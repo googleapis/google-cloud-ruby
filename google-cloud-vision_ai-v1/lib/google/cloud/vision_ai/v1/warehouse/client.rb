@@ -4800,8 +4800,12 @@ module Google
             #
             #   @param image_query [::Google::Cloud::VisionAI::V1::ImageQuery, ::Hash]
             #     An image-only query.
+            #
+            #     Note: The following fields are mutually exclusive: `image_query`, `text_query`. If a field in that set is populated, all other fields in the set will automatically be cleared.
             #   @param text_query [::String]
             #     A text-only query.
+            #
+            #     Note: The following fields are mutually exclusive: `text_query`, `image_query`. If a field in that set is populated, all other fields in the set will automatically be cleared.
             #   @param index_endpoint [::String]
             #     Required. The index endpoint to search.
             #     Format:
@@ -6382,6 +6386,13 @@ module Google
             #    *  (`GRPC::Core::Channel`) a gRPC channel with included credentials
             #    *  (`GRPC::Core::ChannelCredentials`) a gRPC credentails object
             #    *  (`nil`) indicating no credentials
+            #
+            #   Warning: If you accept a credential configuration (JSON file or Hash) from an
+            #   external source for authentication to Google Cloud, you must validate it before
+            #   providing it to a Google API client library. Providing an unvalidated credential
+            #   configuration to Google APIs can compromise the security of your systems and data.
+            #   For more information, refer to [Validate credential configurations from external
+            #   sources](https://cloud.google.com/docs/authentication/external/externally-sourced-credentials).
             #   @return [::Object]
             # @!attribute [rw] scope
             #   The OAuth scopes

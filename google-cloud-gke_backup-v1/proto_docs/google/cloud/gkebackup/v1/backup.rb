@@ -93,14 +93,20 @@ module Google
         # @!attribute [r] all_namespaces
         #   @return [::Boolean]
         #     Output only. If True, all namespaces were included in the Backup.
+        #
+        #     Note: The following fields are mutually exclusive: `all_namespaces`, `selected_namespaces`, `selected_applications`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [r] selected_namespaces
         #   @return [::Google::Cloud::GkeBackup::V1::Namespaces]
         #     Output only. If set, the list of namespaces that were included in the
         #     Backup.
+        #
+        #     Note: The following fields are mutually exclusive: `selected_namespaces`, `all_namespaces`, `selected_applications`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [r] selected_applications
         #   @return [::Google::Cloud::GkeBackup::V1::NamespacedNames]
         #     Output only. If set, the list of ProtectedApplications whose resources
         #     were included in the Backup.
+        #
+        #     Note: The following fields are mutually exclusive: `selected_applications`, `all_namespaces`, `selected_namespaces`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [r] contains_volume_data
         #   @return [::Boolean]
         #     Output only. Whether or not the Backup contains volume data.  Controlled by
@@ -191,9 +197,13 @@ module Google
           # @!attribute [r] gke_version
           #   @return [::String]
           #     Output only. GKE version
+          #
+          #     Note: The following fields are mutually exclusive: `gke_version`, `anthos_version`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [r] anthos_version
           #   @return [::String]
           #     Output only. Anthos version
+          #
+          #     Note: The following fields are mutually exclusive: `anthos_version`, `gke_version`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           class ClusterMetadata
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods

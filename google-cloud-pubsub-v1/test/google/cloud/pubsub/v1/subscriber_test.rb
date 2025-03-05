@@ -91,6 +91,7 @@ class ::Google::Cloud::PubSub::V1::Subscriber::ClientTest < Minitest::Test
     topic_message_retention_duration = {}
     state = :STATE_UNSPECIFIED
     analytics_hub_subscription_info = {}
+    message_transforms = [{}]
 
     create_subscription_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :create_subscription, name
@@ -114,6 +115,7 @@ class ::Google::Cloud::PubSub::V1::Subscriber::ClientTest < Minitest::Test
       assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::Duration), request["topic_message_retention_duration"]
       assert_equal :STATE_UNSPECIFIED, request["state"]
       assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::PubSub::V1::Subscription::AnalyticsHubSubscriptionInfo), request["analytics_hub_subscription_info"]
+      assert_kind_of ::Google::Cloud::PubSub::V1::MessageTransform, request["message_transforms"].first
       refute_nil options
     end
 
@@ -124,31 +126,31 @@ class ::Google::Cloud::PubSub::V1::Subscriber::ClientTest < Minitest::Test
       end
 
       # Use hash object
-      client.create_subscription({ name: name, topic: topic, push_config: push_config, bigquery_config: bigquery_config, cloud_storage_config: cloud_storage_config, ack_deadline_seconds: ack_deadline_seconds, retain_acked_messages: retain_acked_messages, message_retention_duration: message_retention_duration, labels: labels, enable_message_ordering: enable_message_ordering, expiration_policy: expiration_policy, filter: filter, dead_letter_policy: dead_letter_policy, retry_policy: retry_policy, detached: detached, enable_exactly_once_delivery: enable_exactly_once_delivery, topic_message_retention_duration: topic_message_retention_duration, state: state, analytics_hub_subscription_info: analytics_hub_subscription_info }) do |response, operation|
+      client.create_subscription({ name: name, topic: topic, push_config: push_config, bigquery_config: bigquery_config, cloud_storage_config: cloud_storage_config, ack_deadline_seconds: ack_deadline_seconds, retain_acked_messages: retain_acked_messages, message_retention_duration: message_retention_duration, labels: labels, enable_message_ordering: enable_message_ordering, expiration_policy: expiration_policy, filter: filter, dead_letter_policy: dead_letter_policy, retry_policy: retry_policy, detached: detached, enable_exactly_once_delivery: enable_exactly_once_delivery, topic_message_retention_duration: topic_message_retention_duration, state: state, analytics_hub_subscription_info: analytics_hub_subscription_info, message_transforms: message_transforms }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.create_subscription name: name, topic: topic, push_config: push_config, bigquery_config: bigquery_config, cloud_storage_config: cloud_storage_config, ack_deadline_seconds: ack_deadline_seconds, retain_acked_messages: retain_acked_messages, message_retention_duration: message_retention_duration, labels: labels, enable_message_ordering: enable_message_ordering, expiration_policy: expiration_policy, filter: filter, dead_letter_policy: dead_letter_policy, retry_policy: retry_policy, detached: detached, enable_exactly_once_delivery: enable_exactly_once_delivery, topic_message_retention_duration: topic_message_retention_duration, state: state, analytics_hub_subscription_info: analytics_hub_subscription_info do |response, operation|
+      client.create_subscription name: name, topic: topic, push_config: push_config, bigquery_config: bigquery_config, cloud_storage_config: cloud_storage_config, ack_deadline_seconds: ack_deadline_seconds, retain_acked_messages: retain_acked_messages, message_retention_duration: message_retention_duration, labels: labels, enable_message_ordering: enable_message_ordering, expiration_policy: expiration_policy, filter: filter, dead_letter_policy: dead_letter_policy, retry_policy: retry_policy, detached: detached, enable_exactly_once_delivery: enable_exactly_once_delivery, topic_message_retention_duration: topic_message_retention_duration, state: state, analytics_hub_subscription_info: analytics_hub_subscription_info, message_transforms: message_transforms do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.create_subscription ::Google::Cloud::PubSub::V1::Subscription.new(name: name, topic: topic, push_config: push_config, bigquery_config: bigquery_config, cloud_storage_config: cloud_storage_config, ack_deadline_seconds: ack_deadline_seconds, retain_acked_messages: retain_acked_messages, message_retention_duration: message_retention_duration, labels: labels, enable_message_ordering: enable_message_ordering, expiration_policy: expiration_policy, filter: filter, dead_letter_policy: dead_letter_policy, retry_policy: retry_policy, detached: detached, enable_exactly_once_delivery: enable_exactly_once_delivery, topic_message_retention_duration: topic_message_retention_duration, state: state, analytics_hub_subscription_info: analytics_hub_subscription_info) do |response, operation|
+      client.create_subscription ::Google::Cloud::PubSub::V1::Subscription.new(name: name, topic: topic, push_config: push_config, bigquery_config: bigquery_config, cloud_storage_config: cloud_storage_config, ack_deadline_seconds: ack_deadline_seconds, retain_acked_messages: retain_acked_messages, message_retention_duration: message_retention_duration, labels: labels, enable_message_ordering: enable_message_ordering, expiration_policy: expiration_policy, filter: filter, dead_letter_policy: dead_letter_policy, retry_policy: retry_policy, detached: detached, enable_exactly_once_delivery: enable_exactly_once_delivery, topic_message_retention_duration: topic_message_retention_duration, state: state, analytics_hub_subscription_info: analytics_hub_subscription_info, message_transforms: message_transforms) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.create_subscription({ name: name, topic: topic, push_config: push_config, bigquery_config: bigquery_config, cloud_storage_config: cloud_storage_config, ack_deadline_seconds: ack_deadline_seconds, retain_acked_messages: retain_acked_messages, message_retention_duration: message_retention_duration, labels: labels, enable_message_ordering: enable_message_ordering, expiration_policy: expiration_policy, filter: filter, dead_letter_policy: dead_letter_policy, retry_policy: retry_policy, detached: detached, enable_exactly_once_delivery: enable_exactly_once_delivery, topic_message_retention_duration: topic_message_retention_duration, state: state, analytics_hub_subscription_info: analytics_hub_subscription_info }, grpc_options) do |response, operation|
+      client.create_subscription({ name: name, topic: topic, push_config: push_config, bigquery_config: bigquery_config, cloud_storage_config: cloud_storage_config, ack_deadline_seconds: ack_deadline_seconds, retain_acked_messages: retain_acked_messages, message_retention_duration: message_retention_duration, labels: labels, enable_message_ordering: enable_message_ordering, expiration_policy: expiration_policy, filter: filter, dead_letter_policy: dead_letter_policy, retry_policy: retry_policy, detached: detached, enable_exactly_once_delivery: enable_exactly_once_delivery, topic_message_retention_duration: topic_message_retention_duration, state: state, analytics_hub_subscription_info: analytics_hub_subscription_info, message_transforms: message_transforms }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.create_subscription(::Google::Cloud::PubSub::V1::Subscription.new(name: name, topic: topic, push_config: push_config, bigquery_config: bigquery_config, cloud_storage_config: cloud_storage_config, ack_deadline_seconds: ack_deadline_seconds, retain_acked_messages: retain_acked_messages, message_retention_duration: message_retention_duration, labels: labels, enable_message_ordering: enable_message_ordering, expiration_policy: expiration_policy, filter: filter, dead_letter_policy: dead_letter_policy, retry_policy: retry_policy, detached: detached, enable_exactly_once_delivery: enable_exactly_once_delivery, topic_message_retention_duration: topic_message_retention_duration, state: state, analytics_hub_subscription_info: analytics_hub_subscription_info), grpc_options) do |response, operation|
+      client.create_subscription(::Google::Cloud::PubSub::V1::Subscription.new(name: name, topic: topic, push_config: push_config, bigquery_config: bigquery_config, cloud_storage_config: cloud_storage_config, ack_deadline_seconds: ack_deadline_seconds, retain_acked_messages: retain_acked_messages, message_retention_duration: message_retention_duration, labels: labels, enable_message_ordering: enable_message_ordering, expiration_policy: expiration_policy, filter: filter, dead_letter_policy: dead_letter_policy, retry_policy: retry_policy, detached: detached, enable_exactly_once_delivery: enable_exactly_once_delivery, topic_message_retention_duration: topic_message_retention_duration, state: state, analytics_hub_subscription_info: analytics_hub_subscription_info, message_transforms: message_transforms), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end

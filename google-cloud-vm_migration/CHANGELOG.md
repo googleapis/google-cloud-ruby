@@ -1,5 +1,22 @@
 # Changelog
 
+### 2.0.0 (2025-02-13)
+
+### ⚠ BREAKING CHANGES
+
+* Updated google-cloud-vm_migration-v1 dependency to version 2.x ([#29033](https://github.com/googleapis/google-cloud-ruby/issues/29033))
+
+#### Features
+
+* Updated google-cloud-vm_migration-v1 dependency to version 2.x ([#29033](https://github.com/googleapis/google-cloud-ruby/issues/29033)) 
+
+### 1.3.0 (2025-01-29)
+
+#### Features
+
+* Provide methods to determine whether services are available with the currently installed versioned client ([#28533](https://github.com/googleapis/google-cloud-ruby/issues/28533)) 
+* Update Ruby version requirement to 3.0 
+
 ### 1.2.1 (2024-08-08)
 
 #### Documentation

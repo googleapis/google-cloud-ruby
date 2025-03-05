@@ -53,12 +53,18 @@ module Google
           # @!attribute [rw] iframe_ad_resource
           #   @return [::Google::Cloud::Video::Stitcher::V1::IframeAdResource]
           #     The IFrame ad resource associated with the companion ad.
+          #
+          #     Note: The following fields are mutually exclusive: `iframe_ad_resource`, `static_ad_resource`, `html_ad_resource`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] static_ad_resource
           #   @return [::Google::Cloud::Video::Stitcher::V1::StaticAdResource]
           #     The static ad resource associated with the companion ad.
+          #
+          #     Note: The following fields are mutually exclusive: `static_ad_resource`, `iframe_ad_resource`, `html_ad_resource`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] html_ad_resource
           #   @return [::Google::Cloud::Video::Stitcher::V1::HtmlAdResource]
           #     The HTML ad resource associated with the companion ad.
+          #
+          #     Note: The following fields are mutually exclusive: `html_ad_resource`, `iframe_ad_resource`, `static_ad_resource`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] api_framework
           #   @return [::String]
           #     The API necessary to communicate with the creative if available.

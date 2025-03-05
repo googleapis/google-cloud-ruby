@@ -173,11 +173,15 @@ module Google
           # @!attribute [rw] predefined_expression
           #   @return [::Google::Cloud::Bigquery::DataPolicies::V1::DataMaskingPolicy::PredefinedExpression]
           #     A predefined masking expression.
+          #
+          #     Note: The following fields are mutually exclusive: `predefined_expression`, `routine`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] routine
           #   @return [::String]
           #     The name of the BigQuery routine that contains the custom masking
           #     routine, in the format of
           #     `projects/{project_number}/datasets/{dataset_id}/routines/{routine_id}`.
+          #
+          #     Note: The following fields are mutually exclusive: `routine`, `predefined_expression`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           class DataMaskingPolicy
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods

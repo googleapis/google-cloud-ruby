@@ -33,6 +33,11 @@ module Google
           #     Formats:
           #     `projects/{project}/locations/{location}/collections/{collection}/dataStores/{data_store}`
           #     `projects/{project}/locations/{location}/dataStores/{data_store}`
+          # @!attribute [rw] document_processing_mode
+          #   @return [::Google::Cloud::Dialogflow::CX::V3::DocumentProcessingMode]
+          #     The document processing mode for the data store connection. Should only be
+          #     set for PUBLIC_WEB and UNSTRUCTURED data stores. If not set it is
+          #     considered as DOCUMENTS, as this is the legacy mode.
           class DataStoreConnection
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -252,6 +257,20 @@ module Google
 
             # A data store that contains structured data (for example FAQ).
             STRUCTURED = 3
+          end
+
+          # The document processing mode of the data store.
+          module DocumentProcessingMode
+            # Not specified. This should be set for STRUCTURED type data stores. Due to
+            # legacy reasons this is considered as DOCUMENTS for STRUCTURED and
+            # PUBLIC_WEB data stores.
+            DOCUMENT_PROCESSING_MODE_UNSPECIFIED = 0
+
+            # Documents are processed as documents.
+            DOCUMENTS = 1
+
+            # Documents are converted to chunks.
+            CHUNKS = 2
           end
         end
       end

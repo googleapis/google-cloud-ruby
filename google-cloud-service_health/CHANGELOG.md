@@ -1,5 +1,22 @@
 # Changelog
 
+### 2.0.0 (2025-02-13)
+
+### ⚠ BREAKING CHANGES
+
+* Updated google-cloud-service_health-v1 dependency to version 2.x ([#29046](https://github.com/googleapis/google-cloud-ruby/issues/29046))
+
+#### Features
+
+* Updated google-cloud-service_health-v1 dependency to version 2.x ([#29046](https://github.com/googleapis/google-cloud-ruby/issues/29046)) 
+
+### 1.1.0 (2025-01-29)
+
+#### Features
+
+* Provide methods to determine whether services are available with the currently installed versioned client ([#28532](https://github.com/googleapis/google-cloud-ruby/issues/28532)) 
+* Update Ruby version requirement to 3.0 
+
 ### 1.0.1 (2024-08-08)
 
 #### Documentation

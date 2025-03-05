@@ -98,7 +98,7 @@ module Google
                     initial_delay: 1.0, max_delay: 60.0, multiplier: 2, retry_codes: [14, 4]
                   }
 
-                  default_config.rpcs.check_consistency.timeout = 60.0
+                  default_config.rpcs.check_consistency.timeout = 3600.0
                   default_config.rpcs.check_consistency.retry_policy = {
                     initial_delay: 1.0, max_delay: 60.0, multiplier: 2, retry_codes: [14, 4]
                   }
@@ -703,7 +703,7 @@ module Google
               #   @param options [::Gapic::CallOptions, ::Hash]
               #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
               #
-              # @overload update_table(table: nil, update_mask: nil)
+              # @overload update_table(table: nil, update_mask: nil, ignore_warnings: nil)
               #   Pass arguments to `update_table` via keyword arguments. Note that at
               #   least one keyword argument is required. To specify no parameters, or to keep all
               #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -721,9 +721,12 @@ module Google
               #     * `change_stream_config`
               #     * `change_stream_config.retention_period`
               #     * `deletion_protection`
+              #     * `row_key_schema`
               #
               #     If `column_families` is set in `update_mask`, it will return an
               #     UNIMPLEMENTED error.
+              #   @param ignore_warnings [::Boolean]
+              #     Optional. If true, ignore safety checks when updating the table.
               #
               # @yield [response, operation] Access the result along with the RPC operation
               # @yieldparam response [::Gapic::Operation]
@@ -1606,8 +1609,12 @@ module Google
               #   @param row_key_prefix [::String]
               #     Delete all rows that start with this row key prefix. Prefix cannot be
               #     zero length.
+              #
+              #     Note: The following fields are mutually exclusive: `row_key_prefix`, `delete_all_data_from_table`. If a field in that set is populated, all other fields in the set will automatically be cleared.
               #   @param delete_all_data_from_table [::Boolean]
               #     Delete all rows in the table. Setting this to false is a no-op.
+              #
+              #     Note: The following fields are mutually exclusive: `delete_all_data_from_table`, `row_key_prefix`. If a field in that set is populated, all other fields in the set will automatically be cleared.
               #
               # @yield [response, operation] Access the result along with the RPC operation
               # @yieldparam response [::Google::Protobuf::Empty]
@@ -1793,10 +1800,14 @@ module Google
               #     Checks that reads using an app profile with `StandardIsolation` can
               #     see all writes committed before the token was created, even if the
               #     read and write target different clusters.
+              #
+              #     Note: The following fields are mutually exclusive: `standard_read_remote_writes`, `data_boost_read_local_writes`. If a field in that set is populated, all other fields in the set will automatically be cleared.
               #   @param data_boost_read_local_writes [::Google::Cloud::Bigtable::Admin::V2::DataBoostReadLocalWrites, ::Hash]
               #     Checks that reads using an app profile with `DataBoostIsolationReadOnly`
               #     can see all writes committed before the token was created, but only if
               #     the read and write target the same cluster.
+              #
+              #     Note: The following fields are mutually exclusive: `data_boost_read_local_writes`, `standard_read_remote_writes`. If a field in that set is populated, all other fields in the set will automatically be cleared.
               #
               # @yield [response, operation] Access the result along with the RPC operation
               # @yieldparam response [::Google::Cloud::Bigtable::Admin::V2::CheckConsistencyResponse]
@@ -3367,6 +3378,13 @@ module Google
               #    *  (`GRPC::Core::Channel`) a gRPC channel with included credentials
               #    *  (`GRPC::Core::ChannelCredentials`) a gRPC credentails object
               #    *  (`nil`) indicating no credentials
+              #
+              #   Warning: If you accept a credential configuration (JSON file or Hash) from an
+              #   external source for authentication to Google Cloud, you must validate it before
+              #   providing it to a Google API client library. Providing an unvalidated credential
+              #   configuration to Google APIs can compromise the security of your systems and data.
+              #   For more information, refer to [Validate credential configurations from external
+              #   sources](https://cloud.google.com/docs/authentication/external/externally-sourced-credentials).
               #   @return [::Object]
               # @!attribute [rw] scope
               #   The OAuth scopes

@@ -129,9 +129,13 @@ module Google
         # @!attribute [r] validation_report
         #   @return [::Google::Cloud::MigrationCenter::V1::ValidationReport]
         #     Output only. The report with the validation results of the import job.
+        #
+        #     Note: The following fields are mutually exclusive: `validation_report`, `execution_report`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [r] execution_report
         #   @return [::Google::Cloud::MigrationCenter::V1::ExecutionReport]
         #     Output only. The report with the results of running the import job.
+        #
+        #     Note: The following fields are mutually exclusive: `execution_report`, `validation_report`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         class ImportJob
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -2622,18 +2626,28 @@ module Google
         # @!attribute [rw] vmware_details
         #   @return [::Google::Cloud::MigrationCenter::V1::VmwarePlatformDetails]
         #     VMware specific details.
+        #
+        #     Note: The following fields are mutually exclusive: `vmware_details`, `aws_ec2_details`, `azure_vm_details`, `generic_details`, `physical_details`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] aws_ec2_details
         #   @return [::Google::Cloud::MigrationCenter::V1::AwsEc2PlatformDetails]
         #     AWS EC2 specific details.
+        #
+        #     Note: The following fields are mutually exclusive: `aws_ec2_details`, `vmware_details`, `azure_vm_details`, `generic_details`, `physical_details`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] azure_vm_details
         #   @return [::Google::Cloud::MigrationCenter::V1::AzureVmPlatformDetails]
         #     Azure VM specific details.
+        #
+        #     Note: The following fields are mutually exclusive: `azure_vm_details`, `vmware_details`, `aws_ec2_details`, `generic_details`, `physical_details`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] generic_details
         #   @return [::Google::Cloud::MigrationCenter::V1::GenericPlatformDetails]
         #     Generic platform details.
+        #
+        #     Note: The following fields are mutually exclusive: `generic_details`, `vmware_details`, `aws_ec2_details`, `azure_vm_details`, `physical_details`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] physical_details
         #   @return [::Google::Cloud::MigrationCenter::V1::PhysicalPlatformDetails]
         #     Physical machines platform details.
+        #
+        #     Note: The following fields are mutually exclusive: `physical_details`, `vmware_details`, `aws_ec2_details`, `azure_vm_details`, `generic_details`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         class PlatformDetails
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -2882,9 +2896,13 @@ module Google
         # @!attribute [r] migration_insight
         #   @return [::Google::Cloud::MigrationCenter::V1::MigrationInsight]
         #     Output only. An insight about potential migrations for an asset.
+        #
+        #     Note: The following fields are mutually exclusive: `migration_insight`, `generic_insight`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [r] generic_insight
         #   @return [::Google::Cloud::MigrationCenter::V1::GenericInsight]
         #     Output only. A generic insight about an asset
+        #
+        #     Note: The following fields are mutually exclusive: `generic_insight`, `migration_insight`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         class Insight
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -3000,15 +3018,23 @@ module Google
         # @!attribute [rw] count
         #   @return [::Google::Cloud::MigrationCenter::V1::Aggregation::Count]
         #     Count the number of matching objects.
+        #
+        #     Note: The following fields are mutually exclusive: `count`, `sum`, `histogram`, `frequency`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] sum
         #   @return [::Google::Cloud::MigrationCenter::V1::Aggregation::Sum]
         #     Sum over a numeric field.
+        #
+        #     Note: The following fields are mutually exclusive: `sum`, `count`, `histogram`, `frequency`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] histogram
         #   @return [::Google::Cloud::MigrationCenter::V1::Aggregation::Histogram]
         #     Creates a bucketed histogram of field values.
+        #
+        #     Note: The following fields are mutually exclusive: `histogram`, `count`, `sum`, `frequency`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] frequency
         #   @return [::Google::Cloud::MigrationCenter::V1::Aggregation::Frequency]
         #     Creates a frequency distribution of all field values.
+        #
+        #     Note: The following fields are mutually exclusive: `frequency`, `count`, `sum`, `histogram`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         class Aggregation
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -3054,12 +3080,16 @@ module Google
         #   @return [::String]
         # @!attribute [rw] count
         #   @return [::Google::Cloud::MigrationCenter::V1::AggregationResult::Count]
+        #     Note: The following fields are mutually exclusive: `count`, `sum`, `histogram`, `frequency`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] sum
         #   @return [::Google::Cloud::MigrationCenter::V1::AggregationResult::Sum]
+        #     Note: The following fields are mutually exclusive: `sum`, `count`, `histogram`, `frequency`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] histogram
         #   @return [::Google::Cloud::MigrationCenter::V1::AggregationResult::Histogram]
+        #     Note: The following fields are mutually exclusive: `histogram`, `count`, `sum`, `frequency`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] frequency
         #   @return [::Google::Cloud::MigrationCenter::V1::AggregationResult::Frequency]
+        #     Note: The following fields are mutually exclusive: `frequency`, `count`, `sum`, `histogram`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         class AggregationResult
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

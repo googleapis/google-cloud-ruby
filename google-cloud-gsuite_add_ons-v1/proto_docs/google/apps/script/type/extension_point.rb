@@ -67,9 +67,13 @@ module Google
         # @!attribute [rw] open_link
         #   @return [::String]
         #     URL to be opened by the UniversalAction.
+        #
+        #     Note: The following fields are mutually exclusive: `open_link`, `run_function`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] run_function
         #   @return [::String]
         #     Endpoint to be run by the UniversalAction.
+        #
+        #     Note: The following fields are mutually exclusive: `run_function`, `open_link`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         class UniversalActionExtensionPoint
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

@@ -74,46 +74,74 @@ module Google
         # @!attribute [rw] batch_recognize_request
         #   @return [::Google::Cloud::Speech::V2::BatchRecognizeRequest]
         #     The BatchRecognizeRequest that spawned the Operation.
+        #
+        #     Note: The following fields are mutually exclusive: `batch_recognize_request`, `create_recognizer_request`, `update_recognizer_request`, `delete_recognizer_request`, `undelete_recognizer_request`, `create_custom_class_request`, `update_custom_class_request`, `delete_custom_class_request`, `undelete_custom_class_request`, `create_phrase_set_request`, `update_phrase_set_request`, `delete_phrase_set_request`, `undelete_phrase_set_request`, `update_config_request`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] create_recognizer_request
         #   @return [::Google::Cloud::Speech::V2::CreateRecognizerRequest]
         #     The CreateRecognizerRequest that spawned the Operation.
+        #
+        #     Note: The following fields are mutually exclusive: `create_recognizer_request`, `batch_recognize_request`, `update_recognizer_request`, `delete_recognizer_request`, `undelete_recognizer_request`, `create_custom_class_request`, `update_custom_class_request`, `delete_custom_class_request`, `undelete_custom_class_request`, `create_phrase_set_request`, `update_phrase_set_request`, `delete_phrase_set_request`, `undelete_phrase_set_request`, `update_config_request`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] update_recognizer_request
         #   @return [::Google::Cloud::Speech::V2::UpdateRecognizerRequest]
         #     The UpdateRecognizerRequest that spawned the Operation.
+        #
+        #     Note: The following fields are mutually exclusive: `update_recognizer_request`, `batch_recognize_request`, `create_recognizer_request`, `delete_recognizer_request`, `undelete_recognizer_request`, `create_custom_class_request`, `update_custom_class_request`, `delete_custom_class_request`, `undelete_custom_class_request`, `create_phrase_set_request`, `update_phrase_set_request`, `delete_phrase_set_request`, `undelete_phrase_set_request`, `update_config_request`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] delete_recognizer_request
         #   @return [::Google::Cloud::Speech::V2::DeleteRecognizerRequest]
         #     The DeleteRecognizerRequest that spawned the Operation.
+        #
+        #     Note: The following fields are mutually exclusive: `delete_recognizer_request`, `batch_recognize_request`, `create_recognizer_request`, `update_recognizer_request`, `undelete_recognizer_request`, `create_custom_class_request`, `update_custom_class_request`, `delete_custom_class_request`, `undelete_custom_class_request`, `create_phrase_set_request`, `update_phrase_set_request`, `delete_phrase_set_request`, `undelete_phrase_set_request`, `update_config_request`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] undelete_recognizer_request
         #   @return [::Google::Cloud::Speech::V2::UndeleteRecognizerRequest]
         #     The UndeleteRecognizerRequest that spawned the Operation.
+        #
+        #     Note: The following fields are mutually exclusive: `undelete_recognizer_request`, `batch_recognize_request`, `create_recognizer_request`, `update_recognizer_request`, `delete_recognizer_request`, `create_custom_class_request`, `update_custom_class_request`, `delete_custom_class_request`, `undelete_custom_class_request`, `create_phrase_set_request`, `update_phrase_set_request`, `delete_phrase_set_request`, `undelete_phrase_set_request`, `update_config_request`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] create_custom_class_request
         #   @return [::Google::Cloud::Speech::V2::CreateCustomClassRequest]
         #     The CreateCustomClassRequest that spawned the Operation.
+        #
+        #     Note: The following fields are mutually exclusive: `create_custom_class_request`, `batch_recognize_request`, `create_recognizer_request`, `update_recognizer_request`, `delete_recognizer_request`, `undelete_recognizer_request`, `update_custom_class_request`, `delete_custom_class_request`, `undelete_custom_class_request`, `create_phrase_set_request`, `update_phrase_set_request`, `delete_phrase_set_request`, `undelete_phrase_set_request`, `update_config_request`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] update_custom_class_request
         #   @return [::Google::Cloud::Speech::V2::UpdateCustomClassRequest]
         #     The UpdateCustomClassRequest that spawned the Operation.
+        #
+        #     Note: The following fields are mutually exclusive: `update_custom_class_request`, `batch_recognize_request`, `create_recognizer_request`, `update_recognizer_request`, `delete_recognizer_request`, `undelete_recognizer_request`, `create_custom_class_request`, `delete_custom_class_request`, `undelete_custom_class_request`, `create_phrase_set_request`, `update_phrase_set_request`, `delete_phrase_set_request`, `undelete_phrase_set_request`, `update_config_request`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] delete_custom_class_request
         #   @return [::Google::Cloud::Speech::V2::DeleteCustomClassRequest]
         #     The DeleteCustomClassRequest that spawned the Operation.
+        #
+        #     Note: The following fields are mutually exclusive: `delete_custom_class_request`, `batch_recognize_request`, `create_recognizer_request`, `update_recognizer_request`, `delete_recognizer_request`, `undelete_recognizer_request`, `create_custom_class_request`, `update_custom_class_request`, `undelete_custom_class_request`, `create_phrase_set_request`, `update_phrase_set_request`, `delete_phrase_set_request`, `undelete_phrase_set_request`, `update_config_request`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] undelete_custom_class_request
         #   @return [::Google::Cloud::Speech::V2::UndeleteCustomClassRequest]
         #     The UndeleteCustomClassRequest that spawned the Operation.
+        #
+        #     Note: The following fields are mutually exclusive: `undelete_custom_class_request`, `batch_recognize_request`, `create_recognizer_request`, `update_recognizer_request`, `delete_recognizer_request`, `undelete_recognizer_request`, `create_custom_class_request`, `update_custom_class_request`, `delete_custom_class_request`, `create_phrase_set_request`, `update_phrase_set_request`, `delete_phrase_set_request`, `undelete_phrase_set_request`, `update_config_request`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] create_phrase_set_request
         #   @return [::Google::Cloud::Speech::V2::CreatePhraseSetRequest]
         #     The CreatePhraseSetRequest that spawned the Operation.
+        #
+        #     Note: The following fields are mutually exclusive: `create_phrase_set_request`, `batch_recognize_request`, `create_recognizer_request`, `update_recognizer_request`, `delete_recognizer_request`, `undelete_recognizer_request`, `create_custom_class_request`, `update_custom_class_request`, `delete_custom_class_request`, `undelete_custom_class_request`, `update_phrase_set_request`, `delete_phrase_set_request`, `undelete_phrase_set_request`, `update_config_request`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] update_phrase_set_request
         #   @return [::Google::Cloud::Speech::V2::UpdatePhraseSetRequest]
         #     The UpdatePhraseSetRequest that spawned the Operation.
+        #
+        #     Note: The following fields are mutually exclusive: `update_phrase_set_request`, `batch_recognize_request`, `create_recognizer_request`, `update_recognizer_request`, `delete_recognizer_request`, `undelete_recognizer_request`, `create_custom_class_request`, `update_custom_class_request`, `delete_custom_class_request`, `undelete_custom_class_request`, `create_phrase_set_request`, `delete_phrase_set_request`, `undelete_phrase_set_request`, `update_config_request`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] delete_phrase_set_request
         #   @return [::Google::Cloud::Speech::V2::DeletePhraseSetRequest]
         #     The DeletePhraseSetRequest that spawned the Operation.
+        #
+        #     Note: The following fields are mutually exclusive: `delete_phrase_set_request`, `batch_recognize_request`, `create_recognizer_request`, `update_recognizer_request`, `delete_recognizer_request`, `undelete_recognizer_request`, `create_custom_class_request`, `update_custom_class_request`, `delete_custom_class_request`, `undelete_custom_class_request`, `create_phrase_set_request`, `update_phrase_set_request`, `undelete_phrase_set_request`, `update_config_request`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] undelete_phrase_set_request
         #   @return [::Google::Cloud::Speech::V2::UndeletePhraseSetRequest]
         #     The UndeletePhraseSetRequest that spawned the Operation.
+        #
+        #     Note: The following fields are mutually exclusive: `undelete_phrase_set_request`, `batch_recognize_request`, `create_recognizer_request`, `update_recognizer_request`, `delete_recognizer_request`, `undelete_recognizer_request`, `create_custom_class_request`, `update_custom_class_request`, `delete_custom_class_request`, `undelete_custom_class_request`, `create_phrase_set_request`, `update_phrase_set_request`, `delete_phrase_set_request`, `update_config_request`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] update_config_request
         #   @deprecated This field is deprecated and may be removed in the next major version update.
         #   @return [::Google::Cloud::Speech::V2::UpdateConfigRequest]
         #     The UpdateConfigRequest that spawned the Operation.
+        #
+        #     Note: The following fields are mutually exclusive: `update_config_request`, `batch_recognize_request`, `create_recognizer_request`, `update_recognizer_request`, `delete_recognizer_request`, `undelete_recognizer_request`, `create_custom_class_request`, `update_custom_class_request`, `delete_custom_class_request`, `undelete_custom_class_request`, `create_phrase_set_request`, `update_phrase_set_request`, `delete_phrase_set_request`, `undelete_phrase_set_request`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] progress_percent
         #   @return [::Integer]
         #     The percent progress of the Operation. Values can range from 0-100. If the
@@ -405,27 +433,17 @@ module Google
         #     Required. Encoding of the audio data sent for recognition.
         # @!attribute [rw] sample_rate_hertz
         #   @return [::Integer]
-        #     Sample rate in Hertz of the audio data sent for recognition. Valid
-        #     values are: 8000-48000. 16000 is optimal. For best results, set the
+        #     Optional. Sample rate in Hertz of the audio data sent for recognition.
+        #     Valid values are: 8000-48000. 16000 is optimal. For best results, set the
         #     sampling rate of the audio source to 16000 Hz. If that's not possible, use
         #     the native sample rate of the audio source (instead of re-sampling).
-        #     Supported for the following encodings:
-        #
-        #     * LINEAR16: Headerless 16-bit signed little-endian PCM samples.
-        #
-        #     * MULAW: Headerless 8-bit companded mulaw samples.
-        #
-        #     * ALAW: Headerless 8-bit companded alaw samples.
+        #     Note that this field is marked as OPTIONAL for backward compatibility
+        #     reasons. It is (and has always been) effectively REQUIRED.
         # @!attribute [rw] audio_channel_count
         #   @return [::Integer]
-        #     Number of channels present in the audio data sent for recognition.
-        #     Supported for the following encodings:
-        #
-        #     * LINEAR16: Headerless 16-bit signed little-endian PCM samples.
-        #
-        #     * MULAW: Headerless 8-bit companded mulaw samples.
-        #
-        #     * ALAW: Headerless 8-bit companded alaw samples.
+        #     Optional. Number of channels present in the audio data sent for
+        #     recognition. Note that this field is marked as OPTIONAL for backward
+        #     compatibility reasons. It is (and has always been) effectively REQUIRED.
         #
         #     The maximum allowed value is 8.
         class ExplicitDecodingConfig
@@ -445,6 +463,33 @@ module Google
 
             # Headerless 8-bit companded alaw samples.
             ALAW = 3
+
+            # AMR frames with an rfc4867.5 header.
+            AMR = 4
+
+            # AMR-WB frames with an rfc4867.5 header.
+            AMR_WB = 5
+
+            # FLAC frames in the "native FLAC" container format.
+            FLAC = 6
+
+            # MPEG audio frames with optional (ignored) ID3 metadata.
+            MP3 = 7
+
+            # Opus audio frames in an Ogg container.
+            OGG_OPUS = 8
+
+            # Opus audio frames in a WebM container.
+            WEBM_OPUS = 9
+
+            # AAC audio frames in an MP4 container.
+            MP4_AAC = 10
+
+            # AAC audio frames in an M4A container.
+            M4A_AAC = 11
+
+            # AAC audio frames in an MOV container.
+            MOV_AAC = 12
           end
         end
 
@@ -600,9 +645,13 @@ module Google
           #   @return [::String]
           #     The name of an existing PhraseSet resource. The user must have read
           #     access to the resource and it must not be deleted.
+          #
+          #     Note: The following fields are mutually exclusive: `phrase_set`, `inline_phrase_set`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] inline_phrase_set
           #   @return [::Google::Cloud::Speech::V2::PhraseSet]
           #     An inline defined PhraseSet.
+          #
+          #     Note: The following fields are mutually exclusive: `inline_phrase_set`, `phrase_set`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           class AdaptationPhraseSet
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -615,10 +664,14 @@ module Google
         #   @return [::Google::Cloud::Speech::V2::AutoDetectDecodingConfig]
         #     Automatically detect decoding parameters.
         #     Preferred for supported formats.
+        #
+        #     Note: The following fields are mutually exclusive: `auto_decoding_config`, `explicit_decoding_config`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] explicit_decoding_config
         #   @return [::Google::Cloud::Speech::V2::ExplicitDecodingConfig]
         #     Explicitly specified decoding parameters.
         #     Required if using headerless PCM audio (linear16, mulaw, alaw).
+        #
+        #     Note: The following fields are mutually exclusive: `explicit_decoding_config`, `auto_decoding_config`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] model
         #   @return [::String]
         #     Optional. Which model to use for recognition requests. Select the model
@@ -705,6 +758,8 @@ module Google
         #     {::Google::Cloud::Speech::V2::RecognitionConfig RecognitionConfig}. As
         #     with all bytes fields, proto buffers use a pure binary representation,
         #     whereas JSON representations use base64.
+        #
+        #     Note: The following fields are mutually exclusive: `content`, `uri`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] uri
         #   @return [::String]
         #     URI that points to a file that contains audio data bytes as specified in
@@ -715,6 +770,8 @@ module Google
         #     [INVALID_ARGUMENT][google.rpc.Code.INVALID_ARGUMENT]). For more
         #     information, see [Request
         #     URIs](https://cloud.google.com/storage/docs/reference-uris).
+        #
+        #     Note: The following fields are mutually exclusive: `uri`, `content`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         class RecognizeRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -939,10 +996,14 @@ module Google
         #     StreamingRecognitionConfig to be used in this recognition attempt.
         #     If provided, it will override the default RecognitionConfig stored in the
         #     Recognizer.
+        #
+        #     Note: The following fields are mutually exclusive: `streaming_config`, `audio`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] audio
         #   @return [::String]
         #     Inline audio bytes to be Recognized.
         #     Maximum size for this field is 15 KB per request.
+        #
+        #     Note: The following fields are mutually exclusive: `audio`, `streaming_config`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         class StreamingRecognizeRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -1047,16 +1108,16 @@ module Google
         # @!attribute [rw] native
         #   @return [::Google::Cloud::Speech::V2::NativeOutputFileFormatConfig]
         #     Configuration for the native output format. If this field is set or if no
-        #     other output format field is set then transcripts will be written to the
+        #     other output format field is set, then transcripts will be written to the
         #     sink in the native format.
         # @!attribute [rw] vtt
         #   @return [::Google::Cloud::Speech::V2::VttOutputFileFormatConfig]
-        #     Configuration for the vtt output format. If this field is set then
-        #     transcripts will be written to the sink in the vtt format.
+        #     Configuration for the VTT output format. If this field is set, then
+        #     transcripts will be written to the sink in the VTT format.
         # @!attribute [rw] srt
         #   @return [::Google::Cloud::Speech::V2::SrtOutputFileFormatConfig]
-        #     Configuration for the srt output format. If this field is set then
-        #     transcripts will be written to the sink in the srt format.
+        #     Configuration for the SRT output format. If this field is set, then
+        #     transcripts will be written to the sink in the SRT format.
         class OutputFormatConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -1067,6 +1128,8 @@ module Google
         #   @return [::Google::Cloud::Speech::V2::GcsOutputConfig]
         #     If this message is populated, recognition results are written to the
         #     provided Google Cloud Storage URI.
+        #
+        #     Note: The following fields are mutually exclusive: `gcs_output_config`, `inline_response_config`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] inline_response_config
         #   @return [::Google::Cloud::Speech::V2::InlineOutputConfig]
         #     If this message is populated, recognition results are provided in the
@@ -1074,6 +1137,8 @@ module Google
         #     message of the Operation when completed. This is only supported when
         #     calling {::Google::Cloud::Speech::V2::Speech::Client#batch_recognize BatchRecognize}
         #     with just one audio file.
+        #
+        #     Note: The following fields are mutually exclusive: `inline_response_config`, `gcs_output_config`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] output_format_config
         #   @return [::Google::Cloud::Speech::V2::OutputFormatConfig]
         #     Optional. Configuration for the format of the results stored to `output`.
@@ -1168,12 +1233,16 @@ module Google
         #     {::Google::Cloud::Speech::V2::GcsOutputConfig GcsOutputConfig} is set in
         #     the
         #     [RecognitionOutputConfig][[google.cloud.speech.v2.RecognitionOutputConfig].
+        #
+        #     Note: The following fields are mutually exclusive: `cloud_storage_result`, `inline_result`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] inline_result
         #   @return [::Google::Cloud::Speech::V2::InlineResult]
         #     Recognition results. This is populated only when
         #     {::Google::Cloud::Speech::V2::InlineOutputConfig InlineOutputConfig} is set in
         #     the
         #     [RecognitionOutputConfig][[google.cloud.speech.v2.RecognitionOutputConfig].
+        #
+        #     Note: The following fields are mutually exclusive: `inline_result`, `cloud_storage_result`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] uri
         #   @deprecated This field is deprecated and may be removed in the next major version update.
         #   @return [::String]

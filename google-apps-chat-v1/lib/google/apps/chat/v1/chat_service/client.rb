@@ -3179,8 +3179,7 @@ module Google
             end
 
             ##
-            # Creates a reaction and adds it to a message. Only unicode emojis are
-            # supported. For an example, see
+            # Creates a reaction and adds it to a message. For an example, see
             # [Add a reaction to a
             # message](https://developers.google.com/workspace/chat/create-reactions).
             #
@@ -3429,8 +3428,7 @@ module Google
             end
 
             ##
-            # Deletes a reaction to a message. Only unicode emojis are supported.
-            # For an example, see
+            # Deletes a reaction to a message. For an example, see
             # [Delete a
             # reaction](https://developers.google.com/workspace/chat/delete-reactions).
             #
@@ -4170,6 +4168,13 @@ module Google
             #    *  (`GRPC::Core::Channel`) a gRPC channel with included credentials
             #    *  (`GRPC::Core::ChannelCredentials`) a gRPC credentails object
             #    *  (`nil`) indicating no credentials
+            #
+            #   Warning: If you accept a credential configuration (JSON file or Hash) from an
+            #   external source for authentication to Google Cloud, you must validate it before
+            #   providing it to a Google API client library. Providing an unvalidated credential
+            #   configuration to Google APIs can compromise the security of your systems and data.
+            #   For more information, refer to [Validate credential configurations from external
+            #   sources](https://cloud.google.com/docs/authentication/external/externally-sourced-credentials).
             #   @return [::Object]
             # @!attribute [rw] scope
             #   The OAuth scopes

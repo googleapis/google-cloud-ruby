@@ -1,5 +1,23 @@
 # Release History
 
+### 3.0.0 (2025-02-13)
+
+### ⚠ BREAKING CHANGES
+
+* Removed dependency on google-cloud-tasks-v2beta2 and -v2beta3 prerelease services ([#28988](https://github.com/googleapis/google-cloud-ruby/issues/28988))
+
+#### Features
+
+* Removed dependency on google-cloud-tasks-v2beta2 and -v2beta3 prerelease services ([#28988](https://github.com/googleapis/google-cloud-ruby/issues/28988)) 
+* Updated google-cloud-tasks-v2 dependency to version 1.x 
+
+### 2.7.0 (2025-01-29)
+
+#### Features
+
+* Provide methods to determine whether services are available with the currently installed versioned client ([#28533](https://github.com/googleapis/google-cloud-ruby/issues/28533)) 
+* Update Ruby version requirement to 3.0 
+
 ### 2.6.1 (2024-08-08)
 
 #### Documentation

@@ -1,5 +1,11 @@
 # Release History
 
+### 1.51.1 (2024-12-13)
+
+#### Bug Fixes
+
+* Allow inserts to a target dataset/table in another project ([#28097](https://github.com/googleapis/google-cloud-ruby/issues/28097)) 
+
 ### 1.51.0 (2024-12-04)
 
 #### Features

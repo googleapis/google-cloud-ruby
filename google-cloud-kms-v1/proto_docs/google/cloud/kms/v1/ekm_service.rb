@@ -192,7 +192,7 @@ module Google
         # {::Google::Cloud::Kms::V1::CryptoKey CryptoKeys} and
         # {::Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersions} with a
         # {::Google::Cloud::Kms::V1::ProtectionLevel ProtectionLevel} of
-        # [EXTERNAL_VPC][CryptoKeyVersion.ProtectionLevel.EXTERNAL_VPC], as well as
+        # {::Google::Cloud::Kms::V1::ProtectionLevel::EXTERNAL_VPC EXTERNAL_VPC}, as well as
         # performing cryptographic operations using keys created within the
         # {::Google::Cloud::Kms::V1::EkmConnection EkmConnection}.
         # @!attribute [r] name
@@ -286,6 +286,7 @@ module Google
             # All {::Google::Cloud::Kms::V1::CryptoKey CryptoKeys} created with this
             # {::Google::Cloud::Kms::V1::EkmConnection EkmConnection} use EKM-side key
             # management operations initiated from Cloud KMS. This means that:
+            #
             # * When a {::Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersion}
             # associated with this {::Google::Cloud::Kms::V1::EkmConnection EkmConnection}
             # is
@@ -294,7 +295,8 @@ module Google
             #   external key material.
             # * Destruction of external key material associated with this
             #   {::Google::Cloud::Kms::V1::EkmConnection EkmConnection} can be requested by
-            #   calling [DestroyCryptoKeyVersion][EkmService.DestroyCryptoKeyVersion].
+            #   calling
+            #   {::Google::Cloud::Kms::V1::KeyManagementService::Client#destroy_crypto_key_version DestroyCryptoKeyVersion}.
             # * Automatic rotation of key material is supported.
             CLOUD_KMS = 2
           end
@@ -305,7 +307,7 @@ module Google
         # {::Google::Cloud::Kms::V1::CryptoKey CryptoKeys} and
         # {::Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersions} with a
         # {::Google::Cloud::Kms::V1::ProtectionLevel ProtectionLevel} of
-        # [EXTERNAL_VPC][CryptoKeyVersion.ProtectionLevel.EXTERNAL_VPC] in a given
+        # {::Google::Cloud::Kms::V1::ProtectionLevel::EXTERNAL_VPC EXTERNAL_VPC} in a given
         # project and location.
         # @!attribute [r] name
         #   @return [::String]

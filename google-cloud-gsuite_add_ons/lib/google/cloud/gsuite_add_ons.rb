@@ -58,32 +58,37 @@ module Google
       # You can also specify a different transport by passing `:rest` or `:grpc` in
       # the `transport` parameter.
       #
+      # Raises an exception if the currently installed versioned client gem for the
+      # given API version does not support the given transport of the GSuiteAddOns service.
+      # You can determine whether the method will succeed by calling
+      # {Google::Cloud::GSuiteAddOns.gsuite_add_ons_available?}.
+      #
       # ## About GSuiteAddOns
       #
-      # A service for managing Google Workspace Add-ons deployments.
+      # A service for managing Google Workspace add-ons deployments.
       #
-      # A Google Workspace Add-on is a third-party embedded component that can be
+      # A Google Workspace add-on is a third-party embedded component that can be
       # installed in Google Workspace Applications like Gmail, Calendar, Drive, and
-      # the Google Docs, Sheets, and Slides editors. Google Workspace Add-ons can
+      # the Google Docs, Sheets, and Slides editors. Google Workspace add-ons can
       # display UI cards, receive contextual information from the host application,
       # and perform actions in the host application (See:
       # https://developers.google.com/gsuite/add-ons/overview for more information).
       #
-      # A Google Workspace Add-on deployment resource specifies metadata about the
+      # A Google Workspace add-on deployment resource specifies metadata about the
       # add-on, including a specification of the entry points in the host application
       # that trigger add-on executions (see:
       # https://developers.google.com/gsuite/add-ons/concepts/gsuite-manifests).
-      # Add-on deployments defined via the Google Workspace Add-ons API define their
+      # Add-on deployments defined via the Google Workspace add-ons API define their
       # entrypoints using HTTPS URLs (See:
       # https://developers.google.com/gsuite/add-ons/guides/alternate-runtimes),
       #
-      # A Google Workspace Add-on deployment can be installed in developer mode,
+      # A Google Workspace add-on deployment can be installed in developer mode,
       # which allows an add-on developer to test the experience an end-user would see
       # when installing and running the add-on in their G Suite applications.  When
       # running in developer mode, more detailed error messages are exposed in the
       # add-on UI to aid in debugging.
       #
-      # A Google Workspace Add-on deployment can be published to Google Workspace
+      # A Google Workspace add-on deployment can be published to Google Workspace
       # Marketplace, which allows other Google Workspace users to discover and
       # install the add-on.  See:
       # https://developers.google.com/gsuite/add-ons/how-tos/publish-add-on-overview
@@ -104,6 +109,37 @@ module Google
         service_module = Google::Cloud::GSuiteAddOns.const_get(package_name).const_get(:GSuiteAddOns)
         service_module = service_module.const_get(:Rest) if transport == :rest
         service_module.const_get(:Client).new(&block)
+      end
+
+      ##
+      # Determines whether the GSuiteAddOns service is supported by the current client.
+      # If true, you can retrieve a client object by calling {Google::Cloud::GSuiteAddOns.gsuite_add_ons}.
+      # If false, that method will raise an exception. This could happen if the given
+      # API version does not exist or does not support the GSuiteAddOns service,
+      # or if the versioned client gem needs an update to support the GSuiteAddOns service.
+      #
+      # @param version [::String, ::Symbol] The API version to connect to. Optional.
+      #   Defaults to `:v1`.
+      # @param transport [:grpc, :rest] The transport to use. Defaults to `:grpc`.
+      # @return [boolean] Whether the service is available.
+      #
+      def self.gsuite_add_ons_available? version: :v1, transport: :grpc
+        require "google/cloud/gsuite_add_ons/#{version.to_s.downcase}"
+        package_name = Google::Cloud::GSuiteAddOns
+                       .constants
+                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                       .first
+        return false unless package_name
+        service_module = Google::Cloud::GSuiteAddOns.const_get package_name
+        return false unless service_module.const_defined? :GSuiteAddOns
+        service_module = service_module.const_get :GSuiteAddOns
+        if transport == :rest
+          return false unless service_module.const_defined? :Rest
+          service_module = service_module.const_get :Rest
+        end
+        service_module.const_defined? :Client
+      rescue ::LoadError
+        false
       end
 
       ##

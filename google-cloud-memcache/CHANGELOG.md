@@ -1,5 +1,24 @@
 # Release History
 
+### 2.0.0 (2025-02-13)
+
+### ⚠ BREAKING CHANGES
+
+* Removed dependency on google-cloud-memcache-v1beta2 prerelease service
+* Updated google-cloud-memcache-v1 dependency to version 2.x ([#29041](https://github.com/googleapis/google-cloud-ruby/issues/29041))
+
+#### Features
+
+* Removed dependency on google-cloud-memcache-v1beta2 prerelease service 
+* Updated google-cloud-memcache-v1 dependency to version 2.x ([#29041](https://github.com/googleapis/google-cloud-ruby/issues/29041)) 
+
+### 1.6.0 (2025-01-29)
+
+#### Features
+
+* Provide methods to determine whether services are available with the currently installed versioned client ([#28530](https://github.com/googleapis/google-cloud-ruby/issues/28530)) 
+* Update Ruby version requirement to 3.0 
+
 ### 1.5.1 (2024-08-08)
 
 #### Documentation

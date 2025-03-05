@@ -571,7 +571,7 @@ module Google
               end
 
               ##
-              # Updates the specified commitment with the data included in the request. Update is performed only on selected fields included as part of update-mask. Only the following fields can be modified: auto_renew.
+              # Updates the specified commitment with the data included in the request. Update is performed only on selected fields included as part of update-mask. Only the following fields can be updated: auto_renew and plan.
               #
               # @overload update(request, options = nil)
               #   Pass arguments to `update` via a request object, either of type
@@ -589,7 +589,7 @@ module Google
               #   the default parameter values, pass an empty Hash as a request object (see above).
               #
               #   @param commitment [::String]
-              #     Name of the commitment for which auto renew is being updated.
+              #     Name of the commitment that you want to update.
               #   @param commitment_resource [::Google::Cloud::Compute::V1::Commitment, ::Hash]
               #     The body resource for this request
               #   @param paths [::String]
@@ -711,6 +711,13 @@ module Google
               #    *  (`Signet::OAuth2::Client`) A signet oauth2 client object
               #       (see the [signet docs](https://rubydoc.info/gems/signet/Signet/OAuth2/Client))
               #    *  (`nil`) indicating no credentials
+              #
+              #   Warning: If you accept a credential configuration (JSON file or Hash) from an
+              #   external source for authentication to Google Cloud, you must validate it before
+              #   providing it to a Google API client library. Providing an unvalidated credential
+              #   configuration to Google APIs can compromise the security of your systems and data.
+              #   For more information, refer to [Validate credential configurations from external
+              #   sources](https://cloud.google.com/docs/authentication/external/externally-sourced-credentials).
               #   @return [::Object]
               # @!attribute [rw] scope
               #   The OAuth scopes

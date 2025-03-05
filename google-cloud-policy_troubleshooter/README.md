@@ -17,6 +17,7 @@ constructing client objects. Reference documentation for the client objects
 themselves can be found in the client library documentation for the versioned
 client gems:
 [google-cloud-policy_troubleshooter-v1](https://cloud.google.com/ruby/docs/reference/google-cloud-policy_troubleshooter-v1/latest),
+[google-cloud-policy_troubleshooter-iam-v3](https://cloud.google.com/ruby/docs/reference/google-cloud-policy_troubleshooter-iam-v3/latest),
 [google-cloud-policy_troubleshooter-iam-v3](https://cloud.google.com/ruby/docs/reference/google-cloud-policy_troubleshooter-iam-v3/latest).
 
 See also the [Product Documentation](https://cloud.google.com/iam/docs/troubleshooting-access)
@@ -60,9 +61,14 @@ service such as [Google Cloud Run](https://cloud.google.com/run), this generally
 results in logs appearing alongside your application logs in the
 [Google Cloud Logging](https://cloud.google.com/logging/) service.
 
+Debug logging also requires that the versioned clients for this service be
+sufficiently recent, released after about Dec 10, 2024. If logging is not
+working, try updating the versioned clients in your bundle or installed gems:
+[google-cloud-policy_troubleshooter-v1](https://cloud.google.com/ruby/docs/reference/google-cloud-policy_troubleshooter-v1/latest).
+
 ## Supported Ruby Versions
 
-This library is supported on Ruby 2.7+.
+This library is supported on Ruby 3.0+.
 
 Google provides official support for Ruby versions that are actively supported
 by Ruby Core—that is, Ruby versions that are either in normal maintenance or

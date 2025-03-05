@@ -42,6 +42,7 @@ class Google::Cloud::Build::ClientConstructionMinitest < Minitest::Test
   end
 
   def test_cloud_build_grpc
+    skip unless Google::Cloud::Build.cloud_build_available? transport: :grpc
     Gapic::ServiceStub.stub :new, DummyStub.new do
       grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
       client = Google::Cloud::Build.cloud_build transport: :grpc do |config|
@@ -52,6 +53,7 @@ class Google::Cloud::Build::ClientConstructionMinitest < Minitest::Test
   end
 
   def test_cloud_build_rest
+    skip unless Google::Cloud::Build.cloud_build_available? transport: :rest
     Gapic::Rest::ClientStub.stub :new, DummyStub.new do
       client = Google::Cloud::Build.cloud_build transport: :rest do |config|
         config.credentials = :dummy_credentials

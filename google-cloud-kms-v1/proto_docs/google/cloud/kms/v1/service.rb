@@ -289,6 +289,15 @@ module Google
         #   @return [::String]
         #     Required. The {::Google::Cloud::Kms::V1::CryptoKeyVersion#name name} of the
         #     {::Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersion} public key to get.
+        # @!attribute [rw] public_key_format
+        #   @return [::Google::Cloud::Kms::V1::PublicKey::PublicKeyFormat]
+        #     Optional. The {::Google::Cloud::Kms::V1::PublicKey PublicKey} format specified
+        #     by the user. This field is required for PQC algorithms. If specified, the
+        #     public key will be exported through the
+        #     {::Google::Cloud::Kms::V1::PublicKey#public_key public_key} field in the
+        #     requested format. Otherwise, the {::Google::Cloud::Kms::V1::PublicKey#pem pem}
+        #     field will be populated for non-PQC algorithms, and an error will be
+        #     returned for PQC algorithms.
         class GetPublicKeyRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -393,7 +402,9 @@ module Google
         #     {::Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersion}, the
         #     {::Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersion} must be a child of
         #     {::Google::Cloud::Kms::V1::ImportCryptoKeyVersionRequest#parent ImportCryptoKeyVersionRequest.parent},
-        #     have been previously created via [ImportCryptoKeyVersion][], and be in
+        #     have been previously created via
+        #     {::Google::Cloud::Kms::V1::KeyManagementService::Client#import_crypto_key_version ImportCryptoKeyVersion},
+        #     and be in
         #     {::Google::Cloud::Kms::V1::CryptoKeyVersion::CryptoKeyVersionState::DESTROYED DESTROYED}
         #     or
         #     {::Google::Cloud::Kms::V1::CryptoKeyVersion::CryptoKeyVersionState::IMPORT_FAILED IMPORT_FAILED}
@@ -1065,7 +1076,8 @@ module Google
         #     checksum. {::Google::Cloud::Kms::V1::KeyManagementService::Client KeyManagementService}
         #     will report an error if the checksum verification fails. If you receive a
         #     checksum error, your client should verify that
-        #     CRC32C([MacVerifyRequest.tag][]) is equal to
+        #     CRC32C({::Google::Cloud::Kms::V1::MacVerifyRequest#mac MacVerifyRequest.mac}) is
+        #     equal to
         #     {::Google::Cloud::Kms::V1::MacVerifyRequest#mac_crc32c MacVerifyRequest.mac_crc32c},
         #     and if so, perform a limited number of retries. A persistent mismatch may
         #     indicate an issue in your computation of the CRC32C checksum. Note: This
@@ -1637,12 +1649,18 @@ module Google
         # @!attribute [rw] sha256
         #   @return [::String]
         #     A message digest produced with the SHA-256 algorithm.
+        #
+        #     Note: The following fields are mutually exclusive: `sha256`, `sha384`, `sha512`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] sha384
         #   @return [::String]
         #     A message digest produced with the SHA-384 algorithm.
+        #
+        #     Note: The following fields are mutually exclusive: `sha384`, `sha256`, `sha512`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] sha512
         #   @return [::String]
         #     A message digest produced with the SHA-512 algorithm.
+        #
+        #     Note: The following fields are mutually exclusive: `sha512`, `sha256`, `sha384`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         class Digest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

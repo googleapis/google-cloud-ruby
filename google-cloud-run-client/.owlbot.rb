@@ -29,6 +29,7 @@ file_paths = [
   ".repo-metadata.json",
   ".rubocop.yml",
   "AUTHENTICATION.md",
+  "Gemfile",
   "google-cloud-run-client.gemspec",
   "Rakefile",
   "README.md",

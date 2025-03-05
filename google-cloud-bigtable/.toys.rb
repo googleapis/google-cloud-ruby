@@ -26,6 +26,49 @@ else
 end
 
 tool "conformance" do
+  tool "test" do
+    flag :port, "--port=VAL", default: ENV["PORT"] || "9999"
+
+    include :git_cache
+    include :exec
+    include :terminal
+
+    def run
+      Dir.chdir context_directory
+      known_failures = File.read("conformance/known_failures.txt").split.join("|")
+      test_dir = git_cache.get "https://github.com/googleapis/cloud-bigtable-clients-test.git", update: true
+      result = nil
+      exec_tool ["conformance", "run-proxy", "--port", port], out: :controller do |controller|
+        logger.info "Waiting for server to start..."
+        loop do
+          break if controller.out.readline.strip == "SERVER STARTED"
+        end
+        logger.info "Got server start signal. Running test suite..."
+        Dir.chdir "#{test_dir}/tests" do
+          result = exec ["go", "test", "-v", "-proxy_addr=:#{port}", "-skip=#{known_failures}"]
+        end
+        controller.kill "SIGINT"
+      end
+      if result.success?
+        puts "PASSED", :green, :bold
+      else
+        puts "FAILED", :red, :bold
+      end
+      exit result.exit_code
+    end
+  end
+
+  tool "run-proxy" do
+    flag :port, "--port=VAL", default: ENV["PORT"] || "9999"
+
+    include :bundler, gemfile_path: "#{context_directory}/conformance/test_proxy/Gemfile"
+
+    def run
+      ENV["PORT"] = port
+      require "#{context_directory}/conformance/test_proxy/test_proxy"
+    end
+  end
+
   tool "gen-protos" do
     include :exec, e: true
     include :gems
@@ -57,7 +100,7 @@ tool "conformance" do
     end
 
     def generate_test_proxy
-      Dir.chdir "test/test_proxy/proto" do
+      Dir.chdir "conformance/test_proxy/proto" do
         cmd = [
           "grpc_tools_ruby_protoc",
           "--ruby_out", ".",

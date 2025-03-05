@@ -1,5 +1,37 @@
 # Changelog
 
+### 2.0.0 (2025-02-07)
+
+### ⚠ BREAKING CHANGES
+
+* Fixed incorrect pagination on certain REST RPC methods ([#28823](https://github.com/googleapis/google-cloud-ruby/issues/28823))
+
+#### Bug Fixes
+
+* Fixed incorrect pagination on certain REST RPC methods ([#28823](https://github.com/googleapis/google-cloud-ruby/issues/28823)) 
+
+### 1.3.0 (2025-01-28)
+
+#### Features
+
+* Update Ruby version requirement to 3.0 
+#### Documentation
+
+* Clarify behavior of protobuf message fields that are part of mutually-exclusive sets 
+* Include note about validating externally-provided credentials 
+
+### 1.2.1 (2025-01-08)
+
+#### Bug Fixes
+
+* Set default timeout and retry policies ([#28183](https://github.com/googleapis/google-cloud-ruby/issues/28183)) 
+
+### 1.2.0 (2024-12-12)
+
+#### Features
+
+* Support key-value annotations on Preview ([#28099](https://github.com/googleapis/google-cloud-ruby/issues/28099)) 
+
 ### 1.1.0 (2024-12-10)
 
 #### Features

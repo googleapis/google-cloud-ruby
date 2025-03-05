@@ -244,21 +244,29 @@ module Google
         #     Configuration for image classification task.
         #     One of image_classification_config, bounding_poly_config,
         #     polyline_config and segmentation_config are required.
+        #
+        #     Note: The following fields are mutually exclusive: `image_classification_config`, `bounding_poly_config`, `polyline_config`, `segmentation_config`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] bounding_poly_config
         #   @return [::Google::Cloud::DataLabeling::V1beta1::BoundingPolyConfig]
         #     Configuration for bounding box and bounding poly task.
         #     One of image_classification_config, bounding_poly_config,
         #     polyline_config and segmentation_config are required.
+        #
+        #     Note: The following fields are mutually exclusive: `bounding_poly_config`, `image_classification_config`, `polyline_config`, `segmentation_config`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] polyline_config
         #   @return [::Google::Cloud::DataLabeling::V1beta1::PolylineConfig]
         #     Configuration for polyline task.
         #     One of image_classification_config, bounding_poly_config,
         #     polyline_config and segmentation_config are required.
+        #
+        #     Note: The following fields are mutually exclusive: `polyline_config`, `image_classification_config`, `bounding_poly_config`, `segmentation_config`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] segmentation_config
         #   @return [::Google::Cloud::DataLabeling::V1beta1::SegmentationConfig]
         #     Configuration for segmentation task.
         #     One of image_classification_config, bounding_poly_config,
         #     polyline_config and segmentation_config are required.
+        #
+        #     Note: The following fields are mutually exclusive: `segmentation_config`, `image_classification_config`, `bounding_poly_config`, `polyline_config`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] parent
         #   @return [::String]
         #     Required. Name of the dataset to request labeling task, format:
@@ -307,21 +315,29 @@ module Google
         #     Configuration for video classification task.
         #     One of video_classification_config, object_detection_config,
         #     object_tracking_config and event_config is required.
+        #
+        #     Note: The following fields are mutually exclusive: `video_classification_config`, `object_detection_config`, `object_tracking_config`, `event_config`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] object_detection_config
         #   @return [::Google::Cloud::DataLabeling::V1beta1::ObjectDetectionConfig]
         #     Configuration for video object detection task.
         #     One of video_classification_config, object_detection_config,
         #     object_tracking_config and event_config is required.
+        #
+        #     Note: The following fields are mutually exclusive: `object_detection_config`, `video_classification_config`, `object_tracking_config`, `event_config`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] object_tracking_config
         #   @return [::Google::Cloud::DataLabeling::V1beta1::ObjectTrackingConfig]
         #     Configuration for video object tracking task.
         #     One of video_classification_config, object_detection_config,
         #     object_tracking_config and event_config is required.
+        #
+        #     Note: The following fields are mutually exclusive: `object_tracking_config`, `video_classification_config`, `object_detection_config`, `event_config`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] event_config
         #   @return [::Google::Cloud::DataLabeling::V1beta1::EventConfig]
         #     Configuration for video event task.
         #     One of video_classification_config, object_detection_config,
         #     object_tracking_config and event_config is required.
+        #
+        #     Note: The following fields are mutually exclusive: `event_config`, `video_classification_config`, `object_detection_config`, `object_tracking_config`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] parent
         #   @return [::String]
         #     Required. Name of the dataset to request labeling task, format:
@@ -360,11 +376,15 @@ module Google
         #     Configuration for text classification task.
         #     One of text_classification_config and text_entity_extraction_config
         #     is required.
+        #
+        #     Note: The following fields are mutually exclusive: `text_classification_config`, `text_entity_extraction_config`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] text_entity_extraction_config
         #   @return [::Google::Cloud::DataLabeling::V1beta1::TextEntityExtractionConfig]
         #     Configuration for entity extraction task.
         #     One of text_classification_config and text_entity_extraction_config
         #     is required.
+        #
+        #     Note: The following fields are mutually exclusive: `text_entity_extraction_config`, `text_classification_config`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] parent
         #   @return [::String]
         #     Required. Name of the data set to request labeling task, format:

@@ -44,14 +44,20 @@ module Google
           # @!attribute [rw] dataset
           #   @return [::String]
           #     The resource name of the Dataset used to train this Model.
+          #
+          #     Note: The following fields are mutually exclusive: `dataset`, `gcs_source`, `bigquery_source`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] gcs_source
           #   @return [::Google::Cloud::AIPlatform::V1::GcsSource]
           #     The Google Cloud Storage uri of the unmanaged Dataset used to train
           #     this Model.
+          #
+          #     Note: The following fields are mutually exclusive: `gcs_source`, `dataset`, `bigquery_source`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] bigquery_source
           #   @return [::Google::Cloud::AIPlatform::V1::BigQuerySource]
           #     The BigQuery table of the unmanaged Dataset used to train this
           #     Model.
+          #
+          #     Note: The following fields are mutually exclusive: `bigquery_source`, `dataset`, `gcs_source`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] data_format
           #   @return [::String]
           #     Data format of the dataset, only applicable if the input is from
@@ -180,9 +186,13 @@ module Google
             # @!attribute [rw] gcs
             #   @return [::Google::Cloud::AIPlatform::V1::GcsDestination]
             #     Cloud Storage location for BatchExplain output.
+            #
+            #     Note: The following fields are mutually exclusive: `gcs`, `bigquery`. If a field in that set is populated, all other fields in the set will automatically be cleared.
             # @!attribute [rw] bigquery
             #   @return [::Google::Cloud::AIPlatform::V1::BigQueryDestination]
             #     BigQuery location for BatchExplain output.
+            #
+            #     Note: The following fields are mutually exclusive: `bigquery`, `gcs`. If a field in that set is populated, all other fields in the set will automatically be cleared.
             # @!attribute [rw] prediction_format
             #   @return [::Google::Cloud::AIPlatform::V1::ModelMonitoringObjectiveConfig::ExplanationConfig::ExplanationBaseline::PredictionFormat]
             #     The storage format of the predictions generated BatchPrediction job.

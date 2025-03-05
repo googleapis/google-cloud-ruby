@@ -221,8 +221,12 @@ module Google
               #     Required. Artifact Registry URI to store the built image.
               #   @param buildpack_build [::Google::Cloud::Run::V2::SubmitBuildRequest::BuildpacksBuild, ::Hash]
               #     Build the source using Buildpacks.
+              #
+              #     Note: The following fields are mutually exclusive: `buildpack_build`, `docker_build`. If a field in that set is populated, all other fields in the set will automatically be cleared.
               #   @param docker_build [::Google::Cloud::Run::V2::SubmitBuildRequest::DockerBuild, ::Hash]
               #     Build the source using Docker. This means the source has a Dockerfile.
+              #
+              #     Note: The following fields are mutually exclusive: `docker_build`, `buildpack_build`. If a field in that set is populated, all other fields in the set will automatically be cleared.
               #   @param service_account [::String]
               #     Optional. The service account to use for the build. If not set, the default
               #     Cloud Build service account for the project will be used.
@@ -335,6 +339,13 @@ module Google
               #    *  (`Signet::OAuth2::Client`) A signet oauth2 client object
               #       (see the [signet docs](https://rubydoc.info/gems/signet/Signet/OAuth2/Client))
               #    *  (`nil`) indicating no credentials
+              #
+              #   Warning: If you accept a credential configuration (JSON file or Hash) from an
+              #   external source for authentication to Google Cloud, you must validate it before
+              #   providing it to a Google API client library. Providing an unvalidated credential
+              #   configuration to Google APIs can compromise the security of your systems and data.
+              #   For more information, refer to [Validate credential configurations from external
+              #   sources](https://cloud.google.com/docs/authentication/external/externally-sourced-credentials).
               #   @return [::Object]
               # @!attribute [rw] scope
               #   The OAuth scopes

@@ -28,10 +28,14 @@ module Google
         #   @return [::Google::Cloud::Spanner::V1::Mutation::Write]
         #     Insert new rows in a table. If any of the rows already exist,
         #     the write or transaction fails with error `ALREADY_EXISTS`.
+        #
+        #     Note: The following fields are mutually exclusive: `insert`, `update`, `insert_or_update`, `replace`, `delete`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] update
         #   @return [::Google::Cloud::Spanner::V1::Mutation::Write]
         #     Update existing rows in a table. If any of the rows does not
         #     already exist, the transaction fails with error `NOT_FOUND`.
+        #
+        #     Note: The following fields are mutually exclusive: `update`, `insert`, `insert_or_update`, `replace`, `delete`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] insert_or_update
         #   @return [::Google::Cloud::Spanner::V1::Mutation::Write]
         #     Like {::Google::Cloud::Spanner::V1::Mutation#insert insert}, except that if the row already exists, then
@@ -41,6 +45,8 @@ module Google
         #     When using {::Google::Cloud::Spanner::V1::Mutation#insert_or_update insert_or_update}, just as when using {::Google::Cloud::Spanner::V1::Mutation#insert insert}, all `NOT
         #     NULL` columns in the table must be given a value. This holds true
         #     even when the row already exists and will therefore actually be updated.
+        #
+        #     Note: The following fields are mutually exclusive: `insert_or_update`, `insert`, `update`, `replace`, `delete`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] replace
         #   @return [::Google::Cloud::Spanner::V1::Mutation::Write]
         #     Like {::Google::Cloud::Spanner::V1::Mutation#insert insert}, except that if the row already exists, it is
@@ -52,10 +58,14 @@ module Google
         #     `ON DELETE CASCADE` annotation, then replacing a parent row
         #     also deletes the child rows. Otherwise, you must delete the
         #     child rows before you replace the parent row.
+        #
+        #     Note: The following fields are mutually exclusive: `replace`, `insert`, `update`, `insert_or_update`, `delete`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] delete
         #   @return [::Google::Cloud::Spanner::V1::Mutation::Delete]
         #     Delete rows from a table. Succeeds whether or not the named
         #     rows were present.
+        #
+        #     Note: The following fields are mutually exclusive: `delete`, `insert`, `update`, `insert_or_update`, `replace`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         class Mutation
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

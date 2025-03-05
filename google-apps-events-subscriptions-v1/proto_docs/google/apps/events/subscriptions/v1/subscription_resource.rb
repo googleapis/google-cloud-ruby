@@ -29,10 +29,14 @@ module Google
           #   @return [::Google::Protobuf::Timestamp]
           #     Non-empty default. The timestamp in UTC when the subscription expires.
           #     Always displayed on output, regardless of what was used on input.
+          #
+          #     Note: The following fields are mutually exclusive: `expire_time`, `ttl`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] ttl
           #   @return [::Google::Protobuf::Duration]
           #     Input only. The time-to-live (TTL) or duration for the subscription. If
           #     unspecified or set to `0`, uses the maximum possible duration.
+          #
+          #     Note: The following fields are mutually exclusive: `ttl`, `expire_time`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] name
           #   @return [::String]
           #     Optional. Immutable. Identifier. Resource name of the subscription.

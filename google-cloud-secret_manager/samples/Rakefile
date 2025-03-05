@@ -15,6 +15,16 @@
 require "rake/testtask"
 require "rubocop/rake_task"
 
+Rake::TestTask.new "global_test" do |t|
+  t.test_files = FileList["acceptance/*_test.rb"].exclude(/regional/)
+  t.warning = false
+end
+
+Rake::TestTask.new "regional_test" do |t|
+  t.test_files = FileList["acceptance/*_test.rb"].select { |file| file =~ /regional/ }
+  t.warning = false
+end
+
 Rake::TestTask.new "test" do |t|
   t.test_files = FileList["acceptance/*_test.rb"]
   t.warning = false

@@ -242,7 +242,8 @@ module Google
         #     {::Google::Cloud::Talent::V4::PostingRegion::TELECOMMUTE PostingRegion.TELECOMMUTE}
         #     and have additional {::Google::Cloud::Talent::V4::Job#addresses Job.addresses}
         #     may still be matched based on other location filters using
-        #     {::Google::Cloud::Talent::V4::LocationFilter#address address} or [latlng][].
+        #     {::Google::Cloud::Talent::V4::LocationFilter#address address} or
+        #     {::Google::Cloud::Talent::V4::LocationFilter#lat_lng lat_lng}.
         #
         #     This filter can be used by itself to search exclusively for telecommuting
         #     jobs, or it can be combined with another location
@@ -359,12 +360,16 @@ module Google
         # @!attribute [rw] road_traffic
         #   @return [::Google::Cloud::Talent::V4::CommuteFilter::RoadTraffic]
         #     Specifies the traffic density to use when calculating commute time.
+        #
+        #     Note: The following fields are mutually exclusive: `road_traffic`, `departure_time`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] departure_time
         #   @return [::Google::Type::TimeOfDay]
         #     The departure time used to calculate traffic impact, represented as
         #     {::Google::Type::TimeOfDay google.type.TimeOfDay} in local time zone.
         #
         #     Currently traffic model is restricted to hour level resolution.
+        #
+        #     Note: The following fields are mutually exclusive: `departure_time`, `road_traffic`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         class CommuteFilter
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

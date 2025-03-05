@@ -253,6 +253,9 @@ module Google
                   ##
                   # Lists the supported instance configurations for a given project.
                   #
+                  # Returns both Google-managed configurations and user-managed
+                  # configurations.
+                  #
                   # @overload list_instance_configs(request, options = nil)
                   #   Pass arguments to `list_instance_configs` via a request object, either of type
                   #   {::Google::Cloud::Spanner::Admin::Instance::V1::ListInstanceConfigsRequest} or an equivalent Hash.
@@ -425,7 +428,7 @@ module Google
 
                   ##
                   # Creates an instance configuration and begins preparing it to be used. The
-                  # returned {::Google::Longrunning::Operation long-running operation}
+                  # returned long-running operation
                   # can be used to track the progress of preparing the new
                   # instance configuration. The instance configuration name is assigned by the
                   # caller. If the named instance configuration already exists,
@@ -452,13 +455,13 @@ module Google
                   #   {::Google::Cloud::Spanner::Admin::Instance::V1::InstanceConfig#reconciling reconciling}
                   #   field becomes false. Its state becomes `READY`.
                   #
-                  # The returned {::Google::Longrunning::Operation long-running operation} will
+                  # The returned long-running operation will
                   # have a name of the format
                   # `<instance_config_name>/operations/<operation_id>` and can be used to track
                   # creation of the instance configuration. The
-                  # {::Google::Longrunning::Operation#metadata metadata} field type is
+                  # metadata field type is
                   # {::Google::Cloud::Spanner::Admin::Instance::V1::CreateInstanceConfigMetadata CreateInstanceConfigMetadata}.
-                  # The {::Google::Longrunning::Operation#response response} field type is
+                  # The response field type is
                   # {::Google::Cloud::Spanner::Admin::Instance::V1::InstanceConfig InstanceConfig}, if
                   # successful.
                   #
@@ -490,10 +493,10 @@ module Google
                   #     characters in length. The `custom-` prefix is required to avoid name
                   #     conflicts with Google-managed configurations.
                   #   @param instance_config [::Google::Cloud::Spanner::Admin::Instance::V1::InstanceConfig, ::Hash]
-                  #     Required. The InstanceConfig proto of the configuration to create.
-                  #     instance_config.name must be
+                  #     Required. The `InstanceConfig` proto of the configuration to create.
+                  #     `instance_config.name` must be
                   #     `<parent>/instanceConfigs/<instance_config_id>`.
-                  #     instance_config.base_config must be a Google managed configuration name,
+                  #     `instance_config.base_config` must be a Google-managed configuration name,
                   #     e.g. <parent>/instanceConfigs/us-east1, <parent>/instanceConfigs/nam3.
                   #   @param validate_only [::Boolean]
                   #     An option to validate, but not actually execute, a request,
@@ -567,7 +570,7 @@ module Google
 
                   ##
                   # Updates an instance configuration. The returned
-                  # {::Google::Longrunning::Operation long-running operation} can be used to track
+                  # long-running operation can be used to track
                   # the progress of updating the instance. If the named instance configuration
                   # does not exist, returns `NOT_FOUND`.
                   #
@@ -598,13 +601,13 @@ module Google
                   #   {::Google::Cloud::Spanner::Admin::Instance::V1::InstanceConfig#reconciling reconciling}
                   #   field becomes false.
                   #
-                  # The returned {::Google::Longrunning::Operation long-running operation} will
+                  # The returned long-running operation will
                   # have a name of the format
                   # `<instance_config_name>/operations/<operation_id>` and can be used to track
                   # the instance configuration modification.  The
-                  # {::Google::Longrunning::Operation#metadata metadata} field type is
+                  # metadata field type is
                   # {::Google::Cloud::Spanner::Admin::Instance::V1::UpdateInstanceConfigMetadata UpdateInstanceConfigMetadata}.
-                  # The {::Google::Longrunning::Operation#response response} field type is
+                  # The response field type is
                   # {::Google::Cloud::Spanner::Admin::Instance::V1::InstanceConfig InstanceConfig}, if
                   # successful.
                   #
@@ -810,12 +813,12 @@ module Google
                   end
 
                   ##
-                  # Lists the user-managed instance configuration [long-running
-                  # operations][google.longrunning.Operation] in the given project. An instance
+                  # Lists the user-managed instance configuration long-running
+                  # operations in the given project. An instance
                   # configuration operation has a name of the form
                   # `projects/<project>/instanceConfigs/<instance_config>/operations/<operation>`.
                   # The long-running operation
-                  # {::Google::Longrunning::Operation#metadata metadata} field type
+                  # metadata field type
                   # `metadata.type_url` describes the type of the metadata. Operations returned
                   # include those that have completed/failed/canceled within the last 7 days,
                   # and pending operations. Operations returned are ordered by
@@ -849,8 +852,7 @@ module Google
                   #     must be one of: `<`, `>`, `<=`, `>=`, `!=`, `=`, or `:`.
                   #     Colon `:` is the contains operator. Filter rules are not case sensitive.
                   #
-                  #     The following fields in the {::Google::Longrunning::Operation Operation}
-                  #     are eligible for filtering:
+                  #     The following fields in the Operation are eligible for filtering:
                   #
                   #       * `name` - The name of the long-running operation
                   #       * `done` - False if the operation is in progress, else true.
@@ -1014,10 +1016,10 @@ module Google
                   #     in
                   #     {::Google::Cloud::Spanner::Admin::Instance::V1::ListInstancesResponse ListInstancesResponse}.
                   # @yield [result, operation] Access the result along with the TransportOperation object
-                  # @yieldparam result [::Google::Cloud::Spanner::Admin::Instance::V1::ListInstancesResponse]
+                  # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Spanner::Admin::Instance::V1::Instance>]
                   # @yieldparam operation [::Gapic::Rest::TransportOperation]
                   #
-                  # @return [::Google::Cloud::Spanner::Admin::Instance::V1::ListInstancesResponse]
+                  # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Spanner::Admin::Instance::V1::Instance>]
                   #
                   # @raise [::Google::Cloud::Error] if the REST call is aborted.
                   #
@@ -1069,7 +1071,9 @@ module Google
                                            retry_policy: @config.retry_policy
 
                     @instance_admin_stub.list_instances request, options do |result, operation|
+                      result = ::Gapic::Rest::PagedEnumerable.new @instance_admin_stub, :list_instances, "instances", request, result, options
                       yield result, operation if block_given?
+                      throw :response, result
                     end
                   rescue ::Gapic::Rest::Error => e
                     raise ::Google::Cloud::Error.from_error(e)
@@ -1095,7 +1099,9 @@ module Google
                   #
                   #   @param parent [::String]
                   #     Required. The instance whose instance partitions should be listed. Values
-                  #     are of the form `projects/<project>/instances/<instance>`.
+                  #     are of the form `projects/<project>/instances/<instance>`. Use `{instance}
+                  #     = '-'` to list instance partitions for all Instances in a project, e.g.,
+                  #     `projects/myproject/instances/-`.
                   #   @param page_size [::Integer]
                   #     Number of instance partitions to be returned in the response. If 0 or less,
                   #     defaults to the server's maximum allowed page size.
@@ -1112,10 +1118,10 @@ module Google
                   #     in
                   #     {::Google::Cloud::Spanner::Admin::Instance::V1::ListInstancePartitionsResponse ListInstancePartitionsResponse}.
                   # @yield [result, operation] Access the result along with the TransportOperation object
-                  # @yieldparam result [::Google::Cloud::Spanner::Admin::Instance::V1::ListInstancePartitionsResponse]
+                  # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Spanner::Admin::Instance::V1::InstancePartition>]
                   # @yieldparam operation [::Gapic::Rest::TransportOperation]
                   #
-                  # @return [::Google::Cloud::Spanner::Admin::Instance::V1::ListInstancePartitionsResponse]
+                  # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Spanner::Admin::Instance::V1::InstancePartition>]
                   #
                   # @raise [::Google::Cloud::Error] if the REST call is aborted.
                   #
@@ -1167,7 +1173,9 @@ module Google
                                            retry_policy: @config.retry_policy
 
                     @instance_admin_stub.list_instance_partitions request, options do |result, operation|
+                      result = ::Gapic::Rest::PagedEnumerable.new @instance_admin_stub, :list_instance_partitions, "instance_partitions", request, result, options
                       yield result, operation if block_given?
+                      throw :response, result
                     end
                   rescue ::Gapic::Rest::Error => e
                     raise ::Google::Cloud::Error.from_error(e)
@@ -1259,7 +1267,7 @@ module Google
 
                   ##
                   # Creates an instance and begins preparing it to begin serving. The
-                  # returned {::Google::Longrunning::Operation long-running operation}
+                  # returned long-running operation
                   # can be used to track the progress of preparing the new
                   # instance. The instance name is assigned by the caller. If the
                   # named instance already exists, `CreateInstance` returns
@@ -1285,12 +1293,12 @@ module Google
                   #   * The instance's allocated resource levels are readable via the API.
                   #   * The instance's state becomes `READY`.
                   #
-                  # The returned {::Google::Longrunning::Operation long-running operation} will
+                  # The returned long-running operation will
                   # have a name of the format `<instance_name>/operations/<operation_id>` and
                   # can be used to track creation of the instance.  The
-                  # {::Google::Longrunning::Operation#metadata metadata} field type is
+                  # metadata field type is
                   # {::Google::Cloud::Spanner::Admin::Instance::V1::CreateInstanceMetadata CreateInstanceMetadata}.
-                  # The {::Google::Longrunning::Operation#response response} field type is
+                  # The response field type is
                   # {::Google::Cloud::Spanner::Admin::Instance::V1::Instance Instance}, if successful.
                   #
                   # @overload create_instance(request, options = nil)
@@ -1387,8 +1395,7 @@ module Google
 
                   ##
                   # Updates an instance, and begins allocating or releasing resources
-                  # as requested. The returned [long-running
-                  # operation][google.longrunning.Operation] can be used to track the
+                  # as requested. The returned long-running operation can be used to track the
                   # progress of updating the instance. If the named instance does not
                   # exist, returns `NOT_FOUND`.
                   #
@@ -1416,12 +1423,12 @@ module Google
                   #     tables.
                   #   * The instance's new resource levels are readable via the API.
                   #
-                  # The returned {::Google::Longrunning::Operation long-running operation} will
+                  # The returned long-running operation will
                   # have a name of the format `<instance_name>/operations/<operation_id>` and
                   # can be used to track the instance modification.  The
-                  # {::Google::Longrunning::Operation#metadata metadata} field type is
+                  # metadata field type is
                   # {::Google::Cloud::Spanner::Admin::Instance::V1::UpdateInstanceMetadata UpdateInstanceMetadata}.
-                  # The {::Google::Longrunning::Operation#response response} field type is
+                  # The response field type is
                   # {::Google::Cloud::Spanner::Admin::Instance::V1::Instance Instance}, if successful.
                   #
                   # Authorization requires `spanner.instances.update` permission on
@@ -1960,7 +1967,7 @@ module Google
 
                   ##
                   # Creates an instance partition and begins preparing it to be used. The
-                  # returned {::Google::Longrunning::Operation long-running operation}
+                  # returned long-running operation
                   # can be used to track the progress of preparing the new instance partition.
                   # The instance partition name is assigned by the caller. If the named
                   # instance partition already exists, `CreateInstancePartition` returns
@@ -1987,13 +1994,13 @@ module Google
                   #     API.
                   #   * The instance partition's state becomes `READY`.
                   #
-                  # The returned {::Google::Longrunning::Operation long-running operation} will
+                  # The returned long-running operation will
                   # have a name of the format
                   # `<instance_partition_name>/operations/<operation_id>` and can be used to
                   # track creation of the instance partition.  The
-                  # {::Google::Longrunning::Operation#metadata metadata} field type is
+                  # metadata field type is
                   # {::Google::Cloud::Spanner::Admin::Instance::V1::CreateInstancePartitionMetadata CreateInstancePartitionMetadata}.
-                  # The {::Google::Longrunning::Operation#response response} field type is
+                  # The response field type is
                   # {::Google::Cloud::Spanner::Admin::Instance::V1::InstancePartition InstancePartition}, if
                   # successful.
                   #
@@ -2184,8 +2191,7 @@ module Google
 
                   ##
                   # Updates an instance partition, and begins allocating or releasing resources
-                  # as requested. The returned [long-running
-                  # operation][google.longrunning.Operation] can be used to track the
+                  # as requested. The returned long-running operation can be used to track the
                   # progress of updating the instance partition. If the named instance
                   # partition does not exist, returns `NOT_FOUND`.
                   #
@@ -2214,13 +2220,13 @@ module Google
                   #     partition's tables.
                   #   * The instance partition's new resource levels are readable via the API.
                   #
-                  # The returned {::Google::Longrunning::Operation long-running operation} will
+                  # The returned long-running operation will
                   # have a name of the format
                   # `<instance_partition_name>/operations/<operation_id>` and can be used to
                   # track the instance partition modification. The
-                  # {::Google::Longrunning::Operation#metadata metadata} field type is
+                  # metadata field type is
                   # {::Google::Cloud::Spanner::Admin::Instance::V1::UpdateInstancePartitionMetadata UpdateInstancePartitionMetadata}.
-                  # The {::Google::Longrunning::Operation#response response} field type is
+                  # The response field type is
                   # {::Google::Cloud::Spanner::Admin::Instance::V1::InstancePartition InstancePartition}, if
                   # successful.
                   #
@@ -2323,12 +2329,11 @@ module Google
                   end
 
                   ##
-                  # Lists instance partition [long-running
-                  # operations][google.longrunning.Operation] in the given instance.
+                  # Lists instance partition long-running operations in the given instance.
                   # An instance partition operation has a name of the form
                   # `projects/<project>/instances/<instance>/instancePartitions/<instance_partition>/operations/<operation>`.
                   # The long-running operation
-                  # {::Google::Longrunning::Operation#metadata metadata} field type
+                  # metadata field type
                   # `metadata.type_url` describes the type of the metadata. Operations returned
                   # include those that have completed/failed/canceled within the last 7 days,
                   # and pending operations. Operations returned are ordered by
@@ -2366,8 +2371,7 @@ module Google
                   #     must be one of: `<`, `>`, `<=`, `>=`, `!=`, `=`, or `:`.
                   #     Colon `:` is the contains operator. Filter rules are not case sensitive.
                   #
-                  #     The following fields in the {::Google::Longrunning::Operation Operation}
-                  #     are eligible for filtering:
+                  #     The following fields in the Operation are eligible for filtering:
                   #
                   #       * `name` - The name of the long-running operation
                   #       * `done` - False if the operation is in progress, else true.
@@ -2414,7 +2418,8 @@ module Google
                   #     Optional. Deadline used while retrieving metadata for instance partition
                   #     operations. Instance partitions whose operation metadata cannot be
                   #     retrieved within this deadline will be added to
-                  #     [unreachable][ListInstancePartitionOperationsResponse.unreachable] in
+                  #     {::Google::Cloud::Spanner::Admin::Instance::V1::ListInstancePartitionOperationsResponse#unreachable_instance_partitions unreachable_instance_partitions}
+                  #     in
                   #     {::Google::Cloud::Spanner::Admin::Instance::V1::ListInstancePartitionOperationsResponse ListInstancePartitionOperationsResponse}.
                   # @yield [result, operation] Access the result along with the TransportOperation object
                   # @yieldparam result [::Gapic::Operation]
@@ -2472,7 +2477,7 @@ module Google
                                            retry_policy: @config.retry_policy
 
                     @instance_admin_stub.list_instance_partition_operations request, options do |result, operation|
-                      result = ::Gapic::Operation.new result, @operations_client, options: options
+                      result = ::Gapic::Rest::PagedEnumerable.new @instance_admin_stub, :list_instance_partition_operations, "operations", request, result, options
                       yield result, operation if block_given?
                       throw :response, result
                     end
@@ -2482,7 +2487,7 @@ module Google
 
                   ##
                   # Moves an instance to the target instance configuration. You can use the
-                  # returned {::Google::Longrunning::Operation long-running operation} to track
+                  # returned long-running operation to track
                   # the progress of moving the instance.
                   #
                   # `MoveInstance` returns `FAILED_PRECONDITION` if the instance meets any of
@@ -2513,13 +2518,13 @@ module Google
                   #     transaction abort rate. However, moving an instance doesn't cause any
                   #     downtime.
                   #
-                  # The returned {::Google::Longrunning::Operation long-running operation} has
+                  # The returned long-running operation has
                   # a name of the format
                   # `<instance_name>/operations/<operation_id>` and can be used to track
                   # the move instance operation. The
-                  # {::Google::Longrunning::Operation#metadata metadata} field type is
+                  # metadata field type is
                   # {::Google::Cloud::Spanner::Admin::Instance::V1::MoveInstanceMetadata MoveInstanceMetadata}.
-                  # The {::Google::Longrunning::Operation#response response} field type is
+                  # The response field type is
                   # {::Google::Cloud::Spanner::Admin::Instance::V1::Instance Instance},
                   # if successful.
                   # Cancelling the operation sets its metadata's
@@ -2673,6 +2678,13 @@ module Google
                   #    *  (`Signet::OAuth2::Client`) A signet oauth2 client object
                   #       (see the [signet docs](https://rubydoc.info/gems/signet/Signet/OAuth2/Client))
                   #    *  (`nil`) indicating no credentials
+                  #
+                  #   Warning: If you accept a credential configuration (JSON file or Hash) from an
+                  #   external source for authentication to Google Cloud, you must validate it before
+                  #   providing it to a Google API client library. Providing an unvalidated credential
+                  #   configuration to Google APIs can compromise the security of your systems and data.
+                  #   For more information, refer to [Validate credential configurations from external
+                  #   sources](https://cloud.google.com/docs/authentication/external/externally-sourced-credentials).
                   #   @return [::Object]
                   # @!attribute [rw] scope
                   #   The OAuth scopes

@@ -1,5 +1,23 @@
 # Release History
 
+### 2.0.0 (2025-02-13)
+
+### ⚠ BREAKING CHANGES
+
+* Removed dependency on google-cloud-web_risk-v1beta1 prerelease service
+
+#### Features
+
+* Removed dependency on google-cloud-web_risk-v1beta1 prerelease service 
+* Updated google-cloud-web_risk-v1 dependency to version 1.x ([#29029](https://github.com/googleapis/google-cloud-ruby/issues/29029)) 
+
+### 1.7.0 (2025-01-29)
+
+#### Features
+
+* Provide methods to determine whether services are available with the currently installed versioned client ([#28533](https://github.com/googleapis/google-cloud-ruby/issues/28533)) 
+* Update Ruby version requirement to 3.0 
+
 ### 1.6.1 (2024-08-08)
 
 #### Documentation

@@ -72,6 +72,8 @@ module Google
         #     Provides information to the recognizer that specifies how to process the
         #     request. The first `StreamingRecognizeRequest` message must contain a
         #     `streaming_config`  message.
+        #
+        #     Note: The following fields are mutually exclusive: `streaming_config`, `audio_content`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] audio_content
         #   @return [::String]
         #     The audio data to be recognized. Sequential chunks of audio data are sent
@@ -82,6 +84,8 @@ module Google
         #     `RecognitionConfig`. Note: as with all bytes fields, proto buffers use a
         #     pure binary representation (not base64). See
         #     [content limits](https://cloud.google.com/speech-to-text/quotas#content).
+        #
+        #     Note: The following fields are mutually exclusive: `audio_content`, `streaming_config`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         class StreamingRecognizeRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -648,6 +652,8 @@ module Google
         #     The audio data bytes encoded as specified in
         #     `RecognitionConfig`. Note: as with all bytes fields, proto buffers use a
         #     pure binary representation, whereas JSON representations use base64.
+        #
+        #     Note: The following fields are mutually exclusive: `content`, `uri`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] uri
         #   @return [::String]
         #     URI that points to a file that contains audio data bytes as specified in
@@ -658,6 +664,8 @@ module Google
         #     [google.rpc.Code.INVALID_ARGUMENT][google.rpc.Code.INVALID_ARGUMENT]).
         #     For more information, see [Request
         #     URIs](https://cloud.google.com/storage/docs/reference-uris).
+        #
+        #     Note: The following fields are mutually exclusive: `uri`, `content`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         class RecognitionAudio
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

@@ -63,6 +63,29 @@ describe Google::Cloud::Bigquery::Table, :insert, :mock_bigquery do
     _(result.error_count).must_equal 0
   end
 
+  it "can insert rows into another project" do
+    mock = Minitest::Mock.new
+    insert_req = {
+      rows: [insert_rows.first], ignoreUnknownValues: nil, skipInvalidRows: nil
+    }.to_json
+    another_project_id = "another-project"
+    table.gapi.table_reference.project_id = another_project_id
+    mock.expect :insert_all_table_data, success_table_insert_gapi,
+      [another_project_id, table.dataset_id, table.table_id, insert_req], options: { skip_serialization: true }
+    table.service.mocked_service = mock
+
+    result = nil
+    SecureRandom.stub :uuid, insert_id do
+      result = table.insert rows.first
+    end
+
+    mock.verify
+
+    _(result).must_be :success?
+    _(result.insert_count).must_equal 1
+    _(result.error_count).must_equal 0
+  end
+
   it "can insert multiple rows" do
     mock = Minitest::Mock.new
     insert_req = {

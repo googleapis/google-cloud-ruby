@@ -27,7 +27,7 @@ module Google
         # configuration can progress.
         # @!attribute [rw] name
         #   @return [::String]
-        #     Optional. Name of the `DeliveryPipeline`. Format is
+        #     Identifier. Name of the `DeliveryPipeline`. Format is
         #     `projects/{project}/locations/{location}/deliveryPipelines/{deliveryPipeline}`.
         #     The `deliveryPipeline` component must match
         #     `[a-z]([a-z0-9-]{0,61}[a-z0-9])?`
@@ -36,11 +36,12 @@ module Google
         #     Output only. Unique identifier of the `DeliveryPipeline`.
         # @!attribute [rw] description
         #   @return [::String]
-        #     Description of the `DeliveryPipeline`. Max length is 255 characters.
+        #     Optional. Description of the `DeliveryPipeline`. Max length is 255
+        #     characters.
         # @!attribute [rw] annotations
         #   @return [::Google::Protobuf::Map{::String => ::String}]
-        #     User annotations. These attributes can only be set and used by the
-        #     user, and not by Cloud Deploy.
+        #     Optional. User annotations. These attributes can only be set and used by
+        #     the user, and not by Cloud Deploy.
         # @!attribute [rw] labels
         #   @return [::Google::Protobuf::Map{::String => ::String}]
         #     Labels are attributes that can be set and used by both the
@@ -62,7 +63,7 @@ module Google
         #     Output only. Most recent time at which the pipeline was updated.
         # @!attribute [rw] serial_pipeline
         #   @return [::Google::Cloud::Deploy::V1::SerialPipeline]
-        #     SerialPipeline defines a sequential set of stages for a
+        #     Optional. SerialPipeline defines a sequential set of stages for a
         #     `DeliveryPipeline`.
         # @!attribute [r] condition
         #   @return [::Google::Cloud::Deploy::V1::PipelineCondition]
@@ -74,7 +75,7 @@ module Google
         #     client has an up-to-date value before proceeding.
         # @!attribute [rw] suspended
         #   @return [::Boolean]
-        #     When suspended, no new releases or rollouts can be created,
+        #     Optional. When suspended, no new releases or rollouts can be created,
         #     but in-progress ones will complete.
         class DeliveryPipeline
           include ::Google::Protobuf::MessageExts
@@ -102,7 +103,7 @@ module Google
         # SerialPipeline defines a sequential set of stages for a `DeliveryPipeline`.
         # @!attribute [rw] stages
         #   @return [::Array<::Google::Cloud::Deploy::V1::Stage>]
-        #     Each stage specifies configuration for a `Target`. The ordering
+        #     Optional. Each stage specifies configuration for a `Target`. The ordering
         #     of this list defines the promotion flow.
         class SerialPipeline
           include ::Google::Protobuf::MessageExts
@@ -112,16 +113,16 @@ module Google
         # Stage specifies a location to which to deploy.
         # @!attribute [rw] target_id
         #   @return [::String]
-        #     The target_id to which this stage points. This field refers exclusively to
-        #     the last segment of a target name. For example, this field would just be
-        #     `my-target` (rather than
+        #     Optional. The target_id to which this stage points. This field refers
+        #     exclusively to the last segment of a target name. For example, this field
+        #     would just be `my-target` (rather than
         #     `projects/project/locations/location/targets/my-target`). The location of
         #     the `Target` is inferred to be the same as the location of the
         #     `DeliveryPipeline` that contains this `Stage`.
         # @!attribute [rw] profiles
         #   @return [::Array<::String>]
-        #     Skaffold profiles to use when rendering the manifest for this stage's
-        #     `Target`.
+        #     Optional. Skaffold profiles to use when rendering the manifest for this
+        #     stage's `Target`.
         # @!attribute [rw] strategy
         #   @return [::Google::Cloud::Deploy::V1::Strategy]
         #     Optional. The strategy to use for a `Rollout` to this stage.
@@ -168,12 +169,16 @@ module Google
         # Strategy contains deployment strategy information.
         # @!attribute [rw] standard
         #   @return [::Google::Cloud::Deploy::V1::Standard]
-        #     Standard deployment strategy executes a single deploy and allows
-        #     verifying the deployment.
+        #     Optional. Standard deployment strategy executes a single deploy and
+        #     allows verifying the deployment.
+        #
+        #     Note: The following fields are mutually exclusive: `standard`, `canary`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] canary
         #   @return [::Google::Cloud::Deploy::V1::Canary]
-        #     Canary deployment strategy provides progressive percentage based
-        #     deployments to a Target.
+        #     Optional. Canary deployment strategy provides progressive percentage
+        #     based deployments to a Target.
+        #
+        #     Note: The following fields are mutually exclusive: `canary`, `standard`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         class Strategy
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -202,7 +207,7 @@ module Google
         # Standard represents the standard deployment strategy.
         # @!attribute [rw] verify
         #   @return [::Boolean]
-        #     Whether to verify a deployment.
+        #     Optional. Whether to verify a deployment.
         # @!attribute [rw] predeploy
         #   @return [::Google::Cloud::Deploy::V1::Predeploy]
         #     Optional. Configuration for the predeploy job. If this is not configured,
@@ -224,12 +229,16 @@ module Google
         #     traffic to enable a progressive deployment.
         # @!attribute [rw] canary_deployment
         #   @return [::Google::Cloud::Deploy::V1::CanaryDeployment]
-        #     Configures the progressive based deployment for a Target.
+        #     Optional. Configures the progressive based deployment for a Target.
+        #
+        #     Note: The following fields are mutually exclusive: `canary_deployment`, `custom_canary_deployment`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] custom_canary_deployment
         #   @return [::Google::Cloud::Deploy::V1::CustomCanaryDeployment]
-        #     Configures the progressive based deployment for a Target, but allows
-        #     customizing at the phase level where a phase represents each of the
-        #     percentage deployments.
+        #     Optional. Configures the progressive based deployment for a Target, but
+        #     allows customizing at the phase level where a phase represents each of
+        #     the percentage deployments.
+        #
+        #     Note: The following fields are mutually exclusive: `custom_canary_deployment`, `canary_deployment`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         class Canary
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -245,7 +254,7 @@ module Google
         #     n is 0 <= n <= 100.
         # @!attribute [rw] verify
         #   @return [::Boolean]
-        #     Whether to run verify tests after each percentage deployment.
+        #     Optional. Whether to run verify tests after each percentage deployment.
         # @!attribute [rw] predeploy
         #   @return [::Google::Cloud::Deploy::V1::Predeploy]
         #     Optional. Configuration for the predeploy job of the first phase. If this
@@ -283,12 +292,12 @@ module Google
           #     Required. Percentage deployment for the phase.
           # @!attribute [rw] profiles
           #   @return [::Array<::String>]
-          #     Skaffold profiles to use when rendering the manifest for this phase.
-          #     These are in addition to the profiles list specified in the
+          #     Optional. Skaffold profiles to use when rendering the manifest for this
+          #     phase. These are in addition to the profiles list specified in the
           #     `DeliveryPipeline` stage.
           # @!attribute [rw] verify
           #   @return [::Boolean]
-          #     Whether to run verify tests after the deployment.
+          #     Optional. Whether to run verify tests after the deployment.
           # @!attribute [rw] predeploy
           #   @return [::Google::Cloud::Deploy::V1::Predeploy]
           #     Optional. Configuration for the predeploy job of this phase. If this is
@@ -306,10 +315,14 @@ module Google
         # KubernetesConfig contains the Kubernetes runtime configuration.
         # @!attribute [rw] gateway_service_mesh
         #   @return [::Google::Cloud::Deploy::V1::KubernetesConfig::GatewayServiceMesh]
-        #     Kubernetes Gateway API service mesh configuration.
+        #     Optional. Kubernetes Gateway API service mesh configuration.
+        #
+        #     Note: The following fields are mutually exclusive: `gateway_service_mesh`, `service_networking`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] service_networking
         #   @return [::Google::Cloud::Deploy::V1::KubernetesConfig::ServiceNetworking]
-        #     Kubernetes Service networking configuration.
+        #     Optional. Kubernetes Service networking configuration.
+        #
+        #     Note: The following fields are mutually exclusive: `service_networking`, `gateway_service_mesh`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         class KubernetesConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -398,8 +411,8 @@ module Google
         # CloudRunConfig contains the Cloud Run runtime configuration.
         # @!attribute [rw] automatic_traffic_control
         #   @return [::Boolean]
-        #     Whether Cloud Deploy should update the traffic stanza in a Cloud Run
-        #     Service on the user's behalf to facilitate traffic splitting. This is
+        #     Optional. Whether Cloud Deploy should update the traffic stanza in a Cloud
+        #     Run Service on the user's behalf to facilitate traffic splitting. This is
         #     required to be true for CanaryDeployments, but optional for
         #     CustomCanaryDeployments.
         # @!attribute [rw] canary_revision_tags
@@ -423,10 +436,14 @@ module Google
         # strategy.
         # @!attribute [rw] kubernetes
         #   @return [::Google::Cloud::Deploy::V1::KubernetesConfig]
-        #     Kubernetes runtime configuration.
+        #     Optional. Kubernetes runtime configuration.
+        #
+        #     Note: The following fields are mutually exclusive: `kubernetes`, `cloud_run`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] cloud_run
         #   @return [::Google::Cloud::Deploy::V1::CloudRunConfig]
-        #     Cloud Run runtime configuration.
+        #     Optional. Cloud Run runtime configuration.
+        #
+        #     Note: The following fields are mutually exclusive: `cloud_run`, `kubernetes`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         class RuntimeConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -734,7 +751,7 @@ module Google
         # can be deployed.
         # @!attribute [rw] name
         #   @return [::String]
-        #     Optional. Name of the `Target`. Format is
+        #     Identifier. Name of the `Target`. Format is
         #     `projects/{project}/locations/{location}/targets/{target}`.
         #     The `target` component must match `[a-z]([a-z0-9-]{0,61}[a-z0-9])?`
         # @!attribute [r] target_id
@@ -777,18 +794,28 @@ module Google
         # @!attribute [rw] gke
         #   @return [::Google::Cloud::Deploy::V1::GkeCluster]
         #     Optional. Information specifying a GKE Cluster.
+        #
+        #     Note: The following fields are mutually exclusive: `gke`, `anthos_cluster`, `run`, `multi_target`, `custom_target`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] anthos_cluster
         #   @return [::Google::Cloud::Deploy::V1::AnthosCluster]
         #     Optional. Information specifying an Anthos Cluster.
+        #
+        #     Note: The following fields are mutually exclusive: `anthos_cluster`, `gke`, `run`, `multi_target`, `custom_target`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] run
         #   @return [::Google::Cloud::Deploy::V1::CloudRunLocation]
         #     Optional. Information specifying a Cloud Run deployment target.
+        #
+        #     Note: The following fields are mutually exclusive: `run`, `gke`, `anthos_cluster`, `multi_target`, `custom_target`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] multi_target
         #   @return [::Google::Cloud::Deploy::V1::MultiTarget]
         #     Optional. Information specifying a multiTarget.
+        #
+        #     Note: The following fields are mutually exclusive: `multi_target`, `gke`, `anthos_cluster`, `run`, `custom_target`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] custom_target
         #   @return [::Google::Cloud::Deploy::V1::CustomTarget]
         #     Optional. Information specifying a Custom Target.
+        #
+        #     Note: The following fields are mutually exclusive: `custom_target`, `gke`, `anthos_cluster`, `run`, `multi_target`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] associated_entities
         #   @return [::Google::Protobuf::Map{::String => ::Google::Cloud::Deploy::V1::AssociatedEntities}]
         #     Optional. Map of entity IDs to their associated entities. Associated
@@ -806,7 +833,7 @@ module Google
         #     client has an up-to-date value before proceeding.
         # @!attribute [rw] execution_configs
         #   @return [::Array<::Google::Cloud::Deploy::V1::ExecutionConfig>]
-        #     Configurations for all execution that relates to this `Target`.
+        #     Optional. Configurations for all execution that relates to this `Target`.
         #     Each `ExecutionEnvironmentUsage` value may only be used in a single
         #     configuration; using the same value multiple times is an error.
         #     When one or more configurations are specified, they must include the
@@ -864,9 +891,13 @@ module Google
         # @!attribute [rw] default_pool
         #   @return [::Google::Cloud::Deploy::V1::DefaultPool]
         #     Optional. Use default Cloud Build pool.
+        #
+        #     Note: The following fields are mutually exclusive: `default_pool`, `private_pool`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] private_pool
         #   @return [::Google::Cloud::Deploy::V1::PrivatePool]
         #     Optional. Use private Cloud Build pool.
+        #
+        #     Note: The following fields are mutually exclusive: `private_pool`, `default_pool`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] worker_pool
         #   @return [::String]
         #     Optional. The resource name of the `WorkerPool`, with the format
@@ -981,7 +1012,7 @@ module Google
         # @!attribute [rw] dns_endpoint
         #   @return [::Boolean]
         #     Optional. If set, the cluster will be accessed using the DNS endpoint. Note
-        #     that `dns_endpoint` and `internal_ip` cannot both be set to true.
+        #     that both `dns_endpoint` and `internal_ip` cannot be set to true.
         class GkeCluster
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -1216,7 +1247,7 @@ module Google
         # supported runtimes.
         # @!attribute [rw] name
         #   @return [::String]
-        #     Optional. Name of the `CustomTargetType`. Format is
+        #     Identifier. Name of the `CustomTargetType`. Format is
         #     `projects/{project}/locations/{location}/customTargetTypes/{customTargetType}`.
         #     The `customTargetType` component must match
         #     `[a-z]([a-z0-9-]{0,61}[a-z0-9])?`
@@ -1262,8 +1293,8 @@ module Google
         #     client has an up-to-date value before proceeding.
         # @!attribute [rw] custom_actions
         #   @return [::Google::Cloud::Deploy::V1::CustomTargetSkaffoldActions]
-        #     Configures render and deploy for the `CustomTargetType` using Skaffold
-        #     custom actions.
+        #     Optional. Configures render and deploy for the `CustomTargetType` using
+        #     Skaffold custom actions.
         class CustomTargetType
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -1312,13 +1343,20 @@ module Google
         #     Optional. The Skaffold Config modules to use from the specified source.
         # @!attribute [rw] git
         #   @return [::Google::Cloud::Deploy::V1::SkaffoldModules::SkaffoldGitSource]
-        #     Remote git repository containing the Skaffold Config modules.
+        #     Optional. Remote git repository containing the Skaffold Config modules.
+        #
+        #     Note: The following fields are mutually exclusive: `git`, `google_cloud_storage`, `google_cloud_build_repo`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] google_cloud_storage
         #   @return [::Google::Cloud::Deploy::V1::SkaffoldModules::SkaffoldGCSSource]
-        #     Cloud Storage bucket containing the Skaffold Config modules.
+        #     Optional. Cloud Storage bucket containing the Skaffold Config modules.
+        #
+        #     Note: The following fields are mutually exclusive: `google_cloud_storage`, `git`, `google_cloud_build_repo`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] google_cloud_build_repo
         #   @return [::Google::Cloud::Deploy::V1::SkaffoldModules::SkaffoldGCBRepoSource]
-        #     Cloud Build V2 repository containing the Skaffold Config modules.
+        #     Optional. Cloud Build V2 repository containing the Skaffold Config
+        #     modules.
+        #
+        #     Note: The following fields are mutually exclusive: `google_cloud_build_repo`, `git`, `google_cloud_storage`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         class SkaffoldModules
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -1554,11 +1592,11 @@ module Google
         #     Output only. Unique identifier of the `DeployPolicy`.
         # @!attribute [rw] description
         #   @return [::String]
-        #     Description of the `DeployPolicy`. Max length is 255 characters.
+        #     Optional. Description of the `DeployPolicy`. Max length is 255 characters.
         # @!attribute [rw] annotations
         #   @return [::Google::Protobuf::Map{::String => ::String}]
-        #     User annotations. These attributes can only be set and used by the
-        #     user, and not by Cloud Deploy. Annotations must meet the following
+        #     Optional. User annotations. These attributes can only be set and used by
+        #     the user, and not by Cloud Deploy. Annotations must meet the following
         #     constraints:
         #
         #     * Annotations are key/value pairs.
@@ -1595,8 +1633,8 @@ module Google
         #     Output only. Most recent time at which the deploy policy was updated.
         # @!attribute [rw] suspended
         #   @return [::Boolean]
-        #     When suspended, the policy will not prevent actions from occurring, even
-        #     if the action violates the policy.
+        #     Optional. When suspended, the policy will not prevent actions from
+        #     occurring, even if the action violates the policy.
         # @!attribute [rw] selectors
         #   @return [::Array<::Google::Cloud::Deploy::V1::DeployPolicyResourceSelector>]
         #     Required. Selected resources to which the policy will be applied. At least
@@ -1668,8 +1706,8 @@ module Google
         # Contains criteria for selecting DeliveryPipelines.
         # @!attribute [rw] id
         #   @return [::String]
-        #     ID of the `DeliveryPipeline`. The value of this field could be one of the
-        #     following:
+        #     Optional. ID of the `DeliveryPipeline`. The value of this field could be
+        #     one of the following:
         #
         #     * The last segment of a pipeline name
         #     * "*", all delivery pipelines in a location
@@ -1694,7 +1732,7 @@ module Google
         # for a Deploy Policy or for an Automation.
         # @!attribute [rw] id
         #   @return [::String]
-        #     ID of the `Target`. The value of this field could be one of the
+        #     Optional. ID of the `Target`. The value of this field could be one of the
         #     following:
         #
         #     * The last segment of a target name
@@ -1719,7 +1757,7 @@ module Google
         # Deploy Policy rule.
         # @!attribute [rw] rollout_restriction
         #   @return [::Google::Cloud::Deploy::V1::RolloutRestriction]
-        #     Rollout restrictions.
+        #     Optional. Rollout restrictions.
         class PolicyRule
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -1869,7 +1907,7 @@ module Google
         # that can be deployed.
         # @!attribute [rw] name
         #   @return [::String]
-        #     Optional. Name of the `Release`. Format is
+        #     Identifier. Name of the `Release`. Format is
         #     `projects/{project}/locations/{location}/deliveryPipelines/{deliveryPipeline}/releases/{release}`.
         #     The `release` component must match `[a-z]([a-z0-9-]{0,61}[a-z0-9])?`
         # @!attribute [r] uid
@@ -1877,12 +1915,13 @@ module Google
         #     Output only. Unique identifier of the `Release`.
         # @!attribute [rw] description
         #   @return [::String]
-        #     Description of the `Release`. Max length is 255 characters.
+        #     Optional. Description of the `Release`. Max length is 255 characters.
         # @!attribute [rw] annotations
         #   @return [::Google::Protobuf::Map{::String => ::String}]
-        #     User annotations. These attributes can only be set and used by the
-        #     user, and not by Cloud Deploy. See https://google.aip.dev/128#annotations
-        #     for more details such as format and size limitations.
+        #     Optional. User annotations. These attributes can only be set and used by
+        #     the user, and not by Cloud Deploy. See
+        #     https://google.aip.dev/128#annotations for more details such as format and
+        #     size limitations.
         # @!attribute [rw] labels
         #   @return [::Google::Protobuf::Map{::String => ::String}]
         #     Labels are attributes that can be set and used by both the
@@ -1910,13 +1949,14 @@ module Google
         #     Output only. Time at which the render completed.
         # @!attribute [rw] skaffold_config_uri
         #   @return [::String]
-        #     Cloud Storage URI of tar.gz archive containing Skaffold configuration.
+        #     Optional. Cloud Storage URI of tar.gz archive containing Skaffold
+        #     configuration.
         # @!attribute [rw] skaffold_config_path
         #   @return [::String]
-        #     Filepath of the Skaffold config inside of the config URI.
+        #     Optional. Filepath of the Skaffold config inside of the config URI.
         # @!attribute [rw] build_artifacts
         #   @return [::Array<::Google::Cloud::Deploy::V1::BuildArtifact>]
-        #     List of artifacts to pass through to Skaffold command.
+        #     Optional. List of artifacts to pass through to Skaffold command.
         # @!attribute [r] delivery_pipeline_snapshot
         #   @return [::Google::Cloud::Deploy::V1::DeliveryPipeline]
         #     Output only. Snapshot of the parent pipeline taken at release creation
@@ -2317,11 +2357,11 @@ module Google
         # Description of an a image to use during Skaffold rendering.
         # @!attribute [rw] image
         #   @return [::String]
-        #     Image name in Skaffold configuration.
+        #     Optional. Image name in Skaffold configuration.
         # @!attribute [rw] tag
         #   @return [::String]
-        #     Image tag to use. This will generally be the full path to an image, such
-        #     as "gcr.io/my-project/busybox:1.2.3" or
+        #     Optional. Image tag to use. This will generally be the full path to an
+        #     image, such as "gcr.io/my-project/busybox:1.2.3" or
         #     "gcr.io/my-project/busybox@sha256:abc123".
         class BuildArtifact
           include ::Google::Protobuf::MessageExts
@@ -2514,7 +2554,7 @@ module Google
         # A `Rollout` contains information around a specific deployment to a `Target`.
         # @!attribute [rw] name
         #   @return [::String]
-        #     Optional. Name of the `Rollout`. Format is
+        #     Identifier. Name of the `Rollout`. Format is
         #     `projects/{project}/locations/{location}/deliveryPipelines/{deliveryPipeline}/releases/{release}/rollouts/{rollout}`.
         #     The `rollout` component must match `[a-z]([a-z0-9-]{0,61}[a-z0-9])?`
         # @!attribute [r] uid
@@ -2522,13 +2562,14 @@ module Google
         #     Output only. Unique identifier of the `Rollout`.
         # @!attribute [rw] description
         #   @return [::String]
-        #     Description of the `Rollout` for user purposes. Max length is 255
+        #     Optional. Description of the `Rollout` for user purposes. Max length is 255
         #     characters.
         # @!attribute [rw] annotations
         #   @return [::Google::Protobuf::Map{::String => ::String}]
-        #     User annotations. These attributes can only be set and used by the
-        #     user, and not by Cloud Deploy. See https://google.aip.dev/128#annotations
-        #     for more details such as format and size limitations.
+        #     Optional. User annotations. These attributes can only be set and used by
+        #     the user, and not by Cloud Deploy. See
+        #     https://google.aip.dev/128#annotations for more details such as format and
+        #     size limitations.
         # @!attribute [rw] labels
         #   @return [::Google::Protobuf::Map{::String => ::String}]
         #     Labels are attributes that can be set and used by both the
@@ -2836,9 +2877,13 @@ module Google
         # @!attribute [r] deployment_jobs
         #   @return [::Google::Cloud::Deploy::V1::DeploymentJobs]
         #     Output only. Deployment job composition.
+        #
+        #     Note: The following fields are mutually exclusive: `deployment_jobs`, `child_rollout_jobs`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [r] child_rollout_jobs
         #   @return [::Google::Cloud::Deploy::V1::ChildRolloutJobs]
         #     Output only. ChildRollout job composition.
+        #
+        #     Note: The following fields are mutually exclusive: `child_rollout_jobs`, `deployment_jobs`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         class Phase
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -2869,15 +2914,15 @@ module Google
         end
 
         # Deployment job composition.
+        # @!attribute [r] predeploy_job
+        #   @return [::Google::Cloud::Deploy::V1::Job]
+        #     Output only. The predeploy Job, which is the first job on the phase.
         # @!attribute [r] deploy_job
         #   @return [::Google::Cloud::Deploy::V1::Job]
         #     Output only. The deploy Job. This is the deploy job in the phase.
         # @!attribute [r] verify_job
         #   @return [::Google::Cloud::Deploy::V1::Job]
         #     Output only. The verify Job. Runs after a deploy if the deploy succeeds.
-        # @!attribute [r] predeploy_job
-        #   @return [::Google::Cloud::Deploy::V1::Job]
-        #     Output only. The predeploy Job, which is the first job on the phase.
         # @!attribute [r] postdeploy_job
         #   @return [::Google::Cloud::Deploy::V1::Job]
         #     Output only. The postdeploy Job, which is the last job on the phase.
@@ -2916,21 +2961,33 @@ module Google
         # @!attribute [r] deploy_job
         #   @return [::Google::Cloud::Deploy::V1::DeployJob]
         #     Output only. A deploy Job.
+        #
+        #     Note: The following fields are mutually exclusive: `deploy_job`, `verify_job`, `predeploy_job`, `postdeploy_job`, `create_child_rollout_job`, `advance_child_rollout_job`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [r] verify_job
         #   @return [::Google::Cloud::Deploy::V1::VerifyJob]
         #     Output only. A verify Job.
+        #
+        #     Note: The following fields are mutually exclusive: `verify_job`, `deploy_job`, `predeploy_job`, `postdeploy_job`, `create_child_rollout_job`, `advance_child_rollout_job`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [r] predeploy_job
         #   @return [::Google::Cloud::Deploy::V1::PredeployJob]
         #     Output only. A predeploy Job.
+        #
+        #     Note: The following fields are mutually exclusive: `predeploy_job`, `deploy_job`, `verify_job`, `postdeploy_job`, `create_child_rollout_job`, `advance_child_rollout_job`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [r] postdeploy_job
         #   @return [::Google::Cloud::Deploy::V1::PostdeployJob]
         #     Output only. A postdeploy Job.
+        #
+        #     Note: The following fields are mutually exclusive: `postdeploy_job`, `deploy_job`, `verify_job`, `predeploy_job`, `create_child_rollout_job`, `advance_child_rollout_job`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [r] create_child_rollout_job
         #   @return [::Google::Cloud::Deploy::V1::CreateChildRolloutJob]
         #     Output only. A createChildRollout Job.
+        #
+        #     Note: The following fields are mutually exclusive: `create_child_rollout_job`, `deploy_job`, `verify_job`, `predeploy_job`, `postdeploy_job`, `advance_child_rollout_job`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [r] advance_child_rollout_job
         #   @return [::Google::Cloud::Deploy::V1::AdvanceChildRolloutJob]
         #     Output only. An advanceChildRollout Job.
+        #
+        #     Note: The following fields are mutually exclusive: `advance_child_rollout_job`, `deploy_job`, `verify_job`, `predeploy_job`, `postdeploy_job`, `create_child_rollout_job`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         class Job
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -3277,9 +3334,9 @@ module Google
         # A `JobRun` resource in the Cloud Deploy API.
         #
         # A `JobRun` contains information of a single `Rollout` job evaluation.
-        # @!attribute [rw] name
+        # @!attribute [r] name
         #   @return [::String]
-        #     Optional. Name of the `JobRun`. Format is
+        #     Output only. Name of the `JobRun`. Format is
         #     `projects/{project}/locations/{location}/deliveryPipelines/{deliveryPipeline}/releases/{releases}/rollouts/{rollouts}/jobRuns/{uuid}`.
         # @!attribute [r] uid
         #   @return [::String]
@@ -3305,21 +3362,33 @@ module Google
         # @!attribute [r] deploy_job_run
         #   @return [::Google::Cloud::Deploy::V1::DeployJobRun]
         #     Output only. Information specific to a deploy `JobRun`.
+        #
+        #     Note: The following fields are mutually exclusive: `deploy_job_run`, `verify_job_run`, `predeploy_job_run`, `postdeploy_job_run`, `create_child_rollout_job_run`, `advance_child_rollout_job_run`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [r] verify_job_run
         #   @return [::Google::Cloud::Deploy::V1::VerifyJobRun]
         #     Output only. Information specific to a verify `JobRun`.
+        #
+        #     Note: The following fields are mutually exclusive: `verify_job_run`, `deploy_job_run`, `predeploy_job_run`, `postdeploy_job_run`, `create_child_rollout_job_run`, `advance_child_rollout_job_run`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [r] predeploy_job_run
         #   @return [::Google::Cloud::Deploy::V1::PredeployJobRun]
         #     Output only. Information specific to a predeploy `JobRun`.
+        #
+        #     Note: The following fields are mutually exclusive: `predeploy_job_run`, `deploy_job_run`, `verify_job_run`, `postdeploy_job_run`, `create_child_rollout_job_run`, `advance_child_rollout_job_run`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [r] postdeploy_job_run
         #   @return [::Google::Cloud::Deploy::V1::PostdeployJobRun]
         #     Output only. Information specific to a postdeploy `JobRun`.
+        #
+        #     Note: The following fields are mutually exclusive: `postdeploy_job_run`, `deploy_job_run`, `verify_job_run`, `predeploy_job_run`, `create_child_rollout_job_run`, `advance_child_rollout_job_run`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [r] create_child_rollout_job_run
         #   @return [::Google::Cloud::Deploy::V1::CreateChildRolloutJobRun]
         #     Output only. Information specific to a createChildRollout `JobRun`.
+        #
+        #     Note: The following fields are mutually exclusive: `create_child_rollout_job_run`, `deploy_job_run`, `verify_job_run`, `predeploy_job_run`, `postdeploy_job_run`, `advance_child_rollout_job_run`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [r] advance_child_rollout_job_run
         #   @return [::Google::Cloud::Deploy::V1::AdvanceChildRolloutJobRun]
         #     Output only. Information specific to an advanceChildRollout `JobRun`
+        #
+        #     Note: The following fields are mutually exclusive: `advance_child_rollout_job_run`, `deploy_job_run`, `verify_job_run`, `predeploy_job_run`, `postdeploy_job_run`, `create_child_rollout_job_run`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [r] etag
         #   @return [::String]
         #     Output only. This checksum is computed by the server based on the value of
@@ -3788,7 +3857,7 @@ module Google
         # to which an Automation is going to be applied.
         # @!attribute [rw] targets
         #   @return [::Array<::Google::Cloud::Deploy::V1::TargetAttribute>]
-        #     Contains attributes about a target.
+        #     Optional. Contains attributes about a target.
         class AutomationResourceSelector
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -3799,19 +3868,27 @@ module Google
         #   @return [::Google::Cloud::Deploy::V1::PromoteReleaseRule]
         #     Optional. `PromoteReleaseRule` will automatically promote a release from
         #     the current target to a specified target.
+        #
+        #     Note: The following fields are mutually exclusive: `promote_release_rule`, `advance_rollout_rule`, `repair_rollout_rule`, `timed_promote_release_rule`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] advance_rollout_rule
         #   @return [::Google::Cloud::Deploy::V1::AdvanceRolloutRule]
         #     Optional. The `AdvanceRolloutRule` will automatically advance a
         #     successful Rollout.
+        #
+        #     Note: The following fields are mutually exclusive: `advance_rollout_rule`, `promote_release_rule`, `repair_rollout_rule`, `timed_promote_release_rule`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] repair_rollout_rule
         #   @return [::Google::Cloud::Deploy::V1::RepairRolloutRule]
         #     Optional. The `RepairRolloutRule` will automatically repair a failed
         #     rollout.
+        #
+        #     Note: The following fields are mutually exclusive: `repair_rollout_rule`, `promote_release_rule`, `advance_rollout_rule`, `timed_promote_release_rule`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] timed_promote_release_rule
         #   @return [::Google::Cloud::Deploy::V1::TimedPromoteReleaseRule]
         #     Optional. The `TimedPromoteReleaseRule` will automatically promote a
         #     release from the current target(s) to the specified target(s) on a
         #     configured schedule.
+        #
+        #     Note: The following fields are mutually exclusive: `timed_promote_release_rule`, `promote_release_rule`, `advance_rollout_rule`, `repair_rollout_rule`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         class AutomationRule
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -3947,9 +4024,13 @@ module Google
         # @!attribute [rw] retry
         #   @return [::Google::Cloud::Deploy::V1::Retry]
         #     Optional. Retries a failed job.
+        #
+        #     Note: The following fields are mutually exclusive: `retry`, `rollback`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] rollback
         #   @return [::Google::Cloud::Deploy::V1::Rollback]
         #     Optional. Rolls back a `Rollout`.
+        #
+        #     Note: The following fields are mutually exclusive: `rollback`, `retry`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         class RepairPhaseConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -4254,16 +4335,24 @@ module Google
         # @!attribute [r] promote_release_operation
         #   @return [::Google::Cloud::Deploy::V1::PromoteReleaseOperation]
         #     Output only. Promotes a release to a specified 'Target'.
+        #
+        #     Note: The following fields are mutually exclusive: `promote_release_operation`, `advance_rollout_operation`, `repair_rollout_operation`, `timed_promote_release_operation`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [r] advance_rollout_operation
         #   @return [::Google::Cloud::Deploy::V1::AdvanceRolloutOperation]
         #     Output only. Advances a rollout to the next phase.
+        #
+        #     Note: The following fields are mutually exclusive: `advance_rollout_operation`, `promote_release_operation`, `repair_rollout_operation`, `timed_promote_release_operation`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [r] repair_rollout_operation
         #   @return [::Google::Cloud::Deploy::V1::RepairRolloutOperation]
         #     Output only. Repairs a failed 'Rollout'.
+        #
+        #     Note: The following fields are mutually exclusive: `repair_rollout_operation`, `promote_release_operation`, `advance_rollout_operation`, `timed_promote_release_operation`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [r] timed_promote_release_operation
         #   @return [::Google::Cloud::Deploy::V1::TimedPromoteReleaseOperation]
         #     Output only. Promotes a release to a specified 'Target' as defined in a
         #     Timed Promote Release rule.
+        #
+        #     Note: The following fields are mutually exclusive: `timed_promote_release_operation`, `promote_release_operation`, `advance_rollout_operation`, `repair_rollout_operation`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [r] wait_until_time
         #   @return [::Google::Protobuf::Timestamp]
         #     Output only. Earliest time the `AutomationRun` will attempt to resume.
@@ -4380,9 +4469,13 @@ module Google
         # @!attribute [r] retry
         #   @return [::Google::Cloud::Deploy::V1::RetryPhase]
         #     Output only. Records of the retry attempts for retry repair mode.
+        #
+        #     Note: The following fields are mutually exclusive: `retry`, `rollback`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [r] rollback
         #   @return [::Google::Cloud::Deploy::V1::RollbackAttempt]
         #     Output only. Rollback attempt for rollback repair mode .
+        #
+        #     Note: The following fields are mutually exclusive: `rollback`, `retry`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         class RepairPhase
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

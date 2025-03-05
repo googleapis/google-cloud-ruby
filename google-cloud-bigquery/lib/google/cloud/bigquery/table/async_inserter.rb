@@ -294,7 +294,8 @@ module Google
                                                                       json_rows,
                                                                       skip_invalid: @skip_invalid,
                                                                       ignore_unknown: @ignore_unknown,
-                                                                      insert_ids: insert_ids
+                                                                      insert_ids: insert_ids,
+                                                                      project_id: @table.project_id
 
               result = Result.new InsertResponse.from_gapi(orig_rows, insert_resp)
             rescue StandardError => e

@@ -90,12 +90,18 @@ module Google
           # @!attribute [rw] unstructured_document_info
           #   @return [::Google::Cloud::DiscoveryEngine::V1beta::Answer::Reference::UnstructuredDocumentInfo]
           #     Unstructured document information.
+          #
+          #     Note: The following fields are mutually exclusive: `unstructured_document_info`, `chunk_info`, `structured_document_info`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] chunk_info
           #   @return [::Google::Cloud::DiscoveryEngine::V1beta::Answer::Reference::ChunkInfo]
           #     Chunk information.
+          #
+          #     Note: The following fields are mutually exclusive: `chunk_info`, `unstructured_document_info`, `structured_document_info`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] structured_document_info
           #   @return [::Google::Cloud::DiscoveryEngine::V1beta::Answer::Reference::StructuredDocumentInfo]
           #     Structured document information.
+          #
+          #     Note: The following fields are mutually exclusive: `structured_document_info`, `unstructured_document_info`, `chunk_info`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           class Reference
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods

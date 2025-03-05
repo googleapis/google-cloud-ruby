@@ -44,12 +44,18 @@ module Google
         # @!attribute [r] reason
         #   @return [::Google::Cloud::Run::V2::Condition::CommonReason]
         #     Output only. A common (service-level) reason for this condition.
+        #
+        #     Note: The following fields are mutually exclusive: `reason`, `revision_reason`, `execution_reason`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [r] revision_reason
         #   @return [::Google::Cloud::Run::V2::Condition::RevisionReason]
         #     Output only. A reason for the revision condition.
+        #
+        #     Note: The following fields are mutually exclusive: `revision_reason`, `reason`, `execution_reason`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [r] execution_reason
         #   @return [::Google::Cloud::Run::V2::Condition::ExecutionReason]
         #     Output only. A reason for the execution condition.
+        #
+        #     Note: The following fields are mutually exclusive: `execution_reason`, `reason`, `revision_reason`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         class Condition
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

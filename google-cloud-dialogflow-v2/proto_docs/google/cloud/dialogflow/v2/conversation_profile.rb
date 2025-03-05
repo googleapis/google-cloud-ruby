@@ -58,6 +58,17 @@ module Google
         #   @return [::Google::Cloud::Dialogflow::V2::NotificationConfig]
         #     Configuration for publishing new message events. Event will be sent in
         #     format of {::Google::Cloud::Dialogflow::V2::ConversationEvent ConversationEvent}
+        # @!attribute [rw] new_recognition_result_notification_config
+        #   @return [::Google::Cloud::Dialogflow::V2::NotificationConfig]
+        #     Optional. Configuration for publishing transcription intermediate results.
+        #     Event will be sent in format of
+        #     {::Google::Cloud::Dialogflow::V2::ConversationEvent ConversationEvent}. If
+        #     configured, the following information will be populated as
+        #     {::Google::Cloud::Dialogflow::V2::ConversationEvent ConversationEvent} Pub/Sub
+        #     message attributes:
+        #     - "participant_id"
+        #     - "participant_role"
+        #     - "message_id"
         # @!attribute [rw] stt_config
         #   @return [::Google::Cloud::Dialogflow::V2::SpeechToTextConfig]
         #     Settings for speech transcription.
@@ -329,13 +340,19 @@ module Google
           #   @return [::Google::Cloud::Dialogflow::V2::HumanAgentAssistantConfig::SuggestionQueryConfig::KnowledgeBaseQuerySource]
           #     Query from knowledgebase. It is used by:
           #     ARTICLE_SUGGESTION, FAQ.
+          #
+          #     Note: The following fields are mutually exclusive: `knowledge_base_query_source`, `document_query_source`, `dialogflow_query_source`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] document_query_source
           #   @return [::Google::Cloud::Dialogflow::V2::HumanAgentAssistantConfig::SuggestionQueryConfig::DocumentQuerySource]
           #     Query from knowledge base document. It is used by:
           #     SMART_REPLY, SMART_COMPOSE.
+          #
+          #     Note: The following fields are mutually exclusive: `document_query_source`, `knowledge_base_query_source`, `dialogflow_query_source`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] dialogflow_query_source
           #   @return [::Google::Cloud::Dialogflow::V2::HumanAgentAssistantConfig::SuggestionQueryConfig::DialogflowQuerySource]
           #     Query from Dialogflow agent. It is used by DIALOGFLOW_ASSIST.
+          #
+          #     Note: The following fields are mutually exclusive: `dialogflow_query_source`, `knowledge_base_query_source`, `document_query_source`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] max_results
           #   @return [::Integer]
           #     Maximum number of results to return. Currently, if unset, defaults to 10.
@@ -582,9 +599,13 @@ module Google
         # @!attribute [rw] live_person_config
         #   @return [::Google::Cloud::Dialogflow::V2::HumanAgentHandoffConfig::LivePersonConfig]
         #     Uses [LivePerson](https://www.liveperson.com).
+        #
+        #     Note: The following fields are mutually exclusive: `live_person_config`, `salesforce_live_agent_config`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] salesforce_live_agent_config
         #   @return [::Google::Cloud::Dialogflow::V2::HumanAgentHandoffConfig::SalesforceLiveAgentConfig]
         #     Uses Salesforce Live Agent.
+        #
+        #     Note: The following fields are mutually exclusive: `salesforce_live_agent_config`, `live_person_config`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         class HumanAgentHandoffConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -695,6 +716,9 @@ module Google
 
             # Run smart reply model for chat.
             SMART_REPLY = 3
+
+            # Run conversation summarization model for chat.
+            CONVERSATION_SUMMARIZATION = 8
 
             # Run knowledge search with text input from agent or text generated query.
             KNOWLEDGE_SEARCH = 14

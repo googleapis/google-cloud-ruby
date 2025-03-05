@@ -21,7 +21,7 @@ module Google
   module Cloud
     module Dataplex
       module V1
-        VERSION = "1.2.0"
+        VERSION = "2.1.0"
       end
     end
   end

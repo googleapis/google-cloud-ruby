@@ -20,6 +20,11 @@
                 "get_delivery_vehicle"
               ]
             },
+            "DeleteDeliveryVehicle": {
+              "methods": [
+                "delete_delivery_vehicle"
+              ]
+            },
             "UpdateDeliveryVehicle": {
               "methods": [
                 "update_delivery_vehicle"
@@ -38,6 +43,11 @@
             "GetTask": {
               "methods": [
                 "get_task"
+              ]
+            },
+            "DeleteTask": {
+              "methods": [
+                "delete_task"
               ]
             },
             "UpdateTask": {

@@ -226,10 +226,10 @@ module Google
               #     (https://cloud.google.com/dataflow/docs/concepts/regional-endpoints) that
               #     contains the job specified by job_id.
               # @yield [result, operation] Access the result along with the TransportOperation object
-              # @yieldparam result [::Google::Cloud::Dataflow::V1beta3::ListJobMessagesResponse]
+              # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Dataflow::V1beta3::JobMessage>]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
-              # @return [::Google::Cloud::Dataflow::V1beta3::ListJobMessagesResponse]
+              # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Dataflow::V1beta3::JobMessage>]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
               #
@@ -281,7 +281,9 @@ module Google
                                        retry_policy: @config.retry_policy
 
                 @messages_stub.list_job_messages request, options do |result, operation|
+                  result = ::Gapic::Rest::PagedEnumerable.new @messages_stub, :list_job_messages, "job_messages", request, result, options
                   yield result, operation if block_given?
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -329,6 +331,13 @@ module Google
               #    *  (`Signet::OAuth2::Client`) A signet oauth2 client object
               #       (see the [signet docs](https://rubydoc.info/gems/signet/Signet/OAuth2/Client))
               #    *  (`nil`) indicating no credentials
+              #
+              #   Warning: If you accept a credential configuration (JSON file or Hash) from an
+              #   external source for authentication to Google Cloud, you must validate it before
+              #   providing it to a Google API client library. Providing an unvalidated credential
+              #   configuration to Google APIs can compromise the security of your systems and data.
+              #   For more information, refer to [Validate credential configurations from external
+              #   sources](https://cloud.google.com/docs/authentication/external/externally-sourced-credentials).
               #   @return [::Object]
               # @!attribute [rw] scope
               #   The OAuth scopes

@@ -201,23 +201,33 @@ module Google
         #   @return [::Boolean]
         #     Restore all namespaced resources in the Backup if set to "True".
         #     Specifying this field to "False" is an error.
+        #
+        #     Note: The following fields are mutually exclusive: `all_namespaces`, `selected_namespaces`, `selected_applications`, `no_namespaces`, `excluded_namespaces`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] selected_namespaces
         #   @return [::Google::Cloud::GkeBackup::V1::Namespaces]
         #     A list of selected Namespaces to restore from the Backup. The listed
         #     Namespaces and all resources contained in them will be restored.
+        #
+        #     Note: The following fields are mutually exclusive: `selected_namespaces`, `all_namespaces`, `selected_applications`, `no_namespaces`, `excluded_namespaces`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] selected_applications
         #   @return [::Google::Cloud::GkeBackup::V1::NamespacedNames]
         #     A list of selected ProtectedApplications to restore. The listed
         #     ProtectedApplications and all the resources to which they refer will be
         #     restored.
+        #
+        #     Note: The following fields are mutually exclusive: `selected_applications`, `all_namespaces`, `selected_namespaces`, `no_namespaces`, `excluded_namespaces`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] no_namespaces
         #   @return [::Boolean]
         #     Do not restore any namespaced resources if set to "True".
         #     Specifying this field to "False" is not allowed.
+        #
+        #     Note: The following fields are mutually exclusive: `no_namespaces`, `all_namespaces`, `selected_namespaces`, `selected_applications`, `excluded_namespaces`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] excluded_namespaces
         #   @return [::Google::Cloud::GkeBackup::V1::Namespaces]
         #     A list of selected namespaces excluded from restoration. All
         #     namespaces except those in this list will be restored.
+        #
+        #     Note: The following fields are mutually exclusive: `excluded_namespaces`, `all_namespaces`, `selected_namespaces`, `selected_applications`, `no_namespaces`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] substitution_rules
         #   @return [::Array<::Google::Cloud::GkeBackup::V1::RestoreConfig::SubstitutionRule>]
         #     Optional. A list of transformation rules to be applied against Kubernetes

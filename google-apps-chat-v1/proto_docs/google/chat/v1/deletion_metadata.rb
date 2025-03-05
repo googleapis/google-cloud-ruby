@@ -53,6 +53,10 @@ module Google
 
             # A Chat app deleted the message on behalf of the space owner.
             SPACE_OWNER_VIA_APP = 6
+
+            # A member of the space deleted the message. Human users can delete
+            # messages sent by apps.
+            SPACE_MEMBER = 7
           end
         end
       end

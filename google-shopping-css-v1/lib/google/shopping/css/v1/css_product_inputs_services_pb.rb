@@ -41,6 +41,11 @@ module Google
             # After inserting, updating, or deleting a CSS Product input, it may
             # take several minutes before the processed CSS Product can be retrieved.
             rpc :InsertCssProductInput, ::Google::Shopping::Css::V1::InsertCssProductInputRequest, ::Google::Shopping::Css::V1::CssProductInput
+            # Updates the existing Css Product input in your CSS Center account.
+            #
+            # After inserting, updating, or deleting a CSS Product input, it may take
+            # several minutes before the processed Css Product can be retrieved.
+            rpc :UpdateCssProductInput, ::Google::Shopping::Css::V1::UpdateCssProductInputRequest, ::Google::Shopping::Css::V1::CssProductInput
             # Deletes a CSS Product input from your CSS Center account.
             #
             # After a delete it may take several minutes until the input is no longer

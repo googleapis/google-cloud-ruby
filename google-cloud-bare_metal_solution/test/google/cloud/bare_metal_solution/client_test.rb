@@ -42,6 +42,7 @@ class Google::Cloud::BareMetalSolution::ClientConstructionMinitest < Minitest::T
   end
 
   def test_bare_metal_solution_grpc
+    skip unless Google::Cloud::BareMetalSolution.bare_metal_solution_available? transport: :grpc
     Gapic::ServiceStub.stub :new, DummyStub.new do
       grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
       client = Google::Cloud::BareMetalSolution.bare_metal_solution transport: :grpc do |config|
@@ -52,6 +53,7 @@ class Google::Cloud::BareMetalSolution::ClientConstructionMinitest < Minitest::T
   end
 
   def test_bare_metal_solution_rest
+    skip unless Google::Cloud::BareMetalSolution.bare_metal_solution_available? transport: :rest
     Gapic::Rest::ClientStub.stub :new, DummyStub.new do
       client = Google::Cloud::BareMetalSolution.bare_metal_solution transport: :rest do |config|
         config.credentials = :dummy_credentials

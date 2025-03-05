@@ -93,7 +93,14 @@ module Google
         #   @return [::String]
         #     The units in which the metric value is reported. It is only applicable
         #     if the `value_type` is `INT64`, `DOUBLE`, or `DISTRIBUTION`. The `unit`
-        #     defines the representation of the stored metric values.
+        #     defines the representation of the stored metric values. This field can only
+        #     be changed through CreateTimeSeries when it is empty.
+        # @!attribute [rw] description
+        #   @return [::String]
+        #     Input only. A detailed description of the time series that will be
+        #     associated with the
+        #     {::Google::Api::MetricDescriptor google.api.MetricDescriptor} for the metric.
+        #     Once set, this field cannot be changed through CreateTimeSeries.
         class TimeSeries
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -166,12 +173,18 @@ module Google
         # @!attribute [rw] bool_value
         #   @return [::Boolean]
         #     A bool label value.
+        #
+        #     Note: The following fields are mutually exclusive: `bool_value`, `int64_value`, `string_value`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] int64_value
         #   @return [::Integer]
         #     An int64 label value.
+        #
+        #     Note: The following fields are mutually exclusive: `int64_value`, `bool_value`, `string_value`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] string_value
         #   @return [::String]
         #     A string label value.
+        #
+        #     Note: The following fields are mutually exclusive: `string_value`, `bool_value`, `int64_value`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         class LabelValue
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

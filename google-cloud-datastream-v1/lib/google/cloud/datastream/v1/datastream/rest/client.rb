@@ -284,10 +284,10 @@ module Google
               #   @param order_by [::String]
               #     Order by fields for the result.
               # @yield [result, operation] Access the result along with the TransportOperation object
-              # @yieldparam result [::Google::Cloud::Datastream::V1::ListConnectionProfilesResponse]
+              # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Datastream::V1::ConnectionProfile>]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
-              # @return [::Google::Cloud::Datastream::V1::ListConnectionProfilesResponse]
+              # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Datastream::V1::ConnectionProfile>]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
               #
@@ -339,7 +339,9 @@ module Google
                                        retry_policy: @config.retry_policy
 
                 @datastream_stub.list_connection_profiles request, options do |result, operation|
+                  result = ::Gapic::Rest::PagedEnumerable.new @datastream_stub, :list_connection_profiles, "connection_profiles", request, result, options
                   yield result, operation if block_given?
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -772,21 +774,37 @@ module Google
               #     the format `projects/*/locations/*`.
               #   @param connection_profile [::Google::Cloud::Datastream::V1::ConnectionProfile, ::Hash]
               #     An ad-hoc connection profile configuration.
+              #
+              #     Note: The following fields are mutually exclusive: `connection_profile`, `connection_profile_name`. If a field in that set is populated, all other fields in the set will automatically be cleared.
               #   @param connection_profile_name [::String]
               #     A reference to an existing connection profile.
+              #
+              #     Note: The following fields are mutually exclusive: `connection_profile_name`, `connection_profile`. If a field in that set is populated, all other fields in the set will automatically be cleared.
               #   @param full_hierarchy [::Boolean]
               #     Whether to retrieve the full hierarchy of data objects (TRUE) or only the
               #     current level (FALSE).
+              #
+              #     Note: The following fields are mutually exclusive: `full_hierarchy`, `hierarchy_depth`. If a field in that set is populated, all other fields in the set will automatically be cleared.
               #   @param hierarchy_depth [::Integer]
               #     The number of hierarchy levels below the current level to be retrieved.
+              #
+              #     Note: The following fields are mutually exclusive: `hierarchy_depth`, `full_hierarchy`. If a field in that set is populated, all other fields in the set will automatically be cleared.
               #   @param oracle_rdbms [::Google::Cloud::Datastream::V1::OracleRdbms, ::Hash]
               #     Oracle RDBMS to enrich with child data objects and metadata.
+              #
+              #     Note: The following fields are mutually exclusive: `oracle_rdbms`, `mysql_rdbms`, `postgresql_rdbms`, `sql_server_rdbms`. If a field in that set is populated, all other fields in the set will automatically be cleared.
               #   @param mysql_rdbms [::Google::Cloud::Datastream::V1::MysqlRdbms, ::Hash]
               #     MySQL RDBMS to enrich with child data objects and metadata.
+              #
+              #     Note: The following fields are mutually exclusive: `mysql_rdbms`, `oracle_rdbms`, `postgresql_rdbms`, `sql_server_rdbms`. If a field in that set is populated, all other fields in the set will automatically be cleared.
               #   @param postgresql_rdbms [::Google::Cloud::Datastream::V1::PostgresqlRdbms, ::Hash]
               #     PostgreSQL RDBMS to enrich with child data objects and metadata.
+              #
+              #     Note: The following fields are mutually exclusive: `postgresql_rdbms`, `oracle_rdbms`, `mysql_rdbms`, `sql_server_rdbms`. If a field in that set is populated, all other fields in the set will automatically be cleared.
               #   @param sql_server_rdbms [::Google::Cloud::Datastream::V1::SqlServerRdbms, ::Hash]
               #     SQLServer RDBMS to enrich with child data objects and metadata.
+              #
+              #     Note: The following fields are mutually exclusive: `sql_server_rdbms`, `oracle_rdbms`, `mysql_rdbms`, `postgresql_rdbms`. If a field in that set is populated, all other fields in the set will automatically be cleared.
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Google::Cloud::Datastream::V1::DiscoverConnectionProfileResponse]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
@@ -880,10 +898,10 @@ module Google
               #   @param order_by [::String]
               #     Order by fields for the result.
               # @yield [result, operation] Access the result along with the TransportOperation object
-              # @yieldparam result [::Google::Cloud::Datastream::V1::ListStreamsResponse]
+              # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Datastream::V1::Stream>]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
-              # @return [::Google::Cloud::Datastream::V1::ListStreamsResponse]
+              # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Datastream::V1::Stream>]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
               #
@@ -935,7 +953,9 @@ module Google
                                        retry_policy: @config.retry_policy
 
                 @datastream_stub.list_streams request, options do |result, operation|
+                  result = ::Gapic::Rest::PagedEnumerable.new @datastream_stub, :list_streams, "streams", request, result, options
                   yield result, operation if block_given?
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -1874,10 +1894,10 @@ module Google
               #     A page token, received from a previous `ListStaticIps` call.
               #     will likely not be specified.
               # @yield [result, operation] Access the result along with the TransportOperation object
-              # @yieldparam result [::Gapic::Rest::PagedEnumerable<::String>]
+              # @yieldparam result [::Google::Cloud::Datastream::V1::FetchStaticIpsResponse]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
-              # @return [::Gapic::Rest::PagedEnumerable<::String>]
+              # @return [::Google::Cloud::Datastream::V1::FetchStaticIpsResponse]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
               #
@@ -1925,9 +1945,7 @@ module Google
                                        retry_policy: @config.retry_policy
 
                 @datastream_stub.fetch_static_ips request, options do |result, operation|
-                  result = ::Gapic::Rest::PagedEnumerable.new @datastream_stub, :fetch_static_ips, "static_ips", request, result, options
                   yield result, operation if block_given?
-                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -2157,10 +2175,10 @@ module Google
               #   @param order_by [::String]
               #     Order by fields for the result.
               # @yield [result, operation] Access the result along with the TransportOperation object
-              # @yieldparam result [::Google::Cloud::Datastream::V1::ListPrivateConnectionsResponse]
+              # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Datastream::V1::PrivateConnection>]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
-              # @return [::Google::Cloud::Datastream::V1::ListPrivateConnectionsResponse]
+              # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Datastream::V1::PrivateConnection>]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
               #
@@ -2212,7 +2230,9 @@ module Google
                                        retry_policy: @config.retry_policy
 
                 @datastream_stub.list_private_connections request, options do |result, operation|
+                  result = ::Gapic::Rest::PagedEnumerable.new @datastream_stub, :list_private_connections, "private_connections", request, result, options
                   yield result, operation if block_given?
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -2544,10 +2564,10 @@ module Google
               #   @param order_by [::String]
               #     Order by fields for the result.
               # @yield [result, operation] Access the result along with the TransportOperation object
-              # @yieldparam result [::Google::Cloud::Datastream::V1::ListRoutesResponse]
+              # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Datastream::V1::Route>]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
-              # @return [::Google::Cloud::Datastream::V1::ListRoutesResponse]
+              # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Datastream::V1::Route>]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
               #
@@ -2599,7 +2619,9 @@ module Google
                                        retry_policy: @config.retry_policy
 
                 @datastream_stub.list_routes request, options do |result, operation|
+                  result = ::Gapic::Rest::PagedEnumerable.new @datastream_stub, :list_routes, "routes", request, result, options
                   yield result, operation if block_given?
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -2748,6 +2770,13 @@ module Google
               #    *  (`Signet::OAuth2::Client`) A signet oauth2 client object
               #       (see the [signet docs](https://rubydoc.info/gems/signet/Signet/OAuth2/Client))
               #    *  (`nil`) indicating no credentials
+              #
+              #   Warning: If you accept a credential configuration (JSON file or Hash) from an
+              #   external source for authentication to Google Cloud, you must validate it before
+              #   providing it to a Google API client library. Providing an unvalidated credential
+              #   configuration to Google APIs can compromise the security of your systems and data.
+              #   For more information, refer to [Validate credential configurations from external
+              #   sources](https://cloud.google.com/docs/authentication/external/externally-sourced-credentials).
               #   @return [::Object]
               # @!attribute [rw] scope
               #   The OAuth scopes

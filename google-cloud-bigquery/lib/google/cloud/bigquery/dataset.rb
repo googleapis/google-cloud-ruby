@@ -2810,7 +2810,7 @@ module Google
           ensure_service!
 
           # Get table, don't use Dataset#table which handles NotFoundError
-          gapi = service.get_table dataset_id, table_id, metadata_view: view
+          gapi = service.get_project_table project_id, dataset_id, table_id, metadata_view: view
           table = Table.from_gapi gapi, service, metadata_view: view
           # Get the AsyncInserter from the table
           table.insert_async skip_invalid: skip_invalid,
@@ -2865,7 +2865,8 @@ module Google
           ensure_service!
           gapi = service.insert_tabledata dataset_id, table_id, rows, skip_invalid:   skip_invalid,
                                                                       ignore_unknown: ignore_unknown,
-                                                                      insert_ids:     insert_ids
+                                                                      insert_ids:     insert_ids,
+                                                                      project_id:     project_id
           InsertResponse.from_gapi rows, gapi
         end
 

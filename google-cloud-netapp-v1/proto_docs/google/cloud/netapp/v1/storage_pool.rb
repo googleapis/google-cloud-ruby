@@ -191,6 +191,12 @@ module Google
         # @!attribute [rw] zone
         #   @return [::String]
         #     Optional. Specifies the active zone for regional storagePool.
+        # @!attribute [r] satisfies_pzs
+        #   @return [::Boolean]
+        #     Output only. Reserved for future use
+        # @!attribute [r] satisfies_pzi
+        #   @return [::Boolean]
+        #     Output only. Reserved for future use
         class StoragePool
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -230,6 +236,19 @@ module Google
             # Storage Pool State is Error
             ERROR = 7
           end
+        end
+
+        # ValidateDirectoryServiceRequest validates the directory service policy
+        # attached to the storage pool.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. Name of the storage pool
+        # @!attribute [rw] directory_service_type
+        #   @return [::Google::Cloud::NetApp::V1::DirectoryServiceType]
+        #     Type of directory service policy attached to the storage pool.
+        class ValidateDirectoryServiceRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
       end
     end

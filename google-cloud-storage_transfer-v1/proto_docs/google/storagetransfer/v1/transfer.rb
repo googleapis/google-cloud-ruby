@@ -111,17 +111,32 @@ module Google
         # @!attribute [rw] filter
         #   @return [::String]
         #     Required. A list of query parameters specified as JSON text in the form of:
-        #     `{"projectId":"my_project_id",
-        #      "jobNames":["jobid1","jobid2",...],
-        #      "jobStatuses":["status1","status2",...]}`
         #
-        #     Since `jobNames` and `jobStatuses` support multiple values, their values
-        #     must be specified with array notation. `projectId` is required.
-        #     `jobNames` and `jobStatuses` are optional.  The valid values for
-        #     `jobStatuses` are case-insensitive:
-        #     {::Google::Cloud::StorageTransfer::V1::TransferJob::Status::ENABLED ENABLED},
-        #     {::Google::Cloud::StorageTransfer::V1::TransferJob::Status::DISABLED DISABLED}, and
-        #     {::Google::Cloud::StorageTransfer::V1::TransferJob::Status::DELETED DELETED}.
+        #     ```
+        #     {
+        #       "projectId":"my_project_id",
+        #       "jobNames":["jobid1","jobid2",...],
+        #       "jobStatuses":["status1","status2",...],
+        #       "dataBackend":"QUERY_REPLICATION_CONFIGS",
+        #       "sourceBucket":"source-bucket-name",
+        #       "sinkBucket":"sink-bucket-name",
+        #     }
+        #     ```
+        #
+        #     The JSON formatting in the example is for display only; provide the
+        #     query parameters without spaces or line breaks.
+        #
+        #     * `projectId` is required.
+        #     * Since `jobNames` and `jobStatuses` support multiple values, their values
+        #       must be specified with array notation. `jobNames` and `jobStatuses` are
+        #       optional. Valid values are case-insensitive:
+        #         * {::Google::Cloud::StorageTransfer::V1::TransferJob::Status::ENABLED ENABLED}
+        #         * {::Google::Cloud::StorageTransfer::V1::TransferJob::Status::DISABLED DISABLED}
+        #         * {::Google::Cloud::StorageTransfer::V1::TransferJob::Status::DELETED DELETED}
+        #     * Specify `"dataBackend":"QUERY_REPLICATION_CONFIGS"` to return a list of
+        #       cross-bucket replication jobs.
+        #     * Limit the results to jobs from a particular bucket with `sourceBucket`
+        #       and/or to a particular bucket with `sinkBucket`.
         # @!attribute [rw] page_size
         #   @return [::Integer]
         #     The list page size. The max allowed value is 256.

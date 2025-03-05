@@ -58,8 +58,8 @@ module Google
         # @!attribute [rw] resource_type
         #   @return [::String]
         #     Required. The resource type to which the `BackupPlan` will be applied.
-        #     Examples include, "compute.googleapis.com/Instance" and
-        #     "storage.googleapis.com/Bucket".
+        #     Examples include, "compute.googleapis.com/Instance",
+        #     "sqladmin.googleapis.com/Instance", or "alloydb.googleapis.com/Cluster".
         # @!attribute [rw] etag
         #   @return [::String]
         #     Optional. `etag` is returned from the service in the response. As a user of
@@ -119,6 +119,12 @@ module Google
         #     Required. Configures the duration for which backup data will be kept. It is
         #     defined in “days”. The value should be greater than or equal to minimum
         #     enforced retention of the backup vault.
+        #
+        #     Minimum value is 1 and maximum value is 90 for hourly backups.
+        #     Minimum value is 1 and maximum value is 90 for daily backups.
+        #     Minimum value is 7 and maximum value is 186 for weekly backups.
+        #     Minimum value is 30 and maximum value is 732 for monthly backups.
+        #     Minimum value is 365 and maximum value is 36159 for yearly backups.
         # @!attribute [rw] standard_schedule
         #   @return [::Google::Cloud::BackupDR::V1::StandardSchedule]
         #     Required. Defines a schedule that runs within the confines of a defined

@@ -982,7 +982,7 @@ module Google
         #
         def uniform_bucket_level_access= new_uniform_bucket_level_access
           @gapi.iam_configuration ||= API::Bucket::IamConfiguration.new
-          @gapi.iam_configuration.uniform_bucket_level_access ||= \
+          @gapi.iam_configuration.uniform_bucket_level_access ||=
             API::Bucket::IamConfiguration::UniformBucketLevelAccess.new
           @gapi.iam_configuration.uniform_bucket_level_access.enabled = new_uniform_bucket_level_access
           patch_gapi! :iam_configuration
@@ -2278,6 +2278,31 @@ module Google
           else
             raise ArgumentError, "version '#{version}' not supported"
           end
+        end
+
+        # Fetches generation of the bucket
+        # @example
+        #   require "google/cloud/storage"
+        #   storage = Google::Cloud::Storage.new
+        #   bucket = storage.bucket "my-bucket"
+        #   generation= bucket.generation
+        def generation
+          @gapi.generation
+        end
+
+        # Fetches soft_delete_time of a soft deleted bucket
+        # @example
+        #   bucket.delete
+        #   bucket.soft_delete_time
+        def soft_delete_time
+          @gapi.soft_delete_time
+        end
+
+        # Fetches hard_delete_time of a soft deleted bucket
+        # @example
+        #   bucket.hard_delete_time
+        def hard_delete_time
+          @gapi.hard_delete_time
         end
 
         ##

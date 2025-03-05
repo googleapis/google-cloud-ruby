@@ -1,5 +1,33 @@
 # Changelog
 
+### 0.14.0 (2025-02-25)
+
+#### Features
+
+* Introduce PublicKeyFormat enum for selecting public key export encoding 
+* Support PQC asymmetric signing algorithms ML_DSA_65 and SLH_DSA_SHA2_128s ([#29169](https://github.com/googleapis/google-cloud-ruby/issues/29169)) 
+
+### 0.13.0 (2025-01-29)
+
+#### Features
+
+* Update Ruby version requirement to 3.0 
+#### Documentation
+
+* Include note about validating externally-provided credentials 
+
+### 0.12.2 (2025-01-09)
+
+#### Documentation
+
+* Minor updates ([#28204](https://github.com/googleapis/google-cloud-ruby/issues/28204)) 
+
+### 0.12.1 (2025-01-08)
+
+#### Documentation
+
+* Fixed some links in the reference documentation ([#28117](https://github.com/googleapis/google-cloud-ruby/issues/28117)) 
+
 ### 0.12.0 (2024-12-10)
 
 #### Features

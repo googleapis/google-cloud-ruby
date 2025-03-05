@@ -1,5 +1,23 @@
 # Changelog
 
+### 2.0.0 (2025-02-13)
+
+### ⚠ BREAKING CHANGES
+
+* Removed dependency on google-cloud-bigquery-data_policies-v1beta1 prerelease service ([#29020](https://github.com/googleapis/google-cloud-ruby/issues/29020))
+
+#### Features
+
+* Removed dependency on google-cloud-bigquery-data_policies-v1beta1 prerelease service ([#29020](https://github.com/googleapis/google-cloud-ruby/issues/29020)) 
+* Updated google-cloud-bigquery-data_policies-v1 dependency to version 1.x 
+
+### 1.4.0 (2025-01-29)
+
+#### Features
+
+* Provide methods to determine whether services are available with the currently installed versioned client ([#28527](https://github.com/googleapis/google-cloud-ruby/issues/28527)) 
+* Update Ruby version requirement to 3.0 
+
 ### 1.3.1 (2024-08-09)
 
 #### Documentation

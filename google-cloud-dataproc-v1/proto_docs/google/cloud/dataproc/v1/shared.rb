@@ -76,9 +76,13 @@ module Google
         # @!attribute [rw] network_uri
         #   @return [::String]
         #     Optional. Network URI to connect workload to.
+        #
+        #     Note: The following fields are mutually exclusive: `network_uri`, `subnetwork_uri`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] subnetwork_uri
         #   @return [::String]
         #     Optional. Subnetwork URI to connect workload to.
+        #
+        #     Note: The following fields are mutually exclusive: `subnetwork_uri`, `network_uri`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] network_tags
         #   @return [::Array<::String>]
         #     Optional. Tags used for network traffic control.
@@ -123,6 +127,12 @@ module Google
         #     staging and temporary buckets.
         #     **This field requires a Cloud Storage bucket name, not a `gs://...` URI to
         #     a Cloud Storage bucket.**
+        # @!attribute [rw] authentication_config
+        #   @return [::Google::Cloud::Dataproc::V1::AuthenticationConfig]
+        #     Optional. Authentication configuration used to set the default identity for
+        #     the workload execution. The config specifies the type of identity
+        #     (service account or user) that will be used by workloads to access
+        #     resources on the project(s).
         class ExecutionConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -515,6 +525,33 @@ module Google
           end
         end
 
+        # Authentication configuration for a workload is used to set the default
+        # identity for the workload execution.
+        # The config specifies the type of identity (service account or user) that
+        # will be used by workloads to access resources on the project(s).
+        # @!attribute [rw] user_workload_authentication_type
+        #   @return [::Google::Cloud::Dataproc::V1::AuthenticationConfig::AuthenticationType]
+        #     Optional. Authentication type for the user workload running in containers.
+        class AuthenticationConfig
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Authentication types for workload execution.
+          module AuthenticationType
+            # If AuthenticationType is unspecified then END_USER_CREDENTIALS is used
+            # for 3.0 and newer runtimes, and SERVICE_ACCOUNT is used for older
+            # runtimes.
+            AUTHENTICATION_TYPE_UNSPECIFIED = 0
+
+            # Use service account credentials for authenticating to other services.
+            SERVICE_ACCOUNT = 1
+
+            # Use OAuth credentials associated with the workload creator/user for
+            # authenticating to other services.
+            END_USER_CREDENTIALS = 2
+          end
+        end
+
         # Autotuning configuration of the workload.
         # @!attribute [rw] scenarios
         #   @return [::Array<::Google::Cloud::Dataproc::V1::AutotuningConfig::Scenario>]
@@ -563,10 +600,11 @@ module Google
           # Unspecified component. Specifying this will cause Cluster creation to fail.
           COMPONENT_UNSPECIFIED = 0
 
-          # The Anaconda python distribution. The Anaconda component is not supported
-          # in the Dataproc [2.0 image]
-          # (/https://cloud.google.com/dataproc/docs/concepts/versioning/dataproc-release-2.0).
-          # The 2.0 image is pre-installed with Miniconda.
+          # The Anaconda component is no longer supported or applicable to
+          # [supported Dataproc on Compute Engine image versions]
+          # (https://cloud.google.com/dataproc/docs/concepts/versioning/dataproc-version-clusters#supported-dataproc-image-versions).
+          # It cannot be activated on clusters created with supported Dataproc on
+          # Compute Engine image versions.
           ANACONDA = 5
 
           # Docker

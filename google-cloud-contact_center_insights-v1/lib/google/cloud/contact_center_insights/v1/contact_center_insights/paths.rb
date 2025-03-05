@@ -27,22 +27,52 @@ module Google
             ##
             # Create a fully-qualified Analysis resource string.
             #
-            # The resource will be in the following format:
+            # @overload analysis_path(project:, location:, conversation:, analysis:)
+            #   The resource will be in the following format:
             #
-            # `projects/{project}/locations/{location}/conversations/{conversation}/analyses/{analysis}`
+            #   `projects/{project}/locations/{location}/conversations/{conversation}/analyses/{analysis}`
             #
-            # @param project [String]
-            # @param location [String]
-            # @param conversation [String]
-            # @param analysis [String]
+            #   @param project [String]
+            #   @param location [String]
+            #   @param conversation [String]
+            #   @param analysis [String]
+            #
+            # @overload analysis_path(project:, location:, authorized_view_set:, authorized_view:, conversation:, analysis:)
+            #   The resource will be in the following format:
+            #
+            #   `projects/{project}/locations/{location}/authorizedViewSets/{authorized_view_set}/authorizedViews/{authorized_view}/conversations/{conversation}/analyses/{analysis}`
+            #
+            #   @param project [String]
+            #   @param location [String]
+            #   @param authorized_view_set [String]
+            #   @param authorized_view [String]
+            #   @param conversation [String]
+            #   @param analysis [String]
             #
             # @return [::String]
-            def analysis_path project:, location:, conversation:, analysis:
-              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
-              raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
-              raise ::ArgumentError, "conversation cannot contain /" if conversation.to_s.include? "/"
+            def analysis_path **args
+              resources = {
+                "analysis:conversation:location:project" => (proc do |project:, location:, conversation:, analysis:|
+                  raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+                  raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+                  raise ::ArgumentError, "conversation cannot contain /" if conversation.to_s.include? "/"
 
-              "projects/#{project}/locations/#{location}/conversations/#{conversation}/analyses/#{analysis}"
+                  "projects/#{project}/locations/#{location}/conversations/#{conversation}/analyses/#{analysis}"
+                end),
+                "analysis:authorized_view:authorized_view_set:conversation:location:project" => (proc do |project:, location:, authorized_view_set:, authorized_view:, conversation:, analysis:|
+                  raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+                  raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+                  raise ::ArgumentError, "authorized_view_set cannot contain /" if authorized_view_set.to_s.include? "/"
+                  raise ::ArgumentError, "authorized_view cannot contain /" if authorized_view.to_s.include? "/"
+                  raise ::ArgumentError, "conversation cannot contain /" if conversation.to_s.include? "/"
+
+                  "projects/#{project}/locations/#{location}/authorizedViewSets/#{authorized_view_set}/authorizedViews/#{authorized_view}/conversations/#{conversation}/analyses/#{analysis}"
+                end)
+              }
+
+              resource = resources[args.keys.sort.join(":")]
+              raise ::ArgumentError, "no resource found for values #{args.keys}" if resource.nil?
+              resource.call(**args)
             end
 
             ##
@@ -67,20 +97,48 @@ module Google
             ##
             # Create a fully-qualified Conversation resource string.
             #
-            # The resource will be in the following format:
+            # @overload conversation_path(project:, location:, conversation:)
+            #   The resource will be in the following format:
             #
-            # `projects/{project}/locations/{location}/conversations/{conversation}`
+            #   `projects/{project}/locations/{location}/conversations/{conversation}`
             #
-            # @param project [String]
-            # @param location [String]
-            # @param conversation [String]
+            #   @param project [String]
+            #   @param location [String]
+            #   @param conversation [String]
+            #
+            # @overload conversation_path(project:, location:, authorized_view_set:, authorized_view:, conversation:)
+            #   The resource will be in the following format:
+            #
+            #   `projects/{project}/locations/{location}/authorizedViewSets/{authorized_view_set}/authorizedViews/{authorized_view}/conversations/{conversation}`
+            #
+            #   @param project [String]
+            #   @param location [String]
+            #   @param authorized_view_set [String]
+            #   @param authorized_view [String]
+            #   @param conversation [String]
             #
             # @return [::String]
-            def conversation_path project:, location:, conversation:
-              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
-              raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+            def conversation_path **args
+              resources = {
+                "conversation:location:project" => (proc do |project:, location:, conversation:|
+                  raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+                  raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
 
-              "projects/#{project}/locations/#{location}/conversations/#{conversation}"
+                  "projects/#{project}/locations/#{location}/conversations/#{conversation}"
+                end),
+                "authorized_view:authorized_view_set:conversation:location:project" => (proc do |project:, location:, authorized_view_set:, authorized_view:, conversation:|
+                  raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+                  raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+                  raise ::ArgumentError, "authorized_view_set cannot contain /" if authorized_view_set.to_s.include? "/"
+                  raise ::ArgumentError, "authorized_view cannot contain /" if authorized_view.to_s.include? "/"
+
+                  "projects/#{project}/locations/#{location}/authorizedViewSets/#{authorized_view_set}/authorizedViews/#{authorized_view}/conversations/#{conversation}"
+                end)
+              }
+
+              resource = resources[args.keys.sort.join(":")]
+              raise ::ArgumentError, "no resource found for values #{args.keys}" if resource.nil?
+              resource.call(**args)
             end
 
             ##
@@ -122,22 +180,52 @@ module Google
             ##
             # Create a fully-qualified FeedbackLabel resource string.
             #
-            # The resource will be in the following format:
+            # @overload feedback_label_path(project:, location:, conversation:, feedback_label:)
+            #   The resource will be in the following format:
             #
-            # `projects/{project}/locations/{location}/conversations/{conversation}/feedbackLabels/{feedback_label}`
+            #   `projects/{project}/locations/{location}/conversations/{conversation}/feedbackLabels/{feedback_label}`
             #
-            # @param project [String]
-            # @param location [String]
-            # @param conversation [String]
-            # @param feedback_label [String]
+            #   @param project [String]
+            #   @param location [String]
+            #   @param conversation [String]
+            #   @param feedback_label [String]
+            #
+            # @overload feedback_label_path(project:, location:, authorized_view_set:, authorized_view:, conversation:, feedback_label:)
+            #   The resource will be in the following format:
+            #
+            #   `projects/{project}/locations/{location}/authorizedViewSets/{authorized_view_set}/authorizedViews/{authorized_view}/conversations/{conversation}/feedbackLabels/{feedback_label}`
+            #
+            #   @param project [String]
+            #   @param location [String]
+            #   @param authorized_view_set [String]
+            #   @param authorized_view [String]
+            #   @param conversation [String]
+            #   @param feedback_label [String]
             #
             # @return [::String]
-            def feedback_label_path project:, location:, conversation:, feedback_label:
-              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
-              raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
-              raise ::ArgumentError, "conversation cannot contain /" if conversation.to_s.include? "/"
+            def feedback_label_path **args
+              resources = {
+                "conversation:feedback_label:location:project" => (proc do |project:, location:, conversation:, feedback_label:|
+                  raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+                  raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+                  raise ::ArgumentError, "conversation cannot contain /" if conversation.to_s.include? "/"
 
-              "projects/#{project}/locations/#{location}/conversations/#{conversation}/feedbackLabels/#{feedback_label}"
+                  "projects/#{project}/locations/#{location}/conversations/#{conversation}/feedbackLabels/#{feedback_label}"
+                end),
+                "authorized_view:authorized_view_set:conversation:feedback_label:location:project" => (proc do |project:, location:, authorized_view_set:, authorized_view:, conversation:, feedback_label:|
+                  raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+                  raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+                  raise ::ArgumentError, "authorized_view_set cannot contain /" if authorized_view_set.to_s.include? "/"
+                  raise ::ArgumentError, "authorized_view cannot contain /" if authorized_view.to_s.include? "/"
+                  raise ::ArgumentError, "conversation cannot contain /" if conversation.to_s.include? "/"
+
+                  "projects/#{project}/locations/#{location}/authorizedViewSets/#{authorized_view_set}/authorizedViews/#{authorized_view}/conversations/#{conversation}/feedbackLabels/#{feedback_label}"
+                end)
+              }
+
+              resource = resources[args.keys.sort.join(":")]
+              raise ::ArgumentError, "no resource found for values #{args.keys}" if resource.nil?
+              resource.call(**args)
             end
 
             ##

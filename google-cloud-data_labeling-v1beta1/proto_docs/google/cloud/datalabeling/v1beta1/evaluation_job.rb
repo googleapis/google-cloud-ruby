@@ -151,6 +151,8 @@ module Google
         #     {::Google::Cloud::DataLabeling::V1beta1::EvaluationJob#annotation_spec_set EvaluationJob.annotationSpecSet}.
         #     `allowMultiLabel` in this configuration must match
         #     `classificationMetadata.isMultiLabel` in {::Google::Cloud::DataLabeling::V1beta1::EvaluationJobConfig#input_config input_config}.
+        #
+        #     Note: The following fields are mutually exclusive: `image_classification_config`, `bounding_poly_config`, `text_classification_config`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] bounding_poly_config
         #   @return [::Google::Cloud::DataLabeling::V1beta1::BoundingPolyConfig]
         #     Specify this field if your model version performs image object detection
@@ -158,6 +160,8 @@ module Google
         #
         #     `annotationSpecSet` in this configuration must match
         #     {::Google::Cloud::DataLabeling::V1beta1::EvaluationJob#annotation_spec_set EvaluationJob.annotationSpecSet}.
+        #
+        #     Note: The following fields are mutually exclusive: `bounding_poly_config`, `image_classification_config`, `text_classification_config`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] text_classification_config
         #   @return [::Google::Cloud::DataLabeling::V1beta1::TextClassificationConfig]
         #     Specify this field if your model version performs text classification.
@@ -166,6 +170,8 @@ module Google
         #     {::Google::Cloud::DataLabeling::V1beta1::EvaluationJob#annotation_spec_set EvaluationJob.annotationSpecSet}.
         #     `allowMultiLabel` in this configuration must match
         #     `classificationMetadata.isMultiLabel` in {::Google::Cloud::DataLabeling::V1beta1::EvaluationJobConfig#input_config input_config}.
+        #
+        #     Note: The following fields are mutually exclusive: `text_classification_config`, `image_classification_config`, `bounding_poly_config`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] input_config
         #   @return [::Google::Cloud::DataLabeling::V1beta1::InputConfig]
         #     Rquired. Details for the sampled prediction input. Within this

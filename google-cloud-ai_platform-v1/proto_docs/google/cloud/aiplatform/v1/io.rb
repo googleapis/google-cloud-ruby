@@ -255,15 +255,23 @@ module Google
           # @!attribute [rw] sharepoint_folder_path
           #   @return [::String]
           #     The path of the SharePoint folder to download from.
+          #
+          #     Note: The following fields are mutually exclusive: `sharepoint_folder_path`, `sharepoint_folder_id`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] sharepoint_folder_id
           #   @return [::String]
           #     The ID of the SharePoint folder to download from.
+          #
+          #     Note: The following fields are mutually exclusive: `sharepoint_folder_id`, `sharepoint_folder_path`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] drive_name
           #   @return [::String]
           #     The name of the drive to download from.
+          #
+          #     Note: The following fields are mutually exclusive: `drive_name`, `drive_id`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] drive_id
           #   @return [::String]
           #     The ID of the drive to download from.
+          #
+          #     Note: The following fields are mutually exclusive: `drive_id`, `drive_name`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] client_id
           #   @return [::String]
           #     The Application ID for the app registered in Microsoft Azure Portal.

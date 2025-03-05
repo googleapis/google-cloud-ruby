@@ -2180,10 +2180,14 @@ module Google
             #     be at most 24 hours in the future. If a value is not specified, the
             #     token's expiration time will be set to a default value of 1 hour in the
             #     future.
+            #
+            #     Note: The following fields are mutually exclusive: `expire_time`, `ttl`. If a field in that set is populated, all other fields in the set will automatically be cleared.
             #   @param ttl [::Google::Protobuf::Duration, ::Hash]
             #     Desired lifetime duration of the access token. This value must
             #     be at most 24 hours. If a value is not specified, the token's lifetime
             #     will be set to a default value of 1 hour.
+            #
+            #     Note: The following fields are mutually exclusive: `ttl`, `expire_time`. If a field in that set is populated, all other fields in the set will automatically be cleared.
             #   @param workstation [::String]
             #     Required. Name of the workstation for which the access token should be
             #     generated.
@@ -2296,6 +2300,13 @@ module Google
             #    *  (`GRPC::Core::Channel`) a gRPC channel with included credentials
             #    *  (`GRPC::Core::ChannelCredentials`) a gRPC credentails object
             #    *  (`nil`) indicating no credentials
+            #
+            #   Warning: If you accept a credential configuration (JSON file or Hash) from an
+            #   external source for authentication to Google Cloud, you must validate it before
+            #   providing it to a Google API client library. Providing an unvalidated credential
+            #   configuration to Google APIs can compromise the security of your systems and data.
+            #   For more information, refer to [Validate credential configurations from external
+            #   sources](https://cloud.google.com/docs/authentication/external/externally-sourced-credentials).
             #   @return [::Object]
             # @!attribute [rw] scope
             #   The OAuth scopes

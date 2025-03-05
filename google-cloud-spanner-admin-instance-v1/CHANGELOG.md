@@ -1,5 +1,32 @@
 # Release History
 
+### 2.0.0 (2025-02-07)
+
+### ⚠ BREAKING CHANGES
+
+* Fixed incorrect pagination on certain REST RPC methods ([#28826](https://github.com/googleapis/google-cloud-ruby/issues/28826))
+
+#### Bug Fixes
+
+* Fixed incorrect pagination on certain REST RPC methods ([#28826](https://github.com/googleapis/google-cloud-ruby/issues/28826)) 
+
+### 1.6.0 (2025-01-28)
+
+#### Features
+
+* Update Ruby version requirement to 3.0 
+#### Documentation
+
+* Clarify behavior of protobuf message fields that are part of mutually-exclusive sets 
+* Include note about validating externally-provided credentials 
+
+### 1.5.0 (2025-01-08)
+
+#### Features
+
+* Added free_instance_availability, quorum_type, and storage_limit_per_processing_unit to InstanceConfig 
+* Added instance_type and free_instance_metadata to Instance 
+
 ### 1.4.0 (2024-12-10)
 
 #### Features

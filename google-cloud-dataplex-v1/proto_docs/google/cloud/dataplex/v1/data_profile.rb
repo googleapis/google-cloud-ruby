@@ -163,12 +163,18 @@ module Google
               # @!attribute [rw] string_profile
               #   @return [::Google::Cloud::Dataplex::V1::DataProfileResult::Profile::Field::ProfileInfo::StringFieldInfo]
               #     String type field information.
+              #
+              #     Note: The following fields are mutually exclusive: `string_profile`, `integer_profile`, `double_profile`. If a field in that set is populated, all other fields in the set will automatically be cleared.
               # @!attribute [rw] integer_profile
               #   @return [::Google::Cloud::Dataplex::V1::DataProfileResult::Profile::Field::ProfileInfo::IntegerFieldInfo]
               #     Integer type field information.
+              #
+              #     Note: The following fields are mutually exclusive: `integer_profile`, `string_profile`, `double_profile`. If a field in that set is populated, all other fields in the set will automatically be cleared.
               # @!attribute [rw] double_profile
               #   @return [::Google::Cloud::Dataplex::V1::DataProfileResult::Profile::Field::ProfileInfo::DoubleFieldInfo]
               #     Double type field information.
+              #
+              #     Note: The following fields are mutually exclusive: `double_profile`, `string_profile`, `integer_profile`. If a field in that set is populated, all other fields in the set will automatically be cleared.
               class ProfileInfo
                 include ::Google::Protobuf::MessageExts
                 extend ::Google::Protobuf::MessageExts::ClassMethods

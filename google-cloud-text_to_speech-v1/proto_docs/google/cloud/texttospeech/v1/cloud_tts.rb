@@ -164,6 +164,8 @@ module Google
         # @!attribute [rw] text
         #   @return [::String]
         #     The raw text to be synthesized.
+        #
+        #     Note: The following fields are mutually exclusive: `text`, `ssml`, `multi_speaker_markup`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] ssml
         #   @return [::String]
         #     The SSML document to be synthesized. The SSML document must be valid
@@ -171,10 +173,14 @@ module Google
         #     [google.rpc.Code.INVALID_ARGUMENT][google.rpc.Code.INVALID_ARGUMENT]. For
         #     more information, see
         #     [SSML](https://cloud.google.com/text-to-speech/docs/ssml).
+        #
+        #     Note: The following fields are mutually exclusive: `ssml`, `text`, `multi_speaker_markup`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] multi_speaker_markup
         #   @return [::Google::Cloud::TextToSpeech::V1::MultiSpeakerMarkup]
         #     The multi-speaker input to be synthesized. Only applicable for
         #     multi-speaker synthesis.
+        #
+        #     Note: The following fields are mutually exclusive: `multi_speaker_markup`, `text`, `ssml`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] custom_pronunciations
         #   @return [::Google::Cloud::TextToSpeech::V1::CustomPronunciations]
         #     Optional. The pronunciation customizations to be applied to the input. If
@@ -333,10 +339,27 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # Description of the desired output audio data.
+        # @!attribute [rw] audio_encoding
+        #   @return [::Google::Cloud::TextToSpeech::V1::AudioEncoding]
+        #     Required. The format of the audio byte stream.
+        #     For now, streaming only supports PCM and OGG_OPUS. All other encodings
+        #     will return an error.
+        # @!attribute [rw] sample_rate_hertz
+        #   @return [::Integer]
+        #     Optional. The synthesis sample rate (in hertz) for this audio.
+        class StreamingAudioConfig
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # Provides configuration information for the StreamingSynthesize request.
         # @!attribute [rw] voice
         #   @return [::Google::Cloud::TextToSpeech::V1::VoiceSelectionParams]
         #     Required. The desired voice of the synthesized audio.
+        # @!attribute [rw] streaming_audio_config
+        #   @return [::Google::Cloud::TextToSpeech::V1::StreamingAudioConfig]
+        #     Optional. The configuration of the synthesized audio.
         class StreamingSynthesizeConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -363,10 +386,14 @@ module Google
         #   @return [::Google::Cloud::TextToSpeech::V1::StreamingSynthesizeConfig]
         #     StreamingSynthesizeConfig to be used in this streaming attempt. Only
         #     specified in the first message sent in a `StreamingSynthesize` call.
+        #
+        #     Note: The following fields are mutually exclusive: `streaming_config`, `input`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] input
         #   @return [::Google::Cloud::TextToSpeech::V1::StreamingSynthesisInput]
         #     Input to synthesize. Specified in all messages but the first in a
         #     `StreamingSynthesize` call.
+        #
+        #     Note: The following fields are mutually exclusive: `input`, `streaming_config`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         class StreamingSynthesizeRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -431,6 +458,11 @@ module Google
           # 8-bit samples that compand 14-bit audio samples using G.711 PCMU/A-law.
           # Audio content returned as ALAW also contains a WAV header.
           ALAW = 6
+
+          # Uncompressed 16-bit signed little-endian samples (Linear PCM).
+          # Note that as opposed to LINEAR16, audio will not be wrapped in a WAV (or
+          # any other) header.
+          PCM = 7
         end
       end
     end

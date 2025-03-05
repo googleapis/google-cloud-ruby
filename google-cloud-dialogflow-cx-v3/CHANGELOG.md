@@ -1,5 +1,25 @@
 # Changelog
 
+### 1.5.0 (2025-03-04)
+
+#### Features
+
+* Agent resources report their Zone Separation and Zone Isolation status 
+* Support the document processing mode for a data store connectdion 
+#### Documentation
+
+* Deprecated the populate_data_store_connection_signals query parameter 
+
+### 1.4.0 (2025-01-28)
+
+#### Features
+
+* Update Ruby version requirement to 3.0 
+#### Documentation
+
+* Clarify behavior of protobuf message fields that are part of mutually-exclusive sets 
+* Include note about validating externally-provided credentials 
+
 ### 1.3.0 (2024-12-10)
 
 #### Features

@@ -318,7 +318,6 @@ module Google
               #     cluster ID, e.g., just `mycluster` rather than
               #     `projects/myproject/instances/myinstance/clusters/mycluster`.
               #     Fields marked `OutputOnly` must be left blank.
-              #     Currently, at most four clusters can be specified.
               #
               # @yield [response, operation] Access the result along with the RPC operation
               # @yieldparam response [::Gapic::Operation]
@@ -582,7 +581,7 @@ module Google
               #   @param options [::Gapic::CallOptions, ::Hash]
               #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
               #
-              # @overload update_instance(name: nil, display_name: nil, state: nil, type: nil, labels: nil)
+              # @overload update_instance(name: nil, display_name: nil, type: nil, labels: nil)
               #   Pass arguments to `update_instance` via keyword arguments. Note that at
               #   least one keyword argument is required. To specify no parameters, or to keep all
               #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -594,9 +593,6 @@ module Google
               #     Required. The descriptive name for this instance as it appears in UIs.
               #     Can be changed at any time, but should be kept globally unique
               #     to avoid confusion.
-              #   @param state [::Google::Cloud::Bigtable::Admin::V2::Instance::State]
-              #     (`OutputOnly`)
-              #     The current state of the instance.
               #   @param type [::Google::Cloud::Bigtable::Admin::V2::Instance::Type]
               #     The type of the instance. Defaults to `PRODUCTION`.
               #   @param labels [::Hash{::String => ::String}]
@@ -1176,8 +1172,9 @@ module Google
               #     cluster. Currently only zones are supported, so values should be of the
               #     form `projects/{project}/locations/{zone}`.
               #   @param serve_nodes [::Integer]
-              #     The number of nodes allocated to this cluster. More nodes enable higher
-              #     throughput and more consistent performance.
+              #     The number of nodes in the cluster. If no value is set,
+              #     Cloud Bigtable automatically allocates nodes based on your data footprint
+              #     and optimized for 50% storage utilization.
               #   @param node_scaling_factor [::Google::Cloud::Bigtable::Admin::V2::Cluster::NodeScalingFactor]
               #     Immutable. The node scaling factor of this cluster.
               #   @param cluster_config [::Google::Cloud::Bigtable::Admin::V2::Cluster::ClusterConfig, ::Hash]
@@ -2369,6 +2366,13 @@ module Google
               #    *  (`GRPC::Core::Channel`) a gRPC channel with included credentials
               #    *  (`GRPC::Core::ChannelCredentials`) a gRPC credentails object
               #    *  (`nil`) indicating no credentials
+              #
+              #   Warning: If you accept a credential configuration (JSON file or Hash) from an
+              #   external source for authentication to Google Cloud, you must validate it before
+              #   providing it to a Google API client library. Providing an unvalidated credential
+              #   configuration to Google APIs can compromise the security of your systems and data.
+              #   For more information, refer to [Validate credential configurations from external
+              #   sources](https://cloud.google.com/docs/authentication/external/externally-sourced-credentials).
               #   @return [::Object]
               # @!attribute [rw] scope
               #   The OAuth scopes

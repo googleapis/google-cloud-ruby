@@ -41,7 +41,7 @@ def reset_workspace_changes
   # Call the reset_workspace_changes method.
   result = client.reset_workspace_changes request
 
-  # The returned object is of type Google::Protobuf::Empty.
+  # The returned object is of type Google::Cloud::Dataform::V1beta1::ResetWorkspaceChangesResponse.
   p result
 end
 # [END dataform_v1beta1_generated_Dataform_ResetWorkspaceChanges_sync]

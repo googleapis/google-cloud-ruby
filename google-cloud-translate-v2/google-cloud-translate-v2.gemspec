@@ -17,7 +17,7 @@ Gem::Specification.new do |gem|
                       ["README.md", "LICENSE.md", "AUTHENTICATION.md", "CHANGELOG.md", ".yardopts"]
   gem.require_paths = ["lib"]
 
-  gem.required_ruby_version = ">= 2.7"
+  gem.required_ruby_version = ">= 3.0"
 
   gem.add_dependency "faraday", ">= 1.0", "< 3.a"
   gem.add_dependency "googleapis-common-protos", ">= 1.3.10", "< 2.a"

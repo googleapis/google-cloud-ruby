@@ -20,7 +20,7 @@ Gem::Specification.new do |gem|
                       ["README.md", "LICENSE.md", ".yardopts", "MIGRATING.md"]
   gem.require_paths = ["lib"]
 
-  gem.required_ruby_version = ">= 2.7"
+  gem.required_ruby_version = ">= 3.0"
 
   gem.add_dependency "google-cloud-core", "~> 1.6"
   gem.add_dependency "grafeas-v1", ">= 0.14", "< 2.a"

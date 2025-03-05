@@ -300,15 +300,19 @@ module Google
               #   @param options [::Gapic::CallOptions, ::Hash]
               #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
               #
-              # @overload verify_attestation(td_ccel: nil, sev_snp_attestation: nil, challenge: nil, gcp_credentials: nil, tpm_attestation: nil, confidential_space_info: nil, token_options: nil)
+              # @overload verify_attestation(td_ccel: nil, sev_snp_attestation: nil, challenge: nil, gcp_credentials: nil, tpm_attestation: nil, confidential_space_info: nil, token_options: nil, attester: nil)
               #   Pass arguments to `verify_attestation` via keyword arguments. Note that at
               #   least one keyword argument is required. To specify no parameters, or to keep all
               #   the default parameter values, pass an empty Hash as a request object (see above).
               #
               #   @param td_ccel [::Google::Cloud::ConfidentialComputing::V1::TdxCcelAttestation, ::Hash]
               #     Optional. A TDX with CCEL and RTMR Attestation Quote.
+              #
+              #     Note: The following fields are mutually exclusive: `td_ccel`, `sev_snp_attestation`. If a field in that set is populated, all other fields in the set will automatically be cleared.
               #   @param sev_snp_attestation [::Google::Cloud::ConfidentialComputing::V1::SevSnpAttestation, ::Hash]
               #     Optional. An SEV-SNP Attestation Report.
+              #
+              #     Note: The following fields are mutually exclusive: `sev_snp_attestation`, `td_ccel`. If a field in that set is populated, all other fields in the set will automatically be cleared.
               #   @param challenge [::String]
               #     Required. The name of the Challenge whose nonce was used to generate the
               #     attestation, in the format `projects/*/locations/*/challenges/*`. The
@@ -324,6 +328,9 @@ module Google
               #   @param token_options [::Google::Cloud::ConfidentialComputing::V1::TokenOptions, ::Hash]
               #     Optional. A collection of optional, workload-specified claims that modify
               #     the token output.
+              #   @param attester [::String]
+              #     Optional. An optional indicator of the attester, only applies to certain
+              #     products.
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Google::Cloud::ConfidentialComputing::V1::VerifyAttestationResponse]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
@@ -424,6 +431,13 @@ module Google
               #    *  (`Signet::OAuth2::Client`) A signet oauth2 client object
               #       (see the [signet docs](https://rubydoc.info/gems/signet/Signet/OAuth2/Client))
               #    *  (`nil`) indicating no credentials
+              #
+              #   Warning: If you accept a credential configuration (JSON file or Hash) from an
+              #   external source for authentication to Google Cloud, you must validate it before
+              #   providing it to a Google API client library. Providing an unvalidated credential
+              #   configuration to Google APIs can compromise the security of your systems and data.
+              #   For more information, refer to [Validate credential configurations from external
+              #   sources](https://cloud.google.com/docs/authentication/external/externally-sourced-credentials).
               #   @return [::Object]
               # @!attribute [rw] scope
               #   The OAuth scopes

@@ -25,12 +25,18 @@ module Google
         # @!attribute [rw] audience_segment_id
         #   @return [::Integer]
         #     ID of an AudienceSegment that this mapping belongs to.
+        #
+        #     Note: The following fields are mutually exclusive: `audience_segment_id`, `content_bundle_id`, `custom_targeting_value_id`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] content_bundle_id
         #   @return [::Integer]
         #     ID of a ContentBundle that this mapping belongs to.
+        #
+        #     Note: The following fields are mutually exclusive: `content_bundle_id`, `audience_segment_id`, `custom_targeting_value_id`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] custom_targeting_value_id
         #   @return [::Integer]
         #     ID of a CustomValue that this mapping belongs to.
+        #
+        #     Note: The following fields are mutually exclusive: `custom_targeting_value_id`, `audience_segment_id`, `content_bundle_id`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] name
         #   @return [::String]
         #     Identifier. The resource name of the `EntitySignalsMapping`.

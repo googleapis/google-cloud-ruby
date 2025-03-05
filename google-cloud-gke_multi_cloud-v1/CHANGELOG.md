@@ -1,5 +1,23 @@
 # Changelog
 
+### 0.14.0 (2025-01-28)
+
+#### Features
+
+* Update Ruby version requirement to 3.0 
+#### Documentation
+
+* Formatting update ([#28211](https://github.com/googleapis/google-cloud-ruby/issues/28211)) 
+* Clarify behavior of protobuf message fields that are part of mutually-exclusive sets 
+* Include note about validating externally-provided credentials 
+
+### 0.13.0 (2025-01-08)
+
+#### Features
+
+* Support built-in Cloud Logging and Monitoring for Attached Clusters 
+* Support tags on AttachedCluster resources 
+
 ### 0.12.0 (2024-12-10)
 
 #### Features

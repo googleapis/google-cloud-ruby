@@ -944,9 +944,13 @@ module Google
             #   @param generator [::Google::Cloud::Dialogflow::V2::Generator, ::Hash]
             #     Uncreated generator. It should be a complete generator that includes all
             #     information about the generator.
+            #
+            #     Note: The following fields are mutually exclusive: `generator`, `generator_name`. If a field in that set is populated, all other fields in the set will automatically be cleared.
             #   @param generator_name [::String]
             #     The resource name of the existing created generator. Format:
             #     `projects/<Project ID>/locations/<Location ID>/generators/<Generator ID>`
+            #
+            #     Note: The following fields are mutually exclusive: `generator_name`, `generator`. If a field in that set is populated, all other fields in the set will automatically be cleared.
             #   @param conversation_context [::Google::Cloud::Dialogflow::V2::ConversationContext, ::Hash]
             #     Optional. Context of the conversation, including transcripts.
             #   @param trigger_events [::Array<::Google::Cloud::Dialogflow::V2::TriggerEvent>]
@@ -1195,6 +1199,13 @@ module Google
             #    *  (`GRPC::Core::Channel`) a gRPC channel with included credentials
             #    *  (`GRPC::Core::ChannelCredentials`) a gRPC credentails object
             #    *  (`nil`) indicating no credentials
+            #
+            #   Warning: If you accept a credential configuration (JSON file or Hash) from an
+            #   external source for authentication to Google Cloud, you must validate it before
+            #   providing it to a Google API client library. Providing an unvalidated credential
+            #   configuration to Google APIs can compromise the security of your systems and data.
+            #   For more information, refer to [Validate credential configurations from external
+            #   sources](https://cloud.google.com/docs/authentication/external/externally-sourced-credentials).
             #   @return [::Object]
             # @!attribute [rw] scope
             #   The OAuth scopes

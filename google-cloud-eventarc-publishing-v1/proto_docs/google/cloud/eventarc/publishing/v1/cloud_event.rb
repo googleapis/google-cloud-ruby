@@ -46,12 +46,18 @@ module Google
           # @!attribute [rw] binary_data
           #   @return [::String]
           #     Optional. Binary data.
+          #
+          #     Note: The following fields are mutually exclusive: `binary_data`, `text_data`, `proto_data`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] text_data
           #   @return [::String]
           #     Optional. Text data.
+          #
+          #     Note: The following fields are mutually exclusive: `text_data`, `binary_data`, `proto_data`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] proto_data
           #   @return [::Google::Protobuf::Any]
           #     Optional. Proto data.
+          #
+          #     Note: The following fields are mutually exclusive: `proto_data`, `binary_data`, `text_data`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           class CloudEvent
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -60,24 +66,38 @@ module Google
             # @!attribute [rw] ce_boolean
             #   @return [::Boolean]
             #     Boolean value.
+            #
+            #     Note: The following fields are mutually exclusive: `ce_boolean`, `ce_integer`, `ce_string`, `ce_bytes`, `ce_uri`, `ce_uri_ref`, `ce_timestamp`. If a field in that set is populated, all other fields in the set will automatically be cleared.
             # @!attribute [rw] ce_integer
             #   @return [::Integer]
             #     Integer value.
+            #
+            #     Note: The following fields are mutually exclusive: `ce_integer`, `ce_boolean`, `ce_string`, `ce_bytes`, `ce_uri`, `ce_uri_ref`, `ce_timestamp`. If a field in that set is populated, all other fields in the set will automatically be cleared.
             # @!attribute [rw] ce_string
             #   @return [::String]
             #     String value.
+            #
+            #     Note: The following fields are mutually exclusive: `ce_string`, `ce_boolean`, `ce_integer`, `ce_bytes`, `ce_uri`, `ce_uri_ref`, `ce_timestamp`. If a field in that set is populated, all other fields in the set will automatically be cleared.
             # @!attribute [rw] ce_bytes
             #   @return [::String]
             #     Bytes value.
+            #
+            #     Note: The following fields are mutually exclusive: `ce_bytes`, `ce_boolean`, `ce_integer`, `ce_string`, `ce_uri`, `ce_uri_ref`, `ce_timestamp`. If a field in that set is populated, all other fields in the set will automatically be cleared.
             # @!attribute [rw] ce_uri
             #   @return [::String]
             #     URI value.
+            #
+            #     Note: The following fields are mutually exclusive: `ce_uri`, `ce_boolean`, `ce_integer`, `ce_string`, `ce_bytes`, `ce_uri_ref`, `ce_timestamp`. If a field in that set is populated, all other fields in the set will automatically be cleared.
             # @!attribute [rw] ce_uri_ref
             #   @return [::String]
             #     URI-reference value.
+            #
+            #     Note: The following fields are mutually exclusive: `ce_uri_ref`, `ce_boolean`, `ce_integer`, `ce_string`, `ce_bytes`, `ce_uri`, `ce_timestamp`. If a field in that set is populated, all other fields in the set will automatically be cleared.
             # @!attribute [rw] ce_timestamp
             #   @return [::Google::Protobuf::Timestamp]
             #     Timestamp value.
+            #
+            #     Note: The following fields are mutually exclusive: `ce_timestamp`, `ce_boolean`, `ce_integer`, `ce_string`, `ce_bytes`, `ce_uri`, `ce_uri_ref`. If a field in that set is populated, all other fields in the set will automatically be cleared.
             class CloudEventAttributeValue
               include ::Google::Protobuf::MessageExts
               extend ::Google::Protobuf::MessageExts::ClassMethods

@@ -1,5 +1,27 @@
 # Release History
 
+### 1.5.0 (2025-02-13)
+
+#### Features
+
+* Add option to enable fetching dependencies ([#29065](https://github.com/googleapis/google-cloud-ruby/issues/29065)) 
+* Support for git proxy setup ([#29072](https://github.com/googleapis/google-cloud-ruby/issues/29072)) 
+#### Documentation
+
+* Updates to proto message comments 
+
+### 1.4.0 (2025-01-28)
+
+#### Features
+
+* Support structured logging 
+* Support uploading Go modules to Artifact Registry 
+* Update Ruby version requirement to 3.0 
+#### Documentation
+
+* Clarify behavior of protobuf message fields that are part of mutually-exclusive sets 
+* Include note about validating externally-provided credentials 
+
 ### 1.3.0 (2024-12-10)
 
 #### Features

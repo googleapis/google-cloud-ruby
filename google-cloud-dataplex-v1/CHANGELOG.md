@@ -1,5 +1,40 @@
 # Changelog
 
+### 2.1.0 (2025-02-07)
+
+#### Features
+
+* Support the "NONE" entry sync mode ([#28942](https://github.com/googleapis/google-cloud-ruby/issues/28942)) 
+
+### 2.0.0 (2025-02-07)
+
+### ⚠ BREAKING CHANGES
+
+* Fixed incorrect pagination on certain REST RPC methods ([#28824](https://github.com/googleapis/google-cloud-ruby/issues/28824))
+
+#### Bug Fixes
+
+* Fixed incorrect pagination on certain REST RPC methods ([#28824](https://github.com/googleapis/google-cloud-ruby/issues/28824)) 
+
+### 1.4.0 (2025-01-28)
+
+#### Features
+
+* Update Ruby version requirement to 3.0 
+#### Documentation
+
+* Clarify behavior of protobuf message fields that are part of mutually-exclusive sets 
+* Include note about validating externally-provided credentials 
+
+### 1.3.0 (2025-01-15)
+
+#### Features
+
+* The delete_data_Scan RPC supports the force parameter 
+#### Documentation
+
+* Various fixes and clarifications to the reference documentation 
+
 ### 1.2.0 (2024-12-10)
 
 #### Features

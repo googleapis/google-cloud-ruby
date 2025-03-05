@@ -460,10 +460,14 @@ module Google
         # @!attribute [rw] backup_source
         #   @return [::Google::Cloud::AlloyDB::V1alpha::BackupSource]
         #     Backup source.
+        #
+        #     Note: The following fields are mutually exclusive: `backup_source`, `continuous_backup_source`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] continuous_backup_source
         #   @return [::Google::Cloud::AlloyDB::V1alpha::ContinuousBackupSource]
         #     ContinuousBackup source. Continuous backup needs to be enabled in the
         #     source cluster for this operation to succeed.
+        #
+        #     Note: The following fields are mutually exclusive: `continuous_backup_source`, `backup_source`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] parent
         #   @return [::String]
         #     Required. The name of the parent resource. For the required format, see the
@@ -1316,12 +1320,18 @@ module Google
         # @!attribute [r] batch_create_instances_metadata
         #   @return [::Google::Cloud::AlloyDB::V1alpha::BatchCreateInstancesMetadata]
         #     Output only. BatchCreateInstances related metadata.
+        #
+        #     Note: The following fields are mutually exclusive: `batch_create_instances_metadata`, `promote_cluster_status`, `upgrade_cluster_status`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [r] promote_cluster_status
         #   @return [::Google::Cloud::AlloyDB::V1alpha::PromoteClusterStatus]
         #     Output only. PromoteClusterStatus related metadata.
+        #
+        #     Note: The following fields are mutually exclusive: `promote_cluster_status`, `batch_create_instances_metadata`, `upgrade_cluster_status`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [r] upgrade_cluster_status
         #   @return [::Google::Cloud::AlloyDB::V1alpha::UpgradeClusterStatus]
         #     Output only. UpgradeClusterStatus related metadata.
+        #
+        #     Note: The following fields are mutually exclusive: `upgrade_cluster_status`, `batch_create_instances_metadata`, `promote_cluster_status`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [r] create_time
         #   @return [::Google::Protobuf::Timestamp]
         #     Output only. The time the operation was created.

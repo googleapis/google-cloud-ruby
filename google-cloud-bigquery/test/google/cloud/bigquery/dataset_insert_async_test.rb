@@ -114,6 +114,46 @@ describe Google::Cloud::Bigquery::Dataset, :insert_async, :mock_bigquery do
 
       mock.verify
     end
+
+    it "insert rows into another project" do
+      mock = Minitest::Mock.new
+      
+      another_project_id = "another-project"
+      dataset_another_project = Google::Cloud::Bigquery::Dataset.new_reference another_project_id, dataset_id, bigquery.service
+      table_another_project_hash = random_table_hash dataset_id, table_id
+      table_gapi_another_project = Google::Apis::BigqueryV2::Table.from_json table_another_project_hash.to_json
+      table_gapi_another_project.table_reference.project_id = another_project_id
+
+      insert_req = {
+        rows: [insert_rows.first], ignoreUnknownValues: nil, skipInvalidRows: nil
+      }.to_json      
+      mock.expect :get_table, table_gapi_another_project, [another_project_id, dataset_id, table_id], **patch_table_args
+      mock.expect :insert_all_table_data, success_table_insert_gapi,
+        [another_project_id, dataset_id, table_id, insert_req], options: { skip_serialization: true }
+      dataset_another_project.service.mocked_service = mock
+
+      inserter = dataset_another_project.insert_async table_id
+
+      SecureRandom.stub :uuid, insert_id do
+        inserter.insert rows.first
+
+        _(inserter.batch.rows).must_equal [rows.first]
+
+        _(inserter).must_be :started?
+        _(inserter).wont_be :stopped?
+
+        # force the queued rows to be inserted
+        inserter.flush
+        inserter.stop.wait!
+
+        _(inserter).wont_be :started?
+        _(inserter).must_be :stopped?
+
+        _(inserter.batch).must_be :nil?
+      end
+
+      mock.verify
+    end
   end
 
   it "inserts three rows at the same time" do

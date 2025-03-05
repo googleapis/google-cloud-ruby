@@ -27,13 +27,19 @@ module Google
         #   @return [::Google::Cloud::AIPlatform::V1::FeatureView::BigQuerySource]
         #     Optional. Configures how data is supposed to be extracted from a BigQuery
         #     source to be loaded onto the FeatureOnlineStore.
+        #
+        #     Note: The following fields are mutually exclusive: `big_query_source`, `feature_registry_source`, `vertex_rag_source`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] feature_registry_source
         #   @return [::Google::Cloud::AIPlatform::V1::FeatureView::FeatureRegistrySource]
         #     Optional. Configures the features from a Feature Registry source that
         #     need to be loaded onto the FeatureOnlineStore.
+        #
+        #     Note: The following fields are mutually exclusive: `feature_registry_source`, `big_query_source`, `vertex_rag_source`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] vertex_rag_source
         #   @return [::Google::Cloud::AIPlatform::V1::FeatureView::VertexRagSource]
         #     Optional. The Vertex RAG Source that the FeatureView is linked to.
+        #
+        #     Note: The following fields are mutually exclusive: `vertex_rag_source`, `big_query_source`, `feature_registry_source`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] name
         #   @return [::String]
         #     Identifier. Name of the FeatureView. Format:
@@ -72,6 +78,23 @@ module Google
         #     contains the required configurations to create an index from source data,
         #     so that approximate nearest neighbor (a.k.a ANN) algorithms search can be
         #     performed during online serving.
+        # @!attribute [rw] optimized_config
+        #   @return [::Google::Cloud::AIPlatform::V1::FeatureView::OptimizedConfig]
+        #     Optional. Configuration for FeatureView created under Optimized
+        #     FeatureOnlineStore.
+        # @!attribute [rw] service_agent_type
+        #   @return [::Google::Cloud::AIPlatform::V1::FeatureView::ServiceAgentType]
+        #     Optional. Service agent type used during data sync. By default, the Vertex
+        #     AI Service Agent is used. When using an IAM Policy to isolate this
+        #     FeatureView within a project, a separate service account should be
+        #     provisioned by setting this field to `SERVICE_AGENT_TYPE_FEATURE_VIEW`.
+        #     This will generate a separate service account to access the BigQuery source
+        #     table.
+        # @!attribute [r] service_account_email
+        #   @return [::String]
+        #     Output only. A Service Account unique to this FeatureView. The role
+        #     bigquery.dataViewer should be granted to this service account to allow
+        #     Vertex AI Feature Store to sync data to the online store.
         # @!attribute [r] satisfies_pzs
         #   @return [::Boolean]
         #     Output only. Reserved for future use.
@@ -118,12 +141,16 @@ module Google
           #     Optional. Configuration options for the tree-AH algorithm (Shallow tree
           #     + Asymmetric Hashing). Please refer to this paper for more details:
           #     https://arxiv.org/abs/1908.10396
+          #
+          #     Note: The following fields are mutually exclusive: `tree_ah_config`, `brute_force_config`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] brute_force_config
           #   @return [::Google::Cloud::AIPlatform::V1::FeatureView::IndexConfig::BruteForceConfig]
           #     Optional. Configuration options for using brute force search, which
           #     simply implements the standard linear search in the database for each
           #     query. It is primarily meant for benchmarking and to generate the
           #     ground truth for approximate search.
+          #
+          #     Note: The following fields are mutually exclusive: `brute_force_config`, `tree_ah_config`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] embedding_column
           #   @return [::String]
           #     Optional. Column of embedding. This column contains the source data to
@@ -240,6 +267,19 @@ module Google
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
 
+          # Configuration for FeatureViews created in Optimized FeatureOnlineStore.
+          # @!attribute [rw] automatic_resources
+          #   @return [::Google::Cloud::AIPlatform::V1::AutomaticResources]
+          #     Optional. A description of resources that the FeatureView uses, which to
+          #     large degree are decided by Vertex AI, and optionally allows only a
+          #     modest additional configuration. If min_replica_count is not set, the
+          #     default value is 2. If max_replica_count is not set, the default value
+          #     is 6. The max allowed replica count is 1000.
+          class OptimizedConfig
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
           # @!attribute [rw] key
           #   @return [::String]
           # @!attribute [rw] value
@@ -247,6 +287,22 @@ module Google
           class LabelsEntry
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Service agent type used during data sync.
+          module ServiceAgentType
+            # By default, the project-level Vertex AI Service Agent is enabled.
+            SERVICE_AGENT_TYPE_UNSPECIFIED = 0
+
+            # Indicates the project-level Vertex AI Service Agent
+            # (https://cloud.google.com/vertex-ai/docs/general/access-control#service-agents)
+            # will be used during sync jobs.
+            SERVICE_AGENT_TYPE_PROJECT = 1
+
+            # Enable a FeatureView service account to be created by Vertex AI and
+            # output in the field `service_account_email`. This service account will
+            # be used to read from the source BigQuery table during sync.
+            SERVICE_AGENT_TYPE_FEATURE_VIEW = 2
           end
         end
       end

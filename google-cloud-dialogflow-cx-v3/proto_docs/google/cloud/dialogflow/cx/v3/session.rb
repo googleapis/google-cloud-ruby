@@ -323,36 +323,35 @@ module Google
           # {::Google::Cloud::Dialogflow::CX::V3::Sessions::Client#streaming_detect_intent StreamingDetectIntent}
           # method.
           #
-          # Multiple response messages (N) can be returned in order.
-          #
-          # The first (N-1) responses set either the `recognition_result` or
-          # `detect_intent_response` field, depending on the request:
+          # Multiple response messages can be returned in order:
           #
           # *   If the `StreamingDetectIntentRequest.query_input.audio` field was
-          #     set, and the `StreamingDetectIntentRequest.enable_partial_response`
-          #     field was false, the `recognition_result` field is populated for each
-          #     of the (N-1) responses.
-          #     See the
-          #     {::Google::Cloud::Dialogflow::CX::V3::StreamingRecognitionResult StreamingRecognitionResult}
-          #     message for details about the result message sequence.
+          #     set, the first M messages contain `recognition_result`.
+          #     Each `recognition_result` represents a more complete transcript of what
+          #     the user said. The last `recognition_result` has `is_final` set to
+          #     `true`.
           #
           # *   If the `StreamingDetectIntentRequest.enable_partial_response` field was
           #     true, the `detect_intent_response` field is populated for each
-          #     of the (N-1) responses, where 1 <= N <= 4.
+          #     of the following N responses, where 0 <= N <= 5.
           #     These responses set the
           #     {::Google::Cloud::Dialogflow::CX::V3::DetectIntentResponse#response_type DetectIntentResponse.response_type}
           #     field to `PARTIAL`.
           #
-          # For the final Nth response message, the `detect_intent_response` is fully
+          # For the last response message, the `detect_intent_response` is fully
           # populated, and
           # {::Google::Cloud::Dialogflow::CX::V3::DetectIntentResponse#response_type DetectIntentResponse.response_type}
           # is set to `FINAL`.
           # @!attribute [rw] recognition_result
           #   @return [::Google::Cloud::Dialogflow::CX::V3::StreamingRecognitionResult]
           #     The result of speech recognition.
+          #
+          #     Note: The following fields are mutually exclusive: `recognition_result`, `detect_intent_response`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] detect_intent_response
           #   @return [::Google::Cloud::Dialogflow::CX::V3::DetectIntentResponse]
           #     The response from detect intent.
+          #
+          #     Note: The following fields are mutually exclusive: `detect_intent_response`, `recognition_result`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] debugging_info
           #   @return [::Google::Cloud::Dialogflow::CX::V3::CloudConversationDebuggingInfo]
           #     Debugging info that would get populated when
@@ -606,6 +605,7 @@ module Google
           #   @return [::Google::Cloud::Dialogflow::CX::V3::SearchConfig]
           #     Optional. Search configuration for UCS search queries.
           # @!attribute [rw] populate_data_store_connection_signals
+          #   @deprecated This field is deprecated and may be removed in the next major version update.
           #   @return [::Boolean]
           #     Optional. If set to true and data stores are involved in serving the
           #     request then
@@ -629,9 +629,18 @@ module Google
           # @!attribute [rw] boost_specs
           #   @return [::Array<::Google::Cloud::Dialogflow::CX::V3::BoostSpecs>]
           #     Optional. Boosting configuration for the datastores.
+          #
+          #     Maps from datastore name to their boost configuration. Do not specify more
+          #     than one BoostSpecs for each datastore name. If multiple BoostSpecs are
+          #     provided for the same datastore name, the behavior is undefined.
           # @!attribute [rw] filter_specs
           #   @return [::Array<::Google::Cloud::Dialogflow::CX::V3::FilterSpecs>]
           #     Optional. Filter configuration for the datastores.
+          #
+          #     Maps from datastore name to the filter expression for that datastore. Do
+          #     not specify more than one FilterSpecs for each datastore name. If multiple
+          #     FilterSpecs are provided for the same datastore name, the behavior is
+          #     undefined.
           class SearchConfig
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -644,8 +653,8 @@ module Google
           # @!attribute [rw] condition_boost_specs
           #   @return [::Array<::Google::Cloud::Dialogflow::CX::V3::BoostSpec::ConditionBoostSpec>]
           #     Optional. Condition boost specifications. If a document matches multiple
-          #     conditions in the specifictions, boost scores from these specifications are
-          #     all applied and combined in a non-linear way. Maximum number of
+          #     conditions in the specifications, boost scores from these specifications
+          #     are all applied and combined in a non-linear way. Maximum number of
           #     specifications is 20.
           class BoostSpec
             include ::Google::Protobuf::MessageExts
@@ -819,18 +828,28 @@ module Google
           # @!attribute [rw] text
           #   @return [::Google::Cloud::Dialogflow::CX::V3::TextInput]
           #     The natural language text to be processed.
+          #
+          #     Note: The following fields are mutually exclusive: `text`, `intent`, `audio`, `event`, `dtmf`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] intent
           #   @return [::Google::Cloud::Dialogflow::CX::V3::IntentInput]
           #     The intent to be triggered.
+          #
+          #     Note: The following fields are mutually exclusive: `intent`, `text`, `audio`, `event`, `dtmf`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] audio
           #   @return [::Google::Cloud::Dialogflow::CX::V3::AudioInput]
           #     The natural language speech audio to be processed.
+          #
+          #     Note: The following fields are mutually exclusive: `audio`, `text`, `intent`, `event`, `dtmf`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] event
           #   @return [::Google::Cloud::Dialogflow::CX::V3::EventInput]
           #     The event to be triggered.
+          #
+          #     Note: The following fields are mutually exclusive: `event`, `text`, `intent`, `audio`, `dtmf`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] dtmf
           #   @return [::Google::Cloud::Dialogflow::CX::V3::DtmfInput]
           #     The DTMF event to be handled.
+          #
+          #     Note: The following fields are mutually exclusive: `dtmf`, `text`, `intent`, `audio`, `event`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] language_code
           #   @return [::String]
           #     Required. The language of the input. See [Language
@@ -847,25 +866,35 @@ module Google
           #   @return [::String]
           #     If {::Google::Cloud::Dialogflow::CX::V3::TextInput natural language text} was
           #     provided as input, this field will contain a copy of the text.
+          #
+          #     Note: The following fields are mutually exclusive: `text`, `trigger_intent`, `transcript`, `trigger_event`, `dtmf`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] trigger_intent
           #   @return [::String]
           #     If an {::Google::Cloud::Dialogflow::CX::V3::IntentInput intent} was provided as
           #     input, this field will contain a copy of the intent identifier. Format:
           #     `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>/intents/<IntentID>`.
+          #
+          #     Note: The following fields are mutually exclusive: `trigger_intent`, `text`, `transcript`, `trigger_event`, `dtmf`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] transcript
           #   @return [::String]
           #     If [natural language speech
           #     audio][google.cloud.dialogflow.cx.v3.AudioInput] was provided as input,
           #     this field will contain the transcript for the audio.
+          #
+          #     Note: The following fields are mutually exclusive: `transcript`, `text`, `trigger_intent`, `trigger_event`, `dtmf`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] trigger_event
           #   @return [::String]
           #     If an {::Google::Cloud::Dialogflow::CX::V3::EventInput event} was provided as
           #     input, this field will contain the name of the event.
+          #
+          #     Note: The following fields are mutually exclusive: `trigger_event`, `text`, `trigger_intent`, `transcript`, `dtmf`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] dtmf
           #   @return [::Google::Cloud::Dialogflow::CX::V3::DtmfInput]
           #     If a {::Google::Cloud::Dialogflow::CX::V3::DtmfInput DTMF} was provided as
           #     input, this field will contain a copy of the
           #     {::Google::Cloud::Dialogflow::CX::V3::DtmfInput DtmfInput}.
+          #
+          #     Note: The following fields are mutually exclusive: `dtmf`, `text`, `trigger_intent`, `transcript`, `trigger_event`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] language_code
           #   @return [::String]
           #     The language that was triggered during intent detection.
@@ -988,9 +1017,7 @@ module Google
           # @!attribute [rw] data_store_connection_signals
           #   @return [::Google::Cloud::Dialogflow::CX::V3::DataStoreConnectionSignals]
           #     Optional. Data store connection feature output signals.
-          #     Filled only when data stores are involved in serving the query and
-          #     DetectIntentRequest.populate_data_store_connection_signals is set to true
-          #     in the request.
+          #     Filled only when data stores are involved in serving the query.
           class QueryResult
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -1174,20 +1201,28 @@ module Google
           #   @return [::String]
           #     If {::Google::Cloud::Dialogflow::CX::V3::TextInput natural language text} was
           #     provided as input, this field will contain a copy of the text.
+          #
+          #     Note: The following fields are mutually exclusive: `text`, `trigger_intent`, `transcript`, `trigger_event`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] trigger_intent
           #   @return [::String]
           #     If an {::Google::Cloud::Dialogflow::CX::V3::IntentInput intent} was provided as
           #     input, this field will contain a copy of the intent identifier. Format:
           #     `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>/intents/<IntentID>`.
+          #
+          #     Note: The following fields are mutually exclusive: `trigger_intent`, `text`, `transcript`, `trigger_event`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] transcript
           #   @return [::String]
           #     If [natural language speech
           #     audio][google.cloud.dialogflow.cx.v3.AudioInput] was provided as input,
           #     this field will contain the transcript for the audio.
+          #
+          #     Note: The following fields are mutually exclusive: `transcript`, `text`, `trigger_intent`, `trigger_event`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] trigger_event
           #   @return [::String]
           #     If an {::Google::Cloud::Dialogflow::CX::V3::EventInput event} was provided as
           #     input, this field will contain a copy of the event name.
+          #
+          #     Note: The following fields are mutually exclusive: `trigger_event`, `text`, `trigger_intent`, `transcript`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] matches
           #   @return [::Array<::Google::Cloud::Dialogflow::CX::V3::Match>]
           #     Match results, if more than one, ordered descendingly by the confidence

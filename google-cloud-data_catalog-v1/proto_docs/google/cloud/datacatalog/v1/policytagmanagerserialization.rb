@@ -89,9 +89,13 @@ module Google
         # @!attribute [rw] inline_source
         #   @return [::Google::Cloud::DataCatalog::V1::InlineSource]
         #     Inline source taxonomy to import.
+        #
+        #     Note: The following fields are mutually exclusive: `inline_source`, `cross_regional_source`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] cross_regional_source
         #   @return [::Google::Cloud::DataCatalog::V1::CrossRegionalSource]
         #     Cross-regional source taxonomy to import.
+        #
+        #     Note: The following fields are mutually exclusive: `cross_regional_source`, `inline_source`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         class ImportTaxonomiesRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

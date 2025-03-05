@@ -1,5 +1,24 @@
 # Release History
 
+### 2.0.0 (2025-02-13)
+
+### ⚠ BREAKING CHANGES
+
+* Removed dependency on google-cloud-speech-v1p1beta1
+* Updated to use google-cloud-speech-v2 by default ([#28982](https://github.com/googleapis/google-cloud-ruby/issues/28982))
+
+#### Features
+
+* Removed dependency on google-cloud-speech-v1p1beta1 
+* Updated to use google-cloud-speech-v2 by default ([#28982](https://github.com/googleapis/google-cloud-ruby/issues/28982)) 
+
+### 1.8.0 (2025-01-29)
+
+#### Features
+
+* Provide methods to determine whether services are available with the currently installed versioned client ([#28532](https://github.com/googleapis/google-cloud-ruby/issues/28532)) 
+* Update Ruby version requirement to 3.0 
+
 ### 1.7.1 (2024-08-08)
 
 #### Documentation

@@ -56,11 +56,14 @@ module Google
                 self.service_name = 'google.spanner.admin.instance.v1.InstanceAdmin'
 
                 # Lists the supported instance configurations for a given project.
+                #
+                # Returns both Google-managed configurations and user-managed
+                # configurations.
                 rpc :ListInstanceConfigs, ::Google::Cloud::Spanner::Admin::Instance::V1::ListInstanceConfigsRequest, ::Google::Cloud::Spanner::Admin::Instance::V1::ListInstanceConfigsResponse
                 # Gets information about a particular instance configuration.
                 rpc :GetInstanceConfig, ::Google::Cloud::Spanner::Admin::Instance::V1::GetInstanceConfigRequest, ::Google::Cloud::Spanner::Admin::Instance::V1::InstanceConfig
                 # Creates an instance configuration and begins preparing it to be used. The
-                # returned [long-running operation][google.longrunning.Operation]
+                # returned long-running operation
                 # can be used to track the progress of preparing the new
                 # instance configuration. The instance configuration name is assigned by the
                 # caller. If the named instance configuration already exists,
@@ -87,13 +90,13 @@ module Google
                 #   [reconciling][google.spanner.admin.instance.v1.InstanceConfig.reconciling]
                 #   field becomes false. Its state becomes `READY`.
                 #
-                # The returned [long-running operation][google.longrunning.Operation] will
+                # The returned long-running operation will
                 # have a name of the format
                 # `<instance_config_name>/operations/<operation_id>` and can be used to track
                 # creation of the instance configuration. The
-                # [metadata][google.longrunning.Operation.metadata] field type is
+                # metadata field type is
                 # [CreateInstanceConfigMetadata][google.spanner.admin.instance.v1.CreateInstanceConfigMetadata].
-                # The [response][google.longrunning.Operation.response] field type is
+                # The response field type is
                 # [InstanceConfig][google.spanner.admin.instance.v1.InstanceConfig], if
                 # successful.
                 #
@@ -102,7 +105,7 @@ module Google
                 # [parent][google.spanner.admin.instance.v1.CreateInstanceConfigRequest.parent].
                 rpc :CreateInstanceConfig, ::Google::Cloud::Spanner::Admin::Instance::V1::CreateInstanceConfigRequest, ::Google::Longrunning::Operation
                 # Updates an instance configuration. The returned
-                # [long-running operation][google.longrunning.Operation] can be used to track
+                # long-running operation can be used to track
                 # the progress of updating the instance. If the named instance configuration
                 # does not exist, returns `NOT_FOUND`.
                 #
@@ -133,13 +136,13 @@ module Google
                 #   [reconciling][google.spanner.admin.instance.v1.InstanceConfig.reconciling]
                 #   field becomes false.
                 #
-                # The returned [long-running operation][google.longrunning.Operation] will
+                # The returned long-running operation will
                 # have a name of the format
                 # `<instance_config_name>/operations/<operation_id>` and can be used to track
                 # the instance configuration modification.  The
-                # [metadata][google.longrunning.Operation.metadata] field type is
+                # metadata field type is
                 # [UpdateInstanceConfigMetadata][google.spanner.admin.instance.v1.UpdateInstanceConfigMetadata].
-                # The [response][google.longrunning.Operation.response] field type is
+                # The response field type is
                 # [InstanceConfig][google.spanner.admin.instance.v1.InstanceConfig], if
                 # successful.
                 #
@@ -155,12 +158,12 @@ module Google
                 # Authorization requires `spanner.instanceConfigs.delete` permission on
                 # the resource [name][google.spanner.admin.instance.v1.InstanceConfig.name].
                 rpc :DeleteInstanceConfig, ::Google::Cloud::Spanner::Admin::Instance::V1::DeleteInstanceConfigRequest, ::Google::Protobuf::Empty
-                # Lists the user-managed instance configuration [long-running
-                # operations][google.longrunning.Operation] in the given project. An instance
+                # Lists the user-managed instance configuration long-running
+                # operations in the given project. An instance
                 # configuration operation has a name of the form
                 # `projects/<project>/instanceConfigs/<instance_config>/operations/<operation>`.
                 # The long-running operation
-                # [metadata][google.longrunning.Operation.metadata] field type
+                # metadata field type
                 # `metadata.type_url` describes the type of the metadata. Operations returned
                 # include those that have completed/failed/canceled within the last 7 days,
                 # and pending operations. Operations returned are ordered by
@@ -174,7 +177,7 @@ module Google
                 # Gets information about a particular instance.
                 rpc :GetInstance, ::Google::Cloud::Spanner::Admin::Instance::V1::GetInstanceRequest, ::Google::Cloud::Spanner::Admin::Instance::V1::Instance
                 # Creates an instance and begins preparing it to begin serving. The
-                # returned [long-running operation][google.longrunning.Operation]
+                # returned long-running operation
                 # can be used to track the progress of preparing the new
                 # instance. The instance name is assigned by the caller. If the
                 # named instance already exists, `CreateInstance` returns
@@ -200,17 +203,16 @@ module Google
                 #   * The instance's allocated resource levels are readable via the API.
                 #   * The instance's state becomes `READY`.
                 #
-                # The returned [long-running operation][google.longrunning.Operation] will
+                # The returned long-running operation will
                 # have a name of the format `<instance_name>/operations/<operation_id>` and
                 # can be used to track creation of the instance.  The
-                # [metadata][google.longrunning.Operation.metadata] field type is
+                # metadata field type is
                 # [CreateInstanceMetadata][google.spanner.admin.instance.v1.CreateInstanceMetadata].
-                # The [response][google.longrunning.Operation.response] field type is
+                # The response field type is
                 # [Instance][google.spanner.admin.instance.v1.Instance], if successful.
                 rpc :CreateInstance, ::Google::Cloud::Spanner::Admin::Instance::V1::CreateInstanceRequest, ::Google::Longrunning::Operation
                 # Updates an instance, and begins allocating or releasing resources
-                # as requested. The returned [long-running
-                # operation][google.longrunning.Operation] can be used to track the
+                # as requested. The returned long-running operation can be used to track the
                 # progress of updating the instance. If the named instance does not
                 # exist, returns `NOT_FOUND`.
                 #
@@ -238,12 +240,12 @@ module Google
                 #     tables.
                 #   * The instance's new resource levels are readable via the API.
                 #
-                # The returned [long-running operation][google.longrunning.Operation] will
+                # The returned long-running operation will
                 # have a name of the format `<instance_name>/operations/<operation_id>` and
                 # can be used to track the instance modification.  The
-                # [metadata][google.longrunning.Operation.metadata] field type is
+                # metadata field type is
                 # [UpdateInstanceMetadata][google.spanner.admin.instance.v1.UpdateInstanceMetadata].
-                # The [response][google.longrunning.Operation.response] field type is
+                # The response field type is
                 # [Instance][google.spanner.admin.instance.v1.Instance], if successful.
                 #
                 # Authorization requires `spanner.instances.update` permission on
@@ -283,7 +285,7 @@ module Google
                 # Gets information about a particular instance partition.
                 rpc :GetInstancePartition, ::Google::Cloud::Spanner::Admin::Instance::V1::GetInstancePartitionRequest, ::Google::Cloud::Spanner::Admin::Instance::V1::InstancePartition
                 # Creates an instance partition and begins preparing it to be used. The
-                # returned [long-running operation][google.longrunning.Operation]
+                # returned long-running operation
                 # can be used to track the progress of preparing the new instance partition.
                 # The instance partition name is assigned by the caller. If the named
                 # instance partition already exists, `CreateInstancePartition` returns
@@ -310,13 +312,13 @@ module Google
                 #     API.
                 #   * The instance partition's state becomes `READY`.
                 #
-                # The returned [long-running operation][google.longrunning.Operation] will
+                # The returned long-running operation will
                 # have a name of the format
                 # `<instance_partition_name>/operations/<operation_id>` and can be used to
                 # track creation of the instance partition.  The
-                # [metadata][google.longrunning.Operation.metadata] field type is
+                # metadata field type is
                 # [CreateInstancePartitionMetadata][google.spanner.admin.instance.v1.CreateInstancePartitionMetadata].
-                # The [response][google.longrunning.Operation.response] field type is
+                # The response field type is
                 # [InstancePartition][google.spanner.admin.instance.v1.InstancePartition], if
                 # successful.
                 rpc :CreateInstancePartition, ::Google::Cloud::Spanner::Admin::Instance::V1::CreateInstancePartitionRequest, ::Google::Longrunning::Operation
@@ -329,8 +331,7 @@ module Google
                 # [name][google.spanner.admin.instance.v1.InstancePartition.name].
                 rpc :DeleteInstancePartition, ::Google::Cloud::Spanner::Admin::Instance::V1::DeleteInstancePartitionRequest, ::Google::Protobuf::Empty
                 # Updates an instance partition, and begins allocating or releasing resources
-                # as requested. The returned [long-running
-                # operation][google.longrunning.Operation] can be used to track the
+                # as requested. The returned long-running operation can be used to track the
                 # progress of updating the instance partition. If the named instance
                 # partition does not exist, returns `NOT_FOUND`.
                 #
@@ -359,13 +360,13 @@ module Google
                 #     partition's tables.
                 #   * The instance partition's new resource levels are readable via the API.
                 #
-                # The returned [long-running operation][google.longrunning.Operation] will
+                # The returned long-running operation will
                 # have a name of the format
                 # `<instance_partition_name>/operations/<operation_id>` and can be used to
                 # track the instance partition modification. The
-                # [metadata][google.longrunning.Operation.metadata] field type is
+                # metadata field type is
                 # [UpdateInstancePartitionMetadata][google.spanner.admin.instance.v1.UpdateInstancePartitionMetadata].
-                # The [response][google.longrunning.Operation.response] field type is
+                # The response field type is
                 # [InstancePartition][google.spanner.admin.instance.v1.InstancePartition], if
                 # successful.
                 #
@@ -373,12 +374,11 @@ module Google
                 # the resource
                 # [name][google.spanner.admin.instance.v1.InstancePartition.name].
                 rpc :UpdateInstancePartition, ::Google::Cloud::Spanner::Admin::Instance::V1::UpdateInstancePartitionRequest, ::Google::Longrunning::Operation
-                # Lists instance partition [long-running
-                # operations][google.longrunning.Operation] in the given instance.
+                # Lists instance partition long-running operations in the given instance.
                 # An instance partition operation has a name of the form
                 # `projects/<project>/instances/<instance>/instancePartitions/<instance_partition>/operations/<operation>`.
                 # The long-running operation
-                # [metadata][google.longrunning.Operation.metadata] field type
+                # metadata field type
                 # `metadata.type_url` describes the type of the metadata. Operations returned
                 # include those that have completed/failed/canceled within the last 7 days,
                 # and pending operations. Operations returned are ordered by
@@ -390,7 +390,7 @@ module Google
                 # [parent][google.spanner.admin.instance.v1.ListInstancePartitionOperationsRequest.parent].
                 rpc :ListInstancePartitionOperations, ::Google::Cloud::Spanner::Admin::Instance::V1::ListInstancePartitionOperationsRequest, ::Google::Cloud::Spanner::Admin::Instance::V1::ListInstancePartitionOperationsResponse
                 # Moves an instance to the target instance configuration. You can use the
-                # returned [long-running operation][google.longrunning.Operation] to track
+                # returned long-running operation to track
                 # the progress of moving the instance.
                 #
                 # `MoveInstance` returns `FAILED_PRECONDITION` if the instance meets any of
@@ -421,13 +421,13 @@ module Google
                 #     transaction abort rate. However, moving an instance doesn't cause any
                 #     downtime.
                 #
-                # The returned [long-running operation][google.longrunning.Operation] has
+                # The returned long-running operation has
                 # a name of the format
                 # `<instance_name>/operations/<operation_id>` and can be used to track
                 # the move instance operation. The
-                # [metadata][google.longrunning.Operation.metadata] field type is
+                # metadata field type is
                 # [MoveInstanceMetadata][google.spanner.admin.instance.v1.MoveInstanceMetadata].
-                # The [response][google.longrunning.Operation.response] field type is
+                # The response field type is
                 # [Instance][google.spanner.admin.instance.v1.Instance],
                 # if successful.
                 # Cancelling the operation sets its metadata's

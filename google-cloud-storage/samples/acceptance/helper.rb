@@ -22,6 +22,7 @@ require "net/http"
 require "time"
 require "securerandom"
 require "uri"
+require "ostruct"
 
 
 def fixture_bucket

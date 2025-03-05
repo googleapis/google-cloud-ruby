@@ -364,7 +364,13 @@ module Google
             #     * `start_time`
             #     * `end_time`
             #
-            #     For example, `space.meeting_code = "abc-mnop-xyz"`.
+            #     For example, consider the following filters:
+            #
+            #     * `space.name = "spaces/NAME"`
+            #     * `space.meeting_code = "abc-mnop-xyz"`
+            #     * `start_time>="2024-01-01T00:00:00.000Z" AND
+            #     start_time<="2024-01-02T00:00:00.000Z"`
+            #     * `end_time IS NULL`
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Gapic::PagedEnumerable<::Google::Apps::Meet::V2::ConferenceRecord>]
@@ -1432,6 +1438,13 @@ module Google
             #    *  (`GRPC::Core::Channel`) a gRPC channel with included credentials
             #    *  (`GRPC::Core::ChannelCredentials`) a gRPC credentails object
             #    *  (`nil`) indicating no credentials
+            #
+            #   Warning: If you accept a credential configuration (JSON file or Hash) from an
+            #   external source for authentication to Google Cloud, you must validate it before
+            #   providing it to a Google API client library. Providing an unvalidated credential
+            #   configuration to Google APIs can compromise the security of your systems and data.
+            #   For more information, refer to [Validate credential configurations from external
+            #   sources](https://cloud.google.com/docs/authentication/external/externally-sourced-credentials).
             #   @return [::Object]
             # @!attribute [rw] scope
             #   The OAuth scopes

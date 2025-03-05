@@ -64,6 +64,11 @@ module Google
             rpc :CreateVehicle, ::Google::Maps::FleetEngine::V1::CreateVehicleRequest, ::Google::Maps::FleetEngine::V1::Vehicle
             # Returns a vehicle from the Fleet Engine.
             rpc :GetVehicle, ::Google::Maps::FleetEngine::V1::GetVehicleRequest, ::Google::Maps::FleetEngine::V1::Vehicle
+            # Deletes a Vehicle from the Fleet Engine.
+            #
+            # Returns FAILED_PRECONDITION if the Vehicle has active Trips.
+            # assigned to it.
+            rpc :DeleteVehicle, ::Google::Maps::FleetEngine::V1::DeleteVehicleRequest, ::Google::Protobuf::Empty
             # Writes updated vehicle data to the Fleet Engine.
             #
             # When updating a `Vehicle`, the following fields cannot be updated since

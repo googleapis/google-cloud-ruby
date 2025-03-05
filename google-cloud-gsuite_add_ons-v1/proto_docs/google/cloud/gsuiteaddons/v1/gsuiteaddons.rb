@@ -21,10 +21,10 @@ module Google
   module Cloud
     module GSuiteAddOns
       module V1
-        # Request message to get Google Workspace Add-ons authorization information.
+        # Request message to get Google Workspace add-ons authorization information.
         # @!attribute [rw] name
         #   @return [::String]
-        #     Required. Name of the project for which to get the Google Workspace Add-ons
+        #     Required. Name of the project for which to get the Google Workspace add-ons
         #     authorization information.
         #
         #     Example: `projects/my_project/authorization`.
@@ -188,7 +188,7 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # A Google Workspace Add-on deployment
+        # A Google Workspace add-on deployment
         # @!attribute [rw] name
         #   @return [::String]
         #     The deployment resource name.
@@ -199,7 +199,7 @@ module Google
         #     user before executing an add-on endpoint.
         # @!attribute [rw] add_ons
         #   @return [::Google::Cloud::GSuiteAddOns::V1::AddOns]
-        #     The Google Workspace Add-on configuration.
+        #     The Google Workspace add-on configuration.
         # @!attribute [rw] etag
         #   @return [::String]
         #     This value is computed by the server based on the version of the
@@ -210,10 +210,10 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # A Google Workspace Add-on configuration.
+        # A Google Workspace add-on configuration.
         # @!attribute [rw] common
         #   @return [::Google::Apps::Script::Type::CommonAddOnManifest]
-        #     Configuration that is common across all Google Workspace Add-ons.
+        #     Configuration that is common across all Google Workspace add-ons.
         # @!attribute [rw] gmail
         #   @return [::Google::Apps::Script::Type::Gmail::GmailAddOnManifest]
         #     Gmail add-on configuration.

@@ -114,6 +114,46 @@ module Google
               end
 
               ##
+              # Baseline implementation for the update_css_product_input REST call
+              #
+              # @param request_pb [::Google::Shopping::Css::V1::UpdateCssProductInputRequest]
+              #   A request object representing the call parameters. Required.
+              # @param options [::Gapic::CallOptions]
+              #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Shopping::Css::V1::CssProductInput]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Shopping::Css::V1::CssProductInput]
+              #   A result object deserialized from the server's reply
+              def update_css_product_input request_pb, options = nil
+                raise ::ArgumentError, "request must be provided" if request_pb.nil?
+
+                verb, uri, query_string_params, body = ServiceStub.transcode_update_css_product_input_request request_pb
+                query_string_params = if query_string_params.any?
+                                        query_string_params.to_h { |p| p.split "=", 2 }
+                                      else
+                                        {}
+                                      end
+
+                response = @client_stub.make_http_request(
+                  verb,
+                  uri: uri,
+                  body: body || "",
+                  params: query_string_params,
+                  method_name: "update_css_product_input",
+                  options: options
+                )
+                operation = ::Gapic::Rest::TransportOperation.new response
+                result = ::Google::Shopping::Css::V1::CssProductInput.decode_json response.body, ignore_unknown_fields: true
+                catch :response do
+                  yield result, operation if block_given?
+                  result
+                end
+              end
+
+              ##
               # Baseline implementation for the delete_css_product_input REST call
               #
               # @param request_pb [::Google::Shopping::Css::V1::DeleteCssProductInputRequest]
@@ -170,6 +210,28 @@ module Google
                                                           body: "css_product_input",
                                                           matches: [
                                                             ["parent", %r{^accounts/[^/]+/?$}, false]
+                                                          ]
+                                                        )
+                transcoder.transcode request_pb
+              end
+
+              ##
+              # @private
+              #
+              # GRPC transcoding helper method for the update_css_product_input REST call
+              #
+              # @param request_pb [::Google::Shopping::Css::V1::UpdateCssProductInputRequest]
+              #   A request object representing the call parameters. Required.
+              # @return [Array(String, [String, nil], Hash{String => String})]
+              #   Uri, Body, Query string parameters
+              def self.transcode_update_css_product_input_request request_pb
+                transcoder = Gapic::Rest::GrpcTranscoder.new
+                                                        .with_bindings(
+                                                          uri_method: :patch,
+                                                          uri_template: "/v1/{css_product_input.name}",
+                                                          body: "css_product_input",
+                                                          matches: [
+                                                            ["css_product_input.name", %r{^accounts/[^/]+/cssProductInputs/[^/]+/?$}, false]
                                                           ]
                                                         )
                 transcoder.transcode request_pb

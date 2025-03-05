@@ -50,6 +50,9 @@ class ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::ClientP
 
       path = client.analysis_path project: "value0", location: "value1", conversation: "value2", analysis: "value3"
       assert_equal "projects/value0/locations/value1/conversations/value2/analyses/value3", path
+
+      path = client.analysis_path project: "value0", location: "value1", authorized_view_set: "value2", authorized_view: "value3", conversation: "value4", analysis: "value5"
+      assert_equal "projects/value0/locations/value1/authorizedViewSets/value2/authorizedViews/value3/conversations/value4/analyses/value5", path
     end
   end
 
@@ -74,6 +77,9 @@ class ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::ClientP
 
       path = client.conversation_path project: "value0", location: "value1", conversation: "value2"
       assert_equal "projects/value0/locations/value1/conversations/value2", path
+
+      path = client.conversation_path project: "value0", location: "value1", authorized_view_set: "value2", authorized_view: "value3", conversation: "value4"
+      assert_equal "projects/value0/locations/value1/authorizedViewSets/value2/authorizedViews/value3/conversations/value4", path
     end
   end
 
@@ -110,6 +116,9 @@ class ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::ClientP
 
       path = client.feedback_label_path project: "value0", location: "value1", conversation: "value2", feedback_label: "value3"
       assert_equal "projects/value0/locations/value1/conversations/value2/feedbackLabels/value3", path
+
+      path = client.feedback_label_path project: "value0", location: "value1", authorized_view_set: "value2", authorized_view: "value3", conversation: "value4", feedback_label: "value5"
+      assert_equal "projects/value0/locations/value1/authorizedViewSets/value2/authorizedViews/value3/conversations/value4/feedbackLabels/value5", path
     end
   end
 

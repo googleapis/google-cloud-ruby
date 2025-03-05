@@ -29,10 +29,14 @@ module Google
         #   @return [::Google::Cloud::DataCatalog::V1::ViewSpec]
         #     Table view specification. Populated only if
         #     the `table_source_type` is `BIGQUERY_VIEW`.
+        #
+        #     Note: The following fields are mutually exclusive: `view_spec`, `table_spec`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] table_spec
         #   @return [::Google::Cloud::DataCatalog::V1::TableSpec]
         #     Specification of a BigQuery table. Populated only if
         #     the `table_source_type` is `BIGQUERY_TABLE`.
+        #
+        #     Note: The following fields are mutually exclusive: `table_spec`, `view_spec`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         class BigQueryTableSpec
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

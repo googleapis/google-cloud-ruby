@@ -44,12 +44,18 @@ module Google
         # @!attribute [rw] gcp_metadata
         #   @return [::Google::Cloud::SecurityCenter::V2::GcpMetadata]
         #     The GCP metadata associated with the finding.
+        #
+        #     Note: The following fields are mutually exclusive: `gcp_metadata`, `aws_metadata`, `azure_metadata`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] aws_metadata
         #   @return [::Google::Cloud::SecurityCenter::V2::AwsMetadata]
         #     The AWS metadata associated with the finding.
+        #
+        #     Note: The following fields are mutually exclusive: `aws_metadata`, `gcp_metadata`, `azure_metadata`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] azure_metadata
         #   @return [::Google::Cloud::SecurityCenter::V2::AzureMetadata]
         #     The Azure metadata associated with the finding.
+        #
+        #     Note: The following fields are mutually exclusive: `azure_metadata`, `gcp_metadata`, `aws_metadata`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] resource_path
         #   @return [::Google::Cloud::SecurityCenter::V2::ResourcePath]
         #     Provides the path to the resource within the resource hierarchy.
@@ -169,6 +175,9 @@ module Google
         # @!attribute [rw] resource_group
         #   @return [::Google::Cloud::SecurityCenter::V2::AzureMetadata::AzureResourceGroup]
         #     The Azure resource group associated with the resource.
+        # @!attribute [rw] tenant
+        #   @return [::Google::Cloud::SecurityCenter::V2::AzureMetadata::AzureTenant]
+        #     The Azure Entra tenant associated with the resource.
         class AzureMetadata
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -200,10 +209,26 @@ module Google
           end
 
           # Represents an Azure resource group.
+          # @!attribute [rw] id
+          #   @return [::String]
+          #     The ID of the Azure resource group.
           # @!attribute [rw] name
           #   @return [::String]
           #     The name of the Azure resource group. This is not a UUID.
           class AzureResourceGroup
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Represents a Microsoft Entra tenant.
+          # @!attribute [rw] id
+          #   @return [::String]
+          #     The ID of the Microsoft Entra tenant, for example,
+          #     "a11aaa11-aa11-1aa1-11aa-1aaa11a".
+          # @!attribute [rw] display_name
+          #   @return [::String]
+          #     The display name of the Azure tenant.
+          class AzureTenant
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end

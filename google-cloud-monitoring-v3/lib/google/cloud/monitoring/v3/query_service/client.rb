@@ -184,7 +184,12 @@ module Google
             # Service calls
 
             ##
-            # Queries time series using Monitoring Query Language.
+            # Queries time series by using Monitoring Query Language (MQL). We recommend
+            # using PromQL instead of MQL. For more information about the status of MQL,
+            # see the [MQL deprecation
+            # notice](https://cloud.google.com/stackdriver/docs/deprecations/mql).
+            #
+            # @deprecated This method is deprecated and may be removed in the next major version update.
             #
             # @overload query_time_series(request, options = nil)
             #   Pass arguments to `query_time_series` via a request object, either of type
@@ -332,6 +337,13 @@ module Google
             #    *  (`GRPC::Core::Channel`) a gRPC channel with included credentials
             #    *  (`GRPC::Core::ChannelCredentials`) a gRPC credentails object
             #    *  (`nil`) indicating no credentials
+            #
+            #   Warning: If you accept a credential configuration (JSON file or Hash) from an
+            #   external source for authentication to Google Cloud, you must validate it before
+            #   providing it to a Google API client library. Providing an unvalidated credential
+            #   configuration to Google APIs can compromise the security of your systems and data.
+            #   For more information, refer to [Validate credential configurations from external
+            #   sources](https://cloud.google.com/docs/authentication/external/externally-sourced-credentials).
             #   @return [::Object]
             # @!attribute [rw] scope
             #   The OAuth scopes

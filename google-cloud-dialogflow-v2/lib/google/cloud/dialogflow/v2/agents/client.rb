@@ -863,8 +863,12 @@ module Google
             #     have read permissions for the object. For more information, see
             #     [Dialogflow access
             #     control](https://cloud.google.com/dialogflow/cx/docs/concept/access-control#storage).
+            #
+            #     Note: The following fields are mutually exclusive: `agent_uri`, `agent_content`. If a field in that set is populated, all other fields in the set will automatically be cleared.
             #   @param agent_content [::String]
             #     Zip compressed raw byte content for agent.
+            #
+            #     Note: The following fields are mutually exclusive: `agent_content`, `agent_uri`. If a field in that set is populated, all other fields in the set will automatically be cleared.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Gapic::Operation]
@@ -993,8 +997,12 @@ module Google
             #     have read permissions for the object. For more information, see
             #     [Dialogflow access
             #     control](https://cloud.google.com/dialogflow/cx/docs/concept/access-control#storage).
+            #
+            #     Note: The following fields are mutually exclusive: `agent_uri`, `agent_content`. If a field in that set is populated, all other fields in the set will automatically be cleared.
             #   @param agent_content [::String]
             #     Zip compressed raw byte content for agent.
+            #
+            #     Note: The following fields are mutually exclusive: `agent_content`, `agent_uri`. If a field in that set is populated, all other fields in the set will automatically be cleared.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Gapic::Operation]
@@ -1206,6 +1214,13 @@ module Google
             #    *  (`GRPC::Core::Channel`) a gRPC channel with included credentials
             #    *  (`GRPC::Core::ChannelCredentials`) a gRPC credentails object
             #    *  (`nil`) indicating no credentials
+            #
+            #   Warning: If you accept a credential configuration (JSON file or Hash) from an
+            #   external source for authentication to Google Cloud, you must validate it before
+            #   providing it to a Google API client library. Providing an unvalidated credential
+            #   configuration to Google APIs can compromise the security of your systems and data.
+            #   For more information, refer to [Validate credential configurations from external
+            #   sources](https://cloud.google.com/docs/authentication/external/externally-sourced-credentials).
             #   @return [::Object]
             # @!attribute [rw] scope
             #   The OAuth scopes

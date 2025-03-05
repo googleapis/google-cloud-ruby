@@ -43,6 +43,9 @@ module Google
             rpc :UpdateStoragePool, ::Google::Cloud::NetApp::V1::UpdateStoragePoolRequest, ::Google::Longrunning::Operation
             # Warning! This operation will permanently delete the storage pool.
             rpc :DeleteStoragePool, ::Google::Cloud::NetApp::V1::DeleteStoragePoolRequest, ::Google::Longrunning::Operation
+            # ValidateDirectoryService does a connectivity check for a directory service
+            # policy attached to the storage pool.
+            rpc :ValidateDirectoryService, ::Google::Cloud::NetApp::V1::ValidateDirectoryServiceRequest, ::Google::Longrunning::Operation
             # This operation will switch the active/replica zone for a regional
             # storagePool.
             rpc :SwitchActiveReplicaZone, ::Google::Cloud::NetApp::V1::SwitchActiveReplicaZoneRequest, ::Google::Longrunning::Operation
@@ -151,6 +154,16 @@ module Google
             rpc :UpdateBackupPolicy, ::Google::Cloud::NetApp::V1::UpdateBackupPolicyRequest, ::Google::Longrunning::Operation
             # Warning! This operation will permanently delete the backup policy.
             rpc :DeleteBackupPolicy, ::Google::Cloud::NetApp::V1::DeleteBackupPolicyRequest, ::Google::Longrunning::Operation
+            # Returns list of all quota rules in a location.
+            rpc :ListQuotaRules, ::Google::Cloud::NetApp::V1::ListQuotaRulesRequest, ::Google::Cloud::NetApp::V1::ListQuotaRulesResponse
+            # Returns details of the specified quota rule.
+            rpc :GetQuotaRule, ::Google::Cloud::NetApp::V1::GetQuotaRuleRequest, ::Google::Cloud::NetApp::V1::QuotaRule
+            # Creates a new quota rule.
+            rpc :CreateQuotaRule, ::Google::Cloud::NetApp::V1::CreateQuotaRuleRequest, ::Google::Longrunning::Operation
+            # Updates a quota rule.
+            rpc :UpdateQuotaRule, ::Google::Cloud::NetApp::V1::UpdateQuotaRuleRequest, ::Google::Longrunning::Operation
+            # Deletes a quota rule.
+            rpc :DeleteQuotaRule, ::Google::Cloud::NetApp::V1::DeleteQuotaRuleRequest, ::Google::Longrunning::Operation
           end
 
           Stub = Service.rpc_stub_class

@@ -1,5 +1,22 @@
 # Changelog
 
+### 0.5.0 (2025-03-04)
+
+#### Features
+
+* Support for recording vehicle locations that previously could not be sent to the server 
+* Support for the delete_trip and delete_vehicle RPCs 
+
+### 0.4.0 (2025-01-29)
+
+#### Features
+
+* Update Ruby version requirement to 3.0 
+#### Documentation
+
+* Clarify behavior of protobuf message fields that are part of mutually-exclusive sets 
+* Include note about validating externally-provided credentials 
+
 ### 0.3.0 (2024-12-10)
 
 #### Features

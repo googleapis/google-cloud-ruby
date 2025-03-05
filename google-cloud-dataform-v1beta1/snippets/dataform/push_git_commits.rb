@@ -41,7 +41,7 @@ def push_git_commits
   # Call the push_git_commits method.
   result = client.push_git_commits request
 
-  # The returned object is of type Google::Protobuf::Empty.
+  # The returned object is of type Google::Cloud::Dataform::V1beta1::PushGitCommitsResponse.
   p result
 end
 # [END dataform_v1beta1_generated_Dataform_PushGitCommits_sync]

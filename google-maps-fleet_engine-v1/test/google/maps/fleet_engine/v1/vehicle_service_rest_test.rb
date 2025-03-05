@@ -192,6 +192,61 @@ class ::Google::Maps::FleetEngine::V1::VehicleService::Rest::ClientTest < Minite
     end
   end
 
+  def test_delete_vehicle
+    # Create test objects.
+    client_result = ::Google::Protobuf::Empty.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    header = {}
+    name = "hello world"
+
+    delete_vehicle_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Maps::FleetEngine::V1::VehicleService::Rest::ServiceStub.stub :transcode_delete_vehicle_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, delete_vehicle_client_stub do
+        # Create client
+        client = ::Google::Maps::FleetEngine::V1::VehicleService::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.delete_vehicle({ header: header, name: name }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.delete_vehicle header: header, name: name do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.delete_vehicle ::Google::Maps::FleetEngine::V1::DeleteVehicleRequest.new(header: header, name: name) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.delete_vehicle({ header: header, name: name }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.delete_vehicle(::Google::Maps::FleetEngine::V1::DeleteVehicleRequest.new(header: header, name: name), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, delete_vehicle_client_stub.call_count
+      end
+    end
+  end
+
   def test_update_vehicle
     # Create test objects.
     client_result = ::Google::Maps::FleetEngine::V1::Vehicle.new

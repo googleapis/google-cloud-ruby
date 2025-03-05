@@ -26,15 +26,23 @@ module Google
         # @!attribute [r] ml_engine_model_version
         #   @return [::Google::Cloud::AIPlatform::V1::MigratableResource::MlEngineModelVersion]
         #     Output only. Represents one Version in ml.googleapis.com.
+        #
+        #     Note: The following fields are mutually exclusive: `ml_engine_model_version`, `automl_model`, `automl_dataset`, `data_labeling_dataset`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [r] automl_model
         #   @return [::Google::Cloud::AIPlatform::V1::MigratableResource::AutomlModel]
         #     Output only. Represents one Model in automl.googleapis.com.
+        #
+        #     Note: The following fields are mutually exclusive: `automl_model`, `ml_engine_model_version`, `automl_dataset`, `data_labeling_dataset`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [r] automl_dataset
         #   @return [::Google::Cloud::AIPlatform::V1::MigratableResource::AutomlDataset]
         #     Output only. Represents one Dataset in automl.googleapis.com.
+        #
+        #     Note: The following fields are mutually exclusive: `automl_dataset`, `ml_engine_model_version`, `automl_model`, `data_labeling_dataset`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [r] data_labeling_dataset
         #   @return [::Google::Cloud::AIPlatform::V1::MigratableResource::DataLabelingDataset]
         #     Output only. Represents one Dataset in datalabeling.googleapis.com.
+        #
+        #     Note: The following fields are mutually exclusive: `data_labeling_dataset`, `ml_engine_model_version`, `automl_model`, `automl_dataset`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [r] last_migrate_time
         #   @return [::Google::Protobuf::Timestamp]
         #     Output only. Timestamp when the last migration attempt on this

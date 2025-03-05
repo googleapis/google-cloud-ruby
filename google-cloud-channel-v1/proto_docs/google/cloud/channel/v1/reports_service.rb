@@ -322,24 +322,36 @@ module Google
         # @!attribute [rw] string_value
         #   @return [::String]
         #     A value of type `string`.
+        #
+        #     Note: The following fields are mutually exclusive: `string_value`, `int_value`, `decimal_value`, `money_value`, `date_value`, `date_time_value`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] int_value
         #   @return [::Integer]
         #     A value of type `int`.
+        #
+        #     Note: The following fields are mutually exclusive: `int_value`, `string_value`, `decimal_value`, `money_value`, `date_value`, `date_time_value`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] decimal_value
         #   @return [::Google::Type::Decimal]
         #     A value of type `google.type.Decimal`, representing non-integer numeric
         #     values.
+        #
+        #     Note: The following fields are mutually exclusive: `decimal_value`, `string_value`, `int_value`, `money_value`, `date_value`, `date_time_value`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] money_value
         #   @return [::Google::Type::Money]
         #     A value of type `google.type.Money` (currency code, whole units, decimal
         #     units).
+        #
+        #     Note: The following fields are mutually exclusive: `money_value`, `string_value`, `int_value`, `decimal_value`, `date_value`, `date_time_value`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] date_value
         #   @return [::Google::Type::Date]
         #     A value of type `google.type.Date` (year, month, day).
+        #
+        #     Note: The following fields are mutually exclusive: `date_value`, `string_value`, `int_value`, `decimal_value`, `money_value`, `date_time_value`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] date_time_value
         #   @return [::Google::Type::DateTime]
         #     A value of type `google.type.DateTime` (year, month, day, hour, minute,
         #     second, and UTC offset or timezone.)
+        #
+        #     Note: The following fields are mutually exclusive: `date_time_value`, `string_value`, `int_value`, `decimal_value`, `money_value`, `date_value`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         class ReportValue
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

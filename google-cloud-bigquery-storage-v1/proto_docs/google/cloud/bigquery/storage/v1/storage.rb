@@ -118,9 +118,13 @@ module Google
           # @!attribute [rw] avro_rows
           #   @return [::Google::Cloud::Bigquery::Storage::V1::AvroRows]
           #     Serialized row data in AVRO format.
+          #
+          #     Note: The following fields are mutually exclusive: `avro_rows`, `arrow_record_batch`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] arrow_record_batch
           #   @return [::Google::Cloud::Bigquery::Storage::V1::ArrowRecordBatch]
           #     Serialized row data in Arrow RecordBatch format.
+          #
+          #     Note: The following fields are mutually exclusive: `arrow_record_batch`, `avro_rows`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] row_count
           #   @return [::Integer]
           #     Number of serialized rows in the rows block.
@@ -134,9 +138,13 @@ module Google
           # @!attribute [r] avro_schema
           #   @return [::Google::Cloud::Bigquery::Storage::V1::AvroSchema]
           #     Output only. Avro schema.
+          #
+          #     Note: The following fields are mutually exclusive: `avro_schema`, `arrow_schema`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [r] arrow_schema
           #   @return [::Google::Cloud::Bigquery::Storage::V1::ArrowSchema]
           #     Output only. Arrow schema.
+          #
+          #     Note: The following fields are mutually exclusive: `arrow_schema`, `avro_schema`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] uncompressed_byte_size
           #   @return [::Integer]
           #     Optional. If the row data in this ReadRowsResponse is compressed, then
@@ -256,10 +264,14 @@ module Google
           # @!attribute [rw] proto_rows
           #   @return [::Google::Cloud::Bigquery::Storage::V1::AppendRowsRequest::ProtoData]
           #     Rows in proto format.
+          #
+          #     Note: The following fields are mutually exclusive: `proto_rows`, `arrow_rows`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] arrow_rows
           #   @return [::Google::Cloud::Bigquery::Storage::V1::AppendRowsRequest::ArrowData]
           #     Rows in arrow format. This is an experimental feature only selected for
           #     allowlisted customers.
+          #
+          #     Note: The following fields are mutually exclusive: `arrow_rows`, `proto_rows`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] trace_id
           #   @return [::String]
           #     Id set by client to annotate its identity. Only initial request setting is
@@ -366,6 +378,8 @@ module Google
           # @!attribute [rw] append_result
           #   @return [::Google::Cloud::Bigquery::Storage::V1::AppendRowsResponse::AppendResult]
           #     Result if the append is successful.
+          #
+          #     Note: The following fields are mutually exclusive: `append_result`, `error`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] error
           #   @return [::Google::Rpc::Status]
           #     Error returned when problems were encountered.  If present,
@@ -388,6 +402,8 @@ module Google
           #     request can be retried if previous failure is addressed.
           #
           #     INTERNAL: Indicates server side error(s) that can be retried.
+          #
+          #     Note: The following fields are mutually exclusive: `error`, `append_result`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] updated_schema
           #   @return [::Google::Cloud::Bigquery::Storage::V1::TableSchema]
           #     If backend detects a schema update, pass it to user so that user can

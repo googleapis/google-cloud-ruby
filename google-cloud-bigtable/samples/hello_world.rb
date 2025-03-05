@@ -18,26 +18,44 @@ def hello_world instance_id, table_id, column_family, column_qualifier
   # [END bigtable_hw_imports]
 
   # [START bigtable_hw_connect]
+  # These variables are used in the sample code below.
   # instance_id      = "my-instance"
   # table_id         = "my-table"
   # column_family    = "cf"
   # column_qualifier = "greeting"
 
   bigtable = Google::Cloud::Bigtable.new
+  table_client = bigtable.table_admin_client
   # [END bigtable_hw_connect]
 
   # [START bigtable_hw_create_table]
-  if bigtable.table(instance_id, table_id).exists?
+  # This is the full resource name for the table. Use this name to make admin
+  # calls for the table, such as reading or deleting the resource.
+  table_name = table_client.table_path project: bigtable.project_id,
+                                       instance: instance_id,
+                                       table: table_id
+  begin
+    # Attempt to get the table to see if it already exists
+    table_client.get_table name: table_name
     puts "#{table_id} is already exists."
     exit 0
-  else
-    table = bigtable.create_table instance_id, table_id do |column_families|
-      column_families.add(
-        column_family,
-        Google::Cloud::Bigtable::GcRule.max_versions(1)
-      )
-    end
-
+  rescue Google::Cloud::NotFoundError
+    # The table doesn't exist, so let's create it.
+    # The following is the resource name for the table's instance.
+    instance_name = table_client.instance_path project: bigtable.project_id,
+                                               instance: instance_id
+    # This is the configuration of the table's column families.
+    table_config = {
+      column_families: {
+        column_family => {
+          gc_rule: Google::Cloud::Bigtable::Admin::V2::GcRule.max_num_versions(1)
+        }
+      }
+    }
+    # Now call the API to create the table.
+    table_client.create_table parent: instance_name,
+                              table_id: table_id,
+                              table: table_config
     puts "Table #{table_id} created."
   end
   # [END bigtable_hw_create_table]
@@ -45,6 +63,9 @@ def hello_world instance_id, table_id, column_family, column_qualifier
   # [START bigtable_hw_write_rows]
   puts "Write some greetings to the table #{table_id}"
   greetings = ["Hello World!", "Hello Bigtable!", "Hello Ruby!"]
+
+  # Get a table data object for the new table we created.
+  table = bigtable.table instance_id, table_id
 
   # Insert rows one by one
   # Note: To perform multiple mutation on multiple rows use `mutate_rows`.
@@ -83,6 +104,7 @@ def hello_world instance_id, table_id, column_family, column_qualifier
 
   # [START bigtable_hw_delete_table]
   puts "Deleting the table #{table_id}"
-  table.delete
+  # Call the admin API to delete the table given its full resource path.
+  table_client.delete_table name: table_name
   # [END bigtable_hw_delete_table]
 end

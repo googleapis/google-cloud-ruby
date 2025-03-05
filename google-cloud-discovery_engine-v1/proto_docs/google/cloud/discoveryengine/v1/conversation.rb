@@ -99,9 +99,13 @@ module Google
         # @!attribute [rw] user_input
         #   @return [::Google::Cloud::DiscoveryEngine::V1::TextInput]
         #     User text input.
+        #
+        #     Note: The following fields are mutually exclusive: `user_input`, `reply`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] reply
         #   @return [::Google::Cloud::DiscoveryEngine::V1::Reply]
         #     Search reply.
+        #
+        #     Note: The following fields are mutually exclusive: `reply`, `user_input`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [r] create_time
         #   @return [::Google::Protobuf::Timestamp]
         #     Output only. Message creation timestamp.

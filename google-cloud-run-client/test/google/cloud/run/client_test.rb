@@ -42,6 +42,7 @@ class Google::Cloud::Run::ClientConstructionMinitest < Minitest::Test
   end
 
   def test_builds_grpc
+    skip unless Google::Cloud::Run.builds_available? transport: :grpc
     Gapic::ServiceStub.stub :new, DummyStub.new do
       grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
       client = Google::Cloud::Run.builds transport: :grpc do |config|
@@ -52,6 +53,7 @@ class Google::Cloud::Run::ClientConstructionMinitest < Minitest::Test
   end
 
   def test_builds_rest
+    skip unless Google::Cloud::Run.builds_available? transport: :rest
     Gapic::Rest::ClientStub.stub :new, DummyStub.new do
       client = Google::Cloud::Run.builds transport: :rest do |config|
         config.credentials = :dummy_credentials
@@ -61,6 +63,7 @@ class Google::Cloud::Run::ClientConstructionMinitest < Minitest::Test
   end
 
   def test_executions_grpc
+    skip unless Google::Cloud::Run.executions_available? transport: :grpc
     Gapic::ServiceStub.stub :new, DummyStub.new do
       grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
       client = Google::Cloud::Run.executions transport: :grpc do |config|
@@ -71,6 +74,7 @@ class Google::Cloud::Run::ClientConstructionMinitest < Minitest::Test
   end
 
   def test_executions_rest
+    skip unless Google::Cloud::Run.executions_available? transport: :rest
     Gapic::Rest::ClientStub.stub :new, DummyStub.new do
       client = Google::Cloud::Run.executions transport: :rest do |config|
         config.credentials = :dummy_credentials
@@ -80,6 +84,7 @@ class Google::Cloud::Run::ClientConstructionMinitest < Minitest::Test
   end
 
   def test_jobs_grpc
+    skip unless Google::Cloud::Run.jobs_available? transport: :grpc
     Gapic::ServiceStub.stub :new, DummyStub.new do
       grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
       client = Google::Cloud::Run.jobs transport: :grpc do |config|
@@ -90,6 +95,7 @@ class Google::Cloud::Run::ClientConstructionMinitest < Minitest::Test
   end
 
   def test_jobs_rest
+    skip unless Google::Cloud::Run.jobs_available? transport: :rest
     Gapic::Rest::ClientStub.stub :new, DummyStub.new do
       client = Google::Cloud::Run.jobs transport: :rest do |config|
         config.credentials = :dummy_credentials
@@ -99,6 +105,7 @@ class Google::Cloud::Run::ClientConstructionMinitest < Minitest::Test
   end
 
   def test_revisions_grpc
+    skip unless Google::Cloud::Run.revisions_available? transport: :grpc
     Gapic::ServiceStub.stub :new, DummyStub.new do
       grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
       client = Google::Cloud::Run.revisions transport: :grpc do |config|
@@ -109,6 +116,7 @@ class Google::Cloud::Run::ClientConstructionMinitest < Minitest::Test
   end
 
   def test_revisions_rest
+    skip unless Google::Cloud::Run.revisions_available? transport: :rest
     Gapic::Rest::ClientStub.stub :new, DummyStub.new do
       client = Google::Cloud::Run.revisions transport: :rest do |config|
         config.credentials = :dummy_credentials
@@ -118,6 +126,7 @@ class Google::Cloud::Run::ClientConstructionMinitest < Minitest::Test
   end
 
   def test_services_grpc
+    skip unless Google::Cloud::Run.services_available? transport: :grpc
     Gapic::ServiceStub.stub :new, DummyStub.new do
       grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
       client = Google::Cloud::Run.services transport: :grpc do |config|
@@ -128,6 +137,7 @@ class Google::Cloud::Run::ClientConstructionMinitest < Minitest::Test
   end
 
   def test_services_rest
+    skip unless Google::Cloud::Run.services_available? transport: :rest
     Gapic::Rest::ClientStub.stub :new, DummyStub.new do
       client = Google::Cloud::Run.services transport: :rest do |config|
         config.credentials = :dummy_credentials
@@ -137,6 +147,7 @@ class Google::Cloud::Run::ClientConstructionMinitest < Minitest::Test
   end
 
   def test_tasks_grpc
+    skip unless Google::Cloud::Run.tasks_available? transport: :grpc
     Gapic::ServiceStub.stub :new, DummyStub.new do
       grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
       client = Google::Cloud::Run.tasks transport: :grpc do |config|
@@ -147,6 +158,7 @@ class Google::Cloud::Run::ClientConstructionMinitest < Minitest::Test
   end
 
   def test_tasks_rest
+    skip unless Google::Cloud::Run.tasks_available? transport: :rest
     Gapic::Rest::ClientStub.stub :new, DummyStub.new do
       client = Google::Cloud::Run.tasks transport: :rest do |config|
         config.credentials = :dummy_credentials

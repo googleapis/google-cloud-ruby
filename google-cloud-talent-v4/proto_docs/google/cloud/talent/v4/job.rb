@@ -98,13 +98,16 @@ module Google
         #     search experience.
         #
         #     Jobs with multiple addresses must have their addresses with the same
-        #     [LocationType][] to allow location filtering to work properly. (For
-        #     example, a Job with addresses "1600 Amphitheatre Parkway, Mountain View,
-        #     CA, USA" and "London, UK" may not have location filters applied correctly
-        #     at search time since the first is a [LocationType.STREET_ADDRESS][] and the
-        #     second is a [LocationType.LOCALITY][].) If a job needs to have multiple
-        #     addresses, it is suggested to split it into multiple jobs with same
-        #     LocationTypes.
+        #     {::Google::Cloud::Talent::V4::Location::LocationType LocationType} to allow
+        #     location filtering to work properly. (For example, a Job with addresses
+        #     "1600 Amphitheatre Parkway, Mountain View, CA, USA" and "London, UK" may
+        #     not have location filters applied correctly at search time since the first
+        #     is a
+        #     {::Google::Cloud::Talent::V4::Location::LocationType::STREET_ADDRESS LocationType.STREET_ADDRESS}
+        #     and the second is a
+        #     {::Google::Cloud::Talent::V4::Location::LocationType::LOCALITY LocationType.LOCALITY}.)
+        #     If a job needs to have multiple addresses, it is suggested to split it into
+        #     multiple jobs with same LocationTypes.
         #
         #     The maximum number of allowed characters is 500.
         # @!attribute [rw] application_info
@@ -266,10 +269,11 @@ module Google
         #     {::Google::Cloud::Talent::V4::Job#posting_publish_time posting_publish_time}
         #     must be set before
         #     {::Google::Cloud::Talent::V4::Job#posting_expire_time posting_expire_time}. The
-        #     purpose of this feature is to allow other objects, such as [Application][],
-        #     to refer a job that didn't exist in the system prior to becoming expired.
-        #     If you want to modify a job that was expired on creation, delete it and
-        #     create a new one.
+        #     purpose of this feature is to allow other objects, such as
+        #     {::Google::Cloud::Talent::V4::Job::ApplicationInfo ApplicationInfo}, to refer a
+        #     job that didn't exist in the system prior to becoming expired. If you want
+        #     to modify a job that was expired on creation, delete it and create a new
+        #     one.
         #
         #     If this value isn't provided at the time of job creation or is invalid,
         #     the job posting expires after 30 days from the job's creation time. For

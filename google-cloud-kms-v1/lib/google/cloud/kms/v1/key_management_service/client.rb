@@ -1087,7 +1087,7 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload get_public_key(name: nil)
+            # @overload get_public_key(name: nil, public_key_format: nil)
             #   Pass arguments to `get_public_key` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -1095,6 +1095,14 @@ module Google
             #   @param name [::String]
             #     Required. The {::Google::Cloud::Kms::V1::CryptoKeyVersion#name name} of the
             #     {::Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersion} public key to get.
+            #   @param public_key_format [::Google::Cloud::Kms::V1::PublicKey::PublicKeyFormat]
+            #     Optional. The {::Google::Cloud::Kms::V1::PublicKey PublicKey} format specified
+            #     by the user. This field is required for PQC algorithms. If specified, the
+            #     public key will be exported through the
+            #     {::Google::Cloud::Kms::V1::PublicKey#public_key public_key} field in the
+            #     requested format. Otherwise, the {::Google::Cloud::Kms::V1::PublicKey#pem pem}
+            #     field will be populated for non-PQC algorithms, and an error will be
+            #     returned for PQC algorithms.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::Kms::V1::PublicKey]
@@ -1585,7 +1593,9 @@ module Google
             #     {::Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersion}, the
             #     {::Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersion} must be a child of
             #     {::Google::Cloud::Kms::V1::ImportCryptoKeyVersionRequest#parent ImportCryptoKeyVersionRequest.parent},
-            #     have been previously created via [ImportCryptoKeyVersion][], and be in
+            #     have been previously created via
+            #     {::Google::Cloud::Kms::V1::KeyManagementService::Client#import_crypto_key_version ImportCryptoKeyVersion},
+            #     and be in
             #     {::Google::Cloud::Kms::V1::CryptoKeyVersion::CryptoKeyVersionState::DESTROYED DESTROYED}
             #     or
             #     {::Google::Cloud::Kms::V1::CryptoKeyVersion::CryptoKeyVersionState::IMPORT_FAILED IMPORT_FAILED}
@@ -3340,7 +3350,8 @@ module Google
             #     checksum. {::Google::Cloud::Kms::V1::KeyManagementService::Client KeyManagementService}
             #     will report an error if the checksum verification fails. If you receive a
             #     checksum error, your client should verify that
-            #     CRC32C([MacVerifyRequest.tag][]) is equal to
+            #     CRC32C({::Google::Cloud::Kms::V1::MacVerifyRequest#mac MacVerifyRequest.mac}) is
+            #     equal to
             #     {::Google::Cloud::Kms::V1::MacVerifyRequest#mac_crc32c MacVerifyRequest.mac_crc32c},
             #     and if so, perform a limited number of retries. A persistent mismatch may
             #     indicate an issue in your computation of the CRC32C checksum. Note: This
@@ -3552,6 +3563,13 @@ module Google
             #    *  (`GRPC::Core::Channel`) a gRPC channel with included credentials
             #    *  (`GRPC::Core::ChannelCredentials`) a gRPC credentails object
             #    *  (`nil`) indicating no credentials
+            #
+            #   Warning: If you accept a credential configuration (JSON file or Hash) from an
+            #   external source for authentication to Google Cloud, you must validate it before
+            #   providing it to a Google API client library. Providing an unvalidated credential
+            #   configuration to Google APIs can compromise the security of your systems and data.
+            #   For more information, refer to [Validate credential configurations from external
+            #   sources](https://cloud.google.com/docs/authentication/external/externally-sourced-credentials).
             #   @return [::Object]
             # @!attribute [rw] scope
             #   The OAuth scopes

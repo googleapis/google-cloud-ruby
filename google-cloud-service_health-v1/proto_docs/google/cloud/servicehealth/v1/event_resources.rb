@@ -419,7 +419,7 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Message for requesting list of events.
+        # Requests list of events.
         # @!attribute [rw] parent
         #   @return [::String]
         #     Required. Parent value using the form
@@ -469,7 +469,7 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Message for response to listing events.
+        # Response to request for listing events.
         # @!attribute [r] events
         #   @return [::Array<::Google::Cloud::ServiceHealth::V1::Event>]
         #     Output only. List of events.
@@ -488,7 +488,7 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Message for getting an event.
+        # Gets information about a specific event.
         # @!attribute [rw] name
         #   @return [::String]
         #     Required. Unique name of the event in this scope including project
@@ -503,7 +503,7 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Message for requesting list of organization events.
+        # Requests list of events that affect an organization.
         # @!attribute [rw] parent
         #   @return [::String]
         #     Required. Parent value using the form
@@ -558,7 +558,7 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Message for response to listing organization events.
+        # Response to request for listing organization events.
         # @!attribute [r] organization_events
         #   @return [::Array<::Google::Cloud::ServiceHealth::V1::OrganizationEvent>]
         #     Output only. List of organization events affecting an organization.
@@ -577,7 +577,7 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Message for getting an organization event.
+        # Gets information about a specific event affecting an organization.
         # @!attribute [rw] name
         #   @return [::String]
         #     Required. Unique name of the event in this scope including organization and
@@ -594,7 +594,7 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Message for requesting list of organization impacts.
+        # Requests list of projects under an organization affected by an event.
         # @!attribute [rw] parent
         #   @return [::String]
         #     Required. Parent value using the form
@@ -646,7 +646,8 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Message for response to listing organization impacts.
+        # Response to request for listing projects under an organization affected by an
+        # event.
         # @!attribute [r] organization_impacts
         #   @return [::Array<::Google::Cloud::ServiceHealth::V1::OrganizationImpact>]
         #     Output only. List of
@@ -667,7 +668,7 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Message for getting an organization impact.
+        # Gets information about an event that affects a project under an organization.
         # @!attribute [rw] name
         #   @return [::String]
         #     Required. Name of the resource using the form

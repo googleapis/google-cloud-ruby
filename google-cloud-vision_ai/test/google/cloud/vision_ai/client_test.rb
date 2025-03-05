@@ -42,6 +42,7 @@ class Google::Cloud::VisionAI::ClientConstructionMinitest < Minitest::Test
   end
 
   def test_live_video_analytics_grpc
+    skip unless Google::Cloud::VisionAI.live_video_analytics_available? transport: :grpc
     Gapic::ServiceStub.stub :new, DummyStub.new do
       grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
       client = Google::Cloud::VisionAI.live_video_analytics transport: :grpc do |config|
@@ -52,6 +53,7 @@ class Google::Cloud::VisionAI::ClientConstructionMinitest < Minitest::Test
   end
 
   def test_live_video_analytics_rest
+    skip unless Google::Cloud::VisionAI.live_video_analytics_available? transport: :rest
     Gapic::Rest::ClientStub.stub :new, DummyStub.new do
       client = Google::Cloud::VisionAI.live_video_analytics transport: :rest do |config|
         config.credentials = :dummy_credentials
@@ -61,6 +63,7 @@ class Google::Cloud::VisionAI::ClientConstructionMinitest < Minitest::Test
   end
 
   def test_app_platform_grpc
+    skip unless Google::Cloud::VisionAI.app_platform_available? transport: :grpc
     Gapic::ServiceStub.stub :new, DummyStub.new do
       grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
       client = Google::Cloud::VisionAI.app_platform transport: :grpc do |config|
@@ -71,6 +74,7 @@ class Google::Cloud::VisionAI::ClientConstructionMinitest < Minitest::Test
   end
 
   def test_app_platform_rest
+    skip unless Google::Cloud::VisionAI.app_platform_available? transport: :rest
     Gapic::Rest::ClientStub.stub :new, DummyStub.new do
       client = Google::Cloud::VisionAI.app_platform transport: :rest do |config|
         config.credentials = :dummy_credentials
@@ -80,6 +84,7 @@ class Google::Cloud::VisionAI::ClientConstructionMinitest < Minitest::Test
   end
 
   def test_streaming_service_grpc
+    skip unless Google::Cloud::VisionAI.streaming_service_available? transport: :grpc
     Gapic::ServiceStub.stub :new, DummyStub.new do
       grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
       client = Google::Cloud::VisionAI.streaming_service transport: :grpc do |config|
@@ -90,6 +95,7 @@ class Google::Cloud::VisionAI::ClientConstructionMinitest < Minitest::Test
   end
 
   def test_streaming_service_rest
+    skip unless Google::Cloud::VisionAI.streaming_service_available? transport: :rest
     Gapic::Rest::ClientStub.stub :new, DummyStub.new do
       client = Google::Cloud::VisionAI.streaming_service transport: :rest do |config|
         config.credentials = :dummy_credentials
@@ -99,6 +105,7 @@ class Google::Cloud::VisionAI::ClientConstructionMinitest < Minitest::Test
   end
 
   def test_streams_service_grpc
+    skip unless Google::Cloud::VisionAI.streams_service_available? transport: :grpc
     Gapic::ServiceStub.stub :new, DummyStub.new do
       grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
       client = Google::Cloud::VisionAI.streams_service transport: :grpc do |config|
@@ -109,6 +116,7 @@ class Google::Cloud::VisionAI::ClientConstructionMinitest < Minitest::Test
   end
 
   def test_streams_service_rest
+    skip unless Google::Cloud::VisionAI.streams_service_available? transport: :rest
     Gapic::Rest::ClientStub.stub :new, DummyStub.new do
       client = Google::Cloud::VisionAI.streams_service transport: :rest do |config|
         config.credentials = :dummy_credentials
@@ -118,6 +126,7 @@ class Google::Cloud::VisionAI::ClientConstructionMinitest < Minitest::Test
   end
 
   def test_warehouse_grpc
+    skip unless Google::Cloud::VisionAI.warehouse_available? transport: :grpc
     Gapic::ServiceStub.stub :new, DummyStub.new do
       grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
       client = Google::Cloud::VisionAI.warehouse transport: :grpc do |config|
@@ -128,6 +137,7 @@ class Google::Cloud::VisionAI::ClientConstructionMinitest < Minitest::Test
   end
 
   def test_warehouse_rest
+    skip unless Google::Cloud::VisionAI.warehouse_available? transport: :rest
     Gapic::Rest::ClientStub.stub :new, DummyStub.new do
       client = Google::Cloud::VisionAI.warehouse transport: :rest do |config|
         config.credentials = :dummy_credentials
@@ -137,6 +147,7 @@ class Google::Cloud::VisionAI::ClientConstructionMinitest < Minitest::Test
   end
 
   def test_health_check_service_grpc
+    skip unless Google::Cloud::VisionAI.health_check_service_available? transport: :grpc
     Gapic::ServiceStub.stub :new, DummyStub.new do
       grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
       client = Google::Cloud::VisionAI.health_check_service transport: :grpc do |config|
@@ -147,6 +158,7 @@ class Google::Cloud::VisionAI::ClientConstructionMinitest < Minitest::Test
   end
 
   def test_health_check_service_rest
+    skip unless Google::Cloud::VisionAI.health_check_service_available? transport: :rest
     Gapic::Rest::ClientStub.stub :new, DummyStub.new do
       client = Google::Cloud::VisionAI.health_check_service transport: :rest do |config|
         config.credentials = :dummy_credentials

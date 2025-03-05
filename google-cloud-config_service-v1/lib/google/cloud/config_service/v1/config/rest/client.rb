@@ -75,6 +75,11 @@ module Google
                                   end
                   default_config = Client::Configuration.new parent_config
 
+                  default_config.timeout = 60.0
+                  default_config.retry_policy = {
+                    initial_delay: 1.0, max_delay: 10.0, multiplier: 1.3, retry_codes: [14]
+                  }
+
                   default_config
                 end
                 yield @configure if block_given?
@@ -280,10 +285,10 @@ module Google
               #   @param order_by [::String]
               #     Field to use to sort the list.
               # @yield [result, operation] Access the result along with the TransportOperation object
-              # @yieldparam result [::Google::Cloud::ConfigService::V1::ListDeploymentsResponse]
+              # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::ConfigService::V1::Deployment>]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
-              # @return [::Google::Cloud::ConfigService::V1::ListDeploymentsResponse]
+              # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::ConfigService::V1::Deployment>]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
               #
@@ -335,7 +340,9 @@ module Google
                                        retry_policy: @config.retry_policy
 
                 @config_stub.list_deployments request, options do |result, operation|
+                  result = ::Gapic::Rest::PagedEnumerable.new @config_stub, :list_deployments, "deployments", request, result, options
                   yield result, operation if block_given?
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -803,10 +810,10 @@ module Google
               #   @param order_by [::String]
               #     Field to use to sort the list.
               # @yield [result, operation] Access the result along with the TransportOperation object
-              # @yieldparam result [::Google::Cloud::ConfigService::V1::ListRevisionsResponse]
+              # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::ConfigService::V1::Revision>]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
-              # @return [::Google::Cloud::ConfigService::V1::ListRevisionsResponse]
+              # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::ConfigService::V1::Revision>]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
               #
@@ -858,7 +865,9 @@ module Google
                                        retry_policy: @config.retry_policy
 
                 @config_stub.list_revisions request, options do |result, operation|
+                  result = ::Gapic::Rest::PagedEnumerable.new @config_stub, :list_revisions, "revisions", request, result, options
                   yield result, operation if block_given?
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -1069,10 +1078,10 @@ module Google
               #   @param order_by [::String]
               #     Field to use to sort the list.
               # @yield [result, operation] Access the result along with the TransportOperation object
-              # @yieldparam result [::Google::Cloud::ConfigService::V1::ListResourcesResponse]
+              # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::ConfigService::V1::Resource>]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
-              # @return [::Google::Cloud::ConfigService::V1::ListResourcesResponse]
+              # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::ConfigService::V1::Resource>]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
               #
@@ -1124,7 +1133,9 @@ module Google
                                        retry_policy: @config.retry_policy
 
                 @config_stub.list_resources request, options do |result, operation|
+                  result = ::Gapic::Rest::PagedEnumerable.new @config_stub, :list_resources, "resources", request, result, options
                   yield result, operation if block_given?
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -1959,10 +1970,10 @@ module Google
               #   @param order_by [::String]
               #     Optional. Field to use to sort the list.
               # @yield [result, operation] Access the result along with the TransportOperation object
-              # @yieldparam result [::Google::Cloud::ConfigService::V1::ListPreviewsResponse]
+              # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::ConfigService::V1::Preview>]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
-              # @return [::Google::Cloud::ConfigService::V1::ListPreviewsResponse]
+              # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::ConfigService::V1::Preview>]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
               #
@@ -2014,7 +2025,9 @@ module Google
                                        retry_policy: @config.retry_policy
 
                 @config_stub.list_previews request, options do |result, operation|
+                  result = ::Gapic::Rest::PagedEnumerable.new @config_stub, :list_previews, "previews", request, result, options
                   yield result, operation if block_given?
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -2245,10 +2258,10 @@ module Google
               #   @param order_by [::String]
               #     Optional. Field to use to sort the list.
               # @yield [result, operation] Access the result along with the TransportOperation object
-              # @yieldparam result [::Google::Cloud::ConfigService::V1::ListTerraformVersionsResponse]
+              # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::ConfigService::V1::TerraformVersion>]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
-              # @return [::Google::Cloud::ConfigService::V1::ListTerraformVersionsResponse]
+              # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::ConfigService::V1::TerraformVersion>]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
               #
@@ -2300,7 +2313,9 @@ module Google
                                        retry_policy: @config.retry_policy
 
                 @config_stub.list_terraform_versions request, options do |result, operation|
+                  result = ::Gapic::Rest::PagedEnumerable.new @config_stub, :list_terraform_versions, "terraform_versions", request, result, options
                   yield result, operation if block_given?
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -2428,6 +2443,13 @@ module Google
               #    *  (`Signet::OAuth2::Client`) A signet oauth2 client object
               #       (see the [signet docs](https://rubydoc.info/gems/signet/Signet/OAuth2/Client))
               #    *  (`nil`) indicating no credentials
+              #
+              #   Warning: If you accept a credential configuration (JSON file or Hash) from an
+              #   external source for authentication to Google Cloud, you must validate it before
+              #   providing it to a Google API client library. Providing an unvalidated credential
+              #   configuration to Google APIs can compromise the security of your systems and data.
+              #   For more information, refer to [Validate credential configurations from external
+              #   sources](https://cloud.google.com/docs/authentication/external/externally-sourced-credentials).
               #   @return [::Object]
               # @!attribute [rw] scope
               #   The OAuth scopes

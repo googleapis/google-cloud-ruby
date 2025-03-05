@@ -874,6 +874,8 @@ module Google
         #   @return [::Google::Cloud::VideoIntelligence::V1::VideoSegment]
         #     Non-streaming batch mode ONLY.
         #     Each object track corresponds to one video segment where it appears.
+        #
+        #     Note: The following fields are mutually exclusive: `segment`, `track_id`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] track_id
         #   @return [::Integer]
         #     Streaming mode ONLY.
@@ -882,6 +884,8 @@ module Google
         #     Instead, we provide a unique identifiable integer track_id so that
         #     the customers can correlate the results of the ongoing
         #     ObjectTrackAnnotation of the same track_id over time.
+        #
+        #     Note: The following fields are mutually exclusive: `track_id`, `segment`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] entity
         #   @return [::Google::Cloud::VideoIntelligence::V1::Entity]
         #     Entity to specify the object category that this track is labeled as.

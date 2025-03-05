@@ -41,6 +41,11 @@ module Google
         # You can also specify a different transport by passing `:rest` or `:grpc` in
         # the `transport` parameter.
         #
+        # Raises an exception if the currently installed versioned client gem for the
+        # given API version does not support the given transport of the AccountTaxService service.
+        # You can determine whether the method will succeed by calling
+        # {Google::Shopping::Merchant::Accounts.account_tax_service_available?}.
+        #
         # ## About AccountTaxService
         #
         # Manages account level tax setting data.
@@ -67,6 +72,37 @@ module Google
         end
 
         ##
+        # Determines whether the AccountTaxService service is supported by the current client.
+        # If true, you can retrieve a client object by calling {Google::Shopping::Merchant::Accounts.account_tax_service}.
+        # If false, that method will raise an exception. This could happen if the given
+        # API version does not exist or does not support the AccountTaxService service,
+        # or if the versioned client gem needs an update to support the AccountTaxService service.
+        #
+        # @param version [::String, ::Symbol] The API version to connect to. Optional.
+        #   Defaults to `:v1beta`.
+        # @param transport [:grpc, :rest] The transport to use. Defaults to `:grpc`.
+        # @return [boolean] Whether the service is available.
+        #
+        def self.account_tax_service_available? version: :v1beta, transport: :grpc
+          require "google/shopping/merchant/accounts/#{version.to_s.downcase}"
+          package_name = Google::Shopping::Merchant::Accounts
+                         .constants
+                         .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                         .first
+          return false unless package_name
+          service_module = Google::Shopping::Merchant::Accounts.const_get package_name
+          return false unless service_module.const_defined? :AccountTaxService
+          service_module = service_module.const_get :AccountTaxService
+          if transport == :rest
+            return false unless service_module.const_defined? :Rest
+            service_module = service_module.const_get :Rest
+          end
+          service_module.const_defined? :Client
+        rescue ::LoadError
+          false
+        end
+
+        ##
         # Create a new client object for AccountIssueService.
         #
         # By default, this returns an instance of
@@ -78,6 +114,11 @@ module Google
         # appropriate versioned client will be returned.
         # You can also specify a different transport by passing `:rest` or `:grpc` in
         # the `transport` parameter.
+        #
+        # Raises an exception if the currently installed versioned client gem for the
+        # given API version does not support the given transport of the AccountIssueService service.
+        # You can determine whether the method will succeed by calling
+        # {Google::Shopping::Merchant::Accounts.account_issue_service_available?}.
         #
         # ## About AccountIssueService
         #
@@ -101,6 +142,37 @@ module Google
         end
 
         ##
+        # Determines whether the AccountIssueService service is supported by the current client.
+        # If true, you can retrieve a client object by calling {Google::Shopping::Merchant::Accounts.account_issue_service}.
+        # If false, that method will raise an exception. This could happen if the given
+        # API version does not exist or does not support the AccountIssueService service,
+        # or if the versioned client gem needs an update to support the AccountIssueService service.
+        #
+        # @param version [::String, ::Symbol] The API version to connect to. Optional.
+        #   Defaults to `:v1beta`.
+        # @param transport [:grpc, :rest] The transport to use. Defaults to `:grpc`.
+        # @return [boolean] Whether the service is available.
+        #
+        def self.account_issue_service_available? version: :v1beta, transport: :grpc
+          require "google/shopping/merchant/accounts/#{version.to_s.downcase}"
+          package_name = Google::Shopping::Merchant::Accounts
+                         .constants
+                         .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                         .first
+          return false unless package_name
+          service_module = Google::Shopping::Merchant::Accounts.const_get package_name
+          return false unless service_module.const_defined? :AccountIssueService
+          service_module = service_module.const_get :AccountIssueService
+          if transport == :rest
+            return false unless service_module.const_defined? :Rest
+            service_module = service_module.const_get :Rest
+          end
+          service_module.const_defined? :Client
+        rescue ::LoadError
+          false
+        end
+
+        ##
         # Create a new client object for UserService.
         #
         # By default, this returns an instance of
@@ -112,6 +184,11 @@ module Google
         # appropriate versioned client will be returned.
         # You can also specify a different transport by passing `:rest` or `:grpc` in
         # the `transport` parameter.
+        #
+        # Raises an exception if the currently installed versioned client gem for the
+        # given API version does not support the given transport of the UserService service.
+        # You can determine whether the method will succeed by calling
+        # {Google::Shopping::Merchant::Accounts.user_service_available?}.
         #
         # ## About UserService
         #
@@ -135,6 +212,37 @@ module Google
         end
 
         ##
+        # Determines whether the UserService service is supported by the current client.
+        # If true, you can retrieve a client object by calling {Google::Shopping::Merchant::Accounts.user_service}.
+        # If false, that method will raise an exception. This could happen if the given
+        # API version does not exist or does not support the UserService service,
+        # or if the versioned client gem needs an update to support the UserService service.
+        #
+        # @param version [::String, ::Symbol] The API version to connect to. Optional.
+        #   Defaults to `:v1beta`.
+        # @param transport [:grpc, :rest] The transport to use. Defaults to `:grpc`.
+        # @return [boolean] Whether the service is available.
+        #
+        def self.user_service_available? version: :v1beta, transport: :grpc
+          require "google/shopping/merchant/accounts/#{version.to_s.downcase}"
+          package_name = Google::Shopping::Merchant::Accounts
+                         .constants
+                         .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                         .first
+          return false unless package_name
+          service_module = Google::Shopping::Merchant::Accounts.const_get package_name
+          return false unless service_module.const_defined? :UserService
+          service_module = service_module.const_get :UserService
+          if transport == :rest
+            return false unless service_module.const_defined? :Rest
+            service_module = service_module.const_get :Rest
+          end
+          service_module.const_defined? :Client
+        rescue ::LoadError
+          false
+        end
+
+        ##
         # Create a new client object for AccountsService.
         #
         # By default, this returns an instance of
@@ -146,6 +254,11 @@ module Google
         # appropriate versioned client will be returned.
         # You can also specify a different transport by passing `:rest` or `:grpc` in
         # the `transport` parameter.
+        #
+        # Raises an exception if the currently installed versioned client gem for the
+        # given API version does not support the given transport of the AccountsService service.
+        # You can determine whether the method will succeed by calling
+        # {Google::Shopping::Merchant::Accounts.accounts_service_available?}.
         #
         # ## About AccountsService
         #
@@ -169,6 +282,37 @@ module Google
         end
 
         ##
+        # Determines whether the AccountsService service is supported by the current client.
+        # If true, you can retrieve a client object by calling {Google::Shopping::Merchant::Accounts.accounts_service}.
+        # If false, that method will raise an exception. This could happen if the given
+        # API version does not exist or does not support the AccountsService service,
+        # or if the versioned client gem needs an update to support the AccountsService service.
+        #
+        # @param version [::String, ::Symbol] The API version to connect to. Optional.
+        #   Defaults to `:v1beta`.
+        # @param transport [:grpc, :rest] The transport to use. Defaults to `:grpc`.
+        # @return [boolean] Whether the service is available.
+        #
+        def self.accounts_service_available? version: :v1beta, transport: :grpc
+          require "google/shopping/merchant/accounts/#{version.to_s.downcase}"
+          package_name = Google::Shopping::Merchant::Accounts
+                         .constants
+                         .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                         .first
+          return false unless package_name
+          service_module = Google::Shopping::Merchant::Accounts.const_get package_name
+          return false unless service_module.const_defined? :AccountsService
+          service_module = service_module.const_get :AccountsService
+          if transport == :rest
+            return false unless service_module.const_defined? :Rest
+            service_module = service_module.const_get :Rest
+          end
+          service_module.const_defined? :Client
+        rescue ::LoadError
+          false
+        end
+
+        ##
         # Create a new client object for AutofeedSettingsService.
         #
         # By default, this returns an instance of
@@ -180,6 +324,11 @@ module Google
         # appropriate versioned client will be returned.
         # You can also specify a different transport by passing `:rest` or `:grpc` in
         # the `transport` parameter.
+        #
+        # Raises an exception if the currently installed versioned client gem for the
+        # given API version does not support the given transport of the AutofeedSettingsService service.
+        # You can determine whether the method will succeed by calling
+        # {Google::Shopping::Merchant::Accounts.autofeed_settings_service_available?}.
         #
         # ## About AutofeedSettingsService
         #
@@ -204,6 +353,37 @@ module Google
         end
 
         ##
+        # Determines whether the AutofeedSettingsService service is supported by the current client.
+        # If true, you can retrieve a client object by calling {Google::Shopping::Merchant::Accounts.autofeed_settings_service}.
+        # If false, that method will raise an exception. This could happen if the given
+        # API version does not exist or does not support the AutofeedSettingsService service,
+        # or if the versioned client gem needs an update to support the AutofeedSettingsService service.
+        #
+        # @param version [::String, ::Symbol] The API version to connect to. Optional.
+        #   Defaults to `:v1beta`.
+        # @param transport [:grpc, :rest] The transport to use. Defaults to `:grpc`.
+        # @return [boolean] Whether the service is available.
+        #
+        def self.autofeed_settings_service_available? version: :v1beta, transport: :grpc
+          require "google/shopping/merchant/accounts/#{version.to_s.downcase}"
+          package_name = Google::Shopping::Merchant::Accounts
+                         .constants
+                         .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                         .first
+          return false unless package_name
+          service_module = Google::Shopping::Merchant::Accounts.const_get package_name
+          return false unless service_module.const_defined? :AutofeedSettingsService
+          service_module = service_module.const_get :AutofeedSettingsService
+          if transport == :rest
+            return false unless service_module.const_defined? :Rest
+            service_module = service_module.const_get :Rest
+          end
+          service_module.const_defined? :Client
+        rescue ::LoadError
+          false
+        end
+
+        ##
         # Create a new client object for BusinessIdentityService.
         #
         # By default, this returns an instance of
@@ -215,6 +395,11 @@ module Google
         # appropriate versioned client will be returned.
         # You can also specify a different transport by passing `:rest` or `:grpc` in
         # the `transport` parameter.
+        #
+        # Raises an exception if the currently installed versioned client gem for the
+        # given API version does not support the given transport of the BusinessIdentityService service.
+        # You can determine whether the method will succeed by calling
+        # {Google::Shopping::Merchant::Accounts.business_identity_service_available?}.
         #
         # ## About BusinessIdentityService
         #
@@ -239,6 +424,37 @@ module Google
         end
 
         ##
+        # Determines whether the BusinessIdentityService service is supported by the current client.
+        # If true, you can retrieve a client object by calling {Google::Shopping::Merchant::Accounts.business_identity_service}.
+        # If false, that method will raise an exception. This could happen if the given
+        # API version does not exist or does not support the BusinessIdentityService service,
+        # or if the versioned client gem needs an update to support the BusinessIdentityService service.
+        #
+        # @param version [::String, ::Symbol] The API version to connect to. Optional.
+        #   Defaults to `:v1beta`.
+        # @param transport [:grpc, :rest] The transport to use. Defaults to `:grpc`.
+        # @return [boolean] Whether the service is available.
+        #
+        def self.business_identity_service_available? version: :v1beta, transport: :grpc
+          require "google/shopping/merchant/accounts/#{version.to_s.downcase}"
+          package_name = Google::Shopping::Merchant::Accounts
+                         .constants
+                         .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                         .first
+          return false unless package_name
+          service_module = Google::Shopping::Merchant::Accounts.const_get package_name
+          return false unless service_module.const_defined? :BusinessIdentityService
+          service_module = service_module.const_get :BusinessIdentityService
+          if transport == :rest
+            return false unless service_module.const_defined? :Rest
+            service_module = service_module.const_get :Rest
+          end
+          service_module.const_defined? :Client
+        rescue ::LoadError
+          false
+        end
+
+        ##
         # Create a new client object for BusinessInfoService.
         #
         # By default, this returns an instance of
@@ -250,6 +466,11 @@ module Google
         # appropriate versioned client will be returned.
         # You can also specify a different transport by passing `:rest` or `:grpc` in
         # the `transport` parameter.
+        #
+        # Raises an exception if the currently installed versioned client gem for the
+        # given API version does not support the given transport of the BusinessInfoService service.
+        # You can determine whether the method will succeed by calling
+        # {Google::Shopping::Merchant::Accounts.business_info_service_available?}.
         #
         # ## About BusinessInfoService
         #
@@ -273,6 +494,37 @@ module Google
         end
 
         ##
+        # Determines whether the BusinessInfoService service is supported by the current client.
+        # If true, you can retrieve a client object by calling {Google::Shopping::Merchant::Accounts.business_info_service}.
+        # If false, that method will raise an exception. This could happen if the given
+        # API version does not exist or does not support the BusinessInfoService service,
+        # or if the versioned client gem needs an update to support the BusinessInfoService service.
+        #
+        # @param version [::String, ::Symbol] The API version to connect to. Optional.
+        #   Defaults to `:v1beta`.
+        # @param transport [:grpc, :rest] The transport to use. Defaults to `:grpc`.
+        # @return [boolean] Whether the service is available.
+        #
+        def self.business_info_service_available? version: :v1beta, transport: :grpc
+          require "google/shopping/merchant/accounts/#{version.to_s.downcase}"
+          package_name = Google::Shopping::Merchant::Accounts
+                         .constants
+                         .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                         .first
+          return false unless package_name
+          service_module = Google::Shopping::Merchant::Accounts.const_get package_name
+          return false unless service_module.const_defined? :BusinessInfoService
+          service_module = service_module.const_get :BusinessInfoService
+          if transport == :rest
+            return false unless service_module.const_defined? :Rest
+            service_module = service_module.const_get :Rest
+          end
+          service_module.const_defined? :Client
+        rescue ::LoadError
+          false
+        end
+
+        ##
         # Create a new client object for EmailPreferencesService.
         #
         # By default, this returns an instance of
@@ -284,6 +536,11 @@ module Google
         # appropriate versioned client will be returned.
         # You can also specify a different transport by passing `:rest` or `:grpc` in
         # the `transport` parameter.
+        #
+        # Raises an exception if the currently installed versioned client gem for the
+        # given API version does not support the given transport of the EmailPreferencesService service.
+        # You can determine whether the method will succeed by calling
+        # {Google::Shopping::Merchant::Accounts.email_preferences_service_available?}.
         #
         # ## About EmailPreferencesService
         #
@@ -310,6 +567,37 @@ module Google
         end
 
         ##
+        # Determines whether the EmailPreferencesService service is supported by the current client.
+        # If true, you can retrieve a client object by calling {Google::Shopping::Merchant::Accounts.email_preferences_service}.
+        # If false, that method will raise an exception. This could happen if the given
+        # API version does not exist or does not support the EmailPreferencesService service,
+        # or if the versioned client gem needs an update to support the EmailPreferencesService service.
+        #
+        # @param version [::String, ::Symbol] The API version to connect to. Optional.
+        #   Defaults to `:v1beta`.
+        # @param transport [:grpc, :rest] The transport to use. Defaults to `:grpc`.
+        # @return [boolean] Whether the service is available.
+        #
+        def self.email_preferences_service_available? version: :v1beta, transport: :grpc
+          require "google/shopping/merchant/accounts/#{version.to_s.downcase}"
+          package_name = Google::Shopping::Merchant::Accounts
+                         .constants
+                         .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                         .first
+          return false unless package_name
+          service_module = Google::Shopping::Merchant::Accounts.const_get package_name
+          return false unless service_module.const_defined? :EmailPreferencesService
+          service_module = service_module.const_get :EmailPreferencesService
+          if transport == :rest
+            return false unless service_module.const_defined? :Rest
+            service_module = service_module.const_get :Rest
+          end
+          service_module.const_defined? :Client
+        rescue ::LoadError
+          false
+        end
+
+        ##
         # Create a new client object for HomepageService.
         #
         # By default, this returns an instance of
@@ -321,6 +609,11 @@ module Google
         # appropriate versioned client will be returned.
         # You can also specify a different transport by passing `:rest` or `:grpc` in
         # the `transport` parameter.
+        #
+        # Raises an exception if the currently installed versioned client gem for the
+        # given API version does not support the given transport of the HomepageService service.
+        # You can determine whether the method will succeed by calling
+        # {Google::Shopping::Merchant::Accounts.homepage_service_available?}.
         #
         # ## About HomepageService
         #
@@ -344,6 +637,37 @@ module Google
         end
 
         ##
+        # Determines whether the HomepageService service is supported by the current client.
+        # If true, you can retrieve a client object by calling {Google::Shopping::Merchant::Accounts.homepage_service}.
+        # If false, that method will raise an exception. This could happen if the given
+        # API version does not exist or does not support the HomepageService service,
+        # or if the versioned client gem needs an update to support the HomepageService service.
+        #
+        # @param version [::String, ::Symbol] The API version to connect to. Optional.
+        #   Defaults to `:v1beta`.
+        # @param transport [:grpc, :rest] The transport to use. Defaults to `:grpc`.
+        # @return [boolean] Whether the service is available.
+        #
+        def self.homepage_service_available? version: :v1beta, transport: :grpc
+          require "google/shopping/merchant/accounts/#{version.to_s.downcase}"
+          package_name = Google::Shopping::Merchant::Accounts
+                         .constants
+                         .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                         .first
+          return false unless package_name
+          service_module = Google::Shopping::Merchant::Accounts.const_get package_name
+          return false unless service_module.const_defined? :HomepageService
+          service_module = service_module.const_get :HomepageService
+          if transport == :rest
+            return false unless service_module.const_defined? :Rest
+            service_module = service_module.const_get :Rest
+          end
+          service_module.const_defined? :Client
+        rescue ::LoadError
+          false
+        end
+
+        ##
         # Create a new client object for OnlineReturnPolicyService.
         #
         # By default, this returns an instance of
@@ -355,6 +679,11 @@ module Google
         # appropriate versioned client will be returned.
         # You can also specify a different transport by passing `:rest` or `:grpc` in
         # the `transport` parameter.
+        #
+        # Raises an exception if the currently installed versioned client gem for the
+        # given API version does not support the given transport of the OnlineReturnPolicyService service.
+        # You can determine whether the method will succeed by calling
+        # {Google::Shopping::Merchant::Accounts.online_return_policy_service_available?}.
         #
         # ## About OnlineReturnPolicyService
         #
@@ -382,6 +711,37 @@ module Google
         end
 
         ##
+        # Determines whether the OnlineReturnPolicyService service is supported by the current client.
+        # If true, you can retrieve a client object by calling {Google::Shopping::Merchant::Accounts.online_return_policy_service}.
+        # If false, that method will raise an exception. This could happen if the given
+        # API version does not exist or does not support the OnlineReturnPolicyService service,
+        # or if the versioned client gem needs an update to support the OnlineReturnPolicyService service.
+        #
+        # @param version [::String, ::Symbol] The API version to connect to. Optional.
+        #   Defaults to `:v1beta`.
+        # @param transport [:grpc, :rest] The transport to use. Defaults to `:grpc`.
+        # @return [boolean] Whether the service is available.
+        #
+        def self.online_return_policy_service_available? version: :v1beta, transport: :grpc
+          require "google/shopping/merchant/accounts/#{version.to_s.downcase}"
+          package_name = Google::Shopping::Merchant::Accounts
+                         .constants
+                         .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                         .first
+          return false unless package_name
+          service_module = Google::Shopping::Merchant::Accounts.const_get package_name
+          return false unless service_module.const_defined? :OnlineReturnPolicyService
+          service_module = service_module.const_get :OnlineReturnPolicyService
+          if transport == :rest
+            return false unless service_module.const_defined? :Rest
+            service_module = service_module.const_get :Rest
+          end
+          service_module.const_defined? :Client
+        rescue ::LoadError
+          false
+        end
+
+        ##
         # Create a new client object for ProgramsService.
         #
         # By default, this returns an instance of
@@ -393,6 +753,11 @@ module Google
         # appropriate versioned client will be returned.
         # You can also specify a different transport by passing `:rest` or `:grpc` in
         # the `transport` parameter.
+        #
+        # Raises an exception if the currently installed versioned client gem for the
+        # given API version does not support the given transport of the ProgramsService service.
+        # You can determine whether the method will succeed by calling
+        # {Google::Shopping::Merchant::Accounts.programs_service_available?}.
         #
         # ## About ProgramsService
         #
@@ -426,6 +791,37 @@ module Google
         end
 
         ##
+        # Determines whether the ProgramsService service is supported by the current client.
+        # If true, you can retrieve a client object by calling {Google::Shopping::Merchant::Accounts.programs_service}.
+        # If false, that method will raise an exception. This could happen if the given
+        # API version does not exist or does not support the ProgramsService service,
+        # or if the versioned client gem needs an update to support the ProgramsService service.
+        #
+        # @param version [::String, ::Symbol] The API version to connect to. Optional.
+        #   Defaults to `:v1beta`.
+        # @param transport [:grpc, :rest] The transport to use. Defaults to `:grpc`.
+        # @return [boolean] Whether the service is available.
+        #
+        def self.programs_service_available? version: :v1beta, transport: :grpc
+          require "google/shopping/merchant/accounts/#{version.to_s.downcase}"
+          package_name = Google::Shopping::Merchant::Accounts
+                         .constants
+                         .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                         .first
+          return false unless package_name
+          service_module = Google::Shopping::Merchant::Accounts.const_get package_name
+          return false unless service_module.const_defined? :ProgramsService
+          service_module = service_module.const_get :ProgramsService
+          if transport == :rest
+            return false unless service_module.const_defined? :Rest
+            service_module = service_module.const_get :Rest
+          end
+          service_module.const_defined? :Client
+        rescue ::LoadError
+          false
+        end
+
+        ##
         # Create a new client object for RegionsService.
         #
         # By default, this returns an instance of
@@ -437,6 +833,11 @@ module Google
         # appropriate versioned client will be returned.
         # You can also specify a different transport by passing `:rest` or `:grpc` in
         # the `transport` parameter.
+        #
+        # Raises an exception if the currently installed versioned client gem for the
+        # given API version does not support the given transport of the RegionsService service.
+        # You can determine whether the method will succeed by calling
+        # {Google::Shopping::Merchant::Accounts.regions_service_available?}.
         #
         # ## About RegionsService
         #
@@ -464,6 +865,37 @@ module Google
         end
 
         ##
+        # Determines whether the RegionsService service is supported by the current client.
+        # If true, you can retrieve a client object by calling {Google::Shopping::Merchant::Accounts.regions_service}.
+        # If false, that method will raise an exception. This could happen if the given
+        # API version does not exist or does not support the RegionsService service,
+        # or if the versioned client gem needs an update to support the RegionsService service.
+        #
+        # @param version [::String, ::Symbol] The API version to connect to. Optional.
+        #   Defaults to `:v1beta`.
+        # @param transport [:grpc, :rest] The transport to use. Defaults to `:grpc`.
+        # @return [boolean] Whether the service is available.
+        #
+        def self.regions_service_available? version: :v1beta, transport: :grpc
+          require "google/shopping/merchant/accounts/#{version.to_s.downcase}"
+          package_name = Google::Shopping::Merchant::Accounts
+                         .constants
+                         .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                         .first
+          return false unless package_name
+          service_module = Google::Shopping::Merchant::Accounts.const_get package_name
+          return false unless service_module.const_defined? :RegionsService
+          service_module = service_module.const_get :RegionsService
+          if transport == :rest
+            return false unless service_module.const_defined? :Rest
+            service_module = service_module.const_get :Rest
+          end
+          service_module.const_defined? :Client
+        rescue ::LoadError
+          false
+        end
+
+        ##
         # Create a new client object for ShippingSettingsService.
         #
         # By default, this returns an instance of
@@ -475,6 +907,11 @@ module Google
         # appropriate versioned client will be returned.
         # You can also specify a different transport by passing `:rest` or `:grpc` in
         # the `transport` parameter.
+        #
+        # Raises an exception if the currently installed versioned client gem for the
+        # given API version does not support the given transport of the ShippingSettingsService service.
+        # You can determine whether the method will succeed by calling
+        # {Google::Shopping::Merchant::Accounts.shipping_settings_service_available?}.
         #
         # ## About ShippingSettingsService
         #
@@ -499,6 +936,37 @@ module Google
         end
 
         ##
+        # Determines whether the ShippingSettingsService service is supported by the current client.
+        # If true, you can retrieve a client object by calling {Google::Shopping::Merchant::Accounts.shipping_settings_service}.
+        # If false, that method will raise an exception. This could happen if the given
+        # API version does not exist or does not support the ShippingSettingsService service,
+        # or if the versioned client gem needs an update to support the ShippingSettingsService service.
+        #
+        # @param version [::String, ::Symbol] The API version to connect to. Optional.
+        #   Defaults to `:v1beta`.
+        # @param transport [:grpc, :rest] The transport to use. Defaults to `:grpc`.
+        # @return [boolean] Whether the service is available.
+        #
+        def self.shipping_settings_service_available? version: :v1beta, transport: :grpc
+          require "google/shopping/merchant/accounts/#{version.to_s.downcase}"
+          package_name = Google::Shopping::Merchant::Accounts
+                         .constants
+                         .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                         .first
+          return false unless package_name
+          service_module = Google::Shopping::Merchant::Accounts.const_get package_name
+          return false unless service_module.const_defined? :ShippingSettingsService
+          service_module = service_module.const_get :ShippingSettingsService
+          if transport == :rest
+            return false unless service_module.const_defined? :Rest
+            service_module = service_module.const_get :Rest
+          end
+          service_module.const_defined? :Client
+        rescue ::LoadError
+          false
+        end
+
+        ##
         # Create a new client object for TermsOfServiceService.
         #
         # By default, this returns an instance of
@@ -510,6 +978,11 @@ module Google
         # appropriate versioned client will be returned.
         # You can also specify a different transport by passing `:rest` or `:grpc` in
         # the `transport` parameter.
+        #
+        # Raises an exception if the currently installed versioned client gem for the
+        # given API version does not support the given transport of the TermsOfServiceService service.
+        # You can determine whether the method will succeed by calling
+        # {Google::Shopping::Merchant::Accounts.terms_of_service_service_available?}.
         #
         # ## About TermsOfServiceService
         #
@@ -533,6 +1006,37 @@ module Google
         end
 
         ##
+        # Determines whether the TermsOfServiceService service is supported by the current client.
+        # If true, you can retrieve a client object by calling {Google::Shopping::Merchant::Accounts.terms_of_service_service}.
+        # If false, that method will raise an exception. This could happen if the given
+        # API version does not exist or does not support the TermsOfServiceService service,
+        # or if the versioned client gem needs an update to support the TermsOfServiceService service.
+        #
+        # @param version [::String, ::Symbol] The API version to connect to. Optional.
+        #   Defaults to `:v1beta`.
+        # @param transport [:grpc, :rest] The transport to use. Defaults to `:grpc`.
+        # @return [boolean] Whether the service is available.
+        #
+        def self.terms_of_service_service_available? version: :v1beta, transport: :grpc
+          require "google/shopping/merchant/accounts/#{version.to_s.downcase}"
+          package_name = Google::Shopping::Merchant::Accounts
+                         .constants
+                         .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                         .first
+          return false unless package_name
+          service_module = Google::Shopping::Merchant::Accounts.const_get package_name
+          return false unless service_module.const_defined? :TermsOfServiceService
+          service_module = service_module.const_get :TermsOfServiceService
+          if transport == :rest
+            return false unless service_module.const_defined? :Rest
+            service_module = service_module.const_get :Rest
+          end
+          service_module.const_defined? :Client
+        rescue ::LoadError
+          false
+        end
+
+        ##
         # Create a new client object for TermsOfServiceAgreementStateService.
         #
         # By default, this returns an instance of
@@ -544,6 +1048,11 @@ module Google
         # appropriate versioned client will be returned.
         # You can also specify a different transport by passing `:rest` or `:grpc` in
         # the `transport` parameter.
+        #
+        # Raises an exception if the currently installed versioned client gem for the
+        # given API version does not support the given transport of the TermsOfServiceAgreementStateService service.
+        # You can determine whether the method will succeed by calling
+        # {Google::Shopping::Merchant::Accounts.terms_of_service_agreement_state_service_available?}.
         #
         # ## About TermsOfServiceAgreementStateService
         #
@@ -564,6 +1073,37 @@ module Google
           service_module = Google::Shopping::Merchant::Accounts.const_get(package_name).const_get(:TermsOfServiceAgreementStateService)
           service_module = service_module.const_get(:Rest) if transport == :rest
           service_module.const_get(:Client).new(&block)
+        end
+
+        ##
+        # Determines whether the TermsOfServiceAgreementStateService service is supported by the current client.
+        # If true, you can retrieve a client object by calling {Google::Shopping::Merchant::Accounts.terms_of_service_agreement_state_service}.
+        # If false, that method will raise an exception. This could happen if the given
+        # API version does not exist or does not support the TermsOfServiceAgreementStateService service,
+        # or if the versioned client gem needs an update to support the TermsOfServiceAgreementStateService service.
+        #
+        # @param version [::String, ::Symbol] The API version to connect to. Optional.
+        #   Defaults to `:v1beta`.
+        # @param transport [:grpc, :rest] The transport to use. Defaults to `:grpc`.
+        # @return [boolean] Whether the service is available.
+        #
+        def self.terms_of_service_agreement_state_service_available? version: :v1beta, transport: :grpc
+          require "google/shopping/merchant/accounts/#{version.to_s.downcase}"
+          package_name = Google::Shopping::Merchant::Accounts
+                         .constants
+                         .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                         .first
+          return false unless package_name
+          service_module = Google::Shopping::Merchant::Accounts.const_get package_name
+          return false unless service_module.const_defined? :TermsOfServiceAgreementStateService
+          service_module = service_module.const_get :TermsOfServiceAgreementStateService
+          if transport == :rest
+            return false unless service_module.const_defined? :Rest
+            service_module = service_module.const_get :Rest
+          end
+          service_module.const_defined? :Client
+        rescue ::LoadError
+          false
         end
       end
     end

@@ -87,34 +87,54 @@ module Google
         # @!attribute [rw] boost_action
         #   @return [::Google::Cloud::Retail::V2::Rule::BoostAction]
         #     A boost action.
+        #
+        #     Note: The following fields are mutually exclusive: `boost_action`, `redirect_action`, `oneway_synonyms_action`, `do_not_associate_action`, `replacement_action`, `ignore_action`, `filter_action`, `twoway_synonyms_action`, `force_return_facet_action`, `remove_facet_action`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] redirect_action
         #   @return [::Google::Cloud::Retail::V2::Rule::RedirectAction]
         #     Redirects a shopper to a specific page.
+        #
+        #     Note: The following fields are mutually exclusive: `redirect_action`, `boost_action`, `oneway_synonyms_action`, `do_not_associate_action`, `replacement_action`, `ignore_action`, `filter_action`, `twoway_synonyms_action`, `force_return_facet_action`, `remove_facet_action`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] oneway_synonyms_action
         #   @return [::Google::Cloud::Retail::V2::Rule::OnewaySynonymsAction]
         #     Treats specific term as a synonym with a group of terms.
         #     Group of terms will not be treated as synonyms with the specific term.
+        #
+        #     Note: The following fields are mutually exclusive: `oneway_synonyms_action`, `boost_action`, `redirect_action`, `do_not_associate_action`, `replacement_action`, `ignore_action`, `filter_action`, `twoway_synonyms_action`, `force_return_facet_action`, `remove_facet_action`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] do_not_associate_action
         #   @return [::Google::Cloud::Retail::V2::Rule::DoNotAssociateAction]
         #     Prevents term from being associated with other terms.
+        #
+        #     Note: The following fields are mutually exclusive: `do_not_associate_action`, `boost_action`, `redirect_action`, `oneway_synonyms_action`, `replacement_action`, `ignore_action`, `filter_action`, `twoway_synonyms_action`, `force_return_facet_action`, `remove_facet_action`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] replacement_action
         #   @return [::Google::Cloud::Retail::V2::Rule::ReplacementAction]
         #     Replaces specific terms in the query.
+        #
+        #     Note: The following fields are mutually exclusive: `replacement_action`, `boost_action`, `redirect_action`, `oneway_synonyms_action`, `do_not_associate_action`, `ignore_action`, `filter_action`, `twoway_synonyms_action`, `force_return_facet_action`, `remove_facet_action`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] ignore_action
         #   @return [::Google::Cloud::Retail::V2::Rule::IgnoreAction]
         #     Ignores specific terms from query during search.
+        #
+        #     Note: The following fields are mutually exclusive: `ignore_action`, `boost_action`, `redirect_action`, `oneway_synonyms_action`, `do_not_associate_action`, `replacement_action`, `filter_action`, `twoway_synonyms_action`, `force_return_facet_action`, `remove_facet_action`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] filter_action
         #   @return [::Google::Cloud::Retail::V2::Rule::FilterAction]
         #     Filters results.
+        #
+        #     Note: The following fields are mutually exclusive: `filter_action`, `boost_action`, `redirect_action`, `oneway_synonyms_action`, `do_not_associate_action`, `replacement_action`, `ignore_action`, `twoway_synonyms_action`, `force_return_facet_action`, `remove_facet_action`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] twoway_synonyms_action
         #   @return [::Google::Cloud::Retail::V2::Rule::TwowaySynonymsAction]
         #     Treats a set of terms as synonyms of one another.
+        #
+        #     Note: The following fields are mutually exclusive: `twoway_synonyms_action`, `boost_action`, `redirect_action`, `oneway_synonyms_action`, `do_not_associate_action`, `replacement_action`, `ignore_action`, `filter_action`, `force_return_facet_action`, `remove_facet_action`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] force_return_facet_action
         #   @return [::Google::Cloud::Retail::V2::Rule::ForceReturnFacetAction]
         #     Force returns an attribute as a facet in the request.
+        #
+        #     Note: The following fields are mutually exclusive: `force_return_facet_action`, `boost_action`, `redirect_action`, `oneway_synonyms_action`, `do_not_associate_action`, `replacement_action`, `ignore_action`, `filter_action`, `twoway_synonyms_action`, `remove_facet_action`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] remove_facet_action
         #   @return [::Google::Cloud::Retail::V2::Rule::RemoveFacetAction]
         #     Remove an attribute as a facet in the request (if present).
+        #
+        #     Note: The following fields are mutually exclusive: `remove_facet_action`, `boost_action`, `redirect_action`, `oneway_synonyms_action`, `do_not_associate_action`, `replacement_action`, `ignore_action`, `filter_action`, `twoway_synonyms_action`, `force_return_facet_action`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] condition
         #   @return [::Google::Cloud::Retail::V2::Condition]
         #     Required. The condition that triggers the rule.
@@ -592,15 +612,23 @@ module Google
         # @!attribute [rw] minimum
         #   @return [::Float]
         #     Inclusive lower bound.
+        #
+        #     Note: The following fields are mutually exclusive: `minimum`, `exclusive_minimum`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] exclusive_minimum
         #   @return [::Float]
         #     Exclusive lower bound.
+        #
+        #     Note: The following fields are mutually exclusive: `exclusive_minimum`, `minimum`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] maximum
         #   @return [::Float]
         #     Inclusive upper bound.
+        #
+        #     Note: The following fields are mutually exclusive: `maximum`, `exclusive_maximum`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] exclusive_maximum
         #   @return [::Float]
         #     Exclusive upper bound.
+        #
+        #     Note: The following fields are mutually exclusive: `exclusive_maximum`, `maximum`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         class Interval
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

@@ -474,6 +474,9 @@ module Google
         # @!attribute [rw] instructions
         #   @return [::String]
         #     Instructions for mounting
+        # @!attribute [r] ip_address
+        #   @return [::String]
+        #     Output only. IP Address.
         class MountOption
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -485,11 +488,15 @@ module Google
         #     Full name of the snapshot resource.
         #     Format:
         #     projects/\\{project}/locations/\\{location}/volumes/\\{volume}/snapshots/\\{snapshot}
+        #
+        #     Note: The following fields are mutually exclusive: `source_snapshot`, `source_backup`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] source_backup
         #   @return [::String]
         #     Full name of the backup resource.
         #     Format:
         #     projects/\\{project}/locations/\\{location}/backupVaults/\\{backup_vault_id}/backups/\\{backup_id}
+        #
+        #     Note: The following fields are mutually exclusive: `source_backup`, `source_snapshot`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         class RestoreParameters
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -548,9 +555,7 @@ module Google
         # The Hybrid Replication parameters for the volume.
         # @!attribute [rw] replication
         #   @return [::String]
-        #     Required. Desired Identifier (name) of the replication which will be created for this volume.
-        #     Format:
-        #     `projects/{project_id}/locations/{location}/volumes/{volume_id}/replications/{replication_id}`
+        #     Required. Desired name for the replication of this volume.
         # @!attribute [rw] peer_volume_name
         #   @return [::String]
         #     Required. Name of the user's local source volume to be peered with the

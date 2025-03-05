@@ -49,9 +49,13 @@ module Google
         # @!attribute [rw] one_time_schedule
         #   @return [::Google::Cloud::OsConfig::V1::OneTimeSchedule]
         #     Required. Schedule a one-time execution.
+        #
+        #     Note: The following fields are mutually exclusive: `one_time_schedule`, `recurring_schedule`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] recurring_schedule
         #   @return [::Google::Cloud::OsConfig::V1::RecurringSchedule]
         #     Required. Schedule recurring executions.
+        #
+        #     Note: The following fields are mutually exclusive: `recurring_schedule`, `one_time_schedule`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [r] create_time
         #   @return [::Google::Protobuf::Timestamp]
         #     Output only. Time the patch deployment was created. Timestamp is in
@@ -121,9 +125,13 @@ module Google
         # @!attribute [rw] weekly
         #   @return [::Google::Cloud::OsConfig::V1::WeeklySchedule]
         #     Required. Schedule with weekly executions.
+        #
+        #     Note: The following fields are mutually exclusive: `weekly`, `monthly`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] monthly
         #   @return [::Google::Cloud::OsConfig::V1::MonthlySchedule]
         #     Required. Schedule with monthly executions.
+        #
+        #     Note: The following fields are mutually exclusive: `monthly`, `weekly`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [r] last_execute_time
         #   @return [::Google::Protobuf::Timestamp]
         #     Output only. The time the last patch job ran successfully.
@@ -167,12 +175,16 @@ module Google
         # @!attribute [rw] week_day_of_month
         #   @return [::Google::Cloud::OsConfig::V1::WeekDayOfMonth]
         #     Required. Week day in a month.
+        #
+        #     Note: The following fields are mutually exclusive: `week_day_of_month`, `month_day`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] month_day
         #   @return [::Integer]
         #     Required. One day of the month. 1-31 indicates the 1st to the 31st day.
         #     -1 indicates the last day of the month. Months without the target day
         #     will be skipped. For example, a schedule to run "every month on the 31st"
         #     will not run in February, April, June, etc.
+        #
+        #     Note: The following fields are mutually exclusive: `month_day`, `week_day_of_month`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         class MonthlySchedule
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

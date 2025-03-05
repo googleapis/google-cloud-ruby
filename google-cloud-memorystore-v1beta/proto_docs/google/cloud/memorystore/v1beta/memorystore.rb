@@ -135,9 +135,13 @@ module Google
           #   @return [::Google::Cloud::Memorystore::V1beta::PscAutoConnection]
           #     Detailed information of a PSC connection that is created through
           #     service connectivity automation.
+          #
+          #     Note: The following fields are mutually exclusive: `psc_auto_connection`, `psc_connection`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] psc_connection
           #   @return [::Google::Cloud::Memorystore::V1beta::PscConnection]
           #     Detailed information of a PSC connection that is created by the user.
+          #
+          #     Note: The following fields are mutually exclusive: `psc_connection`, `psc_auto_connection`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           class ConnectionDetail
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -228,11 +232,14 @@ module Google
             # Mode is not specified.
             MODE_UNSPECIFIED = 0
 
-            # Instance is in standalone mode.
+            # Deprecated: Use CLUSTER_DISABLED instead.
             STANDALONE = 1
 
             # Instance is in cluster mode.
             CLUSTER = 2
+
+            # Cluster mode is disabled for the instance.
+            CLUSTER_DISABLED = 4
           end
         end
 

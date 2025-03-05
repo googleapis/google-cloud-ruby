@@ -38,9 +38,9 @@ module Google
               self.unmarshal_class_method = :decode
               self.service_name = 'google.shopping.merchant.accounts.v1beta.OnlineReturnPolicyService'
 
-              # Gets an existing return policy.
+              # Gets an existing return policy for a given business.
               rpc :GetOnlineReturnPolicy, ::Google::Shopping::Merchant::Accounts::V1beta::GetOnlineReturnPolicyRequest, ::Google::Shopping::Merchant::Accounts::V1beta::OnlineReturnPolicy
-              # Lists all existing return policies.
+              # Lists all existing return policies for a given business.
               rpc :ListOnlineReturnPolicies, ::Google::Shopping::Merchant::Accounts::V1beta::ListOnlineReturnPoliciesRequest, ::Google::Shopping::Merchant::Accounts::V1beta::ListOnlineReturnPoliciesResponse
             end
 

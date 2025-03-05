@@ -1,5 +1,34 @@
 # Release History
 
+### 1.5.0 (2025-02-25)
+
+#### Features
+
+* Introduce PublicKeyFormat enum for selecting public key export encoding 
+* Support PQC asymmetric signing algorithms ML_DSA_65 and SLH_DSA_SHA2_128s ([#29168](https://github.com/googleapis/google-cloud-ruby/issues/29168)) 
+
+### 1.4.0 (2025-01-28)
+
+#### Features
+
+* Update Ruby version requirement to 3.0 
+#### Documentation
+
+* Clarify behavior of protobuf message fields that are part of mutually-exclusive sets 
+* Include note about validating externally-provided credentials 
+
+### 1.3.2 (2025-01-15)
+
+#### Documentation
+
+* Minor updates ([#28203](https://github.com/googleapis/google-cloud-ruby/issues/28203)) 
+
+### 1.3.1 (2025-01-08)
+
+#### Documentation
+
+* Fixed some links in the reference documentation ([#28116](https://github.com/googleapis/google-cloud-ruby/issues/28116)) 
+
 ### 1.3.0 (2024-12-10)
 
 #### Features

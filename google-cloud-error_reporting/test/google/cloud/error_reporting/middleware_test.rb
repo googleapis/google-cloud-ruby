@@ -175,7 +175,7 @@ describe Google::Cloud::ErrorReporting::Middleware, :mock_error_reporting do
     end
 
     it "calls error_reporting#report when no correct status found" do
-      stub_error_reporting = MiniTest::Mock.new
+      stub_error_reporting = Minitest::Mock.new
       stub_error_reporting.expect :report, nil do |error_event|
         _(error_event).must_be_kind_of Google::Cloud::ErrorReporting::ErrorEvent
       end

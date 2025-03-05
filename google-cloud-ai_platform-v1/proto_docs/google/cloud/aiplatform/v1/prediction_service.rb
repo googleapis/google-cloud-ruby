@@ -471,6 +471,9 @@ module Google
         #   @return [::Integer]
         #     The total number of billable characters counted across all instances from
         #     the request.
+        # @!attribute [r] prompt_tokens_details
+        #   @return [::Array<::Google::Cloud::AIPlatform::V1::ModalityTokenCount>]
+        #     Output only. List of modalities that were processed in the request input.
         class CountTokensResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -499,6 +502,13 @@ module Google
         #     Optional. The user provided system instructions for the model.
         #     Note: only text should be used in parts and content in each part will be in
         #     a separate paragraph.
+        # @!attribute [rw] cached_content
+        #   @return [::String]
+        #     Optional. The name of the cached content used as context to serve the
+        #     prediction. Note: only used in explicit caching, where users can have
+        #     control over caching (e.g. what content to cache) and enjoy guaranteed cost
+        #     savings. Format:
+        #     `projects/{project}/locations/{location}/cachedContents/{cachedContent}`
         # @!attribute [rw] tools
         #   @return [::Array<::Google::Cloud::AIPlatform::V1::Tool>]
         #     Optional. A list of `Tools` the model may use to generate the next
@@ -548,6 +558,13 @@ module Google
         # @!attribute [r] model_version
         #   @return [::String]
         #     Output only. The model version used to generate the response.
+        # @!attribute [r] create_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Output only. Timestamp when the request is made to the server.
+        # @!attribute [r] response_id
+        #   @return [::String]
+        #     Output only. response_id is used to identify each response. It is the
+        #     encoding of the event_id.
         # @!attribute [r] prompt_feedback
         #   @return [::Google::Cloud::AIPlatform::V1::GenerateContentResponse::PromptFeedback]
         #     Output only. Content filter results for a prompt sent in the request.
@@ -606,6 +623,20 @@ module Google
           # @!attribute [rw] total_token_count
           #   @return [::Integer]
           #     Total token count for prompt and response candidates.
+          # @!attribute [r] cached_content_token_count
+          #   @return [::Integer]
+          #     Output only. Number of tokens in the cached part in the input (the cached
+          #     content).
+          # @!attribute [r] prompt_tokens_details
+          #   @return [::Array<::Google::Cloud::AIPlatform::V1::ModalityTokenCount>]
+          #     Output only. List of modalities that were processed in the request input.
+          # @!attribute [r] cache_tokens_details
+          #   @return [::Array<::Google::Cloud::AIPlatform::V1::ModalityTokenCount>]
+          #     Output only. List of modalities of the cached content in the request
+          #     input.
+          # @!attribute [r] candidates_tokens_details
+          #   @return [::Array<::Google::Cloud::AIPlatform::V1::ModalityTokenCount>]
+          #     Output only. List of modalities that were returned in the response.
           class UsageMetadata
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods

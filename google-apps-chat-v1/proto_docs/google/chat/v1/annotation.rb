@@ -62,12 +62,23 @@ module Google
         # @!attribute [rw] user_mention
         #   @return [::Google::Apps::Chat::V1::UserMentionMetadata]
         #     The metadata of user mention.
+        #
+        #     Note: The following fields are mutually exclusive: `user_mention`, `slash_command`, `rich_link_metadata`, `custom_emoji_metadata`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] slash_command
         #   @return [::Google::Apps::Chat::V1::SlashCommandMetadata]
         #     The metadata for a slash command.
+        #
+        #     Note: The following fields are mutually exclusive: `slash_command`, `user_mention`, `rich_link_metadata`, `custom_emoji_metadata`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] rich_link_metadata
         #   @return [::Google::Apps::Chat::V1::RichLinkMetadata]
         #     The metadata for a rich link.
+        #
+        #     Note: The following fields are mutually exclusive: `rich_link_metadata`, `user_mention`, `slash_command`, `custom_emoji_metadata`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] custom_emoji_metadata
+        #   @return [::Google::Apps::Chat::V1::CustomEmojiMetadata]
+        #     The metadata for a custom emoji.
+        #
+        #     Note: The following fields are mutually exclusive: `custom_emoji_metadata`, `user_mention`, `slash_command`, `rich_link_metadata`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         class Annotation
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -138,9 +149,13 @@ module Google
         # @!attribute [rw] drive_link_data
         #   @return [::Google::Apps::Chat::V1::DriveLinkData]
         #     Data for a drive link.
+        #
+        #     Note: The following fields are mutually exclusive: `drive_link_data`, `chat_space_link_data`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] chat_space_link_data
         #   @return [::Google::Apps::Chat::V1::ChatSpaceLinkData]
         #     Data for a chat space link.
+        #
+        #     Note: The following fields are mutually exclusive: `chat_space_link_data`, `drive_link_data`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         class RichLinkMetadata
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -156,6 +171,15 @@ module Google
             # A Chat space rich link type. For example, a space smart chip.
             CHAT_SPACE = 2
           end
+        end
+
+        # Annotation metadata for custom emoji.
+        # @!attribute [rw] custom_emoji
+        #   @return [::Google::Apps::Chat::V1::CustomEmoji]
+        #     The custom emoji.
+        class CustomEmojiMetadata
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # Data for Google Drive links.
@@ -206,6 +230,9 @@ module Google
 
           # A rich link annotation.
           RICH_LINK = 3
+
+          # A custom emoji annotation.
+          CUSTOM_EMOJI = 4
         end
       end
     end

@@ -49,9 +49,13 @@ module Google
         # @!attribute [rw] article_suggestion_model_metadata
         #   @return [::Google::Cloud::Dialogflow::V2::ArticleSuggestionModelMetadata]
         #     Metadata for article suggestion models.
+        #
+        #     Note: The following fields are mutually exclusive: `article_suggestion_model_metadata`, `smart_reply_model_metadata`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] smart_reply_model_metadata
         #   @return [::Google::Cloud::Dialogflow::V2::SmartReplyModelMetadata]
         #     Metadata for smart reply models.
+        #
+        #     Note: The following fields are mutually exclusive: `smart_reply_model_metadata`, `article_suggestion_model_metadata`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [r] satisfies_pzs
         #   @return [::Boolean]
         #     Output only. A read only boolean field reflecting Zone Separation
@@ -130,7 +134,7 @@ module Google
         # @!attribute [r] raw_human_eval_template_csv
         #   @return [::String]
         #     Output only. Human eval template in csv format.
-        #     It tooks real-world conversations provided through input dataset, generates
+        #     It takes real-world conversations provided through input dataset, generates
         #     example suggestions for customer to verify quality of the model.
         #     For Smart Reply, the generated csv file contains columns of
         #     Context, (Suggestions,Q1,Q2)*3, Actual reply.
@@ -155,10 +159,14 @@ module Google
         #     Required. Datasets used for evaluation.
         # @!attribute [rw] smart_reply_config
         #   @return [::Google::Cloud::Dialogflow::V2::EvaluationConfig::SmartReplyConfig]
-        #     Configuration for smart reply model evalution.
+        #     Configuration for smart reply model evaluation.
+        #
+        #     Note: The following fields are mutually exclusive: `smart_reply_config`, `smart_compose_config`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] smart_compose_config
         #   @return [::Google::Cloud::Dialogflow::V2::EvaluationConfig::SmartComposeConfig]
-        #     Configuration for smart compose model evalution.
+        #     Configuration for smart compose model evaluation.
+        #
+        #     Note: The following fields are mutually exclusive: `smart_compose_config`, `smart_reply_config`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         class EvaluationConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

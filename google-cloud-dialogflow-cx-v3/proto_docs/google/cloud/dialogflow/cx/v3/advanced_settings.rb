@@ -77,7 +77,7 @@ module Google
             #     Timeout before detecting no speech.
             # @!attribute [rw] use_timeout_based_endpointing
             #   @return [::Boolean]
-            #     Use timeout based endpointing, interpreting endpointer sensitivy as
+            #     Use timeout based endpointing, interpreting endpointer sensitivity as
             #     seconds of timeout value.
             # @!attribute [rw] models
             #   @return [::Google::Protobuf::Map{::String => ::String}]

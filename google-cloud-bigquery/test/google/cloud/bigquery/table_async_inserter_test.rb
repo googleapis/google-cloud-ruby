@@ -77,6 +77,42 @@ describe Google::Cloud::Bigquery::Table::AsyncInserter, :mock_bigquery do
     mock.verify
   end
 
+  it "insert rows into another project" do
+    mock = Minitest::Mock.new
+    insert_req = {
+      rows: [insert_rows.first], ignoreUnknownValues: nil, skipInvalidRows: nil
+    }.to_json
+    another_project_id = "another-project"
+    mock.expect :insert_all_table_data, success_table_insert_gapi,
+      [another_project_id, table.dataset_id, table.table_id, insert_req], options: { skip_serialization: true }
+    table.service.mocked_service = mock
+    table.gapi.table_reference.project_id = another_project_id
+
+    inserter = table.insert_async do |result|
+      puts "table.insert_async: #{result.error.inspect}" if result.error
+    end
+
+    SecureRandom.stub :uuid, insert_id do
+      inserter.insert rows.first
+
+      _(inserter.batch.rows).must_equal [rows.first]
+
+      _(inserter).must_be :started?
+      _(inserter).wont_be :stopped?
+
+      # force the queued rows to be inserted
+      inserter.flush
+      inserter.stop.wait!
+
+      _(inserter).wont_be :started?
+      _(inserter).must_be :stopped?
+
+      _(inserter.batch).must_be :nil?
+    end
+
+    mock.verify
+  end
+
   it "inserts three rows at the same time" do
     mock = Minitest::Mock.new
     insert_req = {

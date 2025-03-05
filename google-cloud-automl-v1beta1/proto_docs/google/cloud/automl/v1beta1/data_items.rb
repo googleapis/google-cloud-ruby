@@ -28,9 +28,13 @@ module Google
         #     Image content represented as a stream of bytes.
         #     Note: As with all `bytes` fields, protobuffers use a pure binary
         #     representation, whereas JSON representations use base64.
+        #
+        #     Note: The following fields are mutually exclusive: `image_bytes`, `input_config`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] input_config
         #   @return [::Google::Cloud::AutoML::V1beta1::InputConfig]
         #     An input config specifying the content of the image.
+        #
+        #     Note: The following fields are mutually exclusive: `input_config`, `image_bytes`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] thumbnail_uri
         #   @return [::String]
         #     Output only. HTTP URI to the thumbnail image.
@@ -208,15 +212,23 @@ module Google
         # @!attribute [rw] image
         #   @return [::Google::Cloud::AutoML::V1beta1::Image]
         #     Example image.
+        #
+        #     Note: The following fields are mutually exclusive: `image`, `text_snippet`, `document`, `row`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] text_snippet
         #   @return [::Google::Cloud::AutoML::V1beta1::TextSnippet]
         #     Example text.
+        #
+        #     Note: The following fields are mutually exclusive: `text_snippet`, `image`, `document`, `row`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] document
         #   @return [::Google::Cloud::AutoML::V1beta1::Document]
         #     Example document.
+        #
+        #     Note: The following fields are mutually exclusive: `document`, `image`, `text_snippet`, `row`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] row
         #   @return [::Google::Cloud::AutoML::V1beta1::Row]
         #     Example relational table row.
+        #
+        #     Note: The following fields are mutually exclusive: `row`, `image`, `text_snippet`, `document`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         class ExamplePayload
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

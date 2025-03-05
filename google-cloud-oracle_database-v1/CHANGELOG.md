@@ -1,5 +1,27 @@
 # Changelog
 
+### 0.4.0 (2025-01-28)
+
+#### Features
+
+* Update Ruby version requirement to 3.0 
+#### Documentation
+
+* Clarify behavior of protobuf message fields that are part of mutually-exclusive sets 
+* Include note about validating externally-provided credentials 
+
+### 0.3.0 (2025-01-09)
+
+#### Features
+
+* Support new ACCOUNT_SUSPENDED state in Entitlement ([#28208](https://github.com/googleapis/google-cloud-ruby/issues/28208)) 
+
+### 0.2.1 (2025-01-08)
+
+#### Documentation
+
+* the CloudVmClusterProperties#system_version field is no longer labeled as output only ([#28178](https://github.com/googleapis/google-cloud-ruby/issues/28178)) 
+
 ### 0.2.0 (2024-12-10)
 
 #### Features

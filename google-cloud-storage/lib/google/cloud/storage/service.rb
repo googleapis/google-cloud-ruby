@@ -55,15 +55,14 @@ module Google
           @credentials = credentials
           @service = API::StorageService.new
           @service.client_options.application_name    = "gcloud-ruby"
-          @service.client_options.application_version = \
-            Google::Cloud::Storage::VERSION
+          @service.client_options.application_version = Google::Cloud::Storage::VERSION
           @service.client_options.open_timeout_sec = (open_timeout || timeout)
           @service.client_options.read_timeout_sec = (read_timeout || timeout)
           @service.client_options.send_timeout_sec = (send_timeout || timeout)
           @service.client_options.transparent_gzip_decompression = false
           @service.request_options.retries = retries || 3
           @service.request_options.header ||= {}
-          @service.request_options.header["x-goog-api-client"] = \
+          @service.request_options.header["x-goog-api-client"] =
             "gl-ruby/#{RUBY_VERSION} gccl/#{Google::Cloud::Storage::VERSION}"
           @service.request_options.header["Accept-Encoding"] = "gzip"
           @service.request_options.quota_project = quota_project if quota_project
@@ -97,11 +96,12 @@ module Google
 
         ##
         # Retrieves a list of buckets for the given project.
-        def list_buckets prefix: nil, token: nil, max: nil, user_project: nil, options: {}
+        def list_buckets prefix: nil, token: nil, max: nil, user_project: nil, soft_deleted: nil, options: {}
           execute do
             service.list_buckets \
               @project, prefix: prefix, page_token: token, max_results: max,
-                        user_project: user_project(user_project), options: options
+                        user_project: user_project(user_project),
+                        soft_deleted: soft_deleted, options: options
           end
         end
 
@@ -112,12 +112,16 @@ module Google
                        if_metageneration_match: nil,
                        if_metageneration_not_match: nil,
                        user_project: nil,
+                       soft_deleted: nil,
+                       generation: nil,
                        options: {}
           execute do
             service.get_bucket bucket_name,
                                if_metageneration_match: if_metageneration_match,
                                if_metageneration_not_match: if_metageneration_not_match,
                                user_project: user_project(user_project),
+                               soft_deleted: soft_deleted,
+                               generation: generation,
                                options: options
           end
         end
@@ -655,6 +659,17 @@ module Google
         end
 
         ##
+        # Restore soft deleted bucket
+        def restore_bucket bucket_name,
+                           generation,
+                           options: {}
+          execute do
+            service.restore_bucket bucket_name, generation,
+                                   options: options
+          end
+        end
+
+        ##
         # Restores a soft-deleted object.
         def restore_file bucket_name,
                          file_path,
@@ -895,8 +910,7 @@ module Google
           headers = (options[:header] ||= {})
           headers["x-goog-#{source}encryption-algorithm"] = "AES256"
           headers["x-goog-#{source}encryption-key"] = Base64.strict_encode64 key
-          headers["x-goog-#{source}encryption-key-sha256"] = \
-            Base64.strict_encode64 key_sha256
+          headers["x-goog-#{source}encryption-key-sha256"] = Base64.strict_encode64 key_sha256
           options
         end
 

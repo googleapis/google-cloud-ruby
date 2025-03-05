@@ -1,5 +1,18 @@
 # Changelog
 
+### 1.10.0 (2025-01-29)
+
+#### Features
+
+* Provide methods to determine whether services are available with the currently installed versioned client ([#28528](https://github.com/googleapis/google-cloud-ruby/issues/28528)) 
+* Update Ruby version requirement to 3.0 
+
+### 1.9.0 (2024-12-12)
+
+#### Features
+
+* Support for the NetworkProfiles service ([#27798](https://github.com/googleapis/google-cloud-ruby/issues/27798)) 
+
 ### 1.8.1 (2024-08-09)
 
 #### Documentation

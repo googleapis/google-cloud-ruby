@@ -93,13 +93,19 @@ module Google
           # @!attribute [rw] digital_parsing_config
           #   @return [::Google::Cloud::DiscoveryEngine::V1::DocumentProcessingConfig::ParsingConfig::DigitalParsingConfig]
           #     Configurations applied to digital parser.
+          #
+          #     Note: The following fields are mutually exclusive: `digital_parsing_config`, `ocr_parsing_config`, `layout_parsing_config`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] ocr_parsing_config
           #   @return [::Google::Cloud::DiscoveryEngine::V1::DocumentProcessingConfig::ParsingConfig::OcrParsingConfig]
           #     Configurations applied to OCR parser. Currently it only applies to
           #     PDFs.
+          #
+          #     Note: The following fields are mutually exclusive: `ocr_parsing_config`, `digital_parsing_config`, `layout_parsing_config`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] layout_parsing_config
           #   @return [::Google::Cloud::DiscoveryEngine::V1::DocumentProcessingConfig::ParsingConfig::LayoutParsingConfig]
           #     Configurations applied to layout parser.
+          #
+          #     Note: The following fields are mutually exclusive: `layout_parsing_config`, `digital_parsing_config`, `ocr_parsing_config`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           class ParsingConfig
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods

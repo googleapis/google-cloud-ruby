@@ -40,6 +40,8 @@ module Google
     # @!attribute [rw] error
     #   @return [::Google::Rpc::Status]
     #     The error result of the operation in case of failure or cancellation.
+    #
+    #     Note: The following fields are mutually exclusive: `error`, `response`. If a field in that set is populated, all other fields in the set will automatically be cleared.
     # @!attribute [rw] response
     #   @return [::Google::Protobuf::Any]
     #     The normal, successful response of the operation.  If the original
@@ -50,6 +52,8 @@ module Google
     #     is the original method name.  For example, if the original method name
     #     is `TakeSnapshot()`, the inferred response type is
     #     `TakeSnapshotResponse`.
+    #
+    #     Note: The following fields are mutually exclusive: `response`, `error`. If a field in that set is populated, all other fields in the set will automatically be cleared.
     class Operation
       include ::Google::Protobuf::MessageExts
       extend ::Google::Protobuf::MessageExts::ClassMethods

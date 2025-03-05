@@ -258,9 +258,13 @@ module Google
         # @!attribute [rw] container_spec
         #   @return [::Google::Cloud::AIPlatform::V1::ContainerSpec]
         #     The custom container task.
+        #
+        #     Note: The following fields are mutually exclusive: `container_spec`, `python_package_spec`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] python_package_spec
         #   @return [::Google::Cloud::AIPlatform::V1::PythonPackageSpec]
         #     The Python packaged task.
+        #
+        #     Note: The following fields are mutually exclusive: `python_package_spec`, `container_spec`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] machine_spec
         #   @return [::Google::Cloud::AIPlatform::V1::MachineSpec]
         #     Optional. Immutable. The specification of a single machine.

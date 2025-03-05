@@ -63,9 +63,13 @@ module Google
             # @!attribute [rw] full_backup_spec
             #   @return [::Google::Cloud::Spanner::Admin::Database::V1::FullBackupSpec]
             #     The schedule creates only full backups.
+            #
+            #     Note: The following fields are mutually exclusive: `full_backup_spec`, `incremental_backup_spec`. If a field in that set is populated, all other fields in the set will automatically be cleared.
             # @!attribute [rw] incremental_backup_spec
             #   @return [::Google::Cloud::Spanner::Admin::Database::V1::IncrementalBackupSpec]
             #     The schedule creates incremental backup chains.
+            #
+            #     Note: The following fields are mutually exclusive: `incremental_backup_spec`, `full_backup_spec`. If a field in that set is populated, all other fields in the set will automatically be cleared.
             # @!attribute [r] update_time
             #   @return [::Google::Protobuf::Timestamp]
             #     Output only. The timestamp at which the schedule was last updated.
@@ -82,7 +86,7 @@ module Google
             #   @return [::String]
             #     Required. Textual representation of the crontab. User can customize the
             #     backup frequency and the backup version time using the cron
-            #     expression. The version time must be in UTC timzeone.
+            #     expression. The version time must be in UTC timezone.
             #
             #     The backup will contain an externally consistent copy of the
             #     database at the version time. Allowed frequencies are 12 hour, 1 day,

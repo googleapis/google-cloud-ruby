@@ -427,6 +427,10 @@
       "component": "google-cloud-cloud_quotas-v1",
       "version_file": "lib/google/cloud/cloud_quotas/v1/version.rb"
     },
+    "google-cloud-cloud_quotas-v1beta": {
+      "component": "google-cloud-cloud_quotas-v1beta",
+      "version_file": "lib/google/cloud/cloud_quotas/v1beta/version.rb"
+    },
     "google-cloud-commerce-consumer-procurement": {
       "component": "google-cloud-commerce-consumer-procurement",
       "version_file": "lib/google/cloud/commerce/consumer/procurement/version.rb"
@@ -1106,6 +1110,14 @@
     "google-cloud-parallelstore-v1beta": {
       "component": "google-cloud-parallelstore-v1beta",
       "version_file": "lib/google/cloud/parallelstore/v1beta/version.rb"
+    },
+    "google-cloud-parameter_manager": {
+      "component": "google-cloud-parameter_manager",
+      "version_file": "lib/google/cloud/parameter_manager/version.rb"
+    },
+    "google-cloud-parameter_manager-v1": {
+      "component": "google-cloud-parameter_manager-v1",
+      "version_file": "lib/google/cloud/parameter_manager/v1/version.rb"
     },
     "google-cloud-phishing_protection": {
       "component": "google-cloud-phishing_protection",
@@ -1826,6 +1838,14 @@
     "google-shopping-merchant-reports-v1beta": {
       "component": "google-shopping-merchant-reports-v1beta",
       "version_file": "lib/google/shopping/merchant/reports/v1beta/version.rb"
+    },
+    "google-shopping-merchant-reviews": {
+      "component": "google-shopping-merchant-reviews",
+      "version_file": "lib/google/shopping/merchant/reviews/version.rb"
+    },
+    "google-shopping-merchant-reviews-v1beta": {
+      "component": "google-shopping-merchant-reviews-v1beta",
+      "version_file": "lib/google/shopping/merchant/reviews/v1beta/version.rb"
     },
     "grafeas": {
       "component": "grafeas",

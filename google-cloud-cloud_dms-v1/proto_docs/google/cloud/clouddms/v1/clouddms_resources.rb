@@ -128,9 +128,13 @@ module Google
         # @!attribute [rw] static_ip_connectivity
         #   @return [::Google::Cloud::CloudDMS::V1::StaticIpConnectivity]
         #     Static ip connectivity data (default, no additional details needed).
+        #
+        #     Note: The following fields are mutually exclusive: `static_ip_connectivity`, `private_service_connect_connectivity`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] private_service_connect_connectivity
         #   @return [::Google::Cloud::CloudDMS::V1::PrivateServiceConnectConnectivity]
         #     Private service connect connectivity.
+        #
+        #     Note: The following fields are mutually exclusive: `private_service_connect_connectivity`, `static_ip_connectivity`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         class PostgreSqlConnectionProfile
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -170,12 +174,18 @@ module Google
         # @!attribute [rw] static_service_ip_connectivity
         #   @return [::Google::Cloud::CloudDMS::V1::StaticServiceIpConnectivity]
         #     Static Service IP connectivity.
+        #
+        #     Note: The following fields are mutually exclusive: `static_service_ip_connectivity`, `forward_ssh_connectivity`, `private_connectivity`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] forward_ssh_connectivity
         #   @return [::Google::Cloud::CloudDMS::V1::ForwardSshTunnelConnectivity]
         #     Forward SSH tunnel connectivity.
+        #
+        #     Note: The following fields are mutually exclusive: `forward_ssh_connectivity`, `static_service_ip_connectivity`, `private_connectivity`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] private_connectivity
         #   @return [::Google::Cloud::CloudDMS::V1::PrivateConnectivity]
         #     Private connectivity.
+        #
+        #     Note: The following fields are mutually exclusive: `private_connectivity`, `static_service_ip_connectivity`, `forward_ssh_connectivity`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         class OracleConnectionProfile
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -229,9 +239,13 @@ module Google
         #     The time when this access control entry expires in
         #     [RFC 3339](https://tools.ietf.org/html/rfc3339) format, for example:
         #     `2012-11-15T16:19:00.094Z`.
+        #
+        #     Note: The following fields are mutually exclusive: `expire_time`, `ttl`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] ttl
         #   @return [::Google::Protobuf::Duration]
         #     Input only. The time-to-leave of this access control entry.
+        #
+        #     Note: The following fields are mutually exclusive: `ttl`, `expire_time`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] label
         #   @return [::String]
         #     A label to identify this entry.
@@ -665,9 +679,13 @@ module Google
         # @!attribute [rw] password
         #   @return [::String]
         #     Input only. SSH password.
+        #
+        #     Note: The following fields are mutually exclusive: `password`, `private_key`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] private_key
         #   @return [::String]
         #     Input only. SSH private key.
+        #
+        #     Note: The following fields are mutually exclusive: `private_key`, `password`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         class ForwardSshTunnelConnectivity
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -753,12 +771,18 @@ module Google
         #   @return [::Google::Cloud::CloudDMS::V1::ReverseSshConnectivity]
         #     The details needed to communicate to the source over Reverse SSH
         #     tunnel connectivity.
+        #
+        #     Note: The following fields are mutually exclusive: `reverse_ssh_connectivity`, `vpc_peering_connectivity`, `static_ip_connectivity`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] vpc_peering_connectivity
         #   @return [::Google::Cloud::CloudDMS::V1::VpcPeeringConnectivity]
         #     The details of the VPC network that the source database is located in.
+        #
+        #     Note: The following fields are mutually exclusive: `vpc_peering_connectivity`, `reverse_ssh_connectivity`, `static_ip_connectivity`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] static_ip_connectivity
         #   @return [::Google::Cloud::CloudDMS::V1::StaticIpConnectivity]
         #     static ip connectivity data (default, no additional details needed).
+        #
+        #     Note: The following fields are mutually exclusive: `static_ip_connectivity`, `reverse_ssh_connectivity`, `vpc_peering_connectivity`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [r] duration
         #   @return [::Google::Protobuf::Duration]
         #     Output only. The duration of the migration job (in seconds). A duration in
@@ -990,18 +1014,28 @@ module Google
         # @!attribute [rw] mysql
         #   @return [::Google::Cloud::CloudDMS::V1::MySqlConnectionProfile]
         #     A MySQL database connection profile.
+        #
+        #     Note: The following fields are mutually exclusive: `mysql`, `postgresql`, `oracle`, `cloudsql`, `alloydb`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] postgresql
         #   @return [::Google::Cloud::CloudDMS::V1::PostgreSqlConnectionProfile]
         #     A PostgreSQL database connection profile.
+        #
+        #     Note: The following fields are mutually exclusive: `postgresql`, `mysql`, `oracle`, `cloudsql`, `alloydb`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] oracle
         #   @return [::Google::Cloud::CloudDMS::V1::OracleConnectionProfile]
         #     An Oracle database connection profile.
+        #
+        #     Note: The following fields are mutually exclusive: `oracle`, `mysql`, `postgresql`, `cloudsql`, `alloydb`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] cloudsql
         #   @return [::Google::Cloud::CloudDMS::V1::CloudSqlConnectionProfile]
         #     A CloudSQL database connection profile.
+        #
+        #     Note: The following fields are mutually exclusive: `cloudsql`, `mysql`, `postgresql`, `oracle`, `alloydb`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] alloydb
         #   @return [::Google::Cloud::CloudDMS::V1::AlloyDbConnectionProfile]
         #     An AlloyDB cluster connection profile.
+        #
+        #     Note: The following fields are mutually exclusive: `alloydb`, `mysql`, `postgresql`, `oracle`, `cloudsql`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [r] error
         #   @return [::Google::Rpc::Status]
         #     Output only. The error details in case of state FAILED.

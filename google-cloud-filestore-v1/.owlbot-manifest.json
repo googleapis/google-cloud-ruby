@@ -57,6 +57,7 @@
     "snippets/cloud_filestore_manager/list_backups.rb",
     "snippets/cloud_filestore_manager/list_instances.rb",
     "snippets/cloud_filestore_manager/list_snapshots.rb",
+    "snippets/cloud_filestore_manager/promote_replica.rb",
     "snippets/cloud_filestore_manager/restore_instance.rb",
     "snippets/cloud_filestore_manager/revert_instance.rb",
     "snippets/cloud_filestore_manager/update_backup.rb",

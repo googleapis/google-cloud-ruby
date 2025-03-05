@@ -253,11 +253,7 @@ module Google
               #     request the next page of results, page_token must be the value of
               #     {::Google::Cloud::Scheduler::V1::ListJobsResponse#next_page_token next_page_token}
               #     returned from the previous call to
-              #     {::Google::Cloud::Scheduler::V1::CloudScheduler::Rest::Client#list_jobs ListJobs}. It is an
-              #     error to switch the value of
-              #     [filter][google.cloud.scheduler.v1.ListJobsRequest.filter] or
-              #     [order_by][google.cloud.scheduler.v1.ListJobsRequest.order_by] while
-              #     iterating through pages.
+              #     {::Google::Cloud::Scheduler::V1::CloudScheduler::Rest::Client#list_jobs ListJobs}.
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Scheduler::V1::Job>]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
@@ -958,6 +954,13 @@ module Google
               #    *  (`Signet::OAuth2::Client`) A signet oauth2 client object
               #       (see the [signet docs](https://rubydoc.info/gems/signet/Signet/OAuth2/Client))
               #    *  (`nil`) indicating no credentials
+              #
+              #   Warning: If you accept a credential configuration (JSON file or Hash) from an
+              #   external source for authentication to Google Cloud, you must validate it before
+              #   providing it to a Google API client library. Providing an unvalidated credential
+              #   configuration to Google APIs can compromise the security of your systems and data.
+              #   For more information, refer to [Validate credential configurations from external
+              #   sources](https://cloud.google.com/docs/authentication/external/externally-sourced-credentials).
               #   @return [::Object]
               # @!attribute [rw] scope
               #   The OAuth scopes

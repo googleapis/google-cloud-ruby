@@ -42,6 +42,7 @@ class Google::Cloud::StorageInsights::ClientConstructionMinitest < Minitest::Tes
   end
 
   def test_storage_insights_grpc
+    skip unless Google::Cloud::StorageInsights.storage_insights_available? transport: :grpc
     Gapic::ServiceStub.stub :new, DummyStub.new do
       grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
       client = Google::Cloud::StorageInsights.storage_insights transport: :grpc do |config|
@@ -52,6 +53,7 @@ class Google::Cloud::StorageInsights::ClientConstructionMinitest < Minitest::Tes
   end
 
   def test_storage_insights_rest
+    skip unless Google::Cloud::StorageInsights.storage_insights_available? transport: :rest
     Gapic::Rest::ClientStub.stub :new, DummyStub.new do
       client = Google::Cloud::StorageInsights.storage_insights transport: :rest do |config|
         config.credentials = :dummy_credentials

@@ -1021,7 +1021,7 @@ module Google
                   # runs a single Composer component.
                   #
                   # This method is supported for Cloud Composer environments in versions
-                  # composer-3.*.*-airflow-*.*.* and newer.
+                  # composer-2.*.*-airflow-*.*.* and newer.
                   #
                   # @overload list_workloads(request, options = nil)
                   #   Pass arguments to `list_workloads` via a request object, either of type
@@ -2487,6 +2487,13 @@ module Google
                   #    *  (`Signet::OAuth2::Client`) A signet oauth2 client object
                   #       (see the [signet docs](https://rubydoc.info/gems/signet/Signet/OAuth2/Client))
                   #    *  (`nil`) indicating no credentials
+                  #
+                  #   Warning: If you accept a credential configuration (JSON file or Hash) from an
+                  #   external source for authentication to Google Cloud, you must validate it before
+                  #   providing it to a Google API client library. Providing an unvalidated credential
+                  #   configuration to Google APIs can compromise the security of your systems and data.
+                  #   For more information, refer to [Validate credential configurations from external
+                  #   sources](https://cloud.google.com/docs/authentication/external/externally-sourced-credentials).
                   #   @return [::Object]
                   # @!attribute [rw] scope
                   #   The OAuth scopes

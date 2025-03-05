@@ -89,6 +89,11 @@ module Google
 
                 default_config.rpcs.read_change_stream.timeout = 43_200.0
 
+                default_config.rpcs.execute_query.timeout = 43_200.0
+                default_config.rpcs.execute_query.retry_policy = {
+                  initial_delay: 0.01, max_delay: 60.0, multiplier: 2, retry_codes: [14, 4]
+                }
+
                 default_config
               end
               yield @configure if block_given?
@@ -1151,6 +1156,8 @@ module Google
             #     be within the change stream retention period, less than or equal to the
             #     current time, and after change stream creation, whichever is greater.
             #     This value is inclusive and will be truncated to microsecond granularity.
+            #
+            #     Note: The following fields are mutually exclusive: `start_time`, `continuation_tokens`. If a field in that set is populated, all other fields in the set will automatically be cleared.
             #   @param continuation_tokens [::Google::Cloud::Bigtable::V2::StreamContinuationTokens, ::Hash]
             #     Tokens that describe how to resume reading a stream where reading
             #     previously left off. If specified, changes will be read starting at the
@@ -1162,6 +1169,8 @@ module Google
             #     of a partition merge, the union of the token partitions must exactly
             #     cover the request’s partition. Otherwise, INVALID_ARGUMENT will be
             #     returned.
+            #
+            #     Note: The following fields are mutually exclusive: `continuation_tokens`, `start_time`. If a field in that set is populated, all other fields in the set will automatically be cleared.
             #   @param end_time [::Google::Protobuf::Timestamp, ::Hash]
             #     If specified, OK will be returned when the stream advances beyond
             #     this time. Otherwise, changes will be continuously delivered on the stream.
@@ -1411,6 +1420,13 @@ module Google
             #    *  (`GRPC::Core::Channel`) a gRPC channel with included credentials
             #    *  (`GRPC::Core::ChannelCredentials`) a gRPC credentails object
             #    *  (`nil`) indicating no credentials
+            #
+            #   Warning: If you accept a credential configuration (JSON file or Hash) from an
+            #   external source for authentication to Google Cloud, you must validate it before
+            #   providing it to a Google API client library. Providing an unvalidated credential
+            #   configuration to Google APIs can compromise the security of your systems and data.
+            #   For more information, refer to [Validate credential configurations from external
+            #   sources](https://cloud.google.com/docs/authentication/external/externally-sourced-credentials).
             #   @return [::Object]
             # @!attribute [rw] scope
             #   The OAuth scopes

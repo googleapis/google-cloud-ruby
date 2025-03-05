@@ -1,5 +1,33 @@
 # Release History
 
+### 1.7.1 (2025-02-05)
+
+#### Documentation
+
+* Fixed some documentation formatting ([#28914](https://github.com/googleapis/google-cloud-ruby/issues/28914)) 
+
+### 1.7.0 (2025-01-31)
+
+#### Features
+
+* Added support for message transforms to Topic and Subscription ([#28801](https://github.com/googleapis/google-cloud-ruby/issues/28801)) 
+
+### 1.6.0 (2025-01-28)
+
+#### Features
+
+* Update Ruby version requirement to 3.0 
+#### Documentation
+
+* Clarify behavior of protobuf message fields that are part of mutually-exclusive sets 
+* Include note about validating externally-provided credentials 
+
+### 1.5.0 (2025-01-15)
+
+#### Features
+
+* Add Kafka-based sources to IngestionDataSourceSettings proto and IngestionFailureEvent proto ([#28200](https://github.com/googleapis/google-cloud-ruby/issues/28200)) 
+
 ### 1.4.0 (2024-12-10)
 
 #### Features

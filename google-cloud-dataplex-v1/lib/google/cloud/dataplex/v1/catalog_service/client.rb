@@ -1959,7 +1959,7 @@ module Google
             #     specified path. For example, to attach an aspect to a field that is
             #     specified by the `schema` aspect, the path should have the format
             #     `Schema.<field_name>`.
-            #     * `<aspect_type_reference>*` - matches aspects of the given type for all
+            #     * `<aspect_type_reference>@*` - matches aspects of the given type for all
             #     paths.
             #     * `*@path` - matches aspects of all types on the given path.
             #
@@ -2467,6 +2467,8 @@ module Google
             #     following form: `projects/{project}/locations/{location}`.
             #   @param query [::String]
             #     Required. The query against which entries in scope should be matched.
+            #     The query syntax is defined in [Search syntax for Dataplex
+            #     Catalog](https://cloud.google.com/dataplex/docs/search-syntax).
             #   @param page_size [::Integer]
             #     Optional. Number of results in the search page. If <=0, then defaults
             #     to 10. Max limit for page_size is 1000. Throws an invalid argument for
@@ -2476,6 +2478,11 @@ module Google
             #     this to retrieve the subsequent page.
             #   @param order_by [::String]
             #     Optional. Specifies the ordering of results.
+            #     Supported values are:
+            #
+            #     * `relevance` (default)
+            #     * `last_modified_timestamp`
+            #     * `last_modified_timestamp asc`
             #   @param scope [::String]
             #     Optional. The scope under which the search should be operating. It must
             #     either be `organizations/<org_id>` or `projects/<project_ref>`. If it is
@@ -2991,6 +2998,13 @@ module Google
             #    *  (`GRPC::Core::Channel`) a gRPC channel with included credentials
             #    *  (`GRPC::Core::ChannelCredentials`) a gRPC credentails object
             #    *  (`nil`) indicating no credentials
+            #
+            #   Warning: If you accept a credential configuration (JSON file or Hash) from an
+            #   external source for authentication to Google Cloud, you must validate it before
+            #   providing it to a Google API client library. Providing an unvalidated credential
+            #   configuration to Google APIs can compromise the security of your systems and data.
+            #   For more information, refer to [Validate credential configurations from external
+            #   sources](https://cloud.google.com/docs/authentication/external/externally-sourced-credentials).
             #   @return [::Object]
             # @!attribute [rw] scope
             #   The OAuth scopes
