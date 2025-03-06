@@ -88,6 +88,7 @@ module Google
         # The revision ID of the schema.
         #
         # @return [String] The revision id.
+        # @return [nil] If this object is a reference.
         #
         def revision_id
           return nil if reference?

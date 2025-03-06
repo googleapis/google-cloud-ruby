@@ -17,7 +17,7 @@ require "google/cloud/pubsub"
 def commit_proto_schema schema_id:, proto_file:
   # [START pubsub_commit_proto_schema]
   # schema_id = "your-schema-id"
-  # proto_file = "path/to/a/proto/file/(.proto)/formatted/in/protocol/buffers"
+  # proto_file = "path/to/a/proto_file.proto"
 
   pubsub = Google::Cloud::Pubsub.new
   schema = pubsub.schema schema_id
