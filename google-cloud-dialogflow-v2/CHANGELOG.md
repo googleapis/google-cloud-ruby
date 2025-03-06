@@ -1,5 +1,16 @@
 # Release History
 
+### 1.8.0 (2025-03-05)
+
+#### Features
+
+* Support for ControlPoint 
+* Support for conversation summarization agent assistant 
+* Support for country code in a conversation phone number 
+* Support for telephony connection information 
+* Support for the audio_input parameter to analyze_content 
+* The streaming_analyze_content RPC returns the name of the cloud speech model used for speech recognition 
+
 ### 1.7.0 (2025-01-28)
 
 #### Features
