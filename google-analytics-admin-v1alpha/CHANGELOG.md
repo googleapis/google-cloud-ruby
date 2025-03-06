@@ -1,5 +1,11 @@
 # Release History
 
+### 0.33.0 (2025-03-05)
+
+#### Features
+
+* Support for key events in change history ([#29285](https://github.com/googleapis/google-cloud-ruby/issues/29285)) 
+
 ### 0.32.1 (2025-01-30)
 
 #### Documentation
