@@ -1,5 +1,11 @@
 # Changelog
 
+### 0.14.1 (2025-03-05)
+
+#### Documentation
+
+* fixed bigquery migration product link ([#29288](https://github.com/googleapis/google-cloud-ruby/issues/29288)) 
+
 ### 0.14.0 (2025-01-28)
 
 #### Features
