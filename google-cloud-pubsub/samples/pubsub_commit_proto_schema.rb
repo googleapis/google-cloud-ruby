@@ -26,6 +26,6 @@ def commit_proto_schema schema_id:, proto_file:
 
   result = schema.commit definition, :protocol_buffer
 
-  puts "Schema #{result.name} commited with revision #{result.revision_id}."
+  puts "Schema commited with revision #{result.revision_id}."
   # [END pubsub_commit_proto_schema]
 end

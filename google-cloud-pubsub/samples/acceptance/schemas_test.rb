@@ -149,6 +149,7 @@ describe "schemas" do
     require_relative "../utilities/us-states_pb"
     let(:proto_file) { File.expand_path "data/us-states.proto", __dir__ }
     let(:proto_definition) { File.read proto_file }
+    let(:revision_file) { File.expand_path "data/us-states-revision.proto", __dir__ }
 
     it "supports pubsub_create_topic_with_schema, pubsub_publish_proto_messages with binary encoding" do
       @schema = pubsub.create_schema schema_id, :protocol_buffer, proto_definition
@@ -222,17 +223,15 @@ describe "schemas" do
 
     it "supports pubsub_commit_proto_schema" do
       @schema = pubsub.create_schema schema_id, :protocol_buffer, proto_definition
-      definition_file = File.expand_path "data/us-states-revision.proto", __dir__
-      definition = File.read definition_file
-
-      revision_schema = @schema.commit definition, :protocol_buffer
+      revision_id = @schema.revision_id
 
       # pubsub_commit_proto_schema
       expect_with_retry "pubsub_commit_proto_schema" do
-        assert_output "Schema projects/#{pubsub.project}/schemas/#{schema_id} commited with " \
-                      "revision #{revision_schema.revision_id}.\n" do
-          commit_proto_schema schema_id: schema_id, proto_file: definition
+        out, _err = capture_io do
+          commit_proto_schema schema_id: schema_id, proto_file: revision_file
         end
+        refute_equal out, "Schema commited with revision #{revision_id}."
+        assert_includes out, "Schema commited with revision"
       end
     end
   end
