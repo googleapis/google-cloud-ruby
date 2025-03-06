@@ -1,5 +1,11 @@
 # Changelog
 
+### 0.6.0 (2025-03-05)
+
+#### Features
+
+* Support for seasonal overrides ([#29286](https://github.com/googleapis/google-cloud-ruby/issues/29286)) 
+
 ### 0.5.0 (2025-01-29)
 
 #### Features
