@@ -518,6 +518,20 @@ module Google
             # For an example, see [List events from a Google Chat
             # space](https://developers.google.com/workspace/chat/list-space-events).
             rpc :ListSpaceEvents, ::Google::Apps::Chat::V1::ListSpaceEventsRequest, ::Google::Apps::Chat::V1::ListSpaceEventsResponse
+            # Gets the space notification setting. For an example, see [Get the
+            # caller's space notification
+            # setting](https://developers.google.com/workspace/chat/get-space-notification-setting).
+            #
+            # Requires [user
+            # authentication](https://developers.google.com/workspace/chat/authenticate-authorize-chat-user).
+            rpc :GetSpaceNotificationSetting, ::Google::Apps::Chat::V1::GetSpaceNotificationSettingRequest, ::Google::Apps::Chat::V1::SpaceNotificationSetting
+            # Updates the space notification setting. For an example, see [Update
+            # the caller's space notification
+            # setting](https://developers.google.com/workspace/chat/update-space-notification-setting).
+            #
+            # Requires [user
+            # authentication](https://developers.google.com/workspace/chat/authenticate-authorize-chat-user).
+            rpc :UpdateSpaceNotificationSetting, ::Google::Apps::Chat::V1::UpdateSpaceNotificationSettingRequest, ::Google::Apps::Chat::V1::SpaceNotificationSetting
           end
 
           Stub = Service.rpc_stub_class
