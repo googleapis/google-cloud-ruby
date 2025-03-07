@@ -156,9 +156,15 @@ module Google
     # @private
     #
     def self.auto_load_files
-      return Gem.find_latest_files "google-cloud-*.rb" if Gem.respond_to? :find_latest_files
-      # Ruby 2.0 does not have Gem.find_latest_files
-      Gem.find_files "google-cloud-*.rb"
+      paths = []
+      Gem.loaded_specs.each_value do |spec|
+        next unless spec.name.start_with? "google-cloud-"
+        Dir.glob spec.lib_dirs_glob do |dir|
+          path = File.join dir, "#{spec.name}.rb"
+          paths << path if File.file? path
+        end
+      end
+      paths
     end
   end
 end
