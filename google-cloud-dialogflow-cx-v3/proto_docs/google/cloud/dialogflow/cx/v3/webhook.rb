@@ -130,7 +130,7 @@ module Google
               #     Required. The client ID provided by the 3rd party platform.
               # @!attribute [rw] client_secret
               #   @return [::String]
-              #     Required. The client secret provided by the 3rd party platform.
+              #     Optional. The client secret provided by the 3rd party platform.
               # @!attribute [rw] token_endpoint
               #   @return [::String]
               #     Required. The token endpoint provided by the 3rd party platform to
