@@ -1,5 +1,13 @@
 # Changelog
 
+### 1.3.0 (2025-03-07)
+
+#### Features
+
+* Support for avoiding the HF cache for the Model Garden source model 
+* Support for parsing configs for RagFiles 
+* Support for version ID for the Model Garden source model 
+
 ### 1.2.0 (2025-03-04)
 
 #### Features
