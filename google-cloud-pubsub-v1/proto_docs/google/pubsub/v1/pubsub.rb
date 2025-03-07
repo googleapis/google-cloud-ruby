@@ -657,9 +657,14 @@ module Google
         #     Optional. JavaScript User Defined Function. If multiple JavaScriptUDF's
         #     are specified on a resource, each must have a unique `function_name`.
         # @!attribute [rw] enabled
+        #   @deprecated This field is deprecated and may be removed in the next major version update.
         #   @return [::Boolean]
-        #     Optional. If set to true, the transform is enabled. If false, the transform
-        #     is disabled and will not be applied to messages. Defaults to `true`.
+        #     Optional. This field is deprecated, use the `disabled` field to disable
+        #     transforms.
+        # @!attribute [rw] disabled
+        #   @return [::Boolean]
+        #     Optional. If true, the transform is disabled and will not be applied to
+        #     messages. Defaults to `false`.
         class MessageTransform
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
