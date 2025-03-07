@@ -14,4 +14,4 @@
 /google-cloud-datastore*/.           @googleapis/ruby-team @yoshi-approver @googleapis/api-datastore-sdk
 /google-cloud-firestore*/.           @googleapis/ruby-team @yoshi-approver @googleapis/api-firestore-sdk
 /google-cloud-pubsub*/.              @googleapis/ruby-team @yoshi-approver @googleapis/api-pubsub
-/google-cloud-storage/               @googleapis/ruby-team @yoshi-approver @googleapis/cloud-storage-dpe
+/google-cloud-storage/               @googleapis/ruby-team @yoshi-approver @googleapis/gcs-sdk-team
