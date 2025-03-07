@@ -47,7 +47,8 @@ module Google
               "https://www.googleapis.com/auth/chat.spaces.create",
               "https://www.googleapis.com/auth/chat.spaces.readonly",
               "https://www.googleapis.com/auth/chat.users.readstate",
-              "https://www.googleapis.com/auth/chat.users.readstate.readonly"
+              "https://www.googleapis.com/auth/chat.users.readstate.readonly",
+              "https://www.googleapis.com/auth/chat.users.spacesettings"
             ]
             self.env_vars = [
               "GOOGLE_CLOUD_CREDENTIALS",

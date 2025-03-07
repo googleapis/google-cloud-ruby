@@ -1870,6 +1870,124 @@ class ::Google::Apps::Chat::V1::ChatService::ClientTest < Minitest::Test
     end
   end
 
+  def test_get_space_notification_setting
+    # Create GRPC objects.
+    grpc_response = ::Google::Apps::Chat::V1::SpaceNotificationSetting.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    get_space_notification_setting_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :get_space_notification_setting, name
+      assert_kind_of ::Google::Apps::Chat::V1::GetSpaceNotificationSettingRequest, request
+      assert_equal "hello world", request["name"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, get_space_notification_setting_client_stub do
+      # Create client
+      client = ::Google::Apps::Chat::V1::ChatService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.get_space_notification_setting({ name: name }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.get_space_notification_setting name: name do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.get_space_notification_setting ::Google::Apps::Chat::V1::GetSpaceNotificationSettingRequest.new(name: name) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.get_space_notification_setting({ name: name }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.get_space_notification_setting(::Google::Apps::Chat::V1::GetSpaceNotificationSettingRequest.new(name: name), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, get_space_notification_setting_client_stub.call_rpc_count
+    end
+  end
+
+  def test_update_space_notification_setting
+    # Create GRPC objects.
+    grpc_response = ::Google::Apps::Chat::V1::SpaceNotificationSetting.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    space_notification_setting = {}
+    update_mask = {}
+
+    update_space_notification_setting_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :update_space_notification_setting, name
+      assert_kind_of ::Google::Apps::Chat::V1::UpdateSpaceNotificationSettingRequest, request
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Apps::Chat::V1::SpaceNotificationSetting), request["space_notification_setting"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request["update_mask"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, update_space_notification_setting_client_stub do
+      # Create client
+      client = ::Google::Apps::Chat::V1::ChatService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.update_space_notification_setting({ space_notification_setting: space_notification_setting, update_mask: update_mask }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.update_space_notification_setting space_notification_setting: space_notification_setting, update_mask: update_mask do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.update_space_notification_setting ::Google::Apps::Chat::V1::UpdateSpaceNotificationSettingRequest.new(space_notification_setting: space_notification_setting, update_mask: update_mask) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.update_space_notification_setting({ space_notification_setting: space_notification_setting, update_mask: update_mask }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.update_space_notification_setting(::Google::Apps::Chat::V1::UpdateSpaceNotificationSettingRequest.new(space_notification_setting: space_notification_setting, update_mask: update_mask), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, update_space_notification_setting_client_stub.call_rpc_count
+    end
+  end
+
   def test_configure
     grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
 

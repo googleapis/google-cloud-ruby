@@ -147,6 +147,23 @@ module Google
             end
 
             ##
+            # Create a fully-qualified SpaceNotificationSetting resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `users/{user}/spaces/{space}/spaceNotificationSetting`
+            #
+            # @param user [String]
+            # @param space [String]
+            #
+            # @return [::String]
+            def space_notification_setting_path user:, space:
+              raise ::ArgumentError, "user cannot contain /" if user.to_s.include? "/"
+
+              "users/#{user}/spaces/#{space}/spaceNotificationSetting"
+            end
+
+            ##
             # Create a fully-qualified SpaceReadState resource string.
             #
             # The resource will be in the following format:
