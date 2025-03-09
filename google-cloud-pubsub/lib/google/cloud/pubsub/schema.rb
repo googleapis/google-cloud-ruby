@@ -85,6 +85,17 @@ module Google
         end
 
         ##
+        # The revision ID of the schema.
+        #
+        # @return [String] The revision id.
+        # @return [nil] If this object is a reference.
+        #
+        def revision_id
+          return nil if reference?
+          @grpc.revision_id if @grpc.revision_id && !@grpc.revision_id.empty?
+        end
+
+        ##
         # Validates a message against a schema.
         #
         # @param message_data [String] Message to validate against the provided `schema_spec`.
@@ -195,6 +206,39 @@ module Google
           @exists = true
         rescue Google::Cloud::NotFoundError
           @exists = false
+        end
+
+        ##
+        # Commits a new schema revision to an existing schema.
+        #
+        # @param definition [String] The definition of the schema. This should
+        #   contain a string representing the full definition of the schema that
+        #   is a valid schema definition of the type specified in `type`. See
+        #   https://cloud.google.com/pubsub/docs/reference/rest/v1/projects.schemas#Schema
+        #   for details.
+        # @param type [String, Symbol] The type of the schema. Possible values are
+        #   case-insensitive and include:
+        #
+        #     * `PROTOCOL_BUFFER` - A Protocol Buffer schema definition.
+        #     * `AVRO` - An Avro schema definition.
+        #
+        # @return [Google::Cloud::PubSub::Schema]
+        #
+        # @example
+        #   require "google/cloud/pubsub"
+        #
+        #   pubsub = Google::Cloud::PubSub.new
+        #
+        #   schema = pubsub.schema "my-schema"
+        #
+        #   definition = File.read /path/to/file
+        #
+        #   revision_schema = schema.commit definition, type: :protocol_buffer
+        #
+        def commit definition, type
+          type = type.to_s.upcase
+          grpc = service.commit_schema name, definition, type
+          Schema.from_grpc grpc, service, view: @view
         end
 
         ##
