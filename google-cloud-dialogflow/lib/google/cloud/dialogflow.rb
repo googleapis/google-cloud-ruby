@@ -116,6 +116,80 @@ module Google
       end
 
       ##
+      # Create a new client object for Generators.
+      #
+      # By default, this returns an instance of
+      # [Google::Cloud::Dialogflow::V2::Generators::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-dialogflow-v2/latest/Google-Cloud-Dialogflow-V2-Generators-Client)
+      # for a gRPC client for version V2 of the API.
+      # However, you can specify a different API version by passing it in the
+      # `version` parameter. If the Generators service is
+      # supported by that API version, and the corresponding gem is available, the
+      # appropriate versioned client will be returned.
+      # You can also specify a different transport by passing `:rest` or `:grpc` in
+      # the `transport` parameter.
+      #
+      # Raises an exception if the currently installed versioned client gem for the
+      # given API version does not support the given transport of the Generators service.
+      # You can determine whether the method will succeed by calling
+      # {Google::Cloud::Dialogflow.generators_available?}.
+      #
+      # ## About Generators
+      #
+      # Generator Service for LLM powered Agent Assist. This service manages the
+      # configurations of user owned Generators, such as description, context and
+      # instruction, input/output format, etc. The generator resources will be used
+      # inside a conversation and will be triggered by TriggerEvent to query LLM for
+      # answers.
+      #
+      # @param version [::String, ::Symbol] The API version to connect to. Optional.
+      #   Defaults to `:v2`.
+      # @param transport [:grpc, :rest] The transport to use. Defaults to `:grpc`.
+      # @return [::Object] A client object for the specified version.
+      #
+      def self.generators version: :v2, transport: :grpc, &block
+        require "google/cloud/dialogflow/#{version.to_s.downcase}"
+
+        package_name = Google::Cloud::Dialogflow
+                       .constants
+                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                       .first
+        service_module = Google::Cloud::Dialogflow.const_get(package_name).const_get(:Generators)
+        service_module = service_module.const_get(:Rest) if transport == :rest
+        service_module.const_get(:Client).new(&block)
+      end
+
+      ##
+      # Determines whether the Generators service is supported by the current client.
+      # If true, you can retrieve a client object by calling {Google::Cloud::Dialogflow.generators}.
+      # If false, that method will raise an exception. This could happen if the given
+      # API version does not exist or does not support the Generators service,
+      # or if the versioned client gem needs an update to support the Generators service.
+      #
+      # @param version [::String, ::Symbol] The API version to connect to. Optional.
+      #   Defaults to `:v2`.
+      # @param transport [:grpc, :rest] The transport to use. Defaults to `:grpc`.
+      # @return [boolean] Whether the service is available.
+      #
+      def self.generators_available? version: :v2, transport: :grpc
+        require "google/cloud/dialogflow/#{version.to_s.downcase}"
+        package_name = Google::Cloud::Dialogflow
+                       .constants
+                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                       .first
+        return false unless package_name
+        service_module = Google::Cloud::Dialogflow.const_get package_name
+        return false unless service_module.const_defined? :Generators
+        service_module = service_module.const_get :Generators
+        if transport == :rest
+          return false unless service_module.const_defined? :Rest
+          service_module = service_module.const_get :Rest
+        end
+        service_module.const_defined? :Client
+      rescue ::LoadError
+        false
+      end
+
+      ##
       # Create a new client object for Contexts.
       #
       # By default, this returns an instance of
@@ -672,80 +746,6 @@ module Google
         service_module = Google::Cloud::Dialogflow.const_get package_name
         return false unless service_module.const_defined? :ConversationProfiles
         service_module = service_module.const_get :ConversationProfiles
-        if transport == :rest
-          return false unless service_module.const_defined? :Rest
-          service_module = service_module.const_get :Rest
-        end
-        service_module.const_defined? :Client
-      rescue ::LoadError
-        false
-      end
-
-      ##
-      # Create a new client object for Generators.
-      #
-      # By default, this returns an instance of
-      # [Google::Cloud::Dialogflow::V2::Generators::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-dialogflow-v2/latest/Google-Cloud-Dialogflow-V2-Generators-Client)
-      # for a gRPC client for version V2 of the API.
-      # However, you can specify a different API version by passing it in the
-      # `version` parameter. If the Generators service is
-      # supported by that API version, and the corresponding gem is available, the
-      # appropriate versioned client will be returned.
-      # You can also specify a different transport by passing `:rest` or `:grpc` in
-      # the `transport` parameter.
-      #
-      # Raises an exception if the currently installed versioned client gem for the
-      # given API version does not support the given transport of the Generators service.
-      # You can determine whether the method will succeed by calling
-      # {Google::Cloud::Dialogflow.generators_available?}.
-      #
-      # ## About Generators
-      #
-      # Generator Service for LLM powered Agent Assist. This service manages the
-      # configurations of user owned Generators, such as description, context and
-      # instruction, input/output format, etc. The generator resources will be used
-      # inside a conversation and will be triggered by TriggerEvent to query LLM for
-      # answers.
-      #
-      # @param version [::String, ::Symbol] The API version to connect to. Optional.
-      #   Defaults to `:v2`.
-      # @param transport [:grpc, :rest] The transport to use. Defaults to `:grpc`.
-      # @return [::Object] A client object for the specified version.
-      #
-      def self.generators version: :v2, transport: :grpc, &block
-        require "google/cloud/dialogflow/#{version.to_s.downcase}"
-
-        package_name = Google::Cloud::Dialogflow
-                       .constants
-                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
-                       .first
-        service_module = Google::Cloud::Dialogflow.const_get(package_name).const_get(:Generators)
-        service_module = service_module.const_get(:Rest) if transport == :rest
-        service_module.const_get(:Client).new(&block)
-      end
-
-      ##
-      # Determines whether the Generators service is supported by the current client.
-      # If true, you can retrieve a client object by calling {Google::Cloud::Dialogflow.generators}.
-      # If false, that method will raise an exception. This could happen if the given
-      # API version does not exist or does not support the Generators service,
-      # or if the versioned client gem needs an update to support the Generators service.
-      #
-      # @param version [::String, ::Symbol] The API version to connect to. Optional.
-      #   Defaults to `:v2`.
-      # @param transport [:grpc, :rest] The transport to use. Defaults to `:grpc`.
-      # @return [boolean] Whether the service is available.
-      #
-      def self.generators_available? version: :v2, transport: :grpc
-        require "google/cloud/dialogflow/#{version.to_s.downcase}"
-        package_name = Google::Cloud::Dialogflow
-                       .constants
-                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
-                       .first
-        return false unless package_name
-        service_module = Google::Cloud::Dialogflow.const_get package_name
-        return false unless service_module.const_defined? :Generators
-        service_module = service_module.const_get :Generators
         if transport == :rest
           return false unless service_module.const_defined? :Rest
           service_module = service_module.const_get :Rest
