@@ -681,6 +681,41 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # The response message for
+        # {::Google::Cloud::Dialogflow::V2::Conversations::Client#generate_suggestions Conversations.GenerateSuggestions}.
+        # @!attribute [rw] generator_suggestion_answers
+        #   @return [::Array<::Google::Cloud::Dialogflow::V2::GenerateSuggestionsResponse::GeneratorSuggestionAnswer>]
+        #     The answers generated for the conversation based on context.
+        # @!attribute [rw] latest_message
+        #   @return [::String]
+        #     The name of the latest conversation message used as context for
+        #     compiling suggestion.
+        #
+        #     Format: `projects/<Project ID>/locations/<Location
+        #     ID>/conversations/<Conversation ID>/messages/<Message ID>`.
+        class GenerateSuggestionsResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # A GeneratorSuggestion answer.
+          # @!attribute [rw] generator_suggestion
+          #   @return [::Google::Cloud::Dialogflow::V2::GeneratorSuggestion]
+          #     Suggestion details.
+          # @!attribute [rw] source_generator
+          #   @return [::String]
+          #     The name of the generator used to generate this suggestion. Format:
+          #     `projects/<Project ID>/locations/<Location ID>/generators/<Generator
+          #     ID>`.
+          # @!attribute [rw] answer_record
+          #   @return [::String]
+          #     Answer record that uniquely identifies the suggestion. This can be used
+          #     to provide suggestion feedback.
+          class GeneratorSuggestionAnswer
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+        end
+
         # The request message for
         # {::Google::Cloud::Dialogflow::V2::Participants::Client#suggest_smart_replies Participants.SuggestSmartReplies}.
         # @!attribute [rw] parent
@@ -953,27 +988,33 @@ module Google
         #   @return [::Google::Rpc::Status]
         #     Error status if the request failed.
         #
-        #     Note: The following fields are mutually exclusive: `error`, `suggest_articles_response`, `suggest_knowledge_assist_response`, `suggest_faq_answers_response`, `suggest_smart_replies_response`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `error`, `suggest_articles_response`, `suggest_knowledge_assist_response`, `suggest_faq_answers_response`, `suggest_smart_replies_response`, `generate_suggestions_response`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] suggest_articles_response
         #   @return [::Google::Cloud::Dialogflow::V2::SuggestArticlesResponse]
         #     SuggestArticlesResponse if request is for ARTICLE_SUGGESTION.
         #
-        #     Note: The following fields are mutually exclusive: `suggest_articles_response`, `error`, `suggest_knowledge_assist_response`, `suggest_faq_answers_response`, `suggest_smart_replies_response`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `suggest_articles_response`, `error`, `suggest_knowledge_assist_response`, `suggest_faq_answers_response`, `suggest_smart_replies_response`, `generate_suggestions_response`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] suggest_knowledge_assist_response
         #   @return [::Google::Cloud::Dialogflow::V2::SuggestKnowledgeAssistResponse]
         #     SuggestKnowledgeAssistResponse if request is for KNOWLEDGE_ASSIST.
         #
-        #     Note: The following fields are mutually exclusive: `suggest_knowledge_assist_response`, `error`, `suggest_articles_response`, `suggest_faq_answers_response`, `suggest_smart_replies_response`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `suggest_knowledge_assist_response`, `error`, `suggest_articles_response`, `suggest_faq_answers_response`, `suggest_smart_replies_response`, `generate_suggestions_response`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] suggest_faq_answers_response
         #   @return [::Google::Cloud::Dialogflow::V2::SuggestFaqAnswersResponse]
         #     SuggestFaqAnswersResponse if request is for FAQ_ANSWER.
         #
-        #     Note: The following fields are mutually exclusive: `suggest_faq_answers_response`, `error`, `suggest_articles_response`, `suggest_knowledge_assist_response`, `suggest_smart_replies_response`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `suggest_faq_answers_response`, `error`, `suggest_articles_response`, `suggest_knowledge_assist_response`, `suggest_smart_replies_response`, `generate_suggestions_response`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] suggest_smart_replies_response
         #   @return [::Google::Cloud::Dialogflow::V2::SuggestSmartRepliesResponse]
         #     SuggestSmartRepliesResponse if request is for SMART_REPLY.
         #
-        #     Note: The following fields are mutually exclusive: `suggest_smart_replies_response`, `error`, `suggest_articles_response`, `suggest_knowledge_assist_response`, `suggest_faq_answers_response`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `suggest_smart_replies_response`, `error`, `suggest_articles_response`, `suggest_knowledge_assist_response`, `suggest_faq_answers_response`, `generate_suggestions_response`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] generate_suggestions_response
+        #   @return [::Google::Cloud::Dialogflow::V2::GenerateSuggestionsResponse]
+        #     Suggestions generated using generators triggered by customer or agent
+        #     messages.
+        #
+        #     Note: The following fields are mutually exclusive: `generate_suggestions_response`, `error`, `suggest_articles_response`, `suggest_knowledge_assist_response`, `suggest_faq_answers_response`, `suggest_smart_replies_response`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         class SuggestionResult
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

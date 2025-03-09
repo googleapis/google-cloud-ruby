@@ -63,6 +63,9 @@ module Google
             # Completes the specified conversation. Finished conversations are purged
             # from the database after 30 days.
             rpc :CompleteConversation, ::Google::Cloud::Dialogflow::V2::CompleteConversationRequest, ::Google::Cloud::Dialogflow::V2::Conversation
+            # Data ingestion API.
+            # Ingests context references for an existing conversation.
+            rpc :IngestContextReferences, ::Google::Cloud::Dialogflow::V2::IngestContextReferencesRequest, ::Google::Cloud::Dialogflow::V2::IngestContextReferencesResponse
             # Lists messages that belong to a given conversation.
             # `messages` are ordered by `create_time` in descending order. To fetch
             # updates without duplication, send request with filter
@@ -81,6 +84,10 @@ module Google
             rpc :GenerateStatelessSuggestion, ::Google::Cloud::Dialogflow::V2::GenerateStatelessSuggestionRequest, ::Google::Cloud::Dialogflow::V2::GenerateStatelessSuggestionResponse
             # Get answers for the given query based on knowledge documents.
             rpc :SearchKnowledge, ::Google::Cloud::Dialogflow::V2::SearchKnowledgeRequest, ::Google::Cloud::Dialogflow::V2::SearchKnowledgeResponse
+            # Generates all the suggestions using generators configured in the
+            # conversation profile. A generator is used only if its trigger event is
+            # matched.
+            rpc :GenerateSuggestions, ::Google::Cloud::Dialogflow::V2::GenerateSuggestionsRequest, ::Google::Cloud::Dialogflow::V2::GenerateSuggestionsResponse
           end
 
           Stub = Service.rpc_stub_class
