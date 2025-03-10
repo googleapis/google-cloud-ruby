@@ -34,6 +34,12 @@ module Google
         #
         #     Values are of the form
         #     `projects/<project>/instances/<instance>/tables/<table>/authorizedViews/<authorized_view>`.
+        # @!attribute [rw] materialized_view_name
+        #   @return [::String]
+        #     Optional. The unique name of the MaterializedView from which to read.
+        #
+        #     Values are of the form
+        #     `projects/<project>/instances/<instance>/materializedViews/<materialized_view>`.
         # @!attribute [rw] app_profile_id
         #   @return [::String]
         #     This value specifies routing for replication. If not specified, the
@@ -209,6 +215,12 @@ module Google
         #
         #     Values are of the form
         #     `projects/<project>/instances/<instance>/tables/<table>/authorizedViews/<authorized_view>`.
+        # @!attribute [rw] materialized_view_name
+        #   @return [::String]
+        #     Optional. The unique name of the MaterializedView from which to read.
+        #
+        #     Values are of the form
+        #     `projects/<project>/instances/<instance>/materializedViews/<materialized_view>`.
         # @!attribute [rw] app_profile_id
         #   @return [::String]
         #     This value specifies routing for replication. If not specified, the

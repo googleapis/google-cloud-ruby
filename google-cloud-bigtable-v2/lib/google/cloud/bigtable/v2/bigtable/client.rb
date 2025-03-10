@@ -224,7 +224,7 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload read_rows(table_name: nil, authorized_view_name: nil, app_profile_id: nil, rows: nil, filter: nil, rows_limit: nil, request_stats_view: nil, reversed: nil)
+            # @overload read_rows(table_name: nil, authorized_view_name: nil, materialized_view_name: nil, app_profile_id: nil, rows: nil, filter: nil, rows_limit: nil, request_stats_view: nil, reversed: nil)
             #   Pass arguments to `read_rows` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -239,6 +239,11 @@ module Google
             #
             #     Values are of the form
             #     `projects/<project>/instances/<instance>/tables/<table>/authorizedViews/<authorized_view>`.
+            #   @param materialized_view_name [::String]
+            #     Optional. The unique name of the MaterializedView from which to read.
+            #
+            #     Values are of the form
+            #     `projects/<project>/instances/<instance>/materializedViews/<materialized_view>`.
             #   @param app_profile_id [::String]
             #     This value specifies routing for replication. If not specified, the
             #     "default" application profile will be used.
@@ -358,7 +363,7 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload sample_row_keys(table_name: nil, authorized_view_name: nil, app_profile_id: nil)
+            # @overload sample_row_keys(table_name: nil, authorized_view_name: nil, materialized_view_name: nil, app_profile_id: nil)
             #   Pass arguments to `sample_row_keys` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -374,6 +379,11 @@ module Google
             #
             #     Values are of the form
             #     `projects/<project>/instances/<instance>/tables/<table>/authorizedViews/<authorized_view>`.
+            #   @param materialized_view_name [::String]
+            #     Optional. The unique name of the MaterializedView from which to read.
+            #
+            #     Values are of the form
+            #     `projects/<project>/instances/<instance>/materializedViews/<materialized_view>`.
             #   @param app_profile_id [::String]
             #     This value specifies routing for replication. If not specified, the
             #     "default" application profile will be used.
