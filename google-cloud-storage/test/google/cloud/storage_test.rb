@@ -126,7 +126,7 @@ describe Google::Cloud do
         "storage-credentials"
       }
       stubbed_service = ->(project, credentials, retries: nil, timeout: nil, open_timeout: nil, read_timeout: nil, send_timeout: nil, host: nil, quota_project: nil, max_elapsed_time: nil, base_interval: nil,
-        max_interval: nil, multiplier: nil, upload_chunk_size: nil, universe_domain: nil, upload_url: nil, delete_upload: nil) {
+        max_interval: nil, multiplier: nil, upload_chunk_size: nil, universe_domain: nil) {
         _(project).must_equal "project-id"
         _(credentials).must_equal "storage-credentials"
         _(retries).must_be :nil?
@@ -223,7 +223,7 @@ describe Google::Cloud do
 
     it "uses provided endpoint and universe_domain" do
       stubbed_service = ->(project, credentials, retries: nil, timeout: nil, open_timeout: nil, read_timeout: nil, send_timeout: nil, host: nil, quota_project: nil, max_elapsed_time: nil, base_interval: nil,
-        max_interval: nil, multiplier: nil, upload_chunk_size: nil, universe_domain: nil, upload_url: nil, delete_upload: nil) {
+        max_interval: nil, multiplier: nil, upload_chunk_size: nil, universe_domain: nil) {
         _(project).must_equal "project-id"
         _(credentials).must_equal default_credentials
         _(retries).must_be :nil?
@@ -263,7 +263,7 @@ describe Google::Cloud do
         "storage-credentials"
       }
       stubbed_service = ->(project, credentials, retries: nil, timeout: nil, open_timeout: nil, read_timeout: nil, send_timeout: nil, host: nil, quota_project: nil, max_elapsed_time: nil, base_interval: nil,
-        max_interval: nil, multiplier: nil, upload_chunk_size: nil, universe_domain: nil, upload_url: nil, delete_upload: nil) {
+        max_interval: nil, multiplier: nil, upload_chunk_size: nil, universe_domain: nil) {
         _(project).must_equal "project-id"
         _(credentials).must_equal "storage-credentials"
         _(retries).must_be :nil?
@@ -305,7 +305,7 @@ describe Google::Cloud do
         "storage-credentials"
       }
       stubbed_service = ->(project, credentials, retries: nil, timeout: nil, open_timeout: nil, read_timeout: nil, send_timeout: nil, host: nil, quota_project: nil, max_elapsed_time: nil, base_interval: nil,
-        max_interval: nil, multiplier: nil, upload_chunk_size: nil, universe_domain: nil, upload_url: nil, delete_upload: nil) {
+        max_interval: nil, multiplier: nil, upload_chunk_size: nil, universe_domain: nil) {
         _(project).must_equal "project-id"
         _(credentials).must_equal "storage-credentials"
         _(retries).must_be :nil?
@@ -347,7 +347,7 @@ describe Google::Cloud do
         OpenStruct.new project_id: "project-id"
       }
       stubbed_service = ->(project, credentials, retries: nil, timeout: nil, open_timeout: nil, read_timeout: nil, send_timeout: nil, host: nil, quota_project: nil, max_elapsed_time: nil, base_interval: nil,
-        max_interval: nil, multiplier: nil, upload_chunk_size: nil, universe_domain: nil, upload_url: nil, delete_upload: nil) {
+        max_interval: nil, multiplier: nil, upload_chunk_size: nil, universe_domain: nil) {
         _(project).must_equal "project-id"
         _(credentials).must_be_kind_of OpenStruct
         _(credentials.project_id).must_equal "project-id"
@@ -401,7 +401,7 @@ describe Google::Cloud do
         "storage-credentials"
       }
       stubbed_service = ->(project, credentials, retries: nil, timeout: nil, open_timeout: nil, read_timeout: nil, send_timeout: nil, host: nil, quota_project: nil, max_elapsed_time: nil, base_interval: nil,
-        max_interval: nil, multiplier: nil, upload_chunk_size: nil, universe_domain: nil, upload_url: nil, delete_upload: nil) {
+        max_interval: nil, multiplier: nil, upload_chunk_size: nil, universe_domain: nil) {
         _(project).must_equal "project-id"
         _(credentials).must_equal "storage-credentials"
         _(retries).must_be :nil?
@@ -449,7 +449,7 @@ describe Google::Cloud do
         "storage-credentials"
       }
       stubbed_service = ->(project, credentials, retries: nil, timeout: nil, open_timeout: nil, read_timeout: nil, send_timeout: nil, host: nil, quota_project: nil, max_elapsed_time: nil, base_interval: nil,
-        max_interval: nil, multiplier: nil, upload_chunk_size: nil, universe_domain: nil, upload_url: nil, delete_upload: nil) {
+        max_interval: nil, multiplier: nil, upload_chunk_size: nil, universe_domain: nil) {
         _(project).must_equal "project-id"
         _(credentials).must_equal "storage-credentials"
         _(retries).must_be :nil?
@@ -497,7 +497,7 @@ describe Google::Cloud do
         "storage-credentials"
       }
       stubbed_service = ->(project, credentials, retries: nil, timeout: nil, open_timeout: nil, read_timeout: nil, send_timeout: nil, host: nil, quota_project: nil, max_elapsed_time: nil, base_interval: nil,
-        max_interval: nil, multiplier: nil, upload_chunk_size: nil, universe_domain: nil, upload_url: nil, delete_upload: nil) {
+        max_interval: nil, multiplier: nil, upload_chunk_size: nil, universe_domain: nil) {
         _(project).must_equal "project-id"
         _(credentials).must_equal "storage-credentials"
         _(retries).must_equal 3
@@ -553,7 +553,7 @@ describe Google::Cloud do
         "storage-credentials"
       }
       stubbed_service = ->(project, credentials, retries: nil, timeout: nil, open_timeout: nil, read_timeout: nil, send_timeout: nil, host: nil, quota_project: nil, max_elapsed_time: nil, base_interval: nil,
-        max_interval: nil, multiplier: nil, upload_chunk_size: nil, universe_domain: nil, upload_url: nil, delete_upload: nil) {
+        max_interval: nil, multiplier: nil, upload_chunk_size: nil, universe_domain: nil) {
         _(project).must_equal "project-id"
         _(credentials).must_equal "storage-credentials"
         _(retries).must_equal 3
@@ -609,7 +609,7 @@ describe Google::Cloud do
         "storage-credentials"
       }
       stubbed_service = ->(project, credentials, retries: nil, timeout: nil, open_timeout: nil, read_timeout: nil, send_timeout: nil, host: nil, quota_project: nil, max_elapsed_time: nil, base_interval: nil,
-        max_interval: nil, multiplier: nil, upload_chunk_size: nil, universe_domain: nil, upload_url: nil, delete_upload: nil) {
+        max_interval: nil, multiplier: nil, upload_chunk_size: nil, universe_domain: nil) {
         _(project).must_equal "project-id"
         _(credentials).must_equal "storage-credentials"
         _(retries).must_equal 3
@@ -667,7 +667,7 @@ describe Google::Cloud do
         "storage-credentials"
       }
       stubbed_service = ->(project, credentials, retries: nil, timeout: nil, open_timeout: nil, read_timeout: nil, send_timeout: nil, host: nil, quota_project: nil, max_elapsed_time: nil, base_interval: nil,
-        max_interval: nil, multiplier: nil, upload_chunk_size: nil, universe_domain: nil, upload_url: nil, delete_upload: nil) {
+        max_interval: nil, multiplier: nil, upload_chunk_size: nil, universe_domain: nil) {
         _(project).must_equal "project-id"
         _(credentials).must_equal "storage-credentials"
         _(retries).must_equal 3
