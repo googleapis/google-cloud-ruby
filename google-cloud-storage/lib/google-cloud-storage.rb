@@ -142,7 +142,7 @@ module Google
     def self.storage project_id = nil, credentials = nil, scope: nil,
                      retries: nil, timeout: nil, open_timeout: nil, read_timeout: nil, send_timeout: nil,
                      max_elapsed_time: nil, base_interval: nil, max_interval: nil, multiplier: nil,
-                     upload_chunk_size: nil, upload_url: nil, delete_upload: nil
+                     upload_chunk_size: nil
       require "google/cloud/storage"
       Google::Cloud::Storage.new project_id: project_id,
                                  credentials: credentials,
@@ -156,9 +156,7 @@ module Google
                                  base_interval: base_interval,
                                  max_interval: max_interval,
                                  multiplier: multiplier,
-                                 upload_chunk_size: upload_chunk_size,
-                                 upload_url: upload_url,
-                                 delete_upload: delete_upload
+                                 upload_chunk_size: upload_chunk_size
     end
   end
 end
@@ -195,6 +193,4 @@ Google::Cloud.configure.add_config! :storage do |config|
   config.add_field! :upload_chunk_size, nil, match: Integer
   config.add_field! :endpoint, nil, match: String, allow_nil: true
   config.add_field! :universe_domain, nil, match: String, allow_nil: true
-  config.add_field! :upload_url, nil, match: String, allow_nil: true
-  config.add_field! :delete_upload, nil, match: Integer, allow_nil: true
 end

@@ -94,8 +94,7 @@ module Google
                    timeout: nil, open_timeout: nil, read_timeout: nil,
                    send_timeout: nil, endpoint: nil, project: nil, keyfile: nil,
                    max_elapsed_time: nil, base_interval: nil, max_interval: nil,
-                   multiplier: nil, upload_chunk_size: nil, universe_domain: nil,
-                   upload_url: nil, delete_upload: nil
+                   multiplier: nil, upload_chunk_size: nil, universe_domain: nil
         scope             ||= configure.scope
         retries           ||= configure.retries
         timeout           ||= configure.timeout
@@ -110,8 +109,6 @@ module Google
         multiplier        ||= configure.multiplier
         upload_chunk_size ||= configure.upload_chunk_size
         universe_domain   ||= configure.universe_domain
-        upload_url        ||= configure.upload_url
-        delete_upload     ||= configure.delete_upload
         unless credentials.is_a? Google::Auth::Credentials
           credentials = Storage::Credentials.new credentials, scope: scope
         end
@@ -127,7 +124,6 @@ module Google
             host: endpoint, quota_project: configure.quota_project,
             max_elapsed_time: max_elapsed_time, base_interval: base_interval,
             max_interval: max_interval, multiplier: multiplier, upload_chunk_size: upload_chunk_size,
-            upload_url: upload_url, delete_upload: delete_upload,
             universe_domain: universe_domain
           )
         )
