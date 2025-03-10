@@ -278,6 +278,14 @@ module Google
 
             # Customer defined sections.
             CUSTOMER_DEFINED = 7
+
+            # Concise version of the situation section. This type is only available if
+            # type SITUATION is not selected.
+            SITUATION_CONCISE = 9
+
+            # Concise version of the action section. This type is only available if
+            # type ACTION is not selected.
+            ACTION_CONCISE = 10
           end
         end
 
@@ -303,6 +311,15 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # Free form generator context that customer can configure.
+        # @!attribute [rw] text
+        #   @return [::String]
+        #     Optional. Free form text input to LLM.
+        class FreeFormContext
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # LLM generator.
         # @!attribute [r] name
         #   @return [::String]
@@ -311,9 +328,16 @@ module Google
         # @!attribute [rw] description
         #   @return [::String]
         #     Optional. Human readable description of the generator.
+        # @!attribute [rw] free_form_context
+        #   @return [::Google::Cloud::Dialogflow::V2::FreeFormContext]
+        #     Input of free from generator to LLM.
+        #
+        #     Note: The following fields are mutually exclusive: `free_form_context`, `summarization_context`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] summarization_context
         #   @return [::Google::Cloud::Dialogflow::V2::SummarizationContext]
         #     Input of prebuilt Summarization feature.
+        #
+        #     Note: The following fields are mutually exclusive: `summarization_context`, `free_form_context`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] inference_parameter
         #   @return [::Google::Cloud::Dialogflow::V2::InferenceParameter]
         #     Optional. Inference parameters for this generator.
@@ -321,6 +345,13 @@ module Google
         #   @return [::Google::Cloud::Dialogflow::V2::TriggerEvent]
         #     Optional. The trigger event of the generator. It defines when the generator
         #     is triggered in a conversation.
+        # @!attribute [rw] published_model
+        #   @return [::String]
+        #     Optional. The published Large Language Model name.
+        #     * To use the latest model version, specify the model name without version
+        #       number. Example: `text-bison`
+        #     * To use a stable model version, specify the version number as well.
+        #       Example: `text-bison@002`.
         # @!attribute [r] create_time
         #   @return [::Google::Protobuf::Timestamp]
         #     Output only. Creation time of this generator.
@@ -328,6 +359,15 @@ module Google
         #   @return [::Google::Protobuf::Timestamp]
         #     Output only. Update time of this generator.
         class Generator
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Suggestion generated using free form generator.
+        # @!attribute [rw] response
+        #   @return [::String]
+        #     Required. Free form suggestion.
+        class FreeFormSuggestion
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
@@ -354,9 +394,16 @@ module Google
         end
 
         # Suggestion generated using a Generator.
+        # @!attribute [rw] free_form_suggestion
+        #   @return [::Google::Cloud::Dialogflow::V2::FreeFormSuggestion]
+        #     Optional. Free form suggestion.
+        #
+        #     Note: The following fields are mutually exclusive: `free_form_suggestion`, `summary_suggestion`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] summary_suggestion
         #   @return [::Google::Cloud::Dialogflow::V2::SummarySuggestion]
         #     Optional. Suggested summary.
+        #
+        #     Note: The following fields are mutually exclusive: `summary_suggestion`, `free_form_suggestion`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         class GeneratorSuggestion
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -374,6 +421,12 @@ module Google
           # Conversations.GenerateStatelessSuggestion and
           # Conversations.GenerateSuggestions.
           MANUAL_CALL = 2
+
+          # Triggers after each customer message only.
+          CUSTOMER_MESSAGE = 3
+
+          # Triggers after each agent message only.
+          AGENT_MESSAGE = 4
         end
       end
     end

@@ -299,6 +299,61 @@ class ::Google::Cloud::Dialogflow::V2::Conversations::Rest::ClientTest < Minites
     end
   end
 
+  def test_ingest_context_references
+    # Create test objects.
+    client_result = ::Google::Cloud::Dialogflow::V2::IngestContextReferencesResponse.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    conversation = "hello world"
+    context_references = {}
+
+    ingest_context_references_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::Dialogflow::V2::Conversations::Rest::ServiceStub.stub :transcode_ingest_context_references_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, ingest_context_references_client_stub do
+        # Create client
+        client = ::Google::Cloud::Dialogflow::V2::Conversations::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.ingest_context_references({ conversation: conversation, context_references: context_references }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.ingest_context_references conversation: conversation, context_references: context_references do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.ingest_context_references ::Google::Cloud::Dialogflow::V2::IngestContextReferencesRequest.new(conversation: conversation, context_references: context_references) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.ingest_context_references({ conversation: conversation, context_references: context_references }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.ingest_context_references(::Google::Cloud::Dialogflow::V2::IngestContextReferencesRequest.new(conversation: conversation, context_references: context_references), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, ingest_context_references_client_stub.call_count
+      end
+    end
+  end
+
   def test_list_messages
     # Create test objects.
     client_result = ::Google::Cloud::Dialogflow::V2::ListMessagesResponse.new
@@ -480,6 +535,7 @@ class ::Google::Cloud::Dialogflow::V2::Conversations::Rest::ClientTest < Minites
     # Create request parameters for a unary method.
     parent = "hello world"
     generator = {}
+    context_references = {}
     conversation_context = {}
     trigger_events = [:TRIGGER_EVENT_UNSPECIFIED]
 
@@ -497,27 +553,27 @@ class ::Google::Cloud::Dialogflow::V2::Conversations::Rest::ClientTest < Minites
         end
 
         # Use hash object
-        client.generate_stateless_suggestion({ parent: parent, generator: generator, conversation_context: conversation_context, trigger_events: trigger_events }) do |_result, response|
+        client.generate_stateless_suggestion({ parent: parent, generator: generator, context_references: context_references, conversation_context: conversation_context, trigger_events: trigger_events }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.generate_stateless_suggestion parent: parent, generator: generator, conversation_context: conversation_context, trigger_events: trigger_events do |_result, response|
+        client.generate_stateless_suggestion parent: parent, generator: generator, context_references: context_references, conversation_context: conversation_context, trigger_events: trigger_events do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.generate_stateless_suggestion ::Google::Cloud::Dialogflow::V2::GenerateStatelessSuggestionRequest.new(parent: parent, generator: generator, conversation_context: conversation_context, trigger_events: trigger_events) do |_result, response|
+        client.generate_stateless_suggestion ::Google::Cloud::Dialogflow::V2::GenerateStatelessSuggestionRequest.new(parent: parent, generator: generator, context_references: context_references, conversation_context: conversation_context, trigger_events: trigger_events) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.generate_stateless_suggestion({ parent: parent, generator: generator, conversation_context: conversation_context, trigger_events: trigger_events }, call_options) do |_result, response|
+        client.generate_stateless_suggestion({ parent: parent, generator: generator, context_references: context_references, conversation_context: conversation_context, trigger_events: trigger_events }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.generate_stateless_suggestion(::Google::Cloud::Dialogflow::V2::GenerateStatelessSuggestionRequest.new(parent: parent, generator: generator, conversation_context: conversation_context, trigger_events: trigger_events), call_options) do |_result, response|
+        client.generate_stateless_suggestion(::Google::Cloud::Dialogflow::V2::GenerateStatelessSuggestionRequest.new(parent: parent, generator: generator, context_references: context_references, conversation_context: conversation_context, trigger_events: trigger_events), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -586,6 +642,62 @@ class ::Google::Cloud::Dialogflow::V2::Conversations::Rest::ClientTest < Minites
 
         # Verify method calls
         assert_equal 5, search_knowledge_client_stub.call_count
+      end
+    end
+  end
+
+  def test_generate_suggestions
+    # Create test objects.
+    client_result = ::Google::Cloud::Dialogflow::V2::GenerateSuggestionsResponse.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    conversation = "hello world"
+    latest_message = "hello world"
+    trigger_events = [:TRIGGER_EVENT_UNSPECIFIED]
+
+    generate_suggestions_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::Dialogflow::V2::Conversations::Rest::ServiceStub.stub :transcode_generate_suggestions_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, generate_suggestions_client_stub do
+        # Create client
+        client = ::Google::Cloud::Dialogflow::V2::Conversations::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.generate_suggestions({ conversation: conversation, latest_message: latest_message, trigger_events: trigger_events }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.generate_suggestions conversation: conversation, latest_message: latest_message, trigger_events: trigger_events do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.generate_suggestions ::Google::Cloud::Dialogflow::V2::GenerateSuggestionsRequest.new(conversation: conversation, latest_message: latest_message, trigger_events: trigger_events) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.generate_suggestions({ conversation: conversation, latest_message: latest_message, trigger_events: trigger_events }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.generate_suggestions(::Google::Cloud::Dialogflow::V2::GenerateSuggestionsRequest.new(conversation: conversation, latest_message: latest_message, trigger_events: trigger_events), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, generate_suggestions_client_stub.call_count
       end
     end
   end

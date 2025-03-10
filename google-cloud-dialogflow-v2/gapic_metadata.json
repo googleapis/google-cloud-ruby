@@ -59,6 +59,40 @@
         }
       }
     },
+    "Generators": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::Dialogflow::V2::Generators::Client",
+          "rpcs": {
+            "CreateGenerator": {
+              "methods": [
+                "create_generator"
+              ]
+            },
+            "GetGenerator": {
+              "methods": [
+                "get_generator"
+              ]
+            },
+            "ListGenerators": {
+              "methods": [
+                "list_generators"
+              ]
+            },
+            "DeleteGenerator": {
+              "methods": [
+                "delete_generator"
+              ]
+            },
+            "UpdateGenerator": {
+              "methods": [
+                "update_generator"
+              ]
+            }
+          }
+        }
+      }
+    },
     "Contexts": {
       "clients": {
         "grpc": {
@@ -376,40 +410,6 @@
         }
       }
     },
-    "Generators": {
-      "clients": {
-        "grpc": {
-          "libraryClient": "::Google::Cloud::Dialogflow::V2::Generators::Client",
-          "rpcs": {
-            "CreateGenerator": {
-              "methods": [
-                "create_generator"
-              ]
-            },
-            "GetGenerator": {
-              "methods": [
-                "get_generator"
-              ]
-            },
-            "ListGenerators": {
-              "methods": [
-                "list_generators"
-              ]
-            },
-            "DeleteGenerator": {
-              "methods": [
-                "delete_generator"
-              ]
-            },
-            "UpdateGenerator": {
-              "methods": [
-                "update_generator"
-              ]
-            }
-          }
-        }
-      }
-    },
     "Conversations": {
       "clients": {
         "grpc": {
@@ -435,6 +435,11 @@
                 "complete_conversation"
               ]
             },
+            "IngestContextReferences": {
+              "methods": [
+                "ingest_context_references"
+              ]
+            },
             "ListMessages": {
               "methods": [
                 "list_messages"
@@ -458,6 +463,11 @@
             "SearchKnowledge": {
               "methods": [
                 "search_knowledge"
+              ]
+            },
+            "GenerateSuggestions": {
+              "methods": [
+                "generate_suggestions"
               ]
             }
           }

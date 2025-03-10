@@ -311,6 +311,66 @@ class ::Google::Cloud::Dialogflow::V2::Conversations::ClientTest < Minitest::Tes
     end
   end
 
+  def test_ingest_context_references
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::Dialogflow::V2::IngestContextReferencesResponse.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    conversation = "hello world"
+    context_references = {}
+
+    ingest_context_references_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :ingest_context_references, name
+      assert_kind_of ::Google::Cloud::Dialogflow::V2::IngestContextReferencesRequest, request
+      assert_equal "hello world", request["conversation"]
+      assert_equal({}, request["context_references"].to_h)
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, ingest_context_references_client_stub do
+      # Create client
+      client = ::Google::Cloud::Dialogflow::V2::Conversations::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.ingest_context_references({ conversation: conversation, context_references: context_references }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.ingest_context_references conversation: conversation, context_references: context_references do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.ingest_context_references ::Google::Cloud::Dialogflow::V2::IngestContextReferencesRequest.new(conversation: conversation, context_references: context_references) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.ingest_context_references({ conversation: conversation, context_references: context_references }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.ingest_context_references(::Google::Cloud::Dialogflow::V2::IngestContextReferencesRequest.new(conversation: conversation, context_references: context_references), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, ingest_context_references_client_stub.call_rpc_count
+    end
+  end
+
   def test_list_messages
     # Create GRPC objects.
     grpc_response = ::Google::Cloud::Dialogflow::V2::ListMessagesResponse.new
@@ -518,6 +578,7 @@ class ::Google::Cloud::Dialogflow::V2::Conversations::ClientTest < Minitest::Tes
     # Create request parameters for a unary method.
     parent = "hello world"
     generator = {}
+    context_references = {}
     conversation_context = {}
     trigger_events = [:TRIGGER_EVENT_UNSPECIFIED]
 
@@ -527,6 +588,7 @@ class ::Google::Cloud::Dialogflow::V2::Conversations::ClientTest < Minitest::Tes
       assert_equal "hello world", request["parent"]
       assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Dialogflow::V2::Generator), request["generator"]
       assert_equal :generator, request.generator_resource
+      assert_equal({}, request["context_references"].to_h)
       assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Dialogflow::V2::ConversationContext), request["conversation_context"]
       assert_equal [:TRIGGER_EVENT_UNSPECIFIED], request["trigger_events"]
       refute_nil options
@@ -539,31 +601,31 @@ class ::Google::Cloud::Dialogflow::V2::Conversations::ClientTest < Minitest::Tes
       end
 
       # Use hash object
-      client.generate_stateless_suggestion({ parent: parent, generator: generator, conversation_context: conversation_context, trigger_events: trigger_events }) do |response, operation|
+      client.generate_stateless_suggestion({ parent: parent, generator: generator, context_references: context_references, conversation_context: conversation_context, trigger_events: trigger_events }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.generate_stateless_suggestion parent: parent, generator: generator, conversation_context: conversation_context, trigger_events: trigger_events do |response, operation|
+      client.generate_stateless_suggestion parent: parent, generator: generator, context_references: context_references, conversation_context: conversation_context, trigger_events: trigger_events do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.generate_stateless_suggestion ::Google::Cloud::Dialogflow::V2::GenerateStatelessSuggestionRequest.new(parent: parent, generator: generator, conversation_context: conversation_context, trigger_events: trigger_events) do |response, operation|
+      client.generate_stateless_suggestion ::Google::Cloud::Dialogflow::V2::GenerateStatelessSuggestionRequest.new(parent: parent, generator: generator, context_references: context_references, conversation_context: conversation_context, trigger_events: trigger_events) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.generate_stateless_suggestion({ parent: parent, generator: generator, conversation_context: conversation_context, trigger_events: trigger_events }, grpc_options) do |response, operation|
+      client.generate_stateless_suggestion({ parent: parent, generator: generator, context_references: context_references, conversation_context: conversation_context, trigger_events: trigger_events }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.generate_stateless_suggestion(::Google::Cloud::Dialogflow::V2::GenerateStatelessSuggestionRequest.new(parent: parent, generator: generator, conversation_context: conversation_context, trigger_events: trigger_events), grpc_options) do |response, operation|
+      client.generate_stateless_suggestion(::Google::Cloud::Dialogflow::V2::GenerateStatelessSuggestionRequest.new(parent: parent, generator: generator, context_references: context_references, conversation_context: conversation_context, trigger_events: trigger_events), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -646,6 +708,68 @@ class ::Google::Cloud::Dialogflow::V2::Conversations::ClientTest < Minitest::Tes
 
       # Verify method calls
       assert_equal 5, search_knowledge_client_stub.call_rpc_count
+    end
+  end
+
+  def test_generate_suggestions
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::Dialogflow::V2::GenerateSuggestionsResponse.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    conversation = "hello world"
+    latest_message = "hello world"
+    trigger_events = [:TRIGGER_EVENT_UNSPECIFIED]
+
+    generate_suggestions_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :generate_suggestions, name
+      assert_kind_of ::Google::Cloud::Dialogflow::V2::GenerateSuggestionsRequest, request
+      assert_equal "hello world", request["conversation"]
+      assert_equal "hello world", request["latest_message"]
+      assert_equal [:TRIGGER_EVENT_UNSPECIFIED], request["trigger_events"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, generate_suggestions_client_stub do
+      # Create client
+      client = ::Google::Cloud::Dialogflow::V2::Conversations::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.generate_suggestions({ conversation: conversation, latest_message: latest_message, trigger_events: trigger_events }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.generate_suggestions conversation: conversation, latest_message: latest_message, trigger_events: trigger_events do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.generate_suggestions ::Google::Cloud::Dialogflow::V2::GenerateSuggestionsRequest.new(conversation: conversation, latest_message: latest_message, trigger_events: trigger_events) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.generate_suggestions({ conversation: conversation, latest_message: latest_message, trigger_events: trigger_events }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.generate_suggestions(::Google::Cloud::Dialogflow::V2::GenerateSuggestionsRequest.new(conversation: conversation, latest_message: latest_message, trigger_events: trigger_events), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, generate_suggestions_client_stub.call_rpc_count
     end
   end
 

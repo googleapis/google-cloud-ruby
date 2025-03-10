@@ -70,6 +70,9 @@ module Google
         # @!attribute [r] telephony_connection_info
         #   @return [::Google::Cloud::Dialogflow::V2::Conversation::TelephonyConnectionInfo]
         #     Output only. The telephony connection information.
+        # @!attribute [r] ingested_context_references
+        #   @return [::Google::Protobuf::Map{::String => ::Google::Cloud::Dialogflow::V2::Conversation::ContextReference}]
+        #     Output only. The context reference updates provided by external systems.
         class Conversation
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -116,6 +119,74 @@ module Google
               include ::Google::Protobuf::MessageExts
               extend ::Google::Protobuf::MessageExts::ClassMethods
             end
+          end
+
+          # Represents a section of ingested context information.
+          # @!attribute [rw] context_contents
+          #   @return [::Array<::Google::Cloud::Dialogflow::V2::Conversation::ContextReference::ContextContent>]
+          #     Required. The list of content updates for a context reference.
+          # @!attribute [rw] update_mode
+          #   @return [::Google::Cloud::Dialogflow::V2::Conversation::ContextReference::UpdateMode]
+          #     Required. The mode in which context reference contents are updated.
+          # @!attribute [rw] language_code
+          #   @return [::String]
+          #     Optional. The language of the information ingested, defaults to "en-US"
+          #     if not set.
+          # @!attribute [r] create_time
+          #   @return [::Google::Protobuf::Timestamp]
+          #     Output only. The time the context reference was first created.
+          class ContextReference
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+
+            # Contents ingested.
+            # @!attribute [rw] content
+            #   @return [::String]
+            #     Required. The information ingested in a single request.
+            # @!attribute [rw] content_format
+            #   @return [::Google::Cloud::Dialogflow::V2::Conversation::ContextReference::ContextContent::ContentFormat]
+            #     Required. The format of the ingested string.
+            # @!attribute [r] ingestion_time
+            #   @return [::Google::Protobuf::Timestamp]
+            #     Output only. The time when this information was incorporated into the
+            #     relevant context reference.
+            class ContextContent
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+
+              # Represents the format of the ingested string.
+              module ContentFormat
+                # Unspecified content format.
+                CONTENT_FORMAT_UNSPECIFIED = 0
+
+                # Content was provided in JSON format.
+                JSON = 1
+
+                # Content was provided as plain text.
+                PLAIN_TEXT = 2
+              end
+            end
+
+            # Represents the mode in which context reference contents are updated.
+            module UpdateMode
+              # Unspecified update mode.
+              UPDATE_MODE_UNSPECIFIED = 0
+
+              # Context content updates are applied in append mode.
+              APPEND = 1
+
+              # Context content updates are applied in overwrite mode.
+              OVERWRITE = 2
+            end
+          end
+
+          # @!attribute [rw] key
+          #   @return [::String]
+          # @!attribute [rw] value
+          #   @return [::Google::Cloud::Dialogflow::V2::Conversation::ContextReference]
+          class IngestedContextReferencesEntry
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
           end
 
           # Enumeration of the completion status of the conversation.
@@ -297,6 +368,50 @@ module Google
         class ConversationPhoneNumber
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # The request message for [ConversationsService.IngestContextReferences][].
+        # @!attribute [rw] conversation
+        #   @return [::String]
+        #     Required. Resource identifier of the conversation to ingest context
+        #     information for. Format: `projects/<Project ID>/locations/<Location
+        #     ID>/conversations/<Conversation ID>`.
+        # @!attribute [rw] context_references
+        #   @return [::Google::Protobuf::Map{::String => ::Google::Cloud::Dialogflow::V2::Conversation::ContextReference}]
+        #     Required. The context references to ingest. The key is the name of the
+        #     context reference and the value contains the contents of the context
+        #     reference. The key is used to incorporate ingested context references to
+        #     enhance the generator.
+        class IngestContextReferencesRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # @!attribute [rw] key
+          #   @return [::String]
+          # @!attribute [rw] value
+          #   @return [::Google::Cloud::Dialogflow::V2::Conversation::ContextReference]
+          class ContextReferencesEntry
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+        end
+
+        # The response message for [ConversationsService.IngestContextReferences][].
+        # @!attribute [rw] ingested_context_references
+        #   @return [::Google::Protobuf::Map{::String => ::Google::Cloud::Dialogflow::V2::Conversation::ContextReference}]
+        #     All context references ingested.
+        class IngestContextReferencesResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # @!attribute [rw] key
+          #   @return [::String]
+          # @!attribute [rw] value
+          #   @return [::Google::Cloud::Dialogflow::V2::Conversation::ContextReference]
+          class IngestedContextReferencesEntry
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
         end
 
         # The request message for
@@ -497,6 +612,12 @@ module Google
         #     `projects/<Project ID>/locations/<Location ID>/generators/<Generator ID>`
         #
         #     Note: The following fields are mutually exclusive: `generator_name`, `generator`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] context_references
+        #   @return [::Google::Protobuf::Map{::String => ::Google::Cloud::Dialogflow::V2::Conversation::ContextReference}]
+        #     Optional. A section of ingested context information. The key is the name of
+        #     the context reference and the value contains the contents of the context
+        #     reference. The key is used to incorporate ingested context references to
+        #     enhance the generator.
         # @!attribute [rw] conversation_context
         #   @return [::Google::Cloud::Dialogflow::V2::ConversationContext]
         #     Optional. Context of the conversation, including transcripts.
@@ -507,6 +628,15 @@ module Google
         class GenerateStatelessSuggestionRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # @!attribute [rw] key
+          #   @return [::String]
+          # @!attribute [rw] value
+          #   @return [::Google::Cloud::Dialogflow::V2::Conversation::ContextReference]
+          class ContextReferencesEntry
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
         end
 
         # The response message for
@@ -860,6 +990,30 @@ module Google
             # The answer is from intent matching.
             INTENT = 3
           end
+        end
+
+        # The request message for
+        # {::Google::Cloud::Dialogflow::V2::Conversations::Client#generate_suggestions Conversations.GenerateSuggestions}.
+        # @!attribute [rw] conversation
+        #   @return [::String]
+        #     Required. The conversation for which the suggestions are generated. Format:
+        #     `projects/<Project ID>/locations/<Location
+        #     ID>/conversations/<Conversation ID>`.
+        #
+        #     The conversation must be created with a conversation profile which has
+        #     generators configured in it to be able to get suggestions.
+        # @!attribute [rw] latest_message
+        #   @return [::String]
+        #     Optional. The name of the latest conversation message for which the request
+        #     is triggered. Format: `projects/<Project ID>/locations/<Location
+        #     ID>/conversations/<Conversation ID>/messages/<Message ID>`.
+        # @!attribute [rw] trigger_events
+        #   @return [::Array<::Google::Cloud::Dialogflow::V2::TriggerEvent>]
+        #     Optional. A list of trigger events. Only generators configured in the
+        #     conversation_profile whose trigger_event is listed here will be triggered.
+        class GenerateSuggestionsRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
       end
     end
