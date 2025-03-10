@@ -125,6 +125,18 @@ class ::Google::Apps::Chat::V1::ChatService::ClientPathsTest < Minitest::Test
     end
   end
 
+  def test_space_notification_setting_path
+    grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
+      client = ::Google::Apps::Chat::V1::ChatService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      path = client.space_notification_setting_path user: "value0", space: "value1"
+      assert_equal "users/value0/spaces/value1/spaceNotificationSetting", path
+    end
+  end
+
   def test_space_read_state_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
     ::Gapic::ServiceStub.stub :new, DummyStub.new do

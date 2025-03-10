@@ -154,6 +154,16 @@
               "methods": [
                 "list_space_events"
               ]
+            },
+            "GetSpaceNotificationSetting": {
+              "methods": [
+                "get_space_notification_setting"
+              ]
+            },
+            "UpdateSpaceNotificationSetting": {
+              "methods": [
+                "update_space_notification_setting"
+              ]
             }
           }
         }
