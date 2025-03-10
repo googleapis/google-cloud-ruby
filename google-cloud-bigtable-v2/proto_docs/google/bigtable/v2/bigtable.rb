@@ -34,6 +34,12 @@ module Google
         #
         #     Values are of the form
         #     `projects/<project>/instances/<instance>/tables/<table>/authorizedViews/<authorized_view>`.
+        # @!attribute [rw] materialized_view_name
+        #   @return [::String]
+        #     Optional. The unique name of the MaterializedView from which to read.
+        #
+        #     Values are of the form
+        #     `projects/<project>/instances/<instance>/materializedViews/<materialized_view>`.
         # @!attribute [rw] app_profile_id
         #   @return [::String]
         #     This value specifies routing for replication. If not specified, the
@@ -209,6 +215,12 @@ module Google
         #
         #     Values are of the form
         #     `projects/<project>/instances/<instance>/tables/<table>/authorizedViews/<authorized_view>`.
+        # @!attribute [rw] materialized_view_name
+        #   @return [::String]
+        #     Optional. The unique name of the MaterializedView from which to read.
+        #
+        #     Values are of the form
+        #     `projects/<project>/instances/<instance>/materializedViews/<materialized_view>`.
         # @!attribute [rw] app_profile_id
         #   @return [::String]
         #     This value specifies routing for replication. If not specified, the
@@ -772,9 +784,25 @@ module Google
         #     Optional. This value specifies routing for replication. If not specified,
         #     the `default` application profile will be used.
         # @!attribute [rw] query
+        #   @deprecated This field is deprecated and may be removed in the next major version update.
         #   @return [::String]
         #     Required. The query string.
+        #
+        #     Exactly one of `query` and `prepared_query` is required. Setting both
+        #     or neither is an `INVALID_ARGUMENT`.
+        # @!attribute [rw] prepared_query
+        #   @return [::String]
+        #     A prepared query that was returned from `PrepareQueryResponse`.
+        #
+        #     Exactly one of `query` and `prepared_query` is required. Setting both
+        #     or neither is an `INVALID_ARGUMENT`.
+        #
+        #     Setting this field also places restrictions on several other fields:
+        #     - `data_format` must be empty.
+        #     - `validate_only` must be false.
+        #     - `params` must match the `param_types` set in the `PrepareQueryRequest`.
         # @!attribute [rw] proto_format
+        #   @deprecated This field is deprecated and may be removed in the next major version update.
         #   @return [::Google::Cloud::Bigtable::V2::ProtoFormat]
         #     Protocol buffer format as described by ProtoSchema and ProtoRows
         #     messages.
@@ -797,17 +825,21 @@ module Google
         #
         #     For example, if
         #     `params["firstName"] = bytes_value: "foo" type {bytes_type {}}`
-        #      then `@firstName` will be replaced with googlesql bytes value "foo" in the
-        #      query string during query evaluation.
+        #     then `@firstName` will be replaced with googlesql bytes value "foo" in the
+        #     query string during query evaluation.
         #
-        #     In case of Value.kind is not set, it will be set to corresponding null
-        #     value in googlesql.
-        #      `params["firstName"] =  type {string_type {}}`
-        #      then `@firstName` will be replaced with googlesql null string.
+        #     If `Value.kind` is not set, the value is treated as a NULL value of the
+        #     given type. For example, if
+        #     `params["firstName"] = type {string_type {}}`
+        #     then `@firstName` will be replaced with googlesql null string.
         #
-        #     Value.type should always be set and no inference of type will be made from
-        #     Value.kind. If Value.type is not set, we will return INVALID_ARGUMENT
-        #     error.
+        #     If `query` is set, any empty `Value.type` in the map will be rejected with
+        #     `INVALID_ARGUMENT`.
+        #
+        #     If `prepared_query` is set, any empty `Value.type` in the map will be
+        #     inferred from the `param_types` in the `PrepareQueryRequest`. Any non-empty
+        #     `Value.type` must match the corresponding `param_types` entry, or be
+        #     rejected with `INVALID_ARGUMENT`.
         class ExecuteQueryRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -837,6 +869,71 @@ module Google
         #
         #     Note: The following fields are mutually exclusive: `results`, `metadata`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         class ExecuteQueryResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for Bigtable.PrepareQuery
+        # @!attribute [rw] instance_name
+        #   @return [::String]
+        #     Required. The unique name of the instance against which the query should be
+        #     executed.
+        #     Values are of the form `projects/<project>/instances/<instance>`
+        # @!attribute [rw] app_profile_id
+        #   @return [::String]
+        #     Optional. This value specifies routing for preparing the query. Note that
+        #     this `app_profile_id` is only used for preparing the query. The actual
+        #     query execution will use the app profile specified in the
+        #     `ExecuteQueryRequest`. If not specified, the `default` application profile
+        #     will be used.
+        # @!attribute [rw] query
+        #   @return [::String]
+        #     Required. The query string.
+        # @!attribute [rw] proto_format
+        #   @return [::Google::Cloud::Bigtable::V2::ProtoFormat]
+        #     Protocol buffer format as described by ProtoSchema and ProtoRows
+        #     messages.
+        # @!attribute [rw] param_types
+        #   @return [::Google::Protobuf::Map{::String => ::Google::Cloud::Bigtable::V2::Type}]
+        #     Required. `param_types` is a map of parameter identifier strings to their
+        #     `Type`s.
+        #
+        #     In query string, a parameter placeholder consists of the
+        #     `@` character followed by the parameter name (for example, `@firstName`) in
+        #     the query string.
+        #
+        #     For example, if param_types["firstName"] = Bytes then @firstName will be a
+        #     query parameter of type Bytes. The specific `Value` to be used for the
+        #     query execution must be sent in `ExecuteQueryRequest` in the `params` map.
+        class PrepareQueryRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # @!attribute [rw] key
+          #   @return [::String]
+          # @!attribute [rw] value
+          #   @return [::Google::Cloud::Bigtable::V2::Type]
+          class ParamTypesEntry
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+        end
+
+        # Response message for Bigtable.PrepareQueryResponse
+        # @!attribute [rw] metadata
+        #   @return [::Google::Cloud::Bigtable::V2::ResultSetMetadata]
+        #     Structure of rows in the response stream of `ExecuteQueryResponse` for the
+        #     returned `prepared_query`.
+        # @!attribute [rw] prepared_query
+        #   @return [::String]
+        #     A serialized prepared query. Clients should treat this as an opaque
+        #     blob of bytes to send in `ExecuteQueryRequest`.
+        # @!attribute [rw] valid_until
+        #   @return [::Google::Protobuf::Timestamp]
+        #     The time at which the prepared query token becomes invalid.
+        #     A token may become invalid early due to changes in the data being read, but
+        #     it provides a guideline to refresh query plans asynchronously.
+        class PrepareQueryResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end

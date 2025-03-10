@@ -372,6 +372,46 @@
       ]
     },
     {
+      "region_tag": "bigtable_v2_generated_Bigtable_PrepareQuery_sync",
+      "title": "Snippet for the prepare_query call in the Bigtable service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Bigtable::V2::Bigtable::Client#prepare_query.",
+      "file": "bigtable/prepare_query.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "prepare_query",
+        "full_name": "::Google::Cloud::Bigtable::V2::Bigtable::Client#prepare_query",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Bigtable::V2::PrepareQueryRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Bigtable::V2::PrepareQueryResponse",
+        "client": {
+          "short_name": "Bigtable::Client",
+          "full_name": "::Google::Cloud::Bigtable::V2::Bigtable::Client"
+        },
+        "method": {
+          "short_name": "PrepareQuery",
+          "full_name": "google.bigtable.v2.Bigtable.PrepareQuery",
+          "service": {
+            "short_name": "Bigtable",
+            "full_name": "google.bigtable.v2.Bigtable"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
       "region_tag": "bigtable_v2_generated_Bigtable_ExecuteQuery_sync",
       "title": "Snippet for the execute_query call in the Bigtable service",
       "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Bigtable::V2::Bigtable::Client#execute_query.",

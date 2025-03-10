@@ -224,7 +224,7 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload read_rows(table_name: nil, authorized_view_name: nil, app_profile_id: nil, rows: nil, filter: nil, rows_limit: nil, request_stats_view: nil, reversed: nil)
+            # @overload read_rows(table_name: nil, authorized_view_name: nil, materialized_view_name: nil, app_profile_id: nil, rows: nil, filter: nil, rows_limit: nil, request_stats_view: nil, reversed: nil)
             #   Pass arguments to `read_rows` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -239,6 +239,11 @@ module Google
             #
             #     Values are of the form
             #     `projects/<project>/instances/<instance>/tables/<table>/authorizedViews/<authorized_view>`.
+            #   @param materialized_view_name [::String]
+            #     Optional. The unique name of the MaterializedView from which to read.
+            #
+            #     Values are of the form
+            #     `projects/<project>/instances/<instance>/materializedViews/<materialized_view>`.
             #   @param app_profile_id [::String]
             #     This value specifies routing for replication. If not specified, the
             #     "default" application profile will be used.
@@ -358,7 +363,7 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload sample_row_keys(table_name: nil, authorized_view_name: nil, app_profile_id: nil)
+            # @overload sample_row_keys(table_name: nil, authorized_view_name: nil, materialized_view_name: nil, app_profile_id: nil)
             #   Pass arguments to `sample_row_keys` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -374,6 +379,11 @@ module Google
             #
             #     Values are of the form
             #     `projects/<project>/instances/<instance>/tables/<table>/authorizedViews/<authorized_view>`.
+            #   @param materialized_view_name [::String]
+            #     Optional. The unique name of the MaterializedView from which to read.
+            #
+            #     Values are of the form
+            #     `projects/<project>/instances/<instance>/materializedViews/<materialized_view>`.
             #   @param app_profile_id [::String]
             #     This value specifies routing for replication. If not specified, the
             #     "default" application profile will be used.
@@ -1247,7 +1257,120 @@ module Google
             end
 
             ##
-            # Executes a BTQL query against a particular Cloud Bigtable instance.
+            # Prepares a GoogleSQL query for execution on a particular Bigtable instance.
+            #
+            # @overload prepare_query(request, options = nil)
+            #   Pass arguments to `prepare_query` via a request object, either of type
+            #   {::Google::Cloud::Bigtable::V2::PrepareQueryRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::Bigtable::V2::PrepareQueryRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload prepare_query(instance_name: nil, app_profile_id: nil, query: nil, proto_format: nil, param_types: nil)
+            #   Pass arguments to `prepare_query` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param instance_name [::String]
+            #     Required. The unique name of the instance against which the query should be
+            #     executed.
+            #     Values are of the form `projects/<project>/instances/<instance>`
+            #   @param app_profile_id [::String]
+            #     Optional. This value specifies routing for preparing the query. Note that
+            #     this `app_profile_id` is only used for preparing the query. The actual
+            #     query execution will use the app profile specified in the
+            #     `ExecuteQueryRequest`. If not specified, the `default` application profile
+            #     will be used.
+            #   @param query [::String]
+            #     Required. The query string.
+            #   @param proto_format [::Google::Cloud::Bigtable::V2::ProtoFormat, ::Hash]
+            #     Protocol buffer format as described by ProtoSchema and ProtoRows
+            #     messages.
+            #   @param param_types [::Hash{::String => ::Google::Cloud::Bigtable::V2::Type, ::Hash}]
+            #     Required. `param_types` is a map of parameter identifier strings to their
+            #     `Type`s.
+            #
+            #     In query string, a parameter placeholder consists of the
+            #     `@` character followed by the parameter name (for example, `@firstName`) in
+            #     the query string.
+            #
+            #     For example, if param_types["firstName"] = Bytes then @firstName will be a
+            #     query parameter of type Bytes. The specific `Value` to be used for the
+            #     query execution must be sent in `ExecuteQueryRequest` in the `params` map.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Google::Cloud::Bigtable::V2::PrepareQueryResponse]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Google::Cloud::Bigtable::V2::PrepareQueryResponse]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/bigtable/v2"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Bigtable::V2::Bigtable::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Bigtable::V2::PrepareQueryRequest.new
+            #
+            #   # Call the prepare_query method.
+            #   result = client.prepare_query request
+            #
+            #   # The returned object is of type Google::Cloud::Bigtable::V2::PrepareQueryResponse.
+            #   p result
+            #
+            def prepare_query request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Bigtable::V2::PrepareQueryRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.prepare_query.metadata.to_h
+
+              # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::Bigtable::V2::VERSION
+              metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.instance_name &&
+                 %r{^projects/[^/]+/instances/[^/]+/?$}.match?(request.instance_name)
+                header_params["name"] = request.instance_name
+              end
+              if request.app_profile_id && !request.app_profile_id.empty?
+                header_params["app_profile_id"] = request.app_profile_id
+              end
+
+              request_params_header = URI.encode_www_form header_params
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.prepare_query.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.prepare_query.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @bigtable_stub.call_rpc :prepare_query, request, options: options do |response, operation|
+                yield response, operation if block_given?
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Executes a SQL query against a particular Bigtable instance.
             #
             # @overload execute_query(request, options = nil)
             #   Pass arguments to `execute_query` via a request object, either of type
@@ -1259,7 +1382,7 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload execute_query(instance_name: nil, app_profile_id: nil, query: nil, proto_format: nil, resume_token: nil, params: nil)
+            # @overload execute_query(instance_name: nil, app_profile_id: nil, query: nil, prepared_query: nil, proto_format: nil, resume_token: nil, params: nil)
             #   Pass arguments to `execute_query` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -1273,6 +1396,19 @@ module Google
             #     the `default` application profile will be used.
             #   @param query [::String]
             #     Required. The query string.
+            #
+            #     Exactly one of `query` and `prepared_query` is required. Setting both
+            #     or neither is an `INVALID_ARGUMENT`.
+            #   @param prepared_query [::String]
+            #     A prepared query that was returned from `PrepareQueryResponse`.
+            #
+            #     Exactly one of `query` and `prepared_query` is required. Setting both
+            #     or neither is an `INVALID_ARGUMENT`.
+            #
+            #     Setting this field also places restrictions on several other fields:
+            #     - `data_format` must be empty.
+            #     - `validate_only` must be false.
+            #     - `params` must match the `param_types` set in the `PrepareQueryRequest`.
             #   @param proto_format [::Google::Cloud::Bigtable::V2::ProtoFormat, ::Hash]
             #     Protocol buffer format as described by ProtoSchema and ProtoRows
             #     messages.
@@ -1293,17 +1429,21 @@ module Google
             #
             #     For example, if
             #     `params["firstName"] = bytes_value: "foo" type {bytes_type {}}`
-            #      then `@firstName` will be replaced with googlesql bytes value "foo" in the
-            #      query string during query evaluation.
+            #     then `@firstName` will be replaced with googlesql bytes value "foo" in the
+            #     query string during query evaluation.
             #
-            #     In case of Value.kind is not set, it will be set to corresponding null
-            #     value in googlesql.
-            #      `params["firstName"] =  type {string_type {}}`
-            #      then `@firstName` will be replaced with googlesql null string.
+            #     If `Value.kind` is not set, the value is treated as a NULL value of the
+            #     given type. For example, if
+            #     `params["firstName"] = type {string_type {}}`
+            #     then `@firstName` will be replaced with googlesql null string.
             #
-            #     Value.type should always be set and no inference of type will be made from
-            #     Value.kind. If Value.type is not set, we will return INVALID_ARGUMENT
-            #     error.
+            #     If `query` is set, any empty `Value.type` in the map will be rejected with
+            #     `INVALID_ARGUMENT`.
+            #
+            #     If `prepared_query` is set, any empty `Value.type` in the map will be
+            #     inferred from the `param_types` in the `PrepareQueryRequest`. Any non-empty
+            #     `Value.type` must match the corresponding `param_types` entry, or be
+            #     rejected with `INVALID_ARGUMENT`.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Enumerable<::Google::Cloud::Bigtable::V2::ExecuteQueryResponse>]
@@ -1588,6 +1728,11 @@ module Google
                 #
                 attr_reader :read_change_stream
                 ##
+                # RPC-specific configuration for `prepare_query`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :prepare_query
+                ##
                 # RPC-specific configuration for `execute_query`
                 # @return [::Gapic::Config::Method]
                 #
@@ -1613,6 +1758,8 @@ module Google
                   @generate_initial_change_stream_partitions = ::Gapic::Config::Method.new generate_initial_change_stream_partitions_config
                   read_change_stream_config = parent_rpcs.read_change_stream if parent_rpcs.respond_to? :read_change_stream
                   @read_change_stream = ::Gapic::Config::Method.new read_change_stream_config
+                  prepare_query_config = parent_rpcs.prepare_query if parent_rpcs.respond_to? :prepare_query
+                  @prepare_query = ::Gapic::Config::Method.new prepare_query_config
                   execute_query_config = parent_rpcs.execute_query if parent_rpcs.respond_to? :execute_query
                   @execute_query = ::Gapic::Config::Method.new execute_query_config
 
