@@ -1,5 +1,11 @@
 # Changelog
 
+### 1.6.0 (2025-03-10)
+
+#### Features
+
+* Change client_secret in OAuthConfig from required to optional ([#29310](https://github.com/googleapis/google-cloud-ruby/issues/29310)) 
+
 ### 1.5.0 (2025-03-04)
 
 #### Features
