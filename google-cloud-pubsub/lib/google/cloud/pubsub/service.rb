@@ -372,6 +372,31 @@ module Google
         end
 
         ##
+        # Commits a new schema revision to an existing schema.
+        #
+        # @param name [String] The name of the schema to revision.
+        # @param definition [String] The definition of the schema. This should
+        #   contain a string representing the full definition of the schema that
+        #   is a valid schema definition of the type specified in `type`. See
+        #   https://cloud.google.com/pubsub/docs/schemas for details.
+        # @param type [String, Symbol] The type of the schema. Required. Possible
+        #   values are case-insensitive and include:
+        #
+        #     * `PROTOCOL_BUFFER` - A Protocol Buffer schema definition.
+        #     * `AVRO` - An Avro schema definition.
+        #
+        # @return [Google::Cloud::PubSub::V1::Schema]
+        #
+        def commit_schema name, definition, type
+          schema = Google::Cloud::PubSub::V1::Schema.new(
+            name: name,
+            definition: definition,
+            type: type
+          )
+          schemas.commit_schema name: name, schema: schema
+        end
+
+        ##
         # Validate the definition string intended for a schema.
         def validate_schema type, definition, options = {}
           schema = Google::Cloud::PubSub::V1::Schema.new(

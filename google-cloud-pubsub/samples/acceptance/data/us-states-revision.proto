@@ -1,0 +1,9 @@
+syntax = "proto3";
+
+package utilities;
+
+message StateProto {
+  string name = 1;
+  string post_abbr = 2;
+  string capital_city = 3;
+}
