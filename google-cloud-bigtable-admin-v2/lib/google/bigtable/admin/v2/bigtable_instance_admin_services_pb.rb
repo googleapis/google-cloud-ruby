@@ -111,6 +111,26 @@ module Google
               # Lists hot tablets in a cluster, within the time range provided. Hot
               # tablets are ordered based on CPU usage.
               rpc :ListHotTablets, ::Google::Cloud::Bigtable::Admin::V2::ListHotTabletsRequest, ::Google::Cloud::Bigtable::Admin::V2::ListHotTabletsResponse
+              # Creates a logical view within an instance.
+              rpc :CreateLogicalView, ::Google::Cloud::Bigtable::Admin::V2::CreateLogicalViewRequest, ::Google::Longrunning::Operation
+              # Gets information about a logical view.
+              rpc :GetLogicalView, ::Google::Cloud::Bigtable::Admin::V2::GetLogicalViewRequest, ::Google::Cloud::Bigtable::Admin::V2::LogicalView
+              # Lists information about logical views in an instance.
+              rpc :ListLogicalViews, ::Google::Cloud::Bigtable::Admin::V2::ListLogicalViewsRequest, ::Google::Cloud::Bigtable::Admin::V2::ListLogicalViewsResponse
+              # Updates a logical view within an instance.
+              rpc :UpdateLogicalView, ::Google::Cloud::Bigtable::Admin::V2::UpdateLogicalViewRequest, ::Google::Longrunning::Operation
+              # Deletes a logical view from an instance.
+              rpc :DeleteLogicalView, ::Google::Cloud::Bigtable::Admin::V2::DeleteLogicalViewRequest, ::Google::Protobuf::Empty
+              # Creates a materialized view within an instance.
+              rpc :CreateMaterializedView, ::Google::Cloud::Bigtable::Admin::V2::CreateMaterializedViewRequest, ::Google::Longrunning::Operation
+              # Gets information about a materialized view.
+              rpc :GetMaterializedView, ::Google::Cloud::Bigtable::Admin::V2::GetMaterializedViewRequest, ::Google::Cloud::Bigtable::Admin::V2::MaterializedView
+              # Lists information about materialized views in an instance.
+              rpc :ListMaterializedViews, ::Google::Cloud::Bigtable::Admin::V2::ListMaterializedViewsRequest, ::Google::Cloud::Bigtable::Admin::V2::ListMaterializedViewsResponse
+              # Updates a materialized view within an instance.
+              rpc :UpdateMaterializedView, ::Google::Cloud::Bigtable::Admin::V2::UpdateMaterializedViewRequest, ::Google::Longrunning::Operation
+              # Deletes a materialized view from an instance.
+              rpc :DeleteMaterializedView, ::Google::Cloud::Bigtable::Admin::V2::DeleteMaterializedViewRequest, ::Google::Protobuf::Empty
             end
 
             Stub = Service.rpc_stub_class

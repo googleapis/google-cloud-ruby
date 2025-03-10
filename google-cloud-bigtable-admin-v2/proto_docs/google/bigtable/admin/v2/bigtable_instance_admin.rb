@@ -539,6 +539,51 @@ module Google
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
 
+          # Request message for BigtableInstanceAdmin.GetLogicalView.
+          # @!attribute [rw] name
+          #   @return [::String]
+          #     Required. The unique name of the requested logical view. Values are of the
+          #     form `projects/{project}/instances/{instance}/logicalViews/{logical_view}`.
+          class GetLogicalViewRequest
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Request message for BigtableInstanceAdmin.ListLogicalViews.
+          # @!attribute [rw] parent
+          #   @return [::String]
+          #     Required. The unique name of the instance for which the list of logical
+          #     views is requested. Values are of the form
+          #     `projects/{project}/instances/{instance}`.
+          # @!attribute [rw] page_size
+          #   @return [::Integer]
+          #     Optional. The maximum number of logical views to return. The service may
+          #     return fewer than this value
+          # @!attribute [rw] page_token
+          #   @return [::String]
+          #     Optional. A page token, received from a previous `ListLogicalViews` call.
+          #     Provide this to retrieve the subsequent page.
+          #
+          #     When paginating, all other parameters provided to `ListLogicalViews` must
+          #     match the call that provided the page token.
+          class ListLogicalViewsRequest
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Response message for BigtableInstanceAdmin.ListLogicalViews.
+          # @!attribute [rw] logical_views
+          #   @return [::Array<::Google::Cloud::Bigtable::Admin::V2::LogicalView>]
+          #     The list of requested logical views.
+          # @!attribute [rw] next_page_token
+          #   @return [::String]
+          #     A token, which can be sent as `page_token` to retrieve the next page.
+          #     If this field is omitted, there are no subsequent pages.
+          class ListLogicalViewsResponse
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
           # Request message for BigtableInstanceAdmin.UpdateLogicalView.
           # @!attribute [rw] logical_view
           #   @return [::Google::Cloud::Bigtable::Admin::V2::LogicalView]
@@ -567,6 +612,23 @@ module Google
           #   @return [::Google::Protobuf::Timestamp]
           #     If set, the time at which this operation finished or was canceled.
           class UpdateLogicalViewMetadata
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Request message for BigtableInstanceAdmin.DeleteLogicalView.
+          # @!attribute [rw] name
+          #   @return [::String]
+          #     Required. The unique name of the logical view to be deleted.
+          #     Format:
+          #     `projects/{project}/instances/{instance}/logicalViews/{logical_view}`.
+          # @!attribute [rw] etag
+          #   @return [::String]
+          #     Optional. The current etag of the logical view.
+          #     If an etag is provided and does not match the current etag of the
+          #     logical view, deletion will be blocked and an ABORTED error will be
+          #     returned.
+          class DeleteLogicalViewRequest
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
@@ -600,6 +662,101 @@ module Google
           #   @return [::Google::Protobuf::Timestamp]
           #     If set, the time at which this operation finished or was canceled.
           class CreateMaterializedViewMetadata
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Request message for BigtableInstanceAdmin.GetMaterializedView.
+          # @!attribute [rw] name
+          #   @return [::String]
+          #     Required. The unique name of the requested materialized view. Values are of
+          #     the form
+          #     `projects/{project}/instances/{instance}/materializedViews/{materialized_view}`.
+          class GetMaterializedViewRequest
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Request message for BigtableInstanceAdmin.ListMaterializedViews.
+          # @!attribute [rw] parent
+          #   @return [::String]
+          #     Required. The unique name of the instance for which the list of
+          #     materialized views is requested. Values are of the form
+          #     `projects/{project}/instances/{instance}`.
+          # @!attribute [rw] page_size
+          #   @return [::Integer]
+          #     Optional. The maximum number of materialized views to return. The service
+          #     may return fewer than this value
+          # @!attribute [rw] page_token
+          #   @return [::String]
+          #     Optional. A page token, received from a previous `ListMaterializedViews`
+          #     call. Provide this to retrieve the subsequent page.
+          #
+          #     When paginating, all other parameters provided to `ListMaterializedViews`
+          #     must match the call that provided the page token.
+          class ListMaterializedViewsRequest
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Response message for BigtableInstanceAdmin.ListMaterializedViews.
+          # @!attribute [rw] materialized_views
+          #   @return [::Array<::Google::Cloud::Bigtable::Admin::V2::MaterializedView>]
+          #     The list of requested materialized views.
+          # @!attribute [rw] next_page_token
+          #   @return [::String]
+          #     A token, which can be sent as `page_token` to retrieve the next page.
+          #     If this field is omitted, there are no subsequent pages.
+          class ListMaterializedViewsResponse
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Request message for BigtableInstanceAdmin.UpdateMaterializedView.
+          # @!attribute [rw] materialized_view
+          #   @return [::Google::Cloud::Bigtable::Admin::V2::MaterializedView]
+          #     Required. The materialized view to update.
+          #
+          #     The materialized view's `name` field is used to identify the view to
+          #     update. Format:
+          #     `projects/{project}/instances/{instance}/materializedViews/{materialized_view}`.
+          # @!attribute [rw] update_mask
+          #   @return [::Google::Protobuf::FieldMask]
+          #     Optional. The list of fields to update.
+          class UpdateMaterializedViewRequest
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # The metadata for the Operation returned by UpdateMaterializedView.
+          # @!attribute [rw] original_request
+          #   @return [::Google::Cloud::Bigtable::Admin::V2::UpdateMaterializedViewRequest]
+          #     The request that prompted the initiation of this UpdateMaterializedView
+          #     operation.
+          # @!attribute [rw] start_time
+          #   @return [::Google::Protobuf::Timestamp]
+          #     The time at which this operation was started.
+          # @!attribute [rw] end_time
+          #   @return [::Google::Protobuf::Timestamp]
+          #     If set, the time at which this operation finished or was canceled.
+          class UpdateMaterializedViewMetadata
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Request message for BigtableInstanceAdmin.DeleteMaterializedView.
+          # @!attribute [rw] name
+          #   @return [::String]
+          #     Required. The unique name of the materialized view to be deleted.
+          #     Format:
+          #     `projects/{project}/instances/{instance}/materializedViews/{materialized_view}`.
+          # @!attribute [rw] etag
+          #   @return [::String]
+          #     Optional. The current etag of the materialized view.
+          #     If an etag is provided and does not match the current etag of the
+          #     materialized view, deletion will be blocked and an ABORTED error will be
+          #     returned.
+          class DeleteMaterializedViewRequest
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
