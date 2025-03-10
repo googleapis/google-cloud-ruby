@@ -2323,6 +2323,967 @@ module Google
               end
 
               ##
+              # Creates a logical view within an instance.
+              #
+              # @overload create_logical_view(request, options = nil)
+              #   Pass arguments to `create_logical_view` via a request object, either of type
+              #   {::Google::Cloud::Bigtable::Admin::V2::CreateLogicalViewRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::Bigtable::Admin::V2::CreateLogicalViewRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+              #
+              # @overload create_logical_view(parent: nil, logical_view_id: nil, logical_view: nil)
+              #   Pass arguments to `create_logical_view` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param parent [::String]
+              #     Required. The parent instance where this logical view will be created.
+              #     Format: `projects/{project}/instances/{instance}`.
+              #   @param logical_view_id [::String]
+              #     Required. The ID to use for the logical view, which will become the final
+              #     component of the logical view's resource name.
+              #   @param logical_view [::Google::Cloud::Bigtable::Admin::V2::LogicalView, ::Hash]
+              #     Required. The logical view to create.
+              #
+              # @yield [response, operation] Access the result along with the RPC operation
+              # @yieldparam response [::Gapic::Operation]
+              # @yieldparam operation [::GRPC::ActiveCall::Operation]
+              #
+              # @return [::Gapic::Operation]
+              #
+              # @raise [::Google::Cloud::Error] if the RPC is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/bigtable/admin/v2"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdmin::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Bigtable::Admin::V2::CreateLogicalViewRequest.new
+              #
+              #   # Call the create_logical_view method.
+              #   result = client.create_logical_view request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
+              def create_logical_view request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Bigtable::Admin::V2::CreateLogicalViewRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                metadata = @config.rpcs.create_logical_view.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::Bigtable::Admin::V2::VERSION
+                metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                header_params = {}
+                if request.parent
+                  header_params["parent"] = request.parent
+                end
+
+                request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+                metadata[:"x-goog-request-params"] ||= request_params_header
+
+                options.apply_defaults timeout:      @config.rpcs.create_logical_view.timeout,
+                                       metadata:     metadata,
+                                       retry_policy: @config.rpcs.create_logical_view.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @bigtable_instance_admin_stub.call_rpc :create_logical_view, request, options: options do |response, operation|
+                  response = ::Gapic::Operation.new response, @operations_client, options: options
+                  yield response, operation if block_given?
+                  throw :response, response
+                end
+              rescue ::GRPC::BadStatus => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Gets information about a logical view.
+              #
+              # @overload get_logical_view(request, options = nil)
+              #   Pass arguments to `get_logical_view` via a request object, either of type
+              #   {::Google::Cloud::Bigtable::Admin::V2::GetLogicalViewRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::Bigtable::Admin::V2::GetLogicalViewRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+              #
+              # @overload get_logical_view(name: nil)
+              #   Pass arguments to `get_logical_view` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param name [::String]
+              #     Required. The unique name of the requested logical view. Values are of the
+              #     form `projects/{project}/instances/{instance}/logicalViews/{logical_view}`.
+              #
+              # @yield [response, operation] Access the result along with the RPC operation
+              # @yieldparam response [::Google::Cloud::Bigtable::Admin::V2::LogicalView]
+              # @yieldparam operation [::GRPC::ActiveCall::Operation]
+              #
+              # @return [::Google::Cloud::Bigtable::Admin::V2::LogicalView]
+              #
+              # @raise [::Google::Cloud::Error] if the RPC is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/bigtable/admin/v2"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdmin::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Bigtable::Admin::V2::GetLogicalViewRequest.new
+              #
+              #   # Call the get_logical_view method.
+              #   result = client.get_logical_view request
+              #
+              #   # The returned object is of type Google::Cloud::Bigtable::Admin::V2::LogicalView.
+              #   p result
+              #
+              def get_logical_view request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Bigtable::Admin::V2::GetLogicalViewRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                metadata = @config.rpcs.get_logical_view.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::Bigtable::Admin::V2::VERSION
+                metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                header_params = {}
+                if request.name
+                  header_params["name"] = request.name
+                end
+
+                request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+                metadata[:"x-goog-request-params"] ||= request_params_header
+
+                options.apply_defaults timeout:      @config.rpcs.get_logical_view.timeout,
+                                       metadata:     metadata,
+                                       retry_policy: @config.rpcs.get_logical_view.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @bigtable_instance_admin_stub.call_rpc :get_logical_view, request, options: options do |response, operation|
+                  yield response, operation if block_given?
+                end
+              rescue ::GRPC::BadStatus => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Lists information about logical views in an instance.
+              #
+              # @overload list_logical_views(request, options = nil)
+              #   Pass arguments to `list_logical_views` via a request object, either of type
+              #   {::Google::Cloud::Bigtable::Admin::V2::ListLogicalViewsRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::Bigtable::Admin::V2::ListLogicalViewsRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+              #
+              # @overload list_logical_views(parent: nil, page_size: nil, page_token: nil)
+              #   Pass arguments to `list_logical_views` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param parent [::String]
+              #     Required. The unique name of the instance for which the list of logical
+              #     views is requested. Values are of the form
+              #     `projects/{project}/instances/{instance}`.
+              #   @param page_size [::Integer]
+              #     Optional. The maximum number of logical views to return. The service may
+              #     return fewer than this value
+              #   @param page_token [::String]
+              #     Optional. A page token, received from a previous `ListLogicalViews` call.
+              #     Provide this to retrieve the subsequent page.
+              #
+              #     When paginating, all other parameters provided to `ListLogicalViews` must
+              #     match the call that provided the page token.
+              #
+              # @yield [response, operation] Access the result along with the RPC operation
+              # @yieldparam response [::Gapic::PagedEnumerable<::Google::Cloud::Bigtable::Admin::V2::LogicalView>]
+              # @yieldparam operation [::GRPC::ActiveCall::Operation]
+              #
+              # @return [::Gapic::PagedEnumerable<::Google::Cloud::Bigtable::Admin::V2::LogicalView>]
+              #
+              # @raise [::Google::Cloud::Error] if the RPC is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/bigtable/admin/v2"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdmin::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Bigtable::Admin::V2::ListLogicalViewsRequest.new
+              #
+              #   # Call the list_logical_views method.
+              #   result = client.list_logical_views request
+              #
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
+              #     # Each element is of type ::Google::Cloud::Bigtable::Admin::V2::LogicalView.
+              #     p item
+              #   end
+              #
+              def list_logical_views request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Bigtable::Admin::V2::ListLogicalViewsRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                metadata = @config.rpcs.list_logical_views.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::Bigtable::Admin::V2::VERSION
+                metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                header_params = {}
+                if request.parent
+                  header_params["parent"] = request.parent
+                end
+
+                request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+                metadata[:"x-goog-request-params"] ||= request_params_header
+
+                options.apply_defaults timeout:      @config.rpcs.list_logical_views.timeout,
+                                       metadata:     metadata,
+                                       retry_policy: @config.rpcs.list_logical_views.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @bigtable_instance_admin_stub.call_rpc :list_logical_views, request, options: options do |response, operation|
+                  response = ::Gapic::PagedEnumerable.new @bigtable_instance_admin_stub, :list_logical_views, request, response, operation, options
+                  yield response, operation if block_given?
+                  throw :response, response
+                end
+              rescue ::GRPC::BadStatus => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Updates a logical view within an instance.
+              #
+              # @overload update_logical_view(request, options = nil)
+              #   Pass arguments to `update_logical_view` via a request object, either of type
+              #   {::Google::Cloud::Bigtable::Admin::V2::UpdateLogicalViewRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::Bigtable::Admin::V2::UpdateLogicalViewRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+              #
+              # @overload update_logical_view(logical_view: nil, update_mask: nil)
+              #   Pass arguments to `update_logical_view` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param logical_view [::Google::Cloud::Bigtable::Admin::V2::LogicalView, ::Hash]
+              #     Required. The logical view to update.
+              #
+              #     The logical view's `name` field is used to identify the view to update.
+              #     Format:
+              #     `projects/{project}/instances/{instance}/logicalViews/{logical_view}`.
+              #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
+              #     Optional. The list of fields to update.
+              #
+              # @yield [response, operation] Access the result along with the RPC operation
+              # @yieldparam response [::Gapic::Operation]
+              # @yieldparam operation [::GRPC::ActiveCall::Operation]
+              #
+              # @return [::Gapic::Operation]
+              #
+              # @raise [::Google::Cloud::Error] if the RPC is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/bigtable/admin/v2"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdmin::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Bigtable::Admin::V2::UpdateLogicalViewRequest.new
+              #
+              #   # Call the update_logical_view method.
+              #   result = client.update_logical_view request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
+              def update_logical_view request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Bigtable::Admin::V2::UpdateLogicalViewRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                metadata = @config.rpcs.update_logical_view.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::Bigtable::Admin::V2::VERSION
+                metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                header_params = {}
+                if request.logical_view&.name
+                  header_params["logical_view.name"] = request.logical_view.name
+                end
+
+                request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+                metadata[:"x-goog-request-params"] ||= request_params_header
+
+                options.apply_defaults timeout:      @config.rpcs.update_logical_view.timeout,
+                                       metadata:     metadata,
+                                       retry_policy: @config.rpcs.update_logical_view.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @bigtable_instance_admin_stub.call_rpc :update_logical_view, request, options: options do |response, operation|
+                  response = ::Gapic::Operation.new response, @operations_client, options: options
+                  yield response, operation if block_given?
+                  throw :response, response
+                end
+              rescue ::GRPC::BadStatus => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Deletes a logical view from an instance.
+              #
+              # @overload delete_logical_view(request, options = nil)
+              #   Pass arguments to `delete_logical_view` via a request object, either of type
+              #   {::Google::Cloud::Bigtable::Admin::V2::DeleteLogicalViewRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::Bigtable::Admin::V2::DeleteLogicalViewRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+              #
+              # @overload delete_logical_view(name: nil, etag: nil)
+              #   Pass arguments to `delete_logical_view` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param name [::String]
+              #     Required. The unique name of the logical view to be deleted.
+              #     Format:
+              #     `projects/{project}/instances/{instance}/logicalViews/{logical_view}`.
+              #   @param etag [::String]
+              #     Optional. The current etag of the logical view.
+              #     If an etag is provided and does not match the current etag of the
+              #     logical view, deletion will be blocked and an ABORTED error will be
+              #     returned.
+              #
+              # @yield [response, operation] Access the result along with the RPC operation
+              # @yieldparam response [::Google::Protobuf::Empty]
+              # @yieldparam operation [::GRPC::ActiveCall::Operation]
+              #
+              # @return [::Google::Protobuf::Empty]
+              #
+              # @raise [::Google::Cloud::Error] if the RPC is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/bigtable/admin/v2"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdmin::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Bigtable::Admin::V2::DeleteLogicalViewRequest.new
+              #
+              #   # Call the delete_logical_view method.
+              #   result = client.delete_logical_view request
+              #
+              #   # The returned object is of type Google::Protobuf::Empty.
+              #   p result
+              #
+              def delete_logical_view request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Bigtable::Admin::V2::DeleteLogicalViewRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                metadata = @config.rpcs.delete_logical_view.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::Bigtable::Admin::V2::VERSION
+                metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                header_params = {}
+                if request.name
+                  header_params["name"] = request.name
+                end
+
+                request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+                metadata[:"x-goog-request-params"] ||= request_params_header
+
+                options.apply_defaults timeout:      @config.rpcs.delete_logical_view.timeout,
+                                       metadata:     metadata,
+                                       retry_policy: @config.rpcs.delete_logical_view.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @bigtable_instance_admin_stub.call_rpc :delete_logical_view, request, options: options do |response, operation|
+                  yield response, operation if block_given?
+                end
+              rescue ::GRPC::BadStatus => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Creates a materialized view within an instance.
+              #
+              # @overload create_materialized_view(request, options = nil)
+              #   Pass arguments to `create_materialized_view` via a request object, either of type
+              #   {::Google::Cloud::Bigtable::Admin::V2::CreateMaterializedViewRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::Bigtable::Admin::V2::CreateMaterializedViewRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+              #
+              # @overload create_materialized_view(parent: nil, materialized_view_id: nil, materialized_view: nil)
+              #   Pass arguments to `create_materialized_view` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param parent [::String]
+              #     Required. The parent instance where this materialized view will be created.
+              #     Format: `projects/{project}/instances/{instance}`.
+              #   @param materialized_view_id [::String]
+              #     Required. The ID to use for the materialized view, which will become the
+              #     final component of the materialized view's resource name.
+              #   @param materialized_view [::Google::Cloud::Bigtable::Admin::V2::MaterializedView, ::Hash]
+              #     Required. The materialized view to create.
+              #
+              # @yield [response, operation] Access the result along with the RPC operation
+              # @yieldparam response [::Gapic::Operation]
+              # @yieldparam operation [::GRPC::ActiveCall::Operation]
+              #
+              # @return [::Gapic::Operation]
+              #
+              # @raise [::Google::Cloud::Error] if the RPC is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/bigtable/admin/v2"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdmin::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Bigtable::Admin::V2::CreateMaterializedViewRequest.new
+              #
+              #   # Call the create_materialized_view method.
+              #   result = client.create_materialized_view request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
+              def create_materialized_view request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Bigtable::Admin::V2::CreateMaterializedViewRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                metadata = @config.rpcs.create_materialized_view.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::Bigtable::Admin::V2::VERSION
+                metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                header_params = {}
+                if request.parent
+                  header_params["parent"] = request.parent
+                end
+
+                request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+                metadata[:"x-goog-request-params"] ||= request_params_header
+
+                options.apply_defaults timeout:      @config.rpcs.create_materialized_view.timeout,
+                                       metadata:     metadata,
+                                       retry_policy: @config.rpcs.create_materialized_view.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @bigtable_instance_admin_stub.call_rpc :create_materialized_view, request, options: options do |response, operation|
+                  response = ::Gapic::Operation.new response, @operations_client, options: options
+                  yield response, operation if block_given?
+                  throw :response, response
+                end
+              rescue ::GRPC::BadStatus => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Gets information about a materialized view.
+              #
+              # @overload get_materialized_view(request, options = nil)
+              #   Pass arguments to `get_materialized_view` via a request object, either of type
+              #   {::Google::Cloud::Bigtable::Admin::V2::GetMaterializedViewRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::Bigtable::Admin::V2::GetMaterializedViewRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+              #
+              # @overload get_materialized_view(name: nil)
+              #   Pass arguments to `get_materialized_view` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param name [::String]
+              #     Required. The unique name of the requested materialized view. Values are of
+              #     the form
+              #     `projects/{project}/instances/{instance}/materializedViews/{materialized_view}`.
+              #
+              # @yield [response, operation] Access the result along with the RPC operation
+              # @yieldparam response [::Google::Cloud::Bigtable::Admin::V2::MaterializedView]
+              # @yieldparam operation [::GRPC::ActiveCall::Operation]
+              #
+              # @return [::Google::Cloud::Bigtable::Admin::V2::MaterializedView]
+              #
+              # @raise [::Google::Cloud::Error] if the RPC is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/bigtable/admin/v2"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdmin::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Bigtable::Admin::V2::GetMaterializedViewRequest.new
+              #
+              #   # Call the get_materialized_view method.
+              #   result = client.get_materialized_view request
+              #
+              #   # The returned object is of type Google::Cloud::Bigtable::Admin::V2::MaterializedView.
+              #   p result
+              #
+              def get_materialized_view request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Bigtable::Admin::V2::GetMaterializedViewRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                metadata = @config.rpcs.get_materialized_view.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::Bigtable::Admin::V2::VERSION
+                metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                header_params = {}
+                if request.name
+                  header_params["name"] = request.name
+                end
+
+                request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+                metadata[:"x-goog-request-params"] ||= request_params_header
+
+                options.apply_defaults timeout:      @config.rpcs.get_materialized_view.timeout,
+                                       metadata:     metadata,
+                                       retry_policy: @config.rpcs.get_materialized_view.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @bigtable_instance_admin_stub.call_rpc :get_materialized_view, request, options: options do |response, operation|
+                  yield response, operation if block_given?
+                end
+              rescue ::GRPC::BadStatus => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Lists information about materialized views in an instance.
+              #
+              # @overload list_materialized_views(request, options = nil)
+              #   Pass arguments to `list_materialized_views` via a request object, either of type
+              #   {::Google::Cloud::Bigtable::Admin::V2::ListMaterializedViewsRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::Bigtable::Admin::V2::ListMaterializedViewsRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+              #
+              # @overload list_materialized_views(parent: nil, page_size: nil, page_token: nil)
+              #   Pass arguments to `list_materialized_views` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param parent [::String]
+              #     Required. The unique name of the instance for which the list of
+              #     materialized views is requested. Values are of the form
+              #     `projects/{project}/instances/{instance}`.
+              #   @param page_size [::Integer]
+              #     Optional. The maximum number of materialized views to return. The service
+              #     may return fewer than this value
+              #   @param page_token [::String]
+              #     Optional. A page token, received from a previous `ListMaterializedViews`
+              #     call. Provide this to retrieve the subsequent page.
+              #
+              #     When paginating, all other parameters provided to `ListMaterializedViews`
+              #     must match the call that provided the page token.
+              #
+              # @yield [response, operation] Access the result along with the RPC operation
+              # @yieldparam response [::Gapic::PagedEnumerable<::Google::Cloud::Bigtable::Admin::V2::MaterializedView>]
+              # @yieldparam operation [::GRPC::ActiveCall::Operation]
+              #
+              # @return [::Gapic::PagedEnumerable<::Google::Cloud::Bigtable::Admin::V2::MaterializedView>]
+              #
+              # @raise [::Google::Cloud::Error] if the RPC is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/bigtable/admin/v2"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdmin::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Bigtable::Admin::V2::ListMaterializedViewsRequest.new
+              #
+              #   # Call the list_materialized_views method.
+              #   result = client.list_materialized_views request
+              #
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
+              #     # Each element is of type ::Google::Cloud::Bigtable::Admin::V2::MaterializedView.
+              #     p item
+              #   end
+              #
+              def list_materialized_views request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Bigtable::Admin::V2::ListMaterializedViewsRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                metadata = @config.rpcs.list_materialized_views.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::Bigtable::Admin::V2::VERSION
+                metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                header_params = {}
+                if request.parent
+                  header_params["parent"] = request.parent
+                end
+
+                request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+                metadata[:"x-goog-request-params"] ||= request_params_header
+
+                options.apply_defaults timeout:      @config.rpcs.list_materialized_views.timeout,
+                                       metadata:     metadata,
+                                       retry_policy: @config.rpcs.list_materialized_views.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @bigtable_instance_admin_stub.call_rpc :list_materialized_views, request, options: options do |response, operation|
+                  response = ::Gapic::PagedEnumerable.new @bigtable_instance_admin_stub, :list_materialized_views, request, response, operation, options
+                  yield response, operation if block_given?
+                  throw :response, response
+                end
+              rescue ::GRPC::BadStatus => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Updates a materialized view within an instance.
+              #
+              # @overload update_materialized_view(request, options = nil)
+              #   Pass arguments to `update_materialized_view` via a request object, either of type
+              #   {::Google::Cloud::Bigtable::Admin::V2::UpdateMaterializedViewRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::Bigtable::Admin::V2::UpdateMaterializedViewRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+              #
+              # @overload update_materialized_view(materialized_view: nil, update_mask: nil)
+              #   Pass arguments to `update_materialized_view` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param materialized_view [::Google::Cloud::Bigtable::Admin::V2::MaterializedView, ::Hash]
+              #     Required. The materialized view to update.
+              #
+              #     The materialized view's `name` field is used to identify the view to
+              #     update. Format:
+              #     `projects/{project}/instances/{instance}/materializedViews/{materialized_view}`.
+              #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
+              #     Optional. The list of fields to update.
+              #
+              # @yield [response, operation] Access the result along with the RPC operation
+              # @yieldparam response [::Gapic::Operation]
+              # @yieldparam operation [::GRPC::ActiveCall::Operation]
+              #
+              # @return [::Gapic::Operation]
+              #
+              # @raise [::Google::Cloud::Error] if the RPC is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/bigtable/admin/v2"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdmin::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Bigtable::Admin::V2::UpdateMaterializedViewRequest.new
+              #
+              #   # Call the update_materialized_view method.
+              #   result = client.update_materialized_view request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
+              def update_materialized_view request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Bigtable::Admin::V2::UpdateMaterializedViewRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                metadata = @config.rpcs.update_materialized_view.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::Bigtable::Admin::V2::VERSION
+                metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                header_params = {}
+                if request.materialized_view&.name
+                  header_params["materialized_view.name"] = request.materialized_view.name
+                end
+
+                request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+                metadata[:"x-goog-request-params"] ||= request_params_header
+
+                options.apply_defaults timeout:      @config.rpcs.update_materialized_view.timeout,
+                                       metadata:     metadata,
+                                       retry_policy: @config.rpcs.update_materialized_view.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @bigtable_instance_admin_stub.call_rpc :update_materialized_view, request, options: options do |response, operation|
+                  response = ::Gapic::Operation.new response, @operations_client, options: options
+                  yield response, operation if block_given?
+                  throw :response, response
+                end
+              rescue ::GRPC::BadStatus => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Deletes a materialized view from an instance.
+              #
+              # @overload delete_materialized_view(request, options = nil)
+              #   Pass arguments to `delete_materialized_view` via a request object, either of type
+              #   {::Google::Cloud::Bigtable::Admin::V2::DeleteMaterializedViewRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::Bigtable::Admin::V2::DeleteMaterializedViewRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+              #
+              # @overload delete_materialized_view(name: nil, etag: nil)
+              #   Pass arguments to `delete_materialized_view` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param name [::String]
+              #     Required. The unique name of the materialized view to be deleted.
+              #     Format:
+              #     `projects/{project}/instances/{instance}/materializedViews/{materialized_view}`.
+              #   @param etag [::String]
+              #     Optional. The current etag of the materialized view.
+              #     If an etag is provided and does not match the current etag of the
+              #     materialized view, deletion will be blocked and an ABORTED error will be
+              #     returned.
+              #
+              # @yield [response, operation] Access the result along with the RPC operation
+              # @yieldparam response [::Google::Protobuf::Empty]
+              # @yieldparam operation [::GRPC::ActiveCall::Operation]
+              #
+              # @return [::Google::Protobuf::Empty]
+              #
+              # @raise [::Google::Cloud::Error] if the RPC is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/bigtable/admin/v2"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdmin::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Bigtable::Admin::V2::DeleteMaterializedViewRequest.new
+              #
+              #   # Call the delete_materialized_view method.
+              #   result = client.delete_materialized_view request
+              #
+              #   # The returned object is of type Google::Protobuf::Empty.
+              #   p result
+              #
+              def delete_materialized_view request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Bigtable::Admin::V2::DeleteMaterializedViewRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                metadata = @config.rpcs.delete_materialized_view.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::Bigtable::Admin::V2::VERSION
+                metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                header_params = {}
+                if request.name
+                  header_params["name"] = request.name
+                end
+
+                request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+                metadata[:"x-goog-request-params"] ||= request_params_header
+
+                options.apply_defaults timeout:      @config.rpcs.delete_materialized_view.timeout,
+                                       metadata:     metadata,
+                                       retry_policy: @config.rpcs.delete_materialized_view.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @bigtable_instance_admin_stub.call_rpc :delete_materialized_view, request, options: options do |response, operation|
+                  yield response, operation if block_given?
+                end
+              rescue ::GRPC::BadStatus => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
               # Configuration class for the BigtableInstanceAdmin API.
               #
               # This class represents the configuration for BigtableInstanceAdmin,
@@ -2593,6 +3554,56 @@ module Google
                   # @return [::Gapic::Config::Method]
                   #
                   attr_reader :list_hot_tablets
+                  ##
+                  # RPC-specific configuration for `create_logical_view`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :create_logical_view
+                  ##
+                  # RPC-specific configuration for `get_logical_view`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :get_logical_view
+                  ##
+                  # RPC-specific configuration for `list_logical_views`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :list_logical_views
+                  ##
+                  # RPC-specific configuration for `update_logical_view`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :update_logical_view
+                  ##
+                  # RPC-specific configuration for `delete_logical_view`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :delete_logical_view
+                  ##
+                  # RPC-specific configuration for `create_materialized_view`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :create_materialized_view
+                  ##
+                  # RPC-specific configuration for `get_materialized_view`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :get_materialized_view
+                  ##
+                  # RPC-specific configuration for `list_materialized_views`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :list_materialized_views
+                  ##
+                  # RPC-specific configuration for `update_materialized_view`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :update_materialized_view
+                  ##
+                  # RPC-specific configuration for `delete_materialized_view`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :delete_materialized_view
 
                   # @private
                   def initialize parent_rpcs = nil
@@ -2638,6 +3649,26 @@ module Google
                     @test_iam_permissions = ::Gapic::Config::Method.new test_iam_permissions_config
                     list_hot_tablets_config = parent_rpcs.list_hot_tablets if parent_rpcs.respond_to? :list_hot_tablets
                     @list_hot_tablets = ::Gapic::Config::Method.new list_hot_tablets_config
+                    create_logical_view_config = parent_rpcs.create_logical_view if parent_rpcs.respond_to? :create_logical_view
+                    @create_logical_view = ::Gapic::Config::Method.new create_logical_view_config
+                    get_logical_view_config = parent_rpcs.get_logical_view if parent_rpcs.respond_to? :get_logical_view
+                    @get_logical_view = ::Gapic::Config::Method.new get_logical_view_config
+                    list_logical_views_config = parent_rpcs.list_logical_views if parent_rpcs.respond_to? :list_logical_views
+                    @list_logical_views = ::Gapic::Config::Method.new list_logical_views_config
+                    update_logical_view_config = parent_rpcs.update_logical_view if parent_rpcs.respond_to? :update_logical_view
+                    @update_logical_view = ::Gapic::Config::Method.new update_logical_view_config
+                    delete_logical_view_config = parent_rpcs.delete_logical_view if parent_rpcs.respond_to? :delete_logical_view
+                    @delete_logical_view = ::Gapic::Config::Method.new delete_logical_view_config
+                    create_materialized_view_config = parent_rpcs.create_materialized_view if parent_rpcs.respond_to? :create_materialized_view
+                    @create_materialized_view = ::Gapic::Config::Method.new create_materialized_view_config
+                    get_materialized_view_config = parent_rpcs.get_materialized_view if parent_rpcs.respond_to? :get_materialized_view
+                    @get_materialized_view = ::Gapic::Config::Method.new get_materialized_view_config
+                    list_materialized_views_config = parent_rpcs.list_materialized_views if parent_rpcs.respond_to? :list_materialized_views
+                    @list_materialized_views = ::Gapic::Config::Method.new list_materialized_views_config
+                    update_materialized_view_config = parent_rpcs.update_materialized_view if parent_rpcs.respond_to? :update_materialized_view
+                    @update_materialized_view = ::Gapic::Config::Method.new update_materialized_view_config
+                    delete_materialized_view_config = parent_rpcs.delete_materialized_view if parent_rpcs.respond_to? :delete_materialized_view
+                    @delete_materialized_view = ::Gapic::Config::Method.new delete_materialized_view_config
 
                     yield self if block_given?
                   end
