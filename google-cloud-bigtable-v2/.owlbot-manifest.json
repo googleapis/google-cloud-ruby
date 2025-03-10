@@ -52,6 +52,7 @@
     "snippets/bigtable/mutate_row.rb",
     "snippets/bigtable/mutate_rows.rb",
     "snippets/bigtable/ping_and_warm.rb",
+    "snippets/bigtable/prepare_query.rb",
     "snippets/bigtable/read_change_stream.rb",
     "snippets/bigtable/read_modify_write_row.rb",
     "snippets/bigtable/read_rows.rb",
