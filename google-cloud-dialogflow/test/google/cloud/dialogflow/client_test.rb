@@ -62,6 +62,27 @@ class Google::Cloud::Dialogflow::ClientConstructionMinitest < Minitest::Test
     end
   end
 
+  def test_generators_grpc
+    skip unless Google::Cloud::Dialogflow.generators_available? transport: :grpc
+    Gapic::ServiceStub.stub :new, DummyStub.new do
+      grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+      client = Google::Cloud::Dialogflow.generators transport: :grpc do |config|
+        config.credentials = grpc_channel
+      end
+      assert_kind_of Google::Cloud::Dialogflow::V2::Generators::Client, client
+    end
+  end
+
+  def test_generators_rest
+    skip unless Google::Cloud::Dialogflow.generators_available? transport: :rest
+    Gapic::Rest::ClientStub.stub :new, DummyStub.new do
+      client = Google::Cloud::Dialogflow.generators transport: :rest do |config|
+        config.credentials = :dummy_credentials
+      end
+      assert_kind_of Google::Cloud::Dialogflow::V2::Generators::Rest::Client, client
+    end
+  end
+
   def test_contexts_grpc
     skip unless Google::Cloud::Dialogflow.contexts_available? transport: :grpc
     Gapic::ServiceStub.stub :new, DummyStub.new do
@@ -227,27 +248,6 @@ class Google::Cloud::Dialogflow::ClientConstructionMinitest < Minitest::Test
         config.credentials = :dummy_credentials
       end
       assert_kind_of Google::Cloud::Dialogflow::V2::ConversationProfiles::Rest::Client, client
-    end
-  end
-
-  def test_generators_grpc
-    skip unless Google::Cloud::Dialogflow.generators_available? transport: :grpc
-    Gapic::ServiceStub.stub :new, DummyStub.new do
-      grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-      client = Google::Cloud::Dialogflow.generators transport: :grpc do |config|
-        config.credentials = grpc_channel
-      end
-      assert_kind_of Google::Cloud::Dialogflow::V2::Generators::Client, client
-    end
-  end
-
-  def test_generators_rest
-    skip unless Google::Cloud::Dialogflow.generators_available? transport: :rest
-    Gapic::Rest::ClientStub.stub :new, DummyStub.new do
-      client = Google::Cloud::Dialogflow.generators transport: :rest do |config|
-        config.credentials = :dummy_credentials
-      end
-      assert_kind_of Google::Cloud::Dialogflow::V2::Generators::Rest::Client, client
     end
   end
 
