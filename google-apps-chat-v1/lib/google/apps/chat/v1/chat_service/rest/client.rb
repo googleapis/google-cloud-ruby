@@ -218,6 +218,16 @@ module Google
                     initial_delay: 1.0, max_delay: 10.0, multiplier: 1.3, retry_codes: [14]
                   }
 
+                  default_config.rpcs.get_space_notification_setting.timeout = 30.0
+                  default_config.rpcs.get_space_notification_setting.retry_policy = {
+                    initial_delay: 1.0, max_delay: 10.0, multiplier: 1.3, retry_codes: [14]
+                  }
+
+                  default_config.rpcs.update_space_notification_setting.timeout = 30.0
+                  default_config.rpcs.update_space_notification_setting.retry_policy = {
+                    initial_delay: 1.0, max_delay: 10.0, multiplier: 1.3, retry_codes: [14]
+                  }
+
                   default_config
                 end
                 yield @configure if block_given?
@@ -3955,6 +3965,186 @@ module Google
               end
 
               ##
+              # Gets the space notification setting. For an example, see [Get the
+              # caller's space notification
+              # setting](https://developers.google.com/workspace/chat/get-space-notification-setting).
+              #
+              # Requires [user
+              # authentication](https://developers.google.com/workspace/chat/authenticate-authorize-chat-user).
+              #
+              # @overload get_space_notification_setting(request, options = nil)
+              #   Pass arguments to `get_space_notification_setting` via a request object, either of type
+              #   {::Google::Apps::Chat::V1::GetSpaceNotificationSettingRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Apps::Chat::V1::GetSpaceNotificationSettingRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload get_space_notification_setting(name: nil)
+              #   Pass arguments to `get_space_notification_setting` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param name [::String]
+              #     Required. Format: users/\\{user}/spaces/\\{space}/spaceNotificationSetting
+              #
+              #     - `users/me/spaces/{space}/spaceNotificationSetting`, OR
+              #     - `users/user@example.com/spaces/{space}/spaceNotificationSetting`, OR
+              #     - `users/123456789/spaces/{space}/spaceNotificationSetting`.
+              #     Note: Only the caller's user id or email is allowed in the path.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Apps::Chat::V1::SpaceNotificationSetting]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Apps::Chat::V1::SpaceNotificationSetting]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/apps/chat/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Apps::Chat::V1::ChatService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Apps::Chat::V1::GetSpaceNotificationSettingRequest.new
+              #
+              #   # Call the get_space_notification_setting method.
+              #   result = client.get_space_notification_setting request
+              #
+              #   # The returned object is of type Google::Apps::Chat::V1::SpaceNotificationSetting.
+              #   p result
+              #
+              def get_space_notification_setting request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Apps::Chat::V1::GetSpaceNotificationSettingRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.get_space_notification_setting.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Apps::Chat::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.get_space_notification_setting.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.get_space_notification_setting.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @chat_service_stub.get_space_notification_setting request, options do |result, operation|
+                  yield result, operation if block_given?
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Updates the space notification setting. For an example, see [Update
+              # the caller's space notification
+              # setting](https://developers.google.com/workspace/chat/update-space-notification-setting).
+              #
+              # Requires [user
+              # authentication](https://developers.google.com/workspace/chat/authenticate-authorize-chat-user).
+              #
+              # @overload update_space_notification_setting(request, options = nil)
+              #   Pass arguments to `update_space_notification_setting` via a request object, either of type
+              #   {::Google::Apps::Chat::V1::UpdateSpaceNotificationSettingRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Apps::Chat::V1::UpdateSpaceNotificationSettingRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload update_space_notification_setting(space_notification_setting: nil, update_mask: nil)
+              #   Pass arguments to `update_space_notification_setting` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param space_notification_setting [::Google::Apps::Chat::V1::SpaceNotificationSetting, ::Hash]
+              #     Required. The resource name for the space notification settings must be
+              #     populated in the form of
+              #     `users/{user}/spaces/{space}/spaceNotificationSetting`. Only fields
+              #     specified by `update_mask` are updated.
+              #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
+              #     Required. Supported field paths:
+              #
+              #     - `notification_setting`
+              #
+              #     - `mute_setting`
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Apps::Chat::V1::SpaceNotificationSetting]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Apps::Chat::V1::SpaceNotificationSetting]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/apps/chat/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Apps::Chat::V1::ChatService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Apps::Chat::V1::UpdateSpaceNotificationSettingRequest.new
+              #
+              #   # Call the update_space_notification_setting method.
+              #   result = client.update_space_notification_setting request
+              #
+              #   # The returned object is of type Google::Apps::Chat::V1::SpaceNotificationSetting.
+              #   p result
+              #
+              def update_space_notification_setting request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Apps::Chat::V1::UpdateSpaceNotificationSettingRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.update_space_notification_setting.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Apps::Chat::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.update_space_notification_setting.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.update_space_notification_setting.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @chat_service_stub.update_space_notification_setting request, options do |result, operation|
+                  yield result, operation if block_given?
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
               # Configuration class for the ChatService REST API.
               #
               # This class represents the configuration for ChatService REST,
@@ -4245,6 +4435,16 @@ module Google
                   # @return [::Gapic::Config::Method]
                   #
                   attr_reader :list_space_events
+                  ##
+                  # RPC-specific configuration for `get_space_notification_setting`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :get_space_notification_setting
+                  ##
+                  # RPC-specific configuration for `update_space_notification_setting`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :update_space_notification_setting
 
                   # @private
                   def initialize parent_rpcs = nil
@@ -4306,6 +4506,10 @@ module Google
                     @get_space_event = ::Gapic::Config::Method.new get_space_event_config
                     list_space_events_config = parent_rpcs.list_space_events if parent_rpcs.respond_to? :list_space_events
                     @list_space_events = ::Gapic::Config::Method.new list_space_events_config
+                    get_space_notification_setting_config = parent_rpcs.get_space_notification_setting if parent_rpcs.respond_to? :get_space_notification_setting
+                    @get_space_notification_setting = ::Gapic::Config::Method.new get_space_notification_setting_config
+                    update_space_notification_setting_config = parent_rpcs.update_space_notification_setting if parent_rpcs.respond_to? :update_space_notification_setting
+                    @update_space_notification_setting = ::Gapic::Config::Method.new update_space_notification_setting_config
 
                     yield self if block_given?
                   end
