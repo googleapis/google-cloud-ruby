@@ -1,5 +1,14 @@
 # Changelog
 
+### 2.1.0 (2025-03-10)
+
+#### Features
+
+* Support for replica promotion 
+* Support for replication, protocol, performance configuration and deletion protection fr instances 
+* Support for tags for instances, backups, and snapshots 
+* Support the return_partial_success parameter and an "unreachable" result list to the list_snapshots RPC 
+
 ### 2.0.0 (2025-02-07)
 
 ### ⚠ BREAKING CHANGES
