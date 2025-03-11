@@ -1247,10 +1247,6 @@
       "component": "google-cloud-resource_manager-v3",
       "version_file": "lib/google/cloud/resource_manager/v3/version.rb"
     },
-    "google-cloud-resource_settings": {
-      "component": "google-cloud-resource_settings",
-      "version_file": "lib/google/cloud/resource_settings/version.rb"
-    },
     "google-cloud-retail": {
       "component": "google-cloud-retail",
       "version_file": "lib/google/cloud/retail/version.rb"
