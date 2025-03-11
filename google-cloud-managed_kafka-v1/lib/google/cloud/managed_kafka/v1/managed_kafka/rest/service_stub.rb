@@ -883,7 +883,7 @@ module Google
                                                           uri_method: :get,
                                                           uri_template: "/v1/{name}",
                                                           matches: [
-                                                            ["name", %r{^projects/[^/]+/locations/[^/]+/clusters/[^/]+/consumerGroups/[^/]+/?$}, false]
+                                                            ["name", %r{^projects/[^/]+/locations/[^/]+/clusters/[^/]+/consumerGroups(?:/.*)?$}, true]
                                                           ]
                                                         )
                 transcoder.transcode request_pb
@@ -905,7 +905,7 @@ module Google
                                                           uri_template: "/v1/{consumer_group.name}",
                                                           body: "consumer_group",
                                                           matches: [
-                                                            ["consumer_group.name", %r{^projects/[^/]+/locations/[^/]+/clusters/[^/]+/consumerGroups/[^/]+/?$}, false]
+                                                            ["consumer_group.name", %r{^projects/[^/]+/locations/[^/]+/clusters/[^/]+/consumerGroups(?:/.*)?$}, true]
                                                           ]
                                                         )
                 transcoder.transcode request_pb
@@ -926,7 +926,7 @@ module Google
                                                           uri_method: :delete,
                                                           uri_template: "/v1/{name}",
                                                           matches: [
-                                                            ["name", %r{^projects/[^/]+/locations/[^/]+/clusters/[^/]+/consumerGroups/[^/]+/?$}, false]
+                                                            ["name", %r{^projects/[^/]+/locations/[^/]+/clusters/[^/]+/consumerGroups(?:/.*)?$}, true]
                                                           ]
                                                         )
                 transcoder.transcode request_pb
