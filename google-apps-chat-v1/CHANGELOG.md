@@ -1,5 +1,11 @@
 # Changelog
 
+### 0.11.0 (2025-03-11)
+
+#### Features
+
+* Addition of space notification setting Chat API ([#29308](https://github.com/googleapis/google-cloud-ruby/issues/29308)) 
+
 ### 0.10.0 (2025-02-25)
 
 #### Features
