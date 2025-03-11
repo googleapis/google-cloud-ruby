@@ -852,6 +852,406 @@
       ]
     },
     {
+      "region_tag": "bigtableadmin_v2_generated_BigtableInstanceAdmin_CreateLogicalView_sync",
+      "title": "Snippet for the create_logical_view call in the BigtableInstanceAdmin service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdmin::Client#create_logical_view.",
+      "file": "bigtable_instance_admin/create_logical_view.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_logical_view",
+        "full_name": "::Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdmin::Client#create_logical_view",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Bigtable::Admin::V2::CreateLogicalViewRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "BigtableInstanceAdmin::Client",
+          "full_name": "::Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdmin::Client"
+        },
+        "method": {
+          "short_name": "CreateLogicalView",
+          "full_name": "google.bigtable.admin.v2.BigtableInstanceAdmin.CreateLogicalView",
+          "service": {
+            "short_name": "BigtableInstanceAdmin",
+            "full_name": "google.bigtable.admin.v2.BigtableInstanceAdmin"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "bigtableadmin_v2_generated_BigtableInstanceAdmin_GetLogicalView_sync",
+      "title": "Snippet for the get_logical_view call in the BigtableInstanceAdmin service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdmin::Client#get_logical_view.",
+      "file": "bigtable_instance_admin/get_logical_view.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_logical_view",
+        "full_name": "::Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdmin::Client#get_logical_view",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Bigtable::Admin::V2::GetLogicalViewRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Bigtable::Admin::V2::LogicalView",
+        "client": {
+          "short_name": "BigtableInstanceAdmin::Client",
+          "full_name": "::Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdmin::Client"
+        },
+        "method": {
+          "short_name": "GetLogicalView",
+          "full_name": "google.bigtable.admin.v2.BigtableInstanceAdmin.GetLogicalView",
+          "service": {
+            "short_name": "BigtableInstanceAdmin",
+            "full_name": "google.bigtable.admin.v2.BigtableInstanceAdmin"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "bigtableadmin_v2_generated_BigtableInstanceAdmin_ListLogicalViews_sync",
+      "title": "Snippet for the list_logical_views call in the BigtableInstanceAdmin service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdmin::Client#list_logical_views.",
+      "file": "bigtable_instance_admin/list_logical_views.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_logical_views",
+        "full_name": "::Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdmin::Client#list_logical_views",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Bigtable::Admin::V2::ListLogicalViewsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Bigtable::Admin::V2::ListLogicalViewsResponse",
+        "client": {
+          "short_name": "BigtableInstanceAdmin::Client",
+          "full_name": "::Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdmin::Client"
+        },
+        "method": {
+          "short_name": "ListLogicalViews",
+          "full_name": "google.bigtable.admin.v2.BigtableInstanceAdmin.ListLogicalViews",
+          "service": {
+            "short_name": "BigtableInstanceAdmin",
+            "full_name": "google.bigtable.admin.v2.BigtableInstanceAdmin"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "bigtableadmin_v2_generated_BigtableInstanceAdmin_UpdateLogicalView_sync",
+      "title": "Snippet for the update_logical_view call in the BigtableInstanceAdmin service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdmin::Client#update_logical_view.",
+      "file": "bigtable_instance_admin/update_logical_view.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_logical_view",
+        "full_name": "::Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdmin::Client#update_logical_view",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Bigtable::Admin::V2::UpdateLogicalViewRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "BigtableInstanceAdmin::Client",
+          "full_name": "::Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdmin::Client"
+        },
+        "method": {
+          "short_name": "UpdateLogicalView",
+          "full_name": "google.bigtable.admin.v2.BigtableInstanceAdmin.UpdateLogicalView",
+          "service": {
+            "short_name": "BigtableInstanceAdmin",
+            "full_name": "google.bigtable.admin.v2.BigtableInstanceAdmin"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "bigtableadmin_v2_generated_BigtableInstanceAdmin_DeleteLogicalView_sync",
+      "title": "Snippet for the delete_logical_view call in the BigtableInstanceAdmin service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdmin::Client#delete_logical_view.",
+      "file": "bigtable_instance_admin/delete_logical_view.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_logical_view",
+        "full_name": "::Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdmin::Client#delete_logical_view",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Bigtable::Admin::V2::DeleteLogicalViewRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Protobuf::Empty",
+        "client": {
+          "short_name": "BigtableInstanceAdmin::Client",
+          "full_name": "::Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdmin::Client"
+        },
+        "method": {
+          "short_name": "DeleteLogicalView",
+          "full_name": "google.bigtable.admin.v2.BigtableInstanceAdmin.DeleteLogicalView",
+          "service": {
+            "short_name": "BigtableInstanceAdmin",
+            "full_name": "google.bigtable.admin.v2.BigtableInstanceAdmin"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "bigtableadmin_v2_generated_BigtableInstanceAdmin_CreateMaterializedView_sync",
+      "title": "Snippet for the create_materialized_view call in the BigtableInstanceAdmin service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdmin::Client#create_materialized_view.",
+      "file": "bigtable_instance_admin/create_materialized_view.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_materialized_view",
+        "full_name": "::Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdmin::Client#create_materialized_view",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Bigtable::Admin::V2::CreateMaterializedViewRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "BigtableInstanceAdmin::Client",
+          "full_name": "::Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdmin::Client"
+        },
+        "method": {
+          "short_name": "CreateMaterializedView",
+          "full_name": "google.bigtable.admin.v2.BigtableInstanceAdmin.CreateMaterializedView",
+          "service": {
+            "short_name": "BigtableInstanceAdmin",
+            "full_name": "google.bigtable.admin.v2.BigtableInstanceAdmin"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "bigtableadmin_v2_generated_BigtableInstanceAdmin_GetMaterializedView_sync",
+      "title": "Snippet for the get_materialized_view call in the BigtableInstanceAdmin service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdmin::Client#get_materialized_view.",
+      "file": "bigtable_instance_admin/get_materialized_view.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_materialized_view",
+        "full_name": "::Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdmin::Client#get_materialized_view",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Bigtable::Admin::V2::GetMaterializedViewRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Bigtable::Admin::V2::MaterializedView",
+        "client": {
+          "short_name": "BigtableInstanceAdmin::Client",
+          "full_name": "::Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdmin::Client"
+        },
+        "method": {
+          "short_name": "GetMaterializedView",
+          "full_name": "google.bigtable.admin.v2.BigtableInstanceAdmin.GetMaterializedView",
+          "service": {
+            "short_name": "BigtableInstanceAdmin",
+            "full_name": "google.bigtable.admin.v2.BigtableInstanceAdmin"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "bigtableadmin_v2_generated_BigtableInstanceAdmin_ListMaterializedViews_sync",
+      "title": "Snippet for the list_materialized_views call in the BigtableInstanceAdmin service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdmin::Client#list_materialized_views.",
+      "file": "bigtable_instance_admin/list_materialized_views.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_materialized_views",
+        "full_name": "::Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdmin::Client#list_materialized_views",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Bigtable::Admin::V2::ListMaterializedViewsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Bigtable::Admin::V2::ListMaterializedViewsResponse",
+        "client": {
+          "short_name": "BigtableInstanceAdmin::Client",
+          "full_name": "::Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdmin::Client"
+        },
+        "method": {
+          "short_name": "ListMaterializedViews",
+          "full_name": "google.bigtable.admin.v2.BigtableInstanceAdmin.ListMaterializedViews",
+          "service": {
+            "short_name": "BigtableInstanceAdmin",
+            "full_name": "google.bigtable.admin.v2.BigtableInstanceAdmin"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "bigtableadmin_v2_generated_BigtableInstanceAdmin_UpdateMaterializedView_sync",
+      "title": "Snippet for the update_materialized_view call in the BigtableInstanceAdmin service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdmin::Client#update_materialized_view.",
+      "file": "bigtable_instance_admin/update_materialized_view.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_materialized_view",
+        "full_name": "::Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdmin::Client#update_materialized_view",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Bigtable::Admin::V2::UpdateMaterializedViewRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "BigtableInstanceAdmin::Client",
+          "full_name": "::Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdmin::Client"
+        },
+        "method": {
+          "short_name": "UpdateMaterializedView",
+          "full_name": "google.bigtable.admin.v2.BigtableInstanceAdmin.UpdateMaterializedView",
+          "service": {
+            "short_name": "BigtableInstanceAdmin",
+            "full_name": "google.bigtable.admin.v2.BigtableInstanceAdmin"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "bigtableadmin_v2_generated_BigtableInstanceAdmin_DeleteMaterializedView_sync",
+      "title": "Snippet for the delete_materialized_view call in the BigtableInstanceAdmin service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdmin::Client#delete_materialized_view.",
+      "file": "bigtable_instance_admin/delete_materialized_view.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_materialized_view",
+        "full_name": "::Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdmin::Client#delete_materialized_view",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Bigtable::Admin::V2::DeleteMaterializedViewRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Protobuf::Empty",
+        "client": {
+          "short_name": "BigtableInstanceAdmin::Client",
+          "full_name": "::Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdmin::Client"
+        },
+        "method": {
+          "short_name": "DeleteMaterializedView",
+          "full_name": "google.bigtable.admin.v2.BigtableInstanceAdmin.DeleteMaterializedView",
+          "service": {
+            "short_name": "BigtableInstanceAdmin",
+            "full_name": "google.bigtable.admin.v2.BigtableInstanceAdmin"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
       "region_tag": "bigtableadmin_v2_generated_BigtableTableAdmin_CreateTable_sync",
       "title": "Snippet for the create_table call in the BigtableTableAdmin service",
       "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Bigtable::Admin::V2::BigtableTableAdmin::Client#create_table.",
