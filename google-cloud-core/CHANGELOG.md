@@ -1,5 +1,14 @@
 # Release History
 
+### 1.8.0 (2025-03-11)
+
+#### Features
+
+* Update minimum Ruby version to 3.0 ([#29261](https://github.com/googleapis/google-cloud-ruby/issues/29261)) 
+#### Bug Fixes
+
+* Improved performance of the autoload at startup ([#28104](https://github.com/googleapis/google-cloud-ruby/issues/28104)) 
+
 ### 1.7.1 (2024-08-05)
 
 #### Bug Fixes
