@@ -1160,7 +1160,7 @@ module Google
             #     If unspecified, the field defaults to `PLUGINS_ENABLED`.
             #
             #     This field is supported for Cloud Composer environments in versions
-            #     composer-3.*.*-airflow-*.*.* and newer.
+            #     composer-3-airflow-*.*.*-build.* and newer.
             class SoftwareConfig
               include ::Google::Protobuf::MessageExts
               extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -1399,7 +1399,7 @@ module Google
             #     projects/\\{project}/regions/\\{region}/networkAttachments/\\{networkAttachment}.
             #
             #     This field is supported for Cloud Composer environments in versions
-            #     composer-3.*.*-airflow-*.*.* and newer.
+            #     composer-3-airflow-*.*.*-build.* and newer.
             # @!attribute [rw] composer_internal_ipv4_cidr_block
             #   @return [::String]
             #     Optional. The IP range in CIDR notation to use internally by Cloud
@@ -1409,7 +1409,7 @@ module Google
             #     If not specified, the default value of '100.64.128.0/20' is used.
             #
             #     This field is supported for Cloud Composer environments in versions
-            #     composer-3.*.*-airflow-*.*.* and newer.
+            #     composer-3-airflow-*.*.*-build.* and newer.
             class NodeConfig
               include ::Google::Protobuf::MessageExts
               extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -1484,7 +1484,7 @@ module Google
             #     internet.
             #
             #     This field is supported for Cloud Composer environments in versions
-            #     composer-3.*.*-airflow-*.*.* and newer.
+            #     composer-3-airflow-*.*.*-build.* and newer.
             # @!attribute [rw] private_cluster_config
             #   @return [::Google::Cloud::Orchestration::Airflow::Service::V1::PrivateClusterConfig]
             #     Optional. Configuration for the private GKE cluster for a Private IP
@@ -1565,7 +1565,7 @@ module Google
             #     Optional. Resources used by Airflow DAG processors.
             #
             #     This field is supported for Cloud Composer environments in versions
-            #     composer-3.*.*-airflow-*.*.* and newer.
+            #     composer-3-airflow-*.*.*-build.* and newer.
             class WorkloadsConfig
               include ::Google::Protobuf::MessageExts
               extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -1647,7 +1647,7 @@ module Google
               # Configuration for resources used by Airflow DAG processors.
               #
               # This field is supported for Cloud Composer environments in versions
-              # composer-3.*.*-airflow-*.*.* and newer.
+              # composer-3-airflow-*.*.*-build.* and newer.
               # @!attribute [rw] cpu
               #   @return [::Float]
               #     Optional. CPU request and limit for a single Airflow DAG processor
