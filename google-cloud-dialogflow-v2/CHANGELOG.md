@@ -1,5 +1,11 @@
 # Release History
 
+### 1.9.0 (2025-03-11)
+
+#### Features
+
+* Add new RPC IngestContextReferences, GenerateSuggestions ([#29300](https://github.com/googleapis/google-cloud-ruby/issues/29300)) 
+
 ### 1.8.0 (2025-03-05)
 
 #### Features
