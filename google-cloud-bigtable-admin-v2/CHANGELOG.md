@@ -1,5 +1,19 @@
 # Release History
 
+### 1.8.0 (2025-03-11)
+
+#### Features
+
+* add MaterializedViews and LogicalViews APIs ([#29316](https://github.com/googleapis/google-cloud-ruby/issues/29316)) 
+* Included logical and materialized view resources 
+* Support for OrderedCodeBytes encoding for Int64 
+* Support for table row key schema 
+* Support for the ignore_warnings parameter to the update_table RPC 
+* Support for timestamp and struct encoding 
+#### Bug Fixes
+
+* Removed useless state parameter from update_instance 
+
 ### 1.7.0 (2025-01-30)
 
 #### Features
