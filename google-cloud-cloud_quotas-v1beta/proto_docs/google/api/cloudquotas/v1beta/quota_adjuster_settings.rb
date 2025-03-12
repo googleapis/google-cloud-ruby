@@ -24,8 +24,8 @@ module Google
         # Request for getting QuotaAdjusterSettings
         # @!attribute [rw] name
         #   @return [::String]
-        #     Required. Name of the config. Required to be “settings”, as only a single
-        #     setting per container will be supported initially.
+        #     Required. Name of the `quotaAdjusterSettings` configuration. Only a single
+        #     setting per project is supported.
         class GetQuotaAdjusterSettingsRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -40,9 +40,9 @@ module Google
         #     Optional. The list of fields to update.
         # @!attribute [rw] validate_only
         #   @return [::Boolean]
-        #     Optional. If set to true, validate the request, but do not actually update.
-        #     Note that a request being valid does not mean that the request is
-        #     guaranteed to be fulfilled.
+        #     Optional. If set to true, checks the syntax of the request but doesn't
+        #     update the quota adjuster settings value. Note that although a request can
+        #     be valid, that doesn't guarantee that the request will be fulfilled.
         class UpdateQuotaAdjusterSettingsRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -52,21 +52,22 @@ module Google
         # Adjuster.
         # @!attribute [rw] name
         #   @return [::String]
-        #     Identifier. Name of the config would be of the format:
-        #       projects/12345/locations/global/quotaAdjusterSettings
+        #     Identifier. Name of the configuration, in the following format:
+        #       `projects/PROJECT_NUMBER/locations/global/quotaAdjusterSettings`.
+        #     Replace PROJECT_NUMBER with the project number for your project.
         # @!attribute [rw] enablement
         #   @return [::Google::Cloud::CloudQuotas::V1beta::QuotaAdjusterSettings::Enablement]
         #     Required. The configured value of the enablement at the given resource.
         # @!attribute [r] update_time
         #   @return [::Google::Protobuf::Timestamp]
-        #     Output only. The timestamp when the QuotaAdjusterSettings was last updated.
+        #     Output only. The timestamp when the QuotaAdjusterSettings resource was last
+        #     updated.
         # @!attribute [rw] etag
         #   @return [::String]
-        #     Optional. The current etag of the QuotaAdjusterSettings. If an etag is
-        #     provided on update and does not match the current server's etag of the
-        #     QuotaAdjusterSettings, the request will be blocked and an ABORTED error
-        #     will be returned. See https://google.aip.dev/134#etags for more details on
-        #     etags.
+        #     Optional. The current ETag of the QuotaAdjusterSettings. If an ETag is
+        #     provided on update and does not match the current server's ETag in the
+        #     QuotaAdjusterSettings, the request is blocked and returns an ABORTED error.
+        #     See https://google.aip.dev/134#etags for more details on ETags.
         class QuotaAdjusterSettings
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
