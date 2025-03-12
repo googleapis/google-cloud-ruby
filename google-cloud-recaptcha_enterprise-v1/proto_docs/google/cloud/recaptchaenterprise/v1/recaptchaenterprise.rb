@@ -211,7 +211,7 @@ module Google
 
           # Enum that represents potential reasons for annotating an assessment.
           module Reason
-            # Default unspecified reason.
+            # Unspecified reason. Do not use.
             REASON_UNSPECIFIED = 0
 
             # Indicates that the transaction had a chargeback issued with no other
@@ -492,7 +492,12 @@ module Google
         #     WAF-enabled key.
         # @!attribute [rw] ja3
         #   @return [::String]
-        #     Optional. JA3 fingerprint for SSL clients.
+        #     Optional. JA3 fingerprint for SSL clients. To learn how to compute this
+        #     fingerprint, please refer to https://github.com/salesforce/ja3.
+        # @!attribute [rw] ja4
+        #   @return [::String]
+        #     Optional. JA4 fingerprint for SSL clients. To learn how to compute this
+        #     fingerprint, please refer to https://github.com/FoxIO-LLC/ja4.
         # @!attribute [rw] headers
         #   @return [::Array<::String>]
         #     Optional. HTTP header information about the request.
@@ -530,8 +535,8 @@ module Google
             # enabled in the Google Cloud console.
             ENABLED = 1
 
-            # Disable Fraud Prevention for this assessment, regardless of Google Cloud
-            # console settings.
+            # Disable Fraud Prevention for this assessment, regardless of the Google
+            # Cloud console settings.
             DISABLED = 2
           end
         end
@@ -1256,7 +1261,8 @@ module Google
         #     `projects/{project}/keys/{key}/metrics`.
         # @!attribute [rw] start_time
         #   @return [::Google::Protobuf::Timestamp]
-        #     Inclusive start time aligned to a day (UTC).
+        #     Inclusive start time aligned to a day in the America/Los_Angeles (Pacific)
+        #     timezone.
         # @!attribute [rw] score_metrics
         #   @return [::Array<::Google::Cloud::RecaptchaEnterprise::V1::ScoreMetrics>]
         #     Metrics are continuous and in order by dates, and in the granularity
