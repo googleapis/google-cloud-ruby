@@ -50,6 +50,8 @@ module Google
             # See {::Google::Cloud::Dataplex::V1::DataTaxonomyService::Client::Configuration}
             # for a description of the configuration fields.
             #
+            # @deprecated This service is deprecated and may be removed in the next major version update.
+            #
             # @example
             #
             #   # Modify the configuration for all DataTaxonomyService clients
@@ -233,6 +235,8 @@ module Google
             ##
             # Create a DataTaxonomy resource.
             #
+            # @deprecated This method is deprecated and may be removed in the next major version update.
+            #
             # @overload create_data_taxonomy(request, options = nil)
             #   Pass arguments to `create_data_taxonomy` via a request object, either of type
             #   {::Google::Cloud::Dataplex::V1::CreateDataTaxonomyRequest} or an equivalent Hash.
@@ -249,9 +253,6 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param parent [::String]
-            #     Required. The resource name of the data taxonomy location, of the form:
-            #     projects/\\{project_number}/locations/\\{location_id}
-            #     where `location_id` refers to a GCP region.
             #   @param data_taxonomy_id [::String]
             #     Required. DataTaxonomy identifier.
             #     * Must contain only lowercase letters, numbers and hyphens.
@@ -340,6 +341,8 @@ module Google
 
             ##
             # Updates a DataTaxonomy resource.
+            #
+            # @deprecated This method is deprecated and may be removed in the next major version update.
             #
             # @overload update_data_taxonomy(request, options = nil)
             #   Pass arguments to `update_data_taxonomy` via a request object, either of type
@@ -441,6 +444,8 @@ module Google
             # Deletes a DataTaxonomy resource. All attributes within the DataTaxonomy
             # must be deleted before the DataTaxonomy can be deleted.
             #
+            # @deprecated This method is deprecated and may be removed in the next major version update.
+            #
             # @overload delete_data_taxonomy(request, options = nil)
             #   Pass arguments to `delete_data_taxonomy` via a request object, either of type
             #   {::Google::Cloud::Dataplex::V1::DeleteDataTaxonomyRequest} or an equivalent Hash.
@@ -538,6 +543,8 @@ module Google
 
             ##
             # Lists DataTaxonomy resources in a project and location.
+            #
+            # @deprecated This method is deprecated and may be removed in the next major version update.
             #
             # @overload list_data_taxonomies(request, options = nil)
             #   Pass arguments to `list_data_taxonomies` via a request object, either of type
@@ -646,6 +653,8 @@ module Google
             ##
             # Retrieves a DataTaxonomy resource.
             #
+            # @deprecated This method is deprecated and may be removed in the next major version update.
+            #
             # @overload get_data_taxonomy(request, options = nil)
             #   Pass arguments to `get_data_taxonomy` via a request object, either of type
             #   {::Google::Cloud::Dataplex::V1::GetDataTaxonomyRequest} or an equivalent Hash.
@@ -662,8 +671,6 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param name [::String]
-            #     Required. The resource name of the DataTaxonomy:
-            #     projects/\\{project_number}/locations/\\{location_id}/dataTaxonomies/\\{data_taxonomy_id}
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::Dataplex::V1::DataTaxonomy]
@@ -731,6 +738,8 @@ module Google
 
             ##
             # Create a DataAttributeBinding resource.
+            #
+            # @deprecated This method is deprecated and may be removed in the next major version update.
             #
             # @overload create_data_attribute_binding(request, options = nil)
             #   Pass arguments to `create_data_attribute_binding` via a request object, either of type
@@ -839,6 +848,8 @@ module Google
             ##
             # Updates a DataAttributeBinding resource.
             #
+            # @deprecated This method is deprecated and may be removed in the next major version update.
+            #
             # @overload update_data_attribute_binding(request, options = nil)
             #   Pass arguments to `update_data_attribute_binding` via a request object, either of type
             #   {::Google::Cloud::Dataplex::V1::UpdateDataAttributeBindingRequest} or an equivalent Hash.
@@ -940,6 +951,8 @@ module Google
             # DataAttributeBinding must be deleted before the DataAttributeBinding can be
             # deleted.
             #
+            # @deprecated This method is deprecated and may be removed in the next major version update.
+            #
             # @overload delete_data_attribute_binding(request, options = nil)
             #   Pass arguments to `delete_data_attribute_binding` via a request object, either of type
             #   {::Google::Cloud::Dataplex::V1::DeleteDataAttributeBindingRequest} or an equivalent Hash.
@@ -1039,6 +1052,8 @@ module Google
 
             ##
             # Lists DataAttributeBinding resources in a project and location.
+            #
+            # @deprecated This method is deprecated and may be removed in the next major version update.
             #
             # @overload list_data_attribute_bindings(request, options = nil)
             #   Pass arguments to `list_data_attribute_bindings` via a request object, either of type
@@ -1150,6 +1165,8 @@ module Google
             ##
             # Retrieves a DataAttributeBinding resource.
             #
+            # @deprecated This method is deprecated and may be removed in the next major version update.
+            #
             # @overload get_data_attribute_binding(request, options = nil)
             #   Pass arguments to `get_data_attribute_binding` via a request object, either of type
             #   {::Google::Cloud::Dataplex::V1::GetDataAttributeBindingRequest} or an equivalent Hash.
@@ -1235,6 +1252,8 @@ module Google
 
             ##
             # Create a DataAttribute resource.
+            #
+            # @deprecated This method is deprecated and may be removed in the next major version update.
             #
             # @overload create_data_attribute(request, options = nil)
             #   Pass arguments to `create_data_attribute` via a request object, either of type
@@ -1343,6 +1362,8 @@ module Google
             ##
             # Updates a DataAttribute resource.
             #
+            # @deprecated This method is deprecated and may be removed in the next major version update.
+            #
             # @overload update_data_attribute(request, options = nil)
             #   Pass arguments to `update_data_attribute` via a request object, either of type
             #   {::Google::Cloud::Dataplex::V1::UpdateDataAttributeRequest} or an equivalent Hash.
@@ -1442,6 +1463,8 @@ module Google
             ##
             # Deletes a Data Attribute resource.
             #
+            # @deprecated This method is deprecated and may be removed in the next major version update.
+            #
             # @overload delete_data_attribute(request, options = nil)
             #   Pass arguments to `delete_data_attribute` via a request object, either of type
             #   {::Google::Cloud::Dataplex::V1::DeleteDataAttributeRequest} or an equivalent Hash.
@@ -1539,6 +1562,8 @@ module Google
 
             ##
             # Lists Data Attribute resources in a DataTaxonomy.
+            #
+            # @deprecated This method is deprecated and may be removed in the next major version update.
             #
             # @overload list_data_attributes(request, options = nil)
             #   Pass arguments to `list_data_attributes` via a request object, either of type
@@ -1645,6 +1670,8 @@ module Google
 
             ##
             # Retrieves a Data Attribute resource.
+            #
+            # @deprecated This method is deprecated and may be removed in the next major version update.
             #
             # @overload get_data_attribute(request, options = nil)
             #   Pass arguments to `get_data_attribute` via a request object, either of type

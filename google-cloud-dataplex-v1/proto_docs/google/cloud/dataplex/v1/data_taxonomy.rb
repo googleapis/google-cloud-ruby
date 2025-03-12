@@ -24,6 +24,7 @@ module Google
         # DataTaxonomy represents a set of hierarchical DataAttributes resources,
         # grouped with a common theme Eg: 'SensitiveDataTaxonomy' can have attributes
         # to manage PII data. It is defined at project level.
+        # @deprecated This message is deprecated and may be removed in the next major version update.
         # @!attribute [r] name
         #   @return [::String]
         #     Output only. The relative resource name of the DataTaxonomy, of the form:
@@ -84,6 +85,7 @@ module Google
         #   - DataAccessSpec :
         #                 - readers :bar@foo.com
         # ```
+        # @deprecated This message is deprecated and may be removed in the next major version update.
         # @!attribute [r] name
         #   @return [::String]
         #     Output only. The relative resource name of the dataAttribute, of the form:
@@ -146,6 +148,7 @@ module Google
 
         # DataAttributeBinding represents binding of attributes to resources. Eg: Bind
         # 'CustomerInfo' entity with 'PII' attribute.
+        # @deprecated This message is deprecated and may be removed in the next major version update.
         # @!attribute [r] name
         #   @return [::String]
         #     Output only. The relative resource name of the Data Attribute Binding, of
@@ -226,11 +229,9 @@ module Google
         end
 
         # Create DataTaxonomy request.
+        # @deprecated This message is deprecated and may be removed in the next major version update.
         # @!attribute [rw] parent
         #   @return [::String]
-        #     Required. The resource name of the data taxonomy location, of the form:
-        #     projects/\\{project_number}/locations/\\{location_id}
-        #     where `location_id` refers to a GCP region.
         # @!attribute [rw] data_taxonomy_id
         #   @return [::String]
         #     Required. DataTaxonomy identifier.
@@ -252,6 +253,7 @@ module Google
         end
 
         # Update DataTaxonomy request.
+        # @deprecated This message is deprecated and may be removed in the next major version update.
         # @!attribute [rw] update_mask
         #   @return [::Google::Protobuf::FieldMask]
         #     Required. Mask of fields to update.
@@ -268,10 +270,9 @@ module Google
         end
 
         # Get DataTaxonomy request.
+        # @deprecated This message is deprecated and may be removed in the next major version update.
         # @!attribute [rw] name
         #   @return [::String]
-        #     Required. The resource name of the DataTaxonomy:
-        #     projects/\\{project_number}/locations/\\{location_id}/dataTaxonomies/\\{data_taxonomy_id}
         class GetDataTaxonomyRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -323,6 +324,7 @@ module Google
         end
 
         # Delete DataTaxonomy request.
+        # @deprecated This message is deprecated and may be removed in the next major version update.
         # @!attribute [rw] name
         #   @return [::String]
         #     Required. The resource name of the DataTaxonomy:

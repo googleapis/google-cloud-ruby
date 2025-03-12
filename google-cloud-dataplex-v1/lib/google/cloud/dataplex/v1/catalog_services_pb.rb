@@ -76,18 +76,8 @@ module Google
             # Lists Entries within an EntryGroup.
             rpc :ListEntries, ::Google::Cloud::Dataplex::V1::ListEntriesRequest, ::Google::Cloud::Dataplex::V1::ListEntriesResponse
             # Gets an Entry.
-            #
-            # **Caution**: The BigQuery metadata that is stored in Dataplex Catalog is
-            # changing. For more information, see [Changes to BigQuery metadata stored in
-            # Dataplex
-            # Catalog](https://cloud.google.com/dataplex/docs/biqquery-metadata-changes).
             rpc :GetEntry, ::Google::Cloud::Dataplex::V1::GetEntryRequest, ::Google::Cloud::Dataplex::V1::Entry
-            # Looks up a single Entry by name using the permission on the source system.
-            #
-            # **Caution**: The BigQuery metadata that is stored in Dataplex Catalog is
-            # changing. For more information, see [Changes to BigQuery metadata stored in
-            # Dataplex
-            # Catalog](https://cloud.google.com/dataplex/docs/biqquery-metadata-changes).
+            # Looks up an entry by name using the permission on the source system.
             rpc :LookupEntry, ::Google::Cloud::Dataplex::V1::LookupEntryRequest, ::Google::Cloud::Dataplex::V1::Entry
             # Searches for Entries matching the given query and scope.
             rpc :SearchEntries, ::Google::Cloud::Dataplex::V1::SearchEntriesRequest, ::Google::Cloud::Dataplex::V1::SearchEntriesResponse

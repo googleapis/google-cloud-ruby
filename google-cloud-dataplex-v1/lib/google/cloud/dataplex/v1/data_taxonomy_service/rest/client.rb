@@ -51,6 +51,7 @@ module Google
               #
               # See {::Google::Cloud::Dataplex::V1::DataTaxonomyService::Rest::Client::Configuration}
               # for a description of the configuration fields.
+              # @deprecated This service is deprecated and may be removed in the next major version update.
               #
               # @example
               #
@@ -244,9 +245,6 @@ module Google
               #   the default parameter values, pass an empty Hash as a request object (see above).
               #
               #   @param parent [::String]
-              #     Required. The resource name of the data taxonomy location, of the form:
-              #     projects/\\{project_number}/locations/\\{location_id}
-              #     where `location_id` refers to a GCP region.
               #   @param data_taxonomy_id [::String]
               #     Required. DataTaxonomy identifier.
               #     * Must contain only lowercase letters, numbers and hyphens.
@@ -629,8 +627,6 @@ module Google
               #   the default parameter values, pass an empty Hash as a request object (see above).
               #
               #   @param name [::String]
-              #     Required. The resource name of the DataTaxonomy:
-              #     projects/\\{project_number}/locations/\\{location_id}/dataTaxonomies/\\{data_taxonomy_id}
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Google::Cloud::Dataplex::V1::DataTaxonomy]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]

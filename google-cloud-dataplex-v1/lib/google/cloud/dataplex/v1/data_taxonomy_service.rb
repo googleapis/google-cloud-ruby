@@ -36,6 +36,8 @@ module Google
         # DataTaxonomyService enables attribute-based governance. The resources
         # currently offered include DataTaxonomy and DataAttribute.
         #
+        # @deprecated This service is deprecated and may be removed in the next major version update.
+        #
         # @example Load this service and instantiate a gRPC client
         #
         #     require "google/cloud/dataplex/v1/data_taxonomy_service"
