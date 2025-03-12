@@ -391,6 +391,9 @@ module Google
         # @!attribute [rw] filter
         #   @return [::Google::Cloud::AIPlatform::V1::RagRetrievalConfig::Filter]
         #     Optional. Config for filters.
+        # @!attribute [rw] ranking
+        #   @return [::Google::Cloud::AIPlatform::V1::RagRetrievalConfig::Ranking]
+        #     Optional. Config for ranking and reranking.
         class RagRetrievalConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -414,6 +417,42 @@ module Google
           class Filter
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Config for ranking and reranking.
+          # @!attribute [rw] rank_service
+          #   @return [::Google::Cloud::AIPlatform::V1::RagRetrievalConfig::Ranking::RankService]
+          #     Optional. Config for Rank Service.
+          #
+          #     Note: The following fields are mutually exclusive: `rank_service`, `llm_ranker`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+          # @!attribute [rw] llm_ranker
+          #   @return [::Google::Cloud::AIPlatform::V1::RagRetrievalConfig::Ranking::LlmRanker]
+          #     Optional. Config for LlmRanker.
+          #
+          #     Note: The following fields are mutually exclusive: `llm_ranker`, `rank_service`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+          class Ranking
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+
+            # Config for Rank Service.
+            # @!attribute [rw] model_name
+            #   @return [::String]
+            #     Optional. The model name of the rank service.
+            #     Format: `semantic-ranker-512@latest`
+            class RankService
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
+
+            # Config for LlmRanker.
+            # @!attribute [rw] model_name
+            #   @return [::String]
+            #     Optional. The model name used for ranking.
+            #     Format: `gemini-1.5-pro`
+            class LlmRanker
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
           end
         end
       end
