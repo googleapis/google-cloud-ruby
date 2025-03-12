@@ -28,6 +28,8 @@ module Google
           ##
           # Client for the DataCatalog service.
           #
+          # Deprecated: Please use Dataplex Catalog instead.
+          #
           # Data Catalog API service allows clients to discover, understand, and manage
           # their data.
           #
@@ -48,6 +50,8 @@ module Google
             #
             # See {::Google::Cloud::DataCatalog::V1beta1::DataCatalog::Client::Configuration}
             # for a description of the configuration fields.
+            #
+            # @deprecated This service is deprecated and may be removed in the next major version update.
             #
             # @example
             #
@@ -223,6 +227,8 @@ module Google
             # Syntax](https://cloud.google.com/data-catalog/docs/how-to/search-reference)
             # for more information.
             #
+            # @deprecated This method is deprecated and may be removed in the next major version update.
+            #
             # @overload search_catalog(request, options = nil)
             #   Pass arguments to `search_catalog` via a request object, either of type
             #   {::Google::Cloud::DataCatalog::V1beta1::SearchCatalogRequest} or an equivalent Hash.
@@ -348,6 +354,8 @@ module Google
             # (https://cloud.google.com/data-catalog/docs/concepts/resource-project) for
             # more information).
             #
+            # @deprecated This method is deprecated and may be removed in the next major version update.
+            #
             # @overload create_entry_group(request, options = nil)
             #   Pass arguments to `create_entry_group` via a request object, either of type
             #   {::Google::Cloud::DataCatalog::V1beta1::CreateEntryGroupRequest} or an equivalent Hash.
@@ -448,6 +456,8 @@ module Google
             # (https://cloud.google.com/data-catalog/docs/concepts/resource-project) for
             # more information).
             #
+            # @deprecated This method is deprecated and may be removed in the next major version update.
+            #
             # @overload update_entry_group(request, options = nil)
             #   Pass arguments to `update_entry_group` via a request object, either of type
             #   {::Google::Cloud::DataCatalog::V1beta1::UpdateEntryGroupRequest} or an equivalent Hash.
@@ -538,6 +548,8 @@ module Google
 
             ##
             # Gets an EntryGroup.
+            #
+            # @deprecated This method is deprecated and may be removed in the next major version update.
             #
             # @overload get_entry_group(request, options = nil)
             #   Pass arguments to `get_entry_group` via a request object, either of type
@@ -631,6 +643,8 @@ module Google
             # (https://cloud.google.com/data-catalog/docs/concepts/resource-project) for
             # more information).
             #
+            # @deprecated This method is deprecated and may be removed in the next major version update.
+            #
             # @overload delete_entry_group(request, options = nil)
             #   Pass arguments to `delete_entry_group` via a request object, either of type
             #   {::Google::Cloud::DataCatalog::V1beta1::DeleteEntryGroupRequest} or an equivalent Hash.
@@ -718,6 +732,8 @@ module Google
 
             ##
             # Lists entry groups.
+            #
+            # @deprecated This method is deprecated and may be removed in the next major version update.
             #
             # @overload list_entry_groups(request, options = nil)
             #   Pass arguments to `list_entry_groups` via a request object, either of type
@@ -827,6 +843,8 @@ module Google
             #
             # A maximum of 100,000 entries may be created per entry group.
             #
+            # @deprecated This method is deprecated and may be removed in the next major version update.
+            #
             # @overload create_entry(request, options = nil)
             #   Pass arguments to `create_entry` via a request object, either of type
             #   {::Google::Cloud::DataCatalog::V1beta1::CreateEntryRequest} or an equivalent Hash.
@@ -924,6 +942,8 @@ module Google
             # the `entry.name` parameter (see [Data Catalog Resource Project]
             # (https://cloud.google.com/data-catalog/docs/concepts/resource-project) for
             # more information).
+            #
+            # @deprecated This method is deprecated and may be removed in the next major version update.
             #
             # @overload update_entry(request, options = nil)
             #   Pass arguments to `update_entry` via a request object, either of type
@@ -1041,6 +1061,8 @@ module Google
             # (https://cloud.google.com/data-catalog/docs/concepts/resource-project) for
             # more information).
             #
+            # @deprecated This method is deprecated and may be removed in the next major version update.
+            #
             # @overload delete_entry(request, options = nil)
             #   Pass arguments to `delete_entry` via a request object, either of type
             #   {::Google::Cloud::DataCatalog::V1beta1::DeleteEntryRequest} or an equivalent Hash.
@@ -1127,6 +1149,8 @@ module Google
 
             ##
             # Gets an entry.
+            #
+            # @deprecated This method is deprecated and may be removed in the next major version update.
             #
             # @overload get_entry(request, options = nil)
             #   Pass arguments to `get_entry` via a request object, either of type
@@ -1216,6 +1240,8 @@ module Google
             # Get an entry by target resource name. This method allows clients to use
             # the resource name from the source Google Cloud Platform service to get the
             # Data Catalog Entry.
+            #
+            # @deprecated This method is deprecated and may be removed in the next major version update.
             #
             # @overload lookup_entry(request, options = nil)
             #   Pass arguments to `lookup_entry` via a request object, either of type
@@ -1318,6 +1344,8 @@ module Google
 
             ##
             # Lists entries.
+            #
+            # @deprecated This method is deprecated and may be removed in the next major version update.
             #
             # @overload list_entries(request, options = nil)
             #   Pass arguments to `list_entries` via a request object, either of type
@@ -1428,6 +1456,8 @@ module Google
             # Project](https://cloud.google.com/data-catalog/docs/concepts/resource-project)
             # for more information).
             #
+            # @deprecated This method is deprecated and may be removed in the next major version update.
+            #
             # @overload create_tag_template(request, options = nil)
             #   Pass arguments to `create_tag_template` via a request object, either of type
             #   {::Google::Cloud::DataCatalog::V1beta1::CreateTagTemplateRequest} or an equivalent Hash.
@@ -1522,6 +1552,8 @@ module Google
             ##
             # Gets a tag template.
             #
+            # @deprecated This method is deprecated and may be removed in the next major version update.
+            #
             # @overload get_tag_template(request, options = nil)
             #   Pass arguments to `get_tag_template` via a request object, either of type
             #   {::Google::Cloud::DataCatalog::V1beta1::GetTagTemplateRequest} or an equivalent Hash.
@@ -1614,6 +1646,8 @@ module Google
             # the `tag_template.name` parameter (see [Data Catalog Resource Project]
             # (https://cloud.google.com/data-catalog/docs/concepts/resource-project) for
             # more information).
+            #
+            # @deprecated This method is deprecated and may be removed in the next major version update.
             #
             # @overload update_tag_template(request, options = nil)
             #   Pass arguments to `update_tag_template` via a request object, either of type
@@ -1711,6 +1745,8 @@ module Google
             # (https://cloud.google.com/data-catalog/docs/concepts/resource-project) for
             # more information).
             #
+            # @deprecated This method is deprecated and may be removed in the next major version update.
+            #
             # @overload delete_tag_template(request, options = nil)
             #   Pass arguments to `delete_tag_template` via a request object, either of type
             #   {::Google::Cloud::DataCatalog::V1beta1::DeleteTagTemplateRequest} or an equivalent Hash.
@@ -1805,6 +1841,8 @@ module Google
             # [Data Catalog Resource
             # Project](https://cloud.google.com/data-catalog/docs/concepts/resource-project)
             # for more information).
+            #
+            # @deprecated This method is deprecated and may be removed in the next major version update.
             #
             # @overload create_tag_template_field(request, options = nil)
             #   Pass arguments to `create_tag_template_field` via a request object, either of type
@@ -1907,6 +1945,8 @@ module Google
             # identified by the `name` parameter (see [Data Catalog Resource Project]
             # (https://cloud.google.com/data-catalog/docs/concepts/resource-project) for
             # more information).
+            #
+            # @deprecated This method is deprecated and may be removed in the next major version update.
             #
             # @overload update_tag_template_field(request, options = nil)
             #   Pass arguments to `update_tag_template_field` via a request object, either of type
@@ -2018,6 +2058,8 @@ module Google
             # Project](https://cloud.google.com/data-catalog/docs/concepts/resource-project)
             # for more information).
             #
+            # @deprecated This method is deprecated and may be removed in the next major version update.
+            #
             # @overload rename_tag_template_field(request, options = nil)
             #   Pass arguments to `rename_tag_template_field` via a request object, either of type
             #   {::Google::Cloud::DataCatalog::V1beta1::RenameTagTemplateFieldRequest} or an equivalent Hash.
@@ -2109,6 +2151,8 @@ module Google
             # Renames an enum value in a tag template. The enum values have to be unique
             # within one enum field. Thus, an enum value cannot be renamed with a name
             # used in any other enum value within the same enum field.
+            #
+            # @deprecated This method is deprecated and may be removed in the next major version update.
             #
             # @overload rename_tag_template_field_enum_value(request, options = nil)
             #   Pass arguments to `rename_tag_template_field_enum_value` via a request object, either of type
@@ -2203,6 +2247,8 @@ module Google
             # the `name` parameter (see [Data Catalog Resource Project]
             # (https://cloud.google.com/data-catalog/docs/concepts/resource-project) for
             # more information).
+            #
+            # @deprecated This method is deprecated and may be removed in the next major version update.
             #
             # @overload delete_tag_template_field(request, options = nil)
             #   Pass arguments to `delete_tag_template_field` via a request object, either of type
@@ -2301,6 +2347,8 @@ module Google
             # template](https://cloud.google.com/data-catalog/docs/reference/rest/v1beta1/projects.locations.tagTemplates/create#path-parameters)
             # used to create the tag must be from the same organization.
             #
+            # @deprecated This method is deprecated and may be removed in the next major version update.
+            #
             # @overload create_tag(request, options = nil)
             #   Pass arguments to `create_tag` via a request object, either of type
             #   {::Google::Cloud::DataCatalog::V1beta1::CreateTagRequest} or an equivalent Hash.
@@ -2394,6 +2442,8 @@ module Google
 
             ##
             # Updates an existing tag.
+            #
+            # @deprecated This method is deprecated and may be removed in the next major version update.
             #
             # @overload update_tag(request, options = nil)
             #   Pass arguments to `update_tag` via a request object, either of type
@@ -2489,6 +2539,8 @@ module Google
             ##
             # Deletes a tag.
             #
+            # @deprecated This method is deprecated and may be removed in the next major version update.
+            #
             # @overload delete_tag(request, options = nil)
             #   Pass arguments to `delete_tag` via a request object, either of type
             #   {::Google::Cloud::DataCatalog::V1beta1::DeleteTagRequest} or an equivalent Hash.
@@ -2577,6 +2629,8 @@ module Google
             # Lists tags assigned to an {::Google::Cloud::DataCatalog::V1beta1::Entry Entry}.
             # The {::Google::Cloud::DataCatalog::V1beta1::Tag#column columns} in the response
             # are lowercased.
+            #
+            # @deprecated This method is deprecated and may be removed in the next major version update.
             #
             # @overload list_tags(request, options = nil)
             #   Pass arguments to `list_tags` via a request object, either of type
@@ -2694,6 +2748,8 @@ module Google
             #   - `datacatalog.entries.setIamPolicy` to set policies on entries.
             #   - `datacatalog.entryGroups.setIamPolicy` to set policies on entry groups.
             #
+            # @deprecated This method is deprecated and may be removed in the next major version update.
+            #
             # @overload set_iam_policy(request, options = nil)
             #   Pass arguments to `set_iam_policy` via a request object, either of type
             #   {::Google::Iam::V1::SetIamPolicyRequest} or an equivalent Hash.
@@ -2806,6 +2862,8 @@ module Google
             #   - `datacatalog.entries.getIamPolicy` to get policies on entries.
             #   - `datacatalog.entryGroups.getIamPolicy` to get policies on entry groups.
             #
+            # @deprecated This method is deprecated and may be removed in the next major version update.
+            #
             # @overload get_iam_policy(request, options = nil)
             #   Pass arguments to `get_iam_policy` via a request object, either of type
             #   {::Google::Iam::V1::GetIamPolicyRequest} or an equivalent Hash.
@@ -2906,6 +2964,8 @@ module Google
             #
             # A caller is not required to have Google IAM permission to make this
             # request.
+            #
+            # @deprecated This method is deprecated and may be removed in the next major version update.
             #
             # @overload test_iam_permissions(request, options = nil)
             #   Pass arguments to `test_iam_permissions` via a request object, either of type
