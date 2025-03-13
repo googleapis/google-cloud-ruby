@@ -146,6 +146,27 @@ class Google::Shopping::Merchant::Accounts::ClientConstructionMinitest < Minites
     end
   end
 
+  def test_automatic_improvements_service_grpc
+    skip unless Google::Shopping::Merchant::Accounts.automatic_improvements_service_available? transport: :grpc
+    Gapic::ServiceStub.stub :new, DummyStub.new do
+      grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+      client = Google::Shopping::Merchant::Accounts.automatic_improvements_service transport: :grpc do |config|
+        config.credentials = grpc_channel
+      end
+      assert_kind_of Google::Shopping::Merchant::Accounts::V1beta::AutomaticImprovementsService::Client, client
+    end
+  end
+
+  def test_automatic_improvements_service_rest
+    skip unless Google::Shopping::Merchant::Accounts.automatic_improvements_service_available? transport: :rest
+    Gapic::Rest::ClientStub.stub :new, DummyStub.new do
+      client = Google::Shopping::Merchant::Accounts.automatic_improvements_service transport: :rest do |config|
+        config.credentials = :dummy_credentials
+      end
+      assert_kind_of Google::Shopping::Merchant::Accounts::V1beta::AutomaticImprovementsService::Rest::Client, client
+    end
+  end
+
   def test_business_identity_service_grpc
     skip unless Google::Shopping::Merchant::Accounts.business_identity_service_available? transport: :grpc
     Gapic::ServiceStub.stub :new, DummyStub.new do
