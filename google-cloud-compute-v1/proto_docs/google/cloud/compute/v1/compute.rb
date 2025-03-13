@@ -2421,6 +2421,29 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # @!attribute [rw] service_share_type
+        #   @return [::String]
+        #     Sharing config for all Google Cloud services.
+        #     Check the ServiceShareType enum for the list of possible values.
+        class AllocationReservationSharingPolicy
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Sharing config for all Google Cloud services.
+          module ServiceShareType
+            # A value indicating that the enum field is not set.
+            UNDEFINED_SERVICE_SHARE_TYPE = 0
+
+            # Allow all Google Cloud managed services to share reservations.
+            ALLOW_ALL = 475_536_235
+
+            # [Default] Disallow sharing with all Google Cloud services.
+            DISALLOW_ALL = 277_786_301
+
+            SERVICE_SHARE_TYPE_UNSPECIFIED = 279_057_148
+          end
+        end
+
         # [Output Only] Contains output only fields.
         # @!attribute [rw] specific_sku_allocation
         #   @return [::Google::Cloud::Compute::V1::AllocationResourceStatusSpecificSKUAllocation]
@@ -2434,9 +2457,21 @@ module Google
         # @!attribute [rw] source_instance_template_id
         #   @return [::String]
         #     ID of the instance template used to populate reservation properties.
+        # @!attribute [rw] utilizations
+        #   @return [::Google::Protobuf::Map{::String => ::Integer}]
+        #     Per service utilization breakdown. The Key is the Google Cloud managed service name.
         class AllocationResourceStatusSpecificSKUAllocation
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # @!attribute [rw] key
+          #   @return [::String]
+          # @!attribute [rw] value
+          #   @return [::Integer]
+          class UtilizationsEntry
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
         end
 
         # @!attribute [rw] disk_size_gb
@@ -3349,6 +3384,9 @@ module Google
         # @!attribute [rw] capacity_scaler
         #   @return [::Float]
         #     A multiplier applied to the backend's target capacity of its balancing mode. The default value is 1, which means the group serves up to 100% of its configured capacity (depending on balancingMode). A setting of 0 means the group is completely drained, offering 0% of its available capacity. The valid ranges are 0.0 and [0.1,1.0]. You cannot configure a setting larger than 0 and smaller than 0.1. You cannot configure a setting of 0 when there is only one backend attached to the backend service. Not available with backends that don't support using a balancingMode. This includes backends such as global internet NEGs, regional serverless NEGs, and PSC NEGs.
+        # @!attribute [rw] custom_metrics
+        #   @return [::Array<::Google::Cloud::Compute::V1::BackendCustomMetric>]
+        #     List of custom metrics that are used for CUSTOM_METRICS BalancingMode.
         # @!attribute [rw] description
         #   @return [::String]
         #     An optional description of this resource. Provide this property when you create the resource.
@@ -3394,6 +3432,9 @@ module Google
 
             # Balance based on the number of simultaneous connections.
             CONNECTION = 246_311_646
+
+            # Based on custom defined and reported metrics.
+            CUSTOM_METRICS = 331_575_765
 
             # Balance based on requests per second (RPS).
             RATE = 2_508_000
@@ -3601,6 +3642,21 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # Custom Metrics are used for CUSTOM_METRICS balancing_mode.
+        # @!attribute [rw] dry_run
+        #   @return [::Boolean]
+        #     If true, the metric data is collected and reported to Cloud Monitoring, but is not used for load balancing.
+        # @!attribute [rw] max_utilization
+        #   @return [::Float]
+        #     Optional parameter to define a target utilization for the Custom Metrics balancing mode. The valid range is [0.0, 1.0].
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Name of a custom utilization signal. The name must be 1-64 characters long and match the regular expression [a-z]([-_.a-z0-9]*[a-z0-9])? which means the first character must be a lowercase letter, and all following characters must be a dash, period, underscore, lowercase letter, or digit, except the last character, which cannot be a dash, period, or underscore. For usage guidelines, see Custom Metrics balancing mode. This field can only be used for a global or regional backend service with the loadBalancingScheme set to EXTERNAL_MANAGED, INTERNAL_MANAGED INTERNAL_SELF_MANAGED.
+        class BackendCustomMetric
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # Represents a Backend Service resource. A backend service defines how Google Cloud load balancers distribute traffic. The backend service configuration contains a set of values, such as the protocol used to connect to backends, various distribution and session settings, health checks, and timeouts. These settings provide fine-grained control over how your load balancer behaves. Most of the settings have default values that allow for easy configuration if you need to get started quickly. Backend services in Google Compute Engine can be either regionally or globally scoped. * [Global](https://cloud.google.com/compute/docs/reference/rest/v1/backendServices) * [Regional](https://cloud.google.com/compute/docs/reference/rest/v1/regionBackendServices) For more information, see Backend Services.
         # @!attribute [rw] affinity_cookie_ttl_sec
         #   @return [::Integer]
@@ -3628,6 +3684,9 @@ module Google
         # @!attribute [rw] creation_timestamp
         #   @return [::String]
         #     [Output Only] Creation timestamp in RFC3339 text format.
+        # @!attribute [rw] custom_metrics
+        #   @return [::Array<::Google::Cloud::Compute::V1::BackendServiceCustomMetric>]
+        #     List of custom metrics that are used for the WEIGHTED_ROUND_ROBIN locality_lb_policy.
         # @!attribute [rw] custom_request_headers
         #   @return [::Array<::String>]
         #     Headers that the load balancer adds to proxied requests. See [Creating custom headers](https://cloud.google.com/load-balancing/docs/custom-headers).
@@ -3830,6 +3889,9 @@ module Google
 
             # Per-instance weighted Load Balancing via health check reported weights. If set, the Backend Service must configure a non legacy HTTP-based Health Check, and health check replies are expected to contain non-standard HTTP response header field X-Load-Balancing-Endpoint-Weight to specify the per-instance weights. If set, Load Balancing is weighted based on the per-instance weights reported in the last processed health check replies, as long as every instance either reported a valid weight or had UNAVAILABLE_WEIGHT. Otherwise, Load Balancing remains equal-weight. This option is only supported in Network Load Balancing.
             WEIGHTED_MAGLEV = 254_930_962
+
+            # Per-endpoint weighted round-robin Load Balancing using weights computed from Backend reported Custom Metrics. If set, the Backend Service responses are expected to contain non-standard HTTP response header field X-Endpoint-Load-Metrics. The reported metrics to use for computing the weights are specified via the backends[].customMetrics fields.
+            WEIGHTED_ROUND_ROBIN = 5_584_977
           end
 
           # The protocol this BackendService uses to communicate with backends. Possible values are HTTP, HTTPS, HTTP2, TCP, SSL, UDP or GRPC. depending on the chosen load balancer or Traffic Director configuration. Refer to the documentation for the load balancers or for Traffic Director for more information. Must be set to GRPC when the backend service is referenced by a URL map that is bound to target gRPC proxy.
@@ -4055,6 +4117,18 @@ module Google
           end
         end
 
+        # Custom Metrics are used for WEIGHTED_ROUND_ROBIN locality_lb_policy.
+        # @!attribute [rw] dry_run
+        #   @return [::Boolean]
+        #     If true, the metric data is not used for load balancing.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Name of a custom utilization signal. The name must be 1-64 characters long and match the regular expression [a-z]([-_.a-z0-9]*[a-z0-9])? which means the first character must be a lowercase letter, and all following characters must be a dash, period, underscore, lowercase letter, or digit, except the last character, which cannot be a dash, period, or underscore. For usage guidelines, see Custom Metrics balancing mode. This field can only be used for a global or regional backend service with the loadBalancingScheme set to EXTERNAL_MANAGED, INTERNAL_MANAGED INTERNAL_SELF_MANAGED.
+        class BackendServiceCustomMetric
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # For load balancers that have configurable failover: [Internal passthrough Network Load Balancers](https://cloud.google.com/load-balancing/docs/internal/failover-overview) and [external passthrough Network Load Balancers](https://cloud.google.com/load-balancing/docs/network/networklb-failover-overview). On failover or failback, this field indicates whether connection draining will be honored. Google Cloud has a fixed connection draining timeout of 10 minutes. A setting of true terminates existing TCP connections to the active pool during failover and failback, immediately draining traffic. A setting of false allows existing TCP connections to persist, even on VMs no longer in the active pool, for up to the duration of the connection draining timeout (10 minutes).
         # @!attribute [rw] disable_connection_drain_on_failover
         #   @return [::Boolean]
@@ -4232,6 +4306,9 @@ module Google
 
             # Per-instance weighted Load Balancing via health check reported weights. If set, the Backend Service must configure a non legacy HTTP-based Health Check, and health check replies are expected to contain non-standard HTTP response header field X-Load-Balancing-Endpoint-Weight to specify the per-instance weights. If set, Load Balancing is weighted based on the per-instance weights reported in the last processed health check replies, as long as every instance either reported a valid weight or had UNAVAILABLE_WEIGHT. Otherwise, Load Balancing remains equal-weight. This option is only supported in Network Load Balancing.
             WEIGHTED_MAGLEV = 254_930_962
+
+            # Per-endpoint weighted round-robin Load Balancing using weights computed from Backend reported Custom Metrics. If set, the Backend Service responses are expected to contain non-standard HTTP response header field X-Endpoint-Load-Metrics. The reported metrics to use for computing the weights are specified via the backends[].customMetrics fields.
+            WEIGHTED_ROUND_ROBIN = 5_584_977
           end
         end
 
@@ -5048,6 +5125,8 @@ module Google
             MEMORY_OPTIMIZED = 281_753_417
 
             MEMORY_OPTIMIZED_M3 = 276_301_372
+
+            MEMORY_OPTIMIZED_M4 = 276_301_373
 
             MEMORY_OPTIMIZED_X4_16TB = 183_089_120
 
@@ -13987,6 +14066,9 @@ module Google
         # @!attribute [rw] region
         #   @return [::String]
         #     [Output Only] The URL of the region where the managed instance group resides (for regional resources).
+        # @!attribute [rw] resource_policies
+        #   @return [::Google::Cloud::Compute::V1::InstanceGroupManagerResourcePolicies]
+        #     Resource policies for this managed instance group.
         # @!attribute [rw] satisfies_pzi
         #   @return [::Boolean]
         #     [Output Only] Reserved for future use.
@@ -14334,6 +14416,14 @@ module Google
         #   @return [::Google::Cloud::Compute::V1::Warning]
         #     [Output Only] Informational warning message.
         class InstanceGroupManagerResizeRequestsListResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # @!attribute [rw] workload_policy
+        #   @return [::String]
+        #     The URL of the workload policy that is specified for this managed instance group. It can be a full or partial URL. For example, the following are all valid URLs to a workload policy: - https://www.googleapis.com/compute/v1/projects/project/regions/region /resourcePolicies/resourcePolicy - projects/project/regions/region/resourcePolicies/resourcePolicy - regions/region/resourcePolicies/resourcePolicy
+        class InstanceGroupManagerResourcePolicies
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
@@ -15408,6 +15498,57 @@ module Google
         class InstancesRemoveResourcePoliciesRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # @!attribute [rw] disruption_schedule
+        #   @return [::String]
+        #     The disruption schedule for the VM. Default to IMMEDIATE.
+        #     Check the DisruptionSchedule enum for the list of possible values.
+        # @!attribute [rw] fault_reasons
+        #   @return [::Array<::Google::Cloud::Compute::V1::InstancesReportHostAsFaultyRequestFaultReason>]
+        class InstancesReportHostAsFaultyRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # The disruption schedule for the VM. Default to IMMEDIATE.
+          module DisruptionSchedule
+            # A value indicating that the enum field is not set.
+            UNDEFINED_DISRUPTION_SCHEDULE = 0
+
+            # Not used. Required as per aip/126.
+            DISRUPTION_SCHEDULE_UNSPECIFIED = 332_543_835
+
+            # Delay disruption for caller control. Will be default soon.
+            FUTURE = 474_513_859
+
+            # Default value. Disrupt the VM immediately.
+            IMMEDIATE = 152_881_041
+          end
+        end
+
+        # @!attribute [rw] behavior
+        #   @return [::String]
+        #     Check the Behavior enum for the list of possible values.
+        # @!attribute [rw] description
+        #   @return [::String]
+        class InstancesReportHostAsFaultyRequestFaultReason
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+
+          module Behavior
+            # A value indicating that the enum field is not set.
+            UNDEFINED_BEHAVIOR = 0
+
+            # Public reportable behaviors
+            BEHAVIOR_UNSPECIFIED = 85_734_570
+
+            PERFORMANCE = 135_701_520
+
+            SILENT_DATA_CORRUPTION = 111_360_678
+
+            UNRECOVERABLE_GPU_ERROR = 363_710_747
+          end
         end
 
         # @!attribute [rw] instances
@@ -25601,6 +25742,9 @@ module Google
 
             # The public delegated prefix is used for creating forwarding rules only. Such prefixes cannot set publicDelegatedSubPrefixes.
             EXTERNAL_IPV6_FORWARDING_RULE_CREATION = 398_684_356
+
+            # The public delegated prefix is used for creating dual-mode subnetworks only. Such prefixes cannot set publicDelegatedSubPrefixes.
+            EXTERNAL_IPV6_SUBNETWORK_CREATION = 61_198_284
           end
 
           # [Output Only] The status of the public delegated prefix, which can be one of following values: - `INITIALIZING` The public delegated prefix is being initialized and addresses cannot be created yet. - `READY_TO_ANNOUNCE` The public delegated prefix is a live migration prefix and is active. - `ANNOUNCED` The public delegated prefix is active. - `DELETING` The public delegated prefix is being deprovsioned.
@@ -25730,6 +25874,9 @@ module Google
 
             # The public delegated prefix is used for creating forwarding rules only. Such prefixes cannot set publicDelegatedSubPrefixes.
             EXTERNAL_IPV6_FORWARDING_RULE_CREATION = 398_684_356
+
+            # The public delegated prefix is used for creating dual-mode subnetworks only. Such prefixes cannot set publicDelegatedSubPrefixes.
+            EXTERNAL_IPV6_SUBNETWORK_CREATION = 61_198_284
           end
 
           # [Output Only] The status of the sub public delegated prefix.
@@ -27241,6 +27388,27 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # A request message for Instances.ReportHostAsFaulty. See the method description for details.
+        # @!attribute [rw] instance
+        #   @return [::String]
+        #     Name of the instance scoping this request.
+        # @!attribute [rw] instances_report_host_as_faulty_request_resource
+        #   @return [::Google::Cloud::Compute::V1::InstancesReportHostAsFaultyRequest]
+        #     The body resource for this request
+        # @!attribute [rw] project
+        #   @return [::String]
+        #     Project ID for this request.
+        # @!attribute [rw] request_id
+        #   @return [::String]
+        #     An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
+        # @!attribute [rw] zone
+        #   @return [::String]
+        #     The name of the zone for this request.
+        class ReportHostAsFaultyInstanceRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # A policy that specifies how requests intended for the route's backends are shadowed to a separate mirrored backend service. The load balancer doesn't wait for responses from the shadow service. Before sending traffic to the shadow service, the host or authority header is suffixed with -shadow.
         # @!attribute [rw] backend_service
         #   @return [::String]
@@ -27272,6 +27440,9 @@ module Google
         # @!attribute [rw] name
         #   @return [::String]
         #     The name of the resource, provided by the client when initially creating the resource. The resource name must be 1-63 characters long, and comply with RFC1035. Specifically, the name must be 1-63 characters long and match the regular expression `[a-z]([-a-z0-9]*[a-z0-9])?` which means the first character must be a lowercase letter, and all following characters must be a dash, lowercase letter, or digit, except the last character, which cannot be a dash.
+        # @!attribute [rw] reservation_sharing_policy
+        #   @return [::Google::Cloud::Compute::V1::AllocationReservationSharingPolicy]
+        #     Specify the reservation sharing policy. If unspecified, the reservation will not be shared with Google Cloud managed services.
         # @!attribute [rw] resource_policies
         #   @return [::Google::Protobuf::Map{::String => ::String}]
         #     Resource policies to be added to this reservation. The key is defined by user, and the value is resource policy url. This is to define placement policy with reservation.
@@ -27987,11 +28158,32 @@ module Google
         # @!attribute [rw] physical_host
         #   @return [::String]
         #     [Output Only] The precise location of your instance within the zone's data center, including the block, sub-block, and host. The field is formatted as follows: blockId/subBlockId/hostId.
+        # @!attribute [rw] physical_host_topology
+        #   @return [::Google::Cloud::Compute::V1::ResourceStatusPhysicalHostTopology]
+        #     [Output Only] A series of fields containing the global name of the Compute Engine cluster, as well as the ID of the block, sub-block, and host on which the running instance is located.
         # @!attribute [rw] scheduling
         #   @return [::Google::Cloud::Compute::V1::ResourceStatusScheduling]
         # @!attribute [rw] upcoming_maintenance
         #   @return [::Google::Cloud::Compute::V1::UpcomingMaintenance]
         class ResourceStatus
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Represents the physical host topology of the host on which the VM is running.
+        # @!attribute [rw] block
+        #   @return [::String]
+        #     [Output Only] The ID of the block in which the running instance is located. Instances within the same block experience low network latency.
+        # @!attribute [rw] cluster
+        #   @return [::String]
+        #     [Output Only] The global name of the Compute Engine cluster where the running instance is located.
+        # @!attribute [rw] host
+        #   @return [::String]
+        #     [Output Only] The ID of the host on which the running instance is located. Instances on the same host experience the lowest possible network latency.
+        # @!attribute [rw] subblock
+        #   @return [::String]
+        #     [Output Only] The ID of the sub-block in which the running instance is located. Instances in the same sub-block experience lower network latency than instances in the same block.
+        class ResourceStatusPhysicalHostTopology
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
@@ -29481,6 +29673,9 @@ module Google
           module ProvisioningModel
             # A value indicating that the enum field is not set.
             UNDEFINED_PROVISIONING_MODEL = 0
+
+            # Bound to the lifecycle of the reservation in which it is provisioned.
+            RESERVATION_BOUND = 293_538_571
 
             # Heavily discounted, no guaranteed runtime.
             SPOT = 2_552_066
@@ -34031,6 +34226,9 @@ module Google
         # @!attribute [rw] ip_cidr_range
         #   @return [::String]
         #     The range of internal addresses that are owned by this subnetwork. Provide this property when you create the subnetwork. For example, 10.0.0.0/8 or 100.64.0.0/10. Ranges must be unique and non-overlapping within a network. Only IPv4 is supported. This field is set at resource creation time. The range can be any range listed in the Valid ranges list. The range can be expanded after creation using expandIpCidrRange.
+        # @!attribute [rw] ip_collection
+        #   @return [::String]
+        #     Reference to the source of IP, like a PublicDelegatedPrefix (PDP) for BYOIP. The PDP must be a sub-PDP in EXTERNAL_IPV6_SUBNETWORK_CREATION mode. Use one of the following formats to specify a sub-PDP when creating a dual stack subnetwork with external access using BYOIP: - Full resource URL, as in https://www.googleapis.com/compute/v1/projects/projectId/regions/region /publicDelegatedPrefixes/sub-pdp-name - Partial URL, as in - projects/projectId/regions/region/publicDelegatedPrefixes/ sub-pdp-name - regions/region/publicDelegatedPrefixes/sub-pdp-name
         # @!attribute [rw] ipv6_access_type
         #   @return [::String]
         #     The access type of IPv6 address this subnet holds. It's immutable and can only be specified during creation or the first time the subnet is updated into IPV4_IPV6 dual stack.
@@ -34038,6 +34236,10 @@ module Google
         # @!attribute [rw] ipv6_cidr_range
         #   @return [::String]
         #     [Output Only] This field is for internal use.
+        # @!attribute [rw] ipv6_gce_endpoint
+        #   @return [::String]
+        #     [Output Only] Possible endpoints of this subnetwork. It can be one of the following: - VM_ONLY: The subnetwork can be used for creating instances and IPv6 addresses with VM endpoint type. Such a subnetwork gets external IPv6 ranges from a public delegated prefix and cannot be used to create NetLb. - VM_AND_FR: The subnetwork can be used for creating both VM instances and Forwarding Rules. It can also be used to reserve IPv6 addresses with both VM and FR endpoint types. Such a subnetwork gets its IPv6 range from Google IP Pool directly.
+        #     Check the Ipv6GceEndpoint enum for the list of possible values.
         # @!attribute [rw] kind
         #   @return [::String]
         #     [Output Only] Type of the resource. Always compute#subnetwork for Subnetwork resources.
@@ -34101,6 +34303,16 @@ module Google
             INTERNAL = 279_295_677
 
             UNSPECIFIED_IPV6_ACCESS_TYPE = 313_080_613
+          end
+
+          # [Output Only] Possible endpoints of this subnetwork. It can be one of the following: - VM_ONLY: The subnetwork can be used for creating instances and IPv6 addresses with VM endpoint type. Such a subnetwork gets external IPv6 ranges from a public delegated prefix and cannot be used to create NetLb. - VM_AND_FR: The subnetwork can be used for creating both VM instances and Forwarding Rules. It can also be used to reserve IPv6 addresses with both VM and FR endpoint types. Such a subnetwork gets its IPv6 range from Google IP Pool directly.
+          module Ipv6GceEndpoint
+            # A value indicating that the enum field is not set.
+            UNDEFINED_IPV6_GCE_ENDPOINT = 0
+
+            VM_AND_FR = 41_830_108
+
+            VM_ONLY = 236_773_428
           end
 
           # This field is for internal use. This field can be both set at resource creation time and updated using patch.
@@ -34766,7 +34978,7 @@ module Google
         #     [Output Only] Server-defined URL for the resource.
         # @!attribute [rw] server_tls_policy
         #   @return [::String]
-        #     Optional. A URL referring to a networksecurity.ServerTlsPolicy resource that describes how the proxy should authenticate inbound traffic. serverTlsPolicy only applies to a global TargetHttpsProxy attached to globalForwardingRules with the loadBalancingScheme set to INTERNAL_SELF_MANAGED or EXTERNAL or EXTERNAL_MANAGED. For details which ServerTlsPolicy resources are accepted with INTERNAL_SELF_MANAGED and which with EXTERNAL, EXTERNAL_MANAGED loadBalancingScheme consult ServerTlsPolicy documentation. If left blank, communications are not encrypted.
+        #     Optional. A URL referring to a networksecurity.ServerTlsPolicy resource that describes how the proxy should authenticate inbound traffic. serverTlsPolicy only applies to a global TargetHttpsProxy attached to globalForwardingRules with the loadBalancingScheme set to INTERNAL_SELF_MANAGED or EXTERNAL or EXTERNAL_MANAGED or INTERNAL_MANAGED. It also applies to a regional TargetHttpsProxy attached to regional forwardingRules with the loadBalancingScheme set to EXTERNAL_MANAGED or INTERNAL_MANAGED. For details which ServerTlsPolicy resources are accepted with INTERNAL_SELF_MANAGED and which with EXTERNAL, INTERNAL_MANAGED, EXTERNAL_MANAGED loadBalancingScheme consult ServerTlsPolicy documentation. If left blank, communications are not encrypted.
         # @!attribute [rw] ssl_certificates
         #   @return [::Array<::String>]
         #     URLs to SslCertificate resources that are used to authenticate connections between users and the load balancer. At least one SSL certificate must be specified. SslCertificates do not apply when the load balancing scheme is set to INTERNAL_SELF_MANAGED. The URLs should refer to a SSL Certificate resource or Certificate Manager Certificate resource. Mixing Classic Certificates and Certificate Manager Certificates is not allowed. Certificate Manager Certificates must include the certificatemanager API namespace. Using Certificate Manager Certificates in this field is not supported by Global external Application Load Balancer or Classic Application Load Balancer, use certificate_map instead. Currently, you may specify up to 15 Classic SSL Certificates or up to 100 Certificate Manager Certificates. Certificate Manager Certificates accepted formats are: - //certificatemanager.googleapis.com/projects/\\{project}/locations/{ location}/certificates/\\{resourceName}. - https://certificatemanager.googleapis.com/v1alpha1/projects/\\{project }/locations/\\{location}/certificates/\\{resourceName}.
