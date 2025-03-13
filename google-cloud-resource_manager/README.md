@@ -1,82 +1,65 @@
-# google-cloud-resource_manager
+# Ruby Client for the Cloud Resource Manager API
 
-[Google Cloud Resource Manager](https://cloud.google.com/resource-manager/) ([docs](https://cloud.google.com/resource-manager/reference/rest/)) enables you to
-programmatically manage  container resources such as Organizations and Projects, that allow you to group and hierarchically organize other Cloud Platform resources. This hierarchical organization lets you easily manage common aspects of your resources such as access control and configuration settings. You may be familiar with managing projects in the [Developers Console](https://developers.google.com/console/help/new/). With this API you can do the following:
+Creates, reads, and updates metadata for Google Cloud Platform resource containers.
 
-* Get a list of all projects associated with an account
-* Create new projects
-* Update existing projects
-* Delete projects
-* Undelete, or recover, projects that you don't want to delete
+Creates, reads, and updates metadata for Google Cloud Platform resource containers.
 
-* [google-cloud-resource_manager API documentation](https://googleapis.dev/ruby/google-cloud-resource_manager/latest)
-* [google-cloud-resource_manager on RubyGems](https://rubygems.org/gems/google-cloud-resource_manager)
-* [Google Cloud Resource Manager documentation](https://cloud.google.com/resource-manager/)
+Actual client classes for the various versions of this API are defined in
+_versioned_ client gems, with names of the form `google-cloud-resource_manager-v*`.
+The gem `google-cloud-resource_manager` is the main client library that brings the
+verisoned gems in as dependencies, and provides high-level methods for
+constructing clients. More information on versioned clients can be found below
+in the section titled *Which client should I use?*.
+
+View the [Client Library Documentation](https://cloud.google.com/ruby/docs/reference/google-cloud-resource_manager/latest)
+for this library, google-cloud-resource_manager, to see the convenience methods for
+constructing client objects. Reference documentation for the client objects
+themselves can be found in the client library documentation for the versioned
+client gems:
+[google-cloud-resource_manager-v3](https://cloud.google.com/ruby/docs/reference/google-cloud-resource_manager-v3/latest).
 
 ## Quick Start
 
-```sh
+```
 $ gem install google-cloud-resource_manager
 ```
 
-## Authentication
+In order to use this library, you first need to go through the following steps:
 
-The Resource Manager API currently requires authentication of a [User
-Account](https://developers.google.com/identity/protocols/OAuth2), and
-cannot currently be accessed with a [Service
-Account](https://developers.google.com/identity/protocols/OAuth2ServiceAccount).
-To use a User Account install the [Google Cloud
-SDK](http://cloud.google.com/sdk) and authenticate with the following:
+1. [Select or create a Cloud Platform project.](https://console.cloud.google.com/project)
+1. [Enable billing for your project.](https://cloud.google.com/billing/docs/how-to/modify-project#enable_billing_for_a_project)
+1. [Enable the API.](https://console.cloud.google.com/apis/library/cloudresourcemanager.googleapis.com)
+1. [Set up authentication.](AUTHENTICATION.md)
 
-```
-$ gcloud auth login
-```
+## Debug Logging
 
-Also make sure all environment variables are cleared of any
-service account credentials. Then google-cloud-resource_manager will be able to detect the user
-authentication and connect with those credentials.
+This library comes with opt-in Debug Logging that can help you troubleshoot
+your application's integration with the API. When logging is activated, key
+events such as requests and responses, along with data payloads and metadata
+such as headers and client configuration, are logged to the standard error
+stream.
 
-Instructions and configuration options are covered in the [Authentication Guide](https://googleapis.dev/ruby/google-cloud-resource_manager/latest/file.AUTHENTICATION.html).
+**WARNING:** Client Library Debug Logging includes your data payloads in
+plaintext, which could include sensitive data such as PII for yourself or your
+customers, private keys, or other security data that could be compromising if
+leaked. Always practice good data hygiene with your application logs, and follow
+the principle of least access. Google also recommends that Client Library Debug
+Logging be enabled only temporarily during active debugging, and not used
+permanently in production.
 
-## Example
+To enable logging, set the environment variable `GOOGLE_SDK_RUBY_LOGGING_GEMS`
+to the value `all`. Alternatively, you can set the value to a comma-delimited
+list of client library gem names. This will select the default logging behavior,
+which writes logs to the standard error stream. On a local workstation, this may
+result in logs appearing on the console. When running on a Google Cloud hosting
+service such as [Google Cloud Run](https://cloud.google.com/run), this generally
+results in logs appearing alongside your application logs in the
+[Google Cloud Logging](https://cloud.google.com/logging/) service.
 
-```ruby
-require "google/cloud/resource_manager"
-
-resource_manager = Google::Cloud::ResourceManager.new
-
-# List all projects
-resource_manager.projects.each do |project|
-  puts project.project_id
-end
-
-# Label a project as production
-project = resource_manager.project "tokyo-rain-123"
-project.update do |p|
-  p.labels["env"] = "production"
-end
-
-# List only projects with the "production" label
-projects = resource_manager.projects filter: "labels.env:production"
-```
-
-## Enabling Logging
-
-To enable logging for this library, set the logger for the underlying [Google API Client](https://github.com/google/google-api-ruby-client/blob/master/README.md#logging) library. The logger that you set may be a Ruby stdlib [`Logger`](https://ruby-doc.org/stdlib-2.4.0/libdoc/logger/rdoc/Logger.html) as shown below, or a [`Google::Cloud::Logging::Logger`](https://googleapis.dev/ruby/google-cloud-logging/latest) that will write logs to [Stackdriver Logging](https://cloud.google.com/logging/).
-
-If you do not set the logger explicitly and your application is running in a Rails environment, it will default to `Rails.logger`. Otherwise, if you do not set the logger and you are not using Rails, logging is disabled by default.
-
-Configuring a Ruby stdlib logger:
-
-```ruby
-require "logger"
-
-my_logger = Logger.new $stderr
-my_logger.level = Logger::WARN
-
-# Set the Google API Client logger
-Google::Apis.logger = my_logger
-```
+Debug logging also requires that the versioned clients for this service be
+sufficiently recent, released after about Dec 10, 2024. If logging is not
+working, try updating the versioned clients in your bundle or installed gems:
+[google-cloud-resource_manager-v3](https://cloud.google.com/ruby/docs/reference/google-cloud-resource_manager-v3/latest).
 
 ## Supported Ruby Versions
 
@@ -89,35 +72,60 @@ still work, but are unsupported and not recommended. See
 https://www.ruby-lang.org/en/downloads/branches/ for details about the Ruby
 support schedule.
 
-## Versioning
+## Which client should I use?
 
-This library follows [Semantic Versioning](http://semver.org/).
+Most modern Ruby client libraries for Google APIs come in two flavors: the main
+client library with a name such as `google-cloud-resource_manager`,
+and lower-level _versioned_ client libraries with names such as
+`google-cloud-resource_manager-v3`.
+_In most cases, you should install the main client._
 
-It is currently in major version zero (0.y.z), which means that anything may
-change at any time and the public API should not be considered stable.
+### What's the difference between the main client and a versioned client?
 
-## Contributing
+A _versioned client_ provides a basic set of data types and client classes for
+a _single version_ of a specific service. (That is, for a service with multiple
+versions, there might be a separate versioned client for each service version.)
+Most versioned clients are written and maintained by a code generator.
 
-Contributions to this library are always welcome and highly encouraged.
+The _main client_ is designed to provide you with the _recommended_ client
+interfaces for the service. There will be only one main client for any given
+service, even a service with multiple versions. The main client includes
+factory methods for constructing the client objects we recommend for most
+users. In some cases, those will be classes provided by an underlying versioned
+client; in other cases, they will be handwritten higher-level client objects
+with additional capabilities, convenience methods, or best practices built in.
+Generally, the main client will default to a recommended service version,
+although in some cases you can override this if you need to talk to a specific
+service version.
 
-See the [Contributing
-Guide](https://googleapis.dev/ruby/google-cloud-resource_manager/latest/file.CONTRIBUTING.html)
-for more information on how to get started.
+### Why would I want to use the main client?
 
-Please note that this project is released with a Contributor Code of Conduct. By
-participating in this project you agree to abide by its terms. See [Code of
-Conduct](https://googleapis.dev/ruby/google-cloud-resource_manager/latest/file.CODE_OF_CONDUCT.html)
-for more information.
+We recommend that most users install the main client gem for a service. You can
+identify this gem as the one _without_ a version in its name, e.g.
+`google-cloud-resource_manager`.
+The main client is recommended because it will embody the best practices for
+accessing the service, and may also provide more convenient interfaces or
+tighter integration into frameworks and third-party libraries. In addition, the
+documentation and samples published by Google will generally demonstrate use of
+the main client.
 
-## License
+### Why would I want to use a versioned client?
 
-This library is licensed under Apache 2.0. Full license text is available in
-[LICENSE](https://googleapis.dev/ruby/google-cloud-resource_manager/latest/file.LICENSE.html).
+You can use a versioned client if you are content with a possibly lower-level
+class interface, you explicitly want to avoid features provided by the main
+client, or you want to access a specific service version not be covered by the
+main client. You can identify versioned client gems because the service version
+is part of the name, e.g. `google-cloud-resource_manager-v3`.
 
-## Support
+### What about the google-apis-<name> clients?
 
-Please [report bugs at the project on
-Github](https://github.com/googleapis/google-cloud-ruby/issues). Don't
-hesitate to [ask
-questions](http://stackoverflow.com/questions/tagged/google-cloud-platform+ruby)
-about the client or APIs on [StackOverflow](http://stackoverflow.com).
+Client library gems with names that begin with `google-apis-` are based on an
+older code generation technology. They talk to a REST/JSON backend (whereas
+most modern clients talk to a [gRPC](https://grpc.io/) backend) and they may
+not offer the same performance, features, and ease of use provided by more
+modern clients.
+
+The `google-apis-` clients have wide coverage across Google services, so you
+might need to use one if there is no modern client available for the service.
+However, if a modern client is available, we generally recommend it over the
+older `google-apis-` clients.
