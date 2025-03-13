@@ -1,5 +1,11 @@
 # Changelog
 
+### 1.3.2 (2025-03-13)
+
+#### Documentation
+
+* Fixed product branding ([#29332](https://github.com/googleapis/google-cloud-ruby/issues/29332)) 
+
 ### 1.3.1 (2025-03-07)
 
 #### Documentation
