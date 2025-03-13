@@ -173,3 +173,4 @@ This gem contains the Google Cloud Resource Manager service implementation for t
 
 * Namespace is now `Google::Cloud`
 * The `google-cloud` gem is now an umbrella package for individual gems
+
