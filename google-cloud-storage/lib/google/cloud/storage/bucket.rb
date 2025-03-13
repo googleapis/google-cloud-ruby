@@ -1416,6 +1416,7 @@ module Google
         #   upload. Can be an File object, or File-like object such as StringIO.
         #   (If the object does not have path, a `path` argument must be also be
         #   provided.)
+        # @param [String] file_name Name of file specified for Ongoing resumable upload
         # @param [String] upload_id Unique Id of an Ongoing resumable upload
         #
         # @example
@@ -1424,13 +1425,14 @@ module Google
         #   storage = Google::Cloud::Storage.new
         #
         #   bucket = storage.bucket "my-bucket"
-        #   bucket.delete_ongoing_resumable_upload file,upload_id
+        #   bucket.delete_ongoing_resumable_upload file,file_name,upload_id
 
 
-        def delete_ongoing_resumable_upload file, upload_id
+        def delete_ongoing_resumable_upload file, file_name, upload_id
           ensure_service!
           ensure_io_or_file_exists! file
-          service.delete_ongoing_resumable_upload name, file, upload_id
+          raise "Upload Id missing" unless upload_id
+          create_file file, file_name, upload_id: upload_id, delete_upload: true
         end
         ##
         # Retrieves a list of files matching the criteria.
@@ -1823,7 +1825,8 @@ module Google
                         if_generation_not_match: nil,
                         if_metageneration_match: nil,
                         if_metageneration_not_match: nil,
-                        upload_id: nil
+                        upload_id: nil,
+                        delete_upload: nil
           ensure_service!
           ensure_io_or_file_exists! file
           path ||= file.path if file.respond_to? :path
@@ -1855,7 +1858,8 @@ module Google
                                      if_metageneration_match: if_metageneration_match,
                                      if_metageneration_not_match: if_metageneration_not_match,
                                      user_project: user_project,
-                                     upload_id: upload_id
+                                     upload_id: upload_id,
+                                     delete_upload: delete_upload
           File.from_gapi gapi, service, user_project: user_project
         end
         alias upload_file create_file
