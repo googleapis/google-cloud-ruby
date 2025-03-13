@@ -29,6 +29,7 @@ module Google
             # Service stub contains baseline method implementations
             # including transcoding, making the REST call, and deserialing the response.
             #
+            # @deprecated This service is deprecated and may be removed in the next major version update.
             class ServiceStub
               # @private
               def initialize endpoint:, endpoint_template:, universe_domain:, credentials:, logger:
