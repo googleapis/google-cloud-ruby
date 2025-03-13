@@ -39,13 +39,16 @@ jobs:
             ruby: "3.3"
             task: "--test"
           - os: ubuntu-latest
-            ruby: "3.3"
+            ruby: "3.4"
+            task: "--test"
+          - os: ubuntu-latest
+            ruby: "3.4"
             task: "--rubocop-toplevel --rubocop --build --yard --linkinator"
           - os: macos-latest
-            ruby: "3.3"
+            ruby: "3.4"
             task: "--test"
           - os: windows-latest
-            ruby: "3.3"
+            ruby: "3.4"
             task: "--test"
       fail-fast: false
     runs-on: ${{ matrix.os }}
