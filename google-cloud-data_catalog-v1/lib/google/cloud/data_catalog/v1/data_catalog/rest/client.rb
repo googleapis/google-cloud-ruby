@@ -30,6 +30,8 @@ module Google
             ##
             # REST client for the DataCatalog service.
             #
+            # Deprecated: Please use Dataplex Catalog instead.
+            #
             # Data Catalog API service allows you to discover, understand, and manage
             # your data.
             #
@@ -50,6 +52,7 @@ module Google
               #
               # See {::Google::Cloud::DataCatalog::V1::DataCatalog::Rest::Client::Configuration}
               # for a description of the configuration fields.
+              # @deprecated This service is deprecated and may be removed in the next major version update.
               #
               # @example
               #
