@@ -1,5 +1,11 @@
 # Changelog
 
+### 1.4.0 (2025-03-13)
+
+#### Features
+
+* Added ranking config for RAG ([#29334](https://github.com/googleapis/google-cloud-ruby/issues/29334)) 
+
 ### 1.3.0 (2025-03-07)
 
 #### Features
