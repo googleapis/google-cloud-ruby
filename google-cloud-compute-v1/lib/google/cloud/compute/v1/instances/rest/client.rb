@@ -141,6 +141,8 @@ module Google
 
                   default_config.rpcs.remove_resource_policies.timeout = 600.0
 
+                  default_config.rpcs.report_host_as_faulty.timeout = 600.0
+
                   default_config.rpcs.reset.timeout = 600.0
 
                   default_config.rpcs.resume.timeout = 600.0
@@ -2127,6 +2129,102 @@ module Google
                                        retry_policy: @config.retry_policy
 
                 @instances_stub.remove_resource_policies request, options do |result, response|
+                  result = ::Google::Cloud::Compute::V1::ZoneOperations::Rest::NonstandardLro.create_operation(
+                    operation: result,
+                    client: zone_operations,
+                    request_values: {
+                      "project" => request.project,
+                      "zone" => request.zone
+                    },
+                    options: options
+                  )
+                  yield result, response if block_given?
+                  throw :response, result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Mark the host as faulty and try to restart the instance on a new host.
+              #
+              # @overload report_host_as_faulty(request, options = nil)
+              #   Pass arguments to `report_host_as_faulty` via a request object, either of type
+              #   {::Google::Cloud::Compute::V1::ReportHostAsFaultyInstanceRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::Compute::V1::ReportHostAsFaultyInstanceRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload report_host_as_faulty(instance: nil, instances_report_host_as_faulty_request_resource: nil, project: nil, request_id: nil, zone: nil)
+              #   Pass arguments to `report_host_as_faulty` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param instance [::String]
+              #     Name of the instance scoping this request.
+              #   @param instances_report_host_as_faulty_request_resource [::Google::Cloud::Compute::V1::InstancesReportHostAsFaultyRequest, ::Hash]
+              #     The body resource for this request
+              #   @param project [::String]
+              #     Project ID for this request.
+              #   @param request_id [::String]
+              #     An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
+              #   @param zone [::String]
+              #     The name of the zone for this request.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Gapic::GenericLRO::Operation]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Gapic::GenericLRO::Operation]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/compute/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Compute::V1::Instances::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Compute::V1::ReportHostAsFaultyInstanceRequest.new
+              #
+              #   # Call the report_host_as_faulty method.
+              #   result = client.report_host_as_faulty request
+              #
+              #   # The returned object is of type Google::Cloud::Compute::V1::Operation.
+              #   p result
+              #
+              def report_host_as_faulty request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Compute::V1::ReportHostAsFaultyInstanceRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.report_host_as_faulty.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::Compute::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.report_host_as_faulty.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.report_host_as_faulty.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @instances_stub.report_host_as_faulty request, options do |result, response|
                   result = ::Google::Cloud::Compute::V1::ZoneOperations::Rest::NonstandardLro.create_operation(
                     operation: result,
                     client: zone_operations,
@@ -5046,6 +5144,11 @@ module Google
                   #
                   attr_reader :remove_resource_policies
                   ##
+                  # RPC-specific configuration for `report_host_as_faulty`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :report_host_as_faulty
+                  ##
                   # RPC-specific configuration for `reset`
                   # @return [::Gapic::Config::Method]
                   #
@@ -5228,6 +5331,8 @@ module Google
                     @perform_maintenance = ::Gapic::Config::Method.new perform_maintenance_config
                     remove_resource_policies_config = parent_rpcs.remove_resource_policies if parent_rpcs.respond_to? :remove_resource_policies
                     @remove_resource_policies = ::Gapic::Config::Method.new remove_resource_policies_config
+                    report_host_as_faulty_config = parent_rpcs.report_host_as_faulty if parent_rpcs.respond_to? :report_host_as_faulty
+                    @report_host_as_faulty = ::Gapic::Config::Method.new report_host_as_faulty_config
                     reset_config = parent_rpcs.reset if parent_rpcs.respond_to? :reset
                     @reset = ::Gapic::Config::Method.new reset_config
                     resume_config = parent_rpcs.resume if parent_rpcs.respond_to? :resume
