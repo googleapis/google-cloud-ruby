@@ -50,6 +50,7 @@
     "proto_docs/google/shopping/merchant/datasources/v1beta/datasourcetypes.rb",
     "proto_docs/google/shopping/merchant/datasources/v1beta/fileinputs.rb",
     "proto_docs/google/shopping/merchant/datasources/v1beta/fileuploads.rb",
+    "proto_docs/google/shopping/type/types.rb",
     "proto_docs/google/type/dayofweek.rb",
     "proto_docs/google/type/timeofday.rb",
     "snippets/Gemfile",
