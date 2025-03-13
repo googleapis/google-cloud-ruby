@@ -692,6 +692,86 @@
       ]
     },
     {
+      "region_tag": "merchantapi_v1beta_generated_AutomaticImprovementsService_GetAutomaticImprovements_sync",
+      "title": "Snippet for the get_automatic_improvements call in the AutomaticImprovementsService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Shopping::Merchant::Accounts::V1beta::AutomaticImprovementsService::Client#get_automatic_improvements.",
+      "file": "automatic_improvements_service/get_automatic_improvements.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_automatic_improvements",
+        "full_name": "::Google::Shopping::Merchant::Accounts::V1beta::AutomaticImprovementsService::Client#get_automatic_improvements",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Shopping::Merchant::Accounts::V1beta::GetAutomaticImprovementsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Shopping::Merchant::Accounts::V1beta::AutomaticImprovements",
+        "client": {
+          "short_name": "AutomaticImprovementsService::Client",
+          "full_name": "::Google::Shopping::Merchant::Accounts::V1beta::AutomaticImprovementsService::Client"
+        },
+        "method": {
+          "short_name": "GetAutomaticImprovements",
+          "full_name": "google.shopping.merchant.accounts.v1beta.AutomaticImprovementsService.GetAutomaticImprovements",
+          "service": {
+            "short_name": "AutomaticImprovementsService",
+            "full_name": "google.shopping.merchant.accounts.v1beta.AutomaticImprovementsService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "merchantapi_v1beta_generated_AutomaticImprovementsService_UpdateAutomaticImprovements_sync",
+      "title": "Snippet for the update_automatic_improvements call in the AutomaticImprovementsService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Shopping::Merchant::Accounts::V1beta::AutomaticImprovementsService::Client#update_automatic_improvements.",
+      "file": "automatic_improvements_service/update_automatic_improvements.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_automatic_improvements",
+        "full_name": "::Google::Shopping::Merchant::Accounts::V1beta::AutomaticImprovementsService::Client#update_automatic_improvements",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Shopping::Merchant::Accounts::V1beta::UpdateAutomaticImprovementsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Shopping::Merchant::Accounts::V1beta::AutomaticImprovements",
+        "client": {
+          "short_name": "AutomaticImprovementsService::Client",
+          "full_name": "::Google::Shopping::Merchant::Accounts::V1beta::AutomaticImprovementsService::Client"
+        },
+        "method": {
+          "short_name": "UpdateAutomaticImprovements",
+          "full_name": "google.shopping.merchant.accounts.v1beta.AutomaticImprovementsService.UpdateAutomaticImprovements",
+          "service": {
+            "short_name": "AutomaticImprovementsService",
+            "full_name": "google.shopping.merchant.accounts.v1beta.AutomaticImprovementsService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
       "region_tag": "merchantapi_v1beta_generated_BusinessIdentityService_GetBusinessIdentity_sync",
       "title": "Snippet for the get_business_identity call in the BusinessIdentityService service",
       "description": "This is an auto-generated example demonstrating basic usage of Google::Shopping::Merchant::Accounts::V1beta::BusinessIdentityService::Client#get_business_identity.",
