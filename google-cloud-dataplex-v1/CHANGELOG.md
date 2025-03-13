@@ -1,5 +1,14 @@
 # Changelog
 
+### 2.2.0 (2025-03-13)
+
+#### Features
+
+* Added custom BigQuery dataset location support in Auto Discovery 
+#### Documentation
+
+* Deprecated the DataTaxonomyService 
+
 ### 2.1.0 (2025-02-07)
 
 #### Features
