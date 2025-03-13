@@ -410,6 +410,7 @@ module Google
                         if_metageneration_not_match: nil,
                         user_project: nil,
                         upload_id: nil,
+                        delete_upload: nil,
                         options: {}
           params = {
             cache_control: cache_control,
@@ -434,7 +435,8 @@ module Google
           else
             options = key_options(key).merge options
           end
-
+          options.merge! upload_id: upload_id if upload_id
+          options.merge! delete_upload: delete_upload if delete_upload && upload_id
           execute do
             service.insert_object bucket_name,
                                   file_obj,
@@ -449,7 +451,6 @@ module Google
                                   if_metageneration_not_match: if_metageneration_not_match,
                                   kms_key_name: kms_key,
                                   user_project: user_project(user_project),
-                                  upload_id: upload_id,
                                   options: options
           end
         end
@@ -695,12 +696,6 @@ module Google
                                   if_metageneration_not_match: if_metageneration_not_match,
                                   user_project: user_project(user_project),
                                   options: options
-          end
-        end
-
-        def delete_ongoing_resumable_upload bucket_name, source, upload_id
-          execute do
-            service.delete_ongoing_resumable_upload bucket_name, source, upload_id
           end
         end
 
