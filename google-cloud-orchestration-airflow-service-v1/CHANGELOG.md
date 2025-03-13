@@ -1,5 +1,11 @@
 # Changelog
 
+### 1.3.1 (2025-03-13)
+
+#### Documentation
+
+* Fixed Composer 3 image version format ([#29331](https://github.com/googleapis/google-cloud-ruby/issues/29331)) 
+
 ### 1.3.0 (2025-01-28)
 
 #### Features
