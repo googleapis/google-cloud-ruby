@@ -1,5 +1,11 @@
 # Changelog
 
+### 1.0.1 (2025-03-13)
+
+#### Bug Fixes
+
+* Fixes to HTTP transcoding for consumer group calls ([#29330](https://github.com/googleapis/google-cloud-ruby/issues/29330)) 
+
 ### 1.0.0 (2025-02-07)
 
 ### ⚠ BREAKING CHANGES
