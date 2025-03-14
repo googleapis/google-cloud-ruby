@@ -1,5 +1,11 @@
 # Release History
 
+### 2.1.0 (2025-03-14)
+
+#### Features
+
+* Documented the service as deprecated ([#29352](https://github.com/googleapis/google-cloud-ruby/issues/29352)) 
+
 ### 2.0.0 (2025-02-07)
 
 ### ⚠ BREAKING CHANGES
