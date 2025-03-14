@@ -7,7 +7,7 @@
     "language": "ruby",
     "name": "cloudresourcemanager",
     "name_pretty": "Cloud Resource Manager API",
-    "release_level": "unreleased",
+    "release_level": "stable",
     "repo": "googleapis/google-cloud-ruby",
     "requires_billing": true,
     "ruby-cloud-description": "Creates, reads, and updates metadata for Google Cloud Platform resource containers.",
