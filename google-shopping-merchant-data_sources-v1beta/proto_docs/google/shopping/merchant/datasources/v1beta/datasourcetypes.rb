@@ -25,7 +25,7 @@ module Google
           # The primary data source for local and online products.
           # @!attribute [rw] channel
           #   @return [::Google::Shopping::Merchant::DataSources::V1beta::PrimaryProductDataSource::Channel]
-          #     Required. Immutable. Specifies the type of data source channel.
+          #     Optional. Immutable. Specifies the type of data source channel.
           # @!attribute [rw] feed_label
           #   @return [::String]
           #     Optional. Immutable. The feed label that is specified on the data source
@@ -64,6 +64,25 @@ module Google
           #   @return [::Google::Shopping::Merchant::DataSources::V1beta::PrimaryProductDataSource::DefaultRule]
           #     Optional. Default rule management of the data source. If set, the linked
           #     data sources will be replaced.
+          # @!attribute [rw] destinations
+          #   @return [::Array<::Google::Shopping::Merchant::DataSources::V1beta::PrimaryProductDataSource::Destination>]
+          #     Optional. A list of destinations describing where products of the data
+          #     source can be shown.
+          #
+          #     When retrieving the data source, the list contains all the destinations
+          #     that can be used for the data source, including the ones that are disabled
+          #     for the data source but enabled for the account.
+          #
+          #     Only destinations that are enabled on the account, for example through
+          #     program participation, can be enabled on the data source.
+          #
+          #     If unset, during creation, the destinations will be inherited based on the
+          #     account level program participation.
+          #
+          #     If set, during creation or update, the data source will be set only for the
+          #     specified destinations.
+          #
+          #     Updating this field requires at least one destination.
           class PrimaryProductDataSource
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -94,6 +113,32 @@ module Google
             class DefaultRule
               include ::Google::Protobuf::MessageExts
               extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
+
+            # Destinations also known as [Marketing
+            # methods](https://support.google.com/merchants/answer/15130232) selections.
+            # @!attribute [rw] destination
+            #   @return [::Google::Shopping::Type::Destination::DestinationEnum]
+            #     [Marketing methods](https://support.google.com/merchants/answer/15130232)
+            #     (also known as destination) selections.
+            # @!attribute [rw] state
+            #   @return [::Google::Shopping::Merchant::DataSources::V1beta::PrimaryProductDataSource::Destination::State]
+            #     The state of the destination.
+            class Destination
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+
+              # The state of the destination.
+              module State
+                # Not specified.
+                STATE_UNSPECIFIED = 0
+
+                # Indicates that the destination is enabled.
+                ENABLED = 1
+
+                # Indicates that the destination is disabled.
+                DISABLED = 2
+              end
             end
 
             # Data Source Channel.
