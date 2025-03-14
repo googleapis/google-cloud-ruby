@@ -96,7 +96,7 @@ module Google
         ##
         # This logger does not use a formatter, but it provides a default
         # Logger::Formatter for API compatibility with the standard Logger.
-        attr_accessor :formatter
+        attr_reader :formatter
 
         ##
         # This logger does not use a formatter, but it implements this
@@ -107,6 +107,11 @@ module Google
         # The project ID this logger is sending data to. If set, this value is
         # used to set the trace field of log entries.
         attr_accessor :project
+
+        ##
+
+        attr_reader :broadcasts
+
 
         ##
         # This logger treats progname as an alias for log_name.
@@ -178,10 +183,36 @@ module Google
           @formatter = ::Logger::Formatter.new
           @datetime_format = ""
           @silencer = true
+          @broadcasts = []
 
           # The writer is usually a Project or AsyncWriter.
           logging = @writer.respond_to?(:logging) ? @writer.logging : @writer
           @project = logging.project if logging.respond_to? :project
+        end
+
+        # Add logger(s) to the broadcast.
+        #
+        #   broadcast_logger = ActiveSupport::BroadcastLogger.new
+        #   broadcast_logger.broadcast_to(Logger.new(STDOUT), Logger.new(STDERR))
+        def broadcast_to(*loggers)
+          @broadcasts.concat loggers
+        end
+
+        # Remove a logger from the broadcast. When a logger is removed, messages sent to
+        # the broadcast will no longer be written to its sink.
+        #
+        #   sink = Logger.new(STDOUT)
+        #   broadcast_logger = ActiveSupport::BroadcastLogger.new
+        #
+        #   broadcast_logger.stop_broadcasting_to(sink)
+        def stop_broadcasting_to logger
+          @broadcasts.delete logger
+        end
+
+        def formatter= formatter
+          dispatch { |logger| logger.formatter = formatter }
+
+          @formatter = formatter
         end
 
         ##
@@ -307,7 +338,7 @@ module Google
         #   to create potentially expensive logging messages that are only
         #   called when the logger is configured to show them.
         #
-        def add severity, message = nil, progname = nil
+        def add severity, message = nil, progname = nil, &block
           return if @closed
 
           severity = derive_severity(severity) || ::Logger::UNKNOWN
@@ -317,6 +348,7 @@ module Google
           # TODO: Figure out what to do with the progname
 
           write_entry severity, message unless @closed
+          dispatch { |logger| logger.add(severity, message, progname, &block) }
           true
         end
         alias log add
@@ -335,6 +367,8 @@ module Google
         # Returns `true` if the current severity level allows for sending
         # `DEBUG` messages.
         def debug?
+          @broadcasts.any?(&:debug?)
+
           @level <= ::Logger::DEBUG
         end
 
@@ -342,6 +376,7 @@ module Google
         # Returns `true` if the current severity level allows for sending `INFO`
         # messages.
         def info?
+          @broadcasts.any?(&:info?)
           @level <= ::Logger::INFO
         end
 
@@ -349,6 +384,7 @@ module Google
         # Returns `true` if the current severity level allows for sending `WARN`
         # messages.
         def warn?
+          @broadcasts.any?(&:warn?)
           @level <= ::Logger::WARN
         end
 
@@ -356,6 +392,7 @@ module Google
         # Returns `true` if the current severity level allows for sending
         # `ERROR` messages.
         def error?
+          @broadcasts.any?(&:error?)
           @level <= ::Logger::ERROR
         end
 
@@ -363,6 +400,7 @@ module Google
         # Returns `true` if the current severity level allows for sending
         # `FATAL` messages.
         def fatal?
+          @broadcasts.any?(&:fatal?)
           @level <= ::Logger::FATAL
         end
 
@@ -370,6 +408,7 @@ module Google
         # Returns `true` if the current severity level allows for sending
         # `UNKNOWN` messages.
         def unknown?
+          @broadcasts.any?(&:unknown?)
           @level <= ::Logger::UNKNOWN
         end
 
@@ -398,10 +437,21 @@ module Google
           if new_level.nil?
             raise ArgumentError, "invalid log level: #{severity}"
           end
+          dispatch { |logger| logger.level = new_level }
           @level = new_level
         end
         alias sev_threshold= level=
-        alias local_level= level=
+
+        def local_level= severity
+          new_level = derive_severity severity
+          if new_level.nil?
+            raise ArgumentError, "invalid log level: #{severity}"
+          end
+          dispatch do |logger|
+            logger.local_level = new_level if logger.respond_to? :local_level=
+          end
+          @level = new_level
+        end
 
         ##
         # Close the logging "device". This effectively disables logging from
@@ -409,6 +459,8 @@ module Google
         # logger may be re-enabled by calling #reopen.
         #
         def close
+          dispatch(&:close)
+
           @closed = true
           self
         end
@@ -600,6 +652,11 @@ module Google
         end
 
         private
+
+        def dispatch &block
+          @broadcasts.each { |logger| block.call logger }
+          true
+        end
 
         ##
         # @private Compute values for labels
