@@ -1,5 +1,11 @@
 # Release History
 
+### 2.19.0 (2025-03-14)
+
+#### Features
+
+* Update the API to revision 20250302, including the report_host_as_faulty call ([#29350](https://github.com/googleapis/google-cloud-ruby/issues/29350)) 
+
 ### 2.18.0 (2025-02-25)
 
 #### Features
