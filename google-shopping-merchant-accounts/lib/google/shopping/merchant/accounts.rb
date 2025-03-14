@@ -384,6 +384,78 @@ module Google
         end
 
         ##
+        # Create a new client object for AutomaticImprovementsService.
+        #
+        # By default, this returns an instance of
+        # [Google::Shopping::Merchant::Accounts::V1beta::AutomaticImprovementsService::Client](https://rubydoc.info/gems/google-shopping-merchant-accounts-v1beta/Google/Shopping/Merchant/Accounts/V1beta/AutomaticImprovementsService/Client)
+        # for a gRPC client for version V1beta of the API.
+        # However, you can specify a different API version by passing it in the
+        # `version` parameter. If the AutomaticImprovementsService service is
+        # supported by that API version, and the corresponding gem is available, the
+        # appropriate versioned client will be returned.
+        # You can also specify a different transport by passing `:rest` or `:grpc` in
+        # the `transport` parameter.
+        #
+        # Raises an exception if the currently installed versioned client gem for the
+        # given API version does not support the given transport of the AutomaticImprovementsService service.
+        # You can determine whether the method will succeed by calling
+        # {Google::Shopping::Merchant::Accounts.automatic_improvements_service_available?}.
+        #
+        # ## About AutomaticImprovementsService
+        #
+        # Service to manage the automatic improvements of an account. The automatic
+        # improvements of the account can be used to automatically update products,
+        # improve images and shipping.
+        #
+        # @param version [::String, ::Symbol] The API version to connect to. Optional.
+        #   Defaults to `:v1beta`.
+        # @param transport [:grpc, :rest] The transport to use. Defaults to `:grpc`.
+        # @return [::Object] A client object for the specified version.
+        #
+        def self.automatic_improvements_service version: :v1beta, transport: :grpc, &block
+          require "google/shopping/merchant/accounts/#{version.to_s.downcase}"
+
+          package_name = Google::Shopping::Merchant::Accounts
+                         .constants
+                         .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                         .first
+          service_module = Google::Shopping::Merchant::Accounts.const_get(package_name).const_get(:AutomaticImprovementsService)
+          service_module = service_module.const_get(:Rest) if transport == :rest
+          service_module.const_get(:Client).new(&block)
+        end
+
+        ##
+        # Determines whether the AutomaticImprovementsService service is supported by the current client.
+        # If true, you can retrieve a client object by calling {Google::Shopping::Merchant::Accounts.automatic_improvements_service}.
+        # If false, that method will raise an exception. This could happen if the given
+        # API version does not exist or does not support the AutomaticImprovementsService service,
+        # or if the versioned client gem needs an update to support the AutomaticImprovementsService service.
+        #
+        # @param version [::String, ::Symbol] The API version to connect to. Optional.
+        #   Defaults to `:v1beta`.
+        # @param transport [:grpc, :rest] The transport to use. Defaults to `:grpc`.
+        # @return [boolean] Whether the service is available.
+        #
+        def self.automatic_improvements_service_available? version: :v1beta, transport: :grpc
+          require "google/shopping/merchant/accounts/#{version.to_s.downcase}"
+          package_name = Google::Shopping::Merchant::Accounts
+                         .constants
+                         .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                         .first
+          return false unless package_name
+          service_module = Google::Shopping::Merchant::Accounts.const_get package_name
+          return false unless service_module.const_defined? :AutomaticImprovementsService
+          service_module = service_module.const_get :AutomaticImprovementsService
+          if transport == :rest
+            return false unless service_module.const_defined? :Rest
+            service_module = service_module.const_get :Rest
+          end
+          service_module.const_defined? :Client
+        rescue ::LoadError
+          false
+        end
+
+        ##
         # Create a new client object for BusinessIdentityService.
         #
         # By default, this returns an instance of
