@@ -220,8 +220,7 @@ module Google
         # @!attribute [rw] patching_mode
         #   @return [::Google::Cloud::OracleDatabase::V1::MaintenanceWindow::PatchingMode]
         #     Optional. Cloud CloudExadataInfrastructure node patching method, either
-        #     "ROLLING"
-        #      or "NONROLLING". Default value is ROLLING.
+        #     "ROLLING" or "NONROLLING". Default value is ROLLING.
         # @!attribute [rw] custom_action_timeout_mins
         #   @return [::Integer]
         #     Optional. Determines the amount of time the system will wait before the
