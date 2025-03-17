@@ -366,6 +366,9 @@ module Google
           #     (https://support.google.com/merchants/answer/13949249) projects,
           #     ensuring that discounts on merchants' offers do not fall below this value,
           #     thereby preserving the offer's value and profitability.
+          # @!attribute [rw] sustainability_incentives
+          #   @return [::Array<::Google::Shopping::Merchant::Products::V1beta::ProductSustainabilityIncentive>]
+          #     The list of sustainability incentive programs.
           class Attributes
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -890,6 +893,43 @@ module Google
           class CloudExportAdditionalProperties
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Information regarding sustainability-related incentive programs such as
+          # rebates or tax relief.
+          # @!attribute [rw] amount
+          #   @return [::Google::Shopping::Type::Price]
+          #     The fixed amount of the incentive.
+          #
+          #     Note: The following fields are mutually exclusive: `amount`, `percentage`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+          # @!attribute [rw] percentage
+          #   @return [::Float]
+          #     The percentage of the sale price that the incentive is applied to.
+          #
+          #     Note: The following fields are mutually exclusive: `percentage`, `amount`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+          # @!attribute [rw] type
+          #   @return [::Google::Shopping::Merchant::Products::V1beta::ProductSustainabilityIncentive::Type]
+          #     Sustainability incentive program.
+          class ProductSustainabilityIncentive
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+
+            # Types of supported sustainability incentive programs.
+            module Type
+              # Unspecified or unknown sustainability incentive type.
+              TYPE_UNSPECIFIED = 0
+
+              # Program offering tax liability reductions for electric vehicles and, in
+              # some countries, plug-in hybrids. These reductions can be based on a
+              # specific amount or a percentage of the sale price.
+              EV_TAX_CREDIT = 1
+
+              # A subsidy program, often called an environmental bonus, provides a
+              # purchase grant for electric vehicles and, in some countries, plug-in
+              # hybrids. The grant amount may be a fixed sum or a percentage of the sale
+              # price.
+              EV_PRICE_DISCOUNT = 2
+            end
           end
 
           # The subscription period of the product.

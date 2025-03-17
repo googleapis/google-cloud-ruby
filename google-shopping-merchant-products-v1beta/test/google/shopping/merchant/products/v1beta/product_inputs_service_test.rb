@@ -126,6 +126,68 @@ class ::Google::Shopping::Merchant::Products::V1beta::ProductInputsService::Clie
     end
   end
 
+  def test_update_product_input
+    # Create GRPC objects.
+    grpc_response = ::Google::Shopping::Merchant::Products::V1beta::ProductInput.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    product_input = {}
+    update_mask = {}
+    data_source = "hello world"
+
+    update_product_input_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :update_product_input, name
+      assert_kind_of ::Google::Shopping::Merchant::Products::V1beta::UpdateProductInputRequest, request
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Shopping::Merchant::Products::V1beta::ProductInput), request["product_input"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request["update_mask"]
+      assert_equal "hello world", request["data_source"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, update_product_input_client_stub do
+      # Create client
+      client = ::Google::Shopping::Merchant::Products::V1beta::ProductInputsService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.update_product_input({ product_input: product_input, update_mask: update_mask, data_source: data_source }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.update_product_input product_input: product_input, update_mask: update_mask, data_source: data_source do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.update_product_input ::Google::Shopping::Merchant::Products::V1beta::UpdateProductInputRequest.new(product_input: product_input, update_mask: update_mask, data_source: data_source) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.update_product_input({ product_input: product_input, update_mask: update_mask, data_source: data_source }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.update_product_input(::Google::Shopping::Merchant::Products::V1beta::UpdateProductInputRequest.new(product_input: product_input, update_mask: update_mask, data_source: data_source), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, update_product_input_client_stub.call_rpc_count
+    end
+  end
+
   def test_delete_product_input
     # Create GRPC objects.
     grpc_response = ::Google::Protobuf::Empty.new

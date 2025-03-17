@@ -221,8 +221,11 @@ module Google
               #   @param data_source [::String]
               #     Required. The primary or supplemental product data source name. If the
               #     product already exists and data source provided is different, then the
-              #     product will be moved to a new data source. Format:
-              #     `accounts/{account}/dataSources/{datasource}`.
+              #     product will be moved to a new data source.
+              #
+              #     Only API data sources are supported.
+              #
+              #     Format: `accounts/{account}/dataSources/{datasource}`.
               #
               # @yield [response, operation] Access the result along with the RPC operation
               # @yieldparam response [::Google::Shopping::Merchant::Products::V1beta::ProductInput]
@@ -282,6 +285,118 @@ module Google
                                        retry_policy: @config.retry_policy
 
                 @product_inputs_service_stub.call_rpc :insert_product_input, request, options: options do |response, operation|
+                  yield response, operation if block_given?
+                end
+              rescue ::GRPC::BadStatus => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Updates the existing product input in your Merchant Center account.
+              #
+              # After inserting, updating, or deleting a product input, it may take several
+              # minutes before the processed product can be retrieved.
+              #
+              # @overload update_product_input(request, options = nil)
+              #   Pass arguments to `update_product_input` via a request object, either of type
+              #   {::Google::Shopping::Merchant::Products::V1beta::UpdateProductInputRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Shopping::Merchant::Products::V1beta::UpdateProductInputRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+              #
+              # @overload update_product_input(product_input: nil, update_mask: nil, data_source: nil)
+              #   Pass arguments to `update_product_input` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param product_input [::Google::Shopping::Merchant::Products::V1beta::ProductInput, ::Hash]
+              #     Required. The product input resource to update. Information you submit will
+              #     be applied to the processed product as well.
+              #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
+              #     Optional. The list of product attributes to be updated.
+              #
+              #     If the update mask is omitted, then it is treated as implied field mask
+              #     equivalent to all fields that are populated (have a non-empty value).
+              #
+              #     Attributes specified in the update mask without a value specified in the
+              #     body will be deleted from the product.
+              #
+              #     Update mask can only be specified for top level fields in
+              #     attributes and custom attributes.
+              #
+              #     To specify the update mask for custom attributes you need to add the
+              #     `custom_attribute.` prefix.
+              #
+              #     Providing special "*" value for full product replacement is not supported.
+              #   @param data_source [::String]
+              #     Required. The primary or supplemental product data source where
+              #     `data_source` name identifies the product input to be updated.
+              #
+              #     Only API data sources are supported.
+              #
+              #     Format: `accounts/{account}/dataSources/{datasource}`.
+              #
+              # @yield [response, operation] Access the result along with the RPC operation
+              # @yieldparam response [::Google::Shopping::Merchant::Products::V1beta::ProductInput]
+              # @yieldparam operation [::GRPC::ActiveCall::Operation]
+              #
+              # @return [::Google::Shopping::Merchant::Products::V1beta::ProductInput]
+              #
+              # @raise [::Google::Cloud::Error] if the RPC is aborted.
+              #
+              # @example Basic example
+              #   require "google/shopping/merchant/products/v1beta"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Shopping::Merchant::Products::V1beta::ProductInputsService::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Shopping::Merchant::Products::V1beta::UpdateProductInputRequest.new
+              #
+              #   # Call the update_product_input method.
+              #   result = client.update_product_input request
+              #
+              #   # The returned object is of type Google::Shopping::Merchant::Products::V1beta::ProductInput.
+              #   p result
+              #
+              def update_product_input request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Shopping::Merchant::Products::V1beta::UpdateProductInputRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                metadata = @config.rpcs.update_product_input.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Shopping::Merchant::Products::V1beta::VERSION
+                metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                header_params = {}
+                if request.product_input&.name
+                  header_params["product_input.name"] = request.product_input.name
+                end
+
+                request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+                metadata[:"x-goog-request-params"] ||= request_params_header
+
+                options.apply_defaults timeout:      @config.rpcs.update_product_input.timeout,
+                                       metadata:     metadata,
+                                       retry_policy: @config.rpcs.update_product_input.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @product_inputs_service_stub.call_rpc :update_product_input, request, options: options do |response, operation|
                   yield response, operation if block_given?
                 end
               rescue ::GRPC::BadStatus => e
@@ -557,6 +672,11 @@ module Google
                   #
                   attr_reader :insert_product_input
                   ##
+                  # RPC-specific configuration for `update_product_input`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :update_product_input
+                  ##
                   # RPC-specific configuration for `delete_product_input`
                   # @return [::Gapic::Config::Method]
                   #
@@ -566,6 +686,8 @@ module Google
                   def initialize parent_rpcs = nil
                     insert_product_input_config = parent_rpcs.insert_product_input if parent_rpcs.respond_to? :insert_product_input
                     @insert_product_input = ::Gapic::Config::Method.new insert_product_input_config
+                    update_product_input_config = parent_rpcs.update_product_input if parent_rpcs.respond_to? :update_product_input
+                    @update_product_input = ::Gapic::Config::Method.new update_product_input_config
                     delete_product_input_config = parent_rpcs.delete_product_input if parent_rpcs.respond_to? :delete_product_input
                     @delete_product_input = ::Gapic::Config::Method.new delete_product_input_config
 
