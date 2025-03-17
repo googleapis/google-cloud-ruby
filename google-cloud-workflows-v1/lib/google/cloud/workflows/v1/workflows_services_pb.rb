@@ -54,6 +54,8 @@ module Google
             # successful update operation. In that case, the new revision is used
             # in new workflow executions.
             rpc :UpdateWorkflow, ::Google::Cloud::Workflows::V1::UpdateWorkflowRequest, ::Google::Longrunning::Operation
+            # Lists revisions for a given workflow.
+            rpc :ListWorkflowRevisions, ::Google::Cloud::Workflows::V1::ListWorkflowRevisionsRequest, ::Google::Cloud::Workflows::V1::ListWorkflowRevisionsResponse
           end
 
           Stub = Service.rpc_stub_class

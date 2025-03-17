@@ -25,11 +25,13 @@ module Google
         # @!attribute [rw] name
         #   @return [::String]
         #     The resource name of the workflow.
-        #     Format: projects/\\{project}/locations/\\{location}/workflows/\\{workflow}
+        #     Format: projects/\\{project}/locations/\\{location}/workflows/\\{workflow}.
+        #     This is a workflow-wide field and is not tied to a specific revision.
         # @!attribute [rw] description
         #   @return [::String]
         #     Description of the workflow provided by the user.
-        #     Must be at most 1000 unicode characters long.
+        #     Must be at most 1000 Unicode characters long.
+        #     This is a workflow-wide field and is not tied to a specific revision.
         # @!attribute [r] state
         #   @return [::Google::Cloud::Workflows::V1::Workflow::State]
         #     Output only. State of the workflow deployment.
@@ -49,9 +51,11 @@ module Google
         # @!attribute [r] create_time
         #   @return [::Google::Protobuf::Timestamp]
         #     Output only. The timestamp for when the workflow was created.
+        #     This is a workflow-wide field and is not tied to a specific revision.
         # @!attribute [r] update_time
         #   @return [::Google::Protobuf::Timestamp]
         #     Output only. The timestamp for when the workflow was last updated.
+        #     This is a workflow-wide field and is not tied to a specific revision.
         # @!attribute [r] revision_create_time
         #   @return [::Google::Protobuf::Timestamp]
         #     Output only. The timestamp for the latest revision of the workflow's
@@ -63,6 +67,7 @@ module Google
         #     than 63 characters and can only contain lowercase letters, numeric
         #     characters, underscores, and dashes. Label keys must start with a letter.
         #     International characters are allowed.
+        #     This is a workflow-wide field and is not tied to a specific revision.
         # @!attribute [rw] service_account
         #   @return [::String]
         #     The service account associated with the latest workflow version.
@@ -108,8 +113,29 @@ module Google
         #   @return [::Google::Protobuf::Map{::String => ::String}]
         #     Optional. User-defined environment variables associated with this workflow
         #     revision. This map has a maximum length of 20. Each string can take up to
-        #     40KiB. Keys cannot be empty strings and cannot start with “GOOGLE” or
-        #     “WORKFLOWS".
+        #     4KiB. Keys cannot be empty strings and cannot start with "GOOGLE" or
+        #     "WORKFLOWS".
+        # @!attribute [rw] execution_history_level
+        #   @return [::Google::Cloud::Workflows::V1::ExecutionHistoryLevel]
+        #     Optional. Describes the execution history level to apply to this workflow.
+        # @!attribute [r] all_kms_keys
+        #   @return [::Array<::String>]
+        #     Output only. A list of all KMS crypto keys used to encrypt or decrypt the
+        #     data associated with the workflow.
+        # @!attribute [r] all_kms_keys_versions
+        #   @return [::Array<::String>]
+        #     Output only. A list of all KMS crypto key versions used to encrypt or
+        #     decrypt the data associated with the workflow.
+        # @!attribute [r] crypto_key_version
+        #   @return [::String]
+        #     Output only. The resource name of a KMS crypto key version used to encrypt
+        #     or decrypt the data associated with the workflow.
+        #
+        #     Format:
+        #     projects/\\{project}/locations/\\{location}/keyRings/\\{keyRing}/cryptoKeys/\\{cryptoKey}/cryptoKeyVersions/\\{cryptoKeyVersion}
+        # @!attribute [rw] tags
+        #   @return [::Google::Protobuf::Map{::String => ::String}]
+        #     Optional. Input only. Immutable. Tags associated with this workflow.
         class Workflow
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -149,6 +175,15 @@ module Google
           # @!attribute [rw] value
           #   @return [::String]
           class UserEnvVarsEntry
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # @!attribute [rw] key
+          #   @return [::String]
+          # @!attribute [rw] value
+          #   @return [::String]
+          class TagsEntry
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
@@ -206,6 +241,16 @@ module Google
         # @!attribute [rw] filter
         #   @return [::String]
         #     Filter to restrict results to specific workflows.
+        #     For details, see <a href="https://google.aip.dev/160"
+        #     class="external">AIP-160</a>.
+        #
+        #     For example, if you are using the Google APIs Explorer:
+        #
+        #     `state="SUCCEEDED"`
+        #
+        #     or
+        #
+        #     `createTime>"2023-08-01" AND state="FAILED"`
         # @!attribute [rw] order_by
         #   @return [::String]
         #     Comma-separated list of fields that specify the order of the results.
@@ -324,6 +369,54 @@ module Google
         class OperationMetadata
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request for the
+        # {::Google::Cloud::Workflows::V1::Workflows::Client#list_workflow_revisions ListWorkflowRevisions}
+        # method.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. Workflow for which the revisions should be listed.
+        #     Format: projects/\\{project}/locations/\\{location}/workflows/\\{workflow}
+        # @!attribute [rw] page_size
+        #   @return [::Integer]
+        #     The maximum number of revisions to return per page. If a value is not
+        #     specified, a default value of 20 is used. The maximum permitted value is
+        #     100. Values greater than 100 are coerced down to 100.
+        # @!attribute [rw] page_token
+        #   @return [::String]
+        #     The page token, received from a previous ListWorkflowRevisions call.
+        #     Provide this to retrieve the subsequent page.
+        class ListWorkflowRevisionsRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Response for the
+        # {::Google::Cloud::Workflows::V1::Workflows::Client#list_workflow_revisions ListWorkflowRevisions}
+        # method.
+        # @!attribute [rw] workflows
+        #   @return [::Array<::Google::Cloud::Workflows::V1::Workflow>]
+        #     The revisions of the workflow, ordered in reverse chronological order.
+        # @!attribute [rw] next_page_token
+        #   @return [::String]
+        #     A token, which can be sent as `page_token` to retrieve the next page.
+        #     If this field is omitted, there are no subsequent pages.
+        class ListWorkflowRevisionsResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Define possible options for enabling the execution history level.
+        module ExecutionHistoryLevel
+          # The default/unset value.
+          EXECUTION_HISTORY_LEVEL_UNSPECIFIED = 0
+
+          # Enable execution history basic feature.
+          EXECUTION_HISTORY_BASIC = 1
+
+          # Enable execution history detailed feature.
+          EXECUTION_HISTORY_DETAILED = 2
         end
       end
     end
