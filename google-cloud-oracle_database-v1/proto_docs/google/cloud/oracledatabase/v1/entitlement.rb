@@ -55,6 +55,9 @@ module Google
 
             # Account is suspended.
             ACCOUNT_SUSPENDED = 4
+
+            # Entitlement is not approved in private marketplace.
+            NOT_APPROVED_IN_PRIVATE_MARKETPLACE = 5
           end
         end
 
