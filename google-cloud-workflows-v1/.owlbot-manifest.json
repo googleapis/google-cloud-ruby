@@ -47,6 +47,7 @@
     "snippets/workflows/create_workflow.rb",
     "snippets/workflows/delete_workflow.rb",
     "snippets/workflows/get_workflow.rb",
+    "snippets/workflows/list_workflow_revisions.rb",
     "snippets/workflows/list_workflows.rb",
     "snippets/workflows/update_workflow.rb",
     "test/google/cloud/workflows/v1/workflows_operations_test.rb",
