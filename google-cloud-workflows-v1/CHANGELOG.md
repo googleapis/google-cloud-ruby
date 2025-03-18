@@ -1,5 +1,14 @@
 # Changelog
 
+### 2.1.0 (2025-03-18)
+
+#### Features
+
+* Support for the list_workflow_revisions RPC 
+* Support for Workflow execution history level 
+* Workflows now include arbitrary tags 
+* Workflows now report the KMS keys used to encrypt their data 
+
 ### 2.0.0 (2025-02-07)
 
 ### ⚠ BREAKING CHANGES
