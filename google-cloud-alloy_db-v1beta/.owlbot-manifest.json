@@ -68,6 +68,7 @@
     "snippets/alloy_db_admin/delete_instance.rb",
     "snippets/alloy_db_admin/delete_user.rb",
     "snippets/alloy_db_admin/execute_sql.rb",
+    "snippets/alloy_db_admin/export_cluster.rb",
     "snippets/alloy_db_admin/failover_instance.rb",
     "snippets/alloy_db_admin/generate_client_certificate.rb",
     "snippets/alloy_db_admin/get_backup.rb",
