@@ -1,5 +1,11 @@
 # Changelog
 
+### 0.5.0 (2025-03-18)
+
+#### Features
+
+* Support for data source product destinations ([#29348](https://github.com/googleapis/google-cloud-ruby/issues/29348)) 
+
 ### 0.4.0 (2025-01-29)
 
 #### Features
