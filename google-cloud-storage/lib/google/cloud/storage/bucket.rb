@@ -3144,6 +3144,43 @@ module Google
         alias refresh! reload!
 
         ##
+        # Moves object from source to destination path within bucket
+        # This Operation is being performed at server side
+        def move_file source_object,
+                      destination_object,
+                      if_generation_match: nil,
+                      if_generation_not_match: nil,
+                      if_metageneration_match: nil,
+                      if_metageneration_not_match: nil,
+                      if_source_generation_match: nil,
+                      if_source_generation_not_match: nil,
+                      if_source_metageneration_match: nil,
+                      if_source_metageneration_not_match: nil,
+                      user_project: nil,
+                      fields: nil,
+                      quota_user: nil,
+                      user_ip: nil,
+                      options: {}
+          ensure_service!
+          gapi = service.move_file name,
+                                   source_object,
+                                   destination_object,
+                                   if_generation_match: if_generation_match,
+                                   if_generation_not_match: if_generation_not_match,
+                                   if_metageneration_match: if_metageneration_match,
+                                   if_metageneration_not_match: if_metageneration_not_match,
+                                   if_source_generation_match: if_source_generation_match,
+                                   if_source_generation_not_match: if_source_generation_not_match,
+                                   if_source_metageneration_match: if_source_metageneration_match,
+                                   if_source_metageneration_not_match: if_source_metageneration_not_match,
+                                   user_project: user_project,
+                                   fields: fields,
+                                   quota_user: quota_user,
+                                   user_ip: user_ip,
+                                   options: options
+        end
+
+        ##
         # Determines whether the bucket exists in the Storage service.
         #
         # @return [Boolean] true if the bucket exists in the Storage service.

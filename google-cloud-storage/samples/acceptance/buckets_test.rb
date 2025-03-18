@@ -53,6 +53,7 @@ require_relative "../storage_set_public_access_prevention_inherited"
 require_relative "../storage_set_retention_policy"
 require_relative "../storage_get_autoclass"
 require_relative "../storage_set_autoclass"
+require_relative "../storage_move_object"
 
 describe "Buckets Snippets" do
   let(:storage_client)   { Google::Cloud::Storage.new }
@@ -579,6 +580,51 @@ describe "Buckets Snippets" do
       bucket.refresh!
       _(bucket.public_access_prevention).must_equal "inherited"
       bucket.public_access_prevention = :inherited
+    end
+  end
+
+  describe "storage move object" do
+    let(:file_1_name) { "file_1_name_#{SecureRandom.hex}.txt" }
+    let(:file_2_name) { "file_2_name_#{SecureRandom.hex}.txt" }
+    let(:hns_bucket) {
+      hierarchical_namespace = Google::Apis::StorageV1::Bucket::HierarchicalNamespace.new enabled: true
+
+      storage_client.create_bucket random_bucket_name do |b|
+        b.uniform_bucket_level_access = true
+        b.hierarchical_namespace = hierarchical_namespace
+      end
+    }
+    let(:create_file_hns) {
+        file_content = "A" * (3 * 1024 * 1024) # 3 MB of 'A' characters
+        file = StringIO.new file_content
+      hns_bucket.create_file file,file_1_name
+    }
+    it "obejct is moved and old object is deleted" do
+      create_file_hns
+      out, _err = capture_io do
+        move_object bucket_name: hns_bucket.name, source_file_name: file_1_name, destination_file_name: file_2_name
+      end
+      assert_includes out, "New File #{file_2_name} created\n"
+      refute_nil(hns_bucket.file(file_2_name))
+      assert_nil(hns_bucket.file(file_1_name))
+    end
+
+    it "raises error for non hns bucket" do
+      file_content = "A" * (3 * 1024 * 1024) # 3 MB of 'A' characters
+      file = StringIO.new file_content
+      bucket.create_file file,file_1_name
+      exception = assert_raises(Google::Cloud::AlreadyExistsError) do
+        move_object bucket_name: bucket.name, source_file_name: file_1_name, destination_file_name: file_2_name
+      end
+      assert_equal "conflict: The bucket does not support hierarchical namespace.", exception.message
+    end
+
+    it "raises error if source and destination are having same filename" do
+      create_file_hns
+      exception = assert_raises(Google::Cloud::InvalidArgumentError) do
+        move_object bucket_name: hns_bucket.name, source_file_name: file_1_name, destination_file_name: file_1_name
+      end
+      assert_equal "invalid: Source and destination object names must be different.", exception.message
     end
   end
 end
