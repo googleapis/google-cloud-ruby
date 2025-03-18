@@ -410,8 +410,8 @@ module Google
             # enabled in the Google Cloud console.
             ENABLED = 1
 
-            # Disable Fraud Prevention for this assessment, regardless of Google Cloud
-            # console settings.
+            # Disable Fraud Prevention for this assessment, regardless of the Google
+            # Cloud console settings.
             DISABLED = 2
           end
         end
