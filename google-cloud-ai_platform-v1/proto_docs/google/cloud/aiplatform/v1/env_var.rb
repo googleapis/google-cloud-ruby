@@ -38,6 +38,36 @@ module Google
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
+
+        # Reference to a secret stored in the Cloud Secret Manager that will
+        # provide the value for this environment variable.
+        # @!attribute [rw] secret
+        #   @return [::String]
+        #     Required. The name of the secret in Cloud Secret Manager.
+        #     Format: \\{secret_name}.
+        # @!attribute [rw] version
+        #   @return [::String]
+        #     The Cloud Secret Manager secret version.
+        #     Can be 'latest' for the latest version, an integer for a specific
+        #     version, or a version alias.
+        class SecretRef
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Represents an environment variable where the value is a secret in Cloud
+        # Secret Manager.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. Name of the secret environment variable.
+        # @!attribute [rw] secret_ref
+        #   @return [::Google::Cloud::AIPlatform::V1::SecretRef]
+        #     Required. Reference to a secret stored in the Cloud Secret Manager that
+        #     will provide the value for this environment variable.
+        class SecretEnvVar
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
       end
     end
   end

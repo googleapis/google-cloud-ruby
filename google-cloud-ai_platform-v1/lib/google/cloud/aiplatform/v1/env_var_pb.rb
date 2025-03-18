@@ -5,10 +5,9 @@
 require 'google/protobuf'
 
 require 'google/api/field_behavior_pb'
-require 'google/api/resource_pb'
 
 
-descriptor_data = "\n(google/cloud/aiplatform/v1/env_var.proto\x12\x1agoogle.cloud.aiplatform.v1\x1a\x1fgoogle/api/field_behavior.proto\x1a\x19google/api/resource.proto\"/\n\x06\x45nvVar\x12\x11\n\x04name\x18\x01 \x01(\tB\x03\xe0\x41\x02\x12\x12\n\x05value\x18\x02 \x01(\tB\x03\xe0\x41\x02\x42\xc9\x01\n\x1e\x63om.google.cloud.aiplatform.v1B\x0b\x45nvVarProtoP\x01Z>cloud.google.com/go/aiplatform/apiv1/aiplatformpb;aiplatformpb\xaa\x02\x1aGoogle.Cloud.AIPlatform.V1\xca\x02\x1aGoogle\\Cloud\\AIPlatform\\V1\xea\x02\x1dGoogle::Cloud::AIPlatform::V1b\x06proto3"
+descriptor_data = "\n(google/cloud/aiplatform/v1/env_var.proto\x12\x1agoogle.cloud.aiplatform.v1\x1a\x1fgoogle/api/field_behavior.proto\"/\n\x06\x45nvVar\x12\x11\n\x04name\x18\x01 \x01(\tB\x03\xe0\x41\x02\x12\x12\n\x05value\x18\x02 \x01(\tB\x03\xe0\x41\x02\"1\n\tSecretRef\x12\x13\n\x06secret\x18\x01 \x01(\tB\x03\xe0\x41\x02\x12\x0f\n\x07version\x18\x02 \x01(\t\"a\n\x0cSecretEnvVar\x12\x11\n\x04name\x18\x01 \x01(\tB\x03\xe0\x41\x02\x12>\n\nsecret_ref\x18\x02 \x01(\x0b\x32%.google.cloud.aiplatform.v1.SecretRefB\x03\xe0\x41\x02\x42\xc9\x01\n\x1e\x63om.google.cloud.aiplatform.v1B\x0b\x45nvVarProtoP\x01Z>cloud.google.com/go/aiplatform/apiv1/aiplatformpb;aiplatformpb\xaa\x02\x1aGoogle.Cloud.AIPlatform.V1\xca\x02\x1aGoogle\\Cloud\\AIPlatform\\V1\xea\x02\x1dGoogle::Cloud::AIPlatform::V1b\x06proto3"
 
 pool = Google::Protobuf::DescriptorPool.generated_pool
 
@@ -39,6 +38,8 @@ module Google
     module AIPlatform
       module V1
         EnvVar = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.aiplatform.v1.EnvVar").msgclass
+        SecretRef = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.aiplatform.v1.SecretRef").msgclass
+        SecretEnvVar = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.aiplatform.v1.SecretEnvVar").msgclass
       end
     end
   end
