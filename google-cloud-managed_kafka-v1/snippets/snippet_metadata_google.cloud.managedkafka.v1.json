@@ -570,6 +570,566 @@
           "type": "FULL"
         }
       ]
+    },
+    {
+      "region_tag": "managedkafka_v1_generated_ManagedKafkaConnect_ListConnectClusters_sync",
+      "title": "Snippet for the list_connect_clusters call in the ManagedKafkaConnect service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ManagedKafka::V1::ManagedKafkaConnect::Client#list_connect_clusters.",
+      "file": "managed_kafka_connect/list_connect_clusters.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_connect_clusters",
+        "full_name": "::Google::Cloud::ManagedKafka::V1::ManagedKafkaConnect::Client#list_connect_clusters",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::ManagedKafka::V1::ListConnectClustersRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::ManagedKafka::V1::ListConnectClustersResponse",
+        "client": {
+          "short_name": "ManagedKafkaConnect::Client",
+          "full_name": "::Google::Cloud::ManagedKafka::V1::ManagedKafkaConnect::Client"
+        },
+        "method": {
+          "short_name": "ListConnectClusters",
+          "full_name": "google.cloud.managedkafka.v1.ManagedKafkaConnect.ListConnectClusters",
+          "service": {
+            "short_name": "ManagedKafkaConnect",
+            "full_name": "google.cloud.managedkafka.v1.ManagedKafkaConnect"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "managedkafka_v1_generated_ManagedKafkaConnect_GetConnectCluster_sync",
+      "title": "Snippet for the get_connect_cluster call in the ManagedKafkaConnect service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ManagedKafka::V1::ManagedKafkaConnect::Client#get_connect_cluster.",
+      "file": "managed_kafka_connect/get_connect_cluster.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_connect_cluster",
+        "full_name": "::Google::Cloud::ManagedKafka::V1::ManagedKafkaConnect::Client#get_connect_cluster",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::ManagedKafka::V1::GetConnectClusterRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::ManagedKafka::V1::ConnectCluster",
+        "client": {
+          "short_name": "ManagedKafkaConnect::Client",
+          "full_name": "::Google::Cloud::ManagedKafka::V1::ManagedKafkaConnect::Client"
+        },
+        "method": {
+          "short_name": "GetConnectCluster",
+          "full_name": "google.cloud.managedkafka.v1.ManagedKafkaConnect.GetConnectCluster",
+          "service": {
+            "short_name": "ManagedKafkaConnect",
+            "full_name": "google.cloud.managedkafka.v1.ManagedKafkaConnect"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "managedkafka_v1_generated_ManagedKafkaConnect_CreateConnectCluster_sync",
+      "title": "Snippet for the create_connect_cluster call in the ManagedKafkaConnect service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ManagedKafka::V1::ManagedKafkaConnect::Client#create_connect_cluster.",
+      "file": "managed_kafka_connect/create_connect_cluster.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_connect_cluster",
+        "full_name": "::Google::Cloud::ManagedKafka::V1::ManagedKafkaConnect::Client#create_connect_cluster",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::ManagedKafka::V1::CreateConnectClusterRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "ManagedKafkaConnect::Client",
+          "full_name": "::Google::Cloud::ManagedKafka::V1::ManagedKafkaConnect::Client"
+        },
+        "method": {
+          "short_name": "CreateConnectCluster",
+          "full_name": "google.cloud.managedkafka.v1.ManagedKafkaConnect.CreateConnectCluster",
+          "service": {
+            "short_name": "ManagedKafkaConnect",
+            "full_name": "google.cloud.managedkafka.v1.ManagedKafkaConnect"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "managedkafka_v1_generated_ManagedKafkaConnect_UpdateConnectCluster_sync",
+      "title": "Snippet for the update_connect_cluster call in the ManagedKafkaConnect service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ManagedKafka::V1::ManagedKafkaConnect::Client#update_connect_cluster.",
+      "file": "managed_kafka_connect/update_connect_cluster.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_connect_cluster",
+        "full_name": "::Google::Cloud::ManagedKafka::V1::ManagedKafkaConnect::Client#update_connect_cluster",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::ManagedKafka::V1::UpdateConnectClusterRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "ManagedKafkaConnect::Client",
+          "full_name": "::Google::Cloud::ManagedKafka::V1::ManagedKafkaConnect::Client"
+        },
+        "method": {
+          "short_name": "UpdateConnectCluster",
+          "full_name": "google.cloud.managedkafka.v1.ManagedKafkaConnect.UpdateConnectCluster",
+          "service": {
+            "short_name": "ManagedKafkaConnect",
+            "full_name": "google.cloud.managedkafka.v1.ManagedKafkaConnect"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "managedkafka_v1_generated_ManagedKafkaConnect_DeleteConnectCluster_sync",
+      "title": "Snippet for the delete_connect_cluster call in the ManagedKafkaConnect service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ManagedKafka::V1::ManagedKafkaConnect::Client#delete_connect_cluster.",
+      "file": "managed_kafka_connect/delete_connect_cluster.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_connect_cluster",
+        "full_name": "::Google::Cloud::ManagedKafka::V1::ManagedKafkaConnect::Client#delete_connect_cluster",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::ManagedKafka::V1::DeleteConnectClusterRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "ManagedKafkaConnect::Client",
+          "full_name": "::Google::Cloud::ManagedKafka::V1::ManagedKafkaConnect::Client"
+        },
+        "method": {
+          "short_name": "DeleteConnectCluster",
+          "full_name": "google.cloud.managedkafka.v1.ManagedKafkaConnect.DeleteConnectCluster",
+          "service": {
+            "short_name": "ManagedKafkaConnect",
+            "full_name": "google.cloud.managedkafka.v1.ManagedKafkaConnect"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "managedkafka_v1_generated_ManagedKafkaConnect_ListConnectors_sync",
+      "title": "Snippet for the list_connectors call in the ManagedKafkaConnect service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ManagedKafka::V1::ManagedKafkaConnect::Client#list_connectors.",
+      "file": "managed_kafka_connect/list_connectors.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_connectors",
+        "full_name": "::Google::Cloud::ManagedKafka::V1::ManagedKafkaConnect::Client#list_connectors",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::ManagedKafka::V1::ListConnectorsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::ManagedKafka::V1::ListConnectorsResponse",
+        "client": {
+          "short_name": "ManagedKafkaConnect::Client",
+          "full_name": "::Google::Cloud::ManagedKafka::V1::ManagedKafkaConnect::Client"
+        },
+        "method": {
+          "short_name": "ListConnectors",
+          "full_name": "google.cloud.managedkafka.v1.ManagedKafkaConnect.ListConnectors",
+          "service": {
+            "short_name": "ManagedKafkaConnect",
+            "full_name": "google.cloud.managedkafka.v1.ManagedKafkaConnect"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "managedkafka_v1_generated_ManagedKafkaConnect_GetConnector_sync",
+      "title": "Snippet for the get_connector call in the ManagedKafkaConnect service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ManagedKafka::V1::ManagedKafkaConnect::Client#get_connector.",
+      "file": "managed_kafka_connect/get_connector.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_connector",
+        "full_name": "::Google::Cloud::ManagedKafka::V1::ManagedKafkaConnect::Client#get_connector",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::ManagedKafka::V1::GetConnectorRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::ManagedKafka::V1::Connector",
+        "client": {
+          "short_name": "ManagedKafkaConnect::Client",
+          "full_name": "::Google::Cloud::ManagedKafka::V1::ManagedKafkaConnect::Client"
+        },
+        "method": {
+          "short_name": "GetConnector",
+          "full_name": "google.cloud.managedkafka.v1.ManagedKafkaConnect.GetConnector",
+          "service": {
+            "short_name": "ManagedKafkaConnect",
+            "full_name": "google.cloud.managedkafka.v1.ManagedKafkaConnect"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "managedkafka_v1_generated_ManagedKafkaConnect_CreateConnector_sync",
+      "title": "Snippet for the create_connector call in the ManagedKafkaConnect service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ManagedKafka::V1::ManagedKafkaConnect::Client#create_connector.",
+      "file": "managed_kafka_connect/create_connector.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_connector",
+        "full_name": "::Google::Cloud::ManagedKafka::V1::ManagedKafkaConnect::Client#create_connector",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::ManagedKafka::V1::CreateConnectorRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::ManagedKafka::V1::Connector",
+        "client": {
+          "short_name": "ManagedKafkaConnect::Client",
+          "full_name": "::Google::Cloud::ManagedKafka::V1::ManagedKafkaConnect::Client"
+        },
+        "method": {
+          "short_name": "CreateConnector",
+          "full_name": "google.cloud.managedkafka.v1.ManagedKafkaConnect.CreateConnector",
+          "service": {
+            "short_name": "ManagedKafkaConnect",
+            "full_name": "google.cloud.managedkafka.v1.ManagedKafkaConnect"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "managedkafka_v1_generated_ManagedKafkaConnect_UpdateConnector_sync",
+      "title": "Snippet for the update_connector call in the ManagedKafkaConnect service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ManagedKafka::V1::ManagedKafkaConnect::Client#update_connector.",
+      "file": "managed_kafka_connect/update_connector.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_connector",
+        "full_name": "::Google::Cloud::ManagedKafka::V1::ManagedKafkaConnect::Client#update_connector",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::ManagedKafka::V1::UpdateConnectorRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::ManagedKafka::V1::Connector",
+        "client": {
+          "short_name": "ManagedKafkaConnect::Client",
+          "full_name": "::Google::Cloud::ManagedKafka::V1::ManagedKafkaConnect::Client"
+        },
+        "method": {
+          "short_name": "UpdateConnector",
+          "full_name": "google.cloud.managedkafka.v1.ManagedKafkaConnect.UpdateConnector",
+          "service": {
+            "short_name": "ManagedKafkaConnect",
+            "full_name": "google.cloud.managedkafka.v1.ManagedKafkaConnect"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "managedkafka_v1_generated_ManagedKafkaConnect_DeleteConnector_sync",
+      "title": "Snippet for the delete_connector call in the ManagedKafkaConnect service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ManagedKafka::V1::ManagedKafkaConnect::Client#delete_connector.",
+      "file": "managed_kafka_connect/delete_connector.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_connector",
+        "full_name": "::Google::Cloud::ManagedKafka::V1::ManagedKafkaConnect::Client#delete_connector",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::ManagedKafka::V1::DeleteConnectorRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Protobuf::Empty",
+        "client": {
+          "short_name": "ManagedKafkaConnect::Client",
+          "full_name": "::Google::Cloud::ManagedKafka::V1::ManagedKafkaConnect::Client"
+        },
+        "method": {
+          "short_name": "DeleteConnector",
+          "full_name": "google.cloud.managedkafka.v1.ManagedKafkaConnect.DeleteConnector",
+          "service": {
+            "short_name": "ManagedKafkaConnect",
+            "full_name": "google.cloud.managedkafka.v1.ManagedKafkaConnect"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "managedkafka_v1_generated_ManagedKafkaConnect_PauseConnector_sync",
+      "title": "Snippet for the pause_connector call in the ManagedKafkaConnect service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ManagedKafka::V1::ManagedKafkaConnect::Client#pause_connector.",
+      "file": "managed_kafka_connect/pause_connector.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "pause_connector",
+        "full_name": "::Google::Cloud::ManagedKafka::V1::ManagedKafkaConnect::Client#pause_connector",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::ManagedKafka::V1::PauseConnectorRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::ManagedKafka::V1::PauseConnectorResponse",
+        "client": {
+          "short_name": "ManagedKafkaConnect::Client",
+          "full_name": "::Google::Cloud::ManagedKafka::V1::ManagedKafkaConnect::Client"
+        },
+        "method": {
+          "short_name": "PauseConnector",
+          "full_name": "google.cloud.managedkafka.v1.ManagedKafkaConnect.PauseConnector",
+          "service": {
+            "short_name": "ManagedKafkaConnect",
+            "full_name": "google.cloud.managedkafka.v1.ManagedKafkaConnect"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "managedkafka_v1_generated_ManagedKafkaConnect_ResumeConnector_sync",
+      "title": "Snippet for the resume_connector call in the ManagedKafkaConnect service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ManagedKafka::V1::ManagedKafkaConnect::Client#resume_connector.",
+      "file": "managed_kafka_connect/resume_connector.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "resume_connector",
+        "full_name": "::Google::Cloud::ManagedKafka::V1::ManagedKafkaConnect::Client#resume_connector",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::ManagedKafka::V1::ResumeConnectorRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::ManagedKafka::V1::ResumeConnectorResponse",
+        "client": {
+          "short_name": "ManagedKafkaConnect::Client",
+          "full_name": "::Google::Cloud::ManagedKafka::V1::ManagedKafkaConnect::Client"
+        },
+        "method": {
+          "short_name": "ResumeConnector",
+          "full_name": "google.cloud.managedkafka.v1.ManagedKafkaConnect.ResumeConnector",
+          "service": {
+            "short_name": "ManagedKafkaConnect",
+            "full_name": "google.cloud.managedkafka.v1.ManagedKafkaConnect"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "managedkafka_v1_generated_ManagedKafkaConnect_RestartConnector_sync",
+      "title": "Snippet for the restart_connector call in the ManagedKafkaConnect service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ManagedKafka::V1::ManagedKafkaConnect::Client#restart_connector.",
+      "file": "managed_kafka_connect/restart_connector.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "restart_connector",
+        "full_name": "::Google::Cloud::ManagedKafka::V1::ManagedKafkaConnect::Client#restart_connector",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::ManagedKafka::V1::RestartConnectorRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::ManagedKafka::V1::RestartConnectorResponse",
+        "client": {
+          "short_name": "ManagedKafkaConnect::Client",
+          "full_name": "::Google::Cloud::ManagedKafka::V1::ManagedKafkaConnect::Client"
+        },
+        "method": {
+          "short_name": "RestartConnector",
+          "full_name": "google.cloud.managedkafka.v1.ManagedKafkaConnect.RestartConnector",
+          "service": {
+            "short_name": "ManagedKafkaConnect",
+            "full_name": "google.cloud.managedkafka.v1.ManagedKafkaConnect"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "managedkafka_v1_generated_ManagedKafkaConnect_StopConnector_sync",
+      "title": "Snippet for the stop_connector call in the ManagedKafkaConnect service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ManagedKafka::V1::ManagedKafkaConnect::Client#stop_connector.",
+      "file": "managed_kafka_connect/stop_connector.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "stop_connector",
+        "full_name": "::Google::Cloud::ManagedKafka::V1::ManagedKafkaConnect::Client#stop_connector",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::ManagedKafka::V1::StopConnectorRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::ManagedKafka::V1::StopConnectorResponse",
+        "client": {
+          "short_name": "ManagedKafkaConnect::Client",
+          "full_name": "::Google::Cloud::ManagedKafka::V1::ManagedKafkaConnect::Client"
+        },
+        "method": {
+          "short_name": "StopConnector",
+          "full_name": "google.cloud.managedkafka.v1.ManagedKafkaConnect.StopConnector",
+          "service": {
+            "short_name": "ManagedKafkaConnect",
+            "full_name": "google.cloud.managedkafka.v1.ManagedKafkaConnect"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
     }
   ]
 }

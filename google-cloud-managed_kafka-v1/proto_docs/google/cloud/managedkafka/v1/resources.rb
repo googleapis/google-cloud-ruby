@@ -286,6 +286,215 @@ module Google
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
+
+        # An Apache Kafka Connect cluster deployed in a location.
+        # @!attribute [rw] gcp_config
+        #   @return [::Google::Cloud::ManagedKafka::V1::ConnectGcpConfig]
+        #     Required. Configuration properties for a Kafka Connect cluster deployed
+        #     to Google Cloud Platform.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Identifier. The name of the Kafka Connect cluster. Structured like:
+        #     projects/\\{project_number}/locations/\\{location}/connectClusters/\\{connect_cluster_id}
+        # @!attribute [rw] kafka_cluster
+        #   @return [::String]
+        #     Required. Immutable. The name of the Kafka cluster this Kafka Connect
+        #     cluster is attached to. Structured like:
+        #     projects/\\{project}/locations/\\{location}/clusters/\\{cluster}
+        # @!attribute [r] create_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Output only. The time when the cluster was created.
+        # @!attribute [r] update_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Output only. The time when the cluster was last updated.
+        # @!attribute [rw] labels
+        #   @return [::Google::Protobuf::Map{::String => ::String}]
+        #     Optional. Labels as key value pairs.
+        # @!attribute [rw] capacity_config
+        #   @return [::Google::Cloud::ManagedKafka::V1::CapacityConfig]
+        #     Required. Capacity configuration for the Kafka Connect cluster.
+        # @!attribute [r] state
+        #   @return [::Google::Cloud::ManagedKafka::V1::ConnectCluster::State]
+        #     Output only. The current state of the cluster.
+        # @!attribute [rw] config
+        #   @return [::Google::Protobuf::Map{::String => ::String}]
+        #     Optional. Configurations for the worker that are overridden from the
+        #     defaults. The key of the map is a Kafka Connect worker property name, for
+        #     example: `exactly.once.source.support`.
+        class ConnectCluster
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # @!attribute [rw] key
+          #   @return [::String]
+          # @!attribute [rw] value
+          #   @return [::String]
+          class LabelsEntry
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # @!attribute [rw] key
+          #   @return [::String]
+          # @!attribute [rw] value
+          #   @return [::String]
+          class ConfigEntry
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # The state of the cluster.
+          module State
+            # A state was not specified.
+            STATE_UNSPECIFIED = 0
+
+            # The cluster is being created.
+            CREATING = 1
+
+            # The cluster is active.
+            ACTIVE = 2
+
+            # The cluster is being deleted.
+            DELETING = 3
+          end
+        end
+
+        # The configuration of a Virtual Private Cloud (VPC) network that can access
+        # the Kafka Connect cluster.
+        # @!attribute [rw] primary_subnet
+        #   @return [::String]
+        #     Required. VPC subnet to make available to the Kafka Connect cluster.
+        #     Structured like:
+        #     projects/\\{project}/regions/\\{region}/subnetworks/\\{subnet_id}
+        #
+        #     It is used to create a Private Service Connect (PSC) interface for the
+        #     Kafka Connect workers. It must be located in the same region as the
+        #     Kafka Connect cluster.
+        #
+        #     The CIDR range of the subnet must be within the IPv4 address ranges for
+        #     private networks, as specified in RFC 1918. The primary subnet CIDR range
+        #     must have a minimum size of /22 (1024 addresses).
+        # @!attribute [rw] additional_subnets
+        #   @return [::Array<::String>]
+        #     Optional. Additional subnets may be specified. They may be in another
+        #     region, but must be in the same VPC network. The Connect workers can
+        #     communicate with network endpoints in either the primary or additional
+        #     subnets.
+        # @!attribute [rw] dns_domain_names
+        #   @return [::Array<::String>]
+        #     Optional. Additional DNS domain names from the subnet's network to be made
+        #     visible to the Connect Cluster. When using MirrorMaker2, it's necessary to
+        #     add the bootstrap address's dns domain name of the target cluster to make
+        #     it visible to the connector. For example:
+        #     my-kafka-cluster.us-central1.managedkafka.my-project.cloud.goog
+        class ConnectNetworkConfig
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # The configuration of access to the Kafka Connect cluster.
+        # @!attribute [rw] network_configs
+        #   @return [::Array<::Google::Cloud::ManagedKafka::V1::ConnectNetworkConfig>]
+        #     Required.
+        #     Virtual Private Cloud (VPC) networks that must be granted direct access to
+        #     the Kafka Connect cluster. Minimum of 1 network is required. Maximum 10
+        #     networks can be specified.
+        class ConnectAccessConfig
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Configuration properties for a Kafka Connect cluster deployed to Google Cloud
+        # Platform.
+        # @!attribute [rw] access_config
+        #   @return [::Google::Cloud::ManagedKafka::V1::ConnectAccessConfig]
+        #     Required. Access configuration for the Kafka Connect cluster.
+        # @!attribute [rw] secret_paths
+        #   @return [::Array<::String>]
+        #     Optional. Secrets to load into workers. Exact SecretVersions from Secret
+        #     Manager must be provided -- aliases are not supported. Up to 32 secrets may
+        #     be loaded into one cluster. Format:
+        #     projects/<project-id>/secrets/<secret-name>/versions/<version-id>
+        class ConnectGcpConfig
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # A Kafka Connect connector in a given ConnectCluster.
+        # @!attribute [rw] task_restart_policy
+        #   @return [::Google::Cloud::ManagedKafka::V1::TaskRetryPolicy]
+        #     Optional. Restarts the individual tasks of a Connector.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Identifier. The name of the connector.
+        #     Structured like:
+        #     projects/\\{project}/locations/\\{location}/connectClusters/\\{connect_cluster}/connectors/\\{connector}
+        # @!attribute [rw] configs
+        #   @return [::Google::Protobuf::Map{::String => ::String}]
+        #     Optional. Connector config as keys/values.
+        #     The keys of the map are connector property names, for example:
+        #     `connector.class`, `tasks.max`, `key.converter`.
+        # @!attribute [r] state
+        #   @return [::Google::Cloud::ManagedKafka::V1::Connector::State]
+        #     Output only. The current state of the connector.
+        class Connector
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # @!attribute [rw] key
+          #   @return [::String]
+          # @!attribute [rw] value
+          #   @return [::String]
+          class ConfigsEntry
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # The state of the connector.
+          module State
+            # A state was not specified.
+            STATE_UNSPECIFIED = 0
+
+            # The connector is not assigned to any tasks, usually transient.
+            UNASSIGNED = 1
+
+            # The connector is running.
+            RUNNING = 2
+
+            # The connector has been paused.
+            PAUSED = 3
+
+            # The connector has failed. See logs for why.
+            FAILED = 4
+
+            # The connector is restarting.
+            RESTARTING = 5
+
+            # The connector has been stopped.
+            STOPPED = 6
+          end
+        end
+
+        # Task Retry Policy is implemented on a best-effort
+        # basis.
+        # Retry delay will be exponential based on provided minimum and maximum
+        # backoffs. https://en.wikipedia.org/wiki/Exponential_backoff.
+        # Note that the delay between consecutive task restarts may not always
+        # precisely match the configured settings. This can happen when the
+        # ConnectCluster is in rebalancing state or if the ConnectCluster is
+        # unresponsive etc.
+        # @!attribute [rw] minimum_backoff
+        #   @return [::Google::Protobuf::Duration]
+        #     Optional. The minimum amount of time to wait before retrying a failed task.
+        #     This sets a lower bound for the backoff delay.
+        # @!attribute [rw] maximum_backoff
+        #   @return [::Google::Protobuf::Duration]
+        #     Optional. The maximum amount of time to wait before retrying a failed task.
+        #     This sets an upper bound for the backoff delay.
+        class TaskRetryPolicy
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
       end
     end
   end
