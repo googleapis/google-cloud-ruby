@@ -1,5 +1,11 @@
 # Changelog
 
+### 0.4.0 (2025-03-18)
+
+#### Features
+
+* Support for Automatic Improvements (also requires an update to the google-shopping-merchant-accounts-v1beta gem) ([#29346](https://github.com/googleapis/google-cloud-ruby/issues/29346)) 
+
 ### 0.3.0 (2025-01-29)
 
 #### Features
