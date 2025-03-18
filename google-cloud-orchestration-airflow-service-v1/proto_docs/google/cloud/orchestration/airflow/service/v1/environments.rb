@@ -1441,7 +1441,7 @@ module Google
             # environment.
             # @!attribute [rw] connection_type
             #   @return [::Google::Cloud::Orchestration::Airflow::Service::V1::NetworkingConfig::ConnectionType]
-            #     Optional. Indicates the user requested specifc connection type between
+            #     Optional. Indicates the user requested specific connection type between
             #     Tenant and Customer projects. You cannot set networking connection type in
             #     public IP environment.
             class NetworkingConfig
