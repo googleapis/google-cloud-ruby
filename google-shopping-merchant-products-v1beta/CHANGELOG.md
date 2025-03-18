@@ -1,5 +1,12 @@
 # Changelog
 
+### 0.4.0 (2025-03-18)
+
+#### Features
+
+* Support for product sustainability incentives 
+* Support for the update_product_input RPC 
+
 ### 0.3.0 (2025-01-29)
 
 #### Features
