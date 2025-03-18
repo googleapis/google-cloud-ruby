@@ -1,5 +1,11 @@
 # Changelog
 
+### 0.14.0 (2025-03-18)
+
+#### Features
+
+* Support for the export_cluster RPC ([#29368](https://github.com/googleapis/google-cloud-ruby/issues/29368)) 
+
 ### 0.13.0 (2025-02-07)
 
 ### ⚠ BREAKING CHANGES
