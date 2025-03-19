@@ -15,4 +15,3 @@
 /google-cloud-firestore*/.           @googleapis/ruby-team @yoshi-approver @googleapis/api-firestore-sdk
 /google-cloud-pubsub*/.              @googleapis/ruby-team @yoshi-approver @googleapis/api-pubsub
 /google-cloud-storage/               @googleapis/ruby-team @yoshi-approver @googleapis/gcs-sdk-team
-/google-cloud-parameter_manager*/.   @googleapis/ruby-team @yoshi-approver @googleapis/cloud-parameters-team
