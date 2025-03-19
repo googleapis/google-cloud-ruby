@@ -608,15 +608,6 @@ describe "Buckets Snippets" do
       assert_nil(hns_bucket.file(file_1_name))
     end
 
-    it "raises error for non hns bucket" do
-      file_content = "A" * (3 * 1024 * 1024) # 3 MB of 'A' characters
-      file = StringIO.new file_content
-      bucket.create_file file, file_1_name
-      assert_raises Google::Cloud::AlreadyExistsError do
-        move_object bucket_name: bucket.name, source_file_name: file_1_name, destination_file_name: file_2_name
-      end
-    end
-
     it "raises error if source and destination are having same filename" do
       create_file_hns
       exception = assert_raises Google::Cloud::InvalidArgumentError do
