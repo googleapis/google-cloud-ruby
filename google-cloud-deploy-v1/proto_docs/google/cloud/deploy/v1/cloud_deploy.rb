@@ -376,8 +376,8 @@ module Google
             #     Optional. Whether to propagate the Kubernetes Service to the route
             #     destination clusters. The Service will always be deployed to the Target
             #     cluster even if the HTTPRoute is not. This option may be used to
-            #     facilitiate successful DNS lookup in the route destination clusters.
-            #     Can only be set to true if destinations are specified.
+            #     facilitate successful DNS lookup in the route destination clusters. Can
+            #     only be set to true if destinations are specified.
             class RouteDestinations
               include ::Google::Protobuf::MessageExts
               extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -2736,7 +2736,7 @@ module Google
             # logs.
             EXECUTION_FAILED = 2
 
-            # Deployment did not complete within the alloted time.
+            # Deployment did not complete within the allotted time.
             DEADLINE_EXCEEDED = 3
 
             # Release is in a failed state.
@@ -3095,7 +3095,7 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # ListRolloutsResponse is the response object reutrned by `ListRollouts`.
+        # ListRolloutsResponse is the response object returned by `ListRollouts`.
         # @!attribute [rw] rollouts
         #   @return [::Array<::Google::Cloud::Deploy::V1::Rollout>]
         #     The `Rollout` objects.
@@ -3457,7 +3457,7 @@ module Google
             # logs.
             EXECUTION_FAILED = 2
 
-            # The deploy job run did not complete within the alloted time.
+            # The deploy job run did not complete within the allotted time.
             DEADLINE_EXCEEDED = 3
 
             # There were missing resources in the runtime environment required for a
@@ -3512,7 +3512,7 @@ module Google
             # logs.
             EXECUTION_FAILED = 2
 
-            # The verify job run did not complete within the alloted time.
+            # The verify job run did not complete within the allotted time.
             DEADLINE_EXCEEDED = 3
 
             # No Skaffold verify configuration was found.
@@ -3556,7 +3556,7 @@ module Google
             # logs.
             EXECUTION_FAILED = 2
 
-            # The predeploy job run did not complete within the alloted time.
+            # The predeploy job run did not complete within the allotted time.
             DEADLINE_EXCEEDED = 3
 
             # Cloud Build failed to fulfill Cloud Deploy's request. See failure_message
@@ -3597,7 +3597,7 @@ module Google
             # logs.
             EXECUTION_FAILED = 2
 
-            # The postdeploy job run did not complete within the alloted time.
+            # The postdeploy job run did not complete within the allotted time.
             DEADLINE_EXCEEDED = 3
 
             # Cloud Build failed to fulfill Cloud Deploy's request. See failure_message
