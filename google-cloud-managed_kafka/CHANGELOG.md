@@ -1,5 +1,11 @@
 # Changelog
 
+### 2.1.0 (2025-03-19)
+
+#### Features
+
+* Support for the ManagedKafkaConnect service, including RPCs to manage clusters and connectors (also requires an updated google-cloud-managed_kafka-v1 gem) ([#29383](https://github.com/googleapis/google-cloud-ruby/issues/29383)) 
+
 ### 2.0.0 (2025-02-13)
 
 ### ⚠ BREAKING CHANGES
