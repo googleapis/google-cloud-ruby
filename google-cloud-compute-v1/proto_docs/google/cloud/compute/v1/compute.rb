@@ -20978,9 +20978,18 @@ module Google
         end
 
         # @!attribute [rw] errors
-        #   @return [::Google::Cloud::Compute::V1::Errors]
+        #   @return [::Google::Cloud::Compute::V1::ManagedInstanceLastAttemptErrors]
         #     [Output Only] Encountered errors during the last attempt to create or delete the instance.
         class ManagedInstanceLastAttempt
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # [Output Only] Encountered errors during the last attempt to create or delete the instance.
+        # @!attribute [rw] errors
+        #   @return [::Array<::Google::Cloud::Compute::V1::Errors>]
+        #     [Output Only] The array of errors encountered while processing this operation.
+        class ManagedInstanceLastAttemptErrors
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
