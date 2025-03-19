@@ -143,9 +143,7 @@ describe "Buckets Snippets" do
       puts "new bucket soft_delete_policy-- #{check_bucket}"
       puts "new bucket soft_delete_policy-- #{check_bucket.soft_delete_policy}"
       _(check_bucket.soft_delete_policy.retention_duration_seconds).must_equal 864_000
-  
-
-      delete_bucket_helper new_bucket_name
+       new_bucket.delete
 
       # Check if the bucket is deleted
       deleted_bucket = storage_client.bucket new_bucket_name
