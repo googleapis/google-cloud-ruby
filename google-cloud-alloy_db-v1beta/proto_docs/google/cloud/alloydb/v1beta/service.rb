@@ -186,6 +186,99 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # Destination for Export. Export will be done to cloud storage.
+        # @!attribute [rw] uri
+        #   @return [::String]
+        #     Required. The path to the file in Google Cloud Storage where the export
+        #     will be stored. The URI is in the form `gs://bucketName/fileName`.
+        class GcsDestination
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Export cluster request.
+        # @!attribute [rw] gcs_destination
+        #   @return [::Google::Cloud::AlloyDB::V1beta::GcsDestination]
+        #     Required. Option to export data to cloud storage.
+        # @!attribute [rw] csv_export_options
+        #   @return [::Google::Cloud::AlloyDB::V1beta::ExportClusterRequest::CsvExportOptions]
+        #     Options for exporting data in CSV format. Required field to be set for
+        #     CSV file type.
+        #
+        #     Note: The following fields are mutually exclusive: `csv_export_options`, `sql_export_options`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] sql_export_options
+        #   @return [::Google::Cloud::AlloyDB::V1beta::ExportClusterRequest::SqlExportOptions]
+        #     Options for exporting data in SQL format. Required field to be set for
+        #     SQL file type.
+        #
+        #     Note: The following fields are mutually exclusive: `sql_export_options`, `csv_export_options`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The resource name of the cluster.
+        # @!attribute [rw] database
+        #   @return [::String]
+        #     Required. Name of the database where the export command will be executed.
+        #     Note - Value provided should be the same as expected from
+        #     `SELECT current_database();` and NOT as a resource reference.
+        class ExportClusterRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Options for exporting data in CSV format.
+          # @!attribute [rw] select_query
+          #   @return [::String]
+          #     Required. The SELECT query used to extract the data.
+          # @!attribute [rw] field_delimiter
+          #   @return [::String]
+          #     Optional. Specifies the character that separates columns within each row
+          #     (line) of the file. The default is comma. The value of this argument has
+          #     to be a character in Hex ASCII Code.
+          # @!attribute [rw] quote_character
+          #   @return [::String]
+          #     Optional. Specifies the quoting character to be used when a data value is
+          #     quoted. The default is double-quote. The value of this argument has to be
+          #     a character in Hex ASCII Code.
+          # @!attribute [rw] escape_character
+          #   @return [::String]
+          #     Optional. Specifies the character that should appear before a data
+          #     character that needs to be escaped. The default is the same as quote
+          #     character. The value of this argument has to be a character in Hex ASCII
+          #     Code.
+          class CsvExportOptions
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Options for exporting data in SQL format.
+          # @!attribute [rw] tables
+          #   @return [::Array<::String>]
+          #     Optional. Tables to export from.
+          # @!attribute [rw] schema_only
+          #   @return [::Boolean]
+          #     Optional. If true, only export the schema.
+          # @!attribute [rw] clean_target_objects
+          #   @return [::Boolean]
+          #     Optional. If true, output commands to DROP all the dumped database
+          #     objects prior to outputting the commands for creating them.
+          # @!attribute [rw] if_exist_target_objects
+          #   @return [::Boolean]
+          #     Optional. If true, use DROP ... IF EXISTS commands to check for the
+          #     object's existence before dropping it in clean_target_objects mode.
+          class SqlExportOptions
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+        end
+
+        # Response of export cluster rpc.
+        # @!attribute [rw] gcs_destination
+        #   @return [::Google::Cloud::AlloyDB::V1beta::GcsDestination]
+        #     Required. Option to export data to cloud storage.
+        class ExportClusterResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # Upgrades a cluster.
         # @!attribute [rw] name
         #   @return [::String]
@@ -1351,9 +1444,10 @@ module Google
         #   @return [::Boolean]
         #     Output only. Identifies whether the user has requested cancellation
         #     of the operation. Operations that have successfully been cancelled
-        #     have [Operation.error][] value with a
-        #     {::Google::Rpc::Status#code google.rpc.Status.code} of 1, corresponding to
-        #     `Code.CANCELLED`.
+        #     have
+        #     {::Google::Longrunning::Operation#error google.longrunning.Operation.error}
+        #     value with a {::Google::Rpc::Status#code google.rpc.Status.code} of 1,
+        #     corresponding to `Code.CANCELLED`.
         # @!attribute [r] api_version
         #   @return [::String]
         #     Output only. API version used to start the operation.

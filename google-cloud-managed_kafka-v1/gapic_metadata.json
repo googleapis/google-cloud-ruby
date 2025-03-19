@@ -83,6 +83,85 @@
           }
         }
       }
+    },
+    "ManagedKafkaConnect": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::ManagedKafka::V1::ManagedKafkaConnect::Client",
+          "rpcs": {
+            "ListConnectClusters": {
+              "methods": [
+                "list_connect_clusters"
+              ]
+            },
+            "GetConnectCluster": {
+              "methods": [
+                "get_connect_cluster"
+              ]
+            },
+            "CreateConnectCluster": {
+              "methods": [
+                "create_connect_cluster"
+              ]
+            },
+            "UpdateConnectCluster": {
+              "methods": [
+                "update_connect_cluster"
+              ]
+            },
+            "DeleteConnectCluster": {
+              "methods": [
+                "delete_connect_cluster"
+              ]
+            },
+            "ListConnectors": {
+              "methods": [
+                "list_connectors"
+              ]
+            },
+            "GetConnector": {
+              "methods": [
+                "get_connector"
+              ]
+            },
+            "CreateConnector": {
+              "methods": [
+                "create_connector"
+              ]
+            },
+            "UpdateConnector": {
+              "methods": [
+                "update_connector"
+              ]
+            },
+            "DeleteConnector": {
+              "methods": [
+                "delete_connector"
+              ]
+            },
+            "PauseConnector": {
+              "methods": [
+                "pause_connector"
+              ]
+            },
+            "ResumeConnector": {
+              "methods": [
+                "resume_connector"
+              ]
+            },
+            "RestartConnector": {
+              "methods": [
+                "restart_connector"
+              ]
+            },
+            "StopConnector": {
+              "methods": [
+                "stop_connector"
+              ]
+            }
+          }
+        }
+      }
     }
   }
 }

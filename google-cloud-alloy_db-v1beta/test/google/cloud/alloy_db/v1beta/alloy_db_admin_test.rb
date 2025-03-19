@@ -337,6 +337,77 @@ class ::Google::Cloud::AlloyDB::V1beta::AlloyDBAdmin::ClientTest < Minitest::Tes
     end
   end
 
+  def test_export_cluster
+    # Create GRPC objects.
+    grpc_response = ::Google::Longrunning::Operation.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    gcs_destination = {}
+    csv_export_options = {}
+    name = "hello world"
+    database = "hello world"
+
+    export_cluster_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :export_cluster, name
+      assert_kind_of ::Google::Cloud::AlloyDB::V1beta::ExportClusterRequest, request
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::AlloyDB::V1beta::GcsDestination), request["gcs_destination"]
+      assert_equal :gcs_destination, request.destination
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::AlloyDB::V1beta::ExportClusterRequest::CsvExportOptions), request["csv_export_options"]
+      assert_equal :csv_export_options, request.export_options
+      assert_equal "hello world", request["name"]
+      assert_equal "hello world", request["database"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, export_cluster_client_stub do
+      # Create client
+      client = ::Google::Cloud::AlloyDB::V1beta::AlloyDBAdmin::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.export_cluster({ gcs_destination: gcs_destination, csv_export_options: csv_export_options, name: name, database: database }) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.export_cluster gcs_destination: gcs_destination, csv_export_options: csv_export_options, name: name, database: database do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.export_cluster ::Google::Cloud::AlloyDB::V1beta::ExportClusterRequest.new(gcs_destination: gcs_destination, csv_export_options: csv_export_options, name: name, database: database) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.export_cluster({ gcs_destination: gcs_destination, csv_export_options: csv_export_options, name: name, database: database }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.export_cluster(::Google::Cloud::AlloyDB::V1beta::ExportClusterRequest.new(gcs_destination: gcs_destination, csv_export_options: csv_export_options, name: name, database: database), grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, export_cluster_client_stub.call_rpc_count
+    end
+  end
+
   def test_upgrade_cluster
     # Create GRPC objects.
     grpc_response = ::Google::Longrunning::Operation.new

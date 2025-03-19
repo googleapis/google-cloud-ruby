@@ -736,11 +736,13 @@ module Google
         #     zone with available capacity.
         # @!attribute [rw] database_flags
         #   @return [::Google::Protobuf::Map{::String => ::String}]
-        #     Database flags. Set at instance level.
-        #      * They are copied from primary instance on read instance creation.
-        #      * Read instances can set new or override existing flags that are relevant
-        #        for reads, e.g. for enabling columnar cache on a read instance. Flags
-        #        set on read instance may or may not be present on primary.
+        #     Database flags. Set at the instance level.
+        #     They are copied from the primary instance on secondary instance creation.
+        #     Flags that have restrictions default to the value at primary
+        #     instance on read instances during creation. Read instances can set new
+        #     flags or override existing flags that are relevant for reads, for example,
+        #     for enabling columnar cache on a read instance. Flags set on read instance
+        #     might or might not be present on the primary instance.
         #
         #
         #     This is a list of "key": "value" pairs.
@@ -834,19 +836,20 @@ module Google
           # Details of a single node in the instance.
           # Nodes in an AlloyDB instance are ephemereal, they can change during
           # update, failover, autohealing and resize operations.
-          # @!attribute [rw] zone_id
+          # @!attribute [r] zone_id
           #   @return [::String]
-          #     The Compute Engine zone of the VM e.g. "us-central1-b".
-          # @!attribute [rw] id
+          #     Output only. The Compute Engine zone of the VM e.g. "us-central1-b".
+          # @!attribute [r] id
           #   @return [::String]
-          #     The identifier of the VM e.g. "test-read-0601-407e52be-ms3l".
-          # @!attribute [rw] ip
+          #     Output only. The identifier of the VM e.g.
+          #     "test-read-0601-407e52be-ms3l".
+          # @!attribute [r] ip
           #   @return [::String]
-          #     The private IP address of the VM e.g. "10.57.0.34".
-          # @!attribute [rw] state
+          #     Output only. The private IP address of the VM e.g. "10.57.0.34".
+          # @!attribute [r] state
           #   @return [::String]
-          #     Determined by state of the compute VM and postgres-service health.
-          #     Compute VM state can have values listed in
+          #     Output only. Determined by state of the compute VM and postgres-service
+          #     health. Compute VM state can have values listed in
           #     https://cloud.google.com/compute/docs/instances/instance-life-cycle and
           #     postgres-service health can have values: HEALTHY and UNHEALTHY.
           class Node
