@@ -3146,6 +3146,13 @@ module Google
         ##
         # Moves object from source to destination path within bucket
         # This Operation is being performed at server side
+        # @param [String] source_object The file name existing on bucket
+        # @param [String] destination_object The new file name to be created on bucket
+        # @example
+        #   require "google/cloud/storage"
+        #   storage = Google::Cloud::Storage.new
+        #   bucket  = storage.bucket bucket_name, skip_lookup: true
+        #   bucket.move_file source_file_name, destination_file_name
         def move_file source_object,
                       destination_object,
                       if_generation_match: nil,
