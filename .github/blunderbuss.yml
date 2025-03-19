@@ -7,6 +7,10 @@ assign_issues_by:
     - 'api: secretmanager'
     to:
     - GoogleCloudPlatform/cloud-secrets-team
+  - labels:
+    - 'api: parametermanager'
+    to:
+    - GoogleCloudPlatform/cloud-parameters-team
 
 assign_issues:
  - dazuma
