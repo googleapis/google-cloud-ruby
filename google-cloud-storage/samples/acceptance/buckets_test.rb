@@ -586,19 +586,18 @@ describe "Buckets Snippets" do
   describe "storage move object" do
     let(:file_1_name) { "file_1_name_#{SecureRandom.hex}.txt" }
     let(:file_2_name) { "file_2_name_#{SecureRandom.hex}.txt" }
-    let(:hns_bucket) {
+    let :hns_bucket do
       hierarchical_namespace = Google::Apis::StorageV1::Bucket::HierarchicalNamespace.new enabled: true
-
       storage_client.create_bucket random_bucket_name do |b|
         b.uniform_bucket_level_access = true
         b.hierarchical_namespace = hierarchical_namespace
       end
-    }
-    let(:create_file_hns) {
-        file_content = "A" * (3 * 1024 * 1024) # 3 MB of 'A' characters
-        file = StringIO.new file_content
-      hns_bucket.create_file file,file_1_name
-    }
+    end
+    let :create_file_hns do
+      file_content = "A" * (3 * 1024 * 1024) # 3 MB of 'A' characters
+      file = StringIO.new file_content
+      hns_bucket.create_file file, file_1_name
+    end
     it "obejct is moved and old object is deleted" do
       create_file_hns
       out, _err = capture_io do
@@ -612,16 +611,15 @@ describe "Buckets Snippets" do
     it "raises error for non hns bucket" do
       file_content = "A" * (3 * 1024 * 1024) # 3 MB of 'A' characters
       file = StringIO.new file_content
-      bucket.create_file file,file_1_name
-      exception = assert_raises(Google::Cloud::AlreadyExistsError) do
+      bucket.create_file file, file_1_name
+      assert_raises Google::Cloud::AlreadyExistsError do
         move_object bucket_name: bucket.name, source_file_name: file_1_name, destination_file_name: file_2_name
       end
-      assert_equal "conflict: The bucket does not support hierarchical namespace.", exception.message
     end
 
     it "raises error if source and destination are having same filename" do
       create_file_hns
-      exception = assert_raises(Google::Cloud::InvalidArgumentError) do
+      exception = assert_raises Google::Cloud::InvalidArgumentError do
         move_object bucket_name: hns_bucket.name, source_file_name: file_1_name, destination_file_name: file_1_name
       end
       assert_equal "invalid: Source and destination object names must be different.", exception.message

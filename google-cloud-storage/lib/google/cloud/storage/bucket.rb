@@ -3147,7 +3147,7 @@ module Google
         # Moves object from source to destination path within bucket
         # This Operation is being performed at server side
         # @param [String] source_object The file name existing on bucket
-        # @param [String] destination_object The new file name to be created on bucket
+        # @param [String] destination_object The new filename to be created on bucket
         # @example
         #   require "google/cloud/storage"
         #   storage = Google::Cloud::Storage.new
@@ -3169,22 +3169,22 @@ module Google
                       user_ip: nil,
                       options: {}
           ensure_service!
-          gapi = service.move_file name,
-                                   source_object,
-                                   destination_object,
-                                   if_generation_match: if_generation_match,
-                                   if_generation_not_match: if_generation_not_match,
-                                   if_metageneration_match: if_metageneration_match,
-                                   if_metageneration_not_match: if_metageneration_not_match,
-                                   if_source_generation_match: if_source_generation_match,
-                                   if_source_generation_not_match: if_source_generation_not_match,
-                                   if_source_metageneration_match: if_source_metageneration_match,
-                                   if_source_metageneration_not_match: if_source_metageneration_not_match,
-                                   user_project: user_project,
-                                   fields: fields,
-                                   quota_user: quota_user,
-                                   user_ip: user_ip,
-                                   options: options
+          service.move_file name,
+                            source_object,
+                            destination_object,
+                            if_generation_match: if_generation_match,
+                            if_generation_not_match: if_generation_not_match,
+                            if_metageneration_match: if_metageneration_match,
+                            if_metageneration_not_match: if_metageneration_not_match,
+                            if_source_generation_match: if_source_generation_match,
+                            if_source_generation_not_match: if_source_generation_not_match,
+                            if_source_metageneration_match: if_source_metageneration_match,
+                            if_source_metageneration_not_match: if_source_metageneration_not_match,
+                            user_project: user_project,
+                            fields: fields,
+                            quota_user: quota_user,
+                            user_ip: user_ip,
+                            options: options
         end
 
         ##
