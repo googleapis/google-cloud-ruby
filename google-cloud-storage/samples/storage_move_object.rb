@@ -31,8 +31,10 @@ def move_object bucket_name:, source_file_name:, destination_file_name:
   bucket.move_file source_file_name, destination_file_name
   fetch_file = bucket.file destination_file_name
   puts "New File #{fetch_file.name} created\n"
-
 end
 # [END storage_move_object]
 
-move_object bucket_name: ARGV.shift, source_file_name: ARGV.shift, destination_file_name: ARGV.shift if $PROGRAM_NAME == __FILE__
+if $PROGRAM_NAME == __FILE__
+  move_object bucket_name: ARGV.shift, source_file_name: ARGV.shift,
+              destination_file_name: ARGV.shift
+end
