@@ -376,6 +376,21 @@ module Google
         #     Deprecated. Prefer to use `import_result_bq_sink`.
         #
         #     Note: The following fields are mutually exclusive: `partial_failure_bigquery_sink`, `partial_failure_gcs_sink`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] import_result_gcs_sink
+        #   @return [::Google::Cloud::AIPlatform::V1::GcsDestination]
+        #     The Cloud Storage path to write import result to.
+        #
+        #     Note: The following fields are mutually exclusive: `import_result_gcs_sink`, `import_result_bigquery_sink`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] import_result_bigquery_sink
+        #   @return [::Google::Cloud::AIPlatform::V1::BigQueryDestination]
+        #     The BigQuery destination to write import result to. It should be a
+        #     bigquery table resource name (e.g.
+        #     "bq://projectId.bqDatasetId.bqTableId"). The dataset must exist. If the
+        #     table does not exist, it will be created with the expected schema. If the
+        #     table exists, the schema will be validated and data will be added to this
+        #     existing table.
+        #
+        #     Note: The following fields are mutually exclusive: `import_result_bigquery_sink`, `import_result_gcs_sink`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] rag_file_transformation_config
         #   @return [::Google::Cloud::AIPlatform::V1::RagFileTransformationConfig]
         #     Specifies the transformation config for RagFiles.
