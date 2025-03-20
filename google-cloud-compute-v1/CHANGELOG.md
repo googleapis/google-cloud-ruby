@@ -1,5 +1,11 @@
 # Release History
 
+### 2.19.1 (2025-03-20)
+
+#### Bug Fixes
+
+* Corrected the type of ManagedInstanceLastAttempt#errors ([#29385](https://github.com/googleapis/google-cloud-ruby/issues/29385)) 
+
 ### 2.19.0 (2025-03-14)
 
 #### Features
