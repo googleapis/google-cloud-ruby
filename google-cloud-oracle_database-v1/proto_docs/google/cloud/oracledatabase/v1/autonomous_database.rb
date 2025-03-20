@@ -52,11 +52,11 @@ module Google
         #     Optional. The labels or tags associated with the Autonomous Database.
         # @!attribute [rw] network
         #   @return [::String]
-        #     Required. The name of the VPC network used by the Autonomous Database in
+        #     Optional. The name of the VPC network used by the Autonomous Database in
         #     the following format: projects/\\{project}/global/networks/\\{network}
         # @!attribute [rw] cidr
         #   @return [::String]
-        #     Required. The subnet CIDR range for the Autonmous Database.
+        #     Optional. The subnet CIDR range for the Autonmous Database.
         # @!attribute [r] create_time
         #   @return [::Google::Protobuf::Timestamp]
         #     Output only. The date and time that the Autonomous Database was created.
