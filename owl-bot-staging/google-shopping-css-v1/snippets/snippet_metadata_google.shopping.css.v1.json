@@ -1,0 +1,495 @@
+{
+  "client_library": {
+    "name": "google-shopping-css-v1",
+    "version": "",
+    "language": "RUBY",
+    "apis": [
+      {
+        "id": "google.shopping.css.v1",
+        "version": "v1"
+      }
+    ]
+  },
+  "snippets": [
+    {
+      "region_tag": "css_v1_generated_AccountsService_ListChildAccounts_sync",
+      "title": "Snippet for the list_child_accounts call in the AccountsService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Shopping::Css::V1::AccountsService::Client#list_child_accounts.",
+      "file": "accounts_service/list_child_accounts.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_child_accounts",
+        "full_name": "::Google::Shopping::Css::V1::AccountsService::Client#list_child_accounts",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Shopping::Css::V1::ListChildAccountsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Shopping::Css::V1::ListChildAccountsResponse",
+        "client": {
+          "short_name": "AccountsService::Client",
+          "full_name": "::Google::Shopping::Css::V1::AccountsService::Client"
+        },
+        "method": {
+          "short_name": "ListChildAccounts",
+          "full_name": "google.shopping.css.v1.AccountsService.ListChildAccounts",
+          "service": {
+            "short_name": "AccountsService",
+            "full_name": "google.shopping.css.v1.AccountsService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "css_v1_generated_AccountsService_GetAccount_sync",
+      "title": "Snippet for the get_account call in the AccountsService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Shopping::Css::V1::AccountsService::Client#get_account.",
+      "file": "accounts_service/get_account.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_account",
+        "full_name": "::Google::Shopping::Css::V1::AccountsService::Client#get_account",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Shopping::Css::V1::GetAccountRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Shopping::Css::V1::Account",
+        "client": {
+          "short_name": "AccountsService::Client",
+          "full_name": "::Google::Shopping::Css::V1::AccountsService::Client"
+        },
+        "method": {
+          "short_name": "GetAccount",
+          "full_name": "google.shopping.css.v1.AccountsService.GetAccount",
+          "service": {
+            "short_name": "AccountsService",
+            "full_name": "google.shopping.css.v1.AccountsService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "css_v1_generated_AccountsService_UpdateLabels_sync",
+      "title": "Snippet for the update_labels call in the AccountsService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Shopping::Css::V1::AccountsService::Client#update_labels.",
+      "file": "accounts_service/update_labels.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_labels",
+        "full_name": "::Google::Shopping::Css::V1::AccountsService::Client#update_labels",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Shopping::Css::V1::UpdateAccountLabelsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Shopping::Css::V1::Account",
+        "client": {
+          "short_name": "AccountsService::Client",
+          "full_name": "::Google::Shopping::Css::V1::AccountsService::Client"
+        },
+        "method": {
+          "short_name": "UpdateLabels",
+          "full_name": "google.shopping.css.v1.AccountsService.UpdateLabels",
+          "service": {
+            "short_name": "AccountsService",
+            "full_name": "google.shopping.css.v1.AccountsService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "css_v1_generated_AccountLabelsService_ListAccountLabels_sync",
+      "title": "Snippet for the list_account_labels call in the AccountLabelsService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Shopping::Css::V1::AccountLabelsService::Client#list_account_labels.",
+      "file": "account_labels_service/list_account_labels.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_account_labels",
+        "full_name": "::Google::Shopping::Css::V1::AccountLabelsService::Client#list_account_labels",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Shopping::Css::V1::ListAccountLabelsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Shopping::Css::V1::ListAccountLabelsResponse",
+        "client": {
+          "short_name": "AccountLabelsService::Client",
+          "full_name": "::Google::Shopping::Css::V1::AccountLabelsService::Client"
+        },
+        "method": {
+          "short_name": "ListAccountLabels",
+          "full_name": "google.shopping.css.v1.AccountLabelsService.ListAccountLabels",
+          "service": {
+            "short_name": "AccountLabelsService",
+            "full_name": "google.shopping.css.v1.AccountLabelsService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "css_v1_generated_AccountLabelsService_CreateAccountLabel_sync",
+      "title": "Snippet for the create_account_label call in the AccountLabelsService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Shopping::Css::V1::AccountLabelsService::Client#create_account_label.",
+      "file": "account_labels_service/create_account_label.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_account_label",
+        "full_name": "::Google::Shopping::Css::V1::AccountLabelsService::Client#create_account_label",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Shopping::Css::V1::CreateAccountLabelRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Shopping::Css::V1::AccountLabel",
+        "client": {
+          "short_name": "AccountLabelsService::Client",
+          "full_name": "::Google::Shopping::Css::V1::AccountLabelsService::Client"
+        },
+        "method": {
+          "short_name": "CreateAccountLabel",
+          "full_name": "google.shopping.css.v1.AccountLabelsService.CreateAccountLabel",
+          "service": {
+            "short_name": "AccountLabelsService",
+            "full_name": "google.shopping.css.v1.AccountLabelsService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "css_v1_generated_AccountLabelsService_UpdateAccountLabel_sync",
+      "title": "Snippet for the update_account_label call in the AccountLabelsService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Shopping::Css::V1::AccountLabelsService::Client#update_account_label.",
+      "file": "account_labels_service/update_account_label.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_account_label",
+        "full_name": "::Google::Shopping::Css::V1::AccountLabelsService::Client#update_account_label",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Shopping::Css::V1::UpdateAccountLabelRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Shopping::Css::V1::AccountLabel",
+        "client": {
+          "short_name": "AccountLabelsService::Client",
+          "full_name": "::Google::Shopping::Css::V1::AccountLabelsService::Client"
+        },
+        "method": {
+          "short_name": "UpdateAccountLabel",
+          "full_name": "google.shopping.css.v1.AccountLabelsService.UpdateAccountLabel",
+          "service": {
+            "short_name": "AccountLabelsService",
+            "full_name": "google.shopping.css.v1.AccountLabelsService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "css_v1_generated_AccountLabelsService_DeleteAccountLabel_sync",
+      "title": "Snippet for the delete_account_label call in the AccountLabelsService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Shopping::Css::V1::AccountLabelsService::Client#delete_account_label.",
+      "file": "account_labels_service/delete_account_label.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_account_label",
+        "full_name": "::Google::Shopping::Css::V1::AccountLabelsService::Client#delete_account_label",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Shopping::Css::V1::DeleteAccountLabelRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Protobuf::Empty",
+        "client": {
+          "short_name": "AccountLabelsService::Client",
+          "full_name": "::Google::Shopping::Css::V1::AccountLabelsService::Client"
+        },
+        "method": {
+          "short_name": "DeleteAccountLabel",
+          "full_name": "google.shopping.css.v1.AccountLabelsService.DeleteAccountLabel",
+          "service": {
+            "short_name": "AccountLabelsService",
+            "full_name": "google.shopping.css.v1.AccountLabelsService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "css_v1_generated_CssProductInputsService_InsertCssProductInput_sync",
+      "title": "Snippet for the insert_css_product_input call in the CssProductInputsService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Shopping::Css::V1::CssProductInputsService::Client#insert_css_product_input.",
+      "file": "css_product_inputs_service/insert_css_product_input.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "insert_css_product_input",
+        "full_name": "::Google::Shopping::Css::V1::CssProductInputsService::Client#insert_css_product_input",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Shopping::Css::V1::InsertCssProductInputRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Shopping::Css::V1::CssProductInput",
+        "client": {
+          "short_name": "CssProductInputsService::Client",
+          "full_name": "::Google::Shopping::Css::V1::CssProductInputsService::Client"
+        },
+        "method": {
+          "short_name": "InsertCssProductInput",
+          "full_name": "google.shopping.css.v1.CssProductInputsService.InsertCssProductInput",
+          "service": {
+            "short_name": "CssProductInputsService",
+            "full_name": "google.shopping.css.v1.CssProductInputsService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "css_v1_generated_CssProductInputsService_UpdateCssProductInput_sync",
+      "title": "Snippet for the update_css_product_input call in the CssProductInputsService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Shopping::Css::V1::CssProductInputsService::Client#update_css_product_input.",
+      "file": "css_product_inputs_service/update_css_product_input.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_css_product_input",
+        "full_name": "::Google::Shopping::Css::V1::CssProductInputsService::Client#update_css_product_input",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Shopping::Css::V1::UpdateCssProductInputRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Shopping::Css::V1::CssProductInput",
+        "client": {
+          "short_name": "CssProductInputsService::Client",
+          "full_name": "::Google::Shopping::Css::V1::CssProductInputsService::Client"
+        },
+        "method": {
+          "short_name": "UpdateCssProductInput",
+          "full_name": "google.shopping.css.v1.CssProductInputsService.UpdateCssProductInput",
+          "service": {
+            "short_name": "CssProductInputsService",
+            "full_name": "google.shopping.css.v1.CssProductInputsService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "css_v1_generated_CssProductInputsService_DeleteCssProductInput_sync",
+      "title": "Snippet for the delete_css_product_input call in the CssProductInputsService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Shopping::Css::V1::CssProductInputsService::Client#delete_css_product_input.",
+      "file": "css_product_inputs_service/delete_css_product_input.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_css_product_input",
+        "full_name": "::Google::Shopping::Css::V1::CssProductInputsService::Client#delete_css_product_input",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Shopping::Css::V1::DeleteCssProductInputRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Protobuf::Empty",
+        "client": {
+          "short_name": "CssProductInputsService::Client",
+          "full_name": "::Google::Shopping::Css::V1::CssProductInputsService::Client"
+        },
+        "method": {
+          "short_name": "DeleteCssProductInput",
+          "full_name": "google.shopping.css.v1.CssProductInputsService.DeleteCssProductInput",
+          "service": {
+            "short_name": "CssProductInputsService",
+            "full_name": "google.shopping.css.v1.CssProductInputsService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "css_v1_generated_CssProductsService_GetCssProduct_sync",
+      "title": "Snippet for the get_css_product call in the CssProductsService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Shopping::Css::V1::CssProductsService::Client#get_css_product.",
+      "file": "css_products_service/get_css_product.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_css_product",
+        "full_name": "::Google::Shopping::Css::V1::CssProductsService::Client#get_css_product",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Shopping::Css::V1::GetCssProductRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Shopping::Css::V1::CssProduct",
+        "client": {
+          "short_name": "CssProductsService::Client",
+          "full_name": "::Google::Shopping::Css::V1::CssProductsService::Client"
+        },
+        "method": {
+          "short_name": "GetCssProduct",
+          "full_name": "google.shopping.css.v1.CssProductsService.GetCssProduct",
+          "service": {
+            "short_name": "CssProductsService",
+            "full_name": "google.shopping.css.v1.CssProductsService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "css_v1_generated_CssProductsService_ListCssProducts_sync",
+      "title": "Snippet for the list_css_products call in the CssProductsService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Shopping::Css::V1::CssProductsService::Client#list_css_products.",
+      "file": "css_products_service/list_css_products.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_css_products",
+        "full_name": "::Google::Shopping::Css::V1::CssProductsService::Client#list_css_products",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Shopping::Css::V1::ListCssProductsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Shopping::Css::V1::ListCssProductsResponse",
+        "client": {
+          "short_name": "CssProductsService::Client",
+          "full_name": "::Google::Shopping::Css::V1::CssProductsService::Client"
+        },
+        "method": {
+          "short_name": "ListCssProducts",
+          "full_name": "google.shopping.css.v1.CssProductsService.ListCssProducts",
+          "service": {
+            "short_name": "CssProductsService",
+            "full_name": "google.shopping.css.v1.CssProductsService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    }
+  ]
+}
