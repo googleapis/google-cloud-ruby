@@ -1652,6 +1652,234 @@ module Google
             end
 
             ##
+            # Accepts a proposal to update a Network Connectivity Center spoke in a hub.
+            #
+            # @overload accept_spoke_update(request, options = nil)
+            #   Pass arguments to `accept_spoke_update` via a request object, either of type
+            #   {::Google::Cloud::NetworkConnectivity::V1::AcceptSpokeUpdateRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::NetworkConnectivity::V1::AcceptSpokeUpdateRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload accept_spoke_update(name: nil, spoke_uri: nil, spoke_etag: nil, request_id: nil)
+            #   Pass arguments to `accept_spoke_update` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param name [::String]
+            #     Required. The name of the hub to accept spoke update.
+            #   @param spoke_uri [::String]
+            #     Required. The URI of the spoke to accept update.
+            #   @param spoke_etag [::String]
+            #     Required. The etag of the spoke to accept update.
+            #   @param request_id [::String]
+            #     Optional. A request ID to identify requests. Specify a unique request ID so
+            #     that if you must retry your request, the server knows to ignore the request
+            #     if it has already been completed. The server guarantees that a request
+            #     doesn't result in creation of duplicate commitments for at least 60
+            #     minutes.
+            #
+            #     For example, consider a situation where you make an initial request and
+            #     the request times out. If you make the request again with the same request
+            #     ID, the server can check to see whether the original operation
+            #     was received. If it was, the server ignores the second request. This
+            #     behavior prevents clients from mistakenly creating duplicate commitments.
+            #
+            #     The request ID must be a valid UUID, with the exception that zero UUID is
+            #     not supported (00000000-0000-0000-0000-000000000000).
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Gapic::Operation]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Gapic::Operation]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/network_connectivity/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::NetworkConnectivity::V1::HubService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::NetworkConnectivity::V1::AcceptSpokeUpdateRequest.new
+            #
+            #   # Call the accept_spoke_update method.
+            #   result = client.accept_spoke_update request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "No response received."
+            #   end
+            #
+            def accept_spoke_update request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::NetworkConnectivity::V1::AcceptSpokeUpdateRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.accept_spoke_update.metadata.to_h
+
+              # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::NetworkConnectivity::V1::VERSION
+              metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.accept_spoke_update.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.accept_spoke_update.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @hub_service_stub.call_rpc :accept_spoke_update, request, options: options do |response, operation|
+                response = ::Gapic::Operation.new response, @operations_client, options: options
+                yield response, operation if block_given?
+                throw :response, response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Rejects a proposal to update a Network Connectivity Center spoke in a hub.
+            #
+            # @overload reject_spoke_update(request, options = nil)
+            #   Pass arguments to `reject_spoke_update` via a request object, either of type
+            #   {::Google::Cloud::NetworkConnectivity::V1::RejectSpokeUpdateRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::NetworkConnectivity::V1::RejectSpokeUpdateRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload reject_spoke_update(name: nil, spoke_uri: nil, spoke_etag: nil, details: nil, request_id: nil)
+            #   Pass arguments to `reject_spoke_update` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param name [::String]
+            #     Required. The name of the hub to reject spoke update.
+            #   @param spoke_uri [::String]
+            #     Required. The URI of the spoke to reject update.
+            #   @param spoke_etag [::String]
+            #     Required. The etag of the spoke to reject update.
+            #   @param details [::String]
+            #     Optional. Additional information provided by the hub administrator.
+            #   @param request_id [::String]
+            #     Optional. A request ID to identify requests. Specify a unique request ID so
+            #     that if you must retry your request, the server knows to ignore the request
+            #     if it has already been completed. The server guarantees that a request
+            #     doesn't result in creation of duplicate commitments for at least 60
+            #     minutes.
+            #
+            #     For example, consider a situation where you make an initial request and
+            #     the request times out. If you make the request again with the same request
+            #     ID, the server can check to see whether the original operation
+            #     was received. If it was, the server ignores the second request. This
+            #     behavior prevents clients from mistakenly creating duplicate commitments.
+            #
+            #     The request ID must be a valid UUID, with the exception that zero UUID is
+            #     not supported (00000000-0000-0000-0000-000000000000).
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Gapic::Operation]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Gapic::Operation]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/network_connectivity/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::NetworkConnectivity::V1::HubService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::NetworkConnectivity::V1::RejectSpokeUpdateRequest.new
+            #
+            #   # Call the reject_spoke_update method.
+            #   result = client.reject_spoke_update request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "No response received."
+            #   end
+            #
+            def reject_spoke_update request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::NetworkConnectivity::V1::RejectSpokeUpdateRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.reject_spoke_update.metadata.to_h
+
+              # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::NetworkConnectivity::V1::VERSION
+              metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.reject_spoke_update.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.reject_spoke_update.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @hub_service_stub.call_rpc :reject_spoke_update, request, options: options do |response, operation|
+                response = ::Gapic::Operation.new response, @operations_client, options: options
+                yield response, operation if block_given?
+                throw :response, response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
             # Deletes a Network Connectivity Center spoke.
             #
             # @overload delete_spoke(request, options = nil)
@@ -2659,6 +2887,16 @@ module Google
                 #
                 attr_reader :accept_hub_spoke
                 ##
+                # RPC-specific configuration for `accept_spoke_update`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :accept_spoke_update
+                ##
+                # RPC-specific configuration for `reject_spoke_update`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :reject_spoke_update
+                ##
                 # RPC-specific configuration for `delete_spoke`
                 # @return [::Gapic::Config::Method]
                 #
@@ -2727,6 +2965,10 @@ module Google
                   @reject_hub_spoke = ::Gapic::Config::Method.new reject_hub_spoke_config
                   accept_hub_spoke_config = parent_rpcs.accept_hub_spoke if parent_rpcs.respond_to? :accept_hub_spoke
                   @accept_hub_spoke = ::Gapic::Config::Method.new accept_hub_spoke_config
+                  accept_spoke_update_config = parent_rpcs.accept_spoke_update if parent_rpcs.respond_to? :accept_spoke_update
+                  @accept_spoke_update = ::Gapic::Config::Method.new accept_spoke_update_config
+                  reject_spoke_update_config = parent_rpcs.reject_spoke_update if parent_rpcs.respond_to? :reject_spoke_update
+                  @reject_spoke_update = ::Gapic::Config::Method.new reject_spoke_update_config
                   delete_spoke_config = parent_rpcs.delete_spoke if parent_rpcs.respond_to? :delete_spoke
                   @delete_spoke = ::Gapic::Config::Method.new delete_spoke_config
                   get_route_table_config = parent_rpcs.get_route_table if parent_rpcs.respond_to? :get_route_table
