@@ -19,6 +19,7 @@ require_relative "../pubsub_create_topic_with_schema"
 require_relative "../pubsub_create_proto_schema"
 require_relative "../pubsub_delete_schema"
 require_relative "../pubsub_get_schema"
+require_relative "../pubsub_list_schema_revisions"
 require_relative "../pubsub_list_schemas"
 require_relative "../pubsub_publish_avro_records"
 require_relative "../pubsub_subscribe_avro_records"
@@ -221,18 +222,30 @@ describe "schemas" do
       end
     end
 
-    it "supports pubsub_commit_proto_schema" do
+    it "supports pubsub_commit_proto_schema & pubsub_commit_list_schema_revisions" do
       @schema = pubsub.create_schema schema_id, :protocol_buffer, proto_definition
-      revision_id = @schema.revision_id
+      rev_id = @schema.revision_id
 
       # pubsub_commit_proto_schema
-      expect_with_retry "pubsub_commit_proto_schema" do
-        out, _err = capture_io do
-          commit_proto_schema schema_id: schema_id, proto_file: revision_file
-        end
-        refute_equal out, "Schema commited with revision #{revision_id}."
-        assert_includes out, "Schema commited with revision"
+      schema1 = nil
+      out, _err = capture_io do
+        schema1 = commit_proto_schema schema_id: schema_id, proto_file: revision_file
       end
+      refute_equal out, "Schema commited with revision #{rev_id}."
+      assert_includes out, "Schema commited with revision"
+
+      # pubsub_list_schema_revisions
+      schema2 = nil
+      out, _err = capture_io do
+        schema2 = commit_proto_schema schema_id: schema_id, proto_file: revision_file
+      end
+
+      out, _err = capture_io do
+        list_schema_revisions schema_id: schema_id
+      end
+
+      assert_includes out, schema1.revision_id
+      assert_includes out, schema2.revision_id
     end
   end
 end

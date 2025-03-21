@@ -242,6 +242,30 @@ module Google
         end
 
         ##
+        # Lists all schema revisions for the named schema.
+        #
+        # @param view [Symbol, String, nil] The set of fields to return in the response. Possible values:
+        #   * `BASIC` - Include the `name` and `type` of the schema, but not the `definition`.
+        #   * `FULL` - Include all Schema object fields.
+        #
+        # @return [Google::Cloud::PubSub::V1::ListSchemaRevisionsResponse]
+        #
+        # @example
+        #   require "google/cloud/pubsub"
+        #
+        #   pubsub = Google::Cloud::PubSub.new
+        #
+        #   schema = pubsub.schema "my-schema"
+        #   schema.list_revisions
+        #
+        def list_revisions view: nil, page_size: nil, page_token: nil
+          service.list_schema_revisions name,
+                                        view || @view,
+                                        page_size,
+                                        page_token
+        end
+
+        ##
         # Determines whether the schema object was created without retrieving the
         # resource representation from the Pub/Sub service.
         #
