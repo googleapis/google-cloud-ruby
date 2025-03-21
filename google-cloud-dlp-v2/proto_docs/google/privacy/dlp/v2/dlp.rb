@@ -282,6 +282,9 @@ module Google
           # The type of data being sent for inspection. To learn more, see
           # [Supported file
           # types](https://cloud.google.com/sensitive-data-protection/docs/supported-file-types).
+          #
+          # Only the first frame of each multiframe image is inspected. Metadata and
+          # other frames aren't inspected.
           module BytesType
             # Unused
             BYTES_TYPE_UNSPECIFIED = 0
@@ -1233,6 +1236,13 @@ module Google
         # @!attribute [rw] sensitivity_score
         #   @return [::Google::Cloud::Dlp::V2::SensitivityScore]
         #     The default sensitivity of the infoType.
+        # @!attribute [rw] specific_info_types
+        #   @return [::Array<::String>]
+        #     If this field is set, this infoType is a general infoType and these
+        #     specific infoTypes are contained within it.
+        #     General infoTypes are infoTypes that encompass multiple specific infoTypes.
+        #     For example, the "GEOGRAPHIC_DATA" general infoType would have set for this
+        #     field "LOCATION", "LOCATION_COORDINATES", and "STREET_ADDRESS".
         class InfoTypeDescription
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -1305,6 +1315,9 @@ module Google
 
             # The infoType is typically used in Croatia.
             CROATIA = 42
+
+            # The infoType is typically used in Czechia.
+            CZECHIA = 52
 
             # The infoType is typically used in Denmark.
             DENMARK = 10
@@ -4303,6 +4316,15 @@ module Google
           #        reports](https://cloud.google.com/sensitive-data-protection/docs/analyze-data-profiles#use_a_premade_report).
           #        If you use VPC Service Controls to define security perimeters, then
           #        you must use a separate table for each boundary.
+          # @!attribute [rw] sample_findings_table
+          #   @return [::Google::Cloud::Dlp::V2::BigQueryTable]
+          #     Store sample [data profile
+          #     findings][google.privacy.dlp.v2.DataProfileFinding] in an existing table
+          #     or a new table in an existing dataset. Each regeneration will result in
+          #     new rows in BigQuery. Data is inserted using [streaming
+          #     insert](https://cloud.google.com/blog/products/bigquery/life-of-a-bigquery-streaming-insert)
+          #     and so data may be in the buffer for a period of time after the profile
+          #     has finished.
           class Export
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -4437,6 +4459,69 @@ module Google
             # A user (non-internal) error occurred.
             ERROR_CHANGED = 4
           end
+        end
+
+        # Details about a piece of potentially sensitive information that was detected
+        # when the data resource was profiled.
+        # @!attribute [rw] quote
+        #   @return [::String]
+        #     The content that was found. Even if the content is not textual, it
+        #     may be converted to a textual representation here. If the finding exceeds
+        #     4096 bytes in length, the quote may be omitted.
+        # @!attribute [rw] infotype
+        #   @return [::Google::Cloud::Dlp::V2::InfoType]
+        #     The [type of
+        #     content](https://cloud.google.com/sensitive-data-protection/docs/infotypes-reference)
+        #     that might have been found.
+        # @!attribute [rw] quote_info
+        #   @return [::Google::Cloud::Dlp::V2::QuoteInfo]
+        #     Contains data parsed from quotes. Currently supported infoTypes: DATE,
+        #     DATE_OF_BIRTH, and TIME.
+        # @!attribute [rw] data_profile_resource_name
+        #   @return [::String]
+        #     Resource name of the data profile associated with the finding.
+        # @!attribute [rw] finding_id
+        #   @return [::String]
+        #     A unique identifier for the finding.
+        # @!attribute [rw] timestamp
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Timestamp when the finding was detected.
+        # @!attribute [rw] location
+        #   @return [::Google::Cloud::Dlp::V2::DataProfileFindingLocation]
+        #     Where the content was found.
+        # @!attribute [rw] resource_visibility
+        #   @return [::Google::Cloud::Dlp::V2::ResourceVisibility]
+        #     How broadly a resource has been shared.
+        class DataProfileFinding
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Location of a data profile finding within a resource.
+        # @!attribute [rw] container_name
+        #   @return [::String]
+        #     Name of the container where the finding is located.
+        #     The top-level name is the source file name or table name. Names of some
+        #     common storage containers are formatted as follows:
+        #
+        #     * BigQuery tables:  `{project_id}:{dataset_id}.{table_id}`
+        #     * Cloud Storage files: `gs://{bucket}/{path}`
+        # @!attribute [rw] data_profile_finding_record_location
+        #   @return [::Google::Cloud::Dlp::V2::DataProfileFindingRecordLocation]
+        #     Location of a finding within a resource that produces a table data
+        #     profile.
+        class DataProfileFindingLocation
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Location of a finding within a resource that produces a table data profile.
+        # @!attribute [rw] field
+        #   @return [::Google::Cloud::Dlp::V2::FieldId]
+        #     Field ID of the column containing the finding.
+        class DataProfileFindingRecordLocation
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # Configuration for setting up a job to scan resources for profile generation.
@@ -6884,6 +6969,14 @@ module Google
         # @!attribute [rw] create_time
         #   @return [::Google::Protobuf::Timestamp]
         #     The time at which the table was created.
+        # @!attribute [rw] sample_findings_table
+        #   @return [::Google::Cloud::Dlp::V2::BigQueryTable]
+        #     The BigQuery table to which the sample findings are written.
+        # @!attribute [rw] tags
+        #   @return [::Array<::Google::Cloud::Dlp::V2::Tag>]
+        #     The tags attached to the table, including any tags attached during
+        #     profiling. Because tags are attached to Cloud SQL instances rather than
+        #     Cloud SQL tables, this field is empty for Cloud SQL table profiles.
         # @!attribute [rw] related_resources
         #   @return [::Array<::Google::Cloud::Dlp::V2::RelatedResource>]
         #     Resources related to this profile.
@@ -7215,9 +7308,16 @@ module Google
         # @!attribute [rw] file_store_info_type_summaries
         #   @return [::Array<::Google::Cloud::Dlp::V2::FileStoreInfoTypeSummary>]
         #     InfoTypes detected in this file store.
+        # @!attribute [rw] sample_findings_table
+        #   @return [::Google::Cloud::Dlp::V2::BigQueryTable]
+        #     The BigQuery table to which the sample findings are written.
         # @!attribute [rw] file_store_is_empty
         #   @return [::Boolean]
         #     The file store does not have any files.
+        # @!attribute [rw] tags
+        #   @return [::Array<::Google::Cloud::Dlp::V2::Tag>]
+        #     The tags attached to the resource, including any tags attached during
+        #     profiling.
         # @!attribute [rw] related_resources
         #   @return [::Array<::Google::Cloud::Dlp::V2::RelatedResource>]
         #     Resources related to this profile.
@@ -7257,6 +7357,26 @@ module Google
             # failed.
             DONE = 2
           end
+        end
+
+        # A tag associated with a resource.
+        # @!attribute [rw] namespaced_tag_value
+        #   @return [::String]
+        #     The namespaced name for the tag value to attach to Google Cloud resources.
+        #     Must be in the format `{parent_id}/{tag_key_short_name}/{short_name}`, for
+        #     example, "123456/environment/prod". This is only set for Google Cloud
+        #     resources.
+        # @!attribute [rw] key
+        #   @return [::String]
+        #     The key of a tag key-value pair. For Google Cloud resources, this is the
+        #     resource name of the key, for example, "tagKeys/123456".
+        # @!attribute [rw] value
+        #   @return [::String]
+        #     The value of a tag key-value pair. For Google Cloud resources, this is the
+        #     resource name of the value, for example, "tagValues/123456".
+        class Tag
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # A related resource.
