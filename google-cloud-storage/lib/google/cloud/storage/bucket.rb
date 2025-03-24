@@ -3146,7 +3146,7 @@ module Google
         ##
         # Moves object from source to destination path within bucket
         # This Operation is being performed at server side
-        # @param [String] source_object The file name existing on bucket
+        # @param [String] source_object The file name in existing bucket
         # @param [String] destination_object The new filename to be created on bucket
         # @example
         #   require "google/cloud/storage"
