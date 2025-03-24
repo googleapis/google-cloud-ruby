@@ -593,13 +593,13 @@ describe "Buckets Snippets" do
         b.hierarchical_namespace = hierarchical_namespace
       end
     end
-    let :create_file_hns do
+    let :create_source_file do
       file_content = "A" * (3 * 1024 * 1024) # 3 MB of 'A' characters
       file = StringIO.new file_content
       hns_bucket.create_file file, file_1_name
     end
     it "object is moved and old object is deleted" do
-      create_file_hns
+      create_source_file
       out, _err = capture_io do
         move_object bucket_name: hns_bucket.name, source_file_name: file_1_name, destination_file_name: file_2_name
       end
@@ -609,7 +609,7 @@ describe "Buckets Snippets" do
     end
 
     it "raises error if source and destination are having same filename" do
-      create_file_hns
+      create_source_file
       exception = assert_raises Google::Cloud::InvalidArgumentError do
         move_object bucket_name: hns_bucket.name, source_file_name: file_1_name, destination_file_name: file_1_name
       end
