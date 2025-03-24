@@ -73,6 +73,8 @@ class TestProxyServer < Google::Bigtable::Testproxy::CloudBigtableV2TestProxy::S
       @bigtable.table instance_id, name.split("/").last, app_profile_id: app_profile_id
     end
 
+    attr_reader :timeout
+
     private
 
     attr_accessor :instance_id
@@ -93,28 +95,19 @@ class TestProxyServer < Google::Bigtable::Testproxy::CloudBigtableV2TestProxy::S
       self.instance_id = instance_id
       self.app_profile_id = app_profile_id
 
-      timeout = if per_operation_timeout
-                  assert (per_operation_timeout.keys.sort == [:nanos, :seconds]),
-                         "Unexpected format for per_operation_timeout (got #{per_operation_timeout})"
-                  # At time of writing, no tests are using nanos, so we don't use that field.
-                  # If this changes, update tests.
-                  assert per_operation_timeout[:nanos].zero?,
-                         "Timeout specified with nanos, update proxy to handle this"
-
-                  per_operation_timeout[:seconds]
-                end
+      @timeout = per_operation_timeout[:seconds].to_i if per_operation_timeout
 
       # At time of writing, the only value ever supplied here OPTIONAL_FEATURE_CONFIG_DEFAULT
       assert optional_feature_config == :OPTIONAL_FEATURE_CONFIG_DEFAULT,
              "optional_feature_config was set to an unexpected value"
 
-      @bigtable = connect project_id, timeout, data_target
+      @bigtable = connect project_id, data_target
     end
 
-    def connect project_id, timeout, data_target
+    def connect project_id, data_target
       args = {
         project_id: project_id,
-        timeout: timeout
+        timeout: @timeout
       }.compact
 
       if data_target == "emulator"
@@ -469,3 +462,4 @@ server.add_http2_port addr, :this_port_is_insecure
 server.handle TestProxyServer
 puts "SERVER STARTED"
 server.run_till_terminated_or_interrupted [1, "int", "SIGTERM"]
+puts "SERVER STOPPED"

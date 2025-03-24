@@ -28,6 +28,7 @@ end
 tool "conformance" do
   tool "test" do
     flag :port, "--port=VAL", default: ENV["PORT"] || "9999"
+    flag :focus, "--run=REGEXP", "--focus=REGEXP"
 
     include :git_cache
     include :exec
@@ -38,14 +39,16 @@ tool "conformance" do
       known_failures = File.read("conformance/known_failures.txt").split.join("|")
       test_dir = git_cache.get "https://github.com/googleapis/cloud-bigtable-clients-test.git", update: true
       result = nil
-      exec_tool ["conformance", "run-proxy", "--port", port], out: :controller do |controller|
+      exec_tool ["conformance", "run-proxy", "--port", port],
+                out: [:tee, :controller, :inherit], in: :null do |controller|
         logger.info "Waiting for server to start..."
         loop do
           break if controller.out.readline.strip == "SERVER STARTED"
         end
         logger.info "Got server start signal. Running test suite..."
         Dir.chdir "#{test_dir}/tests" do
-          result = exec ["go", "test", "-v", "-proxy_addr=:#{port}", "-skip=#{known_failures}"]
+          which_tests = focus ? "-run=#{focus}" : "-skip=#{known_failures}"
+          result = exec ["go", "test", "-v", "-proxy_addr=:#{port}", which_tests]
         end
         controller.kill "SIGINT"
       end
