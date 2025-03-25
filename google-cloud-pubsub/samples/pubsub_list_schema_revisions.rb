@@ -14,19 +14,19 @@
 
 require "google/cloud/pubsub"
 
-def commit_proto_schema schema_id:, proto_file:
-  # [START pubsub_commit_proto_schema]
+def list_schema_revisions schema_id:
+  # [START pubsub_list_schema_revisions]
   # schema_id = "your-schema-id"
-  # proto_file = "path/to/a/proto_file.proto"
 
   pubsub = Google::Cloud::Pubsub.new
+
   schema = pubsub.schema schema_id
 
-  definition = File.read proto_file
+  response = schema.list_revisions
 
-  result = schema.commit definition, :protocol_buffer
-
-  puts "Schema commited with revision #{result.revision_id}."
-  result
-  # [END pubsub_commit_proto_schema]
+  puts "Listed revisions of schema #{schema_id}"
+  response.each do |revision_schema|
+    puts revision_schema.revision_id
+  end
+  # [END pubsub_list_schema_revisions]
 end

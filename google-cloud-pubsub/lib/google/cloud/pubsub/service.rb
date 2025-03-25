@@ -342,6 +342,21 @@ module Google
         end
 
         ##
+        # Lists all schema revisions for the named schema.
+        # @param name [String] The name of the schema to list revisions for.
+        # @param view [String, Symbol, nil] Possible values:
+        #   * `BASIC` - Include the name and type of the schema, but not the definition.
+        #   * `FULL` - Include all Schema object fields.
+        #
+        def list_schema_revisions name, view, page_size, page_token
+          schema_view = Google::Cloud::PubSub::V1::SchemaView.const_get view.to_s.upcase
+          schemas.list_schema_revisions name: name,
+                                        view: schema_view,
+                                        page_size: page_size,
+                                        page_token: page_token
+        end
+
+        ##
         # Creates a schema in the current (or given) project.
         def create_schema schema_id, type, definition, options = {}
           schema = Google::Cloud::PubSub::V1::Schema.new(
