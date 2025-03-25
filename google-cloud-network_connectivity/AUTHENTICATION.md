@@ -56,7 +56,7 @@ To configure a credentials file for an individual client initialization:
 ```ruby
 require "google/cloud/network_connectivity"
 
-client = Google::Cloud::NetworkConnectivity.hub_service do |config|
+client = Google::Cloud::NetworkConnectivity.cross_network_automation_service do |config|
   config.credentials = "path/to/credentialfile.json"
 end
 ```
@@ -70,7 +70,7 @@ Google::Cloud::NetworkConnectivity.configure do |config|
   config.credentials = "path/to/credentialfile.json"
 end
 
-client = Google::Cloud::NetworkConnectivity.hub_service
+client = Google::Cloud::NetworkConnectivity.cross_network_automation_service
 ```
 
 ### Environment Variables
@@ -100,7 +100,7 @@ require "google/cloud/network_connectivity"
 
 ENV["GOOGLE_APPLICATION_CREDENTIALS"] = "path/to/credentialfile.json"
 
-client = Google::Cloud::NetworkConnectivity.hub_service
+client = Google::Cloud::NetworkConnectivity.cross_network_automation_service
 ```
 
 ### Local ADC file
