@@ -1,5 +1,11 @@
 # Release History
 
+### 0.40.0 (2025-03-25)
+
+#### Features
+
+* Added config options to enable LLM layout parsing ([#29387](https://github.com/googleapis/google-cloud-ruby/issues/29387)) 
+
 ### 0.39.1 (2025-02-06)
 
 #### Documentation
