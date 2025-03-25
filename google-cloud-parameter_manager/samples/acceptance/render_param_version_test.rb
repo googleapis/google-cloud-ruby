@@ -12,8 +12,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-require "uri"
-
 require_relative "helper"
 
 describe "#render_param_version", :parameter_manager_snippet do
@@ -37,7 +35,7 @@ describe "#render_param_version", :parameter_manager_snippet do
     secret_client.set_iam_policy resource: secret_name, policy: policy
 
     data = '{"username": "test-user", "password": ' \
-            "\"__REF__(//secretmanager.googleapis.com/#{secret_name}/versions/latest)\"}"
+           "\"__REF__(//secretmanager.googleapis.com/#{secret_name}/versions/latest)\"}"
 
     # Create Parameter Version
     client.create_parameter_version parent: parameter_name, parameter_version_id: version_id,

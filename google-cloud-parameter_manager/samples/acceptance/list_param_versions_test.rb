@@ -12,8 +12,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-require "uri"
-
 require_relative "helper"
 
 describe "#list_param_versions", :parameter_manager_snippet do
