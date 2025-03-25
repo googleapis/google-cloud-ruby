@@ -45,7 +45,7 @@ module Google
         #     labels](https://cloud.google.com/resource-manager/docs/creating-managing-labels#requirements).
         # @!attribute [rw] description
         #   @return [::String]
-        #     An optional description of the hub.
+        #     Optional. An optional description of the hub.
         # @!attribute [r] unique_id
         #   @return [::String]
         #     Output only. The Google-generated UUID for the hub. This value is unique
@@ -89,10 +89,10 @@ module Google
         #     the preset_topology is set to PRESET_TOPOLOGY_UNSPECIFIED.
         # @!attribute [rw] export_psc
         #   @return [::Boolean]
-        #     Optional. Whether Private Service Connect transitivity is enabled for the
-        #     hub. If true, Private Service Connect endpoints in VPC spokes attached to
-        #     the hub are made accessible to other VPC spokes attached to the hub.
-        #     The default value is false.
+        #     Optional. Whether Private Service Connect connection propagation is enabled
+        #     for the hub. If true, Private Service Connect endpoints in VPC spokes
+        #     attached to the hub are made accessible to other VPC spokes attached to the
+        #     hub. The default value is false.
         class Hub
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -152,7 +152,7 @@ module Google
         #     labels](https://cloud.google.com/resource-manager/docs/creating-managing-labels#requirements).
         # @!attribute [rw] description
         #   @return [::String]
-        #     An optional description of the spoke.
+        #     Optional. An optional description of the spoke.
         # @!attribute [rw] hub
         #   @return [::String]
         #     Immutable. The name of the hub that this spoke is attached to.
@@ -161,13 +161,13 @@ module Google
         #     Optional. The name of the group that this spoke is associated with.
         # @!attribute [rw] linked_vpn_tunnels
         #   @return [::Google::Cloud::NetworkConnectivity::V1::LinkedVpnTunnels]
-        #     VPN tunnels that are associated with the spoke.
+        #     Optional. VPN tunnels that are associated with the spoke.
         # @!attribute [rw] linked_interconnect_attachments
         #   @return [::Google::Cloud::NetworkConnectivity::V1::LinkedInterconnectAttachments]
-        #     VLAN attachments that are associated with the spoke.
+        #     Optional. VLAN attachments that are associated with the spoke.
         # @!attribute [rw] linked_router_appliance_instances
         #   @return [::Google::Cloud::NetworkConnectivity::V1::LinkedRouterApplianceInstances]
-        #     Router appliance instances that are associated with the spoke.
+        #     Optional. Router appliance instances that are associated with the spoke.
         # @!attribute [rw] linked_vpc_network
         #   @return [::Google::Cloud::NetworkConnectivity::V1::LinkedVpcNetwork]
         #     Optional. VPC network that is associated with the spoke.
@@ -184,11 +184,18 @@ module Google
         #     Output only. The current lifecycle state of this spoke.
         # @!attribute [r] reasons
         #   @return [::Array<::Google::Cloud::NetworkConnectivity::V1::Spoke::StateReason>]
-        #     Output only. The reasons for current state of the spoke. Only present when
-        #     the spoke is in the `INACTIVE` state.
+        #     Output only. The reasons for current state of the spoke.
         # @!attribute [r] spoke_type
         #   @return [::Google::Cloud::NetworkConnectivity::V1::SpokeType]
         #     Output only. The type of resource associated with the spoke.
+        # @!attribute [rw] etag
+        #   @return [::String]
+        #     Optional. This checksum is computed by the server based on the value of
+        #     other fields, and may be sent on update and delete requests to ensure the
+        #     client has an up-to-date value before proceeding.
+        # @!attribute [rw] field_paths_pending_update
+        #   @return [::Array<::String>]
+        #     Optional. The list of fields waiting for hub administration's approval.
         class Spoke
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -224,6 +231,16 @@ module Google
               # Network Connectivity Center encountered errors while accepting
               # the spoke.
               FAILED = 4
+
+              # The proposed spoke update is pending review.
+              UPDATE_PENDING_REVIEW = 5
+
+              # The proposed spoke update has been rejected by the hub administrator.
+              UPDATE_REJECTED = 6
+
+              # Network Connectivity Center encountered errors while accepting
+              # the spoke update.
+              UPDATE_FAILED = 7
             end
           end
 
@@ -417,7 +434,7 @@ module Google
         # administrator.
         # @!attribute [rw] auto_accept_projects
         #   @return [::Array<::String>]
-        #     A list of project ids or project numbers for which you want
+        #     Optional. A list of project ids or project numbers for which you want
         #     to enable auto-accept. The auto-accept setting is applied to
         #     spokes being created or updated in these projects.
         class AutoAccept
@@ -1015,6 +1032,93 @@ module Google
         end
 
         # The request for
+        # {::Google::Cloud::NetworkConnectivity::V1::HubService::Client#accept_spoke_update HubService.AcceptSpokeUpdate}.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The name of the hub to accept spoke update.
+        # @!attribute [rw] spoke_uri
+        #   @return [::String]
+        #     Required. The URI of the spoke to accept update.
+        # @!attribute [rw] spoke_etag
+        #   @return [::String]
+        #     Required. The etag of the spoke to accept update.
+        # @!attribute [rw] request_id
+        #   @return [::String]
+        #     Optional. A request ID to identify requests. Specify a unique request ID so
+        #     that if you must retry your request, the server knows to ignore the request
+        #     if it has already been completed. The server guarantees that a request
+        #     doesn't result in creation of duplicate commitments for at least 60
+        #     minutes.
+        #
+        #     For example, consider a situation where you make an initial request and
+        #     the request times out. If you make the request again with the same request
+        #     ID, the server can check to see whether the original operation
+        #     was received. If it was, the server ignores the second request. This
+        #     behavior prevents clients from mistakenly creating duplicate commitments.
+        #
+        #     The request ID must be a valid UUID, with the exception that zero UUID is
+        #     not supported (00000000-0000-0000-0000-000000000000).
+        class AcceptSpokeUpdateRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # The response for
+        # {::Google::Cloud::NetworkConnectivity::V1::HubService::Client#accept_spoke_update HubService.AcceptSpokeUpdate}.
+        # @!attribute [rw] spoke
+        #   @return [::Google::Cloud::NetworkConnectivity::V1::Spoke]
+        #     The spoke that was operated on.
+        class AcceptSpokeUpdateResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # The request for
+        # {::Google::Cloud::NetworkConnectivity::V1::HubService::Client#reject_spoke_update HubService.RejectSpokeUpdate}.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The name of the hub to reject spoke update.
+        # @!attribute [rw] spoke_uri
+        #   @return [::String]
+        #     Required. The URI of the spoke to reject update.
+        # @!attribute [rw] spoke_etag
+        #   @return [::String]
+        #     Required. The etag of the spoke to reject update.
+        # @!attribute [rw] details
+        #   @return [::String]
+        #     Optional. Additional information provided by the hub administrator.
+        # @!attribute [rw] request_id
+        #   @return [::String]
+        #     Optional. A request ID to identify requests. Specify a unique request ID so
+        #     that if you must retry your request, the server knows to ignore the request
+        #     if it has already been completed. The server guarantees that a request
+        #     doesn't result in creation of duplicate commitments for at least 60
+        #     minutes.
+        #
+        #     For example, consider a situation where you make an initial request and
+        #     the request times out. If you make the request again with the same request
+        #     ID, the server can check to see whether the original operation
+        #     was received. If it was, the server ignores the second request. This
+        #     behavior prevents clients from mistakenly creating duplicate commitments.
+        #
+        #     The request ID must be a valid UUID, with the exception that zero UUID is
+        #     not supported (00000000-0000-0000-0000-000000000000).
+        class RejectSpokeUpdateRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # The response for
+        # {::Google::Cloud::NetworkConnectivity::V1::HubService::Client#reject_spoke_update HubService.RejectSpokeUpdate}.
+        # @!attribute [rw] spoke
+        #   @return [::Google::Cloud::NetworkConnectivity::V1::Spoke]
+        #     The spoke that was operated on.
+        class RejectSpokeUpdateResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # The request for
         # {::Google::Cloud::NetworkConnectivity::V1::HubService::Client#get_route_table HubService.GetRouteTable}.
         # @!attribute [rw] name
         #   @return [::String]
@@ -1246,11 +1350,23 @@ module Google
         # @!attribute [rw] include_export_ranges
         #   @return [::Array<::String>]
         #     Optional. IP ranges allowed to be included from peering.
+        # @!attribute [rw] proposed_include_export_ranges
+        #   @return [::Array<::String>]
+        #     Optional. The proposed include export IP ranges waiting for hub
+        #     administration's approval.
+        # @!attribute [r] proposed_exclude_export_ranges
+        #   @return [::Array<::String>]
+        #     Output only. The proposed exclude export IP ranges waiting for hub
+        #     administration's approval.
         # @!attribute [r] producer_vpc_spokes
         #   @return [::Array<::String>]
         #     Output only. The list of Producer VPC spokes that this VPC spoke is a
         #     service consumer VPC spoke for. These producer VPCs are connected through
-        #     VPC peering to this spoke's backing VPC network.
+        #     VPC peering to this spoke's backing VPC network. Because they are directly
+        #     connected throuh VPC peering, NCC export filters do not apply between the
+        #     service consumer VPC spoke and any of its producer VPC spokes. This VPC
+        #     spoke cannot be deleted as long as any of these producer VPC spokes are
+        #     connected to the NCC Hub.
         class LinkedVpcNetwork
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -1277,6 +1393,14 @@ module Google
         # @!attribute [rw] include_export_ranges
         #   @return [::Array<::String>]
         #     Optional. IP ranges allowed to be included from peering.
+        # @!attribute [rw] proposed_include_export_ranges
+        #   @return [::Array<::String>]
+        #     Optional. The proposed include export IP ranges waiting for hub
+        #     administration's approval.
+        # @!attribute [r] proposed_exclude_export_ranges
+        #   @return [::Array<::String>]
+        #     Output only. The proposed exclude export IP ranges waiting for hub
+        #     administration's approval.
         class LinkedProducerVpcNetwork
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -1535,6 +1659,11 @@ module Google
           # The hub associated with this spoke resource has been deleted.
           # This state applies to spoke resources only.
           OBSOLETE = 10
+
+          # The resource is in an undefined state due to resource creation or deletion
+          # failure. You can try to delete the resource later or contact support for
+          # help.
+          FAILED = 11
         end
 
         # The SpokeType enum represents the type of spoke. The type

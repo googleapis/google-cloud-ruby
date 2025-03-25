@@ -5,6 +5,105 @@
   "protoPackage": "google.cloud.networkconnectivity.v1",
   "libraryPackage": "::Google::Cloud::NetworkConnectivity::V1",
   "services": {
+    "CrossNetworkAutomationService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::NetworkConnectivity::V1::CrossNetworkAutomationService::Client",
+          "rpcs": {
+            "ListServiceConnectionMaps": {
+              "methods": [
+                "list_service_connection_maps"
+              ]
+            },
+            "GetServiceConnectionMap": {
+              "methods": [
+                "get_service_connection_map"
+              ]
+            },
+            "CreateServiceConnectionMap": {
+              "methods": [
+                "create_service_connection_map"
+              ]
+            },
+            "UpdateServiceConnectionMap": {
+              "methods": [
+                "update_service_connection_map"
+              ]
+            },
+            "DeleteServiceConnectionMap": {
+              "methods": [
+                "delete_service_connection_map"
+              ]
+            },
+            "ListServiceConnectionPolicies": {
+              "methods": [
+                "list_service_connection_policies"
+              ]
+            },
+            "GetServiceConnectionPolicy": {
+              "methods": [
+                "get_service_connection_policy"
+              ]
+            },
+            "CreateServiceConnectionPolicy": {
+              "methods": [
+                "create_service_connection_policy"
+              ]
+            },
+            "UpdateServiceConnectionPolicy": {
+              "methods": [
+                "update_service_connection_policy"
+              ]
+            },
+            "DeleteServiceConnectionPolicy": {
+              "methods": [
+                "delete_service_connection_policy"
+              ]
+            },
+            "ListServiceClasses": {
+              "methods": [
+                "list_service_classes"
+              ]
+            },
+            "GetServiceClass": {
+              "methods": [
+                "get_service_class"
+              ]
+            },
+            "UpdateServiceClass": {
+              "methods": [
+                "update_service_class"
+              ]
+            },
+            "DeleteServiceClass": {
+              "methods": [
+                "delete_service_class"
+              ]
+            },
+            "GetServiceConnectionToken": {
+              "methods": [
+                "get_service_connection_token"
+              ]
+            },
+            "ListServiceConnectionTokens": {
+              "methods": [
+                "list_service_connection_tokens"
+              ]
+            },
+            "CreateServiceConnectionToken": {
+              "methods": [
+                "create_service_connection_token"
+              ]
+            },
+            "DeleteServiceConnectionToken": {
+              "methods": [
+                "delete_service_connection_token"
+              ]
+            }
+          }
+        }
+      }
+    },
     "HubService": {
       "clients": {
         "grpc": {
@@ -73,6 +172,16 @@
             "AcceptHubSpoke": {
               "methods": [
                 "accept_hub_spoke"
+              ]
+            },
+            "AcceptSpokeUpdate": {
+              "methods": [
+                "accept_spoke_update"
+              ]
+            },
+            "RejectSpokeUpdate": {
+              "methods": [
+                "reject_spoke_update"
               ]
             },
             "DeleteSpoke": {
