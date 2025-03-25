@@ -1,5 +1,11 @@
 # Release History
 
+### 2.1.0 (2025-03-25)
+
+#### Features
+
+* Support for CrossNetworkAutomationService ([#29401](https://github.com/googleapis/google-cloud-ruby/issues/29401)) 
+
 ### 2.0.0 (2025-02-13)
 
 ### ⚠ BREAKING CHANGES
