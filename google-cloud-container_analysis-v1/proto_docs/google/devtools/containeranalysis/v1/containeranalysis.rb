@@ -21,11 +21,44 @@ module Google
   module Cloud
     module ContainerAnalysis
       module V1
+        # The request to generate and export SBOM. Target must be specified for the
+        # request.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The name of the resource in the form of
+        #     `projects/[PROJECT_ID]/resources/[RESOURCE_URL]`.
+        # @!attribute [rw] cloud_storage_location
+        #   @return [::Google::Cloud::ContainerAnalysis::V1::ExportSBOMRequest::CloudStorageLocation]
+        #     Optional. Empty placeholder to denote that this is a Google Cloud Storage
+        #     export request.
+        class ExportSBOMRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Empty placeholder to denote that this is a Google Cloud Storage
+          # export request.
+          class CloudStorageLocation
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+        end
+
+        # The response from a call to ExportSBOM.
+        # @!attribute [rw] discovery_occurrence
+        #   @return [::String]
+        #     The name of the discovery occurrence in the form
+        #     "projects/\\{project_id}/occurrences/\\{OCCURRENCE_ID}
+        #     It can be used to track the progress of the SBOM export.
+        class ExportSBOMResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # Request to get a vulnerability summary for some set of occurrences.
         # @!attribute [rw] parent
         #   @return [::String]
-        #     Required. The name of the project to get a vulnerability summary for in the form of
-        #     `projects/[PROJECT_ID]`.
+        #     Required. The name of the project to get a vulnerability summary for in the
+        #     form of `projects/[PROJECT_ID]`.
         # @!attribute [rw] filter
         #   @return [::String]
         #     The filter expression.
