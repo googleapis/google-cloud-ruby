@@ -1,5 +1,14 @@
 # Changelog
 
+### 1.4.0 (2025-03-25)
+
+#### Features
+
+* Support for accept_spoke_update and reject_spoke_update RPCs 
+* Support for CrossNetworkAutomationService calls 
+* Support for proposed include and exclude support ranges in a LinkedVpcNetwork 
+* Support for Spoke etags and the list of fields waiting for admin approval 
+
 ### 1.3.0 (2025-01-28)
 
 #### Features
