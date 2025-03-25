@@ -36,6 +36,7 @@
     "proto_docs/google/type/expr.rb",
     "proto_docs/grafeas/v1/severity.rb",
     "snippets/Gemfile",
+    "snippets/container_analysis/export_sbom.rb",
     "snippets/container_analysis/get_iam_policy.rb",
     "snippets/container_analysis/get_vulnerability_occurrences_summary.rb",
     "snippets/container_analysis/set_iam_policy.rb",

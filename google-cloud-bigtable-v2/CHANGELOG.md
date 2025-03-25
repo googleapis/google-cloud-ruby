@@ -1,5 +1,14 @@
 # Release History
 
+### 1.6.0 (2025-03-11)
+
+#### Features
+
+* add MaterializedViewName to ReadRows and SampleRowKeys ([#29309](https://github.com/googleapis/google-cloud-ruby/issues/29309)) 
+#### Bug Fixes
+
+* Configure timeout and retry for execute_query ([#29290](https://github.com/googleapis/google-cloud-ruby/issues/29290)) 
+
 ### 1.5.0 (2025-01-28)
 
 #### Features

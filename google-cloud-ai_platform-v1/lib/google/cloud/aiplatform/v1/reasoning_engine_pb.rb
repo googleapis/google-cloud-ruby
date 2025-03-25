@@ -6,11 +6,12 @@ require 'google/protobuf'
 
 require 'google/api/field_behavior_pb'
 require 'google/api/resource_pb'
+require 'google/cloud/aiplatform/v1/env_var_pb'
 require 'google/protobuf/struct_pb'
 require 'google/protobuf/timestamp_pb'
 
 
-descriptor_data = "\n1google/cloud/aiplatform/v1/reasoning_engine.proto\x12\x1agoogle.cloud.aiplatform.v1\x1a\x1fgoogle/api/field_behavior.proto\x1a\x19google/api/resource.proto\x1a\x1cgoogle/protobuf/struct.proto\x1a\x1fgoogle/protobuf/timestamp.proto\"\xbd\x02\n\x13ReasoningEngineSpec\x12V\n\x0cpackage_spec\x18\x02 \x01(\x0b\x32;.google.cloud.aiplatform.v1.ReasoningEngineSpec.PackageSpecB\x03\xe0\x41\x02\x12\x33\n\rclass_methods\x18\x03 \x03(\x0b\x32\x17.google.protobuf.StructB\x03\xe0\x41\x01\x1a\x98\x01\n\x0bPackageSpec\x12\"\n\x15pickle_object_gcs_uri\x18\x01 \x01(\tB\x03\xe0\x41\x01\x12%\n\x18\x64\x65pendency_files_gcs_uri\x18\x02 \x01(\tB\x03\xe0\x41\x01\x12!\n\x14requirements_gcs_uri\x18\x03 \x01(\tB\x03\xe0\x41\x01\x12\x1b\n\x0epython_version\x18\x04 \x01(\tB\x03\xe0\x41\x01\"\xbe\x03\n\x0fReasoningEngine\x12\x11\n\x04name\x18\x01 \x01(\tB\x03\xe0\x41\x08\x12\x19\n\x0c\x64isplay_name\x18\x02 \x01(\tB\x03\xe0\x41\x02\x12\x18\n\x0b\x64\x65scription\x18\x07 \x01(\tB\x03\xe0\x41\x01\x12\x42\n\x04spec\x18\x03 \x01(\x0b\x32/.google.cloud.aiplatform.v1.ReasoningEngineSpecB\x03\xe0\x41\x02\x12\x34\n\x0b\x63reate_time\x18\x04 \x01(\x0b\x32\x1a.google.protobuf.TimestampB\x03\xe0\x41\x03\x12\x34\n\x0bupdate_time\x18\x05 \x01(\x0b\x32\x1a.google.protobuf.TimestampB\x03\xe0\x41\x03\x12\x11\n\x04\x65tag\x18\x06 \x01(\tB\x03\xe0\x41\x01:\x9f\x01\xea\x41\x9b\x01\n)aiplatform.googleapis.com/ReasoningEngine\x12Kprojects/{project}/locations/{location}/reasoningEngines/{reasoning_engine}*\x10reasoningEngines2\x0freasoningEngineB\xd2\x01\n\x1e\x63om.google.cloud.aiplatform.v1B\x14ReasoningEngineProtoP\x01Z>cloud.google.com/go/aiplatform/apiv1/aiplatformpb;aiplatformpb\xaa\x02\x1aGoogle.Cloud.AIPlatform.V1\xca\x02\x1aGoogle\\Cloud\\AIPlatform\\V1\xea\x02\x1dGoogle::Cloud::AIPlatform::V1b\x06proto3"
+descriptor_data = "\n1google/cloud/aiplatform/v1/reasoning_engine.proto\x12\x1agoogle.cloud.aiplatform.v1\x1a\x1fgoogle/api/field_behavior.proto\x1a\x19google/api/resource.proto\x1a(google/cloud/aiplatform/v1/env_var.proto\x1a\x1cgoogle/protobuf/struct.proto\x1a\x1fgoogle/protobuf/timestamp.proto\"\xc5\x04\n\x13ReasoningEngineSpec\x12V\n\x0cpackage_spec\x18\x02 \x01(\x0b\x32;.google.cloud.aiplatform.v1.ReasoningEngineSpec.PackageSpecB\x03\xe0\x41\x01\x12\\\n\x0f\x64\x65ployment_spec\x18\x04 \x01(\x0b\x32>.google.cloud.aiplatform.v1.ReasoningEngineSpec.DeploymentSpecB\x03\xe0\x41\x01\x12\x33\n\rclass_methods\x18\x03 \x03(\x0b\x32\x17.google.protobuf.StructB\x03\xe0\x41\x01\x12\x1c\n\x0f\x61gent_framework\x18\x05 \x01(\tB\x03\xe0\x41\x01\x1a\x98\x01\n\x0bPackageSpec\x12\"\n\x15pickle_object_gcs_uri\x18\x01 \x01(\tB\x03\xe0\x41\x01\x12%\n\x18\x64\x65pendency_files_gcs_uri\x18\x02 \x01(\tB\x03\xe0\x41\x01\x12!\n\x14requirements_gcs_uri\x18\x03 \x01(\tB\x03\xe0\x41\x01\x12\x1b\n\x0epython_version\x18\x04 \x01(\tB\x03\xe0\x41\x01\x1a\x89\x01\n\x0e\x44\x65ploymentSpec\x12\x34\n\x03\x65nv\x18\x01 \x03(\x0b\x32\".google.cloud.aiplatform.v1.EnvVarB\x03\xe0\x41\x01\x12\x41\n\nsecret_env\x18\x02 \x03(\x0b\x32(.google.cloud.aiplatform.v1.SecretEnvVarB\x03\xe0\x41\x01\"\xbe\x03\n\x0fReasoningEngine\x12\x11\n\x04name\x18\x01 \x01(\tB\x03\xe0\x41\x08\x12\x19\n\x0c\x64isplay_name\x18\x02 \x01(\tB\x03\xe0\x41\x02\x12\x18\n\x0b\x64\x65scription\x18\x07 \x01(\tB\x03\xe0\x41\x01\x12\x42\n\x04spec\x18\x03 \x01(\x0b\x32/.google.cloud.aiplatform.v1.ReasoningEngineSpecB\x03\xe0\x41\x01\x12\x34\n\x0b\x63reate_time\x18\x04 \x01(\x0b\x32\x1a.google.protobuf.TimestampB\x03\xe0\x41\x03\x12\x34\n\x0bupdate_time\x18\x05 \x01(\x0b\x32\x1a.google.protobuf.TimestampB\x03\xe0\x41\x03\x12\x11\n\x04\x65tag\x18\x06 \x01(\tB\x03\xe0\x41\x01:\x9f\x01\xea\x41\x9b\x01\n)aiplatform.googleapis.com/ReasoningEngine\x12Kprojects/{project}/locations/{location}/reasoningEngines/{reasoning_engine}*\x10reasoningEngines2\x0freasoningEngineB\xd2\x01\n\x1e\x63om.google.cloud.aiplatform.v1B\x14ReasoningEngineProtoP\x01Z>cloud.google.com/go/aiplatform/apiv1/aiplatformpb;aiplatformpb\xaa\x02\x1aGoogle.Cloud.AIPlatform.V1\xca\x02\x1aGoogle\\Cloud\\AIPlatform\\V1\xea\x02\x1dGoogle::Cloud::AIPlatform::V1b\x06proto3"
 
 pool = Google::Protobuf::DescriptorPool.generated_pool
 
@@ -26,6 +27,7 @@ rescue TypeError
   warn "Warning: Protobuf detected an import path issue while loading generated file #{__FILE__}"
   imports = [
     ["google.protobuf.Struct", "google/protobuf/struct.proto"],
+    ["google.cloud.aiplatform.v1.EnvVar", "google/cloud/aiplatform/v1/env_var.proto"],
     ["google.protobuf.Timestamp", "google/protobuf/timestamp.proto"],
   ]
   imports.each do |type_name, expected_filename|
@@ -44,6 +46,7 @@ module Google
       module V1
         ReasoningEngineSpec = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.aiplatform.v1.ReasoningEngineSpec").msgclass
         ReasoningEngineSpec::PackageSpec = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.aiplatform.v1.ReasoningEngineSpec.PackageSpec").msgclass
+        ReasoningEngineSpec::DeploymentSpec = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.aiplatform.v1.ReasoningEngineSpec.DeploymentSpec").msgclass
         ReasoningEngine = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.aiplatform.v1.ReasoningEngine").msgclass
       end
     end

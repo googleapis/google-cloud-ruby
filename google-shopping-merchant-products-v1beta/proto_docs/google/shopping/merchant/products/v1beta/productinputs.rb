@@ -23,26 +23,26 @@ module Google
       module Products
         module V1beta
           # This resource represents input data you submit for a product, not the
-          # processed product that you see in Merchant Center, in Shopping ads, or across
-          # Google surfaces. Product inputs, rules and supplemental data source data are
-          # combined to create the processed
-          # {::Google::Shopping::Merchant::Products::V1beta::Product Product}.
+          #  processed product that you see in Merchant Center, in Shopping ads, or
+          #  across Google surfaces. Product inputs, rules and supplemental data source
+          #  data are combined to create the processed
+          #  {::Google::Shopping::Merchant::Products::V1beta::Product Product}.
           #
-          # Required product input attributes to pass data validation checks are
-          # primarily defined in the [Products Data
-          # Specification](https://support.google.com/merchants/answer/188494).
+          #  Required product input attributes to pass data validation checks are
+          #  primarily defined in the [Products Data
+          #  Specification](https://support.google.com/merchants/answer/188494).
           #
-          # The following attributes are required:
-          # {::Google::Shopping::Merchant::Products::V1beta::Product#feed_label feedLabel},
-          # {::Google::Shopping::Merchant::Products::V1beta::Product#content_language contentLanguage}
-          # and {::Google::Shopping::Merchant::Products::V1beta::Product#offer_id offerId}.
+          #  The following attributes are required:
+          #  {::Google::Shopping::Merchant::Products::V1beta::Product#feed_label feedLabel},
+          #  {::Google::Shopping::Merchant::Products::V1beta::Product#content_language contentLanguage}
+          #  and {::Google::Shopping::Merchant::Products::V1beta::Product#offer_id offerId}.
           #
-          # After inserting, updating, or deleting a product input, it may take several
-          # minutes before the processed product can be retrieved.
+          #  After inserting, updating, or deleting a product input, it may take several
+          #  minutes before the processed product can be retrieved.
           #
-          # All fields in the product input and its sub-messages match the English name
-          # of their corresponding attribute in the vertical spec with [some
-          # exceptions](https://support.google.com/merchants/answer/7052112).
+          #  All fields in the product input and its sub-messages match the English name
+          #  of their corresponding attribute in the vertical spec with [some
+          #  exceptions](https://support.google.com/merchants/answer/7052112).
           # @!attribute [rw] name
           #   @return [::String]
           #     Identifier. The name of the product input.
@@ -59,7 +59,7 @@ module Google
           #     `"{product.name=accounts/{account}/products/{product}}"`
           # @!attribute [rw] channel
           #   @return [::Google::Shopping::Type::Channel::ChannelEnum]
-          #     Required. Immutable. The
+          #     Immutable. The
           #     [channel](https://support.google.com/merchants/answer/7361332) of the
           #     product.
           # @!attribute [rw] offer_id
@@ -128,9 +128,50 @@ module Google
           #   @return [::String]
           #     Required. The primary or supplemental product data source name. If the
           #     product already exists and data source provided is different, then the
-          #     product will be moved to a new data source. Format:
-          #     `accounts/{account}/dataSources/{datasource}`.
+          #     product will be moved to a new data source.
+          #
+          #     Only API data sources are supported.
+          #
+          #     Format: `accounts/{account}/dataSources/{datasource}`.
           class InsertProductInputRequest
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Request message for the UpdateProductInput method.
+          # The product (primary input) must exist for the update to succeed.
+          # If the update is for a primary product input, the existing primary product
+          # input must be from the same data source.
+          # @!attribute [rw] product_input
+          #   @return [::Google::Shopping::Merchant::Products::V1beta::ProductInput]
+          #     Required. The product input resource to update. Information you submit will
+          #     be applied to the processed product as well.
+          # @!attribute [rw] update_mask
+          #   @return [::Google::Protobuf::FieldMask]
+          #     Optional. The list of product attributes to be updated.
+          #
+          #     If the update mask is omitted, then it is treated as implied field mask
+          #     equivalent to all fields that are populated (have a non-empty value).
+          #
+          #     Attributes specified in the update mask without a value specified in the
+          #     body will be deleted from the product.
+          #
+          #     Update mask can only be specified for top level fields in
+          #     attributes and custom attributes.
+          #
+          #     To specify the update mask for custom attributes you need to add the
+          #     `custom_attribute.` prefix.
+          #
+          #     Providing special "*" value for full product replacement is not supported.
+          # @!attribute [rw] data_source
+          #   @return [::String]
+          #     Required. The primary or supplemental product data source where
+          #     `data_source` name identifies the product input to be updated.
+          #
+          #     Only API data sources are supported.
+          #
+          #     Format: `accounts/{account}/dataSources/{datasource}`.
+          class UpdateProductInputRequest
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end

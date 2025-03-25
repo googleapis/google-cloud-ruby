@@ -1,5 +1,11 @@
 # Release History
 
+### 1.8.0 (2025-03-11)
+
+#### Features
+
+* deprecate `enabled` field for message transforms and add `disabled` field ([#29306](https://github.com/googleapis/google-cloud-ruby/issues/29306)) 
+
 ### 1.7.1 (2025-02-05)
 
 #### Documentation

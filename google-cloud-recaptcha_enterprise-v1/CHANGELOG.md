@@ -1,5 +1,11 @@
 # Release History
 
+### 1.7.0 (2025-03-13)
+
+#### Features
+
+* Support JA4 fingerprint for SSL clients ([#29327](https://github.com/googleapis/google-cloud-ruby/issues/29327)) 
+
 ### 1.6.0 (2025-01-28)
 
 #### Features

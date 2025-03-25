@@ -1,5 +1,16 @@
 # Release History
 
+### 1.0.0 (2025-03-14)
+
+### ⚠ BREAKING CHANGES
+
+* Reworked the client to be a wrapper around the V3 service ([#29337](https://github.com/googleapis/google-cloud-ruby/issues/29337))
+
+#### Features
+
+* Bump version to 1.0.0 ([#29353](https://github.com/googleapis/google-cloud-ruby/issues/29353)) 
+* Reworked the client to be a wrapper around the V3 service ([#29337](https://github.com/googleapis/google-cloud-ruby/issues/29337)) 
+
 ### 0.39.0 (2025-03-04)
 
 #### Features

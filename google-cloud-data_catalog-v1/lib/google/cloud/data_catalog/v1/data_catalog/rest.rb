@@ -32,6 +32,8 @@ module Google
     module DataCatalog
       module V1
         ##
+        # Deprecated: Please use Dataplex Catalog instead.
+        #
         # Data Catalog API service allows you to discover, understand, and manage
         # your data.
         #

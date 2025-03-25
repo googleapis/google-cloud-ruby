@@ -1,5 +1,11 @@
 # Changelog
 
+### 0.8.1 (2025-03-13)
+
+#### Documentation
+
+* Documented the service as deprecated ([#29326](https://github.com/googleapis/google-cloud-ruby/issues/29326)) 
+
 ### 0.8.0 (2025-02-07)
 
 ### ⚠ BREAKING CHANGES

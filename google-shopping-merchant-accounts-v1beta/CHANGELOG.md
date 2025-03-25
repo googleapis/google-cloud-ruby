@@ -1,5 +1,11 @@
 # Changelog
 
+### 0.7.0 (2025-03-18)
+
+#### Features
+
+* Add AutomaticImprovements service ([#29347](https://github.com/googleapis/google-cloud-ruby/issues/29347)) 
+
 ### 0.6.0 (2025-03-05)
 
 #### Features

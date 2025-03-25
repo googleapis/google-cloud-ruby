@@ -30,6 +30,11 @@
                 "update_cluster"
               ]
             },
+            "ExportCluster": {
+              "methods": [
+                "export_cluster"
+              ]
+            },
             "UpgradeCluster": {
               "methods": [
                 "upgrade_cluster"

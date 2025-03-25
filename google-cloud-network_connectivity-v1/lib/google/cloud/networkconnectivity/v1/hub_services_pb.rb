@@ -70,6 +70,10 @@ module Google
             # Accepts a proposal to attach a Network Connectivity Center spoke
             # to a hub.
             rpc :AcceptHubSpoke, ::Google::Cloud::NetworkConnectivity::V1::AcceptHubSpokeRequest, ::Google::Longrunning::Operation
+            # Accepts a proposal to update a Network Connectivity Center spoke in a hub.
+            rpc :AcceptSpokeUpdate, ::Google::Cloud::NetworkConnectivity::V1::AcceptSpokeUpdateRequest, ::Google::Longrunning::Operation
+            # Rejects a proposal to update a Network Connectivity Center spoke in a hub.
+            rpc :RejectSpokeUpdate, ::Google::Cloud::NetworkConnectivity::V1::RejectSpokeUpdateRequest, ::Google::Longrunning::Operation
             # Deletes a Network Connectivity Center spoke.
             rpc :DeleteSpoke, ::Google::Cloud::NetworkConnectivity::V1::DeleteSpokeRequest, ::Google::Longrunning::Operation
             # Gets details about a Network Connectivity Center route table.
