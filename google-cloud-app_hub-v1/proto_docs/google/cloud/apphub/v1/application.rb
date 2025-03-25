@@ -21,14 +21,14 @@ module Google
   module Cloud
     module AppHub
       module V1
-        # Application defines the governance boundary for App Hub Entities that
+        # Application defines the governance boundary for App Hub entities that
         # perform a logical end-to-end business function.
         # App Hub supports application level IAM permission to align with governance
         # requirements.
         # @!attribute [rw] name
         #   @return [::String]
         #     Identifier. The resource name of an Application. Format:
-        #     "projects/\\{host-project-id}/locations/\\{location}/applications/\\{application-id}"
+        #     `"projects/{host-project-id}/locations/{location}/applications/{application-id}"`
         # @!attribute [rw] display_name
         #   @return [::String]
         #     Optional. User-defined name for the Application.
@@ -92,6 +92,9 @@ module Google
 
             # Regional type.
             REGIONAL = 1
+
+            # Global type.
+            GLOBAL = 2
           end
         end
       end

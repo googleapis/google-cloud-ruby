@@ -28,7 +28,7 @@ module Google
         # @!attribute [rw] name
         #   @return [::String]
         #     Identifier. The resource name of the Workload. Format:
-        #     "projects/\\{host-project-id}/locations/\\{location}/applications/\\{application-id}/workloads/\\{workload-id}"
+        #     `"projects/{host-project-id}/locations/{location}/applications/{application-id}/workloads/{workload-id}"`
         # @!attribute [rw] display_name
         #   @return [::String]
         #     Optional. User-defined name for the Workload.
@@ -100,15 +100,15 @@ module Google
         # @!attribute [r] gcp_project
         #   @return [::String]
         #     Output only. The service project identifier that the underlying cloud
-        #     resource resides in. Empty for non cloud resources.
+        #     resource resides in. Empty for non-cloud resources.
         # @!attribute [r] location
         #   @return [::String]
         #     Output only. The location that the underlying compute resource resides in
-        #     (e.g us-west1).
+        #     (for example, us-west1).
         # @!attribute [r] zone
         #   @return [::String]
         #     Output only. The location that the underlying compute resource resides in
-        #     if it is zonal (e.g us-west1-a).
+        #     if it is zonal (for example, us-west1-a).
         class WorkloadProperties
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -121,7 +121,7 @@ module Google
         # @!attribute [rw] name
         #   @return [::String]
         #     Identifier. The resource name of the discovered workload. Format:
-        #     "projects/\\{host-project-id}/locations/\\{location}/discoveredWorkloads/\\{uuid}"
+        #     `"projects/{host-project-id}/locations/{location}/discoveredWorkloads/{uuid}"`
         # @!attribute [r] workload_reference
         #   @return [::Google::Cloud::AppHub::V1::WorkloadReference]
         #     Output only. Reference of an underlying compute resource represented by the
