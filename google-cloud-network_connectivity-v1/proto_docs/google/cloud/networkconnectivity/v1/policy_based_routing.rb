@@ -21,26 +21,26 @@ module Google
   module Cloud
     module NetworkConnectivity
       module V1
-        # Policy Based Routes (PBR) are more powerful routes that allows GCP customers
-        # to route their L4 network traffic based on not just destination IP, but also
-        # source IP, protocol and more. A PBR always take precedence when it conflicts
-        # with other types of routes.
-        # Next id: 22
+        # Policy-based routes route L4 network traffic based on not just destination IP
+        # address, but also source IP address, protocol, and more. If a policy-based
+        # route conflicts with other types of routes, the policy-based route always
+        # takes precedence.
         # @!attribute [rw] virtual_machine
         #   @return [::Google::Cloud::NetworkConnectivity::V1::PolicyBasedRoute::VirtualMachine]
-        #     Optional. VM instances to which this policy based route applies to.
+        #     Optional. VM instances that this policy-based route applies to.
         #
         #     Note: The following fields are mutually exclusive: `virtual_machine`, `interconnect_attachment`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] interconnect_attachment
         #   @return [::Google::Cloud::NetworkConnectivity::V1::PolicyBasedRoute::InterconnectAttachment]
-        #     Optional. The interconnect attachments to which this route applies to.
+        #     Optional. The interconnect attachments that this policy-based route
+        #     applies to.
         #
         #     Note: The following fields are mutually exclusive: `interconnect_attachment`, `virtual_machine`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] next_hop_ilb_ip
         #   @return [::String]
-        #     Optional. The IP of a global access enabled L4 ILB that should be the
-        #     next hop to handle matching packets. For this version, only
-        #     next_hop_ilb_ip is supported.
+        #     Optional. The IP address of a global-access-enabled L4 ILB that is the
+        #     next hop for matching packets. For this version, only nextHopIlbIp is
+        #     supported.
         #
         #     Note: The following fields are mutually exclusive: `next_hop_ilb_ip`, `next_hop_other_routes`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] next_hop_other_routes
@@ -55,10 +55,10 @@ module Google
         #     `projects/{project_number}/locations/global/PolicyBasedRoutes/{policy_based_route_id}`
         # @!attribute [r] create_time
         #   @return [::Google::Protobuf::Timestamp]
-        #     Output only. Time when the PolicyBasedRoute was created.
+        #     Output only. Time when the policy-based route was created.
         # @!attribute [r] update_time
         #   @return [::Google::Protobuf::Timestamp]
-        #     Output only. Time when the PolicyBasedRoute was updated.
+        #     Output only. Time when the policy-based route was updated.
         # @!attribute [rw] labels
         #   @return [::Google::Protobuf::Map{::String => ::String}]
         #     User-defined labels.
@@ -68,16 +68,16 @@ module Google
         #     you create the resource.
         # @!attribute [rw] network
         #   @return [::String]
-        #     Required. Fully-qualified URL of the network that this route applies to.
-        #     e.g. projects/my-project/global/networks/my-network.
+        #     Required. Fully-qualified URL of the network that this route applies to,
+        #     for example: projects/my-project/global/networks/my-network.
         # @!attribute [rw] filter
         #   @return [::Google::Cloud::NetworkConnectivity::V1::PolicyBasedRoute::Filter]
         #     Required. The filter to match L4 traffic.
         # @!attribute [rw] priority
         #   @return [::Integer]
-        #     Optional. The priority of this policy based route. Priority is used to
-        #     break ties in cases where there are more than one matching policy based
-        #     routes found. In cases where multiple policy based routes are matched, the
+        #     Optional. The priority of this policy-based route. Priority is used to
+        #     break ties in cases where there are more than one matching policy-based
+        #     routes found. In cases where multiple policy-based routes are matched, the
         #     one with the lowest-numbered priority value wins. The default value is
         #     1000. The priority value must be from 1 to 65535, inclusive.
         # @!attribute [r] warnings
@@ -90,26 +90,25 @@ module Google
         # @!attribute [r] kind
         #   @return [::String]
         #     Output only. Type of this resource. Always
-        #     networkconnectivity#policyBasedRoute for Policy Based Route resources.
+        #     networkconnectivity#policyBasedRoute for policy-based Route resources.
         class PolicyBasedRoute
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
 
-          # VM instances to which this policy based route applies to.
+          # VM instances that this policy-based route applies to.
           # @!attribute [rw] tags
           #   @return [::Array<::String>]
-          #     Optional. A list of VM instance tags to which this policy based route
-          #     applies to. VM instances that have ANY of tags specified here will
-          #     install this PBR.
+          #     Optional. A list of VM instance tags that this policy-based route applies
+          #     to. VM instances that have ANY of tags specified here installs this PBR.
           class VirtualMachine
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
 
-          # InterconnectAttachment to which this route applies to.
+          # InterconnectAttachment that this route applies to.
           # @!attribute [rw] region
           #   @return [::String]
-          #     Optional. Cloud region to install this policy based route on interconnect
+          #     Optional. Cloud region to install this policy-based route on interconnect
           #     attachment. Use `all` to install it on all interconnect attachments.
           class InterconnectAttachment
             include ::Google::Protobuf::MessageExts
@@ -119,21 +118,21 @@ module Google
           # Filter matches L4 traffic.
           # @!attribute [rw] ip_protocol
           #   @return [::String]
-          #     Optional. The IP protocol that this policy based route applies to. Valid
+          #     Optional. The IP protocol that this policy-based route applies to. Valid
           #     values are 'TCP', 'UDP', and 'ALL'. Default is 'ALL'.
           # @!attribute [rw] src_range
           #   @return [::String]
-          #     Optional. The source IP range of outgoing packets that this policy based
+          #     Optional. The source IP range of outgoing packets that this policy-based
           #     route applies to. Default is "0.0.0.0/0" if protocol version is IPv4.
           # @!attribute [rw] dest_range
           #   @return [::String]
-          #     Optional. The destination IP range of outgoing packets that this policy
-          #     based route applies to. Default is "0.0.0.0/0" if protocol version is
-          #     IPv4.
+          #     Optional. The destination IP range of outgoing packets that this
+          #     policy-based route applies to. Default is "0.0.0.0/0" if protocol version
+          #     is IPv4.
           # @!attribute [rw] protocol_version
           #   @return [::Google::Cloud::NetworkConnectivity::V1::PolicyBasedRoute::Filter::ProtocolVersion]
-          #     Required. Internet protocol versions this policy based route applies to.
-          #     For this version, only IPV4 is supported.
+          #     Required. Internet protocol versions this policy-based route applies to.
+          #     For this version, only IPV4 is supported. IPV6 is supported in preview.
           class Filter
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -176,18 +175,18 @@ module Google
               extend ::Google::Protobuf::MessageExts::ClassMethods
             end
 
-            # Warning code for Policy Based Routing. Expect to add values in the
+            # Warning code for policy-based routing. Expect to add values in the
             # future.
             module Code
               # Default value.
               WARNING_UNSPECIFIED = 0
 
-              # The policy based route is not active and functioning. Common causes are
-              # the dependent network was deleted or the resource project was turned
-              # off.
+              # The policy-based route is not active and functioning. Common causes are
+              # that the dependent network was deleted or the resource project was
+              # turned off.
               RESOURCE_NOT_ACTIVE = 1
 
-              # The policy based route is being modified (e.g. created/deleted) at this
+              # The policy-based route is being modified (e.g. created/deleted) at this
               # time.
               RESOURCE_BEING_MODIFIED = 2
             end
@@ -208,14 +207,16 @@ module Google
             OTHER_ROUTES_UNSPECIFIED = 0
 
             # Use the routes from the default routing tables (system-generated routes,
-            # custom routes, peering route) to determine the next hop. This will
-            # effectively exclude matching packets being applied on other PBRs with a
-            # lower priority.
+            # custom routes, peering route) to determine the next hop. This effectively
+            # excludes matching packets being applied on other PBRs with a lower
+            # priority.
             DEFAULT_ROUTING = 1
           end
         end
 
-        # Request for [PolicyBasedRouting.ListPolicyBasedRoutes][] method.
+        # Request for
+        # {::Google::Cloud::NetworkConnectivity::V1::PolicyBasedRoutingService::Client#list_policy_based_routes PolicyBasedRoutingService.ListPolicyBasedRoutes}
+        # method.
         # @!attribute [rw] parent
         #   @return [::String]
         #     Required. The parent resource's name.
@@ -236,10 +237,12 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Response for [PolicyBasedRouting.ListPolicyBasedRoutes][] method.
+        # Response for
+        # {::Google::Cloud::NetworkConnectivity::V1::PolicyBasedRoutingService::Client#list_policy_based_routes PolicyBasedRoutingService.ListPolicyBasedRoutes}
+        # method.
         # @!attribute [rw] policy_based_routes
         #   @return [::Array<::Google::Cloud::NetworkConnectivity::V1::PolicyBasedRoute>]
-        #     Policy based routes to be returned.
+        #     Policy-based routes to be returned.
         # @!attribute [rw] next_page_token
         #   @return [::String]
         #     The next pagination token in the List response. It should be used as
@@ -252,7 +255,9 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Request for [PolicyBasedRouting.GetPolicyBasedRoute][] method.
+        # Request for
+        # {::Google::Cloud::NetworkConnectivity::V1::PolicyBasedRoutingService::Client#get_policy_based_route PolicyBasedRoutingService.GetPolicyBasedRoute}
+        # method.
         # @!attribute [rw] name
         #   @return [::String]
         #     Required. Name of the PolicyBasedRoute resource to get.
@@ -261,28 +266,37 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Request for [PolicyBasedRouting.CreatePolicyBasedRoute][] method.
+        # Request for
+        # {::Google::Cloud::NetworkConnectivity::V1::PolicyBasedRoutingService::Client#create_policy_based_route PolicyBasedRoutingService.CreatePolicyBasedRoute}
+        # method.
         # @!attribute [rw] parent
         #   @return [::String]
         #     Required. The parent resource's name of the PolicyBasedRoute.
         # @!attribute [rw] policy_based_route_id
         #   @return [::String]
-        #     Required. Unique id for the Policy Based Route to create.
+        #     Required. Unique id for the policy-based route to create. Provided by the
+        #     client when the resource is created. The name must comply with
+        #     https://google.aip.dev/122#resource-id-segments. Specifically, the name
+        #     must be 1-63 characters long and match the regular expression
+        #     [a-z]([a-z0-9-]*[a-z0-9])?. The first character must be a lowercase letter,
+        #     and all following characters (except for the last character) must be a
+        #     dash, lowercase letter, or digit. The last character must be a lowercase
+        #     letter or digit.
         # @!attribute [rw] policy_based_route
         #   @return [::Google::Cloud::NetworkConnectivity::V1::PolicyBasedRoute]
-        #     Required. Initial values for a new Policy Based Route.
+        #     Required. Initial values for a new policy-based route.
         # @!attribute [rw] request_id
         #   @return [::String]
         #     Optional. An optional request ID to identify requests. Specify a unique
-        #     request ID so that if you must retry your request, the server will know to
-        #     ignore the request if it has already been completed. The server will
-        #     guarantee that for at least 60 minutes since the first request.
+        #     request ID so that if you must retry your request, the server knows to
+        #     ignore the request if it has already been completed. The server guarantees
+        #     that for at least 60 minutes since the first request.
         #
         #     For example, consider a situation where you make an initial request and
         #     the request times out. If you make the request again with the same request
         #     ID, the server can check if original operation with the same request ID
-        #     was received, and if so, will ignore the second request. This prevents
-        #     clients from accidentally creating duplicate commitments.
+        #     was received, and if so, ignores the second request. This prevents clients
+        #     from accidentally creating duplicate commitments.
         #
         #     The request ID must be a valid UUID with the exception that zero UUID is
         #     not supported (00000000-0000-0000-0000-000000000000).
@@ -291,22 +305,24 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Request for [PolicyBasedRouting.DeletePolicyBasedRoute][] method.
+        # Request for
+        # {::Google::Cloud::NetworkConnectivity::V1::PolicyBasedRoutingService::Client#delete_policy_based_route PolicyBasedRoutingService.DeletePolicyBasedRoute}
+        # method.
         # @!attribute [rw] name
         #   @return [::String]
-        #     Required. Name of the PolicyBasedRoute resource to delete.
+        #     Required. Name of the policy-based route resource to delete.
         # @!attribute [rw] request_id
         #   @return [::String]
         #     Optional. An optional request ID to identify requests. Specify a unique
-        #     request ID so that if you must retry your request, the server will know to
-        #     ignore the request if it has already been completed. The server will
-        #     guarantee that for at least 60 minutes after the first request.
+        #     request ID so that if you must retry your request, the server knows to
+        #     ignore the request if it has already been completed. The server guarantees
+        #     that for at least 60 minutes after the first request.
         #
         #     For example, consider a situation where you make an initial request and
         #     the request times out. If you make the request again with the same request
         #     ID, the server can check if original operation with the same request ID
-        #     was received, and if so, will ignore the second request. This prevents
-        #     clients from accidentally creating duplicate commitments.
+        #     was received, and if so, ignores the second request. This prevents clients
+        #     from accidentally creating duplicate commitments.
         #
         #     The request ID must be a valid UUID with the exception that zero UUID is
         #     not supported (00000000-0000-0000-0000-000000000000).

@@ -32,9 +32,9 @@ In order to use this library, you first need to go through the following steps:
 ```ruby
 require "google/cloud/network_connectivity/v1"
 
-client = ::Google::Cloud::NetworkConnectivity::V1::HubService::Client.new
-request = ::Google::Cloud::NetworkConnectivity::V1::ListHubsRequest.new # (request fields as keyword arguments...)
-response = client.list_hubs request
+client = ::Google::Cloud::NetworkConnectivity::V1::CrossNetworkAutomationService::Client.new
+request = ::Google::Cloud::NetworkConnectivity::V1::ListServiceConnectionMapsRequest.new # (request fields as keyword arguments...)
+response = client.list_service_connection_maps request
 ```
 
 View the [Client Library Documentation](https://cloud.google.com/ruby/docs/reference/google-cloud-network_connectivity-v1/latest)
@@ -75,7 +75,7 @@ constructing a client object. For example:
 require "google/cloud/network_connectivity/v1"
 require "logger"
 
-client = ::Google::Cloud::NetworkConnectivity::V1::HubService::Client.new do |config|
+client = ::Google::Cloud::NetworkConnectivity::V1::CrossNetworkAutomationService::Client.new do |config|
   config.logger = Logger.new "my-app.log"
 end
 ```

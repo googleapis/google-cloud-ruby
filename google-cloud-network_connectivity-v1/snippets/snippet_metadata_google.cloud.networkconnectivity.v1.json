@@ -12,6 +12,726 @@
   },
   "snippets": [
     {
+      "region_tag": "networkconnectivity_v1_generated_CrossNetworkAutomationService_ListServiceConnectionMaps_sync",
+      "title": "Snippet for the list_service_connection_maps call in the CrossNetworkAutomationService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::NetworkConnectivity::V1::CrossNetworkAutomationService::Client#list_service_connection_maps.",
+      "file": "cross_network_automation_service/list_service_connection_maps.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_service_connection_maps",
+        "full_name": "::Google::Cloud::NetworkConnectivity::V1::CrossNetworkAutomationService::Client#list_service_connection_maps",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::NetworkConnectivity::V1::ListServiceConnectionMapsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::NetworkConnectivity::V1::ListServiceConnectionMapsResponse",
+        "client": {
+          "short_name": "CrossNetworkAutomationService::Client",
+          "full_name": "::Google::Cloud::NetworkConnectivity::V1::CrossNetworkAutomationService::Client"
+        },
+        "method": {
+          "short_name": "ListServiceConnectionMaps",
+          "full_name": "google.cloud.networkconnectivity.v1.CrossNetworkAutomationService.ListServiceConnectionMaps",
+          "service": {
+            "short_name": "CrossNetworkAutomationService",
+            "full_name": "google.cloud.networkconnectivity.v1.CrossNetworkAutomationService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "networkconnectivity_v1_generated_CrossNetworkAutomationService_GetServiceConnectionMap_sync",
+      "title": "Snippet for the get_service_connection_map call in the CrossNetworkAutomationService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::NetworkConnectivity::V1::CrossNetworkAutomationService::Client#get_service_connection_map.",
+      "file": "cross_network_automation_service/get_service_connection_map.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_service_connection_map",
+        "full_name": "::Google::Cloud::NetworkConnectivity::V1::CrossNetworkAutomationService::Client#get_service_connection_map",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::NetworkConnectivity::V1::GetServiceConnectionMapRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::NetworkConnectivity::V1::ServiceConnectionMap",
+        "client": {
+          "short_name": "CrossNetworkAutomationService::Client",
+          "full_name": "::Google::Cloud::NetworkConnectivity::V1::CrossNetworkAutomationService::Client"
+        },
+        "method": {
+          "short_name": "GetServiceConnectionMap",
+          "full_name": "google.cloud.networkconnectivity.v1.CrossNetworkAutomationService.GetServiceConnectionMap",
+          "service": {
+            "short_name": "CrossNetworkAutomationService",
+            "full_name": "google.cloud.networkconnectivity.v1.CrossNetworkAutomationService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "networkconnectivity_v1_generated_CrossNetworkAutomationService_CreateServiceConnectionMap_sync",
+      "title": "Snippet for the create_service_connection_map call in the CrossNetworkAutomationService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::NetworkConnectivity::V1::CrossNetworkAutomationService::Client#create_service_connection_map.",
+      "file": "cross_network_automation_service/create_service_connection_map.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_service_connection_map",
+        "full_name": "::Google::Cloud::NetworkConnectivity::V1::CrossNetworkAutomationService::Client#create_service_connection_map",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::NetworkConnectivity::V1::CreateServiceConnectionMapRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "CrossNetworkAutomationService::Client",
+          "full_name": "::Google::Cloud::NetworkConnectivity::V1::CrossNetworkAutomationService::Client"
+        },
+        "method": {
+          "short_name": "CreateServiceConnectionMap",
+          "full_name": "google.cloud.networkconnectivity.v1.CrossNetworkAutomationService.CreateServiceConnectionMap",
+          "service": {
+            "short_name": "CrossNetworkAutomationService",
+            "full_name": "google.cloud.networkconnectivity.v1.CrossNetworkAutomationService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "networkconnectivity_v1_generated_CrossNetworkAutomationService_UpdateServiceConnectionMap_sync",
+      "title": "Snippet for the update_service_connection_map call in the CrossNetworkAutomationService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::NetworkConnectivity::V1::CrossNetworkAutomationService::Client#update_service_connection_map.",
+      "file": "cross_network_automation_service/update_service_connection_map.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_service_connection_map",
+        "full_name": "::Google::Cloud::NetworkConnectivity::V1::CrossNetworkAutomationService::Client#update_service_connection_map",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::NetworkConnectivity::V1::UpdateServiceConnectionMapRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "CrossNetworkAutomationService::Client",
+          "full_name": "::Google::Cloud::NetworkConnectivity::V1::CrossNetworkAutomationService::Client"
+        },
+        "method": {
+          "short_name": "UpdateServiceConnectionMap",
+          "full_name": "google.cloud.networkconnectivity.v1.CrossNetworkAutomationService.UpdateServiceConnectionMap",
+          "service": {
+            "short_name": "CrossNetworkAutomationService",
+            "full_name": "google.cloud.networkconnectivity.v1.CrossNetworkAutomationService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "networkconnectivity_v1_generated_CrossNetworkAutomationService_DeleteServiceConnectionMap_sync",
+      "title": "Snippet for the delete_service_connection_map call in the CrossNetworkAutomationService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::NetworkConnectivity::V1::CrossNetworkAutomationService::Client#delete_service_connection_map.",
+      "file": "cross_network_automation_service/delete_service_connection_map.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_service_connection_map",
+        "full_name": "::Google::Cloud::NetworkConnectivity::V1::CrossNetworkAutomationService::Client#delete_service_connection_map",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::NetworkConnectivity::V1::DeleteServiceConnectionMapRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "CrossNetworkAutomationService::Client",
+          "full_name": "::Google::Cloud::NetworkConnectivity::V1::CrossNetworkAutomationService::Client"
+        },
+        "method": {
+          "short_name": "DeleteServiceConnectionMap",
+          "full_name": "google.cloud.networkconnectivity.v1.CrossNetworkAutomationService.DeleteServiceConnectionMap",
+          "service": {
+            "short_name": "CrossNetworkAutomationService",
+            "full_name": "google.cloud.networkconnectivity.v1.CrossNetworkAutomationService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "networkconnectivity_v1_generated_CrossNetworkAutomationService_ListServiceConnectionPolicies_sync",
+      "title": "Snippet for the list_service_connection_policies call in the CrossNetworkAutomationService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::NetworkConnectivity::V1::CrossNetworkAutomationService::Client#list_service_connection_policies.",
+      "file": "cross_network_automation_service/list_service_connection_policies.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_service_connection_policies",
+        "full_name": "::Google::Cloud::NetworkConnectivity::V1::CrossNetworkAutomationService::Client#list_service_connection_policies",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::NetworkConnectivity::V1::ListServiceConnectionPoliciesRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::NetworkConnectivity::V1::ListServiceConnectionPoliciesResponse",
+        "client": {
+          "short_name": "CrossNetworkAutomationService::Client",
+          "full_name": "::Google::Cloud::NetworkConnectivity::V1::CrossNetworkAutomationService::Client"
+        },
+        "method": {
+          "short_name": "ListServiceConnectionPolicies",
+          "full_name": "google.cloud.networkconnectivity.v1.CrossNetworkAutomationService.ListServiceConnectionPolicies",
+          "service": {
+            "short_name": "CrossNetworkAutomationService",
+            "full_name": "google.cloud.networkconnectivity.v1.CrossNetworkAutomationService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "networkconnectivity_v1_generated_CrossNetworkAutomationService_GetServiceConnectionPolicy_sync",
+      "title": "Snippet for the get_service_connection_policy call in the CrossNetworkAutomationService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::NetworkConnectivity::V1::CrossNetworkAutomationService::Client#get_service_connection_policy.",
+      "file": "cross_network_automation_service/get_service_connection_policy.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_service_connection_policy",
+        "full_name": "::Google::Cloud::NetworkConnectivity::V1::CrossNetworkAutomationService::Client#get_service_connection_policy",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::NetworkConnectivity::V1::GetServiceConnectionPolicyRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::NetworkConnectivity::V1::ServiceConnectionPolicy",
+        "client": {
+          "short_name": "CrossNetworkAutomationService::Client",
+          "full_name": "::Google::Cloud::NetworkConnectivity::V1::CrossNetworkAutomationService::Client"
+        },
+        "method": {
+          "short_name": "GetServiceConnectionPolicy",
+          "full_name": "google.cloud.networkconnectivity.v1.CrossNetworkAutomationService.GetServiceConnectionPolicy",
+          "service": {
+            "short_name": "CrossNetworkAutomationService",
+            "full_name": "google.cloud.networkconnectivity.v1.CrossNetworkAutomationService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "networkconnectivity_v1_generated_CrossNetworkAutomationService_CreateServiceConnectionPolicy_sync",
+      "title": "Snippet for the create_service_connection_policy call in the CrossNetworkAutomationService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::NetworkConnectivity::V1::CrossNetworkAutomationService::Client#create_service_connection_policy.",
+      "file": "cross_network_automation_service/create_service_connection_policy.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_service_connection_policy",
+        "full_name": "::Google::Cloud::NetworkConnectivity::V1::CrossNetworkAutomationService::Client#create_service_connection_policy",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::NetworkConnectivity::V1::CreateServiceConnectionPolicyRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "CrossNetworkAutomationService::Client",
+          "full_name": "::Google::Cloud::NetworkConnectivity::V1::CrossNetworkAutomationService::Client"
+        },
+        "method": {
+          "short_name": "CreateServiceConnectionPolicy",
+          "full_name": "google.cloud.networkconnectivity.v1.CrossNetworkAutomationService.CreateServiceConnectionPolicy",
+          "service": {
+            "short_name": "CrossNetworkAutomationService",
+            "full_name": "google.cloud.networkconnectivity.v1.CrossNetworkAutomationService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "networkconnectivity_v1_generated_CrossNetworkAutomationService_UpdateServiceConnectionPolicy_sync",
+      "title": "Snippet for the update_service_connection_policy call in the CrossNetworkAutomationService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::NetworkConnectivity::V1::CrossNetworkAutomationService::Client#update_service_connection_policy.",
+      "file": "cross_network_automation_service/update_service_connection_policy.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_service_connection_policy",
+        "full_name": "::Google::Cloud::NetworkConnectivity::V1::CrossNetworkAutomationService::Client#update_service_connection_policy",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::NetworkConnectivity::V1::UpdateServiceConnectionPolicyRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "CrossNetworkAutomationService::Client",
+          "full_name": "::Google::Cloud::NetworkConnectivity::V1::CrossNetworkAutomationService::Client"
+        },
+        "method": {
+          "short_name": "UpdateServiceConnectionPolicy",
+          "full_name": "google.cloud.networkconnectivity.v1.CrossNetworkAutomationService.UpdateServiceConnectionPolicy",
+          "service": {
+            "short_name": "CrossNetworkAutomationService",
+            "full_name": "google.cloud.networkconnectivity.v1.CrossNetworkAutomationService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "networkconnectivity_v1_generated_CrossNetworkAutomationService_DeleteServiceConnectionPolicy_sync",
+      "title": "Snippet for the delete_service_connection_policy call in the CrossNetworkAutomationService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::NetworkConnectivity::V1::CrossNetworkAutomationService::Client#delete_service_connection_policy.",
+      "file": "cross_network_automation_service/delete_service_connection_policy.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_service_connection_policy",
+        "full_name": "::Google::Cloud::NetworkConnectivity::V1::CrossNetworkAutomationService::Client#delete_service_connection_policy",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::NetworkConnectivity::V1::DeleteServiceConnectionPolicyRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "CrossNetworkAutomationService::Client",
+          "full_name": "::Google::Cloud::NetworkConnectivity::V1::CrossNetworkAutomationService::Client"
+        },
+        "method": {
+          "short_name": "DeleteServiceConnectionPolicy",
+          "full_name": "google.cloud.networkconnectivity.v1.CrossNetworkAutomationService.DeleteServiceConnectionPolicy",
+          "service": {
+            "short_name": "CrossNetworkAutomationService",
+            "full_name": "google.cloud.networkconnectivity.v1.CrossNetworkAutomationService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "networkconnectivity_v1_generated_CrossNetworkAutomationService_ListServiceClasses_sync",
+      "title": "Snippet for the list_service_classes call in the CrossNetworkAutomationService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::NetworkConnectivity::V1::CrossNetworkAutomationService::Client#list_service_classes.",
+      "file": "cross_network_automation_service/list_service_classes.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_service_classes",
+        "full_name": "::Google::Cloud::NetworkConnectivity::V1::CrossNetworkAutomationService::Client#list_service_classes",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::NetworkConnectivity::V1::ListServiceClassesRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::NetworkConnectivity::V1::ListServiceClassesResponse",
+        "client": {
+          "short_name": "CrossNetworkAutomationService::Client",
+          "full_name": "::Google::Cloud::NetworkConnectivity::V1::CrossNetworkAutomationService::Client"
+        },
+        "method": {
+          "short_name": "ListServiceClasses",
+          "full_name": "google.cloud.networkconnectivity.v1.CrossNetworkAutomationService.ListServiceClasses",
+          "service": {
+            "short_name": "CrossNetworkAutomationService",
+            "full_name": "google.cloud.networkconnectivity.v1.CrossNetworkAutomationService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "networkconnectivity_v1_generated_CrossNetworkAutomationService_GetServiceClass_sync",
+      "title": "Snippet for the get_service_class call in the CrossNetworkAutomationService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::NetworkConnectivity::V1::CrossNetworkAutomationService::Client#get_service_class.",
+      "file": "cross_network_automation_service/get_service_class.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_service_class",
+        "full_name": "::Google::Cloud::NetworkConnectivity::V1::CrossNetworkAutomationService::Client#get_service_class",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::NetworkConnectivity::V1::GetServiceClassRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::NetworkConnectivity::V1::ServiceClass",
+        "client": {
+          "short_name": "CrossNetworkAutomationService::Client",
+          "full_name": "::Google::Cloud::NetworkConnectivity::V1::CrossNetworkAutomationService::Client"
+        },
+        "method": {
+          "short_name": "GetServiceClass",
+          "full_name": "google.cloud.networkconnectivity.v1.CrossNetworkAutomationService.GetServiceClass",
+          "service": {
+            "short_name": "CrossNetworkAutomationService",
+            "full_name": "google.cloud.networkconnectivity.v1.CrossNetworkAutomationService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "networkconnectivity_v1_generated_CrossNetworkAutomationService_UpdateServiceClass_sync",
+      "title": "Snippet for the update_service_class call in the CrossNetworkAutomationService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::NetworkConnectivity::V1::CrossNetworkAutomationService::Client#update_service_class.",
+      "file": "cross_network_automation_service/update_service_class.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_service_class",
+        "full_name": "::Google::Cloud::NetworkConnectivity::V1::CrossNetworkAutomationService::Client#update_service_class",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::NetworkConnectivity::V1::UpdateServiceClassRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "CrossNetworkAutomationService::Client",
+          "full_name": "::Google::Cloud::NetworkConnectivity::V1::CrossNetworkAutomationService::Client"
+        },
+        "method": {
+          "short_name": "UpdateServiceClass",
+          "full_name": "google.cloud.networkconnectivity.v1.CrossNetworkAutomationService.UpdateServiceClass",
+          "service": {
+            "short_name": "CrossNetworkAutomationService",
+            "full_name": "google.cloud.networkconnectivity.v1.CrossNetworkAutomationService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "networkconnectivity_v1_generated_CrossNetworkAutomationService_DeleteServiceClass_sync",
+      "title": "Snippet for the delete_service_class call in the CrossNetworkAutomationService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::NetworkConnectivity::V1::CrossNetworkAutomationService::Client#delete_service_class.",
+      "file": "cross_network_automation_service/delete_service_class.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_service_class",
+        "full_name": "::Google::Cloud::NetworkConnectivity::V1::CrossNetworkAutomationService::Client#delete_service_class",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::NetworkConnectivity::V1::DeleteServiceClassRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "CrossNetworkAutomationService::Client",
+          "full_name": "::Google::Cloud::NetworkConnectivity::V1::CrossNetworkAutomationService::Client"
+        },
+        "method": {
+          "short_name": "DeleteServiceClass",
+          "full_name": "google.cloud.networkconnectivity.v1.CrossNetworkAutomationService.DeleteServiceClass",
+          "service": {
+            "short_name": "CrossNetworkAutomationService",
+            "full_name": "google.cloud.networkconnectivity.v1.CrossNetworkAutomationService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "networkconnectivity_v1_generated_CrossNetworkAutomationService_GetServiceConnectionToken_sync",
+      "title": "Snippet for the get_service_connection_token call in the CrossNetworkAutomationService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::NetworkConnectivity::V1::CrossNetworkAutomationService::Client#get_service_connection_token.",
+      "file": "cross_network_automation_service/get_service_connection_token.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_service_connection_token",
+        "full_name": "::Google::Cloud::NetworkConnectivity::V1::CrossNetworkAutomationService::Client#get_service_connection_token",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::NetworkConnectivity::V1::GetServiceConnectionTokenRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::NetworkConnectivity::V1::ServiceConnectionToken",
+        "client": {
+          "short_name": "CrossNetworkAutomationService::Client",
+          "full_name": "::Google::Cloud::NetworkConnectivity::V1::CrossNetworkAutomationService::Client"
+        },
+        "method": {
+          "short_name": "GetServiceConnectionToken",
+          "full_name": "google.cloud.networkconnectivity.v1.CrossNetworkAutomationService.GetServiceConnectionToken",
+          "service": {
+            "short_name": "CrossNetworkAutomationService",
+            "full_name": "google.cloud.networkconnectivity.v1.CrossNetworkAutomationService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "networkconnectivity_v1_generated_CrossNetworkAutomationService_ListServiceConnectionTokens_sync",
+      "title": "Snippet for the list_service_connection_tokens call in the CrossNetworkAutomationService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::NetworkConnectivity::V1::CrossNetworkAutomationService::Client#list_service_connection_tokens.",
+      "file": "cross_network_automation_service/list_service_connection_tokens.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_service_connection_tokens",
+        "full_name": "::Google::Cloud::NetworkConnectivity::V1::CrossNetworkAutomationService::Client#list_service_connection_tokens",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::NetworkConnectivity::V1::ListServiceConnectionTokensRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::NetworkConnectivity::V1::ListServiceConnectionTokensResponse",
+        "client": {
+          "short_name": "CrossNetworkAutomationService::Client",
+          "full_name": "::Google::Cloud::NetworkConnectivity::V1::CrossNetworkAutomationService::Client"
+        },
+        "method": {
+          "short_name": "ListServiceConnectionTokens",
+          "full_name": "google.cloud.networkconnectivity.v1.CrossNetworkAutomationService.ListServiceConnectionTokens",
+          "service": {
+            "short_name": "CrossNetworkAutomationService",
+            "full_name": "google.cloud.networkconnectivity.v1.CrossNetworkAutomationService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "networkconnectivity_v1_generated_CrossNetworkAutomationService_CreateServiceConnectionToken_sync",
+      "title": "Snippet for the create_service_connection_token call in the CrossNetworkAutomationService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::NetworkConnectivity::V1::CrossNetworkAutomationService::Client#create_service_connection_token.",
+      "file": "cross_network_automation_service/create_service_connection_token.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_service_connection_token",
+        "full_name": "::Google::Cloud::NetworkConnectivity::V1::CrossNetworkAutomationService::Client#create_service_connection_token",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::NetworkConnectivity::V1::CreateServiceConnectionTokenRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "CrossNetworkAutomationService::Client",
+          "full_name": "::Google::Cloud::NetworkConnectivity::V1::CrossNetworkAutomationService::Client"
+        },
+        "method": {
+          "short_name": "CreateServiceConnectionToken",
+          "full_name": "google.cloud.networkconnectivity.v1.CrossNetworkAutomationService.CreateServiceConnectionToken",
+          "service": {
+            "short_name": "CrossNetworkAutomationService",
+            "full_name": "google.cloud.networkconnectivity.v1.CrossNetworkAutomationService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "networkconnectivity_v1_generated_CrossNetworkAutomationService_DeleteServiceConnectionToken_sync",
+      "title": "Snippet for the delete_service_connection_token call in the CrossNetworkAutomationService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::NetworkConnectivity::V1::CrossNetworkAutomationService::Client#delete_service_connection_token.",
+      "file": "cross_network_automation_service/delete_service_connection_token.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_service_connection_token",
+        "full_name": "::Google::Cloud::NetworkConnectivity::V1::CrossNetworkAutomationService::Client#delete_service_connection_token",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::NetworkConnectivity::V1::DeleteServiceConnectionTokenRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "CrossNetworkAutomationService::Client",
+          "full_name": "::Google::Cloud::NetworkConnectivity::V1::CrossNetworkAutomationService::Client"
+        },
+        "method": {
+          "short_name": "DeleteServiceConnectionToken",
+          "full_name": "google.cloud.networkconnectivity.v1.CrossNetworkAutomationService.DeleteServiceConnectionToken",
+          "service": {
+            "short_name": "CrossNetworkAutomationService",
+            "full_name": "google.cloud.networkconnectivity.v1.CrossNetworkAutomationService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
       "region_tag": "networkconnectivity_v1_generated_HubService_ListHubs_sync",
       "title": "Snippet for the list_hubs call in the HubService service",
       "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::NetworkConnectivity::V1::HubService::Client#list_hubs.",
@@ -515,6 +1235,86 @@
         "method": {
           "short_name": "AcceptHubSpoke",
           "full_name": "google.cloud.networkconnectivity.v1.HubService.AcceptHubSpoke",
+          "service": {
+            "short_name": "HubService",
+            "full_name": "google.cloud.networkconnectivity.v1.HubService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "networkconnectivity_v1_generated_HubService_AcceptSpokeUpdate_sync",
+      "title": "Snippet for the accept_spoke_update call in the HubService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::NetworkConnectivity::V1::HubService::Client#accept_spoke_update.",
+      "file": "hub_service/accept_spoke_update.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "accept_spoke_update",
+        "full_name": "::Google::Cloud::NetworkConnectivity::V1::HubService::Client#accept_spoke_update",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::NetworkConnectivity::V1::AcceptSpokeUpdateRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "HubService::Client",
+          "full_name": "::Google::Cloud::NetworkConnectivity::V1::HubService::Client"
+        },
+        "method": {
+          "short_name": "AcceptSpokeUpdate",
+          "full_name": "google.cloud.networkconnectivity.v1.HubService.AcceptSpokeUpdate",
+          "service": {
+            "short_name": "HubService",
+            "full_name": "google.cloud.networkconnectivity.v1.HubService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "networkconnectivity_v1_generated_HubService_RejectSpokeUpdate_sync",
+      "title": "Snippet for the reject_spoke_update call in the HubService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::NetworkConnectivity::V1::HubService::Client#reject_spoke_update.",
+      "file": "hub_service/reject_spoke_update.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "reject_spoke_update",
+        "full_name": "::Google::Cloud::NetworkConnectivity::V1::HubService::Client#reject_spoke_update",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::NetworkConnectivity::V1::RejectSpokeUpdateRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "HubService::Client",
+          "full_name": "::Google::Cloud::NetworkConnectivity::V1::HubService::Client"
+        },
+        "method": {
+          "short_name": "RejectSpokeUpdate",
+          "full_name": "google.cloud.networkconnectivity.v1.HubService.RejectSpokeUpdate",
           "service": {
             "short_name": "HubService",
             "full_name": "google.cloud.networkconnectivity.v1.HubService"
