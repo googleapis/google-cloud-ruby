@@ -1,5 +1,11 @@
 # Changelog
 
+### 1.6.0 (2025-03-25)
+
+#### Features
+
+* Support for writing import results to Cloud Storage vs BigQuery ([#29392](https://github.com/googleapis/google-cloud-ruby/issues/29392)) 
+
 ### 1.5.0 (2025-03-18)
 
 #### Features
