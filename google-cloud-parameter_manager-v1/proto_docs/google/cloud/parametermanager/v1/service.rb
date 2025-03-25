@@ -42,6 +42,13 @@ module Google
         #   @return [::Google::Iam::V1::ResourcePolicyMember]
         #     Output only. [Output-only] policy member strings of a Google Cloud
         #     resource.
+        # @!attribute [rw] kms_key
+        #   @return [::String]
+        #     Optional. Customer managed encryption key (CMEK) to use for encrypting the
+        #     Parameter Versions. If not set, the default Google-managed encryption key
+        #     will be used. Cloud KMS CryptoKeys must reside in the same location as the
+        #     Parameter. The expected format is
+        #     `projects/*/locations/*/keyRings/*/cryptoKeys/*`.
         class Parameter
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -215,6 +222,12 @@ module Google
         #     Required. Immutable. Payload content of a ParameterVersion resource.  This
         #     is only returned when the request provides the View value of FULL (default
         #     for GET request).
+        # @!attribute [r] kms_key_version
+        #   @return [::String]
+        #     Optional. Output only. [Output only] The resource name of the KMS key
+        #     version used to encrypt the ParameterVersion payload. This field is
+        #     populated only if the Parameter resource has customer managed encryption
+        #     key (CMEK) configured.
         class ParameterVersion
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -303,7 +316,7 @@ module Google
         #   @return [::String]
         #     Output only. Server generated rendered version of the user provided payload
         #     data (ParameterVersionPayload) which has substitutions of all (if any)
-        #     references to a SecretManager SecretVersion resources. This substituion
+        #     references to a SecretManager SecretVersion resources. This substitution
         #     only works for a Parameter which is in JSON or YAML format.
         class RenderParameterVersionResponse
           include ::Google::Protobuf::MessageExts
