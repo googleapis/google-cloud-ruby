@@ -1,5 +1,18 @@
 # Changelog
 
+### 1.5.0 (2025-03-18)
+
+#### Features
+
+* Added env variables and agent framework to ReasoningEngineSpec ([#29378](https://github.com/googleapis/google-cloud-ruby/issues/29378)) 
+* Added Vertex AI Search engine option ([#29358](https://github.com/googleapis/google-cloud-ruby/issues/29358)) 
+
+### 1.4.0 (2025-03-13)
+
+#### Features
+
+* Added ranking config for RAG ([#29334](https://github.com/googleapis/google-cloud-ruby/issues/29334)) 
+
 ### 1.3.0 (2025-03-07)
 
 #### Features

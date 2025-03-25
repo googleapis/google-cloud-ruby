@@ -517,8 +517,8 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param parent [::String]
-            #     Required. The name of the project to get a vulnerability summary for in the form of
-            #     `projects/[PROJECT_ID]`.
+            #     Required. The name of the project to get a vulnerability summary for in the
+            #     form of `projects/[PROJECT_ID]`.
             #   @param filter [::String]
             #     The filter expression.
             #
@@ -580,6 +580,95 @@ module Google
                                      retry_policy: @config.retry_policy
 
               @container_analysis_stub.call_rpc :get_vulnerability_occurrences_summary, request, options: options do |response, operation|
+                yield response, operation if block_given?
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Generates an SBOM for the given resource.
+            #
+            # @overload export_sbom(request, options = nil)
+            #   Pass arguments to `export_sbom` via a request object, either of type
+            #   {::Google::Cloud::ContainerAnalysis::V1::ExportSBOMRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::ContainerAnalysis::V1::ExportSBOMRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload export_sbom(name: nil, cloud_storage_location: nil)
+            #   Pass arguments to `export_sbom` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param name [::String]
+            #     Required. The name of the resource in the form of
+            #     `projects/[PROJECT_ID]/resources/[RESOURCE_URL]`.
+            #   @param cloud_storage_location [::Google::Cloud::ContainerAnalysis::V1::ExportSBOMRequest::CloudStorageLocation, ::Hash]
+            #     Optional. Empty placeholder to denote that this is a Google Cloud Storage
+            #     export request.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Google::Cloud::ContainerAnalysis::V1::ExportSBOMResponse]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Google::Cloud::ContainerAnalysis::V1::ExportSBOMResponse]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/container_analysis/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::ContainerAnalysis::V1::ContainerAnalysis::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::ContainerAnalysis::V1::ExportSBOMRequest.new
+            #
+            #   # Call the export_sbom method.
+            #   result = client.export_sbom request
+            #
+            #   # The returned object is of type Google::Cloud::ContainerAnalysis::V1::ExportSBOMResponse.
+            #   p result
+            #
+            def export_sbom request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::ContainerAnalysis::V1::ExportSBOMRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.export_sbom.metadata.to_h
+
+              # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::ContainerAnalysis::V1::VERSION
+              metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.export_sbom.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.export_sbom.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @container_analysis_stub.call_rpc :export_sbom, request, options: options do |response, operation|
                 yield response, operation if block_given?
               end
             rescue ::GRPC::BadStatus => e
@@ -772,6 +861,11 @@ module Google
                 # @return [::Gapic::Config::Method]
                 #
                 attr_reader :get_vulnerability_occurrences_summary
+                ##
+                # RPC-specific configuration for `export_sbom`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :export_sbom
 
                 # @private
                 def initialize parent_rpcs = nil
@@ -783,6 +877,8 @@ module Google
                   @test_iam_permissions = ::Gapic::Config::Method.new test_iam_permissions_config
                   get_vulnerability_occurrences_summary_config = parent_rpcs.get_vulnerability_occurrences_summary if parent_rpcs.respond_to? :get_vulnerability_occurrences_summary
                   @get_vulnerability_occurrences_summary = ::Gapic::Config::Method.new get_vulnerability_occurrences_summary_config
+                  export_sbom_config = parent_rpcs.export_sbom if parent_rpcs.respond_to? :export_sbom
+                  @export_sbom = ::Gapic::Config::Method.new export_sbom_config
 
                   yield self if block_given?
                 end

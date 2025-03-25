@@ -659,7 +659,7 @@ module Google
         #     Dataplex table entries.
         # @!attribute [rw] database_view_spec
         #   @return [::Google::Cloud::DataCatalog::V1::DatabaseTableSpec::DatabaseViewSpec]
-        #     Spec what aplies to tables that are actually views.
+        #     Spec what applies to tables that are actually views.
         #     Not set for "real" tables.
         class DatabaseTableSpec
           include ::Google::Protobuf::MessageExts
@@ -1064,12 +1064,12 @@ module Google
         # Store.
         # @!attribute [r] storage_type
         #   @return [::Google::Cloud::DataCatalog::V1::FeatureOnlineStoreSpec::StorageType]
-        #     Output only. Type of underelaying storage for the FeatureOnlineStore.
+        #     Output only. Type of underlying storage for the FeatureOnlineStore.
         class FeatureOnlineStoreSpec
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
 
-          # Type of underlaying storage type.
+          # Type of underlying storage type.
           module StorageType
             # Should not be used.
             STORAGE_TYPE_UNSPECIFIED = 0
@@ -1077,7 +1077,7 @@ module Google
             # Underlsying storgae is Bigtable.
             BIGTABLE = 1
 
-            # Underlaying is optimized online server (Lightning).
+            # Underlying is optimized online server (Lightning).
             OPTIMIZED = 2
           end
         end

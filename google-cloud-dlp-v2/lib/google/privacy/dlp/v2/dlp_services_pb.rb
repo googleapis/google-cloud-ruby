@@ -58,6 +58,9 @@ module Google
             # When no InfoTypes or CustomInfoTypes are specified in this request, the
             # system will automatically choose what detectors to run. By default this may
             # be all types, but may change over time as detectors are updated.
+            #
+            # Only the first frame of each multiframe image is redacted. Metadata and
+            # other frames are omitted in the response.
             rpc :RedactImage, ::Google::Cloud::Dlp::V2::RedactImageRequest, ::Google::Cloud::Dlp::V2::RedactImageResponse
             # De-identifies potentially sensitive info from a ContentItem.
             # This method has limits on input size and output size.

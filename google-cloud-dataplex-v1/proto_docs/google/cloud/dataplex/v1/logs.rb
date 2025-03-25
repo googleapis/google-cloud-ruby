@@ -876,6 +876,54 @@ module Google
             FAILED = 2
           end
         end
+
+        # Payload associated with Business Glossary related log events.
+        # @!attribute [rw] message
+        #   @return [::String]
+        #     The log message.
+        # @!attribute [rw] event_type
+        #   @return [::Google::Cloud::Dataplex::V1::BusinessGlossaryEvent::EventType]
+        #     The type of the event.
+        # @!attribute [rw] resource
+        #   @return [::String]
+        #     Name of the resource.
+        class BusinessGlossaryEvent
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Type of glossary log event.
+          module EventType
+            # An unspecified event type.
+            EVENT_TYPE_UNSPECIFIED = 0
+
+            # Glossary create event.
+            GLOSSARY_CREATE = 1
+
+            # Glossary update event.
+            GLOSSARY_UPDATE = 2
+
+            # Glossary delete event.
+            GLOSSARY_DELETE = 3
+
+            # Glossary category create event.
+            GLOSSARY_CATEGORY_CREATE = 4
+
+            # Glossary category update event.
+            GLOSSARY_CATEGORY_UPDATE = 5
+
+            # Glossary category delete event.
+            GLOSSARY_CATEGORY_DELETE = 6
+
+            # Glossary term create event.
+            GLOSSARY_TERM_CREATE = 7
+
+            # Glossary term update event.
+            GLOSSARY_TERM_UPDATE = 8
+
+            # Glossary term delete event.
+            GLOSSARY_TERM_DELETE = 9
+          end
+        end
       end
     end
   end

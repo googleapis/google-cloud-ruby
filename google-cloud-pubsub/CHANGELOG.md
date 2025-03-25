@@ -1,5 +1,11 @@
 # Release History
 
+### 2.21.0 (2025-03-14)
+
+#### Features
+
+* Support revision_id in Schema 
+
 ### 2.20.0 (2025-02-13)
 
 #### Features

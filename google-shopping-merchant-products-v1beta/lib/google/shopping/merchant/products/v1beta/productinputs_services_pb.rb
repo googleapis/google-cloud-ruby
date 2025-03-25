@@ -42,6 +42,11 @@ module Google
               # After inserting, updating, or deleting a product input, it may take several
               # minutes before the processed product can be retrieved.
               rpc :InsertProductInput, ::Google::Shopping::Merchant::Products::V1beta::InsertProductInputRequest, ::Google::Shopping::Merchant::Products::V1beta::ProductInput
+              # Updates the existing product input in your Merchant Center account.
+              #
+              # After inserting, updating, or deleting a product input, it may take several
+              # minutes before the processed product can be retrieved.
+              rpc :UpdateProductInput, ::Google::Shopping::Merchant::Products::V1beta::UpdateProductInputRequest, ::Google::Shopping::Merchant::Products::V1beta::ProductInput
               # Deletes a product input from your Merchant Center account.
               #
               # After inserting, updating, or deleting a product input, it may take several

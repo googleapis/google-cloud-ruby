@@ -135,6 +135,25 @@
         }
       }
     },
+    "AutomaticImprovementsService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Shopping::Merchant::Accounts::V1beta::AutomaticImprovementsService::Client",
+          "rpcs": {
+            "GetAutomaticImprovements": {
+              "methods": [
+                "get_automatic_improvements"
+              ]
+            },
+            "UpdateAutomaticImprovements": {
+              "methods": [
+                "update_automatic_improvements"
+              ]
+            }
+          }
+        }
+      }
+    },
     "BusinessIdentityService": {
       "clients": {
         "grpc": {

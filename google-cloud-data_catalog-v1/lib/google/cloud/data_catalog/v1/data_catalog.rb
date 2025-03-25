@@ -33,8 +33,12 @@ module Google
     module DataCatalog
       module V1
         ##
+        # Deprecated: Please use Dataplex Catalog instead.
+        #
         # Data Catalog API service allows you to discover, understand, and manage
         # your data.
+        #
+        # @deprecated This service is deprecated and may be removed in the next major version update.
         #
         # @example Load this service and instantiate a gRPC client
         #

@@ -1,5 +1,11 @@
 # Changelog
 
+### 0.5.0 (2025-03-18)
+
+#### Features
+
+* Added entitlement state for not approved in private marketplace ([#29359](https://github.com/googleapis/google-cloud-ruby/issues/29359)) 
+
 ### 0.4.0 (2025-01-28)
 
 #### Features

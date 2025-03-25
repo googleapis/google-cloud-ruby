@@ -1,5 +1,17 @@
 # Changelog
 
+### 1.1.0 (2025-03-19)
+
+#### Features
+
+* Support for the ManagedKafkaConnect service, including RPCs to manage clusters and connectors ([#29384](https://github.com/googleapis/google-cloud-ruby/issues/29384)) 
+
+### 1.0.1 (2025-03-13)
+
+#### Bug Fixes
+
+* Fixes to HTTP transcoding for consumer group calls ([#29330](https://github.com/googleapis/google-cloud-ruby/issues/29330)) 
+
 ### 1.0.0 (2025-02-07)
 
 ### ⚠ BREAKING CHANGES
