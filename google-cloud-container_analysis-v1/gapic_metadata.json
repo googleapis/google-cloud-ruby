@@ -29,6 +29,11 @@
               "methods": [
                 "get_vulnerability_occurrences_summary"
               ]
+            },
+            "ExportSBOM": {
+              "methods": [
+                "export_sbom"
+              ]
             }
           }
         }

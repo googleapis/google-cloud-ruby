@@ -73,6 +73,8 @@ module Google
             rpc :TestIamPermissions, ::Google::Iam::V1::TestIamPermissionsRequest, ::Google::Iam::V1::TestIamPermissionsResponse
             # Gets a summary of the number and severity of occurrences.
             rpc :GetVulnerabilityOccurrencesSummary, ::Google::Cloud::ContainerAnalysis::V1::GetVulnerabilityOccurrencesSummaryRequest, ::Google::Cloud::ContainerAnalysis::V1::VulnerabilityOccurrencesSummary
+            # Generates an SBOM for the given resource.
+            rpc :ExportSBOM, ::Google::Cloud::ContainerAnalysis::V1::ExportSBOMRequest, ::Google::Cloud::ContainerAnalysis::V1::ExportSBOMResponse
           end
 
           Stub = Service.rpc_stub_class
