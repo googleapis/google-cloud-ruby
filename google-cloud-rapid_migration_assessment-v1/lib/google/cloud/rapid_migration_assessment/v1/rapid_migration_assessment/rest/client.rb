@@ -779,7 +779,7 @@ module Google
 
               ##
               # Deletes a single Collector - changes state of collector to "Deleting".
-              # Background jobs does final deletion thorugh producer api.
+              # Background jobs does final deletion through producer API.
               #
               # @overload delete_collector(request, options = nil)
               #   Pass arguments to `delete_collector` via a request object, either of type
