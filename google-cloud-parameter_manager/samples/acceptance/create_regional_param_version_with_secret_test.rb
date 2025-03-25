@@ -12,8 +12,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-require "uri"
-
 require_relative "regional_helper"
 
 describe "#create_regional_param_version_with_secret", :regional_parameter_manager_snippet do
