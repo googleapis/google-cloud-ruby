@@ -1,5 +1,11 @@
 # Changelog
 
+### 2.0.2 (2025-03-25)
+
+#### Documentation
+
+* Fixed some typos in the reference docs ([#29393](https://github.com/googleapis/google-cloud-ruby/issues/29393)) 
+
 ### 2.0.1 (2025-02-12)
 
 #### Bug Fixes
