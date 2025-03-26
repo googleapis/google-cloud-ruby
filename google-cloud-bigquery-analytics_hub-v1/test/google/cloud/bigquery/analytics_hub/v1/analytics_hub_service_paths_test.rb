@@ -112,4 +112,16 @@ class ::Google::Cloud::Bigquery::AnalyticsHub::V1::AnalyticsHubService::ClientPa
       assert_equal "projects/value0/datasets/value1/tables/value2", path
     end
   end
+
+  def test_topic_path
+    grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
+      client = ::Google::Cloud::Bigquery::AnalyticsHub::V1::AnalyticsHubService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      path = client.topic_path project: "value0", topic: "value1"
+      assert_equal "projects/value0/topics/value1", path
+    end
+  end
 end
