@@ -21,7 +21,7 @@ describe "#render_param_version", :parameter_manager_snippet do
 
     # Create secret and secret version
     secret = secret_client.create_secret parent: project_name, secret_id: render_secret_id,
-                                        secret: { replication: { automatic: {} } }
+                                         secret: { replication: { automatic: {} } }
     secret_client.add_secret_version parent: secret_name, payload: { data: payload }
 
     # Get IAM Policy
