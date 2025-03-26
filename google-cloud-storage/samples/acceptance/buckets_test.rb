@@ -584,8 +584,8 @@ describe "Buckets Snippets" do
   end
 
   describe "storage move object" do
-    let(:file_1_name) { "file_1_name_#{SecureRandom.hex}.txt" }
-    let(:file_2_name) { "file_2_name_#{SecureRandom.hex}.txt" }
+    let(:source_file) { "file_1_name_#{SecureRandom.hex}.txt" }
+    let(:destination_file) { "file_2_name_#{SecureRandom.hex}.txt" }
     let :hns_bucket do
       hierarchical_namespace = Google::Apis::StorageV1::Bucket::HierarchicalNamespace.new enabled: true
       storage_client.create_bucket random_bucket_name do |b|
@@ -596,22 +596,22 @@ describe "Buckets Snippets" do
     let :create_source_file do
       file_content = "A" * (3 * 1024 * 1024) # 3 MB of 'A' characters
       file = StringIO.new file_content
-      hns_bucket.create_file file, file_1_name
+      hns_bucket.create_file file, source_file
     end
     it "object is moved and old object is deleted" do
       create_source_file
       out, _err = capture_io do
-        move_object bucket_name: hns_bucket.name, source_file_name: file_1_name, destination_file_name: file_2_name
+        move_object bucket_name: hns_bucket.name, source_file_name: source_file, destination_file_name: destination_file
       end
-      assert_includes out, "New File #{file_2_name} created\n"
-      refute_nil(hns_bucket.file(file_2_name))
-      assert_nil(hns_bucket.file(file_1_name))
+      assert_includes out, "New File #{destination_file} created\n"
+      refute_nil(hns_bucket.file(destination_file))
+      assert_nil(hns_bucket.file(source_file))
     end
 
     it "raises error if source and destination are having same filename" do
       create_source_file
       exception = assert_raises Google::Cloud::InvalidArgumentError do
-        move_object bucket_name: hns_bucket.name, source_file_name: file_1_name, destination_file_name: file_1_name
+        move_object bucket_name: hns_bucket.name, source_file_name: source_file, destination_file_name: source_file
       end
       assert_equal "invalid: Source and destination object names must be different.", exception.message
     end

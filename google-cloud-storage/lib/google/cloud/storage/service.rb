@@ -633,8 +633,8 @@ module Google
         ##
         # Moves object from source to destination path within bucket
         def move_file name,
-                      source_object,
-                      destination_object,
+                      source_file,
+                      destination_file,
                       if_generation_match: nil,
                       if_generation_not_match: nil,
                       if_metageneration_match: nil,
@@ -650,8 +650,8 @@ module Google
                       options: {}
           execute do
             service.move_object name,
-                                source_object,
-                                destination_object,
+                                source_file,
+                                destination_file,
                                 if_generation_match: if_generation_match,
                                 if_generation_not_match: if_generation_not_match,
                                 if_metageneration_match: if_metageneration_match,
