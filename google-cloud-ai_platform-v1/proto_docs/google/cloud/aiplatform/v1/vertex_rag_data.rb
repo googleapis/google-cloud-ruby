@@ -141,6 +141,18 @@ module Google
           end
         end
 
+        # Config for the Vertex AI Search.
+        # @!attribute [rw] serving_config
+        #   @return [::String]
+        #     Vertex AI Search Serving Config resource full name. For example,
+        #     `projects/{project}/locations/{location}/collections/{collection}/engines/{engine}/servingConfigs/{serving_config}`
+        #     or
+        #     `projects/{project}/locations/{location}/collections/{collection}/dataStores/{data_store}/servingConfigs/{serving_config}`.
+        class VertexAiSearchConfig
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # RagCorpus status.
         # @!attribute [r] state
         #   @return [::Google::Cloud::AIPlatform::V1::CorpusStatus::State]
@@ -194,6 +206,13 @@ module Google
         # @!attribute [rw] vector_db_config
         #   @return [::Google::Cloud::AIPlatform::V1::RagVectorDbConfig]
         #     Optional. Immutable. The config for the Vector DBs.
+        #
+        #     Note: The following fields are mutually exclusive: `vector_db_config`, `vertex_ai_search_config`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] vertex_ai_search_config
+        #   @return [::Google::Cloud::AIPlatform::V1::VertexAiSearchConfig]
+        #     Optional. Immutable. The config for the Vertex AI Search.
+        #
+        #     Note: The following fields are mutually exclusive: `vertex_ai_search_config`, `vector_db_config`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         class RagCorpus
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
