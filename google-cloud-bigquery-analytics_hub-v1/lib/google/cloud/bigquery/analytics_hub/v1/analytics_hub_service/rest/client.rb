@@ -486,9 +486,7 @@ module Google
                 #     e.g. `projects/myproject/locations/US`.
                 #   @param data_exchange_id [::String]
                 #     Required. The ID of the data exchange.
-                #     Must contain only Unicode letters, numbers (0-9), underscores (_).
-                #     Should not use characters that require URL-escaping, or characters
-                #     outside of ASCII, spaces.
+                #     Must contain only ASCII letters, numbers (0-9), underscores (_).
                 #     Max length: 100 bytes.
                 #   @param data_exchange [::Google::Cloud::Bigquery::AnalyticsHub::V1::DataExchange, ::Hash]
                 #     Required. The data exchange to create.
@@ -904,9 +902,7 @@ module Google
                 #     e.g. `projects/myproject/locations/US/dataExchanges/123`.
                 #   @param listing_id [::String]
                 #     Required. The ID of the listing to create.
-                #     Must contain only Unicode letters, numbers (0-9), underscores (_).
-                #     Should not use characters that require URL-escaping, or characters
-                #     outside of ASCII, spaces.
+                #     Must contain only ASCII letters, numbers (0-9), underscores (_).
                 #     Max length: 100 bytes.
                 #   @param listing [::Google::Cloud::Bigquery::AnalyticsHub::V1::Listing, ::Hash]
                 #     Required. The listing to create.
@@ -1147,13 +1143,20 @@ module Google
                 #   @param options [::Gapic::CallOptions, ::Hash]
                 #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
                 #
-                # @overload subscribe_listing(destination_dataset: nil, name: nil)
+                # @overload subscribe_listing(destination_dataset: nil, destination_pubsub_subscription: nil, name: nil)
                 #   Pass arguments to `subscribe_listing` via keyword arguments. Note that at
                 #   least one keyword argument is required. To specify no parameters, or to keep all
                 #   the default parameter values, pass an empty Hash as a request object (see above).
                 #
                 #   @param destination_dataset [::Google::Cloud::Bigquery::AnalyticsHub::V1::DestinationDataset, ::Hash]
                 #     Input only. BigQuery destination dataset to create for the subscriber.
+                #
+                #     Note: The following fields are mutually exclusive: `destination_dataset`, `destination_pubsub_subscription`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+                #   @param destination_pubsub_subscription [::Google::Cloud::Bigquery::AnalyticsHub::V1::DestinationPubSubSubscription, ::Hash]
+                #     Input only. Destination Pub/Sub subscription to create for the
+                #     subscriber.
+                #
+                #     Note: The following fields are mutually exclusive: `destination_pubsub_subscription`, `destination_dataset`. If a field in that set is populated, all other fields in the set will automatically be cleared.
                 #   @param name [::String]
                 #     Required. Resource name of the listing that you want to subscribe to.
                 #     e.g. `projects/myproject/locations/US/dataExchanges/123/listings/456`.
@@ -1216,8 +1219,8 @@ module Google
                 end
 
                 ##
-                # Creates a Subscription to a Data Exchange. This is a long-running operation
-                # as it will create one or more linked datasets.
+                # Creates a Subscription to a Data Clean Room. This is a long-running
+                # operation as it will create one or more linked datasets.
                 #
                 # @overload subscribe_data_exchange(request, options = nil)
                 #   Pass arguments to `subscribe_data_exchange` via a request object, either of type
@@ -1229,7 +1232,7 @@ module Google
                 #   @param options [::Gapic::CallOptions, ::Hash]
                 #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
                 #
-                # @overload subscribe_data_exchange(name: nil, destination: nil, subscription: nil, subscriber_contact: nil)
+                # @overload subscribe_data_exchange(name: nil, destination: nil, destination_dataset: nil, subscription: nil, subscriber_contact: nil)
                 #   Pass arguments to `subscribe_data_exchange` via keyword arguments. Note that at
                 #   least one keyword argument is required. To specify no parameters, or to keep all
                 #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -1240,6 +1243,8 @@ module Google
                 #   @param destination [::String]
                 #     Required. The parent resource path of the Subscription.
                 #     e.g. `projects/subscriberproject/locations/US`
+                #   @param destination_dataset [::Google::Cloud::Bigquery::AnalyticsHub::V1::DestinationDataset, ::Hash]
+                #     Optional. BigQuery destination dataset to create for the subscriber.
                 #   @param subscription [::String]
                 #     Required. Name of the subscription to create.
                 #     e.g. `subscription1`
