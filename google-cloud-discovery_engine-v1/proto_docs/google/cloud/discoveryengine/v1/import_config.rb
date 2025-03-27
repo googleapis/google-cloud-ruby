@@ -224,7 +224,7 @@ module Google
           # The type of values in a Bigtable column or column family.
           # The values are expected to be encoded using
           # [HBase
-          # Bytes.toBytes](https://hbase.apache.org/apidocs/org/apache/hadoop/hbase/util/Bytes.html)
+          # Bytes.toBytes](https://hbase.apache.org/1.4/apidocs/org/apache/hadoop/hbase/util/Bytes.html)
           # function when the encoding value is set to `BINARY`.
           module Type
             # The type is unspecified.
@@ -303,6 +303,17 @@ module Google
         #     all [supported FHIR resource
         #     types](https://cloud.google.com/generative-ai-app-builder/docs/fhir-schema-reference#resource-level-specification).
         #     Default to all supported FHIR resource types if empty.
+        # @!attribute [rw] update_from_latest_predefined_schema
+        #   @return [::Boolean]
+        #     Optional. Whether to update the DataStore schema to the latest predefined
+        #     schema.
+        #
+        #     If true, the DataStore schema will be updated to include any FHIR fields
+        #     or resource types that have been added since the last import and
+        #     corresponding FHIR resources will be imported from the FHIR store.
+        #
+        #     Note this field cannot be used in conjunction with `resource_types`. It
+        #     should be used after initial import.
         class FhirStoreSource
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -647,6 +658,13 @@ module Google
         #     * {::Google::Cloud::DiscoveryEngine::V1::CloudSqlSource CloudSqlSource}.
         #     * {::Google::Cloud::DiscoveryEngine::V1::FirestoreSource FirestoreSource}.
         #     * {::Google::Cloud::DiscoveryEngine::V1::BigtableSource BigtableSource}.
+        # @!attribute [rw] force_refresh_content
+        #   @return [::Boolean]
+        #     Optional. Whether to force refresh the unstructured content of the
+        #     documents.
+        #
+        #     If set to `true`, the content part of the documents will be refreshed
+        #     regardless of the update status of the referencing content.
         class ImportDocumentsRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

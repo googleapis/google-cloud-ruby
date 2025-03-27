@@ -772,6 +772,46 @@
       ]
     },
     {
+      "region_tag": "discoveryengine_v1_generated_ConversationalSearchService_StreamAnswerQuery_sync",
+      "title": "Snippet for the stream_answer_query call in the ConversationalSearchService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DiscoveryEngine::V1::ConversationalSearchService::Client#stream_answer_query.",
+      "file": "conversational_search_service/stream_answer_query.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "stream_answer_query",
+        "full_name": "::Google::Cloud::DiscoveryEngine::V1::ConversationalSearchService::Client#stream_answer_query",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::DiscoveryEngine::V1::AnswerQueryRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::DiscoveryEngine::V1::AnswerQueryResponse",
+        "client": {
+          "short_name": "ConversationalSearchService::Client",
+          "full_name": "::Google::Cloud::DiscoveryEngine::V1::ConversationalSearchService::Client"
+        },
+        "method": {
+          "short_name": "StreamAnswerQuery",
+          "full_name": "google.cloud.discoveryengine.v1.ConversationalSearchService.StreamAnswerQuery",
+          "service": {
+            "short_name": "ConversationalSearchService",
+            "full_name": "google.cloud.discoveryengine.v1.ConversationalSearchService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 49,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
       "region_tag": "discoveryengine_v1_generated_ConversationalSearchService_GetAnswer_sync",
       "title": "Snippet for the get_answer call in the ConversationalSearchService service",
       "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DiscoveryEngine::V1::ConversationalSearchService::Client#get_answer.",
@@ -2252,6 +2292,46 @@
       ]
     },
     {
+      "region_tag": "discoveryengine_v1_generated_ServingConfigService_UpdateServingConfig_sync",
+      "title": "Snippet for the update_serving_config call in the ServingConfigService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DiscoveryEngine::V1::ServingConfigService::Client#update_serving_config.",
+      "file": "serving_config_service/update_serving_config.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_serving_config",
+        "full_name": "::Google::Cloud::DiscoveryEngine::V1::ServingConfigService::Client#update_serving_config",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::DiscoveryEngine::V1::UpdateServingConfigRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::DiscoveryEngine::V1::ServingConfig",
+        "client": {
+          "short_name": "ServingConfigService::Client",
+          "full_name": "::Google::Cloud::DiscoveryEngine::V1::ServingConfigService::Client"
+        },
+        "method": {
+          "short_name": "UpdateServingConfig",
+          "full_name": "google.cloud.discoveryengine.v1.ServingConfigService.UpdateServingConfig",
+          "service": {
+            "short_name": "ServingConfigService",
+            "full_name": "google.cloud.discoveryengine.v1.ServingConfigService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
       "region_tag": "discoveryengine_v1_generated_SiteSearchEngineService_GetSiteSearchEngine_sync",
       "title": "Snippet for the get_site_search_engine call in the SiteSearchEngineService service",
       "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DiscoveryEngine::V1::SiteSearchEngineService::Client#get_site_search_engine.",
@@ -2527,6 +2607,126 @@
         {
           "start": 20,
           "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "discoveryengine_v1_generated_SiteSearchEngineService_CreateSitemap_sync",
+      "title": "Snippet for the create_sitemap call in the SiteSearchEngineService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DiscoveryEngine::V1::SiteSearchEngineService::Client#create_sitemap.",
+      "file": "site_search_engine_service/create_sitemap.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_sitemap",
+        "full_name": "::Google::Cloud::DiscoveryEngine::V1::SiteSearchEngineService::Client#create_sitemap",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::DiscoveryEngine::V1::CreateSitemapRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "SiteSearchEngineService::Client",
+          "full_name": "::Google::Cloud::DiscoveryEngine::V1::SiteSearchEngineService::Client"
+        },
+        "method": {
+          "short_name": "CreateSitemap",
+          "full_name": "google.cloud.discoveryengine.v1.SiteSearchEngineService.CreateSitemap",
+          "service": {
+            "short_name": "SiteSearchEngineService",
+            "full_name": "google.cloud.discoveryengine.v1.SiteSearchEngineService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "discoveryengine_v1_generated_SiteSearchEngineService_DeleteSitemap_sync",
+      "title": "Snippet for the delete_sitemap call in the SiteSearchEngineService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DiscoveryEngine::V1::SiteSearchEngineService::Client#delete_sitemap.",
+      "file": "site_search_engine_service/delete_sitemap.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_sitemap",
+        "full_name": "::Google::Cloud::DiscoveryEngine::V1::SiteSearchEngineService::Client#delete_sitemap",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::DiscoveryEngine::V1::DeleteSitemapRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "SiteSearchEngineService::Client",
+          "full_name": "::Google::Cloud::DiscoveryEngine::V1::SiteSearchEngineService::Client"
+        },
+        "method": {
+          "short_name": "DeleteSitemap",
+          "full_name": "google.cloud.discoveryengine.v1.SiteSearchEngineService.DeleteSitemap",
+          "service": {
+            "short_name": "SiteSearchEngineService",
+            "full_name": "google.cloud.discoveryengine.v1.SiteSearchEngineService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "discoveryengine_v1_generated_SiteSearchEngineService_FetchSitemaps_sync",
+      "title": "Snippet for the fetch_sitemaps call in the SiteSearchEngineService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DiscoveryEngine::V1::SiteSearchEngineService::Client#fetch_sitemaps.",
+      "file": "site_search_engine_service/fetch_sitemaps.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "fetch_sitemaps",
+        "full_name": "::Google::Cloud::DiscoveryEngine::V1::SiteSearchEngineService::Client#fetch_sitemaps",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::DiscoveryEngine::V1::FetchSitemapsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::DiscoveryEngine::V1::FetchSitemapsResponse",
+        "client": {
+          "short_name": "SiteSearchEngineService::Client",
+          "full_name": "::Google::Cloud::DiscoveryEngine::V1::SiteSearchEngineService::Client"
+        },
+        "method": {
+          "short_name": "FetchSitemaps",
+          "full_name": "google.cloud.discoveryengine.v1.SiteSearchEngineService.FetchSitemaps",
+          "service": {
+            "short_name": "SiteSearchEngineService",
+            "full_name": "google.cloud.discoveryengine.v1.SiteSearchEngineService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
           "type": "FULL"
         }
       ]

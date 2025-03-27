@@ -791,7 +791,7 @@ module Google
               #   @param options [::Gapic::CallOptions, ::Hash]
               #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
               #
-              # @overload answer_query(serving_config: nil, query: nil, session: nil, safety_spec: nil, related_questions_spec: nil, answer_generation_spec: nil, search_spec: nil, query_understanding_spec: nil, asynchronous_mode: nil, user_pseudo_id: nil, user_labels: nil)
+              # @overload answer_query(serving_config: nil, query: nil, session: nil, safety_spec: nil, related_questions_spec: nil, grounding_spec: nil, answer_generation_spec: nil, search_spec: nil, query_understanding_spec: nil, asynchronous_mode: nil, user_pseudo_id: nil, user_labels: nil, end_user_spec: nil)
               #   Pass arguments to `answer_query` via keyword arguments. Note that at
               #   least one keyword argument is required. To specify no parameters, or to keep all
               #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -816,6 +816,8 @@ module Google
               #     Model specification.
               #   @param related_questions_spec [::Google::Cloud::DiscoveryEngine::V1::AnswerQueryRequest::RelatedQuestionsSpec, ::Hash]
               #     Related questions specification.
+              #   @param grounding_spec [::Google::Cloud::DiscoveryEngine::V1::AnswerQueryRequest::GroundingSpec, ::Hash]
+              #     Optional. Grounding specification.
               #   @param answer_generation_spec [::Google::Cloud::DiscoveryEngine::V1::AnswerQueryRequest::AnswerGenerationSpec, ::Hash]
               #     Answer generation specification.
               #   @param search_spec [::Google::Cloud::DiscoveryEngine::V1::AnswerQueryRequest::SearchSpec, ::Hash]
@@ -863,6 +865,8 @@ module Google
               #     See [Google Cloud
               #     Document](https://cloud.google.com/resource-manager/docs/creating-managing-labels#requirements)
               #     for more details.
+              #   @param end_user_spec [::Google::Cloud::DiscoveryEngine::V1::AnswerQueryRequest::EndUserSpec, ::Hash]
+              #     Optional. End user specification.
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Google::Cloud::DiscoveryEngine::V1::AnswerQueryResponse]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
@@ -917,6 +921,164 @@ module Google
                 @conversational_search_service_stub.answer_query request, options do |result, operation|
                   yield result, operation if block_given?
                 end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Answer query method (streaming).
+              #
+              # It takes one
+              # {::Google::Cloud::DiscoveryEngine::V1::AnswerQueryRequest AnswerQueryRequest}
+              # and returns multiple
+              # {::Google::Cloud::DiscoveryEngine::V1::AnswerQueryResponse AnswerQueryResponse}
+              # messages in a stream.
+              #
+              # @overload stream_answer_query(request, options = nil)
+              #   Pass arguments to `stream_answer_query` via a request object, either of type
+              #   {::Google::Cloud::DiscoveryEngine::V1::AnswerQueryRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::DiscoveryEngine::V1::AnswerQueryRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload stream_answer_query(serving_config: nil, query: nil, session: nil, safety_spec: nil, related_questions_spec: nil, grounding_spec: nil, answer_generation_spec: nil, search_spec: nil, query_understanding_spec: nil, asynchronous_mode: nil, user_pseudo_id: nil, user_labels: nil, end_user_spec: nil)
+              #   Pass arguments to `stream_answer_query` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param serving_config [::String]
+              #     Required. The resource name of the Search serving config, such as
+              #     `projects/*/locations/global/collections/default_collection/engines/*/servingConfigs/default_serving_config`,
+              #     or
+              #     `projects/*/locations/global/collections/default_collection/dataStores/*/servingConfigs/default_serving_config`.
+              #     This field is used to identify the serving configuration name, set
+              #     of models used to make the search.
+              #   @param query [::Google::Cloud::DiscoveryEngine::V1::Query, ::Hash]
+              #     Required. Current user query.
+              #   @param session [::String]
+              #     The session resource name. Not required.
+              #
+              #     When session field is not set, the API is in sessionless mode.
+              #
+              #     We support auto session mode: users can use the wildcard symbol `-` as
+              #     session ID.  A new ID will be automatically generated and assigned.
+              #   @param safety_spec [::Google::Cloud::DiscoveryEngine::V1::AnswerQueryRequest::SafetySpec, ::Hash]
+              #     Model specification.
+              #   @param related_questions_spec [::Google::Cloud::DiscoveryEngine::V1::AnswerQueryRequest::RelatedQuestionsSpec, ::Hash]
+              #     Related questions specification.
+              #   @param grounding_spec [::Google::Cloud::DiscoveryEngine::V1::AnswerQueryRequest::GroundingSpec, ::Hash]
+              #     Optional. Grounding specification.
+              #   @param answer_generation_spec [::Google::Cloud::DiscoveryEngine::V1::AnswerQueryRequest::AnswerGenerationSpec, ::Hash]
+              #     Answer generation specification.
+              #   @param search_spec [::Google::Cloud::DiscoveryEngine::V1::AnswerQueryRequest::SearchSpec, ::Hash]
+              #     Search specification.
+              #   @param query_understanding_spec [::Google::Cloud::DiscoveryEngine::V1::AnswerQueryRequest::QueryUnderstandingSpec, ::Hash]
+              #     Query understanding specification.
+              #   @param asynchronous_mode [::Boolean]
+              #     Deprecated: This field is deprecated. Streaming Answer API will be
+              #     supported.
+              #
+              #     Asynchronous mode control.
+              #
+              #     If enabled, the response will be returned with answer/session resource
+              #     name without final answer. The API users need to do the polling to get
+              #     the latest status of answer/session by calling
+              #     {::Google::Cloud::DiscoveryEngine::V1::ConversationalSearchService::Rest::Client#get_answer ConversationalSearchService.GetAnswer}
+              #     or
+              #     {::Google::Cloud::DiscoveryEngine::V1::ConversationalSearchService::Rest::Client#get_session ConversationalSearchService.GetSession}
+              #     method.
+              #   @param user_pseudo_id [::String]
+              #     A unique identifier for tracking visitors. For example, this could be
+              #     implemented with an HTTP cookie, which should be able to uniquely identify
+              #     a visitor on a single device. This unique identifier should not change if
+              #     the visitor logs in or out of the website.
+              #
+              #     This field should NOT have a fixed value such as `unknown_visitor`.
+              #
+              #     The field must be a UTF-8 encoded string with a length limit of 128
+              #     characters. Otherwise, an  `INVALID_ARGUMENT`  error is returned.
+              #   @param user_labels [::Hash{::String => ::String}]
+              #     The user labels applied to a resource must meet the following requirements:
+              #
+              #     * Each resource can have multiple labels, up to a maximum of 64.
+              #     * Each label must be a key-value pair.
+              #     * Keys have a minimum length of 1 character and a maximum length of 63
+              #       characters and cannot be empty. Values can be empty and have a maximum
+              #       length of 63 characters.
+              #     * Keys and values can contain only lowercase letters, numeric characters,
+              #       underscores, and dashes. All characters must use UTF-8 encoding, and
+              #       international characters are allowed.
+              #     * The key portion of a label must be unique. However, you can use the same
+              #       key with multiple resources.
+              #     * Keys must start with a lowercase letter or international character.
+              #
+              #     See [Google Cloud
+              #     Document](https://cloud.google.com/resource-manager/docs/creating-managing-labels#requirements)
+              #     for more details.
+              #   @param end_user_spec [::Google::Cloud::DiscoveryEngine::V1::AnswerQueryRequest::EndUserSpec, ::Hash]
+              #     Optional. End user specification.
+              # @return [::Enumerable<::Google::Cloud::DiscoveryEngine::V1::AnswerQueryResponse>]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/discovery_engine/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::DiscoveryEngine::V1::ConversationalSearchService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::DiscoveryEngine::V1::AnswerQueryRequest.new
+              #
+              #   # Call the stream_answer_query method to start streaming.
+              #   output = client.stream_answer_query request
+              #
+              #   # The returned object is a streamed enumerable yielding elements of type
+              #   # ::Google::Cloud::DiscoveryEngine::V1::AnswerQueryResponse
+              #   output.each do |current_response|
+              #     p current_response
+              #   end
+              #
+              def stream_answer_query request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::DiscoveryEngine::V1::AnswerQueryRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.stream_answer_query.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::DiscoveryEngine::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.stream_answer_query.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.stream_answer_query.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                ::Gapic::Rest::ServerStream.new(
+                  ::Google::Cloud::DiscoveryEngine::V1::AnswerQueryResponse,
+                  ::Gapic::Rest::ThreadedEnumerator.new do |in_q, out_q|
+                    @conversational_search_service_stub.stream_answer_query request, options do |chunk|
+                      in_q.deq
+                      out_q.enq chunk
+                    end
+                  end
+                )
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
               end
@@ -1269,7 +1431,7 @@ module Google
               #   @param options [::Gapic::CallOptions, ::Hash]
               #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
               #
-              # @overload get_session(name: nil)
+              # @overload get_session(name: nil, include_answer_details: nil)
               #   Pass arguments to `get_session` via keyword arguments. Note that at
               #   least one keyword argument is required. To specify no parameters, or to keep all
               #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -1277,6 +1439,9 @@ module Google
               #   @param name [::String]
               #     Required. The resource name of the Session to get. Format:
               #     `projects/{project}/locations/{location}/collections/{collection}/dataStores/{data_store_id}/sessions/{session_id}`
+              #   @param include_answer_details [::Boolean]
+              #     Optional. If set to true, the full session including all answer details
+              #     will be returned.
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Google::Cloud::DiscoveryEngine::V1::Session]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
@@ -1373,13 +1538,18 @@ module Google
               #     A comma-separated list of fields to order by, sorted in ascending order.
               #     Use "desc" after a field name for descending.
               #     Supported fields:
+              #
               #       * `update_time`
               #       * `create_time`
               #       * `session_name`
+              #       * `is_pinned`
               #
               #     Example:
-              #     "update_time desc"
-              #     "create_time"
+              #
+              #     * "update_time desc"
+              #     * "create_time"
+              #     * "is_pinned desc,update_time desc": list sessions by is_pinned first, then
+              #        by update_time.
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::DiscoveryEngine::V1::Session>]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
@@ -1626,6 +1796,11 @@ module Google
                   #
                   attr_reader :answer_query
                   ##
+                  # RPC-specific configuration for `stream_answer_query`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :stream_answer_query
+                  ##
                   # RPC-specific configuration for `get_answer`
                   # @return [::Gapic::Config::Method]
                   #
@@ -1672,6 +1847,8 @@ module Google
                     @list_conversations = ::Gapic::Config::Method.new list_conversations_config
                     answer_query_config = parent_rpcs.answer_query if parent_rpcs.respond_to? :answer_query
                     @answer_query = ::Gapic::Config::Method.new answer_query_config
+                    stream_answer_query_config = parent_rpcs.stream_answer_query if parent_rpcs.respond_to? :stream_answer_query
+                    @stream_answer_query = ::Gapic::Config::Method.new stream_answer_query_config
                     get_answer_config = parent_rpcs.get_answer if parent_rpcs.respond_to? :get_answer
                     @get_answer = ::Gapic::Config::Method.new get_answer_config
                     create_session_config = parent_rpcs.create_session if parent_rpcs.respond_to? :create_session

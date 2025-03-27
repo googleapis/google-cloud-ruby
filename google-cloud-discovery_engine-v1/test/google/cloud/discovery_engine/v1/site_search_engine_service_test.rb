@@ -503,6 +503,194 @@ class ::Google::Cloud::DiscoveryEngine::V1::SiteSearchEngineService::ClientTest 
     end
   end
 
+  def test_create_sitemap
+    # Create GRPC objects.
+    grpc_response = ::Google::Longrunning::Operation.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    sitemap = {}
+
+    create_sitemap_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :create_sitemap, name
+      assert_kind_of ::Google::Cloud::DiscoveryEngine::V1::CreateSitemapRequest, request
+      assert_equal "hello world", request["parent"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::DiscoveryEngine::V1::Sitemap), request["sitemap"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, create_sitemap_client_stub do
+      # Create client
+      client = ::Google::Cloud::DiscoveryEngine::V1::SiteSearchEngineService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.create_sitemap({ parent: parent, sitemap: sitemap }) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.create_sitemap parent: parent, sitemap: sitemap do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.create_sitemap ::Google::Cloud::DiscoveryEngine::V1::CreateSitemapRequest.new(parent: parent, sitemap: sitemap) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.create_sitemap({ parent: parent, sitemap: sitemap }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.create_sitemap(::Google::Cloud::DiscoveryEngine::V1::CreateSitemapRequest.new(parent: parent, sitemap: sitemap), grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, create_sitemap_client_stub.call_rpc_count
+    end
+  end
+
+  def test_delete_sitemap
+    # Create GRPC objects.
+    grpc_response = ::Google::Longrunning::Operation.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    delete_sitemap_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :delete_sitemap, name
+      assert_kind_of ::Google::Cloud::DiscoveryEngine::V1::DeleteSitemapRequest, request
+      assert_equal "hello world", request["name"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, delete_sitemap_client_stub do
+      # Create client
+      client = ::Google::Cloud::DiscoveryEngine::V1::SiteSearchEngineService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.delete_sitemap({ name: name }) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.delete_sitemap name: name do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.delete_sitemap ::Google::Cloud::DiscoveryEngine::V1::DeleteSitemapRequest.new(name: name) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.delete_sitemap({ name: name }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.delete_sitemap(::Google::Cloud::DiscoveryEngine::V1::DeleteSitemapRequest.new(name: name), grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, delete_sitemap_client_stub.call_rpc_count
+    end
+  end
+
+  def test_fetch_sitemaps
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::DiscoveryEngine::V1::FetchSitemapsResponse.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    matcher = {}
+
+    fetch_sitemaps_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :fetch_sitemaps, name
+      assert_kind_of ::Google::Cloud::DiscoveryEngine::V1::FetchSitemapsRequest, request
+      assert_equal "hello world", request["parent"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::DiscoveryEngine::V1::FetchSitemapsRequest::Matcher), request["matcher"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, fetch_sitemaps_client_stub do
+      # Create client
+      client = ::Google::Cloud::DiscoveryEngine::V1::SiteSearchEngineService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.fetch_sitemaps({ parent: parent, matcher: matcher }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.fetch_sitemaps parent: parent, matcher: matcher do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.fetch_sitemaps ::Google::Cloud::DiscoveryEngine::V1::FetchSitemapsRequest.new(parent: parent, matcher: matcher) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.fetch_sitemaps({ parent: parent, matcher: matcher }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.fetch_sitemaps(::Google::Cloud::DiscoveryEngine::V1::FetchSitemapsRequest.new(parent: parent, matcher: matcher), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, fetch_sitemaps_client_stub.call_rpc_count
+    end
+  end
+
   def test_enable_advanced_site_search
     # Create GRPC objects.
     grpc_response = ::Google::Longrunning::Operation.new
