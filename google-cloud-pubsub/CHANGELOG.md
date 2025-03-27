@@ -1,5 +1,11 @@
 # Release History
 
+### 2.22.0 (2025-03-27)
+
+#### Features
+
+* Support list schema revisions ([#29174](https://github.com/googleapis/google-cloud-ruby/issues/29174)) 
+
 ### 2.21.0 (2025-03-14)
 
 #### Features
