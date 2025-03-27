@@ -126,6 +126,11 @@ module Google
         #     Required. The name of the ReasoningEngine resource to be deleted.
         #     Format:
         #     `projects/{project}/locations/{location}/reasoningEngines/{reasoning_engine}`
+        # @!attribute [rw] force
+        #   @return [::Boolean]
+        #     Optional. If set to true, child resources of this reasoning engine will
+        #     also be deleted. Otherwise, the request will fail with FAILED_PRECONDITION
+        #     error when the reasoning engine has undeleted child resources.
         class DeleteReasoningEngineRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

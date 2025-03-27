@@ -114,6 +114,9 @@ module Google
           #     distance between the query and the context. The larger the distance, the
           #     less relevant the context is to the query. The range is [0, 2], while 0
           #     means the most relevant and 2 means the least relevant.
+          # @!attribute [rw] chunk
+          #   @return [::Google::Cloud::AIPlatform::V1::RagChunk]
+          #     Context of the retrieved chunk.
           class Context
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -251,6 +254,9 @@ module Google
         #     distance between the query and the fact. The larger the distance, the less
         #     relevant the fact is to the query. The range is [0, 2], while 0 means the
         #     most relevant and 2 means the least relevant.
+        # @!attribute [rw] chunk
+        #   @return [::Google::Cloud::AIPlatform::V1::RagChunk]
+        #     If present, chunk properties.
         class Fact
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
