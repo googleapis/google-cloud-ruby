@@ -1,5 +1,11 @@
 # Changelog
 
+### 1.1.0 (2025-03-27)
+
+#### Features
+
+* Support for global application scope ([#29416](https://github.com/googleapis/google-cloud-ruby/issues/29416)) 
+
 ### 1.0.0 (2025-02-07)
 
 ### ⚠ BREAKING CHANGES
