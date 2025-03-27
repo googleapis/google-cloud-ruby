@@ -314,6 +314,27 @@ class Google::Cloud::DiscoveryEngine::ClientConstructionMinitest < Minitest::Tes
     end
   end
 
+  def test_serving_config_service_grpc
+    skip unless Google::Cloud::DiscoveryEngine.serving_config_service_available? transport: :grpc
+    Gapic::ServiceStub.stub :new, DummyStub.new do
+      grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+      client = Google::Cloud::DiscoveryEngine.serving_config_service transport: :grpc do |config|
+        config.credentials = grpc_channel
+      end
+      assert_kind_of Google::Cloud::DiscoveryEngine::V1::ServingConfigService::Client, client
+    end
+  end
+
+  def test_serving_config_service_rest
+    skip unless Google::Cloud::DiscoveryEngine.serving_config_service_available? transport: :rest
+    Gapic::Rest::ClientStub.stub :new, DummyStub.new do
+      client = Google::Cloud::DiscoveryEngine.serving_config_service transport: :rest do |config|
+        config.credentials = :dummy_credentials
+      end
+      assert_kind_of Google::Cloud::DiscoveryEngine::V1::ServingConfigService::Rest::Client, client
+    end
+  end
+
   def test_site_search_engine_service_grpc
     skip unless Google::Cloud::DiscoveryEngine.site_search_engine_service_available? transport: :grpc
     Gapic::ServiceStub.stub :new, DummyStub.new do
