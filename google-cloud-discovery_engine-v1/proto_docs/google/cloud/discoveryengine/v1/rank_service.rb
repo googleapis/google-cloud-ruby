@@ -43,6 +43,8 @@ module Google
         # @!attribute [rw] score
         #   @return [::Float]
         #     The score of this record based on the given query and selected model.
+        #     The score will be rounded to 2 decimal places. If the score is close to 0,
+        #     it will be rounded to 0.0001 to avoid returning unset.
         class RankingRecord
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -58,7 +60,7 @@ module Google
         #   @return [::String]
         #     The identifier of the model to use. It is one of:
         #
-        #     * `semantic-ranker-512@latest`: Semantic ranking model with maxiumn input
+        #     * `semantic-ranker-512@latest`: Semantic ranking model with maximum input
         #     token size 512.
         #
         #     It is set to `semantic-ranker-512@latest` by default if unspecified.

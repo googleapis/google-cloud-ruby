@@ -104,7 +104,47 @@ module Google
         #     or if
         #     {::Google::Cloud::DiscoveryEngine::V1::UserEvent#direct_user_request UserEvent.direct_user_request}
         #     is set.
+        # @!attribute [rw] time_zone
+        #   @return [::String]
+        #     Optional. IANA time zone, e.g. Europe/Budapest.
         class UserInfo
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Double list.
+        # @!attribute [rw] values
+        #   @return [::Array<::Float>]
+        #     Double values.
+        class DoubleList
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Promotion proto includes uri and other helping information to display the
+        # promotion.
+        # @!attribute [rw] title
+        #   @return [::String]
+        #     Required. The title of the promotion.
+        #     Maximum length: 160 characters.
+        # @!attribute [rw] uri
+        #   @return [::String]
+        #     Optional. The URL for the page the user wants to promote. Must be set for
+        #     site search. For other verticals, this is optional.
+        # @!attribute [rw] image_uri
+        #   @return [::String]
+        #     Optional. The promotion thumbnail image url.
+        # @!attribute [rw] description
+        #   @return [::String]
+        #     Optional. The Promotion description.
+        #     Maximum length: 200 characters.
+        # @!attribute [rw] enabled
+        #   @return [::Boolean]
+        #     Optional. The enabled promotion will be returned for any serving configs
+        #     associated with the parent of the control this promotion is attached to.
+        #
+        #     This flag is used for basic site search only.
+        class SearchLinkPromotion
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end

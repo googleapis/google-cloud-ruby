@@ -32,9 +32,16 @@ module Google
         # @!attribute [rw] answer_text
         #   @return [::String]
         #     The textual answer.
+        # @!attribute [rw] grounding_score
+        #   @return [::Float]
+        #     A score in the range of [0, 1] describing how grounded the answer is by the
+        #     reference chunks.
         # @!attribute [rw] citations
         #   @return [::Array<::Google::Cloud::DiscoveryEngine::V1::Answer::Citation>]
         #     Citations.
+        # @!attribute [rw] grounding_supports
+        #   @return [::Array<::Google::Cloud::DiscoveryEngine::V1::Answer::GroundingSupport>]
+        #     Optional. Grounding supports.
         # @!attribute [rw] references
         #   @return [::Array<::Google::Cloud::DiscoveryEngine::V1::Answer::Reference>]
         #     References.
@@ -57,6 +64,9 @@ module Google
         # @!attribute [r] complete_time
         #   @return [::Google::Protobuf::Timestamp]
         #     Output only. Answer completed timestamp.
+        # @!attribute [rw] safety_ratings
+        #   @return [::Array<::Google::Cloud::DiscoveryEngine::V1::SafetyRating>]
+        #     Optional. Safety ratings.
         class Answer
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -65,10 +75,13 @@ module Google
           # @!attribute [rw] start_index
           #   @return [::Integer]
           #     Index indicates the start of the segment, measured in bytes (UTF-8
-          #     unicode).
+          #     unicode). If there are multi-byte characters,such as non-ASCII
+          #     characters, the index measurement is longer than the string length.
           # @!attribute [rw] end_index
           #   @return [::Integer]
-          #     End of the attributed segment, exclusive.
+          #     End of the attributed segment, exclusive. Measured in bytes (UTF-8
+          #     unicode). If there are multi-byte characters,such as non-ASCII
+          #     characters, the index measurement is longer than the string length.
           # @!attribute [rw] sources
           #   @return [::Array<::Google::Cloud::DiscoveryEngine::V1::Answer::CitationSource>]
           #     Citation sources for the attributed segment.
@@ -82,6 +95,35 @@ module Google
           #   @return [::String]
           #     ID of the citation source.
           class CitationSource
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Grounding support for a claim in `answer_text`.
+          # @!attribute [rw] start_index
+          #   @return [::Integer]
+          #     Required. Index indicates the start of the claim, measured in bytes
+          #     (UTF-8 unicode).
+          # @!attribute [rw] end_index
+          #   @return [::Integer]
+          #     Required. End of the claim, exclusive.
+          # @!attribute [rw] grounding_score
+          #   @return [::Float]
+          #     A score in the range of [0, 1] describing how grounded is a specific
+          #     claim by the references.
+          #     Higher value means that the claim is better supported by the reference
+          #     chunks.
+          # @!attribute [rw] grounding_check_required
+          #   @return [::Boolean]
+          #     Indicates that this claim required grounding check. When the
+          #     system decided this claim didn't require attribution/grounding check,
+          #     this field is set to false. In that case, no grounding check was
+          #     done for the claim and therefore `grounding_score`, `sources` is not
+          #     returned.
+          # @!attribute [rw] sources
+          #   @return [::Array<::Google::Cloud::DiscoveryEngine::V1::Answer::CitationSource>]
+          #     Optional. Citation sources for the claim.
+          class GroundingSupport
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
@@ -198,6 +240,12 @@ module Google
             # @!attribute [rw] struct_data
             #   @return [::Google::Protobuf::Struct]
             #     Structured search data.
+            # @!attribute [r] title
+            #   @return [::String]
+            #     Output only. The title of the document.
+            # @!attribute [r] uri
+            #   @return [::String]
+            #     Output only. The URI of the document.
             class StructuredDocumentInfo
               include ::Google::Protobuf::MessageExts
               extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -379,6 +427,9 @@ module Google
 
             # Answer generation has succeeded.
             SUCCEEDED = 3
+
+            # Answer generation is currently in progress.
+            STREAMING = 4
           end
 
           # An enum for answer skipped reasons.

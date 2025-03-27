@@ -50,7 +50,7 @@ module Google
         # @!attribute [r] default_schema_id
         #   @return [::String]
         #     Output only. The id of the default
-        #     {::Google::Cloud::DiscoveryEngine::V1::Schema Schema} asscociated to this data
+        #     {::Google::Cloud::DiscoveryEngine::V1::Schema Schema} associated to this data
         #     store.
         # @!attribute [rw] content_config
         #   @return [::Google::Cloud::DiscoveryEngine::V1::DataStore::ContentConfig]
@@ -61,6 +61,9 @@ module Google
         #   @return [::Google::Protobuf::Timestamp]
         #     Output only. Timestamp the
         #     {::Google::Cloud::DiscoveryEngine::V1::DataStore DataStore} was created at.
+        # @!attribute [rw] advanced_site_search_config
+        #   @return [::Google::Cloud::DiscoveryEngine::V1::AdvancedSiteSearchConfig]
+        #     Optional. Configuration for advanced site search.
         # @!attribute [r] billing_estimation
         #   @return [::Google::Cloud::DiscoveryEngine::V1::DataStore::BillingEstimation]
         #     Output only. Data size estimation for billing.
@@ -80,9 +83,12 @@ module Google
         #     {::Google::Cloud::DiscoveryEngine::V1::DataStore DataStore} when provisioning
         #     it. If unset, a default vertical specialized schema will be used.
         #
-        #     This field is only used by [CreateDataStore][] API, and will be ignored if
-        #     used in other APIs. This field will be omitted from all API responses
-        #     including [CreateDataStore][] API. To retrieve a schema of a
+        #     This field is only used by
+        #     {::Google::Cloud::DiscoveryEngine::V1::DataStoreService::Client#create_data_store CreateDataStore}
+        #     API, and will be ignored if used in other APIs. This field will be omitted
+        #     from all API responses including
+        #     {::Google::Cloud::DiscoveryEngine::V1::DataStoreService::Client#create_data_store CreateDataStore}
+        #     API. To retrieve a schema of a
         #     {::Google::Cloud::DiscoveryEngine::V1::DataStore DataStore}, use
         #     {::Google::Cloud::DiscoveryEngine::V1::SchemaService::Client#get_schema SchemaService.GetSchema}
         #     API instead.
@@ -141,6 +147,18 @@ module Google
           end
         end
 
+        # Configuration data for advance site search.
+        # @!attribute [rw] disable_initial_index
+        #   @return [::Boolean]
+        #     If set true, initial indexing is disabled for the DataStore.
+        # @!attribute [rw] disable_automatic_refresh
+        #   @return [::Boolean]
+        #     If set true, automatic refresh is disabled for the DataStore.
+        class AdvancedSiteSearchConfig
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # Config to store data store type configuration for workspace data
         # @!attribute [rw] type
         #   @return [::Google::Cloud::DiscoveryEngine::V1::WorkspaceConfig::Type]
@@ -187,6 +205,9 @@ module Google
 
             # Workspace Data Store contains Keep data
             GOOGLE_KEEP = 7
+
+            # Workspace Data Store contains People data
+            GOOGLE_PEOPLE = 8
           end
         end
       end

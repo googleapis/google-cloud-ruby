@@ -230,8 +230,6 @@ module Google
               #     For single-turn queries, this is a single instance. For multi-turn queries,
               #     this is a repeated field that contains conversation history + latest
               #     request.
-              #
-              #     Only a single-turn query is supported currently.
               #   @param generation_spec [::Google::Cloud::DiscoveryEngine::V1::GenerateGroundedContentRequest::GenerationSpec, ::Hash]
               #     Content generation specification.
               #   @param grounding_spec [::Google::Cloud::DiscoveryEngine::V1::GenerateGroundedContentRequest::GroundingSpec, ::Hash]
@@ -334,7 +332,7 @@ module Google
               #     Required. The resource name of the grounding config, such as
               #     `projects/*/locations/global/groundingConfigs/default_grounding_config`.
               #   @param answer_candidate [::String]
-              #     Answer candidate to check. Can have a maximum length of 1024 characters.
+              #     Answer candidate to check. It can have a maximum length of 4096 tokens.
               #   @param facts [::Array<::Google::Cloud::DiscoveryEngine::V1::GroundingFact, ::Hash>]
               #     List of facts for the grounding check.
               #     We support up to 200 facts.

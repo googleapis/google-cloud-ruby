@@ -132,6 +132,11 @@
                 "answer_query"
               ]
             },
+            "StreamAnswerQuery": {
+              "methods": [
+                "stream_answer_query"
+              ]
+            },
             "GetAnswer": {
               "methods": [
                 "get_answer"
@@ -402,6 +407,20 @@
         }
       }
     },
+    "ServingConfigService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::DiscoveryEngine::V1::ServingConfigService::Client",
+          "rpcs": {
+            "UpdateServingConfig": {
+              "methods": [
+                "update_serving_config"
+              ]
+            }
+          }
+        }
+      }
+    },
     "SiteSearchEngineService": {
       "clients": {
         "grpc": {
@@ -440,6 +459,21 @@
             "ListTargetSites": {
               "methods": [
                 "list_target_sites"
+              ]
+            },
+            "CreateSitemap": {
+              "methods": [
+                "create_sitemap"
+              ]
+            },
+            "DeleteSitemap": {
+              "methods": [
+                "delete_sitemap"
+              ]
+            },
+            "FetchSitemaps": {
+              "methods": [
+                "fetch_sitemaps"
               ]
             },
             "EnableAdvancedSiteSearch": {

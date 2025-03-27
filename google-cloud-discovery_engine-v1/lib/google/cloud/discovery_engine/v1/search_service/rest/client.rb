@@ -210,7 +210,7 @@ module Google
               #   @param options [::Gapic::CallOptions, ::Hash]
               #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
               #
-              # @overload search(serving_config: nil, branch: nil, query: nil, image_query: nil, page_size: nil, page_token: nil, offset: nil, one_box_page_size: nil, data_store_specs: nil, filter: nil, canonical_filter: nil, order_by: nil, user_info: nil, language_code: nil, facet_specs: nil, boost_spec: nil, params: nil, query_expansion_spec: nil, spell_correction_spec: nil, user_pseudo_id: nil, content_search_spec: nil, safe_search: nil, user_labels: nil, search_as_you_type_spec: nil, session: nil, session_spec: nil)
+              # @overload search(serving_config: nil, branch: nil, query: nil, image_query: nil, page_size: nil, page_token: nil, offset: nil, one_box_page_size: nil, data_store_specs: nil, filter: nil, canonical_filter: nil, order_by: nil, user_info: nil, language_code: nil, facet_specs: nil, boost_spec: nil, params: nil, query_expansion_spec: nil, spell_correction_spec: nil, user_pseudo_id: nil, content_search_spec: nil, safe_search: nil, user_labels: nil, search_as_you_type_spec: nil, display_spec: nil, session: nil, session_spec: nil, relevance_threshold: nil, relevance_score_spec: nil)
               #   Pass arguments to `search` via keyword arguments. Note that at
               #   least one keyword argument is required. To specify no parameters, or to keep all
               #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -265,10 +265,13 @@ module Google
               #     This applies to each OneBox type individually.
               #     Default number is 10.
               #   @param data_store_specs [::Array<::Google::Cloud::DiscoveryEngine::V1::SearchRequest::DataStoreSpec, ::Hash>]
-              #     Specs defining dataStores to filter on in a search call and configurations
-              #     for those dataStores. This is only considered for engines with multiple
-              #     dataStores use case. For single dataStore within an engine, they should
-              #     use the specs at the top level.
+              #     Specifications that define the specific
+              #     {::Google::Cloud::DiscoveryEngine::V1::DataStore DataStore}s to be searched,
+              #     along with configurations for those data stores. This is only considered
+              #     for {::Google::Cloud::DiscoveryEngine::V1::Engine Engine}s with multiple data
+              #     stores. For engines with a single data store, the specs directly under
+              #     {::Google::Cloud::DiscoveryEngine::V1::SearchRequest SearchRequest} should be
+              #     used.
               #   @param filter [::String]
               #     The filter syntax consists of an expression language for constructing a
               #     predicate from one or more fields of the documents being filtered. Filter
@@ -313,7 +316,7 @@ module Google
               #     If this field is unrecognizable, an `INVALID_ARGUMENT` is returned.
               #   @param user_info [::Google::Cloud::DiscoveryEngine::V1::UserInfo, ::Hash]
               #     Information about the end user.
-              #     Highly recommended for analytics.
+              #     Highly recommended for analytics and personalization.
               #     {::Google::Cloud::DiscoveryEngine::V1::UserInfo#user_agent UserInfo.user_agent}
               #     is used to deduce `device_type` for analytics.
               #   @param language_code [::String]
@@ -395,6 +398,9 @@ module Google
               #     Search as you type configuration. Only supported for the
               #     {::Google::Cloud::DiscoveryEngine::V1::IndustryVertical::MEDIA IndustryVertical.MEDIA}
               #     vertical.
+              #   @param display_spec [::Google::Cloud::DiscoveryEngine::V1::SearchRequest::DisplaySpec, ::Hash]
+              #     Optional. Config for display feature, like match highlighting on search
+              #     results.
               #   @param session [::String]
               #     The session resource name. Optional.
               #
@@ -426,6 +432,16 @@ module Google
               #     Session specification.
               #
               #     Can be used only when `session` is set.
+              #   @param relevance_threshold [::Google::Cloud::DiscoveryEngine::V1::SearchRequest::RelevanceThreshold]
+              #     The relevance threshold of the search results.
+              #
+              #     Default to Google defined threshold, leveraging a balance of
+              #     precision and recall to deliver both highly accurate results and
+              #     comprehensive coverage of relevant information.
+              #
+              #     This feature is not supported for healthcare search.
+              #   @param relevance_score_spec [::Google::Cloud::DiscoveryEngine::V1::SearchRequest::RelevanceScoreSpec, ::Hash]
+              #     Optional. The specification for returning the relevance score.
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::DiscoveryEngine::V1::SearchResponse::SearchResult>]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
@@ -515,7 +531,7 @@ module Google
               #   @param options [::Gapic::CallOptions, ::Hash]
               #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
               #
-              # @overload search_lite(serving_config: nil, branch: nil, query: nil, image_query: nil, page_size: nil, page_token: nil, offset: nil, one_box_page_size: nil, data_store_specs: nil, filter: nil, canonical_filter: nil, order_by: nil, user_info: nil, language_code: nil, facet_specs: nil, boost_spec: nil, params: nil, query_expansion_spec: nil, spell_correction_spec: nil, user_pseudo_id: nil, content_search_spec: nil, safe_search: nil, user_labels: nil, search_as_you_type_spec: nil, session: nil, session_spec: nil)
+              # @overload search_lite(serving_config: nil, branch: nil, query: nil, image_query: nil, page_size: nil, page_token: nil, offset: nil, one_box_page_size: nil, data_store_specs: nil, filter: nil, canonical_filter: nil, order_by: nil, user_info: nil, language_code: nil, facet_specs: nil, boost_spec: nil, params: nil, query_expansion_spec: nil, spell_correction_spec: nil, user_pseudo_id: nil, content_search_spec: nil, safe_search: nil, user_labels: nil, search_as_you_type_spec: nil, display_spec: nil, session: nil, session_spec: nil, relevance_threshold: nil, relevance_score_spec: nil)
               #   Pass arguments to `search_lite` via keyword arguments. Note that at
               #   least one keyword argument is required. To specify no parameters, or to keep all
               #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -570,10 +586,13 @@ module Google
               #     This applies to each OneBox type individually.
               #     Default number is 10.
               #   @param data_store_specs [::Array<::Google::Cloud::DiscoveryEngine::V1::SearchRequest::DataStoreSpec, ::Hash>]
-              #     Specs defining dataStores to filter on in a search call and configurations
-              #     for those dataStores. This is only considered for engines with multiple
-              #     dataStores use case. For single dataStore within an engine, they should
-              #     use the specs at the top level.
+              #     Specifications that define the specific
+              #     {::Google::Cloud::DiscoveryEngine::V1::DataStore DataStore}s to be searched,
+              #     along with configurations for those data stores. This is only considered
+              #     for {::Google::Cloud::DiscoveryEngine::V1::Engine Engine}s with multiple data
+              #     stores. For engines with a single data store, the specs directly under
+              #     {::Google::Cloud::DiscoveryEngine::V1::SearchRequest SearchRequest} should be
+              #     used.
               #   @param filter [::String]
               #     The filter syntax consists of an expression language for constructing a
               #     predicate from one or more fields of the documents being filtered. Filter
@@ -618,7 +637,7 @@ module Google
               #     If this field is unrecognizable, an `INVALID_ARGUMENT` is returned.
               #   @param user_info [::Google::Cloud::DiscoveryEngine::V1::UserInfo, ::Hash]
               #     Information about the end user.
-              #     Highly recommended for analytics.
+              #     Highly recommended for analytics and personalization.
               #     {::Google::Cloud::DiscoveryEngine::V1::UserInfo#user_agent UserInfo.user_agent}
               #     is used to deduce `device_type` for analytics.
               #   @param language_code [::String]
@@ -700,6 +719,9 @@ module Google
               #     Search as you type configuration. Only supported for the
               #     {::Google::Cloud::DiscoveryEngine::V1::IndustryVertical::MEDIA IndustryVertical.MEDIA}
               #     vertical.
+              #   @param display_spec [::Google::Cloud::DiscoveryEngine::V1::SearchRequest::DisplaySpec, ::Hash]
+              #     Optional. Config for display feature, like match highlighting on search
+              #     results.
               #   @param session [::String]
               #     The session resource name. Optional.
               #
@@ -731,6 +753,16 @@ module Google
               #     Session specification.
               #
               #     Can be used only when `session` is set.
+              #   @param relevance_threshold [::Google::Cloud::DiscoveryEngine::V1::SearchRequest::RelevanceThreshold]
+              #     The relevance threshold of the search results.
+              #
+              #     Default to Google defined threshold, leveraging a balance of
+              #     precision and recall to deliver both highly accurate results and
+              #     comprehensive coverage of relevant information.
+              #
+              #     This feature is not supported for healthcare search.
+              #   @param relevance_score_spec [::Google::Cloud::DiscoveryEngine::V1::SearchRequest::RelevanceScoreSpec, ::Hash]
+              #     Optional. The specification for returning the relevance score.
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::DiscoveryEngine::V1::SearchResponse::SearchResult>]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]

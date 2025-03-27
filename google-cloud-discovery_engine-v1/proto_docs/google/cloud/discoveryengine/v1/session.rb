@@ -26,6 +26,12 @@ module Google
         #   @return [::String]
         #     Immutable. Fully qualified name
         #     `projects/{project}/locations/global/collections/{collection}/engines/{engine}/sessions/*`
+        # @!attribute [rw] display_name
+        #   @return [::String]
+        #     Optional. The display name of the session.
+        #
+        #     This field is used to identify the session in the UI.
+        #     By default, the display name is the first turn query text in the session.
         # @!attribute [rw] state
         #   @return [::Google::Cloud::DiscoveryEngine::V1::Session::State]
         #     The state of the session.
@@ -41,6 +47,10 @@ module Google
         # @!attribute [r] end_time
         #   @return [::Google::Protobuf::Timestamp]
         #     Output only. The time the session finished.
+        # @!attribute [rw] is_pinned
+        #   @return [::Boolean]
+        #     Optional. Whether the session is pinned, pinned session will be displayed
+        #     on the top of the session list.
         class Session
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -56,6 +66,14 @@ module Google
           #
           #     Only set if the answer generation (/answer API call) happened in this
           #     turn.
+          # @!attribute [r] detailed_answer
+          #   @return [::Google::Cloud::DiscoveryEngine::V1::Answer]
+          #     Output only. In
+          #     {::Google::Cloud::DiscoveryEngine::V1::ConversationalSearchService::Client#get_session ConversationalSearchService.GetSession}
+          #     API, if
+          #     {::Google::Cloud::DiscoveryEngine::V1::GetSessionRequest#include_answer_details GetSessionRequest.include_answer_details}
+          #     is set to true, this field will be populated when getting answer query
+          #     session.
           class Turn
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods

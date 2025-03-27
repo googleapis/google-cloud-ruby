@@ -50,7 +50,7 @@ module Google
         #     Immutable. The identifier of the document.
         #
         #     Id should conform to [RFC-1034](https://tools.ietf.org/html/rfc1034)
-        #     standard with a length limit of 63 characters.
+        #     standard with a length limit of 128 characters.
         # @!attribute [rw] schema_id
         #   @return [::String]
         #     The identifier of the schema located in the same data store.
@@ -84,7 +84,8 @@ module Google
         #     * If document is indexed successfully, the index_time field is populated.
         #     * Otherwise, if document is not indexed due to errors, the error_samples
         #       field is populated.
-        #     * Otherwise, index_status is unset.
+        #     * Otherwise, if document's index is in progress, the pending_message field
+        #       is populated.
         class Document
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -134,6 +135,10 @@ module Google
           #   @return [::Array<::Google::Rpc::Status>]
           #     A sample of errors encountered while indexing the document.
           #     If this field is populated, the document is not indexed due to errors.
+          # @!attribute [rw] pending_message
+          #   @return [::String]
+          #     Immutable. The message indicates the document index is in progress.
+          #     If this field is populated, the document index is pending.
           class IndexStatus
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods

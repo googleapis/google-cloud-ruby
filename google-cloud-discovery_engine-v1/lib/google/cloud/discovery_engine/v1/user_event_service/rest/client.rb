@@ -240,9 +240,9 @@ module Google
               #     {::Google::Cloud::DiscoveryEngine::V1::DataStore DataStore} level, the format
               #     is:
               #     `projects/{project}/locations/{location}/collections/{collection}/dataStores/{data_store}`.
-              #     If the write user event action is applied in [Location][] level, for
-              #     example, the event with
-              #     {::Google::Cloud::DiscoveryEngine::V1::Document Document} across multiple
+              #     If the write user event action is applied in
+              #     `::Google::Cloud::Location::Location` level, for example, the event
+              #     with {::Google::Cloud::DiscoveryEngine::V1::Document Document} across multiple
               #     {::Google::Cloud::DiscoveryEngine::V1::DataStore DataStore}, the format is:
               #     `projects/{project}/locations/{location}`.
               #   @param user_event [::Google::Cloud::DiscoveryEngine::V1::UserEvent, ::Hash]
@@ -331,8 +331,16 @@ module Google
               #   the default parameter values, pass an empty Hash as a request object (see above).
               #
               #   @param parent [::String]
-              #     Required. The parent DataStore resource name, such as
+              #     Required. The parent resource name.
+              #     If the collect user event action is applied in
+              #     {::Google::Cloud::DiscoveryEngine::V1::DataStore DataStore} level, the format
+              #     is:
               #     `projects/{project}/locations/{location}/collections/{collection}/dataStores/{data_store}`.
+              #     If the collect user event action is applied in
+              #     `::Google::Cloud::Location::Location` level, for example, the event
+              #     with {::Google::Cloud::DiscoveryEngine::V1::Document Document} across multiple
+              #     {::Google::Cloud::DiscoveryEngine::V1::DataStore DataStore}, the format is:
+              #     `projects/{project}/locations/{location}`.
               #   @param user_event [::String]
               #     Required. URL encoded UserEvent proto with a length limit of 2,000,000
               #     characters.
@@ -441,16 +449,20 @@ module Google
               #     * `userId`: Double quoted string. Specifying this will delete all events
               #       associated with a user.
               #
+              #     Note: This API only supports purging a max range of 30 days.
+              #
               #     Examples:
               #
               #     * Deleting all events in a time range:
               #       `eventTime > "2012-04-23T18:25:43.511Z"
               #       eventTime < "2012-04-23T18:30:43.511Z"`
-              #     * Deleting specific eventType:
-              #       `eventType = "search"`
-              #     * Deleting all events for a specific visitor:
-              #       `userPseudoId = "visitor1024"`
-              #     * Deleting all events inside a DataStore:
+              #     * Deleting specific eventType in a time range:
+              #       `eventTime > "2012-04-23T18:25:43.511Z"
+              #       eventTime < "2012-04-23T18:30:43.511Z" eventType = "search"`
+              #     * Deleting all events for a specific visitor in a time range:
+              #       `eventTime > "2012-04-23T18:25:43.511Z"
+              #       eventTime < "2012-04-23T18:30:43.511Z" userPseudoId = "visitor1024"`
+              #     * Deleting the past 30 days of events inside a DataStore:
               #       `*`
               #
               #     The filtering fields are assumed to have an implicit AND.

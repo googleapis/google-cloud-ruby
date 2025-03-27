@@ -429,12 +429,14 @@ class ::Google::Cloud::DiscoveryEngine::V1::ConversationalSearchService::Rest::C
     session = "hello world"
     safety_spec = {}
     related_questions_spec = {}
+    grounding_spec = {}
     answer_generation_spec = {}
     search_spec = {}
     query_understanding_spec = {}
     asynchronous_mode = true
     user_pseudo_id = "hello world"
     user_labels = {}
+    end_user_spec = {}
 
     answer_query_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
@@ -450,32 +452,98 @@ class ::Google::Cloud::DiscoveryEngine::V1::ConversationalSearchService::Rest::C
         end
 
         # Use hash object
-        client.answer_query({ serving_config: serving_config, query: query, session: session, safety_spec: safety_spec, related_questions_spec: related_questions_spec, answer_generation_spec: answer_generation_spec, search_spec: search_spec, query_understanding_spec: query_understanding_spec, asynchronous_mode: asynchronous_mode, user_pseudo_id: user_pseudo_id, user_labels: user_labels }) do |_result, response|
+        client.answer_query({ serving_config: serving_config, query: query, session: session, safety_spec: safety_spec, related_questions_spec: related_questions_spec, grounding_spec: grounding_spec, answer_generation_spec: answer_generation_spec, search_spec: search_spec, query_understanding_spec: query_understanding_spec, asynchronous_mode: asynchronous_mode, user_pseudo_id: user_pseudo_id, user_labels: user_labels, end_user_spec: end_user_spec }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.answer_query serving_config: serving_config, query: query, session: session, safety_spec: safety_spec, related_questions_spec: related_questions_spec, answer_generation_spec: answer_generation_spec, search_spec: search_spec, query_understanding_spec: query_understanding_spec, asynchronous_mode: asynchronous_mode, user_pseudo_id: user_pseudo_id, user_labels: user_labels do |_result, response|
+        client.answer_query serving_config: serving_config, query: query, session: session, safety_spec: safety_spec, related_questions_spec: related_questions_spec, grounding_spec: grounding_spec, answer_generation_spec: answer_generation_spec, search_spec: search_spec, query_understanding_spec: query_understanding_spec, asynchronous_mode: asynchronous_mode, user_pseudo_id: user_pseudo_id, user_labels: user_labels, end_user_spec: end_user_spec do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.answer_query ::Google::Cloud::DiscoveryEngine::V1::AnswerQueryRequest.new(serving_config: serving_config, query: query, session: session, safety_spec: safety_spec, related_questions_spec: related_questions_spec, answer_generation_spec: answer_generation_spec, search_spec: search_spec, query_understanding_spec: query_understanding_spec, asynchronous_mode: asynchronous_mode, user_pseudo_id: user_pseudo_id, user_labels: user_labels) do |_result, response|
+        client.answer_query ::Google::Cloud::DiscoveryEngine::V1::AnswerQueryRequest.new(serving_config: serving_config, query: query, session: session, safety_spec: safety_spec, related_questions_spec: related_questions_spec, grounding_spec: grounding_spec, answer_generation_spec: answer_generation_spec, search_spec: search_spec, query_understanding_spec: query_understanding_spec, asynchronous_mode: asynchronous_mode, user_pseudo_id: user_pseudo_id, user_labels: user_labels, end_user_spec: end_user_spec) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.answer_query({ serving_config: serving_config, query: query, session: session, safety_spec: safety_spec, related_questions_spec: related_questions_spec, answer_generation_spec: answer_generation_spec, search_spec: search_spec, query_understanding_spec: query_understanding_spec, asynchronous_mode: asynchronous_mode, user_pseudo_id: user_pseudo_id, user_labels: user_labels }, call_options) do |_result, response|
+        client.answer_query({ serving_config: serving_config, query: query, session: session, safety_spec: safety_spec, related_questions_spec: related_questions_spec, grounding_spec: grounding_spec, answer_generation_spec: answer_generation_spec, search_spec: search_spec, query_understanding_spec: query_understanding_spec, asynchronous_mode: asynchronous_mode, user_pseudo_id: user_pseudo_id, user_labels: user_labels, end_user_spec: end_user_spec }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.answer_query(::Google::Cloud::DiscoveryEngine::V1::AnswerQueryRequest.new(serving_config: serving_config, query: query, session: session, safety_spec: safety_spec, related_questions_spec: related_questions_spec, answer_generation_spec: answer_generation_spec, search_spec: search_spec, query_understanding_spec: query_understanding_spec, asynchronous_mode: asynchronous_mode, user_pseudo_id: user_pseudo_id, user_labels: user_labels), call_options) do |_result, response|
+        client.answer_query(::Google::Cloud::DiscoveryEngine::V1::AnswerQueryRequest.new(serving_config: serving_config, query: query, session: session, safety_spec: safety_spec, related_questions_spec: related_questions_spec, grounding_spec: grounding_spec, answer_generation_spec: answer_generation_spec, search_spec: search_spec, query_understanding_spec: query_understanding_spec, asynchronous_mode: asynchronous_mode, user_pseudo_id: user_pseudo_id, user_labels: user_labels, end_user_spec: end_user_spec), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Verify method calls
         assert_equal 5, answer_query_client_stub.call_count
+      end
+    end
+  end
+
+  def test_stream_answer_query
+    # Create test objects.
+    client_result = ::Google::Cloud::DiscoveryEngine::V1::AnswerQueryResponse.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    serving_config = "hello world"
+    query = {}
+    session = "hello world"
+    safety_spec = {}
+    related_questions_spec = {}
+    grounding_spec = {}
+    answer_generation_spec = {}
+    search_spec = {}
+    query_understanding_spec = {}
+    asynchronous_mode = true
+    user_pseudo_id = "hello world"
+    user_labels = {}
+    end_user_spec = {}
+
+    stream_answer_query_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, is_server_streaming:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::DiscoveryEngine::V1::ConversationalSearchService::Rest::ServiceStub.stub :transcode_stream_answer_query_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, stream_answer_query_client_stub do
+        # Create client
+        client = ::Google::Cloud::DiscoveryEngine::V1::ConversationalSearchService::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.stream_answer_query({ serving_config: serving_config, query: query, session: session, safety_spec: safety_spec, related_questions_spec: related_questions_spec, grounding_spec: grounding_spec, answer_generation_spec: answer_generation_spec, search_spec: search_spec, query_understanding_spec: query_understanding_spec, asynchronous_mode: asynchronous_mode, user_pseudo_id: user_pseudo_id, user_labels: user_labels, end_user_spec: end_user_spec }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end.first
+
+        # Use named arguments
+        client.stream_answer_query serving_config: serving_config, query: query, session: session, safety_spec: safety_spec, related_questions_spec: related_questions_spec, grounding_spec: grounding_spec, answer_generation_spec: answer_generation_spec, search_spec: search_spec, query_understanding_spec: query_understanding_spec, asynchronous_mode: asynchronous_mode, user_pseudo_id: user_pseudo_id, user_labels: user_labels, end_user_spec: end_user_spec do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end.first
+
+        # Use protobuf object
+        client.stream_answer_query ::Google::Cloud::DiscoveryEngine::V1::AnswerQueryRequest.new(serving_config: serving_config, query: query, session: session, safety_spec: safety_spec, related_questions_spec: related_questions_spec, grounding_spec: grounding_spec, answer_generation_spec: answer_generation_spec, search_spec: search_spec, query_understanding_spec: query_understanding_spec, asynchronous_mode: asynchronous_mode, user_pseudo_id: user_pseudo_id, user_labels: user_labels, end_user_spec: end_user_spec) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end.first
+
+        # Use hash object with options
+        client.stream_answer_query({ serving_config: serving_config, query: query, session: session, safety_spec: safety_spec, related_questions_spec: related_questions_spec, grounding_spec: grounding_spec, answer_generation_spec: answer_generation_spec, search_spec: search_spec, query_understanding_spec: query_understanding_spec, asynchronous_mode: asynchronous_mode, user_pseudo_id: user_pseudo_id, user_labels: user_labels, end_user_spec: end_user_spec }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end.first
+
+        # Use protobuf object with options
+        client.stream_answer_query(::Google::Cloud::DiscoveryEngine::V1::AnswerQueryRequest.new(serving_config: serving_config, query: query, session: session, safety_spec: safety_spec, related_questions_spec: related_questions_spec, grounding_spec: grounding_spec, answer_generation_spec: answer_generation_spec, search_spec: search_spec, query_understanding_spec: query_understanding_spec, asynchronous_mode: asynchronous_mode, user_pseudo_id: user_pseudo_id, user_labels: user_labels, end_user_spec: end_user_spec), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end.first
+
+        # Verify method calls
+        assert_equal 5, stream_answer_query_client_stub.call_count
       end
     end
   end
@@ -707,6 +775,7 @@ class ::Google::Cloud::DiscoveryEngine::V1::ConversationalSearchService::Rest::C
 
     # Create request parameters for a unary method.
     name = "hello world"
+    include_answer_details = true
 
     get_session_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
@@ -722,27 +791,27 @@ class ::Google::Cloud::DiscoveryEngine::V1::ConversationalSearchService::Rest::C
         end
 
         # Use hash object
-        client.get_session({ name: name }) do |_result, response|
+        client.get_session({ name: name, include_answer_details: include_answer_details }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_session name: name do |_result, response|
+        client.get_session name: name, include_answer_details: include_answer_details do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_session ::Google::Cloud::DiscoveryEngine::V1::GetSessionRequest.new(name: name) do |_result, response|
+        client.get_session ::Google::Cloud::DiscoveryEngine::V1::GetSessionRequest.new(name: name, include_answer_details: include_answer_details) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_session({ name: name }, call_options) do |_result, response|
+        client.get_session({ name: name, include_answer_details: include_answer_details }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_session(::Google::Cloud::DiscoveryEngine::V1::GetSessionRequest.new(name: name), call_options) do |_result, response|
+        client.get_session(::Google::Cloud::DiscoveryEngine::V1::GetSessionRequest.new(name: name, include_answer_details: include_answer_details), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 

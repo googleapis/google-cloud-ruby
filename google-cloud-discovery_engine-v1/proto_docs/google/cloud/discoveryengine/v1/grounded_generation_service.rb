@@ -65,8 +65,6 @@ module Google
         #     For single-turn queries, this is a single instance. For multi-turn queries,
         #     this is a repeated field that contains conversation history + latest
         #     request.
-        #
-        #     Only a single-turn query is supported currently.
         # @!attribute [rw] generation_spec
         #   @return [::Google::Cloud::DiscoveryEngine::V1::GenerateGroundedContentRequest::GenerationSpec]
         #     Content generation specification.
@@ -116,6 +114,9 @@ module Google
           # @!attribute [rw] frequency_penalty
           #   @return [::Float]
           #     If specified, custom value for frequency penalty will be used.
+          # @!attribute [rw] seed
+          #   @return [::Integer]
+          #     If specified, custom value for the seed will be used.
           # @!attribute [rw] presence_penalty
           #   @return [::Float]
           #     If specified, custom value for presence penalty will be used.
@@ -163,17 +164,22 @@ module Google
           #   @return [::Google::Cloud::DiscoveryEngine::V1::GenerateGroundedContentRequest::GroundingSource::InlineSource]
           #     If set, grounding is performed with inline content.
           #
-          #     Note: The following fields are mutually exclusive: `inline_source`, `search_source`, `google_search_source`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+          #     Note: The following fields are mutually exclusive: `inline_source`, `search_source`, `google_search_source`, `enterprise_web_retrieval_source`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] search_source
           #   @return [::Google::Cloud::DiscoveryEngine::V1::GenerateGroundedContentRequest::GroundingSource::SearchSource]
           #     If set, grounding is performed with Vertex AI Search.
           #
-          #     Note: The following fields are mutually exclusive: `search_source`, `inline_source`, `google_search_source`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+          #     Note: The following fields are mutually exclusive: `search_source`, `inline_source`, `google_search_source`, `enterprise_web_retrieval_source`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] google_search_source
           #   @return [::Google::Cloud::DiscoveryEngine::V1::GenerateGroundedContentRequest::GroundingSource::GoogleSearchSource]
           #     If set, grounding is performed with Google Search.
           #
-          #     Note: The following fields are mutually exclusive: `google_search_source`, `inline_source`, `search_source`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+          #     Note: The following fields are mutually exclusive: `google_search_source`, `inline_source`, `search_source`, `enterprise_web_retrieval_source`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+          # @!attribute [rw] enterprise_web_retrieval_source
+          #   @return [::Google::Cloud::DiscoveryEngine::V1::GenerateGroundedContentRequest::GroundingSource::EnterpriseWebRetrievalSource]
+          #     If set, grounding is performed with enterprise web retrieval.
+          #
+          #     Note: The following fields are mutually exclusive: `enterprise_web_retrieval_source`, `inline_source`, `search_source`, `google_search_source`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           class GroundingSource
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -237,6 +243,12 @@ module Google
               include ::Google::Protobuf::MessageExts
               extend ::Google::Protobuf::MessageExts::ClassMethods
             end
+
+            # Params for using enterprise web retrieval as grounding source.
+            class EnterpriseWebRetrievalSource
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
           end
 
           # Grounding specification.
@@ -258,6 +270,7 @@ module Google
           end
         end
 
+        # Response for the `GenerateGroundedContent` method.
         # @!attribute [rw] candidates
         #   @return [::Array<::Google::Cloud::DiscoveryEngine::V1::GenerateGroundedContentResponse::Candidate>]
         #     Generated candidates.
@@ -304,6 +317,9 @@ module Google
             #     GroundingSupport across all claims in the answer candidate.
             #     An support to a fact indicates that the claim is supported by
             #     the fact.
+            # @!attribute [rw] images
+            #   @return [::Array<::Google::Cloud::DiscoveryEngine::V1::GenerateGroundedContentResponse::Candidate::GroundingMetadata::ImageMetadata>]
+            #     Images from the web search.
             class GroundingMetadata
               include ::Google::Protobuf::MessageExts
               extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -406,6 +422,48 @@ module Google
                 include ::Google::Protobuf::MessageExts
                 extend ::Google::Protobuf::MessageExts::ClassMethods
               end
+
+              # Metadata about an image from the web search.
+              # @!attribute [rw] image
+              #   @return [::Google::Cloud::DiscoveryEngine::V1::GenerateGroundedContentResponse::Candidate::GroundingMetadata::ImageMetadata::Image]
+              #     Metadata about the full size image.
+              # @!attribute [rw] thumbnail
+              #   @return [::Google::Cloud::DiscoveryEngine::V1::GenerateGroundedContentResponse::Candidate::GroundingMetadata::ImageMetadata::Image]
+              #     Metadata about the thumbnail.
+              # @!attribute [rw] source
+              #   @return [::Google::Cloud::DiscoveryEngine::V1::GenerateGroundedContentResponse::Candidate::GroundingMetadata::ImageMetadata::WebsiteInfo]
+              #     The details about the website that the image is from.
+              class ImageMetadata
+                include ::Google::Protobuf::MessageExts
+                extend ::Google::Protobuf::MessageExts::ClassMethods
+
+                # Metadata about the website that the image is from.
+                # @!attribute [rw] uri
+                #   @return [::String]
+                #     The url of the website.
+                # @!attribute [rw] title
+                #   @return [::String]
+                #     The title of the website.
+                class WebsiteInfo
+                  include ::Google::Protobuf::MessageExts
+                  extend ::Google::Protobuf::MessageExts::ClassMethods
+                end
+
+                # Metadata about the image.
+                # @!attribute [rw] uri
+                #   @return [::String]
+                #     The url of the image.
+                # @!attribute [rw] width
+                #   @return [::Integer]
+                #     The width of the image in pixels.
+                # @!attribute [rw] height
+                #   @return [::Integer]
+                #     The height of the image in pixels.
+                class Image
+                  include ::Google::Protobuf::MessageExts
+                  extend ::Google::Protobuf::MessageExts::ClassMethods
+                end
+              end
             end
           end
         end
@@ -432,7 +490,7 @@ module Google
         #     `projects/*/locations/global/groundingConfigs/default_grounding_config`.
         # @!attribute [rw] answer_candidate
         #   @return [::String]
-        #     Answer candidate to check. Can have a maximum length of 1024 characters.
+        #     Answer candidate to check. It can have a maximum length of 4096 tokens.
         # @!attribute [rw] facts
         #   @return [::Array<::Google::Cloud::DiscoveryEngine::V1::GroundingFact>]
         #     List of facts for the grounding check.
@@ -485,6 +543,10 @@ module Google
         #   @return [::Array<::Google::Cloud::DiscoveryEngine::V1::FactChunk>]
         #     List of facts cited across all claims in the answer candidate.
         #     These are derived from the facts supplied in the request.
+        # @!attribute [rw] cited_facts
+        #   @return [::Array<::Google::Cloud::DiscoveryEngine::V1::CheckGroundingResponse::CheckGroundingFactChunk>]
+        #     List of facts cited across all claims in the answer candidate.
+        #     These are derived from the facts supplied in the request.
         # @!attribute [rw] claims
         #   @return [::Array<::Google::Cloud::DiscoveryEngine::V1::CheckGroundingResponse::Claim>]
         #     Claim texts and citation info across all claims in the answer candidate.
@@ -492,15 +554,34 @@ module Google
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
 
+          # Fact chunk for grounding check.
+          # @!attribute [rw] chunk_text
+          #   @return [::String]
+          #     Text content of the fact chunk. Can be at most 10K characters long.
+          class CheckGroundingFactChunk
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
           # Text and citation info for a claim in the answer candidate.
           # @!attribute [rw] start_pos
           #   @return [::Integer]
           #     Position indicating the start of the claim in the answer candidate,
-          #     measured in bytes.
+          #     measured in bytes. Note that this is not measured in characters and,
+          #     therefore, must be rendered in the user interface keeping in mind that
+          #     some characters may take more than one byte. For example,
+          #     if the claim text contains non-ASCII characters, the start and end
+          #     positions vary when measured in characters
+          #     (programming-language-dependent) and when measured in bytes
+          #     (programming-language-independent).
           # @!attribute [rw] end_pos
           #   @return [::Integer]
           #     Position indicating the end of the claim in the answer candidate,
-          #     exclusive.
+          #     exclusive, in bytes. Note that this is not measured in characters and,
+          #     therefore, must be rendered as such. For example, if the claim text
+          #     contains non-ASCII characters, the start and end positions vary when
+          #     measured in characters (programming-language-dependent) and when measured
+          #     in bytes (programming-language-independent).
           # @!attribute [rw] claim_text
           #   @return [::String]
           #     Text for the claim in the answer candidate. Always provided regardless of
@@ -518,10 +599,7 @@ module Google
           #     decided this claim doesn't require attribution/grounding check, this
           #     field will be set to false. In that case, no grounding check was done for
           #     the claim and therefore
-          #     {::Google::Cloud::DiscoveryEngine::V1::CheckGroundingResponse::Claim#citation_indices citation_indices},
-          #     [anti_citation_indices][google.cloud.discoveryengine.v1.CheckGroundingResponse.Claim.anti_citation_indices],
-          #     and
-          #     [score][google.cloud.discoveryengine.v1.CheckGroundingResponse.Claim.score]
+          #     {::Google::Cloud::DiscoveryEngine::V1::CheckGroundingResponse::Claim#citation_indices citation_indices}
           #     should not be returned.
           class Claim
             include ::Google::Protobuf::MessageExts
