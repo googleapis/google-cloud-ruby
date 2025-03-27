@@ -48,8 +48,8 @@ module Google
         #     excluded.
         # @!attribute [rw] exact_match
         #   @return [::Boolean]
-        #     Input only. If set to false, a uri_pattern is generated to include all
-        #     pages whose address contains the provided_uri_pattern. If set to true, an
+        #     Immutable. If set to false, a uri_pattern is generated to include all pages
+        #     whose address contains the provided_uri_pattern. If set to true, an
         #     uri_pattern is generated to try to be an exact match of the
         #     provided_uri_pattern or just the specific page if the provided_uri_pattern
         #     is a specific one. provided_uri_pattern is always normalized to
@@ -156,6 +156,23 @@ module Google
             # Site exempt from verification, e.g., a public website that opens to all.
             EXEMPTED = 3
           end
+        end
+
+        # A sitemap for the SiteSearchEngine.
+        # @!attribute [rw] uri
+        #   @return [::String]
+        #     Public URI for the sitemap, e.g. `www.example.com/sitemap.xml`.
+        # @!attribute [r] name
+        #   @return [::String]
+        #     Output only. The fully qualified resource name of the sitemap.
+        #     `projects/*/locations/*/collections/*/dataStores/*/siteSearchEngine/sitemaps/*`
+        #     The `sitemap_id` suffix is system-generated.
+        # @!attribute [r] create_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Output only. The sitemap's creation time.
+        class Sitemap
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
       end
     end

@@ -369,6 +369,7 @@ class ::Google::Cloud::DiscoveryEngine::V1::DocumentService::Rest::ClientTest < 
     update_mask = {}
     auto_generate_ids = true
     id_field = "hello world"
+    force_refresh_content = true
 
     import_documents_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
@@ -384,27 +385,27 @@ class ::Google::Cloud::DiscoveryEngine::V1::DocumentService::Rest::ClientTest < 
         end
 
         # Use hash object
-        client.import_documents({ inline_source: inline_source, parent: parent, error_config: error_config, reconciliation_mode: reconciliation_mode, update_mask: update_mask, auto_generate_ids: auto_generate_ids, id_field: id_field }) do |_result, response|
+        client.import_documents({ inline_source: inline_source, parent: parent, error_config: error_config, reconciliation_mode: reconciliation_mode, update_mask: update_mask, auto_generate_ids: auto_generate_ids, id_field: id_field, force_refresh_content: force_refresh_content }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.import_documents inline_source: inline_source, parent: parent, error_config: error_config, reconciliation_mode: reconciliation_mode, update_mask: update_mask, auto_generate_ids: auto_generate_ids, id_field: id_field do |_result, response|
+        client.import_documents inline_source: inline_source, parent: parent, error_config: error_config, reconciliation_mode: reconciliation_mode, update_mask: update_mask, auto_generate_ids: auto_generate_ids, id_field: id_field, force_refresh_content: force_refresh_content do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.import_documents ::Google::Cloud::DiscoveryEngine::V1::ImportDocumentsRequest.new(inline_source: inline_source, parent: parent, error_config: error_config, reconciliation_mode: reconciliation_mode, update_mask: update_mask, auto_generate_ids: auto_generate_ids, id_field: id_field) do |_result, response|
+        client.import_documents ::Google::Cloud::DiscoveryEngine::V1::ImportDocumentsRequest.new(inline_source: inline_source, parent: parent, error_config: error_config, reconciliation_mode: reconciliation_mode, update_mask: update_mask, auto_generate_ids: auto_generate_ids, id_field: id_field, force_refresh_content: force_refresh_content) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.import_documents({ inline_source: inline_source, parent: parent, error_config: error_config, reconciliation_mode: reconciliation_mode, update_mask: update_mask, auto_generate_ids: auto_generate_ids, id_field: id_field }, call_options) do |_result, response|
+        client.import_documents({ inline_source: inline_source, parent: parent, error_config: error_config, reconciliation_mode: reconciliation_mode, update_mask: update_mask, auto_generate_ids: auto_generate_ids, id_field: id_field, force_refresh_content: force_refresh_content }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.import_documents(::Google::Cloud::DiscoveryEngine::V1::ImportDocumentsRequest.new(inline_source: inline_source, parent: parent, error_config: error_config, reconciliation_mode: reconciliation_mode, update_mask: update_mask, auto_generate_ids: auto_generate_ids, id_field: id_field), call_options) do |_result, response|
+        client.import_documents(::Google::Cloud::DiscoveryEngine::V1::ImportDocumentsRequest.new(inline_source: inline_source, parent: parent, error_config: error_config, reconciliation_mode: reconciliation_mode, update_mask: update_mask, auto_generate_ids: auto_generate_ids, id_field: id_field, force_refresh_content: force_refresh_content), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 

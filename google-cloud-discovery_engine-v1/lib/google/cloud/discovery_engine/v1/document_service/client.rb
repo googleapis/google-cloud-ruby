@@ -474,7 +474,7 @@ module Google
             #     Otherwise, an `ALREADY_EXISTS` error is returned.
             #
             #     This field must conform to [RFC-1034](https://tools.ietf.org/html/rfc1034)
-            #     standard with a length limit of 63 characters. Otherwise, an
+            #     standard with a length limit of 128 characters. Otherwise, an
             #     `INVALID_ARGUMENT` error is returned.
             #
             # @yield [response, operation] Access the result along with the RPC operation
@@ -755,7 +755,7 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload import_documents(inline_source: nil, gcs_source: nil, bigquery_source: nil, fhir_store_source: nil, spanner_source: nil, cloud_sql_source: nil, firestore_source: nil, alloy_db_source: nil, bigtable_source: nil, parent: nil, error_config: nil, reconciliation_mode: nil, update_mask: nil, auto_generate_ids: nil, id_field: nil)
+            # @overload import_documents(inline_source: nil, gcs_source: nil, bigquery_source: nil, fhir_store_source: nil, spanner_source: nil, cloud_sql_source: nil, firestore_source: nil, alloy_db_source: nil, bigtable_source: nil, parent: nil, error_config: nil, reconciliation_mode: nil, update_mask: nil, auto_generate_ids: nil, id_field: nil, force_refresh_content: nil)
             #   Pass arguments to `import_documents` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -870,6 +870,12 @@ module Google
             #     * {::Google::Cloud::DiscoveryEngine::V1::CloudSqlSource CloudSqlSource}.
             #     * {::Google::Cloud::DiscoveryEngine::V1::FirestoreSource FirestoreSource}.
             #     * {::Google::Cloud::DiscoveryEngine::V1::BigtableSource BigtableSource}.
+            #   @param force_refresh_content [::Boolean]
+            #     Optional. Whether to force refresh the unstructured content of the
+            #     documents.
+            #
+            #     If set to `true`, the content part of the documents will be refreshed
+            #     regardless of the update status of the referencing content.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Gapic::Operation]

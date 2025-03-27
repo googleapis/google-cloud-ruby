@@ -42,7 +42,8 @@ module Google
         #     Output only. Represents the relevance score based on similarity.
         #     Higher score indicates higher chunk relevance.
         #     The score is in range [-1.0, 1.0].
-        #     Only populated on [SearchService.SearchResponse][].
+        #     Only populated on
+        #     {::Google::Cloud::DiscoveryEngine::V1::SearchResponse SearchResponse}.
         # @!attribute [rw] document_metadata
         #   @return [::Google::Cloud::DiscoveryEngine::V1::Chunk::DocumentMetadata]
         #     Metadata of the document from the current chunk.

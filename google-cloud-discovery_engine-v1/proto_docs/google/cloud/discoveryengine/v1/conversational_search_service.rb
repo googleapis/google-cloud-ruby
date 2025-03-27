@@ -252,6 +252,9 @@ module Google
         # @!attribute [rw] related_questions_spec
         #   @return [::Google::Cloud::DiscoveryEngine::V1::AnswerQueryRequest::RelatedQuestionsSpec]
         #     Related questions specification.
+        # @!attribute [rw] grounding_spec
+        #   @return [::Google::Cloud::DiscoveryEngine::V1::AnswerQueryRequest::GroundingSpec]
+        #     Optional. Grounding specification.
         # @!attribute [rw] answer_generation_spec
         #   @return [::Google::Cloud::DiscoveryEngine::V1::AnswerQueryRequest::AnswerGenerationSpec]
         #     Answer generation specification.
@@ -306,18 +309,63 @@ module Google
         #     See [Google Cloud
         #     Document](https://cloud.google.com/resource-manager/docs/creating-managing-labels#requirements)
         #     for more details.
+        # @!attribute [rw] end_user_spec
+        #   @return [::Google::Cloud::DiscoveryEngine::V1::AnswerQueryRequest::EndUserSpec]
+        #     Optional. End user specification.
         class AnswerQueryRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
 
           # Safety specification.
+          # There are two use cases:
+          # 1. when only safety_spec.enable is set, the BLOCK_LOW_AND_ABOVE threshold
+          # will be applied for all categories.
+          # 2. when safety_spec.enable is set and some safety_settings are set, only
+          # specified safety_settings are applied.
           # @!attribute [rw] enable
           #   @return [::Boolean]
           #     Enable the safety filtering on the answer response. It is false by
           #     default.
+          # @!attribute [rw] safety_settings
+          #   @return [::Array<::Google::Cloud::DiscoveryEngine::V1::AnswerQueryRequest::SafetySpec::SafetySetting>]
+          #     Optional. Safety settings.
+          #     This settings are effective only when the safety_spec.enable is true.
           class SafetySpec
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
+
+            # Safety settings.
+            # @!attribute [rw] category
+            #   @return [::Google::Cloud::DiscoveryEngine::V1::HarmCategory]
+            #     Required. Harm category.
+            # @!attribute [rw] threshold
+            #   @return [::Google::Cloud::DiscoveryEngine::V1::AnswerQueryRequest::SafetySpec::SafetySetting::HarmBlockThreshold]
+            #     Required. The harm block threshold.
+            class SafetySetting
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+
+              # Probability based thresholds levels for blocking.
+              module HarmBlockThreshold
+                # Unspecified harm block threshold.
+                HARM_BLOCK_THRESHOLD_UNSPECIFIED = 0
+
+                # Block low threshold and above (i.e. block more).
+                BLOCK_LOW_AND_ABOVE = 1
+
+                # Block medium threshold and above.
+                BLOCK_MEDIUM_AND_ABOVE = 2
+
+                # Block only high threshold (i.e. block less).
+                BLOCK_ONLY_HIGH = 3
+
+                # Block none.
+                BLOCK_NONE = 4
+
+                # Turn off the safety filter.
+                OFF = 5
+              end
+            end
           end
 
           # Related questions specification.
@@ -327,6 +375,35 @@ module Google
           class RelatedQuestionsSpec
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Grounding specification.
+          # @!attribute [rw] include_grounding_supports
+          #   @return [::Boolean]
+          #     Optional. Specifies whether to include grounding_supports in the answer.
+          #     The default value is `false`.
+          #
+          #     When this field is set to `true`, returned answer will have
+          #     `grounding_score` and will contain GroundingSupports for each claim.
+          # @!attribute [rw] filtering_level
+          #   @return [::Google::Cloud::DiscoveryEngine::V1::AnswerQueryRequest::GroundingSpec::FilteringLevel]
+          #     Optional. Specifies whether to enable the filtering based on grounding
+          #     score and at what level.
+          class GroundingSpec
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+
+            # Level to filter based on answer grounding.
+            module FilteringLevel
+              # Default is no filter
+              FILTERING_LEVEL_UNSPECIFIED = 0
+
+              # Filter answers based on a low threshold.
+              FILTERING_LEVEL_LOW = 1
+
+              # Filter answers based on a high threshold.
+              FILTERING_LEVEL_HIGH = 2
+            end
           end
 
           # Answer generation specification.
@@ -612,6 +689,10 @@ module Google
           # @!attribute [rw] query_rephraser_spec
           #   @return [::Google::Cloud::DiscoveryEngine::V1::AnswerQueryRequest::QueryUnderstandingSpec::QueryRephraserSpec]
           #     Query rephraser specification.
+          # @!attribute [rw] disable_spell_correction
+          #   @return [::Boolean]
+          #     Optional. Whether to disable spell correction.
+          #     The default value is `false`.
           class QueryUnderstandingSpec
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -652,9 +733,76 @@ module Google
             #     Max rephrase steps.
             #     The max number is 5 steps.
             #     If not set or set to < 1, it will be set to 1 by default.
+            # @!attribute [rw] model_spec
+            #   @return [::Google::Cloud::DiscoveryEngine::V1::AnswerQueryRequest::QueryUnderstandingSpec::QueryRephraserSpec::ModelSpec]
+            #     Optional. Query Rephraser Model specification.
             class QueryRephraserSpec
               include ::Google::Protobuf::MessageExts
               extend ::Google::Protobuf::MessageExts::ClassMethods
+
+              # Query Rephraser Model specification.
+              # @!attribute [rw] model_type
+              #   @return [::Google::Cloud::DiscoveryEngine::V1::AnswerQueryRequest::QueryUnderstandingSpec::QueryRephraserSpec::ModelSpec::ModelType]
+              #     Optional. Enabled query rephraser model type. If not set, it will use
+              #     LARGE by default.
+              class ModelSpec
+                include ::Google::Protobuf::MessageExts
+                extend ::Google::Protobuf::MessageExts::ClassMethods
+
+                # Query rephraser types. Currently only supports single-hop
+                # (max_rephrase_steps = 1) model selections. For multi-hop
+                # (max_rephrase_steps > 1), there is only one default model.
+                module ModelType
+                  # Unspecified model type.
+                  MODEL_TYPE_UNSPECIFIED = 0
+
+                  # Small query rephraser model. Gemini 1.0 XS model.
+                  SMALL = 1
+
+                  # Large query rephraser model. Gemini 1.0 Pro model.
+                  LARGE = 2
+                end
+              end
+            end
+          end
+
+          # End user specification.
+          # @!attribute [rw] end_user_metadata
+          #   @return [::Array<::Google::Cloud::DiscoveryEngine::V1::AnswerQueryRequest::EndUserSpec::EndUserMetaData>]
+          #     Optional. End user metadata.
+          class EndUserSpec
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+
+            # End user metadata.
+            # @!attribute [rw] chunk_info
+            #   @return [::Google::Cloud::DiscoveryEngine::V1::AnswerQueryRequest::EndUserSpec::EndUserMetaData::ChunkInfo]
+            #     Chunk information.
+            class EndUserMetaData
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+
+              # Chunk information.
+              # @!attribute [rw] content
+              #   @return [::String]
+              #     Chunk textual content. It is limited to 8000 characters.
+              # @!attribute [rw] document_metadata
+              #   @return [::Google::Cloud::DiscoveryEngine::V1::AnswerQueryRequest::EndUserSpec::EndUserMetaData::ChunkInfo::DocumentMetadata]
+              #     Metadata of the document from the current chunk.
+              class ChunkInfo
+                include ::Google::Protobuf::MessageExts
+                extend ::Google::Protobuf::MessageExts::ClassMethods
+
+                # Document metadata contains the information of the document of
+                # the current chunk.
+                # @!attribute [rw] title
+                #   @return [::String]
+                #     Title of the document.
+                class DocumentMetadata
+                  include ::Google::Protobuf::MessageExts
+                  extend ::Google::Protobuf::MessageExts::ClassMethods
+                end
+              end
             end
           end
 
@@ -751,6 +899,10 @@ module Google
         #   @return [::String]
         #     Required. The resource name of the Session to get. Format:
         #     `projects/{project}/locations/{location}/collections/{collection}/dataStores/{data_store_id}/sessions/{session_id}`
+        # @!attribute [rw] include_answer_details
+        #   @return [::Boolean]
+        #     Optional. If set to true, the full session including all answer details
+        #     will be returned.
         class GetSessionRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -781,13 +933,18 @@ module Google
         #     A comma-separated list of fields to order by, sorted in ascending order.
         #     Use "desc" after a field name for descending.
         #     Supported fields:
+        #
         #       * `update_time`
         #       * `create_time`
         #       * `session_name`
+        #       * `is_pinned`
         #
         #     Example:
-        #     "update_time desc"
-        #     "create_time"
+        #
+        #     * "update_time desc"
+        #     * "create_time"
+        #     * "is_pinned desc,update_time desc": list sessions by is_pinned first, then
+        #        by update_time.
         class ListSessionsRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
