@@ -68,6 +68,12 @@ authentication:
    bundle exec rake global_test
    ```
 
+1. **Test only regional samples using the Project ID & Location ID configured above**
+
+   ```
+   bundle exec rake regional_test
+   ```
+
 1. **Test all samples using the Project ID & Location ID configured above**
    ```
    bundle exec rake test
@@ -98,3 +104,25 @@ authentication:
 | delete_param.rb                     | `parameter_id`                               | Deletes a global parameter.                                                        |
 | delete_param_version.rb             | `parameter_id`, `version_id`                 | Deletes a global parameter version.                                                |
 | quickstart.rb                       | `parameter_id`, `version_id`                 | Creates a global parameter, parameter version and retrieves the parameter version. |
+
+### Run regional samples
+
+##### List of executable samples files and their arguments
+
+| File                                         | Args                                         | Description                                                                          |
+| -------------------------------------------- | -------------------------------------------- | ------------------------------------------------------------------------------------ |
+| create_regional_param.rb                     | `parameter_id`                               | Creates a regional parameter.                                                        |
+| create_structured_regional_param.rb          | `parameter_id`                               | Creates a regional parameter with JSON format.                                       |
+| create_regional_param_version.rb             | `parameter_id`, `version_id`, `payload`      | Creates a regional parameter version.                                                |
+| create_structured_regional_param_version.rb  | `parameter_id`, `version_id`, `json_payload` | Creates a regional parameter version with JSON format.                               |
+| create_regional_param_version_with_secret.rb | `parameter_id`, `version_id`, `secret_id`    | Creates a regional parameter version with a secret.                                  |
+| get_regional_param.rb                        | `parameter_id`                               | Retrieves a regional parameter.                                                      |
+| get_regional_param_version.rb                | `parameter_id`, `version_id`                 | Retrieves a regional parameter version.                                              |
+| render_regional_param_version.rb             | `parameter_id`, `version_id`                 | Renders a regional parameter version.                                                |
+| list_regional_params.rb                      |                                              | Lists all regional parameters.                                                       |
+| list_regional_param_versions.rb              | `parameter_id`                               | Lists all regional parameter versions.                                               |
+| disable_regional_param_version.rb            | `parameter_id`, `version_id`                 | Disables a regional parameter version.                                               |
+| enable_regional_param_version.rb             | `parameter_id`, `version_id`                 | Enables a regional parameter version.                                                |
+| delete_regional_param.rb                     | `parameter_id`                               | Deletes a regional parameter.                                                        |
+| delete_regional_param_version.rb             | `parameter_id`, `version_id`                 | Deletes a regional parameter version.                                                |
+| regional_quickstart.rb                       | `parameter_id`, `version_id`                 | Creates a regional parameter, parameter version and retrieves the parameter version. |

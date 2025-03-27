@@ -556,6 +556,10 @@ module Google
           end
 
           # Chunk from context retrieved by the retrieval tools.
+          # @!attribute [rw] rag_chunk
+          #   @return [::Google::Cloud::AIPlatform::V1::RagChunk]
+          #     Additional context for the RAG retrieval result. This is only populated
+          #     when using the RAG retrieval tool.
           # @!attribute [rw] uri
           #   @return [::String]
           #     URI reference of the attribution.

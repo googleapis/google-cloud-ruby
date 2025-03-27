@@ -141,6 +141,18 @@ module Google
           end
         end
 
+        # Config for the Vertex AI Search.
+        # @!attribute [rw] serving_config
+        #   @return [::String]
+        #     Vertex AI Search Serving Config resource full name. For example,
+        #     `projects/{project}/locations/{location}/collections/{collection}/engines/{engine}/servingConfigs/{serving_config}`
+        #     or
+        #     `projects/{project}/locations/{location}/collections/{collection}/dataStores/{data_store}/servingConfigs/{serving_config}`.
+        class VertexAiSearchConfig
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # RagCorpus status.
         # @!attribute [r] state
         #   @return [::Google::Cloud::AIPlatform::V1::CorpusStatus::State]
@@ -171,6 +183,16 @@ module Google
 
         # A RagCorpus is a RagFile container and a project can have multiple
         # RagCorpora.
+        # @!attribute [rw] vector_db_config
+        #   @return [::Google::Cloud::AIPlatform::V1::RagVectorDbConfig]
+        #     Optional. Immutable. The config for the Vector DBs.
+        #
+        #     Note: The following fields are mutually exclusive: `vector_db_config`, `vertex_ai_search_config`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] vertex_ai_search_config
+        #   @return [::Google::Cloud::AIPlatform::V1::VertexAiSearchConfig]
+        #     Optional. Immutable. The config for the Vertex AI Search.
+        #
+        #     Note: The following fields are mutually exclusive: `vertex_ai_search_config`, `vector_db_config`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [r] name
         #   @return [::String]
         #     Output only. The resource name of the RagCorpus.
@@ -191,9 +213,6 @@ module Google
         # @!attribute [r] corpus_status
         #   @return [::Google::Cloud::AIPlatform::V1::CorpusStatus]
         #     Output only. RagCorpus state.
-        # @!attribute [rw] vector_db_config
-        #   @return [::Google::Cloud::AIPlatform::V1::RagVectorDbConfig]
-        #     Optional. Immutable. The config for the Vector DBs.
         class RagCorpus
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -256,6 +275,31 @@ module Google
         class RagFile
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # A RagChunk includes the content of a chunk of a RagFile, and associated
+        # metadata.
+        # @!attribute [rw] text
+        #   @return [::String]
+        #     The content of the chunk.
+        # @!attribute [rw] page_span
+        #   @return [::Google::Cloud::AIPlatform::V1::RagChunk::PageSpan]
+        #     If populated, represents where the chunk starts and ends in the document.
+        class RagChunk
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Represents where the chunk starts and ends in the document.
+          # @!attribute [rw] first_page
+          #   @return [::Integer]
+          #     Page where chunk starts in the document. Inclusive. 1-indexed.
+          # @!attribute [rw] last_page
+          #   @return [::Integer]
+          #     Page where chunk ends in the document. Inclusive. 1-indexed.
+          class PageSpan
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
         end
 
         # Specifies the size and overlap of chunks for RagFiles.

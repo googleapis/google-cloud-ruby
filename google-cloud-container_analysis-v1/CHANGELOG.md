@@ -1,5 +1,11 @@
 # Release History
 
+### 1.3.0 (2025-03-25)
+
+#### Features
+
+* Support for the export_sbom RPC ([#29404](https://github.com/googleapis/google-cloud-ruby/issues/29404)) 
+
 ### 1.2.0 (2025-01-29)
 
 #### Features

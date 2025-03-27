@@ -749,6 +749,7 @@ class ::Google::Cloud::Bigquery::AnalyticsHub::V1::AnalyticsHubService::Rest::Cl
     # Create request parameters for a unary method.
     name = "hello world"
     destination = "hello world"
+    destination_dataset = {}
     subscription = "hello world"
     subscriber_contact = "hello world"
 
@@ -766,27 +767,27 @@ class ::Google::Cloud::Bigquery::AnalyticsHub::V1::AnalyticsHubService::Rest::Cl
         end
 
         # Use hash object
-        client.subscribe_data_exchange({ name: name, destination: destination, subscription: subscription, subscriber_contact: subscriber_contact }) do |_result, response|
+        client.subscribe_data_exchange({ name: name, destination: destination, destination_dataset: destination_dataset, subscription: subscription, subscriber_contact: subscriber_contact }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.subscribe_data_exchange name: name, destination: destination, subscription: subscription, subscriber_contact: subscriber_contact do |_result, response|
+        client.subscribe_data_exchange name: name, destination: destination, destination_dataset: destination_dataset, subscription: subscription, subscriber_contact: subscriber_contact do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.subscribe_data_exchange ::Google::Cloud::Bigquery::AnalyticsHub::V1::SubscribeDataExchangeRequest.new(name: name, destination: destination, subscription: subscription, subscriber_contact: subscriber_contact) do |_result, response|
+        client.subscribe_data_exchange ::Google::Cloud::Bigquery::AnalyticsHub::V1::SubscribeDataExchangeRequest.new(name: name, destination: destination, destination_dataset: destination_dataset, subscription: subscription, subscriber_contact: subscriber_contact) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.subscribe_data_exchange({ name: name, destination: destination, subscription: subscription, subscriber_contact: subscriber_contact }, call_options) do |_result, response|
+        client.subscribe_data_exchange({ name: name, destination: destination, destination_dataset: destination_dataset, subscription: subscription, subscriber_contact: subscriber_contact }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.subscribe_data_exchange(::Google::Cloud::Bigquery::AnalyticsHub::V1::SubscribeDataExchangeRequest.new(name: name, destination: destination, subscription: subscription, subscriber_contact: subscriber_contact), call_options) do |_result, response|
+        client.subscribe_data_exchange(::Google::Cloud::Bigquery::AnalyticsHub::V1::SubscribeDataExchangeRequest.new(name: name, destination: destination, destination_dataset: destination_dataset, subscription: subscription, subscriber_contact: subscriber_contact), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
