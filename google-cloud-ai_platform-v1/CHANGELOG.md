@@ -1,5 +1,13 @@
 # Changelog
 
+### 1.7.0 (2025-03-28)
+
+#### Features
+
+* Support for additional context for a RAG retrieval result 
+* Support for forcing delete of child resources of a reasoning engine ([#29420](https://github.com/googleapis/google-cloud-ruby/issues/29420)) 
+* Support for Vertex AI Search config 
+
 ### 1.6.0 (2025-03-25)
 
 #### Features
