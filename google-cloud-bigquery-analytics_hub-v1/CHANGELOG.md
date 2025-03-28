@@ -1,5 +1,12 @@
 # Changelog
 
+### 0.11.0 (2025-03-28)
+
+#### Features
+
+* Support for sharing Cloud PubSub streams 
+* Support for Subscriber Email logging 
+
 ### 0.10.0 (2025-01-28)
 
 #### Features
