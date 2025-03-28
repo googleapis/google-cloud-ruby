@@ -12,22 +12,20 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-require "rake/testtask"
-require "rubocop/rake_task"
+require_relative "helper"
 
-Rake::TestTask.new "global_test" do |t|
-  t.test_files = FileList["acceptance/*_test.rb"].exclude(/regional/)
-  t.warning = false
+describe "#delete_param", :parameter_manager_snippet do
+  before do
+    client.create_parameter parent: location_name, parameter_id: parameter_id
+  end
+
+  it "delete a parameter" do
+    sample = SampleLoader.load "delete_param.rb"
+
+    out, _err = capture_io do
+      sample.run project_id: project_id, parameter_id: parameter_id
+    end
+
+    assert_equal "Deleted parameter projects/#{project_id}/locations/global/parameters/#{parameter_id}\n", out
+  end
 end
-
-Rake::TestTask.new "regional_test" do |t|
-  t.test_files = FileList["acceptance/*_test.rb"].select { |file| file =~ /regional/ }
-  t.warning = false
-end
-
-Rake::TestTask.new "test" do |t|
-  t.test_files = FileList["acceptance/*_test.rb"]
-  t.warning = false
-end
-
-RuboCop::RakeTask.new

@@ -62,6 +62,12 @@ authentication:
 
 ## Run Tests
 
+1. **Test only global samples using the Project ID configured above**
+
+   ```
+   bundle exec rake global_test
+   ```
+
 1. **Test only regional samples using the Project ID & Location ID configured above**
 
    ```
@@ -76,6 +82,28 @@ authentication:
 ## Run Samples
 
 **Usage:** `ruby sample.rb [arguments]`
+
+### Run global samples
+
+##### List of executable samples files and their arguments
+
+| File                                | Args                                         | Description                                                                        |
+| ----------------------------------- | -------------------------------------------- | ---------------------------------------------------------------------------------- |
+| create_param.rb                     | `parameter_id`                               | Creates a global parameter.                                                        |
+| create_structured_param.rb          | `parameter_id`                               | Creates a global parameter with JSON format.                                       |
+| create_param_version.rb             | `parameter_id`, `version_id`, `payload`      | Creates a global parameter version.                                                |
+| create_structured_param_version.rb  | `parameter_id`, `version_id`, `json_payload` | Creates a global parameter version with JSON format.                               |
+| create_param_version_with_secret.rb | `parameter_id`, `version_id`, `secret_id`    | Creates a global parameter version with a secret.                                  |
+| get_param.rb                        | `parameter_id`                               | Retrieves a global parameter.                                                      |
+| get_param_version.rb                | `parameter_id`, `version_id`                 | Retrieves a global parameter version.                                              |
+| render_param_version.rb             | `parameter_id`, `version_id`                 | Renders a global parameter version.                                                |
+| list_params.rb                      |                                              | Lists all global parameters.                                                       |
+| list_param_versions.rb              | `parameter_id`                               | Lists all global parameter versions.                                               |
+| disable_param_version.rb            | `parameter_id`, `version_id`                 | Disables a global parameter version.                                               |
+| enable_param_version.rb             | `parameter_id`, `version_id`                 | Enables a global parameter version.                                                |
+| delete_param.rb                     | `parameter_id`                               | Deletes a global parameter.                                                        |
+| delete_param_version.rb             | `parameter_id`, `version_id`                 | Deletes a global parameter version.                                                |
+| quickstart.rb                       | `parameter_id`, `version_id`                 | Creates a global parameter, parameter version and retrieves the parameter version. |
 
 ### Run regional samples
 
