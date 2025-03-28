@@ -12,22 +12,16 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-require "rake/testtask"
-require "rubocop/rake_task"
+require_relative "helper"
 
-Rake::TestTask.new "global_test" do |t|
-  t.test_files = FileList["acceptance/*_test.rb"].exclude(/regional/)
-  t.warning = false
+describe "#create_param", :parameter_manager_snippet do
+  it "creates a parameter" do
+    sample = SampleLoader.load "create_param.rb"
+
+    out, _err = capture_io do
+      sample.run project_id: project_id, parameter_id: parameter_id
+    end
+
+    assert_equal "Created parameter projects/#{project_id}/locations/global/parameters/#{parameter_id}\n", out
+  end
 end
-
-Rake::TestTask.new "regional_test" do |t|
-  t.test_files = FileList["acceptance/*_test.rb"].select { |file| file =~ /regional/ }
-  t.warning = false
-end
-
-Rake::TestTask.new "test" do |t|
-  t.test_files = FileList["acceptance/*_test.rb"]
-  t.warning = false
-end
-
-RuboCop::RakeTask.new
