@@ -1,5 +1,11 @@
 # Changelog
 
+### 2.1.0 (2025-03-28)
+
+#### Features
+
+* Support for the ServingConfigService (requires a recent update to the google-cloud-discovery_engine-v1 gem) ([#29424](https://github.com/googleapis/google-cloud-ruby/issues/29424)) 
+
 ### 2.0.0 (2025-02-13)
 
 ### ⚠ BREAKING CHANGES
