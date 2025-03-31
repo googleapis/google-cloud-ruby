@@ -38,7 +38,7 @@ module Google
             # Synthesizes speech synchronously: receive results after all text input
             # has been processed.
             rpc :SynthesizeSpeech, ::Google::Cloud::TextToSpeech::V1::SynthesizeSpeechRequest, ::Google::Cloud::TextToSpeech::V1::SynthesizeSpeechResponse
-            # Performs bidirectional streaming speech synthesis: receive audio while
+            # Performs bidirectional streaming speech synthesis: receives audio while
             # sending text.
             rpc :StreamingSynthesize, stream(::Google::Cloud::TextToSpeech::V1::StreamingSynthesizeRequest), stream(::Google::Cloud::TextToSpeech::V1::StreamingSynthesizeResponse)
           end
