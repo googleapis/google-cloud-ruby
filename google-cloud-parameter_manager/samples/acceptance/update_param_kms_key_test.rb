@@ -16,37 +16,7 @@ require_relative "helper"
 
 describe "#update_param_kms_key", :parameter_manager_snippet do
   before do
-    key = {
-      purpose:          :ENCRYPT_DECRYPT,
-      version_template: {
-        algorithm:        :GOOGLE_SYMMETRIC_ENCRYPTION,
-        protection_level: :HSM
-      }
-    }
-
-    begin
-      kms_client.get_key_ring name: key_ring_name
-    rescue Google::Cloud::NotFoundError
-      kms_client.create_key_ring parent: location_name, key_ring_id: key_ring_id, key_ring: {}
-    end
-
-    begin
-      kms_client.get_crypto_key name: crypt_key_id1_name
-    rescue Google::Cloud::NotFoundError
-      kms_client.create_crypto_key parent: key_ring_name, crypto_key_id: crypt_key_id1, crypto_key: key
-    end
-
-    begin
-      kms_client.get_crypto_key name: crypt_key_id2_name
-    rescue Google::Cloud::NotFoundError
-      kms_client.create_crypto_key parent: key_ring_name, crypto_key_id: crypt_key_id2, crypto_key: key
-    end
-
-    parameter = {
-      kms_key: crypt_key_id1_name
-    }
-
-    client.create_parameter parent: location_name, parameter_id: parameter_id, parameter: parameter
+    setup_update_param_kms_keys
   end
 
   it "Updates a parameter kms_key" do
@@ -61,4 +31,38 @@ describe "#update_param_kms_key", :parameter_manager_snippet do
                  "keyRings/#{key_ring_id}/cryptoKeys/#{crypt_key_id2}\n",
                  out
   end
+end
+
+def setup_update_param_kms_keys
+  key = {
+    purpose:          :ENCRYPT_DECRYPT,
+    version_template: {
+      algorithm:        :GOOGLE_SYMMETRIC_ENCRYPTION,
+      protection_level: :HSM
+    }
+  }
+
+  begin
+    kms_client.get_key_ring name: key_ring_name
+  rescue Google::Cloud::NotFoundError
+    kms_client.create_key_ring parent: location_name, key_ring_id: key_ring_id, key_ring: {}
+  end
+
+  begin
+    kms_client.get_crypto_key name: crypt_key_id1_name
+  rescue Google::Cloud::NotFoundError
+    kms_client.create_crypto_key parent: key_ring_name, crypto_key_id: crypt_key_id1, crypto_key: key
+  end
+
+  begin
+    kms_client.get_crypto_key name: crypt_key_id2_name
+  rescue Google::Cloud::NotFoundError
+    kms_client.create_crypto_key parent: key_ring_name, crypto_key_id: crypt_key_id2, crypto_key: key
+  end
+
+  parameter = {
+    kms_key: crypt_key_id1_name
+  }
+
+  client.create_parameter parent: location_name, parameter_id: parameter_id, parameter: parameter
 end

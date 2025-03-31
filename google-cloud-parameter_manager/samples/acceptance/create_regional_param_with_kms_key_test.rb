@@ -16,24 +16,7 @@ require_relative "regional_helper"
 
 describe "#create_regional_param_with_kms_key", :regional_parameter_manager_snippet do
   before do
-    key = {
-      purpose:          :ENCRYPT_DECRYPT,
-      version_template: {
-        algorithm:        :GOOGLE_SYMMETRIC_ENCRYPTION,
-        protection_level: :HSM
-      }
-    }
-    begin
-      kms_client.get_key_ring name: key_ring_name
-    rescue Google::Cloud::NotFoundError
-      kms_client.create_key_ring parent: location_name, key_ring_id: key_ring_id, key_ring: {}
-    end
-
-    begin
-      kms_client.get_crypto_key name: crypt_key_id1_name
-    rescue Google::Cloud::NotFoundError
-      kms_client.create_crypto_key parent: key_ring_name, crypto_key_id: crypt_key_id1, crypto_key: {}
-    end
+    setup_create_regional_param_with_kms_keys
   end
 
   it "creates a regional parameter with kms_key" do
@@ -48,5 +31,26 @@ describe "#create_regional_param_with_kms_key", :regional_parameter_manager_snip
                  "parameters/#{parameter_id} with kms_key projects/#{project_id}/locations/" \
                  "#{location_id}/keyRings/#{key_ring_id}/cryptoKeys/#{crypt_key_id1}\n",
                  out
+  end
+end
+
+def setup_create_regional_param_with_kms_keys
+  key = {
+    purpose:          :ENCRYPT_DECRYPT,
+    version_template: {
+      algorithm:        :GOOGLE_SYMMETRIC_ENCRYPTION,
+      protection_level: :HSM
+    }
+  }
+  begin
+    kms_client.get_key_ring name: key_ring_name
+  rescue Google::Cloud::NotFoundError
+    kms_client.create_key_ring parent: location_name, key_ring_id: key_ring_id, key_ring: {}
+  end
+
+  begin
+    kms_client.get_crypto_key name: crypt_key_id1_name
+  rescue Google::Cloud::NotFoundError
+    kms_client.create_crypto_key parent: key_ring_name, crypto_key_id: crypt_key_id1, crypto_key: {}
   end
 end
