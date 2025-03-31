@@ -14,7 +14,7 @@
 
 require_relative "regional_helper"
 
-describe "#create_param_with_kms_key", :regional_parameter_manager_snippet do
+describe "#create_regional_param_with_kms_key", :regional_parameter_manager_snippet do
   before do
     key = {
       purpose:          :ENCRYPT_DECRYPT,
