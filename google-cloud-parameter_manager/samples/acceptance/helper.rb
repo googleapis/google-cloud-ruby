@@ -18,6 +18,7 @@ require "minitest/rg"
 
 require "google/cloud/parameter_manager"
 require "google/cloud/secret_manager"
+require "google/cloud/kms"
 
 require_relative "../../../.toys/.lib/sample_loader"
 
@@ -30,6 +31,7 @@ require_relative "../../../.toys/.lib/sample_loader"
 class ParameterManagerSnippetSpec < Minitest::Spec
   let(:client) { Google::Cloud::ParameterManager.parameter_manager }
   let(:secret_client) { Google::Cloud::SecretManager.secret_manager_service }
+  let(:kms_client) { Google::Cloud::Kms.key_management_service }
   let(:project_id) { ENV["GOOGLE_CLOUD_PROJECT"] || raise("missing GOOGLE_CLOUD_PROJECT") }
 
   let(:parameter_id) { "ruby-#{(Time.now.to_f * 1000).to_i}" }
@@ -37,6 +39,10 @@ class ParameterManagerSnippetSpec < Minitest::Spec
   let(:version_id) { "ruby-#{(Time.now.to_f * 1000).to_i}" }
   let(:version_id_1) { "ruby-#{(Time.now.to_f * 1000).to_i}" }
   let(:render_secret_id) { "ruby-#{(Time.now.to_f * 1000).to_i}" }
+
+  let(:key_ring_id) { "ruby-parameter-manager-key" }
+  let(:crypt_key_id1) { "ruby-parameter-manager-crypto-key-1" }
+  let(:crypt_key_id2) { "ruby-parameter-manager-crypto-key-2" }
 
   let(:payload) { "test123" }
   let(:json_payload) { '{"username": "test-user", "host": "localhost"}' }
@@ -54,6 +60,9 @@ class ParameterManagerSnippetSpec < Minitest::Spec
     "projects/#{project_id}/locations/global/parameters/#{parameter_id}/versions/#{version_id_1}"
   end
   let(:secret_name) { "projects/#{project_id}/secrets/#{render_secret_id}" }
+  let(:key_ring_name) { "projects/#{project_id}/locations/global/keyRings/#{key_ring_id}" }
+  let(:crypt_key_id1_name) { "#{key_ring_name}/cryptoKeys/#{crypt_key_id1}" }
+  let(:crypt_key_id2_name) { "#{key_ring_name}/cryptoKeys/#{crypt_key_id2}" }
 
   after do
     begin
