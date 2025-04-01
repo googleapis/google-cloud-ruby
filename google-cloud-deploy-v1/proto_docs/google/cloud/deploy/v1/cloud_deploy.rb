@@ -2064,8 +2064,8 @@ module Google
               VERIFICATION_CONFIG_NOT_FOUND = 4
 
               # The render operation did not complete successfully because the custom
-              # action required for predeploy or postdeploy was not found in the
-              # Skaffold configuration. See failure_message for additional details.
+              # action(s) required for Rollout jobs were not found in the Skaffold
+              # configuration. See failure_message for additional details.
               CUSTOM_ACTION_NOT_FOUND = 5
 
               # Release failed during rendering because the release configuration is
@@ -2376,11 +2376,12 @@ module Google
         #     paths are relative to this location.
         # @!attribute [r] skaffold_config_path
         #   @return [::String]
-        #     Output only. File path of the resolved Skaffold configuration relative to
-        #     the URI.
+        #     Output only. File path of the resolved Skaffold configuration for the
+        #     stable phase, relative to the URI.
         # @!attribute [r] manifest_path
         #   @return [::String]
-        #     Output only. File path of the rendered manifest relative to the URI.
+        #     Output only. File path of the rendered manifest relative to the URI for the
+        #     stable phase.
         # @!attribute [r] phase_artifacts
         #   @return [::Google::Protobuf::Map{::String => ::Google::Cloud::Deploy::V1::TargetArtifact::PhaseArtifact}]
         #     Output only. Map from the phase ID to the phase artifacts for the `Target`.
