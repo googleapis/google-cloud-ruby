@@ -41,8 +41,8 @@ class ParameterManagerSnippetSpec < Minitest::Spec
   let(:render_secret_id) { "ruby-#{(Time.now.to_f * 1000).to_i}" }
 
   let(:key_ring_id) { "ruby-parameter-manager-key" }
-  let(:crypt_key_id1) { "ruby-parameter-manager-crypto-key-1" }
-  let(:crypt_key_id2) { "ruby-parameter-manager-crypto-key-2" }
+  let(:crypt_key_id1) { "ruby-#{(Time.now.to_f * 1000).to_i}" }
+  let(:crypt_key_id2) { "ruby-#{(Time.now.to_f * 1000).to_i}" }
 
   let(:payload) { "test123" }
   let(:json_payload) { '{"username": "test-user", "host": "localhost"}' }
@@ -70,31 +70,41 @@ class ParameterManagerSnippetSpec < Minitest::Spec
     rescue Google::Cloud::NotFoundError
       # Do nothing for this specific error
     end
-
     begin
       client.delete_parameter_version name: parameter_version_name
     rescue Google::Cloud::NotFoundError
       # Do nothing for this specific error
     end
-
     begin
       client.delete_parameter_version name: parameter_version_name_1
     rescue Google::Cloud::NotFoundError
       # Do nothing for this specific error
     end
-
     begin
       client.delete_parameter name: parameter_name
     rescue Google::Cloud::NotFoundError
       # Do nothing for this specific error
     end
-
     begin
       client.delete_parameter name: parameter_name_1
     rescue Google::Cloud::NotFoundError
       # Do nothing for this specific error
     end
+    destroy_key_versions
   end
 
   register_spec_type(self) { |*descs| descs.include? :parameter_manager_snippet }
+end
+
+def destroy_key_versions
+  begin
+    kms_client.destroy_crypto_key_version name: "#{crypt_key_id1_name}/cryptoKeyVersions/1"
+  rescue Google::Cloud::NotFoundError
+    # Do nothing for this specific error
+  end
+  begin
+    kms_client.destroy_crypto_key_version name: "#{crypt_key_id2_name}/cryptoKeyVersions/1"
+  rescue Google::Cloud::NotFoundError
+    # Do nothing for this specific error
+  end
 end

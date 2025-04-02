@@ -51,6 +51,6 @@ def setup_create_regional_param_with_kms_keys
   begin
     kms_client.get_crypto_key name: crypt_key_id1_name
   rescue Google::Cloud::NotFoundError
-    kms_client.create_crypto_key parent: key_ring_name, crypto_key_id: crypt_key_id1, crypto_key: {}
+    kms_client.create_crypto_key parent: key_ring_name, crypto_key_id: crypt_key_id1, crypto_key: key
   end
 end
