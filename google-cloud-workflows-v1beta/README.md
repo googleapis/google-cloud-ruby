@@ -30,7 +30,7 @@ In order to use this library, you first need to go through the following steps:
 ## Quick Start
 
 ```ruby
-require "google/cloud/workflows/v1beta"
+require "google/cloud/location"
 
 client = ::Google::Cloud::Workflows::V1beta::Workflows::Client.new
 request = ::Google::Cloud::Workflows::V1beta::ListWorkflowsRequest.new # (request fields as keyword arguments...)
@@ -72,7 +72,7 @@ You can customize logging by modifying the `logger` configuration when
 constructing a client object. For example:
 
 ```ruby
-require "google/cloud/workflows/v1beta"
+require "google/cloud/location"
 require "logger"
 
 client = ::Google::Cloud::Workflows::V1beta::Workflows::Client.new do |config|
