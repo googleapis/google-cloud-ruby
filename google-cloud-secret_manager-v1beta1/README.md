@@ -30,7 +30,7 @@ In order to use this library, you first need to go through the following steps:
 ## Quick Start
 
 ```ruby
-require "google/cloud/secret_manager/v1beta1"
+require "google/cloud/location"
 
 client = ::Google::Cloud::SecretManager::V1beta1::SecretManagerService::Client.new
 request = ::Google::Cloud::SecretManager::V1beta1::ListSecretsRequest.new # (request fields as keyword arguments...)
@@ -72,7 +72,7 @@ You can customize logging by modifying the `logger` configuration when
 constructing a client object. For example:
 
 ```ruby
-require "google/cloud/secret_manager/v1beta1"
+require "google/cloud/location"
 require "logger"
 
 client = ::Google::Cloud::SecretManager::V1beta1::SecretManagerService::Client.new do |config|

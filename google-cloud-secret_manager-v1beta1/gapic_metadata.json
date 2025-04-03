@@ -2,87 +2,22 @@
   "schema": "1.0",
   "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
   "language": "ruby",
-  "protoPackage": "google.cloud.secrets.v1beta1",
-  "libraryPackage": "::Google::Cloud::SecretManager::V1beta1",
+  "protoPackage": "google.cloud.location",
+  "libraryPackage": "::Google::Cloud::Location",
   "services": {
-    "SecretManagerService": {
+    "Locations": {
       "clients": {
         "grpc": {
-          "libraryClient": "::Google::Cloud::SecretManager::V1beta1::SecretManagerService::Client",
+          "libraryClient": "::Google::Cloud::Location::Locations::Client",
           "rpcs": {
-            "ListSecrets": {
+            "ListLocations": {
               "methods": [
-                "list_secrets"
+                "list_locations"
               ]
             },
-            "CreateSecret": {
+            "GetLocation": {
               "methods": [
-                "create_secret"
-              ]
-            },
-            "AddSecretVersion": {
-              "methods": [
-                "add_secret_version"
-              ]
-            },
-            "GetSecret": {
-              "methods": [
-                "get_secret"
-              ]
-            },
-            "UpdateSecret": {
-              "methods": [
-                "update_secret"
-              ]
-            },
-            "DeleteSecret": {
-              "methods": [
-                "delete_secret"
-              ]
-            },
-            "ListSecretVersions": {
-              "methods": [
-                "list_secret_versions"
-              ]
-            },
-            "GetSecretVersion": {
-              "methods": [
-                "get_secret_version"
-              ]
-            },
-            "AccessSecretVersion": {
-              "methods": [
-                "access_secret_version"
-              ]
-            },
-            "DisableSecretVersion": {
-              "methods": [
-                "disable_secret_version"
-              ]
-            },
-            "EnableSecretVersion": {
-              "methods": [
-                "enable_secret_version"
-              ]
-            },
-            "DestroySecretVersion": {
-              "methods": [
-                "destroy_secret_version"
-              ]
-            },
-            "SetIamPolicy": {
-              "methods": [
-                "set_iam_policy"
-              ]
-            },
-            "GetIamPolicy": {
-              "methods": [
-                "get_iam_policy"
-              ]
-            },
-            "TestIamPermissions": {
-              "methods": [
-                "test_iam_permissions"
+                "get_location"
               ]
             }
           }
