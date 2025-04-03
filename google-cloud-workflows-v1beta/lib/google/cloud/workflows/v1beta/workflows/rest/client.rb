@@ -19,6 +19,7 @@
 require "google/cloud/errors"
 require "google/cloud/workflows/v1beta/workflows_pb"
 require "google/cloud/workflows/v1beta/workflows/rest/service_stub"
+require "google/cloud/location/rest"
 
 module Google
   module Cloud
@@ -172,6 +173,15 @@ module Google
                   entry.set "defaultTimeout", @config.timeout if @config.timeout
                   entry.set "quotaProject", @quota_project_id if @quota_project_id
                 end
+
+                @location_client = Google::Cloud::Location::Locations::Rest::Client.new do |config|
+                  config.credentials = credentials
+                  config.quota_project = @quota_project_id
+                  config.endpoint = @workflows_stub.endpoint
+                  config.universe_domain = @workflows_stub.universe_domain
+                  config.bindings_override = @config.bindings_override
+                  config.logger = @workflows_stub.logger if config.respond_to? :logger=
+                end
               end
 
               ##
@@ -180,6 +190,13 @@ module Google
               # @return [::Google::Cloud::Workflows::V1beta::Workflows::Rest::Operations]
               #
               attr_reader :operations_client
+
+              ##
+              # Get the associated client for mix-in of the Locations.
+              #
+              # @return [Google::Cloud::Location::Locations::Rest::Client]
+              #
+              attr_reader :location_client
 
               ##
               # The logger used for request/response debug logging.
@@ -767,6 +784,13 @@ module Google
                 config_attr :retry_policy,  nil, ::Hash, ::Proc, nil
                 config_attr :quota_project, nil, ::String, nil
                 config_attr :universe_domain, nil, ::String, nil
+
+                # @private
+                # Overrides for http bindings for the RPCs of this service
+                # are only used when this service is used as mixin, and only
+                # by the host service.
+                # @return [::Hash{::Symbol=>::Array<::Gapic::Rest::GrpcTranscoder::HttpBinding>}]
+                config_attr :bindings_override, {}, ::Hash, nil
                 config_attr :logger, :default, ::Logger, nil, :default
 
                 # @private

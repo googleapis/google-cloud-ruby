@@ -15,6 +15,7 @@
     "google-cloud-workflows-v1beta.gemspec",
     "lib/google-cloud-workflows-v1beta.rb",
     "lib/google/cloud/workflows/v1beta.rb",
+    "lib/google/cloud/workflows/v1beta/bindings_override.rb",
     "lib/google/cloud/workflows/v1beta/rest.rb",
     "lib/google/cloud/workflows/v1beta/version.rb",
     "lib/google/cloud/workflows/v1beta/workflows.rb",
