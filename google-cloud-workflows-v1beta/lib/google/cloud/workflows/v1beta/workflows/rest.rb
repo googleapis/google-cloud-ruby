@@ -21,6 +21,7 @@ require "gapic/config"
 require "gapic/config/method"
 
 require "google/cloud/workflows/v1beta/version"
+require "google/cloud/workflows/v1beta/bindings_override"
 
 require "google/cloud/workflows/v1beta/workflows/credentials"
 require "google/cloud/workflows/v1beta/workflows/paths"
