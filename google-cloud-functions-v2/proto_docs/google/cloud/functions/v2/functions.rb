@@ -62,7 +62,7 @@ module Google
         #     Output only. The deployed url for the function.
         # @!attribute [rw] kms_key_name
         #   @return [::String]
-        #     [Preview] Resource name of a KMS crypto key (managed by the user) used to
+        #     Resource name of a KMS crypto key (managed by the user) used to
         #     encrypt/decrypt function resources.
         #
         #     It must match the pattern
@@ -305,10 +305,15 @@ module Google
         #   @return [::Google::Protobuf::Map{::String => ::String}]
         #     User-provided build-time environment variables for the function
         # @!attribute [rw] docker_registry
+        #   @deprecated This field is deprecated and may be removed in the next major version update.
         #   @return [::Google::Cloud::Functions::V2::BuildConfig::DockerRegistry]
         #     Docker Registry to use for this deployment. This configuration is only
         #     applicable to 1st Gen functions, 2nd Gen functions can only use Artifact
         #     Registry.
+        #     Deprecated: As of March 2025, `CONTAINER_REGISTRY` option is no longer
+        #     available in response to Container Registry's deprecation:
+        #     https://cloud.google.com/artifact-registry/docs/transition/transition-from-gcr
+        #     Please use Artifact Registry instead, which is the default choice.
         #
         #     If unspecified, it defaults to `ARTIFACT_REGISTRY`.
         #     If `docker_repository` field is specified, this field should either be left
@@ -323,9 +328,6 @@ module Google
         #
         #     It must match the pattern
         #     `projects/{project}/locations/{location}/repositories/{repository}`.
-        #
-        #     Cross-project repositories are not supported.
-        #     Cross-location repositories are not supported.
         #     Repository format must be 'DOCKER'.
         # @!attribute [rw] service_account
         #   @return [::String]
@@ -704,7 +706,7 @@ module Google
         #     Required. The name of the function which details should be obtained.
         # @!attribute [rw] revision
         #   @return [::String]
-        #     Optional. The version of the 1st gen function whose details should
+        #     Optional. The optional version of the 1st gen function whose details should
         #     be obtained. The version of a 1st gen function is an integer that starts
         #     from 1 and gets incremented on redeployments. GCF may keep historical
         #     configs for old versions of 1st gen function. This field can be specified
@@ -743,7 +745,7 @@ module Google
         # @!attribute [rw] order_by
         #   @return [::String]
         #     The sorting order of the resources returned. Value should be a comma
-        #     separated list of fields. The default sorting oder is ascending.
+        #     separated list of fields. The default sorting order is ascending.
         #     See https://google.aip.dev/132#ordering.
         class ListFunctionsRequest
           include ::Google::Protobuf::MessageExts
@@ -816,7 +818,7 @@ module Google
         #     URL should be generated, specified in the format `projects/*/locations/*`.
         # @!attribute [rw] kms_key_name
         #   @return [::String]
-        #     [Preview] Resource name of a KMS crypto key (managed by the user) used to
+        #     Resource name of a KMS crypto key (managed by the user) used to
         #     encrypt/decrypt function source code objects in intermediate Cloud Storage
         #     buckets. When you generate an upload url and upload your source code, it
         #     gets copied to an intermediate Cloud Storage bucket. The source code is
@@ -1060,7 +1062,7 @@ module Google
             # Not specified. Invalid name.
             NAME_UNSPECIFIED = 0
 
-            # Artifact Regsitry Stage
+            # Artifact Registry Stage
             ARTIFACT_REGISTRY = 1
 
             # Build Stage
