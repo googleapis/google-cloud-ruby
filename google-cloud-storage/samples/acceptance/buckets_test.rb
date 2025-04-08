@@ -583,7 +583,7 @@ describe "Buckets Snippets" do
     end
   end
 
-  describe "storage move object" do
+  describe "storage move file" do
     let(:source_file) { "file_1_name_#{SecureRandom.hex}.txt" }
     let(:destination_file) { "file_2_name_#{SecureRandom.hex}.txt" }
     let :hns_bucket do
@@ -598,7 +598,7 @@ describe "Buckets Snippets" do
       file = StringIO.new file_content
       hns_bucket.create_file file, source_file
     end
-    it "object is moved and old object is deleted" do
+    it "file is moved and old object is deleted" do
       create_source_file
       out, _err = capture_io do
         move_object bucket_name: hns_bucket.name, source_file_name: source_file, destination_file_name: destination_file

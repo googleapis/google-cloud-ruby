@@ -1381,7 +1381,7 @@ describe Google::Cloud::Storage::Bucket, :mock_storage do
     _(bucket.api_url).must_equal "#{new_url_root}/b/#{bucket_name}"
     mock.verify
   end
-  describe "storage move object" do
+  describe "storage move file" do
     it "moves a file object for bucket" do
       file_name = "file.ext"
       file_2_name = "file1.ext"

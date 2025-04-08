@@ -3144,7 +3144,7 @@ module Google
         alias refresh! reload!
 
         ##
-        # Moves object from source to destination path within bucket
+        # Moves File from source to destination path within bucket
         # This Operation is being performed at server side
         # @param [String] source_file The file name in existing bucket
         # @param [String] destination_file The new filename to be created on bucket
