@@ -1382,7 +1382,7 @@ describe Google::Cloud::Storage::Bucket, :mock_storage do
     mock.verify
   end
   describe "storage move file" do
-    it "moves a file object for bucket" do
+    it "moves a file for bucket" do
       file_name = "file.ext"
       file_2_name = "file1.ext"
       mock = Minitest::Mock.new
