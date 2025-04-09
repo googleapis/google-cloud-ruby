@@ -598,7 +598,7 @@ describe "Buckets Snippets" do
       file = StringIO.new file_content
       hns_bucket.create_file file, source_file
     end
-    it "file is moved and old object is deleted" do
+    it "file is moved and old file is deleted" do
       create_source_file
       out, _err = capture_io do
         move_object bucket_name: hns_bucket.name, source_file_name: source_file, destination_file_name: destination_file
