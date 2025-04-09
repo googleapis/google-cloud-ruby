@@ -3144,10 +3144,11 @@ module Google
         alias refresh! reload!
 
         ##
-        # Moves File from source to destination path within bucket
+        # Moves File from source to destination path within the same HNS-enabled bucket
         # This Operation is being performed at server side
         # @param [String] source_file The file name in existing bucket
         # @param [String] destination_file The new filename to be created on bucket
+        # If the destination path includes non-existent parent folders, they will be created.
         # @example
         #   require "google/cloud/storage"
         #   storage = Google::Cloud::Storage.new
