@@ -363,7 +363,7 @@ module Google
         #       * `bigquery.dataset.project_id.dataset_id`
         #       * `datacatalog.entry.project_id.location_id.entry_group_id.entry_id`
         #
-        #     `*_id`s should satisfy the standard SQL rules for identifiers.
+        #     `*_id`s should satisfy the GoogleSQL rules for identifiers.
         #     https://cloud.google.com/bigquery/docs/reference/standard-sql/lexical.
         #
         #     Note: The following fields are mutually exclusive: `sql_resource`, `linked_resource`. If a field in that set is populated, all other fields in the set will automatically be cleared.
