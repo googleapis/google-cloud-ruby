@@ -105,11 +105,27 @@ module Google
           # @!attribute [r] source_info
           #   @return [::Google::Cloud::Firestore::Admin::V1::Database::SourceInfo]
           #     Output only. Information about the provenance of this database.
+          # @!attribute [r] free_tier
+          #   @return [::Boolean]
+          #     Output only. Background: Free tier is the ability of a Firestore database
+          #     to use a small amount of resources every day without being charged. Once
+          #     usage exceeds the free tier limit further usage is charged.
+          #
+          #     Whether this database can make use of the free tier. Only one database
+          #     per project can be eligible for the free tier.
+          #
+          #     The first (or next) database that is created in a project without a free
+          #     tier database will be marked as eligible for the free tier. Databases that
+          #     are created while there is a free tier database will not be eligible for
+          #     the free tier.
           # @!attribute [rw] etag
           #   @return [::String]
           #     This checksum is computed by the server based on the value of other
           #     fields, and may be sent on update and delete requests to ensure the
           #     client has an up-to-date value before proceeding.
+          # @!attribute [rw] database_edition
+          #   @return [::Google::Cloud::Firestore::Admin::V1::Database::DatabaseEdition]
+          #     Immutable. The edition of the database.
           class Database
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -313,6 +329,20 @@ module Google
 
               # Delete protection is enabled
               DELETE_PROTECTION_ENABLED = 2
+            end
+
+            # The edition of the database.
+            module DatabaseEdition
+              # Not used.
+              DATABASE_EDITION_UNSPECIFIED = 0
+
+              # Standard edition.
+              #
+              # This is the default setting if not specified.
+              STANDARD = 1
+
+              # Enterprise edition.
+              ENTERPRISE = 2
             end
           end
         end
