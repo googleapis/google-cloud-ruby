@@ -79,6 +79,12 @@ module Google
             rpc :ListAutonomousDatabaseCharacterSets, ::Google::Cloud::OracleDatabase::V1::ListAutonomousDatabaseCharacterSetsRequest, ::Google::Cloud::OracleDatabase::V1::ListAutonomousDatabaseCharacterSetsResponse
             # Lists the long-term and automatic backups of an Autonomous Database.
             rpc :ListAutonomousDatabaseBackups, ::Google::Cloud::OracleDatabase::V1::ListAutonomousDatabaseBackupsRequest, ::Google::Cloud::OracleDatabase::V1::ListAutonomousDatabaseBackupsResponse
+            # Stops an Autonomous Database.
+            rpc :StopAutonomousDatabase, ::Google::Cloud::OracleDatabase::V1::StopAutonomousDatabaseRequest, ::Google::Longrunning::Operation
+            # Starts an Autonomous Database.
+            rpc :StartAutonomousDatabase, ::Google::Cloud::OracleDatabase::V1::StartAutonomousDatabaseRequest, ::Google::Longrunning::Operation
+            # Restarts an Autonomous Database.
+            rpc :RestartAutonomousDatabase, ::Google::Cloud::OracleDatabase::V1::RestartAutonomousDatabaseRequest, ::Google::Longrunning::Operation
           end
 
           Stub = Service.rpc_stub_class

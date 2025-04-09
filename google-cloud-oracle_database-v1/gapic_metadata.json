@@ -119,6 +119,21 @@
               "methods": [
                 "list_autonomous_database_backups"
               ]
+            },
+            "StopAutonomousDatabase": {
+              "methods": [
+                "stop_autonomous_database"
+              ]
+            },
+            "StartAutonomousDatabase": {
+              "methods": [
+                "start_autonomous_database"
+              ]
+            },
+            "RestartAutonomousDatabase": {
+              "methods": [
+                "restart_autonomous_database"
+              ]
             }
           }
         }

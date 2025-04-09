@@ -92,7 +92,10 @@
     "snippets/oracle_database/list_db_system_shapes.rb",
     "snippets/oracle_database/list_entitlements.rb",
     "snippets/oracle_database/list_gi_versions.rb",
+    "snippets/oracle_database/restart_autonomous_database.rb",
     "snippets/oracle_database/restore_autonomous_database.rb",
+    "snippets/oracle_database/start_autonomous_database.rb",
+    "snippets/oracle_database/stop_autonomous_database.rb",
     "snippets/snippet_metadata_google.cloud.oracledatabase.v1.json",
     "test/google/cloud/oracle_database/v1/oracle_database_rest_test.rb",
     "test/helper.rb"
