@@ -631,7 +631,7 @@ module Google
         end
 
         ##
-        # Moves object from source to destination path within bucket
+        # Moves file from source to destination path within bucket
         def move_file name,
                       source_file,
                       destination_file,
