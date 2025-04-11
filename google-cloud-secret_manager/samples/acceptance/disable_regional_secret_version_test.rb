@@ -30,4 +30,32 @@ describe "#disable_regional_secret_version", :regional_secret_manager_snippet do
     refute_nil n_version
     assert_equal "disabled", n_version.state.to_s.downcase
   end
+
+  it "disables the secret version scheduled for destruction" do
+    sample = SampleLoader.load "disable_regional_secret_version.rb"
+
+    refute_nil secret_version
+
+    # enables the delayed destroy on the secret.
+    client.update_secret(
+      secret: {
+        name: secret_name,
+        version_destroy_ttl: {
+          seconds: time_to_live
+        }
+      },
+      update_mask: {
+        paths: ["version_destroy_ttl"]
+      }
+    )
+    client.destroy_secret_version name: version_name
+
+    assert_output(/Disabled regional secret version/) do
+      sample.run project_id: project_id, location_id: location_id, secret_id: secret_id, version_id: version_id
+    end
+
+    n_version = client.get_secret_version name: version_name
+    refute_nil n_version
+    assert_equal "disabled", n_version.state.to_s.downcase
+  end
 end
