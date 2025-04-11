@@ -479,4 +479,22 @@ describe "Secret Manager Snippets" do
       expect(n_version.version_destroy_ttl).must_be_nil
     end
   end
+
+  describe "#update_secret_delayed_destroy" do
+    it "updates the secret's delayed destroy" do
+      expect(secret).wont_be_nil
+      expect(secret_version).wont_be_nil
+
+      expect {
+        n_secret = update_secret_with_delayed_destroy(
+          project_id: project_id,
+          secret_id:  secret_id,
+          updated_time_to_live: 172_800
+        )
+
+        expect(n_secret).wont_be_nil
+        expect(n_secret.version_destroy_ttl.seconds).must_equal(172_800)
+      }.must_output(/Updated secret/)
+    end
+  end
 end
