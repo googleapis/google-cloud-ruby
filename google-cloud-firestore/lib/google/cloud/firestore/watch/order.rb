@@ -14,11 +14,7 @@
 
 
 require "google/cloud/firestore/v1"
-require "google/cloud/firestore/convert"
-require "google/cloud/firestore/document_reference"
-require "google/cloud/firestore/document_snapshot"
 require "google/cloud/firestore/document_change"
-require "google/cloud/firestore/query_snapshot"
 require "rbtree"
 
 module Google

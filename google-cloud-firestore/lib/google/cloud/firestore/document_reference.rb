@@ -14,8 +14,6 @@
 
 
 require "google/cloud/firestore/v1"
-require "google/cloud/firestore/document_snapshot"
-require "google/cloud/firestore/collection_reference"
 require "google/cloud/firestore/document_listener"
 require "google/cloud/firestore/document_reference/list"
 require "google/cloud/firestore/resource_path"

@@ -16,7 +16,6 @@
 require "google/cloud/firestore/v1"
 require "google/cloud/firestore/document_snapshot"
 require "google/cloud/firestore/query_listener"
-require "google/cloud/firestore/convert"
 require "google/cloud/firestore/aggregate_query"
 require "google/cloud/firestore/filter"
 require "json"
