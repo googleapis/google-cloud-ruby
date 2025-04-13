@@ -373,7 +373,7 @@ module Google
           end
 
           # Validate analyze parameter
-          unless [true, false].include?(analyze)
+          unless [true, false].include? analyze
             raise ArgumentError, "analyze must be a boolean"
           end
 
@@ -1101,11 +1101,11 @@ module Google
           # Reverse the results for Query#limit_to_last queries since that method reversed the order_by directions.
           reverse_results = limit_type == :last
           results_generator = lambda do
-             service.run_query parent_path, query, read_time: read_time, explain_options: explain_options
+            service.run_query parent_path, query, read_time: read_time, explain_options: explain_options
           end
-          
-          results = QueryRunResult.new(results_generator, client, reverse_results: reverse_results)
-          
+
+          results = QueryRunResult.new results_generator, client, reverse_results: reverse_results
+
           return results unless block_given?
           results.each(&block)
         end
