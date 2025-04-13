@@ -282,9 +282,11 @@ describe Google::Cloud::Firestore::Query, :get, :mock_firestore do
       start_at: Google::Cloud::Firestore::V1::Cursor.new(values: [Google::Cloud::Firestore::Convert.raw_to_value("foo")], before: false),
       end_at: Google::Cloud::Firestore::V1::Cursor.new(values: [Google::Cloud::Firestore::Convert.raw_to_value("bar")], before: true)
     )
-    firestore_mock.expect :run_query, query_results_enum, run_query_args(expected_query)
+    expected_explain_options = Google::Cloud::Firestore::V1::ExplainOptions.new(analyze: true)
+    firestore_mock.expect :run_query, query_results_enum, run_query_args(expected_query, explain_options: expected_explain_options)
 
-    original_query = firestore.col(:users).select(:name).offset(3).limit(42).order(:name).order(firestore.document_id, :desc).start_after(:foo).end_before(:bar)
+    original_query = firestore.col(:users).select(:name).offset(3).limit(42).order(:name)
+      .order(firestore.document_id, :desc).start_after(:foo).end_before(:bar).explain(analyze: true)
 
     json = original_query.to_json
     _(json).must_be_instance_of String
@@ -296,14 +298,135 @@ describe Google::Cloud::Firestore::Query, :get, :mock_firestore do
     _(deserialized_query.parent_path).must_equal original_query.parent_path # Private field
     _(deserialized_query.limit_type).must_equal original_query.limit_type # Private field
     _(deserialized_query.client).must_equal original_query.client # Private field
+    _(deserialized_query.explain_options).must_be_kind_of Google::Cloud::Firestore::V1::ExplainOptions
+    _(deserialized_query.explain_options.analyze).must_equal true
 
     results_enum = deserialized_query.get
 
     assert_results_enum results_enum
   end
+ 
+  it "gets a query with explanation" do
+    expected_query = Google::Cloud::Firestore::V1::StructuredQuery.new(
+      select: Google::Cloud::Firestore::V1::StructuredQuery::Projection.new(
+        fields: [Google::Cloud::Firestore::V1::StructuredQuery::FieldReference.new(field_path: "name")])
+    )
+    expected_explain_options = Google::Cloud::Firestore::V1::ExplainOptions.new(analyze: true)
+
+    query_result_metrics = Google::Cloud::Firestore::V1::ExplainMetrics.new(
+      plan_summary: Google::Cloud::Firestore::V1::PlanSummary.new(
+        indexes_used: [
+
+        ]
+      ),
+      execution_stats: Google::Cloud::Firestore::V1::ExecutionStats.new(
+        results_returned: 2
+      )
+    )
+
+    query_results_with_explanation = [
+      Google::Cloud::Firestore::V1::RunQueryResponse.new(
+        read_time: Google::Cloud::Firestore::Convert.time_to_timestamp(read_time),
+        document: Google::Cloud::Firestore::V1::Document.new(
+          name: "projects/#{project}/databases/(default)/documents/users/alice",
+          fields: { "name" => Google::Cloud::Firestore::V1::Value.new(string_value: "Alice") },
+          create_time: Google::Cloud::Firestore::Convert.time_to_timestamp(read_time),
+          update_time: Google::Cloud::Firestore::Convert.time_to_timestamp(read_time)
+        )),
+      Google::Cloud::Firestore::V1::RunQueryResponse.new(
+        explain_metrics: query_result_metrics,
+        read_time: Google::Cloud::Firestore::Convert.time_to_timestamp(read_time),
+        document: Google::Cloud::Firestore::V1::Document.new(
+          name: "projects/#{project}/databases/(default)/documents/users/bob",
+          fields: { "name" => Google::Cloud::Firestore::V1::Value.new(string_value: "Bob") },
+          create_time: Google::Cloud::Firestore::Convert.time_to_timestamp(read_time),
+          update_time: Google::Cloud::Firestore::Convert.time_to_timestamp(read_time)
+        ))
+    ].to_enum
+
+    firestore_mock.expect :run_query, query_results_with_explanation, run_query_args(expected_query, explain_options: expected_explain_options)
+
+    results_enum = query.select(:name).explain(analyze: true).get
+
+    _(results_enum).must_be_kind_of Google::Cloud::Firestore::QueryRunResult
+
+    results = results_enum.to_a
+
+    _(results.count).must_equal 2
+    _(results.first).must_be_kind_of Google::Cloud::Firestore::DocumentSnapshot
+    _(results.last).must_be_kind_of Google::Cloud::Firestore::DocumentSnapshot
+
+    # the explain metrics are surfaced to enum after the results are read (eg. via `to_a` call)
+    _(results_enum.explain_metrics).must_equal query_result_metrics
+  end
+
+  it "gets a query with limit_last" do
+    expected_query = Google::Cloud::Firestore::V1::StructuredQuery.new(
+      select: Google::Cloud::Firestore::V1::StructuredQuery::Projection.new(
+        fields: [Google::Cloud::Firestore::V1::StructuredQuery::FieldReference.new(field_path: "name")]),
+      order_by: [
+        Google::Cloud::Firestore::V1::StructuredQuery::Order.new(
+          field: Google::Cloud::Firestore::V1::StructuredQuery::FieldReference.new(field_path: "name"),
+          direction: :DESCENDING)],
+      limit: Google::Protobuf::Int32Value.new(value: 2)
+    )
+    
+    firestore_mock.expect :run_query, query_results_enum, run_query_args(expected_query)
+    # Later calls to `first` and `to_a` will result in separate firestore mock reads
+    firestore_mock.expect :run_query, query_results_enum, run_query_args(expected_query)
+
+    results_enum = query.select(:name).order_by(:name).limit_to_last(2).get
+    _(results_enum).must_be_kind_of Google::Cloud::Firestore::QueryRunResult
+
+    # The results are reverted with limit_last, so "Bob" becomes the first result
+    first = results_enum.first
+    _(first).must_be_kind_of Google::Cloud::Firestore::DocumentSnapshot
+    _(first.data).must_equal({ name: "Bob" })
+        
+    results = results_enum.to_a
+    _(results.last).must_be_kind_of Google::Cloud::Firestore::DocumentSnapshot
+    _(results.last.data).must_equal({ name: "Alice" })
+  end
+
+  it "does not eagerly read without `limit_last`" do
+    expected_query = Google::Cloud::Firestore::V1::StructuredQuery.new(
+      select: Google::Cloud::Firestore::V1::StructuredQuery::Projection.new(
+        fields: [Google::Cloud::Firestore::V1::StructuredQuery::FieldReference.new(field_path: "name")])
+    )
+    firestore_mock.expect(:run_query, ExplodingEnum.new(query_results_enum), run_query_args(expected_query))
+    # Later calls to `first` and `to_a` will result in separate firestore mock reads
+    firestore_mock.expect(:run_query, ExplodingEnum.new(query_results_enum), run_query_args(expected_query))
+
+    results_enum = query.select(:name).get
+    _(results_enum).must_be_kind_of Google::Cloud::Firestore::QueryRunResult
+
+    first = results_enum.first
+    _(first).must_be_kind_of Google::Cloud::Firestore::DocumentSnapshot
+
+    assert_raises(RuntimeError) { results_enum.to_a }
+  end
+
+  it "does eagerly read the whole enum with `limit_last` when first entry is read" do
+    expected_query = Google::Cloud::Firestore::V1::StructuredQuery.new(
+      select: Google::Cloud::Firestore::V1::StructuredQuery::Projection.new(
+        fields: [Google::Cloud::Firestore::V1::StructuredQuery::FieldReference.new(field_path: "name")]),
+      order_by: [
+        Google::Cloud::Firestore::V1::StructuredQuery::Order.new(
+          field: Google::Cloud::Firestore::V1::StructuredQuery::FieldReference.new(field_path: "name"),
+          direction: :DESCENDING)],
+      limit: Google::Protobuf::Int32Value.new(value: 2)
+    )
+    
+    firestore_mock.expect :run_query, ExplodingEnum.new(query_results_enum), run_query_args(expected_query)
+
+    results_enum = query.select(:name).order_by(:name).limit_to_last(2).get
+    _(results_enum).must_be_kind_of Google::Cloud::Firestore::QueryRunResult
+    
+    assert_raises(RuntimeError) { results_enum.first }
+  end
 
   def assert_results_enum enum
-    _(enum).must_be_kind_of Enumerator
+    _(enum).must_be_kind_of Google::Cloud::Firestore::QueryRunResult
 
     results = enum.to_a
     _(results.count).must_equal 2
