@@ -135,7 +135,7 @@ module Google
             new_query.select.fields << field_ref
           end
 
-          Query.start new_query, parent_path, client, limit_type: limit_type
+          start_new_query new_query
         end
 
         ##
@@ -171,7 +171,7 @@ module Google
 
           new_query.from.last.all_descendants = true
 
-          Query.start new_query, parent_path, client, limit_type: limit_type
+          start_new_query new_query
         end
 
         ##
@@ -207,7 +207,7 @@ module Google
 
           new_query.from.last.all_descendants = false
 
-          Query.start new_query, parent_path, client, limit_type: limit_type
+          start_new_query new_query
         end
 
         ##
@@ -373,7 +373,7 @@ module Google
             direction: order_direction(direction)
           )
 
-          Query.start new_query, parent_path, client, limit_type: limit_type
+          start_new_query new_query
         end
         alias order_by order
 
@@ -406,7 +406,7 @@ module Google
 
           new_query.offset = num
 
-          Query.start new_query, parent_path, client, limit_type: limit_type
+          start_new_query new_query
         end
 
         ##
@@ -443,7 +443,7 @@ module Google
 
           new_query.limit = Google::Protobuf::Int32Value.new value: num
 
-          Query.start new_query, parent_path, client, limit_type: :first
+          start_new_query new_query, limit_type_override: :first
         end
 
         ##
@@ -503,7 +503,7 @@ module Google
 
           new_query.limit = Google::Protobuf::Int32Value.new value: num
 
-          Query.start new_query, parent_path, client, limit_type: :last
+          start_new_query new_query, limit_type_override: :last
         end
 
         ##
@@ -611,7 +611,7 @@ module Google
           cursor.before = true
           new_query.start_at = cursor
 
-          Query.start new_query, parent_path, client, limit_type: limit_type
+          start_new_query new_query
         end
 
         ##
@@ -720,7 +720,7 @@ module Google
           cursor.before = false
           new_query.start_at = cursor
 
-          Query.start new_query, parent_path, client, limit_type: limit_type
+          start_new_query new_query
         end
 
         ##
@@ -829,7 +829,7 @@ module Google
           cursor.before = true
           new_query.end_at = cursor
 
-          Query.start new_query, parent_path, client, limit_type: limit_type
+          start_new_query new_query
         end
 
         ##
@@ -938,7 +938,7 @@ module Google
           cursor.before = false
           new_query.end_at = cursor
 
-          Query.start new_query, parent_path, client, limit_type: limit_type
+          start_new_query new_query
         end
 
         ##
@@ -1117,11 +1117,46 @@ module Google
 
         ##
         # @private Start a new Query.
-        def self.start query, parent_path, client, limit_type: nil
-          new query, parent_path, client, limit_type: limit_type
+        #
+        # This method creates and returns a new `Query` instance, initializing it with the provided parameters.
+        #
+        # @param [Google::Cloud::Firestore::V1::StructuredQuery] query
+        #   The structured query object representing the query to be executed.
+        # @param [String] parent_path
+        #   The parent path of the collection or document the query is operating on.
+        # @param [Google::Cloud::Firestore::Client] client
+        #   The Firestore client instance.
+        # @param [Symbol, nil] limit_type
+        #   (Optional) The type of limit to apply to the query results, either `:first` or `:last`.
+        #   Defaults to `nil` if no limit is applied.
+        # @param [Google::Cloud::Firestore::V1::ExplainOptions, nil] explain_options
+        #   (Optional) The options for explaining the query plan. Defaults to `nil` if not provided.
+        #
+        # @return [Google::Cloud::Firestore::Query]
+        #   A new `Query` instance initialized with the given parameters.
+        def self.start query, parent_path, client, limit_type: nil, explain_options: nil
+          new query, parent_path, client, limit_type: limit_type, explain_options: explain_options
         end
 
         protected
+
+        ##
+        # @private Helper for starting a new query copying existing parameters.
+        #
+        # @param [Google::Cloud::Firestore::V1::StructuredQuery] new_query
+        #    The new structured query object.
+        # @param [Symbol] limit_type_override The limit type override for the new query
+        # @param [Google::Cloud::Firestore::V1::ExplainOptions] explain_options_override
+        #   The explain options override for the new query.
+        #
+        # @return [Query] A new query
+        def start_new_query new_query, limit_type_override: nil, explain_options_override: nil
+          Query.start(new_query,
+                      parent_path,
+                      client,
+                      limit_type: limit_type_override || limit_type,
+                      explain_options: explain_options_override || explain_options)
+        end
 
         ##
         # @private
