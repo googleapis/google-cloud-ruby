@@ -469,6 +469,36 @@ class MockStorage < Minitest::Spec
     }
   end
 
+  def move_object_args if_generation_match: nil,
+                       if_generation_not_match: nil,
+                       if_metageneration_match: nil,
+                       if_metageneration_not_match: nil,
+                       if_source_generation_match: nil,
+                       if_source_generation_not_match: nil,
+                       if_source_metageneration_match: nil,
+                       if_source_metageneration_not_match: nil,
+                       user_project: nil,
+                       fields: nil,
+                       quota_user: nil,
+                       user_ip: nil,
+                       options: {}
+    {
+      if_generation_match: if_generation_match,
+      if_generation_not_match: if_generation_not_match,
+      if_metageneration_match: if_metageneration_match,
+      if_metageneration_not_match: if_metageneration_not_match,
+      if_source_generation_match: if_source_generation_match,
+      if_source_generation_not_match: if_source_generation_not_match,
+      if_source_metageneration_match: if_source_metageneration_match,
+      if_source_metageneration_not_match: if_source_metageneration_not_match,
+      user_project: user_project,
+      fields: fields,
+      quota_user: quota_user,
+      user_ip: user_ip,
+      options: options
+    }
+  end
+
   def delete_object_args generation: nil,
                          if_generation_match: nil,
                          if_generation_not_match: nil,

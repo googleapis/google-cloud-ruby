@@ -1381,6 +1381,32 @@ describe Google::Cloud::Storage::Bucket, :mock_storage do
     _(bucket.api_url).must_equal "#{new_url_root}/b/#{bucket_name}"
     mock.verify
   end
+  describe "storage move file" do
+    it "moves a file for bucket" do
+      file_name = "file.ext"
+      file_2_name = "file1.ext"
+      mock = Minitest::Mock.new
+      mock.expect :move_object,Google::Apis::StorageV1::Object.from_json(random_file_hash(bucket.name, file_2_name).to_json),[ bucket.name, file_name,file_2_name],**move_object_args
+      bucket.service.mocked_service = mock
+      file = bucket.move_file file_name, file_2_name
+      mock.verify
+      _(file).must_be_kind_of Google::Apis::StorageV1::Object
+    end
+
+    it "raises error if source and destination are having same filename" do
+      file_name = "file.ext"
+      file_2_name = "file1.ext"
+      mock = Minitest::Mock.new
+      mock.expect :move_object, [ bucket.name, file_name,file_name] do
+        raise Google::Cloud::InvalidArgumentError, "invalid: Source and destination object names must be different."
+      end
+      bucket.service.mocked_service = mock
+      exception = assert_raises(Google::Cloud::InvalidArgumentError) do
+          bucket.move_file file_name, file_name
+      end
+      assert_equal "invalid: Source and destination object names must be different.", exception.message
+    end
+  end
 
    it "restarts a resumable upload with upload_id" do
     new_file_name = random_file_path
