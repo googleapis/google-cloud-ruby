@@ -54,7 +54,7 @@ whenever possible.
 To configure a credentials file for an individual client initialization:
 
 ```ruby
-require "google/cloud/location"
+require "google/cloud/secret_manager/v1beta1"
 
 client = ::Google::Cloud::SecretManager::V1beta1::SecretManagerService::Client.new do |config|
   config.credentials = "path/to/credentialfile.json"
@@ -64,7 +64,7 @@ end
 To configure a credentials file globally for all clients:
 
 ```ruby
-require "google/cloud/location"
+require "google/cloud/secret_manager/v1beta1"
 
 ::Google::Cloud::SecretManager::V1beta1::SecretManagerService::Client.configure do |config|
   config.credentials = "path/to/credentialfile.json"
@@ -96,7 +96,7 @@ checks for credentials are:
 * `GOOGLE_APPLICATION_CREDENTIALS` - Path to JSON file
 
 ```ruby
-require "google/cloud/location"
+require "google/cloud/secret_manager/v1beta1"
 
 ENV["GOOGLE_APPLICATION_CREDENTIALS"] = "path/to/credentialfile.json"
 
