@@ -73,6 +73,8 @@ module Google
             #     Optional. The BigQuery table to export DataProfileScan results to.
             #     Format:
             #     //bigquery.googleapis.com/projects/PROJECT_ID/datasets/DATASET_ID/tables/TABLE_ID
+            #     or
+            #     projects/PROJECT_ID/datasets/DATASET_ID/tables/TABLE_ID
             class BigQueryExport
               include ::Google::Protobuf::MessageExts
               extend ::Google::Protobuf::MessageExts::ClassMethods
