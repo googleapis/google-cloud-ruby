@@ -13,8 +13,6 @@
 # limitations under the License.
 
 
-require "google/cloud/firestore/convert"
-
 module Google
   module Cloud
     module Firestore

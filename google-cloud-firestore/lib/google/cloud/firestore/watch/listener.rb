@@ -14,9 +14,8 @@
 
 
 require "google/cloud/firestore/v1"
-require "google/cloud/firestore/convert"
-require "google/cloud/firestore/watch/enumerator_queue"
 require "google/cloud/firestore/watch/inventory"
+require "google/cloud/firestore/watch/enumerator_queue"
 require "monitor"
 
 module Google

@@ -19,7 +19,6 @@ require "google/cloud/firestore/bulk_writer_operation"
 require "google/cloud/firestore/rate_limiter"
 require "google/cloud/firestore/bulk_commit_batch"
 require "google/cloud/firestore/bulk_writer_exception"
-require "google/cloud/firestore/bulk_writer_scheduler"
 
 
 module Google
