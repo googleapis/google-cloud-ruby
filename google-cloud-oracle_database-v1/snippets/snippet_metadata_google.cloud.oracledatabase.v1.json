@@ -890,6 +890,126 @@
           "type": "FULL"
         }
       ]
+    },
+    {
+      "region_tag": "oracledatabase_v1_generated_OracleDatabase_StopAutonomousDatabase_sync",
+      "title": "Snippet for the stop_autonomous_database call in the OracleDatabase service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::OracleDatabase::V1::OracleDatabase::Rest::Client#stop_autonomous_database.",
+      "file": "oracle_database/stop_autonomous_database.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "stop_autonomous_database",
+        "full_name": "::Google::Cloud::OracleDatabase::V1::OracleDatabase::Rest::Client#stop_autonomous_database",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::OracleDatabase::V1::StopAutonomousDatabaseRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "OracleDatabase::Rest::Client",
+          "full_name": "::Google::Cloud::OracleDatabase::V1::OracleDatabase::Rest::Client"
+        },
+        "method": {
+          "short_name": "StopAutonomousDatabase",
+          "full_name": "google.cloud.oracledatabase.v1.OracleDatabase.StopAutonomousDatabase",
+          "service": {
+            "short_name": "OracleDatabase",
+            "full_name": "google.cloud.oracledatabase.v1.OracleDatabase"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "oracledatabase_v1_generated_OracleDatabase_StartAutonomousDatabase_sync",
+      "title": "Snippet for the start_autonomous_database call in the OracleDatabase service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::OracleDatabase::V1::OracleDatabase::Rest::Client#start_autonomous_database.",
+      "file": "oracle_database/start_autonomous_database.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "start_autonomous_database",
+        "full_name": "::Google::Cloud::OracleDatabase::V1::OracleDatabase::Rest::Client#start_autonomous_database",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::OracleDatabase::V1::StartAutonomousDatabaseRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "OracleDatabase::Rest::Client",
+          "full_name": "::Google::Cloud::OracleDatabase::V1::OracleDatabase::Rest::Client"
+        },
+        "method": {
+          "short_name": "StartAutonomousDatabase",
+          "full_name": "google.cloud.oracledatabase.v1.OracleDatabase.StartAutonomousDatabase",
+          "service": {
+            "short_name": "OracleDatabase",
+            "full_name": "google.cloud.oracledatabase.v1.OracleDatabase"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "oracledatabase_v1_generated_OracleDatabase_RestartAutonomousDatabase_sync",
+      "title": "Snippet for the restart_autonomous_database call in the OracleDatabase service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::OracleDatabase::V1::OracleDatabase::Rest::Client#restart_autonomous_database.",
+      "file": "oracle_database/restart_autonomous_database.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "restart_autonomous_database",
+        "full_name": "::Google::Cloud::OracleDatabase::V1::OracleDatabase::Rest::Client#restart_autonomous_database",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::OracleDatabase::V1::RestartAutonomousDatabaseRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "OracleDatabase::Rest::Client",
+          "full_name": "::Google::Cloud::OracleDatabase::V1::OracleDatabase::Rest::Client"
+        },
+        "method": {
+          "short_name": "RestartAutonomousDatabase",
+          "full_name": "google.cloud.oracledatabase.v1.OracleDatabase.RestartAutonomousDatabase",
+          "service": {
+            "short_name": "OracleDatabase",
+            "full_name": "google.cloud.oracledatabase.v1.OracleDatabase"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
     }
   ]
 }
