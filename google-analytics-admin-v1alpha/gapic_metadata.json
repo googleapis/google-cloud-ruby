@@ -759,6 +759,36 @@
               "methods": [
                 "delete_subproperty_event_filter"
               ]
+            },
+            "CreateReportingDataAnnotation": {
+              "methods": [
+                "create_reporting_data_annotation"
+              ]
+            },
+            "GetReportingDataAnnotation": {
+              "methods": [
+                "get_reporting_data_annotation"
+              ]
+            },
+            "ListReportingDataAnnotations": {
+              "methods": [
+                "list_reporting_data_annotations"
+              ]
+            },
+            "UpdateReportingDataAnnotation": {
+              "methods": [
+                "update_reporting_data_annotation"
+              ]
+            },
+            "DeleteReportingDataAnnotation": {
+              "methods": [
+                "delete_reporting_data_annotation"
+              ]
+            },
+            "SubmitUserDeletion": {
+              "methods": [
+                "submit_user_deletion"
+              ]
             }
           }
         }

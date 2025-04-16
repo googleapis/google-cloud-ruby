@@ -9165,6 +9165,372 @@ class ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::ClientTest < M
     end
   end
 
+  def test_create_reporting_data_annotation
+    # Create GRPC objects.
+    grpc_response = ::Google::Analytics::Admin::V1alpha::ReportingDataAnnotation.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    reporting_data_annotation = {}
+
+    create_reporting_data_annotation_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :create_reporting_data_annotation, name
+      assert_kind_of ::Google::Analytics::Admin::V1alpha::CreateReportingDataAnnotationRequest, request
+      assert_equal "hello world", request["parent"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Analytics::Admin::V1alpha::ReportingDataAnnotation), request["reporting_data_annotation"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, create_reporting_data_annotation_client_stub do
+      # Create client
+      client = ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.create_reporting_data_annotation({ parent: parent, reporting_data_annotation: reporting_data_annotation }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.create_reporting_data_annotation parent: parent, reporting_data_annotation: reporting_data_annotation do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.create_reporting_data_annotation ::Google::Analytics::Admin::V1alpha::CreateReportingDataAnnotationRequest.new(parent: parent, reporting_data_annotation: reporting_data_annotation) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.create_reporting_data_annotation({ parent: parent, reporting_data_annotation: reporting_data_annotation }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.create_reporting_data_annotation(::Google::Analytics::Admin::V1alpha::CreateReportingDataAnnotationRequest.new(parent: parent, reporting_data_annotation: reporting_data_annotation), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, create_reporting_data_annotation_client_stub.call_rpc_count
+    end
+  end
+
+  def test_get_reporting_data_annotation
+    # Create GRPC objects.
+    grpc_response = ::Google::Analytics::Admin::V1alpha::ReportingDataAnnotation.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    get_reporting_data_annotation_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :get_reporting_data_annotation, name
+      assert_kind_of ::Google::Analytics::Admin::V1alpha::GetReportingDataAnnotationRequest, request
+      assert_equal "hello world", request["name"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, get_reporting_data_annotation_client_stub do
+      # Create client
+      client = ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.get_reporting_data_annotation({ name: name }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.get_reporting_data_annotation name: name do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.get_reporting_data_annotation ::Google::Analytics::Admin::V1alpha::GetReportingDataAnnotationRequest.new(name: name) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.get_reporting_data_annotation({ name: name }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.get_reporting_data_annotation(::Google::Analytics::Admin::V1alpha::GetReportingDataAnnotationRequest.new(name: name), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, get_reporting_data_annotation_client_stub.call_rpc_count
+    end
+  end
+
+  def test_list_reporting_data_annotations
+    # Create GRPC objects.
+    grpc_response = ::Google::Analytics::Admin::V1alpha::ListReportingDataAnnotationsResponse.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    filter = "hello world"
+    page_size = 42
+    page_token = "hello world"
+
+    list_reporting_data_annotations_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :list_reporting_data_annotations, name
+      assert_kind_of ::Google::Analytics::Admin::V1alpha::ListReportingDataAnnotationsRequest, request
+      assert_equal "hello world", request["parent"]
+      assert_equal "hello world", request["filter"]
+      assert_equal 42, request["page_size"]
+      assert_equal "hello world", request["page_token"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, list_reporting_data_annotations_client_stub do
+      # Create client
+      client = ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.list_reporting_data_annotations({ parent: parent, filter: filter, page_size: page_size, page_token: page_token }) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.list_reporting_data_annotations parent: parent, filter: filter, page_size: page_size, page_token: page_token do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.list_reporting_data_annotations ::Google::Analytics::Admin::V1alpha::ListReportingDataAnnotationsRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.list_reporting_data_annotations({ parent: parent, filter: filter, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.list_reporting_data_annotations(::Google::Analytics::Admin::V1alpha::ListReportingDataAnnotationsRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, list_reporting_data_annotations_client_stub.call_rpc_count
+    end
+  end
+
+  def test_update_reporting_data_annotation
+    # Create GRPC objects.
+    grpc_response = ::Google::Analytics::Admin::V1alpha::ReportingDataAnnotation.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    reporting_data_annotation = {}
+    update_mask = {}
+
+    update_reporting_data_annotation_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :update_reporting_data_annotation, name
+      assert_kind_of ::Google::Analytics::Admin::V1alpha::UpdateReportingDataAnnotationRequest, request
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Analytics::Admin::V1alpha::ReportingDataAnnotation), request["reporting_data_annotation"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request["update_mask"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, update_reporting_data_annotation_client_stub do
+      # Create client
+      client = ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.update_reporting_data_annotation({ reporting_data_annotation: reporting_data_annotation, update_mask: update_mask }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.update_reporting_data_annotation reporting_data_annotation: reporting_data_annotation, update_mask: update_mask do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.update_reporting_data_annotation ::Google::Analytics::Admin::V1alpha::UpdateReportingDataAnnotationRequest.new(reporting_data_annotation: reporting_data_annotation, update_mask: update_mask) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.update_reporting_data_annotation({ reporting_data_annotation: reporting_data_annotation, update_mask: update_mask }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.update_reporting_data_annotation(::Google::Analytics::Admin::V1alpha::UpdateReportingDataAnnotationRequest.new(reporting_data_annotation: reporting_data_annotation, update_mask: update_mask), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, update_reporting_data_annotation_client_stub.call_rpc_count
+    end
+  end
+
+  def test_delete_reporting_data_annotation
+    # Create GRPC objects.
+    grpc_response = ::Google::Protobuf::Empty.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    delete_reporting_data_annotation_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :delete_reporting_data_annotation, name
+      assert_kind_of ::Google::Analytics::Admin::V1alpha::DeleteReportingDataAnnotationRequest, request
+      assert_equal "hello world", request["name"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, delete_reporting_data_annotation_client_stub do
+      # Create client
+      client = ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.delete_reporting_data_annotation({ name: name }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.delete_reporting_data_annotation name: name do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.delete_reporting_data_annotation ::Google::Analytics::Admin::V1alpha::DeleteReportingDataAnnotationRequest.new(name: name) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.delete_reporting_data_annotation({ name: name }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.delete_reporting_data_annotation(::Google::Analytics::Admin::V1alpha::DeleteReportingDataAnnotationRequest.new(name: name), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, delete_reporting_data_annotation_client_stub.call_rpc_count
+    end
+  end
+
+  def test_submit_user_deletion
+    # Create GRPC objects.
+    grpc_response = ::Google::Analytics::Admin::V1alpha::SubmitUserDeletionResponse.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    user_id = "hello world"
+    name = "hello world"
+
+    submit_user_deletion_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :submit_user_deletion, name
+      assert_kind_of ::Google::Analytics::Admin::V1alpha::SubmitUserDeletionRequest, request
+      assert_equal "hello world", request["user_id"]
+      assert_equal :user_id, request.user
+      assert_equal "hello world", request["name"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, submit_user_deletion_client_stub do
+      # Create client
+      client = ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.submit_user_deletion({ user_id: user_id, name: name }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.submit_user_deletion user_id: user_id, name: name do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.submit_user_deletion ::Google::Analytics::Admin::V1alpha::SubmitUserDeletionRequest.new(user_id: user_id, name: name) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.submit_user_deletion({ user_id: user_id, name: name }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.submit_user_deletion(::Google::Analytics::Admin::V1alpha::SubmitUserDeletionRequest.new(user_id: user_id, name: name), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, submit_user_deletion_client_stub.call_rpc_count
+    end
+  end
+
   def test_configure
     grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
 
