@@ -1707,7 +1707,7 @@ module Google
             # Google Compute Engine Public IPs and Google Prod IPs.
             # @!attribute [rw] enabled
             #   @return [::Boolean]
-            #     Whether or not master authorized networks feature is enabled.
+            #     Optional. Whether or not master authorized networks feature is enabled.
             # @!attribute [rw] cidr_blocks
             #   @return [::Array<::Google::Cloud::Orchestration::Airflow::Service::V1::MasterAuthorizedNetworksConfig::CidrBlock>]
             #     Up to 50 external networks that could access Kubernetes master through
