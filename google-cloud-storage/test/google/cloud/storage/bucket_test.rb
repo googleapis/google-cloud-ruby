@@ -1408,6 +1408,44 @@ describe Google::Cloud::Storage::Bucket, :mock_storage do
     end
   end
 
+   it "resstarts a resumable upload with upload_id" do
+    new_file_name = random_file_path
+    upload_id= "TEST_ID"
+
+    Tempfile.open ["google-cloud", ".txt"] do |tmpfile|
+      tmpfile.write "Hello world"
+      tmpfile.rewind
+
+      mock = Minitest::Mock.new
+      mock.expect :insert_object, create_file_gapi(bucket.name, new_file_name),
+        [bucket.name, empty_file_gapi], **insert_object_args(name: new_file_name, upload_source: tmpfile, options: {retries: 0, upload_id: upload_id})
+
+      bucket.service.mocked_service = mock
+      bucket.create_file tmpfile, new_file_name, upload_id: upload_id
+
+      mock.verify
+    end
+  end
+
+  it "deletes a resumable upload with upload_id" do
+    new_file_name = random_file_path
+    upload_id= "TEST_ID"
+
+    Tempfile.open ["google-cloud", ".txt"] do |tmpfile|
+      tmpfile.write "Hello world"
+      tmpfile.rewind
+
+      mock = Minitest::Mock.new
+      mock.expect :insert_object, create_file_gapi(bucket.name, new_file_name),
+        [bucket.name, empty_file_gapi], **insert_object_args(name: new_file_name, upload_source: tmpfile, options: {retries: 0, upload_id: upload_id, delete_upload: true})
+
+      bucket.service.mocked_service = mock
+      bucket.delete_ongoing_resumable_upload tmpfile, new_file_name, upload_id
+
+      mock.verify
+    end
+  end
+
   def create_file_gapi bucket=nil, name = nil
     Google::Apis::StorageV1::Object.from_json random_file_hash(bucket, name).to_json
   end
