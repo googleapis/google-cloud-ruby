@@ -103,6 +103,9 @@ authentication:
 | enable_param_version.rb             | `parameter_id`, `version_id`                 | Enables a global parameter version.                                                |
 | delete_param.rb                     | `parameter_id`                               | Deletes a global parameter.                                                        |
 | delete_param_version.rb             | `parameter_id`, `version_id`                 | Deletes a global parameter version.                                                |
+| create_param_with_kms_key.rb        | `parameter_id`, `kms_key`                    | Creates a global parameter with kms_key.                                           |
+| update_param_kms_key.rb             | `parameter_id`, `kms_key`                    | Updates a global parameter kms_key.                                           |
+| remove_param_kms_key.rb             | `parameter_id`                               | Removes a kms_key for global parameter.                                       |
 | quickstart.rb                       | `parameter_id`, `version_id`                 | Creates a global parameter, parameter version and retrieves the parameter version. |
 
 ### Run regional samples
@@ -125,4 +128,7 @@ authentication:
 | enable_regional_param_version.rb             | `parameter_id`, `version_id`                 | Enables a regional parameter version.                                                |
 | delete_regional_param.rb                     | `parameter_id`                               | Deletes a regional parameter.                                                        |
 | delete_regional_param_version.rb             | `parameter_id`, `version_id`                 | Deletes a regional parameter version.                                                |
+| create_regional_param_with_kms_key.rb        | `parameter_id`, `kms_key`                    | Creates a regional parameter with kms_key.                                           |
+| update_regional_param_kms_key.rb             | `parameter_id`, `kms_key`                    | Updates a regional parameter kms_key.                                           |
+| remove_regional_param_kms_key.rb             | `parameter_id`                               | Removes a kms_key for regional parameter.                                       |
 | regional_quickstart.rb                       | `parameter_id`, `version_id`                 | Creates a regional parameter, parameter version and retrieves the parameter version. |
