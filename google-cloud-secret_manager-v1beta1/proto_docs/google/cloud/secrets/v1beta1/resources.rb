@@ -21,22 +21,27 @@ module Google
   module Cloud
     module SecretManager
       module V1beta1
-        # A {::Google::Cloud::SecretManager::V1beta1::Secret Secret} is a logical secret whose value and versions can
-        # be accessed.
+        # A {::Google::Cloud::SecretManager::V1beta1::Secret Secret} is a logical secret whose
+        # value and versions can be accessed.
         #
-        # A {::Google::Cloud::SecretManager::V1beta1::Secret Secret} is made up of zero or more {::Google::Cloud::SecretManager::V1beta1::SecretVersion SecretVersions} that
-        # represent the secret data.
+        # A {::Google::Cloud::SecretManager::V1beta1::Secret Secret} is made up of zero or more
+        # {::Google::Cloud::SecretManager::V1beta1::SecretVersion SecretVersions} that represent
+        # the secret data.
         # @!attribute [r] name
         #   @return [::String]
-        #     Output only. The resource name of the {::Google::Cloud::SecretManager::V1beta1::Secret Secret} in the format `projects/*/secrets/*`.
+        #     Output only. The resource name of the
+        #     {::Google::Cloud::SecretManager::V1beta1::Secret Secret} in the format
+        #     `projects/*/secrets/*`.
         # @!attribute [rw] replication
         #   @return [::Google::Cloud::SecretManager::V1beta1::Replication]
-        #     Required. Immutable. The replication policy of the secret data attached to the {::Google::Cloud::SecretManager::V1beta1::Secret Secret}.
+        #     Required. Immutable. The replication policy of the secret data attached to
+        #     the {::Google::Cloud::SecretManager::V1beta1::Secret Secret}.
         #
         #     The replication policy cannot be changed after the Secret has been created.
         # @!attribute [r] create_time
         #   @return [::Google::Protobuf::Timestamp]
-        #     Output only. The time at which the {::Google::Cloud::SecretManager::V1beta1::Secret Secret} was created.
+        #     Output only. The time at which the
+        #     {::Google::Cloud::SecretManager::V1beta1::Secret Secret} was created.
         # @!attribute [rw] labels
         #   @return [::Google::Protobuf::Map{::String => ::String}]
         #     The labels assigned to this Secret.
@@ -67,41 +72,51 @@ module Google
         # A secret version resource in the Secret Manager API.
         # @!attribute [r] name
         #   @return [::String]
-        #     Output only. The resource name of the {::Google::Cloud::SecretManager::V1beta1::SecretVersion SecretVersion} in the
-        #     format `projects/*/secrets/*/versions/*`.
+        #     Output only. The resource name of the
+        #     {::Google::Cloud::SecretManager::V1beta1::SecretVersion SecretVersion} in the format
+        #     `projects/*/secrets/*/versions/*`.
         #
-        #     {::Google::Cloud::SecretManager::V1beta1::SecretVersion SecretVersion} IDs in a {::Google::Cloud::SecretManager::V1beta1::Secret Secret} start at 1 and
-        #     are incremented for each subsequent version of the secret.
+        #     {::Google::Cloud::SecretManager::V1beta1::SecretVersion SecretVersion} IDs in a
+        #     {::Google::Cloud::SecretManager::V1beta1::Secret Secret} start at 1 and are
+        #     incremented for each subsequent version of the secret.
         # @!attribute [r] create_time
         #   @return [::Google::Protobuf::Timestamp]
-        #     Output only. The time at which the {::Google::Cloud::SecretManager::V1beta1::SecretVersion SecretVersion} was created.
+        #     Output only. The time at which the
+        #     {::Google::Cloud::SecretManager::V1beta1::SecretVersion SecretVersion} was created.
         # @!attribute [r] destroy_time
         #   @return [::Google::Protobuf::Timestamp]
-        #     Output only. The time this {::Google::Cloud::SecretManager::V1beta1::SecretVersion SecretVersion} was destroyed.
-        #     Only present if {::Google::Cloud::SecretManager::V1beta1::SecretVersion#state state} is
-        #     {::Google::Cloud::SecretManager::V1beta1::SecretVersion::State::DESTROYED DESTROYED}.
+        #     Output only. The time this
+        #     {::Google::Cloud::SecretManager::V1beta1::SecretVersion SecretVersion} was destroyed.
+        #     Only present if {::Google::Cloud::SecretManager::V1beta1::SecretVersion#state state}
+        #     is {::Google::Cloud::SecretManager::V1beta1::SecretVersion::State::DESTROYED DESTROYED}.
         # @!attribute [r] state
         #   @return [::Google::Cloud::SecretManager::V1beta1::SecretVersion::State]
-        #     Output only. The current state of the {::Google::Cloud::SecretManager::V1beta1::SecretVersion SecretVersion}.
+        #     Output only. The current state of the
+        #     {::Google::Cloud::SecretManager::V1beta1::SecretVersion SecretVersion}.
         class SecretVersion
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
 
-          # The state of a {::Google::Cloud::SecretManager::V1beta1::SecretVersion SecretVersion}, indicating if it can be accessed.
+          # The state of a {::Google::Cloud::SecretManager::V1beta1::SecretVersion SecretVersion},
+          # indicating if it can be accessed.
           module State
             # Not specified. This value is unused and invalid.
             STATE_UNSPECIFIED = 0
 
-            # The {::Google::Cloud::SecretManager::V1beta1::SecretVersion SecretVersion} may be accessed.
+            # The {::Google::Cloud::SecretManager::V1beta1::SecretVersion SecretVersion} may be
+            # accessed.
             ENABLED = 1
 
-            # The {::Google::Cloud::SecretManager::V1beta1::SecretVersion SecretVersion} may not be accessed, but the secret data
-            # is still available and can be placed back into the {::Google::Cloud::SecretManager::V1beta1::SecretVersion::State::ENABLED ENABLED}
+            # The {::Google::Cloud::SecretManager::V1beta1::SecretVersion SecretVersion} may not
+            # be accessed, but the secret data is still available and can be placed
+            # back into the
+            # {::Google::Cloud::SecretManager::V1beta1::SecretVersion::State::ENABLED ENABLED}
             # state.
             DISABLED = 2
 
-            # The {::Google::Cloud::SecretManager::V1beta1::SecretVersion SecretVersion} is destroyed and the secret data is no longer
-            # stored. A version may not leave this state once entered.
+            # The {::Google::Cloud::SecretManager::V1beta1::SecretVersion SecretVersion} is
+            # destroyed and the secret data is no longer stored. A version may not
+            # leave this state once entered.
             DESTROYED = 3
           end
         end
@@ -109,37 +124,44 @@ module Google
         # A policy that defines the replication configuration of data.
         # @!attribute [rw] automatic
         #   @return [::Google::Cloud::SecretManager::V1beta1::Replication::Automatic]
-        #     The {::Google::Cloud::SecretManager::V1beta1::Secret Secret} will automatically be replicated without any restrictions.
+        #     The {::Google::Cloud::SecretManager::V1beta1::Secret Secret} will automatically be
+        #     replicated without any restrictions.
         #
         #     Note: The following fields are mutually exclusive: `automatic`, `user_managed`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] user_managed
         #   @return [::Google::Cloud::SecretManager::V1beta1::Replication::UserManaged]
-        #     The {::Google::Cloud::SecretManager::V1beta1::Secret Secret} will only be replicated into the locations specified.
+        #     The {::Google::Cloud::SecretManager::V1beta1::Secret Secret} will only be replicated
+        #     into the locations specified.
         #
         #     Note: The following fields are mutually exclusive: `user_managed`, `automatic`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         class Replication
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
 
-          # A replication policy that replicates the {::Google::Cloud::SecretManager::V1beta1::Secret Secret} payload without any
+          # A replication policy that replicates the
+          # {::Google::Cloud::SecretManager::V1beta1::Secret Secret} payload without any
           # restrictions.
           class Automatic
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
 
-          # A replication policy that replicates the {::Google::Cloud::SecretManager::V1beta1::Secret Secret} payload into the
-          # locations specified in [Secret.replication.user_managed.replicas][]
+          # A replication policy that replicates the
+          # {::Google::Cloud::SecretManager::V1beta1::Secret Secret} payload into the locations
+          # specified in
+          # {::Google::Cloud::SecretManager::V1beta1::Replication::UserManaged#replicas Replication.UserManaged.replicas}
           # @!attribute [rw] replicas
           #   @return [::Array<::Google::Cloud::SecretManager::V1beta1::Replication::UserManaged::Replica>]
-          #     Required. The list of Replicas for this {::Google::Cloud::SecretManager::V1beta1::Secret Secret}.
+          #     Required. The list of Replicas for this
+          #     {::Google::Cloud::SecretManager::V1beta1::Secret Secret}.
           #
           #     Cannot be empty.
           class UserManaged
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
 
-            # Represents a Replica for this {::Google::Cloud::SecretManager::V1beta1::Secret Secret}.
+            # Represents a Replica for this
+            # {::Google::Cloud::SecretManager::V1beta1::Secret Secret}.
             # @!attribute [rw] location
             #   @return [::String]
             #     The canonical IDs of the location to replicate data.
@@ -152,7 +174,8 @@ module Google
         end
 
         # A secret payload resource in the Secret Manager API. This contains the
-        # sensitive secret data that is associated with a {::Google::Cloud::SecretManager::V1beta1::SecretVersion SecretVersion}.
+        # sensitive secret data that is associated with a
+        # {::Google::Cloud::SecretManager::V1beta1::SecretVersion SecretVersion}.
         # @!attribute [rw] data
         #   @return [::String]
         #     The secret data. Must be no larger than 64KiB.

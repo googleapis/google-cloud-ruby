@@ -18,6 +18,7 @@
 
 require "google/cloud/errors"
 require "google/cloud/secrets/v1beta1/service_pb"
+require "google/cloud/location"
 
 module Google
   module Cloud
@@ -209,7 +210,22 @@ module Google
                 entry.set "defaultTimeout", @config.timeout if @config.timeout
                 entry.set "quotaProject", @quota_project_id if @quota_project_id
               end
+
+              @location_client = Google::Cloud::Location::Locations::Client.new do |config|
+                config.credentials = credentials
+                config.quota_project = @quota_project_id
+                config.endpoint = @secret_manager_service_stub.endpoint
+                config.universe_domain = @secret_manager_service_stub.universe_domain
+                config.logger = @secret_manager_service_stub.logger if config.respond_to? :logger=
+              end
             end
+
+            ##
+            # Get the associated client for mix-in of the Locations.
+            #
+            # @return [Google::Cloud::Location::Locations::Client]
+            #
+            attr_reader :location_client
 
             ##
             # The logger used for request/response debug logging.
@@ -322,7 +338,8 @@ module Google
             end
 
             ##
-            # Creates a new {::Google::Cloud::SecretManager::V1beta1::Secret Secret} containing no {::Google::Cloud::SecretManager::V1beta1::SecretVersion SecretVersions}.
+            # Creates a new {::Google::Cloud::SecretManager::V1beta1::Secret Secret} containing no
+            # {::Google::Cloud::SecretManager::V1beta1::SecretVersion SecretVersions}.
             #
             # @overload create_secret(request, options = nil)
             #   Pass arguments to `create_secret` via a request object, either of type
@@ -349,7 +366,8 @@ module Google
             #     contain uppercase and lowercase letters, numerals, and the hyphen (`-`) and
             #     underscore (`_`) characters.
             #   @param secret [::Google::Cloud::SecretManager::V1beta1::Secret, ::Hash]
-            #     Required. A {::Google::Cloud::SecretManager::V1beta1::Secret Secret} with initial field values.
+            #     Required. A {::Google::Cloud::SecretManager::V1beta1::Secret Secret} with initial
+            #     field values.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::SecretManager::V1beta1::Secret]
@@ -416,8 +434,9 @@ module Google
             end
 
             ##
-            # Creates a new {::Google::Cloud::SecretManager::V1beta1::SecretVersion SecretVersion} containing secret data and attaches
-            # it to an existing {::Google::Cloud::SecretManager::V1beta1::Secret Secret}.
+            # Creates a new {::Google::Cloud::SecretManager::V1beta1::SecretVersion SecretVersion}
+            # containing secret data and attaches it to an existing
+            # {::Google::Cloud::SecretManager::V1beta1::Secret Secret}.
             #
             # @overload add_secret_version(request, options = nil)
             #   Pass arguments to `add_secret_version` via a request object, either of type
@@ -435,10 +454,13 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param parent [::String]
-            #     Required. The resource name of the {::Google::Cloud::SecretManager::V1beta1::Secret Secret} to associate with the
-            #     {::Google::Cloud::SecretManager::V1beta1::SecretVersion SecretVersion} in the format `projects/*/secrets/*`.
+            #     Required. The resource name of the
+            #     {::Google::Cloud::SecretManager::V1beta1::Secret Secret} to associate with the
+            #     {::Google::Cloud::SecretManager::V1beta1::SecretVersion SecretVersion} in the format
+            #     `projects/*/secrets/*`.
             #   @param payload [::Google::Cloud::SecretManager::V1beta1::SecretPayload, ::Hash]
-            #     Required. The secret payload of the {::Google::Cloud::SecretManager::V1beta1::SecretVersion SecretVersion}.
+            #     Required. The secret payload of the
+            #     {::Google::Cloud::SecretManager::V1beta1::SecretVersion SecretVersion}.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::SecretManager::V1beta1::SecretVersion]
@@ -523,7 +545,9 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param name [::String]
-            #     Required. The resource name of the {::Google::Cloud::SecretManager::V1beta1::Secret Secret}, in the format `projects/*/secrets/*`.
+            #     Required. The resource name of the
+            #     {::Google::Cloud::SecretManager::V1beta1::Secret Secret}, in the format
+            #     `projects/*/secrets/*`.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::SecretManager::V1beta1::Secret]
@@ -590,7 +614,8 @@ module Google
             end
 
             ##
-            # Updates metadata of an existing {::Google::Cloud::SecretManager::V1beta1::Secret Secret}.
+            # Updates metadata of an existing
+            # {::Google::Cloud::SecretManager::V1beta1::Secret Secret}.
             #
             # @overload update_secret(request, options = nil)
             #   Pass arguments to `update_secret` via a request object, either of type
@@ -608,7 +633,8 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param secret [::Google::Cloud::SecretManager::V1beta1::Secret, ::Hash]
-            #     Required. {::Google::Cloud::SecretManager::V1beta1::Secret Secret} with updated field values.
+            #     Required. {::Google::Cloud::SecretManager::V1beta1::Secret Secret} with updated field
+            #     values.
             #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
             #     Required. Specifies the fields to be updated.
             #
@@ -695,7 +721,8 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param name [::String]
-            #     Required. The resource name of the {::Google::Cloud::SecretManager::V1beta1::Secret Secret} to delete in the format
+            #     Required. The resource name of the
+            #     {::Google::Cloud::SecretManager::V1beta1::Secret Secret} to delete in the format
             #     `projects/*/secrets/*`.
             #
             # @yield [response, operation] Access the result along with the RPC operation
@@ -763,8 +790,8 @@ module Google
             end
 
             ##
-            # Lists {::Google::Cloud::SecretManager::V1beta1::SecretVersion SecretVersions}. This call does not return secret
-            # data.
+            # Lists {::Google::Cloud::SecretManager::V1beta1::SecretVersion SecretVersions}. This
+            # call does not return secret data.
             #
             # @overload list_secret_versions(request, options = nil)
             #   Pass arguments to `list_secret_versions` via a request object, either of type
@@ -782,9 +809,10 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param parent [::String]
-            #     Required. The resource name of the {::Google::Cloud::SecretManager::V1beta1::Secret Secret} associated with the
-            #     {::Google::Cloud::SecretManager::V1beta1::SecretVersion SecretVersions} to list, in the format
-            #     `projects/*/secrets/*`.
+            #     Required. The resource name of the
+            #     {::Google::Cloud::SecretManager::V1beta1::Secret Secret} associated with the
+            #     {::Google::Cloud::SecretManager::V1beta1::SecretVersion SecretVersions} to list, in
+            #     the format `projects/*/secrets/*`.
             #   @param page_size [::Integer]
             #     Optional. The maximum number of results to be returned in a single page. If
             #     set to 0, the server decides the number of results to return. If the
@@ -864,7 +892,8 @@ module Google
             end
 
             ##
-            # Gets metadata for a {::Google::Cloud::SecretManager::V1beta1::SecretVersion SecretVersion}.
+            # Gets metadata for a
+            # {::Google::Cloud::SecretManager::V1beta1::SecretVersion SecretVersion}.
             #
             # `projects/*/secrets/*/versions/latest` is an alias to the `latest`
             # {::Google::Cloud::SecretManager::V1beta1::SecretVersion SecretVersion}.
@@ -885,7 +914,8 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param name [::String]
-            #     Required. The resource name of the {::Google::Cloud::SecretManager::V1beta1::SecretVersion SecretVersion} in the format
+            #     Required. The resource name of the
+            #     {::Google::Cloud::SecretManager::V1beta1::SecretVersion SecretVersion} in the format
             #     `projects/*/secrets/*/versions/*`.
             #     `projects/*/secrets/*/versions/latest` is an alias to the `latest`
             #     {::Google::Cloud::SecretManager::V1beta1::SecretVersion SecretVersion}.
@@ -955,7 +985,8 @@ module Google
             end
 
             ##
-            # Accesses a {::Google::Cloud::SecretManager::V1beta1::SecretVersion SecretVersion}. This call returns the secret data.
+            # Accesses a {::Google::Cloud::SecretManager::V1beta1::SecretVersion SecretVersion}.
+            # This call returns the secret data.
             #
             # `projects/*/secrets/*/versions/latest` is an alias to the `latest`
             # {::Google::Cloud::SecretManager::V1beta1::SecretVersion SecretVersion}.
@@ -976,7 +1007,8 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param name [::String]
-            #     Required. The resource name of the {::Google::Cloud::SecretManager::V1beta1::SecretVersion SecretVersion} in the format
+            #     Required. The resource name of the
+            #     {::Google::Cloud::SecretManager::V1beta1::SecretVersion SecretVersion} in the format
             #     `projects/*/secrets/*/versions/*`.
             #
             # @yield [response, operation] Access the result along with the RPC operation
@@ -1046,7 +1078,8 @@ module Google
             ##
             # Disables a {::Google::Cloud::SecretManager::V1beta1::SecretVersion SecretVersion}.
             #
-            # Sets the {::Google::Cloud::SecretManager::V1beta1::SecretVersion#state state} of the {::Google::Cloud::SecretManager::V1beta1::SecretVersion SecretVersion} to
+            # Sets the {::Google::Cloud::SecretManager::V1beta1::SecretVersion#state state} of the
+            # {::Google::Cloud::SecretManager::V1beta1::SecretVersion SecretVersion} to
             # {::Google::Cloud::SecretManager::V1beta1::SecretVersion::State::DISABLED DISABLED}.
             #
             # @overload disable_secret_version(request, options = nil)
@@ -1065,8 +1098,9 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param name [::String]
-            #     Required. The resource name of the {::Google::Cloud::SecretManager::V1beta1::SecretVersion SecretVersion} to disable in the format
-            #     `projects/*/secrets/*/versions/*`.
+            #     Required. The resource name of the
+            #     {::Google::Cloud::SecretManager::V1beta1::SecretVersion SecretVersion} to disable in
+            #     the format `projects/*/secrets/*/versions/*`.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::SecretManager::V1beta1::SecretVersion]
@@ -1135,7 +1169,8 @@ module Google
             ##
             # Enables a {::Google::Cloud::SecretManager::V1beta1::SecretVersion SecretVersion}.
             #
-            # Sets the {::Google::Cloud::SecretManager::V1beta1::SecretVersion#state state} of the {::Google::Cloud::SecretManager::V1beta1::SecretVersion SecretVersion} to
+            # Sets the {::Google::Cloud::SecretManager::V1beta1::SecretVersion#state state} of the
+            # {::Google::Cloud::SecretManager::V1beta1::SecretVersion SecretVersion} to
             # {::Google::Cloud::SecretManager::V1beta1::SecretVersion::State::ENABLED ENABLED}.
             #
             # @overload enable_secret_version(request, options = nil)
@@ -1154,8 +1189,9 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param name [::String]
-            #     Required. The resource name of the {::Google::Cloud::SecretManager::V1beta1::SecretVersion SecretVersion} to enable in the format
-            #     `projects/*/secrets/*/versions/*`.
+            #     Required. The resource name of the
+            #     {::Google::Cloud::SecretManager::V1beta1::SecretVersion SecretVersion} to enable in
+            #     the format `projects/*/secrets/*/versions/*`.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::SecretManager::V1beta1::SecretVersion]
@@ -1224,9 +1260,10 @@ module Google
             ##
             # Destroys a {::Google::Cloud::SecretManager::V1beta1::SecretVersion SecretVersion}.
             #
-            # Sets the {::Google::Cloud::SecretManager::V1beta1::SecretVersion#state state} of the {::Google::Cloud::SecretManager::V1beta1::SecretVersion SecretVersion} to
-            # {::Google::Cloud::SecretManager::V1beta1::SecretVersion::State::DESTROYED DESTROYED} and irrevocably destroys the
-            # secret data.
+            # Sets the {::Google::Cloud::SecretManager::V1beta1::SecretVersion#state state} of the
+            # {::Google::Cloud::SecretManager::V1beta1::SecretVersion SecretVersion} to
+            # {::Google::Cloud::SecretManager::V1beta1::SecretVersion::State::DESTROYED DESTROYED} and
+            # irrevocably destroys the secret data.
             #
             # @overload destroy_secret_version(request, options = nil)
             #   Pass arguments to `destroy_secret_version` via a request object, either of type
@@ -1244,8 +1281,9 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param name [::String]
-            #     Required. The resource name of the {::Google::Cloud::SecretManager::V1beta1::SecretVersion SecretVersion} to destroy in the format
-            #     `projects/*/secrets/*/versions/*`.
+            #     Required. The resource name of the
+            #     {::Google::Cloud::SecretManager::V1beta1::SecretVersion SecretVersion} to destroy in
+            #     the format `projects/*/secrets/*/versions/*`.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::SecretManager::V1beta1::SecretVersion]
@@ -1315,8 +1353,9 @@ module Google
             # Sets the access control policy on the specified secret. Replaces any
             # existing policy.
             #
-            # Permissions on {::Google::Cloud::SecretManager::V1beta1::SecretVersion SecretVersions} are enforced according
-            # to the policy set on the associated {::Google::Cloud::SecretManager::V1beta1::Secret Secret}.
+            # Permissions on {::Google::Cloud::SecretManager::V1beta1::SecretVersion SecretVersions}
+            # are enforced according to the policy set on the associated
+            # {::Google::Cloud::SecretManager::V1beta1::Secret Secret}.
             #
             # @overload set_iam_policy(request, options = nil)
             #   Pass arguments to `set_iam_policy` via a request object, either of type
