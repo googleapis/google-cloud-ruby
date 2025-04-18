@@ -52,7 +52,7 @@ module Google
         # @!attribute [r] daos_version
         #   @deprecated This field is deprecated and may be removed in the next major version update.
         #   @return [::String]
-        #     Deprecated 'daos_version' field.
+        #     Output only. Deprecated 'daos_version' field.
         #     Output only. The version of DAOS software running in the instance.
         # @!attribute [r] access_points
         #   @return [::Array<::String>]
@@ -612,10 +612,10 @@ module Google
         #     Bytes that are copied to the data destination.
         # @!attribute [rw] objects_failed
         #   @return [::Integer]
-        #     Objects that failed to write to the data destination.
+        #     Objects that are failed to write to the data destination.
         # @!attribute [rw] bytes_failed
         #   @return [::Integer]
-        #     Number of Bytes that failed to be written to the data destination.
+        #     Bytes that are failed to write to the data destination.
         class TransferCounters
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
