@@ -1,5 +1,11 @@
 # Changelog
 
+### 0.6.0 (2025-04-18)
+
+#### Features
+
+* add new AutonomousDatabase RPCs ([#29464](https://github.com/googleapis/google-cloud-ruby/issues/29464)) 
+
 ### 0.5.1 (2025-03-25)
 
 #### Documentation
