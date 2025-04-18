@@ -570,6 +570,10 @@ module Google
         # @!attribute [r] satisfies_pzi
         #   @return [::Boolean]
         #     Output only. If set, the repository satisfies physical zone isolation.
+        # @!attribute [r] registry_uri
+        #   @return [::String]
+        #     Output only. The repository endpoint, for example:
+        #     `us-docker.pkg.dev/my-proj/my-repo`.
         class Repository
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

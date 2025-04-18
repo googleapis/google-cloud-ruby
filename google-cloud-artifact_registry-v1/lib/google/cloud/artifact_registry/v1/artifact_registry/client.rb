@@ -2315,7 +2315,8 @@ module Google
             #     The name of the repository holding all requested versions.
             #   @param names [::Array<::String>]
             #     Required. The names of the versions to delete.
-            #     A maximum of 10000 versions can be deleted in a batch.
+            #     The maximum number of versions deleted per batch is determined by the
+            #     service and is dependent on the available resources in the region.
             #   @param validate_only [::Boolean]
             #     If true, the request is performed without deleting data, following AIP-163.
             #
