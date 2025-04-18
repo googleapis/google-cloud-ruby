@@ -1,5 +1,11 @@
 # Release History
 
+### 1.8.1 (2025-04-18)
+
+#### Documentation
+
+* The message_id metadata field for JavaScriptUDF is optional, not required ([#29434](https://github.com/googleapis/google-cloud-ruby/issues/29434)) 
+
 ### 1.8.0 (2025-03-11)
 
 #### Features
