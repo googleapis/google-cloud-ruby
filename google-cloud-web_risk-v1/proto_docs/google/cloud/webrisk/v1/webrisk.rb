@@ -303,7 +303,6 @@ module Google
 
         # Context about the submission including the type of abuse found on the URI and
         # supporting details.
-        # option (google.api.message_visibility).restriction = "TRUSTED_TESTER";
         # @!attribute [rw] abuse_type
         #   @return [::Google::Cloud::WebRisk::V1::ThreatInfo::AbuseType]
         #     The type of abuse.
@@ -457,7 +456,6 @@ module Google
         end
 
         # Metadata for the Submit URI long-running operation.
-        # option (google.api.message_visibility).restriction = "TRUSTED_TESTER";
         # @!attribute [rw] state
         #   @return [::Google::Cloud::WebRisk::V1::SubmitUriMetadata::State]
         #     The state of the operation.
