@@ -932,6 +932,27 @@ module Google
             end
           end
 
+          # Information regarding Automated Discounts.
+          # @!attribute [rw] prior_price
+          #   @return [::Google::Shopping::Type::Price]
+          #     The price prior to the application of the first price reduction.
+          #     Absent if the information about the prior price of the product is not
+          #     available.
+          # @!attribute [rw] prior_price_progressive
+          #   @return [::Google::Shopping::Type::Price]
+          #     The price prior to the application of consecutive price reductions.
+          #     Absent if the information about the prior price of the product is not
+          #     available.
+          # @!attribute [rw] gad_price
+          #   @return [::Google::Shopping::Type::Price]
+          #     The current sale price for products with a price optimized using Google
+          #     Automated Discounts (GAD). Absent if the information about the GAD_price of
+          #     the product is not available.
+          class AutomatedDiscounts
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
           # The subscription period of the product.
           module SubscriptionPeriod
             # Indicates that the subscription period is unspecified.
