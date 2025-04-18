@@ -101,6 +101,78 @@ module Google
         end
 
         ##
+        # Create a new client object for LfpMerchantStateService.
+        #
+        # By default, this returns an instance of
+        # [Google::Shopping::Merchant::Lfp::V1beta::LfpMerchantStateService::Client](https://rubydoc.info/gems/google-shopping-merchant-lfp-v1beta/Google/Shopping/Merchant/Lfp/V1beta/LfpMerchantStateService/Client)
+        # for a gRPC client for version V1beta of the API.
+        # However, you can specify a different API version by passing it in the
+        # `version` parameter. If the LfpMerchantStateService service is
+        # supported by that API version, and the corresponding gem is available, the
+        # appropriate versioned client will be returned.
+        # You can also specify a different transport by passing `:rest` or `:grpc` in
+        # the `transport` parameter.
+        #
+        # Raises an exception if the currently installed versioned client gem for the
+        # given API version does not support the given transport of the LfpMerchantStateService service.
+        # You can determine whether the method will succeed by calling
+        # {Google::Shopping::Merchant::Lfp.lfp_merchant_state_service_available?}.
+        #
+        # ## About LfpMerchantStateService
+        #
+        # Service for a [LFP
+        # partner](https://support.google.com/merchants/answer/7676652) to get the
+        # state of a merchant.
+        #
+        # @param version [::String, ::Symbol] The API version to connect to. Optional.
+        #   Defaults to `:v1beta`.
+        # @param transport [:grpc, :rest] The transport to use. Defaults to `:grpc`.
+        # @return [::Object] A client object for the specified version.
+        #
+        def self.lfp_merchant_state_service version: :v1beta, transport: :grpc, &block
+          require "google/shopping/merchant/lfp/#{version.to_s.downcase}"
+
+          package_name = Google::Shopping::Merchant::Lfp
+                         .constants
+                         .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                         .first
+          service_module = Google::Shopping::Merchant::Lfp.const_get(package_name).const_get(:LfpMerchantStateService)
+          service_module = service_module.const_get(:Rest) if transport == :rest
+          service_module.const_get(:Client).new(&block)
+        end
+
+        ##
+        # Determines whether the LfpMerchantStateService service is supported by the current client.
+        # If true, you can retrieve a client object by calling {Google::Shopping::Merchant::Lfp.lfp_merchant_state_service}.
+        # If false, that method will raise an exception. This could happen if the given
+        # API version does not exist or does not support the LfpMerchantStateService service,
+        # or if the versioned client gem needs an update to support the LfpMerchantStateService service.
+        #
+        # @param version [::String, ::Symbol] The API version to connect to. Optional.
+        #   Defaults to `:v1beta`.
+        # @param transport [:grpc, :rest] The transport to use. Defaults to `:grpc`.
+        # @return [boolean] Whether the service is available.
+        #
+        def self.lfp_merchant_state_service_available? version: :v1beta, transport: :grpc
+          require "google/shopping/merchant/lfp/#{version.to_s.downcase}"
+          package_name = Google::Shopping::Merchant::Lfp
+                         .constants
+                         .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                         .first
+          return false unless package_name
+          service_module = Google::Shopping::Merchant::Lfp.const_get package_name
+          return false unless service_module.const_defined? :LfpMerchantStateService
+          service_module = service_module.const_get :LfpMerchantStateService
+          if transport == :rest
+            return false unless service_module.const_defined? :Rest
+            service_module = service_module.const_get :Rest
+          end
+          service_module.const_defined? :Client
+        rescue ::LoadError
+          false
+        end
+
+        ##
         # Create a new client object for LfpSaleService.
         #
         # By default, this returns an instance of

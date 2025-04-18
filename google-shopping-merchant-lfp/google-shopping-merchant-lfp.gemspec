@@ -9,8 +9,8 @@ Gem::Specification.new do |gem|
 
   gem.authors       = ["Google LLC"]
   gem.email         = "googleapis-packages@google.com"
-  gem.description   = "Programmatically manage your Merchant Center accounts."
-  gem.summary       = "Programmatically manage your Merchant Center accounts."
+  gem.description   = "Merchant API consists of multiple Sub-APIs. Accounts Sub-API: Enables you to programmatically manage your accounts. Conversions Sub-API: Enables you to programmatically manage your conversion sources for a merchant account. Datasources Sub-API: Enables you to programmatically manage your datasources. Inventories Sub-API: This bundle enables you to programmatically manage your local and regional inventories. Local Feeds Partnerships Sub-API: This bundle enables LFP partners to submit local inventories for a merchant. Notifications Sub-API: This bundle enables you to programmatically manage your notification subscriptions. Products Sub-API: This bundle enables you to programmatically manage your products. Promotions Sub-API: This bundle enables you to programmatically manage your promotions for products. Quota Sub-API: This bundle enables you to list your quotas for all APIs you are using. Reports Sub-API: This bundle enables you to programmatically retrieve reports and insights about products, their performance and their competitive environment."
+  gem.summary       = "Programmatically manage your Merchant Center Accounts."
   gem.homepage      = "https://github.com/googleapis/google-cloud-ruby"
   gem.license       = "Apache-2.0"
 
