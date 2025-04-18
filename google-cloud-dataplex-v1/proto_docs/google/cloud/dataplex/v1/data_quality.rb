@@ -69,6 +69,8 @@ module Google
             #     Optional. The BigQuery table to export DataQualityScan results to.
             #     Format:
             #     //bigquery.googleapis.com/projects/PROJECT_ID/datasets/DATASET_ID/tables/TABLE_ID
+            #     or
+            #     projects/PROJECT_ID/datasets/DATASET_ID/tables/TABLE_ID
             class BigQueryExport
               include ::Google::Protobuf::MessageExts
               extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -130,17 +132,17 @@ module Google
         end
 
         # The output of a DataQualityScan.
-        # @!attribute [rw] passed
+        # @!attribute [r] passed
         #   @return [::Boolean]
-        #     Overall data quality result -- `true` if all rules passed.
+        #     Output only. Overall data quality result -- `true` if all rules passed.
         # @!attribute [r] score
         #   @return [::Float]
         #     Output only. The overall data quality score.
         #
         #     The score ranges between [0, 100] (up to two decimal points).
-        # @!attribute [rw] dimensions
+        # @!attribute [r] dimensions
         #   @return [::Array<::Google::Cloud::Dataplex::V1::DataQualityDimensionResult>]
-        #     A list of results at the dimension level.
+        #     Output only. A list of results at the dimension level.
         #
         #     A dimension will have a corresponding `DataQualityDimensionResult` if and
         #     only if there is at least one rule with the 'dimension' field set to it.
@@ -150,15 +152,15 @@ module Google
         #
         #     A column will have a corresponding `DataQualityColumnResult` if and only if
         #     there is at least one rule with the 'column' field set to it.
-        # @!attribute [rw] rules
+        # @!attribute [r] rules
         #   @return [::Array<::Google::Cloud::Dataplex::V1::DataQualityRuleResult>]
-        #     A list of all the rules in a job, and their results.
-        # @!attribute [rw] row_count
+        #     Output only. A list of all the rules in a job, and their results.
+        # @!attribute [r] row_count
         #   @return [::Integer]
-        #     The count of rows processed.
-        # @!attribute [rw] scanned_data
+        #     Output only. The count of rows processed.
+        # @!attribute [r] scanned_data
         #   @return [::Google::Cloud::Dataplex::V1::ScannedData]
-        #     The data scanned for this result.
+        #     Output only. The data scanned for this result.
         # @!attribute [r] post_scan_actions_result
         #   @return [::Google::Cloud::Dataplex::V1::DataQualityResult::PostScanActionsResult]
         #     Output only. The result of post scan actions.
@@ -205,15 +207,15 @@ module Google
         end
 
         # DataQualityRuleResult provides a more detailed, per-rule view of the results.
-        # @!attribute [rw] rule
+        # @!attribute [r] rule
         #   @return [::Google::Cloud::Dataplex::V1::DataQualityRule]
-        #     The rule specified in the DataQualitySpec, as is.
-        # @!attribute [rw] passed
+        #     Output only. The rule specified in the DataQualitySpec, as is.
+        # @!attribute [r] passed
         #   @return [::Boolean]
-        #     Whether the rule passed or failed.
-        # @!attribute [rw] evaluated_count
+        #     Output only. Whether the rule passed or failed.
+        # @!attribute [r] evaluated_count
         #   @return [::Integer]
-        #     The number of rows a rule was evaluated against.
+        #     Output only. The number of rows a rule was evaluated against.
         #
         #     This field is only valid for row-level type rules.
         #
@@ -225,20 +227,24 @@ module Google
         #     `ignore_nulls = true`.
         #
         #     This field is not set for rule SqlAssertion.
-        # @!attribute [rw] passed_count
+        # @!attribute [r] passed_count
         #   @return [::Integer]
-        #     This field is not set for rule SqlAssertion.
-        # @!attribute [rw] null_count
-        #   @return [::Integer]
-        #     The number of rows with null values in the specified column.
-        # @!attribute [rw] pass_ratio
-        #   @return [::Float]
-        #     The ratio of **passed_count / evaluated_count**.
+        #     Output only. The number of rows which passed a rule evaluation.
         #
         #     This field is only valid for row-level type rules.
-        # @!attribute [rw] failing_rows_query
+        #
+        #     This field is not set for rule SqlAssertion.
+        # @!attribute [r] null_count
+        #   @return [::Integer]
+        #     Output only. The number of rows with null values in the specified column.
+        # @!attribute [r] pass_ratio
+        #   @return [::Float]
+        #     Output only. The ratio of **passed_count / evaluated_count**.
+        #
+        #     This field is only valid for row-level type rules.
+        # @!attribute [r] failing_rows_query
         #   @return [::String]
-        #     The query to find rows that did not pass this rule.
+        #     Output only. The query to find rows that did not pass this rule.
         #
         #     This field is only valid for row-level type rules.
         # @!attribute [r] assertion_row_count
@@ -257,9 +263,9 @@ module Google
         # @!attribute [r] dimension
         #   @return [::Google::Cloud::Dataplex::V1::DataQualityDimension]
         #     Output only. The dimension config specified in the DataQualitySpec, as is.
-        # @!attribute [rw] passed
+        # @!attribute [r] passed
         #   @return [::Boolean]
-        #     Whether the dimension passed or failed.
+        #     Output only. Whether the dimension passed or failed.
         # @!attribute [r] score
         #   @return [::Float]
         #     Output only. The dimension-level data quality score for this data scan job
@@ -276,9 +282,8 @@ module Google
         # specified.
         # @!attribute [rw] name
         #   @return [::String]
-        #     The dimension name a rule belongs to. Supported dimensions are
-        #     ["COMPLETENESS", "ACCURACY", "CONSISTENCY", "VALIDITY", "UNIQUENESS",
-        #     "FRESHNESS", "VOLUME"]
+        #     Optional. The dimension name a rule belongs to. Custom dimension name is
+        #     supported with all uppercase letters and maximum length of 30 characters.
         class DataQualityDimension
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

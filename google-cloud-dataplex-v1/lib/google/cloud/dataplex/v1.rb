@@ -18,6 +18,7 @@
 
 require "google/cloud/dataplex/v1/dataplex_service"
 require "google/cloud/dataplex/v1/catalog_service"
+require "google/cloud/dataplex/v1/cmek_service"
 require "google/cloud/dataplex/v1/content_service"
 require "google/cloud/dataplex/v1/data_taxonomy_service"
 require "google/cloud/dataplex/v1/data_scan_service"
