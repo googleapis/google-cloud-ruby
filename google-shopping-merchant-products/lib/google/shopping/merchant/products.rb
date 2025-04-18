@@ -120,7 +120,6 @@ module Google
         # ## About ProductsService
         #
         # Service to use Product resource.
-        # This service works for products with online channel only.
         #
         # @param version [::String, ::Symbol] The API version to connect to. Optional.
         #   Defaults to `:v1beta`.
