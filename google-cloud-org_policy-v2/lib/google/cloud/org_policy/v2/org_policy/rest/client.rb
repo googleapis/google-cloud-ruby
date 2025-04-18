@@ -1056,10 +1056,10 @@ module Google
               end
 
               ##
-              # Gets a custom constraint.
+              # Gets a custom or managed constraint.
               #
               # Returns a `google.rpc.Status` with `google.rpc.Code.NOT_FOUND` if the
-              # custom constraint does not exist.
+              # custom or managed constraint does not exist.
               #
               # @overload get_custom_constraint(request, options = nil)
               #   Pass arguments to `get_custom_constraint` via a request object, either of type
@@ -1077,8 +1077,8 @@ module Google
               #   the default parameter values, pass an empty Hash as a request object (see above).
               #
               #   @param name [::String]
-              #     Required. Resource name of the custom constraint. See the custom constraint
-              #     entry for naming requirements.
+              #     Required. Resource name of the custom or managed constraint. See the custom
+              #     constraint entry for naming requirements.
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Google::Cloud::OrgPolicy::V2::CustomConstraint]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]

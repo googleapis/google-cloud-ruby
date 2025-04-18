@@ -106,10 +106,10 @@ module Google
             # Note: the supplied policy will perform a full overwrite of all
             # fields.
             rpc :UpdateCustomConstraint, ::Google::Cloud::OrgPolicy::V2::UpdateCustomConstraintRequest, ::Google::Cloud::OrgPolicy::V2::CustomConstraint
-            # Gets a custom constraint.
+            # Gets a custom or managed constraint.
             #
             # Returns a `google.rpc.Status` with `google.rpc.Code.NOT_FOUND` if the
-            # custom constraint does not exist.
+            # custom or managed constraint does not exist.
             rpc :GetCustomConstraint, ::Google::Cloud::OrgPolicy::V2::GetCustomConstraintRequest, ::Google::Cloud::OrgPolicy::V2::CustomConstraint
             # Retrieves all of the custom constraints that exist on a particular
             # organization resource.
