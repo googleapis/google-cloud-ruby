@@ -18,6 +18,7 @@
 
 require "google/cloud/errors"
 require "google/cloud/workflows/v1beta/workflows_pb"
+require "google/cloud/location"
 
 module Google
   module Cloud
@@ -179,6 +180,14 @@ module Google
                 entry.set "defaultTimeout", @config.timeout if @config.timeout
                 entry.set "quotaProject", @quota_project_id if @quota_project_id
               end
+
+              @location_client = Google::Cloud::Location::Locations::Client.new do |config|
+                config.credentials = credentials
+                config.quota_project = @quota_project_id
+                config.endpoint = @workflows_stub.endpoint
+                config.universe_domain = @workflows_stub.universe_domain
+                config.logger = @workflows_stub.logger if config.respond_to? :logger=
+              end
             end
 
             ##
@@ -187,6 +196,13 @@ module Google
             # @return [::Google::Cloud::Workflows::V1beta::Workflows::Operations]
             #
             attr_reader :operations_client
+
+            ##
+            # Get the associated client for mix-in of the Locations.
+            #
+            # @return [Google::Cloud::Location::Locations::Client]
+            #
+            attr_reader :location_client
 
             ##
             # The logger used for request/response debug logging.
