@@ -1,5 +1,11 @@
 # Release History
 
+### 1.8.0 (2025-04-18)
+
+#### Features
+
+* Support for speaking rate and custom pronunciations ([#29436](https://github.com/googleapis/google-cloud-ruby/issues/29436)) 
+
 ### 1.7.0 (2025-01-28)
 
 #### Features
