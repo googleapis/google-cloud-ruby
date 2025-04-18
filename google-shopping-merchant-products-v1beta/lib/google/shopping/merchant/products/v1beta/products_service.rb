@@ -34,7 +34,6 @@ module Google
         module V1beta
           ##
           # Service to use Product resource.
-          # This service works for products with online channel only.
           #
           # @example Load this service and instantiate a gRPC client
           #
