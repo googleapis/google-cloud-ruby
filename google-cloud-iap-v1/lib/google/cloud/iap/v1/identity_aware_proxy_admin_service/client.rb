@@ -654,6 +654,95 @@ module Google
             end
 
             ##
+            # Validates that a given CEL expression conforms to IAP restrictions.
+            #
+            # @overload validate_iap_attribute_expression(request, options = nil)
+            #   Pass arguments to `validate_iap_attribute_expression` via a request object, either of type
+            #   {::Google::Cloud::Iap::V1::ValidateIapAttributeExpressionRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::Iap::V1::ValidateIapAttributeExpressionRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload validate_iap_attribute_expression(name: nil, expression: nil)
+            #   Pass arguments to `validate_iap_attribute_expression` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param name [::String]
+            #     Required. The resource name of the IAP protected resource.
+            #   @param expression [::String]
+            #     Required. User input string expression. Should be of the form
+            #     `attributes.saml_attributes.filter(attribute, attribute.name in
+            #     ['\\{attribute_name}', '\\{attribute_name}'])`
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Google::Cloud::Iap::V1::ValidateIapAttributeExpressionResponse]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Google::Cloud::Iap::V1::ValidateIapAttributeExpressionResponse]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/iap/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Iap::V1::IdentityAwareProxyAdminService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Iap::V1::ValidateIapAttributeExpressionRequest.new
+            #
+            #   # Call the validate_iap_attribute_expression method.
+            #   result = client.validate_iap_attribute_expression request
+            #
+            #   # The returned object is of type Google::Cloud::Iap::V1::ValidateIapAttributeExpressionResponse.
+            #   p result
+            #
+            def validate_iap_attribute_expression request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Iap::V1::ValidateIapAttributeExpressionRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.validate_iap_attribute_expression.metadata.to_h
+
+              # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::Iap::V1::VERSION
+              metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.validate_iap_attribute_expression.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.validate_iap_attribute_expression.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @identity_aware_proxy_admin_service_stub.call_rpc :validate_iap_attribute_expression, request, options: options do |response, operation|
+                yield response, operation if block_given?
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
             # Lists the existing TunnelDestGroups. To group across all locations, use a
             # `-` as the location ID. For example:
             # `/v1/projects/123/iap_tunnel/locations/-/destGroups`
@@ -1311,6 +1400,11 @@ module Google
                 #
                 attr_reader :update_iap_settings
                 ##
+                # RPC-specific configuration for `validate_iap_attribute_expression`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :validate_iap_attribute_expression
+                ##
                 # RPC-specific configuration for `list_tunnel_dest_groups`
                 # @return [::Gapic::Config::Method]
                 #
@@ -1348,6 +1442,8 @@ module Google
                   @get_iap_settings = ::Gapic::Config::Method.new get_iap_settings_config
                   update_iap_settings_config = parent_rpcs.update_iap_settings if parent_rpcs.respond_to? :update_iap_settings
                   @update_iap_settings = ::Gapic::Config::Method.new update_iap_settings_config
+                  validate_iap_attribute_expression_config = parent_rpcs.validate_iap_attribute_expression if parent_rpcs.respond_to? :validate_iap_attribute_expression
+                  @validate_iap_attribute_expression = ::Gapic::Config::Method.new validate_iap_attribute_expression_config
                   list_tunnel_dest_groups_config = parent_rpcs.list_tunnel_dest_groups if parent_rpcs.respond_to? :list_tunnel_dest_groups
                   @list_tunnel_dest_groups = ::Gapic::Config::Method.new list_tunnel_dest_groups_config
                   create_tunnel_dest_group_config = parent_rpcs.create_tunnel_dest_group if parent_rpcs.respond_to? :create_tunnel_dest_group

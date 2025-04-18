@@ -57,6 +57,7 @@
     "snippets/identity_aware_proxy_admin_service/test_iam_permissions.rb",
     "snippets/identity_aware_proxy_admin_service/update_iap_settings.rb",
     "snippets/identity_aware_proxy_admin_service/update_tunnel_dest_group.rb",
+    "snippets/identity_aware_proxy_admin_service/validate_iap_attribute_expression.rb",
     "snippets/identity_aware_proxy_o_auth_service/create_brand.rb",
     "snippets/identity_aware_proxy_o_auth_service/create_identity_aware_proxy_client.rb",
     "snippets/identity_aware_proxy_o_auth_service/delete_identity_aware_proxy_client.rb",
