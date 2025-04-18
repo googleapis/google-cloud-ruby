@@ -50,7 +50,9 @@ module Google
         #     Allowed values are between 12000 and 100000, in multiples of 4000; e.g.,
         #     12000, 16000, 20000, ...
         # @!attribute [r] daos_version
+        #   @deprecated This field is deprecated and may be removed in the next major version update.
         #   @return [::String]
+        #     Output only. Deprecated 'daos_version' field.
         #     Output only. The version of DAOS software running in the instance.
         # @!attribute [r] access_points
         #   @return [::Array<::String>]
@@ -73,7 +75,7 @@ module Google
         #     the value currently used by the service.
         # @!attribute [rw] file_stripe_level
         #   @return [::Google::Cloud::Parallelstore::V1beta::FileStripeLevel]
-        #     Optional. Stripe level for files. Allowed values are:
+        #     Optional. Immutable. Stripe level for files. Allowed values are:
         #
         #     * `FILE_STRIPE_LEVEL_MIN`: offers the best performance for small size
         #       files.
@@ -82,7 +84,7 @@ module Google
         #     * `FILE_STRIPE_LEVEL_MAX`: higher throughput performance for larger files.
         # @!attribute [rw] directory_stripe_level
         #   @return [::Google::Cloud::Parallelstore::V1beta::DirectoryStripeLevel]
-        #     Optional. Stripe level for directories. Allowed values are:
+        #     Optional. Immutable. Stripe level for directories. Allowed values are:
         #
         #     * `DIRECTORY_STRIPE_LEVEL_MIN`: recommended when directories contain a
         #       small number of files.
@@ -92,7 +94,8 @@ module Google
         #       number of files.
         # @!attribute [rw] deployment_type
         #   @return [::Google::Cloud::Parallelstore::V1beta::DeploymentType]
-        #     Optional. The deployment type of the instance. Allowed values are:
+        #     Optional. Immutable. The deployment type of the instance. Allowed values
+        #     are:
         #
         #     * `SCRATCH`: the instance is a scratch instance.
         #     * `PERSISTENT`: the instance is a persistent instance.
@@ -128,6 +131,61 @@ module Google
 
             # The instance is being upgraded.
             UPGRADING = 5
+
+            # The instance is being repaired. This should only be used by instances
+            # using the `PERSISTENT` deployment type.
+            REPAIRING = 6
+          end
+        end
+
+        # Transfer metadata options for the instance.
+        # @!attribute [rw] uid
+        #   @return [::Google::Cloud::Parallelstore::V1beta::TransferMetadataOptions::Uid]
+        #     Optional. The UID preservation behavior.
+        # @!attribute [rw] gid
+        #   @return [::Google::Cloud::Parallelstore::V1beta::TransferMetadataOptions::Gid]
+        #     Optional. The GID preservation behavior.
+        # @!attribute [rw] mode
+        #   @return [::Google::Cloud::Parallelstore::V1beta::TransferMetadataOptions::Mode]
+        #     Optional. The mode preservation behavior.
+        class TransferMetadataOptions
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # The UID perservation behavior.
+          module Uid
+            # default is UID_NUMBER_PRESERVE.
+            UID_UNSPECIFIED = 0
+
+            # Do not preserve UID during a transfer job.
+            UID_SKIP = 1
+
+            # Preserve UID that is in number format during a transfer job.
+            UID_NUMBER_PRESERVE = 2
+          end
+
+          # The GID preservation behavior.
+          module Gid
+            # default is GID_NUMBER_PRESERVE.
+            GID_UNSPECIFIED = 0
+
+            # Do not preserve GID during a transfer job.
+            GID_SKIP = 1
+
+            # Preserve GID that is in number format during a transfer job.
+            GID_NUMBER_PRESERVE = 2
+          end
+
+          # The mode preservation behavior.
+          module Mode
+            # default is MODE_PRESERVE.
+            MODE_UNSPECIFIED = 0
+
+            # Do not preserve mode during a transfer job.
+            MODE_SKIP = 1
+
+            # Preserve mode during a transfer job.
+            MODE_PRESERVE = 2
           end
         end
 
@@ -386,6 +444,9 @@ module Google
         #
         #     If unspecified, the Parallelstore service agent is used:
         #     `service-<PROJECT_NUMBER>@gcp-sa-parallelstore.iam.gserviceaccount.com`
+        # @!attribute [rw] metadata_options
+        #   @return [::Google::Cloud::Parallelstore::V1beta::TransferMetadataOptions]
+        #     Optional. The transfer metadata options for the import data.
         class ImportDataRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -428,6 +489,9 @@ module Google
         #
         #     If unspecified, the Parallelstore service agent is used:
         #     `service-<PROJECT_NUMBER>@gcp-sa-parallelstore.iam.gserviceaccount.com`
+        # @!attribute [rw] metadata_options
+        #   @return [::Google::Cloud::Parallelstore::V1beta::TransferMetadataOptions]
+        #     Optional. The metadata options for the export data.
         class ExportDataRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -435,6 +499,35 @@ module Google
 
         # The response to a request to import data to Parallelstore.
         class ImportDataResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # An entry describing an error that has occurred.
+        # @!attribute [rw] uri
+        #   @return [::String]
+        #     A URL that refers to the target (a data source, a data sink,
+        #     or an object) with which the error is associated.
+        # @!attribute [rw] error_details
+        #   @return [::Array<::String>]
+        #     A list of messages that carry the error details.
+        class TransferErrorLogEntry
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # A summary of errors by error code, plus a count and sample error log
+        # entries.
+        # @!attribute [rw] error_code
+        #   @return [::Google::Rpc::Code]
+        #     One of the error codes that caused the transfer failure.
+        # @!attribute [rw] error_count
+        #   @return [::Integer]
+        #     Count of this type of error.
+        # @!attribute [rw] error_log_entries
+        #   @return [::Array<::Google::Cloud::Parallelstore::V1beta::TransferErrorLogEntry>]
+        #     A list of messages that carry the error details.
+        class TransferErrorSummary
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
@@ -540,6 +633,10 @@ module Google
         # @!attribute [r] transfer_type
         #   @return [::Google::Cloud::Parallelstore::V1beta::TransferType]
         #     Output only. The type of transfer occurring.
+        # @!attribute [r] error_summary
+        #   @return [::Array<::Google::Cloud::Parallelstore::V1beta::TransferErrorSummary>]
+        #     Output only. List of files that failed to be transferred. This list will
+        #     have a maximum size of 5 elements.
         class TransferOperationMetadata
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -570,6 +667,12 @@ module Google
         # @!attribute [rw] bytes_copied
         #   @return [::Integer]
         #     Bytes that are copied to the data destination.
+        # @!attribute [rw] objects_failed
+        #   @return [::Integer]
+        #     Objects that are failed to write to the data destination.
+        # @!attribute [rw] bytes_failed
+        #   @return [::Integer]
+        #     Bytes that are failed to write to the data destination.
         class TransferCounters
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
