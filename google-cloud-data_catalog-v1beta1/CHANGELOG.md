@@ -1,5 +1,12 @@
 # Changelog
 
+### 0.8.2 (2025-04-18)
+
+#### Documentation
+
+* clarify sql variant in comment for v1beta1.LookupEntryRequest.sql_resource 
+* fix a typo ([#29462](https://github.com/googleapis/google-cloud-ruby/issues/29462)) 
+
 ### 0.8.1 (2025-03-13)
 
 #### Documentation
