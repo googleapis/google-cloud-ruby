@@ -124,4 +124,25 @@ class Google::Shopping::Css::ClientConstructionMinitest < Minitest::Test
       assert_kind_of Google::Shopping::Css::V1::CssProductsService::Rest::Client, client
     end
   end
+
+  def test_quota_service_grpc
+    skip unless Google::Shopping::Css.quota_service_available? transport: :grpc
+    Gapic::ServiceStub.stub :new, DummyStub.new do
+      grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+      client = Google::Shopping::Css.quota_service transport: :grpc do |config|
+        config.credentials = grpc_channel
+      end
+      assert_kind_of Google::Shopping::Css::V1::QuotaService::Client, client
+    end
+  end
+
+  def test_quota_service_rest
+    skip unless Google::Shopping::Css.quota_service_available? transport: :rest
+    Gapic::Rest::ClientStub.stub :new, DummyStub.new do
+      client = Google::Shopping::Css.quota_service transport: :rest do |config|
+        config.credentials = :dummy_credentials
+      end
+      assert_kind_of Google::Shopping::Css::V1::QuotaService::Rest::Client, client
+    end
+  end
 end
