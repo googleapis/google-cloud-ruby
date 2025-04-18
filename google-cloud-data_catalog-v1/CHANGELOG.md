@@ -1,5 +1,11 @@
 # Release History
 
+### 2.1.1 (2025-04-18)
+
+#### Documentation
+
+* clarify sql variant in comment for LookupEntryRequest ([#29454](https://github.com/googleapis/google-cloud-ruby/issues/29454)) 
+
 ### 2.1.0 (2025-03-14)
 
 #### Features
