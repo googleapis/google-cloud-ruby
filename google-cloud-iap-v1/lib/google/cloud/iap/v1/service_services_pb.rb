@@ -55,6 +55,8 @@ module Google
             # Updates the IAP settings on a particular IAP protected resource. It
             # replaces all fields unless the `update_mask` is set.
             rpc :UpdateIapSettings, ::Google::Cloud::Iap::V1::UpdateIapSettingsRequest, ::Google::Cloud::Iap::V1::IapSettings
+            # Validates that a given CEL expression conforms to IAP restrictions.
+            rpc :ValidateIapAttributeExpression, ::Google::Cloud::Iap::V1::ValidateIapAttributeExpressionRequest, ::Google::Cloud::Iap::V1::ValidateIapAttributeExpressionResponse
             # Lists the existing TunnelDestGroups. To group across all locations, use a
             # `-` as the location ID. For example:
             # `/v1/projects/123/iap_tunnel/locations/-/destGroups`
