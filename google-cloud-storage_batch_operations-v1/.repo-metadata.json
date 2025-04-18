@@ -8,7 +8,7 @@
     "name": "storagebatchoperations",
     "name_pretty": "Storage Batch Operations V1 API",
     "product_documentation": "https://cloud.google.com/storage/docs/batch-operations/overview",
-    "release_level": "unreleased",
+    "release_level": "preview",
     "repo": "googleapis/google-cloud-ruby",
     "requires_billing": true,
     "ruby-cloud-description": "google-cloud-storage_batch_operations-v1 is the official client library for the Storage Batch Operations V1 API. Note that google-cloud-storage_batch_operations-v1 is a version-specific client library. For most uses, we recommend installing the main client library google-cloud-storage_batch_operations instead. See the readme for more details.",
