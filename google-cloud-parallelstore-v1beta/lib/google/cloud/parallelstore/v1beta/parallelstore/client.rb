@@ -771,7 +771,7 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload import_data(source_gcs_bucket: nil, destination_parallelstore: nil, name: nil, request_id: nil, service_account: nil)
+            # @overload import_data(source_gcs_bucket: nil, destination_parallelstore: nil, name: nil, request_id: nil, service_account: nil, metadata_options: nil)
             #   Pass arguments to `import_data` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -808,6 +808,8 @@ module Google
             #
             #     If unspecified, the Parallelstore service agent is used:
             #     `service-<PROJECT_NUMBER>@gcp-sa-parallelstore.iam.gserviceaccount.com`
+            #   @param metadata_options [::Google::Cloud::Parallelstore::V1beta::TransferMetadataOptions, ::Hash]
+            #     Optional. The transfer metadata options for the import data.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Gapic::Operation]
@@ -895,7 +897,7 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload export_data(source_parallelstore: nil, destination_gcs_bucket: nil, name: nil, request_id: nil, service_account: nil)
+            # @overload export_data(source_parallelstore: nil, destination_gcs_bucket: nil, name: nil, request_id: nil, service_account: nil, metadata_options: nil)
             #   Pass arguments to `export_data` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -931,6 +933,8 @@ module Google
             #
             #     If unspecified, the Parallelstore service agent is used:
             #     `service-<PROJECT_NUMBER>@gcp-sa-parallelstore.iam.gserviceaccount.com`
+            #   @param metadata_options [::Google::Cloud::Parallelstore::V1beta::TransferMetadataOptions, ::Hash]
+            #     Optional. The metadata options for the export data.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Gapic::Operation]
