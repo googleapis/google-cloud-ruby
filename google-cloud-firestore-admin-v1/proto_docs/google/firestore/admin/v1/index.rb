@@ -58,6 +58,22 @@ module Google
           # @!attribute [rw] state
           #   @return [::Google::Cloud::Firestore::Admin::V1::Index::State]
           #     Output only. The serving state of the index.
+          # @!attribute [rw] density
+          #   @return [::Google::Cloud::Firestore::Admin::V1::Index::Density]
+          #     Immutable. The density configuration of the index.
+          # @!attribute [rw] multikey
+          #   @return [::Boolean]
+          #     Optional. Whether the index is multikey. By default, the index is not
+          #     multikey. For non-multikey indexes, none of the paths in the index
+          #     definition reach or traverse an array, except via an explicit array index.
+          #     For multikey indexes, at most one of the paths in the index definition
+          #     reach or traverse an array, except via an explicit array index. Violations
+          #     will result in errors.
+          #
+          #     Note this field only applies to index with MONGODB_COMPATIBLE_API ApiScope.
+          # @!attribute [rw] shard_count
+          #   @return [::Integer]
+          #     Optional. The number of shards for the index.
           class Index
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -165,6 +181,9 @@ module Google
 
               # The index can only be used by the Firestore in Datastore Mode query API.
               DATASTORE_MODE_API = 1
+
+              # The index can only be used by the MONGODB_COMPATIBLE_API.
+              MONGODB_COMPATIBLE_API = 2
             end
 
             # The state of an index. During index creation, an index will be in the
@@ -195,6 +214,32 @@ module Google
               # that last attempted to create this index failed, then re-create the
               # index.
               NEEDS_REPAIR = 3
+            end
+
+            # The density configuration for the index.
+            module Density
+              # Unspecified. It will use database default setting. This value is input
+              # only.
+              DENSITY_UNSPECIFIED = 0
+
+              # In order for an index entry to be added, the document must
+              # contain all fields specified in the index.
+              #
+              # This is the only allowed value for indexes having ApiScope `ANY_API` and
+              # `DATASTORE_MODE_API`.
+              SPARSE_ALL = 1
+
+              # In order for an index entry to be added, the document must
+              # contain at least one of the fields specified in the index.
+              # Non-existent fields are treated as having a NULL value when generating
+              # index entries.
+              SPARSE_ANY = 2
+
+              # An index entry will be added regardless of whether the
+              # document contains any of the fields specified in the index.
+              # Non-existent fields are treated as having a NULL value when generating
+              # index entries.
+              DENSE = 3
             end
           end
         end
