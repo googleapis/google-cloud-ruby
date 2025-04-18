@@ -1439,6 +1439,10 @@
       "component": "google-cloud-storage-control-v2",
       "version_file": "lib/google/cloud/storage/control/v2/version.rb"
     },
+    "google-cloud-storage_batch_operations": {
+      "component": "google-cloud-storage_batch_operations",
+      "version_file": "lib/google/cloud/storage_batch_operations/version.rb"
+    },
     "google-cloud-storage_batch_operations-v1": {
       "component": "google-cloud-storage_batch_operations-v1",
       "version_file": "lib/google/cloud/storage_batch_operations/v1/version.rb"

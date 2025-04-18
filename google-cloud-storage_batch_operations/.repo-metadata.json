@@ -1,0 +1,17 @@
+{
+    "api_id": "storagebatchoperations.googleapis.com",
+    "api_shortname": "storagebatchoperations",
+    "client_documentation": "https://cloud.google.com/ruby/docs/reference/google-cloud-storage_batch_operations/latest",
+    "distribution_name": "google-cloud-storage_batch_operations",
+    "is_cloud": true,
+    "language": "ruby",
+    "name": "storagebatchoperations",
+    "name_pretty": "Storage Batch Operations API",
+    "product_documentation": "https://cloud.google.com/storage/docs/batch-operations/overview",
+    "release_level": "unreleased",
+    "repo": "googleapis/google-cloud-ruby",
+    "requires_billing": true,
+    "ruby-cloud-description": "google-cloud-storage_batch_operations is the official client library for the Storage Batch Operations API.",
+    "ruby-cloud-product-url": "https://cloud.google.com/storage/docs/batch-operations/overview",
+    "library_type": "GAPIC_MANUAL"
+}
