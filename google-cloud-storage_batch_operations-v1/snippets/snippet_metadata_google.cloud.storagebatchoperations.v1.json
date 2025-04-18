@@ -1,0 +1,215 @@
+{
+  "client_library": {
+    "name": "google-cloud-storage_batch_operations-v1",
+    "version": "",
+    "language": "RUBY",
+    "apis": [
+      {
+        "id": "google.cloud.storagebatchoperations.v1",
+        "version": "v1"
+      }
+    ]
+  },
+  "snippets": [
+    {
+      "region_tag": "storagebatchoperations_v1_generated_StorageBatchOperations_ListJobs_sync",
+      "title": "Snippet for the list_jobs call in the StorageBatchOperations service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::StorageBatchOperations::V1::StorageBatchOperations::Client#list_jobs.",
+      "file": "storage_batch_operations/list_jobs.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_jobs",
+        "full_name": "::Google::Cloud::StorageBatchOperations::V1::StorageBatchOperations::Client#list_jobs",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::StorageBatchOperations::V1::ListJobsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::StorageBatchOperations::V1::ListJobsResponse",
+        "client": {
+          "short_name": "StorageBatchOperations::Client",
+          "full_name": "::Google::Cloud::StorageBatchOperations::V1::StorageBatchOperations::Client"
+        },
+        "method": {
+          "short_name": "ListJobs",
+          "full_name": "google.cloud.storagebatchoperations.v1.StorageBatchOperations.ListJobs",
+          "service": {
+            "short_name": "StorageBatchOperations",
+            "full_name": "google.cloud.storagebatchoperations.v1.StorageBatchOperations"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "storagebatchoperations_v1_generated_StorageBatchOperations_GetJob_sync",
+      "title": "Snippet for the get_job call in the StorageBatchOperations service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::StorageBatchOperations::V1::StorageBatchOperations::Client#get_job.",
+      "file": "storage_batch_operations/get_job.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_job",
+        "full_name": "::Google::Cloud::StorageBatchOperations::V1::StorageBatchOperations::Client#get_job",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::StorageBatchOperations::V1::GetJobRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::StorageBatchOperations::V1::Job",
+        "client": {
+          "short_name": "StorageBatchOperations::Client",
+          "full_name": "::Google::Cloud::StorageBatchOperations::V1::StorageBatchOperations::Client"
+        },
+        "method": {
+          "short_name": "GetJob",
+          "full_name": "google.cloud.storagebatchoperations.v1.StorageBatchOperations.GetJob",
+          "service": {
+            "short_name": "StorageBatchOperations",
+            "full_name": "google.cloud.storagebatchoperations.v1.StorageBatchOperations"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "storagebatchoperations_v1_generated_StorageBatchOperations_CreateJob_sync",
+      "title": "Snippet for the create_job call in the StorageBatchOperations service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::StorageBatchOperations::V1::StorageBatchOperations::Client#create_job.",
+      "file": "storage_batch_operations/create_job.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_job",
+        "full_name": "::Google::Cloud::StorageBatchOperations::V1::StorageBatchOperations::Client#create_job",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::StorageBatchOperations::V1::CreateJobRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "StorageBatchOperations::Client",
+          "full_name": "::Google::Cloud::StorageBatchOperations::V1::StorageBatchOperations::Client"
+        },
+        "method": {
+          "short_name": "CreateJob",
+          "full_name": "google.cloud.storagebatchoperations.v1.StorageBatchOperations.CreateJob",
+          "service": {
+            "short_name": "StorageBatchOperations",
+            "full_name": "google.cloud.storagebatchoperations.v1.StorageBatchOperations"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "storagebatchoperations_v1_generated_StorageBatchOperations_DeleteJob_sync",
+      "title": "Snippet for the delete_job call in the StorageBatchOperations service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::StorageBatchOperations::V1::StorageBatchOperations::Client#delete_job.",
+      "file": "storage_batch_operations/delete_job.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_job",
+        "full_name": "::Google::Cloud::StorageBatchOperations::V1::StorageBatchOperations::Client#delete_job",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::StorageBatchOperations::V1::DeleteJobRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Protobuf::Empty",
+        "client": {
+          "short_name": "StorageBatchOperations::Client",
+          "full_name": "::Google::Cloud::StorageBatchOperations::V1::StorageBatchOperations::Client"
+        },
+        "method": {
+          "short_name": "DeleteJob",
+          "full_name": "google.cloud.storagebatchoperations.v1.StorageBatchOperations.DeleteJob",
+          "service": {
+            "short_name": "StorageBatchOperations",
+            "full_name": "google.cloud.storagebatchoperations.v1.StorageBatchOperations"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "storagebatchoperations_v1_generated_StorageBatchOperations_CancelJob_sync",
+      "title": "Snippet for the cancel_job call in the StorageBatchOperations service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::StorageBatchOperations::V1::StorageBatchOperations::Client#cancel_job.",
+      "file": "storage_batch_operations/cancel_job.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "cancel_job",
+        "full_name": "::Google::Cloud::StorageBatchOperations::V1::StorageBatchOperations::Client#cancel_job",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::StorageBatchOperations::V1::CancelJobRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::StorageBatchOperations::V1::CancelJobResponse",
+        "client": {
+          "short_name": "StorageBatchOperations::Client",
+          "full_name": "::Google::Cloud::StorageBatchOperations::V1::StorageBatchOperations::Client"
+        },
+        "method": {
+          "short_name": "CancelJob",
+          "full_name": "google.cloud.storagebatchoperations.v1.StorageBatchOperations.CancelJob",
+          "service": {
+            "short_name": "StorageBatchOperations",
+            "full_name": "google.cloud.storagebatchoperations.v1.StorageBatchOperations"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    }
+  ]
+}
