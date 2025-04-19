@@ -6074,6 +6074,246 @@ module Google
               end
 
               ##
+              # Baseline implementation for the create_reporting_data_annotation REST call
+              #
+              # @param request_pb [::Google::Analytics::Admin::V1alpha::CreateReportingDataAnnotationRequest]
+              #   A request object representing the call parameters. Required.
+              # @param options [::Gapic::CallOptions]
+              #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Analytics::Admin::V1alpha::ReportingDataAnnotation]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Analytics::Admin::V1alpha::ReportingDataAnnotation]
+              #   A result object deserialized from the server's reply
+              def create_reporting_data_annotation request_pb, options = nil
+                raise ::ArgumentError, "request must be provided" if request_pb.nil?
+
+                verb, uri, query_string_params, body = ServiceStub.transcode_create_reporting_data_annotation_request request_pb
+                query_string_params = if query_string_params.any?
+                                        query_string_params.to_h { |p| p.split "=", 2 }
+                                      else
+                                        {}
+                                      end
+
+                response = @client_stub.make_http_request(
+                  verb,
+                  uri: uri,
+                  body: body || "",
+                  params: query_string_params,
+                  method_name: "create_reporting_data_annotation",
+                  options: options
+                )
+                operation = ::Gapic::Rest::TransportOperation.new response
+                result = ::Google::Analytics::Admin::V1alpha::ReportingDataAnnotation.decode_json response.body, ignore_unknown_fields: true
+                catch :response do
+                  yield result, operation if block_given?
+                  result
+                end
+              end
+
+              ##
+              # Baseline implementation for the get_reporting_data_annotation REST call
+              #
+              # @param request_pb [::Google::Analytics::Admin::V1alpha::GetReportingDataAnnotationRequest]
+              #   A request object representing the call parameters. Required.
+              # @param options [::Gapic::CallOptions]
+              #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Analytics::Admin::V1alpha::ReportingDataAnnotation]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Analytics::Admin::V1alpha::ReportingDataAnnotation]
+              #   A result object deserialized from the server's reply
+              def get_reporting_data_annotation request_pb, options = nil
+                raise ::ArgumentError, "request must be provided" if request_pb.nil?
+
+                verb, uri, query_string_params, body = ServiceStub.transcode_get_reporting_data_annotation_request request_pb
+                query_string_params = if query_string_params.any?
+                                        query_string_params.to_h { |p| p.split "=", 2 }
+                                      else
+                                        {}
+                                      end
+
+                response = @client_stub.make_http_request(
+                  verb,
+                  uri: uri,
+                  body: body || "",
+                  params: query_string_params,
+                  method_name: "get_reporting_data_annotation",
+                  options: options
+                )
+                operation = ::Gapic::Rest::TransportOperation.new response
+                result = ::Google::Analytics::Admin::V1alpha::ReportingDataAnnotation.decode_json response.body, ignore_unknown_fields: true
+                catch :response do
+                  yield result, operation if block_given?
+                  result
+                end
+              end
+
+              ##
+              # Baseline implementation for the list_reporting_data_annotations REST call
+              #
+              # @param request_pb [::Google::Analytics::Admin::V1alpha::ListReportingDataAnnotationsRequest]
+              #   A request object representing the call parameters. Required.
+              # @param options [::Gapic::CallOptions]
+              #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Analytics::Admin::V1alpha::ListReportingDataAnnotationsResponse]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Analytics::Admin::V1alpha::ListReportingDataAnnotationsResponse]
+              #   A result object deserialized from the server's reply
+              def list_reporting_data_annotations request_pb, options = nil
+                raise ::ArgumentError, "request must be provided" if request_pb.nil?
+
+                verb, uri, query_string_params, body = ServiceStub.transcode_list_reporting_data_annotations_request request_pb
+                query_string_params = if query_string_params.any?
+                                        query_string_params.to_h { |p| p.split "=", 2 }
+                                      else
+                                        {}
+                                      end
+
+                response = @client_stub.make_http_request(
+                  verb,
+                  uri: uri,
+                  body: body || "",
+                  params: query_string_params,
+                  method_name: "list_reporting_data_annotations",
+                  options: options
+                )
+                operation = ::Gapic::Rest::TransportOperation.new response
+                result = ::Google::Analytics::Admin::V1alpha::ListReportingDataAnnotationsResponse.decode_json response.body, ignore_unknown_fields: true
+                catch :response do
+                  yield result, operation if block_given?
+                  result
+                end
+              end
+
+              ##
+              # Baseline implementation for the update_reporting_data_annotation REST call
+              #
+              # @param request_pb [::Google::Analytics::Admin::V1alpha::UpdateReportingDataAnnotationRequest]
+              #   A request object representing the call parameters. Required.
+              # @param options [::Gapic::CallOptions]
+              #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Analytics::Admin::V1alpha::ReportingDataAnnotation]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Analytics::Admin::V1alpha::ReportingDataAnnotation]
+              #   A result object deserialized from the server's reply
+              def update_reporting_data_annotation request_pb, options = nil
+                raise ::ArgumentError, "request must be provided" if request_pb.nil?
+
+                verb, uri, query_string_params, body = ServiceStub.transcode_update_reporting_data_annotation_request request_pb
+                query_string_params = if query_string_params.any?
+                                        query_string_params.to_h { |p| p.split "=", 2 }
+                                      else
+                                        {}
+                                      end
+
+                response = @client_stub.make_http_request(
+                  verb,
+                  uri: uri,
+                  body: body || "",
+                  params: query_string_params,
+                  method_name: "update_reporting_data_annotation",
+                  options: options
+                )
+                operation = ::Gapic::Rest::TransportOperation.new response
+                result = ::Google::Analytics::Admin::V1alpha::ReportingDataAnnotation.decode_json response.body, ignore_unknown_fields: true
+                catch :response do
+                  yield result, operation if block_given?
+                  result
+                end
+              end
+
+              ##
+              # Baseline implementation for the delete_reporting_data_annotation REST call
+              #
+              # @param request_pb [::Google::Analytics::Admin::V1alpha::DeleteReportingDataAnnotationRequest]
+              #   A request object representing the call parameters. Required.
+              # @param options [::Gapic::CallOptions]
+              #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Protobuf::Empty]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Protobuf::Empty]
+              #   A result object deserialized from the server's reply
+              def delete_reporting_data_annotation request_pb, options = nil
+                raise ::ArgumentError, "request must be provided" if request_pb.nil?
+
+                verb, uri, query_string_params, body = ServiceStub.transcode_delete_reporting_data_annotation_request request_pb
+                query_string_params = if query_string_params.any?
+                                        query_string_params.to_h { |p| p.split "=", 2 }
+                                      else
+                                        {}
+                                      end
+
+                response = @client_stub.make_http_request(
+                  verb,
+                  uri: uri,
+                  body: body || "",
+                  params: query_string_params,
+                  method_name: "delete_reporting_data_annotation",
+                  options: options
+                )
+                operation = ::Gapic::Rest::TransportOperation.new response
+                result = ::Google::Protobuf::Empty.decode_json response.body, ignore_unknown_fields: true
+                catch :response do
+                  yield result, operation if block_given?
+                  result
+                end
+              end
+
+              ##
+              # Baseline implementation for the submit_user_deletion REST call
+              #
+              # @param request_pb [::Google::Analytics::Admin::V1alpha::SubmitUserDeletionRequest]
+              #   A request object representing the call parameters. Required.
+              # @param options [::Gapic::CallOptions]
+              #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Analytics::Admin::V1alpha::SubmitUserDeletionResponse]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Analytics::Admin::V1alpha::SubmitUserDeletionResponse]
+              #   A result object deserialized from the server's reply
+              def submit_user_deletion request_pb, options = nil
+                raise ::ArgumentError, "request must be provided" if request_pb.nil?
+
+                verb, uri, query_string_params, body = ServiceStub.transcode_submit_user_deletion_request request_pb
+                query_string_params = if query_string_params.any?
+                                        query_string_params.to_h { |p| p.split "=", 2 }
+                                      else
+                                        {}
+                                      end
+
+                response = @client_stub.make_http_request(
+                  verb,
+                  uri: uri,
+                  body: body || "",
+                  params: query_string_params,
+                  method_name: "submit_user_deletion",
+                  options: options
+                )
+                operation = ::Gapic::Rest::TransportOperation.new response
+                result = ::Google::Analytics::Admin::V1alpha::SubmitUserDeletionResponse.decode_json response.body, ignore_unknown_fields: true
+                catch :response do
+                  yield result, operation if block_given?
+                  result
+                end
+              end
+
+              ##
               # @private
               #
               # GRPC transcoding helper method for the get_account REST call
@@ -9338,6 +9578,135 @@ module Google
                                                           uri_template: "/v1alpha/{name}",
                                                           matches: [
                                                             ["name", %r{^properties/[^/]+/subpropertyEventFilters/[^/]+/?$}, false]
+                                                          ]
+                                                        )
+                transcoder.transcode request_pb
+              end
+
+              ##
+              # @private
+              #
+              # GRPC transcoding helper method for the create_reporting_data_annotation REST call
+              #
+              # @param request_pb [::Google::Analytics::Admin::V1alpha::CreateReportingDataAnnotationRequest]
+              #   A request object representing the call parameters. Required.
+              # @return [Array(String, [String, nil], Hash{String => String})]
+              #   Uri, Body, Query string parameters
+              def self.transcode_create_reporting_data_annotation_request request_pb
+                transcoder = Gapic::Rest::GrpcTranscoder.new
+                                                        .with_bindings(
+                                                          uri_method: :post,
+                                                          uri_template: "/v1alpha/{parent}/reportingDataAnnotations",
+                                                          body: "reporting_data_annotation",
+                                                          matches: [
+                                                            ["parent", %r{^properties/[^/]+/?$}, false]
+                                                          ]
+                                                        )
+                transcoder.transcode request_pb
+              end
+
+              ##
+              # @private
+              #
+              # GRPC transcoding helper method for the get_reporting_data_annotation REST call
+              #
+              # @param request_pb [::Google::Analytics::Admin::V1alpha::GetReportingDataAnnotationRequest]
+              #   A request object representing the call parameters. Required.
+              # @return [Array(String, [String, nil], Hash{String => String})]
+              #   Uri, Body, Query string parameters
+              def self.transcode_get_reporting_data_annotation_request request_pb
+                transcoder = Gapic::Rest::GrpcTranscoder.new
+                                                        .with_bindings(
+                                                          uri_method: :get,
+                                                          uri_template: "/v1alpha/{name}",
+                                                          matches: [
+                                                            ["name", %r{^properties/[^/]+/reportingDataAnnotations/[^/]+/?$}, false]
+                                                          ]
+                                                        )
+                transcoder.transcode request_pb
+              end
+
+              ##
+              # @private
+              #
+              # GRPC transcoding helper method for the list_reporting_data_annotations REST call
+              #
+              # @param request_pb [::Google::Analytics::Admin::V1alpha::ListReportingDataAnnotationsRequest]
+              #   A request object representing the call parameters. Required.
+              # @return [Array(String, [String, nil], Hash{String => String})]
+              #   Uri, Body, Query string parameters
+              def self.transcode_list_reporting_data_annotations_request request_pb
+                transcoder = Gapic::Rest::GrpcTranscoder.new
+                                                        .with_bindings(
+                                                          uri_method: :get,
+                                                          uri_template: "/v1alpha/{parent}/reportingDataAnnotations",
+                                                          matches: [
+                                                            ["parent", %r{^properties/[^/]+/?$}, false]
+                                                          ]
+                                                        )
+                transcoder.transcode request_pb
+              end
+
+              ##
+              # @private
+              #
+              # GRPC transcoding helper method for the update_reporting_data_annotation REST call
+              #
+              # @param request_pb [::Google::Analytics::Admin::V1alpha::UpdateReportingDataAnnotationRequest]
+              #   A request object representing the call parameters. Required.
+              # @return [Array(String, [String, nil], Hash{String => String})]
+              #   Uri, Body, Query string parameters
+              def self.transcode_update_reporting_data_annotation_request request_pb
+                transcoder = Gapic::Rest::GrpcTranscoder.new
+                                                        .with_bindings(
+                                                          uri_method: :patch,
+                                                          uri_template: "/v1alpha/{reporting_data_annotation.name}",
+                                                          body: "reporting_data_annotation",
+                                                          matches: [
+                                                            ["reporting_data_annotation.name", %r{^properties/[^/]+/reportingDataAnnotations/[^/]+/?$}, false]
+                                                          ]
+                                                        )
+                transcoder.transcode request_pb
+              end
+
+              ##
+              # @private
+              #
+              # GRPC transcoding helper method for the delete_reporting_data_annotation REST call
+              #
+              # @param request_pb [::Google::Analytics::Admin::V1alpha::DeleteReportingDataAnnotationRequest]
+              #   A request object representing the call parameters. Required.
+              # @return [Array(String, [String, nil], Hash{String => String})]
+              #   Uri, Body, Query string parameters
+              def self.transcode_delete_reporting_data_annotation_request request_pb
+                transcoder = Gapic::Rest::GrpcTranscoder.new
+                                                        .with_bindings(
+                                                          uri_method: :delete,
+                                                          uri_template: "/v1alpha/{name}",
+                                                          matches: [
+                                                            ["name", %r{^properties/[^/]+/reportingDataAnnotations/[^/]+/?$}, false]
+                                                          ]
+                                                        )
+                transcoder.transcode request_pb
+              end
+
+              ##
+              # @private
+              #
+              # GRPC transcoding helper method for the submit_user_deletion REST call
+              #
+              # @param request_pb [::Google::Analytics::Admin::V1alpha::SubmitUserDeletionRequest]
+              #   A request object representing the call parameters. Required.
+              # @return [Array(String, [String, nil], Hash{String => String})]
+              #   Uri, Body, Query string parameters
+              def self.transcode_submit_user_deletion_request request_pb
+                transcoder = Gapic::Rest::GrpcTranscoder.new
+                                                        .with_bindings(
+                                                          uri_method: :post,
+                                                          uri_template: "/v1alpha/{name}:submitUserDeletion",
+                                                          body: "*",
+                                                          matches: [
+                                                            ["name", %r{^properties/[^/]+/?$}, false]
                                                           ]
                                                         )
                 transcoder.transcode request_pb
