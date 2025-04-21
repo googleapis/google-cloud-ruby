@@ -1,5 +1,11 @@
 # Changelog
 
+### 0.4.0 (2025-04-21)
+
+#### Features
+
+* Add GetLfpMerchantState method ([#29471](https://github.com/googleapis/google-cloud-ruby/issues/29471)) 
+
 ### 0.3.0 (2025-01-29)
 
 #### Features
