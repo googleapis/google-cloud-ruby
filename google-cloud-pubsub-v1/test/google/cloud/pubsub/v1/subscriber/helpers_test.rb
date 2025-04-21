@@ -20,7 +20,7 @@ require "helper"
 
 require "gapic/grpc/service_stub"
 
-require "google/cloud/pubsub/v1/subscriber"
+require "google/cloud/pubsub/v1/subscription_admin"
 
 class ::Google::Cloud::PubSub::V1::Subscriber::HelpersTest < Minitest::Test
   class DummyStub
