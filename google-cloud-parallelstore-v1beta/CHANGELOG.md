@@ -1,5 +1,23 @@
 # Changelog
 
+### 0.8.0 (2025-04-21)
+
+#### Features
+
+* A new field `bytes_failed` is added to message `v1beta.TransferCounters` 
+* A new field `error_summary` is added to message `v1beta.TransferOperationMetadata` 
+* A new field `metadata_options` is added to message `v1beta.ExportDataRequest` 
+* A new field `metadata_options` is added to message `v1beta.ImportDataRequest` 
+* A new field `objects_failed` is added to message `v1beta.TransferCounters` 
+* A new message `TransferErrorLogEntry` is added 
+* A new message `TransferErrorSummary` is added 
+* A new message `TransferMetadataOptions` is added 
+* A new value `REPAIRING` is added to enum `State` ([#29450](https://github.com/googleapis/google-cloud-ruby/issues/29450)) 
+* Field `daos_version` in message `v1beta.Instance` is Deprecated 
+#### Documentation
+
+* fields `directory_stripe_level` `deployment_type` `file_stripe_level` in message `v1beta.Instance` documented as immutable 
+
 ### 0.7.0 (2025-02-07)
 
 ### ⚠ BREAKING CHANGES
