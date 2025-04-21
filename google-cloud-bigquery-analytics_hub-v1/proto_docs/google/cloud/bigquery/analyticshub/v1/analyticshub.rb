@@ -67,6 +67,11 @@ module Google
           #     Optional. Type of discovery on the discovery page for all the listings
           #     under this exchange. Updating this field also updates (overwrites) the
           #     discovery_type field for all the listings under this exchange.
+          # @!attribute [rw] log_linked_dataset_query_user_email
+          #   @return [::Boolean]
+          #     Optional. By default, false.
+          #     If true, the DataExchange has an email sharing mandate enabled.
+          #     Publishers can view the logged email of the subscriber.
           class DataExchange
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -142,7 +147,6 @@ module Google
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
 
-          # Contains the reference that identifies a destination bigquery dataset.
           # @!attribute [rw] dataset_id
           #   @return [::String]
           #     Required. A unique ID for this dataset, without the project name. The ID
@@ -192,13 +196,29 @@ module Google
             end
           end
 
+          # Defines the destination Pub/Sub subscription.
+          # @!attribute [rw] pubsub_subscription
+          #   @return [::Google::Cloud::Bigquery::AnalyticsHub::V1::PubSubSubscription]
+          #     Required. Destination Pub/Sub subscription resource.
+          class DestinationPubSubSubscription
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
           # A listing is what gets published into a data exchange that a subscriber can
           # subscribe to. It contains a reference to the data source along with
           # descriptive information that will help subscribers find and subscribe the
           # data.
           # @!attribute [rw] bigquery_dataset
           #   @return [::Google::Cloud::Bigquery::AnalyticsHub::V1::Listing::BigQueryDatasetSource]
-          #     Required. Shared dataset i.e. BigQuery dataset source.
+          #     Shared dataset i.e. BigQuery dataset source.
+          #
+          #     Note: The following fields are mutually exclusive: `bigquery_dataset`, `pubsub_topic`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+          # @!attribute [rw] pubsub_topic
+          #   @return [::Google::Cloud::Bigquery::AnalyticsHub::V1::Listing::PubSubTopicSource]
+          #     Pub/Sub topic source.
+          #
+          #     Note: The following fields are mutually exclusive: `pubsub_topic`, `bigquery_dataset`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [r] name
           #   @return [::String]
           #     Output only. The resource name of the listing.
@@ -254,6 +274,13 @@ module Google
           # @!attribute [rw] discovery_type
           #   @return [::Google::Cloud::Bigquery::AnalyticsHub::V1::DiscoveryType]
           #     Optional. Type of discovery of the listing on the discovery page.
+          # @!attribute [r] resource_type
+          #   @return [::Google::Cloud::Bigquery::AnalyticsHub::V1::SharedResourceType]
+          #     Output only. Listing shared asset type.
+          # @!attribute [rw] log_linked_dataset_query_user_email
+          #   @return [::Boolean]
+          #     Optional. By default, false.
+          #     If true, the Listing has an email sharing mandate enabled.
           class Listing
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -267,13 +294,12 @@ module Google
             # dataset that serves as a _symbolic link_ to a shared dataset.
             # @!attribute [rw] dataset
             #   @return [::String]
-            #     Resource name of the dataset source for this listing.
+            #     Optional. Resource name of the dataset source for this listing.
             #     e.g. `projects/myproject/datasets/123`
             # @!attribute [rw] selected_resources
             #   @return [::Array<::Google::Cloud::Bigquery::AnalyticsHub::V1::Listing::BigQueryDatasetSource::SelectedResource>]
-            #     Optional. Resources in this dataset that are selectively shared.
-            #     If this field is empty, then the entire dataset (all resources) are
-            #     shared. This field is only valid for data clean room exchanges.
+            #     Optional. Resource in this dataset that is selectively shared.
+            #     This field is required for data clean room exchanges.
             # @!attribute [rw] restricted_export_policy
             #   @return [::Google::Cloud::Bigquery::AnalyticsHub::V1::Listing::BigQueryDatasetSource::RestrictedExportPolicy]
             #     Optional. If set, restricted export policy will be propagated and
@@ -282,7 +308,7 @@ module Google
               include ::Google::Protobuf::MessageExts
               extend ::Google::Protobuf::MessageExts::ClassMethods
 
-              # Resource in this dataset that are selectively shared.
+              # Resource in this dataset that is selectively shared.
               # @!attribute [rw] table
               #   @return [::String]
               #     Optional. Format:
@@ -311,6 +337,21 @@ module Google
                 include ::Google::Protobuf::MessageExts
                 extend ::Google::Protobuf::MessageExts::ClassMethods
               end
+            end
+
+            # Pub/Sub topic source.
+            # @!attribute [rw] topic
+            #   @return [::String]
+            #     Required. Resource name of the Pub/Sub topic source for this listing.
+            #     e.g. projects/myproject/topics/topicId
+            # @!attribute [rw] data_affinity_regions
+            #   @return [::Array<::String>]
+            #     Optional. Region hint on where the data might be published. Data affinity
+            #     regions are modifiable. See https://cloud.google.com/about/locations for
+            #     full listing of possible Cloud regions.
+            class PubSubTopicSource
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
             end
 
             # Restricted export config, used to configure restricted export on linked
@@ -431,6 +472,18 @@ module Google
           # @!attribute [r] subscriber_contact
           #   @return [::String]
           #     Output only. Email of the subscriber.
+          # @!attribute [r] linked_resources
+          #   @return [::Array<::Google::Cloud::Bigquery::AnalyticsHub::V1::Subscription::LinkedResource>]
+          #     Output only. Linked resources created in the subscription. Only contains
+          #     values if state = STATE_ACTIVE.
+          # @!attribute [r] resource_type
+          #   @return [::Google::Cloud::Bigquery::AnalyticsHub::V1::SharedResourceType]
+          #     Output only. Listing shared asset type.
+          # @!attribute [r] log_linked_dataset_query_user_email
+          #   @return [::Boolean]
+          #     Output only. By default, false.
+          #     If true, the Subscriber agreed to the email sharing mandate
+          #     that is enabled for DataExchange/Listing.
           class Subscription
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -440,6 +493,17 @@ module Google
             #   @return [::String]
             #     Output only. Name of the linked dataset, e.g.
             #     projects/subscriberproject/datasets/linked_dataset
+            #
+            #     Note: The following fields are mutually exclusive: `linked_dataset`, `linked_pubsub_subscription`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+            # @!attribute [r] linked_pubsub_subscription
+            #   @return [::String]
+            #     Output only. Name of the Pub/Sub subscription, e.g.
+            #     projects/subscriberproject/subscriptions/subscriptions/sub_id
+            #
+            #     Note: The following fields are mutually exclusive: `linked_pubsub_subscription`, `linked_dataset`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+            # @!attribute [r] listing
+            #   @return [::String]
+            #     Output only. Listing for which linked resource is created.
             class LinkedResource
               include ::Google::Protobuf::MessageExts
               extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -552,9 +616,7 @@ module Google
           # @!attribute [rw] data_exchange_id
           #   @return [::String]
           #     Required. The ID of the data exchange.
-          #     Must contain only Unicode letters, numbers (0-9), underscores (_).
-          #     Should not use characters that require URL-escaping, or characters
-          #     outside of ASCII, spaces.
+          #     Must contain only ASCII letters, numbers (0-9), underscores (_).
           #     Max length: 100 bytes.
           # @!attribute [rw] data_exchange
           #   @return [::Google::Cloud::Bigquery::AnalyticsHub::V1::DataExchange]
@@ -636,9 +698,7 @@ module Google
           # @!attribute [rw] listing_id
           #   @return [::String]
           #     Required. The ID of the listing to create.
-          #     Must contain only Unicode letters, numbers (0-9), underscores (_).
-          #     Should not use characters that require URL-escaping, or characters
-          #     outside of ASCII, spaces.
+          #     Must contain only ASCII letters, numbers (0-9), underscores (_).
           #     Max length: 100 bytes.
           # @!attribute [rw] listing
           #   @return [::Google::Cloud::Bigquery::AnalyticsHub::V1::Listing]
@@ -676,6 +736,14 @@ module Google
           # @!attribute [rw] destination_dataset
           #   @return [::Google::Cloud::Bigquery::AnalyticsHub::V1::DestinationDataset]
           #     Input only. BigQuery destination dataset to create for the subscriber.
+          #
+          #     Note: The following fields are mutually exclusive: `destination_dataset`, `destination_pubsub_subscription`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+          # @!attribute [rw] destination_pubsub_subscription
+          #   @return [::Google::Cloud::Bigquery::AnalyticsHub::V1::DestinationPubSubSubscription]
+          #     Input only. Destination Pub/Sub subscription to create for the
+          #     subscriber.
+          #
+          #     Note: The following fields are mutually exclusive: `destination_pubsub_subscription`, `destination_dataset`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] name
           #   @return [::String]
           #     Required. Resource name of the listing that you want to subscribe to.
@@ -703,6 +771,9 @@ module Google
           #   @return [::String]
           #     Required. The parent resource path of the Subscription.
           #     e.g. `projects/subscriberproject/locations/US`
+          # @!attribute [rw] destination_dataset
+          #   @return [::Google::Cloud::Bigquery::AnalyticsHub::V1::DestinationDataset]
+          #     Optional. BigQuery destination dataset to create for the subscriber.
           # @!attribute [rw] subscription
           #   @return [::String]
           #     Required. Name of the subscription to create.
@@ -843,6 +914,7 @@ module Google
           end
 
           # Message for response when you revoke a subscription.
+          # Empty for now.
           class RevokeSubscriptionResponse
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -903,6 +975,18 @@ module Google
             # The Data exchange/listing can be discovered in the 'Public' results
             # list.
             DISCOVERY_TYPE_PUBLIC = 2
+          end
+
+          # The underlying shared asset type shared in a listing by a publisher.
+          module SharedResourceType
+            # Not specified.
+            SHARED_RESOURCE_TYPE_UNSPECIFIED = 0
+
+            # BigQuery Dataset Asset.
+            BIGQUERY_DATASET = 1
+
+            # Pub/Sub Topic Asset.
+            PUBSUB_TOPIC = 2
           end
         end
       end

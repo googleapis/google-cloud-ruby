@@ -689,7 +689,7 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Message for requesting diagnositcs of a router within a specific zone.
+        # Message for requesting diagnostics of a router within a specific zone.
         # @!attribute [rw] name
         #   @return [::String]
         #     Required. The name of the router resource.

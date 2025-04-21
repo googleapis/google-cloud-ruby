@@ -40,7 +40,7 @@ module Google
         #     the equivalent project number.
         # @!attribute [rw] spec
         #   @return [::Google::Cloud::OrgPolicy::V2::PolicySpec]
-        #     Basic information about the Organization Policy.
+        #     Basic information about the organization policy.
         # @!attribute [rw] alternate
         #   @deprecated This field is deprecated and may be removed in the next major version update.
         #   @return [::Google::Cloud::OrgPolicy::V2::AlternatePolicySpec]
@@ -62,7 +62,7 @@ module Google
         end
 
         # Similar to PolicySpec but with an extra 'launch' field for launch reference.
-        # The PolicySpec here is specific for dry-run/darklaunch.
+        # The PolicySpec here is specific for dry-run.
         # @!attribute [rw] launch
         #   @return [::String]
         #     Reference to the launch that will be used while audit logging and to
@@ -166,6 +166,16 @@ module Google
           #     "resource.matchTag('123456789/environment,
           #     'prod')". or "resource.matchTagId('tagKeys/123',
           #     'tagValues/456')".
+          # @!attribute [rw] parameters
+          #   @return [::Google::Protobuf::Struct]
+          #     Optional. Required for managed constraints if parameters are defined.
+          #     Passes parameter values when policy enforcement is enabled. Ensure that
+          #     parameter value types match those defined in the constraint definition.
+          #     For example:
+          #     {
+          #       "allowedLocations" : ["us-east1", "us-west1"],
+          #       "allowAll" : true
+          #     }
           class PolicyRule
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -371,8 +381,8 @@ module Google
         # [google.cloud.orgpolicy.v2.OrgPolicy.GetCustomConstraint] method.
         # @!attribute [rw] name
         #   @return [::String]
-        #     Required. Resource name of the custom constraint. See the custom constraint
-        #     entry for naming requirements.
+        #     Required. Resource name of the custom or managed constraint. See the custom
+        #     constraint entry for naming requirements.
         class GetCustomConstraintRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -403,11 +413,12 @@ module Google
 
         # The response returned from the [ListCustomConstraints]
         # [google.cloud.orgpolicy.v2.OrgPolicy.ListCustomConstraints] method. It will
-        # be empty if no custom constraints are set on the organization resource.
+        # be empty if no custom or managed constraints are set on the organization
+        # resource.
         # @!attribute [rw] custom_constraints
         #   @return [::Array<::Google::Cloud::OrgPolicy::V2::CustomConstraint>]
-        #     All custom constraints that exist on the organization resource. It will be
-        #     empty if no custom constraints are set.
+        #     All custom and managed constraints that exist on the organization resource.
+        #     It will be empty if no custom constraints are set.
         # @!attribute [rw] next_page_token
         #   @return [::String]
         #     Page token used to retrieve the next page. This is currently not used, but

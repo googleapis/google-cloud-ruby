@@ -29,12 +29,12 @@ module Google
         # @!attribute [rw] name
         #   @return [::String]
         #     Identifier. The resource name of a ServiceProjectAttachment. Format:
-        #     "projects/\\{host-project-id}/locations/global/serviceProjectAttachments/\\{service-project-id}."
+        #     `"projects/{host-project-id}/locations/global/serviceProjectAttachments/{service-project-id}."`
         # @!attribute [rw] service_project
         #   @return [::String]
-        #     Required. Immutable. Service project name in the format: "projects/abc" or
-        #     "projects/123". As input, project name with either project id or number are
-        #     accepted. As output, this field will contain project number.
+        #     Required. Immutable. Service project name in the format: `"projects/abc"`
+        #     or `"projects/123"`. As input, project name with either project id or
+        #     number are accepted. As output, this field will contain project number.
         # @!attribute [r] create_time
         #   @return [::Google::Protobuf::Timestamp]
         #     Output only. Create time.

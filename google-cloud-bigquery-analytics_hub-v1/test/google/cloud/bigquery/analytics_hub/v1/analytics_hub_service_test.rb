@@ -812,6 +812,7 @@ class ::Google::Cloud::Bigquery::AnalyticsHub::V1::AnalyticsHubService::ClientTe
     # Create request parameters for a unary method.
     name = "hello world"
     destination = "hello world"
+    destination_dataset = {}
     subscription = "hello world"
     subscriber_contact = "hello world"
 
@@ -820,6 +821,7 @@ class ::Google::Cloud::Bigquery::AnalyticsHub::V1::AnalyticsHubService::ClientTe
       assert_kind_of ::Google::Cloud::Bigquery::AnalyticsHub::V1::SubscribeDataExchangeRequest, request
       assert_equal "hello world", request["name"]
       assert_equal "hello world", request["destination"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Bigquery::AnalyticsHub::V1::DestinationDataset), request["destination_dataset"]
       assert_equal "hello world", request["subscription"]
       assert_equal "hello world", request["subscriber_contact"]
       refute_nil options
@@ -832,35 +834,35 @@ class ::Google::Cloud::Bigquery::AnalyticsHub::V1::AnalyticsHubService::ClientTe
       end
 
       # Use hash object
-      client.subscribe_data_exchange({ name: name, destination: destination, subscription: subscription, subscriber_contact: subscriber_contact }) do |response, operation|
+      client.subscribe_data_exchange({ name: name, destination: destination, destination_dataset: destination_dataset, subscription: subscription, subscriber_contact: subscriber_contact }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.subscribe_data_exchange name: name, destination: destination, subscription: subscription, subscriber_contact: subscriber_contact do |response, operation|
+      client.subscribe_data_exchange name: name, destination: destination, destination_dataset: destination_dataset, subscription: subscription, subscriber_contact: subscriber_contact do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.subscribe_data_exchange ::Google::Cloud::Bigquery::AnalyticsHub::V1::SubscribeDataExchangeRequest.new(name: name, destination: destination, subscription: subscription, subscriber_contact: subscriber_contact) do |response, operation|
+      client.subscribe_data_exchange ::Google::Cloud::Bigquery::AnalyticsHub::V1::SubscribeDataExchangeRequest.new(name: name, destination: destination, destination_dataset: destination_dataset, subscription: subscription, subscriber_contact: subscriber_contact) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.subscribe_data_exchange({ name: name, destination: destination, subscription: subscription, subscriber_contact: subscriber_contact }, grpc_options) do |response, operation|
+      client.subscribe_data_exchange({ name: name, destination: destination, destination_dataset: destination_dataset, subscription: subscription, subscriber_contact: subscriber_contact }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.subscribe_data_exchange(::Google::Cloud::Bigquery::AnalyticsHub::V1::SubscribeDataExchangeRequest.new(name: name, destination: destination, subscription: subscription, subscriber_contact: subscriber_contact), grpc_options) do |response, operation|
+      client.subscribe_data_exchange(::Google::Cloud::Bigquery::AnalyticsHub::V1::SubscribeDataExchangeRequest.new(name: name, destination: destination, destination_dataset: destination_dataset, subscription: subscription, subscriber_contact: subscriber_contact), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation

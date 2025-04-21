@@ -47,7 +47,7 @@ module Google
             # Updates the parameters of a single Collector.
             rpc :UpdateCollector, ::Google::Cloud::RapidMigrationAssessment::V1::UpdateCollectorRequest, ::Google::Longrunning::Operation
             # Deletes a single Collector - changes state of collector to "Deleting".
-            # Background jobs does final deletion thorugh producer api.
+            # Background jobs does final deletion through producer API.
             rpc :DeleteCollector, ::Google::Cloud::RapidMigrationAssessment::V1::DeleteCollectorRequest, ::Google::Longrunning::Operation
             # Resumes the given collector.
             rpc :ResumeCollector, ::Google::Cloud::RapidMigrationAssessment::V1::ResumeCollectorRequest, ::Google::Longrunning::Operation

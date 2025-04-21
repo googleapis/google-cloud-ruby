@@ -1,5 +1,18 @@
 # Changelog
 
+### 2.1.0 (2025-03-28)
+
+#### Features
+
+* Support for RPCs for managing sitemaps 
+* Support for the ServingConfigService 
+* Support for the stream_answer_query RPC 
+* The answer_query RPC takes new parameters for grounding specification and end user specification 
+* The get_session RPC can now return the full session including all answer details 
+* The import_documents RPC can now force refresh of unstructured content 
+* The search and search_lite RPCs takes new parameters for configuring display, setting relevance threshold, and returning relevance score 
+* Various additional updates 
+
 ### 2.0.0 (2025-02-07)
 
 ### ⚠ BREAKING CHANGES

@@ -83,10 +83,13 @@ module Google
         #     Default number is 10.
         # @!attribute [rw] data_store_specs
         #   @return [::Array<::Google::Cloud::DiscoveryEngine::V1::SearchRequest::DataStoreSpec>]
-        #     Specs defining dataStores to filter on in a search call and configurations
-        #     for those dataStores. This is only considered for engines with multiple
-        #     dataStores use case. For single dataStore within an engine, they should
-        #     use the specs at the top level.
+        #     Specifications that define the specific
+        #     {::Google::Cloud::DiscoveryEngine::V1::DataStore DataStore}s to be searched,
+        #     along with configurations for those data stores. This is only considered
+        #     for {::Google::Cloud::DiscoveryEngine::V1::Engine Engine}s with multiple data
+        #     stores. For engines with a single data store, the specs directly under
+        #     {::Google::Cloud::DiscoveryEngine::V1::SearchRequest SearchRequest} should be
+        #     used.
         # @!attribute [rw] filter
         #   @return [::String]
         #     The filter syntax consists of an expression language for constructing a
@@ -135,7 +138,7 @@ module Google
         # @!attribute [rw] user_info
         #   @return [::Google::Cloud::DiscoveryEngine::V1::UserInfo]
         #     Information about the end user.
-        #     Highly recommended for analytics.
+        #     Highly recommended for analytics and personalization.
         #     {::Google::Cloud::DiscoveryEngine::V1::UserInfo#user_agent UserInfo.user_agent}
         #     is used to deduce `device_type` for analytics.
         # @!attribute [rw] language_code
@@ -228,6 +231,10 @@ module Google
         #     Search as you type configuration. Only supported for the
         #     {::Google::Cloud::DiscoveryEngine::V1::IndustryVertical::MEDIA IndustryVertical.MEDIA}
         #     vertical.
+        # @!attribute [rw] display_spec
+        #   @return [::Google::Cloud::DiscoveryEngine::V1::SearchRequest::DisplaySpec]
+        #     Optional. Config for display feature, like match highlighting on search
+        #     results.
         # @!attribute [rw] session
         #   @return [::String]
         #     The session resource name. Optional.
@@ -261,6 +268,18 @@ module Google
         #     Session specification.
         #
         #     Can be used only when `session` is set.
+        # @!attribute [rw] relevance_threshold
+        #   @return [::Google::Cloud::DiscoveryEngine::V1::SearchRequest::RelevanceThreshold]
+        #     The relevance threshold of the search results.
+        #
+        #     Default to Google defined threshold, leveraging a balance of
+        #     precision and recall to deliver both highly accurate results and
+        #     comprehensive coverage of relevant information.
+        #
+        #     This feature is not supported for healthcare search.
+        # @!attribute [rw] relevance_score_spec
+        #   @return [::Google::Cloud::DiscoveryEngine::V1::SearchRequest::RelevanceScoreSpec]
+        #     Optional. The specification for returning the relevance score.
         class SearchRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -288,6 +307,11 @@ module Google
           #     Optional. Filter specification to filter documents in the data store
           #     specified by data_store field. For more information on filtering, see
           #     [Filtering](https://cloud.google.com/generative-ai-app-builder/docs/filter-search-metadata)
+          # @!attribute [rw] boost_spec
+          #   @return [::Google::Cloud::DiscoveryEngine::V1::SearchRequest::BoostSpec]
+          #     Optional. Boost specification to boost certain documents.
+          #     For more information on boosting, see
+          #     [Boosting](https://cloud.google.com/generative-ai-app-builder/docs/boost-search-results)
           class DataStoreSpec
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -437,7 +461,7 @@ module Google
           # @!attribute [rw] condition_boost_specs
           #   @return [::Array<::Google::Cloud::DiscoveryEngine::V1::SearchRequest::BoostSpec::ConditionBoostSpec>]
           #     Condition boost specifications. If a document matches multiple conditions
-          #     in the specifictions, boost scores from these specifications are all
+          #     in the specifications, boost scores from these specifications are all
           #     applied and combined in a non-linear way. Maximum number of
           #     specifications is 20.
           class BoostSpec
@@ -900,7 +924,8 @@ module Google
               DOCUMENTS = 1
 
               # Returns chunks in the search result. Only available if the
-              # [DataStore.DocumentProcessingConfig.chunking_config][] is specified.
+              # {::Google::Cloud::DiscoveryEngine::V1::DocumentProcessingConfig#chunking_config DocumentProcessingConfig.chunking_config}
+              # is specified.
               CHUNKS = 2
             end
           end
@@ -926,6 +951,31 @@ module Google
 
               # Enables Search As You Type.
               ENABLED = 2
+
+              # Automatic switching between search-as-you-type and standard search
+              # modes, ideal for single-API implementations (e.g., debouncing).
+              AUTO = 3
+            end
+          end
+
+          # Specifies features for display, like match highlighting.
+          # @!attribute [rw] match_highlighting_condition
+          #   @return [::Google::Cloud::DiscoveryEngine::V1::SearchRequest::DisplaySpec::MatchHighlightingCondition]
+          #     The condition under which match highlighting should occur.
+          class DisplaySpec
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+
+            # Enum describing under which condition match highlighting should occur.
+            module MatchHighlightingCondition
+              # Server behavior is the same as `MATCH_HIGHLIGHTING_DISABLED`.
+              MATCH_HIGHLIGHTING_CONDITION_UNSPECIFIED = 0
+
+              # Disables match highlighting on all documents.
+              MATCH_HIGHLIGHTING_DISABLED = 1
+
+              # Enables match highlighting on all documents.
+              MATCH_HIGHLIGHTING_ENABLED = 2
             end
           end
 
@@ -966,11 +1016,21 @@ module Google
           #     The number of top search results to persist. The persisted search results
           #     can be used for the subsequent /answer api call.
           #
-          #     This field is simliar to the `summary_result_count` field in
+          #     This field is similar to the `summary_result_count` field in
           #     {::Google::Cloud::DiscoveryEngine::V1::SearchRequest::ContentSearchSpec::SummarySpec#summary_result_count SearchRequest.ContentSearchSpec.SummarySpec.summary_result_count}.
           #
           #     At most 10 results for documents mode, or 50 for chunks mode.
           class SessionSpec
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # The specification for returning the document relevance score.
+          # @!attribute [rw] return_relevance_score
+          #   @return [::Boolean]
+          #     Optional. Whether to return the relevance score for search results.
+          #     The higher the score, the more relevant the document is to the query.
+          class RelevanceScoreSpec
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
@@ -991,6 +1051,27 @@ module Google
           class UserLabelsEntry
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # The relevance threshold of the search results. The higher relevance
+          # threshold is, the higher relevant results are shown and the less number of
+          # results are returned.
+          module RelevanceThreshold
+            # Default value. In this case, server behavior defaults to Google defined
+            # threshold.
+            RELEVANCE_THRESHOLD_UNSPECIFIED = 0
+
+            # Lowest relevance threshold.
+            LOWEST = 1
+
+            # Low relevance threshold.
+            LOW = 2
+
+            # Medium relevance threshold.
+            MEDIUM = 3
+
+            # High relevance threshold.
+            HIGH = 4
           end
         end
 
@@ -1052,6 +1133,9 @@ module Google
         #     Only set if
         #     {::Google::Cloud::DiscoveryEngine::V1::SearchRequest#session SearchRequest.session}
         #     is provided. See its description for more details.
+        # @!attribute [rw] search_link_promotions
+        #   @return [::Array<::Google::Cloud::DiscoveryEngine::V1::SearchLinkPromotion>]
+        #     Promotions for site search.
         class SearchResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -1071,9 +1155,21 @@ module Google
           #     {::Google::Cloud::DiscoveryEngine::V1::SearchRequest::ContentSearchSpec#search_result_mode SearchRequest.ContentSearchSpec.search_result_mode}
           #     is set to
           #     {::Google::Cloud::DiscoveryEngine::V1::SearchRequest::ContentSearchSpec::SearchResultMode::CHUNKS CHUNKS}.
+          # @!attribute [r] model_scores
+          #   @return [::Google::Protobuf::Map{::String => ::Google::Cloud::DiscoveryEngine::V1::DoubleList}]
+          #     Output only. Google provided available scores.
           class SearchResult
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
+
+            # @!attribute [rw] key
+            #   @return [::String]
+            # @!attribute [rw] value
+            #   @return [::Google::Cloud::DiscoveryEngine::V1::DoubleList]
+            class ModelScoresEntry
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
           end
 
           # A facet result.
@@ -1294,6 +1390,11 @@ module Google
               # [SearchRequest.ContentSearchSpec.SummarySpec.ignore_non_answer_seeking_query]
               # is set to `true`.
               NON_SUMMARY_SEEKING_QUERY_IGNORED_V2 = 9
+
+              # The time out case.
+              #
+              # Google skips the summary if the time out.
+              TIME_OUT = 10
             end
           end
 

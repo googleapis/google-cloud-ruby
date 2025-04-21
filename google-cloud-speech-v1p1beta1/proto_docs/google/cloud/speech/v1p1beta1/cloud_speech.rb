@@ -112,8 +112,9 @@ module Google
         #     `true`.
         #
         #     The `single_utterance` field can only be used with specified models,
-        #     otherwise an error is thrown. The `model` field in [`RecognitionConfig`][]
-        #     must be set to:
+        #     otherwise an error is thrown. The `model` field in
+        #     {::Google::Cloud::Speech::V1p1beta1::RecognitionConfig RecognitionConfig} must
+        #     be set to:
         #
         #     * `command_and_search`
         #     * `phone_call` AND additional field `useEnhanced`=`true`
@@ -233,8 +234,8 @@ module Google
         #     When speech adaptation is set it supersedes the `speech_contexts` field.
         # @!attribute [rw] transcript_normalization
         #   @return [::Google::Cloud::Speech::V1p1beta1::TranscriptNormalization]
-        #     Use transcription normalization to automatically replace parts of the
-        #     transcript with phrases of your choosing. For StreamingRecognize, this
+        #     Optional. Use transcription normalization to automatically replace parts of
+        #     the transcript with phrases of your choosing. For StreamingRecognize, this
         #     normalization only applies to stable partial transcripts (stability > 0.8)
         #     and final transcripts.
         # @!attribute [rw] speech_contexts
@@ -281,8 +282,8 @@ module Google
         #   @deprecated This field is deprecated and may be removed in the next major version update.
         #   @return [::Boolean]
         #     If 'true', enables speaker detection for each recognized word in
-        #     the top alternative of the recognition result using a speaker_tag provided
-        #     in the WordInfo.
+        #     the top alternative of the recognition result using a speaker_label
+        #     provided in the WordInfo.
         #     Note: Use diarization_config instead.
         # @!attribute [rw] diarization_speaker_count
         #   @deprecated This field is deprecated and may be removed in the next major version update.
@@ -445,9 +446,12 @@ module Google
             MP3 = 8
 
             # Opus encoded audio frames in WebM container
-            # ([OggOpus](https://wiki.xiph.org/OggOpus)). `sample_rate_hertz` must be
-            # one of 8000, 12000, 16000, 24000, or 48000.
+            # ([WebM](https://www.webmproject.org/docs/container/)).
+            # `sample_rate_hertz` must be one of 8000, 12000, 16000, 24000, or 48000.
             WEBM_OPUS = 9
+
+            # 8-bit samples that compand 13-bit audio samples using G.711 PCMU/a-law.
+            ALAW = 10
           end
         end
 
@@ -455,8 +459,8 @@ module Google
         # @!attribute [rw] enable_speaker_diarization
         #   @return [::Boolean]
         #     If 'true', enables speaker detection for each recognized word in
-        #     the top alternative of the recognition result using a speaker_tag provided
-        #     in the WordInfo.
+        #     the top alternative of the recognition result using a speaker_label
+        #     provided in the WordInfo.
         # @!attribute [rw] min_speaker_count
         #   @return [::Integer]
         #     Minimum number of speakers in the conversation. This range gives you more
@@ -688,6 +692,10 @@ module Google
         #   @return [::Integer]
         #     The ID associated with the request. This is a unique ID specific only to
         #     the given request.
+        # @!attribute [rw] using_legacy_models
+        #   @return [::Boolean]
+        #     Whether request used legacy asr models (was not automatically migrated to
+        #     use conformer models).
         class RecognizeResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -985,12 +993,22 @@ module Google
         #     to be always provided.
         #     The default of 0.0 is a sentinel value indicating `confidence` was not set.
         # @!attribute [r] speaker_tag
+        #   @deprecated This field is deprecated and may be removed in the next major version update.
         #   @return [::Integer]
         #     Output only. A distinct integer value is assigned for every speaker within
         #     the audio. This field specifies which one of those speakers was detected to
         #     have spoken this word. Value ranges from '1' to diarization_speaker_count.
-        #     speaker_tag is set if enable_speaker_diarization = 'true' and only in the
+        #     speaker_tag is set if enable_speaker_diarization = 'true' and only for the
         #     top alternative.
+        #     Note: Use speaker_label instead.
+        # @!attribute [r] speaker_label
+        #   @return [::String]
+        #     Output only. A label value assigned for every unique speaker within the
+        #     audio. This field specifies which speaker was detected to have spoken this
+        #     word. For some models, like medical_conversation this can be actual speaker
+        #     role, for example "patient" or "provider", but generally this would be a
+        #     number identifying a speaker. This field is only set if
+        #     enable_speaker_diarization = 'true' and only for the top alternative.
         class WordInfo
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

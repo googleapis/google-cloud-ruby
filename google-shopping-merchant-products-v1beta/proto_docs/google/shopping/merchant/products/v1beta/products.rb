@@ -25,11 +25,11 @@ module Google
           # The processed product, built from multiple [product
           # inputs][google.shopping.merchant.products.v1main.ProductInput]
           # after applying rules and supplemental data sources. This processed product
-          # matches what is shown in your Merchant Center account and in Shopping ads and
-          # other surfaces across Google. Each product is built from exactly one primary
-          # data source product input, and multiple supplemental data source inputs.
-          # After inserting, updating, or deleting a product input, it may take
-          # several minutes before the updated processed product can be retrieved.
+          # matches what is shown in your Merchant Center account. Each product is built
+          # from exactly one primary data source product input, and multiple supplemental
+          # data source inputs. After inserting, updating, or deleting a product input,
+          # it may take several minutes before the updated processed product can be
+          # retrieved.
           #
           # All fields in the processed product and its sub-messages match the name of
           # their corresponding attribute in the [Product data
@@ -39,10 +39,10 @@ module Google
           #   @return [::String]
           #     The name of the product.
           #     Format:
-          #     `"{product.name=accounts/{account}/products/{product}}"` where the last
+          #     `accounts/{account}/products/{product}` where the last
           #     section `product` consists of 4 parts:
-          #     channel~content_language~feed_label~offer_id
-          #     example for product name is "accounts/123/products/online~en~US~sku123"
+          #     `channel~content_language~feed_label~offer_id`
+          #     example for product name is `accounts/123/products/online~en~US~sku123`
           # @!attribute [r] channel
           #   @return [::Google::Shopping::Type::Channel::ChannelEnum]
           #     Output only. The
@@ -97,6 +97,9 @@ module Google
           #   @return [::Google::Shopping::Merchant::Products::V1beta::ProductStatus]
           #     Output only. The status of a product, data validation issues, that is,
           #     information about a product computed asynchronously.
+          # @!attribute [r] automated_discounts
+          #   @return [::Google::Shopping::Merchant::Products::V1beta::AutomatedDiscounts]
+          #     Output only. The automated discounts information for the product.
           class Product
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -108,9 +111,9 @@ module Google
           #     Required. The name of the product to retrieve.
           #     Format: `accounts/{account}/products/{product}`
           #     where the last section `product` consists of 4 parts:
-          #     channel~content_language~feed_label~offer_id
+          #     `channel~content_language~feed_label~offer_id`
           #     example for product name is
-          #     "accounts/123/products/online~en~US~sku123"
+          #     `accounts/123/products/online~en~US~sku123`
           class GetProductRequest
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -120,7 +123,7 @@ module Google
           # @!attribute [rw] parent
           #   @return [::String]
           #     Required. The account to list processed products for.
-          #     Format: accounts/\\{account}
+          #     Format: `accounts/{account}`
           # @!attribute [rw] page_size
           #   @return [::Integer]
           #     The maximum number of products to return. The service may return fewer than

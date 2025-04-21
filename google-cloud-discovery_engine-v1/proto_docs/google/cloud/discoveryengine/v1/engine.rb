@@ -91,9 +91,8 @@ module Google
         #   @return [::Google::Cloud::DiscoveryEngine::V1::IndustryVertical]
         #     The industry vertical that the engine registers.
         #     The restriction of the Engine industry vertical is based on
-        #     {::Google::Cloud::DiscoveryEngine::V1::DataStore DataStore}: If unspecified,
-        #     default to `GENERIC`. Vertical on Engine has to match vertical of the
-        #     DataStore linked to the engine.
+        #     {::Google::Cloud::DiscoveryEngine::V1::DataStore DataStore}: Vertical on Engine
+        #     has to match vertical of the DataStore linked to the engine.
         # @!attribute [rw] common_config
         #   @return [::Google::Cloud::DiscoveryEngine::V1::Engine::CommonConfig]
         #     Common config spec that specifies the metadata of the engine.
@@ -153,6 +152,20 @@ module Google
           #     API after engine creation. Use
           #     {::Google::Cloud::DiscoveryEngine::V1::Engine::ChatEngineMetadata#dialogflow_agent ChatEngineMetadata.dialogflow_agent}
           #     for actual agent association after Engine is created.
+          # @!attribute [rw] allow_cross_region
+          #   @return [::Boolean]
+          #     Optional. If the flag set to true, we allow the agent and engine are in
+          #     different locations, otherwise the agent and engine are required to be in
+          #     the same location. The flag is set to false by default.
+          #
+          #     Note that the `allow_cross_region` are one-time consumed by and
+          #     passed to
+          #     {::Google::Cloud::DiscoveryEngine::V1::EngineService::Client#create_engine EngineService.CreateEngine}.
+          #     It means they cannot be retrieved using
+          #     {::Google::Cloud::DiscoveryEngine::V1::EngineService::Client#get_engine EngineService.GetEngine}
+          #     or
+          #     {::Google::Cloud::DiscoveryEngine::V1::EngineService::Client#list_engines EngineService.ListEngines}
+          #     API after engine creation.
           class ChatEngineConfig
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods

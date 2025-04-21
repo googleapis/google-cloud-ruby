@@ -1,5 +1,13 @@
 # Release History
 
+### 1.9.0 (2025-03-25)
+
+#### Features
+
+* Support for general and specific info types 
+* Support for storing sample data profile findings in an existing BigQuery table or dataset 
+* Support for the Czechia info type 
+
 ### 1.8.0 (2025-02-25)
 
 #### Features

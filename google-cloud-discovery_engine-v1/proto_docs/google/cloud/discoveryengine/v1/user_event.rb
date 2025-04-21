@@ -34,6 +34,7 @@ module Google
         #     * `view-item-list`: View of a panel or ordered list of Documents.
         #     * `view-home-page`: View of the home page.
         #     * `view-category-page`: View of a category page, e.g. Home > Men > Jeans
+        #     * `add-feedback`: Add a user feedback.
         #
         #     Retail-related values:
         #
@@ -44,6 +45,23 @@ module Google
         #
         #     * `media-play`: Start/resume watching a video, playing a song, etc.
         #     * `media-complete`: Finished or stopped midway through a video, song, etc.
+        #
+        #     Custom conversion value:
+        #
+        #     * `conversion`: Customer defined conversion event.
+        # @!attribute [rw] conversion_type
+        #   @return [::String]
+        #     Optional. Conversion type.
+        #
+        #     Required if
+        #     {::Google::Cloud::DiscoveryEngine::V1::UserEvent#event_type UserEvent.event_type}
+        #     is `conversion`. This is a customer-defined conversion name in lowercase
+        #     letters or numbers separated by "-", such as "watch", "good-visit" etc.
+        #
+        #     Do not set the field if
+        #     {::Google::Cloud::DiscoveryEngine::V1::UserEvent#event_type UserEvent.event_type}
+        #     is not `conversion`. This mixes the custom conversion event with predefined
+        #     events like `search`, `view-item` etc.
         # @!attribute [rw] user_pseudo_id
         #   @return [::String]
         #     Required. A unique identifier for tracking visitors.
@@ -244,6 +262,10 @@ module Google
         # @!attribute [rw] media_info
         #   @return [::Google::Cloud::DiscoveryEngine::V1::MediaInfo]
         #     Media-specific info.
+        # @!attribute [rw] panels
+        #   @return [::Array<::Google::Cloud::DiscoveryEngine::V1::PanelInfo>]
+        #     Optional. List of panels associated with this event.
+        #     Used for page-level impression data.
         class UserEvent
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -457,6 +479,15 @@ module Google
         #   @return [::Boolean]
         #     Output only. Whether the referenced Document can be found in the data
         #     store.
+        # @!attribute [rw] conversion_value
+        #   @return [::Float]
+        #     Optional. The conversion value associated with this Document.
+        #     Must be set if
+        #     {::Google::Cloud::DiscoveryEngine::V1::UserEvent#event_type UserEvent.event_type}
+        #     is "conversion".
+        #
+        #     For example, a value of 1000 signifies that 1000 seconds were spent viewing
+        #     a Document for the `watch` conversion type.
         class DocumentInfo
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -481,6 +512,9 @@ module Google
         #     Must be set if
         #     {::Google::Cloud::DiscoveryEngine::V1::PanelInfo#panel_position panel_position}
         #     is set.
+        # @!attribute [rw] documents
+        #   @return [::Array<::Google::Cloud::DiscoveryEngine::V1::DocumentInfo>]
+        #     Optional. The document IDs associated with this panel.
         class PanelInfo
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

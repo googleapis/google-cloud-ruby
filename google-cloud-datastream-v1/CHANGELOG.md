@@ -1,5 +1,14 @@
 # Changelog
 
+### 1.1.0 (2025-03-28)
+
+#### Features
+
+* Support for Big Lake Managed Tables 
+* Support for passwords stored in Secret Manager ([#29419](https://github.com/googleapis/google-cloud-ruby/issues/29419)) 
+* Support for replicating from MySQL GTID 
+* Support for SalesForce data source 
+
 ### 1.0.0 (2025-02-07)
 
 ### ⚠ BREAKING CHANGES

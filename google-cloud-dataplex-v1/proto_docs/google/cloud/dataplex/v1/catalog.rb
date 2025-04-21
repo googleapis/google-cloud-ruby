@@ -1309,9 +1309,23 @@ module Google
         # @!attribute [rw] import_spec
         #   @return [::Google::Cloud::Dataplex::V1::MetadataJob::ImportJobSpec]
         #     Import job specification.
+        #
+        #     Note: The following fields are mutually exclusive: `import_spec`, `export_spec`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] export_spec
+        #   @return [::Google::Cloud::Dataplex::V1::MetadataJob::ExportJobSpec]
+        #     Export job specification.
+        #
+        #     Note: The following fields are mutually exclusive: `export_spec`, `import_spec`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [r] import_result
         #   @return [::Google::Cloud::Dataplex::V1::MetadataJob::ImportJobResult]
         #     Output only. Import job result.
+        #
+        #     Note: The following fields are mutually exclusive: `import_result`, `export_result`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [r] export_result
+        #   @return [::Google::Cloud::Dataplex::V1::MetadataJob::ExportJobResult]
+        #     Output only. Export job result.
+        #
+        #     Note: The following fields are mutually exclusive: `export_result`, `import_result`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [r] status
         #   @return [::Google::Cloud::Dataplex::V1::MetadataJob::Status]
         #     Output only. Metadata job status.
@@ -1339,6 +1353,19 @@ module Google
           #   @return [::Google::Protobuf::Timestamp]
           #     Output only. The time when the status was updated.
           class ImportJobResult
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Export Job Results. The result is based on the snapshot at the time when
+          # the job is created.
+          # @!attribute [r] exported_entries
+          #   @return [::Integer]
+          #     Output only. The number of entries that have been exported.
+          # @!attribute [r] error_message
+          #   @return [::String]
+          #     Output only. The error message if the export job failed.
+          class ExportJobResult
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
@@ -1500,6 +1527,70 @@ module Google
             end
           end
 
+          # Export job specification.
+          # @!attribute [rw] scope
+          #   @return [::Google::Cloud::Dataplex::V1::MetadataJob::ExportJobSpec::ExportJobScope]
+          #     Required. Selects the entries to be exported by this job.
+          # @!attribute [rw] output_path
+          #   @return [::String]
+          #     Required. The root path of the exported metadata.
+          #     Must be in the format: "gs://<bucket_id>"
+          #     Or specify a customized prefix after the bucket:
+          #     "gs://<bucket_id>/<folder1>/<folder2>/.../".
+          #     The length limit of the customized prefix is 128 characters.
+          #     The bucket must be in the same VPC-SC perimeter with the job.
+          class ExportJobSpec
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+
+            # Scope of the export job.
+            # @!attribute [rw] organization_level
+            #   @return [::Boolean]
+            #     Indicating if it is an organization level export job.
+            #     - When set to true, exports all entries from entry groups and projects
+            #     sharing the same organization id of the Metadata Job. Only projects and
+            #     entry groups in the VPC-SC perimeter will be exported. The projects and
+            #     entry groups are ignored.
+            #     - When set to false, one of the projects or entry groups must be
+            #     specified.
+            #     - Default to false.
+            # @!attribute [rw] projects
+            #   @return [::Array<::String>]
+            #     The projects that are in the scope of the export job. Can either be
+            #     project numbers or project IDs. If specified, only the entries from the
+            #     specified projects will be exported. The projects must be in the same
+            #     organization and in the VPC-SC perimeter. Either projects or
+            #     entry_groups can be specified when organization_level_export is set to
+            #     false.
+            #     Must follow the format: "projects/<project_id_or_number>"
+            # @!attribute [rw] entry_groups
+            #   @return [::Array<::String>]
+            #     The entry groups that are in scope for the export job. Optional. If
+            #     specified, only entries in the specified entry groups will be exported
+            #     by the job. Must be in the VPC-SC perimeter of the job. The location of
+            #     the entry groups must be the same as the job. Either projects or
+            #     entry_groups can be specified when organization_level_export is set to
+            #     false. Must follow the format:
+            #     "projects/<project_id_or_number>/locations/<location>/entryGroups/<entry_group_id>"
+            # @!attribute [rw] entry_types
+            #   @return [::Array<::String>]
+            #     If specified, only entries of the specified types will be
+            #     affected by the job.
+            #     Must follow the format:
+            #     "projects/<project_id_or_number>/locations/<location>/entryTypes/<entry_type_id>"
+            # @!attribute [rw] aspect_types
+            #   @return [::Array<::String>]
+            #     The aspect types that are in scope for the export job.
+            #     Optional. If specified, only aspects of the specified types will be
+            #     affected by the job.
+            #     Must follow the format:
+            #     "projects/<project_id_or_number>/locations/<location>/aspectTypes/<aspect_type_id>"
+            class ExportJobScope
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
+          end
+
           # Metadata job status.
           # @!attribute [r] state
           #   @return [::Google::Cloud::Dataplex::V1::MetadataJob::Status::State]
@@ -1561,6 +1652,9 @@ module Google
 
             # Import job.
             IMPORT = 1
+
+            # Export job type.
+            EXPORT = 2
           end
         end
 

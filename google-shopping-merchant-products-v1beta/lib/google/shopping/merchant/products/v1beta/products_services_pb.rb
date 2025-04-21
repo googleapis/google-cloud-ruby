@@ -26,7 +26,6 @@ module Google
         module V1beta
           module ProductsService
             # Service to use Product resource.
-            # This service works for products with online channel only.
             class Service
 
               include ::GRPC::GenericService
@@ -41,8 +40,8 @@ module Google
               # minutes before the updated final product can be retrieved.
               rpc :GetProduct, ::Google::Shopping::Merchant::Products::V1beta::GetProductRequest, ::Google::Shopping::Merchant::Products::V1beta::Product
               # Lists the processed products in your Merchant Center account. The response
-              # might contain fewer items than specified by pageSize. Rely on pageToken to
-              # determine if there are more items to be requested.
+              # might contain fewer items than specified by `pageSize`. Rely on `pageToken`
+              # to determine if there are more items to be requested.
               #
               # After inserting, updating, or deleting a product input, it may take several
               # minutes before the updated processed product can be retrieved.

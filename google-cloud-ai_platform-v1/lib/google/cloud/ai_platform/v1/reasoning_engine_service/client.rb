@@ -621,7 +621,7 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload delete_reasoning_engine(name: nil)
+            # @overload delete_reasoning_engine(name: nil, force: nil)
             #   Pass arguments to `delete_reasoning_engine` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -630,6 +630,10 @@ module Google
             #     Required. The name of the ReasoningEngine resource to be deleted.
             #     Format:
             #     `projects/{project}/locations/{location}/reasoningEngines/{reasoning_engine}`
+            #   @param force [::Boolean]
+            #     Optional. If set to true, child resources of this reasoning engine will
+            #     also be deleted. Otherwise, the request will fail with FAILED_PRECONDITION
+            #     error when the reasoning engine has undeleted child resources.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Gapic::Operation]

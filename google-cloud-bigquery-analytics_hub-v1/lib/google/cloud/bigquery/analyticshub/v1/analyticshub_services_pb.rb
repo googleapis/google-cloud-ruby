@@ -69,8 +69,8 @@ module Google
               # Upon subscription to a listing for a BigQuery dataset, Analytics Hub
               # creates a linked dataset in the subscriber's project.
               rpc :SubscribeListing, ::Google::Cloud::Bigquery::AnalyticsHub::V1::SubscribeListingRequest, ::Google::Cloud::Bigquery::AnalyticsHub::V1::SubscribeListingResponse
-              # Creates a Subscription to a Data Exchange. This is a long-running operation
-              # as it will create one or more linked datasets.
+              # Creates a Subscription to a Data Clean Room. This is a long-running
+              # operation as it will create one or more linked datasets.
               rpc :SubscribeDataExchange, ::Google::Cloud::Bigquery::AnalyticsHub::V1::SubscribeDataExchangeRequest, ::Google::Longrunning::Operation
               # Refreshes a Subscription to a Data Exchange. A Data Exchange can become
               # stale when a publisher adds or removes data. This is a long-running

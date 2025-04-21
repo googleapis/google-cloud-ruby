@@ -1,5 +1,17 @@
 # Changelog
 
+### 0.6.0 (2025-04-18)
+
+#### Features
+
+* add new AutonomousDatabase RPCs ([#29464](https://github.com/googleapis/google-cloud-ruby/issues/29464)) 
+
+### 0.5.1 (2025-03-25)
+
+#### Documentation
+
+* The network and cidr fields of AutonomousDatabase are now marked optional ([#29396](https://github.com/googleapis/google-cloud-ruby/issues/29396)) 
+
 ### 0.5.0 (2025-03-18)
 
 #### Features
