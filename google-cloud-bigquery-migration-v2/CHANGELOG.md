@@ -1,5 +1,11 @@
 # Changelog
 
+### 0.15.0 (2025-04-21)
+
+#### Features
+
+* expand QuotaFailure with quota error details ([#29461](https://github.com/googleapis/google-cloud-ruby/issues/29461)) 
+
 ### 0.14.1 (2025-03-05)
 
 #### Documentation

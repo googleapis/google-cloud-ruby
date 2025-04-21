@@ -22,7 +22,7 @@ module Google
     module Bigquery
       module Migration
         module V2
-          VERSION = "0.14.1"
+          VERSION = "0.15.0"
         end
       end
     end
