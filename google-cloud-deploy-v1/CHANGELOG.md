@@ -1,5 +1,14 @@
 # Changelog
 
+### 2.1.0 (2025-04-21)
+
+#### Features
+
+* Add resource definition for Revision ([#29441](https://github.com/googleapis/google-cloud-ruby/issues/29441)) 
+#### Documentation
+
+* Typos fixes and small improvements 
+
 ### 2.0.2 (2025-03-25)
 
 #### Documentation
