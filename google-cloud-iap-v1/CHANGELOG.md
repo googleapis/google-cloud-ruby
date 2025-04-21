@@ -1,5 +1,14 @@
 # Changelog
 
+### 1.3.0 (2025-04-21)
+
+#### Features
+
+* Identity-aware Proxy (IAP) released a feature Use IAP with Workforce Identity Federation ([#29463](https://github.com/googleapis/google-cloud-ruby/issues/29463)) 
+#### Documentation
+
+* update fields to optional and other updates 
+
 ### 1.2.0 (2025-01-29)
 
 #### Features
