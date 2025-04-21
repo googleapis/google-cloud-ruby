@@ -848,6 +848,15 @@ module Google
         #   @return [::Google::Cloud::GDCHardwareManagement::V1alpha::SignalZoneStateRequest::ProvisioningStateSignal]
         #     Optional. The provisioning state signal to send for this zone. Either
         #     state_signal or provisioning_state_signal must be set, but not both.
+        # @!attribute [rw] step
+        #   @return [::String]
+        #     Optional. The step being executed. Provides a finer grained status when the
+        #     state_signal is FACTORY_TURNUP_CHECKS_STARTED or
+        #     FACTORY_TURNUP_CHECKS_FAILED.
+        # @!attribute [rw] details
+        #   @return [::String]
+        #     Optional. Additional details, such as an error message when state_signal is
+        #     FACTORY_TURNUP_CHECKS_FAILED.
         class SignalZoneStateRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -856,6 +865,9 @@ module Google
           module StateSignal
             # State signal of the zone is unspecified.
             STATE_SIGNAL_UNSPECIFIED = 0
+
+            # Factory turnup checks have started.
+            FACTORY_TURNUP_CHECKS_STARTED = 3
 
             # The Zone is ready for site turnup.
             FACTORY_TURNUP_CHECKS_PASSED = 1
