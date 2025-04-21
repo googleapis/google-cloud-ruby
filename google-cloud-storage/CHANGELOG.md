@@ -1,5 +1,11 @@
 # Release History
 
+### 1.56.0 (2025-04-21)
+
+#### Features
+
+* move_object within hns bucket ([#29391](https://github.com/googleapis/google-cloud-ruby/issues/29391)) 
+
 ### 1.55.0 (2025-02-13)
 
 #### Features
