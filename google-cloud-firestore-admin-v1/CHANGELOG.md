@@ -1,5 +1,12 @@
 # Release History
 
+### 1.4.0 (2025-04-21)
+
+#### Features
+
+* add the UserCreds API 
+* new Firestore index modes and Database Editions ([#29439](https://github.com/googleapis/google-cloud-ruby/issues/29439)) 
+
 ### 1.3.0 (2025-01-28)
 
 #### Features

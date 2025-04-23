@@ -1,0 +1,3 @@
+deep-copy-regex:
+  - source: /google/cloud/storagebatchoperations/[^/]+-ruby/(.*)
+    dest: /owl-bot-staging/google-cloud-storage_batch_operations/$1

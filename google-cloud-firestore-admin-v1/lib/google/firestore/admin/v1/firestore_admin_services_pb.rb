@@ -139,6 +139,22 @@ module Google
               rpc :UpdateDatabase, ::Google::Cloud::Firestore::Admin::V1::UpdateDatabaseRequest, ::Google::Longrunning::Operation
               # Deletes a database.
               rpc :DeleteDatabase, ::Google::Cloud::Firestore::Admin::V1::DeleteDatabaseRequest, ::Google::Longrunning::Operation
+              # Create a user creds.
+              rpc :CreateUserCreds, ::Google::Cloud::Firestore::Admin::V1::CreateUserCredsRequest, ::Google::Cloud::Firestore::Admin::V1::UserCreds
+              # Gets a user creds resource. Note that the returned resource does not
+              # contain the secret value itself.
+              rpc :GetUserCreds, ::Google::Cloud::Firestore::Admin::V1::GetUserCredsRequest, ::Google::Cloud::Firestore::Admin::V1::UserCreds
+              # List all user creds in the database. Note that the returned resource
+              # does not contain the secret value itself.
+              rpc :ListUserCreds, ::Google::Cloud::Firestore::Admin::V1::ListUserCredsRequest, ::Google::Cloud::Firestore::Admin::V1::ListUserCredsResponse
+              # Enables a user creds. No-op if the user creds are already enabled.
+              rpc :EnableUserCreds, ::Google::Cloud::Firestore::Admin::V1::EnableUserCredsRequest, ::Google::Cloud::Firestore::Admin::V1::UserCreds
+              # Disables a user creds. No-op if the user creds are already disabled.
+              rpc :DisableUserCreds, ::Google::Cloud::Firestore::Admin::V1::DisableUserCredsRequest, ::Google::Cloud::Firestore::Admin::V1::UserCreds
+              # Resets the password of a user creds.
+              rpc :ResetUserPassword, ::Google::Cloud::Firestore::Admin::V1::ResetUserPasswordRequest, ::Google::Cloud::Firestore::Admin::V1::UserCreds
+              # Deletes a user creds.
+              rpc :DeleteUserCreds, ::Google::Cloud::Firestore::Admin::V1::DeleteUserCredsRequest, ::Google::Protobuf::Empty
               # Gets information about a backup.
               rpc :GetBackup, ::Google::Cloud::Firestore::Admin::V1::GetBackupRequest, ::Google::Cloud::Firestore::Admin::V1::Backup
               # Lists all the backups.

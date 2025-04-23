@@ -158,6 +158,9 @@ module Google
         # @!attribute [r] bigquery_publishing
         #   @return [::Google::Cloud::Dataplex::V1::DataDiscoveryResult::BigQueryPublishing]
         #     Output only. Configuration for metadata publishing.
+        # @!attribute [r] scan_statistics
+        #   @return [::Google::Cloud::Dataplex::V1::DataDiscoveryResult::ScanStatistics]
+        #     Output only. Statistics of the DataDiscoveryScan.
         class DataDiscoveryResult
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -165,10 +168,44 @@ module Google
           # Describes BigQuery publishing configurations.
           # @!attribute [r] dataset
           #   @return [::String]
-          #     Output only. The BigQuery dataset to publish to. It takes the form
-          #     `projects/{project_id}/datasets/{dataset_id}`.
-          #     If not set, the service creates a default publishing dataset.
+          #     Output only. The BigQuery dataset the discovered tables are published to.
+          # @!attribute [r] location
+          #   @return [::String]
+          #     Output only. The location of the BigQuery publishing dataset.
           class BigQueryPublishing
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Statistics of the DataDiscoveryScan.
+          # @!attribute [rw] scanned_file_count
+          #   @return [::Integer]
+          #     The number of files scanned.
+          # @!attribute [rw] data_processed_bytes
+          #   @return [::Integer]
+          #     The data processed in bytes.
+          # @!attribute [rw] files_excluded
+          #   @return [::Integer]
+          #     The number of files excluded.
+          # @!attribute [rw] tables_created
+          #   @return [::Integer]
+          #     The number of tables created.
+          # @!attribute [rw] tables_deleted
+          #   @return [::Integer]
+          #     The number of tables deleted.
+          # @!attribute [rw] tables_updated
+          #   @return [::Integer]
+          #     The number of tables updated.
+          # @!attribute [rw] filesets_created
+          #   @return [::Integer]
+          #     The number of filesets created.
+          # @!attribute [rw] filesets_deleted
+          #   @return [::Integer]
+          #     The number of filesets deleted.
+          # @!attribute [rw] filesets_updated
+          #   @return [::Integer]
+          #     The number of filesets updated.
+          class ScanStatistics
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end

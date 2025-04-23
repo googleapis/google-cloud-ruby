@@ -1252,7 +1252,7 @@ module Google
               #     * `datacatalog.entry.{PROJECT_ID}.{LOCATION_ID}.{ENTRY_GROUP_ID}.{ENTRY_ID}`
               #
               #     Identifiers (`*_ID`) should comply with the
-              #     [Lexical structure in Standard SQL]
+              #     [Lexical structure in GoogleSQL]
               #     (https://cloud.google.com/bigquery/docs/reference/standard-sql/lexical).
               #
               #     Note: The following fields are mutually exclusive: `sql_resource`, `linked_resource`, `fully_qualified_name`. If a field in that set is populated, all other fields in the set will automatically be cleared.

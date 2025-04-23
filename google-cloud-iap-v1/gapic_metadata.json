@@ -35,6 +35,11 @@
                 "update_iap_settings"
               ]
             },
+            "ValidateIapAttributeExpression": {
+              "methods": [
+                "validate_iap_attribute_expression"
+              ]
+            },
             "ListTunnelDestGroups": {
               "methods": [
                 "list_tunnel_dest_groups"

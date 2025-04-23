@@ -1,5 +1,20 @@
 # Changelog
 
+### 2.1.0 (2025-04-21)
+
+#### Features
+
+* add enum types related to Abort 
+* add enum types related to Drop 
+* add enum types related to Firewall 
+* add enum types related to Google Service 
+* add messages and fields related to Direct VPC Egress ([#29449](https://github.com/googleapis/google-cloud-ruby/issues/29449)) 
+* add messages and fields related to Route 
+* add messages and fields related to Serverless External 
+#### Documentation
+
+* update outdated comments 
+
 ### 2.0.1 (2025-03-18)
 
 #### Documentation

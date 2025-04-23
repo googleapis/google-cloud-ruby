@@ -623,30 +623,31 @@ module Google
         end
 
         # Assessment for Fraud Prevention.
-        # @!attribute [rw] transaction_risk
+        # @!attribute [r] transaction_risk
         #   @return [::Float]
-        #     Probability (0-1) of this transaction being fraudulent. Summarizes the
-        #     combined risk of attack vectors below.
-        # @!attribute [rw] stolen_instrument_verdict
+        #     Output only. Probability (0-1) of this transaction being fraudulent.
+        #     Summarizes the combined risk of attack vectors below.
+        # @!attribute [r] stolen_instrument_verdict
         #   @return [::Google::Cloud::RecaptchaEnterprise::V1beta1::FraudPreventionAssessment::StolenInstrumentVerdict]
-        #     Assessment of this transaction for risk of a stolen instrument.
-        # @!attribute [rw] card_testing_verdict
+        #     Output only. Assessment of this transaction for risk of a stolen
+        #     instrument.
+        # @!attribute [r] card_testing_verdict
         #   @return [::Google::Cloud::RecaptchaEnterprise::V1beta1::FraudPreventionAssessment::CardTestingVerdict]
-        #     Assessment of this transaction for risk of being part of a card testing
-        #     attack.
-        # @!attribute [rw] behavioral_trust_verdict
+        #     Output only. Assessment of this transaction for risk of being part of a
+        #     card testing attack.
+        # @!attribute [r] behavioral_trust_verdict
         #   @return [::Google::Cloud::RecaptchaEnterprise::V1beta1::FraudPreventionAssessment::BehavioralTrustVerdict]
-        #     Assessment of this transaction for behavioral trust.
+        #     Output only. Assessment of this transaction for behavioral trust.
         class FraudPreventionAssessment
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
 
           # Information about stolen instrument fraud, where the user is not the
           # legitimate owner of the instrument being used for the purchase.
-          # @!attribute [rw] risk
+          # @!attribute [r] risk
           #   @return [::Float]
-          #     Probability (0-1) of this transaction being executed with a stolen
-          #     instrument.
+          #     Output only. Probability (0-1) of this transaction being executed with a
+          #     stolen instrument.
           class StolenInstrumentVerdict
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -654,20 +655,20 @@ module Google
 
           # Information about card testing fraud, where an adversary is testing
           # fraudulently obtained cards or brute forcing their details.
-          # @!attribute [rw] risk
+          # @!attribute [r] risk
           #   @return [::Float]
-          #     Probability (0-1) of this transaction attempt being part of a card
-          #     testing attack.
+          #     Output only. Probability (0-1) of this transaction attempt being part of
+          #     a card testing attack.
           class CardTestingVerdict
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
 
           # Information about behavioral trust of the transaction.
-          # @!attribute [rw] trust
+          # @!attribute [r] trust
           #   @return [::Float]
-          #     Probability (0-1) of this transaction attempt being executed in a
-          #     behaviorally trustworthy way.
+          #     Output only. Probability (0-1) of this transaction attempt being executed
+          #     in a behaviorally trustworthy way.
           class BehavioralTrustVerdict
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods

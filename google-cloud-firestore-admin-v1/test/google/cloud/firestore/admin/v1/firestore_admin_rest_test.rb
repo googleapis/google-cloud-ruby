@@ -910,6 +910,386 @@ class ::Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Rest::ClientTest < 
     end
   end
 
+  def test_create_user_creds
+    # Create test objects.
+    client_result = ::Google::Cloud::Firestore::Admin::V1::UserCreds.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    user_creds = {}
+    user_creds_id = "hello world"
+
+    create_user_creds_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Rest::ServiceStub.stub :transcode_create_user_creds_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, create_user_creds_client_stub do
+        # Create client
+        client = ::Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.create_user_creds({ parent: parent, user_creds: user_creds, user_creds_id: user_creds_id }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.create_user_creds parent: parent, user_creds: user_creds, user_creds_id: user_creds_id do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.create_user_creds ::Google::Cloud::Firestore::Admin::V1::CreateUserCredsRequest.new(parent: parent, user_creds: user_creds, user_creds_id: user_creds_id) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.create_user_creds({ parent: parent, user_creds: user_creds, user_creds_id: user_creds_id }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.create_user_creds(::Google::Cloud::Firestore::Admin::V1::CreateUserCredsRequest.new(parent: parent, user_creds: user_creds, user_creds_id: user_creds_id), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, create_user_creds_client_stub.call_count
+      end
+    end
+  end
+
+  def test_get_user_creds
+    # Create test objects.
+    client_result = ::Google::Cloud::Firestore::Admin::V1::UserCreds.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    get_user_creds_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Rest::ServiceStub.stub :transcode_get_user_creds_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, get_user_creds_client_stub do
+        # Create client
+        client = ::Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.get_user_creds({ name: name }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.get_user_creds name: name do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.get_user_creds ::Google::Cloud::Firestore::Admin::V1::GetUserCredsRequest.new(name: name) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.get_user_creds({ name: name }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.get_user_creds(::Google::Cloud::Firestore::Admin::V1::GetUserCredsRequest.new(name: name), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, get_user_creds_client_stub.call_count
+      end
+    end
+  end
+
+  def test_list_user_creds
+    # Create test objects.
+    client_result = ::Google::Cloud::Firestore::Admin::V1::ListUserCredsResponse.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+
+    list_user_creds_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Rest::ServiceStub.stub :transcode_list_user_creds_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, list_user_creds_client_stub do
+        # Create client
+        client = ::Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.list_user_creds({ parent: parent }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.list_user_creds parent: parent do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.list_user_creds ::Google::Cloud::Firestore::Admin::V1::ListUserCredsRequest.new(parent: parent) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.list_user_creds({ parent: parent }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.list_user_creds(::Google::Cloud::Firestore::Admin::V1::ListUserCredsRequest.new(parent: parent), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, list_user_creds_client_stub.call_count
+      end
+    end
+  end
+
+  def test_enable_user_creds
+    # Create test objects.
+    client_result = ::Google::Cloud::Firestore::Admin::V1::UserCreds.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    enable_user_creds_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Rest::ServiceStub.stub :transcode_enable_user_creds_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, enable_user_creds_client_stub do
+        # Create client
+        client = ::Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.enable_user_creds({ name: name }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.enable_user_creds name: name do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.enable_user_creds ::Google::Cloud::Firestore::Admin::V1::EnableUserCredsRequest.new(name: name) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.enable_user_creds({ name: name }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.enable_user_creds(::Google::Cloud::Firestore::Admin::V1::EnableUserCredsRequest.new(name: name), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, enable_user_creds_client_stub.call_count
+      end
+    end
+  end
+
+  def test_disable_user_creds
+    # Create test objects.
+    client_result = ::Google::Cloud::Firestore::Admin::V1::UserCreds.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    disable_user_creds_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Rest::ServiceStub.stub :transcode_disable_user_creds_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, disable_user_creds_client_stub do
+        # Create client
+        client = ::Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.disable_user_creds({ name: name }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.disable_user_creds name: name do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.disable_user_creds ::Google::Cloud::Firestore::Admin::V1::DisableUserCredsRequest.new(name: name) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.disable_user_creds({ name: name }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.disable_user_creds(::Google::Cloud::Firestore::Admin::V1::DisableUserCredsRequest.new(name: name), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, disable_user_creds_client_stub.call_count
+      end
+    end
+  end
+
+  def test_reset_user_password
+    # Create test objects.
+    client_result = ::Google::Cloud::Firestore::Admin::V1::UserCreds.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    reset_user_password_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Rest::ServiceStub.stub :transcode_reset_user_password_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, reset_user_password_client_stub do
+        # Create client
+        client = ::Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.reset_user_password({ name: name }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.reset_user_password name: name do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.reset_user_password ::Google::Cloud::Firestore::Admin::V1::ResetUserPasswordRequest.new(name: name) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.reset_user_password({ name: name }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.reset_user_password(::Google::Cloud::Firestore::Admin::V1::ResetUserPasswordRequest.new(name: name), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, reset_user_password_client_stub.call_count
+      end
+    end
+  end
+
+  def test_delete_user_creds
+    # Create test objects.
+    client_result = ::Google::Protobuf::Empty.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    delete_user_creds_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Rest::ServiceStub.stub :transcode_delete_user_creds_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, delete_user_creds_client_stub do
+        # Create client
+        client = ::Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.delete_user_creds({ name: name }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.delete_user_creds name: name do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.delete_user_creds ::Google::Cloud::Firestore::Admin::V1::DeleteUserCredsRequest.new(name: name) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.delete_user_creds({ name: name }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.delete_user_creds(::Google::Cloud::Firestore::Admin::V1::DeleteUserCredsRequest.new(name: name), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, delete_user_creds_client_stub.call_count
+      end
+    end
+  end
+
   def test_get_backup
     # Create test objects.
     client_result = ::Google::Cloud::Firestore::Admin::V1::Backup.new

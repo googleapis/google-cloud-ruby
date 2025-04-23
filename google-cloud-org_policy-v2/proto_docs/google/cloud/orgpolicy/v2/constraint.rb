@@ -29,8 +29,8 @@ module Google
         # organization by setting a policy that includes constraints at different
         # locations in the organization's resource hierarchy. Policies are inherited
         # down the resource hierarchy from higher levels, but can also be overridden.
-        # For details about the inheritance rules please read about
-        # [`policies`][google.cloud.OrgPolicy.v2.Policy].
+        # For details about the inheritance rules, see
+        # {::Google::Cloud::OrgPolicy::V2::Policy `Policy`}.
         #
         # Constraints have a default behavior determined by the `constraint_default`
         # field, which is the enforcement behavior that is used in the absence of a
@@ -61,23 +61,31 @@ module Google
         #     The evaluation behavior of this constraint in the absence of a policy.
         # @!attribute [rw] list_constraint
         #   @return [::Google::Cloud::OrgPolicy::V2::Constraint::ListConstraint]
-        #     Defines this constraint as being a ListConstraint.
+        #     Defines this constraint as being a list constraint.
         #
         #     Note: The following fields are mutually exclusive: `list_constraint`, `boolean_constraint`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] boolean_constraint
         #   @return [::Google::Cloud::OrgPolicy::V2::Constraint::BooleanConstraint]
-        #     Defines this constraint as being a BooleanConstraint.
+        #     Defines this constraint as being a boolean constraint.
         #
         #     Note: The following fields are mutually exclusive: `boolean_constraint`, `list_constraint`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] supports_dry_run
         #   @return [::Boolean]
         #     Shows if dry run is supported for this constraint or not.
+        # @!attribute [rw] equivalent_constraint
+        #   @return [::String]
+        #     Managed constraint and canned constraint sometimes can have
+        #     equivalents. This field is used to store the equivalent constraint name.
+        # @!attribute [rw] supports_simulation
+        #   @return [::Boolean]
+        #     Shows if simulation is supported for this constraint or not.
         class Constraint
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
 
-          # A constraint that allows or disallows a list of string values, which are
-          # configured by an Organization Policy administrator with a policy.
+          # A constraint type that allows or disallows a list of string values, which
+          # are configured in the
+          # {::Google::Cloud::OrgPolicy::V2::PolicySpec::PolicyRule `PolicyRule`}.
           # @!attribute [rw] supports_in
           #   @return [::Boolean]
           #     Indicates whether values grouped into categories can be used in
@@ -94,11 +102,148 @@ module Google
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
 
-          # A constraint that is either enforced or not.
+          # Custom constraint definition. Defines this as a managed constraint.
+          # @!attribute [rw] resource_types
+          #   @return [::Array<::String>]
+          #     The resource instance type on which this policy applies. Format will be
+          #     of the form : `<service name>/<type>` Example:
           #
-          # For example, a constraint `constraints/compute.disableSerialPortAccess`.
-          # If it is enforced on a VM instance, serial port connections will not be
-          # opened to that instance.
+          #      * `compute.googleapis.com/Instance`.
+          # @!attribute [rw] method_types
+          #   @return [::Array<::Google::Cloud::OrgPolicy::V2::Constraint::CustomConstraintDefinition::MethodType>]
+          #     All the operations being applied for this constraint.
+          # @!attribute [rw] condition
+          #   @return [::String]
+          #     Org policy condition/expression. For example:
+          #     `resource.instanceName.matches("[production|test]_.*_(\d)+")` or,
+          #     `resource.management.auto_upgrade == true`
+          #
+          #     The max length of the condition is 1000 characters.
+          # @!attribute [rw] action_type
+          #   @return [::Google::Cloud::OrgPolicy::V2::Constraint::CustomConstraintDefinition::ActionType]
+          #     Allow or deny type.
+          # @!attribute [rw] parameters
+          #   @return [::Google::Protobuf::Map{::String => ::Google::Cloud::OrgPolicy::V2::Constraint::CustomConstraintDefinition::Parameter}]
+          #     Stores the structure of
+          #     {::Google::Cloud::OrgPolicy::V2::Constraint::CustomConstraintDefinition::Parameter `Parameters`}
+          #     used by the constraint condition. The key of `map` represents the name of
+          #     the parameter.
+          class CustomConstraintDefinition
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+
+            # Defines a parameter structure.
+            # @!attribute [rw] type
+            #   @return [::Google::Cloud::OrgPolicy::V2::Constraint::CustomConstraintDefinition::Parameter::Type]
+            #     Type of the parameter.
+            # @!attribute [rw] default_value
+            #   @return [::Google::Protobuf::Value]
+            #     Sets the value of the parameter in an assignment if no value is given.
+            # @!attribute [rw] valid_values_expr
+            #   @return [::String]
+            #     Provides a CEL expression to specify the acceptable parameter values
+            #     during assignment.
+            #     For example, parameterName in ("parameterValue1", "parameterValue2")
+            # @!attribute [rw] metadata
+            #   @return [::Google::Cloud::OrgPolicy::V2::Constraint::CustomConstraintDefinition::Parameter::Metadata]
+            #     Defines subproperties primarily used by the UI to display user-friendly
+            #     information.
+            # @!attribute [rw] item
+            #   @return [::Google::Cloud::OrgPolicy::V2::Constraint::CustomConstraintDefinition::Parameter::Type]
+            #     Determines the parameter's value structure.
+            #     For example, `LIST<STRING>` can be specified by defining `type: LIST`,
+            #     and `item: STRING`.
+            class Parameter
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+
+              # Defines Metadata structure.
+              # @!attribute [rw] description
+              #   @return [::String]
+              #     Detailed description of what this `parameter` is and use of it.
+              #     Mutable.
+              class Metadata
+                include ::Google::Protobuf::MessageExts
+                extend ::Google::Protobuf::MessageExts::ClassMethods
+              end
+
+              # All valid types of parameter.
+              module Type
+                # This is only used for distinguishing unset values and should never be
+                # used. Results in an error.
+                TYPE_UNSPECIFIED = 0
+
+                # List parameter type.
+                LIST = 1
+
+                # String parameter type.
+                STRING = 2
+
+                # Boolean parameter type.
+                BOOLEAN = 3
+              end
+            end
+
+            # @!attribute [rw] key
+            #   @return [::String]
+            # @!attribute [rw] value
+            #   @return [::Google::Cloud::OrgPolicy::V2::Constraint::CustomConstraintDefinition::Parameter]
+            class ParametersEntry
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
+
+            # The operation for which this constraint will be applied. To apply this
+            # constraint only when creating new resources, the `method_types` should be
+            # `CREATE` only. To apply this constraint when creating or deleting
+            # resources, the `method_types` should be `CREATE` and `DELETE`.
+            #
+            # `UPDATE`-only custom constraints are not supported. Use `CREATE` or
+            # `CREATE, UPDATE`.
+            module MethodType
+              # This is only used for distinguishing unset values and should never be
+              # used. Results in an error.
+              METHOD_TYPE_UNSPECIFIED = 0
+
+              # Constraint applied when creating the resource.
+              CREATE = 1
+
+              # Constraint applied when updating the resource.
+              UPDATE = 2
+
+              # Constraint applied when deleting the resource.
+              # Not currently supported.
+              DELETE = 3
+
+              # Constraint applied when removing an IAM grant.
+              REMOVE_GRANT = 4
+
+              # Constraint applied when enforcing forced tagging.
+              GOVERN_TAGS = 5
+            end
+
+            # Allow or deny type.
+            module ActionType
+              # This is only used for distinguishing unset values and should never be
+              # used. Results in an error.
+              ACTION_TYPE_UNSPECIFIED = 0
+
+              # Allowed action type.
+              ALLOW = 1
+
+              # Deny action type.
+              DENY = 2
+            end
+          end
+
+          # A constraint type is enforced or not enforced, which is configured in the
+          # {::Google::Cloud::OrgPolicy::V2::PolicySpec::PolicyRule `PolicyRule`}.
+          #
+          # If `customConstraintDefinition` is defined, this constraint is a managed
+          # constraint.
+          # @!attribute [rw] custom_constraint_definition
+          #   @return [::Google::Cloud::OrgPolicy::V2::Constraint::CustomConstraintDefinition]
+          #     Custom constraint definition. Defines this as a managed constraint.
           class BooleanConstraint
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -110,7 +255,7 @@ module Google
           # Immutable after creation.
           module ConstraintDefault
             # This is only used for distinguishing unset values and should never be
-            # used.
+            # used. Results in an error.
             CONSTRAINT_DEFAULT_UNSPECIFIED = 0
 
             # Indicate that all values are allowed for list constraints.
@@ -143,7 +288,7 @@ module Google
         # @!attribute [rw] resource_types
         #   @return [::Array<::String>]
         #     Immutable. The resource instance type on which this policy applies. Format
-        #     will be of the form : `<canonical service name>/<type>` Example:
+        #     will be of the form : `<service name>/<type>` Example:
         #
         #      * `compute.googleapis.com/Instance`.
         # @!attribute [rw] method_types
@@ -151,7 +296,8 @@ module Google
         #     All the operations being applied for this constraint.
         # @!attribute [rw] condition
         #   @return [::String]
-        #     Org policy condition/expression. For example:
+        #     A Common Expression Language (CEL) condition which is used in the
+        #     evaluation of the constraint. For example:
         #     `resource.instanceName.matches("[production|test]_.*_(\d)+")` or,
         #     `resource.management.auto_upgrade == true`
         #
@@ -171,20 +317,21 @@ module Google
         #   @return [::Google::Protobuf::Timestamp]
         #     Output only. The last time this custom constraint was updated. This
         #     represents the last time that the `CreateCustomConstraint` or
-        #     `UpdateCustomConstraint` RPC was called
+        #     `UpdateCustomConstraint` methods were called.
         class CustomConstraint
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
 
           # The operation for which this constraint will be applied. To apply this
-          # constraint only when creating new VMs, the `method_types` should be
+          # constraint only when creating new resources, the `method_types` should be
           # `CREATE` only. To apply this constraint when creating or deleting
-          # VMs, the `method_types` should be `CREATE` and `DELETE`.
+          # resources, the `method_types` should be `CREATE` and `DELETE`.
           #
           # `UPDATE` only custom constraints are not supported. Use `CREATE` or
           # `CREATE, UPDATE`.
           module MethodType
-            # Unspecified. Results in an error.
+            # This is only used for distinguishing unset values and should never be
+            # used. Results in an error.
             METHOD_TYPE_UNSPECIFIED = 0
 
             # Constraint applied when creating the resource.
@@ -194,7 +341,7 @@ module Google
             UPDATE = 2
 
             # Constraint applied when deleting the resource.
-            # Not supported yet.
+            # Not currently supported.
             DELETE = 3
 
             # Constraint applied when removing an IAM grant.
@@ -206,7 +353,8 @@ module Google
 
           # Allow or deny type.
           module ActionType
-            # Unspecified. Results in an error.
+            # This is only used for distinguishing unset values and should never be
+            # used. Results in an error.
             ACTION_TYPE_UNSPECIFIED = 0
 
             # Allowed action type.

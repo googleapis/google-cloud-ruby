@@ -1,5 +1,11 @@
 # Release History
 
+### 1.4.0 (2025-04-21)
+
+#### Features
+
+* Add managed constraints new fields (e.g. parameter) ([#29486](https://github.com/googleapis/google-cloud-ruby/issues/29486)) 
+
 ### 1.3.0 (2025-01-28)
 
 #### Features
