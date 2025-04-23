@@ -72,7 +72,9 @@ module Google
         # @!attribute [r] state_message
         #   @return [::String]
         #     Output only. A human readable message explaining why the VolumeBackup is in
-        #     its current state.
+        #     its current state. This field is only meant for human consumption and
+        #     should not be used programmatically as this field is not guaranteed to be
+        #     consistent.
         # @!attribute [r] etag
         #   @return [::String]
         #     Output only. `etag` is used for optimistic concurrency control as a way to
@@ -80,6 +82,12 @@ module Google
         #     other. It is strongly suggested that systems make use of the `etag` in the
         #     read-modify-write cycle to perform volume backup updates in order to avoid
         #     race conditions.
+        # @!attribute [r] satisfies_pzs
+        #   @return [::Boolean]
+        #     Output only. [Output Only] Reserved for future use.
+        # @!attribute [r] satisfies_pzi
+        #   @return [::Boolean]
+        #     Output only. [Output Only] Reserved for future use.
         class VolumeBackup
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -121,6 +129,10 @@ module Google
             # This VolumeBackup resource (and its associated artifacts) is in the
             # process of being deleted.
             DELETING = 6
+
+            # The underlying artifacts of a volume backup (eg: persistent disk
+            # snapshots) are deleted.
+            CLEANED_UP = 7
           end
         end
 
