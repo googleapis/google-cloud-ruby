@@ -41,6 +41,7 @@ module Google
             end
           end
         end
+        Publisher = TopicAdmin
       end
     end
   end

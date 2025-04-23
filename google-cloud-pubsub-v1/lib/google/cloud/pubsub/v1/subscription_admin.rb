@@ -42,8 +42,6 @@ module Google
         #
         module SubscriptionAdmin
         end
-
-        Subscriber = SubscriptionAdmin
       end
     end
   end

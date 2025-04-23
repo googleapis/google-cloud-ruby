@@ -22,7 +22,7 @@ require "gapic/grpc/service_stub"
 
 require "google/cloud/pubsub/v1/subscription_admin"
 
-class ::Google::Cloud::PubSub::V1::Subscriber::HelpersTest < Minitest::Test
+class ::Google::Cloud::PubSub::V1::SubscriptionAdmin::HelpersTest < Minitest::Test
   class DummyStub
     def endpoint
       "endpoint.example.com"
@@ -44,7 +44,7 @@ class ::Google::Cloud::PubSub::V1::Subscriber::HelpersTest < Minitest::Test
   def test_config_channel_args
     ::Gapic::ServiceStub.stub :new, DummyStub.new do
       ::Google::Auth::Credentials.stub :default, :my_creds do
-        ::Google::Cloud::PubSub::V1::Subscriber::Client.new do |config|
+        ::Google::Cloud::PubSub::V1::SubscriptionAdmin::Client.new do |config|
           channel_args = config.channel_args
           assert channel_args
           assert_equal -1, channel_args["grpc.max_send_message_length"]

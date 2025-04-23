@@ -19,7 +19,7 @@ module Google
   module Cloud
     module PubSub
       module V1
-        module Subscriber
+        module SubscriptionAdmin
           class Client # rubocop:disable Style/Documentation
             class << self
               alias configure_internal configure
@@ -41,6 +41,7 @@ module Google
             end
           end
         end
+        Subscriber = SubscriptionAdmin
       end
     end
   end
