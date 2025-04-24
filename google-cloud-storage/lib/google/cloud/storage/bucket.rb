@@ -731,14 +731,14 @@ module Google
         #   storage = Google::Cloud::Storage.new
         #
         #   bucket = storage.bucket "my-bucket"
-        #   bucket.restart_ongoing_resumable_upload file,upload_id
+        #   bucket.restart_resumable_upload file,upload_id
 
 
-        def restart_ongoing_resumable_upload file, upload_id
+        def restart_resumable_upload file, upload_id
           ensure_service!
           ensure_io_or_file_exists! file
           raise "Upload Id missing" unless upload_id
-          service.restart_delete_ongoing_resumable_upload name, file, upload_id
+          service.restart_resumable_upload name, file, upload_id
         end
 
         ##
@@ -1448,13 +1448,13 @@ module Google
         #   storage = Google::Cloud::Storage.new
         #
         #   bucket = storage.bucket "my-bucket"
-        #   bucket.delete_ongoing_resumable_upload file,upload_id
+        #   bucket.delete_resumable_upload file,upload_id
 
-        def delete_ongoing_resumable_upload file, upload_id
+        def delete_resumable_upload file, upload_id
           ensure_service!
           ensure_io_or_file_exists! file
           raise "Upload Id missing" unless upload_id
-          service.restart_delete_ongoing_resumable_upload name, file, upload_id, options: {delete_upload: true}
+          service.delete_resumable_upload name, file, upload_id, options: {delete_upload: true}
         end
         ##
         # Retrieves a list of files matching the criteria.
