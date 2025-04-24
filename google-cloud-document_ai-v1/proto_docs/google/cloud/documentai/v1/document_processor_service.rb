@@ -61,6 +61,13 @@ module Google
           # @!attribute [rw] chunking_config
           #   @return [::Google::Cloud::DocumentAI::V1::ProcessOptions::LayoutConfig::ChunkingConfig]
           #     Optional. Config for chunking in layout parser processor.
+          # @!attribute [rw] return_images
+          #   @return [::Boolean]
+          #     Optional. Whether to include images in layout parser processor response.
+          # @!attribute [rw] return_bounding_boxes
+          #   @return [::Boolean]
+          #     Optional. Whether to include bounding boxes in layout parser processor
+          #     response.
           class LayoutConfig
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
