@@ -1,0 +1,25 @@
+{
+  "generated": [
+    ".gitignore",
+    ".repo-metadata.json",
+    ".rubocop.yml",
+    ".toys.rb",
+    ".yardopts",
+    "AUTHENTICATION.md",
+    "CHANGELOG.md",
+    "Gemfile",
+    "LICENSE.md",
+    "README.md",
+    "Rakefile",
+    "google-cloud-financial_services.gemspec",
+    "lib/google-cloud-financial_services.rb",
+    "lib/google/cloud/financial_services.rb",
+    "lib/google/cloud/financial_services/version.rb",
+    "test/google/cloud/financial_services/client_test.rb",
+    "test/google/cloud/financial_services/version_test.rb",
+    "test/helper.rb"
+  ],
+  "static": [
+    ".OwlBot.yaml"
+  ]
+}

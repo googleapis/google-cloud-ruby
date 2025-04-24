@@ -1,0 +1,3 @@
+deep-copy-regex:
+  - source: /google/cloud/financialservices/[^/]+-ruby/(.*)
+    dest: /owl-bot-staging/google-cloud-financial_services/$1
