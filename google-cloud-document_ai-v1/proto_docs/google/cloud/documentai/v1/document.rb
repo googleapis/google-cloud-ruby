@@ -40,6 +40,9 @@ module Google
         #     representation, whereas JSON representations use base64.
         #
         #     Note: The following fields are mutually exclusive: `content`, `uri`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] docid
+        #   @return [::String]
+        #     Optional. An internal identifier for document. Should be loggable (no PII).
         # @!attribute [rw] mime_type
         #   @return [::String]
         #     An IANA published [media type (MIME
@@ -1101,6 +1104,9 @@ module Google
             # @!attribute [rw] page_span
             #   @return [::Google::Cloud::DocumentAI::V1::Document::DocumentLayout::DocumentLayoutBlock::LayoutPageSpan]
             #     Page span of the block.
+            # @!attribute [rw] bounding_box
+            #   @return [::Google::Cloud::DocumentAI::V1::BoundingPoly]
+            #     Identifies the bounding box for the block.
             class DocumentLayoutBlock
               include ::Google::Protobuf::MessageExts
               extend ::Google::Protobuf::MessageExts::ClassMethods
