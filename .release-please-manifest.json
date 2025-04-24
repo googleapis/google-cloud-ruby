@@ -367,6 +367,8 @@
   "google-cloud-filestore+FILLER": "0.0.0",
   "google-cloud-filestore-v1": "2.1.0",
   "google-cloud-filestore-v1+FILLER": "0.0.0",
+  "google-cloud-financial_services-v1": "0.0.1",
+  "google-cloud-financial_services-v1+FILLER": "0.0.0",
   "google-cloud-firestore": "3.0.0",
   "google-cloud-firestore+FILLER": "0.0.0",
   "google-cloud-firestore-admin": "0.5.0",
