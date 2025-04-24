@@ -308,6 +308,9 @@ module Google
         # @!attribute [r] satisfies_pzi
         #   @return [::Boolean]
         #     Output only. Reserved for future use.
+        # @!attribute [r] checkpoints
+        #   @return [::Array<::Google::Cloud::AIPlatform::V1::Checkpoint>]
+        #     Optional. Output only. The checkpoints of the model.
         class Model
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -988,6 +991,21 @@ module Google
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
+        end
+
+        # Describes the machine learning model version checkpoint.
+        # @!attribute [rw] checkpoint_id
+        #   @return [::String]
+        #     The ID of the checkpoint.
+        # @!attribute [rw] epoch
+        #   @return [::Integer]
+        #     The epoch of the checkpoint.
+        # @!attribute [rw] step
+        #   @return [::Integer]
+        #     The step of the checkpoint.
+        class Checkpoint
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
       end
     end
