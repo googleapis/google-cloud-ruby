@@ -1192,8 +1192,8 @@ module Google
         # @!attribute [rw] service_account_impersonation_analysis
         #   @return [::Array<::Google::Cloud::Asset::V1::AnalyzeIamPolicyResponse::IamPolicyAnalysis>]
         #     The service account impersonation analysis if
-        #     [AnalyzeIamPolicyRequest.analyze_service_account_impersonation][] is
-        #     enabled.
+        #     {::Google::Cloud::Asset::V1::IamPolicyAnalysisQuery::Options#analyze_service_account_impersonation IamPolicyAnalysisQuery.Options.analyze_service_account_impersonation}
+        #     is enabled.
         # @!attribute [rw] fully_explored
         #   @return [::Boolean]
         #     Represents whether all entries in the
@@ -2192,6 +2192,12 @@ module Google
 
               # Constraint applied when deleting the resource.
               DELETE = 3
+
+              # Constraint applied when removing an IAM grant.
+              REMOVE_GRANT = 4
+
+              # Constraint applied when enforcing forced tagging.
+              GOVERN_TAGS = 5
             end
 
             # Allow or deny type.
@@ -2271,13 +2277,13 @@ module Google
           #   @return [::Google::Cloud::Asset::V1::AnalyzerOrgPolicy]
           #     The consolidated organization policy for the analyzed resource. The
           #     consolidated organization policy is computed by merging and evaluating
-          #     [AnalyzeOrgPoliciesResponse.policy_bundle][].
+          #     {::Google::Cloud::Asset::V1::AnalyzeOrgPoliciesResponse::OrgPolicyResult#policy_bundle policy_bundle}.
           #     The evaluation will respect the organization policy [hierarchy
           #     rules](https://cloud.google.com/resource-manager/docs/organization-policy/understanding-hierarchy).
           # @!attribute [rw] policy_bundle
           #   @return [::Array<::Google::Cloud::Asset::V1::AnalyzerOrgPolicy>]
           #     The ordered list of all organization policies from the
-          #     [AnalyzeOrgPoliciesResponse.OrgPolicyResult.consolidated_policy.attached_resource][].
+          #     {::Google::Cloud::Asset::V1::AnalyzerOrgPolicy#attached_resource consolidated_policy.attached_resource}.
           #     to the scope specified in the request.
           #
           #     If the constraint is defined with default policy, it will also appear in
@@ -2384,7 +2390,7 @@ module Google
           # @!attribute [rw] policy_bundle
           #   @return [::Array<::Google::Cloud::Asset::V1::AnalyzerOrgPolicy>]
           #     The ordered list of all organization policies from the
-          #     [AnalyzeOrgPoliciesResponse.OrgPolicyResult.consolidated_policy.attached_resource][].
+          #     {::Google::Cloud::Asset::V1::AnalyzerOrgPolicy#attached_resource consolidated_policy.attached_resource}.
           #     to the scope specified in the request.
           #
           #     If the constraint is defined with default policy, it will also appear in
@@ -2600,7 +2606,7 @@ module Google
           # @!attribute [rw] policy_bundle
           #   @return [::Array<::Google::Cloud::Asset::V1::AnalyzerOrgPolicy>]
           #     The ordered list of all organization policies from the
-          #     [AnalyzeOrgPoliciesResponse.OrgPolicyResult.consolidated_policy.attached_resource][]
+          #     {::Google::Cloud::Asset::V1::AnalyzerOrgPolicy#attached_resource consolidated_policy.attached_resource}
           #     to the scope specified in the request.
           #
           #     If the constraint is defined with default policy, it will also appear in
