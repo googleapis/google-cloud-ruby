@@ -8,7 +8,7 @@
     "name": "financialservices",
     "name_pretty": "Financial Services API",
     "product_documentation": "https://cloud.google.com/financial-services/anti-money-laundering/docs/concepts/overview",
-    "release_level": "unreleased",
+    "release_level": "preview",
     "repo": "googleapis/google-cloud-ruby",
     "requires_billing": true,
     "ruby-cloud-description": "google-cloud-financial_services is the official client library for the Financial Services API.",
