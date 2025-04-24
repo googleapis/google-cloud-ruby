@@ -6010,6 +6010,246 @@
           "type": "FULL"
         }
       ]
+    },
+    {
+      "region_tag": "analyticsadmin_v1alpha_generated_AnalyticsAdminService_CreateReportingDataAnnotation_sync",
+      "title": "Snippet for the create_reporting_data_annotation call in the AnalyticsAdminService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client#create_reporting_data_annotation.",
+      "file": "analytics_admin_service/create_reporting_data_annotation.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_reporting_data_annotation",
+        "full_name": "::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client#create_reporting_data_annotation",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Analytics::Admin::V1alpha::CreateReportingDataAnnotationRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Analytics::Admin::V1alpha::ReportingDataAnnotation",
+        "client": {
+          "short_name": "AnalyticsAdminService::Client",
+          "full_name": "::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client"
+        },
+        "method": {
+          "short_name": "CreateReportingDataAnnotation",
+          "full_name": "google.analytics.admin.v1alpha.AnalyticsAdminService.CreateReportingDataAnnotation",
+          "service": {
+            "short_name": "AnalyticsAdminService",
+            "full_name": "google.analytics.admin.v1alpha.AnalyticsAdminService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "analyticsadmin_v1alpha_generated_AnalyticsAdminService_GetReportingDataAnnotation_sync",
+      "title": "Snippet for the get_reporting_data_annotation call in the AnalyticsAdminService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client#get_reporting_data_annotation.",
+      "file": "analytics_admin_service/get_reporting_data_annotation.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_reporting_data_annotation",
+        "full_name": "::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client#get_reporting_data_annotation",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Analytics::Admin::V1alpha::GetReportingDataAnnotationRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Analytics::Admin::V1alpha::ReportingDataAnnotation",
+        "client": {
+          "short_name": "AnalyticsAdminService::Client",
+          "full_name": "::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client"
+        },
+        "method": {
+          "short_name": "GetReportingDataAnnotation",
+          "full_name": "google.analytics.admin.v1alpha.AnalyticsAdminService.GetReportingDataAnnotation",
+          "service": {
+            "short_name": "AnalyticsAdminService",
+            "full_name": "google.analytics.admin.v1alpha.AnalyticsAdminService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "analyticsadmin_v1alpha_generated_AnalyticsAdminService_ListReportingDataAnnotations_sync",
+      "title": "Snippet for the list_reporting_data_annotations call in the AnalyticsAdminService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client#list_reporting_data_annotations.",
+      "file": "analytics_admin_service/list_reporting_data_annotations.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_reporting_data_annotations",
+        "full_name": "::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client#list_reporting_data_annotations",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Analytics::Admin::V1alpha::ListReportingDataAnnotationsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Analytics::Admin::V1alpha::ListReportingDataAnnotationsResponse",
+        "client": {
+          "short_name": "AnalyticsAdminService::Client",
+          "full_name": "::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client"
+        },
+        "method": {
+          "short_name": "ListReportingDataAnnotations",
+          "full_name": "google.analytics.admin.v1alpha.AnalyticsAdminService.ListReportingDataAnnotations",
+          "service": {
+            "short_name": "AnalyticsAdminService",
+            "full_name": "google.analytics.admin.v1alpha.AnalyticsAdminService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "analyticsadmin_v1alpha_generated_AnalyticsAdminService_UpdateReportingDataAnnotation_sync",
+      "title": "Snippet for the update_reporting_data_annotation call in the AnalyticsAdminService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client#update_reporting_data_annotation.",
+      "file": "analytics_admin_service/update_reporting_data_annotation.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_reporting_data_annotation",
+        "full_name": "::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client#update_reporting_data_annotation",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Analytics::Admin::V1alpha::UpdateReportingDataAnnotationRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Analytics::Admin::V1alpha::ReportingDataAnnotation",
+        "client": {
+          "short_name": "AnalyticsAdminService::Client",
+          "full_name": "::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client"
+        },
+        "method": {
+          "short_name": "UpdateReportingDataAnnotation",
+          "full_name": "google.analytics.admin.v1alpha.AnalyticsAdminService.UpdateReportingDataAnnotation",
+          "service": {
+            "short_name": "AnalyticsAdminService",
+            "full_name": "google.analytics.admin.v1alpha.AnalyticsAdminService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "analyticsadmin_v1alpha_generated_AnalyticsAdminService_DeleteReportingDataAnnotation_sync",
+      "title": "Snippet for the delete_reporting_data_annotation call in the AnalyticsAdminService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client#delete_reporting_data_annotation.",
+      "file": "analytics_admin_service/delete_reporting_data_annotation.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_reporting_data_annotation",
+        "full_name": "::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client#delete_reporting_data_annotation",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Analytics::Admin::V1alpha::DeleteReportingDataAnnotationRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Protobuf::Empty",
+        "client": {
+          "short_name": "AnalyticsAdminService::Client",
+          "full_name": "::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client"
+        },
+        "method": {
+          "short_name": "DeleteReportingDataAnnotation",
+          "full_name": "google.analytics.admin.v1alpha.AnalyticsAdminService.DeleteReportingDataAnnotation",
+          "service": {
+            "short_name": "AnalyticsAdminService",
+            "full_name": "google.analytics.admin.v1alpha.AnalyticsAdminService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "analyticsadmin_v1alpha_generated_AnalyticsAdminService_SubmitUserDeletion_sync",
+      "title": "Snippet for the submit_user_deletion call in the AnalyticsAdminService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client#submit_user_deletion.",
+      "file": "analytics_admin_service/submit_user_deletion.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "submit_user_deletion",
+        "full_name": "::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client#submit_user_deletion",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Analytics::Admin::V1alpha::SubmitUserDeletionRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Analytics::Admin::V1alpha::SubmitUserDeletionResponse",
+        "client": {
+          "short_name": "AnalyticsAdminService::Client",
+          "full_name": "::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client"
+        },
+        "method": {
+          "short_name": "SubmitUserDeletion",
+          "full_name": "google.analytics.admin.v1alpha.AnalyticsAdminService.SubmitUserDeletion",
+          "service": {
+            "short_name": "AnalyticsAdminService",
+            "full_name": "google.analytics.admin.v1alpha.AnalyticsAdminService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
     }
   ]
 }

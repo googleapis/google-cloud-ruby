@@ -2810,6 +2810,186 @@ module Google
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
+
+        # Request message for CreateReportingDataAnnotation RPC.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. The property for which to create a Reporting Data Annotation.
+        #     Format: properties/property_id
+        #     Example: properties/123
+        # @!attribute [rw] reporting_data_annotation
+        #   @return [::Google::Analytics::Admin::V1alpha::ReportingDataAnnotation]
+        #     Required. The Reporting Data Annotation to create.
+        class CreateReportingDataAnnotationRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for GetReportingDataAnnotation RPC.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. Resource name of the Reporting Data Annotation to lookup.
+        #     Format:
+        #     properties/property_id/reportingDataAnnotations/reportingDataAnnotation
+        #     Example: properties/123/reportingDataAnnotations/456
+        class GetReportingDataAnnotationRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for ListReportingDataAnnotation RPC.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. Resource name of the property.
+        #     Format: properties/property_id
+        #     Example: properties/123
+        # @!attribute [rw] filter
+        #   @return [::String]
+        #     Optional. Filter that restricts which reporting data annotations under the
+        #     parent property are listed.
+        #
+        #     Supported fields are:
+        #
+        #       * 'name'
+        #       * `title`
+        #       * `description`
+        #       * `annotation_date`
+        #       * `annotation_date_range`
+        #       * `color`
+        #
+        #     Additionally, this API provides the following helper functions:
+        #
+        #       * annotation_duration() : the duration that this annotation marks,
+        #       [durations](https://github.com/protocolbuffers/protobuf/blob/main/src/google/protobuf/duration.proto).
+        #       expect a numeric representation of seconds followed by an `s` suffix.
+        #       * is_annotation_in_range(start_date, end_date)  : if the annotation is in
+        #       the range specified by the `start_date` and `end_date`. The dates are in
+        #       ISO-8601 format, for example `2031-06-28`.
+        #
+        #     Supported operations:
+        #
+        #     * `=` : equals
+        #     * `!=` : not equals
+        #     * `<` : less than
+        #     * `>` : greater than
+        #     * `<=` :  less than or equals
+        #     * `>=` : greater than or equals
+        #     * `:` : has operator
+        #     * `=~` : [regular expression](https://github.com/google/re2/wiki/Syntax)
+        #     match
+        #     * `!~` : [regular expression](https://github.com/google/re2/wiki/Syntax)
+        #     does not match
+        #     * `NOT` : Logical not
+        #     * `AND` : Logical and
+        #     * `OR` : Logical or
+        #
+        #     Examples:
+        #
+        #       1. `title="Holiday Sale"`
+        #       2. `description=~"[Bb]ig [Gg]ame.*[Ss]ale"`
+        #       3. `is_annotation_in_range("2025-12-25", "2026-01-16") = true`
+        #       4. `annotation_duration() >= 172800s AND title:BOGO`
+        # @!attribute [rw] page_size
+        #   @return [::Integer]
+        #     Optional. The maximum number of resources to return. The service may return
+        #     fewer than this value, even if there are additional pages. If unspecified,
+        #     at most 50 resources will be returned. The maximum value is 200; (higher
+        #     values will be coerced to the maximum)
+        # @!attribute [rw] page_token
+        #   @return [::String]
+        #     Optional. A page token, received from a previous
+        #     `ListReportingDataAnnotations` call. Provide this to retrieve the
+        #     subsequent page. When paginating, all other parameters provided to
+        #     `ListReportingDataAnnotations` must match the call that provided the page
+        #     token.
+        class ListReportingDataAnnotationsRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Response message for ListReportingDataAnnotation RPC.
+        # @!attribute [rw] reporting_data_annotations
+        #   @return [::Array<::Google::Analytics::Admin::V1alpha::ReportingDataAnnotation>]
+        #     List of Reporting Data Annotations.
+        # @!attribute [rw] next_page_token
+        #   @return [::String]
+        #     A token, which can be sent as `page_token` to retrieve the next page. If
+        #     this field is omitted, there are no subsequent pages.
+        class ListReportingDataAnnotationsResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for UpdateReportingDataAnnotation RPC.
+        # @!attribute [rw] reporting_data_annotation
+        #   @return [::Google::Analytics::Admin::V1alpha::ReportingDataAnnotation]
+        #     Required. The Reporting Data Annotation to update.
+        # @!attribute [rw] update_mask
+        #   @return [::Google::Protobuf::FieldMask]
+        #     Optional. The list of fields to update. Field names must be in snake case
+        #     (for example, "field_to_update"). Omitted fields will not be updated. To
+        #     replace the entire entity, use one path with the string "*" to match all
+        #     fields.
+        class UpdateReportingDataAnnotationRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for DeleteReportingDataAnnotation RPC.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. Resource name of the Reporting Data Annotation to delete.
+        #     Format:
+        #     properties/property_id/reportingDataAnnotations/reporting_data_annotation
+        #     Example: properties/123/reportingDataAnnotations/456
+        class DeleteReportingDataAnnotationRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for SubmitUserDeletion RPC.
+        # @!attribute [rw] user_id
+        #   @return [::String]
+        #     Google Analytics [user
+        #     ID](https://firebase.google.com/docs/analytics/userid).
+        #
+        #     Note: The following fields are mutually exclusive: `user_id`, `client_id`, `app_instance_id`, `user_provided_data`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] client_id
+        #   @return [::String]
+        #     Google Analytics [client
+        #     ID](https://support.google.com/analytics/answer/11593727).
+        #
+        #     Note: The following fields are mutually exclusive: `client_id`, `user_id`, `app_instance_id`, `user_provided_data`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] app_instance_id
+        #   @return [::String]
+        #     Firebase [application instance
+        #     ID](https://firebase.google.com/docs/reference/android/com/google/firebase/analytics/FirebaseAnalytics.html#getAppInstanceId).
+        #
+        #     Note: The following fields are mutually exclusive: `app_instance_id`, `user_id`, `client_id`, `user_provided_data`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] user_provided_data
+        #   @return [::String]
+        #     The un-hashed, unencrypted, [user-provided
+        #     data](https://support.google.com/analytics/answer/14077171).
+        #
+        #     Note: The following fields are mutually exclusive: `user_provided_data`, `user_id`, `client_id`, `app_instance_id`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The name of the property to submit user deletion for.
+        class SubmitUserDeletionRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Response message for SubmitUserDeletion RPC.
+        # @!attribute [rw] deletion_request_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Marks the moment for which all visitor data before this point should be
+        #     deleted. This is set to the time at which the deletion request was
+        #     received.
+        class SubmitUserDeletionResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
       end
     end
   end
