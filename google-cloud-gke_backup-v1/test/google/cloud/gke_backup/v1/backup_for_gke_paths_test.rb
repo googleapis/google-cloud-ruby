@@ -53,6 +53,18 @@ class ::Google::Cloud::GkeBackup::V1::BackupForGKE::ClientPathsTest < Minitest::
     end
   end
 
+  def test_backup_channel_path
+    grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
+      client = ::Google::Cloud::GkeBackup::V1::BackupForGKE::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      path = client.backup_channel_path project: "value0", location: "value1", backup_channel: "value2"
+      assert_equal "projects/value0/locations/value1/backupChannels/value2", path
+    end
+  end
+
   def test_backup_plan_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
     ::Gapic::ServiceStub.stub :new, DummyStub.new do
@@ -62,6 +74,18 @@ class ::Google::Cloud::GkeBackup::V1::BackupForGKE::ClientPathsTest < Minitest::
 
       path = client.backup_plan_path project: "value0", location: "value1", backup_plan: "value2"
       assert_equal "projects/value0/locations/value1/backupPlans/value2", path
+    end
+  end
+
+  def test_backup_plan_binding_path
+    grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
+      client = ::Google::Cloud::GkeBackup::V1::BackupForGKE::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      path = client.backup_plan_binding_path project: "value0", location: "value1", backup_channel: "value2", backup_plan_binding: "value3"
+      assert_equal "projects/value0/locations/value1/backupChannels/value2/backupPlanBindings/value3", path
     end
   end
 
@@ -113,6 +137,18 @@ class ::Google::Cloud::GkeBackup::V1::BackupForGKE::ClientPathsTest < Minitest::
     end
   end
 
+  def test_restore_channel_path
+    grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
+      client = ::Google::Cloud::GkeBackup::V1::BackupForGKE::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      path = client.restore_channel_path project: "value0", location: "value1", restore_channel: "value2"
+      assert_equal "projects/value0/locations/value1/restoreChannels/value2", path
+    end
+  end
+
   def test_restore_plan_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
     ::Gapic::ServiceStub.stub :new, DummyStub.new do
@@ -122,6 +158,18 @@ class ::Google::Cloud::GkeBackup::V1::BackupForGKE::ClientPathsTest < Minitest::
 
       path = client.restore_plan_path project: "value0", location: "value1", restore_plan: "value2"
       assert_equal "projects/value0/locations/value1/restorePlans/value2", path
+    end
+  end
+
+  def test_restore_plan_binding_path
+    grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
+      client = ::Google::Cloud::GkeBackup::V1::BackupForGKE::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      path = client.restore_plan_binding_path project: "value0", location: "value1", restore_channel: "value2", restore_plan_binding: "value3"
+      assert_equal "projects/value0/locations/value1/restoreChannels/value2/restorePlanBindings/value3", path
     end
   end
 

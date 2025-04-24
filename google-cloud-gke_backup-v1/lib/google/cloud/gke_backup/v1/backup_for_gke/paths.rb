@@ -46,6 +46,25 @@ module Google
             end
 
             ##
+            # Create a fully-qualified BackupChannel resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `projects/{project}/locations/{location}/backupChannels/{backup_channel}`
+            #
+            # @param project [String]
+            # @param location [String]
+            # @param backup_channel [String]
+            #
+            # @return [::String]
+            def backup_channel_path project:, location:, backup_channel:
+              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+              raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+
+              "projects/#{project}/locations/#{location}/backupChannels/#{backup_channel}"
+            end
+
+            ##
             # Create a fully-qualified BackupPlan resource string.
             #
             # The resource will be in the following format:
@@ -62,6 +81,27 @@ module Google
               raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
 
               "projects/#{project}/locations/#{location}/backupPlans/#{backup_plan}"
+            end
+
+            ##
+            # Create a fully-qualified BackupPlanBinding resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `projects/{project}/locations/{location}/backupChannels/{backup_channel}/backupPlanBindings/{backup_plan_binding}`
+            #
+            # @param project [String]
+            # @param location [String]
+            # @param backup_channel [String]
+            # @param backup_plan_binding [String]
+            #
+            # @return [::String]
+            def backup_plan_binding_path project:, location:, backup_channel:, backup_plan_binding:
+              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+              raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+              raise ::ArgumentError, "backup_channel cannot contain /" if backup_channel.to_s.include? "/"
+
+              "projects/#{project}/locations/#{location}/backupChannels/#{backup_channel}/backupPlanBindings/#{backup_plan_binding}"
             end
 
             ##
@@ -143,6 +183,25 @@ module Google
             end
 
             ##
+            # Create a fully-qualified RestoreChannel resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `projects/{project}/locations/{location}/restoreChannels/{restore_channel}`
+            #
+            # @param project [String]
+            # @param location [String]
+            # @param restore_channel [String]
+            #
+            # @return [::String]
+            def restore_channel_path project:, location:, restore_channel:
+              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+              raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+
+              "projects/#{project}/locations/#{location}/restoreChannels/#{restore_channel}"
+            end
+
+            ##
             # Create a fully-qualified RestorePlan resource string.
             #
             # The resource will be in the following format:
@@ -159,6 +218,27 @@ module Google
               raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
 
               "projects/#{project}/locations/#{location}/restorePlans/#{restore_plan}"
+            end
+
+            ##
+            # Create a fully-qualified RestorePlanBinding resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `projects/{project}/locations/{location}/restoreChannels/{restore_channel}/restorePlanBindings/{restore_plan_binding}`
+            #
+            # @param project [String]
+            # @param location [String]
+            # @param restore_channel [String]
+            # @param restore_plan_binding [String]
+            #
+            # @return [::String]
+            def restore_plan_binding_path project:, location:, restore_channel:, restore_plan_binding:
+              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+              raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+              raise ::ArgumentError, "restore_channel cannot contain /" if restore_channel.to_s.include? "/"
+
+              "projects/#{project}/locations/#{location}/restoreChannels/#{restore_channel}/restorePlanBindings/#{restore_plan_binding}"
             end
 
             ##

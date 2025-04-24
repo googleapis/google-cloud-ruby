@@ -129,7 +129,8 @@ module Google
         # @!attribute [r] state_reason
         #   @return [::String]
         #     Output only. Human-readable description of why the backup is in the current
-        #     `state`.
+        #     `state`. This field is only meant for human readability and should not be
+        #     used programmatically as this field is not guaranteed to be consistent.
         # @!attribute [r] complete_time
         #   @return [::Google::Protobuf::Timestamp]
         #     Output only. Completion time of the Backup
@@ -172,6 +173,12 @@ module Google
         #     Inherited from the parent BackupPlan's
         #     {::Google::Cloud::GkeBackup::V1::BackupPlan::BackupConfig#permissive_mode permissive_mode}
         #     value.
+        # @!attribute [r] satisfies_pzs
+        #   @return [::Boolean]
+        #     Output only. [Output Only] Reserved for future use.
+        # @!attribute [r] satisfies_pzi
+        #   @return [::Boolean]
+        #     Output only. [Output Only] Reserved for future use.
         class Backup
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

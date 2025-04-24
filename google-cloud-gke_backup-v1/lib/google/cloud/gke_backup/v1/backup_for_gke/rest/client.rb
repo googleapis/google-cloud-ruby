@@ -91,6 +91,32 @@ module Google
 
                   default_config.rpcs.delete_backup_plan.timeout = 60.0
 
+                  default_config.rpcs.create_backup_channel.timeout = 60.0
+
+                  default_config.rpcs.list_backup_channels.timeout = 60.0
+                  default_config.rpcs.list_backup_channels.retry_policy = {
+                    initial_delay: 1.0, max_delay: 60.0, multiplier: 1.3, retry_codes: [14]
+                  }
+
+                  default_config.rpcs.get_backup_channel.timeout = 60.0
+                  default_config.rpcs.get_backup_channel.retry_policy = {
+                    initial_delay: 1.0, max_delay: 60.0, multiplier: 1.3, retry_codes: [14]
+                  }
+
+                  default_config.rpcs.update_backup_channel.timeout = 60.0
+
+                  default_config.rpcs.delete_backup_channel.timeout = 60.0
+
+                  default_config.rpcs.list_backup_plan_bindings.timeout = 60.0
+                  default_config.rpcs.list_backup_plan_bindings.retry_policy = {
+                    initial_delay: 1.0, max_delay: 60.0, multiplier: 1.3, retry_codes: [14]
+                  }
+
+                  default_config.rpcs.get_backup_plan_binding.timeout = 60.0
+                  default_config.rpcs.get_backup_plan_binding.retry_policy = {
+                    initial_delay: 1.0, max_delay: 60.0, multiplier: 1.3, retry_codes: [14]
+                  }
+
                   default_config.rpcs.create_backup.timeout = 120.0
 
                   default_config.rpcs.list_backups.timeout = 60.0
@@ -132,6 +158,32 @@ module Google
                   default_config.rpcs.update_restore_plan.timeout = 60.0
 
                   default_config.rpcs.delete_restore_plan.timeout = 60.0
+
+                  default_config.rpcs.create_restore_channel.timeout = 60.0
+
+                  default_config.rpcs.list_restore_channels.timeout = 60.0
+                  default_config.rpcs.list_restore_channels.retry_policy = {
+                    initial_delay: 1.0, max_delay: 60.0, multiplier: 1.3, retry_codes: [14]
+                  }
+
+                  default_config.rpcs.get_restore_channel.timeout = 60.0
+                  default_config.rpcs.get_restore_channel.retry_policy = {
+                    initial_delay: 1.0, max_delay: 60.0, multiplier: 1.3, retry_codes: [14]
+                  }
+
+                  default_config.rpcs.update_restore_channel.timeout = 60.0
+
+                  default_config.rpcs.delete_restore_channel.timeout = 60.0
+
+                  default_config.rpcs.list_restore_plan_bindings.timeout = 60.0
+                  default_config.rpcs.list_restore_plan_bindings.retry_policy = {
+                    initial_delay: 1.0, max_delay: 60.0, multiplier: 1.3, retry_codes: [14]
+                  }
+
+                  default_config.rpcs.get_restore_plan_binding.timeout = 60.0
+                  default_config.rpcs.get_restore_plan_binding.retry_policy = {
+                    initial_delay: 1.0, max_delay: 60.0, multiplier: 1.3, retry_codes: [14]
+                  }
 
                   default_config.rpcs.create_restore.timeout = 120.0
 
@@ -786,6 +838,667 @@ module Google
               end
 
               ##
+              # Creates a new BackupChannel in a given location.
+              #
+              # @overload create_backup_channel(request, options = nil)
+              #   Pass arguments to `create_backup_channel` via a request object, either of type
+              #   {::Google::Cloud::GkeBackup::V1::CreateBackupChannelRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::GkeBackup::V1::CreateBackupChannelRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload create_backup_channel(parent: nil, backup_channel: nil, backup_channel_id: nil)
+              #   Pass arguments to `create_backup_channel` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param parent [::String]
+              #     Required. The location within which to create the BackupChannel.
+              #     Format: `projects/*/locations/*`
+              #   @param backup_channel [::Google::Cloud::GkeBackup::V1::BackupChannel, ::Hash]
+              #     Required. The BackupChannel resource object to create.
+              #   @param backup_channel_id [::String]
+              #     Optional. The client-provided short name for the BackupChannel resource.
+              #     This name must:
+              #
+              #     - be between 1 and 63 characters long (inclusive)
+              #     - consist of only lower-case ASCII letters, numbers, and dashes
+              #     - start with a lower-case letter
+              #     - end with a lower-case letter or number
+              #     - be unique within the set of BackupChannels in this location
+              #     If the user does not provide a name, a uuid will be used as the name.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Gapic::Operation]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Gapic::Operation]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/gke_backup/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::GkeBackup::V1::BackupForGKE::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::GkeBackup::V1::CreateBackupChannelRequest.new
+              #
+              #   # Call the create_backup_channel method.
+              #   result = client.create_backup_channel request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
+              def create_backup_channel request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::GkeBackup::V1::CreateBackupChannelRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.create_backup_channel.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::GkeBackup::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.create_backup_channel.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.create_backup_channel.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @backup_for_gke_stub.create_backup_channel request, options do |result, operation|
+                  result = ::Gapic::Operation.new result, @operations_client, options: options
+                  yield result, operation if block_given?
+                  throw :response, result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Lists BackupChannels in a given location.
+              #
+              # @overload list_backup_channels(request, options = nil)
+              #   Pass arguments to `list_backup_channels` via a request object, either of type
+              #   {::Google::Cloud::GkeBackup::V1::ListBackupChannelsRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::GkeBackup::V1::ListBackupChannelsRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload list_backup_channels(parent: nil, page_size: nil, page_token: nil, filter: nil, order_by: nil)
+              #   Pass arguments to `list_backup_channels` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param parent [::String]
+              #     Required. The location that contains the BackupChannels to list.
+              #     Format: `projects/*/locations/*`
+              #   @param page_size [::Integer]
+              #     Optional. The target number of results to return in a single response.
+              #     If not specified, a default value will be chosen by the service.
+              #     Note that the response may include a partial list and a caller should
+              #     only rely on the response's
+              #     {::Google::Cloud::GkeBackup::V1::ListBackupChannelsResponse#next_page_token next_page_token}
+              #     to determine if there are more instances left to be queried.
+              #   @param page_token [::String]
+              #     Optional. The value of
+              #     {::Google::Cloud::GkeBackup::V1::ListBackupChannelsResponse#next_page_token next_page_token}
+              #     received from a previous `ListBackupChannels` call.
+              #     Provide this to retrieve the subsequent page in a multi-page list of
+              #     results. When paginating, all other parameters provided to
+              #     `ListBackupChannels` must match the call that provided the page
+              #     token.
+              #   @param filter [::String]
+              #     Optional. Field match expression used to filter the results.
+              #   @param order_by [::String]
+              #     Optional. Field by which to sort the results.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::GkeBackup::V1::BackupChannel>]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::GkeBackup::V1::BackupChannel>]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/gke_backup/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::GkeBackup::V1::BackupForGKE::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::GkeBackup::V1::ListBackupChannelsRequest.new
+              #
+              #   # Call the list_backup_channels method.
+              #   result = client.list_backup_channels request
+              #
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
+              #     # Each element is of type ::Google::Cloud::GkeBackup::V1::BackupChannel.
+              #     p item
+              #   end
+              #
+              def list_backup_channels request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::GkeBackup::V1::ListBackupChannelsRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.list_backup_channels.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::GkeBackup::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.list_backup_channels.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.list_backup_channels.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @backup_for_gke_stub.list_backup_channels request, options do |result, operation|
+                  result = ::Gapic::Rest::PagedEnumerable.new @backup_for_gke_stub, :list_backup_channels, "backup_channels", request, result, options
+                  yield result, operation if block_given?
+                  throw :response, result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Retrieve the details of a single BackupChannel.
+              #
+              # @overload get_backup_channel(request, options = nil)
+              #   Pass arguments to `get_backup_channel` via a request object, either of type
+              #   {::Google::Cloud::GkeBackup::V1::GetBackupChannelRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::GkeBackup::V1::GetBackupChannelRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload get_backup_channel(name: nil)
+              #   Pass arguments to `get_backup_channel` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param name [::String]
+              #     Required. Fully qualified BackupChannel name.
+              #     Format: `projects/*/locations/*/backupChannels/*`
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Cloud::GkeBackup::V1::BackupChannel]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Cloud::GkeBackup::V1::BackupChannel]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/gke_backup/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::GkeBackup::V1::BackupForGKE::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::GkeBackup::V1::GetBackupChannelRequest.new
+              #
+              #   # Call the get_backup_channel method.
+              #   result = client.get_backup_channel request
+              #
+              #   # The returned object is of type Google::Cloud::GkeBackup::V1::BackupChannel.
+              #   p result
+              #
+              def get_backup_channel request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::GkeBackup::V1::GetBackupChannelRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.get_backup_channel.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::GkeBackup::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.get_backup_channel.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.get_backup_channel.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @backup_for_gke_stub.get_backup_channel request, options do |result, operation|
+                  yield result, operation if block_given?
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Update a BackupChannel.
+              #
+              # @overload update_backup_channel(request, options = nil)
+              #   Pass arguments to `update_backup_channel` via a request object, either of type
+              #   {::Google::Cloud::GkeBackup::V1::UpdateBackupChannelRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::GkeBackup::V1::UpdateBackupChannelRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload update_backup_channel(backup_channel: nil, update_mask: nil)
+              #   Pass arguments to `update_backup_channel` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param backup_channel [::Google::Cloud::GkeBackup::V1::BackupChannel, ::Hash]
+              #     Required. A new version of the BackupChannel resource that contains updated
+              #     fields. This may be sparsely populated if an `update_mask` is provided.
+              #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
+              #     Optional. This is used to specify the fields to be overwritten in the
+              #     BackupChannel targeted for update. The values for each of these
+              #     updated fields will be taken from the `backup_channel` provided
+              #     with this request. Field names are relative to the root of the resource
+              #     (e.g., `description`, `labels`, etc.)
+              #     If no `update_mask` is provided, all fields in `backup_channel` will
+              #     be written to the target BackupChannel resource. Note that
+              #     OUTPUT_ONLY and IMMUTABLE fields in `backup_channel` are ignored and
+              #     are not used to update the target BackupChannel.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Gapic::Operation]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Gapic::Operation]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/gke_backup/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::GkeBackup::V1::BackupForGKE::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::GkeBackup::V1::UpdateBackupChannelRequest.new
+              #
+              #   # Call the update_backup_channel method.
+              #   result = client.update_backup_channel request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
+              def update_backup_channel request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::GkeBackup::V1::UpdateBackupChannelRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.update_backup_channel.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::GkeBackup::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.update_backup_channel.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.update_backup_channel.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @backup_for_gke_stub.update_backup_channel request, options do |result, operation|
+                  result = ::Gapic::Operation.new result, @operations_client, options: options
+                  yield result, operation if block_given?
+                  throw :response, result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Deletes an existing BackupChannel.
+              #
+              # @overload delete_backup_channel(request, options = nil)
+              #   Pass arguments to `delete_backup_channel` via a request object, either of type
+              #   {::Google::Cloud::GkeBackup::V1::DeleteBackupChannelRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::GkeBackup::V1::DeleteBackupChannelRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload delete_backup_channel(name: nil, etag: nil, force: nil)
+              #   Pass arguments to `delete_backup_channel` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param name [::String]
+              #     Required. Fully qualified BackupChannel name.
+              #     Format: `projects/*/locations/*/backupChannels/*`
+              #   @param etag [::String]
+              #     Optional. If provided, this value must match the current value of the
+              #     target BackupChannel's {::Google::Cloud::GkeBackup::V1::BackupChannel#etag etag}
+              #     field or the request is rejected.
+              #   @param force [::Boolean]
+              #     Optional. If set to true, any BackupPlanAssociations below this
+              #     BackupChannel will also be deleted. Otherwise, the request will only
+              #     succeed if the BackupChannel has no BackupPlanAssociations.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Gapic::Operation]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Gapic::Operation]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/gke_backup/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::GkeBackup::V1::BackupForGKE::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::GkeBackup::V1::DeleteBackupChannelRequest.new
+              #
+              #   # Call the delete_backup_channel method.
+              #   result = client.delete_backup_channel request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
+              def delete_backup_channel request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::GkeBackup::V1::DeleteBackupChannelRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.delete_backup_channel.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::GkeBackup::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.delete_backup_channel.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.delete_backup_channel.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @backup_for_gke_stub.delete_backup_channel request, options do |result, operation|
+                  result = ::Gapic::Operation.new result, @operations_client, options: options
+                  yield result, operation if block_given?
+                  throw :response, result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Lists BackupPlanBindings in a given location.
+              #
+              # @overload list_backup_plan_bindings(request, options = nil)
+              #   Pass arguments to `list_backup_plan_bindings` via a request object, either of type
+              #   {::Google::Cloud::GkeBackup::V1::ListBackupPlanBindingsRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::GkeBackup::V1::ListBackupPlanBindingsRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload list_backup_plan_bindings(parent: nil, page_size: nil, page_token: nil, filter: nil, order_by: nil)
+              #   Pass arguments to `list_backup_plan_bindings` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param parent [::String]
+              #     Required. The BackupChannel that contains the BackupPlanBindings to list.
+              #     Format: `projects/*/locations/*/backupChannels/*`
+              #   @param page_size [::Integer]
+              #     Optional. The target number of results to return in a single response.
+              #     If not specified, a default value will be chosen by the service.
+              #     Note that the response may include a partial list and a caller should
+              #     only rely on the response's
+              #     {::Google::Cloud::GkeBackup::V1::ListBackupPlanBindingsResponse#next_page_token next_page_token}
+              #     to determine if there are more instances left to be queried.
+              #   @param page_token [::String]
+              #     Optional. The value of
+              #     {::Google::Cloud::GkeBackup::V1::ListBackupPlanBindingsResponse#next_page_token next_page_token}
+              #     received from a previous `ListBackupPlanBindings` call.
+              #     Provide this to retrieve the subsequent page in a multi-page list of
+              #     results. When paginating, all other parameters provided to
+              #     `ListBackupPlanBindings` must match the call that provided the page
+              #     token.
+              #   @param filter [::String]
+              #     Optional. Field match expression used to filter the results.
+              #   @param order_by [::String]
+              #     Optional. Field by which to sort the results.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::GkeBackup::V1::BackupPlanBinding>]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::GkeBackup::V1::BackupPlanBinding>]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/gke_backup/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::GkeBackup::V1::BackupForGKE::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::GkeBackup::V1::ListBackupPlanBindingsRequest.new
+              #
+              #   # Call the list_backup_plan_bindings method.
+              #   result = client.list_backup_plan_bindings request
+              #
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
+              #     # Each element is of type ::Google::Cloud::GkeBackup::V1::BackupPlanBinding.
+              #     p item
+              #   end
+              #
+              def list_backup_plan_bindings request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::GkeBackup::V1::ListBackupPlanBindingsRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.list_backup_plan_bindings.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::GkeBackup::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.list_backup_plan_bindings.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.list_backup_plan_bindings.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @backup_for_gke_stub.list_backup_plan_bindings request, options do |result, operation|
+                  result = ::Gapic::Rest::PagedEnumerable.new @backup_for_gke_stub, :list_backup_plan_bindings, "backup_plan_bindings", request, result, options
+                  yield result, operation if block_given?
+                  throw :response, result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Retrieve the details of a single BackupPlanBinding.
+              #
+              # @overload get_backup_plan_binding(request, options = nil)
+              #   Pass arguments to `get_backup_plan_binding` via a request object, either of type
+              #   {::Google::Cloud::GkeBackup::V1::GetBackupPlanBindingRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::GkeBackup::V1::GetBackupPlanBindingRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload get_backup_plan_binding(name: nil)
+              #   Pass arguments to `get_backup_plan_binding` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param name [::String]
+              #     Required. Fully qualified BackupPlanBinding name.
+              #     Format:
+              #     `projects/*/locations/*/backupChannels/*/backupPlanBindings/*`
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Cloud::GkeBackup::V1::BackupPlanBinding]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Cloud::GkeBackup::V1::BackupPlanBinding]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/gke_backup/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::GkeBackup::V1::BackupForGKE::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::GkeBackup::V1::GetBackupPlanBindingRequest.new
+              #
+              #   # Call the get_backup_plan_binding method.
+              #   result = client.get_backup_plan_binding request
+              #
+              #   # The returned object is of type Google::Cloud::GkeBackup::V1::BackupPlanBinding.
+              #   p result
+              #
+              def get_backup_plan_binding request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::GkeBackup::V1::GetBackupPlanBindingRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.get_backup_plan_binding.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::GkeBackup::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.get_backup_plan_binding.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.get_backup_plan_binding.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @backup_for_gke_stub.get_backup_plan_binding request, options do |result, operation|
+                  yield result, operation if block_given?
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
               # Creates a Backup for the given BackupPlan.
               #
               # @overload create_backup(request, options = nil)
@@ -897,7 +1610,7 @@ module Google
               #   @param options [::Gapic::CallOptions, ::Hash]
               #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
               #
-              # @overload list_backups(parent: nil, page_size: nil, page_token: nil, filter: nil, order_by: nil)
+              # @overload list_backups(parent: nil, page_size: nil, page_token: nil, filter: nil, order_by: nil, return_partial_success: nil)
               #   Pass arguments to `list_backups` via keyword arguments. Note that at
               #   least one keyword argument is required. To specify no parameters, or to keep all
               #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -923,6 +1636,9 @@ module Google
               #     Optional. Field match expression used to filter the results.
               #   @param order_by [::String]
               #     Optional. Field by which to sort the results.
+              #   @param return_partial_success [::Boolean]
+              #     Optional. If set to true, the response will return partial results when
+              #     some regions are unreachable and the unreachable field will be populated.
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::GkeBackup::V1::Backup>]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
@@ -1916,6 +2632,665 @@ module Google
               end
 
               ##
+              # Creates a new RestoreChannel in a given location.
+              #
+              # @overload create_restore_channel(request, options = nil)
+              #   Pass arguments to `create_restore_channel` via a request object, either of type
+              #   {::Google::Cloud::GkeBackup::V1::CreateRestoreChannelRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::GkeBackup::V1::CreateRestoreChannelRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload create_restore_channel(parent: nil, restore_channel: nil, restore_channel_id: nil)
+              #   Pass arguments to `create_restore_channel` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param parent [::String]
+              #     Required. The location within which to create the RestoreChannel.
+              #     Format: `projects/*/locations/*`
+              #   @param restore_channel [::Google::Cloud::GkeBackup::V1::RestoreChannel, ::Hash]
+              #     Required. The RestoreChannel resource object to create.
+              #   @param restore_channel_id [::String]
+              #     Optional. The client-provided short name for the RestoreChannel resource.
+              #     This name must:
+              #
+              #     - be between 1 and 63 characters long (inclusive)
+              #     - consist of only lower-case ASCII letters, numbers, and dashes
+              #     - start with a lower-case letter
+              #     - end with a lower-case letter or number
+              #     - be unique within the set of RestoreChannels in this location
+              #     If the user does not provide a name, a uuid will be used as the name.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Gapic::Operation]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Gapic::Operation]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/gke_backup/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::GkeBackup::V1::BackupForGKE::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::GkeBackup::V1::CreateRestoreChannelRequest.new
+              #
+              #   # Call the create_restore_channel method.
+              #   result = client.create_restore_channel request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
+              def create_restore_channel request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::GkeBackup::V1::CreateRestoreChannelRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.create_restore_channel.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::GkeBackup::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.create_restore_channel.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.create_restore_channel.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @backup_for_gke_stub.create_restore_channel request, options do |result, operation|
+                  result = ::Gapic::Operation.new result, @operations_client, options: options
+                  yield result, operation if block_given?
+                  throw :response, result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Lists RestoreChannels in a given location.
+              #
+              # @overload list_restore_channels(request, options = nil)
+              #   Pass arguments to `list_restore_channels` via a request object, either of type
+              #   {::Google::Cloud::GkeBackup::V1::ListRestoreChannelsRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::GkeBackup::V1::ListRestoreChannelsRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload list_restore_channels(parent: nil, page_size: nil, page_token: nil, filter: nil, order_by: nil)
+              #   Pass arguments to `list_restore_channels` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param parent [::String]
+              #     Required. The location that contains the RestoreChannels to list.
+              #     Format: `projects/*/locations/*`
+              #   @param page_size [::Integer]
+              #     Optional. The target number of results to return in a single response.
+              #     If not specified, a default value will be chosen by the service.
+              #     Note that the response may include a partial list and a caller should
+              #     only rely on the response's
+              #     {::Google::Cloud::GkeBackup::V1::ListRestoreChannelsResponse#next_page_token next_page_token}
+              #     to determine if there are more instances left to be queried.
+              #   @param page_token [::String]
+              #     Optional. The value of
+              #     {::Google::Cloud::GkeBackup::V1::ListRestoreChannelsResponse#next_page_token next_page_token}
+              #     received from a previous `ListRestoreChannels` call.
+              #     Provide this to retrieve the subsequent page in a multi-page list of
+              #     results. When paginating, all other parameters provided to
+              #     `ListRestoreChannels` must match the call that provided the page
+              #     token.
+              #   @param filter [::String]
+              #     Optional. Field match expression used to filter the results.
+              #   @param order_by [::String]
+              #     Optional. Field by which to sort the results.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::GkeBackup::V1::RestoreChannel>]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::GkeBackup::V1::RestoreChannel>]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/gke_backup/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::GkeBackup::V1::BackupForGKE::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::GkeBackup::V1::ListRestoreChannelsRequest.new
+              #
+              #   # Call the list_restore_channels method.
+              #   result = client.list_restore_channels request
+              #
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
+              #     # Each element is of type ::Google::Cloud::GkeBackup::V1::RestoreChannel.
+              #     p item
+              #   end
+              #
+              def list_restore_channels request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::GkeBackup::V1::ListRestoreChannelsRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.list_restore_channels.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::GkeBackup::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.list_restore_channels.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.list_restore_channels.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @backup_for_gke_stub.list_restore_channels request, options do |result, operation|
+                  result = ::Gapic::Rest::PagedEnumerable.new @backup_for_gke_stub, :list_restore_channels, "restore_channels", request, result, options
+                  yield result, operation if block_given?
+                  throw :response, result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Retrieve the details of a single RestoreChannel.
+              #
+              # @overload get_restore_channel(request, options = nil)
+              #   Pass arguments to `get_restore_channel` via a request object, either of type
+              #   {::Google::Cloud::GkeBackup::V1::GetRestoreChannelRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::GkeBackup::V1::GetRestoreChannelRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload get_restore_channel(name: nil)
+              #   Pass arguments to `get_restore_channel` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param name [::String]
+              #     Required. Fully qualified RestoreChannel name.
+              #     Format: `projects/*/locations/*/restoreChannels/*`
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Cloud::GkeBackup::V1::RestoreChannel]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Cloud::GkeBackup::V1::RestoreChannel]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/gke_backup/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::GkeBackup::V1::BackupForGKE::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::GkeBackup::V1::GetRestoreChannelRequest.new
+              #
+              #   # Call the get_restore_channel method.
+              #   result = client.get_restore_channel request
+              #
+              #   # The returned object is of type Google::Cloud::GkeBackup::V1::RestoreChannel.
+              #   p result
+              #
+              def get_restore_channel request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::GkeBackup::V1::GetRestoreChannelRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.get_restore_channel.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::GkeBackup::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.get_restore_channel.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.get_restore_channel.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @backup_for_gke_stub.get_restore_channel request, options do |result, operation|
+                  yield result, operation if block_given?
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Update a RestoreChannel.
+              #
+              # @overload update_restore_channel(request, options = nil)
+              #   Pass arguments to `update_restore_channel` via a request object, either of type
+              #   {::Google::Cloud::GkeBackup::V1::UpdateRestoreChannelRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::GkeBackup::V1::UpdateRestoreChannelRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload update_restore_channel(restore_channel: nil, update_mask: nil)
+              #   Pass arguments to `update_restore_channel` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param restore_channel [::Google::Cloud::GkeBackup::V1::RestoreChannel, ::Hash]
+              #     Required. A new version of the RestoreChannel resource that contains
+              #     updated fields. This may be sparsely populated if an `update_mask` is
+              #     provided.
+              #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
+              #     Optional. This is used to specify the fields to be overwritten in the
+              #     RestoreChannel targeted for update. The values for each of these
+              #     updated fields will be taken from the `restore_channel` provided
+              #     with this request. Field names are relative to the root of the resource
+              #     (e.g., `description`, `destination_project_id`, etc.)
+              #     If no `update_mask` is provided, all fields in `restore_channel` will
+              #     be written to the target RestoreChannel resource. Note that
+              #     OUTPUT_ONLY and IMMUTABLE fields in `restore_channel` are ignored and
+              #     are not used to update the target RestoreChannel.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Gapic::Operation]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Gapic::Operation]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/gke_backup/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::GkeBackup::V1::BackupForGKE::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::GkeBackup::V1::UpdateRestoreChannelRequest.new
+              #
+              #   # Call the update_restore_channel method.
+              #   result = client.update_restore_channel request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
+              def update_restore_channel request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::GkeBackup::V1::UpdateRestoreChannelRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.update_restore_channel.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::GkeBackup::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.update_restore_channel.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.update_restore_channel.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @backup_for_gke_stub.update_restore_channel request, options do |result, operation|
+                  result = ::Gapic::Operation.new result, @operations_client, options: options
+                  yield result, operation if block_given?
+                  throw :response, result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Deletes an existing RestoreChannel.
+              #
+              # @overload delete_restore_channel(request, options = nil)
+              #   Pass arguments to `delete_restore_channel` via a request object, either of type
+              #   {::Google::Cloud::GkeBackup::V1::DeleteRestoreChannelRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::GkeBackup::V1::DeleteRestoreChannelRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload delete_restore_channel(name: nil, etag: nil)
+              #   Pass arguments to `delete_restore_channel` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param name [::String]
+              #     Required. Fully qualified RestoreChannel name.
+              #     Format: `projects/*/locations/*/restoreChannels/*`
+              #   @param etag [::String]
+              #     Optional. If provided, this value must match the current value of the
+              #     target RestoreChannel's
+              #     {::Google::Cloud::GkeBackup::V1::RestoreChannel#etag etag} field or the request
+              #     is rejected.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Gapic::Operation]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Gapic::Operation]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/gke_backup/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::GkeBackup::V1::BackupForGKE::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::GkeBackup::V1::DeleteRestoreChannelRequest.new
+              #
+              #   # Call the delete_restore_channel method.
+              #   result = client.delete_restore_channel request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
+              def delete_restore_channel request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::GkeBackup::V1::DeleteRestoreChannelRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.delete_restore_channel.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::GkeBackup::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.delete_restore_channel.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.delete_restore_channel.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @backup_for_gke_stub.delete_restore_channel request, options do |result, operation|
+                  result = ::Gapic::Operation.new result, @operations_client, options: options
+                  yield result, operation if block_given?
+                  throw :response, result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Lists RestorePlanBindings in a given location.
+              #
+              # @overload list_restore_plan_bindings(request, options = nil)
+              #   Pass arguments to `list_restore_plan_bindings` via a request object, either of type
+              #   {::Google::Cloud::GkeBackup::V1::ListRestorePlanBindingsRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::GkeBackup::V1::ListRestorePlanBindingsRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload list_restore_plan_bindings(parent: nil, page_size: nil, page_token: nil, filter: nil, order_by: nil)
+              #   Pass arguments to `list_restore_plan_bindings` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param parent [::String]
+              #     Required. The RestoreChannel that contains the ListRestorePlanBindings to
+              #     list. Format: `projects/*/locations/*/restoreChannels/*`
+              #   @param page_size [::Integer]
+              #     Optional. The target number of results to return in a single response.
+              #     If not specified, a default value will be chosen by the service.
+              #     Note that the response may include a partial list and a caller should
+              #     only rely on the response's
+              #     {::Google::Cloud::GkeBackup::V1::ListRestorePlanBindingsResponse#next_page_token next_page_token}
+              #     to determine if there are more instances left to be queried.
+              #   @param page_token [::String]
+              #     Optional. The value of
+              #     {::Google::Cloud::GkeBackup::V1::ListRestorePlanBindingsResponse#next_page_token next_page_token}
+              #     received from a previous `ListRestorePlanBindings` call.
+              #     Provide this to retrieve the subsequent page in a multi-page list of
+              #     results. When paginating, all other parameters provided to
+              #     `ListRestorePlanBindings` must match the call that provided the page
+              #     token.
+              #   @param filter [::String]
+              #     Optional. Field match expression used to filter the results.
+              #   @param order_by [::String]
+              #     Optional. Field by which to sort the results.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::GkeBackup::V1::RestorePlanBinding>]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::GkeBackup::V1::RestorePlanBinding>]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/gke_backup/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::GkeBackup::V1::BackupForGKE::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::GkeBackup::V1::ListRestorePlanBindingsRequest.new
+              #
+              #   # Call the list_restore_plan_bindings method.
+              #   result = client.list_restore_plan_bindings request
+              #
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
+              #     # Each element is of type ::Google::Cloud::GkeBackup::V1::RestorePlanBinding.
+              #     p item
+              #   end
+              #
+              def list_restore_plan_bindings request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::GkeBackup::V1::ListRestorePlanBindingsRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.list_restore_plan_bindings.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::GkeBackup::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.list_restore_plan_bindings.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.list_restore_plan_bindings.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @backup_for_gke_stub.list_restore_plan_bindings request, options do |result, operation|
+                  result = ::Gapic::Rest::PagedEnumerable.new @backup_for_gke_stub, :list_restore_plan_bindings, "restore_plan_bindings", request, result, options
+                  yield result, operation if block_given?
+                  throw :response, result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Retrieve the details of a single RestorePlanBinding.
+              #
+              # @overload get_restore_plan_binding(request, options = nil)
+              #   Pass arguments to `get_restore_plan_binding` via a request object, either of type
+              #   {::Google::Cloud::GkeBackup::V1::GetRestorePlanBindingRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::GkeBackup::V1::GetRestorePlanBindingRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload get_restore_plan_binding(name: nil)
+              #   Pass arguments to `get_restore_plan_binding` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param name [::String]
+              #     Required. Fully qualified RestorePlanBinding name.
+              #     Format:
+              #     `projects/*/locations/*/restoreChannels/*/restorePlanBindings/*`
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Cloud::GkeBackup::V1::RestorePlanBinding]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Cloud::GkeBackup::V1::RestorePlanBinding]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/gke_backup/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::GkeBackup::V1::BackupForGKE::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::GkeBackup::V1::GetRestorePlanBindingRequest.new
+              #
+              #   # Call the get_restore_plan_binding method.
+              #   result = client.get_restore_plan_binding request
+              #
+              #   # The returned object is of type Google::Cloud::GkeBackup::V1::RestorePlanBinding.
+              #   p result
+              #
+              def get_restore_plan_binding request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::GkeBackup::V1::GetRestorePlanBindingRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.get_restore_plan_binding.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::GkeBackup::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.get_restore_plan_binding.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.get_restore_plan_binding.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @backup_for_gke_stub.get_restore_plan_binding request, options do |result, operation|
+                  yield result, operation if block_given?
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
               # Creates a new Restore for the given RestorePlan.
               #
               # @overload create_restore(request, options = nil)
@@ -2830,6 +4205,41 @@ module Google
                   #
                   attr_reader :delete_backup_plan
                   ##
+                  # RPC-specific configuration for `create_backup_channel`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :create_backup_channel
+                  ##
+                  # RPC-specific configuration for `list_backup_channels`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :list_backup_channels
+                  ##
+                  # RPC-specific configuration for `get_backup_channel`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :get_backup_channel
+                  ##
+                  # RPC-specific configuration for `update_backup_channel`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :update_backup_channel
+                  ##
+                  # RPC-specific configuration for `delete_backup_channel`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :delete_backup_channel
+                  ##
+                  # RPC-specific configuration for `list_backup_plan_bindings`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :list_backup_plan_bindings
+                  ##
+                  # RPC-specific configuration for `get_backup_plan_binding`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :get_backup_plan_binding
+                  ##
                   # RPC-specific configuration for `create_backup`
                   # @return [::Gapic::Config::Method]
                   #
@@ -2890,6 +4300,41 @@ module Google
                   #
                   attr_reader :delete_restore_plan
                   ##
+                  # RPC-specific configuration for `create_restore_channel`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :create_restore_channel
+                  ##
+                  # RPC-specific configuration for `list_restore_channels`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :list_restore_channels
+                  ##
+                  # RPC-specific configuration for `get_restore_channel`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :get_restore_channel
+                  ##
+                  # RPC-specific configuration for `update_restore_channel`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :update_restore_channel
+                  ##
+                  # RPC-specific configuration for `delete_restore_channel`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :delete_restore_channel
+                  ##
+                  # RPC-specific configuration for `list_restore_plan_bindings`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :list_restore_plan_bindings
+                  ##
+                  # RPC-specific configuration for `get_restore_plan_binding`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :get_restore_plan_binding
+                  ##
                   # RPC-specific configuration for `create_restore`
                   # @return [::Gapic::Config::Method]
                   #
@@ -2942,6 +4387,20 @@ module Google
                     @update_backup_plan = ::Gapic::Config::Method.new update_backup_plan_config
                     delete_backup_plan_config = parent_rpcs.delete_backup_plan if parent_rpcs.respond_to? :delete_backup_plan
                     @delete_backup_plan = ::Gapic::Config::Method.new delete_backup_plan_config
+                    create_backup_channel_config = parent_rpcs.create_backup_channel if parent_rpcs.respond_to? :create_backup_channel
+                    @create_backup_channel = ::Gapic::Config::Method.new create_backup_channel_config
+                    list_backup_channels_config = parent_rpcs.list_backup_channels if parent_rpcs.respond_to? :list_backup_channels
+                    @list_backup_channels = ::Gapic::Config::Method.new list_backup_channels_config
+                    get_backup_channel_config = parent_rpcs.get_backup_channel if parent_rpcs.respond_to? :get_backup_channel
+                    @get_backup_channel = ::Gapic::Config::Method.new get_backup_channel_config
+                    update_backup_channel_config = parent_rpcs.update_backup_channel if parent_rpcs.respond_to? :update_backup_channel
+                    @update_backup_channel = ::Gapic::Config::Method.new update_backup_channel_config
+                    delete_backup_channel_config = parent_rpcs.delete_backup_channel if parent_rpcs.respond_to? :delete_backup_channel
+                    @delete_backup_channel = ::Gapic::Config::Method.new delete_backup_channel_config
+                    list_backup_plan_bindings_config = parent_rpcs.list_backup_plan_bindings if parent_rpcs.respond_to? :list_backup_plan_bindings
+                    @list_backup_plan_bindings = ::Gapic::Config::Method.new list_backup_plan_bindings_config
+                    get_backup_plan_binding_config = parent_rpcs.get_backup_plan_binding if parent_rpcs.respond_to? :get_backup_plan_binding
+                    @get_backup_plan_binding = ::Gapic::Config::Method.new get_backup_plan_binding_config
                     create_backup_config = parent_rpcs.create_backup if parent_rpcs.respond_to? :create_backup
                     @create_backup = ::Gapic::Config::Method.new create_backup_config
                     list_backups_config = parent_rpcs.list_backups if parent_rpcs.respond_to? :list_backups
@@ -2966,6 +4425,20 @@ module Google
                     @update_restore_plan = ::Gapic::Config::Method.new update_restore_plan_config
                     delete_restore_plan_config = parent_rpcs.delete_restore_plan if parent_rpcs.respond_to? :delete_restore_plan
                     @delete_restore_plan = ::Gapic::Config::Method.new delete_restore_plan_config
+                    create_restore_channel_config = parent_rpcs.create_restore_channel if parent_rpcs.respond_to? :create_restore_channel
+                    @create_restore_channel = ::Gapic::Config::Method.new create_restore_channel_config
+                    list_restore_channels_config = parent_rpcs.list_restore_channels if parent_rpcs.respond_to? :list_restore_channels
+                    @list_restore_channels = ::Gapic::Config::Method.new list_restore_channels_config
+                    get_restore_channel_config = parent_rpcs.get_restore_channel if parent_rpcs.respond_to? :get_restore_channel
+                    @get_restore_channel = ::Gapic::Config::Method.new get_restore_channel_config
+                    update_restore_channel_config = parent_rpcs.update_restore_channel if parent_rpcs.respond_to? :update_restore_channel
+                    @update_restore_channel = ::Gapic::Config::Method.new update_restore_channel_config
+                    delete_restore_channel_config = parent_rpcs.delete_restore_channel if parent_rpcs.respond_to? :delete_restore_channel
+                    @delete_restore_channel = ::Gapic::Config::Method.new delete_restore_channel_config
+                    list_restore_plan_bindings_config = parent_rpcs.list_restore_plan_bindings if parent_rpcs.respond_to? :list_restore_plan_bindings
+                    @list_restore_plan_bindings = ::Gapic::Config::Method.new list_restore_plan_bindings_config
+                    get_restore_plan_binding_config = parent_rpcs.get_restore_plan_binding if parent_rpcs.respond_to? :get_restore_plan_binding
+                    @get_restore_plan_binding = ::Gapic::Config::Method.new get_restore_plan_binding_config
                     create_restore_config = parent_rpcs.create_restore if parent_rpcs.respond_to? :create_restore
                     @create_restore = ::Gapic::Config::Method.new create_restore_config
                     list_restores_config = parent_rpcs.list_restores if parent_rpcs.respond_to? :list_restores

@@ -80,7 +80,9 @@ module Google
         # @!attribute [r] state_reason
         #   @return [::String]
         #     Output only. Human-readable description of why RestorePlan is in the
-        #     current `state`
+        #     current `state`. This field is only meant for human readability and should
+        #     not be used programmatically as this field is not guaranteed to be
+        #     consistent.
         class RestorePlan
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

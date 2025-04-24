@@ -35,6 +35,41 @@
                 "delete_backup_plan"
               ]
             },
+            "CreateBackupChannel": {
+              "methods": [
+                "create_backup_channel"
+              ]
+            },
+            "ListBackupChannels": {
+              "methods": [
+                "list_backup_channels"
+              ]
+            },
+            "GetBackupChannel": {
+              "methods": [
+                "get_backup_channel"
+              ]
+            },
+            "UpdateBackupChannel": {
+              "methods": [
+                "update_backup_channel"
+              ]
+            },
+            "DeleteBackupChannel": {
+              "methods": [
+                "delete_backup_channel"
+              ]
+            },
+            "ListBackupPlanBindings": {
+              "methods": [
+                "list_backup_plan_bindings"
+              ]
+            },
+            "GetBackupPlanBinding": {
+              "methods": [
+                "get_backup_plan_binding"
+              ]
+            },
             "CreateBackup": {
               "methods": [
                 "create_backup"
@@ -93,6 +128,41 @@
             "DeleteRestorePlan": {
               "methods": [
                 "delete_restore_plan"
+              ]
+            },
+            "CreateRestoreChannel": {
+              "methods": [
+                "create_restore_channel"
+              ]
+            },
+            "ListRestoreChannels": {
+              "methods": [
+                "list_restore_channels"
+              ]
+            },
+            "GetRestoreChannel": {
+              "methods": [
+                "get_restore_channel"
+              ]
+            },
+            "UpdateRestoreChannel": {
+              "methods": [
+                "update_restore_channel"
+              ]
+            },
+            "DeleteRestoreChannel": {
+              "methods": [
+                "delete_restore_channel"
+              ]
+            },
+            "ListRestorePlanBindings": {
+              "methods": [
+                "list_restore_plan_bindings"
+              ]
+            },
+            "GetRestorePlanBinding": {
+              "methods": [
+                "get_restore_plan_binding"
               ]
             },
             "CreateRestore": {
