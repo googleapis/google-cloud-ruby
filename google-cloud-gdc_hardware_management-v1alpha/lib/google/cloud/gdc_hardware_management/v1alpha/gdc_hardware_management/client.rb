@@ -3742,7 +3742,7 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload signal_zone_state(name: nil, request_id: nil, state_signal: nil, provisioning_state_signal: nil)
+            # @overload signal_zone_state(name: nil, request_id: nil, state_signal: nil, provisioning_state_signal: nil, step: nil, details: nil)
             #   Pass arguments to `signal_zone_state` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -3759,6 +3759,13 @@ module Google
             #   @param provisioning_state_signal [::Google::Cloud::GDCHardwareManagement::V1alpha::SignalZoneStateRequest::ProvisioningStateSignal]
             #     Optional. The provisioning state signal to send for this zone. Either
             #     state_signal or provisioning_state_signal must be set, but not both.
+            #   @param step [::String]
+            #     Optional. The step being executed. Provides a finer grained status when the
+            #     state_signal is FACTORY_TURNUP_CHECKS_STARTED or
+            #     FACTORY_TURNUP_CHECKS_FAILED.
+            #   @param details [::String]
+            #     Optional. Additional details, such as an error message when state_signal is
+            #     FACTORY_TURNUP_CHECKS_FAILED.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Gapic::Operation]
