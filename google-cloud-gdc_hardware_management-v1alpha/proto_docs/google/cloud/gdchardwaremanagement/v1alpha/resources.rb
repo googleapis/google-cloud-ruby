@@ -76,13 +76,22 @@ module Google
         #   @return [::Google::Protobuf::Timestamp]
         #     Output only. Time when the order was submitted. Is auto-populated to the
         #     current time when an order is submitted.
-        # @!attribute [rw] billing_id
+        # @!attribute [r] billing_id
         #   @return [::String]
-        #     Required. The Google Cloud Billing ID to be charged for this order.
+        #     Output only. The Google Cloud Billing ID to be charged for this order.
         # @!attribute [rw] existing_hardware
         #   @return [::Array<::Google::Cloud::GDCHardwareManagement::V1alpha::HardwareLocation>]
         #     Optional. Existing hardware to be removed as part of this order.
         #     Note: any hardware removed will be recycled unless otherwise agreed.
+        # @!attribute [r] deployment_type
+        #   @return [::Google::Cloud::GDCHardwareManagement::V1alpha::Order::DeploymentType]
+        #     Output only. The deployment type of this order.
+        # @!attribute [r] actual_installation_date
+        #   @return [::Google::Type::Date]
+        #     Output only. Actual installation date for this order.
+        # @!attribute [r] estimated_installation_date
+        #   @return [::Google::Type::Date]
+        #     Output only. Estimated installation date for this order.
         class Order
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -151,6 +160,27 @@ module Google
 
             # Proof of concept for the customer.
             POC = 2
+
+            # Not billed.
+            UNPAID = 2
+          end
+
+          # Valid types of a deployment.
+          module DeploymentType
+            # Deployment type is unspecified.
+            DEPLOYMENT_TYPE_UNSPECIFIED = 0
+
+            # Prod deployment with SLOs.
+            FULL_PRODUCTION = 1
+
+            # Deployment with best-effort support and no SLOs.
+            PROOF_OF_CONCEPT = 2
+
+            # Internal deployment with best-effort support and no SLOs.
+            INTERNAL = 3
+
+            # Customer lab deployment that we support as though it's prod.
+            CUSTOMER_LAB = 4
           end
         end
 
@@ -591,9 +621,25 @@ module Google
         # @!attribute [r] vcpu_count
         #   @return [::Integer]
         #     Output only. The vCPU count associated with this SKU.
+        # @!attribute [r] hardware_count_ranges
+        #   @return [::Array<::Google::Cloud::GDCHardwareManagement::V1alpha::Sku::Range>]
+        #     Output only. The inclusive ranges of hardware counts that are allowed in a
+        #     zone using this SKU.
         class Sku
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Inclusive range.
+          # @!attribute [rw] min
+          #   @return [::Integer]
+          #     The minimum value of the range.
+          # @!attribute [rw] max
+          #   @return [::Integer]
+          #     The maximum value of the range.
+          class Range
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
 
           # Valid types of a SKU.
           module Type
@@ -675,6 +721,9 @@ module Google
 
             # Factory turnup has succeeded.
             READY_FOR_CUSTOMER_FACTORY_TURNUP_CHECKS = 5
+
+            # The Zone is running factory turnup checks.
+            CUSTOMER_FACTORY_TURNUP_CHECKS_STARTED = 8
 
             # The Zone is ready for site turnup.
             READY_FOR_SITE_TURNUP = 6
