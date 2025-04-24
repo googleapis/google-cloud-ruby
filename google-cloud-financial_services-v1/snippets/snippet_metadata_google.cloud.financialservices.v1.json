@@ -1,0 +1,1535 @@
+{
+  "client_library": {
+    "name": "google-cloud-financial_services-v1",
+    "version": "",
+    "language": "RUBY",
+    "apis": [
+      {
+        "id": "google.cloud.financialservices.v1",
+        "version": "v1"
+      }
+    ]
+  },
+  "snippets": [
+    {
+      "region_tag": "financialserivces_v1_generated_AML_ListInstances_sync",
+      "title": "Snippet for the list_instances call in the AML service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::FinancialServices::V1::AML::Client#list_instances.",
+      "file": "aml/list_instances.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_instances",
+        "full_name": "::Google::Cloud::FinancialServices::V1::AML::Client#list_instances",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::FinancialServices::V1::ListInstancesRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::FinancialServices::V1::ListInstancesResponse",
+        "client": {
+          "short_name": "AML::Client",
+          "full_name": "::Google::Cloud::FinancialServices::V1::AML::Client"
+        },
+        "method": {
+          "short_name": "ListInstances",
+          "full_name": "google.cloud.financialservices.v1.AML.ListInstances",
+          "service": {
+            "short_name": "AML",
+            "full_name": "google.cloud.financialservices.v1.AML"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "financialserivces_v1_generated_AML_GetInstance_sync",
+      "title": "Snippet for the get_instance call in the AML service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::FinancialServices::V1::AML::Client#get_instance.",
+      "file": "aml/get_instance.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_instance",
+        "full_name": "::Google::Cloud::FinancialServices::V1::AML::Client#get_instance",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::FinancialServices::V1::GetInstanceRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::FinancialServices::V1::Instance",
+        "client": {
+          "short_name": "AML::Client",
+          "full_name": "::Google::Cloud::FinancialServices::V1::AML::Client"
+        },
+        "method": {
+          "short_name": "GetInstance",
+          "full_name": "google.cloud.financialservices.v1.AML.GetInstance",
+          "service": {
+            "short_name": "AML",
+            "full_name": "google.cloud.financialservices.v1.AML"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "financialserivces_v1_generated_AML_CreateInstance_sync",
+      "title": "Snippet for the create_instance call in the AML service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::FinancialServices::V1::AML::Client#create_instance.",
+      "file": "aml/create_instance.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_instance",
+        "full_name": "::Google::Cloud::FinancialServices::V1::AML::Client#create_instance",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::FinancialServices::V1::CreateInstanceRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "AML::Client",
+          "full_name": "::Google::Cloud::FinancialServices::V1::AML::Client"
+        },
+        "method": {
+          "short_name": "CreateInstance",
+          "full_name": "google.cloud.financialservices.v1.AML.CreateInstance",
+          "service": {
+            "short_name": "AML",
+            "full_name": "google.cloud.financialservices.v1.AML"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "financialserivces_v1_generated_AML_UpdateInstance_sync",
+      "title": "Snippet for the update_instance call in the AML service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::FinancialServices::V1::AML::Client#update_instance.",
+      "file": "aml/update_instance.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_instance",
+        "full_name": "::Google::Cloud::FinancialServices::V1::AML::Client#update_instance",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::FinancialServices::V1::UpdateInstanceRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "AML::Client",
+          "full_name": "::Google::Cloud::FinancialServices::V1::AML::Client"
+        },
+        "method": {
+          "short_name": "UpdateInstance",
+          "full_name": "google.cloud.financialservices.v1.AML.UpdateInstance",
+          "service": {
+            "short_name": "AML",
+            "full_name": "google.cloud.financialservices.v1.AML"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "financialserivces_v1_generated_AML_DeleteInstance_sync",
+      "title": "Snippet for the delete_instance call in the AML service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::FinancialServices::V1::AML::Client#delete_instance.",
+      "file": "aml/delete_instance.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_instance",
+        "full_name": "::Google::Cloud::FinancialServices::V1::AML::Client#delete_instance",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::FinancialServices::V1::DeleteInstanceRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "AML::Client",
+          "full_name": "::Google::Cloud::FinancialServices::V1::AML::Client"
+        },
+        "method": {
+          "short_name": "DeleteInstance",
+          "full_name": "google.cloud.financialservices.v1.AML.DeleteInstance",
+          "service": {
+            "short_name": "AML",
+            "full_name": "google.cloud.financialservices.v1.AML"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "financialserivces_v1_generated_AML_ImportRegisteredParties_sync",
+      "title": "Snippet for the import_registered_parties call in the AML service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::FinancialServices::V1::AML::Client#import_registered_parties.",
+      "file": "aml/import_registered_parties.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "import_registered_parties",
+        "full_name": "::Google::Cloud::FinancialServices::V1::AML::Client#import_registered_parties",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::FinancialServices::V1::ImportRegisteredPartiesRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "AML::Client",
+          "full_name": "::Google::Cloud::FinancialServices::V1::AML::Client"
+        },
+        "method": {
+          "short_name": "ImportRegisteredParties",
+          "full_name": "google.cloud.financialservices.v1.AML.ImportRegisteredParties",
+          "service": {
+            "short_name": "AML",
+            "full_name": "google.cloud.financialservices.v1.AML"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "financialserivces_v1_generated_AML_ExportRegisteredParties_sync",
+      "title": "Snippet for the export_registered_parties call in the AML service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::FinancialServices::V1::AML::Client#export_registered_parties.",
+      "file": "aml/export_registered_parties.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "export_registered_parties",
+        "full_name": "::Google::Cloud::FinancialServices::V1::AML::Client#export_registered_parties",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::FinancialServices::V1::ExportRegisteredPartiesRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "AML::Client",
+          "full_name": "::Google::Cloud::FinancialServices::V1::AML::Client"
+        },
+        "method": {
+          "short_name": "ExportRegisteredParties",
+          "full_name": "google.cloud.financialservices.v1.AML.ExportRegisteredParties",
+          "service": {
+            "short_name": "AML",
+            "full_name": "google.cloud.financialservices.v1.AML"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "financialserivces_v1_generated_AML_ListDatasets_sync",
+      "title": "Snippet for the list_datasets call in the AML service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::FinancialServices::V1::AML::Client#list_datasets.",
+      "file": "aml/list_datasets.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_datasets",
+        "full_name": "::Google::Cloud::FinancialServices::V1::AML::Client#list_datasets",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::FinancialServices::V1::ListDatasetsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::FinancialServices::V1::ListDatasetsResponse",
+        "client": {
+          "short_name": "AML::Client",
+          "full_name": "::Google::Cloud::FinancialServices::V1::AML::Client"
+        },
+        "method": {
+          "short_name": "ListDatasets",
+          "full_name": "google.cloud.financialservices.v1.AML.ListDatasets",
+          "service": {
+            "short_name": "AML",
+            "full_name": "google.cloud.financialservices.v1.AML"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "financialserivces_v1_generated_AML_GetDataset_sync",
+      "title": "Snippet for the get_dataset call in the AML service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::FinancialServices::V1::AML::Client#get_dataset.",
+      "file": "aml/get_dataset.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_dataset",
+        "full_name": "::Google::Cloud::FinancialServices::V1::AML::Client#get_dataset",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::FinancialServices::V1::GetDatasetRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::FinancialServices::V1::Dataset",
+        "client": {
+          "short_name": "AML::Client",
+          "full_name": "::Google::Cloud::FinancialServices::V1::AML::Client"
+        },
+        "method": {
+          "short_name": "GetDataset",
+          "full_name": "google.cloud.financialservices.v1.AML.GetDataset",
+          "service": {
+            "short_name": "AML",
+            "full_name": "google.cloud.financialservices.v1.AML"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "financialserivces_v1_generated_AML_CreateDataset_sync",
+      "title": "Snippet for the create_dataset call in the AML service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::FinancialServices::V1::AML::Client#create_dataset.",
+      "file": "aml/create_dataset.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_dataset",
+        "full_name": "::Google::Cloud::FinancialServices::V1::AML::Client#create_dataset",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::FinancialServices::V1::CreateDatasetRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "AML::Client",
+          "full_name": "::Google::Cloud::FinancialServices::V1::AML::Client"
+        },
+        "method": {
+          "short_name": "CreateDataset",
+          "full_name": "google.cloud.financialservices.v1.AML.CreateDataset",
+          "service": {
+            "short_name": "AML",
+            "full_name": "google.cloud.financialservices.v1.AML"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "financialserivces_v1_generated_AML_UpdateDataset_sync",
+      "title": "Snippet for the update_dataset call in the AML service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::FinancialServices::V1::AML::Client#update_dataset.",
+      "file": "aml/update_dataset.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_dataset",
+        "full_name": "::Google::Cloud::FinancialServices::V1::AML::Client#update_dataset",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::FinancialServices::V1::UpdateDatasetRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "AML::Client",
+          "full_name": "::Google::Cloud::FinancialServices::V1::AML::Client"
+        },
+        "method": {
+          "short_name": "UpdateDataset",
+          "full_name": "google.cloud.financialservices.v1.AML.UpdateDataset",
+          "service": {
+            "short_name": "AML",
+            "full_name": "google.cloud.financialservices.v1.AML"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "financialserivces_v1_generated_AML_DeleteDataset_sync",
+      "title": "Snippet for the delete_dataset call in the AML service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::FinancialServices::V1::AML::Client#delete_dataset.",
+      "file": "aml/delete_dataset.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_dataset",
+        "full_name": "::Google::Cloud::FinancialServices::V1::AML::Client#delete_dataset",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::FinancialServices::V1::DeleteDatasetRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "AML::Client",
+          "full_name": "::Google::Cloud::FinancialServices::V1::AML::Client"
+        },
+        "method": {
+          "short_name": "DeleteDataset",
+          "full_name": "google.cloud.financialservices.v1.AML.DeleteDataset",
+          "service": {
+            "short_name": "AML",
+            "full_name": "google.cloud.financialservices.v1.AML"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "financialserivces_v1_generated_AML_ListModels_sync",
+      "title": "Snippet for the list_models call in the AML service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::FinancialServices::V1::AML::Client#list_models.",
+      "file": "aml/list_models.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_models",
+        "full_name": "::Google::Cloud::FinancialServices::V1::AML::Client#list_models",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::FinancialServices::V1::ListModelsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::FinancialServices::V1::ListModelsResponse",
+        "client": {
+          "short_name": "AML::Client",
+          "full_name": "::Google::Cloud::FinancialServices::V1::AML::Client"
+        },
+        "method": {
+          "short_name": "ListModels",
+          "full_name": "google.cloud.financialservices.v1.AML.ListModels",
+          "service": {
+            "short_name": "AML",
+            "full_name": "google.cloud.financialservices.v1.AML"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "financialserivces_v1_generated_AML_GetModel_sync",
+      "title": "Snippet for the get_model call in the AML service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::FinancialServices::V1::AML::Client#get_model.",
+      "file": "aml/get_model.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_model",
+        "full_name": "::Google::Cloud::FinancialServices::V1::AML::Client#get_model",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::FinancialServices::V1::GetModelRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::FinancialServices::V1::Model",
+        "client": {
+          "short_name": "AML::Client",
+          "full_name": "::Google::Cloud::FinancialServices::V1::AML::Client"
+        },
+        "method": {
+          "short_name": "GetModel",
+          "full_name": "google.cloud.financialservices.v1.AML.GetModel",
+          "service": {
+            "short_name": "AML",
+            "full_name": "google.cloud.financialservices.v1.AML"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "financialserivces_v1_generated_AML_CreateModel_sync",
+      "title": "Snippet for the create_model call in the AML service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::FinancialServices::V1::AML::Client#create_model.",
+      "file": "aml/create_model.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_model",
+        "full_name": "::Google::Cloud::FinancialServices::V1::AML::Client#create_model",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::FinancialServices::V1::CreateModelRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "AML::Client",
+          "full_name": "::Google::Cloud::FinancialServices::V1::AML::Client"
+        },
+        "method": {
+          "short_name": "CreateModel",
+          "full_name": "google.cloud.financialservices.v1.AML.CreateModel",
+          "service": {
+            "short_name": "AML",
+            "full_name": "google.cloud.financialservices.v1.AML"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "financialserivces_v1_generated_AML_UpdateModel_sync",
+      "title": "Snippet for the update_model call in the AML service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::FinancialServices::V1::AML::Client#update_model.",
+      "file": "aml/update_model.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_model",
+        "full_name": "::Google::Cloud::FinancialServices::V1::AML::Client#update_model",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::FinancialServices::V1::UpdateModelRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "AML::Client",
+          "full_name": "::Google::Cloud::FinancialServices::V1::AML::Client"
+        },
+        "method": {
+          "short_name": "UpdateModel",
+          "full_name": "google.cloud.financialservices.v1.AML.UpdateModel",
+          "service": {
+            "short_name": "AML",
+            "full_name": "google.cloud.financialservices.v1.AML"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "financialserivces_v1_generated_AML_ExportModelMetadata_sync",
+      "title": "Snippet for the export_model_metadata call in the AML service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::FinancialServices::V1::AML::Client#export_model_metadata.",
+      "file": "aml/export_model_metadata.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "export_model_metadata",
+        "full_name": "::Google::Cloud::FinancialServices::V1::AML::Client#export_model_metadata",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::FinancialServices::V1::ExportModelMetadataRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "AML::Client",
+          "full_name": "::Google::Cloud::FinancialServices::V1::AML::Client"
+        },
+        "method": {
+          "short_name": "ExportModelMetadata",
+          "full_name": "google.cloud.financialservices.v1.AML.ExportModelMetadata",
+          "service": {
+            "short_name": "AML",
+            "full_name": "google.cloud.financialservices.v1.AML"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "financialserivces_v1_generated_AML_DeleteModel_sync",
+      "title": "Snippet for the delete_model call in the AML service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::FinancialServices::V1::AML::Client#delete_model.",
+      "file": "aml/delete_model.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_model",
+        "full_name": "::Google::Cloud::FinancialServices::V1::AML::Client#delete_model",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::FinancialServices::V1::DeleteModelRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "AML::Client",
+          "full_name": "::Google::Cloud::FinancialServices::V1::AML::Client"
+        },
+        "method": {
+          "short_name": "DeleteModel",
+          "full_name": "google.cloud.financialservices.v1.AML.DeleteModel",
+          "service": {
+            "short_name": "AML",
+            "full_name": "google.cloud.financialservices.v1.AML"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "financialserivces_v1_generated_AML_ListEngineConfigs_sync",
+      "title": "Snippet for the list_engine_configs call in the AML service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::FinancialServices::V1::AML::Client#list_engine_configs.",
+      "file": "aml/list_engine_configs.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_engine_configs",
+        "full_name": "::Google::Cloud::FinancialServices::V1::AML::Client#list_engine_configs",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::FinancialServices::V1::ListEngineConfigsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::FinancialServices::V1::ListEngineConfigsResponse",
+        "client": {
+          "short_name": "AML::Client",
+          "full_name": "::Google::Cloud::FinancialServices::V1::AML::Client"
+        },
+        "method": {
+          "short_name": "ListEngineConfigs",
+          "full_name": "google.cloud.financialservices.v1.AML.ListEngineConfigs",
+          "service": {
+            "short_name": "AML",
+            "full_name": "google.cloud.financialservices.v1.AML"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "financialserivces_v1_generated_AML_GetEngineConfig_sync",
+      "title": "Snippet for the get_engine_config call in the AML service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::FinancialServices::V1::AML::Client#get_engine_config.",
+      "file": "aml/get_engine_config.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_engine_config",
+        "full_name": "::Google::Cloud::FinancialServices::V1::AML::Client#get_engine_config",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::FinancialServices::V1::GetEngineConfigRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::FinancialServices::V1::EngineConfig",
+        "client": {
+          "short_name": "AML::Client",
+          "full_name": "::Google::Cloud::FinancialServices::V1::AML::Client"
+        },
+        "method": {
+          "short_name": "GetEngineConfig",
+          "full_name": "google.cloud.financialservices.v1.AML.GetEngineConfig",
+          "service": {
+            "short_name": "AML",
+            "full_name": "google.cloud.financialservices.v1.AML"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "financialserivces_v1_generated_AML_CreateEngineConfig_sync",
+      "title": "Snippet for the create_engine_config call in the AML service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::FinancialServices::V1::AML::Client#create_engine_config.",
+      "file": "aml/create_engine_config.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_engine_config",
+        "full_name": "::Google::Cloud::FinancialServices::V1::AML::Client#create_engine_config",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::FinancialServices::V1::CreateEngineConfigRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "AML::Client",
+          "full_name": "::Google::Cloud::FinancialServices::V1::AML::Client"
+        },
+        "method": {
+          "short_name": "CreateEngineConfig",
+          "full_name": "google.cloud.financialservices.v1.AML.CreateEngineConfig",
+          "service": {
+            "short_name": "AML",
+            "full_name": "google.cloud.financialservices.v1.AML"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "financialserivces_v1_generated_AML_UpdateEngineConfig_sync",
+      "title": "Snippet for the update_engine_config call in the AML service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::FinancialServices::V1::AML::Client#update_engine_config.",
+      "file": "aml/update_engine_config.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_engine_config",
+        "full_name": "::Google::Cloud::FinancialServices::V1::AML::Client#update_engine_config",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::FinancialServices::V1::UpdateEngineConfigRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "AML::Client",
+          "full_name": "::Google::Cloud::FinancialServices::V1::AML::Client"
+        },
+        "method": {
+          "short_name": "UpdateEngineConfig",
+          "full_name": "google.cloud.financialservices.v1.AML.UpdateEngineConfig",
+          "service": {
+            "short_name": "AML",
+            "full_name": "google.cloud.financialservices.v1.AML"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "financialserivces_v1_generated_AML_ExportEngineConfigMetadata_sync",
+      "title": "Snippet for the export_engine_config_metadata call in the AML service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::FinancialServices::V1::AML::Client#export_engine_config_metadata.",
+      "file": "aml/export_engine_config_metadata.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "export_engine_config_metadata",
+        "full_name": "::Google::Cloud::FinancialServices::V1::AML::Client#export_engine_config_metadata",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::FinancialServices::V1::ExportEngineConfigMetadataRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "AML::Client",
+          "full_name": "::Google::Cloud::FinancialServices::V1::AML::Client"
+        },
+        "method": {
+          "short_name": "ExportEngineConfigMetadata",
+          "full_name": "google.cloud.financialservices.v1.AML.ExportEngineConfigMetadata",
+          "service": {
+            "short_name": "AML",
+            "full_name": "google.cloud.financialservices.v1.AML"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "financialserivces_v1_generated_AML_DeleteEngineConfig_sync",
+      "title": "Snippet for the delete_engine_config call in the AML service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::FinancialServices::V1::AML::Client#delete_engine_config.",
+      "file": "aml/delete_engine_config.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_engine_config",
+        "full_name": "::Google::Cloud::FinancialServices::V1::AML::Client#delete_engine_config",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::FinancialServices::V1::DeleteEngineConfigRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "AML::Client",
+          "full_name": "::Google::Cloud::FinancialServices::V1::AML::Client"
+        },
+        "method": {
+          "short_name": "DeleteEngineConfig",
+          "full_name": "google.cloud.financialservices.v1.AML.DeleteEngineConfig",
+          "service": {
+            "short_name": "AML",
+            "full_name": "google.cloud.financialservices.v1.AML"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "financialserivces_v1_generated_AML_GetEngineVersion_sync",
+      "title": "Snippet for the get_engine_version call in the AML service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::FinancialServices::V1::AML::Client#get_engine_version.",
+      "file": "aml/get_engine_version.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_engine_version",
+        "full_name": "::Google::Cloud::FinancialServices::V1::AML::Client#get_engine_version",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::FinancialServices::V1::GetEngineVersionRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::FinancialServices::V1::EngineVersion",
+        "client": {
+          "short_name": "AML::Client",
+          "full_name": "::Google::Cloud::FinancialServices::V1::AML::Client"
+        },
+        "method": {
+          "short_name": "GetEngineVersion",
+          "full_name": "google.cloud.financialservices.v1.AML.GetEngineVersion",
+          "service": {
+            "short_name": "AML",
+            "full_name": "google.cloud.financialservices.v1.AML"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "financialserivces_v1_generated_AML_ListEngineVersions_sync",
+      "title": "Snippet for the list_engine_versions call in the AML service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::FinancialServices::V1::AML::Client#list_engine_versions.",
+      "file": "aml/list_engine_versions.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_engine_versions",
+        "full_name": "::Google::Cloud::FinancialServices::V1::AML::Client#list_engine_versions",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::FinancialServices::V1::ListEngineVersionsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::FinancialServices::V1::ListEngineVersionsResponse",
+        "client": {
+          "short_name": "AML::Client",
+          "full_name": "::Google::Cloud::FinancialServices::V1::AML::Client"
+        },
+        "method": {
+          "short_name": "ListEngineVersions",
+          "full_name": "google.cloud.financialservices.v1.AML.ListEngineVersions",
+          "service": {
+            "short_name": "AML",
+            "full_name": "google.cloud.financialservices.v1.AML"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "financialserivces_v1_generated_AML_ListPredictionResults_sync",
+      "title": "Snippet for the list_prediction_results call in the AML service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::FinancialServices::V1::AML::Client#list_prediction_results.",
+      "file": "aml/list_prediction_results.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_prediction_results",
+        "full_name": "::Google::Cloud::FinancialServices::V1::AML::Client#list_prediction_results",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::FinancialServices::V1::ListPredictionResultsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::FinancialServices::V1::ListPredictionResultsResponse",
+        "client": {
+          "short_name": "AML::Client",
+          "full_name": "::Google::Cloud::FinancialServices::V1::AML::Client"
+        },
+        "method": {
+          "short_name": "ListPredictionResults",
+          "full_name": "google.cloud.financialservices.v1.AML.ListPredictionResults",
+          "service": {
+            "short_name": "AML",
+            "full_name": "google.cloud.financialservices.v1.AML"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "financialserivces_v1_generated_AML_GetPredictionResult_sync",
+      "title": "Snippet for the get_prediction_result call in the AML service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::FinancialServices::V1::AML::Client#get_prediction_result.",
+      "file": "aml/get_prediction_result.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_prediction_result",
+        "full_name": "::Google::Cloud::FinancialServices::V1::AML::Client#get_prediction_result",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::FinancialServices::V1::GetPredictionResultRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::FinancialServices::V1::PredictionResult",
+        "client": {
+          "short_name": "AML::Client",
+          "full_name": "::Google::Cloud::FinancialServices::V1::AML::Client"
+        },
+        "method": {
+          "short_name": "GetPredictionResult",
+          "full_name": "google.cloud.financialservices.v1.AML.GetPredictionResult",
+          "service": {
+            "short_name": "AML",
+            "full_name": "google.cloud.financialservices.v1.AML"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "financialserivces_v1_generated_AML_CreatePredictionResult_sync",
+      "title": "Snippet for the create_prediction_result call in the AML service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::FinancialServices::V1::AML::Client#create_prediction_result.",
+      "file": "aml/create_prediction_result.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_prediction_result",
+        "full_name": "::Google::Cloud::FinancialServices::V1::AML::Client#create_prediction_result",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::FinancialServices::V1::CreatePredictionResultRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "AML::Client",
+          "full_name": "::Google::Cloud::FinancialServices::V1::AML::Client"
+        },
+        "method": {
+          "short_name": "CreatePredictionResult",
+          "full_name": "google.cloud.financialservices.v1.AML.CreatePredictionResult",
+          "service": {
+            "short_name": "AML",
+            "full_name": "google.cloud.financialservices.v1.AML"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "financialserivces_v1_generated_AML_UpdatePredictionResult_sync",
+      "title": "Snippet for the update_prediction_result call in the AML service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::FinancialServices::V1::AML::Client#update_prediction_result.",
+      "file": "aml/update_prediction_result.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_prediction_result",
+        "full_name": "::Google::Cloud::FinancialServices::V1::AML::Client#update_prediction_result",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::FinancialServices::V1::UpdatePredictionResultRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "AML::Client",
+          "full_name": "::Google::Cloud::FinancialServices::V1::AML::Client"
+        },
+        "method": {
+          "short_name": "UpdatePredictionResult",
+          "full_name": "google.cloud.financialservices.v1.AML.UpdatePredictionResult",
+          "service": {
+            "short_name": "AML",
+            "full_name": "google.cloud.financialservices.v1.AML"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "financialserivces_v1_generated_AML_ExportPredictionResultMetadata_sync",
+      "title": "Snippet for the export_prediction_result_metadata call in the AML service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::FinancialServices::V1::AML::Client#export_prediction_result_metadata.",
+      "file": "aml/export_prediction_result_metadata.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "export_prediction_result_metadata",
+        "full_name": "::Google::Cloud::FinancialServices::V1::AML::Client#export_prediction_result_metadata",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::FinancialServices::V1::ExportPredictionResultMetadataRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "AML::Client",
+          "full_name": "::Google::Cloud::FinancialServices::V1::AML::Client"
+        },
+        "method": {
+          "short_name": "ExportPredictionResultMetadata",
+          "full_name": "google.cloud.financialservices.v1.AML.ExportPredictionResultMetadata",
+          "service": {
+            "short_name": "AML",
+            "full_name": "google.cloud.financialservices.v1.AML"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "financialserivces_v1_generated_AML_DeletePredictionResult_sync",
+      "title": "Snippet for the delete_prediction_result call in the AML service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::FinancialServices::V1::AML::Client#delete_prediction_result.",
+      "file": "aml/delete_prediction_result.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_prediction_result",
+        "full_name": "::Google::Cloud::FinancialServices::V1::AML::Client#delete_prediction_result",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::FinancialServices::V1::DeletePredictionResultRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "AML::Client",
+          "full_name": "::Google::Cloud::FinancialServices::V1::AML::Client"
+        },
+        "method": {
+          "short_name": "DeletePredictionResult",
+          "full_name": "google.cloud.financialservices.v1.AML.DeletePredictionResult",
+          "service": {
+            "short_name": "AML",
+            "full_name": "google.cloud.financialservices.v1.AML"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "financialserivces_v1_generated_AML_ListBacktestResults_sync",
+      "title": "Snippet for the list_backtest_results call in the AML service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::FinancialServices::V1::AML::Client#list_backtest_results.",
+      "file": "aml/list_backtest_results.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_backtest_results",
+        "full_name": "::Google::Cloud::FinancialServices::V1::AML::Client#list_backtest_results",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::FinancialServices::V1::ListBacktestResultsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::FinancialServices::V1::ListBacktestResultsResponse",
+        "client": {
+          "short_name": "AML::Client",
+          "full_name": "::Google::Cloud::FinancialServices::V1::AML::Client"
+        },
+        "method": {
+          "short_name": "ListBacktestResults",
+          "full_name": "google.cloud.financialservices.v1.AML.ListBacktestResults",
+          "service": {
+            "short_name": "AML",
+            "full_name": "google.cloud.financialservices.v1.AML"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "financialserivces_v1_generated_AML_GetBacktestResult_sync",
+      "title": "Snippet for the get_backtest_result call in the AML service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::FinancialServices::V1::AML::Client#get_backtest_result.",
+      "file": "aml/get_backtest_result.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_backtest_result",
+        "full_name": "::Google::Cloud::FinancialServices::V1::AML::Client#get_backtest_result",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::FinancialServices::V1::GetBacktestResultRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::FinancialServices::V1::BacktestResult",
+        "client": {
+          "short_name": "AML::Client",
+          "full_name": "::Google::Cloud::FinancialServices::V1::AML::Client"
+        },
+        "method": {
+          "short_name": "GetBacktestResult",
+          "full_name": "google.cloud.financialservices.v1.AML.GetBacktestResult",
+          "service": {
+            "short_name": "AML",
+            "full_name": "google.cloud.financialservices.v1.AML"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "financialserivces_v1_generated_AML_CreateBacktestResult_sync",
+      "title": "Snippet for the create_backtest_result call in the AML service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::FinancialServices::V1::AML::Client#create_backtest_result.",
+      "file": "aml/create_backtest_result.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_backtest_result",
+        "full_name": "::Google::Cloud::FinancialServices::V1::AML::Client#create_backtest_result",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::FinancialServices::V1::CreateBacktestResultRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "AML::Client",
+          "full_name": "::Google::Cloud::FinancialServices::V1::AML::Client"
+        },
+        "method": {
+          "short_name": "CreateBacktestResult",
+          "full_name": "google.cloud.financialservices.v1.AML.CreateBacktestResult",
+          "service": {
+            "short_name": "AML",
+            "full_name": "google.cloud.financialservices.v1.AML"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "financialserivces_v1_generated_AML_UpdateBacktestResult_sync",
+      "title": "Snippet for the update_backtest_result call in the AML service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::FinancialServices::V1::AML::Client#update_backtest_result.",
+      "file": "aml/update_backtest_result.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_backtest_result",
+        "full_name": "::Google::Cloud::FinancialServices::V1::AML::Client#update_backtest_result",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::FinancialServices::V1::UpdateBacktestResultRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "AML::Client",
+          "full_name": "::Google::Cloud::FinancialServices::V1::AML::Client"
+        },
+        "method": {
+          "short_name": "UpdateBacktestResult",
+          "full_name": "google.cloud.financialservices.v1.AML.UpdateBacktestResult",
+          "service": {
+            "short_name": "AML",
+            "full_name": "google.cloud.financialservices.v1.AML"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "financialserivces_v1_generated_AML_ExportBacktestResultMetadata_sync",
+      "title": "Snippet for the export_backtest_result_metadata call in the AML service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::FinancialServices::V1::AML::Client#export_backtest_result_metadata.",
+      "file": "aml/export_backtest_result_metadata.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "export_backtest_result_metadata",
+        "full_name": "::Google::Cloud::FinancialServices::V1::AML::Client#export_backtest_result_metadata",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::FinancialServices::V1::ExportBacktestResultMetadataRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "AML::Client",
+          "full_name": "::Google::Cloud::FinancialServices::V1::AML::Client"
+        },
+        "method": {
+          "short_name": "ExportBacktestResultMetadata",
+          "full_name": "google.cloud.financialservices.v1.AML.ExportBacktestResultMetadata",
+          "service": {
+            "short_name": "AML",
+            "full_name": "google.cloud.financialservices.v1.AML"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "financialserivces_v1_generated_AML_DeleteBacktestResult_sync",
+      "title": "Snippet for the delete_backtest_result call in the AML service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::FinancialServices::V1::AML::Client#delete_backtest_result.",
+      "file": "aml/delete_backtest_result.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_backtest_result",
+        "full_name": "::Google::Cloud::FinancialServices::V1::AML::Client#delete_backtest_result",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::FinancialServices::V1::DeleteBacktestResultRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "AML::Client",
+          "full_name": "::Google::Cloud::FinancialServices::V1::AML::Client"
+        },
+        "method": {
+          "short_name": "DeleteBacktestResult",
+          "full_name": "google.cloud.financialservices.v1.AML.DeleteBacktestResult",
+          "service": {
+            "short_name": "AML",
+            "full_name": "google.cloud.financialservices.v1.AML"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    }
+  ]
+}
