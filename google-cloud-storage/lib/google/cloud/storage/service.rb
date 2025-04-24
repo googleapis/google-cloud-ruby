@@ -699,9 +699,15 @@ module Google
           end
         end
 
-        def restart_delete_ongoing_resumable_upload bucket_name, source, upload_id, options: {}
+        def restart_resumable_upload bucket_name, source, upload_id, options: {}
           execute do
-            service.restart_delete_ongoing_resumable_upload bucket_name, source, upload_id, options: options
+            service.restart_resumable_upload bucket_name, source, upload_id, options: options
+          end
+        end
+
+        def delete_resumable_upload bucket_name, source, upload_id, options: {}
+          execute do
+            service.delete_resumable_upload bucket_name, source, upload_id, options: options
           end
         end
 
