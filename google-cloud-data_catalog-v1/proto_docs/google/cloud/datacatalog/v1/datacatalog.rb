@@ -1737,6 +1737,10 @@ module Google
         # @!attribute [rw] catalog_ui_experience
         #   @return [::Google::Cloud::DataCatalog::V1::CatalogUIExperience]
         #     Opt-in status for the UI switch to Dataplex.
+        # @!attribute [rw] template_migration_enabled_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     The time when the Tag Template migration was enabled.
+        #     If the Tag Template migration is not enabled, this field is not set.
         class MigrationConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
