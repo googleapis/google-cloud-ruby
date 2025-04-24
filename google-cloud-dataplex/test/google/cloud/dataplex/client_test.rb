@@ -83,6 +83,27 @@ class Google::Cloud::Dataplex::ClientConstructionMinitest < Minitest::Test
     end
   end
 
+  def test_cmek_service_grpc
+    skip unless Google::Cloud::Dataplex.cmek_service_available? transport: :grpc
+    Gapic::ServiceStub.stub :new, DummyStub.new do
+      grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+      client = Google::Cloud::Dataplex.cmek_service transport: :grpc do |config|
+        config.credentials = grpc_channel
+      end
+      assert_kind_of Google::Cloud::Dataplex::V1::CmekService::Client, client
+    end
+  end
+
+  def test_cmek_service_rest
+    skip unless Google::Cloud::Dataplex.cmek_service_available? transport: :rest
+    Gapic::Rest::ClientStub.stub :new, DummyStub.new do
+      client = Google::Cloud::Dataplex.cmek_service transport: :rest do |config|
+        config.credentials = :dummy_credentials
+      end
+      assert_kind_of Google::Cloud::Dataplex::V1::CmekService::Rest::Client, client
+    end
+  end
+
   def test_content_service_grpc
     skip unless Google::Cloud::Dataplex.content_service_available? transport: :grpc
     Gapic::ServiceStub.stub :new, DummyStub.new do
