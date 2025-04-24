@@ -87,7 +87,7 @@ advantages over legacy SQL, including:
 * Complex `JOIN` predicates, including arbitrary expressions
 
 For examples that demonstrate some of these features, see [Standard SQL
-ghlights](https://cloud.google.com/bigquery/docs/reference/standard-sql/migrating-from-legacy-sql#standard_sql_highlights).
+highlights](https://cloud.google.com/bigquery/docs/reference/standard-sql/migrating-from-legacy-sql#standard_sql_highlights).
 
 As shown in this example, standard SQL is the library default:
 
