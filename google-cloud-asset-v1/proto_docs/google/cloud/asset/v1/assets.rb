@@ -75,6 +75,18 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # The enhanced metadata information for a resource.
+        # @!attribute [rw] resource_owners
+        #   @return [::Google::Cloud::Asset::V1::ResourceOwners]
+        #     The resource owners for a resource.
+        #
+        #     Note that this field only contains the members that have "roles/owner"
+        #     role in the resource's IAM Policy.
+        class AssetEnrichment
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # An asset in Google Cloud. An asset can be any resource in the Google Cloud
         # [resource
         # hierarchy](https://cloud.google.com/resource-manager/docs/cloud-platform-resource-hierarchy),
@@ -328,8 +340,9 @@ module Google
         #   @return [::String]
         #     The [full resource
         #     name](https://cloud.google.com/asset-inventory/docs/resource-name-format)
-        #     of the ancestor from which an [effective_tag][] is inherited, according to
-        #     [tag
+        #     of the ancestor from which
+        #     {::Google::Cloud::Asset::V1::EffectiveTagDetails#effective_tags effective_tags}
+        #     are inherited, according to [tag
         #     inheritance](https://cloud.google.com/resource-manager/docs/tags/tags-overview#inheritance).
         # @!attribute [rw] effective_tags
         #   @return [::Array<::Google::Cloud::Asset::V1::Tag>]
@@ -680,6 +693,32 @@ module Google
         #         - `effectiveTagValues:"123456789/env/prod*"`
         #         - `effectiveTagValues="123456789/env/prod"`
         #         - `effectiveTagValueIds="tagValues/456"`
+        # @!attribute [rw] enrichments
+        #   @return [::Array<::Google::Cloud::Asset::V1::AssetEnrichment>]
+        #     Enrichments of the asset. Currently supported enrichment types with
+        #     SearchAllResources API:
+        #
+        #     * RESOURCE_OWNERS
+        #
+        #     The corresponding read masks in order to get the enrichment:
+        #
+        #     * enrichments.resource_owners
+        #
+        #     The corresponding required permissions:
+        #
+        #     * cloudasset.assets.searchEnrichmentResourceOwners
+        #
+        #     Example query to get resource owner enrichment:
+        #     ```
+        #       scope: "projects/my-project"
+        #       query: "name: my-project"
+        #       assetTypes: "cloudresourcemanager.googleapis.com/Project"
+        #       readMask: {
+        #          paths: "asset_type"
+        #          paths: "name"
+        #          paths: "enrichments.resource_owners"
+        #       }
+        #     ```
         # @!attribute [rw] parent_asset_type
         #   @return [::String]
         #     The type of this resource's immediate parent, if there is one.
