@@ -747,6 +747,10 @@
       "component": "google-cloud-filestore-v1",
       "version_file": "lib/google/cloud/filestore/v1/version.rb"
     },
+    "google-cloud-financial_services": {
+      "component": "google-cloud-financial_services",
+      "version_file": "lib/google/cloud/financial_services/version.rb"
+    },
     "google-cloud-financial_services-v1": {
       "component": "google-cloud-financial_services-v1",
       "version_file": "lib/google/cloud/financial_services/v1/version.rb"
