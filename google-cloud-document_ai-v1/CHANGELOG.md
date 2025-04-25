@@ -1,5 +1,13 @@
 # Changelog
 
+### 1.5.0 (2025-04-25)
+
+#### Features
+
+* LayoutConfig includes whether to return images and bounding boxes 
+* Support for document identifiers 
+* Support for document layout block bounding boxes 
+
 ### 1.4.0 (2025-01-28)
 
 #### Features
