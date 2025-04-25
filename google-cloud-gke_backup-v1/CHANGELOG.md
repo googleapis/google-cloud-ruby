@@ -1,5 +1,13 @@
 # Changelog
 
+### 1.1.0 (2025-04-25)
+
+#### Features
+
+* BackupPlan reports its last successful completion time 
+* Support RPCs related to listing and reading backup and restore plan bindings 
+* Support RPCs related to managing backup and restore channels ([#29525](https://github.com/googleapis/google-cloud-ruby/issues/29525)) 
+
 ### 1.0.0 (2025-02-07)
 
 ### ⚠ BREAKING CHANGES
