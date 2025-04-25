@@ -1,5 +1,11 @@
 # Release History
 
+### 1.9.0 (2025-04-25)
+
+#### Features
+
+* Added deletion protection support for LogicalView ([#29528](https://github.com/googleapis/google-cloud-ruby/issues/29528)) 
+
 ### 1.8.0 (2025-03-11)
 
 #### Features
