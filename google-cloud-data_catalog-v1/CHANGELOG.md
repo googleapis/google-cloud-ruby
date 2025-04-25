@@ -1,5 +1,11 @@
 # Release History
 
+### 2.2.0 (2025-04-25)
+
+#### Features
+
+* MigrationConfig now includes the time when the Tag Template migration was enabled ([#29523](https://github.com/googleapis/google-cloud-ruby/issues/29523)) 
+
 ### 2.1.1 (2025-04-18)
 
 #### Documentation
