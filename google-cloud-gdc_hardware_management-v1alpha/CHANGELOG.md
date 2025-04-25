@@ -1,5 +1,13 @@
 # Changelog
 
+### 0.8.0 (2025-04-25)
+
+#### Features
+
+* Support deployment type and installation date for an Order 
+* Support hardware count ranges for a SKU 
+* Support step and details parameters to the signal_zone_state RPC 
+
 ### 0.7.0 (2025-02-07)
 
 ### ⚠ BREAKING CHANGES
