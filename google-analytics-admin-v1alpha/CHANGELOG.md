@@ -1,5 +1,12 @@
 # Release History
 
+### 0.34.0 (2025-04-25)
+
+#### Features
+
+* Support for managing ReportingDataAnnotation resources 
+* Support for the submit_user_deletion RPC 
+
 ### 0.33.0 (2025-03-05)
 
 #### Features
