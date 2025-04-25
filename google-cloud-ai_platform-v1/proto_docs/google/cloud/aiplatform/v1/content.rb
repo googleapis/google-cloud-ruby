@@ -191,6 +191,11 @@ module Google
         # @!attribute [rw] routing_config
         #   @return [::Google::Cloud::AIPlatform::V1::GenerationConfig::RoutingConfig]
         #     Optional. Routing configuration.
+        # @!attribute [rw] thinking_config
+        #   @return [::Google::Cloud::AIPlatform::V1::GenerationConfig::ThinkingConfig]
+        #     Optional. Config for thinking features.
+        #     An error will be returned if this field is set for models that don't
+        #     support thinking.
         class GenerationConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -245,6 +250,16 @@ module Google
               include ::Google::Protobuf::MessageExts
               extend ::Google::Protobuf::MessageExts::ClassMethods
             end
+          end
+
+          # Config for thinking features.
+          # @!attribute [rw] thinking_budget
+          #   @return [::Integer]
+          #     Optional. Indicates the thinking budget in tokens.
+          #     This is only applied when enable_thinking is true.
+          class ThinkingConfig
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
           end
         end
 
