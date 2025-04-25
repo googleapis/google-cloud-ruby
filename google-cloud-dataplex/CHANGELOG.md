@@ -1,5 +1,11 @@
 # Changelog
 
+### 2.1.0 (2025-04-25)
+
+#### Features
+
+* Support for cmek_service ([#29467](https://github.com/googleapis/google-cloud-ruby/issues/29467)) 
+
 ### 2.0.0 (2025-02-13)
 
 ### ⚠ BREAKING CHANGES
