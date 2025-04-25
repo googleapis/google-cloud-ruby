@@ -1,5 +1,13 @@
 # Release History
 
+### 0.41.0 (2025-04-25)
+
+#### Features
+
+* Added an internal identifier and a set of blob assets to Document 
+* Added image blocks and bounding boxes to document layout 
+* Added support for chunk fields 
+
 ### 0.40.0 (2025-03-25)
 
 #### Features
