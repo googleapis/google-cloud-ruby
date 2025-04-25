@@ -1,5 +1,11 @@
 # Changelog
 
+### 1.8.0 (2025-04-25)
+
+#### Features
+
+* Support for model checkpoints ([#29524](https://github.com/googleapis/google-cloud-ruby/issues/29524)) 
+
 ### 1.7.0 (2025-03-28)
 
 #### Features
