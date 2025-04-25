@@ -14,6 +14,17 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+# The batch-reviewer implementation is in the ruby-common-tools repo.
+# Here we load that implementation and configure it for google-cloud-ruby.
+
+if ENV["RUBY_COMMON_TOOLS"]
+  common_tools_dir = File.expand_path ENV["RUBY_COMMON_TOOLS"]
+  load File.join(common_tools_dir, "toys", "batch-review")
+else
+  load_git remote: "https://github.com/googleapis/ruby-common-tools.git",
+           path: "toys/batch-review",
+           update: true
+end
 
 batch_reviewer = Yoshi::BatchReviewer.new "googleapis/google-cloud-ruby"
 
@@ -41,7 +52,7 @@ end
 
 batch_reviewer.define_preset "owlbot" do |preset|
   preset.desc = "Selects all OwlBot pull requests"
-  preset.pull_request_filter.only_users(["gcf-owl-bot[bot]"])
+  preset.pull_request_filter.only_users Array "gcf-owl-bot[bot]"
   preset.diff_expectations.expect name: "protobuf descriptor files" do |expect|
     expect.path_pattern(/_pb\.rb$/)
   end
