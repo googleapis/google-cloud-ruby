@@ -1,5 +1,11 @@
 # Release History
 
+### 1.3.0 (2025-04-25)
+
+#### Features
+
+* Support for asset enrichments ([#29535](https://github.com/googleapis/google-cloud-ruby/issues/29535)) 
+
 ### 1.2.0 (2025-01-28)
 
 #### Features
