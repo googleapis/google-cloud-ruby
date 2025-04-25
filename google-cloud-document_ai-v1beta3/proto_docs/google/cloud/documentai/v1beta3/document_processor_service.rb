@@ -68,6 +68,9 @@ module Google
           #   @return [::Boolean]
           #     Optional. Whether to include bounding boxes in layout parser processor
           #     response.
+          # @!attribute [rw] enable_image_annotation
+          #   @return [::Boolean]
+          #     Optional. Whether to include image annotations in layout parser response.
           # @!attribute [rw] enable_llm_layout_parsing
           #   @return [::Boolean]
           #     Optional. Whether to refine PDF layout using LLM.
