@@ -67,7 +67,7 @@
     "Publisher": {
       "clients": {
         "grpc": {
-          "libraryClient": "::Google::Cloud::PubSub::V1::Publisher::Client",
+          "libraryClient": "::Google::Cloud::PubSub::V1::TopicAdmin::Client",
           "rpcs": {
             "CreateTopic": {
               "methods": [
@@ -121,7 +121,7 @@
     "Subscriber": {
       "clients": {
         "grpc": {
-          "libraryClient": "::Google::Cloud::PubSub::V1::Subscriber::Client",
+          "libraryClient": "::Google::Cloud::PubSub::V1::SubscriptionAdmin::Client",
           "rpcs": {
             "CreateSubscription": {
               "methods": [

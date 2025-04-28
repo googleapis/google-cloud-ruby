@@ -16,5 +16,6 @@
     "ruby-cloud-product-url": "https://cloud.google.com/pubsub",
     "ruby-cloud-path-override": "pub_sub=pubsub",
     "ruby-cloud-namespace-override": "Pubsub=PubSub",
+    "ruby-cloud-service-override": "Publisher=TopicAdmin;Subscriber=SubscriptionAdmin",
     "library_type": "GAPIC_COMBO"
 }
