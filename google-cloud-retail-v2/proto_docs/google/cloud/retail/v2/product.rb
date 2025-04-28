@@ -487,7 +487,6 @@ module Google
         #     * {::Google::Cloud::Retail::V2::Product#name name}
         #     * {::Google::Cloud::Retail::V2::Product#color_info color_info}
         #
-        #
         #     Note: Returning more fields in
         #     {::Google::Cloud::Retail::V2::SearchResponse SearchResponse} can increase
         #     response payload size and serving latency.

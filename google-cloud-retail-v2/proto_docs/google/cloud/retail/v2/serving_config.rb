@@ -44,7 +44,7 @@ module Google
         #
         #     Required when
         #     {::Google::Cloud::Retail::V2::ServingConfig#solution_types solution_types} is
-        #     [SOLUTION_TYPE_RECOMMENDATION][google.cloud.retail.v2main.SolutionType.SOLUTION_TYPE_RECOMMENDATION].
+        #     {::Google::Cloud::Retail::V2::SolutionType::SOLUTION_TYPE_RECOMMENDATION SOLUTION_TYPE_RECOMMENDATION}.
         # @!attribute [rw] price_reranking_level
         #   @return [::String]
         #     How much price ranking we want in serving results.
@@ -64,7 +64,7 @@ module Google
         #
         #     Can only be set if
         #     {::Google::Cloud::Retail::V2::ServingConfig#solution_types solution_types} is
-        #     [SOLUTION_TYPE_RECOMMENDATION][google.cloud.retail.v2main.SolutionType.SOLUTION_TYPE_RECOMMENDATION].
+        #     {::Google::Cloud::Retail::V2::SolutionType::SOLUTION_TYPE_RECOMMENDATION SOLUTION_TYPE_RECOMMENDATION}.
         # @!attribute [rw] facet_control_ids
         #   @return [::Array<::String>]
         #     Facet specifications for faceted search. If empty, no facets are returned.
@@ -77,7 +77,7 @@ module Google
         #
         #     Can only be set if
         #     {::Google::Cloud::Retail::V2::ServingConfig#solution_types solution_types} is
-        #     [SOLUTION_TYPE_SEARCH][google.cloud.retail.v2main.SolutionType.SOLUTION_TYPE_SEARCH].
+        #     {::Google::Cloud::Retail::V2::SolutionType::SOLUTION_TYPE_SEARCH SOLUTION_TYPE_SEARCH}.
         # @!attribute [rw] dynamic_facet_spec
         #   @return [::Google::Cloud::Retail::V2::SearchRequest::DynamicFacetSpec]
         #     The specification for dynamically generated facets. Notice that only
@@ -85,7 +85,7 @@ module Google
         #
         #     Can only be set if
         #     {::Google::Cloud::Retail::V2::ServingConfig#solution_types solution_types} is
-        #     [SOLUTION_TYPE_SEARCH][google.cloud.retail.v2main.SolutionType.SOLUTION_TYPE_SEARCH].
+        #     {::Google::Cloud::Retail::V2::SolutionType::SOLUTION_TYPE_SEARCH SOLUTION_TYPE_SEARCH}.
         # @!attribute [rw] boost_control_ids
         #   @return [::Array<::String>]
         #     Condition boost specifications. If a product matches multiple conditions
@@ -103,7 +103,7 @@ module Google
         #
         #     Can only be set if
         #     {::Google::Cloud::Retail::V2::ServingConfig#solution_types solution_types} is
-        #     [SOLUTION_TYPE_SEARCH][google.cloud.retail.v2main.SolutionType.SOLUTION_TYPE_SEARCH].
+        #     {::Google::Cloud::Retail::V2::SolutionType::SOLUTION_TYPE_SEARCH SOLUTION_TYPE_SEARCH}.
         # @!attribute [rw] filter_control_ids
         #   @return [::Array<::String>]
         #     Condition filter specifications. If a product matches multiple conditions
@@ -113,7 +113,7 @@ module Google
         #
         #     Can only be set if
         #     {::Google::Cloud::Retail::V2::ServingConfig#solution_types solution_types} is
-        #     [SOLUTION_TYPE_SEARCH][google.cloud.retail.v2main.SolutionType.SOLUTION_TYPE_SEARCH].
+        #     {::Google::Cloud::Retail::V2::SolutionType::SOLUTION_TYPE_SEARCH SOLUTION_TYPE_SEARCH}.
         # @!attribute [rw] redirect_control_ids
         #   @return [::Array<::String>]
         #     Condition redirect specifications. Only the first triggered redirect action
@@ -122,7 +122,7 @@ module Google
         #
         #     Can only be set if
         #     {::Google::Cloud::Retail::V2::ServingConfig#solution_types solution_types} is
-        #     [SOLUTION_TYPE_SEARCH][google.cloud.retail.v2main.SolutionType.SOLUTION_TYPE_SEARCH].
+        #     {::Google::Cloud::Retail::V2::SolutionType::SOLUTION_TYPE_SEARCH SOLUTION_TYPE_SEARCH}.
         # @!attribute [rw] twoway_synonyms_control_ids
         #   @return [::Array<::String>]
         #     Condition synonyms specifications. If multiple syonyms conditions match,
@@ -132,7 +132,7 @@ module Google
         #
         #     Can only be set if
         #     {::Google::Cloud::Retail::V2::ServingConfig#solution_types solution_types} is
-        #     [SOLUTION_TYPE_SEARCH][google.cloud.retail.v2main.SolutionType.SOLUTION_TYPE_SEARCH].
+        #     {::Google::Cloud::Retail::V2::SolutionType::SOLUTION_TYPE_SEARCH SOLUTION_TYPE_SEARCH}.
         # @!attribute [rw] oneway_synonyms_control_ids
         #   @return [::Array<::String>]
         #     Condition oneway synonyms specifications. If multiple oneway synonyms
@@ -142,7 +142,7 @@ module Google
         #
         #     Can only be set if
         #     {::Google::Cloud::Retail::V2::ServingConfig#solution_types solution_types} is
-        #     [SOLUTION_TYPE_SEARCH][google.cloud.retail.v2main.SolutionType.SOLUTION_TYPE_SEARCH].
+        #     {::Google::Cloud::Retail::V2::SolutionType::SOLUTION_TYPE_SEARCH SOLUTION_TYPE_SEARCH}.
         # @!attribute [rw] do_not_associate_control_ids
         #   @return [::Array<::String>]
         #     Condition do not associate specifications. If multiple do not associate
@@ -153,7 +153,7 @@ module Google
         #
         #     Can only be set if
         #     {::Google::Cloud::Retail::V2::ServingConfig#solution_types solution_types} is
-        #     [SOLUTION_TYPE_SEARCH][google.cloud.retail.v2main.SolutionType.SOLUTION_TYPE_SEARCH].
+        #     {::Google::Cloud::Retail::V2::SolutionType::SOLUTION_TYPE_SEARCH SOLUTION_TYPE_SEARCH}.
         # @!attribute [rw] replacement_control_ids
         #   @return [::Array<::String>]
         #     Condition replacement specifications.
@@ -163,7 +163,7 @@ module Google
         #
         #     Can only be set if
         #     {::Google::Cloud::Retail::V2::ServingConfig#solution_types solution_types} is
-        #     [SOLUTION_TYPE_SEARCH][google.cloud.retail.v2main.SolutionType.SOLUTION_TYPE_SEARCH].
+        #     {::Google::Cloud::Retail::V2::SolutionType::SOLUTION_TYPE_SEARCH SOLUTION_TYPE_SEARCH}.
         # @!attribute [rw] ignore_control_ids
         #   @return [::Array<::String>]
         #     Condition ignore specifications. If multiple ignore
@@ -174,7 +174,7 @@ module Google
         #
         #     Can only be set if
         #     {::Google::Cloud::Retail::V2::ServingConfig#solution_types solution_types} is
-        #     [SOLUTION_TYPE_SEARCH][google.cloud.retail.v2main.SolutionType.SOLUTION_TYPE_SEARCH].
+        #     {::Google::Cloud::Retail::V2::SolutionType::SOLUTION_TYPE_SEARCH SOLUTION_TYPE_SEARCH}.
         # @!attribute [rw] diversity_level
         #   @return [::String]
         #     How much diversity to use in recommendation model results e.g.
@@ -191,7 +191,7 @@ module Google
         #
         #     Can only be set if
         #     {::Google::Cloud::Retail::V2::ServingConfig#solution_types solution_types} is
-        #     [SOLUTION_TYPE_RECOMMENDATION][google.cloud.retail.v2main.SolutionType.SOLUTION_TYPE_RECOMMENDATION].
+        #     {::Google::Cloud::Retail::V2::SolutionType::SOLUTION_TYPE_RECOMMENDATION SOLUTION_TYPE_RECOMMENDATION}.
         # @!attribute [rw] diversity_type
         #   @return [::Google::Cloud::Retail::V2::ServingConfig::DiversityType]
         #     What kind of diversity to use - data driven or rule based. If unset, the
@@ -212,7 +212,7 @@ module Google
         #
         #     Can only be set if
         #     {::Google::Cloud::Retail::V2::ServingConfig#solution_types solution_types} is
-        #     [SOLUTION_TYPE_RECOMMENDATION][google.cloud.retail.v2main.SolutionType.SOLUTION_TYPE_RECOMMENDATION].
+        #     {::Google::Cloud::Retail::V2::SolutionType::SOLUTION_TYPE_RECOMMENDATION SOLUTION_TYPE_RECOMMENDATION}.
         # @!attribute [rw] ignore_recs_denylist
         #   @return [::Boolean]
         #     When the flag is enabled, the products in the denylist will not be filtered
@@ -223,7 +223,7 @@ module Google
         #
         #     Can only be set if
         #     {::Google::Cloud::Retail::V2::ServingConfig#solution_types solution_types} is
-        #     [SOLUTION_TYPE_SEARCH][google.cloud.retail.v2main.SolutionType.SOLUTION_TYPE_SEARCH].
+        #     {::Google::Cloud::Retail::V2::SolutionType::SOLUTION_TYPE_SEARCH SOLUTION_TYPE_SEARCH}.
         #
         #     Notice that if both
         #     {::Google::Cloud::Retail::V2::ServingConfig#personalization_spec ServingConfig.personalization_spec}

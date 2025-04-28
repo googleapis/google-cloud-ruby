@@ -88,53 +88,59 @@ module Google
         #   @return [::Google::Cloud::Retail::V2::Rule::BoostAction]
         #     A boost action.
         #
-        #     Note: The following fields are mutually exclusive: `boost_action`, `redirect_action`, `oneway_synonyms_action`, `do_not_associate_action`, `replacement_action`, `ignore_action`, `filter_action`, `twoway_synonyms_action`, `force_return_facet_action`, `remove_facet_action`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `boost_action`, `redirect_action`, `oneway_synonyms_action`, `do_not_associate_action`, `replacement_action`, `ignore_action`, `filter_action`, `twoway_synonyms_action`, `force_return_facet_action`, `remove_facet_action`, `pin_action`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] redirect_action
         #   @return [::Google::Cloud::Retail::V2::Rule::RedirectAction]
         #     Redirects a shopper to a specific page.
         #
-        #     Note: The following fields are mutually exclusive: `redirect_action`, `boost_action`, `oneway_synonyms_action`, `do_not_associate_action`, `replacement_action`, `ignore_action`, `filter_action`, `twoway_synonyms_action`, `force_return_facet_action`, `remove_facet_action`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `redirect_action`, `boost_action`, `oneway_synonyms_action`, `do_not_associate_action`, `replacement_action`, `ignore_action`, `filter_action`, `twoway_synonyms_action`, `force_return_facet_action`, `remove_facet_action`, `pin_action`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] oneway_synonyms_action
         #   @return [::Google::Cloud::Retail::V2::Rule::OnewaySynonymsAction]
         #     Treats specific term as a synonym with a group of terms.
         #     Group of terms will not be treated as synonyms with the specific term.
         #
-        #     Note: The following fields are mutually exclusive: `oneway_synonyms_action`, `boost_action`, `redirect_action`, `do_not_associate_action`, `replacement_action`, `ignore_action`, `filter_action`, `twoway_synonyms_action`, `force_return_facet_action`, `remove_facet_action`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `oneway_synonyms_action`, `boost_action`, `redirect_action`, `do_not_associate_action`, `replacement_action`, `ignore_action`, `filter_action`, `twoway_synonyms_action`, `force_return_facet_action`, `remove_facet_action`, `pin_action`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] do_not_associate_action
         #   @return [::Google::Cloud::Retail::V2::Rule::DoNotAssociateAction]
         #     Prevents term from being associated with other terms.
         #
-        #     Note: The following fields are mutually exclusive: `do_not_associate_action`, `boost_action`, `redirect_action`, `oneway_synonyms_action`, `replacement_action`, `ignore_action`, `filter_action`, `twoway_synonyms_action`, `force_return_facet_action`, `remove_facet_action`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `do_not_associate_action`, `boost_action`, `redirect_action`, `oneway_synonyms_action`, `replacement_action`, `ignore_action`, `filter_action`, `twoway_synonyms_action`, `force_return_facet_action`, `remove_facet_action`, `pin_action`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] replacement_action
         #   @return [::Google::Cloud::Retail::V2::Rule::ReplacementAction]
         #     Replaces specific terms in the query.
         #
-        #     Note: The following fields are mutually exclusive: `replacement_action`, `boost_action`, `redirect_action`, `oneway_synonyms_action`, `do_not_associate_action`, `ignore_action`, `filter_action`, `twoway_synonyms_action`, `force_return_facet_action`, `remove_facet_action`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `replacement_action`, `boost_action`, `redirect_action`, `oneway_synonyms_action`, `do_not_associate_action`, `ignore_action`, `filter_action`, `twoway_synonyms_action`, `force_return_facet_action`, `remove_facet_action`, `pin_action`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] ignore_action
         #   @return [::Google::Cloud::Retail::V2::Rule::IgnoreAction]
         #     Ignores specific terms from query during search.
         #
-        #     Note: The following fields are mutually exclusive: `ignore_action`, `boost_action`, `redirect_action`, `oneway_synonyms_action`, `do_not_associate_action`, `replacement_action`, `filter_action`, `twoway_synonyms_action`, `force_return_facet_action`, `remove_facet_action`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `ignore_action`, `boost_action`, `redirect_action`, `oneway_synonyms_action`, `do_not_associate_action`, `replacement_action`, `filter_action`, `twoway_synonyms_action`, `force_return_facet_action`, `remove_facet_action`, `pin_action`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] filter_action
         #   @return [::Google::Cloud::Retail::V2::Rule::FilterAction]
         #     Filters results.
         #
-        #     Note: The following fields are mutually exclusive: `filter_action`, `boost_action`, `redirect_action`, `oneway_synonyms_action`, `do_not_associate_action`, `replacement_action`, `ignore_action`, `twoway_synonyms_action`, `force_return_facet_action`, `remove_facet_action`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `filter_action`, `boost_action`, `redirect_action`, `oneway_synonyms_action`, `do_not_associate_action`, `replacement_action`, `ignore_action`, `twoway_synonyms_action`, `force_return_facet_action`, `remove_facet_action`, `pin_action`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] twoway_synonyms_action
         #   @return [::Google::Cloud::Retail::V2::Rule::TwowaySynonymsAction]
         #     Treats a set of terms as synonyms of one another.
         #
-        #     Note: The following fields are mutually exclusive: `twoway_synonyms_action`, `boost_action`, `redirect_action`, `oneway_synonyms_action`, `do_not_associate_action`, `replacement_action`, `ignore_action`, `filter_action`, `force_return_facet_action`, `remove_facet_action`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `twoway_synonyms_action`, `boost_action`, `redirect_action`, `oneway_synonyms_action`, `do_not_associate_action`, `replacement_action`, `ignore_action`, `filter_action`, `force_return_facet_action`, `remove_facet_action`, `pin_action`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] force_return_facet_action
         #   @return [::Google::Cloud::Retail::V2::Rule::ForceReturnFacetAction]
         #     Force returns an attribute as a facet in the request.
         #
-        #     Note: The following fields are mutually exclusive: `force_return_facet_action`, `boost_action`, `redirect_action`, `oneway_synonyms_action`, `do_not_associate_action`, `replacement_action`, `ignore_action`, `filter_action`, `twoway_synonyms_action`, `remove_facet_action`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `force_return_facet_action`, `boost_action`, `redirect_action`, `oneway_synonyms_action`, `do_not_associate_action`, `replacement_action`, `ignore_action`, `filter_action`, `twoway_synonyms_action`, `remove_facet_action`, `pin_action`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] remove_facet_action
         #   @return [::Google::Cloud::Retail::V2::Rule::RemoveFacetAction]
         #     Remove an attribute as a facet in the request (if present).
         #
-        #     Note: The following fields are mutually exclusive: `remove_facet_action`, `boost_action`, `redirect_action`, `oneway_synonyms_action`, `do_not_associate_action`, `replacement_action`, `ignore_action`, `filter_action`, `twoway_synonyms_action`, `force_return_facet_action`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `remove_facet_action`, `boost_action`, `redirect_action`, `oneway_synonyms_action`, `do_not_associate_action`, `replacement_action`, `ignore_action`, `filter_action`, `twoway_synonyms_action`, `force_return_facet_action`, `pin_action`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] pin_action
+        #   @return [::Google::Cloud::Retail::V2::Rule::PinAction]
+        #     Pins one or more specified products to a specific position in the
+        #     results.
+        #
+        #     Note: The following fields are mutually exclusive: `pin_action`, `boost_action`, `redirect_action`, `oneway_synonyms_action`, `do_not_associate_action`, `replacement_action`, `ignore_action`, `filter_action`, `twoway_synonyms_action`, `force_return_facet_action`, `remove_facet_action`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] condition
         #   @return [::Google::Cloud::Retail::V2::Condition]
         #     Required. The condition that triggers the rule.
@@ -403,6 +409,60 @@ module Google
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
+
+          # Pins one or more specified products to a specific position in the
+          # results.
+          #
+          # * Rule Condition:
+          #   Must specify non-empty
+          #   {::Google::Cloud::Retail::V2::Condition#query_terms Condition.query_terms}
+          #   (for search only) or
+          #   {::Google::Cloud::Retail::V2::Condition#page_categories Condition.page_categories}
+          #   (for browse only), but can't specify both.
+          #
+          # * Action Input: mapping of `[pin_position, product_id]` pairs (pin position
+          # uses 1-based indexing).
+          #
+          # * Action Result: Will pin products with matching ids to the position
+          # specified in the final result order.
+          #
+          # Example: Suppose the query is `shoes`, the
+          # {::Google::Cloud::Retail::V2::Condition#query_terms Condition.query_terms} is
+          # `shoes` and the pin_map has `{1, "pid1"}`, then product with `pid1` will be
+          # pinned to the top position in the final results.
+          #
+          # If multiple PinActions are matched to a single request the actions will
+          # be processed from most to least recently updated.
+          #
+          # Pins to positions larger than the max allowed page size of 120 are not
+          # allowed.
+          # @!attribute [rw] pin_map
+          #   @return [::Google::Protobuf::Map{::Integer => ::String}]
+          #     Required. A map of positions to product_ids.
+          #
+          #     Partial matches per action are allowed, if a certain position in the map
+          #     is already filled that `[position, product_id]` pair will be ignored
+          #     but the rest may still be applied. This case will only occur if multiple
+          #     pin actions are matched to a single request, as the map guarantees that
+          #     pin positions are unique within the same action.
+          #
+          #     Duplicate product_ids are not permitted within a single pin map.
+          #
+          #     The max size of this map is 120, equivalent to the max [request page
+          #     size](https://cloud.google.com/retail/docs/reference/rest/v2/projects.locations.catalogs.placements/search#request-body).
+          class PinAction
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+
+            # @!attribute [rw] key
+            #   @return [::Integer]
+            # @!attribute [rw] value
+            #   @return [::String]
+            class PinMapEntry
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
+          end
         end
 
         # An intended audience of the {::Google::Cloud::Retail::V2::Product Product} for
@@ -446,9 +506,9 @@ module Google
         #   @return [::Array<::String>]
         #     The standard color families. Strongly recommended to use the following
         #     standard color groups: "Red", "Pink", "Orange", "Yellow", "Purple",
-        #     "Green", "Cyan", "Blue", "Brown", "White", "Gray", "Black" and
-        #     "Mixed". Normally it is expected to have only 1 color family. May consider
-        #     using single "Mixed" instead of multiple values.
+        #     "Green", "Cyan", "Blue", "Brown", "White", "Gray", "Black" and "Mixed".
+        #     Normally it is expected to have only 1 color family. May consider using
+        #     single "Mixed" instead of multiple values.
         #
         #     A maximum of 5 values are allowed. Each value must be a UTF-8 encoded
         #     string with a length limit of 128 characters. Otherwise, an
@@ -457,6 +517,10 @@ module Google
         #     Google Merchant Center property
         #     [color](https://support.google.com/merchants/answer/6324487). Schema.org
         #     property [Product.color](https://schema.org/color).
+        #
+        #     The colorFamilies field as a system attribute is not a required field but
+        #     strongly recommended to be specified. Google Search models treat this field
+        #     as more important than a custom product attribute when specified.
         # @!attribute [rw] colors
         #   @return [::Array<::String>]
         #     The color display names, which may be different from standard color family
@@ -578,9 +642,10 @@ module Google
         end
 
         # {::Google::Cloud::Retail::V2::Product Product} image. Recommendations AI and
-        # Retail Search do not use product images to improve prediction and search
-        # results. However, product images can be returned in results, and are shown in
-        # prediction or search previews in the console.
+        # Retail Search use product images to improve prediction and search results.
+        # Product images can be returned in results, and are shown in prediction or
+        # search previews in the console. Please try to provide correct product images
+        # and avoid using images with size too small.
         # @!attribute [rw] uri
         #   @return [::String]
         #     Required. URI of the image.
@@ -805,9 +870,7 @@ module Google
         #     is set.
         # @!attribute [rw] user_agent
         #   @return [::String]
-        #     User agent as included in the HTTP header. Required for getting
-        #     [SearchResponse.sponsored_results][google.cloud.retail.v2.SearchResponse.sponsored_results].
-        #
+        #     User agent as included in the HTTP header.
         #     The field must be a UTF-8 encoded string with a length limit of 1,000
         #     characters. Otherwise, an INVALID_ARGUMENT error is returned.
         #
@@ -837,17 +900,17 @@ module Google
         # by a place ID.
         # @!attribute [rw] place_id
         #   @return [::String]
-        #     The place ID for the current set of inventory information.
+        #     Optional. The place ID for the current set of inventory information.
         # @!attribute [rw] price_info
         #   @return [::Google::Cloud::Retail::V2::PriceInfo]
-        #     Product price and cost information.
+        #     Optional. Product price and cost information.
         #
         #     Google Merchant Center property
         #     [price](https://support.google.com/merchants/answer/6324371).
         # @!attribute [rw] attributes
         #   @return [::Google::Protobuf::Map{::String => ::Google::Cloud::Retail::V2::CustomAttribute}]
-        #     Additional local inventory attributes, for example, store name, promotion
-        #     tags, etc.
+        #     Optional. Additional local inventory attributes, for example, store name,
+        #     promotion tags, etc.
         #
         #     This field needs to pass all below criteria, otherwise an INVALID_ARGUMENT
         #     error is returned:
@@ -866,7 +929,7 @@ module Google
         #       product is 5MiB.
         # @!attribute [rw] fulfillment_types
         #   @return [::Array<::String>]
-        #     Input only. Supported fulfillment types. Valid fulfillment type values
+        #     Optional. Supported fulfillment types. Valid fulfillment type values
         #     include commonly used types (such as pickup in store and same day
         #     delivery), and custom types. Customers have to map custom types to their
         #     display names before rendering UI.
@@ -902,6 +965,47 @@ module Google
           end
         end
 
+        # Metadata for pinning to be returned in the response.
+        # This is used for distinguishing between applied vs dropped pins.
+        # @!attribute [rw] all_matched_pins
+        #   @return [::Google::Protobuf::Map{::Integer => ::Google::Cloud::Retail::V2::PinControlMetadata::ProductPins}]
+        #     Map of all matched pins, keyed by pin position.
+        # @!attribute [rw] dropped_pins
+        #   @return [::Google::Protobuf::Map{::Integer => ::Google::Cloud::Retail::V2::PinControlMetadata::ProductPins}]
+        #     Map of pins that were dropped due to overlap with other matching pins,
+        #     keyed by pin position.
+        class PinControlMetadata
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # List of product ids which have associated pins.
+          # @!attribute [rw] product_id
+          #   @return [::Array<::String>]
+          #     List of product ids which have associated pins.
+          class ProductPins
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # @!attribute [rw] key
+          #   @return [::Integer]
+          # @!attribute [rw] value
+          #   @return [::Google::Cloud::Retail::V2::PinControlMetadata::ProductPins]
+          class AllMatchedPinsEntry
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # @!attribute [rw] key
+          #   @return [::Integer]
+          # @!attribute [rw] value
+          #   @return [::Google::Cloud::Retail::V2::PinControlMetadata::ProductPins]
+          class DroppedPinsEntry
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+        end
+
         # At which level we offer configuration for attributes.
         module AttributeConfigLevel
           # Value used when unset. In this case, server behavior defaults to
@@ -913,7 +1017,7 @@ module Google
           PRODUCT_LEVEL_ATTRIBUTE_CONFIG = 1
 
           # At this level, we honor the attribute configurations set in
-          # [CatalogConfig.attribute_configs][].
+          # `CatalogConfig.attribute_configs`.
           CATALOG_LEVEL_ATTRIBUTE_CONFIG = 2
         end
 
