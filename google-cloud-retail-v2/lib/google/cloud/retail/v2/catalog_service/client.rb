@@ -418,38 +418,39 @@ module Google
 
             ##
             # Set a specified branch id as default branch. API methods such as
-            # {::Google::Cloud::Retail::V2::SearchService::Client#search SearchService.Search},
-            # {::Google::Cloud::Retail::V2::ProductService::Client#get_product ProductService.GetProduct},
-            # {::Google::Cloud::Retail::V2::ProductService::Client#list_products ProductService.ListProducts}
-            # will treat requests using "default_branch" to the actual branch id set as
-            # default.
+            #  {::Google::Cloud::Retail::V2::SearchService::Client#search SearchService.Search},
+            #  {::Google::Cloud::Retail::V2::ProductService::Client#get_product ProductService.GetProduct},
+            #  {::Google::Cloud::Retail::V2::ProductService::Client#list_products ProductService.ListProducts}
+            #  will treat requests using "default_branch" to the actual branch id set as
+            #  default.
             #
-            # For example, if `projects/*/locations/*/catalogs/*/branches/1` is set as
-            # default, setting
-            # {::Google::Cloud::Retail::V2::SearchRequest#branch SearchRequest.branch} to
-            # `projects/*/locations/*/catalogs/*/branches/default_branch` is equivalent
-            # to setting
-            # {::Google::Cloud::Retail::V2::SearchRequest#branch SearchRequest.branch} to
-            # `projects/*/locations/*/catalogs/*/branches/1`.
+            #  For example, if `projects/*/locations/*/catalogs/*/branches/1` is set as
+            #  default, setting
+            #  {::Google::Cloud::Retail::V2::SearchRequest#branch SearchRequest.branch} to
+            #  `projects/*/locations/*/catalogs/*/branches/default_branch` is equivalent
+            #  to setting
+            #  {::Google::Cloud::Retail::V2::SearchRequest#branch SearchRequest.branch} to
+            #  `projects/*/locations/*/catalogs/*/branches/1`.
             #
-            # Using multiple branches can be useful when developers would like
-            # to have a staging branch to test and verify for future usage. When it
-            # becomes ready, developers switch on the staging branch using this API while
-            # keeping using `projects/*/locations/*/catalogs/*/branches/default_branch`
-            # as {::Google::Cloud::Retail::V2::SearchRequest#branch SearchRequest.branch} to
-            # route the traffic to this staging branch.
+            #  Using multiple branches can be useful when developers would like
+            #  to have a staging branch to test and verify for future usage. When it
+            #  becomes ready, developers switch on the staging branch using this API
+            #  while keeping using
+            #  `projects/*/locations/*/catalogs/*/branches/default_branch` as
+            #  {::Google::Cloud::Retail::V2::SearchRequest#branch SearchRequest.branch} to
+            #  route the traffic to this staging branch.
             #
-            # CAUTION: If you have live predict/search traffic, switching the default
-            # branch could potentially cause outages if the ID space of the new branch is
-            # very different from the old one.
+            #  CAUTION: If you have live predict/search traffic, switching the default
+            #  branch could potentially cause outages if the ID space of the new branch
+            #  is very different from the old one.
             #
-            # More specifically:
+            #  More specifically:
             #
-            # * PredictionService will only return product IDs from branch \\{newBranch}.
-            # * SearchService will only return product IDs from branch \\{newBranch}
-            #   (if branch is not explicitly set).
-            # * UserEventService will only join events with products from branch
-            #   \\{newBranch}.
+            #  * PredictionService will only return product IDs from branch \\{newBranch}.
+            #  * SearchService will only return product IDs from branch \\{newBranch}
+            #    (if branch is not explicitly set).
+            #  * UserEventService will only join events with products from branch
+            #    \\{newBranch}.
             #
             # @overload set_default_branch(request, options = nil)
             #   Pass arguments to `set_default_branch` via a request object, either of type
@@ -556,8 +557,8 @@ module Google
 
             ##
             # Get which branch is currently default branch set by
-            # {::Google::Cloud::Retail::V2::CatalogService::Client#set_default_branch CatalogService.SetDefaultBranch}
-            # method under a specified parent catalog.
+            #  {::Google::Cloud::Retail::V2::CatalogService::Client#set_default_branch CatalogService.SetDefaultBranch}
+            #  method under a specified parent catalog.
             #
             # @overload get_default_branch(request, options = nil)
             #   Pass arguments to `get_default_branch` via a request object, either of type
