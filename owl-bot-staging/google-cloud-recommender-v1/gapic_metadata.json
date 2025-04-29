@@ -1,0 +1,83 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "ruby",
+  "protoPackage": "google.cloud.recommender.v1",
+  "libraryPackage": "::Google::Cloud::Recommender::V1",
+  "services": {
+    "Recommender": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::Recommender::V1::Recommender::Client",
+          "rpcs": {
+            "ListInsights": {
+              "methods": [
+                "list_insights"
+              ]
+            },
+            "GetInsight": {
+              "methods": [
+                "get_insight"
+              ]
+            },
+            "MarkInsightAccepted": {
+              "methods": [
+                "mark_insight_accepted"
+              ]
+            },
+            "ListRecommendations": {
+              "methods": [
+                "list_recommendations"
+              ]
+            },
+            "GetRecommendation": {
+              "methods": [
+                "get_recommendation"
+              ]
+            },
+            "MarkRecommendationDismissed": {
+              "methods": [
+                "mark_recommendation_dismissed"
+              ]
+            },
+            "MarkRecommendationClaimed": {
+              "methods": [
+                "mark_recommendation_claimed"
+              ]
+            },
+            "MarkRecommendationSucceeded": {
+              "methods": [
+                "mark_recommendation_succeeded"
+              ]
+            },
+            "MarkRecommendationFailed": {
+              "methods": [
+                "mark_recommendation_failed"
+              ]
+            },
+            "GetRecommenderConfig": {
+              "methods": [
+                "get_recommender_config"
+              ]
+            },
+            "UpdateRecommenderConfig": {
+              "methods": [
+                "update_recommender_config"
+              ]
+            },
+            "GetInsightTypeConfig": {
+              "methods": [
+                "get_insight_type_config"
+              ]
+            },
+            "UpdateInsightTypeConfig": {
+              "methods": [
+                "update_insight_type_config"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}
