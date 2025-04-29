@@ -1,7 +1,7 @@
 {
   "client_library": {
     "name": "google-cloud-netapp-v1",
-    "version": "2.0.1",
+    "version": "2.0.2",
     "language": "RUBY",
     "apis": [
       {
