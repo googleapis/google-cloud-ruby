@@ -1,5 +1,11 @@
 # Release History
 
+### 2.21.1 (2025-04-29)
+
+#### Bug Fixes
+
+* Fixed several issues with validating credential configs 
+
 ### 2.21.0 (2025-04-21)
 
 #### Features
