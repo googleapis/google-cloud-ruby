@@ -21,7 +21,7 @@ module Google
   module Cloud
     module Monitoring
       module V3
-        VERSION = "1.5.0"
+        VERSION = "1.5.1"
       end
     end
   end
