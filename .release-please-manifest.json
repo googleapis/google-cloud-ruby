@@ -617,7 +617,7 @@
   "google-cloud-redis-v1+FILLER": "0.0.0",
   "google-cloud-redis-v1beta1": "0.16.0",
   "google-cloud-redis-v1beta1+FILLER": "0.0.0",
-  "google-cloud-resource_manager": "1.0.0",
+  "google-cloud-resource_manager": "1.0.1",
   "google-cloud-resource_manager+FILLER": "0.0.0",
   "google-cloud-resource_manager-v3": "1.2.1",
   "google-cloud-resource_manager-v3+FILLER": "0.0.0",
