@@ -1,5 +1,14 @@
 # Changelog
 
+### 1.9.0 (2025-04-29)
+
+#### Features
+
+* Support config for thinking features ([#29549](https://github.com/googleapis/google-cloud-ruby/issues/29549)) 
+#### Bug Fixes
+
+* Fixed several issues with validating credential configs 
+
 ### 1.8.0 (2025-04-25)
 
 #### Features
