@@ -21,7 +21,7 @@ module Google
   module Cloud
     module Eventarc
       module Publishing
-        VERSION = "1.3.2"
+        VERSION = "1.3.3"
       end
     end
   end
