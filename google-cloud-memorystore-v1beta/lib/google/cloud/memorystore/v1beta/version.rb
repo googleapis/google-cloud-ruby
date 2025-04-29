@@ -21,7 +21,7 @@ module Google
   module Cloud
     module Memorystore
       module V1beta
-        VERSION = "0.5.0"
+        VERSION = "0.5.1"
       end
     end
   end
