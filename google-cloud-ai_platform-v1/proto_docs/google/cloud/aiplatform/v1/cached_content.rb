@@ -47,9 +47,9 @@ module Google
         #     cached content.
         # @!attribute [rw] model
         #   @return [::String]
-        #     Immutable. The name of the publisher model to use for cached content.
-        #     Format:
-        #     projects/\\{project}/locations/\\{location}/publishers/\\{publisher}/models/\\{model}
+        #     Immutable. The name of the `Model` to use for cached content. Currently,
+        #     only the published Gemini base models are supported, in form of
+        #     projects/\\{PROJECT}/locations/\\{LOCATION}/publishers/google/models/\\{MODEL}
         # @!attribute [rw] system_instruction
         #   @return [::Google::Cloud::AIPlatform::V1::Content]
         #     Optional. Input only. Immutable. Developer set system instruction.
@@ -67,13 +67,18 @@ module Google
         #     tools
         # @!attribute [r] create_time
         #   @return [::Google::Protobuf::Timestamp]
-        #     Output only. Creatation time of the cache entry.
+        #     Output only. Creation time of the cache entry.
         # @!attribute [r] update_time
         #   @return [::Google::Protobuf::Timestamp]
         #     Output only. When the cache entry was last updated in UTC time.
         # @!attribute [r] usage_metadata
         #   @return [::Google::Cloud::AIPlatform::V1::CachedContent::UsageMetadata]
         #     Output only. Metadata on the usage of the cached content.
+        # @!attribute [rw] encryption_spec
+        #   @return [::Google::Cloud::AIPlatform::V1::EncryptionSpec]
+        #     Input only. Immutable. Customer-managed encryption key spec for a
+        #     `CachedContent`. If set, this `CachedContent` and all its sub-resources
+        #     will be secured by this key.
         class CachedContent
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

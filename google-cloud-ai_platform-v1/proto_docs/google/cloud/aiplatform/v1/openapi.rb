@@ -109,6 +109,33 @@ module Google
         #   @return [::Array<::Google::Cloud::AIPlatform::V1::Schema>]
         #     Optional. The value should be validated against any (one or more) of the
         #     subschemas in the list.
+        # @!attribute [rw] ref
+        #   @return [::String]
+        #     Optional. Allows indirect references between schema nodes. The value should
+        #     be a valid reference to a child of the root `defs`.
+        #
+        #     For example, the following schema defines a reference to a schema node
+        #     named "Pet":
+        #
+        #     type: object
+        #     properties:
+        #       pet:
+        #         ref: #/defs/Pet
+        #     defs:
+        #       Pet:
+        #         type: object
+        #         properties:
+        #           name:
+        #             type: string
+        #
+        #     The value of the "pet" property is a reference to the schema node
+        #     named "Pet".
+        #     See details in
+        #     https://json-schema.org/understanding-json-schema/structuring
+        # @!attribute [rw] defs
+        #   @return [::Google::Protobuf::Map{::String => ::Google::Cloud::AIPlatform::V1::Schema}]
+        #     Optional. A map of definitions for use by `ref`
+        #     Only allowed at the root of the schema.
         class Schema
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -118,6 +145,15 @@ module Google
           # @!attribute [rw] value
           #   @return [::Google::Cloud::AIPlatform::V1::Schema]
           class PropertiesEntry
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # @!attribute [rw] key
+          #   @return [::String]
+          # @!attribute [rw] value
+          #   @return [::Google::Cloud::AIPlatform::V1::Schema]
+          class DefsEntry
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
