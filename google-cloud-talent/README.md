@@ -7,7 +7,7 @@ Transform your job search and candidate matching capabilities with Cloud Talent 
 Actual client classes for the various versions of this API are defined in
 _versioned_ client gems, with names of the form `google-cloud-talent-v*`.
 The gem `google-cloud-talent` is the main client library that brings the
-verisoned gems in as dependencies, and provides high-level methods for
+versioned gems in as dependencies, and provides high-level methods for
 constructing clients. More information on versioned clients can be found below
 in the section titled *Which client should I use?*.
 
