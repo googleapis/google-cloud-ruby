@@ -1,5 +1,11 @@
 # Changelog
 
+### 0.3.2 (2025-04-29)
+
+#### Bug Fixes
+
+* Fixed several issues with validating credential configs 
+
 ### 0.3.1 (2025-03-13)
 
 #### Documentation
