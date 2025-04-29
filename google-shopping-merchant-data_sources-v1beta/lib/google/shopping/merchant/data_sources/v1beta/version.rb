@@ -22,7 +22,7 @@ module Google
     module Merchant
       module DataSources
         module V1beta
-          VERSION = "0.5.0"
+          VERSION = "0.5.1"
         end
       end
     end
