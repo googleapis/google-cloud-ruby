@@ -7,7 +7,7 @@ Vertex AI enables data scientists, developers, and AI newcomers to create custom
 Actual client classes for the various versions of this API are defined in
 _versioned_ client gems, with names of the form `google-cloud-ai_platform-v*`.
 The gem `google-cloud-ai_platform` is the main client library that brings the
-verisoned gems in as dependencies, and provides high-level methods for
+versioned gems in as dependencies, and provides high-level methods for
 constructing clients. More information on versioned clients can be found below
 in the section titled *Which client should I use?*.
 
