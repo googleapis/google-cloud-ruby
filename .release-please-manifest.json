@@ -759,7 +759,7 @@
   "google-cloud-text_to_speech-v1beta1+FILLER": "0.0.0",
   "google-cloud-tpu": "1.4.1",
   "google-cloud-tpu+FILLER": "0.0.0",
-  "google-cloud-tpu-v1": "1.2.0",
+  "google-cloud-tpu-v1": "1.2.1",
   "google-cloud-tpu-v1+FILLER": "0.0.0",
   "google-cloud-trace": "0.45.0",
   "google-cloud-trace+FILLER": "0.0.0",
