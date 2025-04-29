@@ -7,7 +7,7 @@ Policy Troubleshooter makes it easier to understand why a user has access to a r
 Actual client classes for the various versions of this API are defined in
 _versioned_ client gems, with names of the form `google-cloud-policy_troubleshooter-v*`.
 The gem `google-cloud-policy_troubleshooter` is the main client library that brings the
-verisoned gems in as dependencies, and provides high-level methods for
+versioned gems in as dependencies, and provides high-level methods for
 constructing clients. More information on versioned clients can be found below
 in the section titled *Which client should I use?*.
 
@@ -17,7 +17,6 @@ constructing client objects. Reference documentation for the client objects
 themselves can be found in the client library documentation for the versioned
 client gems:
 [google-cloud-policy_troubleshooter-v1](https://cloud.google.com/ruby/docs/reference/google-cloud-policy_troubleshooter-v1/latest),
-[google-cloud-policy_troubleshooter-iam-v3](https://cloud.google.com/ruby/docs/reference/google-cloud-policy_troubleshooter-iam-v3/latest),
 [google-cloud-policy_troubleshooter-iam-v3](https://cloud.google.com/ruby/docs/reference/google-cloud-policy_troubleshooter-iam-v3/latest).
 
 See also the [Product Documentation](https://cloud.google.com/iam/docs/troubleshooting-access)
@@ -64,7 +63,8 @@ results in logs appearing alongside your application logs in the
 Debug logging also requires that the versioned clients for this service be
 sufficiently recent, released after about Dec 10, 2024. If logging is not
 working, try updating the versioned clients in your bundle or installed gems:
-[google-cloud-policy_troubleshooter-v1](https://cloud.google.com/ruby/docs/reference/google-cloud-policy_troubleshooter-v1/latest).
+[google-cloud-policy_troubleshooter-v1](https://cloud.google.com/ruby/docs/reference/google-cloud-policy_troubleshooter-v1/latest),
+[google-cloud-policy_troubleshooter-iam-v3](https://cloud.google.com/ruby/docs/reference/google-cloud-policy_troubleshooter-iam-v3/latest).
 
 ## Supported Ruby Versions
 
