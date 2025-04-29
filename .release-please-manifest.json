@@ -815,7 +815,7 @@
   "google-cloud-vm_migration-v1+FILLER": "0.0.0",
   "google-cloud-vmware_engine": "2.0.0",
   "google-cloud-vmware_engine+FILLER": "0.0.0",
-  "google-cloud-vmware_engine-v1": "1.0.0",
+  "google-cloud-vmware_engine-v1": "1.0.1",
   "google-cloud-vmware_engine-v1+FILLER": "0.0.0",
   "google-cloud-vpc_access": "1.5.1",
   "google-cloud-vpc_access+FILLER": "0.0.0",
