@@ -1,5 +1,11 @@
 # Release History
 
+### 1.8.2 (2025-04-29)
+
+#### Bug Fixes
+
+* Fixed several issues with validating credential configs 
+
 ### 1.8.1 (2025-04-18)
 
 #### Documentation
