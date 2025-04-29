@@ -21,7 +21,7 @@ module Google
   module Cloud
     module Functions
       module V1
-        VERSION = "2.0.1"
+        VERSION = "2.0.2"
       end
     end
   end
