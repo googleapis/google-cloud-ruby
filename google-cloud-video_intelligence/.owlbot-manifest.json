@@ -22,8 +22,6 @@
   "static": [
     ".OwlBot.yaml",
     "MIGRATING.md",
-    "acceptance/google/cloud/video_intelligence/v1/video_intelligence_service_smoke_test.rb",
-    "acceptance/google/cloud/video_intelligence/v1p1beta1/video_intelligence_service_smoke_test.rb",
-    "acceptance/google/cloud/video_intelligence/v1p2beta1/video_intelligence_service_smoke_test.rb"
+    "acceptance/google/cloud/video_intelligence/v1/video_intelligence_service_smoke_test.rb"
   ]
 }
