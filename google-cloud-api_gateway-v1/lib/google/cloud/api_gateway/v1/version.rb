@@ -21,7 +21,7 @@ module Google
   module Cloud
     module ApiGateway
       module V1
-        VERSION = "2.0.0"
+        VERSION = "2.0.1"
       end
     end
   end
