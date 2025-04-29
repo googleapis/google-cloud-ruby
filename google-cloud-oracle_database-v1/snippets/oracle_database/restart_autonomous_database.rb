@@ -29,11 +29,11 @@ require "google/cloud/oracle_database/v1"
 # client as shown in https://cloud.google.com/ruby/docs/reference.
 #
 # This is an auto-generated example demonstrating basic usage of
-# Google::Cloud::OracleDatabase::V1::OracleDatabase::Rest::Client#restart_autonomous_database.
+# Google::Cloud::OracleDatabase::V1::OracleDatabase::Client#restart_autonomous_database.
 #
 def restart_autonomous_database
   # Create a client object. The client can be reused for multiple calls.
-  client = Google::Cloud::OracleDatabase::V1::OracleDatabase::Rest::Client.new
+  client = Google::Cloud::OracleDatabase::V1::OracleDatabase::Client.new
 
   # Create a request. To set request fields, pass in keyword arguments.
   request = Google::Cloud::OracleDatabase::V1::RestartAutonomousDatabaseRequest.new
