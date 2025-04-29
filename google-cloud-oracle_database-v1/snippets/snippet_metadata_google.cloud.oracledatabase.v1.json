@@ -14,12 +14,12 @@
     {
       "region_tag": "oracledatabase_v1_generated_OracleDatabase_ListCloudExadataInfrastructures_sync",
       "title": "Snippet for the list_cloud_exadata_infrastructures call in the OracleDatabase service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::OracleDatabase::V1::OracleDatabase::Rest::Client#list_cloud_exadata_infrastructures.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::OracleDatabase::V1::OracleDatabase::Client#list_cloud_exadata_infrastructures.",
       "file": "oracle_database/list_cloud_exadata_infrastructures.rb",
       "language": "RUBY",
       "client_method": {
         "short_name": "list_cloud_exadata_infrastructures",
-        "full_name": "::Google::Cloud::OracleDatabase::V1::OracleDatabase::Rest::Client#list_cloud_exadata_infrastructures",
+        "full_name": "::Google::Cloud::OracleDatabase::V1::OracleDatabase::Client#list_cloud_exadata_infrastructures",
         "async": false,
         "parameters": [
           {
@@ -29,8 +29,8 @@
         ],
         "result_type": "::Google::Cloud::OracleDatabase::V1::ListCloudExadataInfrastructuresResponse",
         "client": {
-          "short_name": "OracleDatabase::Rest::Client",
-          "full_name": "::Google::Cloud::OracleDatabase::V1::OracleDatabase::Rest::Client"
+          "short_name": "OracleDatabase::Client",
+          "full_name": "::Google::Cloud::OracleDatabase::V1::OracleDatabase::Client"
         },
         "method": {
           "short_name": "ListCloudExadataInfrastructures",
@@ -54,12 +54,12 @@
     {
       "region_tag": "oracledatabase_v1_generated_OracleDatabase_GetCloudExadataInfrastructure_sync",
       "title": "Snippet for the get_cloud_exadata_infrastructure call in the OracleDatabase service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::OracleDatabase::V1::OracleDatabase::Rest::Client#get_cloud_exadata_infrastructure.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::OracleDatabase::V1::OracleDatabase::Client#get_cloud_exadata_infrastructure.",
       "file": "oracle_database/get_cloud_exadata_infrastructure.rb",
       "language": "RUBY",
       "client_method": {
         "short_name": "get_cloud_exadata_infrastructure",
-        "full_name": "::Google::Cloud::OracleDatabase::V1::OracleDatabase::Rest::Client#get_cloud_exadata_infrastructure",
+        "full_name": "::Google::Cloud::OracleDatabase::V1::OracleDatabase::Client#get_cloud_exadata_infrastructure",
         "async": false,
         "parameters": [
           {
@@ -69,8 +69,8 @@
         ],
         "result_type": "::Google::Cloud::OracleDatabase::V1::CloudExadataInfrastructure",
         "client": {
-          "short_name": "OracleDatabase::Rest::Client",
-          "full_name": "::Google::Cloud::OracleDatabase::V1::OracleDatabase::Rest::Client"
+          "short_name": "OracleDatabase::Client",
+          "full_name": "::Google::Cloud::OracleDatabase::V1::OracleDatabase::Client"
         },
         "method": {
           "short_name": "GetCloudExadataInfrastructure",
@@ -94,12 +94,12 @@
     {
       "region_tag": "oracledatabase_v1_generated_OracleDatabase_CreateCloudExadataInfrastructure_sync",
       "title": "Snippet for the create_cloud_exadata_infrastructure call in the OracleDatabase service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::OracleDatabase::V1::OracleDatabase::Rest::Client#create_cloud_exadata_infrastructure.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::OracleDatabase::V1::OracleDatabase::Client#create_cloud_exadata_infrastructure.",
       "file": "oracle_database/create_cloud_exadata_infrastructure.rb",
       "language": "RUBY",
       "client_method": {
         "short_name": "create_cloud_exadata_infrastructure",
-        "full_name": "::Google::Cloud::OracleDatabase::V1::OracleDatabase::Rest::Client#create_cloud_exadata_infrastructure",
+        "full_name": "::Google::Cloud::OracleDatabase::V1::OracleDatabase::Client#create_cloud_exadata_infrastructure",
         "async": false,
         "parameters": [
           {
@@ -109,8 +109,8 @@
         ],
         "result_type": "::Google::Longrunning::Operation",
         "client": {
-          "short_name": "OracleDatabase::Rest::Client",
-          "full_name": "::Google::Cloud::OracleDatabase::V1::OracleDatabase::Rest::Client"
+          "short_name": "OracleDatabase::Client",
+          "full_name": "::Google::Cloud::OracleDatabase::V1::OracleDatabase::Client"
         },
         "method": {
           "short_name": "CreateCloudExadataInfrastructure",
@@ -134,12 +134,12 @@
     {
       "region_tag": "oracledatabase_v1_generated_OracleDatabase_DeleteCloudExadataInfrastructure_sync",
       "title": "Snippet for the delete_cloud_exadata_infrastructure call in the OracleDatabase service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::OracleDatabase::V1::OracleDatabase::Rest::Client#delete_cloud_exadata_infrastructure.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::OracleDatabase::V1::OracleDatabase::Client#delete_cloud_exadata_infrastructure.",
       "file": "oracle_database/delete_cloud_exadata_infrastructure.rb",
       "language": "RUBY",
       "client_method": {
         "short_name": "delete_cloud_exadata_infrastructure",
-        "full_name": "::Google::Cloud::OracleDatabase::V1::OracleDatabase::Rest::Client#delete_cloud_exadata_infrastructure",
+        "full_name": "::Google::Cloud::OracleDatabase::V1::OracleDatabase::Client#delete_cloud_exadata_infrastructure",
         "async": false,
         "parameters": [
           {
@@ -149,8 +149,8 @@
         ],
         "result_type": "::Google::Longrunning::Operation",
         "client": {
-          "short_name": "OracleDatabase::Rest::Client",
-          "full_name": "::Google::Cloud::OracleDatabase::V1::OracleDatabase::Rest::Client"
+          "short_name": "OracleDatabase::Client",
+          "full_name": "::Google::Cloud::OracleDatabase::V1::OracleDatabase::Client"
         },
         "method": {
           "short_name": "DeleteCloudExadataInfrastructure",
@@ -174,12 +174,12 @@
     {
       "region_tag": "oracledatabase_v1_generated_OracleDatabase_ListCloudVmClusters_sync",
       "title": "Snippet for the list_cloud_vm_clusters call in the OracleDatabase service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::OracleDatabase::V1::OracleDatabase::Rest::Client#list_cloud_vm_clusters.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::OracleDatabase::V1::OracleDatabase::Client#list_cloud_vm_clusters.",
       "file": "oracle_database/list_cloud_vm_clusters.rb",
       "language": "RUBY",
       "client_method": {
         "short_name": "list_cloud_vm_clusters",
-        "full_name": "::Google::Cloud::OracleDatabase::V1::OracleDatabase::Rest::Client#list_cloud_vm_clusters",
+        "full_name": "::Google::Cloud::OracleDatabase::V1::OracleDatabase::Client#list_cloud_vm_clusters",
         "async": false,
         "parameters": [
           {
@@ -189,8 +189,8 @@
         ],
         "result_type": "::Google::Cloud::OracleDatabase::V1::ListCloudVmClustersResponse",
         "client": {
-          "short_name": "OracleDatabase::Rest::Client",
-          "full_name": "::Google::Cloud::OracleDatabase::V1::OracleDatabase::Rest::Client"
+          "short_name": "OracleDatabase::Client",
+          "full_name": "::Google::Cloud::OracleDatabase::V1::OracleDatabase::Client"
         },
         "method": {
           "short_name": "ListCloudVmClusters",
@@ -214,12 +214,12 @@
     {
       "region_tag": "oracledatabase_v1_generated_OracleDatabase_GetCloudVmCluster_sync",
       "title": "Snippet for the get_cloud_vm_cluster call in the OracleDatabase service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::OracleDatabase::V1::OracleDatabase::Rest::Client#get_cloud_vm_cluster.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::OracleDatabase::V1::OracleDatabase::Client#get_cloud_vm_cluster.",
       "file": "oracle_database/get_cloud_vm_cluster.rb",
       "language": "RUBY",
       "client_method": {
         "short_name": "get_cloud_vm_cluster",
-        "full_name": "::Google::Cloud::OracleDatabase::V1::OracleDatabase::Rest::Client#get_cloud_vm_cluster",
+        "full_name": "::Google::Cloud::OracleDatabase::V1::OracleDatabase::Client#get_cloud_vm_cluster",
         "async": false,
         "parameters": [
           {
@@ -229,8 +229,8 @@
         ],
         "result_type": "::Google::Cloud::OracleDatabase::V1::CloudVmCluster",
         "client": {
-          "short_name": "OracleDatabase::Rest::Client",
-          "full_name": "::Google::Cloud::OracleDatabase::V1::OracleDatabase::Rest::Client"
+          "short_name": "OracleDatabase::Client",
+          "full_name": "::Google::Cloud::OracleDatabase::V1::OracleDatabase::Client"
         },
         "method": {
           "short_name": "GetCloudVmCluster",
@@ -254,12 +254,12 @@
     {
       "region_tag": "oracledatabase_v1_generated_OracleDatabase_CreateCloudVmCluster_sync",
       "title": "Snippet for the create_cloud_vm_cluster call in the OracleDatabase service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::OracleDatabase::V1::OracleDatabase::Rest::Client#create_cloud_vm_cluster.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::OracleDatabase::V1::OracleDatabase::Client#create_cloud_vm_cluster.",
       "file": "oracle_database/create_cloud_vm_cluster.rb",
       "language": "RUBY",
       "client_method": {
         "short_name": "create_cloud_vm_cluster",
-        "full_name": "::Google::Cloud::OracleDatabase::V1::OracleDatabase::Rest::Client#create_cloud_vm_cluster",
+        "full_name": "::Google::Cloud::OracleDatabase::V1::OracleDatabase::Client#create_cloud_vm_cluster",
         "async": false,
         "parameters": [
           {
@@ -269,8 +269,8 @@
         ],
         "result_type": "::Google::Longrunning::Operation",
         "client": {
-          "short_name": "OracleDatabase::Rest::Client",
-          "full_name": "::Google::Cloud::OracleDatabase::V1::OracleDatabase::Rest::Client"
+          "short_name": "OracleDatabase::Client",
+          "full_name": "::Google::Cloud::OracleDatabase::V1::OracleDatabase::Client"
         },
         "method": {
           "short_name": "CreateCloudVmCluster",
@@ -294,12 +294,12 @@
     {
       "region_tag": "oracledatabase_v1_generated_OracleDatabase_DeleteCloudVmCluster_sync",
       "title": "Snippet for the delete_cloud_vm_cluster call in the OracleDatabase service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::OracleDatabase::V1::OracleDatabase::Rest::Client#delete_cloud_vm_cluster.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::OracleDatabase::V1::OracleDatabase::Client#delete_cloud_vm_cluster.",
       "file": "oracle_database/delete_cloud_vm_cluster.rb",
       "language": "RUBY",
       "client_method": {
         "short_name": "delete_cloud_vm_cluster",
-        "full_name": "::Google::Cloud::OracleDatabase::V1::OracleDatabase::Rest::Client#delete_cloud_vm_cluster",
+        "full_name": "::Google::Cloud::OracleDatabase::V1::OracleDatabase::Client#delete_cloud_vm_cluster",
         "async": false,
         "parameters": [
           {
@@ -309,8 +309,8 @@
         ],
         "result_type": "::Google::Longrunning::Operation",
         "client": {
-          "short_name": "OracleDatabase::Rest::Client",
-          "full_name": "::Google::Cloud::OracleDatabase::V1::OracleDatabase::Rest::Client"
+          "short_name": "OracleDatabase::Client",
+          "full_name": "::Google::Cloud::OracleDatabase::V1::OracleDatabase::Client"
         },
         "method": {
           "short_name": "DeleteCloudVmCluster",
@@ -334,12 +334,12 @@
     {
       "region_tag": "oracledatabase_v1_generated_OracleDatabase_ListEntitlements_sync",
       "title": "Snippet for the list_entitlements call in the OracleDatabase service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::OracleDatabase::V1::OracleDatabase::Rest::Client#list_entitlements.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::OracleDatabase::V1::OracleDatabase::Client#list_entitlements.",
       "file": "oracle_database/list_entitlements.rb",
       "language": "RUBY",
       "client_method": {
         "short_name": "list_entitlements",
-        "full_name": "::Google::Cloud::OracleDatabase::V1::OracleDatabase::Rest::Client#list_entitlements",
+        "full_name": "::Google::Cloud::OracleDatabase::V1::OracleDatabase::Client#list_entitlements",
         "async": false,
         "parameters": [
           {
@@ -349,8 +349,8 @@
         ],
         "result_type": "::Google::Cloud::OracleDatabase::V1::ListEntitlementsResponse",
         "client": {
-          "short_name": "OracleDatabase::Rest::Client",
-          "full_name": "::Google::Cloud::OracleDatabase::V1::OracleDatabase::Rest::Client"
+          "short_name": "OracleDatabase::Client",
+          "full_name": "::Google::Cloud::OracleDatabase::V1::OracleDatabase::Client"
         },
         "method": {
           "short_name": "ListEntitlements",
@@ -374,12 +374,12 @@
     {
       "region_tag": "oracledatabase_v1_generated_OracleDatabase_ListDbServers_sync",
       "title": "Snippet for the list_db_servers call in the OracleDatabase service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::OracleDatabase::V1::OracleDatabase::Rest::Client#list_db_servers.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::OracleDatabase::V1::OracleDatabase::Client#list_db_servers.",
       "file": "oracle_database/list_db_servers.rb",
       "language": "RUBY",
       "client_method": {
         "short_name": "list_db_servers",
-        "full_name": "::Google::Cloud::OracleDatabase::V1::OracleDatabase::Rest::Client#list_db_servers",
+        "full_name": "::Google::Cloud::OracleDatabase::V1::OracleDatabase::Client#list_db_servers",
         "async": false,
         "parameters": [
           {
@@ -389,8 +389,8 @@
         ],
         "result_type": "::Google::Cloud::OracleDatabase::V1::ListDbServersResponse",
         "client": {
-          "short_name": "OracleDatabase::Rest::Client",
-          "full_name": "::Google::Cloud::OracleDatabase::V1::OracleDatabase::Rest::Client"
+          "short_name": "OracleDatabase::Client",
+          "full_name": "::Google::Cloud::OracleDatabase::V1::OracleDatabase::Client"
         },
         "method": {
           "short_name": "ListDbServers",
@@ -414,12 +414,12 @@
     {
       "region_tag": "oracledatabase_v1_generated_OracleDatabase_ListDbNodes_sync",
       "title": "Snippet for the list_db_nodes call in the OracleDatabase service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::OracleDatabase::V1::OracleDatabase::Rest::Client#list_db_nodes.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::OracleDatabase::V1::OracleDatabase::Client#list_db_nodes.",
       "file": "oracle_database/list_db_nodes.rb",
       "language": "RUBY",
       "client_method": {
         "short_name": "list_db_nodes",
-        "full_name": "::Google::Cloud::OracleDatabase::V1::OracleDatabase::Rest::Client#list_db_nodes",
+        "full_name": "::Google::Cloud::OracleDatabase::V1::OracleDatabase::Client#list_db_nodes",
         "async": false,
         "parameters": [
           {
@@ -429,8 +429,8 @@
         ],
         "result_type": "::Google::Cloud::OracleDatabase::V1::ListDbNodesResponse",
         "client": {
-          "short_name": "OracleDatabase::Rest::Client",
-          "full_name": "::Google::Cloud::OracleDatabase::V1::OracleDatabase::Rest::Client"
+          "short_name": "OracleDatabase::Client",
+          "full_name": "::Google::Cloud::OracleDatabase::V1::OracleDatabase::Client"
         },
         "method": {
           "short_name": "ListDbNodes",
@@ -454,12 +454,12 @@
     {
       "region_tag": "oracledatabase_v1_generated_OracleDatabase_ListGiVersions_sync",
       "title": "Snippet for the list_gi_versions call in the OracleDatabase service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::OracleDatabase::V1::OracleDatabase::Rest::Client#list_gi_versions.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::OracleDatabase::V1::OracleDatabase::Client#list_gi_versions.",
       "file": "oracle_database/list_gi_versions.rb",
       "language": "RUBY",
       "client_method": {
         "short_name": "list_gi_versions",
-        "full_name": "::Google::Cloud::OracleDatabase::V1::OracleDatabase::Rest::Client#list_gi_versions",
+        "full_name": "::Google::Cloud::OracleDatabase::V1::OracleDatabase::Client#list_gi_versions",
         "async": false,
         "parameters": [
           {
@@ -469,8 +469,8 @@
         ],
         "result_type": "::Google::Cloud::OracleDatabase::V1::ListGiVersionsResponse",
         "client": {
-          "short_name": "OracleDatabase::Rest::Client",
-          "full_name": "::Google::Cloud::OracleDatabase::V1::OracleDatabase::Rest::Client"
+          "short_name": "OracleDatabase::Client",
+          "full_name": "::Google::Cloud::OracleDatabase::V1::OracleDatabase::Client"
         },
         "method": {
           "short_name": "ListGiVersions",
@@ -494,12 +494,12 @@
     {
       "region_tag": "oracledatabase_v1_generated_OracleDatabase_ListDbSystemShapes_sync",
       "title": "Snippet for the list_db_system_shapes call in the OracleDatabase service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::OracleDatabase::V1::OracleDatabase::Rest::Client#list_db_system_shapes.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::OracleDatabase::V1::OracleDatabase::Client#list_db_system_shapes.",
       "file": "oracle_database/list_db_system_shapes.rb",
       "language": "RUBY",
       "client_method": {
         "short_name": "list_db_system_shapes",
-        "full_name": "::Google::Cloud::OracleDatabase::V1::OracleDatabase::Rest::Client#list_db_system_shapes",
+        "full_name": "::Google::Cloud::OracleDatabase::V1::OracleDatabase::Client#list_db_system_shapes",
         "async": false,
         "parameters": [
           {
@@ -509,8 +509,8 @@
         ],
         "result_type": "::Google::Cloud::OracleDatabase::V1::ListDbSystemShapesResponse",
         "client": {
-          "short_name": "OracleDatabase::Rest::Client",
-          "full_name": "::Google::Cloud::OracleDatabase::V1::OracleDatabase::Rest::Client"
+          "short_name": "OracleDatabase::Client",
+          "full_name": "::Google::Cloud::OracleDatabase::V1::OracleDatabase::Client"
         },
         "method": {
           "short_name": "ListDbSystemShapes",
@@ -534,12 +534,12 @@
     {
       "region_tag": "oracledatabase_v1_generated_OracleDatabase_ListAutonomousDatabases_sync",
       "title": "Snippet for the list_autonomous_databases call in the OracleDatabase service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::OracleDatabase::V1::OracleDatabase::Rest::Client#list_autonomous_databases.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::OracleDatabase::V1::OracleDatabase::Client#list_autonomous_databases.",
       "file": "oracle_database/list_autonomous_databases.rb",
       "language": "RUBY",
       "client_method": {
         "short_name": "list_autonomous_databases",
-        "full_name": "::Google::Cloud::OracleDatabase::V1::OracleDatabase::Rest::Client#list_autonomous_databases",
+        "full_name": "::Google::Cloud::OracleDatabase::V1::OracleDatabase::Client#list_autonomous_databases",
         "async": false,
         "parameters": [
           {
@@ -549,8 +549,8 @@
         ],
         "result_type": "::Google::Cloud::OracleDatabase::V1::ListAutonomousDatabasesResponse",
         "client": {
-          "short_name": "OracleDatabase::Rest::Client",
-          "full_name": "::Google::Cloud::OracleDatabase::V1::OracleDatabase::Rest::Client"
+          "short_name": "OracleDatabase::Client",
+          "full_name": "::Google::Cloud::OracleDatabase::V1::OracleDatabase::Client"
         },
         "method": {
           "short_name": "ListAutonomousDatabases",
@@ -574,12 +574,12 @@
     {
       "region_tag": "oracledatabase_v1_generated_OracleDatabase_GetAutonomousDatabase_sync",
       "title": "Snippet for the get_autonomous_database call in the OracleDatabase service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::OracleDatabase::V1::OracleDatabase::Rest::Client#get_autonomous_database.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::OracleDatabase::V1::OracleDatabase::Client#get_autonomous_database.",
       "file": "oracle_database/get_autonomous_database.rb",
       "language": "RUBY",
       "client_method": {
         "short_name": "get_autonomous_database",
-        "full_name": "::Google::Cloud::OracleDatabase::V1::OracleDatabase::Rest::Client#get_autonomous_database",
+        "full_name": "::Google::Cloud::OracleDatabase::V1::OracleDatabase::Client#get_autonomous_database",
         "async": false,
         "parameters": [
           {
@@ -589,8 +589,8 @@
         ],
         "result_type": "::Google::Cloud::OracleDatabase::V1::AutonomousDatabase",
         "client": {
-          "short_name": "OracleDatabase::Rest::Client",
-          "full_name": "::Google::Cloud::OracleDatabase::V1::OracleDatabase::Rest::Client"
+          "short_name": "OracleDatabase::Client",
+          "full_name": "::Google::Cloud::OracleDatabase::V1::OracleDatabase::Client"
         },
         "method": {
           "short_name": "GetAutonomousDatabase",
@@ -614,12 +614,12 @@
     {
       "region_tag": "oracledatabase_v1_generated_OracleDatabase_CreateAutonomousDatabase_sync",
       "title": "Snippet for the create_autonomous_database call in the OracleDatabase service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::OracleDatabase::V1::OracleDatabase::Rest::Client#create_autonomous_database.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::OracleDatabase::V1::OracleDatabase::Client#create_autonomous_database.",
       "file": "oracle_database/create_autonomous_database.rb",
       "language": "RUBY",
       "client_method": {
         "short_name": "create_autonomous_database",
-        "full_name": "::Google::Cloud::OracleDatabase::V1::OracleDatabase::Rest::Client#create_autonomous_database",
+        "full_name": "::Google::Cloud::OracleDatabase::V1::OracleDatabase::Client#create_autonomous_database",
         "async": false,
         "parameters": [
           {
@@ -629,8 +629,8 @@
         ],
         "result_type": "::Google::Longrunning::Operation",
         "client": {
-          "short_name": "OracleDatabase::Rest::Client",
-          "full_name": "::Google::Cloud::OracleDatabase::V1::OracleDatabase::Rest::Client"
+          "short_name": "OracleDatabase::Client",
+          "full_name": "::Google::Cloud::OracleDatabase::V1::OracleDatabase::Client"
         },
         "method": {
           "short_name": "CreateAutonomousDatabase",
@@ -654,12 +654,12 @@
     {
       "region_tag": "oracledatabase_v1_generated_OracleDatabase_DeleteAutonomousDatabase_sync",
       "title": "Snippet for the delete_autonomous_database call in the OracleDatabase service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::OracleDatabase::V1::OracleDatabase::Rest::Client#delete_autonomous_database.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::OracleDatabase::V1::OracleDatabase::Client#delete_autonomous_database.",
       "file": "oracle_database/delete_autonomous_database.rb",
       "language": "RUBY",
       "client_method": {
         "short_name": "delete_autonomous_database",
-        "full_name": "::Google::Cloud::OracleDatabase::V1::OracleDatabase::Rest::Client#delete_autonomous_database",
+        "full_name": "::Google::Cloud::OracleDatabase::V1::OracleDatabase::Client#delete_autonomous_database",
         "async": false,
         "parameters": [
           {
@@ -669,8 +669,8 @@
         ],
         "result_type": "::Google::Longrunning::Operation",
         "client": {
-          "short_name": "OracleDatabase::Rest::Client",
-          "full_name": "::Google::Cloud::OracleDatabase::V1::OracleDatabase::Rest::Client"
+          "short_name": "OracleDatabase::Client",
+          "full_name": "::Google::Cloud::OracleDatabase::V1::OracleDatabase::Client"
         },
         "method": {
           "short_name": "DeleteAutonomousDatabase",
@@ -694,12 +694,12 @@
     {
       "region_tag": "oracledatabase_v1_generated_OracleDatabase_RestoreAutonomousDatabase_sync",
       "title": "Snippet for the restore_autonomous_database call in the OracleDatabase service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::OracleDatabase::V1::OracleDatabase::Rest::Client#restore_autonomous_database.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::OracleDatabase::V1::OracleDatabase::Client#restore_autonomous_database.",
       "file": "oracle_database/restore_autonomous_database.rb",
       "language": "RUBY",
       "client_method": {
         "short_name": "restore_autonomous_database",
-        "full_name": "::Google::Cloud::OracleDatabase::V1::OracleDatabase::Rest::Client#restore_autonomous_database",
+        "full_name": "::Google::Cloud::OracleDatabase::V1::OracleDatabase::Client#restore_autonomous_database",
         "async": false,
         "parameters": [
           {
@@ -709,8 +709,8 @@
         ],
         "result_type": "::Google::Longrunning::Operation",
         "client": {
-          "short_name": "OracleDatabase::Rest::Client",
-          "full_name": "::Google::Cloud::OracleDatabase::V1::OracleDatabase::Rest::Client"
+          "short_name": "OracleDatabase::Client",
+          "full_name": "::Google::Cloud::OracleDatabase::V1::OracleDatabase::Client"
         },
         "method": {
           "short_name": "RestoreAutonomousDatabase",
@@ -734,12 +734,12 @@
     {
       "region_tag": "oracledatabase_v1_generated_OracleDatabase_GenerateAutonomousDatabaseWallet_sync",
       "title": "Snippet for the generate_autonomous_database_wallet call in the OracleDatabase service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::OracleDatabase::V1::OracleDatabase::Rest::Client#generate_autonomous_database_wallet.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::OracleDatabase::V1::OracleDatabase::Client#generate_autonomous_database_wallet.",
       "file": "oracle_database/generate_autonomous_database_wallet.rb",
       "language": "RUBY",
       "client_method": {
         "short_name": "generate_autonomous_database_wallet",
-        "full_name": "::Google::Cloud::OracleDatabase::V1::OracleDatabase::Rest::Client#generate_autonomous_database_wallet",
+        "full_name": "::Google::Cloud::OracleDatabase::V1::OracleDatabase::Client#generate_autonomous_database_wallet",
         "async": false,
         "parameters": [
           {
@@ -749,8 +749,8 @@
         ],
         "result_type": "::Google::Cloud::OracleDatabase::V1::GenerateAutonomousDatabaseWalletResponse",
         "client": {
-          "short_name": "OracleDatabase::Rest::Client",
-          "full_name": "::Google::Cloud::OracleDatabase::V1::OracleDatabase::Rest::Client"
+          "short_name": "OracleDatabase::Client",
+          "full_name": "::Google::Cloud::OracleDatabase::V1::OracleDatabase::Client"
         },
         "method": {
           "short_name": "GenerateAutonomousDatabaseWallet",
@@ -774,12 +774,12 @@
     {
       "region_tag": "oracledatabase_v1_generated_OracleDatabase_ListAutonomousDbVersions_sync",
       "title": "Snippet for the list_autonomous_db_versions call in the OracleDatabase service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::OracleDatabase::V1::OracleDatabase::Rest::Client#list_autonomous_db_versions.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::OracleDatabase::V1::OracleDatabase::Client#list_autonomous_db_versions.",
       "file": "oracle_database/list_autonomous_db_versions.rb",
       "language": "RUBY",
       "client_method": {
         "short_name": "list_autonomous_db_versions",
-        "full_name": "::Google::Cloud::OracleDatabase::V1::OracleDatabase::Rest::Client#list_autonomous_db_versions",
+        "full_name": "::Google::Cloud::OracleDatabase::V1::OracleDatabase::Client#list_autonomous_db_versions",
         "async": false,
         "parameters": [
           {
@@ -789,8 +789,8 @@
         ],
         "result_type": "::Google::Cloud::OracleDatabase::V1::ListAutonomousDbVersionsResponse",
         "client": {
-          "short_name": "OracleDatabase::Rest::Client",
-          "full_name": "::Google::Cloud::OracleDatabase::V1::OracleDatabase::Rest::Client"
+          "short_name": "OracleDatabase::Client",
+          "full_name": "::Google::Cloud::OracleDatabase::V1::OracleDatabase::Client"
         },
         "method": {
           "short_name": "ListAutonomousDbVersions",
@@ -814,12 +814,12 @@
     {
       "region_tag": "oracledatabase_v1_generated_OracleDatabase_ListAutonomousDatabaseCharacterSets_sync",
       "title": "Snippet for the list_autonomous_database_character_sets call in the OracleDatabase service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::OracleDatabase::V1::OracleDatabase::Rest::Client#list_autonomous_database_character_sets.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::OracleDatabase::V1::OracleDatabase::Client#list_autonomous_database_character_sets.",
       "file": "oracle_database/list_autonomous_database_character_sets.rb",
       "language": "RUBY",
       "client_method": {
         "short_name": "list_autonomous_database_character_sets",
-        "full_name": "::Google::Cloud::OracleDatabase::V1::OracleDatabase::Rest::Client#list_autonomous_database_character_sets",
+        "full_name": "::Google::Cloud::OracleDatabase::V1::OracleDatabase::Client#list_autonomous_database_character_sets",
         "async": false,
         "parameters": [
           {
@@ -829,8 +829,8 @@
         ],
         "result_type": "::Google::Cloud::OracleDatabase::V1::ListAutonomousDatabaseCharacterSetsResponse",
         "client": {
-          "short_name": "OracleDatabase::Rest::Client",
-          "full_name": "::Google::Cloud::OracleDatabase::V1::OracleDatabase::Rest::Client"
+          "short_name": "OracleDatabase::Client",
+          "full_name": "::Google::Cloud::OracleDatabase::V1::OracleDatabase::Client"
         },
         "method": {
           "short_name": "ListAutonomousDatabaseCharacterSets",
@@ -854,12 +854,12 @@
     {
       "region_tag": "oracledatabase_v1_generated_OracleDatabase_ListAutonomousDatabaseBackups_sync",
       "title": "Snippet for the list_autonomous_database_backups call in the OracleDatabase service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::OracleDatabase::V1::OracleDatabase::Rest::Client#list_autonomous_database_backups.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::OracleDatabase::V1::OracleDatabase::Client#list_autonomous_database_backups.",
       "file": "oracle_database/list_autonomous_database_backups.rb",
       "language": "RUBY",
       "client_method": {
         "short_name": "list_autonomous_database_backups",
-        "full_name": "::Google::Cloud::OracleDatabase::V1::OracleDatabase::Rest::Client#list_autonomous_database_backups",
+        "full_name": "::Google::Cloud::OracleDatabase::V1::OracleDatabase::Client#list_autonomous_database_backups",
         "async": false,
         "parameters": [
           {
@@ -869,8 +869,8 @@
         ],
         "result_type": "::Google::Cloud::OracleDatabase::V1::ListAutonomousDatabaseBackupsResponse",
         "client": {
-          "short_name": "OracleDatabase::Rest::Client",
-          "full_name": "::Google::Cloud::OracleDatabase::V1::OracleDatabase::Rest::Client"
+          "short_name": "OracleDatabase::Client",
+          "full_name": "::Google::Cloud::OracleDatabase::V1::OracleDatabase::Client"
         },
         "method": {
           "short_name": "ListAutonomousDatabaseBackups",
@@ -894,12 +894,12 @@
     {
       "region_tag": "oracledatabase_v1_generated_OracleDatabase_StopAutonomousDatabase_sync",
       "title": "Snippet for the stop_autonomous_database call in the OracleDatabase service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::OracleDatabase::V1::OracleDatabase::Rest::Client#stop_autonomous_database.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::OracleDatabase::V1::OracleDatabase::Client#stop_autonomous_database.",
       "file": "oracle_database/stop_autonomous_database.rb",
       "language": "RUBY",
       "client_method": {
         "short_name": "stop_autonomous_database",
-        "full_name": "::Google::Cloud::OracleDatabase::V1::OracleDatabase::Rest::Client#stop_autonomous_database",
+        "full_name": "::Google::Cloud::OracleDatabase::V1::OracleDatabase::Client#stop_autonomous_database",
         "async": false,
         "parameters": [
           {
@@ -909,8 +909,8 @@
         ],
         "result_type": "::Google::Longrunning::Operation",
         "client": {
-          "short_name": "OracleDatabase::Rest::Client",
-          "full_name": "::Google::Cloud::OracleDatabase::V1::OracleDatabase::Rest::Client"
+          "short_name": "OracleDatabase::Client",
+          "full_name": "::Google::Cloud::OracleDatabase::V1::OracleDatabase::Client"
         },
         "method": {
           "short_name": "StopAutonomousDatabase",
@@ -934,12 +934,12 @@
     {
       "region_tag": "oracledatabase_v1_generated_OracleDatabase_StartAutonomousDatabase_sync",
       "title": "Snippet for the start_autonomous_database call in the OracleDatabase service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::OracleDatabase::V1::OracleDatabase::Rest::Client#start_autonomous_database.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::OracleDatabase::V1::OracleDatabase::Client#start_autonomous_database.",
       "file": "oracle_database/start_autonomous_database.rb",
       "language": "RUBY",
       "client_method": {
         "short_name": "start_autonomous_database",
-        "full_name": "::Google::Cloud::OracleDatabase::V1::OracleDatabase::Rest::Client#start_autonomous_database",
+        "full_name": "::Google::Cloud::OracleDatabase::V1::OracleDatabase::Client#start_autonomous_database",
         "async": false,
         "parameters": [
           {
@@ -949,8 +949,8 @@
         ],
         "result_type": "::Google::Longrunning::Operation",
         "client": {
-          "short_name": "OracleDatabase::Rest::Client",
-          "full_name": "::Google::Cloud::OracleDatabase::V1::OracleDatabase::Rest::Client"
+          "short_name": "OracleDatabase::Client",
+          "full_name": "::Google::Cloud::OracleDatabase::V1::OracleDatabase::Client"
         },
         "method": {
           "short_name": "StartAutonomousDatabase",
@@ -974,12 +974,12 @@
     {
       "region_tag": "oracledatabase_v1_generated_OracleDatabase_RestartAutonomousDatabase_sync",
       "title": "Snippet for the restart_autonomous_database call in the OracleDatabase service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::OracleDatabase::V1::OracleDatabase::Rest::Client#restart_autonomous_database.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::OracleDatabase::V1::OracleDatabase::Client#restart_autonomous_database.",
       "file": "oracle_database/restart_autonomous_database.rb",
       "language": "RUBY",
       "client_method": {
         "short_name": "restart_autonomous_database",
-        "full_name": "::Google::Cloud::OracleDatabase::V1::OracleDatabase::Rest::Client#restart_autonomous_database",
+        "full_name": "::Google::Cloud::OracleDatabase::V1::OracleDatabase::Client#restart_autonomous_database",
         "async": false,
         "parameters": [
           {
@@ -989,8 +989,8 @@
         ],
         "result_type": "::Google::Longrunning::Operation",
         "client": {
-          "short_name": "OracleDatabase::Rest::Client",
-          "full_name": "::Google::Cloud::OracleDatabase::V1::OracleDatabase::Rest::Client"
+          "short_name": "OracleDatabase::Client",
+          "full_name": "::Google::Cloud::OracleDatabase::V1::OracleDatabase::Client"
         },
         "method": {
           "short_name": "RestartAutonomousDatabase",
