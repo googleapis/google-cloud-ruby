@@ -33,10 +33,12 @@ module Google
           #     to.
           # @!attribute [r] store_states
           #   @return [::Array<::Google::Shopping::Merchant::Lfp::V1beta::LfpMerchantState::LfpStoreState>]
-          #     Output only. The state per store from the specified merchant.
+          #     Output only. The state per store from the specified merchant. The field
+          #     will be absent if the merchant has no stores submitted through LFP.
           # @!attribute [rw] inventory_stats
           #   @return [::Google::Shopping::Merchant::Lfp::V1beta::LfpMerchantState::InventoryStats]
-          #     The inventory statistics for the merchant.
+          #     The inventory statistics for the merchant. The field will be absent if the
+          #     merchant has no inventory submitted through LFP.
           # @!attribute [rw] country_settings
           #   @return [::Array<::Google::Shopping::Merchant::Lfp::V1beta::LfpMerchantState::CountrySettings>]
           #     Country-specific settings for the merchant.
