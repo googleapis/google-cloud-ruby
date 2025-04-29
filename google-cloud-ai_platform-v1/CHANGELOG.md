@@ -1,5 +1,12 @@
 # Changelog
 
+### 1.10.0 (2025-04-29)
+
+#### Features
+
+* Support customer-managed encryption key spec for a CachedContent 
+* Support indirect references between schema nodes 
+
 ### 1.9.0 (2025-04-29)
 
 #### Features
