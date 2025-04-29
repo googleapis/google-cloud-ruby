@@ -21,7 +21,7 @@ module Google
   module Maps
     module FleetEngine
       module Delivery
-        VERSION = "1.1.0"
+        VERSION = "1.1.1"
       end
     end
   end
