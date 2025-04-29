@@ -21,7 +21,7 @@ module Google
   module Cloud
     module SecurityCenter
       module V2
-        VERSION = "1.1.0"
+        VERSION = "1.1.1"
       end
     end
   end
