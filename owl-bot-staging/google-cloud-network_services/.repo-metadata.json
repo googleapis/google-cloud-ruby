@@ -1,0 +1,17 @@
+{
+    "api_id": "networkservices.googleapis.com",
+    "api_shortname": "networkservices",
+    "client_documentation": "https://cloud.google.com/ruby/docs/reference/google-cloud-network_services/latest",
+    "distribution_name": "google-cloud-network_services",
+    "is_cloud": true,
+    "language": "ruby",
+    "name": "networkservices",
+    "name_pretty": "Network Services API",
+    "product_documentation": "https://cloud.google.com/products/networking",
+    "release_level": "unreleased",
+    "repo": "googleapis/google-cloud-ruby",
+    "requires_billing": true,
+    "ruby-cloud-description": "google-cloud-network_services is the official client library for the Network Services API.",
+    "ruby-cloud-product-url": "https://cloud.google.com/products/networking",
+    "library_type": "GAPIC_AUTO"
+}
