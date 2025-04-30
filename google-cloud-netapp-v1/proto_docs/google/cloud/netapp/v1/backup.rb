@@ -70,6 +70,14 @@ module Google
         # @!attribute [r] satisfies_pzi
         #   @return [::Boolean]
         #     Output only. Reserved for future use
+        # @!attribute [r] volume_region
+        #   @return [::String]
+        #     Output only. Region of the volume from which the backup was created.
+        #     Format: `projects/{project_id}/locations/{location}`
+        # @!attribute [r] backup_region
+        #   @return [::String]
+        #     Output only. Region in which backup is stored.
+        #     Format: `projects/{project_id}/locations/{location}`
         class Backup
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
