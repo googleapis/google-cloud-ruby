@@ -1408,27 +1408,25 @@ describe Google::Cloud::Storage::Bucket, :mock_storage do
     end
   end
 
-   it "resstarts a resumable upload with upload_id" do
+   it "restarts a resumable upload with upload_id" do
     new_file_name = random_file_path
     upload_id= "TEST_ID"
 
     Tempfile.open ["google-cloud", ".txt"] do |tmpfile|
       tmpfile.write "Hello world"
       tmpfile.rewind
-
       mock = Minitest::Mock.new
-      mock.expect :insert_object, create_file_gapi(bucket.name, new_file_name),
-        [bucket.name, empty_file_gapi], **insert_object_args(name: new_file_name, upload_source: tmpfile, options: {retries: 0, upload_id: upload_id})
-
+      mock.expect :restart_resumable_upload, create_file_gapi(bucket.name, new_file_name),
+        [bucket.name, tmpfile, upload_id],
+        **restart_resumable_upload_args(options: {})
       bucket.service.mocked_service = mock
-      bucket.create_file tmpfile, new_file_name, upload_id: upload_id
+      bucket.restart_resumable_upload tmpfile, upload_id
 
       mock.verify
     end
   end
 
-  it "deletes a resumable upload with upload_id" do
-    new_file_name = random_file_path
+   it "deletes a resumable upload with upload_id" do
     upload_id= "TEST_ID"
 
     Tempfile.open ["google-cloud", ".txt"] do |tmpfile|
@@ -1436,11 +1434,11 @@ describe Google::Cloud::Storage::Bucket, :mock_storage do
       tmpfile.rewind
 
       mock = Minitest::Mock.new
-      mock.expect :insert_object, create_file_gapi(bucket.name, new_file_name),
-        [bucket.name, empty_file_gapi], **insert_object_args(name: new_file_name, upload_source: tmpfile, options: {retries: 0, upload_id: upload_id, delete_upload: true})
-
+      mock.expect :delete_resumable_upload, true,
+        [bucket.name, tmpfile, upload_id],
+        **delete_resumable_upload_args(options: {delete_upload: true})
       bucket.service.mocked_service = mock
-      bucket.delete_ongoing_resumable_upload tmpfile, new_file_name, upload_id
+      bucket.delete_resumable_upload tmpfile, upload_id
 
       mock.verify
     end
