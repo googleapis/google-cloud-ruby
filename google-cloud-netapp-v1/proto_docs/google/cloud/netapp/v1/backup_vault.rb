@@ -39,6 +39,28 @@ module Google
         # @!attribute [rw] labels
         #   @return [::Google::Protobuf::Map{::String => ::String}]
         #     Resource labels to represent user provided metadata.
+        # @!attribute [rw] backup_vault_type
+        #   @return [::Google::Cloud::NetApp::V1::BackupVault::BackupVaultType]
+        #     Optional. Type of backup vault to be created.
+        #     Default is IN_REGION.
+        # @!attribute [r] source_region
+        #   @return [::String]
+        #     Output only. Region in which the backup vault is created.
+        #     Format: `projects/{project_id}/locations/{location}`
+        # @!attribute [rw] backup_region
+        #   @return [::String]
+        #     Optional. Region where the backups are stored.
+        #     Format: `projects/{project_id}/locations/{location}`
+        # @!attribute [r] source_backup_vault
+        #   @return [::String]
+        #     Output only. Name of the Backup vault created in source region.
+        #     Format:
+        #     `projects/{project_id}/locations/{location}/backupVaults/{backup_vault_id}`
+        # @!attribute [r] destination_backup_vault
+        #   @return [::String]
+        #     Output only. Name of the Backup vault created in backup region.
+        #     Format:
+        #     `projects/{project_id}/locations/{location}/backupVaults/{backup_vault_id}`
         class BackupVault
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -71,6 +93,18 @@ module Google
 
             # BackupVault is being updated.
             UPDATING = 5
+          end
+
+          # Backup Vault Type.
+          module BackupVaultType
+            # BackupVault type not set.
+            BACKUP_VAULT_TYPE_UNSPECIFIED = 0
+
+            # BackupVault type is IN_REGION.
+            IN_REGION = 1
+
+            # BackupVault type is CROSS_REGION.
+            CROSS_REGION = 2
           end
         end
 
