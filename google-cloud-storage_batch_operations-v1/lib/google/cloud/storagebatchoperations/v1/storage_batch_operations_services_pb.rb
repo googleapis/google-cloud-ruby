@@ -36,7 +36,7 @@ module Google
             self.unmarshal_class_method = :decode
             self.service_name = 'google.cloud.storagebatchoperations.v1.StorageBatchOperations'
 
-            # Lists Jobs in a given project and location.
+            # Lists Jobs in a given project.
             rpc :ListJobs, ::Google::Cloud::StorageBatchOperations::V1::ListJobsRequest, ::Google::Cloud::StorageBatchOperations::V1::ListJobsResponse
             # Gets a batch job.
             rpc :GetJob, ::Google::Cloud::StorageBatchOperations::V1::GetJobRequest, ::Google::Cloud::StorageBatchOperations::V1::Job
