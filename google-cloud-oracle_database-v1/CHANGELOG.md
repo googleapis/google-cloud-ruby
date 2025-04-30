@@ -1,5 +1,14 @@
 # Changelog
 
+### 0.7.0 (2025-04-29)
+
+#### Features
+
+* Added support for gRPC transport ([#30029](https://github.com/googleapis/google-cloud-ruby/issues/30029)) 
+#### Bug Fixes
+
+* Fixed several issues with validating credential configs 
+
 ### 0.6.0 (2025-04-18)
 
 #### Features
