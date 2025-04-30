@@ -733,7 +733,6 @@ module Google
         #   bucket = storage.bucket "my-bucket"
         #   bucket.restart_resumable_upload file,upload_id
 
-
         def restart_resumable_upload file, upload_id
           ensure_service!
           ensure_io_or_file_exists! file

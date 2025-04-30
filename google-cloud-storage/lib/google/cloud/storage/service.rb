@@ -433,6 +433,7 @@ module Google
           else
             options = key_options(key).merge options
           end
+
           execute do
             service.insert_object bucket_name,
                                   file_obj,

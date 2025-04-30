@@ -109,6 +109,7 @@ module Google
         multiplier        ||= configure.multiplier
         upload_chunk_size ||= configure.upload_chunk_size
         universe_domain   ||= configure.universe_domain
+
         unless credentials.is_a? Google::Auth::Credentials
           credentials = Storage::Credentials.new credentials, scope: scope
         end
