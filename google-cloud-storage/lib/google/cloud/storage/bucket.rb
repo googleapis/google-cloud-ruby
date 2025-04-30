@@ -718,12 +718,12 @@ module Google
         end
 
         ##
-        # Restart ongoing resumable upload
+        # Restart resumable upload
         # @param [String, ::File] file Path of the file on the filesystem to
         #   upload. Can be an File object, or File-like object such as StringIO.
         #   (If the object does not have path, a `path` argument must be also be
         #   provided.)
-        # @param [String] upload_id Unique Id of an Ongoing resumable upload
+        # @param [String] upload_id Unique Id of an resumable upload
         #
         # @example
         #   require "google/cloud/storage"
@@ -1435,12 +1435,12 @@ module Google
         end
 
         ##
-        # Delete ongoing resumable upload
+        # Delete resumable upload
         # @param [String, ::File] file Path of the file on the filesystem to
         #   upload. Can be an File object, or File-like object such as StringIO.
         #   (If the object does not have path, a `path` argument must be also be
         #   provided.)
-        # @param [String] upload_id Unique Id of an Ongoing resumable upload
+        # @param [String] upload_id Unique Id of an resumable upload
         #
         # @example
         #   require "google/cloud/storage"
