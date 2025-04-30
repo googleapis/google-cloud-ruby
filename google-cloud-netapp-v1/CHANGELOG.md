@@ -1,5 +1,11 @@
 # Changelog
 
+### 2.1.0 (2025-04-30)
+
+#### Features
+
+* Support for backup regions ([#30037](https://github.com/googleapis/google-cloud-ruby/issues/30037)) 
+
 ### 2.0.2 (2025-04-29)
 
 #### Bug Fixes
