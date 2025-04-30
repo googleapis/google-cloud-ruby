@@ -409,8 +409,6 @@ module Google
                         if_metageneration_match: nil,
                         if_metageneration_not_match: nil,
                         user_project: nil,
-                        upload_id: nil,
-                        delete_upload: nil,
                         options: {}
           params = {
             cache_control: cache_control,
@@ -435,8 +433,6 @@ module Google
           else
             options = key_options(key).merge options
           end
-          options.merge! upload_id: upload_id if upload_id
-          options.merge! delete_upload: delete_upload if delete_upload && upload_id
           execute do
             service.insert_object bucket_name,
                                   file_obj,

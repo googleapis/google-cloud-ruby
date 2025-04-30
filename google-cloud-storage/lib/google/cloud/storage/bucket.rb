@@ -1846,9 +1846,7 @@ module Google
                         if_generation_match: nil,
                         if_generation_not_match: nil,
                         if_metageneration_match: nil,
-                        if_metageneration_not_match: nil,
-                        upload_id: nil,
-                        delete_upload: nil
+                        if_metageneration_not_match: nil
           ensure_service!
           ensure_io_or_file_exists! file
           path ||= file.path if file.respond_to? :path
@@ -1879,9 +1877,7 @@ module Google
                                      if_generation_not_match: if_generation_not_match,
                                      if_metageneration_match: if_metageneration_match,
                                      if_metageneration_not_match: if_metageneration_not_match,
-                                     user_project: user_project,
-                                     upload_id: upload_id,
-                                     delete_upload: delete_upload
+                                     user_project: user_project
           File.from_gapi gapi, service, user_project: user_project
         end
         alias upload_file create_file
