@@ -230,7 +230,7 @@ module Google
               # Service calls
 
               ##
-              # Lists Jobs in a given project and location.
+              # Lists Jobs in a given project.
               #
               # @overload list_jobs(request, options = nil)
               #   Pass arguments to `list_jobs` via a request object, either of type
@@ -248,7 +248,7 @@ module Google
               #   the default parameter values, pass an empty Hash as a request object (see above).
               #
               #   @param parent [::String]
-              #     Required. Format: projects/\\{project_id}/locations/\\{location_id} .
+              #     Required. Format: projects/\\{project_id}/locations/global.
               #   @param filter [::String]
               #     Optional. Filters results as defined by https://google.aip.dev/160.
               #   @param page_size [::Integer]
@@ -341,7 +341,7 @@ module Google
               #
               #   @param name [::String]
               #     Required. `name` of the job to retrieve.
-              #     Format: projects/\\{project_id}/locations/\\{location_id}/jobs/\\{job_id} .
+              #     Format: projects/\\{project_id}/locations/global/jobs/\\{job_id} .
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Google::Cloud::StorageBatchOperations::V1::Job]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
@@ -520,7 +520,7 @@ module Google
               #
               #   @param name [::String]
               #     Required. The `name` of the job to delete.
-              #     Format: projects/\\{project_id}/locations/\\{location_id}/jobs/\\{job_id} .
+              #     Format: projects/\\{project_id}/locations/global/jobs/\\{job_id} .
               #   @param request_id [::String]
               #     Optional. An optional request ID to identify requests. Specify a unique
               #     request ID in case you need to retry your request. Requests with same
@@ -605,7 +605,7 @@ module Google
               #
               #   @param name [::String]
               #     Required. The `name` of the job to cancel.
-              #     Format: projects/\\{project_id}/locations/\\{location_id}/jobs/\\{job_id}.
+              #     Format: projects/\\{project_id}/locations/global/jobs/\\{job_id}.
               #   @param request_id [::String]
               #     Optional. An optional request ID to identify requests. Specify a unique
               #     request ID in case you need to retry your request. Requests with same
