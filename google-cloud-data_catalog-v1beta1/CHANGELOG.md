@@ -1,5 +1,11 @@
 # Changelog
 
+### 0.8.4 (2025-04-29)
+
+#### Documentation
+
+* update documentation URL ([#30030](https://github.com/googleapis/google-cloud-ruby/issues/30030)) 
+
 ### 0.8.3 (2025-04-29)
 
 #### Bug Fixes
