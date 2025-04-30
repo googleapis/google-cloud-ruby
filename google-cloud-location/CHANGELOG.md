@@ -99,3 +99,4 @@
 #### Features
 
 * Initial generation of google-cloud-location
+
