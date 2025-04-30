@@ -1454,7 +1454,7 @@ module Google
           ensure_service!
           ensure_io_or_file_exists! file
           raise "Upload Id missing" unless upload_id
-          service.delete_resumable_upload name, file, upload_id, options: {delete_upload: true}
+          service.delete_resumable_upload name, file, upload_id, options: { delete_upload: true }
         end
         ##
         # Retrieves a list of files matching the criteria.
