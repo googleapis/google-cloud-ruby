@@ -1567,6 +1567,247 @@ class ::Google::Apps::Chat::V1::ChatService::ClientTest < Minitest::Test
     end
   end
 
+  def test_create_custom_emoji
+    # Create GRPC objects.
+    grpc_response = ::Google::Apps::Chat::V1::CustomEmoji.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    custom_emoji = {}
+
+    create_custom_emoji_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :create_custom_emoji, name
+      assert_kind_of ::Google::Apps::Chat::V1::CreateCustomEmojiRequest, request
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Apps::Chat::V1::CustomEmoji), request["custom_emoji"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, create_custom_emoji_client_stub do
+      # Create client
+      client = ::Google::Apps::Chat::V1::ChatService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.create_custom_emoji({ custom_emoji: custom_emoji }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.create_custom_emoji custom_emoji: custom_emoji do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.create_custom_emoji ::Google::Apps::Chat::V1::CreateCustomEmojiRequest.new(custom_emoji: custom_emoji) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.create_custom_emoji({ custom_emoji: custom_emoji }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.create_custom_emoji(::Google::Apps::Chat::V1::CreateCustomEmojiRequest.new(custom_emoji: custom_emoji), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, create_custom_emoji_client_stub.call_rpc_count
+    end
+  end
+
+  def test_get_custom_emoji
+    # Create GRPC objects.
+    grpc_response = ::Google::Apps::Chat::V1::CustomEmoji.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    get_custom_emoji_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :get_custom_emoji, name
+      assert_kind_of ::Google::Apps::Chat::V1::GetCustomEmojiRequest, request
+      assert_equal "hello world", request["name"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, get_custom_emoji_client_stub do
+      # Create client
+      client = ::Google::Apps::Chat::V1::ChatService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.get_custom_emoji({ name: name }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.get_custom_emoji name: name do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.get_custom_emoji ::Google::Apps::Chat::V1::GetCustomEmojiRequest.new(name: name) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.get_custom_emoji({ name: name }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.get_custom_emoji(::Google::Apps::Chat::V1::GetCustomEmojiRequest.new(name: name), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, get_custom_emoji_client_stub.call_rpc_count
+    end
+  end
+
+  def test_list_custom_emojis
+    # Create GRPC objects.
+    grpc_response = ::Google::Apps::Chat::V1::ListCustomEmojisResponse.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    page_size = 42
+    page_token = "hello world"
+    filter = "hello world"
+
+    list_custom_emojis_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :list_custom_emojis, name
+      assert_kind_of ::Google::Apps::Chat::V1::ListCustomEmojisRequest, request
+      assert_equal 42, request["page_size"]
+      assert_equal "hello world", request["page_token"]
+      assert_equal "hello world", request["filter"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, list_custom_emojis_client_stub do
+      # Create client
+      client = ::Google::Apps::Chat::V1::ChatService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.list_custom_emojis({ page_size: page_size, page_token: page_token, filter: filter }) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.list_custom_emojis page_size: page_size, page_token: page_token, filter: filter do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.list_custom_emojis ::Google::Apps::Chat::V1::ListCustomEmojisRequest.new(page_size: page_size, page_token: page_token, filter: filter) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.list_custom_emojis({ page_size: page_size, page_token: page_token, filter: filter }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.list_custom_emojis(::Google::Apps::Chat::V1::ListCustomEmojisRequest.new(page_size: page_size, page_token: page_token, filter: filter), grpc_options) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, list_custom_emojis_client_stub.call_rpc_count
+    end
+  end
+
+  def test_delete_custom_emoji
+    # Create GRPC objects.
+    grpc_response = ::Google::Protobuf::Empty.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    delete_custom_emoji_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :delete_custom_emoji, name
+      assert_kind_of ::Google::Apps::Chat::V1::DeleteCustomEmojiRequest, request
+      assert_equal "hello world", request["name"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, delete_custom_emoji_client_stub do
+      # Create client
+      client = ::Google::Apps::Chat::V1::ChatService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.delete_custom_emoji({ name: name }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.delete_custom_emoji name: name do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.delete_custom_emoji ::Google::Apps::Chat::V1::DeleteCustomEmojiRequest.new(name: name) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.delete_custom_emoji({ name: name }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.delete_custom_emoji(::Google::Apps::Chat::V1::DeleteCustomEmojiRequest.new(name: name), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, delete_custom_emoji_client_stub.call_rpc_count
+    end
+  end
+
   def test_get_space_read_state
     # Create GRPC objects.
     grpc_response = ::Google::Apps::Chat::V1::SpaceReadState.new

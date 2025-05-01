@@ -44,6 +44,20 @@ module Google
             end
 
             ##
+            # Create a fully-qualified CustomEmoji resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `customEmojis/{custom_emoji}`
+            #
+            # @param custom_emoji [String]
+            #
+            # @return [::String]
+            def custom_emoji_path custom_emoji:
+              "customEmojis/#{custom_emoji}"
+            end
+
+            ##
             # Create a fully-qualified Membership resource string.
             #
             # The resource will be in the following format:
