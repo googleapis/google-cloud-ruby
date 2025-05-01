@@ -1,5 +1,11 @@
 # Changelog
 
+### 1.1.2 (2025-05-01)
+
+#### Documentation
+
+* Document default values for minimum_backoff ([#30038](https://github.com/googleapis/google-cloud-ruby/issues/30038)) 
+
 ### 1.1.1 (2025-04-29)
 
 #### Bug Fixes
