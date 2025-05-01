@@ -1,5 +1,11 @@
 # Changelog
 
+### 0.1.3 (2025-05-01)
+
+#### Documentation
+
+* Updated format strings for resource names ([#30036](https://github.com/googleapis/google-cloud-ruby/issues/30036)) 
+
 ### 0.1.2 (2025-04-29)
 
 #### Bug Fixes
