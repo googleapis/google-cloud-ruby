@@ -45,6 +45,37 @@ module Google
             rpc :DeleteInstance, ::Google::Cloud::Memorystore::V1::DeleteInstanceRequest, ::Google::Longrunning::Operation
             # Gets details about the certificate authority for an Instance.
             rpc :GetCertificateAuthority, ::Google::Cloud::Memorystore::V1::GetCertificateAuthorityRequest, ::Google::Cloud::Memorystore::V1::CertificateAuthority
+            # Reschedules upcoming maintenance event.
+            rpc :RescheduleMaintenance, ::Google::Cloud::Memorystore::V1::RescheduleMaintenanceRequest, ::Google::Longrunning::Operation
+            # Lists all backup collections owned by a consumer project in either the
+            # specified location (region) or all locations.
+            #
+            # If `location_id` is specified as `-` (wildcard), then all regions
+            # available to the project are queried, and the results are aggregated.
+            rpc :ListBackupCollections, ::Google::Cloud::Memorystore::V1::ListBackupCollectionsRequest, ::Google::Cloud::Memorystore::V1::ListBackupCollectionsResponse
+            # Get a backup collection.
+            rpc :GetBackupCollection, ::Google::Cloud::Memorystore::V1::GetBackupCollectionRequest, ::Google::Cloud::Memorystore::V1::BackupCollection
+            # Lists all backups owned by a backup collection.
+            rpc :ListBackups, ::Google::Cloud::Memorystore::V1::ListBackupsRequest, ::Google::Cloud::Memorystore::V1::ListBackupsResponse
+            # Gets the details of a specific backup.
+            rpc :GetBackup, ::Google::Cloud::Memorystore::V1::GetBackupRequest, ::Google::Cloud::Memorystore::V1::Backup
+            # Deletes a specific backup.
+            rpc :DeleteBackup, ::Google::Cloud::Memorystore::V1::DeleteBackupRequest, ::Google::Longrunning::Operation
+            # Exports a specific backup to a customer target Cloud Storage URI.
+            rpc :ExportBackup, ::Google::Cloud::Memorystore::V1::ExportBackupRequest, ::Google::Longrunning::Operation
+            # Backup Instance.
+            # If this is the first time a backup is being created, a backup collection
+            # will be created at the backend, and this backup belongs to this collection.
+            # Both collection and backup will have a resource name. Backup will be
+            # executed for each shard. A replica (primary if nonHA) will be selected to
+            # perform the execution. Backup call will be rejected if there is an ongoing
+            # backup or update operation. Be aware that during preview, if the instance's
+            # internal software version is too old, critical update will be performed
+            # before actual backup. Once the internal software version is updated to the
+            # minimum version required by the backup feature, subsequent backups will not
+            # require critical update. After preview, there will be no critical update
+            # needed for backup.
+            rpc :BackupInstance, ::Google::Cloud::Memorystore::V1::BackupInstanceRequest, ::Google::Longrunning::Operation
           end
 
           Stub = Service.rpc_stub_class
