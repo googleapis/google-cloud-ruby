@@ -22,6 +22,20 @@ module Google
     module Memorystore
       module V1
         # A Memorystore instance.
+        # @!attribute [rw] gcs_source
+        #   @return [::Google::Cloud::Memorystore::V1::Instance::GcsBackupSource]
+        #     Optional. Immutable. Backups that stored in Cloud Storage buckets.
+        #     The Cloud Storage buckets need to be the same region as the instances.
+        #     Read permission is required to import from the provided Cloud Storage
+        #     Objects.
+        #
+        #     Note: The following fields are mutually exclusive: `gcs_source`, `managed_backup_source`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] managed_backup_source
+        #   @return [::Google::Cloud::Memorystore::V1::Instance::ManagedBackupSource]
+        #     Optional. Immutable. Backups that generated and managed by memorystore
+        #     service.
+        #
+        #     Note: The following fields are mutually exclusive: `managed_backup_source`, `gcs_source`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] name
         #   @return [::String]
         #     Identifier. Unique name of the instance.
@@ -58,18 +72,19 @@ module Google
         #   @return [::Integer]
         #     Optional. Number of shards for the instance.
         # @!attribute [r] discovery_endpoints
+        #   @deprecated This field is deprecated and may be removed in the next major version update.
         #   @return [::Array<::Google::Cloud::Memorystore::V1::DiscoveryEndpoint>]
-        #     Output only. Endpoints clients can connect to the instance through.
-        #     Currently only one discovery endpoint is supported.
+        #     Output only. Deprecated: Use the endpoints.connections.psc_auto_connection
+        #     or endpoints.connections.psc_connection values instead.
         # @!attribute [rw] node_type
         #   @return [::Google::Cloud::Memorystore::V1::Instance::NodeType]
-        #     Optional. Immutable. Machine type for individual nodes of the instance.
+        #     Optional. Machine type for individual nodes of the instance.
         # @!attribute [rw] persistence_config
         #   @return [::Google::Cloud::Memorystore::V1::PersistenceConfig]
         #     Optional. Persistence configuration of the instance.
         # @!attribute [rw] engine_version
         #   @return [::String]
-        #     Optional. Immutable. Engine version of the instance.
+        #     Optional. Engine version of the instance.
         # @!attribute [rw] engine_configs
         #   @return [::Google::Protobuf::Map{::String => ::String}]
         #     Optional. User-provided engine configurations for the instance.
@@ -84,15 +99,46 @@ module Google
         #   @return [::Boolean]
         #     Optional. If set to true deletion of the instance will fail.
         # @!attribute [rw] psc_auto_connections
+        #   @deprecated This field is deprecated and may be removed in the next major version update.
         #   @return [::Array<::Google::Cloud::Memorystore::V1::PscAutoConnection>]
-        #     Required. Immutable. User inputs and resource details of the auto-created
-        #     PSC connections.
+        #     Optional. Immutable. Deprecated: Use the
+        #     endpoints.connections.psc_auto_connection value instead.
+        # @!attribute [r] psc_attachment_details
+        #   @return [::Array<::Google::Cloud::Memorystore::V1::PscAttachmentDetail>]
+        #     Output only. Service attachment details to configure PSC connections.
         # @!attribute [rw] endpoints
         #   @return [::Array<::Google::Cloud::Memorystore::V1::Instance::InstanceEndpoint>]
         #     Optional. Endpoints for the instance.
         # @!attribute [rw] mode
         #   @return [::Google::Cloud::Memorystore::V1::Instance::Mode]
         #     Optional. The mode config for the instance.
+        # @!attribute [rw] ondemand_maintenance
+        #   @return [::Boolean]
+        #     Optional. Input only. Ondemand maintenance for the instance.
+        # @!attribute [rw] maintenance_policy
+        #   @return [::Google::Cloud::Memorystore::V1::MaintenancePolicy]
+        #     Optional. The maintenance policy for the instance. If not provided,
+        #     the maintenance event will be performed based on Memorystore
+        #     internal rollout schedule.
+        # @!attribute [r] maintenance_schedule
+        #   @return [::Google::Cloud::Memorystore::V1::MaintenanceSchedule]
+        #     Output only. Published maintenance schedule.
+        # @!attribute [rw] cross_instance_replication_config
+        #   @return [::Google::Cloud::Memorystore::V1::CrossInstanceReplicationConfig]
+        #     Optional. The config for cross instance replication.
+        # @!attribute [rw] async_instance_endpoints_deletion_enabled
+        #   @return [::Boolean]
+        #     Optional. If true, instance endpoints that are created and registered by
+        #     customers can be deleted asynchronously. That is, such an instance endpoint
+        #     can be de-registered before the forwarding rules in the instance endpoint
+        #     are deleted.
+        # @!attribute [r] backup_collection
+        #   @return [::String]
+        #     Output only. The backup collection full resource name. Example:
+        #     projects/\\{project}/locations/\\{location}/backupCollections/\\{collection}
+        # @!attribute [rw] automated_backup_config
+        #   @return [::Google::Cloud::Memorystore::V1::AutomatedBackupConfig]
+        #     Optional. The automated backup config for the instance.
         class Instance
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -112,10 +158,40 @@ module Google
             # @!attribute [r] target_replica_count
             #   @return [::Integer]
             #     Output only. Target number of replica nodes per shard for the instance.
+            # @!attribute [r] target_engine_version
+            #   @return [::String]
+            #     Output only. Target engine version for the instance.
+            # @!attribute [r] target_node_type
+            #   @return [::Google::Cloud::Memorystore::V1::Instance::NodeType]
+            #     Output only. Target node type for the instance.
             class UpdateInfo
               include ::Google::Protobuf::MessageExts
               extend ::Google::Protobuf::MessageExts::ClassMethods
             end
+          end
+
+          # Backups that stored in Cloud Storage buckets.
+          # The Cloud Storage buckets need to be the same region as the instances.
+          # @!attribute [rw] uris
+          #   @return [::Array<::String>]
+          #     Optional. Example: gs://bucket1/object1, gs://bucket2/folder2/object2
+          class GcsBackupSource
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Backups that generated and managed by memorystore.
+          # @!attribute [rw] backup
+          #   @return [::String]
+          #     Optional. Example:
+          #     //memorystore.googleapis.com/projects/\\{project}/locations/\\{location}/backupCollections/\\{collection}/backups/\\{backup}
+          #     A shorter version (without the prefix) of the backup name is also
+          #     supported, like
+          #     projects/\\{project}/locations/\\{location}/backupCollections/\\{collection}/backups/\\{backup_id}
+          #     In this case, it assumes the backup is under memorystore.googleapis.com.
+          class ManagedBackupSource
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
           end
 
           # InstanceEndpoint consists of PSC connections that are created
@@ -133,8 +209,8 @@ module Google
           # Information of each PSC connection.
           # @!attribute [rw] psc_auto_connection
           #   @return [::Google::Cloud::Memorystore::V1::PscAutoConnection]
-          #     Detailed information of a PSC connection that is created through
-          #     service connectivity automation.
+          #     Immutable. Detailed information of a PSC connection that is created
+          #     through service connectivity automation.
           #
           #     Note: The following fields are mutually exclusive: `psc_auto_connection`, `psc_connection`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] psc_connection
@@ -243,11 +319,318 @@ module Google
           end
         end
 
-        # Details of consumer resources in a PSC connection.
-        # @!attribute [r] port
+        # The automated backup config for an instance.
+        # @!attribute [rw] fixed_frequency_schedule
+        #   @return [::Google::Cloud::Memorystore::V1::AutomatedBackupConfig::FixedFrequencySchedule]
+        #     Optional. Trigger automated backups at a fixed frequency.
+        # @!attribute [rw] automated_backup_mode
+        #   @return [::Google::Cloud::Memorystore::V1::AutomatedBackupConfig::AutomatedBackupMode]
+        #     Optional. The automated backup mode. If the mode is disabled, the other
+        #     fields will be ignored.
+        # @!attribute [rw] retention
+        #   @return [::Google::Protobuf::Duration]
+        #     Optional. How long to keep automated backups before the backups are
+        #     deleted. The value should be between 1 day and 365 days. If not specified,
+        #     the default value is 35 days.
+        class AutomatedBackupConfig
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # This schedule allows the backup to be triggered at a fixed frequency
+          # (currently only daily is supported).
+          # @!attribute [rw] start_time
+          #   @return [::Google::Type::TimeOfDay]
+          #     Required. The start time of every automated backup in UTC. It must be set
+          #     to the start of an hour. This field is required.
+          class FixedFrequencySchedule
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # The automated backup mode.
+          module AutomatedBackupMode
+            # Default value. Automated backup config is not specified.
+            AUTOMATED_BACKUP_MODE_UNSPECIFIED = 0
+
+            # Automated backup config disabled.
+            DISABLED = 1
+
+            # Automated backup config enabled.
+            ENABLED = 2
+          end
+        end
+
+        # BackupCollection of an instance.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Identifier. Full resource path of the backup collection.
+        # @!attribute [r] instance_uid
+        #   @return [::String]
+        #     Output only. The instance uid of the backup collection.
+        # @!attribute [r] instance
+        #   @return [::String]
+        #     Output only. The full resource path of the instance the backup collection
+        #     belongs to. Example:
+        #     projects/\\{project}/locations/\\{location}/instances/\\{instance}
+        # @!attribute [r] kms_key
+        #   @return [::String]
+        #     Output only. The KMS key used to encrypt the backups under this backup
+        #     collection.
+        # @!attribute [r] uid
+        #   @return [::String]
+        #     Output only. System assigned unique identifier of the backup collection.
+        # @!attribute [r] create_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Output only. The time when the backup collection was created.
+        class BackupCollection
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Backup of an instance.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Identifier. Full resource path of the backup. the last part of the name is
+        #     the backup id with the following format: [YYYYMMDDHHMMSS]_[Shorted Instance
+        #     UID] OR customer specified while backup instance. Example:
+        #     20240515123000_1234
+        # @!attribute [r] create_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Output only. The time when the backup was created.
+        # @!attribute [r] instance
+        #   @return [::String]
+        #     Output only. Instance resource path of this backup.
+        # @!attribute [r] instance_uid
+        #   @return [::String]
+        #     Output only. Instance uid of this backup.
+        # @!attribute [r] total_size_bytes
         #   @return [::Integer]
-        #     Optional. Output only. port will only be set for Primary/Reader or
-        #     Discovery endpoint.
+        #     Output only. Total size of the backup in bytes.
+        # @!attribute [r] expire_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Output only. The time when the backup will expire.
+        # @!attribute [r] engine_version
+        #   @return [::String]
+        #     Output only. valkey-7.5/valkey-8.0, etc.
+        # @!attribute [r] backup_files
+        #   @return [::Array<::Google::Cloud::Memorystore::V1::BackupFile>]
+        #     Output only. List of backup files of the backup.
+        # @!attribute [r] node_type
+        #   @return [::Google::Cloud::Memorystore::V1::Instance::NodeType]
+        #     Output only. Node type of the instance.
+        # @!attribute [r] replica_count
+        #   @return [::Integer]
+        #     Output only. Number of replicas for the instance.
+        # @!attribute [r] shard_count
+        #   @return [::Integer]
+        #     Output only. Number of shards for the instance.
+        # @!attribute [r] backup_type
+        #   @return [::Google::Cloud::Memorystore::V1::Backup::BackupType]
+        #     Output only. Type of the backup.
+        # @!attribute [r] state
+        #   @return [::Google::Cloud::Memorystore::V1::Backup::State]
+        #     Output only. State of the backup.
+        # @!attribute [r] uid
+        #   @return [::String]
+        #     Output only. System assigned unique identifier of the backup.
+        class Backup
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Type of the backup.
+          module BackupType
+            # The default value, not set.
+            BACKUP_TYPE_UNSPECIFIED = 0
+
+            # On-demand backup.
+            ON_DEMAND = 1
+
+            # Automated backup.
+            AUTOMATED = 2
+          end
+
+          # State of the backup.
+          module State
+            # The default value, not set.
+            STATE_UNSPECIFIED = 0
+
+            # The backup is being created.
+            CREATING = 1
+
+            # The backup is active to be used.
+            ACTIVE = 2
+
+            # The backup is being deleted.
+            DELETING = 3
+
+            # The backup is currently suspended due to reasons like project deletion,
+            # billing account closure, etc.
+            SUSPENDED = 4
+          end
+        end
+
+        # Backup is consisted of multiple backup files.
+        # @!attribute [r] file_name
+        #   @return [::String]
+        #     Output only. e.g: <shard-id>.rdb
+        # @!attribute [r] size_bytes
+        #   @return [::Integer]
+        #     Output only. Size of the backup file in bytes.
+        # @!attribute [r] create_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Output only. The time when the backup file was created.
+        class BackupFile
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Cross instance replication config.
+        # @!attribute [rw] instance_role
+        #   @return [::Google::Cloud::Memorystore::V1::CrossInstanceReplicationConfig::InstanceRole]
+        #     Required. The role of the instance in cross instance replication.
+        # @!attribute [rw] primary_instance
+        #   @return [::Google::Cloud::Memorystore::V1::CrossInstanceReplicationConfig::RemoteInstance]
+        #     Optional. Details of the primary instance that is used as the replication
+        #     source for this secondary instance.
+        #
+        #     This field is only set for a secondary instance.
+        # @!attribute [rw] secondary_instances
+        #   @return [::Array<::Google::Cloud::Memorystore::V1::CrossInstanceReplicationConfig::RemoteInstance>]
+        #     Optional. List of secondary instances that are replicating from this
+        #     primary instance.
+        #
+        #     This field is only set for a primary instance.
+        # @!attribute [r] update_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Output only. The last time cross instance replication config was updated.
+        # @!attribute [r] membership
+        #   @return [::Google::Cloud::Memorystore::V1::CrossInstanceReplicationConfig::Membership]
+        #     Output only. An output only view of all the member instances participating
+        #     in the cross instance replication. This view will be provided by every
+        #     member instance irrespective of its instance role(primary or secondary).
+        #
+        #     A primary instance can provide information about all the secondary
+        #     instances replicating from it. However, a secondary instance only knows
+        #     about the primary instance from which it is replicating. However, for
+        #     scenarios, where the primary instance is unavailable(e.g. regional outage),
+        #     a Getinstance request can be sent to any other member instance and this
+        #     field will list all the member instances participating in cross instance
+        #     replication.
+        class CrossInstanceReplicationConfig
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Details of the remote instance associated with this instance in a cross
+          # instance replication setup.
+          # @!attribute [rw] instance
+          #   @return [::String]
+          #     Optional. The full resource path of the remote instance in
+          #     the format: projects/<project>/locations/<region>/instances/<instance-id>
+          # @!attribute [r] uid
+          #   @return [::String]
+          #     Output only. The unique identifier of the remote instance.
+          class RemoteInstance
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # An output only view of all the member instances participating in the cross
+          # instance replication.
+          # @!attribute [r] primary_instance
+          #   @return [::Google::Cloud::Memorystore::V1::CrossInstanceReplicationConfig::RemoteInstance]
+          #     Output only. The primary instance that acts as the source of replication
+          #     for the secondary instances.
+          # @!attribute [r] secondary_instances
+          #   @return [::Array<::Google::Cloud::Memorystore::V1::CrossInstanceReplicationConfig::RemoteInstance>]
+          #     Output only. The list of secondary instances replicating from the primary
+          #     instance.
+          class Membership
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # The role of the instance in cross instance replication.
+          module InstanceRole
+            # instance role is not set.
+            # The behavior is equivalent to NONE.
+            INSTANCE_ROLE_UNSPECIFIED = 0
+
+            # This instance does not participate in cross instance replication. It is
+            # an independent instance and does not replicate to or from any other
+            # instances.
+            NONE = 1
+
+            # A instance that allows both reads and writes. Any data written to this
+            # instance is also replicated to the attached secondary instances.
+            PRIMARY = 2
+
+            # A instance that allows only reads and replicates data from a primary
+            # instance.
+            SECONDARY = 3
+          end
+        end
+
+        # Maintenance policy per instance.
+        # @!attribute [r] create_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Output only. The time when the policy was created.
+        # @!attribute [r] update_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Output only. The time when the policy was updated.
+        # @!attribute [rw] weekly_maintenance_window
+        #   @return [::Array<::Google::Cloud::Memorystore::V1::WeeklyMaintenanceWindow>]
+        #     Optional. Maintenance window that is applied to resources covered by this
+        #     policy. Minimum 1. For the current version, the maximum number of
+        #     weekly_window is expected to be one.
+        class MaintenancePolicy
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Time window specified for weekly operations.
+        # @!attribute [rw] day
+        #   @return [::Google::Type::DayOfWeek]
+        #     Optional. Allows to define schedule that runs specified day of the week.
+        # @!attribute [rw] start_time
+        #   @return [::Google::Type::TimeOfDay]
+        #     Optional. Start time of the window in UTC.
+        class WeeklyMaintenanceWindow
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Upcoming maintenance schedule.
+        # @!attribute [r] start_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Output only. The start time of any upcoming scheduled maintenance for this
+        #     instance.
+        # @!attribute [r] end_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Output only. The end time of any upcoming scheduled maintenance for this
+        #     instance.
+        class MaintenanceSchedule
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Configuration of a service attachment of the cluster, for creating PSC
+        # connections.
+        # @!attribute [r] service_attachment
+        #   @return [::String]
+        #     Output only. Service attachment URI which your self-created PscConnection
+        #     should use as target.
+        # @!attribute [r] connection_type
+        #   @return [::Google::Cloud::Memorystore::V1::ConnectionType]
+        #     Output only. Type of Psc endpoint.
+        class PscAttachmentDetail
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Details of consumer resources in a PSC connection.
+        # @!attribute [rw] port
+        #   @return [::Integer]
+        #     Optional. port will only be set for Primary/Reader or Discovery endpoint.
         # @!attribute [r] psc_connection_id
         #   @return [::String]
         #     Output only. The PSC connection id of the forwarding rule connected to the
@@ -289,9 +672,12 @@ module Google
         end
 
         # User created Psc connection configuration.
-        # @!attribute [r] psc_connection_id
+        # @!attribute [rw] port
+        #   @return [::Integer]
+        #     Optional. port will only be set for Primary/Reader or Discovery endpoint.
+        # @!attribute [rw] psc_connection_id
         #   @return [::String]
-        #     Output only. The PSC connection id of the forwarding rule connected to the
+        #     Required. The PSC connection id of the forwarding rule connected to the
         #     service attachment.
         # @!attribute [rw] ip_address
         #   @return [::String]
@@ -470,6 +856,36 @@ module Google
           end
         end
 
+        # Request for rescheduling instance maintenance.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. Name of the instance to reschedule maintenance for:
+        #     `projects/{project}/locations/{location_id}/instances/{instance}`
+        # @!attribute [rw] reschedule_type
+        #   @return [::Google::Cloud::Memorystore::V1::RescheduleMaintenanceRequest::RescheduleType]
+        #     Required. If reschedule type is SPECIFIC_TIME, schedule_time must be set.
+        # @!attribute [rw] schedule_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Optional. Timestamp when the maintenance shall be rescheduled to if
+        #     reschedule_type=SPECIFIC_TIME, in RFC 3339 format.
+        #     Example: `2012-11-15T16:19:00.094Z`.
+        class RescheduleMaintenanceRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Reschedule options.
+          module RescheduleType
+            # Not set.
+            RESCHEDULE_TYPE_UNSPECIFIED = 0
+
+            # If the user wants to schedule the maintenance to happen now.
+            IMMEDIATE = 1
+
+            # If the user wants to reschedule the maintenance to a specific time.
+            SPECIFIC_TIME = 3
+          end
+        end
+
         # Request message for [ListInstances][].
         # @!attribute [rw] parent
         #   @return [::String]
@@ -611,6 +1027,161 @@ module Google
         #     The request ID must be a valid UUID with the exception that zero UUID is
         #     not supported (00000000-0000-0000-0000-000000000000).
         class DeleteInstanceRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request for [ListBackupCollections]
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. The resource name of the backupCollection location using the
+        #     form:
+        #         `projects/{project_id}/locations/{location_id}`
+        #     where `location_id` refers to a Google Cloud region.
+        # @!attribute [rw] page_size
+        #   @return [::Integer]
+        #     Optional. The maximum number of items to return.
+        #
+        #     If not specified, a default value of 1000 will be used by the service.
+        #     Regardless of the page_size value, the response may include a partial list
+        #     and a caller should only rely on response's
+        #     {::Google::Cloud::Memorystore::V1::ListBackupCollectionsResponse#next_page_token `next_page_token`}
+        #     to determine if there are more clusters left to be queried.
+        # @!attribute [rw] page_token
+        #   @return [::String]
+        #     Optional. The `next_page_token` value returned from a previous
+        #     [ListBackupCollections] request, if any.
+        class ListBackupCollectionsRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Response for [ListBackupCollections].
+        # @!attribute [rw] backup_collections
+        #   @return [::Array<::Google::Cloud::Memorystore::V1::BackupCollection>]
+        #     A list of backupCollections in the project.
+        #
+        #     If the `location_id` in the parent field of the request is "-", all regions
+        #     available to the project are queried, and the results aggregated.
+        #     If in such an aggregated query a location is unavailable, a placeholder
+        #     backupCollection entry is included in the response with the `name` field
+        #     set to a value of the form
+        #     `projects/{project_id}/locations/{location_id}/backupCollections/`- and the
+        #     `status` field set to ERROR and `status_message` field set to "location not
+        #     available for ListBackupCollections".
+        # @!attribute [rw] next_page_token
+        #   @return [::String]
+        #     Token to retrieve the next page of results, or empty if there are no more
+        #     results in the list.
+        # @!attribute [rw] unreachable
+        #   @return [::Array<::String>]
+        #     Locations that could not be reached.
+        class ListBackupCollectionsResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request for [GetBackupCollection].
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. Instance backupCollection resource name using the form:
+        #         `projects/{project_id}/locations/{location_id}/backupCollections/{backup_collection_id}`
+        #     where `location_id` refers to a Google Cloud region.
+        class GetBackupCollectionRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request for [ListBackups].
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. The resource name of the backupCollection using the form:
+        #     `projects/{project_id}/locations/{location_id}/backupCollections/{backup_collection_id}`
+        # @!attribute [rw] page_size
+        #   @return [::Integer]
+        #     Optional. The maximum number of items to return.
+        #
+        #     If not specified, a default value of 1000 will be used by the service.
+        #     Regardless of the page_size value, the response may include a partial list
+        #     and a caller should only rely on response's
+        #     {::Google::Cloud::Memorystore::V1::ListBackupsResponse#next_page_token `next_page_token`}
+        #     to determine if there are more clusters left to be queried.
+        # @!attribute [rw] page_token
+        #   @return [::String]
+        #     Optional. The `next_page_token` value returned from a previous
+        #     [ListBackupCollections] request, if any.
+        class ListBackupsRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Response for [ListBackups].
+        # @!attribute [rw] backups
+        #   @return [::Array<::Google::Cloud::Memorystore::V1::Backup>]
+        #     A list of backups in the project.
+        # @!attribute [rw] next_page_token
+        #   @return [::String]
+        #     Token to retrieve the next page of results, or empty if there are no more
+        #     results in the list.
+        # @!attribute [rw] unreachable
+        #   @return [::Array<::String>]
+        #     Backups that could not be reached.
+        class ListBackupsResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request for [GetBackup].
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. Instance backup resource name using the form:
+        #     `projects/{project_id}/locations/{location_id}/backupCollections/{backup_collection_id}/backups/{backup_id}`
+        class GetBackupRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request for [DeleteBackup].
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. Instance backup resource name using the form:
+        #     `projects/{project_id}/locations/{location_id}/backupCollections/{backup_collection_id}/backups/{backup_id}`
+        # @!attribute [rw] request_id
+        #   @return [::String]
+        #     Optional. Idempotent request UUID.
+        class DeleteBackupRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request for [ExportBackup].
+        # @!attribute [rw] gcs_bucket
+        #   @return [::String]
+        #     Google Cloud Storage bucket, like "my-bucket".
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. Instance backup resource name using the form:
+        #     `projects/{project_id}/locations/{location_id}/backupCollections/{backup_collection_id}/backups/{backup_id}`
+        class ExportBackupRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request for [BackupInstance].
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. Instance resource name using the form:
+        #      `projects/{project_id}/locations/{location_id}/instances/{instance_id}`
+        #     where `location_id` refers to a Google Cloud region.
+        # @!attribute [rw] ttl
+        #   @return [::Google::Protobuf::Duration]
+        #     Optional. TTL for the backup to expire. Value range is 1 day to 100 years.
+        #     If not specified, the default value is 100 years.
+        # @!attribute [rw] backup_id
+        #   @return [::String]
+        #     Optional. The id of the backup to be created. If not specified, the
+        #     default value ([YYYYMMDDHHMMSS]_[Shortened Instance UID] is used.
+        class BackupInstanceRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
