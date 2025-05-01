@@ -50,13 +50,14 @@ module Google
         #     field for service related experiments is service_options.
         # @!attribute [rw] service_options
         #   @return [::Array<::String>]
-        #     The list of service options to enable. This field should be used for
-        #     service related experiments only. These experiments, when graduating to GA,
-        #     should be replaced by dedicated fields or become default (i.e. always on).
+        #     Optional. The list of service options to enable. This field should be used
+        #     for service related experiments only. These experiments, when graduating to
+        #     GA, should be replaced by dedicated fields or become default (i.e. always
+        #     on).
         # @!attribute [rw] service_kms_key_name
         #   @return [::String]
-        #     If set, contains the Cloud KMS key identifier used to encrypt data
-        #     at rest, AKA a Customer Managed Encryption Key (CMEK).
+        #     Optional. If set, contains the Cloud KMS key identifier used to encrypt
+        #     data at rest, AKA a Customer Managed Encryption Key (CMEK).
         #
         #     Format:
         #       projects/PROJECT_ID/locations/LOCATION/keyRings/KEY_RING/cryptoKeys/KEY
@@ -73,7 +74,7 @@ module Google
         #     are required in order to run the job.
         # @!attribute [rw] dataset
         #   @return [::String]
-        #     The dataset for the current project where various workflow
+        #     Optional. The dataset for the current project where various workflow
         #     related tables are stored.
         #
         #     The supported resource type is:
@@ -91,20 +92,21 @@ module Google
         #     Experimental settings.
         # @!attribute [rw] service_account_email
         #   @return [::String]
-        #     Identity to run virtual machines as. Defaults to the default account.
+        #     Optional. Identity to run virtual machines as. Defaults to the default
+        #     account.
         # @!attribute [rw] flex_resource_scheduling_goal
         #   @return [::Google::Cloud::Dataflow::V1beta3::FlexResourceSchedulingGoal]
-        #     Which Flexible Resource Scheduling mode to run in.
+        #     Optional. Which Flexible Resource Scheduling mode to run in.
         # @!attribute [rw] worker_region
         #   @return [::String]
-        #     The Compute Engine region
+        #     Optional. The Compute Engine region
         #     (https://cloud.google.com/compute/docs/regions-zones/regions-zones) in
         #     which worker processing should occur, e.g. "us-west1". Mutually exclusive
         #     with worker_zone. If neither worker_region nor worker_zone is specified,
         #     default to the control plane's region.
         # @!attribute [rw] worker_zone
         #   @return [::String]
-        #     The Compute Engine zone
+        #     Optional. The Compute Engine zone
         #     (https://cloud.google.com/compute/docs/regions-zones/regions-zones) in
         #     which worker processing should occur, e.g. "us-west1-a". Mutually exclusive
         #     with worker_region. If neither worker_region nor worker_zone is specified,
@@ -114,7 +116,20 @@ module Google
         #     Output only. The shuffle mode used for the job.
         # @!attribute [rw] debug_options
         #   @return [::Google::Cloud::Dataflow::V1beta3::DebugOptions]
-        #     Any debugging options to be supplied to the job.
+        #     Optional. Any debugging options to be supplied to the job.
+        # @!attribute [r] use_streaming_engine_resource_based_billing
+        #   @return [::Boolean]
+        #     Output only. Whether the job uses the Streaming Engine resource-based
+        #     billing model.
+        # @!attribute [rw] streaming_mode
+        #   @return [::Google::Cloud::Dataflow::V1beta3::StreamingMode]
+        #     Optional. Specifies the Streaming Engine message processing guarantees.
+        #     Reduces cost and latency but might result in duplicate messages committed
+        #     to storage. Designed to run simple mapping streaming ETL jobs at the lowest
+        #     cost. For example, Change Data Capture (CDC) to BigQuery is a canonical use
+        #     case. For more information, see
+        #     [Set the pipeline streaming
+        #     mode](https://cloud.google.com/dataflow/docs/guides/streaming-modes).
         class Environment
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -321,7 +336,7 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Defines a SDK harness container for executing Dataflow pipelines.
+        # Defines an SDK harness container for executing Dataflow pipelines.
         # @!attribute [rw] container_image
         #   @return [::String]
         #     A docker container image that resides in Google Container Registry.
@@ -339,7 +354,7 @@ module Google
         # @!attribute [rw] capabilities
         #   @return [::Array<::String>]
         #     The set of capabilities enumerated in the above Environment proto. See also
-        #     https://github.com/apache/beam/blob/master/model/pipeline/src/main/proto/beam_runner_api.proto
+        #     [beam_runner_api.proto](https://github.com/apache/beam/blob/master/model/pipeline/src/main/proto/org/apache/beam/model/pipeline/v1/beam_runner_api.proto)
         class SdkHarnessContainerImage
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -467,11 +482,50 @@ module Google
           end
         end
 
+        # Configuration options for sampling elements.
+        # @!attribute [rw] behaviors
+        #   @return [::Array<::Google::Cloud::Dataflow::V1beta3::DataSamplingConfig::DataSamplingBehavior>]
+        #     List of given sampling behaviors to enable. For example, specifying
+        #     behaviors = [ALWAYS_ON] samples in-flight elements but does not sample
+        #     exceptions. Can be used to specify multiple behaviors like,
+        #     behaviors = [ALWAYS_ON, EXCEPTIONS] for specifying periodic sampling and
+        #     exception sampling.
+        #
+        #     If DISABLED is in the list, then sampling will be disabled and ignore the
+        #     other given behaviors.
+        #
+        #     Ordering does not matter.
+        class DataSamplingConfig
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # The following enum defines what to sample for a running job.
+          module DataSamplingBehavior
+            # If given, has no effect on sampling behavior. Used as an unknown or unset
+            # sentinel value.
+            DATA_SAMPLING_BEHAVIOR_UNSPECIFIED = 0
+
+            # When given, disables element sampling. Has same behavior as not setting
+            # the behavior.
+            DISABLED = 1
+
+            # When given, enables sampling in-flight from all PCollections.
+            ALWAYS_ON = 2
+
+            # When given, enables sampling input elements when a user-defined DoFn
+            # causes an exception.
+            EXCEPTIONS = 3
+          end
+        end
+
         # Describes any options that have an effect on the debugging of pipelines.
         # @!attribute [rw] enable_hot_key_logging
         #   @return [::Boolean]
-        #     When true, enables the logging of the literal hot key to the user's Cloud
-        #     Logging.
+        #     Optional. When true, enables the logging of the literal hot key to the
+        #     user's Cloud Logging.
+        # @!attribute [rw] data_sampling
+        #   @return [::Google::Cloud::Dataflow::V1beta3::DataSamplingConfig]
+        #     Configuration options for sampling elements from a running pipeline.
         class DebugOptions
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -555,7 +609,10 @@ module Google
           AUTOSCALING_ALGORITHM_BASIC = 2
         end
 
-        # Specifies how IP addresses should be allocated to the worker machines.
+        # Specifies how to allocate IP addresses to worker machines. You can also use
+        # [pipeline
+        # options](https://cloud.google.com/dataflow/docs/reference/pipeline-options#security_and_networking)
+        # to specify whether Dataflow workers use external IP addresses.
         module WorkerIPAddressConfiguration
           # The configuration is unknown, or unspecified.
           WORKER_IP_UNSPECIFIED = 0
@@ -580,6 +637,29 @@ module Google
 
           # Shuffle is done on the service side.
           SERVICE_BASED = 2
+        end
+
+        # Specifies the Streaming Engine message processing guarantees. Reduces cost
+        # and latency but might result in duplicate messages written to storage.
+        # Designed to run simple mapping streaming ETL jobs at the lowest cost.
+        # For example, Change Data Capture (CDC) to BigQuery is a canonical use
+        # case. For more information, see
+        # [Set the pipeline streaming
+        # mode](https://cloud.google.com/dataflow/docs/guides/streaming-modes).
+        module StreamingMode
+          # Run in the default mode.
+          STREAMING_MODE_UNSPECIFIED = 0
+
+          # In this mode, message deduplication is performed against persistent state
+          # to make sure each message is processed and committed to storage exactly
+          # once.
+          STREAMING_MODE_EXACTLY_ONCE = 1
+
+          # Message deduplication is not performed. Messages might be processed
+          # multiple times, and the results are applied multiple times.
+          # Note: Setting this value also enables Streaming Engine and
+          # Streaming Engine resource-based billing.
+          STREAMING_MODE_AT_LEAST_ONCE = 2
         end
       end
     end

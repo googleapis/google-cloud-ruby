@@ -33,18 +33,37 @@ module Google
             self.unmarshal_class_method = :decode
             self.service_name = 'google.dataflow.v1beta3.TemplatesService'
 
-            # Creates a Cloud Dataflow job from a template.
+            # Creates a Cloud Dataflow job from a template. Do not enter confidential
+            # information when you supply string values using the API.
+            #
+            # To create a job, we recommend using `projects.locations.templates.create`
+            # with a [regional endpoint]
+            # (https://cloud.google.com/dataflow/docs/concepts/regional-endpoints). Using
+            # `projects.templates.create` is not recommended, because your job will
+            # always start in `us-central1`.
             rpc :CreateJobFromTemplate, ::Google::Cloud::Dataflow::V1beta3::CreateJobFromTemplateRequest, ::Google::Cloud::Dataflow::V1beta3::Job
-            # Launch a template.
+            # Launches a template.
+            #
+            # To launch a template, we recommend using
+            # `projects.locations.templates.launch` with a [regional endpoint]
+            # (https://cloud.google.com/dataflow/docs/concepts/regional-endpoints). Using
+            # `projects.templates.launch` is not recommended, because jobs launched
+            # from the template will always start in `us-central1`.
             rpc :LaunchTemplate, ::Google::Cloud::Dataflow::V1beta3::LaunchTemplateRequest, ::Google::Cloud::Dataflow::V1beta3::LaunchTemplateResponse
             # Get the template associated with a template.
+            #
+            # To get the template, we recommend using `projects.locations.templates.get`
+            # with a [regional endpoint]
+            # (https://cloud.google.com/dataflow/docs/concepts/regional-endpoints). Using
+            # `projects.templates.get` is not recommended, because only
+            # templates that are running in `us-central1` are retrieved.
             rpc :GetTemplate, ::Google::Cloud::Dataflow::V1beta3::GetTemplateRequest, ::Google::Cloud::Dataflow::V1beta3::GetTemplateResponse
           end
 
           Stub = Service.rpc_stub_class
         end
         module FlexTemplatesService
-          # Provides a service for Flex templates. This feature is not ready yet.
+          # Provides a service for Flex templates.
           class Service
 
             include ::GRPC::GenericService
