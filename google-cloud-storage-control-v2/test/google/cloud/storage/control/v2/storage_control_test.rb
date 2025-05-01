@@ -743,6 +743,449 @@ class ::Google::Cloud::Storage::Control::V2::StorageControl::ClientTest < Minite
     end
   end
 
+  def test_create_anywhere_cache
+    # Create GRPC objects.
+    grpc_response = ::Google::Longrunning::Operation.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    anywhere_cache = {}
+    request_id = "hello world"
+
+    create_anywhere_cache_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :create_anywhere_cache, name
+      assert_kind_of ::Google::Cloud::Storage::Control::V2::CreateAnywhereCacheRequest, request
+      assert_equal "hello world", request["parent"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Storage::Control::V2::AnywhereCache), request["anywhere_cache"]
+      assert_equal "hello world", request["request_id"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, create_anywhere_cache_client_stub do
+      # Create client
+      client = ::Google::Cloud::Storage::Control::V2::StorageControl::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.create_anywhere_cache({ parent: parent, anywhere_cache: anywhere_cache, request_id: request_id }) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.create_anywhere_cache parent: parent, anywhere_cache: anywhere_cache, request_id: request_id do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.create_anywhere_cache ::Google::Cloud::Storage::Control::V2::CreateAnywhereCacheRequest.new(parent: parent, anywhere_cache: anywhere_cache, request_id: request_id) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.create_anywhere_cache({ parent: parent, anywhere_cache: anywhere_cache, request_id: request_id }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.create_anywhere_cache(::Google::Cloud::Storage::Control::V2::CreateAnywhereCacheRequest.new(parent: parent, anywhere_cache: anywhere_cache, request_id: request_id), grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, create_anywhere_cache_client_stub.call_rpc_count
+    end
+  end
+
+  def test_update_anywhere_cache
+    # Create GRPC objects.
+    grpc_response = ::Google::Longrunning::Operation.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    anywhere_cache = {}
+    update_mask = {}
+    request_id = "hello world"
+
+    update_anywhere_cache_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :update_anywhere_cache, name
+      assert_kind_of ::Google::Cloud::Storage::Control::V2::UpdateAnywhereCacheRequest, request
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Storage::Control::V2::AnywhereCache), request["anywhere_cache"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request["update_mask"]
+      assert_equal "hello world", request["request_id"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, update_anywhere_cache_client_stub do
+      # Create client
+      client = ::Google::Cloud::Storage::Control::V2::StorageControl::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.update_anywhere_cache({ anywhere_cache: anywhere_cache, update_mask: update_mask, request_id: request_id }) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.update_anywhere_cache anywhere_cache: anywhere_cache, update_mask: update_mask, request_id: request_id do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.update_anywhere_cache ::Google::Cloud::Storage::Control::V2::UpdateAnywhereCacheRequest.new(anywhere_cache: anywhere_cache, update_mask: update_mask, request_id: request_id) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.update_anywhere_cache({ anywhere_cache: anywhere_cache, update_mask: update_mask, request_id: request_id }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.update_anywhere_cache(::Google::Cloud::Storage::Control::V2::UpdateAnywhereCacheRequest.new(anywhere_cache: anywhere_cache, update_mask: update_mask, request_id: request_id), grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, update_anywhere_cache_client_stub.call_rpc_count
+    end
+  end
+
+  def test_disable_anywhere_cache
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::Storage::Control::V2::AnywhereCache.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+    request_id = "hello world"
+
+    disable_anywhere_cache_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :disable_anywhere_cache, name
+      assert_kind_of ::Google::Cloud::Storage::Control::V2::DisableAnywhereCacheRequest, request
+      assert_equal "hello world", request["name"]
+      assert_equal "hello world", request["request_id"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, disable_anywhere_cache_client_stub do
+      # Create client
+      client = ::Google::Cloud::Storage::Control::V2::StorageControl::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.disable_anywhere_cache({ name: name, request_id: request_id }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.disable_anywhere_cache name: name, request_id: request_id do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.disable_anywhere_cache ::Google::Cloud::Storage::Control::V2::DisableAnywhereCacheRequest.new(name: name, request_id: request_id) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.disable_anywhere_cache({ name: name, request_id: request_id }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.disable_anywhere_cache(::Google::Cloud::Storage::Control::V2::DisableAnywhereCacheRequest.new(name: name, request_id: request_id), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, disable_anywhere_cache_client_stub.call_rpc_count
+    end
+  end
+
+  def test_pause_anywhere_cache
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::Storage::Control::V2::AnywhereCache.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+    request_id = "hello world"
+
+    pause_anywhere_cache_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :pause_anywhere_cache, name
+      assert_kind_of ::Google::Cloud::Storage::Control::V2::PauseAnywhereCacheRequest, request
+      assert_equal "hello world", request["name"]
+      assert_equal "hello world", request["request_id"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, pause_anywhere_cache_client_stub do
+      # Create client
+      client = ::Google::Cloud::Storage::Control::V2::StorageControl::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.pause_anywhere_cache({ name: name, request_id: request_id }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.pause_anywhere_cache name: name, request_id: request_id do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.pause_anywhere_cache ::Google::Cloud::Storage::Control::V2::PauseAnywhereCacheRequest.new(name: name, request_id: request_id) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.pause_anywhere_cache({ name: name, request_id: request_id }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.pause_anywhere_cache(::Google::Cloud::Storage::Control::V2::PauseAnywhereCacheRequest.new(name: name, request_id: request_id), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, pause_anywhere_cache_client_stub.call_rpc_count
+    end
+  end
+
+  def test_resume_anywhere_cache
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::Storage::Control::V2::AnywhereCache.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+    request_id = "hello world"
+
+    resume_anywhere_cache_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :resume_anywhere_cache, name
+      assert_kind_of ::Google::Cloud::Storage::Control::V2::ResumeAnywhereCacheRequest, request
+      assert_equal "hello world", request["name"]
+      assert_equal "hello world", request["request_id"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, resume_anywhere_cache_client_stub do
+      # Create client
+      client = ::Google::Cloud::Storage::Control::V2::StorageControl::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.resume_anywhere_cache({ name: name, request_id: request_id }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.resume_anywhere_cache name: name, request_id: request_id do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.resume_anywhere_cache ::Google::Cloud::Storage::Control::V2::ResumeAnywhereCacheRequest.new(name: name, request_id: request_id) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.resume_anywhere_cache({ name: name, request_id: request_id }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.resume_anywhere_cache(::Google::Cloud::Storage::Control::V2::ResumeAnywhereCacheRequest.new(name: name, request_id: request_id), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, resume_anywhere_cache_client_stub.call_rpc_count
+    end
+  end
+
+  def test_get_anywhere_cache
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::Storage::Control::V2::AnywhereCache.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+    request_id = "hello world"
+
+    get_anywhere_cache_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :get_anywhere_cache, name
+      assert_kind_of ::Google::Cloud::Storage::Control::V2::GetAnywhereCacheRequest, request
+      assert_equal "hello world", request["name"]
+      assert_equal "hello world", request["request_id"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, get_anywhere_cache_client_stub do
+      # Create client
+      client = ::Google::Cloud::Storage::Control::V2::StorageControl::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.get_anywhere_cache({ name: name, request_id: request_id }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.get_anywhere_cache name: name, request_id: request_id do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.get_anywhere_cache ::Google::Cloud::Storage::Control::V2::GetAnywhereCacheRequest.new(name: name, request_id: request_id) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.get_anywhere_cache({ name: name, request_id: request_id }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.get_anywhere_cache(::Google::Cloud::Storage::Control::V2::GetAnywhereCacheRequest.new(name: name, request_id: request_id), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, get_anywhere_cache_client_stub.call_rpc_count
+    end
+  end
+
+  def test_list_anywhere_caches
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::Storage::Control::V2::ListAnywhereCachesResponse.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    page_size = 42
+    page_token = "hello world"
+    request_id = "hello world"
+
+    list_anywhere_caches_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :list_anywhere_caches, name
+      assert_kind_of ::Google::Cloud::Storage::Control::V2::ListAnywhereCachesRequest, request
+      assert_equal "hello world", request["parent"]
+      assert_equal 42, request["page_size"]
+      assert_equal "hello world", request["page_token"]
+      assert_equal "hello world", request["request_id"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, list_anywhere_caches_client_stub do
+      # Create client
+      client = ::Google::Cloud::Storage::Control::V2::StorageControl::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.list_anywhere_caches({ parent: parent, page_size: page_size, page_token: page_token, request_id: request_id }) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.list_anywhere_caches parent: parent, page_size: page_size, page_token: page_token, request_id: request_id do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.list_anywhere_caches ::Google::Cloud::Storage::Control::V2::ListAnywhereCachesRequest.new(parent: parent, page_size: page_size, page_token: page_token, request_id: request_id) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.list_anywhere_caches({ parent: parent, page_size: page_size, page_token: page_token, request_id: request_id }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.list_anywhere_caches(::Google::Cloud::Storage::Control::V2::ListAnywhereCachesRequest.new(parent: parent, page_size: page_size, page_token: page_token, request_id: request_id), grpc_options) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, list_anywhere_caches_client_stub.call_rpc_count
+    end
+  end
+
   def test_configure
     grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
 

@@ -26,6 +26,25 @@ module Google
             # Path helper methods for the StorageControl API.
             module Paths
               ##
+              # Create a fully-qualified AnywhereCache resource string.
+              #
+              # The resource will be in the following format:
+              #
+              # `projects/{project}/buckets/{bucket}/anywhereCaches/{anywhere_cache}`
+              #
+              # @param project [String]
+              # @param bucket [String]
+              # @param anywhere_cache [String]
+              #
+              # @return [::String]
+              def anywhere_cache_path project:, bucket:, anywhere_cache:
+                raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+                raise ::ArgumentError, "bucket cannot contain /" if bucket.to_s.include? "/"
+
+                "projects/#{project}/buckets/#{bucket}/anywhereCaches/#{anywhere_cache}"
+              end
+
+              ##
               # Create a fully-qualified Bucket resource string.
               #
               # The resource will be in the following format:

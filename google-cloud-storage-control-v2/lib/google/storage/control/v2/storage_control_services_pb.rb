@@ -61,6 +61,24 @@ module Google
               rpc :GetManagedFolder, ::Google::Cloud::Storage::Control::V2::GetManagedFolderRequest, ::Google::Cloud::Storage::Control::V2::ManagedFolder
               # Retrieves a list of managed folders for a given bucket.
               rpc :ListManagedFolders, ::Google::Cloud::Storage::Control::V2::ListManagedFoldersRequest, ::Google::Cloud::Storage::Control::V2::ListManagedFoldersResponse
+              # Creates an Anywhere Cache instance.
+              rpc :CreateAnywhereCache, ::Google::Cloud::Storage::Control::V2::CreateAnywhereCacheRequest, ::Google::Longrunning::Operation
+              # Updates an Anywhere Cache instance. Mutable fields include `ttl` and
+              # `admission_policy`.
+              rpc :UpdateAnywhereCache, ::Google::Cloud::Storage::Control::V2::UpdateAnywhereCacheRequest, ::Google::Longrunning::Operation
+              # Disables an Anywhere Cache instance. A disabled instance is read-only. The
+              # disablement could be revoked by calling ResumeAnywhereCache. The cache
+              # instance will be deleted automatically if it remains in the disabled state
+              # for at least one hour.
+              rpc :DisableAnywhereCache, ::Google::Cloud::Storage::Control::V2::DisableAnywhereCacheRequest, ::Google::Cloud::Storage::Control::V2::AnywhereCache
+              # Pauses an Anywhere Cache instance.
+              rpc :PauseAnywhereCache, ::Google::Cloud::Storage::Control::V2::PauseAnywhereCacheRequest, ::Google::Cloud::Storage::Control::V2::AnywhereCache
+              # Resumes a disabled or paused Anywhere Cache instance.
+              rpc :ResumeAnywhereCache, ::Google::Cloud::Storage::Control::V2::ResumeAnywhereCacheRequest, ::Google::Cloud::Storage::Control::V2::AnywhereCache
+              # Gets an Anywhere Cache instance.
+              rpc :GetAnywhereCache, ::Google::Cloud::Storage::Control::V2::GetAnywhereCacheRequest, ::Google::Cloud::Storage::Control::V2::AnywhereCache
+              # Lists Anywhere Cache instances for a given bucket.
+              rpc :ListAnywhereCaches, ::Google::Cloud::Storage::Control::V2::ListAnywhereCachesRequest, ::Google::Cloud::Storage::Control::V2::ListAnywhereCachesResponse
             end
 
             Stub = Service.rpc_stub_class

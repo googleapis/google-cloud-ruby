@@ -41,6 +41,18 @@ class ::Google::Cloud::Storage::Control::V2::StorageControl::ClientPathsTest < M
     end
   end
 
+  def test_anywhere_cache_path
+    grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
+      client = ::Google::Cloud::Storage::Control::V2::StorageControl::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      path = client.anywhere_cache_path project: "value0", bucket: "value1", anywhere_cache: "value2"
+      assert_equal "projects/value0/buckets/value1/anywhereCaches/value2", path
+    end
+  end
+
   def test_bucket_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
     ::Gapic::ServiceStub.stub :new, DummyStub.new do

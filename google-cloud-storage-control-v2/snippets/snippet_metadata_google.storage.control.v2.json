@@ -410,6 +410,286 @@
           "type": "FULL"
         }
       ]
+    },
+    {
+      "region_tag": "storage_v2_generated_StorageControl_CreateAnywhereCache_sync",
+      "title": "Snippet for the create_anywhere_cache call in the StorageControl service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Storage::Control::V2::StorageControl::Client#create_anywhere_cache.",
+      "file": "storage_control/create_anywhere_cache.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_anywhere_cache",
+        "full_name": "::Google::Cloud::Storage::Control::V2::StorageControl::Client#create_anywhere_cache",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Storage::Control::V2::CreateAnywhereCacheRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "StorageControl::Client",
+          "full_name": "::Google::Cloud::Storage::Control::V2::StorageControl::Client"
+        },
+        "method": {
+          "short_name": "CreateAnywhereCache",
+          "full_name": "google.storage.control.v2.StorageControl.CreateAnywhereCache",
+          "service": {
+            "short_name": "StorageControl",
+            "full_name": "google.storage.control.v2.StorageControl"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "storage_v2_generated_StorageControl_UpdateAnywhereCache_sync",
+      "title": "Snippet for the update_anywhere_cache call in the StorageControl service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Storage::Control::V2::StorageControl::Client#update_anywhere_cache.",
+      "file": "storage_control/update_anywhere_cache.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_anywhere_cache",
+        "full_name": "::Google::Cloud::Storage::Control::V2::StorageControl::Client#update_anywhere_cache",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Storage::Control::V2::UpdateAnywhereCacheRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "StorageControl::Client",
+          "full_name": "::Google::Cloud::Storage::Control::V2::StorageControl::Client"
+        },
+        "method": {
+          "short_name": "UpdateAnywhereCache",
+          "full_name": "google.storage.control.v2.StorageControl.UpdateAnywhereCache",
+          "service": {
+            "short_name": "StorageControl",
+            "full_name": "google.storage.control.v2.StorageControl"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "storage_v2_generated_StorageControl_DisableAnywhereCache_sync",
+      "title": "Snippet for the disable_anywhere_cache call in the StorageControl service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Storage::Control::V2::StorageControl::Client#disable_anywhere_cache.",
+      "file": "storage_control/disable_anywhere_cache.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "disable_anywhere_cache",
+        "full_name": "::Google::Cloud::Storage::Control::V2::StorageControl::Client#disable_anywhere_cache",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Storage::Control::V2::DisableAnywhereCacheRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Storage::Control::V2::AnywhereCache",
+        "client": {
+          "short_name": "StorageControl::Client",
+          "full_name": "::Google::Cloud::Storage::Control::V2::StorageControl::Client"
+        },
+        "method": {
+          "short_name": "DisableAnywhereCache",
+          "full_name": "google.storage.control.v2.StorageControl.DisableAnywhereCache",
+          "service": {
+            "short_name": "StorageControl",
+            "full_name": "google.storage.control.v2.StorageControl"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "storage_v2_generated_StorageControl_PauseAnywhereCache_sync",
+      "title": "Snippet for the pause_anywhere_cache call in the StorageControl service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Storage::Control::V2::StorageControl::Client#pause_anywhere_cache.",
+      "file": "storage_control/pause_anywhere_cache.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "pause_anywhere_cache",
+        "full_name": "::Google::Cloud::Storage::Control::V2::StorageControl::Client#pause_anywhere_cache",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Storage::Control::V2::PauseAnywhereCacheRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Storage::Control::V2::AnywhereCache",
+        "client": {
+          "short_name": "StorageControl::Client",
+          "full_name": "::Google::Cloud::Storage::Control::V2::StorageControl::Client"
+        },
+        "method": {
+          "short_name": "PauseAnywhereCache",
+          "full_name": "google.storage.control.v2.StorageControl.PauseAnywhereCache",
+          "service": {
+            "short_name": "StorageControl",
+            "full_name": "google.storage.control.v2.StorageControl"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "storage_v2_generated_StorageControl_ResumeAnywhereCache_sync",
+      "title": "Snippet for the resume_anywhere_cache call in the StorageControl service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Storage::Control::V2::StorageControl::Client#resume_anywhere_cache.",
+      "file": "storage_control/resume_anywhere_cache.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "resume_anywhere_cache",
+        "full_name": "::Google::Cloud::Storage::Control::V2::StorageControl::Client#resume_anywhere_cache",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Storage::Control::V2::ResumeAnywhereCacheRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Storage::Control::V2::AnywhereCache",
+        "client": {
+          "short_name": "StorageControl::Client",
+          "full_name": "::Google::Cloud::Storage::Control::V2::StorageControl::Client"
+        },
+        "method": {
+          "short_name": "ResumeAnywhereCache",
+          "full_name": "google.storage.control.v2.StorageControl.ResumeAnywhereCache",
+          "service": {
+            "short_name": "StorageControl",
+            "full_name": "google.storage.control.v2.StorageControl"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "storage_v2_generated_StorageControl_GetAnywhereCache_sync",
+      "title": "Snippet for the get_anywhere_cache call in the StorageControl service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Storage::Control::V2::StorageControl::Client#get_anywhere_cache.",
+      "file": "storage_control/get_anywhere_cache.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_anywhere_cache",
+        "full_name": "::Google::Cloud::Storage::Control::V2::StorageControl::Client#get_anywhere_cache",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Storage::Control::V2::GetAnywhereCacheRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Storage::Control::V2::AnywhereCache",
+        "client": {
+          "short_name": "StorageControl::Client",
+          "full_name": "::Google::Cloud::Storage::Control::V2::StorageControl::Client"
+        },
+        "method": {
+          "short_name": "GetAnywhereCache",
+          "full_name": "google.storage.control.v2.StorageControl.GetAnywhereCache",
+          "service": {
+            "short_name": "StorageControl",
+            "full_name": "google.storage.control.v2.StorageControl"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "storage_v2_generated_StorageControl_ListAnywhereCaches_sync",
+      "title": "Snippet for the list_anywhere_caches call in the StorageControl service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Storage::Control::V2::StorageControl::Client#list_anywhere_caches.",
+      "file": "storage_control/list_anywhere_caches.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_anywhere_caches",
+        "full_name": "::Google::Cloud::Storage::Control::V2::StorageControl::Client#list_anywhere_caches",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Storage::Control::V2::ListAnywhereCachesRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Storage::Control::V2::ListAnywhereCachesResponse",
+        "client": {
+          "short_name": "StorageControl::Client",
+          "full_name": "::Google::Cloud::Storage::Control::V2::StorageControl::Client"
+        },
+        "method": {
+          "short_name": "ListAnywhereCaches",
+          "full_name": "google.storage.control.v2.StorageControl.ListAnywhereCaches",
+          "service": {
+            "short_name": "StorageControl",
+            "full_name": "google.storage.control.v2.StorageControl"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
     }
   ]
 }

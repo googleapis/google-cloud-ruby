@@ -290,7 +290,7 @@ module Google
 
             # Configuration for Custom Dual Regions.  It should specify precisely two
             # eligible regions within the same Multiregion. More information on regions
-            # may be found [https://cloud.google.com/storage/docs/locations][here].
+            # may be found [here](https://cloud.google.com/storage/docs/locations).
             # @!attribute [rw] data_locations
             #   @return [::Array<::String>]
             #     List of locations to use for data placement.
@@ -458,6 +458,241 @@ module Google
           #     The continuation token, used to page through large result sets. Provide
           #     this value in a subsequent request to return the next page of results.
           class ListManagedFoldersResponse
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Message returned in the metadata field of the Operation resource for
+          # CreateAnywhereCache operations.
+          # @!attribute [rw] common_metadata
+          #   @return [::Google::Cloud::Storage::Control::V2::CommonLongRunningOperationMetadata]
+          #     Generic metadata for the long running operation.
+          # @!attribute [rw] anywhere_cache_id
+          #   @return [::String]
+          #     Anywhere Cache ID.
+          # @!attribute [rw] zone
+          #   @return [::String]
+          #     The zone in which the cache instance is running. For example,
+          #     us-central1-a.
+          # @!attribute [rw] ttl
+          #   @return [::Google::Protobuf::Duration]
+          #     Anywhere Cache entry's TTL. A cache-level config that is applied to all new
+          #     cache entries on admission. Default ttl value (24hrs) is applied if not
+          #     specified in the create request.
+          # @!attribute [rw] admission_policy
+          #   @return [::String]
+          #     Anywhere Cache entry Admission Policy in kebab-case (e.g.,
+          #     "admit-on-first-miss"). Default admission policy (admit-on-first-miss) is
+          #     applied if not specified in the create request.
+          class CreateAnywhereCacheMetadata
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Message returned in the metadata field of the Operation resource for
+          # UpdateAnywhereCache operation.
+          # @!attribute [rw] common_metadata
+          #   @return [::Google::Cloud::Storage::Control::V2::CommonLongRunningOperationMetadata]
+          #     Generic metadata for the long running operation.
+          # @!attribute [rw] anywhere_cache_id
+          #   @return [::String]
+          #     Anywhere Cache ID.
+          # @!attribute [rw] zone
+          #   @return [::String]
+          #     The zone in which the cache instance is running. For example,
+          #     us-central1-a.
+          # @!attribute [rw] ttl
+          #   @return [::Google::Protobuf::Duration]
+          #     Anywhere Cache entry's TTL between 1h and 7days. A cache-level config that
+          #     is applied to all new cache entries on admission. If `ttl` is pending
+          #     update, this field equals to the new value specified in the Update request.
+          # @!attribute [rw] admission_policy
+          #   @return [::String]
+          #     L4 Cache entry Admission Policy in kebab-case (e.g.,
+          #     "admit-on-first-miss"). If `admission_policy` is pending
+          #     update, this field equals to the new value specified in the Update request.
+          class UpdateAnywhereCacheMetadata
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # An Anywhere Cache Instance.
+          # @!attribute [rw] name
+          #   @return [::String]
+          #     Immutable. The resource name of this AnywhereCache.
+          #     Format:
+          #     `projects/{project}/buckets/{bucket}/anywhereCaches/{anywhere_cache}`
+          # @!attribute [rw] zone
+          #   @return [::String]
+          #     Immutable. The zone in which the cache instance is running. For example,
+          #     us-central1-a.
+          # @!attribute [rw] ttl
+          #   @return [::Google::Protobuf::Duration]
+          #     Cache entry TTL (ranges between 1h to 7d). This is a cache-level config
+          #     that defines how long a cache entry can live. Default ttl value (24hrs)
+          #     is applied if not specified in the create request. TTL must be in whole
+          #     seconds.
+          # @!attribute [rw] admission_policy
+          #   @return [::String]
+          #     Cache admission policy. Valid policies includes:
+          #     `admit-on-first-miss` and `admit-on-second-miss`. Defaults to
+          #     `admit-on-first-miss`. Default value is applied if not specified in the
+          #     create request.
+          # @!attribute [r] state
+          #   @return [::String]
+          #     Output only. Cache state including RUNNING, CREATING, DISABLED and PAUSED.
+          # @!attribute [r] create_time
+          #   @return [::Google::Protobuf::Timestamp]
+          #     Output only. Time when Anywhere cache instance is allocated.
+          # @!attribute [r] update_time
+          #   @return [::Google::Protobuf::Timestamp]
+          #     Output only. Time when Anywhere cache instance is last updated, including
+          #     creation.
+          # @!attribute [r] pending_update
+          #   @return [::Boolean]
+          #     Output only. True if there is an active update operation against this cache
+          #     instance. Subsequential update requests will be rejected if this field is
+          #     true. Output only.
+          class AnywhereCache
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Request message for CreateAnywhereCache.
+          # @!attribute [rw] parent
+          #   @return [::String]
+          #     Required. The bucket to which this cache belongs.
+          #     Format: `projects/{project}/buckets/{bucket}`
+          # @!attribute [rw] anywhere_cache
+          #   @return [::Google::Cloud::Storage::Control::V2::AnywhereCache]
+          #     Required. Properties of the Anywhere Cache instance being created.
+          #     The parent bucket name is specified in the `parent` field. Server uses the
+          #     default value of `ttl` or `admission_policy` if not specified in
+          #     request.
+          # @!attribute [rw] request_id
+          #   @return [::String]
+          #     Optional. A unique identifier for this request. UUID is the recommended
+          #     format, but other formats are still accepted. This request is only
+          #     idempotent if a `request_id` is provided.
+          class CreateAnywhereCacheRequest
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Request message for UpdateAnywhereCache.
+          # @!attribute [rw] anywhere_cache
+          #   @return [::Google::Cloud::Storage::Control::V2::AnywhereCache]
+          #     Required. The Anywhere Cache instance to be updated.
+          # @!attribute [rw] update_mask
+          #   @return [::Google::Protobuf::FieldMask]
+          #     Required. List of fields to be updated. Mutable fields of AnywhereCache
+          #     include `ttl` and `admission_policy`.
+          #
+          #     To specify ALL fields, specify a single field with the value `*`. Note: We
+          #     recommend against doing this. If a new field is introduced at a later time,
+          #     an older client updating with the `*` may accidentally reset the new
+          #     field's value.
+          #
+          #     Not specifying any fields is an error.
+          # @!attribute [rw] request_id
+          #   @return [::String]
+          #     Optional. A unique identifier for this request. UUID is the recommended
+          #     format, but other formats are still accepted. This request is only
+          #     idempotent if a `request_id` is provided.
+          class UpdateAnywhereCacheRequest
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Request message for DisableAnywhereCache.
+          # @!attribute [rw] name
+          #   @return [::String]
+          #     Required. The name field in the request should be:
+          #     `projects/{project}/buckets/{bucket}/anywhereCaches/{anywhere_cache}`
+          # @!attribute [rw] request_id
+          #   @return [::String]
+          #     Optional. A unique identifier for this request. UUID is the recommended
+          #     format, but other formats are still accepted. This request is only
+          #     idempotent if a `request_id` is provided.
+          class DisableAnywhereCacheRequest
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Request message for PauseAnywhereCache.
+          # @!attribute [rw] name
+          #   @return [::String]
+          #     Required. The name field in the request should be:
+          #     `projects/{project}/buckets/{bucket}/anywhereCaches/{anywhere_cache}`
+          # @!attribute [rw] request_id
+          #   @return [::String]
+          #     Optional. A unique identifier for this request. UUID is the recommended
+          #     format, but other formats are still accepted. This request is only
+          #     idempotent if a `request_id` is provided.
+          class PauseAnywhereCacheRequest
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Request message for ResumeAnywhereCache.
+          # @!attribute [rw] name
+          #   @return [::String]
+          #     Required. The name field in the request should be:
+          #     `projects/{project}/buckets/{bucket}/anywhereCaches/{anywhere_cache}`
+          # @!attribute [rw] request_id
+          #   @return [::String]
+          #     Optional. A unique identifier for this request. UUID is the recommended
+          #     format, but other formats are still accepted. This request is only
+          #     idempotent if a `request_id` is provided.
+          class ResumeAnywhereCacheRequest
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Request message for GetAnywhereCache.
+          # @!attribute [rw] name
+          #   @return [::String]
+          #     Required. The name field in the request should be:
+          #     `projects/{project}/buckets/{bucket}/anywhereCaches/{anywhere_cache}`
+          # @!attribute [rw] request_id
+          #   @return [::String]
+          #     Optional. A unique identifier for this request. UUID is the recommended
+          #     format, but other formats are still accepted.
+          class GetAnywhereCacheRequest
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Request message for ListAnywhereCaches.
+          # @!attribute [rw] parent
+          #   @return [::String]
+          #     Required. The bucket to which this cache belongs.
+          # @!attribute [rw] page_size
+          #   @return [::Integer]
+          #     Maximum number of caches to return in a single response.
+          #     The service will use this parameter or 1,000 items, whichever is smaller.
+          # @!attribute [rw] page_token
+          #   @return [::String]
+          #     A previously-returned page token representing part of the larger set of
+          #     results to view.
+          # @!attribute [rw] request_id
+          #   @return [::String]
+          #     Optional. A unique identifier for this request. UUID is the recommended
+          #     format, but other formats are still accepted.
+          class ListAnywhereCachesRequest
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Response message for ListAnywhereCaches.
+          # @!attribute [rw] anywhere_caches
+          #   @return [::Array<::Google::Cloud::Storage::Control::V2::AnywhereCache>]
+          #     The list of items.
+          # @!attribute [rw] next_page_token
+          #   @return [::String]
+          #     A token, which can be sent as `page_token` to retrieve the next page.
+          #     If this field is omitted, there are no subsequent pages.
+          class ListAnywhereCachesResponse
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
