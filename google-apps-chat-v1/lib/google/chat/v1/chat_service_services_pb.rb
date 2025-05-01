@@ -462,6 +462,58 @@ module Google
             # Requires [user
             # authentication](https://developers.google.com/workspace/chat/authenticate-authorize-chat-user).
             rpc :DeleteReaction, ::Google::Apps::Chat::V1::DeleteReactionRequest, ::Google::Protobuf::Empty
+            # Creates a custom emoji.
+            #
+            # Custom emojis are only available for Google Workspace accounts, and the
+            # administrator must turn custom emojis on for the organization. For more
+            # information, see [Learn about custom emojis in Google
+            # Chat](https://support.google.com/chat/answer/12800149) and
+            # [Manage custom emoji
+            # permissions](https://support.google.com/a/answer/12850085).
+            #
+            # Requires [user
+            # authentication](https://developers.google.com/workspace/chat/authenticate-authorize-chat-user).
+            rpc :CreateCustomEmoji, ::Google::Apps::Chat::V1::CreateCustomEmojiRequest, ::Google::Apps::Chat::V1::CustomEmoji
+            # Returns details about a custom emoji.
+            #
+            # Custom emojis are only available for Google Workspace accounts, and the
+            # administrator must turn custom emojis on for the organization. For more
+            # information, see [Learn about custom emojis in Google
+            # Chat](https://support.google.com/chat/answer/12800149) and
+            # [Manage custom emoji
+            # permissions](https://support.google.com/a/answer/12850085).
+            #
+            # Requires [user
+            # authentication](https://developers.google.com/workspace/chat/authenticate-authorize-chat-user).
+            rpc :GetCustomEmoji, ::Google::Apps::Chat::V1::GetCustomEmojiRequest, ::Google::Apps::Chat::V1::CustomEmoji
+            # Lists custom emojis visible to the authenticated user.
+            #
+            # Custom emojis are only available for Google Workspace accounts, and the
+            # administrator must turn custom emojis on for the organization. For more
+            # information, see [Learn about custom emojis in Google
+            # Chat](https://support.google.com/chat/answer/12800149) and
+            # [Manage custom emoji
+            # permissions](https://support.google.com/a/answer/12850085).
+            #
+            # Requires [user
+            # authentication](https://developers.google.com/workspace/chat/authenticate-authorize-chat-user).
+            rpc :ListCustomEmojis, ::Google::Apps::Chat::V1::ListCustomEmojisRequest, ::Google::Apps::Chat::V1::ListCustomEmojisResponse
+            # Deletes a custom emoji. By default, users can only delete custom emoji they
+            # created. [Emoji managers](https://support.google.com/a/answer/12850085)
+            # assigned by the administrator can delete any custom emoji in the
+            # organization. See [Learn about custom emojis in Google
+            # Chat](https://support.google.com/chat/answer/12800149).
+            #
+            # Custom emojis are only available for Google Workspace accounts, and the
+            # administrator must turn custom emojis on for the organization. For more
+            # information, see [Learn about custom emojis in Google
+            # Chat](https://support.google.com/chat/answer/12800149) and
+            # [Manage custom emoji
+            # permissions](https://support.google.com/a/answer/12850085).
+            #
+            # Requires [user
+            # authentication](https://developers.google.com/workspace/chat/authenticate-authorize-chat-user).
+            rpc :DeleteCustomEmoji, ::Google::Apps::Chat::V1::DeleteCustomEmojiRequest, ::Google::Protobuf::Empty
             # Returns details about a user's read state within a space, used to identify
             # read and unread messages. For an example, see [Get details about a user's
             # space read
