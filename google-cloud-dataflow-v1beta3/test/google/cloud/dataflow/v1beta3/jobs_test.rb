@@ -206,6 +206,7 @@ class ::Google::Cloud::Dataflow::V1beta3::Jobs::ClientTest < Minitest::Test
     job_id = "hello world"
     job = {}
     location = "hello world"
+    update_mask = {}
 
     update_job_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :update_job, name
@@ -214,6 +215,8 @@ class ::Google::Cloud::Dataflow::V1beta3::Jobs::ClientTest < Minitest::Test
       assert_equal "hello world", request["job_id"]
       assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Dataflow::V1beta3::Job), request["job"]
       assert_equal "hello world", request["location"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request["update_mask"]
+      assert request.has_update_mask?
       refute_nil options
     end
 
@@ -224,31 +227,31 @@ class ::Google::Cloud::Dataflow::V1beta3::Jobs::ClientTest < Minitest::Test
       end
 
       # Use hash object
-      client.update_job({ project_id: project_id, job_id: job_id, job: job, location: location }) do |response, operation|
+      client.update_job({ project_id: project_id, job_id: job_id, job: job, location: location, update_mask: update_mask }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.update_job project_id: project_id, job_id: job_id, job: job, location: location do |response, operation|
+      client.update_job project_id: project_id, job_id: job_id, job: job, location: location, update_mask: update_mask do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.update_job ::Google::Cloud::Dataflow::V1beta3::UpdateJobRequest.new(project_id: project_id, job_id: job_id, job: job, location: location) do |response, operation|
+      client.update_job ::Google::Cloud::Dataflow::V1beta3::UpdateJobRequest.new(project_id: project_id, job_id: job_id, job: job, location: location, update_mask: update_mask) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.update_job({ project_id: project_id, job_id: job_id, job: job, location: location }, grpc_options) do |response, operation|
+      client.update_job({ project_id: project_id, job_id: job_id, job: job, location: location, update_mask: update_mask }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.update_job(::Google::Cloud::Dataflow::V1beta3::UpdateJobRequest.new(project_id: project_id, job_id: job_id, job: job, location: location), grpc_options) do |response, operation|
+      client.update_job(::Google::Cloud::Dataflow::V1beta3::UpdateJobRequest.new(project_id: project_id, job_id: job_id, job: job, location: location, update_mask: update_mask), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -272,6 +275,7 @@ class ::Google::Cloud::Dataflow::V1beta3::Jobs::ClientTest < Minitest::Test
     page_size = 42
     page_token = "hello world"
     location = "hello world"
+    name = "hello world"
 
     list_jobs_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :list_jobs, name
@@ -282,6 +286,8 @@ class ::Google::Cloud::Dataflow::V1beta3::Jobs::ClientTest < Minitest::Test
       assert_equal 42, request["page_size"]
       assert_equal "hello world", request["page_token"]
       assert_equal "hello world", request["location"]
+      assert_equal "hello world", request["name"]
+      assert request.has_name?
       refute_nil options
     end
 
@@ -292,35 +298,35 @@ class ::Google::Cloud::Dataflow::V1beta3::Jobs::ClientTest < Minitest::Test
       end
 
       # Use hash object
-      client.list_jobs({ filter: filter, project_id: project_id, view: view, page_size: page_size, page_token: page_token, location: location }) do |response, operation|
+      client.list_jobs({ filter: filter, project_id: project_id, view: view, page_size: page_size, page_token: page_token, location: location, name: name }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_jobs filter: filter, project_id: project_id, view: view, page_size: page_size, page_token: page_token, location: location do |response, operation|
+      client.list_jobs filter: filter, project_id: project_id, view: view, page_size: page_size, page_token: page_token, location: location, name: name do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_jobs ::Google::Cloud::Dataflow::V1beta3::ListJobsRequest.new(filter: filter, project_id: project_id, view: view, page_size: page_size, page_token: page_token, location: location) do |response, operation|
+      client.list_jobs ::Google::Cloud::Dataflow::V1beta3::ListJobsRequest.new(filter: filter, project_id: project_id, view: view, page_size: page_size, page_token: page_token, location: location, name: name) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_jobs({ filter: filter, project_id: project_id, view: view, page_size: page_size, page_token: page_token, location: location }, grpc_options) do |response, operation|
+      client.list_jobs({ filter: filter, project_id: project_id, view: view, page_size: page_size, page_token: page_token, location: location, name: name }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_jobs(::Google::Cloud::Dataflow::V1beta3::ListJobsRequest.new(filter: filter, project_id: project_id, view: view, page_size: page_size, page_token: page_token, location: location), grpc_options) do |response, operation|
+      client.list_jobs(::Google::Cloud::Dataflow::V1beta3::ListJobsRequest.new(filter: filter, project_id: project_id, view: view, page_size: page_size, page_token: page_token, location: location, name: name), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -345,6 +351,7 @@ class ::Google::Cloud::Dataflow::V1beta3::Jobs::ClientTest < Minitest::Test
     page_size = 42
     page_token = "hello world"
     location = "hello world"
+    name = "hello world"
 
     aggregated_list_jobs_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :aggregated_list_jobs, name
@@ -355,6 +362,8 @@ class ::Google::Cloud::Dataflow::V1beta3::Jobs::ClientTest < Minitest::Test
       assert_equal 42, request["page_size"]
       assert_equal "hello world", request["page_token"]
       assert_equal "hello world", request["location"]
+      assert_equal "hello world", request["name"]
+      assert request.has_name?
       refute_nil options
     end
 
@@ -365,35 +374,35 @@ class ::Google::Cloud::Dataflow::V1beta3::Jobs::ClientTest < Minitest::Test
       end
 
       # Use hash object
-      client.aggregated_list_jobs({ filter: filter, project_id: project_id, view: view, page_size: page_size, page_token: page_token, location: location }) do |response, operation|
+      client.aggregated_list_jobs({ filter: filter, project_id: project_id, view: view, page_size: page_size, page_token: page_token, location: location, name: name }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.aggregated_list_jobs filter: filter, project_id: project_id, view: view, page_size: page_size, page_token: page_token, location: location do |response, operation|
+      client.aggregated_list_jobs filter: filter, project_id: project_id, view: view, page_size: page_size, page_token: page_token, location: location, name: name do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.aggregated_list_jobs ::Google::Cloud::Dataflow::V1beta3::ListJobsRequest.new(filter: filter, project_id: project_id, view: view, page_size: page_size, page_token: page_token, location: location) do |response, operation|
+      client.aggregated_list_jobs ::Google::Cloud::Dataflow::V1beta3::ListJobsRequest.new(filter: filter, project_id: project_id, view: view, page_size: page_size, page_token: page_token, location: location, name: name) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.aggregated_list_jobs({ filter: filter, project_id: project_id, view: view, page_size: page_size, page_token: page_token, location: location }, grpc_options) do |response, operation|
+      client.aggregated_list_jobs({ filter: filter, project_id: project_id, view: view, page_size: page_size, page_token: page_token, location: location, name: name }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.aggregated_list_jobs(::Google::Cloud::Dataflow::V1beta3::ListJobsRequest.new(filter: filter, project_id: project_id, view: view, page_size: page_size, page_token: page_token, location: location), grpc_options) do |response, operation|
+      client.aggregated_list_jobs(::Google::Cloud::Dataflow::V1beta3::ListJobsRequest.new(filter: filter, project_id: project_id, view: view, page_size: page_size, page_token: page_token, location: location, name: name), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
