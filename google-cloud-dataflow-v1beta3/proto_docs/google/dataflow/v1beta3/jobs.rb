@@ -21,33 +21,36 @@ module Google
   module Cloud
     module Dataflow
       module V1beta3
-        # Defines a job to be run by the Cloud Dataflow service.
+        # Defines a job to be run by the Cloud Dataflow service. Do not enter
+        # confidential information when you supply string values using the API.
         # @!attribute [rw] id
         #   @return [::String]
         #     The unique ID of this job.
         #
-        #     This field is set by the Cloud Dataflow service when the Job is
+        #     This field is set by the Dataflow service when the job is
         #     created, and is immutable for the life of the job.
         # @!attribute [rw] project_id
         #   @return [::String]
-        #     The ID of the Cloud Platform project that the job belongs to.
+        #     The ID of the Google Cloud project that the job belongs to.
         # @!attribute [rw] name
         #   @return [::String]
-        #     The user-specified Cloud Dataflow job name.
+        #     Optional. The user-specified Dataflow job name.
         #
-        #     Only one Job with a given name may exist in a project at any
-        #     given time. If a caller attempts to create a Job with the same
-        #     name as an already-existing Job, the attempt returns the
-        #     existing Job.
+        #     Only one active job with a given name can exist in a project within one
+        #     region at
+        #     any given time. Jobs in different regions can have the same name.
+        #     If a caller attempts to create a job with the same
+        #     name as an active job that already exists, the attempt returns the
+        #     existing job.
         #
         #     The name must match the regular expression
         #     `[a-z]([-a-z0-9]{0,1022}[a-z0-9])?`
         # @!attribute [rw] type
         #   @return [::Google::Cloud::Dataflow::V1beta3::JobType]
-        #     The type of Cloud Dataflow job.
+        #     Optional. The type of Dataflow job.
         # @!attribute [rw] environment
         #   @return [::Google::Cloud::Dataflow::V1beta3::Environment]
-        #     The environment for the job.
+        #     Optional. The environment for the job.
         # @!attribute [rw] steps
         #   @return [::Array<::Google::Cloud::Dataflow::V1beta3::Step>]
         #     Exactly one of step or steps_location should be specified.
@@ -68,20 +71,23 @@ module Google
         #     terminal state. After a job has reached a terminal state, no
         #     further state updates may be made.
         #
-        #     This field may be mutated by the Cloud Dataflow service;
+        #     This field might be mutated by the Dataflow service;
         #     callers cannot mutate it.
         # @!attribute [rw] current_state_time
         #   @return [::Google::Protobuf::Timestamp]
         #     The timestamp associated with the current state.
         # @!attribute [rw] requested_state
         #   @return [::Google::Cloud::Dataflow::V1beta3::JobState]
-        #     The job's requested state.
+        #     The job's requested state. Applies to `UpdateJob` requests.
         #
-        #     `UpdateJob` may be used to switch between the `JOB_STATE_STOPPED` and
-        #     `JOB_STATE_RUNNING` states, by setting requested_state.  `UpdateJob` may
-        #     also be used to directly set a job's requested state to
-        #     `JOB_STATE_CANCELLED` or `JOB_STATE_DONE`, irrevocably terminating the
-        #     job if it has not already reached a terminal state.
+        #     Set `requested_state` with `UpdateJob` requests to switch between the
+        #     states `JOB_STATE_STOPPED` and `JOB_STATE_RUNNING`. You can also use
+        #     `UpdateJob` requests to change a job's
+        #     state from `JOB_STATE_RUNNING` to `JOB_STATE_CANCELLED`,
+        #     `JOB_STATE_DONE`,  or `JOB_STATE_DRAINED`. These states irrevocably
+        #     terminate the job if it hasn't already reached a terminal state.
+        #
+        #     This field has no effect on `CreateJob` requests.
         # @!attribute [rw] execution_info
         #   @return [::Google::Cloud::Dataflow::V1beta3::JobExecutionInfo]
         #     Deprecated.
@@ -99,8 +105,8 @@ module Google
         #     transferred to this job.
         # @!attribute [rw] transform_name_mapping
         #   @return [::Google::Protobuf::Map{::String => ::String}]
-        #     The map of transform name prefixes of the job to be replaced to the
-        #     corresponding name prefixes of the new job.
+        #     Optional. The map of transform name prefixes of the job to be replaced to
+        #     the corresponding name prefixes of the new job.
         # @!attribute [rw] client_request_id
         #   @return [::String]
         #     The client's unique identifier of the job, re-used across retried attempts.
@@ -141,7 +147,7 @@ module Google
         #     size.
         # @!attribute [rw] location
         #   @return [::String]
-        #     The [regional endpoint]
+        #     Optional. The [regional endpoint]
         #     (https://cloud.google.com/dataflow/docs/concepts/regional-endpoints) that
         #     contains this job.
         # @!attribute [rw] pipeline_description
@@ -175,6 +181,18 @@ module Google
         #   @return [::Boolean]
         #     Reserved for future use. This field is set only in responses from the
         #     server; it is ignored if it is set in any requests.
+        # @!attribute [rw] runtime_updatable_params
+        #   @return [::Google::Cloud::Dataflow::V1beta3::RuntimeUpdatableParams]
+        #     This field may ONLY be modified at runtime using the projects.jobs.update
+        #     method to adjust job behavior. This field has no effect when specified at
+        #     job creation.
+        # @!attribute [r] satisfies_pzi
+        #   @return [::Boolean]
+        #     Output only. Reserved for future use. This field is set only in responses
+        #     from the server; it is ignored if it is set in any requests.
+        # @!attribute [r] service_resources
+        #   @return [::Google::Cloud::Dataflow::V1beta3::ServiceResources]
+        #     Output only. Resources used by the Dataflow Service to run the job.
         class Job
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -196,6 +214,40 @@ module Google
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
+        end
+
+        # Resources used by the Dataflow Service to run the job.
+        # @!attribute [r] zones
+        #   @return [::Array<::String>]
+        #     Output only. List of Cloud Zones being used by the Dataflow Service for
+        #     this job. Example: us-central1-c
+        class ServiceResources
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Additional job parameters that can only be updated during runtime using the
+        # projects.jobs.update method. These fields have no effect when specified
+        # during job creation.
+        # @!attribute [rw] max_num_workers
+        #   @return [::Integer]
+        #     The maximum number of workers to cap autoscaling at. This field is
+        #     currently only supported for Streaming Engine jobs.
+        # @!attribute [rw] min_num_workers
+        #   @return [::Integer]
+        #     The minimum number of workers to scale down to. This field is currently
+        #     only supported for Streaming Engine jobs.
+        # @!attribute [rw] worker_utilization_hint
+        #   @return [::Float]
+        #     Target worker utilization, compared against the aggregate utilization of
+        #     the worker pool by autoscaler, to determine upscaling and downscaling when
+        #     absent other constraints such as backlog.
+        #     For more information, see
+        #     [Update an existing
+        #     pipeline](https://cloud.google.com/dataflow/docs/guides/updating-a-pipeline).
+        class RuntimeUpdatableParams
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # Metadata for a Datastore connector used by the job.
@@ -289,6 +341,9 @@ module Google
         # @!attribute [rw] sdk_support_status
         #   @return [::Google::Cloud::Dataflow::V1beta3::SdkVersion::SdkSupportStatus]
         #     The support status for this SDK version.
+        # @!attribute [r] bugs
+        #   @return [::Array<::Google::Cloud::Dataflow::V1beta3::SdkBug>]
+        #     Output only. Known bugs found in this SDK version.
         class SdkVersion
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -310,6 +365,56 @@ module Google
 
             # Support for this SDK version has ended and it should no longer be used.
             UNSUPPORTED = 4
+          end
+        end
+
+        # A bug found in the Dataflow SDK.
+        # @!attribute [r] type
+        #   @return [::Google::Cloud::Dataflow::V1beta3::SdkBug::Type]
+        #     Output only. Describes the impact of this SDK bug.
+        # @!attribute [r] severity
+        #   @return [::Google::Cloud::Dataflow::V1beta3::SdkBug::Severity]
+        #     Output only. How severe the SDK bug is.
+        # @!attribute [r] uri
+        #   @return [::String]
+        #     Output only. Link to more information on the bug.
+        class SdkBug
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Nature of the issue, ordered from least severe to most. Other bug types may
+          # be added to this list in the future.
+          module Type
+            # Unknown issue with this SDK.
+            TYPE_UNSPECIFIED = 0
+
+            # Catch-all for SDK bugs that don't fit in the below categories.
+            GENERAL = 1
+
+            # Using this version of the SDK may result in degraded performance.
+            PERFORMANCE = 2
+
+            # Using this version of the SDK may cause data loss.
+            DATALOSS = 3
+          end
+
+          # Indicates the severity of the bug. Other severities may be added to this
+          # list in the future.
+          module Severity
+            # A bug of unknown severity.
+            SEVERITY_UNSPECIFIED = 0
+
+            # A minor bug that that may reduce reliability or performance for some
+            # jobs. Impact will be minimal or non-existent for most jobs.
+            NOTICE = 1
+
+            # A bug that has some likelihood of causing performance degradation, data
+            # loss, or job failures.
+            WARNING = 2
+
+            # A bug with extremely significant impact. Jobs may fail erroneously,
+            # performance may be severely degraded, and data loss may be very likely.
+            SEVERE = 3
           end
         end
 
@@ -336,9 +441,21 @@ module Google
         # @!attribute [rw] datastore_details
         #   @return [::Array<::Google::Cloud::Dataflow::V1beta3::DatastoreIODetails>]
         #     Identification of a Datastore source used in the Dataflow job.
+        # @!attribute [rw] user_display_properties
+        #   @return [::Google::Protobuf::Map{::String => ::String}]
+        #     List of display properties to help UI filter jobs.
         class JobMetadata
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # @!attribute [rw] key
+          #   @return [::String]
+          # @!attribute [rw] value
+          #   @return [::String]
+          class UserDisplayPropertiesEntry
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
         end
 
         # A message describing the state of a particular execution stage.
@@ -368,6 +485,9 @@ module Google
         # @!attribute [rw] display_data
         #   @return [::Array<::Google::Cloud::Dataflow::V1beta3::DisplayData>]
         #     Pipeline level display data.
+        # @!attribute [rw] step_names_hash
+        #   @return [::String]
+        #     A hash value of the submitted pipeline portable graph step names if exists.
         class PipelineDescription
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -553,6 +673,8 @@ module Google
         # specific operation as part of the overall job.  Data is typically
         # passed from one step to another as part of the job.
         #
+        # **Note:** The properties of this object are not stable and might change.
+        #
         # Here's an example of a sequence of steps which together implement a
         # Map-Reduce job:
         #
@@ -609,7 +731,8 @@ module Google
         end
 
         # Contains information about how a particular
-        # {::Google::Cloud::Dataflow::V1beta3::Step google.dataflow.v1beta3.Step} will be executed.
+        # {::Google::Cloud::Dataflow::V1beta3::Step google.dataflow.v1beta3.Step} will be
+        # executed.
         # @!attribute [rw] step_name
         #   @return [::Array<::String>]
         #     The steps associated with the execution stage.
@@ -679,6 +802,14 @@ module Google
         #     The [regional endpoint]
         #     (https://cloud.google.com/dataflow/docs/concepts/regional-endpoints) that
         #     contains this job.
+        # @!attribute [rw] update_mask
+        #   @return [::Google::Protobuf::FieldMask]
+        #     The list of fields to update relative to Job. If empty, only
+        #     RequestedJobState will be considered for update. If the FieldMask is not
+        #     empty and RequestedJobState is none/empty, The fields specified in the
+        #     update mask will be the only ones considered for update. If both
+        #     RequestedJobState and update_mask are specified, an error will be returned
+        #     as we cannot update both state and mask.
         class UpdateJobRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -710,6 +841,9 @@ module Google
         #     The [regional endpoint]
         #     (https://cloud.google.com/dataflow/docs/concepts/regional-endpoints) that
         #     contains this job.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Optional. The job name.
         class ListJobsRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -842,7 +976,8 @@ module Google
           SHUFFLE_KIND = 8
         end
 
-        # Describes the overall state of a {::Google::Cloud::Dataflow::V1beta3::Job google.dataflow.v1beta3.Job}.
+        # Describes the overall state of a
+        # {::Google::Cloud::Dataflow::V1beta3::Job google.dataflow.v1beta3.Job}.
         module JobState
           # The job's run state isn't specified.
           JOB_STATE_UNKNOWN = 0
@@ -928,7 +1063,12 @@ module Google
           # and Cloud SDK version details.
           JOB_VIEW_SUMMARY = 1
 
-          # Request all information available for this job.
+          # Request all information available for this job. When the job is in
+          # `JOB_STATE_PENDING`, the job has been created but is not yet running, and
+          # not all job information is available. For complete
+          # job information, wait until the job in is `JOB_STATE_RUNNING`. For more
+          # information, see
+          # [JobState](https://cloud.google.com/dataflow/docs/reference/rest/v1b3/projects.jobs#jobstate).
           JOB_VIEW_ALL = 2
 
           # Request summary info and limited job description data for steps, labels and

@@ -186,6 +186,9 @@ module Google
               # `projects.jobs.create` is not recommended, as your job will always start
               # in `us-central1`.
               #
+              # Do not enter confidential information when you supply string values using
+              # the API.
+              #
               # @overload create_job(request, options = nil)
               #   Pass arguments to `create_job` via a request object, either of type
               #   {::Google::Cloud::Dataflow::V1beta3::CreateJobRequest} or an equivalent Hash.
@@ -382,7 +385,7 @@ module Google
               #   @param options [::Gapic::CallOptions, ::Hash]
               #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
               #
-              # @overload update_job(project_id: nil, job_id: nil, job: nil, location: nil)
+              # @overload update_job(project_id: nil, job_id: nil, job: nil, location: nil, update_mask: nil)
               #   Pass arguments to `update_job` via keyword arguments. Note that at
               #   least one keyword argument is required. To specify no parameters, or to keep all
               #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -398,6 +401,13 @@ module Google
               #     The [regional endpoint]
               #     (https://cloud.google.com/dataflow/docs/concepts/regional-endpoints) that
               #     contains this job.
+              #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
+              #     The list of fields to update relative to Job. If empty, only
+              #     RequestedJobState will be considered for update. If the FieldMask is not
+              #     empty and RequestedJobState is none/empty, The fields specified in the
+              #     update mask will be the only ones considered for update. If both
+              #     RequestedJobState and update_mask are specified, an error will be returned
+              #     as we cannot update both state and mask.
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Google::Cloud::Dataflow::V1beta3::Job]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
@@ -463,8 +473,12 @@ module Google
               # `projects.locations.jobs.list` with a [regional endpoint]
               # (https://cloud.google.com/dataflow/docs/concepts/regional-endpoints). To
               # list the all jobs across all regions, use `projects.jobs.aggregated`. Using
-              # `projects.jobs.list` is not recommended, as you can only get the list of
-              # jobs that are running in `us-central1`.
+              # `projects.jobs.list` is not recommended, because you can only get the list
+              # of jobs that are running in `us-central1`.
+              #
+              # `projects.locations.jobs.list` and `projects.jobs.list` support filtering
+              # the list of jobs by name. Filtering by name isn't supported by
+              # `projects.jobs.aggregated`.
               #
               # @overload list_jobs(request, options = nil)
               #   Pass arguments to `list_jobs` via a request object, either of type
@@ -476,7 +490,7 @@ module Google
               #   @param options [::Gapic::CallOptions, ::Hash]
               #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
               #
-              # @overload list_jobs(filter: nil, project_id: nil, view: nil, page_size: nil, page_token: nil, location: nil)
+              # @overload list_jobs(filter: nil, project_id: nil, view: nil, page_size: nil, page_token: nil, location: nil, name: nil)
               #   Pass arguments to `list_jobs` via keyword arguments. Note that at
               #   least one keyword argument is required. To specify no parameters, or to keep all
               #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -499,6 +513,8 @@ module Google
               #     The [regional endpoint]
               #     (https://cloud.google.com/dataflow/docs/concepts/regional-endpoints) that
               #     contains this job.
+              #   @param name [::String]
+              #     Optional. The job name.
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Dataflow::V1beta3::Job>]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
@@ -566,6 +582,9 @@ module Google
               ##
               # List the jobs of a project across all regions.
               #
+              # **Note:** This method doesn't support filtering the list of
+              # jobs by name.
+              #
               # @overload aggregated_list_jobs(request, options = nil)
               #   Pass arguments to `aggregated_list_jobs` via a request object, either of type
               #   {::Google::Cloud::Dataflow::V1beta3::ListJobsRequest} or an equivalent Hash.
@@ -576,7 +595,7 @@ module Google
               #   @param options [::Gapic::CallOptions, ::Hash]
               #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
               #
-              # @overload aggregated_list_jobs(filter: nil, project_id: nil, view: nil, page_size: nil, page_token: nil, location: nil)
+              # @overload aggregated_list_jobs(filter: nil, project_id: nil, view: nil, page_size: nil, page_token: nil, location: nil, name: nil)
               #   Pass arguments to `aggregated_list_jobs` via keyword arguments. Note that at
               #   least one keyword argument is required. To specify no parameters, or to keep all
               #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -599,6 +618,8 @@ module Google
               #     The [regional endpoint]
               #     (https://cloud.google.com/dataflow/docs/concepts/regional-endpoints) that
               #     contains this job.
+              #   @param name [::String]
+              #     Optional. The job name.
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Dataflow::V1beta3::Job>]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]

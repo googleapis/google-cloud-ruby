@@ -27,7 +27,7 @@ module Google
           ##
           # Client for the FlexTemplatesService service.
           #
-          # Provides a service for Flex templates. This feature is not ready yet.
+          # Provides a service for Flex templates.
           #
           class Client
             # @private

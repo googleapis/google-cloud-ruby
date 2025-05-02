@@ -41,6 +41,9 @@ module Google
             # (https://cloud.google.com/dataflow/docs/concepts/regional-endpoints). Using
             # `projects.jobs.create` is not recommended, as your job will always start
             # in `us-central1`.
+            #
+            # Do not enter confidential information when you supply string values using
+            # the API.
             rpc :CreateJob, ::Google::Cloud::Dataflow::V1beta3::CreateJobRequest, ::Google::Cloud::Dataflow::V1beta3::Job
             # Gets the state of the specified Cloud Dataflow job.
             #
@@ -64,10 +67,17 @@ module Google
             # `projects.locations.jobs.list` with a [regional endpoint]
             # (https://cloud.google.com/dataflow/docs/concepts/regional-endpoints). To
             # list the all jobs across all regions, use `projects.jobs.aggregated`. Using
-            # `projects.jobs.list` is not recommended, as you can only get the list of
-            # jobs that are running in `us-central1`.
+            # `projects.jobs.list` is not recommended, because you can only get the list
+            # of jobs that are running in `us-central1`.
+            #
+            # `projects.locations.jobs.list` and `projects.jobs.list` support filtering
+            # the list of jobs by name. Filtering by name isn't supported by
+            # `projects.jobs.aggregated`.
             rpc :ListJobs, ::Google::Cloud::Dataflow::V1beta3::ListJobsRequest, ::Google::Cloud::Dataflow::V1beta3::ListJobsResponse
             # List the jobs of a project across all regions.
+            #
+            # **Note:** This method doesn't support filtering the list of
+            # jobs by name.
             rpc :AggregatedListJobs, ::Google::Cloud::Dataflow::V1beta3::ListJobsRequest, ::Google::Cloud::Dataflow::V1beta3::ListJobsResponse
             # Check for existence of active jobs in the given project across all regions.
             rpc :CheckActiveJobs, ::Google::Cloud::Dataflow::V1beta3::CheckActiveJobsRequest, ::Google::Cloud::Dataflow::V1beta3::CheckActiveJobsResponse
