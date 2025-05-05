@@ -447,6 +447,8 @@
   "google-cloud-logging+FILLER": "0.0.0",
   "google-cloud-logging-v2": "1.2.1",
   "google-cloud-logging-v2+FILLER": "0.0.0",
+  "google-cloud-lustre": "0.0.1",
+  "google-cloud-lustre+FILLER": "0.0.0",
   "google-cloud-lustre-v1": "0.0.1",
   "google-cloud-lustre-v1+FILLER": "0.0.0",
   "google-cloud-managed_identities": "1.4.1",

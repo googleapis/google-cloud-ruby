@@ -907,6 +907,10 @@
       "component": "google-cloud-logging-v2",
       "version_file": "lib/google/cloud/logging/v2/version.rb"
     },
+    "google-cloud-lustre": {
+      "component": "google-cloud-lustre",
+      "version_file": "lib/google/cloud/lustre/version.rb"
+    },
     "google-cloud-lustre-v1": {
       "component": "google-cloud-lustre-v1",
       "version_file": "lib/google/cloud/lustre/v1/version.rb"
