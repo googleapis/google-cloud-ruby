@@ -1435,10 +1435,6 @@ module Google
 
         ##
         # Delete resumable upload
-        # @param [String, ::File] file Path of the file on the filesystem to
-        #   upload. Can be an File object, or File-like object such as StringIO.
-        #   (If the object does not have path, a `path` argument must be also be
-        #   provided.)
         # @param [String] upload_id Unique Id of an resumable upload
         #
         # @example
@@ -1449,11 +1445,10 @@ module Google
         #   bucket = storage.bucket "my-bucket"
         #   bucket.delete_resumable_upload file,upload_id
 
-        def delete_resumable_upload file, upload_id
+        def delete_resumable_upload upload_id
           ensure_service!
-          ensure_io_or_file_exists! file
           raise "Upload Id missing" unless upload_id
-          service.delete_resumable_upload name, file, upload_id, options: { delete_upload: true }
+          service.delete_resumable_upload name, upload_id, options: { delete_upload: true }
         end
         ##
         # Retrieves a list of files matching the criteria.
