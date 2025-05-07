@@ -702,9 +702,9 @@ module Google
           end
         end
 
-        def delete_resumable_upload bucket_name, source, upload_id, options: {}
+        def delete_resumable_upload bucket_name, upload_id, options: {}
           execute do
-            service.delete_resumable_upload bucket_name, source, upload_id, options: options
+            service.delete_resumable_upload bucket_name, upload_id, options: options
           end
         end
 

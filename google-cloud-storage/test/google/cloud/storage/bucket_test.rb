@@ -1429,19 +1429,13 @@ describe Google::Cloud::Storage::Bucket, :mock_storage do
    it "deletes a resumable upload with upload_id" do
     upload_id= "TEST_ID"
 
-    Tempfile.open ["google-cloud", ".txt"] do |tmpfile|
-      tmpfile.write "Hello world"
-      tmpfile.rewind
-
-      mock = Minitest::Mock.new
-      mock.expect :delete_resumable_upload, true,
-        [bucket.name, tmpfile, upload_id],
-        **delete_resumable_upload_args(options: {delete_upload: true})
-      bucket.service.mocked_service = mock
-      bucket.delete_resumable_upload tmpfile, upload_id
-
-      mock.verify
-    end
+    mock = Minitest::Mock.new
+    mock.expect :delete_resumable_upload, true,
+      [bucket.name, upload_id],
+      **delete_resumable_upload_args(options: {delete_upload: true})
+    bucket.service.mocked_service = mock
+    bucket.delete_resumable_upload  upload_id
+    mock.verify
   end
 
   def create_file_gapi bucket=nil, name = nil
