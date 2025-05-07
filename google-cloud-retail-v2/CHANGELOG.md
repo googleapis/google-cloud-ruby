@@ -1,5 +1,15 @@
 # Release History
 
+### 2.1.0 (2025-04-29)
+
+#### Features
+
+* Added language_code, region_code, and place_id parameters to the search RPC 
+* Support for pin control metadata in the search response 
+#### Bug Fixes
+
+* Fixed several issues with validating credential configs 
+
 ### 2.0.0 (2025-02-07)
 
 ### ⚠ BREAKING CHANGES

@@ -1,5 +1,30 @@
 # Changelog
 
+### 0.8.4 (2025-04-29)
+
+#### Documentation
+
+* update documentation URL ([#30030](https://github.com/googleapis/google-cloud-ruby/issues/30030)) 
+
+### 0.8.3 (2025-04-29)
+
+#### Bug Fixes
+
+* Fixed several issues with validating credential configs 
+
+### 0.8.2 (2025-04-18)
+
+#### Documentation
+
+* clarify sql variant in comment for v1beta1.LookupEntryRequest.sql_resource 
+* fix a typo ([#29462](https://github.com/googleapis/google-cloud-ruby/issues/29462)) 
+
+### 0.8.1 (2025-03-13)
+
+#### Documentation
+
+* Documented the service as deprecated ([#29326](https://github.com/googleapis/google-cloud-ruby/issues/29326)) 
+
 ### 0.8.0 (2025-02-07)
 
 ### ⚠ BREAKING CHANGES

@@ -22,12 +22,12 @@ module Google
     module AppHub
       module V1
         # Service is an App Hub data model that contains a discovered service, which
-        # represents a network/api interface that exposes some functionality to clients
-        # for consumption over the network.
+        # represents a network or API interface that exposes some functionality to
+        # clients for consumption over the network.
         # @!attribute [rw] name
         #   @return [::String]
         #     Identifier. The resource name of a Service. Format:
-        #     "projects/\\{host-project-id}/locations/\\{location}/applications/\\{application-id}/services/\\{service-id}"
+        #     `"projects/{host-project-id}/locations/{location}/applications/{application-id}/services/{service-id}"`
         # @!attribute [rw] display_name
         #   @return [::String]
         #     Optional. User-defined name for the Service.
@@ -89,8 +89,8 @@ module Google
         # Reference to an underlying networking resource that can comprise a Service.
         # @!attribute [r] uri
         #   @return [::String]
-        #     Output only. The underlying resource URI (For example, URI of Forwarding
-        #     Rule, URL Map, and Backend Service).
+        #     Output only. The underlying resource URI. For example, URI of Forwarding
+        #     Rule, URL Map, and Backend Service.
         class ServiceReference
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -114,13 +114,13 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # DiscoveredService is a network/api interface that exposes some functionality
-        # to clients for consumption over the network. A discovered service can be
-        # registered to a App Hub service.
+        # DiscoveredService is a network or API interface that exposes some
+        # functionality to clients for consumption over the network. A discovered
+        # service can be registered to a App Hub service.
         # @!attribute [rw] name
         #   @return [::String]
         #     Identifier. The resource name of the discovered service. Format:
-        #     "projects/\\{host-project-id}/locations/\\{location}/discoveredServices/\\{uuid}""
+        #     `"projects/{host-project-id}/locations/{location}/discoveredServices/{uuid}"`
         # @!attribute [r] service_reference
         #   @return [::Google::Cloud::AppHub::V1::ServiceReference]
         #     Output only. Reference to an underlying networking resource that can

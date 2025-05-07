@@ -1,0 +1,17 @@
+{
+    "api_id": "lustre.googleapis.com",
+    "api_shortname": "lustre",
+    "client_documentation": "https://cloud.google.com/ruby/docs/reference/google-cloud-lustre/latest",
+    "distribution_name": "google-cloud-lustre",
+    "is_cloud": true,
+    "language": "ruby",
+    "name": "lustre",
+    "name_pretty": "Google Cloud Managed Lustre API",
+    "product_documentation": "https://cloud.google.com/managed-lustre/docs",
+    "release_level": "preview",
+    "repo": "googleapis/google-cloud-ruby",
+    "requires_billing": true,
+    "ruby-cloud-description": "google-cloud-lustre is the official client library for the Google Cloud Managed Lustre API.",
+    "ruby-cloud-product-url": "https://cloud.google.com/managed-lustre/docs",
+    "library_type": "GAPIC_MANUAL"
+}

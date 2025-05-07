@@ -67,9 +67,127 @@ module Google
         #     {::Google::Cloud::Dialogflow::V2::Conversation::ConversationStage::VIRTUAL_AGENT_STAGE ConversationStage.VIRTUAL_AGENT_STAGE}
         #     stage and directly goes to
         #     {::Google::Cloud::Dialogflow::V2::Conversation::ConversationStage::HUMAN_ASSIST_STAGE ConversationStage.HUMAN_ASSIST_STAGE}.
+        # @!attribute [r] telephony_connection_info
+        #   @return [::Google::Cloud::Dialogflow::V2::Conversation::TelephonyConnectionInfo]
+        #     Output only. The telephony connection information.
+        # @!attribute [r] ingested_context_references
+        #   @return [::Google::Protobuf::Map{::String => ::Google::Cloud::Dialogflow::V2::Conversation::ContextReference}]
+        #     Output only. The context reference updates provided by external systems.
         class Conversation
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # The information about phone calls connected via phone gateway to the
+          # conversation.
+          # @!attribute [r] dialed_number
+          #   @return [::String]
+          #     Output only. The number dialed to connect this call in E.164 format.
+          # @!attribute [rw] sdp
+          #   @return [::String]
+          #     Optional. SDP of the call. It's initially the SDP answer to the endpoint,
+          #     but maybe later updated for the purpose of making the link active, etc.
+          # @!attribute [r] sip_headers
+          #   @return [::Array<::Google::Cloud::Dialogflow::V2::Conversation::TelephonyConnectionInfo::SipHeader>]
+          #     Output only. The SIP headers from the initial SIP INVITE.
+          # @!attribute [r] extra_mime_contents
+          #   @return [::Array<::Google::Cloud::Dialogflow::V2::Conversation::TelephonyConnectionInfo::MimeContent>]
+          #     Output only. The mime content from the initial SIP INVITE.
+          class TelephonyConnectionInfo
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+
+            # The SIP headers from the initial SIP INVITE.
+            # @!attribute [rw] name
+            #   @return [::String]
+            #     Optional. The name of the header.
+            # @!attribute [rw] value
+            #   @return [::String]
+            #     Optional. The value of the header.
+            class SipHeader
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
+
+            # The mime content from the initial SIP INVITE.
+            # @!attribute [rw] mime_type
+            #   @return [::String]
+            #     Optional. The mime type of the content.
+            # @!attribute [rw] content
+            #   @return [::String]
+            #     Optional. The content payload.
+            class MimeContent
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
+          end
+
+          # Represents a section of ingested context information.
+          # @!attribute [rw] context_contents
+          #   @return [::Array<::Google::Cloud::Dialogflow::V2::Conversation::ContextReference::ContextContent>]
+          #     Required. The list of content updates for a context reference.
+          # @!attribute [rw] update_mode
+          #   @return [::Google::Cloud::Dialogflow::V2::Conversation::ContextReference::UpdateMode]
+          #     Required. The mode in which context reference contents are updated.
+          # @!attribute [rw] language_code
+          #   @return [::String]
+          #     Optional. The language of the information ingested, defaults to "en-US"
+          #     if not set.
+          # @!attribute [r] create_time
+          #   @return [::Google::Protobuf::Timestamp]
+          #     Output only. The time the context reference was first created.
+          class ContextReference
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+
+            # Contents ingested.
+            # @!attribute [rw] content
+            #   @return [::String]
+            #     Required. The information ingested in a single request.
+            # @!attribute [rw] content_format
+            #   @return [::Google::Cloud::Dialogflow::V2::Conversation::ContextReference::ContextContent::ContentFormat]
+            #     Required. The format of the ingested string.
+            # @!attribute [r] ingestion_time
+            #   @return [::Google::Protobuf::Timestamp]
+            #     Output only. The time when this information was incorporated into the
+            #     relevant context reference.
+            class ContextContent
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+
+              # Represents the format of the ingested string.
+              module ContentFormat
+                # Unspecified content format.
+                CONTENT_FORMAT_UNSPECIFIED = 0
+
+                # Content was provided in JSON format.
+                JSON = 1
+
+                # Content was provided as plain text.
+                PLAIN_TEXT = 2
+              end
+            end
+
+            # Represents the mode in which context reference contents are updated.
+            module UpdateMode
+              # Unspecified update mode.
+              UPDATE_MODE_UNSPECIFIED = 0
+
+              # Context content updates are applied in append mode.
+              APPEND = 1
+
+              # Context content updates are applied in overwrite mode.
+              OVERWRITE = 2
+            end
+          end
+
+          # @!attribute [rw] key
+          #   @return [::String]
+          # @!attribute [rw] value
+          #   @return [::Google::Cloud::Dialogflow::V2::Conversation::ContextReference]
+          class IngestedContextReferencesEntry
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
 
           # Enumeration of the completion status of the conversation.
           module LifecycleState
@@ -85,7 +203,7 @@ module Google
 
           # Enumeration of the different conversation stages a conversation can be in.
           # Reference:
-          # https://cloud.google.com/dialogflow/priv/docs/contact-center/basics#stages
+          # https://cloud.google.com/agent-assist/docs/basics#conversation_stages
           module ConversationStage
             # Unknown. Should never be used after a conversation is successfully
             # created.
@@ -241,12 +359,59 @@ module Google
 
         # Represents a phone number for telephony integration. It allows for connecting
         # a particular conversation over telephony.
+        # @!attribute [r] country_code
+        #   @return [::Integer]
+        #     Output only. Desired country code for the phone number.
         # @!attribute [r] phone_number
         #   @return [::String]
         #     Output only. The phone number to connect to this conversation.
         class ConversationPhoneNumber
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # The request message for [ConversationsService.IngestContextReferences][].
+        # @!attribute [rw] conversation
+        #   @return [::String]
+        #     Required. Resource identifier of the conversation to ingest context
+        #     information for. Format: `projects/<Project ID>/locations/<Location
+        #     ID>/conversations/<Conversation ID>`.
+        # @!attribute [rw] context_references
+        #   @return [::Google::Protobuf::Map{::String => ::Google::Cloud::Dialogflow::V2::Conversation::ContextReference}]
+        #     Required. The context references to ingest. The key is the name of the
+        #     context reference and the value contains the contents of the context
+        #     reference. The key is used to incorporate ingested context references to
+        #     enhance the generator.
+        class IngestContextReferencesRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # @!attribute [rw] key
+          #   @return [::String]
+          # @!attribute [rw] value
+          #   @return [::Google::Cloud::Dialogflow::V2::Conversation::ContextReference]
+          class ContextReferencesEntry
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+        end
+
+        # The response message for [ConversationsService.IngestContextReferences][].
+        # @!attribute [rw] ingested_context_references
+        #   @return [::Google::Protobuf::Map{::String => ::Google::Cloud::Dialogflow::V2::Conversation::ContextReference}]
+        #     All context references ingested.
+        class IngestContextReferencesResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # @!attribute [rw] key
+          #   @return [::String]
+          # @!attribute [rw] value
+          #   @return [::Google::Cloud::Dialogflow::V2::Conversation::ContextReference]
+          class IngestedContextReferencesEntry
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
         end
 
         # The request message for
@@ -447,6 +612,12 @@ module Google
         #     `projects/<Project ID>/locations/<Location ID>/generators/<Generator ID>`
         #
         #     Note: The following fields are mutually exclusive: `generator_name`, `generator`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] context_references
+        #   @return [::Google::Protobuf::Map{::String => ::Google::Cloud::Dialogflow::V2::Conversation::ContextReference}]
+        #     Optional. A section of ingested context information. The key is the name of
+        #     the context reference and the value contains the contents of the context
+        #     reference. The key is used to incorporate ingested context references to
+        #     enhance the generator.
         # @!attribute [rw] conversation_context
         #   @return [::Google::Cloud::Dialogflow::V2::ConversationContext]
         #     Optional. Context of the conversation, including transcripts.
@@ -457,6 +628,15 @@ module Google
         class GenerateStatelessSuggestionRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # @!attribute [rw] key
+          #   @return [::String]
+          # @!attribute [rw] value
+          #   @return [::Google::Cloud::Dialogflow::V2::Conversation::ContextReference]
+          class ContextReferencesEntry
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
         end
 
         # The response message for
@@ -540,9 +720,18 @@ module Google
           # @!attribute [rw] boost_specs
           #   @return [::Array<::Google::Cloud::Dialogflow::V2::SearchKnowledgeRequest::SearchConfig::BoostSpecs>]
           #     Optional. Boost specifications for data stores.
+          #
+          #     Maps from datastore name to their boost configuration. Do not specify
+          #     more than one BoostSpecs for each datastore name. If multiple BoostSpecs
+          #     are provided for the same datastore name, the behavior is undefined.
           # @!attribute [rw] filter_specs
           #   @return [::Array<::Google::Cloud::Dialogflow::V2::SearchKnowledgeRequest::SearchConfig::FilterSpecs>]
           #     Optional. Filter specification for data store queries.
+          #
+          #     TMaps from datastore name to the filter expression for that datastore. Do
+          #     not specify more than one FilterSpecs for each datastore name. If
+          #     multiple FilterSpecs are provided for the same datastore name, the
+          #     behavior is undefined.
           class SearchConfig
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -568,7 +757,7 @@ module Google
               # @!attribute [rw] condition_boost_specs
               #   @return [::Array<::Google::Cloud::Dialogflow::V2::SearchKnowledgeRequest::SearchConfig::BoostSpecs::BoostSpec::ConditionBoostSpec>]
               #     Optional. Condition boost specifications. If a document matches
-              #     multiple conditions in the specifictions, boost scores from these
+              #     multiple conditions in the specifications, boost scores from these
               #     specifications are all applied and combined in a non-linear way.
               #     Maximum number of specifications is 20.
               class BoostSpec
@@ -646,6 +835,18 @@ module Google
                     # The control points used to define the curve. The curve defined
                     # through these control points can only be monotonically increasing
                     # or decreasing(constant values are acceptable).
+                    # @!attribute [rw] attribute_value
+                    #   @return [::String]
+                    #     Optional. Can be one of:
+                    #     1. The numerical field value.
+                    #     2. The duration spec for freshness:
+                    #     The value must be formatted as an XSD `dayTimeDuration` value
+                    #     (a restricted subset of an ISO 8601 duration value). The
+                    #     pattern for this is: `[nD][T[nH][nM][nS]]`.
+                    # @!attribute [rw] boost_amount
+                    #   @return [::Float]
+                    #     Optional. The value between -1 to 1 by which to boost the score
+                    #     if the attribute_value evaluates to the value specified above.
                     class ControlPoint
                       include ::Google::Protobuf::MessageExts
                       extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -789,6 +990,30 @@ module Google
             # The answer is from intent matching.
             INTENT = 3
           end
+        end
+
+        # The request message for
+        # {::Google::Cloud::Dialogflow::V2::Conversations::Client#generate_suggestions Conversations.GenerateSuggestions}.
+        # @!attribute [rw] conversation
+        #   @return [::String]
+        #     Required. The conversation for which the suggestions are generated. Format:
+        #     `projects/<Project ID>/locations/<Location
+        #     ID>/conversations/<Conversation ID>`.
+        #
+        #     The conversation must be created with a conversation profile which has
+        #     generators configured in it to be able to get suggestions.
+        # @!attribute [rw] latest_message
+        #   @return [::String]
+        #     Optional. The name of the latest conversation message for which the request
+        #     is triggered. Format: `projects/<Project ID>/locations/<Location
+        #     ID>/conversations/<Conversation ID>/messages/<Message ID>`.
+        # @!attribute [rw] trigger_events
+        #   @return [::Array<::Google::Cloud::Dialogflow::V2::TriggerEvent>]
+        #     Optional. A list of trigger events. Only generators configured in the
+        #     conversation_profile whose trigger_event is listed here will be triggered.
+        class GenerateSuggestionsRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
       end
     end

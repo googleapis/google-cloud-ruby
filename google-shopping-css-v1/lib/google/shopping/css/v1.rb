@@ -20,6 +20,7 @@ require "google/shopping/css/v1/accounts_service"
 require "google/shopping/css/v1/account_labels_service"
 require "google/shopping/css/v1/css_product_inputs_service"
 require "google/shopping/css/v1/css_products_service"
+require "google/shopping/css/v1/quota_service"
 require "google/shopping/css/v1/version"
 
 module Google

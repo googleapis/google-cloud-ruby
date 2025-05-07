@@ -827,7 +827,7 @@ module Google
 
             ##
             # Deletes a single Collector - changes state of collector to "Deleting".
-            # Background jobs does final deletion thorugh producer api.
+            # Background jobs does final deletion through producer API.
             #
             # @overload delete_collector(request, options = nil)
             #   Pass arguments to `delete_collector` via a request object, either of type
@@ -1363,8 +1363,8 @@ module Google
 
               config_attr :endpoint,      nil, ::String, nil
               config_attr :credentials,   nil do |value|
-                allowed = [::String, ::Hash, ::Proc, ::Symbol, ::Google::Auth::Credentials, ::Signet::OAuth2::Client, nil]
-                allowed += [::GRPC::Core::Channel, ::GRPC::Core::ChannelCredentials] if defined? ::GRPC
+                allowed = [::String, ::Hash, ::Proc, ::Symbol, ::Google::Auth::Credentials, ::Google::Auth::BaseClient, ::Signet::OAuth2::Client, nil]
+                allowed += [::GRPC::Core::Channel, ::GRPC::Core::ChannelCredentials] if defined? ::GRPC::Core::Channel
                 allowed.any? { |klass| klass === value }
               end
               config_attr :scope,         nil, ::String, ::Array, nil

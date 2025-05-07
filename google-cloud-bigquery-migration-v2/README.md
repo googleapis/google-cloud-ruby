@@ -40,7 +40,7 @@ response = client.create_migration_workflow request
 View the [Client Library Documentation](https://cloud.google.com/ruby/docs/reference/google-cloud-bigquery-migration-v2/latest)
 for class and method documentation.
 
-See also the [Product Documentation](https://cloud.google.com/bigquery/docs/reference/migration)
+See also the [Product Documentation](https://cloud.google.com/bigquery/docs/migration-intro)
 for general usage information.
 
 ## Debug Logging

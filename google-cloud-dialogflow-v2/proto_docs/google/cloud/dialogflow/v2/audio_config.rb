@@ -297,6 +297,8 @@ module Google
         # @!attribute [rw] phrase_sets
         #   @return [::Array<::String>]
         #     List of names of Cloud Speech phrase sets that are used for transcription.
+        #     For phrase set limitations, please refer to [Cloud Speech API quotas and
+        #     limits](https://cloud.google.com/speech-to-text/quotas#content).
         # @!attribute [rw] audio_encoding
         #   @return [::Google::Cloud::Dialogflow::V2::AudioEncoding]
         #     Audio encoding of the audio content to process.
@@ -323,7 +325,7 @@ module Google
         #     information.
         # @!attribute [rw] use_timeout_based_endpointing
         #   @return [::Boolean]
-        #     Use timeout based endpointing, interpreting endpointer sensitivy as
+        #     Use timeout based endpointing, interpreting endpointer sensitivity as
         #     seconds of timeout value.
         class SpeechToTextConfig
           include ::Google::Protobuf::MessageExts

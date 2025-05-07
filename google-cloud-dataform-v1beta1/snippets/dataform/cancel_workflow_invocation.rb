@@ -41,7 +41,7 @@ def cancel_workflow_invocation
   # Call the cancel_workflow_invocation method.
   result = client.cancel_workflow_invocation request
 
-  # The returned object is of type Google::Protobuf::Empty.
+  # The returned object is of type Google::Cloud::Dataform::V1beta1::CancelWorkflowInvocationResponse.
   p result
 end
 # [END dataform_v1beta1_generated_Dataform_CancelWorkflowInvocation_sync]

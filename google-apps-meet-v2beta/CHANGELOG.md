@@ -1,5 +1,17 @@
 # Changelog
 
+### 0.6.1 (2025-04-29)
+
+#### Bug Fixes
+
+* Fixed several issues with validating credential configs 
+
+### 0.6.0 (2025-02-25)
+
+#### Features
+
+* Support for the connect_active_conference RPC ([#29185](https://github.com/googleapis/google-cloud-ruby/issues/29185)) 
+
 ### 0.5.0 (2025-01-28)
 
 #### Features

@@ -25,6 +25,11 @@ module Google
       ##
       # API client module.
       #
+      # @example Load this package, including all its services, and instantiate a gRPC client
+      #
+      #     require "google/cloud/oracle_database/v1"
+      #     client = ::Google::Cloud::OracleDatabase::V1::OracleDatabase::Client.new
+      #
       # @example Load this package, including all its services, and instantiate a REST client
       #
       #     require "google/cloud/oracle_database/v1"

@@ -24,6 +24,8 @@ module Google
     module Filestore
       module V1
         module CloudFilestoreManager
+          # LINT: LEGACY_NAMES
+          #
           # Configures and manages Filestore resources.
           #
           # Filestore Manager v1.
@@ -95,6 +97,8 @@ module Google
             rpc :DeleteBackup, ::Google::Cloud::Filestore::V1::DeleteBackupRequest, ::Google::Longrunning::Operation
             # Updates the settings of a specific backup.
             rpc :UpdateBackup, ::Google::Cloud::Filestore::V1::UpdateBackupRequest, ::Google::Longrunning::Operation
+            # Promote the standby instance (replica).
+            rpc :PromoteReplica, ::Google::Cloud::Filestore::V1::PromoteReplicaRequest, ::Google::Longrunning::Operation
           end
 
           Stub = Service.rpc_stub_class

@@ -2244,11 +2244,6 @@ module Google
             ##
             # Gets an Entry.
             #
-            # **Caution**: The BigQuery metadata that is stored in Dataplex Catalog is
-            # changing. For more information, see [Changes to BigQuery metadata stored in
-            # Dataplex
-            # Catalog](https://cloud.google.com/dataplex/docs/biqquery-metadata-changes).
-            #
             # @overload get_entry(request, options = nil)
             #   Pass arguments to `get_entry` via a request object, either of type
             #   {::Google::Cloud::Dataplex::V1::GetEntryRequest} or an equivalent Hash.
@@ -2342,12 +2337,7 @@ module Google
             end
 
             ##
-            # Looks up a single Entry by name using the permission on the source system.
-            #
-            # **Caution**: The BigQuery metadata that is stored in Dataplex Catalog is
-            # changing. For more information, see [Changes to BigQuery metadata stored in
-            # Dataplex
-            # Catalog](https://cloud.google.com/dataplex/docs/biqquery-metadata-changes).
+            # Looks up an entry by name using the permission on the source system.
             #
             # @overload lookup_entry(request, options = nil)
             #   Pass arguments to `lookup_entry` via a request object, either of type
@@ -3059,8 +3049,8 @@ module Google
 
               config_attr :endpoint,      nil, ::String, nil
               config_attr :credentials,   nil do |value|
-                allowed = [::String, ::Hash, ::Proc, ::Symbol, ::Google::Auth::Credentials, ::Signet::OAuth2::Client, nil]
-                allowed += [::GRPC::Core::Channel, ::GRPC::Core::ChannelCredentials] if defined? ::GRPC
+                allowed = [::String, ::Hash, ::Proc, ::Symbol, ::Google::Auth::Credentials, ::Google::Auth::BaseClient, ::Signet::OAuth2::Client, nil]
+                allowed += [::GRPC::Core::Channel, ::GRPC::Core::ChannelCredentials] if defined? ::GRPC::Core::Channel
                 allowed.any? { |klass| klass === value }
               end
               config_attr :scope,         nil, ::String, ::Array, nil

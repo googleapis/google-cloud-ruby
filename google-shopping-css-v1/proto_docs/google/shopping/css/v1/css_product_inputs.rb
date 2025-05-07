@@ -28,7 +28,10 @@ module Google
         #   @return [::String]
         #     The name of the CSS Product input.
         #     Format:
-        #     `accounts/{account}/cssProductInputs/{css_product_input}`
+        #     `accounts/{account}/cssProductInputs/{css_product_input}`, where the
+        #     last section `css_product_input` consists of 3 parts:
+        #     contentLanguage~feedLabel~offerId. Example:
+        #     accounts/123/cssProductInputs/de~DE~rawProvidedId123
         # @!attribute [r] final_name
         #   @return [::String]
         #     Output only. The name of the processed CSS Product.
@@ -146,7 +149,10 @@ module Google
         # @!attribute [rw] name
         #   @return [::String]
         #     Required. The name of the CSS product input resource to delete.
-        #     Format: accounts/\\{account}/cssProductInputs/\\{css_product_input}
+        #     Format: accounts/\\{account}/cssProductInputs/\\{css_product_input}, where the
+        #     last section `css_product_input` consists of 3 parts:
+        #     contentLanguage~feedLabel~offerId. Example:
+        #     accounts/123/cssProductInputs/de~DE~rawProvidedId123
         # @!attribute [rw] supplemental_feed_id
         #   @return [::Integer]
         #     The Content API Supplemental Feed ID.

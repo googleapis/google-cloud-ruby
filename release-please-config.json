@@ -747,6 +747,14 @@
       "component": "google-cloud-filestore-v1",
       "version_file": "lib/google/cloud/filestore/v1/version.rb"
     },
+    "google-cloud-financial_services": {
+      "component": "google-cloud-financial_services",
+      "version_file": "lib/google/cloud/financial_services/version.rb"
+    },
+    "google-cloud-financial_services-v1": {
+      "component": "google-cloud-financial_services-v1",
+      "version_file": "lib/google/cloud/financial_services/v1/version.rb"
+    },
     "google-cloud-firestore": {
       "component": "google-cloud-firestore",
       "version_file": "lib/google/cloud/firestore/version.rb"
@@ -898,6 +906,14 @@
     "google-cloud-logging-v2": {
       "component": "google-cloud-logging-v2",
       "version_file": "lib/google/cloud/logging/v2/version.rb"
+    },
+    "google-cloud-lustre": {
+      "component": "google-cloud-lustre",
+      "version_file": "lib/google/cloud/lustre/version.rb"
+    },
+    "google-cloud-lustre-v1": {
+      "component": "google-cloud-lustre-v1",
+      "version_file": "lib/google/cloud/lustre/v1/version.rb"
     },
     "google-cloud-managed_identities": {
       "component": "google-cloud-managed_identities",
@@ -1111,6 +1127,14 @@
       "component": "google-cloud-parallelstore-v1beta",
       "version_file": "lib/google/cloud/parallelstore/v1beta/version.rb"
     },
+    "google-cloud-parameter_manager": {
+      "component": "google-cloud-parameter_manager",
+      "version_file": "lib/google/cloud/parameter_manager/version.rb"
+    },
+    "google-cloud-parameter_manager-v1": {
+      "component": "google-cloud-parameter_manager-v1",
+      "version_file": "lib/google/cloud/parameter_manager/v1/version.rb"
+    },
     "google-cloud-phishing_protection": {
       "component": "google-cloud-phishing_protection",
       "version_file": "lib/google/cloud/phishing_protection/version.rb"
@@ -1238,14 +1262,6 @@
     "google-cloud-resource_manager-v3": {
       "component": "google-cloud-resource_manager-v3",
       "version_file": "lib/google/cloud/resource_manager/v3/version.rb"
-    },
-    "google-cloud-resource_settings": {
-      "component": "google-cloud-resource_settings",
-      "version_file": "lib/google/cloud/resource_settings/version.rb"
-    },
-    "google-cloud-resource_settings-v1": {
-      "component": "google-cloud-resource_settings-v1",
-      "version_file": "lib/google/cloud/resource_settings/v1/version.rb"
     },
     "google-cloud-retail": {
       "component": "google-cloud-retail",
@@ -1438,6 +1454,14 @@
     "google-cloud-storage-control-v2": {
       "component": "google-cloud-storage-control-v2",
       "version_file": "lib/google/cloud/storage/control/v2/version.rb"
+    },
+    "google-cloud-storage_batch_operations": {
+      "component": "google-cloud-storage_batch_operations",
+      "version_file": "lib/google/cloud/storage_batch_operations/version.rb"
+    },
+    "google-cloud-storage_batch_operations-v1": {
+      "component": "google-cloud-storage_batch_operations-v1",
+      "version_file": "lib/google/cloud/storage_batch_operations/v1/version.rb"
     },
     "google-cloud-storage_insights": {
       "component": "google-cloud-storage_insights",

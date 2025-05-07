@@ -1,5 +1,23 @@
 # Changelog
 
+### 0.7.1 (2025-04-29)
+
+#### Bug Fixes
+
+* Fixed several issues with validating credential configs 
+
+### 0.7.0 (2025-03-18)
+
+#### Features
+
+* Add AutomaticImprovements service ([#29347](https://github.com/googleapis/google-cloud-ruby/issues/29347)) 
+
+### 0.6.0 (2025-03-05)
+
+#### Features
+
+* Support for seasonal overrides ([#29286](https://github.com/googleapis/google-cloud-ruby/issues/29286)) 
+
 ### 0.5.0 (2025-01-29)
 
 #### Features

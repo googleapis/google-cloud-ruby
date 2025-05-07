@@ -1,5 +1,27 @@
 # Release History
 
+### 3.0.1 (2025-04-29)
+
+#### Bug Fixes
+
+* Fixed several issues with validating credential configs 
+
+### 3.0.0 (2025-02-13)
+
+### ⚠ BREAKING CHANGES
+
+* Updated google-cloud-workflows-executions-v1 dependency to version 1.x
+* Removed dependency on google-cloud-workflows-v1beta prerelease service
+* Removed dependency on google-cloud-workflows-executions-v1beta prerelease service
+* Updated google-cloud-workflows-v1 dependency to version 2.x ([#29034](https://github.com/googleapis/google-cloud-ruby/issues/29034))
+
+#### Features
+
+* Removed dependency on google-cloud-workflows-executions-v1beta prerelease service 
+* Removed dependency on google-cloud-workflows-v1beta prerelease service 
+* Updated google-cloud-workflows-executions-v1 dependency to version 1.x 
+* Updated google-cloud-workflows-v1 dependency to version 2.x ([#29034](https://github.com/googleapis/google-cloud-ruby/issues/29034)) 
+
 ### 2.6.0 (2025-01-29)
 
 #### Features

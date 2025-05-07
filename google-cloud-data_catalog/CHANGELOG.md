@@ -1,5 +1,27 @@
 # Release History
 
+### 2.1.1 (2025-04-29)
+
+#### Bug Fixes
+
+* Fixed several issues with validating credential configs 
+
+### 2.1.0 (2025-03-14)
+
+#### Features
+
+* Documented the service as deprecatedad ([#29351](https://github.com/googleapis/google-cloud-ruby/issues/29351)) 
+
+### 2.0.0 (2025-02-13)
+
+### ⚠ BREAKING CHANGES
+
+* Update google-cloud-data_catalog-v1 dependency to version 2.x ([#29051](https://github.com/googleapis/google-cloud-ruby/issues/29051))
+
+#### Features
+
+* Update google-cloud-data_catalog-v1 dependency to version 2.x ([#29051](https://github.com/googleapis/google-cloud-ruby/issues/29051)) 
+
 ### 1.7.0 (2025-01-29)
 
 #### Features

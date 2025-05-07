@@ -13,16 +13,18 @@
 # limitations under the License.
 
 require_relative "helper"
-require_relative "../pubsub_create_avro_schema.rb"
-require_relative "../pubsub_create_topic_with_schema.rb"
-require_relative "../pubsub_create_proto_schema.rb"
-require_relative "../pubsub_delete_schema.rb"
-require_relative "../pubsub_get_schema.rb"
-require_relative "../pubsub_list_schemas.rb"
-require_relative "../pubsub_publish_avro_records.rb"
-require_relative "../pubsub_subscribe_avro_records.rb"
-require_relative "../pubsub_publish_proto_messages.rb"
-require_relative "../pubsub_subscribe_proto_messages.rb"
+require_relative "../pubsub_commit_proto_schema"
+require_relative "../pubsub_create_avro_schema"
+require_relative "../pubsub_create_topic_with_schema"
+require_relative "../pubsub_create_proto_schema"
+require_relative "../pubsub_delete_schema"
+require_relative "../pubsub_get_schema"
+require_relative "../pubsub_list_schema_revisions"
+require_relative "../pubsub_list_schemas"
+require_relative "../pubsub_publish_avro_records"
+require_relative "../pubsub_subscribe_avro_records"
+require_relative "../pubsub_publish_proto_messages"
+require_relative "../pubsub_subscribe_proto_messages"
 
 
 describe "schemas" do
@@ -30,7 +32,7 @@ describe "schemas" do
   let(:schema_id) { random_schema_id }
   let(:topic_id) { random_topic_id }
   let(:subscription_id) { random_subscription_id }
-  let(:avsc_file) { File.expand_path("data/us-states.avsc", __dir__) }
+  let(:avsc_file) { File.expand_path "data/us-states.avsc", __dir__ }
 
   after do
     @subscription.delete if @subscription
@@ -146,8 +148,9 @@ describe "schemas" do
 
   describe "PROTOCOL_BUFFER" do
     require_relative "../utilities/us-states_pb"
-    let(:proto_file) { File.expand_path("data/us-states.proto", __dir__) }
+    let(:proto_file) { File.expand_path "data/us-states.proto", __dir__ }
     let(:proto_definition) { File.read proto_file }
+    let(:revision_file) { File.expand_path "data/us-states-revision.proto", __dir__ }
 
     it "supports pubsub_create_topic_with_schema, pubsub_publish_proto_messages with binary encoding" do
       @schema = pubsub.create_schema schema_id, :protocol_buffer, proto_definition
@@ -217,6 +220,32 @@ describe "schemas" do
           subscribe_proto_messages subscription_id: @subscription.name
         end
       end
+    end
+
+    it "supports pubsub_commit_proto_schema & pubsub_commit_list_schema_revisions" do
+      @schema = pubsub.create_schema schema_id, :protocol_buffer, proto_definition
+      rev_id = @schema.revision_id
+
+      # pubsub_commit_proto_schema
+      schema1 = nil
+      out, _err = capture_io do
+        schema1 = commit_proto_schema schema_id: schema_id, proto_file: revision_file
+      end
+      refute_equal out, "Schema commited with revision #{rev_id}."
+      assert_includes out, "Schema commited with revision"
+
+      # pubsub_list_schema_revisions
+      schema2 = nil
+      out, _err = capture_io do
+        schema2 = commit_proto_schema schema_id: schema_id, proto_file: revision_file
+      end
+
+      out, _err = capture_io do
+        list_schema_revisions schema_id: schema_id
+      end
+
+      assert_includes out, schema1.revision_id
+      assert_includes out, schema2.revision_id
     end
   end
 end

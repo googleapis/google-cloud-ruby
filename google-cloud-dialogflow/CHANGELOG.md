@@ -1,5 +1,17 @@
 # Release History
 
+### 1.11.1 (2025-04-29)
+
+#### Bug Fixes
+
+* Fixed several issues with validating credential configs 
+
+### 1.11.0 (2025-03-11)
+
+#### Features
+
+* Add new RPC IngestContextReferences, GenerateSuggestions ([#29299](https://github.com/googleapis/google-cloud-ruby/issues/29299)) 
+
 ### 1.10.0 (2025-01-29)
 
 #### Features

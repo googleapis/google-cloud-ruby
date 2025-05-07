@@ -221,7 +221,7 @@ module Google
               #   @param model [::String]
               #     The identifier of the model to use. It is one of:
               #
-              #     * `semantic-ranker-512@latest`: Semantic ranking model with maxiumn input
+              #     * `semantic-ranker-512@latest`: Semantic ranking model with maximum input
               #     token size 512.
               #
               #     It is set to `semantic-ranker-512@latest` by default if unspecified.
@@ -407,7 +407,7 @@ module Google
 
                 config_attr :endpoint,      nil, ::String, nil
                 config_attr :credentials,   nil do |value|
-                  allowed = [::String, ::Hash, ::Proc, ::Symbol, ::Google::Auth::Credentials, ::Signet::OAuth2::Client, nil]
+                  allowed = [::String, ::Hash, ::Proc, ::Symbol, ::Google::Auth::Credentials, ::Google::Auth::BaseClient, ::Signet::OAuth2::Client, nil]
                   allowed.any? { |klass| klass === value }
                 end
                 config_attr :scope,         nil, ::String, ::Array, nil

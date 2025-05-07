@@ -217,7 +217,7 @@ module Google
               #
               #   @param serving_config [::String]
               #     Required. Full resource name of a
-              #     [ServingConfig][google.cloud.discoveryengine.v1.ServingConfig]:
+              #     {::Google::Cloud::DiscoveryEngine::V1::ServingConfig ServingConfig}:
               #     `projects/*/locations/global/collections/*/engines/*/servingConfigs/*`, or
               #     `projects/*/locations/global/collections/*/dataStores/*/servingConfigs/*`
               #
@@ -266,9 +266,9 @@ module Google
               #     attribute-based expressions are expected instead of the above described
               #     tag-based syntax. Examples:
               #
-              #      * (launguage: ANY("en", "es")) AND NOT (categories: ANY("Movie"))
+              #      * (language: ANY("en", "es")) AND NOT (categories: ANY("Movie"))
               #      * (available: true) AND
-              #        (launguage: ANY("en", "es")) OR (categories: ANY("Movie"))
+              #        (language: ANY("en", "es")) OR (categories: ANY("Movie"))
               #
               #     If your filter blocks all results, the API returns generic
               #     (unfiltered) popular Documents. If you only want results strictly matching
@@ -485,7 +485,7 @@ module Google
 
                 config_attr :endpoint,      nil, ::String, nil
                 config_attr :credentials,   nil do |value|
-                  allowed = [::String, ::Hash, ::Proc, ::Symbol, ::Google::Auth::Credentials, ::Signet::OAuth2::Client, nil]
+                  allowed = [::String, ::Hash, ::Proc, ::Symbol, ::Google::Auth::Credentials, ::Google::Auth::BaseClient, ::Signet::OAuth2::Client, nil]
                   allowed.any? { |klass| klass === value }
                 end
                 config_attr :scope,         nil, ::String, ::Array, nil

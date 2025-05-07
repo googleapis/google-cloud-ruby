@@ -315,8 +315,6 @@ module Google
             #     For single-turn queries, this is a single instance. For multi-turn queries,
             #     this is a repeated field that contains conversation history + latest
             #     request.
-            #
-            #     Only a single-turn query is supported currently.
             #   @param generation_spec [::Google::Cloud::DiscoveryEngine::V1::GenerateGroundedContentRequest::GenerationSpec, ::Hash]
             #     Content generation specification.
             #   @param grounding_spec [::Google::Cloud::DiscoveryEngine::V1::GenerateGroundedContentRequest::GroundingSpec, ::Hash]
@@ -426,7 +424,7 @@ module Google
             #     Required. The resource name of the grounding config, such as
             #     `projects/*/locations/global/groundingConfigs/default_grounding_config`.
             #   @param answer_candidate [::String]
-            #     Answer candidate to check. Can have a maximum length of 1024 characters.
+            #     Answer candidate to check. It can have a maximum length of 4096 tokens.
             #   @param facts [::Array<::Google::Cloud::DiscoveryEngine::V1::GroundingFact, ::Hash>]
             #     List of facts for the grounding check.
             #     We support up to 200 facts.
@@ -620,8 +618,8 @@ module Google
 
               config_attr :endpoint,      nil, ::String, nil
               config_attr :credentials,   nil do |value|
-                allowed = [::String, ::Hash, ::Proc, ::Symbol, ::Google::Auth::Credentials, ::Signet::OAuth2::Client, nil]
-                allowed += [::GRPC::Core::Channel, ::GRPC::Core::ChannelCredentials] if defined? ::GRPC
+                allowed = [::String, ::Hash, ::Proc, ::Symbol, ::Google::Auth::Credentials, ::Google::Auth::BaseClient, ::Signet::OAuth2::Client, nil]
+                allowed += [::GRPC::Core::Channel, ::GRPC::Core::ChannelCredentials] if defined? ::GRPC::Core::Channel
                 allowed.any? { |klass| klass === value }
               end
               config_attr :scope,         nil, ::String, ::Array, nil

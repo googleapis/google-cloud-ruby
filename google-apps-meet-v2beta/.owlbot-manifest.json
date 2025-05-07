@@ -59,6 +59,7 @@
     "snippets/conference_records_service/list_transcript_entries.rb",
     "snippets/conference_records_service/list_transcripts.rb",
     "snippets/snippet_metadata_google.apps.meet.v2beta.json",
+    "snippets/spaces_service/connect_active_conference.rb",
     "snippets/spaces_service/create_member.rb",
     "snippets/spaces_service/create_space.rb",
     "snippets/spaces_service/delete_member.rb",

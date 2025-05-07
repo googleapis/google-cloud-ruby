@@ -1,5 +1,68 @@
 # Changelog
 
+### 1.10.0 (2025-04-29)
+
+#### Features
+
+* Support customer-managed encryption key spec for a CachedContent 
+* Support indirect references between schema nodes 
+
+### 1.9.0 (2025-04-29)
+
+#### Features
+
+* Support config for thinking features ([#29549](https://github.com/googleapis/google-cloud-ruby/issues/29549)) 
+#### Bug Fixes
+
+* Fixed several issues with validating credential configs 
+
+### 1.8.0 (2025-04-25)
+
+#### Features
+
+* Support for model checkpoints ([#29524](https://github.com/googleapis/google-cloud-ruby/issues/29524)) 
+
+### 1.7.0 (2025-03-28)
+
+#### Features
+
+* Support for additional context for a RAG retrieval result 
+* Support for forcing delete of child resources of a reasoning engine ([#29420](https://github.com/googleapis/google-cloud-ruby/issues/29420)) 
+* Support for Vertex AI Search config 
+
+### 1.6.0 (2025-03-25)
+
+#### Features
+
+* Support for writing import results to Cloud Storage vs BigQuery ([#29392](https://github.com/googleapis/google-cloud-ruby/issues/29392)) 
+
+### 1.5.0 (2025-03-18)
+
+#### Features
+
+* Added env variables and agent framework to ReasoningEngineSpec ([#29378](https://github.com/googleapis/google-cloud-ruby/issues/29378)) 
+* Added Vertex AI Search engine option ([#29358](https://github.com/googleapis/google-cloud-ruby/issues/29358)) 
+
+### 1.4.0 (2025-03-13)
+
+#### Features
+
+* Added ranking config for RAG ([#29334](https://github.com/googleapis/google-cloud-ruby/issues/29334)) 
+
+### 1.3.0 (2025-03-07)
+
+#### Features
+
+* Support for avoiding the HF cache for the Model Garden source model 
+* Support for parsing configs for RagFiles 
+* Support for version ID for the Model Garden source model 
+
+### 1.2.0 (2025-03-04)
+
+#### Features
+
+* Support for Google search and enterprise web search tools ([#29203](https://github.com/googleapis/google-cloud-ruby/issues/29203)) 
+
 ### 1.1.0 (2025-02-12)
 
 #### Features

@@ -42,6 +42,29 @@ module Google
           #     Optional. The BigQuery connection used to create BigLake tables.
           #     Must be in the form
           #     `projects/{project_id}/locations/{location_id}/connections/{connection_id}`
+          # @!attribute [rw] location
+          #   @return [::String]
+          #     Optional. The location of the BigQuery dataset to publish BigLake
+          #     external or non-BigLake external tables to.
+          #     1. If the Cloud Storage bucket is located in a multi-region bucket, then
+          #     BigQuery dataset can be in the same multi-region bucket or any single
+          #     region that is included in the same multi-region bucket. The datascan can
+          #     be created in any single region that is included in the same multi-region
+          #     bucket
+          #     2. If the Cloud Storage bucket is located in a dual-region bucket, then
+          #     BigQuery dataset can be located in regions that are included in the
+          #     dual-region bucket, or in a multi-region that includes the dual-region.
+          #     The datascan can be created in any single region that is included in the
+          #     same dual-region bucket.
+          #     3. If the Cloud Storage bucket is located in a single region, then
+          #     BigQuery dataset can be in the same single region or any multi-region
+          #     bucket that includes the same single region. The datascan will be created
+          #     in the same single region as the bucket.
+          #     4. If the BigQuery dataset is in single region, it must be in the same
+          #     single region as the datascan.
+          #
+          #     For supported values, refer to
+          #     https://cloud.google.com/bigquery/docs/locations#supported_locations.
           class BigQueryPublishingConfig
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -135,6 +158,9 @@ module Google
         # @!attribute [r] bigquery_publishing
         #   @return [::Google::Cloud::Dataplex::V1::DataDiscoveryResult::BigQueryPublishing]
         #     Output only. Configuration for metadata publishing.
+        # @!attribute [r] scan_statistics
+        #   @return [::Google::Cloud::Dataplex::V1::DataDiscoveryResult::ScanStatistics]
+        #     Output only. Statistics of the DataDiscoveryScan.
         class DataDiscoveryResult
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -142,10 +168,44 @@ module Google
           # Describes BigQuery publishing configurations.
           # @!attribute [r] dataset
           #   @return [::String]
-          #     Output only. The BigQuery dataset to publish to. It takes the form
-          #     `projects/{project_id}/datasets/{dataset_id}`.
-          #     If not set, the service creates a default publishing dataset.
+          #     Output only. The BigQuery dataset the discovered tables are published to.
+          # @!attribute [r] location
+          #   @return [::String]
+          #     Output only. The location of the BigQuery publishing dataset.
           class BigQueryPublishing
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Statistics of the DataDiscoveryScan.
+          # @!attribute [rw] scanned_file_count
+          #   @return [::Integer]
+          #     The number of files scanned.
+          # @!attribute [rw] data_processed_bytes
+          #   @return [::Integer]
+          #     The data processed in bytes.
+          # @!attribute [rw] files_excluded
+          #   @return [::Integer]
+          #     The number of files excluded.
+          # @!attribute [rw] tables_created
+          #   @return [::Integer]
+          #     The number of tables created.
+          # @!attribute [rw] tables_deleted
+          #   @return [::Integer]
+          #     The number of tables deleted.
+          # @!attribute [rw] tables_updated
+          #   @return [::Integer]
+          #     The number of tables updated.
+          # @!attribute [rw] filesets_created
+          #   @return [::Integer]
+          #     The number of filesets created.
+          # @!attribute [rw] filesets_deleted
+          #   @return [::Integer]
+          #     The number of filesets deleted.
+          # @!attribute [rw] filesets_updated
+          #   @return [::Integer]
+          #     The number of filesets updated.
+          class ScanStatistics
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end

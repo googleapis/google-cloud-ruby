@@ -1,5 +1,35 @@
 # Release History
 
+### 2.2.2 (2025-04-29)
+
+#### Documentation
+
+* update documentation URL ([#30031](https://github.com/googleapis/google-cloud-ruby/issues/30031)) 
+
+### 2.2.1 (2025-04-29)
+
+#### Bug Fixes
+
+* Fixed several issues with validating credential configs 
+
+### 2.2.0 (2025-04-25)
+
+#### Features
+
+* MigrationConfig now includes the time when the Tag Template migration was enabled ([#29523](https://github.com/googleapis/google-cloud-ruby/issues/29523)) 
+
+### 2.1.1 (2025-04-18)
+
+#### Documentation
+
+* clarify sql variant in comment for LookupEntryRequest ([#29454](https://github.com/googleapis/google-cloud-ruby/issues/29454)) 
+
+### 2.1.0 (2025-03-14)
+
+#### Features
+
+* Documented the service as deprecated ([#29352](https://github.com/googleapis/google-cloud-ruby/issues/29352)) 
+
 ### 2.0.0 (2025-02-07)
 
 ### ⚠ BREAKING CHANGES

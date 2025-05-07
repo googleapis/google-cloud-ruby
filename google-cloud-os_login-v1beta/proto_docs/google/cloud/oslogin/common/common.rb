@@ -65,8 +65,7 @@ module Google
         # @!attribute [rw] key
         #   @return [::String]
         #     Public key text in SSH format, defined by
-        #     <a href="https://www.ietf.org/rfc/rfc4253.txt" target="_blank">RFC4253</a>
-        #     section 6.6.
+        #     [RFC4253](https://www.ietf.org/rfc/rfc4253.txt) section 6.6.
         # @!attribute [rw] expiration_time_usec
         #   @return [::Integer]
         #     An expiration time in microseconds since epoch.

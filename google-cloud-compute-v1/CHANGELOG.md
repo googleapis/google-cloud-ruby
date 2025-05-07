@@ -1,5 +1,41 @@
 # Release History
 
+### 2.21.1 (2025-04-29)
+
+#### Bug Fixes
+
+* Fixed several issues with validating credential configs 
+
+### 2.21.0 (2025-04-21)
+
+#### Features
+
+* Update Compute Engine API to revision 20250415 ([#29479](https://github.com/googleapis/google-cloud-ruby/issues/29479)) 
+
+### 2.20.0 (2025-03-28)
+
+#### Features
+
+* Update Compute Engine API to revision 20250320 ([#29417](https://github.com/googleapis/google-cloud-ruby/issues/29417)) 
+
+### 2.19.1 (2025-03-20)
+
+#### Bug Fixes
+
+* Corrected the type of ManagedInstanceLastAttempt#errors ([#29385](https://github.com/googleapis/google-cloud-ruby/issues/29385)) 
+
+### 2.19.0 (2025-03-14)
+
+#### Features
+
+* Update the API to revision 20250302, including the report_host_as_faulty call ([#29350](https://github.com/googleapis/google-cloud-ruby/issues/29350)) 
+
+### 2.18.0 (2025-02-25)
+
+#### Features
+
+* Updated Compute Engine API to revision 20250211 ([#29167](https://github.com/googleapis/google-cloud-ruby/issues/29167)) 
+
 ### 2.17.0 (2025-01-31)
 
 #### Features

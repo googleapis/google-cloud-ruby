@@ -703,7 +703,7 @@ module Google
               #   @param options [::Gapic::CallOptions, ::Hash]
               #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
               #
-              # @overload update_table(table: nil, update_mask: nil)
+              # @overload update_table(table: nil, update_mask: nil, ignore_warnings: nil)
               #   Pass arguments to `update_table` via keyword arguments. Note that at
               #   least one keyword argument is required. To specify no parameters, or to keep all
               #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -721,9 +721,12 @@ module Google
               #     * `change_stream_config`
               #     * `change_stream_config.retention_period`
               #     * `deletion_protection`
+              #     * `row_key_schema`
               #
               #     If `column_families` is set in `update_mask`, it will return an
               #     UNIMPLEMENTED error.
+              #   @param ignore_warnings [::Boolean]
+              #     Optional. If true, ignore safety checks when updating the table.
               #
               # @yield [response, operation] Access the result along with the RPC operation
               # @yieldparam response [::Gapic::Operation]
@@ -3436,8 +3439,8 @@ module Google
 
                 config_attr :endpoint,      nil, ::String, nil
                 config_attr :credentials,   nil do |value|
-                  allowed = [::String, ::Hash, ::Proc, ::Symbol, ::Google::Auth::Credentials, ::Signet::OAuth2::Client, nil]
-                  allowed += [::GRPC::Core::Channel, ::GRPC::Core::ChannelCredentials] if defined? ::GRPC
+                  allowed = [::String, ::Hash, ::Proc, ::Symbol, ::Google::Auth::Credentials, ::Google::Auth::BaseClient, ::Signet::OAuth2::Client, nil]
+                  allowed += [::GRPC::Core::Channel, ::GRPC::Core::ChannelCredentials] if defined? ::GRPC::Core::Channel
                   allowed.any? { |klass| klass === value }
                 end
                 config_attr :scope,         nil, ::String, ::Array, nil

@@ -20,7 +20,7 @@
 module Google
   module Cloud
     module GDCHardwareManagement
-      VERSION = "0.2.0"
+      VERSION = "0.2.1"
     end
   end
 end

@@ -20,7 +20,7 @@
 module Google
   module Shopping
     module Css
-      VERSION = "1.1.0"
+      VERSION = "1.2.1"
     end
   end
 end

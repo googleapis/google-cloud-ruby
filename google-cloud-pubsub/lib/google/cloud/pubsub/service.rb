@@ -342,6 +342,21 @@ module Google
         end
 
         ##
+        # Lists all schema revisions for the named schema.
+        # @param name [String] The name of the schema to list revisions for.
+        # @param view [String, Symbol, nil] Possible values:
+        #   * `BASIC` - Include the name and type of the schema, but not the definition.
+        #   * `FULL` - Include all Schema object fields.
+        #
+        def list_schema_revisions name, view, page_size, page_token
+          schema_view = Google::Cloud::PubSub::V1::SchemaView.const_get view.to_s.upcase
+          schemas.list_schema_revisions name: name,
+                                        view: schema_view,
+                                        page_size: page_size,
+                                        page_token: page_token
+        end
+
+        ##
         # Creates a schema in the current (or given) project.
         def create_schema schema_id, type, definition, options = {}
           schema = Google::Cloud::PubSub::V1::Schema.new(
@@ -369,6 +384,31 @@ module Google
         # Delete a schema.
         def delete_schema schema_name
           schemas.delete_schema name: schema_path(schema_name)
+        end
+
+        ##
+        # Commits a new schema revision to an existing schema.
+        #
+        # @param name [String] The name of the schema to revision.
+        # @param definition [String] The definition of the schema. This should
+        #   contain a string representing the full definition of the schema that
+        #   is a valid schema definition of the type specified in `type`. See
+        #   https://cloud.google.com/pubsub/docs/schemas for details.
+        # @param type [String, Symbol] The type of the schema. Required. Possible
+        #   values are case-insensitive and include:
+        #
+        #     * `PROTOCOL_BUFFER` - A Protocol Buffer schema definition.
+        #     * `AVRO` - An Avro schema definition.
+        #
+        # @return [Google::Cloud::PubSub::V1::Schema]
+        #
+        def commit_schema name, definition, type
+          schema = Google::Cloud::PubSub::V1::Schema.new(
+            name: name,
+            definition: definition,
+            type: type
+          )
+          schemas.commit_schema name: name, schema: schema
         end
 
         ##

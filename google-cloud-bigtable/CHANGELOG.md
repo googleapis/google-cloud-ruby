@@ -1,5 +1,12 @@
 # Release History
 
+### 2.12.0 (2025-02-25)
+
+#### Features
+
+* Provide easier access to the admin clients ([#28917](https://github.com/googleapis/google-cloud-ruby/issues/28917)) 
+* Support for setting the universe domain ([#29173](https://github.com/googleapis/google-cloud-ruby/issues/29173)) 
+
 ### 2.11.1 (2024-12-12)
 
 #### Bug Fixes

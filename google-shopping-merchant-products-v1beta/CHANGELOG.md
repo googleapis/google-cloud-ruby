@@ -1,5 +1,27 @@
 # Changelog
 
+### 0.5.1 (2025-04-29)
+
+#### Bug Fixes
+
+* Fixed several issues with validating credential configs 
+
+### 0.5.0 (2025-04-21)
+
+#### Features
+
+* A new field `automated_discounts` is added to message `google.shopping.merchant.products.v1beta.Product` ([#29456](https://github.com/googleapis/google-cloud-ruby/issues/29456)) 
+#### Documentation
+
+* Modified several comments 
+
+### 0.4.0 (2025-03-18)
+
+#### Features
+
+* Support for product sustainability incentives 
+* Support for the update_product_input RPC 
+
 ### 0.3.0 (2025-01-29)
 
 #### Features

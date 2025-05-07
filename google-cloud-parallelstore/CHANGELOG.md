@@ -1,5 +1,21 @@
 # Changelog
 
+### 2.0.1 (2025-04-29)
+
+#### Bug Fixes
+
+* Fixed several issues with validating credential configs 
+
+### 2.0.0 (2025-02-13)
+
+### ⚠ BREAKING CHANGES
+
+* Updated to use google-cloud-parallelstore-v1 ([#29049](https://github.com/googleapis/google-cloud-ruby/issues/29049))
+
+#### Features
+
+* Updated to use google-cloud-parallelstore-v1 ([#29049](https://github.com/googleapis/google-cloud-ruby/issues/29049)) 
+
 ### 1.1.0 (2025-01-29)
 
 #### Features

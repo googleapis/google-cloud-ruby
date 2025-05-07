@@ -571,7 +571,7 @@ module Google
               end
 
               ##
-              # Updates the specified commitment with the data included in the request. Update is performed only on selected fields included as part of update-mask. Only the following fields can be modified: auto_renew.
+              # Updates the specified commitment with the data included in the request. Update is performed only on selected fields included as part of update-mask. Only the following fields can be updated: auto_renew and plan.
               #
               # @overload update(request, options = nil)
               #   Pass arguments to `update` via a request object, either of type
@@ -589,7 +589,7 @@ module Google
               #   the default parameter values, pass an empty Hash as a request object (see above).
               #
               #   @param commitment [::String]
-              #     Name of the commitment for which auto renew is being updated.
+              #     Name of the commitment that you want to update.
               #   @param commitment_resource [::Google::Cloud::Compute::V1::Commitment, ::Hash]
               #     The body resource for this request
               #   @param paths [::String]
@@ -765,7 +765,7 @@ module Google
 
                 config_attr :endpoint,      nil, ::String, nil
                 config_attr :credentials,   nil do |value|
-                  allowed = [::String, ::Hash, ::Proc, ::Symbol, ::Google::Auth::Credentials, ::Signet::OAuth2::Client, nil]
+                  allowed = [::String, ::Hash, ::Proc, ::Symbol, ::Google::Auth::Credentials, ::Google::Auth::BaseClient, ::Signet::OAuth2::Client, nil]
                   allowed.any? { |klass| klass === value }
                 end
                 config_attr :scope,         nil, ::String, ::Array, nil

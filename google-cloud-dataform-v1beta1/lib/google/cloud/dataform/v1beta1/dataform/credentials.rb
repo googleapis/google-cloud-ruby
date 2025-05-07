@@ -26,6 +26,7 @@ module Google
           # Credentials for the Dataform API.
           class Credentials < ::Google::Auth::Credentials
             self.scope = [
+              "https://www.googleapis.com/auth/bigquery",
               "https://www.googleapis.com/auth/cloud-platform"
             ]
             self.env_vars = [

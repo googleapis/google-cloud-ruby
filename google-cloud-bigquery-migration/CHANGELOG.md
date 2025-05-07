@@ -1,5 +1,17 @@
 # Changelog
 
+### 1.3.2 (2025-04-29)
+
+#### Bug Fixes
+
+* Fixed several issues with validating credential configs 
+
+### 1.3.1 (2025-03-05)
+
+#### Documentation
+
+* fixed bigquery migration product link ([#29287](https://github.com/googleapis/google-cloud-ruby/issues/29287)) 
+
 ### 1.3.0 (2025-01-29)
 
 #### Features

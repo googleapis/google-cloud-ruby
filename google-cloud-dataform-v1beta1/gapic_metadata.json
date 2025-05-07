@@ -130,6 +130,11 @@
                 "query_directory_contents"
               ]
             },
+            "SearchFiles": {
+              "methods": [
+                "search_files"
+              ]
+            },
             "MakeDirectory": {
               "methods": [
                 "make_directory"
@@ -263,6 +268,16 @@
             "QueryWorkflowInvocationActions": {
               "methods": [
                 "query_workflow_invocation_actions"
+              ]
+            },
+            "GetConfig": {
+              "methods": [
+                "get_config"
+              ]
+            },
+            "UpdateConfig": {
+              "methods": [
+                "update_config"
               ]
             }
           }

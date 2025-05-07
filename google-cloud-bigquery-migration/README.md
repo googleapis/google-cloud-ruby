@@ -7,7 +7,7 @@ The BigQuery Migration Service is a comprehensive solution for migrating your da
 Actual client classes for the various versions of this API are defined in
 _versioned_ client gems, with names of the form `google-cloud-bigquery-migration-v*`.
 The gem `google-cloud-bigquery-migration` is the main client library that brings the
-verisoned gems in as dependencies, and provides high-level methods for
+versioned gems in as dependencies, and provides high-level methods for
 constructing clients. More information on versioned clients can be found below
 in the section titled *Which client should I use?*.
 
@@ -18,7 +18,7 @@ themselves can be found in the client library documentation for the versioned
 client gems:
 [google-cloud-bigquery-migration-v2](https://cloud.google.com/ruby/docs/reference/google-cloud-bigquery-migration-v2/latest).
 
-See also the [Product Documentation](https://cloud.google.com/bigquery/docs/reference/migration)
+See also the [Product Documentation](https://cloud.google.com/bigquery/docs/migration-intro)
 for more usage information.
 
 ## Quick Start

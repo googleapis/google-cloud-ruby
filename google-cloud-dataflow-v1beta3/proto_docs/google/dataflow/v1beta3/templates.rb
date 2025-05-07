@@ -44,6 +44,15 @@ module Google
         # @!attribute [rw] default_environment
         #   @return [::Google::Cloud::Dataflow::V1beta3::FlexTemplateRuntimeEnvironment]
         #     Default runtime environment for the job.
+        # @!attribute [rw] image_repository_username_secret_id
+        #   @return [::String]
+        #     Secret Manager secret id for username to authenticate to private registry.
+        # @!attribute [rw] image_repository_password_secret_id
+        #   @return [::String]
+        #     Secret Manager secret id for password to authenticate to private registry.
+        # @!attribute [rw] image_repository_cert_path
+        #   @return [::String]
+        #     Cloud Storage path to self-signed certificate of private registry.
         class ContainerSpec
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -213,19 +222,33 @@ module Google
         #     The algorithm to use for autoscaling
         # @!attribute [rw] dump_heap_on_oom
         #   @return [::Boolean]
-        #     If true, save a heap dump before killing a thread or process which is GC
-        #     thrashing or out of memory. The location of the heap file will either be
-        #     echoed back to the user, or the user will be given the opportunity to
+        #     If true, when processing time is spent almost entirely
+        #     on garbage collection (GC), saves a heap dump before ending the thread
+        #     or process. If false, ends the thread or process without saving a heap
+        #     dump. Does not save a heap dump when the Java Virtual Machine (JVM) has an
+        #     out of memory error during processing. The location of the heap file is
+        #     either echoed back to the user, or the user is given the opportunity to
         #     download the heap file.
         # @!attribute [rw] save_heap_dumps_to_gcs_path
         #   @return [::String]
-        #     Cloud Storage bucket (directory) to upload heap dumps to the given
-        #     location. Enabling this implies that heap dumps should be generated on OOM
-        #     (dump_heap_on_oom is set to true).
+        #     Cloud Storage bucket (directory) to upload heap dumps to.
+        #     Enabling this field implies that `dump_heap_on_oom` is set to true.
         # @!attribute [rw] launcher_machine_type
         #   @return [::String]
         #     The machine type to use for launching the job. The default is
         #     n1-standard-1.
+        # @!attribute [rw] enable_launcher_vm_serial_port_logging
+        #   @return [::Boolean]
+        #     If true serial port logging will be enabled for the launcher VM.
+        # @!attribute [rw] streaming_mode
+        #   @return [::Google::Cloud::Dataflow::V1beta3::StreamingMode]
+        #     Optional. Specifies the Streaming Engine message processing guarantees.
+        #     Reduces cost and latency but might result in duplicate messages committed
+        #     to storage. Designed to run simple mapping streaming ETL jobs at the lowest
+        #     cost. For example, Change Data Capture (CDC) to BigQuery is a canonical use
+        #     case. For more information, see
+        #     [Set the pipeline streaming
+        #     mode](https://cloud.google.com/dataflow/docs/guides/streaming-modes).
         class FlexTemplateRuntimeEnvironment
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -264,51 +287,53 @@ module Google
         # The environment values to set at runtime.
         # @!attribute [rw] num_workers
         #   @return [::Integer]
-        #     The initial number of Google Compute Engine instnaces for the job.
+        #     Optional. The initial number of Google Compute Engine instances for the
+        #     job. The default value is 11.
         # @!attribute [rw] max_workers
         #   @return [::Integer]
-        #     The maximum number of Google Compute Engine instances to be made
-        #     available to your pipeline during execution, from 1 to 1000.
+        #     Optional. The maximum number of Google Compute Engine instances to be made
+        #     available to your pipeline during execution, from 1 to 1000. The default
+        #     value is 1.
         # @!attribute [rw] zone
         #   @return [::String]
-        #     The Compute Engine [availability
+        #     Optional. The Compute Engine [availability
         #     zone](https://cloud.google.com/compute/docs/regions-zones/regions-zones)
         #     for launching worker instances to run your pipeline.
         #     In the future, worker_zone will take precedence.
         # @!attribute [rw] service_account_email
         #   @return [::String]
-        #     The email address of the service account to run the job as.
+        #     Optional. The email address of the service account to run the job as.
         # @!attribute [rw] temp_location
         #   @return [::String]
-        #     The Cloud Storage path to use for temporary files.
+        #     Required. The Cloud Storage path to use for temporary files.
         #     Must be a valid Cloud Storage URL, beginning with `gs://`.
         # @!attribute [rw] bypass_temp_dir_validation
         #   @return [::Boolean]
-        #     Whether to bypass the safety checks for the job's temporary directory.
-        #     Use with caution.
+        #     Optional. Whether to bypass the safety checks for the job's temporary
+        #     directory. Use with caution.
         # @!attribute [rw] machine_type
         #   @return [::String]
-        #     The machine type to use for the job. Defaults to the value from the
-        #     template if not specified.
+        #     Optional. The machine type to use for the job. Defaults to the value from
+        #     the template if not specified.
         # @!attribute [rw] additional_experiments
         #   @return [::Array<::String>]
-        #     Additional experiment flags for the job, specified with the
+        #     Optional. Additional experiment flags for the job, specified with the
         #     `--experiments` option.
         # @!attribute [rw] network
         #   @return [::String]
-        #     Network to which VMs will be assigned.  If empty or unspecified,
+        #     Optional. Network to which VMs will be assigned.  If empty or unspecified,
         #     the service will use the network "default".
         # @!attribute [rw] subnetwork
         #   @return [::String]
-        #     Subnetwork to which VMs will be assigned, if desired. You can specify a
-        #     subnetwork using either a complete URL or an abbreviated path. Expected to
-        #     be of the form
+        #     Optional. Subnetwork to which VMs will be assigned, if desired. You can
+        #     specify a subnetwork using either a complete URL or an abbreviated path.
+        #      Expected to be of the form
         #     "https://www.googleapis.com/compute/v1/projects/HOST_PROJECT_ID/regions/REGION/subnetworks/SUBNETWORK"
         #     or "regions/REGION/subnetworks/SUBNETWORK". If the subnetwork is located in
         #     a Shared VPC network, you must use the complete URL.
         # @!attribute [rw] additional_user_labels
         #   @return [::Google::Protobuf::Map{::String => ::String}]
-        #     Additional user labels to be specified for the job.
+        #     Optional. Additional user labels to be specified for the job.
         #     Keys and values should follow the restrictions specified in the [labeling
         #     restrictions](https://cloud.google.com/compute/docs/labeling-resources#restrictions)
         #     page.
@@ -316,22 +341,22 @@ module Google
         #     Example: { "name": "wrench", "mass": "1kg", "count": "3" }.
         # @!attribute [rw] kms_key_name
         #   @return [::String]
-        #     Name for the Cloud KMS key for the job.
+        #     Optional. Name for the Cloud KMS key for the job.
         #     Key format is:
         #     projects/<project>/locations/<location>/keyRings/<keyring>/cryptoKeys/<key>
         # @!attribute [rw] ip_configuration
         #   @return [::Google::Cloud::Dataflow::V1beta3::WorkerIPAddressConfiguration]
-        #     Configuration for VM IPs.
+        #     Optional. Configuration for VM IPs.
         # @!attribute [rw] worker_region
         #   @return [::String]
-        #     The Compute Engine region
+        #     Required. The Compute Engine region
         #     (https://cloud.google.com/compute/docs/regions-zones/regions-zones) in
         #     which worker processing should occur, e.g. "us-west1". Mutually exclusive
         #     with worker_zone. If neither worker_region nor worker_zone is specified,
         #     default to the control plane's region.
         # @!attribute [rw] worker_zone
         #   @return [::String]
-        #     The Compute Engine zone
+        #     Optional. The Compute Engine zone
         #     (https://cloud.google.com/compute/docs/regions-zones/regions-zones) in
         #     which worker processing should occur, e.g. "us-west1-a". Mutually exclusive
         #     with worker_region. If neither worker_region nor worker_zone is specified,
@@ -339,7 +364,20 @@ module Google
         #     If both `worker_zone` and `zone` are set, `worker_zone` takes precedence.
         # @!attribute [rw] enable_streaming_engine
         #   @return [::Boolean]
-        #     Whether to enable Streaming Engine for the job.
+        #     Optional. Whether to enable Streaming Engine for the job.
+        # @!attribute [rw] disk_size_gb
+        #   @return [::Integer]
+        #     Optional. The disk size, in gigabytes, to use on each remote Compute Engine
+        #     worker instance.
+        # @!attribute [rw] streaming_mode
+        #   @return [::Google::Cloud::Dataflow::V1beta3::StreamingMode]
+        #     Optional. Specifies the Streaming Engine message processing guarantees.
+        #     Reduces cost and latency but might result in duplicate messages committed
+        #     to storage. Designed to run simple mapping streaming ETL jobs at the lowest
+        #     cost. For example, Change Data Capture (CDC) to BigQuery is a canonical use
+        #     case. For more information, see
+        #     [Set the pipeline streaming
+        #     mode](https://cloud.google.com/dataflow/docs/guides/streaming-modes).
         class RuntimeEnvironment
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -352,6 +390,21 @@ module Google
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
+        end
+
+        # ParameterMetadataEnumOption specifies the option shown in the enum form.
+        # @!attribute [rw] value
+        #   @return [::String]
+        #     Required. The value of the enum option.
+        # @!attribute [rw] label
+        #   @return [::String]
+        #     Optional. The label to display for the enum option.
+        # @!attribute [rw] description
+        #   @return [::String]
+        #     Optional. The description to display for the enum option.
+        class ParameterMetadataEnumOption
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # Metadata for a specific parameter.
@@ -377,6 +430,35 @@ module Google
         # @!attribute [rw] custom_metadata
         #   @return [::Google::Protobuf::Map{::String => ::String}]
         #     Optional. Additional metadata for describing this parameter.
+        # @!attribute [rw] group_name
+        #   @return [::String]
+        #     Optional. Specifies a group name for this parameter to be rendered under.
+        #     Group header text will be rendered exactly as specified in this field. Only
+        #     considered when parent_name is NOT provided.
+        # @!attribute [rw] parent_name
+        #   @return [::String]
+        #     Optional. Specifies the name of the parent parameter. Used in conjunction
+        #     with 'parent_trigger_values' to make this parameter conditional (will only
+        #     be rendered conditionally). Should be mappable to a ParameterMetadata.name
+        #     field.
+        # @!attribute [rw] parent_trigger_values
+        #   @return [::Array<::String>]
+        #     Optional. The value(s) of the 'parent_name' parameter which will trigger
+        #     this parameter to be shown. If left empty, ANY non-empty value in
+        #     parent_name will trigger this parameter to be shown. Only considered when
+        #     this parameter is conditional (when 'parent_name' has been provided).
+        # @!attribute [rw] enum_options
+        #   @return [::Array<::Google::Cloud::Dataflow::V1beta3::ParameterMetadataEnumOption>]
+        #     Optional. The options shown when ENUM ParameterType is specified.
+        # @!attribute [rw] default_value
+        #   @return [::String]
+        #     Optional. The default values will pre-populate the parameter with the
+        #     given value from the proto. If default_value is left empty, the parameter
+        #     will be populated with a default of the relevant type, e.g. false for a
+        #     boolean.
+        # @!attribute [rw] hidden_ui
+        #   @return [::Boolean]
+        #     Optional. Whether the parameter should be hidden in the UI.
         class ParameterMetadata
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -401,6 +483,20 @@ module Google
         # @!attribute [rw] parameters
         #   @return [::Array<::Google::Cloud::Dataflow::V1beta3::ParameterMetadata>]
         #     The parameters for the template.
+        # @!attribute [rw] streaming
+        #   @return [::Boolean]
+        #     Optional. Indicates if the template is streaming or not.
+        # @!attribute [rw] supports_at_least_once
+        #   @return [::Boolean]
+        #     Optional. Indicates if the streaming template supports at least once mode.
+        # @!attribute [rw] supports_exactly_once
+        #   @return [::Boolean]
+        #     Optional. Indicates if the streaming template supports exactly once mode.
+        # @!attribute [rw] default_streaming_mode
+        #   @return [::String]
+        #     Optional. Indicates the default streaming mode for a streaming template.
+        #     Only valid if both supports_at_least_once and supports_exactly_once are
+        #     true. Possible values: UNSPECIFIED, EXACTLY_ONCE and AT_LEAST_ONCE
         class TemplateMetadata
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -427,6 +523,9 @@ module Google
 
             # Python.
             PYTHON = 2
+
+            # Go.
+            GO = 3
           end
         end
 
@@ -540,10 +639,16 @@ module Google
           end
         end
 
-        # Parameters to provide to the template being launched.
+        # Parameters to provide to the template being launched. Note that the
+        # [metadata in the pipeline code]
+        # (https://cloud.google.com/dataflow/docs/guides/templates/creating-templates#metadata)
+        # determines which runtime parameters are valid.
         # @!attribute [rw] job_name
         #   @return [::String]
         #     Required. The job name to use for the created job.
+        #
+        #     The name must match the regular expression
+        #     `[a-z]([-a-z0-9]{0,1022}[a-z0-9])?`
         # @!attribute [rw] parameters
         #   @return [::Google::Protobuf::Map{::String => ::String}]
         #     The runtime parameters to pass to the job.
@@ -591,19 +696,19 @@ module Google
         #     Defaults to false.
         # @!attribute [rw] gcs_path
         #   @return [::String]
-        #     A Cloud Storage path to the template from which to create
+        #     A Cloud Storage path to the template to use to create
         #     the job.
-        #     Must be valid Cloud Storage URL, beginning with 'gs://'.
+        #     Must be valid Cloud Storage URL, beginning with `gs://`.
         #
         #     Note: The following fields are mutually exclusive: `gcs_path`, `dynamic_template`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] dynamic_template
         #   @return [::Google::Cloud::Dataflow::V1beta3::DynamicTemplateLaunchParams]
-        #     Params for launching a dynamic template.
+        #     Parameters for launching a dynamic template.
         #
         #     Note: The following fields are mutually exclusive: `dynamic_template`, `gcs_path`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] launch_parameters
         #   @return [::Google::Cloud::Dataflow::V1beta3::LaunchTemplateParameters]
-        #     The parameters of the template to launch. This should be part of the
+        #     The parameters of the template to launch. Part of the
         #     body of the POST request.
         # @!attribute [rw] location
         #   @return [::String]
@@ -647,11 +752,11 @@ module Google
           end
         end
 
-        # Params which should be passed when launching a dynamic template.
+        # Parameters to pass when launching a dynamic template.
         # @!attribute [rw] gcs_path
         #   @return [::String]
-        #     Path to dynamic template spec file on Cloud Storage.
-        #     The file must be a Json serialized DynamicTemplateFieSpec object.
+        #     Path to the dynamic template specification file on Cloud Storage.
+        #     The file must be a JSON serialized `DynamicTemplateFileSpec` object.
         # @!attribute [rw] staging_location
         #   @return [::String]
         #     Cloud Storage path for staging dependencies.
@@ -692,6 +797,49 @@ module Google
 
           # The parameter specifies a Pub/Sub Subscription.
           PUBSUB_SUBSCRIPTION = 9
+
+          # The parameter specifies a BigQuery table.
+          BIGQUERY_TABLE = 10
+
+          # The parameter specifies a JavaScript UDF in Cloud Storage.
+          JAVASCRIPT_UDF_FILE = 11
+
+          # The parameter specifies a Service Account email.
+          SERVICE_ACCOUNT = 12
+
+          # The parameter specifies a Machine Type.
+          MACHINE_TYPE = 13
+
+          # The parameter specifies a KMS Key name.
+          KMS_KEY_NAME = 14
+
+          # The parameter specifies a Worker Region.
+          WORKER_REGION = 15
+
+          # The parameter specifies a Worker Zone.
+          WORKER_ZONE = 16
+
+          # The parameter specifies a boolean input.
+          BOOLEAN = 17
+
+          # The parameter specifies an enum input.
+          ENUM = 18
+
+          # The parameter specifies a number input.
+          NUMBER = 19
+
+          # Deprecated. Please use KAFKA_READ_TOPIC instead.
+          KAFKA_TOPIC = 20
+
+          # The parameter specifies the fully-qualified name of an Apache Kafka topic.
+          # This can be either a Google Managed Kafka topic or a non-managed Kafka
+          # topic.
+          KAFKA_READ_TOPIC = 21
+
+          # The parameter specifies the fully-qualified name of an Apache Kafka topic.
+          # This can be an existing Google Managed Kafka topic, the name for a new
+          # Google Managed Kafka topic, or an existing non-managed Kafka topic.
+          KAFKA_WRITE_TOPIC = 22
         end
       end
     end

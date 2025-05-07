@@ -34,8 +34,10 @@ module Google
         # @!attribute [rw] row_filter
         #   @return [::String]
         #     Optional. A filter applied to all rows in a single DataScan job.
-        #     The filter needs to be a valid SQL expression for a WHERE clause in
-        #     BigQuery standard SQL syntax.
+        #     The filter needs to be a valid SQL expression for a [WHERE clause in
+        #     GoogleSQL
+        #     syntax](https://cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#where_clause).
+        #
         #     Example: col1 >= 0 AND col2 < 10
         # @!attribute [rw] post_scan_actions
         #   @return [::Google::Cloud::Dataplex::V1::DataProfileSpec::PostScanActions]
@@ -71,6 +73,8 @@ module Google
             #     Optional. The BigQuery table to export DataProfileScan results to.
             #     Format:
             #     //bigquery.googleapis.com/projects/PROJECT_ID/datasets/DATASET_ID/tables/TABLE_ID
+            #     or
+            #     projects/PROJECT_ID/datasets/DATASET_ID/tables/TABLE_ID
             class BigQueryExport
               include ::Google::Protobuf::MessageExts
               extend ::Google::Protobuf::MessageExts::ClassMethods

@@ -1,5 +1,21 @@
 # Changelog
 
+### 2.0.1 (2025-04-29)
+
+#### Bug Fixes
+
+* Fixed several issues with validating credential configs 
+
+### 2.0.0 (2025-02-13)
+
+### ⚠ BREAKING CHANGES
+
+* Update google-cloud-deploy-v1 dependency to version 2.x ([#29054](https://github.com/googleapis/google-cloud-ruby/issues/29054))
+
+#### Features
+
+* Update google-cloud-deploy-v1 dependency to version 2.x ([#29054](https://github.com/googleapis/google-cloud-ruby/issues/29054)) 
+
 ### 1.3.0 (2025-01-29)
 
 #### Features

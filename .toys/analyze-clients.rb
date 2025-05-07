@@ -26,6 +26,7 @@ ANALYSES = {
   wrapper_dependencies: "List wrapper gems with outdated dependencies",
   wrapper_bazel: "List missing Ruby wrapper bazel configs",
   gapic_ready: "List complete Ruby bazel configs that haven't yet been generated",
+  handwritten: "List gems that are fully handwritten",
 }.freeze
 
 at_least_one desc: "Analyses" do
@@ -63,6 +64,10 @@ end
 
 def all_gems
   @all_gems ||= Dir.glob("*/*.gemspec").map { |path| File.dirname path }.sort
+end
+
+def all_handwritten_gems
+  @all_handwritten_gems ||= all_gems.find_all { |name| !File.file? "#{name}/.OwlBot.yaml" }
 end
 
 def all_normal_gems
@@ -162,6 +167,15 @@ end
 
 def date_to_age date
   (Time.now.to_i - Time.new(*date.map(&:to_i)).to_i) / 86_400
+end
+
+def handwritten_analysis
+  count = 0
+  all_handwritten_gems.each do |name|
+    puts name
+    count += 1
+  end
+  puts "Total: #{count}", :cyan
 end
 
 def unreleased_analysis

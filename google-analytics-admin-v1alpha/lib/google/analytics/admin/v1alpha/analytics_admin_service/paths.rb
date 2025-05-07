@@ -525,6 +525,23 @@ module Google
             end
 
             ##
+            # Create a fully-qualified ReportingDataAnnotation resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `properties/{property}/reportingDataAnnotations/{reporting_data_annotation}`
+            #
+            # @param property [String]
+            # @param reporting_data_annotation [String]
+            #
+            # @return [::String]
+            def reporting_data_annotation_path property:, reporting_data_annotation:
+              raise ::ArgumentError, "property cannot contain /" if property.to_s.include? "/"
+
+              "properties/#{property}/reportingDataAnnotations/#{reporting_data_annotation}"
+            end
+
+            ##
             # Create a fully-qualified RollupPropertySourceLink resource string.
             #
             # The resource will be in the following format:

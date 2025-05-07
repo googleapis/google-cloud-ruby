@@ -529,6 +529,9 @@ module Google
             # system will automatically choose what detectors to run. By default this may
             # be all types, but may change over time as detectors are updated.
             #
+            # Only the first frame of each multiframe image is redacted. Metadata and
+            # other frames are omitted in the response.
+            #
             # @overload redact_image(request, options = nil)
             #   Pass arguments to `redact_image` via a request object, either of type
             #   {::Google::Cloud::Dlp::V2::RedactImageRequest} or an equivalent Hash.
@@ -911,7 +914,7 @@ module Google
             end
 
             ##
-            # Returns a list of the sensitive information types that DLP API
+            # Returns a list of the sensitive information types that the DLP API
             # supports. See
             # https://cloud.google.com/sensitive-data-protection/docs/infotypes-reference
             # to learn more.
@@ -6292,8 +6295,8 @@ module Google
 
               config_attr :endpoint,      nil, ::String, nil
               config_attr :credentials,   nil do |value|
-                allowed = [::String, ::Hash, ::Proc, ::Symbol, ::Google::Auth::Credentials, ::Signet::OAuth2::Client, nil]
-                allowed += [::GRPC::Core::Channel, ::GRPC::Core::ChannelCredentials] if defined? ::GRPC
+                allowed = [::String, ::Hash, ::Proc, ::Symbol, ::Google::Auth::Credentials, ::Google::Auth::BaseClient, ::Signet::OAuth2::Client, nil]
+                allowed += [::GRPC::Core::Channel, ::GRPC::Core::ChannelCredentials] if defined? ::GRPC::Core::Channel
                 allowed.any? { |klass| klass === value }
               end
               config_attr :scope,         nil, ::String, ::Array, nil

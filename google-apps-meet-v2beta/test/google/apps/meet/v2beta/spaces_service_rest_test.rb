@@ -241,6 +241,61 @@ class ::Google::Apps::Meet::V2beta::SpacesService::Rest::ClientTest < Minitest::
     end
   end
 
+  def test_connect_active_conference
+    # Create test objects.
+    client_result = ::Google::Apps::Meet::V2beta::ConnectActiveConferenceResponse.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+    offer = "hello world"
+
+    connect_active_conference_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Apps::Meet::V2beta::SpacesService::Rest::ServiceStub.stub :transcode_connect_active_conference_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, connect_active_conference_client_stub do
+        # Create client
+        client = ::Google::Apps::Meet::V2beta::SpacesService::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.connect_active_conference({ name: name, offer: offer }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.connect_active_conference name: name, offer: offer do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.connect_active_conference ::Google::Apps::Meet::V2beta::ConnectActiveConferenceRequest.new(name: name, offer: offer) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.connect_active_conference({ name: name, offer: offer }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.connect_active_conference(::Google::Apps::Meet::V2beta::ConnectActiveConferenceRequest.new(name: name, offer: offer), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, connect_active_conference_client_stub.call_count
+      end
+    end
+  end
+
   def test_end_active_conference
     # Create test objects.
     client_result = ::Google::Protobuf::Empty.new

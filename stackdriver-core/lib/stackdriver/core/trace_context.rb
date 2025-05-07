@@ -70,17 +70,13 @@ module Stackdriver
       def initialize trace_id: nil, is_new: nil, span_id: nil, sampled: nil,
                      capture_stack: false
         @trace_id = trace_id || new_random_trace_id
-        @is_new = if is_new.nil?
-                    !trace_id
-                  else
-                    is_new ? true : false
-                  end
+        @is_new = is_new.nil? ? !trace_id : !!is_new
         @span_id = span_id&.to_i
         @sampled = sampled
         if @sampled.nil?
           @capture_stack = nil
         else
-          @sampled = @sampled ? true : false
+          @sampled = !!@sampled
           @capture_stack = capture_stack && @sampled
         end
       end

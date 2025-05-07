@@ -17,12 +17,13 @@ source "https://rubygems.org"
 master = ENV["GOOGLE_CLOUD_SAMPLES_TEST"] == "master"
 
 gem "google-cloud-firestore", path: master ? "../../google-cloud-firestore" : nil
+gem "google-cloud-firestore-admin-v1", path: master ? "../../google-cloud-firestore-admin-v1" : nil
 gem "google-cloud-firestore-v1", path: master ? "../../google-cloud-firestore-v1" : nil
 
 group :test do
-  gem "google-style", "~> 1.25.1"
-  gem "minitest", "~> 5.14"
-  gem "minitest-focus", "~> 1.2"
+  gem "google-style", "~> 1.30.1"
+  gem "minitest", "~> 5.25"
+  gem "minitest-focus", "~> 1.4"
   gem "minitest-hooks", "~> 1.5"
   gem "rake", ">= 12.0"
 end

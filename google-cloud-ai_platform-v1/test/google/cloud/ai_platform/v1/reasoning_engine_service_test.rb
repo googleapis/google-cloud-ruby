@@ -330,11 +330,13 @@ class ::Google::Cloud::AIPlatform::V1::ReasoningEngineService::ClientTest < Mini
 
     # Create request parameters for a unary method.
     name = "hello world"
+    force = true
 
     delete_reasoning_engine_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :delete_reasoning_engine, name
       assert_kind_of ::Google::Cloud::AIPlatform::V1::DeleteReasoningEngineRequest, request
       assert_equal "hello world", request["name"]
+      assert_equal true, request["force"]
       refute_nil options
     end
 
@@ -345,35 +347,35 @@ class ::Google::Cloud::AIPlatform::V1::ReasoningEngineService::ClientTest < Mini
       end
 
       # Use hash object
-      client.delete_reasoning_engine({ name: name }) do |response, operation|
+      client.delete_reasoning_engine({ name: name, force: force }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.delete_reasoning_engine name: name do |response, operation|
+      client.delete_reasoning_engine name: name, force: force do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.delete_reasoning_engine ::Google::Cloud::AIPlatform::V1::DeleteReasoningEngineRequest.new(name: name) do |response, operation|
+      client.delete_reasoning_engine ::Google::Cloud::AIPlatform::V1::DeleteReasoningEngineRequest.new(name: name, force: force) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.delete_reasoning_engine({ name: name }, grpc_options) do |response, operation|
+      client.delete_reasoning_engine({ name: name, force: force }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.delete_reasoning_engine(::Google::Cloud::AIPlatform::V1::DeleteReasoningEngineRequest.new(name: name), grpc_options) do |response, operation|
+      client.delete_reasoning_engine(::Google::Cloud::AIPlatform::V1::DeleteReasoningEngineRequest.new(name: name, force: force), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation

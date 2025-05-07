@@ -1,5 +1,29 @@
 # Changelog
 
+### 1.3.4 (2025-04-29)
+
+#### Bug Fixes
+
+* Fixed several issues with validating credential configs 
+
+### 1.3.3 (2025-04-18)
+
+#### Documentation
+
+* `enabled` field of `MasterAuthorizedNetworksConfig` is now marked as optional ([#29474](https://github.com/googleapis/google-cloud-ruby/issues/29474)) 
+
+### 1.3.2 (2025-03-20)
+
+#### Documentation
+
+* Fixed a minor typo ([#29386](https://github.com/googleapis/google-cloud-ruby/issues/29386)) 
+
+### 1.3.1 (2025-03-13)
+
+#### Documentation
+
+* Fixed Composer 3 image version format ([#29331](https://github.com/googleapis/google-cloud-ruby/issues/29331)) 
+
 ### 1.3.0 (2025-01-28)
 
 #### Features

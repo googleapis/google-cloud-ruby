@@ -38,18 +38,23 @@ module Google
             #
             # A partner is a third-party event provider that is integrated with Eventarc.
             #
-            # A subscriber is a GCP customer interested in receiving events.
+            # A subscriber is a Google Cloud customer interested in receiving events.
             #
             # Channel is a first-class Eventarc resource that is created and managed
-            # by the subscriber in their GCP project. A Channel represents a subscriber's
-            # intent to receive events from an event provider. A Channel is associated with
-            # exactly one event provider.
+            # by the subscriber in their Google Cloud project. A Channel represents a
+            # subscriber's intent to receive events from an event provider. A Channel is
+            # associated with exactly one event provider.
             #
             # ChannelConnection is a first-class Eventarc resource that
-            # is created and managed by the partner in their GCP project. A
+            # is created and managed by the partner in their Google Cloud project. A
             # ChannelConnection represents a connection between a partner and a
             # subscriber's Channel. A ChannelConnection has a one-to-one mapping with a
             # Channel.
+            #
+            # Bus is a first-class Eventarc resource that is created and managed in a
+            # Google Cloud project. A Bus provides a discoverable endpoint for events and
+            # is a router that receives all events published by event providers and
+            # delivers them to zero or more subscribers.
             #
             # Publisher allows an event provider to publish events to Eventarc.
             #
@@ -608,8 +613,8 @@ module Google
 
                 config_attr :endpoint,      nil, ::String, nil
                 config_attr :credentials,   nil do |value|
-                  allowed = [::String, ::Hash, ::Proc, ::Symbol, ::Google::Auth::Credentials, ::Signet::OAuth2::Client, nil]
-                  allowed += [::GRPC::Core::Channel, ::GRPC::Core::ChannelCredentials] if defined? ::GRPC
+                  allowed = [::String, ::Hash, ::Proc, ::Symbol, ::Google::Auth::Credentials, ::Google::Auth::BaseClient, ::Signet::OAuth2::Client, nil]
+                  allowed += [::GRPC::Core::Channel, ::GRPC::Core::ChannelCredentials] if defined? ::GRPC::Core::Channel
                   allowed.any? { |klass| klass === value }
                 end
                 config_attr :scope,         nil, ::String, ::Array, nil

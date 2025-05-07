@@ -223,9 +223,19 @@ module Google
               #     chronological order. Format: `projects/<Project ID>/locations/<Location
               #     ID>`.
               #   @param filter [::String]
-              #     Optional. Filters to restrict results to specific answer records.
+              #     Optional. Filters to restrict results to specific answer records. The
+              #     expression has the following syntax:
               #
-              #     Marked deprecated as it hasn't been, and isn't currently, supported.
+              #         <field> <operator> <value> [AND <field> <operator> <value>] ...
+              #
+              #     The following fields and operators are supported:
+              #     * conversation_id with equals(=) operator
+              #
+              #     Examples:
+              #
+              #     * `conversation_id=bar` matches answer records in the
+              #       `projects/foo/locations/global/conversations/bar` conversation
+              #       (assuming the parent is `projects/foo/locations/global`).
               #
               #     For more information about filtering, see
               #     [API Filtering](https://aip.dev/160).
@@ -478,7 +488,7 @@ module Google
 
                 config_attr :endpoint,      nil, ::String, nil
                 config_attr :credentials,   nil do |value|
-                  allowed = [::String, ::Hash, ::Proc, ::Symbol, ::Google::Auth::Credentials, ::Signet::OAuth2::Client, nil]
+                  allowed = [::String, ::Hash, ::Proc, ::Symbol, ::Google::Auth::Credentials, ::Google::Auth::BaseClient, ::Signet::OAuth2::Client, nil]
                   allowed.any? { |klass| klass === value }
                 end
                 config_attr :scope,         nil, ::String, ::Array, nil

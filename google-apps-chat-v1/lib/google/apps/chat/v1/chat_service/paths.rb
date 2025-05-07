@@ -44,6 +44,20 @@ module Google
             end
 
             ##
+            # Create a fully-qualified CustomEmoji resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `customEmojis/{custom_emoji}`
+            #
+            # @param custom_emoji [String]
+            #
+            # @return [::String]
+            def custom_emoji_path custom_emoji:
+              "customEmojis/#{custom_emoji}"
+            end
+
+            ##
             # Create a fully-qualified Membership resource string.
             #
             # The resource will be in the following format:
@@ -144,6 +158,23 @@ module Google
               raise ::ArgumentError, "space cannot contain /" if space.to_s.include? "/"
 
               "spaces/#{space}/spaceEvents/#{space_event}"
+            end
+
+            ##
+            # Create a fully-qualified SpaceNotificationSetting resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `users/{user}/spaces/{space}/spaceNotificationSetting`
+            #
+            # @param user [String]
+            # @param space [String]
+            #
+            # @return [::String]
+            def space_notification_setting_path user:, space:
+              raise ::ArgumentError, "user cannot contain /" if user.to_s.include? "/"
+
+              "users/#{user}/spaces/#{space}/spaceNotificationSetting"
             end
 
             ##

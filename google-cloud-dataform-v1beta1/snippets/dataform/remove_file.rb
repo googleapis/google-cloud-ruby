@@ -41,7 +41,7 @@ def remove_file
   # Call the remove_file method.
   result = client.remove_file request
 
-  # The returned object is of type Google::Protobuf::Empty.
+  # The returned object is of type Google::Cloud::Dataform::V1beta1::RemoveFileResponse.
   p result
 end
 # [END dataform_v1beta1_generated_Dataform_RemoveFile_sync]

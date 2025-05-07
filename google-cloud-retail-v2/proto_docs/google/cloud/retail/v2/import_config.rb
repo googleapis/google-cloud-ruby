@@ -69,9 +69,6 @@ module Google
         # @!attribute [rw] partition_date
         #   @return [::Google::Type::Date]
         #     BigQuery time partitioned table's _PARTITIONDATE in YYYY-MM-DD format.
-        #
-        #     Only supported in
-        #     {::Google::Cloud::Retail::V2::ImportProductsRequest ImportProductsRequest}.
         # @!attribute [rw] project_id
         #   @return [::String]
         #     The project ID (can be project # or ID) that the BigQuery source is in with

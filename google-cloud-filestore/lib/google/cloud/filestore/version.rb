@@ -20,7 +20,7 @@
 module Google
   module Cloud
     module Filestore
-      VERSION = "1.5.0"
+      VERSION = "2.0.1"
     end
   end
 end

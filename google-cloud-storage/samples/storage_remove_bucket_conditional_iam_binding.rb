@@ -37,10 +37,10 @@ def remove_bucket_conditional_iam_binding bucket_name:
         description: description,
         expression:  expression
       }
-      if (b.role == role) && (b.condition &&
-        b.condition.title == title &&
-        b.condition.description == description &&
-        b.condition.expression == expression)
+      if b.role == role && b.condition &&
+         b.condition.title == title &&
+         b.condition.description == description &&
+         b.condition.expression == expression
         binding_to_remove = b
       end
     end

@@ -357,7 +357,7 @@ module Google
             end
 
             ##
-            # Performs bidirectional streaming speech synthesis: receive audio while
+            # Performs bidirectional streaming speech synthesis: receives audio while
             # sending text.
             #
             # @param request [::Gapic::StreamInput, ::Enumerable<::Google::Cloud::TextToSpeech::V1::StreamingSynthesizeRequest, ::Hash>]
@@ -540,8 +540,8 @@ module Google
 
               config_attr :endpoint,      nil, ::String, nil
               config_attr :credentials,   nil do |value|
-                allowed = [::String, ::Hash, ::Proc, ::Symbol, ::Google::Auth::Credentials, ::Signet::OAuth2::Client, nil]
-                allowed += [::GRPC::Core::Channel, ::GRPC::Core::ChannelCredentials] if defined? ::GRPC
+                allowed = [::String, ::Hash, ::Proc, ::Symbol, ::Google::Auth::Credentials, ::Google::Auth::BaseClient, ::Signet::OAuth2::Client, nil]
+                allowed += [::GRPC::Core::Channel, ::GRPC::Core::ChannelCredentials] if defined? ::GRPC::Core::Channel
                 allowed.any? { |klass| klass === value }
               end
               config_attr :scope,         nil, ::String, ::Array, nil

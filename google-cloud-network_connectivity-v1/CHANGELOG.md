@@ -1,5 +1,26 @@
 # Changelog
 
+### 1.5.1 (2025-04-29)
+
+#### Bug Fixes
+
+* Fixed several issues with validating credential configs 
+
+### 1.5.0 (2025-04-21)
+
+#### Features
+
+* expand QuotaFailure with quota error details ([#29460](https://github.com/googleapis/google-cloud-ruby/issues/29460)) 
+
+### 1.4.0 (2025-03-25)
+
+#### Features
+
+* Support for accept_spoke_update and reject_spoke_update RPCs 
+* Support for CrossNetworkAutomationService calls 
+* Support for proposed include and exclude support ranges in a LinkedVpcNetwork 
+* Support for Spoke etags and the list of fields waiting for admin approval 
+
 ### 1.3.0 (2025-01-28)
 
 #### Features

@@ -16,7 +16,7 @@
 module Google
   module Cloud
     module Asset
-      VERSION = "1.8.0".freeze
+      VERSION = "1.8.1".freeze
     end
   end
 end

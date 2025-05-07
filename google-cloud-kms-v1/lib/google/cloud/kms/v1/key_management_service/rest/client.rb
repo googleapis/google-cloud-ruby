@@ -1033,7 +1033,7 @@ module Google
               #   @param options [::Gapic::CallOptions, ::Hash]
               #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
               #
-              # @overload get_public_key(name: nil)
+              # @overload get_public_key(name: nil, public_key_format: nil)
               #   Pass arguments to `get_public_key` via keyword arguments. Note that at
               #   least one keyword argument is required. To specify no parameters, or to keep all
               #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -1041,6 +1041,14 @@ module Google
               #   @param name [::String]
               #     Required. The {::Google::Cloud::Kms::V1::CryptoKeyVersion#name name} of the
               #     {::Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersion} public key to get.
+              #   @param public_key_format [::Google::Cloud::Kms::V1::PublicKey::PublicKeyFormat]
+              #     Optional. The {::Google::Cloud::Kms::V1::PublicKey PublicKey} format specified
+              #     by the user. This field is required for PQC algorithms. If specified, the
+              #     public key will be exported through the
+              #     {::Google::Cloud::Kms::V1::PublicKey#public_key public_key} field in the
+              #     requested format. Otherwise, the {::Google::Cloud::Kms::V1::PublicKey#pem pem}
+              #     field will be populated for non-PQC algorithms, and an error will be
+              #     returned for PQC algorithms.
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Google::Cloud::Kms::V1::PublicKey]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
@@ -3406,7 +3414,7 @@ module Google
 
                 config_attr :endpoint,      nil, ::String, nil
                 config_attr :credentials,   nil do |value|
-                  allowed = [::String, ::Hash, ::Proc, ::Symbol, ::Google::Auth::Credentials, ::Signet::OAuth2::Client, nil]
+                  allowed = [::String, ::Hash, ::Proc, ::Symbol, ::Google::Auth::Credentials, ::Google::Auth::BaseClient, ::Signet::OAuth2::Client, nil]
                   allowed.any? { |klass| klass === value }
                 end
                 config_attr :scope,         nil, ::String, ::Array, nil

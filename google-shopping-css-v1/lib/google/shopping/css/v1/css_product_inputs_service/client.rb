@@ -420,7 +420,10 @@ module Google
             #
             #   @param name [::String]
             #     Required. The name of the CSS product input resource to delete.
-            #     Format: accounts/\\{account}/cssProductInputs/\\{css_product_input}
+            #     Format: accounts/\\{account}/cssProductInputs/\\{css_product_input}, where the
+            #     last section `css_product_input` consists of 3 parts:
+            #     contentLanguage~feedLabel~offerId. Example:
+            #     accounts/123/cssProductInputs/de~DE~rawProvidedId123
             #   @param supplemental_feed_id [::Integer]
             #     The Content API Supplemental Feed ID.
             #     The field must not be set if the action applies to a primary feed.
@@ -596,8 +599,8 @@ module Google
 
               config_attr :endpoint,      nil, ::String, nil
               config_attr :credentials,   nil do |value|
-                allowed = [::String, ::Hash, ::Proc, ::Symbol, ::Google::Auth::Credentials, ::Signet::OAuth2::Client, nil]
-                allowed += [::GRPC::Core::Channel, ::GRPC::Core::ChannelCredentials] if defined? ::GRPC
+                allowed = [::String, ::Hash, ::Proc, ::Symbol, ::Google::Auth::Credentials, ::Google::Auth::BaseClient, ::Signet::OAuth2::Client, nil]
+                allowed += [::GRPC::Core::Channel, ::GRPC::Core::ChannelCredentials] if defined? ::GRPC::Core::Channel
                 allowed.any? { |klass| klass === value }
               end
               config_attr :scope,         nil, ::String, ::Array, nil

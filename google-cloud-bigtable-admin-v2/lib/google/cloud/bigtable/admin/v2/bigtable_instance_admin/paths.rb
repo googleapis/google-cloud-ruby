@@ -119,6 +119,44 @@ module Google
               end
 
               ##
+              # Create a fully-qualified LogicalView resource string.
+              #
+              # The resource will be in the following format:
+              #
+              # `projects/{project}/instances/{instance}/logicalViews/{logical_view}`
+              #
+              # @param project [String]
+              # @param instance [String]
+              # @param logical_view [String]
+              #
+              # @return [::String]
+              def logical_view_path project:, instance:, logical_view:
+                raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+                raise ::ArgumentError, "instance cannot contain /" if instance.to_s.include? "/"
+
+                "projects/#{project}/instances/#{instance}/logicalViews/#{logical_view}"
+              end
+
+              ##
+              # Create a fully-qualified MaterializedView resource string.
+              #
+              # The resource will be in the following format:
+              #
+              # `projects/{project}/instances/{instance}/materializedViews/{materialized_view}`
+              #
+              # @param project [String]
+              # @param instance [String]
+              # @param materialized_view [String]
+              #
+              # @return [::String]
+              def materialized_view_path project:, instance:, materialized_view:
+                raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+                raise ::ArgumentError, "instance cannot contain /" if instance.to_s.include? "/"
+
+                "projects/#{project}/instances/#{instance}/materializedViews/#{materialized_view}"
+              end
+
+              ##
               # Create a fully-qualified Project resource string.
               #
               # The resource will be in the following format:

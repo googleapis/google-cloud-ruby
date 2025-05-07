@@ -1,5 +1,25 @@
 # Release History
 
+### 1.9.1 (2025-04-29)
+
+#### Bug Fixes
+
+* Fixed several issues with validating credential configs 
+
+### 1.9.0 (2025-03-25)
+
+#### Features
+
+* Support for general and specific info types 
+* Support for storing sample data profile findings in an existing BigQuery table or dataset 
+* Support for the Czechia info type 
+
+### 1.8.0 (2025-02-25)
+
+#### Features
+
+* Support for discovery of Vertex AI datasets ([#29172](https://github.com/googleapis/google-cloud-ruby/issues/29172)) 
+
 ### 1.7.0 (2025-01-28)
 
 #### Features

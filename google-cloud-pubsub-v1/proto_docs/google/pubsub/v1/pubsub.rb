@@ -638,7 +638,7 @@ module Google
         #       *
         #       * @param  \\{Object<string, any>} metadata - Pub/Sub message metadata.
         #       * Keys:
-        #       *   - (required) 'message_id'  : \\{string}
+        #       *   - (optional) 'message_id'  : \\{string}
         #       *   - (optional) 'publish_time': \\{string} YYYY-MM-DDTHH:MM:SSZ format
         #       *   - (optional) 'ordering_key': \\{string}
         #       */
@@ -657,9 +657,14 @@ module Google
         #     Optional. JavaScript User Defined Function. If multiple JavaScriptUDF's
         #     are specified on a resource, each must have a unique `function_name`.
         # @!attribute [rw] enabled
+        #   @deprecated This field is deprecated and may be removed in the next major version update.
         #   @return [::Boolean]
-        #     Optional. If set to true, the transform is enabled. If false, the transform
-        #     is disabled and will not be applied to messages. Defaults to `true`.
+        #     Optional. This field is deprecated, use the `disabled` field to disable
+        #     transforms.
+        # @!attribute [rw] disabled
+        #   @return [::Boolean]
+        #     Optional. If true, the transform is disabled and will not be applied to
+        #     messages. Defaults to `false`.
         class MessageTransform
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

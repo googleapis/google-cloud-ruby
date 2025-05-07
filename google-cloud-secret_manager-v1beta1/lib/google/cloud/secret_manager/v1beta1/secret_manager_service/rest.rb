@@ -21,6 +21,7 @@ require "gapic/config"
 require "gapic/config/method"
 
 require "google/cloud/secret_manager/v1beta1/version"
+require "google/cloud/secret_manager/v1beta1/bindings_override"
 
 require "google/cloud/secret_manager/v1beta1/secret_manager_service/credentials"
 require "google/cloud/secret_manager/v1beta1/secret_manager_service/paths"

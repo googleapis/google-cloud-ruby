@@ -1,5 +1,18 @@
 # Changelog
 
+### 0.11.1 (2025-04-29)
+
+#### Bug Fixes
+
+* Fixed several issues with validating credential configs 
+
+### 0.11.0 (2025-03-28)
+
+#### Features
+
+* Support for sharing Cloud PubSub streams 
+* Support for Subscriber Email logging 
+
 ### 0.10.0 (2025-01-28)
 
 #### Features

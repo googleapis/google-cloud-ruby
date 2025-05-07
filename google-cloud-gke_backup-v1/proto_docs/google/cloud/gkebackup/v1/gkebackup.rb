@@ -41,9 +41,10 @@ module Google
         #   @return [::Boolean]
         #     Output only. Identifies whether the user has requested cancellation
         #     of the operation. Operations that have successfully been cancelled
-        #     have [Operation.error][] value with a
-        #     {::Google::Rpc::Status#code google.rpc.Status.code} of 1, corresponding to
-        #     `Code.CANCELLED`.
+        #     have
+        #     {::Google::Longrunning::Operation#error google.longrunning.Operation.error}
+        #     value with a {::Google::Rpc::Status#code google.rpc.Status.code} of 1,
+        #     corresponding to `Code.CANCELLED`.
         # @!attribute [r] api_version
         #   @return [::String]
         #     Output only. API version used to start the operation.
@@ -172,6 +173,196 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # Request message for CreateBackupChannel.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. The location within which to create the BackupChannel.
+        #     Format: `projects/*/locations/*`
+        # @!attribute [rw] backup_channel
+        #   @return [::Google::Cloud::GkeBackup::V1::BackupChannel]
+        #     Required. The BackupChannel resource object to create.
+        # @!attribute [rw] backup_channel_id
+        #   @return [::String]
+        #     Optional. The client-provided short name for the BackupChannel resource.
+        #     This name must:
+        #
+        #     - be between 1 and 63 characters long (inclusive)
+        #     - consist of only lower-case ASCII letters, numbers, and dashes
+        #     - start with a lower-case letter
+        #     - end with a lower-case letter or number
+        #     - be unique within the set of BackupChannels in this location
+        #     If the user does not provide a name, a uuid will be used as the name.
+        class CreateBackupChannelRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for ListBackupChannels.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. The location that contains the BackupChannels to list.
+        #     Format: `projects/*/locations/*`
+        # @!attribute [rw] page_size
+        #   @return [::Integer]
+        #     Optional. The target number of results to return in a single response.
+        #     If not specified, a default value will be chosen by the service.
+        #     Note that the response may include a partial list and a caller should
+        #     only rely on the response's
+        #     {::Google::Cloud::GkeBackup::V1::ListBackupChannelsResponse#next_page_token next_page_token}
+        #     to determine if there are more instances left to be queried.
+        # @!attribute [rw] page_token
+        #   @return [::String]
+        #     Optional. The value of
+        #     {::Google::Cloud::GkeBackup::V1::ListBackupChannelsResponse#next_page_token next_page_token}
+        #     received from a previous `ListBackupChannels` call.
+        #     Provide this to retrieve the subsequent page in a multi-page list of
+        #     results. When paginating, all other parameters provided to
+        #     `ListBackupChannels` must match the call that provided the page
+        #     token.
+        # @!attribute [rw] filter
+        #   @return [::String]
+        #     Optional. Field match expression used to filter the results.
+        # @!attribute [rw] order_by
+        #   @return [::String]
+        #     Optional. Field by which to sort the results.
+        class ListBackupChannelsRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Response message for ListBackupChannels.
+        # @!attribute [rw] backup_channels
+        #   @return [::Array<::Google::Cloud::GkeBackup::V1::BackupChannel>]
+        #     The list of BackupChannels matching the given criteria.
+        # @!attribute [rw] next_page_token
+        #   @return [::String]
+        #     A token which may be sent as
+        #     {::Google::Cloud::GkeBackup::V1::ListBackupChannelsRequest#page_token page_token}
+        #     in a subsequent `ListBackupChannels` call to retrieve the next page of
+        #     results. If this field is omitted or empty, then there are no more results
+        #     to return.
+        # @!attribute [rw] unreachable
+        #   @return [::Array<::String>]
+        #     Locations that could not be reached.
+        class ListBackupChannelsResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for GetBackupChannel.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. Fully qualified BackupChannel name.
+        #     Format: `projects/*/locations/*/backupChannels/*`
+        class GetBackupChannelRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for UpdateBackupChannel.
+        # @!attribute [rw] backup_channel
+        #   @return [::Google::Cloud::GkeBackup::V1::BackupChannel]
+        #     Required. A new version of the BackupChannel resource that contains updated
+        #     fields. This may be sparsely populated if an `update_mask` is provided.
+        # @!attribute [rw] update_mask
+        #   @return [::Google::Protobuf::FieldMask]
+        #     Optional. This is used to specify the fields to be overwritten in the
+        #     BackupChannel targeted for update. The values for each of these
+        #     updated fields will be taken from the `backup_channel` provided
+        #     with this request. Field names are relative to the root of the resource
+        #     (e.g., `description`, `labels`, etc.)
+        #     If no `update_mask` is provided, all fields in `backup_channel` will
+        #     be written to the target BackupChannel resource. Note that
+        #     OUTPUT_ONLY and IMMUTABLE fields in `backup_channel` are ignored and
+        #     are not used to update the target BackupChannel.
+        class UpdateBackupChannelRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for DeleteBackupChannel.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. Fully qualified BackupChannel name.
+        #     Format: `projects/*/locations/*/backupChannels/*`
+        # @!attribute [rw] etag
+        #   @return [::String]
+        #     Optional. If provided, this value must match the current value of the
+        #     target BackupChannel's {::Google::Cloud::GkeBackup::V1::BackupChannel#etag etag}
+        #     field or the request is rejected.
+        # @!attribute [rw] force
+        #   @return [::Boolean]
+        #     Optional. If set to true, any BackupPlanAssociations below this
+        #     BackupChannel will also be deleted. Otherwise, the request will only
+        #     succeed if the BackupChannel has no BackupPlanAssociations.
+        class DeleteBackupChannelRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for ListBackupPlanBindings.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. The BackupChannel that contains the BackupPlanBindings to list.
+        #     Format: `projects/*/locations/*/backupChannels/*`
+        # @!attribute [rw] page_size
+        #   @return [::Integer]
+        #     Optional. The target number of results to return in a single response.
+        #     If not specified, a default value will be chosen by the service.
+        #     Note that the response may include a partial list and a caller should
+        #     only rely on the response's
+        #     {::Google::Cloud::GkeBackup::V1::ListBackupPlanBindingsResponse#next_page_token next_page_token}
+        #     to determine if there are more instances left to be queried.
+        # @!attribute [rw] page_token
+        #   @return [::String]
+        #     Optional. The value of
+        #     {::Google::Cloud::GkeBackup::V1::ListBackupPlanBindingsResponse#next_page_token next_page_token}
+        #     received from a previous `ListBackupPlanBindings` call.
+        #     Provide this to retrieve the subsequent page in a multi-page list of
+        #     results. When paginating, all other parameters provided to
+        #     `ListBackupPlanBindings` must match the call that provided the page
+        #     token.
+        # @!attribute [rw] filter
+        #   @return [::String]
+        #     Optional. Field match expression used to filter the results.
+        # @!attribute [rw] order_by
+        #   @return [::String]
+        #     Optional. Field by which to sort the results.
+        class ListBackupPlanBindingsRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Response message for ListBackupPlanBindings.
+        # @!attribute [rw] backup_plan_bindings
+        #   @return [::Array<::Google::Cloud::GkeBackup::V1::BackupPlanBinding>]
+        #     The list of BackupPlanBindings matching the given criteria.
+        # @!attribute [rw] next_page_token
+        #   @return [::String]
+        #     A token which may be sent as
+        #     {::Google::Cloud::GkeBackup::V1::ListBackupPlanBindingsRequest#page_token page_token}
+        #     in a subsequent `ListBackupPlanBindingss` call to retrieve the next page of
+        #     results. If this field is omitted or empty, then there are no more results
+        #     to return.
+        # @!attribute [rw] unreachable
+        #   @return [::Array<::String>]
+        #     Locations that could not be reached.
+        class ListBackupPlanBindingsResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for GetBackupPlanBinding.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. Fully qualified BackupPlanBinding name.
+        #     Format:
+        #     `projects/*/locations/*/backupChannels/*/backupPlanBindings/*`
+        class GetBackupPlanBindingRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # Request message for CreateBackup.
         # @!attribute [rw] parent
         #   @return [::String]
@@ -222,6 +413,10 @@ module Google
         # @!attribute [rw] order_by
         #   @return [::String]
         #     Optional. Field by which to sort the results.
+        # @!attribute [rw] return_partial_success
+        #   @return [::Boolean]
+        #     Optional. If set to true, the response will return partial results when
+        #     some regions are unreachable and the unreachable field will be populated.
         class ListBackupsRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -237,6 +432,9 @@ module Google
         #     {::Google::Cloud::GkeBackup::V1::ListBackupsRequest#page_token page_token} in a
         #     subsequent `ListBackups` call to retrieve the next page of results. If this
         #     field is omitted or empty, then there are no more results to return.
+        # @!attribute [rw] unreachable
+        #   @return [::Array<::String>]
+        #     Locations that could not be reached.
         class ListBackupsResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -474,6 +672,193 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # Request message for CreateRestoreChannel.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. The location within which to create the RestoreChannel.
+        #     Format: `projects/*/locations/*`
+        # @!attribute [rw] restore_channel
+        #   @return [::Google::Cloud::GkeBackup::V1::RestoreChannel]
+        #     Required. The RestoreChannel resource object to create.
+        # @!attribute [rw] restore_channel_id
+        #   @return [::String]
+        #     Optional. The client-provided short name for the RestoreChannel resource.
+        #     This name must:
+        #
+        #     - be between 1 and 63 characters long (inclusive)
+        #     - consist of only lower-case ASCII letters, numbers, and dashes
+        #     - start with a lower-case letter
+        #     - end with a lower-case letter or number
+        #     - be unique within the set of RestoreChannels in this location
+        #     If the user does not provide a name, a uuid will be used as the name.
+        class CreateRestoreChannelRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for ListRestoreChannels.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. The location that contains the RestoreChannels to list.
+        #     Format: `projects/*/locations/*`
+        # @!attribute [rw] page_size
+        #   @return [::Integer]
+        #     Optional. The target number of results to return in a single response.
+        #     If not specified, a default value will be chosen by the service.
+        #     Note that the response may include a partial list and a caller should
+        #     only rely on the response's
+        #     {::Google::Cloud::GkeBackup::V1::ListRestoreChannelsResponse#next_page_token next_page_token}
+        #     to determine if there are more instances left to be queried.
+        # @!attribute [rw] page_token
+        #   @return [::String]
+        #     Optional. The value of
+        #     {::Google::Cloud::GkeBackup::V1::ListRestoreChannelsResponse#next_page_token next_page_token}
+        #     received from a previous `ListRestoreChannels` call.
+        #     Provide this to retrieve the subsequent page in a multi-page list of
+        #     results. When paginating, all other parameters provided to
+        #     `ListRestoreChannels` must match the call that provided the page
+        #     token.
+        # @!attribute [rw] filter
+        #   @return [::String]
+        #     Optional. Field match expression used to filter the results.
+        # @!attribute [rw] order_by
+        #   @return [::String]
+        #     Optional. Field by which to sort the results.
+        class ListRestoreChannelsRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Response message for ListRestoreChannels.
+        # @!attribute [rw] restore_channels
+        #   @return [::Array<::Google::Cloud::GkeBackup::V1::RestoreChannel>]
+        #     The list of RestoreChannels matching the given criteria.
+        # @!attribute [rw] next_page_token
+        #   @return [::String]
+        #     A token which may be sent as
+        #     {::Google::Cloud::GkeBackup::V1::ListRestoreChannelsRequest#page_token page_token}
+        #     in a subsequent `ListRestoreChannels` call to retrieve the next page of
+        #     results. If this field is omitted or empty, then there are no more results
+        #     to return.
+        # @!attribute [rw] unreachable
+        #   @return [::Array<::String>]
+        #     Locations that could not be reached.
+        class ListRestoreChannelsResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for GetRestoreChannel.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. Fully qualified RestoreChannel name.
+        #     Format: `projects/*/locations/*/restoreChannels/*`
+        class GetRestoreChannelRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for UpdateRestoreChannel.
+        # @!attribute [rw] restore_channel
+        #   @return [::Google::Cloud::GkeBackup::V1::RestoreChannel]
+        #     Required. A new version of the RestoreChannel resource that contains
+        #     updated fields. This may be sparsely populated if an `update_mask` is
+        #     provided.
+        # @!attribute [rw] update_mask
+        #   @return [::Google::Protobuf::FieldMask]
+        #     Optional. This is used to specify the fields to be overwritten in the
+        #     RestoreChannel targeted for update. The values for each of these
+        #     updated fields will be taken from the `restore_channel` provided
+        #     with this request. Field names are relative to the root of the resource
+        #     (e.g., `description`, `destination_project_id`, etc.)
+        #     If no `update_mask` is provided, all fields in `restore_channel` will
+        #     be written to the target RestoreChannel resource. Note that
+        #     OUTPUT_ONLY and IMMUTABLE fields in `restore_channel` are ignored and
+        #     are not used to update the target RestoreChannel.
+        class UpdateRestoreChannelRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for DeleteRestoreChannel.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. Fully qualified RestoreChannel name.
+        #     Format: `projects/*/locations/*/restoreChannels/*`
+        # @!attribute [rw] etag
+        #   @return [::String]
+        #     Optional. If provided, this value must match the current value of the
+        #     target RestoreChannel's
+        #     {::Google::Cloud::GkeBackup::V1::RestoreChannel#etag etag} field or the request
+        #     is rejected.
+        class DeleteRestoreChannelRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for ListRestorePlanBindings.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. The RestoreChannel that contains the ListRestorePlanBindings to
+        #     list. Format: `projects/*/locations/*/restoreChannels/*`
+        # @!attribute [rw] page_size
+        #   @return [::Integer]
+        #     Optional. The target number of results to return in a single response.
+        #     If not specified, a default value will be chosen by the service.
+        #     Note that the response may include a partial list and a caller should
+        #     only rely on the response's
+        #     {::Google::Cloud::GkeBackup::V1::ListRestorePlanBindingsResponse#next_page_token next_page_token}
+        #     to determine if there are more instances left to be queried.
+        # @!attribute [rw] page_token
+        #   @return [::String]
+        #     Optional. The value of
+        #     {::Google::Cloud::GkeBackup::V1::ListRestorePlanBindingsResponse#next_page_token next_page_token}
+        #     received from a previous `ListRestorePlanBindings` call.
+        #     Provide this to retrieve the subsequent page in a multi-page list of
+        #     results. When paginating, all other parameters provided to
+        #     `ListRestorePlanBindings` must match the call that provided the page
+        #     token.
+        # @!attribute [rw] filter
+        #   @return [::String]
+        #     Optional. Field match expression used to filter the results.
+        # @!attribute [rw] order_by
+        #   @return [::String]
+        #     Optional. Field by which to sort the results.
+        class ListRestorePlanBindingsRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Response message for ListRestorePlanBindings.
+        # @!attribute [rw] restore_plan_bindings
+        #   @return [::Array<::Google::Cloud::GkeBackup::V1::RestorePlanBinding>]
+        #     The list of RestorePlanBindings matching the given criteria.
+        # @!attribute [rw] next_page_token
+        #   @return [::String]
+        #     A token which may be sent as
+        #     {::Google::Cloud::GkeBackup::V1::ListRestorePlanBindingsRequest#page_token page_token}
+        #     in a subsequent `ListRestorePlanBindings` call to retrieve the next page of
+        #     results. If this field is omitted or empty, then there are no more results
+        #     to return.
+        # @!attribute [rw] unreachable
+        #   @return [::Array<::String>]
+        #     Unordered list. Locations that could not be reached.
+        class ListRestorePlanBindingsResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for GetRestorePlanBinding.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. Fully qualified RestorePlanBinding name.
+        #     Format:
+        #     `projects/*/locations/*/restoreChannels/*/restorePlanBindings/*`
+        class GetRestorePlanBindingRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # Request message for CreateRestore.
         # @!attribute [rw] parent
         #   @return [::String]
@@ -669,6 +1054,7 @@ module Google
         # Response message for GetBackupIndexDownloadUrl.
         # @!attribute [rw] signed_url
         #   @return [::String]
+        #     Required. The signed URL for downloading the backup index.
         class GetBackupIndexDownloadUrlResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

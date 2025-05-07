@@ -34,13 +34,13 @@ module Google
             self.unmarshal_class_method = :decode
             self.service_name = 'google.cloud.networkconnectivity.v1.PolicyBasedRoutingService'
 
-            # Lists PolicyBasedRoutes in a given project and location.
+            # Lists policy-based routes in a given project and location.
             rpc :ListPolicyBasedRoutes, ::Google::Cloud::NetworkConnectivity::V1::ListPolicyBasedRoutesRequest, ::Google::Cloud::NetworkConnectivity::V1::ListPolicyBasedRoutesResponse
-            # Gets details of a single PolicyBasedRoute.
+            # Gets details of a single policy-based route.
             rpc :GetPolicyBasedRoute, ::Google::Cloud::NetworkConnectivity::V1::GetPolicyBasedRouteRequest, ::Google::Cloud::NetworkConnectivity::V1::PolicyBasedRoute
-            # Creates a new PolicyBasedRoute in a given project and location.
+            # Creates a new policy-based route in a given project and location.
             rpc :CreatePolicyBasedRoute, ::Google::Cloud::NetworkConnectivity::V1::CreatePolicyBasedRouteRequest, ::Google::Longrunning::Operation
-            # Deletes a single PolicyBasedRoute.
+            # Deletes a single policy-based route.
             rpc :DeletePolicyBasedRoute, ::Google::Cloud::NetworkConnectivity::V1::DeletePolicyBasedRouteRequest, ::Google::Longrunning::Operation
           end
 

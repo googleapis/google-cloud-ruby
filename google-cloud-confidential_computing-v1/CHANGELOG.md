@@ -1,5 +1,17 @@
 # Changelog
 
+### 1.5.1 (2025-04-29)
+
+#### Bug Fixes
+
+* Fixed several issues with validating credential configs 
+
+### 1.5.0 (2025-02-25)
+
+#### Features
+
+* Support for the attester parameter to verify_attestation ([#29175](https://github.com/googleapis/google-cloud-ruby/issues/29175)) 
+
 ### 1.4.0 (2025-01-28)
 
 #### Features

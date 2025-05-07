@@ -308,6 +308,9 @@ module Google
         # @!attribute [r] satisfies_pzi
         #   @return [::Boolean]
         #     Output only. Reserved for future use.
+        # @!attribute [r] checkpoints
+        #   @return [::Array<::Google::Cloud::AIPlatform::V1::Checkpoint>]
+        #     Optional. Output only. The checkpoints of the model.
         class Model
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -472,6 +475,12 @@ module Google
         # @!attribute [rw] public_model_name
         #   @return [::String]
         #     Required. The model garden source model resource name.
+        # @!attribute [rw] version_id
+        #   @return [::String]
+        #     Optional. The model garden source model version ID.
+        # @!attribute [rw] skip_hf_model_cache
+        #   @return [::Boolean]
+        #     Optional. Whether to avoid pulling the model from the HF cache.
         class ModelGardenSource
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -982,6 +991,21 @@ module Google
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
+        end
+
+        # Describes the machine learning model version checkpoint.
+        # @!attribute [rw] checkpoint_id
+        #   @return [::String]
+        #     The ID of the checkpoint.
+        # @!attribute [rw] epoch
+        #   @return [::Integer]
+        #     The epoch of the checkpoint.
+        # @!attribute [rw] step
+        #   @return [::Integer]
+        #     The step of the checkpoint.
+        class Checkpoint
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
       end
     end

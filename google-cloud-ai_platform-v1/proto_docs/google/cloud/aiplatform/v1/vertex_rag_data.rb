@@ -141,6 +141,18 @@ module Google
           end
         end
 
+        # Config for the Vertex AI Search.
+        # @!attribute [rw] serving_config
+        #   @return [::String]
+        #     Vertex AI Search Serving Config resource full name. For example,
+        #     `projects/{project}/locations/{location}/collections/{collection}/engines/{engine}/servingConfigs/{serving_config}`
+        #     or
+        #     `projects/{project}/locations/{location}/collections/{collection}/dataStores/{data_store}/servingConfigs/{serving_config}`.
+        class VertexAiSearchConfig
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # RagCorpus status.
         # @!attribute [r] state
         #   @return [::Google::Cloud::AIPlatform::V1::CorpusStatus::State]
@@ -171,6 +183,16 @@ module Google
 
         # A RagCorpus is a RagFile container and a project can have multiple
         # RagCorpora.
+        # @!attribute [rw] vector_db_config
+        #   @return [::Google::Cloud::AIPlatform::V1::RagVectorDbConfig]
+        #     Optional. Immutable. The config for the Vector DBs.
+        #
+        #     Note: The following fields are mutually exclusive: `vector_db_config`, `vertex_ai_search_config`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] vertex_ai_search_config
+        #   @return [::Google::Cloud::AIPlatform::V1::VertexAiSearchConfig]
+        #     Optional. Immutable. The config for the Vertex AI Search.
+        #
+        #     Note: The following fields are mutually exclusive: `vertex_ai_search_config`, `vector_db_config`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [r] name
         #   @return [::String]
         #     Output only. The resource name of the RagCorpus.
@@ -191,9 +213,6 @@ module Google
         # @!attribute [r] corpus_status
         #   @return [::Google::Cloud::AIPlatform::V1::CorpusStatus]
         #     Output only. RagCorpus state.
-        # @!attribute [rw] vector_db_config
-        #   @return [::Google::Cloud::AIPlatform::V1::RagVectorDbConfig]
-        #     Optional. Immutable. The config for the Vector DBs.
         class RagCorpus
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -258,6 +277,31 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # A RagChunk includes the content of a chunk of a RagFile, and associated
+        # metadata.
+        # @!attribute [rw] text
+        #   @return [::String]
+        #     The content of the chunk.
+        # @!attribute [rw] page_span
+        #   @return [::Google::Cloud::AIPlatform::V1::RagChunk::PageSpan]
+        #     If populated, represents where the chunk starts and ends in the document.
+        class RagChunk
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Represents where the chunk starts and ends in the document.
+          # @!attribute [rw] first_page
+          #   @return [::Integer]
+          #     Page where chunk starts in the document. Inclusive. 1-indexed.
+          # @!attribute [rw] last_page
+          #   @return [::Integer]
+          #     Page where chunk ends in the document. Inclusive. 1-indexed.
+          class PageSpan
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+        end
+
         # Specifies the size and overlap of chunks for RagFiles.
         # @!attribute [rw] fixed_length_chunking
         #   @return [::Google::Cloud::AIPlatform::V1::RagFileChunkingConfig::FixedLengthChunking]
@@ -286,6 +330,65 @@ module Google
         class RagFileTransformationConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Specifies the parsing config for RagFiles.
+        # @!attribute [rw] layout_parser
+        #   @return [::Google::Cloud::AIPlatform::V1::RagFileParsingConfig::LayoutParser]
+        #     The Layout Parser to use for RagFiles.
+        #
+        #     Note: The following fields are mutually exclusive: `layout_parser`, `llm_parser`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] llm_parser
+        #   @return [::Google::Cloud::AIPlatform::V1::RagFileParsingConfig::LlmParser]
+        #     The LLM Parser to use for RagFiles.
+        #
+        #     Note: The following fields are mutually exclusive: `llm_parser`, `layout_parser`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        class RagFileParsingConfig
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Document AI Layout Parser config.
+          # @!attribute [rw] processor_name
+          #   @return [::String]
+          #     The full resource name of a Document AI processor or processor version.
+          #     The processor must have type `LAYOUT_PARSER_PROCESSOR`. If specified, the
+          #     `additional_config.parse_as_scanned_pdf` field must be false.
+          #     Format:
+          #     * `projects/{project_id}/locations/{location}/processors/{processor_id}`
+          #     * `projects/{project_id}/locations/{location}/processors/{processor_id}/processorVersions/{processor_version_id}`
+          # @!attribute [rw] max_parsing_requests_per_min
+          #   @return [::Integer]
+          #     The maximum number of requests the job is allowed to make to the Document
+          #     AI processor per minute. Consult
+          #     https://cloud.google.com/document-ai/quotas and the Quota page for your
+          #     project to set an appropriate value here. If unspecified, a default value
+          #     of 120 QPM would be used.
+          class LayoutParser
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Specifies the advanced parsing for RagFiles.
+          # @!attribute [rw] model_name
+          #   @return [::String]
+          #     The name of a LLM model used for parsing.
+          #     Format:
+          #     * `projects/{project_id}/locations/{location}/publishers/{publisher}/models/{model}`
+          # @!attribute [rw] max_parsing_requests_per_min
+          #   @return [::Integer]
+          #     The maximum number of requests the job is allowed to make to the
+          #     LLM model per minute. Consult
+          #     https://cloud.google.com/vertex-ai/generative-ai/docs/quotas
+          #     and your document size to set an appropriate value here. If unspecified,
+          #     a default value of 5000 QPM would be used.
+          # @!attribute [rw] custom_parsing_prompt
+          #   @return [::String]
+          #     The prompt to use for parsing. If not specified, a default prompt will
+          #     be used.
+          class LlmParser
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
         end
 
         # Config for uploading RagFile.
@@ -346,9 +449,28 @@ module Google
         #     Deprecated. Prefer to use `import_result_bq_sink`.
         #
         #     Note: The following fields are mutually exclusive: `partial_failure_bigquery_sink`, `partial_failure_gcs_sink`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] import_result_gcs_sink
+        #   @return [::Google::Cloud::AIPlatform::V1::GcsDestination]
+        #     The Cloud Storage path to write import result to.
+        #
+        #     Note: The following fields are mutually exclusive: `import_result_gcs_sink`, `import_result_bigquery_sink`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] import_result_bigquery_sink
+        #   @return [::Google::Cloud::AIPlatform::V1::BigQueryDestination]
+        #     The BigQuery destination to write import result to. It should be a
+        #     bigquery table resource name (e.g.
+        #     "bq://projectId.bqDatasetId.bqTableId"). The dataset must exist. If the
+        #     table does not exist, it will be created with the expected schema. If the
+        #     table exists, the schema will be validated and data will be added to this
+        #     existing table.
+        #
+        #     Note: The following fields are mutually exclusive: `import_result_bigquery_sink`, `import_result_gcs_sink`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] rag_file_transformation_config
         #   @return [::Google::Cloud::AIPlatform::V1::RagFileTransformationConfig]
         #     Specifies the transformation config for RagFiles.
+        # @!attribute [rw] rag_file_parsing_config
+        #   @return [::Google::Cloud::AIPlatform::V1::RagFileParsingConfig]
+        #     Optional. Specifies the parsing config for RagFiles.
+        #     RAG will use the default parser if this field is not set.
         # @!attribute [rw] max_embedding_requests_per_min
         #   @return [::Integer]
         #     Optional. The max number of queries per minute that this job is allowed to

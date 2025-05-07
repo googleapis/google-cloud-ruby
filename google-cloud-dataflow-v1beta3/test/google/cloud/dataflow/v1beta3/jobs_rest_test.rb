@@ -205,6 +205,7 @@ class ::Google::Cloud::Dataflow::V1beta3::Jobs::Rest::ClientTest < Minitest::Tes
     job_id = "hello world"
     job = {}
     location = "hello world"
+    update_mask = {}
 
     update_job_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
@@ -220,27 +221,27 @@ class ::Google::Cloud::Dataflow::V1beta3::Jobs::Rest::ClientTest < Minitest::Tes
         end
 
         # Use hash object
-        client.update_job({ project_id: project_id, job_id: job_id, job: job, location: location }) do |_result, response|
+        client.update_job({ project_id: project_id, job_id: job_id, job: job, location: location, update_mask: update_mask }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.update_job project_id: project_id, job_id: job_id, job: job, location: location do |_result, response|
+        client.update_job project_id: project_id, job_id: job_id, job: job, location: location, update_mask: update_mask do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.update_job ::Google::Cloud::Dataflow::V1beta3::UpdateJobRequest.new(project_id: project_id, job_id: job_id, job: job, location: location) do |_result, response|
+        client.update_job ::Google::Cloud::Dataflow::V1beta3::UpdateJobRequest.new(project_id: project_id, job_id: job_id, job: job, location: location, update_mask: update_mask) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.update_job({ project_id: project_id, job_id: job_id, job: job, location: location }, call_options) do |_result, response|
+        client.update_job({ project_id: project_id, job_id: job_id, job: job, location: location, update_mask: update_mask }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.update_job(::Google::Cloud::Dataflow::V1beta3::UpdateJobRequest.new(project_id: project_id, job_id: job_id, job: job, location: location), call_options) do |_result, response|
+        client.update_job(::Google::Cloud::Dataflow::V1beta3::UpdateJobRequest.new(project_id: project_id, job_id: job_id, job: job, location: location, update_mask: update_mask), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -264,6 +265,7 @@ class ::Google::Cloud::Dataflow::V1beta3::Jobs::Rest::ClientTest < Minitest::Tes
     page_size = 42
     page_token = "hello world"
     location = "hello world"
+    name = "hello world"
 
     list_jobs_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
@@ -279,27 +281,27 @@ class ::Google::Cloud::Dataflow::V1beta3::Jobs::Rest::ClientTest < Minitest::Tes
         end
 
         # Use hash object
-        client.list_jobs({ filter: filter, project_id: project_id, view: view, page_size: page_size, page_token: page_token, location: location }) do |_result, response|
+        client.list_jobs({ filter: filter, project_id: project_id, view: view, page_size: page_size, page_token: page_token, location: location, name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_jobs filter: filter, project_id: project_id, view: view, page_size: page_size, page_token: page_token, location: location do |_result, response|
+        client.list_jobs filter: filter, project_id: project_id, view: view, page_size: page_size, page_token: page_token, location: location, name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_jobs ::Google::Cloud::Dataflow::V1beta3::ListJobsRequest.new(filter: filter, project_id: project_id, view: view, page_size: page_size, page_token: page_token, location: location) do |_result, response|
+        client.list_jobs ::Google::Cloud::Dataflow::V1beta3::ListJobsRequest.new(filter: filter, project_id: project_id, view: view, page_size: page_size, page_token: page_token, location: location, name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_jobs({ filter: filter, project_id: project_id, view: view, page_size: page_size, page_token: page_token, location: location }, call_options) do |_result, response|
+        client.list_jobs({ filter: filter, project_id: project_id, view: view, page_size: page_size, page_token: page_token, location: location, name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_jobs(::Google::Cloud::Dataflow::V1beta3::ListJobsRequest.new(filter: filter, project_id: project_id, view: view, page_size: page_size, page_token: page_token, location: location), call_options) do |_result, response|
+        client.list_jobs(::Google::Cloud::Dataflow::V1beta3::ListJobsRequest.new(filter: filter, project_id: project_id, view: view, page_size: page_size, page_token: page_token, location: location, name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -323,6 +325,7 @@ class ::Google::Cloud::Dataflow::V1beta3::Jobs::Rest::ClientTest < Minitest::Tes
     page_size = 42
     page_token = "hello world"
     location = "hello world"
+    name = "hello world"
 
     aggregated_list_jobs_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
@@ -338,27 +341,27 @@ class ::Google::Cloud::Dataflow::V1beta3::Jobs::Rest::ClientTest < Minitest::Tes
         end
 
         # Use hash object
-        client.aggregated_list_jobs({ filter: filter, project_id: project_id, view: view, page_size: page_size, page_token: page_token, location: location }) do |_result, response|
+        client.aggregated_list_jobs({ filter: filter, project_id: project_id, view: view, page_size: page_size, page_token: page_token, location: location, name: name }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.aggregated_list_jobs filter: filter, project_id: project_id, view: view, page_size: page_size, page_token: page_token, location: location do |_result, response|
+        client.aggregated_list_jobs filter: filter, project_id: project_id, view: view, page_size: page_size, page_token: page_token, location: location, name: name do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.aggregated_list_jobs ::Google::Cloud::Dataflow::V1beta3::ListJobsRequest.new(filter: filter, project_id: project_id, view: view, page_size: page_size, page_token: page_token, location: location) do |_result, response|
+        client.aggregated_list_jobs ::Google::Cloud::Dataflow::V1beta3::ListJobsRequest.new(filter: filter, project_id: project_id, view: view, page_size: page_size, page_token: page_token, location: location, name: name) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.aggregated_list_jobs({ filter: filter, project_id: project_id, view: view, page_size: page_size, page_token: page_token, location: location }, call_options) do |_result, response|
+        client.aggregated_list_jobs({ filter: filter, project_id: project_id, view: view, page_size: page_size, page_token: page_token, location: location, name: name }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.aggregated_list_jobs(::Google::Cloud::Dataflow::V1beta3::ListJobsRequest.new(filter: filter, project_id: project_id, view: view, page_size: page_size, page_token: page_token, location: location), call_options) do |_result, response|
+        client.aggregated_list_jobs(::Google::Cloud::Dataflow::V1beta3::ListJobsRequest.new(filter: filter, project_id: project_id, view: view, page_size: page_size, page_token: page_token, location: location, name: name), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 

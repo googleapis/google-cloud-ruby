@@ -240,7 +240,7 @@ module Google
             # Service calls
 
             ##
-            # Lists PolicyBasedRoutes in a given project and location.
+            # Lists policy-based routes in a given project and location.
             #
             # @overload list_policy_based_routes(request, options = nil)
             #   Pass arguments to `list_policy_based_routes` via a request object, either of type
@@ -339,7 +339,7 @@ module Google
             end
 
             ##
-            # Gets details of a single PolicyBasedRoute.
+            # Gets details of a single policy-based route.
             #
             # @overload get_policy_based_route(request, options = nil)
             #   Pass arguments to `get_policy_based_route` via a request object, either of type
@@ -424,7 +424,7 @@ module Google
             end
 
             ##
-            # Creates a new PolicyBasedRoute in a given project and location.
+            # Creates a new policy-based route in a given project and location.
             #
             # @overload create_policy_based_route(request, options = nil)
             #   Pass arguments to `create_policy_based_route` via a request object, either of type
@@ -444,20 +444,27 @@ module Google
             #   @param parent [::String]
             #     Required. The parent resource's name of the PolicyBasedRoute.
             #   @param policy_based_route_id [::String]
-            #     Required. Unique id for the Policy Based Route to create.
+            #     Required. Unique id for the policy-based route to create. Provided by the
+            #     client when the resource is created. The name must comply with
+            #     https://google.aip.dev/122#resource-id-segments. Specifically, the name
+            #     must be 1-63 characters long and match the regular expression
+            #     [a-z]([a-z0-9-]*[a-z0-9])?. The first character must be a lowercase letter,
+            #     and all following characters (except for the last character) must be a
+            #     dash, lowercase letter, or digit. The last character must be a lowercase
+            #     letter or digit.
             #   @param policy_based_route [::Google::Cloud::NetworkConnectivity::V1::PolicyBasedRoute, ::Hash]
-            #     Required. Initial values for a new Policy Based Route.
+            #     Required. Initial values for a new policy-based route.
             #   @param request_id [::String]
             #     Optional. An optional request ID to identify requests. Specify a unique
-            #     request ID so that if you must retry your request, the server will know to
-            #     ignore the request if it has already been completed. The server will
-            #     guarantee that for at least 60 minutes since the first request.
+            #     request ID so that if you must retry your request, the server knows to
+            #     ignore the request if it has already been completed. The server guarantees
+            #     that for at least 60 minutes since the first request.
             #
             #     For example, consider a situation where you make an initial request and
             #     the request times out. If you make the request again with the same request
             #     ID, the server can check if original operation with the same request ID
-            #     was received, and if so, will ignore the second request. This prevents
-            #     clients from accidentally creating duplicate commitments.
+            #     was received, and if so, ignores the second request. This prevents clients
+            #     from accidentally creating duplicate commitments.
             #
             #     The request ID must be a valid UUID with the exception that zero UUID is
             #     not supported (00000000-0000-0000-0000-000000000000).
@@ -536,7 +543,7 @@ module Google
             end
 
             ##
-            # Deletes a single PolicyBasedRoute.
+            # Deletes a single policy-based route.
             #
             # @overload delete_policy_based_route(request, options = nil)
             #   Pass arguments to `delete_policy_based_route` via a request object, either of type
@@ -554,18 +561,18 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param name [::String]
-            #     Required. Name of the PolicyBasedRoute resource to delete.
+            #     Required. Name of the policy-based route resource to delete.
             #   @param request_id [::String]
             #     Optional. An optional request ID to identify requests. Specify a unique
-            #     request ID so that if you must retry your request, the server will know to
-            #     ignore the request if it has already been completed. The server will
-            #     guarantee that for at least 60 minutes after the first request.
+            #     request ID so that if you must retry your request, the server knows to
+            #     ignore the request if it has already been completed. The server guarantees
+            #     that for at least 60 minutes after the first request.
             #
             #     For example, consider a situation where you make an initial request and
             #     the request times out. If you make the request again with the same request
             #     ID, the server can check if original operation with the same request ID
-            #     was received, and if so, will ignore the second request. This prevents
-            #     clients from accidentally creating duplicate commitments.
+            #     was received, and if so, ignores the second request. This prevents clients
+            #     from accidentally creating duplicate commitments.
             #
             #     The request ID must be a valid UUID with the exception that zero UUID is
             #     not supported (00000000-0000-0000-0000-000000000000).
@@ -748,8 +755,8 @@ module Google
 
               config_attr :endpoint,      nil, ::String, nil
               config_attr :credentials,   nil do |value|
-                allowed = [::String, ::Hash, ::Proc, ::Symbol, ::Google::Auth::Credentials, ::Signet::OAuth2::Client, nil]
-                allowed += [::GRPC::Core::Channel, ::GRPC::Core::ChannelCredentials] if defined? ::GRPC
+                allowed = [::String, ::Hash, ::Proc, ::Symbol, ::Google::Auth::Credentials, ::Google::Auth::BaseClient, ::Signet::OAuth2::Client, nil]
+                allowed += [::GRPC::Core::Channel, ::GRPC::Core::ChannelCredentials] if defined? ::GRPC::Core::Channel
                 allowed.any? { |klass| klass === value }
               end
               config_attr :scope,         nil, ::String, ::Array, nil

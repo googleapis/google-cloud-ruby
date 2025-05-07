@@ -2331,6 +2331,270 @@ module Google
               end
 
               ##
+              # Stops an Autonomous Database.
+              #
+              # @overload stop_autonomous_database(request, options = nil)
+              #   Pass arguments to `stop_autonomous_database` via a request object, either of type
+              #   {::Google::Cloud::OracleDatabase::V1::StopAutonomousDatabaseRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::OracleDatabase::V1::StopAutonomousDatabaseRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload stop_autonomous_database(name: nil)
+              #   Pass arguments to `stop_autonomous_database` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param name [::String]
+              #     Required. The name of the Autonomous Database in the following format:
+              #     projects/\\{project}/locations/\\{location}/autonomousDatabases/\\{autonomous_database}.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Gapic::Operation]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Gapic::Operation]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/oracle_database/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::OracleDatabase::V1::OracleDatabase::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::OracleDatabase::V1::StopAutonomousDatabaseRequest.new
+              #
+              #   # Call the stop_autonomous_database method.
+              #   result = client.stop_autonomous_database request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
+              def stop_autonomous_database request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::OracleDatabase::V1::StopAutonomousDatabaseRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.stop_autonomous_database.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::OracleDatabase::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.stop_autonomous_database.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.stop_autonomous_database.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @oracle_database_stub.stop_autonomous_database request, options do |result, operation|
+                  result = ::Gapic::Operation.new result, @operations_client, options: options
+                  yield result, operation if block_given?
+                  throw :response, result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Starts an Autonomous Database.
+              #
+              # @overload start_autonomous_database(request, options = nil)
+              #   Pass arguments to `start_autonomous_database` via a request object, either of type
+              #   {::Google::Cloud::OracleDatabase::V1::StartAutonomousDatabaseRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::OracleDatabase::V1::StartAutonomousDatabaseRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload start_autonomous_database(name: nil)
+              #   Pass arguments to `start_autonomous_database` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param name [::String]
+              #     Required. The name of the Autonomous Database in the following format:
+              #     projects/\\{project}/locations/\\{location}/autonomousDatabases/\\{autonomous_database}.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Gapic::Operation]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Gapic::Operation]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/oracle_database/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::OracleDatabase::V1::OracleDatabase::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::OracleDatabase::V1::StartAutonomousDatabaseRequest.new
+              #
+              #   # Call the start_autonomous_database method.
+              #   result = client.start_autonomous_database request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
+              def start_autonomous_database request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::OracleDatabase::V1::StartAutonomousDatabaseRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.start_autonomous_database.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::OracleDatabase::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.start_autonomous_database.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.start_autonomous_database.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @oracle_database_stub.start_autonomous_database request, options do |result, operation|
+                  result = ::Gapic::Operation.new result, @operations_client, options: options
+                  yield result, operation if block_given?
+                  throw :response, result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Restarts an Autonomous Database.
+              #
+              # @overload restart_autonomous_database(request, options = nil)
+              #   Pass arguments to `restart_autonomous_database` via a request object, either of type
+              #   {::Google::Cloud::OracleDatabase::V1::RestartAutonomousDatabaseRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::OracleDatabase::V1::RestartAutonomousDatabaseRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload restart_autonomous_database(name: nil)
+              #   Pass arguments to `restart_autonomous_database` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param name [::String]
+              #     Required. The name of the Autonomous Database in the following format:
+              #     projects/\\{project}/locations/\\{location}/autonomousDatabases/\\{autonomous_database}.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Gapic::Operation]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Gapic::Operation]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/oracle_database/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::OracleDatabase::V1::OracleDatabase::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::OracleDatabase::V1::RestartAutonomousDatabaseRequest.new
+              #
+              #   # Call the restart_autonomous_database method.
+              #   result = client.restart_autonomous_database request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
+              def restart_autonomous_database request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::OracleDatabase::V1::RestartAutonomousDatabaseRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.restart_autonomous_database.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::OracleDatabase::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.restart_autonomous_database.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.restart_autonomous_database.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @oracle_database_stub.restart_autonomous_database request, options do |result, operation|
+                  result = ::Gapic::Operation.new result, @operations_client, options: options
+                  yield result, operation if block_given?
+                  throw :response, result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
               # Configuration class for the OracleDatabase REST API.
               #
               # This class represents the configuration for OracleDatabase REST,
@@ -2426,7 +2690,7 @@ module Google
 
                 config_attr :endpoint,      nil, ::String, nil
                 config_attr :credentials,   nil do |value|
-                  allowed = [::String, ::Hash, ::Proc, ::Symbol, ::Google::Auth::Credentials, ::Signet::OAuth2::Client, nil]
+                  allowed = [::String, ::Hash, ::Proc, ::Symbol, ::Google::Auth::Credentials, ::Google::Auth::BaseClient, ::Signet::OAuth2::Client, nil]
                   allowed.any? { |klass| klass === value }
                 end
                 config_attr :scope,         nil, ::String, ::Array, nil
@@ -2593,6 +2857,21 @@ module Google
                   # @return [::Gapic::Config::Method]
                   #
                   attr_reader :list_autonomous_database_backups
+                  ##
+                  # RPC-specific configuration for `stop_autonomous_database`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :stop_autonomous_database
+                  ##
+                  # RPC-specific configuration for `start_autonomous_database`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :start_autonomous_database
+                  ##
+                  # RPC-specific configuration for `restart_autonomous_database`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :restart_autonomous_database
 
                   # @private
                   def initialize parent_rpcs = nil
@@ -2640,6 +2919,12 @@ module Google
                     @list_autonomous_database_character_sets = ::Gapic::Config::Method.new list_autonomous_database_character_sets_config
                     list_autonomous_database_backups_config = parent_rpcs.list_autonomous_database_backups if parent_rpcs.respond_to? :list_autonomous_database_backups
                     @list_autonomous_database_backups = ::Gapic::Config::Method.new list_autonomous_database_backups_config
+                    stop_autonomous_database_config = parent_rpcs.stop_autonomous_database if parent_rpcs.respond_to? :stop_autonomous_database
+                    @stop_autonomous_database = ::Gapic::Config::Method.new stop_autonomous_database_config
+                    start_autonomous_database_config = parent_rpcs.start_autonomous_database if parent_rpcs.respond_to? :start_autonomous_database
+                    @start_autonomous_database = ::Gapic::Config::Method.new start_autonomous_database_config
+                    restart_autonomous_database_config = parent_rpcs.restart_autonomous_database if parent_rpcs.respond_to? :restart_autonomous_database
+                    @restart_autonomous_database = ::Gapic::Config::Method.new restart_autonomous_database_config
 
                     yield self if block_given?
                   end

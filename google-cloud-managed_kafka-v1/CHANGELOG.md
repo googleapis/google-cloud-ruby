@@ -1,5 +1,29 @@
 # Changelog
 
+### 1.1.2 (2025-05-01)
+
+#### Documentation
+
+* Document default values for minimum_backoff ([#30038](https://github.com/googleapis/google-cloud-ruby/issues/30038)) 
+
+### 1.1.1 (2025-04-29)
+
+#### Bug Fixes
+
+* Fixed several issues with validating credential configs 
+
+### 1.1.0 (2025-03-19)
+
+#### Features
+
+* Support for the ManagedKafkaConnect service, including RPCs to manage clusters and connectors ([#29384](https://github.com/googleapis/google-cloud-ruby/issues/29384)) 
+
+### 1.0.1 (2025-03-13)
+
+#### Bug Fixes
+
+* Fixes to HTTP transcoding for consumer group calls ([#29330](https://github.com/googleapis/google-cloud-ruby/issues/29330)) 
+
 ### 1.0.0 (2025-02-07)
 
 ### ⚠ BREAKING CHANGES

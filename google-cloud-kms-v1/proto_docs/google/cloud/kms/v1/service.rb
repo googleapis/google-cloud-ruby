@@ -289,6 +289,15 @@ module Google
         #   @return [::String]
         #     Required. The {::Google::Cloud::Kms::V1::CryptoKeyVersion#name name} of the
         #     {::Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersion} public key to get.
+        # @!attribute [rw] public_key_format
+        #   @return [::Google::Cloud::Kms::V1::PublicKey::PublicKeyFormat]
+        #     Optional. The {::Google::Cloud::Kms::V1::PublicKey PublicKey} format specified
+        #     by the user. This field is required for PQC algorithms. If specified, the
+        #     public key will be exported through the
+        #     {::Google::Cloud::Kms::V1::PublicKey#public_key public_key} field in the
+        #     requested format. Otherwise, the {::Google::Cloud::Kms::V1::PublicKey#pem pem}
+        #     field will be populated for non-PQC algorithms, and an error will be
+        #     returned for PQC algorithms.
         class GetPublicKeyRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

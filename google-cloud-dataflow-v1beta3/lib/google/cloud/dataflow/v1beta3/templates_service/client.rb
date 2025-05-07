@@ -184,7 +184,14 @@ module Google
             # Service calls
 
             ##
-            # Creates a Cloud Dataflow job from a template.
+            # Creates a Cloud Dataflow job from a template. Do not enter confidential
+            # information when you supply string values using the API.
+            #
+            # To create a job, we recommend using `projects.locations.templates.create`
+            # with a [regional endpoint]
+            # (https://cloud.google.com/dataflow/docs/concepts/regional-endpoints). Using
+            # `projects.templates.create` is not recommended, because your job will
+            # always start in `us-central1`.
             #
             # @overload create_job_from_template(request, options = nil)
             #   Pass arguments to `create_job_from_template` via a request object, either of type
@@ -286,7 +293,13 @@ module Google
             end
 
             ##
-            # Launch a template.
+            # Launches a template.
+            #
+            # To launch a template, we recommend using
+            # `projects.locations.templates.launch` with a [regional endpoint]
+            # (https://cloud.google.com/dataflow/docs/concepts/regional-endpoints). Using
+            # `projects.templates.launch` is not recommended, because jobs launched
+            # from the template will always start in `us-central1`.
             #
             # @overload launch_template(request, options = nil)
             #   Pass arguments to `launch_template` via a request object, either of type
@@ -309,17 +322,17 @@ module Google
             #     If true, the request is validated but not actually executed.
             #     Defaults to false.
             #   @param gcs_path [::String]
-            #     A Cloud Storage path to the template from which to create
+            #     A Cloud Storage path to the template to use to create
             #     the job.
-            #     Must be valid Cloud Storage URL, beginning with 'gs://'.
+            #     Must be valid Cloud Storage URL, beginning with `gs://`.
             #
             #     Note: The following fields are mutually exclusive: `gcs_path`, `dynamic_template`. If a field in that set is populated, all other fields in the set will automatically be cleared.
             #   @param dynamic_template [::Google::Cloud::Dataflow::V1beta3::DynamicTemplateLaunchParams, ::Hash]
-            #     Params for launching a dynamic template.
+            #     Parameters for launching a dynamic template.
             #
             #     Note: The following fields are mutually exclusive: `dynamic_template`, `gcs_path`. If a field in that set is populated, all other fields in the set will automatically be cleared.
             #   @param launch_parameters [::Google::Cloud::Dataflow::V1beta3::LaunchTemplateParameters, ::Hash]
-            #     The parameters of the template to launch. This should be part of the
+            #     The parameters of the template to launch. Part of the
             #     body of the POST request.
             #   @param location [::String]
             #     The [regional endpoint]
@@ -395,6 +408,12 @@ module Google
 
             ##
             # Get the template associated with a template.
+            #
+            # To get the template, we recommend using `projects.locations.templates.get`
+            # with a [regional endpoint]
+            # (https://cloud.google.com/dataflow/docs/concepts/regional-endpoints). Using
+            # `projects.templates.get` is not recommended, because only
+            # templates that are running in `us-central1` are retrieved.
             #
             # @overload get_template(request, options = nil)
             #   Pass arguments to `get_template` via a request object, either of type
@@ -596,8 +615,8 @@ module Google
 
               config_attr :endpoint,      nil, ::String, nil
               config_attr :credentials,   nil do |value|
-                allowed = [::String, ::Hash, ::Proc, ::Symbol, ::Google::Auth::Credentials, ::Signet::OAuth2::Client, nil]
-                allowed += [::GRPC::Core::Channel, ::GRPC::Core::ChannelCredentials] if defined? ::GRPC
+                allowed = [::String, ::Hash, ::Proc, ::Symbol, ::Google::Auth::Credentials, ::Google::Auth::BaseClient, ::Signet::OAuth2::Client, nil]
+                allowed += [::GRPC::Core::Channel, ::GRPC::Core::ChannelCredentials] if defined? ::GRPC::Core::Channel
                 allowed.any? { |klass| klass === value }
               end
               config_attr :scope,         nil, ::String, ::Array, nil

@@ -223,7 +223,7 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload search(placement: nil, branch: nil, query: nil, visitor_id: nil, user_info: nil, page_size: nil, page_token: nil, offset: nil, filter: nil, canonical_filter: nil, order_by: nil, facet_specs: nil, dynamic_facet_spec: nil, boost_spec: nil, query_expansion_spec: nil, variant_rollup_keys: nil, page_categories: nil, search_mode: nil, personalization_spec: nil, labels: nil, spell_correction_spec: nil, entity: nil, conversational_search_spec: nil, tile_navigation_spec: nil)
+            # @overload search(placement: nil, branch: nil, query: nil, visitor_id: nil, user_info: nil, page_size: nil, page_token: nil, offset: nil, filter: nil, canonical_filter: nil, order_by: nil, facet_specs: nil, dynamic_facet_spec: nil, boost_spec: nil, query_expansion_spec: nil, variant_rollup_keys: nil, page_categories: nil, search_mode: nil, personalization_spec: nil, labels: nil, spell_correction_spec: nil, entity: nil, conversational_search_spec: nil, tile_navigation_spec: nil, language_code: nil, region_code: nil, place_id: nil)
             #   Pass arguments to `search` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -471,6 +471,24 @@ module Google
             #     addition to traditional retail search.
             #   @param tile_navigation_spec [::Google::Cloud::Retail::V2::SearchRequest::TileNavigationSpec, ::Hash]
             #     Optional. This field specifies tile navigation related parameters.
+            #   @param language_code [::String]
+            #     Optional. The BCP-47 language code, such as "en-US" or "sr-Latn"
+            #     [list](https://www.unicode.org/cldr/charts/46/summary/root.html). For more
+            #     information, see [Standardized codes](https://google.aip.dev/143). This
+            #     field helps to better interpret the query. If a value isn't specified, the
+            #     query language code is automatically detected, which may not be accurate.
+            #   @param region_code [::String]
+            #     Optional. The Unicode country/region code (CLDR) of a location, such as
+            #     "US" and "419"
+            #     [list](https://www.unicode.org/cldr/charts/46/supplemental/territory_information.html).
+            #     For more information, see [Standardized codes](https://google.aip.dev/143).
+            #     If set, then results will be boosted based on the region_code provided.
+            #   @param place_id [::String]
+            #     Optional. An id corresponding to a place, such as a store id or region id.
+            #     When specified, we use the price from the local inventory with the matching
+            #     product's
+            #     {::Google::Cloud::Retail::V2::LocalInventory#place_id LocalInventory.place_id}
+            #     for revenue optimization.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Gapic::PagedEnumerable<::Google::Cloud::Retail::V2::SearchResponse::SearchResult>]
@@ -647,8 +665,8 @@ module Google
 
               config_attr :endpoint,      nil, ::String, nil
               config_attr :credentials,   nil do |value|
-                allowed = [::String, ::Hash, ::Proc, ::Symbol, ::Google::Auth::Credentials, ::Signet::OAuth2::Client, nil]
-                allowed += [::GRPC::Core::Channel, ::GRPC::Core::ChannelCredentials] if defined? ::GRPC
+                allowed = [::String, ::Hash, ::Proc, ::Symbol, ::Google::Auth::Credentials, ::Google::Auth::BaseClient, ::Signet::OAuth2::Client, nil]
+                allowed += [::GRPC::Core::Channel, ::GRPC::Core::ChannelCredentials] if defined? ::GRPC::Core::Channel
                 allowed.any? { |klass| klass === value }
               end
               config_attr :scope,         nil, ::String, ::Array, nil

@@ -32,6 +32,8 @@ module Google
               "https://www.googleapis.com/auth/chat.admin.spaces",
               "https://www.googleapis.com/auth/chat.admin.spaces.readonly",
               "https://www.googleapis.com/auth/chat.bot",
+              "https://www.googleapis.com/auth/chat.customemojis",
+              "https://www.googleapis.com/auth/chat.customemojis.readonly",
               "https://www.googleapis.com/auth/chat.delete",
               "https://www.googleapis.com/auth/chat.import",
               "https://www.googleapis.com/auth/chat.memberships",
@@ -47,7 +49,8 @@ module Google
               "https://www.googleapis.com/auth/chat.spaces.create",
               "https://www.googleapis.com/auth/chat.spaces.readonly",
               "https://www.googleapis.com/auth/chat.users.readstate",
-              "https://www.googleapis.com/auth/chat.users.readstate.readonly"
+              "https://www.googleapis.com/auth/chat.users.readstate.readonly",
+              "https://www.googleapis.com/auth/chat.users.spacesettings"
             ]
             self.env_vars = [
               "GOOGLE_CLOUD_CREDENTIALS",

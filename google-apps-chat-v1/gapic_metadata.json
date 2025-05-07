@@ -130,6 +130,26 @@
                 "delete_reaction"
               ]
             },
+            "CreateCustomEmoji": {
+              "methods": [
+                "create_custom_emoji"
+              ]
+            },
+            "GetCustomEmoji": {
+              "methods": [
+                "get_custom_emoji"
+              ]
+            },
+            "ListCustomEmojis": {
+              "methods": [
+                "list_custom_emojis"
+              ]
+            },
+            "DeleteCustomEmoji": {
+              "methods": [
+                "delete_custom_emoji"
+              ]
+            },
             "GetSpaceReadState": {
               "methods": [
                 "get_space_read_state"
@@ -153,6 +173,16 @@
             "ListSpaceEvents": {
               "methods": [
                 "list_space_events"
+              ]
+            },
+            "GetSpaceNotificationSetting": {
+              "methods": [
+                "get_space_notification_setting"
+              ]
+            },
+            "UpdateSpaceNotificationSetting": {
+              "methods": [
+                "update_space_notification_setting"
               ]
             }
           }

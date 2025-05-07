@@ -20,6 +20,11 @@
                 "get_trip"
               ]
             },
+            "DeleteTrip": {
+              "methods": [
+                "delete_trip"
+              ]
+            },
             "ReportBillableTrip": {
               "methods": [
                 "report_billable_trip"
@@ -52,6 +57,11 @@
             "GetVehicle": {
               "methods": [
                 "get_vehicle"
+              ]
+            },
+            "DeleteVehicle": {
+              "methods": [
+                "delete_vehicle"
               ]
             },
             "UpdateVehicle": {

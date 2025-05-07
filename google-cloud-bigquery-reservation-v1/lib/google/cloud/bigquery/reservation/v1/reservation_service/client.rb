@@ -104,6 +104,8 @@ module Google
 
                   default_config.rpcs.update_reservation.timeout = 300.0
 
+                  default_config.rpcs.failover_reservation.timeout = 300.0
+
                   default_config.rpcs.create_capacity_commitment.timeout = 300.0
 
                   default_config.rpcs.list_capacity_commitments.timeout = 300.0
@@ -2537,8 +2539,8 @@ module Google
 
                 config_attr :endpoint,      nil, ::String, nil
                 config_attr :credentials,   nil do |value|
-                  allowed = [::String, ::Hash, ::Proc, ::Symbol, ::Google::Auth::Credentials, ::Signet::OAuth2::Client, nil]
-                  allowed += [::GRPC::Core::Channel, ::GRPC::Core::ChannelCredentials] if defined? ::GRPC
+                  allowed = [::String, ::Hash, ::Proc, ::Symbol, ::Google::Auth::Credentials, ::Google::Auth::BaseClient, ::Signet::OAuth2::Client, nil]
+                  allowed += [::GRPC::Core::Channel, ::GRPC::Core::ChannelCredentials] if defined? ::GRPC::Core::Channel
                   allowed.any? { |klass| klass === value }
                 end
                 config_attr :scope,         nil, ::String, ::Array, nil

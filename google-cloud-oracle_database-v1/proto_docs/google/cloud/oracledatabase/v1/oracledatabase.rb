@@ -508,6 +508,36 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # The request for `AutonomousDatabase.Stop`.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The name of the Autonomous Database in the following format:
+        #     projects/\\{project}/locations/\\{location}/autonomousDatabases/\\{autonomous_database}.
+        class StopAutonomousDatabaseRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # The request for `AutonomousDatabase.Start`.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The name of the Autonomous Database in the following format:
+        #     projects/\\{project}/locations/\\{location}/autonomousDatabases/\\{autonomous_database}.
+        class StartAutonomousDatabaseRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # The request for `AutonomousDatabase.Restart`.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The name of the Autonomous Database in the following format:
+        #     projects/\\{project}/locations/\\{location}/autonomousDatabases/\\{autonomous_database}.
+        class RestartAutonomousDatabaseRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # The request for `AutonomousDatabase.GenerateWallet`.
         # @!attribute [rw] name
         #   @return [::String]

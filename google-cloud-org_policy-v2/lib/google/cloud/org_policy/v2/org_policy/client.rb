@@ -1126,10 +1126,10 @@ module Google
             end
 
             ##
-            # Gets a custom constraint.
+            # Gets a custom or managed constraint.
             #
             # Returns a `google.rpc.Status` with `google.rpc.Code.NOT_FOUND` if the
-            # custom constraint does not exist.
+            # custom or managed constraint does not exist.
             #
             # @overload get_custom_constraint(request, options = nil)
             #   Pass arguments to `get_custom_constraint` via a request object, either of type
@@ -1147,8 +1147,8 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param name [::String]
-            #     Required. Resource name of the custom constraint. See the custom constraint
-            #     entry for naming requirements.
+            #     Required. Resource name of the custom or managed constraint. See the custom
+            #     constraint entry for naming requirements.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::OrgPolicy::V2::CustomConstraint]
@@ -1511,8 +1511,8 @@ module Google
 
               config_attr :endpoint,      nil, ::String, nil
               config_attr :credentials,   nil do |value|
-                allowed = [::String, ::Hash, ::Proc, ::Symbol, ::Google::Auth::Credentials, ::Signet::OAuth2::Client, nil]
-                allowed += [::GRPC::Core::Channel, ::GRPC::Core::ChannelCredentials] if defined? ::GRPC
+                allowed = [::String, ::Hash, ::Proc, ::Symbol, ::Google::Auth::Credentials, ::Google::Auth::BaseClient, ::Signet::OAuth2::Client, nil]
+                allowed += [::GRPC::Core::Channel, ::GRPC::Core::ChannelCredentials] if defined? ::GRPC::Core::Channel
                 allowed.any? { |klass| klass === value }
               end
               config_attr :scope,         nil, ::String, ::Array, nil

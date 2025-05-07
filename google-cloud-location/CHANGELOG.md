@@ -1,5 +1,17 @@
 # Changelog
 
+### 1.0.0 (2025-04-30)
+
+#### Features
+
+* Bump version to 1.0.0 ([#30039](https://github.com/googleapis/google-cloud-ruby/issues/30039)) 
+
+### 0.10.1 (2025-04-29)
+
+#### Bug Fixes
+
+* Fixed several issues with validating credential configs 
+
 ### 0.10.0 (2025-01-29)
 
 #### Features

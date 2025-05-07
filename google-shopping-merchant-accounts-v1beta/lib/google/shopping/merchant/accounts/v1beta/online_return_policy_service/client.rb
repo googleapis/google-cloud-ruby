@@ -194,7 +194,7 @@ module Google
               # Service calls
 
               ##
-              # Gets an existing return policy.
+              # Gets an existing return policy for a given business.
               #
               # @overload get_online_return_policy(request, options = nil)
               #   Pass arguments to `get_online_return_policy` via a request object, either of type
@@ -280,7 +280,7 @@ module Google
               end
 
               ##
-              # Lists all existing return policies.
+              # Lists all existing return policies for a given business.
               #
               # @overload list_online_return_policies(request, options = nil)
               #   Pass arguments to `list_online_return_policies` via a request object, either of type
@@ -298,7 +298,7 @@ module Google
               #   the default parameter values, pass an empty Hash as a request object (see above).
               #
               #   @param parent [::String]
-              #     Required. The merchant account for which to list return policies.
+              #     Required. The business account for which to list return policies.
               #     Format: `accounts/{account}`
               #   @param page_size [::Integer]
               #     Optional. The maximum number of `OnlineReturnPolicy` resources to return.
@@ -491,8 +491,8 @@ module Google
 
                 config_attr :endpoint,      nil, ::String, nil
                 config_attr :credentials,   nil do |value|
-                  allowed = [::String, ::Hash, ::Proc, ::Symbol, ::Google::Auth::Credentials, ::Signet::OAuth2::Client, nil]
-                  allowed += [::GRPC::Core::Channel, ::GRPC::Core::ChannelCredentials] if defined? ::GRPC
+                  allowed = [::String, ::Hash, ::Proc, ::Symbol, ::Google::Auth::Credentials, ::Google::Auth::BaseClient, ::Signet::OAuth2::Client, nil]
+                  allowed += [::GRPC::Core::Channel, ::GRPC::Core::ChannelCredentials] if defined? ::GRPC::Core::Channel
                   allowed.any? { |klass| klass === value }
                 end
                 config_attr :scope,         nil, ::String, ::Array, nil

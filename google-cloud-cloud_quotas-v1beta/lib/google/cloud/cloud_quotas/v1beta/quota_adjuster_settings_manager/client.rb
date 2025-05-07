@@ -221,9 +221,9 @@ module Google
             #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
             #     Optional. The list of fields to update.
             #   @param validate_only [::Boolean]
-            #     Optional. If set to true, validate the request, but do not actually update.
-            #     Note that a request being valid does not mean that the request is
-            #     guaranteed to be fulfilled.
+            #     Optional. If set to true, checks the syntax of the request but doesn't
+            #     update the quota adjuster settings value. Note that although a request can
+            #     be valid, that doesn't guarantee that the request will be fulfilled.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::CloudQuotas::V1beta::QuotaAdjusterSettings]
@@ -308,8 +308,8 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param name [::String]
-            #     Required. Name of the config. Required to be “settings”, as only a single
-            #     setting per container will be supported initially.
+            #     Required. Name of the `quotaAdjusterSettings` configuration. Only a single
+            #     setting per project is supported.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::CloudQuotas::V1beta::QuotaAdjusterSettings]
@@ -480,8 +480,8 @@ module Google
 
               config_attr :endpoint,      nil, ::String, nil
               config_attr :credentials,   nil do |value|
-                allowed = [::String, ::Hash, ::Proc, ::Symbol, ::Google::Auth::Credentials, ::Signet::OAuth2::Client, nil]
-                allowed += [::GRPC::Core::Channel, ::GRPC::Core::ChannelCredentials] if defined? ::GRPC
+                allowed = [::String, ::Hash, ::Proc, ::Symbol, ::Google::Auth::Credentials, ::Google::Auth::BaseClient, ::Signet::OAuth2::Client, nil]
+                allowed += [::GRPC::Core::Channel, ::GRPC::Core::ChannelCredentials] if defined? ::GRPC::Core::Channel
                 allowed.any? { |klass| klass === value }
               end
               config_attr :scope,         nil, ::String, ::Array, nil

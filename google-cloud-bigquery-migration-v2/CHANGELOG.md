@@ -1,5 +1,23 @@
 # Changelog
 
+### 0.15.1 (2025-04-29)
+
+#### Bug Fixes
+
+* Fixed several issues with validating credential configs 
+
+### 0.15.0 (2025-04-21)
+
+#### Features
+
+* expand QuotaFailure with quota error details ([#29461](https://github.com/googleapis/google-cloud-ruby/issues/29461)) 
+
+### 0.14.1 (2025-03-05)
+
+#### Documentation
+
+* fixed bigquery migration product link ([#29288](https://github.com/googleapis/google-cloud-ruby/issues/29288)) 
+
 ### 0.14.0 (2025-01-28)
 
 #### Features

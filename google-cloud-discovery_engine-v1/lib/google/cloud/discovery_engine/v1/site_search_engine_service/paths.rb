@@ -70,6 +70,55 @@ module Google
             end
 
             ##
+            # Create a fully-qualified Sitemap resource string.
+            #
+            # @overload sitemap_path(project:, location:, data_store:, sitemap:)
+            #   The resource will be in the following format:
+            #
+            #   `projects/{project}/locations/{location}/dataStores/{data_store}/siteSearchEngine/sitemaps/{sitemap}`
+            #
+            #   @param project [String]
+            #   @param location [String]
+            #   @param data_store [String]
+            #   @param sitemap [String]
+            #
+            # @overload sitemap_path(project:, location:, collection:, data_store:, sitemap:)
+            #   The resource will be in the following format:
+            #
+            #   `projects/{project}/locations/{location}/collections/{collection}/dataStores/{data_store}/siteSearchEngine/sitemaps/{sitemap}`
+            #
+            #   @param project [String]
+            #   @param location [String]
+            #   @param collection [String]
+            #   @param data_store [String]
+            #   @param sitemap [String]
+            #
+            # @return [::String]
+            def sitemap_path **args
+              resources = {
+                "data_store:location:project:sitemap" => (proc do |project:, location:, data_store:, sitemap:|
+                  raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+                  raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+                  raise ::ArgumentError, "data_store cannot contain /" if data_store.to_s.include? "/"
+
+                  "projects/#{project}/locations/#{location}/dataStores/#{data_store}/siteSearchEngine/sitemaps/#{sitemap}"
+                end),
+                "collection:data_store:location:project:sitemap" => (proc do |project:, location:, collection:, data_store:, sitemap:|
+                  raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+                  raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+                  raise ::ArgumentError, "collection cannot contain /" if collection.to_s.include? "/"
+                  raise ::ArgumentError, "data_store cannot contain /" if data_store.to_s.include? "/"
+
+                  "projects/#{project}/locations/#{location}/collections/#{collection}/dataStores/#{data_store}/siteSearchEngine/sitemaps/#{sitemap}"
+                end)
+              }
+
+              resource = resources[args.keys.sort.join(":")]
+              raise ::ArgumentError, "no resource found for values #{args.keys}" if resource.nil?
+              resource.call(**args)
+            end
+
+            ##
             # Create a fully-qualified TargetSite resource string.
             #
             # @overload target_site_path(project:, location:, data_store:, target_site:)

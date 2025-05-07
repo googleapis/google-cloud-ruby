@@ -1,5 +1,23 @@
 # Release History
 
+### 2.22.0 (2025-03-27)
+
+#### Features
+
+* Support list schema revisions ([#29174](https://github.com/googleapis/google-cloud-ruby/issues/29174)) 
+
+### 2.21.0 (2025-03-14)
+
+#### Features
+
+* Support revision_id in Schema 
+
+### 2.20.0 (2025-02-13)
+
+#### Features
+
+* Update Ruby version requirement to 3.0 ([#29071](https://github.com/googleapis/google-cloud-ruby/issues/29071)) 
+
 ### 2.19.0 (2024-07-09)
 
 #### Features

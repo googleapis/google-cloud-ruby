@@ -631,6 +631,44 @@ module Google
         end
 
         ##
+        # Moves file from source to destination path within bucket
+        def move_file name,
+                      source_file,
+                      destination_file,
+                      if_generation_match: nil,
+                      if_generation_not_match: nil,
+                      if_metageneration_match: nil,
+                      if_metageneration_not_match: nil,
+                      if_source_generation_match: nil,
+                      if_source_generation_not_match: nil,
+                      if_source_metageneration_match: nil,
+                      if_source_metageneration_not_match: nil,
+                      user_project: nil,
+                      fields: nil,
+                      quota_user: nil,
+                      user_ip: nil,
+                      options: {}
+          execute do
+            service.move_object name,
+                                source_file,
+                                destination_file,
+                                if_generation_match: if_generation_match,
+                                if_generation_not_match: if_generation_not_match,
+                                if_metageneration_match: if_metageneration_match,
+                                if_metageneration_not_match: if_metageneration_not_match,
+                                if_source_generation_match: if_source_generation_match,
+                                if_source_generation_not_match: if_source_generation_not_match,
+                                if_source_metageneration_match: if_source_metageneration_match,
+                                if_source_metageneration_not_match: if_source_metageneration_not_match,
+                                user_project: user_project(user_project),
+                                fields: fields,
+                                quota_user: quota_user,
+                                user_ip: user_ip,
+                                options: options
+          end
+        end
+
+        ##
         # Permanently deletes a file.
         def delete_file bucket_name,
                         file_path,

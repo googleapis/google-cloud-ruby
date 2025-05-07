@@ -1,0 +1,17 @@
+{
+    "api_id": "financialservices.googleapis.com",
+    "api_shortname": "financialservices",
+    "client_documentation": "https://cloud.google.com/ruby/docs/reference/google-cloud-financial_services/latest",
+    "distribution_name": "google-cloud-financial_services",
+    "is_cloud": true,
+    "language": "ruby",
+    "name": "financialservices",
+    "name_pretty": "Financial Services API",
+    "product_documentation": "https://cloud.google.com/financial-services/anti-money-laundering/docs/concepts/overview",
+    "release_level": "preview",
+    "repo": "googleapis/google-cloud-ruby",
+    "requires_billing": true,
+    "ruby-cloud-description": "google-cloud-financial_services is the official client library for the Financial Services API.",
+    "ruby-cloud-product-url": "https://cloud.google.com/financial-services/anti-money-laundering/docs/concepts/overview",
+    "library_type": "GAPIC_MANUAL"
+}

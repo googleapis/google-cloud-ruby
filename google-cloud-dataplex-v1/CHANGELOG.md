@@ -1,5 +1,36 @@
 # Changelog
 
+### 2.3.1 (2025-04-29)
+
+#### Bug Fixes
+
+* Fixed several issues with validating credential configs 
+
+### 2.3.0 (2025-04-21)
+
+#### Features
+
+* A new field `export_result` is added to message `.google.cloud.dataplex.v1.MetadataJob` 
+* A new field `export_spec` is added to message `.google.cloud.dataplex.v1.MetadataJob` 
+* A new message `ExportJobResult` is added 
+* A new message `ExportJobSpec` is added 
+* A new value `EXPORT` is added to enum `Type` 
+* Add Data Discovery result statistics 
+* Add Data Discovery result statistics 
+* Add EntryLinkEvent for logs 
+#### Documentation
+
+* minor formatting changes 
+
+### 2.2.0 (2025-03-13)
+
+#### Features
+
+* Added custom BigQuery dataset location support in Auto Discovery 
+#### Documentation
+
+* Deprecated the DataTaxonomyService 
+
 ### 2.1.0 (2025-02-07)
 
 #### Features

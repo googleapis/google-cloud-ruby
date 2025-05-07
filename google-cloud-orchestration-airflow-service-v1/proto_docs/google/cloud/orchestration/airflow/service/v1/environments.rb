@@ -1160,7 +1160,7 @@ module Google
             #     If unspecified, the field defaults to `PLUGINS_ENABLED`.
             #
             #     This field is supported for Cloud Composer environments in versions
-            #     composer-3.*.*-airflow-*.*.* and newer.
+            #     composer-3-airflow-*.*.*-build.* and newer.
             class SoftwareConfig
               include ::Google::Protobuf::MessageExts
               extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -1399,7 +1399,7 @@ module Google
             #     projects/\\{project}/regions/\\{region}/networkAttachments/\\{networkAttachment}.
             #
             #     This field is supported for Cloud Composer environments in versions
-            #     composer-3.*.*-airflow-*.*.* and newer.
+            #     composer-3-airflow-*.*.*-build.* and newer.
             # @!attribute [rw] composer_internal_ipv4_cidr_block
             #   @return [::String]
             #     Optional. The IP range in CIDR notation to use internally by Cloud
@@ -1409,7 +1409,7 @@ module Google
             #     If not specified, the default value of '100.64.128.0/20' is used.
             #
             #     This field is supported for Cloud Composer environments in versions
-            #     composer-3.*.*-airflow-*.*.* and newer.
+            #     composer-3-airflow-*.*.*-build.* and newer.
             class NodeConfig
               include ::Google::Protobuf::MessageExts
               extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -1441,7 +1441,7 @@ module Google
             # environment.
             # @!attribute [rw] connection_type
             #   @return [::Google::Cloud::Orchestration::Airflow::Service::V1::NetworkingConfig::ConnectionType]
-            #     Optional. Indicates the user requested specifc connection type between
+            #     Optional. Indicates the user requested specific connection type between
             #     Tenant and Customer projects. You cannot set networking connection type in
             #     public IP environment.
             class NetworkingConfig
@@ -1484,7 +1484,7 @@ module Google
             #     internet.
             #
             #     This field is supported for Cloud Composer environments in versions
-            #     composer-3.*.*-airflow-*.*.* and newer.
+            #     composer-3-airflow-*.*.*-build.* and newer.
             # @!attribute [rw] private_cluster_config
             #   @return [::Google::Cloud::Orchestration::Airflow::Service::V1::PrivateClusterConfig]
             #     Optional. Configuration for the private GKE cluster for a Private IP
@@ -1565,7 +1565,7 @@ module Google
             #     Optional. Resources used by Airflow DAG processors.
             #
             #     This field is supported for Cloud Composer environments in versions
-            #     composer-3.*.*-airflow-*.*.* and newer.
+            #     composer-3-airflow-*.*.*-build.* and newer.
             class WorkloadsConfig
               include ::Google::Protobuf::MessageExts
               extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -1647,7 +1647,7 @@ module Google
               # Configuration for resources used by Airflow DAG processors.
               #
               # This field is supported for Cloud Composer environments in versions
-              # composer-3.*.*-airflow-*.*.* and newer.
+              # composer-3-airflow-*.*.*-build.* and newer.
               # @!attribute [rw] cpu
               #   @return [::Float]
               #     Optional. CPU request and limit for a single Airflow DAG processor
@@ -1707,7 +1707,7 @@ module Google
             # Google Compute Engine Public IPs and Google Prod IPs.
             # @!attribute [rw] enabled
             #   @return [::Boolean]
-            #     Whether or not master authorized networks feature is enabled.
+            #     Optional. Whether or not master authorized networks feature is enabled.
             # @!attribute [rw] cidr_blocks
             #   @return [::Array<::Google::Cloud::Orchestration::Airflow::Service::V1::MasterAuthorizedNetworksConfig::CidrBlock>]
             #     Up to 50 external networks that could access Kubernetes master through

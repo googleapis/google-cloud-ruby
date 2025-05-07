@@ -1,5 +1,29 @@
 # Changelog
 
+### 2.1.1 (2025-04-29)
+
+#### Bug Fixes
+
+* Fixed several issues with validating credential configs 
+
+### 2.1.0 (2025-03-28)
+
+#### Features
+
+* Support for the ServingConfigService (requires a recent update to the google-cloud-discovery_engine-v1 gem) ([#29424](https://github.com/googleapis/google-cloud-ruby/issues/29424)) 
+
+### 2.0.0 (2025-02-13)
+
+### ⚠ BREAKING CHANGES
+
+* Removed dependency on google-cloud-discovery_engine-v1beta prerelease service
+* Update google-cloud-discovery_engine-v1 dependency to version 2.x ([#29063](https://github.com/googleapis/google-cloud-ruby/issues/29063))
+
+#### Features
+
+* Removed dependency on google-cloud-discovery_engine-v1beta prerelease service 
+* Update google-cloud-discovery_engine-v1 dependency to version 2.x ([#29063](https://github.com/googleapis/google-cloud-ruby/issues/29063)) 
+
 ### 1.2.0 (2025-01-29)
 
 #### Features

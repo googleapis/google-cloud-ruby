@@ -191,6 +191,11 @@ module Google
         # @!attribute [rw] routing_config
         #   @return [::Google::Cloud::AIPlatform::V1::GenerationConfig::RoutingConfig]
         #     Optional. Routing configuration.
+        # @!attribute [rw] thinking_config
+        #   @return [::Google::Cloud::AIPlatform::V1::GenerationConfig::ThinkingConfig]
+        #     Optional. Config for thinking features.
+        #     An error will be returned if this field is set for models that don't
+        #     support thinking.
         class GenerationConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -245,6 +250,16 @@ module Google
               include ::Google::Protobuf::MessageExts
               extend ::Google::Protobuf::MessageExts::ClassMethods
             end
+          end
+
+          # Config for thinking features.
+          # @!attribute [rw] thinking_budget
+          #   @return [::Integer]
+          #     Optional. Indicates the thinking budget in tokens.
+          #     This is only applied when enable_thinking is true.
+          class ThinkingConfig
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
           end
         end
 
@@ -556,6 +571,10 @@ module Google
           end
 
           # Chunk from context retrieved by the retrieval tools.
+          # @!attribute [rw] rag_chunk
+          #   @return [::Google::Cloud::AIPlatform::V1::RagChunk]
+          #     Additional context for the RAG retrieval result. This is only populated
+          #     when using the RAG retrieval tool.
           # @!attribute [rw] uri
           #   @return [::String]
           #     URI reference of the attribution.
@@ -668,6 +687,7 @@ module Google
           # The harm category is sexually explicit content.
           HARM_CATEGORY_SEXUALLY_EXPLICIT = 4
 
+          # Deprecated: Election filter is not longer supported.
           # The harm category is civic integrity.
           HARM_CATEGORY_CIVIC_INTEGRITY = 5
         end

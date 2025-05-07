@@ -1237,7 +1237,7 @@ module Google
                   # Creates a user workloads Secret.
                   #
                   # This method is supported for Cloud Composer environments in versions
-                  # composer-3.*.*-airflow-*.*.* and newer.
+                  # composer-3-airflow-*.*.*-build.* and newer.
                   #
                   # @overload create_user_workloads_secret(request, options = nil)
                   #   Pass arguments to `create_user_workloads_secret` via a request object, either of type
@@ -1322,7 +1322,7 @@ module Google
                   # Values of the "data" field in the response are cleared.
                   #
                   # This method is supported for Cloud Composer environments in versions
-                  # composer-3.*.*-airflow-*.*.* and newer.
+                  # composer-3-airflow-*.*.*-build.* and newer.
                   #
                   # @overload get_user_workloads_secret(request, options = nil)
                   #   Pass arguments to `get_user_workloads_secret` via a request object, either of type
@@ -1404,7 +1404,7 @@ module Google
                   # Lists user workloads Secrets.
                   #
                   # This method is supported for Cloud Composer environments in versions
-                  # composer-3.*.*-airflow-*.*.* and newer.
+                  # composer-3-airflow-*.*.*-build.* and newer.
                   #
                   # @overload list_user_workloads_secrets(request, options = nil)
                   #   Pass arguments to `list_user_workloads_secrets` via a request object, either of type
@@ -1497,7 +1497,7 @@ module Google
                   # Updates a user workloads Secret.
                   #
                   # This method is supported for Cloud Composer environments in versions
-                  # composer-3.*.*-airflow-*.*.* and newer.
+                  # composer-3-airflow-*.*.*-build.* and newer.
                   #
                   # @overload update_user_workloads_secret(request, options = nil)
                   #   Pass arguments to `update_user_workloads_secret` via a request object, either of type
@@ -1578,7 +1578,7 @@ module Google
                   # Deletes a user workloads Secret.
                   #
                   # This method is supported for Cloud Composer environments in versions
-                  # composer-3.*.*-airflow-*.*.* and newer.
+                  # composer-3-airflow-*.*.*-build.* and newer.
                   #
                   # @overload delete_user_workloads_secret(request, options = nil)
                   #   Pass arguments to `delete_user_workloads_secret` via a request object, either of type
@@ -1660,7 +1660,7 @@ module Google
                   # Creates a user workloads ConfigMap.
                   #
                   # This method is supported for Cloud Composer environments in versions
-                  # composer-3.*.*-airflow-*.*.* and newer.
+                  # composer-3-airflow-*.*.*-build.* and newer.
                   #
                   # @overload create_user_workloads_config_map(request, options = nil)
                   #   Pass arguments to `create_user_workloads_config_map` via a request object, either of type
@@ -1744,7 +1744,7 @@ module Google
                   # Gets an existing user workloads ConfigMap.
                   #
                   # This method is supported for Cloud Composer environments in versions
-                  # composer-3.*.*-airflow-*.*.* and newer.
+                  # composer-3-airflow-*.*.*-build.* and newer.
                   #
                   # @overload get_user_workloads_config_map(request, options = nil)
                   #   Pass arguments to `get_user_workloads_config_map` via a request object, either of type
@@ -1826,7 +1826,7 @@ module Google
                   # Lists user workloads ConfigMaps.
                   #
                   # This method is supported for Cloud Composer environments in versions
-                  # composer-3.*.*-airflow-*.*.* and newer.
+                  # composer-3-airflow-*.*.*-build.* and newer.
                   #
                   # @overload list_user_workloads_config_maps(request, options = nil)
                   #   Pass arguments to `list_user_workloads_config_maps` via a request object, either of type
@@ -1919,7 +1919,7 @@ module Google
                   # Updates a user workloads ConfigMap.
                   #
                   # This method is supported for Cloud Composer environments in versions
-                  # composer-3.*.*-airflow-*.*.* and newer.
+                  # composer-3-airflow-*.*.*-build.* and newer.
                   #
                   # @overload update_user_workloads_config_map(request, options = nil)
                   #   Pass arguments to `update_user_workloads_config_map` via a request object, either of type
@@ -2000,7 +2000,7 @@ module Google
                   # Deletes a user workloads ConfigMap.
                   #
                   # This method is supported for Cloud Composer environments in versions
-                  # composer-3.*.*-airflow-*.*.* and newer.
+                  # composer-3-airflow-*.*.*-build.* and newer.
                   #
                   # @overload delete_user_workloads_config_map(request, options = nil)
                   #   Pass arguments to `delete_user_workloads_config_map` via a request object, either of type
@@ -2541,7 +2541,7 @@ module Google
 
                     config_attr :endpoint,      nil, ::String, nil
                     config_attr :credentials,   nil do |value|
-                      allowed = [::String, ::Hash, ::Proc, ::Symbol, ::Google::Auth::Credentials, ::Signet::OAuth2::Client, nil]
+                      allowed = [::String, ::Hash, ::Proc, ::Symbol, ::Google::Auth::Credentials, ::Google::Auth::BaseClient, ::Signet::OAuth2::Client, nil]
                       allowed.any? { |klass| klass === value }
                     end
                     config_attr :scope,         nil, ::String, ::Array, nil

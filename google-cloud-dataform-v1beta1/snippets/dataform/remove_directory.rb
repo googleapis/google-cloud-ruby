@@ -41,7 +41,7 @@ def remove_directory
   # Call the remove_directory method.
   result = client.remove_directory request
 
-  # The returned object is of type Google::Protobuf::Empty.
+  # The returned object is of type Google::Cloud::Dataform::V1beta1::RemoveDirectoryResponse.
   p result
 end
 # [END dataform_v1beta1_generated_Dataform_RemoveDirectory_sync]

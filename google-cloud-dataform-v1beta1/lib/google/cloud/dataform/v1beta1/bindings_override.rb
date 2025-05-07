@@ -78,14 +78,6 @@ module Google
                 uri_method: :get,
                 uri_template: "/v1beta1/{resource}:getIamPolicy",
                 matches: [
-                  ["resource", %r{^projects/[^/]+/locations/[^/]+/collections/[^/]+/?$}, false]
-                ],
-                body: nil
-              ),
-              Gapic::Rest::GrpcTranscoder::HttpBinding.create_with_validation(
-                uri_method: :get,
-                uri_template: "/v1beta1/{resource}:getIamPolicy",
-                matches: [
                   ["resource", %r{^projects/[^/]+/locations/[^/]+/repositories/[^/]+/workspaces/[^/]+/?$}, false]
                 ],
                 body: nil
@@ -108,14 +100,6 @@ module Google
                   ["resource", %r{^projects/[^/]+/locations/[^/]+/repositories/[^/]+/workspaces/[^/]+/?$}, false]
                 ],
                 body: "*"
-              ),
-              Gapic::Rest::GrpcTranscoder::HttpBinding.create_with_validation(
-                uri_method: :post,
-                uri_template: "/v1beta1/{resource}:setIamPolicy",
-                matches: [
-                  ["resource", %r{^projects/[^/]+/locations/[^/]+/collections/[^/]+/?$}, false]
-                ],
-                body: "*"
               )
             ]
             default_config.bindings_override["google.iam.v1.IAMPolicy.TestIamPermissions"] = [
@@ -125,14 +109,6 @@ module Google
                 uri_template: "/v1beta1/{resource}:testIamPermissions",
                 matches: [
                   ["resource", %r{^projects/[^/]+/locations/[^/]+/repositories/[^/]+/?$}, false]
-                ],
-                body: "*"
-              ),
-              Gapic::Rest::GrpcTranscoder::HttpBinding.create_with_validation(
-                uri_method: :post,
-                uri_template: "/v1beta1/{resource}:testIamPermissions",
-                matches: [
-                  ["resource", %r{^projects/[^/]+/locations/[^/]+/collections/[^/]+/?$}, false]
                 ],
                 body: "*"
               ),

@@ -7,7 +7,7 @@ The Google Analytics Data API provides programmatic methods to access report dat
 Actual client classes for the various versions of this API are defined in
 _versioned_ client gems, with names of the form `google-analytics-data-v*`.
 The gem `google-analytics-data` is the main client library that brings the
-verisoned gems in as dependencies, and provides high-level methods for
+versioned gems in as dependencies, and provides high-level methods for
 constructing clients. More information on versioned clients can be found below
 in the section titled *Which client should I use?*.
 

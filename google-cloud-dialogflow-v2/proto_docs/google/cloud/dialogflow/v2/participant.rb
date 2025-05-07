@@ -145,7 +145,8 @@ module Google
         #     Output only. The time when the message was created in Contact Center AI.
         # @!attribute [rw] send_time
         #   @return [::Google::Protobuf::Timestamp]
-        #     Optional. The time when the message was sent.
+        #     Optional. The time when the message was sent. For voice messages, this is
+        #     the time when an utterance started.
         # @!attribute [r] message_annotation
         #   @return [::Google::Cloud::Dialogflow::V2::MessageAnnotation]
         #     Output only. The annotation for the message.
@@ -242,17 +243,22 @@ module Google
         #   @return [::Google::Cloud::Dialogflow::V2::TextInput]
         #     The natural language text to be processed.
         #
-        #     Note: The following fields are mutually exclusive: `text_input`, `event_input`, `suggestion_input`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `text_input`, `audio_input`, `event_input`, `suggestion_input`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] audio_input
+        #   @return [::Google::Cloud::Dialogflow::V2::AudioInput]
+        #     The natural language speech audio to be processed.
+        #
+        #     Note: The following fields are mutually exclusive: `audio_input`, `text_input`, `event_input`, `suggestion_input`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] event_input
         #   @return [::Google::Cloud::Dialogflow::V2::EventInput]
         #     An input event to send to Dialogflow.
         #
-        #     Note: The following fields are mutually exclusive: `event_input`, `text_input`, `suggestion_input`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `event_input`, `text_input`, `audio_input`, `suggestion_input`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] suggestion_input
         #   @return [::Google::Cloud::Dialogflow::V2::SuggestionInput]
         #     An input representing the selection of a suggestion.
         #
-        #     Note: The following fields are mutually exclusive: `suggestion_input`, `text_input`, `event_input`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `suggestion_input`, `text_input`, `audio_input`, `event_input`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] reply_audio_config
         #   @return [::Google::Cloud::Dialogflow::V2::OutputAudioConfig]
         #     Speech synthesis configuration.
@@ -477,10 +483,10 @@ module Google
         #     https://cloud.google.com/agent-assist/docs/extended-streaming
         # @!attribute [rw] enable_partial_automated_agent_reply
         #   @return [::Boolean]
-        #     Enable partial virtual agent responses. If this flag is not enabled,
-        #     response stream still contains only one final response even if some
-        #     `Fulfillment`s in Dialogflow virtual agent have been configured to return
-        #     partial responses.
+        #     Optional. Enable partial responses from Dialogflow CX agent. If this flag
+        #     is not enabled, response stream still contains only one final response even
+        #     if some `Fulfillment`s in Dialogflow CX agent have been configured to
+        #     return partial responses.
         # @!attribute [rw] enable_debugging_info
         #   @return [::Boolean]
         #     If true, `StreamingAnalyzeContentResponse.debugging_info` will get
@@ -562,6 +568,9 @@ module Google
         #   @return [::Google::Cloud::Dialogflow::V2::CloudConversationDebuggingInfo]
         #     Debugging info that would get populated when
         #     `StreamingAnalyzeContentRequest.enable_debugging_info` is set to true.
+        # @!attribute [rw] speech_model
+        #   @return [::String]
+        #     The name of the actual Cloud speech model used for speech recognition.
         class StreamingAnalyzeContentResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -672,6 +681,41 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # The response message for
+        # {::Google::Cloud::Dialogflow::V2::Conversations::Client#generate_suggestions Conversations.GenerateSuggestions}.
+        # @!attribute [rw] generator_suggestion_answers
+        #   @return [::Array<::Google::Cloud::Dialogflow::V2::GenerateSuggestionsResponse::GeneratorSuggestionAnswer>]
+        #     The answers generated for the conversation based on context.
+        # @!attribute [rw] latest_message
+        #   @return [::String]
+        #     The name of the latest conversation message used as context for
+        #     compiling suggestion.
+        #
+        #     Format: `projects/<Project ID>/locations/<Location
+        #     ID>/conversations/<Conversation ID>/messages/<Message ID>`.
+        class GenerateSuggestionsResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # A GeneratorSuggestion answer.
+          # @!attribute [rw] generator_suggestion
+          #   @return [::Google::Cloud::Dialogflow::V2::GeneratorSuggestion]
+          #     Suggestion details.
+          # @!attribute [rw] source_generator
+          #   @return [::String]
+          #     The name of the generator used to generate this suggestion. Format:
+          #     `projects/<Project ID>/locations/<Location ID>/generators/<Generator
+          #     ID>`.
+          # @!attribute [rw] answer_record
+          #   @return [::String]
+          #     Answer record that uniquely identifies the suggestion. This can be used
+          #     to provide suggestion feedback.
+          class GeneratorSuggestionAnswer
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+        end
+
         # The request message for
         # {::Google::Cloud::Dialogflow::V2::Participants::Client#suggest_smart_replies Participants.SuggestSmartReplies}.
         # @!attribute [rw] parent
@@ -724,6 +768,21 @@ module Google
         #     field in the request if there aren't that many messages in the
         #     conversation.
         class SuggestSmartRepliesResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Represents the natural language speech audio to be processed.
+        # @!attribute [rw] config
+        #   @return [::Google::Cloud::Dialogflow::V2::InputAudioConfig]
+        #     Required. Instructs the speech recognizer how to process the speech audio.
+        # @!attribute [rw] audio
+        #   @return [::String]
+        #     Required. The natural language speech audio to be processed.
+        #     A single request can contain up to 2 minutes of speech audio data.
+        #     The transcribed text cannot contain more than 256 bytes for virtual agent
+        #     interactions.
+        class AudioInput
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
@@ -929,27 +988,33 @@ module Google
         #   @return [::Google::Rpc::Status]
         #     Error status if the request failed.
         #
-        #     Note: The following fields are mutually exclusive: `error`, `suggest_articles_response`, `suggest_knowledge_assist_response`, `suggest_faq_answers_response`, `suggest_smart_replies_response`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `error`, `suggest_articles_response`, `suggest_knowledge_assist_response`, `suggest_faq_answers_response`, `suggest_smart_replies_response`, `generate_suggestions_response`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] suggest_articles_response
         #   @return [::Google::Cloud::Dialogflow::V2::SuggestArticlesResponse]
         #     SuggestArticlesResponse if request is for ARTICLE_SUGGESTION.
         #
-        #     Note: The following fields are mutually exclusive: `suggest_articles_response`, `error`, `suggest_knowledge_assist_response`, `suggest_faq_answers_response`, `suggest_smart_replies_response`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `suggest_articles_response`, `error`, `suggest_knowledge_assist_response`, `suggest_faq_answers_response`, `suggest_smart_replies_response`, `generate_suggestions_response`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] suggest_knowledge_assist_response
         #   @return [::Google::Cloud::Dialogflow::V2::SuggestKnowledgeAssistResponse]
         #     SuggestKnowledgeAssistResponse if request is for KNOWLEDGE_ASSIST.
         #
-        #     Note: The following fields are mutually exclusive: `suggest_knowledge_assist_response`, `error`, `suggest_articles_response`, `suggest_faq_answers_response`, `suggest_smart_replies_response`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `suggest_knowledge_assist_response`, `error`, `suggest_articles_response`, `suggest_faq_answers_response`, `suggest_smart_replies_response`, `generate_suggestions_response`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] suggest_faq_answers_response
         #   @return [::Google::Cloud::Dialogflow::V2::SuggestFaqAnswersResponse]
         #     SuggestFaqAnswersResponse if request is for FAQ_ANSWER.
         #
-        #     Note: The following fields are mutually exclusive: `suggest_faq_answers_response`, `error`, `suggest_articles_response`, `suggest_knowledge_assist_response`, `suggest_smart_replies_response`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `suggest_faq_answers_response`, `error`, `suggest_articles_response`, `suggest_knowledge_assist_response`, `suggest_smart_replies_response`, `generate_suggestions_response`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] suggest_smart_replies_response
         #   @return [::Google::Cloud::Dialogflow::V2::SuggestSmartRepliesResponse]
         #     SuggestSmartRepliesResponse if request is for SMART_REPLY.
         #
-        #     Note: The following fields are mutually exclusive: `suggest_smart_replies_response`, `error`, `suggest_articles_response`, `suggest_knowledge_assist_response`, `suggest_faq_answers_response`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `suggest_smart_replies_response`, `error`, `suggest_articles_response`, `suggest_knowledge_assist_response`, `suggest_faq_answers_response`, `generate_suggestions_response`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] generate_suggestions_response
+        #   @return [::Google::Cloud::Dialogflow::V2::GenerateSuggestionsResponse]
+        #     Suggestions generated using generators triggered by customer or agent
+        #     messages.
+        #
+        #     Note: The following fields are mutually exclusive: `generate_suggestions_response`, `error`, `suggest_articles_response`, `suggest_knowledge_assist_response`, `suggest_faq_answers_response`, `suggest_smart_replies_response`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         class SuggestionResult
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -1079,7 +1144,7 @@ module Google
         # @!attribute [rw] previous_suggested_query
         #   @return [::String]
         #     Optional. The previously suggested query for the given conversation. This
-        #     helps identify whether the next suggestion we generate is resonably
+        #     helps identify whether the next suggestion we generate is reasonably
         #     different from the previous one. This is useful to avoid similar
         #     suggestions within the conversation.
         class SuggestKnowledgeAssistRequest

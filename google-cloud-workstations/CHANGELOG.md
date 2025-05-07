@@ -1,5 +1,23 @@
 # Changelog
 
+### 2.0.1 (2025-04-29)
+
+#### Bug Fixes
+
+* Fixed several issues with validating credential configs 
+
+### 2.0.0 (2025-02-13)
+
+### ⚠ BREAKING CHANGES
+
+* Removed dependency on google-cloud-workstations-v1beta prerelease service
+* Updated google-cloud-workstations-v1 dependency to version 1.x ([#29011](https://github.com/googleapis/google-cloud-ruby/issues/29011))
+
+#### Features
+
+* Removed dependency on google-cloud-workstations-v1beta prerelease service 
+* Updated google-cloud-workstations-v1 dependency to version 1.x ([#29011](https://github.com/googleapis/google-cloud-ruby/issues/29011)) 
+
 ### 1.1.0 (2025-01-29)
 
 #### Features
