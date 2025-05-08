@@ -450,9 +450,9 @@ module Google
             #   @param request_id [::String]
             #     Optional. An optional request ID to identify requests. Specify a unique
             #     request ID in case you need to retry your request. Requests with same
-            #     `request_id` will ignored for at least 60 minutes since the first request.
-            #     The request ID must be a valid UUID with the exception that zero UUID is
-            #     not supported (00000000-0000-0000-0000-000000000000).
+            #     `request_id` will be ignored for at least 60 minutes since the first
+            #     request. The request ID must be a valid UUID with the exception that zero
+            #     UUID is not supported (00000000-0000-0000-0000-000000000000).
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Gapic::Operation]
@@ -551,9 +551,9 @@ module Google
             #   @param request_id [::String]
             #     Optional. An optional request ID to identify requests. Specify a unique
             #     request ID in case you need to retry your request. Requests with same
-            #     `request_id` will ignored for at least 60 minutes since the first request.
-            #     The request ID must be a valid UUID with the exception that zero UUID is
-            #     not supported (00000000-0000-0000-0000-000000000000).
+            #     `request_id` will be ignored for at least 60 minutes since the first
+            #     request. The request ID must be a valid UUID with the exception that zero
+            #     UUID is not supported (00000000-0000-0000-0000-000000000000).
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Protobuf::Empty]
@@ -643,9 +643,9 @@ module Google
             #   @param request_id [::String]
             #     Optional. An optional request ID to identify requests. Specify a unique
             #     request ID in case you need to retry your request. Requests with same
-            #     `request_id` will ignored for at least 60 minutes since the first request.
-            #     The request ID must be a valid UUID with the exception that zero UUID is
-            #     not supported (00000000-0000-0000-0000-000000000000).
+            #     `request_id` will be ignored for at least 60 minutes since the first
+            #     request. The request ID must be a valid UUID with the exception that zero
+            #     UUID is not supported (00000000-0000-0000-0000-000000000000).
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::StorageBatchOperations::V1::CancelJobResponse]

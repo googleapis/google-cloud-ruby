@@ -84,9 +84,9 @@ module Google
         #   @return [::String]
         #     Optional. An optional request ID to identify requests. Specify a unique
         #     request ID in case you need to retry your request. Requests with same
-        #     `request_id` will ignored for at least 60 minutes since the first request.
-        #     The request ID must be a valid UUID with the exception that zero UUID is
-        #     not supported (00000000-0000-0000-0000-000000000000).
+        #     `request_id` will be ignored for at least 60 minutes since the first
+        #     request. The request ID must be a valid UUID with the exception that zero
+        #     UUID is not supported (00000000-0000-0000-0000-000000000000).
         class CreateJobRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -101,9 +101,9 @@ module Google
         #   @return [::String]
         #     Optional. An optional request ID to identify requests. Specify a unique
         #     request ID in case you need to retry your request. Requests with same
-        #     `request_id` will ignored for at least 60 minutes since the first request.
-        #     The request ID must be a valid UUID with the exception that zero UUID is
-        #     not supported (00000000-0000-0000-0000-000000000000).
+        #     `request_id` will be ignored for at least 60 minutes since the first
+        #     request. The request ID must be a valid UUID with the exception that zero
+        #     UUID is not supported (00000000-0000-0000-0000-000000000000).
         class CancelJobRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -118,9 +118,9 @@ module Google
         #   @return [::String]
         #     Optional. An optional request ID to identify requests. Specify a unique
         #     request ID in case you need to retry your request. Requests with same
-        #     `request_id` will ignored for at least 60 minutes since the first request.
-        #     The request ID must be a valid UUID with the exception that zero UUID is
-        #     not supported (00000000-0000-0000-0000-000000000000).
+        #     `request_id` will be ignored for at least 60 minutes since the first
+        #     request. The request ID must be a valid UUID with the exception that zero
+        #     UUID is not supported (00000000-0000-0000-0000-000000000000).
         class DeleteJobRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -150,7 +150,8 @@ module Google
         #     have
         #     {::Google::Longrunning::Operation#error google.longrunning.Operation.error}
         #     value with a {::Google::Rpc::Status#code google.rpc.Status.code} of 1,
-        #     corresponding to `Code.CANCELLED`.
+        #     corresponding to
+        #     `[Code.CANCELLED][google.rpc.Code.CANCELLED]`.
         # @!attribute [r] api_version
         #   @return [::String]
         #     Output only. API version used to start the operation.
