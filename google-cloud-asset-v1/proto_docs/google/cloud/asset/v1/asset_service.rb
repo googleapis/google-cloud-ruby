@@ -508,14 +508,14 @@ module Google
             PARTITION_KEY_UNSPECIFIED = 0
 
             # The time when the snapshot is taken. If specified as partition key, the
-            # result table(s) is partitoned by the additional timestamp column,
+            # result table(s) is partitioned by the additional timestamp column,
             # readTime. If [read_time] in ExportAssetsRequest is specified, the
             # readTime column's value will be the same as it. Otherwise, its value will
             # be the current time that is used to take the snapshot.
             READ_TIME = 1
 
             # The time when the request is received and started to be processed. If
-            # specified as partition key, the result table(s) is partitoned by the
+            # specified as partition key, the result table(s) is partitioned by the
             # requestTime column, an additional timestamp column representing when the
             # request was received.
             REQUEST_TIME = 2
@@ -1309,7 +1309,7 @@ module Google
               PARTITION_KEY_UNSPECIFIED = 0
 
               # The time when the request is received. If specified as partition key,
-              # the result table(s) is partitoned by the RequestTime column, an
+              # the result table(s) is partitioned by the RequestTime column, an
               # additional timestamp column representing when the request was received.
               REQUEST_TIME = 1
             end
@@ -1547,7 +1547,7 @@ module Google
         #   @return [::String]
         #     Required. Name of the Google Cloud folder or organization to reparent the
         #     target resource. The analysis will be performed against hypothetically
-        #     moving the resource to this specified desitination parent. This can only be
+        #     moving the resource to this specified destination parent. This can only be
         #     a folder number (such as "folders/123") or an organization number (such as
         #     "organizations/123").
         # @!attribute [rw] view
