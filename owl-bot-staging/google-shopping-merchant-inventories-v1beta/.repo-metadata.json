@@ -1,0 +1,17 @@
+{
+    "api_id": "merchantapi.googleapis.com",
+    "api_shortname": "merchantapi",
+    "client_documentation": "https://rubydoc.info/gems/google-shopping-merchant-inventories-v1beta",
+    "distribution_name": "google-shopping-merchant-inventories-v1beta",
+    "is_cloud": false,
+    "language": "ruby",
+    "name": "merchantapi",
+    "name_pretty": "Merchant V1BETA API",
+    "product_documentation": "https://developers.google.com/merchant/api",
+    "release_level": "unreleased",
+    "repo": "googleapis/google-cloud-ruby",
+    "requires_billing": true,
+    "ruby-cloud-description": "Programmatically manage your Merchant Center accounts. Note that google-shopping-merchant-inventories-v1beta is a version-specific client library. For most uses, we recommend installing the main client library google-shopping-merchant-inventories instead. See the readme for more details.",
+    "ruby-cloud-product-url": "https://developers.google.com/merchant/api",
+    "library_type": "GAPIC_AUTO"
+}
