@@ -113,7 +113,49 @@ module Grafeas
     #   @return [::String]
     #     For jars that are contained inside .war files, this filepath
     #     can indicate the path to war file combined with the path to jar file.
+    # @!attribute [rw] layer_details
+    #   @return [::Grafeas::V1::LayerDetails]
+    #     Each package found in a file should have its own layer metadata (that is,
+    #     information from the origin layer of the package).
     class FileLocation
+      include ::Google::Protobuf::MessageExts
+      extend ::Google::Protobuf::MessageExts::ClassMethods
+    end
+
+    # BaseImage describes a base image of a container image.
+    # @!attribute [rw] name
+    #   @return [::String]
+    #     The name of the base image.
+    # @!attribute [rw] repository
+    #   @return [::String]
+    #     The repository name in which the base image is from.
+    # @!attribute [rw] layer_count
+    #   @return [::Integer]
+    #     The number of layers that the base image is composed of.
+    class BaseImage
+      include ::Google::Protobuf::MessageExts
+      extend ::Google::Protobuf::MessageExts::ClassMethods
+    end
+
+    # Details about the layer a package was found in.
+    # @!attribute [rw] index
+    #   @return [::Integer]
+    #     The index of the layer in the container image.
+    # @!attribute [rw] diff_id
+    #   @return [::String]
+    #     The diff ID (typically a sha256 hash) of the layer in the container image.
+    # @!attribute [rw] chain_id
+    #   @return [::String]
+    #     The layer chain ID (sha256 hash) of the layer in the container image.
+    #     https://github.com/opencontainers/image-spec/blob/main/config.md#layer-chainid
+    # @!attribute [rw] command
+    #   @return [::String]
+    #     The layer build command that was used to build the layer. This may not be
+    #     found in all layers depending on how the container image is built.
+    # @!attribute [rw] base_images
+    #   @return [::Array<::Grafeas::V1::BaseImage>]
+    #     The base images the layer is found within.
+    class LayerDetails
       include ::Google::Protobuf::MessageExts
       extend ::Google::Protobuf::MessageExts::ClassMethods
     end
@@ -186,6 +228,9 @@ module Grafeas
 
       # This represents an SBOM Reference.
       SBOM_REFERENCE = 12
+
+      # This represents a secret.
+      SECRET = 13
     end
   end
 end
