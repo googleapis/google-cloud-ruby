@@ -20,6 +20,7 @@ require "google/cloud/firestore/convert"
 require "google/cloud/firestore/aggregate_query"
 require "google/cloud/firestore/filter"
 require "json"
+require "google/cloud/firestore/query_run_result"
 
 module Google
   module Cloud
@@ -74,17 +75,30 @@ module Google
         attr_accessor :query
 
         ##
+        # @private The Google::Cloud::Firestore::V1::ExplainOptions object.
+        attr_accessor :explain_options
+
+        ##
         # @private The firestore client object.
         attr_accessor :client
 
         ##
         # @private Creates a new Query.
-        def initialize query, parent_path, client, limit_type: nil
+        #
+        # @param [Google::Cloud::Firestore::V1::StructuredQuery] query The structured query object.
+        # @param [String] parent_path The parent path for the query.
+        # @param [Google::Cloud::Firestore::Client] client The firestore client object.
+        # @param [Symbol] limit_type (Optional) The type of limit query (:first or :last).
+        #   Defaults to `nil` if not provided.
+        # @param [Google::Cloud::Firestore::V1::ExplainOptions] explain_options
+        #   (Optional) The options for explaining the query plan. Defaults to `nil` if not provided.
+        def initialize query, parent_path, client, limit_type: nil, explain_options: nil
           query ||= StructuredQuery.new
           @query = query
           @parent_path = parent_path
           @limit_type = limit_type
           @client = client
+          @explain_options = explain_options
         end
 
         ##
@@ -135,7 +149,7 @@ module Google
             new_query.select.fields << field_ref
           end
 
-          Query.start new_query, parent_path, client, limit_type: limit_type
+          start_new_query new_query
         end
 
         ##
@@ -171,7 +185,7 @@ module Google
 
           new_query.from.last.all_descendants = true
 
-          Query.start new_query, parent_path, client, limit_type: limit_type
+          start_new_query new_query
         end
 
         ##
@@ -207,7 +221,7 @@ module Google
 
           new_query.from.last.all_descendants = false
 
-          Query.start new_query, parent_path, client, limit_type: limit_type
+          start_new_query new_query
         end
 
         ##
@@ -305,7 +319,72 @@ module Google
             add_filters_to_query new_query, new_filter.filter
           end
 
-          Query.start new_query, parent_path, client, limit_type: limit_type
+          start_new_query new_query
+        end
+
+        ##
+        # Adds a request to return the additional planning metrics for the query.
+        # This method creates a new query with ExplainOptions set.
+        #
+        # The `analyze` parameter determines whether the query should be executed.
+        # If it's set to `false` (the default) the query will be planned, returning only metrics from the
+        # planning stages. If it's set to `true` the query will be planned and executed, returning the full query
+        # results along with both planning and execution stage metrics.
+        #
+        # If `explain` is called multiple times, an error will be thrown
+        #
+        # @param [Boolean] analyze
+        #   Whether to execute the query and return the execution stage metrics, in addition to planning metrics.
+        #   If set to `false` the query will be planned only and will return planning stage metrics without results.
+        #   If set to `true` the query will be executed, and will return the query results, planning stage metrics,
+        #     and execution stage metrics.
+        #   Defaults to `false`.
+        #
+        # @return [Query]
+        #   A new query instance with the explain options set.
+        #
+        # @example
+        #   require "google/cloud/firestore"
+        #
+        #   firestore = Google::Cloud::Firestore.new
+        #   query = firestore.col(:cities).where(:population, :>, 100000)
+        #
+        #   # Get the execution plan without running the query
+        #   explain_query = query.explain
+        #   explain_query.get do |result|
+        #     if result. [tktk]
+        #   end
+        #
+        # @example
+        #   require "google/cloud/firestore"
+        #
+        #   firestore = Google::Cloud::Firestore.new
+        #   query = firestore.col(:cities).where(:population, :>, 100000)
+        #
+        #   # Run the query and return metrics from the planning and execution stages
+        #   explain_query = query.explain analyze: true
+        #   explain_query.get do |result|
+        #     # Process the detailed execution plan results
+        #     puts result
+        #   end
+        def explain analyze: false
+          # Check if explain has already been called
+          if @explain_options
+            raise "cannot call explain after it has already been called"
+          end
+
+          # Validate analyze parameter
+          unless [true, false].include? analyze
+            raise ArgumentError, "analyze must be a boolean"
+          end
+
+          new_query = @query.dup
+          new_query ||= StructuredQuery.new
+
+          new_explain_options = ::Google::Cloud::Firestore::V1::ExplainOptions.new
+          new_explain_options.analyze = analyze
+
+          start_new_query new_query, explain_options_override: new_explain_options
         end
 
         ##
@@ -373,7 +452,7 @@ module Google
             direction: order_direction(direction)
           )
 
-          Query.start new_query, parent_path, client, limit_type: limit_type
+          start_new_query new_query
         end
         alias order_by order
 
@@ -406,7 +485,7 @@ module Google
 
           new_query.offset = num
 
-          Query.start new_query, parent_path, client, limit_type: limit_type
+          start_new_query new_query
         end
 
         ##
@@ -443,7 +522,7 @@ module Google
 
           new_query.limit = Google::Protobuf::Int32Value.new value: num
 
-          Query.start new_query, parent_path, client, limit_type: :first
+          start_new_query new_query, limit_type_override: :first
         end
 
         ##
@@ -503,7 +582,7 @@ module Google
 
           new_query.limit = Google::Protobuf::Int32Value.new value: num
 
-          Query.start new_query, parent_path, client, limit_type: :last
+          start_new_query new_query, limit_type_override: :last
         end
 
         ##
@@ -611,7 +690,7 @@ module Google
           cursor.before = true
           new_query.start_at = cursor
 
-          Query.start new_query, parent_path, client, limit_type: limit_type
+          start_new_query new_query
         end
 
         ##
@@ -720,7 +799,7 @@ module Google
           cursor.before = false
           new_query.start_at = cursor
 
-          Query.start new_query, parent_path, client, limit_type: limit_type
+          start_new_query new_query
         end
 
         ##
@@ -829,7 +908,7 @@ module Google
           cursor.before = true
           new_query.end_at = cursor
 
-          Query.start new_query, parent_path, client, limit_type: limit_type
+          start_new_query new_query
         end
 
         ##
@@ -938,7 +1017,7 @@ module Google
           cursor.before = false
           new_query.end_at = cursor
 
-          Query.start new_query, parent_path, client, limit_type: limit_type
+          start_new_query new_query
         end
 
         ##
@@ -950,7 +1029,7 @@ module Google
         # @yield [documents] The block for accessing the document snapshots.
         # @yieldparam [DocumentSnapshot] document A document snapshot.
         #
-        # @return [Enumerator<DocumentSnapshot>] A list of document snapshots.
+        # @return [QueryRunResult] A custom enumerator of document snapshots with additional properties.
         #
         # @example
         #   require "google/cloud/firestore"
@@ -984,12 +1063,63 @@ module Google
         #     puts "#{city.document_id} has #{city[:population]} residents."
         #   end
         #
-        def get read_time: nil
+        # @example Get query planning stage metrics
+        #   require "google/cloud/firestore"
+        #
+        #   firestore = Google::Cloud::Firestore.new
+        #
+        #   # Get a collection reference with explanation
+        #   query = firestore.col("cities")
+        #
+        #   # Explain defaults to `false` which returns planning stage metrics without running the query
+        #   explain_query = query.explain
+        #
+        #   # Run query and iterate through returned enumerable to populate the explanation
+        #   explain_results = explain_query.get.to_a
+        #
+        #   puts "Query explanation: #{explain_results.explanation}" if explain_results.explanation
+        #
+        # @example Run query and return detailed metrics from planning and execution stages
+        #   require "google/cloud/firestore"
+        #
+        #   firestore = Google::Cloud::Firestore.new
+        #
+        #   # Get a collection reference with explanation
+        #   query = firestore.col("cities").explain(true)
+        #
+        #   # Run query
+        #   results = query.get
+        #
+        #   # Iterating through results will populate explanation
+        #   results.do |city|
+        #     puts "#{city.document_id} has #{city[:population]} residents."
+        #   end
+        #
+        #   puts "Query explanation: #{results.explanation}" if results.explanation
+        #
+        def get read_time: nil, &block
+          ensure_service!
+          # Reverse the results for Query#limit_to_last queries since that method reversed the order_by directions.
+          reverse_results = limit_type == :last
+          results_generator = lambda do
+            service.run_query parent_path, query, read_time: read_time, explain_options: explain_options
+          end
+
+          results = QueryRunResult.new results_generator, client, reverse_results: reverse_results
+
+          return results unless block_given?
+          results.each(&block)
+        end
+        alias run get
+
+        ##
+        # [tk] Remove me
+        def old_get read_time: nil
           ensure_service!
 
-          return enum_for :get, read_time: read_time unless block_given?
+          return enum_for :old_get, read_time: read_time unless block_given?
 
-          results = service.run_query parent_path, @query, read_time: read_time
+          results = service.run_query parent_path, @query, read_time: read_time, explain_options: explain_options
 
           # Reverse the results for Query#limit_to_last queries since that method reversed the order_by directions.
           results = results.to_a.reverse if limit_type == :last
@@ -999,7 +1129,6 @@ module Google
             yield DocumentSnapshot.from_query_result result, client
           end
         end
-        alias run get
 
         ##
         # Creates an AggregateQuery object for the query.
@@ -1075,10 +1204,15 @@ module Google
         #
         def to_json options = nil
           query_json = Google::Cloud::Firestore::V1::StructuredQuery.encode_json query
+          explain_options_json = if explain_options
+                                   Google::Cloud::Firestore::V1::ExplainOptions.encode_json explain_options
+                                 end
+
           {
             "query" => JSON.parse(query_json),
             "parent_path" => parent_path,
-            "limit_type" => limit_type
+            "limit_type" => limit_type,
+            "explain_options" => explain_options_json ? JSON.parse(explain_options_json) : nil
           }.to_json options
         end
 
@@ -1112,16 +1246,60 @@ module Google
           query_json = json["query"]
           raise ArgumentError, "Field 'query' is required" unless query_json
           query = Google::Cloud::Firestore::V1::StructuredQuery.decode_json query_json.to_json
-          start query, json["parent_path"], client, limit_type: json["limit_type"]&.to_sym
+
+          explain_options_json = json["explain_options"]
+          explain_options = if explain_options_json
+                              Google::Cloud::Firestore::V1::ExplainOptions.decode_json explain_options_json.to_json
+                            end
+          start(query,
+                json["parent_path"],
+                client,
+                limit_type: json["limit_type"]&.to_sym,
+                explain_options: explain_options)
         end
 
         ##
         # @private Start a new Query.
-        def self.start query, parent_path, client, limit_type: nil
-          new query, parent_path, client, limit_type: limit_type
+        #
+        # This method creates and returns a new `Query` instance, initializing it with the provided parameters.
+        #
+        # @param [Google::Cloud::Firestore::V1::StructuredQuery] query
+        #   The structured query object representing the query to be executed.
+        # @param [String] parent_path
+        #   The parent path of the collection or document the query is operating on.
+        # @param [Google::Cloud::Firestore::Client] client
+        #   The Firestore client instance.
+        # @param [Symbol, nil] limit_type
+        #   (Optional) The type of limit to apply to the query results, either `:first` or `:last`.
+        #   Defaults to `nil` if no limit is applied.
+        # @param [Google::Cloud::Firestore::V1::ExplainOptions, nil] explain_options
+        #   (Optional) The options for explaining the query plan. Defaults to `nil` if not provided.
+        #
+        # @return [Google::Cloud::Firestore::Query]
+        #   A new `Query` instance initialized with the given parameters.
+        def self.start query, parent_path, client, limit_type: nil, explain_options: nil
+          new query, parent_path, client, limit_type: limit_type, explain_options: explain_options
         end
 
         protected
+
+        ##
+        # @private Helper for starting a new query copying existing parameters.
+        #
+        # @param [Google::Cloud::Firestore::V1::StructuredQuery] new_query
+        #    The new structured query object.
+        # @param [Symbol] limit_type_override The limit type override for the new query
+        # @param [Google::Cloud::Firestore::V1::ExplainOptions] explain_options_override
+        #   The explain options override for the new query.
+        #
+        # @return [Query] A new query
+        def start_new_query new_query, limit_type_override: nil, explain_options_override: nil
+          Query.start(new_query,
+                      parent_path,
+                      client,
+                      limit_type: limit_type_override || limit_type,
+                      explain_options: explain_options_override || explain_options)
+        end
 
         ##
         # @private

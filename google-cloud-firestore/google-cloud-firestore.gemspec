@@ -24,4 +24,5 @@ Gem::Specification.new do |gem|
   gem.add_dependency "google-cloud-core", "~> 1.7"
   gem.add_dependency "google-cloud-firestore-v1", "~> 2.0"
   gem.add_dependency "rbtree", "~> 0.4.2"
+  gem.add_dependency "pry"
 end
