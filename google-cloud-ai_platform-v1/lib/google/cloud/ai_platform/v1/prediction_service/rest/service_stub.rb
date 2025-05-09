@@ -164,7 +164,7 @@ module Google
               # @yieldparam chunk [::String] The chunk of data received during server streaming.
               #
               # @return [::Gapic::Rest::TransportOperation]
-              def stream_raw_predict request_pb, options = nil, &block
+              def stream_raw_predict(request_pb, options = nil, &)
                 raise ::ArgumentError, "request must be provided" if request_pb.nil?
 
                 verb, uri, query_string_params, body = ServiceStub.transcode_stream_raw_predict_request request_pb
@@ -182,7 +182,7 @@ module Google
                   method_name: "stream_raw_predict",
                   options: options,
                   is_server_streaming: true,
-                  &block
+                  &
                 )
                 ::Gapic::Rest::TransportOperation.new response
               end
@@ -278,7 +278,7 @@ module Google
               # @yieldparam chunk [::String] The chunk of data received during server streaming.
               #
               # @return [::Gapic::Rest::TransportOperation]
-              def server_streaming_predict request_pb, options = nil, &block
+              def server_streaming_predict(request_pb, options = nil, &)
                 raise ::ArgumentError, "request must be provided" if request_pb.nil?
 
                 verb, uri, query_string_params, body = ServiceStub.transcode_server_streaming_predict_request request_pb
@@ -296,7 +296,7 @@ module Google
                   method_name: "server_streaming_predict",
                   options: options,
                   is_server_streaming: true,
-                  &block
+                  &
                 )
                 ::Gapic::Rest::TransportOperation.new response
               end
@@ -392,7 +392,7 @@ module Google
               # @yieldparam chunk [::String] The chunk of data received during server streaming.
               #
               # @return [::Gapic::Rest::TransportOperation]
-              def stream_generate_content request_pb, options = nil, &block
+              def stream_generate_content(request_pb, options = nil, &)
                 raise ::ArgumentError, "request must be provided" if request_pb.nil?
 
                 verb, uri, query_string_params, body = ServiceStub.transcode_stream_generate_content_request request_pb
@@ -410,7 +410,7 @@ module Google
                   method_name: "stream_generate_content",
                   options: options,
                   is_server_streaming: true,
-                  &block
+                  &
                 )
                 ::Gapic::Rest::TransportOperation.new response
               end
