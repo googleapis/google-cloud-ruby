@@ -21,9 +21,9 @@ Gem::Specification.new do |gem|
                       ["README.md", "LICENSE.md", "AUTHENTICATION.md", ".yardopts"]
   gem.require_paths = ["lib"]
 
-  gem.required_ruby_version = ">= 3.0"
+  gem.required_ruby_version = ">= 3.1"
 
-  gem.add_dependency "gapic-common", ">= 0.25.0", "< 2.a"
+  gem.add_dependency "gapic-common", "~> 1.0"
   gem.add_dependency "google-cloud-errors", "~> 1.0"
   gem.add_dependency "google-cloud-kms-v1", "> 0.0", "< 2.a"
 end
