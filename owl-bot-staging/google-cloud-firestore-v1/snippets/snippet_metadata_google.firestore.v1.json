@@ -1,0 +1,655 @@
+{
+  "client_library": {
+    "name": "google-cloud-firestore-v1",
+    "version": "",
+    "language": "RUBY",
+    "apis": [
+      {
+        "id": "google.firestore.v1",
+        "version": "v1"
+      }
+    ]
+  },
+  "snippets": [
+    {
+      "region_tag": "firestore_v1_generated_Firestore_GetDocument_sync",
+      "title": "Snippet for the get_document call in the Firestore service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Firestore::V1::Firestore::Client#get_document.",
+      "file": "firestore/get_document.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_document",
+        "full_name": "::Google::Cloud::Firestore::V1::Firestore::Client#get_document",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Firestore::V1::GetDocumentRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Firestore::V1::Document",
+        "client": {
+          "short_name": "Firestore::Client",
+          "full_name": "::Google::Cloud::Firestore::V1::Firestore::Client"
+        },
+        "method": {
+          "short_name": "GetDocument",
+          "full_name": "google.firestore.v1.Firestore.GetDocument",
+          "service": {
+            "short_name": "Firestore",
+            "full_name": "google.firestore.v1.Firestore"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "firestore_v1_generated_Firestore_ListDocuments_sync",
+      "title": "Snippet for the list_documents call in the Firestore service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Firestore::V1::Firestore::Client#list_documents.",
+      "file": "firestore/list_documents.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_documents",
+        "full_name": "::Google::Cloud::Firestore::V1::Firestore::Client#list_documents",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Firestore::V1::ListDocumentsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Firestore::V1::ListDocumentsResponse",
+        "client": {
+          "short_name": "Firestore::Client",
+          "full_name": "::Google::Cloud::Firestore::V1::Firestore::Client"
+        },
+        "method": {
+          "short_name": "ListDocuments",
+          "full_name": "google.firestore.v1.Firestore.ListDocuments",
+          "service": {
+            "short_name": "Firestore",
+            "full_name": "google.firestore.v1.Firestore"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "firestore_v1_generated_Firestore_UpdateDocument_sync",
+      "title": "Snippet for the update_document call in the Firestore service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Firestore::V1::Firestore::Client#update_document.",
+      "file": "firestore/update_document.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_document",
+        "full_name": "::Google::Cloud::Firestore::V1::Firestore::Client#update_document",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Firestore::V1::UpdateDocumentRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Firestore::V1::Document",
+        "client": {
+          "short_name": "Firestore::Client",
+          "full_name": "::Google::Cloud::Firestore::V1::Firestore::Client"
+        },
+        "method": {
+          "short_name": "UpdateDocument",
+          "full_name": "google.firestore.v1.Firestore.UpdateDocument",
+          "service": {
+            "short_name": "Firestore",
+            "full_name": "google.firestore.v1.Firestore"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "firestore_v1_generated_Firestore_DeleteDocument_sync",
+      "title": "Snippet for the delete_document call in the Firestore service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Firestore::V1::Firestore::Client#delete_document.",
+      "file": "firestore/delete_document.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_document",
+        "full_name": "::Google::Cloud::Firestore::V1::Firestore::Client#delete_document",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Firestore::V1::DeleteDocumentRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Protobuf::Empty",
+        "client": {
+          "short_name": "Firestore::Client",
+          "full_name": "::Google::Cloud::Firestore::V1::Firestore::Client"
+        },
+        "method": {
+          "short_name": "DeleteDocument",
+          "full_name": "google.firestore.v1.Firestore.DeleteDocument",
+          "service": {
+            "short_name": "Firestore",
+            "full_name": "google.firestore.v1.Firestore"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "firestore_v1_generated_Firestore_BatchGetDocuments_sync",
+      "title": "Snippet for the batch_get_documents call in the Firestore service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Firestore::V1::Firestore::Client#batch_get_documents.",
+      "file": "firestore/batch_get_documents.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "batch_get_documents",
+        "full_name": "::Google::Cloud::Firestore::V1::Firestore::Client#batch_get_documents",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Firestore::V1::BatchGetDocumentsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Firestore::V1::BatchGetDocumentsResponse",
+        "client": {
+          "short_name": "Firestore::Client",
+          "full_name": "::Google::Cloud::Firestore::V1::Firestore::Client"
+        },
+        "method": {
+          "short_name": "BatchGetDocuments",
+          "full_name": "google.firestore.v1.Firestore.BatchGetDocuments",
+          "service": {
+            "short_name": "Firestore",
+            "full_name": "google.firestore.v1.Firestore"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 49,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "firestore_v1_generated_Firestore_BeginTransaction_sync",
+      "title": "Snippet for the begin_transaction call in the Firestore service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Firestore::V1::Firestore::Client#begin_transaction.",
+      "file": "firestore/begin_transaction.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "begin_transaction",
+        "full_name": "::Google::Cloud::Firestore::V1::Firestore::Client#begin_transaction",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Firestore::V1::BeginTransactionRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Firestore::V1::BeginTransactionResponse",
+        "client": {
+          "short_name": "Firestore::Client",
+          "full_name": "::Google::Cloud::Firestore::V1::Firestore::Client"
+        },
+        "method": {
+          "short_name": "BeginTransaction",
+          "full_name": "google.firestore.v1.Firestore.BeginTransaction",
+          "service": {
+            "short_name": "Firestore",
+            "full_name": "google.firestore.v1.Firestore"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "firestore_v1_generated_Firestore_Commit_sync",
+      "title": "Snippet for the commit call in the Firestore service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Firestore::V1::Firestore::Client#commit.",
+      "file": "firestore/commit.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "commit",
+        "full_name": "::Google::Cloud::Firestore::V1::Firestore::Client#commit",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Firestore::V1::CommitRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Firestore::V1::CommitResponse",
+        "client": {
+          "short_name": "Firestore::Client",
+          "full_name": "::Google::Cloud::Firestore::V1::Firestore::Client"
+        },
+        "method": {
+          "short_name": "Commit",
+          "full_name": "google.firestore.v1.Firestore.Commit",
+          "service": {
+            "short_name": "Firestore",
+            "full_name": "google.firestore.v1.Firestore"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "firestore_v1_generated_Firestore_Rollback_sync",
+      "title": "Snippet for the rollback call in the Firestore service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Firestore::V1::Firestore::Client#rollback.",
+      "file": "firestore/rollback.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "rollback",
+        "full_name": "::Google::Cloud::Firestore::V1::Firestore::Client#rollback",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Firestore::V1::RollbackRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Protobuf::Empty",
+        "client": {
+          "short_name": "Firestore::Client",
+          "full_name": "::Google::Cloud::Firestore::V1::Firestore::Client"
+        },
+        "method": {
+          "short_name": "Rollback",
+          "full_name": "google.firestore.v1.Firestore.Rollback",
+          "service": {
+            "short_name": "Firestore",
+            "full_name": "google.firestore.v1.Firestore"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "firestore_v1_generated_Firestore_RunQuery_sync",
+      "title": "Snippet for the run_query call in the Firestore service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Firestore::V1::Firestore::Client#run_query.",
+      "file": "firestore/run_query.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "run_query",
+        "full_name": "::Google::Cloud::Firestore::V1::Firestore::Client#run_query",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Firestore::V1::RunQueryRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Firestore::V1::RunQueryResponse",
+        "client": {
+          "short_name": "Firestore::Client",
+          "full_name": "::Google::Cloud::Firestore::V1::Firestore::Client"
+        },
+        "method": {
+          "short_name": "RunQuery",
+          "full_name": "google.firestore.v1.Firestore.RunQuery",
+          "service": {
+            "short_name": "Firestore",
+            "full_name": "google.firestore.v1.Firestore"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 49,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "firestore_v1_generated_Firestore_RunAggregationQuery_sync",
+      "title": "Snippet for the run_aggregation_query call in the Firestore service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Firestore::V1::Firestore::Client#run_aggregation_query.",
+      "file": "firestore/run_aggregation_query.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "run_aggregation_query",
+        "full_name": "::Google::Cloud::Firestore::V1::Firestore::Client#run_aggregation_query",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Firestore::V1::RunAggregationQueryRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Firestore::V1::RunAggregationQueryResponse",
+        "client": {
+          "short_name": "Firestore::Client",
+          "full_name": "::Google::Cloud::Firestore::V1::Firestore::Client"
+        },
+        "method": {
+          "short_name": "RunAggregationQuery",
+          "full_name": "google.firestore.v1.Firestore.RunAggregationQuery",
+          "service": {
+            "short_name": "Firestore",
+            "full_name": "google.firestore.v1.Firestore"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 49,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "firestore_v1_generated_Firestore_PartitionQuery_sync",
+      "title": "Snippet for the partition_query call in the Firestore service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Firestore::V1::Firestore::Client#partition_query.",
+      "file": "firestore/partition_query.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "partition_query",
+        "full_name": "::Google::Cloud::Firestore::V1::Firestore::Client#partition_query",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Firestore::V1::PartitionQueryRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Firestore::V1::PartitionQueryResponse",
+        "client": {
+          "short_name": "Firestore::Client",
+          "full_name": "::Google::Cloud::Firestore::V1::Firestore::Client"
+        },
+        "method": {
+          "short_name": "PartitionQuery",
+          "full_name": "google.firestore.v1.Firestore.PartitionQuery",
+          "service": {
+            "short_name": "Firestore",
+            "full_name": "google.firestore.v1.Firestore"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "firestore_v1_generated_Firestore_Write_sync",
+      "title": "Snippet for the write call in the Firestore service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Firestore::V1::Firestore::Client#write.",
+      "file": "firestore/write.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "write",
+        "full_name": "::Google::Cloud::Firestore::V1::Firestore::Client#write",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Firestore::V1::WriteRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Firestore::V1::WriteResponse",
+        "client": {
+          "short_name": "Firestore::Client",
+          "full_name": "::Google::Cloud::Firestore::V1::Firestore::Client"
+        },
+        "method": {
+          "short_name": "Write",
+          "full_name": "google.firestore.v1.Firestore.Write",
+          "service": {
+            "short_name": "Firestore",
+            "full_name": "google.firestore.v1.Firestore"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 55,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "firestore_v1_generated_Firestore_Listen_sync",
+      "title": "Snippet for the listen call in the Firestore service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Firestore::V1::Firestore::Client#listen.",
+      "file": "firestore/listen.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "listen",
+        "full_name": "::Google::Cloud::Firestore::V1::Firestore::Client#listen",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Firestore::V1::ListenRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Firestore::V1::ListenResponse",
+        "client": {
+          "short_name": "Firestore::Client",
+          "full_name": "::Google::Cloud::Firestore::V1::Firestore::Client"
+        },
+        "method": {
+          "short_name": "Listen",
+          "full_name": "google.firestore.v1.Firestore.Listen",
+          "service": {
+            "short_name": "Firestore",
+            "full_name": "google.firestore.v1.Firestore"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 55,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "firestore_v1_generated_Firestore_ListCollectionIds_sync",
+      "title": "Snippet for the list_collection_ids call in the Firestore service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Firestore::V1::Firestore::Client#list_collection_ids.",
+      "file": "firestore/list_collection_ids.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_collection_ids",
+        "full_name": "::Google::Cloud::Firestore::V1::Firestore::Client#list_collection_ids",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Firestore::V1::ListCollectionIdsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Firestore::V1::ListCollectionIdsResponse",
+        "client": {
+          "short_name": "Firestore::Client",
+          "full_name": "::Google::Cloud::Firestore::V1::Firestore::Client"
+        },
+        "method": {
+          "short_name": "ListCollectionIds",
+          "full_name": "google.firestore.v1.Firestore.ListCollectionIds",
+          "service": {
+            "short_name": "Firestore",
+            "full_name": "google.firestore.v1.Firestore"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "firestore_v1_generated_Firestore_BatchWrite_sync",
+      "title": "Snippet for the batch_write call in the Firestore service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Firestore::V1::Firestore::Client#batch_write.",
+      "file": "firestore/batch_write.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "batch_write",
+        "full_name": "::Google::Cloud::Firestore::V1::Firestore::Client#batch_write",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Firestore::V1::BatchWriteRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Firestore::V1::BatchWriteResponse",
+        "client": {
+          "short_name": "Firestore::Client",
+          "full_name": "::Google::Cloud::Firestore::V1::Firestore::Client"
+        },
+        "method": {
+          "short_name": "BatchWrite",
+          "full_name": "google.firestore.v1.Firestore.BatchWrite",
+          "service": {
+            "short_name": "Firestore",
+            "full_name": "google.firestore.v1.Firestore"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "firestore_v1_generated_Firestore_CreateDocument_sync",
+      "title": "Snippet for the create_document call in the Firestore service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Firestore::V1::Firestore::Client#create_document.",
+      "file": "firestore/create_document.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_document",
+        "full_name": "::Google::Cloud::Firestore::V1::Firestore::Client#create_document",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Firestore::V1::CreateDocumentRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Firestore::V1::Document",
+        "client": {
+          "short_name": "Firestore::Client",
+          "full_name": "::Google::Cloud::Firestore::V1::Firestore::Client"
+        },
+        "method": {
+          "short_name": "CreateDocument",
+          "full_name": "google.firestore.v1.Firestore.CreateDocument",
+          "service": {
+            "short_name": "Firestore",
+            "full_name": "google.firestore.v1.Firestore"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    }
+  ]
+}
