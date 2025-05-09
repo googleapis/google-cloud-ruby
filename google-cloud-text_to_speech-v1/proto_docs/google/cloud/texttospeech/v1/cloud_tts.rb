@@ -123,6 +123,29 @@ module Google
             # X-SAMPA, such as apple -> "{p@l".
             # https://en.wikipedia.org/wiki/X-SAMPA
             PHONETIC_ENCODING_X_SAMPA = 2
+
+            # For reading-to-pron conversion to work well, the `pronunciation` field
+            #  should only contain Kanji, Hiragana, and Katakana.
+            #
+            # The pronunciation can also contain pitch accents.
+            # The start of a pitch phrase is specified with `^` and the down-pitch
+            # position is specified with `!`, for example:
+            #
+            #     phrase:端  pronunciation:^はし
+            #     phrase:箸  pronunciation:^は!し
+            #     phrase:橋  pronunciation:^はし!
+            #
+            # We currently only support the Tokyo dialect, which allows at most one
+            # down-pitch per phrase (i.e. at most one `!` between `^`).
+            PHONETIC_ENCODING_JAPANESE_YOMIGANA = 3
+
+            # Used to specify pronunciations for Mandarin words. See
+            # https://en.wikipedia.org/wiki/Pinyin.
+            #
+            # For example: 朝阳, the pronunciation is "chao2 yang2". The number
+            # represents the tone, and there is a space between syllables. Neutral
+            # tones are represented by 5, for example 孩子 "hai2 zi5".
+            PHONETIC_ENCODING_PINYIN = 4
           end
         end
 
@@ -165,7 +188,13 @@ module Google
         #   @return [::String]
         #     The raw text to be synthesized.
         #
-        #     Note: The following fields are mutually exclusive: `text`, `ssml`, `multi_speaker_markup`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `text`, `markup`, `ssml`, `multi_speaker_markup`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] markup
+        #   @return [::String]
+        #     Markup for HD voices specifically. This field may not be used with any
+        #     other voices.
+        #
+        #     Note: The following fields are mutually exclusive: `markup`, `text`, `ssml`, `multi_speaker_markup`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] ssml
         #   @return [::String]
         #     The SSML document to be synthesized. The SSML document must be valid
@@ -174,13 +203,13 @@ module Google
         #     more information, see
         #     [SSML](https://cloud.google.com/text-to-speech/docs/ssml).
         #
-        #     Note: The following fields are mutually exclusive: `ssml`, `text`, `multi_speaker_markup`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `ssml`, `text`, `markup`, `multi_speaker_markup`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] multi_speaker_markup
         #   @return [::Google::Cloud::TextToSpeech::V1::MultiSpeakerMarkup]
         #     The multi-speaker input to be synthesized. Only applicable for
         #     multi-speaker synthesis.
         #
-        #     Note: The following fields are mutually exclusive: `multi_speaker_markup`, `text`, `ssml`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `multi_speaker_markup`, `text`, `markup`, `ssml`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] custom_pronunciations
         #   @return [::Google::Cloud::TextToSpeech::V1::CustomPronunciations]
         #     Optional. The pronunciation customizations are applied to the input. If
@@ -387,6 +416,14 @@ module Google
         #     The raw text to be synthesized. It is recommended that each input
         #     contains complete, terminating sentences, which results in better prosody
         #     in the output audio.
+        #
+        #     Note: The following fields are mutually exclusive: `text`, `markup`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] markup
+        #   @return [::String]
+        #     Markup for HD voices specifically. This field may not be used with any
+        #     other voices.
+        #
+        #     Note: The following fields are mutually exclusive: `markup`, `text`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         class StreamingSynthesisInput
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
