@@ -1799,7 +1799,7 @@ module Google
               #   @param destination_parent [::String]
               #     Required. Name of the Google Cloud folder or organization to reparent the
               #     target resource. The analysis will be performed against hypothetically
-              #     moving the resource to this specified desitination parent. This can only be
+              #     moving the resource to this specified destination parent. This can only be
               #     a folder number (such as "folders/123") or an organization number (such as
               #     "organizations/123").
               #   @param view [::Google::Cloud::Asset::V1::AnalyzeMoveRequest::AnalysisView]
