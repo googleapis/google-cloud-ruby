@@ -1357,14 +1357,15 @@ module Google
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
 
-          # Export Job Results. The result is based on the snapshot at the time when
-          # the job is created.
+          # Summary results from a metadata export job. The results are a snapshot of
+          # the metadata at the time when the job was created. The exported entries are
+          # saved to a Cloud Storage bucket.
           # @!attribute [r] exported_entries
           #   @return [::Integer]
-          #     Output only. The number of entries that have been exported.
+          #     Output only. The number of entries that were exported.
           # @!attribute [r] error_message
           #   @return [::String]
-          #     Output only. The error message if the export job failed.
+          #     Output only. The error message if the metadata export job failed.
           class ExportJobResult
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -1387,8 +1388,9 @@ module Google
           #     this job.
           #
           #     A metadata import file defines the values to set for each of the entries
-          #     and aspects in a metadata job. For more information about how to create a
-          #     metadata import file and the file requirements, see [Metadata import
+          #     and aspects in a metadata import job. For more information about how to
+          #     create a metadata import file and the file requirements, see [Metadata
+          #     import
           #     file](https://cloud.google.com/dataplex/docs/import-metadata#metadata-import-file).
           #
           #     You can provide multiple metadata import files in the same metadata job.
@@ -1473,8 +1475,8 @@ module Google
               extend ::Google::Protobuf::MessageExts::ClassMethods
             end
 
-            # Specifies how the entries and aspects in a metadata job are updated. For
-            # more information, see [Sync
+            # Specifies how the entries and aspects in a metadata import job are
+            # updated. For more information, see [Sync
             # mode](https://cloud.google.com/dataplex/docs/import-metadata#sync-mode).
             module SyncMode
               # Sync mode unspecified.
@@ -1527,64 +1529,77 @@ module Google
             end
           end
 
-          # Export job specification.
+          # Job specification for a metadata export job.
           # @!attribute [rw] scope
           #   @return [::Google::Cloud::Dataplex::V1::MetadataJob::ExportJobSpec::ExportJobScope]
-          #     Required. Selects the entries to be exported by this job.
+          #     Required. The scope of the export job.
           # @!attribute [rw] output_path
           #   @return [::String]
-          #     Required. The root path of the exported metadata.
-          #     Must be in the format: "gs://<bucket_id>"
-          #     Or specify a customized prefix after the bucket:
-          #     "gs://<bucket_id>/<folder1>/<folder2>/.../".
-          #     The length limit of the customized prefix is 128 characters.
-          #     The bucket must be in the same VPC-SC perimeter with the job.
+          #     Required. The root path of the Cloud Storage bucket to export the
+          #     metadata to, in the format `gs://{bucket}/`. You can optionally specify a
+          #     custom prefix after the bucket name, in the format
+          #     `gs://{bucket}/{prefix}/`. The maximum length of the custom prefix is 128
+          #     characters. Dataplex constructs the object path for the exported files by
+          #     using the bucket name and prefix that you provide, followed by a
+          #     system-generated path.
+          #
+          #     The bucket must be in the same VPC Service Controls perimeter as the job.
           class ExportJobSpec
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
 
-            # Scope of the export job.
+            # The scope of the export job.
             # @!attribute [rw] organization_level
             #   @return [::Boolean]
-            #     Indicating if it is an organization level export job.
-            #     - When set to true, exports all entries from entry groups and projects
-            #     sharing the same organization id of the Metadata Job. Only projects and
-            #     entry groups in the VPC-SC perimeter will be exported. The projects and
-            #     entry groups are ignored.
-            #     - When set to false, one of the projects or entry groups must be
-            #     specified.
-            #     - Default to false.
+            #     Whether the metadata export job is an organization-level export job.
+            #
+            #     - If `true`, the job exports the entries from the same organization and
+            #     VPC Service Controls perimeter as the job. The project that the job
+            #     belongs to determines the VPC Service Controls perimeter. If you set
+            #     the job scope to be at the organization level, then don't provide a
+            #     list of projects or entry groups.
+            #     - If `false`, you must specify a list of projects or a list of entry
+            #     groups whose entries you want to export.
+            #
+            #     The default is `false`.
             # @!attribute [rw] projects
             #   @return [::Array<::String>]
-            #     The projects that are in the scope of the export job. Can either be
-            #     project numbers or project IDs. If specified, only the entries from the
-            #     specified projects will be exported. The projects must be in the same
-            #     organization and in the VPC-SC perimeter. Either projects or
-            #     entry_groups can be specified when organization_level_export is set to
-            #     false.
-            #     Must follow the format: "projects/<project_id_or_number>"
+            #     The projects whose metadata you want to export, in the format
+            #     `projects/{project_id_or_number}`. Only the entries from
+            #     the specified projects are exported.
+            #
+            #     The projects must be in the same organization and VPC Service Controls
+            #     perimeter as the job.
+            #
+            #     If you set the job scope to be a list of projects, then set the
+            #     organization-level export flag to false and don't provide a list of
+            #     entry groups.
             # @!attribute [rw] entry_groups
             #   @return [::Array<::String>]
-            #     The entry groups that are in scope for the export job. Optional. If
-            #     specified, only entries in the specified entry groups will be exported
-            #     by the job. Must be in the VPC-SC perimeter of the job. The location of
-            #     the entry groups must be the same as the job. Either projects or
-            #     entry_groups can be specified when organization_level_export is set to
-            #     false. Must follow the format:
-            #     "projects/<project_id_or_number>/locations/<location>/entryGroups/<entry_group_id>"
+            #     The entry groups whose metadata you want to export, in the format
+            #     `projects/{project_id_or_number}/locations/{location_id}/entryGroups/{entry_group_id}`.
+            #     Only the entries in the specified entry groups are exported.
+            #
+            #     The entry groups must be in the same location and the same VPC Service
+            #     Controls perimeter as the job.
+            #
+            #     If you set the job scope to be a list of entry groups, then set the
+            #     organization-level export flag to false and don't provide a list of
+            #     projects.
             # @!attribute [rw] entry_types
             #   @return [::Array<::String>]
-            #     If specified, only entries of the specified types will be
-            #     affected by the job.
-            #     Must follow the format:
-            #     "projects/<project_id_or_number>/locations/<location>/entryTypes/<entry_type_id>"
+            #     The entry types that are in scope for the export job, specified as
+            #     relative resource names in the format
+            #     `projects/{project_id_or_number}/locations/{location}/entryTypes/{entry_type_id}`.
+            #     Only entries that belong to the specified entry types are affected by
+            #     the job.
             # @!attribute [rw] aspect_types
             #   @return [::Array<::String>]
-            #     The aspect types that are in scope for the export job.
-            #     Optional. If specified, only aspects of the specified types will be
-            #     affected by the job.
-            #     Must follow the format:
-            #     "projects/<project_id_or_number>/locations/<location>/aspectTypes/<aspect_type_id>"
+            #     The aspect types that are in scope for the export job, specified as
+            #     relative resource names in the format
+            #     `projects/{project_id_or_number}/locations/{location}/aspectTypes/{aspect_type_id}`.
+            #     Only aspects that belong to the specified aspect types are affected by
+            #     the job.
             class ExportJobScope
               include ::Google::Protobuf::MessageExts
               extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -1653,7 +1668,7 @@ module Google
             # Import job.
             IMPORT = 1
 
-            # Export job type.
+            # Export job.
             EXPORT = 2
           end
         end
