@@ -1,5 +1,12 @@
 # Release History
 
+### 1.9.0 (2025-05-12)
+
+#### Features
+
+* Updated core dependencies including gapic-common 
+* Updated required Ruby version to 3.1 
+
 ### 1.8.2 (2025-04-29)
 
 #### Bug Fixes
