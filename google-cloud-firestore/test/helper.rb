@@ -126,6 +126,33 @@ class BatchWriteStub
   end
 end
 
+##
+# Used to test the moment the enum is reverted (and therefore read)
+# for `limit_last` queries
+
+class ExplodingEnum
+  include Enumerable
+
+  def initialize responses, explode_on: 1
+    raise if !responses.to_a.empty? && responses.first.nil?
+
+    @responses = responses.to_a
+    @explode_on = explode_on
+  end
+
+  def each
+    return enum_for(:each) unless block_given?
+
+    @responses.each_with_index do |response, index|
+      if index >= @explode_on
+        raise "BOOM! Attempted to read past allowed count (allowed: #{@explode_on}, tried index: #{index})."
+      end
+
+      yield response
+    end
+  end
+end
+
 class MockFirestore < Minitest::Spec
   let(:project) { "projectID" }
   let(:database) { "(default)" }
@@ -209,7 +236,8 @@ class MockFirestore < Minitest::Spec
                      parent: "projects/#{project}/databases/(default)/documents",
                      transaction: nil,
                      new_transaction: nil,
-                     read_time: nil
+                     read_time: nil,
+                     explain_options: nil
     req = {
       parent: parent,
       structured_query: query
@@ -217,6 +245,7 @@ class MockFirestore < Minitest::Spec
     req[:transaction] = transaction if transaction
     req[:new_transaction] = new_transaction if new_transaction
     req[:read_time] = firestore.service.read_time_to_timestamp(read_time) if read_time
+    req[:explain_options] = explain_options if explain_options
     [req, default_options]
   end
 

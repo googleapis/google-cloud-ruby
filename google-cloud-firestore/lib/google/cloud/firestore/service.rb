@@ -120,18 +120,24 @@ module Google
           paged_enum.response
         end
 
-        def run_query path, query_grpc, transaction: nil, read_time: nil
+        def run_query path, query_grpc, transaction: nil, read_time: nil, explain_options: nil
           run_query_req = {
             parent:           path,
             structured_query: query_grpc
           }
+
           if transaction.is_a? String
             run_query_req[:transaction] = transaction
           elsif transaction
             run_query_req[:new_transaction] = transaction
           end
+
           if read_time
             run_query_req[:read_time] = read_time_to_timestamp(read_time)
+          end
+
+          if explain_options
+            run_query_req[:explain_options] = explain_options
           end
 
           firestore.run_query run_query_req, call_options(parent: database_path)
