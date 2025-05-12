@@ -1,5 +1,20 @@
 # Changelog
 
+### 0.12.0 (2025-05-12)
+
+#### Features
+
+* A new method `customEmojis.create` is added ([#30050](https://github.com/googleapis/google-cloud-ruby/issues/30050)) 
+* A new method `customEmojis.delete` is added 
+* A new method `customEmojis.get` is added 
+* A new method `customEmojis.list` is added 
+* Updated core dependencies including gapic-common 
+* Updated required Ruby version to 3.1 
+#### Documentation
+
+* A comment for field `filter` in message `.google.chat.v1.ListReactionsRequest` is changed 
+* A comment for message `CustomEmoji` is changed 
+
 ### 0.11.1 (2025-04-29)
 
 #### Bug Fixes
