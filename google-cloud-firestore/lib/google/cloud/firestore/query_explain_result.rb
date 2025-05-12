@@ -25,6 +25,22 @@ module Google
       # access to the {Google::Cloud::Firestore::V1::ExplainMetrics} which
       # contain details about the query plan and execution statistics.
       #
+      # Unlike the Enumerator object that is returned from the `Query#get`,
+      # iterating over QueryExplainResult multiple times will not result in
+      # multiple requests to the server. The first set of results will be saved
+      # and re-used instead.
+      #
+      # @example Iterating over results multiple times
+      #   require "google/cloud/firestore"
+      #
+      #   firestore = Google::Cloud::Firestore.new
+      #   query = firestore.col(:cities).where(:population, :>, 100000)
+      #   explanation_result = query.explain analyze: true
+      #   results = explanation_result.to_a
+      #   results_2 = explanation_result.to_a # same results, no re-query
+      #
+      # This is to avoid the situations where the metrics change unpredictably when results are looked at.
+      #
       # @see Query#explain
       #
       # @example Iterating over results and accessing metrics

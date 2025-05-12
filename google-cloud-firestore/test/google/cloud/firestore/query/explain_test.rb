@@ -66,6 +66,21 @@ describe Google::Cloud::Firestore::Query, :explain_options, :mock_firestore do
     assert_results_enum results_enum
   end
 
+  it "returns same results without re-querying" do
+    expected_query = Google::Cloud::Firestore::V1::StructuredQuery.new(
+      select: Google::Cloud::Firestore::V1::StructuredQuery::Projection.new(
+        fields: [Google::Cloud::Firestore::V1::StructuredQuery::FieldReference.new(field_path: "name")])
+    )
+    explain_options = Google::Cloud::Firestore::V1::ExplainOptions.new(analyze: true)
+
+    firestore_mock.expect :run_query, query_results_enum, run_query_args(expected_query, explain_options: explain_options)
+
+    results = query.select(:name).explain(analyze: true)
+    
+    assert_results_enum results.to_a.to_enum
+    assert_results_enum results.to_a.to_enum # second call to to_a does not result in a second call to mock
+  end
+
   it "runs query with explain and order_by" do
     expected_query = Google::Cloud::Firestore::V1::StructuredQuery.new(
       order_by: [
@@ -183,7 +198,7 @@ describe Google::Cloud::Firestore::Query, :explain_options, :mock_firestore do
     _(error.message).must_match(/unknown keyword/)
   end
 
-  it "does not eagerly read all documents when analyze: true and taking one" do
+  it "does eagerly read all documents when analyze: true and taking one" do
     exploding_enum = ExplodingEnum.new query_results_enum
 
     expected_query = Google::Cloud::Firestore::V1::StructuredQuery.new(
@@ -194,10 +209,10 @@ describe Google::Cloud::Firestore::Query, :explain_options, :mock_firestore do
 
     firestore_mock.expect :run_query, exploding_enum, run_query_args(expected_query, explain_options: explain_options)
 
-    # nothing is raised when getting the first document
-    results_enum = query.select(:name).explain(analyze: true).to_enum
-    first_doc = results_enum.first
-    refute_nil first_doc, "First document should be present"
+    assert_raises RuntimeError do 
+      results_enum = query.select(:name).explain(analyze: true).to_enum
+      first_doc = results_enum.first
+    end
   end
 
   it "does eagerly read all documents when analyze: true and taking one with limit_to_last" do
