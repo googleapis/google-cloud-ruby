@@ -1,4 +1,4 @@
-# Copyright 2017 Google LLC
+# Copyright 2015 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -15,85 +15,65 @@
 require "helper"
 
 describe Google::Cloud::PubSub::Subscriber, :mock_pubsub do
-  let(:callback) { Proc.new { |msg| puts msg.inspect } }
+  let(:topic_name) { "topic-name-goes-here" }
   let(:subscription_name) { "subscription-name-goes-here" }
-  let(:deadline) { 120 }
-  let(:streams) { 8 }
-  let(:max_outstanding_messages) { 2000 }
-  let(:callback_threads) { 16 }
-  let(:push_threads) { 8 }
-  let :subscriber do
-    Google::Cloud::PubSub::Subscriber.new(
-      subscription_name,
-      callback,
-      deadline: deadline,
-      streams: streams,
-      inventory: max_outstanding_messages,
-      threads: {
-        callback: callback_threads,
-        push: push_threads
-      },
-      service: pubsub.service
-    )
+  let(:subscription_grpc) { Google::Cloud::PubSub::V1::Subscription.new(subscription_hash(topic_name, subscription_name)) }
+  let(:subscriber) { Google::Cloud::PubSub::Subscriber.from_grpc subscription_grpc, pubsub.service }
+  let(:labels) { { "foo" => "bar" } }
+
+  it "knows its name" do
+    _(subscriber.name).must_equal subscription_path(subscription_name)
   end
 
-  it "knows its defaults" do
-    subscriber = Google::Cloud::PubSub::Subscriber.new(
-      subscription_name,
-      callback,
-      service: pubsub.service
-    )
-    _(subscriber).must_be_kind_of Google::Cloud::PubSub::Subscriber
-    _(subscriber.deadline).must_equal 60
-    _(subscriber.streams).must_equal 2
-    _(subscriber.inventory).must_equal 1000 # deprecated Use #max_outstanding_messages.
-    _(subscriber.inventory_limit).must_equal 1000 # deprecated Use #max_outstanding_messages.
-    _(subscriber.max_outstanding_messages).must_equal 1000
-    _(subscriber.inventory_bytesize).must_equal 100_000_000 # deprecated Use #max_outstanding_bytes.
-    _(subscriber.max_outstanding_bytes).must_equal 100_000_000
-    _(subscriber.inventory_extension).must_equal 3600 # deprecated Use #max_total_lease_duration.
-    _(subscriber.max_total_lease_duration).must_equal 3600
-    _(subscriber.max_duration_per_lease_extension).must_equal 0
-    _(subscriber.min_duration_per_lease_extension).must_equal 0
-    _(subscriber.stream_inventory).must_equal({limit: 500, bytesize: 50000000, max_duration_per_lease_extension: 0, min_duration_per_lease_extension: 0, extension: 3600, use_legacy_flow_control: false})
-    _(subscriber.callback_threads).must_equal 8
-    _(subscriber.push_threads).must_equal 4
+  it "has an ack deadline" do
+    _(subscriber).must_respond_to :deadline
   end
 
-  it "knows its given attributes and retains defaults" do
-    _(subscriber).must_be_kind_of Google::Cloud::PubSub::Subscriber
-    _(subscriber.callback).must_equal callback
-    _(subscriber.subscription_name).must_equal subscription_name
-    _(subscriber.deadline).must_equal deadline
-    _(subscriber.streams).must_equal streams
-    _(subscriber.inventory).must_equal max_outstanding_messages # deprecated Use #max_outstanding_messages.
-    _(subscriber.inventory_limit).must_equal max_outstanding_messages # deprecated Use #max_outstanding_messages.
-    _(subscriber.max_outstanding_messages).must_equal max_outstanding_messages
-    _(subscriber.inventory_bytesize).must_equal 100_000_000 # deprecated Use #max_outstanding_bytes.
-    _(subscriber.max_outstanding_bytes).must_equal 100_000_000
-    _(subscriber.inventory_extension).must_equal 3600 # deprecated Use #max_total_lease_duration.
-    _(subscriber.max_total_lease_duration).must_equal 3600
-    _(subscriber.max_duration_per_lease_extension).must_equal 0
-    _(subscriber.min_duration_per_lease_extension).must_equal 0
-    _(subscriber.stream_inventory).must_equal({limit: 250, bytesize: 12500000, max_duration_per_lease_extension: 0, min_duration_per_lease_extension: 0, extension: 3600, use_legacy_flow_control: false})
-    _(subscriber.callback_threads).must_equal callback_threads
-    _(subscriber.push_threads).must_equal push_threads
+  it "can pull a message" do
+    rec_message_msg = "pulled-message"
+    pull_res = Google::Cloud::PubSub::V1::PullResponse.new rec_messages_hash(rec_message_msg)
+    mock = Minitest::Mock.new
+    mock.expect :pull, pull_res, subscription: subscription_path(subscription_name), max_messages: 100, return_immediately: true
+    subscriber.service.mocked_subscriber = mock
 
-    _(subscriber.to_s).must_equal "(subscription: subscription-name-goes-here, streams: [(inventory: 0, status: running, thread: not started), (inventory: 0, status: running, thread: not started), (inventory: 0, status: running, thread: not started), (inventory: 0, status: running, thread: not started), (inventory: 0, status: running, thread: not started), (inventory: 0, status: running, thread: not started), (inventory: 0, status: running, thread: not started), (inventory: 0, status: running, thread: not started)])"
-    _(subscriber.stream_pool.first.to_s).must_equal "(inventory: 0, status: running, thread: not started)"
+    rec_messages = subscriber.pull
+
+    mock.verify
+
+    _(rec_messages).wont_be :empty?
+    _(rec_messages.first.message.data).must_equal rec_message_msg
   end
 
-  it "propagates use_legacy_flow_control" do
-    subscriber = Google::Cloud::PubSub::Subscriber.new(
-      subscription_name,
-      callback,
-      inventory: {
-        max_outstanding_messages: 999,
-        use_legacy_flow_control: true
-      }
-    )
-    _(subscriber.max_outstanding_messages).must_equal 999
-    _(subscriber.use_legacy_flow_control?).must_equal true
-    _(subscriber.stream_inventory).must_equal({limit: 500, bytesize: 50000000, max_duration_per_lease_extension: 0, min_duration_per_lease_extension: 0, extension: 3600, use_legacy_flow_control: true})
+  it "can acknowledge one message" do
+    ack_res = nil
+    mock = Minitest::Mock.new
+    mock.expect :acknowledge, ack_res, subscription: subscription_path(subscription_name), ack_ids: ["ack-id-1"]
+    subscriber.service.mocked_subscriber = mock
+
+    subscriber.acknowledge "ack-id-1"
+
+    mock.verify
+  end
+
+  it "can acknowledge many messages" do
+    ack_res = nil
+    mock = Minitest::Mock.new
+    mock.expect :acknowledge, ack_res, subscription: subscription_path(subscription_name), ack_ids: ["ack-id-1", "ack-id-2", "ack-id-3"]
+    subscriber.service.mocked_subscriber = mock
+
+    subscriber.acknowledge "ack-id-1", "ack-id-2", "ack-id-3"
+
+    mock.verify
+  end
+
+  it "can acknowledge with ack" do
+    ack_res = nil
+    mock = Minitest::Mock.new
+    mock.expect :acknowledge, ack_res, subscription: subscription_path(subscription_name), ack_ids: ["ack-id-1"]
+    subscriber.service.mocked_subscriber = mock
+
+    subscriber.ack "ack-id-1"
+
+    mock.verify
   end
 end
