@@ -1,5 +1,15 @@
 # Changelog
 
+### 2.2.0 (2025-05-12)
+
+#### Features
+
+* Updated core dependencies including gapic-common 
+* Updated required Ruby version to 3.1 
+#### Documentation
+
+* A few minor clarifications 
+
 ### 2.1.1 (2025-04-29)
 
 #### Bug Fixes
