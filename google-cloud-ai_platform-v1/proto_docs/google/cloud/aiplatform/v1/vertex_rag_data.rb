@@ -84,9 +84,56 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
 
           # The config for the default RAG-managed Vector DB.
+          # @!attribute [rw] knn
+          #   @return [::Google::Cloud::AIPlatform::V1::RagVectorDbConfig::RagManagedDb::KNN]
+          #     Performs a KNN search on RagCorpus.
+          #     Default choice if not specified.
+          #
+          #     Note: The following fields are mutually exclusive: `knn`, `ann`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+          # @!attribute [rw] ann
+          #   @return [::Google::Cloud::AIPlatform::V1::RagVectorDbConfig::RagManagedDb::ANN]
+          #     Performs an ANN search on RagCorpus. Use this if you have a lot of
+          #     files (> 10K) in your RagCorpus and want to reduce the search latency.
+          #
+          #     Note: The following fields are mutually exclusive: `ann`, `knn`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           class RagManagedDb
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
+
+            # Config for KNN search.
+            class KNN
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
+
+            # Config for ANN search.
+            #
+            # RagManagedDb uses a tree-based structure to partition data and
+            # facilitate faster searches. As a tradeoff, it requires longer indexing
+            # time and manual triggering of index rebuild via the ImportRagFiles and
+            # UpdateRagCorpus API.
+            # @!attribute [rw] tree_depth
+            #   @return [::Integer]
+            #     The depth of the tree-based structure. Only depth values of 2 and 3 are
+            #     supported.
+            #
+            #     Recommended value is 2 if you have if you have O(10K) files in the
+            #     RagCorpus and set this to 3 if more than that.
+            #
+            #     Default value is 2.
+            # @!attribute [rw] leaf_count
+            #   @return [::Integer]
+            #     Number of leaf nodes in the tree-based structure. Each leaf node
+            #     contains groups of closely related vectors along with their
+            #     corresponding centroid.
+            #
+            #     Recommended value is 10 * sqrt(num of RagFiles in your RagCorpus).
+            #
+            #     Default value is 500.
+            class ANN
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
           end
 
           # The config for the Pinecone.
@@ -478,6 +525,15 @@ module Google
         #     to this job and not shared across other import jobs. Consult the Quotas
         #     page on the project to set an appropriate value here.
         #     If unspecified, a default value of 1,000 QPM would be used.
+        # @!attribute [rw] rebuild_ann_index
+        #   @return [::Boolean]
+        #     Rebuilds the ANN index to optimize for recall on the imported data.
+        #     Only applicable for RagCorpora running on RagManagedDb with
+        #     `retrieval_strategy` set to `ANN`. The rebuild will be performed using the
+        #     existing ANN config set on the RagCorpus. To change the ANN config, please
+        #     use the UpdateRagCorpus API.
+        #
+        #     Default is false, i.e., index is not rebuilt.
         class ImportRagFilesConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
