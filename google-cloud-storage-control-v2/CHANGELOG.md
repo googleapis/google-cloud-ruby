@@ -1,5 +1,16 @@
 # Changelog
 
+### 1.3.0 (2025-05-12)
+
+#### Features
+
+* Add Anywhere cache control APIs ([#30045](https://github.com/googleapis/google-cloud-ruby/issues/30045)) 
+* Updated core dependencies including gapic-common 
+* Updated required Ruby version to 3.1 
+#### Documentation
+
+* Added comments for Anywhere cache messages 
+
 ### 1.2.1 (2025-04-29)
 
 #### Bug Fixes
