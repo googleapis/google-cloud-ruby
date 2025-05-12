@@ -24,7 +24,8 @@ module Google
         # Represents a TuningJob that runs with Google owned models.
         # @!attribute [rw] base_model
         #   @return [::String]
-        #     The base model that is being tuned, e.g., "gemini-1.0-pro-002".
+        #     The base model that is being tuned. See [Supported
+        #     models](https://cloud.google.com/vertex-ai/generative-ai/docs/model-reference/tuning#supported_models).
         # @!attribute [rw] supervised_tuning_spec
         #   @return [::Google::Cloud::AIPlatform::V1::SupervisedTuningSpec]
         #     Tuning Spec for Supervised Fine Tuning.
@@ -85,7 +86,7 @@ module Google
         #     {::Google::Cloud::AIPlatform::V1::TuningJob TuningJob}.
         # @!attribute [r] tuned_model
         #   @return [::Google::Cloud::AIPlatform::V1::TunedModel]
-        #     Output only. The tuned model resources assiociated with this
+        #     Output only. The tuned model resources associated with this
         #     {::Google::Cloud::AIPlatform::V1::TuningJob TuningJob}.
         # @!attribute [r] tuning_data_stats
         #   @return [::Google::Cloud::AIPlatform::V1::TuningDataStats]
@@ -119,7 +120,7 @@ module Google
           end
         end
 
-        # The Model Registry Model and Online Prediction Endpoint assiociated with
+        # The Model Registry Model and Online Prediction Endpoint associated with
         # this {::Google::Cloud::AIPlatform::V1::TuningJob TuningJob}.
         # @!attribute [r] model
         #   @return [::String]
@@ -129,6 +130,11 @@ module Google
         #   @return [::String]
         #     Output only. A resource name of an Endpoint. Format:
         #     `projects/{project}/locations/{location}/endpoints/{endpoint}`.
+        # @!attribute [r] checkpoints
+        #   @return [::Array<::Google::Cloud::AIPlatform::V1::TunedModelCheckpoint>]
+        #     Output only. The checkpoints associated with this TunedModel.
+        #     This field is only populated for tuning jobs that enable intermediate
+        #     checkpoints.
         class TunedModel
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -212,14 +218,19 @@ module Google
         # @!attribute [r] user_dataset_examples
         #   @return [::Array<::Google::Cloud::AIPlatform::V1::Content>]
         #     Output only. Sample user messages in the training dataset uri.
-        # @!attribute [rw] total_truncated_example_count
+        # @!attribute [r] total_truncated_example_count
         #   @return [::Integer]
-        #     The number of examples in the dataset that have been truncated by any
-        #     amount.
-        # @!attribute [rw] truncated_example_indices
+        #     Output only. The number of examples in the dataset that have been dropped.
+        #     An example can be dropped for reasons including: too many tokens, contains
+        #     an invalid image, contains too many images, etc.
+        # @!attribute [r] truncated_example_indices
         #   @return [::Array<::Integer>]
-        #     A partial sample of the indices (starting from 1) of the truncated
-        #     examples.
+        #     Output only. A partial sample of the indices (starting from 1) of the
+        #     dropped examples.
+        # @!attribute [r] dropped_example_reasons
+        #   @return [::Array<::String>]
+        #     Output only. For each index in `truncated_example_indices`, the user-facing
+        #     reason why the example was dropped.
         class SupervisedTuningDataStats
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -258,6 +269,9 @@ module Google
             # Adapter size 1.
             ADAPTER_SIZE_ONE = 1
 
+            # Adapter size 2.
+            ADAPTER_SIZE_TWO = 6
+
             # Adapter size 4.
             ADAPTER_SIZE_FOUR = 2
 
@@ -266,6 +280,9 @@ module Google
 
             # Adapter size 16.
             ADAPTER_SIZE_SIXTEEN = 4
+
+            # Adapter size 32.
+            ADAPTER_SIZE_THIRTY_TWO = 5
           end
         end
 
@@ -281,6 +298,11 @@ module Google
         # @!attribute [rw] hyper_parameters
         #   @return [::Google::Cloud::AIPlatform::V1::SupervisedHyperParameters]
         #     Optional. Hyperparameters for SFT.
+        # @!attribute [rw] export_last_checkpoint_only
+        #   @return [::Boolean]
+        #     Optional. If set to true, disable intermediate checkpoints for SFT and only
+        #     the last checkpoint will be exported. Otherwise, enable intermediate
+        #     checkpoints for SFT. Default is false.
         class SupervisedTuningSpec
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -305,6 +327,25 @@ module Google
         #
         #     Note: The following fields are mutually exclusive: `pipeline_job`, `tuned_model`, `tuning_job`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         class TunedModelRef
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # TunedModelCheckpoint for the Tuned Model of a Tuning Job.
+        # @!attribute [rw] checkpoint_id
+        #   @return [::String]
+        #     The ID of the checkpoint.
+        # @!attribute [rw] epoch
+        #   @return [::Integer]
+        #     The epoch of the checkpoint.
+        # @!attribute [rw] step
+        #   @return [::Integer]
+        #     The step of the checkpoint.
+        # @!attribute [rw] endpoint
+        #   @return [::String]
+        #     The Endpoint resource name that the checkpoint is deployed to. Format:
+        #     `projects/{project}/locations/{location}/endpoints/{endpoint}`.
+        class TunedModelCheckpoint
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
