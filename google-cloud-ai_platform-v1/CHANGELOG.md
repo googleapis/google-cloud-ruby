@@ -1,5 +1,17 @@
 # Changelog
 
+### 1.11.0 (2025-05-12)
+
+#### Features
+
+* Added NVIDIA_H200_141GB and NVIDIA_B200 accelerator types 
+* Support for LLM parsing for RagFiles ([#30046](https://github.com/googleapis/google-cloud-ruby/issues/30046)) 
+* Updated core dependencies including gapic-common 
+* Updated required Ruby version to 3.1 
+#### Documentation
+
+* Updated an outdated URL ([#30044](https://github.com/googleapis/google-cloud-ruby/issues/30044)) 
+
 ### 1.10.0 (2025-04-29)
 
 #### Features
