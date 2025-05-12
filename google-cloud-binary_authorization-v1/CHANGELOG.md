@@ -1,5 +1,14 @@
 # Changelog
 
+### 1.3.0 (2025-05-12)
+
+#### Features
+
+* Support for Layer Details of a package 
+* Support for Secrets 
+* Updated core dependencies including gapic-common 
+* Updated required Ruby version to 3.1 
+
 ### 1.2.1 (2025-04-29)
 
 #### Bug Fixes
