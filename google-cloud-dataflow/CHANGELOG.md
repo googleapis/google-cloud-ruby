@@ -1,5 +1,11 @@
 # Changelog
 
+### 0.6.2 (2025-05-12)
+
+#### Documentation
+
+* Removed notice about availability of FlexTemplatesService ([#30048](https://github.com/googleapis/google-cloud-ruby/issues/30048)) 
+
 ### 0.6.1 (2025-04-29)
 
 #### Bug Fixes
