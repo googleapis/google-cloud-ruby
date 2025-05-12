@@ -337,6 +337,220 @@ class ::Google::Cloud::AlloyDB::V1::AlloyDBAdmin::ClientTest < Minitest::Test
     end
   end
 
+  def test_export_cluster
+    # Create GRPC objects.
+    grpc_response = ::Google::Longrunning::Operation.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    gcs_destination = {}
+    csv_export_options = {}
+    name = "hello world"
+    database = "hello world"
+
+    export_cluster_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :export_cluster, name
+      assert_kind_of ::Google::Cloud::AlloyDB::V1::ExportClusterRequest, request
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::AlloyDB::V1::GcsDestination), request["gcs_destination"]
+      assert_equal :gcs_destination, request.destination
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::AlloyDB::V1::ExportClusterRequest::CsvExportOptions), request["csv_export_options"]
+      assert_equal :csv_export_options, request.export_options
+      assert_equal "hello world", request["name"]
+      assert_equal "hello world", request["database"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, export_cluster_client_stub do
+      # Create client
+      client = ::Google::Cloud::AlloyDB::V1::AlloyDBAdmin::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.export_cluster({ gcs_destination: gcs_destination, csv_export_options: csv_export_options, name: name, database: database }) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.export_cluster gcs_destination: gcs_destination, csv_export_options: csv_export_options, name: name, database: database do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.export_cluster ::Google::Cloud::AlloyDB::V1::ExportClusterRequest.new(gcs_destination: gcs_destination, csv_export_options: csv_export_options, name: name, database: database) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.export_cluster({ gcs_destination: gcs_destination, csv_export_options: csv_export_options, name: name, database: database }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.export_cluster(::Google::Cloud::AlloyDB::V1::ExportClusterRequest.new(gcs_destination: gcs_destination, csv_export_options: csv_export_options, name: name, database: database), grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, export_cluster_client_stub.call_rpc_count
+    end
+  end
+
+  def test_import_cluster
+    # Create GRPC objects.
+    grpc_response = ::Google::Longrunning::Operation.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    sql_import_options = {}
+    name = "hello world"
+    gcs_uri = "hello world"
+    database = "hello world"
+    user = "hello world"
+
+    import_cluster_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :import_cluster, name
+      assert_kind_of ::Google::Cloud::AlloyDB::V1::ImportClusterRequest, request
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::AlloyDB::V1::ImportClusterRequest::SqlImportOptions), request["sql_import_options"]
+      assert_equal :sql_import_options, request.import_options
+      assert_equal "hello world", request["name"]
+      assert_equal "hello world", request["gcs_uri"]
+      assert_equal "hello world", request["database"]
+      assert_equal "hello world", request["user"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, import_cluster_client_stub do
+      # Create client
+      client = ::Google::Cloud::AlloyDB::V1::AlloyDBAdmin::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.import_cluster({ sql_import_options: sql_import_options, name: name, gcs_uri: gcs_uri, database: database, user: user }) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.import_cluster sql_import_options: sql_import_options, name: name, gcs_uri: gcs_uri, database: database, user: user do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.import_cluster ::Google::Cloud::AlloyDB::V1::ImportClusterRequest.new(sql_import_options: sql_import_options, name: name, gcs_uri: gcs_uri, database: database, user: user) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.import_cluster({ sql_import_options: sql_import_options, name: name, gcs_uri: gcs_uri, database: database, user: user }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.import_cluster(::Google::Cloud::AlloyDB::V1::ImportClusterRequest.new(sql_import_options: sql_import_options, name: name, gcs_uri: gcs_uri, database: database, user: user), grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, import_cluster_client_stub.call_rpc_count
+    end
+  end
+
+  def test_upgrade_cluster
+    # Create GRPC objects.
+    grpc_response = ::Google::Longrunning::Operation.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+    version = :DATABASE_VERSION_UNSPECIFIED
+    request_id = "hello world"
+    validate_only = true
+    etag = "hello world"
+
+    upgrade_cluster_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :upgrade_cluster, name
+      assert_kind_of ::Google::Cloud::AlloyDB::V1::UpgradeClusterRequest, request
+      assert_equal "hello world", request["name"]
+      assert_equal :DATABASE_VERSION_UNSPECIFIED, request["version"]
+      assert_equal "hello world", request["request_id"]
+      assert_equal true, request["validate_only"]
+      assert_equal "hello world", request["etag"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, upgrade_cluster_client_stub do
+      # Create client
+      client = ::Google::Cloud::AlloyDB::V1::AlloyDBAdmin::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.upgrade_cluster({ name: name, version: version, request_id: request_id, validate_only: validate_only, etag: etag }) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.upgrade_cluster name: name, version: version, request_id: request_id, validate_only: validate_only, etag: etag do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.upgrade_cluster ::Google::Cloud::AlloyDB::V1::UpgradeClusterRequest.new(name: name, version: version, request_id: request_id, validate_only: validate_only, etag: etag) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.upgrade_cluster({ name: name, version: version, request_id: request_id, validate_only: validate_only, etag: etag }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.upgrade_cluster(::Google::Cloud::AlloyDB::V1::UpgradeClusterRequest.new(name: name, version: version, request_id: request_id, validate_only: validate_only, etag: etag), grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, upgrade_cluster_client_stub.call_rpc_count
+    end
+  end
+
   def test_delete_cluster
     # Create GRPC objects.
     grpc_response = ::Google::Longrunning::Operation.new
@@ -1792,6 +2006,7 @@ class ::Google::Cloud::AlloyDB::V1::AlloyDBAdmin::ClientTest < Minitest::Test
     parent = "hello world"
     page_size = 42
     page_token = "hello world"
+    scope = :SCOPE_UNSPECIFIED
 
     list_supported_database_flags_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :list_supported_database_flags, name
@@ -1799,6 +2014,7 @@ class ::Google::Cloud::AlloyDB::V1::AlloyDBAdmin::ClientTest < Minitest::Test
       assert_equal "hello world", request["parent"]
       assert_equal 42, request["page_size"]
       assert_equal "hello world", request["page_token"]
+      assert_equal :SCOPE_UNSPECIFIED, request["scope"]
       refute_nil options
     end
 
@@ -1809,35 +2025,35 @@ class ::Google::Cloud::AlloyDB::V1::AlloyDBAdmin::ClientTest < Minitest::Test
       end
 
       # Use hash object
-      client.list_supported_database_flags({ parent: parent, page_size: page_size, page_token: page_token }) do |response, operation|
+      client.list_supported_database_flags({ parent: parent, page_size: page_size, page_token: page_token, scope: scope }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_supported_database_flags parent: parent, page_size: page_size, page_token: page_token do |response, operation|
+      client.list_supported_database_flags parent: parent, page_size: page_size, page_token: page_token, scope: scope do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_supported_database_flags ::Google::Cloud::AlloyDB::V1::ListSupportedDatabaseFlagsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |response, operation|
+      client.list_supported_database_flags ::Google::Cloud::AlloyDB::V1::ListSupportedDatabaseFlagsRequest.new(parent: parent, page_size: page_size, page_token: page_token, scope: scope) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_supported_database_flags({ parent: parent, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
+      client.list_supported_database_flags({ parent: parent, page_size: page_size, page_token: page_token, scope: scope }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_supported_database_flags(::Google::Cloud::AlloyDB::V1::ListSupportedDatabaseFlagsRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
+      client.list_supported_database_flags(::Google::Cloud::AlloyDB::V1::ListSupportedDatabaseFlagsRequest.new(parent: parent, page_size: page_size, page_token: page_token, scope: scope), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
