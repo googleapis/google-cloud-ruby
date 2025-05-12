@@ -617,7 +617,7 @@
   "google-cloud-redis-cluster-v1+FILLER": "0.0.0",
   "google-cloud-redis-cluster-v1beta1": "0.4.1",
   "google-cloud-redis-cluster-v1beta1+FILLER": "0.0.0",
-  "google-cloud-redis-v1": "2.0.1",
+  "google-cloud-redis-v1": "2.1.0",
   "google-cloud-redis-v1+FILLER": "0.0.0",
   "google-cloud-redis-v1beta1": "0.17.0",
   "google-cloud-redis-v1beta1+FILLER": "0.0.0",
