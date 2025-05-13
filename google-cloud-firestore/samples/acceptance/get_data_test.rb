@@ -41,11 +41,11 @@ describe "Google Cloud Firestore API samples - Get Data" do
       get_document project_id: @firestore_project, collection_path: @collection_path
     end
     assert_includes out, "SF data:"
-    assert_includes out, ':name=>"San Francisco"'
-    assert_includes out, ':state=>"CA"'
-    assert_includes out, ':country=>"USA"'
-    assert_includes out, ":capital=>false"
-    assert_includes out, ":population=>860000"
+    assert_includes out, 'name: "San Francisco"'
+    assert_includes out, 'state: "CA"'
+    assert_includes out, 'country: "USA"'
+    assert_includes out, "capital: false"
+    assert_includes out, "population: 860000"
   end
 
   it "get_multiple_docs" do
@@ -57,11 +57,11 @@ describe "Google Cloud Firestore API samples - Get Data" do
     assert_includes out, "BJ data:"
     refute_includes out, "SF data:"
     refute_includes out, "LA data:"
-    assert_includes out, ':name=>"Tokyo"'
-    assert_includes out, ":state=>nil"
-    assert_includes out, ':country=>"Japan"'
-    assert_includes out, ":capital=>true"
-    assert_includes out, ":population=>9000000"
+    assert_includes out, 'name: "Tokyo"'
+    assert_includes out, "state: nil"
+    assert_includes out, 'country: "Japan"'
+    assert_includes out, "capital: true"
+    assert_includes out, "population: 9000000"
   end
 
   it "get_all_docs" do
@@ -73,11 +73,11 @@ describe "Google Cloud Firestore API samples - Get Data" do
     assert_includes out, "BJ data:"
     assert_includes out, "SF data:"
     assert_includes out, "LA data:"
-    assert_includes out, ':name=>"Los Angeles"'
-    assert_includes out, ':state=>"CA"'
-    assert_includes out, ':country=>"USA"'
-    assert_includes out, ":capital=>false"
-    assert_includes out, ":population=>3900000"
+    assert_includes out, 'name: "Los Angeles"'
+    assert_includes out, 'state: "CA"'
+    assert_includes out, 'country: "USA"'
+    assert_includes out, "capital: false"
+    assert_includes out, "population: 3900000"
   end
 
   it "add_subcollection" do
