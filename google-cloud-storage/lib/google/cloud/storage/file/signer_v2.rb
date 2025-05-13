@@ -15,7 +15,7 @@
 
 require "addressable/uri"
 require "base64"
-require "cgi"
+require "cgi/escape"
 require "openssl"
 require "google/cloud/storage/errors"
 
