@@ -70,7 +70,7 @@ module Google
               # The error code is not specified
               UNKNOWN = 0
 
-              # Error because of internal server error, will be retried automatically..
+              # Error because of internal server error, will be retried automatically.
               INTERNAL_ERROR = 1
 
               # User action is required to resolve the error.
@@ -105,12 +105,9 @@ module Google
         #     Required. The location at which the EncryptionConfig is to be created.
         # @!attribute [rw] encryption_config_id
         #   @return [::String]
-        #     Required. The ID of the EncryptionConfig to create.
-        #     The ID must contain only letters (a-z, A-Z), numbers (0-9),
-        #     and hyphens (-).
-        #     The maximum size is 63 characters.
-        #     The first character must be a letter.
-        #     The last character must be a letter or a number.
+        #     Required. The ID of the
+        #     {::Google::Cloud::Dataplex::V1::EncryptionConfig EncryptionConfig} to create.
+        #     Currently, only a value of "default" is supported.
         # @!attribute [rw] encryption_config
         #   @return [::Google::Cloud::Dataplex::V1::EncryptionConfig]
         #     Required. The EncryptionConfig to create.

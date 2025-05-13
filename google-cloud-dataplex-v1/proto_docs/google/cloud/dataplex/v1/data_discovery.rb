@@ -160,7 +160,7 @@ module Google
         #     Output only. Configuration for metadata publishing.
         # @!attribute [r] scan_statistics
         #   @return [::Google::Cloud::Dataplex::V1::DataDiscoveryResult::ScanStatistics]
-        #     Output only. Statistics of the DataDiscoveryScan.
+        #     Output only. Describes result statistics of a data scan discovery job.
         class DataDiscoveryResult
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -177,7 +177,7 @@ module Google
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
 
-          # Statistics of the DataDiscoveryScan.
+          # Describes result statistics of a data scan discovery job.
           # @!attribute [rw] scanned_file_count
           #   @return [::Integer]
           #     The number of files scanned.
