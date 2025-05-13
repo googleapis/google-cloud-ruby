@@ -195,6 +195,9 @@ module Google
         # @!attribute [r] satisfies_pzs
         #   @return [::Boolean]
         #     Output only. Reserved for future use.
+        # @!attribute [r] node_selector
+        #   @return [::Google::Cloud::Run::V2::NodeSelector]
+        #     Output only. The node selector for the task.
         # @!attribute [r] etag
         #   @return [::String]
         #     Output only. A system-generated fingerprint for this version of the
