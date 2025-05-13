@@ -245,12 +245,9 @@ module Google
               #   @param parent [::String]
               #     Required. The location at which the EncryptionConfig is to be created.
               #   @param encryption_config_id [::String]
-              #     Required. The ID of the EncryptionConfig to create.
-              #     The ID must contain only letters (a-z, A-Z), numbers (0-9),
-              #     and hyphens (-).
-              #     The maximum size is 63 characters.
-              #     The first character must be a letter.
-              #     The last character must be a letter or a number.
+              #     Required. The ID of the
+              #     {::Google::Cloud::Dataplex::V1::EncryptionConfig EncryptionConfig} to create.
+              #     Currently, only a value of "default" is supported.
               #   @param encryption_config [::Google::Cloud::Dataplex::V1::EncryptionConfig, ::Hash]
               #     Required. The EncryptionConfig to create.
               # @yield [result, operation] Access the result along with the TransportOperation object
