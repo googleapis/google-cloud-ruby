@@ -44,6 +44,9 @@ module Google
             # Exports data from the cluster.
             # Imperative only.
             rpc :ExportCluster, ::Google::Cloud::AlloyDB::V1beta::ExportClusterRequest, ::Google::Longrunning::Operation
+            # Imports data to the cluster.
+            # Imperative only.
+            rpc :ImportCluster, ::Google::Cloud::AlloyDB::V1beta::ImportClusterRequest, ::Google::Longrunning::Operation
             # Upgrades a single Cluster.
             # Imperative only.
             rpc :UpgradeCluster, ::Google::Cloud::AlloyDB::V1beta::UpgradeClusterRequest, ::Google::Longrunning::Operation
