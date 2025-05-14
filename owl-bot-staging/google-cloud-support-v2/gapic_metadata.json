@@ -1,0 +1,91 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "ruby",
+  "protoPackage": "google.cloud.support.v2",
+  "libraryPackage": "::Google::Cloud::Support::V2",
+  "services": {
+    "CaseAttachmentService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::Support::V2::CaseAttachmentService::Client",
+          "rpcs": {
+            "ListAttachments": {
+              "methods": [
+                "list_attachments"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "CaseService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::Support::V2::CaseService::Client",
+          "rpcs": {
+            "GetCase": {
+              "methods": [
+                "get_case"
+              ]
+            },
+            "ListCases": {
+              "methods": [
+                "list_cases"
+              ]
+            },
+            "SearchCases": {
+              "methods": [
+                "search_cases"
+              ]
+            },
+            "CreateCase": {
+              "methods": [
+                "create_case"
+              ]
+            },
+            "UpdateCase": {
+              "methods": [
+                "update_case"
+              ]
+            },
+            "EscalateCase": {
+              "methods": [
+                "escalate_case"
+              ]
+            },
+            "CloseCase": {
+              "methods": [
+                "close_case"
+              ]
+            },
+            "SearchCaseClassifications": {
+              "methods": [
+                "search_case_classifications"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "CommentService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::Support::V2::CommentService::Client",
+          "rpcs": {
+            "ListComments": {
+              "methods": [
+                "list_comments"
+              ]
+            },
+            "CreateComment": {
+              "methods": [
+                "create_comment"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}
