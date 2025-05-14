@@ -1492,14 +1492,14 @@
       ]
     },
     {
-      "region_tag": "alloydb_v1_generated_AlloyDBCSQLAdmin_RestoreFromCloudSQL_sync",
-      "title": "Snippet for the restore_from_cloud_sql call in the AlloyDBCSQLAdmin service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AlloyDB::V1::AlloyDBCSQLAdmin::Client#restore_from_cloud_sql.",
-      "file": "alloy_dbcsql_admin/restore_from_cloud_sql.rb",
+      "region_tag": "alloydb_v1_generated_AlloyDBCloudSQLAdmin_RestoreFromCloudSQL_sync",
+      "title": "Snippet for the restore_from_cloud_sql call in the AlloyDBCloudSQLAdmin service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AlloyDB::V1::AlloyDBCloudSQLAdmin::Client#restore_from_cloud_sql.",
+      "file": "alloy_db_cloud_sql_admin/restore_from_cloud_sql.rb",
       "language": "RUBY",
       "client_method": {
         "short_name": "restore_from_cloud_sql",
-        "full_name": "::Google::Cloud::AlloyDB::V1::AlloyDBCSQLAdmin::Client#restore_from_cloud_sql",
+        "full_name": "::Google::Cloud::AlloyDB::V1::AlloyDBCloudSQLAdmin::Client#restore_from_cloud_sql",
         "async": false,
         "parameters": [
           {
@@ -1509,14 +1509,14 @@
         ],
         "result_type": "::Google::Longrunning::Operation",
         "client": {
-          "short_name": "AlloyDBCSQLAdmin::Client",
-          "full_name": "::Google::Cloud::AlloyDB::V1::AlloyDBCSQLAdmin::Client"
+          "short_name": "AlloyDBCloudSQLAdmin::Client",
+          "full_name": "::Google::Cloud::AlloyDB::V1::AlloyDBCloudSQLAdmin::Client"
         },
         "method": {
           "short_name": "RestoreFromCloudSQL",
           "full_name": "google.cloud.alloydb.v1.AlloyDBCSQLAdmin.RestoreFromCloudSQL",
           "service": {
-            "short_name": "AlloyDBCSQLAdmin",
+            "short_name": "AlloyDBCloudSQLAdmin",
             "full_name": "google.cloud.alloydb.v1.AlloyDBCSQLAdmin"
           }
         }
