@@ -22,23 +22,32 @@ module Google
     module Support
       module V2
         # A comment associated with a support case.
+        #
+        # Case comments are the primary way for Google Support to communicate with a
+        # user who has opened a case. When a user responds to Google Support, the
+        # user's responses also appear as comments.
         # @!attribute [r] name
         #   @return [::String]
-        #     Output only. The resource name for the comment.
+        #     Output only. Identifier. The resource name of the comment.
         # @!attribute [r] create_time
         #   @return [::Google::Protobuf::Timestamp]
-        #     Output only. The time when this comment was created.
+        #     Output only. The time when the comment was created.
         # @!attribute [r] creator
         #   @return [::Google::Cloud::Support::V2::Actor]
-        #     Output only. The user or Google Support agent created this comment.
+        #     Output only. The user or Google Support agent who created the comment.
         # @!attribute [rw] body
         #   @return [::String]
-        #     The full comment body. Maximum of 12800 characters. This can contain rich
-        #     text syntax.
+        #     The full comment body.
+        #
+        #     Maximum of 12800 characters.
         # @!attribute [r] plain_text_body
+        #   @deprecated This field is deprecated and may be removed in the next major version update.
         #   @return [::String]
-        #     Output only. DEPRECATED. An automatically generated plain text version of
-        #     body with all rich text syntax stripped.
+        #     Output only. DEPRECATED. DO NOT USE.
+        #
+        #     A duplicate of the `body` field.
+        #
+        #     This field is only present for legacy reasons.
         class Comment
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

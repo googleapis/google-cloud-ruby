@@ -24,13 +24,17 @@ module Google
         # The request message for the ListAttachments endpoint.
         # @!attribute [rw] parent
         #   @return [::String]
-        #     Required. The resource name of Case object for which attachments should be
-        #     listed.
+        #     Required. The name of the case for which attachments should be listed.
         # @!attribute [rw] page_size
         #   @return [::Integer]
-        #     The maximum number of attachments fetched with each request. If not
-        #     provided, the default is 10. The maximum page size that will be returned is
-        #     100.
+        #     The maximum number of attachments fetched with each request.
+        #
+        #     If not provided, the default is 10. The maximum page size that will be
+        #     returned is 100.
+        #
+        #     The size of each page can be smaller than the requested page size and can
+        #     include zero. For example, you could request 100 attachments on one page,
+        #     receive 0, and then on the next page, receive 90.
         # @!attribute [rw] page_token
         #   @return [::String]
         #     A token identifying the page of results to return. If unspecified, the
@@ -43,12 +47,12 @@ module Google
         # The response message for the ListAttachments endpoint.
         # @!attribute [rw] attachments
         #   @return [::Array<::Google::Cloud::Support::V2::Attachment>]
-        #     The list of attachments associated with the given case.
+        #     The list of attachments associated with a case.
         # @!attribute [rw] next_page_token
         #   @return [::String]
-        #     A token to retrieve the next page of results. This should be set in the
-        #     `page_token` field of subsequent `cases.attachments.list` requests. If
-        #     unspecified, there are no more results to retrieve.
+        #     A token to retrieve the next page of results. Set this in the `page_token`
+        #     field of subsequent `cases.attachments.list` requests. If unspecified,
+        #     there are no more results to retrieve.
         class ListAttachmentsResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
