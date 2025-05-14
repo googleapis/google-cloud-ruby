@@ -254,6 +254,21 @@
               "methods": [
                 "list_online_return_policies"
               ]
+            },
+            "CreateOnlineReturnPolicy": {
+              "methods": [
+                "create_online_return_policy"
+              ]
+            },
+            "UpdateOnlineReturnPolicy": {
+              "methods": [
+                "update_online_return_policy"
+              ]
+            },
+            "DeleteOnlineReturnPolicy": {
+              "methods": [
+                "delete_online_return_policy"
+              ]
             }
           }
         }
