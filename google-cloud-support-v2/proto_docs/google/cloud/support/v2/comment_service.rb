@@ -24,15 +24,14 @@ module Google
         # The request message for the ListComments endpoint.
         # @!attribute [rw] parent
         #   @return [::String]
-        #     Required. The resource name of Case object for which comments should be
-        #     listed.
+        #     Required. The name of the case for which to list comments.
         # @!attribute [rw] page_size
         #   @return [::Integer]
-        #     The maximum number of comments fetched with each request. Defaults to 10.
+        #     The maximum number of comments to fetch. Defaults to 10.
         # @!attribute [rw] page_token
         #   @return [::String]
         #     A token identifying the page of results to return. If unspecified, the
-        #     first page is retrieved.
+        #     first page is returned.
         class ListCommentsRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -41,24 +40,24 @@ module Google
         # The response message for the ListComments endpoint.
         # @!attribute [rw] comments
         #   @return [::Array<::Google::Cloud::Support::V2::Comment>]
-        #     The list of Comments associated with the given Case.
+        #     List of the comments associated with the case.
         # @!attribute [rw] next_page_token
         #   @return [::String]
-        #     A token to retrieve the next page of results. This should be set in the
-        #     `page_token` field of subsequent `ListCommentsRequest` message that is
-        #     issued. If unspecified, there are no more results to retrieve.
+        #     A token to retrieve the next page of results. Set this in the `page_token`
+        #     field of subsequent `cases.comments.list` requests. If unspecified, there
+        #     are no more results to retrieve.
         class ListCommentsResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # The request message for CreateComment endpoint.
+        # The request message for the CreateComment endpoint.
         # @!attribute [rw] parent
         #   @return [::String]
-        #     Required. The resource name of Case to which this comment should be added.
+        #     Required. The name of the case to which the comment should be added.
         # @!attribute [rw] comment
         #   @return [::Google::Cloud::Support::V2::Comment]
-        #     Required. The Comment object to be added to this Case.
+        #     Required. The comment to be added.
         class CreateCommentRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

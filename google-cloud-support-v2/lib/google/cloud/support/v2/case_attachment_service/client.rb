@@ -27,7 +27,7 @@ module Google
           ##
           # Client for the CaseAttachmentService service.
           #
-          # A service to manage file attachment for Google Cloud support cases.
+          # A service to manage file attachments for Google Cloud support cases.
           #
           class Client
             # @private
@@ -189,7 +189,37 @@ module Google
             # Service calls
 
             ##
-            # Retrieve all attachments associated with a support case.
+            # List all the attachments associated with a support case.
+            #
+            # EXAMPLES:
+            #
+            # cURL:
+            #
+            # ```shell
+            # case="projects/some-project/cases/23598314"
+            # curl \
+            #   --header "Authorization: Bearer $(gcloud auth print-access-token)" \
+            #   "https://cloudsupport.googleapis.com/v2/$case/attachments"
+            # ```
+            #
+            # Python:
+            #
+            # ```python
+            # import googleapiclient.discovery
+            #
+            # api_version = "v2"
+            # supportApiService = googleapiclient.discovery.build(
+            #     serviceName="cloudsupport",
+            #     version=api_version,
+            #     discoveryServiceUrl=f"https://cloudsupport.googleapis.com/$discovery/rest?version=\\{api_version}",
+            # )
+            # request = (
+            #     supportApiService.cases()
+            #     .attachments()
+            #     .list(parent="projects/some-project/cases/43595344")
+            # )
+            # print(request.execute())
+            # ```
             #
             # @overload list_attachments(request, options = nil)
             #   Pass arguments to `list_attachments` via a request object, either of type
@@ -207,12 +237,16 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param parent [::String]
-            #     Required. The resource name of Case object for which attachments should be
-            #     listed.
+            #     Required. The name of the case for which attachments should be listed.
             #   @param page_size [::Integer]
-            #     The maximum number of attachments fetched with each request. If not
-            #     provided, the default is 10. The maximum page size that will be returned is
-            #     100.
+            #     The maximum number of attachments fetched with each request.
+            #
+            #     If not provided, the default is 10. The maximum page size that will be
+            #     returned is 100.
+            #
+            #     The size of each page can be smaller than the requested page size and can
+            #     include zero. For example, you could request 100 attachments on one page,
+            #     receive 0, and then on the next page, receive 90.
             #   @param page_token [::String]
             #     A token identifying the page of results to return. If unspecified, the
             #     first page is retrieved.

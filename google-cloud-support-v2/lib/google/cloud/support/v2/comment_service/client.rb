@@ -191,7 +191,37 @@ module Google
             # Service calls
 
             ##
-            # Retrieve all Comments associated with the Case object.
+            # List all the comments associated with a case.
+            #
+            # EXAMPLES:
+            #
+            # cURL:
+            #
+            # ```shell
+            # case="projects/some-project/cases/43595344"
+            # curl \
+            #   --header "Authorization: Bearer $(gcloud auth print-access-token)" \
+            #   "https://cloudsupport.googleapis.com/v2/$case/comments"
+            # ```
+            #
+            # Python:
+            #
+            # ```python
+            # import googleapiclient.discovery
+            #
+            # api_version = "v2"
+            # supportApiService = googleapiclient.discovery.build(
+            #     serviceName="cloudsupport",
+            #     version=api_version,
+            #     discoveryServiceUrl=f"https://cloudsupport.googleapis.com/$discovery/rest?version=\\{api_version}",
+            # )
+            # request = (
+            #     supportApiService.cases()
+            #     .comments()
+            #     .list(parent="projects/some-project/cases/43595344")
+            # )
+            # print(request.execute())
+            # ```
             #
             # @overload list_comments(request, options = nil)
             #   Pass arguments to `list_comments` via a request object, either of type
@@ -209,13 +239,12 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param parent [::String]
-            #     Required. The resource name of Case object for which comments should be
-            #     listed.
+            #     Required. The name of the case for which to list comments.
             #   @param page_size [::Integer]
-            #     The maximum number of comments fetched with each request. Defaults to 10.
+            #     The maximum number of comments to fetch. Defaults to 10.
             #   @param page_token [::String]
             #     A token identifying the page of results to return. If unspecified, the
-            #     first page is retrieved.
+            #     first page is returned.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Gapic::PagedEnumerable<::Google::Cloud::Support::V2::Comment>]
@@ -288,8 +317,47 @@ module Google
             end
 
             ##
-            # Add a new comment to the specified Case.
-            # The comment object must have the following fields set: body.
+            # Add a new comment to a case.
+            #
+            # The comment must have the following fields set: `body`.
+            #
+            # EXAMPLES:
+            #
+            # cURL:
+            #
+            # ```shell
+            # case="projects/some-project/cases/43591344"
+            # curl \
+            #   --request POST \
+            #   --header "Authorization: Bearer $(gcloud auth print-access-token)" \
+            #   --header 'Content-Type: application/json' \
+            #   --data '{
+            #     "body": "This is a test comment."
+            #   }' \
+            #   "https://cloudsupport.googleapis.com/v2/$case/comments"
+            # ```
+            #
+            # Python:
+            #
+            # ```python
+            # import googleapiclient.discovery
+            #
+            # api_version = "v2"
+            # supportApiService = googleapiclient.discovery.build(
+            #     serviceName="cloudsupport",
+            #     version=api_version,
+            #     discoveryServiceUrl=f"https://cloudsupport.googleapis.com/$discovery/rest?version=\\{api_version}",
+            # )
+            # request = (
+            #     supportApiService.cases()
+            #     .comments()
+            #     .create(
+            #         parent="projects/some-project/cases/43595344",
+            #         body=\\{"body": "This is a test comment."},
+            #     )
+            # )
+            # print(request.execute())
+            # ```
             #
             # @overload create_comment(request, options = nil)
             #   Pass arguments to `create_comment` via a request object, either of type
@@ -307,9 +375,9 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param parent [::String]
-            #     Required. The resource name of Case to which this comment should be added.
+            #     Required. The name of the case to which the comment should be added.
             #   @param comment [::Google::Cloud::Support::V2::Comment, ::Hash]
-            #     Required. The Comment object to be added to this Case.
+            #     Required. The comment to be added.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::Support::V2::Comment]
