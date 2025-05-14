@@ -24,6 +24,7 @@ require "google/cloud/storage_insights/v1/version"
 
 require "google/cloud/storage_insights/v1/storage_insights/credentials"
 require "google/cloud/storage_insights/v1/storage_insights/paths"
+require "google/cloud/storage_insights/v1/storage_insights/operations"
 require "google/cloud/storage_insights/v1/storage_insights/client"
 require "google/cloud/storage_insights/v1/storage_insights/rest"
 
