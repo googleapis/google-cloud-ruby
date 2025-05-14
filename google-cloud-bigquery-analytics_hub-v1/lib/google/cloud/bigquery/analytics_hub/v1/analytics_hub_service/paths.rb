@@ -100,6 +100,39 @@ module Google
               end
 
               ##
+              # Create a fully-qualified ManagedService resource string.
+              #
+              # The resource will be in the following format:
+              #
+              # `services/{service}`
+              #
+              # @param service [String]
+              #
+              # @return [::String]
+              def managed_service_path service:
+                "services/#{service}"
+              end
+
+              ##
+              # Create a fully-qualified Routine resource string.
+              #
+              # The resource will be in the following format:
+              #
+              # `projects/{project}/datasets/{dataset}/routines/{routine}`
+              #
+              # @param project [String]
+              # @param dataset [String]
+              # @param routine [String]
+              #
+              # @return [::String]
+              def routine_path project:, dataset:, routine:
+                raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+                raise ::ArgumentError, "dataset cannot contain /" if dataset.to_s.include? "/"
+
+                "projects/#{project}/datasets/#{dataset}/routines/#{routine}"
+              end
+
+              ##
               # Create a fully-qualified Subscription resource string.
               #
               # The resource will be in the following format:
