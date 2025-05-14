@@ -426,8 +426,9 @@ describe Google::Cloud::Firestore::Query, :get, :mock_firestore do
 
     _(explain_result).must_be_kind_of Google::Cloud::Firestore::QueryExplainResult
 
-    explain_result.fetch_metrics
+    _(explain_result.metrics_fetched?).must_equal false
     _(explain_result.explain_metrics).must_equal query_result_metrics
+    _(explain_result.metrics_fetched?).must_equal true 
 
     assert_results_enum explain_result.to_enum
   end

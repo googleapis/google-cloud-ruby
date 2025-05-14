@@ -80,20 +80,32 @@ module Google
       class QueryExplainResult
         include Enumerable
 
-        # The metrics from planning and execution stages of the query.
-        # This attribute is populated after iterating through the results (e.g., via {#each})
-        # or by explicitly calling {#fetch_metrics}.
-        # It will be `nil` if the query explanation did not produce metrics or if
-        # iteration has not yet occurred.
+        # Indicates whether the {#explain_metrics} have been populated.
+        # This becomes `true` after iterating through the results (e.g., via {#each})
+        # or by explicitly calling {#explain_metrics}.
         #
-        # @return [Google::Cloud::Firestore::V1::ExplainMetrics, nil] The query explanation metrics,
-        #   or `nil` if not yet populated or not available.
-        attr_reader :explain_metrics
+        # @return [Boolean] `true` if metrics are populated, `false` otherwise.
+        attr_reader :metrics_fetched
+        alias metrics_fetched? metrics_fetched
 
         # @private Creates a new QueryRunResult.
         def initialize results_enum, client
           @results_enum = results_enum
           @client = client
+          @metrics_fetched = false
+        end
+
+        # The metrics from planning and execution stages of the query.
+        # Calling this the first time will enumerate and cache all results as well as cache the metrics.
+        #
+        # Subsequent calls will return the cached value.
+        #
+        # @return [Google::Cloud::Firestore::V1::ExplainMetrics] The query explanation metrics.
+        def explain_metrics
+          # rubocop:disable Lint/EmptyBlock
+          each {} unless metrics_fetched?
+          # rubocop:enable Lint/EmptyBlock
+          @explain_metrics
         end
 
         # Iterates over the document snapshots returned by the query explanation
@@ -108,23 +120,11 @@ module Google
           @results ||= @results_enum.to_a
           @results.each do |result|
             @explain_metrics ||= result.explain_metrics if result.explain_metrics
+            @metrics_fetched = !@explain_metrics.nil?
             next if result.document.nil?
 
             yield DocumentSnapshot.from_query_result(result, @client)
           end
-        end
-
-        # Ensures that all results from the underlying enumerator have been seen
-        # and the metrics are populated.
-        # This method will iterate through any remaining results if they haven't been
-        # fully processed yet.
-        #
-        # @return [Google::Cloud::Firestore::V1::ExplainMetrics, nil] The query explanation metrics.
-        def fetch_metrics
-          # rubocop:disable Lint/EmptyBlock
-          each {} if explain_metrics.nil?
-          # rubocop:enable Lint/EmptyBlock
-          explain_metrics
         end
       end
     end

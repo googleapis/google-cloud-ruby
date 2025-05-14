@@ -49,8 +49,37 @@ describe Google::Cloud::Firestore::Query, :explain_options, :mock_firestore do
 
     firestore_mock.expect :run_query, query_results_enum, run_query_args(expected_query, explain_options: explain_options)
 
-    results_enum = query.select(:name).explain.to_enum
+    results = query.select(:name).explain
+    # Results and metrics are not fetched at first
+    refute results.metrics_fetched?
+    
+    results_enum = results.to_enum
     assert_results_enum results_enum
+    
+    # Enumerating the results fetches the metrics
+    assert results.metrics_fetched?
+  end
+
+  it "runs query with explain options (analyze: false)" do
+    expected_query = Google::Cloud::Firestore::V1::StructuredQuery.new(
+      select: Google::Cloud::Firestore::V1::StructuredQuery::Projection.new(
+        fields: [Google::Cloud::Firestore::V1::StructuredQuery::FieldReference.new(field_path: "name")])
+    )
+    explain_options = Google::Cloud::Firestore::V1::ExplainOptions.new(analyze: false)
+
+    firestore_mock.expect :run_query, query_results_enum, run_query_args(expected_query, explain_options: explain_options)
+
+    results = query.select(:name).explain
+
+    # Results and metrics are not fetched at first
+    refute results.metrics_fetched?
+
+    # accessing metrics fetches metrics and results
+    metrics = results.explain_metrics
+    refute_nil metrics
+    assert results.metrics_fetched?
+
+    assert_results_enum results.to_enum
   end
 
   it "runs query with explain options (analyze: true)" do
