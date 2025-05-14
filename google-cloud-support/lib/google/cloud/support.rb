@@ -63,7 +63,7 @@ module Google
       #
       # ## About CaseAttachmentService
       #
-      # A service to manage file attachment for Google Cloud support cases.
+      # A service to manage file attachments for Google Cloud support cases.
       #
       # @param version [::String, ::Symbol] The API version to connect to. Optional.
       #   Defaults to `:v2`.
