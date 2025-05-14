@@ -25,6 +25,25 @@ module Google
           # Path helper methods for the StorageInsights API.
           module Paths
             ##
+            # Create a fully-qualified DatasetConfig resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `projects/{project}/locations/{location}/datasetConfigs/{dataset_config}`
+            #
+            # @param project [String]
+            # @param location [String]
+            # @param dataset_config [String]
+            #
+            # @return [::String]
+            def dataset_config_path project:, location:, dataset_config:
+              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+              raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+
+              "projects/#{project}/locations/#{location}/datasetConfigs/#{dataset_config}"
+            end
+
+            ##
             # Create a fully-qualified Location resource string.
             #
             # The resource will be in the following format:

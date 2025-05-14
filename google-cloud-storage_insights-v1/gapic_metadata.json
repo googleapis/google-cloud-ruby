@@ -44,6 +44,41 @@
               "methods": [
                 "get_report_detail"
               ]
+            },
+            "ListDatasetConfigs": {
+              "methods": [
+                "list_dataset_configs"
+              ]
+            },
+            "GetDatasetConfig": {
+              "methods": [
+                "get_dataset_config"
+              ]
+            },
+            "CreateDatasetConfig": {
+              "methods": [
+                "create_dataset_config"
+              ]
+            },
+            "UpdateDatasetConfig": {
+              "methods": [
+                "update_dataset_config"
+              ]
+            },
+            "DeleteDatasetConfig": {
+              "methods": [
+                "delete_dataset_config"
+              ]
+            },
+            "LinkDataset": {
+              "methods": [
+                "link_dataset"
+              ]
+            },
+            "UnlinkDataset": {
+              "methods": [
+                "unlink_dataset"
+              ]
             }
           }
         }

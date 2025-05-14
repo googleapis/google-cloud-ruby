@@ -47,6 +47,21 @@ module Google
             rpc :ListReportDetails, ::Google::Cloud::StorageInsights::V1::ListReportDetailsRequest, ::Google::Cloud::StorageInsights::V1::ListReportDetailsResponse
             # Gets details of a single ReportDetail.
             rpc :GetReportDetail, ::Google::Cloud::StorageInsights::V1::GetReportDetailRequest, ::Google::Cloud::StorageInsights::V1::ReportDetail
+            # Lists the dataset configurations in a given project for a given location.
+            rpc :ListDatasetConfigs, ::Google::Cloud::StorageInsights::V1::ListDatasetConfigsRequest, ::Google::Cloud::StorageInsights::V1::ListDatasetConfigsResponse
+            # Gets the dataset configuration in a given project for a given location.
+            rpc :GetDatasetConfig, ::Google::Cloud::StorageInsights::V1::GetDatasetConfigRequest, ::Google::Cloud::StorageInsights::V1::DatasetConfig
+            # Creates a dataset configuration in a given project for a given location.
+            rpc :CreateDatasetConfig, ::Google::Cloud::StorageInsights::V1::CreateDatasetConfigRequest, ::Google::Longrunning::Operation
+            # Updates a dataset configuration in a given project for a given location.
+            rpc :UpdateDatasetConfig, ::Google::Cloud::StorageInsights::V1::UpdateDatasetConfigRequest, ::Google::Longrunning::Operation
+            # Deletes a dataset configuration in a given project for a given location.
+            rpc :DeleteDatasetConfig, ::Google::Cloud::StorageInsights::V1::DeleteDatasetConfigRequest, ::Google::Longrunning::Operation
+            # Links a dataset to BigQuery in a given project for a given location.
+            rpc :LinkDataset, ::Google::Cloud::StorageInsights::V1::LinkDatasetRequest, ::Google::Longrunning::Operation
+            # Unlinks a dataset from BigQuery in a given project
+            # for a given location.
+            rpc :UnlinkDataset, ::Google::Cloud::StorageInsights::V1::UnlinkDatasetRequest, ::Google::Longrunning::Operation
           end
 
           Stub = Service.rpc_stub_class
