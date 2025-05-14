@@ -28,7 +28,7 @@ module Google
           # @!attribute [r] name
           #   @return [::String]
           #     Output only. The resource name of the data exchange.
-          #     e.g. `projects/myproject/locations/US/dataExchanges/123`.
+          #     e.g. `projects/myproject/locations/us/dataExchanges/123`.
           # @!attribute [rw] display_name
           #   @return [::String]
           #     Required. Human-readable display name of the data exchange. The display
@@ -71,7 +71,6 @@ module Google
           #   @return [::Boolean]
           #     Optional. By default, false.
           #     If true, the DataExchange has an email sharing mandate enabled.
-          #     Publishers can view the logged email of the subscriber.
           class DataExchange
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -222,7 +221,7 @@ module Google
           # @!attribute [r] name
           #   @return [::String]
           #     Output only. The resource name of the listing.
-          #     e.g. `projects/myproject/locations/US/dataExchanges/123/listings/456`
+          #     e.g. `projects/myproject/locations/us/dataExchanges/123/listings/456`
           # @!attribute [rw] display_name
           #   @return [::String]
           #     Required. Human-readable display name of the listing. The display name must
@@ -277,10 +276,18 @@ module Google
           # @!attribute [r] resource_type
           #   @return [::Google::Cloud::Bigquery::AnalyticsHub::V1::SharedResourceType]
           #     Output only. Listing shared asset type.
+          # @!attribute [r] commercial_info
+          #   @return [::Google::Cloud::Bigquery::AnalyticsHub::V1::Listing::CommercialInfo]
+          #     Output only. Commercial info contains the information about the commercial
+          #     data products associated with the listing.
           # @!attribute [rw] log_linked_dataset_query_user_email
           #   @return [::Boolean]
           #     Optional. By default, false.
           #     If true, the Listing has an email sharing mandate enabled.
+          # @!attribute [rw] allow_only_metadata_sharing
+          #   @return [::Boolean]
+          #     Optional. If true, the listing is only available to get the resource
+          #     metadata. Listing is non subscribable.
           class Listing
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -315,6 +322,16 @@ module Google
               #     For table:
               #     `projects/{projectId}/datasets/{datasetId}/tables/{tableId}`
               #     Example:"projects/test_project/datasets/test_dataset/tables/test_table"
+              #
+              #     Note: The following fields are mutually exclusive: `table`, `routine`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+              # @!attribute [rw] routine
+              #   @return [::String]
+              #     Optional. Format:
+              #     For routine:
+              #     `projects/{projectId}/datasets/{datasetId}/routines/{routineId}`
+              #     Example:"projects/test_project/datasets/test_dataset/routines/test_routine"
+              #
+              #     Note: The following fields are mutually exclusive: `routine`, `table`. If a field in that set is populated, all other fields in the set will automatically be cleared.
               class SelectedResource
                 include ::Google::Protobuf::MessageExts
                 extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -370,6 +387,43 @@ module Google
             class RestrictedExportConfig
               include ::Google::Protobuf::MessageExts
               extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
+
+            # Commercial info contains the information about the commercial data products
+            # associated with the listing.
+            # @!attribute [r] cloud_marketplace
+            #   @return [::Google::Cloud::Bigquery::AnalyticsHub::V1::Listing::CommercialInfo::GoogleCloudMarketplaceInfo]
+            #     Output only. Details of the Marketplace Data Product associated with the
+            #     Listing.
+            class CommercialInfo
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+
+              # Specifies the details of the Marketplace Data Product associated with the
+              # Listing.
+              # @!attribute [r] service
+              #   @return [::String]
+              #     Output only. Resource name of the commercial service associated with
+              #     the Marketplace Data Product. e.g. example.com
+              # @!attribute [r] commercial_state
+              #   @return [::Google::Cloud::Bigquery::AnalyticsHub::V1::Listing::CommercialInfo::GoogleCloudMarketplaceInfo::CommercialState]
+              #     Output only. Commercial state of the Marketplace Data Product.
+              class GoogleCloudMarketplaceInfo
+                include ::Google::Protobuf::MessageExts
+                extend ::Google::Protobuf::MessageExts::ClassMethods
+
+                # Indicates whether this commercial access is currently active.
+                module CommercialState
+                  # Commercialization is incomplete and cannot be used.
+                  COMMERCIAL_STATE_UNSPECIFIED = 0
+
+                  # Commercialization has been initialized.
+                  ONBOARDING = 1
+
+                  # Commercialization is complete and available for use.
+                  ACTIVE = 2
+                end
+              end
             end
 
             # State of the listing.
@@ -432,19 +486,19 @@ module Google
           # @!attribute [r] listing
           #   @return [::String]
           #     Output only. Resource name of the source Listing.
-          #     e.g. projects/123/locations/US/dataExchanges/456/listings/789
+          #     e.g. projects/123/locations/us/dataExchanges/456/listings/789
           #
           #     Note: The following fields are mutually exclusive: `listing`, `data_exchange`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [r] data_exchange
           #   @return [::String]
           #     Output only. Resource name of the source Data Exchange.
-          #     e.g. projects/123/locations/US/dataExchanges/456
+          #     e.g. projects/123/locations/us/dataExchanges/456
           #
           #     Note: The following fields are mutually exclusive: `data_exchange`, `listing`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [r] name
           #   @return [::String]
           #     Output only. The resource name of the subscription.
-          #     e.g. `projects/myproject/locations/US/subscriptions/123`.
+          #     e.g. `projects/myproject/locations/us/subscriptions/123`.
           # @!attribute [r] creation_time
           #   @return [::Google::Protobuf::Timestamp]
           #     Output only. Timestamp when the subscription was created.
@@ -463,7 +517,7 @@ module Google
           # @!attribute [r] linked_dataset_map
           #   @return [::Google::Protobuf::Map{::String => ::Google::Cloud::Bigquery::AnalyticsHub::V1::Subscription::LinkedResource}]
           #     Output only. Map of listing resource names to associated linked resource,
-          #     e.g. projects/123/locations/US/dataExchanges/456/listings/789
+          #     e.g. projects/123/locations/us/dataExchanges/456/listings/789
           #     ->
           #     projects/123/datasets/my_dataset
           #
@@ -479,11 +533,18 @@ module Google
           # @!attribute [r] resource_type
           #   @return [::Google::Cloud::Bigquery::AnalyticsHub::V1::SharedResourceType]
           #     Output only. Listing shared asset type.
+          # @!attribute [r] commercial_info
+          #   @return [::Google::Cloud::Bigquery::AnalyticsHub::V1::Subscription::CommercialInfo]
+          #     Output only. This is set if this is a commercial subscription i.e. if this
+          #     subscription was created from subscribing to a commercial listing.
           # @!attribute [r] log_linked_dataset_query_user_email
           #   @return [::Boolean]
           #     Output only. By default, false.
           #     If true, the Subscriber agreed to the email sharing mandate
           #     that is enabled for DataExchange/Listing.
+          # @!attribute [rw] destination_dataset
+          #   @return [::Google::Cloud::Bigquery::AnalyticsHub::V1::DestinationDataset]
+          #     Optional. BigQuery destination dataset to create for the subscriber.
           class Subscription
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -507,6 +568,25 @@ module Google
             class LinkedResource
               include ::Google::Protobuf::MessageExts
               extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
+
+            # Commercial info metadata for this subscription.
+            # @!attribute [r] cloud_marketplace
+            #   @return [::Google::Cloud::Bigquery::AnalyticsHub::V1::Subscription::CommercialInfo::GoogleCloudMarketplaceInfo]
+            #     Output only. This is set when the subscription is commercialised via
+            #     Cloud Marketplace.
+            class CommercialInfo
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+
+              # Cloud Marketplace commercial metadata for this subscription.
+              # @!attribute [rw] order
+              #   @return [::String]
+              #     Resource name of the Marketplace Order.
+              class GoogleCloudMarketplaceInfo
+                include ::Google::Protobuf::MessageExts
+                extend ::Google::Protobuf::MessageExts::ClassMethods
+              end
             end
 
             # @!attribute [rw] key
@@ -540,7 +620,7 @@ module Google
           # @!attribute [rw] parent
           #   @return [::String]
           #     Required. The parent resource path of the data exchanges.
-          #     e.g. `projects/myproject/locations/US`.
+          #     e.g. `projects/myproject/locations/us`.
           # @!attribute [rw] page_size
           #   @return [::Integer]
           #     The maximum number of results to return in a single response page. Leverage
@@ -571,7 +651,7 @@ module Google
           # @!attribute [rw] organization
           #   @return [::String]
           #     Required. The organization resource path of the projects containing
-          #     DataExchanges. e.g. `organizations/myorg/locations/US`.
+          #     DataExchanges. e.g. `organizations/myorg/locations/us`.
           # @!attribute [rw] page_size
           #   @return [::Integer]
           #     The maximum number of results to return in a single response page. Leverage
@@ -602,7 +682,7 @@ module Google
           # @!attribute [rw] name
           #   @return [::String]
           #     Required. The resource name of the data exchange.
-          #     e.g. `projects/myproject/locations/US/dataExchanges/123`.
+          #     e.g. `projects/myproject/locations/us/dataExchanges/123`.
           class GetDataExchangeRequest
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -612,11 +692,11 @@ module Google
           # @!attribute [rw] parent
           #   @return [::String]
           #     Required. The parent resource path of the data exchange.
-          #     e.g. `projects/myproject/locations/US`.
+          #     e.g. `projects/myproject/locations/us`.
           # @!attribute [rw] data_exchange_id
           #   @return [::String]
           #     Required. The ID of the data exchange.
-          #     Must contain only ASCII letters, numbers (0-9), underscores (_).
+          #     Must contain only Unicode letters, numbers (0-9), underscores (_).
           #     Max length: 100 bytes.
           # @!attribute [rw] data_exchange
           #   @return [::Google::Cloud::Bigquery::AnalyticsHub::V1::DataExchange]
@@ -644,7 +724,7 @@ module Google
           # @!attribute [rw] name
           #   @return [::String]
           #     Required. The full name of the data exchange resource that you want to
-          #     delete. For example, `projects/myproject/locations/US/dataExchanges/123`.
+          #     delete. For example, `projects/myproject/locations/us/dataExchanges/123`.
           class DeleteDataExchangeRequest
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -654,7 +734,7 @@ module Google
           # @!attribute [rw] parent
           #   @return [::String]
           #     Required. The parent resource path of the listing.
-          #     e.g. `projects/myproject/locations/US/dataExchanges/123`.
+          #     e.g. `projects/myproject/locations/us/dataExchanges/123`.
           # @!attribute [rw] page_size
           #   @return [::Integer]
           #     The maximum number of results to return in a single response page. Leverage
@@ -684,7 +764,7 @@ module Google
           # @!attribute [rw] name
           #   @return [::String]
           #     Required. The resource name of the listing.
-          #     e.g. `projects/myproject/locations/US/dataExchanges/123/listings/456`.
+          #     e.g. `projects/myproject/locations/us/dataExchanges/123/listings/456`.
           class GetListingRequest
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -694,11 +774,11 @@ module Google
           # @!attribute [rw] parent
           #   @return [::String]
           #     Required. The parent resource path of the listing.
-          #     e.g. `projects/myproject/locations/US/dataExchanges/123`.
+          #     e.g. `projects/myproject/locations/us/dataExchanges/123`.
           # @!attribute [rw] listing_id
           #   @return [::String]
           #     Required. The ID of the listing to create.
-          #     Must contain only ASCII letters, numbers (0-9), underscores (_).
+          #     Must contain only Unicode letters, numbers (0-9), underscores (_).
           #     Max length: 100 bytes.
           # @!attribute [rw] listing
           #   @return [::Google::Cloud::Bigquery::AnalyticsHub::V1::Listing]
@@ -726,7 +806,12 @@ module Google
           # @!attribute [rw] name
           #   @return [::String]
           #     Required. Resource name of the listing to delete.
-          #     e.g. `projects/myproject/locations/US/dataExchanges/123/listings/456`.
+          #     e.g. `projects/myproject/locations/us/dataExchanges/123/listings/456`.
+          # @!attribute [rw] delete_commercial
+          #   @return [::Boolean]
+          #     Optional. If the listing is commercial then this field must be set to true,
+          #     otherwise a failure is thrown. This acts as a safety guard to avoid
+          #     deleting commercial listings accidentally.
           class DeleteListingRequest
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -747,7 +832,7 @@ module Google
           # @!attribute [rw] name
           #   @return [::String]
           #     Required. Resource name of the listing that you want to subscribe to.
-          #     e.g. `projects/myproject/locations/US/dataExchanges/123/listings/456`.
+          #     e.g. `projects/myproject/locations/us/dataExchanges/123/listings/456`.
           class SubscribeListingRequest
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -766,11 +851,11 @@ module Google
           # @!attribute [rw] name
           #   @return [::String]
           #     Required. Resource name of the Data Exchange.
-          #     e.g. `projects/publisherproject/locations/US/dataExchanges/123`
+          #     e.g. `projects/publisherproject/locations/us/dataExchanges/123`
           # @!attribute [rw] destination
           #   @return [::String]
           #     Required. The parent resource path of the Subscription.
-          #     e.g. `projects/subscriberproject/locations/US`
+          #     e.g. `projects/subscriberproject/locations/us`
           # @!attribute [rw] destination_dataset
           #   @return [::Google::Cloud::Bigquery::AnalyticsHub::V1::DestinationDataset]
           #     Optional. BigQuery destination dataset to create for the subscriber.
@@ -799,7 +884,7 @@ module Google
           # @!attribute [rw] name
           #   @return [::String]
           #     Required. Resource name of the Subscription to refresh.
-          #     e.g. `projects/subscriberproject/locations/US/subscriptions/123`
+          #     e.g. `projects/subscriberproject/locations/us/subscriptions/123`
           class RefreshSubscriptionRequest
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -818,7 +903,7 @@ module Google
           # @!attribute [rw] name
           #   @return [::String]
           #     Required. Resource name of the subscription.
-          #     e.g. projects/123/locations/US/subscriptions/456
+          #     e.g. projects/123/locations/us/subscriptions/456
           class GetSubscriptionRequest
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -828,14 +913,14 @@ module Google
           # @!attribute [rw] parent
           #   @return [::String]
           #     Required. The parent resource path of the subscription.
-          #     e.g. projects/myproject/locations/US
+          #     e.g. projects/myproject/locations/us
           # @!attribute [rw] filter
           #   @return [::String]
           #     An expression for filtering the results of the request. Eligible
           #     fields for filtering are:
           #
-          #      * `listing`
-          #      * `data_exchange`
+          #      + `listing`
+          #      + `data_exchange`
           #
           #     Alternatively, a literal wrapped in double quotes may be provided.
           #     This will be checked for an exact match against both fields above.
@@ -843,9 +928,9 @@ module Google
           #     In all cases, the full Data Exchange or Listing resource name must
           #     be provided. Some example of using filters:
           #
-          #      * data_exchange="projects/myproject/locations/us/dataExchanges/123"
-          #      * listing="projects/123/locations/us/dataExchanges/456/listings/789"
-          #      * "projects/myproject/locations/us/dataExchanges/123"
+          #      + data_exchange="projects/myproject/locations/us/dataExchanges/123"
+          #      + listing="projects/123/locations/us/dataExchanges/456/listings/789"
+          #      + "projects/myproject/locations/us/dataExchanges/123"
           # @!attribute [rw] page_size
           #   @return [::Integer]
           #     The maximum number of results to return in a single response page.
@@ -874,8 +959,8 @@ module Google
           #   @return [::String]
           #     Required. Resource name of the requested target. This resource may be
           #     either a Listing or a DataExchange. e.g.
-          #     projects/123/locations/US/dataExchanges/456 OR e.g.
-          #     projects/123/locations/US/dataExchanges/456/listings/789
+          #     projects/123/locations/us/dataExchanges/456 OR e.g.
+          #     projects/123/locations/us/dataExchanges/456/listings/789
           # @!attribute [rw] include_deleted_subscriptions
           #   @return [::Boolean]
           #     If selected, includes deleted subscriptions in the response
@@ -907,7 +992,12 @@ module Google
           # @!attribute [rw] name
           #   @return [::String]
           #     Required. Resource name of the subscription to revoke.
-          #     e.g. projects/123/locations/US/subscriptions/456
+          #     e.g. projects/123/locations/us/subscriptions/456
+          # @!attribute [rw] revoke_commercial
+          #   @return [::Boolean]
+          #     Optional. If the subscription is commercial then this field must be set to
+          #     true, otherwise a failure is thrown. This acts as a safety guard to avoid
+          #     revoking commercial subscriptions accidentally.
           class RevokeSubscriptionRequest
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -924,7 +1014,7 @@ module Google
           # @!attribute [rw] name
           #   @return [::String]
           #     Required. Resource name of the subscription to delete.
-          #     e.g. projects/123/locations/US/subscriptions/456
+          #     e.g. projects/123/locations/us/subscriptions/456
           class DeleteSubscriptionRequest
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
