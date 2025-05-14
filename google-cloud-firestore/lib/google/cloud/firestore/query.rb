@@ -1052,8 +1052,8 @@ module Google
         #
         #   # Get the execution plan without running the query
         #   explain_result = query.explain
-        #   explain_result.fetch_metrics
-        #   pp explain_result.metrics
+        #   metrics = explain_result.explain_metrics
+        #   puts "Plan summary: #{metrics.plan_summary}" if metrics&.plan_summary
         #
         # @example Getting planning and execution stage metrics, as well as query results
         #   require "google/cloud/firestore"
@@ -1063,8 +1063,9 @@ module Google
         #
         #   # Run the query and return metrics from the planning and execution stages
         #   explain_result = query.explain analyze: true
-        #   explain_result.fetch_metrics
-        #   pp explain_result.metrics
+        #   metrics = explain_result.explain_metrics
+        #   puts "Plan summary: #{metrics.plan_summary}" if metrics&.plan_summary
+        #   puts "Results returned: #{metrics.execution_stats.results_returned}" if metrics&.execution_stats
         #   results = explain_result.to_a
         #
         def explain read_time: false, analyze: false

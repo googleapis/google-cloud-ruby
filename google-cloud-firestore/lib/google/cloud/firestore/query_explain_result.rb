@@ -30,16 +30,8 @@ module Google
       # multiple requests to the server. The first set of results will be saved
       # and re-used instead.
       #
-      # @example Iterating over results multiple times
-      #   require "google/cloud/firestore"
-      #
-      #   firestore = Google::Cloud::Firestore.new
-      #   query = firestore.col(:cities).where(:population, :>, 100000)
-      #   explanation_result = query.explain analyze: true
-      #   results = explanation_result.to_a
-      #   results_2 = explanation_result.to_a # same results, no re-query
-      #
-      # This is to avoid the situations where the metrics change unpredictably when results are looked at.
+      # This is to avoid the situations where the metrics do not correspond to the results
+      # if results are partially re-enumerated
       #
       # @see Query#explain
       #
@@ -56,7 +48,6 @@ module Google
       #     puts "City: #{city_snapshot.document_id}, Population: #{city_snapshot[:population]}"
       #   end
       #
-      #   # Metrics are populated after iterating or calling fetch_metrics
       #   metrics = explanation_result.explain_metrics
       #   puts "Results returned: #{metrics.execution_stats.results_returned}" if metrics&.execution_stats
       #
@@ -69,13 +60,19 @@ module Google
       #   # Get the execution plan without running the query (or with analyze: true)
       #   explanation_result = query.explain analyze: false # or true
       #
-      #   metrics = explanation_result.fetch_metrics
-      #   if metrics
-      #     puts "Plan summary: #{metrics.plan_summary}"
-      #     if metrics.execution_stats
-      #       puts "Execution stats: #{metrics.execution_stats.results_returned} results"
-      #     end
-      #   end
+      #   metrics = explanation_result.explain_metrics
+      #   puts "Plan summary: #{metrics.plan_summary}" if metrics&.plan_summary
+      #   puts "Results returned: #{metrics.execution_stats.results_returned}" if metrics&.execution_stats
+      #
+      # @example Iterating over results multiple times
+      #   require "google/cloud/firestore"
+      #
+      #   firestore = Google::Cloud::Firestore.new
+      #   query = firestore.col(:cities).where(:population, :>, 100000)
+      #   explanation_result = query.explain analyze: true
+      #   results = explanation_result.to_a
+      #   results_2 = explanation_result.to_a # same results, no re-query
+      #
       ##
       class QueryExplainResult
         include Enumerable
