@@ -202,7 +202,7 @@
     "AlloyDBCSQLAdmin": {
       "clients": {
         "grpc": {
-          "libraryClient": "::Google::Cloud::AlloyDB::V1beta::AlloyDBCSQLAdmin::Client",
+          "libraryClient": "::Google::Cloud::AlloyDB::V1beta::AlloyDBCloudSQLAdmin::Client",
           "rpcs": {
             "RestoreFromCloudSQL": {
               "methods": [
