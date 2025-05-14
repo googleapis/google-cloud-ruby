@@ -31,7 +31,7 @@ module Google
     module Support
       module V2
         ##
-        # A service to manage file attachment for Google Cloud support cases.
+        # A service to manage file attachments for Google Cloud support cases.
         #
         # @example Load this service and instantiate a gRPC client
         #
