@@ -181,8 +181,7 @@ module Google
         #   @return [::Google::Cloud::AlloyDB::V1beta::EncryptionConfig]
         #     Optional. The encryption config can be specified to encrypt the
         #     backups with a customer-managed encryption key (CMEK). When this field is
-        #     not specified, the backup will then use default encryption scheme to
-        #     protect the user data.
+        #     not specified, the backup will use the cluster's encryption config.
         # @!attribute [rw] location
         #   @return [::String]
         #     The location where the backup will be stored. Currently, the only supported
@@ -265,8 +264,7 @@ module Google
         #   @return [::Google::Cloud::AlloyDB::V1beta::EncryptionConfig]
         #     The encryption config can be specified to encrypt the
         #     backups with a customer-managed encryption key (CMEK). When this field is
-        #     not specified, the backup will then use default encryption scheme to
-        #     protect the user data.
+        #     not specified, the backup will use the cluster's encryption config.
         class ContinuousBackupConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -571,6 +569,10 @@ module Google
           #   @return [::Boolean]
           #     Optional. Create an instance that allows connections from Private Service
           #     Connect endpoints to the instance.
+          # @!attribute [r] service_owned_project_number
+          #   @return [::Integer]
+          #     Output only. The project number that needs to be allowlisted on the
+          #     network attachment to enable outbound connectivity.
           class PscConfig
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -820,6 +822,9 @@ module Google
         # @!attribute [r] outbound_public_ip_addresses
         #   @return [::Array<::String>]
         #     Output only. All outbound public IP addresses configured for the instance.
+        # @!attribute [r] gca_config
+        #   @return [::Google::Cloud::AlloyDB::V1beta::GCAInstanceConfig]
+        #     Output only. Configuration parameters related to Gemini Cloud Assist.
         class Instance
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -828,13 +833,18 @@ module Google
           # @!attribute [rw] cpu_count
           #   @return [::Integer]
           #     The number of CPU's in the VM instance.
+          # @!attribute [rw] machine_type
+          #   @return [::String]
+          #     Machine type of the VM instance. E.g. "n2-highmem-4",
+          #     "n2-highmem-8", "c4a-highmem-4-lssd".
+          #     cpu_count must match the number of vCPUs in the machine type.
           class MachineConfig
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
 
           # Details of a single node in the instance.
-          # Nodes in an AlloyDB instance are ephemereal, they can change during
+          # Nodes in an AlloyDB instance are ephemeral, they can change during
           # update, failover, autohealing and resize operations.
           # @!attribute [r] zone_id
           #   @return [::String]
@@ -899,7 +909,7 @@ module Google
           #     Output only. Track wait event types during query execution for an
           #     instance. This flag is turned "on" by default but tracking is enabled
           #     only after observability enabled flag is also turned on. This is
-          #     read-only flag and only modifiable by producer API.
+          #     read-only flag and only modifiable by internal API.
           # @!attribute [rw] max_query_string_length
           #   @return [::Integer]
           #     Query string length. The default value is 10k.
@@ -969,6 +979,45 @@ module Google
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
 
+          # Configuration for setting up a PSC interface to enable outbound
+          # connectivity.
+          # @!attribute [rw] network_attachment_resource
+          #   @return [::String]
+          #     The network attachment resource created in the consumer network to which
+          #     the PSC interface will be linked. This is of the format:
+          #     "projects/$\\{CONSUMER_PROJECT}/regions/$\\{REGION}/networkAttachments/$\\{NETWORK_ATTACHMENT_NAME}".
+          #     The network attachment must be in the same region as the instance.
+          class PscInterfaceConfig
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Configuration for setting up PSC service automation. Consumer projects in
+          # the configs will be allowlisted automatically for the instance.
+          # @!attribute [rw] consumer_project
+          #   @return [::String]
+          #     The consumer project to which the PSC service automation endpoint will
+          #     be created.
+          # @!attribute [rw] consumer_network
+          #   @return [::String]
+          #     The consumer network for the PSC service automation, example:
+          #     "projects/vpc-host-project/global/networks/default".
+          #     The consumer network might be hosted a different project than the
+          #     consumer project.
+          # @!attribute [r] ip_address
+          #   @return [::String]
+          #     Output only. The IP address of the PSC service automation endpoint.
+          # @!attribute [r] status
+          #   @return [::String]
+          #     Output only. The status of the PSC service automation connection.
+          # @!attribute [r] consumer_network_status
+          #   @return [::String]
+          #     Output only. The status of the service connection policy.
+          class PscAutoConnectionConfig
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
           # PscInstanceConfig contains PSC related configuration at an
           # instance level.
           # @!attribute [r] service_attachment_link
@@ -985,6 +1034,15 @@ module Google
           #   @return [::String]
           #     Output only. The DNS name of the instance for PSC connectivity.
           #     Name convention: <uid>.<uid>.<region>.alloydb-psc.goog
+          # @!attribute [rw] psc_interface_configs
+          #   @return [::Array<::Google::Cloud::AlloyDB::V1beta::Instance::PscInterfaceConfig>]
+          #     Optional. Configurations for setting up PSC interfaces attached to the
+          #     instance which are used for outbound connectivity. Only primary instances
+          #     can have PSC interface attached. Currently we only support 0 or 1 PSC
+          #     interface.
+          # @!attribute [rw] psc_auto_connections
+          #   @return [::Array<::Google::Cloud::AlloyDB::V1beta::Instance::PscAutoConnectionConfig>]
+          #     Optional. Configurations for setting up PSC service automation.
           class PscInstanceConfig
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -1358,6 +1416,16 @@ module Google
         #     Restriction on INTEGER type value.
         #
         #     Note: The following fields are mutually exclusive: `integer_restrictions`, `string_restrictions`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] recommended_string_value
+        #   @return [::String]
+        #     The recommended value for a STRING flag.
+        #
+        #     Note: The following fields are mutually exclusive: `recommended_string_value`, `recommended_integer_value`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] recommended_integer_value
+        #   @return [::Google::Protobuf::Int64Value]
+        #     The recommended value for an INTEGER flag.
+        #
+        #     Note: The following fields are mutually exclusive: `recommended_integer_value`, `recommended_string_value`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] name
         #   @return [::String]
         #     The name of the flag resource, following Google Cloud conventions, e.g.:
@@ -1382,6 +1450,9 @@ module Google
         #     restart. If a flag that requires database restart is set, the backend
         #     will automatically restart the database (making sure to satisfy any
         #     availability SLO's).
+        # @!attribute [rw] scope
+        #   @return [::Google::Cloud::AlloyDB::V1beta::SupportedDatabaseFlag::Scope]
+        #     The scope of the flag.
         class SupportedDatabaseFlag
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -1426,6 +1497,18 @@ module Google
 
             # Denotes that the flag does not accept any values.
             NONE = 4
+          end
+
+          # The scope of the flag.
+          module Scope
+            # The scope of the flag is not specified. Default is DATABASE.
+            SCOPE_UNSPECIFIED = 0
+
+            # The flag is a database flag.
+            DATABASE = 1
+
+            # The flag is a connection pool flag.
+            CONNECTION_POOL = 2
           end
         end
 
