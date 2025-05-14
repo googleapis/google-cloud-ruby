@@ -109,6 +109,9 @@ module Google
         # @!attribute [rw] node_selector
         #   @return [::Google::Cloud::Run::V2::NodeSelector]
         #     Optional. The node selector for the revision template.
+        # @!attribute [rw] gpu_zonal_redundancy_disabled
+        #   @return [::Boolean]
+        #     Optional. True if GPU zonal redundancy is disabled on this revision.
         class RevisionTemplate
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
