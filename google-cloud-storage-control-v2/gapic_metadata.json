@@ -94,6 +94,36 @@
               "methods": [
                 "list_anywhere_caches"
               ]
+            },
+            "GetProjectIntelligenceConfig": {
+              "methods": [
+                "get_project_intelligence_config"
+              ]
+            },
+            "UpdateProjectIntelligenceConfig": {
+              "methods": [
+                "update_project_intelligence_config"
+              ]
+            },
+            "GetFolderIntelligenceConfig": {
+              "methods": [
+                "get_folder_intelligence_config"
+              ]
+            },
+            "UpdateFolderIntelligenceConfig": {
+              "methods": [
+                "update_folder_intelligence_config"
+              ]
+            },
+            "GetOrganizationIntelligenceConfig": {
+              "methods": [
+                "get_organization_intelligence_config"
+              ]
+            },
+            "UpdateOrganizationIntelligenceConfig": {
+              "methods": [
+                "update_organization_intelligence_config"
+              ]
             }
           }
         }
