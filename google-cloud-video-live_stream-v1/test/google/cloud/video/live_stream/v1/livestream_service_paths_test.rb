@@ -77,6 +77,18 @@ class ::Google::Cloud::Video::LiveStream::V1::LivestreamService::ClientPathsTest
     end
   end
 
+  def test_dvr_session_path
+    grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
+      client = ::Google::Cloud::Video::LiveStream::V1::LivestreamService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      path = client.dvr_session_path project: "value0", location: "value1", channel: "value2", dvr_session: "value3"
+      assert_equal "projects/value0/locations/value1/channels/value2/dvrSessions/value3", path
+    end
+  end
+
   def test_event_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
     ::Gapic::ServiceStub.stub :new, DummyStub.new do

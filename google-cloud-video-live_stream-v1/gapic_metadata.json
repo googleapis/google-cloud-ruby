@@ -110,6 +110,31 @@
                 "delete_clip"
               ]
             },
+            "CreateDvrSession": {
+              "methods": [
+                "create_dvr_session"
+              ]
+            },
+            "ListDvrSessions": {
+              "methods": [
+                "list_dvr_sessions"
+              ]
+            },
+            "GetDvrSession": {
+              "methods": [
+                "get_dvr_session"
+              ]
+            },
+            "DeleteDvrSession": {
+              "methods": [
+                "delete_dvr_session"
+              ]
+            },
+            "UpdateDvrSession": {
+              "methods": [
+                "update_dvr_session"
+              ]
+            },
             "CreateAsset": {
               "methods": [
                 "create_asset"

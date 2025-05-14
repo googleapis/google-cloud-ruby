@@ -672,7 +672,7 @@ module Google
           # @!attribute [rw] name
           #   @return [::String]
           #     The resource name of the clip, in the following format:
-          #     `projects/{project}/locations/{location}/channels/{c}/clips/{clipId}`.
+          #     `projects/{project}/locations/{location}/channels/{channelId}/clips/{clipId}`.
           #     `{clipId}` is a user-specified resource id that conforms to the following
           #     criteria:
           #
@@ -714,6 +714,10 @@ module Google
           #   @return [::Array<::Google::Cloud::Video::LiveStream::V1::Clip::ClipManifest>]
           #     Required. A list of clip manifests. Currently only one clip manifest is
           #     allowed.
+          # @!attribute [rw] output_type
+          #   @return [::Google::Cloud::Video::LiveStream::V1::Clip::OutputType]
+          #     Optional. OutputType of the clip. If not specified, the default value is
+          #     MANIFEST.
           class Clip
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -787,6 +791,153 @@ module Google
               # The operation has failed. For additional information, see the `error`
               # field.
               FAILED = 4
+            end
+
+            # OutputType represents the output type of the clip.
+            module OutputType
+              # OutputType is not specified.
+              OUTPUT_TYPE_UNSPECIFIED = 0
+
+              # OutputType is a VOD manifest. This is the default value.
+              MANIFEST = 1
+
+              # OutputType is an MP4 file.
+              MP4 = 2
+            end
+          end
+
+          # TimeInterval represents a time interval.
+          # @!attribute [rw] start_time
+          #   @return [::Google::Protobuf::Timestamp]
+          #     Optional. The start time of the interval.
+          # @!attribute [rw] end_time
+          #   @return [::Google::Protobuf::Timestamp]
+          #     Optional. The end time of the interval.
+          class TimeInterval
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # DvrSession is a sub-resource under channel. Each DvrSession represents a DVR
+          # recording of the live stream for a specific time range.
+          # @!attribute [rw] name
+          #   @return [::String]
+          #     Identifier. The resource name of the DVR session, in the following format:
+          #     `projects/{project}/locations/{location}/channels/{channelId}/dvrSessions/{dvrSessionId}`.
+          #     `{dvrSessionId}` is a user-specified resource id that conforms to the
+          #     following criteria:
+          #
+          #     1. 1 character minimum, 63 characters maximum
+          #     2. Only contains letters, digits, underscores, and hyphens
+          # @!attribute [r] create_time
+          #   @return [::Google::Protobuf::Timestamp]
+          #     Output only. The creation time.
+          # @!attribute [r] update_time
+          #   @return [::Google::Protobuf::Timestamp]
+          #     Output only. The update time.
+          # @!attribute [rw] labels
+          #   @return [::Google::Protobuf::Map{::String => ::String}]
+          #     Optional. User-defined key/value metadata.
+          # @!attribute [r] state
+          #   @return [::Google::Cloud::Video::LiveStream::V1::DvrSession::State]
+          #     Output only. The state of the clip.
+          # @!attribute [r] error
+          #   @return [::Google::Rpc::Status]
+          #     Output only. An error object that describes the reason for the failure.
+          #     This property only presents when `state` is `FAILED`.
+          # @!attribute [rw] dvr_manifests
+          #   @return [::Array<::Google::Cloud::Video::LiveStream::V1::DvrSession::DvrManifest>]
+          #     Required. A list of DVR manifests. Currently only one DVR manifest is
+          #     allowed.
+          # @!attribute [rw] dvr_windows
+          #   @return [::Array<::Google::Cloud::Video::LiveStream::V1::DvrSession::DvrWindow>]
+          #     Required. The specified ranges of segments to generate a DVR recording.
+          class DvrSession
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+
+            # DvrManifest identifies a source manifest and specifies a file name for the
+            # generated DVR manifest.
+            # @!attribute [rw] manifest_key
+            #   @return [::String]
+            #     Required. A unique key that identifies a manifest config in the parent
+            #     channel. This key is the same as `channel.manifests.key` for the selected
+            #     manifest.
+            # @!attribute [r] output_uri
+            #   @return [::String]
+            #     Output only. The output URI of the DVR manifest. The DVR output will be
+            #     placed in a directory named `dvr/dvrSessionId/` under the parent
+            #     channel's output uri. Format:
+            #     \\{channel.output.uri}/dvr/\\{dvrSessionId}/\\{channel.manifests.fileName}
+            #     Example: gs://my-bucket/outputs/dvr/my-dvr-session/main.m3u8
+            class DvrManifest
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
+
+            # DvrWindow represents a DVR window.
+            # @!attribute [rw] time_interval
+            #   @return [::Google::Cloud::Video::LiveStream::V1::TimeInterval]
+            #     A time interval in the form of a tuple of Unix epoch time.
+            class DvrWindow
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
+
+            # @!attribute [rw] key
+            #   @return [::String]
+            # @!attribute [rw] value
+            #   @return [::String]
+            class LabelsEntry
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
+
+            # State of the DVR session.
+            module State
+              # State is not specified.
+              STATE_UNSPECIFIED = 0
+
+              # The operation is pending to be picked up by the server.
+              PENDING = 1
+
+              # The session is being updated.
+              UPDATING = 2
+
+              # The session is scheduled and waiting for the start time.
+              SCHEDULED = 3
+
+              # The session is currently in progress and the outputs are available in the
+              # specified Cloud Storage bucket. For additional information, see the
+              # `dvr_manifests.output_uri` field.
+              LIVE = 4
+
+              # Outputs are available in the specified Cloud Storage bucket. For
+              # additional information, see the `dvr_manifests.output_uri` field.
+              FINISHED = 5
+
+              # The operation has failed. For additional information, see the `error`
+              # field.
+              FAILED = 6
+
+              # The session is being deleted.
+              DELETING = 7
+
+              # The session is being post processed.
+              POST_PROCESSING = 8
+
+              # The session is in cooldown. The cooldown period lasts for 60 seconds.
+              # When the DVR session is updated by the user to have a new end time that
+              # is likely already in the past, the DVR manifest will end as soon as
+              # possible and the DVR session will move to this state. This is done to
+              # prevent the players to receive a manifest update that removes a segment
+              # that has already been played. After the cooldown period ends, a new
+              # manifest is generated that honors the new end time.
+              COOLDOWN = 9
+
+              # The session is being stopped. The session will move to STOPPING state, if
+              # the parent channel is updated.
+              STOPPING = 10
             end
           end
 
