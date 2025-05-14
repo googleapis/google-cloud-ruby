@@ -1,0 +1,133 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "ruby",
+  "protoPackage": "google.storage.control.v2",
+  "libraryPackage": "::Google::Cloud::Storage::Control::V2",
+  "services": {
+    "StorageControl": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::Storage::Control::V2::StorageControl::Client",
+          "rpcs": {
+            "CreateFolder": {
+              "methods": [
+                "create_folder"
+              ]
+            },
+            "DeleteFolder": {
+              "methods": [
+                "delete_folder"
+              ]
+            },
+            "GetFolder": {
+              "methods": [
+                "get_folder"
+              ]
+            },
+            "ListFolders": {
+              "methods": [
+                "list_folders"
+              ]
+            },
+            "RenameFolder": {
+              "methods": [
+                "rename_folder"
+              ]
+            },
+            "GetStorageLayout": {
+              "methods": [
+                "get_storage_layout"
+              ]
+            },
+            "CreateManagedFolder": {
+              "methods": [
+                "create_managed_folder"
+              ]
+            },
+            "DeleteManagedFolder": {
+              "methods": [
+                "delete_managed_folder"
+              ]
+            },
+            "GetManagedFolder": {
+              "methods": [
+                "get_managed_folder"
+              ]
+            },
+            "ListManagedFolders": {
+              "methods": [
+                "list_managed_folders"
+              ]
+            },
+            "CreateAnywhereCache": {
+              "methods": [
+                "create_anywhere_cache"
+              ]
+            },
+            "UpdateAnywhereCache": {
+              "methods": [
+                "update_anywhere_cache"
+              ]
+            },
+            "DisableAnywhereCache": {
+              "methods": [
+                "disable_anywhere_cache"
+              ]
+            },
+            "PauseAnywhereCache": {
+              "methods": [
+                "pause_anywhere_cache"
+              ]
+            },
+            "ResumeAnywhereCache": {
+              "methods": [
+                "resume_anywhere_cache"
+              ]
+            },
+            "GetAnywhereCache": {
+              "methods": [
+                "get_anywhere_cache"
+              ]
+            },
+            "ListAnywhereCaches": {
+              "methods": [
+                "list_anywhere_caches"
+              ]
+            },
+            "GetProjectIntelligenceConfig": {
+              "methods": [
+                "get_project_intelligence_config"
+              ]
+            },
+            "UpdateProjectIntelligenceConfig": {
+              "methods": [
+                "update_project_intelligence_config"
+              ]
+            },
+            "GetFolderIntelligenceConfig": {
+              "methods": [
+                "get_folder_intelligence_config"
+              ]
+            },
+            "UpdateFolderIntelligenceConfig": {
+              "methods": [
+                "update_folder_intelligence_config"
+              ]
+            },
+            "GetOrganizationIntelligenceConfig": {
+              "methods": [
+                "get_organization_intelligence_config"
+              ]
+            },
+            "UpdateOrganizationIntelligenceConfig": {
+              "methods": [
+                "update_organization_intelligence_config"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}
