@@ -104,6 +104,12 @@ module Google
         #   @return [::String]
         #     Output only. Human-readable description of why the BackupPlan is in the
         #     current rpo_risk_level and action items if any.
+        # @!attribute [r] backup_channel
+        #   @return [::String]
+        #     Output only. The fully qualified name of the BackupChannel to be used to
+        #     create a backup. This field is set only if the cluster being backed up is
+        #     in a different project.
+        #     `projects/*/locations/*/backupChannels/*`
         # @!attribute [r] last_successful_backup_time
         #   @return [::Google::Protobuf::Timestamp]
         #     Output only. Completion time of the last successful Backup. This is sourced

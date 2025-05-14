@@ -32,9 +32,7 @@ module Google
         # @!attribute [rw] destination_project
         #   @return [::String]
         #     Required. Immutable. The project into which the backups will be restored.
-        #     The format is `projects/{project}`.
-        #     Currently, \\{project} can only be the project number. Support for project
-        #     IDs will be added in the future.
+        #     The format is `projects/{projectId}` or `projects/{projectNumber}`.
         # @!attribute [r] uid
         #   @return [::String]
         #     Output only. Server generated global unique identifier of
