@@ -29,7 +29,7 @@ module Google
             # configuration, encompassing return policies for both ads and free listings
             # ## programs. This API defines the following resource model:
             #
-            # [OnlineReturnPolicy][google.shopping.merchant.accounts.v1.OnlineReturnPolicy]
+            # [OnlineReturnPolicy](/merchant/api/reference/rpc/google.shopping.merchant.accounts.v1beta#google.shopping.merchant.accounts.v1beta.OnlineReturnPolicy)
             class Service
 
               include ::GRPC::GenericService
@@ -38,10 +38,16 @@ module Google
               self.unmarshal_class_method = :decode
               self.service_name = 'google.shopping.merchant.accounts.v1beta.OnlineReturnPolicyService'
 
-              # Gets an existing return policy for a given business.
+              # Gets an existing return policy for a given merchant.
               rpc :GetOnlineReturnPolicy, ::Google::Shopping::Merchant::Accounts::V1beta::GetOnlineReturnPolicyRequest, ::Google::Shopping::Merchant::Accounts::V1beta::OnlineReturnPolicy
-              # Lists all existing return policies for a given business.
+              # Lists all existing return policies for a given merchant.
               rpc :ListOnlineReturnPolicies, ::Google::Shopping::Merchant::Accounts::V1beta::ListOnlineReturnPoliciesRequest, ::Google::Shopping::Merchant::Accounts::V1beta::ListOnlineReturnPoliciesResponse
+              # Creates a new return policy for a given merchant.
+              rpc :CreateOnlineReturnPolicy, ::Google::Shopping::Merchant::Accounts::V1beta::CreateOnlineReturnPolicyRequest, ::Google::Shopping::Merchant::Accounts::V1beta::OnlineReturnPolicy
+              # Updates an existing return policy for a given merchant.
+              rpc :UpdateOnlineReturnPolicy, ::Google::Shopping::Merchant::Accounts::V1beta::UpdateOnlineReturnPolicyRequest, ::Google::Shopping::Merchant::Accounts::V1beta::OnlineReturnPolicy
+              # Deletes an existing return policy for a given merchant.
+              rpc :DeleteOnlineReturnPolicy, ::Google::Shopping::Merchant::Accounts::V1beta::DeleteOnlineReturnPolicyRequest, ::Google::Protobuf::Empty
             end
 
             Stub = Service.rpc_stub_class

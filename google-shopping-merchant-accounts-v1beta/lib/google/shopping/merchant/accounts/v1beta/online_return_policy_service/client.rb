@@ -32,7 +32,7 @@ module Google
             # configuration, encompassing return policies for both ads and free listings
             # ## programs. This API defines the following resource model:
             #
-            # [OnlineReturnPolicy][google.shopping.merchant.accounts.v1.OnlineReturnPolicy]
+            # [OnlineReturnPolicy](/merchant/api/reference/rpc/google.shopping.merchant.accounts.v1beta#google.shopping.merchant.accounts.v1beta.OnlineReturnPolicy)
             #
             class Client
               # @private
@@ -194,7 +194,7 @@ module Google
               # Service calls
 
               ##
-              # Gets an existing return policy for a given business.
+              # Gets an existing return policy for a given merchant.
               #
               # @overload get_online_return_policy(request, options = nil)
               #   Pass arguments to `get_online_return_policy` via a request object, either of type
@@ -280,7 +280,7 @@ module Google
               end
 
               ##
-              # Lists all existing return policies for a given business.
+              # Lists all existing return policies for a given merchant.
               #
               # @overload list_online_return_policies(request, options = nil)
               #   Pass arguments to `list_online_return_policies` via a request object, either of type
@@ -298,7 +298,7 @@ module Google
               #   the default parameter values, pass an empty Hash as a request object (see above).
               #
               #   @param parent [::String]
-              #     Required. The business account for which to list return policies.
+              #     Required. The merchant account for which to list return policies.
               #     Format: `accounts/{account}`
               #   @param page_size [::Integer]
               #     Optional. The maximum number of `OnlineReturnPolicy` resources to return.
@@ -381,6 +381,266 @@ module Google
                   response = ::Gapic::PagedEnumerable.new @online_return_policy_service_stub, :list_online_return_policies, request, response, operation, options
                   yield response, operation if block_given?
                   throw :response, response
+                end
+              rescue ::GRPC::BadStatus => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Creates a new return policy for a given merchant.
+              #
+              # @overload create_online_return_policy(request, options = nil)
+              #   Pass arguments to `create_online_return_policy` via a request object, either of type
+              #   {::Google::Shopping::Merchant::Accounts::V1beta::CreateOnlineReturnPolicyRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Shopping::Merchant::Accounts::V1beta::CreateOnlineReturnPolicyRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+              #
+              # @overload create_online_return_policy(parent: nil, online_return_policy: nil)
+              #   Pass arguments to `create_online_return_policy` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param parent [::String]
+              #     Required. The merchant account for which to create a return policy.
+              #     Format: `accounts/{account}`
+              #   @param online_return_policy [::Google::Shopping::Merchant::Accounts::V1beta::OnlineReturnPolicy, ::Hash]
+              #     Required. The return policy to create.
+              #
+              # @yield [response, operation] Access the result along with the RPC operation
+              # @yieldparam response [::Google::Shopping::Merchant::Accounts::V1beta::OnlineReturnPolicy]
+              # @yieldparam operation [::GRPC::ActiveCall::Operation]
+              #
+              # @return [::Google::Shopping::Merchant::Accounts::V1beta::OnlineReturnPolicy]
+              #
+              # @raise [::Google::Cloud::Error] if the RPC is aborted.
+              #
+              # @example Basic example
+              #   require "google/shopping/merchant/accounts/v1beta"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Shopping::Merchant::Accounts::V1beta::OnlineReturnPolicyService::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Shopping::Merchant::Accounts::V1beta::CreateOnlineReturnPolicyRequest.new
+              #
+              #   # Call the create_online_return_policy method.
+              #   result = client.create_online_return_policy request
+              #
+              #   # The returned object is of type Google::Shopping::Merchant::Accounts::V1beta::OnlineReturnPolicy.
+              #   p result
+              #
+              def create_online_return_policy request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Shopping::Merchant::Accounts::V1beta::CreateOnlineReturnPolicyRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                metadata = @config.rpcs.create_online_return_policy.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Shopping::Merchant::Accounts::V1beta::VERSION
+                metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                header_params = {}
+                if request.parent
+                  header_params["parent"] = request.parent
+                end
+
+                request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+                metadata[:"x-goog-request-params"] ||= request_params_header
+
+                options.apply_defaults timeout:      @config.rpcs.create_online_return_policy.timeout,
+                                       metadata:     metadata,
+                                       retry_policy: @config.rpcs.create_online_return_policy.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @online_return_policy_service_stub.call_rpc :create_online_return_policy, request, options: options do |response, operation|
+                  yield response, operation if block_given?
+                end
+              rescue ::GRPC::BadStatus => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Updates an existing return policy for a given merchant.
+              #
+              # @overload update_online_return_policy(request, options = nil)
+              #   Pass arguments to `update_online_return_policy` via a request object, either of type
+              #   {::Google::Shopping::Merchant::Accounts::V1beta::UpdateOnlineReturnPolicyRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Shopping::Merchant::Accounts::V1beta::UpdateOnlineReturnPolicyRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+              #
+              # @overload update_online_return_policy(online_return_policy: nil, update_mask: nil)
+              #   Pass arguments to `update_online_return_policy` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param online_return_policy [::Google::Shopping::Merchant::Accounts::V1beta::OnlineReturnPolicy, ::Hash]
+              #     Required. The return policy to update.
+              #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
+              #
+              # @yield [response, operation] Access the result along with the RPC operation
+              # @yieldparam response [::Google::Shopping::Merchant::Accounts::V1beta::OnlineReturnPolicy]
+              # @yieldparam operation [::GRPC::ActiveCall::Operation]
+              #
+              # @return [::Google::Shopping::Merchant::Accounts::V1beta::OnlineReturnPolicy]
+              #
+              # @raise [::Google::Cloud::Error] if the RPC is aborted.
+              #
+              # @example Basic example
+              #   require "google/shopping/merchant/accounts/v1beta"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Shopping::Merchant::Accounts::V1beta::OnlineReturnPolicyService::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Shopping::Merchant::Accounts::V1beta::UpdateOnlineReturnPolicyRequest.new
+              #
+              #   # Call the update_online_return_policy method.
+              #   result = client.update_online_return_policy request
+              #
+              #   # The returned object is of type Google::Shopping::Merchant::Accounts::V1beta::OnlineReturnPolicy.
+              #   p result
+              #
+              def update_online_return_policy request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Shopping::Merchant::Accounts::V1beta::UpdateOnlineReturnPolicyRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                metadata = @config.rpcs.update_online_return_policy.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Shopping::Merchant::Accounts::V1beta::VERSION
+                metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                header_params = {}
+                if request.online_return_policy&.name
+                  header_params["online_return_policy.name"] = request.online_return_policy.name
+                end
+
+                request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+                metadata[:"x-goog-request-params"] ||= request_params_header
+
+                options.apply_defaults timeout:      @config.rpcs.update_online_return_policy.timeout,
+                                       metadata:     metadata,
+                                       retry_policy: @config.rpcs.update_online_return_policy.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @online_return_policy_service_stub.call_rpc :update_online_return_policy, request, options: options do |response, operation|
+                  yield response, operation if block_given?
+                end
+              rescue ::GRPC::BadStatus => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Deletes an existing return policy for a given merchant.
+              #
+              # @overload delete_online_return_policy(request, options = nil)
+              #   Pass arguments to `delete_online_return_policy` via a request object, either of type
+              #   {::Google::Shopping::Merchant::Accounts::V1beta::DeleteOnlineReturnPolicyRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Shopping::Merchant::Accounts::V1beta::DeleteOnlineReturnPolicyRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+              #
+              # @overload delete_online_return_policy(name: nil)
+              #   Pass arguments to `delete_online_return_policy` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param name [::String]
+              #     Required. The name of the return policy to delete.
+              #     Format: `accounts/{account}/onlineReturnPolicies/{return_policy}`
+              #
+              # @yield [response, operation] Access the result along with the RPC operation
+              # @yieldparam response [::Google::Protobuf::Empty]
+              # @yieldparam operation [::GRPC::ActiveCall::Operation]
+              #
+              # @return [::Google::Protobuf::Empty]
+              #
+              # @raise [::Google::Cloud::Error] if the RPC is aborted.
+              #
+              # @example Basic example
+              #   require "google/shopping/merchant/accounts/v1beta"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Shopping::Merchant::Accounts::V1beta::OnlineReturnPolicyService::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Shopping::Merchant::Accounts::V1beta::DeleteOnlineReturnPolicyRequest.new
+              #
+              #   # Call the delete_online_return_policy method.
+              #   result = client.delete_online_return_policy request
+              #
+              #   # The returned object is of type Google::Protobuf::Empty.
+              #   p result
+              #
+              def delete_online_return_policy request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Shopping::Merchant::Accounts::V1beta::DeleteOnlineReturnPolicyRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                metadata = @config.rpcs.delete_online_return_policy.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Shopping::Merchant::Accounts::V1beta::VERSION
+                metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                header_params = {}
+                if request.name
+                  header_params["name"] = request.name
+                end
+
+                request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+                metadata[:"x-goog-request-params"] ||= request_params_header
+
+                options.apply_defaults timeout:      @config.rpcs.delete_online_return_policy.timeout,
+                                       metadata:     metadata,
+                                       retry_policy: @config.rpcs.delete_online_return_policy.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @online_return_policy_service_stub.call_rpc :delete_online_return_policy, request, options: options do |response, operation|
+                  yield response, operation if block_given?
                 end
               rescue ::GRPC::BadStatus => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -562,6 +822,21 @@ module Google
                   # @return [::Gapic::Config::Method]
                   #
                   attr_reader :list_online_return_policies
+                  ##
+                  # RPC-specific configuration for `create_online_return_policy`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :create_online_return_policy
+                  ##
+                  # RPC-specific configuration for `update_online_return_policy`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :update_online_return_policy
+                  ##
+                  # RPC-specific configuration for `delete_online_return_policy`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :delete_online_return_policy
 
                   # @private
                   def initialize parent_rpcs = nil
@@ -569,6 +844,12 @@ module Google
                     @get_online_return_policy = ::Gapic::Config::Method.new get_online_return_policy_config
                     list_online_return_policies_config = parent_rpcs.list_online_return_policies if parent_rpcs.respond_to? :list_online_return_policies
                     @list_online_return_policies = ::Gapic::Config::Method.new list_online_return_policies_config
+                    create_online_return_policy_config = parent_rpcs.create_online_return_policy if parent_rpcs.respond_to? :create_online_return_policy
+                    @create_online_return_policy = ::Gapic::Config::Method.new create_online_return_policy_config
+                    update_online_return_policy_config = parent_rpcs.update_online_return_policy if parent_rpcs.respond_to? :update_online_return_policy
+                    @update_online_return_policy = ::Gapic::Config::Method.new update_online_return_policy_config
+                    delete_online_return_policy_config = parent_rpcs.delete_online_return_policy if parent_rpcs.respond_to? :delete_online_return_policy
+                    @delete_online_return_policy = ::Gapic::Config::Method.new delete_online_return_policy_config
 
                     yield self if block_given?
                   end

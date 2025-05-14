@@ -35,7 +35,7 @@ module Google
           # Request message for the `ListOnlineReturnPolicies` method.
           # @!attribute [rw] parent
           #   @return [::String]
-          #     Required. The business account for which to list return policies.
+          #     Required. The merchant account for which to list return policies.
           #     Format: `accounts/{account}`
           # @!attribute [rw] page_size
           #   @return [::Integer]
@@ -55,6 +55,40 @@ module Google
           #     {::Google::Shopping::Merchant::Accounts::V1beta::ListOnlineReturnPoliciesResponse#next_page_token nextPageToken}
           #     in the response to the previous request.
           class ListOnlineReturnPoliciesRequest
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Request message for the `CreateOnlineReturnPolicy` method.
+          # @!attribute [rw] parent
+          #   @return [::String]
+          #     Required. The merchant account for which to create a return policy.
+          #     Format: `accounts/{account}`
+          # @!attribute [rw] online_return_policy
+          #   @return [::Google::Shopping::Merchant::Accounts::V1beta::OnlineReturnPolicy]
+          #     Required. The return policy to create.
+          class CreateOnlineReturnPolicyRequest
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Request message for the `UpdateOnlineReturnPolicy` method.
+          # @!attribute [rw] online_return_policy
+          #   @return [::Google::Shopping::Merchant::Accounts::V1beta::OnlineReturnPolicy]
+          #     Required. The return policy to update.
+          # @!attribute [rw] update_mask
+          #   @return [::Google::Protobuf::FieldMask]
+          class UpdateOnlineReturnPolicyRequest
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Request message for the `DeleteOnlineReturnPolicy` method.
+          # @!attribute [rw] name
+          #   @return [::String]
+          #     Required. The name of the return policy to delete.
+          #     Format: `accounts/{account}/onlineReturnPolicies/{return_policy}`
+          class DeleteOnlineReturnPolicyRequest
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
@@ -98,27 +132,28 @@ module Google
           #     The values must be a valid 2 letter ISO 3166 code.
           # @!attribute [rw] policy
           #   @return [::Google::Shopping::Merchant::Accounts::V1beta::OnlineReturnPolicy::Policy]
-          #     The return policy.
+          #     Optional. The return policy.
           # @!attribute [rw] seasonal_overrides
           #   @return [::Array<::Google::Shopping::Merchant::Accounts::V1beta::OnlineReturnPolicy::SeasonalOverride>]
           #     Optional. Overrides to the general policy for orders placed during a
           #     specific set of time intervals.
           # @!attribute [rw] restocking_fee
           #   @return [::Google::Shopping::Merchant::Accounts::V1beta::OnlineReturnPolicy::RestockingFee]
-          #     The restocking fee that applies to all return reason categories. This would
-          #     be treated as a free restocking fee if the value is not set.
+          #     Optional. The restocking fee that applies to all return reason categories.
+          #     This would be treated as a free restocking fee if the value is not set.
           # @!attribute [rw] return_methods
           #   @return [::Array<::Google::Shopping::Merchant::Accounts::V1beta::OnlineReturnPolicy::ReturnMethod>]
-          #     The return methods of how customers can return an item. This value is
-          #     required to not be empty unless the type of return policy is noReturns.
+          #     Optional. The return methods of how customers can return an item. This
+          #     value is required to not be empty unless the type of return policy is
+          #     noReturns.
           # @!attribute [rw] item_conditions
           #   @return [::Array<::Google::Shopping::Merchant::Accounts::V1beta::OnlineReturnPolicy::ItemCondition>]
-          #     The item conditions accepted for returns must not be empty unless the type
-          #     of return policy is 'noReturns'.
+          #     Optional. The item conditions accepted for returns must not be empty unless
+          #     the type of return policy is 'noReturns'.
           # @!attribute [rw] return_shipping_fee
           #   @return [::Google::Shopping::Merchant::Accounts::V1beta::OnlineReturnPolicy::ReturnShippingFee]
-          #     The return shipping fee. Should be set only when customer need to download
-          #     and print the return label.
+          #     Optional. The return shipping fee. Should be set only when customer need to
+          #     download and print the return label.
           # @!attribute [rw] return_policy_uri
           #   @return [::String]
           #     Required. The return policy uri. This can used by Google to do a sanity
@@ -135,6 +170,10 @@ module Google
           #   @return [::Boolean]
           #     This field specifies if merchant allows customers to exchange products,
           #     this field is required.
+          # @!attribute [rw] return_label_source
+          #   @return [::Google::Shopping::Merchant::Accounts::V1beta::OnlineReturnPolicy::ReturnLabelSource]
+          #     The field specifies the return label source. This field is required when
+          #     return method is BY_MAIL.
           class OnlineReturnPolicy
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -264,6 +303,21 @@ module Google
 
               # Used.
               USED = 2
+            end
+
+            # The available return label sources.
+            module ReturnLabelSource
+              # Default value. This value is unused.
+              RETURN_LABEL_SOURCE_UNSPECIFIED = 0
+
+              # Download and print.
+              DOWNLOAD_AND_PRINT = 1
+
+              # Label include in the package.
+              IN_THE_PACKAGE = 2
+
+              # Customer to provide.
+              CUSTOMER_RESPONSIBILITY = 3
             end
           end
         end

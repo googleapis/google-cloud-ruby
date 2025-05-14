@@ -189,6 +189,184 @@ class ::Google::Shopping::Merchant::Accounts::V1beta::OnlineReturnPolicyService:
     end
   end
 
+  def test_create_online_return_policy
+    # Create GRPC objects.
+    grpc_response = ::Google::Shopping::Merchant::Accounts::V1beta::OnlineReturnPolicy.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    online_return_policy = {}
+
+    create_online_return_policy_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :create_online_return_policy, name
+      assert_kind_of ::Google::Shopping::Merchant::Accounts::V1beta::CreateOnlineReturnPolicyRequest, request
+      assert_equal "hello world", request["parent"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Shopping::Merchant::Accounts::V1beta::OnlineReturnPolicy), request["online_return_policy"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, create_online_return_policy_client_stub do
+      # Create client
+      client = ::Google::Shopping::Merchant::Accounts::V1beta::OnlineReturnPolicyService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.create_online_return_policy({ parent: parent, online_return_policy: online_return_policy }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.create_online_return_policy parent: parent, online_return_policy: online_return_policy do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.create_online_return_policy ::Google::Shopping::Merchant::Accounts::V1beta::CreateOnlineReturnPolicyRequest.new(parent: parent, online_return_policy: online_return_policy) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.create_online_return_policy({ parent: parent, online_return_policy: online_return_policy }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.create_online_return_policy(::Google::Shopping::Merchant::Accounts::V1beta::CreateOnlineReturnPolicyRequest.new(parent: parent, online_return_policy: online_return_policy), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, create_online_return_policy_client_stub.call_rpc_count
+    end
+  end
+
+  def test_update_online_return_policy
+    # Create GRPC objects.
+    grpc_response = ::Google::Shopping::Merchant::Accounts::V1beta::OnlineReturnPolicy.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    online_return_policy = {}
+    update_mask = {}
+
+    update_online_return_policy_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :update_online_return_policy, name
+      assert_kind_of ::Google::Shopping::Merchant::Accounts::V1beta::UpdateOnlineReturnPolicyRequest, request
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Shopping::Merchant::Accounts::V1beta::OnlineReturnPolicy), request["online_return_policy"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request["update_mask"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, update_online_return_policy_client_stub do
+      # Create client
+      client = ::Google::Shopping::Merchant::Accounts::V1beta::OnlineReturnPolicyService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.update_online_return_policy({ online_return_policy: online_return_policy, update_mask: update_mask }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.update_online_return_policy online_return_policy: online_return_policy, update_mask: update_mask do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.update_online_return_policy ::Google::Shopping::Merchant::Accounts::V1beta::UpdateOnlineReturnPolicyRequest.new(online_return_policy: online_return_policy, update_mask: update_mask) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.update_online_return_policy({ online_return_policy: online_return_policy, update_mask: update_mask }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.update_online_return_policy(::Google::Shopping::Merchant::Accounts::V1beta::UpdateOnlineReturnPolicyRequest.new(online_return_policy: online_return_policy, update_mask: update_mask), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, update_online_return_policy_client_stub.call_rpc_count
+    end
+  end
+
+  def test_delete_online_return_policy
+    # Create GRPC objects.
+    grpc_response = ::Google::Protobuf::Empty.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    delete_online_return_policy_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :delete_online_return_policy, name
+      assert_kind_of ::Google::Shopping::Merchant::Accounts::V1beta::DeleteOnlineReturnPolicyRequest, request
+      assert_equal "hello world", request["name"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, delete_online_return_policy_client_stub do
+      # Create client
+      client = ::Google::Shopping::Merchant::Accounts::V1beta::OnlineReturnPolicyService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.delete_online_return_policy({ name: name }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.delete_online_return_policy name: name do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.delete_online_return_policy ::Google::Shopping::Merchant::Accounts::V1beta::DeleteOnlineReturnPolicyRequest.new(name: name) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.delete_online_return_policy({ name: name }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.delete_online_return_policy(::Google::Shopping::Merchant::Accounts::V1beta::DeleteOnlineReturnPolicyRequest.new(name: name), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, delete_online_return_policy_client_stub.call_rpc_count
+    end
+  end
+
   def test_configure
     grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
 
