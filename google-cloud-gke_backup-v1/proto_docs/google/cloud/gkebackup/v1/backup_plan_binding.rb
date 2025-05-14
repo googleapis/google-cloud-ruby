@@ -95,9 +95,87 @@ module Google
           #     Output only. The fully qualified name of the last successful Backup
           #     created under this BackupPlan.
           #     `projects/*/locations/*/backupPlans/*/backups/*`
+          # @!attribute [r] backup_config_details
+          #   @return [::Google::Cloud::GkeBackup::V1::BackupPlanBinding::BackupPlanDetails::BackupConfigDetails]
+          #     Output only. Contains details about the BackupConfig of Backups created
+          #     via this BackupPlan.
+          # @!attribute [r] retention_policy_details
+          #   @return [::Google::Cloud::GkeBackup::V1::BackupPlanBinding::BackupPlanDetails::RetentionPolicyDetails]
+          #     Output only. Contains details about the RetentionPolicy of Backups
+          #     created via this BackupPlan.
           class BackupPlanDetails
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
+
+            # BackupConfigDetails defines the configuration of Backups created via this
+            # BackupPlan.
+            # @!attribute [r] all_namespaces
+            #   @return [::Boolean]
+            #     Output only. If True, include all namespaced resources
+            #
+            #     Note: The following fields are mutually exclusive: `all_namespaces`, `selected_namespaces`, `selected_applications`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+            # @!attribute [r] selected_namespaces
+            #   @return [::Google::Cloud::GkeBackup::V1::Namespaces]
+            #     Output only. If set, include just the resources in the listed
+            #     namespaces.
+            #
+            #     Note: The following fields are mutually exclusive: `selected_namespaces`, `all_namespaces`, `selected_applications`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+            # @!attribute [r] selected_applications
+            #   @return [::Google::Cloud::GkeBackup::V1::NamespacedNames]
+            #     Output only. If set, include just the resources referenced by the
+            #     listed ProtectedApplications.
+            #
+            #     Note: The following fields are mutually exclusive: `selected_applications`, `all_namespaces`, `selected_namespaces`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+            # @!attribute [r] include_volume_data
+            #   @return [::Boolean]
+            #     Output only. This flag specifies whether volume data should be backed
+            #     up when PVCs are included in the scope of a Backup.
+            #
+            #     Default: False
+            # @!attribute [r] include_secrets
+            #   @return [::Boolean]
+            #     Output only. This flag specifies whether Kubernetes Secret resources
+            #     should be included when they fall into the scope of Backups.
+            #
+            #     Default: False
+            # @!attribute [r] encryption_key
+            #   @return [::Google::Cloud::GkeBackup::V1::EncryptionKey]
+            #     Output only. This defines a customer managed encryption key that will
+            #     be used to encrypt the "config" portion (the Kubernetes resources) of
+            #     Backups created via this plan.
+            #
+            #     Default (empty): Config backup artifacts will not be encrypted.
+            class BackupConfigDetails
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
+
+            # RetentionPolicyDetails defines a Backup retention policy for a
+            # BackupPlan.
+            # @!attribute [rw] backup_delete_lock_days
+            #   @return [::Integer]
+            #     Optional. Minimum age for Backups created via this BackupPlan (in
+            #     days). This field MUST be an integer value between 0-90 (inclusive). A
+            #     Backup created under this BackupPlan will NOT be deletable until it
+            #     reaches Backup's (create_time + backup_delete_lock_days).
+            #     Updating this field of a BackupPlan does NOT affect existing Backups
+            #     under it. Backups created AFTER a successful update will inherit
+            #     the new value.
+            #
+            #     Default: 0 (no delete blocking)
+            # @!attribute [rw] backup_retain_days
+            #   @return [::Integer]
+            #     Optional. The default maximum age of a Backup created via this
+            #     BackupPlan. This field MUST be an integer value >= 0 and <= 365. If
+            #     specified, a Backup created under this BackupPlan will be automatically
+            #     deleted after its age reaches (create_time + backup_retain_days). If
+            #     not specified, Backups created under this BackupPlan will NOT be
+            #     subject to automatic deletion.
+            #     Default: 0 (no automatic deletion)
+            class RetentionPolicyDetails
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
 
             # State
             module State
