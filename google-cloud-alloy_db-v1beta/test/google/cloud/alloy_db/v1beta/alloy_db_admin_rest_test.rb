@@ -364,6 +364,64 @@ class ::Google::Cloud::AlloyDB::V1beta::AlloyDBAdmin::Rest::ClientTest < Minites
     end
   end
 
+  def test_import_cluster
+    # Create test objects.
+    client_result = ::Google::Longrunning::Operation.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    sql_import_options = {}
+    name = "hello world"
+    gcs_uri = "hello world"
+    database = "hello world"
+    user = "hello world"
+
+    import_cluster_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::AlloyDB::V1beta::AlloyDBAdmin::Rest::ServiceStub.stub :transcode_import_cluster_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, import_cluster_client_stub do
+        # Create client
+        client = ::Google::Cloud::AlloyDB::V1beta::AlloyDBAdmin::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.import_cluster({ sql_import_options: sql_import_options, name: name, gcs_uri: gcs_uri, database: database, user: user }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.import_cluster sql_import_options: sql_import_options, name: name, gcs_uri: gcs_uri, database: database, user: user do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.import_cluster ::Google::Cloud::AlloyDB::V1beta::ImportClusterRequest.new(sql_import_options: sql_import_options, name: name, gcs_uri: gcs_uri, database: database, user: user) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.import_cluster({ sql_import_options: sql_import_options, name: name, gcs_uri: gcs_uri, database: database, user: user }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.import_cluster(::Google::Cloud::AlloyDB::V1beta::ImportClusterRequest.new(sql_import_options: sql_import_options, name: name, gcs_uri: gcs_uri, database: database, user: user), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, import_cluster_client_stub.call_count
+      end
+    end
+  end
+
   def test_upgrade_cluster
     # Create test objects.
     client_result = ::Google::Longrunning::Operation.new
@@ -1634,6 +1692,7 @@ class ::Google::Cloud::AlloyDB::V1beta::AlloyDBAdmin::Rest::ClientTest < Minites
     parent = "hello world"
     page_size = 42
     page_token = "hello world"
+    scope = :SCOPE_UNSPECIFIED
 
     list_supported_database_flags_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
@@ -1649,27 +1708,27 @@ class ::Google::Cloud::AlloyDB::V1beta::AlloyDBAdmin::Rest::ClientTest < Minites
         end
 
         # Use hash object
-        client.list_supported_database_flags({ parent: parent, page_size: page_size, page_token: page_token }) do |_result, response|
+        client.list_supported_database_flags({ parent: parent, page_size: page_size, page_token: page_token, scope: scope }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_supported_database_flags parent: parent, page_size: page_size, page_token: page_token do |_result, response|
+        client.list_supported_database_flags parent: parent, page_size: page_size, page_token: page_token, scope: scope do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_supported_database_flags ::Google::Cloud::AlloyDB::V1beta::ListSupportedDatabaseFlagsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |_result, response|
+        client.list_supported_database_flags ::Google::Cloud::AlloyDB::V1beta::ListSupportedDatabaseFlagsRequest.new(parent: parent, page_size: page_size, page_token: page_token, scope: scope) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_supported_database_flags({ parent: parent, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
+        client.list_supported_database_flags({ parent: parent, page_size: page_size, page_token: page_token, scope: scope }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_supported_database_flags(::Google::Cloud::AlloyDB::V1beta::ListSupportedDatabaseFlagsRequest.new(parent: parent, page_size: page_size, page_token: page_token), call_options) do |_result, response|
+        client.list_supported_database_flags(::Google::Cloud::AlloyDB::V1beta::ListSupportedDatabaseFlagsRequest.new(parent: parent, page_size: page_size, page_token: page_token, scope: scope), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
