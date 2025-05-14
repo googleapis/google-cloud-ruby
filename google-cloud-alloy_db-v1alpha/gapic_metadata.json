@@ -30,6 +30,16 @@
                 "update_cluster"
               ]
             },
+            "ExportCluster": {
+              "methods": [
+                "export_cluster"
+              ]
+            },
+            "ImportCluster": {
+              "methods": [
+                "import_cluster"
+              ]
+            },
             "UpgradeCluster": {
               "methods": [
                 "upgrade_cluster"
@@ -183,6 +193,20 @@
             "ListDatabases": {
               "methods": [
                 "list_databases"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "AlloyDBCSQLAdmin": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::AlloyDB::V1alpha::AlloyDBCloudSQLAdmin::Client",
+          "rpcs": {
+            "RestoreFromCloudSQL": {
+              "methods": [
+                "restore_from_cloud_sql"
               ]
             }
           }
