@@ -812,6 +812,206 @@
       ]
     },
     {
+      "region_tag": "livestream_v1_generated_LivestreamService_CreateDvrSession_sync",
+      "title": "Snippet for the create_dvr_session call in the LivestreamService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Video::LiveStream::V1::LivestreamService::Client#create_dvr_session.",
+      "file": "livestream_service/create_dvr_session.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_dvr_session",
+        "full_name": "::Google::Cloud::Video::LiveStream::V1::LivestreamService::Client#create_dvr_session",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Video::LiveStream::V1::CreateDvrSessionRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "LivestreamService::Client",
+          "full_name": "::Google::Cloud::Video::LiveStream::V1::LivestreamService::Client"
+        },
+        "method": {
+          "short_name": "CreateDvrSession",
+          "full_name": "google.cloud.video.livestream.v1.LivestreamService.CreateDvrSession",
+          "service": {
+            "short_name": "LivestreamService",
+            "full_name": "google.cloud.video.livestream.v1.LivestreamService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "livestream_v1_generated_LivestreamService_ListDvrSessions_sync",
+      "title": "Snippet for the list_dvr_sessions call in the LivestreamService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Video::LiveStream::V1::LivestreamService::Client#list_dvr_sessions.",
+      "file": "livestream_service/list_dvr_sessions.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_dvr_sessions",
+        "full_name": "::Google::Cloud::Video::LiveStream::V1::LivestreamService::Client#list_dvr_sessions",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Video::LiveStream::V1::ListDvrSessionsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Video::LiveStream::V1::ListDvrSessionsResponse",
+        "client": {
+          "short_name": "LivestreamService::Client",
+          "full_name": "::Google::Cloud::Video::LiveStream::V1::LivestreamService::Client"
+        },
+        "method": {
+          "short_name": "ListDvrSessions",
+          "full_name": "google.cloud.video.livestream.v1.LivestreamService.ListDvrSessions",
+          "service": {
+            "short_name": "LivestreamService",
+            "full_name": "google.cloud.video.livestream.v1.LivestreamService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "livestream_v1_generated_LivestreamService_GetDvrSession_sync",
+      "title": "Snippet for the get_dvr_session call in the LivestreamService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Video::LiveStream::V1::LivestreamService::Client#get_dvr_session.",
+      "file": "livestream_service/get_dvr_session.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_dvr_session",
+        "full_name": "::Google::Cloud::Video::LiveStream::V1::LivestreamService::Client#get_dvr_session",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Video::LiveStream::V1::GetDvrSessionRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Video::LiveStream::V1::DvrSession",
+        "client": {
+          "short_name": "LivestreamService::Client",
+          "full_name": "::Google::Cloud::Video::LiveStream::V1::LivestreamService::Client"
+        },
+        "method": {
+          "short_name": "GetDvrSession",
+          "full_name": "google.cloud.video.livestream.v1.LivestreamService.GetDvrSession",
+          "service": {
+            "short_name": "LivestreamService",
+            "full_name": "google.cloud.video.livestream.v1.LivestreamService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "livestream_v1_generated_LivestreamService_DeleteDvrSession_sync",
+      "title": "Snippet for the delete_dvr_session call in the LivestreamService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Video::LiveStream::V1::LivestreamService::Client#delete_dvr_session.",
+      "file": "livestream_service/delete_dvr_session.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_dvr_session",
+        "full_name": "::Google::Cloud::Video::LiveStream::V1::LivestreamService::Client#delete_dvr_session",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Video::LiveStream::V1::DeleteDvrSessionRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "LivestreamService::Client",
+          "full_name": "::Google::Cloud::Video::LiveStream::V1::LivestreamService::Client"
+        },
+        "method": {
+          "short_name": "DeleteDvrSession",
+          "full_name": "google.cloud.video.livestream.v1.LivestreamService.DeleteDvrSession",
+          "service": {
+            "short_name": "LivestreamService",
+            "full_name": "google.cloud.video.livestream.v1.LivestreamService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "livestream_v1_generated_LivestreamService_UpdateDvrSession_sync",
+      "title": "Snippet for the update_dvr_session call in the LivestreamService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Video::LiveStream::V1::LivestreamService::Client#update_dvr_session.",
+      "file": "livestream_service/update_dvr_session.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_dvr_session",
+        "full_name": "::Google::Cloud::Video::LiveStream::V1::LivestreamService::Client#update_dvr_session",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Video::LiveStream::V1::UpdateDvrSessionRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "LivestreamService::Client",
+          "full_name": "::Google::Cloud::Video::LiveStream::V1::LivestreamService::Client"
+        },
+        "method": {
+          "short_name": "UpdateDvrSession",
+          "full_name": "google.cloud.video.livestream.v1.LivestreamService.UpdateDvrSession",
+          "service": {
+            "short_name": "LivestreamService",
+            "full_name": "google.cloud.video.livestream.v1.LivestreamService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
       "region_tag": "livestream_v1_generated_LivestreamService_CreateAsset_sync",
       "title": "Snippet for the create_asset call in the LivestreamService service",
       "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Video::LiveStream::V1::LivestreamService::Client#create_asset.",
