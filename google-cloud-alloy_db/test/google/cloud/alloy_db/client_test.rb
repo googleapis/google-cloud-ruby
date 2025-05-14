@@ -61,4 +61,25 @@ class Google::Cloud::AlloyDB::ClientConstructionMinitest < Minitest::Test
       assert_kind_of Google::Cloud::AlloyDB::V1::AlloyDBAdmin::Rest::Client, client
     end
   end
+
+  def test_alloy_db_cloud_sql_admin_grpc
+    skip unless Google::Cloud::AlloyDB.alloy_db_cloud_sql_admin_available? transport: :grpc
+    Gapic::ServiceStub.stub :new, DummyStub.new do
+      grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+      client = Google::Cloud::AlloyDB.alloy_db_cloud_sql_admin transport: :grpc do |config|
+        config.credentials = grpc_channel
+      end
+      assert_kind_of Google::Cloud::AlloyDB::V1::AlloyDBCloudSQLAdmin::Client, client
+    end
+  end
+
+  def test_alloy_db_cloud_sql_admin_rest
+    skip unless Google::Cloud::AlloyDB.alloy_db_cloud_sql_admin_available? transport: :rest
+    Gapic::Rest::ClientStub.stub :new, DummyStub.new do
+      client = Google::Cloud::AlloyDB.alloy_db_cloud_sql_admin transport: :rest do |config|
+        config.credentials = :dummy_credentials
+      end
+      assert_kind_of Google::Cloud::AlloyDB::V1::AlloyDBCloudSQLAdmin::Rest::Client, client
+    end
+  end
 end
