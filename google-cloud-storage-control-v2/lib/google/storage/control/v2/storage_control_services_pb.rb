@@ -79,6 +79,18 @@ module Google
               rpc :GetAnywhereCache, ::Google::Cloud::Storage::Control::V2::GetAnywhereCacheRequest, ::Google::Cloud::Storage::Control::V2::AnywhereCache
               # Lists Anywhere Cache instances for a given bucket.
               rpc :ListAnywhereCaches, ::Google::Cloud::Storage::Control::V2::ListAnywhereCachesRequest, ::Google::Cloud::Storage::Control::V2::ListAnywhereCachesResponse
+              # Returns the Project scoped singleton IntelligenceConfig resource.
+              rpc :GetProjectIntelligenceConfig, ::Google::Cloud::Storage::Control::V2::GetProjectIntelligenceConfigRequest, ::Google::Cloud::Storage::Control::V2::IntelligenceConfig
+              # Updates the Project scoped singleton IntelligenceConfig resource.
+              rpc :UpdateProjectIntelligenceConfig, ::Google::Cloud::Storage::Control::V2::UpdateProjectIntelligenceConfigRequest, ::Google::Cloud::Storage::Control::V2::IntelligenceConfig
+              # Returns the Folder scoped singleton IntelligenceConfig resource.
+              rpc :GetFolderIntelligenceConfig, ::Google::Cloud::Storage::Control::V2::GetFolderIntelligenceConfigRequest, ::Google::Cloud::Storage::Control::V2::IntelligenceConfig
+              # Updates the Folder scoped singleton IntelligenceConfig resource.
+              rpc :UpdateFolderIntelligenceConfig, ::Google::Cloud::Storage::Control::V2::UpdateFolderIntelligenceConfigRequest, ::Google::Cloud::Storage::Control::V2::IntelligenceConfig
+              # Returns the Organization scoped singleton IntelligenceConfig resource.
+              rpc :GetOrganizationIntelligenceConfig, ::Google::Cloud::Storage::Control::V2::GetOrganizationIntelligenceConfigRequest, ::Google::Cloud::Storage::Control::V2::IntelligenceConfig
+              # Updates the Organization scoped singleton IntelligenceConfig resource.
+              rpc :UpdateOrganizationIntelligenceConfig, ::Google::Cloud::Storage::Control::V2::UpdateOrganizationIntelligenceConfigRequest, ::Google::Cloud::Storage::Control::V2::IntelligenceConfig
             end
 
             Stub = Service.rpc_stub_class
