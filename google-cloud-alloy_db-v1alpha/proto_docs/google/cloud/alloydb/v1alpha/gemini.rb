@@ -46,6 +46,25 @@ module Google
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
+
+        # Instance level configuration parameters related to the Gemini Cloud Assist
+        # product.
+        # @!attribute [r] gca_entitlement
+        #   @return [::Google::Cloud::AlloyDB::V1alpha::GCAEntitlementType]
+        #     Output only. Represents the GCA entitlement state of the instance.
+        class GCAInstanceConfig
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Enum representing the type of GCA entitlement assigned to a resource.
+        module GCAEntitlementType
+          # No GCA entitlement is assigned.
+          GCA_ENTITLEMENT_TYPE_UNSPECIFIED = 0
+
+          # The resource is entitled to the GCA Standard Tier.
+          GCA_STANDARD = 1
+        end
       end
     end
   end
