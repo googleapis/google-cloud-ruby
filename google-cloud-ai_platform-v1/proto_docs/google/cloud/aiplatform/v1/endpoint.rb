@@ -285,6 +285,9 @@ module Google
         #   @return [::Google::Protobuf::Map{::String => ::String}]
         #     System labels to apply to Model Garden deployments.
         #     System labels are managed by Google for internal use only.
+        # @!attribute [rw] checkpoint_id
+        #   @return [::String]
+        #     The checkpoint id of the model.
         # @!attribute [rw] speculative_decoding_spec
         #   @return [::Google::Cloud::AIPlatform::V1::SpeculativeDecodingSpec]
         #     Optional. Spec for configuring speculative decoding.
