@@ -1186,6 +1186,366 @@ class ::Google::Cloud::Storage::Control::V2::StorageControl::ClientTest < Minite
     end
   end
 
+  def test_get_project_intelligence_config
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::Storage::Control::V2::IntelligenceConfig.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    get_project_intelligence_config_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :get_project_intelligence_config, name
+      assert_kind_of ::Google::Cloud::Storage::Control::V2::GetProjectIntelligenceConfigRequest, request
+      assert_equal "hello world", request["name"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, get_project_intelligence_config_client_stub do
+      # Create client
+      client = ::Google::Cloud::Storage::Control::V2::StorageControl::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.get_project_intelligence_config({ name: name }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.get_project_intelligence_config name: name do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.get_project_intelligence_config ::Google::Cloud::Storage::Control::V2::GetProjectIntelligenceConfigRequest.new(name: name) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.get_project_intelligence_config({ name: name }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.get_project_intelligence_config(::Google::Cloud::Storage::Control::V2::GetProjectIntelligenceConfigRequest.new(name: name), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, get_project_intelligence_config_client_stub.call_rpc_count
+    end
+  end
+
+  def test_update_project_intelligence_config
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::Storage::Control::V2::IntelligenceConfig.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    intelligence_config = {}
+    update_mask = {}
+    request_id = "hello world"
+
+    update_project_intelligence_config_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :update_project_intelligence_config, name
+      assert_kind_of ::Google::Cloud::Storage::Control::V2::UpdateProjectIntelligenceConfigRequest, request
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Storage::Control::V2::IntelligenceConfig), request["intelligence_config"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request["update_mask"]
+      assert_equal "hello world", request["request_id"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, update_project_intelligence_config_client_stub do
+      # Create client
+      client = ::Google::Cloud::Storage::Control::V2::StorageControl::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.update_project_intelligence_config({ intelligence_config: intelligence_config, update_mask: update_mask, request_id: request_id }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.update_project_intelligence_config intelligence_config: intelligence_config, update_mask: update_mask, request_id: request_id do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.update_project_intelligence_config ::Google::Cloud::Storage::Control::V2::UpdateProjectIntelligenceConfigRequest.new(intelligence_config: intelligence_config, update_mask: update_mask, request_id: request_id) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.update_project_intelligence_config({ intelligence_config: intelligence_config, update_mask: update_mask, request_id: request_id }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.update_project_intelligence_config(::Google::Cloud::Storage::Control::V2::UpdateProjectIntelligenceConfigRequest.new(intelligence_config: intelligence_config, update_mask: update_mask, request_id: request_id), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, update_project_intelligence_config_client_stub.call_rpc_count
+    end
+  end
+
+  def test_get_folder_intelligence_config
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::Storage::Control::V2::IntelligenceConfig.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    get_folder_intelligence_config_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :get_folder_intelligence_config, name
+      assert_kind_of ::Google::Cloud::Storage::Control::V2::GetFolderIntelligenceConfigRequest, request
+      assert_equal "hello world", request["name"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, get_folder_intelligence_config_client_stub do
+      # Create client
+      client = ::Google::Cloud::Storage::Control::V2::StorageControl::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.get_folder_intelligence_config({ name: name }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.get_folder_intelligence_config name: name do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.get_folder_intelligence_config ::Google::Cloud::Storage::Control::V2::GetFolderIntelligenceConfigRequest.new(name: name) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.get_folder_intelligence_config({ name: name }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.get_folder_intelligence_config(::Google::Cloud::Storage::Control::V2::GetFolderIntelligenceConfigRequest.new(name: name), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, get_folder_intelligence_config_client_stub.call_rpc_count
+    end
+  end
+
+  def test_update_folder_intelligence_config
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::Storage::Control::V2::IntelligenceConfig.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    intelligence_config = {}
+    update_mask = {}
+    request_id = "hello world"
+
+    update_folder_intelligence_config_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :update_folder_intelligence_config, name
+      assert_kind_of ::Google::Cloud::Storage::Control::V2::UpdateFolderIntelligenceConfigRequest, request
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Storage::Control::V2::IntelligenceConfig), request["intelligence_config"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request["update_mask"]
+      assert_equal "hello world", request["request_id"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, update_folder_intelligence_config_client_stub do
+      # Create client
+      client = ::Google::Cloud::Storage::Control::V2::StorageControl::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.update_folder_intelligence_config({ intelligence_config: intelligence_config, update_mask: update_mask, request_id: request_id }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.update_folder_intelligence_config intelligence_config: intelligence_config, update_mask: update_mask, request_id: request_id do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.update_folder_intelligence_config ::Google::Cloud::Storage::Control::V2::UpdateFolderIntelligenceConfigRequest.new(intelligence_config: intelligence_config, update_mask: update_mask, request_id: request_id) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.update_folder_intelligence_config({ intelligence_config: intelligence_config, update_mask: update_mask, request_id: request_id }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.update_folder_intelligence_config(::Google::Cloud::Storage::Control::V2::UpdateFolderIntelligenceConfigRequest.new(intelligence_config: intelligence_config, update_mask: update_mask, request_id: request_id), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, update_folder_intelligence_config_client_stub.call_rpc_count
+    end
+  end
+
+  def test_get_organization_intelligence_config
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::Storage::Control::V2::IntelligenceConfig.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    get_organization_intelligence_config_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :get_organization_intelligence_config, name
+      assert_kind_of ::Google::Cloud::Storage::Control::V2::GetOrganizationIntelligenceConfigRequest, request
+      assert_equal "hello world", request["name"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, get_organization_intelligence_config_client_stub do
+      # Create client
+      client = ::Google::Cloud::Storage::Control::V2::StorageControl::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.get_organization_intelligence_config({ name: name }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.get_organization_intelligence_config name: name do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.get_organization_intelligence_config ::Google::Cloud::Storage::Control::V2::GetOrganizationIntelligenceConfigRequest.new(name: name) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.get_organization_intelligence_config({ name: name }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.get_organization_intelligence_config(::Google::Cloud::Storage::Control::V2::GetOrganizationIntelligenceConfigRequest.new(name: name), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, get_organization_intelligence_config_client_stub.call_rpc_count
+    end
+  end
+
+  def test_update_organization_intelligence_config
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::Storage::Control::V2::IntelligenceConfig.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    intelligence_config = {}
+    update_mask = {}
+    request_id = "hello world"
+
+    update_organization_intelligence_config_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :update_organization_intelligence_config, name
+      assert_kind_of ::Google::Cloud::Storage::Control::V2::UpdateOrganizationIntelligenceConfigRequest, request
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Storage::Control::V2::IntelligenceConfig), request["intelligence_config"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request["update_mask"]
+      assert_equal "hello world", request["request_id"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, update_organization_intelligence_config_client_stub do
+      # Create client
+      client = ::Google::Cloud::Storage::Control::V2::StorageControl::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.update_organization_intelligence_config({ intelligence_config: intelligence_config, update_mask: update_mask, request_id: request_id }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.update_organization_intelligence_config intelligence_config: intelligence_config, update_mask: update_mask, request_id: request_id do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.update_organization_intelligence_config ::Google::Cloud::Storage::Control::V2::UpdateOrganizationIntelligenceConfigRequest.new(intelligence_config: intelligence_config, update_mask: update_mask, request_id: request_id) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.update_organization_intelligence_config({ intelligence_config: intelligence_config, update_mask: update_mask, request_id: request_id }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.update_organization_intelligence_config(::Google::Cloud::Storage::Control::V2::UpdateOrganizationIntelligenceConfigRequest.new(intelligence_config: intelligence_config, update_mask: update_mask, request_id: request_id), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, update_organization_intelligence_config_client_stub.call_rpc_count
+    end
+  end
+
   def test_configure
     grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
 

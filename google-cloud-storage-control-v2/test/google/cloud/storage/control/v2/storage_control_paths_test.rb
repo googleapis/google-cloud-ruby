@@ -77,6 +77,24 @@ class ::Google::Cloud::Storage::Control::V2::StorageControl::ClientPathsTest < M
     end
   end
 
+  def test_intelligence_config_path
+    grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
+      client = ::Google::Cloud::Storage::Control::V2::StorageControl::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      path = client.intelligence_config_path folder: "value0", location: "value1"
+      assert_equal "folders/value0/locations/value1/intelligenceConfig", path
+
+      path = client.intelligence_config_path org: "value0", location: "value1"
+      assert_equal "organizations/value0/locations/value1/intelligenceConfig", path
+
+      path = client.intelligence_config_path project: "value0", location: "value1"
+      assert_equal "projects/value0/locations/value1/intelligenceConfig", path
+    end
+  end
+
   def test_managed_folder_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
     ::Gapic::ServiceStub.stub :new, DummyStub.new do
