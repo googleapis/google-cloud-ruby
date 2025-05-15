@@ -580,7 +580,7 @@ module Google
             # state.
             DISABLED = 2
 
-            # This key material of this version is destroyed and no longer stored.
+            # The key material of this version is destroyed and no longer stored.
             # This version may only become
             # {::Google::Cloud::Kms::V1::CryptoKeyVersion::CryptoKeyVersionState::ENABLED ENABLED}
             # again if this version is
