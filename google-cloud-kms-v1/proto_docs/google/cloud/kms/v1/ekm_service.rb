@@ -72,6 +72,10 @@ module Google
         #   @return [::Integer]
         #     The total number of {::Google::Cloud::Kms::V1::EkmConnection EkmConnections}
         #     that matched the query.
+        #
+        #     This field is not populated if
+        #     {::Google::Cloud::Kms::V1::ListEkmConnectionsRequest#filter ListEkmConnectionsRequest.filter}
+        #     is applied.
         class ListEkmConnectionsResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
