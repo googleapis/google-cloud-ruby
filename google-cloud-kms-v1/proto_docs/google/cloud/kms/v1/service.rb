@@ -187,6 +187,10 @@ module Google
         #   @return [::Integer]
         #     The total number of {::Google::Cloud::Kms::V1::KeyRing KeyRings} that matched
         #     the query.
+        #
+        #     This field is not populated if
+        #     {::Google::Cloud::Kms::V1::ListKeyRingsRequest#filter ListKeyRingsRequest.filter}
+        #     is applied.
         class ListKeyRingsResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -206,6 +210,10 @@ module Google
         #   @return [::Integer]
         #     The total number of {::Google::Cloud::Kms::V1::CryptoKey CryptoKeys} that
         #     matched the query.
+        #
+        #     This field is not populated if
+        #     {::Google::Cloud::Kms::V1::ListCryptoKeysRequest#filter ListCryptoKeysRequest.filter}
+        #     is applied.
         class ListCryptoKeysResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -226,6 +234,10 @@ module Google
         #     The total number of
         #     {::Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersions} that matched the
         #     query.
+        #
+        #     This field is not populated if
+        #     {::Google::Cloud::Kms::V1::ListCryptoKeyVersionsRequest#filter ListCryptoKeyVersionsRequest.filter}
+        #     is applied.
         class ListCryptoKeyVersionsResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -245,6 +257,10 @@ module Google
         #   @return [::Integer]
         #     The total number of {::Google::Cloud::Kms::V1::ImportJob ImportJobs} that
         #     matched the query.
+        #
+        #     This field is not populated if
+        #     {::Google::Cloud::Kms::V1::ListImportJobsRequest#filter ListImportJobsRequest.filter}
+        #     is applied.
         class ListImportJobsResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
