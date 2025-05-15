@@ -27,6 +27,10 @@ describe "Vertex AI Quickstart" do
   let(:model) { "text-bison@001" }
 
   it "generates text" do
+    # As of May 2025, this sample does not work. The text-bison model has been
+    # retired, and the replacement requires Gemini, which is not available via
+    # the PredictionService. This sample should probably be removed.
+    skip
     sample = SampleLoader.load "predict_text_prompt.rb"
 
     assert_output(/\S/) do
