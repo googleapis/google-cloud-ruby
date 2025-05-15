@@ -12,9 +12,13 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+# rubocop:disable Lint/DuplicateRequire
+
 # [START monitoring_uptime_check_list_ips]
+gem "google-cloud-monitoring"
+require "google/cloud/monitoring"
+
 def list_ips
-  require "google/cloud/monitoring"
   client = Google::Cloud::Monitoring.uptime_check_service
 
   # Iterate over all results.
@@ -25,9 +29,10 @@ end
 # [END monitoring_uptime_check_list_ips]
 
 # [START monitoring_uptime_check_create]
-def create_uptime_check_config project_id: nil, host_name: nil, display_name: nil
-  require "google/cloud/monitoring"
+gem "google-cloud-monitoring"
+require "google/cloud/monitoring"
 
+def create_uptime_check_config project_id: nil, host_name: nil, display_name: nil
   client = Google::Cloud::Monitoring.uptime_check_service
   project_name = client.project_path project: project_id
   config = {
@@ -49,9 +54,10 @@ end
 # [END monitoring_uptime_check_create]
 
 # [START monitoring_uptime_check_delete]
-def delete_uptime_check_config config_name
-  require "google/cloud/monitoring"
+gem "google-cloud-monitoring"
+require "google/cloud/monitoring"
 
+def delete_uptime_check_config config_name
   client = Google::Cloud::Monitoring.uptime_check_service
   client.delete_uptime_check_config name: config_name
   puts "Deleted #{config_name}"
@@ -60,9 +66,10 @@ end
 
 
 # [START monitoring_uptime_check_list_configs]
-def list_uptime_check_configs project_id
-  require "google/cloud/monitoring"
+gem "google-cloud-monitoring"
+require "google/cloud/monitoring"
 
+def list_uptime_check_configs project_id
   client = Google::Cloud::Monitoring.uptime_check_service
   project_name = client.project_path project: project_id
   configs = client.list_uptime_check_configs parent: project_name
@@ -72,9 +79,10 @@ end
 # [END monitoring_uptime_check_list_configs]
 
 # [START monitoring_uptime_check_get]
-def get_uptime_check_config config_name
-  require "google/cloud/monitoring"
+gem "google-cloud-monitoring"
+require "google/cloud/monitoring"
 
+def get_uptime_check_config config_name
   client = Google::Cloud::Monitoring.uptime_check_service
   config = client.get_uptime_check_config name: config_name
   pp config.to_h
@@ -83,11 +91,12 @@ end
 # [END monitoring_uptime_check_get]
 
 # [START monitoring_uptime_check_update]
+gem "google-cloud-monitoring"
+require "google/cloud/monitoring"
+
 def update_uptime_check_config config_name:         nil,
                                new_display_name:    nil,
                                new_http_check_path: nil
-  require "google/cloud/monitoring"
-
   client = Google::Cloud::Monitoring.uptime_check_service
   config = { name: config_name }
   field_mask = { paths: [] }
@@ -103,6 +112,8 @@ def update_uptime_check_config config_name:         nil,
                                     update_mask:         field_mask
 end
 # [END monitoring_uptime_check_update]
+
+# rubocop:enable Lint/DuplicateRequire
 
 if $PROGRAM_NAME == __FILE__
   command = ARGV.shift
