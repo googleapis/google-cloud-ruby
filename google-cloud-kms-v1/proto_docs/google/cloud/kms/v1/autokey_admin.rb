@@ -69,6 +69,12 @@ module Google
         # @!attribute [r] state
         #   @return [::Google::Cloud::Kms::V1::AutokeyConfig::State]
         #     Output only. The state for the AutokeyConfig.
+        # @!attribute [rw] etag
+        #   @return [::String]
+        #     Optional. A checksum computed by the server based on the value of other
+        #     fields. This may be sent on update requests to ensure that the client has
+        #     an up-to-date value before proceeding. The request will be rejected with an
+        #     ABORTED error on a mismatched etag.
         class AutokeyConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
