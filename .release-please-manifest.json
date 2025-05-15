@@ -737,6 +737,8 @@
   "google-cloud-support+FILLER": "0.0.0",
   "google-cloud-support-v2": "1.3.0",
   "google-cloud-support-v2+FILLER": "0.0.0",
+  "google-cloud-support-v2beta": "0.0.1",
+  "google-cloud-support-v2beta+FILLER": "0.0.0",
   "google-cloud-talent": "2.0.1",
   "google-cloud-talent+FILLER": "0.0.0",
   "google-cloud-talent-v4": "1.4.0",

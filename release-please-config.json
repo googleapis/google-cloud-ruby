@@ -1487,6 +1487,10 @@
       "component": "google-cloud-support-v2",
       "version_file": "lib/google/cloud/support/v2/version.rb"
     },
+    "google-cloud-support-v2beta": {
+      "component": "google-cloud-support-v2beta",
+      "version_file": "lib/google/cloud/support/v2beta/version.rb"
+    },
     "google-cloud-talent": {
       "component": "google-cloud-talent",
       "version_file": "lib/google/cloud/talent/version.rb"
