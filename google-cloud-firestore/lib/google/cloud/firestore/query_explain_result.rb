@@ -115,6 +115,7 @@ module Google
         def each
           return enum_for :each unless block_given?
           @results ||= @results_enum.to_a
+
           @results.each do |result|
             @explain_metrics ||= result.explain_metrics if result.explain_metrics
             @metrics_fetched = !@explain_metrics.nil?
