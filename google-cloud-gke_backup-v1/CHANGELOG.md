@@ -1,5 +1,13 @@
 # Changelog
 
+### 1.3.0 (2025-05-16)
+
+#### Features
+
+* Support for backup config details 
+* Support for retention policy details 
+* Support for specifying backup and restore channel names 
+
 ### 1.2.0 (2025-05-12)
 
 #### Features
