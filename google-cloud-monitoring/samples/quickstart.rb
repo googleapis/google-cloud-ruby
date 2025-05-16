@@ -12,10 +12,11 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-require "google/cloud/monitoring"
-
 def quickstart project_id:, metric_label:
   # [START monitoring_quickstart]
+  gem "google-cloud-monitoring"
+  require "google/cloud/monitoring"
+
   # Your Google Cloud Platform project ID
   # project_id = "YOUR_PROJECT_ID"
 
