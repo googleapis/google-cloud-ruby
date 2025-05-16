@@ -1397,6 +1397,9 @@ module Google
         # @!attribute [rw] table_prefix
         #   @return [::String]
         #     Optional. The prefix that should be prepended to all table names.
+        # @!attribute [rw] builtin_assertion_name_prefix
+        #   @return [::String]
+        #     Optional. The prefix to prepend to built-in assertion names.
         # @!attribute [rw] default_notebook_runtime_options
         #   @return [::Google::Cloud::Dataform::V1beta1::NotebookRuntimeOptions]
         #     Optional. The default notebook runtime options.
@@ -1419,6 +1422,12 @@ module Google
         #   @return [::String]
         #     Optional. The Google Cloud Storage location to upload the result to.
         #     Format: `gs://bucket-name`.
+        # @!attribute [rw] ai_platform_notebook_runtime_template
+        #   @return [::String]
+        #     Optional. The resource name of the [Colab runtime template]
+        #     (https://cloud.google.com/colab/docs/runtimes), from which a runtime is
+        #     created for notebook executions. If not specified, a runtime is created
+        #     with Colab's default specifications.
         class NotebookRuntimeOptions
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -1554,27 +1563,32 @@ module Google
         #   @return [::Google::Cloud::Dataform::V1beta1::CompilationResultAction::Relation]
         #     The database relation created/updated by this action.
         #
-        #     Note: The following fields are mutually exclusive: `relation`, `operations`, `assertion`, `declaration`, `notebook`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `relation`, `operations`, `assertion`, `declaration`, `notebook`, `data_preparation`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] operations
         #   @return [::Google::Cloud::Dataform::V1beta1::CompilationResultAction::Operations]
         #     The database operations executed by this action.
         #
-        #     Note: The following fields are mutually exclusive: `operations`, `relation`, `assertion`, `declaration`, `notebook`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `operations`, `relation`, `assertion`, `declaration`, `notebook`, `data_preparation`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] assertion
         #   @return [::Google::Cloud::Dataform::V1beta1::CompilationResultAction::Assertion]
         #     The assertion executed by this action.
         #
-        #     Note: The following fields are mutually exclusive: `assertion`, `relation`, `operations`, `declaration`, `notebook`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `assertion`, `relation`, `operations`, `declaration`, `notebook`, `data_preparation`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] declaration
         #   @return [::Google::Cloud::Dataform::V1beta1::CompilationResultAction::Declaration]
         #     The declaration declared by this action.
         #
-        #     Note: The following fields are mutually exclusive: `declaration`, `relation`, `operations`, `assertion`, `notebook`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `declaration`, `relation`, `operations`, `assertion`, `notebook`, `data_preparation`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] notebook
         #   @return [::Google::Cloud::Dataform::V1beta1::CompilationResultAction::Notebook]
         #     The notebook executed by this action.
         #
-        #     Note: The following fields are mutually exclusive: `notebook`, `relation`, `operations`, `assertion`, `declaration`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `notebook`, `relation`, `operations`, `assertion`, `declaration`, `data_preparation`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] data_preparation
+        #   @return [::Google::Cloud::Dataform::V1beta1::CompilationResultAction::DataPreparation]
+        #     The data preparation executed by this action.
+        #
+        #     Note: The following fields are mutually exclusive: `data_preparation`, `relation`, `operations`, `assertion`, `declaration`, `notebook`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] target
         #   @return [::Google::Cloud::Dataform::V1beta1::Target]
         #     This action's identifier. Unique within the compilation result.
@@ -1789,6 +1803,105 @@ module Google
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
+
+          # Defines a compiled Data Preparation entity
+          # @!attribute [rw] contents_yaml
+          #   @return [::String]
+          #     The data preparation definition, stored as a YAML string.
+          #
+          #     Note: The following fields are mutually exclusive: `contents_yaml`, `contents_sql`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+          # @!attribute [rw] contents_sql
+          #   @return [::Google::Cloud::Dataform::V1beta1::CompilationResultAction::DataPreparation::SqlDefinition]
+          #     SQL definition for a Data Preparation. Contains a SQL query and
+          #     additional context information.
+          #
+          #     Note: The following fields are mutually exclusive: `contents_sql`, `contents_yaml`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+          # @!attribute [rw] dependency_targets
+          #   @return [::Array<::Google::Cloud::Dataform::V1beta1::Target>]
+          #     A list of actions that this action depends on.
+          # @!attribute [rw] disabled
+          #   @return [::Boolean]
+          #     Whether this action is disabled (i.e. should not be run).
+          # @!attribute [rw] tags
+          #   @return [::Array<::String>]
+          #     Arbitrary, user-defined tags on this action.
+          class DataPreparation
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+
+            # Definition of a SQL Data Preparation
+            # @!attribute [rw] query
+            #   @return [::String]
+            #     The SQL query representing the data preparation steps. Formatted as a
+            #     Pipe SQL query statement.
+            # @!attribute [rw] error_table
+            #   @return [::Google::Cloud::Dataform::V1beta1::CompilationResultAction::DataPreparation::ErrorTable]
+            #     Error table configuration,
+            # @!attribute [rw] load
+            #   @return [::Google::Cloud::Dataform::V1beta1::CompilationResultAction::LoadConfig]
+            #     Load configuration.
+            class SqlDefinition
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
+
+            # Error table information, used to write error data into a BigQuery
+            # table.
+            # @!attribute [rw] target
+            #   @return [::Google::Cloud::Dataform::V1beta1::Target]
+            #     Error Table target.
+            # @!attribute [rw] retention_days
+            #   @return [::Integer]
+            #     Error table partition expiration in days. Only positive values are
+            #     allowed.
+            class ErrorTable
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
+          end
+
+          # Simplified load configuration for actions
+          # @!attribute [rw] replace
+          #   @return [::Google::Cloud::Dataform::V1beta1::CompilationResultAction::SimpleLoadMode]
+          #     Replace destination table
+          #
+          #     Note: The following fields are mutually exclusive: `replace`, `append`, `maximum`, `unique`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+          # @!attribute [rw] append
+          #   @return [::Google::Cloud::Dataform::V1beta1::CompilationResultAction::SimpleLoadMode]
+          #     Append into destination table
+          #
+          #     Note: The following fields are mutually exclusive: `append`, `replace`, `maximum`, `unique`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+          # @!attribute [rw] maximum
+          #   @return [::Google::Cloud::Dataform::V1beta1::CompilationResultAction::IncrementalLoadMode]
+          #     Insert records where the value exceeds the previous maximum value for a
+          #     column in the destination table
+          #
+          #     Note: The following fields are mutually exclusive: `maximum`, `replace`, `append`, `unique`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+          # @!attribute [rw] unique
+          #   @return [::Google::Cloud::Dataform::V1beta1::CompilationResultAction::IncrementalLoadMode]
+          #     Insert records where the value of a column is not already present in
+          #     the destination table
+          #
+          #     Note: The following fields are mutually exclusive: `unique`, `replace`, `append`, `maximum`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+          class LoadConfig
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Simple load definition
+          class SimpleLoadMode
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Load definition for incremental load modes
+          # @!attribute [rw] column
+          #   @return [::String]
+          #     Column name for incremental load modes
+          class IncrementalLoadMode
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
         end
 
         # `QueryCompilationResultActions` request message.
@@ -1858,6 +1971,9 @@ module Google
         #     Output only. Records of the 10 most recent scheduled execution attempts,
         #     ordered in descending order of `execution_time`. Updated whenever automatic
         #     creation of a workflow invocation is triggered by cron_schedule.
+        # @!attribute [rw] disabled
+        #   @return [::Boolean]
+        #     Optional. Disables automatic creation of workflow invocations.
         # @!attribute [r] create_time
         #   @return [::Google::Protobuf::Timestamp]
         #     Output only. The timestamp of when the WorkflowConfig was created.
@@ -2176,12 +2292,17 @@ module Google
         #   @return [::Google::Cloud::Dataform::V1beta1::WorkflowInvocationAction::BigQueryAction]
         #     Output only. The workflow action's bigquery action details.
         #
-        #     Note: The following fields are mutually exclusive: `bigquery_action`, `notebook_action`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `bigquery_action`, `notebook_action`, `data_preparation_action`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [r] notebook_action
         #   @return [::Google::Cloud::Dataform::V1beta1::WorkflowInvocationAction::NotebookAction]
         #     Output only. The workflow action's notebook action details.
         #
-        #     Note: The following fields are mutually exclusive: `notebook_action`, `bigquery_action`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `notebook_action`, `bigquery_action`, `data_preparation_action`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [r] data_preparation_action
+        #   @return [::Google::Cloud::Dataform::V1beta1::WorkflowInvocationAction::DataPreparationAction]
+        #     Output only. The workflow action's data preparation action details.
+        #
+        #     Note: The following fields are mutually exclusive: `data_preparation_action`, `bigquery_action`, `notebook_action`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [r] target
         #   @return [::Google::Cloud::Dataform::V1beta1::Target]
         #     Output only. This action's identifier. Unique within the workflow
@@ -2238,6 +2359,105 @@ module Google
           class NotebookAction
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Represents a workflow action that will run a Data Preparation.
+          # @!attribute [r] contents_yaml
+          #   @return [::String]
+          #     Output only. YAML representing the contents of the data preparation.
+          #     Can be used to show the customer what the input was to their workflow.
+          #
+          #     Note: The following fields are mutually exclusive: `contents_yaml`, `contents_sql`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+          # @!attribute [rw] contents_sql
+          #   @return [::Google::Cloud::Dataform::V1beta1::WorkflowInvocationAction::DataPreparationAction::ActionSqlDefinition]
+          #     SQL definition for a Data Preparation. Contains a SQL query and
+          #     additional context information.
+          #
+          #     Note: The following fields are mutually exclusive: `contents_sql`, `contents_yaml`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+          # @!attribute [r] generated_sql
+          #   @return [::String]
+          #     Output only. The generated BigQuery SQL script that will be executed. For
+          #     reference only.
+          # @!attribute [r] job_id
+          #   @return [::String]
+          #     Output only. The ID of the BigQuery job that executed the SQL in
+          #     sql_script. Only set once the job has started to run.
+          class DataPreparationAction
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+
+            # Definition of a SQL Data Preparation
+            # @!attribute [rw] query
+            #   @return [::String]
+            #     The SQL query representing the data preparation steps. Formatted as a
+            #     Pipe SQL query statement.
+            # @!attribute [rw] error_table
+            #   @return [::Google::Cloud::Dataform::V1beta1::WorkflowInvocationAction::DataPreparationAction::ActionErrorTable]
+            #     Error table configuration,
+            # @!attribute [rw] load_config
+            #   @return [::Google::Cloud::Dataform::V1beta1::WorkflowInvocationAction::DataPreparationAction::ActionLoadConfig]
+            #     Load configuration.
+            class ActionSqlDefinition
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
+
+            # Error table information, used to write error data into a BigQuery
+            # table.
+            # @!attribute [rw] target
+            #   @return [::Google::Cloud::Dataform::V1beta1::Target]
+            #     Error Table target.
+            # @!attribute [rw] retention_days
+            #   @return [::Integer]
+            #     Error table partition expiration in days. Only positive values are
+            #     allowed.
+            class ActionErrorTable
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
+
+            # Simplified load configuration for actions
+            # @!attribute [rw] replace
+            #   @return [::Google::Cloud::Dataform::V1beta1::WorkflowInvocationAction::DataPreparationAction::ActionSimpleLoadMode]
+            #     Replace destination table
+            #
+            #     Note: The following fields are mutually exclusive: `replace`, `append`, `maximum`, `unique`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+            # @!attribute [rw] append
+            #   @return [::Google::Cloud::Dataform::V1beta1::WorkflowInvocationAction::DataPreparationAction::ActionSimpleLoadMode]
+            #     Append into destination table
+            #
+            #     Note: The following fields are mutually exclusive: `append`, `replace`, `maximum`, `unique`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+            # @!attribute [rw] maximum
+            #   @return [::Google::Cloud::Dataform::V1beta1::WorkflowInvocationAction::DataPreparationAction::ActionIncrementalLoadMode]
+            #     Insert records where the value exceeds the previous maximum value for
+            #     a column in the destination table
+            #
+            #     Note: The following fields are mutually exclusive: `maximum`, `replace`, `append`, `unique`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+            # @!attribute [rw] unique
+            #   @return [::Google::Cloud::Dataform::V1beta1::WorkflowInvocationAction::DataPreparationAction::ActionIncrementalLoadMode]
+            #     Insert records where the value of a column is not already present in
+            #     the destination table
+            #
+            #     Note: The following fields are mutually exclusive: `unique`, `replace`, `append`, `maximum`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+            class ActionLoadConfig
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
+
+            # Simple load definition
+            class ActionSimpleLoadMode
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
+
+            # Load definition for incremental load modes
+            # @!attribute [rw] column
+            #   @return [::String]
+            #     Column name for incremental load modes
+            class ActionIncrementalLoadMode
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
           end
 
           # Represents the current state of a workflow invocation action.
