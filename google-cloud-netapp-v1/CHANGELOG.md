@@ -1,5 +1,12 @@
 # Changelog
 
+### 2.3.0 (2025-05-16)
+
+#### Features
+
+* Support for backup retention policies 
+* Support for independent scaling of StoragePool capacity and performance 
+
 ### 2.2.0 (2025-05-12)
 
 #### Features
