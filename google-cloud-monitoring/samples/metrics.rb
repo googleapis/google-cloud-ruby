@@ -12,10 +12,12 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-require "google/cloud/monitoring"
 
 def create_metric_descriptor project_id:, metric_type:
   # [START monitoring_create_metric]
+  gem "google-cloud-monitoring"
+  require "google/cloud/monitoring"
+
   # Your Google Cloud Platform project ID
   # project_id = "YOUR_PROJECT_ID"
 
@@ -41,6 +43,9 @@ end
 
 def delete_metric_descriptor project_id:, metric_type:
   # [START monitoring_delete_metric]
+  gem "google-cloud-monitoring"
+  require "google/cloud/monitoring"
+
   # Your Google Cloud Platform project ID
   # project_id = "YOUR_PROJECT_ID"
 
@@ -58,6 +63,9 @@ end
 
 def write_time_series project_id:, metric_type:
   # [START monitoring_write_timeseries]
+  gem "google-cloud-monitoring"
+  require "google/cloud/monitoring"
+
   # Your Google Cloud Platform project ID
   # project_id = "YOUR_PROJECT_ID"
 
@@ -88,6 +96,9 @@ end
 
 def list_time_series project_id:
   # [START monitoring_read_timeseries_simple]
+  gem "google-cloud-monitoring"
+  require "google/cloud/monitoring"
+
   # Your Google Cloud Platform project ID
   # project_id = "YOUR_PROJECT_ID"
 
@@ -115,6 +126,9 @@ end
 
 def list_time_series_header project_id:
   # [START monitoring_read_timeseries_fields]
+  gem "google-cloud-monitoring"
+  require "google/cloud/monitoring"
+
   # Your Google Cloud Platform project ID
   # project_id = "YOUR_PROJECT_ID"
 
@@ -142,6 +156,9 @@ end
 
 def list_time_series_aggregate project_id:
   # [START monitoring_read_timeseries_align]
+  gem "google-cloud-monitoring"
+  require "google/cloud/monitoring"
+
   # Your Google Cloud Platform project ID
   # project_id = "YOUR_PROJECT_ID"
 
@@ -175,6 +192,9 @@ end
 
 def list_time_series_reduce project_id:
   # [START monitoring_read_timeseries_reduce]
+  gem "google-cloud-monitoring"
+  require "google/cloud/monitoring"
+
   # Your Google Cloud Platform project ID
   # project_id = "YOUR_PROJECT_ID"
 
@@ -210,6 +230,9 @@ end
 
 def list_metric_descriptors project_id:
   # [START monitoring_list_descriptors]
+  gem "google-cloud-monitoring"
+  require "google/cloud/monitoring"
+
   # Your Google Cloud Platform project ID
   # project_id = "YOUR_PROJECT_ID"
 
@@ -225,6 +248,9 @@ end
 
 def list_monitored_resources project_id:
   # [START monitoring_list_resources]
+  gem "google-cloud-monitoring"
+  require "google/cloud/monitoring"
+
   # Your Google Cloud Platform project ID
   # project_id = "YOUR_PROJECT_ID"
 
@@ -259,6 +285,9 @@ end
 
 def get_metric_descriptor project_id:, metric_type:
   # [START monitoring_get_descriptor]
+  gem "google-cloud-monitoring"
+  require "google/cloud/monitoring"
+
   # Your Google Cloud Platform project ID
   # project_id = "YOUR_PROJECT_ID"
 
