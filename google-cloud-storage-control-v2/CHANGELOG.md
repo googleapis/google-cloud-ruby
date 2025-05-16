@@ -1,5 +1,11 @@
 # Changelog
 
+### 1.4.0 (2025-05-16)
+
+#### Features
+
+* Support for storage IntelligenceConfig ([#30359](https://github.com/googleapis/google-cloud-ruby/issues/30359)) 
+
 ### 1.3.0 (2025-05-12)
 
 #### Features
