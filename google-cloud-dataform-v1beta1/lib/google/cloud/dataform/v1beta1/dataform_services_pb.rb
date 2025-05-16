@@ -35,6 +35,9 @@ module Google
             self.service_name = 'google.cloud.dataform.v1beta1.Dataform'
 
             # Lists Repositories in a given project and location.
+            #
+            # **Note:** *This method can return repositories not shown in the [Dataform
+            # UI](https://console.cloud.google.com/bigquery/dataform)*.
             rpc :ListRepositories, ::Google::Cloud::Dataform::V1beta1::ListRepositoriesRequest, ::Google::Cloud::Dataform::V1beta1::ListRepositoriesResponse
             # Fetches a single Repository.
             rpc :GetRepository, ::Google::Cloud::Dataform::V1beta1::GetRepositoryRequest, ::Google::Cloud::Dataform::V1beta1::Repository
@@ -42,11 +45,10 @@ module Google
             rpc :CreateRepository, ::Google::Cloud::Dataform::V1beta1::CreateRepositoryRequest, ::Google::Cloud::Dataform::V1beta1::Repository
             # Updates a single Repository.
             #
-            # **Note:** This method does not fully implement
-            # [AIP-134](https://google.aip.dev/134); in particular:
-            # - The wildcard entry (**\***) is treated as a bad request
-            # - When the **field_mask** is omitted, instead of only updating the set
-            #   fields, the request is treated as a full update on all modifiable fields
+            # **Note:** *This method does not fully implement
+            # [AIP/134](https://google.aip.dev/134). The wildcard entry (\*) is treated
+            # as a bad request, and when the `field_mask` is omitted, the request is
+            # treated as a full update on all modifiable fields.*
             rpc :UpdateRepository, ::Google::Cloud::Dataform::V1beta1::UpdateRepositoryRequest, ::Google::Cloud::Dataform::V1beta1::Repository
             # Deletes a single Repository.
             rpc :DeleteRepository, ::Google::Cloud::Dataform::V1beta1::DeleteRepositoryRequest, ::Google::Protobuf::Empty
@@ -117,11 +119,10 @@ module Google
             rpc :CreateReleaseConfig, ::Google::Cloud::Dataform::V1beta1::CreateReleaseConfigRequest, ::Google::Cloud::Dataform::V1beta1::ReleaseConfig
             # Updates a single ReleaseConfig.
             #
-            # **Note:** This method does not fully implement
-            # [AIP-134](https://google.aip.dev/134); in particular:
-            # - The wildcard entry (**\***) is treated as a bad request
-            # - When the **field_mask** is omitted, instead of only updating the set
-            #   fields, the request is treated as a full update on all modifiable fields
+            # **Note:** *This method does not fully implement
+            # [AIP/134](https://google.aip.dev/134). The wildcard entry (\*) is treated
+            # as a bad request, and when the `field_mask` is omitted, the request is
+            # treated as a full update on all modifiable fields.*
             rpc :UpdateReleaseConfig, ::Google::Cloud::Dataform::V1beta1::UpdateReleaseConfigRequest, ::Google::Cloud::Dataform::V1beta1::ReleaseConfig
             # Deletes a single ReleaseConfig.
             rpc :DeleteReleaseConfig, ::Google::Cloud::Dataform::V1beta1::DeleteReleaseConfigRequest, ::Google::Protobuf::Empty
@@ -141,11 +142,10 @@ module Google
             rpc :CreateWorkflowConfig, ::Google::Cloud::Dataform::V1beta1::CreateWorkflowConfigRequest, ::Google::Cloud::Dataform::V1beta1::WorkflowConfig
             # Updates a single WorkflowConfig.
             #
-            # **Note:** This method does not fully implement
-            # [AIP-134](https://google.aip.dev/134); in particular:
-            # - The wildcard entry (**\***) is treated as a bad request
-            # - When the **field_mask** is omitted, instead of only updating the set
-            #   fields, the request is treated as a full update on all modifiable fields
+            # **Note:** *This method does not fully implement
+            # [AIP/134](https://google.aip.dev/134). The wildcard entry (\*) is treated
+            # as a bad request, and when the `field_mask` is omitted, the request is
+            # treated as a full update on all modifiable fields.*
             rpc :UpdateWorkflowConfig, ::Google::Cloud::Dataform::V1beta1::UpdateWorkflowConfigRequest, ::Google::Cloud::Dataform::V1beta1::WorkflowConfig
             # Deletes a single WorkflowConfig.
             rpc :DeleteWorkflowConfig, ::Google::Cloud::Dataform::V1beta1::DeleteWorkflowConfigRequest, ::Google::Protobuf::Empty
@@ -165,11 +165,10 @@ module Google
             rpc :GetConfig, ::Google::Cloud::Dataform::V1beta1::GetConfigRequest, ::Google::Cloud::Dataform::V1beta1::Config
             # Update default config for a given project and location.
             #
-            # **Note:** This method does not fully implement
-            # [AIP-134](https://google.aip.dev/134); in particular:
-            # - The wildcard entry (**\***) is treated as a bad request
-            # - When the **field_mask** is omitted, instead of only updating the set
-            #   fields, the request is treated as a full update on all modifiable fields
+            # **Note:** *This method does not fully implement
+            # [AIP/134](https://google.aip.dev/134). The wildcard entry (\*) is treated
+            # as a bad request, and when the `field_mask` is omitted, the request is
+            # treated as a full update on all modifiable fields.*
             rpc :UpdateConfig, ::Google::Cloud::Dataform::V1beta1::UpdateConfigRequest, ::Google::Cloud::Dataform::V1beta1::Config
           end
 
