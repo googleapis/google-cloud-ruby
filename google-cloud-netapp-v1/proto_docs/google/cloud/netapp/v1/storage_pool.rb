@@ -197,6 +197,17 @@ module Google
         # @!attribute [r] satisfies_pzi
         #   @return [::Boolean]
         #     Output only. Reserved for future use
+        # @!attribute [rw] custom_performance_enabled
+        #   @return [::Boolean]
+        #     Optional. True if using Independent Scaling of capacity and performance
+        #     (Hyperdisk) By default set to false
+        # @!attribute [rw] total_throughput_mibps
+        #   @return [::Integer]
+        #     Optional. Custom Performance Total Throughput of the pool (in MiB/s)
+        # @!attribute [rw] total_iops
+        #   @return [::Integer]
+        #     Optional. Custom Performance Total IOPS of the pool
+        #     If not provided, it will be calculated based on the total_throughput_mibps
         class StoragePool
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

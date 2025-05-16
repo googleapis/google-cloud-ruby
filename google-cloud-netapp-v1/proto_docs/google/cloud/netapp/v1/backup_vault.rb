@@ -61,9 +61,42 @@ module Google
         #     Output only. Name of the Backup vault created in backup region.
         #     Format:
         #     `projects/{project_id}/locations/{location}/backupVaults/{backup_vault_id}`
+        # @!attribute [rw] backup_retention_policy
+        #   @return [::Google::Cloud::NetApp::V1::BackupVault::BackupRetentionPolicy]
+        #     Optional. Backup retention policy defining the retenton of backups.
         class BackupVault
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Retention policy for backups in the backup vault
+          # @!attribute [rw] backup_minimum_enforced_retention_days
+          #   @return [::Integer]
+          #     Required. Minimum retention duration in days for backups in the backup
+          #     vault.
+          # @!attribute [rw] daily_backup_immutable
+          #   @return [::Boolean]
+          #     Optional. Indicates if the daily backups are immutable.
+          #     Atleast one of daily_backup_immutable, weekly_backup_immutable,
+          #     monthly_backup_immutable and manual_backup_immutable must be true.
+          # @!attribute [rw] weekly_backup_immutable
+          #   @return [::Boolean]
+          #     Optional. Indicates if the weekly backups are immutable.
+          #     Atleast one of daily_backup_immutable, weekly_backup_immutable,
+          #     monthly_backup_immutable and manual_backup_immutable must be true.
+          # @!attribute [rw] monthly_backup_immutable
+          #   @return [::Boolean]
+          #     Optional. Indicates if the monthly backups are immutable.
+          #     Atleast one of daily_backup_immutable, weekly_backup_immutable,
+          #     monthly_backup_immutable and manual_backup_immutable must be true.
+          # @!attribute [rw] manual_backup_immutable
+          #   @return [::Boolean]
+          #     Optional. Indicates if the manual backups are immutable.
+          #     Atleast one of daily_backup_immutable, weekly_backup_immutable,
+          #     monthly_backup_immutable and manual_backup_immutable must be true.
+          class BackupRetentionPolicy
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
 
           # @!attribute [rw] key
           #   @return [::String]
