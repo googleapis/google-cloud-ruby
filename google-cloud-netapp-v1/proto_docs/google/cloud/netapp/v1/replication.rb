@@ -24,7 +24,7 @@ module Google
         # TransferStats reports all statistics related to replication transfer.
         # @!attribute [rw] transfer_bytes
         #   @return [::Integer]
-        #     Cumulative bytes trasferred so far for the replication relatinonship.
+        #     Cumulative bytes transferred so far for the replication relationship.
         # @!attribute [rw] total_transfer_duration
         #   @return [::Google::Protobuf::Duration]
         #     Cumulative time taken across all transfers for the replication

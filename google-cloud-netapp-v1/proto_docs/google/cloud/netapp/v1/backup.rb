@@ -78,6 +78,9 @@ module Google
         #   @return [::String]
         #     Output only. Region in which backup is stored.
         #     Format: `projects/{project_id}/locations/{location}`
+        # @!attribute [r] enforced_retention_end_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Output only. The time until which the backup is not deletable.
         class Backup
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
