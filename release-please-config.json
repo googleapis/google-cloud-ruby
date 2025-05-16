@@ -551,6 +551,10 @@
       "component": "google-cloud-dataform",
       "version_file": "lib/google/cloud/dataform/version.rb"
     },
+    "google-cloud-dataform-v1": {
+      "component": "google-cloud-dataform-v1",
+      "version_file": "lib/google/cloud/dataform/v1/version.rb"
+    },
     "google-cloud-dataform-v1beta1": {
       "component": "google-cloud-dataform-v1beta1",
       "version_file": "lib/google/cloud/dataform/v1beta1/version.rb"
