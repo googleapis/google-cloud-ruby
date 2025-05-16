@@ -1,5 +1,12 @@
 # Changelog
 
+### 2.2.0 (2025-05-16)
+
+#### Features
+
+* Support for clip output type 
+* Support for managing DvrSessions 
+
 ### 2.1.0 (2025-05-12)
 
 #### Features
