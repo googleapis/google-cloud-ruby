@@ -1,5 +1,15 @@
 # Changelog
 
+### 0.9.0 (2025-05-16)
+
+#### Features
+
+* Support for creating, updating, and deleting online return policy resources 
+* Support for GbpAccountsService 
+* Support for LfpProvidersService 
+* Support for OmnichannelSettingsService 
+* Support for the return label source 
+
 ### 0.8.0 (2025-05-11)
 
 #### Features
