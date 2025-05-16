@@ -1,5 +1,15 @@
 # Changelog
 
+### 1.4.0 (2025-05-16)
+
+#### Features
+
+* Deprecated the Actor email field and replaced with username 
+#### Documentation
+
+* Deprecated the Comment plain_text_body field 
+* Numerous additional edits and clarifications to the reference documentation 
+
 ### 1.3.0 (2025-05-12)
 
 #### Features
