@@ -8,7 +8,7 @@
     "name": "dataform",
     "name_pretty": "Dataform V1 API",
     "product_documentation": "https://cloud.google.com/dataform/docs/overview",
-    "release_level": "unreleased",
+    "release_level": "preview",
     "repo": "googleapis/google-cloud-ruby",
     "requires_billing": true,
     "ruby-cloud-description": "Service to develop, version control, and operationalize SQL pipelines in BigQuery. Note that google-cloud-dataform-v1 is a version-specific client library. For most uses, we recommend installing the main client library google-cloud-dataform instead. See the readme for more details.",
