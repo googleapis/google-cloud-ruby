@@ -620,6 +620,9 @@ module Google
           # @!attribute [rw] candidates_token_count
           #   @return [::Integer]
           #     Number of tokens in the response(s).
+          # @!attribute [r] thoughts_token_count
+          #   @return [::Integer]
+          #     Output only. Number of tokens present in thoughts output.
           # @!attribute [rw] total_token_count
           #   @return [::Integer]
           #     Total token count for prompt and response candidates.
