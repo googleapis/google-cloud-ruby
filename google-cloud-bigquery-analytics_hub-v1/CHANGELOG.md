@@ -1,5 +1,15 @@
 # Changelog
 
+### 0.13.0 (2025-05-16)
+
+#### Features
+
+* Provide a safety guard against accidentally deleting or revoking commercial subscriptions 
+* Support commercial data products associated with a listing 
+* Support for destination dataset to create for a subscriber 
+* Support for routine shared resources 
+* Support listings that are provided for metadata but are not subscribable 
+
 ### 0.12.0 (2025-05-12)
 
 #### Features
