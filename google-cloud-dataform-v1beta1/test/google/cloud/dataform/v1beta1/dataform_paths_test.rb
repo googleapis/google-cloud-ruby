@@ -101,6 +101,18 @@ class ::Google::Cloud::Dataform::V1beta1::Dataform::ClientPathsTest < Minitest::
     end
   end
 
+  def test_notebook_runtime_template_path
+    grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
+      client = ::Google::Cloud::Dataform::V1beta1::Dataform::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      path = client.notebook_runtime_template_path project: "value0", location: "value1", notebook_runtime_template: "value2"
+      assert_equal "projects/value0/locations/value1/notebookRuntimeTemplates/value2", path
+    end
+  end
+
   def test_release_config_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
     ::Gapic::ServiceStub.stub :new, DummyStub.new do
