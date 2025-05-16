@@ -211,6 +211,25 @@
         }
       }
     },
+    "GbpAccountsService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Shopping::Merchant::Accounts::V1beta::GbpAccountsService::Client",
+          "rpcs": {
+            "ListGbpAccounts": {
+              "methods": [
+                "list_gbp_accounts"
+              ]
+            },
+            "LinkGbpAccount": {
+              "methods": [
+                "link_gbp_account"
+              ]
+            }
+          }
+        }
+      }
+    },
     "HomepageService": {
       "clients": {
         "grpc": {
@@ -234,6 +253,59 @@
             "UnclaimHomepage": {
               "methods": [
                 "unclaim_homepage"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "LfpProvidersService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Shopping::Merchant::Accounts::V1beta::LfpProvidersService::Client",
+          "rpcs": {
+            "FindLfpProviders": {
+              "methods": [
+                "find_lfp_providers"
+              ]
+            },
+            "LinkLfpProvider": {
+              "methods": [
+                "link_lfp_provider"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "OmnichannelSettingsService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Shopping::Merchant::Accounts::V1beta::OmnichannelSettingsService::Client",
+          "rpcs": {
+            "GetOmnichannelSetting": {
+              "methods": [
+                "get_omnichannel_setting"
+              ]
+            },
+            "ListOmnichannelSettings": {
+              "methods": [
+                "list_omnichannel_settings"
+              ]
+            },
+            "CreateOmnichannelSetting": {
+              "methods": [
+                "create_omnichannel_setting"
+              ]
+            },
+            "UpdateOmnichannelSetting": {
+              "methods": [
+                "update_omnichannel_setting"
+              ]
+            },
+            "RequestInventoryVerification": {
+              "methods": [
+                "request_inventory_verification"
               ]
             }
           }
