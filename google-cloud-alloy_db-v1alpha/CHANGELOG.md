@@ -1,5 +1,16 @@
 # Changelog
 
+### 0.13.0 (2025-05-16)
+
+#### Features
+
+* Support for Gemini Cloud Assist configuration for Instance 
+* Support for machine type configuration 
+* Support for PSC service automation configuration 
+* Support for the export_cluster and import_cluster RPCs 
+* Support for the restore_from_cloud_sql RPC 
+* Support for the scope argument when listing supported database flags 
+
 ### 0.12.0 (2025-05-12)
 
 #### Features
