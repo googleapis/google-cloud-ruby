@@ -1,5 +1,18 @@
 # Changelog
 
+### 1.12.0 (2025-05-16)
+
+#### Features
+
+* Support for additional Schema properties 
+* Support for KNN and ANN searches on RagManagedDb 
+* Support for reporting reasons why supervised tuning examples were dropped 
+* Support for TunedModel checkpoints 
+* Support model checkpoint ID ([#30366](https://github.com/googleapis/google-cloud-ruby/issues/30366)) 
+#### Bug Fixes
+
+* Updated bindings for long-running-operation calls via REST 
+
 ### 1.11.0 (2025-05-12)
 
 #### Features
