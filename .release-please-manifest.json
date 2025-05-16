@@ -271,7 +271,7 @@
   "google-cloud-dataform+FILLER": "0.0.0",
   "google-cloud-dataform-v1": "0.0.1",
   "google-cloud-dataform-v1+FILLER": "0.0.0",
-  "google-cloud-dataform-v1beta1": "0.12.0",
+  "google-cloud-dataform-v1beta1": "0.13.0",
   "google-cloud-dataform-v1beta1+FILLER": "0.0.0",
   "google-cloud-dataplex": "2.1.1",
   "google-cloud-dataplex+FILLER": "0.0.0",
