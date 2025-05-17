@@ -757,7 +757,7 @@ module Google
                   #   @param options [::Gapic::CallOptions, ::Hash]
                   #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
                   #
-                  # @overload update_database_ddl(database: nil, statements: nil, operation_id: nil, proto_descriptors: nil)
+                  # @overload update_database_ddl(database: nil, statements: nil, operation_id: nil, proto_descriptors: nil, throughput_mode: nil)
                   #   Pass arguments to `update_database_ddl` via keyword arguments. Note that at
                   #   least one keyword argument is required. To specify no parameters, or to keep all
                   #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -803,6 +803,10 @@ module Google
                   #     ```
                   #     For more details, see protobuffer [self
                   #     description](https://developers.google.com/protocol-buffers/docs/techniques#self-description).
+                  #   @param throughput_mode [::Boolean]
+                  #     Optional. This field is exposed to be used by the Spanner Migration Tool.
+                  #     For more details, see
+                  #     [SMT](https://github.com/GoogleCloudPlatform/spanner-migration-tool).
                   # @yield [result, operation] Access the result along with the TransportOperation object
                   # @yieldparam result [::Gapic::Operation]
                   # @yieldparam operation [::Gapic::Rest::TransportOperation]

@@ -339,6 +339,7 @@ class ::Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::ClientTest <
     statements = ["hello world"]
     operation_id = "hello world"
     proto_descriptors = "hello world"
+    throughput_mode = true
 
     update_database_ddl_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :update_database_ddl, name
@@ -347,6 +348,7 @@ class ::Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::ClientTest <
       assert_equal ["hello world"], request["statements"]
       assert_equal "hello world", request["operation_id"]
       assert_equal "hello world", request["proto_descriptors"]
+      assert_equal true, request["throughput_mode"]
       refute_nil options
     end
 
@@ -357,35 +359,35 @@ class ::Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::ClientTest <
       end
 
       # Use hash object
-      client.update_database_ddl({ database: database, statements: statements, operation_id: operation_id, proto_descriptors: proto_descriptors }) do |response, operation|
+      client.update_database_ddl({ database: database, statements: statements, operation_id: operation_id, proto_descriptors: proto_descriptors, throughput_mode: throughput_mode }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.update_database_ddl database: database, statements: statements, operation_id: operation_id, proto_descriptors: proto_descriptors do |response, operation|
+      client.update_database_ddl database: database, statements: statements, operation_id: operation_id, proto_descriptors: proto_descriptors, throughput_mode: throughput_mode do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.update_database_ddl ::Google::Cloud::Spanner::Admin::Database::V1::UpdateDatabaseDdlRequest.new(database: database, statements: statements, operation_id: operation_id, proto_descriptors: proto_descriptors) do |response, operation|
+      client.update_database_ddl ::Google::Cloud::Spanner::Admin::Database::V1::UpdateDatabaseDdlRequest.new(database: database, statements: statements, operation_id: operation_id, proto_descriptors: proto_descriptors, throughput_mode: throughput_mode) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.update_database_ddl({ database: database, statements: statements, operation_id: operation_id, proto_descriptors: proto_descriptors }, grpc_options) do |response, operation|
+      client.update_database_ddl({ database: database, statements: statements, operation_id: operation_id, proto_descriptors: proto_descriptors, throughput_mode: throughput_mode }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.update_database_ddl(::Google::Cloud::Spanner::Admin::Database::V1::UpdateDatabaseDdlRequest.new(database: database, statements: statements, operation_id: operation_id, proto_descriptors: proto_descriptors), grpc_options) do |response, operation|
+      client.update_database_ddl(::Google::Cloud::Spanner::Admin::Database::V1::UpdateDatabaseDdlRequest.new(database: database, statements: statements, operation_id: operation_id, proto_descriptors: proto_descriptors, throughput_mode: throughput_mode), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation

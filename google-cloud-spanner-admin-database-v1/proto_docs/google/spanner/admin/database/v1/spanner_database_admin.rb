@@ -338,6 +338,11 @@ module Google
             #     ```
             #     For more details, see protobuffer [self
             #     description](https://developers.google.com/protocol-buffers/docs/techniques#self-description).
+            # @!attribute [rw] throughput_mode
+            #   @return [::Boolean]
+            #     Optional. This field is exposed to be used by the Spanner Migration Tool.
+            #     For more details, see
+            #     [SMT](https://github.com/GoogleCloudPlatform/spanner-migration-tool).
             class UpdateDatabaseDdlRequest
               include ::Google::Protobuf::MessageExts
               extend ::Google::Protobuf::MessageExts::ClassMethods
