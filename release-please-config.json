@@ -399,6 +399,10 @@
       "component": "google-cloud-channel-v1",
       "version_file": "lib/google/cloud/channel/v1/version.rb"
     },
+    "google-cloud-chronicle-v1": {
+      "component": "google-cloud-chronicle-v1",
+      "version_file": "lib/google/cloud/chronicle/v1/version.rb"
+    },
     "google-cloud-cloud_controls_partner": {
       "component": "google-cloud-cloud_controls_partner",
       "version_file": "lib/google/cloud/cloud_controls_partner/version.rb"
