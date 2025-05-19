@@ -923,6 +923,8 @@
   "google-shopping-merchant-notifications+FILLER": "0.0.0",
   "google-shopping-merchant-notifications-v1beta": "0.4.0",
   "google-shopping-merchant-notifications-v1beta+FILLER": "0.0.0",
+  "google-shopping-merchant-order_tracking": "0.0.1",
+  "google-shopping-merchant-order_tracking+FILLER": "0.0.0",
   "google-shopping-merchant-order_tracking-v1beta": "0.0.1",
   "google-shopping-merchant-order_tracking-v1beta+FILLER": "0.0.0",
   "google-shopping-merchant-products": "0.2.2",
