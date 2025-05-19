@@ -313,6 +313,8 @@
   "google-cloud-developer_connect+FILLER": "0.0.0",
   "google-cloud-developer_connect-v1": "1.1.0",
   "google-cloud-developer_connect-v1+FILLER": "0.0.0",
+  "google-cloud-device_streaming": "0.0.1",
+  "google-cloud-device_streaming+FILLER": "0.0.0",
   "google-cloud-device_streaming-v1": "0.0.1",
   "google-cloud-device_streaming-v1+FILLER": "0.0.0",
   "google-cloud-dialogflow": "1.11.1",
