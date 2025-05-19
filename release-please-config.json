@@ -1847,6 +1847,10 @@
       "component": "google-shopping-merchant-notifications-v1beta",
       "version_file": "lib/google/shopping/merchant/notifications/v1beta/version.rb"
     },
+    "google-shopping-merchant-order_tracking-v1beta": {
+      "component": "google-shopping-merchant-order_tracking-v1beta",
+      "version_file": "lib/google/shopping/merchant/order_tracking/v1beta/version.rb"
+    },
     "google-shopping-merchant-products": {
       "component": "google-shopping-merchant-products",
       "version_file": "lib/google/shopping/merchant/products/version.rb"
