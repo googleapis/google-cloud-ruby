@@ -403,6 +403,10 @@
       "component": "google-cloud-channel-v1",
       "version_file": "lib/google/cloud/channel/v1/version.rb"
     },
+    "google-cloud-chronicle": {
+      "component": "google-cloud-chronicle",
+      "version_file": "lib/google/cloud/chronicle/version.rb"
+    },
     "google-cloud-chronicle-v1": {
       "component": "google-cloud-chronicle-v1",
       "version_file": "lib/google/cloud/chronicle/v1/version.rb"
