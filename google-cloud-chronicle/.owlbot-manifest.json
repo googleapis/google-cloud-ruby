@@ -1,0 +1,25 @@
+{
+  "generated": [
+    ".gitignore",
+    ".repo-metadata.json",
+    ".rubocop.yml",
+    ".toys.rb",
+    ".yardopts",
+    "AUTHENTICATION.md",
+    "CHANGELOG.md",
+    "Gemfile",
+    "LICENSE.md",
+    "README.md",
+    "Rakefile",
+    "google-cloud-chronicle.gemspec",
+    "lib/google-cloud-chronicle.rb",
+    "lib/google/cloud/chronicle.rb",
+    "lib/google/cloud/chronicle/version.rb",
+    "test/google/cloud/chronicle/client_test.rb",
+    "test/google/cloud/chronicle/version_test.rb",
+    "test/helper.rb"
+  ],
+  "static": [
+    ".OwlBot.yaml"
+  ]
+}
