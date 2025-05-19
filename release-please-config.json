@@ -631,6 +631,10 @@
       "component": "google-cloud-developer_connect-v1",
       "version_file": "lib/google/cloud/developer_connect/v1/version.rb"
     },
+    "google-cloud-device_streaming-v1": {
+      "component": "google-cloud-device_streaming-v1",
+      "version_file": "lib/google/cloud/device_streaming/v1/version.rb"
+    },
     "google-cloud-dialogflow": {
       "component": "google-cloud-dialogflow",
       "version_file": "lib/google/cloud/dialogflow/version.rb"
