@@ -1,0 +1,495 @@
+{
+  "client_library": {
+    "name": "google-iam-v3beta",
+    "version": "",
+    "language": "RUBY",
+    "apis": [
+      {
+        "id": "google.iam.v3beta",
+        "version": "v3beta"
+      }
+    ]
+  },
+  "snippets": [
+    {
+      "region_tag": "iam_v3beta_generated_PolicyBindings_CreatePolicyBinding_sync",
+      "title": "Snippet for the create_policy_binding call in the PolicyBindings service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Iam::V3beta::PolicyBindings::Client#create_policy_binding.",
+      "file": "policy_bindings/create_policy_binding.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_policy_binding",
+        "full_name": "::Google::Iam::V3beta::PolicyBindings::Client#create_policy_binding",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Iam::V3beta::CreatePolicyBindingRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "PolicyBindings::Client",
+          "full_name": "::Google::Iam::V3beta::PolicyBindings::Client"
+        },
+        "method": {
+          "short_name": "CreatePolicyBinding",
+          "full_name": "google.iam.v3beta.PolicyBindings.CreatePolicyBinding",
+          "service": {
+            "short_name": "PolicyBindings",
+            "full_name": "google.iam.v3beta.PolicyBindings"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "iam_v3beta_generated_PolicyBindings_GetPolicyBinding_sync",
+      "title": "Snippet for the get_policy_binding call in the PolicyBindings service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Iam::V3beta::PolicyBindings::Client#get_policy_binding.",
+      "file": "policy_bindings/get_policy_binding.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_policy_binding",
+        "full_name": "::Google::Iam::V3beta::PolicyBindings::Client#get_policy_binding",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Iam::V3beta::GetPolicyBindingRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Iam::V3beta::PolicyBinding",
+        "client": {
+          "short_name": "PolicyBindings::Client",
+          "full_name": "::Google::Iam::V3beta::PolicyBindings::Client"
+        },
+        "method": {
+          "short_name": "GetPolicyBinding",
+          "full_name": "google.iam.v3beta.PolicyBindings.GetPolicyBinding",
+          "service": {
+            "short_name": "PolicyBindings",
+            "full_name": "google.iam.v3beta.PolicyBindings"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "iam_v3beta_generated_PolicyBindings_UpdatePolicyBinding_sync",
+      "title": "Snippet for the update_policy_binding call in the PolicyBindings service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Iam::V3beta::PolicyBindings::Client#update_policy_binding.",
+      "file": "policy_bindings/update_policy_binding.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_policy_binding",
+        "full_name": "::Google::Iam::V3beta::PolicyBindings::Client#update_policy_binding",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Iam::V3beta::UpdatePolicyBindingRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "PolicyBindings::Client",
+          "full_name": "::Google::Iam::V3beta::PolicyBindings::Client"
+        },
+        "method": {
+          "short_name": "UpdatePolicyBinding",
+          "full_name": "google.iam.v3beta.PolicyBindings.UpdatePolicyBinding",
+          "service": {
+            "short_name": "PolicyBindings",
+            "full_name": "google.iam.v3beta.PolicyBindings"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "iam_v3beta_generated_PolicyBindings_DeletePolicyBinding_sync",
+      "title": "Snippet for the delete_policy_binding call in the PolicyBindings service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Iam::V3beta::PolicyBindings::Client#delete_policy_binding.",
+      "file": "policy_bindings/delete_policy_binding.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_policy_binding",
+        "full_name": "::Google::Iam::V3beta::PolicyBindings::Client#delete_policy_binding",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Iam::V3beta::DeletePolicyBindingRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "PolicyBindings::Client",
+          "full_name": "::Google::Iam::V3beta::PolicyBindings::Client"
+        },
+        "method": {
+          "short_name": "DeletePolicyBinding",
+          "full_name": "google.iam.v3beta.PolicyBindings.DeletePolicyBinding",
+          "service": {
+            "short_name": "PolicyBindings",
+            "full_name": "google.iam.v3beta.PolicyBindings"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "iam_v3beta_generated_PolicyBindings_ListPolicyBindings_sync",
+      "title": "Snippet for the list_policy_bindings call in the PolicyBindings service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Iam::V3beta::PolicyBindings::Client#list_policy_bindings.",
+      "file": "policy_bindings/list_policy_bindings.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_policy_bindings",
+        "full_name": "::Google::Iam::V3beta::PolicyBindings::Client#list_policy_bindings",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Iam::V3beta::ListPolicyBindingsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Iam::V3beta::ListPolicyBindingsResponse",
+        "client": {
+          "short_name": "PolicyBindings::Client",
+          "full_name": "::Google::Iam::V3beta::PolicyBindings::Client"
+        },
+        "method": {
+          "short_name": "ListPolicyBindings",
+          "full_name": "google.iam.v3beta.PolicyBindings.ListPolicyBindings",
+          "service": {
+            "short_name": "PolicyBindings",
+            "full_name": "google.iam.v3beta.PolicyBindings"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "iam_v3beta_generated_PolicyBindings_SearchTargetPolicyBindings_sync",
+      "title": "Snippet for the search_target_policy_bindings call in the PolicyBindings service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Iam::V3beta::PolicyBindings::Client#search_target_policy_bindings.",
+      "file": "policy_bindings/search_target_policy_bindings.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "search_target_policy_bindings",
+        "full_name": "::Google::Iam::V3beta::PolicyBindings::Client#search_target_policy_bindings",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Iam::V3beta::SearchTargetPolicyBindingsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Iam::V3beta::SearchTargetPolicyBindingsResponse",
+        "client": {
+          "short_name": "PolicyBindings::Client",
+          "full_name": "::Google::Iam::V3beta::PolicyBindings::Client"
+        },
+        "method": {
+          "short_name": "SearchTargetPolicyBindings",
+          "full_name": "google.iam.v3beta.PolicyBindings.SearchTargetPolicyBindings",
+          "service": {
+            "short_name": "PolicyBindings",
+            "full_name": "google.iam.v3beta.PolicyBindings"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "iam_v3beta_generated_PrincipalAccessBoundaryPolicies_CreatePrincipalAccessBoundaryPolicy_sync",
+      "title": "Snippet for the create_principal_access_boundary_policy call in the PrincipalAccessBoundaryPolicies service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Iam::V3beta::PrincipalAccessBoundaryPolicies::Client#create_principal_access_boundary_policy.",
+      "file": "principal_access_boundary_policies/create_principal_access_boundary_policy.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_principal_access_boundary_policy",
+        "full_name": "::Google::Iam::V3beta::PrincipalAccessBoundaryPolicies::Client#create_principal_access_boundary_policy",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Iam::V3beta::CreatePrincipalAccessBoundaryPolicyRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "PrincipalAccessBoundaryPolicies::Client",
+          "full_name": "::Google::Iam::V3beta::PrincipalAccessBoundaryPolicies::Client"
+        },
+        "method": {
+          "short_name": "CreatePrincipalAccessBoundaryPolicy",
+          "full_name": "google.iam.v3beta.PrincipalAccessBoundaryPolicies.CreatePrincipalAccessBoundaryPolicy",
+          "service": {
+            "short_name": "PrincipalAccessBoundaryPolicies",
+            "full_name": "google.iam.v3beta.PrincipalAccessBoundaryPolicies"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "iam_v3beta_generated_PrincipalAccessBoundaryPolicies_GetPrincipalAccessBoundaryPolicy_sync",
+      "title": "Snippet for the get_principal_access_boundary_policy call in the PrincipalAccessBoundaryPolicies service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Iam::V3beta::PrincipalAccessBoundaryPolicies::Client#get_principal_access_boundary_policy.",
+      "file": "principal_access_boundary_policies/get_principal_access_boundary_policy.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_principal_access_boundary_policy",
+        "full_name": "::Google::Iam::V3beta::PrincipalAccessBoundaryPolicies::Client#get_principal_access_boundary_policy",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Iam::V3beta::GetPrincipalAccessBoundaryPolicyRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Iam::V3beta::PrincipalAccessBoundaryPolicy",
+        "client": {
+          "short_name": "PrincipalAccessBoundaryPolicies::Client",
+          "full_name": "::Google::Iam::V3beta::PrincipalAccessBoundaryPolicies::Client"
+        },
+        "method": {
+          "short_name": "GetPrincipalAccessBoundaryPolicy",
+          "full_name": "google.iam.v3beta.PrincipalAccessBoundaryPolicies.GetPrincipalAccessBoundaryPolicy",
+          "service": {
+            "short_name": "PrincipalAccessBoundaryPolicies",
+            "full_name": "google.iam.v3beta.PrincipalAccessBoundaryPolicies"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "iam_v3beta_generated_PrincipalAccessBoundaryPolicies_UpdatePrincipalAccessBoundaryPolicy_sync",
+      "title": "Snippet for the update_principal_access_boundary_policy call in the PrincipalAccessBoundaryPolicies service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Iam::V3beta::PrincipalAccessBoundaryPolicies::Client#update_principal_access_boundary_policy.",
+      "file": "principal_access_boundary_policies/update_principal_access_boundary_policy.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_principal_access_boundary_policy",
+        "full_name": "::Google::Iam::V3beta::PrincipalAccessBoundaryPolicies::Client#update_principal_access_boundary_policy",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Iam::V3beta::UpdatePrincipalAccessBoundaryPolicyRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "PrincipalAccessBoundaryPolicies::Client",
+          "full_name": "::Google::Iam::V3beta::PrincipalAccessBoundaryPolicies::Client"
+        },
+        "method": {
+          "short_name": "UpdatePrincipalAccessBoundaryPolicy",
+          "full_name": "google.iam.v3beta.PrincipalAccessBoundaryPolicies.UpdatePrincipalAccessBoundaryPolicy",
+          "service": {
+            "short_name": "PrincipalAccessBoundaryPolicies",
+            "full_name": "google.iam.v3beta.PrincipalAccessBoundaryPolicies"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "iam_v3beta_generated_PrincipalAccessBoundaryPolicies_DeletePrincipalAccessBoundaryPolicy_sync",
+      "title": "Snippet for the delete_principal_access_boundary_policy call in the PrincipalAccessBoundaryPolicies service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Iam::V3beta::PrincipalAccessBoundaryPolicies::Client#delete_principal_access_boundary_policy.",
+      "file": "principal_access_boundary_policies/delete_principal_access_boundary_policy.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_principal_access_boundary_policy",
+        "full_name": "::Google::Iam::V3beta::PrincipalAccessBoundaryPolicies::Client#delete_principal_access_boundary_policy",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Iam::V3beta::DeletePrincipalAccessBoundaryPolicyRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "PrincipalAccessBoundaryPolicies::Client",
+          "full_name": "::Google::Iam::V3beta::PrincipalAccessBoundaryPolicies::Client"
+        },
+        "method": {
+          "short_name": "DeletePrincipalAccessBoundaryPolicy",
+          "full_name": "google.iam.v3beta.PrincipalAccessBoundaryPolicies.DeletePrincipalAccessBoundaryPolicy",
+          "service": {
+            "short_name": "PrincipalAccessBoundaryPolicies",
+            "full_name": "google.iam.v3beta.PrincipalAccessBoundaryPolicies"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "iam_v3beta_generated_PrincipalAccessBoundaryPolicies_ListPrincipalAccessBoundaryPolicies_sync",
+      "title": "Snippet for the list_principal_access_boundary_policies call in the PrincipalAccessBoundaryPolicies service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Iam::V3beta::PrincipalAccessBoundaryPolicies::Client#list_principal_access_boundary_policies.",
+      "file": "principal_access_boundary_policies/list_principal_access_boundary_policies.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_principal_access_boundary_policies",
+        "full_name": "::Google::Iam::V3beta::PrincipalAccessBoundaryPolicies::Client#list_principal_access_boundary_policies",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Iam::V3beta::ListPrincipalAccessBoundaryPoliciesRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Iam::V3beta::ListPrincipalAccessBoundaryPoliciesResponse",
+        "client": {
+          "short_name": "PrincipalAccessBoundaryPolicies::Client",
+          "full_name": "::Google::Iam::V3beta::PrincipalAccessBoundaryPolicies::Client"
+        },
+        "method": {
+          "short_name": "ListPrincipalAccessBoundaryPolicies",
+          "full_name": "google.iam.v3beta.PrincipalAccessBoundaryPolicies.ListPrincipalAccessBoundaryPolicies",
+          "service": {
+            "short_name": "PrincipalAccessBoundaryPolicies",
+            "full_name": "google.iam.v3beta.PrincipalAccessBoundaryPolicies"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "iam_v3beta_generated_PrincipalAccessBoundaryPolicies_SearchPrincipalAccessBoundaryPolicyBindings_sync",
+      "title": "Snippet for the search_principal_access_boundary_policy_bindings call in the PrincipalAccessBoundaryPolicies service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Iam::V3beta::PrincipalAccessBoundaryPolicies::Client#search_principal_access_boundary_policy_bindings.",
+      "file": "principal_access_boundary_policies/search_principal_access_boundary_policy_bindings.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "search_principal_access_boundary_policy_bindings",
+        "full_name": "::Google::Iam::V3beta::PrincipalAccessBoundaryPolicies::Client#search_principal_access_boundary_policy_bindings",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Iam::V3beta::SearchPrincipalAccessBoundaryPolicyBindingsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Iam::V3beta::SearchPrincipalAccessBoundaryPolicyBindingsResponse",
+        "client": {
+          "short_name": "PrincipalAccessBoundaryPolicies::Client",
+          "full_name": "::Google::Iam::V3beta::PrincipalAccessBoundaryPolicies::Client"
+        },
+        "method": {
+          "short_name": "SearchPrincipalAccessBoundaryPolicyBindings",
+          "full_name": "google.iam.v3beta.PrincipalAccessBoundaryPolicies.SearchPrincipalAccessBoundaryPolicyBindings",
+          "service": {
+            "short_name": "PrincipalAccessBoundaryPolicies",
+            "full_name": "google.iam.v3beta.PrincipalAccessBoundaryPolicies"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    }
+  ]
+}
