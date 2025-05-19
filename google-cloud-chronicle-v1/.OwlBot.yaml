@@ -1,0 +1,3 @@
+deep-copy-regex:
+  - source: /google/cloud/chronicle/v1/[^/]+-ruby/(.*)
+    dest: /owl-bot-staging/google-cloud-chronicle-v1/$1
