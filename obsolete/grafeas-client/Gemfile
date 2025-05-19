@@ -1,7 +1,0 @@
-source "https://rubygems.org"
-
-gemspec
-
-gem "grafeas", path: "../grafeas"
-
-gem "rake", "~> 13.0"
