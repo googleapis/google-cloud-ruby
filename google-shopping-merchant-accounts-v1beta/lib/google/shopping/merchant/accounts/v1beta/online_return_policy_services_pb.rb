@@ -46,7 +46,7 @@ module Google
               rpc :CreateOnlineReturnPolicy, ::Google::Shopping::Merchant::Accounts::V1beta::CreateOnlineReturnPolicyRequest, ::Google::Shopping::Merchant::Accounts::V1beta::OnlineReturnPolicy
               # Updates an existing return policy for a given merchant.
               rpc :UpdateOnlineReturnPolicy, ::Google::Shopping::Merchant::Accounts::V1beta::UpdateOnlineReturnPolicyRequest, ::Google::Shopping::Merchant::Accounts::V1beta::OnlineReturnPolicy
-              # Deletes an existing return policy for a given merchant.
+              # Deletes an existing return policy.
               rpc :DeleteOnlineReturnPolicy, ::Google::Shopping::Merchant::Accounts::V1beta::DeleteOnlineReturnPolicyRequest, ::Google::Protobuf::Empty
             end
 
