@@ -31,7 +31,7 @@ module Google
         # "comment" level.
         # @!attribute [r] name
         #   @return [::String]
-        #     Output only. The resource name of the attachment.
+        #     Output only. Identifier. The resource name of the attachment.
         # @!attribute [r] create_time
         #   @return [::Google::Protobuf::Timestamp]
         #     Output only. The time at which the attachment was created.
