@@ -124,8 +124,8 @@ describe "Buckets Snippets" do
 
   describe "storage_soft_deleted_bucket" do
     let(:new_bucket_name) { random_bucket_name }
-    let(:new_bucket) { storage_client.create_bucket new_bucket_name}
-    let(:new_generation) {new_bucket.generation}
+    let(:new_bucket) { storage_client.create_bucket new_bucket_name }
+    let(:new_generation) { new_bucket.generation }
     before do
       delete_bucket_helper new_bucket.name
     end
@@ -145,7 +145,6 @@ describe "Buckets Snippets" do
       end
       assert_includes list_deleted_bucket, new_bucket_name
     end
-
   end
 
   describe "storage_create_bucket_dual_region" do
