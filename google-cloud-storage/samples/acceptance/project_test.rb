@@ -39,6 +39,7 @@ describe "storage_soft_deleted_bucket" do
 
   it "restores a soft deleted bucket" do
     delete_bucket_helper bucket.name
+    # restoring deleted bucket
     _out, _err = capture_io do
       restore_bucket bucket_name: bucket.name, generation: generation
     end
