@@ -723,7 +723,7 @@ module Google
         #   upload. Can be an File object, or File-like object such as StringIO.
         #   (If the object does not have path, a `path` argument must be also be
         #   provided.)
-        # @param [String] upload_id Unique Id of an resumable upload
+        # @param [String] upload_id Unique Id of a resumable upload
         #
         # @example
         #   require "google/cloud/storage"
