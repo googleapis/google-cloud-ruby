@@ -1014,6 +1014,12 @@ module Google
         # planning stages. If `analyze` is set to `true` the query will be planned and executed,
         # returning the full query results alongside both planning and execution stage metrics.
         #
+        # Unlike the Enumerator object that is returned from the `Query#get`,
+        # iterating over QueryExplainResult multiple times will not result in
+        # multiple requests to the server. The first set of results will be saved
+        # and re-used instead.
+        # This is to avoid the situations where the metrics change unpredictably when results are looked at.
+        #
         # @param [Time] read_time Reads documents as they were at the given time.
         #   This may not be older than 270 seconds. Optional
         #
@@ -1026,11 +1032,6 @@ module Google
         #     planning stage metrics, and execution stage metrics.
         #   Defaults to `false`.
         #
-        # Unlike the Enumerator object that is returned from the `Query#get`,
-        # iterating over QueryExplainResult multiple times will not result in
-        # multiple requests to the server. The first set of results will be saved
-        # and re-used instead.
-        #
         # @example Iterating over results multiple times
         #   require "google/cloud/firestore"
         #
@@ -1039,8 +1040,6 @@ module Google
         #   explanation_result = query.explain analyze: true
         #   results = explanation_result.to_a
         #   results_2 = explanation_result.to_a # same results, no re-query
-        #
-        # This is to avoid the situations where the metrics change unpredictably when results are looked at.
         #
         # @return [QueryExplainResult]
         #
