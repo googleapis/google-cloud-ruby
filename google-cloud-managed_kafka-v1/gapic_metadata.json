@@ -79,6 +79,41 @@
               "methods": [
                 "delete_consumer_group"
               ]
+            },
+            "ListAcls": {
+              "methods": [
+                "list_acls"
+              ]
+            },
+            "GetAcl": {
+              "methods": [
+                "get_acl"
+              ]
+            },
+            "CreateAcl": {
+              "methods": [
+                "create_acl"
+              ]
+            },
+            "UpdateAcl": {
+              "methods": [
+                "update_acl"
+              ]
+            },
+            "DeleteAcl": {
+              "methods": [
+                "delete_acl"
+              ]
+            },
+            "AddAclEntry": {
+              "methods": [
+                "add_acl_entry"
+              ]
+            },
+            "RemoveAclEntry": {
+              "methods": [
+                "remove_acl_entry"
+              ]
             }
           }
         }

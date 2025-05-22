@@ -62,6 +62,23 @@ module Google
             rpc :UpdateConsumerGroup, ::Google::Cloud::ManagedKafka::V1::UpdateConsumerGroupRequest, ::Google::Cloud::ManagedKafka::V1::ConsumerGroup
             # Deletes a single consumer group.
             rpc :DeleteConsumerGroup, ::Google::Cloud::ManagedKafka::V1::DeleteConsumerGroupRequest, ::Google::Protobuf::Empty
+            # Lists the acls in a given cluster.
+            rpc :ListAcls, ::Google::Cloud::ManagedKafka::V1::ListAclsRequest, ::Google::Cloud::ManagedKafka::V1::ListAclsResponse
+            # Returns the properties of a single acl.
+            rpc :GetAcl, ::Google::Cloud::ManagedKafka::V1::GetAclRequest, ::Google::Cloud::ManagedKafka::V1::Acl
+            # Creates a new acl in the given project, location, and cluster.
+            rpc :CreateAcl, ::Google::Cloud::ManagedKafka::V1::CreateAclRequest, ::Google::Cloud::ManagedKafka::V1::Acl
+            # Updates the properties of a single acl.
+            rpc :UpdateAcl, ::Google::Cloud::ManagedKafka::V1::UpdateAclRequest, ::Google::Cloud::ManagedKafka::V1::Acl
+            # Deletes an acl.
+            rpc :DeleteAcl, ::Google::Cloud::ManagedKafka::V1::DeleteAclRequest, ::Google::Protobuf::Empty
+            # Incremental update: Adds an acl entry to an acl. Creates the acl if it does
+            # not exist yet.
+            rpc :AddAclEntry, ::Google::Cloud::ManagedKafka::V1::AddAclEntryRequest, ::Google::Cloud::ManagedKafka::V1::AddAclEntryResponse
+            # Incremental update: Removes an acl entry from an acl. Deletes the acl if
+            # its acl entries become empty (i.e. if the removed entry was the last one in
+            # the acl).
+            rpc :RemoveAclEntry, ::Google::Cloud::ManagedKafka::V1::RemoveAclEntryRequest, ::Google::Cloud::ManagedKafka::V1::RemoveAclEntryResponse
           end
 
           Stub = Service.rpc_stub_class
