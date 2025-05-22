@@ -917,6 +917,8 @@
   "google-shopping-merchant-inventories+FILLER": "0.0.0",
   "google-shopping-merchant-inventories-v1beta": "0.7.0",
   "google-shopping-merchant-inventories-v1beta+FILLER": "0.0.0",
+  "google-shopping-merchant-issue_resolution": "0.0.1",
+  "google-shopping-merchant-issue_resolution+FILLER": "0.0.0",
   "google-shopping-merchant-issue_resolution-v1beta": "0.0.1",
   "google-shopping-merchant-issue_resolution-v1beta+FILLER": "0.0.0",
   "google-shopping-merchant-lfp": "0.3.1",
