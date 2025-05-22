@@ -207,35 +207,6 @@ module Google
               ##
               # Retrieve a case.
               #
-              # EXAMPLES:
-              #
-              # cURL:
-              #
-              # ```shell
-              # case="projects/some-project/cases/16033687"
-              # curl \
-              #   --header "Authorization: Bearer $(gcloud auth print-access-token)" \
-              #   "https://cloudsupport.googleapis.com/v2/$case"
-              # ```
-              #
-              # Python:
-              #
-              # ```python
-              # import googleapiclient.discovery
-              #
-              # api_version = "v2"
-              # supportApiService = googleapiclient.discovery.build(
-              #     serviceName="cloudsupport",
-              #     version=api_version,
-              #     discoveryServiceUrl=f"https://cloudsupport.googleapis.com/$discovery/rest?version=\\{api_version}",
-              # )
-              #
-              # request = supportApiService.cases().get(
-              #     name="projects/some-project/cases/43595344",
-              # )
-              # print(request.execute())
-              # ```
-              #
               # @overload get_case(request, options = nil)
               #   Pass arguments to `get_case` via a request object, either of type
               #   {::Google::Cloud::Support::V2beta::GetCaseRequest} or an equivalent Hash.
@@ -317,34 +288,6 @@ module Google
               # For example, listing cases under an organization only returns the cases
               # that are directly parented by that organization. To retrieve cases
               # under an organization and its projects, use `cases.search`.
-              #
-              # EXAMPLES:
-              #
-              # cURL:
-              #
-              # ```shell
-              # parent="projects/some-project"
-              # curl \
-              #   --header "Authorization: Bearer $(gcloud auth print-access-token)" \
-              #   "https://cloudsupport.googleapis.com/v2/$parent/cases"
-              # ```
-              #
-              # Python:
-              #
-              # ```python
-              # import googleapiclient.discovery
-              #
-              # api_version = "v2"
-              # supportApiService = googleapiclient.discovery.build(
-              #     serviceName="cloudsupport",
-              #     version=api_version,
-              #     discoveryServiceUrl=f"https://cloudsupport.googleapis.com/$discovery/rest?version=\\{api_version}",
-              # )
-              #
-              # request =
-              #   supportApiService.cases().list(parent="projects/some-project")
-              # print(request.execute())
-              # ```
               #
               # @overload list_cases(request, options = nil)
               #   Pass arguments to `list_cases` via a request object, either of type
@@ -457,34 +400,6 @@ module Google
 
               ##
               # Search for cases using a query.
-              #
-              # EXAMPLES:
-              #
-              # cURL:
-              #
-              # ```shell
-              # parent="projects/some-project"
-              # curl \
-              #   --header "Authorization: Bearer $(gcloud auth print-access-token)" \
-              #   "https://cloudsupport.googleapis.com/v2/$parent/cases:search"
-              # ```
-              #
-              # Python:
-              #
-              # ```python
-              # import googleapiclient.discovery
-              #
-              # api_version = "v2"
-              # supportApiService = googleapiclient.discovery.build(
-              #     serviceName="cloudsupport",
-              #     version=api_version,
-              #     discoveryServiceUrl=f"https://cloudsupport.googleapis.com/$discovery/rest?version=\\{api_version}",
-              # )
-              # request = supportApiService.cases().search(
-              #     parent="projects/some-project", query="state=OPEN"
-              # )
-              # print(request.execute())
-              # ```
               #
               # @overload search_cases(request, options = nil)
               #   Pass arguments to `search_cases` via a request object, either of type
@@ -613,61 +528,6 @@ module Google
               # `classification`, and `priority`. If you're just testing the API and don't
               # want to route your case to an agent, set `testCase=true`.
               #
-              # EXAMPLES:
-              #
-              # cURL:
-              #
-              # ```shell
-              # parent="projects/some-project"
-              # curl \
-              #   --request POST \
-              #   --header "Authorization: Bearer $(gcloud auth print-access-token)" \
-              #   --header 'Content-Type: application/json' \
-              #   --data '{
-              #     "display_name": "Test case created by me.",
-              #     "description": "a random test case, feel free to close",
-              #     "classification": {
-              #       "id":
-              #       "100IK2AKCLHMGRJ9CDGMOCGP8DM6UTB4BT262T31BT1M2T31DHNMENPO6KS36CPJ786L2TBFEHGN6NPI64R3CDHN8880G08I1H3MURR7DHII0GRCDTQM8"
-              #     },
-              #     "time_zone": "-07:00",
-              #     "subscriber_email_addresses": [
-              #       "foo@domain.com",
-              #       "bar@domain.com"
-              #     ],
-              #     "testCase": true,
-              #     "priority": "P3"
-              #   }' \
-              #   "https://cloudsupport.googleapis.com/v2/$parent/cases"
-              # ```
-              #
-              # Python:
-              #
-              # ```python
-              # import googleapiclient.discovery
-              #
-              # api_version = "v2"
-              # supportApiService = googleapiclient.discovery.build(
-              #     serviceName="cloudsupport",
-              #     version=api_version,
-              #     discoveryServiceUrl=f"https://cloudsupport.googleapis.com/$discovery/rest?version=\\{api_version}",
-              # )
-              # request = supportApiService.cases().create(
-              #     parent="projects/some-project",
-              #     body={
-              #         "displayName": "A Test Case",
-              #         "description": "This is a test case.",
-              #         "testCase": True,
-              #         "priority": "P2",
-              #         "classification": {
-              #             "id":
-              #               "100IK2AKCLHMGRJ9CDGMOCGP8DM6UTB4BT262T31BT1M2T31DHNMENPO6KS36CPJ786L2TBFEHGN6NPI64R3CDHN8880G08I1H3MURR7DHII0GRCDTQM8"
-              #         },
-              #     },
-              # )
-              # print(request.execute())
-              # ```
-              #
               # @overload create_case(request, options = nil)
               #   Pass arguments to `create_case` via a request object, either of type
               #   {::Google::Cloud::Support::V2beta::CreateCaseRequest} or an equivalent Hash.
@@ -747,43 +607,6 @@ module Google
 
               ##
               # Update a case. Only some fields can be updated.
-              #
-              # EXAMPLES:
-              #
-              # cURL:
-              #
-              # ```shell
-              # case="projects/some-project/cases/43595344"
-              # curl \
-              #   --request PATCH \
-              #   --header "Authorization: Bearer $(gcloud auth print-access-token)" \
-              #   --header "Content-Type: application/json" \
-              #   --data '{
-              #     "priority": "P1"
-              #   }' \
-              #   "https://cloudsupport.googleapis.com/v2/$case?updateMask=priority"
-              # ```
-              #
-              # Python:
-              #
-              # ```python
-              # import googleapiclient.discovery
-              #
-              # api_version = "v2"
-              # supportApiService = googleapiclient.discovery.build(
-              #     serviceName="cloudsupport",
-              #     version=api_version,
-              #     discoveryServiceUrl=f"https://cloudsupport.googleapis.com/$discovery/rest?version=\\{api_version}",
-              # )
-              # request = supportApiService.cases().patch(
-              #     name="projects/some-project/cases/43112854",
-              #     body={
-              #         "displayName": "This is Now a New Title",
-              #         "priority": "P2",
-              #     },
-              # )
-              # print(request.execute())
-              # ```
               #
               # @overload update_case(request, options = nil)
               #   Pass arguments to `update_case` via a request object, either of type
@@ -878,48 +701,6 @@ module Google
               # escalations' in the feature list to find out which ones let you
               # do that.
               #
-              # EXAMPLES:
-              #
-              # cURL:
-              #
-              # ```shell
-              # case="projects/some-project/cases/43595344"
-              # curl \
-              #   --request POST \
-              #   --header "Authorization: Bearer $(gcloud auth print-access-token)" \
-              #   --header "Content-Type: application/json" \
-              #   --data '{
-              #     "escalation": {
-              #       "reason": "BUSINESS_IMPACT",
-              #       "justification": "This is a test escalation."
-              #     }
-              #   }' \
-              #   "https://cloudsupport.googleapis.com/v2/$case:escalate"
-              # ```
-              #
-              # Python:
-              #
-              # ```python
-              # import googleapiclient.discovery
-              #
-              # api_version = "v2"
-              # supportApiService = googleapiclient.discovery.build(
-              #     serviceName="cloudsupport",
-              #     version=api_version,
-              #     discoveryServiceUrl=f"https://cloudsupport.googleapis.com/$discovery/rest?version=\\{api_version}",
-              # )
-              # request = supportApiService.cases().escalate(
-              #     name="projects/some-project/cases/43595344",
-              #     body={
-              #         "escalation": {
-              #             "reason": "BUSINESS_IMPACT",
-              #             "justification": "This is a test escalation.",
-              #         },
-              #     },
-              # )
-              # print(request.execute())
-              # ```
-              #
               # @overload escalate_case(request, options = nil)
               #   Pass arguments to `escalate_case` via a request object, either of type
               #   {::Google::Cloud::Support::V2beta::EscalateCaseRequest} or an equivalent Hash.
@@ -999,35 +780,6 @@ module Google
 
               ##
               # Close a case.
-              #
-              # EXAMPLES:
-              #
-              # cURL:
-              #
-              # ```shell
-              # case="projects/some-project/cases/43595344"
-              # curl \
-              #   --request POST \
-              #   --header "Authorization: Bearer $(gcloud auth print-access-token)" \
-              #   "https://cloudsupport.googleapis.com/v2/$case:close"
-              # ```
-              #
-              # Python:
-              #
-              # ```python
-              # import googleapiclient.discovery
-              #
-              # api_version = "v2"
-              # supportApiService = googleapiclient.discovery.build(
-              #     serviceName="cloudsupport",
-              #     version=api_version,
-              #     discoveryServiceUrl=f"https://cloudsupport.googleapis.com/$discovery/rest?version=\\{api_version}",
-              # )
-              # request = supportApiService.cases().close(
-              #     name="projects/some-project/cases/43595344"
-              # )
-              # print(request.execute())
-              # ```
               #
               # @overload close_case(request, options = nil)
               #   Pass arguments to `close_case` via a request object, either of type
@@ -1115,32 +867,6 @@ module Google
               # months. When a classification is deactivated, this endpoint immediately
               # stops returning it. After six months, `case.create` requests using the
               # classification will fail.
-              #
-              # EXAMPLES:
-              #
-              # cURL:
-              #
-              # ```shell
-              # curl \
-              #   --header "Authorization: Bearer $(gcloud auth print-access-token)" \
-              #   'https://cloudsupport.googleapis.com/v2/caseClassifications:search?query=display_name:"*Compute%20Engine*"'
-              # ```
-              #
-              # Python:
-              #
-              # ```python
-              # import googleapiclient.discovery
-              #
-              # supportApiService = googleapiclient.discovery.build(
-              #     serviceName="cloudsupport",
-              #     version="v2",
-              #     discoveryServiceUrl=f"https://cloudsupport.googleapis.com/$discovery/rest?version=v2",
-              # )
-              # request = supportApiService.caseClassifications().search(
-              #     query='display_name:"*Compute Engine*"'
-              # )
-              # print(request.execute())
-              # ```
               #
               # @overload search_case_classifications(request, options = nil)
               #   Pass arguments to `search_case_classifications` via a request object, either of type
