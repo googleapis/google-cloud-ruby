@@ -1,5 +1,11 @@
 # Changelog
 
+### 1.13.0 (2025-05-22)
+
+#### Features
+
+* Support thoughts_token_count to prediction service ([#30403](https://github.com/googleapis/google-cloud-ruby/issues/30403)) 
+
 ### 1.12.0 (2025-05-16)
 
 #### Features
