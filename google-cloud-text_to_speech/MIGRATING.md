@@ -1,4 +1,4 @@
-## Migrating to google-cloud-text_to_speech 1.0
+# Migrating to google-cloud-text_to_speech 1.0
 
 The 1.0 release of the google-cloud-text_to_speech client is a significant upgrade
 based on a [next-gen code generator](https://github.com/googleapis/gapic-generator-ruby),

@@ -1,4 +1,4 @@
-## Migrating to google-cloud-video_intelligence 3.0
+# Migrating to google-cloud-video_intelligence 3.0
 
 The 3.0 release of the google-cloud-video_intelligence client is a significant upgrade
 based on a [next-gen code generator](https://github.com/googleapis/gapic-generator-ruby),
