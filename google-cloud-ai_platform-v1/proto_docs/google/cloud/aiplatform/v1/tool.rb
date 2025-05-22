@@ -289,9 +289,41 @@ module Google
         #     Optional. Fully-qualified Vertex AI Search engine resource ID.
         #     Format:
         #     `projects/{project}/locations/{location}/collections/{collection}/engines/{engine}`
+        # @!attribute [rw] max_results
+        #   @return [::Integer]
+        #     Optional. Number of search results to return per query.
+        #     The default value is 10.
+        #     The maximumm allowed value is 10.
+        # @!attribute [rw] filter
+        #   @return [::String]
+        #     Optional. Filter strings to be passed to the search API.
+        # @!attribute [rw] data_store_specs
+        #   @return [::Array<::Google::Cloud::AIPlatform::V1::VertexAISearch::DataStoreSpec>]
+        #     Specifications that define the specific DataStores to be searched, along
+        #     with configurations for those data stores. This is only considered for
+        #     Engines with multiple data stores.
+        #     It should only be set if engine is used.
         class VertexAISearch
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Define data stores within engine to filter on in a search call and
+          # configurations for those data stores. For more information, see
+          # https://cloud.google.com/generative-ai-app-builder/docs/reference/rpc/google.cloud.discoveryengine.v1#datastorespec
+          # @!attribute [rw] data_store
+          #   @return [::String]
+          #     Full resource name of DataStore, such as
+          #     Format:
+          #     `projects/{project}/locations/{location}/collections/{collection}/dataStores/{dataStore}`
+          # @!attribute [rw] filter
+          #   @return [::String]
+          #     Optional. Filter specification to filter documents in the data store
+          #     specified by data_store field. For more information on filtering, see
+          #     [Filtering](https://cloud.google.com/generative-ai-app-builder/docs/filter-search-metadata)
+          class DataStoreSpec
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
         end
 
         # Tool to retrieve public web data for grounding, powered by Google.
