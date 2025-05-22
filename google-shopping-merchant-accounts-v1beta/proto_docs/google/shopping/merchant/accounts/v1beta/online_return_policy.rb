@@ -32,6 +32,58 @@ module Google
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
 
+          # Request message for the `CreateOnlineReturnPolicy` method.
+          # @!attribute [rw] parent
+          #   @return [::String]
+          #     Required. The merchant account for which the return policy will be created.
+          #     Format: `accounts/{account}`
+          # @!attribute [rw] online_return_policy
+          #   @return [::Google::Shopping::Merchant::Accounts::V1beta::OnlineReturnPolicy]
+          #     Required. The return policy object to create.
+          class CreateOnlineReturnPolicyRequest
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Request message for the `UpdateOnlineReturnPolicy` method. The method
+          # supports field masks and when the mask is provided, only the fields specified
+          # in the mask are updated.
+          # @!attribute [rw] online_return_policy
+          #   @return [::Google::Shopping::Merchant::Accounts::V1beta::OnlineReturnPolicy]
+          #     Required. The online return policy to update.
+          #     The online return policy's `name` field is used to identify the
+          #     online return policy to be updated.
+          # @!attribute [rw] update_mask
+          #   @return [::Google::Protobuf::FieldMask]
+          #     Optional. List of fields being updated.
+          #
+          #     The following fields are supported (in both `snake_case` and
+          #     `lowerCamelCase`):
+          #
+          #     - `accept_defective_only`
+          #     - `accept_exchange`
+          #     - `item_conditions`
+          #     - `policy`
+          #     - `process_refund_days`
+          #     - `restocking_fee`
+          #     - `return_methods`
+          #     - `return_policy_uri`
+          #     - `return_shipping_fee`
+          class UpdateOnlineReturnPolicyRequest
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Request message for the `DeleteOnlineReturnPolicy` method.
+          # @!attribute [rw] name
+          #   @return [::String]
+          #     Required. The name of the return policy to delete.
+          #     Format: `accounts/{account}/onlineReturnPolicies/{return_policy}`
+          class DeleteOnlineReturnPolicyRequest
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
           # Request message for the `ListOnlineReturnPolicies` method.
           # @!attribute [rw] parent
           #   @return [::String]
@@ -55,40 +107,6 @@ module Google
           #     {::Google::Shopping::Merchant::Accounts::V1beta::ListOnlineReturnPoliciesResponse#next_page_token nextPageToken}
           #     in the response to the previous request.
           class ListOnlineReturnPoliciesRequest
-            include ::Google::Protobuf::MessageExts
-            extend ::Google::Protobuf::MessageExts::ClassMethods
-          end
-
-          # Request message for the `CreateOnlineReturnPolicy` method.
-          # @!attribute [rw] parent
-          #   @return [::String]
-          #     Required. The merchant account for which to create a return policy.
-          #     Format: `accounts/{account}`
-          # @!attribute [rw] online_return_policy
-          #   @return [::Google::Shopping::Merchant::Accounts::V1beta::OnlineReturnPolicy]
-          #     Required. The return policy to create.
-          class CreateOnlineReturnPolicyRequest
-            include ::Google::Protobuf::MessageExts
-            extend ::Google::Protobuf::MessageExts::ClassMethods
-          end
-
-          # Request message for the `UpdateOnlineReturnPolicy` method.
-          # @!attribute [rw] online_return_policy
-          #   @return [::Google::Shopping::Merchant::Accounts::V1beta::OnlineReturnPolicy]
-          #     Required. The return policy to update.
-          # @!attribute [rw] update_mask
-          #   @return [::Google::Protobuf::FieldMask]
-          class UpdateOnlineReturnPolicyRequest
-            include ::Google::Protobuf::MessageExts
-            extend ::Google::Protobuf::MessageExts::ClassMethods
-          end
-
-          # Request message for the `DeleteOnlineReturnPolicy` method.
-          # @!attribute [rw] name
-          #   @return [::String]
-          #     Required. The name of the return policy to delete.
-          #     Format: `accounts/{account}/onlineReturnPolicies/{return_policy}`
-          class DeleteOnlineReturnPolicyRequest
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
@@ -160,20 +178,20 @@ module Google
           #     check for the policy. It must be a valid URL.
           # @!attribute [rw] accept_defective_only
           #   @return [::Boolean]
-          #     This field specifies if merchant only accepts defective products for
-          #     returns, and this field is required.
+          #     Optional. This field specifies if merchant
+          #     only accepts defective products for returns.
           # @!attribute [rw] process_refund_days
           #   @return [::Integer]
-          #     The field specifies the number of days it takes for merchants to process
-          #     refunds, field is optional.
+          #     Optional. The field specifies the number of
+          #     days it takes for merchants to process refunds.
           # @!attribute [rw] accept_exchange
           #   @return [::Boolean]
-          #     This field specifies if merchant allows customers to exchange products,
-          #     this field is required.
+          #     Optional. This field specifies if merchant
+          #     allows customers to exchange products.
           # @!attribute [rw] return_label_source
           #   @return [::Google::Shopping::Merchant::Accounts::V1beta::OnlineReturnPolicy::ReturnLabelSource]
-          #     The field specifies the return label source. This field is required when
-          #     return method is BY_MAIL.
+          #     Optional. The field specifies the return
+          #     label source.
           class OnlineReturnPolicy
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
