@@ -1,4 +1,4 @@
-## Migrating to google-cloud-dlp 1.0
+# Migrating to google-cloud-dlp 1.0
 
 The 1.0 release of the google-cloud-dlp client is a significant upgrade
 based on a [next-gen code generator](https://github.com/googleapis/gapic-generator-ruby),
