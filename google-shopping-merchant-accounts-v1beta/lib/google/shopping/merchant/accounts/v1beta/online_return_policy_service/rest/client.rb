@@ -384,10 +384,10 @@ module Google
                 #   the default parameter values, pass an empty Hash as a request object (see above).
                 #
                 #   @param parent [::String]
-                #     Required. The merchant account for which to create a return policy.
+                #     Required. The merchant account for which the return policy will be created.
                 #     Format: `accounts/{account}`
                 #   @param online_return_policy [::Google::Shopping::Merchant::Accounts::V1beta::OnlineReturnPolicy, ::Hash]
-                #     Required. The return policy to create.
+                #     Required. The return policy object to create.
                 # @yield [result, operation] Access the result along with the TransportOperation object
                 # @yieldparam result [::Google::Shopping::Merchant::Accounts::V1beta::OnlineReturnPolicy]
                 # @yieldparam operation [::Gapic::Rest::TransportOperation]
@@ -465,8 +465,24 @@ module Google
                 #   the default parameter values, pass an empty Hash as a request object (see above).
                 #
                 #   @param online_return_policy [::Google::Shopping::Merchant::Accounts::V1beta::OnlineReturnPolicy, ::Hash]
-                #     Required. The return policy to update.
+                #     Required. The online return policy to update.
+                #     The online return policy's `name` field is used to identify the
+                #     online return policy to be updated.
                 #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
+                #     Optional. List of fields being updated.
+                #
+                #     The following fields are supported (in both `snake_case` and
+                #     `lowerCamelCase`):
+                #
+                #     - `accept_defective_only`
+                #     - `accept_exchange`
+                #     - `item_conditions`
+                #     - `policy`
+                #     - `process_refund_days`
+                #     - `restocking_fee`
+                #     - `return_methods`
+                #     - `return_policy_uri`
+                #     - `return_shipping_fee`
                 # @yield [result, operation] Access the result along with the TransportOperation object
                 # @yieldparam result [::Google::Shopping::Merchant::Accounts::V1beta::OnlineReturnPolicy]
                 # @yieldparam operation [::Gapic::Rest::TransportOperation]
@@ -526,7 +542,7 @@ module Google
                 end
 
                 ##
-                # Deletes an existing return policy for a given merchant.
+                # Deletes an existing return policy.
                 #
                 # @overload delete_online_return_policy(request, options = nil)
                 #   Pass arguments to `delete_online_return_policy` via a request object, either of type
