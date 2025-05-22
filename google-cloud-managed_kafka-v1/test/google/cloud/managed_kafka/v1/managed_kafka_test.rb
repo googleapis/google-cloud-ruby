@@ -942,6 +942,431 @@ class ::Google::Cloud::ManagedKafka::V1::ManagedKafka::ClientTest < Minitest::Te
     end
   end
 
+  def test_list_acls
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::ManagedKafka::V1::ListAclsResponse.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    page_size = 42
+    page_token = "hello world"
+
+    list_acls_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :list_acls, name
+      assert_kind_of ::Google::Cloud::ManagedKafka::V1::ListAclsRequest, request
+      assert_equal "hello world", request["parent"]
+      assert_equal 42, request["page_size"]
+      assert_equal "hello world", request["page_token"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, list_acls_client_stub do
+      # Create client
+      client = ::Google::Cloud::ManagedKafka::V1::ManagedKafka::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.list_acls({ parent: parent, page_size: page_size, page_token: page_token }) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.list_acls parent: parent, page_size: page_size, page_token: page_token do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.list_acls ::Google::Cloud::ManagedKafka::V1::ListAclsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.list_acls({ parent: parent, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.list_acls(::Google::Cloud::ManagedKafka::V1::ListAclsRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, list_acls_client_stub.call_rpc_count
+    end
+  end
+
+  def test_get_acl
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::ManagedKafka::V1::Acl.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    get_acl_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :get_acl, name
+      assert_kind_of ::Google::Cloud::ManagedKafka::V1::GetAclRequest, request
+      assert_equal "hello world", request["name"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, get_acl_client_stub do
+      # Create client
+      client = ::Google::Cloud::ManagedKafka::V1::ManagedKafka::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.get_acl({ name: name }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.get_acl name: name do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.get_acl ::Google::Cloud::ManagedKafka::V1::GetAclRequest.new(name: name) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.get_acl({ name: name }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.get_acl(::Google::Cloud::ManagedKafka::V1::GetAclRequest.new(name: name), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, get_acl_client_stub.call_rpc_count
+    end
+  end
+
+  def test_create_acl
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::ManagedKafka::V1::Acl.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    acl_id = "hello world"
+    acl = {}
+
+    create_acl_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :create_acl, name
+      assert_kind_of ::Google::Cloud::ManagedKafka::V1::CreateAclRequest, request
+      assert_equal "hello world", request["parent"]
+      assert_equal "hello world", request["acl_id"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::ManagedKafka::V1::Acl), request["acl"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, create_acl_client_stub do
+      # Create client
+      client = ::Google::Cloud::ManagedKafka::V1::ManagedKafka::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.create_acl({ parent: parent, acl_id: acl_id, acl: acl }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.create_acl parent: parent, acl_id: acl_id, acl: acl do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.create_acl ::Google::Cloud::ManagedKafka::V1::CreateAclRequest.new(parent: parent, acl_id: acl_id, acl: acl) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.create_acl({ parent: parent, acl_id: acl_id, acl: acl }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.create_acl(::Google::Cloud::ManagedKafka::V1::CreateAclRequest.new(parent: parent, acl_id: acl_id, acl: acl), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, create_acl_client_stub.call_rpc_count
+    end
+  end
+
+  def test_update_acl
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::ManagedKafka::V1::Acl.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    acl = {}
+    update_mask = {}
+
+    update_acl_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :update_acl, name
+      assert_kind_of ::Google::Cloud::ManagedKafka::V1::UpdateAclRequest, request
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::ManagedKafka::V1::Acl), request["acl"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request["update_mask"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, update_acl_client_stub do
+      # Create client
+      client = ::Google::Cloud::ManagedKafka::V1::ManagedKafka::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.update_acl({ acl: acl, update_mask: update_mask }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.update_acl acl: acl, update_mask: update_mask do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.update_acl ::Google::Cloud::ManagedKafka::V1::UpdateAclRequest.new(acl: acl, update_mask: update_mask) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.update_acl({ acl: acl, update_mask: update_mask }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.update_acl(::Google::Cloud::ManagedKafka::V1::UpdateAclRequest.new(acl: acl, update_mask: update_mask), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, update_acl_client_stub.call_rpc_count
+    end
+  end
+
+  def test_delete_acl
+    # Create GRPC objects.
+    grpc_response = ::Google::Protobuf::Empty.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    delete_acl_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :delete_acl, name
+      assert_kind_of ::Google::Cloud::ManagedKafka::V1::DeleteAclRequest, request
+      assert_equal "hello world", request["name"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, delete_acl_client_stub do
+      # Create client
+      client = ::Google::Cloud::ManagedKafka::V1::ManagedKafka::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.delete_acl({ name: name }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.delete_acl name: name do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.delete_acl ::Google::Cloud::ManagedKafka::V1::DeleteAclRequest.new(name: name) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.delete_acl({ name: name }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.delete_acl(::Google::Cloud::ManagedKafka::V1::DeleteAclRequest.new(name: name), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, delete_acl_client_stub.call_rpc_count
+    end
+  end
+
+  def test_add_acl_entry
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::ManagedKafka::V1::AddAclEntryResponse.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    acl = "hello world"
+    acl_entry = {}
+
+    add_acl_entry_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :add_acl_entry, name
+      assert_kind_of ::Google::Cloud::ManagedKafka::V1::AddAclEntryRequest, request
+      assert_equal "hello world", request["acl"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::ManagedKafka::V1::AclEntry), request["acl_entry"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, add_acl_entry_client_stub do
+      # Create client
+      client = ::Google::Cloud::ManagedKafka::V1::ManagedKafka::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.add_acl_entry({ acl: acl, acl_entry: acl_entry }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.add_acl_entry acl: acl, acl_entry: acl_entry do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.add_acl_entry ::Google::Cloud::ManagedKafka::V1::AddAclEntryRequest.new(acl: acl, acl_entry: acl_entry) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.add_acl_entry({ acl: acl, acl_entry: acl_entry }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.add_acl_entry(::Google::Cloud::ManagedKafka::V1::AddAclEntryRequest.new(acl: acl, acl_entry: acl_entry), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, add_acl_entry_client_stub.call_rpc_count
+    end
+  end
+
+  def test_remove_acl_entry
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::ManagedKafka::V1::RemoveAclEntryResponse.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    acl = "hello world"
+    acl_entry = {}
+
+    remove_acl_entry_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :remove_acl_entry, name
+      assert_kind_of ::Google::Cloud::ManagedKafka::V1::RemoveAclEntryRequest, request
+      assert_equal "hello world", request["acl"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::ManagedKafka::V1::AclEntry), request["acl_entry"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, remove_acl_entry_client_stub do
+      # Create client
+      client = ::Google::Cloud::ManagedKafka::V1::ManagedKafka::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.remove_acl_entry({ acl: acl, acl_entry: acl_entry }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.remove_acl_entry acl: acl, acl_entry: acl_entry do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.remove_acl_entry ::Google::Cloud::ManagedKafka::V1::RemoveAclEntryRequest.new(acl: acl, acl_entry: acl_entry) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.remove_acl_entry({ acl: acl, acl_entry: acl_entry }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.remove_acl_entry(::Google::Cloud::ManagedKafka::V1::RemoveAclEntryRequest.new(acl: acl, acl_entry: acl_entry), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, remove_acl_entry_client_stub.call_rpc_count
+    end
+  end
+
   def test_configure
     grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
 
