@@ -38,7 +38,7 @@ module Google
         #     email must also be provided. If the user is a Google Support agent, this is
         #     obfuscated.
         #
-        #     This field is deprecated. Use **username** field instead.
+        #     This field is deprecated. Use `username` instead.
         # @!attribute [r] google_support
         #   @return [::Boolean]
         #     Output only. Whether the actor is a Google support actor.
