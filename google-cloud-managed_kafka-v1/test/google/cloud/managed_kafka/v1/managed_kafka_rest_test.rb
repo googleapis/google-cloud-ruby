@@ -852,6 +852,391 @@ class ::Google::Cloud::ManagedKafka::V1::ManagedKafka::Rest::ClientTest < Minite
     end
   end
 
+  def test_list_acls
+    # Create test objects.
+    client_result = ::Google::Cloud::ManagedKafka::V1::ListAclsResponse.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    page_size = 42
+    page_token = "hello world"
+
+    list_acls_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::ManagedKafka::V1::ManagedKafka::Rest::ServiceStub.stub :transcode_list_acls_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, list_acls_client_stub do
+        # Create client
+        client = ::Google::Cloud::ManagedKafka::V1::ManagedKafka::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.list_acls({ parent: parent, page_size: page_size, page_token: page_token }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.list_acls parent: parent, page_size: page_size, page_token: page_token do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.list_acls ::Google::Cloud::ManagedKafka::V1::ListAclsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.list_acls({ parent: parent, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.list_acls(::Google::Cloud::ManagedKafka::V1::ListAclsRequest.new(parent: parent, page_size: page_size, page_token: page_token), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, list_acls_client_stub.call_count
+      end
+    end
+  end
+
+  def test_get_acl
+    # Create test objects.
+    client_result = ::Google::Cloud::ManagedKafka::V1::Acl.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    get_acl_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::ManagedKafka::V1::ManagedKafka::Rest::ServiceStub.stub :transcode_get_acl_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, get_acl_client_stub do
+        # Create client
+        client = ::Google::Cloud::ManagedKafka::V1::ManagedKafka::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.get_acl({ name: name }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.get_acl name: name do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.get_acl ::Google::Cloud::ManagedKafka::V1::GetAclRequest.new(name: name) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.get_acl({ name: name }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.get_acl(::Google::Cloud::ManagedKafka::V1::GetAclRequest.new(name: name), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, get_acl_client_stub.call_count
+      end
+    end
+  end
+
+  def test_create_acl
+    # Create test objects.
+    client_result = ::Google::Cloud::ManagedKafka::V1::Acl.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    acl_id = "hello world"
+    acl = {}
+
+    create_acl_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::ManagedKafka::V1::ManagedKafka::Rest::ServiceStub.stub :transcode_create_acl_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, create_acl_client_stub do
+        # Create client
+        client = ::Google::Cloud::ManagedKafka::V1::ManagedKafka::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.create_acl({ parent: parent, acl_id: acl_id, acl: acl }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.create_acl parent: parent, acl_id: acl_id, acl: acl do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.create_acl ::Google::Cloud::ManagedKafka::V1::CreateAclRequest.new(parent: parent, acl_id: acl_id, acl: acl) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.create_acl({ parent: parent, acl_id: acl_id, acl: acl }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.create_acl(::Google::Cloud::ManagedKafka::V1::CreateAclRequest.new(parent: parent, acl_id: acl_id, acl: acl), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, create_acl_client_stub.call_count
+      end
+    end
+  end
+
+  def test_update_acl
+    # Create test objects.
+    client_result = ::Google::Cloud::ManagedKafka::V1::Acl.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    acl = {}
+    update_mask = {}
+
+    update_acl_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::ManagedKafka::V1::ManagedKafka::Rest::ServiceStub.stub :transcode_update_acl_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, update_acl_client_stub do
+        # Create client
+        client = ::Google::Cloud::ManagedKafka::V1::ManagedKafka::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.update_acl({ acl: acl, update_mask: update_mask }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.update_acl acl: acl, update_mask: update_mask do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.update_acl ::Google::Cloud::ManagedKafka::V1::UpdateAclRequest.new(acl: acl, update_mask: update_mask) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.update_acl({ acl: acl, update_mask: update_mask }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.update_acl(::Google::Cloud::ManagedKafka::V1::UpdateAclRequest.new(acl: acl, update_mask: update_mask), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, update_acl_client_stub.call_count
+      end
+    end
+  end
+
+  def test_delete_acl
+    # Create test objects.
+    client_result = ::Google::Protobuf::Empty.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    delete_acl_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::ManagedKafka::V1::ManagedKafka::Rest::ServiceStub.stub :transcode_delete_acl_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, delete_acl_client_stub do
+        # Create client
+        client = ::Google::Cloud::ManagedKafka::V1::ManagedKafka::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.delete_acl({ name: name }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.delete_acl name: name do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.delete_acl ::Google::Cloud::ManagedKafka::V1::DeleteAclRequest.new(name: name) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.delete_acl({ name: name }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.delete_acl(::Google::Cloud::ManagedKafka::V1::DeleteAclRequest.new(name: name), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, delete_acl_client_stub.call_count
+      end
+    end
+  end
+
+  def test_add_acl_entry
+    # Create test objects.
+    client_result = ::Google::Cloud::ManagedKafka::V1::AddAclEntryResponse.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    acl = "hello world"
+    acl_entry = {}
+
+    add_acl_entry_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::ManagedKafka::V1::ManagedKafka::Rest::ServiceStub.stub :transcode_add_acl_entry_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, add_acl_entry_client_stub do
+        # Create client
+        client = ::Google::Cloud::ManagedKafka::V1::ManagedKafka::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.add_acl_entry({ acl: acl, acl_entry: acl_entry }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.add_acl_entry acl: acl, acl_entry: acl_entry do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.add_acl_entry ::Google::Cloud::ManagedKafka::V1::AddAclEntryRequest.new(acl: acl, acl_entry: acl_entry) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.add_acl_entry({ acl: acl, acl_entry: acl_entry }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.add_acl_entry(::Google::Cloud::ManagedKafka::V1::AddAclEntryRequest.new(acl: acl, acl_entry: acl_entry), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, add_acl_entry_client_stub.call_count
+      end
+    end
+  end
+
+  def test_remove_acl_entry
+    # Create test objects.
+    client_result = ::Google::Cloud::ManagedKafka::V1::RemoveAclEntryResponse.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    acl = "hello world"
+    acl_entry = {}
+
+    remove_acl_entry_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::ManagedKafka::V1::ManagedKafka::Rest::ServiceStub.stub :transcode_remove_acl_entry_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, remove_acl_entry_client_stub do
+        # Create client
+        client = ::Google::Cloud::ManagedKafka::V1::ManagedKafka::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.remove_acl_entry({ acl: acl, acl_entry: acl_entry }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.remove_acl_entry acl: acl, acl_entry: acl_entry do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.remove_acl_entry ::Google::Cloud::ManagedKafka::V1::RemoveAclEntryRequest.new(acl: acl, acl_entry: acl_entry) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.remove_acl_entry({ acl: acl, acl_entry: acl_entry }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.remove_acl_entry(::Google::Cloud::ManagedKafka::V1::RemoveAclEntryRequest.new(acl: acl, acl_entry: acl_entry), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, remove_acl_entry_client_stub.call_count
+      end
+    end
+  end
+
   def test_configure
     credentials_token = :dummy_value
 

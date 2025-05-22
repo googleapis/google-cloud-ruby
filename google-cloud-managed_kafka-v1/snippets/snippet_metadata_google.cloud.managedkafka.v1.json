@@ -572,6 +572,286 @@
       ]
     },
     {
+      "region_tag": "managedkafka_v1_generated_ManagedKafka_ListAcls_sync",
+      "title": "Snippet for the list_acls call in the ManagedKafka service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ManagedKafka::V1::ManagedKafka::Client#list_acls.",
+      "file": "managed_kafka/list_acls.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_acls",
+        "full_name": "::Google::Cloud::ManagedKafka::V1::ManagedKafka::Client#list_acls",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::ManagedKafka::V1::ListAclsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::ManagedKafka::V1::ListAclsResponse",
+        "client": {
+          "short_name": "ManagedKafka::Client",
+          "full_name": "::Google::Cloud::ManagedKafka::V1::ManagedKafka::Client"
+        },
+        "method": {
+          "short_name": "ListAcls",
+          "full_name": "google.cloud.managedkafka.v1.ManagedKafka.ListAcls",
+          "service": {
+            "short_name": "ManagedKafka",
+            "full_name": "google.cloud.managedkafka.v1.ManagedKafka"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "managedkafka_v1_generated_ManagedKafka_GetAcl_sync",
+      "title": "Snippet for the get_acl call in the ManagedKafka service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ManagedKafka::V1::ManagedKafka::Client#get_acl.",
+      "file": "managed_kafka/get_acl.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_acl",
+        "full_name": "::Google::Cloud::ManagedKafka::V1::ManagedKafka::Client#get_acl",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::ManagedKafka::V1::GetAclRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::ManagedKafka::V1::Acl",
+        "client": {
+          "short_name": "ManagedKafka::Client",
+          "full_name": "::Google::Cloud::ManagedKafka::V1::ManagedKafka::Client"
+        },
+        "method": {
+          "short_name": "GetAcl",
+          "full_name": "google.cloud.managedkafka.v1.ManagedKafka.GetAcl",
+          "service": {
+            "short_name": "ManagedKafka",
+            "full_name": "google.cloud.managedkafka.v1.ManagedKafka"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "managedkafka_v1_generated_ManagedKafka_CreateAcl_sync",
+      "title": "Snippet for the create_acl call in the ManagedKafka service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ManagedKafka::V1::ManagedKafka::Client#create_acl.",
+      "file": "managed_kafka/create_acl.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_acl",
+        "full_name": "::Google::Cloud::ManagedKafka::V1::ManagedKafka::Client#create_acl",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::ManagedKafka::V1::CreateAclRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::ManagedKafka::V1::Acl",
+        "client": {
+          "short_name": "ManagedKafka::Client",
+          "full_name": "::Google::Cloud::ManagedKafka::V1::ManagedKafka::Client"
+        },
+        "method": {
+          "short_name": "CreateAcl",
+          "full_name": "google.cloud.managedkafka.v1.ManagedKafka.CreateAcl",
+          "service": {
+            "short_name": "ManagedKafka",
+            "full_name": "google.cloud.managedkafka.v1.ManagedKafka"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "managedkafka_v1_generated_ManagedKafka_UpdateAcl_sync",
+      "title": "Snippet for the update_acl call in the ManagedKafka service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ManagedKafka::V1::ManagedKafka::Client#update_acl.",
+      "file": "managed_kafka/update_acl.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_acl",
+        "full_name": "::Google::Cloud::ManagedKafka::V1::ManagedKafka::Client#update_acl",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::ManagedKafka::V1::UpdateAclRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::ManagedKafka::V1::Acl",
+        "client": {
+          "short_name": "ManagedKafka::Client",
+          "full_name": "::Google::Cloud::ManagedKafka::V1::ManagedKafka::Client"
+        },
+        "method": {
+          "short_name": "UpdateAcl",
+          "full_name": "google.cloud.managedkafka.v1.ManagedKafka.UpdateAcl",
+          "service": {
+            "short_name": "ManagedKafka",
+            "full_name": "google.cloud.managedkafka.v1.ManagedKafka"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "managedkafka_v1_generated_ManagedKafka_DeleteAcl_sync",
+      "title": "Snippet for the delete_acl call in the ManagedKafka service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ManagedKafka::V1::ManagedKafka::Client#delete_acl.",
+      "file": "managed_kafka/delete_acl.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_acl",
+        "full_name": "::Google::Cloud::ManagedKafka::V1::ManagedKafka::Client#delete_acl",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::ManagedKafka::V1::DeleteAclRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Protobuf::Empty",
+        "client": {
+          "short_name": "ManagedKafka::Client",
+          "full_name": "::Google::Cloud::ManagedKafka::V1::ManagedKafka::Client"
+        },
+        "method": {
+          "short_name": "DeleteAcl",
+          "full_name": "google.cloud.managedkafka.v1.ManagedKafka.DeleteAcl",
+          "service": {
+            "short_name": "ManagedKafka",
+            "full_name": "google.cloud.managedkafka.v1.ManagedKafka"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "managedkafka_v1_generated_ManagedKafka_AddAclEntry_sync",
+      "title": "Snippet for the add_acl_entry call in the ManagedKafka service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ManagedKafka::V1::ManagedKafka::Client#add_acl_entry.",
+      "file": "managed_kafka/add_acl_entry.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "add_acl_entry",
+        "full_name": "::Google::Cloud::ManagedKafka::V1::ManagedKafka::Client#add_acl_entry",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::ManagedKafka::V1::AddAclEntryRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::ManagedKafka::V1::AddAclEntryResponse",
+        "client": {
+          "short_name": "ManagedKafka::Client",
+          "full_name": "::Google::Cloud::ManagedKafka::V1::ManagedKafka::Client"
+        },
+        "method": {
+          "short_name": "AddAclEntry",
+          "full_name": "google.cloud.managedkafka.v1.ManagedKafka.AddAclEntry",
+          "service": {
+            "short_name": "ManagedKafka",
+            "full_name": "google.cloud.managedkafka.v1.ManagedKafka"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "managedkafka_v1_generated_ManagedKafka_RemoveAclEntry_sync",
+      "title": "Snippet for the remove_acl_entry call in the ManagedKafka service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ManagedKafka::V1::ManagedKafka::Client#remove_acl_entry.",
+      "file": "managed_kafka/remove_acl_entry.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "remove_acl_entry",
+        "full_name": "::Google::Cloud::ManagedKafka::V1::ManagedKafka::Client#remove_acl_entry",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::ManagedKafka::V1::RemoveAclEntryRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::ManagedKafka::V1::RemoveAclEntryResponse",
+        "client": {
+          "short_name": "ManagedKafka::Client",
+          "full_name": "::Google::Cloud::ManagedKafka::V1::ManagedKafka::Client"
+        },
+        "method": {
+          "short_name": "RemoveAclEntry",
+          "full_name": "google.cloud.managedkafka.v1.ManagedKafka.RemoveAclEntry",
+          "service": {
+            "short_name": "ManagedKafka",
+            "full_name": "google.cloud.managedkafka.v1.ManagedKafka"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
       "region_tag": "managedkafka_v1_generated_ManagedKafkaConnect_ListConnectClusters_sync",
       "title": "Snippet for the list_connect_clusters call in the ManagedKafkaConnect service",
       "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ManagedKafka::V1::ManagedKafkaConnect::Client#list_connect_clusters.",
