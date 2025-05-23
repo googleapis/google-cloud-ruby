@@ -24,6 +24,8 @@ module Google
     module Container
       module V1
         module ClusterManager
+          # LINT: LEGACY_NAMES
+          #
           # Google Kubernetes Engine Cluster Manager v1
           class Service
 
@@ -134,6 +136,10 @@ module Google
             # Checks the cluster compatibility with Autopilot mode, and returns a list of
             # compatibility issues.
             rpc :CheckAutopilotCompatibility, ::Google::Cloud::Container::V1::CheckAutopilotCompatibilityRequest, ::Google::Cloud::Container::V1::CheckAutopilotCompatibilityResponse
+            # Fetch upgrade information of a specific cluster.
+            rpc :FetchClusterUpgradeInfo, ::Google::Cloud::Container::V1::FetchClusterUpgradeInfoRequest, ::Google::Cloud::Container::V1::ClusterUpgradeInfo
+            # Fetch upgrade information of a specific nodepool.
+            rpc :FetchNodePoolUpgradeInfo, ::Google::Cloud::Container::V1::FetchNodePoolUpgradeInfoRequest, ::Google::Cloud::Container::V1::NodePoolUpgradeInfo
           end
 
           Stub = Service.rpc_stub_class
