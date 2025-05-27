@@ -90,17 +90,17 @@ require "securerandom"
 t = Time.now.utc.iso8601.gsub ":", "-"
 $firestore_prefix = "gcloud-#{t}-#{SecureRandom.hex(4)}".downcase
 
-def clean_up_firestore
-  puts "Cleaning up documents and collections after firestore tests."
+def clean_up_firestore firestore_db, name="main"
+  puts "Cleaning up documents and collections after firestore tests in the #{name} db"
 
-  $firestore.batch do |b|
-    $firestore.col($firestore_prefix).select($firestore.document_id).all_descendants.run.each_slice(500).with_index do |slice, index|
-      $firestore.batch do |b|
+  firestore_db.batch do |b|
+    firestore_db.col($firestore_prefix).select(Google::Cloud::Firestore::FieldPath.document_id).all_descendants.run.each_slice(500).with_index do |slice, index|
+      firestore_db.batch do |b|
         slice.each do |doc|
           b.delete doc
         end
       end
-      puts "Deleted batch #{index+1} of #{slice.count} documents"
+      puts "\tDeleted batch #{index+1} consisting of #{slice.count} documents"
     end
   end
 rescue => e
@@ -108,8 +108,10 @@ rescue => e
 end
 
 Minitest.after_run do
-  clean_up_firestore
-  unless $firestore_2
+  clean_up_firestore $firestore
+  if $firestore_2
+    clean_up_firestore $firestore_2, "secondary"
+  else $firestore_2
     puts "The multiple database tests were not run. These tests require a secondary " \
        "database which is not configured. To enable, ensure that the following " \
        "is present in the environment: \n" \
