@@ -21,7 +21,7 @@ module Google
   module Cloud
     module Bigquery
       module DataTransfer
-        VERSION = "1.7.1"
+        VERSION = "1.7.2"
       end
     end
   end
