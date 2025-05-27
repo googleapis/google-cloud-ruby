@@ -1,5 +1,12 @@
 # Changelog
 
+### 0.1.1 (2025-05-27)
+
+#### Documentation
+
+* Minor updates 
+* Remove unnecessary curl and Python documentation ([#30430](https://github.com/googleapis/google-cloud-ruby/issues/30430)) 
+
 ### 0.1.0 (2025-05-16)
 
 #### Features
