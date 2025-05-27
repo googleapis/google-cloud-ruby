@@ -1,5 +1,11 @@
 # Changelog
 
+### 1.14.0 (2025-05-27)
+
+#### Features
+
+* add max_results, filter, data_store_specs options to VertexAISearch. ([#30429](https://github.com/googleapis/google-cloud-ruby/issues/30429)) 
+
 ### 1.13.0 (2025-05-22)
 
 #### Features
