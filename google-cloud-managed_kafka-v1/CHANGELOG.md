@@ -1,5 +1,11 @@
 # Changelog
 
+### 1.3.0 (2025-05-27)
+
+#### Features
+
+* add Managed Kafka ACL API ([#30437](https://github.com/googleapis/google-cloud-ruby/issues/30437)) 
+
 ### 1.2.0 (2025-05-12)
 
 #### Features
