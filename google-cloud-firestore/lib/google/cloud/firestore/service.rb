@@ -12,6 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+require "cgi/escape"
 
 require "google/cloud/env"
 require "google/cloud/errors"
@@ -52,7 +53,8 @@ module Google
               config.endpoint = host if host
               config.lib_name = "gccl"
               config.lib_version = Google::Cloud::Firestore::VERSION
-              config.metadata = { "google-cloud-resource-prefix": "projects/#{@project}/databases/#{@database}" }
+              routing_val = CGI.escapeURIComponent "projects/#{@project}/databases/#{@database}"
+              config.metadata = { "x-goog-request-params": "database=#{routing_val}" }
             end
           end
         end
@@ -233,7 +235,8 @@ module Google
 
         def default_headers parent = nil
           parent ||= database_path
-          { "google-cloud-resource-prefix" => parent }
+          routing_val = CGI.escapeURIComponent parent
+          { "x-goog-request-params" => "database=#{routing_val}" }
         end
 
         def call_options parent: nil, token: nil
