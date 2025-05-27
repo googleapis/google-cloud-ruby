@@ -21,7 +21,7 @@ module Google
   module Cloud
     module Support
       module V2
-        VERSION = "1.4.0"
+        VERSION = "1.4.1"
       end
     end
   end
