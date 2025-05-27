@@ -222,15 +222,16 @@ module Google
           end
         end
 
-        # Allows customers to configure tenant_id for GCIP instance per-app.
+        # Allows customers to configure tenant IDs for a Cloud Identity Platform (GCIP)
+        # instance for each application.
         # @!attribute [rw] tenant_ids
         #   @return [::Array<::String>]
-        #     Optional. GCIP tenant ids that are linked to the IAP resource.
-        #     tenant_ids could be a string beginning with a number character to indicate
-        #     authenticating with GCIP tenant flow, or in the format of _<ProjectNumber>
-        #     to indicate authenticating with GCIP agent flow.
-        #     If agent flow is used, tenant_ids should only contain one single element,
-        #     while for tenant flow, tenant_ids can contain multiple elements.
+        #     Optional. GCIP tenant IDs that are linked to the IAP resource. `tenant_ids`
+        #     could be a string beginning with a number character to indicate
+        #     authenticating with GCIP tenant flow, or in the format of
+        #     `_<ProjectNumber>` to indicate authenticating with GCIP agent flow. If
+        #     agent flow is used, `tenant_ids` should only contain one single element,
+        #     while for tenant flow, `tenant_ids` can contain multiple elements.
         # @!attribute [rw] login_page_uri
         #   @return [::Google::Protobuf::StringValue]
         #     Login page URI associated with the GCIP tenants.
@@ -241,12 +242,13 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Allows customers to configure HTTP request paths that'll allow HTTP OPTIONS
-        # call to bypass authentication and authorization.
+        # Allows customers to configure HTTP request paths that'll allow HTTP
+        # `OPTIONS` call to bypass authentication and authorization.
         # @!attribute [rw] allow_http_options
         #   @return [::Google::Protobuf::BoolValue]
-        #     Configuration to allow HTTP OPTIONS calls to skip authorization. If
-        #     undefined, IAP will not apply any special logic to OPTIONS requests.
+        #     Configuration to allow HTTP `OPTIONS` calls to skip
+        #     authentication and authorization. If undefined, IAP will not apply any
+        #     special logic to `OPTIONS` requests.
         class CorsSettings
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
