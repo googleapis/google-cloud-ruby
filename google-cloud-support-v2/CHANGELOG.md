@@ -1,5 +1,12 @@
 # Changelog
 
+### 1.4.1 (2025-05-27)
+
+#### Documentation
+
+* Minor updates 
+* Update Cloud Support RPC comments to no longer include cURL and Python examples ([#30428](https://github.com/googleapis/google-cloud-ruby/issues/30428)) 
+
 ### 1.4.0 (2025-05-16)
 
 #### Features
