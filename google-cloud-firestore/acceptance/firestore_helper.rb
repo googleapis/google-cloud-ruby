@@ -111,7 +111,7 @@ Minitest.after_run do
   clean_up_firestore $firestore
   if $firestore_2
     clean_up_firestore $firestore_2, "secondary"
-  else $firestore_2
+  else
     puts "The multiple database tests were not run. These tests require a secondary " \
        "database which is not configured. To enable, ensure that the following " \
        "is present in the environment: \n" \
