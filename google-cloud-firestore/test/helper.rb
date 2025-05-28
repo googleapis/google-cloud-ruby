@@ -18,10 +18,13 @@ gem "minitest"
 require "minitest/autorun"
 require "minitest/focus"
 require "minitest/rg"
-require "google/cloud/firestore"
-require "google/cloud/firestore/rate_limiter"
+
+require "cgi/escape"
 require "grpc"
 require "ostruct"
+
+require "google/cloud/firestore"
+require "google/cloud/firestore/rate_limiter"
 
 ##
 # Monkey-Patch CallOptions to support Mocks
@@ -163,8 +166,7 @@ class MockFirestore < Minitest::Spec
   let(:full_doc_paths) {
     ["#{documents_path}/users/alice", "#{documents_path}/users/bob", "#{documents_path}/users/carol"]
   }
-  let(:default_project_options) { Gapic::CallOptions.new(metadata: { "google-cloud-resource-prefix" => "projects/#{project}" }) }
-  let(:default_options) { Gapic::CallOptions.new(metadata: { "google-cloud-resource-prefix" => database_path }, retry_policy: {}) }
+  let(:default_options) { Gapic::CallOptions.new(metadata: { "x-goog-request-params" => "database=#{CGI.escapeURIComponent(database_path)}"}, retry_policy: {}) }
   let(:credentials) { OpenStruct.new(client: OpenStruct.new(updater_proc: Proc.new {})) }
   let(:firestore) { Google::Cloud::Firestore::Client.new(Google::Cloud::Firestore::Service.new(project, credentials, database: database)) }
   let(:secondary_firestore) { Google::Cloud::Firestore::Client.new(Google::Cloud::Firestore::Service.new(project, credentials, database: secondary_database)) }
