@@ -61,6 +61,9 @@ module Google
         #   @return [::Google::Cloud::AIPlatform::V1::Tool::CodeExecution]
         #     Optional. CodeExecution tool type.
         #     Enables the model to execute code as part of generation.
+        # @!attribute [rw] url_context
+        #   @return [::Google::Cloud::AIPlatform::V1::UrlContext]
+        #     Optional. Tool to support URL context retrieval.
         class Tool
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -81,6 +84,12 @@ module Google
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
+        end
+
+        # Tool to support URL context.
+        class UrlContext
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # Structured representation of a function declaration as defined by the
