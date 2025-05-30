@@ -164,6 +164,9 @@ module Google
         #     network.
         #
         #     Example: ['vertex-ai-ip-range'].
+        # @!attribute [rw] psc_interface_config
+        #   @return [::Google::Cloud::AIPlatform::V1::PscInterfaceConfig]
+        #     Optional. Configuration for PSC-I for CustomJob.
         # @!attribute [rw] base_output_directory
         #   @return [::Google::Cloud::AIPlatform::V1::GcsDestination]
         #     The Cloud Storage location to store the output of this CustomJob or
