@@ -81,13 +81,13 @@ describe "Aggregate Query", :firestore_acceptance do
       aq = @rand_query_col.aggregate_query
                           .add_count(aggregate_alias: 'one')
                           .add_count(aggregate_alias: 'one')
-      expect { _ = aq.get.first }.must_raise expected_error_class
+      expect { aq.get.first }.must_raise expected_error_class
     end
 
     it "throws error when no aggregate is added" do
       # aggregate object with no added aggregate (ex: aq.add_count)
       aq = @rand_query_col.aggregate_query
-      expect { _ = aq.get.first }.must_raise expected_error_class
+      expect { aq.get.first }.must_raise expected_error_class
     end
 
     it "returns count inside a transaction" do
@@ -174,7 +174,7 @@ describe "Aggregate Query", :firestore_acceptance do
       aq = @rand_query_col.aggregate_query
                           .add_sum('foo', aggregate_alias: 'one')
                           .add_sum('foo', aggregate_alias: 'one')
-      expect { _ = aq.get.first }.must_raise expected_error_class
+      expect { aq.get.first }.must_raise expected_error_class
     end
 
     it "returns sum inside a transaction" do
@@ -263,7 +263,7 @@ describe "Aggregate Query", :firestore_acceptance do
       aq = @rand_query_col.aggregate_query
                           .add_avg('foo', aggregate_alias: 'one')
                           .add_avg('foo', aggregate_alias: 'one')
-      expect { _ = aq.get.first }.must_raise expected_error_class
+      expect { aq.get.first }.must_raise expected_error_class
     end
 
     it "returns avg inside a transaction" do
