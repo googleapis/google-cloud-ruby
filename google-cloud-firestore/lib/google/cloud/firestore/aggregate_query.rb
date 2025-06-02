@@ -14,6 +14,7 @@
 
 require "google/cloud/firestore/v1"
 require "google/cloud/firestore/aggregate_query_snapshot"
+require "google/cloud/firestore/aggregate_query_explain_result"
 
 module Google
   module Cloud
@@ -253,6 +254,60 @@ module Google
         end
 
         ##
+        # Retrieves the query explanation for the aggregate query.
+        # By default, the query is only planned, not executed, returning only metrics from the
+        # planning stages. If `analyze` is set to `true` the query will be planned and executed,
+        # returning the `AggregateQuerySnapshot` alongside both planning and execution stage metrics.
+        #
+        # Unlike the enumerator returned from `AggregateQuery#get`, the `AggregateQueryExplainResult`
+        # caches its snapshot and metrics after the first access.
+        #
+        # @param [Boolean] analyze
+        #   Whether to execute the query and return the execution stage metrics
+        #     in addition to planning metrics.
+        #   If set to `false` the query will be planned only and will return planning
+        #      stage metrics without results.
+        #   If set to `true` the query will be executed, and will return the query results,
+        #     planning stage metrics, and execution stage metrics.
+        #   Defaults to `false`.
+        #
+        # @return [AggregateQueryExplainResult]
+        #
+        # @example Getting only the planning stage metrics for the aggregate query
+        #   require "google/cloud/firestore"
+        #
+        #   firestore = Google::Cloud::Firestore.new
+        #   query = firestore.col(:cities).aggregate_query.add_count
+        #
+        #   explain_result = query.explain
+        #   metrics = explain_result.explain_metrics
+        #   puts "Plan summary: #{metrics.plan_summary}" if metrics&.plan_summary
+        #
+        # @example Getting planning and execution stage metrics, as well as aggregate query results
+        #   require "google/cloud/firestore"
+        #
+        #   firestore = Google::Cloud::Firestore.new
+        #   query = firestore.col(:cities).aggregate_query.add_count
+        #
+        #   explain_result = query.explain analyze: true
+        #   metrics = explain_result.explain_metrics
+        #   puts "Plan summary: #{metrics.plan_summary}" if metrics&.plan_summary
+        #   puts "Results returned: #{metrics.execution_stats.results_returned}" if metrics&.execution_stats
+        #   snapshot = explain_result.snapshot
+        #   puts "Count: #{snapshot.get}" if snapshot
+        #
+        def explain analyze: false
+          ensure_service!
+          validate_analyze_option! analyze
+
+          explain_options = ::Google::Cloud::Firestore::V1::ExplainOptions.new analyze: analyze
+
+          responses_enum = service.run_aggregate_query @parent_path, @grpc, explain_options: explain_options
+
+          AggregateQueryExplainResult.new responses_enum
+        end
+
+        ##
         # @private
         def to_grpc
           @grpc
@@ -278,6 +333,13 @@ module Google
         def service
           ensure_client!
           client.service
+        end
+
+        # @private
+        # Validates the analyze option.
+        def validate_analyze_option! analyze_value
+          return if [true, false].include? analyze_value
+          raise ArgumentError, "analyze must be a boolean"
         end
       end
     end
