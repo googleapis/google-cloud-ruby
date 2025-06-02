@@ -1,5 +1,12 @@
 # Release History
 
+### 3.1.0 (2025-06-02)
+
+#### Features
+
+* add Query explanation features for Ruby Firestore ([#29469](https://github.com/googleapis/google-cloud-ruby/issues/29469)) 
+* update routing headers to new format ([#30481](https://github.com/googleapis/google-cloud-ruby/issues/30481)) 
+
 ### 3.0.0 (2025-03-10)
 
 ### ⚠ BREAKING CHANGES
