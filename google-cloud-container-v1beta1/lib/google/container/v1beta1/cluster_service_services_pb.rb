@@ -24,6 +24,8 @@ module Google
     module Container
       module V1beta1
         module ClusterManager
+          # LINT: LEGACY_NAMES
+          #
           # Google Kubernetes Engine Cluster Manager v1beta1
           class Service
 
@@ -136,6 +138,10 @@ module Google
             rpc :CheckAutopilotCompatibility, ::Google::Cloud::Container::V1beta1::CheckAutopilotCompatibilityRequest, ::Google::Cloud::Container::V1beta1::CheckAutopilotCompatibilityResponse
             # Fetches locations that offer Google Kubernetes Engine.
             rpc :ListLocations, ::Google::Cloud::Container::V1beta1::ListLocationsRequest, ::Google::Cloud::Container::V1beta1::ListLocationsResponse
+            # Fetch upgrade information of a specific cluster.
+            rpc :FetchClusterUpgradeInfo, ::Google::Cloud::Container::V1beta1::FetchClusterUpgradeInfoRequest, ::Google::Cloud::Container::V1beta1::ClusterUpgradeInfo
+            # Fetch upgrade information of a specific nodepool.
+            rpc :FetchNodePoolUpgradeInfo, ::Google::Cloud::Container::V1beta1::FetchNodePoolUpgradeInfoRequest, ::Google::Cloud::Container::V1beta1::NodePoolUpgradeInfo
           end
 
           Stub = Service.rpc_stub_class
