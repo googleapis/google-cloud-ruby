@@ -48,7 +48,7 @@ module Acceptance
     # Setup project based on available ENV variables
     def setup
       @firestore = $firestore
-      @firestore_2 = $firestore_2
+      @firestore_2 = $firestore_2 if defined?($firestore_2)
 
       refute_nil @firestore, "You do not have an active firestore to run the tests."
 
