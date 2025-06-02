@@ -147,7 +147,7 @@ module Google
 
         ##
         # Returns Google::Cloud::Firestore::V1::RunAggregationQueryResponse
-        def run_aggregate_query parent, structured_aggregation_query, transaction: nil
+        def run_aggregate_query parent, structured_aggregation_query, transaction: nil, explain_options: nil
           request = Google::Cloud::Firestore::V1::RunAggregationQueryRequest.new(
             parent: parent,
             structured_aggregation_query: structured_aggregation_query
@@ -156,6 +156,9 @@ module Google
             request.transaction = transaction
           elsif transaction
             request.new_transaction = transaction
+          end
+          if explain_options
+            request.explain_options = explain_options
           end
           firestore.run_aggregation_query request
         end
