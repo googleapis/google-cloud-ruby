@@ -48,6 +48,8 @@
     "snippets/cluster_manager/create_node_pool.rb",
     "snippets/cluster_manager/delete_cluster.rb",
     "snippets/cluster_manager/delete_node_pool.rb",
+    "snippets/cluster_manager/fetch_cluster_upgrade_info.rb",
+    "snippets/cluster_manager/fetch_node_pool_upgrade_info.rb",
     "snippets/cluster_manager/get_cluster.rb",
     "snippets/cluster_manager/get_json_web_keys.rb",
     "snippets/cluster_manager/get_node_pool.rb",

@@ -33,6 +33,7 @@ module Google
         #     net.core.busy_read
         #     net.core.netdev_max_backlog
         #     net.core.rmem_max
+        #     net.core.rmem_default
         #     net.core.wmem_default
         #     net.core.wmem_max
         #     net.core.optmem_max
@@ -40,9 +41,16 @@ module Google
         #     net.ipv4.tcp_rmem
         #     net.ipv4.tcp_wmem
         #     net.ipv4.tcp_tw_reuse
+        #     net.netfilter.nf_conntrack_max
+        #     net.netfilter.nf_conntrack_buckets
+        #     net.netfilter.nf_conntrack_tcp_timeout_close_wait
+        #     net.netfilter.nf_conntrack_tcp_timeout_time_wait
+        #     net.netfilter.nf_conntrack_tcp_timeout_established
+        #     net.netfilter.nf_conntrack_acct
         #     kernel.shmmni
         #     kernel.shmmax
         #     kernel.shmall
+        #     vm.max_map_count
         # @!attribute [rw] cgroup_mode
         #   @return [::Google::Cloud::Container::V1::LinuxNodeConfig::CgroupMode]
         #     cgroup_mode specifies the cgroup mode to be used on the node.
@@ -92,23 +100,23 @@ module Google
 
         # Parameters that can be configured on Windows nodes.
         # Windows Node Config that define the parameters that will be used to
-        # configure the Windows node pool settings
+        # configure the Windows node pool settings.
         # @!attribute [rw] os_version
         #   @return [::Google::Cloud::Container::V1::WindowsNodeConfig::OSVersion]
-        #     OSVersion specifies the Windows node config to be used on the node
+        #     OSVersion specifies the Windows node config to be used on the node.
         class WindowsNodeConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
 
           # Possible OS version that can be used.
           module OSVersion
-            # When OSVersion is not specified
+            # When OSVersion is not specified.
             OS_VERSION_UNSPECIFIED = 0
 
-            # LTSC2019 specifies to use LTSC2019 as the Windows Servercore Base Image
+            # LTSC2019 specifies to use LTSC2019 as the Windows Servercore Base Image.
             OS_VERSION_LTSC2019 = 1
 
-            # LTSC2022 specifies to use LTSC2022 as the Windows Servercore Base Image
+            # LTSC2022 specifies to use LTSC2022 as the Windows Servercore Base Image.
             OS_VERSION_LTSC2022 = 2
           end
         end
@@ -125,6 +133,16 @@ module Google
         #     * "static": allows pods with certain resource characteristics to be granted
         #     increased CPU affinity and exclusivity on the node.
         #     The default value is 'none' if unspecified.
+        # @!attribute [rw] topology_manager
+        #   @return [::Google::Cloud::Container::V1::TopologyManager]
+        #     Optional. Controls Topology Manager configuration on the node.
+        #     For more information, see:
+        #     https://kubernetes.io/docs/tasks/administer-cluster/topology-manager/
+        # @!attribute [rw] memory_manager
+        #   @return [::Google::Cloud::Container::V1::MemoryManager]
+        #     Optional. Controls NUMA-aware Memory Manager configuration on the
+        #     node. For more information, see:
+        #     https://kubernetes.io/docs/tasks/administer-cluster/memory-manager/
         # @!attribute [rw] cpu_cfs_quota
         #   @return [::Google::Protobuf::BoolValue]
         #     Enable CPU CFS quota enforcement for containers that specify CPU limits.
@@ -156,7 +174,148 @@ module Google
         # @!attribute [rw] insecure_kubelet_readonly_port_enabled
         #   @return [::Boolean]
         #     Enable or disable Kubelet read only port.
+        # @!attribute [rw] image_gc_low_threshold_percent
+        #   @return [::Integer]
+        #     Optional. Defines the percent of disk usage before which image garbage
+        #     collection is never run. Lowest disk usage to garbage collect to. The
+        #     percent is calculated as this field value out of 100.
+        #
+        #     The value must be between 10 and 85, inclusive and smaller than
+        #     image_gc_high_threshold_percent.
+        #
+        #     The default value is 80 if unspecified.
+        # @!attribute [rw] image_gc_high_threshold_percent
+        #   @return [::Integer]
+        #     Optional. Defines the percent of disk usage after which image garbage
+        #     collection is always run. The percent is calculated as this field value out
+        #     of 100.
+        #
+        #     The value must be between 10 and 85, inclusive and greater than
+        #     image_gc_low_threshold_percent.
+        #
+        #     The default value is 85 if unspecified.
+        # @!attribute [rw] image_minimum_gc_age
+        #   @return [::String]
+        #     Optional. Defines the minimum age for an unused image before it is garbage
+        #     collected.
+        #
+        #     The string must be a sequence of decimal numbers, each with optional
+        #     fraction and a unit suffix, such as "300s", "1.5h", and "2h45m". Valid time
+        #     units are "ns", "us" (or "µs"), "ms", "s", "m", "h".
+        #
+        #     The value must be a positive duration less than or equal to 2 minutes.
+        #
+        #     The default value is "2m0s" if unspecified.
+        # @!attribute [rw] image_maximum_gc_age
+        #   @return [::String]
+        #     Optional. Defines the maximum age an image can be unused before it is
+        #     garbage collected. The string must be a sequence of decimal numbers, each
+        #     with optional fraction and a unit suffix, such as "300s", "1.5h", and
+        #     "2h45m". Valid time units are "ns", "us" (or "µs"), "ms", "s", "m", "h".
+        #
+        #     The value must be a positive duration greater than image_minimum_gc_age
+        #     or "0s".
+        #
+        #     The default value is "0s" if unspecified, which disables this field,
+        #     meaning images won't be garbage collected based on being unused for too
+        #     long.
+        # @!attribute [rw] container_log_max_size
+        #   @return [::String]
+        #     Optional. Defines the maximum size of the container log file before it is
+        #     rotated. See
+        #     https://kubernetes.io/docs/concepts/cluster-administration/logging/#log-rotation
+        #
+        #     Valid format is positive number + unit, e.g. 100Ki, 10Mi. Valid units are
+        #     Ki, Mi, Gi.
+        #     The value must be between 10Mi and 500Mi, inclusive.
+        #
+        #     Note that the total container log size (container_log_max_size *
+        #     container_log_max_files) cannot exceed 1% of the total
+        #     storage of the node, to avoid disk pressure caused by log files.
+        #
+        #     The default value is 10Mi if unspecified.
+        # @!attribute [rw] container_log_max_files
+        #   @return [::Integer]
+        #     Optional. Defines the maximum number of container log files that can be
+        #     present for a container. See
+        #     https://kubernetes.io/docs/concepts/cluster-administration/logging/#log-rotation
+        #
+        #     The value must be an integer between 2 and 10, inclusive.
+        #     The default value is 5 if unspecified.
+        # @!attribute [rw] allowed_unsafe_sysctls
+        #   @return [::Array<::String>]
+        #     Optional. Defines a comma-separated allowlist of unsafe sysctls or sysctl
+        #     patterns (ending in `*`).
+        #
+        #     The unsafe namespaced sysctl groups are `kernel.shm*`, `kernel.msg*`,
+        #     `kernel.sem`, `fs.mqueue.*`, and `net.*`. Leaving this allowlist empty
+        #     means they cannot be set on Pods.
+        #
+        #     To allow certain sysctls or sysctl patterns to be set on Pods, list them
+        #     separated by commas.
+        #     For example: `kernel.msg*,net.ipv4.route.min_pmtu`.
+        #
+        #     See https://kubernetes.io/docs/tasks/administer-cluster/sysctl-cluster/
+        #     for more details.
         class NodeKubeletConfig
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # TopologyManager defines the configuration options for Topology Manager
+        # feature. See
+        # https://kubernetes.io/docs/tasks/administer-cluster/topology-manager/
+        # @!attribute [rw] policy
+        #   @return [::String]
+        #     Configures the strategy for resource alignment.
+        #     Allowed values are:
+        #
+        #     * none: the default policy, and does not perform any topology alignment.
+        #     * restricted: the topology manager stores the preferred NUMA node affinity
+        #     for the container, and will reject the pod if the affinity if not
+        #     preferred.
+        #     * best-effort: the topology manager stores the preferred NUMA node affinity
+        #     for the container. If the affinity is not preferred, the topology manager
+        #     will admit the pod to the node anyway.
+        #     * single-numa-node: the topology manager determines if the single NUMA node
+        #     affinity is possible. If it is, Topology Manager will store this and the
+        #     Hint Providers can then use this information when making the resource
+        #     allocation decision. If, however, this is not possible then the
+        #     Topology Manager will reject the pod from the node. This will result in a
+        #     pod in a Terminated state with a pod admission failure.
+        #
+        #     The default policy value is 'none' if unspecified.
+        #     Details about each strategy can be found
+        #     [here](https://kubernetes.io/docs/tasks/administer-cluster/topology-manager/#topology-manager-policies).
+        # @!attribute [rw] scope
+        #   @return [::String]
+        #     The Topology Manager aligns resources in following scopes:
+        #
+        #     * container
+        #     * pod
+        #
+        #     The default scope is 'container' if unspecified.
+        #     See
+        #     https://kubernetes.io/docs/tasks/administer-cluster/topology-manager/#topology-manager-scopes
+        class TopologyManager
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # The option enables the Kubernetes NUMA-aware Memory Manager feature.
+        # Detailed description about the feature can be found
+        # [here](https://kubernetes.io/docs/tasks/administer-cluster/memory-manager/).
+        # @!attribute [rw] policy
+        #   @return [::String]
+        #     Controls the memory management policy on the Node.
+        #     See
+        #     https://kubernetes.io/docs/tasks/administer-cluster/memory-manager/#policies
+        #
+        #     The following values are allowed.
+        #     * "none"
+        #     * "static"
+        #     The default value is 'none' if unspecified.
+        class MemoryManager
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
@@ -389,16 +548,23 @@ module Google
         # @!attribute [rw] secondary_boot_disk_update_strategy
         #   @return [::Google::Cloud::Container::V1::SecondaryBootDiskUpdateStrategy]
         #     Secondary boot disk update strategy.
+        # @!attribute [rw] max_run_duration
+        #   @return [::Google::Protobuf::Duration]
+        #     The maximum duration for the nodes to exist.
+        #     If unspecified, the nodes can exist indefinitely.
         # @!attribute [rw] local_ssd_encryption_mode
         #   @return [::Google::Cloud::Container::V1::NodeConfig::LocalSsdEncryptionMode]
         #     Specifies which method should be used for encrypting the
-        #     Local SSDs attahced to the node.
+        #     Local SSDs attached to the node.
         # @!attribute [r] effective_cgroup_mode
         #   @return [::Google::Cloud::Container::V1::NodeConfig::EffectiveCgroupMode]
         #     Output only. effective_cgroup_mode is the cgroup mode actually used by the
         #     node pool. It is determined by the cgroup mode specified in the
         #     LinuxNodeConfig or the default cgroup mode based on the cluster creation
         #     version.
+        # @!attribute [rw] flex_start
+        #   @return [::Boolean]
+        #     Flex Start flag for enabling Flex Start VM.
         class NodeConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -475,9 +641,28 @@ module Google
         # @!attribute [rw] enable_nested_virtualization
         #   @return [::Boolean]
         #     Whether or not to enable nested virtualization (defaults to false).
+        # @!attribute [rw] performance_monitoring_unit
+        #   @return [::Google::Cloud::Container::V1::AdvancedMachineFeatures::PerformanceMonitoringUnit]
+        #     Type of Performance Monitoring Unit (PMU) requested on node pool instances.
+        #     If unset, PMU will not be available to the node.
         class AdvancedMachineFeatures
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Level of PMU access
+          module PerformanceMonitoringUnit
+            # PMU not enabled.
+            PERFORMANCE_MONITORING_UNIT_UNSPECIFIED = 0
+
+            # Architecturally defined non-LLC events.
+            ARCHITECTURAL = 1
+
+            # Most documented core/L2 events.
+            STANDARD = 2
+
+            # Most documented core/L2 and LLC events.
+            ENHANCED = 3
+          end
         end
 
         # Parameters for node pool-level network config.
@@ -762,7 +947,7 @@ module Google
             #   @return [::Array<::String>]
             #     List of fully qualified domain names (FQDN).
             #     Specifying port is supported.
-            #     Wilcards are NOT supported.
+            #     Wildcards are NOT supported.
             #     Examples:
             #     - my.customdomain.com
             #     - 10.0.1.2:5000
@@ -995,6 +1180,9 @@ module Google
         # @!attribute [rw] ray_operator_config
         #   @return [::Google::Cloud::Container::V1::RayOperatorConfig]
         #     Optional. Configuration for Ray Operator addon.
+        # @!attribute [rw] high_scale_checkpointing_config
+        #   @return [::Google::Cloud::Container::V1::HighScaleCheckpointingConfig]
+        #     Configuration for the High Scale Checkpointing add-on.
         class AddonsConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -1214,6 +1402,16 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # Configuration for the High Scale Checkpointing.
+        # @!attribute [rw] enabled
+        #   @return [::Boolean]
+        #     Whether the High Scale Checkpointing is enabled for this
+        #     cluster.
+        class HighScaleCheckpointingConfig
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # Configuration options for the Ray Operator add-on.
         # @!attribute [rw] enabled
         #   @return [::Boolean]
@@ -1260,7 +1458,7 @@ module Google
         #     Kubernetes master through HTTPS.
         # @!attribute [rw] gcp_public_cidrs_access_enabled
         #   @return [::Boolean]
-        #     Whether master is accessbile via Google Compute Engine Public IP addresses.
+        #     Whether master is accessible via Google Compute Engine Public IP addresses.
         # @!attribute [rw] private_endpoint_enforcement_enabled
         #   @return [::Boolean]
         #     Whether master authorized networks is enforced on private endpoint or not.
@@ -1455,6 +1653,7 @@ module Google
         #     `10.0.0.0/8`, `172.16.0.0/12`, `192.168.0.0/16`) to pick a specific range
         #     to use.
         # @!attribute [rw] tpu_ipv4_cidr_block
+        #   @deprecated This field is deprecated and may be removed in the next major version update.
         #   @return [::String]
         #     The IP address range of the Cloud TPUs in this cluster. If unspecified, a
         #     range will be automatically chosen with the default size.
@@ -1471,6 +1670,9 @@ module Google
         #     notation (e.g. `10.96.0.0/14`) from the RFC-1918 private networks (e.g.
         #     `10.0.0.0/8`, `172.16.0.0/12`, `192.168.0.0/16`) to pick a specific range
         #     to use.
+        #
+        #     This field is deprecated due to the deprecation of 2VM TPU. The end of life
+        #     date for 2VM TPU is 2025-04-25.
         # @!attribute [rw] use_routes
         #   @return [::Boolean]
         #     Whether routes will be used for pod IPs in the cluster.
@@ -1584,7 +1786,7 @@ module Google
         #     The monitoring service the cluster should use to write metrics.
         #     Currently available options:
         #
-        #     * "monitoring.googleapis.com/kubernetes" - The Cloud Monitoring
+        #     * `monitoring.googleapis.com/kubernetes` - The Cloud Monitoring
         #     service with a Kubernetes-native resource model
         #     * `monitoring.googleapis.com` - The legacy Cloud Monitoring service (no
         #       longer available as of GKE 1.15).
@@ -1638,6 +1840,11 @@ module Google
         #     The cluster has no SLA for uptime and master/node upgrades are disabled.
         #     Alpha enabled clusters are automatically deleted thirty days after
         #     creation.
+        # @!attribute [rw] alpha_cluster_feature_gates
+        #   @return [::Array<::String>]
+        #     The list of user specified Kubernetes feature gates.
+        #     Each string represents the activation status of a feature gate (e.g.
+        #     "featureX=true" or "featureX=false")
         # @!attribute [rw] resource_labels
         #   @return [::Google::Protobuf::Map{::String => ::String}]
         #     The resource labels for the cluster to use to annotate any related
@@ -1817,13 +2024,19 @@ module Google
         #     [region](https://cloud.google.com/compute/docs/regions-zones/regions-zones#available)
         #     in which the cluster resides.
         # @!attribute [rw] enable_tpu
+        #   @deprecated This field is deprecated and may be removed in the next major version update.
         #   @return [::Boolean]
         #     Enable the ability to use Cloud TPUs in this cluster.
+        #     This field is deprecated due to the deprecation of 2VM TPU. The end of life
+        #     date for 2VM TPU is 2025-04-25.
         # @!attribute [r] tpu_ipv4_cidr_block
+        #   @deprecated This field is deprecated and may be removed in the next major version update.
         #   @return [::String]
         #     Output only. The IP address range of the Cloud TPUs in this cluster, in
         #     [CIDR](http://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing)
         #     notation (e.g. `1.2.3.4/29`).
+        #     This field is deprecated due to the deprecation of 2VM TPU. The end of life
+        #     date for 2VM TPU is 2025-04-25.
         # @!attribute [rw] conditions
         #   @return [::Array<::Google::Cloud::Container::V1::StatusCondition>]
         #     Which conditions caused the current cluster state.
@@ -1847,6 +2060,9 @@ module Google
         #   @return [::Google::Cloud::Container::V1::NodePoolAutoConfig]
         #     Node pool configs that apply to all auto-provisioned node pools
         #     in autopilot clusters and node auto-provisioning enabled clusters.
+        # @!attribute [rw] pod_autoscaling
+        #   @return [::Google::Cloud::Container::V1::PodAutoscaling]
+        #     The config for pod autoscaling.
         # @!attribute [rw] etag
         #   @return [::String]
         #     This checksum is computed by the server based on the value of cluster
@@ -1886,6 +2102,10 @@ module Google
         #   @return [::Google::Cloud::Container::V1::RBACBindingConfig]
         #     RBACBindingConfig allows user to restrict ClusterRoleBindings an
         #     RoleBindings that can be created.
+        # @!attribute [rw] anonymous_authentication_config
+        #   @return [::Google::Cloud::Container::V1::AnonymousAuthenticationConfig]
+        #     Configuration for limiting anonymous access to all endpoints except the
+        #     health checks.
         class Cluster
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -1985,6 +2205,13 @@ module Google
         #     Resource path of the Cloud KMS cryptoKey to use for encryption of internal
         #     etcd backups.
         class UserManagedKeysConfig
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # AnonymousAuthenticationConfig defines the settings needed to limit endpoints
+        # that allow anonymous authentication.
+        class AnonymousAuthenticationConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
@@ -2151,7 +2378,7 @@ module Google
         #     The monitoring service the cluster should use to write metrics.
         #     Currently available options:
         #
-        #     * "monitoring.googleapis.com/kubernetes" - The Cloud Monitoring
+        #     * `monitoring.googleapis.com/kubernetes` - The Cloud Monitoring
         #     service with a Kubernetes-native resource model
         #     * `monitoring.googleapis.com` - The legacy Cloud Monitoring service (no
         #       longer available as of GKE 1.15).
@@ -2328,6 +2555,9 @@ module Google
         #   @return [::Google::Cloud::Container::V1::NetworkTags]
         #     The desired network tags that apply to all auto-provisioned node pools
         #     in autopilot clusters and node auto-provisioning enabled clusters.
+        # @!attribute [rw] desired_pod_autoscaling
+        #   @return [::Google::Cloud::Container::V1::PodAutoscaling]
+        #     The desired config for pod autoscaling.
         # @!attribute [rw] desired_gateway_api_config
         #   @return [::Google::Cloud::Container::V1::GatewayAPIConfig]
         #     The desired config of Gateway API on this cluster.
@@ -2370,7 +2600,7 @@ module Google
         #     Enable/Disable FQDN Network Policy for the cluster.
         # @!attribute [rw] desired_autopilot_workload_policy_config
         #   @return [::Google::Cloud::Container::V1::WorkloadPolicyConfig]
-        #     The desired workload policy configuration for the autopilot cluster.
+        #     WorkloadPolicyConfig is the configuration related to GCW workload policy
         # @!attribute [rw] desired_k8s_beta_apis
         #   @return [::Google::Cloud::Container::V1::K8sBetaAPIConfig]
         #     Desired Beta APIs to be enabled for cluster.
@@ -2413,12 +2643,19 @@ module Google
         # @!attribute [rw] desired_enterprise_config
         #   @return [::Google::Cloud::Container::V1::DesiredEnterpriseConfig]
         #     The desired enterprise configuration for the cluster.
+        # @!attribute [rw] desired_disable_l4_lb_firewall_reconciliation
+        #   @return [::Boolean]
+        #     Enable/Disable L4 LB VPC firewall reconciliation for the cluster.
         # @!attribute [rw] desired_node_pool_auto_config_linux_node_config
         #   @return [::Google::Cloud::Container::V1::LinuxNodeConfig]
         #     The desired Linux node config for all auto-provisioned node pools
         #     in autopilot clusters and node auto-provisioning enabled clusters.
         #
         #     Currently only `cgroup_mode` can be set here.
+        # @!attribute [rw] desired_anonymous_authentication_config
+        #   @return [::Google::Cloud::Container::V1::AnonymousAuthenticationConfig]
+        #     Configuration for limiting anonymous access to all endpoints except the
+        #     health checks.
         class ClusterUpdate
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -2565,16 +2802,17 @@ module Google
             # The cluster is being created. The cluster should be assumed to be
             # unusable until the operation finishes.
             #
-            # In the event of the operation failing, the cluster will enter the [ERROR
-            # state][Cluster.Status.ERROR] and eventually be deleted.
+            # In the event of the operation failing, the cluster will enter the
+            # {::Google::Cloud::Container::V1::Cluster::Status::ERROR ERROR state} and eventually be
+            # deleted.
             CREATE_CLUSTER = 1
 
             # The cluster is being deleted. The cluster should be assumed to be
             # unusable as soon as this operation starts.
             #
-            # In the event of the operation failing, the cluster will enter the [ERROR
-            # state][Cluster.Status.ERROR] and the deletion will be automatically
-            # retried until completed.
+            # In the event of the operation failing, the cluster will enter the
+            # {::Google::Cloud::Container::V1::Cluster::Status::ERROR ERROR state} and the deletion
+            # will be automatically retried until completed.
             DELETE_CLUSTER = 2
 
             # The [cluster
@@ -2970,6 +3208,13 @@ module Google
         #   @return [::Array<::String>]
         #     List of Storage Pools where boot disks are provisioned.
         #     Existing Storage Pools will be replaced with storage-pools.
+        # @!attribute [rw] max_run_duration
+        #   @return [::Google::Protobuf::Duration]
+        #     The maximum duration for the nodes to exist.
+        #     If unspecified, the nodes can exist indefinitely.
+        # @!attribute [rw] flex_start
+        #   @return [::Boolean]
+        #     Flex Start flag for enabling Flex Start VM.
         class UpdateNodePoolRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -3077,7 +3322,7 @@ module Google
         #     Required. The monitoring service the cluster should use to write metrics.
         #     Currently available options:
         #
-        #     * "monitoring.googleapis.com/kubernetes" - The Cloud Monitoring
+        #     * `monitoring.googleapis.com/kubernetes` - The Cloud Monitoring
         #     service with a Kubernetes-native resource model
         #     * `monitoring.googleapis.com` - The legacy Cloud Monitoring service (no
         #       longer available as of GKE 1.15).
@@ -4233,8 +4478,8 @@ module Google
         end
 
         # RollbackNodePoolUpgradeRequest rollbacks the previously Aborted or Failed
-        # NodePool upgrade. This will be an no-op if the last upgrade successfully
-        # completed.
+        #  NodePool upgrade. This will be an no-op if the last upgrade successfully
+        #  completed.
         # @!attribute [rw] project_id
         #   @deprecated This field is deprecated and may be removed in the next major version update.
         #   @return [::String]
@@ -4379,7 +4624,7 @@ module Google
         #     available image types.
         # @!attribute [rw] insecure_kubelet_readonly_port_enabled
         #   @return [::Boolean]
-        #     Enable or disable Kubelet read only port.
+        #     DEPRECATED. Use NodePoolAutoConfig.NodeKubeletConfig instead.
         class AutoprovisioningNodePoolDefaults
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -4795,6 +5040,9 @@ module Google
 
             # Cluster CA is expiring soon.
             CA_EXPIRING = 9
+
+            # Node service account is missing permissions.
+            NODE_SERVICE_ACCOUNT_MISSING_PERMISSIONS = 10
           end
         end
 
@@ -4867,6 +5115,9 @@ module Google
         #     and this field at the same time.
         #     To update the default setting, use
         #     {::Google::Cloud::Container::V1::ClusterUpdate#desired_default_enable_private_nodes ClusterUpdate.desired_default_enable_private_nodes}
+        # @!attribute [rw] disable_l4_lb_firewall_reconciliation
+        #   @return [::Boolean]
+        #     Disable L4 load balancer VPC firewalls to enable firewall policies.
         class NetworkConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -5010,7 +5261,7 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # GetJSONWebKeysResponse is a valid JSON Web Key Set as specififed in rfc 7517
+        # GetJSONWebKeysResponse is a valid JSON Web Key Set as specified in rfc 7517
         # @!attribute [rw] keys
         #   @return [::Array<::Google::Cloud::Container::V1::Jwk>]
         #     The public component of the keys used by the cluster to sign token
@@ -5047,7 +5298,7 @@ module Google
         #     The name of the resources which are subject to this issue.
         # @!attribute [rw] documentation_url
         #   @return [::String]
-        #     A URL to a public documnetation, which addresses resolving this issue.
+        #     A URL to a public documentation, which addresses resolving this issue.
         # @!attribute [rw] description
         #   @return [::String]
         #     The description of the issue.
@@ -5575,6 +5826,9 @@ module Google
 
             # Corresponds with SecurityBulletinEvent.
             SECURITY_BULLETIN_EVENT = 3
+
+            # Corresponds with UpgradeInfoEvent.
+            UPGRADE_INFO_EVENT = 4
           end
         end
 
@@ -5583,9 +5837,27 @@ module Google
         # @!attribute [rw] enabled
         #   @return [::Boolean]
         #     Whether Confidential Nodes feature is enabled.
+        # @!attribute [rw] confidential_instance_type
+        #   @return [::Google::Cloud::Container::V1::ConfidentialNodes::ConfidentialInstanceType]
+        #     Defines the type of technology used by the confidential node.
         class ConfidentialNodes
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # The type of technology used by the confidential node.
+          module ConfidentialInstanceType
+            # No type specified. Do not use this value.
+            CONFIDENTIAL_INSTANCE_TYPE_UNSPECIFIED = 0
+
+            # AMD Secure Encrypted Virtualization.
+            SEV = 1
+
+            # AMD Secure Encrypted Virtualization - Secure Nested Paging.
+            SEV_SNP = 2
+
+            # Intel Trust Domain eXtension.
+            TDX = 3
+          end
         end
 
         # UpgradeEvent is a notification sent to customers by the cluster server when
@@ -5641,9 +5913,18 @@ module Google
         # @!attribute [r] state
         #   @return [::Google::Cloud::Container::V1::UpgradeInfoEvent::State]
         #     Output only. The state of the upgrade.
+        # @!attribute [rw] standard_support_end_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     The end of standard support timestamp.
+        # @!attribute [rw] extended_support_end_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     The end of extended support timestamp.
         # @!attribute [rw] description
         #   @return [::String]
         #     A brief description of the event.
+        # @!attribute [rw] event_type
+        #   @return [::Google::Cloud::Container::V1::UpgradeInfoEvent::EventType]
+        #     The type of the event.
         class UpgradeInfoEvent
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -5664,6 +5945,24 @@ module Google
 
             # CANCELED indicates the upgrade has canceled.
             CANCELED = 6
+          end
+
+          # The type of the event.
+          module EventType
+            # EVENT_TYPE_UNSPECIFIED indicates the event type is unspecified.
+            EVENT_TYPE_UNSPECIFIED = 0
+
+            # END_OF_SUPPORT indicates GKE version reaches end of support, check
+            # standard_support_end_time and extended_support_end_time for more details.
+            END_OF_SUPPORT = 1
+
+            # COS_MILESTONE_VERSION_UPDATE indicates that the COS node image will
+            # update COS milestone version for new patch versions starting with
+            # the one in the description.
+            COS_MILESTONE_VERSION_UPDATE = 2
+
+            # UPGRADE_LIFECYCLE indicates the event is about the upgrade lifecycle.
+            UPGRADE_LIFECYCLE = 3
           end
         end
 
@@ -5728,6 +6027,9 @@ module Google
         #   @return [::Boolean]
         #     If this field is specified, it means there are manual steps that the user
         #     must take to make their clusters safe.
+        # @!attribute [rw] mitigated_versions
+        #   @return [::Array<::String>]
+        #     The GKE versions where this vulnerability is mitigated.
         class SecurityBulletinEvent
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -5739,17 +6041,20 @@ module Google
         #     Enable Autopilot
         # @!attribute [rw] workload_policy_config
         #   @return [::Google::Cloud::Container::V1::WorkloadPolicyConfig]
-        #     Workload policy configuration for Autopilot.
+        #     WorkloadPolicyConfig is the configuration related to GCW workload policy
         class Autopilot
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # WorkloadPolicyConfig is the configuration of workload policy for autopilot
-        # clusters.
+        # WorkloadPolicyConfig is the configuration related to GCW workload policy
         # @!attribute [rw] allow_net_admin
         #   @return [::Boolean]
         #     If true, workloads can use NET_ADMIN capability.
+        # @!attribute [rw] autopilot_compatibility_auditing_enabled
+        #   @return [::Boolean]
+        #     If true, enables the GCW Auditor that audits workloads on
+        #     standard clusters.
         class WorkloadPolicyConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -5797,6 +6102,9 @@ module Google
 
             # kcp connection logs
             KCP_CONNECTION = 8
+
+            # horizontal pod autoscaler decision logs
+            KCP_HPA = 9
           end
         end
 
@@ -5948,6 +6256,9 @@ module Google
 
             # NVIDIA Data Center GPU Manager (DCGM)
             DCGM = 15
+
+            # JobSet
+            JOBSET = 16
           end
         end
 
@@ -5956,9 +6267,58 @@ module Google
         # @!attribute [rw] enabled
         #   @return [::Boolean]
         #     Enable Managed Collection.
+        # @!attribute [rw] auto_monitoring_config
+        #   @return [::Google::Cloud::Container::V1::AutoMonitoringConfig]
+        #     GKE Workload Auto-Monitoring Configuration.
         class ManagedPrometheusConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # AutoMonitoringConfig defines the configuration for GKE Workload
+        # Auto-Monitoring.
+        # @!attribute [rw] scope
+        #   @return [::Google::Cloud::Container::V1::AutoMonitoringConfig::Scope]
+        #     Scope for GKE Workload Auto-Monitoring.
+        class AutoMonitoringConfig
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Scope for applications monitored by Auto-Monitoring
+          module Scope
+            # Not set.
+            SCOPE_UNSPECIFIED = 0
+
+            # Auto-Monitoring is enabled for all supported applications.
+            ALL = 1
+
+            # Disable Auto-Monitoring.
+            NONE = 2
+          end
+        end
+
+        # PodAutoscaling is used for configuration of parameters
+        # for workload autoscaling.
+        # @!attribute [rw] hpa_profile
+        #   @return [::Google::Cloud::Container::V1::PodAutoscaling::HPAProfile]
+        #     Selected Horizontal Pod Autoscaling profile.
+        class PodAutoscaling
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Possible types of Horizontal Pod Autoscaling profile.
+          module HPAProfile
+            # HPA_PROFILE_UNSPECIFIED is used when no custom HPA profile is set.
+            HPA_PROFILE_UNSPECIFIED = 0
+
+            # Customers explicitly opt-out of HPA profiles.
+            NONE = 1
+
+            # PERFORMANCE is used when customers opt-in to the performance HPA profile.
+            # In this profile we support a higher number of HPAs per cluster and faster
+            # metrics collection for workload autoscaling.
+            PERFORMANCE = 2
+          end
         end
 
         # Fleet is the fleet configuration for the cluster.
@@ -6101,6 +6461,9 @@ module Google
         #     ssds), 0 will be provisioned. See
         #     https://cloud.google.com/compute/docs/disks/local-ssd#choose_number_local_ssds
         #     for more info.
+        # @!attribute [rw] data_cache_count
+        #   @return [::Integer]
+        #     Number of local SSDs to use for GKE Data Cache.
         class EphemeralStorageLocalSsdConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -6194,6 +6557,229 @@ module Google
         class SecondaryBootDiskUpdateStrategy
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # FetchClusterUpgradeInfoRequest fetches the upgrade information of a cluster.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The name (project, location, cluster) of the cluster to get.
+        #     Specified in the format `projects/*/locations/*/clusters/*` or
+        #     `projects/*/zones/*/clusters/*`.
+        # @!attribute [rw] version
+        #   @return [::String]
+        #     API request version that initiates this operation.
+        class FetchClusterUpgradeInfoRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # ClusterUpgradeInfo contains the upgrade information of a cluster.
+        # @!attribute [rw] minor_target_version
+        #   @return [::String]
+        #     minor_target_version indicates the target version for minor upgrade.
+        # @!attribute [rw] patch_target_version
+        #   @return [::String]
+        #     patch_target_version indicates the target version for patch upgrade.
+        # @!attribute [rw] auto_upgrade_status
+        #   @return [::Array<::Google::Cloud::Container::V1::ClusterUpgradeInfo::AutoUpgradeStatus>]
+        #     The auto upgrade status.
+        # @!attribute [rw] paused_reason
+        #   @return [::Array<::Google::Cloud::Container::V1::ClusterUpgradeInfo::AutoUpgradePausedReason>]
+        #     The auto upgrade paused reason.
+        # @!attribute [rw] upgrade_details
+        #   @return [::Array<::Google::Cloud::Container::V1::UpgradeDetails>]
+        #     The list of past auto upgrades.
+        # @!attribute [rw] end_of_standard_support_timestamp
+        #   @return [::String]
+        #     The cluster's current minor version's end of standard support timestamp.
+        # @!attribute [rw] end_of_extended_support_timestamp
+        #   @return [::String]
+        #     The cluster's current minor version's end of extended support timestamp.
+        class ClusterUpgradeInfo
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # AutoUpgradeStatus indicates the status of auto upgrade.
+          module AutoUpgradeStatus
+            # UNKNOWN indicates an unknown status.
+            UNKNOWN = 0
+
+            # ACTIVE indicates an active status.
+            ACTIVE = 1
+
+            # MINOR_UPGRADE_PAUSED indicates the minor version upgrade is
+            # paused.
+            MINOR_UPGRADE_PAUSED = 4
+
+            # UPGRADE_PAUSED indicates the upgrade is paused.
+            UPGRADE_PAUSED = 5
+          end
+
+          # AutoUpgradePausedReason indicates the reason for auto upgrade paused
+          # status.
+          module AutoUpgradePausedReason
+            # AUTO_UPGRADE_PAUSED_REASON_UNSPECIFIED indicates an unspecified reason.
+            AUTO_UPGRADE_PAUSED_REASON_UNSPECIFIED = 0
+
+            # MAINTENANCE_WINDOW indicates the cluster is outside customer maintenance
+            # window.
+            MAINTENANCE_WINDOW = 1
+
+            # MAINTENANCE_EXCLUSION_NO_UPGRADES indicates the cluster is in a
+            # maintenance exclusion with scope NO_UPGRADES.
+            MAINTENANCE_EXCLUSION_NO_UPGRADES = 5
+
+            # MAINTENANCE_EXCLUSION_NO_MINOR_UPGRADES indicates the cluster is in a
+            # maintenance exclusion with scope NO_MINOR_UPGRADES.
+            MAINTENANCE_EXCLUSION_NO_MINOR_UPGRADES = 6
+
+            # CLUSTER_DISRUPTION_BUDGET indicates the cluster is outside the cluster
+            # disruption budget.
+            CLUSTER_DISRUPTION_BUDGET = 4
+
+            # CLUSTER_DISRUPTION_BUDGET_MINOR_UPGRADE indicates the cluster is outside
+            # the cluster disruption budget for minor version upgrade.
+            CLUSTER_DISRUPTION_BUDGET_MINOR_UPGRADE = 7
+
+            # SYSTEM_CONFIG indicates the cluster upgrade is paused  by system config.
+            SYSTEM_CONFIG = 8
+          end
+        end
+
+        # UpgradeDetails contains detailed information of each individual upgrade
+        # operation.
+        # @!attribute [r] state
+        #   @return [::Google::Cloud::Container::V1::UpgradeDetails::State]
+        #     Output only. The state of the upgrade.
+        # @!attribute [rw] start_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     The start timestamp of the upgrade.
+        # @!attribute [rw] end_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     The end timestamp of the upgrade.
+        # @!attribute [rw] initial_version
+        #   @return [::String]
+        #     The version before the upgrade.
+        # @!attribute [rw] target_version
+        #   @return [::String]
+        #     The version after the upgrade.
+        # @!attribute [rw] start_type
+        #   @return [::Google::Cloud::Container::V1::UpgradeDetails::StartType]
+        #     The start type of the upgrade.
+        class UpgradeDetails
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # State indicates the state of the upgrade.
+          module State
+            # Upgrade state is unknown.
+            UNKNOWN = 0
+
+            # Upgrade has failed with an error.
+            FAILED = 1
+
+            # Upgrade has succeeded.
+            SUCCEEDED = 2
+
+            # Upgrade has been canceled.
+            CANCELED = 3
+
+            # Upgrade is running.
+            RUNNING = 4
+          end
+
+          # StartType indicates the type of starting the upgrade.
+          module StartType
+            # Upgrade start type is unspecified.
+            START_TYPE_UNSPECIFIED = 0
+
+            # Upgrade started automatically.
+            AUTOMATIC = 1
+
+            # Upgrade started manually.
+            MANUAL = 2
+          end
+        end
+
+        # FetchNodePoolUpgradeInfoRequest fetches the upgrade information of a
+        # nodepool.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The name (project, location, cluster, nodepool) of the nodepool
+        #     to get. Specified in the format
+        #     `projects/*/locations/*/clusters/*/nodePools/*` or
+        #     `projects/*/zones/*/clusters/*/nodePools/*`.
+        # @!attribute [rw] version
+        #   @return [::String]
+        #     API request version that initiates this operation.
+        class FetchNodePoolUpgradeInfoRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # NodePoolUpgradeInfo contains the upgrade information of a nodepool.
+        # @!attribute [rw] minor_target_version
+        #   @return [::String]
+        #     minor_target_version indicates the target version for minor upgrade.
+        # @!attribute [rw] patch_target_version
+        #   @return [::String]
+        #     patch_target_version indicates the target version for patch upgrade.
+        # @!attribute [rw] auto_upgrade_status
+        #   @return [::Array<::Google::Cloud::Container::V1::NodePoolUpgradeInfo::AutoUpgradeStatus>]
+        #     The auto upgrade status.
+        # @!attribute [rw] paused_reason
+        #   @return [::Array<::Google::Cloud::Container::V1::NodePoolUpgradeInfo::AutoUpgradePausedReason>]
+        #     The auto upgrade paused reason.
+        # @!attribute [rw] upgrade_details
+        #   @return [::Array<::Google::Cloud::Container::V1::UpgradeDetails>]
+        #     The list of past auto upgrades.
+        # @!attribute [rw] end_of_standard_support_timestamp
+        #   @return [::String]
+        #     The nodepool's current minor version's end of standard support timestamp.
+        # @!attribute [rw] end_of_extended_support_timestamp
+        #   @return [::String]
+        #     The nodepool's current minor version's end of extended support timestamp.
+        class NodePoolUpgradeInfo
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # AutoUpgradeStatus indicates the status of auto upgrade.
+          module AutoUpgradeStatus
+            # UNKNOWN indicates an unknown status.
+            UNKNOWN = 0
+
+            # ACTIVE indicates an active status.
+            ACTIVE = 1
+
+            # MINOR_UPGRADE_PAUSED indicates the minor version upgrade is
+            # paused.
+            MINOR_UPGRADE_PAUSED = 2
+
+            # UPGRADE_PAUSED indicates the upgrade is paused.
+            UPGRADE_PAUSED = 3
+          end
+
+          # AutoUpgradePausedReason indicates the reason for auto upgrade paused
+          # status.
+          module AutoUpgradePausedReason
+            # AUTO_UPGRADE_PAUSED_REASON_UNSPECIFIED indicates an unspecified reason.
+            AUTO_UPGRADE_PAUSED_REASON_UNSPECIFIED = 0
+
+            # MAINTENANCE_WINDOW indicates the cluster is outside customer maintenance
+            # window.
+            MAINTENANCE_WINDOW = 1
+
+            # MAINTENANCE_EXCLUSION_NO_UPGRADES indicates the cluster is in a
+            # maintenance exclusion with scope NO_UPGRADES.
+            MAINTENANCE_EXCLUSION_NO_UPGRADES = 2
+
+            # MAINTENANCE_EXCLUSION_NO_MINOR_UPGRADES indicates the cluster is in a
+            # maintenance exclusion with scope NO_MINOR_UPGRADES.
+            MAINTENANCE_EXCLUSION_NO_MINOR_UPGRADES = 3
+
+            # SYSTEM_CONFIG indicates the cluster upgrade is paused by system config.
+            SYSTEM_CONFIG = 4
+          end
         end
 
         # PrivateIPv6GoogleAccess controls whether and how the pods can communicate
