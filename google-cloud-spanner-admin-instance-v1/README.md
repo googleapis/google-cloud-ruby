@@ -1,8 +1,7 @@
 # Ruby Client for the Cloud Spanner Instance Admin V1 API
 
-API Client library for the Cloud Spanner Instance Admin V1 API
-
 Cloud Spanner is a managed, mission-critical, globally consistent and scalable relational database service.
+
 
 https://github.com/googleapis/google-cloud-ruby
 
