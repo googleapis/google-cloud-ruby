@@ -574,6 +574,12 @@ module Google
 
             # Memory management for workloads.
             MEMORY = 4
+
+            # No autotuning.
+            NONE = 5
+
+            # Automatic selection of scenarios.
+            AUTO = 6
           end
         end
 
