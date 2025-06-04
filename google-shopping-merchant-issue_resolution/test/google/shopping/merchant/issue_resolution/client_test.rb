@@ -41,6 +41,27 @@ class Google::Shopping::Merchant::IssueResolution::ClientConstructionMinitest < 
     end
   end
 
+  def test_aggregate_product_statuses_service_grpc
+    skip unless Google::Shopping::Merchant::IssueResolution.aggregate_product_statuses_service_available? transport: :grpc
+    Gapic::ServiceStub.stub :new, DummyStub.new do
+      grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+      client = Google::Shopping::Merchant::IssueResolution.aggregate_product_statuses_service transport: :grpc do |config|
+        config.credentials = grpc_channel
+      end
+      assert_kind_of Google::Shopping::Merchant::IssueResolution::V1beta::AggregateProductStatusesService::Client, client
+    end
+  end
+
+  def test_aggregate_product_statuses_service_rest
+    skip unless Google::Shopping::Merchant::IssueResolution.aggregate_product_statuses_service_available? transport: :rest
+    Gapic::Rest::ClientStub.stub :new, DummyStub.new do
+      client = Google::Shopping::Merchant::IssueResolution.aggregate_product_statuses_service transport: :rest do |config|
+        config.credentials = :dummy_credentials
+      end
+      assert_kind_of Google::Shopping::Merchant::IssueResolution::V1beta::AggregateProductStatusesService::Rest::Client, client
+    end
+  end
+
   def test_issue_resolution_service_grpc
     skip unless Google::Shopping::Merchant::IssueResolution.issue_resolution_service_available? transport: :grpc
     Gapic::ServiceStub.stub :new, DummyStub.new do
