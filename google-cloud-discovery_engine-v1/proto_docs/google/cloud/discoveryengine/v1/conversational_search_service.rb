@@ -721,6 +721,9 @@ module Google
 
                 # Non-answer-seeking query classification type, for no clear intent.
                 NON_ANSWER_SEEKING_QUERY_V2 = 4
+
+                # User defined query classification type.
+                USER_DEFINED_CLASSIFICATION_QUERY = 5
               end
             end
 
