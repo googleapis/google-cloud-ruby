@@ -24,7 +24,7 @@ module Google
         # DataStore captures global settings and configs at the DataStore level.
         # @!attribute [rw] name
         #   @return [::String]
-        #     Immutable. The full resource name of the data store.
+        #     Immutable. Identifier. The full resource name of the data store.
         #     Format:
         #     `projects/{project}/locations/{location}/collections/{collection_id}/dataStores/{data_store_id}`.
         #
@@ -64,9 +64,41 @@ module Google
         # @!attribute [rw] advanced_site_search_config
         #   @return [::Google::Cloud::DiscoveryEngine::V1::AdvancedSiteSearchConfig]
         #     Optional. Configuration for advanced site search.
+        # @!attribute [rw] kms_key_name
+        #   @return [::String]
+        #     Input only. The KMS key to be used to protect this DataStore at creation
+        #     time.
+        #
+        #     Must be set for requests that need to comply with CMEK Org Policy
+        #     protections.
+        #
+        #     If this field is set and processed successfully, the DataStore will be
+        #     protected by the KMS key, as indicated in the cmek_config field.
+        # @!attribute [r] cmek_config
+        #   @return [::Google::Cloud::DiscoveryEngine::V1::CmekConfig]
+        #     Output only. CMEK-related information for the DataStore.
         # @!attribute [r] billing_estimation
         #   @return [::Google::Cloud::DiscoveryEngine::V1::DataStore::BillingEstimation]
         #     Output only. Data size estimation for billing.
+        # @!attribute [rw] acl_enabled
+        #   @return [::Boolean]
+        #     Immutable. Whether data in the
+        #     {::Google::Cloud::DiscoveryEngine::V1::DataStore DataStore} has ACL information.
+        #     If set to `true`, the source data must have ACL. ACL will be ingested when
+        #     data is ingested by
+        #     {::Google::Cloud::DiscoveryEngine::V1::DocumentService::Client#import_documents DocumentService.ImportDocuments}
+        #     methods.
+        #
+        #     When ACL is enabled for the
+        #     {::Google::Cloud::DiscoveryEngine::V1::DataStore DataStore},
+        #     {::Google::Cloud::DiscoveryEngine::V1::Document Document} can't be accessed by
+        #     calling
+        #     {::Google::Cloud::DiscoveryEngine::V1::DocumentService::Client#get_document DocumentService.GetDocument}
+        #     or
+        #     {::Google::Cloud::DiscoveryEngine::V1::DocumentService::Client#list_documents DocumentService.ListDocuments}.
+        #
+        #     Currently ACL is only supported in `GENERIC` industry vertical with
+        #     non-`PUBLIC_WEBSITE` content config.
         # @!attribute [rw] workspace_config
         #   @return [::Google::Cloud::DiscoveryEngine::V1::WorkspaceConfig]
         #     Config to store data store type configuration for workspace data. This
@@ -96,6 +128,16 @@ module Google
         #     The provided schema will be validated against certain rules on schema.
         #     Learn more from [this
         #     doc](https://cloud.google.com/generative-ai-app-builder/docs/provide-schema).
+        # @!attribute [rw] healthcare_fhir_config
+        #   @return [::Google::Cloud::DiscoveryEngine::V1::HealthcareFhirConfig]
+        #     Optional. Configuration for `HEALTHCARE_FHIR` vertical.
+        # @!attribute [rw] identity_mapping_store
+        #   @return [::String]
+        #     Immutable. The fully qualified resource name of the associated
+        #     {::Google::Cloud::DiscoveryEngine::V1::IdentityMappingStore IdentityMappingStore}.
+        #     This field can only be set for acl_enabled DataStores with `THIRD_PARTY` or
+        #     `GSUITE` IdP. Format:
+        #     `projects/{project}/locations/{location}/identityMappingStores/{identity_mapping_store}`.
         class DataStore
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
