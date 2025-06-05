@@ -995,124 +995,6 @@ def view_regional_secret_labels project_id:, location_id:, secret_id:
   existing_secret_labels
 end
 
-def create_regional_secret_with_delayed_destroy project_id:, location_id:, secret_id:, time_to_live:
-  # [START secretmanager_create_regional_secret_with_delayed_destroy]
-  # project_id   = "YOUR-GOOGLE-CLOUD-PROJECT"            # (e.g. "my-project")
-  # location_id  = "YOUR-GOOGLE-CLOUD-LOCATION"           # (e.g. "us-west1")
-  # secret_id    = "YOUR-SECRET-ID"                       # (e.g. "my-secret")
-  # time_to_live = "TOUR_DELAYED_DESTROY_TTL_IN_SECONDS"  # (e.g. 86400)
-
-  # Require the Secret Manager client library.
-  require "google/cloud/secret_manager"
-
-  # Endpoint for the regional secret manager service.
-  api_endpoint = "secretmanager.#{location_id}.rep.googleapis.com"
-
-  # Create the Secret Manager client.
-  client = Google::Cloud::SecretManager.secret_manager_service do |config|
-    config.endpoint = api_endpoint
-  end
-
-  # Build the resource name of the parent project.
-  parent = client.location_path project: project_id, location: location_id
-
-  # Create the secret.
-  secret = client.create_secret(
-    parent:    parent,
-    secret_id: secret_id,
-    secret: {
-      version_destroy_ttl: {
-        seconds: time_to_live
-      }
-    }
-  )
-
-  # Print the new secret name.
-  puts "Created regional secret: #{secret.name}"
-  # [END secretmanager_create_regional_secret_with_delayed_destroy]
-
-  secret
-end
-
-def disable_regional_secret_delayed_destroy project_id:, location_id:, secret_id:
-  # [START secretmanager_disable_regional_secret_delayed_destroy]
-  # project_id   = "YOUR-GOOGLE-CLOUD-PROJECT"   # (e.g. "my-project")
-  # location_id  = "YOUR-GOOGLE-CLOUD-LOCATION"  # (e.g. "us-west1")
-  # secret_id    = "YOUR-SECRET-ID"              # (e.g. "my-secret")
-
-  # Require the Secret Manager client library.
-  require "google/cloud/secret_manager"
-
-  # Endpoint for the regional secret manager service.
-  api_endpoint = "secretmanager.#{location_id}.rep.googleapis.com"
-
-  # Create the Secret Manager client.
-  client = Google::Cloud::SecretManager.secret_manager_service do |config|
-    config.endpoint = api_endpoint
-  end
-
-  # Build the resource name of the secret.
-  name = client.secret_path project: project_id, location: location_id, secret: secret_id
-
-  # Create the secret.
-  secret = client.update_secret(
-    secret: {
-      name: name
-    },
-    update_mask: {
-      paths: ["version_destroy_ttl"]
-    }
-  )
-
-  # Print a success message.
-  puts "Disabled regional secret delayed destroy: #{secret.name}"
-  # [END secretmanager_disable_regional_secret_delayed_destroy]
-
-  secret
-end
-
-def update_regional_secret_with_delayed_destroy project_id:, location_id:, secret_id:, updated_time_to_live:
-  # [START secretmanager_update_regional_secret_with_delayed_destroy]
-  # project_id   = "YOUR-GOOGLE-CLOUD-PROJECT"            # (e.g. "my-project")
-  # location_id  = "YOUR-GOOGLE-CLOUD-LOCATION"           # (e.g. "us-west1")
-  # secret_id    = "YOUR-SECRET-ID"                       # (e.g. "my-secret")
-  # time_to_live = "TOUR_DELAYED_DESTROY_TTL_IN_SECONDS"  # (e.g. 86400)
-
-  # Require the Secret Manager client library.
-  require "google/cloud/secret_manager"
-
-  # Endpoint for the regional secret manager service.
-  api_endpoint = "secretmanager.#{location_id}.rep.googleapis.com"
-
-  # Create the Secret Manager client.
-  client = Google::Cloud::SecretManager.secret_manager_service do |config|
-    config.endpoint = api_endpoint
-  end
-
-  # Build the resource name of the secret.
-  name = client.secret_path project: project_id, location: location_id, secret: secret_id
-
-  # Create the secret.
-  secret = client.update_secret(
-    secret: {
-      name: name,
-      version_destroy_ttl: {
-        seconds: updated_time_to_live
-      }
-    },
-    update_mask: {
-      paths: ["version_destroy_ttl"]
-    }
-  )
-
-  # Print the updated secret name and the new ttl value.
-  puts "Updated regional secret: #{secret.name}"
-  puts "New updated regional secret ttl: #{secret.version_destroy_ttl}"
-  # [END secretmanager_update_regional_secret_with_delayed_destroy]
-
-  secret
-end
-
 if $PROGRAM_NAME == __FILE__
   args    = ARGV.dup
   command = args.shift
@@ -1301,26 +1183,6 @@ if $PROGRAM_NAME == __FILE__
       location_id: ENV["GOOGLE_CLOUD_LOCATION"],
       secret_id:  args.shift
     )
-  when "create_regional_secret_with_delayed_destroy"
-    create_regional_secret_with_delayed_destroy(
-      project_id: ENV["GOOGLE_CLOUD_PROJECT"],
-      location_id: ENV["GOOGLE_CLOUD_LOCATION"],
-      secret_id:  args.shift,
-      time_to_live: args.shift
-    )
-  when "disable_regional_secret_delayed_destroy"
-    disable_regional_secret_delayed_destroy(
-      project_id: ENV["GOOGLE_CLOUD_PROJECT"],
-      location_id: ENV["GOOGLE_CLOUD_LOCATION"],
-      secret_id:  args.shift
-    )
-  when "update_regional_secret_with_delayed_destroy"
-    update_regional_secret_with_delayed_destroy(
-      project_id: ENV["GOOGLE_CLOUD_PROJECT"],
-      location_id: ENV["GOOGLE_CLOUD_LOCATION"],
-      secret_id:  args.shift,
-      updated_time_to_live: args.shift
-    )
   else
     puts <<~USAGE
       Usage: bundle exec ruby #{__FILE__} [command] [arguments]
@@ -1330,14 +1192,12 @@ if $PROGRAM_NAME == __FILE__
         add_regional_secret_version <secret>                                                                 Add a new regional secret version
         create_regional_secret <secret>                                                                      Create a new regional secret
         create_regional_secret_with_annotations <secret> <key> <value>                                       Create a new regional secret with annotations
-        create_regional_secret_with_delayed_destroy <secret> <ttl>                                           Create a new regional secret with delayed destroy
         create_regional_secret_with_labels <secret> <key> <value>                                            Create a new regional secret with labels
         delete_regional_secret_with_etag <secret> <etag>                                                     Delete an existing regional secret with associated etag
         delete_regional_secret <secret>                                                                      Delete an existing regional secret
         destroy_regional_secret_version_with_etag <secret> <version> <etag>                                  Destroy a regional secret version
         destroy_regional_secret_version <secret> <version> <etag>                                            Destroy a regional secret version
         disable_regional_secret_version_with_etag <secret> <version> <etag>                                  Disable a regional secret version
-        disable_regional_secret_delayed_destroy <secret>                                                     Disable a regional secret's delayed destroy
         disable_regional_secret_version <secret> <version>                                                   Disable a regional secret version
         edit_regional_secret_annotations <secret> <key> <value>                                              Edit a regional secret annotations
         enable_regional_secret_version_with_etag <secret> <version> <etag>                                   Enable a regional secret version
@@ -1351,7 +1211,6 @@ if $PROGRAM_NAME == __FILE__
         list_regional_secrets_with_filter <filter>                                                           List all  regional secrets
         list_regional_secrets                                                                                List all  regional secrets
         update_regional_secret_with_alias <secret>                                                           Update a regional secret
-        update_regional_secret_with_delayed_destroy <secret> <ttl>                                           Update a regional secret's delayed destroy ttl value
         update_regional_secret_with_etag <secret> <etag>                                                     Update a regional secret
         update_regional_secret <secret>                                                                      Update a regional secret
         view_regional_secret_annotations <secret>                                                            View a regional secret annotations
