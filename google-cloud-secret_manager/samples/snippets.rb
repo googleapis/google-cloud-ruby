@@ -817,7 +817,6 @@ if $PROGRAM_NAME == __FILE__
         view_secret_annotations <secret>                        View a secret annotations
         view_secret_labels <secret>                             View a secret labels
 
-
       Environment variables:
         GOOGLE_CLOUD_PROJECT    ID of the Google Cloud project to run snippets
     USAGE
