@@ -1,5 +1,71 @@
 # Release History
 
+### 0.47.0 (2025-06-05)
+
+#### Features
+
+* add allowed_unsafe_sysctls in NodeKubeletConfig 
+* add alpha_cluster_feature_gates in Cluster 
+* add anonymous_authentication_config in Cluster 
+* add auto_monitoring_config in ManagedPrometheusConfig 
+* add autopilot_compatibility_auditing_enabled in WorkloadPolicyConfig 
+* add ClusterUpgradeInfo 
+* add confidential_instance_type in ConfidentialNodes 
+* add container_log_max_files in NodeKubeletConfig 
+* add container_log_max_size in NodeKubeletConfig 
+* add control_plane_endpoints_config in Cluster 
+* add data_cache_count in EphemeralStorageLocalSsdConfig 
+* add desired_anonymous_authentication_config in ClusterUpdate 
+* add desired_compliance_posture_config in ClusterUpdate 
+* add desired_control_plane_endpoints_config in ClusterUpdate 
+* add desired_default_enable_private_nodes in ClusterUpdate 
+* add desired_disable_l4_lb_firewall_reconciliation in ClusterUpdate 
+* add desired_enterprise_config in ClusterUpdate 
+* add desired_node_pool_auto_config_linux_node_config in ClusterUpdate 
+* add desired_pod_autoscaling in ClusterUpdate 
+* add desired_rbac_binding_config in ClusterUpdate 
+* add disable_l4_lb_firewall_reconciliation in NetworkConfig 
+* add effective_cgroup_mode in NodeConfig 
+* add event_type in UpgradeInfoEvent 
+* add extended_support_end_time in UpgradeInfoEvent 
+* add FetchClusterUpgradeInfoRequest 
+* add FetchNodePoolUpgradeInfoRequest 
+* add flex_start in NodeConfig 
+* add flex_start in UpdateNodePoolRequest 
+* add high_scale_checkpointing_config in AddonsConfig 
+* add image_gc_high_threshold_percent in NodeKubeletConfig 
+* add image_gc_low_threshold_percent in NodeKubeletConfig 
+* add image_maximum_gc_age in NodeKubeletConfig 
+* add image_minimum_gc_age in NodeKubeletConfig 
+* add JOBSET in MonitoringComponentConfig.Component 
+* add KCP_HPA in LoggingComponentConfig.Component 
+* add linux_node_config in NodePoolAutoConfig 
+* add local_ssd_encryption_mode in NodeConfig 
+* add max_run_duration in NodeConfig 
+* add max_run_duration in UpdateNodePoolRequest 
+* add MemoryManager 
+* add mitigated_versions in SecurityBulletinEvent 
+* add NODE_SERVICE_ACCOUNT_MISSING_PERMISSIONS in StatusCondition.Code 
+* add NodePoolUpgradeInfo 
+* add parallelstore_csi_driver_config in AddonsConfig 
+* add performance_monitoring_unit in AdvancedMachineFeatures 
+* add pod_autoscaling in Cluster 
+* add private_endpoint_enforcement_enabled in MasterAuthorizedNetworksConfig 
+* add rbac_binding_config in Cluster 
+* add standard_support_end_time in UpgradeInfoEvent 
+* add storage_pools in NodeConfig 
+* add storage_pools in UpdateNodePoolRequest 
+* add topology_manager in NodeKubeletConfig ([#30479](https://github.com/googleapis/google-cloud-ruby/issues/30479)) 
+* add TopologyManager 
+* add UPGRADE_INFO_EVENT in NotificationConfig.EventType 
+* add upgrade_target_version in ReleaseChannelConfig 
+* add UpgradeDetails 
+* add user_managed_keys_config in Cluster 
+* add user_managed_keys_config in ClusterUpdate 
+#### Documentation
+
+* Minor documentation updates 
+
 ### 0.46.0 (2025-05-12)
 
 #### Features
