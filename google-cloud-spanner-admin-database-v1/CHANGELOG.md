@@ -1,5 +1,11 @@
 # Release History
 
+### 1.8.0 (2025-06-05)
+
+#### Features
+
+* Support throughput_mode in UpdateDatabaseDdlRequest to be used by Spanner Migration Tool 
+
 ### 1.7.0 (2025-05-12)
 
 #### Features
