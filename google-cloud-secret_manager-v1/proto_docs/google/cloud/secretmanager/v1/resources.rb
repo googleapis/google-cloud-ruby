@@ -127,6 +127,16 @@ module Google
         #     {::Google::Cloud::SecretManager::V1::SecretVersion SecretVersions} added
         #     afterwards. They do not apply retroactively to existing
         #     {::Google::Cloud::SecretManager::V1::SecretVersion SecretVersions}.
+        # @!attribute [rw] tags
+        #   @return [::Google::Protobuf::Map{::String => ::String}]
+        #     Optional. Input only. Immutable. Mapping of Tag keys/values directly bound
+        #     to this resource. For example:
+        #       "123/environment": "production",
+        #       "123/costCenter": "marketing"
+        #
+        #     Tags are used to organize and group resources.
+        #
+        #     Tags can be used to control policy evaluation for the resource.
         class Secret
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -154,6 +164,15 @@ module Google
           # @!attribute [rw] value
           #   @return [::String]
           class AnnotationsEntry
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # @!attribute [rw] key
+          #   @return [::String]
+          # @!attribute [rw] value
+          #   @return [::String]
+          class TagsEntry
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
