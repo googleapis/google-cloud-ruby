@@ -673,109 +673,6 @@ def view_secret_labels project_id:, secret_id:
   existing_secret_labels
 end
 
-def create_secret_with_delayed_destroy project_id:, secret_id:, time_to_live:
-  # [START secretmanager_create_secret_with_delayed_destroy]
-  # project_id   = "YOUR-GOOGLE-CLOUD-PROJECT"            # (e.g. "my-project")
-  # secret_id    = "YOUR-SECRET-ID"                       # (e.g. "my-secret")
-  # time_to_live = "TOUR_DELAYED_DESTROY_TTL_IN_SECONDS"  # (e.g. 86400)
-
-  # Require the Secret Manager client library.
-  require "google/cloud/secret_manager"
-
-  # Create a Secret Manager client.
-  client = Google::Cloud::SecretManager.secret_manager_service
-
-  # Build the resource name of the parent project.
-  parent = client.project_path project: project_id
-
-  # Create the secret.
-  secret = client.create_secret(
-    parent:    parent,
-    secret_id: secret_id,
-    secret:    {
-      replication: {
-        automatic: {}
-      },
-      version_destroy_ttl: {
-        seconds: time_to_live
-      }
-    }
-  )
-
-  # Print the new secret name.
-  puts "Created secret: #{secret.name}"
-  # [END secretmanager_create_secret_with_delayed_destroy]
-
-  secret
-end
-
-def disable_secret_delayed_destroy project_id:, secret_id:
-  # [START secretmanager_disable_secret_delayed_destroy]
-  # project_id   = "YOUR-GOOGLE-CLOUD-PROJECT"            # (e.g. "my-project")
-  # secret_id    = "YOUR-SECRET-ID"                       # (e.g. "my-secret")
-
-  # Require the Secret Manager client library.
-  require "google/cloud/secret_manager"
-
-  # Create a Secret Manager client.
-  client = Google::Cloud::SecretManager.secret_manager_service
-
-  # Build the resource name of the secret.
-  name = client.secret_path project: project_id, secret: secret_id
-
-  # Disable the secret's delayed destroy.
-  secret = client.update_secret(
-    secret: {
-      name: name
-    },
-    update_mask: {
-      paths: ["version_destroy_ttl"]
-    }
-  )
-
-  # Print a success message.
-  puts "Disabled secret delayed destroy: #{secret.name}"
-  # [END secretmanager_disable_secret_delayed_destroy]
-
-  secret
-end
-
-def update_secret_with_delayed_destroy project_id:, secret_id:, updated_time_to_live:
-  # [START secretmanager_update_secret_with_delayed_destroy]
-  # project_id           = "YOUR-GOOGLE-CLOUD-PROJECT"            # (e.g. "my-project")
-  # secret_id            = "YOUR-SECRET-ID"                       # (e.g. "my-secret")
-  # updated_time_to_live = "TOUR_DELAYED_DESTROY_TTL_IN_SECONDS"  # (e.g. 86400)
-
-  # Require the Secret Manager client library.
-  require "google/cloud/secret_manager"
-
-  # Create a Secret Manager client.
-  client = Google::Cloud::SecretManager.secret_manager_service
-
-  # Build the resource name of the secret.
-  name = client.secret_path project: project_id, secret: secret_id
-
-  # Updates the secret.
-  secret = client.update_secret(
-    secret: {
-      name: name,
-      version_destroy_ttl: {
-        seconds: updated_time_to_live
-      }
-    },
-    update_mask: {
-      paths: ["version_destroy_ttl"]
-    }
-  )
-
-  # Print the updated secret name and annotations.
-  puts "Updated secret: #{secret.name}"
-  puts "New updated secret version ttl: #{secret.version_destroy_ttl}"
-  # [END secretmanager_update_secret_with_delayed_destroy]
-
-  secret
-end
-
 if $PROGRAM_NAME == __FILE__
   args    = ARGV.dup
   command = args.shift
@@ -894,52 +791,31 @@ if $PROGRAM_NAME == __FILE__
       project_id: ENV["GOOGLE_CLOUD_PROJECT"],
       secret_id:  args.shift
     )
-  when "create_secret_with_delayed_destroy"
-    create_secret_with_delayed_destroy(
-      project_id: ENV["GOOGLE_CLOUD_PROJECT"],
-      secret_id:  args.shift,
-      time_to_live: args.shift
-    )
-  when "disable_secret_delayed_destroy"
-    disable_secret_delayed_destroy(
-      project_id: ENV["GOOGLE_CLOUD_PROJECT"],
-      secret_id:  args.shift
-    )
-  when "update_secret_with_delayed_destroy"
-    update_secret_with_delayed_destroy(
-      project_id: ENV["GOOGLE_CLOUD_PROJECT"],
-      secret_id:  args.shift,
-      updated_time_to_live: args.shift
-    )
   else
     puts <<~USAGE
       Usage: bundle exec ruby #{__FILE__} [command] [arguments]
 
       Commands:
-        access_secret_version <secret> <version>                    Access a secret version
-        add_secret_version <secret>                                 Add a new secret version
-        create_secret <secret>                                      Create a new secret
-        create_secret_with_annotations <secret> <key> <value>       Create a new secret with annotations
-        create_secret_with_delayed_destroy <secret> <time_to_live>  Create a new secret with delayed destroy
-        create_secret_with_labels <secret> <key> <value>            Create a new secret with labels
-        create_ummr_secret <secret> <locations>                     Create a new secret with user managed replication
-        delete_secret <secret>                                      Delete an existing secret
-        destroy_secret_version <secret> <version>                   Destroy a secret version
-        disable_secret_version <secret> <version>                   Disable a secret version
-        disable_secret_delayed_destroy <secret>                     Disable a secret delayed destroy
-        edit_secret_annotations <secret> <key> <value>              Edit existing secret annotations
-        enable_secret_version <secret> <version>                    Enable a secret version
-        get_secret <secret>                                         Get a secret
-        get_secret_version <secret> <version>                       Get a secret version
-        iam_grant_access <secret> <version> <member>                Grant the member access to the secret
-        iam_revoke_access <secret> <version> <member>               Revoke the member access to the secret
-        list_secret_versions <secret>                               List all versions for a secret
-        list_secrets                                                List all secrets
-        update_secret <secret>                                      Update a secret
-        updated_secret_with_delayed_destroy <secret> <time_to_live> Update a secret delayed destroy value.
-        view_secret_annotations <secret>                            View a secret annotations
-        view_secret_labels <secret>                                 View a secret labels
-
+        access_secret_version <secret> <version>                Access a secret version
+        add_secret_version <secret>                             Add a new secret version
+        create_secret <secret>                                  Create a new secret
+        create_secret_with_annotations <secret> <key> <value>   Create a new secret with annotations
+        create_secret_with_labels <secret> <key> <value>        Create a new secret with labels
+        create_ummr_secret <secret> <locations>                 Create a new secret with user managed replication
+        delete_secret <secret>                                  Delete an existing secret
+        destroy_secret_version <secret> <version>               Destroy a secret version
+        disable_secret_version <secret> <version>               Disable a secret version
+        edit_secret_annotations <secret> <key> <value>          Edit existing secret annotations
+        enable_secret_version <secret> <version>                Enable a secret version
+        get_secret <secret>                                     Get a secret
+        get_secret_version <secret> <version>                   Get a secret version
+        iam_grant_access <secret> <version> <member>            Grant the member access to the secret
+        iam_revoke_access <secret> <version> <member>           Revoke the member access to the secret
+        list_secret_versions <secret>                           List all versions for a secret
+        list_secrets                                            List all secrets
+        update_secret <secret>                                  Update a secret
+        view_secret_annotations <secret>                        View a secret annotations
+        view_secret_labels <secret>                             View a secret labels
 
       Environment variables:
         GOOGLE_CLOUD_PROJECT    ID of the Google Cloud project to run snippets
