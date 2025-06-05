@@ -56,9 +56,8 @@ module Google
         #     The identifier of the schema located in the same data store.
         # @!attribute [rw] content
         #   @return [::Google::Cloud::DiscoveryEngine::V1::Document::Content]
-        #     The unstructured data linked to this document. Content must be set if this
-        #     document is under a
-        #     `CONTENT_REQUIRED` data store.
+        #     The unstructured data linked to this document. Content can only be set
+        #     and must be set if this document is under a `CONTENT_REQUIRED` data store.
         # @!attribute [rw] parent_document_id
         #   @return [::String]
         #     The identifier of the parent document. Currently supports at most two level
@@ -70,6 +69,9 @@ module Google
         #   @return [::Google::Protobuf::Struct]
         #     Output only. This field is OUTPUT_ONLY.
         #     It contains derived data that are not in the original input document.
+        # @!attribute [rw] acl_info
+        #   @return [::Google::Cloud::DiscoveryEngine::V1::Document::AclInfo]
+        #     Access control information for the document.
         # @!attribute [r] index_time
         #   @return [::Google::Protobuf::Timestamp]
         #     Output only. The last time the document was indexed. If this field is set,
@@ -116,14 +118,107 @@ module Google
           #
           #     * `application/pdf` (PDF, only native PDFs are supported for now)
           #     * `text/html` (HTML)
+          #     * `text/plain` (TXT)
+          #     * `application/xml` or `text/xml` (XML)
+          #     * `application/json` (JSON)
           #     * `application/vnd.openxmlformats-officedocument.wordprocessingml.document` (DOCX)
           #     * `application/vnd.openxmlformats-officedocument.presentationml.presentation` (PPTX)
-          #     * `text/plain` (TXT)
+          #     * `application/vnd.openxmlformats-officedocument.spreadsheetml.sheet`
+          #     (XLSX)
+          #     * `application/vnd.ms-excel.sheet.macroenabled.12` (XLSM)
+          #
+          #     The following types are supported only if layout parser is enabled in the
+          #     data store:
+          #
+          #     * `image/bmp` (BMP)
+          #     * `image/gif` (GIF)
+          #     * `image/jpeg` (JPEG)
+          #     * `image/png` (PNG)
+          #     * `image/tiff` (TIFF)
           #
           #     See https://www.iana.org/assignments/media-types/media-types.xhtml.
           class Content
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # ACL Information of the Document.
+          # @!attribute [rw] readers
+          #   @return [::Array<::Google::Cloud::DiscoveryEngine::V1::Document::AclInfo::AccessRestriction>]
+          #     Readers of the document.
+          class AclInfo
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+
+            # AclRestriction to model complex inheritance restrictions.
+            #
+            # Example: Modeling a "Both Permit" inheritance, where to access a
+            # child document, user needs to have access to parent document.
+            #
+            # Document Hierarchy - Space_S --> Page_P.
+            #
+            # Readers:
+            #   Space_S: group_1, user_1
+            #   Page_P: group_2, group_3, user_2
+            #
+            # Space_S ACL Restriction -
+            # {
+            #   "acl_info": {
+            #     "readers": [
+            #       {
+            #         "principals": [
+            #           {
+            #             "group_id": "group_1"
+            #           },
+            #           {
+            #             "user_id": "user_1"
+            #           }
+            #         ]
+            #       }
+            #     ]
+            #   }
+            # }
+            #
+            # Page_P ACL Restriction.
+            # {
+            #   "acl_info": {
+            #     "readers": [
+            #       {
+            #         "principals": [
+            #           {
+            #             "group_id": "group_2"
+            #           },
+            #           {
+            #             "group_id": "group_3"
+            #           },
+            #           {
+            #             "user_id": "user_2"
+            #           }
+            #         ],
+            #       },
+            #       {
+            #         "principals": [
+            #           {
+            #             "group_id": "group_1"
+            #           },
+            #           {
+            #             "user_id": "user_1"
+            #           }
+            #         ],
+            #       }
+            #     ]
+            #   }
+            # }
+            # @!attribute [rw] principals
+            #   @return [::Array<::Google::Cloud::DiscoveryEngine::V1::Principal>]
+            #     List of principals.
+            # @!attribute [rw] idp_wide
+            #   @return [::Boolean]
+            #     All users within the Identity Provider.
+            class AccessRestriction
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
           end
 
           # Index status of the document.
