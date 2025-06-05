@@ -121,6 +121,56 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # Principal identifier of a user or a group.
+        # @!attribute [rw] user_id
+        #   @return [::String]
+        #     User identifier.
+        #     For Google Workspace user account, user_id should be the google workspace
+        #     user email.
+        #     For non-google identity provider user account, user_id is the mapped user
+        #     identifier configured during the workforcepool config.
+        #
+        #     Note: The following fields are mutually exclusive: `user_id`, `group_id`, `external_entity_id`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] group_id
+        #   @return [::String]
+        #     Group identifier.
+        #     For Google Workspace user account, group_id should be the google
+        #     workspace group email.
+        #     For non-google identity provider user account, group_id is the mapped
+        #     group identifier configured during the workforcepool config.
+        #
+        #     Note: The following fields are mutually exclusive: `group_id`, `user_id`, `external_entity_id`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] external_entity_id
+        #   @return [::String]
+        #     For 3P application identities which are not present in the customer
+        #     identity provider.
+        #
+        #     Note: The following fields are mutually exclusive: `external_entity_id`, `user_id`, `group_id`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        class Principal
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Config to data store for `HEALTHCARE_FHIR` vertical.
+        # @!attribute [rw] enable_configurable_schema
+        #   @return [::Boolean]
+        #     Whether to enable configurable schema for `HEALTHCARE_FHIR` vertical.
+        #
+        #     If set to `true`, the predefined healthcare fhir schema can be extended
+        #     for more customized searching and filtering.
+        # @!attribute [rw] enable_static_indexing_for_batch_ingestion
+        #   @return [::Boolean]
+        #     Whether to enable static indexing for `HEALTHCARE_FHIR` batch
+        #     ingestion.
+        #
+        #     If set to `true`, the batch ingestion will be processed in a static
+        #     indexing mode which is slower but more capable of handling larger
+        #     volume.
+        class HealthcareFhirConfig
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # Promotion proto includes uri and other helping information to display the
         # promotion.
         # @!attribute [rw] title
@@ -131,6 +181,11 @@ module Google
         #   @return [::String]
         #     Optional. The URL for the page the user wants to promote. Must be set for
         #     site search. For other verticals, this is optional.
+        # @!attribute [rw] document
+        #   @return [::String]
+        #     Optional. The {::Google::Cloud::DiscoveryEngine::V1::Document Document} the user
+        #     wants to promote. For site search, leave unset and only populate uri. Can
+        #     be set along with uri.
         # @!attribute [rw] image_uri
         #   @return [::String]
         #     Optional. The promotion thumbnail image url.

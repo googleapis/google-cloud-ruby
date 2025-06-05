@@ -233,11 +233,21 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload create_data_store(parent: nil, data_store: nil, data_store_id: nil, create_advanced_site_search: nil, skip_default_schema_creation: nil)
+            # @overload create_data_store(cmek_config_name: nil, disable_cmek: nil, parent: nil, data_store: nil, data_store_id: nil, create_advanced_site_search: nil, skip_default_schema_creation: nil)
             #   Pass arguments to `create_data_store` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
+            #   @param cmek_config_name [::String]
+            #     Resource name of the CmekConfig to use for protecting this DataStore.
+            #
+            #     Note: The following fields are mutually exclusive: `cmek_config_name`, `disable_cmek`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+            #   @param disable_cmek [::Boolean]
+            #     DataStore without CMEK protections. If a default CmekConfig is set for
+            #     the project, setting this field will override the default CmekConfig as
+            #     well.
+            #
+            #     Note: The following fields are mutually exclusive: `disable_cmek`, `cmek_config_name`. If a field in that set is populated, all other fields in the set will automatically be cleared.
             #   @param parent [::String]
             #     Required. The parent resource name, such as
             #     `projects/{project}/locations/{location}/collections/{collection}`.
