@@ -61,6 +61,9 @@ module Google
         #   @return [::Google::Cloud::AIPlatform::V1::Tool::CodeExecution]
         #     Optional. CodeExecution tool type.
         #     Enables the model to execute code as part of generation.
+        # @!attribute [rw] url_context
+        #   @return [::Google::Cloud::AIPlatform::V1::UrlContext]
+        #     Optional. Tool to support URL context retrieval.
         class Tool
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -81,6 +84,12 @@ module Google
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
+        end
+
+        # Tool to support URL context.
+        class UrlContext
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # Structured representation of a function declaration as defined by the
@@ -114,11 +123,37 @@ module Google
         #        type: INTEGER
         #     required:
         #      - param1
+        # @!attribute [rw] parameters_json_schema
+        #   @return [::Google::Protobuf::Value]
+        #     Optional. Describes the parameters to the function in JSON Schema format.
+        #     The schema must describe an object where the properties are the parameters
+        #     to the function. For example:
+        #
+        #     ```
+        #     {
+        #       "type": "object",
+        #       "properties": {
+        #         "name": { "type": "string" },
+        #         "age": { "type": "integer" }
+        #       },
+        #       "additionalProperties": false,
+        #       "required": ["name", "age"],
+        #       "propertyOrdering": ["name", "age"]
+        #     }
+        #     ```
+        #
+        #     This field is mutually exclusive with `parameters`.
         # @!attribute [rw] response
         #   @return [::Google::Cloud::AIPlatform::V1::Schema]
         #     Optional. Describes the output from this function in JSON Schema format.
         #     Reflects the Open API 3.03 Response Object. The Schema defines the type
         #     used for the response value of the function.
+        # @!attribute [rw] response_json_schema
+        #   @return [::Google::Protobuf::Value]
+        #     Optional. Describes the output from this function in JSON Schema format.
+        #     The value specified by the schema is the response value of the function.
+        #
+        #     This field is mutually exclusive with `response`.
         class FunctionDeclaration
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

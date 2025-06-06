@@ -80,6 +80,9 @@ module Google
         #
         #     If this field is left unspecified, the resources aren't peered with any
         #     network.
+        # @!attribute [rw] psc_interface_config
+        #   @return [::Google::Cloud::AIPlatform::V1::PscInterfaceConfig]
+        #     Optional. Configuration for PSC-I for PersistentResource.
         # @!attribute [rw] encryption_spec
         #   @return [::Google::Cloud::AIPlatform::V1::EncryptionSpec]
         #     Optional. Customer-managed encryption key spec for a PersistentResource.
