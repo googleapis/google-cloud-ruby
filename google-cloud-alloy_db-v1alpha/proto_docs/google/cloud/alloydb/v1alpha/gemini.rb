@@ -21,27 +21,23 @@ module Google
   module Cloud
     module AlloyDB
       module V1alpha
-        # Cluster level configuration parameters related to the Gemini in Databases
-        # add-on.
+        # Deprecated and unused. This message will be removed in the near future.
         # @!attribute [r] entitled
+        #   @deprecated This field is deprecated and may be removed in the next major version update.
         #   @return [::Boolean]
-        #     Output only. Whether the Gemini in Databases add-on is enabled for the
-        #     cluster. It will be true only if the add-on has been enabled for the
-        #     billing account corresponding to the cluster. Its status is toggled from
-        #     the Admin Control Center (ACC) and cannot be toggled using AlloyDB's APIs.
+        #     Output only. Deprecated and unused. This field will be removed in the near
+        #     future.
         class GeminiClusterConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Instance level configuration parameters related to the Gemini in Databases
-        # add-on.
+        # Deprecated and unused. This message will be removed in the near future.
         # @!attribute [r] entitled
+        #   @deprecated This field is deprecated and may be removed in the next major version update.
         #   @return [::Boolean]
-        #     Output only. Whether the Gemini in Databases add-on is enabled for the
-        #     instance. It will be true only if the add-on has been enabled for the
-        #     billing account corresponding to the instance. Its status is toggled from
-        #     the Admin Control Center (ACC) and cannot be toggled using AlloyDB's APIs.
+        #     Output only. Deprecated and unused. This field will be removed in the near
+        #     future.
         class GeminiInstanceConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
