@@ -76,6 +76,13 @@ module Google
         # the `updated` property of Cloud Storage objects, the `LastModified` field
         # of S3 objects, and the `Last-Modified` header of Azure blobs.
         #
+        # For S3 objects, the `LastModified` value is the time the object begins
+        # uploading. If the object meets your "last modification time" criteria,
+        # but has not finished uploading, the object is not transferred. See
+        # [Transfer from Amazon S3 to Cloud
+        # Storage](https://cloud.google.com/storage-transfer/docs/create-transfers/agentless/s3#transfer_options)
+        # for more information.
+        #
         # Transfers with a {::Google::Cloud::StorageTransfer::V1::PosixFilesystem PosixFilesystem}
         # source or destination don't support `ObjectConditions`.
         # @!attribute [rw] min_time_elapsed_since_last_modification
@@ -352,9 +359,40 @@ module Google
         #     {::Google::Cloud::StorageTransfer::V1::AzureBlobStorageData#azure_credentials azure_credentials}.
         #
         #     Format: `projects/{project_number}/secrets/{secret_name}`
+        # @!attribute [rw] federated_identity_config
+        #   @return [::Google::Cloud::StorageTransfer::V1::AzureBlobStorageData::FederatedIdentityConfig]
+        #     Optional. Federated identity config of a user registered Azure application.
+        #
+        #     If `federated_identity_config` is specified, do not specify
+        #     {::Google::Cloud::StorageTransfer::V1::AzureBlobStorageData#azure_credentials azure_credentials}
+        #     or
+        #     {::Google::Cloud::StorageTransfer::V1::AzureBlobStorageData#credentials_secret credentials_secret}.
         class AzureBlobStorageData
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # The identity of an Azure application through which Storage Transfer Service
+          # can authenticate requests using Azure workload identity federation.
+          #
+          # Storage Transfer Service can issue requests to Azure Storage through
+          # registered Azure applications, eliminating the need to pass credentials to
+          # Storage Transfer Service directly.
+          #
+          # To configure federated identity, see
+          # [Configure access to Microsoft Azure
+          # Storage](https://cloud.google.com/storage-transfer/docs/source-microsoft-azure#option_3_authenticate_using_federated_identity).
+          # @!attribute [rw] client_id
+          #   @return [::String]
+          #     Required. The client (application) ID of the application with federated
+          #     credentials.
+          # @!attribute [rw] tenant_id
+          #   @return [::String]
+          #     Required. The tenant (directory) ID of the application with federated
+          #     credentials.
+          class FederatedIdentityConfig
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
         end
 
         # An HttpData resource specifies a list of objects on the web to be
@@ -400,8 +438,9 @@ module Google
         # @!attribute [rw] list_url
         #   @return [::String]
         #     Required. The URL that points to the file that stores the object list
-        #     entries. This file must allow public access.  Currently, only URLs with
-        #     HTTP and HTTPS schemes are supported.
+        #     entries. This file must allow public access. The URL is either an
+        #     HTTP/HTTPS address (e.g. `https://example.com/urllist.tsv`) or a Cloud
+        #     Storage path (e.g. `gs://my-bucket/urllist.tsv`).
         class HttpData
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -584,7 +623,7 @@ module Google
         # @!attribute [rw] overwrite_objects_already_existing_in_sink
         #   @return [::Boolean]
         #     When to overwrite objects that already exist in the sink. The default is
-        #     that only objects that are different from the source are ovewritten. If
+        #     that only objects that are different from the source are overwritten. If
         #     true, all objects in the sink whose name matches an object in the source
         #     are overwritten with the source object.
         # @!attribute [rw] delete_objects_unique_in_sink
@@ -999,7 +1038,7 @@ module Google
         #     {::Google::Cloud::StorageTransfer::V1::Schedule#schedule_end_date schedule_end_date},
         #     `end_time_of_day` specifies the end date and time for starting new transfer
         #     operations. This field must be greater than or equal to the timestamp
-        #     corresponding to the combintation of
+        #     corresponding to the combination of
         #     {::Google::Cloud::StorageTransfer::V1::Schedule#schedule_start_date schedule_start_date}
         #     and
         #     {::Google::Cloud::StorageTransfer::V1::Schedule#start_time_of_day start_time_of_day},
@@ -1080,6 +1119,23 @@ module Google
         # @!attribute [rw] project_id
         #   @return [::String]
         #     The ID of the Google Cloud project that owns the job.
+        # @!attribute [rw] service_account
+        #   @return [::String]
+        #     Optional. The user-managed service account to which to delegate service
+        #     agent permissions. You can grant Cloud Storage bucket permissions to this
+        #     service account instead of to the Transfer Service service agent.
+        #
+        #     Format is
+        #     `projects/-/serviceAccounts/ACCOUNT_EMAIL_OR_UNIQUEID`
+        #
+        #     Either the service account email
+        #     (`SERVICE_ACCOUNT_NAME@PROJECT_ID.iam.gserviceaccount.com`) or the unique
+        #     ID (`123456789012345678901`) are accepted in the string. The `-`
+        #     wildcard character is required; replacing it with a project ID is invalid.
+        #
+        #     See
+        #     https://cloud.google.com//storage-transfer/docs/delegate-service-agent-permissions
+        #     for required permissions.
         # @!attribute [rw] transfer_spec
         #   @return [::Google::Cloud::StorageTransfer::V1::TransferSpec]
         #     Transfer specification.
@@ -1383,7 +1439,7 @@ module Google
             # Deleting objects at the source or the destination.
             DELETE = 2
 
-            # Copying objects to Google Cloud Storage.
+            # Copying objects to the destination.
             COPY = 3
           end
 
@@ -1399,6 +1455,11 @@ module Google
             # `LoggableAction` terminated in an error state. `FAILED` actions are
             # logged as [ERROR][google.logging.type.LogSeverity.ERROR].
             FAILED = 2
+
+            # The `COPY` action was skipped for this file. Only supported for
+            # agent-based transfers. `SKIPPED` actions are
+            # logged as [INFO][google.logging.type.LogSeverity.INFO].
+            SKIPPED = 3
           end
         end
 
