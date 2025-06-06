@@ -27,21 +27,21 @@ module Google
         #   @return [::String]
         #     Resource name of this QuotaInfo.
         #     The ID component following "locations/" must be "global".
-        #     Example:
+        #     For example,
         #     `projects/123/locations/global/services/compute.googleapis.com/quotaInfos/CpusPerProjectPerRegion`
         # @!attribute [rw] quota_id
         #   @return [::String]
         #     The id of the quota, which is unquie within the service.
-        #     Example: `CpusPerProjectPerRegion`
+        #     For example, `CpusPerProjectPerRegion`
         # @!attribute [rw] metric
         #   @return [::String]
         #     The metric of the quota. It specifies the resources consumption the quota
         #     is defined for.
-        #     Example: `compute.googleapis.com/cpus`
+        #     For example, `compute.googleapis.com/cpus`
         # @!attribute [rw] service
         #   @return [::String]
         #     The name of the service in which the quota is defined.
-        #     Example: `compute.googleapis.com`
+        #     For example, `compute.googleapis.com`
         # @!attribute [rw] is_precise
         #   @return [::Boolean]
         #     Whether this is a precise quota. A precise quota is tracked with absolute
@@ -50,8 +50,8 @@ module Google
         #   @return [::String]
         #     The reset time interval for the quota. Refresh interval applies to rate
         #     quota only.
-        #     Example: "minute" for per minute, "day" for per day, or "10 seconds" for
-        #     every 10 seconds.
+        #     For example, "minute" for per minute, "day" for per day, or "10 seconds"
+        #     for every 10 seconds.
         # @!attribute [rw] container_type
         #   @return [::Google::Cloud::CloudQuotas::V1beta::QuotaInfo::ContainerType]
         #     The container type of the QuotaInfo.
@@ -146,25 +146,26 @@ module Google
         #   @return [::String]
         #     Required except in the CREATE requests.
         #     The resource name of the quota preference.
-        #     The ID component following "locations/" must be "global".
-        #     Example:
+        #     The path that follows `/locations` must be `/global`.
+        #     For example:
         #     `projects/123/locations/global/quotaPreferences/my-config-for-us-east1`
         # @!attribute [rw] dimensions
         #   @return [::Google::Protobuf::Map{::String => ::String}]
         #     Immutable. The dimensions that this quota preference applies to. The key of
-        #     the map entry is the name of a dimension, such as "region", "zone",
-        #     "network_id", and the value of the map entry is the dimension value.
+        #     the map entry is the name of a dimension, such as `region`, `zone`,
+        #     `network_id`, and the value of the map entry is the dimension value.
         #
         #     If a dimension is missing from the map of dimensions, the quota preference
         #     applies to all the dimension values except for those that have other quota
         #     preferences configured for the specific value.
         #
-        #     NOTE: QuotaPreferences can only be applied across all values of "user" and
-        #     "resource" dimension. Do not set values for "user" or "resource" in the
+        #     Note: QuotaPreferences can only be applied across all values of `user` and
+        #     `resource` dimension. Do not set values for `user` or `resource` in the
         #     dimension map.
         #
-        #     Example: \\{"provider", "Foo Inc"} where "provider" is a service specific
-        #     dimension.
+        #     For example: `{"provider" : "Example Organization"}` where `provider` is a
+        #     service-specific quota dimension and `Example Organization` is the provider
+        #     name.
         # @!attribute [rw] quota_config
         #   @return [::Google::Cloud::CloudQuotas::V1beta::QuotaConfig]
         #     Required. Preferred quota configuration.
@@ -186,7 +187,7 @@ module Google
         # @!attribute [rw] quota_id
         #   @return [::String]
         #     Required. The id of the quota to which the quota preference is applied. A
-        #     quota name is unique in the service. Example: `CpusPerProjectPerRegion`
+        #     quota name is unique in the service. For example, `CpusPerProjectPerRegion`
         # @!attribute [r] reconciling
         #   @return [::Boolean]
         #     Output only. Is the quota preference pending Google Cloud approval and
@@ -196,9 +197,9 @@ module Google
         #     The reason / justification for this quota preference.
         # @!attribute [rw] contact_email
         #   @return [::String]
-        #     Input only. An email address that can be used to contact the the user, in
-        #     case Google Cloud needs more information to make a decision before
-        #     additional quota can be granted.
+        #     Input only. An email address that can be used to contact the user, in case
+        #     Google Cloud needs more information to make a decision before additional
+        #     quota can be granted.
         #
         #     When requesting a quota increase, the email address is required.
         #     When requesting a quota decrease, the email address is optional.
@@ -275,20 +276,21 @@ module Google
         # combination of dimensions.
         # @!attribute [rw] dimensions
         #   @return [::Google::Protobuf::Map{::String => ::String}]
-        #     The map of dimensions for this dimensions info. The key of a map entry
-        #     is "region", "zone" or the name of a service specific dimension, and the
-        #     value of a map entry is the value of the dimension.  If a dimension does
+        #     The map of dimensions in key-value pairs. The key of a map entry
+        #     is "region", "zone", or the name of a service-specific dimension, and the
+        #     value of a map entry is the value of the dimension. If a dimension does
         #     not appear in the map of dimensions, the dimensions info applies to all
-        #     the dimension values except for those that have another DimenisonInfo
+        #     the dimension values except for those that have another DimensionInfo
         #     instance configured for the specific value.
-        #     Example: \\{"provider" : "Foo Inc"} where "provider" is a service specific
-        #     dimension of a quota.
+        #     For example: `{"provider" : "Example Organization"}` where `provider` is a
+        #     service-specific quota dimension and `Example Organization` is the provider
+        #     name.
         # @!attribute [rw] details
         #   @return [::Google::Cloud::CloudQuotas::V1beta::QuotaDetails]
         #     Quota details for the specified dimensions.
         # @!attribute [rw] applicable_locations
         #   @return [::Array<::String>]
-        #     The applicable regions or zones of this dimensions info. The field will be
+        #     The applicable regions or zones of this dimension. The field is
         #     set to ['global'] for quotas that are not per region or per zone.
         #     Otherwise, it will be set to the list of locations this dimension info is
         #     applicable to.

@@ -27,18 +27,53 @@ module Google
             ##
             # Create a fully-qualified QuotaAdjusterSettings resource string.
             #
-            # The resource will be in the following format:
+            # @overload quota_adjuster_settings_path(project:, location:)
+            #   The resource will be in the following format:
             #
-            # `projects/{project}/locations/{location}/quotaAdjusterSettings`
+            #   `projects/{project}/locations/{location}/quotaAdjusterSettings`
             #
-            # @param project [String]
-            # @param location [String]
+            #   @param project [String]
+            #   @param location [String]
+            #
+            # @overload quota_adjuster_settings_path(organization:, location:)
+            #   The resource will be in the following format:
+            #
+            #   `organizations/{organization}/locations/{location}/quotaAdjusterSettings`
+            #
+            #   @param organization [String]
+            #   @param location [String]
+            #
+            # @overload quota_adjuster_settings_path(folder:, location:)
+            #   The resource will be in the following format:
+            #
+            #   `folders/{folder}/locations/{location}/quotaAdjusterSettings`
+            #
+            #   @param folder [String]
+            #   @param location [String]
             #
             # @return [::String]
-            def quota_adjuster_settings_path project:, location:
-              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+            def quota_adjuster_settings_path **args
+              resources = {
+                "location:project" => (proc do |project:, location:|
+                  raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
 
-              "projects/#{project}/locations/#{location}/quotaAdjusterSettings"
+                  "projects/#{project}/locations/#{location}/quotaAdjusterSettings"
+                end),
+                "location:organization" => (proc do |organization:, location:|
+                  raise ::ArgumentError, "organization cannot contain /" if organization.to_s.include? "/"
+
+                  "organizations/#{organization}/locations/#{location}/quotaAdjusterSettings"
+                end),
+                "folder:location" => (proc do |folder:, location:|
+                  raise ::ArgumentError, "folder cannot contain /" if folder.to_s.include? "/"
+
+                  "folders/#{folder}/locations/#{location}/quotaAdjusterSettings"
+                end)
+              }
+
+              resource = resources[args.keys.sort.join(":")]
+              raise ::ArgumentError, "no resource found for values #{args.keys}" if resource.nil?
+              resource.call(**args)
             end
 
             extend self

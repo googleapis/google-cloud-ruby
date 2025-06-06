@@ -172,6 +172,22 @@ module Google
                                                             ["quota_adjuster_settings.name", %r{^projects/[^/]+/locations/[^/]+/quotaAdjusterSettings/?$}, false]
                                                           ]
                                                         )
+                                                        .with_bindings(
+                                                          uri_method: :patch,
+                                                          uri_template: "/v1beta/{quota_adjuster_settings.name}",
+                                                          body: "quota_adjuster_settings",
+                                                          matches: [
+                                                            ["quota_adjuster_settings.name", %r{^folders/[^/]+/locations/[^/]+/quotaAdjusterSettings/?$}, false]
+                                                          ]
+                                                        )
+                                                        .with_bindings(
+                                                          uri_method: :patch,
+                                                          uri_template: "/v1beta/{quota_adjuster_settings.name}",
+                                                          body: "quota_adjuster_settings",
+                                                          matches: [
+                                                            ["quota_adjuster_settings.name", %r{^organizations/[^/]+/locations/[^/]+/quotaAdjusterSettings/?$}, false]
+                                                          ]
+                                                        )
                 transcoder.transcode request_pb
               end
 
@@ -191,6 +207,20 @@ module Google
                                                           uri_template: "/v1beta/{name}",
                                                           matches: [
                                                             ["name", %r{^projects/[^/]+/locations/[^/]+/quotaAdjusterSettings/?$}, false]
+                                                          ]
+                                                        )
+                                                        .with_bindings(
+                                                          uri_method: :get,
+                                                          uri_template: "/v1beta/{name}",
+                                                          matches: [
+                                                            ["name", %r{^folders/[^/]+/locations/[^/]+/quotaAdjusterSettings/?$}, false]
+                                                          ]
+                                                        )
+                                                        .with_bindings(
+                                                          uri_method: :get,
+                                                          uri_template: "/v1beta/{name}",
+                                                          matches: [
+                                                            ["name", %r{^organizations/[^/]+/locations/[^/]+/quotaAdjusterSettings/?$}, false]
                                                           ]
                                                         )
                 transcoder.transcode request_pb

@@ -50,6 +50,12 @@ class ::Google::Cloud::CloudQuotas::V1beta::QuotaAdjusterSettingsManager::Client
 
       path = client.quota_adjuster_settings_path project: "value0", location: "value1"
       assert_equal "projects/value0/locations/value1/quotaAdjusterSettings", path
+
+      path = client.quota_adjuster_settings_path organization: "value0", location: "value1"
+      assert_equal "organizations/value0/locations/value1/quotaAdjusterSettings", path
+
+      path = client.quota_adjuster_settings_path folder: "value0", location: "value1"
+      assert_equal "folders/value0/locations/value1/quotaAdjusterSettings", path
     end
   end
 end
