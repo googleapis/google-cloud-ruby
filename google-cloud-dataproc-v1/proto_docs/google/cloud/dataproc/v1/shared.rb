@@ -613,6 +613,9 @@ module Google
           # Compute Engine image versions.
           ANACONDA = 5
 
+          # Delta Lake.
+          DELTA = 20
+
           # Docker
           DOCKER = 13
 
@@ -631,8 +634,14 @@ module Google
           # Hudi.
           HUDI = 18
 
+          # Iceberg.
+          ICEBERG = 19
+
           # The Jupyter Notebook.
           JUPYTER = 1
+
+          # The Pig component.
+          PIG = 21
 
           # The Presto query engine.
           PRESTO = 6
