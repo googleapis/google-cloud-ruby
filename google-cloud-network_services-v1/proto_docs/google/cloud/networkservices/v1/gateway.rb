@@ -27,7 +27,7 @@ module Google
         # dictate how requests should be routed by this Gateway.
         # @!attribute [rw] name
         #   @return [::String]
-        #     Required. Name of the Gateway resource. It matches pattern
+        #     Identifier. Name of the Gateway resource. It matches pattern
         #     `projects/*/locations/*/gateways/<gateway_name>`.
         # @!attribute [r] self_link
         #   @return [::String]
@@ -49,17 +49,27 @@ module Google
         #   @return [::Google::Cloud::NetworkServices::V1::Gateway::Type]
         #     Immutable. The type of the customer managed gateway.
         #     This field is required. If unspecified, an error is returned.
+        # @!attribute [rw] addresses
+        #   @return [::Array<::String>]
+        #     Optional. Zero or one IPv4 or IPv6 address on which the Gateway will
+        #     receive the traffic. When no address is provided, an IP from the subnetwork
+        #     is allocated
+        #
+        #     This field only applies to gateways of type 'SECURE_WEB_GATEWAY'.
+        #     Gateways of type 'OPEN_MESH' listen on 0.0.0.0 for IPv4 and :: for IPv6.
         # @!attribute [rw] ports
         #   @return [::Array<::Integer>]
-        #     Required. One or more ports that the Gateway must receive traffic on. The
-        #     proxy binds to the ports specified. Gateway listen on 0.0.0.0 on the ports
-        #     specified below.
+        #     Required. One or more port numbers (1-65535), on which the Gateway will
+        #     receive traffic. The proxy binds to the specified ports.
+        #     Gateways of type 'SECURE_WEB_GATEWAY' are limited to 1 port.
+        #     Gateways of type 'OPEN_MESH' listen on 0.0.0.0 for IPv4 and :: for IPv6 and
+        #     support multiple ports.
         # @!attribute [rw] scope
         #   @return [::String]
-        #     Required. Immutable. Scope determines how configuration across multiple
-        #     Gateway instances are merged. The configuration for multiple Gateway
-        #     instances with the same scope will be merged as presented as a single
-        #     coniguration to the proxy/load balancer.
+        #     Optional. Scope determines how configuration across multiple Gateway
+        #     instances are merged. The configuration for multiple Gateway instances with
+        #     the same scope will be merged as presented as a single configuration to the
+        #     proxy/load balancer.
         #
         #     Max length 64 characters.
         #     Scope should start with a letter and can only have letters, numbers,
@@ -68,6 +78,49 @@ module Google
         #   @return [::String]
         #     Optional. A fully-qualified ServerTLSPolicy URL reference. Specifies how
         #     TLS traffic is terminated. If empty, TLS termination is disabled.
+        # @!attribute [rw] certificate_urls
+        #   @return [::Array<::String>]
+        #     Optional. A fully-qualified Certificates URL reference. The proxy presents
+        #     a Certificate (selected based on SNI) when establishing a TLS connection.
+        #     This feature only applies to gateways of type 'SECURE_WEB_GATEWAY'.
+        # @!attribute [rw] gateway_security_policy
+        #   @return [::String]
+        #     Optional. A fully-qualified GatewaySecurityPolicy URL reference.
+        #     Defines how a server should apply security policy to inbound
+        #     (VM to Proxy) initiated connections.
+        #
+        #     For example:
+        #     `projects/*/locations/*/gatewaySecurityPolicies/swg-policy`.
+        #
+        #     This policy is specific to gateways of type 'SECURE_WEB_GATEWAY'.
+        # @!attribute [rw] network
+        #   @return [::String]
+        #     Optional. The relative resource name identifying the VPC network that is
+        #     using this configuration. For example:
+        #     `projects/*/global/networks/network-1`.
+        #
+        #     Currently, this field is specific to gateways of type 'SECURE_WEB_GATEWAY'.
+        # @!attribute [rw] subnetwork
+        #   @return [::String]
+        #     Optional. The relative resource name identifying  the subnetwork in which
+        #     this SWG is allocated. For example:
+        #     `projects/*/regions/us-central1/subnetworks/network-1`
+        #
+        #     Currently, this field is specific to gateways of type 'SECURE_WEB_GATEWAY".
+        # @!attribute [rw] ip_version
+        #   @return [::Google::Cloud::NetworkServices::V1::Gateway::IpVersion]
+        #     Optional. The IP Version that will be used by this gateway. Valid options
+        #     are IPV4 or IPV6. Default is IPV4.
+        # @!attribute [rw] envoy_headers
+        #   @return [::Google::Cloud::NetworkServices::V1::EnvoyHeaders]
+        #     Optional. Determines if envoy will insert internal debug headers into
+        #     upstream requests. Other Envoy headers may still be injected. By default,
+        #     envoy will not insert any debug headers.
+        # @!attribute [rw] routing_mode
+        #   @return [::Google::Cloud::NetworkServices::V1::Gateway::RoutingMode]
+        #     Optional. The routing mode of the Gateway.
+        #     This field is configurable only for gateways of type SECURE_WEB_GATEWAY.
+        #     This field is required for gateways of type SECURE_WEB_GATEWAY.
         class Gateway
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -95,6 +148,38 @@ module Google
 
             # The type of the customer managed gateway is SecureWebGateway (SWG).
             SECURE_WEB_GATEWAY = 2
+          end
+
+          # The types of IP version for the gateway.
+          # Possible values are:
+          # * IPV4
+          # * IPV6
+          module IpVersion
+            # The type when IP version is not specified. Defaults to IPV4.
+            IP_VERSION_UNSPECIFIED = 0
+
+            # The type for IP version 4.
+            IPV4 = 1
+
+            # The type for IP version 6.
+            IPV6 = 2
+          end
+
+          # The routing mode of the Gateway, to determine how the Gateway routes
+          # traffic. Today, this field only applies to Gateways of type
+          # SECURE_WEB_GATEWAY. Possible values are:
+          # * EXPLICIT_ROUTING_MODE
+          # * NEXT_HOP_ROUTING_MODE
+          module RoutingMode
+            # The routing mode is explicit; clients are configured to send
+            # traffic through the gateway. This is the default routing mode.
+            EXPLICIT_ROUTING_MODE = 0
+
+            # The routing mode is next-hop. Clients are unaware of the gateway,
+            # and a route (advanced route or other route type)
+            # can be configured to direct traffic from client to gateway.
+            # The gateway then acts as a next-hop to the destination.
+            NEXT_HOP_ROUTING_MODE = 1
           end
         end
 
@@ -125,6 +210,9 @@ module Google
         #     If there might be more results than those appearing in this response, then
         #     `next_page_token` is included. To get the next set of results, call this
         #     method again using the value of `next_page_token` as `page_token`.
+        # @!attribute [rw] unreachable
+        #   @return [::Array<::String>]
+        #     Locations that could not be reached.
         class ListGatewaysResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
