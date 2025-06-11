@@ -14,11 +14,11 @@
 
 # [START storage_batch_cancel_job]
 def cancel_job parent:, job_name:
-  # The ID of your GCS bucket
-  # bucket_name = "your-unique-bucket-name"
+  # The parent location for your job
+  # parent = "projects/your-project-id/locations/your-location"
 
-  # The ID of your GCS object
-  # file_name = "your-file-name"
+  # The name of your Storage batch operation job
+  # job_name = "your-job-name"
 
   require "google/cloud/storage_batch_operations/v1"
 

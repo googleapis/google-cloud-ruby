@@ -25,7 +25,6 @@ def list_job parent:
   result.each do |job|
     puts "Job name: #{job.name}"
   end
-
 end
 # [END storage_batch_list_job]
 

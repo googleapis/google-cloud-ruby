@@ -26,7 +26,6 @@ def delete_job parent:, job_name:
   request = Google::Cloud::StorageBatchOperations::V1::DeleteJobRequest.new name: "#{parent}/jobs/#{job_name}"
   result = client.delete_job request
   puts result.is_a?(Google::Protobuf::Empty) ? "The job is deleted." : "The job is not deleted."
-
 end
 # [END storage_batch_delete_job]
 

@@ -17,8 +17,14 @@ def create_job bucket_name:, prefix:, job_name:, parent:
   # The ID of your GCS bucket
   # bucket_name = "your-unique-bucket-name"
 
-  # The ID of your GCS object
-  # file_name = "your-file-name"
+  # Prefix is the first part of filename on which job has to be executed
+  # prefix = 'test'
+
+  # The parent location for your job
+  # parent = "projects/your-project-id/locations/your-location"
+
+  # The name of your Storage batch operation job
+  # job_name = "your-job-name"
 
   require "google/cloud/storage_batch_operations/v1"
 
@@ -49,11 +55,10 @@ def create_job bucket_name:, prefix:, job_name:, parent:
     delete_object: delete_object
   )
 
-  request = Google::Cloud::StorageBatchOperations::V1::CreateJobRequest.new(parent: parent, job_id: job_name, job: job )
+  request = Google::Cloud::StorageBatchOperations::V1::CreateJobRequest.new parent: parent, job_id: job_name, job: job
   result = client.create_job request
 
   puts result.is_a?(Gapic::Operation) ? "The job is created." : "The job is not created."
-
 end
 # [END storage_batch_create_job]
 

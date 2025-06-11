@@ -16,7 +16,7 @@ describe "Batch jobs Snippets" do
   let(:bucket)         { @bucket }
   let(:file_content)   { "some content" }
   let(:remote_file_name) { "ruby_file_#{SecureRandom.hex}" }
-  let(:job_name)       { @job_name }
+  let(:job_name) { @job_name }
 
 
   before :all do
@@ -27,25 +27,24 @@ describe "Batch jobs Snippets" do
     delete_bucket_helper @bucket.name
   end
 
-  def create_test_job(my_job)
+  def create_test_job my_job
     bucket.create_file StringIO.new(file_content), remote_file_name
     create_job bucket_name: bucket.name, prefix: "ruby_file", job_name: my_job, parent: parent
   end
 
   describe "storage batch manage operations" do
-      before do
-        @job_name= "ruby-sbo-job-#{SecureRandom.hex}"
-        create_test_job(job_name)
-      end
+    before do
+      @job_name = "ruby-sbo-job-#{SecureRandom.hex}"
+      create_test_job job_name
+    end
 
     it "lists jobs and includes the created job" do
       out, _err = capture_io { list_job parent: parent }
       assert_includes out, @job_name, "Expected job name not found in the result list"
     end
 
-
     it "fetches the details of a job" do
-      assert_output parent+"/jobs/"+job_name+"\n" do
+      assert_output "#{parent}/jobs/#{job_name}\n" do
         get_job parent: parent, job_name: job_name
       end
     end
@@ -55,13 +54,12 @@ describe "Batch jobs Snippets" do
         cancel_job parent: parent, job_name: job_name
       end
     end
-
   end
 
   describe "Delete storage batch ops" do
     before do
-      @job_name= "ruby-sbo-job-#{SecureRandom.hex}"
-      create_test_job(job_name)
+      @job_name = "ruby-sbo-job-#{SecureRandom.hex}"
+      create_test_job job_name
     end
     it "deletes a job" do
       retry_job_status do
@@ -76,11 +74,10 @@ describe "Batch jobs Snippets" do
   describe "creates a storage batch ops" do
     it "creates a job" do
       assert_output "The job is created.\n" do
-        @job_name= "ruby-sbo-job-#{SecureRandom.hex}"
+        @job_name = "ruby-sbo-job-#{SecureRandom.hex}"
 
-        create_test_job(job_name)
+        create_test_job job_name
       end
     end
   end
-
 end

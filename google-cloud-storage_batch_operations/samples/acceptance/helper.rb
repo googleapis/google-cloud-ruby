@@ -25,12 +25,6 @@ require "uri"
 require "ostruct"
 
 
-def fixture_bucket
-  storage_client = Google::Cloud::Storage.new
-  storage_client.bucket($fixture_bucket_name) ||
-    retry_resource_exhaustion { storage_client.create_bucket $fixture_bucket_name }
-end
-
 def create_bucket_helper bucket_name
   storage_client = Google::Cloud::Storage.new
   retry_resource_exhaustion do
