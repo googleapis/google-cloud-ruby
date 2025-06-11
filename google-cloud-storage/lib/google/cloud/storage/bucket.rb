@@ -1448,7 +1448,7 @@ module Google
         def delete_resumable_upload upload_id
           ensure_service!
           raise "Upload Id missing" unless upload_id
-          service.delete_resumable_upload name, upload_id, options: { delete_upload: true }
+          service.delete_resumable_upload name, upload_id
         end
         ##
         # Retrieves a list of files matching the criteria.

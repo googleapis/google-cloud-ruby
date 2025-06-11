@@ -1406,7 +1406,7 @@ describe Google::Cloud::Storage::Bucket, :mock_storage do
     mock = Minitest::Mock.new
     mock.expect :delete_resumable_upload, true,
       [bucket.name, upload_id],
-      **delete_resumable_upload_args(options: {delete_upload: true})
+      **delete_resumable_upload_args(options: {})
     bucket.service.mocked_service = mock
     bucket.delete_resumable_upload  upload_id
     mock.verify
