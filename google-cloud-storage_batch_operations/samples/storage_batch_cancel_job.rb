@@ -13,7 +13,7 @@
 # limitations under the License.
 
 # [START storage_batch_cancel_job]
-def cancel_job parent:, job_name:
+def cancel_job project_name:, job_name:
   # The parent location for your job
   # parent = "projects/your-project-id/locations/your-location"
 
@@ -23,6 +23,7 @@ def cancel_job parent:, job_name:
   require "google/cloud/storage_batch_operations/v1"
 
   client = Google::Cloud::StorageBatchOperations::V1::StorageBatchOperations::Client.new
+  parent = "projects/#{project_name}/locations/global"
 
   request = Google::Cloud::StorageBatchOperations::V1::CancelJobRequest.new name: "#{parent}/jobs/#{job_name}"
   result = client.cancel_job request
@@ -30,4 +31,4 @@ def cancel_job parent:, job_name:
 end
 # [END storage_batch_cancel_job]
 
-cancel_job parent: ARGV.shift, job_name: ARGV.shift if $PROGRAM_NAME == __FILE__
+cancel_job project_name: ARGV.shift, job_name: ARGV.shift if $PROGRAM_NAME == __FILE__

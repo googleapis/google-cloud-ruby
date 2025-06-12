@@ -13,7 +13,7 @@
 # limitations under the License.
 
 # [START storage_batch_get_job]
-def get_job parent:, job_name:
+def get_job project_name:, job_name:
   # The parent location for your job
   # parent = "projects/your-project-id/locations/your-location"
 
@@ -23,10 +23,11 @@ def get_job parent:, job_name:
   require "google/cloud/storage_batch_operations/v1"
 
   client = Google::Cloud::StorageBatchOperations::V1::StorageBatchOperations::Client.new
+  parent = "projects/#{project_name}/locations/global"
   request = Google::Cloud::StorageBatchOperations::V1::GetJobRequest.new name: "#{parent}/jobs/#{job_name}"
   result = client.get_job request
-  puts result.name
+  return "job_name- #{result.name}, job_status- #{result.state}"
 end
 # [END storage_batch_get_job]
 
-get_job parent: ARGV.shift, job_name: ARGV.shift if $PROGRAM_NAME == __FILE__
+get_job project_name: ARGV.shift, job_name: ARGV.shift if $PROGRAM_NAME == __FILE__

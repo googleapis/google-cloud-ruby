@@ -13,13 +13,13 @@
 # limitations under the License.
 
 # [START storage_batch_list_job]
-def list_job parent:
+def list_job project_name:
   # The parent location for your job
   # parent = "projects/your-project-id/locations/your-location"
 
   require "google/cloud/storage_batch_operations/v1"
   client = Google::Cloud::StorageBatchOperations::V1::StorageBatchOperations::Client.new
-
+  parent = "projects/#{project_name}/locations/global"
   request = Google::Cloud::StorageBatchOperations::V1::ListJobsRequest.new parent: parent, page_size: 10
   result = client.list_jobs request
   result.each do |job|
@@ -28,4 +28,4 @@ def list_job parent:
 end
 # [END storage_batch_list_job]
 
-delete_job parent: ARGV.shift, job_name: ARGV.shift if $PROGRAM_NAME == __FILE__
+delete_job project_name: ARGV.shift, job_name: ARGV.shift if $PROGRAM_NAME == __FILE__

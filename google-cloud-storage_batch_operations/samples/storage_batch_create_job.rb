@@ -13,7 +13,7 @@
 # limitations under the License.
 
 # [START storage_batch_create_job]
-def create_job bucket_name:, prefix:, job_name:, parent:
+def create_job bucket_name:, prefix:, job_name:, project_name:
   # The ID of your GCS bucket
   # bucket_name = "your-unique-bucket-name"
 
@@ -29,6 +29,7 @@ def create_job bucket_name:, prefix:, job_name:, parent:
   require "google/cloud/storage_batch_operations/v1"
 
   client = Google::Cloud::StorageBatchOperations::V1::StorageBatchOperations::Client.new
+  parent = "projects/#{project_name}/locations/global"
 
   prefix_list = Google::Cloud::StorageBatchOperations::V1::PrefixList.new(
     included_object_prefixes: [prefix]
@@ -62,4 +63,4 @@ def create_job bucket_name:, prefix:, job_name:, parent:
 end
 # [END storage_batch_create_job]
 
-create_job bucket_name: ARGV.shift, prefix: ARGV.shift, job_name: ARGV.shift, parent: ARGV.shift, job_type: ARGV.shift if $PROGRAM_NAME == __FILE__
+create_job bucket_name: ARGV.shift, prefix: ARGV.shift, job_name: ARGV.shift, project_name: ARGV.shift, job_type: ARGV.shift if $PROGRAM_NAME == __FILE__

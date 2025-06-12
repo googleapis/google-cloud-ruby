@@ -13,7 +13,7 @@
 # limitations under the License.
 
 # [START storage_batch_delete_job]
-def delete_job parent:, job_name:
+def delete_job project_name:, job_name:
   # The parent location for your job
   # parent = "projects/your-project-id/locations/your-location"
 
@@ -23,10 +23,11 @@ def delete_job parent:, job_name:
   require "google/cloud/storage_batch_operations/v1"
 
   client = Google::Cloud::StorageBatchOperations::V1::StorageBatchOperations::Client.new
+  parent = "projects/#{project_name}/locations/global"
   request = Google::Cloud::StorageBatchOperations::V1::DeleteJobRequest.new name: "#{parent}/jobs/#{job_name}"
   result = client.delete_job request
   puts result.is_a?(Google::Protobuf::Empty) ? "The job is deleted." : "The job is not deleted."
 end
 # [END storage_batch_delete_job]
 
-delete_job parent: ARGV.shift, job_name: ARGV.shift if $PROGRAM_NAME == __FILE__
+delete_job project_name: ARGV.shift, job_name: ARGV.shift if $PROGRAM_NAME == __FILE__

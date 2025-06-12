@@ -24,7 +24,6 @@ require "securerandom"
 require "uri"
 require "ostruct"
 
-
 def create_bucket_helper bucket_name
   storage_client = Google::Cloud::Storage.new
   retry_resource_exhaustion do
@@ -45,7 +44,7 @@ end
 
 def retry_job_status
   5.times do
-    if yield == :RUNNING
+    if yield[/job_status-\s*(\w+)/, 1] == "RUNNING"
       puts "Job in Running status Gonna try again"
       sleep rand(5..9)
     end
