@@ -1407,8 +1407,8 @@ describe Google::Cloud::Storage::Bucket, :mock_storage do
       assert_equal "invalid: Source and destination object names must be different.", exception.message
     end
   end
-
-   it "restarts a resumable upload with upload_id" do
+  
+  it "restarts a resumable upload with upload_id" do
     new_file_name = random_file_path
     upload_id= "TEST_ID"
 

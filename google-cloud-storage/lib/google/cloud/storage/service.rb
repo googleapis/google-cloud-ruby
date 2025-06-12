@@ -720,6 +720,17 @@ module Google
         end
 
         ##
+        # Restore soft deleted bucket
+        def restore_bucket bucket_name,
+                           generation,
+                           options: {}
+          execute do
+            service.restore_bucket bucket_name, generation,
+                                   options: options
+          end
+        end
+
+        ##
         # Restores a soft-deleted object.
         def restore_file bucket_name,
                          file_path,
