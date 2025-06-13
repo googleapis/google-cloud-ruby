@@ -32,9 +32,9 @@ In order to use this library, you first need to go through the following steps:
 ```ruby
 require "google/shopping/merchant/issue_resolution/v1beta"
 
-client = ::Google::Shopping::Merchant::IssueResolution::V1beta::IssueResolutionService::Client.new
-request = ::Google::Shopping::Merchant::IssueResolution::V1beta::RenderAccountIssuesRequest.new # (request fields as keyword arguments...)
-response = client.render_account_issues request
+client = ::Google::Shopping::Merchant::IssueResolution::V1beta::AggregateProductStatusesService::Client.new
+request = ::Google::Shopping::Merchant::IssueResolution::V1beta::ListAggregateProductStatusesRequest.new # (request fields as keyword arguments...)
+response = client.list_aggregate_product_statuses request
 ```
 
 View the [Client Library Documentation](https://rubydoc.info/gems/google-shopping-merchant-issue_resolution-v1beta)
@@ -75,7 +75,7 @@ constructing a client object. For example:
 require "google/shopping/merchant/issue_resolution/v1beta"
 require "logger"
 
-client = ::Google::Shopping::Merchant::IssueResolution::V1beta::IssueResolutionService::Client.new do |config|
+client = ::Google::Shopping::Merchant::IssueResolution::V1beta::AggregateProductStatusesService::Client.new do |config|
   config.logger = Logger.new "my-app.log"
 end
 ```
