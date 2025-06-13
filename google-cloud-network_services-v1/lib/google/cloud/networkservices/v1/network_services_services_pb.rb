@@ -99,6 +99,8 @@ module Google
             rpc :GetServiceBinding, ::Google::Cloud::NetworkServices::V1::GetServiceBindingRequest, ::Google::Cloud::NetworkServices::V1::ServiceBinding
             # Creates a new ServiceBinding in a given project and location.
             rpc :CreateServiceBinding, ::Google::Cloud::NetworkServices::V1::CreateServiceBindingRequest, ::Google::Longrunning::Operation
+            # Updates the parameters of a single ServiceBinding.
+            rpc :UpdateServiceBinding, ::Google::Cloud::NetworkServices::V1::UpdateServiceBindingRequest, ::Google::Longrunning::Operation
             # Deletes a single ServiceBinding.
             rpc :DeleteServiceBinding, ::Google::Cloud::NetworkServices::V1::DeleteServiceBindingRequest, ::Google::Longrunning::Operation
             # Lists Meshes in a given project and location.
@@ -111,6 +113,24 @@ module Google
             rpc :UpdateMesh, ::Google::Cloud::NetworkServices::V1::UpdateMeshRequest, ::Google::Longrunning::Operation
             # Deletes a single Mesh.
             rpc :DeleteMesh, ::Google::Cloud::NetworkServices::V1::DeleteMeshRequest, ::Google::Longrunning::Operation
+            # Lists ServiceLbPolicies in a given project and location.
+            rpc :ListServiceLbPolicies, ::Google::Cloud::NetworkServices::V1::ListServiceLbPoliciesRequest, ::Google::Cloud::NetworkServices::V1::ListServiceLbPoliciesResponse
+            # Gets details of a single ServiceLbPolicy.
+            rpc :GetServiceLbPolicy, ::Google::Cloud::NetworkServices::V1::GetServiceLbPolicyRequest, ::Google::Cloud::NetworkServices::V1::ServiceLbPolicy
+            # Creates a new ServiceLbPolicy in a given project and location.
+            rpc :CreateServiceLbPolicy, ::Google::Cloud::NetworkServices::V1::CreateServiceLbPolicyRequest, ::Google::Longrunning::Operation
+            # Updates the parameters of a single ServiceLbPolicy.
+            rpc :UpdateServiceLbPolicy, ::Google::Cloud::NetworkServices::V1::UpdateServiceLbPolicyRequest, ::Google::Longrunning::Operation
+            # Deletes a single ServiceLbPolicy.
+            rpc :DeleteServiceLbPolicy, ::Google::Cloud::NetworkServices::V1::DeleteServiceLbPolicyRequest, ::Google::Longrunning::Operation
+            # Get a single RouteView of a Gateway.
+            rpc :GetGatewayRouteView, ::Google::Cloud::NetworkServices::V1::GetGatewayRouteViewRequest, ::Google::Cloud::NetworkServices::V1::GatewayRouteView
+            # Get a single RouteView of a Mesh.
+            rpc :GetMeshRouteView, ::Google::Cloud::NetworkServices::V1::GetMeshRouteViewRequest, ::Google::Cloud::NetworkServices::V1::MeshRouteView
+            # Lists RouteViews
+            rpc :ListGatewayRouteViews, ::Google::Cloud::NetworkServices::V1::ListGatewayRouteViewsRequest, ::Google::Cloud::NetworkServices::V1::ListGatewayRouteViewsResponse
+            # Lists RouteViews
+            rpc :ListMeshRouteViews, ::Google::Cloud::NetworkServices::V1::ListMeshRouteViewsRequest, ::Google::Cloud::NetworkServices::V1::ListMeshRouteViewsResponse
           end
 
           Stub = Service.rpc_stub_class
