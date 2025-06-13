@@ -14,8 +14,8 @@
 
 # [START storage_batch_delete_job]
 def delete_job project_name:, job_name:
-  # The parent location for your job
-  # parent = "projects/your-project-id/locations/your-location"
+  # The Name/ID of your project
+  # project_name = "your-project-id"
 
   # The name of your Storage batch operation job
   # job_name = "your-job-name"
@@ -26,7 +26,7 @@ def delete_job project_name:, job_name:
   parent = "projects/#{project_name}/locations/global"
   request = Google::Cloud::StorageBatchOperations::V1::DeleteJobRequest.new name: "#{parent}/jobs/#{job_name}"
   result = client.delete_job request
-  puts result.is_a?(Google::Protobuf::Empty) ? "The job is deleted." : "The job is not deleted."
+  puts result.is_a?(Google::Protobuf::Empty) ? "The #{job_name} is deleted." : "The #{job_name} is not deleted."
 end
 # [END storage_batch_delete_job]
 

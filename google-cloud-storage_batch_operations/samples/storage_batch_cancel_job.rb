@@ -14,8 +14,8 @@
 
 # [START storage_batch_cancel_job]
 def cancel_job project_name:, job_name:
-  # The parent location for your job
-  # parent = "projects/your-project-id/locations/your-location"
+  # The Name/ID of your project
+  # project_name = "your-project-id"
 
   # The name of your Storage batch operation job
   # job_name = "your-job-name"
@@ -28,9 +28,9 @@ def cancel_job project_name:, job_name:
   request = Google::Cloud::StorageBatchOperations::V1::CancelJobRequest.new name: "#{parent}/jobs/#{job_name}"
   result = client.cancel_job request
   message = if result.is_a? Google::Cloud::StorageBatchOperations::V1::CancelJobResponse
-              "The job is canceled."
+              "The #{job_name} is canceled."
             else
-              "The job is not canceled."
+              "The #{job_name} is not canceled."
             end
   puts message
 end

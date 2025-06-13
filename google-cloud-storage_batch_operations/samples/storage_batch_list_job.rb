@@ -14,8 +14,8 @@
 
 # [START storage_batch_list_job]
 def list_job project_name:
-  # The parent location for your job
-  # parent = "projects/your-project-id/locations/your-location"
+  # The Name/ID of your project
+  # project_name = "your-project-id"
 
   require "google/cloud/storage_batch_operations/v1"
   client = Google::Cloud::StorageBatchOperations::V1::StorageBatchOperations::Client.new

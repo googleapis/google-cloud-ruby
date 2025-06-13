@@ -47,13 +47,13 @@ describe "Batch jobs Snippets" do
     end
 
     it "cancels a job" do
-      assert_output "The job is canceled.\n" do
+      assert_output "The #{@job_name} is canceled.\n" do
         cancel_job project_name: project_name, job_name: @job_name
       end
     end
   end
 
-  describe "Delete storage batch ops" do
+  describe "Delete storage batch operation" do
     before do
       @job_name = "ruby-sbo-job-#{SecureRandom.hex}"
       create_test_job job_name
@@ -62,17 +62,17 @@ describe "Batch jobs Snippets" do
       retry_job_status do
         get_job project_name: project_name, job_name: @job_name
       end
-      assert_output "The job is deleted.\n" do
+      assert_output "The #{@job_name} is deleted.\n" do
         delete_job project_name: project_name, job_name: @job_name
       end
     end
   end
 
-  describe "creates a storage batch ops" do
+  describe "creates a storage batch operation" do
     it "creates a job" do
       @job_name = "ruby-sbo-job-#{SecureRandom.hex}"
 
-      assert_output "The job is created.\n" do
+      assert_output "The #{@job_name} is created.\n" do
         create_test_job job_name
       end
     end

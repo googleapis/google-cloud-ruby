@@ -20,8 +20,8 @@ def create_job bucket_name:, prefix:, job_name:, project_name:
   # Prefix is the first part of filename on which job has to be executed
   # prefix = 'test'
 
-  # The parent location for your job
-  # parent = "projects/your-project-id/locations/your-location"
+  # The Name/ID of your project
+  # project_name = "your-project-id"
 
   # The name of your Storage batch operation job
   # job_name = "your-job-name"
@@ -59,7 +59,7 @@ def create_job bucket_name:, prefix:, job_name:, project_name:
   request = Google::Cloud::StorageBatchOperations::V1::CreateJobRequest.new parent: parent, job_id: job_name, job: job
   result = client.create_job request
 
-  puts result.is_a?(Gapic::Operation) ? "The job is created." : "The job is not created."
+  puts result.is_a?(Gapic::Operation) ? "The #{job_name} is created." : "The #{job_name} is not created."
 end
 # [END storage_batch_create_job]
 

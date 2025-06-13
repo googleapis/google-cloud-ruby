@@ -14,8 +14,8 @@
 
 # [START storage_batch_get_job]
 def get_job project_name:, job_name:
-  # The parent location for your job
-  # parent = "projects/your-project-id/locations/your-location"
+  # The Name/ID of your project
+  # project_name = "your-project-id"
 
   # The name of your Storage batch operation job
   # job_name = "your-job-name"
