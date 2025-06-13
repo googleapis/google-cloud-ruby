@@ -260,6 +260,12 @@ module Google
         # @!attribute [r] corpus_status
         #   @return [::Google::Cloud::AIPlatform::V1::CorpusStatus]
         #     Output only. RagCorpus state.
+        # @!attribute [rw] encryption_spec
+        #   @return [::Google::Cloud::AIPlatform::V1::EncryptionSpec]
+        #     Optional. Immutable. The CMEK key name used to encrypt at-rest data related
+        #     to this Corpus. Only applicable to RagManagedDb option for Vector DB. This
+        #     field can only be set at corpus creation time, and cannot be updated or
+        #     deleted.
         class RagCorpus
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

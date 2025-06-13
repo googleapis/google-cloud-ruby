@@ -72,6 +72,21 @@ module Google
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
+
+        # Configuration for PSC-I.
+        # @!attribute [rw] network_attachment
+        #   @return [::String]
+        #     Optional. The name of the Compute Engine
+        #     [network
+        #     attachment](https://cloud.google.com/vpc/docs/about-network-attachments) to
+        #     attach to the resource within the region and user project.
+        #     To specify this field, you must have already [created a network attachment]
+        #     (https://cloud.google.com/vpc/docs/create-manage-network-attachments#create-network-attachments).
+        #     This field is only used for resources using PSC-I.
+        class PscInterfaceConfig
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
       end
     end
   end
