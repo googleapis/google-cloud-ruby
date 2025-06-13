@@ -110,6 +110,9 @@ module Google
         #     provided VPC network.
         #
         #     Example: ['vertex-ai-ip-range'].
+        # @!attribute [rw] psc_interface_config
+        #   @return [::Google::Cloud::AIPlatform::V1::PscInterfaceConfig]
+        #     Optional. Configuration for PSC-I for PipelineJob.
         # @!attribute [rw] template_uri
         #   @return [::String]
         #     A template uri from where the
