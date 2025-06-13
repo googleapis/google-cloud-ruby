@@ -7992,6 +7992,7 @@ class ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Rest::ClientTe
     # Create request parameters for a unary method.
     subproperty = {}
     subproperty_event_filter = {}
+    custom_dimension_and_metric_synchronization_mode = :SYNCHRONIZATION_MODE_UNSPECIFIED
 
     provision_subproperty_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
@@ -8007,27 +8008,27 @@ class ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Rest::ClientTe
         end
 
         # Use hash object
-        client.provision_subproperty({ subproperty: subproperty, subproperty_event_filter: subproperty_event_filter }) do |_result, response|
+        client.provision_subproperty({ subproperty: subproperty, subproperty_event_filter: subproperty_event_filter, custom_dimension_and_metric_synchronization_mode: custom_dimension_and_metric_synchronization_mode }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.provision_subproperty subproperty: subproperty, subproperty_event_filter: subproperty_event_filter do |_result, response|
+        client.provision_subproperty subproperty: subproperty, subproperty_event_filter: subproperty_event_filter, custom_dimension_and_metric_synchronization_mode: custom_dimension_and_metric_synchronization_mode do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.provision_subproperty ::Google::Analytics::Admin::V1alpha::ProvisionSubpropertyRequest.new(subproperty: subproperty, subproperty_event_filter: subproperty_event_filter) do |_result, response|
+        client.provision_subproperty ::Google::Analytics::Admin::V1alpha::ProvisionSubpropertyRequest.new(subproperty: subproperty, subproperty_event_filter: subproperty_event_filter, custom_dimension_and_metric_synchronization_mode: custom_dimension_and_metric_synchronization_mode) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.provision_subproperty({ subproperty: subproperty, subproperty_event_filter: subproperty_event_filter }, call_options) do |_result, response|
+        client.provision_subproperty({ subproperty: subproperty, subproperty_event_filter: subproperty_event_filter, custom_dimension_and_metric_synchronization_mode: custom_dimension_and_metric_synchronization_mode }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.provision_subproperty(::Google::Analytics::Admin::V1alpha::ProvisionSubpropertyRequest.new(subproperty: subproperty, subproperty_event_filter: subproperty_event_filter), call_options) do |_result, response|
+        client.provision_subproperty(::Google::Analytics::Admin::V1alpha::ProvisionSubpropertyRequest.new(subproperty: subproperty, subproperty_event_filter: subproperty_event_filter, custom_dimension_and_metric_synchronization_mode: custom_dimension_and_metric_synchronization_mode), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -8637,6 +8638,171 @@ class ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Rest::ClientTe
 
         # Verify method calls
         assert_equal 5, submit_user_deletion_client_stub.call_count
+      end
+    end
+  end
+
+  def test_list_subproperty_sync_configs
+    # Create test objects.
+    client_result = ::Google::Analytics::Admin::V1alpha::ListSubpropertySyncConfigsResponse.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    page_size = 42
+    page_token = "hello world"
+
+    list_subproperty_sync_configs_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Rest::ServiceStub.stub :transcode_list_subproperty_sync_configs_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, list_subproperty_sync_configs_client_stub do
+        # Create client
+        client = ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.list_subproperty_sync_configs({ parent: parent, page_size: page_size, page_token: page_token }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.list_subproperty_sync_configs parent: parent, page_size: page_size, page_token: page_token do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.list_subproperty_sync_configs ::Google::Analytics::Admin::V1alpha::ListSubpropertySyncConfigsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.list_subproperty_sync_configs({ parent: parent, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.list_subproperty_sync_configs(::Google::Analytics::Admin::V1alpha::ListSubpropertySyncConfigsRequest.new(parent: parent, page_size: page_size, page_token: page_token), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, list_subproperty_sync_configs_client_stub.call_count
+      end
+    end
+  end
+
+  def test_update_subproperty_sync_config
+    # Create test objects.
+    client_result = ::Google::Analytics::Admin::V1alpha::SubpropertySyncConfig.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    subproperty_sync_config = {}
+    update_mask = {}
+
+    update_subproperty_sync_config_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Rest::ServiceStub.stub :transcode_update_subproperty_sync_config_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, update_subproperty_sync_config_client_stub do
+        # Create client
+        client = ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.update_subproperty_sync_config({ subproperty_sync_config: subproperty_sync_config, update_mask: update_mask }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.update_subproperty_sync_config subproperty_sync_config: subproperty_sync_config, update_mask: update_mask do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.update_subproperty_sync_config ::Google::Analytics::Admin::V1alpha::UpdateSubpropertySyncConfigRequest.new(subproperty_sync_config: subproperty_sync_config, update_mask: update_mask) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.update_subproperty_sync_config({ subproperty_sync_config: subproperty_sync_config, update_mask: update_mask }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.update_subproperty_sync_config(::Google::Analytics::Admin::V1alpha::UpdateSubpropertySyncConfigRequest.new(subproperty_sync_config: subproperty_sync_config, update_mask: update_mask), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, update_subproperty_sync_config_client_stub.call_count
+      end
+    end
+  end
+
+  def test_get_subproperty_sync_config
+    # Create test objects.
+    client_result = ::Google::Analytics::Admin::V1alpha::SubpropertySyncConfig.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    get_subproperty_sync_config_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Rest::ServiceStub.stub :transcode_get_subproperty_sync_config_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, get_subproperty_sync_config_client_stub do
+        # Create client
+        client = ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.get_subproperty_sync_config({ name: name }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.get_subproperty_sync_config name: name do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.get_subproperty_sync_config ::Google::Analytics::Admin::V1alpha::GetSubpropertySyncConfigRequest.new(name: name) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.get_subproperty_sync_config({ name: name }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.get_subproperty_sync_config(::Google::Analytics::Admin::V1alpha::GetSubpropertySyncConfigRequest.new(name: name), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, get_subproperty_sync_config_client_stub.call_count
       end
     end
   end
