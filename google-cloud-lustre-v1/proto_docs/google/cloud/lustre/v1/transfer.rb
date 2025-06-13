@@ -25,34 +25,42 @@ module Google
         # @!attribute [rw] gcs_path
         #   @return [::Google::Cloud::Lustre::V1::GcsPath]
         #     The Cloud Storage source bucket and, optionally, path inside the bucket.
+        #     If a path inside the bucket is specified, it must end with a forward
+        #     slash (`/`).
         # @!attribute [rw] lustre_path
         #   @return [::Google::Cloud::Lustre::V1::LustrePath]
         #     Lustre path destination.
         # @!attribute [rw] name
         #   @return [::String]
-        #     Required. Name of the resource.
+        #     Required. The name of the Managed Lustre instance in the format
+        #     `projects/{project}/locations/{location}/instances/{instance}`.
         # @!attribute [rw] request_id
         #   @return [::String]
         #     Optional. UUID to identify requests.
         # @!attribute [rw] service_account
         #   @return [::String]
         #     Optional. User-specified service account used to perform the transfer.
-        #     If unspecified, the default Lustre P4 service account will be used.
+        #     If unspecified, the default Managed Lustre service agent will be used.
         class ImportDataRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Message for exporting data from Lustre.
+        # Export data from Managed Lustre to a Cloud Storage bucket.
         # @!attribute [rw] lustre_path
         #   @return [::Google::Cloud::Lustre::V1::LustrePath]
-        #     Lustre path source.
+        #     The root directory path to the Managed Lustre file system. Must start
+        #     with `/`. Default is `/`.
         # @!attribute [rw] gcs_path
         #   @return [::Google::Cloud::Lustre::V1::GcsPath]
-        #     Cloud Storage destination.
+        #     The URI to a Cloud Storage bucket, or a path within a bucket, using
+        #     the format `gs://<bucket_name>/<optional_path_inside_bucket>/`. If a
+        #     path inside the bucket is specified, it must end with a forward slash
+        #     (`/`).
         # @!attribute [rw] name
         #   @return [::String]
-        #     Required. Name of the resource.
+        #     Required. The name of the Managed Lustre instance in the format
+        #     `projects/{project}/locations/{location}/instances/{instance}`.
         # @!attribute [rw] request_id
         #   @return [::String]
         #     Optional. UUID to identify requests.
@@ -144,21 +152,25 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Cloud Storage as the source of a data transfer.
+        # Specifies a Cloud Storage bucket and, optionally, a path inside the bucket.
         # @!attribute [rw] uri
         #   @return [::String]
-        #     Required. URI to a Cloud Storage path in the format:
-        #     `gs://<bucket_name>`.
+        #     Required. The URI to a Cloud Storage bucket, or a path within a bucket,
+        #     using the format `gs://<bucket_name>/<optional_path_inside_bucket>/`. If a
+        #     path inside the bucket is specified, it must end with a forward slash
+        #     (`/`).
         class GcsPath
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # LustrePath represents a path in the Lustre file system.
+        # The root directory path to the Lustre file system.
         # @!attribute [rw] path
         #   @return [::String]
-        #     Optional. Root directory path to the Managed Lustre file system, starting
-        #     with `/`. Defaults to `/` if unset.
+        #     Optional. The root directory path to the Managed Lustre file system. Must
+        #     start with
+        #     `/`. Default is `/`. If you're importing data into Managed Lustre, any
+        #     path other than the default must already exist on the file system.
         class LustrePath
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
