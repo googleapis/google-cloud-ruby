@@ -29,6 +29,7 @@ else
   # [END storage_dependencies]
 end
 
+gem "yard"
 group :test do
   gem "google-style", "~> 1.30.0"
   gem "minitest", "~> 5.14"

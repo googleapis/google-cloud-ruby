@@ -27,7 +27,12 @@ def cancel_job project_name:, job_name:
 
   request = Google::Cloud::StorageBatchOperations::V1::CancelJobRequest.new name: "#{parent}/jobs/#{job_name}"
   result = client.cancel_job request
-  puts result.is_a?(Google::Cloud::StorageBatchOperations::V1::CancelJobResponse) ? "The job is canceled." : "The job is not canceled."
+  message = if result.is_a? Google::Cloud::StorageBatchOperations::V1::CancelJobResponse
+              "The job is canceled."
+            else
+              "The job is not canceled."
+            end
+  puts message
 end
 # [END storage_batch_cancel_job]
 

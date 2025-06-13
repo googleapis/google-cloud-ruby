@@ -26,7 +26,7 @@ def get_job project_name:, job_name:
   parent = "projects/#{project_name}/locations/global"
   request = Google::Cloud::StorageBatchOperations::V1::GetJobRequest.new name: "#{parent}/jobs/#{job_name}"
   result = client.get_job request
-  return "job_name- #{result.name}, job_status- #{result.state}"
+  "job_name- #{result.name}, job_status- #{result.state}"
 end
 # [END storage_batch_get_job]
 

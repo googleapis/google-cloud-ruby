@@ -7,7 +7,6 @@ require_relative "../storage_batch_delete_job"
 require_relative "../storage_batch_cancel_job"
 require_relative "../storage_batch_list_job"
 require_relative "../storage_batch_get_job"
-require_relative "../storage_batch_get_job_status"
 
 describe "Batch jobs Snippets" do
   let(:storage_client) { Google::Cloud::Storage.new }
@@ -43,9 +42,8 @@ describe "Batch jobs Snippets" do
     end
 
     it "fetches the details of a job" do
-      result = get_job project_name: project_name, job_name: job_name 
+      result = get_job project_name: project_name, job_name: job_name
       assert_includes result, @job_name, "Expected job name not found in the result"
-
     end
 
     it "cancels a job" do

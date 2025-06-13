@@ -63,4 +63,12 @@ def create_job bucket_name:, prefix:, job_name:, project_name:
 end
 # [END storage_batch_create_job]
 
-create_job bucket_name: ARGV.shift, prefix: ARGV.shift, job_name: ARGV.shift, project_name: ARGV.shift, job_type: ARGV.shift if $PROGRAM_NAME == __FILE__
+if $PROGRAM_NAME == __FILE__
+  create_job(
+    bucket_name: ARGV.shift,
+    prefix: ARGV.shift,
+    job_name: ARGV.shift,
+    project_name: ARGV.shift,
+    job_type: ARGV.shift
+  )
+end
