@@ -611,6 +611,23 @@ module Google
               "properties/#{property}/subpropertyEventFilters/#{sub_property_event_filter}"
             end
 
+            ##
+            # Create a fully-qualified SubpropertySyncConfig resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `properties/{property}/subpropertySyncConfigs/{subproperty_sync_config}`
+            #
+            # @param property [String]
+            # @param subproperty_sync_config [String]
+            #
+            # @return [::String]
+            def subproperty_sync_config_path property:, subproperty_sync_config:
+              raise ::ArgumentError, "property cannot contain /" if property.to_s.include? "/"
+
+              "properties/#{property}/subpropertySyncConfigs/#{subproperty_sync_config}"
+            end
+
             extend self
           end
         end

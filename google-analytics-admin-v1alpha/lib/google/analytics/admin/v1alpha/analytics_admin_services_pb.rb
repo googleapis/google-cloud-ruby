@@ -459,6 +459,12 @@ module Google
             rpc :DeleteReportingDataAnnotation, ::Google::Analytics::Admin::V1alpha::DeleteReportingDataAnnotationRequest, ::Google::Protobuf::Empty
             # Submits a request for user deletion for a property.
             rpc :SubmitUserDeletion, ::Google::Analytics::Admin::V1alpha::SubmitUserDeletionRequest, ::Google::Analytics::Admin::V1alpha::SubmitUserDeletionResponse
+            # List all Subproperty Sync Configs on a property.
+            rpc :ListSubpropertySyncConfigs, ::Google::Analytics::Admin::V1alpha::ListSubpropertySyncConfigsRequest, ::Google::Analytics::Admin::V1alpha::ListSubpropertySyncConfigsResponse
+            # Updates a Subproperty Sync Config.
+            rpc :UpdateSubpropertySyncConfig, ::Google::Analytics::Admin::V1alpha::UpdateSubpropertySyncConfigRequest, ::Google::Analytics::Admin::V1alpha::SubpropertySyncConfig
+            # Lookup for a single Subproperty Sync Config.
+            rpc :GetSubpropertySyncConfig, ::Google::Analytics::Admin::V1alpha::GetSubpropertySyncConfigRequest, ::Google::Analytics::Admin::V1alpha::SubpropertySyncConfig
           end
 
           Stub = Service.rpc_stub_class

@@ -789,6 +789,21 @@
               "methods": [
                 "submit_user_deletion"
               ]
+            },
+            "ListSubpropertySyncConfigs": {
+              "methods": [
+                "list_subproperty_sync_configs"
+              ]
+            },
+            "UpdateSubpropertySyncConfig": {
+              "methods": [
+                "update_subproperty_sync_config"
+              ]
+            },
+            "GetSubpropertySyncConfig": {
+              "methods": [
+                "get_subproperty_sync_config"
+              ]
             }
           }
         }
