@@ -14,7 +14,6 @@ describe "Batch jobs Snippets" do
   let(:bucket)         { @bucket }
   let(:file_content)   { "some content" }
   let(:remote_file_name) { "ruby_file_#{SecureRandom.hex}" }
-  let(:job_name) { @job_name }
 
 
   before :all do
@@ -33,7 +32,7 @@ describe "Batch jobs Snippets" do
   describe "storage batch manage operations" do
     before do
       @job_name = "ruby-sbo-job-#{SecureRandom.hex}"
-      create_test_job job_name
+      create_test_job @job_name
     end
 
     it "lists jobs and includes the created job" do
@@ -42,7 +41,7 @@ describe "Batch jobs Snippets" do
     end
 
     it "fetches the details of a job" do
-      result = get_job project_name: project_name, job_name: job_name
+      result = get_job project_name: project_name, job_name: @job_name
       assert_includes result, @job_name, "Expected job name not found in the result"
     end
 
@@ -56,7 +55,7 @@ describe "Batch jobs Snippets" do
   describe "Delete storage batch operation" do
     before do
       @job_name = "ruby-sbo-job-#{SecureRandom.hex}"
-      create_test_job job_name
+      create_test_job @job_name
     end
     it "deletes a job" do
       retry_job_status do
@@ -73,7 +72,7 @@ describe "Batch jobs Snippets" do
       @job_name = "ruby-sbo-job-#{SecureRandom.hex}"
 
       assert_output "The #{@job_name} is created.\n" do
-        create_test_job job_name
+        create_test_job @job_name
       end
     end
   end
