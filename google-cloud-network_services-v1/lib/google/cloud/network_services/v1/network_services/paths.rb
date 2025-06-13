@@ -25,6 +25,25 @@ module Google
           # Path helper methods for the NetworkServices API.
           module Paths
             ##
+            # Create a fully-qualified Address resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `projects/{project}/regions/{region}/addresses/{address}`
+            #
+            # @param project [String]
+            # @param region [String]
+            # @param address [String]
+            #
+            # @return [::String]
+            def address_path project:, region:, address:
+              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+              raise ::ArgumentError, "region cannot contain /" if region.to_s.include? "/"
+
+              "projects/#{project}/regions/#{region}/addresses/#{address}"
+            end
+
+            ##
             # Create a fully-qualified AuthorizationPolicy resource string.
             #
             # The resource will be in the following format:
@@ -60,6 +79,25 @@ module Google
               raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
 
               "projects/#{project}/locations/#{location}/backendServices/#{backend_service}"
+            end
+
+            ##
+            # Create a fully-qualified Certificate resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `projects/{project}/locations/{location}/certificates/{certificate}`
+            #
+            # @param project [String]
+            # @param location [String]
+            # @param certificate [String]
+            #
+            # @return [::String]
+            def certificate_path project:, location:, certificate:
+              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+              raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+
+              "projects/#{project}/locations/#{location}/certificates/#{certificate}"
             end
 
             ##
@@ -117,6 +155,46 @@ module Google
               raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
 
               "projects/#{project}/locations/#{location}/gateways/#{gateway}"
+            end
+
+            ##
+            # Create a fully-qualified GatewayRouteView resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `projects/{project}/locations/{location}/gateways/{gateway}/routeViews/{route_view}`
+            #
+            # @param project [String]
+            # @param location [String]
+            # @param gateway [String]
+            # @param route_view [String]
+            #
+            # @return [::String]
+            def gateway_route_view_path project:, location:, gateway:, route_view:
+              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+              raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+              raise ::ArgumentError, "gateway cannot contain /" if gateway.to_s.include? "/"
+
+              "projects/#{project}/locations/#{location}/gateways/#{gateway}/routeViews/#{route_view}"
+            end
+
+            ##
+            # Create a fully-qualified GatewaySecurityPolicy resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `projects/{project}/locations/{location}/gatewaySecurityPolicies/{gateway_security_policy}`
+            #
+            # @param project [String]
+            # @param location [String]
+            # @param gateway_security_policy [String]
+            #
+            # @return [::String]
+            def gateway_security_policy_path project:, location:, gateway_security_policy:
+              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+              raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+
+              "projects/#{project}/locations/#{location}/gatewaySecurityPolicies/#{gateway_security_policy}"
             end
 
             ##
@@ -194,6 +272,44 @@ module Google
             end
 
             ##
+            # Create a fully-qualified MeshRouteView resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `projects/{project}/locations/{location}/meshes/{mesh}/routeViews/{route_view}`
+            #
+            # @param project [String]
+            # @param location [String]
+            # @param mesh [String]
+            # @param route_view [String]
+            #
+            # @return [::String]
+            def mesh_route_view_path project:, location:, mesh:, route_view:
+              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+              raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+              raise ::ArgumentError, "mesh cannot contain /" if mesh.to_s.include? "/"
+
+              "projects/#{project}/locations/#{location}/meshes/#{mesh}/routeViews/#{route_view}"
+            end
+
+            ##
+            # Create a fully-qualified Network resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `projects/{project}/global/networks/{network}`
+            #
+            # @param project [String]
+            # @param network [String]
+            #
+            # @return [::String]
+            def network_path project:, network:
+              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+
+              "projects/#{project}/global/networks/#{network}"
+            end
+
+            ##
             # Create a fully-qualified ServerTlsPolicy resource string.
             #
             # The resource will be in the following format:
@@ -213,6 +329,27 @@ module Google
             end
 
             ##
+            # Create a fully-qualified Service resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `projects/{project}/locations/{location}/namespaces/{namespace}/services/{service}`
+            #
+            # @param project [String]
+            # @param location [String]
+            # @param namespace [String]
+            # @param service [String]
+            #
+            # @return [::String]
+            def service_path project:, location:, namespace:, service:
+              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+              raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+              raise ::ArgumentError, "namespace cannot contain /" if namespace.to_s.include? "/"
+
+              "projects/#{project}/locations/#{location}/namespaces/#{namespace}/services/#{service}"
+            end
+
+            ##
             # Create a fully-qualified ServiceBinding resource string.
             #
             # The resource will be in the following format:
@@ -229,6 +366,44 @@ module Google
               raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
 
               "projects/#{project}/locations/#{location}/serviceBindings/#{service_binding}"
+            end
+
+            ##
+            # Create a fully-qualified ServiceLbPolicy resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `projects/{project}/locations/{location}/serviceLbPolicies/{service_lb_policy}`
+            #
+            # @param project [String]
+            # @param location [String]
+            # @param service_lb_policy [String]
+            #
+            # @return [::String]
+            def service_lb_policy_path project:, location:, service_lb_policy:
+              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+              raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+
+              "projects/#{project}/locations/#{location}/serviceLbPolicies/#{service_lb_policy}"
+            end
+
+            ##
+            # Create a fully-qualified Subnetwork resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `projects/{project}/regions/{region}/subnetworks/{subnetwork}`
+            #
+            # @param project [String]
+            # @param region [String]
+            # @param subnetwork [String]
+            #
+            # @return [::String]
+            def subnetwork_path project:, region:, subnetwork:
+              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+              raise ::ArgumentError, "region cannot contain /" if region.to_s.include? "/"
+
+              "projects/#{project}/regions/#{region}/subnetworks/#{subnetwork}"
             end
 
             ##

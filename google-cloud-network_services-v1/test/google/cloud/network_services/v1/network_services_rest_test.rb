@@ -89,6 +89,7 @@ class ::Google::Cloud::NetworkServices::V1::NetworkServices::Rest::ClientTest < 
     parent = "hello world"
     page_size = 42
     page_token = "hello world"
+    return_partial_success = true
 
     list_endpoint_policies_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
@@ -104,27 +105,27 @@ class ::Google::Cloud::NetworkServices::V1::NetworkServices::Rest::ClientTest < 
         end
 
         # Use hash object
-        client.list_endpoint_policies({ parent: parent, page_size: page_size, page_token: page_token }) do |_result, response|
+        client.list_endpoint_policies({ parent: parent, page_size: page_size, page_token: page_token, return_partial_success: return_partial_success }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_endpoint_policies parent: parent, page_size: page_size, page_token: page_token do |_result, response|
+        client.list_endpoint_policies parent: parent, page_size: page_size, page_token: page_token, return_partial_success: return_partial_success do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_endpoint_policies ::Google::Cloud::NetworkServices::V1::ListEndpointPoliciesRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |_result, response|
+        client.list_endpoint_policies ::Google::Cloud::NetworkServices::V1::ListEndpointPoliciesRequest.new(parent: parent, page_size: page_size, page_token: page_token, return_partial_success: return_partial_success) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_endpoint_policies({ parent: parent, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
+        client.list_endpoint_policies({ parent: parent, page_size: page_size, page_token: page_token, return_partial_success: return_partial_success }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_endpoint_policies(::Google::Cloud::NetworkServices::V1::ListEndpointPoliciesRequest.new(parent: parent, page_size: page_size, page_token: page_token), call_options) do |_result, response|
+        client.list_endpoint_policies(::Google::Cloud::NetworkServices::V1::ListEndpointPoliciesRequest.new(parent: parent, page_size: page_size, page_token: page_token, return_partial_success: return_partial_success), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -639,6 +640,7 @@ class ::Google::Cloud::NetworkServices::V1::NetworkServices::Rest::ClientTest < 
     parent = "hello world"
     page_size = 42
     page_token = "hello world"
+    return_partial_success = true
 
     list_grpc_routes_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
@@ -654,27 +656,27 @@ class ::Google::Cloud::NetworkServices::V1::NetworkServices::Rest::ClientTest < 
         end
 
         # Use hash object
-        client.list_grpc_routes({ parent: parent, page_size: page_size, page_token: page_token }) do |_result, response|
+        client.list_grpc_routes({ parent: parent, page_size: page_size, page_token: page_token, return_partial_success: return_partial_success }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_grpc_routes parent: parent, page_size: page_size, page_token: page_token do |_result, response|
+        client.list_grpc_routes parent: parent, page_size: page_size, page_token: page_token, return_partial_success: return_partial_success do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_grpc_routes ::Google::Cloud::NetworkServices::V1::ListGrpcRoutesRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |_result, response|
+        client.list_grpc_routes ::Google::Cloud::NetworkServices::V1::ListGrpcRoutesRequest.new(parent: parent, page_size: page_size, page_token: page_token, return_partial_success: return_partial_success) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_grpc_routes({ parent: parent, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
+        client.list_grpc_routes({ parent: parent, page_size: page_size, page_token: page_token, return_partial_success: return_partial_success }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_grpc_routes(::Google::Cloud::NetworkServices::V1::ListGrpcRoutesRequest.new(parent: parent, page_size: page_size, page_token: page_token), call_options) do |_result, response|
+        client.list_grpc_routes(::Google::Cloud::NetworkServices::V1::ListGrpcRoutesRequest.new(parent: parent, page_size: page_size, page_token: page_token, return_partial_success: return_partial_success), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -914,6 +916,7 @@ class ::Google::Cloud::NetworkServices::V1::NetworkServices::Rest::ClientTest < 
     parent = "hello world"
     page_size = 42
     page_token = "hello world"
+    return_partial_success = true
 
     list_http_routes_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
@@ -929,27 +932,27 @@ class ::Google::Cloud::NetworkServices::V1::NetworkServices::Rest::ClientTest < 
         end
 
         # Use hash object
-        client.list_http_routes({ parent: parent, page_size: page_size, page_token: page_token }) do |_result, response|
+        client.list_http_routes({ parent: parent, page_size: page_size, page_token: page_token, return_partial_success: return_partial_success }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_http_routes parent: parent, page_size: page_size, page_token: page_token do |_result, response|
+        client.list_http_routes parent: parent, page_size: page_size, page_token: page_token, return_partial_success: return_partial_success do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_http_routes ::Google::Cloud::NetworkServices::V1::ListHttpRoutesRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |_result, response|
+        client.list_http_routes ::Google::Cloud::NetworkServices::V1::ListHttpRoutesRequest.new(parent: parent, page_size: page_size, page_token: page_token, return_partial_success: return_partial_success) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_http_routes({ parent: parent, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
+        client.list_http_routes({ parent: parent, page_size: page_size, page_token: page_token, return_partial_success: return_partial_success }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_http_routes(::Google::Cloud::NetworkServices::V1::ListHttpRoutesRequest.new(parent: parent, page_size: page_size, page_token: page_token), call_options) do |_result, response|
+        client.list_http_routes(::Google::Cloud::NetworkServices::V1::ListHttpRoutesRequest.new(parent: parent, page_size: page_size, page_token: page_token, return_partial_success: return_partial_success), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1189,6 +1192,7 @@ class ::Google::Cloud::NetworkServices::V1::NetworkServices::Rest::ClientTest < 
     parent = "hello world"
     page_size = 42
     page_token = "hello world"
+    return_partial_success = true
 
     list_tcp_routes_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
@@ -1204,27 +1208,27 @@ class ::Google::Cloud::NetworkServices::V1::NetworkServices::Rest::ClientTest < 
         end
 
         # Use hash object
-        client.list_tcp_routes({ parent: parent, page_size: page_size, page_token: page_token }) do |_result, response|
+        client.list_tcp_routes({ parent: parent, page_size: page_size, page_token: page_token, return_partial_success: return_partial_success }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_tcp_routes parent: parent, page_size: page_size, page_token: page_token do |_result, response|
+        client.list_tcp_routes parent: parent, page_size: page_size, page_token: page_token, return_partial_success: return_partial_success do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_tcp_routes ::Google::Cloud::NetworkServices::V1::ListTcpRoutesRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |_result, response|
+        client.list_tcp_routes ::Google::Cloud::NetworkServices::V1::ListTcpRoutesRequest.new(parent: parent, page_size: page_size, page_token: page_token, return_partial_success: return_partial_success) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_tcp_routes({ parent: parent, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
+        client.list_tcp_routes({ parent: parent, page_size: page_size, page_token: page_token, return_partial_success: return_partial_success }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_tcp_routes(::Google::Cloud::NetworkServices::V1::ListTcpRoutesRequest.new(parent: parent, page_size: page_size, page_token: page_token), call_options) do |_result, response|
+        client.list_tcp_routes(::Google::Cloud::NetworkServices::V1::ListTcpRoutesRequest.new(parent: parent, page_size: page_size, page_token: page_token, return_partial_success: return_partial_success), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1464,6 +1468,7 @@ class ::Google::Cloud::NetworkServices::V1::NetworkServices::Rest::ClientTest < 
     parent = "hello world"
     page_size = 42
     page_token = "hello world"
+    return_partial_success = true
 
     list_tls_routes_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
@@ -1479,27 +1484,27 @@ class ::Google::Cloud::NetworkServices::V1::NetworkServices::Rest::ClientTest < 
         end
 
         # Use hash object
-        client.list_tls_routes({ parent: parent, page_size: page_size, page_token: page_token }) do |_result, response|
+        client.list_tls_routes({ parent: parent, page_size: page_size, page_token: page_token, return_partial_success: return_partial_success }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_tls_routes parent: parent, page_size: page_size, page_token: page_token do |_result, response|
+        client.list_tls_routes parent: parent, page_size: page_size, page_token: page_token, return_partial_success: return_partial_success do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_tls_routes ::Google::Cloud::NetworkServices::V1::ListTlsRoutesRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |_result, response|
+        client.list_tls_routes ::Google::Cloud::NetworkServices::V1::ListTlsRoutesRequest.new(parent: parent, page_size: page_size, page_token: page_token, return_partial_success: return_partial_success) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_tls_routes({ parent: parent, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
+        client.list_tls_routes({ parent: parent, page_size: page_size, page_token: page_token, return_partial_success: return_partial_success }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_tls_routes(::Google::Cloud::NetworkServices::V1::ListTlsRoutesRequest.new(parent: parent, page_size: page_size, page_token: page_token), call_options) do |_result, response|
+        client.list_tls_routes(::Google::Cloud::NetworkServices::V1::ListTlsRoutesRequest.new(parent: parent, page_size: page_size, page_token: page_token, return_partial_success: return_partial_success), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1894,6 +1899,61 @@ class ::Google::Cloud::NetworkServices::V1::NetworkServices::Rest::ClientTest < 
     end
   end
 
+  def test_update_service_binding
+    # Create test objects.
+    client_result = ::Google::Longrunning::Operation.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    update_mask = {}
+    service_binding = {}
+
+    update_service_binding_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::NetworkServices::V1::NetworkServices::Rest::ServiceStub.stub :transcode_update_service_binding_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, update_service_binding_client_stub do
+        # Create client
+        client = ::Google::Cloud::NetworkServices::V1::NetworkServices::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.update_service_binding({ update_mask: update_mask, service_binding: service_binding }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.update_service_binding update_mask: update_mask, service_binding: service_binding do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.update_service_binding ::Google::Cloud::NetworkServices::V1::UpdateServiceBindingRequest.new(update_mask: update_mask, service_binding: service_binding) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.update_service_binding({ update_mask: update_mask, service_binding: service_binding }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.update_service_binding(::Google::Cloud::NetworkServices::V1::UpdateServiceBindingRequest.new(update_mask: update_mask, service_binding: service_binding), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, update_service_binding_client_stub.call_count
+      end
+    end
+  end
+
   def test_delete_service_binding
     # Create test objects.
     client_result = ::Google::Longrunning::Operation.new
@@ -1959,6 +2019,7 @@ class ::Google::Cloud::NetworkServices::V1::NetworkServices::Rest::ClientTest < 
     parent = "hello world"
     page_size = 42
     page_token = "hello world"
+    return_partial_success = true
 
     list_meshes_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
@@ -1974,27 +2035,27 @@ class ::Google::Cloud::NetworkServices::V1::NetworkServices::Rest::ClientTest < 
         end
 
         # Use hash object
-        client.list_meshes({ parent: parent, page_size: page_size, page_token: page_token }) do |_result, response|
+        client.list_meshes({ parent: parent, page_size: page_size, page_token: page_token, return_partial_success: return_partial_success }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_meshes parent: parent, page_size: page_size, page_token: page_token do |_result, response|
+        client.list_meshes parent: parent, page_size: page_size, page_token: page_token, return_partial_success: return_partial_success do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_meshes ::Google::Cloud::NetworkServices::V1::ListMeshesRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |_result, response|
+        client.list_meshes ::Google::Cloud::NetworkServices::V1::ListMeshesRequest.new(parent: parent, page_size: page_size, page_token: page_token, return_partial_success: return_partial_success) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_meshes({ parent: parent, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
+        client.list_meshes({ parent: parent, page_size: page_size, page_token: page_token, return_partial_success: return_partial_success }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_meshes(::Google::Cloud::NetworkServices::V1::ListMeshesRequest.new(parent: parent, page_size: page_size, page_token: page_token), call_options) do |_result, response|
+        client.list_meshes(::Google::Cloud::NetworkServices::V1::ListMeshesRequest.new(parent: parent, page_size: page_size, page_token: page_token, return_partial_success: return_partial_success), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -2219,6 +2280,501 @@ class ::Google::Cloud::NetworkServices::V1::NetworkServices::Rest::ClientTest < 
 
         # Verify method calls
         assert_equal 5, delete_mesh_client_stub.call_count
+      end
+    end
+  end
+
+  def test_list_service_lb_policies
+    # Create test objects.
+    client_result = ::Google::Cloud::NetworkServices::V1::ListServiceLbPoliciesResponse.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    page_size = 42
+    page_token = "hello world"
+
+    list_service_lb_policies_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::NetworkServices::V1::NetworkServices::Rest::ServiceStub.stub :transcode_list_service_lb_policies_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, list_service_lb_policies_client_stub do
+        # Create client
+        client = ::Google::Cloud::NetworkServices::V1::NetworkServices::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.list_service_lb_policies({ parent: parent, page_size: page_size, page_token: page_token }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.list_service_lb_policies parent: parent, page_size: page_size, page_token: page_token do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.list_service_lb_policies ::Google::Cloud::NetworkServices::V1::ListServiceLbPoliciesRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.list_service_lb_policies({ parent: parent, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.list_service_lb_policies(::Google::Cloud::NetworkServices::V1::ListServiceLbPoliciesRequest.new(parent: parent, page_size: page_size, page_token: page_token), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, list_service_lb_policies_client_stub.call_count
+      end
+    end
+  end
+
+  def test_get_service_lb_policy
+    # Create test objects.
+    client_result = ::Google::Cloud::NetworkServices::V1::ServiceLbPolicy.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    get_service_lb_policy_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::NetworkServices::V1::NetworkServices::Rest::ServiceStub.stub :transcode_get_service_lb_policy_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, get_service_lb_policy_client_stub do
+        # Create client
+        client = ::Google::Cloud::NetworkServices::V1::NetworkServices::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.get_service_lb_policy({ name: name }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.get_service_lb_policy name: name do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.get_service_lb_policy ::Google::Cloud::NetworkServices::V1::GetServiceLbPolicyRequest.new(name: name) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.get_service_lb_policy({ name: name }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.get_service_lb_policy(::Google::Cloud::NetworkServices::V1::GetServiceLbPolicyRequest.new(name: name), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, get_service_lb_policy_client_stub.call_count
+      end
+    end
+  end
+
+  def test_create_service_lb_policy
+    # Create test objects.
+    client_result = ::Google::Longrunning::Operation.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    service_lb_policy_id = "hello world"
+    service_lb_policy = {}
+
+    create_service_lb_policy_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::NetworkServices::V1::NetworkServices::Rest::ServiceStub.stub :transcode_create_service_lb_policy_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, create_service_lb_policy_client_stub do
+        # Create client
+        client = ::Google::Cloud::NetworkServices::V1::NetworkServices::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.create_service_lb_policy({ parent: parent, service_lb_policy_id: service_lb_policy_id, service_lb_policy: service_lb_policy }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.create_service_lb_policy parent: parent, service_lb_policy_id: service_lb_policy_id, service_lb_policy: service_lb_policy do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.create_service_lb_policy ::Google::Cloud::NetworkServices::V1::CreateServiceLbPolicyRequest.new(parent: parent, service_lb_policy_id: service_lb_policy_id, service_lb_policy: service_lb_policy) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.create_service_lb_policy({ parent: parent, service_lb_policy_id: service_lb_policy_id, service_lb_policy: service_lb_policy }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.create_service_lb_policy(::Google::Cloud::NetworkServices::V1::CreateServiceLbPolicyRequest.new(parent: parent, service_lb_policy_id: service_lb_policy_id, service_lb_policy: service_lb_policy), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, create_service_lb_policy_client_stub.call_count
+      end
+    end
+  end
+
+  def test_update_service_lb_policy
+    # Create test objects.
+    client_result = ::Google::Longrunning::Operation.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    update_mask = {}
+    service_lb_policy = {}
+
+    update_service_lb_policy_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::NetworkServices::V1::NetworkServices::Rest::ServiceStub.stub :transcode_update_service_lb_policy_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, update_service_lb_policy_client_stub do
+        # Create client
+        client = ::Google::Cloud::NetworkServices::V1::NetworkServices::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.update_service_lb_policy({ update_mask: update_mask, service_lb_policy: service_lb_policy }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.update_service_lb_policy update_mask: update_mask, service_lb_policy: service_lb_policy do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.update_service_lb_policy ::Google::Cloud::NetworkServices::V1::UpdateServiceLbPolicyRequest.new(update_mask: update_mask, service_lb_policy: service_lb_policy) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.update_service_lb_policy({ update_mask: update_mask, service_lb_policy: service_lb_policy }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.update_service_lb_policy(::Google::Cloud::NetworkServices::V1::UpdateServiceLbPolicyRequest.new(update_mask: update_mask, service_lb_policy: service_lb_policy), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, update_service_lb_policy_client_stub.call_count
+      end
+    end
+  end
+
+  def test_delete_service_lb_policy
+    # Create test objects.
+    client_result = ::Google::Longrunning::Operation.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    delete_service_lb_policy_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::NetworkServices::V1::NetworkServices::Rest::ServiceStub.stub :transcode_delete_service_lb_policy_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, delete_service_lb_policy_client_stub do
+        # Create client
+        client = ::Google::Cloud::NetworkServices::V1::NetworkServices::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.delete_service_lb_policy({ name: name }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.delete_service_lb_policy name: name do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.delete_service_lb_policy ::Google::Cloud::NetworkServices::V1::DeleteServiceLbPolicyRequest.new(name: name) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.delete_service_lb_policy({ name: name }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.delete_service_lb_policy(::Google::Cloud::NetworkServices::V1::DeleteServiceLbPolicyRequest.new(name: name), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, delete_service_lb_policy_client_stub.call_count
+      end
+    end
+  end
+
+  def test_get_gateway_route_view
+    # Create test objects.
+    client_result = ::Google::Cloud::NetworkServices::V1::GatewayRouteView.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    get_gateway_route_view_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::NetworkServices::V1::NetworkServices::Rest::ServiceStub.stub :transcode_get_gateway_route_view_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, get_gateway_route_view_client_stub do
+        # Create client
+        client = ::Google::Cloud::NetworkServices::V1::NetworkServices::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.get_gateway_route_view({ name: name }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.get_gateway_route_view name: name do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.get_gateway_route_view ::Google::Cloud::NetworkServices::V1::GetGatewayRouteViewRequest.new(name: name) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.get_gateway_route_view({ name: name }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.get_gateway_route_view(::Google::Cloud::NetworkServices::V1::GetGatewayRouteViewRequest.new(name: name), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, get_gateway_route_view_client_stub.call_count
+      end
+    end
+  end
+
+  def test_get_mesh_route_view
+    # Create test objects.
+    client_result = ::Google::Cloud::NetworkServices::V1::MeshRouteView.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    get_mesh_route_view_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::NetworkServices::V1::NetworkServices::Rest::ServiceStub.stub :transcode_get_mesh_route_view_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, get_mesh_route_view_client_stub do
+        # Create client
+        client = ::Google::Cloud::NetworkServices::V1::NetworkServices::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.get_mesh_route_view({ name: name }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.get_mesh_route_view name: name do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.get_mesh_route_view ::Google::Cloud::NetworkServices::V1::GetMeshRouteViewRequest.new(name: name) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.get_mesh_route_view({ name: name }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.get_mesh_route_view(::Google::Cloud::NetworkServices::V1::GetMeshRouteViewRequest.new(name: name), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, get_mesh_route_view_client_stub.call_count
+      end
+    end
+  end
+
+  def test_list_gateway_route_views
+    # Create test objects.
+    client_result = ::Google::Cloud::NetworkServices::V1::ListGatewayRouteViewsResponse.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    page_size = 42
+    page_token = "hello world"
+
+    list_gateway_route_views_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::NetworkServices::V1::NetworkServices::Rest::ServiceStub.stub :transcode_list_gateway_route_views_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, list_gateway_route_views_client_stub do
+        # Create client
+        client = ::Google::Cloud::NetworkServices::V1::NetworkServices::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.list_gateway_route_views({ parent: parent, page_size: page_size, page_token: page_token }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.list_gateway_route_views parent: parent, page_size: page_size, page_token: page_token do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.list_gateway_route_views ::Google::Cloud::NetworkServices::V1::ListGatewayRouteViewsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.list_gateway_route_views({ parent: parent, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.list_gateway_route_views(::Google::Cloud::NetworkServices::V1::ListGatewayRouteViewsRequest.new(parent: parent, page_size: page_size, page_token: page_token), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, list_gateway_route_views_client_stub.call_count
+      end
+    end
+  end
+
+  def test_list_mesh_route_views
+    # Create test objects.
+    client_result = ::Google::Cloud::NetworkServices::V1::ListMeshRouteViewsResponse.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    page_size = 42
+    page_token = "hello world"
+
+    list_mesh_route_views_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::NetworkServices::V1::NetworkServices::Rest::ServiceStub.stub :transcode_list_mesh_route_views_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, list_mesh_route_views_client_stub do
+        # Create client
+        client = ::Google::Cloud::NetworkServices::V1::NetworkServices::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.list_mesh_route_views({ parent: parent, page_size: page_size, page_token: page_token }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.list_mesh_route_views parent: parent, page_size: page_size, page_token: page_token do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.list_mesh_route_views ::Google::Cloud::NetworkServices::V1::ListMeshRouteViewsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.list_mesh_route_views({ parent: parent, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.list_mesh_route_views(::Google::Cloud::NetworkServices::V1::ListMeshRouteViewsRequest.new(parent: parent, page_size: page_size, page_token: page_token), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, list_mesh_route_views_client_stub.call_count
       end
     end
   end

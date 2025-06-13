@@ -75,6 +75,7 @@ class ::Google::Cloud::NetworkServices::V1::NetworkServices::ClientTest < Minite
     parent = "hello world"
     page_size = 42
     page_token = "hello world"
+    return_partial_success = true
 
     list_endpoint_policies_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :list_endpoint_policies, name
@@ -82,6 +83,7 @@ class ::Google::Cloud::NetworkServices::V1::NetworkServices::ClientTest < Minite
       assert_equal "hello world", request["parent"]
       assert_equal 42, request["page_size"]
       assert_equal "hello world", request["page_token"]
+      assert_equal true, request["return_partial_success"]
       refute_nil options
     end
 
@@ -92,35 +94,35 @@ class ::Google::Cloud::NetworkServices::V1::NetworkServices::ClientTest < Minite
       end
 
       # Use hash object
-      client.list_endpoint_policies({ parent: parent, page_size: page_size, page_token: page_token }) do |response, operation|
+      client.list_endpoint_policies({ parent: parent, page_size: page_size, page_token: page_token, return_partial_success: return_partial_success }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_endpoint_policies parent: parent, page_size: page_size, page_token: page_token do |response, operation|
+      client.list_endpoint_policies parent: parent, page_size: page_size, page_token: page_token, return_partial_success: return_partial_success do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_endpoint_policies ::Google::Cloud::NetworkServices::V1::ListEndpointPoliciesRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |response, operation|
+      client.list_endpoint_policies ::Google::Cloud::NetworkServices::V1::ListEndpointPoliciesRequest.new(parent: parent, page_size: page_size, page_token: page_token, return_partial_success: return_partial_success) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_endpoint_policies({ parent: parent, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
+      client.list_endpoint_policies({ parent: parent, page_size: page_size, page_token: page_token, return_partial_success: return_partial_success }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_endpoint_policies(::Google::Cloud::NetworkServices::V1::ListEndpointPoliciesRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
+      client.list_endpoint_policies(::Google::Cloud::NetworkServices::V1::ListEndpointPoliciesRequest.new(parent: parent, page_size: page_size, page_token: page_token, return_partial_success: return_partial_success), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -715,6 +717,7 @@ class ::Google::Cloud::NetworkServices::V1::NetworkServices::ClientTest < Minite
     parent = "hello world"
     page_size = 42
     page_token = "hello world"
+    return_partial_success = true
 
     list_grpc_routes_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :list_grpc_routes, name
@@ -722,6 +725,7 @@ class ::Google::Cloud::NetworkServices::V1::NetworkServices::ClientTest < Minite
       assert_equal "hello world", request["parent"]
       assert_equal 42, request["page_size"]
       assert_equal "hello world", request["page_token"]
+      assert_equal true, request["return_partial_success"]
       refute_nil options
     end
 
@@ -732,35 +736,35 @@ class ::Google::Cloud::NetworkServices::V1::NetworkServices::ClientTest < Minite
       end
 
       # Use hash object
-      client.list_grpc_routes({ parent: parent, page_size: page_size, page_token: page_token }) do |response, operation|
+      client.list_grpc_routes({ parent: parent, page_size: page_size, page_token: page_token, return_partial_success: return_partial_success }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_grpc_routes parent: parent, page_size: page_size, page_token: page_token do |response, operation|
+      client.list_grpc_routes parent: parent, page_size: page_size, page_token: page_token, return_partial_success: return_partial_success do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_grpc_routes ::Google::Cloud::NetworkServices::V1::ListGrpcRoutesRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |response, operation|
+      client.list_grpc_routes ::Google::Cloud::NetworkServices::V1::ListGrpcRoutesRequest.new(parent: parent, page_size: page_size, page_token: page_token, return_partial_success: return_partial_success) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_grpc_routes({ parent: parent, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
+      client.list_grpc_routes({ parent: parent, page_size: page_size, page_token: page_token, return_partial_success: return_partial_success }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_grpc_routes(::Google::Cloud::NetworkServices::V1::ListGrpcRoutesRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
+      client.list_grpc_routes(::Google::Cloud::NetworkServices::V1::ListGrpcRoutesRequest.new(parent: parent, page_size: page_size, page_token: page_token, return_partial_success: return_partial_success), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -1035,6 +1039,7 @@ class ::Google::Cloud::NetworkServices::V1::NetworkServices::ClientTest < Minite
     parent = "hello world"
     page_size = 42
     page_token = "hello world"
+    return_partial_success = true
 
     list_http_routes_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :list_http_routes, name
@@ -1042,6 +1047,7 @@ class ::Google::Cloud::NetworkServices::V1::NetworkServices::ClientTest < Minite
       assert_equal "hello world", request["parent"]
       assert_equal 42, request["page_size"]
       assert_equal "hello world", request["page_token"]
+      assert_equal true, request["return_partial_success"]
       refute_nil options
     end
 
@@ -1052,35 +1058,35 @@ class ::Google::Cloud::NetworkServices::V1::NetworkServices::ClientTest < Minite
       end
 
       # Use hash object
-      client.list_http_routes({ parent: parent, page_size: page_size, page_token: page_token }) do |response, operation|
+      client.list_http_routes({ parent: parent, page_size: page_size, page_token: page_token, return_partial_success: return_partial_success }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_http_routes parent: parent, page_size: page_size, page_token: page_token do |response, operation|
+      client.list_http_routes parent: parent, page_size: page_size, page_token: page_token, return_partial_success: return_partial_success do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_http_routes ::Google::Cloud::NetworkServices::V1::ListHttpRoutesRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |response, operation|
+      client.list_http_routes ::Google::Cloud::NetworkServices::V1::ListHttpRoutesRequest.new(parent: parent, page_size: page_size, page_token: page_token, return_partial_success: return_partial_success) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_http_routes({ parent: parent, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
+      client.list_http_routes({ parent: parent, page_size: page_size, page_token: page_token, return_partial_success: return_partial_success }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_http_routes(::Google::Cloud::NetworkServices::V1::ListHttpRoutesRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
+      client.list_http_routes(::Google::Cloud::NetworkServices::V1::ListHttpRoutesRequest.new(parent: parent, page_size: page_size, page_token: page_token, return_partial_success: return_partial_success), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -1355,6 +1361,7 @@ class ::Google::Cloud::NetworkServices::V1::NetworkServices::ClientTest < Minite
     parent = "hello world"
     page_size = 42
     page_token = "hello world"
+    return_partial_success = true
 
     list_tcp_routes_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :list_tcp_routes, name
@@ -1362,6 +1369,7 @@ class ::Google::Cloud::NetworkServices::V1::NetworkServices::ClientTest < Minite
       assert_equal "hello world", request["parent"]
       assert_equal 42, request["page_size"]
       assert_equal "hello world", request["page_token"]
+      assert_equal true, request["return_partial_success"]
       refute_nil options
     end
 
@@ -1372,35 +1380,35 @@ class ::Google::Cloud::NetworkServices::V1::NetworkServices::ClientTest < Minite
       end
 
       # Use hash object
-      client.list_tcp_routes({ parent: parent, page_size: page_size, page_token: page_token }) do |response, operation|
+      client.list_tcp_routes({ parent: parent, page_size: page_size, page_token: page_token, return_partial_success: return_partial_success }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_tcp_routes parent: parent, page_size: page_size, page_token: page_token do |response, operation|
+      client.list_tcp_routes parent: parent, page_size: page_size, page_token: page_token, return_partial_success: return_partial_success do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_tcp_routes ::Google::Cloud::NetworkServices::V1::ListTcpRoutesRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |response, operation|
+      client.list_tcp_routes ::Google::Cloud::NetworkServices::V1::ListTcpRoutesRequest.new(parent: parent, page_size: page_size, page_token: page_token, return_partial_success: return_partial_success) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_tcp_routes({ parent: parent, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
+      client.list_tcp_routes({ parent: parent, page_size: page_size, page_token: page_token, return_partial_success: return_partial_success }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_tcp_routes(::Google::Cloud::NetworkServices::V1::ListTcpRoutesRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
+      client.list_tcp_routes(::Google::Cloud::NetworkServices::V1::ListTcpRoutesRequest.new(parent: parent, page_size: page_size, page_token: page_token, return_partial_success: return_partial_success), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -1675,6 +1683,7 @@ class ::Google::Cloud::NetworkServices::V1::NetworkServices::ClientTest < Minite
     parent = "hello world"
     page_size = 42
     page_token = "hello world"
+    return_partial_success = true
 
     list_tls_routes_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :list_tls_routes, name
@@ -1682,6 +1691,7 @@ class ::Google::Cloud::NetworkServices::V1::NetworkServices::ClientTest < Minite
       assert_equal "hello world", request["parent"]
       assert_equal 42, request["page_size"]
       assert_equal "hello world", request["page_token"]
+      assert_equal true, request["return_partial_success"]
       refute_nil options
     end
 
@@ -1692,35 +1702,35 @@ class ::Google::Cloud::NetworkServices::V1::NetworkServices::ClientTest < Minite
       end
 
       # Use hash object
-      client.list_tls_routes({ parent: parent, page_size: page_size, page_token: page_token }) do |response, operation|
+      client.list_tls_routes({ parent: parent, page_size: page_size, page_token: page_token, return_partial_success: return_partial_success }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_tls_routes parent: parent, page_size: page_size, page_token: page_token do |response, operation|
+      client.list_tls_routes parent: parent, page_size: page_size, page_token: page_token, return_partial_success: return_partial_success do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_tls_routes ::Google::Cloud::NetworkServices::V1::ListTlsRoutesRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |response, operation|
+      client.list_tls_routes ::Google::Cloud::NetworkServices::V1::ListTlsRoutesRequest.new(parent: parent, page_size: page_size, page_token: page_token, return_partial_success: return_partial_success) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_tls_routes({ parent: parent, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
+      client.list_tls_routes({ parent: parent, page_size: page_size, page_token: page_token, return_partial_success: return_partial_success }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_tls_routes(::Google::Cloud::NetworkServices::V1::ListTlsRoutesRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
+      client.list_tls_routes(::Google::Cloud::NetworkServices::V1::ListTlsRoutesRequest.new(parent: parent, page_size: page_size, page_token: page_token, return_partial_success: return_partial_success), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -2176,6 +2186,71 @@ class ::Google::Cloud::NetworkServices::V1::NetworkServices::ClientTest < Minite
     end
   end
 
+  def test_update_service_binding
+    # Create GRPC objects.
+    grpc_response = ::Google::Longrunning::Operation.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    update_mask = {}
+    service_binding = {}
+
+    update_service_binding_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :update_service_binding, name
+      assert_kind_of ::Google::Cloud::NetworkServices::V1::UpdateServiceBindingRequest, request
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request["update_mask"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::NetworkServices::V1::ServiceBinding), request["service_binding"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, update_service_binding_client_stub do
+      # Create client
+      client = ::Google::Cloud::NetworkServices::V1::NetworkServices::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.update_service_binding({ update_mask: update_mask, service_binding: service_binding }) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.update_service_binding update_mask: update_mask, service_binding: service_binding do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.update_service_binding ::Google::Cloud::NetworkServices::V1::UpdateServiceBindingRequest.new(update_mask: update_mask, service_binding: service_binding) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.update_service_binding({ update_mask: update_mask, service_binding: service_binding }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.update_service_binding(::Google::Cloud::NetworkServices::V1::UpdateServiceBindingRequest.new(update_mask: update_mask, service_binding: service_binding), grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, update_service_binding_client_stub.call_rpc_count
+    end
+  end
+
   def test_delete_service_binding
     # Create GRPC objects.
     grpc_response = ::Google::Longrunning::Operation.new
@@ -2250,6 +2325,7 @@ class ::Google::Cloud::NetworkServices::V1::NetworkServices::ClientTest < Minite
     parent = "hello world"
     page_size = 42
     page_token = "hello world"
+    return_partial_success = true
 
     list_meshes_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :list_meshes, name
@@ -2257,6 +2333,7 @@ class ::Google::Cloud::NetworkServices::V1::NetworkServices::ClientTest < Minite
       assert_equal "hello world", request["parent"]
       assert_equal 42, request["page_size"]
       assert_equal "hello world", request["page_token"]
+      assert_equal true, request["return_partial_success"]
       refute_nil options
     end
 
@@ -2267,35 +2344,35 @@ class ::Google::Cloud::NetworkServices::V1::NetworkServices::ClientTest < Minite
       end
 
       # Use hash object
-      client.list_meshes({ parent: parent, page_size: page_size, page_token: page_token }) do |response, operation|
+      client.list_meshes({ parent: parent, page_size: page_size, page_token: page_token, return_partial_success: return_partial_success }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_meshes parent: parent, page_size: page_size, page_token: page_token do |response, operation|
+      client.list_meshes parent: parent, page_size: page_size, page_token: page_token, return_partial_success: return_partial_success do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_meshes ::Google::Cloud::NetworkServices::V1::ListMeshesRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |response, operation|
+      client.list_meshes ::Google::Cloud::NetworkServices::V1::ListMeshesRequest.new(parent: parent, page_size: page_size, page_token: page_token, return_partial_success: return_partial_success) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_meshes({ parent: parent, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
+      client.list_meshes({ parent: parent, page_size: page_size, page_token: page_token, return_partial_success: return_partial_success }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_meshes(::Google::Cloud::NetworkServices::V1::ListMeshesRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
+      client.list_meshes(::Google::Cloud::NetworkServices::V1::ListMeshesRequest.new(parent: parent, page_size: page_size, page_token: page_token, return_partial_success: return_partial_success), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -2556,6 +2633,576 @@ class ::Google::Cloud::NetworkServices::V1::NetworkServices::ClientTest < Minite
 
       # Verify method calls
       assert_equal 5, delete_mesh_client_stub.call_rpc_count
+    end
+  end
+
+  def test_list_service_lb_policies
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::NetworkServices::V1::ListServiceLbPoliciesResponse.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    page_size = 42
+    page_token = "hello world"
+
+    list_service_lb_policies_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :list_service_lb_policies, name
+      assert_kind_of ::Google::Cloud::NetworkServices::V1::ListServiceLbPoliciesRequest, request
+      assert_equal "hello world", request["parent"]
+      assert_equal 42, request["page_size"]
+      assert_equal "hello world", request["page_token"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, list_service_lb_policies_client_stub do
+      # Create client
+      client = ::Google::Cloud::NetworkServices::V1::NetworkServices::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.list_service_lb_policies({ parent: parent, page_size: page_size, page_token: page_token }) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.list_service_lb_policies parent: parent, page_size: page_size, page_token: page_token do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.list_service_lb_policies ::Google::Cloud::NetworkServices::V1::ListServiceLbPoliciesRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.list_service_lb_policies({ parent: parent, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.list_service_lb_policies(::Google::Cloud::NetworkServices::V1::ListServiceLbPoliciesRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, list_service_lb_policies_client_stub.call_rpc_count
+    end
+  end
+
+  def test_get_service_lb_policy
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::NetworkServices::V1::ServiceLbPolicy.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    get_service_lb_policy_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :get_service_lb_policy, name
+      assert_kind_of ::Google::Cloud::NetworkServices::V1::GetServiceLbPolicyRequest, request
+      assert_equal "hello world", request["name"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, get_service_lb_policy_client_stub do
+      # Create client
+      client = ::Google::Cloud::NetworkServices::V1::NetworkServices::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.get_service_lb_policy({ name: name }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.get_service_lb_policy name: name do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.get_service_lb_policy ::Google::Cloud::NetworkServices::V1::GetServiceLbPolicyRequest.new(name: name) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.get_service_lb_policy({ name: name }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.get_service_lb_policy(::Google::Cloud::NetworkServices::V1::GetServiceLbPolicyRequest.new(name: name), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, get_service_lb_policy_client_stub.call_rpc_count
+    end
+  end
+
+  def test_create_service_lb_policy
+    # Create GRPC objects.
+    grpc_response = ::Google::Longrunning::Operation.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    service_lb_policy_id = "hello world"
+    service_lb_policy = {}
+
+    create_service_lb_policy_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :create_service_lb_policy, name
+      assert_kind_of ::Google::Cloud::NetworkServices::V1::CreateServiceLbPolicyRequest, request
+      assert_equal "hello world", request["parent"]
+      assert_equal "hello world", request["service_lb_policy_id"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::NetworkServices::V1::ServiceLbPolicy), request["service_lb_policy"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, create_service_lb_policy_client_stub do
+      # Create client
+      client = ::Google::Cloud::NetworkServices::V1::NetworkServices::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.create_service_lb_policy({ parent: parent, service_lb_policy_id: service_lb_policy_id, service_lb_policy: service_lb_policy }) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.create_service_lb_policy parent: parent, service_lb_policy_id: service_lb_policy_id, service_lb_policy: service_lb_policy do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.create_service_lb_policy ::Google::Cloud::NetworkServices::V1::CreateServiceLbPolicyRequest.new(parent: parent, service_lb_policy_id: service_lb_policy_id, service_lb_policy: service_lb_policy) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.create_service_lb_policy({ parent: parent, service_lb_policy_id: service_lb_policy_id, service_lb_policy: service_lb_policy }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.create_service_lb_policy(::Google::Cloud::NetworkServices::V1::CreateServiceLbPolicyRequest.new(parent: parent, service_lb_policy_id: service_lb_policy_id, service_lb_policy: service_lb_policy), grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, create_service_lb_policy_client_stub.call_rpc_count
+    end
+  end
+
+  def test_update_service_lb_policy
+    # Create GRPC objects.
+    grpc_response = ::Google::Longrunning::Operation.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    update_mask = {}
+    service_lb_policy = {}
+
+    update_service_lb_policy_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :update_service_lb_policy, name
+      assert_kind_of ::Google::Cloud::NetworkServices::V1::UpdateServiceLbPolicyRequest, request
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request["update_mask"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::NetworkServices::V1::ServiceLbPolicy), request["service_lb_policy"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, update_service_lb_policy_client_stub do
+      # Create client
+      client = ::Google::Cloud::NetworkServices::V1::NetworkServices::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.update_service_lb_policy({ update_mask: update_mask, service_lb_policy: service_lb_policy }) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.update_service_lb_policy update_mask: update_mask, service_lb_policy: service_lb_policy do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.update_service_lb_policy ::Google::Cloud::NetworkServices::V1::UpdateServiceLbPolicyRequest.new(update_mask: update_mask, service_lb_policy: service_lb_policy) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.update_service_lb_policy({ update_mask: update_mask, service_lb_policy: service_lb_policy }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.update_service_lb_policy(::Google::Cloud::NetworkServices::V1::UpdateServiceLbPolicyRequest.new(update_mask: update_mask, service_lb_policy: service_lb_policy), grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, update_service_lb_policy_client_stub.call_rpc_count
+    end
+  end
+
+  def test_delete_service_lb_policy
+    # Create GRPC objects.
+    grpc_response = ::Google::Longrunning::Operation.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    delete_service_lb_policy_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :delete_service_lb_policy, name
+      assert_kind_of ::Google::Cloud::NetworkServices::V1::DeleteServiceLbPolicyRequest, request
+      assert_equal "hello world", request["name"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, delete_service_lb_policy_client_stub do
+      # Create client
+      client = ::Google::Cloud::NetworkServices::V1::NetworkServices::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.delete_service_lb_policy({ name: name }) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.delete_service_lb_policy name: name do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.delete_service_lb_policy ::Google::Cloud::NetworkServices::V1::DeleteServiceLbPolicyRequest.new(name: name) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.delete_service_lb_policy({ name: name }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.delete_service_lb_policy(::Google::Cloud::NetworkServices::V1::DeleteServiceLbPolicyRequest.new(name: name), grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, delete_service_lb_policy_client_stub.call_rpc_count
+    end
+  end
+
+  def test_get_gateway_route_view
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::NetworkServices::V1::GatewayRouteView.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    get_gateway_route_view_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :get_gateway_route_view, name
+      assert_kind_of ::Google::Cloud::NetworkServices::V1::GetGatewayRouteViewRequest, request
+      assert_equal "hello world", request["name"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, get_gateway_route_view_client_stub do
+      # Create client
+      client = ::Google::Cloud::NetworkServices::V1::NetworkServices::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.get_gateway_route_view({ name: name }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.get_gateway_route_view name: name do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.get_gateway_route_view ::Google::Cloud::NetworkServices::V1::GetGatewayRouteViewRequest.new(name: name) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.get_gateway_route_view({ name: name }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.get_gateway_route_view(::Google::Cloud::NetworkServices::V1::GetGatewayRouteViewRequest.new(name: name), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, get_gateway_route_view_client_stub.call_rpc_count
+    end
+  end
+
+  def test_get_mesh_route_view
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::NetworkServices::V1::MeshRouteView.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    get_mesh_route_view_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :get_mesh_route_view, name
+      assert_kind_of ::Google::Cloud::NetworkServices::V1::GetMeshRouteViewRequest, request
+      assert_equal "hello world", request["name"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, get_mesh_route_view_client_stub do
+      # Create client
+      client = ::Google::Cloud::NetworkServices::V1::NetworkServices::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.get_mesh_route_view({ name: name }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.get_mesh_route_view name: name do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.get_mesh_route_view ::Google::Cloud::NetworkServices::V1::GetMeshRouteViewRequest.new(name: name) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.get_mesh_route_view({ name: name }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.get_mesh_route_view(::Google::Cloud::NetworkServices::V1::GetMeshRouteViewRequest.new(name: name), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, get_mesh_route_view_client_stub.call_rpc_count
+    end
+  end
+
+  def test_list_gateway_route_views
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::NetworkServices::V1::ListGatewayRouteViewsResponse.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    page_size = 42
+    page_token = "hello world"
+
+    list_gateway_route_views_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :list_gateway_route_views, name
+      assert_kind_of ::Google::Cloud::NetworkServices::V1::ListGatewayRouteViewsRequest, request
+      assert_equal "hello world", request["parent"]
+      assert_equal 42, request["page_size"]
+      assert_equal "hello world", request["page_token"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, list_gateway_route_views_client_stub do
+      # Create client
+      client = ::Google::Cloud::NetworkServices::V1::NetworkServices::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.list_gateway_route_views({ parent: parent, page_size: page_size, page_token: page_token }) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.list_gateway_route_views parent: parent, page_size: page_size, page_token: page_token do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.list_gateway_route_views ::Google::Cloud::NetworkServices::V1::ListGatewayRouteViewsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.list_gateway_route_views({ parent: parent, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.list_gateway_route_views(::Google::Cloud::NetworkServices::V1::ListGatewayRouteViewsRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, list_gateway_route_views_client_stub.call_rpc_count
+    end
+  end
+
+  def test_list_mesh_route_views
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::NetworkServices::V1::ListMeshRouteViewsResponse.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    page_size = 42
+    page_token = "hello world"
+
+    list_mesh_route_views_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :list_mesh_route_views, name
+      assert_kind_of ::Google::Cloud::NetworkServices::V1::ListMeshRouteViewsRequest, request
+      assert_equal "hello world", request["parent"]
+      assert_equal 42, request["page_size"]
+      assert_equal "hello world", request["page_token"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, list_mesh_route_views_client_stub do
+      # Create client
+      client = ::Google::Cloud::NetworkServices::V1::NetworkServices::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.list_mesh_route_views({ parent: parent, page_size: page_size, page_token: page_token }) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.list_mesh_route_views parent: parent, page_size: page_size, page_token: page_token do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.list_mesh_route_views ::Google::Cloud::NetworkServices::V1::ListMeshRouteViewsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.list_mesh_route_views({ parent: parent, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.list_mesh_route_views(::Google::Cloud::NetworkServices::V1::ListMeshRouteViewsRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, list_mesh_route_views_client_stub.call_rpc_count
     end
   end
 
