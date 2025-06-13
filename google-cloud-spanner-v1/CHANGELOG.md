@@ -1,5 +1,11 @@
 # Release History
 
+### 1.9.0 (2025-06-13)
+
+#### Features
+
+* add new change_stream.proto ([#30493](https://github.com/googleapis/google-cloud-ruby/issues/30493)) 
+
 ### 1.8.0 (2025-05-12)
 
 #### Features
