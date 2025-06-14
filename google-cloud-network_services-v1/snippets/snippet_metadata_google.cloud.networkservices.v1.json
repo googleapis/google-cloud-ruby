@@ -1,7 +1,7 @@
 {
   "client_library": {
     "name": "google-cloud-network_services-v1",
-    "version": "2.1.0",
+    "version": "2.2.0",
     "language": "RUBY",
     "apis": [
       {
