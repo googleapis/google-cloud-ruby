@@ -400,8 +400,8 @@ module Google
             #
             #     If not set, the default retry policy is applied. This generally implies
             #     that messages will be retried as soon as possible for healthy subscribers.
-            #     RetryPolicy will be triggered on NACKs or acknowledgement deadline
-            #     exceeded events for a given message.
+            #     RetryPolicy will be triggered on NACKs or acknowledgment deadline exceeded
+            #     events for a given message.
             #   @param detached [::Boolean]
             #     Optional. Indicates whether the subscription is detached from its topic.
             #     Detached subscriptions don't receive messages from their topic and don't
@@ -414,7 +414,7 @@ module Google
             #     subscription:
             #
             #     * The message sent to a subscriber is guaranteed not to be resent
-            #     before the message's acknowledgement deadline expires.
+            #     before the message's acknowledgment deadline expires.
             #     * An acknowledged message will not be resent to a subscriber.
             #
             #     Note that subscribers may still receive multiple copies of a message
@@ -1151,7 +1151,7 @@ module Google
 
             ##
             # Establishes a stream with the server, which sends messages down to the
-            # client. The client streams acknowledgements and ack deadline modifications
+            # client. The client streams acknowledgments and ack deadline modifications
             # back to the server. The server will close the stream and return the status
             # on any error. The server may close the stream with status `UNAVAILABLE` to
             # reassign server-side resources, in which case, the client should
