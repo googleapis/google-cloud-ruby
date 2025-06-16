@@ -1,5 +1,11 @@
 # Changelog
 
+### 1.15.0 (2025-06-16)
+
+#### Features
+
+* add EncryptionSpec field for RagCorpus CMEK feature to v1 ([#30485](https://github.com/googleapis/google-cloud-ruby/issues/30485)) 
+
 ### 1.14.0 (2025-05-27)
 
 #### Features
