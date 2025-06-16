@@ -83,7 +83,37 @@ module Google
         #     To specify this field, you must have already [created a network attachment]
         #     (https://cloud.google.com/vpc/docs/create-manage-network-attachments#create-network-attachments).
         #     This field is only used for resources using PSC-I.
+        # @!attribute [rw] dns_peering_configs
+        #   @return [::Array<::Google::Cloud::AIPlatform::V1::DnsPeeringConfig>]
+        #     Optional. DNS peering configurations. When specified, Vertex AI will
+        #     attempt to configure DNS peering zones in the tenant project VPC
+        #     to resolve the specified domains using the target network's Cloud DNS.
+        #     The user must grant the dns.peer role to the Vertex AI Service Agent
+        #     on the target project.
         class PscInterfaceConfig
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # DNS peering configuration. These configurations are used to create
+        # DNS peering zones in the Vertex tenant project VPC, enabling resolution
+        # of records within the specified domain hosted in the target network's
+        # Cloud DNS.
+        # @!attribute [rw] domain
+        #   @return [::String]
+        #     Required. The DNS name suffix of the zone being peered to, e.g.,
+        #     "my-internal-domain.corp.". Must end with a dot.
+        # @!attribute [rw] target_project
+        #   @return [::String]
+        #     Required. The project ID hosting the Cloud DNS managed zone that
+        #     contains the 'domain'. The Vertex AI Service Agent requires the
+        #     dns.peer role on this project.
+        # @!attribute [rw] target_network
+        #   @return [::String]
+        #     Required. The VPC network name
+        #     in the target_project where the DNS zone specified by 'domain' is
+        #     visible.
+        class DnsPeeringConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
