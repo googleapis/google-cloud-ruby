@@ -1,5 +1,14 @@
 # Changelog
 
+### 1.2.0 (2025-06-16)
+
+#### Features
+
+* add denoiser related configuration 
+#### Documentation
+
+* updated description of sample_rate_hertz ([#30509](https://github.com/googleapis/google-cloud-ruby/issues/30509)) 
+
 ### 1.1.0 (2025-05-12)
 
 #### Features
