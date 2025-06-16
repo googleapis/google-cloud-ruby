@@ -1,5 +1,12 @@
 # Release History
 
+### 2.2.0 (2025-06-16)
+
+#### Features
+
+* A new enum `CustomerAttestationState` is added ([#30513](https://github.com/googleapis/google-cloud-ruby/issues/30513)) 
+* A new field `customer_attestation_state` is added to message `.google.cloud.channel.v1.Customer` 
+
 ### 2.1.0 (2025-05-12)
 
 #### Features
