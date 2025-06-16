@@ -33,7 +33,7 @@ module Google
         # @!attribute [rw] capacity_gib
         #   @return [::Integer]
         #     Required. The storage capacity of the instance in gibibytes (GiB). Allowed
-        #     values are from `18000` to `936000`, in increments of 9000.
+        #     values are from `18000` to `954000`, in increments of 9000.
         # @!attribute [rw] network
         #   @return [::String]
         #     Required. Immutable. The full name of the VPC network to which the instance
@@ -60,9 +60,8 @@ module Google
         #     Optional. Labels as key value pairs.
         # @!attribute [rw] per_unit_storage_throughput
         #   @return [::Integer]
-        #     Optional. The throughput of the instance in MB/s/TiB.
-        #     Valid values are 250, 500, 1000.
-        #     Default value is 1000.
+        #     Required. The throughput of the instance in MB/s/TiB.
+        #     Valid values are 125, 250, 500, 1000.
         # @!attribute [rw] gke_support_enabled
         #   @return [::Boolean]
         #     Optional. Indicates whether you want to enable support for GKE clients. By
