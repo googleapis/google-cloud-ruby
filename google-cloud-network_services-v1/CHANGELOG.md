@@ -1,5 +1,14 @@
 # Changelog
 
+### 2.2.0 (2025-06-16)
+
+#### Features
+
+* update NetworkServices protos ([#30508](https://github.com/googleapis/google-cloud-ruby/issues/30508)) 
+#### Documentation
+
+* Various updates 
+
 ### 2.1.0 (2025-05-12)
 
 #### Features
