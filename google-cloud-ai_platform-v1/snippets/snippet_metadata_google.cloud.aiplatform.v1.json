@@ -12372,6 +12372,86 @@
       ]
     },
     {
+      "region_tag": "aiplatform_v1_generated_VertexRagDataService_UpdateRagEngineConfig_sync",
+      "title": "Snippet for the update_rag_engine_config call in the VertexRagDataService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AIPlatform::V1::VertexRagDataService::Client#update_rag_engine_config.",
+      "file": "vertex_rag_data_service/update_rag_engine_config.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_rag_engine_config",
+        "full_name": "::Google::Cloud::AIPlatform::V1::VertexRagDataService::Client#update_rag_engine_config",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::AIPlatform::V1::UpdateRagEngineConfigRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "VertexRagDataService::Client",
+          "full_name": "::Google::Cloud::AIPlatform::V1::VertexRagDataService::Client"
+        },
+        "method": {
+          "short_name": "UpdateRagEngineConfig",
+          "full_name": "google.cloud.aiplatform.v1.VertexRagDataService.UpdateRagEngineConfig",
+          "service": {
+            "short_name": "VertexRagDataService",
+            "full_name": "google.cloud.aiplatform.v1.VertexRagDataService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "aiplatform_v1_generated_VertexRagDataService_GetRagEngineConfig_sync",
+      "title": "Snippet for the get_rag_engine_config call in the VertexRagDataService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AIPlatform::V1::VertexRagDataService::Client#get_rag_engine_config.",
+      "file": "vertex_rag_data_service/get_rag_engine_config.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_rag_engine_config",
+        "full_name": "::Google::Cloud::AIPlatform::V1::VertexRagDataService::Client#get_rag_engine_config",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::AIPlatform::V1::GetRagEngineConfigRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::AIPlatform::V1::RagEngineConfig",
+        "client": {
+          "short_name": "VertexRagDataService::Client",
+          "full_name": "::Google::Cloud::AIPlatform::V1::VertexRagDataService::Client"
+        },
+        "method": {
+          "short_name": "GetRagEngineConfig",
+          "full_name": "google.cloud.aiplatform.v1.VertexRagDataService.GetRagEngineConfig",
+          "service": {
+            "short_name": "VertexRagDataService",
+            "full_name": "google.cloud.aiplatform.v1.VertexRagDataService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
       "region_tag": "aiplatform_v1_generated_VertexRagService_RetrieveContexts_sync",
       "title": "Snippet for the retrieve_contexts call in the VertexRagService service",
       "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AIPlatform::V1::VertexRagService::Client#retrieve_contexts.",
