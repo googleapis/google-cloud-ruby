@@ -372,8 +372,8 @@ module Google
           end
 
           def pause_streaming?
-            return if @stopped
-            return if @paused
+            return false if @stopped
+            return false if @paused
 
             @inventory.full?
           end
@@ -387,8 +387,8 @@ module Google
           end
 
           def unpause_streaming?
-            return if @stopped
-            return if @paused.nil?
+            return false if @stopped
+            return false if @paused.nil?
 
             @inventory.count < @inventory.limit * 0.8
           end
