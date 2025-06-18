@@ -1165,6 +1165,11 @@
               "methods": [
                 "get_publisher_model"
               ]
+            },
+            "Deploy": {
+              "methods": [
+                "deploy"
+              ]
             }
           }
         }

@@ -25,6 +25,7 @@ require "google/cloud/ai_platform/v1/bindings_override"
 
 require "google/cloud/ai_platform/v1/model_garden_service/credentials"
 require "google/cloud/ai_platform/v1/model_garden_service/paths"
+require "google/cloud/ai_platform/v1/model_garden_service/rest/operations"
 require "google/cloud/ai_platform/v1/model_garden_service/rest/client"
 
 module Google

@@ -25,6 +25,23 @@ module Google
           # Path helper methods for the ModelGardenService API.
           module Paths
             ##
+            # Create a fully-qualified Location resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `projects/{project}/locations/{location}`
+            #
+            # @param project [String]
+            # @param location [String]
+            #
+            # @return [::String]
+            def location_path project:, location:
+              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+
+              "projects/#{project}/locations/#{location}"
+            end
+
+            ##
             # Create a fully-qualified PublisherModel resource string.
             #
             # The resource will be in the following format:
@@ -39,6 +56,25 @@ module Google
               raise ::ArgumentError, "publisher cannot contain /" if publisher.to_s.include? "/"
 
               "publishers/#{publisher}/models/#{model}"
+            end
+
+            ##
+            # Create a fully-qualified Reservation resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `projects/{project_id_or_number}/zones/{zone}/reservations/{reservation_name}`
+            #
+            # @param project_id_or_number [String]
+            # @param zone [String]
+            # @param reservation_name [String]
+            #
+            # @return [::String]
+            def reservation_path project_id_or_number:, zone:, reservation_name:
+              raise ::ArgumentError, "project_id_or_number cannot contain /" if project_id_or_number.to_s.include? "/"
+              raise ::ArgumentError, "zone cannot contain /" if zone.to_s.include? "/"
+
+              "projects/#{project_id_or_number}/zones/#{zone}/reservations/#{reservation_name}"
             end
 
             extend self
