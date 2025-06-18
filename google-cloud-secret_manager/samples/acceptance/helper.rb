@@ -38,6 +38,8 @@ class SecretManagerSnippetSpec < Minitest::Spec
   let(:label_key) { "label-key" }
   let(:label_value) { "label-value" }
 
+  let(:time_to_live) { 86_400 }
+
   let :secret do
     client.create_secret(
       parent:    "projects/#{project_id}",
