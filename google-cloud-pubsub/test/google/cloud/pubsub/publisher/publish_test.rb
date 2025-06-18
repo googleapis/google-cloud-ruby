@@ -143,7 +143,7 @@ describe Google::Cloud::PubSub::Publisher, :publish, :mock_pubsub do
   end
 
   describe "reference topic that exists" do
-    let(:publisher) { Google::Cloud::PubSub::Publisher.from_name topic_name, pubsub.service }
+    let(:publisher) { Google::Cloud::PubSub::Publisher.from_grpc Google::Cloud::PubSub::V1::Topic.new(topic_hash(topic_name)), pubsub.service }
 
     it "publishes a message" do
      messages = [
@@ -217,7 +217,7 @@ describe Google::Cloud::PubSub::Publisher, :publish, :mock_pubsub do
   end
 
   describe "reference topic that does not exist" do
-    let(:publisher) { Google::Cloud::PubSub::Publisher.from_name topic_name, pubsub.service }
+    let(:publisher) { Google::Cloud::PubSub::Publisher.from_grpc Google::Cloud::PubSub::V1::Topic.new(topic_hash(topic_name)), pubsub.service }
 
     it "publishes a message" do
       stub = Object.new

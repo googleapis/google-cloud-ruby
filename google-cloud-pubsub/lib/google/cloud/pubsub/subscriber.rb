@@ -17,7 +17,6 @@ require "google/cloud/pubsub/convert"
 require "google/cloud/errors"
 require "google/cloud/pubsub/received_message"
 require "google/cloud/pubsub/retry_policy"
-require "google/cloud/pubsub/snapshot"
 require "google/cloud/pubsub/message_listener"
 require "google/cloud/pubsub/v1"
 

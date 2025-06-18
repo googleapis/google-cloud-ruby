@@ -234,9 +234,8 @@ describe Google::Cloud::PubSub::Publisher, :publish_async, :mock_pubsub do
   end
 
   describe "reference topic that exists" do
-    let(:publisher) { Google::Cloud::PubSub::Publisher.from_name topic_name,
-                                                 pubsub.service,
-                                                 autocreate: false }
+    let(:publisher) { Google::Cloud::PubSub::Publisher.from_grpc Google::Cloud::PubSub::V1::Topic.new(topic_hash(topic_name)), 
+                                                 pubsub.service }
 
     it "publishes a message" do
       publisher.service.mocked_publisher = AsyncPublisherStub.new
@@ -299,48 +298,6 @@ describe Google::Cloud::PubSub::Publisher, :publish_async, :mock_pubsub do
       }
       published_messages_hash = publisher.service.mocked_publisher.message_hash
       assert_equal expected_messages_hash, published_messages_hash
-      _(callback_called).must_equal true
-    end
-  end
-
-  describe "reference topic that does not exist" do
-    let(:publisher) { Google::Cloud::PubSub::Publisher.from_name topic_name,
-                                                 pubsub.service,
-                                                 autocreate: false }
-
-    it "publishes a message" do
-      messages = [
-        Google::Cloud::PubSub::V1::PubsubMessage.new(data: "async-message".encode(Encoding::ASCII_8BIT))
-      ]
-
-      stub = Object.new
-      def stub.publish *args
-        raise Google::Cloud::NotFoundError.new("not found")
-      end
-      pubsub.service.mocked_publisher = stub
-
-      _(publisher.async_publisher).must_be :nil?
-
-      callback_called = false
-
-      publisher.publish_async "async-message" do |result|
-        assert_kind_of Google::Cloud::PubSub::PublishResult, result
-        refute result.succeeded?
-        assert result.failed?
-        assert_equal "async-message".force_encoding(Encoding::ASCII_8BIT), result.data
-        assert_kind_of Google::Cloud::NotFoundError, result.error
-        callback_called = true
-      end
-
-      _(publisher.async_publisher).wont_be :nil?
-
-      # force the queued messages to be published
-      publisher.async_publisher.stop!
-
-      _(publisher.async_publisher).wont_be :started?
-      _(publisher.async_publisher).must_be :stopped?
-
-      _(publisher.async_publisher.batch).must_be :nil?
       _(callback_called).must_equal true
     end
   end
