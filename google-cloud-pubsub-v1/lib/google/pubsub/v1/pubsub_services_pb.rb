@@ -23,7 +23,7 @@ module Google
   module Cloud
     module PubSub
       module V1
-        module Publisher
+        module TopicAdmin
           # The service that an application uses to manipulate topics, and to send
           # messages to a topic.
           class Service
@@ -70,7 +70,7 @@ module Google
 
           Stub = Service.rpc_stub_class
         end
-        module Subscriber
+        module SubscriptionAdmin
           # The service that an application uses to manipulate subscriptions and to
           # consume messages from a subscription via the `Pull` method or by
           # establishing a bi-directional stream using the `StreamingPull` method.

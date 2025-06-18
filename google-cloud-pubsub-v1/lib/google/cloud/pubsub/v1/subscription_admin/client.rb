@@ -233,7 +233,7 @@ module Google
               @quota_project_id ||= credentials.quota_project_id if credentials.respond_to? :quota_project_id
 
               @subscription_admin_stub = ::Gapic::ServiceStub.new(
-                ::Google::Cloud::PubSub::V1::Subscriber::Stub,
+                ::Google::Cloud::PubSub::V1::SubscriptionAdmin::Stub,
                 credentials: credentials,
                 endpoint: @config.endpoint,
                 endpoint_template: DEFAULT_ENDPOINT_TEMPLATE,

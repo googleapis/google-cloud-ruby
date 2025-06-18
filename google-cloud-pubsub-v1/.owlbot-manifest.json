@@ -95,10 +95,12 @@
     "lib/google/cloud/pubsub/v1/iam_policy.rb",
     "lib/google/cloud/pubsub/v1/iam_policy/client.rb",
     "lib/google/cloud/pubsub/v1/iam_policy/credentials.rb",
+    "lib/google/cloud/pubsub/v1/publisher/credentials.rb",
     "lib/google/cloud/pubsub/v1/topic_admin/helpers.rb",
+    "lib/google/cloud/pubsub/v1/subscriber/credentials.rb",
     "lib/google/cloud/pubsub/v1/subscription_admin/helpers.rb",
     "test/google/cloud/pubsub/v1/iam_policy_test.rb",
-    "test/google/cloud/pubsub/v1/publisher/helpers_test.rb",
-    "test/google/cloud/pubsub/v1/subscriber/helpers_test.rb"
+    "test/google/cloud/pubsub/v1/topic_admin/helpers_test.rb",
+    "test/google/cloud/pubsub/v1/subscription_admin/helpers_test.rb"
   ]
 }
