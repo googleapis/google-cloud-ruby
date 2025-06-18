@@ -36,6 +36,8 @@ class RegionalSecretManagerSnippetSpec < Minitest::Spec
   let(:label_key) { "label-key" }
   let(:label_value) { "label-value" }
 
+  let(:time_to_live) { 86_400 }
+
   let :client do
     Google::Cloud::SecretManager.secret_manager_service do |config|
       config.endpoint = api_endpoint
