@@ -153,6 +153,12 @@ module Google
           "#{project_path options}/topics/#{topic_name}"
         end
 
+        def subscriber_path subscription_name, options = {}
+          return subscription_name if subscription_name.to_s.include? "/"
+          "#{project_path options}/subscriptions/#{subscription_name}"
+        end
+
+
         ##
         # Retrieves a Publisher by topic name or full project path.
         #
@@ -180,6 +186,33 @@ module Google
           return Publisher.from_name topic_name, service, options if skip_lookup
           grpc = topic_admin_client.get_topic topic: publisher_path(topic_name, options)
           Publisher.from_grpc grpc
+        end
+
+        ##
+        # Retrieves a Subscriber by subscription name or full project path.
+        #
+        # @param [String] subscription_name Name of a subscription. The value can
+        #   be a simple subscription ID, in which case the current project ID
+        #   will be supplied, or a fully-qualified subscription name in the form
+        #   `projects/{project_id}/subscriptions/{subscription_id}`.
+        # @param [String] project If the subscription belongs to a project other
+        #   than the one currently connected to, the alternate project ID can be
+        #   specified here. Not used if a fully-qualified subscription name is
+        #   provided for `subscription_name`.
+        # @param [Boolean] skip_lookup Optionally create a {Subscription} object
+        #   without verifying the subscription resource exists on the Pub/Sub
+        #   service. Calls made on this object will raise errors if the service
+        #   resource does not exist. Default is `false`.
+        #
+        # @return [Google::Cloud::PubSub::Subscriber, nil] Returns `nil` if
+        #   the subscription does not exist
+        #
+        def subscriber subscription_name, project: nil, skip_lookup: nil
+          ensure_service!
+          options = { project: project }
+          return Subscriber.from_name subscription_name, service, options if skip_lookup
+          grpc = subscription_admin_client.get_subscription subscription: subscription_path(subscription_name, options)
+          Subscriber.from_grpc grpc
         end
 
         protected
