@@ -5326,7 +5326,7 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Match file stores (e.g. buckets) using regex filters.
+        # Match file stores (e.g. buckets) using filters.
         # @!attribute [rw] include_regexes
         #   @return [::Google::Cloud::Dlp::V2::FileStoreRegexes]
         #     Optional. A collection of regular expressions to match a file store
@@ -8071,6 +8071,17 @@ module Google
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
+        end
+
+        # Collection of findings saved to a Cloud Storage bucket. This is used as the
+        # proto schema for textproto files created when specifying a cloud storage
+        # path to save inspection findings.
+        # @!attribute [rw] findings
+        #   @return [::Array<::Google::Cloud::Dlp::V2::Finding>]
+        #     List of findings.
+        class SaveToGcsFindingsOutput
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # Enum of possible outcomes of transformations. SUCCESS if transformation and
