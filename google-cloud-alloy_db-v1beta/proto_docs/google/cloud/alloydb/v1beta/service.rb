@@ -429,7 +429,7 @@ module Google
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
 
-          # Details regarding the upgrade of instaces associated with a cluster.
+          # Details regarding the upgrade of instances associated with a cluster.
           # @!attribute [rw] name
           #   @return [::String]
           #     Normalized name of the instance.
@@ -630,6 +630,7 @@ module Google
 
         # Message for restoring a Cluster from a backup or another cluster at a given
         # point in time.
+        # NEXT_ID: 11
         # @!attribute [rw] backup_source
         #   @return [::Google::Cloud::AlloyDB::V1beta::BackupSource]
         #     Backup source.

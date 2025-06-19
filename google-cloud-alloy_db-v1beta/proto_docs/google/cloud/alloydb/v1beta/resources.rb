@@ -282,12 +282,19 @@ module Google
         #     if ContinuousBackup is not enabled.
         # @!attribute [r] schedule
         #   @return [::Array<::Google::Type::DayOfWeek>]
-        #     Output only. Days of the week on which a continuous backup is taken. Output
-        #     only field. Ignored if passed into the request.
+        #     Output only. Days of the week on which a continuous backup is taken.
         # @!attribute [r] earliest_restorable_time
         #   @return [::Google::Protobuf::Timestamp]
-        #     Output only. The earliest restorable time that can be restored to. Output
-        #     only field.
+        #     Output only. The earliest restorable time that can be restored to. If
+        #     continuous backups and recovery was recently enabled, the earliest
+        #     restorable time is the creation time of the earliest eligible backup within
+        #     this cluster's continuous backup recovery window. After a cluster has had
+        #     continuous backups enabled for the duration of its recovery window, the
+        #     earliest restorable time becomes "now minus the recovery window". For
+        #     example, assuming a point in time recovery is attempted at 04/16/2025
+        #     3:23:00PM with a 14d recovery window, the earliest restorable time would be
+        #     04/02/2025 3:23:00PM. This field is only visible if the
+        #     CLUSTER_VIEW_CONTINUOUS_BACKUP cluster view is provided.
         class ContinuousBackupInfo
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -326,6 +333,9 @@ module Google
         # @!attribute [rw] maintenance_windows
         #   @return [::Array<::Google::Cloud::AlloyDB::V1beta::MaintenanceUpdatePolicy::MaintenanceWindow>]
         #     Preferred windows to perform maintenance. Currently limited to 1.
+        # @!attribute [rw] deny_maintenance_periods
+        #   @return [::Array<::Google::Cloud::AlloyDB::V1beta::MaintenanceUpdatePolicy::DenyMaintenancePeriod>]
+        #     Periods to deny maintenance. Currently limited to 1.
         class MaintenanceUpdatePolicy
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -339,6 +349,32 @@ module Google
           #     Preferred time to start the maintenance operation on the specified day.
           #     Maintenance will start within 1 hour of this time.
           class MaintenanceWindow
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # DenyMaintenancePeriod definition. Excepting emergencies, maintenance
+          # will not be scheduled to start within this deny period. The start_date must
+          # be less than the end_date.
+          # @!attribute [rw] start_date
+          #   @return [::Google::Type::Date]
+          #     Deny period start date.
+          #     This can be:
+          #     * A full date, with non-zero year, month and day values OR
+          #     * A month and day value, with a zero year for recurring
+          # @!attribute [rw] end_date
+          #   @return [::Google::Type::Date]
+          #     Deny period end date.
+          #     This can be:
+          #     * A full date, with non-zero year, month and day values OR
+          #     * A month and day value, with a zero year for recurring
+          # @!attribute [rw] time
+          #   @return [::Google::Type::TimeOfDay]
+          #     Time in UTC when the deny period starts on start_date and ends on
+          #     end_date. This can be:
+          #     * Full time OR
+          #     * All zeros for 00:00:00 UTC
+          class DenyMaintenancePeriod
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
@@ -497,9 +533,10 @@ module Google
         #     Output only. The maintenance schedule for the cluster, generated for a
         #     specific rollout if a maintenance window is set.
         # @!attribute [rw] gemini_config
+        #   @deprecated This field is deprecated and may be removed in the next major version update.
         #   @return [::Google::Cloud::AlloyDB::V1beta::GeminiClusterConfig]
-        #     Optional. Configuration parameters related to the Gemini in Databases
-        #     add-on.
+        #     Optional. Deprecated and unused. This field will be removed in the near
+        #     future.
         # @!attribute [rw] subscription_type
         #   @return [::Google::Cloud::AlloyDB::V1beta::SubscriptionType]
         #     Optional. Subscription type of the cluster.
@@ -514,6 +551,12 @@ module Google
         #     "123/environment": "production",
         #     "123/costCenter": "marketing"
         #     ```
+        # @!attribute [r] service_account_email
+        #   @return [::String]
+        #     Output only. AlloyDB per-cluster service agent email. This service account
+        #     is created per-cluster per-project, and is different from that of the
+        #     primary service agent which is created per-project. The service account
+        #     naming format is subject to change.
         class Cluster
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -816,12 +859,25 @@ module Google
         #   @return [::Google::Cloud::AlloyDB::V1beta::Instance::InstanceNetworkConfig]
         #     Optional. Instance-level network configuration.
         # @!attribute [rw] gemini_config
+        #   @deprecated This field is deprecated and may be removed in the next major version update.
         #   @return [::Google::Cloud::AlloyDB::V1beta::GeminiInstanceConfig]
-        #     Optional. Configuration parameters related to the Gemini in Databases
-        #     add-on.
+        #     Optional. Deprecated and unused. This field will be removed in the near
+        #     future.
         # @!attribute [r] outbound_public_ip_addresses
         #   @return [::Array<::String>]
         #     Output only. All outbound public IP addresses configured for the instance.
+        # @!attribute [rw] activation_policy
+        #   @return [::Google::Cloud::AlloyDB::V1beta::Instance::ActivationPolicy]
+        #     Optional. Specifies whether an instance needs to spin up. Once the instance
+        #     is active, the activation policy can be updated to the `NEVER` to stop the
+        #     instance. Likewise, the activation policy can be updated to `ALWAYS` to
+        #     start the instance.
+        #     There are restrictions around when an instance can/cannot be activated (for
+        #     example, a read pool instance should be stopped before stopping primary
+        #     etc.). Please refer to the API documentation for more details.
+        # @!attribute [rw] connection_pool_config
+        #   @return [::Google::Cloud::AlloyDB::V1beta::Instance::ConnectionPoolConfig]
+        #     Optional. The configuration for Managed Connection Pool (MCP).
         # @!attribute [r] gca_config
         #   @return [::Google::Cloud::AlloyDB::V1beta::GCAInstanceConfig]
         #     Output only. Configuration parameters related to Gemini Cloud Assist.
@@ -930,6 +986,9 @@ module Google
           #   @return [::Boolean]
           #     Track client address for an instance.
           #     If not set, default value is "off".
+          # @!attribute [rw] assistive_experiences_enabled
+          #   @return [::Boolean]
+          #     Whether assistive experiences are enabled for this AlloyDB instance.
           class ObservabilityInstanceConfig
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -1010,9 +1069,33 @@ module Google
           # @!attribute [r] status
           #   @return [::String]
           #     Output only. The status of the PSC service automation connection.
+          #     Possible values:
+          #       "STATE_UNSPECIFIED" - An invalid state as the default case.
+          #       "ACTIVE" - The connection has been created successfully.
+          #       "FAILED" - The connection is not functional since some resources on the
+          #     connection fail to be created.
+          #       "CREATING" - The connection is being created.
+          #       "DELETING" - The connection is being deleted.
+          #       "CREATE_REPAIRING" - The connection is being repaired to complete
+          #     creation.
+          #       "DELETE_REPAIRING" - The connection is being repaired to complete
+          #     deletion.
           # @!attribute [r] consumer_network_status
           #   @return [::String]
           #     Output only. The status of the service connection policy.
+          #     Possible values:
+          #       "STATE_UNSPECIFIED" - Default state, when Connection Map is created
+          #     initially.
+          #       "VALID" - Set when policy and map configuration is valid, and their
+          #     matching can lead to allowing creation of PSC Connections subject to
+          #     other constraints like connections limit.
+          #       "CONNECTION_POLICY_MISSING" - No Service Connection Policy found for
+          #     this network and Service Class
+          #       "POLICY_LIMIT_REACHED" - Service Connection Policy limit reached for
+          #       this network and Service Class
+          #       "CONSUMER_INSTANCE_PROJECT_NOT_ALLOWLISTED" - The consumer instance
+          #     project is not in AllowedGoogleProducersResourceHierarchyLevels of the
+          #     matching ServiceConnectionPolicy.
           class PscAutoConnectionConfig
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -1059,6 +1142,22 @@ module Google
           #   @return [::Boolean]
           #     Optional. Enabling an outbound public IP address to support a database
           #     server sending requests out into the internet.
+          # @!attribute [r] network
+          #   @return [::String]
+          #     Output only. The resource link for the VPC network in which instance
+          #     resources are created and from which they are accessible via Private IP.
+          #     This will be the same value as the parent cluster's network. It is
+          #     specified in the form: //
+          #     `projects/{project_number}/global/networks/{network_id}`.
+          # @!attribute [rw] allocated_ip_range_override
+          #   @return [::String]
+          #     Optional. Name of the allocated IP range for the private IP AlloyDB
+          #     instance, for example: "google-managed-services-default". If set, the
+          #     instance IPs will be created from this allocated range and will override
+          #     the IP range used by the parent cluster. The range name must comply with
+          #     [RFC 1035](http://datatracker.ietf.org/doc/html/rfc1035). Specifically,
+          #     the name must be 1-63 characters long and match the regular expression
+          #     [a-z]([-a-z0-9]*[a-z0-9])?.
           class InstanceNetworkConfig
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -1070,6 +1169,39 @@ module Google
             class AuthorizedNetwork
               include ::Google::Protobuf::MessageExts
               extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
+          end
+
+          # Configuration for Managed Connection Pool (MCP).
+          # @!attribute [rw] enabled
+          #   @return [::Boolean]
+          #     Optional. Whether to enable Managed Connection Pool (MCP).
+          # @!attribute [rw] flags
+          #   @return [::Google::Protobuf::Map{::String => ::String}]
+          #     Optional. Connection Pool flags, as a list of "key": "value" pairs.
+          class ConnectionPoolConfig
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+
+            # @!attribute [rw] key
+            #   @return [::String]
+            # @!attribute [rw] value
+            #   @return [::String]
+            class FlagsEntry
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
+
+            # The pool mode. Defaults to `POOL_MODE_TRANSACTION`.
+            module PoolMode
+              # The pool mode is not specified. Defaults to `POOL_MODE_TRANSACTION`.
+              POOL_MODE_UNSPECIFIED = 0
+
+              # Server is released back to pool after a client disconnects.
+              POOL_MODE_SESSION = 1
+
+              # Server is released back to pool after a transaction finishes.
+              POOL_MODE_TRANSACTION = 2
             end
           end
 
@@ -1172,6 +1304,18 @@ module Google
             # Regional (or Highly) available instance.
             REGIONAL = 2
           end
+
+          # Specifies whether an instance needs to spin up.
+          module ActivationPolicy
+            # The policy is not specified.
+            ACTIVATION_POLICY_UNSPECIFIED = 0
+
+            # The instance is running.
+            ALWAYS = 1
+
+            # The instance is not running.
+            NEVER = 2
+          end
         end
 
         # ConnectionInfo singleton resource.
@@ -1232,9 +1376,15 @@ module Google
         # @!attribute [r] update_time
         #   @return [::Google::Protobuf::Timestamp]
         #     Output only. Update time stamp
+        #
+        #     Users should not infer any meaning from this field. Its value is generally
+        #     unrelated to the timing of the backup creation operation.
         # @!attribute [r] delete_time
         #   @return [::Google::Protobuf::Timestamp]
         #     Output only. Delete time stamp
+        # @!attribute [r] create_completion_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Output only. Timestamp when the resource finished being created.
         # @!attribute [rw] labels
         #   @return [::Google::Protobuf::Map{::String => ::String}]
         #     Labels as key value pairs
