@@ -29,6 +29,76 @@ module Google
     module Merchant
       module IssueResolution
         ##
+        # Create a new client object for AggregateProductStatusesService.
+        #
+        # By default, this returns an instance of
+        # [Google::Shopping::Merchant::IssueResolution::V1beta::AggregateProductStatusesService::Client](https://rubydoc.info/gems/google-shopping-merchant-issue_resolution-v1beta/Google/Shopping/Merchant/IssueResolution/V1beta/AggregateProductStatusesService/Client)
+        # for a gRPC client for version V1beta of the API.
+        # However, you can specify a different API version by passing it in the
+        # `version` parameter. If the AggregateProductStatusesService service is
+        # supported by that API version, and the corresponding gem is available, the
+        # appropriate versioned client will be returned.
+        # You can also specify a different transport by passing `:rest` or `:grpc` in
+        # the `transport` parameter.
+        #
+        # Raises an exception if the currently installed versioned client gem for the
+        # given API version does not support the given transport of the AggregateProductStatusesService service.
+        # You can determine whether the method will succeed by calling
+        # {Google::Shopping::Merchant::IssueResolution.aggregate_product_statuses_service_available?}.
+        #
+        # ## About AggregateProductStatusesService
+        #
+        # Service to manage aggregate product statuses.
+        #
+        # @param version [::String, ::Symbol] The API version to connect to. Optional.
+        #   Defaults to `:v1beta`.
+        # @param transport [:grpc, :rest] The transport to use. Defaults to `:grpc`.
+        # @return [::Object] A client object for the specified version.
+        #
+        def self.aggregate_product_statuses_service version: :v1beta, transport: :grpc, &block
+          require "google/shopping/merchant/issue_resolution/#{version.to_s.downcase}"
+
+          package_name = Google::Shopping::Merchant::IssueResolution
+                         .constants
+                         .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                         .first
+          service_module = Google::Shopping::Merchant::IssueResolution.const_get(package_name).const_get(:AggregateProductStatusesService)
+          service_module = service_module.const_get(:Rest) if transport == :rest
+          service_module.const_get(:Client).new(&block)
+        end
+
+        ##
+        # Determines whether the AggregateProductStatusesService service is supported by the current client.
+        # If true, you can retrieve a client object by calling {Google::Shopping::Merchant::IssueResolution.aggregate_product_statuses_service}.
+        # If false, that method will raise an exception. This could happen if the given
+        # API version does not exist or does not support the AggregateProductStatusesService service,
+        # or if the versioned client gem needs an update to support the AggregateProductStatusesService service.
+        #
+        # @param version [::String, ::Symbol] The API version to connect to. Optional.
+        #   Defaults to `:v1beta`.
+        # @param transport [:grpc, :rest] The transport to use. Defaults to `:grpc`.
+        # @return [boolean] Whether the service is available.
+        #
+        def self.aggregate_product_statuses_service_available? version: :v1beta, transport: :grpc
+          require "google/shopping/merchant/issue_resolution/#{version.to_s.downcase}"
+          package_name = Google::Shopping::Merchant::IssueResolution
+                         .constants
+                         .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                         .first
+          return false unless package_name
+          service_module = Google::Shopping::Merchant::IssueResolution.const_get package_name
+          return false unless service_module.const_defined? :AggregateProductStatusesService
+          service_module = service_module.const_get :AggregateProductStatusesService
+          if transport == :rest
+            return false unless service_module.const_defined? :Rest
+            service_module = service_module.const_get :Rest
+          end
+          service_module.const_defined? :Client
+        rescue ::LoadError
+          false
+        end
+
+        ##
         # Create a new client object for IssueResolutionService.
         #
         # By default, this returns an instance of
