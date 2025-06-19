@@ -62,6 +62,7 @@
     "proto_docs/google/protobuf/timestamp.rb",
     "proto_docs/google/protobuf/wrappers.rb",
     "proto_docs/google/rpc/status.rb",
+    "proto_docs/google/type/date.rb",
     "proto_docs/google/type/dayofweek.rb",
     "proto_docs/google/type/expr.rb",
     "proto_docs/google/type/timeofday.rb",
