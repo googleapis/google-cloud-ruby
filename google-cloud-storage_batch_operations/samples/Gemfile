@@ -28,7 +28,6 @@ else
   gem "google-cloud-storage_batch_operations"
   # [END storage_dependencies]
 end
-
 gem "yard"
 group :test do
   gem "google-style", "~> 1.30.0"
