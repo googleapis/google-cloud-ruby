@@ -22,17 +22,16 @@ describe "Storage Control Anywhere Cache" do
   let(:project_name)   { storage_client.project }
 
   before :all do
-    create_bucket_helper bucket_name
+     @bucket = create_bucket_helper bucket_name
   end
 
   after do
     delete_bucket_helper bucket_name
   end
 
-  it "Gets the storage layout" do
-    # layout_name = "projects/_/buckets/#{bucket_name}/storageLayout"
-    # binding.pry
+  it "create Anywhere cache" do
+     binding.pry
 
-    create_anywhere_cache bucket_name: bucket_name, project_name: project_name
+    create_anywhere_cache bucket_name: bucket_name, project_name: project_name, zone: @bucket.location
   end
 end
