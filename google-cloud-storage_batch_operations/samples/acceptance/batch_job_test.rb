@@ -15,7 +15,6 @@ describe "Batch jobs Snippets" do
   let(:file_content)   { "some content" }
   let(:remote_file_name) { "ruby_file_#{SecureRandom.hex}" }
 
-
   before :all do
     @bucket = create_bucket_helper random_bucket_name
   end
