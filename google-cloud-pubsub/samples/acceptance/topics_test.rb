@@ -16,6 +16,7 @@ require_relative "helper"
 require_relative "../pubsub_create_pull_subscription.rb"
 require_relative "../pubsub_create_push_subscription.rb"
 require_relative "../pubsub_create_topic.rb"
+require_relative "../pubsub_create_topic_with_cloud_storage_ingestion.rb"
 require_relative "../pubsub_dead_letter_create_subscription.rb"
 require_relative "../pubsub_dead_letter_delivery_attempt.rb"
 require_relative "../pubsub_dead_letter_remove.rb"
@@ -40,15 +41,18 @@ describe "topics" do
   let(:role) { "roles/pubsub.publisher" }
   let(:service_account_email) { "serviceAccount:kokoro@#{pubsub.project}.iam.gserviceaccount.com" }
   let(:topic_id) { random_topic_id }
+  let(:cloud_storage_ingestion_topic_id) { random_topic_id }
+  let(:cloud_storage_bucket) { "pubsub-ruby-sample-bucket" }
   let(:subscription_id) { random_subscription_id }
   let(:dead_letter_topic_id) { random_topic_id }
 
   after do
     @subscription.delete if @subscription
     @topic.delete if @topic
+    @cloud_storage_ingestion_topic.delete if @cloud_storage_ingestion_topic
   end
 
-  it "supports pubsub_create_topic, pubsub_list_topics, pubsub_set_topic_policy, pubsub_get_topic_policy, pubsub_test_topic_permissions, pubsub_delete_topic" do
+  it "supports pubsub_create_topic, pubsub_create_topic_with_cloud_storage_ingestion, pubsub_list_topics, pubsub_set_topic_policy, pubsub_get_topic_policy, pubsub_test_topic_permissions, pubsub_delete_topic" do
     # pubsub_create_topic
     assert_output "Topic projects/#{pubsub.project}/topics/#{topic_id} created.\n" do
       create_topic topic_id: topic_id
@@ -56,6 +60,20 @@ describe "topics" do
     topic = pubsub.topic topic_id
     assert topic
     assert_equal "projects/#{pubsub.project}/topics/#{topic_id}", topic.name
+
+    # pubsub_create_topic_with_cloud_storage_ingestion
+    # This test requires the existence of GCS bucket gs://pubsub-ruby-sample-bucket in `pubsub.project` with the P4SA for `pubsub.project` having the "storage.admin" role on the GCS bucket.
+    assert_output "Topic projects/#{pubsub.project}/topics/#{cloud_storage_ingestion_topic_id} with Cloud Storage ingestion settings created.\n" do
+      create_topic_with_cloud_storage_ingestion topic_id: cloud_storage_ingestion_topic_id,
+                                                bucket: cloud_storage_bucket,
+                                                input_format: "text",
+                                                text_delimiter: ",",
+                                                match_glob: "**.txt",
+                                                minimum_object_create_time: "1970-01-01T00:00:01Z"
+    end
+    @cloud_storage_ingestion_topic = pubsub.topic cloud_storage_ingestion_topic_id
+    assert @cloud_storage_ingestion_topic
+    assert_equal "projects/#{pubsub.project}/topics/#{cloud_storage_ingestion_topic_id}", @cloud_storage_ingestion_topic.name
 
     # pubsub_list_topics
     out, _err = capture_io do
@@ -196,7 +214,7 @@ describe "topics" do
     #setup
     @topic = pubsub.create_topic topic_id
     @dead_letter_topic = pubsub.create_topic dead_letter_topic_id
-    
+
     begin
       # pubsub_dead_letter_create_subscription
       out, _err = capture_io do
@@ -239,7 +257,6 @@ describe "topics" do
       @subscription.reload!
       refute @subscription.dead_letter_topic
       refute @subscription.dead_letter_max_delivery_attempts
-
     ensure
       @dead_letter_topic.delete
     end
@@ -399,7 +416,7 @@ describe "topics" do
   rescue Minitest::Assertion => e
     @attempt_number += 1
     puts "failed attempt #{@attempt_number} for #{sample_name}"
-    sleep @attempt_number*@attempt_number
+    sleep @attempt_number * @attempt_number
     retry if @attempt_number < attempts
     @attempt_number = nil
     raise e
