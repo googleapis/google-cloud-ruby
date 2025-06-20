@@ -30,8 +30,6 @@ describe "Storage Control Anywhere Cache" do
   end
 
   it "create Anywhere cache" do
-     binding.pry
-
     create_anywhere_cache bucket_name: bucket_name, project_name: project_name, zone: @bucket.location
   end
 end
