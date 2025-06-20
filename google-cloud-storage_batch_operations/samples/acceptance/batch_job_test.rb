@@ -69,7 +69,6 @@ describe "Batch jobs Snippets" do
   describe "creates a storage batch operation" do
     it "creates a job" do
       @job_name = "ruby-sbo-job-#{SecureRandom.hex}"
-
       assert_output "The #{@job_name} is created.\n" do
         create_test_job @job_name
       end
