@@ -47,6 +47,159 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # Request message for
+        # {::Google::Cloud::AIPlatform::V1::ModelGardenService::Client#deploy ModelGardenService.Deploy}.
+        # @!attribute [rw] publisher_model_name
+        #   @return [::String]
+        #     The Model Garden model to deploy.
+        #     Format:
+        #     `publishers/{publisher}/models/{publisher_model}@{version_id}`, or
+        #     `publishers/hf-{hugging-face-author}/models/{hugging-face-model-name}@001`.
+        #
+        #     Note: The following fields are mutually exclusive: `publisher_model_name`, `hugging_face_model_id`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] hugging_face_model_id
+        #   @return [::String]
+        #     The Hugging Face model to deploy.
+        #     Format: Hugging Face model ID like `google/gemma-2-2b-it`.
+        #
+        #     Note: The following fields are mutually exclusive: `hugging_face_model_id`, `publisher_model_name`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] destination
+        #   @return [::String]
+        #     Required. The resource name of the Location to deploy the model in.
+        #     Format: `projects/{project}/locations/{location}`
+        # @!attribute [rw] model_config
+        #   @return [::Google::Cloud::AIPlatform::V1::DeployRequest::ModelConfig]
+        #     Optional. The model config to use for the deployment.
+        #     If not specified, the default model config will be used.
+        # @!attribute [rw] endpoint_config
+        #   @return [::Google::Cloud::AIPlatform::V1::DeployRequest::EndpointConfig]
+        #     Optional. The endpoint config to use for the deployment.
+        #     If not specified, the default endpoint config will be used.
+        # @!attribute [rw] deploy_config
+        #   @return [::Google::Cloud::AIPlatform::V1::DeployRequest::DeployConfig]
+        #     Optional. The deploy config to use for the deployment.
+        #     If not specified, the default deploy config will be used.
+        class DeployRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # The model config to use for the deployment.
+          # @!attribute [rw] accept_eula
+          #   @return [::Boolean]
+          #     Optional. Whether the user accepts the End User License Agreement (EULA)
+          #     for the model.
+          # @!attribute [rw] hugging_face_access_token
+          #   @return [::String]
+          #     Optional. The Hugging Face read access token used to access the model
+          #     artifacts of gated models.
+          # @!attribute [rw] hugging_face_cache_enabled
+          #   @return [::Boolean]
+          #     Optional. If true, the model will deploy with a cached version instead of
+          #     directly downloading the model artifacts from Hugging Face. This is
+          #     suitable for VPC-SC users with limited internet access.
+          # @!attribute [rw] model_display_name
+          #   @return [::String]
+          #     Optional. The user-specified display name of the uploaded model. If not
+          #     set, a default name will be used.
+          # @!attribute [rw] container_spec
+          #   @return [::Google::Cloud::AIPlatform::V1::ModelContainerSpec]
+          #     Optional. The specification of the container that is to be used when
+          #     deploying. If not set, the default container spec will be used.
+          class ModelConfig
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # The endpoint config to use for the deployment.
+          # @!attribute [rw] endpoint_display_name
+          #   @return [::String]
+          #     Optional. The user-specified display name of the endpoint. If not set, a
+          #     default name will be used.
+          # @!attribute [rw] dedicated_endpoint_enabled
+          #   @return [::Boolean]
+          #     Optional. If true, the endpoint will be exposed through a dedicated
+          #     DNS [Endpoint.dedicated_endpoint_dns]. Your request to the dedicated DNS
+          #     will be isolated from other users' traffic and will have better
+          #     performance and reliability. Note: Once you enabled dedicated endpoint,
+          #     you won't be able to send request to the shared DNS
+          #     \\{region}-aiplatform.googleapis.com. The limitations will be removed soon.
+          class EndpointConfig
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # The deploy config to use for the deployment.
+          # @!attribute [rw] dedicated_resources
+          #   @return [::Google::Cloud::AIPlatform::V1::DedicatedResources]
+          #     Optional. The dedicated resources to use for the endpoint. If not set,
+          #     the default resources will be used.
+          # @!attribute [rw] fast_tryout_enabled
+          #   @return [::Boolean]
+          #     Optional. If true, enable the QMT fast tryout feature for this model if
+          #     possible.
+          # @!attribute [rw] system_labels
+          #   @return [::Google::Protobuf::Map{::String => ::String}]
+          #     Optional. System labels for Model Garden deployments.
+          #     These labels are managed by Google and for tracking purposes only.
+          class DeployConfig
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+
+            # @!attribute [rw] key
+            #   @return [::String]
+            # @!attribute [rw] value
+            #   @return [::String]
+            class SystemLabelsEntry
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
+          end
+        end
+
+        # Response message for
+        # {::Google::Cloud::AIPlatform::V1::ModelGardenService::Client#deploy ModelGardenService.Deploy}.
+        # @!attribute [r] publisher_model
+        #   @return [::String]
+        #     Output only. The name of the PublisherModel resource.
+        #     Format:
+        #     `publishers/{publisher}/models/{publisher_model}@{version_id}`, or
+        #     `publishers/hf-{hugging-face-author}/models/{hugging-face-model-name}@001`
+        # @!attribute [r] endpoint
+        #   @return [::String]
+        #     Output only. The name of the Endpoint created.
+        #     Format: `projects/{project}/locations/{location}/endpoints/{endpoint}`
+        # @!attribute [r] model
+        #   @return [::String]
+        #     Output only. The name of the Model created.
+        #     Format: `projects/{project}/locations/{location}/models/{model}`
+        class DeployResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Runtime operation information for
+        # {::Google::Cloud::AIPlatform::V1::ModelGardenService::Client#deploy ModelGardenService.Deploy}.
+        # @!attribute [rw] generic_metadata
+        #   @return [::Google::Cloud::AIPlatform::V1::GenericOperationMetadata]
+        #     The operation generic information.
+        # @!attribute [r] publisher_model
+        #   @return [::String]
+        #     Output only. The name of the model resource.
+        # @!attribute [r] destination
+        #   @return [::String]
+        #     Output only. The resource name of the Location to deploy the model in.
+        #     Format: `projects/{project}/locations/{location}`
+        # @!attribute [r] project_number
+        #   @return [::Integer]
+        #     Output only. The project number where the deploy model request is sent.
+        # @!attribute [r] model_id
+        #   @return [::String]
+        #     Output only. The model id to be used at query time.
+        class DeployOperationMetadata
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # View enumeration of PublisherModel.
         module PublisherModelView
           # The default / unset value. The API will default to the BASIC view.

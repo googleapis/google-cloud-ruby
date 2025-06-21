@@ -130,6 +130,78 @@ class ::Google::Cloud::AIPlatform::V1::ModelGardenService::ClientTest < Minitest
     end
   end
 
+  def test_deploy
+    # Create GRPC objects.
+    grpc_response = ::Google::Longrunning::Operation.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    publisher_model_name = "hello world"
+    destination = "hello world"
+    model_config = {}
+    endpoint_config = {}
+    deploy_config = {}
+
+    deploy_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :deploy, name
+      assert_kind_of ::Google::Cloud::AIPlatform::V1::DeployRequest, request
+      assert_equal "hello world", request["publisher_model_name"]
+      assert_equal :publisher_model_name, request.artifacts
+      assert_equal "hello world", request["destination"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::AIPlatform::V1::DeployRequest::ModelConfig), request["model_config"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::AIPlatform::V1::DeployRequest::EndpointConfig), request["endpoint_config"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::AIPlatform::V1::DeployRequest::DeployConfig), request["deploy_config"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, deploy_client_stub do
+      # Create client
+      client = ::Google::Cloud::AIPlatform::V1::ModelGardenService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.deploy({ publisher_model_name: publisher_model_name, destination: destination, model_config: model_config, endpoint_config: endpoint_config, deploy_config: deploy_config }) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.deploy publisher_model_name: publisher_model_name, destination: destination, model_config: model_config, endpoint_config: endpoint_config, deploy_config: deploy_config do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.deploy ::Google::Cloud::AIPlatform::V1::DeployRequest.new(publisher_model_name: publisher_model_name, destination: destination, model_config: model_config, endpoint_config: endpoint_config, deploy_config: deploy_config) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.deploy({ publisher_model_name: publisher_model_name, destination: destination, model_config: model_config, endpoint_config: endpoint_config, deploy_config: deploy_config }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.deploy(::Google::Cloud::AIPlatform::V1::DeployRequest.new(publisher_model_name: publisher_model_name, destination: destination, model_config: model_config, endpoint_config: endpoint_config, deploy_config: deploy_config), grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, deploy_client_stub.call_rpc_count
+    end
+  end
+
   def test_configure
     grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
 
@@ -147,5 +219,19 @@ class ::Google::Cloud::AIPlatform::V1::ModelGardenService::ClientTest < Minitest
 
     assert_same block_config, config
     assert_kind_of ::Google::Cloud::AIPlatform::V1::ModelGardenService::Client::Configuration, config
+  end
+
+  def test_operations_client
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+
+    client = nil
+    dummy_stub = ClientStub.new nil, nil
+    Gapic::ServiceStub.stub :new, dummy_stub do
+      client = ::Google::Cloud::AIPlatform::V1::ModelGardenService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+    end
+
+    assert_kind_of ::Google::Cloud::AIPlatform::V1::ModelGardenService::Operations, client.operations_client
   end
 end

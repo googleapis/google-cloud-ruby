@@ -256,6 +256,18 @@ module Google
         end
 
         # Request message for
+        # {::Google::Cloud::AIPlatform::V1::VertexRagDataService::Client#get_rag_engine_config VertexRagDataService.GetRagEngineConfig}
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The name of the RagEngineConfig resource.
+        #     Format:
+        #     `projects/{project}/locations/{location}/ragEngineConfig`
+        class GetRagEngineConfigRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for
         # {::Google::Cloud::AIPlatform::V1::VertexRagDataService::Client#update_rag_corpus VertexRagDataService.UpdateRagCorpus}.
         # @!attribute [rw] rag_corpus
         #   @return [::Google::Cloud::AIPlatform::V1::RagCorpus]
@@ -292,6 +304,29 @@ module Google
         #     This percentage is calculated as follows:
         #        progress_percentage = 100 * (successes + failures + skips) / total
         class ImportRagFilesOperationMetadata
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for
+        # {::Google::Cloud::AIPlatform::V1::VertexRagDataService::Client#update_rag_engine_config VertexRagDataService.UpdateRagEngineConfig}.
+        # @!attribute [rw] rag_engine_config
+        #   @return [::Google::Cloud::AIPlatform::V1::RagEngineConfig]
+        #     Required. The updated RagEngineConfig.
+        #
+        #     NOTE: Downgrading your RagManagedDb's ComputeTier could temporarily
+        #     increase request latencies until the operation is fully complete.
+        class UpdateRagEngineConfigRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Runtime operation information for
+        # {::Google::Cloud::AIPlatform::V1::VertexRagDataService::Client#update_rag_engine_config VertexRagDataService.UpdateRagEngineConfig}.
+        # @!attribute [rw] generic_metadata
+        #   @return [::Google::Cloud::AIPlatform::V1::GenericOperationMetadata]
+        #     The operation generic information.
+        class UpdateRagEngineConfigOperationMetadata
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end

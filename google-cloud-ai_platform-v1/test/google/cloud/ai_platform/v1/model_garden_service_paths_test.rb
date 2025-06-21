@@ -41,6 +41,18 @@ class ::Google::Cloud::AIPlatform::V1::ModelGardenService::ClientPathsTest < Min
     end
   end
 
+  def test_location_path
+    grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
+      client = ::Google::Cloud::AIPlatform::V1::ModelGardenService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      path = client.location_path project: "value0", location: "value1"
+      assert_equal "projects/value0/locations/value1", path
+    end
+  end
+
   def test_publisher_model_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
     ::Gapic::ServiceStub.stub :new, DummyStub.new do
@@ -50,6 +62,18 @@ class ::Google::Cloud::AIPlatform::V1::ModelGardenService::ClientPathsTest < Min
 
       path = client.publisher_model_path publisher: "value0", model: "value1"
       assert_equal "publishers/value0/models/value1", path
+    end
+  end
+
+  def test_reservation_path
+    grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
+      client = ::Google::Cloud::AIPlatform::V1::ModelGardenService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      path = client.reservation_path project_id_or_number: "value0", zone: "value1", reservation_name: "value2"
+      assert_equal "projects/value0/zones/value1/reservations/value2", path
     end
   end
 end

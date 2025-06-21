@@ -24,6 +24,7 @@ require "google/cloud/ai_platform/v1/version"
 
 require "google/cloud/ai_platform/v1/model_garden_service/credentials"
 require "google/cloud/ai_platform/v1/model_garden_service/paths"
+require "google/cloud/ai_platform/v1/model_garden_service/operations"
 require "google/cloud/ai_platform/v1/model_garden_service/client"
 require "google/cloud/ai_platform/v1/model_garden_service/rest"
 

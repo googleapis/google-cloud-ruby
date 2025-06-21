@@ -544,6 +544,73 @@ module Google
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
+
+        # Configuration message for RagManagedDb used by RagEngine.
+        # @!attribute [rw] scaled
+        #   @return [::Google::Cloud::AIPlatform::V1::RagManagedDbConfig::Scaled]
+        #     Sets the RagManagedDb to the Scaled tier.
+        #
+        #     Note: The following fields are mutually exclusive: `scaled`, `basic`, `unprovisioned`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] basic
+        #   @return [::Google::Cloud::AIPlatform::V1::RagManagedDbConfig::Basic]
+        #     Sets the RagManagedDb to the Basic tier.
+        #
+        #     Note: The following fields are mutually exclusive: `basic`, `scaled`, `unprovisioned`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] unprovisioned
+        #   @return [::Google::Cloud::AIPlatform::V1::RagManagedDbConfig::Unprovisioned]
+        #     Sets the RagManagedDb to the Unprovisioned tier.
+        #
+        #     Note: The following fields are mutually exclusive: `unprovisioned`, `scaled`, `basic`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        class RagManagedDbConfig
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Scaled tier offers production grade performance along with
+          # autoscaling functionality. It is suitable for customers with large
+          # amounts of data or performance sensitive workloads.
+          class Scaled
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Basic tier is a cost-effective and low compute tier suitable for
+          # the following cases:
+          # * Experimenting with RagManagedDb.
+          # * Small data size.
+          # * Latency insensitive workload.
+          # * Only using RAG Engine with external vector DBs.
+          #
+          # NOTE: This is the default tier if not explicitly chosen.
+          class Basic
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Disables the RAG Engine service and deletes all your data held
+          # within this service. This will halt the billing of the service.
+          #
+          # NOTE: Once deleted the data cannot be recovered. To start using
+          # RAG Engine again, you will need to update the tier by calling the
+          # UpdateRagEngineConfig API.
+          class Unprovisioned
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+        end
+
+        # Config for RagEngine.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Identifier. The name of the RagEngineConfig.
+        #     Format:
+        #     `projects/{project}/locations/{location}/ragEngineConfig`
+        # @!attribute [rw] rag_managed_db_config
+        #   @return [::Google::Cloud::AIPlatform::V1::RagManagedDbConfig]
+        #     The config of the RagManagedDb used by RagEngine.
+        class RagEngineConfig
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
       end
     end
   end

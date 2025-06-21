@@ -53,6 +53,10 @@ module Google
             rpc :ListRagFiles, ::Google::Cloud::AIPlatform::V1::ListRagFilesRequest, ::Google::Cloud::AIPlatform::V1::ListRagFilesResponse
             # Deletes a RagFile.
             rpc :DeleteRagFile, ::Google::Cloud::AIPlatform::V1::DeleteRagFileRequest, ::Google::Longrunning::Operation
+            # Updates a RagEngineConfig.
+            rpc :UpdateRagEngineConfig, ::Google::Cloud::AIPlatform::V1::UpdateRagEngineConfigRequest, ::Google::Longrunning::Operation
+            # Gets a RagEngineConfig.
+            rpc :GetRagEngineConfig, ::Google::Cloud::AIPlatform::V1::GetRagEngineConfigRequest, ::Google::Cloud::AIPlatform::V1::RagEngineConfig
           end
 
           Stub = Service.rpc_stub_class
