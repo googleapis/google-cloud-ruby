@@ -45,13 +45,15 @@ module Google
         #   @return [::String]
         #     Optional. The ISO-639 language code of the input text if
         #     known, for example, "en-US" or "sr-Latn". Supported language codes are
-        #     listed in Language Support. If the source language isn't specified, the API
-        #     attempts to identify the source language automatically and returns the
-        #     source language within the response.
+        #     listed in [Language
+        #     Support](https://cloud.google.com/translate/docs/languages). If the source
+        #     language isn't specified, the API attempts to identify the source language
+        #     automatically and returns the source language within the response.
         # @!attribute [rw] target_language_code
         #   @return [::String]
         #     Required. The ISO-639 language code to use for translation of the input
-        #     text, set to one of the language codes listed in Language Support.
+        #     text, set to one of the language codes listed in [Language
+        #     Support](https://cloud.google.com/translate/docs/languages).
         # @!attribute [rw] parent
         #   @return [::String]
         #     Required. Project or location to make a call. Must refer to a caller's
@@ -185,9 +187,12 @@ module Google
         # @!attribute [rw] source_language_code
         #   @return [::String]
         #     Optional. The ISO-639 language code of the input text if
-        #     known, for example, "hi" or "zh". If the source language isn't specified,
-        #     the API attempts to identify the source language automatically and returns
-        #     the source language for each content in the response.
+        #     known, for example, "hi" or "zh". Supported language codes are
+        #     listed in [Language
+        #     Support](https://cloud.google.com/translate/docs/languages#roman). If the
+        #     source language isn't specified, the API attempts to identify the source
+        #     language automatically and returns the source language for each content in
+        #     the response.
         class RomanizeTextRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -618,14 +623,16 @@ module Google
         #   @return [::String]
         #     Optional. The ISO-639 language code of the input document if known, for
         #     example, "en-US" or "sr-Latn". Supported language codes are listed in
-        #     Language Support. If the source language isn't specified, the API attempts
-        #     to identify the source language automatically and returns the source
-        #     language within the response. Source language must be specified if the
-        #     request contains a glossary or a custom model.
+        #     [Language Support] (https://cloud.google.com/translate/docs/languages). If
+        #     the source language isn't specified, the API attempts to identify the
+        #     source language automatically and returns the source language within the
+        #     response. Source language must be specified if the request contains a
+        #     glossary or a custom model.
         # @!attribute [rw] target_language_code
         #   @return [::String]
         #     Required. The ISO-639 language code to use for translation of the input
-        #     document, set to one of the language codes listed in Language Support.
+        #     document, set to one of the language codes listed in [Language Support]
+        #     (https://cloud.google.com/translate/docs/languages).
         # @!attribute [rw] document_input_config
         #   @return [::Google::Cloud::Translate::V3::DocumentInputConfig]
         #     Required. Input configurations.
@@ -763,10 +770,14 @@ module Google
         #     error is returned.
         # @!attribute [rw] source_language_code
         #   @return [::String]
-        #     Required. Source language code.
+        #     Required. Source language code. Supported language codes are listed in
+        #     [Language
+        #     Support](https://cloud.google.com/translate/docs/languages).
         # @!attribute [rw] target_language_codes
         #   @return [::Array<::String>]
-        #     Required. Specify up to 10 language codes here.
+        #     Required. Specify up to 10 language codes here. Supported language codes
+        #     are listed in [Language
+        #     Support](https://cloud.google.com/translate/docs/languages).
         # @!attribute [rw] models
         #   @return [::Google::Protobuf::Map{::String => ::String}]
         #     Optional. The models to use for translation. Map's key is target language
@@ -1330,7 +1341,9 @@ module Google
         # @!attribute [rw] target_language_codes
         #   @return [::Array<::String>]
         #     Required. The ISO-639 language code to use for translation of the input
-        #     document. Specify up to 10 language codes here.
+        #     document. Specify up to 10 language codes here. Supported language codes
+        #     are listed in [Language
+        #     Support](https://cloud.google.com/translate/docs/languages).
         # @!attribute [rw] input_configs
         #   @return [::Array<::Google::Cloud::Translate::V3::BatchDocumentInputConfig>]
         #     Required. Input configurations.
