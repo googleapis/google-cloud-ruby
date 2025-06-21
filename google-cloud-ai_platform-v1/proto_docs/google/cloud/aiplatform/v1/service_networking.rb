@@ -21,8 +21,8 @@ module Google
   module Cloud
     module AIPlatform
       module V1
-        # PSC config that is used to automatically create forwarding rule via
-        # ServiceConnectionMap.
+        # PSC config that is used to automatically create PSC endpoints in the user
+        # projects.
         # @!attribute [rw] project_id
         #   @return [::String]
         #     Required. Project id used to create forwarding rule.
@@ -30,10 +30,20 @@ module Google
         #   @return [::String]
         #     Required. The full name of the Google Compute Engine
         #     [network](https://cloud.google.com/compute/docs/networks-and-firewalls#networks).
-        #     [Format](https://cloud.google.com/compute/docs/reference/rest/v1/networks/insert):
+        #     [Format](https://cloud.google.com/compute/docs/reference/rest/v1/networks/get):
         #     `projects/{project}/global/networks/{network}`.
-        #     Where \\{project} is a project number, as in '12345', and \\{network} is
-        #     network name.
+        # @!attribute [r] ip_address
+        #   @return [::String]
+        #     Output only. IP address rule created by the PSC service automation.
+        # @!attribute [r] forwarding_rule
+        #   @return [::String]
+        #     Output only. Forwarding rule created by the PSC service automation.
+        # @!attribute [r] state
+        #   @return [::Google::Cloud::AIPlatform::V1::PSCAutomationState]
+        #     Output only. The state of the PSC service automation.
+        # @!attribute [r] error_message
+        #   @return [::String]
+        #     Output only. Error message if the PSC service automation failed.
         class PSCAutomationConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -47,6 +57,10 @@ module Google
         #   @return [::Array<::String>]
         #     A list of Projects from which the forwarding rule will target the service
         #     attachment.
+        # @!attribute [rw] psc_automation_configs
+        #   @return [::Array<::Google::Cloud::AIPlatform::V1::PSCAutomationConfig>]
+        #     Optional. List of projects and networks where the PSC endpoints will be
+        #     created. This field is used by Online Inference(Prediction) only.
         # @!attribute [r] service_attachment
         #   @return [::String]
         #     Output only. The name of the generated service attachment resource.
@@ -116,6 +130,18 @@ module Google
         class DnsPeeringConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # The state of the PSC service automation.
+        module PSCAutomationState
+          # Should not be used.
+          PSC_AUTOMATION_STATE_UNSPECIFIED = 0
+
+          # The PSC service automation is successful.
+          PSC_AUTOMATION_STATE_SUCCESSFUL = 1
+
+          # The PSC service automation has failed.
+          PSC_AUTOMATION_STATE_FAILED = 2
         end
       end
     end
