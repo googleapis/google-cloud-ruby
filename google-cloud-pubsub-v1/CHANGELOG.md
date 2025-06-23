@@ -1,5 +1,14 @@
 # Release History
 
+### 1.10.0 (2025-06-23)
+
+#### Features
+
+* Add SchemaViolationReason to IngestionFailureEvent ([#30433](https://github.com/googleapis/google-cloud-ruby/issues/30433)) 
+#### Documentation
+
+* Standardize spelling of "acknowledgment" in Pub/Sub protos 
+
 ### 1.9.0 (2025-05-12)
 
 #### Features
