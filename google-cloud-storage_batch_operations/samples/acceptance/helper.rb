@@ -46,7 +46,7 @@ def retry_job_status
   5.times do
     if yield[/job_status-\s*(\w+)/, 1] == "RUNNING"
       puts "Job in Running status Gonna try again"
-      sleep rand(5..9)
+      sleep rand(10..16)
     end
   end
 end
