@@ -21,27 +21,74 @@ module Google
   module Cloud
     module DeveloperConnect
       module V1
+        # Message for requesting a list of Users
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. Parent value for ListUsersRequest
+        # @!attribute [rw] page_size
+        #   @return [::Integer]
+        #     Optional. Requested page size. Server may return fewer items than
+        #     requested. If unspecified, server will pick an appropriate default.
+        # @!attribute [rw] page_token
+        #   @return [::String]
+        #     Optional. A token identifying a page of results the server should return.
+        # @!attribute [rw] filter
+        #   @return [::String]
+        #     Optional. Filtering results
+        # @!attribute [rw] order_by
+        #   @return [::String]
+        #     Optional. Hint for how to order the results
+        class ListUsersRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Message for response to listing Users
+        # @!attribute [rw] users
+        #   @return [::Array<::Google::Cloud::DeveloperConnect::V1::User>]
+        #     The list of Users
+        # @!attribute [rw] next_page_token
+        #   @return [::String]
+        #     A token identifying a page of results the server should return.
+        # @!attribute [rw] unreachable
+        #   @return [::Array<::String>]
+        #     Locations that could not be reached.
+        class ListUsersResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # Message describing Connection object
         # @!attribute [rw] github_config
         #   @return [::Google::Cloud::DeveloperConnect::V1::GitHubConfig]
         #     Configuration for connections to github.com.
         #
-        #     Note: The following fields are mutually exclusive: `github_config`, `github_enterprise_config`, `gitlab_config`, `gitlab_enterprise_config`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `github_config`, `github_enterprise_config`, `gitlab_config`, `gitlab_enterprise_config`, `bitbucket_data_center_config`, `bitbucket_cloud_config`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] github_enterprise_config
         #   @return [::Google::Cloud::DeveloperConnect::V1::GitHubEnterpriseConfig]
         #     Configuration for connections to an instance of GitHub Enterprise.
         #
-        #     Note: The following fields are mutually exclusive: `github_enterprise_config`, `github_config`, `gitlab_config`, `gitlab_enterprise_config`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `github_enterprise_config`, `github_config`, `gitlab_config`, `gitlab_enterprise_config`, `bitbucket_data_center_config`, `bitbucket_cloud_config`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] gitlab_config
         #   @return [::Google::Cloud::DeveloperConnect::V1::GitLabConfig]
         #     Configuration for connections to gitlab.com.
         #
-        #     Note: The following fields are mutually exclusive: `gitlab_config`, `github_config`, `github_enterprise_config`, `gitlab_enterprise_config`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `gitlab_config`, `github_config`, `github_enterprise_config`, `gitlab_enterprise_config`, `bitbucket_data_center_config`, `bitbucket_cloud_config`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] gitlab_enterprise_config
         #   @return [::Google::Cloud::DeveloperConnect::V1::GitLabEnterpriseConfig]
         #     Configuration for connections to an instance of GitLab Enterprise.
         #
-        #     Note: The following fields are mutually exclusive: `gitlab_enterprise_config`, `github_config`, `github_enterprise_config`, `gitlab_config`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `gitlab_enterprise_config`, `github_config`, `github_enterprise_config`, `gitlab_config`, `bitbucket_data_center_config`, `bitbucket_cloud_config`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] bitbucket_data_center_config
+        #   @return [::Google::Cloud::DeveloperConnect::V1::BitbucketDataCenterConfig]
+        #     Configuration for connections to an instance of Bitbucket Data Center.
+        #
+        #     Note: The following fields are mutually exclusive: `bitbucket_data_center_config`, `github_config`, `github_enterprise_config`, `gitlab_config`, `gitlab_enterprise_config`, `bitbucket_cloud_config`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] bitbucket_cloud_config
+        #   @return [::Google::Cloud::DeveloperConnect::V1::BitbucketCloudConfig]
+        #     Configuration for connections to an instance of Bitbucket Clouds.
+        #
+        #     Note: The following fields are mutually exclusive: `bitbucket_cloud_config`, `github_config`, `github_enterprise_config`, `gitlab_config`, `gitlab_enterprise_config`, `bitbucket_data_center_config`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] name
         #   @return [::String]
         #     Identifier. The resource name of the connection, in the format
@@ -80,12 +127,16 @@ module Google
         #     client has an up-to-date value before proceeding.
         # @!attribute [r] uid
         #   @return [::String]
-        #     Output only. A system-assigned unique identifier for a the
-        #     GitRepositoryLink.
+        #     Output only. A system-assigned unique identifier for the Connection.
         # @!attribute [rw] crypto_key_config
         #   @return [::Google::Cloud::DeveloperConnect::V1::CryptoKeyConfig]
         #     Optional. The crypto key configuration. This field is used by the
         #     Customer-Managed Encryption Keys (CMEK) feature.
+        # @!attribute [rw] git_proxy_config
+        #   @return [::Google::Cloud::DeveloperConnect::V1::GitProxyConfig]
+        #     Optional. Configuration for the git proxy feature. Enabling the git proxy
+        #     allows clients to perform git operations on the repositories linked in the
+        #     connection.
         class Connection
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -117,6 +168,16 @@ module Google
         #     data. For key in Cloud KMS, the key should be in the format of
         #     `projects/*/locations/*/keyRings/*/cryptoKeys/*`.
         class CryptoKeyConfig
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # The git proxy configuration.
+        # @!attribute [rw] enabled
+        #   @return [::Boolean]
+        #     Optional. Setting this to true allows the git proxy to be used for
+        #     performing git operations on the repositories linked in the connection.
+        class GitProxyConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
@@ -342,6 +403,71 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # Configuration for connections to an instance of Bitbucket Data Center.
+        # @!attribute [rw] host_uri
+        #   @return [::String]
+        #     Required. The URI of the Bitbucket Data Center host this connection is for.
+        # @!attribute [rw] webhook_secret_secret_version
+        #   @return [::String]
+        #     Required. Immutable. SecretManager resource containing the webhook secret
+        #     used to verify webhook events, formatted as
+        #     `projects/*/secrets/*/versions/*`. This is used to validate webhooks.
+        # @!attribute [rw] read_authorizer_credential
+        #   @return [::Google::Cloud::DeveloperConnect::V1::UserCredential]
+        #     Required. An http access token with the minimum `Repository read` access.
+        #     It's recommended to use a system account to generate the credentials.
+        # @!attribute [rw] authorizer_credential
+        #   @return [::Google::Cloud::DeveloperConnect::V1::UserCredential]
+        #     Required. An http access token with the minimum `Repository admin` scope
+        #     access. This is needed to create webhooks. It's recommended to use a system
+        #     account to generate these credentials.
+        # @!attribute [rw] service_directory_config
+        #   @return [::Google::Cloud::DeveloperConnect::V1::ServiceDirectoryConfig]
+        #     Optional. Configuration for using Service Directory to privately connect to
+        #     a Bitbucket Data Center instance. This should only be set if the Bitbucket
+        #     Data Center is hosted on-premises and not reachable by public internet. If
+        #     this field is left empty, calls to the Bitbucket Data Center will be made
+        #     over the public internet.
+        # @!attribute [rw] ssl_ca_certificate
+        #   @return [::String]
+        #     Optional. SSL certificate authority to trust when making requests to
+        #     Bitbucket Data Center.
+        # @!attribute [r] server_version
+        #   @return [::String]
+        #     Output only. Version of the Bitbucket Data Center server running on the
+        #     `host_uri`.
+        class BitbucketDataCenterConfig
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Configuration for connections to an instance of Bitbucket Cloud.
+        # @!attribute [rw] workspace
+        #   @return [::String]
+        #     Required. The Bitbucket Cloud Workspace ID to be connected to Google Cloud
+        #     Platform.
+        # @!attribute [rw] webhook_secret_secret_version
+        #   @return [::String]
+        #     Required. Immutable. SecretManager resource containing the webhook secret
+        #     used to verify webhook events, formatted as
+        #     `projects/*/secrets/*/versions/*`. This is used to validate and create
+        #     webhooks.
+        # @!attribute [rw] read_authorizer_credential
+        #   @return [::Google::Cloud::DeveloperConnect::V1::UserCredential]
+        #     Required. An access token with the minimum `repository` access.
+        #     It can either be a workspace, project or repository access token.
+        #     It's recommended to use a system account to generate the credentials.
+        # @!attribute [rw] authorizer_credential
+        #   @return [::Google::Cloud::DeveloperConnect::V1::UserCredential]
+        #     Required. An access token with the minimum `repository`, `pullrequest` and
+        #     `webhook` scope access. It can either be a workspace, project or repository
+        #     access token. This is needed to create webhooks. It's recommended to use a
+        #     system account to generate these credentials.
+        class BitbucketCloudConfig
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # Message for requesting list of Connections
         # @!attribute [rw] parent
         #   @return [::String]
@@ -496,6 +622,193 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # Message for requesting list of AccountConnectors
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. Parent value for ListAccountConnectorsRequest
+        # @!attribute [rw] page_size
+        #   @return [::Integer]
+        #     Optional. Requested page size. Server may return fewer items than
+        #     requested. If unspecified, server will pick an appropriate default.
+        # @!attribute [rw] page_token
+        #   @return [::String]
+        #     Optional. A token identifying a page of results the server should return.
+        # @!attribute [rw] filter
+        #   @return [::String]
+        #     Optional. Filtering results
+        # @!attribute [rw] order_by
+        #   @return [::String]
+        #     Optional. Hint for how to order the results
+        class ListAccountConnectorsRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Message for response to listing AccountConnectors
+        # @!attribute [rw] account_connectors
+        #   @return [::Array<::Google::Cloud::DeveloperConnect::V1::AccountConnector>]
+        #     The list of AccountConnectors
+        # @!attribute [rw] next_page_token
+        #   @return [::String]
+        #     A token identifying a page of results the server should return.
+        # @!attribute [rw] unreachable
+        #   @return [::Array<::String>]
+        #     Locations that could not be reached.
+        class ListAccountConnectorsResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Message for getting a AccountConnector
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. Name of the resource
+        class GetAccountConnectorRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. Location resource name as the account_connector’s parent.
+        # @!attribute [rw] account_connector_id
+        #   @return [::String]
+        #     Required. The ID to use for the AccountConnector, which will become the
+        #     final component of the AccountConnector's resource name. Its format should
+        #     adhere to https://google.aip.dev/122#resource-id-segments Names must be
+        #     unique per-project per-location.
+        # @!attribute [rw] account_connector
+        #   @return [::Google::Cloud::DeveloperConnect::V1::AccountConnector]
+        #     Required. The AccountConnector to create.
+        # @!attribute [rw] request_id
+        #   @return [::String]
+        #     Optional. An optional request ID to identify requests. Specify a unique
+        #     request ID so that if you must retry your request, the server will know to
+        #     ignore the request if it has already been completed. The server will
+        #     guarantee that for at least 60 minutes since the first request.
+        #
+        #     For example, consider a situation where you make an initial request and the
+        #     request times out. If you make the request again with the same request
+        #     ID, the server can check if original operation with the same request ID
+        #     was received, and if so, will ignore the second request. This prevents
+        #     clients from accidentally creating duplicate commitments.
+        #
+        #     The request ID must be a valid UUID with the exception that zero UUID is
+        #     not supported (00000000-0000-0000-0000-000000000000).
+        # @!attribute [rw] validate_only
+        #   @return [::Boolean]
+        #     Optional. If set, validate the request, but do not actually post it.
+        class CreateAccountConnectorRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Message for updating a AccountConnector
+        # @!attribute [rw] update_mask
+        #   @return [::Google::Protobuf::FieldMask]
+        #     Optional. The list of fields to be updated.
+        # @!attribute [rw] account_connector
+        #   @return [::Google::Cloud::DeveloperConnect::V1::AccountConnector]
+        #     Required. The AccountConnector to update.
+        # @!attribute [rw] request_id
+        #   @return [::String]
+        #     Optional. An optional request ID to identify requests. Specify a unique
+        #     request ID so that if you must retry your request, the server will know to
+        #     ignore the request if it has already been completed. The server will
+        #     guarantee that for at least 60 minutes since the first request.
+        #
+        #     For example, consider a situation where you make an initial request and the
+        #     request times out. If you make the request again with the same request
+        #     ID, the server can check if original operation with the same request ID
+        #     was received, and if so, will ignore the second request. This prevents
+        #     clients from accidentally creating duplicate commitments.
+        #
+        #     The request ID must be a valid UUID with the exception that zero UUID is
+        #     not supported (00000000-0000-0000-0000-000000000000).
+        # @!attribute [rw] allow_missing
+        #   @return [::Boolean]
+        #     Optional. If set to true, and the accountConnector is not found a new
+        #     accountConnector will be created. In this situation `update_mask` is
+        #     ignored. The creation will succeed only if the input accountConnector has
+        #     all the necessary
+        # @!attribute [rw] validate_only
+        #   @return [::Boolean]
+        #     Optional. If set, validate the request, but do not actually post it.
+        class UpdateAccountConnectorRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Message for deleting a AccountConnector
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. Name of the resource
+        # @!attribute [rw] request_id
+        #   @return [::String]
+        #     Optional. An optional request ID to identify requests. Specify a unique
+        #     request ID so that if you must retry your request, the server will know to
+        #     ignore the request if it has already been completed. The server will
+        #     guarantee that for at least 60 minutes after the first request.
+        #
+        #     For example, consider a situation where you make an initial request and the
+        #     request times out. If you make the request again with the same request
+        #     ID, the server can check if original operation with the same request ID
+        #     was received, and if so, will ignore the second request. This prevents
+        #     clients from accidentally creating duplicate commitments.
+        #
+        #     The request ID must be a valid UUID with the exception that zero UUID is
+        #     not supported (00000000-0000-0000-0000-000000000000).
+        # @!attribute [rw] validate_only
+        #   @return [::Boolean]
+        #     Optional. If set, validate the request, but do not actually post it.
+        # @!attribute [rw] etag
+        #   @return [::String]
+        #     Optional. The current etag of the AccountConnectorn.
+        #     If an etag is provided and does not match the current etag of the
+        #     AccountConnector, deletion will be blocked and an ABORTED error will be
+        #     returned.
+        # @!attribute [rw] force
+        #   @return [::Boolean]
+        #     Optional. If set to true, any Users from this AccountConnector will also
+        #     be deleted. (Otherwise, the request will only work if the AccountConnector
+        #     has no Users.)
+        class DeleteAccountConnectorRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Message for deleting a User
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. Name of the resource
+        # @!attribute [rw] request_id
+        #   @return [::String]
+        #     Optional. An optional request ID to identify requests. Specify a unique
+        #     request ID so that if you must retry your request, the server will know to
+        #     ignore the request if it has already been completed. The server will
+        #     guarantee that for at least 60 minutes after the first request.
+        #
+        #     For example, consider a situation where you make an initial request and the
+        #     request times out. If you make the request again with the same request
+        #     ID, the server can check if original operation with the same request ID
+        #     was received, and if so, will ignore the second request. This prevents
+        #     clients from accidentally creating duplicate commitments.
+        #
+        #     The request ID must be a valid UUID with the exception that zero UUID is
+        #     not supported (00000000-0000-0000-0000-000000000000).
+        # @!attribute [rw] validate_only
+        #   @return [::Boolean]
+        #     Optional. If set, validate the request, but do not actually post it.
+        # @!attribute [rw] etag
+        #   @return [::String]
+        #     Optional. This checksum is computed by the server based on the value of
+        #     other fields, and may be sent on update and delete requests to ensure the
+        #     client has an up-to-date value before proceeding.
+        class DeleteUserRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # Represents the metadata of the long-running operation.
         # @!attribute [r] create_time
         #   @return [::Google::Protobuf::Timestamp]
@@ -524,6 +837,65 @@ module Google
         #   @return [::String]
         #     Output only. API version used to start the operation.
         class OperationMetadata
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Message for fetching a User of the user themselves.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. Name of the AccountConnector resource
+        class FetchSelfRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Message for deleting a User of the user themselves.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. Name of the AccountConnector resource
+        class DeleteSelfRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Message for fetching an OAuth access token.
+        # @!attribute [rw] account_connector
+        #   @return [::String]
+        #     Required. The resource name of the AccountConnector in the format
+        #     `projects/*/locations/*/accountConnectors/*`.
+        class FetchAccessTokenRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Message for responding to getting an OAuth access token.
+        # @!attribute [rw] token
+        #   @return [::String]
+        #     The token content.
+        # @!attribute [rw] expiration_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Expiration timestamp. Can be empty if unknown or non-expiring.
+        # @!attribute [rw] scopes
+        #   @return [::Array<::String>]
+        #     The scopes of the access token.
+        # @!attribute [rw] exchange_error
+        #   @return [::Google::Cloud::DeveloperConnect::V1::ExchangeError]
+        #     The error resulted from exchanging OAuth tokens from the service provider.
+        class FetchAccessTokenResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Message for representing an error from exchanging OAuth tokens.
+        # @!attribute [rw] code
+        #   @return [::String]
+        #     https://datatracker.ietf.org/doc/html/rfc6749#section-5.2 - error
+        # @!attribute [rw] description
+        #   @return [::String]
+        #     https://datatracker.ietf.org/doc/html/rfc6749#section-5.2 -
+        #     error_description
+        class ExchangeError
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
@@ -562,11 +934,15 @@ module Google
         #     Optional. Allows clients to store small amounts of arbitrary data.
         # @!attribute [r] uid
         #   @return [::String]
-        #     Output only. A system-assigned unique identifier for a the
-        #     GitRepositoryLink.
+        #     Output only. A system-assigned unique identifier for the GitRepositoryLink.
         # @!attribute [r] webhook_id
         #   @return [::String]
         #     Output only. External ID of the webhook created for the repository.
+        # @!attribute [r] git_proxy_uri
+        #   @return [::String]
+        #     Output only. URI to access the linked repository through the Git Proxy.
+        #     This field is only populated if the git proxy is enabled for the
+        #     connection.
         class GitRepositoryLink
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -872,6 +1248,137 @@ module Google
         class FetchGitRefsResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # AccountConnector encapsulates what a platform administrator needs to
+        # configure for users to connect to the service providers, which includes,
+        # among other fields, the OAuth client ID, client secret, and authorization and
+        # token endpoints.
+        # @!attribute [rw] provider_oauth_config
+        #   @return [::Google::Cloud::DeveloperConnect::V1::ProviderOAuthConfig]
+        #     Provider OAuth config.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Identifier. The resource name of the accountConnector, in the format
+        #     `projects/{project}/locations/{location}/accountConnectors/{account_connector_id}`.
+        # @!attribute [r] create_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Output only. The timestamp when the accountConnector was created.
+        # @!attribute [r] update_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Output only. The timestamp when the accountConnector was updated.
+        # @!attribute [rw] annotations
+        #   @return [::Google::Protobuf::Map{::String => ::String}]
+        #     Optional. Allows users to store small amounts of arbitrary data.
+        # @!attribute [rw] etag
+        #   @return [::String]
+        #     Optional. This checksum is computed by the server based on the value of
+        #     other fields, and may be sent on update and delete requests to ensure the
+        #     client has an up-to-date value before proceeding.
+        # @!attribute [rw] labels
+        #   @return [::Google::Protobuf::Map{::String => ::String}]
+        #     Optional. Labels as key value pairs
+        # @!attribute [r] oauth_start_uri
+        #   @return [::String]
+        #     Output only. Start OAuth flow by clicking on this URL.
+        class AccountConnector
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # @!attribute [rw] key
+          #   @return [::String]
+          # @!attribute [rw] value
+          #   @return [::String]
+          class AnnotationsEntry
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # @!attribute [rw] key
+          #   @return [::String]
+          # @!attribute [rw] value
+          #   @return [::String]
+          class LabelsEntry
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+        end
+
+        # User represents a user connected to the service providers through
+        # a AccountConnector.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Identifier. Resource name of the user, in the format
+        #     `projects/*/locations/*/accountConnectors/*/users/*`.
+        # @!attribute [r] display_name
+        #   @return [::String]
+        #     Output only. Developer Connect automatically converts user identity
+        #     to some human readable description, e.g., email address.
+        # @!attribute [r] create_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Output only. The timestamp when the user was created.
+        # @!attribute [r] last_token_request_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Output only. The timestamp when the token was last requested.
+        class User
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # ProviderOAuthConfig is the OAuth config for a provider.
+        # @!attribute [rw] system_provider_id
+        #   @return [::Google::Cloud::DeveloperConnect::V1::SystemProvider]
+        #     Immutable. Developer Connect provided OAuth.
+        # @!attribute [rw] scopes
+        #   @return [::Array<::String>]
+        #     Required. User selected scopes to apply to the Oauth config
+        #     In the event of changing scopes, user records under AccountConnector will
+        #     be deleted and users will re-auth again.
+        class ProviderOAuthConfig
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # SystemProvider is a list of providers that are owned by Developer Connect.
+        module SystemProvider
+          # No system provider specified.
+          SYSTEM_PROVIDER_UNSPECIFIED = 0
+
+          # GitHub provider.
+          # Scopes can be found at
+          # https://docs.github.com/en/apps/oauth-apps/building-oauth-apps/scopes-for-oauth-apps#available-scopes
+          GITHUB = 1
+
+          # GitLab provider.
+          # Scopes can be found at
+          # https://docs.gitlab.com/user/profile/personal_access_tokens/#personal-access-token-scopes
+          GITLAB = 2
+
+          # Google provider.
+          # Recommended scopes:
+          #   "https://www.googleapis.com/auth/drive.readonly",
+          #   "https://www.googleapis.com/auth/documents.readonly"
+          GOOGLE = 3
+
+          # Sentry provider.
+          # Scopes can be found at
+          # https://docs.sentry.io/api/permissions/
+          SENTRY = 4
+
+          # Rovo provider.
+          # Must select the "rovo" scope.
+          ROVO = 5
+
+          # New Relic provider.
+          # No scopes are allowed.
+          NEW_RELIC = 6
+
+          # Datastax provider.
+          # No scopes are allowed.
+          DATASTAX = 7
+
+          # Dynatrace provider.
+          DYNATRACE = 8
         end
       end
     end

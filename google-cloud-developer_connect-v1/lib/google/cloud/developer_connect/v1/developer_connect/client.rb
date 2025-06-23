@@ -1681,6 +1681,1023 @@ module Google
             end
 
             ##
+            # Lists AccountConnectors in a given project and location.
+            #
+            # @overload list_account_connectors(request, options = nil)
+            #   Pass arguments to `list_account_connectors` via a request object, either of type
+            #   {::Google::Cloud::DeveloperConnect::V1::ListAccountConnectorsRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::DeveloperConnect::V1::ListAccountConnectorsRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload list_account_connectors(parent: nil, page_size: nil, page_token: nil, filter: nil, order_by: nil)
+            #   Pass arguments to `list_account_connectors` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param parent [::String]
+            #     Required. Parent value for ListAccountConnectorsRequest
+            #   @param page_size [::Integer]
+            #     Optional. Requested page size. Server may return fewer items than
+            #     requested. If unspecified, server will pick an appropriate default.
+            #   @param page_token [::String]
+            #     Optional. A token identifying a page of results the server should return.
+            #   @param filter [::String]
+            #     Optional. Filtering results
+            #   @param order_by [::String]
+            #     Optional. Hint for how to order the results
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Gapic::PagedEnumerable<::Google::Cloud::DeveloperConnect::V1::AccountConnector>]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Gapic::PagedEnumerable<::Google::Cloud::DeveloperConnect::V1::AccountConnector>]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/developer_connect/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::DeveloperConnect::V1::DeveloperConnect::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::DeveloperConnect::V1::ListAccountConnectorsRequest.new
+            #
+            #   # Call the list_account_connectors method.
+            #   result = client.list_account_connectors request
+            #
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
+            #     # Each element is of type ::Google::Cloud::DeveloperConnect::V1::AccountConnector.
+            #     p item
+            #   end
+            #
+            def list_account_connectors request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::DeveloperConnect::V1::ListAccountConnectorsRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.list_account_connectors.metadata.to_h
+
+              # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::DeveloperConnect::V1::VERSION
+              metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.list_account_connectors.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.list_account_connectors.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @developer_connect_stub.call_rpc :list_account_connectors, request, options: options do |response, operation|
+                response = ::Gapic::PagedEnumerable.new @developer_connect_stub, :list_account_connectors, request, response, operation, options
+                yield response, operation if block_given?
+                throw :response, response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Gets details of a single AccountConnector.
+            #
+            # @overload get_account_connector(request, options = nil)
+            #   Pass arguments to `get_account_connector` via a request object, either of type
+            #   {::Google::Cloud::DeveloperConnect::V1::GetAccountConnectorRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::DeveloperConnect::V1::GetAccountConnectorRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload get_account_connector(name: nil)
+            #   Pass arguments to `get_account_connector` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param name [::String]
+            #     Required. Name of the resource
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Google::Cloud::DeveloperConnect::V1::AccountConnector]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Google::Cloud::DeveloperConnect::V1::AccountConnector]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/developer_connect/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::DeveloperConnect::V1::DeveloperConnect::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::DeveloperConnect::V1::GetAccountConnectorRequest.new
+            #
+            #   # Call the get_account_connector method.
+            #   result = client.get_account_connector request
+            #
+            #   # The returned object is of type Google::Cloud::DeveloperConnect::V1::AccountConnector.
+            #   p result
+            #
+            def get_account_connector request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::DeveloperConnect::V1::GetAccountConnectorRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.get_account_connector.metadata.to_h
+
+              # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::DeveloperConnect::V1::VERSION
+              metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.get_account_connector.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.get_account_connector.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @developer_connect_stub.call_rpc :get_account_connector, request, options: options do |response, operation|
+                yield response, operation if block_given?
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Creates a new AccountConnector in a given project and location.
+            #
+            # @overload create_account_connector(request, options = nil)
+            #   Pass arguments to `create_account_connector` via a request object, either of type
+            #   {::Google::Cloud::DeveloperConnect::V1::CreateAccountConnectorRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::DeveloperConnect::V1::CreateAccountConnectorRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload create_account_connector(parent: nil, account_connector_id: nil, account_connector: nil, request_id: nil, validate_only: nil)
+            #   Pass arguments to `create_account_connector` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param parent [::String]
+            #     Required. Location resource name as the account_connector’s parent.
+            #   @param account_connector_id [::String]
+            #     Required. The ID to use for the AccountConnector, which will become the
+            #     final component of the AccountConnector's resource name. Its format should
+            #     adhere to https://google.aip.dev/122#resource-id-segments Names must be
+            #     unique per-project per-location.
+            #   @param account_connector [::Google::Cloud::DeveloperConnect::V1::AccountConnector, ::Hash]
+            #     Required. The AccountConnector to create.
+            #   @param request_id [::String]
+            #     Optional. An optional request ID to identify requests. Specify a unique
+            #     request ID so that if you must retry your request, the server will know to
+            #     ignore the request if it has already been completed. The server will
+            #     guarantee that for at least 60 minutes since the first request.
+            #
+            #     For example, consider a situation where you make an initial request and the
+            #     request times out. If you make the request again with the same request
+            #     ID, the server can check if original operation with the same request ID
+            #     was received, and if so, will ignore the second request. This prevents
+            #     clients from accidentally creating duplicate commitments.
+            #
+            #     The request ID must be a valid UUID with the exception that zero UUID is
+            #     not supported (00000000-0000-0000-0000-000000000000).
+            #   @param validate_only [::Boolean]
+            #     Optional. If set, validate the request, but do not actually post it.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Gapic::Operation]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Gapic::Operation]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/developer_connect/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::DeveloperConnect::V1::DeveloperConnect::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::DeveloperConnect::V1::CreateAccountConnectorRequest.new
+            #
+            #   # Call the create_account_connector method.
+            #   result = client.create_account_connector request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "No response received."
+            #   end
+            #
+            def create_account_connector request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::DeveloperConnect::V1::CreateAccountConnectorRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.create_account_connector.metadata.to_h
+
+              # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::DeveloperConnect::V1::VERSION
+              metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.create_account_connector.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.create_account_connector.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @developer_connect_stub.call_rpc :create_account_connector, request, options: options do |response, operation|
+                response = ::Gapic::Operation.new response, @operations_client, options: options
+                yield response, operation if block_given?
+                throw :response, response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Updates the parameters of a single AccountConnector.
+            #
+            # @overload update_account_connector(request, options = nil)
+            #   Pass arguments to `update_account_connector` via a request object, either of type
+            #   {::Google::Cloud::DeveloperConnect::V1::UpdateAccountConnectorRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::DeveloperConnect::V1::UpdateAccountConnectorRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload update_account_connector(update_mask: nil, account_connector: nil, request_id: nil, allow_missing: nil, validate_only: nil)
+            #   Pass arguments to `update_account_connector` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
+            #     Optional. The list of fields to be updated.
+            #   @param account_connector [::Google::Cloud::DeveloperConnect::V1::AccountConnector, ::Hash]
+            #     Required. The AccountConnector to update.
+            #   @param request_id [::String]
+            #     Optional. An optional request ID to identify requests. Specify a unique
+            #     request ID so that if you must retry your request, the server will know to
+            #     ignore the request if it has already been completed. The server will
+            #     guarantee that for at least 60 minutes since the first request.
+            #
+            #     For example, consider a situation where you make an initial request and the
+            #     request times out. If you make the request again with the same request
+            #     ID, the server can check if original operation with the same request ID
+            #     was received, and if so, will ignore the second request. This prevents
+            #     clients from accidentally creating duplicate commitments.
+            #
+            #     The request ID must be a valid UUID with the exception that zero UUID is
+            #     not supported (00000000-0000-0000-0000-000000000000).
+            #   @param allow_missing [::Boolean]
+            #     Optional. If set to true, and the accountConnector is not found a new
+            #     accountConnector will be created. In this situation `update_mask` is
+            #     ignored. The creation will succeed only if the input accountConnector has
+            #     all the necessary
+            #   @param validate_only [::Boolean]
+            #     Optional. If set, validate the request, but do not actually post it.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Gapic::Operation]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Gapic::Operation]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/developer_connect/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::DeveloperConnect::V1::DeveloperConnect::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::DeveloperConnect::V1::UpdateAccountConnectorRequest.new
+            #
+            #   # Call the update_account_connector method.
+            #   result = client.update_account_connector request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "No response received."
+            #   end
+            #
+            def update_account_connector request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::DeveloperConnect::V1::UpdateAccountConnectorRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.update_account_connector.metadata.to_h
+
+              # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::DeveloperConnect::V1::VERSION
+              metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.account_connector&.name
+                header_params["account_connector.name"] = request.account_connector.name
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.update_account_connector.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.update_account_connector.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @developer_connect_stub.call_rpc :update_account_connector, request, options: options do |response, operation|
+                response = ::Gapic::Operation.new response, @operations_client, options: options
+                yield response, operation if block_given?
+                throw :response, response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Deletes a single AccountConnector.
+            #
+            # @overload delete_account_connector(request, options = nil)
+            #   Pass arguments to `delete_account_connector` via a request object, either of type
+            #   {::Google::Cloud::DeveloperConnect::V1::DeleteAccountConnectorRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::DeveloperConnect::V1::DeleteAccountConnectorRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload delete_account_connector(name: nil, request_id: nil, validate_only: nil, etag: nil, force: nil)
+            #   Pass arguments to `delete_account_connector` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param name [::String]
+            #     Required. Name of the resource
+            #   @param request_id [::String]
+            #     Optional. An optional request ID to identify requests. Specify a unique
+            #     request ID so that if you must retry your request, the server will know to
+            #     ignore the request if it has already been completed. The server will
+            #     guarantee that for at least 60 minutes after the first request.
+            #
+            #     For example, consider a situation where you make an initial request and the
+            #     request times out. If you make the request again with the same request
+            #     ID, the server can check if original operation with the same request ID
+            #     was received, and if so, will ignore the second request. This prevents
+            #     clients from accidentally creating duplicate commitments.
+            #
+            #     The request ID must be a valid UUID with the exception that zero UUID is
+            #     not supported (00000000-0000-0000-0000-000000000000).
+            #   @param validate_only [::Boolean]
+            #     Optional. If set, validate the request, but do not actually post it.
+            #   @param etag [::String]
+            #     Optional. The current etag of the AccountConnectorn.
+            #     If an etag is provided and does not match the current etag of the
+            #     AccountConnector, deletion will be blocked and an ABORTED error will be
+            #     returned.
+            #   @param force [::Boolean]
+            #     Optional. If set to true, any Users from this AccountConnector will also
+            #     be deleted. (Otherwise, the request will only work if the AccountConnector
+            #     has no Users.)
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Gapic::Operation]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Gapic::Operation]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/developer_connect/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::DeveloperConnect::V1::DeveloperConnect::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::DeveloperConnect::V1::DeleteAccountConnectorRequest.new
+            #
+            #   # Call the delete_account_connector method.
+            #   result = client.delete_account_connector request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "No response received."
+            #   end
+            #
+            def delete_account_connector request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::DeveloperConnect::V1::DeleteAccountConnectorRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.delete_account_connector.metadata.to_h
+
+              # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::DeveloperConnect::V1::VERSION
+              metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.delete_account_connector.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.delete_account_connector.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @developer_connect_stub.call_rpc :delete_account_connector, request, options: options do |response, operation|
+                response = ::Gapic::Operation.new response, @operations_client, options: options
+                yield response, operation if block_given?
+                throw :response, response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Fetches OAuth access token based on end user credentials.
+            #
+            # @overload fetch_access_token(request, options = nil)
+            #   Pass arguments to `fetch_access_token` via a request object, either of type
+            #   {::Google::Cloud::DeveloperConnect::V1::FetchAccessTokenRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::DeveloperConnect::V1::FetchAccessTokenRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload fetch_access_token(account_connector: nil)
+            #   Pass arguments to `fetch_access_token` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param account_connector [::String]
+            #     Required. The resource name of the AccountConnector in the format
+            #     `projects/*/locations/*/accountConnectors/*`.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Google::Cloud::DeveloperConnect::V1::FetchAccessTokenResponse]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Google::Cloud::DeveloperConnect::V1::FetchAccessTokenResponse]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/developer_connect/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::DeveloperConnect::V1::DeveloperConnect::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::DeveloperConnect::V1::FetchAccessTokenRequest.new
+            #
+            #   # Call the fetch_access_token method.
+            #   result = client.fetch_access_token request
+            #
+            #   # The returned object is of type Google::Cloud::DeveloperConnect::V1::FetchAccessTokenResponse.
+            #   p result
+            #
+            def fetch_access_token request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::DeveloperConnect::V1::FetchAccessTokenRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.fetch_access_token.metadata.to_h
+
+              # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::DeveloperConnect::V1::VERSION
+              metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.account_connector
+                header_params["account_connector"] = request.account_connector
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.fetch_access_token.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.fetch_access_token.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @developer_connect_stub.call_rpc :fetch_access_token, request, options: options do |response, operation|
+                yield response, operation if block_given?
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Lists Users in a given project, location, and account_connector.
+            #
+            # @overload list_users(request, options = nil)
+            #   Pass arguments to `list_users` via a request object, either of type
+            #   {::Google::Cloud::DeveloperConnect::V1::ListUsersRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::DeveloperConnect::V1::ListUsersRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload list_users(parent: nil, page_size: nil, page_token: nil, filter: nil, order_by: nil)
+            #   Pass arguments to `list_users` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param parent [::String]
+            #     Required. Parent value for ListUsersRequest
+            #   @param page_size [::Integer]
+            #     Optional. Requested page size. Server may return fewer items than
+            #     requested. If unspecified, server will pick an appropriate default.
+            #   @param page_token [::String]
+            #     Optional. A token identifying a page of results the server should return.
+            #   @param filter [::String]
+            #     Optional. Filtering results
+            #   @param order_by [::String]
+            #     Optional. Hint for how to order the results
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Gapic::PagedEnumerable<::Google::Cloud::DeveloperConnect::V1::User>]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Gapic::PagedEnumerable<::Google::Cloud::DeveloperConnect::V1::User>]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/developer_connect/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::DeveloperConnect::V1::DeveloperConnect::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::DeveloperConnect::V1::ListUsersRequest.new
+            #
+            #   # Call the list_users method.
+            #   result = client.list_users request
+            #
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
+            #     # Each element is of type ::Google::Cloud::DeveloperConnect::V1::User.
+            #     p item
+            #   end
+            #
+            def list_users request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::DeveloperConnect::V1::ListUsersRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.list_users.metadata.to_h
+
+              # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::DeveloperConnect::V1::VERSION
+              metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.list_users.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.list_users.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @developer_connect_stub.call_rpc :list_users, request, options: options do |response, operation|
+                response = ::Gapic::PagedEnumerable.new @developer_connect_stub, :list_users, request, response, operation, options
+                yield response, operation if block_given?
+                throw :response, response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Deletes a single User.
+            #
+            # @overload delete_user(request, options = nil)
+            #   Pass arguments to `delete_user` via a request object, either of type
+            #   {::Google::Cloud::DeveloperConnect::V1::DeleteUserRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::DeveloperConnect::V1::DeleteUserRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload delete_user(name: nil, request_id: nil, validate_only: nil, etag: nil)
+            #   Pass arguments to `delete_user` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param name [::String]
+            #     Required. Name of the resource
+            #   @param request_id [::String]
+            #     Optional. An optional request ID to identify requests. Specify a unique
+            #     request ID so that if you must retry your request, the server will know to
+            #     ignore the request if it has already been completed. The server will
+            #     guarantee that for at least 60 minutes after the first request.
+            #
+            #     For example, consider a situation where you make an initial request and the
+            #     request times out. If you make the request again with the same request
+            #     ID, the server can check if original operation with the same request ID
+            #     was received, and if so, will ignore the second request. This prevents
+            #     clients from accidentally creating duplicate commitments.
+            #
+            #     The request ID must be a valid UUID with the exception that zero UUID is
+            #     not supported (00000000-0000-0000-0000-000000000000).
+            #   @param validate_only [::Boolean]
+            #     Optional. If set, validate the request, but do not actually post it.
+            #   @param etag [::String]
+            #     Optional. This checksum is computed by the server based on the value of
+            #     other fields, and may be sent on update and delete requests to ensure the
+            #     client has an up-to-date value before proceeding.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Gapic::Operation]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Gapic::Operation]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/developer_connect/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::DeveloperConnect::V1::DeveloperConnect::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::DeveloperConnect::V1::DeleteUserRequest.new
+            #
+            #   # Call the delete_user method.
+            #   result = client.delete_user request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "No response received."
+            #   end
+            #
+            def delete_user request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::DeveloperConnect::V1::DeleteUserRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.delete_user.metadata.to_h
+
+              # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::DeveloperConnect::V1::VERSION
+              metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.delete_user.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.delete_user.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @developer_connect_stub.call_rpc :delete_user, request, options: options do |response, operation|
+                response = ::Gapic::Operation.new response, @operations_client, options: options
+                yield response, operation if block_given?
+                throw :response, response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Fetch the User based on the user credentials.
+            #
+            # @overload fetch_self(request, options = nil)
+            #   Pass arguments to `fetch_self` via a request object, either of type
+            #   {::Google::Cloud::DeveloperConnect::V1::FetchSelfRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::DeveloperConnect::V1::FetchSelfRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload fetch_self(name: nil)
+            #   Pass arguments to `fetch_self` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param name [::String]
+            #     Required. Name of the AccountConnector resource
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Google::Cloud::DeveloperConnect::V1::User]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Google::Cloud::DeveloperConnect::V1::User]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/developer_connect/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::DeveloperConnect::V1::DeveloperConnect::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::DeveloperConnect::V1::FetchSelfRequest.new
+            #
+            #   # Call the fetch_self method.
+            #   result = client.fetch_self request
+            #
+            #   # The returned object is of type Google::Cloud::DeveloperConnect::V1::User.
+            #   p result
+            #
+            def fetch_self request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::DeveloperConnect::V1::FetchSelfRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.fetch_self.metadata.to_h
+
+              # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::DeveloperConnect::V1::VERSION
+              metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.fetch_self.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.fetch_self.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @developer_connect_stub.call_rpc :fetch_self, request, options: options do |response, operation|
+                yield response, operation if block_given?
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Delete the User based on the user credentials.
+            #
+            # @overload delete_self(request, options = nil)
+            #   Pass arguments to `delete_self` via a request object, either of type
+            #   {::Google::Cloud::DeveloperConnect::V1::DeleteSelfRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::DeveloperConnect::V1::DeleteSelfRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload delete_self(name: nil)
+            #   Pass arguments to `delete_self` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param name [::String]
+            #     Required. Name of the AccountConnector resource
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Gapic::Operation]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Gapic::Operation]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/developer_connect/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::DeveloperConnect::V1::DeveloperConnect::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::DeveloperConnect::V1::DeleteSelfRequest.new
+            #
+            #   # Call the delete_self method.
+            #   result = client.delete_self request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "No response received."
+            #   end
+            #
+            def delete_self request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::DeveloperConnect::V1::DeleteSelfRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.delete_self.metadata.to_h
+
+              # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::DeveloperConnect::V1::VERSION
+              metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.delete_self.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.delete_self.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @developer_connect_stub.call_rpc :delete_self, request, options: options do |response, operation|
+                response = ::Gapic::Operation.new response, @operations_client, options: options
+                yield response, operation if block_given?
+                throw :response, response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
             # Configuration class for the DeveloperConnect API.
             #
             # This class represents the configuration for DeveloperConnect,
@@ -1916,6 +2933,56 @@ module Google
                 # @return [::Gapic::Config::Method]
                 #
                 attr_reader :fetch_git_refs
+                ##
+                # RPC-specific configuration for `list_account_connectors`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :list_account_connectors
+                ##
+                # RPC-specific configuration for `get_account_connector`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :get_account_connector
+                ##
+                # RPC-specific configuration for `create_account_connector`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :create_account_connector
+                ##
+                # RPC-specific configuration for `update_account_connector`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :update_account_connector
+                ##
+                # RPC-specific configuration for `delete_account_connector`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :delete_account_connector
+                ##
+                # RPC-specific configuration for `fetch_access_token`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :fetch_access_token
+                ##
+                # RPC-specific configuration for `list_users`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :list_users
+                ##
+                # RPC-specific configuration for `delete_user`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :delete_user
+                ##
+                # RPC-specific configuration for `fetch_self`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :fetch_self
+                ##
+                # RPC-specific configuration for `delete_self`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :delete_self
 
                 # @private
                 def initialize parent_rpcs = nil
@@ -1947,6 +3014,26 @@ module Google
                   @fetch_git_hub_installations = ::Gapic::Config::Method.new fetch_git_hub_installations_config
                   fetch_git_refs_config = parent_rpcs.fetch_git_refs if parent_rpcs.respond_to? :fetch_git_refs
                   @fetch_git_refs = ::Gapic::Config::Method.new fetch_git_refs_config
+                  list_account_connectors_config = parent_rpcs.list_account_connectors if parent_rpcs.respond_to? :list_account_connectors
+                  @list_account_connectors = ::Gapic::Config::Method.new list_account_connectors_config
+                  get_account_connector_config = parent_rpcs.get_account_connector if parent_rpcs.respond_to? :get_account_connector
+                  @get_account_connector = ::Gapic::Config::Method.new get_account_connector_config
+                  create_account_connector_config = parent_rpcs.create_account_connector if parent_rpcs.respond_to? :create_account_connector
+                  @create_account_connector = ::Gapic::Config::Method.new create_account_connector_config
+                  update_account_connector_config = parent_rpcs.update_account_connector if parent_rpcs.respond_to? :update_account_connector
+                  @update_account_connector = ::Gapic::Config::Method.new update_account_connector_config
+                  delete_account_connector_config = parent_rpcs.delete_account_connector if parent_rpcs.respond_to? :delete_account_connector
+                  @delete_account_connector = ::Gapic::Config::Method.new delete_account_connector_config
+                  fetch_access_token_config = parent_rpcs.fetch_access_token if parent_rpcs.respond_to? :fetch_access_token
+                  @fetch_access_token = ::Gapic::Config::Method.new fetch_access_token_config
+                  list_users_config = parent_rpcs.list_users if parent_rpcs.respond_to? :list_users
+                  @list_users = ::Gapic::Config::Method.new list_users_config
+                  delete_user_config = parent_rpcs.delete_user if parent_rpcs.respond_to? :delete_user
+                  @delete_user = ::Gapic::Config::Method.new delete_user_config
+                  fetch_self_config = parent_rpcs.fetch_self if parent_rpcs.respond_to? :fetch_self
+                  @fetch_self = ::Gapic::Config::Method.new fetch_self_config
+                  delete_self_config = parent_rpcs.delete_self if parent_rpcs.respond_to? :delete_self
+                  @delete_self = ::Gapic::Config::Method.new delete_self_config
 
                   yield self if block_given?
                 end
