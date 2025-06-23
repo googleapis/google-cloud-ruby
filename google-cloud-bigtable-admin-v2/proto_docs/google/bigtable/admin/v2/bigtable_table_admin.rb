@@ -881,7 +881,8 @@ module Google
           # The metadata for the Operation returned by CreateAuthorizedView.
           # @!attribute [rw] original_request
           #   @return [::Google::Cloud::Bigtable::Admin::V2::CreateAuthorizedViewRequest]
-          #     The request that prompted the initiation of this CreateInstance operation.
+          #     The request that prompted the initiation of this CreateAuthorizedView
+          #     operation.
           # @!attribute [rw] request_time
           #   @return [::Google::Protobuf::Timestamp]
           #     The time at which the original request was received.
@@ -916,8 +917,8 @@ module Google
           #     Optional. The value of `next_page_token` returned by a previous call.
           # @!attribute [rw] view
           #   @return [::Google::Cloud::Bigtable::Admin::V2::AuthorizedView::ResponseView]
-          #     Optional. The resource_view to be applied to the returned views' fields.
-          #     Default to NAME_ONLY.
+          #     Optional. The resource_view to be applied to the returned AuthorizedViews'
+          #     fields. Default to NAME_ONLY.
           class ListAuthorizedViewsRequest
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -960,8 +961,8 @@ module Google
           #   @return [::Google::Cloud::Bigtable::Admin::V2::AuthorizedView]
           #     Required. The AuthorizedView to update. The `name` in `authorized_view` is
           #     used to identify the AuthorizedView. AuthorizedView name must in this
-          #     format
-          #     projects/<project>/instances/<instance>/tables/<table>/authorizedViews/<authorized_view>
+          #     format:
+          #     `projects/{project}/instances/{instance}/tables/{table}/authorizedViews/{authorized_view}`.
           # @!attribute [rw] update_mask
           #   @return [::Google::Protobuf::FieldMask]
           #     Optional. The list of fields to update.
@@ -1011,6 +1012,151 @@ module Google
           #     AuthorizedView, deletion will be blocked and an ABORTED error will be
           #     returned.
           class DeleteAuthorizedViewRequest
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # The request for
+          # {::Google::Cloud::Bigtable::Admin::V2::BigtableTableAdmin::Client#create_schema_bundle CreateSchemaBundle}.
+          # @!attribute [rw] parent
+          #   @return [::String]
+          #     Required. The parent resource where this schema bundle will be created.
+          #     Values are of the form
+          #     `projects/{project}/instances/{instance}/tables/{table}`.
+          # @!attribute [rw] schema_bundle_id
+          #   @return [::String]
+          #     Required. The unique ID to use for the schema bundle, which will become the
+          #     final component of the schema bundle's resource name.
+          # @!attribute [rw] schema_bundle
+          #   @return [::Google::Cloud::Bigtable::Admin::V2::SchemaBundle]
+          #     Required. The schema bundle to create.
+          class CreateSchemaBundleRequest
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # The metadata for the Operation returned by
+          # {::Google::Cloud::Bigtable::Admin::V2::BigtableTableAdmin::Client#create_schema_bundle CreateSchemaBundle}.
+          # @!attribute [rw] name
+          #   @return [::String]
+          #     The unique name identifying this schema bundle.
+          #     Values are of the form
+          #     `projects/{project}/instances/{instance}/tables/{table}/schemaBundles/{schema_bundle}`
+          # @!attribute [rw] start_time
+          #   @return [::Google::Protobuf::Timestamp]
+          #     The time at which this operation started.
+          # @!attribute [rw] end_time
+          #   @return [::Google::Protobuf::Timestamp]
+          #     If set, the time at which this operation finished or was canceled.
+          class CreateSchemaBundleMetadata
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # The request for
+          # {::Google::Cloud::Bigtable::Admin::V2::BigtableTableAdmin::Client#update_schema_bundle UpdateSchemaBundle}.
+          # @!attribute [rw] schema_bundle
+          #   @return [::Google::Cloud::Bigtable::Admin::V2::SchemaBundle]
+          #     Required. The schema bundle to update.
+          #
+          #     The schema bundle's `name` field is used to identify the schema bundle to
+          #     update. Values are of the form
+          #     `projects/{project}/instances/{instance}/tables/{table}/schemaBundles/{schema_bundle}`
+          # @!attribute [rw] update_mask
+          #   @return [::Google::Protobuf::FieldMask]
+          #     Optional. The list of fields to update.
+          # @!attribute [rw] ignore_warnings
+          #   @return [::Boolean]
+          #     Optional. If set, ignore the safety checks when updating the Schema Bundle.
+          #     The safety checks are:
+          #     - The new Schema Bundle is backwards compatible with the existing Schema
+          #     Bundle.
+          class UpdateSchemaBundleRequest
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # The metadata for the Operation returned by
+          # {::Google::Cloud::Bigtable::Admin::V2::BigtableTableAdmin::Client#update_schema_bundle UpdateSchemaBundle}.
+          # @!attribute [rw] name
+          #   @return [::String]
+          #     The unique name identifying this schema bundle.
+          #     Values are of the form
+          #     `projects/{project}/instances/{instance}/tables/{table}/schemaBundles/{schema_bundle}`
+          # @!attribute [rw] start_time
+          #   @return [::Google::Protobuf::Timestamp]
+          #     The time at which this operation started.
+          # @!attribute [rw] end_time
+          #   @return [::Google::Protobuf::Timestamp]
+          #     If set, the time at which this operation finished or was canceled.
+          class UpdateSchemaBundleMetadata
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # The request for
+          # {::Google::Cloud::Bigtable::Admin::V2::BigtableTableAdmin::Client#get_schema_bundle GetSchemaBundle}.
+          # @!attribute [rw] name
+          #   @return [::String]
+          #     Required. The unique name of the schema bundle to retrieve.
+          #     Values are of the form
+          #     `projects/{project}/instances/{instance}/tables/{table}/schemaBundles/{schema_bundle}`
+          class GetSchemaBundleRequest
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # The request for
+          # {::Google::Cloud::Bigtable::Admin::V2::BigtableTableAdmin::Client#list_schema_bundles ListSchemaBundles}.
+          # @!attribute [rw] parent
+          #   @return [::String]
+          #     Required. The parent, which owns this collection of schema bundles.
+          #     Values are of the form
+          #     `projects/{project}/instances/{instance}/tables/{table}`.
+          # @!attribute [rw] page_size
+          #   @return [::Integer]
+          #     The maximum number of schema bundles to return. If the value is positive,
+          #     the server may return at most this value. If unspecified, the server will
+          #     return the maximum allowed page size.
+          # @!attribute [rw] page_token
+          #   @return [::String]
+          #     A page token, received from a previous `ListSchemaBundles` call.
+          #     Provide this to retrieve the subsequent page.
+          #
+          #     When paginating, all other parameters provided to `ListSchemaBundles` must
+          #     match the call that provided the page token.
+          class ListSchemaBundlesRequest
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # The response for
+          # {::Google::Cloud::Bigtable::Admin::V2::BigtableTableAdmin::Client#list_schema_bundles ListSchemaBundles}.
+          # @!attribute [rw] schema_bundles
+          #   @return [::Array<::Google::Cloud::Bigtable::Admin::V2::SchemaBundle>]
+          #     The schema bundles from the specified table.
+          # @!attribute [rw] next_page_token
+          #   @return [::String]
+          #     A token, which can be sent as `page_token` to retrieve the next page.
+          #     If this field is omitted, there are no subsequent pages.
+          class ListSchemaBundlesResponse
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # The request for
+          # {::Google::Cloud::Bigtable::Admin::V2::BigtableTableAdmin::Client#delete_schema_bundle DeleteSchemaBundle}.
+          # @!attribute [rw] name
+          #   @return [::String]
+          #     Required. The unique name of the schema bundle to delete.
+          #     Values are of the form
+          #     `projects/{project}/instances/{instance}/tables/{table}/schemaBundles/{schema_bundle}`
+          # @!attribute [rw] etag
+          #   @return [::String]
+          #     Optional. The etag of the schema bundle.
+          #     If this is provided, it must match the server's etag. The server
+          #     returns an ABORTED error on a mismatched etag.
+          class DeleteSchemaBundleRequest
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
