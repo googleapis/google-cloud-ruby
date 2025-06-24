@@ -21,6 +21,7 @@ require "helper"
 require "gapic/grpc/service_stub"
 
 require "google/pubsub/v1/pubsub_pb"
+
 require "google/cloud/pubsub/v1/subscription_admin"
 
 class ::Google::Cloud::PubSub::V1::SubscriptionAdmin::ClientTest < Minitest::Test
