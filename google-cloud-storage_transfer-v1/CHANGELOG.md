@@ -1,5 +1,19 @@
 # Changelog
 
+### 1.6.0 (2025-06-24)
+
+#### Features
+
+* support Azure federated identity ([#30478](https://github.com/googleapis/google-cloud-ruby/issues/30478)) 
+* support BYOSA 
+#### Documentation
+
+* A comment for enum value `COPY` in enum `LoggableAction` is changed 
+* A comment for field `end_time_of_day` in message `.google.storagetransfer.v1.Schedule` is changed 
+* A comment for field `list_url` in message `.google.storagetransfer.v1.HttpData` is changed 
+* A comment for field `overwrite_objects_already_existing_in_sink` in message `.google.storagetransfer.v1.TransferOptions` is changed 
+* A comment for message `ObjectConditions` is changed 
+
 ### 1.5.0 (2025-05-12)
 
 #### Features
