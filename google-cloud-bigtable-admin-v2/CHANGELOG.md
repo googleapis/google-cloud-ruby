@@ -1,5 +1,11 @@
 # Release History
 
+### 1.11.0 (2025-06-24)
+
+#### Features
+
+* Support for RPCs for managing SchemaBundle resources ([#30536](https://github.com/googleapis/google-cloud-ruby/issues/30536)) 
+
 ### 1.10.0 (2025-05-12)
 
 #### Features
