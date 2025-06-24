@@ -1,5 +1,14 @@
 # Changelog
 
+### 1.16.0 (2025-06-24)
+
+#### Features
+
+* Support for GenAiAdvancedFeaturesConfig 
+* Support for ModelGarden deploy RPC 
+* Support for update_rag_engine_config and get_rag_engine_config RPCs 
+* Updates to PSCAutomationConfig and PscInterfaceConfig 
+
 ### 1.15.0 (2025-06-16)
 
 #### Features
