@@ -1,0 +1,1095 @@
+{
+  "client_library": {
+    "name": "google-cloud-app_hub-v1",
+    "version": "",
+    "language": "RUBY",
+    "apis": [
+      {
+        "id": "google.cloud.apphub.v1",
+        "version": "v1"
+      }
+    ]
+  },
+  "snippets": [
+    {
+      "region_tag": "apphub_v1_generated_AppHub_LookupServiceProjectAttachment_sync",
+      "title": "Snippet for the lookup_service_project_attachment call in the AppHub service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AppHub::V1::AppHub::Client#lookup_service_project_attachment.",
+      "file": "app_hub/lookup_service_project_attachment.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "lookup_service_project_attachment",
+        "full_name": "::Google::Cloud::AppHub::V1::AppHub::Client#lookup_service_project_attachment",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::AppHub::V1::LookupServiceProjectAttachmentRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::AppHub::V1::LookupServiceProjectAttachmentResponse",
+        "client": {
+          "short_name": "AppHub::Client",
+          "full_name": "::Google::Cloud::AppHub::V1::AppHub::Client"
+        },
+        "method": {
+          "short_name": "LookupServiceProjectAttachment",
+          "full_name": "google.cloud.apphub.v1.AppHub.LookupServiceProjectAttachment",
+          "service": {
+            "short_name": "AppHub",
+            "full_name": "google.cloud.apphub.v1.AppHub"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "apphub_v1_generated_AppHub_ListServiceProjectAttachments_sync",
+      "title": "Snippet for the list_service_project_attachments call in the AppHub service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AppHub::V1::AppHub::Client#list_service_project_attachments.",
+      "file": "app_hub/list_service_project_attachments.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_service_project_attachments",
+        "full_name": "::Google::Cloud::AppHub::V1::AppHub::Client#list_service_project_attachments",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::AppHub::V1::ListServiceProjectAttachmentsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::AppHub::V1::ListServiceProjectAttachmentsResponse",
+        "client": {
+          "short_name": "AppHub::Client",
+          "full_name": "::Google::Cloud::AppHub::V1::AppHub::Client"
+        },
+        "method": {
+          "short_name": "ListServiceProjectAttachments",
+          "full_name": "google.cloud.apphub.v1.AppHub.ListServiceProjectAttachments",
+          "service": {
+            "short_name": "AppHub",
+            "full_name": "google.cloud.apphub.v1.AppHub"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "apphub_v1_generated_AppHub_CreateServiceProjectAttachment_sync",
+      "title": "Snippet for the create_service_project_attachment call in the AppHub service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AppHub::V1::AppHub::Client#create_service_project_attachment.",
+      "file": "app_hub/create_service_project_attachment.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_service_project_attachment",
+        "full_name": "::Google::Cloud::AppHub::V1::AppHub::Client#create_service_project_attachment",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::AppHub::V1::CreateServiceProjectAttachmentRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "AppHub::Client",
+          "full_name": "::Google::Cloud::AppHub::V1::AppHub::Client"
+        },
+        "method": {
+          "short_name": "CreateServiceProjectAttachment",
+          "full_name": "google.cloud.apphub.v1.AppHub.CreateServiceProjectAttachment",
+          "service": {
+            "short_name": "AppHub",
+            "full_name": "google.cloud.apphub.v1.AppHub"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "apphub_v1_generated_AppHub_GetServiceProjectAttachment_sync",
+      "title": "Snippet for the get_service_project_attachment call in the AppHub service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AppHub::V1::AppHub::Client#get_service_project_attachment.",
+      "file": "app_hub/get_service_project_attachment.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_service_project_attachment",
+        "full_name": "::Google::Cloud::AppHub::V1::AppHub::Client#get_service_project_attachment",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::AppHub::V1::GetServiceProjectAttachmentRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::AppHub::V1::ServiceProjectAttachment",
+        "client": {
+          "short_name": "AppHub::Client",
+          "full_name": "::Google::Cloud::AppHub::V1::AppHub::Client"
+        },
+        "method": {
+          "short_name": "GetServiceProjectAttachment",
+          "full_name": "google.cloud.apphub.v1.AppHub.GetServiceProjectAttachment",
+          "service": {
+            "short_name": "AppHub",
+            "full_name": "google.cloud.apphub.v1.AppHub"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "apphub_v1_generated_AppHub_DeleteServiceProjectAttachment_sync",
+      "title": "Snippet for the delete_service_project_attachment call in the AppHub service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AppHub::V1::AppHub::Client#delete_service_project_attachment.",
+      "file": "app_hub/delete_service_project_attachment.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_service_project_attachment",
+        "full_name": "::Google::Cloud::AppHub::V1::AppHub::Client#delete_service_project_attachment",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::AppHub::V1::DeleteServiceProjectAttachmentRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "AppHub::Client",
+          "full_name": "::Google::Cloud::AppHub::V1::AppHub::Client"
+        },
+        "method": {
+          "short_name": "DeleteServiceProjectAttachment",
+          "full_name": "google.cloud.apphub.v1.AppHub.DeleteServiceProjectAttachment",
+          "service": {
+            "short_name": "AppHub",
+            "full_name": "google.cloud.apphub.v1.AppHub"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "apphub_v1_generated_AppHub_DetachServiceProjectAttachment_sync",
+      "title": "Snippet for the detach_service_project_attachment call in the AppHub service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AppHub::V1::AppHub::Client#detach_service_project_attachment.",
+      "file": "app_hub/detach_service_project_attachment.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "detach_service_project_attachment",
+        "full_name": "::Google::Cloud::AppHub::V1::AppHub::Client#detach_service_project_attachment",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::AppHub::V1::DetachServiceProjectAttachmentRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::AppHub::V1::DetachServiceProjectAttachmentResponse",
+        "client": {
+          "short_name": "AppHub::Client",
+          "full_name": "::Google::Cloud::AppHub::V1::AppHub::Client"
+        },
+        "method": {
+          "short_name": "DetachServiceProjectAttachment",
+          "full_name": "google.cloud.apphub.v1.AppHub.DetachServiceProjectAttachment",
+          "service": {
+            "short_name": "AppHub",
+            "full_name": "google.cloud.apphub.v1.AppHub"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "apphub_v1_generated_AppHub_ListDiscoveredServices_sync",
+      "title": "Snippet for the list_discovered_services call in the AppHub service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AppHub::V1::AppHub::Client#list_discovered_services.",
+      "file": "app_hub/list_discovered_services.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_discovered_services",
+        "full_name": "::Google::Cloud::AppHub::V1::AppHub::Client#list_discovered_services",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::AppHub::V1::ListDiscoveredServicesRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::AppHub::V1::ListDiscoveredServicesResponse",
+        "client": {
+          "short_name": "AppHub::Client",
+          "full_name": "::Google::Cloud::AppHub::V1::AppHub::Client"
+        },
+        "method": {
+          "short_name": "ListDiscoveredServices",
+          "full_name": "google.cloud.apphub.v1.AppHub.ListDiscoveredServices",
+          "service": {
+            "short_name": "AppHub",
+            "full_name": "google.cloud.apphub.v1.AppHub"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "apphub_v1_generated_AppHub_GetDiscoveredService_sync",
+      "title": "Snippet for the get_discovered_service call in the AppHub service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AppHub::V1::AppHub::Client#get_discovered_service.",
+      "file": "app_hub/get_discovered_service.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_discovered_service",
+        "full_name": "::Google::Cloud::AppHub::V1::AppHub::Client#get_discovered_service",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::AppHub::V1::GetDiscoveredServiceRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::AppHub::V1::DiscoveredService",
+        "client": {
+          "short_name": "AppHub::Client",
+          "full_name": "::Google::Cloud::AppHub::V1::AppHub::Client"
+        },
+        "method": {
+          "short_name": "GetDiscoveredService",
+          "full_name": "google.cloud.apphub.v1.AppHub.GetDiscoveredService",
+          "service": {
+            "short_name": "AppHub",
+            "full_name": "google.cloud.apphub.v1.AppHub"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "apphub_v1_generated_AppHub_LookupDiscoveredService_sync",
+      "title": "Snippet for the lookup_discovered_service call in the AppHub service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AppHub::V1::AppHub::Client#lookup_discovered_service.",
+      "file": "app_hub/lookup_discovered_service.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "lookup_discovered_service",
+        "full_name": "::Google::Cloud::AppHub::V1::AppHub::Client#lookup_discovered_service",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::AppHub::V1::LookupDiscoveredServiceRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::AppHub::V1::LookupDiscoveredServiceResponse",
+        "client": {
+          "short_name": "AppHub::Client",
+          "full_name": "::Google::Cloud::AppHub::V1::AppHub::Client"
+        },
+        "method": {
+          "short_name": "LookupDiscoveredService",
+          "full_name": "google.cloud.apphub.v1.AppHub.LookupDiscoveredService",
+          "service": {
+            "short_name": "AppHub",
+            "full_name": "google.cloud.apphub.v1.AppHub"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "apphub_v1_generated_AppHub_ListServices_sync",
+      "title": "Snippet for the list_services call in the AppHub service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AppHub::V1::AppHub::Client#list_services.",
+      "file": "app_hub/list_services.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_services",
+        "full_name": "::Google::Cloud::AppHub::V1::AppHub::Client#list_services",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::AppHub::V1::ListServicesRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::AppHub::V1::ListServicesResponse",
+        "client": {
+          "short_name": "AppHub::Client",
+          "full_name": "::Google::Cloud::AppHub::V1::AppHub::Client"
+        },
+        "method": {
+          "short_name": "ListServices",
+          "full_name": "google.cloud.apphub.v1.AppHub.ListServices",
+          "service": {
+            "short_name": "AppHub",
+            "full_name": "google.cloud.apphub.v1.AppHub"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "apphub_v1_generated_AppHub_CreateService_sync",
+      "title": "Snippet for the create_service call in the AppHub service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AppHub::V1::AppHub::Client#create_service.",
+      "file": "app_hub/create_service.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_service",
+        "full_name": "::Google::Cloud::AppHub::V1::AppHub::Client#create_service",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::AppHub::V1::CreateServiceRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "AppHub::Client",
+          "full_name": "::Google::Cloud::AppHub::V1::AppHub::Client"
+        },
+        "method": {
+          "short_name": "CreateService",
+          "full_name": "google.cloud.apphub.v1.AppHub.CreateService",
+          "service": {
+            "short_name": "AppHub",
+            "full_name": "google.cloud.apphub.v1.AppHub"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "apphub_v1_generated_AppHub_GetService_sync",
+      "title": "Snippet for the get_service call in the AppHub service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AppHub::V1::AppHub::Client#get_service.",
+      "file": "app_hub/get_service.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_service",
+        "full_name": "::Google::Cloud::AppHub::V1::AppHub::Client#get_service",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::AppHub::V1::GetServiceRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::AppHub::V1::Service",
+        "client": {
+          "short_name": "AppHub::Client",
+          "full_name": "::Google::Cloud::AppHub::V1::AppHub::Client"
+        },
+        "method": {
+          "short_name": "GetService",
+          "full_name": "google.cloud.apphub.v1.AppHub.GetService",
+          "service": {
+            "short_name": "AppHub",
+            "full_name": "google.cloud.apphub.v1.AppHub"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "apphub_v1_generated_AppHub_UpdateService_sync",
+      "title": "Snippet for the update_service call in the AppHub service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AppHub::V1::AppHub::Client#update_service.",
+      "file": "app_hub/update_service.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_service",
+        "full_name": "::Google::Cloud::AppHub::V1::AppHub::Client#update_service",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::AppHub::V1::UpdateServiceRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "AppHub::Client",
+          "full_name": "::Google::Cloud::AppHub::V1::AppHub::Client"
+        },
+        "method": {
+          "short_name": "UpdateService",
+          "full_name": "google.cloud.apphub.v1.AppHub.UpdateService",
+          "service": {
+            "short_name": "AppHub",
+            "full_name": "google.cloud.apphub.v1.AppHub"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "apphub_v1_generated_AppHub_DeleteService_sync",
+      "title": "Snippet for the delete_service call in the AppHub service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AppHub::V1::AppHub::Client#delete_service.",
+      "file": "app_hub/delete_service.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_service",
+        "full_name": "::Google::Cloud::AppHub::V1::AppHub::Client#delete_service",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::AppHub::V1::DeleteServiceRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "AppHub::Client",
+          "full_name": "::Google::Cloud::AppHub::V1::AppHub::Client"
+        },
+        "method": {
+          "short_name": "DeleteService",
+          "full_name": "google.cloud.apphub.v1.AppHub.DeleteService",
+          "service": {
+            "short_name": "AppHub",
+            "full_name": "google.cloud.apphub.v1.AppHub"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "apphub_v1_generated_AppHub_ListDiscoveredWorkloads_sync",
+      "title": "Snippet for the list_discovered_workloads call in the AppHub service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AppHub::V1::AppHub::Client#list_discovered_workloads.",
+      "file": "app_hub/list_discovered_workloads.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_discovered_workloads",
+        "full_name": "::Google::Cloud::AppHub::V1::AppHub::Client#list_discovered_workloads",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::AppHub::V1::ListDiscoveredWorkloadsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::AppHub::V1::ListDiscoveredWorkloadsResponse",
+        "client": {
+          "short_name": "AppHub::Client",
+          "full_name": "::Google::Cloud::AppHub::V1::AppHub::Client"
+        },
+        "method": {
+          "short_name": "ListDiscoveredWorkloads",
+          "full_name": "google.cloud.apphub.v1.AppHub.ListDiscoveredWorkloads",
+          "service": {
+            "short_name": "AppHub",
+            "full_name": "google.cloud.apphub.v1.AppHub"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "apphub_v1_generated_AppHub_GetDiscoveredWorkload_sync",
+      "title": "Snippet for the get_discovered_workload call in the AppHub service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AppHub::V1::AppHub::Client#get_discovered_workload.",
+      "file": "app_hub/get_discovered_workload.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_discovered_workload",
+        "full_name": "::Google::Cloud::AppHub::V1::AppHub::Client#get_discovered_workload",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::AppHub::V1::GetDiscoveredWorkloadRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::AppHub::V1::DiscoveredWorkload",
+        "client": {
+          "short_name": "AppHub::Client",
+          "full_name": "::Google::Cloud::AppHub::V1::AppHub::Client"
+        },
+        "method": {
+          "short_name": "GetDiscoveredWorkload",
+          "full_name": "google.cloud.apphub.v1.AppHub.GetDiscoveredWorkload",
+          "service": {
+            "short_name": "AppHub",
+            "full_name": "google.cloud.apphub.v1.AppHub"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "apphub_v1_generated_AppHub_LookupDiscoveredWorkload_sync",
+      "title": "Snippet for the lookup_discovered_workload call in the AppHub service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AppHub::V1::AppHub::Client#lookup_discovered_workload.",
+      "file": "app_hub/lookup_discovered_workload.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "lookup_discovered_workload",
+        "full_name": "::Google::Cloud::AppHub::V1::AppHub::Client#lookup_discovered_workload",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::AppHub::V1::LookupDiscoveredWorkloadRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::AppHub::V1::LookupDiscoveredWorkloadResponse",
+        "client": {
+          "short_name": "AppHub::Client",
+          "full_name": "::Google::Cloud::AppHub::V1::AppHub::Client"
+        },
+        "method": {
+          "short_name": "LookupDiscoveredWorkload",
+          "full_name": "google.cloud.apphub.v1.AppHub.LookupDiscoveredWorkload",
+          "service": {
+            "short_name": "AppHub",
+            "full_name": "google.cloud.apphub.v1.AppHub"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "apphub_v1_generated_AppHub_ListWorkloads_sync",
+      "title": "Snippet for the list_workloads call in the AppHub service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AppHub::V1::AppHub::Client#list_workloads.",
+      "file": "app_hub/list_workloads.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_workloads",
+        "full_name": "::Google::Cloud::AppHub::V1::AppHub::Client#list_workloads",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::AppHub::V1::ListWorkloadsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::AppHub::V1::ListWorkloadsResponse",
+        "client": {
+          "short_name": "AppHub::Client",
+          "full_name": "::Google::Cloud::AppHub::V1::AppHub::Client"
+        },
+        "method": {
+          "short_name": "ListWorkloads",
+          "full_name": "google.cloud.apphub.v1.AppHub.ListWorkloads",
+          "service": {
+            "short_name": "AppHub",
+            "full_name": "google.cloud.apphub.v1.AppHub"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "apphub_v1_generated_AppHub_CreateWorkload_sync",
+      "title": "Snippet for the create_workload call in the AppHub service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AppHub::V1::AppHub::Client#create_workload.",
+      "file": "app_hub/create_workload.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_workload",
+        "full_name": "::Google::Cloud::AppHub::V1::AppHub::Client#create_workload",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::AppHub::V1::CreateWorkloadRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "AppHub::Client",
+          "full_name": "::Google::Cloud::AppHub::V1::AppHub::Client"
+        },
+        "method": {
+          "short_name": "CreateWorkload",
+          "full_name": "google.cloud.apphub.v1.AppHub.CreateWorkload",
+          "service": {
+            "short_name": "AppHub",
+            "full_name": "google.cloud.apphub.v1.AppHub"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "apphub_v1_generated_AppHub_GetWorkload_sync",
+      "title": "Snippet for the get_workload call in the AppHub service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AppHub::V1::AppHub::Client#get_workload.",
+      "file": "app_hub/get_workload.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_workload",
+        "full_name": "::Google::Cloud::AppHub::V1::AppHub::Client#get_workload",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::AppHub::V1::GetWorkloadRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::AppHub::V1::Workload",
+        "client": {
+          "short_name": "AppHub::Client",
+          "full_name": "::Google::Cloud::AppHub::V1::AppHub::Client"
+        },
+        "method": {
+          "short_name": "GetWorkload",
+          "full_name": "google.cloud.apphub.v1.AppHub.GetWorkload",
+          "service": {
+            "short_name": "AppHub",
+            "full_name": "google.cloud.apphub.v1.AppHub"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "apphub_v1_generated_AppHub_UpdateWorkload_sync",
+      "title": "Snippet for the update_workload call in the AppHub service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AppHub::V1::AppHub::Client#update_workload.",
+      "file": "app_hub/update_workload.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_workload",
+        "full_name": "::Google::Cloud::AppHub::V1::AppHub::Client#update_workload",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::AppHub::V1::UpdateWorkloadRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "AppHub::Client",
+          "full_name": "::Google::Cloud::AppHub::V1::AppHub::Client"
+        },
+        "method": {
+          "short_name": "UpdateWorkload",
+          "full_name": "google.cloud.apphub.v1.AppHub.UpdateWorkload",
+          "service": {
+            "short_name": "AppHub",
+            "full_name": "google.cloud.apphub.v1.AppHub"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "apphub_v1_generated_AppHub_DeleteWorkload_sync",
+      "title": "Snippet for the delete_workload call in the AppHub service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AppHub::V1::AppHub::Client#delete_workload.",
+      "file": "app_hub/delete_workload.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_workload",
+        "full_name": "::Google::Cloud::AppHub::V1::AppHub::Client#delete_workload",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::AppHub::V1::DeleteWorkloadRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "AppHub::Client",
+          "full_name": "::Google::Cloud::AppHub::V1::AppHub::Client"
+        },
+        "method": {
+          "short_name": "DeleteWorkload",
+          "full_name": "google.cloud.apphub.v1.AppHub.DeleteWorkload",
+          "service": {
+            "short_name": "AppHub",
+            "full_name": "google.cloud.apphub.v1.AppHub"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "apphub_v1_generated_AppHub_ListApplications_sync",
+      "title": "Snippet for the list_applications call in the AppHub service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AppHub::V1::AppHub::Client#list_applications.",
+      "file": "app_hub/list_applications.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_applications",
+        "full_name": "::Google::Cloud::AppHub::V1::AppHub::Client#list_applications",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::AppHub::V1::ListApplicationsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::AppHub::V1::ListApplicationsResponse",
+        "client": {
+          "short_name": "AppHub::Client",
+          "full_name": "::Google::Cloud::AppHub::V1::AppHub::Client"
+        },
+        "method": {
+          "short_name": "ListApplications",
+          "full_name": "google.cloud.apphub.v1.AppHub.ListApplications",
+          "service": {
+            "short_name": "AppHub",
+            "full_name": "google.cloud.apphub.v1.AppHub"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "apphub_v1_generated_AppHub_CreateApplication_sync",
+      "title": "Snippet for the create_application call in the AppHub service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AppHub::V1::AppHub::Client#create_application.",
+      "file": "app_hub/create_application.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_application",
+        "full_name": "::Google::Cloud::AppHub::V1::AppHub::Client#create_application",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::AppHub::V1::CreateApplicationRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "AppHub::Client",
+          "full_name": "::Google::Cloud::AppHub::V1::AppHub::Client"
+        },
+        "method": {
+          "short_name": "CreateApplication",
+          "full_name": "google.cloud.apphub.v1.AppHub.CreateApplication",
+          "service": {
+            "short_name": "AppHub",
+            "full_name": "google.cloud.apphub.v1.AppHub"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "apphub_v1_generated_AppHub_GetApplication_sync",
+      "title": "Snippet for the get_application call in the AppHub service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AppHub::V1::AppHub::Client#get_application.",
+      "file": "app_hub/get_application.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_application",
+        "full_name": "::Google::Cloud::AppHub::V1::AppHub::Client#get_application",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::AppHub::V1::GetApplicationRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::AppHub::V1::Application",
+        "client": {
+          "short_name": "AppHub::Client",
+          "full_name": "::Google::Cloud::AppHub::V1::AppHub::Client"
+        },
+        "method": {
+          "short_name": "GetApplication",
+          "full_name": "google.cloud.apphub.v1.AppHub.GetApplication",
+          "service": {
+            "short_name": "AppHub",
+            "full_name": "google.cloud.apphub.v1.AppHub"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "apphub_v1_generated_AppHub_UpdateApplication_sync",
+      "title": "Snippet for the update_application call in the AppHub service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AppHub::V1::AppHub::Client#update_application.",
+      "file": "app_hub/update_application.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_application",
+        "full_name": "::Google::Cloud::AppHub::V1::AppHub::Client#update_application",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::AppHub::V1::UpdateApplicationRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "AppHub::Client",
+          "full_name": "::Google::Cloud::AppHub::V1::AppHub::Client"
+        },
+        "method": {
+          "short_name": "UpdateApplication",
+          "full_name": "google.cloud.apphub.v1.AppHub.UpdateApplication",
+          "service": {
+            "short_name": "AppHub",
+            "full_name": "google.cloud.apphub.v1.AppHub"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "apphub_v1_generated_AppHub_DeleteApplication_sync",
+      "title": "Snippet for the delete_application call in the AppHub service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AppHub::V1::AppHub::Client#delete_application.",
+      "file": "app_hub/delete_application.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_application",
+        "full_name": "::Google::Cloud::AppHub::V1::AppHub::Client#delete_application",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::AppHub::V1::DeleteApplicationRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "AppHub::Client",
+          "full_name": "::Google::Cloud::AppHub::V1::AppHub::Client"
+        },
+        "method": {
+          "short_name": "DeleteApplication",
+          "full_name": "google.cloud.apphub.v1.AppHub.DeleteApplication",
+          "service": {
+            "short_name": "AppHub",
+            "full_name": "google.cloud.apphub.v1.AppHub"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    }
+  ]
+}

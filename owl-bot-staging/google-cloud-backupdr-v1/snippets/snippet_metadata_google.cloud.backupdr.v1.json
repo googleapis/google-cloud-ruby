@@ -1,0 +1,1135 @@
+{
+  "client_library": {
+    "name": "google-cloud-backupdr-v1",
+    "version": "",
+    "language": "RUBY",
+    "apis": [
+      {
+        "id": "google.cloud.backupdr.v1",
+        "version": "v1"
+      }
+    ]
+  },
+  "snippets": [
+    {
+      "region_tag": "backupdr_v1_generated_BackupDR_ListManagementServers_sync",
+      "title": "Snippet for the list_management_servers call in the BackupDR service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::BackupDR::V1::BackupDR::Client#list_management_servers.",
+      "file": "backupdr/list_management_servers.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_management_servers",
+        "full_name": "::Google::Cloud::BackupDR::V1::BackupDR::Client#list_management_servers",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::BackupDR::V1::ListManagementServersRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::BackupDR::V1::ListManagementServersResponse",
+        "client": {
+          "short_name": "BackupDR::Client",
+          "full_name": "::Google::Cloud::BackupDR::V1::BackupDR::Client"
+        },
+        "method": {
+          "short_name": "ListManagementServers",
+          "full_name": "google.cloud.backupdr.v1.BackupDR.ListManagementServers",
+          "service": {
+            "short_name": "BackupDR",
+            "full_name": "google.cloud.backupdr.v1.BackupDR"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "backupdr_v1_generated_BackupDR_GetManagementServer_sync",
+      "title": "Snippet for the get_management_server call in the BackupDR service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::BackupDR::V1::BackupDR::Client#get_management_server.",
+      "file": "backupdr/get_management_server.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_management_server",
+        "full_name": "::Google::Cloud::BackupDR::V1::BackupDR::Client#get_management_server",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::BackupDR::V1::GetManagementServerRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::BackupDR::V1::ManagementServer",
+        "client": {
+          "short_name": "BackupDR::Client",
+          "full_name": "::Google::Cloud::BackupDR::V1::BackupDR::Client"
+        },
+        "method": {
+          "short_name": "GetManagementServer",
+          "full_name": "google.cloud.backupdr.v1.BackupDR.GetManagementServer",
+          "service": {
+            "short_name": "BackupDR",
+            "full_name": "google.cloud.backupdr.v1.BackupDR"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "backupdr_v1_generated_BackupDR_CreateManagementServer_sync",
+      "title": "Snippet for the create_management_server call in the BackupDR service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::BackupDR::V1::BackupDR::Client#create_management_server.",
+      "file": "backupdr/create_management_server.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_management_server",
+        "full_name": "::Google::Cloud::BackupDR::V1::BackupDR::Client#create_management_server",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::BackupDR::V1::CreateManagementServerRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "BackupDR::Client",
+          "full_name": "::Google::Cloud::BackupDR::V1::BackupDR::Client"
+        },
+        "method": {
+          "short_name": "CreateManagementServer",
+          "full_name": "google.cloud.backupdr.v1.BackupDR.CreateManagementServer",
+          "service": {
+            "short_name": "BackupDR",
+            "full_name": "google.cloud.backupdr.v1.BackupDR"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "backupdr_v1_generated_BackupDR_DeleteManagementServer_sync",
+      "title": "Snippet for the delete_management_server call in the BackupDR service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::BackupDR::V1::BackupDR::Client#delete_management_server.",
+      "file": "backupdr/delete_management_server.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_management_server",
+        "full_name": "::Google::Cloud::BackupDR::V1::BackupDR::Client#delete_management_server",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::BackupDR::V1::DeleteManagementServerRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "BackupDR::Client",
+          "full_name": "::Google::Cloud::BackupDR::V1::BackupDR::Client"
+        },
+        "method": {
+          "short_name": "DeleteManagementServer",
+          "full_name": "google.cloud.backupdr.v1.BackupDR.DeleteManagementServer",
+          "service": {
+            "short_name": "BackupDR",
+            "full_name": "google.cloud.backupdr.v1.BackupDR"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "backupdr_v1_generated_BackupDR_CreateBackupVault_sync",
+      "title": "Snippet for the create_backup_vault call in the BackupDR service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::BackupDR::V1::BackupDR::Client#create_backup_vault.",
+      "file": "backupdr/create_backup_vault.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_backup_vault",
+        "full_name": "::Google::Cloud::BackupDR::V1::BackupDR::Client#create_backup_vault",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::BackupDR::V1::CreateBackupVaultRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "BackupDR::Client",
+          "full_name": "::Google::Cloud::BackupDR::V1::BackupDR::Client"
+        },
+        "method": {
+          "short_name": "CreateBackupVault",
+          "full_name": "google.cloud.backupdr.v1.BackupDR.CreateBackupVault",
+          "service": {
+            "short_name": "BackupDR",
+            "full_name": "google.cloud.backupdr.v1.BackupDR"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "backupdr_v1_generated_BackupDR_ListBackupVaults_sync",
+      "title": "Snippet for the list_backup_vaults call in the BackupDR service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::BackupDR::V1::BackupDR::Client#list_backup_vaults.",
+      "file": "backupdr/list_backup_vaults.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_backup_vaults",
+        "full_name": "::Google::Cloud::BackupDR::V1::BackupDR::Client#list_backup_vaults",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::BackupDR::V1::ListBackupVaultsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::BackupDR::V1::ListBackupVaultsResponse",
+        "client": {
+          "short_name": "BackupDR::Client",
+          "full_name": "::Google::Cloud::BackupDR::V1::BackupDR::Client"
+        },
+        "method": {
+          "short_name": "ListBackupVaults",
+          "full_name": "google.cloud.backupdr.v1.BackupDR.ListBackupVaults",
+          "service": {
+            "short_name": "BackupDR",
+            "full_name": "google.cloud.backupdr.v1.BackupDR"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "backupdr_v1_generated_BackupDR_FetchUsableBackupVaults_sync",
+      "title": "Snippet for the fetch_usable_backup_vaults call in the BackupDR service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::BackupDR::V1::BackupDR::Client#fetch_usable_backup_vaults.",
+      "file": "backupdr/fetch_usable_backup_vaults.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "fetch_usable_backup_vaults",
+        "full_name": "::Google::Cloud::BackupDR::V1::BackupDR::Client#fetch_usable_backup_vaults",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::BackupDR::V1::FetchUsableBackupVaultsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::BackupDR::V1::FetchUsableBackupVaultsResponse",
+        "client": {
+          "short_name": "BackupDR::Client",
+          "full_name": "::Google::Cloud::BackupDR::V1::BackupDR::Client"
+        },
+        "method": {
+          "short_name": "FetchUsableBackupVaults",
+          "full_name": "google.cloud.backupdr.v1.BackupDR.FetchUsableBackupVaults",
+          "service": {
+            "short_name": "BackupDR",
+            "full_name": "google.cloud.backupdr.v1.BackupDR"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "backupdr_v1_generated_BackupDR_GetBackupVault_sync",
+      "title": "Snippet for the get_backup_vault call in the BackupDR service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::BackupDR::V1::BackupDR::Client#get_backup_vault.",
+      "file": "backupdr/get_backup_vault.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_backup_vault",
+        "full_name": "::Google::Cloud::BackupDR::V1::BackupDR::Client#get_backup_vault",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::BackupDR::V1::GetBackupVaultRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::BackupDR::V1::BackupVault",
+        "client": {
+          "short_name": "BackupDR::Client",
+          "full_name": "::Google::Cloud::BackupDR::V1::BackupDR::Client"
+        },
+        "method": {
+          "short_name": "GetBackupVault",
+          "full_name": "google.cloud.backupdr.v1.BackupDR.GetBackupVault",
+          "service": {
+            "short_name": "BackupDR",
+            "full_name": "google.cloud.backupdr.v1.BackupDR"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "backupdr_v1_generated_BackupDR_UpdateBackupVault_sync",
+      "title": "Snippet for the update_backup_vault call in the BackupDR service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::BackupDR::V1::BackupDR::Client#update_backup_vault.",
+      "file": "backupdr/update_backup_vault.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_backup_vault",
+        "full_name": "::Google::Cloud::BackupDR::V1::BackupDR::Client#update_backup_vault",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::BackupDR::V1::UpdateBackupVaultRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "BackupDR::Client",
+          "full_name": "::Google::Cloud::BackupDR::V1::BackupDR::Client"
+        },
+        "method": {
+          "short_name": "UpdateBackupVault",
+          "full_name": "google.cloud.backupdr.v1.BackupDR.UpdateBackupVault",
+          "service": {
+            "short_name": "BackupDR",
+            "full_name": "google.cloud.backupdr.v1.BackupDR"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "backupdr_v1_generated_BackupDR_DeleteBackupVault_sync",
+      "title": "Snippet for the delete_backup_vault call in the BackupDR service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::BackupDR::V1::BackupDR::Client#delete_backup_vault.",
+      "file": "backupdr/delete_backup_vault.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_backup_vault",
+        "full_name": "::Google::Cloud::BackupDR::V1::BackupDR::Client#delete_backup_vault",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::BackupDR::V1::DeleteBackupVaultRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "BackupDR::Client",
+          "full_name": "::Google::Cloud::BackupDR::V1::BackupDR::Client"
+        },
+        "method": {
+          "short_name": "DeleteBackupVault",
+          "full_name": "google.cloud.backupdr.v1.BackupDR.DeleteBackupVault",
+          "service": {
+            "short_name": "BackupDR",
+            "full_name": "google.cloud.backupdr.v1.BackupDR"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "backupdr_v1_generated_BackupDR_ListDataSources_sync",
+      "title": "Snippet for the list_data_sources call in the BackupDR service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::BackupDR::V1::BackupDR::Client#list_data_sources.",
+      "file": "backupdr/list_data_sources.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_data_sources",
+        "full_name": "::Google::Cloud::BackupDR::V1::BackupDR::Client#list_data_sources",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::BackupDR::V1::ListDataSourcesRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::BackupDR::V1::ListDataSourcesResponse",
+        "client": {
+          "short_name": "BackupDR::Client",
+          "full_name": "::Google::Cloud::BackupDR::V1::BackupDR::Client"
+        },
+        "method": {
+          "short_name": "ListDataSources",
+          "full_name": "google.cloud.backupdr.v1.BackupDR.ListDataSources",
+          "service": {
+            "short_name": "BackupDR",
+            "full_name": "google.cloud.backupdr.v1.BackupDR"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "backupdr_v1_generated_BackupDR_GetDataSource_sync",
+      "title": "Snippet for the get_data_source call in the BackupDR service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::BackupDR::V1::BackupDR::Client#get_data_source.",
+      "file": "backupdr/get_data_source.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_data_source",
+        "full_name": "::Google::Cloud::BackupDR::V1::BackupDR::Client#get_data_source",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::BackupDR::V1::GetDataSourceRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::BackupDR::V1::DataSource",
+        "client": {
+          "short_name": "BackupDR::Client",
+          "full_name": "::Google::Cloud::BackupDR::V1::BackupDR::Client"
+        },
+        "method": {
+          "short_name": "GetDataSource",
+          "full_name": "google.cloud.backupdr.v1.BackupDR.GetDataSource",
+          "service": {
+            "short_name": "BackupDR",
+            "full_name": "google.cloud.backupdr.v1.BackupDR"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "backupdr_v1_generated_BackupDR_UpdateDataSource_sync",
+      "title": "Snippet for the update_data_source call in the BackupDR service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::BackupDR::V1::BackupDR::Client#update_data_source.",
+      "file": "backupdr/update_data_source.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_data_source",
+        "full_name": "::Google::Cloud::BackupDR::V1::BackupDR::Client#update_data_source",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::BackupDR::V1::UpdateDataSourceRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "BackupDR::Client",
+          "full_name": "::Google::Cloud::BackupDR::V1::BackupDR::Client"
+        },
+        "method": {
+          "short_name": "UpdateDataSource",
+          "full_name": "google.cloud.backupdr.v1.BackupDR.UpdateDataSource",
+          "service": {
+            "short_name": "BackupDR",
+            "full_name": "google.cloud.backupdr.v1.BackupDR"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "backupdr_v1_generated_BackupDR_ListBackups_sync",
+      "title": "Snippet for the list_backups call in the BackupDR service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::BackupDR::V1::BackupDR::Client#list_backups.",
+      "file": "backupdr/list_backups.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_backups",
+        "full_name": "::Google::Cloud::BackupDR::V1::BackupDR::Client#list_backups",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::BackupDR::V1::ListBackupsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::BackupDR::V1::ListBackupsResponse",
+        "client": {
+          "short_name": "BackupDR::Client",
+          "full_name": "::Google::Cloud::BackupDR::V1::BackupDR::Client"
+        },
+        "method": {
+          "short_name": "ListBackups",
+          "full_name": "google.cloud.backupdr.v1.BackupDR.ListBackups",
+          "service": {
+            "short_name": "BackupDR",
+            "full_name": "google.cloud.backupdr.v1.BackupDR"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "backupdr_v1_generated_BackupDR_GetBackup_sync",
+      "title": "Snippet for the get_backup call in the BackupDR service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::BackupDR::V1::BackupDR::Client#get_backup.",
+      "file": "backupdr/get_backup.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_backup",
+        "full_name": "::Google::Cloud::BackupDR::V1::BackupDR::Client#get_backup",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::BackupDR::V1::GetBackupRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::BackupDR::V1::Backup",
+        "client": {
+          "short_name": "BackupDR::Client",
+          "full_name": "::Google::Cloud::BackupDR::V1::BackupDR::Client"
+        },
+        "method": {
+          "short_name": "GetBackup",
+          "full_name": "google.cloud.backupdr.v1.BackupDR.GetBackup",
+          "service": {
+            "short_name": "BackupDR",
+            "full_name": "google.cloud.backupdr.v1.BackupDR"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "backupdr_v1_generated_BackupDR_UpdateBackup_sync",
+      "title": "Snippet for the update_backup call in the BackupDR service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::BackupDR::V1::BackupDR::Client#update_backup.",
+      "file": "backupdr/update_backup.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_backup",
+        "full_name": "::Google::Cloud::BackupDR::V1::BackupDR::Client#update_backup",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::BackupDR::V1::UpdateBackupRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "BackupDR::Client",
+          "full_name": "::Google::Cloud::BackupDR::V1::BackupDR::Client"
+        },
+        "method": {
+          "short_name": "UpdateBackup",
+          "full_name": "google.cloud.backupdr.v1.BackupDR.UpdateBackup",
+          "service": {
+            "short_name": "BackupDR",
+            "full_name": "google.cloud.backupdr.v1.BackupDR"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "backupdr_v1_generated_BackupDR_DeleteBackup_sync",
+      "title": "Snippet for the delete_backup call in the BackupDR service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::BackupDR::V1::BackupDR::Client#delete_backup.",
+      "file": "backupdr/delete_backup.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_backup",
+        "full_name": "::Google::Cloud::BackupDR::V1::BackupDR::Client#delete_backup",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::BackupDR::V1::DeleteBackupRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "BackupDR::Client",
+          "full_name": "::Google::Cloud::BackupDR::V1::BackupDR::Client"
+        },
+        "method": {
+          "short_name": "DeleteBackup",
+          "full_name": "google.cloud.backupdr.v1.BackupDR.DeleteBackup",
+          "service": {
+            "short_name": "BackupDR",
+            "full_name": "google.cloud.backupdr.v1.BackupDR"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "backupdr_v1_generated_BackupDR_RestoreBackup_sync",
+      "title": "Snippet for the restore_backup call in the BackupDR service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::BackupDR::V1::BackupDR::Client#restore_backup.",
+      "file": "backupdr/restore_backup.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "restore_backup",
+        "full_name": "::Google::Cloud::BackupDR::V1::BackupDR::Client#restore_backup",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::BackupDR::V1::RestoreBackupRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "BackupDR::Client",
+          "full_name": "::Google::Cloud::BackupDR::V1::BackupDR::Client"
+        },
+        "method": {
+          "short_name": "RestoreBackup",
+          "full_name": "google.cloud.backupdr.v1.BackupDR.RestoreBackup",
+          "service": {
+            "short_name": "BackupDR",
+            "full_name": "google.cloud.backupdr.v1.BackupDR"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "backupdr_v1_generated_BackupDR_CreateBackupPlan_sync",
+      "title": "Snippet for the create_backup_plan call in the BackupDR service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::BackupDR::V1::BackupDR::Client#create_backup_plan.",
+      "file": "backupdr/create_backup_plan.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_backup_plan",
+        "full_name": "::Google::Cloud::BackupDR::V1::BackupDR::Client#create_backup_plan",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::BackupDR::V1::CreateBackupPlanRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "BackupDR::Client",
+          "full_name": "::Google::Cloud::BackupDR::V1::BackupDR::Client"
+        },
+        "method": {
+          "short_name": "CreateBackupPlan",
+          "full_name": "google.cloud.backupdr.v1.BackupDR.CreateBackupPlan",
+          "service": {
+            "short_name": "BackupDR",
+            "full_name": "google.cloud.backupdr.v1.BackupDR"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "backupdr_v1_generated_BackupDR_GetBackupPlan_sync",
+      "title": "Snippet for the get_backup_plan call in the BackupDR service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::BackupDR::V1::BackupDR::Client#get_backup_plan.",
+      "file": "backupdr/get_backup_plan.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_backup_plan",
+        "full_name": "::Google::Cloud::BackupDR::V1::BackupDR::Client#get_backup_plan",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::BackupDR::V1::GetBackupPlanRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::BackupDR::V1::BackupPlan",
+        "client": {
+          "short_name": "BackupDR::Client",
+          "full_name": "::Google::Cloud::BackupDR::V1::BackupDR::Client"
+        },
+        "method": {
+          "short_name": "GetBackupPlan",
+          "full_name": "google.cloud.backupdr.v1.BackupDR.GetBackupPlan",
+          "service": {
+            "short_name": "BackupDR",
+            "full_name": "google.cloud.backupdr.v1.BackupDR"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "backupdr_v1_generated_BackupDR_ListBackupPlans_sync",
+      "title": "Snippet for the list_backup_plans call in the BackupDR service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::BackupDR::V1::BackupDR::Client#list_backup_plans.",
+      "file": "backupdr/list_backup_plans.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_backup_plans",
+        "full_name": "::Google::Cloud::BackupDR::V1::BackupDR::Client#list_backup_plans",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::BackupDR::V1::ListBackupPlansRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::BackupDR::V1::ListBackupPlansResponse",
+        "client": {
+          "short_name": "BackupDR::Client",
+          "full_name": "::Google::Cloud::BackupDR::V1::BackupDR::Client"
+        },
+        "method": {
+          "short_name": "ListBackupPlans",
+          "full_name": "google.cloud.backupdr.v1.BackupDR.ListBackupPlans",
+          "service": {
+            "short_name": "BackupDR",
+            "full_name": "google.cloud.backupdr.v1.BackupDR"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "backupdr_v1_generated_BackupDR_DeleteBackupPlan_sync",
+      "title": "Snippet for the delete_backup_plan call in the BackupDR service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::BackupDR::V1::BackupDR::Client#delete_backup_plan.",
+      "file": "backupdr/delete_backup_plan.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_backup_plan",
+        "full_name": "::Google::Cloud::BackupDR::V1::BackupDR::Client#delete_backup_plan",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::BackupDR::V1::DeleteBackupPlanRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "BackupDR::Client",
+          "full_name": "::Google::Cloud::BackupDR::V1::BackupDR::Client"
+        },
+        "method": {
+          "short_name": "DeleteBackupPlan",
+          "full_name": "google.cloud.backupdr.v1.BackupDR.DeleteBackupPlan",
+          "service": {
+            "short_name": "BackupDR",
+            "full_name": "google.cloud.backupdr.v1.BackupDR"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "backupdr_v1_generated_BackupDR_CreateBackupPlanAssociation_sync",
+      "title": "Snippet for the create_backup_plan_association call in the BackupDR service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::BackupDR::V1::BackupDR::Client#create_backup_plan_association.",
+      "file": "backupdr/create_backup_plan_association.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_backup_plan_association",
+        "full_name": "::Google::Cloud::BackupDR::V1::BackupDR::Client#create_backup_plan_association",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::BackupDR::V1::CreateBackupPlanAssociationRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "BackupDR::Client",
+          "full_name": "::Google::Cloud::BackupDR::V1::BackupDR::Client"
+        },
+        "method": {
+          "short_name": "CreateBackupPlanAssociation",
+          "full_name": "google.cloud.backupdr.v1.BackupDR.CreateBackupPlanAssociation",
+          "service": {
+            "short_name": "BackupDR",
+            "full_name": "google.cloud.backupdr.v1.BackupDR"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "backupdr_v1_generated_BackupDR_GetBackupPlanAssociation_sync",
+      "title": "Snippet for the get_backup_plan_association call in the BackupDR service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::BackupDR::V1::BackupDR::Client#get_backup_plan_association.",
+      "file": "backupdr/get_backup_plan_association.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_backup_plan_association",
+        "full_name": "::Google::Cloud::BackupDR::V1::BackupDR::Client#get_backup_plan_association",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::BackupDR::V1::GetBackupPlanAssociationRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::BackupDR::V1::BackupPlanAssociation",
+        "client": {
+          "short_name": "BackupDR::Client",
+          "full_name": "::Google::Cloud::BackupDR::V1::BackupDR::Client"
+        },
+        "method": {
+          "short_name": "GetBackupPlanAssociation",
+          "full_name": "google.cloud.backupdr.v1.BackupDR.GetBackupPlanAssociation",
+          "service": {
+            "short_name": "BackupDR",
+            "full_name": "google.cloud.backupdr.v1.BackupDR"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "backupdr_v1_generated_BackupDR_ListBackupPlanAssociations_sync",
+      "title": "Snippet for the list_backup_plan_associations call in the BackupDR service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::BackupDR::V1::BackupDR::Client#list_backup_plan_associations.",
+      "file": "backupdr/list_backup_plan_associations.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_backup_plan_associations",
+        "full_name": "::Google::Cloud::BackupDR::V1::BackupDR::Client#list_backup_plan_associations",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::BackupDR::V1::ListBackupPlanAssociationsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::BackupDR::V1::ListBackupPlanAssociationsResponse",
+        "client": {
+          "short_name": "BackupDR::Client",
+          "full_name": "::Google::Cloud::BackupDR::V1::BackupDR::Client"
+        },
+        "method": {
+          "short_name": "ListBackupPlanAssociations",
+          "full_name": "google.cloud.backupdr.v1.BackupDR.ListBackupPlanAssociations",
+          "service": {
+            "short_name": "BackupDR",
+            "full_name": "google.cloud.backupdr.v1.BackupDR"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "backupdr_v1_generated_BackupDR_DeleteBackupPlanAssociation_sync",
+      "title": "Snippet for the delete_backup_plan_association call in the BackupDR service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::BackupDR::V1::BackupDR::Client#delete_backup_plan_association.",
+      "file": "backupdr/delete_backup_plan_association.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_backup_plan_association",
+        "full_name": "::Google::Cloud::BackupDR::V1::BackupDR::Client#delete_backup_plan_association",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::BackupDR::V1::DeleteBackupPlanAssociationRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "BackupDR::Client",
+          "full_name": "::Google::Cloud::BackupDR::V1::BackupDR::Client"
+        },
+        "method": {
+          "short_name": "DeleteBackupPlanAssociation",
+          "full_name": "google.cloud.backupdr.v1.BackupDR.DeleteBackupPlanAssociation",
+          "service": {
+            "short_name": "BackupDR",
+            "full_name": "google.cloud.backupdr.v1.BackupDR"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "backupdr_v1_generated_BackupDR_TriggerBackup_sync",
+      "title": "Snippet for the trigger_backup call in the BackupDR service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::BackupDR::V1::BackupDR::Client#trigger_backup.",
+      "file": "backupdr/trigger_backup.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "trigger_backup",
+        "full_name": "::Google::Cloud::BackupDR::V1::BackupDR::Client#trigger_backup",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::BackupDR::V1::TriggerBackupRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "BackupDR::Client",
+          "full_name": "::Google::Cloud::BackupDR::V1::BackupDR::Client"
+        },
+        "method": {
+          "short_name": "TriggerBackup",
+          "full_name": "google.cloud.backupdr.v1.BackupDR.TriggerBackup",
+          "service": {
+            "short_name": "BackupDR",
+            "full_name": "google.cloud.backupdr.v1.BackupDR"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "backupdr_v1_generated_BackupDR_InitializeService_sync",
+      "title": "Snippet for the initialize_service call in the BackupDR service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::BackupDR::V1::BackupDR::Client#initialize_service.",
+      "file": "backupdr/initialize_service.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "initialize_service",
+        "full_name": "::Google::Cloud::BackupDR::V1::BackupDR::Client#initialize_service",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::BackupDR::V1::InitializeServiceRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "BackupDR::Client",
+          "full_name": "::Google::Cloud::BackupDR::V1::BackupDR::Client"
+        },
+        "method": {
+          "short_name": "InitializeService",
+          "full_name": "google.cloud.backupdr.v1.BackupDR.InitializeService",
+          "service": {
+            "short_name": "BackupDR",
+            "full_name": "google.cloud.backupdr.v1.BackupDR"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    }
+  ]
+}
