@@ -1,0 +1,103 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "ruby",
+  "protoPackage": "google.cloud.connectors.v1",
+  "libraryPackage": "::Google::Cloud::Connectors::V1",
+  "services": {
+    "Connectors": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::Connectors::V1::Connectors::Client",
+          "rpcs": {
+            "ListConnections": {
+              "methods": [
+                "list_connections"
+              ]
+            },
+            "GetConnection": {
+              "methods": [
+                "get_connection"
+              ]
+            },
+            "CreateConnection": {
+              "methods": [
+                "create_connection"
+              ]
+            },
+            "UpdateConnection": {
+              "methods": [
+                "update_connection"
+              ]
+            },
+            "DeleteConnection": {
+              "methods": [
+                "delete_connection"
+              ]
+            },
+            "ListProviders": {
+              "methods": [
+                "list_providers"
+              ]
+            },
+            "GetProvider": {
+              "methods": [
+                "get_provider"
+              ]
+            },
+            "ListConnectors": {
+              "methods": [
+                "list_connectors"
+              ]
+            },
+            "GetConnector": {
+              "methods": [
+                "get_connector"
+              ]
+            },
+            "ListConnectorVersions": {
+              "methods": [
+                "list_connector_versions"
+              ]
+            },
+            "GetConnectorVersion": {
+              "methods": [
+                "get_connector_version"
+              ]
+            },
+            "GetConnectionSchemaMetadata": {
+              "methods": [
+                "get_connection_schema_metadata"
+              ]
+            },
+            "RefreshConnectionSchemaMetadata": {
+              "methods": [
+                "refresh_connection_schema_metadata"
+              ]
+            },
+            "ListRuntimeEntitySchemas": {
+              "methods": [
+                "list_runtime_entity_schemas"
+              ]
+            },
+            "ListRuntimeActionSchemas": {
+              "methods": [
+                "list_runtime_action_schemas"
+              ]
+            },
+            "GetRuntimeConfig": {
+              "methods": [
+                "get_runtime_config"
+              ]
+            },
+            "GetGlobalSettings": {
+              "methods": [
+                "get_global_settings"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}
