@@ -54,6 +54,18 @@ module Google
             rpc :UpdateLbRouteExtension, ::Google::Cloud::NetworkServices::V1::UpdateLbRouteExtensionRequest, ::Google::Longrunning::Operation
             # Deletes the specified `LbRouteExtension` resource.
             rpc :DeleteLbRouteExtension, ::Google::Cloud::NetworkServices::V1::DeleteLbRouteExtensionRequest, ::Google::Longrunning::Operation
+            # Lists `AuthzExtension` resources in a given project and location.
+            rpc :ListAuthzExtensions, ::Google::Cloud::NetworkServices::V1::ListAuthzExtensionsRequest, ::Google::Cloud::NetworkServices::V1::ListAuthzExtensionsResponse
+            # Gets details of the specified `AuthzExtension` resource.
+            rpc :GetAuthzExtension, ::Google::Cloud::NetworkServices::V1::GetAuthzExtensionRequest, ::Google::Cloud::NetworkServices::V1::AuthzExtension
+            # Creates a new `AuthzExtension` resource in a given project
+            # and location.
+            rpc :CreateAuthzExtension, ::Google::Cloud::NetworkServices::V1::CreateAuthzExtensionRequest, ::Google::Longrunning::Operation
+            # Updates the parameters of the specified `AuthzExtension`
+            # resource.
+            rpc :UpdateAuthzExtension, ::Google::Cloud::NetworkServices::V1::UpdateAuthzExtensionRequest, ::Google::Longrunning::Operation
+            # Deletes the specified `AuthzExtension` resource.
+            rpc :DeleteAuthzExtension, ::Google::Cloud::NetworkServices::V1::DeleteAuthzExtensionRequest, ::Google::Longrunning::Operation
           end
 
           Stub = Service.rpc_stub_class

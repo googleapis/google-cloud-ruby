@@ -444,6 +444,46 @@ module Google
               "projects/#{project}/locations/#{location}/tlsRoutes/#{tls_route}"
             end
 
+            ##
+            # Create a fully-qualified WasmPlugin resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `projects/{project}/locations/{location}/wasmPlugins/{wasm_plugin}`
+            #
+            # @param project [String]
+            # @param location [String]
+            # @param wasm_plugin [String]
+            #
+            # @return [::String]
+            def wasm_plugin_path project:, location:, wasm_plugin:
+              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+              raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+
+              "projects/#{project}/locations/#{location}/wasmPlugins/#{wasm_plugin}"
+            end
+
+            ##
+            # Create a fully-qualified WasmPluginVersion resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `projects/{project}/locations/{location}/wasmPlugins/{wasm_plugin}/versions/{wasm_plugin_version}`
+            #
+            # @param project [String]
+            # @param location [String]
+            # @param wasm_plugin [String]
+            # @param wasm_plugin_version [String]
+            #
+            # @return [::String]
+            def wasm_plugin_version_path project:, location:, wasm_plugin:, wasm_plugin_version:
+              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+              raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+              raise ::ArgumentError, "wasm_plugin cannot contain /" if wasm_plugin.to_s.include? "/"
+
+              "projects/#{project}/locations/#{location}/wasmPlugins/#{wasm_plugin}/versions/#{wasm_plugin_version}"
+            end
+
             extend self
           end
         end
