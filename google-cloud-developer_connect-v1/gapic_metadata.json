@@ -79,6 +79,90 @@
               "methods": [
                 "fetch_git_refs"
               ]
+            },
+            "ListAccountConnectors": {
+              "methods": [
+                "list_account_connectors"
+              ]
+            },
+            "GetAccountConnector": {
+              "methods": [
+                "get_account_connector"
+              ]
+            },
+            "CreateAccountConnector": {
+              "methods": [
+                "create_account_connector"
+              ]
+            },
+            "UpdateAccountConnector": {
+              "methods": [
+                "update_account_connector"
+              ]
+            },
+            "DeleteAccountConnector": {
+              "methods": [
+                "delete_account_connector"
+              ]
+            },
+            "FetchAccessToken": {
+              "methods": [
+                "fetch_access_token"
+              ]
+            },
+            "ListUsers": {
+              "methods": [
+                "list_users"
+              ]
+            },
+            "DeleteUser": {
+              "methods": [
+                "delete_user"
+              ]
+            },
+            "FetchSelf": {
+              "methods": [
+                "fetch_self"
+              ]
+            },
+            "DeleteSelf": {
+              "methods": [
+                "delete_self"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "InsightsConfigService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::Developerconnect::V1::InsightsConfigService::Client",
+          "rpcs": {
+            "ListInsightsConfigs": {
+              "methods": [
+                "list_insights_configs"
+              ]
+            },
+            "CreateInsightsConfig": {
+              "methods": [
+                "create_insights_config"
+              ]
+            },
+            "GetInsightsConfig": {
+              "methods": [
+                "get_insights_config"
+              ]
+            },
+            "UpdateInsightsConfig": {
+              "methods": [
+                "update_insights_config"
+              ]
+            },
+            "DeleteInsightsConfig": {
+              "methods": [
+                "delete_insights_config"
+              ]
             }
           }
         }
