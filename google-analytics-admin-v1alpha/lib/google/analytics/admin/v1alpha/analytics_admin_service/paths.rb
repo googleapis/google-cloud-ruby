@@ -525,6 +525,23 @@ module Google
             end
 
             ##
+            # Create a fully-qualified ReportingDataAnnotation resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `properties/{property}/reportingDataAnnotations/{reporting_data_annotation}`
+            #
+            # @param property [String]
+            # @param reporting_data_annotation [String]
+            #
+            # @return [::String]
+            def reporting_data_annotation_path property:, reporting_data_annotation:
+              raise ::ArgumentError, "property cannot contain /" if property.to_s.include? "/"
+
+              "properties/#{property}/reportingDataAnnotations/#{reporting_data_annotation}"
+            end
+
+            ##
             # Create a fully-qualified RollupPropertySourceLink resource string.
             #
             # The resource will be in the following format:
@@ -592,6 +609,23 @@ module Google
               raise ::ArgumentError, "property cannot contain /" if property.to_s.include? "/"
 
               "properties/#{property}/subpropertyEventFilters/#{sub_property_event_filter}"
+            end
+
+            ##
+            # Create a fully-qualified SubpropertySyncConfig resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `properties/{property}/subpropertySyncConfigs/{subproperty_sync_config}`
+            #
+            # @param property [String]
+            # @param subproperty_sync_config [String]
+            #
+            # @return [::String]
+            def subproperty_sync_config_path property:, subproperty_sync_config:
+              raise ::ArgumentError, "property cannot contain /" if property.to_s.include? "/"
+
+              "properties/#{property}/subpropertySyncConfigs/#{subproperty_sync_config}"
             end
 
             extend self

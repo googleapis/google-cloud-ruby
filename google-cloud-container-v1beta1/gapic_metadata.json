@@ -184,6 +184,16 @@
               "methods": [
                 "list_locations"
               ]
+            },
+            "FetchClusterUpgradeInfo": {
+              "methods": [
+                "fetch_cluster_upgrade_info"
+              ]
+            },
+            "FetchNodePoolUpgradeInfo": {
+              "methods": [
+                "fetch_node_pool_upgrade_info"
+              ]
             }
           }
         }

@@ -1,6 +1,9 @@
 inherit_gem:
     google-style: google-style.yml
 
+Layout/LineLength:
+    Exclude:
+        - "acceptance/*.rb"
 Lint/ShadowingOuterLocalVariable:
     Enabled: false
 Metrics/AbcSize:
@@ -9,9 +12,6 @@ Metrics/BlockLength:
     Enabled: false
 Metrics/CyclomaticComplexity:
     Enabled: false
-Metrics/LineLength:
-    Exclude:
-        - "acceptance/*.rb"
 Metrics/MethodLength:
     Enabled: false
 Style/IfUnlessModifier:

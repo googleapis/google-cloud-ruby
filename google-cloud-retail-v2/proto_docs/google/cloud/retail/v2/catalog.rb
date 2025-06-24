@@ -103,8 +103,8 @@ module Google
         #
         #     {::Google::Cloud::Retail::V2::CatalogAttribute CatalogAttribute} can be
         #     pre-loaded by using
-        #     {::Google::Cloud::Retail::V2::CatalogService::Client#add_catalog_attribute CatalogService.AddCatalogAttribute},
-        #     [CatalogService.ImportCatalogAttributes][], or
+        #     {::Google::Cloud::Retail::V2::CatalogService::Client#add_catalog_attribute CatalogService.AddCatalogAttribute}
+        #     or
         #     {::Google::Cloud::Retail::V2::CatalogService::Client#update_attributes_config CatalogService.UpdateAttributesConfig}
         #     APIs. This field is `False` for pre-loaded
         #     {::Google::Cloud::Retail::V2::CatalogAttribute CatalogAttribute}s.

@@ -435,8 +435,8 @@ module Google
               #     ignore the request if it has already been completed. The server will
               #     guarantee that for at least 60 minutes since the first request.
               #
-              #     For example, consider a situation where you make an initial request and t
-              #     he request times out. If you make the request again with the same request
+              #     For example, consider a situation where you make an initial request and
+              #     the request times out. If you make the request again with the same request
               #     ID, the server can check if original operation with the same request ID
               #     was received, and if so, will ignore the second request. This prevents
               #     clients from accidentally creating duplicate commitments.
@@ -541,8 +541,8 @@ module Google
               #     ignore the request if it has already been completed. The server will
               #     guarantee that for at least 60 minutes since the first request.
               #
-              #     For example, consider a situation where you make an initial request and t
-              #     he request times out. If you make the request again with the same request
+              #     For example, consider a situation where you make an initial request and
+              #     the request times out. If you make the request again with the same request
               #     ID, the server can check if original operation with the same request ID
               #     was received, and if so, will ignore the second request. This prevents
               #     clients from accidentally creating duplicate commitments.
@@ -642,8 +642,8 @@ module Google
               #     ignore the request if it has already been completed. The server will
               #     guarantee that for at least 60 minutes after the first request.
               #
-              #     For example, consider a situation where you make an initial request and t
-              #     he request times out. If you make the request again with the same request
+              #     For example, consider a situation where you make an initial request and
+              #     the request times out. If you make the request again with the same request
               #     ID, the server can check if original operation with the same request ID
               #     was received, and if so, will ignore the second request. This prevents
               #     clients from accidentally creating duplicate commitments.
@@ -747,8 +747,8 @@ module Google
               #     ignore the request if it has already been completed. The server will
               #     guarantee that for at least 60 minutes since the first request.
               #
-              #     For example, consider a situation where you make an initial request and t
-              #     he request times out. If you make the request again with the same request
+              #     For example, consider a situation where you make an initial request and
+              #     the request times out. If you make the request again with the same request
               #     ID, the server can check if original operation with the same request ID
               #     was received, and if so, will ignore the second request. This prevents
               #     clients from accidentally creating duplicate commitments.
@@ -866,8 +866,8 @@ module Google
               #     ignore the request if it has already been completed. The server will
               #     guarantee that for at least 60 minutes since the first request.
               #
-              #     For example, consider a situation where you make an initial request and t
-              #     he request times out. If you make the request again with the same request
+              #     For example, consider a situation where you make an initial request and
+              #     the request times out. If you make the request again with the same request
               #     ID, the server can check if original operation with the same request ID
               #     was received, and if so, will ignore the second request. This prevents
               #     clients from accidentally creating duplicate commitments.
@@ -1050,7 +1050,7 @@ module Google
 
                 config_attr :endpoint,      nil, ::String, nil
                 config_attr :credentials,   nil do |value|
-                  allowed = [::String, ::Hash, ::Proc, ::Symbol, ::Google::Auth::Credentials, ::Signet::OAuth2::Client, nil]
+                  allowed = [::String, ::Hash, ::Proc, ::Symbol, ::Google::Auth::Credentials, ::Google::Auth::BaseClient, ::Signet::OAuth2::Client, nil]
                   allowed.any? { |klass| klass === value }
                 end
                 config_attr :scope,         nil, ::String, ::Array, nil

@@ -1,5 +1,24 @@
 # Release History
 
+### 0.13.0 (2025-05-12)
+
+#### Features
+
+* Updated core dependencies including gapic-common 
+* Updated required Ruby version to 3.1 
+
+### 0.12.2 (2025-04-29)
+
+#### Bug Fixes
+
+* Fixed several issues with validating credential configs 
+
+### 0.12.1 (2025-04-21)
+
+#### Documentation
+
+* A comment for field `revision_id` in message `.google.cloud.workflows.v1beta.Workflow` is changed ([#29443](https://github.com/googleapis/google-cloud-ruby/issues/29443)) 
+
 ### 0.12.0 (2025-02-07)
 
 ### ⚠ BREAKING CHANGES

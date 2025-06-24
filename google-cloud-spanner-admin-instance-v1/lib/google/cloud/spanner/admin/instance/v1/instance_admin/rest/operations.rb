@@ -558,7 +558,7 @@ module Google
 
                     config_attr :endpoint,      nil, ::String, nil
                     config_attr :credentials,   nil do |value|
-                      allowed = [::String, ::Hash, ::Proc, ::Symbol, ::Google::Auth::Credentials, ::Signet::OAuth2::Client, nil]
+                      allowed = [::String, ::Hash, ::Proc, ::Symbol, ::Google::Auth::Credentials, ::Google::Auth::BaseClient, ::Signet::OAuth2::Client, nil]
                       allowed.any? { |klass| klass === value }
                     end
                     config_attr :scope,         nil, ::String, ::Array, nil
@@ -848,6 +848,34 @@ module Google
                                                                 ["name", %r{^projects/[^/]+/instances/[^/]+/operations/?$}, false]
                                                               ]
                                                             )
+                                                            .with_bindings(
+                                                              uri_method: :get,
+                                                              uri_template: "/v1/{name}",
+                                                              matches: [
+                                                                ["name", %r{^projects/[^/]+/instances/[^/]+/backups/[^/]+/operations/?$}, false]
+                                                              ]
+                                                            )
+                                                            .with_bindings(
+                                                              uri_method: :get,
+                                                              uri_template: "/v1/{name}",
+                                                              matches: [
+                                                                ["name", %r{^projects/[^/]+/instances/[^/]+/instancePartitions/[^/]+/operations/?$}, false]
+                                                              ]
+                                                            )
+                                                            .with_bindings(
+                                                              uri_method: :get,
+                                                              uri_template: "/v1/{name}",
+                                                              matches: [
+                                                                ["name", %r{^projects/[^/]+/instanceConfigs/[^/]+/operations/?$}, false]
+                                                              ]
+                                                            )
+                                                            .with_bindings(
+                                                              uri_method: :get,
+                                                              uri_template: "/v1/{name}",
+                                                              matches: [
+                                                                ["name", %r{^projects/[^/]+/instanceConfigs/[^/]+/ssdCaches/[^/]+/operations/?$}, false]
+                                                              ]
+                                                            )
                     transcoder.transcode request_pb
                   end
 
@@ -874,6 +902,34 @@ module Google
                                                               uri_template: "/v1/{name}",
                                                               matches: [
                                                                 ["name", %r{^projects/[^/]+/instances/[^/]+/operations/[^/]+/?$}, false]
+                                                              ]
+                                                            )
+                                                            .with_bindings(
+                                                              uri_method: :get,
+                                                              uri_template: "/v1/{name}",
+                                                              matches: [
+                                                                ["name", %r{^projects/[^/]+/instances/[^/]+/backups/[^/]+/operations/[^/]+/?$}, false]
+                                                              ]
+                                                            )
+                                                            .with_bindings(
+                                                              uri_method: :get,
+                                                              uri_template: "/v1/{name}",
+                                                              matches: [
+                                                                ["name", %r{^projects/[^/]+/instances/[^/]+/instancePartitions/[^/]+/operations/[^/]+/?$}, false]
+                                                              ]
+                                                            )
+                                                            .with_bindings(
+                                                              uri_method: :get,
+                                                              uri_template: "/v1/{name}",
+                                                              matches: [
+                                                                ["name", %r{^projects/[^/]+/instanceConfigs/[^/]+/operations/[^/]+/?$}, false]
+                                                              ]
+                                                            )
+                                                            .with_bindings(
+                                                              uri_method: :get,
+                                                              uri_template: "/v1/{name}",
+                                                              matches: [
+                                                                ["name", %r{^projects/[^/]+/instanceConfigs/[^/]+/ssdCaches/[^/]+/operations/[^/]+/?$}, false]
                                                               ]
                                                             )
                     transcoder.transcode request_pb
@@ -904,6 +960,34 @@ module Google
                                                                 ["name", %r{^projects/[^/]+/instances/[^/]+/operations/[^/]+/?$}, false]
                                                               ]
                                                             )
+                                                            .with_bindings(
+                                                              uri_method: :delete,
+                                                              uri_template: "/v1/{name}",
+                                                              matches: [
+                                                                ["name", %r{^projects/[^/]+/instances/[^/]+/backups/[^/]+/operations/[^/]+/?$}, false]
+                                                              ]
+                                                            )
+                                                            .with_bindings(
+                                                              uri_method: :delete,
+                                                              uri_template: "/v1/{name}",
+                                                              matches: [
+                                                                ["name", %r{^projects/[^/]+/instances/[^/]+/instancePartitions/[^/]+/operations/[^/]+/?$}, false]
+                                                              ]
+                                                            )
+                                                            .with_bindings(
+                                                              uri_method: :delete,
+                                                              uri_template: "/v1/{name}",
+                                                              matches: [
+                                                                ["name", %r{^projects/[^/]+/instanceConfigs/[^/]+/operations/[^/]+/?$}, false]
+                                                              ]
+                                                            )
+                                                            .with_bindings(
+                                                              uri_method: :delete,
+                                                              uri_template: "/v1/{name}",
+                                                              matches: [
+                                                                ["name", %r{^projects/[^/]+/instanceConfigs/[^/]+/ssdCaches/[^/]+/operations/[^/]+/?$}, false]
+                                                              ]
+                                                            )
                     transcoder.transcode request_pb
                   end
 
@@ -930,6 +1014,34 @@ module Google
                                                               uri_template: "/v1/{name}:cancel",
                                                               matches: [
                                                                 ["name", %r{^projects/[^/]+/instances/[^/]+/operations/[^/]+/?$}, false]
+                                                              ]
+                                                            )
+                                                            .with_bindings(
+                                                              uri_method: :post,
+                                                              uri_template: "/v1/{name}:cancel",
+                                                              matches: [
+                                                                ["name", %r{^projects/[^/]+/instances/[^/]+/backups/[^/]+/operations/[^/]+/?$}, false]
+                                                              ]
+                                                            )
+                                                            .with_bindings(
+                                                              uri_method: :post,
+                                                              uri_template: "/v1/{name}:cancel",
+                                                              matches: [
+                                                                ["name", %r{^projects/[^/]+/instances/[^/]+/instancePartitions/[^/]+/operations/[^/]+/?$}, false]
+                                                              ]
+                                                            )
+                                                            .with_bindings(
+                                                              uri_method: :post,
+                                                              uri_template: "/v1/{name}:cancel",
+                                                              matches: [
+                                                                ["name", %r{^projects/[^/]+/instanceConfigs/[^/]+/operations/[^/]+/?$}, false]
+                                                              ]
+                                                            )
+                                                            .with_bindings(
+                                                              uri_method: :post,
+                                                              uri_template: "/v1/{name}:cancel",
+                                                              matches: [
+                                                                ["name", %r{^projects/[^/]+/instanceConfigs/[^/]+/ssdCaches/[^/]+/operations/[^/]+/?$}, false]
                                                               ]
                                                             )
                     transcoder.transcode request_pb

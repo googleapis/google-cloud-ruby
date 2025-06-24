@@ -314,6 +314,7 @@ class ::Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Rest::Client
     statements = ["hello world"]
     operation_id = "hello world"
     proto_descriptors = "hello world"
+    throughput_mode = true
 
     update_database_ddl_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
@@ -329,27 +330,27 @@ class ::Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Rest::Client
         end
 
         # Use hash object
-        client.update_database_ddl({ database: database, statements: statements, operation_id: operation_id, proto_descriptors: proto_descriptors }) do |_result, response|
+        client.update_database_ddl({ database: database, statements: statements, operation_id: operation_id, proto_descriptors: proto_descriptors, throughput_mode: throughput_mode }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.update_database_ddl database: database, statements: statements, operation_id: operation_id, proto_descriptors: proto_descriptors do |_result, response|
+        client.update_database_ddl database: database, statements: statements, operation_id: operation_id, proto_descriptors: proto_descriptors, throughput_mode: throughput_mode do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.update_database_ddl ::Google::Cloud::Spanner::Admin::Database::V1::UpdateDatabaseDdlRequest.new(database: database, statements: statements, operation_id: operation_id, proto_descriptors: proto_descriptors) do |_result, response|
+        client.update_database_ddl ::Google::Cloud::Spanner::Admin::Database::V1::UpdateDatabaseDdlRequest.new(database: database, statements: statements, operation_id: operation_id, proto_descriptors: proto_descriptors, throughput_mode: throughput_mode) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.update_database_ddl({ database: database, statements: statements, operation_id: operation_id, proto_descriptors: proto_descriptors }, call_options) do |_result, response|
+        client.update_database_ddl({ database: database, statements: statements, operation_id: operation_id, proto_descriptors: proto_descriptors, throughput_mode: throughput_mode }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.update_database_ddl(::Google::Cloud::Spanner::Admin::Database::V1::UpdateDatabaseDdlRequest.new(database: database, statements: statements, operation_id: operation_id, proto_descriptors: proto_descriptors), call_options) do |_result, response|
+        client.update_database_ddl(::Google::Cloud::Spanner::Admin::Database::V1::UpdateDatabaseDdlRequest.new(database: database, statements: statements, operation_id: operation_id, proto_descriptors: proto_descriptors, throughput_mode: throughput_mode), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 

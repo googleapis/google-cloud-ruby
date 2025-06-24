@@ -17,7 +17,9 @@
     "lib/google/cloud/oracle_database/v1.rb",
     "lib/google/cloud/oracle_database/v1/bindings_override.rb",
     "lib/google/cloud/oracle_database/v1/oracle_database.rb",
+    "lib/google/cloud/oracle_database/v1/oracle_database/client.rb",
     "lib/google/cloud/oracle_database/v1/oracle_database/credentials.rb",
+    "lib/google/cloud/oracle_database/v1/oracle_database/operations.rb",
     "lib/google/cloud/oracle_database/v1/oracle_database/paths.rb",
     "lib/google/cloud/oracle_database/v1/oracle_database/rest.rb",
     "lib/google/cloud/oracle_database/v1/oracle_database/rest/client.rb",
@@ -97,7 +99,10 @@
     "snippets/oracle_database/start_autonomous_database.rb",
     "snippets/oracle_database/stop_autonomous_database.rb",
     "snippets/snippet_metadata_google.cloud.oracledatabase.v1.json",
+    "test/google/cloud/oracle_database/v1/oracle_database_operations_test.rb",
+    "test/google/cloud/oracle_database/v1/oracle_database_paths_test.rb",
     "test/google/cloud/oracle_database/v1/oracle_database_rest_test.rb",
+    "test/google/cloud/oracle_database/v1/oracle_database_test.rb",
     "test/helper.rb"
   ],
   "static": [

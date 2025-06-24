@@ -251,7 +251,7 @@ module Google
             #
             #   @param parent [::String]
             #     Required. The project and location from which the `LbTrafficExtension`
-            #     resources are listed, specified in the following format:
+            #     resources are listed. These values are specified in the following format:
             #     `projects/{project}/locations/{location}`.
             #   @param page_size [::Integer]
             #     Optional. Requested page size. The server might return fewer items than
@@ -261,7 +261,7 @@ module Google
             #   @param filter [::String]
             #     Optional. Filtering results.
             #   @param order_by [::String]
-            #     Optional. Hint for how to order the results.
+            #     Optional. Hint about how to order the results.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Gapic::PagedEnumerable<::Google::Cloud::NetworkServices::V1::LbTrafficExtension>]
@@ -451,12 +451,11 @@ module Google
             #     Optional. An optional request ID to identify requests. Specify a unique
             #     request ID so that if you must retry your request, the server can ignore
             #     the request if it has already been completed. The server guarantees
-            #     that for at least 60 minutes since the first request.
+            #     that for 60 minutes since the first request.
             #
             #     For example, consider a situation where you make an initial request and the
             #     request times out. If you make the request again with the same request
-            #     ID, the server can check if original operation with the same request ID
-            #     was received, and if so, ignores the second request. This prevents
+            #     ID, the server ignores the second request This prevents
             #     clients from accidentally creating duplicate commitments.
             #
             #     The request ID must be a valid UUID with the exception that zero UUID is
@@ -556,7 +555,7 @@ module Google
             #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
             #     Optional. Used to specify the fields to be overwritten in the
             #     `LbTrafficExtension` resource by the update.
-            #     The fields specified in the update_mask are relative to the resource, not
+            #     The fields specified in the `update_mask` are relative to the resource, not
             #     the full request. A field is overwritten if it is in the mask. If the
             #     user does not specify a mask, then all fields are overwritten.
             #   @param lb_traffic_extension [::Google::Cloud::NetworkServices::V1::LbTrafficExtension, ::Hash]
@@ -565,12 +564,11 @@ module Google
             #     Optional. An optional request ID to identify requests. Specify a unique
             #     request ID so that if you must retry your request, the server can ignore
             #     the request if it has already been completed. The server guarantees
-            #     that for at least 60 minutes since the first request.
+            #     that for 60 minutes since the first request.
             #
             #     For example, consider a situation where you make an initial request and the
             #     request times out. If you make the request again with the same request
-            #     ID, the server can check if original operation with the same request ID
-            #     was received, and if so, ignores the second request. This prevents
+            #     ID, the server ignores the second request This prevents
             #     clients from accidentally creating duplicate commitments.
             #
             #     The request ID must be a valid UUID with the exception that zero UUID is
@@ -675,12 +673,11 @@ module Google
             #     Optional. An optional request ID to identify requests. Specify a unique
             #     request ID so that if you must retry your request, the server can ignore
             #     the request if it has already been completed. The server guarantees
-            #     that for at least 60 minutes after the first request.
+            #     that for 60 minutes after the first request.
             #
             #     For example, consider a situation where you make an initial request and the
             #     request times out. If you make the request again with the same request
-            #     ID, the server can check if original operation with the same request ID
-            #     was received, and if so, ignores the second request. This prevents
+            #     ID, the server ignores the second request This prevents
             #     clients from accidentally creating duplicate commitments.
             #
             #     The request ID must be a valid UUID with the exception that zero UUID is
@@ -779,7 +776,7 @@ module Google
             #
             #   @param parent [::String]
             #     Required. The project and location from which the `LbRouteExtension`
-            #     resources are listed, specified in the following format:
+            #     resources are listed. These values are specified in the following format:
             #     `projects/{project}/locations/{location}`.
             #   @param page_size [::Integer]
             #     Optional. Requested page size. The server might return fewer items than
@@ -789,7 +786,7 @@ module Google
             #   @param filter [::String]
             #     Optional. Filtering results.
             #   @param order_by [::String]
-            #     Optional. Hint for how to order the results.
+            #     Optional. Hint about how to order the results.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Gapic::PagedEnumerable<::Google::Cloud::NetworkServices::V1::LbRouteExtension>]
@@ -978,12 +975,11 @@ module Google
             #     Optional. An optional request ID to identify requests. Specify a unique
             #     request ID so that if you must retry your request, the server can ignore
             #     the request if it has already been completed. The server guarantees
-            #     that for at least 60 minutes since the first request.
+            #     that for 60 minutes since the first request.
             #
             #     For example, consider a situation where you make an initial request and the
             #     request times out. If you make the request again with the same request
-            #     ID, the server can check if original operation with the same request ID
-            #     was received, and if so, ignores the second request. This prevents
+            #     ID, the server ignores the second request This prevents
             #     clients from accidentally creating duplicate commitments.
             #
             #     The request ID must be a valid UUID with the exception that zero UUID is
@@ -1083,7 +1079,7 @@ module Google
             #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
             #     Optional. Used to specify the fields to be overwritten in the
             #     `LbRouteExtension` resource by the update.
-            #     The fields specified in the update_mask are relative to the resource, not
+            #     The fields specified in the `update_mask` are relative to the resource, not
             #     the full request. A field is overwritten if it is in the mask. If the
             #     user does not specify a mask, then all fields are overwritten.
             #   @param lb_route_extension [::Google::Cloud::NetworkServices::V1::LbRouteExtension, ::Hash]
@@ -1092,12 +1088,11 @@ module Google
             #     Optional. An optional request ID to identify requests. Specify a unique
             #     request ID so that if you must retry your request, the server can ignore
             #     the request if it has already been completed. The server guarantees
-            #     that for at least 60 minutes since the first request.
+            #     that for 60 minutes since the first request.
             #
             #     For example, consider a situation where you make an initial request and the
             #     request times out. If you make the request again with the same request
-            #     ID, the server can check if original operation with the same request ID
-            #     was received, and if so, ignores the second request. This prevents
+            #     ID, the server ignores the second request This prevents
             #     clients from accidentally creating duplicate commitments.
             #
             #     The request ID must be a valid UUID with the exception that zero UUID is
@@ -1202,12 +1197,11 @@ module Google
             #     Optional. An optional request ID to identify requests. Specify a unique
             #     request ID so that if you must retry your request, the server can ignore
             #     the request if it has already been completed. The server guarantees
-            #     that for at least 60 minutes after the first request.
+            #     that for 60 minutes after the first request.
             #
             #     For example, consider a situation where you make an initial request and the
             #     request times out. If you make the request again with the same request
-            #     ID, the server can check if original operation with the same request ID
-            #     was received, and if so, ignores the second request. This prevents
+            #     ID, the server ignores the second request This prevents
             #     clients from accidentally creating duplicate commitments.
             #
             #     The request ID must be a valid UUID with the exception that zero UUID is
@@ -1278,6 +1272,532 @@ module Google
                                      retry_policy: @config.retry_policy
 
               @dep_service_stub.call_rpc :delete_lb_route_extension, request, options: options do |response, operation|
+                response = ::Gapic::Operation.new response, @operations_client, options: options
+                yield response, operation if block_given?
+                throw :response, response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Lists `AuthzExtension` resources in a given project and location.
+            #
+            # @overload list_authz_extensions(request, options = nil)
+            #   Pass arguments to `list_authz_extensions` via a request object, either of type
+            #   {::Google::Cloud::NetworkServices::V1::ListAuthzExtensionsRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::NetworkServices::V1::ListAuthzExtensionsRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload list_authz_extensions(parent: nil, page_size: nil, page_token: nil, filter: nil, order_by: nil)
+            #   Pass arguments to `list_authz_extensions` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param parent [::String]
+            #     Required. The project and location from which the `AuthzExtension`
+            #     resources are listed. These values are specified in the following format:
+            #     `projects/{project}/locations/{location}`.
+            #   @param page_size [::Integer]
+            #     Optional. Requested page size. The server might return fewer items than
+            #     requested. If unspecified, the server picks an appropriate default.
+            #   @param page_token [::String]
+            #     Optional. A token identifying a page of results that the server returns.
+            #   @param filter [::String]
+            #     Optional. Filtering results.
+            #   @param order_by [::String]
+            #     Optional. Hint about how to order the results.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Gapic::PagedEnumerable<::Google::Cloud::NetworkServices::V1::AuthzExtension>]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Gapic::PagedEnumerable<::Google::Cloud::NetworkServices::V1::AuthzExtension>]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/network_services/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::NetworkServices::V1::DepService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::NetworkServices::V1::ListAuthzExtensionsRequest.new
+            #
+            #   # Call the list_authz_extensions method.
+            #   result = client.list_authz_extensions request
+            #
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
+            #     # Each element is of type ::Google::Cloud::NetworkServices::V1::AuthzExtension.
+            #     p item
+            #   end
+            #
+            def list_authz_extensions request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::NetworkServices::V1::ListAuthzExtensionsRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.list_authz_extensions.metadata.to_h
+
+              # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::NetworkServices::V1::VERSION
+              metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.list_authz_extensions.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.list_authz_extensions.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @dep_service_stub.call_rpc :list_authz_extensions, request, options: options do |response, operation|
+                response = ::Gapic::PagedEnumerable.new @dep_service_stub, :list_authz_extensions, request, response, operation, options
+                yield response, operation if block_given?
+                throw :response, response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Gets details of the specified `AuthzExtension` resource.
+            #
+            # @overload get_authz_extension(request, options = nil)
+            #   Pass arguments to `get_authz_extension` via a request object, either of type
+            #   {::Google::Cloud::NetworkServices::V1::GetAuthzExtensionRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::NetworkServices::V1::GetAuthzExtensionRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload get_authz_extension(name: nil)
+            #   Pass arguments to `get_authz_extension` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param name [::String]
+            #     Required. A name of the `AuthzExtension` resource to get. Must be in
+            #     the format
+            #     `projects/{project}/locations/{location}/authzExtensions/{authz_extension}`.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Google::Cloud::NetworkServices::V1::AuthzExtension]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Google::Cloud::NetworkServices::V1::AuthzExtension]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/network_services/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::NetworkServices::V1::DepService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::NetworkServices::V1::GetAuthzExtensionRequest.new
+            #
+            #   # Call the get_authz_extension method.
+            #   result = client.get_authz_extension request
+            #
+            #   # The returned object is of type Google::Cloud::NetworkServices::V1::AuthzExtension.
+            #   p result
+            #
+            def get_authz_extension request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::NetworkServices::V1::GetAuthzExtensionRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.get_authz_extension.metadata.to_h
+
+              # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::NetworkServices::V1::VERSION
+              metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.get_authz_extension.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.get_authz_extension.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @dep_service_stub.call_rpc :get_authz_extension, request, options: options do |response, operation|
+                yield response, operation if block_given?
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Creates a new `AuthzExtension` resource in a given project
+            # and location.
+            #
+            # @overload create_authz_extension(request, options = nil)
+            #   Pass arguments to `create_authz_extension` via a request object, either of type
+            #   {::Google::Cloud::NetworkServices::V1::CreateAuthzExtensionRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::NetworkServices::V1::CreateAuthzExtensionRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload create_authz_extension(parent: nil, authz_extension_id: nil, authz_extension: nil, request_id: nil)
+            #   Pass arguments to `create_authz_extension` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param parent [::String]
+            #     Required. The parent resource of the `AuthzExtension` resource. Must
+            #     be in the format `projects/{project}/locations/{location}`.
+            #   @param authz_extension_id [::String]
+            #     Required. User-provided ID of the `AuthzExtension` resource to be
+            #     created.
+            #   @param authz_extension [::Google::Cloud::NetworkServices::V1::AuthzExtension, ::Hash]
+            #     Required. `AuthzExtension` resource to be created.
+            #   @param request_id [::String]
+            #     Optional. An optional request ID to identify requests. Specify a unique
+            #     request ID so that if you must retry your request, the server can ignore
+            #     the request if it has already been completed. The server guarantees
+            #     that for 60 minutes since the first request.
+            #
+            #     For example, consider a situation where you make an initial request and the
+            #     request times out. If you make the request again with the same request
+            #     ID, the server ignores the second request This prevents
+            #     clients from accidentally creating duplicate commitments.
+            #
+            #     The request ID must be a valid UUID with the exception that zero UUID is
+            #     not supported (00000000-0000-0000-0000-000000000000).
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Gapic::Operation]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Gapic::Operation]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/network_services/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::NetworkServices::V1::DepService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::NetworkServices::V1::CreateAuthzExtensionRequest.new
+            #
+            #   # Call the create_authz_extension method.
+            #   result = client.create_authz_extension request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "No response received."
+            #   end
+            #
+            def create_authz_extension request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::NetworkServices::V1::CreateAuthzExtensionRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.create_authz_extension.metadata.to_h
+
+              # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::NetworkServices::V1::VERSION
+              metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.create_authz_extension.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.create_authz_extension.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @dep_service_stub.call_rpc :create_authz_extension, request, options: options do |response, operation|
+                response = ::Gapic::Operation.new response, @operations_client, options: options
+                yield response, operation if block_given?
+                throw :response, response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Updates the parameters of the specified `AuthzExtension`
+            # resource.
+            #
+            # @overload update_authz_extension(request, options = nil)
+            #   Pass arguments to `update_authz_extension` via a request object, either of type
+            #   {::Google::Cloud::NetworkServices::V1::UpdateAuthzExtensionRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::NetworkServices::V1::UpdateAuthzExtensionRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload update_authz_extension(update_mask: nil, authz_extension: nil, request_id: nil)
+            #   Pass arguments to `update_authz_extension` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
+            #     Required. Used to specify the fields to be overwritten in the
+            #     `AuthzExtension` resource by the update.
+            #     The fields specified in the `update_mask` are relative to the resource, not
+            #     the full request. A field is overwritten if it is in the mask. If the
+            #     user does not specify a mask, then all fields are overwritten.
+            #   @param authz_extension [::Google::Cloud::NetworkServices::V1::AuthzExtension, ::Hash]
+            #     Required. `AuthzExtension` resource being updated.
+            #   @param request_id [::String]
+            #     Optional. An optional request ID to identify requests. Specify a unique
+            #     request ID so that if you must retry your request, the server can ignore
+            #     the request if it has already been completed. The server guarantees
+            #     that for 60 minutes since the first request.
+            #
+            #     For example, consider a situation where you make an initial request and the
+            #     request times out. If you make the request again with the same request
+            #     ID, the server ignores the second request This prevents
+            #     clients from accidentally creating duplicate commitments.
+            #
+            #     The request ID must be a valid UUID with the exception that zero UUID is
+            #     not supported (00000000-0000-0000-0000-000000000000).
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Gapic::Operation]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Gapic::Operation]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/network_services/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::NetworkServices::V1::DepService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::NetworkServices::V1::UpdateAuthzExtensionRequest.new
+            #
+            #   # Call the update_authz_extension method.
+            #   result = client.update_authz_extension request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "No response received."
+            #   end
+            #
+            def update_authz_extension request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::NetworkServices::V1::UpdateAuthzExtensionRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.update_authz_extension.metadata.to_h
+
+              # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::NetworkServices::V1::VERSION
+              metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.authz_extension&.name
+                header_params["authz_extension.name"] = request.authz_extension.name
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.update_authz_extension.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.update_authz_extension.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @dep_service_stub.call_rpc :update_authz_extension, request, options: options do |response, operation|
+                response = ::Gapic::Operation.new response, @operations_client, options: options
+                yield response, operation if block_given?
+                throw :response, response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Deletes the specified `AuthzExtension` resource.
+            #
+            # @overload delete_authz_extension(request, options = nil)
+            #   Pass arguments to `delete_authz_extension` via a request object, either of type
+            #   {::Google::Cloud::NetworkServices::V1::DeleteAuthzExtensionRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::NetworkServices::V1::DeleteAuthzExtensionRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload delete_authz_extension(name: nil, request_id: nil)
+            #   Pass arguments to `delete_authz_extension` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param name [::String]
+            #     Required. The name of the `AuthzExtension` resource to delete. Must
+            #     be in the format
+            #     `projects/{project}/locations/{location}/authzExtensions/{authz_extension}`.
+            #   @param request_id [::String]
+            #     Optional. An optional request ID to identify requests. Specify a unique
+            #     request ID so that if you must retry your request, the server can ignore
+            #     the request if it has already been completed. The server guarantees
+            #     that for 60 minutes after the first request.
+            #
+            #     For example, consider a situation where you make an initial request and the
+            #     request times out. If you make the request again with the same request
+            #     ID, the server ignores the second request This prevents
+            #     clients from accidentally creating duplicate commitments.
+            #
+            #     The request ID must be a valid UUID with the exception that zero UUID is
+            #     not supported (00000000-0000-0000-0000-000000000000).
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Gapic::Operation]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Gapic::Operation]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/network_services/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::NetworkServices::V1::DepService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::NetworkServices::V1::DeleteAuthzExtensionRequest.new
+            #
+            #   # Call the delete_authz_extension method.
+            #   result = client.delete_authz_extension request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "No response received."
+            #   end
+            #
+            def delete_authz_extension request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::NetworkServices::V1::DeleteAuthzExtensionRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.delete_authz_extension.metadata.to_h
+
+              # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::NetworkServices::V1::VERSION
+              metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.delete_authz_extension.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.delete_authz_extension.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @dep_service_stub.call_rpc :delete_authz_extension, request, options: options do |response, operation|
                 response = ::Gapic::Operation.new response, @operations_client, options: options
                 yield response, operation if block_given?
                 throw :response, response
@@ -1391,8 +1911,8 @@ module Google
 
               config_attr :endpoint,      nil, ::String, nil
               config_attr :credentials,   nil do |value|
-                allowed = [::String, ::Hash, ::Proc, ::Symbol, ::Google::Auth::Credentials, ::Signet::OAuth2::Client, nil]
-                allowed += [::GRPC::Core::Channel, ::GRPC::Core::ChannelCredentials] if defined? ::GRPC
+                allowed = [::String, ::Hash, ::Proc, ::Symbol, ::Google::Auth::Credentials, ::Google::Auth::BaseClient, ::Signet::OAuth2::Client, nil]
+                allowed += [::GRPC::Core::Channel, ::GRPC::Core::ChannelCredentials] if defined? ::GRPC::Core::Channel
                 allowed.any? { |klass| klass === value }
               end
               config_attr :scope,         nil, ::String, ::Array, nil
@@ -1502,6 +2022,31 @@ module Google
                 # @return [::Gapic::Config::Method]
                 #
                 attr_reader :delete_lb_route_extension
+                ##
+                # RPC-specific configuration for `list_authz_extensions`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :list_authz_extensions
+                ##
+                # RPC-specific configuration for `get_authz_extension`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :get_authz_extension
+                ##
+                # RPC-specific configuration for `create_authz_extension`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :create_authz_extension
+                ##
+                # RPC-specific configuration for `update_authz_extension`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :update_authz_extension
+                ##
+                # RPC-specific configuration for `delete_authz_extension`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :delete_authz_extension
 
                 # @private
                 def initialize parent_rpcs = nil
@@ -1525,6 +2070,16 @@ module Google
                   @update_lb_route_extension = ::Gapic::Config::Method.new update_lb_route_extension_config
                   delete_lb_route_extension_config = parent_rpcs.delete_lb_route_extension if parent_rpcs.respond_to? :delete_lb_route_extension
                   @delete_lb_route_extension = ::Gapic::Config::Method.new delete_lb_route_extension_config
+                  list_authz_extensions_config = parent_rpcs.list_authz_extensions if parent_rpcs.respond_to? :list_authz_extensions
+                  @list_authz_extensions = ::Gapic::Config::Method.new list_authz_extensions_config
+                  get_authz_extension_config = parent_rpcs.get_authz_extension if parent_rpcs.respond_to? :get_authz_extension
+                  @get_authz_extension = ::Gapic::Config::Method.new get_authz_extension_config
+                  create_authz_extension_config = parent_rpcs.create_authz_extension if parent_rpcs.respond_to? :create_authz_extension
+                  @create_authz_extension = ::Gapic::Config::Method.new create_authz_extension_config
+                  update_authz_extension_config = parent_rpcs.update_authz_extension if parent_rpcs.respond_to? :update_authz_extension
+                  @update_authz_extension = ::Gapic::Config::Method.new update_authz_extension_config
+                  delete_authz_extension_config = parent_rpcs.delete_authz_extension if parent_rpcs.respond_to? :delete_authz_extension
+                  @delete_authz_extension = ::Gapic::Config::Method.new delete_authz_extension_config
 
                   yield self if block_given?
                 end

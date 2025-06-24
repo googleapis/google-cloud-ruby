@@ -1,5 +1,21 @@
 # Changelog
 
+### 1.2.1 (2025-04-29)
+
+#### Bug Fixes
+
+* Fixed several issues with validating credential configs 
+
+### 1.2.0 (2025-04-21)
+
+#### Features
+
+* Introduce QuotaService for CSS API ([#29457](https://github.com/googleapis/google-cloud-ruby/issues/29457)) 
+#### Documentation
+
+* A comment for field `name` in message `.google.shopping.css.v1.CssProductInput` is changed 
+* A comment for field `name` in message `.google.shopping.css.v1.DeleteCssProductInputRequest` is changed 
+
 ### 1.1.0 (2025-01-29)
 
 #### Features

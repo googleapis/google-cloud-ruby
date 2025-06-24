@@ -1,7 +1,7 @@
 {
   "client_library": {
     "name": "google-cloud-memorystore-v1",
-    "version": "1.1.0",
+    "version": "1.2.0",
     "language": "RUBY",
     "apis": [
       {
@@ -247,6 +247,326 @@
         {
           "start": 20,
           "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "memorystore_v1_generated_Memorystore_RescheduleMaintenance_sync",
+      "title": "Snippet for the reschedule_maintenance call in the Memorystore service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Memorystore::V1::Memorystore::Rest::Client#reschedule_maintenance.",
+      "file": "memorystore/reschedule_maintenance.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "reschedule_maintenance",
+        "full_name": "::Google::Cloud::Memorystore::V1::Memorystore::Rest::Client#reschedule_maintenance",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Memorystore::V1::RescheduleMaintenanceRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "Memorystore::Rest::Client",
+          "full_name": "::Google::Cloud::Memorystore::V1::Memorystore::Rest::Client"
+        },
+        "method": {
+          "short_name": "RescheduleMaintenance",
+          "full_name": "google.cloud.memorystore.v1.Memorystore.RescheduleMaintenance",
+          "service": {
+            "short_name": "Memorystore",
+            "full_name": "google.cloud.memorystore.v1.Memorystore"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "memorystore_v1_generated_Memorystore_ListBackupCollections_sync",
+      "title": "Snippet for the list_backup_collections call in the Memorystore service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Memorystore::V1::Memorystore::Rest::Client#list_backup_collections.",
+      "file": "memorystore/list_backup_collections.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_backup_collections",
+        "full_name": "::Google::Cloud::Memorystore::V1::Memorystore::Rest::Client#list_backup_collections",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Memorystore::V1::ListBackupCollectionsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Memorystore::V1::ListBackupCollectionsResponse",
+        "client": {
+          "short_name": "Memorystore::Rest::Client",
+          "full_name": "::Google::Cloud::Memorystore::V1::Memorystore::Rest::Client"
+        },
+        "method": {
+          "short_name": "ListBackupCollections",
+          "full_name": "google.cloud.memorystore.v1.Memorystore.ListBackupCollections",
+          "service": {
+            "short_name": "Memorystore",
+            "full_name": "google.cloud.memorystore.v1.Memorystore"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "memorystore_v1_generated_Memorystore_GetBackupCollection_sync",
+      "title": "Snippet for the get_backup_collection call in the Memorystore service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Memorystore::V1::Memorystore::Rest::Client#get_backup_collection.",
+      "file": "memorystore/get_backup_collection.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_backup_collection",
+        "full_name": "::Google::Cloud::Memorystore::V1::Memorystore::Rest::Client#get_backup_collection",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Memorystore::V1::GetBackupCollectionRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Memorystore::V1::BackupCollection",
+        "client": {
+          "short_name": "Memorystore::Rest::Client",
+          "full_name": "::Google::Cloud::Memorystore::V1::Memorystore::Rest::Client"
+        },
+        "method": {
+          "short_name": "GetBackupCollection",
+          "full_name": "google.cloud.memorystore.v1.Memorystore.GetBackupCollection",
+          "service": {
+            "short_name": "Memorystore",
+            "full_name": "google.cloud.memorystore.v1.Memorystore"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "memorystore_v1_generated_Memorystore_ListBackups_sync",
+      "title": "Snippet for the list_backups call in the Memorystore service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Memorystore::V1::Memorystore::Rest::Client#list_backups.",
+      "file": "memorystore/list_backups.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_backups",
+        "full_name": "::Google::Cloud::Memorystore::V1::Memorystore::Rest::Client#list_backups",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Memorystore::V1::ListBackupsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Memorystore::V1::ListBackupsResponse",
+        "client": {
+          "short_name": "Memorystore::Rest::Client",
+          "full_name": "::Google::Cloud::Memorystore::V1::Memorystore::Rest::Client"
+        },
+        "method": {
+          "short_name": "ListBackups",
+          "full_name": "google.cloud.memorystore.v1.Memorystore.ListBackups",
+          "service": {
+            "short_name": "Memorystore",
+            "full_name": "google.cloud.memorystore.v1.Memorystore"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "memorystore_v1_generated_Memorystore_GetBackup_sync",
+      "title": "Snippet for the get_backup call in the Memorystore service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Memorystore::V1::Memorystore::Rest::Client#get_backup.",
+      "file": "memorystore/get_backup.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_backup",
+        "full_name": "::Google::Cloud::Memorystore::V1::Memorystore::Rest::Client#get_backup",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Memorystore::V1::GetBackupRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Memorystore::V1::Backup",
+        "client": {
+          "short_name": "Memorystore::Rest::Client",
+          "full_name": "::Google::Cloud::Memorystore::V1::Memorystore::Rest::Client"
+        },
+        "method": {
+          "short_name": "GetBackup",
+          "full_name": "google.cloud.memorystore.v1.Memorystore.GetBackup",
+          "service": {
+            "short_name": "Memorystore",
+            "full_name": "google.cloud.memorystore.v1.Memorystore"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "memorystore_v1_generated_Memorystore_DeleteBackup_sync",
+      "title": "Snippet for the delete_backup call in the Memorystore service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Memorystore::V1::Memorystore::Rest::Client#delete_backup.",
+      "file": "memorystore/delete_backup.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_backup",
+        "full_name": "::Google::Cloud::Memorystore::V1::Memorystore::Rest::Client#delete_backup",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Memorystore::V1::DeleteBackupRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "Memorystore::Rest::Client",
+          "full_name": "::Google::Cloud::Memorystore::V1::Memorystore::Rest::Client"
+        },
+        "method": {
+          "short_name": "DeleteBackup",
+          "full_name": "google.cloud.memorystore.v1.Memorystore.DeleteBackup",
+          "service": {
+            "short_name": "Memorystore",
+            "full_name": "google.cloud.memorystore.v1.Memorystore"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "memorystore_v1_generated_Memorystore_ExportBackup_sync",
+      "title": "Snippet for the export_backup call in the Memorystore service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Memorystore::V1::Memorystore::Rest::Client#export_backup.",
+      "file": "memorystore/export_backup.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "export_backup",
+        "full_name": "::Google::Cloud::Memorystore::V1::Memorystore::Rest::Client#export_backup",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Memorystore::V1::ExportBackupRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "Memorystore::Rest::Client",
+          "full_name": "::Google::Cloud::Memorystore::V1::Memorystore::Rest::Client"
+        },
+        "method": {
+          "short_name": "ExportBackup",
+          "full_name": "google.cloud.memorystore.v1.Memorystore.ExportBackup",
+          "service": {
+            "short_name": "Memorystore",
+            "full_name": "google.cloud.memorystore.v1.Memorystore"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "memorystore_v1_generated_Memorystore_BackupInstance_sync",
+      "title": "Snippet for the backup_instance call in the Memorystore service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Memorystore::V1::Memorystore::Rest::Client#backup_instance.",
+      "file": "memorystore/backup_instance.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "backup_instance",
+        "full_name": "::Google::Cloud::Memorystore::V1::Memorystore::Rest::Client#backup_instance",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Memorystore::V1::BackupInstanceRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "Memorystore::Rest::Client",
+          "full_name": "::Google::Cloud::Memorystore::V1::Memorystore::Rest::Client"
+        },
+        "method": {
+          "short_name": "BackupInstance",
+          "full_name": "google.cloud.memorystore.v1.Memorystore.BackupInstance",
+          "service": {
+            "short_name": "Memorystore",
+            "full_name": "google.cloud.memorystore.v1.Memorystore"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
           "type": "FULL"
         }
       ]

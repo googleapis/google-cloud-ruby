@@ -244,7 +244,7 @@ module Google
               # @yieldparam chunk [::String] The chunk of data received during server streaming.
               #
               # @return [::Gapic::Rest::TransportOperation]
-              def batch_get_documents request_pb, options = nil, &block
+              def batch_get_documents(request_pb, options = nil, &)
                 raise ::ArgumentError, "request must be provided" if request_pb.nil?
 
                 verb, uri, query_string_params, body = ServiceStub.transcode_batch_get_documents_request request_pb
@@ -262,7 +262,7 @@ module Google
                   method_name: "batch_get_documents",
                   options: options,
                   is_server_streaming: true,
-                  &block
+                  &
                 )
                 ::Gapic::Rest::TransportOperation.new response
               end
@@ -398,7 +398,7 @@ module Google
               # @yieldparam chunk [::String] The chunk of data received during server streaming.
               #
               # @return [::Gapic::Rest::TransportOperation]
-              def run_query request_pb, options = nil, &block
+              def run_query(request_pb, options = nil, &)
                 raise ::ArgumentError, "request must be provided" if request_pb.nil?
 
                 verb, uri, query_string_params, body = ServiceStub.transcode_run_query_request request_pb
@@ -416,7 +416,7 @@ module Google
                   method_name: "run_query",
                   options: options,
                   is_server_streaming: true,
-                  &block
+                  &
                 )
                 ::Gapic::Rest::TransportOperation.new response
               end
@@ -432,7 +432,7 @@ module Google
               # @yieldparam chunk [::String] The chunk of data received during server streaming.
               #
               # @return [::Gapic::Rest::TransportOperation]
-              def run_aggregation_query request_pb, options = nil, &block
+              def run_aggregation_query(request_pb, options = nil, &)
                 raise ::ArgumentError, "request must be provided" if request_pb.nil?
 
                 verb, uri, query_string_params, body = ServiceStub.transcode_run_aggregation_query_request request_pb
@@ -450,7 +450,7 @@ module Google
                   method_name: "run_aggregation_query",
                   options: options,
                   is_server_streaming: true,
-                  &block
+                  &
                 )
                 ::Gapic::Rest::TransportOperation.new response
               end

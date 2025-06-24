@@ -1,0 +1,215 @@
+{
+  "client_library": {
+    "name": "google-ads-marketing_platform-admin-v1alpha",
+    "version": "0.1.0",
+    "language": "RUBY",
+    "apis": [
+      {
+        "id": "google.marketingplatform.admin.v1alpha",
+        "version": "v1alpha"
+      }
+    ]
+  },
+  "snippets": [
+    {
+      "region_tag": "library_v1alpha_generated_MarketingplatformAdminService_GetOrganization_sync",
+      "title": "Snippet for the get_organization call in the MarketingplatformAdminService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Ads::MarketingPlatform::Admin::V1alpha::MarketingplatformAdminService::Client#get_organization.",
+      "file": "marketingplatform_admin_service/get_organization.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_organization",
+        "full_name": "::Google::Ads::MarketingPlatform::Admin::V1alpha::MarketingplatformAdminService::Client#get_organization",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Ads::MarketingPlatform::Admin::V1alpha::GetOrganizationRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Ads::MarketingPlatform::Admin::V1alpha::Organization",
+        "client": {
+          "short_name": "MarketingplatformAdminService::Client",
+          "full_name": "::Google::Ads::MarketingPlatform::Admin::V1alpha::MarketingplatformAdminService::Client"
+        },
+        "method": {
+          "short_name": "GetOrganization",
+          "full_name": "google.marketingplatform.admin.v1alpha.MarketingplatformAdminService.GetOrganization",
+          "service": {
+            "short_name": "MarketingplatformAdminService",
+            "full_name": "google.marketingplatform.admin.v1alpha.MarketingplatformAdminService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "library_v1alpha_generated_MarketingplatformAdminService_ListAnalyticsAccountLinks_sync",
+      "title": "Snippet for the list_analytics_account_links call in the MarketingplatformAdminService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Ads::MarketingPlatform::Admin::V1alpha::MarketingplatformAdminService::Client#list_analytics_account_links.",
+      "file": "marketingplatform_admin_service/list_analytics_account_links.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_analytics_account_links",
+        "full_name": "::Google::Ads::MarketingPlatform::Admin::V1alpha::MarketingplatformAdminService::Client#list_analytics_account_links",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Ads::MarketingPlatform::Admin::V1alpha::ListAnalyticsAccountLinksRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Ads::MarketingPlatform::Admin::V1alpha::ListAnalyticsAccountLinksResponse",
+        "client": {
+          "short_name": "MarketingplatformAdminService::Client",
+          "full_name": "::Google::Ads::MarketingPlatform::Admin::V1alpha::MarketingplatformAdminService::Client"
+        },
+        "method": {
+          "short_name": "ListAnalyticsAccountLinks",
+          "full_name": "google.marketingplatform.admin.v1alpha.MarketingplatformAdminService.ListAnalyticsAccountLinks",
+          "service": {
+            "short_name": "MarketingplatformAdminService",
+            "full_name": "google.marketingplatform.admin.v1alpha.MarketingplatformAdminService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "library_v1alpha_generated_MarketingplatformAdminService_CreateAnalyticsAccountLink_sync",
+      "title": "Snippet for the create_analytics_account_link call in the MarketingplatformAdminService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Ads::MarketingPlatform::Admin::V1alpha::MarketingplatformAdminService::Client#create_analytics_account_link.",
+      "file": "marketingplatform_admin_service/create_analytics_account_link.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_analytics_account_link",
+        "full_name": "::Google::Ads::MarketingPlatform::Admin::V1alpha::MarketingplatformAdminService::Client#create_analytics_account_link",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Ads::MarketingPlatform::Admin::V1alpha::CreateAnalyticsAccountLinkRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Ads::MarketingPlatform::Admin::V1alpha::AnalyticsAccountLink",
+        "client": {
+          "short_name": "MarketingplatformAdminService::Client",
+          "full_name": "::Google::Ads::MarketingPlatform::Admin::V1alpha::MarketingplatformAdminService::Client"
+        },
+        "method": {
+          "short_name": "CreateAnalyticsAccountLink",
+          "full_name": "google.marketingplatform.admin.v1alpha.MarketingplatformAdminService.CreateAnalyticsAccountLink",
+          "service": {
+            "short_name": "MarketingplatformAdminService",
+            "full_name": "google.marketingplatform.admin.v1alpha.MarketingplatformAdminService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "library_v1alpha_generated_MarketingplatformAdminService_DeleteAnalyticsAccountLink_sync",
+      "title": "Snippet for the delete_analytics_account_link call in the MarketingplatformAdminService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Ads::MarketingPlatform::Admin::V1alpha::MarketingplatformAdminService::Client#delete_analytics_account_link.",
+      "file": "marketingplatform_admin_service/delete_analytics_account_link.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_analytics_account_link",
+        "full_name": "::Google::Ads::MarketingPlatform::Admin::V1alpha::MarketingplatformAdminService::Client#delete_analytics_account_link",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Ads::MarketingPlatform::Admin::V1alpha::DeleteAnalyticsAccountLinkRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Protobuf::Empty",
+        "client": {
+          "short_name": "MarketingplatformAdminService::Client",
+          "full_name": "::Google::Ads::MarketingPlatform::Admin::V1alpha::MarketingplatformAdminService::Client"
+        },
+        "method": {
+          "short_name": "DeleteAnalyticsAccountLink",
+          "full_name": "google.marketingplatform.admin.v1alpha.MarketingplatformAdminService.DeleteAnalyticsAccountLink",
+          "service": {
+            "short_name": "MarketingplatformAdminService",
+            "full_name": "google.marketingplatform.admin.v1alpha.MarketingplatformAdminService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "library_v1alpha_generated_MarketingplatformAdminService_SetPropertyServiceLevel_sync",
+      "title": "Snippet for the set_property_service_level call in the MarketingplatformAdminService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Ads::MarketingPlatform::Admin::V1alpha::MarketingplatformAdminService::Client#set_property_service_level.",
+      "file": "marketingplatform_admin_service/set_property_service_level.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "set_property_service_level",
+        "full_name": "::Google::Ads::MarketingPlatform::Admin::V1alpha::MarketingplatformAdminService::Client#set_property_service_level",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Ads::MarketingPlatform::Admin::V1alpha::SetPropertyServiceLevelRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Ads::MarketingPlatform::Admin::V1alpha::SetPropertyServiceLevelResponse",
+        "client": {
+          "short_name": "MarketingplatformAdminService::Client",
+          "full_name": "::Google::Ads::MarketingPlatform::Admin::V1alpha::MarketingplatformAdminService::Client"
+        },
+        "method": {
+          "short_name": "SetPropertyServiceLevel",
+          "full_name": "google.marketingplatform.admin.v1alpha.MarketingplatformAdminService.SetPropertyServiceLevel",
+          "service": {
+            "short_name": "MarketingplatformAdminService",
+            "full_name": "google.marketingplatform.admin.v1alpha.MarketingplatformAdminService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    }
+  ]
+}

@@ -1,5 +1,37 @@
 # Changelog
 
+### 2.3.0 (2025-05-16)
+
+#### Features
+
+* Support for backup retention policies 
+* Support for independent scaling of StoragePool capacity and performance 
+
+### 2.2.0 (2025-05-12)
+
+#### Features
+
+* Updated core dependencies including gapic-common 
+* Updated required Ruby version to 3.1 
+
+### 2.1.0 (2025-04-30)
+
+#### Features
+
+* Support for backup regions ([#30037](https://github.com/googleapis/google-cloud-ruby/issues/30037)) 
+
+### 2.0.2 (2025-04-29)
+
+#### Bug Fixes
+
+* Fixed several issues with validating credential configs 
+
+### 2.0.1 (2025-04-21)
+
+#### Documentation
+
+* A comment for field `cooling_threshold_days` in message `.google.cloud.netapp.v1.TieringPolicy` is changed ([#29476](https://github.com/googleapis/google-cloud-ruby/issues/29476)) 
+
 ### 2.0.0 (2025-02-07)
 
 ### ⚠ BREAKING CHANGES

@@ -21,10 +21,10 @@ module Google
   module Cloud
     module GkeBackup
       module V1
-        # A list of Kubernetes Namespaces
+        # A list of Kubernetes Namespaces.
         # @!attribute [rw] namespaces
         #   @return [::Array<::String>]
-        #     Optional. A list of Kubernetes Namespaces
+        #     Optional. A list of Kubernetes Namespaces.
         class Namespaces
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

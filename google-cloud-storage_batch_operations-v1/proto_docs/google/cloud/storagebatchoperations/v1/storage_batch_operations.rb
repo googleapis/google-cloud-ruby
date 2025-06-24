@@ -24,7 +24,7 @@ module Google
         # Message for request to list Jobs
         # @!attribute [rw] parent
         #   @return [::String]
-        #     Required. Format: projects/\\{project_id}/locations/\\{location_id} .
+        #     Required. Format: projects/\\{project_id}/locations/global.
         # @!attribute [rw] filter
         #   @return [::String]
         #     Optional. Filters results as defined by https://google.aip.dev/160.
@@ -61,7 +61,7 @@ module Google
         # @!attribute [rw] name
         #   @return [::String]
         #     Required. `name` of the job to retrieve.
-        #     Format: projects/\\{project_id}/locations/\\{location_id}/jobs/\\{job_id} .
+        #     Format: projects/\\{project_id}/locations/global/jobs/\\{job_id} .
         class GetJobRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -84,9 +84,9 @@ module Google
         #   @return [::String]
         #     Optional. An optional request ID to identify requests. Specify a unique
         #     request ID in case you need to retry your request. Requests with same
-        #     `request_id` will ignored for at least 60 minutes since the first request.
-        #     The request ID must be a valid UUID with the exception that zero UUID is
-        #     not supported (00000000-0000-0000-0000-000000000000).
+        #     `request_id` will be ignored for at least 60 minutes since the first
+        #     request. The request ID must be a valid UUID with the exception that zero
+        #     UUID is not supported (00000000-0000-0000-0000-000000000000).
         class CreateJobRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -96,14 +96,14 @@ module Google
         # @!attribute [rw] name
         #   @return [::String]
         #     Required. The `name` of the job to cancel.
-        #     Format: projects/\\{project_id}/locations/\\{location_id}/jobs/\\{job_id}.
+        #     Format: projects/\\{project_id}/locations/global/jobs/\\{job_id}.
         # @!attribute [rw] request_id
         #   @return [::String]
         #     Optional. An optional request ID to identify requests. Specify a unique
         #     request ID in case you need to retry your request. Requests with same
-        #     `request_id` will ignored for at least 60 minutes since the first request.
-        #     The request ID must be a valid UUID with the exception that zero UUID is
-        #     not supported (00000000-0000-0000-0000-000000000000).
+        #     `request_id` will be ignored for at least 60 minutes since the first
+        #     request. The request ID must be a valid UUID with the exception that zero
+        #     UUID is not supported (00000000-0000-0000-0000-000000000000).
         class CancelJobRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -113,14 +113,14 @@ module Google
         # @!attribute [rw] name
         #   @return [::String]
         #     Required. The `name` of the job to delete.
-        #     Format: projects/\\{project_id}/locations/\\{location_id}/jobs/\\{job_id} .
+        #     Format: projects/\\{project_id}/locations/global/jobs/\\{job_id} .
         # @!attribute [rw] request_id
         #   @return [::String]
         #     Optional. An optional request ID to identify requests. Specify a unique
         #     request ID in case you need to retry your request. Requests with same
-        #     `request_id` will ignored for at least 60 minutes since the first request.
-        #     The request ID must be a valid UUID with the exception that zero UUID is
-        #     not supported (00000000-0000-0000-0000-000000000000).
+        #     `request_id` will be ignored for at least 60 minutes since the first
+        #     request. The request ID must be a valid UUID with the exception that zero
+        #     UUID is not supported (00000000-0000-0000-0000-000000000000).
         class DeleteJobRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -136,7 +136,7 @@ module Google
         # @!attribute [r] operation
         #   @return [::String]
         #     Output only. The unique operation resource name.
-        #     Format: projects/\\{project}/locations/\\{location}/operations/\\{operation}.
+        #     Format: projects/\\{project}/locations/global/operations/\\{operation}.
         # @!attribute [r] create_time
         #   @return [::Google::Protobuf::Timestamp]
         #     Output only. The time the operation was created.
@@ -150,7 +150,8 @@ module Google
         #     have
         #     {::Google::Longrunning::Operation#error google.longrunning.Operation.error}
         #     value with a {::Google::Rpc::Status#code google.rpc.Status.code} of 1,
-        #     corresponding to `Code.CANCELLED`.
+        #     corresponding to
+        #     `[Code.CANCELLED][google.rpc.Code.CANCELLED]`.
         # @!attribute [r] api_version
         #   @return [::String]
         #     Output only. API version used to start the operation.

@@ -1,0 +1,25 @@
+{
+  "generated": [
+    ".gitignore",
+    ".repo-metadata.json",
+    ".rubocop.yml",
+    ".toys.rb",
+    ".yardopts",
+    "AUTHENTICATION.md",
+    "CHANGELOG.md",
+    "Gemfile",
+    "LICENSE.md",
+    "README.md",
+    "Rakefile",
+    "google-cloud-lustre.gemspec",
+    "lib/google-cloud-lustre.rb",
+    "lib/google/cloud/lustre.rb",
+    "lib/google/cloud/lustre/version.rb",
+    "test/google/cloud/lustre/client_test.rb",
+    "test/google/cloud/lustre/version_test.rb",
+    "test/helper.rb"
+  ],
+  "static": [
+    ".OwlBot.yaml"
+  ]
+}

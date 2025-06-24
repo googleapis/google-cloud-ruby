@@ -1124,7 +1124,7 @@ module Google
               # @yieldparam chunk [::String] The chunk of data received during server streaming.
               #
               # @return [::Gapic::Rest::TransportOperation]
-              def read_tensorboard_blob_data request_pb, options = nil, &block
+              def read_tensorboard_blob_data(request_pb, options = nil, &)
                 raise ::ArgumentError, "request must be provided" if request_pb.nil?
 
                 verb, uri, query_string_params, body = ServiceStub.transcode_read_tensorboard_blob_data_request request_pb
@@ -1142,7 +1142,7 @@ module Google
                   method_name: "read_tensorboard_blob_data",
                   options: options,
                   is_server_streaming: true,
-                  &block
+                  &
                 )
                 ::Gapic::Rest::TransportOperation.new response
               end

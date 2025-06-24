@@ -1,5 +1,70 @@
 # Changelog
 
+### 1.15.0 (2025-06-16)
+
+#### Features
+
+* add EncryptionSpec field for RagCorpus CMEK feature to v1 ([#30485](https://github.com/googleapis/google-cloud-ruby/issues/30485)) 
+
+### 1.14.0 (2025-05-27)
+
+#### Features
+
+* add max_results, filter, data_store_specs options to VertexAISearch. ([#30429](https://github.com/googleapis/google-cloud-ruby/issues/30429)) 
+
+### 1.13.0 (2025-05-22)
+
+#### Features
+
+* Support thoughts_token_count to prediction service ([#30403](https://github.com/googleapis/google-cloud-ruby/issues/30403)) 
+
+### 1.12.0 (2025-05-16)
+
+#### Features
+
+* Support for additional Schema properties 
+* Support for KNN and ANN searches on RagManagedDb 
+* Support for reporting reasons why supervised tuning examples were dropped 
+* Support for TunedModel checkpoints 
+* Support model checkpoint ID ([#30366](https://github.com/googleapis/google-cloud-ruby/issues/30366)) 
+#### Bug Fixes
+
+* Updated bindings for long-running-operation calls via REST 
+
+### 1.11.0 (2025-05-12)
+
+#### Features
+
+* Added NVIDIA_H200_141GB and NVIDIA_B200 accelerator types 
+* Support for LLM parsing for RagFiles ([#30046](https://github.com/googleapis/google-cloud-ruby/issues/30046)) 
+* Updated core dependencies including gapic-common 
+* Updated required Ruby version to 3.1 
+#### Documentation
+
+* Updated an outdated URL ([#30044](https://github.com/googleapis/google-cloud-ruby/issues/30044)) 
+
+### 1.10.0 (2025-04-29)
+
+#### Features
+
+* Support customer-managed encryption key spec for a CachedContent 
+* Support indirect references between schema nodes 
+
+### 1.9.0 (2025-04-29)
+
+#### Features
+
+* Support config for thinking features ([#29549](https://github.com/googleapis/google-cloud-ruby/issues/29549)) 
+#### Bug Fixes
+
+* Fixed several issues with validating credential configs 
+
+### 1.8.0 (2025-04-25)
+
+#### Features
+
+* Support for model checkpoints ([#29524](https://github.com/googleapis/google-cloud-ruby/issues/29524)) 
+
 ### 1.7.0 (2025-03-28)
 
 #### Features

@@ -22,7 +22,6 @@
   "static": [
     ".OwlBot.yaml",
     "MIGRATING.md",
-    "acceptance/google/cloud/container/v1/cluster_manager_smoke_test.rb",
-    "acceptance/google/cloud/container/v1beta1/cluster_manager_smoke_test.rb"
+    "acceptance/google/cloud/container/v1/cluster_manager_smoke_test.rb"
   ]
 }

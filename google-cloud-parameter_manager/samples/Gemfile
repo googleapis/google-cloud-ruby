@@ -19,6 +19,8 @@ master = ENV["GOOGLE_CLOUD_SAMPLES_TEST"] == "master"
 gem "google-cloud-parameter_manager", path: master ? "../../google-cloud-parameter_manager" : nil
 # Required for rendering the test case.
 gem "google-cloud-secret_manager", path: master ? "../../google-cloud-secret_manager" : nil
+# Required for kms_key test case.
+gem "google-cloud-kms", path: master ? "../../google-cloud-kms" : nil
 
 group :test do
   gem "google-style", "~> 1.30.1"

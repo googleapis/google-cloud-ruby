@@ -59,6 +59,31 @@
               "methods": [
                 "delete_lb_route_extension"
               ]
+            },
+            "ListAuthzExtensions": {
+              "methods": [
+                "list_authz_extensions"
+              ]
+            },
+            "GetAuthzExtension": {
+              "methods": [
+                "get_authz_extension"
+              ]
+            },
+            "CreateAuthzExtension": {
+              "methods": [
+                "create_authz_extension"
+              ]
+            },
+            "UpdateAuthzExtension": {
+              "methods": [
+                "update_authz_extension"
+              ]
+            },
+            "DeleteAuthzExtension": {
+              "methods": [
+                "delete_authz_extension"
+              ]
             }
           }
         }
@@ -92,6 +117,51 @@
             "DeleteEndpointPolicy": {
               "methods": [
                 "delete_endpoint_policy"
+              ]
+            },
+            "ListWasmPluginVersions": {
+              "methods": [
+                "list_wasm_plugin_versions"
+              ]
+            },
+            "GetWasmPluginVersion": {
+              "methods": [
+                "get_wasm_plugin_version"
+              ]
+            },
+            "CreateWasmPluginVersion": {
+              "methods": [
+                "create_wasm_plugin_version"
+              ]
+            },
+            "DeleteWasmPluginVersion": {
+              "methods": [
+                "delete_wasm_plugin_version"
+              ]
+            },
+            "ListWasmPlugins": {
+              "methods": [
+                "list_wasm_plugins"
+              ]
+            },
+            "GetWasmPlugin": {
+              "methods": [
+                "get_wasm_plugin"
+              ]
+            },
+            "CreateWasmPlugin": {
+              "methods": [
+                "create_wasm_plugin"
+              ]
+            },
+            "UpdateWasmPlugin": {
+              "methods": [
+                "update_wasm_plugin"
+              ]
+            },
+            "DeleteWasmPlugin": {
+              "methods": [
+                "delete_wasm_plugin"
               ]
             },
             "ListGateways": {
@@ -234,6 +304,11 @@
                 "create_service_binding"
               ]
             },
+            "UpdateServiceBinding": {
+              "methods": [
+                "update_service_binding"
+              ]
+            },
             "DeleteServiceBinding": {
               "methods": [
                 "delete_service_binding"
@@ -262,6 +337,51 @@
             "DeleteMesh": {
               "methods": [
                 "delete_mesh"
+              ]
+            },
+            "ListServiceLbPolicies": {
+              "methods": [
+                "list_service_lb_policies"
+              ]
+            },
+            "GetServiceLbPolicy": {
+              "methods": [
+                "get_service_lb_policy"
+              ]
+            },
+            "CreateServiceLbPolicy": {
+              "methods": [
+                "create_service_lb_policy"
+              ]
+            },
+            "UpdateServiceLbPolicy": {
+              "methods": [
+                "update_service_lb_policy"
+              ]
+            },
+            "DeleteServiceLbPolicy": {
+              "methods": [
+                "delete_service_lb_policy"
+              ]
+            },
+            "GetGatewayRouteView": {
+              "methods": [
+                "get_gateway_route_view"
+              ]
+            },
+            "GetMeshRouteView": {
+              "methods": [
+                "get_mesh_route_view"
+              ]
+            },
+            "ListGatewayRouteViews": {
+              "methods": [
+                "list_gateway_route_views"
+              ]
+            },
+            "ListMeshRouteViews": {
+              "methods": [
+                "list_mesh_route_views"
               ]
             }
           }

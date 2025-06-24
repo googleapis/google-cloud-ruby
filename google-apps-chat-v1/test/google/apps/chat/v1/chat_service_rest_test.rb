@@ -1417,6 +1417,224 @@ class ::Google::Apps::Chat::V1::ChatService::Rest::ClientTest < Minitest::Test
     end
   end
 
+  def test_create_custom_emoji
+    # Create test objects.
+    client_result = ::Google::Apps::Chat::V1::CustomEmoji.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    custom_emoji = {}
+
+    create_custom_emoji_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Apps::Chat::V1::ChatService::Rest::ServiceStub.stub :transcode_create_custom_emoji_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, create_custom_emoji_client_stub do
+        # Create client
+        client = ::Google::Apps::Chat::V1::ChatService::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.create_custom_emoji({ custom_emoji: custom_emoji }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.create_custom_emoji custom_emoji: custom_emoji do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.create_custom_emoji ::Google::Apps::Chat::V1::CreateCustomEmojiRequest.new(custom_emoji: custom_emoji) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.create_custom_emoji({ custom_emoji: custom_emoji }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.create_custom_emoji(::Google::Apps::Chat::V1::CreateCustomEmojiRequest.new(custom_emoji: custom_emoji), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, create_custom_emoji_client_stub.call_count
+      end
+    end
+  end
+
+  def test_get_custom_emoji
+    # Create test objects.
+    client_result = ::Google::Apps::Chat::V1::CustomEmoji.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    get_custom_emoji_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Apps::Chat::V1::ChatService::Rest::ServiceStub.stub :transcode_get_custom_emoji_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, get_custom_emoji_client_stub do
+        # Create client
+        client = ::Google::Apps::Chat::V1::ChatService::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.get_custom_emoji({ name: name }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.get_custom_emoji name: name do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.get_custom_emoji ::Google::Apps::Chat::V1::GetCustomEmojiRequest.new(name: name) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.get_custom_emoji({ name: name }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.get_custom_emoji(::Google::Apps::Chat::V1::GetCustomEmojiRequest.new(name: name), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, get_custom_emoji_client_stub.call_count
+      end
+    end
+  end
+
+  def test_list_custom_emojis
+    # Create test objects.
+    client_result = ::Google::Apps::Chat::V1::ListCustomEmojisResponse.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    page_size = 42
+    page_token = "hello world"
+    filter = "hello world"
+
+    list_custom_emojis_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Apps::Chat::V1::ChatService::Rest::ServiceStub.stub :transcode_list_custom_emojis_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, list_custom_emojis_client_stub do
+        # Create client
+        client = ::Google::Apps::Chat::V1::ChatService::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.list_custom_emojis({ page_size: page_size, page_token: page_token, filter: filter }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.list_custom_emojis page_size: page_size, page_token: page_token, filter: filter do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.list_custom_emojis ::Google::Apps::Chat::V1::ListCustomEmojisRequest.new(page_size: page_size, page_token: page_token, filter: filter) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.list_custom_emojis({ page_size: page_size, page_token: page_token, filter: filter }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.list_custom_emojis(::Google::Apps::Chat::V1::ListCustomEmojisRequest.new(page_size: page_size, page_token: page_token, filter: filter), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, list_custom_emojis_client_stub.call_count
+      end
+    end
+  end
+
+  def test_delete_custom_emoji
+    # Create test objects.
+    client_result = ::Google::Protobuf::Empty.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    delete_custom_emoji_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Apps::Chat::V1::ChatService::Rest::ServiceStub.stub :transcode_delete_custom_emoji_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, delete_custom_emoji_client_stub do
+        # Create client
+        client = ::Google::Apps::Chat::V1::ChatService::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.delete_custom_emoji({ name: name }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.delete_custom_emoji name: name do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.delete_custom_emoji ::Google::Apps::Chat::V1::DeleteCustomEmojiRequest.new(name: name) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.delete_custom_emoji({ name: name }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.delete_custom_emoji(::Google::Apps::Chat::V1::DeleteCustomEmojiRequest.new(name: name), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, delete_custom_emoji_client_stub.call_count
+      end
+    end
+  end
+
   def test_get_space_read_state
     # Create test objects.
     client_result = ::Google::Apps::Chat::V1::SpaceReadState.new

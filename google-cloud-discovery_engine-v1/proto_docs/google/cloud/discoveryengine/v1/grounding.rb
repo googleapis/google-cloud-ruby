@@ -60,6 +60,15 @@ module Google
         # @!attribute [rw] source_metadata
         #   @return [::Google::Protobuf::Map{::String => ::String}]
         #     More fine-grained information for the source reference.
+        # @!attribute [rw] uri
+        #   @return [::String]
+        #     The URI of the source.
+        # @!attribute [rw] title
+        #   @return [::String]
+        #     The title of the source.
+        # @!attribute [rw] domain
+        #   @return [::String]
+        #     The domain of the source.
         class FactChunk
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

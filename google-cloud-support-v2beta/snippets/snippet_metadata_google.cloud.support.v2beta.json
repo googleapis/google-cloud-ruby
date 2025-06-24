@@ -1,0 +1,495 @@
+{
+  "client_library": {
+    "name": "google-cloud-support-v2beta",
+    "version": "0.1.1",
+    "language": "RUBY",
+    "apis": [
+      {
+        "id": "google.cloud.support.v2beta",
+        "version": "v2beta"
+      }
+    ]
+  },
+  "snippets": [
+    {
+      "region_tag": "cloudsupport_v2beta_generated_CaseAttachmentService_ListAttachments_sync",
+      "title": "Snippet for the list_attachments call in the CaseAttachmentService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Support::V2beta::CaseAttachmentService::Client#list_attachments.",
+      "file": "case_attachment_service/list_attachments.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_attachments",
+        "full_name": "::Google::Cloud::Support::V2beta::CaseAttachmentService::Client#list_attachments",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Support::V2beta::ListAttachmentsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Support::V2beta::ListAttachmentsResponse",
+        "client": {
+          "short_name": "CaseAttachmentService::Client",
+          "full_name": "::Google::Cloud::Support::V2beta::CaseAttachmentService::Client"
+        },
+        "method": {
+          "short_name": "ListAttachments",
+          "full_name": "google.cloud.support.v2beta.CaseAttachmentService.ListAttachments",
+          "service": {
+            "short_name": "CaseAttachmentService",
+            "full_name": "google.cloud.support.v2beta.CaseAttachmentService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "cloudsupport_v2beta_generated_CaseService_GetCase_sync",
+      "title": "Snippet for the get_case call in the CaseService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Support::V2beta::CaseService::Client#get_case.",
+      "file": "case_service/get_case.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_case",
+        "full_name": "::Google::Cloud::Support::V2beta::CaseService::Client#get_case",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Support::V2beta::GetCaseRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Support::V2beta::Case",
+        "client": {
+          "short_name": "CaseService::Client",
+          "full_name": "::Google::Cloud::Support::V2beta::CaseService::Client"
+        },
+        "method": {
+          "short_name": "GetCase",
+          "full_name": "google.cloud.support.v2beta.CaseService.GetCase",
+          "service": {
+            "short_name": "CaseService",
+            "full_name": "google.cloud.support.v2beta.CaseService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "cloudsupport_v2beta_generated_CaseService_ListCases_sync",
+      "title": "Snippet for the list_cases call in the CaseService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Support::V2beta::CaseService::Client#list_cases.",
+      "file": "case_service/list_cases.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_cases",
+        "full_name": "::Google::Cloud::Support::V2beta::CaseService::Client#list_cases",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Support::V2beta::ListCasesRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Support::V2beta::ListCasesResponse",
+        "client": {
+          "short_name": "CaseService::Client",
+          "full_name": "::Google::Cloud::Support::V2beta::CaseService::Client"
+        },
+        "method": {
+          "short_name": "ListCases",
+          "full_name": "google.cloud.support.v2beta.CaseService.ListCases",
+          "service": {
+            "short_name": "CaseService",
+            "full_name": "google.cloud.support.v2beta.CaseService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "cloudsupport_v2beta_generated_CaseService_SearchCases_sync",
+      "title": "Snippet for the search_cases call in the CaseService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Support::V2beta::CaseService::Client#search_cases.",
+      "file": "case_service/search_cases.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "search_cases",
+        "full_name": "::Google::Cloud::Support::V2beta::CaseService::Client#search_cases",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Support::V2beta::SearchCasesRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Support::V2beta::SearchCasesResponse",
+        "client": {
+          "short_name": "CaseService::Client",
+          "full_name": "::Google::Cloud::Support::V2beta::CaseService::Client"
+        },
+        "method": {
+          "short_name": "SearchCases",
+          "full_name": "google.cloud.support.v2beta.CaseService.SearchCases",
+          "service": {
+            "short_name": "CaseService",
+            "full_name": "google.cloud.support.v2beta.CaseService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "cloudsupport_v2beta_generated_CaseService_CreateCase_sync",
+      "title": "Snippet for the create_case call in the CaseService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Support::V2beta::CaseService::Client#create_case.",
+      "file": "case_service/create_case.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_case",
+        "full_name": "::Google::Cloud::Support::V2beta::CaseService::Client#create_case",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Support::V2beta::CreateCaseRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Support::V2beta::Case",
+        "client": {
+          "short_name": "CaseService::Client",
+          "full_name": "::Google::Cloud::Support::V2beta::CaseService::Client"
+        },
+        "method": {
+          "short_name": "CreateCase",
+          "full_name": "google.cloud.support.v2beta.CaseService.CreateCase",
+          "service": {
+            "short_name": "CaseService",
+            "full_name": "google.cloud.support.v2beta.CaseService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "cloudsupport_v2beta_generated_CaseService_UpdateCase_sync",
+      "title": "Snippet for the update_case call in the CaseService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Support::V2beta::CaseService::Client#update_case.",
+      "file": "case_service/update_case.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_case",
+        "full_name": "::Google::Cloud::Support::V2beta::CaseService::Client#update_case",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Support::V2beta::UpdateCaseRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Support::V2beta::Case",
+        "client": {
+          "short_name": "CaseService::Client",
+          "full_name": "::Google::Cloud::Support::V2beta::CaseService::Client"
+        },
+        "method": {
+          "short_name": "UpdateCase",
+          "full_name": "google.cloud.support.v2beta.CaseService.UpdateCase",
+          "service": {
+            "short_name": "CaseService",
+            "full_name": "google.cloud.support.v2beta.CaseService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "cloudsupport_v2beta_generated_CaseService_EscalateCase_sync",
+      "title": "Snippet for the escalate_case call in the CaseService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Support::V2beta::CaseService::Client#escalate_case.",
+      "file": "case_service/escalate_case.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "escalate_case",
+        "full_name": "::Google::Cloud::Support::V2beta::CaseService::Client#escalate_case",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Support::V2beta::EscalateCaseRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Support::V2beta::Case",
+        "client": {
+          "short_name": "CaseService::Client",
+          "full_name": "::Google::Cloud::Support::V2beta::CaseService::Client"
+        },
+        "method": {
+          "short_name": "EscalateCase",
+          "full_name": "google.cloud.support.v2beta.CaseService.EscalateCase",
+          "service": {
+            "short_name": "CaseService",
+            "full_name": "google.cloud.support.v2beta.CaseService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "cloudsupport_v2beta_generated_CaseService_CloseCase_sync",
+      "title": "Snippet for the close_case call in the CaseService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Support::V2beta::CaseService::Client#close_case.",
+      "file": "case_service/close_case.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "close_case",
+        "full_name": "::Google::Cloud::Support::V2beta::CaseService::Client#close_case",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Support::V2beta::CloseCaseRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Support::V2beta::Case",
+        "client": {
+          "short_name": "CaseService::Client",
+          "full_name": "::Google::Cloud::Support::V2beta::CaseService::Client"
+        },
+        "method": {
+          "short_name": "CloseCase",
+          "full_name": "google.cloud.support.v2beta.CaseService.CloseCase",
+          "service": {
+            "short_name": "CaseService",
+            "full_name": "google.cloud.support.v2beta.CaseService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "cloudsupport_v2beta_generated_CaseService_SearchCaseClassifications_sync",
+      "title": "Snippet for the search_case_classifications call in the CaseService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Support::V2beta::CaseService::Client#search_case_classifications.",
+      "file": "case_service/search_case_classifications.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "search_case_classifications",
+        "full_name": "::Google::Cloud::Support::V2beta::CaseService::Client#search_case_classifications",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Support::V2beta::SearchCaseClassificationsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Support::V2beta::SearchCaseClassificationsResponse",
+        "client": {
+          "short_name": "CaseService::Client",
+          "full_name": "::Google::Cloud::Support::V2beta::CaseService::Client"
+        },
+        "method": {
+          "short_name": "SearchCaseClassifications",
+          "full_name": "google.cloud.support.v2beta.CaseService.SearchCaseClassifications",
+          "service": {
+            "short_name": "CaseService",
+            "full_name": "google.cloud.support.v2beta.CaseService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "cloudsupport_v2beta_generated_CommentService_ListComments_sync",
+      "title": "Snippet for the list_comments call in the CommentService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Support::V2beta::CommentService::Client#list_comments.",
+      "file": "comment_service/list_comments.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_comments",
+        "full_name": "::Google::Cloud::Support::V2beta::CommentService::Client#list_comments",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Support::V2beta::ListCommentsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Support::V2beta::ListCommentsResponse",
+        "client": {
+          "short_name": "CommentService::Client",
+          "full_name": "::Google::Cloud::Support::V2beta::CommentService::Client"
+        },
+        "method": {
+          "short_name": "ListComments",
+          "full_name": "google.cloud.support.v2beta.CommentService.ListComments",
+          "service": {
+            "short_name": "CommentService",
+            "full_name": "google.cloud.support.v2beta.CommentService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "cloudsupport_v2beta_generated_CommentService_CreateComment_sync",
+      "title": "Snippet for the create_comment call in the CommentService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Support::V2beta::CommentService::Client#create_comment.",
+      "file": "comment_service/create_comment.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_comment",
+        "full_name": "::Google::Cloud::Support::V2beta::CommentService::Client#create_comment",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Support::V2beta::CreateCommentRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Support::V2beta::Comment",
+        "client": {
+          "short_name": "CommentService::Client",
+          "full_name": "::Google::Cloud::Support::V2beta::CommentService::Client"
+        },
+        "method": {
+          "short_name": "CreateComment",
+          "full_name": "google.cloud.support.v2beta.CommentService.CreateComment",
+          "service": {
+            "short_name": "CommentService",
+            "full_name": "google.cloud.support.v2beta.CommentService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "cloudsupport_v2beta_generated_FeedService_ShowFeed_sync",
+      "title": "Snippet for the show_feed call in the FeedService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Support::V2beta::FeedService::Client#show_feed.",
+      "file": "feed_service/show_feed.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "show_feed",
+        "full_name": "::Google::Cloud::Support::V2beta::FeedService::Client#show_feed",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Support::V2beta::ShowFeedRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Support::V2beta::ShowFeedResponse",
+        "client": {
+          "short_name": "FeedService::Client",
+          "full_name": "::Google::Cloud::Support::V2beta::FeedService::Client"
+        },
+        "method": {
+          "short_name": "ShowFeed",
+          "full_name": "google.cloud.support.v2beta.FeedService.ShowFeed",
+          "service": {
+            "short_name": "FeedService",
+            "full_name": "google.cloud.support.v2beta.FeedService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    }
+  ]
+}

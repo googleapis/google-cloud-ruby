@@ -1,5 +1,18 @@
 # Release History
 
+### 1.8.0 (2025-05-12)
+
+#### Features
+
+* Updated core dependencies including gapic-common 
+* Updated required Ruby version to 3.1 
+
+### 1.7.1 (2025-04-29)
+
+#### Bug Fixes
+
+* Fixed several issues with validating credential configs 
+
 ### 1.7.0 (2025-03-13)
 
 #### Features

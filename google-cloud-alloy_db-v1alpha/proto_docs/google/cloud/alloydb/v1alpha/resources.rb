@@ -181,8 +181,7 @@ module Google
         #   @return [::Google::Cloud::AlloyDB::V1alpha::EncryptionConfig]
         #     Optional. The encryption config can be specified to encrypt the
         #     backups with a customer-managed encryption key (CMEK). When this field is
-        #     not specified, the backup will then use default encryption scheme to
-        #     protect the user data.
+        #     not specified, the backup will use the cluster's encryption config.
         # @!attribute [rw] location
         #   @return [::String]
         #     The location where the backup will be stored. Currently, the only supported
@@ -265,8 +264,7 @@ module Google
         #   @return [::Google::Cloud::AlloyDB::V1alpha::EncryptionConfig]
         #     The encryption config can be specified to encrypt the
         #     backups with a customer-managed encryption key (CMEK). When this field is
-        #     not specified, the backup will then use default encryption scheme to
-        #     protect the user data.
+        #     not specified, the backup will use the cluster's encryption config.
         class ContinuousBackupConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -284,12 +282,19 @@ module Google
         #     if ContinuousBackup is not enabled.
         # @!attribute [r] schedule
         #   @return [::Array<::Google::Type::DayOfWeek>]
-        #     Output only. Days of the week on which a continuous backup is taken. Output
-        #     only field. Ignored if passed into the request.
+        #     Output only. Days of the week on which a continuous backup is taken.
         # @!attribute [r] earliest_restorable_time
         #   @return [::Google::Protobuf::Timestamp]
-        #     Output only. The earliest restorable time that can be restored to. Output
-        #     only field.
+        #     Output only. The earliest restorable time that can be restored to. If
+        #     continuous backups and recovery was recently enabled, the earliest
+        #     restorable time is the creation time of the earliest eligible backup within
+        #     this cluster's continuous backup recovery window. After a cluster has had
+        #     continuous backups enabled for the duration of its recovery window, the
+        #     earliest restorable time becomes "now minus the recovery window". For
+        #     example, assuming a point in time recovery is attempted at 04/16/2025
+        #     3:23:00PM with a 14d recovery window, the earliest restorable time would be
+        #     04/02/2025 3:23:00PM. This field is only visible if the
+        #     CLUSTER_VIEW_CONTINUOUS_BACKUP cluster view is provided.
         class ContinuousBackupInfo
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -328,6 +333,9 @@ module Google
         # @!attribute [rw] maintenance_windows
         #   @return [::Array<::Google::Cloud::AlloyDB::V1alpha::MaintenanceUpdatePolicy::MaintenanceWindow>]
         #     Preferred windows to perform maintenance. Currently limited to 1.
+        # @!attribute [rw] deny_maintenance_periods
+        #   @return [::Array<::Google::Cloud::AlloyDB::V1alpha::MaintenanceUpdatePolicy::DenyMaintenancePeriod>]
+        #     Periods to deny maintenance. Currently limited to 1.
         class MaintenanceUpdatePolicy
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -341,6 +349,32 @@ module Google
           #     Preferred time to start the maintenance operation on the specified day.
           #     Maintenance will start within 1 hour of this time.
           class MaintenanceWindow
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # DenyMaintenancePeriod definition. Excepting emergencies, maintenance
+          # will not be scheduled to start within this deny period. The start_date must
+          # be less than the end_date.
+          # @!attribute [rw] start_date
+          #   @return [::Google::Type::Date]
+          #     Deny period start date.
+          #     This can be:
+          #     * A full date, with non-zero year, month and day values OR
+          #     * A month and day value, with a zero year for recurring
+          # @!attribute [rw] end_date
+          #   @return [::Google::Type::Date]
+          #     Deny period end date.
+          #     This can be:
+          #     * A full date, with non-zero year, month and day values OR
+          #     * A month and day value, with a zero year for recurring
+          # @!attribute [rw] time
+          #   @return [::Google::Type::TimeOfDay]
+          #     Time in UTC when the deny period starts on start_date and ends on
+          #     end_date. This can be:
+          #     * Full time OR
+          #     * All zeros for 00:00:00 UTC
+          class DenyMaintenancePeriod
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
@@ -502,9 +536,10 @@ module Google
         #     Output only. The maintenance schedule for the cluster, generated for a
         #     specific rollout if a maintenance window is set.
         # @!attribute [rw] gemini_config
+        #   @deprecated This field is deprecated and may be removed in the next major version update.
         #   @return [::Google::Cloud::AlloyDB::V1alpha::GeminiClusterConfig]
-        #     Optional. Configuration parameters related to the Gemini in Databases
-        #     add-on.
+        #     Optional. Deprecated and unused. This field will be removed in the near
+        #     future.
         # @!attribute [rw] subscription_type
         #   @return [::Google::Cloud::AlloyDB::V1alpha::SubscriptionType]
         #     Optional. Subscription type of the cluster.
@@ -519,6 +554,12 @@ module Google
         #     "123/environment": "production",
         #     "123/costCenter": "marketing"
         #     ```
+        # @!attribute [r] service_account_email
+        #   @return [::String]
+        #     Output only. AlloyDB per-cluster service agent email. This service account
+        #     is created per-cluster per-project, and is different from that of the
+        #     primary service agent which is created per-project. The service account
+        #     naming format is subject to change.
         class Cluster
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -743,11 +784,13 @@ module Google
         #     zone with available capacity.
         # @!attribute [rw] database_flags
         #   @return [::Google::Protobuf::Map{::String => ::String}]
-        #     Database flags. Set at instance level.
-        #      * They are copied from primary instance on read instance creation.
-        #      * Read instances can set new or override existing flags that are relevant
-        #        for reads, e.g. for enabling columnar cache on a read instance. Flags
-        #        set on read instance may or may not be present on primary.
+        #     Database flags. Set at the instance level.
+        #     They are copied from the primary instance on secondary instance creation.
+        #     Flags that have restrictions default to the value at primary
+        #     instance on read instances during creation. Read instances can set new
+        #     flags or override existing flags that are relevant for reads, for example,
+        #     for enabling columnar cache on a read instance. Flags set on read instance
+        #     might or might not be present on the primary instance.
         #
         #
         #     This is a list of "key": "value" pairs.
@@ -822,12 +865,28 @@ module Google
         #   @return [::Google::Cloud::AlloyDB::V1alpha::Instance::InstanceNetworkConfig]
         #     Optional. Instance-level network configuration.
         # @!attribute [rw] gemini_config
+        #   @deprecated This field is deprecated and may be removed in the next major version update.
         #   @return [::Google::Cloud::AlloyDB::V1alpha::GeminiInstanceConfig]
-        #     Optional. Configuration parameters related to the Gemini in Databases
-        #     add-on.
+        #     Optional. Deprecated and unused. This field will be removed in the near
+        #     future.
         # @!attribute [r] outbound_public_ip_addresses
         #   @return [::Array<::String>]
         #     Output only. All outbound public IP addresses configured for the instance.
+        # @!attribute [rw] activation_policy
+        #   @return [::Google::Cloud::AlloyDB::V1alpha::Instance::ActivationPolicy]
+        #     Optional. Specifies whether an instance needs to spin up. Once the instance
+        #     is active, the activation policy can be updated to the `NEVER` to stop the
+        #     instance. Likewise, the activation policy can be updated to `ALWAYS` to
+        #     start the instance.
+        #     There are restrictions around when an instance can/cannot be activated (for
+        #     example, a read pool instance should be stopped before stopping primary
+        #     etc.). Please refer to the API documentation for more details.
+        # @!attribute [rw] connection_pool_config
+        #   @return [::Google::Cloud::AlloyDB::V1alpha::Instance::ConnectionPoolConfig]
+        #     Optional. The configuration for Managed Connection Pool (MCP).
+        # @!attribute [r] gca_config
+        #   @return [::Google::Cloud::AlloyDB::V1alpha::GCAInstanceConfig]
+        #     Output only. Configuration parameters related to Gemini Cloud Assist.
         class Instance
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -836,27 +895,33 @@ module Google
           # @!attribute [rw] cpu_count
           #   @return [::Integer]
           #     The number of CPU's in the VM instance.
+          # @!attribute [rw] machine_type
+          #   @return [::String]
+          #     Machine type of the VM instance. E.g. "n2-highmem-4",
+          #     "n2-highmem-8", "c4a-highmem-4-lssd".
+          #     cpu_count must match the number of vCPUs in the machine type.
           class MachineConfig
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
 
           # Details of a single node in the instance.
-          # Nodes in an AlloyDB instance are ephemereal, they can change during
+          # Nodes in an AlloyDB instance are ephemeral, they can change during
           # update, failover, autohealing and resize operations.
-          # @!attribute [rw] zone_id
+          # @!attribute [r] zone_id
           #   @return [::String]
-          #     The Compute Engine zone of the VM e.g. "us-central1-b".
-          # @!attribute [rw] id
+          #     Output only. The Compute Engine zone of the VM e.g. "us-central1-b".
+          # @!attribute [r] id
           #   @return [::String]
-          #     The identifier of the VM e.g. "test-read-0601-407e52be-ms3l".
-          # @!attribute [rw] ip
+          #     Output only. The identifier of the VM e.g.
+          #     "test-read-0601-407e52be-ms3l".
+          # @!attribute [r] ip
           #   @return [::String]
-          #     The private IP address of the VM e.g. "10.57.0.34".
-          # @!attribute [rw] state
+          #     Output only. The private IP address of the VM e.g. "10.57.0.34".
+          # @!attribute [r] state
           #   @return [::String]
-          #     Determined by state of the compute VM and postgres-service health.
-          #     Compute VM state can have values listed in
+          #     Output only. Determined by state of the compute VM and postgres-service
+          #     health. Compute VM state can have values listed in
           #     https://cloud.google.com/compute/docs/instances/instance-life-cycle and
           #     postgres-service health can have values: HEALTHY and UNHEALTHY.
           class Node
@@ -906,7 +971,7 @@ module Google
           #     Output only. Track wait event types during query execution for an
           #     instance. This flag is turned "on" by default but tracking is enabled
           #     only after observability enabled flag is also turned on. This is
-          #     read-only flag and only modifiable by producer API.
+          #     read-only flag and only modifiable by internal API.
           # @!attribute [rw] max_query_string_length
           #   @return [::Integer]
           #     Query string length. The default value is 10k.
@@ -927,6 +992,9 @@ module Google
           #   @return [::Boolean]
           #     Track client address for an instance.
           #     If not set, default value is "off".
+          # @!attribute [rw] assistive_experiences_enabled
+          #   @return [::Boolean]
+          #     Whether assistive experiences are enabled for this AlloyDB instance.
           class ObservabilityInstanceConfig
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -989,6 +1057,56 @@ module Google
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
 
+          # Configuration for setting up PSC service automation. Consumer projects in
+          # the configs will be allowlisted automatically for the instance.
+          # @!attribute [rw] consumer_project
+          #   @return [::String]
+          #     The consumer project to which the PSC service automation endpoint will
+          #     be created.
+          # @!attribute [rw] consumer_network
+          #   @return [::String]
+          #     The consumer network for the PSC service automation, example:
+          #     "projects/vpc-host-project/global/networks/default".
+          #     The consumer network might be hosted a different project than the
+          #     consumer project.
+          # @!attribute [r] ip_address
+          #   @return [::String]
+          #     Output only. The IP address of the PSC service automation endpoint.
+          # @!attribute [r] status
+          #   @return [::String]
+          #     Output only. The status of the PSC service automation connection.
+          #     Possible values:
+          #       "STATE_UNSPECIFIED" - An invalid state as the default case.
+          #       "ACTIVE" - The connection has been created successfully.
+          #       "FAILED" - The connection is not functional since some resources on the
+          #     connection fail to be created.
+          #       "CREATING" - The connection is being created.
+          #       "DELETING" - The connection is being deleted.
+          #       "CREATE_REPAIRING" - The connection is being repaired to complete
+          #     creation.
+          #       "DELETE_REPAIRING" - The connection is being repaired to complete
+          #     deletion.
+          # @!attribute [r] consumer_network_status
+          #   @return [::String]
+          #     Output only. The status of the service connection policy.
+          #     Possible values:
+          #       "STATE_UNSPECIFIED" - Default state, when Connection Map is created
+          #     initially.
+          #       "VALID" - Set when policy and map configuration is valid, and their
+          #     matching can lead to allowing creation of PSC Connections subject to
+          #     other constraints like connections limit.
+          #       "CONNECTION_POLICY_MISSING" - No Service Connection Policy found for
+          #     this network and Service Class
+          #       "POLICY_LIMIT_REACHED" - Service Connection Policy limit reached for
+          #       this network and Service Class
+          #       "CONSUMER_INSTANCE_PROJECT_NOT_ALLOWLISTED" - The consumer instance
+          #     project is not in AllowedGoogleProducersResourceHierarchyLevels of the
+          #     matching ServiceConnectionPolicy.
+          class PscAutoConnectionConfig
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
           # PscInstanceConfig contains PSC related configuration at an
           # instance level.
           # @!attribute [r] service_attachment_link
@@ -1011,6 +1129,9 @@ module Google
           #     instance which are used for outbound connectivity. Only primary instances
           #     can have PSC interface attached. Currently we only support 0 or 1 PSC
           #     interface.
+          # @!attribute [rw] psc_auto_connections
+          #   @return [::Array<::Google::Cloud::AlloyDB::V1alpha::Instance::PscAutoConnectionConfig>]
+          #     Optional. Configurations for setting up PSC service automation.
           class PscInstanceConfig
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -1027,6 +1148,22 @@ module Google
           #   @return [::Boolean]
           #     Optional. Enabling an outbound public IP address to support a database
           #     server sending requests out into the internet.
+          # @!attribute [r] network
+          #   @return [::String]
+          #     Output only. The resource link for the VPC network in which instance
+          #     resources are created and from which they are accessible via Private IP.
+          #     This will be the same value as the parent cluster's network. It is
+          #     specified in the form: //
+          #     `projects/{project_number}/global/networks/{network_id}`.
+          # @!attribute [rw] allocated_ip_range_override
+          #   @return [::String]
+          #     Optional. Name of the allocated IP range for the private IP AlloyDB
+          #     instance, for example: "google-managed-services-default". If set, the
+          #     instance IPs will be created from this allocated range and will override
+          #     the IP range used by the parent cluster. The range name must comply with
+          #     [RFC 1035](http://datatracker.ietf.org/doc/html/rfc1035). Specifically,
+          #     the name must be 1-63 characters long and match the regular expression
+          #     [a-z]([-a-z0-9]*[a-z0-9])?.
           class InstanceNetworkConfig
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -1038,6 +1175,27 @@ module Google
             class AuthorizedNetwork
               include ::Google::Protobuf::MessageExts
               extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
+          end
+
+          # Configuration for Managed Connection Pool (MCP).
+          # @!attribute [rw] enabled
+          #   @return [::Boolean]
+          #     Optional. Whether to enable Managed Connection Pool (MCP).
+          class ConnectionPoolConfig
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+
+            # The pool mode. Defaults to `POOL_MODE_TRANSACTION`.
+            module PoolMode
+              # The pool mode is not specified. Defaults to `POOL_MODE_TRANSACTION`.
+              POOL_MODE_UNSPECIFIED = 0
+
+              # Server is released back to pool after a client disconnects.
+              POOL_MODE_SESSION = 1
+
+              # Server is released back to pool after a transaction finishes.
+              POOL_MODE_TRANSACTION = 2
             end
           end
 
@@ -1140,6 +1298,18 @@ module Google
             # Regional (or Highly) available instance.
             REGIONAL = 2
           end
+
+          # Specifies whether an instance needs to spin up.
+          module ActivationPolicy
+            # The policy is not specified.
+            ACTIVATION_POLICY_UNSPECIFIED = 0
+
+            # The instance is running.
+            ALWAYS = 1
+
+            # The instance is not running.
+            NEVER = 2
+          end
         end
 
         # ConnectionInfo singleton resource.
@@ -1200,9 +1370,15 @@ module Google
         # @!attribute [r] update_time
         #   @return [::Google::Protobuf::Timestamp]
         #     Output only. Update time stamp
+        #
+        #     Users should not infer any meaning from this field. Its value is generally
+        #     unrelated to the timing of the backup creation operation.
         # @!attribute [r] delete_time
         #   @return [::Google::Protobuf::Timestamp]
         #     Output only. Delete time stamp
+        # @!attribute [r] create_completion_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Output only. Timestamp when the resource finished being created.
         # @!attribute [rw] labels
         #   @return [::Google::Protobuf::Map{::String => ::String}]
         #     Labels as key value pairs
@@ -1387,6 +1563,16 @@ module Google
         #     Restriction on INTEGER type value.
         #
         #     Note: The following fields are mutually exclusive: `integer_restrictions`, `string_restrictions`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] recommended_string_value
+        #   @return [::String]
+        #     The recommended value for a STRING flag.
+        #
+        #     Note: The following fields are mutually exclusive: `recommended_string_value`, `recommended_integer_value`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] recommended_integer_value
+        #   @return [::Google::Protobuf::Int64Value]
+        #     The recommended value for an INTEGER flag.
+        #
+        #     Note: The following fields are mutually exclusive: `recommended_integer_value`, `recommended_string_value`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] name
         #   @return [::String]
         #     The name of the flag resource, following Google Cloud conventions, e.g.:
@@ -1411,6 +1597,9 @@ module Google
         #     restart. If a flag that requires database restart is set, the backend
         #     will automatically restart the database (making sure to satisfy any
         #     availability SLO's).
+        # @!attribute [rw] scope
+        #   @return [::Google::Cloud::AlloyDB::V1alpha::SupportedDatabaseFlag::Scope]
+        #     The scope of the flag.
         class SupportedDatabaseFlag
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -1455,6 +1644,18 @@ module Google
 
             # Denotes that the flag does not accept any values.
             NONE = 4
+          end
+
+          # The scope of the flag.
+          module Scope
+            # The scope of the flag is not specified. Default is DATABASE.
+            SCOPE_UNSPECIFIED = 0
+
+            # The flag is a database flag.
+            DATABASE = 1
+
+            # The flag is a connection pool flag.
+            CONNECTION_POOL = 2
           end
         end
 

@@ -7,7 +7,7 @@ Cloud Monitoring collects metrics, events, and metadata from Google Cloud, Amazo
 Actual client classes for the various versions of this API are defined in
 _versioned_ client gems, with names of the form `google-cloud-monitoring-v*`.
 The gem `google-cloud-monitoring` is the main client library that brings the
-verisoned gems in as dependencies, and provides high-level methods for
+versioned gems in as dependencies, and provides high-level methods for
 constructing clients. More information on versioned clients can be found below
 in the section titled *Which client should I use?*.
 
@@ -18,8 +18,6 @@ themselves can be found in the client library documentation for the versioned
 client gems:
 [google-cloud-monitoring-v3](https://cloud.google.com/ruby/docs/reference/google-cloud-monitoring-v3/latest),
 [google-cloud-monitoring-dashboard-v1](https://cloud.google.com/ruby/docs/reference/google-cloud-monitoring-dashboard-v1/latest),
-[google-cloud-monitoring-dashboard-v1](https://cloud.google.com/ruby/docs/reference/google-cloud-monitoring-dashboard-v1/latest),
-[google-cloud-monitoring-metrics_scope-v1](https://cloud.google.com/ruby/docs/reference/google-cloud-monitoring-metrics_scope-v1/latest),
 [google-cloud-monitoring-metrics_scope-v1](https://cloud.google.com/ruby/docs/reference/google-cloud-monitoring-metrics_scope-v1/latest).
 
 See also the [Product Documentation](https://cloud.google.com/monitoring)
@@ -74,7 +72,9 @@ results in logs appearing alongside your application logs in the
 Debug logging also requires that the versioned clients for this service be
 sufficiently recent, released after about Dec 10, 2024. If logging is not
 working, try updating the versioned clients in your bundle or installed gems:
-[google-cloud-monitoring-v3](https://cloud.google.com/ruby/docs/reference/google-cloud-monitoring-v3/latest).
+[google-cloud-monitoring-v3](https://cloud.google.com/ruby/docs/reference/google-cloud-monitoring-v3/latest),
+[google-cloud-monitoring-dashboard-v1](https://cloud.google.com/ruby/docs/reference/google-cloud-monitoring-dashboard-v1/latest),
+[google-cloud-monitoring-metrics_scope-v1](https://cloud.google.com/ruby/docs/reference/google-cloud-monitoring-metrics_scope-v1/latest).
 
 ## Supported Ruby Versions
 

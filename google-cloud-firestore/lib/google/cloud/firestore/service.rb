@@ -12,6 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+require "cgi/escape"
 
 require "google/cloud/env"
 require "google/cloud/errors"
@@ -52,7 +53,8 @@ module Google
               config.endpoint = host if host
               config.lib_name = "gccl"
               config.lib_version = Google::Cloud::Firestore::VERSION
-              config.metadata = { "google-cloud-resource-prefix": "projects/#{@project}/databases/#{@database}" }
+              routing_val = CGI.escapeURIComponent "projects/#{@project}/databases/#{@database}"
+              config.metadata = { "x-goog-request-params": "database=#{routing_val}" }
             end
           end
         end
@@ -120,18 +122,24 @@ module Google
           paged_enum.response
         end
 
-        def run_query path, query_grpc, transaction: nil, read_time: nil
+        def run_query path, query_grpc, transaction: nil, read_time: nil, explain_options: nil
           run_query_req = {
             parent:           path,
             structured_query: query_grpc
           }
+
           if transaction.is_a? String
             run_query_req[:transaction] = transaction
           elsif transaction
             run_query_req[:new_transaction] = transaction
           end
+
           if read_time
             run_query_req[:read_time] = read_time_to_timestamp(read_time)
+          end
+
+          if explain_options
+            run_query_req[:explain_options] = explain_options
           end
 
           firestore.run_query run_query_req, call_options(parent: database_path)
@@ -139,7 +147,7 @@ module Google
 
         ##
         # Returns Google::Cloud::Firestore::V1::RunAggregationQueryResponse
-        def run_aggregate_query parent, structured_aggregation_query, transaction: nil
+        def run_aggregate_query parent, structured_aggregation_query, transaction: nil, explain_options: nil
           request = Google::Cloud::Firestore::V1::RunAggregationQueryRequest.new(
             parent: parent,
             structured_aggregation_query: structured_aggregation_query
@@ -148,6 +156,9 @@ module Google
             request.transaction = transaction
           elsif transaction
             request.new_transaction = transaction
+          end
+          if explain_options
+            request.explain_options = explain_options
           end
           firestore.run_aggregation_query request
         end
@@ -227,7 +238,8 @@ module Google
 
         def default_headers parent = nil
           parent ||= database_path
-          { "google-cloud-resource-prefix" => parent }
+          routing_val = CGI.escapeURIComponent parent
+          { "x-goog-request-params" => "database=#{routing_val}" }
         end
 
         def call_options parent: nil, token: nil

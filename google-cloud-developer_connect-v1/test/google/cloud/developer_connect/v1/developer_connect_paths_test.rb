@@ -41,6 +41,18 @@ class ::Google::Cloud::DeveloperConnect::V1::DeveloperConnect::ClientPathsTest <
     end
   end
 
+  def test_account_connector_path
+    grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
+      client = ::Google::Cloud::DeveloperConnect::V1::DeveloperConnect::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      path = client.account_connector_path project: "value0", location: "value1", account_connector: "value2"
+      assert_equal "projects/value0/locations/value1/accountConnectors/value2", path
+    end
+  end
+
   def test_connection_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
     ::Gapic::ServiceStub.stub :new, DummyStub.new do
@@ -110,6 +122,18 @@ class ::Google::Cloud::DeveloperConnect::V1::DeveloperConnect::ClientPathsTest <
 
       path = client.service_path project: "value0", location: "value1", namespace: "value2", service: "value3"
       assert_equal "projects/value0/locations/value1/namespaces/value2/services/value3", path
+    end
+  end
+
+  def test_user_path
+    grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
+      client = ::Google::Cloud::DeveloperConnect::V1::DeveloperConnect::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      path = client.user_path project: "value0", location: "value1", account_connector: "value2", user: "value3"
+      assert_equal "projects/value0/locations/value1/accountConnectors/value2/users/value3", path
     end
   end
 end

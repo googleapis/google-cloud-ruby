@@ -230,7 +230,7 @@ module Google
               # Service calls
 
               ##
-              # Lists Jobs in a given project and location.
+              # Lists Jobs in a given project.
               #
               # @overload list_jobs(request, options = nil)
               #   Pass arguments to `list_jobs` via a request object, either of type
@@ -248,7 +248,7 @@ module Google
               #   the default parameter values, pass an empty Hash as a request object (see above).
               #
               #   @param parent [::String]
-              #     Required. Format: projects/\\{project_id}/locations/\\{location_id} .
+              #     Required. Format: projects/\\{project_id}/locations/global.
               #   @param filter [::String]
               #     Optional. Filters results as defined by https://google.aip.dev/160.
               #   @param page_size [::Integer]
@@ -341,7 +341,7 @@ module Google
               #
               #   @param name [::String]
               #     Required. `name` of the job to retrieve.
-              #     Format: projects/\\{project_id}/locations/\\{location_id}/jobs/\\{job_id} .
+              #     Format: projects/\\{project_id}/locations/global/jobs/\\{job_id} .
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Google::Cloud::StorageBatchOperations::V1::Job]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
@@ -430,9 +430,9 @@ module Google
               #   @param request_id [::String]
               #     Optional. An optional request ID to identify requests. Specify a unique
               #     request ID in case you need to retry your request. Requests with same
-              #     `request_id` will ignored for at least 60 minutes since the first request.
-              #     The request ID must be a valid UUID with the exception that zero UUID is
-              #     not supported (00000000-0000-0000-0000-000000000000).
+              #     `request_id` will be ignored for at least 60 minutes since the first
+              #     request. The request ID must be a valid UUID with the exception that zero
+              #     UUID is not supported (00000000-0000-0000-0000-000000000000).
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Gapic::Operation]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
@@ -520,13 +520,13 @@ module Google
               #
               #   @param name [::String]
               #     Required. The `name` of the job to delete.
-              #     Format: projects/\\{project_id}/locations/\\{location_id}/jobs/\\{job_id} .
+              #     Format: projects/\\{project_id}/locations/global/jobs/\\{job_id} .
               #   @param request_id [::String]
               #     Optional. An optional request ID to identify requests. Specify a unique
               #     request ID in case you need to retry your request. Requests with same
-              #     `request_id` will ignored for at least 60 minutes since the first request.
-              #     The request ID must be a valid UUID with the exception that zero UUID is
-              #     not supported (00000000-0000-0000-0000-000000000000).
+              #     `request_id` will be ignored for at least 60 minutes since the first
+              #     request. The request ID must be a valid UUID with the exception that zero
+              #     UUID is not supported (00000000-0000-0000-0000-000000000000).
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Google::Protobuf::Empty]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
@@ -605,13 +605,13 @@ module Google
               #
               #   @param name [::String]
               #     Required. The `name` of the job to cancel.
-              #     Format: projects/\\{project_id}/locations/\\{location_id}/jobs/\\{job_id}.
+              #     Format: projects/\\{project_id}/locations/global/jobs/\\{job_id}.
               #   @param request_id [::String]
               #     Optional. An optional request ID to identify requests. Specify a unique
               #     request ID in case you need to retry your request. Requests with same
-              #     `request_id` will ignored for at least 60 minutes since the first request.
-              #     The request ID must be a valid UUID with the exception that zero UUID is
-              #     not supported (00000000-0000-0000-0000-000000000000).
+              #     `request_id` will be ignored for at least 60 minutes since the first
+              #     request. The request ID must be a valid UUID with the exception that zero
+              #     UUID is not supported (00000000-0000-0000-0000-000000000000).
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Google::Cloud::StorageBatchOperations::V1::CancelJobResponse]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
@@ -766,7 +766,7 @@ module Google
 
                 config_attr :endpoint,      nil, ::String, nil
                 config_attr :credentials,   nil do |value|
-                  allowed = [::String, ::Hash, ::Proc, ::Symbol, ::Google::Auth::Credentials, ::Signet::OAuth2::Client, nil]
+                  allowed = [::String, ::Hash, ::Proc, ::Symbol, ::Google::Auth::Credentials, ::Google::Auth::BaseClient, ::Signet::OAuth2::Client, nil]
                   allowed.any? { |klass| klass === value }
                 end
                 config_attr :scope,         nil, ::String, ::Array, nil

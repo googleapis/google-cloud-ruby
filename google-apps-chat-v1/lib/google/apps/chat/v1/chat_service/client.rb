@@ -191,6 +191,26 @@ module Google
                   initial_delay: 1.0, max_delay: 10.0, multiplier: 1.3, retry_codes: [14]
                 }
 
+                default_config.rpcs.create_custom_emoji.timeout = 30.0
+                default_config.rpcs.create_custom_emoji.retry_policy = {
+                  initial_delay: 1.0, max_delay: 10.0, multiplier: 1.3, retry_codes: [14]
+                }
+
+                default_config.rpcs.get_custom_emoji.timeout = 30.0
+                default_config.rpcs.get_custom_emoji.retry_policy = {
+                  initial_delay: 1.0, max_delay: 10.0, multiplier: 1.3, retry_codes: [14]
+                }
+
+                default_config.rpcs.list_custom_emojis.timeout = 30.0
+                default_config.rpcs.list_custom_emojis.retry_policy = {
+                  initial_delay: 1.0, max_delay: 10.0, multiplier: 1.3, retry_codes: [14]
+                }
+
+                default_config.rpcs.delete_custom_emoji.timeout = 30.0
+                default_config.rpcs.delete_custom_emoji.retry_policy = {
+                  initial_delay: 1.0, max_delay: 10.0, multiplier: 1.3, retry_codes: [14]
+                }
+
                 default_config.rpcs.get_space_read_state.timeout = 30.0
                 default_config.rpcs.get_space_read_state.retry_policy = {
                   initial_delay: 1.0, max_delay: 10.0, multiplier: 1.3, retry_codes: [14]
@@ -3364,8 +3384,7 @@ module Google
             #     AND user.name = "users/\\{user}"
             #     ```
             #
-            #     Invalid queries are rejected by the server with an `INVALID_ARGUMENT`
-            #     error.
+            #     Invalid queries are rejected with an `INVALID_ARGUMENT` error.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Gapic::PagedEnumerable<::Google::Apps::Chat::V1::Reaction>]
@@ -3523,6 +3542,418 @@ module Google
                                      retry_policy: @config.retry_policy
 
               @chat_service_stub.call_rpc :delete_reaction, request, options: options do |response, operation|
+                yield response, operation if block_given?
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Creates a custom emoji.
+            #
+            # Custom emojis are only available for Google Workspace accounts, and the
+            # administrator must turn custom emojis on for the organization. For more
+            # information, see [Learn about custom emojis in Google
+            # Chat](https://support.google.com/chat/answer/12800149) and
+            # [Manage custom emoji
+            # permissions](https://support.google.com/a/answer/12850085).
+            #
+            # Requires [user
+            # authentication](https://developers.google.com/workspace/chat/authenticate-authorize-chat-user).
+            #
+            # @overload create_custom_emoji(request, options = nil)
+            #   Pass arguments to `create_custom_emoji` via a request object, either of type
+            #   {::Google::Apps::Chat::V1::CreateCustomEmojiRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Apps::Chat::V1::CreateCustomEmojiRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload create_custom_emoji(custom_emoji: nil)
+            #   Pass arguments to `create_custom_emoji` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param custom_emoji [::Google::Apps::Chat::V1::CustomEmoji, ::Hash]
+            #     Required. The custom emoji to create.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Google::Apps::Chat::V1::CustomEmoji]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Google::Apps::Chat::V1::CustomEmoji]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/apps/chat/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Apps::Chat::V1::ChatService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Apps::Chat::V1::CreateCustomEmojiRequest.new
+            #
+            #   # Call the create_custom_emoji method.
+            #   result = client.create_custom_emoji request
+            #
+            #   # The returned object is of type Google::Apps::Chat::V1::CustomEmoji.
+            #   p result
+            #
+            def create_custom_emoji request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Apps::Chat::V1::CreateCustomEmojiRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.create_custom_emoji.metadata.to_h
+
+              # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Apps::Chat::V1::VERSION
+              metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              options.apply_defaults timeout:      @config.rpcs.create_custom_emoji.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.create_custom_emoji.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @chat_service_stub.call_rpc :create_custom_emoji, request, options: options do |response, operation|
+                yield response, operation if block_given?
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Returns details about a custom emoji.
+            #
+            # Custom emojis are only available for Google Workspace accounts, and the
+            # administrator must turn custom emojis on for the organization. For more
+            # information, see [Learn about custom emojis in Google
+            # Chat](https://support.google.com/chat/answer/12800149) and
+            # [Manage custom emoji
+            # permissions](https://support.google.com/a/answer/12850085).
+            #
+            # Requires [user
+            # authentication](https://developers.google.com/workspace/chat/authenticate-authorize-chat-user).
+            #
+            # @overload get_custom_emoji(request, options = nil)
+            #   Pass arguments to `get_custom_emoji` via a request object, either of type
+            #   {::Google::Apps::Chat::V1::GetCustomEmojiRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Apps::Chat::V1::GetCustomEmojiRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload get_custom_emoji(name: nil)
+            #   Pass arguments to `get_custom_emoji` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param name [::String]
+            #     Required. Resource name of the custom emoji.
+            #
+            #     Format: `customEmojis/{customEmoji}`
+            #
+            #     You can use the emoji name as an alias for `{customEmoji}`. For example,
+            #     `customEmojis/:example-emoji:` where `:example-emoji:` is the emoji name
+            #     for a custom emoji.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Google::Apps::Chat::V1::CustomEmoji]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Google::Apps::Chat::V1::CustomEmoji]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/apps/chat/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Apps::Chat::V1::ChatService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Apps::Chat::V1::GetCustomEmojiRequest.new
+            #
+            #   # Call the get_custom_emoji method.
+            #   result = client.get_custom_emoji request
+            #
+            #   # The returned object is of type Google::Apps::Chat::V1::CustomEmoji.
+            #   p result
+            #
+            def get_custom_emoji request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Apps::Chat::V1::GetCustomEmojiRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.get_custom_emoji.metadata.to_h
+
+              # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Apps::Chat::V1::VERSION
+              metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.get_custom_emoji.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.get_custom_emoji.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @chat_service_stub.call_rpc :get_custom_emoji, request, options: options do |response, operation|
+                yield response, operation if block_given?
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Lists custom emojis visible to the authenticated user.
+            #
+            # Custom emojis are only available for Google Workspace accounts, and the
+            # administrator must turn custom emojis on for the organization. For more
+            # information, see [Learn about custom emojis in Google
+            # Chat](https://support.google.com/chat/answer/12800149) and
+            # [Manage custom emoji
+            # permissions](https://support.google.com/a/answer/12850085).
+            #
+            # Requires [user
+            # authentication](https://developers.google.com/workspace/chat/authenticate-authorize-chat-user).
+            #
+            # @overload list_custom_emojis(request, options = nil)
+            #   Pass arguments to `list_custom_emojis` via a request object, either of type
+            #   {::Google::Apps::Chat::V1::ListCustomEmojisRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Apps::Chat::V1::ListCustomEmojisRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload list_custom_emojis(page_size: nil, page_token: nil, filter: nil)
+            #   Pass arguments to `list_custom_emojis` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param page_size [::Integer]
+            #     Optional. The maximum number of custom emojis returned. The service can
+            #     return fewer custom emojis than this value. If unspecified, the default
+            #     value is 25. The maximum value is 200; values above 200 are changed to 200.
+            #   @param page_token [::String]
+            #     Optional. (If resuming from a previous query.)
+            #
+            #     A page token received from a previous list custom emoji call. Provide this
+            #     to retrieve the subsequent page.
+            #
+            #     When paginating, the filter value should match the call that provided the
+            #     page token. Passing a different value might lead to unexpected results.
+            #   @param filter [::String]
+            #     Optional. A query filter.
+            #
+            #     Supports filtering by creator.
+            #
+            #     To filter by creator, you must specify a valid value. Currently only
+            #     `creator("users/me")` and `NOT creator("users/me")` are accepted to filter
+            #     custom emojis by whether they were created by the calling user or not.
+            #
+            #     For example, the following query returns custom emojis created by the
+            #     caller:
+            #     ```
+            #     creator("users/me")
+            #     ```
+            #
+            #     Invalid queries are rejected with an `INVALID_ARGUMENT` error.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Gapic::PagedEnumerable<::Google::Apps::Chat::V1::CustomEmoji>]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Gapic::PagedEnumerable<::Google::Apps::Chat::V1::CustomEmoji>]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/apps/chat/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Apps::Chat::V1::ChatService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Apps::Chat::V1::ListCustomEmojisRequest.new
+            #
+            #   # Call the list_custom_emojis method.
+            #   result = client.list_custom_emojis request
+            #
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
+            #     # Each element is of type ::Google::Apps::Chat::V1::CustomEmoji.
+            #     p item
+            #   end
+            #
+            def list_custom_emojis request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Apps::Chat::V1::ListCustomEmojisRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.list_custom_emojis.metadata.to_h
+
+              # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Apps::Chat::V1::VERSION
+              metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              options.apply_defaults timeout:      @config.rpcs.list_custom_emojis.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.list_custom_emojis.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @chat_service_stub.call_rpc :list_custom_emojis, request, options: options do |response, operation|
+                response = ::Gapic::PagedEnumerable.new @chat_service_stub, :list_custom_emojis, request, response, operation, options
+                yield response, operation if block_given?
+                throw :response, response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Deletes a custom emoji. By default, users can only delete custom emoji they
+            # created. [Emoji managers](https://support.google.com/a/answer/12850085)
+            # assigned by the administrator can delete any custom emoji in the
+            # organization. See [Learn about custom emojis in Google
+            # Chat](https://support.google.com/chat/answer/12800149).
+            #
+            # Custom emojis are only available for Google Workspace accounts, and the
+            # administrator must turn custom emojis on for the organization. For more
+            # information, see [Learn about custom emojis in Google
+            # Chat](https://support.google.com/chat/answer/12800149) and
+            # [Manage custom emoji
+            # permissions](https://support.google.com/a/answer/12850085).
+            #
+            # Requires [user
+            # authentication](https://developers.google.com/workspace/chat/authenticate-authorize-chat-user).
+            #
+            # @overload delete_custom_emoji(request, options = nil)
+            #   Pass arguments to `delete_custom_emoji` via a request object, either of type
+            #   {::Google::Apps::Chat::V1::DeleteCustomEmojiRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Apps::Chat::V1::DeleteCustomEmojiRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload delete_custom_emoji(name: nil)
+            #   Pass arguments to `delete_custom_emoji` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param name [::String]
+            #     Required. Resource name of the custom emoji to delete.
+            #
+            #     Format: `customEmojis/{customEmoji}`
+            #
+            #     You can use the emoji name as an alias for `{customEmoji}`. For example,
+            #     `customEmojis/:example-emoji:` where `:example-emoji:` is the emoji name
+            #     for a custom emoji.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Google::Protobuf::Empty]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Google::Protobuf::Empty]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/apps/chat/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Apps::Chat::V1::ChatService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Apps::Chat::V1::DeleteCustomEmojiRequest.new
+            #
+            #   # Call the delete_custom_emoji method.
+            #   result = client.delete_custom_emoji request
+            #
+            #   # The returned object is of type Google::Protobuf::Empty.
+            #   p result
+            #
+            def delete_custom_emoji request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Apps::Chat::V1::DeleteCustomEmojiRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.delete_custom_emoji.metadata.to_h
+
+              # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Apps::Chat::V1::VERSION
+              metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.delete_custom_emoji.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.delete_custom_emoji.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @chat_service_stub.call_rpc :delete_custom_emoji, request, options: options do |response, operation|
                 yield response, operation if block_given?
               end
             rescue ::GRPC::BadStatus => e
@@ -4433,8 +4864,8 @@ module Google
 
               config_attr :endpoint,      nil, ::String, nil
               config_attr :credentials,   nil do |value|
-                allowed = [::String, ::Hash, ::Proc, ::Symbol, ::Google::Auth::Credentials, ::Signet::OAuth2::Client, nil]
-                allowed += [::GRPC::Core::Channel, ::GRPC::Core::ChannelCredentials] if defined? ::GRPC
+                allowed = [::String, ::Hash, ::Proc, ::Symbol, ::Google::Auth::Credentials, ::Google::Auth::BaseClient, ::Signet::OAuth2::Client, nil]
+                allowed += [::GRPC::Core::Channel, ::GRPC::Core::ChannelCredentials] if defined? ::GRPC::Core::Channel
                 allowed.any? { |klass| klass === value }
               end
               config_attr :scope,         nil, ::String, ::Array, nil
@@ -4615,6 +5046,26 @@ module Google
                 #
                 attr_reader :delete_reaction
                 ##
+                # RPC-specific configuration for `create_custom_emoji`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :create_custom_emoji
+                ##
+                # RPC-specific configuration for `get_custom_emoji`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :get_custom_emoji
+                ##
+                # RPC-specific configuration for `list_custom_emojis`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :list_custom_emojis
+                ##
+                # RPC-specific configuration for `delete_custom_emoji`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :delete_custom_emoji
+                ##
                 # RPC-specific configuration for `get_space_read_state`
                 # @return [::Gapic::Config::Method]
                 #
@@ -4700,6 +5151,14 @@ module Google
                   @list_reactions = ::Gapic::Config::Method.new list_reactions_config
                   delete_reaction_config = parent_rpcs.delete_reaction if parent_rpcs.respond_to? :delete_reaction
                   @delete_reaction = ::Gapic::Config::Method.new delete_reaction_config
+                  create_custom_emoji_config = parent_rpcs.create_custom_emoji if parent_rpcs.respond_to? :create_custom_emoji
+                  @create_custom_emoji = ::Gapic::Config::Method.new create_custom_emoji_config
+                  get_custom_emoji_config = parent_rpcs.get_custom_emoji if parent_rpcs.respond_to? :get_custom_emoji
+                  @get_custom_emoji = ::Gapic::Config::Method.new get_custom_emoji_config
+                  list_custom_emojis_config = parent_rpcs.list_custom_emojis if parent_rpcs.respond_to? :list_custom_emojis
+                  @list_custom_emojis = ::Gapic::Config::Method.new list_custom_emojis_config
+                  delete_custom_emoji_config = parent_rpcs.delete_custom_emoji if parent_rpcs.respond_to? :delete_custom_emoji
+                  @delete_custom_emoji = ::Gapic::Config::Method.new delete_custom_emoji_config
                   get_space_read_state_config = parent_rpcs.get_space_read_state if parent_rpcs.respond_to? :get_space_read_state
                   @get_space_read_state = ::Gapic::Config::Method.new get_space_read_state_config
                   update_space_read_state_config = parent_rpcs.update_space_read_state if parent_rpcs.respond_to? :update_space_read_state

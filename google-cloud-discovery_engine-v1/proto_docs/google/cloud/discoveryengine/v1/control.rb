@@ -41,7 +41,7 @@ module Google
         #     Optional. Query regex to match the whole search query.
         #     Cannot be set when
         #     {::Google::Cloud::DiscoveryEngine::V1::Condition#query_terms Condition.query_terms}
-        #     is set. This is currently supporting promotion use case.
+        #     is set. Only supported for Basic Site Search promotion serving controls.
         class Condition
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -109,8 +109,6 @@ module Google
         # @!attribute [rw] promote_action
         #   @return [::Google::Cloud::DiscoveryEngine::V1::Control::PromoteAction]
         #     Promote certain links based on predefined trigger queries.
-        #
-        #     This now only supports basic site search.
         #
         #     Note: The following fields are mutually exclusive: `promote_action`, `boost_action`, `filter_action`, `redirect_action`, `synonyms_action`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] name

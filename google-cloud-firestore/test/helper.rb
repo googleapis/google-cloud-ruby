@@ -18,10 +18,13 @@ gem "minitest"
 require "minitest/autorun"
 require "minitest/focus"
 require "minitest/rg"
-require "google/cloud/firestore"
-require "google/cloud/firestore/rate_limiter"
+
+require "cgi/escape"
 require "grpc"
 require "ostruct"
+
+require "google/cloud/firestore"
+require "google/cloud/firestore/rate_limiter"
 
 ##
 # Monkey-Patch CallOptions to support Mocks
@@ -126,6 +129,33 @@ class BatchWriteStub
   end
 end
 
+##
+# Used to test the moment the enum is reverted (and therefore read)
+# for `limit_last` queries
+
+class ExplodingEnum
+  include Enumerable
+
+  def initialize responses, explode_on: 1
+    raise if !responses.to_a.empty? && responses.first.nil?
+
+    @responses = responses.to_a
+    @explode_on = explode_on
+  end
+
+  def each
+    return enum_for(:each) unless block_given?
+
+    @responses.each_with_index do |response, index|
+      if index >= @explode_on
+        raise "BOOM! Attempted to read past allowed count (allowed: #{@explode_on}, tried index: #{index})."
+      end
+
+      yield response
+    end
+  end
+end
+
 class MockFirestore < Minitest::Spec
   let(:project) { "projectID" }
   let(:database) { "(default)" }
@@ -136,8 +166,7 @@ class MockFirestore < Minitest::Spec
   let(:full_doc_paths) {
     ["#{documents_path}/users/alice", "#{documents_path}/users/bob", "#{documents_path}/users/carol"]
   }
-  let(:default_project_options) { Gapic::CallOptions.new(metadata: { "google-cloud-resource-prefix" => "projects/#{project}" }) }
-  let(:default_options) { Gapic::CallOptions.new(metadata: { "google-cloud-resource-prefix" => database_path }, retry_policy: {}) }
+  let(:default_options) { Gapic::CallOptions.new(metadata: { "x-goog-request-params" => "database=#{CGI.escapeURIComponent(database_path)}"}, retry_policy: {}) }
   let(:credentials) { OpenStruct.new(client: OpenStruct.new(updater_proc: Proc.new {})) }
   let(:firestore) { Google::Cloud::Firestore::Client.new(Google::Cloud::Firestore::Service.new(project, credentials, database: database)) }
   let(:secondary_firestore) { Google::Cloud::Firestore::Client.new(Google::Cloud::Firestore::Service.new(project, credentials, database: secondary_database)) }
@@ -209,7 +238,8 @@ class MockFirestore < Minitest::Spec
                      parent: "projects/#{project}/databases/(default)/documents",
                      transaction: nil,
                      new_transaction: nil,
-                     read_time: nil
+                     read_time: nil,
+                     explain_options: nil
     req = {
       parent: parent,
       structured_query: query
@@ -217,6 +247,7 @@ class MockFirestore < Minitest::Spec
     req[:transaction] = transaction if transaction
     req[:new_transaction] = new_transaction if new_transaction
     req[:read_time] = firestore.service.read_time_to_timestamp(read_time) if read_time
+    req[:explain_options] = explain_options if explain_options
     [req, default_options]
   end
 

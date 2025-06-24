@@ -61,6 +61,9 @@ module Google
         #   @return [::Google::Cloud::AIPlatform::V1::Tool::CodeExecution]
         #     Optional. CodeExecution tool type.
         #     Enables the model to execute code as part of generation.
+        # @!attribute [rw] url_context
+        #   @return [::Google::Cloud::AIPlatform::V1::UrlContext]
+        #     Optional. Tool to support URL context retrieval.
         class Tool
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -81,6 +84,12 @@ module Google
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
+        end
+
+        # Tool to support URL context.
+        class UrlContext
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # Structured representation of a function declaration as defined by the
@@ -114,11 +123,37 @@ module Google
         #        type: INTEGER
         #     required:
         #      - param1
+        # @!attribute [rw] parameters_json_schema
+        #   @return [::Google::Protobuf::Value]
+        #     Optional. Describes the parameters to the function in JSON Schema format.
+        #     The schema must describe an object where the properties are the parameters
+        #     to the function. For example:
+        #
+        #     ```
+        #     {
+        #       "type": "object",
+        #       "properties": {
+        #         "name": { "type": "string" },
+        #         "age": { "type": "integer" }
+        #       },
+        #       "additionalProperties": false,
+        #       "required": ["name", "age"],
+        #       "propertyOrdering": ["name", "age"]
+        #     }
+        #     ```
+        #
+        #     This field is mutually exclusive with `parameters`.
         # @!attribute [rw] response
         #   @return [::Google::Cloud::AIPlatform::V1::Schema]
         #     Optional. Describes the output from this function in JSON Schema format.
         #     Reflects the Open API 3.03 Response Object. The Schema defines the type
         #     used for the response value of the function.
+        # @!attribute [rw] response_json_schema
+        #   @return [::Google::Protobuf::Value]
+        #     Optional. Describes the output from this function in JSON Schema format.
+        #     The value specified by the schema is the response value of the function.
+        #
+        #     This field is mutually exclusive with `response`.
         class FunctionDeclaration
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -289,9 +324,41 @@ module Google
         #     Optional. Fully-qualified Vertex AI Search engine resource ID.
         #     Format:
         #     `projects/{project}/locations/{location}/collections/{collection}/engines/{engine}`
+        # @!attribute [rw] max_results
+        #   @return [::Integer]
+        #     Optional. Number of search results to return per query.
+        #     The default value is 10.
+        #     The maximumm allowed value is 10.
+        # @!attribute [rw] filter
+        #   @return [::String]
+        #     Optional. Filter strings to be passed to the search API.
+        # @!attribute [rw] data_store_specs
+        #   @return [::Array<::Google::Cloud::AIPlatform::V1::VertexAISearch::DataStoreSpec>]
+        #     Specifications that define the specific DataStores to be searched, along
+        #     with configurations for those data stores. This is only considered for
+        #     Engines with multiple data stores.
+        #     It should only be set if engine is used.
         class VertexAISearch
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Define data stores within engine to filter on in a search call and
+          # configurations for those data stores. For more information, see
+          # https://cloud.google.com/generative-ai-app-builder/docs/reference/rpc/google.cloud.discoveryengine.v1#datastorespec
+          # @!attribute [rw] data_store
+          #   @return [::String]
+          #     Full resource name of DataStore, such as
+          #     Format:
+          #     `projects/{project}/locations/{location}/collections/{collection}/dataStores/{dataStore}`
+          # @!attribute [rw] filter
+          #   @return [::String]
+          #     Optional. Filter specification to filter documents in the data store
+          #     specified by data_store field. For more information on filtering, see
+          #     [Filtering](https://cloud.google.com/generative-ai-app-builder/docs/filter-search-metadata)
+          class DataStoreSpec
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
         end
 
         # Tool to retrieve public web data for grounding, powered by Google.

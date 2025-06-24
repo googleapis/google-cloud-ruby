@@ -151,16 +151,26 @@ module Google
               # Copy a Cloud Bigtable backup to a new backup in the destination cluster
               # located in the destination instance and project.
               rpc :CopyBackup, ::Google::Cloud::Bigtable::Admin::V2::CopyBackupRequest, ::Google::Longrunning::Operation
-              # Gets the access control policy for a Table or Backup resource.
+              # Gets the access control policy for a Bigtable resource.
               # Returns an empty policy if the resource exists but does not have a policy
               # set.
               rpc :GetIamPolicy, ::Google::Iam::V1::GetIamPolicyRequest, ::Google::Iam::V1::Policy
-              # Sets the access control policy on a Table or Backup resource.
+              # Sets the access control policy on a Bigtable resource.
               # Replaces any existing policy.
               rpc :SetIamPolicy, ::Google::Iam::V1::SetIamPolicyRequest, ::Google::Iam::V1::Policy
-              # Returns permissions that the caller has on the specified Table or Backup
+              # Returns permissions that the caller has on the specified Bigtable
               # resource.
               rpc :TestIamPermissions, ::Google::Iam::V1::TestIamPermissionsRequest, ::Google::Iam::V1::TestIamPermissionsResponse
+              # Creates a new schema bundle in the specified table.
+              rpc :CreateSchemaBundle, ::Google::Cloud::Bigtable::Admin::V2::CreateSchemaBundleRequest, ::Google::Longrunning::Operation
+              # Updates a schema bundle in the specified table.
+              rpc :UpdateSchemaBundle, ::Google::Cloud::Bigtable::Admin::V2::UpdateSchemaBundleRequest, ::Google::Longrunning::Operation
+              # Gets metadata information about the specified schema bundle.
+              rpc :GetSchemaBundle, ::Google::Cloud::Bigtable::Admin::V2::GetSchemaBundleRequest, ::Google::Cloud::Bigtable::Admin::V2::SchemaBundle
+              # Lists all schema bundles associated with the specified table.
+              rpc :ListSchemaBundles, ::Google::Cloud::Bigtable::Admin::V2::ListSchemaBundlesRequest, ::Google::Cloud::Bigtable::Admin::V2::ListSchemaBundlesResponse
+              # Deletes a schema bundle in the specified table.
+              rpc :DeleteSchemaBundle, ::Google::Cloud::Bigtable::Admin::V2::DeleteSchemaBundleRequest, ::Google::Protobuf::Empty
             end
 
             Stub = Service.rpc_stub_class

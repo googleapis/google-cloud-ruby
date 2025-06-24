@@ -21,7 +21,7 @@ module Google
   module Cloud
     module CloudControlsPartner
       module V1beta
-        VERSION = "0.5.0"
+        VERSION = "0.6.0"
       end
     end
   end

@@ -80,8 +80,18 @@ module Google
               # Creates a clip with the provided clip ID in the specified channel.
               rpc :CreateClip, ::Google::Cloud::Video::LiveStream::V1::CreateClipRequest, ::Google::Longrunning::Operation
               # Deletes the specified clip job resource. This method only deletes the clip
-              # job and does not delete the VOD clip stored in the GCS.
+              # job and does not delete the VOD clip stored in Cloud Storage.
               rpc :DeleteClip, ::Google::Cloud::Video::LiveStream::V1::DeleteClipRequest, ::Google::Longrunning::Operation
+              # Creates a DVR session with the provided unique ID in the specified channel.
+              rpc :CreateDvrSession, ::Google::Cloud::Video::LiveStream::V1::CreateDvrSessionRequest, ::Google::Longrunning::Operation
+              # Returns a list of all DVR sessions in the specified channel.
+              rpc :ListDvrSessions, ::Google::Cloud::Video::LiveStream::V1::ListDvrSessionsRequest, ::Google::Cloud::Video::LiveStream::V1::ListDvrSessionsResponse
+              # Returns the specified DVR session.
+              rpc :GetDvrSession, ::Google::Cloud::Video::LiveStream::V1::GetDvrSessionRequest, ::Google::Cloud::Video::LiveStream::V1::DvrSession
+              # Deletes the specified DVR session.
+              rpc :DeleteDvrSession, ::Google::Cloud::Video::LiveStream::V1::DeleteDvrSessionRequest, ::Google::Longrunning::Operation
+              # Updates the specified DVR session.
+              rpc :UpdateDvrSession, ::Google::Cloud::Video::LiveStream::V1::UpdateDvrSessionRequest, ::Google::Longrunning::Operation
               # Creates a Asset with the provided unique ID in the specified
               # region.
               rpc :CreateAsset, ::Google::Cloud::Video::LiveStream::V1::CreateAssetRequest, ::Google::Longrunning::Operation

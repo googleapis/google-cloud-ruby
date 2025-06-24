@@ -1,5 +1,30 @@
 # Release History
 
+### 0.43.0 (2025-05-12)
+
+#### Features
+
+* Updated core dependencies including gapic-common 
+* Updated required Ruby version to 3.1 
+
+### 0.42.0 (2025-04-29)
+
+#### Features
+
+* Support including image annotations in layout parser response ([#29548](https://github.com/googleapis/google-cloud-ruby/issues/29548)) 
+* Added config options to enable table annotation and image extraction ([#29554](https://github.com/googleapis/google-cloud-ruby/issues/29554)) 
+#### Bug Fixes
+
+* Fixed several issues with validating credential configs 
+
+### 0.41.0 (2025-04-25)
+
+#### Features
+
+* Added an internal identifier and a set of blob assets to Document 
+* Added image blocks and bounding boxes to document layout 
+* Added support for chunk fields 
+
 ### 0.40.0 (2025-03-25)
 
 #### Features

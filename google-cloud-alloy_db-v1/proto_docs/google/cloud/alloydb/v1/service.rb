@@ -186,6 +186,345 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # Destination for Export. Export will be done to cloud storage.
+        # @!attribute [rw] uri
+        #   @return [::String]
+        #     Required. The path to the file in Google Cloud Storage where the export
+        #     will be stored. The URI is in the form `gs://bucketName/fileName`.
+        class GcsDestination
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Export cluster request.
+        # @!attribute [rw] gcs_destination
+        #   @return [::Google::Cloud::AlloyDB::V1::GcsDestination]
+        #     Required. Option to export data to cloud storage.
+        # @!attribute [rw] csv_export_options
+        #   @return [::Google::Cloud::AlloyDB::V1::ExportClusterRequest::CsvExportOptions]
+        #     Options for exporting data in CSV format. Required field to be set for
+        #     CSV file type.
+        #
+        #     Note: The following fields are mutually exclusive: `csv_export_options`, `sql_export_options`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] sql_export_options
+        #   @return [::Google::Cloud::AlloyDB::V1::ExportClusterRequest::SqlExportOptions]
+        #     Options for exporting data in SQL format. Required field to be set for
+        #     SQL file type.
+        #
+        #     Note: The following fields are mutually exclusive: `sql_export_options`, `csv_export_options`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The resource name of the cluster.
+        # @!attribute [rw] database
+        #   @return [::String]
+        #     Required. Name of the database where the export command will be executed.
+        #     Note - Value provided should be the same as expected from
+        #     `SELECT current_database();` and NOT as a resource reference.
+        class ExportClusterRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Options for exporting data in CSV format.
+          # @!attribute [rw] select_query
+          #   @return [::String]
+          #     Required. The SELECT query used to extract the data.
+          # @!attribute [rw] field_delimiter
+          #   @return [::String]
+          #     Optional. Specifies the character that separates columns within each row
+          #     (line) of the file. The default is comma. The value of this argument has
+          #     to be a character in Hex ASCII Code.
+          # @!attribute [rw] quote_character
+          #   @return [::String]
+          #     Optional. Specifies the quoting character to be used when a data value is
+          #     quoted. The default is double-quote. The value of this argument has to be
+          #     a character in Hex ASCII Code.
+          # @!attribute [rw] escape_character
+          #   @return [::String]
+          #     Optional. Specifies the character that should appear before a data
+          #     character that needs to be escaped. The default is the same as quote
+          #     character. The value of this argument has to be a character in Hex ASCII
+          #     Code.
+          class CsvExportOptions
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Options for exporting data in SQL format.
+          # @!attribute [rw] tables
+          #   @return [::Array<::String>]
+          #     Optional. Tables to export from.
+          # @!attribute [rw] schema_only
+          #   @return [::Boolean]
+          #     Optional. If true, only export the schema.
+          # @!attribute [rw] clean_target_objects
+          #   @return [::Boolean]
+          #     Optional. If true, output commands to DROP all the dumped database
+          #     objects prior to outputting the commands for creating them.
+          # @!attribute [rw] if_exist_target_objects
+          #   @return [::Boolean]
+          #     Optional. If true, use DROP ... IF EXISTS commands to check for the
+          #     object's existence before dropping it in clean_target_objects mode.
+          class SqlExportOptions
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+        end
+
+        # Response of export cluster rpc.
+        # @!attribute [rw] gcs_destination
+        #   @return [::Google::Cloud::AlloyDB::V1::GcsDestination]
+        #     Required. Option to export data to cloud storage.
+        class ExportClusterResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Import cluster request.
+        # @!attribute [rw] sql_import_options
+        #   @return [::Google::Cloud::AlloyDB::V1::ImportClusterRequest::SqlImportOptions]
+        #     Options for importing data in SQL format.
+        #
+        #     Note: The following fields are mutually exclusive: `sql_import_options`, `csv_import_options`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] csv_import_options
+        #   @return [::Google::Cloud::AlloyDB::V1::ImportClusterRequest::CsvImportOptions]
+        #     Options for importing data in CSV format.
+        #
+        #     Note: The following fields are mutually exclusive: `csv_import_options`, `sql_import_options`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The resource name of the cluster.
+        # @!attribute [rw] gcs_uri
+        #   @return [::String]
+        #     Required. The path to the file in Google Cloud Storage where the source
+        #     file for import will be stored. The URI is in the form
+        #     `gs://bucketName/fileName`.
+        # @!attribute [rw] database
+        #   @return [::String]
+        #     Optional. Name of the database to which the import will be done.
+        #     For import from SQL file, this is required only if the file does not
+        #     specify a database.
+        #     Note - Value provided should be the same as expected from `SELECT
+        #     current_database();` and NOT as a resource reference.
+        # @!attribute [rw] user
+        #   @return [::String]
+        #     Optional. Database user to be used for importing the data.
+        #     Note - Value provided should be the same as expected from
+        #     `SELECT current_user;` and NOT as a resource reference.
+        class ImportClusterRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Options for importing data in SQL format.
+          class SqlImportOptions
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Options for importing data in CSV format.
+          # @!attribute [rw] table
+          #   @return [::String]
+          #     Required. The database table to import CSV file into.
+          # @!attribute [rw] columns
+          #   @return [::Array<::String>]
+          #     Optional. The columns to which CSV data is imported. If not specified,
+          #     all columns of the database table are loaded with CSV data.
+          # @!attribute [rw] field_delimiter
+          #   @return [::String]
+          #     Optional. Specifies the character that separates columns within each row
+          #     (line) of the file. The default is comma. The value of this argument has
+          #     to be a character in Hex ASCII Code.
+          # @!attribute [rw] quote_character
+          #   @return [::String]
+          #     Optional. Specifies the quoting character to be used when a data value is
+          #     quoted. The default is double-quote. The value of this argument has to be
+          #     a character in Hex ASCII Code.
+          # @!attribute [rw] escape_character
+          #   @return [::String]
+          #     Optional. Specifies the character that should appear before a data
+          #     character that needs to be escaped. The default is same as quote
+          #     character. The value of this argument has to be a character in Hex ASCII
+          #     Code.
+          class CsvImportOptions
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+        end
+
+        # Response of import rpc.
+        # @!attribute [rw] bytes_downloaded
+        #   @return [::Integer]
+        #     Required. Size of the object downloaded from Google Cloud Storage in bytes.
+        class ImportClusterResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Upgrades a cluster.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The resource name of the cluster.
+        # @!attribute [rw] version
+        #   @return [::Google::Cloud::AlloyDB::V1::DatabaseVersion]
+        #     Required. The version the cluster is going to be upgraded to.
+        # @!attribute [rw] request_id
+        #   @return [::String]
+        #     Optional. An optional request ID to identify requests. Specify a unique
+        #     request ID so that if you must retry your request, the server ignores the
+        #     request if it has already been completed. The server guarantees that for at
+        #     least 60 minutes since the first request.
+        #
+        #     For example, consider a situation where you make an initial request and
+        #     the request times out. If you make the request again with the same request
+        #     ID, the server can check if the original operation with the same request ID
+        #     was received, and if so, ignores the second request. This prevents
+        #     clients from accidentally creating duplicate commitments.
+        #
+        #     The request ID must be a valid UUID with the exception that zero UUID is
+        #     not supported (00000000-0000-0000-0000-000000000000).
+        # @!attribute [rw] validate_only
+        #   @return [::Boolean]
+        #     Optional. If set, performs request validation, for example, permission
+        #     checks and any other type of validation, but does not actually execute the
+        #     create request.
+        # @!attribute [rw] etag
+        #   @return [::String]
+        #     Optional. The current etag of the Cluster.
+        #     If an etag is provided and does not match the current etag of the Cluster,
+        #     upgrade will be blocked and an ABORTED error will be returned.
+        class UpgradeClusterRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # UpgradeClusterResponse contains the response for upgrade cluster operation.
+        # @!attribute [rw] status
+        #   @return [::Google::Cloud::AlloyDB::V1::UpgradeClusterResponse::Status]
+        #     Status of upgrade operation.
+        # @!attribute [rw] message
+        #   @return [::String]
+        #     A user friendly message summarising the upgrade operation details and the
+        #     next steps for the user if there is any.
+        # @!attribute [rw] cluster_upgrade_details
+        #   @return [::Array<::Google::Cloud::AlloyDB::V1::UpgradeClusterResponse::ClusterUpgradeDetails>]
+        #     Array of upgrade details for the current cluster and all the secondary
+        #     clusters associated with this cluster.
+        class UpgradeClusterResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Stage information for different stages in the upgrade process.
+          # @!attribute [rw] stage
+          #   @return [::Google::Cloud::AlloyDB::V1::UpgradeClusterResponse::Stage]
+          #     The stage.
+          # @!attribute [rw] status
+          #   @return [::Google::Cloud::AlloyDB::V1::UpgradeClusterResponse::Status]
+          #     Status of the stage.
+          # @!attribute [rw] logs_url
+          #   @return [::String]
+          #     logs_url is the URL for the logs associated with a stage if that stage
+          #     has logs. Right now, only three stages have logs: ALLOYDB_PRECHECK,
+          #     PG_UPGRADE_CHECK, PRIMARY_INSTANCE_UPGRADE.
+          class StageInfo
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Details regarding the upgrade of instances associated with a cluster.
+          # @!attribute [rw] name
+          #   @return [::String]
+          #     Normalized name of the instance.
+          # @!attribute [rw] upgrade_status
+          #   @return [::Google::Cloud::AlloyDB::V1::UpgradeClusterResponse::Status]
+          #     Upgrade status of the instance.
+          # @!attribute [rw] instance_type
+          #   @return [::Google::Cloud::AlloyDB::V1::Instance::InstanceType]
+          #     Instance type.
+          class InstanceUpgradeDetails
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Upgrade details of a cluster. This cluster can be primary or secondary.
+          # @!attribute [rw] name
+          #   @return [::String]
+          #     Normalized name of the cluster
+          # @!attribute [rw] upgrade_status
+          #   @return [::Google::Cloud::AlloyDB::V1::UpgradeClusterResponse::Status]
+          #     Upgrade status of the cluster.
+          # @!attribute [rw] cluster_type
+          #   @return [::Google::Cloud::AlloyDB::V1::Cluster::ClusterType]
+          #     Cluster type which can either be primary or secondary.
+          # @!attribute [rw] database_version
+          #   @return [::Google::Cloud::AlloyDB::V1::DatabaseVersion]
+          #     Database version of the cluster after the upgrade operation. This will be
+          #     the target version if the upgrade was successful otherwise it remains the
+          #     same as that before the upgrade operation.
+          # @!attribute [rw] stage_info
+          #   @return [::Array<::Google::Cloud::AlloyDB::V1::UpgradeClusterResponse::StageInfo>]
+          #     Array containing stage info associated with this cluster.
+          # @!attribute [rw] instance_upgrade_details
+          #   @return [::Array<::Google::Cloud::AlloyDB::V1::UpgradeClusterResponse::InstanceUpgradeDetails>]
+          #     Upgrade details of the instances directly associated with this cluster.
+          class ClusterUpgradeDetails
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Status of upgrade operation.
+          module Status
+            # Unspecified status.
+            STATUS_UNSPECIFIED = 0
+
+            # Not started.
+            NOT_STARTED = 4
+
+            # In progress.
+            IN_PROGRESS = 5
+
+            # Operation succeeded.
+            SUCCESS = 1
+
+            # Operation failed.
+            FAILED = 2
+
+            # Operation partially succeeded.
+            PARTIAL_SUCCESS = 3
+
+            # Cancel is in progress.
+            CANCEL_IN_PROGRESS = 6
+
+            # Cancellation complete.
+            CANCELLED = 7
+          end
+
+          # Stage in the upgrade.
+          module Stage
+            # Unspecified stage.
+            STAGE_UNSPECIFIED = 0
+
+            # Pre-upgrade custom checks, not covered by pg_upgrade.
+            ALLOYDB_PRECHECK = 1
+
+            # Pre-upgrade pg_upgrade checks.
+            PG_UPGRADE_CHECK = 2
+
+            # Clone the original cluster.
+            PREPARE_FOR_UPGRADE = 5
+
+            # Upgrade the primary instance(downtime).
+            PRIMARY_INSTANCE_UPGRADE = 3
+
+            # This stage is read pool upgrade.
+            READ_POOL_INSTANCES_UPGRADE = 4
+
+            # Rollback in case of critical failures.
+            ROLLBACK = 6
+
+            # Cleanup.
+            CLEANUP = 7
+          end
+        end
+
         # Message for deleting a Cluster
         # @!attribute [rw] name
         #   @return [::String]
@@ -291,6 +630,7 @@ module Google
 
         # Message for restoring a Cluster from a backup or another cluster at a given
         # point in time.
+        # NEXT_ID: 11
         # @!attribute [rw] backup_source
         #   @return [::Google::Cloud::AlloyDB::V1::BackupSource]
         #     Backup source.
@@ -1045,6 +1385,10 @@ module Google
         # @!attribute [rw] page_token
         #   @return [::String]
         #     A token identifying a page of results the server should return.
+        # @!attribute [rw] scope
+        #   @return [::Google::Cloud::AlloyDB::V1::SupportedDatabaseFlag::Scope]
+        #     Optional. The scope for which supported flags are requested. If not
+        #     specified, default is DATABASE.
         class ListSupportedDatabaseFlagsRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -1095,9 +1439,9 @@ module Google
         #     Optional. The public key from the client.
         # @!attribute [rw] use_metadata_exchange
         #   @return [::Boolean]
-        #     Optional. An optional hint to the endpoint to generate a client
-        #     ceritificate that can be used by AlloyDB connectors to exchange additional
-        #     metadata with the server after TLS handshake.
+        #     Optional. An optional hint to the endpoint to generate a client certificate
+        #     that can be used by AlloyDB connectors to exchange additional metadata with
+        #     the server after TLS handshake.
         class GenerateClientCertificateRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -1145,6 +1489,13 @@ module Google
         # @!attribute [r] batch_create_instances_metadata
         #   @return [::Google::Cloud::AlloyDB::V1::BatchCreateInstancesMetadata]
         #     Output only. BatchCreateInstances related metadata.
+        #
+        #     Note: The following fields are mutually exclusive: `batch_create_instances_metadata`, `upgrade_cluster_status`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [r] upgrade_cluster_status
+        #   @return [::Google::Cloud::AlloyDB::V1::UpgradeClusterStatus]
+        #     Output only. UpgradeClusterStatus related metadata.
+        #
+        #     Note: The following fields are mutually exclusive: `upgrade_cluster_status`, `batch_create_instances_metadata`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [r] create_time
         #   @return [::Google::Protobuf::Timestamp]
         #     Output only. The time the operation was created.
@@ -1164,15 +1515,79 @@ module Google
         #   @return [::Boolean]
         #     Output only. Identifies whether the user has requested cancellation
         #     of the operation. Operations that have successfully been cancelled
-        #     have [Operation.error][] value with a
-        #     {::Google::Rpc::Status#code google.rpc.Status.code} of 1, corresponding to
-        #     `Code.CANCELLED`.
+        #     have
+        #     {::Google::Longrunning::Operation#error google.longrunning.Operation.error}
+        #     value with a {::Google::Rpc::Status#code google.rpc.Status.code} of 1,
+        #     corresponding to `Code.CANCELLED`.
         # @!attribute [r] api_version
         #   @return [::String]
         #     Output only. API version used to start the operation.
         class OperationMetadata
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Message for current status of the Major Version Upgrade operation.
+        # @!attribute [rw] state
+        #   @return [::Google::Cloud::AlloyDB::V1::UpgradeClusterResponse::Status]
+        #     Cluster Major Version Upgrade state.
+        # @!attribute [rw] cancellable
+        #   @return [::Boolean]
+        #     Whether the operation is cancellable.
+        # @!attribute [rw] source_version
+        #   @return [::Google::Cloud::AlloyDB::V1::DatabaseVersion]
+        #     Source database major version.
+        # @!attribute [rw] target_version
+        #   @return [::Google::Cloud::AlloyDB::V1::DatabaseVersion]
+        #     Target database major version.
+        # @!attribute [rw] stages
+        #   @return [::Array<::Google::Cloud::AlloyDB::V1::UpgradeClusterStatus::StageStatus>]
+        #     Status of all upgrade stages.
+        class UpgradeClusterStatus
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Status of an upgrade stage.
+          # @!attribute [rw] read_pool_instances_upgrade
+          #   @return [::Google::Cloud::AlloyDB::V1::UpgradeClusterStatus::ReadPoolInstancesUpgradeStageStatus]
+          #     Read pool instances upgrade metadata.
+          # @!attribute [rw] stage
+          #   @return [::Google::Cloud::AlloyDB::V1::UpgradeClusterResponse::Stage]
+          #     Upgrade stage.
+          # @!attribute [rw] state
+          #   @return [::Google::Cloud::AlloyDB::V1::UpgradeClusterResponse::Status]
+          #     State of this stage.
+          class StageStatus
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Read pool instances upgrade specific status.
+          # @!attribute [rw] upgrade_stats
+          #   @return [::Google::Cloud::AlloyDB::V1::UpgradeClusterStatus::ReadPoolInstancesUpgradeStageStatus::Stats]
+          #     Read pool instances upgrade statistics.
+          class ReadPoolInstancesUpgradeStageStatus
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+
+            # Upgrade stats for read pool instances.
+            # @!attribute [rw] not_started
+            #   @return [::Integer]
+            #     Number of read pool instances for which upgrade has not started.
+            # @!attribute [rw] ongoing
+            #   @return [::Integer]
+            #     Number of read pool instances undergoing upgrade.
+            # @!attribute [rw] success
+            #   @return [::Integer]
+            #     Number of read pool instances successfully upgraded.
+            # @!attribute [rw] failed
+            #   @return [::Integer]
+            #     Number of read pool instances which failed to upgrade.
+            class Stats
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
+          end
         end
 
         # Message for requesting list of Users

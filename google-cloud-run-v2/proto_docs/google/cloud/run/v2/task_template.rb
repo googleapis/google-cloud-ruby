@@ -59,6 +59,9 @@ module Google
         #     Optional. VPC Access configuration to use for this Task. For more
         #     information, visit
         #     https://cloud.google.com/run/docs/configuring/connecting-vpc.
+        # @!attribute [rw] node_selector
+        #   @return [::Google::Cloud::Run::V2::NodeSelector]
+        #     Optional. The node selector for the task template.
         class TaskTemplate
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

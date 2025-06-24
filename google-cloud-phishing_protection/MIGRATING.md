@@ -1,4 +1,4 @@
-## Migrating to google-cloud-phishing_protection 0.10
+# Migrating to google-cloud-phishing_protection 0.10
 
 The 0.10 release of the google-cloud-phishing_protection client is a significant upgrade
 based on a [next-gen code generator](https://github.com/googleapis/gapic-generator-ruby),

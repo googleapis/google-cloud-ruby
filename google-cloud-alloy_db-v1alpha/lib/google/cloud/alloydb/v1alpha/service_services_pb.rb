@@ -41,6 +41,12 @@ module Google
             rpc :CreateCluster, ::Google::Cloud::AlloyDB::V1alpha::CreateClusterRequest, ::Google::Longrunning::Operation
             # Updates the parameters of a single Cluster.
             rpc :UpdateCluster, ::Google::Cloud::AlloyDB::V1alpha::UpdateClusterRequest, ::Google::Longrunning::Operation
+            # Exports data from the cluster.
+            # Imperative only.
+            rpc :ExportCluster, ::Google::Cloud::AlloyDB::V1alpha::ExportClusterRequest, ::Google::Longrunning::Operation
+            # Imports data to the cluster.
+            # Imperative only.
+            rpc :ImportCluster, ::Google::Cloud::AlloyDB::V1alpha::ImportClusterRequest, ::Google::Longrunning::Operation
             # Upgrades a single Cluster.
             # Imperative only.
             rpc :UpgradeCluster, ::Google::Cloud::AlloyDB::V1alpha::UpgradeClusterRequest, ::Google::Longrunning::Operation

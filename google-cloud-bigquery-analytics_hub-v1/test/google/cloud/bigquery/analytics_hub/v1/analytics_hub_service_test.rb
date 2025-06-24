@@ -692,11 +692,13 @@ class ::Google::Cloud::Bigquery::AnalyticsHub::V1::AnalyticsHubService::ClientTe
 
     # Create request parameters for a unary method.
     name = "hello world"
+    delete_commercial = true
 
     delete_listing_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :delete_listing, name
       assert_kind_of ::Google::Cloud::Bigquery::AnalyticsHub::V1::DeleteListingRequest, request
       assert_equal "hello world", request["name"]
+      assert_equal true, request["delete_commercial"]
       refute_nil options
     end
 
@@ -707,31 +709,31 @@ class ::Google::Cloud::Bigquery::AnalyticsHub::V1::AnalyticsHubService::ClientTe
       end
 
       # Use hash object
-      client.delete_listing({ name: name }) do |response, operation|
+      client.delete_listing({ name: name, delete_commercial: delete_commercial }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.delete_listing name: name do |response, operation|
+      client.delete_listing name: name, delete_commercial: delete_commercial do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.delete_listing ::Google::Cloud::Bigquery::AnalyticsHub::V1::DeleteListingRequest.new(name: name) do |response, operation|
+      client.delete_listing ::Google::Cloud::Bigquery::AnalyticsHub::V1::DeleteListingRequest.new(name: name, delete_commercial: delete_commercial) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.delete_listing({ name: name }, grpc_options) do |response, operation|
+      client.delete_listing({ name: name, delete_commercial: delete_commercial }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.delete_listing(::Google::Cloud::Bigquery::AnalyticsHub::V1::DeleteListingRequest.new(name: name), grpc_options) do |response, operation|
+      client.delete_listing(::Google::Cloud::Bigquery::AnalyticsHub::V1::DeleteListingRequest.new(name: name, delete_commercial: delete_commercial), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -1141,11 +1143,13 @@ class ::Google::Cloud::Bigquery::AnalyticsHub::V1::AnalyticsHubService::ClientTe
 
     # Create request parameters for a unary method.
     name = "hello world"
+    revoke_commercial = true
 
     revoke_subscription_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :revoke_subscription, name
       assert_kind_of ::Google::Cloud::Bigquery::AnalyticsHub::V1::RevokeSubscriptionRequest, request
       assert_equal "hello world", request["name"]
+      assert_equal true, request["revoke_commercial"]
       refute_nil options
     end
 
@@ -1156,31 +1160,31 @@ class ::Google::Cloud::Bigquery::AnalyticsHub::V1::AnalyticsHubService::ClientTe
       end
 
       # Use hash object
-      client.revoke_subscription({ name: name }) do |response, operation|
+      client.revoke_subscription({ name: name, revoke_commercial: revoke_commercial }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.revoke_subscription name: name do |response, operation|
+      client.revoke_subscription name: name, revoke_commercial: revoke_commercial do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.revoke_subscription ::Google::Cloud::Bigquery::AnalyticsHub::V1::RevokeSubscriptionRequest.new(name: name) do |response, operation|
+      client.revoke_subscription ::Google::Cloud::Bigquery::AnalyticsHub::V1::RevokeSubscriptionRequest.new(name: name, revoke_commercial: revoke_commercial) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.revoke_subscription({ name: name }, grpc_options) do |response, operation|
+      client.revoke_subscription({ name: name, revoke_commercial: revoke_commercial }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.revoke_subscription(::Google::Cloud::Bigquery::AnalyticsHub::V1::RevokeSubscriptionRequest.new(name: name), grpc_options) do |response, operation|
+      client.revoke_subscription(::Google::Cloud::Bigquery::AnalyticsHub::V1::RevokeSubscriptionRequest.new(name: name, revoke_commercial: revoke_commercial), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end

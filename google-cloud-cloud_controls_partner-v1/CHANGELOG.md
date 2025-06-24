@@ -1,5 +1,20 @@
 # Changelog
 
+### 2.1.0 (2025-05-12)
+
+#### Features
+
+* Support for RPCs for managing customer resources 
+* Support for the customer organization domain 
+* Updated core dependencies including gapic-common 
+* Updated required Ruby version to 3.1 
+
+### 2.0.1 (2025-04-29)
+
+#### Bug Fixes
+
+* Fixed several issues with validating credential configs 
+
 ### 2.0.0 (2025-02-07)
 
 ### ⚠ BREAKING CHANGES

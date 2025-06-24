@@ -33,10 +33,11 @@ module Google
             self.unmarshal_class_method = :decode
             self.service_name = 'google.cloud.support.v2.CommentService'
 
-            # Retrieve all Comments associated with the Case object.
+            # List all the comments associated with a case.
             rpc :ListComments, ::Google::Cloud::Support::V2::ListCommentsRequest, ::Google::Cloud::Support::V2::ListCommentsResponse
-            # Add a new comment to the specified Case.
-            # The comment object must have the following fields set: body.
+            # Add a new comment to a case.
+            #
+            # The comment must have the following fields set: `body`.
             rpc :CreateComment, ::Google::Cloud::Support::V2::CreateCommentRequest, ::Google::Cloud::Support::V2::Comment
           end
 

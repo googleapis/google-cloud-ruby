@@ -1,4 +1,4 @@
-## Migrating to google-cloud-web_risk 1.0
+# Migrating to google-cloud-web_risk 1.0
 
 The `google-cloud-web_risk` gem is a significant upgrade over the older and now
 deprecated `google-cloud-webrisk` gem. It is based on a

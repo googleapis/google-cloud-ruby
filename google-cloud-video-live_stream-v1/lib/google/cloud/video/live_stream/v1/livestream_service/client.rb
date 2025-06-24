@@ -126,6 +126,31 @@ module Google
 
                   default_config.rpcs.delete_event.timeout = 60.0
 
+                  default_config.rpcs.list_clips.timeout = 60.0
+                  default_config.rpcs.list_clips.retry_policy = {
+                    initial_delay: 1.0, max_delay: 10.0, multiplier: 1.3, retry_codes: [14]
+                  }
+
+                  default_config.rpcs.get_clip.timeout = 60.0
+                  default_config.rpcs.get_clip.retry_policy = {
+                    initial_delay: 1.0, max_delay: 10.0, multiplier: 1.3, retry_codes: [14]
+                  }
+
+                  default_config.rpcs.get_asset.timeout = 60.0
+                  default_config.rpcs.get_asset.retry_policy = {
+                    initial_delay: 1.0, max_delay: 10.0, multiplier: 1.3, retry_codes: [14]
+                  }
+
+                  default_config.rpcs.list_assets.timeout = 60.0
+                  default_config.rpcs.list_assets.retry_policy = {
+                    initial_delay: 1.0, max_delay: 10.0, multiplier: 1.3, retry_codes: [14]
+                  }
+
+                  default_config.rpcs.get_pool.timeout = 60.0
+                  default_config.rpcs.get_pool.retry_policy = {
+                    initial_delay: 1.0, max_delay: 10.0, multiplier: 1.3, retry_codes: [14]
+                  }
+
                   default_config
                 end
                 yield @configure if block_given?
@@ -1475,6 +1500,7 @@ module Google
               #     Field mask is used to specify the fields to be overwritten in the Input
               #     resource by the update. You can only update the following fields:
               #
+              #     * [`tier`](https://cloud.google.com/livestream/docs/reference/rest/v1/projects.locations.inputs#Tier)
               #     * [`preprocessingConfig`](https://cloud.google.com/livestream/docs/reference/rest/v1/projects.locations.inputs#PreprocessingConfig)
               #     * [`securityRules`](https://cloud.google.com/livestream/docs/reference/rest/v1/projects.locations.inputs#SecurityRule)
               #
@@ -2275,7 +2301,7 @@ module Google
 
               ##
               # Deletes the specified clip job resource. This method only deletes the clip
-              # job and does not delete the VOD clip stored in the GCS.
+              # job and does not delete the VOD clip stored in Cloud Storage.
               #
               # @overload delete_clip(request, options = nil)
               #   Pass arguments to `delete_clip` via a request object, either of type
@@ -2375,6 +2401,534 @@ module Google
                                        retry_policy: @config.retry_policy
 
                 @livestream_service_stub.call_rpc :delete_clip, request, options: options do |response, operation|
+                  response = ::Gapic::Operation.new response, @operations_client, options: options
+                  yield response, operation if block_given?
+                  throw :response, response
+                end
+              rescue ::GRPC::BadStatus => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Creates a DVR session with the provided unique ID in the specified channel.
+              #
+              # @overload create_dvr_session(request, options = nil)
+              #   Pass arguments to `create_dvr_session` via a request object, either of type
+              #   {::Google::Cloud::Video::LiveStream::V1::CreateDvrSessionRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::Video::LiveStream::V1::CreateDvrSessionRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+              #
+              # @overload create_dvr_session(parent: nil, dvr_session_id: nil, dvr_session: nil, request_id: nil)
+              #   Pass arguments to `create_dvr_session` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param parent [::String]
+              #     Required. The parent resource name, in the following form:
+              #     `projects/{project}/locations/{location}/channels/{channelId}`.
+              #   @param dvr_session_id [::String]
+              #     Required. Id of the requesting object in the following form:
+              #
+              #     1. 1 character minimum, 63 characters maximum
+              #     2. Only contains letters, digits, underscores, and hyphens
+              #   @param dvr_session [::Google::Cloud::Video::LiveStream::V1::DvrSession, ::Hash]
+              #     Required. The resource being created
+              #   @param request_id [::String]
+              #     Optional. An optional request ID to identify requests. Specify a unique
+              #     request ID so that if you must retry your request, the server will know to
+              #     ignore the request if it has already been completed. The server will
+              #     guarantee that for at least 60 minutes since the first request.
+              #
+              #     For example, consider a situation where you make an initial request and
+              #     the request times out. If you make the request again with the same request
+              #     ID, the server can check if original operation with the same request ID
+              #     was received, and if so, will ignore the second request. This prevents
+              #     clients from accidentally creating duplicate commitments.
+              #
+              #     The request ID must be a valid UUID with the exception that zero UUID is
+              #     not supported (00000000-0000-0000-0000-000000000000).
+              #
+              # @yield [response, operation] Access the result along with the RPC operation
+              # @yieldparam response [::Gapic::Operation]
+              # @yieldparam operation [::GRPC::ActiveCall::Operation]
+              #
+              # @return [::Gapic::Operation]
+              #
+              # @raise [::Google::Cloud::Error] if the RPC is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/video/live_stream/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Video::LiveStream::V1::LivestreamService::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Video::LiveStream::V1::CreateDvrSessionRequest.new
+              #
+              #   # Call the create_dvr_session method.
+              #   result = client.create_dvr_session request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
+              def create_dvr_session request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Video::LiveStream::V1::CreateDvrSessionRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                metadata = @config.rpcs.create_dvr_session.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::Video::LiveStream::V1::VERSION
+                metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                header_params = {}
+                if request.parent
+                  header_params["parent"] = request.parent
+                end
+
+                request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+                metadata[:"x-goog-request-params"] ||= request_params_header
+
+                options.apply_defaults timeout:      @config.rpcs.create_dvr_session.timeout,
+                                       metadata:     metadata,
+                                       retry_policy: @config.rpcs.create_dvr_session.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @livestream_service_stub.call_rpc :create_dvr_session, request, options: options do |response, operation|
+                  response = ::Gapic::Operation.new response, @operations_client, options: options
+                  yield response, operation if block_given?
+                  throw :response, response
+                end
+              rescue ::GRPC::BadStatus => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Returns a list of all DVR sessions in the specified channel.
+              #
+              # @overload list_dvr_sessions(request, options = nil)
+              #   Pass arguments to `list_dvr_sessions` via a request object, either of type
+              #   {::Google::Cloud::Video::LiveStream::V1::ListDvrSessionsRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::Video::LiveStream::V1::ListDvrSessionsRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+              #
+              # @overload list_dvr_sessions(parent: nil, page_size: nil, page_token: nil, filter: nil, order_by: nil)
+              #   Pass arguments to `list_dvr_sessions` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param parent [::String]
+              #     Required. Parent value for ListDvrSessionsRequest
+              #   @param page_size [::Integer]
+              #     Optional. Requested page size. Server may return fewer items than
+              #     requested. If unspecified, server will pick an appropriate default.
+              #   @param page_token [::String]
+              #     Optional. A token identifying a page of results the server should return.
+              #   @param filter [::String]
+              #     Optional. Filtering results
+              #   @param order_by [::String]
+              #     Optional. Hint for how to order the results
+              #
+              # @yield [response, operation] Access the result along with the RPC operation
+              # @yieldparam response [::Gapic::PagedEnumerable<::Google::Cloud::Video::LiveStream::V1::DvrSession>]
+              # @yieldparam operation [::GRPC::ActiveCall::Operation]
+              #
+              # @return [::Gapic::PagedEnumerable<::Google::Cloud::Video::LiveStream::V1::DvrSession>]
+              #
+              # @raise [::Google::Cloud::Error] if the RPC is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/video/live_stream/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Video::LiveStream::V1::LivestreamService::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Video::LiveStream::V1::ListDvrSessionsRequest.new
+              #
+              #   # Call the list_dvr_sessions method.
+              #   result = client.list_dvr_sessions request
+              #
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
+              #     # Each element is of type ::Google::Cloud::Video::LiveStream::V1::DvrSession.
+              #     p item
+              #   end
+              #
+              def list_dvr_sessions request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Video::LiveStream::V1::ListDvrSessionsRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                metadata = @config.rpcs.list_dvr_sessions.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::Video::LiveStream::V1::VERSION
+                metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                header_params = {}
+                if request.parent
+                  header_params["parent"] = request.parent
+                end
+
+                request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+                metadata[:"x-goog-request-params"] ||= request_params_header
+
+                options.apply_defaults timeout:      @config.rpcs.list_dvr_sessions.timeout,
+                                       metadata:     metadata,
+                                       retry_policy: @config.rpcs.list_dvr_sessions.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @livestream_service_stub.call_rpc :list_dvr_sessions, request, options: options do |response, operation|
+                  response = ::Gapic::PagedEnumerable.new @livestream_service_stub, :list_dvr_sessions, request, response, operation, options
+                  yield response, operation if block_given?
+                  throw :response, response
+                end
+              rescue ::GRPC::BadStatus => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Returns the specified DVR session.
+              #
+              # @overload get_dvr_session(request, options = nil)
+              #   Pass arguments to `get_dvr_session` via a request object, either of type
+              #   {::Google::Cloud::Video::LiveStream::V1::GetDvrSessionRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::Video::LiveStream::V1::GetDvrSessionRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+              #
+              # @overload get_dvr_session(name: nil)
+              #   Pass arguments to `get_dvr_session` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param name [::String]
+              #     Required. Name of the resource, in the following form:
+              #     `projects/{project}/locations/{location}/channels/{channelId}/dvrSessions/{dvrSessionId}`.
+              #
+              # @yield [response, operation] Access the result along with the RPC operation
+              # @yieldparam response [::Google::Cloud::Video::LiveStream::V1::DvrSession]
+              # @yieldparam operation [::GRPC::ActiveCall::Operation]
+              #
+              # @return [::Google::Cloud::Video::LiveStream::V1::DvrSession]
+              #
+              # @raise [::Google::Cloud::Error] if the RPC is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/video/live_stream/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Video::LiveStream::V1::LivestreamService::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Video::LiveStream::V1::GetDvrSessionRequest.new
+              #
+              #   # Call the get_dvr_session method.
+              #   result = client.get_dvr_session request
+              #
+              #   # The returned object is of type Google::Cloud::Video::LiveStream::V1::DvrSession.
+              #   p result
+              #
+              def get_dvr_session request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Video::LiveStream::V1::GetDvrSessionRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                metadata = @config.rpcs.get_dvr_session.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::Video::LiveStream::V1::VERSION
+                metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                header_params = {}
+                if request.name
+                  header_params["name"] = request.name
+                end
+
+                request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+                metadata[:"x-goog-request-params"] ||= request_params_header
+
+                options.apply_defaults timeout:      @config.rpcs.get_dvr_session.timeout,
+                                       metadata:     metadata,
+                                       retry_policy: @config.rpcs.get_dvr_session.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @livestream_service_stub.call_rpc :get_dvr_session, request, options: options do |response, operation|
+                  yield response, operation if block_given?
+                end
+              rescue ::GRPC::BadStatus => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Deletes the specified DVR session.
+              #
+              # @overload delete_dvr_session(request, options = nil)
+              #   Pass arguments to `delete_dvr_session` via a request object, either of type
+              #   {::Google::Cloud::Video::LiveStream::V1::DeleteDvrSessionRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::Video::LiveStream::V1::DeleteDvrSessionRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+              #
+              # @overload delete_dvr_session(name: nil, request_id: nil)
+              #   Pass arguments to `delete_dvr_session` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param name [::String]
+              #     Required. The name of the event resource, in the form of:
+              #     `projects/{project}/locations/{location}/channels/{channelId}/dvrSessions/{dvrSessionId}`.
+              #   @param request_id [::String]
+              #     Optional. A request ID to identify requests. Specify a unique request ID
+              #     so that if you must retry your request, the server will know to ignore
+              #     the request if it has already been completed. The server will guarantee
+              #     that for at least 60 minutes since the first request.
+              #
+              #     For example, consider a situation where you make an initial request and the
+              #     request times out. If you make the request again with the same request ID,
+              #     the server can check if original operation with the same request ID was
+              #     received, and if so, will ignore the second request. This prevents clients
+              #     from accidentally creating duplicate commitments.
+              #
+              #     The request ID must be a valid UUID with the exception that zero UUID is
+              #     not supported `(00000000-0000-0000-0000-000000000000)`.
+              #
+              # @yield [response, operation] Access the result along with the RPC operation
+              # @yieldparam response [::Gapic::Operation]
+              # @yieldparam operation [::GRPC::ActiveCall::Operation]
+              #
+              # @return [::Gapic::Operation]
+              #
+              # @raise [::Google::Cloud::Error] if the RPC is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/video/live_stream/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Video::LiveStream::V1::LivestreamService::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Video::LiveStream::V1::DeleteDvrSessionRequest.new
+              #
+              #   # Call the delete_dvr_session method.
+              #   result = client.delete_dvr_session request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
+              def delete_dvr_session request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Video::LiveStream::V1::DeleteDvrSessionRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                metadata = @config.rpcs.delete_dvr_session.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::Video::LiveStream::V1::VERSION
+                metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                header_params = {}
+                if request.name
+                  header_params["name"] = request.name
+                end
+
+                request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+                metadata[:"x-goog-request-params"] ||= request_params_header
+
+                options.apply_defaults timeout:      @config.rpcs.delete_dvr_session.timeout,
+                                       metadata:     metadata,
+                                       retry_policy: @config.rpcs.delete_dvr_session.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @livestream_service_stub.call_rpc :delete_dvr_session, request, options: options do |response, operation|
+                  response = ::Gapic::Operation.new response, @operations_client, options: options
+                  yield response, operation if block_given?
+                  throw :response, response
+                end
+              rescue ::GRPC::BadStatus => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Updates the specified DVR session.
+              #
+              # @overload update_dvr_session(request, options = nil)
+              #   Pass arguments to `update_dvr_session` via a request object, either of type
+              #   {::Google::Cloud::Video::LiveStream::V1::UpdateDvrSessionRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::Video::LiveStream::V1::UpdateDvrSessionRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+              #
+              # @overload update_dvr_session(update_mask: nil, dvr_session: nil, request_id: nil)
+              #   Pass arguments to `update_dvr_session` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
+              #     Required. Field mask is used to specify the fields to be overwritten in the
+              #     DvrSession resource by the update. You can only update the following
+              #     fields:
+              #
+              #     * `dvrWindows`
+              #
+              #     The fields specified in the update_mask are relative to the resource, not
+              #     the full request. A field will be overwritten if it is in the mask.
+              #   @param dvr_session [::Google::Cloud::Video::LiveStream::V1::DvrSession, ::Hash]
+              #     Required. The DVR session resource to be updated.
+              #   @param request_id [::String]
+              #     Optional. A request ID to identify requests. Specify a unique request ID
+              #     so that if you must retry your request, the server will know to ignore
+              #     the request if it has already been completed. The server will guarantee
+              #     that for at least 60 minutes since the first request.
+              #
+              #     For example, consider a situation where you make an initial request and the
+              #     request times out. If you make the request again with the same request ID,
+              #     the server can check if original operation with the same request ID was
+              #     received, and if so, will ignore the second request. This prevents clients
+              #     from accidentally creating duplicate commitments.
+              #
+              #     The request ID must be a valid UUID with the exception that zero UUID is
+              #     not supported `(00000000-0000-0000-0000-000000000000)`.
+              #
+              # @yield [response, operation] Access the result along with the RPC operation
+              # @yieldparam response [::Gapic::Operation]
+              # @yieldparam operation [::GRPC::ActiveCall::Operation]
+              #
+              # @return [::Gapic::Operation]
+              #
+              # @raise [::Google::Cloud::Error] if the RPC is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/video/live_stream/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Video::LiveStream::V1::LivestreamService::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Video::LiveStream::V1::UpdateDvrSessionRequest.new
+              #
+              #   # Call the update_dvr_session method.
+              #   result = client.update_dvr_session request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
+              def update_dvr_session request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Video::LiveStream::V1::UpdateDvrSessionRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                metadata = @config.rpcs.update_dvr_session.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::Video::LiveStream::V1::VERSION
+                metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                header_params = {}
+                if request.dvr_session&.name
+                  header_params["dvr_session.name"] = request.dvr_session.name
+                end
+
+                request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+                metadata[:"x-goog-request-params"] ||= request_params_header
+
+                options.apply_defaults timeout:      @config.rpcs.update_dvr_session.timeout,
+                                       metadata:     metadata,
+                                       retry_policy: @config.rpcs.update_dvr_session.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @livestream_service_stub.call_rpc :update_dvr_session, request, options: options do |response, operation|
                   response = ::Gapic::Operation.new response, @operations_client, options: options
                   yield response, operation if block_given?
                   throw :response, response
@@ -3102,8 +3656,8 @@ module Google
 
                 config_attr :endpoint,      nil, ::String, nil
                 config_attr :credentials,   nil do |value|
-                  allowed = [::String, ::Hash, ::Proc, ::Symbol, ::Google::Auth::Credentials, ::Signet::OAuth2::Client, nil]
-                  allowed += [::GRPC::Core::Channel, ::GRPC::Core::ChannelCredentials] if defined? ::GRPC
+                  allowed = [::String, ::Hash, ::Proc, ::Symbol, ::Google::Auth::Credentials, ::Google::Auth::BaseClient, ::Signet::OAuth2::Client, nil]
+                  allowed += [::GRPC::Core::Channel, ::GRPC::Core::ChannelCredentials] if defined? ::GRPC::Core::Channel
                   allowed.any? { |klass| klass === value }
                 end
                 config_attr :scope,         nil, ::String, ::Array, nil
@@ -3264,6 +3818,31 @@ module Google
                   #
                   attr_reader :delete_clip
                   ##
+                  # RPC-specific configuration for `create_dvr_session`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :create_dvr_session
+                  ##
+                  # RPC-specific configuration for `list_dvr_sessions`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :list_dvr_sessions
+                  ##
+                  # RPC-specific configuration for `get_dvr_session`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :get_dvr_session
+                  ##
+                  # RPC-specific configuration for `delete_dvr_session`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :delete_dvr_session
+                  ##
+                  # RPC-specific configuration for `update_dvr_session`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :update_dvr_session
+                  ##
                   # RPC-specific configuration for `create_asset`
                   # @return [::Gapic::Config::Method]
                   #
@@ -3336,6 +3915,16 @@ module Google
                     @create_clip = ::Gapic::Config::Method.new create_clip_config
                     delete_clip_config = parent_rpcs.delete_clip if parent_rpcs.respond_to? :delete_clip
                     @delete_clip = ::Gapic::Config::Method.new delete_clip_config
+                    create_dvr_session_config = parent_rpcs.create_dvr_session if parent_rpcs.respond_to? :create_dvr_session
+                    @create_dvr_session = ::Gapic::Config::Method.new create_dvr_session_config
+                    list_dvr_sessions_config = parent_rpcs.list_dvr_sessions if parent_rpcs.respond_to? :list_dvr_sessions
+                    @list_dvr_sessions = ::Gapic::Config::Method.new list_dvr_sessions_config
+                    get_dvr_session_config = parent_rpcs.get_dvr_session if parent_rpcs.respond_to? :get_dvr_session
+                    @get_dvr_session = ::Gapic::Config::Method.new get_dvr_session_config
+                    delete_dvr_session_config = parent_rpcs.delete_dvr_session if parent_rpcs.respond_to? :delete_dvr_session
+                    @delete_dvr_session = ::Gapic::Config::Method.new delete_dvr_session_config
+                    update_dvr_session_config = parent_rpcs.update_dvr_session if parent_rpcs.respond_to? :update_dvr_session
+                    @update_dvr_session = ::Gapic::Config::Method.new update_dvr_session_config
                     create_asset_config = parent_rpcs.create_asset if parent_rpcs.respond_to? :create_asset
                     @create_asset = ::Gapic::Config::Method.new create_asset_config
                     delete_asset_config = parent_rpcs.delete_asset if parent_rpcs.respond_to? :delete_asset

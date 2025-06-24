@@ -39,9 +39,64 @@ module Google
         # @!attribute [rw] labels
         #   @return [::Google::Protobuf::Map{::String => ::String}]
         #     Resource labels to represent user provided metadata.
+        # @!attribute [rw] backup_vault_type
+        #   @return [::Google::Cloud::NetApp::V1::BackupVault::BackupVaultType]
+        #     Optional. Type of backup vault to be created.
+        #     Default is IN_REGION.
+        # @!attribute [r] source_region
+        #   @return [::String]
+        #     Output only. Region in which the backup vault is created.
+        #     Format: `projects/{project_id}/locations/{location}`
+        # @!attribute [rw] backup_region
+        #   @return [::String]
+        #     Optional. Region where the backups are stored.
+        #     Format: `projects/{project_id}/locations/{location}`
+        # @!attribute [r] source_backup_vault
+        #   @return [::String]
+        #     Output only. Name of the Backup vault created in source region.
+        #     Format:
+        #     `projects/{project_id}/locations/{location}/backupVaults/{backup_vault_id}`
+        # @!attribute [r] destination_backup_vault
+        #   @return [::String]
+        #     Output only. Name of the Backup vault created in backup region.
+        #     Format:
+        #     `projects/{project_id}/locations/{location}/backupVaults/{backup_vault_id}`
+        # @!attribute [rw] backup_retention_policy
+        #   @return [::Google::Cloud::NetApp::V1::BackupVault::BackupRetentionPolicy]
+        #     Optional. Backup retention policy defining the retenton of backups.
         class BackupVault
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Retention policy for backups in the backup vault
+          # @!attribute [rw] backup_minimum_enforced_retention_days
+          #   @return [::Integer]
+          #     Required. Minimum retention duration in days for backups in the backup
+          #     vault.
+          # @!attribute [rw] daily_backup_immutable
+          #   @return [::Boolean]
+          #     Optional. Indicates if the daily backups are immutable.
+          #     Atleast one of daily_backup_immutable, weekly_backup_immutable,
+          #     monthly_backup_immutable and manual_backup_immutable must be true.
+          # @!attribute [rw] weekly_backup_immutable
+          #   @return [::Boolean]
+          #     Optional. Indicates if the weekly backups are immutable.
+          #     Atleast one of daily_backup_immutable, weekly_backup_immutable,
+          #     monthly_backup_immutable and manual_backup_immutable must be true.
+          # @!attribute [rw] monthly_backup_immutable
+          #   @return [::Boolean]
+          #     Optional. Indicates if the monthly backups are immutable.
+          #     Atleast one of daily_backup_immutable, weekly_backup_immutable,
+          #     monthly_backup_immutable and manual_backup_immutable must be true.
+          # @!attribute [rw] manual_backup_immutable
+          #   @return [::Boolean]
+          #     Optional. Indicates if the manual backups are immutable.
+          #     Atleast one of daily_backup_immutable, weekly_backup_immutable,
+          #     monthly_backup_immutable and manual_backup_immutable must be true.
+          class BackupRetentionPolicy
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
 
           # @!attribute [rw] key
           #   @return [::String]
@@ -71,6 +126,18 @@ module Google
 
             # BackupVault is being updated.
             UPDATING = 5
+          end
+
+          # Backup Vault Type.
+          module BackupVaultType
+            # BackupVault type not set.
+            BACKUP_VAULT_TYPE_UNSPECIFIED = 0
+
+            # BackupVault type is IN_REGION.
+            IN_REGION = 1
+
+            # BackupVault type is CROSS_REGION.
+            CROSS_REGION = 2
           end
         end
 

@@ -54,13 +54,58 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Represents a custom emoji.
+        # Represents a [custom emoji](https://support.google.com/chat/answer/12800149).
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Identifier. The resource name of the custom emoji, assigned by the server.
+        #
+        #     Format: `customEmojis/{customEmoji}`
         # @!attribute [r] uid
         #   @return [::String]
         #     Output only. Unique key for the custom emoji resource.
+        # @!attribute [rw] emoji_name
+        #   @return [::String]
+        #     Optional. Immutable. User-provided name for the custom emoji, which is
+        #     unique within the organization.
+        #
+        #     Required when the custom emoji is created, output only otherwise.
+        #
+        #     Emoji names must start and end with colons, must be lowercase and can only
+        #     contain alphanumeric characters, hyphens, and underscores.
+        #     Hyphens and underscores should be used to separate words and cannot be used
+        #     consecutively.
+        #
+        #     Example: `:valid-emoji-name:`
+        # @!attribute [r] temporary_image_uri
+        #   @return [::String]
+        #     Output only. A temporary image URL for the custom emoji, valid for at least
+        #     10 minutes. Note that this is not populated in the response when the custom
+        #     emoji is created.
+        # @!attribute [rw] payload
+        #   @return [::Google::Apps::Chat::V1::CustomEmoji::CustomEmojiPayload]
+        #     Optional. Input only. Payload data.
+        #     Required when the custom emoji is created.
         class CustomEmoji
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Payload data for the custom emoji.
+          # @!attribute [rw] file_content
+          #   @return [::String]
+          #     Required. Input only. The image used for the custom emoji.
+          #
+          #     The payload must be under 256 KB and the dimension of
+          #     the image must be square and between 64 and 500 pixels. The
+          #     restrictions are subject to change.
+          # @!attribute [rw] filename
+          #   @return [::String]
+          #     Required. Input only. The image file name.
+          #
+          #     Supported file extensions: `.png`, `.jpg`, `.gif`.
+          class CustomEmojiPayload
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
         end
 
         # The number of people who reacted to a message with a specific emoji.
@@ -153,8 +198,7 @@ module Google
         #     AND user.name = "users/\\{user}"
         #     ```
         #
-        #     Invalid queries are rejected by the server with an `INVALID_ARGUMENT`
-        #     error.
+        #     Invalid queries are rejected with an `INVALID_ARGUMENT` error.
         class ListReactionsRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -180,6 +224,95 @@ module Google
         #
         #     Format: `spaces/{space}/messages/{message}/reactions/{reaction}`
         class DeleteReactionRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # A request to create a custom emoji.
+        # @!attribute [rw] custom_emoji
+        #   @return [::Google::Apps::Chat::V1::CustomEmoji]
+        #     Required. The custom emoji to create.
+        class CreateCustomEmojiRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # A request to return a single custom emoji.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. Resource name of the custom emoji.
+        #
+        #     Format: `customEmojis/{customEmoji}`
+        #
+        #     You can use the emoji name as an alias for `{customEmoji}`. For example,
+        #     `customEmojis/:example-emoji:` where `:example-emoji:` is the emoji name
+        #     for a custom emoji.
+        class GetCustomEmojiRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # A request to return a list of custom emojis.
+        # @!attribute [rw] page_size
+        #   @return [::Integer]
+        #     Optional. The maximum number of custom emojis returned. The service can
+        #     return fewer custom emojis than this value. If unspecified, the default
+        #     value is 25. The maximum value is 200; values above 200 are changed to 200.
+        # @!attribute [rw] page_token
+        #   @return [::String]
+        #     Optional. (If resuming from a previous query.)
+        #
+        #     A page token received from a previous list custom emoji call. Provide this
+        #     to retrieve the subsequent page.
+        #
+        #     When paginating, the filter value should match the call that provided the
+        #     page token. Passing a different value might lead to unexpected results.
+        # @!attribute [rw] filter
+        #   @return [::String]
+        #     Optional. A query filter.
+        #
+        #     Supports filtering by creator.
+        #
+        #     To filter by creator, you must specify a valid value. Currently only
+        #     `creator("users/me")` and `NOT creator("users/me")` are accepted to filter
+        #     custom emojis by whether they were created by the calling user or not.
+        #
+        #     For example, the following query returns custom emojis created by the
+        #     caller:
+        #     ```
+        #     creator("users/me")
+        #     ```
+        #
+        #     Invalid queries are rejected with an `INVALID_ARGUMENT` error.
+        class ListCustomEmojisRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # A response to list custom emojis.
+        # @!attribute [rw] custom_emojis
+        #   @return [::Array<::Google::Apps::Chat::V1::CustomEmoji>]
+        #     Unordered list. List of custom emojis.
+        # @!attribute [rw] next_page_token
+        #   @return [::String]
+        #     A token that you can send as `pageToken` to retrieve the next page of
+        #     results. If empty, there are no subsequent pages.
+        class ListCustomEmojisResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request for deleting a custom emoji.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. Resource name of the custom emoji to delete.
+        #
+        #     Format: `customEmojis/{customEmoji}`
+        #
+        #     You can use the emoji name as an alias for `{customEmoji}`. For example,
+        #     `customEmojis/:example-emoji:` where `:example-emoji:` is the emoji name
+        #     for a custom emoji.
+        class DeleteCustomEmojiRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end

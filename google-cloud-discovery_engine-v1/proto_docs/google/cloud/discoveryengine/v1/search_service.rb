@@ -312,6 +312,12 @@ module Google
           #     Optional. Boost specification to boost certain documents.
           #     For more information on boosting, see
           #     [Boosting](https://cloud.google.com/generative-ai-app-builder/docs/boost-search-results)
+          # @!attribute [rw] custom_search_operators
+          #   @return [::String]
+          #     Optional. Custom search operators which if specified will be used to
+          #     filter results from workspace data stores. For more information on custom
+          #     search operators, see
+          #     [SearchOperators](https://support.google.com/cloudsearch/answer/6172299).
           class DataStoreSpec
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods

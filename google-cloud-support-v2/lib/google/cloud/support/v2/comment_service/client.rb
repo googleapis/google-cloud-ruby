@@ -191,7 +191,7 @@ module Google
             # Service calls
 
             ##
-            # Retrieve all Comments associated with the Case object.
+            # List all the comments associated with a case.
             #
             # @overload list_comments(request, options = nil)
             #   Pass arguments to `list_comments` via a request object, either of type
@@ -209,13 +209,12 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param parent [::String]
-            #     Required. The resource name of Case object for which comments should be
-            #     listed.
+            #     Required. The name of the case for which to list comments.
             #   @param page_size [::Integer]
-            #     The maximum number of comments fetched with each request. Defaults to 10.
+            #     The maximum number of comments to fetch. Defaults to 10.
             #   @param page_token [::String]
             #     A token identifying the page of results to return. If unspecified, the
-            #     first page is retrieved.
+            #     first page is returned.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Gapic::PagedEnumerable<::Google::Cloud::Support::V2::Comment>]
@@ -288,8 +287,9 @@ module Google
             end
 
             ##
-            # Add a new comment to the specified Case.
-            # The comment object must have the following fields set: body.
+            # Add a new comment to a case.
+            #
+            # The comment must have the following fields set: `body`.
             #
             # @overload create_comment(request, options = nil)
             #   Pass arguments to `create_comment` via a request object, either of type
@@ -307,9 +307,9 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param parent [::String]
-            #     Required. The resource name of Case to which this comment should be added.
+            #     Required. The name of the case to which the comment should be added.
             #   @param comment [::Google::Cloud::Support::V2::Comment, ::Hash]
-            #     Required. The Comment object to be added to this Case.
+            #     Required. The comment to be added.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::Support::V2::Comment]
@@ -480,8 +480,8 @@ module Google
 
               config_attr :endpoint,      nil, ::String, nil
               config_attr :credentials,   nil do |value|
-                allowed = [::String, ::Hash, ::Proc, ::Symbol, ::Google::Auth::Credentials, ::Signet::OAuth2::Client, nil]
-                allowed += [::GRPC::Core::Channel, ::GRPC::Core::ChannelCredentials] if defined? ::GRPC
+                allowed = [::String, ::Hash, ::Proc, ::Symbol, ::Google::Auth::Credentials, ::Google::Auth::BaseClient, ::Signet::OAuth2::Client, nil]
+                allowed += [::GRPC::Core::Channel, ::GRPC::Core::ChannelCredentials] if defined? ::GRPC::Core::Channel
                 allowed.any? { |klass| klass === value }
               end
               config_attr :scope,         nil, ::String, ::Array, nil

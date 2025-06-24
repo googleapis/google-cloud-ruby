@@ -1,5 +1,20 @@
 # Release History
 
+### 1.9.0 (2025-05-12)
+
+#### Features
+
+* Support for markup foir HD voices 
+* Support for phonetic encodings for Mandarin Pinyin and Japanese Yomigana 
+* Updated core dependencies including gapic-common 
+* Updated required Ruby version to 3.1 
+
+### 1.8.1 (2025-04-29)
+
+#### Bug Fixes
+
+* Fixed several issues with validating credential configs 
+
 ### 1.8.0 (2025-04-18)
 
 #### Features

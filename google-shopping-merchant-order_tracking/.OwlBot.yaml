@@ -1,0 +1,3 @@
+deep-copy-regex:
+  - source: /google/shopping/merchant/ordertracking/[^/]+-ruby/(.*)
+    dest: /owl-bot-staging/google-shopping-merchant-order_tracking/$1

@@ -33,37 +33,44 @@ module Google
             self.unmarshal_class_method = :decode
             self.service_name = 'google.cloud.support.v2.CaseService'
 
-            # Retrieve the specified case.
+            # Retrieve a case.
             rpc :GetCase, ::Google::Cloud::Support::V2::GetCaseRequest, ::Google::Cloud::Support::V2::Case
-            # Retrieve all cases under the specified parent.
+            # Retrieve all cases under a parent, but not its children.
             #
-            # Note: Listing cases under an Organization returns only the cases directly
-            # parented by that organization. To retrieve all cases under an organization,
-            # including cases parented by projects under that organization, use
-            # `cases.search`.
+            # For example, listing cases under an organization only returns the cases
+            # that are directly parented by that organization. To retrieve cases
+            # under an organization and its projects, use `cases.search`.
             rpc :ListCases, ::Google::Cloud::Support::V2::ListCasesRequest, ::Google::Cloud::Support::V2::ListCasesResponse
-            # Search cases using the specified query.
+            # Search for cases using a query.
             rpc :SearchCases, ::Google::Cloud::Support::V2::SearchCasesRequest, ::Google::Cloud::Support::V2::SearchCasesResponse
-            # Create a new case and associate it with the given Google Cloud Resource.
-            # The case object must have the following fields set: `display_name`,
-            # `description`, `classification`, and `priority`.
-            rpc :CreateCase, ::Google::Cloud::Support::V2::CreateCaseRequest, ::Google::Cloud::Support::V2::Case
-            # Update the specified case. Only a subset of fields can be updated.
-            rpc :UpdateCase, ::Google::Cloud::Support::V2::UpdateCaseRequest, ::Google::Cloud::Support::V2::Case
-            # Escalate a case. Escalating a case will initiate the Google Cloud Support
-            # escalation management process.
+            # Create a new case and associate it with a parent.
             #
-            # This operation is only available to certain Customer Care tiers. Go to
+            # It must have the following fields set: `display_name`, `description`,
+            # `classification`, and `priority`. If you're just testing the API and don't
+            # want to route your case to an agent, set `testCase=true`.
+            rpc :CreateCase, ::Google::Cloud::Support::V2::CreateCaseRequest, ::Google::Cloud::Support::V2::Case
+            # Update a case. Only some fields can be updated.
+            rpc :UpdateCase, ::Google::Cloud::Support::V2::UpdateCaseRequest, ::Google::Cloud::Support::V2::Case
+            # Escalate a case, starting the Google Cloud Support escalation management
+            # process.
+            #
+            # This operation is only available for some support services. Go to
             # https://cloud.google.com/support and look for 'Technical support
-            # escalations' in the feature list to find out which tiers are able to
-            # perform escalations.
+            # escalations' in the feature list to find out which ones let you
+            # do that.
             rpc :EscalateCase, ::Google::Cloud::Support::V2::EscalateCaseRequest, ::Google::Cloud::Support::V2::Case
-            # Close the specified case.
+            # Close a case.
             rpc :CloseCase, ::Google::Cloud::Support::V2::CloseCaseRequest, ::Google::Cloud::Support::V2::Case
-            # Retrieve valid classifications to be used when creating a support case.
-            # The classications are hierarchical, with each classification containing
-            # all levels of the hierarchy, separated by " > ". For example "Technical
-            # Issue > Compute > Compute Engine".
+            # Retrieve valid classifications to use when creating a support case.
+            #
+            # Classifications are hierarchical. Each classification is a string
+            # containing all levels of the hierarchy separated by `" > "`. For example,
+            # `"Technical Issue > Compute > Compute Engine"`.
+            #
+            # Classification IDs returned by this endpoint are valid for at least six
+            # months. When a classification is deactivated, this endpoint immediately
+            # stops returning it. After six months, `case.create` requests using the
+            # classification will fail.
             rpc :SearchCaseClassifications, ::Google::Cloud::Support::V2::SearchCaseClassificationsRequest, ::Google::Cloud::Support::V2::SearchCaseClassificationsResponse
           end
 

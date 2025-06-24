@@ -462,6 +462,9 @@ module Google
           #     This may be sent on update requests to ensure that the client has an
           #     up-to-date value before proceeding. The server returns an ABORTED error on
           #     a mismatched etag.
+          # @!attribute [rw] deletion_protection
+          #   @return [::Boolean]
+          #     Optional. Set to true to make the LogicalView protected against deletion.
           class LogicalView
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods

@@ -3645,33 +3645,79 @@ module Google
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
 
-          # Create a de-identified copy of the requested table or files.
+          # Create a de-identified copy of a storage bucket. Only compatible
+          # with Cloud Storage buckets.
+          #
           #
           # A TransformationDetail will be created for each transformation.
           #
-          # If any rows in BigQuery are skipped during de-identification
-          # (transformation errors or row size exceeds BigQuery insert API limits) they
-          # are placed in the failure output table. If the original row exceeds
-          # the BigQuery insert API limit it will be truncated when written to the
-          # failure output table. The failure output table can be set in the
-          # action.deidentify.output.big_query_output.deidentified_failure_output_table
-          # field, if no table is set, a table will be automatically created in the
-          # same project and dataset as the original table.
           #
-          # Compatible with: Inspect
+          # Compatible with: Inspection of Cloud Storage
           # @!attribute [rw] transformation_config
           #   @return [::Google::Cloud::Dlp::V2::TransformationConfig]
           #     User specified deidentify templates and configs for structured,
           #     unstructured, and image files.
           # @!attribute [rw] transformation_details_storage_config
           #   @return [::Google::Cloud::Dlp::V2::TransformationDetailsStorageConfig]
-          #     Config for storing transformation details. This is separate from the
-          #     de-identified content, and contains metadata about the successful
-          #     transformations and/or failures that occurred while de-identifying. This
-          #     needs to be set in order for users to access information about the status
-          #     of each transformation (see
+          #     Config for storing transformation details.
+          #
+          #     This field specifies the configuration for storing detailed metadata
+          #     about each transformation performed during a de-identification process.
+          #     The metadata is stored separately from the de-identified content itself
+          #     and provides a granular record of both successful transformations and any
+          #     failures that occurred.
+          #
+          #     Enabling this configuration is essential for users who need to access
+          #     comprehensive information about the status, outcome, and specifics of
+          #     each transformation. The details are captured in the
           #     {::Google::Cloud::Dlp::V2::TransformationDetails TransformationDetails}
-          #     message for more information about what is noted).
+          #     message for each operation.
+          #
+          #     Key use cases:
+          #
+          #     * **Auditing and compliance**
+          #         * Provides a verifiable audit trail of de-identification activities,
+          #         which is crucial for meeting regulatory requirements and internal
+          #         data governance policies.
+          #         * Logs what data was transformed, what transformations were applied,
+          #         when they occurred, and their success status. This helps
+          #         demonstrate accountability and due diligence in protecting
+          #         sensitive data.
+          #
+          #     * **Troubleshooting and debugging**
+          #         * Offers detailed error messages and context if a transformation
+          #         fails. This information is useful for diagnosing and resolving
+          #         issues in the de-identification pipeline.
+          #         * Helps pinpoint the exact location and nature of failures, speeding
+          #         up the debugging process.
+          #
+          #     * **Process verification and quality assurance**
+          #         * Allows users to confirm that de-identification rules and
+          #         transformations were applied correctly and consistently across
+          #         the dataset as intended.
+          #         * Helps in verifying the effectiveness of the chosen
+          #         de-identification strategies.
+          #
+          #     * **Data lineage and impact analysis**
+          #         * Creates a record of how data elements were modified, contributing
+          #         to data lineage. This is useful for understanding the provenance
+          #         of de-identified data.
+          #         * Aids in assessing the potential impact of de-identification choices
+          #         on downstream analytical processes or data usability.
+          #
+          #     * **Reporting and operational insights**
+          #         * You can analyze the metadata stored in a queryable BigQuery table
+          #         to generate reports on transformation success rates, common
+          #         error types, processing volumes (e.g., transformedBytes), and the
+          #         types of transformations applied.
+          #         * These insights can inform optimization of de-identification
+          #         configurations and resource planning.
+          #
+          #     To take advantage of these benefits, set this configuration. The stored
+          #     details include a description of the transformation, success or
+          #     error codes, error messages, the number of bytes transformed, the
+          #     location of the transformed content, and identifiers for the job and
+          #     source data.
           # @!attribute [rw] cloud_storage_output
           #   @return [::String]
           #     Required. User settable Cloud Storage bucket and folders to store
@@ -4258,12 +4304,12 @@ module Google
         #   @return [::Google::Cloud::Dlp::V2::DataProfileAction::Export]
         #     Export data profiles into a provided location.
         #
-        #     Note: The following fields are mutually exclusive: `export_data`, `pub_sub_notification`, `publish_to_chronicle`, `publish_to_scc`, `tag_resources`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `export_data`, `pub_sub_notification`, `publish_to_chronicle`, `publish_to_scc`, `tag_resources`, `publish_to_dataplex_catalog`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] pub_sub_notification
         #   @return [::Google::Cloud::Dlp::V2::DataProfileAction::PubSubNotification]
         #     Publish a message into the Pub/Sub topic.
         #
-        #     Note: The following fields are mutually exclusive: `pub_sub_notification`, `export_data`, `publish_to_chronicle`, `publish_to_scc`, `tag_resources`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `pub_sub_notification`, `export_data`, `publish_to_chronicle`, `publish_to_scc`, `tag_resources`, `publish_to_dataplex_catalog`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] publish_to_chronicle
         #   @return [::Google::Cloud::Dlp::V2::DataProfileAction::PublishToChronicle]
         #     Publishes generated data profiles to Google Security Operations.
@@ -4271,17 +4317,23 @@ module Google
         #     context-aware
         #     analytics](https://cloud.google.com/chronicle/docs/detection/usecase-dlp-high-risk-user-download).
         #
-        #     Note: The following fields are mutually exclusive: `publish_to_chronicle`, `export_data`, `pub_sub_notification`, `publish_to_scc`, `tag_resources`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `publish_to_chronicle`, `export_data`, `pub_sub_notification`, `publish_to_scc`, `tag_resources`, `publish_to_dataplex_catalog`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] publish_to_scc
         #   @return [::Google::Cloud::Dlp::V2::DataProfileAction::PublishToSecurityCommandCenter]
         #     Publishes findings to Security Command Center for each data profile.
         #
-        #     Note: The following fields are mutually exclusive: `publish_to_scc`, `export_data`, `pub_sub_notification`, `publish_to_chronicle`, `tag_resources`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `publish_to_scc`, `export_data`, `pub_sub_notification`, `publish_to_chronicle`, `tag_resources`, `publish_to_dataplex_catalog`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] tag_resources
         #   @return [::Google::Cloud::Dlp::V2::DataProfileAction::TagResources]
         #     Tags the profiled resources with the specified tag values.
         #
-        #     Note: The following fields are mutually exclusive: `tag_resources`, `export_data`, `pub_sub_notification`, `publish_to_chronicle`, `publish_to_scc`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `tag_resources`, `export_data`, `pub_sub_notification`, `publish_to_chronicle`, `publish_to_scc`, `publish_to_dataplex_catalog`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] publish_to_dataplex_catalog
+        #   @return [::Google::Cloud::Dlp::V2::DataProfileAction::PublishToDataplexCatalog]
+        #     Publishes a portion of each profile to Dataplex Catalog with the aspect
+        #     type Sensitive Data Protection Profile.
+        #
+        #     Note: The following fields are mutually exclusive: `publish_to_dataplex_catalog`, `export_data`, `pub_sub_notification`, `publish_to_chronicle`, `publish_to_scc`, `tag_resources`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         class DataProfileAction
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -4379,6 +4431,21 @@ module Google
           # If set, a summary finding will be created or updated in Security Command
           # Center for each profile.
           class PublishToSecurityCommandCenter
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Create Dataplex Catalog aspects for profiled resources with the aspect type
+          # Sensitive Data Protection Profile. To learn more about aspects, see
+          # https://cloud.google.com/sensitive-data-protection/docs/add-aspects.
+          # @!attribute [rw] lower_data_risk_to_low
+          #   @return [::Boolean]
+          #     Whether creating a Dataplex Catalog aspect for a profiled resource should
+          #     lower the risk of the profile for that resource. This also lowers the
+          #     data risk of resources at the lower levels of the resource hierarchy. For
+          #     example, reducing the data risk of a table data profile also reduces the
+          #     data risk of the constituent column data profiles.
+          class PublishToDataplexCatalog
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
@@ -4492,6 +4559,14 @@ module Google
         # @!attribute [rw] resource_visibility
         #   @return [::Google::Cloud::Dlp::V2::ResourceVisibility]
         #     How broadly a resource has been shared.
+        # @!attribute [rw] full_resource_name
+        #   @return [::String]
+        #     The [full resource
+        #     name](https://cloud.google.com/apis/design/resource_names#full_resource_name)
+        #     of the resource profiled for this finding.
+        # @!attribute [rw] data_source_type
+        #   @return [::Google::Cloud::Dlp::V2::DataSourceType]
+        #     The type of the resource that was profiled.
         class DataProfileFinding
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -5251,7 +5326,7 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Match file stores (e.g. buckets) using regex filters.
+        # Match file stores (e.g. buckets) using filters.
         # @!attribute [rw] include_regexes
         #   @return [::Google::Cloud::Dlp::V2::FileStoreRegexes]
         #     Optional. A collection of regular expressions to match a file store
@@ -7313,7 +7388,8 @@ module Google
         #     The BigQuery table to which the sample findings are written.
         # @!attribute [rw] file_store_is_empty
         #   @return [::Boolean]
-        #     The file store does not have any files.
+        #     The file store does not have any files. If the profiling operation failed,
+        #     this is false.
         # @!attribute [rw] tags
         #   @return [::Array<::Google::Cloud::Dlp::V2::Tag>]
         #     The tags attached to the resource, including any tags attached during
@@ -7995,6 +8071,17 @@ module Google
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
+        end
+
+        # Collection of findings saved to a Cloud Storage bucket. This is used as the
+        # proto schema for textproto files created when specifying a cloud storage
+        # path to save inspection findings.
+        # @!attribute [rw] findings
+        #   @return [::Array<::Google::Cloud::Dlp::V2::Finding>]
+        #     List of findings.
+        class SaveToGcsFindingsOutput
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # Enum of possible outcomes of transformations. SUCCESS if transformation and

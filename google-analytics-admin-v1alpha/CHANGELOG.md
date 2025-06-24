@@ -1,5 +1,33 @@
 # Release History
 
+### 0.36.0 (2025-06-16)
+
+#### Features
+
+* add the `GetSubpropertySyncConfigRequest` method ([#30512](https://github.com/googleapis/google-cloud-ruby/issues/30512)) 
+* add the `ListSubpropertySyncConfigsRequest` method 
+* add the `UpdateSubpropertySyncConfigRequest` method 
+
+### 0.35.0 (2025-05-12)
+
+#### Features
+
+* Updated core dependencies including gapic-common 
+* Updated required Ruby version to 3.1 
+
+### 0.34.1 (2025-04-29)
+
+#### Bug Fixes
+
+* Fixed several issues with validating credential configs 
+
+### 0.34.0 (2025-04-25)
+
+#### Features
+
+* Support for managing ReportingDataAnnotation resources 
+* Support for the submit_user_deletion RPC 
+
 ### 0.33.0 (2025-03-05)
 
 #### Features

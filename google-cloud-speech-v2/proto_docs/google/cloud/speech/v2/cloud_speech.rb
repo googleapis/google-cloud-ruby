@@ -434,9 +434,9 @@ module Google
         # @!attribute [rw] sample_rate_hertz
         #   @return [::Integer]
         #     Optional. Sample rate in Hertz of the audio data sent for recognition.
-        #     Valid values are: 8000-48000. 16000 is optimal. For best results, set the
-        #     sampling rate of the audio source to 16000 Hz. If that's not possible, use
-        #     the native sample rate of the audio source (instead of re-sampling).
+        #     Valid values are: 8000-48000, and 16000 is optimal. For best results, set
+        #     the sampling rate of the audio source to 16000 Hz. If that's not possible,
+        #     use the native sample rate of the audio source (instead of resampling).
         #     Note that this field is marked as OPTIONAL for backward compatibility
         #     reasons. It is (and has always been) effectively REQUIRED.
         # @!attribute [rw] audio_channel_count
@@ -658,6 +658,24 @@ module Google
           end
         end
 
+        # Denoiser config. May not be supported for all models and may
+        # have no effect.
+        # @!attribute [rw] denoise_audio
+        #   @return [::Boolean]
+        #     Denoise audio before sending to the transcription model.
+        # @!attribute [rw] snr_threshold
+        #   @return [::Float]
+        #     Signal-to-Noise Ratio (SNR) threshold for the denoiser. Here SNR means the
+        #     loudness of the speech signal. Audio with an SNR below this threshold,
+        #     meaning the speech is too quiet, will be prevented from being sent to the
+        #     transcription model.
+        #
+        #     If snr_threshold=0, no filtering will be applied.
+        class DenoiserConfig
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # Provides information to the Recognizer that specifies how to process the
         # recognition request.
         # @!attribute [rw] auto_decoding_config
@@ -713,6 +731,10 @@ module Google
         #   @return [::Google::Cloud::Speech::V2::TranslationConfig]
         #     Optional. Optional configuration used to automatically run translation on
         #     the given audio to the desired language for supported models.
+        # @!attribute [rw] denoiser_config
+        #   @return [::Google::Cloud::Speech::V2::DenoiserConfig]
+        #     Optional. Optional denoiser config. May not be supported for all models
+        #     and may have no effect.
         class RecognitionConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

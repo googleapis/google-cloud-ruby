@@ -865,6 +865,569 @@ class ::Google::Cloud::DeveloperConnect::V1::DeveloperConnect::Rest::ClientTest 
     end
   end
 
+  def test_list_account_connectors
+    # Create test objects.
+    client_result = ::Google::Cloud::DeveloperConnect::V1::ListAccountConnectorsResponse.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    page_size = 42
+    page_token = "hello world"
+    filter = "hello world"
+    order_by = "hello world"
+
+    list_account_connectors_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::DeveloperConnect::V1::DeveloperConnect::Rest::ServiceStub.stub :transcode_list_account_connectors_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, list_account_connectors_client_stub do
+        # Create client
+        client = ::Google::Cloud::DeveloperConnect::V1::DeveloperConnect::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.list_account_connectors({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.list_account_connectors parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.list_account_connectors ::Google::Cloud::DeveloperConnect::V1::ListAccountConnectorsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.list_account_connectors({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.list_account_connectors(::Google::Cloud::DeveloperConnect::V1::ListAccountConnectorsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, list_account_connectors_client_stub.call_count
+      end
+    end
+  end
+
+  def test_get_account_connector
+    # Create test objects.
+    client_result = ::Google::Cloud::DeveloperConnect::V1::AccountConnector.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    get_account_connector_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::DeveloperConnect::V1::DeveloperConnect::Rest::ServiceStub.stub :transcode_get_account_connector_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, get_account_connector_client_stub do
+        # Create client
+        client = ::Google::Cloud::DeveloperConnect::V1::DeveloperConnect::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.get_account_connector({ name: name }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.get_account_connector name: name do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.get_account_connector ::Google::Cloud::DeveloperConnect::V1::GetAccountConnectorRequest.new(name: name) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.get_account_connector({ name: name }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.get_account_connector(::Google::Cloud::DeveloperConnect::V1::GetAccountConnectorRequest.new(name: name), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, get_account_connector_client_stub.call_count
+      end
+    end
+  end
+
+  def test_create_account_connector
+    # Create test objects.
+    client_result = ::Google::Longrunning::Operation.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    account_connector_id = "hello world"
+    account_connector = {}
+    request_id = "hello world"
+    validate_only = true
+
+    create_account_connector_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::DeveloperConnect::V1::DeveloperConnect::Rest::ServiceStub.stub :transcode_create_account_connector_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, create_account_connector_client_stub do
+        # Create client
+        client = ::Google::Cloud::DeveloperConnect::V1::DeveloperConnect::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.create_account_connector({ parent: parent, account_connector_id: account_connector_id, account_connector: account_connector, request_id: request_id, validate_only: validate_only }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.create_account_connector parent: parent, account_connector_id: account_connector_id, account_connector: account_connector, request_id: request_id, validate_only: validate_only do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.create_account_connector ::Google::Cloud::DeveloperConnect::V1::CreateAccountConnectorRequest.new(parent: parent, account_connector_id: account_connector_id, account_connector: account_connector, request_id: request_id, validate_only: validate_only) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.create_account_connector({ parent: parent, account_connector_id: account_connector_id, account_connector: account_connector, request_id: request_id, validate_only: validate_only }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.create_account_connector(::Google::Cloud::DeveloperConnect::V1::CreateAccountConnectorRequest.new(parent: parent, account_connector_id: account_connector_id, account_connector: account_connector, request_id: request_id, validate_only: validate_only), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, create_account_connector_client_stub.call_count
+      end
+    end
+  end
+
+  def test_update_account_connector
+    # Create test objects.
+    client_result = ::Google::Longrunning::Operation.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    update_mask = {}
+    account_connector = {}
+    request_id = "hello world"
+    allow_missing = true
+    validate_only = true
+
+    update_account_connector_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::DeveloperConnect::V1::DeveloperConnect::Rest::ServiceStub.stub :transcode_update_account_connector_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, update_account_connector_client_stub do
+        # Create client
+        client = ::Google::Cloud::DeveloperConnect::V1::DeveloperConnect::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.update_account_connector({ update_mask: update_mask, account_connector: account_connector, request_id: request_id, allow_missing: allow_missing, validate_only: validate_only }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.update_account_connector update_mask: update_mask, account_connector: account_connector, request_id: request_id, allow_missing: allow_missing, validate_only: validate_only do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.update_account_connector ::Google::Cloud::DeveloperConnect::V1::UpdateAccountConnectorRequest.new(update_mask: update_mask, account_connector: account_connector, request_id: request_id, allow_missing: allow_missing, validate_only: validate_only) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.update_account_connector({ update_mask: update_mask, account_connector: account_connector, request_id: request_id, allow_missing: allow_missing, validate_only: validate_only }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.update_account_connector(::Google::Cloud::DeveloperConnect::V1::UpdateAccountConnectorRequest.new(update_mask: update_mask, account_connector: account_connector, request_id: request_id, allow_missing: allow_missing, validate_only: validate_only), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, update_account_connector_client_stub.call_count
+      end
+    end
+  end
+
+  def test_delete_account_connector
+    # Create test objects.
+    client_result = ::Google::Longrunning::Operation.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+    request_id = "hello world"
+    validate_only = true
+    etag = "hello world"
+    force = true
+
+    delete_account_connector_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::DeveloperConnect::V1::DeveloperConnect::Rest::ServiceStub.stub :transcode_delete_account_connector_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, delete_account_connector_client_stub do
+        # Create client
+        client = ::Google::Cloud::DeveloperConnect::V1::DeveloperConnect::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.delete_account_connector({ name: name, request_id: request_id, validate_only: validate_only, etag: etag, force: force }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.delete_account_connector name: name, request_id: request_id, validate_only: validate_only, etag: etag, force: force do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.delete_account_connector ::Google::Cloud::DeveloperConnect::V1::DeleteAccountConnectorRequest.new(name: name, request_id: request_id, validate_only: validate_only, etag: etag, force: force) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.delete_account_connector({ name: name, request_id: request_id, validate_only: validate_only, etag: etag, force: force }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.delete_account_connector(::Google::Cloud::DeveloperConnect::V1::DeleteAccountConnectorRequest.new(name: name, request_id: request_id, validate_only: validate_only, etag: etag, force: force), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, delete_account_connector_client_stub.call_count
+      end
+    end
+  end
+
+  def test_fetch_access_token
+    # Create test objects.
+    client_result = ::Google::Cloud::DeveloperConnect::V1::FetchAccessTokenResponse.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    account_connector = "hello world"
+
+    fetch_access_token_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::DeveloperConnect::V1::DeveloperConnect::Rest::ServiceStub.stub :transcode_fetch_access_token_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, fetch_access_token_client_stub do
+        # Create client
+        client = ::Google::Cloud::DeveloperConnect::V1::DeveloperConnect::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.fetch_access_token({ account_connector: account_connector }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.fetch_access_token account_connector: account_connector do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.fetch_access_token ::Google::Cloud::DeveloperConnect::V1::FetchAccessTokenRequest.new(account_connector: account_connector) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.fetch_access_token({ account_connector: account_connector }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.fetch_access_token(::Google::Cloud::DeveloperConnect::V1::FetchAccessTokenRequest.new(account_connector: account_connector), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, fetch_access_token_client_stub.call_count
+      end
+    end
+  end
+
+  def test_list_users
+    # Create test objects.
+    client_result = ::Google::Cloud::DeveloperConnect::V1::ListUsersResponse.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    page_size = 42
+    page_token = "hello world"
+    filter = "hello world"
+    order_by = "hello world"
+
+    list_users_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::DeveloperConnect::V1::DeveloperConnect::Rest::ServiceStub.stub :transcode_list_users_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, list_users_client_stub do
+        # Create client
+        client = ::Google::Cloud::DeveloperConnect::V1::DeveloperConnect::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.list_users({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.list_users parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.list_users ::Google::Cloud::DeveloperConnect::V1::ListUsersRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.list_users({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.list_users(::Google::Cloud::DeveloperConnect::V1::ListUsersRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, list_users_client_stub.call_count
+      end
+    end
+  end
+
+  def test_delete_user
+    # Create test objects.
+    client_result = ::Google::Longrunning::Operation.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+    request_id = "hello world"
+    validate_only = true
+    etag = "hello world"
+
+    delete_user_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::DeveloperConnect::V1::DeveloperConnect::Rest::ServiceStub.stub :transcode_delete_user_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, delete_user_client_stub do
+        # Create client
+        client = ::Google::Cloud::DeveloperConnect::V1::DeveloperConnect::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.delete_user({ name: name, request_id: request_id, validate_only: validate_only, etag: etag }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.delete_user name: name, request_id: request_id, validate_only: validate_only, etag: etag do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.delete_user ::Google::Cloud::DeveloperConnect::V1::DeleteUserRequest.new(name: name, request_id: request_id, validate_only: validate_only, etag: etag) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.delete_user({ name: name, request_id: request_id, validate_only: validate_only, etag: etag }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.delete_user(::Google::Cloud::DeveloperConnect::V1::DeleteUserRequest.new(name: name, request_id: request_id, validate_only: validate_only, etag: etag), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, delete_user_client_stub.call_count
+      end
+    end
+  end
+
+  def test_fetch_self
+    # Create test objects.
+    client_result = ::Google::Cloud::DeveloperConnect::V1::User.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    fetch_self_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::DeveloperConnect::V1::DeveloperConnect::Rest::ServiceStub.stub :transcode_fetch_self_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, fetch_self_client_stub do
+        # Create client
+        client = ::Google::Cloud::DeveloperConnect::V1::DeveloperConnect::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.fetch_self({ name: name }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.fetch_self name: name do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.fetch_self ::Google::Cloud::DeveloperConnect::V1::FetchSelfRequest.new(name: name) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.fetch_self({ name: name }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.fetch_self(::Google::Cloud::DeveloperConnect::V1::FetchSelfRequest.new(name: name), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, fetch_self_client_stub.call_count
+      end
+    end
+  end
+
+  def test_delete_self
+    # Create test objects.
+    client_result = ::Google::Longrunning::Operation.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    delete_self_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::DeveloperConnect::V1::DeveloperConnect::Rest::ServiceStub.stub :transcode_delete_self_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, delete_self_client_stub do
+        # Create client
+        client = ::Google::Cloud::DeveloperConnect::V1::DeveloperConnect::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.delete_self({ name: name }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.delete_self name: name do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.delete_self ::Google::Cloud::DeveloperConnect::V1::DeleteSelfRequest.new(name: name) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.delete_self({ name: name }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.delete_self(::Google::Cloud::DeveloperConnect::V1::DeleteSelfRequest.new(name: name), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, delete_self_client_stub.call_count
+      end
+    end
+  end
+
   def test_configure
     credentials_token = :dummy_value
 

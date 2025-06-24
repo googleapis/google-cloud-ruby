@@ -35,6 +35,11 @@
                 "export_cluster"
               ]
             },
+            "ImportCluster": {
+              "methods": [
+                "import_cluster"
+              ]
+            },
             "UpgradeCluster": {
               "methods": [
                 "upgrade_cluster"
@@ -188,6 +193,20 @@
             "ListDatabases": {
               "methods": [
                 "list_databases"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "AlloyDBCSQLAdmin": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::AlloyDB::V1beta::AlloyDBCloudSQLAdmin::Client",
+          "rpcs": {
+            "RestoreFromCloudSQL": {
+              "methods": [
+                "restore_from_cloud_sql"
               ]
             }
           }

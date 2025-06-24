@@ -392,6 +392,18 @@ class ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::ClientPathsTes
     end
   end
 
+  def test_reporting_data_annotation_path
+    grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
+      client = ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      path = client.reporting_data_annotation_path property: "value0", reporting_data_annotation: "value1"
+      assert_equal "properties/value0/reportingDataAnnotations/value1", path
+    end
+  end
+
   def test_rollup_property_source_link_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
     ::Gapic::ServiceStub.stub :new, DummyStub.new do
@@ -437,6 +449,18 @@ class ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::ClientPathsTes
 
       path = client.subproperty_event_filter_path property: "value0", sub_property_event_filter: "value1"
       assert_equal "properties/value0/subpropertyEventFilters/value1", path
+    end
+  end
+
+  def test_subproperty_sync_config_path
+    grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
+      client = ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      path = client.subproperty_sync_config_path property: "value0", subproperty_sync_config: "value1"
+      assert_equal "properties/value0/subpropertySyncConfigs/value1", path
     end
   end
 end

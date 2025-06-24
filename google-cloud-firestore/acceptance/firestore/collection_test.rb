@@ -61,7 +61,7 @@ describe "Collection", :firestore_acceptance do
     rand_col.list_documents.map(&:delete)
     _(rand_col.list_documents).must_be :empty?
   end
-  
+ 
   it "lists its documents with read_time" do
     rand_col = firestore.col "#{root_path}/query/#{SecureRandom.hex(4)}"
     rand_col.add({foo: "bar"})
@@ -86,7 +86,7 @@ describe "Collection", :firestore_acceptance do
     _(docs.first.client).must_be_kind_of Google::Cloud::Firestore::Client
 
     rand_col.list_documents.map(&:delete)
-    _(rand_col.list_documents).must_be :empty? 
+    _(rand_col.list_documents).must_be :empty?
   end
 
   describe "Multiple database tests" do
@@ -117,5 +117,5 @@ describe "Collection", :firestore_acceptance do
       rand_col_2.list_documents.map(&:delete)
       _(rand_col_2.list_documents).must_be :empty?
     end
-  end  
+  end 
 end

@@ -3498,7 +3498,7 @@ module Google
               #   @param options [::Gapic::CallOptions, ::Hash]
               #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
               #
-              # @overload signal_zone_state(name: nil, request_id: nil, state_signal: nil, provisioning_state_signal: nil)
+              # @overload signal_zone_state(name: nil, request_id: nil, state_signal: nil, provisioning_state_signal: nil, step: nil, details: nil)
               #   Pass arguments to `signal_zone_state` via keyword arguments. Note that at
               #   least one keyword argument is required. To specify no parameters, or to keep all
               #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -3515,6 +3515,13 @@ module Google
               #   @param provisioning_state_signal [::Google::Cloud::GDCHardwareManagement::V1alpha::SignalZoneStateRequest::ProvisioningStateSignal]
               #     Optional. The provisioning state signal to send for this zone. Either
               #     state_signal or provisioning_state_signal must be set, but not both.
+              #   @param step [::String]
+              #     Optional. The step being executed. Provides a finer grained status when the
+              #     state_signal is FACTORY_TURNUP_CHECKS_STARTED or
+              #     FACTORY_TURNUP_CHECKS_FAILED.
+              #   @param details [::String]
+              #     Optional. Additional details, such as an error message when state_signal is
+              #     FACTORY_TURNUP_CHECKS_FAILED.
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Gapic::Operation]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
@@ -3678,7 +3685,7 @@ module Google
 
                 config_attr :endpoint,      nil, ::String, nil
                 config_attr :credentials,   nil do |value|
-                  allowed = [::String, ::Hash, ::Proc, ::Symbol, ::Google::Auth::Credentials, ::Signet::OAuth2::Client, nil]
+                  allowed = [::String, ::Hash, ::Proc, ::Symbol, ::Google::Auth::Credentials, ::Google::Auth::BaseClient, ::Signet::OAuth2::Client, nil]
                   allowed.any? { |klass| klass === value }
                 end
                 config_attr :scope,         nil, ::String, ::Array, nil

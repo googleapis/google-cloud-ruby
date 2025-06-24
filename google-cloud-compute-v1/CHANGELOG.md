@@ -1,5 +1,24 @@
 # Release History
 
+### 2.22.0 (2025-05-12)
+
+#### Features
+
+* Updated core dependencies including gapic-common 
+* Updated required Ruby version to 3.1 
+
+### 2.21.1 (2025-04-29)
+
+#### Bug Fixes
+
+* Fixed several issues with validating credential configs 
+
+### 2.21.0 (2025-04-21)
+
+#### Features
+
+* Update Compute Engine API to revision 20250415 ([#29479](https://github.com/googleapis/google-cloud-ruby/issues/29479)) 
+
 ### 2.20.0 (2025-03-28)
 
 #### Features

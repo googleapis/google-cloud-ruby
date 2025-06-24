@@ -21,7 +21,7 @@ module Google
   module Apps
     module Meet
       module V2
-        VERSION = "0.4.1"
+        VERSION = "0.5.0"
       end
     end
   end

@@ -16,7 +16,7 @@
 module Google
   module Cloud
     module Dialogflow
-      VERSION = "1.11.0".freeze
+      VERSION = "1.11.2".freeze
     end
   end
 end

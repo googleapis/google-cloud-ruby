@@ -1,5 +1,31 @@
 # Changelog
 
+### 0.13.0 (2025-05-12)
+
+#### Features
+
+* Support for data sampling configuration 
+* Support for dynamic PubSub topics 
+* Support for filtering by name in the list_jobs RPC 
+* Support for straggler info 
+* Support for Streaming Engine options 
+* Support for Trie aggregation 
+* Support update masks for the update_job RPC 
+* Updated core dependencies including gapic-common 
+* Updated required Ruby version to 3.1 
+#### Bug Fixes
+
+* Fixed default oauth scopes 
+#### Documentation
+
+* Removed notes stating that features are not ready 
+
+### 0.12.1 (2025-04-29)
+
+#### Bug Fixes
+
+* Fixed several issues with validating credential configs 
+
 ### 0.12.0 (2025-02-07)
 
 ### ⚠ BREAKING CHANGES

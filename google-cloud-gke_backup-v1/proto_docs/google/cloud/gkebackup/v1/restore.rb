@@ -40,7 +40,7 @@ module Google
         #     updated.
         # @!attribute [rw] description
         #   @return [::String]
-        #     User specified descriptive string for this Restore.
+        #     Optional. User specified descriptive string for this Restore.
         # @!attribute [rw] backup
         #   @return [::String]
         #     Required. Immutable. A reference to the
@@ -73,7 +73,9 @@ module Google
         # @!attribute [r] state_reason
         #   @return [::String]
         #     Output only. Human-readable description of why the Restore is in its
-        #     current state.
+        #     current state. This field is only meant for human readability and should
+        #     not be used programmatically as this field is not guaranteed to be
+        #     consistent.
         # @!attribute [r] complete_time
         #   @return [::Google::Protobuf::Timestamp]
         #     Output only. Timestamp of when the restore operation completed.
@@ -104,8 +106,8 @@ module Google
         #   @return [::Google::Cloud::GkeBackup::V1::Restore::Filter]
         #     Optional. Immutable. Filters resources for `Restore`. If not specified, the
         #     scope of the restore will remain the same as defined in the `RestorePlan`.
-        #     If this is specified, and no resources are matched by the
-        #     `inclusion_filters` or everyting is excluded by the `exclusion_filters`,
+        #     If this is specified and no resources are matched by the
+        #     `inclusion_filters` or everything is excluded by the `exclusion_filters`,
         #     nothing will be restored. This filter can only be specified if the value of
         #     {::Google::Cloud::GkeBackup::V1::RestoreConfig#namespaced_resource_restore_mode namespaced_resource_restore_mode}
         #     is set to `MERGE_SKIP_ON_CONFLICT`, `MERGE_REPLACE_VOLUME_ON_CONFLICT` or
@@ -170,6 +172,10 @@ module Google
 
             # This Restore resource is in the process of being deleted.
             DELETING = 5
+
+            # The Kubernetes resources created by this Restore are being
+            # validated.
+            VALIDATING = 6
           end
         end
 
@@ -261,7 +267,7 @@ module Google
           #   @return [::String]
           #     Optional. API group string of a Kubernetes resource, e.g.
           #     "apiextensions.k8s.io", "storage.k8s.io", etc.
-          #     Note: use empty string for core API group
+          #     Note: use empty string for core API group.
           # @!attribute [rw] resource_kind
           #   @return [::String]
           #     Optional. Kind of a Kubernetes resource, must be in UpperCamelCase
@@ -277,14 +283,16 @@ module Google
           # Some group kinds are not reasonable choices for a restore, and will cause
           # an error if selected here. Any scope selection that would restore
           # "all valid" resources automatically excludes these group kinds.
+          # - Node
+          # - ComponentStatus
           # - gkebackup.gke.io/BackupJob
           # - gkebackup.gke.io/RestoreJob
           # - metrics.k8s.io/NodeMetrics
           # - migration.k8s.io/StorageState
           # - migration.k8s.io/StorageVersionMigration
-          # - Node
           # - snapshot.storage.k8s.io/VolumeSnapshotContent
           # - storage.k8s.io/CSINode
+          # - storage.k8s.io/VolumeAttachment
           #
           # Some group kinds are driven by restore configuration elsewhere,
           # and will cause an error if selected here.

@@ -20,7 +20,7 @@
 module Google
   module Area120
     module Tables
-      VERSION = "0.7.0"
+      VERSION = "0.7.1"
     end
   end
 end

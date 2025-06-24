@@ -312,7 +312,7 @@ module Google
                                                               uri_template: "/v1/{license_pool.name}",
                                                               body: "license_pool",
                                                               matches: [
-                                                                ["license_pool.name", %r{^billingAccounts/[^/]+/orders/[^/]+/licensePool/[^/]+/?$}, false]
+                                                                ["license_pool.name", %r{^billingAccounts/[^/]+/orders/[^/]+/licensePool/?$}, false]
                                                               ]
                                                             )
                     transcoder.transcode request_pb

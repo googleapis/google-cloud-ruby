@@ -1,5 +1,27 @@
 # Changelog
 
+### 1.5.0 (2025-05-12)
+
+#### Features
+
+* Updated core dependencies including gapic-common 
+* Updated required Ruby version to 3.1 
+
+### 1.4.1 (2025-04-29)
+
+#### Bug Fixes
+
+* Fixed several issues with validating credential configs 
+
+### 1.4.0 (2025-04-21)
+
+#### Features
+
+* add the GoModule and KfpArtifact resources ([#29440](https://github.com/googleapis/google-cloud-ruby/issues/29440)) 
+#### Documentation
+
+* remove the restriction of the maximum numbers of versions that can be deleted in one BatchDeleteVersions call 
+
 ### 1.3.0 (2025-01-28)
 
 #### Features
