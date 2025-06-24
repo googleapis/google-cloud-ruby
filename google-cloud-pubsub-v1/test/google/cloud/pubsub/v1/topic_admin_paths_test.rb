@@ -27,7 +27,7 @@ class ::Google::Cloud::PubSub::V1::TopicAdmin::ClientPathsTest < Minitest::Test
     def endpoint
       "endpoint.example.com"
     end
-
+  
     def universe_domain
       "example.com"
     end

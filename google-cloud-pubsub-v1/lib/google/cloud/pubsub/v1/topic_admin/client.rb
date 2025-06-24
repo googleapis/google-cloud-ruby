@@ -197,7 +197,7 @@ module Google
               @quota_project_id ||= credentials.quota_project_id if credentials.respond_to? :quota_project_id
 
               @topic_admin_stub = ::Gapic::ServiceStub.new(
-                ::Google::Cloud::PubSub::V1::TopicAdmin::Stub,
+                ::Google::Cloud::PubSub::V1::Publisher::Stub,
                 credentials: credentials,
                 endpoint: @config.endpoint,
                 endpoint_template: DEFAULT_ENDPOINT_TEMPLATE,
@@ -1205,8 +1205,8 @@ module Google
 
               config_attr :endpoint,      nil, ::String, nil
               config_attr :credentials,   nil do |value|
-                allowed = [::String, ::Hash, ::Proc, ::Symbol, ::Google::Auth::Credentials, ::Signet::OAuth2::Client, nil]
-                allowed += [::GRPC::Core::Channel, ::GRPC::Core::ChannelCredentials] if defined? ::GRPC
+                allowed = [::String, ::Hash, ::Proc, ::Symbol, ::Google::Auth::Credentials, ::Google::Auth::BaseClient, ::Signet::OAuth2::Client, nil]
+                allowed += [::GRPC::Core::Channel, ::GRPC::Core::ChannelCredentials] if defined? ::GRPC::Core::Channel
                 allowed.any? { |klass| klass === value }
               end
               config_attr :scope,         nil, ::String, ::Array, nil

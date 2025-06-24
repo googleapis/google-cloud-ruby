@@ -233,7 +233,7 @@ module Google
               @quota_project_id ||= credentials.quota_project_id if credentials.respond_to? :quota_project_id
 
               @subscription_admin_stub = ::Gapic::ServiceStub.new(
-                ::Google::Cloud::PubSub::V1::SubscriptionAdmin::Stub,
+                ::Google::Cloud::PubSub::V1::Subscriber::Stub,
                 credentials: credentials,
                 endpoint: @config.endpoint,
                 endpoint_template: DEFAULT_ENDPOINT_TEMPLATE,
@@ -400,8 +400,8 @@ module Google
             #
             #     If not set, the default retry policy is applied. This generally implies
             #     that messages will be retried as soon as possible for healthy subscribers.
-            #     RetryPolicy will be triggered on NACKs or acknowledgement deadline
-            #     exceeded events for a given message.
+            #     RetryPolicy will be triggered on NACKs or acknowledgment deadline exceeded
+            #     events for a given message.
             #   @param detached [::Boolean]
             #     Optional. Indicates whether the subscription is detached from its topic.
             #     Detached subscriptions don't receive messages from their topic and don't
@@ -414,7 +414,7 @@ module Google
             #     subscription:
             #
             #     * The message sent to a subscriber is guaranteed not to be resent
-            #     before the message's acknowledgement deadline expires.
+            #     before the message's acknowledgment deadline expires.
             #     * An acknowledged message will not be resent to a subscriber.
             #
             #     Note that subscribers may still receive multiple copies of a message
@@ -1151,7 +1151,7 @@ module Google
 
             ##
             # Establishes a stream with the server, which sends messages down to the
-            # client. The client streams acknowledgements and ack deadline modifications
+            # client. The client streams acknowledgments and ack deadline modifications
             # back to the server. The server will close the stream and return the status
             # on any error. The server may close the stream with status `UNAVAILABLE` to
             # reassign server-side resources, in which case, the client should
@@ -2044,8 +2044,8 @@ module Google
 
               config_attr :endpoint,      nil, ::String, nil
               config_attr :credentials,   nil do |value|
-                allowed = [::String, ::Hash, ::Proc, ::Symbol, ::Google::Auth::Credentials, ::Signet::OAuth2::Client, nil]
-                allowed += [::GRPC::Core::Channel, ::GRPC::Core::ChannelCredentials] if defined? ::GRPC
+                allowed = [::String, ::Hash, ::Proc, ::Symbol, ::Google::Auth::Credentials, ::Google::Auth::BaseClient, ::Signet::OAuth2::Client, nil]
+                allowed += [::GRPC::Core::Channel, ::GRPC::Core::ChannelCredentials] if defined? ::GRPC::Core::Channel
                 allowed.any? { |klass| klass === value }
               end
               config_attr :scope,         nil, ::String, ::Array, nil
