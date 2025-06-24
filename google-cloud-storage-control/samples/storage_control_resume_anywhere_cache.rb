@@ -12,28 +12,30 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# [START storage_control_list_anywhere_caches]
-def list_anywhere_caches bucket_name:
+# [START storage_control_resume_anywhere_cache]
+def resume_anywhere_cache bucket_name:, zone:
   # The ID of your GCS bucket
   # bucket_name = "your-unique-bucket-name"
+
 
   require "google/cloud/storage/control"
 	require "google/cloud/storage/control/v2"
 
+
 	# Create a client object. The client can be reused for multiple calls.
 	client = Google::Cloud::Storage::Control::V2::StorageControl::Client.new
 	parent = "projects/_/buckets/#{bucket_name}"
+    name=  "#{parent}/anywhereCaches/#{zone}"
 
-	request = Google::Cloud::Storage::Control::V2::ListAnywhereCachesRequest.new(
-		parent: parent
+	# Create a request. Replace the placeholder values with actual data.
+    request = Google::Cloud::Storage::Control::V2::ResumeAnywhereCacheRequest.new(
+		name: name
 	)
-  # Call the create_anywhere_cache method.
+  # Call the resume_anywhere_cache method.
 
-	result = client.list_anywhere_caches(request)
-  result.response.anywhere_caches.each do |item|
-    puts item.name
-  end
-
+  result = client.resume_anywhere_cache(request)
+  puts result
 end
-# [END storage_control_list_anywhere_caches]
- list_anywhere_caches bucket_name: ARGV.shift if $PROGRAM_NAME == __FILE__
+# [END storage_control_resume_anywhere_cache]
+
+resume_anywhere_cache bucket_name: ARGV.shift if $PROGRAM_NAME == __FILE__

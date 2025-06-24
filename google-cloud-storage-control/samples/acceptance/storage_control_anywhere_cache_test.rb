@@ -16,6 +16,10 @@ require_relative "helper"
 require_relative "../storage_control_create_anywhere_cache"
 require_relative "../storage_control_list_anywhere_caches"
 require_relative "../storage_control_get_anywhere_cache"
+require_relative "../storage_control_update_anywhere_cache"
+require_relative "../storage_control_pause_anywhere_cache"
+require_relative "../storage_control_resume_anywhere_cache"
+require_relative "../storage_control_disable_anywhere_cache"
 
 require 'pry'
 
@@ -52,4 +56,32 @@ describe "Storage Control Anywhere Cache" do
     end
     assert_includes out, "#{bucket_name}/anywhereCaches/#{zone}"
   end
+
+  it "Pause Anywhere cache" do
+    out, _err = capture_io do
+        pause_anywhere_cache bucket_name: bucket_name, zone: zone
+    end
+    assert_includes out, "#{bucket_name}/anywhereCaches/#{zone}"
+  end
+
+  it "Resume Anywhere cache" do
+    out, _err = capture_io do
+        resume_anywhere_cache bucket_name: bucket_name, zone: zone
+    end
+    assert_includes out, "#{bucket_name}/anywhereCaches/#{zone}"
+  end
+
+  it "Disable Anywhere cache" do
+    out, _err = capture_io do
+        resume_anywhere_cache bucket_name: bucket_name, zone: zone
+    end
+    assert_includes out, "#{bucket_name}/anywhereCaches/#{zone}"
+  end
+
+#   it "Update Anywhere cache" do
+#     out, _err = capture_io do
+#         update_anywhere_cache bucket_name: bucket_name, zone: zone
+#     end
+#     assert_includes out, "#{bucket_name}/anywhereCaches/#{zone}"
+#   end
 end
