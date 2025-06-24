@@ -1,0 +1,215 @@
+{
+  "client_library": {
+    "name": "google-shopping-merchant-notifications-v1beta",
+    "version": "",
+    "language": "RUBY",
+    "apis": [
+      {
+        "id": "google.shopping.merchant.notifications.v1beta",
+        "version": "v1beta"
+      }
+    ]
+  },
+  "snippets": [
+    {
+      "region_tag": "merchantapi_v1beta_generated_NotificationsApiService_GetNotificationSubscription_sync",
+      "title": "Snippet for the get_notification_subscription call in the NotificationsApiService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Shopping::Merchant::Notifications::V1beta::NotificationsApiService::Client#get_notification_subscription.",
+      "file": "notifications_api_service/get_notification_subscription.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_notification_subscription",
+        "full_name": "::Google::Shopping::Merchant::Notifications::V1beta::NotificationsApiService::Client#get_notification_subscription",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Shopping::Merchant::Notifications::V1beta::GetNotificationSubscriptionRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Shopping::Merchant::Notifications::V1beta::NotificationSubscription",
+        "client": {
+          "short_name": "NotificationsApiService::Client",
+          "full_name": "::Google::Shopping::Merchant::Notifications::V1beta::NotificationsApiService::Client"
+        },
+        "method": {
+          "short_name": "GetNotificationSubscription",
+          "full_name": "google.shopping.merchant.notifications.v1beta.NotificationsApiService.GetNotificationSubscription",
+          "service": {
+            "short_name": "NotificationsApiService",
+            "full_name": "google.shopping.merchant.notifications.v1beta.NotificationsApiService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "merchantapi_v1beta_generated_NotificationsApiService_CreateNotificationSubscription_sync",
+      "title": "Snippet for the create_notification_subscription call in the NotificationsApiService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Shopping::Merchant::Notifications::V1beta::NotificationsApiService::Client#create_notification_subscription.",
+      "file": "notifications_api_service/create_notification_subscription.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_notification_subscription",
+        "full_name": "::Google::Shopping::Merchant::Notifications::V1beta::NotificationsApiService::Client#create_notification_subscription",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Shopping::Merchant::Notifications::V1beta::CreateNotificationSubscriptionRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Shopping::Merchant::Notifications::V1beta::NotificationSubscription",
+        "client": {
+          "short_name": "NotificationsApiService::Client",
+          "full_name": "::Google::Shopping::Merchant::Notifications::V1beta::NotificationsApiService::Client"
+        },
+        "method": {
+          "short_name": "CreateNotificationSubscription",
+          "full_name": "google.shopping.merchant.notifications.v1beta.NotificationsApiService.CreateNotificationSubscription",
+          "service": {
+            "short_name": "NotificationsApiService",
+            "full_name": "google.shopping.merchant.notifications.v1beta.NotificationsApiService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "merchantapi_v1beta_generated_NotificationsApiService_UpdateNotificationSubscription_sync",
+      "title": "Snippet for the update_notification_subscription call in the NotificationsApiService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Shopping::Merchant::Notifications::V1beta::NotificationsApiService::Client#update_notification_subscription.",
+      "file": "notifications_api_service/update_notification_subscription.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_notification_subscription",
+        "full_name": "::Google::Shopping::Merchant::Notifications::V1beta::NotificationsApiService::Client#update_notification_subscription",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Shopping::Merchant::Notifications::V1beta::UpdateNotificationSubscriptionRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Shopping::Merchant::Notifications::V1beta::NotificationSubscription",
+        "client": {
+          "short_name": "NotificationsApiService::Client",
+          "full_name": "::Google::Shopping::Merchant::Notifications::V1beta::NotificationsApiService::Client"
+        },
+        "method": {
+          "short_name": "UpdateNotificationSubscription",
+          "full_name": "google.shopping.merchant.notifications.v1beta.NotificationsApiService.UpdateNotificationSubscription",
+          "service": {
+            "short_name": "NotificationsApiService",
+            "full_name": "google.shopping.merchant.notifications.v1beta.NotificationsApiService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "merchantapi_v1beta_generated_NotificationsApiService_DeleteNotificationSubscription_sync",
+      "title": "Snippet for the delete_notification_subscription call in the NotificationsApiService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Shopping::Merchant::Notifications::V1beta::NotificationsApiService::Client#delete_notification_subscription.",
+      "file": "notifications_api_service/delete_notification_subscription.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_notification_subscription",
+        "full_name": "::Google::Shopping::Merchant::Notifications::V1beta::NotificationsApiService::Client#delete_notification_subscription",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Shopping::Merchant::Notifications::V1beta::DeleteNotificationSubscriptionRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Protobuf::Empty",
+        "client": {
+          "short_name": "NotificationsApiService::Client",
+          "full_name": "::Google::Shopping::Merchant::Notifications::V1beta::NotificationsApiService::Client"
+        },
+        "method": {
+          "short_name": "DeleteNotificationSubscription",
+          "full_name": "google.shopping.merchant.notifications.v1beta.NotificationsApiService.DeleteNotificationSubscription",
+          "service": {
+            "short_name": "NotificationsApiService",
+            "full_name": "google.shopping.merchant.notifications.v1beta.NotificationsApiService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "merchantapi_v1beta_generated_NotificationsApiService_ListNotificationSubscriptions_sync",
+      "title": "Snippet for the list_notification_subscriptions call in the NotificationsApiService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Shopping::Merchant::Notifications::V1beta::NotificationsApiService::Client#list_notification_subscriptions.",
+      "file": "notifications_api_service/list_notification_subscriptions.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_notification_subscriptions",
+        "full_name": "::Google::Shopping::Merchant::Notifications::V1beta::NotificationsApiService::Client#list_notification_subscriptions",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Shopping::Merchant::Notifications::V1beta::ListNotificationSubscriptionsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Shopping::Merchant::Notifications::V1beta::ListNotificationSubscriptionsResponse",
+        "client": {
+          "short_name": "NotificationsApiService::Client",
+          "full_name": "::Google::Shopping::Merchant::Notifications::V1beta::NotificationsApiService::Client"
+        },
+        "method": {
+          "short_name": "ListNotificationSubscriptions",
+          "full_name": "google.shopping.merchant.notifications.v1beta.NotificationsApiService.ListNotificationSubscriptions",
+          "service": {
+            "short_name": "NotificationsApiService",
+            "full_name": "google.shopping.merchant.notifications.v1beta.NotificationsApiService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    }
+  ]
+}
