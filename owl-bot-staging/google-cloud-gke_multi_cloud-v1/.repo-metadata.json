@@ -1,0 +1,17 @@
+{
+    "api_id": "gkemulticloud.googleapis.com",
+    "api_shortname": "gkemulticloud",
+    "client_documentation": "https://cloud.google.com/ruby/docs/reference/google-cloud-gke_multi_cloud-v1/latest",
+    "distribution_name": "google-cloud-gke_multi_cloud-v1",
+    "is_cloud": true,
+    "language": "ruby",
+    "name": "gkemulticloud",
+    "name_pretty": "Anthos Multi-Cloud V1 API",
+    "product_documentation": "https://cloud.google.com/anthos/clusters/docs/multi-cloud",
+    "release_level": "unreleased",
+    "repo": "googleapis/google-cloud-ruby",
+    "requires_billing": true,
+    "ruby-cloud-description": "Anthos Multi-Cloud provides a way to manage Kubernetes clusters that run on AWS and Azure infrastructure using the Anthos Multi-Cloud API. Combined with Connect, you can manage Kubernetes clusters on Google Cloud, AWS, and Azure from the Google Cloud Console. Note that google-cloud-gke_multi_cloud-v1 is a version-specific client library. For most uses, we recommend installing the main client library google-cloud-gke_multi_cloud instead. See the readme for more details.",
+    "ruby-cloud-product-url": "https://cloud.google.com/anthos/clusters/docs/multi-cloud",
+    "library_type": "GAPIC_AUTO"
+}
