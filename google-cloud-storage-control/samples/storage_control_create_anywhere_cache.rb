@@ -13,7 +13,7 @@
 # limitations under the License.
 
 # [START storage_control_create_anywhere_cache]
-def create_anywhere_cache bucket_name:, project_name:, zone:
+def create_anywhere_cache bucket_name:, zone:
   # The ID of your GCS bucket
   # bucket_name = "your-unique-bucket-name"
 
@@ -21,14 +21,13 @@ def create_anywhere_cache bucket_name:, project_name:, zone:
   require "google/cloud/storage/control"
 	require "google/cloud/storage/control/v2"
 
-	require "pry"
-
 	# Create a client object. The client can be reused for multiple calls.
 	client = Google::Cloud::Storage::Control::V2::StorageControl::Client.new
 	parent = "projects/_/buckets/#{bucket_name}"
+	name=  "#{parent}/anywhereCaches/#{zone}"
 
 	anywhere_cache = Google::Cloud::Storage::Control::V2::AnywhereCache.new(
-		name: "test_cache_shubhangi",
+		name: name,
 		zone: zone
 	)
 	# Create a request. Replace the placeholder values with actual data.
@@ -39,6 +38,8 @@ def create_anywhere_cache bucket_name:, project_name:, zone:
 # Call the create_anywhere_cache method.
 
 result = client.create_anywhere_cache(request)
+
+puts result
 
 end
 # [END storage_control_create_anywhere_cache]

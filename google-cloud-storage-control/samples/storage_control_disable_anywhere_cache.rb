@@ -12,8 +12,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# [START storage_control_get_anywhere_cache]
-def get_anywhere_cache bucket_name:, zone:
+# [START storage_control_create_anywhere_cache]
+def disable_anywhere_cache bucket_name:, zone:
   # The ID of your GCS bucket
   # bucket_name = "your-unique-bucket-name"
 
@@ -27,14 +27,14 @@ def get_anywhere_cache bucket_name:, zone:
   name=  "#{parent}/anywhereCaches/#{zone}"
 
   # Create a request. Replace the placeholder values with actual data.
-  request = Google::Cloud::Storage::Control::V2::GetAnywhereCacheRequest.new(
+  request = Google::Cloud::Storage::Control::V2::DisableAnywhereCacheRequest.new(
       name: name
   )
-  # Call the create_anywhere_cache method.
+  # Call the disable_anywhere_cache method.
 
-  result = client.get_anywhere_cache(request)
+  result = client.disable_anywhere_cache(request)
   puts result
 end
-# [END storage_control_get_anywhere_cache]
+# [END storage_control_create_anywhere_cache]
 
-get_anywhere_cache bucket_name: ARGV.shift if $PROGRAM_NAME == __FILE__
+disable_anywhere_cache bucket_name: ARGV.shift if $PROGRAM_NAME == __FILE__
