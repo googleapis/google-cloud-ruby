@@ -41,6 +41,8 @@ module Google
             end
           end
         end
+        # Alias for SubscriptionAdmin. Subscriber is a legacy name for this service,
+        # maintained for backwards compatibility.
         Subscriber = SubscriptionAdmin
       end
     end

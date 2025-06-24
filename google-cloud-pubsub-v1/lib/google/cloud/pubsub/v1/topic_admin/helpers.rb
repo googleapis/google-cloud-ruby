@@ -41,6 +41,8 @@ module Google
             end
           end
         end
+        # Alias for TopicAdmin. Publisher is a legacy name for this service,
+        # maintained for backwards compatibility.
         Publisher = TopicAdmin
       end
     end
