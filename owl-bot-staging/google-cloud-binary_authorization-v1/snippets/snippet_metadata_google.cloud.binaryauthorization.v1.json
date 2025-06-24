@@ -1,0 +1,375 @@
+{
+  "client_library": {
+    "name": "google-cloud-binary_authorization-v1",
+    "version": "",
+    "language": "RUBY",
+    "apis": [
+      {
+        "id": "google.cloud.binaryauthorization.v1",
+        "version": "v1"
+      }
+    ]
+  },
+  "snippets": [
+    {
+      "region_tag": "binaryauthorization_v1_generated_BinauthzManagementService_GetPolicy_sync",
+      "title": "Snippet for the get_policy call in the BinauthzManagementService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::BinaryAuthorization::V1::BinauthzManagementService::Client#get_policy.",
+      "file": "binauthz_management_service/get_policy.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_policy",
+        "full_name": "::Google::Cloud::BinaryAuthorization::V1::BinauthzManagementService::Client#get_policy",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::BinaryAuthorization::V1::GetPolicyRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::BinaryAuthorization::V1::Policy",
+        "client": {
+          "short_name": "BinauthzManagementService::Client",
+          "full_name": "::Google::Cloud::BinaryAuthorization::V1::BinauthzManagementService::Client"
+        },
+        "method": {
+          "short_name": "GetPolicy",
+          "full_name": "google.cloud.binaryauthorization.v1.BinauthzManagementServiceV1.GetPolicy",
+          "service": {
+            "short_name": "BinauthzManagementService",
+            "full_name": "google.cloud.binaryauthorization.v1.BinauthzManagementServiceV1"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "binaryauthorization_v1_generated_BinauthzManagementService_UpdatePolicy_sync",
+      "title": "Snippet for the update_policy call in the BinauthzManagementService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::BinaryAuthorization::V1::BinauthzManagementService::Client#update_policy.",
+      "file": "binauthz_management_service/update_policy.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_policy",
+        "full_name": "::Google::Cloud::BinaryAuthorization::V1::BinauthzManagementService::Client#update_policy",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::BinaryAuthorization::V1::UpdatePolicyRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::BinaryAuthorization::V1::Policy",
+        "client": {
+          "short_name": "BinauthzManagementService::Client",
+          "full_name": "::Google::Cloud::BinaryAuthorization::V1::BinauthzManagementService::Client"
+        },
+        "method": {
+          "short_name": "UpdatePolicy",
+          "full_name": "google.cloud.binaryauthorization.v1.BinauthzManagementServiceV1.UpdatePolicy",
+          "service": {
+            "short_name": "BinauthzManagementService",
+            "full_name": "google.cloud.binaryauthorization.v1.BinauthzManagementServiceV1"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "binaryauthorization_v1_generated_BinauthzManagementService_CreateAttestor_sync",
+      "title": "Snippet for the create_attestor call in the BinauthzManagementService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::BinaryAuthorization::V1::BinauthzManagementService::Client#create_attestor.",
+      "file": "binauthz_management_service/create_attestor.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_attestor",
+        "full_name": "::Google::Cloud::BinaryAuthorization::V1::BinauthzManagementService::Client#create_attestor",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::BinaryAuthorization::V1::CreateAttestorRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::BinaryAuthorization::V1::Attestor",
+        "client": {
+          "short_name": "BinauthzManagementService::Client",
+          "full_name": "::Google::Cloud::BinaryAuthorization::V1::BinauthzManagementService::Client"
+        },
+        "method": {
+          "short_name": "CreateAttestor",
+          "full_name": "google.cloud.binaryauthorization.v1.BinauthzManagementServiceV1.CreateAttestor",
+          "service": {
+            "short_name": "BinauthzManagementService",
+            "full_name": "google.cloud.binaryauthorization.v1.BinauthzManagementServiceV1"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "binaryauthorization_v1_generated_BinauthzManagementService_GetAttestor_sync",
+      "title": "Snippet for the get_attestor call in the BinauthzManagementService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::BinaryAuthorization::V1::BinauthzManagementService::Client#get_attestor.",
+      "file": "binauthz_management_service/get_attestor.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_attestor",
+        "full_name": "::Google::Cloud::BinaryAuthorization::V1::BinauthzManagementService::Client#get_attestor",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::BinaryAuthorization::V1::GetAttestorRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::BinaryAuthorization::V1::Attestor",
+        "client": {
+          "short_name": "BinauthzManagementService::Client",
+          "full_name": "::Google::Cloud::BinaryAuthorization::V1::BinauthzManagementService::Client"
+        },
+        "method": {
+          "short_name": "GetAttestor",
+          "full_name": "google.cloud.binaryauthorization.v1.BinauthzManagementServiceV1.GetAttestor",
+          "service": {
+            "short_name": "BinauthzManagementService",
+            "full_name": "google.cloud.binaryauthorization.v1.BinauthzManagementServiceV1"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "binaryauthorization_v1_generated_BinauthzManagementService_UpdateAttestor_sync",
+      "title": "Snippet for the update_attestor call in the BinauthzManagementService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::BinaryAuthorization::V1::BinauthzManagementService::Client#update_attestor.",
+      "file": "binauthz_management_service/update_attestor.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_attestor",
+        "full_name": "::Google::Cloud::BinaryAuthorization::V1::BinauthzManagementService::Client#update_attestor",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::BinaryAuthorization::V1::UpdateAttestorRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::BinaryAuthorization::V1::Attestor",
+        "client": {
+          "short_name": "BinauthzManagementService::Client",
+          "full_name": "::Google::Cloud::BinaryAuthorization::V1::BinauthzManagementService::Client"
+        },
+        "method": {
+          "short_name": "UpdateAttestor",
+          "full_name": "google.cloud.binaryauthorization.v1.BinauthzManagementServiceV1.UpdateAttestor",
+          "service": {
+            "short_name": "BinauthzManagementService",
+            "full_name": "google.cloud.binaryauthorization.v1.BinauthzManagementServiceV1"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "binaryauthorization_v1_generated_BinauthzManagementService_ListAttestors_sync",
+      "title": "Snippet for the list_attestors call in the BinauthzManagementService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::BinaryAuthorization::V1::BinauthzManagementService::Client#list_attestors.",
+      "file": "binauthz_management_service/list_attestors.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_attestors",
+        "full_name": "::Google::Cloud::BinaryAuthorization::V1::BinauthzManagementService::Client#list_attestors",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::BinaryAuthorization::V1::ListAttestorsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::BinaryAuthorization::V1::ListAttestorsResponse",
+        "client": {
+          "short_name": "BinauthzManagementService::Client",
+          "full_name": "::Google::Cloud::BinaryAuthorization::V1::BinauthzManagementService::Client"
+        },
+        "method": {
+          "short_name": "ListAttestors",
+          "full_name": "google.cloud.binaryauthorization.v1.BinauthzManagementServiceV1.ListAttestors",
+          "service": {
+            "short_name": "BinauthzManagementService",
+            "full_name": "google.cloud.binaryauthorization.v1.BinauthzManagementServiceV1"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "binaryauthorization_v1_generated_BinauthzManagementService_DeleteAttestor_sync",
+      "title": "Snippet for the delete_attestor call in the BinauthzManagementService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::BinaryAuthorization::V1::BinauthzManagementService::Client#delete_attestor.",
+      "file": "binauthz_management_service/delete_attestor.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_attestor",
+        "full_name": "::Google::Cloud::BinaryAuthorization::V1::BinauthzManagementService::Client#delete_attestor",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::BinaryAuthorization::V1::DeleteAttestorRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Protobuf::Empty",
+        "client": {
+          "short_name": "BinauthzManagementService::Client",
+          "full_name": "::Google::Cloud::BinaryAuthorization::V1::BinauthzManagementService::Client"
+        },
+        "method": {
+          "short_name": "DeleteAttestor",
+          "full_name": "google.cloud.binaryauthorization.v1.BinauthzManagementServiceV1.DeleteAttestor",
+          "service": {
+            "short_name": "BinauthzManagementService",
+            "full_name": "google.cloud.binaryauthorization.v1.BinauthzManagementServiceV1"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "binaryauthorization_v1_generated_SystemPolicy_GetSystemPolicy_sync",
+      "title": "Snippet for the get_system_policy call in the SystemPolicy service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::BinaryAuthorization::V1::SystemPolicy::Client#get_system_policy.",
+      "file": "system_policy/get_system_policy.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_system_policy",
+        "full_name": "::Google::Cloud::BinaryAuthorization::V1::SystemPolicy::Client#get_system_policy",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::BinaryAuthorization::V1::GetSystemPolicyRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::BinaryAuthorization::V1::Policy",
+        "client": {
+          "short_name": "SystemPolicy::Client",
+          "full_name": "::Google::Cloud::BinaryAuthorization::V1::SystemPolicy::Client"
+        },
+        "method": {
+          "short_name": "GetSystemPolicy",
+          "full_name": "google.cloud.binaryauthorization.v1.SystemPolicyV1.GetSystemPolicy",
+          "service": {
+            "short_name": "SystemPolicy",
+            "full_name": "google.cloud.binaryauthorization.v1.SystemPolicyV1"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "binaryauthorization_v1_generated_ValidationHelper_ValidateAttestationOccurrence_sync",
+      "title": "Snippet for the validate_attestation_occurrence call in the ValidationHelper service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::BinaryAuthorization::V1::ValidationHelper::Client#validate_attestation_occurrence.",
+      "file": "validation_helper/validate_attestation_occurrence.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "validate_attestation_occurrence",
+        "full_name": "::Google::Cloud::BinaryAuthorization::V1::ValidationHelper::Client#validate_attestation_occurrence",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::BinaryAuthorization::V1::ValidateAttestationOccurrenceRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::BinaryAuthorization::V1::ValidateAttestationOccurrenceResponse",
+        "client": {
+          "short_name": "ValidationHelper::Client",
+          "full_name": "::Google::Cloud::BinaryAuthorization::V1::ValidationHelper::Client"
+        },
+        "method": {
+          "short_name": "ValidateAttestationOccurrence",
+          "full_name": "google.cloud.binaryauthorization.v1.ValidationHelperV1.ValidateAttestationOccurrence",
+          "service": {
+            "short_name": "ValidationHelper",
+            "full_name": "google.cloud.binaryauthorization.v1.ValidationHelperV1"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    }
+  ]
+}
