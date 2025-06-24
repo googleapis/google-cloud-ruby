@@ -1,0 +1,1175 @@
+{
+  "client_library": {
+    "name": "google-cloud-developer_connect-v1",
+    "version": "",
+    "language": "RUBY",
+    "apis": [
+      {
+        "id": "google.cloud.developerconnect.v1",
+        "version": "v1"
+      }
+    ]
+  },
+  "snippets": [
+    {
+      "region_tag": "developerconnect_v1_generated_DeveloperConnect_ListConnections_sync",
+      "title": "Snippet for the list_connections call in the DeveloperConnect service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DeveloperConnect::V1::DeveloperConnect::Client#list_connections.",
+      "file": "developer_connect/list_connections.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_connections",
+        "full_name": "::Google::Cloud::DeveloperConnect::V1::DeveloperConnect::Client#list_connections",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::DeveloperConnect::V1::ListConnectionsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::DeveloperConnect::V1::ListConnectionsResponse",
+        "client": {
+          "short_name": "DeveloperConnect::Client",
+          "full_name": "::Google::Cloud::DeveloperConnect::V1::DeveloperConnect::Client"
+        },
+        "method": {
+          "short_name": "ListConnections",
+          "full_name": "google.cloud.developerconnect.v1.DeveloperConnect.ListConnections",
+          "service": {
+            "short_name": "DeveloperConnect",
+            "full_name": "google.cloud.developerconnect.v1.DeveloperConnect"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "developerconnect_v1_generated_DeveloperConnect_GetConnection_sync",
+      "title": "Snippet for the get_connection call in the DeveloperConnect service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DeveloperConnect::V1::DeveloperConnect::Client#get_connection.",
+      "file": "developer_connect/get_connection.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_connection",
+        "full_name": "::Google::Cloud::DeveloperConnect::V1::DeveloperConnect::Client#get_connection",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::DeveloperConnect::V1::GetConnectionRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::DeveloperConnect::V1::Connection",
+        "client": {
+          "short_name": "DeveloperConnect::Client",
+          "full_name": "::Google::Cloud::DeveloperConnect::V1::DeveloperConnect::Client"
+        },
+        "method": {
+          "short_name": "GetConnection",
+          "full_name": "google.cloud.developerconnect.v1.DeveloperConnect.GetConnection",
+          "service": {
+            "short_name": "DeveloperConnect",
+            "full_name": "google.cloud.developerconnect.v1.DeveloperConnect"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "developerconnect_v1_generated_DeveloperConnect_CreateConnection_sync",
+      "title": "Snippet for the create_connection call in the DeveloperConnect service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DeveloperConnect::V1::DeveloperConnect::Client#create_connection.",
+      "file": "developer_connect/create_connection.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_connection",
+        "full_name": "::Google::Cloud::DeveloperConnect::V1::DeveloperConnect::Client#create_connection",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::DeveloperConnect::V1::CreateConnectionRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "DeveloperConnect::Client",
+          "full_name": "::Google::Cloud::DeveloperConnect::V1::DeveloperConnect::Client"
+        },
+        "method": {
+          "short_name": "CreateConnection",
+          "full_name": "google.cloud.developerconnect.v1.DeveloperConnect.CreateConnection",
+          "service": {
+            "short_name": "DeveloperConnect",
+            "full_name": "google.cloud.developerconnect.v1.DeveloperConnect"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "developerconnect_v1_generated_DeveloperConnect_UpdateConnection_sync",
+      "title": "Snippet for the update_connection call in the DeveloperConnect service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DeveloperConnect::V1::DeveloperConnect::Client#update_connection.",
+      "file": "developer_connect/update_connection.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_connection",
+        "full_name": "::Google::Cloud::DeveloperConnect::V1::DeveloperConnect::Client#update_connection",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::DeveloperConnect::V1::UpdateConnectionRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "DeveloperConnect::Client",
+          "full_name": "::Google::Cloud::DeveloperConnect::V1::DeveloperConnect::Client"
+        },
+        "method": {
+          "short_name": "UpdateConnection",
+          "full_name": "google.cloud.developerconnect.v1.DeveloperConnect.UpdateConnection",
+          "service": {
+            "short_name": "DeveloperConnect",
+            "full_name": "google.cloud.developerconnect.v1.DeveloperConnect"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "developerconnect_v1_generated_DeveloperConnect_DeleteConnection_sync",
+      "title": "Snippet for the delete_connection call in the DeveloperConnect service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DeveloperConnect::V1::DeveloperConnect::Client#delete_connection.",
+      "file": "developer_connect/delete_connection.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_connection",
+        "full_name": "::Google::Cloud::DeveloperConnect::V1::DeveloperConnect::Client#delete_connection",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::DeveloperConnect::V1::DeleteConnectionRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "DeveloperConnect::Client",
+          "full_name": "::Google::Cloud::DeveloperConnect::V1::DeveloperConnect::Client"
+        },
+        "method": {
+          "short_name": "DeleteConnection",
+          "full_name": "google.cloud.developerconnect.v1.DeveloperConnect.DeleteConnection",
+          "service": {
+            "short_name": "DeveloperConnect",
+            "full_name": "google.cloud.developerconnect.v1.DeveloperConnect"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "developerconnect_v1_generated_DeveloperConnect_CreateGitRepositoryLink_sync",
+      "title": "Snippet for the create_git_repository_link call in the DeveloperConnect service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DeveloperConnect::V1::DeveloperConnect::Client#create_git_repository_link.",
+      "file": "developer_connect/create_git_repository_link.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_git_repository_link",
+        "full_name": "::Google::Cloud::DeveloperConnect::V1::DeveloperConnect::Client#create_git_repository_link",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::DeveloperConnect::V1::CreateGitRepositoryLinkRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "DeveloperConnect::Client",
+          "full_name": "::Google::Cloud::DeveloperConnect::V1::DeveloperConnect::Client"
+        },
+        "method": {
+          "short_name": "CreateGitRepositoryLink",
+          "full_name": "google.cloud.developerconnect.v1.DeveloperConnect.CreateGitRepositoryLink",
+          "service": {
+            "short_name": "DeveloperConnect",
+            "full_name": "google.cloud.developerconnect.v1.DeveloperConnect"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "developerconnect_v1_generated_DeveloperConnect_DeleteGitRepositoryLink_sync",
+      "title": "Snippet for the delete_git_repository_link call in the DeveloperConnect service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DeveloperConnect::V1::DeveloperConnect::Client#delete_git_repository_link.",
+      "file": "developer_connect/delete_git_repository_link.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_git_repository_link",
+        "full_name": "::Google::Cloud::DeveloperConnect::V1::DeveloperConnect::Client#delete_git_repository_link",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::DeveloperConnect::V1::DeleteGitRepositoryLinkRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "DeveloperConnect::Client",
+          "full_name": "::Google::Cloud::DeveloperConnect::V1::DeveloperConnect::Client"
+        },
+        "method": {
+          "short_name": "DeleteGitRepositoryLink",
+          "full_name": "google.cloud.developerconnect.v1.DeveloperConnect.DeleteGitRepositoryLink",
+          "service": {
+            "short_name": "DeveloperConnect",
+            "full_name": "google.cloud.developerconnect.v1.DeveloperConnect"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "developerconnect_v1_generated_DeveloperConnect_ListGitRepositoryLinks_sync",
+      "title": "Snippet for the list_git_repository_links call in the DeveloperConnect service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DeveloperConnect::V1::DeveloperConnect::Client#list_git_repository_links.",
+      "file": "developer_connect/list_git_repository_links.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_git_repository_links",
+        "full_name": "::Google::Cloud::DeveloperConnect::V1::DeveloperConnect::Client#list_git_repository_links",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::DeveloperConnect::V1::ListGitRepositoryLinksRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::DeveloperConnect::V1::ListGitRepositoryLinksResponse",
+        "client": {
+          "short_name": "DeveloperConnect::Client",
+          "full_name": "::Google::Cloud::DeveloperConnect::V1::DeveloperConnect::Client"
+        },
+        "method": {
+          "short_name": "ListGitRepositoryLinks",
+          "full_name": "google.cloud.developerconnect.v1.DeveloperConnect.ListGitRepositoryLinks",
+          "service": {
+            "short_name": "DeveloperConnect",
+            "full_name": "google.cloud.developerconnect.v1.DeveloperConnect"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "developerconnect_v1_generated_DeveloperConnect_GetGitRepositoryLink_sync",
+      "title": "Snippet for the get_git_repository_link call in the DeveloperConnect service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DeveloperConnect::V1::DeveloperConnect::Client#get_git_repository_link.",
+      "file": "developer_connect/get_git_repository_link.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_git_repository_link",
+        "full_name": "::Google::Cloud::DeveloperConnect::V1::DeveloperConnect::Client#get_git_repository_link",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::DeveloperConnect::V1::GetGitRepositoryLinkRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::DeveloperConnect::V1::GitRepositoryLink",
+        "client": {
+          "short_name": "DeveloperConnect::Client",
+          "full_name": "::Google::Cloud::DeveloperConnect::V1::DeveloperConnect::Client"
+        },
+        "method": {
+          "short_name": "GetGitRepositoryLink",
+          "full_name": "google.cloud.developerconnect.v1.DeveloperConnect.GetGitRepositoryLink",
+          "service": {
+            "short_name": "DeveloperConnect",
+            "full_name": "google.cloud.developerconnect.v1.DeveloperConnect"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "developerconnect_v1_generated_DeveloperConnect_FetchReadWriteToken_sync",
+      "title": "Snippet for the fetch_read_write_token call in the DeveloperConnect service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DeveloperConnect::V1::DeveloperConnect::Client#fetch_read_write_token.",
+      "file": "developer_connect/fetch_read_write_token.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "fetch_read_write_token",
+        "full_name": "::Google::Cloud::DeveloperConnect::V1::DeveloperConnect::Client#fetch_read_write_token",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::DeveloperConnect::V1::FetchReadWriteTokenRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::DeveloperConnect::V1::FetchReadWriteTokenResponse",
+        "client": {
+          "short_name": "DeveloperConnect::Client",
+          "full_name": "::Google::Cloud::DeveloperConnect::V1::DeveloperConnect::Client"
+        },
+        "method": {
+          "short_name": "FetchReadWriteToken",
+          "full_name": "google.cloud.developerconnect.v1.DeveloperConnect.FetchReadWriteToken",
+          "service": {
+            "short_name": "DeveloperConnect",
+            "full_name": "google.cloud.developerconnect.v1.DeveloperConnect"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "developerconnect_v1_generated_DeveloperConnect_FetchReadToken_sync",
+      "title": "Snippet for the fetch_read_token call in the DeveloperConnect service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DeveloperConnect::V1::DeveloperConnect::Client#fetch_read_token.",
+      "file": "developer_connect/fetch_read_token.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "fetch_read_token",
+        "full_name": "::Google::Cloud::DeveloperConnect::V1::DeveloperConnect::Client#fetch_read_token",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::DeveloperConnect::V1::FetchReadTokenRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::DeveloperConnect::V1::FetchReadTokenResponse",
+        "client": {
+          "short_name": "DeveloperConnect::Client",
+          "full_name": "::Google::Cloud::DeveloperConnect::V1::DeveloperConnect::Client"
+        },
+        "method": {
+          "short_name": "FetchReadToken",
+          "full_name": "google.cloud.developerconnect.v1.DeveloperConnect.FetchReadToken",
+          "service": {
+            "short_name": "DeveloperConnect",
+            "full_name": "google.cloud.developerconnect.v1.DeveloperConnect"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "developerconnect_v1_generated_DeveloperConnect_FetchLinkableGitRepositories_sync",
+      "title": "Snippet for the fetch_linkable_git_repositories call in the DeveloperConnect service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DeveloperConnect::V1::DeveloperConnect::Client#fetch_linkable_git_repositories.",
+      "file": "developer_connect/fetch_linkable_git_repositories.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "fetch_linkable_git_repositories",
+        "full_name": "::Google::Cloud::DeveloperConnect::V1::DeveloperConnect::Client#fetch_linkable_git_repositories",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::DeveloperConnect::V1::FetchLinkableGitRepositoriesRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::DeveloperConnect::V1::FetchLinkableGitRepositoriesResponse",
+        "client": {
+          "short_name": "DeveloperConnect::Client",
+          "full_name": "::Google::Cloud::DeveloperConnect::V1::DeveloperConnect::Client"
+        },
+        "method": {
+          "short_name": "FetchLinkableGitRepositories",
+          "full_name": "google.cloud.developerconnect.v1.DeveloperConnect.FetchLinkableGitRepositories",
+          "service": {
+            "short_name": "DeveloperConnect",
+            "full_name": "google.cloud.developerconnect.v1.DeveloperConnect"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "developerconnect_v1_generated_DeveloperConnect_FetchGitHubInstallations_sync",
+      "title": "Snippet for the fetch_git_hub_installations call in the DeveloperConnect service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DeveloperConnect::V1::DeveloperConnect::Client#fetch_git_hub_installations.",
+      "file": "developer_connect/fetch_git_hub_installations.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "fetch_git_hub_installations",
+        "full_name": "::Google::Cloud::DeveloperConnect::V1::DeveloperConnect::Client#fetch_git_hub_installations",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::DeveloperConnect::V1::FetchGitHubInstallationsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::DeveloperConnect::V1::FetchGitHubInstallationsResponse",
+        "client": {
+          "short_name": "DeveloperConnect::Client",
+          "full_name": "::Google::Cloud::DeveloperConnect::V1::DeveloperConnect::Client"
+        },
+        "method": {
+          "short_name": "FetchGitHubInstallations",
+          "full_name": "google.cloud.developerconnect.v1.DeveloperConnect.FetchGitHubInstallations",
+          "service": {
+            "short_name": "DeveloperConnect",
+            "full_name": "google.cloud.developerconnect.v1.DeveloperConnect"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "developerconnect_v1_generated_DeveloperConnect_FetchGitRefs_sync",
+      "title": "Snippet for the fetch_git_refs call in the DeveloperConnect service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DeveloperConnect::V1::DeveloperConnect::Client#fetch_git_refs.",
+      "file": "developer_connect/fetch_git_refs.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "fetch_git_refs",
+        "full_name": "::Google::Cloud::DeveloperConnect::V1::DeveloperConnect::Client#fetch_git_refs",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::DeveloperConnect::V1::FetchGitRefsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::DeveloperConnect::V1::FetchGitRefsResponse",
+        "client": {
+          "short_name": "DeveloperConnect::Client",
+          "full_name": "::Google::Cloud::DeveloperConnect::V1::DeveloperConnect::Client"
+        },
+        "method": {
+          "short_name": "FetchGitRefs",
+          "full_name": "google.cloud.developerconnect.v1.DeveloperConnect.FetchGitRefs",
+          "service": {
+            "short_name": "DeveloperConnect",
+            "full_name": "google.cloud.developerconnect.v1.DeveloperConnect"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "developerconnect_v1_generated_DeveloperConnect_ListAccountConnectors_sync",
+      "title": "Snippet for the list_account_connectors call in the DeveloperConnect service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DeveloperConnect::V1::DeveloperConnect::Client#list_account_connectors.",
+      "file": "developer_connect/list_account_connectors.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_account_connectors",
+        "full_name": "::Google::Cloud::DeveloperConnect::V1::DeveloperConnect::Client#list_account_connectors",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::DeveloperConnect::V1::ListAccountConnectorsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::DeveloperConnect::V1::ListAccountConnectorsResponse",
+        "client": {
+          "short_name": "DeveloperConnect::Client",
+          "full_name": "::Google::Cloud::DeveloperConnect::V1::DeveloperConnect::Client"
+        },
+        "method": {
+          "short_name": "ListAccountConnectors",
+          "full_name": "google.cloud.developerconnect.v1.DeveloperConnect.ListAccountConnectors",
+          "service": {
+            "short_name": "DeveloperConnect",
+            "full_name": "google.cloud.developerconnect.v1.DeveloperConnect"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "developerconnect_v1_generated_DeveloperConnect_GetAccountConnector_sync",
+      "title": "Snippet for the get_account_connector call in the DeveloperConnect service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DeveloperConnect::V1::DeveloperConnect::Client#get_account_connector.",
+      "file": "developer_connect/get_account_connector.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_account_connector",
+        "full_name": "::Google::Cloud::DeveloperConnect::V1::DeveloperConnect::Client#get_account_connector",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::DeveloperConnect::V1::GetAccountConnectorRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::DeveloperConnect::V1::AccountConnector",
+        "client": {
+          "short_name": "DeveloperConnect::Client",
+          "full_name": "::Google::Cloud::DeveloperConnect::V1::DeveloperConnect::Client"
+        },
+        "method": {
+          "short_name": "GetAccountConnector",
+          "full_name": "google.cloud.developerconnect.v1.DeveloperConnect.GetAccountConnector",
+          "service": {
+            "short_name": "DeveloperConnect",
+            "full_name": "google.cloud.developerconnect.v1.DeveloperConnect"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "developerconnect_v1_generated_DeveloperConnect_CreateAccountConnector_sync",
+      "title": "Snippet for the create_account_connector call in the DeveloperConnect service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DeveloperConnect::V1::DeveloperConnect::Client#create_account_connector.",
+      "file": "developer_connect/create_account_connector.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_account_connector",
+        "full_name": "::Google::Cloud::DeveloperConnect::V1::DeveloperConnect::Client#create_account_connector",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::DeveloperConnect::V1::CreateAccountConnectorRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "DeveloperConnect::Client",
+          "full_name": "::Google::Cloud::DeveloperConnect::V1::DeveloperConnect::Client"
+        },
+        "method": {
+          "short_name": "CreateAccountConnector",
+          "full_name": "google.cloud.developerconnect.v1.DeveloperConnect.CreateAccountConnector",
+          "service": {
+            "short_name": "DeveloperConnect",
+            "full_name": "google.cloud.developerconnect.v1.DeveloperConnect"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "developerconnect_v1_generated_DeveloperConnect_UpdateAccountConnector_sync",
+      "title": "Snippet for the update_account_connector call in the DeveloperConnect service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DeveloperConnect::V1::DeveloperConnect::Client#update_account_connector.",
+      "file": "developer_connect/update_account_connector.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_account_connector",
+        "full_name": "::Google::Cloud::DeveloperConnect::V1::DeveloperConnect::Client#update_account_connector",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::DeveloperConnect::V1::UpdateAccountConnectorRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "DeveloperConnect::Client",
+          "full_name": "::Google::Cloud::DeveloperConnect::V1::DeveloperConnect::Client"
+        },
+        "method": {
+          "short_name": "UpdateAccountConnector",
+          "full_name": "google.cloud.developerconnect.v1.DeveloperConnect.UpdateAccountConnector",
+          "service": {
+            "short_name": "DeveloperConnect",
+            "full_name": "google.cloud.developerconnect.v1.DeveloperConnect"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "developerconnect_v1_generated_DeveloperConnect_DeleteAccountConnector_sync",
+      "title": "Snippet for the delete_account_connector call in the DeveloperConnect service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DeveloperConnect::V1::DeveloperConnect::Client#delete_account_connector.",
+      "file": "developer_connect/delete_account_connector.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_account_connector",
+        "full_name": "::Google::Cloud::DeveloperConnect::V1::DeveloperConnect::Client#delete_account_connector",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::DeveloperConnect::V1::DeleteAccountConnectorRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "DeveloperConnect::Client",
+          "full_name": "::Google::Cloud::DeveloperConnect::V1::DeveloperConnect::Client"
+        },
+        "method": {
+          "short_name": "DeleteAccountConnector",
+          "full_name": "google.cloud.developerconnect.v1.DeveloperConnect.DeleteAccountConnector",
+          "service": {
+            "short_name": "DeveloperConnect",
+            "full_name": "google.cloud.developerconnect.v1.DeveloperConnect"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "developerconnect_v1_generated_DeveloperConnect_FetchAccessToken_sync",
+      "title": "Snippet for the fetch_access_token call in the DeveloperConnect service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DeveloperConnect::V1::DeveloperConnect::Client#fetch_access_token.",
+      "file": "developer_connect/fetch_access_token.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "fetch_access_token",
+        "full_name": "::Google::Cloud::DeveloperConnect::V1::DeveloperConnect::Client#fetch_access_token",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::DeveloperConnect::V1::FetchAccessTokenRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::DeveloperConnect::V1::FetchAccessTokenResponse",
+        "client": {
+          "short_name": "DeveloperConnect::Client",
+          "full_name": "::Google::Cloud::DeveloperConnect::V1::DeveloperConnect::Client"
+        },
+        "method": {
+          "short_name": "FetchAccessToken",
+          "full_name": "google.cloud.developerconnect.v1.DeveloperConnect.FetchAccessToken",
+          "service": {
+            "short_name": "DeveloperConnect",
+            "full_name": "google.cloud.developerconnect.v1.DeveloperConnect"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "developerconnect_v1_generated_DeveloperConnect_ListUsers_sync",
+      "title": "Snippet for the list_users call in the DeveloperConnect service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DeveloperConnect::V1::DeveloperConnect::Client#list_users.",
+      "file": "developer_connect/list_users.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_users",
+        "full_name": "::Google::Cloud::DeveloperConnect::V1::DeveloperConnect::Client#list_users",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::DeveloperConnect::V1::ListUsersRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::DeveloperConnect::V1::ListUsersResponse",
+        "client": {
+          "short_name": "DeveloperConnect::Client",
+          "full_name": "::Google::Cloud::DeveloperConnect::V1::DeveloperConnect::Client"
+        },
+        "method": {
+          "short_name": "ListUsers",
+          "full_name": "google.cloud.developerconnect.v1.DeveloperConnect.ListUsers",
+          "service": {
+            "short_name": "DeveloperConnect",
+            "full_name": "google.cloud.developerconnect.v1.DeveloperConnect"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "developerconnect_v1_generated_DeveloperConnect_DeleteUser_sync",
+      "title": "Snippet for the delete_user call in the DeveloperConnect service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DeveloperConnect::V1::DeveloperConnect::Client#delete_user.",
+      "file": "developer_connect/delete_user.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_user",
+        "full_name": "::Google::Cloud::DeveloperConnect::V1::DeveloperConnect::Client#delete_user",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::DeveloperConnect::V1::DeleteUserRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "DeveloperConnect::Client",
+          "full_name": "::Google::Cloud::DeveloperConnect::V1::DeveloperConnect::Client"
+        },
+        "method": {
+          "short_name": "DeleteUser",
+          "full_name": "google.cloud.developerconnect.v1.DeveloperConnect.DeleteUser",
+          "service": {
+            "short_name": "DeveloperConnect",
+            "full_name": "google.cloud.developerconnect.v1.DeveloperConnect"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "developerconnect_v1_generated_DeveloperConnect_FetchSelf_sync",
+      "title": "Snippet for the fetch_self call in the DeveloperConnect service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DeveloperConnect::V1::DeveloperConnect::Client#fetch_self.",
+      "file": "developer_connect/fetch_self.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "fetch_self",
+        "full_name": "::Google::Cloud::DeveloperConnect::V1::DeveloperConnect::Client#fetch_self",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::DeveloperConnect::V1::FetchSelfRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::DeveloperConnect::V1::User",
+        "client": {
+          "short_name": "DeveloperConnect::Client",
+          "full_name": "::Google::Cloud::DeveloperConnect::V1::DeveloperConnect::Client"
+        },
+        "method": {
+          "short_name": "FetchSelf",
+          "full_name": "google.cloud.developerconnect.v1.DeveloperConnect.FetchSelf",
+          "service": {
+            "short_name": "DeveloperConnect",
+            "full_name": "google.cloud.developerconnect.v1.DeveloperConnect"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "developerconnect_v1_generated_DeveloperConnect_DeleteSelf_sync",
+      "title": "Snippet for the delete_self call in the DeveloperConnect service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DeveloperConnect::V1::DeveloperConnect::Client#delete_self.",
+      "file": "developer_connect/delete_self.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_self",
+        "full_name": "::Google::Cloud::DeveloperConnect::V1::DeveloperConnect::Client#delete_self",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::DeveloperConnect::V1::DeleteSelfRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "DeveloperConnect::Client",
+          "full_name": "::Google::Cloud::DeveloperConnect::V1::DeveloperConnect::Client"
+        },
+        "method": {
+          "short_name": "DeleteSelf",
+          "full_name": "google.cloud.developerconnect.v1.DeveloperConnect.DeleteSelf",
+          "service": {
+            "short_name": "DeveloperConnect",
+            "full_name": "google.cloud.developerconnect.v1.DeveloperConnect"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "developerconnect_v1_generated_InsightsConfigService_ListInsightsConfigs_sync",
+      "title": "Snippet for the list_insights_configs call in the InsightsConfigService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Developerconnect::V1::InsightsConfigService::Client#list_insights_configs.",
+      "file": "insights_config_service/list_insights_configs.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_insights_configs",
+        "full_name": "::Google::Cloud::Developerconnect::V1::InsightsConfigService::Client#list_insights_configs",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Developerconnect::V1::ListInsightsConfigsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Developerconnect::V1::ListInsightsConfigsResponse",
+        "client": {
+          "short_name": "InsightsConfigService::Client",
+          "full_name": "::Google::Cloud::Developerconnect::V1::InsightsConfigService::Client"
+        },
+        "method": {
+          "short_name": "ListInsightsConfigs",
+          "full_name": "google.cloud.developerconnect.v1.InsightsConfigService.ListInsightsConfigs",
+          "service": {
+            "short_name": "InsightsConfigService",
+            "full_name": "google.cloud.developerconnect.v1.InsightsConfigService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "developerconnect_v1_generated_InsightsConfigService_CreateInsightsConfig_sync",
+      "title": "Snippet for the create_insights_config call in the InsightsConfigService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Developerconnect::V1::InsightsConfigService::Client#create_insights_config.",
+      "file": "insights_config_service/create_insights_config.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_insights_config",
+        "full_name": "::Google::Cloud::Developerconnect::V1::InsightsConfigService::Client#create_insights_config",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Developerconnect::V1::CreateInsightsConfigRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "InsightsConfigService::Client",
+          "full_name": "::Google::Cloud::Developerconnect::V1::InsightsConfigService::Client"
+        },
+        "method": {
+          "short_name": "CreateInsightsConfig",
+          "full_name": "google.cloud.developerconnect.v1.InsightsConfigService.CreateInsightsConfig",
+          "service": {
+            "short_name": "InsightsConfigService",
+            "full_name": "google.cloud.developerconnect.v1.InsightsConfigService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "developerconnect_v1_generated_InsightsConfigService_GetInsightsConfig_sync",
+      "title": "Snippet for the get_insights_config call in the InsightsConfigService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Developerconnect::V1::InsightsConfigService::Client#get_insights_config.",
+      "file": "insights_config_service/get_insights_config.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_insights_config",
+        "full_name": "::Google::Cloud::Developerconnect::V1::InsightsConfigService::Client#get_insights_config",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Developerconnect::V1::GetInsightsConfigRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Developerconnect::V1::InsightsConfig",
+        "client": {
+          "short_name": "InsightsConfigService::Client",
+          "full_name": "::Google::Cloud::Developerconnect::V1::InsightsConfigService::Client"
+        },
+        "method": {
+          "short_name": "GetInsightsConfig",
+          "full_name": "google.cloud.developerconnect.v1.InsightsConfigService.GetInsightsConfig",
+          "service": {
+            "short_name": "InsightsConfigService",
+            "full_name": "google.cloud.developerconnect.v1.InsightsConfigService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "developerconnect_v1_generated_InsightsConfigService_UpdateInsightsConfig_sync",
+      "title": "Snippet for the update_insights_config call in the InsightsConfigService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Developerconnect::V1::InsightsConfigService::Client#update_insights_config.",
+      "file": "insights_config_service/update_insights_config.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_insights_config",
+        "full_name": "::Google::Cloud::Developerconnect::V1::InsightsConfigService::Client#update_insights_config",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Developerconnect::V1::UpdateInsightsConfigRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "InsightsConfigService::Client",
+          "full_name": "::Google::Cloud::Developerconnect::V1::InsightsConfigService::Client"
+        },
+        "method": {
+          "short_name": "UpdateInsightsConfig",
+          "full_name": "google.cloud.developerconnect.v1.InsightsConfigService.UpdateInsightsConfig",
+          "service": {
+            "short_name": "InsightsConfigService",
+            "full_name": "google.cloud.developerconnect.v1.InsightsConfigService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "developerconnect_v1_generated_InsightsConfigService_DeleteInsightsConfig_sync",
+      "title": "Snippet for the delete_insights_config call in the InsightsConfigService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Developerconnect::V1::InsightsConfigService::Client#delete_insights_config.",
+      "file": "insights_config_service/delete_insights_config.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_insights_config",
+        "full_name": "::Google::Cloud::Developerconnect::V1::InsightsConfigService::Client#delete_insights_config",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Developerconnect::V1::DeleteInsightsConfigRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "InsightsConfigService::Client",
+          "full_name": "::Google::Cloud::Developerconnect::V1::InsightsConfigService::Client"
+        },
+        "method": {
+          "short_name": "DeleteInsightsConfig",
+          "full_name": "google.cloud.developerconnect.v1.InsightsConfigService.DeleteInsightsConfig",
+          "service": {
+            "short_name": "InsightsConfigService",
+            "full_name": "google.cloud.developerconnect.v1.InsightsConfigService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    }
+  ]
+}
