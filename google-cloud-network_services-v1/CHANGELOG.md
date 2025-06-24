@@ -1,5 +1,14 @@
 # Changelog
 
+### 2.3.0 (2025-06-24)
+
+#### Features
+
+* Support for extension metadata 
+* Support for RPCs for managing AuthzExtensions 
+* Support for RPCs for managing WasmPlugins 
+* Support for RPCs for managing WasmPluginVersions 
+
 ### 2.2.0 (2025-06-16)
 
 #### Features
