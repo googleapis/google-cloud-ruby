@@ -623,7 +623,7 @@ module Google
         #   @return [::String]
         #     Optional. The ISO-639 language code of the input document if known, for
         #     example, "en-US" or "sr-Latn". Supported language codes are listed in
-        #     [Language Support] (https://cloud.google.com/translate/docs/languages). If
+        #     [Language Support](https://cloud.google.com/translate/docs/languages). If
         #     the source language isn't specified, the API attempts to identify the
         #     source language automatically and returns the source language within the
         #     response. Source language must be specified if the request contains a
@@ -631,8 +631,8 @@ module Google
         # @!attribute [rw] target_language_code
         #   @return [::String]
         #     Required. The ISO-639 language code to use for translation of the input
-        #     document, set to one of the language codes listed in [Language Support]
-        #     (https://cloud.google.com/translate/docs/languages).
+        #     document, set to one of the language codes listed in [Language
+        #     Support](https://cloud.google.com/translate/docs/languages).
         # @!attribute [rw] document_input_config
         #   @return [::Google::Cloud::Translate::V3::DocumentInputConfig]
         #     Required. Input configurations.
