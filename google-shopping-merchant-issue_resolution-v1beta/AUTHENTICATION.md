@@ -56,7 +56,7 @@ To configure a credentials file for an individual client initialization:
 ```ruby
 require "google/shopping/merchant/issue_resolution/v1beta"
 
-client = ::Google::Shopping::Merchant::IssueResolution::V1beta::IssueResolutionService::Client.new do |config|
+client = ::Google::Shopping::Merchant::IssueResolution::V1beta::AggregateProductStatusesService::Client.new do |config|
   config.credentials = "path/to/credentialfile.json"
 end
 ```
@@ -66,11 +66,11 @@ To configure a credentials file globally for all clients:
 ```ruby
 require "google/shopping/merchant/issue_resolution/v1beta"
 
-::Google::Shopping::Merchant::IssueResolution::V1beta::IssueResolutionService::Client.configure do |config|
+::Google::Shopping::Merchant::IssueResolution::V1beta::AggregateProductStatusesService::Client.configure do |config|
   config.credentials = "path/to/credentialfile.json"
 end
 
-client = ::Google::Shopping::Merchant::IssueResolution::V1beta::IssueResolutionService::Client.new
+client = ::Google::Shopping::Merchant::IssueResolution::V1beta::AggregateProductStatusesService::Client.new
 ```
 
 ### Environment Variables
@@ -100,7 +100,7 @@ require "google/shopping/merchant/issue_resolution/v1beta"
 
 ENV["GOOGLE_APPLICATION_CREDENTIALS"] = "path/to/credentialfile.json"
 
-client = ::Google::Shopping::Merchant::IssueResolution::V1beta::IssueResolutionService::Client.new
+client = ::Google::Shopping::Merchant::IssueResolution::V1beta::AggregateProductStatusesService::Client.new
 ```
 
 ### Local ADC file
