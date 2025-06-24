@@ -1,0 +1,18 @@
+{
+    "api_id": "videointelligence.googleapis.com",
+    "api_shortname": "videointelligence",
+    "client_documentation": "https://cloud.google.com/ruby/docs/reference/google-cloud-video_intelligence-v1p1beta1/latest",
+    "distribution_name": "google-cloud-video_intelligence-v1p1beta1",
+    "is_cloud": true,
+    "language": "ruby",
+    "name": "videointelligence",
+    "name_pretty": "Cloud Video Intelligence V1p1beta1 API",
+    "product_documentation": "https://cloud.google.com/video-intelligence",
+    "release_level": "unreleased",
+    "repo": "googleapis/google-cloud-ruby",
+    "requires_billing": true,
+    "ruby-cloud-description": "Detects objects, explicit content, and scene changes in videos. It also specifies the region for annotation and transcribes speech to text. Supports both asynchronous API and streaming API. Note that google-cloud-video_intelligence-v1p1beta1 is a version-specific client library. For most uses, we recommend installing the main client library google-cloud-video_intelligence instead. See the readme for more details.",
+    "ruby-cloud-env-prefix": "VIDEO_INTELLIGENCE",
+    "ruby-cloud-product-url": "https://cloud.google.com/video-intelligence",
+    "library_type": "GAPIC_AUTO"
+}
