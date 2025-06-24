@@ -1,5 +1,19 @@
 # Changelog
 
+### 0.17.0 (2025-06-24)
+
+#### Features
+
+* Additional instance network configs 
+* Support cluster activation policy 
+* Support deny maintenance periods 
+* Support for assisted experiences 
+* Support managed connection pool config 
+* Support per-cluster service agents 
+#### Documentation
+
+* Deprecated GeminiClusterConfig and GeminiInstanceConfig 
+
 ### 0.16.0 (2025-05-16)
 
 #### Features
