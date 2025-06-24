@@ -1,0 +1,19 @@
+{
+    "api_id": "logging.googleapis.com",
+    "api_shortname": "logging",
+    "client_documentation": "https://cloud.google.com/ruby/docs/reference/google-cloud-logging-v2/latest",
+    "distribution_name": "google-cloud-logging-v2",
+    "is_cloud": true,
+    "language": "ruby",
+    "name": "logging",
+    "name_pretty": "Cloud Logging V2 API",
+    "product_documentation": "https://cloud.google.com/logging",
+    "release_level": "unreleased",
+    "repo": "googleapis/google-cloud-ruby",
+    "requires_billing": true,
+    "ruby-cloud-description": "The Cloud Logging API lets you programmatically read and write log entries, set up exclusions, create logs-based metrics, and manage export sinks. Note that google-cloud-logging-v2 is a version-specific client library. For most uses, we recommend installing the main client library google-cloud-logging instead. See the readme for more details.",
+    "ruby-cloud-env-prefix": "LOGGING",
+    "ruby-cloud-product-url": "https://cloud.google.com/logging",
+    "ruby-cloud-service-override": "ConfigServiceV2=ConfigService;LoggingServiceV2=LoggingService;MetricsServiceV2=MetricsService",
+    "library_type": "GAPIC_AUTO"
+}

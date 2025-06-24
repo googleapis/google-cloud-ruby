@@ -1,0 +1,43 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "ruby",
+  "protoPackage": "google.cloud.language.v2",
+  "libraryPackage": "::Google::Cloud::Language::V2",
+  "services": {
+    "LanguageService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::Language::V2::LanguageService::Client",
+          "rpcs": {
+            "AnalyzeSentiment": {
+              "methods": [
+                "analyze_sentiment"
+              ]
+            },
+            "AnalyzeEntities": {
+              "methods": [
+                "analyze_entities"
+              ]
+            },
+            "ClassifyText": {
+              "methods": [
+                "classify_text"
+              ]
+            },
+            "ModerateText": {
+              "methods": [
+                "moderate_text"
+              ]
+            },
+            "AnnotateText": {
+              "methods": [
+                "annotate_text"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}
