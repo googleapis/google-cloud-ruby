@@ -1,5 +1,11 @@
 # Changelog
 
+### 1.4.1 (2025-06-24)
+
+#### Bug Fixes
+
+* Fixed transcoding for update_license_pool RPC ([#30441](https://github.com/googleapis/google-cloud-ruby/issues/30441)) 
+
 ### 1.4.0 (2025-05-12)
 
 #### Features
