@@ -386,6 +386,583 @@ class ::Google::Cloud::NetworkServices::V1::NetworkServices::ClientTest < Minite
     end
   end
 
+  def test_list_wasm_plugin_versions
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::NetworkServices::V1::ListWasmPluginVersionsResponse.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    page_size = 42
+    page_token = "hello world"
+
+    list_wasm_plugin_versions_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :list_wasm_plugin_versions, name
+      assert_kind_of ::Google::Cloud::NetworkServices::V1::ListWasmPluginVersionsRequest, request
+      assert_equal "hello world", request["parent"]
+      assert_equal 42, request["page_size"]
+      assert_equal "hello world", request["page_token"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, list_wasm_plugin_versions_client_stub do
+      # Create client
+      client = ::Google::Cloud::NetworkServices::V1::NetworkServices::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.list_wasm_plugin_versions({ parent: parent, page_size: page_size, page_token: page_token }) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.list_wasm_plugin_versions parent: parent, page_size: page_size, page_token: page_token do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.list_wasm_plugin_versions ::Google::Cloud::NetworkServices::V1::ListWasmPluginVersionsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.list_wasm_plugin_versions({ parent: parent, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.list_wasm_plugin_versions(::Google::Cloud::NetworkServices::V1::ListWasmPluginVersionsRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, list_wasm_plugin_versions_client_stub.call_rpc_count
+    end
+  end
+
+  def test_get_wasm_plugin_version
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::NetworkServices::V1::WasmPluginVersion.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    get_wasm_plugin_version_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :get_wasm_plugin_version, name
+      assert_kind_of ::Google::Cloud::NetworkServices::V1::GetWasmPluginVersionRequest, request
+      assert_equal "hello world", request["name"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, get_wasm_plugin_version_client_stub do
+      # Create client
+      client = ::Google::Cloud::NetworkServices::V1::NetworkServices::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.get_wasm_plugin_version({ name: name }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.get_wasm_plugin_version name: name do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.get_wasm_plugin_version ::Google::Cloud::NetworkServices::V1::GetWasmPluginVersionRequest.new(name: name) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.get_wasm_plugin_version({ name: name }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.get_wasm_plugin_version(::Google::Cloud::NetworkServices::V1::GetWasmPluginVersionRequest.new(name: name), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, get_wasm_plugin_version_client_stub.call_rpc_count
+    end
+  end
+
+  def test_create_wasm_plugin_version
+    # Create GRPC objects.
+    grpc_response = ::Google::Longrunning::Operation.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    wasm_plugin_version_id = "hello world"
+    wasm_plugin_version = {}
+
+    create_wasm_plugin_version_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :create_wasm_plugin_version, name
+      assert_kind_of ::Google::Cloud::NetworkServices::V1::CreateWasmPluginVersionRequest, request
+      assert_equal "hello world", request["parent"]
+      assert_equal "hello world", request["wasm_plugin_version_id"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::NetworkServices::V1::WasmPluginVersion), request["wasm_plugin_version"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, create_wasm_plugin_version_client_stub do
+      # Create client
+      client = ::Google::Cloud::NetworkServices::V1::NetworkServices::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.create_wasm_plugin_version({ parent: parent, wasm_plugin_version_id: wasm_plugin_version_id, wasm_plugin_version: wasm_plugin_version }) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.create_wasm_plugin_version parent: parent, wasm_plugin_version_id: wasm_plugin_version_id, wasm_plugin_version: wasm_plugin_version do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.create_wasm_plugin_version ::Google::Cloud::NetworkServices::V1::CreateWasmPluginVersionRequest.new(parent: parent, wasm_plugin_version_id: wasm_plugin_version_id, wasm_plugin_version: wasm_plugin_version) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.create_wasm_plugin_version({ parent: parent, wasm_plugin_version_id: wasm_plugin_version_id, wasm_plugin_version: wasm_plugin_version }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.create_wasm_plugin_version(::Google::Cloud::NetworkServices::V1::CreateWasmPluginVersionRequest.new(parent: parent, wasm_plugin_version_id: wasm_plugin_version_id, wasm_plugin_version: wasm_plugin_version), grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, create_wasm_plugin_version_client_stub.call_rpc_count
+    end
+  end
+
+  def test_delete_wasm_plugin_version
+    # Create GRPC objects.
+    grpc_response = ::Google::Longrunning::Operation.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    delete_wasm_plugin_version_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :delete_wasm_plugin_version, name
+      assert_kind_of ::Google::Cloud::NetworkServices::V1::DeleteWasmPluginVersionRequest, request
+      assert_equal "hello world", request["name"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, delete_wasm_plugin_version_client_stub do
+      # Create client
+      client = ::Google::Cloud::NetworkServices::V1::NetworkServices::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.delete_wasm_plugin_version({ name: name }) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.delete_wasm_plugin_version name: name do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.delete_wasm_plugin_version ::Google::Cloud::NetworkServices::V1::DeleteWasmPluginVersionRequest.new(name: name) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.delete_wasm_plugin_version({ name: name }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.delete_wasm_plugin_version(::Google::Cloud::NetworkServices::V1::DeleteWasmPluginVersionRequest.new(name: name), grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, delete_wasm_plugin_version_client_stub.call_rpc_count
+    end
+  end
+
+  def test_list_wasm_plugins
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::NetworkServices::V1::ListWasmPluginsResponse.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    page_size = 42
+    page_token = "hello world"
+
+    list_wasm_plugins_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :list_wasm_plugins, name
+      assert_kind_of ::Google::Cloud::NetworkServices::V1::ListWasmPluginsRequest, request
+      assert_equal "hello world", request["parent"]
+      assert_equal 42, request["page_size"]
+      assert_equal "hello world", request["page_token"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, list_wasm_plugins_client_stub do
+      # Create client
+      client = ::Google::Cloud::NetworkServices::V1::NetworkServices::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.list_wasm_plugins({ parent: parent, page_size: page_size, page_token: page_token }) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.list_wasm_plugins parent: parent, page_size: page_size, page_token: page_token do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.list_wasm_plugins ::Google::Cloud::NetworkServices::V1::ListWasmPluginsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.list_wasm_plugins({ parent: parent, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.list_wasm_plugins(::Google::Cloud::NetworkServices::V1::ListWasmPluginsRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, list_wasm_plugins_client_stub.call_rpc_count
+    end
+  end
+
+  def test_get_wasm_plugin
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::NetworkServices::V1::WasmPlugin.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+    view = :WASM_PLUGIN_VIEW_UNSPECIFIED
+
+    get_wasm_plugin_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :get_wasm_plugin, name
+      assert_kind_of ::Google::Cloud::NetworkServices::V1::GetWasmPluginRequest, request
+      assert_equal "hello world", request["name"]
+      assert_equal :WASM_PLUGIN_VIEW_UNSPECIFIED, request["view"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, get_wasm_plugin_client_stub do
+      # Create client
+      client = ::Google::Cloud::NetworkServices::V1::NetworkServices::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.get_wasm_plugin({ name: name, view: view }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.get_wasm_plugin name: name, view: view do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.get_wasm_plugin ::Google::Cloud::NetworkServices::V1::GetWasmPluginRequest.new(name: name, view: view) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.get_wasm_plugin({ name: name, view: view }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.get_wasm_plugin(::Google::Cloud::NetworkServices::V1::GetWasmPluginRequest.new(name: name, view: view), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, get_wasm_plugin_client_stub.call_rpc_count
+    end
+  end
+
+  def test_create_wasm_plugin
+    # Create GRPC objects.
+    grpc_response = ::Google::Longrunning::Operation.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    wasm_plugin_id = "hello world"
+    wasm_plugin = {}
+
+    create_wasm_plugin_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :create_wasm_plugin, name
+      assert_kind_of ::Google::Cloud::NetworkServices::V1::CreateWasmPluginRequest, request
+      assert_equal "hello world", request["parent"]
+      assert_equal "hello world", request["wasm_plugin_id"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::NetworkServices::V1::WasmPlugin), request["wasm_plugin"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, create_wasm_plugin_client_stub do
+      # Create client
+      client = ::Google::Cloud::NetworkServices::V1::NetworkServices::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.create_wasm_plugin({ parent: parent, wasm_plugin_id: wasm_plugin_id, wasm_plugin: wasm_plugin }) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.create_wasm_plugin parent: parent, wasm_plugin_id: wasm_plugin_id, wasm_plugin: wasm_plugin do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.create_wasm_plugin ::Google::Cloud::NetworkServices::V1::CreateWasmPluginRequest.new(parent: parent, wasm_plugin_id: wasm_plugin_id, wasm_plugin: wasm_plugin) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.create_wasm_plugin({ parent: parent, wasm_plugin_id: wasm_plugin_id, wasm_plugin: wasm_plugin }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.create_wasm_plugin(::Google::Cloud::NetworkServices::V1::CreateWasmPluginRequest.new(parent: parent, wasm_plugin_id: wasm_plugin_id, wasm_plugin: wasm_plugin), grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, create_wasm_plugin_client_stub.call_rpc_count
+    end
+  end
+
+  def test_update_wasm_plugin
+    # Create GRPC objects.
+    grpc_response = ::Google::Longrunning::Operation.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    update_mask = {}
+    wasm_plugin = {}
+
+    update_wasm_plugin_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :update_wasm_plugin, name
+      assert_kind_of ::Google::Cloud::NetworkServices::V1::UpdateWasmPluginRequest, request
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request["update_mask"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::NetworkServices::V1::WasmPlugin), request["wasm_plugin"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, update_wasm_plugin_client_stub do
+      # Create client
+      client = ::Google::Cloud::NetworkServices::V1::NetworkServices::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.update_wasm_plugin({ update_mask: update_mask, wasm_plugin: wasm_plugin }) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.update_wasm_plugin update_mask: update_mask, wasm_plugin: wasm_plugin do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.update_wasm_plugin ::Google::Cloud::NetworkServices::V1::UpdateWasmPluginRequest.new(update_mask: update_mask, wasm_plugin: wasm_plugin) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.update_wasm_plugin({ update_mask: update_mask, wasm_plugin: wasm_plugin }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.update_wasm_plugin(::Google::Cloud::NetworkServices::V1::UpdateWasmPluginRequest.new(update_mask: update_mask, wasm_plugin: wasm_plugin), grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, update_wasm_plugin_client_stub.call_rpc_count
+    end
+  end
+
+  def test_delete_wasm_plugin
+    # Create GRPC objects.
+    grpc_response = ::Google::Longrunning::Operation.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    delete_wasm_plugin_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :delete_wasm_plugin, name
+      assert_kind_of ::Google::Cloud::NetworkServices::V1::DeleteWasmPluginRequest, request
+      assert_equal "hello world", request["name"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, delete_wasm_plugin_client_stub do
+      # Create client
+      client = ::Google::Cloud::NetworkServices::V1::NetworkServices::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.delete_wasm_plugin({ name: name }) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.delete_wasm_plugin name: name do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.delete_wasm_plugin ::Google::Cloud::NetworkServices::V1::DeleteWasmPluginRequest.new(name: name) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.delete_wasm_plugin({ name: name }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.delete_wasm_plugin(::Google::Cloud::NetworkServices::V1::DeleteWasmPluginRequest.new(name: name), grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, delete_wasm_plugin_client_stub.call_rpc_count
+    end
+  end
+
   def test_list_gateways
     # Create GRPC objects.
     grpc_response = ::Google::Cloud::NetworkServices::V1::ListGatewaysResponse.new

@@ -43,6 +43,28 @@ module Google
             rpc :UpdateEndpointPolicy, ::Google::Cloud::NetworkServices::V1::UpdateEndpointPolicyRequest, ::Google::Longrunning::Operation
             # Deletes a single EndpointPolicy.
             rpc :DeleteEndpointPolicy, ::Google::Cloud::NetworkServices::V1::DeleteEndpointPolicyRequest, ::Google::Longrunning::Operation
+            # Lists `WasmPluginVersion` resources in a given project and
+            # location.
+            rpc :ListWasmPluginVersions, ::Google::Cloud::NetworkServices::V1::ListWasmPluginVersionsRequest, ::Google::Cloud::NetworkServices::V1::ListWasmPluginVersionsResponse
+            # Gets details of the specified `WasmPluginVersion` resource.
+            rpc :GetWasmPluginVersion, ::Google::Cloud::NetworkServices::V1::GetWasmPluginVersionRequest, ::Google::Cloud::NetworkServices::V1::WasmPluginVersion
+            # Creates a new `WasmPluginVersion` resource in a given project
+            # and location.
+            rpc :CreateWasmPluginVersion, ::Google::Cloud::NetworkServices::V1::CreateWasmPluginVersionRequest, ::Google::Longrunning::Operation
+            # Deletes the specified `WasmPluginVersion` resource.
+            rpc :DeleteWasmPluginVersion, ::Google::Cloud::NetworkServices::V1::DeleteWasmPluginVersionRequest, ::Google::Longrunning::Operation
+            # Lists `WasmPlugin` resources in a given project and
+            # location.
+            rpc :ListWasmPlugins, ::Google::Cloud::NetworkServices::V1::ListWasmPluginsRequest, ::Google::Cloud::NetworkServices::V1::ListWasmPluginsResponse
+            # Gets details of the specified `WasmPlugin` resource.
+            rpc :GetWasmPlugin, ::Google::Cloud::NetworkServices::V1::GetWasmPluginRequest, ::Google::Cloud::NetworkServices::V1::WasmPlugin
+            # Creates a new `WasmPlugin` resource in a given project
+            # and location.
+            rpc :CreateWasmPlugin, ::Google::Cloud::NetworkServices::V1::CreateWasmPluginRequest, ::Google::Longrunning::Operation
+            # Updates the parameters of the specified `WasmPlugin` resource.
+            rpc :UpdateWasmPlugin, ::Google::Cloud::NetworkServices::V1::UpdateWasmPluginRequest, ::Google::Longrunning::Operation
+            # Deletes the specified `WasmPlugin` resource.
+            rpc :DeleteWasmPlugin, ::Google::Cloud::NetworkServices::V1::DeleteWasmPluginRequest, ::Google::Longrunning::Operation
             # Lists Gateways in a given project and location.
             rpc :ListGateways, ::Google::Cloud::NetworkServices::V1::ListGatewaysRequest, ::Google::Cloud::NetworkServices::V1::ListGatewaysResponse
             # Gets details of a single Gateway.
