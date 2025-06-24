@@ -354,6 +354,502 @@ class ::Google::Cloud::NetworkServices::V1::NetworkServices::Rest::ClientTest < 
     end
   end
 
+  def test_list_wasm_plugin_versions
+    # Create test objects.
+    client_result = ::Google::Cloud::NetworkServices::V1::ListWasmPluginVersionsResponse.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    page_size = 42
+    page_token = "hello world"
+
+    list_wasm_plugin_versions_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::NetworkServices::V1::NetworkServices::Rest::ServiceStub.stub :transcode_list_wasm_plugin_versions_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, list_wasm_plugin_versions_client_stub do
+        # Create client
+        client = ::Google::Cloud::NetworkServices::V1::NetworkServices::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.list_wasm_plugin_versions({ parent: parent, page_size: page_size, page_token: page_token }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.list_wasm_plugin_versions parent: parent, page_size: page_size, page_token: page_token do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.list_wasm_plugin_versions ::Google::Cloud::NetworkServices::V1::ListWasmPluginVersionsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.list_wasm_plugin_versions({ parent: parent, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.list_wasm_plugin_versions(::Google::Cloud::NetworkServices::V1::ListWasmPluginVersionsRequest.new(parent: parent, page_size: page_size, page_token: page_token), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, list_wasm_plugin_versions_client_stub.call_count
+      end
+    end
+  end
+
+  def test_get_wasm_plugin_version
+    # Create test objects.
+    client_result = ::Google::Cloud::NetworkServices::V1::WasmPluginVersion.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    get_wasm_plugin_version_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::NetworkServices::V1::NetworkServices::Rest::ServiceStub.stub :transcode_get_wasm_plugin_version_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, get_wasm_plugin_version_client_stub do
+        # Create client
+        client = ::Google::Cloud::NetworkServices::V1::NetworkServices::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.get_wasm_plugin_version({ name: name }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.get_wasm_plugin_version name: name do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.get_wasm_plugin_version ::Google::Cloud::NetworkServices::V1::GetWasmPluginVersionRequest.new(name: name) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.get_wasm_plugin_version({ name: name }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.get_wasm_plugin_version(::Google::Cloud::NetworkServices::V1::GetWasmPluginVersionRequest.new(name: name), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, get_wasm_plugin_version_client_stub.call_count
+      end
+    end
+  end
+
+  def test_create_wasm_plugin_version
+    # Create test objects.
+    client_result = ::Google::Longrunning::Operation.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    wasm_plugin_version_id = "hello world"
+    wasm_plugin_version = {}
+
+    create_wasm_plugin_version_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::NetworkServices::V1::NetworkServices::Rest::ServiceStub.stub :transcode_create_wasm_plugin_version_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, create_wasm_plugin_version_client_stub do
+        # Create client
+        client = ::Google::Cloud::NetworkServices::V1::NetworkServices::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.create_wasm_plugin_version({ parent: parent, wasm_plugin_version_id: wasm_plugin_version_id, wasm_plugin_version: wasm_plugin_version }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.create_wasm_plugin_version parent: parent, wasm_plugin_version_id: wasm_plugin_version_id, wasm_plugin_version: wasm_plugin_version do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.create_wasm_plugin_version ::Google::Cloud::NetworkServices::V1::CreateWasmPluginVersionRequest.new(parent: parent, wasm_plugin_version_id: wasm_plugin_version_id, wasm_plugin_version: wasm_plugin_version) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.create_wasm_plugin_version({ parent: parent, wasm_plugin_version_id: wasm_plugin_version_id, wasm_plugin_version: wasm_plugin_version }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.create_wasm_plugin_version(::Google::Cloud::NetworkServices::V1::CreateWasmPluginVersionRequest.new(parent: parent, wasm_plugin_version_id: wasm_plugin_version_id, wasm_plugin_version: wasm_plugin_version), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, create_wasm_plugin_version_client_stub.call_count
+      end
+    end
+  end
+
+  def test_delete_wasm_plugin_version
+    # Create test objects.
+    client_result = ::Google::Longrunning::Operation.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    delete_wasm_plugin_version_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::NetworkServices::V1::NetworkServices::Rest::ServiceStub.stub :transcode_delete_wasm_plugin_version_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, delete_wasm_plugin_version_client_stub do
+        # Create client
+        client = ::Google::Cloud::NetworkServices::V1::NetworkServices::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.delete_wasm_plugin_version({ name: name }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.delete_wasm_plugin_version name: name do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.delete_wasm_plugin_version ::Google::Cloud::NetworkServices::V1::DeleteWasmPluginVersionRequest.new(name: name) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.delete_wasm_plugin_version({ name: name }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.delete_wasm_plugin_version(::Google::Cloud::NetworkServices::V1::DeleteWasmPluginVersionRequest.new(name: name), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, delete_wasm_plugin_version_client_stub.call_count
+      end
+    end
+  end
+
+  def test_list_wasm_plugins
+    # Create test objects.
+    client_result = ::Google::Cloud::NetworkServices::V1::ListWasmPluginsResponse.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    page_size = 42
+    page_token = "hello world"
+
+    list_wasm_plugins_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::NetworkServices::V1::NetworkServices::Rest::ServiceStub.stub :transcode_list_wasm_plugins_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, list_wasm_plugins_client_stub do
+        # Create client
+        client = ::Google::Cloud::NetworkServices::V1::NetworkServices::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.list_wasm_plugins({ parent: parent, page_size: page_size, page_token: page_token }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.list_wasm_plugins parent: parent, page_size: page_size, page_token: page_token do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.list_wasm_plugins ::Google::Cloud::NetworkServices::V1::ListWasmPluginsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.list_wasm_plugins({ parent: parent, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.list_wasm_plugins(::Google::Cloud::NetworkServices::V1::ListWasmPluginsRequest.new(parent: parent, page_size: page_size, page_token: page_token), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, list_wasm_plugins_client_stub.call_count
+      end
+    end
+  end
+
+  def test_get_wasm_plugin
+    # Create test objects.
+    client_result = ::Google::Cloud::NetworkServices::V1::WasmPlugin.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+    view = :WASM_PLUGIN_VIEW_UNSPECIFIED
+
+    get_wasm_plugin_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::NetworkServices::V1::NetworkServices::Rest::ServiceStub.stub :transcode_get_wasm_plugin_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, get_wasm_plugin_client_stub do
+        # Create client
+        client = ::Google::Cloud::NetworkServices::V1::NetworkServices::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.get_wasm_plugin({ name: name, view: view }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.get_wasm_plugin name: name, view: view do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.get_wasm_plugin ::Google::Cloud::NetworkServices::V1::GetWasmPluginRequest.new(name: name, view: view) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.get_wasm_plugin({ name: name, view: view }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.get_wasm_plugin(::Google::Cloud::NetworkServices::V1::GetWasmPluginRequest.new(name: name, view: view), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, get_wasm_plugin_client_stub.call_count
+      end
+    end
+  end
+
+  def test_create_wasm_plugin
+    # Create test objects.
+    client_result = ::Google::Longrunning::Operation.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    wasm_plugin_id = "hello world"
+    wasm_plugin = {}
+
+    create_wasm_plugin_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::NetworkServices::V1::NetworkServices::Rest::ServiceStub.stub :transcode_create_wasm_plugin_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, create_wasm_plugin_client_stub do
+        # Create client
+        client = ::Google::Cloud::NetworkServices::V1::NetworkServices::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.create_wasm_plugin({ parent: parent, wasm_plugin_id: wasm_plugin_id, wasm_plugin: wasm_plugin }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.create_wasm_plugin parent: parent, wasm_plugin_id: wasm_plugin_id, wasm_plugin: wasm_plugin do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.create_wasm_plugin ::Google::Cloud::NetworkServices::V1::CreateWasmPluginRequest.new(parent: parent, wasm_plugin_id: wasm_plugin_id, wasm_plugin: wasm_plugin) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.create_wasm_plugin({ parent: parent, wasm_plugin_id: wasm_plugin_id, wasm_plugin: wasm_plugin }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.create_wasm_plugin(::Google::Cloud::NetworkServices::V1::CreateWasmPluginRequest.new(parent: parent, wasm_plugin_id: wasm_plugin_id, wasm_plugin: wasm_plugin), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, create_wasm_plugin_client_stub.call_count
+      end
+    end
+  end
+
+  def test_update_wasm_plugin
+    # Create test objects.
+    client_result = ::Google::Longrunning::Operation.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    update_mask = {}
+    wasm_plugin = {}
+
+    update_wasm_plugin_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::NetworkServices::V1::NetworkServices::Rest::ServiceStub.stub :transcode_update_wasm_plugin_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, update_wasm_plugin_client_stub do
+        # Create client
+        client = ::Google::Cloud::NetworkServices::V1::NetworkServices::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.update_wasm_plugin({ update_mask: update_mask, wasm_plugin: wasm_plugin }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.update_wasm_plugin update_mask: update_mask, wasm_plugin: wasm_plugin do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.update_wasm_plugin ::Google::Cloud::NetworkServices::V1::UpdateWasmPluginRequest.new(update_mask: update_mask, wasm_plugin: wasm_plugin) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.update_wasm_plugin({ update_mask: update_mask, wasm_plugin: wasm_plugin }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.update_wasm_plugin(::Google::Cloud::NetworkServices::V1::UpdateWasmPluginRequest.new(update_mask: update_mask, wasm_plugin: wasm_plugin), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, update_wasm_plugin_client_stub.call_count
+      end
+    end
+  end
+
+  def test_delete_wasm_plugin
+    # Create test objects.
+    client_result = ::Google::Longrunning::Operation.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    delete_wasm_plugin_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::NetworkServices::V1::NetworkServices::Rest::ServiceStub.stub :transcode_delete_wasm_plugin_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, delete_wasm_plugin_client_stub do
+        # Create client
+        client = ::Google::Cloud::NetworkServices::V1::NetworkServices::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.delete_wasm_plugin({ name: name }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.delete_wasm_plugin name: name do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.delete_wasm_plugin ::Google::Cloud::NetworkServices::V1::DeleteWasmPluginRequest.new(name: name) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.delete_wasm_plugin({ name: name }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.delete_wasm_plugin(::Google::Cloud::NetworkServices::V1::DeleteWasmPluginRequest.new(name: name), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, delete_wasm_plugin_client_stub.call_count
+      end
+    end
+  end
+
   def test_list_gateways
     # Create test objects.
     client_result = ::Google::Cloud::NetworkServices::V1::ListGatewaysResponse.new

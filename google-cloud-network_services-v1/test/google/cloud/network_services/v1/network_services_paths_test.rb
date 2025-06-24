@@ -304,4 +304,28 @@ class ::Google::Cloud::NetworkServices::V1::NetworkServices::ClientPathsTest < M
       assert_equal "projects/value0/locations/value1/tlsRoutes/value2", path
     end
   end
+
+  def test_wasm_plugin_path
+    grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
+      client = ::Google::Cloud::NetworkServices::V1::NetworkServices::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      path = client.wasm_plugin_path project: "value0", location: "value1", wasm_plugin: "value2"
+      assert_equal "projects/value0/locations/value1/wasmPlugins/value2", path
+    end
+  end
+
+  def test_wasm_plugin_version_path
+    grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
+      client = ::Google::Cloud::NetworkServices::V1::NetworkServices::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      path = client.wasm_plugin_version_path project: "value0", location: "value1", wasm_plugin: "value2", wasm_plugin_version: "value3"
+      assert_equal "projects/value0/locations/value1/wasmPlugins/value2/versions/value3", path
+    end
+  end
 end
