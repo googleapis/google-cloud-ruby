@@ -1,0 +1,935 @@
+{
+  "client_library": {
+    "name": "google-cloud-speech-v2",
+    "version": "",
+    "language": "RUBY",
+    "apis": [
+      {
+        "id": "google.cloud.speech.v2",
+        "version": "v2"
+      }
+    ]
+  },
+  "snippets": [
+    {
+      "region_tag": "speech_v2_generated_Speech_CreateRecognizer_sync",
+      "title": "Snippet for the create_recognizer call in the Speech service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Speech::V2::Speech::Client#create_recognizer.",
+      "file": "speech/create_recognizer.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_recognizer",
+        "full_name": "::Google::Cloud::Speech::V2::Speech::Client#create_recognizer",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Speech::V2::CreateRecognizerRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "Speech::Client",
+          "full_name": "::Google::Cloud::Speech::V2::Speech::Client"
+        },
+        "method": {
+          "short_name": "CreateRecognizer",
+          "full_name": "google.cloud.speech.v2.Speech.CreateRecognizer",
+          "service": {
+            "short_name": "Speech",
+            "full_name": "google.cloud.speech.v2.Speech"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "speech_v2_generated_Speech_ListRecognizers_sync",
+      "title": "Snippet for the list_recognizers call in the Speech service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Speech::V2::Speech::Client#list_recognizers.",
+      "file": "speech/list_recognizers.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_recognizers",
+        "full_name": "::Google::Cloud::Speech::V2::Speech::Client#list_recognizers",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Speech::V2::ListRecognizersRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Speech::V2::ListRecognizersResponse",
+        "client": {
+          "short_name": "Speech::Client",
+          "full_name": "::Google::Cloud::Speech::V2::Speech::Client"
+        },
+        "method": {
+          "short_name": "ListRecognizers",
+          "full_name": "google.cloud.speech.v2.Speech.ListRecognizers",
+          "service": {
+            "short_name": "Speech",
+            "full_name": "google.cloud.speech.v2.Speech"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "speech_v2_generated_Speech_GetRecognizer_sync",
+      "title": "Snippet for the get_recognizer call in the Speech service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Speech::V2::Speech::Client#get_recognizer.",
+      "file": "speech/get_recognizer.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_recognizer",
+        "full_name": "::Google::Cloud::Speech::V2::Speech::Client#get_recognizer",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Speech::V2::GetRecognizerRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Speech::V2::Recognizer",
+        "client": {
+          "short_name": "Speech::Client",
+          "full_name": "::Google::Cloud::Speech::V2::Speech::Client"
+        },
+        "method": {
+          "short_name": "GetRecognizer",
+          "full_name": "google.cloud.speech.v2.Speech.GetRecognizer",
+          "service": {
+            "short_name": "Speech",
+            "full_name": "google.cloud.speech.v2.Speech"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "speech_v2_generated_Speech_UpdateRecognizer_sync",
+      "title": "Snippet for the update_recognizer call in the Speech service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Speech::V2::Speech::Client#update_recognizer.",
+      "file": "speech/update_recognizer.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_recognizer",
+        "full_name": "::Google::Cloud::Speech::V2::Speech::Client#update_recognizer",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Speech::V2::UpdateRecognizerRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "Speech::Client",
+          "full_name": "::Google::Cloud::Speech::V2::Speech::Client"
+        },
+        "method": {
+          "short_name": "UpdateRecognizer",
+          "full_name": "google.cloud.speech.v2.Speech.UpdateRecognizer",
+          "service": {
+            "short_name": "Speech",
+            "full_name": "google.cloud.speech.v2.Speech"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "speech_v2_generated_Speech_DeleteRecognizer_sync",
+      "title": "Snippet for the delete_recognizer call in the Speech service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Speech::V2::Speech::Client#delete_recognizer.",
+      "file": "speech/delete_recognizer.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_recognizer",
+        "full_name": "::Google::Cloud::Speech::V2::Speech::Client#delete_recognizer",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Speech::V2::DeleteRecognizerRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "Speech::Client",
+          "full_name": "::Google::Cloud::Speech::V2::Speech::Client"
+        },
+        "method": {
+          "short_name": "DeleteRecognizer",
+          "full_name": "google.cloud.speech.v2.Speech.DeleteRecognizer",
+          "service": {
+            "short_name": "Speech",
+            "full_name": "google.cloud.speech.v2.Speech"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "speech_v2_generated_Speech_UndeleteRecognizer_sync",
+      "title": "Snippet for the undelete_recognizer call in the Speech service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Speech::V2::Speech::Client#undelete_recognizer.",
+      "file": "speech/undelete_recognizer.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "undelete_recognizer",
+        "full_name": "::Google::Cloud::Speech::V2::Speech::Client#undelete_recognizer",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Speech::V2::UndeleteRecognizerRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "Speech::Client",
+          "full_name": "::Google::Cloud::Speech::V2::Speech::Client"
+        },
+        "method": {
+          "short_name": "UndeleteRecognizer",
+          "full_name": "google.cloud.speech.v2.Speech.UndeleteRecognizer",
+          "service": {
+            "short_name": "Speech",
+            "full_name": "google.cloud.speech.v2.Speech"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "speech_v2_generated_Speech_Recognize_sync",
+      "title": "Snippet for the recognize call in the Speech service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Speech::V2::Speech::Client#recognize.",
+      "file": "speech/recognize.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "recognize",
+        "full_name": "::Google::Cloud::Speech::V2::Speech::Client#recognize",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Speech::V2::RecognizeRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Speech::V2::RecognizeResponse",
+        "client": {
+          "short_name": "Speech::Client",
+          "full_name": "::Google::Cloud::Speech::V2::Speech::Client"
+        },
+        "method": {
+          "short_name": "Recognize",
+          "full_name": "google.cloud.speech.v2.Speech.Recognize",
+          "service": {
+            "short_name": "Speech",
+            "full_name": "google.cloud.speech.v2.Speech"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "speech_v2_generated_Speech_StreamingRecognize_sync",
+      "title": "Snippet for the streaming_recognize call in the Speech service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Speech::V2::Speech::Client#streaming_recognize.",
+      "file": "speech/streaming_recognize.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "streaming_recognize",
+        "full_name": "::Google::Cloud::Speech::V2::Speech::Client#streaming_recognize",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Speech::V2::StreamingRecognizeRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Speech::V2::StreamingRecognizeResponse",
+        "client": {
+          "short_name": "Speech::Client",
+          "full_name": "::Google::Cloud::Speech::V2::Speech::Client"
+        },
+        "method": {
+          "short_name": "StreamingRecognize",
+          "full_name": "google.cloud.speech.v2.Speech.StreamingRecognize",
+          "service": {
+            "short_name": "Speech",
+            "full_name": "google.cloud.speech.v2.Speech"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 55,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "speech_v2_generated_Speech_BatchRecognize_sync",
+      "title": "Snippet for the batch_recognize call in the Speech service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Speech::V2::Speech::Client#batch_recognize.",
+      "file": "speech/batch_recognize.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "batch_recognize",
+        "full_name": "::Google::Cloud::Speech::V2::Speech::Client#batch_recognize",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Speech::V2::BatchRecognizeRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "Speech::Client",
+          "full_name": "::Google::Cloud::Speech::V2::Speech::Client"
+        },
+        "method": {
+          "short_name": "BatchRecognize",
+          "full_name": "google.cloud.speech.v2.Speech.BatchRecognize",
+          "service": {
+            "short_name": "Speech",
+            "full_name": "google.cloud.speech.v2.Speech"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "speech_v2_generated_Speech_GetConfig_sync",
+      "title": "Snippet for the get_config call in the Speech service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Speech::V2::Speech::Client#get_config.",
+      "file": "speech/get_config.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_config",
+        "full_name": "::Google::Cloud::Speech::V2::Speech::Client#get_config",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Speech::V2::GetConfigRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Speech::V2::Config",
+        "client": {
+          "short_name": "Speech::Client",
+          "full_name": "::Google::Cloud::Speech::V2::Speech::Client"
+        },
+        "method": {
+          "short_name": "GetConfig",
+          "full_name": "google.cloud.speech.v2.Speech.GetConfig",
+          "service": {
+            "short_name": "Speech",
+            "full_name": "google.cloud.speech.v2.Speech"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "speech_v2_generated_Speech_UpdateConfig_sync",
+      "title": "Snippet for the update_config call in the Speech service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Speech::V2::Speech::Client#update_config.",
+      "file": "speech/update_config.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_config",
+        "full_name": "::Google::Cloud::Speech::V2::Speech::Client#update_config",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Speech::V2::UpdateConfigRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Speech::V2::Config",
+        "client": {
+          "short_name": "Speech::Client",
+          "full_name": "::Google::Cloud::Speech::V2::Speech::Client"
+        },
+        "method": {
+          "short_name": "UpdateConfig",
+          "full_name": "google.cloud.speech.v2.Speech.UpdateConfig",
+          "service": {
+            "short_name": "Speech",
+            "full_name": "google.cloud.speech.v2.Speech"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "speech_v2_generated_Speech_CreateCustomClass_sync",
+      "title": "Snippet for the create_custom_class call in the Speech service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Speech::V2::Speech::Client#create_custom_class.",
+      "file": "speech/create_custom_class.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_custom_class",
+        "full_name": "::Google::Cloud::Speech::V2::Speech::Client#create_custom_class",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Speech::V2::CreateCustomClassRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "Speech::Client",
+          "full_name": "::Google::Cloud::Speech::V2::Speech::Client"
+        },
+        "method": {
+          "short_name": "CreateCustomClass",
+          "full_name": "google.cloud.speech.v2.Speech.CreateCustomClass",
+          "service": {
+            "short_name": "Speech",
+            "full_name": "google.cloud.speech.v2.Speech"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "speech_v2_generated_Speech_ListCustomClasses_sync",
+      "title": "Snippet for the list_custom_classes call in the Speech service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Speech::V2::Speech::Client#list_custom_classes.",
+      "file": "speech/list_custom_classes.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_custom_classes",
+        "full_name": "::Google::Cloud::Speech::V2::Speech::Client#list_custom_classes",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Speech::V2::ListCustomClassesRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Speech::V2::ListCustomClassesResponse",
+        "client": {
+          "short_name": "Speech::Client",
+          "full_name": "::Google::Cloud::Speech::V2::Speech::Client"
+        },
+        "method": {
+          "short_name": "ListCustomClasses",
+          "full_name": "google.cloud.speech.v2.Speech.ListCustomClasses",
+          "service": {
+            "short_name": "Speech",
+            "full_name": "google.cloud.speech.v2.Speech"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "speech_v2_generated_Speech_GetCustomClass_sync",
+      "title": "Snippet for the get_custom_class call in the Speech service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Speech::V2::Speech::Client#get_custom_class.",
+      "file": "speech/get_custom_class.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_custom_class",
+        "full_name": "::Google::Cloud::Speech::V2::Speech::Client#get_custom_class",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Speech::V2::GetCustomClassRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Speech::V2::CustomClass",
+        "client": {
+          "short_name": "Speech::Client",
+          "full_name": "::Google::Cloud::Speech::V2::Speech::Client"
+        },
+        "method": {
+          "short_name": "GetCustomClass",
+          "full_name": "google.cloud.speech.v2.Speech.GetCustomClass",
+          "service": {
+            "short_name": "Speech",
+            "full_name": "google.cloud.speech.v2.Speech"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "speech_v2_generated_Speech_UpdateCustomClass_sync",
+      "title": "Snippet for the update_custom_class call in the Speech service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Speech::V2::Speech::Client#update_custom_class.",
+      "file": "speech/update_custom_class.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_custom_class",
+        "full_name": "::Google::Cloud::Speech::V2::Speech::Client#update_custom_class",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Speech::V2::UpdateCustomClassRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "Speech::Client",
+          "full_name": "::Google::Cloud::Speech::V2::Speech::Client"
+        },
+        "method": {
+          "short_name": "UpdateCustomClass",
+          "full_name": "google.cloud.speech.v2.Speech.UpdateCustomClass",
+          "service": {
+            "short_name": "Speech",
+            "full_name": "google.cloud.speech.v2.Speech"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "speech_v2_generated_Speech_DeleteCustomClass_sync",
+      "title": "Snippet for the delete_custom_class call in the Speech service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Speech::V2::Speech::Client#delete_custom_class.",
+      "file": "speech/delete_custom_class.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_custom_class",
+        "full_name": "::Google::Cloud::Speech::V2::Speech::Client#delete_custom_class",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Speech::V2::DeleteCustomClassRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "Speech::Client",
+          "full_name": "::Google::Cloud::Speech::V2::Speech::Client"
+        },
+        "method": {
+          "short_name": "DeleteCustomClass",
+          "full_name": "google.cloud.speech.v2.Speech.DeleteCustomClass",
+          "service": {
+            "short_name": "Speech",
+            "full_name": "google.cloud.speech.v2.Speech"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "speech_v2_generated_Speech_UndeleteCustomClass_sync",
+      "title": "Snippet for the undelete_custom_class call in the Speech service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Speech::V2::Speech::Client#undelete_custom_class.",
+      "file": "speech/undelete_custom_class.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "undelete_custom_class",
+        "full_name": "::Google::Cloud::Speech::V2::Speech::Client#undelete_custom_class",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Speech::V2::UndeleteCustomClassRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "Speech::Client",
+          "full_name": "::Google::Cloud::Speech::V2::Speech::Client"
+        },
+        "method": {
+          "short_name": "UndeleteCustomClass",
+          "full_name": "google.cloud.speech.v2.Speech.UndeleteCustomClass",
+          "service": {
+            "short_name": "Speech",
+            "full_name": "google.cloud.speech.v2.Speech"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "speech_v2_generated_Speech_CreatePhraseSet_sync",
+      "title": "Snippet for the create_phrase_set call in the Speech service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Speech::V2::Speech::Client#create_phrase_set.",
+      "file": "speech/create_phrase_set.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_phrase_set",
+        "full_name": "::Google::Cloud::Speech::V2::Speech::Client#create_phrase_set",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Speech::V2::CreatePhraseSetRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "Speech::Client",
+          "full_name": "::Google::Cloud::Speech::V2::Speech::Client"
+        },
+        "method": {
+          "short_name": "CreatePhraseSet",
+          "full_name": "google.cloud.speech.v2.Speech.CreatePhraseSet",
+          "service": {
+            "short_name": "Speech",
+            "full_name": "google.cloud.speech.v2.Speech"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "speech_v2_generated_Speech_ListPhraseSets_sync",
+      "title": "Snippet for the list_phrase_sets call in the Speech service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Speech::V2::Speech::Client#list_phrase_sets.",
+      "file": "speech/list_phrase_sets.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_phrase_sets",
+        "full_name": "::Google::Cloud::Speech::V2::Speech::Client#list_phrase_sets",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Speech::V2::ListPhraseSetsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Speech::V2::ListPhraseSetsResponse",
+        "client": {
+          "short_name": "Speech::Client",
+          "full_name": "::Google::Cloud::Speech::V2::Speech::Client"
+        },
+        "method": {
+          "short_name": "ListPhraseSets",
+          "full_name": "google.cloud.speech.v2.Speech.ListPhraseSets",
+          "service": {
+            "short_name": "Speech",
+            "full_name": "google.cloud.speech.v2.Speech"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "speech_v2_generated_Speech_GetPhraseSet_sync",
+      "title": "Snippet for the get_phrase_set call in the Speech service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Speech::V2::Speech::Client#get_phrase_set.",
+      "file": "speech/get_phrase_set.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_phrase_set",
+        "full_name": "::Google::Cloud::Speech::V2::Speech::Client#get_phrase_set",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Speech::V2::GetPhraseSetRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Speech::V2::PhraseSet",
+        "client": {
+          "short_name": "Speech::Client",
+          "full_name": "::Google::Cloud::Speech::V2::Speech::Client"
+        },
+        "method": {
+          "short_name": "GetPhraseSet",
+          "full_name": "google.cloud.speech.v2.Speech.GetPhraseSet",
+          "service": {
+            "short_name": "Speech",
+            "full_name": "google.cloud.speech.v2.Speech"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "speech_v2_generated_Speech_UpdatePhraseSet_sync",
+      "title": "Snippet for the update_phrase_set call in the Speech service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Speech::V2::Speech::Client#update_phrase_set.",
+      "file": "speech/update_phrase_set.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_phrase_set",
+        "full_name": "::Google::Cloud::Speech::V2::Speech::Client#update_phrase_set",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Speech::V2::UpdatePhraseSetRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "Speech::Client",
+          "full_name": "::Google::Cloud::Speech::V2::Speech::Client"
+        },
+        "method": {
+          "short_name": "UpdatePhraseSet",
+          "full_name": "google.cloud.speech.v2.Speech.UpdatePhraseSet",
+          "service": {
+            "short_name": "Speech",
+            "full_name": "google.cloud.speech.v2.Speech"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "speech_v2_generated_Speech_DeletePhraseSet_sync",
+      "title": "Snippet for the delete_phrase_set call in the Speech service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Speech::V2::Speech::Client#delete_phrase_set.",
+      "file": "speech/delete_phrase_set.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_phrase_set",
+        "full_name": "::Google::Cloud::Speech::V2::Speech::Client#delete_phrase_set",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Speech::V2::DeletePhraseSetRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "Speech::Client",
+          "full_name": "::Google::Cloud::Speech::V2::Speech::Client"
+        },
+        "method": {
+          "short_name": "DeletePhraseSet",
+          "full_name": "google.cloud.speech.v2.Speech.DeletePhraseSet",
+          "service": {
+            "short_name": "Speech",
+            "full_name": "google.cloud.speech.v2.Speech"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "speech_v2_generated_Speech_UndeletePhraseSet_sync",
+      "title": "Snippet for the undelete_phrase_set call in the Speech service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Speech::V2::Speech::Client#undelete_phrase_set.",
+      "file": "speech/undelete_phrase_set.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "undelete_phrase_set",
+        "full_name": "::Google::Cloud::Speech::V2::Speech::Client#undelete_phrase_set",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Speech::V2::UndeletePhraseSetRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "Speech::Client",
+          "full_name": "::Google::Cloud::Speech::V2::Speech::Client"
+        },
+        "method": {
+          "short_name": "UndeletePhraseSet",
+          "full_name": "google.cloud.speech.v2.Speech.UndeletePhraseSet",
+          "service": {
+            "short_name": "Speech",
+            "full_name": "google.cloud.speech.v2.Speech"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    }
+  ]
+}
