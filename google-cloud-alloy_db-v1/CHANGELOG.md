@@ -1,5 +1,13 @@
 # Changelog
 
+### 1.3.0 (2025-06-24)
+
+#### Features
+
+* Additional instance network configs 
+* Support deny maintenance periods 
+* Support instance activation policy 
+
 ### 1.2.0 (2025-05-16)
 
 #### Features
