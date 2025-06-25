@@ -1006,6 +1006,24 @@ module Google
           end
         end
 
+        # A list of string values.
+        # @!attribute [rw] values
+        #   @return [::Array<::String>]
+        #     String values.
+        class StringList
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # A message with a list of double values.
+        # @!attribute [rw] values
+        #   @return [::Array<::Float>]
+        #     The list of double values.
+        class DoubleList
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # At which level we offer configuration for attributes.
         module AttributeConfigLevel
           # Value used when unset. In this case, server behavior defaults to
