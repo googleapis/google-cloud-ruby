@@ -522,6 +522,13 @@ module Google
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
 
+          # Set when a Pub/Sub message fails to get published due to a message
+          # transformation error.
+          class MessageTransformationFailureReason
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
           # Failure when ingesting from a Cloud Storage source.
           # @!attribute [rw] bucket
           #   @return [::String]
@@ -538,18 +545,24 @@ module Google
           #   @return [::Google::Cloud::PubSub::V1::IngestionFailureEvent::AvroFailureReason]
           #     Optional. Failure encountered when parsing an Avro file.
           #
-          #     Note: The following fields are mutually exclusive: `avro_failure_reason`, `api_violation_reason`, `schema_violation_reason`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+          #     Note: The following fields are mutually exclusive: `avro_failure_reason`, `api_violation_reason`, `schema_violation_reason`, `message_transformation_failure_reason`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] api_violation_reason
           #   @return [::Google::Cloud::PubSub::V1::IngestionFailureEvent::ApiViolationReason]
           #     Optional. The Pub/Sub API limits prevented the desired message from
           #     being published.
           #
-          #     Note: The following fields are mutually exclusive: `api_violation_reason`, `avro_failure_reason`, `schema_violation_reason`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+          #     Note: The following fields are mutually exclusive: `api_violation_reason`, `avro_failure_reason`, `schema_violation_reason`, `message_transformation_failure_reason`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] schema_violation_reason
           #   @return [::Google::Cloud::PubSub::V1::IngestionFailureEvent::SchemaViolationReason]
           #     Optional. The Pub/Sub message failed schema validation.
           #
-          #     Note: The following fields are mutually exclusive: `schema_violation_reason`, `avro_failure_reason`, `api_violation_reason`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+          #     Note: The following fields are mutually exclusive: `schema_violation_reason`, `avro_failure_reason`, `api_violation_reason`, `message_transformation_failure_reason`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+          # @!attribute [rw] message_transformation_failure_reason
+          #   @return [::Google::Cloud::PubSub::V1::IngestionFailureEvent::MessageTransformationFailureReason]
+          #     Optional. Failure encountered when applying a message transformation to
+          #     the Pub/Sub message.
+          #
+          #     Note: The following fields are mutually exclusive: `message_transformation_failure_reason`, `avro_failure_reason`, `api_violation_reason`, `schema_violation_reason`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           class CloudStorageFailure
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -574,12 +587,18 @@ module Google
           #     Optional. The Pub/Sub API limits prevented the desired message from
           #     being published.
           #
-          #     Note: The following fields are mutually exclusive: `api_violation_reason`, `schema_violation_reason`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+          #     Note: The following fields are mutually exclusive: `api_violation_reason`, `schema_violation_reason`, `message_transformation_failure_reason`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] schema_violation_reason
           #   @return [::Google::Cloud::PubSub::V1::IngestionFailureEvent::SchemaViolationReason]
           #     Optional. The Pub/Sub message failed schema validation.
           #
-          #     Note: The following fields are mutually exclusive: `schema_violation_reason`, `api_violation_reason`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+          #     Note: The following fields are mutually exclusive: `schema_violation_reason`, `api_violation_reason`, `message_transformation_failure_reason`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+          # @!attribute [rw] message_transformation_failure_reason
+          #   @return [::Google::Cloud::PubSub::V1::IngestionFailureEvent::MessageTransformationFailureReason]
+          #     Optional. Failure encountered when applying a message transformation to
+          #     the Pub/Sub message.
+          #
+          #     Note: The following fields are mutually exclusive: `message_transformation_failure_reason`, `api_violation_reason`, `schema_violation_reason`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           class AwsMskFailureReason
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -604,12 +623,18 @@ module Google
           #     Optional. The Pub/Sub API limits prevented the desired message from
           #     being published.
           #
-          #     Note: The following fields are mutually exclusive: `api_violation_reason`, `schema_violation_reason`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+          #     Note: The following fields are mutually exclusive: `api_violation_reason`, `schema_violation_reason`, `message_transformation_failure_reason`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] schema_violation_reason
           #   @return [::Google::Cloud::PubSub::V1::IngestionFailureEvent::SchemaViolationReason]
           #     Optional. The Pub/Sub message failed schema validation.
           #
-          #     Note: The following fields are mutually exclusive: `schema_violation_reason`, `api_violation_reason`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+          #     Note: The following fields are mutually exclusive: `schema_violation_reason`, `api_violation_reason`, `message_transformation_failure_reason`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+          # @!attribute [rw] message_transformation_failure_reason
+          #   @return [::Google::Cloud::PubSub::V1::IngestionFailureEvent::MessageTransformationFailureReason]
+          #     Optional. Failure encountered when applying a message transformation to
+          #     the Pub/Sub message.
+          #
+          #     Note: The following fields are mutually exclusive: `message_transformation_failure_reason`, `api_violation_reason`, `schema_violation_reason`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           class AzureEventHubsFailureReason
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -634,12 +659,18 @@ module Google
           #     Optional. The Pub/Sub API limits prevented the desired message from
           #     being published.
           #
-          #     Note: The following fields are mutually exclusive: `api_violation_reason`, `schema_violation_reason`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+          #     Note: The following fields are mutually exclusive: `api_violation_reason`, `schema_violation_reason`, `message_transformation_failure_reason`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] schema_violation_reason
           #   @return [::Google::Cloud::PubSub::V1::IngestionFailureEvent::SchemaViolationReason]
           #     Optional. The Pub/Sub message failed schema validation.
           #
-          #     Note: The following fields are mutually exclusive: `schema_violation_reason`, `api_violation_reason`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+          #     Note: The following fields are mutually exclusive: `schema_violation_reason`, `api_violation_reason`, `message_transformation_failure_reason`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+          # @!attribute [rw] message_transformation_failure_reason
+          #   @return [::Google::Cloud::PubSub::V1::IngestionFailureEvent::MessageTransformationFailureReason]
+          #     Optional. Failure encountered when applying a message transformation to
+          #     the Pub/Sub message.
+          #
+          #     Note: The following fields are mutually exclusive: `message_transformation_failure_reason`, `api_violation_reason`, `schema_violation_reason`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           class ConfluentCloudFailureReason
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -658,6 +689,14 @@ module Google
           # @!attribute [rw] schema_violation_reason
           #   @return [::Google::Cloud::PubSub::V1::IngestionFailureEvent::SchemaViolationReason]
           #     Optional. The Pub/Sub message failed schema validation.
+          #
+          #     Note: The following fields are mutually exclusive: `schema_violation_reason`, `message_transformation_failure_reason`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+          # @!attribute [rw] message_transformation_failure_reason
+          #   @return [::Google::Cloud::PubSub::V1::IngestionFailureEvent::MessageTransformationFailureReason]
+          #     Optional. Failure encountered when applying a message transformation to
+          #     the Pub/Sub message.
+          #
+          #     Note: The following fields are mutually exclusive: `message_transformation_failure_reason`, `schema_violation_reason`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           class AwsKinesisFailureReason
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -1868,11 +1907,11 @@ module Google
         # @!attribute [rw] acknowledge_confirmation
         #   @return [::Google::Cloud::PubSub::V1::StreamingPullResponse::AcknowledgeConfirmation]
         #     Optional. This field will only be set if `enable_exactly_once_delivery` is
-        #     set to `true`.
+        #     set to `true` and is not guaranteed to be populated.
         # @!attribute [rw] modify_ack_deadline_confirmation
         #   @return [::Google::Cloud::PubSub::V1::StreamingPullResponse::ModifyAckDeadlineConfirmation]
         #     Optional. This field will only be set if `enable_exactly_once_delivery` is
-        #     set to `true`.
+        #     set to `true` and is not guaranteed to be populated.
         # @!attribute [rw] subscription_properties
         #   @return [::Google::Cloud::PubSub::V1::StreamingPullResponse::SubscriptionProperties]
         #     Optional. Properties associated with this subscription.
