@@ -29,10 +29,9 @@ module Google
         #   @return [::String]
         #     Identifier. The resource name of the `Contact`.
         #     Format: `networks/{network_code}/contacts/{contact_id}`
-        # @!attribute [r] contact_id
-        #   @return [::Integer]
-        #     Output only. The unique ID of the contact. This value is readonly and is
-        #     assigned by Google.
+        # @!attribute [r] company_display_name
+        #   @return [::String]
+        #     Output only. The display name of the Company.
         class Contact
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

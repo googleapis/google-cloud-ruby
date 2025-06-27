@@ -26,7 +26,7 @@ module Google
         #   @return [::String]
         #     Required. The resource name of the CustomTargetingValue.
         #     Format:
-        #     `networks/{network_code}/customTargetingKeys/{custom_targeting_key_id}/customTargetingValues/{custom_targeting_value_id}`
+        #     `networks/{network_code}/customTargetingValues/{custom_targeting_value_id}`
         class GetCustomTargetingValueRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -37,7 +37,7 @@ module Google
         #   @return [::String]
         #     Required. The parent, which owns this collection of CustomTargetingValues.
         #     Format:
-        #     `networks/{network_code}/customTargetingKeys/{custom_targeting_key_id}`
+        #     `networks/{network_code}`
         # @!attribute [rw] page_size
         #   @return [::Integer]
         #     Optional. The maximum number of `CustomTargetingValues` to return. The

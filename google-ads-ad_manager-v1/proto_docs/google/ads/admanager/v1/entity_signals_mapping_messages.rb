@@ -47,7 +47,7 @@ module Google
         #     Output only. `EntitySignalsMapping` ID.
         # @!attribute [rw] taxonomy_category_ids
         #   @return [::Array<::Integer>]
-        #     Required. The IDs of the categories that are associated with the
+        #     Optional. The IDs of the categories that are associated with the
         #     referencing entity.
         class EntitySignalsMapping
           include ::Google::Protobuf::MessageExts
