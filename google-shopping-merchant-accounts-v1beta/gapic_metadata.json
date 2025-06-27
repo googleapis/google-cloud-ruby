@@ -192,6 +192,35 @@
         }
       }
     },
+    "CheckoutSettingsService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Shopping::Merchant::Accounts::V1beta::CheckoutSettingsService::Client",
+          "rpcs": {
+            "GetCheckoutSettings": {
+              "methods": [
+                "get_checkout_settings"
+              ]
+            },
+            "CreateCheckoutSettings": {
+              "methods": [
+                "create_checkout_settings"
+              ]
+            },
+            "UpdateCheckoutSettings": {
+              "methods": [
+                "update_checkout_settings"
+              ]
+            },
+            "DeleteCheckoutSettings": {
+              "methods": [
+                "delete_checkout_settings"
+              ]
+            }
+          }
+        }
+      }
+    },
     "EmailPreferencesService": {
       "clients": {
         "grpc": {
