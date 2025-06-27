@@ -24,6 +24,7 @@ require "google/shopping/merchant/accounts/v1beta/autofeed_settings_service/rest
 require "google/shopping/merchant/accounts/v1beta/automatic_improvements_service/rest"
 require "google/shopping/merchant/accounts/v1beta/business_identity_service/rest"
 require "google/shopping/merchant/accounts/v1beta/business_info_service/rest"
+require "google/shopping/merchant/accounts/v1beta/checkout_settings_service/rest"
 require "google/shopping/merchant/accounts/v1beta/email_preferences_service/rest"
 require "google/shopping/merchant/accounts/v1beta/gbp_accounts_service/rest"
 require "google/shopping/merchant/accounts/v1beta/homepage_service/rest"
