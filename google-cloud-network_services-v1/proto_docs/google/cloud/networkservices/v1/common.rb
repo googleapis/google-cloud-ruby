@@ -101,7 +101,7 @@ module Google
           #
           #     If there is more than one best match, (for example, if a
           #     config P4 with selector <A:1,D:1> exists and if a client with
-          #     label <A:1,B:1,D:1> connects), an error will be thrown.
+          #     label <A:1,B:1,D:1> connects), pick up the one with older creation time.
           # @!attribute [rw] metadata_labels
           #   @return [::Array<::Google::Cloud::NetworkServices::V1::EndpointMatcher::MetadataLabelMatcher::MetadataLabels>]
           #     The list of label value pairs that must match labels in the
@@ -140,6 +140,23 @@ module Google
               MATCH_ALL = 2
             end
           end
+        end
+
+        # EnvoyHeader configuration for Mesh and Gateway
+        module EnvoyHeaders
+          # Defaults to NONE.
+          ENVOY_HEADERS_UNSPECIFIED = 0
+
+          # Suppress envoy debug headers.
+          NONE = 1
+
+          # Envoy will insert default internal debug headers into upstream requests:
+          # x-envoy-attempt-count
+          # x-envoy-is-timeout-retry
+          # x-envoy-expected-rq-timeout-ms
+          # x-envoy-original-path
+          # x-envoy-upstream-stream-duration-ms
+          DEBUG_HEADERS = 2
         end
       end
     end

@@ -16,11 +16,14 @@
 
 
 require "firestore_helper"
+require "cgi/escape"
 
 describe Google::Cloud::Firestore::Service, :firestore_acceptance do
   let :config_metadata do
+    routing_val = CGI.escapeURIComponent("projects/#{firestore.project_id}/databases/(default)")
+
     {
-      "google-cloud-resource-prefix": "projects/#{firestore.project_id}/databases/(default)"
+      "x-goog-request-params": "database=#{routing_val}"
     }
   end
 

@@ -19,6 +19,14 @@
       "component": "google-ads-ad_manager-v1",
       "version_file": "lib/google/ads/ad_manager/v1/version.rb"
     },
+    "google-ads-marketing_platform-admin": {
+      "component": "google-ads-marketing_platform-admin",
+      "version_file": "lib/google/ads/marketing_platform/admin/version.rb"
+    },
+    "google-ads-marketing_platform-admin-v1alpha": {
+      "component": "google-ads-marketing_platform-admin-v1alpha",
+      "version_file": "lib/google/ads/marketing_platform/admin/v1alpha/version.rb"
+    },
     "google-analytics-admin": {
       "component": "google-analytics-admin",
       "version_file": "lib/google/analytics/admin/version.rb"
@@ -399,6 +407,14 @@
       "component": "google-cloud-channel-v1",
       "version_file": "lib/google/cloud/channel/v1/version.rb"
     },
+    "google-cloud-chronicle": {
+      "component": "google-cloud-chronicle",
+      "version_file": "lib/google/cloud/chronicle/version.rb"
+    },
+    "google-cloud-chronicle-v1": {
+      "component": "google-cloud-chronicle-v1",
+      "version_file": "lib/google/cloud/chronicle/v1/version.rb"
+    },
     "google-cloud-cloud_controls_partner": {
       "component": "google-cloud-cloud_controls_partner",
       "version_file": "lib/google/cloud/cloud_controls_partner/version.rb"
@@ -551,6 +567,10 @@
       "component": "google-cloud-dataform",
       "version_file": "lib/google/cloud/dataform/version.rb"
     },
+    "google-cloud-dataform-v1": {
+      "component": "google-cloud-dataform-v1",
+      "version_file": "lib/google/cloud/dataform/v1/version.rb"
+    },
     "google-cloud-dataform-v1beta1": {
       "component": "google-cloud-dataform-v1beta1",
       "version_file": "lib/google/cloud/dataform/v1beta1/version.rb"
@@ -622,6 +642,14 @@
     "google-cloud-developer_connect-v1": {
       "component": "google-cloud-developer_connect-v1",
       "version_file": "lib/google/cloud/developer_connect/v1/version.rb"
+    },
+    "google-cloud-device_streaming": {
+      "component": "google-cloud-device_streaming",
+      "version_file": "lib/google/cloud/device_streaming/version.rb"
+    },
+    "google-cloud-device_streaming-v1": {
+      "component": "google-cloud-device_streaming-v1",
+      "version_file": "lib/google/cloud/device_streaming/v1/version.rb"
     },
     "google-cloud-dialogflow": {
       "component": "google-cloud-dialogflow",
@@ -746,6 +774,14 @@
     "google-cloud-filestore-v1": {
       "component": "google-cloud-filestore-v1",
       "version_file": "lib/google/cloud/filestore/v1/version.rb"
+    },
+    "google-cloud-financial_services": {
+      "component": "google-cloud-financial_services",
+      "version_file": "lib/google/cloud/financial_services/version.rb"
+    },
+    "google-cloud-financial_services-v1": {
+      "component": "google-cloud-financial_services-v1",
+      "version_file": "lib/google/cloud/financial_services/v1/version.rb"
     },
     "google-cloud-firestore": {
       "component": "google-cloud-firestore",
@@ -898,6 +934,14 @@
     "google-cloud-logging-v2": {
       "component": "google-cloud-logging-v2",
       "version_file": "lib/google/cloud/logging/v2/version.rb"
+    },
+    "google-cloud-lustre": {
+      "component": "google-cloud-lustre",
+      "version_file": "lib/google/cloud/lustre/version.rb"
+    },
+    "google-cloud-lustre-v1": {
+      "component": "google-cloud-lustre-v1",
+      "version_file": "lib/google/cloud/lustre/v1/version.rb"
     },
     "google-cloud-managed_identities": {
       "component": "google-cloud-managed_identities",
@@ -1439,6 +1483,14 @@
       "component": "google-cloud-storage-control-v2",
       "version_file": "lib/google/cloud/storage/control/v2/version.rb"
     },
+    "google-cloud-storage_batch_operations": {
+      "component": "google-cloud-storage_batch_operations",
+      "version_file": "lib/google/cloud/storage_batch_operations/version.rb"
+    },
+    "google-cloud-storage_batch_operations-v1": {
+      "component": "google-cloud-storage_batch_operations-v1",
+      "version_file": "lib/google/cloud/storage_batch_operations/v1/version.rb"
+    },
     "google-cloud-storage_insights": {
       "component": "google-cloud-storage_insights",
       "version_file": "lib/google/cloud/storage_insights/version.rb"
@@ -1462,6 +1514,10 @@
     "google-cloud-support-v2": {
       "component": "google-cloud-support-v2",
       "version_file": "lib/google/cloud/support/v2/version.rb"
+    },
+    "google-cloud-support-v2beta": {
+      "component": "google-cloud-support-v2beta",
+      "version_file": "lib/google/cloud/support/v2beta/version.rb"
     },
     "google-cloud-talent": {
       "component": "google-cloud-talent",
@@ -1719,6 +1775,14 @@
       "component": "google-iam-v2",
       "version_file": "lib/google/iam/v2/version.rb"
     },
+    "google-iam-v3": {
+      "component": "google-iam-v3",
+      "version_file": "lib/google/iam/v3/version.rb"
+    },
+    "google-iam-v3beta": {
+      "component": "google-iam-v3beta",
+      "version_file": "lib/google/iam/v3beta/version.rb"
+    },
     "google-identity-access_context_manager": {
       "component": "google-identity-access_context_manager",
       "version_file": "lib/google/identity/access_context_manager/version.rb"
@@ -1783,6 +1847,14 @@
       "component": "google-shopping-merchant-inventories-v1beta",
       "version_file": "lib/google/shopping/merchant/inventories/v1beta/version.rb"
     },
+    "google-shopping-merchant-issue_resolution": {
+      "component": "google-shopping-merchant-issue_resolution",
+      "version_file": "lib/google/shopping/merchant/issue_resolution/version.rb"
+    },
+    "google-shopping-merchant-issue_resolution-v1beta": {
+      "component": "google-shopping-merchant-issue_resolution-v1beta",
+      "version_file": "lib/google/shopping/merchant/issue_resolution/v1beta/version.rb"
+    },
     "google-shopping-merchant-lfp": {
       "component": "google-shopping-merchant-lfp",
       "version_file": "lib/google/shopping/merchant/lfp/version.rb"
@@ -1798,6 +1870,14 @@
     "google-shopping-merchant-notifications-v1beta": {
       "component": "google-shopping-merchant-notifications-v1beta",
       "version_file": "lib/google/shopping/merchant/notifications/v1beta/version.rb"
+    },
+    "google-shopping-merchant-order_tracking": {
+      "component": "google-shopping-merchant-order_tracking",
+      "version_file": "lib/google/shopping/merchant/order_tracking/version.rb"
+    },
+    "google-shopping-merchant-order_tracking-v1beta": {
+      "component": "google-shopping-merchant-order_tracking-v1beta",
+      "version_file": "lib/google/shopping/merchant/order_tracking/v1beta/version.rb"
     },
     "google-shopping-merchant-products": {
       "component": "google-shopping-merchant-products",

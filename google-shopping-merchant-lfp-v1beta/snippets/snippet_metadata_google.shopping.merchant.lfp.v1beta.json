@@ -1,7 +1,7 @@
 {
   "client_library": {
     "name": "google-shopping-merchant-lfp-v1beta",
-    "version": "0.3.0",
+    "version": "0.5.0",
     "language": "RUBY",
     "apis": [
       {
@@ -38,6 +38,46 @@
           "service": {
             "short_name": "LfpInventoryService",
             "full_name": "google.shopping.merchant.lfp.v1beta.LfpInventoryService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "merchantapi_v1beta_generated_LfpMerchantStateService_GetLfpMerchantState_sync",
+      "title": "Snippet for the get_lfp_merchant_state call in the LfpMerchantStateService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Shopping::Merchant::Lfp::V1beta::LfpMerchantStateService::Client#get_lfp_merchant_state.",
+      "file": "lfp_merchant_state_service/get_lfp_merchant_state.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_lfp_merchant_state",
+        "full_name": "::Google::Shopping::Merchant::Lfp::V1beta::LfpMerchantStateService::Client#get_lfp_merchant_state",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Shopping::Merchant::Lfp::V1beta::GetLfpMerchantStateRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Shopping::Merchant::Lfp::V1beta::LfpMerchantState",
+        "client": {
+          "short_name": "LfpMerchantStateService::Client",
+          "full_name": "::Google::Shopping::Merchant::Lfp::V1beta::LfpMerchantStateService::Client"
+        },
+        "method": {
+          "short_name": "GetLfpMerchantState",
+          "full_name": "google.shopping.merchant.lfp.v1beta.LfpMerchantStateService.GetLfpMerchantState",
+          "service": {
+            "short_name": "LfpMerchantStateService",
+            "full_name": "google.shopping.merchant.lfp.v1beta.LfpMerchantStateService"
           }
         }
       },

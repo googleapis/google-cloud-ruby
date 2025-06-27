@@ -1189,7 +1189,7 @@ module Google
               #       * `bigquery.dataset.project_id.dataset_id`
               #       * `datacatalog.entry.project_id.location_id.entry_group_id.entry_id`
               #
-              #     `*_id`s should satisfy the standard SQL rules for identifiers.
+              #     `*_id`s should satisfy the GoogleSQL rules for identifiers.
               #     https://cloud.google.com/bigquery/docs/reference/standard-sql/lexical.
               #
               #     Note: The following fields are mutually exclusive: `sql_resource`, `linked_resource`. If a field in that set is populated, all other fields in the set will automatically be cleared.
@@ -2907,7 +2907,7 @@ module Google
 
                 config_attr :endpoint,      nil, ::String, nil
                 config_attr :credentials,   nil do |value|
-                  allowed = [::String, ::Hash, ::Proc, ::Symbol, ::Google::Auth::Credentials, ::Signet::OAuth2::Client, nil]
+                  allowed = [::String, ::Hash, ::Proc, ::Symbol, ::Google::Auth::Credentials, ::Google::Auth::BaseClient, ::Signet::OAuth2::Client, nil]
                   allowed.any? { |klass| klass === value }
                 end
                 config_attr :scope,         nil, ::String, ::Array, nil

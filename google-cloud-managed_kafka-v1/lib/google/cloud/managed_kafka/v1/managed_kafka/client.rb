@@ -1623,6 +1623,683 @@ module Google
             end
 
             ##
+            # Lists the acls in a given cluster.
+            #
+            # @overload list_acls(request, options = nil)
+            #   Pass arguments to `list_acls` via a request object, either of type
+            #   {::Google::Cloud::ManagedKafka::V1::ListAclsRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::ManagedKafka::V1::ListAclsRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload list_acls(parent: nil, page_size: nil, page_token: nil)
+            #   Pass arguments to `list_acls` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param parent [::String]
+            #     Required. The parent cluster whose acls are to be listed.
+            #     Structured like
+            #     `projects/{project}/locations/{location}/clusters/{cluster}`.
+            #   @param page_size [::Integer]
+            #     Optional. The maximum number of acls to return. The service may return
+            #     fewer than this value. If unset or zero, all acls for the parent is
+            #     returned.
+            #   @param page_token [::String]
+            #     Optional. A page token, received from a previous `ListAcls` call.
+            #     Provide this to retrieve the subsequent page.
+            #
+            #     When paginating, all other parameters provided to `ListAcls` must match
+            #     the call that provided the page token.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Gapic::PagedEnumerable<::Google::Cloud::ManagedKafka::V1::Acl>]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Gapic::PagedEnumerable<::Google::Cloud::ManagedKafka::V1::Acl>]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/managed_kafka/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::ManagedKafka::V1::ManagedKafka::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::ManagedKafka::V1::ListAclsRequest.new
+            #
+            #   # Call the list_acls method.
+            #   result = client.list_acls request
+            #
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
+            #     # Each element is of type ::Google::Cloud::ManagedKafka::V1::Acl.
+            #     p item
+            #   end
+            #
+            def list_acls request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::ManagedKafka::V1::ListAclsRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.list_acls.metadata.to_h
+
+              # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::ManagedKafka::V1::VERSION
+              metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.list_acls.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.list_acls.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @managed_kafka_stub.call_rpc :list_acls, request, options: options do |response, operation|
+                response = ::Gapic::PagedEnumerable.new @managed_kafka_stub, :list_acls, request, response, operation, options
+                yield response, operation if block_given?
+                throw :response, response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Returns the properties of a single acl.
+            #
+            # @overload get_acl(request, options = nil)
+            #   Pass arguments to `get_acl` via a request object, either of type
+            #   {::Google::Cloud::ManagedKafka::V1::GetAclRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::ManagedKafka::V1::GetAclRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload get_acl(name: nil)
+            #   Pass arguments to `get_acl` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param name [::String]
+            #     Required. The name of the acl to return.
+            #     Structured like:
+            #     `projects/{project}/locations/{location}/clusters/{cluster}/acls/{acl_id}`.
+            #
+            #     The structure of `acl_id` defines the Resource Pattern (resource_type,
+            #     resource_name, pattern_type) of the acl. See `Acl.name` for
+            #     details.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Google::Cloud::ManagedKafka::V1::Acl]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Google::Cloud::ManagedKafka::V1::Acl]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/managed_kafka/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::ManagedKafka::V1::ManagedKafka::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::ManagedKafka::V1::GetAclRequest.new
+            #
+            #   # Call the get_acl method.
+            #   result = client.get_acl request
+            #
+            #   # The returned object is of type Google::Cloud::ManagedKafka::V1::Acl.
+            #   p result
+            #
+            def get_acl request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::ManagedKafka::V1::GetAclRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.get_acl.metadata.to_h
+
+              # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::ManagedKafka::V1::VERSION
+              metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.get_acl.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.get_acl.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @managed_kafka_stub.call_rpc :get_acl, request, options: options do |response, operation|
+                yield response, operation if block_given?
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Creates a new acl in the given project, location, and cluster.
+            #
+            # @overload create_acl(request, options = nil)
+            #   Pass arguments to `create_acl` via a request object, either of type
+            #   {::Google::Cloud::ManagedKafka::V1::CreateAclRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::ManagedKafka::V1::CreateAclRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload create_acl(parent: nil, acl_id: nil, acl: nil)
+            #   Pass arguments to `create_acl` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param parent [::String]
+            #     Required. The parent cluster in which to create the acl.
+            #     Structured like
+            #     `projects/{project}/locations/{location}/clusters/{cluster}`.
+            #   @param acl_id [::String]
+            #     Required. The ID to use for the acl, which will become the final component
+            #     of the acl's name. The structure of `acl_id` defines the Resource Pattern
+            #     (resource_type, resource_name, pattern_type) of the acl. `acl_id` is
+            #     structured like one of the following:
+            #
+            #     For acls on the cluster:
+            #       `cluster`
+            #
+            #     For acls on a single resource within the cluster:
+            #       `topic/{resource_name}`
+            #       `consumerGroup/{resource_name}`
+            #       `transactionalId/{resource_name}`
+            #
+            #     For acls on all resources that match a prefix:
+            #       `topicPrefixed/{resource_name}`
+            #       `consumerGroupPrefixed/{resource_name}`
+            #       `transactionalIdPrefixed/{resource_name}`
+            #
+            #     For acls on all resources of a given type (i.e. the wildcard literal "*"):
+            #       `allTopics` (represents `topic/*`)
+            #       `allConsumerGroups` (represents `consumerGroup/*`)
+            #       `allTransactionalIds` (represents `transactionalId/*`)
+            #   @param acl [::Google::Cloud::ManagedKafka::V1::Acl, ::Hash]
+            #     Required. Configuration of the acl to create. Its `name` field is ignored.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Google::Cloud::ManagedKafka::V1::Acl]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Google::Cloud::ManagedKafka::V1::Acl]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/managed_kafka/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::ManagedKafka::V1::ManagedKafka::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::ManagedKafka::V1::CreateAclRequest.new
+            #
+            #   # Call the create_acl method.
+            #   result = client.create_acl request
+            #
+            #   # The returned object is of type Google::Cloud::ManagedKafka::V1::Acl.
+            #   p result
+            #
+            def create_acl request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::ManagedKafka::V1::CreateAclRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.create_acl.metadata.to_h
+
+              # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::ManagedKafka::V1::VERSION
+              metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.create_acl.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.create_acl.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @managed_kafka_stub.call_rpc :create_acl, request, options: options do |response, operation|
+                yield response, operation if block_given?
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Updates the properties of a single acl.
+            #
+            # @overload update_acl(request, options = nil)
+            #   Pass arguments to `update_acl` via a request object, either of type
+            #   {::Google::Cloud::ManagedKafka::V1::UpdateAclRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::ManagedKafka::V1::UpdateAclRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload update_acl(acl: nil, update_mask: nil)
+            #   Pass arguments to `update_acl` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param acl [::Google::Cloud::ManagedKafka::V1::Acl, ::Hash]
+            #     Required. The updated acl. Its `name` and `etag` fields must be populated.
+            #     `acl_entries` must not be empty in the updated acl; to remove all acl
+            #     entries for an acl, use DeleteAcl.
+            #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
+            #     Optional. Field mask is used to specify the fields to be overwritten in the
+            #     Acl resource by the update. The fields specified in the update_mask are
+            #     relative to the resource, not the full request. A field will be overwritten
+            #     if it is in the mask.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Google::Cloud::ManagedKafka::V1::Acl]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Google::Cloud::ManagedKafka::V1::Acl]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/managed_kafka/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::ManagedKafka::V1::ManagedKafka::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::ManagedKafka::V1::UpdateAclRequest.new
+            #
+            #   # Call the update_acl method.
+            #   result = client.update_acl request
+            #
+            #   # The returned object is of type Google::Cloud::ManagedKafka::V1::Acl.
+            #   p result
+            #
+            def update_acl request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::ManagedKafka::V1::UpdateAclRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.update_acl.metadata.to_h
+
+              # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::ManagedKafka::V1::VERSION
+              metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.acl&.name
+                header_params["acl.name"] = request.acl.name
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.update_acl.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.update_acl.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @managed_kafka_stub.call_rpc :update_acl, request, options: options do |response, operation|
+                yield response, operation if block_given?
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Deletes an acl.
+            #
+            # @overload delete_acl(request, options = nil)
+            #   Pass arguments to `delete_acl` via a request object, either of type
+            #   {::Google::Cloud::ManagedKafka::V1::DeleteAclRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::ManagedKafka::V1::DeleteAclRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload delete_acl(name: nil)
+            #   Pass arguments to `delete_acl` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param name [::String]
+            #     Required. The name of the acl to delete.
+            #     Structured like:
+            #     `projects/{project}/locations/{location}/clusters/{cluster}/acls/{acl_id}`.
+            #
+            #     The structure of `acl_id` defines the Resource Pattern (resource_type,
+            #     resource_name, pattern_type) of the acl. See `Acl.name` for details.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Google::Protobuf::Empty]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Google::Protobuf::Empty]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/managed_kafka/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::ManagedKafka::V1::ManagedKafka::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::ManagedKafka::V1::DeleteAclRequest.new
+            #
+            #   # Call the delete_acl method.
+            #   result = client.delete_acl request
+            #
+            #   # The returned object is of type Google::Protobuf::Empty.
+            #   p result
+            #
+            def delete_acl request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::ManagedKafka::V1::DeleteAclRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.delete_acl.metadata.to_h
+
+              # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::ManagedKafka::V1::VERSION
+              metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.delete_acl.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.delete_acl.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @managed_kafka_stub.call_rpc :delete_acl, request, options: options do |response, operation|
+                yield response, operation if block_given?
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Incremental update: Adds an acl entry to an acl. Creates the acl if it does
+            # not exist yet.
+            #
+            # @overload add_acl_entry(request, options = nil)
+            #   Pass arguments to `add_acl_entry` via a request object, either of type
+            #   {::Google::Cloud::ManagedKafka::V1::AddAclEntryRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::ManagedKafka::V1::AddAclEntryRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload add_acl_entry(acl: nil, acl_entry: nil)
+            #   Pass arguments to `add_acl_entry` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param acl [::String]
+            #     Required. The name of the acl to add the acl entry to.
+            #     Structured like:
+            #     `projects/{project}/locations/{location}/clusters/{cluster}/acls/{acl_id}`.
+            #
+            #     The structure of `acl_id` defines the Resource Pattern (resource_type,
+            #     resource_name, pattern_type) of the acl. See `Acl.name` for
+            #     details.
+            #   @param acl_entry [::Google::Cloud::ManagedKafka::V1::AclEntry, ::Hash]
+            #     Required. The acl entry to add.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Google::Cloud::ManagedKafka::V1::AddAclEntryResponse]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Google::Cloud::ManagedKafka::V1::AddAclEntryResponse]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/managed_kafka/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::ManagedKafka::V1::ManagedKafka::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::ManagedKafka::V1::AddAclEntryRequest.new
+            #
+            #   # Call the add_acl_entry method.
+            #   result = client.add_acl_entry request
+            #
+            #   # The returned object is of type Google::Cloud::ManagedKafka::V1::AddAclEntryResponse.
+            #   p result
+            #
+            def add_acl_entry request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::ManagedKafka::V1::AddAclEntryRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.add_acl_entry.metadata.to_h
+
+              # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::ManagedKafka::V1::VERSION
+              metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.acl
+                header_params["acl"] = request.acl
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.add_acl_entry.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.add_acl_entry.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @managed_kafka_stub.call_rpc :add_acl_entry, request, options: options do |response, operation|
+                yield response, operation if block_given?
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Incremental update: Removes an acl entry from an acl. Deletes the acl if
+            # its acl entries become empty (i.e. if the removed entry was the last one in
+            # the acl).
+            #
+            # @overload remove_acl_entry(request, options = nil)
+            #   Pass arguments to `remove_acl_entry` via a request object, either of type
+            #   {::Google::Cloud::ManagedKafka::V1::RemoveAclEntryRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::ManagedKafka::V1::RemoveAclEntryRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload remove_acl_entry(acl: nil, acl_entry: nil)
+            #   Pass arguments to `remove_acl_entry` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param acl [::String]
+            #     Required. The name of the acl to remove the acl entry from.
+            #     Structured like:
+            #     `projects/{project}/locations/{location}/clusters/{cluster}/acls/{acl_id}`.
+            #
+            #     The structure of `acl_id` defines the Resource Pattern (resource_type,
+            #     resource_name, pattern_type) of the acl. See `Acl.name` for
+            #     details.
+            #   @param acl_entry [::Google::Cloud::ManagedKafka::V1::AclEntry, ::Hash]
+            #     Required. The acl entry to remove.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Google::Cloud::ManagedKafka::V1::RemoveAclEntryResponse]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Google::Cloud::ManagedKafka::V1::RemoveAclEntryResponse]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/managed_kafka/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::ManagedKafka::V1::ManagedKafka::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::ManagedKafka::V1::RemoveAclEntryRequest.new
+            #
+            #   # Call the remove_acl_entry method.
+            #   result = client.remove_acl_entry request
+            #
+            #   # The returned object is of type Google::Cloud::ManagedKafka::V1::RemoveAclEntryResponse.
+            #   p result
+            #
+            def remove_acl_entry request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::ManagedKafka::V1::RemoveAclEntryRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.remove_acl_entry.metadata.to_h
+
+              # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::ManagedKafka::V1::VERSION
+              metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.acl
+                header_params["acl"] = request.acl
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.remove_acl_entry.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.remove_acl_entry.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @managed_kafka_stub.call_rpc :remove_acl_entry, request, options: options do |response, operation|
+                yield response, operation if block_given?
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
             # Configuration class for the ManagedKafka API.
             #
             # This class represents the configuration for ManagedKafka,
@@ -1727,8 +2404,8 @@ module Google
 
               config_attr :endpoint,      nil, ::String, nil
               config_attr :credentials,   nil do |value|
-                allowed = [::String, ::Hash, ::Proc, ::Symbol, ::Google::Auth::Credentials, ::Signet::OAuth2::Client, nil]
-                allowed += [::GRPC::Core::Channel, ::GRPC::Core::ChannelCredentials] if defined? ::GRPC
+                allowed = [::String, ::Hash, ::Proc, ::Symbol, ::Google::Auth::Credentials, ::Google::Auth::BaseClient, ::Signet::OAuth2::Client, nil]
+                allowed += [::GRPC::Core::Channel, ::GRPC::Core::ChannelCredentials] if defined? ::GRPC::Core::Channel
                 allowed.any? { |klass| klass === value }
               end
               config_attr :scope,         nil, ::String, ::Array, nil
@@ -1858,6 +2535,41 @@ module Google
                 # @return [::Gapic::Config::Method]
                 #
                 attr_reader :delete_consumer_group
+                ##
+                # RPC-specific configuration for `list_acls`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :list_acls
+                ##
+                # RPC-specific configuration for `get_acl`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :get_acl
+                ##
+                # RPC-specific configuration for `create_acl`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :create_acl
+                ##
+                # RPC-specific configuration for `update_acl`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :update_acl
+                ##
+                # RPC-specific configuration for `delete_acl`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :delete_acl
+                ##
+                # RPC-specific configuration for `add_acl_entry`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :add_acl_entry
+                ##
+                # RPC-specific configuration for `remove_acl_entry`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :remove_acl_entry
 
                 # @private
                 def initialize parent_rpcs = nil
@@ -1889,6 +2601,20 @@ module Google
                   @update_consumer_group = ::Gapic::Config::Method.new update_consumer_group_config
                   delete_consumer_group_config = parent_rpcs.delete_consumer_group if parent_rpcs.respond_to? :delete_consumer_group
                   @delete_consumer_group = ::Gapic::Config::Method.new delete_consumer_group_config
+                  list_acls_config = parent_rpcs.list_acls if parent_rpcs.respond_to? :list_acls
+                  @list_acls = ::Gapic::Config::Method.new list_acls_config
+                  get_acl_config = parent_rpcs.get_acl if parent_rpcs.respond_to? :get_acl
+                  @get_acl = ::Gapic::Config::Method.new get_acl_config
+                  create_acl_config = parent_rpcs.create_acl if parent_rpcs.respond_to? :create_acl
+                  @create_acl = ::Gapic::Config::Method.new create_acl_config
+                  update_acl_config = parent_rpcs.update_acl if parent_rpcs.respond_to? :update_acl
+                  @update_acl = ::Gapic::Config::Method.new update_acl_config
+                  delete_acl_config = parent_rpcs.delete_acl if parent_rpcs.respond_to? :delete_acl
+                  @delete_acl = ::Gapic::Config::Method.new delete_acl_config
+                  add_acl_entry_config = parent_rpcs.add_acl_entry if parent_rpcs.respond_to? :add_acl_entry
+                  @add_acl_entry = ::Gapic::Config::Method.new add_acl_entry_config
+                  remove_acl_entry_config = parent_rpcs.remove_acl_entry if parent_rpcs.respond_to? :remove_acl_entry
+                  @remove_acl_entry = ::Gapic::Config::Method.new remove_acl_entry_config
 
                   yield self if block_given?
                 end

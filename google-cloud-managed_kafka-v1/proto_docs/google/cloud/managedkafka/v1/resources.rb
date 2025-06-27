@@ -482,7 +482,8 @@ module Google
         # Note that the delay between consecutive task restarts may not always
         # precisely match the configured settings. This can happen when the
         # ConnectCluster is in rebalancing state or if the ConnectCluster is
-        # unresponsive etc.
+        # unresponsive etc. The default values for minimum and maximum backoffs are
+        # 60 seconds and 30 minutes respectively.
         # @!attribute [rw] minimum_backoff
         #   @return [::Google::Protobuf::Duration]
         #     Optional. The minimum amount of time to wait before retrying a failed task.
@@ -492,6 +493,95 @@ module Google
         #     Optional. The maximum amount of time to wait before retrying a failed task.
         #     This sets an upper bound for the backoff delay.
         class TaskRetryPolicy
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Represents the set of ACLs for a given Kafka Resource Pattern, which consists
+        # of resource_type, resource_name and pattern_type.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Identifier. The name for the acl. Represents a single Resource Pattern.
+        #     Structured like:
+        #     projects/\\{project}/locations/\\{location}/clusters/\\{cluster}/acls/\\{acl_id}
+        #
+        #     The structure of `acl_id` defines the Resource Pattern (resource_type,
+        #     resource_name, pattern_type) of the acl. `acl_id` is structured like one of
+        #     the following:
+        #
+        #     For acls on the cluster:
+        #       `cluster`
+        #
+        #     For acls on a single resource within the cluster:
+        #       `topic/{resource_name}`
+        #       `consumerGroup/{resource_name}`
+        #       `transactionalId/{resource_name}`
+        #
+        #     For acls on all resources that match a prefix:
+        #       `topicPrefixed/{resource_name}`
+        #       `consumerGroupPrefixed/{resource_name}`
+        #       `transactionalIdPrefixed/{resource_name}`
+        #
+        #     For acls on all resources of a given type (i.e. the wildcard literal "*"):
+        #       `allTopics` (represents `topic/*`)
+        #       `allConsumerGroups` (represents `consumerGroup/*`)
+        #       `allTransactionalIds` (represents `transactionalId/*`)
+        # @!attribute [rw] acl_entries
+        #   @return [::Array<::Google::Cloud::ManagedKafka::V1::AclEntry>]
+        #     Required. The ACL entries that apply to the resource pattern. The maximum
+        #     number of allowed entries 100.
+        # @!attribute [rw] etag
+        #   @return [::String]
+        #     Optional. `etag` is used for concurrency control. An `etag` is returned in
+        #     the response to `GetAcl` and `CreateAcl`. Callers are required to put that
+        #     etag in the request to `UpdateAcl` to ensure that their change will be
+        #     applied to the same version of the acl that exists in the Kafka Cluster.
+        #
+        #     A terminal 'T' character in the etag indicates that the AclEntries were
+        #     truncated; more entries for the Acl exist on the Kafka Cluster, but can't
+        #     be returned in the Acl due to repeated field limits.
+        # @!attribute [r] resource_type
+        #   @return [::String]
+        #     Output only. The ACL resource type derived from the name. One of: CLUSTER,
+        #     TOPIC, GROUP, TRANSACTIONAL_ID.
+        # @!attribute [r] resource_name
+        #   @return [::String]
+        #     Output only. The ACL resource name derived from the name. For cluster
+        #     resource_type, this is always "kafka-cluster". Can be the wildcard literal
+        #     "*".
+        # @!attribute [r] pattern_type
+        #   @return [::String]
+        #     Output only. The ACL pattern type derived from the name. One of: LITERAL,
+        #     PREFIXED.
+        class Acl
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Represents the access granted for a given Resource Pattern in an ACL.
+        # @!attribute [rw] principal
+        #   @return [::String]
+        #     Required. The principal. Specified as Google Cloud account, with the Kafka
+        #     StandardAuthorizer prefix "User:". For example:
+        #     "User:test-kafka-client@test-project.iam.gserviceaccount.com".
+        #     Can be the wildcard "User:*" to refer to all users.
+        # @!attribute [rw] permission_type
+        #   @return [::String]
+        #     Required. The permission type. Accepted values are (case insensitive):
+        #     ALLOW, DENY.
+        # @!attribute [rw] operation
+        #   @return [::String]
+        #     Required. The operation type. Allowed values are (case insensitive): ALL,
+        #     READ, WRITE, CREATE, DELETE, ALTER, DESCRIBE, CLUSTER_ACTION,
+        #     DESCRIBE_CONFIGS, ALTER_CONFIGS, and IDEMPOTENT_WRITE. See
+        #     https://kafka.apache.org/documentation/#operations_resources_and_protocols
+        #     for valid combinations of resource_type and operation for different Kafka
+        #     API requests.
+        # @!attribute [rw] host
+        #   @return [::String]
+        #     Required. The host. Must be set to "*" for Managed Service for Apache
+        #     Kafka.
+        class AclEntry
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end

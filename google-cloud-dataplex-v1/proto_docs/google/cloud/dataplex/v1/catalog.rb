@@ -1309,9 +1309,23 @@ module Google
         # @!attribute [rw] import_spec
         #   @return [::Google::Cloud::Dataplex::V1::MetadataJob::ImportJobSpec]
         #     Import job specification.
+        #
+        #     Note: The following fields are mutually exclusive: `import_spec`, `export_spec`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] export_spec
+        #   @return [::Google::Cloud::Dataplex::V1::MetadataJob::ExportJobSpec]
+        #     Export job specification.
+        #
+        #     Note: The following fields are mutually exclusive: `export_spec`, `import_spec`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [r] import_result
         #   @return [::Google::Cloud::Dataplex::V1::MetadataJob::ImportJobResult]
         #     Output only. Import job result.
+        #
+        #     Note: The following fields are mutually exclusive: `import_result`, `export_result`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [r] export_result
+        #   @return [::Google::Cloud::Dataplex::V1::MetadataJob::ExportJobResult]
+        #     Output only. Export job result.
+        #
+        #     Note: The following fields are mutually exclusive: `export_result`, `import_result`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [r] status
         #   @return [::Google::Cloud::Dataplex::V1::MetadataJob::Status]
         #     Output only. Metadata job status.
@@ -1343,6 +1357,20 @@ module Google
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
 
+          # Summary results from a metadata export job. The results are a snapshot of
+          # the metadata at the time when the job was created. The exported entries are
+          # saved to a Cloud Storage bucket.
+          # @!attribute [r] exported_entries
+          #   @return [::Integer]
+          #     Output only. The number of entries that were exported.
+          # @!attribute [r] error_message
+          #   @return [::String]
+          #     Output only. The error message if the metadata export job failed.
+          class ExportJobResult
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
           # Job specification for a metadata import job.
           #
           # You can run the following kinds of metadata import jobs:
@@ -1360,8 +1388,9 @@ module Google
           #     this job.
           #
           #     A metadata import file defines the values to set for each of the entries
-          #     and aspects in a metadata job. For more information about how to create a
-          #     metadata import file and the file requirements, see [Metadata import
+          #     and aspects in a metadata import job. For more information about how to
+          #     create a metadata import file and the file requirements, see [Metadata
+          #     import
           #     file](https://cloud.google.com/dataplex/docs/import-metadata#metadata-import-file).
           #
           #     You can provide multiple metadata import files in the same metadata job.
@@ -1446,8 +1475,8 @@ module Google
               extend ::Google::Protobuf::MessageExts::ClassMethods
             end
 
-            # Specifies how the entries and aspects in a metadata job are updated. For
-            # more information, see [Sync
+            # Specifies how the entries and aspects in a metadata import job are
+            # updated. For more information, see [Sync
             # mode](https://cloud.google.com/dataplex/docs/import-metadata#sync-mode).
             module SyncMode
               # Sync mode unspecified.
@@ -1497,6 +1526,83 @@ module Google
               # aggregate logs about import items, but doesn't specify which import
               # item has an error.
               INFO = 2
+            end
+          end
+
+          # Job specification for a metadata export job.
+          # @!attribute [rw] scope
+          #   @return [::Google::Cloud::Dataplex::V1::MetadataJob::ExportJobSpec::ExportJobScope]
+          #     Required. The scope of the export job.
+          # @!attribute [rw] output_path
+          #   @return [::String]
+          #     Required. The root path of the Cloud Storage bucket to export the
+          #     metadata to, in the format `gs://{bucket}/`. You can optionally specify a
+          #     custom prefix after the bucket name, in the format
+          #     `gs://{bucket}/{prefix}/`. The maximum length of the custom prefix is 128
+          #     characters. Dataplex constructs the object path for the exported files by
+          #     using the bucket name and prefix that you provide, followed by a
+          #     system-generated path.
+          #
+          #     The bucket must be in the same VPC Service Controls perimeter as the job.
+          class ExportJobSpec
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+
+            # The scope of the export job.
+            # @!attribute [rw] organization_level
+            #   @return [::Boolean]
+            #     Whether the metadata export job is an organization-level export job.
+            #
+            #     - If `true`, the job exports the entries from the same organization and
+            #     VPC Service Controls perimeter as the job. The project that the job
+            #     belongs to determines the VPC Service Controls perimeter. If you set
+            #     the job scope to be at the organization level, then don't provide a
+            #     list of projects or entry groups.
+            #     - If `false`, you must specify a list of projects or a list of entry
+            #     groups whose entries you want to export.
+            #
+            #     The default is `false`.
+            # @!attribute [rw] projects
+            #   @return [::Array<::String>]
+            #     The projects whose metadata you want to export, in the format
+            #     `projects/{project_id_or_number}`. Only the entries from
+            #     the specified projects are exported.
+            #
+            #     The projects must be in the same organization and VPC Service Controls
+            #     perimeter as the job.
+            #
+            #     If you set the job scope to be a list of projects, then set the
+            #     organization-level export flag to false and don't provide a list of
+            #     entry groups.
+            # @!attribute [rw] entry_groups
+            #   @return [::Array<::String>]
+            #     The entry groups whose metadata you want to export, in the format
+            #     `projects/{project_id_or_number}/locations/{location_id}/entryGroups/{entry_group_id}`.
+            #     Only the entries in the specified entry groups are exported.
+            #
+            #     The entry groups must be in the same location and the same VPC Service
+            #     Controls perimeter as the job.
+            #
+            #     If you set the job scope to be a list of entry groups, then set the
+            #     organization-level export flag to false and don't provide a list of
+            #     projects.
+            # @!attribute [rw] entry_types
+            #   @return [::Array<::String>]
+            #     The entry types that are in scope for the export job, specified as
+            #     relative resource names in the format
+            #     `projects/{project_id_or_number}/locations/{location}/entryTypes/{entry_type_id}`.
+            #     Only entries that belong to the specified entry types are affected by
+            #     the job.
+            # @!attribute [rw] aspect_types
+            #   @return [::Array<::String>]
+            #     The aspect types that are in scope for the export job, specified as
+            #     relative resource names in the format
+            #     `projects/{project_id_or_number}/locations/{location}/aspectTypes/{aspect_type_id}`.
+            #     Only aspects that belong to the specified aspect types are affected by
+            #     the job.
+            class ExportJobScope
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
             end
           end
 
@@ -1561,6 +1667,9 @@ module Google
 
             # Import job.
             IMPORT = 1
+
+            # Export job.
+            EXPORT = 2
           end
         end
 

@@ -27,7 +27,7 @@ module Google
         # an all endpoints that serve on port 8080.
         # @!attribute [rw] name
         #   @return [::String]
-        #     Required. Name of the EndpointPolicy resource. It matches pattern
+        #     Identifier. Name of the EndpointPolicy resource. It matches pattern
         #     `projects/{project}/locations/global/endpointPolicies/{endpoint_policy}`.
         # @!attribute [r] create_time
         #   @return [::Google::Protobuf::Timestamp]
@@ -117,6 +117,11 @@ module Google
         #     Indicates that this is a continuation of a prior
         #     `ListEndpointPolicies` call, and that the system should return the
         #     next page of data.
+        # @!attribute [rw] return_partial_success
+        #   @return [::Boolean]
+        #     Optional. If true, allow partial responses for multi-regional Aggregated
+        #     List requests. Otherwise if one of the locations is down or unreachable,
+        #     the Aggregated List request will fail.
         class ListEndpointPoliciesRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -131,6 +136,12 @@ module Google
         #     If there might be more results than those appearing in this response, then
         #     `next_page_token` is included. To get the next set of results, call this
         #     method again using the value of `next_page_token` as `page_token`.
+        # @!attribute [rw] unreachable
+        #   @return [::Array<::String>]
+        #     Unreachable resources. Populated when the request opts into
+        #     {::Google::Cloud::NetworkServices::V1::ListEndpointPoliciesRequest#return_partial_success return_partial_success}
+        #     and reading across collections e.g. when
+        #     attempting to list all resources across all supported locations.
         class ListEndpointPoliciesResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

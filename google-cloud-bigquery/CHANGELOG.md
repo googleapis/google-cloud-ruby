@@ -1,5 +1,11 @@
 # Release History
 
+### 1.52.1 (2025-04-25)
+
+#### Documentation
+
+* Fixed a typo in the overview ([#29526](https://github.com/googleapis/google-cloud-ruby/issues/29526)) 
+
 ### 1.52.0 (2025-03-10)
 
 #### Features

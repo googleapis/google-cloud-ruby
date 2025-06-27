@@ -219,6 +219,13 @@ module Google
         # @!attribute [rw] node_selector
         #   @return [::Google::Cloud::Run::V2::NodeSelector]
         #     The node selector for the revision.
+        # @!attribute [r] gpu_zonal_redundancy_disabled
+        #   @return [::Boolean]
+        #     Optional. Output only. True if GPU zonal redundancy is disabled on this
+        #     revision.
+        # @!attribute [r] creator
+        #   @return [::String]
+        #     Output only. Email address of the authenticated creator.
         # @!attribute [r] etag
         #   @return [::String]
         #     Output only. A system-generated fingerprint for this version of the

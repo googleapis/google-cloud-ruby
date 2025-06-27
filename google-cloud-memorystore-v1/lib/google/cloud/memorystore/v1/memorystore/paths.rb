@@ -25,6 +25,46 @@ module Google
           # Path helper methods for the Memorystore API.
           module Paths
             ##
+            # Create a fully-qualified Backup resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `projects/{project}/locations/{location}/backupCollections/{backup_collection}/backups/{backup}`
+            #
+            # @param project [String]
+            # @param location [String]
+            # @param backup_collection [String]
+            # @param backup [String]
+            #
+            # @return [::String]
+            def backup_path project:, location:, backup_collection:, backup:
+              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+              raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+              raise ::ArgumentError, "backup_collection cannot contain /" if backup_collection.to_s.include? "/"
+
+              "projects/#{project}/locations/#{location}/backupCollections/#{backup_collection}/backups/#{backup}"
+            end
+
+            ##
+            # Create a fully-qualified BackupCollection resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `projects/{project}/locations/{location}/backupCollections/{backup_collection}`
+            #
+            # @param project [String]
+            # @param location [String]
+            # @param backup_collection [String]
+            #
+            # @return [::String]
+            def backup_collection_path project:, location:, backup_collection:
+              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+              raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+
+              "projects/#{project}/locations/#{location}/backupCollections/#{backup_collection}"
+            end
+
+            ##
             # Create a fully-qualified ForwardingRule resource string.
             #
             # The resource will be in the following format:

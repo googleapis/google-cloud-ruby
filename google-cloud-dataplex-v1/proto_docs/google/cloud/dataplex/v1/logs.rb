@@ -924,6 +924,33 @@ module Google
             GLOSSARY_TERM_DELETE = 9
           end
         end
+
+        # Payload associated with Entry related log events.
+        # @!attribute [rw] message
+        #   @return [::String]
+        #     The log message.
+        # @!attribute [rw] event_type
+        #   @return [::Google::Cloud::Dataplex::V1::EntryLinkEvent::EventType]
+        #     The type of the event.
+        # @!attribute [rw] resource
+        #   @return [::String]
+        #     Name of the resource.
+        class EntryLinkEvent
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Type of entry link log event.
+          module EventType
+            # An unspecified event type.
+            EVENT_TYPE_UNSPECIFIED = 0
+
+            # EntryLink create event.
+            ENTRY_LINK_CREATE = 1
+
+            # EntryLink delete event.
+            ENTRY_LINK_DELETE = 2
+          end
+        end
       end
     end
   end

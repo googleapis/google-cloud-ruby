@@ -1,5 +1,24 @@
 # Release History
 
+### 1.4.0 (2025-05-12)
+
+#### Features
+
+* Updated core dependencies including gapic-common 
+* Updated required Ruby version to 3.1 
+
+### 1.3.1 (2025-04-29)
+
+#### Bug Fixes
+
+* Fixed several issues with validating credential configs 
+
+### 1.3.0 (2025-04-21)
+
+#### Features
+
+* A new method_signature `parent,submission` is added to method `SubmitUri` in service `WebRiskService` ([#29444](https://github.com/googleapis/google-cloud-ruby/issues/29444)) 
+
 ### 1.2.0 (2025-01-29)
 
 #### Features

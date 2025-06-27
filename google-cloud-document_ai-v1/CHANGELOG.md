@@ -1,5 +1,26 @@
 # Changelog
 
+### 1.6.0 (2025-05-12)
+
+#### Features
+
+* Updated core dependencies including gapic-common 
+* Updated required Ruby version to 3.1 
+
+### 1.5.1 (2025-04-29)
+
+#### Bug Fixes
+
+* Fixed several issues with validating credential configs 
+
+### 1.5.0 (2025-04-25)
+
+#### Features
+
+* LayoutConfig includes whether to return images and bounding boxes 
+* Support for document identifiers 
+* Support for document layout block bounding boxes 
+
 ### 1.4.0 (2025-01-28)
 
 #### Features

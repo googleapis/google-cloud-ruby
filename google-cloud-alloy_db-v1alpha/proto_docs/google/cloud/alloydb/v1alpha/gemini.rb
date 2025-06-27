@@ -21,30 +21,45 @@ module Google
   module Cloud
     module AlloyDB
       module V1alpha
-        # Cluster level configuration parameters related to the Gemini in Databases
-        # add-on.
+        # Deprecated and unused. This message will be removed in the near future.
         # @!attribute [r] entitled
+        #   @deprecated This field is deprecated and may be removed in the next major version update.
         #   @return [::Boolean]
-        #     Output only. Whether the Gemini in Databases add-on is enabled for the
-        #     cluster. It will be true only if the add-on has been enabled for the
-        #     billing account corresponding to the cluster. Its status is toggled from
-        #     the Admin Control Center (ACC) and cannot be toggled using AlloyDB's APIs.
+        #     Output only. Deprecated and unused. This field will be removed in the near
+        #     future.
         class GeminiClusterConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Instance level configuration parameters related to the Gemini in Databases
-        # add-on.
+        # Deprecated and unused. This message will be removed in the near future.
         # @!attribute [r] entitled
+        #   @deprecated This field is deprecated and may be removed in the next major version update.
         #   @return [::Boolean]
-        #     Output only. Whether the Gemini in Databases add-on is enabled for the
-        #     instance. It will be true only if the add-on has been enabled for the
-        #     billing account corresponding to the instance. Its status is toggled from
-        #     the Admin Control Center (ACC) and cannot be toggled using AlloyDB's APIs.
+        #     Output only. Deprecated and unused. This field will be removed in the near
+        #     future.
         class GeminiInstanceConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Instance level configuration parameters related to the Gemini Cloud Assist
+        # product.
+        # @!attribute [r] gca_entitlement
+        #   @return [::Google::Cloud::AlloyDB::V1alpha::GCAEntitlementType]
+        #     Output only. Represents the GCA entitlement state of the instance.
+        class GCAInstanceConfig
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Enum representing the type of GCA entitlement assigned to a resource.
+        module GCAEntitlementType
+          # No GCA entitlement is assigned.
+          GCA_ENTITLEMENT_TYPE_UNSPECIFIED = 0
+
+          # The resource is entitled to the GCA Standard Tier.
+          GCA_STANDARD = 1
         end
       end
     end

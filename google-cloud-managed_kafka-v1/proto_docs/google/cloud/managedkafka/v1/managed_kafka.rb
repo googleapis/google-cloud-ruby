@@ -335,6 +335,193 @@ module Google
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
+
+        # Request for ListAcls.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. The parent cluster whose acls are to be listed.
+        #     Structured like
+        #     `projects/{project}/locations/{location}/clusters/{cluster}`.
+        # @!attribute [rw] page_size
+        #   @return [::Integer]
+        #     Optional. The maximum number of acls to return. The service may return
+        #     fewer than this value. If unset or zero, all acls for the parent is
+        #     returned.
+        # @!attribute [rw] page_token
+        #   @return [::String]
+        #     Optional. A page token, received from a previous `ListAcls` call.
+        #     Provide this to retrieve the subsequent page.
+        #
+        #     When paginating, all other parameters provided to `ListAcls` must match
+        #     the call that provided the page token.
+        class ListAclsRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Response for ListAcls.
+        # @!attribute [rw] acls
+        #   @return [::Array<::Google::Cloud::ManagedKafka::V1::Acl>]
+        #     The list of acls in the requested parent. The order of the acls is
+        #     unspecified.
+        # @!attribute [rw] next_page_token
+        #   @return [::String]
+        #     A token that can be sent as `page_token` to retrieve the next page of
+        #     results. If this field is omitted, there are no more results.
+        class ListAclsResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request for GetAcl.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The name of the acl to return.
+        #     Structured like:
+        #     `projects/{project}/locations/{location}/clusters/{cluster}/acls/{acl_id}`.
+        #
+        #     The structure of `acl_id` defines the Resource Pattern (resource_type,
+        #     resource_name, pattern_type) of the acl. See `Acl.name` for
+        #     details.
+        class GetAclRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request for CreateAcl.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. The parent cluster in which to create the acl.
+        #     Structured like
+        #     `projects/{project}/locations/{location}/clusters/{cluster}`.
+        # @!attribute [rw] acl_id
+        #   @return [::String]
+        #     Required. The ID to use for the acl, which will become the final component
+        #     of the acl's name. The structure of `acl_id` defines the Resource Pattern
+        #     (resource_type, resource_name, pattern_type) of the acl. `acl_id` is
+        #     structured like one of the following:
+        #
+        #     For acls on the cluster:
+        #       `cluster`
+        #
+        #     For acls on a single resource within the cluster:
+        #       `topic/{resource_name}`
+        #       `consumerGroup/{resource_name}`
+        #       `transactionalId/{resource_name}`
+        #
+        #     For acls on all resources that match a prefix:
+        #       `topicPrefixed/{resource_name}`
+        #       `consumerGroupPrefixed/{resource_name}`
+        #       `transactionalIdPrefixed/{resource_name}`
+        #
+        #     For acls on all resources of a given type (i.e. the wildcard literal "*"):
+        #       `allTopics` (represents `topic/*`)
+        #       `allConsumerGroups` (represents `consumerGroup/*`)
+        #       `allTransactionalIds` (represents `transactionalId/*`)
+        # @!attribute [rw] acl
+        #   @return [::Google::Cloud::ManagedKafka::V1::Acl]
+        #     Required. Configuration of the acl to create. Its `name` field is ignored.
+        class CreateAclRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request for UpdateAcl.
+        # @!attribute [rw] acl
+        #   @return [::Google::Cloud::ManagedKafka::V1::Acl]
+        #     Required. The updated acl. Its `name` and `etag` fields must be populated.
+        #     `acl_entries` must not be empty in the updated acl; to remove all acl
+        #     entries for an acl, use DeleteAcl.
+        # @!attribute [rw] update_mask
+        #   @return [::Google::Protobuf::FieldMask]
+        #     Optional. Field mask is used to specify the fields to be overwritten in the
+        #     Acl resource by the update. The fields specified in the update_mask are
+        #     relative to the resource, not the full request. A field will be overwritten
+        #     if it is in the mask.
+        class UpdateAclRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request for DeleteAcl.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The name of the acl to delete.
+        #     Structured like:
+        #     `projects/{project}/locations/{location}/clusters/{cluster}/acls/{acl_id}`.
+        #
+        #     The structure of `acl_id` defines the Resource Pattern (resource_type,
+        #     resource_name, pattern_type) of the acl. See `Acl.name` for details.
+        class DeleteAclRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request for AddAclEntry.
+        # @!attribute [rw] acl
+        #   @return [::String]
+        #     Required. The name of the acl to add the acl entry to.
+        #     Structured like:
+        #     `projects/{project}/locations/{location}/clusters/{cluster}/acls/{acl_id}`.
+        #
+        #     The structure of `acl_id` defines the Resource Pattern (resource_type,
+        #     resource_name, pattern_type) of the acl. See `Acl.name` for
+        #     details.
+        # @!attribute [rw] acl_entry
+        #   @return [::Google::Cloud::ManagedKafka::V1::AclEntry]
+        #     Required. The acl entry to add.
+        class AddAclEntryRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Response for AddAclEntry.
+        # @!attribute [rw] acl
+        #   @return [::Google::Cloud::ManagedKafka::V1::Acl]
+        #     The updated acl.
+        # @!attribute [rw] acl_created
+        #   @return [::Boolean]
+        #     Whether the acl was created as a result of adding the acl entry.
+        class AddAclEntryResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request for RemoveAclEntry.
+        # @!attribute [rw] acl
+        #   @return [::String]
+        #     Required. The name of the acl to remove the acl entry from.
+        #     Structured like:
+        #     `projects/{project}/locations/{location}/clusters/{cluster}/acls/{acl_id}`.
+        #
+        #     The structure of `acl_id` defines the Resource Pattern (resource_type,
+        #     resource_name, pattern_type) of the acl. See `Acl.name` for
+        #     details.
+        # @!attribute [rw] acl_entry
+        #   @return [::Google::Cloud::ManagedKafka::V1::AclEntry]
+        #     Required. The acl entry to remove.
+        class RemoveAclEntryRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Response for RemoveAclEntry.
+        # @!attribute [rw] acl
+        #   @return [::Google::Cloud::ManagedKafka::V1::Acl]
+        #     The updated acl. Returned if the removed acl entry was not the last entry
+        #     in the acl.
+        #
+        #     Note: The following fields are mutually exclusive: `acl`, `acl_deleted`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] acl_deleted
+        #   @return [::Boolean]
+        #     Returned with value true if the removed acl entry was the last entry in
+        #     the acl, resulting in acl deletion.
+        #
+        #     Note: The following fields are mutually exclusive: `acl_deleted`, `acl`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        class RemoveAclEntryResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
       end
     end
   end

@@ -1,5 +1,17 @@
 # Release History
 
+### 3.0.2 (2025-05-27)
+
+#### Documentation
+
+* Add h1 heading to migration docs ([#30436](https://github.com/googleapis/google-cloud-ruby/issues/30436)) 
+
+### 3.0.1 (2025-04-29)
+
+#### Bug Fixes
+
+* Fixed several issues with validating credential configs 
+
 ### 3.0.0 (2025-02-13)
 
 ### ⚠ BREAKING CHANGES

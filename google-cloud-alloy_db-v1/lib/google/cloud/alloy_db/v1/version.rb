@@ -21,7 +21,7 @@ module Google
   module Cloud
     module AlloyDB
       module V1
-        VERSION = "1.0.0"
+        VERSION = "1.3.0"
       end
     end
   end

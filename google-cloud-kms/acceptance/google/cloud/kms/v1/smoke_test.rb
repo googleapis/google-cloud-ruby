@@ -23,8 +23,7 @@ class KmsServiceSmokeTest < Minitest::Spec
     key_rings = kms.list_key_rings(parent: key_ring_parent) do |result, operation|
       assert_kind_of ::GRPC::ActiveCall::Operation, operation
     end.to_a
-    _(key_rings.size).must_equal 1
-    _(key_rings[0].name).must_match %r{keyRings/ruby-test$}
+    assert key_rings.any? { |ring| ring.name.end_with? "keyRings/ruby-test" }
   end
 
   def test_list_locations_grpc
@@ -48,8 +47,7 @@ class KmsServiceSmokeTest < Minitest::Spec
     key_rings = kms.list_key_rings(parent: key_ring_parent) do |result, operation|
       assert_kind_of ::Faraday::Response, operation.underlying_op
     end.to_a
-    _(key_rings.size).must_equal 1
-    _(key_rings[0].name).must_match %r{keyRings/ruby-test$}
+    assert key_rings.any? { |ring| ring.name.end_with? "keyRings/ruby-test" }
   end
 
   def test_list_locations_rest

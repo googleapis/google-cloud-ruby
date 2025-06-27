@@ -5,6 +5,35 @@
   "protoPackage": "google.cloud.discoveryengine.v1",
   "libraryPackage": "::Google::Cloud::DiscoveryEngine::V1",
   "services": {
+    "CmekConfigService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::DiscoveryEngine::V1::CmekConfigService::Client",
+          "rpcs": {
+            "UpdateCmekConfig": {
+              "methods": [
+                "update_cmek_config"
+              ]
+            },
+            "GetCmekConfig": {
+              "methods": [
+                "get_cmek_config"
+              ]
+            },
+            "ListCmekConfigs": {
+              "methods": [
+                "list_cmek_configs"
+              ]
+            },
+            "DeleteCmekConfig": {
+              "methods": [
+                "delete_cmek_config"
+              ]
+            }
+          }
+        }
+      }
+    },
     "CompletionService": {
       "clients": {
         "grpc": {
@@ -312,6 +341,50 @@
         }
       }
     },
+    "IdentityMappingStoreService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::DiscoveryEngine::V1::IdentityMappingStoreService::Client",
+          "rpcs": {
+            "CreateIdentityMappingStore": {
+              "methods": [
+                "create_identity_mapping_store"
+              ]
+            },
+            "GetIdentityMappingStore": {
+              "methods": [
+                "get_identity_mapping_store"
+              ]
+            },
+            "DeleteIdentityMappingStore": {
+              "methods": [
+                "delete_identity_mapping_store"
+              ]
+            },
+            "ImportIdentityMappings": {
+              "methods": [
+                "import_identity_mappings"
+              ]
+            },
+            "PurgeIdentityMappings": {
+              "methods": [
+                "purge_identity_mappings"
+              ]
+            },
+            "ListIdentityMappings": {
+              "methods": [
+                "list_identity_mappings"
+              ]
+            },
+            "ListIdentityMappingStores": {
+              "methods": [
+                "list_identity_mapping_stores"
+              ]
+            }
+          }
+        }
+      }
+    },
     "ProjectService": {
       "clients": {
         "grpc": {
@@ -528,6 +601,25 @@
             "ImportUserEvents": {
               "methods": [
                 "import_user_events"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "UserLicenseService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::DiscoveryEngine::V1::UserLicenseService::Client",
+          "rpcs": {
+            "ListUserLicenses": {
+              "methods": [
+                "list_user_licenses"
+              ]
+            },
+            "BatchUpdateUserLicenses": {
+              "methods": [
+                "batch_update_user_licenses"
               ]
             }
           }

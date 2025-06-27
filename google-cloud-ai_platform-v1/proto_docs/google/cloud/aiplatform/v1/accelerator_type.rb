@@ -21,6 +21,7 @@ module Google
   module Cloud
     module AIPlatform
       module V1
+        # LINT: LEGACY_NAMES
         # Represents a hardware accelerator type.
         module AcceleratorType
           # Unspecified accelerator type, which means no accelerator.
@@ -56,6 +57,12 @@ module Google
 
           # Nvidia H100 Mega 80Gb GPU.
           NVIDIA_H100_MEGA_80GB = 14
+
+          # Nvidia H200 141Gb GPU.
+          NVIDIA_H200_141GB = 15
+
+          # Nvidia B200 GPU.
+          NVIDIA_B200 = 16
 
           # TPU v2.
           TPU_V2 = 6

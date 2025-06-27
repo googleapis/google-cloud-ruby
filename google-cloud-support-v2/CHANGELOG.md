@@ -1,5 +1,35 @@
 # Changelog
 
+### 1.4.1 (2025-05-27)
+
+#### Documentation
+
+* Minor updates 
+* Update Cloud Support RPC comments to no longer include cURL and Python examples ([#30428](https://github.com/googleapis/google-cloud-ruby/issues/30428)) 
+
+### 1.4.0 (2025-05-16)
+
+#### Features
+
+* Deprecated the Actor email field and replaced with username 
+#### Documentation
+
+* Deprecated the Comment plain_text_body field 
+* Numerous additional edits and clarifications to the reference documentation 
+
+### 1.3.0 (2025-05-12)
+
+#### Features
+
+* Updated core dependencies including gapic-common 
+* Updated required Ruby version to 3.1 
+
+### 1.2.1 (2025-04-29)
+
+#### Bug Fixes
+
+* Fixed several issues with validating credential configs 
+
 ### 1.2.0 (2025-01-29)
 
 #### Features

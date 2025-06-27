@@ -25,6 +25,27 @@ module Google
           # Path helper methods for the ManagedKafka API.
           module Paths
             ##
+            # Create a fully-qualified Acl resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `projects/{project}/locations/{location}/clusters/{cluster}/acls/{acl}`
+            #
+            # @param project [String]
+            # @param location [String]
+            # @param cluster [String]
+            # @param acl [String]
+            #
+            # @return [::String]
+            def acl_path project:, location:, cluster:, acl:
+              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+              raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+              raise ::ArgumentError, "cluster cannot contain /" if cluster.to_s.include? "/"
+
+              "projects/#{project}/locations/#{location}/clusters/#{cluster}/acls/#{acl}"
+            end
+
+            ##
             # Create a fully-qualified Cluster resource string.
             #
             # The resource will be in the following format:

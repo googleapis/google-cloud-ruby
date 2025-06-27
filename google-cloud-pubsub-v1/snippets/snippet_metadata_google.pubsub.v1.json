@@ -1,7 +1,7 @@
 {
   "client_library": {
     "name": "google-cloud-pubsub-v1",
-    "version": "1.8.0",
+    "version": "1.10.0",
     "language": "RUBY",
     "apis": [
       {
@@ -412,14 +412,14 @@
       ]
     },
     {
-      "region_tag": "pubsub_v1_generated_Publisher_CreateTopic_sync",
-      "title": "Snippet for the create_topic call in the Publisher service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::PubSub::V1::Publisher::Client#create_topic.",
-      "file": "publisher/create_topic.rb",
+      "region_tag": "pubsub_v1_generated_TopicAdmin_CreateTopic_sync",
+      "title": "Snippet for the create_topic call in the TopicAdmin service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::PubSub::V1::TopicAdmin::Client#create_topic.",
+      "file": "topic_admin/create_topic.rb",
       "language": "RUBY",
       "client_method": {
         "short_name": "create_topic",
-        "full_name": "::Google::Cloud::PubSub::V1::Publisher::Client#create_topic",
+        "full_name": "::Google::Cloud::PubSub::V1::TopicAdmin::Client#create_topic",
         "async": false,
         "parameters": [
           {
@@ -429,14 +429,14 @@
         ],
         "result_type": "::Google::Cloud::PubSub::V1::Topic",
         "client": {
-          "short_name": "Publisher::Client",
-          "full_name": "::Google::Cloud::PubSub::V1::Publisher::Client"
+          "short_name": "TopicAdmin::Client",
+          "full_name": "::Google::Cloud::PubSub::V1::TopicAdmin::Client"
         },
         "method": {
           "short_name": "CreateTopic",
           "full_name": "google.pubsub.v1.Publisher.CreateTopic",
           "service": {
-            "short_name": "Publisher",
+            "short_name": "TopicAdmin",
             "full_name": "google.pubsub.v1.Publisher"
           }
         }
@@ -452,14 +452,14 @@
       ]
     },
     {
-      "region_tag": "pubsub_v1_generated_Publisher_UpdateTopic_sync",
-      "title": "Snippet for the update_topic call in the Publisher service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::PubSub::V1::Publisher::Client#update_topic.",
-      "file": "publisher/update_topic.rb",
+      "region_tag": "pubsub_v1_generated_TopicAdmin_UpdateTopic_sync",
+      "title": "Snippet for the update_topic call in the TopicAdmin service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::PubSub::V1::TopicAdmin::Client#update_topic.",
+      "file": "topic_admin/update_topic.rb",
       "language": "RUBY",
       "client_method": {
         "short_name": "update_topic",
-        "full_name": "::Google::Cloud::PubSub::V1::Publisher::Client#update_topic",
+        "full_name": "::Google::Cloud::PubSub::V1::TopicAdmin::Client#update_topic",
         "async": false,
         "parameters": [
           {
@@ -469,14 +469,14 @@
         ],
         "result_type": "::Google::Cloud::PubSub::V1::Topic",
         "client": {
-          "short_name": "Publisher::Client",
-          "full_name": "::Google::Cloud::PubSub::V1::Publisher::Client"
+          "short_name": "TopicAdmin::Client",
+          "full_name": "::Google::Cloud::PubSub::V1::TopicAdmin::Client"
         },
         "method": {
           "short_name": "UpdateTopic",
           "full_name": "google.pubsub.v1.Publisher.UpdateTopic",
           "service": {
-            "short_name": "Publisher",
+            "short_name": "TopicAdmin",
             "full_name": "google.pubsub.v1.Publisher"
           }
         }
@@ -492,14 +492,14 @@
       ]
     },
     {
-      "region_tag": "pubsub_v1_generated_Publisher_Publish_sync",
-      "title": "Snippet for the publish call in the Publisher service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::PubSub::V1::Publisher::Client#publish.",
-      "file": "publisher/publish.rb",
+      "region_tag": "pubsub_v1_generated_TopicAdmin_Publish_sync",
+      "title": "Snippet for the publish call in the TopicAdmin service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::PubSub::V1::TopicAdmin::Client#publish.",
+      "file": "topic_admin/publish.rb",
       "language": "RUBY",
       "client_method": {
         "short_name": "publish",
-        "full_name": "::Google::Cloud::PubSub::V1::Publisher::Client#publish",
+        "full_name": "::Google::Cloud::PubSub::V1::TopicAdmin::Client#publish",
         "async": false,
         "parameters": [
           {
@@ -509,14 +509,14 @@
         ],
         "result_type": "::Google::Cloud::PubSub::V1::PublishResponse",
         "client": {
-          "short_name": "Publisher::Client",
-          "full_name": "::Google::Cloud::PubSub::V1::Publisher::Client"
+          "short_name": "TopicAdmin::Client",
+          "full_name": "::Google::Cloud::PubSub::V1::TopicAdmin::Client"
         },
         "method": {
           "short_name": "Publish",
           "full_name": "google.pubsub.v1.Publisher.Publish",
           "service": {
-            "short_name": "Publisher",
+            "short_name": "TopicAdmin",
             "full_name": "google.pubsub.v1.Publisher"
           }
         }
@@ -532,14 +532,14 @@
       ]
     },
     {
-      "region_tag": "pubsub_v1_generated_Publisher_GetTopic_sync",
-      "title": "Snippet for the get_topic call in the Publisher service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::PubSub::V1::Publisher::Client#get_topic.",
-      "file": "publisher/get_topic.rb",
+      "region_tag": "pubsub_v1_generated_TopicAdmin_GetTopic_sync",
+      "title": "Snippet for the get_topic call in the TopicAdmin service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::PubSub::V1::TopicAdmin::Client#get_topic.",
+      "file": "topic_admin/get_topic.rb",
       "language": "RUBY",
       "client_method": {
         "short_name": "get_topic",
-        "full_name": "::Google::Cloud::PubSub::V1::Publisher::Client#get_topic",
+        "full_name": "::Google::Cloud::PubSub::V1::TopicAdmin::Client#get_topic",
         "async": false,
         "parameters": [
           {
@@ -549,14 +549,14 @@
         ],
         "result_type": "::Google::Cloud::PubSub::V1::Topic",
         "client": {
-          "short_name": "Publisher::Client",
-          "full_name": "::Google::Cloud::PubSub::V1::Publisher::Client"
+          "short_name": "TopicAdmin::Client",
+          "full_name": "::Google::Cloud::PubSub::V1::TopicAdmin::Client"
         },
         "method": {
           "short_name": "GetTopic",
           "full_name": "google.pubsub.v1.Publisher.GetTopic",
           "service": {
-            "short_name": "Publisher",
+            "short_name": "TopicAdmin",
             "full_name": "google.pubsub.v1.Publisher"
           }
         }
@@ -572,14 +572,14 @@
       ]
     },
     {
-      "region_tag": "pubsub_v1_generated_Publisher_ListTopics_sync",
-      "title": "Snippet for the list_topics call in the Publisher service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::PubSub::V1::Publisher::Client#list_topics.",
-      "file": "publisher/list_topics.rb",
+      "region_tag": "pubsub_v1_generated_TopicAdmin_ListTopics_sync",
+      "title": "Snippet for the list_topics call in the TopicAdmin service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::PubSub::V1::TopicAdmin::Client#list_topics.",
+      "file": "topic_admin/list_topics.rb",
       "language": "RUBY",
       "client_method": {
         "short_name": "list_topics",
-        "full_name": "::Google::Cloud::PubSub::V1::Publisher::Client#list_topics",
+        "full_name": "::Google::Cloud::PubSub::V1::TopicAdmin::Client#list_topics",
         "async": false,
         "parameters": [
           {
@@ -589,14 +589,14 @@
         ],
         "result_type": "::Google::Cloud::PubSub::V1::ListTopicsResponse",
         "client": {
-          "short_name": "Publisher::Client",
-          "full_name": "::Google::Cloud::PubSub::V1::Publisher::Client"
+          "short_name": "TopicAdmin::Client",
+          "full_name": "::Google::Cloud::PubSub::V1::TopicAdmin::Client"
         },
         "method": {
           "short_name": "ListTopics",
           "full_name": "google.pubsub.v1.Publisher.ListTopics",
           "service": {
-            "short_name": "Publisher",
+            "short_name": "TopicAdmin",
             "full_name": "google.pubsub.v1.Publisher"
           }
         }
@@ -612,14 +612,14 @@
       ]
     },
     {
-      "region_tag": "pubsub_v1_generated_Publisher_ListTopicSubscriptions_sync",
-      "title": "Snippet for the list_topic_subscriptions call in the Publisher service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::PubSub::V1::Publisher::Client#list_topic_subscriptions.",
-      "file": "publisher/list_topic_subscriptions.rb",
+      "region_tag": "pubsub_v1_generated_TopicAdmin_ListTopicSubscriptions_sync",
+      "title": "Snippet for the list_topic_subscriptions call in the TopicAdmin service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::PubSub::V1::TopicAdmin::Client#list_topic_subscriptions.",
+      "file": "topic_admin/list_topic_subscriptions.rb",
       "language": "RUBY",
       "client_method": {
         "short_name": "list_topic_subscriptions",
-        "full_name": "::Google::Cloud::PubSub::V1::Publisher::Client#list_topic_subscriptions",
+        "full_name": "::Google::Cloud::PubSub::V1::TopicAdmin::Client#list_topic_subscriptions",
         "async": false,
         "parameters": [
           {
@@ -629,14 +629,14 @@
         ],
         "result_type": "::Google::Cloud::PubSub::V1::ListTopicSubscriptionsResponse",
         "client": {
-          "short_name": "Publisher::Client",
-          "full_name": "::Google::Cloud::PubSub::V1::Publisher::Client"
+          "short_name": "TopicAdmin::Client",
+          "full_name": "::Google::Cloud::PubSub::V1::TopicAdmin::Client"
         },
         "method": {
           "short_name": "ListTopicSubscriptions",
           "full_name": "google.pubsub.v1.Publisher.ListTopicSubscriptions",
           "service": {
-            "short_name": "Publisher",
+            "short_name": "TopicAdmin",
             "full_name": "google.pubsub.v1.Publisher"
           }
         }
@@ -652,14 +652,14 @@
       ]
     },
     {
-      "region_tag": "pubsub_v1_generated_Publisher_ListTopicSnapshots_sync",
-      "title": "Snippet for the list_topic_snapshots call in the Publisher service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::PubSub::V1::Publisher::Client#list_topic_snapshots.",
-      "file": "publisher/list_topic_snapshots.rb",
+      "region_tag": "pubsub_v1_generated_TopicAdmin_ListTopicSnapshots_sync",
+      "title": "Snippet for the list_topic_snapshots call in the TopicAdmin service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::PubSub::V1::TopicAdmin::Client#list_topic_snapshots.",
+      "file": "topic_admin/list_topic_snapshots.rb",
       "language": "RUBY",
       "client_method": {
         "short_name": "list_topic_snapshots",
-        "full_name": "::Google::Cloud::PubSub::V1::Publisher::Client#list_topic_snapshots",
+        "full_name": "::Google::Cloud::PubSub::V1::TopicAdmin::Client#list_topic_snapshots",
         "async": false,
         "parameters": [
           {
@@ -669,14 +669,14 @@
         ],
         "result_type": "::Google::Cloud::PubSub::V1::ListTopicSnapshotsResponse",
         "client": {
-          "short_name": "Publisher::Client",
-          "full_name": "::Google::Cloud::PubSub::V1::Publisher::Client"
+          "short_name": "TopicAdmin::Client",
+          "full_name": "::Google::Cloud::PubSub::V1::TopicAdmin::Client"
         },
         "method": {
           "short_name": "ListTopicSnapshots",
           "full_name": "google.pubsub.v1.Publisher.ListTopicSnapshots",
           "service": {
-            "short_name": "Publisher",
+            "short_name": "TopicAdmin",
             "full_name": "google.pubsub.v1.Publisher"
           }
         }
@@ -692,14 +692,14 @@
       ]
     },
     {
-      "region_tag": "pubsub_v1_generated_Publisher_DeleteTopic_sync",
-      "title": "Snippet for the delete_topic call in the Publisher service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::PubSub::V1::Publisher::Client#delete_topic.",
-      "file": "publisher/delete_topic.rb",
+      "region_tag": "pubsub_v1_generated_TopicAdmin_DeleteTopic_sync",
+      "title": "Snippet for the delete_topic call in the TopicAdmin service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::PubSub::V1::TopicAdmin::Client#delete_topic.",
+      "file": "topic_admin/delete_topic.rb",
       "language": "RUBY",
       "client_method": {
         "short_name": "delete_topic",
-        "full_name": "::Google::Cloud::PubSub::V1::Publisher::Client#delete_topic",
+        "full_name": "::Google::Cloud::PubSub::V1::TopicAdmin::Client#delete_topic",
         "async": false,
         "parameters": [
           {
@@ -709,14 +709,14 @@
         ],
         "result_type": "::Google::Protobuf::Empty",
         "client": {
-          "short_name": "Publisher::Client",
-          "full_name": "::Google::Cloud::PubSub::V1::Publisher::Client"
+          "short_name": "TopicAdmin::Client",
+          "full_name": "::Google::Cloud::PubSub::V1::TopicAdmin::Client"
         },
         "method": {
           "short_name": "DeleteTopic",
           "full_name": "google.pubsub.v1.Publisher.DeleteTopic",
           "service": {
-            "short_name": "Publisher",
+            "short_name": "TopicAdmin",
             "full_name": "google.pubsub.v1.Publisher"
           }
         }
@@ -732,14 +732,14 @@
       ]
     },
     {
-      "region_tag": "pubsub_v1_generated_Publisher_DetachSubscription_sync",
-      "title": "Snippet for the detach_subscription call in the Publisher service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::PubSub::V1::Publisher::Client#detach_subscription.",
-      "file": "publisher/detach_subscription.rb",
+      "region_tag": "pubsub_v1_generated_TopicAdmin_DetachSubscription_sync",
+      "title": "Snippet for the detach_subscription call in the TopicAdmin service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::PubSub::V1::TopicAdmin::Client#detach_subscription.",
+      "file": "topic_admin/detach_subscription.rb",
       "language": "RUBY",
       "client_method": {
         "short_name": "detach_subscription",
-        "full_name": "::Google::Cloud::PubSub::V1::Publisher::Client#detach_subscription",
+        "full_name": "::Google::Cloud::PubSub::V1::TopicAdmin::Client#detach_subscription",
         "async": false,
         "parameters": [
           {
@@ -749,14 +749,14 @@
         ],
         "result_type": "::Google::Cloud::PubSub::V1::DetachSubscriptionResponse",
         "client": {
-          "short_name": "Publisher::Client",
-          "full_name": "::Google::Cloud::PubSub::V1::Publisher::Client"
+          "short_name": "TopicAdmin::Client",
+          "full_name": "::Google::Cloud::PubSub::V1::TopicAdmin::Client"
         },
         "method": {
           "short_name": "DetachSubscription",
           "full_name": "google.pubsub.v1.Publisher.DetachSubscription",
           "service": {
-            "short_name": "Publisher",
+            "short_name": "TopicAdmin",
             "full_name": "google.pubsub.v1.Publisher"
           }
         }
@@ -772,14 +772,14 @@
       ]
     },
     {
-      "region_tag": "pubsub_v1_generated_Subscriber_CreateSubscription_sync",
-      "title": "Snippet for the create_subscription call in the Subscriber service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::PubSub::V1::Subscriber::Client#create_subscription.",
-      "file": "subscriber/create_subscription.rb",
+      "region_tag": "pubsub_v1_generated_SubscriptionAdmin_CreateSubscription_sync",
+      "title": "Snippet for the create_subscription call in the SubscriptionAdmin service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::PubSub::V1::SubscriptionAdmin::Client#create_subscription.",
+      "file": "subscription_admin/create_subscription.rb",
       "language": "RUBY",
       "client_method": {
         "short_name": "create_subscription",
-        "full_name": "::Google::Cloud::PubSub::V1::Subscriber::Client#create_subscription",
+        "full_name": "::Google::Cloud::PubSub::V1::SubscriptionAdmin::Client#create_subscription",
         "async": false,
         "parameters": [
           {
@@ -789,14 +789,14 @@
         ],
         "result_type": "::Google::Cloud::PubSub::V1::Subscription",
         "client": {
-          "short_name": "Subscriber::Client",
-          "full_name": "::Google::Cloud::PubSub::V1::Subscriber::Client"
+          "short_name": "SubscriptionAdmin::Client",
+          "full_name": "::Google::Cloud::PubSub::V1::SubscriptionAdmin::Client"
         },
         "method": {
           "short_name": "CreateSubscription",
           "full_name": "google.pubsub.v1.Subscriber.CreateSubscription",
           "service": {
-            "short_name": "Subscriber",
+            "short_name": "SubscriptionAdmin",
             "full_name": "google.pubsub.v1.Subscriber"
           }
         }
@@ -812,14 +812,14 @@
       ]
     },
     {
-      "region_tag": "pubsub_v1_generated_Subscriber_GetSubscription_sync",
-      "title": "Snippet for the get_subscription call in the Subscriber service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::PubSub::V1::Subscriber::Client#get_subscription.",
-      "file": "subscriber/get_subscription.rb",
+      "region_tag": "pubsub_v1_generated_SubscriptionAdmin_GetSubscription_sync",
+      "title": "Snippet for the get_subscription call in the SubscriptionAdmin service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::PubSub::V1::SubscriptionAdmin::Client#get_subscription.",
+      "file": "subscription_admin/get_subscription.rb",
       "language": "RUBY",
       "client_method": {
         "short_name": "get_subscription",
-        "full_name": "::Google::Cloud::PubSub::V1::Subscriber::Client#get_subscription",
+        "full_name": "::Google::Cloud::PubSub::V1::SubscriptionAdmin::Client#get_subscription",
         "async": false,
         "parameters": [
           {
@@ -829,14 +829,14 @@
         ],
         "result_type": "::Google::Cloud::PubSub::V1::Subscription",
         "client": {
-          "short_name": "Subscriber::Client",
-          "full_name": "::Google::Cloud::PubSub::V1::Subscriber::Client"
+          "short_name": "SubscriptionAdmin::Client",
+          "full_name": "::Google::Cloud::PubSub::V1::SubscriptionAdmin::Client"
         },
         "method": {
           "short_name": "GetSubscription",
           "full_name": "google.pubsub.v1.Subscriber.GetSubscription",
           "service": {
-            "short_name": "Subscriber",
+            "short_name": "SubscriptionAdmin",
             "full_name": "google.pubsub.v1.Subscriber"
           }
         }
@@ -852,14 +852,14 @@
       ]
     },
     {
-      "region_tag": "pubsub_v1_generated_Subscriber_UpdateSubscription_sync",
-      "title": "Snippet for the update_subscription call in the Subscriber service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::PubSub::V1::Subscriber::Client#update_subscription.",
-      "file": "subscriber/update_subscription.rb",
+      "region_tag": "pubsub_v1_generated_SubscriptionAdmin_UpdateSubscription_sync",
+      "title": "Snippet for the update_subscription call in the SubscriptionAdmin service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::PubSub::V1::SubscriptionAdmin::Client#update_subscription.",
+      "file": "subscription_admin/update_subscription.rb",
       "language": "RUBY",
       "client_method": {
         "short_name": "update_subscription",
-        "full_name": "::Google::Cloud::PubSub::V1::Subscriber::Client#update_subscription",
+        "full_name": "::Google::Cloud::PubSub::V1::SubscriptionAdmin::Client#update_subscription",
         "async": false,
         "parameters": [
           {
@@ -869,14 +869,14 @@
         ],
         "result_type": "::Google::Cloud::PubSub::V1::Subscription",
         "client": {
-          "short_name": "Subscriber::Client",
-          "full_name": "::Google::Cloud::PubSub::V1::Subscriber::Client"
+          "short_name": "SubscriptionAdmin::Client",
+          "full_name": "::Google::Cloud::PubSub::V1::SubscriptionAdmin::Client"
         },
         "method": {
           "short_name": "UpdateSubscription",
           "full_name": "google.pubsub.v1.Subscriber.UpdateSubscription",
           "service": {
-            "short_name": "Subscriber",
+            "short_name": "SubscriptionAdmin",
             "full_name": "google.pubsub.v1.Subscriber"
           }
         }
@@ -892,14 +892,14 @@
       ]
     },
     {
-      "region_tag": "pubsub_v1_generated_Subscriber_ListSubscriptions_sync",
-      "title": "Snippet for the list_subscriptions call in the Subscriber service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::PubSub::V1::Subscriber::Client#list_subscriptions.",
-      "file": "subscriber/list_subscriptions.rb",
+      "region_tag": "pubsub_v1_generated_SubscriptionAdmin_ListSubscriptions_sync",
+      "title": "Snippet for the list_subscriptions call in the SubscriptionAdmin service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::PubSub::V1::SubscriptionAdmin::Client#list_subscriptions.",
+      "file": "subscription_admin/list_subscriptions.rb",
       "language": "RUBY",
       "client_method": {
         "short_name": "list_subscriptions",
-        "full_name": "::Google::Cloud::PubSub::V1::Subscriber::Client#list_subscriptions",
+        "full_name": "::Google::Cloud::PubSub::V1::SubscriptionAdmin::Client#list_subscriptions",
         "async": false,
         "parameters": [
           {
@@ -909,14 +909,14 @@
         ],
         "result_type": "::Google::Cloud::PubSub::V1::ListSubscriptionsResponse",
         "client": {
-          "short_name": "Subscriber::Client",
-          "full_name": "::Google::Cloud::PubSub::V1::Subscriber::Client"
+          "short_name": "SubscriptionAdmin::Client",
+          "full_name": "::Google::Cloud::PubSub::V1::SubscriptionAdmin::Client"
         },
         "method": {
           "short_name": "ListSubscriptions",
           "full_name": "google.pubsub.v1.Subscriber.ListSubscriptions",
           "service": {
-            "short_name": "Subscriber",
+            "short_name": "SubscriptionAdmin",
             "full_name": "google.pubsub.v1.Subscriber"
           }
         }
@@ -932,14 +932,14 @@
       ]
     },
     {
-      "region_tag": "pubsub_v1_generated_Subscriber_DeleteSubscription_sync",
-      "title": "Snippet for the delete_subscription call in the Subscriber service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::PubSub::V1::Subscriber::Client#delete_subscription.",
-      "file": "subscriber/delete_subscription.rb",
+      "region_tag": "pubsub_v1_generated_SubscriptionAdmin_DeleteSubscription_sync",
+      "title": "Snippet for the delete_subscription call in the SubscriptionAdmin service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::PubSub::V1::SubscriptionAdmin::Client#delete_subscription.",
+      "file": "subscription_admin/delete_subscription.rb",
       "language": "RUBY",
       "client_method": {
         "short_name": "delete_subscription",
-        "full_name": "::Google::Cloud::PubSub::V1::Subscriber::Client#delete_subscription",
+        "full_name": "::Google::Cloud::PubSub::V1::SubscriptionAdmin::Client#delete_subscription",
         "async": false,
         "parameters": [
           {
@@ -949,14 +949,14 @@
         ],
         "result_type": "::Google::Protobuf::Empty",
         "client": {
-          "short_name": "Subscriber::Client",
-          "full_name": "::Google::Cloud::PubSub::V1::Subscriber::Client"
+          "short_name": "SubscriptionAdmin::Client",
+          "full_name": "::Google::Cloud::PubSub::V1::SubscriptionAdmin::Client"
         },
         "method": {
           "short_name": "DeleteSubscription",
           "full_name": "google.pubsub.v1.Subscriber.DeleteSubscription",
           "service": {
-            "short_name": "Subscriber",
+            "short_name": "SubscriptionAdmin",
             "full_name": "google.pubsub.v1.Subscriber"
           }
         }
@@ -972,14 +972,14 @@
       ]
     },
     {
-      "region_tag": "pubsub_v1_generated_Subscriber_ModifyAckDeadline_sync",
-      "title": "Snippet for the modify_ack_deadline call in the Subscriber service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::PubSub::V1::Subscriber::Client#modify_ack_deadline.",
-      "file": "subscriber/modify_ack_deadline.rb",
+      "region_tag": "pubsub_v1_generated_SubscriptionAdmin_ModifyAckDeadline_sync",
+      "title": "Snippet for the modify_ack_deadline call in the SubscriptionAdmin service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::PubSub::V1::SubscriptionAdmin::Client#modify_ack_deadline.",
+      "file": "subscription_admin/modify_ack_deadline.rb",
       "language": "RUBY",
       "client_method": {
         "short_name": "modify_ack_deadline",
-        "full_name": "::Google::Cloud::PubSub::V1::Subscriber::Client#modify_ack_deadline",
+        "full_name": "::Google::Cloud::PubSub::V1::SubscriptionAdmin::Client#modify_ack_deadline",
         "async": false,
         "parameters": [
           {
@@ -989,14 +989,14 @@
         ],
         "result_type": "::Google::Protobuf::Empty",
         "client": {
-          "short_name": "Subscriber::Client",
-          "full_name": "::Google::Cloud::PubSub::V1::Subscriber::Client"
+          "short_name": "SubscriptionAdmin::Client",
+          "full_name": "::Google::Cloud::PubSub::V1::SubscriptionAdmin::Client"
         },
         "method": {
           "short_name": "ModifyAckDeadline",
           "full_name": "google.pubsub.v1.Subscriber.ModifyAckDeadline",
           "service": {
-            "short_name": "Subscriber",
+            "short_name": "SubscriptionAdmin",
             "full_name": "google.pubsub.v1.Subscriber"
           }
         }
@@ -1012,14 +1012,14 @@
       ]
     },
     {
-      "region_tag": "pubsub_v1_generated_Subscriber_Acknowledge_sync",
-      "title": "Snippet for the acknowledge call in the Subscriber service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::PubSub::V1::Subscriber::Client#acknowledge.",
-      "file": "subscriber/acknowledge.rb",
+      "region_tag": "pubsub_v1_generated_SubscriptionAdmin_Acknowledge_sync",
+      "title": "Snippet for the acknowledge call in the SubscriptionAdmin service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::PubSub::V1::SubscriptionAdmin::Client#acknowledge.",
+      "file": "subscription_admin/acknowledge.rb",
       "language": "RUBY",
       "client_method": {
         "short_name": "acknowledge",
-        "full_name": "::Google::Cloud::PubSub::V1::Subscriber::Client#acknowledge",
+        "full_name": "::Google::Cloud::PubSub::V1::SubscriptionAdmin::Client#acknowledge",
         "async": false,
         "parameters": [
           {
@@ -1029,14 +1029,14 @@
         ],
         "result_type": "::Google::Protobuf::Empty",
         "client": {
-          "short_name": "Subscriber::Client",
-          "full_name": "::Google::Cloud::PubSub::V1::Subscriber::Client"
+          "short_name": "SubscriptionAdmin::Client",
+          "full_name": "::Google::Cloud::PubSub::V1::SubscriptionAdmin::Client"
         },
         "method": {
           "short_name": "Acknowledge",
           "full_name": "google.pubsub.v1.Subscriber.Acknowledge",
           "service": {
-            "short_name": "Subscriber",
+            "short_name": "SubscriptionAdmin",
             "full_name": "google.pubsub.v1.Subscriber"
           }
         }
@@ -1052,14 +1052,14 @@
       ]
     },
     {
-      "region_tag": "pubsub_v1_generated_Subscriber_Pull_sync",
-      "title": "Snippet for the pull call in the Subscriber service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::PubSub::V1::Subscriber::Client#pull.",
-      "file": "subscriber/pull.rb",
+      "region_tag": "pubsub_v1_generated_SubscriptionAdmin_Pull_sync",
+      "title": "Snippet for the pull call in the SubscriptionAdmin service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::PubSub::V1::SubscriptionAdmin::Client#pull.",
+      "file": "subscription_admin/pull.rb",
       "language": "RUBY",
       "client_method": {
         "short_name": "pull",
-        "full_name": "::Google::Cloud::PubSub::V1::Subscriber::Client#pull",
+        "full_name": "::Google::Cloud::PubSub::V1::SubscriptionAdmin::Client#pull",
         "async": false,
         "parameters": [
           {
@@ -1069,14 +1069,14 @@
         ],
         "result_type": "::Google::Cloud::PubSub::V1::PullResponse",
         "client": {
-          "short_name": "Subscriber::Client",
-          "full_name": "::Google::Cloud::PubSub::V1::Subscriber::Client"
+          "short_name": "SubscriptionAdmin::Client",
+          "full_name": "::Google::Cloud::PubSub::V1::SubscriptionAdmin::Client"
         },
         "method": {
           "short_name": "Pull",
           "full_name": "google.pubsub.v1.Subscriber.Pull",
           "service": {
-            "short_name": "Subscriber",
+            "short_name": "SubscriptionAdmin",
             "full_name": "google.pubsub.v1.Subscriber"
           }
         }
@@ -1092,14 +1092,14 @@
       ]
     },
     {
-      "region_tag": "pubsub_v1_generated_Subscriber_StreamingPull_sync",
-      "title": "Snippet for the streaming_pull call in the Subscriber service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::PubSub::V1::Subscriber::Client#streaming_pull.",
-      "file": "subscriber/streaming_pull.rb",
+      "region_tag": "pubsub_v1_generated_SubscriptionAdmin_StreamingPull_sync",
+      "title": "Snippet for the streaming_pull call in the SubscriptionAdmin service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::PubSub::V1::SubscriptionAdmin::Client#streaming_pull.",
+      "file": "subscription_admin/streaming_pull.rb",
       "language": "RUBY",
       "client_method": {
         "short_name": "streaming_pull",
-        "full_name": "::Google::Cloud::PubSub::V1::Subscriber::Client#streaming_pull",
+        "full_name": "::Google::Cloud::PubSub::V1::SubscriptionAdmin::Client#streaming_pull",
         "async": false,
         "parameters": [
           {
@@ -1109,14 +1109,14 @@
         ],
         "result_type": "::Google::Cloud::PubSub::V1::StreamingPullResponse",
         "client": {
-          "short_name": "Subscriber::Client",
-          "full_name": "::Google::Cloud::PubSub::V1::Subscriber::Client"
+          "short_name": "SubscriptionAdmin::Client",
+          "full_name": "::Google::Cloud::PubSub::V1::SubscriptionAdmin::Client"
         },
         "method": {
           "short_name": "StreamingPull",
           "full_name": "google.pubsub.v1.Subscriber.StreamingPull",
           "service": {
-            "short_name": "Subscriber",
+            "short_name": "SubscriptionAdmin",
             "full_name": "google.pubsub.v1.Subscriber"
           }
         }
@@ -1132,14 +1132,14 @@
       ]
     },
     {
-      "region_tag": "pubsub_v1_generated_Subscriber_ModifyPushConfig_sync",
-      "title": "Snippet for the modify_push_config call in the Subscriber service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::PubSub::V1::Subscriber::Client#modify_push_config.",
-      "file": "subscriber/modify_push_config.rb",
+      "region_tag": "pubsub_v1_generated_SubscriptionAdmin_ModifyPushConfig_sync",
+      "title": "Snippet for the modify_push_config call in the SubscriptionAdmin service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::PubSub::V1::SubscriptionAdmin::Client#modify_push_config.",
+      "file": "subscription_admin/modify_push_config.rb",
       "language": "RUBY",
       "client_method": {
         "short_name": "modify_push_config",
-        "full_name": "::Google::Cloud::PubSub::V1::Subscriber::Client#modify_push_config",
+        "full_name": "::Google::Cloud::PubSub::V1::SubscriptionAdmin::Client#modify_push_config",
         "async": false,
         "parameters": [
           {
@@ -1149,14 +1149,14 @@
         ],
         "result_type": "::Google::Protobuf::Empty",
         "client": {
-          "short_name": "Subscriber::Client",
-          "full_name": "::Google::Cloud::PubSub::V1::Subscriber::Client"
+          "short_name": "SubscriptionAdmin::Client",
+          "full_name": "::Google::Cloud::PubSub::V1::SubscriptionAdmin::Client"
         },
         "method": {
           "short_name": "ModifyPushConfig",
           "full_name": "google.pubsub.v1.Subscriber.ModifyPushConfig",
           "service": {
-            "short_name": "Subscriber",
+            "short_name": "SubscriptionAdmin",
             "full_name": "google.pubsub.v1.Subscriber"
           }
         }
@@ -1172,14 +1172,14 @@
       ]
     },
     {
-      "region_tag": "pubsub_v1_generated_Subscriber_GetSnapshot_sync",
-      "title": "Snippet for the get_snapshot call in the Subscriber service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::PubSub::V1::Subscriber::Client#get_snapshot.",
-      "file": "subscriber/get_snapshot.rb",
+      "region_tag": "pubsub_v1_generated_SubscriptionAdmin_GetSnapshot_sync",
+      "title": "Snippet for the get_snapshot call in the SubscriptionAdmin service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::PubSub::V1::SubscriptionAdmin::Client#get_snapshot.",
+      "file": "subscription_admin/get_snapshot.rb",
       "language": "RUBY",
       "client_method": {
         "short_name": "get_snapshot",
-        "full_name": "::Google::Cloud::PubSub::V1::Subscriber::Client#get_snapshot",
+        "full_name": "::Google::Cloud::PubSub::V1::SubscriptionAdmin::Client#get_snapshot",
         "async": false,
         "parameters": [
           {
@@ -1189,14 +1189,14 @@
         ],
         "result_type": "::Google::Cloud::PubSub::V1::Snapshot",
         "client": {
-          "short_name": "Subscriber::Client",
-          "full_name": "::Google::Cloud::PubSub::V1::Subscriber::Client"
+          "short_name": "SubscriptionAdmin::Client",
+          "full_name": "::Google::Cloud::PubSub::V1::SubscriptionAdmin::Client"
         },
         "method": {
           "short_name": "GetSnapshot",
           "full_name": "google.pubsub.v1.Subscriber.GetSnapshot",
           "service": {
-            "short_name": "Subscriber",
+            "short_name": "SubscriptionAdmin",
             "full_name": "google.pubsub.v1.Subscriber"
           }
         }
@@ -1212,14 +1212,14 @@
       ]
     },
     {
-      "region_tag": "pubsub_v1_generated_Subscriber_ListSnapshots_sync",
-      "title": "Snippet for the list_snapshots call in the Subscriber service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::PubSub::V1::Subscriber::Client#list_snapshots.",
-      "file": "subscriber/list_snapshots.rb",
+      "region_tag": "pubsub_v1_generated_SubscriptionAdmin_ListSnapshots_sync",
+      "title": "Snippet for the list_snapshots call in the SubscriptionAdmin service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::PubSub::V1::SubscriptionAdmin::Client#list_snapshots.",
+      "file": "subscription_admin/list_snapshots.rb",
       "language": "RUBY",
       "client_method": {
         "short_name": "list_snapshots",
-        "full_name": "::Google::Cloud::PubSub::V1::Subscriber::Client#list_snapshots",
+        "full_name": "::Google::Cloud::PubSub::V1::SubscriptionAdmin::Client#list_snapshots",
         "async": false,
         "parameters": [
           {
@@ -1229,14 +1229,14 @@
         ],
         "result_type": "::Google::Cloud::PubSub::V1::ListSnapshotsResponse",
         "client": {
-          "short_name": "Subscriber::Client",
-          "full_name": "::Google::Cloud::PubSub::V1::Subscriber::Client"
+          "short_name": "SubscriptionAdmin::Client",
+          "full_name": "::Google::Cloud::PubSub::V1::SubscriptionAdmin::Client"
         },
         "method": {
           "short_name": "ListSnapshots",
           "full_name": "google.pubsub.v1.Subscriber.ListSnapshots",
           "service": {
-            "short_name": "Subscriber",
+            "short_name": "SubscriptionAdmin",
             "full_name": "google.pubsub.v1.Subscriber"
           }
         }
@@ -1252,14 +1252,14 @@
       ]
     },
     {
-      "region_tag": "pubsub_v1_generated_Subscriber_CreateSnapshot_sync",
-      "title": "Snippet for the create_snapshot call in the Subscriber service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::PubSub::V1::Subscriber::Client#create_snapshot.",
-      "file": "subscriber/create_snapshot.rb",
+      "region_tag": "pubsub_v1_generated_SubscriptionAdmin_CreateSnapshot_sync",
+      "title": "Snippet for the create_snapshot call in the SubscriptionAdmin service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::PubSub::V1::SubscriptionAdmin::Client#create_snapshot.",
+      "file": "subscription_admin/create_snapshot.rb",
       "language": "RUBY",
       "client_method": {
         "short_name": "create_snapshot",
-        "full_name": "::Google::Cloud::PubSub::V1::Subscriber::Client#create_snapshot",
+        "full_name": "::Google::Cloud::PubSub::V1::SubscriptionAdmin::Client#create_snapshot",
         "async": false,
         "parameters": [
           {
@@ -1269,14 +1269,14 @@
         ],
         "result_type": "::Google::Cloud::PubSub::V1::Snapshot",
         "client": {
-          "short_name": "Subscriber::Client",
-          "full_name": "::Google::Cloud::PubSub::V1::Subscriber::Client"
+          "short_name": "SubscriptionAdmin::Client",
+          "full_name": "::Google::Cloud::PubSub::V1::SubscriptionAdmin::Client"
         },
         "method": {
           "short_name": "CreateSnapshot",
           "full_name": "google.pubsub.v1.Subscriber.CreateSnapshot",
           "service": {
-            "short_name": "Subscriber",
+            "short_name": "SubscriptionAdmin",
             "full_name": "google.pubsub.v1.Subscriber"
           }
         }
@@ -1292,14 +1292,14 @@
       ]
     },
     {
-      "region_tag": "pubsub_v1_generated_Subscriber_UpdateSnapshot_sync",
-      "title": "Snippet for the update_snapshot call in the Subscriber service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::PubSub::V1::Subscriber::Client#update_snapshot.",
-      "file": "subscriber/update_snapshot.rb",
+      "region_tag": "pubsub_v1_generated_SubscriptionAdmin_UpdateSnapshot_sync",
+      "title": "Snippet for the update_snapshot call in the SubscriptionAdmin service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::PubSub::V1::SubscriptionAdmin::Client#update_snapshot.",
+      "file": "subscription_admin/update_snapshot.rb",
       "language": "RUBY",
       "client_method": {
         "short_name": "update_snapshot",
-        "full_name": "::Google::Cloud::PubSub::V1::Subscriber::Client#update_snapshot",
+        "full_name": "::Google::Cloud::PubSub::V1::SubscriptionAdmin::Client#update_snapshot",
         "async": false,
         "parameters": [
           {
@@ -1309,14 +1309,14 @@
         ],
         "result_type": "::Google::Cloud::PubSub::V1::Snapshot",
         "client": {
-          "short_name": "Subscriber::Client",
-          "full_name": "::Google::Cloud::PubSub::V1::Subscriber::Client"
+          "short_name": "SubscriptionAdmin::Client",
+          "full_name": "::Google::Cloud::PubSub::V1::SubscriptionAdmin::Client"
         },
         "method": {
           "short_name": "UpdateSnapshot",
           "full_name": "google.pubsub.v1.Subscriber.UpdateSnapshot",
           "service": {
-            "short_name": "Subscriber",
+            "short_name": "SubscriptionAdmin",
             "full_name": "google.pubsub.v1.Subscriber"
           }
         }
@@ -1332,14 +1332,14 @@
       ]
     },
     {
-      "region_tag": "pubsub_v1_generated_Subscriber_DeleteSnapshot_sync",
-      "title": "Snippet for the delete_snapshot call in the Subscriber service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::PubSub::V1::Subscriber::Client#delete_snapshot.",
-      "file": "subscriber/delete_snapshot.rb",
+      "region_tag": "pubsub_v1_generated_SubscriptionAdmin_DeleteSnapshot_sync",
+      "title": "Snippet for the delete_snapshot call in the SubscriptionAdmin service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::PubSub::V1::SubscriptionAdmin::Client#delete_snapshot.",
+      "file": "subscription_admin/delete_snapshot.rb",
       "language": "RUBY",
       "client_method": {
         "short_name": "delete_snapshot",
-        "full_name": "::Google::Cloud::PubSub::V1::Subscriber::Client#delete_snapshot",
+        "full_name": "::Google::Cloud::PubSub::V1::SubscriptionAdmin::Client#delete_snapshot",
         "async": false,
         "parameters": [
           {
@@ -1349,14 +1349,14 @@
         ],
         "result_type": "::Google::Protobuf::Empty",
         "client": {
-          "short_name": "Subscriber::Client",
-          "full_name": "::Google::Cloud::PubSub::V1::Subscriber::Client"
+          "short_name": "SubscriptionAdmin::Client",
+          "full_name": "::Google::Cloud::PubSub::V1::SubscriptionAdmin::Client"
         },
         "method": {
           "short_name": "DeleteSnapshot",
           "full_name": "google.pubsub.v1.Subscriber.DeleteSnapshot",
           "service": {
-            "short_name": "Subscriber",
+            "short_name": "SubscriptionAdmin",
             "full_name": "google.pubsub.v1.Subscriber"
           }
         }
@@ -1372,14 +1372,14 @@
       ]
     },
     {
-      "region_tag": "pubsub_v1_generated_Subscriber_Seek_sync",
-      "title": "Snippet for the seek call in the Subscriber service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::PubSub::V1::Subscriber::Client#seek.",
-      "file": "subscriber/seek.rb",
+      "region_tag": "pubsub_v1_generated_SubscriptionAdmin_Seek_sync",
+      "title": "Snippet for the seek call in the SubscriptionAdmin service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::PubSub::V1::SubscriptionAdmin::Client#seek.",
+      "file": "subscription_admin/seek.rb",
       "language": "RUBY",
       "client_method": {
         "short_name": "seek",
-        "full_name": "::Google::Cloud::PubSub::V1::Subscriber::Client#seek",
+        "full_name": "::Google::Cloud::PubSub::V1::SubscriptionAdmin::Client#seek",
         "async": false,
         "parameters": [
           {
@@ -1389,14 +1389,14 @@
         ],
         "result_type": "::Google::Cloud::PubSub::V1::SeekResponse",
         "client": {
-          "short_name": "Subscriber::Client",
-          "full_name": "::Google::Cloud::PubSub::V1::Subscriber::Client"
+          "short_name": "SubscriptionAdmin::Client",
+          "full_name": "::Google::Cloud::PubSub::V1::SubscriptionAdmin::Client"
         },
         "method": {
           "short_name": "Seek",
           "full_name": "google.pubsub.v1.Subscriber.Seek",
           "service": {
-            "short_name": "Subscriber",
+            "short_name": "SubscriptionAdmin",
             "full_name": "google.pubsub.v1.Subscriber"
           }
         }

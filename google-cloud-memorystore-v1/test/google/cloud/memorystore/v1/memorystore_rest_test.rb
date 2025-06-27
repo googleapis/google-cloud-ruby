@@ -412,6 +412,448 @@ class ::Google::Cloud::Memorystore::V1::Memorystore::Rest::ClientTest < Minitest
     end
   end
 
+  def test_reschedule_maintenance
+    # Create test objects.
+    client_result = ::Google::Longrunning::Operation.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+    reschedule_type = :RESCHEDULE_TYPE_UNSPECIFIED
+    schedule_time = {}
+
+    reschedule_maintenance_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::Memorystore::V1::Memorystore::Rest::ServiceStub.stub :transcode_reschedule_maintenance_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, reschedule_maintenance_client_stub do
+        # Create client
+        client = ::Google::Cloud::Memorystore::V1::Memorystore::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.reschedule_maintenance({ name: name, reschedule_type: reschedule_type, schedule_time: schedule_time }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.reschedule_maintenance name: name, reschedule_type: reschedule_type, schedule_time: schedule_time do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.reschedule_maintenance ::Google::Cloud::Memorystore::V1::RescheduleMaintenanceRequest.new(name: name, reschedule_type: reschedule_type, schedule_time: schedule_time) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.reschedule_maintenance({ name: name, reschedule_type: reschedule_type, schedule_time: schedule_time }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.reschedule_maintenance(::Google::Cloud::Memorystore::V1::RescheduleMaintenanceRequest.new(name: name, reschedule_type: reschedule_type, schedule_time: schedule_time), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, reschedule_maintenance_client_stub.call_count
+      end
+    end
+  end
+
+  def test_list_backup_collections
+    # Create test objects.
+    client_result = ::Google::Cloud::Memorystore::V1::ListBackupCollectionsResponse.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    page_size = 42
+    page_token = "hello world"
+
+    list_backup_collections_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::Memorystore::V1::Memorystore::Rest::ServiceStub.stub :transcode_list_backup_collections_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, list_backup_collections_client_stub do
+        # Create client
+        client = ::Google::Cloud::Memorystore::V1::Memorystore::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.list_backup_collections({ parent: parent, page_size: page_size, page_token: page_token }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.list_backup_collections parent: parent, page_size: page_size, page_token: page_token do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.list_backup_collections ::Google::Cloud::Memorystore::V1::ListBackupCollectionsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.list_backup_collections({ parent: parent, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.list_backup_collections(::Google::Cloud::Memorystore::V1::ListBackupCollectionsRequest.new(parent: parent, page_size: page_size, page_token: page_token), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, list_backup_collections_client_stub.call_count
+      end
+    end
+  end
+
+  def test_get_backup_collection
+    # Create test objects.
+    client_result = ::Google::Cloud::Memorystore::V1::BackupCollection.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    get_backup_collection_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::Memorystore::V1::Memorystore::Rest::ServiceStub.stub :transcode_get_backup_collection_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, get_backup_collection_client_stub do
+        # Create client
+        client = ::Google::Cloud::Memorystore::V1::Memorystore::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.get_backup_collection({ name: name }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.get_backup_collection name: name do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.get_backup_collection ::Google::Cloud::Memorystore::V1::GetBackupCollectionRequest.new(name: name) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.get_backup_collection({ name: name }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.get_backup_collection(::Google::Cloud::Memorystore::V1::GetBackupCollectionRequest.new(name: name), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, get_backup_collection_client_stub.call_count
+      end
+    end
+  end
+
+  def test_list_backups
+    # Create test objects.
+    client_result = ::Google::Cloud::Memorystore::V1::ListBackupsResponse.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    page_size = 42
+    page_token = "hello world"
+
+    list_backups_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::Memorystore::V1::Memorystore::Rest::ServiceStub.stub :transcode_list_backups_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, list_backups_client_stub do
+        # Create client
+        client = ::Google::Cloud::Memorystore::V1::Memorystore::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.list_backups({ parent: parent, page_size: page_size, page_token: page_token }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.list_backups parent: parent, page_size: page_size, page_token: page_token do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.list_backups ::Google::Cloud::Memorystore::V1::ListBackupsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.list_backups({ parent: parent, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.list_backups(::Google::Cloud::Memorystore::V1::ListBackupsRequest.new(parent: parent, page_size: page_size, page_token: page_token), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, list_backups_client_stub.call_count
+      end
+    end
+  end
+
+  def test_get_backup
+    # Create test objects.
+    client_result = ::Google::Cloud::Memorystore::V1::Backup.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    get_backup_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::Memorystore::V1::Memorystore::Rest::ServiceStub.stub :transcode_get_backup_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, get_backup_client_stub do
+        # Create client
+        client = ::Google::Cloud::Memorystore::V1::Memorystore::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.get_backup({ name: name }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.get_backup name: name do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.get_backup ::Google::Cloud::Memorystore::V1::GetBackupRequest.new(name: name) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.get_backup({ name: name }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.get_backup(::Google::Cloud::Memorystore::V1::GetBackupRequest.new(name: name), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, get_backup_client_stub.call_count
+      end
+    end
+  end
+
+  def test_delete_backup
+    # Create test objects.
+    client_result = ::Google::Longrunning::Operation.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+    request_id = "hello world"
+
+    delete_backup_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::Memorystore::V1::Memorystore::Rest::ServiceStub.stub :transcode_delete_backup_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, delete_backup_client_stub do
+        # Create client
+        client = ::Google::Cloud::Memorystore::V1::Memorystore::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.delete_backup({ name: name, request_id: request_id }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.delete_backup name: name, request_id: request_id do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.delete_backup ::Google::Cloud::Memorystore::V1::DeleteBackupRequest.new(name: name, request_id: request_id) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.delete_backup({ name: name, request_id: request_id }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.delete_backup(::Google::Cloud::Memorystore::V1::DeleteBackupRequest.new(name: name, request_id: request_id), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, delete_backup_client_stub.call_count
+      end
+    end
+  end
+
+  def test_export_backup
+    # Create test objects.
+    client_result = ::Google::Longrunning::Operation.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    gcs_bucket = "hello world"
+    name = "hello world"
+
+    export_backup_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::Memorystore::V1::Memorystore::Rest::ServiceStub.stub :transcode_export_backup_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, export_backup_client_stub do
+        # Create client
+        client = ::Google::Cloud::Memorystore::V1::Memorystore::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.export_backup({ gcs_bucket: gcs_bucket, name: name }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.export_backup gcs_bucket: gcs_bucket, name: name do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.export_backup ::Google::Cloud::Memorystore::V1::ExportBackupRequest.new(gcs_bucket: gcs_bucket, name: name) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.export_backup({ gcs_bucket: gcs_bucket, name: name }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.export_backup(::Google::Cloud::Memorystore::V1::ExportBackupRequest.new(gcs_bucket: gcs_bucket, name: name), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, export_backup_client_stub.call_count
+      end
+    end
+  end
+
+  def test_backup_instance
+    # Create test objects.
+    client_result = ::Google::Longrunning::Operation.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+    ttl = {}
+    backup_id = "hello world"
+
+    backup_instance_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::Memorystore::V1::Memorystore::Rest::ServiceStub.stub :transcode_backup_instance_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, backup_instance_client_stub do
+        # Create client
+        client = ::Google::Cloud::Memorystore::V1::Memorystore::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.backup_instance({ name: name, ttl: ttl, backup_id: backup_id }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.backup_instance name: name, ttl: ttl, backup_id: backup_id do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.backup_instance ::Google::Cloud::Memorystore::V1::BackupInstanceRequest.new(name: name, ttl: ttl, backup_id: backup_id) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.backup_instance({ name: name, ttl: ttl, backup_id: backup_id }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.backup_instance(::Google::Cloud::Memorystore::V1::BackupInstanceRequest.new(name: name, ttl: ttl, backup_id: backup_id), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, backup_instance_client_stub.call_count
+      end
+    end
+  end
+
   def test_configure
     credentials_token = :dummy_value
 

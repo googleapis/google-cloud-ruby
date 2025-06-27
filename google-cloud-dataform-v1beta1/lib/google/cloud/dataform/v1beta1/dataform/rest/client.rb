@@ -214,6 +214,9 @@ module Google
               ##
               # Lists Repositories in a given project and location.
               #
+              # **Note:** *This method can return repositories not shown in the [Dataform
+              # UI](https://console.cloud.google.com/bigquery/dataform)*.
+              #
               # @overload list_repositories(request, options = nil)
               #   Pass arguments to `list_repositories` via a request object, either of type
               #   {::Google::Cloud::Dataform::V1beta1::ListRepositoriesRequest} or an equivalent Hash.
@@ -478,11 +481,10 @@ module Google
               ##
               # Updates a single Repository.
               #
-              # **Note:** This method does not fully implement
-              # [AIP-134](https://google.aip.dev/134); in particular:
-              # - The wildcard entry (**\***) is treated as a bad request
-              # - When the **field_mask** is omitted, instead of only updating the set
-              #   fields, the request is treated as a full update on all modifiable fields
+              # **Note:** *This method does not fully implement
+              # [AIP/134](https://google.aip.dev/134). The wildcard entry (\*) is treated
+              # as a bad request, and when the `field_mask` is omitted, the request is
+              # treated as a full update on all modifiable fields.*
               #
               # @overload update_repository(request, options = nil)
               #   Pass arguments to `update_repository` via a request object, either of type
@@ -3202,11 +3204,10 @@ module Google
               ##
               # Updates a single ReleaseConfig.
               #
-              # **Note:** This method does not fully implement
-              # [AIP-134](https://google.aip.dev/134); in particular:
-              # - The wildcard entry (**\***) is treated as a bad request
-              # - When the **field_mask** is omitted, instead of only updating the set
-              #   fields, the request is treated as a full update on all modifiable fields
+              # **Note:** *This method does not fully implement
+              # [AIP/134](https://google.aip.dev/134). The wildcard entry (\*) is treated
+              # as a bad request, and when the `field_mask` is omitted, the request is
+              # treated as a full update on all modifiable fields.*
               #
               # @overload update_release_config(request, options = nil)
               #   Pass arguments to `update_release_config` via a request object, either of type
@@ -3985,11 +3986,10 @@ module Google
               ##
               # Updates a single WorkflowConfig.
               #
-              # **Note:** This method does not fully implement
-              # [AIP-134](https://google.aip.dev/134); in particular:
-              # - The wildcard entry (**\***) is treated as a bad request
-              # - When the **field_mask** is omitted, instead of only updating the set
-              #   fields, the request is treated as a full update on all modifiable fields
+              # **Note:** *This method does not fully implement
+              # [AIP/134](https://google.aip.dev/134). The wildcard entry (\*) is treated
+              # as a bad request, and when the `field_mask` is omitted, the request is
+              # treated as a full update on all modifiable fields.*
               #
               # @overload update_workflow_config(request, options = nil)
               #   Pass arguments to `update_workflow_config` via a request object, either of type
@@ -4741,11 +4741,10 @@ module Google
               ##
               # Update default config for a given project and location.
               #
-              # **Note:** This method does not fully implement
-              # [AIP-134](https://google.aip.dev/134); in particular:
-              # - The wildcard entry (**\***) is treated as a bad request
-              # - When the **field_mask** is omitted, instead of only updating the set
-              #   fields, the request is treated as a full update on all modifiable fields
+              # **Note:** *This method does not fully implement
+              # [AIP/134](https://google.aip.dev/134). The wildcard entry (\*) is treated
+              # as a bad request, and when the `field_mask` is omitted, the request is
+              # treated as a full update on all modifiable fields.*
               #
               # @overload update_config(request, options = nil)
               #   Pass arguments to `update_config` via a request object, either of type
@@ -4920,7 +4919,7 @@ module Google
 
                 config_attr :endpoint,      nil, ::String, nil
                 config_attr :credentials,   nil do |value|
-                  allowed = [::String, ::Hash, ::Proc, ::Symbol, ::Google::Auth::Credentials, ::Signet::OAuth2::Client, nil]
+                  allowed = [::String, ::Hash, ::Proc, ::Symbol, ::Google::Auth::Credentials, ::Google::Auth::BaseClient, ::Signet::OAuth2::Client, nil]
                   allowed.any? { |klass| klass === value }
                 end
                 config_attr :scope,         nil, ::String, ::Array, nil

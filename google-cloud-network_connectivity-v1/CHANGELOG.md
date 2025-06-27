@@ -1,5 +1,24 @@
 # Changelog
 
+### 1.6.0 (2025-05-12)
+
+#### Features
+
+* Updated core dependencies including gapic-common 
+* Updated required Ruby version to 3.1 
+
+### 1.5.1 (2025-04-29)
+
+#### Bug Fixes
+
+* Fixed several issues with validating credential configs 
+
+### 1.5.0 (2025-04-21)
+
+#### Features
+
+* expand QuotaFailure with quota error details ([#29460](https://github.com/googleapis/google-cloud-ruby/issues/29460)) 
+
 ### 1.4.0 (2025-03-25)
 
 #### Features

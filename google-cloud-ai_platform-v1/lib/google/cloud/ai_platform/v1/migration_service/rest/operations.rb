@@ -655,7 +655,7 @@ module Google
 
                 config_attr :endpoint,      nil, ::String, nil
                 config_attr :credentials,   nil do |value|
-                  allowed = [::String, ::Hash, ::Proc, ::Symbol, ::Google::Auth::Credentials, ::Signet::OAuth2::Client, nil]
+                  allowed = [::String, ::Hash, ::Proc, ::Symbol, ::Google::Auth::Credentials, ::Google::Auth::BaseClient, ::Signet::OAuth2::Client, nil]
                   allowed.any? { |klass| klass === value }
                 end
                 config_attr :scope,         nil, ::String, ::Array, nil
@@ -1255,6 +1255,13 @@ module Google
                                                           uri_method: :get,
                                                           uri_template: "/ui/{name}/operations",
                                                           matches: [
+                                                            ["name", %r{^projects/[^/]+/locations/[^/]+/ragEngineConfig/?$}, false]
+                                                          ]
+                                                        )
+                                                        .with_bindings(
+                                                          uri_method: :get,
+                                                          uri_template: "/ui/{name}/operations",
+                                                          matches: [
                                                             ["name", %r{^projects/[^/]+/locations/[^/]+/schedules/[^/]+/?$}, false]
                                                           ]
                                                         )
@@ -1564,6 +1571,13 @@ module Google
                                                           uri_template: "/v1/{name}/operations",
                                                           matches: [
                                                             ["name", %r{^projects/[^/]+/locations/[^/]+/pipelineJobs/[^/]+/?$}, false]
+                                                          ]
+                                                        )
+                                                        .with_bindings(
+                                                          uri_method: :get,
+                                                          uri_template: "/v1/{name}/operations",
+                                                          matches: [
+                                                            ["name", %r{^projects/[^/]+/locations/[^/]+/ragEngineConfig/?$}, false]
                                                           ]
                                                         )
                                                         .with_bindings(
@@ -1948,6 +1962,13 @@ module Google
                                                           uri_method: :get,
                                                           uri_template: "/ui/{name}",
                                                           matches: [
+                                                            ["name", %r{^projects/[^/]+/locations/[^/]+/ragEngineConfig/operations/[^/]+/?$}, false]
+                                                          ]
+                                                        )
+                                                        .with_bindings(
+                                                          uri_method: :get,
+                                                          uri_template: "/ui/{name}",
+                                                          matches: [
                                                             ["name", %r{^projects/[^/]+/locations/[^/]+/schedules/[^/]+/operations/[^/]+/?$}, false]
                                                           ]
                                                         )
@@ -2215,6 +2236,13 @@ module Google
                                                           uri_template: "/v1/{name}",
                                                           matches: [
                                                             ["name", %r{^projects/[^/]+/locations/[^/]+/notebookRuntimeTemplates/[^/]+/operations/[^/]+/?$}, false]
+                                                          ]
+                                                        )
+                                                        .with_bindings(
+                                                          uri_method: :get,
+                                                          uri_template: "/v1/{name}",
+                                                          matches: [
+                                                            ["name", %r{^projects/[^/]+/locations/[^/]+/ragEngineConfig/operations/[^/]+/?$}, false]
                                                           ]
                                                         )
                                                         .with_bindings(
@@ -2641,6 +2669,13 @@ module Google
                                                           uri_method: :delete,
                                                           uri_template: "/ui/{name}",
                                                           matches: [
+                                                            ["name", %r{^projects/[^/]+/locations/[^/]+/ragEngineConfig/operations/[^/]+/?$}, false]
+                                                          ]
+                                                        )
+                                                        .with_bindings(
+                                                          uri_method: :delete,
+                                                          uri_template: "/ui/{name}",
+                                                          matches: [
                                                             ["name", %r{^projects/[^/]+/locations/[^/]+/tensorboards/[^/]+/operations/[^/]+/?$}, false]
                                                           ]
                                                         )
@@ -2887,6 +2922,13 @@ module Google
                                                           uri_template: "/v1/{name}",
                                                           matches: [
                                                             ["name", %r{^projects/[^/]+/locations/[^/]+/notebookRuntimeTemplates/[^/]+/operations/[^/]+/?$}, false]
+                                                          ]
+                                                        )
+                                                        .with_bindings(
+                                                          uri_method: :delete,
+                                                          uri_template: "/v1/{name}",
+                                                          matches: [
+                                                            ["name", %r{^projects/[^/]+/locations/[^/]+/ragEngineConfig/operations/[^/]+/?$}, false]
                                                           ]
                                                         )
                                                         .with_bindings(
@@ -3313,6 +3355,13 @@ module Google
                                                           uri_method: :post,
                                                           uri_template: "/ui/{name}:cancel",
                                                           matches: [
+                                                            ["name", %r{^projects/[^/]+/locations/[^/]+/ragEngineConfig/operations/[^/]+/?$}, false]
+                                                          ]
+                                                        )
+                                                        .with_bindings(
+                                                          uri_method: :post,
+                                                          uri_template: "/ui/{name}:cancel",
+                                                          matches: [
                                                             ["name", %r{^projects/[^/]+/locations/[^/]+/specialistPools/[^/]+/operations/[^/]+/?$}, false]
                                                           ]
                                                         )
@@ -3545,6 +3594,13 @@ module Google
                                                           uri_template: "/v1/{name}:cancel",
                                                           matches: [
                                                             ["name", %r{^projects/[^/]+/locations/[^/]+/persistentResources/[^/]+/operations/[^/]+/?$}, false]
+                                                          ]
+                                                        )
+                                                        .with_bindings(
+                                                          uri_method: :post,
+                                                          uri_template: "/v1/{name}:cancel",
+                                                          matches: [
+                                                            ["name", %r{^projects/[^/]+/locations/[^/]+/ragEngineConfig/operations/[^/]+/?$}, false]
                                                           ]
                                                         )
                                                         .with_bindings(
@@ -3943,6 +3999,13 @@ module Google
                                                           uri_method: :post,
                                                           uri_template: "/ui/{name}:wait",
                                                           matches: [
+                                                            ["name", %r{^projects/[^/]+/locations/[^/]+/ragEngineConfig/operations/[^/]+/?$}, false]
+                                                          ]
+                                                        )
+                                                        .with_bindings(
+                                                          uri_method: :post,
+                                                          uri_template: "/ui/{name}:wait",
+                                                          matches: [
                                                             ["name", %r{^projects/[^/]+/locations/[^/]+/tensorboards/[^/]+/operations/[^/]+/?$}, false]
                                                           ]
                                                         )
@@ -4189,6 +4252,13 @@ module Google
                                                           uri_template: "/v1/{name}:wait",
                                                           matches: [
                                                             ["name", %r{^projects/[^/]+/locations/[^/]+/notebookRuntimeTemplates/[^/]+/operations/[^/]+/?$}, false]
+                                                          ]
+                                                        )
+                                                        .with_bindings(
+                                                          uri_method: :post,
+                                                          uri_template: "/v1/{name}:wait",
+                                                          matches: [
+                                                            ["name", %r{^projects/[^/]+/locations/[^/]+/ragEngineConfig/operations/[^/]+/?$}, false]
                                                           ]
                                                         )
                                                         .with_bindings(

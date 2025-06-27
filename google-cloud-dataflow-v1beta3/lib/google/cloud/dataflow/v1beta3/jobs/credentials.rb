@@ -27,9 +27,7 @@ module Google
           class Credentials < ::Google::Auth::Credentials
             self.scope = [
               "https://www.googleapis.com/auth/cloud-platform",
-              "https://www.googleapis.com/auth/compute",
-              "https://www.googleapis.com/auth/compute.readonly",
-              "https://www.googleapis.com/auth/userinfo.email"
+              "https://www.googleapis.com/auth/compute"
             ]
             self.env_vars = [
               "DATAFLOW_CREDENTIALS",

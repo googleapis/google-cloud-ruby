@@ -80,6 +80,9 @@ module Google
         # @!attribute [rw] with_attributes
         #   @return [::Boolean]
         #     If true, then the client has requested to get pubsub attributes.
+        # @!attribute [rw] dynamic_destinations
+        #   @return [::Boolean]
+        #     If true, then this location represents dynamic topics.
         class PubsubLocation
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

@@ -187,6 +187,118 @@ describe "Watch", :firestore_acceptance do
     _(snps[3][:val]).must_equal 1
   end
 
+  describe "Watch -- multiple database tests" do
+    it "watches a query" do
+      skip "Don't have secondary database to run the test" unless firestore_2
+      col_id = "#{root_path}/query/#{SecureRandom.hex(4)}"
+      watch_col = firestore_2.col(col_id).doc("watch-#{SecureRandom.hex(4)}").col("watch-query")
+
+      watch_col.doc("nil").create val: nil
+      watch_col.doc("int").create val: 0
+      watch_col.doc("true").create val: true
+      watch_col.doc("false").create val: false
+      watch_col.doc("num").create val: 0.0
+      watch_col.doc("str").create val: ""
+      watch_col.doc("time").create val: Time.now
+      watch_col.doc("array").create val: []
+      watch_col.doc("hash").create val: {}
+      watch_col.doc("ref").create val: root_col.doc("ref")
+      watch_col.doc("geo").create val: { longitude: 45, latitude: 45 }
+      watch_col.doc("io").create val: StringIO.new
+
+      snps = []
+      listener = watch_col.order(:val, :desc).listen { |snp| snps << snp }
+
+      wait_until { snps.count == 1 }
+
+      watch_col.doc("added").create val: false
+
+      wait_until { snps.count == 2 }
+
+      watch_col.doc("array").delete
+
+      wait_until { snps.count == 3 }
+
+      watch_col.doc("added").update({val: true})
+
+      wait_until { snps.count == 4 }
+
+      listener.stop
+
+      _(snps.count).must_equal 4
+      snps.each { |qs| _(qs).must_be_kind_of Google::Cloud::Firestore::QuerySnapshot }
+
+      _(snps[0].count).must_equal 12
+      _(snps[0].changes.count).must_equal 12
+      _(snps[0].docs.map(&:document_id)).must_equal ["hash", "array", "geo", "ref", "io", "str", "time", "num", "int", "true", "false", "nil"]
+      snps[0].changes.each { |change| _(change).must_be :added? }
+      _(snps[0].changes.map(&:doc).map(&:document_id)).must_equal ["hash", "array", "geo", "ref", "io", "str", "time", "num", "int", "true", "false", "nil"]
+
+      _(snps[1].count).must_equal 13
+      _(snps[1].changes.count).must_equal 1
+      _(snps[1].docs.map(&:document_id)).must_equal ["hash", "array", "geo", "ref", "io", "str", "time", "num", "int", "true", "false", "added", "nil"]
+      snps[1].changes.each { |change| _(change).must_be :added? }
+      _(snps[1].changes.map(&:doc).map(&:document_id)).must_equal ["added"]
+
+      _(snps[2].count).must_equal 12
+      _(snps[2].changes.count).must_equal 1
+      _(snps[2].docs.map(&:document_id)).must_equal ["hash", "geo", "ref", "io", "str", "time", "num", "int", "true", "false", "added", "nil"]
+      snps[2].changes.each { |change| _(change).must_be :removed? }
+      _(snps[2].changes.map(&:doc).map(&:document_id)).must_equal ["array"]
+
+      _(snps[3].count).must_equal 12
+      _(snps[3].changes.count).must_equal 1
+      _(snps[3].docs.map(&:document_id)).must_equal ["hash", "geo", "ref", "io", "str", "time", "num", "int", "true", "added", "false", "nil"]
+      snps[3].changes.each { |change| _(change).must_be :modified? }
+      _(snps[3].changes.map(&:doc).map(&:document_id)).must_equal ["added"]
+    end
+
+    it "watches a document" do
+      skip "Don't have secondary database to run the test" unless firestore_2
+      col_id = "#{root_path}/query/#{SecureRandom.hex(4)}"
+      watch_col = firestore_2.col(col_id).doc("watch-#{SecureRandom.hex(4)}").col("watch-docs")
+
+      watch_col.doc("watch-doc").create val: true
+
+      snps = []
+      listener = watch_col.doc("watch-doc").listen { |snp| snps << snp }
+
+      wait_until { snps.count == 1 }
+
+      watch_col.doc("watch-doc").update({val: false})
+
+      wait_until { snps.count == 2 }
+
+      watch_col.doc("watch-doc").delete
+
+      wait_until { snps.count == 3 }
+
+      watch_col.doc("watch-doc").set({val: 1})
+
+      wait_until { snps.count == 4 }
+
+      listener.stop
+
+      _(snps.count).must_equal 4
+      snps.each { |qs| _(qs).must_be_kind_of Google::Cloud::Firestore::DocumentSnapshot }
+
+      _(snps[0].document_path).must_equal watch_col.doc("watch-doc").document_path
+      _(snps[0]).must_be :exists?
+      _(snps[0][:val]).must_equal true
+
+      _(snps[1].document_path).must_equal watch_col.doc("watch-doc").document_path
+      _(snps[1]).must_be :exists?
+      _(snps[1][:val]).must_equal false
+
+      _(snps[2].document_path).must_equal watch_col.doc("watch-doc").document_path
+      _(snps[2]).must_be :missing?
+
+      _(snps[3].document_path).must_equal watch_col.doc("watch-doc").document_path
+      _(snps[3]).must_be :exists?
+      _(snps[3][:val]).must_equal 1
+    end
+  end
+
   def wait_until &block
     wait_count = 0
     until block.call

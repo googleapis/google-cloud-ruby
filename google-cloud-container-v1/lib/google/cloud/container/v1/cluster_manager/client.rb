@@ -689,7 +689,7 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload update_node_pool(project_id: nil, zone: nil, cluster_id: nil, node_pool_id: nil, node_version: nil, image_type: nil, name: nil, locations: nil, workload_metadata_config: nil, upgrade_settings: nil, tags: nil, taints: nil, labels: nil, linux_node_config: nil, kubelet_config: nil, node_network_config: nil, gcfs_config: nil, confidential_nodes: nil, gvnic: nil, etag: nil, fast_socket: nil, logging_config: nil, resource_labels: nil, windows_node_config: nil, accelerators: nil, machine_type: nil, disk_type: nil, disk_size_gb: nil, resource_manager_tags: nil, containerd_config: nil, queued_provisioning: nil, storage_pools: nil)
+            # @overload update_node_pool(project_id: nil, zone: nil, cluster_id: nil, node_pool_id: nil, node_version: nil, image_type: nil, name: nil, locations: nil, workload_metadata_config: nil, upgrade_settings: nil, tags: nil, taints: nil, labels: nil, linux_node_config: nil, kubelet_config: nil, node_network_config: nil, gcfs_config: nil, confidential_nodes: nil, gvnic: nil, etag: nil, fast_socket: nil, logging_config: nil, resource_labels: nil, windows_node_config: nil, accelerators: nil, machine_type: nil, disk_type: nil, disk_size_gb: nil, resource_manager_tags: nil, containerd_config: nil, queued_provisioning: nil, storage_pools: nil, max_run_duration: nil, flex_start: nil)
             #   Pass arguments to `update_node_pool` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -809,6 +809,11 @@ module Google
             #   @param storage_pools [::Array<::String>]
             #     List of Storage Pools where boot disks are provisioned.
             #     Existing Storage Pools will be replaced with storage-pools.
+            #   @param max_run_duration [::Google::Protobuf::Duration, ::Hash]
+            #     The maximum duration for the nodes to exist.
+            #     If unspecified, the nodes can exist indefinitely.
+            #   @param flex_start [::Boolean]
+            #     Flex Start flag for enabling Flex Start VM.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::Container::V1::Operation]
@@ -1122,7 +1127,7 @@ module Google
             #     Required. The monitoring service the cluster should use to write metrics.
             #     Currently available options:
             #
-            #     * "monitoring.googleapis.com/kubernetes" - The Cloud Monitoring
+            #     * `monitoring.googleapis.com/kubernetes` - The Cloud Monitoring
             #     service with a Kubernetes-native resource model
             #     * `monitoring.googleapis.com` - The legacy Cloud Monitoring service (no
             #       longer available as of GKE 1.15).
@@ -3807,6 +3812,185 @@ module Google
             end
 
             ##
+            # Fetch upgrade information of a specific cluster.
+            #
+            # @overload fetch_cluster_upgrade_info(request, options = nil)
+            #   Pass arguments to `fetch_cluster_upgrade_info` via a request object, either of type
+            #   {::Google::Cloud::Container::V1::FetchClusterUpgradeInfoRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::Container::V1::FetchClusterUpgradeInfoRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload fetch_cluster_upgrade_info(name: nil, version: nil)
+            #   Pass arguments to `fetch_cluster_upgrade_info` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param name [::String]
+            #     Required. The name (project, location, cluster) of the cluster to get.
+            #     Specified in the format `projects/*/locations/*/clusters/*` or
+            #     `projects/*/zones/*/clusters/*`.
+            #   @param version [::String]
+            #     API request version that initiates this operation.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Google::Cloud::Container::V1::ClusterUpgradeInfo]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Google::Cloud::Container::V1::ClusterUpgradeInfo]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/container/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Container::V1::ClusterManager::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Container::V1::FetchClusterUpgradeInfoRequest.new
+            #
+            #   # Call the fetch_cluster_upgrade_info method.
+            #   result = client.fetch_cluster_upgrade_info request
+            #
+            #   # The returned object is of type Google::Cloud::Container::V1::ClusterUpgradeInfo.
+            #   p result
+            #
+            def fetch_cluster_upgrade_info request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Container::V1::FetchClusterUpgradeInfoRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.fetch_cluster_upgrade_info.metadata.to_h
+
+              # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::Container::V1::VERSION
+              metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.fetch_cluster_upgrade_info.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.fetch_cluster_upgrade_info.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @cluster_manager_stub.call_rpc :fetch_cluster_upgrade_info, request, options: options do |response, operation|
+                yield response, operation if block_given?
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Fetch upgrade information of a specific nodepool.
+            #
+            # @overload fetch_node_pool_upgrade_info(request, options = nil)
+            #   Pass arguments to `fetch_node_pool_upgrade_info` via a request object, either of type
+            #   {::Google::Cloud::Container::V1::FetchNodePoolUpgradeInfoRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::Container::V1::FetchNodePoolUpgradeInfoRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload fetch_node_pool_upgrade_info(name: nil, version: nil)
+            #   Pass arguments to `fetch_node_pool_upgrade_info` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param name [::String]
+            #     Required. The name (project, location, cluster, nodepool) of the nodepool
+            #     to get. Specified in the format
+            #     `projects/*/locations/*/clusters/*/nodePools/*` or
+            #     `projects/*/zones/*/clusters/*/nodePools/*`.
+            #   @param version [::String]
+            #     API request version that initiates this operation.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Google::Cloud::Container::V1::NodePoolUpgradeInfo]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Google::Cloud::Container::V1::NodePoolUpgradeInfo]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/container/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Container::V1::ClusterManager::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Container::V1::FetchNodePoolUpgradeInfoRequest.new
+            #
+            #   # Call the fetch_node_pool_upgrade_info method.
+            #   result = client.fetch_node_pool_upgrade_info request
+            #
+            #   # The returned object is of type Google::Cloud::Container::V1::NodePoolUpgradeInfo.
+            #   p result
+            #
+            def fetch_node_pool_upgrade_info request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Container::V1::FetchNodePoolUpgradeInfoRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.fetch_node_pool_upgrade_info.metadata.to_h
+
+              # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::Container::V1::VERSION
+              metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.fetch_node_pool_upgrade_info.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.fetch_node_pool_upgrade_info.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @cluster_manager_stub.call_rpc :fetch_node_pool_upgrade_info, request, options: options do |response, operation|
+                yield response, operation if block_given?
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
             # Configuration class for the ClusterManager API.
             #
             # This class represents the configuration for ClusterManager,
@@ -3911,8 +4095,8 @@ module Google
 
               config_attr :endpoint,      nil, ::String, nil
               config_attr :credentials,   nil do |value|
-                allowed = [::String, ::Hash, ::Proc, ::Symbol, ::Google::Auth::Credentials, ::Signet::OAuth2::Client, nil]
-                allowed += [::GRPC::Core::Channel, ::GRPC::Core::ChannelCredentials] if defined? ::GRPC
+                allowed = [::String, ::Hash, ::Proc, ::Symbol, ::Google::Auth::Credentials, ::Google::Auth::BaseClient, ::Signet::OAuth2::Client, nil]
+                allowed += [::GRPC::Core::Channel, ::GRPC::Core::ChannelCredentials] if defined? ::GRPC::Core::Channel
                 allowed.any? { |klass| klass === value }
               end
               config_attr :scope,         nil, ::String, ::Array, nil
@@ -4142,6 +4326,16 @@ module Google
                 # @return [::Gapic::Config::Method]
                 #
                 attr_reader :check_autopilot_compatibility
+                ##
+                # RPC-specific configuration for `fetch_cluster_upgrade_info`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :fetch_cluster_upgrade_info
+                ##
+                # RPC-specific configuration for `fetch_node_pool_upgrade_info`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :fetch_node_pool_upgrade_info
 
                 # @private
                 def initialize parent_rpcs = nil
@@ -4213,6 +4407,10 @@ module Google
                   @list_usable_subnetworks = ::Gapic::Config::Method.new list_usable_subnetworks_config
                   check_autopilot_compatibility_config = parent_rpcs.check_autopilot_compatibility if parent_rpcs.respond_to? :check_autopilot_compatibility
                   @check_autopilot_compatibility = ::Gapic::Config::Method.new check_autopilot_compatibility_config
+                  fetch_cluster_upgrade_info_config = parent_rpcs.fetch_cluster_upgrade_info if parent_rpcs.respond_to? :fetch_cluster_upgrade_info
+                  @fetch_cluster_upgrade_info = ::Gapic::Config::Method.new fetch_cluster_upgrade_info_config
+                  fetch_node_pool_upgrade_info_config = parent_rpcs.fetch_node_pool_upgrade_info if parent_rpcs.respond_to? :fetch_node_pool_upgrade_info
+                  @fetch_node_pool_upgrade_info = ::Gapic::Config::Method.new fetch_node_pool_upgrade_info_config
 
                   yield self if block_given?
                 end

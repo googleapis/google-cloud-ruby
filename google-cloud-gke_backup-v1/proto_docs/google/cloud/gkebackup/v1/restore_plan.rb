@@ -80,7 +80,15 @@ module Google
         # @!attribute [r] state_reason
         #   @return [::String]
         #     Output only. Human-readable description of why RestorePlan is in the
-        #     current `state`
+        #     current `state`. This field is only meant for human readability and should
+        #     not be used programmatically as this field is not guaranteed to be
+        #     consistent.
+        # @!attribute [r] restore_channel
+        #   @return [::String]
+        #     Output only. The fully qualified name of the RestoreChannel to be used to
+        #     create a RestorePlan. This field is set only if the `backup_plan` is in a
+        #     different project than the RestorePlan. Format:
+        #     `projects/*/locations/*/restoreChannels/*`
         class RestorePlan
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

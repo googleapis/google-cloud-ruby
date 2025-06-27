@@ -1,7 +1,7 @@
 {
   "client_library": {
     "name": "google-cloud-firestore-admin-v1",
-    "version": "1.3.0",
+    "version": "1.5.0",
     "language": "RUBY",
     "apis": [
       {
@@ -607,6 +607,286 @@
         {
           "start": 20,
           "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "firestore_v1_generated_FirestoreAdmin_CreateUserCreds_sync",
+      "title": "Snippet for the create_user_creds call in the FirestoreAdmin service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Client#create_user_creds.",
+      "file": "firestore_admin/create_user_creds.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_user_creds",
+        "full_name": "::Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Client#create_user_creds",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Firestore::Admin::V1::CreateUserCredsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Firestore::Admin::V1::UserCreds",
+        "client": {
+          "short_name": "FirestoreAdmin::Client",
+          "full_name": "::Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Client"
+        },
+        "method": {
+          "short_name": "CreateUserCreds",
+          "full_name": "google.firestore.admin.v1.FirestoreAdmin.CreateUserCreds",
+          "service": {
+            "short_name": "FirestoreAdmin",
+            "full_name": "google.firestore.admin.v1.FirestoreAdmin"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "firestore_v1_generated_FirestoreAdmin_GetUserCreds_sync",
+      "title": "Snippet for the get_user_creds call in the FirestoreAdmin service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Client#get_user_creds.",
+      "file": "firestore_admin/get_user_creds.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_user_creds",
+        "full_name": "::Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Client#get_user_creds",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Firestore::Admin::V1::GetUserCredsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Firestore::Admin::V1::UserCreds",
+        "client": {
+          "short_name": "FirestoreAdmin::Client",
+          "full_name": "::Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Client"
+        },
+        "method": {
+          "short_name": "GetUserCreds",
+          "full_name": "google.firestore.admin.v1.FirestoreAdmin.GetUserCreds",
+          "service": {
+            "short_name": "FirestoreAdmin",
+            "full_name": "google.firestore.admin.v1.FirestoreAdmin"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "firestore_v1_generated_FirestoreAdmin_ListUserCreds_sync",
+      "title": "Snippet for the list_user_creds call in the FirestoreAdmin service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Client#list_user_creds.",
+      "file": "firestore_admin/list_user_creds.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_user_creds",
+        "full_name": "::Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Client#list_user_creds",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Firestore::Admin::V1::ListUserCredsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Firestore::Admin::V1::ListUserCredsResponse",
+        "client": {
+          "short_name": "FirestoreAdmin::Client",
+          "full_name": "::Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Client"
+        },
+        "method": {
+          "short_name": "ListUserCreds",
+          "full_name": "google.firestore.admin.v1.FirestoreAdmin.ListUserCreds",
+          "service": {
+            "short_name": "FirestoreAdmin",
+            "full_name": "google.firestore.admin.v1.FirestoreAdmin"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "firestore_v1_generated_FirestoreAdmin_EnableUserCreds_sync",
+      "title": "Snippet for the enable_user_creds call in the FirestoreAdmin service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Client#enable_user_creds.",
+      "file": "firestore_admin/enable_user_creds.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "enable_user_creds",
+        "full_name": "::Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Client#enable_user_creds",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Firestore::Admin::V1::EnableUserCredsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Firestore::Admin::V1::UserCreds",
+        "client": {
+          "short_name": "FirestoreAdmin::Client",
+          "full_name": "::Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Client"
+        },
+        "method": {
+          "short_name": "EnableUserCreds",
+          "full_name": "google.firestore.admin.v1.FirestoreAdmin.EnableUserCreds",
+          "service": {
+            "short_name": "FirestoreAdmin",
+            "full_name": "google.firestore.admin.v1.FirestoreAdmin"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "firestore_v1_generated_FirestoreAdmin_DisableUserCreds_sync",
+      "title": "Snippet for the disable_user_creds call in the FirestoreAdmin service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Client#disable_user_creds.",
+      "file": "firestore_admin/disable_user_creds.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "disable_user_creds",
+        "full_name": "::Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Client#disable_user_creds",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Firestore::Admin::V1::DisableUserCredsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Firestore::Admin::V1::UserCreds",
+        "client": {
+          "short_name": "FirestoreAdmin::Client",
+          "full_name": "::Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Client"
+        },
+        "method": {
+          "short_name": "DisableUserCreds",
+          "full_name": "google.firestore.admin.v1.FirestoreAdmin.DisableUserCreds",
+          "service": {
+            "short_name": "FirestoreAdmin",
+            "full_name": "google.firestore.admin.v1.FirestoreAdmin"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "firestore_v1_generated_FirestoreAdmin_ResetUserPassword_sync",
+      "title": "Snippet for the reset_user_password call in the FirestoreAdmin service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Client#reset_user_password.",
+      "file": "firestore_admin/reset_user_password.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "reset_user_password",
+        "full_name": "::Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Client#reset_user_password",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Firestore::Admin::V1::ResetUserPasswordRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Firestore::Admin::V1::UserCreds",
+        "client": {
+          "short_name": "FirestoreAdmin::Client",
+          "full_name": "::Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Client"
+        },
+        "method": {
+          "short_name": "ResetUserPassword",
+          "full_name": "google.firestore.admin.v1.FirestoreAdmin.ResetUserPassword",
+          "service": {
+            "short_name": "FirestoreAdmin",
+            "full_name": "google.firestore.admin.v1.FirestoreAdmin"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "firestore_v1_generated_FirestoreAdmin_DeleteUserCreds_sync",
+      "title": "Snippet for the delete_user_creds call in the FirestoreAdmin service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Client#delete_user_creds.",
+      "file": "firestore_admin/delete_user_creds.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_user_creds",
+        "full_name": "::Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Client#delete_user_creds",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Firestore::Admin::V1::DeleteUserCredsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Protobuf::Empty",
+        "client": {
+          "short_name": "FirestoreAdmin::Client",
+          "full_name": "::Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Client"
+        },
+        "method": {
+          "short_name": "DeleteUserCreds",
+          "full_name": "google.firestore.admin.v1.FirestoreAdmin.DeleteUserCreds",
+          "service": {
+            "short_name": "FirestoreAdmin",
+            "full_name": "google.firestore.admin.v1.FirestoreAdmin"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
           "type": "FULL"
         }
       ]

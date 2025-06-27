@@ -44,6 +44,20 @@ module Google
             rpc :UpdateBackupPlan, ::Google::Cloud::GkeBackup::V1::UpdateBackupPlanRequest, ::Google::Longrunning::Operation
             # Deletes an existing BackupPlan.
             rpc :DeleteBackupPlan, ::Google::Cloud::GkeBackup::V1::DeleteBackupPlanRequest, ::Google::Longrunning::Operation
+            # Creates a new BackupChannel in a given location.
+            rpc :CreateBackupChannel, ::Google::Cloud::GkeBackup::V1::CreateBackupChannelRequest, ::Google::Longrunning::Operation
+            # Lists BackupChannels in a given location.
+            rpc :ListBackupChannels, ::Google::Cloud::GkeBackup::V1::ListBackupChannelsRequest, ::Google::Cloud::GkeBackup::V1::ListBackupChannelsResponse
+            # Retrieve the details of a single BackupChannel.
+            rpc :GetBackupChannel, ::Google::Cloud::GkeBackup::V1::GetBackupChannelRequest, ::Google::Cloud::GkeBackup::V1::BackupChannel
+            # Update a BackupChannel.
+            rpc :UpdateBackupChannel, ::Google::Cloud::GkeBackup::V1::UpdateBackupChannelRequest, ::Google::Longrunning::Operation
+            # Deletes an existing BackupChannel.
+            rpc :DeleteBackupChannel, ::Google::Cloud::GkeBackup::V1::DeleteBackupChannelRequest, ::Google::Longrunning::Operation
+            # Lists BackupPlanBindings in a given location.
+            rpc :ListBackupPlanBindings, ::Google::Cloud::GkeBackup::V1::ListBackupPlanBindingsRequest, ::Google::Cloud::GkeBackup::V1::ListBackupPlanBindingsResponse
+            # Retrieve the details of a single BackupPlanBinding.
+            rpc :GetBackupPlanBinding, ::Google::Cloud::GkeBackup::V1::GetBackupPlanBindingRequest, ::Google::Cloud::GkeBackup::V1::BackupPlanBinding
             # Creates a Backup for the given BackupPlan.
             rpc :CreateBackup, ::Google::Cloud::GkeBackup::V1::CreateBackupRequest, ::Google::Longrunning::Operation
             # Lists the Backups for a given BackupPlan.
@@ -68,6 +82,20 @@ module Google
             rpc :UpdateRestorePlan, ::Google::Cloud::GkeBackup::V1::UpdateRestorePlanRequest, ::Google::Longrunning::Operation
             # Deletes an existing RestorePlan.
             rpc :DeleteRestorePlan, ::Google::Cloud::GkeBackup::V1::DeleteRestorePlanRequest, ::Google::Longrunning::Operation
+            # Creates a new RestoreChannel in a given location.
+            rpc :CreateRestoreChannel, ::Google::Cloud::GkeBackup::V1::CreateRestoreChannelRequest, ::Google::Longrunning::Operation
+            # Lists RestoreChannels in a given location.
+            rpc :ListRestoreChannels, ::Google::Cloud::GkeBackup::V1::ListRestoreChannelsRequest, ::Google::Cloud::GkeBackup::V1::ListRestoreChannelsResponse
+            # Retrieve the details of a single RestoreChannel.
+            rpc :GetRestoreChannel, ::Google::Cloud::GkeBackup::V1::GetRestoreChannelRequest, ::Google::Cloud::GkeBackup::V1::RestoreChannel
+            # Update a RestoreChannel.
+            rpc :UpdateRestoreChannel, ::Google::Cloud::GkeBackup::V1::UpdateRestoreChannelRequest, ::Google::Longrunning::Operation
+            # Deletes an existing RestoreChannel.
+            rpc :DeleteRestoreChannel, ::Google::Cloud::GkeBackup::V1::DeleteRestoreChannelRequest, ::Google::Longrunning::Operation
+            # Lists RestorePlanBindings in a given location.
+            rpc :ListRestorePlanBindings, ::Google::Cloud::GkeBackup::V1::ListRestorePlanBindingsRequest, ::Google::Cloud::GkeBackup::V1::ListRestorePlanBindingsResponse
+            # Retrieve the details of a single RestorePlanBinding.
+            rpc :GetRestorePlanBinding, ::Google::Cloud::GkeBackup::V1::GetRestorePlanBindingRequest, ::Google::Cloud::GkeBackup::V1::RestorePlanBinding
             # Creates a new Restore for the given RestorePlan.
             rpc :CreateRestore, ::Google::Cloud::GkeBackup::V1::CreateRestoreRequest, ::Google::Longrunning::Operation
             # Lists the Restores for a given RestorePlan.

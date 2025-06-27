@@ -1,5 +1,26 @@
 # Changelog
 
+### 0.9.0 (2025-05-12)
+
+#### Features
+
+* Updated core dependencies including gapic-common 
+* Updated required Ruby version to 3.1 
+
+### 0.8.1 (2025-04-29)
+
+#### Bug Fixes
+
+* Fixed several issues with validating credential configs 
+
+### 0.8.0 (2025-04-25)
+
+#### Features
+
+* Support deployment type and installation date for an Order 
+* Support hardware count ranges for a SKU 
+* Support step and details parameters to the signal_zone_state RPC 
+
 ### 0.7.0 (2025-02-07)
 
 ### ⚠ BREAKING CHANGES

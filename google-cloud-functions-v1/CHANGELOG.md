@@ -1,5 +1,25 @@
 # Release History
 
+### 2.1.0 (2025-05-12)
+
+#### Features
+
+* Updated core dependencies including gapic-common 
+* Updated required Ruby version to 3.1 
+
+### 2.0.2 (2025-04-29)
+
+#### Bug Fixes
+
+* Fixed several issues with validating credential configs 
+
+### 2.0.1 (2025-04-21)
+
+#### Documentation
+
+* fixed typo 
+* updated `docker_registry` proto to reflect its deprecated status ([#29448](https://github.com/googleapis/google-cloud-ruby/issues/29448)) 
+
 ### 2.0.0 (2025-02-07)
 
 ### ⚠ BREAKING CHANGES

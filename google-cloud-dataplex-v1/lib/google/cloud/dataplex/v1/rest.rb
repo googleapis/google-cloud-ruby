@@ -18,6 +18,7 @@
 
 require "google/cloud/dataplex/v1/dataplex_service/rest"
 require "google/cloud/dataplex/v1/catalog_service/rest"
+require "google/cloud/dataplex/v1/cmek_service/rest"
 require "google/cloud/dataplex/v1/content_service/rest"
 require "google/cloud/dataplex/v1/data_taxonomy_service/rest"
 require "google/cloud/dataplex/v1/data_scan_service/rest"

@@ -25,7 +25,7 @@ module Google
         # L3 attributes.
         # @!attribute [rw] name
         #   @return [::String]
-        #     Required. Name of the TlsRoute resource. It matches pattern
+        #     Identifier. Name of the TlsRoute resource. It matches pattern
         #     `projects/*/locations/global/tlsRoutes/tls_route_name>`.
         # @!attribute [r] self_link
         #   @return [::String]
@@ -61,6 +61,9 @@ module Google
         #
         #     Each gateway reference should match the pattern:
         #     `projects/*/locations/global/gateways/<gateway_name>`
+        # @!attribute [rw] labels
+        #   @return [::Google::Protobuf::Map{::String => ::String}]
+        #     Optional. Set of label tags associated with the TlsRoute resource.
         class TlsRoute
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -70,7 +73,8 @@ module Google
           # @!attribute [rw] matches
           #   @return [::Array<::Google::Cloud::NetworkServices::V1::TlsRoute::RouteMatch>]
           #     Required. RouteMatch defines the predicate used to match requests to a
-          #     given action. Multiple match types are "OR"ed for evaluation.
+          #     given action. Multiple match types are "OR"ed for evaluation. Atleast one
+          #     RouteMatch must be supplied.
           # @!attribute [rw] action
           #   @return [::Google::Cloud::NetworkServices::V1::TlsRoute::RouteAction]
           #     Required. The detailed rule defining how to route matched traffic.
@@ -81,8 +85,6 @@ module Google
 
           # RouteMatch defines the predicate used to match requests to a given action.
           # Multiple match types are "AND"ed for evaluation.
-          # If no routeMatch field is specified, this rule will unconditionally match
-          # traffic.
           # @!attribute [rw] sni_host
           #   @return [::Array<::String>]
           #     Optional. SNI (server name indicator) to match against.
@@ -92,7 +94,7 @@ module Google
           #     Partial wildcards are not supported, and values like *w.example.com are
           #     invalid.
           #     At least one of sni_host and alpn is required.
-          #     Up to 5 sni hosts across all matches can be set.
+          #     Up to 100 sni hosts across all matches can be set.
           # @!attribute [rw] alpn
           #   @return [::Array<::String>]
           #     Optional. ALPN (Application-Layer Protocol Negotiation) to match against.
@@ -109,6 +111,13 @@ module Google
           #   @return [::Array<::Google::Cloud::NetworkServices::V1::TlsRoute::RouteDestination>]
           #     Required. The destination services to which traffic should be forwarded.
           #     At least one destination service is required.
+          # @!attribute [rw] idle_timeout
+          #   @return [::Google::Protobuf::Duration]
+          #     Optional. Specifies the idle timeout for the selected route. The idle
+          #     timeout is defined as the period in which there are no bytes sent or
+          #     received on either the upstream or downstream connection. If not set, the
+          #     default idle timeout is 1 hour. If set to 0s, the timeout will be
+          #     disabled.
           class RouteAction
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -120,11 +129,20 @@ module Google
           #     Required. The URL of a BackendService to route traffic to.
           # @!attribute [rw] weight
           #   @return [::Integer]
-          #     Optional. Specifies the proportion of requests forwareded to the backend
+          #     Optional. Specifies the proportion of requests forwarded to the backend
           #     referenced by the service_name field. This is computed as:
           #     - weight/Sum(weights in destinations)
           #     Weights in all destinations does not need to sum up to 100.
           class RouteDestination
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # @!attribute [rw] key
+          #   @return [::String]
+          # @!attribute [rw] value
+          #   @return [::String]
+          class LabelsEntry
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
@@ -143,6 +161,11 @@ module Google
         #     The value returned by the last `ListTlsRoutesResponse`
         #     Indicates that this is a continuation of a prior `ListTlsRoutes` call,
         #     and that the system should return the next page of data.
+        # @!attribute [rw] return_partial_success
+        #   @return [::Boolean]
+        #     Optional. If true, allow partial responses for multi-regional Aggregated
+        #     List requests. Otherwise if one of the locations is down or unreachable,
+        #     the Aggregated List request will fail.
         class ListTlsRoutesRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -157,6 +180,12 @@ module Google
         #     If there might be more results than those appearing in this response, then
         #     `next_page_token` is included. To get the next set of results, call this
         #     method again using the value of `next_page_token` as `page_token`.
+        # @!attribute [rw] unreachable
+        #   @return [::Array<::String>]
+        #     Unreachable resources. Populated when the request opts into
+        #     {::Google::Cloud::NetworkServices::V1::ListTlsRoutesRequest#return_partial_success return_partial_success}
+        #     and reading across collections e.g. when attempting to list all resources
+        #     across all supported locations.
         class ListTlsRoutesResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

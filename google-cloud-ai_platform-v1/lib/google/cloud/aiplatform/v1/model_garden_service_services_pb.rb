@@ -35,6 +35,8 @@ module Google
 
             # Gets a Model Garden publisher model.
             rpc :GetPublisherModel, ::Google::Cloud::AIPlatform::V1::GetPublisherModelRequest, ::Google::Cloud::AIPlatform::V1::PublisherModel
+            # Deploys a model to a new endpoint.
+            rpc :Deploy, ::Google::Cloud::AIPlatform::V1::DeployRequest, ::Google::Longrunning::Operation
           end
 
           Stub = Service.rpc_stub_class

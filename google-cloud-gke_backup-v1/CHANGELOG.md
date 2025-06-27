@@ -1,5 +1,34 @@
 # Changelog
 
+### 1.3.0 (2025-05-16)
+
+#### Features
+
+* Support for backup config details 
+* Support for retention policy details 
+* Support for specifying backup and restore channel names 
+
+### 1.2.0 (2025-05-12)
+
+#### Features
+
+* Updated core dependencies including gapic-common 
+* Updated required Ruby version to 3.1 
+
+### 1.1.1 (2025-04-29)
+
+#### Bug Fixes
+
+* Fixed several issues with validating credential configs 
+
+### 1.1.0 (2025-04-25)
+
+#### Features
+
+* BackupPlan reports its last successful completion time 
+* Support RPCs related to listing and reading backup and restore plan bindings 
+* Support RPCs related to managing backup and restore channels ([#29525](https://github.com/googleapis/google-cloud-ruby/issues/29525)) 
+
 ### 1.0.0 (2025-02-07)
 
 ### ⚠ BREAKING CHANGES

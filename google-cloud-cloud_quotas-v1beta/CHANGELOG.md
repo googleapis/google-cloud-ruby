@@ -1,5 +1,29 @@
 # Changelog
 
+### 0.5.0 (2025-06-16)
+
+#### Features
+
+* Added support for hierarchical enrollment in Quota Adjuster consumer API ([#30506](https://github.com/googleapis/google-cloud-ruby/issues/30506)) 
+#### Documentation
+
+* Added 2 new fields in `.google.api.cloudquotas.v1beta.QuotaAdjusterSettings` 
+* Added inherited and inherited_from in `.google.api.cloudquotas.v1beta.QuotaAdjusterSettings` 
+* Added support for folder and organization level enrollment 
+
+### 0.4.0 (2025-05-12)
+
+#### Features
+
+* Updated core dependencies including gapic-common 
+* Updated required Ruby version to 3.1 
+
+### 0.3.2 (2025-04-29)
+
+#### Bug Fixes
+
+* Fixed several issues with validating credential configs 
+
 ### 0.3.1 (2025-03-13)
 
 #### Documentation

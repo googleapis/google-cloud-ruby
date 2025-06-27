@@ -1,4 +1,4 @@
-## Migrating to google-cloud-automl 1.0
+# Migrating to google-cloud-automl 1.0
 
 The 1.0 release of the google-cloud-automl client is a significant upgrade
 based on a [next-gen code generator](https://github.com/googleapis/gapic-generator-ruby),

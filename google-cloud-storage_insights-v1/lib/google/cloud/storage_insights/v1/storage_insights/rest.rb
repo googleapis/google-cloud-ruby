@@ -25,6 +25,7 @@ require "google/cloud/storage_insights/v1/bindings_override"
 
 require "google/cloud/storage_insights/v1/storage_insights/credentials"
 require "google/cloud/storage_insights/v1/storage_insights/paths"
+require "google/cloud/storage_insights/v1/storage_insights/rest/operations"
 require "google/cloud/storage_insights/v1/storage_insights/rest/client"
 
 module Google

@@ -26,6 +26,25 @@ module Google
             # Path helper methods for the StorageControl API.
             module Paths
               ##
+              # Create a fully-qualified AnywhereCache resource string.
+              #
+              # The resource will be in the following format:
+              #
+              # `projects/{project}/buckets/{bucket}/anywhereCaches/{anywhere_cache}`
+              #
+              # @param project [String]
+              # @param bucket [String]
+              # @param anywhere_cache [String]
+              #
+              # @return [::String]
+              def anywhere_cache_path project:, bucket:, anywhere_cache:
+                raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+                raise ::ArgumentError, "bucket cannot contain /" if bucket.to_s.include? "/"
+
+                "projects/#{project}/buckets/#{bucket}/anywhereCaches/#{anywhere_cache}"
+              end
+
+              ##
               # Create a fully-qualified Bucket resource string.
               #
               # The resource will be in the following format:
@@ -59,6 +78,58 @@ module Google
                 raise ::ArgumentError, "bucket cannot contain /" if bucket.to_s.include? "/"
 
                 "projects/#{project}/buckets/#{bucket}/folders/#{folder}"
+              end
+
+              ##
+              # Create a fully-qualified IntelligenceConfig resource string.
+              #
+              # @overload intelligence_config_path(folder:, location:)
+              #   The resource will be in the following format:
+              #
+              #   `folders/{folder}/locations/{location}/intelligenceConfig`
+              #
+              #   @param folder [String]
+              #   @param location [String]
+              #
+              # @overload intelligence_config_path(org:, location:)
+              #   The resource will be in the following format:
+              #
+              #   `organizations/{org}/locations/{location}/intelligenceConfig`
+              #
+              #   @param org [String]
+              #   @param location [String]
+              #
+              # @overload intelligence_config_path(project:, location:)
+              #   The resource will be in the following format:
+              #
+              #   `projects/{project}/locations/{location}/intelligenceConfig`
+              #
+              #   @param project [String]
+              #   @param location [String]
+              #
+              # @return [::String]
+              def intelligence_config_path **args
+                resources = {
+                  "folder:location" => (proc do |folder:, location:|
+                    raise ::ArgumentError, "folder cannot contain /" if folder.to_s.include? "/"
+
+                    "folders/#{folder}/locations/#{location}/intelligenceConfig"
+                  end),
+                  "location:org" => (proc do |org:, location:|
+                    raise ::ArgumentError, "org cannot contain /" if org.to_s.include? "/"
+
+                    "organizations/#{org}/locations/#{location}/intelligenceConfig"
+                  end),
+                  "location:project" => (proc do |project:, location:|
+                    raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+
+                    "projects/#{project}/locations/#{location}/intelligenceConfig"
+                  end)
+                }
+
+                resource = resources[args.keys.sort.join(":")]
+                raise ::ArgumentError, "no resource found for values #{args.keys}" if resource.nil?
+                resource.call(**args)
               end
 
               ##

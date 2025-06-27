@@ -21,10 +21,17 @@ module Google
   module Cloud
     module Support
       module V2
-        # Represents a file attached to a support case.
+        # An Attachment contains metadata about a file that was uploaded to a
+        # case - it is NOT a file itself. That being said, the name of an Attachment
+        # object can be used to download its accompanying file through the
+        # `media.download` endpoint.
+        #
+        # While attachments can be uploaded in the console at the
+        # same time as a comment, they're associated on a "case" level, not a
+        # "comment" level.
         # @!attribute [r] name
         #   @return [::String]
-        #     Output only. The resource name of the attachment.
+        #     Output only. Identifier. The resource name of the attachment.
         # @!attribute [r] create_time
         #   @return [::Google::Protobuf::Timestamp]
         #     Output only. The time at which the attachment was created.

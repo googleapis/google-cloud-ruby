@@ -418,7 +418,7 @@ module Google
       #
       # ## About FlexTemplatesService
       #
-      # Provides a service for Flex templates. This feature is not ready yet.
+      # Provides a service for Flex templates.
       #
       # @param version [::String, ::Symbol] The API version to connect to. Optional.
       #   Defaults to `:v1beta3`.

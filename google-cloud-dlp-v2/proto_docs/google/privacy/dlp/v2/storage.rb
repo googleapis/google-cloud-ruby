@@ -872,6 +872,11 @@ module Google
         # @!attribute [rw] table_id
         #   @return [::String]
         #     Name of the table.
+        # @!attribute [rw] project_id
+        #   @return [::String]
+        #     The Google Cloud project ID of the project containing the table.
+        #     If omitted, the project ID is inferred from the parent project. This field
+        #     is required if the parent resource is an organization.
         class TableReference
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

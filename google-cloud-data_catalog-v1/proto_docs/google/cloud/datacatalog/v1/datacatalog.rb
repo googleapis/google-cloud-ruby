@@ -378,7 +378,7 @@ module Google
         #     * `datacatalog.entry.{PROJECT_ID}.{LOCATION_ID}.{ENTRY_GROUP_ID}.{ENTRY_ID}`
         #
         #     Identifiers (`*_ID`) should comply with the
-        #     [Lexical structure in Standard SQL]
+        #     [Lexical structure in GoogleSQL]
         #     (https://cloud.google.com/bigquery/docs/reference/standard-sql/lexical).
         #
         #     Note: The following fields are mutually exclusive: `sql_resource`, `linked_resource`, `fully_qualified_name`. If a field in that set is populated, all other fields in the set will automatically be cleared.
@@ -1737,6 +1737,10 @@ module Google
         # @!attribute [rw] catalog_ui_experience
         #   @return [::Google::Cloud::DataCatalog::V1::CatalogUIExperience]
         #     Opt-in status for the UI switch to Dataplex.
+        # @!attribute [rw] template_migration_enabled_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     The time when the Tag Template migration was enabled.
+        #     If the Tag Template migration is not enabled, this field is not set.
         class MigrationConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

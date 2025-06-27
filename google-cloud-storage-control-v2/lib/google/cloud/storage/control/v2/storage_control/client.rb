@@ -73,6 +73,11 @@ module Google
 
                   default_config.timeout = 60.0
 
+                  default_config.rpcs.create_folder.timeout = 60.0
+                  default_config.rpcs.create_folder.retry_policy = {
+                    initial_delay: 1.0, max_delay: 60.0, multiplier: 2, retry_codes: [8, 14, 4, 13, 2]
+                  }
+
                   default_config.rpcs.get_folder.timeout = 60.0
                   default_config.rpcs.get_folder.retry_policy = {
                     initial_delay: 1.0, max_delay: 60.0, multiplier: 2, retry_codes: [8, 14, 4, 13, 2]
@@ -100,6 +105,71 @@ module Google
 
                   default_config.rpcs.list_managed_folders.timeout = 60.0
                   default_config.rpcs.list_managed_folders.retry_policy = {
+                    initial_delay: 1.0, max_delay: 60.0, multiplier: 2, retry_codes: [8, 14, 4, 13, 2]
+                  }
+
+                  default_config.rpcs.create_anywhere_cache.timeout = 60.0
+                  default_config.rpcs.create_anywhere_cache.retry_policy = {
+                    initial_delay: 1.0, max_delay: 60.0, multiplier: 2, retry_codes: [8, 14, 4, 13, 2]
+                  }
+
+                  default_config.rpcs.update_anywhere_cache.timeout = 60.0
+                  default_config.rpcs.update_anywhere_cache.retry_policy = {
+                    initial_delay: 1.0, max_delay: 60.0, multiplier: 2, retry_codes: [8, 14, 4, 13, 2]
+                  }
+
+                  default_config.rpcs.disable_anywhere_cache.timeout = 60.0
+                  default_config.rpcs.disable_anywhere_cache.retry_policy = {
+                    initial_delay: 1.0, max_delay: 60.0, multiplier: 2, retry_codes: [8, 14, 4, 13, 2]
+                  }
+
+                  default_config.rpcs.pause_anywhere_cache.timeout = 60.0
+                  default_config.rpcs.pause_anywhere_cache.retry_policy = {
+                    initial_delay: 1.0, max_delay: 60.0, multiplier: 2, retry_codes: [8, 14, 4, 13, 2]
+                  }
+
+                  default_config.rpcs.resume_anywhere_cache.timeout = 60.0
+                  default_config.rpcs.resume_anywhere_cache.retry_policy = {
+                    initial_delay: 1.0, max_delay: 60.0, multiplier: 2, retry_codes: [8, 14, 4, 13, 2]
+                  }
+
+                  default_config.rpcs.get_anywhere_cache.timeout = 60.0
+                  default_config.rpcs.get_anywhere_cache.retry_policy = {
+                    initial_delay: 1.0, max_delay: 60.0, multiplier: 2, retry_codes: [8, 14, 4, 13, 2]
+                  }
+
+                  default_config.rpcs.list_anywhere_caches.timeout = 60.0
+                  default_config.rpcs.list_anywhere_caches.retry_policy = {
+                    initial_delay: 1.0, max_delay: 60.0, multiplier: 2, retry_codes: [8, 14, 4, 13, 2]
+                  }
+
+                  default_config.rpcs.get_project_intelligence_config.timeout = 60.0
+                  default_config.rpcs.get_project_intelligence_config.retry_policy = {
+                    initial_delay: 1.0, max_delay: 60.0, multiplier: 2, retry_codes: [8, 14, 4, 13, 2]
+                  }
+
+                  default_config.rpcs.update_project_intelligence_config.timeout = 60.0
+                  default_config.rpcs.update_project_intelligence_config.retry_policy = {
+                    initial_delay: 1.0, max_delay: 60.0, multiplier: 2, retry_codes: [8, 14, 4, 13, 2]
+                  }
+
+                  default_config.rpcs.get_folder_intelligence_config.timeout = 60.0
+                  default_config.rpcs.get_folder_intelligence_config.retry_policy = {
+                    initial_delay: 1.0, max_delay: 60.0, multiplier: 2, retry_codes: [8, 14, 4, 13, 2]
+                  }
+
+                  default_config.rpcs.update_folder_intelligence_config.timeout = 60.0
+                  default_config.rpcs.update_folder_intelligence_config.retry_policy = {
+                    initial_delay: 1.0, max_delay: 60.0, multiplier: 2, retry_codes: [8, 14, 4, 13, 2]
+                  }
+
+                  default_config.rpcs.get_organization_intelligence_config.timeout = 60.0
+                  default_config.rpcs.get_organization_intelligence_config.retry_policy = {
+                    initial_delay: 1.0, max_delay: 60.0, multiplier: 2, retry_codes: [8, 14, 4, 13, 2]
+                  }
+
+                  default_config.rpcs.update_organization_intelligence_config.timeout = 60.0
+                  default_config.rpcs.update_organization_intelligence_config.retry_policy = {
                     initial_delay: 1.0, max_delay: 60.0, multiplier: 2, retry_codes: [8, 14, 4, 13, 2]
                   }
 
@@ -1262,6 +1332,1236 @@ module Google
               end
 
               ##
+              # Creates an Anywhere Cache instance.
+              #
+              # @overload create_anywhere_cache(request, options = nil)
+              #   Pass arguments to `create_anywhere_cache` via a request object, either of type
+              #   {::Google::Cloud::Storage::Control::V2::CreateAnywhereCacheRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::Storage::Control::V2::CreateAnywhereCacheRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+              #
+              # @overload create_anywhere_cache(parent: nil, anywhere_cache: nil, request_id: nil)
+              #   Pass arguments to `create_anywhere_cache` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param parent [::String]
+              #     Required. The bucket to which this cache belongs.
+              #     Format: `projects/{project}/buckets/{bucket}`
+              #   @param anywhere_cache [::Google::Cloud::Storage::Control::V2::AnywhereCache, ::Hash]
+              #     Required. Properties of the Anywhere Cache instance being created.
+              #     The parent bucket name is specified in the `parent` field. Server uses the
+              #     default value of `ttl` or `admission_policy` if not specified in
+              #     request.
+              #   @param request_id [::String]
+              #     Optional. A unique identifier for this request. UUID is the recommended
+              #     format, but other formats are still accepted. This request is only
+              #     idempotent if a `request_id` is provided.
+              #
+              # @yield [response, operation] Access the result along with the RPC operation
+              # @yieldparam response [::Gapic::Operation]
+              # @yieldparam operation [::GRPC::ActiveCall::Operation]
+              #
+              # @return [::Gapic::Operation]
+              #
+              # @raise [::Google::Cloud::Error] if the RPC is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/storage/control/v2"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Storage::Control::V2::StorageControl::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Storage::Control::V2::CreateAnywhereCacheRequest.new
+              #
+              #   # Call the create_anywhere_cache method.
+              #   result = client.create_anywhere_cache request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
+              def create_anywhere_cache request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Storage::Control::V2::CreateAnywhereCacheRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                metadata = @config.rpcs.create_anywhere_cache.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::Storage::Control::V2::VERSION
+                metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                header_params = {}
+                if request.parent && !request.parent.empty?
+                  header_params["bucket"] = request.parent
+                end
+
+                request_params_header = URI.encode_www_form header_params
+                metadata[:"x-goog-request-params"] ||= request_params_header
+
+                options.apply_defaults timeout:      @config.rpcs.create_anywhere_cache.timeout,
+                                       metadata:     metadata,
+                                       retry_policy: @config.rpcs.create_anywhere_cache.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @storage_control_stub.call_rpc :create_anywhere_cache, request, options: options do |response, operation|
+                  response = ::Gapic::Operation.new response, @operations_client, options: options
+                  yield response, operation if block_given?
+                  throw :response, response
+                end
+              rescue ::GRPC::BadStatus => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Updates an Anywhere Cache instance. Mutable fields include `ttl` and
+              # `admission_policy`.
+              #
+              # @overload update_anywhere_cache(request, options = nil)
+              #   Pass arguments to `update_anywhere_cache` via a request object, either of type
+              #   {::Google::Cloud::Storage::Control::V2::UpdateAnywhereCacheRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::Storage::Control::V2::UpdateAnywhereCacheRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+              #
+              # @overload update_anywhere_cache(anywhere_cache: nil, update_mask: nil, request_id: nil)
+              #   Pass arguments to `update_anywhere_cache` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param anywhere_cache [::Google::Cloud::Storage::Control::V2::AnywhereCache, ::Hash]
+              #     Required. The Anywhere Cache instance to be updated.
+              #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
+              #     Required. List of fields to be updated. Mutable fields of AnywhereCache
+              #     include `ttl` and `admission_policy`.
+              #
+              #     To specify ALL fields, specify a single field with the value `*`. Note: We
+              #     recommend against doing this. If a new field is introduced at a later time,
+              #     an older client updating with the `*` may accidentally reset the new
+              #     field's value.
+              #
+              #     Not specifying any fields is an error.
+              #   @param request_id [::String]
+              #     Optional. A unique identifier for this request. UUID is the recommended
+              #     format, but other formats are still accepted. This request is only
+              #     idempotent if a `request_id` is provided.
+              #
+              # @yield [response, operation] Access the result along with the RPC operation
+              # @yieldparam response [::Gapic::Operation]
+              # @yieldparam operation [::GRPC::ActiveCall::Operation]
+              #
+              # @return [::Gapic::Operation]
+              #
+              # @raise [::Google::Cloud::Error] if the RPC is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/storage/control/v2"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Storage::Control::V2::StorageControl::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Storage::Control::V2::UpdateAnywhereCacheRequest.new
+              #
+              #   # Call the update_anywhere_cache method.
+              #   result = client.update_anywhere_cache request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
+              def update_anywhere_cache request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Storage::Control::V2::UpdateAnywhereCacheRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                metadata = @config.rpcs.update_anywhere_cache.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::Storage::Control::V2::VERSION
+                metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                header_params = {}
+                if request.anywhere_cache&.name
+                  regex_match = %r{^(?<bucket>projects/[^/]+/buckets/[^/]+)(?:/.*)?$}.match request.anywhere_cache.name
+                  if regex_match
+                    header_params["bucket"] = regex_match["bucket".to_s]
+                  end
+                end
+
+                request_params_header = URI.encode_www_form header_params
+                metadata[:"x-goog-request-params"] ||= request_params_header
+
+                options.apply_defaults timeout:      @config.rpcs.update_anywhere_cache.timeout,
+                                       metadata:     metadata,
+                                       retry_policy: @config.rpcs.update_anywhere_cache.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @storage_control_stub.call_rpc :update_anywhere_cache, request, options: options do |response, operation|
+                  response = ::Gapic::Operation.new response, @operations_client, options: options
+                  yield response, operation if block_given?
+                  throw :response, response
+                end
+              rescue ::GRPC::BadStatus => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Disables an Anywhere Cache instance. A disabled instance is read-only. The
+              # disablement could be revoked by calling ResumeAnywhereCache. The cache
+              # instance will be deleted automatically if it remains in the disabled state
+              # for at least one hour.
+              #
+              # @overload disable_anywhere_cache(request, options = nil)
+              #   Pass arguments to `disable_anywhere_cache` via a request object, either of type
+              #   {::Google::Cloud::Storage::Control::V2::DisableAnywhereCacheRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::Storage::Control::V2::DisableAnywhereCacheRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+              #
+              # @overload disable_anywhere_cache(name: nil, request_id: nil)
+              #   Pass arguments to `disable_anywhere_cache` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param name [::String]
+              #     Required. The name field in the request should be:
+              #     `projects/{project}/buckets/{bucket}/anywhereCaches/{anywhere_cache}`
+              #   @param request_id [::String]
+              #     Optional. A unique identifier for this request. UUID is the recommended
+              #     format, but other formats are still accepted. This request is only
+              #     idempotent if a `request_id` is provided.
+              #
+              # @yield [response, operation] Access the result along with the RPC operation
+              # @yieldparam response [::Google::Cloud::Storage::Control::V2::AnywhereCache]
+              # @yieldparam operation [::GRPC::ActiveCall::Operation]
+              #
+              # @return [::Google::Cloud::Storage::Control::V2::AnywhereCache]
+              #
+              # @raise [::Google::Cloud::Error] if the RPC is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/storage/control/v2"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Storage::Control::V2::StorageControl::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Storage::Control::V2::DisableAnywhereCacheRequest.new
+              #
+              #   # Call the disable_anywhere_cache method.
+              #   result = client.disable_anywhere_cache request
+              #
+              #   # The returned object is of type Google::Cloud::Storage::Control::V2::AnywhereCache.
+              #   p result
+              #
+              def disable_anywhere_cache request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Storage::Control::V2::DisableAnywhereCacheRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                metadata = @config.rpcs.disable_anywhere_cache.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::Storage::Control::V2::VERSION
+                metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                header_params = {}
+                if request.name
+                  regex_match = %r{^(?<bucket>projects/[^/]+/buckets/[^/]+)(?:/.*)?$}.match request.name
+                  if regex_match
+                    header_params["bucket"] = regex_match["bucket".to_s]
+                  end
+                end
+
+                request_params_header = URI.encode_www_form header_params
+                metadata[:"x-goog-request-params"] ||= request_params_header
+
+                options.apply_defaults timeout:      @config.rpcs.disable_anywhere_cache.timeout,
+                                       metadata:     metadata,
+                                       retry_policy: @config.rpcs.disable_anywhere_cache.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @storage_control_stub.call_rpc :disable_anywhere_cache, request, options: options do |response, operation|
+                  yield response, operation if block_given?
+                end
+              rescue ::GRPC::BadStatus => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Pauses an Anywhere Cache instance.
+              #
+              # @overload pause_anywhere_cache(request, options = nil)
+              #   Pass arguments to `pause_anywhere_cache` via a request object, either of type
+              #   {::Google::Cloud::Storage::Control::V2::PauseAnywhereCacheRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::Storage::Control::V2::PauseAnywhereCacheRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+              #
+              # @overload pause_anywhere_cache(name: nil, request_id: nil)
+              #   Pass arguments to `pause_anywhere_cache` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param name [::String]
+              #     Required. The name field in the request should be:
+              #     `projects/{project}/buckets/{bucket}/anywhereCaches/{anywhere_cache}`
+              #   @param request_id [::String]
+              #     Optional. A unique identifier for this request. UUID is the recommended
+              #     format, but other formats are still accepted. This request is only
+              #     idempotent if a `request_id` is provided.
+              #
+              # @yield [response, operation] Access the result along with the RPC operation
+              # @yieldparam response [::Google::Cloud::Storage::Control::V2::AnywhereCache]
+              # @yieldparam operation [::GRPC::ActiveCall::Operation]
+              #
+              # @return [::Google::Cloud::Storage::Control::V2::AnywhereCache]
+              #
+              # @raise [::Google::Cloud::Error] if the RPC is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/storage/control/v2"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Storage::Control::V2::StorageControl::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Storage::Control::V2::PauseAnywhereCacheRequest.new
+              #
+              #   # Call the pause_anywhere_cache method.
+              #   result = client.pause_anywhere_cache request
+              #
+              #   # The returned object is of type Google::Cloud::Storage::Control::V2::AnywhereCache.
+              #   p result
+              #
+              def pause_anywhere_cache request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Storage::Control::V2::PauseAnywhereCacheRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                metadata = @config.rpcs.pause_anywhere_cache.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::Storage::Control::V2::VERSION
+                metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                header_params = {}
+                if request.name
+                  regex_match = %r{^(?<bucket>projects/[^/]+/buckets/[^/]+)(?:/.*)?$}.match request.name
+                  if regex_match
+                    header_params["bucket"] = regex_match["bucket".to_s]
+                  end
+                end
+
+                request_params_header = URI.encode_www_form header_params
+                metadata[:"x-goog-request-params"] ||= request_params_header
+
+                options.apply_defaults timeout:      @config.rpcs.pause_anywhere_cache.timeout,
+                                       metadata:     metadata,
+                                       retry_policy: @config.rpcs.pause_anywhere_cache.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @storage_control_stub.call_rpc :pause_anywhere_cache, request, options: options do |response, operation|
+                  yield response, operation if block_given?
+                end
+              rescue ::GRPC::BadStatus => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Resumes a disabled or paused Anywhere Cache instance.
+              #
+              # @overload resume_anywhere_cache(request, options = nil)
+              #   Pass arguments to `resume_anywhere_cache` via a request object, either of type
+              #   {::Google::Cloud::Storage::Control::V2::ResumeAnywhereCacheRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::Storage::Control::V2::ResumeAnywhereCacheRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+              #
+              # @overload resume_anywhere_cache(name: nil, request_id: nil)
+              #   Pass arguments to `resume_anywhere_cache` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param name [::String]
+              #     Required. The name field in the request should be:
+              #     `projects/{project}/buckets/{bucket}/anywhereCaches/{anywhere_cache}`
+              #   @param request_id [::String]
+              #     Optional. A unique identifier for this request. UUID is the recommended
+              #     format, but other formats are still accepted. This request is only
+              #     idempotent if a `request_id` is provided.
+              #
+              # @yield [response, operation] Access the result along with the RPC operation
+              # @yieldparam response [::Google::Cloud::Storage::Control::V2::AnywhereCache]
+              # @yieldparam operation [::GRPC::ActiveCall::Operation]
+              #
+              # @return [::Google::Cloud::Storage::Control::V2::AnywhereCache]
+              #
+              # @raise [::Google::Cloud::Error] if the RPC is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/storage/control/v2"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Storage::Control::V2::StorageControl::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Storage::Control::V2::ResumeAnywhereCacheRequest.new
+              #
+              #   # Call the resume_anywhere_cache method.
+              #   result = client.resume_anywhere_cache request
+              #
+              #   # The returned object is of type Google::Cloud::Storage::Control::V2::AnywhereCache.
+              #   p result
+              #
+              def resume_anywhere_cache request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Storage::Control::V2::ResumeAnywhereCacheRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                metadata = @config.rpcs.resume_anywhere_cache.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::Storage::Control::V2::VERSION
+                metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                header_params = {}
+                if request.name
+                  regex_match = %r{^(?<bucket>projects/[^/]+/buckets/[^/]+)(?:/.*)?$}.match request.name
+                  if regex_match
+                    header_params["bucket"] = regex_match["bucket".to_s]
+                  end
+                end
+
+                request_params_header = URI.encode_www_form header_params
+                metadata[:"x-goog-request-params"] ||= request_params_header
+
+                options.apply_defaults timeout:      @config.rpcs.resume_anywhere_cache.timeout,
+                                       metadata:     metadata,
+                                       retry_policy: @config.rpcs.resume_anywhere_cache.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @storage_control_stub.call_rpc :resume_anywhere_cache, request, options: options do |response, operation|
+                  yield response, operation if block_given?
+                end
+              rescue ::GRPC::BadStatus => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Gets an Anywhere Cache instance.
+              #
+              # @overload get_anywhere_cache(request, options = nil)
+              #   Pass arguments to `get_anywhere_cache` via a request object, either of type
+              #   {::Google::Cloud::Storage::Control::V2::GetAnywhereCacheRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::Storage::Control::V2::GetAnywhereCacheRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+              #
+              # @overload get_anywhere_cache(name: nil, request_id: nil)
+              #   Pass arguments to `get_anywhere_cache` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param name [::String]
+              #     Required. The name field in the request should be:
+              #     `projects/{project}/buckets/{bucket}/anywhereCaches/{anywhere_cache}`
+              #   @param request_id [::String]
+              #     Optional. A unique identifier for this request. UUID is the recommended
+              #     format, but other formats are still accepted.
+              #
+              # @yield [response, operation] Access the result along with the RPC operation
+              # @yieldparam response [::Google::Cloud::Storage::Control::V2::AnywhereCache]
+              # @yieldparam operation [::GRPC::ActiveCall::Operation]
+              #
+              # @return [::Google::Cloud::Storage::Control::V2::AnywhereCache]
+              #
+              # @raise [::Google::Cloud::Error] if the RPC is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/storage/control/v2"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Storage::Control::V2::StorageControl::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Storage::Control::V2::GetAnywhereCacheRequest.new
+              #
+              #   # Call the get_anywhere_cache method.
+              #   result = client.get_anywhere_cache request
+              #
+              #   # The returned object is of type Google::Cloud::Storage::Control::V2::AnywhereCache.
+              #   p result
+              #
+              def get_anywhere_cache request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Storage::Control::V2::GetAnywhereCacheRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                metadata = @config.rpcs.get_anywhere_cache.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::Storage::Control::V2::VERSION
+                metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                header_params = {}
+                if request.name
+                  regex_match = %r{^(?<bucket>projects/[^/]+/buckets/[^/]+)(?:/.*)?$}.match request.name
+                  if regex_match
+                    header_params["bucket"] = regex_match["bucket".to_s]
+                  end
+                end
+
+                request_params_header = URI.encode_www_form header_params
+                metadata[:"x-goog-request-params"] ||= request_params_header
+
+                options.apply_defaults timeout:      @config.rpcs.get_anywhere_cache.timeout,
+                                       metadata:     metadata,
+                                       retry_policy: @config.rpcs.get_anywhere_cache.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @storage_control_stub.call_rpc :get_anywhere_cache, request, options: options do |response, operation|
+                  yield response, operation if block_given?
+                end
+              rescue ::GRPC::BadStatus => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Lists Anywhere Cache instances for a given bucket.
+              #
+              # @overload list_anywhere_caches(request, options = nil)
+              #   Pass arguments to `list_anywhere_caches` via a request object, either of type
+              #   {::Google::Cloud::Storage::Control::V2::ListAnywhereCachesRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::Storage::Control::V2::ListAnywhereCachesRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+              #
+              # @overload list_anywhere_caches(parent: nil, page_size: nil, page_token: nil, request_id: nil)
+              #   Pass arguments to `list_anywhere_caches` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param parent [::String]
+              #     Required. The bucket to which this cache belongs.
+              #   @param page_size [::Integer]
+              #     Maximum number of caches to return in a single response.
+              #     The service will use this parameter or 1,000 items, whichever is smaller.
+              #   @param page_token [::String]
+              #     A previously-returned page token representing part of the larger set of
+              #     results to view.
+              #   @param request_id [::String]
+              #     Optional. A unique identifier for this request. UUID is the recommended
+              #     format, but other formats are still accepted.
+              #
+              # @yield [response, operation] Access the result along with the RPC operation
+              # @yieldparam response [::Gapic::PagedEnumerable<::Google::Cloud::Storage::Control::V2::AnywhereCache>]
+              # @yieldparam operation [::GRPC::ActiveCall::Operation]
+              #
+              # @return [::Gapic::PagedEnumerable<::Google::Cloud::Storage::Control::V2::AnywhereCache>]
+              #
+              # @raise [::Google::Cloud::Error] if the RPC is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/storage/control/v2"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Storage::Control::V2::StorageControl::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Storage::Control::V2::ListAnywhereCachesRequest.new
+              #
+              #   # Call the list_anywhere_caches method.
+              #   result = client.list_anywhere_caches request
+              #
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
+              #     # Each element is of type ::Google::Cloud::Storage::Control::V2::AnywhereCache.
+              #     p item
+              #   end
+              #
+              def list_anywhere_caches request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Storage::Control::V2::ListAnywhereCachesRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                metadata = @config.rpcs.list_anywhere_caches.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::Storage::Control::V2::VERSION
+                metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                header_params = {}
+                if request.parent && !request.parent.empty?
+                  header_params["bucket"] = request.parent
+                end
+
+                request_params_header = URI.encode_www_form header_params
+                metadata[:"x-goog-request-params"] ||= request_params_header
+
+                options.apply_defaults timeout:      @config.rpcs.list_anywhere_caches.timeout,
+                                       metadata:     metadata,
+                                       retry_policy: @config.rpcs.list_anywhere_caches.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @storage_control_stub.call_rpc :list_anywhere_caches, request, options: options do |response, operation|
+                  response = ::Gapic::PagedEnumerable.new @storage_control_stub, :list_anywhere_caches, request, response, operation, options
+                  yield response, operation if block_given?
+                  throw :response, response
+                end
+              rescue ::GRPC::BadStatus => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Returns the Project scoped singleton IntelligenceConfig resource.
+              #
+              # @overload get_project_intelligence_config(request, options = nil)
+              #   Pass arguments to `get_project_intelligence_config` via a request object, either of type
+              #   {::Google::Cloud::Storage::Control::V2::GetProjectIntelligenceConfigRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::Storage::Control::V2::GetProjectIntelligenceConfigRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+              #
+              # @overload get_project_intelligence_config(name: nil)
+              #   Pass arguments to `get_project_intelligence_config` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param name [::String]
+              #     Required. The name of the `IntelligenceConfig` resource associated with
+              #     your project.
+              #
+              #     Format: `projects/{id}/locations/global/intelligenceConfig`
+              #
+              # @yield [response, operation] Access the result along with the RPC operation
+              # @yieldparam response [::Google::Cloud::Storage::Control::V2::IntelligenceConfig]
+              # @yieldparam operation [::GRPC::ActiveCall::Operation]
+              #
+              # @return [::Google::Cloud::Storage::Control::V2::IntelligenceConfig]
+              #
+              # @raise [::Google::Cloud::Error] if the RPC is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/storage/control/v2"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Storage::Control::V2::StorageControl::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Storage::Control::V2::GetProjectIntelligenceConfigRequest.new
+              #
+              #   # Call the get_project_intelligence_config method.
+              #   result = client.get_project_intelligence_config request
+              #
+              #   # The returned object is of type Google::Cloud::Storage::Control::V2::IntelligenceConfig.
+              #   p result
+              #
+              def get_project_intelligence_config request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Storage::Control::V2::GetProjectIntelligenceConfigRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                metadata = @config.rpcs.get_project_intelligence_config.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::Storage::Control::V2::VERSION
+                metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                header_params = {}
+                if request.name
+                  header_params["name"] = request.name
+                end
+
+                request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+                metadata[:"x-goog-request-params"] ||= request_params_header
+
+                options.apply_defaults timeout:      @config.rpcs.get_project_intelligence_config.timeout,
+                                       metadata:     metadata,
+                                       retry_policy: @config.rpcs.get_project_intelligence_config.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @storage_control_stub.call_rpc :get_project_intelligence_config, request, options: options do |response, operation|
+                  yield response, operation if block_given?
+                end
+              rescue ::GRPC::BadStatus => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Updates the Project scoped singleton IntelligenceConfig resource.
+              #
+              # @overload update_project_intelligence_config(request, options = nil)
+              #   Pass arguments to `update_project_intelligence_config` via a request object, either of type
+              #   {::Google::Cloud::Storage::Control::V2::UpdateProjectIntelligenceConfigRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::Storage::Control::V2::UpdateProjectIntelligenceConfigRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+              #
+              # @overload update_project_intelligence_config(intelligence_config: nil, update_mask: nil, request_id: nil)
+              #   Pass arguments to `update_project_intelligence_config` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param intelligence_config [::Google::Cloud::Storage::Control::V2::IntelligenceConfig, ::Hash]
+              #     Required. The `IntelligenceConfig` resource to be updated.
+              #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
+              #     Required. The `update_mask` that specifies the fields within the
+              #     `IntelligenceConfig` resource that should be modified by this update. Only
+              #     the listed fields are updated.
+              #   @param request_id [::String]
+              #     Optional. The ID that uniquely identifies the request, preventing duplicate
+              #     processing.
+              #
+              # @yield [response, operation] Access the result along with the RPC operation
+              # @yieldparam response [::Google::Cloud::Storage::Control::V2::IntelligenceConfig]
+              # @yieldparam operation [::GRPC::ActiveCall::Operation]
+              #
+              # @return [::Google::Cloud::Storage::Control::V2::IntelligenceConfig]
+              #
+              # @raise [::Google::Cloud::Error] if the RPC is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/storage/control/v2"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Storage::Control::V2::StorageControl::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Storage::Control::V2::UpdateProjectIntelligenceConfigRequest.new
+              #
+              #   # Call the update_project_intelligence_config method.
+              #   result = client.update_project_intelligence_config request
+              #
+              #   # The returned object is of type Google::Cloud::Storage::Control::V2::IntelligenceConfig.
+              #   p result
+              #
+              def update_project_intelligence_config request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Storage::Control::V2::UpdateProjectIntelligenceConfigRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                metadata = @config.rpcs.update_project_intelligence_config.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::Storage::Control::V2::VERSION
+                metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                header_params = {}
+                if request.intelligence_config&.name
+                  header_params["intelligence_config.name"] = request.intelligence_config.name
+                end
+
+                request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+                metadata[:"x-goog-request-params"] ||= request_params_header
+
+                options.apply_defaults timeout:      @config.rpcs.update_project_intelligence_config.timeout,
+                                       metadata:     metadata,
+                                       retry_policy: @config.rpcs.update_project_intelligence_config.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @storage_control_stub.call_rpc :update_project_intelligence_config, request, options: options do |response, operation|
+                  yield response, operation if block_given?
+                end
+              rescue ::GRPC::BadStatus => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Returns the Folder scoped singleton IntelligenceConfig resource.
+              #
+              # @overload get_folder_intelligence_config(request, options = nil)
+              #   Pass arguments to `get_folder_intelligence_config` via a request object, either of type
+              #   {::Google::Cloud::Storage::Control::V2::GetFolderIntelligenceConfigRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::Storage::Control::V2::GetFolderIntelligenceConfigRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+              #
+              # @overload get_folder_intelligence_config(name: nil)
+              #   Pass arguments to `get_folder_intelligence_config` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param name [::String]
+              #     Required. The name of the `IntelligenceConfig` resource associated with
+              #     your folder.
+              #
+              #     Format: `folders/{id}/locations/global/intelligenceConfig`
+              #
+              # @yield [response, operation] Access the result along with the RPC operation
+              # @yieldparam response [::Google::Cloud::Storage::Control::V2::IntelligenceConfig]
+              # @yieldparam operation [::GRPC::ActiveCall::Operation]
+              #
+              # @return [::Google::Cloud::Storage::Control::V2::IntelligenceConfig]
+              #
+              # @raise [::Google::Cloud::Error] if the RPC is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/storage/control/v2"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Storage::Control::V2::StorageControl::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Storage::Control::V2::GetFolderIntelligenceConfigRequest.new
+              #
+              #   # Call the get_folder_intelligence_config method.
+              #   result = client.get_folder_intelligence_config request
+              #
+              #   # The returned object is of type Google::Cloud::Storage::Control::V2::IntelligenceConfig.
+              #   p result
+              #
+              def get_folder_intelligence_config request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Storage::Control::V2::GetFolderIntelligenceConfigRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                metadata = @config.rpcs.get_folder_intelligence_config.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::Storage::Control::V2::VERSION
+                metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                header_params = {}
+                if request.name
+                  header_params["name"] = request.name
+                end
+
+                request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+                metadata[:"x-goog-request-params"] ||= request_params_header
+
+                options.apply_defaults timeout:      @config.rpcs.get_folder_intelligence_config.timeout,
+                                       metadata:     metadata,
+                                       retry_policy: @config.rpcs.get_folder_intelligence_config.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @storage_control_stub.call_rpc :get_folder_intelligence_config, request, options: options do |response, operation|
+                  yield response, operation if block_given?
+                end
+              rescue ::GRPC::BadStatus => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Updates the Folder scoped singleton IntelligenceConfig resource.
+              #
+              # @overload update_folder_intelligence_config(request, options = nil)
+              #   Pass arguments to `update_folder_intelligence_config` via a request object, either of type
+              #   {::Google::Cloud::Storage::Control::V2::UpdateFolderIntelligenceConfigRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::Storage::Control::V2::UpdateFolderIntelligenceConfigRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+              #
+              # @overload update_folder_intelligence_config(intelligence_config: nil, update_mask: nil, request_id: nil)
+              #   Pass arguments to `update_folder_intelligence_config` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param intelligence_config [::Google::Cloud::Storage::Control::V2::IntelligenceConfig, ::Hash]
+              #     Required. The `IntelligenceConfig` resource to be updated.
+              #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
+              #     Required. The `update_mask` that specifies the fields within the
+              #     `IntelligenceConfig` resource that should be modified by this update. Only
+              #     the listed fields are updated.
+              #   @param request_id [::String]
+              #     Optional. The ID that uniquely identifies the request, preventing duplicate
+              #     processing.
+              #
+              # @yield [response, operation] Access the result along with the RPC operation
+              # @yieldparam response [::Google::Cloud::Storage::Control::V2::IntelligenceConfig]
+              # @yieldparam operation [::GRPC::ActiveCall::Operation]
+              #
+              # @return [::Google::Cloud::Storage::Control::V2::IntelligenceConfig]
+              #
+              # @raise [::Google::Cloud::Error] if the RPC is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/storage/control/v2"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Storage::Control::V2::StorageControl::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Storage::Control::V2::UpdateFolderIntelligenceConfigRequest.new
+              #
+              #   # Call the update_folder_intelligence_config method.
+              #   result = client.update_folder_intelligence_config request
+              #
+              #   # The returned object is of type Google::Cloud::Storage::Control::V2::IntelligenceConfig.
+              #   p result
+              #
+              def update_folder_intelligence_config request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Storage::Control::V2::UpdateFolderIntelligenceConfigRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                metadata = @config.rpcs.update_folder_intelligence_config.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::Storage::Control::V2::VERSION
+                metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                header_params = {}
+                if request.intelligence_config&.name
+                  header_params["intelligence_config.name"] = request.intelligence_config.name
+                end
+
+                request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+                metadata[:"x-goog-request-params"] ||= request_params_header
+
+                options.apply_defaults timeout:      @config.rpcs.update_folder_intelligence_config.timeout,
+                                       metadata:     metadata,
+                                       retry_policy: @config.rpcs.update_folder_intelligence_config.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @storage_control_stub.call_rpc :update_folder_intelligence_config, request, options: options do |response, operation|
+                  yield response, operation if block_given?
+                end
+              rescue ::GRPC::BadStatus => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Returns the Organization scoped singleton IntelligenceConfig resource.
+              #
+              # @overload get_organization_intelligence_config(request, options = nil)
+              #   Pass arguments to `get_organization_intelligence_config` via a request object, either of type
+              #   {::Google::Cloud::Storage::Control::V2::GetOrganizationIntelligenceConfigRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::Storage::Control::V2::GetOrganizationIntelligenceConfigRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+              #
+              # @overload get_organization_intelligence_config(name: nil)
+              #   Pass arguments to `get_organization_intelligence_config` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param name [::String]
+              #     Required. The name of the `IntelligenceConfig` resource associated with
+              #     your organization.
+              #
+              #     Format: `organizations/{org_id}/locations/global/intelligenceConfig`
+              #
+              # @yield [response, operation] Access the result along with the RPC operation
+              # @yieldparam response [::Google::Cloud::Storage::Control::V2::IntelligenceConfig]
+              # @yieldparam operation [::GRPC::ActiveCall::Operation]
+              #
+              # @return [::Google::Cloud::Storage::Control::V2::IntelligenceConfig]
+              #
+              # @raise [::Google::Cloud::Error] if the RPC is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/storage/control/v2"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Storage::Control::V2::StorageControl::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Storage::Control::V2::GetOrganizationIntelligenceConfigRequest.new
+              #
+              #   # Call the get_organization_intelligence_config method.
+              #   result = client.get_organization_intelligence_config request
+              #
+              #   # The returned object is of type Google::Cloud::Storage::Control::V2::IntelligenceConfig.
+              #   p result
+              #
+              def get_organization_intelligence_config request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Storage::Control::V2::GetOrganizationIntelligenceConfigRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                metadata = @config.rpcs.get_organization_intelligence_config.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::Storage::Control::V2::VERSION
+                metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                header_params = {}
+                if request.name
+                  header_params["name"] = request.name
+                end
+
+                request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+                metadata[:"x-goog-request-params"] ||= request_params_header
+
+                options.apply_defaults timeout:      @config.rpcs.get_organization_intelligence_config.timeout,
+                                       metadata:     metadata,
+                                       retry_policy: @config.rpcs.get_organization_intelligence_config.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @storage_control_stub.call_rpc :get_organization_intelligence_config, request, options: options do |response, operation|
+                  yield response, operation if block_given?
+                end
+              rescue ::GRPC::BadStatus => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Updates the Organization scoped singleton IntelligenceConfig resource.
+              #
+              # @overload update_organization_intelligence_config(request, options = nil)
+              #   Pass arguments to `update_organization_intelligence_config` via a request object, either of type
+              #   {::Google::Cloud::Storage::Control::V2::UpdateOrganizationIntelligenceConfigRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::Storage::Control::V2::UpdateOrganizationIntelligenceConfigRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+              #
+              # @overload update_organization_intelligence_config(intelligence_config: nil, update_mask: nil, request_id: nil)
+              #   Pass arguments to `update_organization_intelligence_config` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param intelligence_config [::Google::Cloud::Storage::Control::V2::IntelligenceConfig, ::Hash]
+              #     Required. The `IntelligenceConfig` resource to be updated.
+              #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
+              #     Required. The `update_mask` that specifies the fields within the
+              #     `IntelligenceConfig` resource that should be modified by this update. Only
+              #     the listed fields are updated.
+              #   @param request_id [::String]
+              #     Optional. The ID that uniquely identifies the request, preventing duplicate
+              #     processing.
+              #
+              # @yield [response, operation] Access the result along with the RPC operation
+              # @yieldparam response [::Google::Cloud::Storage::Control::V2::IntelligenceConfig]
+              # @yieldparam operation [::GRPC::ActiveCall::Operation]
+              #
+              # @return [::Google::Cloud::Storage::Control::V2::IntelligenceConfig]
+              #
+              # @raise [::Google::Cloud::Error] if the RPC is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/storage/control/v2"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Storage::Control::V2::StorageControl::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Storage::Control::V2::UpdateOrganizationIntelligenceConfigRequest.new
+              #
+              #   # Call the update_organization_intelligence_config method.
+              #   result = client.update_organization_intelligence_config request
+              #
+              #   # The returned object is of type Google::Cloud::Storage::Control::V2::IntelligenceConfig.
+              #   p result
+              #
+              def update_organization_intelligence_config request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Storage::Control::V2::UpdateOrganizationIntelligenceConfigRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                metadata = @config.rpcs.update_organization_intelligence_config.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::Storage::Control::V2::VERSION
+                metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                header_params = {}
+                if request.intelligence_config&.name
+                  header_params["intelligence_config.name"] = request.intelligence_config.name
+                end
+
+                request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+                metadata[:"x-goog-request-params"] ||= request_params_header
+
+                options.apply_defaults timeout:      @config.rpcs.update_organization_intelligence_config.timeout,
+                                       metadata:     metadata,
+                                       retry_policy: @config.rpcs.update_organization_intelligence_config.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @storage_control_stub.call_rpc :update_organization_intelligence_config, request, options: options do |response, operation|
+                  yield response, operation if block_given?
+                end
+              rescue ::GRPC::BadStatus => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
               # Configuration class for the StorageControl API.
               #
               # This class represents the configuration for StorageControl,
@@ -1366,8 +2666,8 @@ module Google
 
                 config_attr :endpoint,      nil, ::String, nil
                 config_attr :credentials,   nil do |value|
-                  allowed = [::String, ::Hash, ::Proc, ::Symbol, ::Google::Auth::Credentials, ::Signet::OAuth2::Client, nil]
-                  allowed += [::GRPC::Core::Channel, ::GRPC::Core::ChannelCredentials] if defined? ::GRPC
+                  allowed = [::String, ::Hash, ::Proc, ::Symbol, ::Google::Auth::Credentials, ::Google::Auth::BaseClient, ::Signet::OAuth2::Client, nil]
+                  allowed += [::GRPC::Core::Channel, ::GRPC::Core::ChannelCredentials] if defined? ::GRPC::Core::Channel
                   allowed.any? { |klass| klass === value }
                 end
                 config_attr :scope,         nil, ::String, ::Array, nil
@@ -1477,6 +2777,71 @@ module Google
                   # @return [::Gapic::Config::Method]
                   #
                   attr_reader :list_managed_folders
+                  ##
+                  # RPC-specific configuration for `create_anywhere_cache`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :create_anywhere_cache
+                  ##
+                  # RPC-specific configuration for `update_anywhere_cache`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :update_anywhere_cache
+                  ##
+                  # RPC-specific configuration for `disable_anywhere_cache`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :disable_anywhere_cache
+                  ##
+                  # RPC-specific configuration for `pause_anywhere_cache`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :pause_anywhere_cache
+                  ##
+                  # RPC-specific configuration for `resume_anywhere_cache`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :resume_anywhere_cache
+                  ##
+                  # RPC-specific configuration for `get_anywhere_cache`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :get_anywhere_cache
+                  ##
+                  # RPC-specific configuration for `list_anywhere_caches`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :list_anywhere_caches
+                  ##
+                  # RPC-specific configuration for `get_project_intelligence_config`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :get_project_intelligence_config
+                  ##
+                  # RPC-specific configuration for `update_project_intelligence_config`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :update_project_intelligence_config
+                  ##
+                  # RPC-specific configuration for `get_folder_intelligence_config`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :get_folder_intelligence_config
+                  ##
+                  # RPC-specific configuration for `update_folder_intelligence_config`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :update_folder_intelligence_config
+                  ##
+                  # RPC-specific configuration for `get_organization_intelligence_config`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :get_organization_intelligence_config
+                  ##
+                  # RPC-specific configuration for `update_organization_intelligence_config`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :update_organization_intelligence_config
 
                   # @private
                   def initialize parent_rpcs = nil
@@ -1500,6 +2865,32 @@ module Google
                     @get_managed_folder = ::Gapic::Config::Method.new get_managed_folder_config
                     list_managed_folders_config = parent_rpcs.list_managed_folders if parent_rpcs.respond_to? :list_managed_folders
                     @list_managed_folders = ::Gapic::Config::Method.new list_managed_folders_config
+                    create_anywhere_cache_config = parent_rpcs.create_anywhere_cache if parent_rpcs.respond_to? :create_anywhere_cache
+                    @create_anywhere_cache = ::Gapic::Config::Method.new create_anywhere_cache_config
+                    update_anywhere_cache_config = parent_rpcs.update_anywhere_cache if parent_rpcs.respond_to? :update_anywhere_cache
+                    @update_anywhere_cache = ::Gapic::Config::Method.new update_anywhere_cache_config
+                    disable_anywhere_cache_config = parent_rpcs.disable_anywhere_cache if parent_rpcs.respond_to? :disable_anywhere_cache
+                    @disable_anywhere_cache = ::Gapic::Config::Method.new disable_anywhere_cache_config
+                    pause_anywhere_cache_config = parent_rpcs.pause_anywhere_cache if parent_rpcs.respond_to? :pause_anywhere_cache
+                    @pause_anywhere_cache = ::Gapic::Config::Method.new pause_anywhere_cache_config
+                    resume_anywhere_cache_config = parent_rpcs.resume_anywhere_cache if parent_rpcs.respond_to? :resume_anywhere_cache
+                    @resume_anywhere_cache = ::Gapic::Config::Method.new resume_anywhere_cache_config
+                    get_anywhere_cache_config = parent_rpcs.get_anywhere_cache if parent_rpcs.respond_to? :get_anywhere_cache
+                    @get_anywhere_cache = ::Gapic::Config::Method.new get_anywhere_cache_config
+                    list_anywhere_caches_config = parent_rpcs.list_anywhere_caches if parent_rpcs.respond_to? :list_anywhere_caches
+                    @list_anywhere_caches = ::Gapic::Config::Method.new list_anywhere_caches_config
+                    get_project_intelligence_config_config = parent_rpcs.get_project_intelligence_config if parent_rpcs.respond_to? :get_project_intelligence_config
+                    @get_project_intelligence_config = ::Gapic::Config::Method.new get_project_intelligence_config_config
+                    update_project_intelligence_config_config = parent_rpcs.update_project_intelligence_config if parent_rpcs.respond_to? :update_project_intelligence_config
+                    @update_project_intelligence_config = ::Gapic::Config::Method.new update_project_intelligence_config_config
+                    get_folder_intelligence_config_config = parent_rpcs.get_folder_intelligence_config if parent_rpcs.respond_to? :get_folder_intelligence_config
+                    @get_folder_intelligence_config = ::Gapic::Config::Method.new get_folder_intelligence_config_config
+                    update_folder_intelligence_config_config = parent_rpcs.update_folder_intelligence_config if parent_rpcs.respond_to? :update_folder_intelligence_config
+                    @update_folder_intelligence_config = ::Gapic::Config::Method.new update_folder_intelligence_config_config
+                    get_organization_intelligence_config_config = parent_rpcs.get_organization_intelligence_config if parent_rpcs.respond_to? :get_organization_intelligence_config
+                    @get_organization_intelligence_config = ::Gapic::Config::Method.new get_organization_intelligence_config_config
+                    update_organization_intelligence_config_config = parent_rpcs.update_organization_intelligence_config if parent_rpcs.respond_to? :update_organization_intelligence_config
+                    @update_organization_intelligence_config = ::Gapic::Config::Method.new update_organization_intelligence_config_config
 
                     yield self if block_given?
                   end

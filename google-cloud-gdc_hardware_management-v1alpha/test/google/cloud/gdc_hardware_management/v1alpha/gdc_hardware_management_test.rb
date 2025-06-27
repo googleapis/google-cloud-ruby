@@ -2309,6 +2309,8 @@ class ::Google::Cloud::GDCHardwareManagement::V1alpha::GDCHardwareManagement::Cl
     request_id = "hello world"
     state_signal = :STATE_SIGNAL_UNSPECIFIED
     provisioning_state_signal = :PROVISIONING_STATE_SIGNAL_UNSPECIFIED
+    step = "hello world"
+    details = "hello world"
 
     signal_zone_state_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :signal_zone_state, name
@@ -2317,6 +2319,8 @@ class ::Google::Cloud::GDCHardwareManagement::V1alpha::GDCHardwareManagement::Cl
       assert_equal "hello world", request["request_id"]
       assert_equal :STATE_SIGNAL_UNSPECIFIED, request["state_signal"]
       assert_equal :PROVISIONING_STATE_SIGNAL_UNSPECIFIED, request["provisioning_state_signal"]
+      assert_equal "hello world", request["step"]
+      assert_equal "hello world", request["details"]
       refute_nil options
     end
 
@@ -2327,35 +2331,35 @@ class ::Google::Cloud::GDCHardwareManagement::V1alpha::GDCHardwareManagement::Cl
       end
 
       # Use hash object
-      client.signal_zone_state({ name: name, request_id: request_id, state_signal: state_signal, provisioning_state_signal: provisioning_state_signal }) do |response, operation|
+      client.signal_zone_state({ name: name, request_id: request_id, state_signal: state_signal, provisioning_state_signal: provisioning_state_signal, step: step, details: details }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.signal_zone_state name: name, request_id: request_id, state_signal: state_signal, provisioning_state_signal: provisioning_state_signal do |response, operation|
+      client.signal_zone_state name: name, request_id: request_id, state_signal: state_signal, provisioning_state_signal: provisioning_state_signal, step: step, details: details do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.signal_zone_state ::Google::Cloud::GDCHardwareManagement::V1alpha::SignalZoneStateRequest.new(name: name, request_id: request_id, state_signal: state_signal, provisioning_state_signal: provisioning_state_signal) do |response, operation|
+      client.signal_zone_state ::Google::Cloud::GDCHardwareManagement::V1alpha::SignalZoneStateRequest.new(name: name, request_id: request_id, state_signal: state_signal, provisioning_state_signal: provisioning_state_signal, step: step, details: details) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.signal_zone_state({ name: name, request_id: request_id, state_signal: state_signal, provisioning_state_signal: provisioning_state_signal }, grpc_options) do |response, operation|
+      client.signal_zone_state({ name: name, request_id: request_id, state_signal: state_signal, provisioning_state_signal: provisioning_state_signal, step: step, details: details }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.signal_zone_state(::Google::Cloud::GDCHardwareManagement::V1alpha::SignalZoneStateRequest.new(name: name, request_id: request_id, state_signal: state_signal, provisioning_state_signal: provisioning_state_signal), grpc_options) do |response, operation|
+      client.signal_zone_state(::Google::Cloud::GDCHardwareManagement::V1alpha::SignalZoneStateRequest.new(name: name, request_id: request_id, state_signal: state_signal, provisioning_state_signal: provisioning_state_signal, step: step, details: details), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation

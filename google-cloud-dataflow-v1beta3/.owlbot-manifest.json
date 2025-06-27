@@ -79,6 +79,7 @@
     "proto_docs/google/dataflow/v1beta3/templates.rb",
     "proto_docs/google/protobuf/any.rb",
     "proto_docs/google/protobuf/duration.rb",
+    "proto_docs/google/protobuf/field_mask.rb",
     "proto_docs/google/protobuf/struct.rb",
     "proto_docs/google/protobuf/timestamp.rb",
     "proto_docs/google/rpc/status.rb",

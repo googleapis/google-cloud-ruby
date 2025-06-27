@@ -290,7 +290,7 @@ module Google
 
             # Configuration for Custom Dual Regions.  It should specify precisely two
             # eligible regions within the same Multiregion. More information on regions
-            # may be found [https://cloud.google.com/storage/docs/locations][here].
+            # may be found [here](https://cloud.google.com/storage/docs/locations).
             # @!attribute [rw] data_locations
             #   @return [::Array<::String>]
             #     List of locations to use for data placement.
@@ -458,6 +458,528 @@ module Google
           #     The continuation token, used to page through large result sets. Provide
           #     this value in a subsequent request to return the next page of results.
           class ListManagedFoldersResponse
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Message returned in the metadata field of the Operation resource for
+          # CreateAnywhereCache operations.
+          # @!attribute [rw] common_metadata
+          #   @return [::Google::Cloud::Storage::Control::V2::CommonLongRunningOperationMetadata]
+          #     Generic metadata for the long running operation.
+          # @!attribute [rw] anywhere_cache_id
+          #   @return [::String]
+          #     Anywhere Cache ID.
+          # @!attribute [rw] zone
+          #   @return [::String]
+          #     The zone in which the cache instance is running. For example,
+          #     us-central1-a.
+          # @!attribute [rw] ttl
+          #   @return [::Google::Protobuf::Duration]
+          #     Anywhere Cache entry's TTL. A cache-level config that is applied to all new
+          #     cache entries on admission. Default ttl value (24hrs) is applied if not
+          #     specified in the create request.
+          # @!attribute [rw] admission_policy
+          #   @return [::String]
+          #     Anywhere Cache entry Admission Policy in kebab-case (e.g.,
+          #     "admit-on-first-miss"). Default admission policy (admit-on-first-miss) is
+          #     applied if not specified in the create request.
+          class CreateAnywhereCacheMetadata
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Message returned in the metadata field of the Operation resource for
+          # UpdateAnywhereCache operation.
+          # @!attribute [rw] common_metadata
+          #   @return [::Google::Cloud::Storage::Control::V2::CommonLongRunningOperationMetadata]
+          #     Generic metadata for the long running operation.
+          # @!attribute [rw] anywhere_cache_id
+          #   @return [::String]
+          #     Anywhere Cache ID.
+          # @!attribute [rw] zone
+          #   @return [::String]
+          #     The zone in which the cache instance is running. For example,
+          #     us-central1-a.
+          # @!attribute [rw] ttl
+          #   @return [::Google::Protobuf::Duration]
+          #     Anywhere Cache entry's TTL between 1h and 7days. A cache-level config that
+          #     is applied to all new cache entries on admission. If `ttl` is pending
+          #     update, this field equals to the new value specified in the Update request.
+          # @!attribute [rw] admission_policy
+          #   @return [::String]
+          #     L4 Cache entry Admission Policy in kebab-case (e.g.,
+          #     "admit-on-first-miss"). If `admission_policy` is pending
+          #     update, this field equals to the new value specified in the Update request.
+          class UpdateAnywhereCacheMetadata
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # An Anywhere Cache Instance.
+          # @!attribute [rw] name
+          #   @return [::String]
+          #     Immutable. The resource name of this AnywhereCache.
+          #     Format:
+          #     `projects/{project}/buckets/{bucket}/anywhereCaches/{anywhere_cache}`
+          # @!attribute [rw] zone
+          #   @return [::String]
+          #     Immutable. The zone in which the cache instance is running. For example,
+          #     us-central1-a.
+          # @!attribute [rw] ttl
+          #   @return [::Google::Protobuf::Duration]
+          #     Cache entry TTL (ranges between 1h to 7d). This is a cache-level config
+          #     that defines how long a cache entry can live. Default ttl value (24hrs)
+          #     is applied if not specified in the create request. TTL must be in whole
+          #     seconds.
+          # @!attribute [rw] admission_policy
+          #   @return [::String]
+          #     Cache admission policy. Valid policies includes:
+          #     `admit-on-first-miss` and `admit-on-second-miss`. Defaults to
+          #     `admit-on-first-miss`. Default value is applied if not specified in the
+          #     create request.
+          # @!attribute [r] state
+          #   @return [::String]
+          #     Output only. Cache state including RUNNING, CREATING, DISABLED and PAUSED.
+          # @!attribute [r] create_time
+          #   @return [::Google::Protobuf::Timestamp]
+          #     Output only. Time when Anywhere cache instance is allocated.
+          # @!attribute [r] update_time
+          #   @return [::Google::Protobuf::Timestamp]
+          #     Output only. Time when Anywhere cache instance is last updated, including
+          #     creation.
+          # @!attribute [r] pending_update
+          #   @return [::Boolean]
+          #     Output only. True if there is an active update operation against this cache
+          #     instance. Subsequential update requests will be rejected if this field is
+          #     true. Output only.
+          class AnywhereCache
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Request message for CreateAnywhereCache.
+          # @!attribute [rw] parent
+          #   @return [::String]
+          #     Required. The bucket to which this cache belongs.
+          #     Format: `projects/{project}/buckets/{bucket}`
+          # @!attribute [rw] anywhere_cache
+          #   @return [::Google::Cloud::Storage::Control::V2::AnywhereCache]
+          #     Required. Properties of the Anywhere Cache instance being created.
+          #     The parent bucket name is specified in the `parent` field. Server uses the
+          #     default value of `ttl` or `admission_policy` if not specified in
+          #     request.
+          # @!attribute [rw] request_id
+          #   @return [::String]
+          #     Optional. A unique identifier for this request. UUID is the recommended
+          #     format, but other formats are still accepted. This request is only
+          #     idempotent if a `request_id` is provided.
+          class CreateAnywhereCacheRequest
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Request message for UpdateAnywhereCache.
+          # @!attribute [rw] anywhere_cache
+          #   @return [::Google::Cloud::Storage::Control::V2::AnywhereCache]
+          #     Required. The Anywhere Cache instance to be updated.
+          # @!attribute [rw] update_mask
+          #   @return [::Google::Protobuf::FieldMask]
+          #     Required. List of fields to be updated. Mutable fields of AnywhereCache
+          #     include `ttl` and `admission_policy`.
+          #
+          #     To specify ALL fields, specify a single field with the value `*`. Note: We
+          #     recommend against doing this. If a new field is introduced at a later time,
+          #     an older client updating with the `*` may accidentally reset the new
+          #     field's value.
+          #
+          #     Not specifying any fields is an error.
+          # @!attribute [rw] request_id
+          #   @return [::String]
+          #     Optional. A unique identifier for this request. UUID is the recommended
+          #     format, but other formats are still accepted. This request is only
+          #     idempotent if a `request_id` is provided.
+          class UpdateAnywhereCacheRequest
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Request message for DisableAnywhereCache.
+          # @!attribute [rw] name
+          #   @return [::String]
+          #     Required. The name field in the request should be:
+          #     `projects/{project}/buckets/{bucket}/anywhereCaches/{anywhere_cache}`
+          # @!attribute [rw] request_id
+          #   @return [::String]
+          #     Optional. A unique identifier for this request. UUID is the recommended
+          #     format, but other formats are still accepted. This request is only
+          #     idempotent if a `request_id` is provided.
+          class DisableAnywhereCacheRequest
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Request message for PauseAnywhereCache.
+          # @!attribute [rw] name
+          #   @return [::String]
+          #     Required. The name field in the request should be:
+          #     `projects/{project}/buckets/{bucket}/anywhereCaches/{anywhere_cache}`
+          # @!attribute [rw] request_id
+          #   @return [::String]
+          #     Optional. A unique identifier for this request. UUID is the recommended
+          #     format, but other formats are still accepted. This request is only
+          #     idempotent if a `request_id` is provided.
+          class PauseAnywhereCacheRequest
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Request message for ResumeAnywhereCache.
+          # @!attribute [rw] name
+          #   @return [::String]
+          #     Required. The name field in the request should be:
+          #     `projects/{project}/buckets/{bucket}/anywhereCaches/{anywhere_cache}`
+          # @!attribute [rw] request_id
+          #   @return [::String]
+          #     Optional. A unique identifier for this request. UUID is the recommended
+          #     format, but other formats are still accepted. This request is only
+          #     idempotent if a `request_id` is provided.
+          class ResumeAnywhereCacheRequest
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Request message for GetAnywhereCache.
+          # @!attribute [rw] name
+          #   @return [::String]
+          #     Required. The name field in the request should be:
+          #     `projects/{project}/buckets/{bucket}/anywhereCaches/{anywhere_cache}`
+          # @!attribute [rw] request_id
+          #   @return [::String]
+          #     Optional. A unique identifier for this request. UUID is the recommended
+          #     format, but other formats are still accepted.
+          class GetAnywhereCacheRequest
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Request message for ListAnywhereCaches.
+          # @!attribute [rw] parent
+          #   @return [::String]
+          #     Required. The bucket to which this cache belongs.
+          # @!attribute [rw] page_size
+          #   @return [::Integer]
+          #     Maximum number of caches to return in a single response.
+          #     The service will use this parameter or 1,000 items, whichever is smaller.
+          # @!attribute [rw] page_token
+          #   @return [::String]
+          #     A previously-returned page token representing part of the larger set of
+          #     results to view.
+          # @!attribute [rw] request_id
+          #   @return [::String]
+          #     Optional. A unique identifier for this request. UUID is the recommended
+          #     format, but other formats are still accepted.
+          class ListAnywhereCachesRequest
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Response message for ListAnywhereCaches.
+          # @!attribute [rw] anywhere_caches
+          #   @return [::Array<::Google::Cloud::Storage::Control::V2::AnywhereCache>]
+          #     The list of items.
+          # @!attribute [rw] next_page_token
+          #   @return [::String]
+          #     A token, which can be sent as `page_token` to retrieve the next page.
+          #     If this field is omitted, there are no subsequent pages.
+          class ListAnywhereCachesResponse
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # The `IntelligenceConfig` resource associated with your organization, folder,
+          # or project.
+          # @!attribute [rw] name
+          #   @return [::String]
+          #     Identifier. The name of the `IntelligenceConfig` resource associated with
+          #     your organization, folder, or project.
+          #
+          #     The name format varies based on the GCP resource hierarchy as follows:
+          #
+          #     * For project:
+          #     `projects/{project_number}/locations/global/intelligenceConfig`
+          #     * For organization:
+          #     `organizations/{org_id}/locations/global/intelligenceConfig`
+          #     * For folder: `folders/{folder_id}/locations/global/intelligenceConfig`
+          # @!attribute [rw] edition_config
+          #   @return [::Google::Cloud::Storage::Control::V2::IntelligenceConfig::EditionConfig]
+          #     Optional. The edition configuration of the `IntelligenceConfig` resource.
+          # @!attribute [r] update_time
+          #   @return [::Google::Protobuf::Timestamp]
+          #     Output only. The time at which the `IntelligenceConfig` resource is last
+          #     updated.
+          # @!attribute [rw] filter
+          #   @return [::Google::Cloud::Storage::Control::V2::IntelligenceConfig::Filter]
+          #     Optional. Filter over location and bucket.
+          # @!attribute [r] effective_intelligence_config
+          #   @return [::Google::Cloud::Storage::Control::V2::IntelligenceConfig::EffectiveIntelligenceConfig]
+          #     Output only. The `IntelligenceConfig` resource that is applicable for the
+          #     resource.
+          # @!attribute [rw] trial_config
+          #   @return [::Google::Cloud::Storage::Control::V2::IntelligenceConfig::TrialConfig]
+          #     The trial configuration of the `IntelligenceConfig` resource.
+          class IntelligenceConfig
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+
+            # Filter over location and bucket using include or exclude semantics.
+            # Resources that match the include or exclude filter are exclusively included
+            # or excluded from the Storage Intelligence plan.
+            # @!attribute [rw] included_cloud_storage_locations
+            #   @return [::Google::Cloud::Storage::Control::V2::IntelligenceConfig::Filter::CloudStorageLocations]
+            #     Bucket locations to include.
+            #
+            #     Note: The following fields are mutually exclusive: `included_cloud_storage_locations`, `excluded_cloud_storage_locations`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+            # @!attribute [rw] excluded_cloud_storage_locations
+            #   @return [::Google::Cloud::Storage::Control::V2::IntelligenceConfig::Filter::CloudStorageLocations]
+            #     Bucket locations to exclude.
+            #
+            #     Note: The following fields are mutually exclusive: `excluded_cloud_storage_locations`, `included_cloud_storage_locations`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+            # @!attribute [rw] included_cloud_storage_buckets
+            #   @return [::Google::Cloud::Storage::Control::V2::IntelligenceConfig::Filter::CloudStorageBuckets]
+            #     Buckets to include.
+            #
+            #     Note: The following fields are mutually exclusive: `included_cloud_storage_buckets`, `excluded_cloud_storage_buckets`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+            # @!attribute [rw] excluded_cloud_storage_buckets
+            #   @return [::Google::Cloud::Storage::Control::V2::IntelligenceConfig::Filter::CloudStorageBuckets]
+            #     Buckets to exclude.
+            #
+            #     Note: The following fields are mutually exclusive: `excluded_cloud_storage_buckets`, `included_cloud_storage_buckets`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+            class Filter
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+
+              # Collection of bucket locations.
+              # @!attribute [rw] locations
+              #   @return [::Array<::String>]
+              #     Optional. Bucket locations. Location can be any of the Cloud Storage
+              #     regions specified in lower case format. For example, `us-east1`,
+              #     `us-west1`.
+              class CloudStorageLocations
+                include ::Google::Protobuf::MessageExts
+                extend ::Google::Protobuf::MessageExts::ClassMethods
+              end
+
+              # Collection of buckets.
+              # @!attribute [rw] bucket_id_regexes
+              #   @return [::Array<::String>]
+              #     Optional. A regex pattern for matching bucket names. Regex should
+              #     follow the syntax specified in
+              #     [google/re2](https://github.com/google/re2). For example,
+              #     `^sample_.*` matches all buckets of the form
+              #     `gs://sample_bucket-1`, `gs://sample_bucket-2`,
+              #     `gs://sample_bucket-n` but not `gs://test_sample_bucket`.
+              #     If you want to match a single bucket, say `gs://sample_bucket`,
+              #     use `sample_bucket`.
+              class CloudStorageBuckets
+                include ::Google::Protobuf::MessageExts
+                extend ::Google::Protobuf::MessageExts::ClassMethods
+              end
+            end
+
+            # The effective `IntelligenceConfig` for the resource.
+            # @!attribute [r] effective_edition
+            #   @return [::Google::Cloud::Storage::Control::V2::IntelligenceConfig::EffectiveIntelligenceConfig::EffectiveEdition]
+            #     Output only. The `IntelligenceConfig` edition that is applicable for the
+            #     resource.
+            # @!attribute [r] intelligence_config
+            #   @return [::String]
+            #     Output only. The `IntelligenceConfig` resource that is applied for the
+            #     target resource. Format:
+            #     `{organizations|folders|projects}/{id}/locations/{location}/intelligenceConfig`
+            class EffectiveIntelligenceConfig
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+
+              # The effective edition of the `IntelligenceConfig` resource.
+              module EffectiveEdition
+                # This is an unknown edition of the resource.
+                EFFECTIVE_EDITION_UNSPECIFIED = 0
+
+                # No edition.
+                NONE = 1
+
+                # The `IntelligenceConfig` resource is of STANDARD edition.
+                STANDARD = 2
+              end
+            end
+
+            # The trial configuration of the `IntelligenceConfig` resource.
+            # @!attribute [r] expire_time
+            #   @return [::Google::Protobuf::Timestamp]
+            #     Output only. The time at which the trial expires.
+            class TrialConfig
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
+
+            # The edition configuration of the `IntelligenceConfig` resource. This
+            # signifies the edition used for configuring the `IntelligenceConfig`
+            # resource and can only take the following values:
+            # `EDITION_CONFIG_UNSPECIFIED`, `INHERIT`, `DISABLED`, `STANDARD` and
+            # `TRIAL`.
+            module EditionConfig
+              # This is an unknown edition of the resource.
+              EDITION_CONFIG_UNSPECIFIED = 0
+
+              # The inherited edition from the parent and filters. This is the default
+              # edition when there is no `IntelligenceConfig` setup for a GCP resource.
+              INHERIT = 1
+
+              # The edition configuration is disabled for the `IntelligenceConfig`
+              # resource and its children. Filters are not applicable.
+              DISABLED = 2
+
+              # The `IntelligenceConfig` resource is of STANDARD edition.
+              STANDARD = 3
+
+              # The `IntelligenceConfig` resource is available in `TRIAL` edition. During
+              # the trial period, Cloud Storage does not charge for Storage Intelligence
+              # usage. You can specify the buckets to include in the trial period by
+              # using filters. At the end of the trial period, the `IntelligenceConfig`
+              # resource is upgraded to `STANDARD` edition.
+              TRIAL = 5
+            end
+          end
+
+          # Request message to update the `IntelligenceConfig` resource associated with
+          # your organization.
+          #
+          # **IAM Permissions**:
+          #
+          # Requires `storage.intelligenceConfigs.update`
+          # [IAM](https://cloud.google.com/iam/docs/overview#permissions) permission on
+          # the organization.
+          # @!attribute [rw] intelligence_config
+          #   @return [::Google::Cloud::Storage::Control::V2::IntelligenceConfig]
+          #     Required. The `IntelligenceConfig` resource to be updated.
+          # @!attribute [rw] update_mask
+          #   @return [::Google::Protobuf::FieldMask]
+          #     Required. The `update_mask` that specifies the fields within the
+          #     `IntelligenceConfig` resource that should be modified by this update. Only
+          #     the listed fields are updated.
+          # @!attribute [rw] request_id
+          #   @return [::String]
+          #     Optional. The ID that uniquely identifies the request, preventing duplicate
+          #     processing.
+          class UpdateOrganizationIntelligenceConfigRequest
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Request message to update the `IntelligenceConfig` resource associated with
+          # your folder.
+          #
+          # **IAM Permissions**:
+          #
+          # Requires `storage.intelligenceConfigs.update`
+          # [IAM](https://cloud.google.com/iam/docs/overview#permissions) permission on
+          # the folder.
+          # @!attribute [rw] intelligence_config
+          #   @return [::Google::Cloud::Storage::Control::V2::IntelligenceConfig]
+          #     Required. The `IntelligenceConfig` resource to be updated.
+          # @!attribute [rw] update_mask
+          #   @return [::Google::Protobuf::FieldMask]
+          #     Required. The `update_mask` that specifies the fields within the
+          #     `IntelligenceConfig` resource that should be modified by this update. Only
+          #     the listed fields are updated.
+          # @!attribute [rw] request_id
+          #   @return [::String]
+          #     Optional. The ID that uniquely identifies the request, preventing duplicate
+          #     processing.
+          class UpdateFolderIntelligenceConfigRequest
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Request message to update the `IntelligenceConfig` resource associated with
+          # your project.
+          #
+          # **IAM Permissions**:
+          #
+          # Requires `storage.intelligenceConfigs.update`
+          # [IAM](https://cloud.google.com/iam/docs/overview#permissions) permission on
+          # the folder.
+          # @!attribute [rw] intelligence_config
+          #   @return [::Google::Cloud::Storage::Control::V2::IntelligenceConfig]
+          #     Required. The `IntelligenceConfig` resource to be updated.
+          # @!attribute [rw] update_mask
+          #   @return [::Google::Protobuf::FieldMask]
+          #     Required. The `update_mask` that specifies the fields within the
+          #     `IntelligenceConfig` resource that should be modified by this update. Only
+          #     the listed fields are updated.
+          # @!attribute [rw] request_id
+          #   @return [::String]
+          #     Optional. The ID that uniquely identifies the request, preventing duplicate
+          #     processing.
+          class UpdateProjectIntelligenceConfigRequest
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Request message to get the `IntelligenceConfig` resource associated with your
+          # organization.
+          #
+          # **IAM Permissions**
+          #
+          # Requires `storage.intelligenceConfigs.get`
+          # [IAM](https://cloud.google.com/iam/docs/overview#permissions) permission on
+          # the organization.
+          # @!attribute [rw] name
+          #   @return [::String]
+          #     Required. The name of the `IntelligenceConfig` resource associated with
+          #     your organization.
+          #
+          #     Format: `organizations/{org_id}/locations/global/intelligenceConfig`
+          class GetOrganizationIntelligenceConfigRequest
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Request message to get the `IntelligenceConfig` resource associated with your
+          # folder.
+          #
+          # **IAM Permissions**
+          #
+          # Requires `storage.intelligenceConfigs.get`
+          # [IAM](https://cloud.google.com/iam/docs/overview#permissions) permission on
+          # the folder.
+          # @!attribute [rw] name
+          #   @return [::String]
+          #     Required. The name of the `IntelligenceConfig` resource associated with
+          #     your folder.
+          #
+          #     Format: `folders/{id}/locations/global/intelligenceConfig`
+          class GetFolderIntelligenceConfigRequest
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Request message to get the `IntelligenceConfig` resource associated with your
+          # project.
+          #
+          # **IAM Permissions**:
+          #
+          # Requires `storage.intelligenceConfigs.get`
+          # [IAM](https://cloud.google.com/iam/docs/overview#permissions) permission
+          # on the project.
+          # @!attribute [rw] name
+          #   @return [::String]
+          #     Required. The name of the `IntelligenceConfig` resource associated with
+          #     your project.
+          #
+          #     Format: `projects/{id}/locations/global/intelligenceConfig`
+          class GetProjectIntelligenceConfigRequest
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end

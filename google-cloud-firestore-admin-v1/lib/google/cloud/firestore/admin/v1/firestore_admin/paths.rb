@@ -191,6 +191,25 @@ module Google
                 "projects/#{project}"
               end
 
+              ##
+              # Create a fully-qualified UserCreds resource string.
+              #
+              # The resource will be in the following format:
+              #
+              # `projects/{project}/databases/{database}/userCreds/{user_creds}`
+              #
+              # @param project [String]
+              # @param database [String]
+              # @param user_creds [String]
+              #
+              # @return [::String]
+              def user_creds_path project:, database:, user_creds:
+                raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+                raise ::ArgumentError, "database cannot contain /" if database.to_s.include? "/"
+
+                "projects/#{project}/databases/#{database}/userCreds/#{user_creds}"
+              end
+
               extend self
             end
           end

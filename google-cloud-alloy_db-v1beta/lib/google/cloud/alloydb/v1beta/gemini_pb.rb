@@ -7,7 +7,7 @@ require 'google/protobuf'
 require 'google/api/field_behavior_pb'
 
 
-descriptor_data = "\n(google/cloud/alloydb/v1beta/gemini.proto\x12\x1bgoogle.cloud.alloydb.v1beta\x1a\x1fgoogle/api/field_behavior.proto\",\n\x13GeminiClusterConfig\x12\x15\n\x08\x65ntitled\x18\x01 \x01(\x08\x42\x03\xe0\x41\x03\"-\n\x14GeminiInstanceConfig\x12\x15\n\x08\x65ntitled\x18\x01 \x01(\x08\x42\x03\xe0\x41\x03\x42\xc8\x01\n\x1f\x63om.google.cloud.alloydb.v1betaB\x0bGeminiProtoP\x01Z9cloud.google.com/go/alloydb/apiv1beta/alloydbpb;alloydbpb\xaa\x02\x1bGoogle.Cloud.AlloyDb.V1Beta\xca\x02\x1bGoogle\\Cloud\\AlloyDb\\V1beta\xea\x02\x1eGoogle::Cloud::AlloyDB::V1betab\x06proto3"
+descriptor_data = "\n(google/cloud/alloydb/v1beta/gemini.proto\x12\x1bgoogle.cloud.alloydb.v1beta\x1a\x1fgoogle/api/field_behavior.proto\".\n\x13GeminiClusterConfig\x12\x17\n\x08\x65ntitled\x18\x01 \x01(\x08\x42\x05\x18\x01\xe0\x41\x03\"/\n\x14GeminiInstanceConfig\x12\x17\n\x08\x65ntitled\x18\x01 \x01(\x08\x42\x05\x18\x01\xe0\x41\x03\"b\n\x11GCAInstanceConfig\x12M\n\x0fgca_entitlement\x18\x01 \x01(\x0e\x32/.google.cloud.alloydb.v1beta.GCAEntitlementTypeB\x03\xe0\x41\x03*L\n\x12GCAEntitlementType\x12$\n GCA_ENTITLEMENT_TYPE_UNSPECIFIED\x10\x00\x12\x10\n\x0cGCA_STANDARD\x10\x01\x42\xc8\x01\n\x1f\x63om.google.cloud.alloydb.v1betaB\x0bGeminiProtoP\x01Z9cloud.google.com/go/alloydb/apiv1beta/alloydbpb;alloydbpb\xaa\x02\x1bGoogle.Cloud.AlloyDb.V1Beta\xca\x02\x1bGoogle\\Cloud\\AlloyDb\\V1beta\xea\x02\x1eGoogle::Cloud::AlloyDB::V1betab\x06proto3"
 
 pool = Google::Protobuf::DescriptorPool.generated_pool
 
@@ -39,6 +39,8 @@ module Google
       module V1beta
         GeminiClusterConfig = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.alloydb.v1beta.GeminiClusterConfig").msgclass
         GeminiInstanceConfig = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.alloydb.v1beta.GeminiInstanceConfig").msgclass
+        GCAInstanceConfig = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.alloydb.v1beta.GCAInstanceConfig").msgclass
+        GCAEntitlementType = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.alloydb.v1beta.GCAEntitlementType").enummodule
       end
     end
   end

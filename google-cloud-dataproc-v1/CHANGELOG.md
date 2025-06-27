@@ -1,5 +1,25 @@
 # Release History
 
+### 1.5.0 (2025-06-16)
+
+#### Features
+
+* add scenarios AUTO/NONE to autotuning config 
+* Added support for DELTA, ICEBERG, PIG components ([#30496](https://github.com/googleapis/google-cloud-ruby/issues/30496)) 
+
+### 1.4.0 (2025-05-12)
+
+#### Features
+
+* Updated core dependencies including gapic-common 
+* Updated required Ruby version to 3.1 
+
+### 1.3.1 (2025-04-29)
+
+#### Bug Fixes
+
+* Fixed several issues with validating credential configs 
+
 ### 1.3.0 (2025-02-25)
 
 #### Features

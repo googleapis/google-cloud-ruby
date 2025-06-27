@@ -1,7 +1,7 @@
 {
   "client_library": {
     "name": "google-cloud-alloy_db-v1beta",
-    "version": "0.14.0",
+    "version": "0.17.0",
     "language": "RUBY",
     "apis": [
       {
@@ -195,6 +195,46 @@
         "method": {
           "short_name": "ExportCluster",
           "full_name": "google.cloud.alloydb.v1beta.AlloyDBAdmin.ExportCluster",
+          "service": {
+            "short_name": "AlloyDBAdmin",
+            "full_name": "google.cloud.alloydb.v1beta.AlloyDBAdmin"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "alloydb_v1beta_generated_AlloyDBAdmin_ImportCluster_sync",
+      "title": "Snippet for the import_cluster call in the AlloyDBAdmin service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AlloyDB::V1beta::AlloyDBAdmin::Client#import_cluster.",
+      "file": "alloy_db_admin/import_cluster.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "import_cluster",
+        "full_name": "::Google::Cloud::AlloyDB::V1beta::AlloyDBAdmin::Client#import_cluster",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::AlloyDB::V1beta::ImportClusterRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "AlloyDBAdmin::Client",
+          "full_name": "::Google::Cloud::AlloyDB::V1beta::AlloyDBAdmin::Client"
+        },
+        "method": {
+          "short_name": "ImportCluster",
+          "full_name": "google.cloud.alloydb.v1beta.AlloyDBAdmin.ImportCluster",
           "service": {
             "short_name": "AlloyDBAdmin",
             "full_name": "google.cloud.alloydb.v1beta.AlloyDBAdmin"
@@ -1447,6 +1487,46 @@
         {
           "start": 20,
           "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "alloydb_v1beta_generated_AlloyDBCloudSQLAdmin_RestoreFromCloudSQL_sync",
+      "title": "Snippet for the restore_from_cloud_sql call in the AlloyDBCloudSQLAdmin service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AlloyDB::V1beta::AlloyDBCloudSQLAdmin::Client#restore_from_cloud_sql.",
+      "file": "alloy_db_cloud_sql_admin/restore_from_cloud_sql.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "restore_from_cloud_sql",
+        "full_name": "::Google::Cloud::AlloyDB::V1beta::AlloyDBCloudSQLAdmin::Client#restore_from_cloud_sql",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::AlloyDB::V1beta::RestoreFromCloudSQLRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "AlloyDBCloudSQLAdmin::Client",
+          "full_name": "::Google::Cloud::AlloyDB::V1beta::AlloyDBCloudSQLAdmin::Client"
+        },
+        "method": {
+          "short_name": "RestoreFromCloudSQL",
+          "full_name": "google.cloud.alloydb.v1beta.AlloyDBCSQLAdmin.RestoreFromCloudSQL",
+          "service": {
+            "short_name": "AlloyDBCloudSQLAdmin",
+            "full_name": "google.cloud.alloydb.v1beta.AlloyDBCSQLAdmin"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
           "type": "FULL"
         }
       ]

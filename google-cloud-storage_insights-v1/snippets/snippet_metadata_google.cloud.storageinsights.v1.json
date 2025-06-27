@@ -1,7 +1,7 @@
 {
   "client_library": {
     "name": "google-cloud-storage_insights-v1",
-    "version": "1.0.0",
+    "version": "1.2.0",
     "language": "RUBY",
     "apis": [
       {
@@ -287,6 +287,286 @@
         {
           "start": 20,
           "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "storageinsights_v1_generated_StorageInsights_ListDatasetConfigs_sync",
+      "title": "Snippet for the list_dataset_configs call in the StorageInsights service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::StorageInsights::V1::StorageInsights::Client#list_dataset_configs.",
+      "file": "storage_insights/list_dataset_configs.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_dataset_configs",
+        "full_name": "::Google::Cloud::StorageInsights::V1::StorageInsights::Client#list_dataset_configs",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::StorageInsights::V1::ListDatasetConfigsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::StorageInsights::V1::ListDatasetConfigsResponse",
+        "client": {
+          "short_name": "StorageInsights::Client",
+          "full_name": "::Google::Cloud::StorageInsights::V1::StorageInsights::Client"
+        },
+        "method": {
+          "short_name": "ListDatasetConfigs",
+          "full_name": "google.cloud.storageinsights.v1.StorageInsights.ListDatasetConfigs",
+          "service": {
+            "short_name": "StorageInsights",
+            "full_name": "google.cloud.storageinsights.v1.StorageInsights"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "storageinsights_v1_generated_StorageInsights_GetDatasetConfig_sync",
+      "title": "Snippet for the get_dataset_config call in the StorageInsights service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::StorageInsights::V1::StorageInsights::Client#get_dataset_config.",
+      "file": "storage_insights/get_dataset_config.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_dataset_config",
+        "full_name": "::Google::Cloud::StorageInsights::V1::StorageInsights::Client#get_dataset_config",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::StorageInsights::V1::GetDatasetConfigRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::StorageInsights::V1::DatasetConfig",
+        "client": {
+          "short_name": "StorageInsights::Client",
+          "full_name": "::Google::Cloud::StorageInsights::V1::StorageInsights::Client"
+        },
+        "method": {
+          "short_name": "GetDatasetConfig",
+          "full_name": "google.cloud.storageinsights.v1.StorageInsights.GetDatasetConfig",
+          "service": {
+            "short_name": "StorageInsights",
+            "full_name": "google.cloud.storageinsights.v1.StorageInsights"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "storageinsights_v1_generated_StorageInsights_CreateDatasetConfig_sync",
+      "title": "Snippet for the create_dataset_config call in the StorageInsights service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::StorageInsights::V1::StorageInsights::Client#create_dataset_config.",
+      "file": "storage_insights/create_dataset_config.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_dataset_config",
+        "full_name": "::Google::Cloud::StorageInsights::V1::StorageInsights::Client#create_dataset_config",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::StorageInsights::V1::CreateDatasetConfigRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "StorageInsights::Client",
+          "full_name": "::Google::Cloud::StorageInsights::V1::StorageInsights::Client"
+        },
+        "method": {
+          "short_name": "CreateDatasetConfig",
+          "full_name": "google.cloud.storageinsights.v1.StorageInsights.CreateDatasetConfig",
+          "service": {
+            "short_name": "StorageInsights",
+            "full_name": "google.cloud.storageinsights.v1.StorageInsights"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "storageinsights_v1_generated_StorageInsights_UpdateDatasetConfig_sync",
+      "title": "Snippet for the update_dataset_config call in the StorageInsights service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::StorageInsights::V1::StorageInsights::Client#update_dataset_config.",
+      "file": "storage_insights/update_dataset_config.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_dataset_config",
+        "full_name": "::Google::Cloud::StorageInsights::V1::StorageInsights::Client#update_dataset_config",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::StorageInsights::V1::UpdateDatasetConfigRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "StorageInsights::Client",
+          "full_name": "::Google::Cloud::StorageInsights::V1::StorageInsights::Client"
+        },
+        "method": {
+          "short_name": "UpdateDatasetConfig",
+          "full_name": "google.cloud.storageinsights.v1.StorageInsights.UpdateDatasetConfig",
+          "service": {
+            "short_name": "StorageInsights",
+            "full_name": "google.cloud.storageinsights.v1.StorageInsights"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "storageinsights_v1_generated_StorageInsights_DeleteDatasetConfig_sync",
+      "title": "Snippet for the delete_dataset_config call in the StorageInsights service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::StorageInsights::V1::StorageInsights::Client#delete_dataset_config.",
+      "file": "storage_insights/delete_dataset_config.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_dataset_config",
+        "full_name": "::Google::Cloud::StorageInsights::V1::StorageInsights::Client#delete_dataset_config",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::StorageInsights::V1::DeleteDatasetConfigRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "StorageInsights::Client",
+          "full_name": "::Google::Cloud::StorageInsights::V1::StorageInsights::Client"
+        },
+        "method": {
+          "short_name": "DeleteDatasetConfig",
+          "full_name": "google.cloud.storageinsights.v1.StorageInsights.DeleteDatasetConfig",
+          "service": {
+            "short_name": "StorageInsights",
+            "full_name": "google.cloud.storageinsights.v1.StorageInsights"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "storageinsights_v1_generated_StorageInsights_LinkDataset_sync",
+      "title": "Snippet for the link_dataset call in the StorageInsights service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::StorageInsights::V1::StorageInsights::Client#link_dataset.",
+      "file": "storage_insights/link_dataset.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "link_dataset",
+        "full_name": "::Google::Cloud::StorageInsights::V1::StorageInsights::Client#link_dataset",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::StorageInsights::V1::LinkDatasetRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "StorageInsights::Client",
+          "full_name": "::Google::Cloud::StorageInsights::V1::StorageInsights::Client"
+        },
+        "method": {
+          "short_name": "LinkDataset",
+          "full_name": "google.cloud.storageinsights.v1.StorageInsights.LinkDataset",
+          "service": {
+            "short_name": "StorageInsights",
+            "full_name": "google.cloud.storageinsights.v1.StorageInsights"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "storageinsights_v1_generated_StorageInsights_UnlinkDataset_sync",
+      "title": "Snippet for the unlink_dataset call in the StorageInsights service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::StorageInsights::V1::StorageInsights::Client#unlink_dataset.",
+      "file": "storage_insights/unlink_dataset.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "unlink_dataset",
+        "full_name": "::Google::Cloud::StorageInsights::V1::StorageInsights::Client#unlink_dataset",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::StorageInsights::V1::UnlinkDatasetRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "StorageInsights::Client",
+          "full_name": "::Google::Cloud::StorageInsights::V1::StorageInsights::Client"
+        },
+        "method": {
+          "short_name": "UnlinkDataset",
+          "full_name": "google.cloud.storageinsights.v1.StorageInsights.UnlinkDataset",
+          "service": {
+            "short_name": "StorageInsights",
+            "full_name": "google.cloud.storageinsights.v1.StorageInsights"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
           "type": "FULL"
         }
       ]

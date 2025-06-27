@@ -20,7 +20,7 @@
 module Google
   module Cloud
     module Kms
-      VERSION = "2.9.0"
+      VERSION = "2.9.2"
     end
   end
 end

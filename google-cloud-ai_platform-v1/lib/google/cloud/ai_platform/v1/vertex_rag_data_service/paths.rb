@@ -125,6 +125,23 @@ module Google
             end
 
             ##
+            # Create a fully-qualified RagEngineConfig resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `projects/{project}/locations/{location}/ragEngineConfig`
+            #
+            # @param project [String]
+            # @param location [String]
+            #
+            # @return [::String]
+            def rag_engine_config_path project:, location:
+              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+
+              "projects/#{project}/locations/#{location}/ragEngineConfig"
+            end
+
+            ##
             # Create a fully-qualified RagFile resource string.
             #
             # The resource will be in the following format:

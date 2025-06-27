@@ -92,6 +92,8 @@ module Google
 
                   default_config.rpcs.set_iam_policy.timeout = 600.0
 
+                  default_config.rpcs.set_labels.timeout = 600.0
+
                   default_config.rpcs.test_iam_permissions.timeout = 600.0
 
                   default_config
@@ -731,6 +733,97 @@ module Google
               end
 
               ##
+              # Sets the labels on a machine image. To learn more about labels, read the Labeling Resources documentation.
+              #
+              # @overload set_labels(request, options = nil)
+              #   Pass arguments to `set_labels` via a request object, either of type
+              #   {::Google::Cloud::Compute::V1::SetLabelsMachineImageRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::Compute::V1::SetLabelsMachineImageRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload set_labels(global_set_labels_request_resource: nil, project: nil, resource: nil)
+              #   Pass arguments to `set_labels` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param global_set_labels_request_resource [::Google::Cloud::Compute::V1::GlobalSetLabelsRequest, ::Hash]
+              #     The body resource for this request
+              #   @param project [::String]
+              #     Project ID for this request.
+              #   @param resource [::String]
+              #     Name or id of the resource for this request.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Gapic::GenericLRO::Operation]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Gapic::GenericLRO::Operation]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/compute/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Compute::V1::MachineImages::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Compute::V1::SetLabelsMachineImageRequest.new
+              #
+              #   # Call the set_labels method.
+              #   result = client.set_labels request
+              #
+              #   # The returned object is of type Google::Cloud::Compute::V1::Operation.
+              #   p result
+              #
+              def set_labels request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Compute::V1::SetLabelsMachineImageRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.set_labels.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::Compute::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.set_labels.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.set_labels.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @machine_images_stub.set_labels request, options do |result, response|
+                  result = ::Google::Cloud::Compute::V1::GlobalOperations::Rest::NonstandardLro.create_operation(
+                    operation: result,
+                    client: global_operations,
+                    request_values: {
+                      "project" => request.project
+                    },
+                    options: options
+                  )
+                  yield result, response if block_given?
+                  throw :response, result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
               # Returns permissions that a caller has on the specified resource.
               #
               # @overload test_iam_permissions(request, options = nil)
@@ -908,7 +1001,7 @@ module Google
 
                 config_attr :endpoint,      nil, ::String, nil
                 config_attr :credentials,   nil do |value|
-                  allowed = [::String, ::Hash, ::Proc, ::Symbol, ::Google::Auth::Credentials, ::Signet::OAuth2::Client, nil]
+                  allowed = [::String, ::Hash, ::Proc, ::Symbol, ::Google::Auth::Credentials, ::Google::Auth::BaseClient, ::Signet::OAuth2::Client, nil]
                   allowed.any? { |klass| klass === value }
                 end
                 config_attr :scope,         nil, ::String, ::Array, nil
@@ -989,6 +1082,11 @@ module Google
                   #
                   attr_reader :set_iam_policy
                   ##
+                  # RPC-specific configuration for `set_labels`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :set_labels
+                  ##
                   # RPC-specific configuration for `test_iam_permissions`
                   # @return [::Gapic::Config::Method]
                   #
@@ -1008,6 +1106,8 @@ module Google
                     @list = ::Gapic::Config::Method.new list_config
                     set_iam_policy_config = parent_rpcs.set_iam_policy if parent_rpcs.respond_to? :set_iam_policy
                     @set_iam_policy = ::Gapic::Config::Method.new set_iam_policy_config
+                    set_labels_config = parent_rpcs.set_labels if parent_rpcs.respond_to? :set_labels
+                    @set_labels = ::Gapic::Config::Method.new set_labels_config
                     test_iam_permissions_config = parent_rpcs.test_iam_permissions if parent_rpcs.respond_to? :test_iam_permissions
                     @test_iam_permissions = ::Gapic::Config::Method.new test_iam_permissions_config
 

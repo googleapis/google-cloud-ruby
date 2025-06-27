@@ -24,6 +24,18 @@ module Google
         # Request for
         # {::Google::Cloud::DiscoveryEngine::V1::DataStoreService::Client#create_data_store DataStoreService.CreateDataStore}
         # method.
+        # @!attribute [rw] cmek_config_name
+        #   @return [::String]
+        #     Resource name of the CmekConfig to use for protecting this DataStore.
+        #
+        #     Note: The following fields are mutually exclusive: `cmek_config_name`, `disable_cmek`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] disable_cmek
+        #   @return [::Boolean]
+        #     DataStore without CMEK protections. If a default CmekConfig is set for
+        #     the project, setting this field will override the default CmekConfig as
+        #     well.
+        #
+        #     Note: The following fields are mutually exclusive: `disable_cmek`, `cmek_config_name`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] parent
         #   @return [::String]
         #     Required. The parent resource name, such as

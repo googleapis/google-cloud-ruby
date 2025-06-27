@@ -1,5 +1,30 @@
 # Release History
 
+### 1.11.0 (2025-06-24)
+
+#### Features
+
+* Support for RPCs for managing SchemaBundle resources ([#30536](https://github.com/googleapis/google-cloud-ruby/issues/30536)) 
+
+### 1.10.0 (2025-05-12)
+
+#### Features
+
+* Updated core dependencies including gapic-common 
+* Updated required Ruby version to 3.1 
+
+### 1.9.1 (2025-04-29)
+
+#### Bug Fixes
+
+* Fixed several issues with validating credential configs 
+
+### 1.9.0 (2025-04-25)
+
+#### Features
+
+* Added deletion protection support for LogicalView ([#29528](https://github.com/googleapis/google-cloud-ruby/issues/29528)) 
+
 ### 1.8.0 (2025-03-11)
 
 #### Features

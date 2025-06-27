@@ -1122,8 +1122,8 @@ module Google
               #   @param page_token [::String]
               #     Optional. The value of `next_page_token` returned by a previous call.
               #   @param view [::Google::Cloud::Bigtable::Admin::V2::AuthorizedView::ResponseView]
-              #     Optional. The resource_view to be applied to the returned views' fields.
-              #     Default to NAME_ONLY.
+              #     Optional. The resource_view to be applied to the returned AuthorizedViews'
+              #     fields. Default to NAME_ONLY.
               #
               # @yield [response, operation] Access the result along with the RPC operation
               # @yieldparam response [::Gapic::PagedEnumerable<::Google::Cloud::Bigtable::Admin::V2::AuthorizedView>]
@@ -1306,8 +1306,8 @@ module Google
               #   @param authorized_view [::Google::Cloud::Bigtable::Admin::V2::AuthorizedView, ::Hash]
               #     Required. The AuthorizedView to update. The `name` in `authorized_view` is
               #     used to identify the AuthorizedView. AuthorizedView name must in this
-              #     format
-              #     projects/<project>/instances/<instance>/tables/<table>/authorizedViews/<authorized_view>
+              #     format:
+              #     `projects/{project}/instances/{instance}/tables/{table}/authorizedViews/{authorized_view}`.
               #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
               #     Optional. The list of fields to update.
               #     A mask specifying which fields in the AuthorizedView resource should be
@@ -3054,7 +3054,7 @@ module Google
               end
 
               ##
-              # Gets the access control policy for a Table or Backup resource.
+              # Gets the access control policy for a Bigtable resource.
               # Returns an empty policy if the resource exists but does not have a policy
               # set.
               #
@@ -3145,7 +3145,7 @@ module Google
               end
 
               ##
-              # Sets the access control policy on a Table or Backup resource.
+              # Sets the access control policy on a Bigtable resource.
               # Replaces any existing policy.
               #
               # @overload set_iam_policy(request, options = nil)
@@ -3243,7 +3243,7 @@ module Google
               end
 
               ##
-              # Returns permissions that the caller has on the specified Table or Backup
+              # Returns permissions that the caller has on the specified Bigtable
               # resource.
               #
               # @overload test_iam_permissions(request, options = nil)
@@ -3328,6 +3328,493 @@ module Google
                                        retry_policy: @config.retry_policy
 
                 @bigtable_table_admin_stub.call_rpc :test_iam_permissions, request, options: options do |response, operation|
+                  yield response, operation if block_given?
+                end
+              rescue ::GRPC::BadStatus => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Creates a new schema bundle in the specified table.
+              #
+              # @overload create_schema_bundle(request, options = nil)
+              #   Pass arguments to `create_schema_bundle` via a request object, either of type
+              #   {::Google::Cloud::Bigtable::Admin::V2::CreateSchemaBundleRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::Bigtable::Admin::V2::CreateSchemaBundleRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+              #
+              # @overload create_schema_bundle(parent: nil, schema_bundle_id: nil, schema_bundle: nil)
+              #   Pass arguments to `create_schema_bundle` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param parent [::String]
+              #     Required. The parent resource where this schema bundle will be created.
+              #     Values are of the form
+              #     `projects/{project}/instances/{instance}/tables/{table}`.
+              #   @param schema_bundle_id [::String]
+              #     Required. The unique ID to use for the schema bundle, which will become the
+              #     final component of the schema bundle's resource name.
+              #   @param schema_bundle [::Google::Cloud::Bigtable::Admin::V2::SchemaBundle, ::Hash]
+              #     Required. The schema bundle to create.
+              #
+              # @yield [response, operation] Access the result along with the RPC operation
+              # @yieldparam response [::Gapic::Operation]
+              # @yieldparam operation [::GRPC::ActiveCall::Operation]
+              #
+              # @return [::Gapic::Operation]
+              #
+              # @raise [::Google::Cloud::Error] if the RPC is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/bigtable/admin/v2"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Bigtable::Admin::V2::BigtableTableAdmin::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Bigtable::Admin::V2::CreateSchemaBundleRequest.new
+              #
+              #   # Call the create_schema_bundle method.
+              #   result = client.create_schema_bundle request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
+              def create_schema_bundle request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Bigtable::Admin::V2::CreateSchemaBundleRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                metadata = @config.rpcs.create_schema_bundle.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::Bigtable::Admin::V2::VERSION
+                metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                header_params = {}
+                if request.parent
+                  header_params["parent"] = request.parent
+                end
+
+                request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+                metadata[:"x-goog-request-params"] ||= request_params_header
+
+                options.apply_defaults timeout:      @config.rpcs.create_schema_bundle.timeout,
+                                       metadata:     metadata,
+                                       retry_policy: @config.rpcs.create_schema_bundle.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @bigtable_table_admin_stub.call_rpc :create_schema_bundle, request, options: options do |response, operation|
+                  response = ::Gapic::Operation.new response, @operations_client, options: options
+                  yield response, operation if block_given?
+                  throw :response, response
+                end
+              rescue ::GRPC::BadStatus => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Updates a schema bundle in the specified table.
+              #
+              # @overload update_schema_bundle(request, options = nil)
+              #   Pass arguments to `update_schema_bundle` via a request object, either of type
+              #   {::Google::Cloud::Bigtable::Admin::V2::UpdateSchemaBundleRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::Bigtable::Admin::V2::UpdateSchemaBundleRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+              #
+              # @overload update_schema_bundle(schema_bundle: nil, update_mask: nil, ignore_warnings: nil)
+              #   Pass arguments to `update_schema_bundle` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param schema_bundle [::Google::Cloud::Bigtable::Admin::V2::SchemaBundle, ::Hash]
+              #     Required. The schema bundle to update.
+              #
+              #     The schema bundle's `name` field is used to identify the schema bundle to
+              #     update. Values are of the form
+              #     `projects/{project}/instances/{instance}/tables/{table}/schemaBundles/{schema_bundle}`
+              #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
+              #     Optional. The list of fields to update.
+              #   @param ignore_warnings [::Boolean]
+              #     Optional. If set, ignore the safety checks when updating the Schema Bundle.
+              #     The safety checks are:
+              #     - The new Schema Bundle is backwards compatible with the existing Schema
+              #     Bundle.
+              #
+              # @yield [response, operation] Access the result along with the RPC operation
+              # @yieldparam response [::Gapic::Operation]
+              # @yieldparam operation [::GRPC::ActiveCall::Operation]
+              #
+              # @return [::Gapic::Operation]
+              #
+              # @raise [::Google::Cloud::Error] if the RPC is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/bigtable/admin/v2"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Bigtable::Admin::V2::BigtableTableAdmin::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Bigtable::Admin::V2::UpdateSchemaBundleRequest.new
+              #
+              #   # Call the update_schema_bundle method.
+              #   result = client.update_schema_bundle request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
+              def update_schema_bundle request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Bigtable::Admin::V2::UpdateSchemaBundleRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                metadata = @config.rpcs.update_schema_bundle.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::Bigtable::Admin::V2::VERSION
+                metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                header_params = {}
+                if request.schema_bundle&.name
+                  header_params["schema_bundle.name"] = request.schema_bundle.name
+                end
+
+                request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+                metadata[:"x-goog-request-params"] ||= request_params_header
+
+                options.apply_defaults timeout:      @config.rpcs.update_schema_bundle.timeout,
+                                       metadata:     metadata,
+                                       retry_policy: @config.rpcs.update_schema_bundle.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @bigtable_table_admin_stub.call_rpc :update_schema_bundle, request, options: options do |response, operation|
+                  response = ::Gapic::Operation.new response, @operations_client, options: options
+                  yield response, operation if block_given?
+                  throw :response, response
+                end
+              rescue ::GRPC::BadStatus => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Gets metadata information about the specified schema bundle.
+              #
+              # @overload get_schema_bundle(request, options = nil)
+              #   Pass arguments to `get_schema_bundle` via a request object, either of type
+              #   {::Google::Cloud::Bigtable::Admin::V2::GetSchemaBundleRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::Bigtable::Admin::V2::GetSchemaBundleRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+              #
+              # @overload get_schema_bundle(name: nil)
+              #   Pass arguments to `get_schema_bundle` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param name [::String]
+              #     Required. The unique name of the schema bundle to retrieve.
+              #     Values are of the form
+              #     `projects/{project}/instances/{instance}/tables/{table}/schemaBundles/{schema_bundle}`
+              #
+              # @yield [response, operation] Access the result along with the RPC operation
+              # @yieldparam response [::Google::Cloud::Bigtable::Admin::V2::SchemaBundle]
+              # @yieldparam operation [::GRPC::ActiveCall::Operation]
+              #
+              # @return [::Google::Cloud::Bigtable::Admin::V2::SchemaBundle]
+              #
+              # @raise [::Google::Cloud::Error] if the RPC is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/bigtable/admin/v2"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Bigtable::Admin::V2::BigtableTableAdmin::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Bigtable::Admin::V2::GetSchemaBundleRequest.new
+              #
+              #   # Call the get_schema_bundle method.
+              #   result = client.get_schema_bundle request
+              #
+              #   # The returned object is of type Google::Cloud::Bigtable::Admin::V2::SchemaBundle.
+              #   p result
+              #
+              def get_schema_bundle request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Bigtable::Admin::V2::GetSchemaBundleRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                metadata = @config.rpcs.get_schema_bundle.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::Bigtable::Admin::V2::VERSION
+                metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                header_params = {}
+                if request.name
+                  header_params["name"] = request.name
+                end
+
+                request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+                metadata[:"x-goog-request-params"] ||= request_params_header
+
+                options.apply_defaults timeout:      @config.rpcs.get_schema_bundle.timeout,
+                                       metadata:     metadata,
+                                       retry_policy: @config.rpcs.get_schema_bundle.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @bigtable_table_admin_stub.call_rpc :get_schema_bundle, request, options: options do |response, operation|
+                  yield response, operation if block_given?
+                end
+              rescue ::GRPC::BadStatus => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Lists all schema bundles associated with the specified table.
+              #
+              # @overload list_schema_bundles(request, options = nil)
+              #   Pass arguments to `list_schema_bundles` via a request object, either of type
+              #   {::Google::Cloud::Bigtable::Admin::V2::ListSchemaBundlesRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::Bigtable::Admin::V2::ListSchemaBundlesRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+              #
+              # @overload list_schema_bundles(parent: nil, page_size: nil, page_token: nil)
+              #   Pass arguments to `list_schema_bundles` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param parent [::String]
+              #     Required. The parent, which owns this collection of schema bundles.
+              #     Values are of the form
+              #     `projects/{project}/instances/{instance}/tables/{table}`.
+              #   @param page_size [::Integer]
+              #     The maximum number of schema bundles to return. If the value is positive,
+              #     the server may return at most this value. If unspecified, the server will
+              #     return the maximum allowed page size.
+              #   @param page_token [::String]
+              #     A page token, received from a previous `ListSchemaBundles` call.
+              #     Provide this to retrieve the subsequent page.
+              #
+              #     When paginating, all other parameters provided to `ListSchemaBundles` must
+              #     match the call that provided the page token.
+              #
+              # @yield [response, operation] Access the result along with the RPC operation
+              # @yieldparam response [::Gapic::PagedEnumerable<::Google::Cloud::Bigtable::Admin::V2::SchemaBundle>]
+              # @yieldparam operation [::GRPC::ActiveCall::Operation]
+              #
+              # @return [::Gapic::PagedEnumerable<::Google::Cloud::Bigtable::Admin::V2::SchemaBundle>]
+              #
+              # @raise [::Google::Cloud::Error] if the RPC is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/bigtable/admin/v2"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Bigtable::Admin::V2::BigtableTableAdmin::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Bigtable::Admin::V2::ListSchemaBundlesRequest.new
+              #
+              #   # Call the list_schema_bundles method.
+              #   result = client.list_schema_bundles request
+              #
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
+              #     # Each element is of type ::Google::Cloud::Bigtable::Admin::V2::SchemaBundle.
+              #     p item
+              #   end
+              #
+              def list_schema_bundles request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Bigtable::Admin::V2::ListSchemaBundlesRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                metadata = @config.rpcs.list_schema_bundles.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::Bigtable::Admin::V2::VERSION
+                metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                header_params = {}
+                if request.parent
+                  header_params["parent"] = request.parent
+                end
+
+                request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+                metadata[:"x-goog-request-params"] ||= request_params_header
+
+                options.apply_defaults timeout:      @config.rpcs.list_schema_bundles.timeout,
+                                       metadata:     metadata,
+                                       retry_policy: @config.rpcs.list_schema_bundles.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @bigtable_table_admin_stub.call_rpc :list_schema_bundles, request, options: options do |response, operation|
+                  response = ::Gapic::PagedEnumerable.new @bigtable_table_admin_stub, :list_schema_bundles, request, response, operation, options
+                  yield response, operation if block_given?
+                  throw :response, response
+                end
+              rescue ::GRPC::BadStatus => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Deletes a schema bundle in the specified table.
+              #
+              # @overload delete_schema_bundle(request, options = nil)
+              #   Pass arguments to `delete_schema_bundle` via a request object, either of type
+              #   {::Google::Cloud::Bigtable::Admin::V2::DeleteSchemaBundleRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::Bigtable::Admin::V2::DeleteSchemaBundleRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+              #
+              # @overload delete_schema_bundle(name: nil, etag: nil)
+              #   Pass arguments to `delete_schema_bundle` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param name [::String]
+              #     Required. The unique name of the schema bundle to delete.
+              #     Values are of the form
+              #     `projects/{project}/instances/{instance}/tables/{table}/schemaBundles/{schema_bundle}`
+              #   @param etag [::String]
+              #     Optional. The etag of the schema bundle.
+              #     If this is provided, it must match the server's etag. The server
+              #     returns an ABORTED error on a mismatched etag.
+              #
+              # @yield [response, operation] Access the result along with the RPC operation
+              # @yieldparam response [::Google::Protobuf::Empty]
+              # @yieldparam operation [::GRPC::ActiveCall::Operation]
+              #
+              # @return [::Google::Protobuf::Empty]
+              #
+              # @raise [::Google::Cloud::Error] if the RPC is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/bigtable/admin/v2"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Bigtable::Admin::V2::BigtableTableAdmin::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Bigtable::Admin::V2::DeleteSchemaBundleRequest.new
+              #
+              #   # Call the delete_schema_bundle method.
+              #   result = client.delete_schema_bundle request
+              #
+              #   # The returned object is of type Google::Protobuf::Empty.
+              #   p result
+              #
+              def delete_schema_bundle request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Bigtable::Admin::V2::DeleteSchemaBundleRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                metadata = @config.rpcs.delete_schema_bundle.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::Bigtable::Admin::V2::VERSION
+                metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                header_params = {}
+                if request.name
+                  header_params["name"] = request.name
+                end
+
+                request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+                metadata[:"x-goog-request-params"] ||= request_params_header
+
+                options.apply_defaults timeout:      @config.rpcs.delete_schema_bundle.timeout,
+                                       metadata:     metadata,
+                                       retry_policy: @config.rpcs.delete_schema_bundle.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @bigtable_table_admin_stub.call_rpc :delete_schema_bundle, request, options: options do |response, operation|
                   yield response, operation if block_given?
                 end
               rescue ::GRPC::BadStatus => e
@@ -3439,8 +3926,8 @@ module Google
 
                 config_attr :endpoint,      nil, ::String, nil
                 config_attr :credentials,   nil do |value|
-                  allowed = [::String, ::Hash, ::Proc, ::Symbol, ::Google::Auth::Credentials, ::Signet::OAuth2::Client, nil]
-                  allowed += [::GRPC::Core::Channel, ::GRPC::Core::ChannelCredentials] if defined? ::GRPC
+                  allowed = [::String, ::Hash, ::Proc, ::Symbol, ::Google::Auth::Credentials, ::Google::Auth::BaseClient, ::Signet::OAuth2::Client, nil]
+                  allowed += [::GRPC::Core::Channel, ::GRPC::Core::ChannelCredentials] if defined? ::GRPC::Core::Channel
                   allowed.any? { |klass| klass === value }
                 end
                 config_attr :scope,         nil, ::String, ::Array, nil
@@ -3650,6 +4137,31 @@ module Google
                   # @return [::Gapic::Config::Method]
                   #
                   attr_reader :test_iam_permissions
+                  ##
+                  # RPC-specific configuration for `create_schema_bundle`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :create_schema_bundle
+                  ##
+                  # RPC-specific configuration for `update_schema_bundle`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :update_schema_bundle
+                  ##
+                  # RPC-specific configuration for `get_schema_bundle`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :get_schema_bundle
+                  ##
+                  # RPC-specific configuration for `list_schema_bundles`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :list_schema_bundles
+                  ##
+                  # RPC-specific configuration for `delete_schema_bundle`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :delete_schema_bundle
 
                   # @private
                   def initialize parent_rpcs = nil
@@ -3713,6 +4225,16 @@ module Google
                     @set_iam_policy = ::Gapic::Config::Method.new set_iam_policy_config
                     test_iam_permissions_config = parent_rpcs.test_iam_permissions if parent_rpcs.respond_to? :test_iam_permissions
                     @test_iam_permissions = ::Gapic::Config::Method.new test_iam_permissions_config
+                    create_schema_bundle_config = parent_rpcs.create_schema_bundle if parent_rpcs.respond_to? :create_schema_bundle
+                    @create_schema_bundle = ::Gapic::Config::Method.new create_schema_bundle_config
+                    update_schema_bundle_config = parent_rpcs.update_schema_bundle if parent_rpcs.respond_to? :update_schema_bundle
+                    @update_schema_bundle = ::Gapic::Config::Method.new update_schema_bundle_config
+                    get_schema_bundle_config = parent_rpcs.get_schema_bundle if parent_rpcs.respond_to? :get_schema_bundle
+                    @get_schema_bundle = ::Gapic::Config::Method.new get_schema_bundle_config
+                    list_schema_bundles_config = parent_rpcs.list_schema_bundles if parent_rpcs.respond_to? :list_schema_bundles
+                    @list_schema_bundles = ::Gapic::Config::Method.new list_schema_bundles_config
+                    delete_schema_bundle_config = parent_rpcs.delete_schema_bundle if parent_rpcs.respond_to? :delete_schema_bundle
+                    @delete_schema_bundle = ::Gapic::Config::Method.new delete_schema_bundle_config
 
                     yield self if block_given?
                   end

@@ -1,5 +1,19 @@
 # Changelog
 
+### 0.5.0 (2025-05-16)
+
+#### Features
+
+* Support for GbpAccountsService 
+* Support for LfpProvidersService 
+* Support for OmnichannelSettingsService 
+
+### 0.4.1 (2025-04-29)
+
+#### Bug Fixes
+
+* Fixed several issues with validating credential configs 
+
 ### 0.4.0 (2025-03-18)
 
 #### Features

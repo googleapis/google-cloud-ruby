@@ -1,7 +1,7 @@
 {
   "client_library": {
     "name": "google-apps-chat-v1",
-    "version": "0.11.0",
+    "version": "0.12.0",
     "language": "RUBY",
     "apis": [
       {
@@ -955,6 +955,166 @@
         "method": {
           "short_name": "DeleteReaction",
           "full_name": "google.chat.v1.ChatService.DeleteReaction",
+          "service": {
+            "short_name": "ChatService",
+            "full_name": "google.chat.v1.ChatService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "chat_v1_generated_ChatService_CreateCustomEmoji_sync",
+      "title": "Snippet for the create_custom_emoji call in the ChatService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Apps::Chat::V1::ChatService::Client#create_custom_emoji.",
+      "file": "chat_service/create_custom_emoji.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_custom_emoji",
+        "full_name": "::Google::Apps::Chat::V1::ChatService::Client#create_custom_emoji",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Apps::Chat::V1::CreateCustomEmojiRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Apps::Chat::V1::CustomEmoji",
+        "client": {
+          "short_name": "ChatService::Client",
+          "full_name": "::Google::Apps::Chat::V1::ChatService::Client"
+        },
+        "method": {
+          "short_name": "CreateCustomEmoji",
+          "full_name": "google.chat.v1.ChatService.CreateCustomEmoji",
+          "service": {
+            "short_name": "ChatService",
+            "full_name": "google.chat.v1.ChatService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "chat_v1_generated_ChatService_GetCustomEmoji_sync",
+      "title": "Snippet for the get_custom_emoji call in the ChatService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Apps::Chat::V1::ChatService::Client#get_custom_emoji.",
+      "file": "chat_service/get_custom_emoji.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_custom_emoji",
+        "full_name": "::Google::Apps::Chat::V1::ChatService::Client#get_custom_emoji",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Apps::Chat::V1::GetCustomEmojiRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Apps::Chat::V1::CustomEmoji",
+        "client": {
+          "short_name": "ChatService::Client",
+          "full_name": "::Google::Apps::Chat::V1::ChatService::Client"
+        },
+        "method": {
+          "short_name": "GetCustomEmoji",
+          "full_name": "google.chat.v1.ChatService.GetCustomEmoji",
+          "service": {
+            "short_name": "ChatService",
+            "full_name": "google.chat.v1.ChatService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "chat_v1_generated_ChatService_ListCustomEmojis_sync",
+      "title": "Snippet for the list_custom_emojis call in the ChatService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Apps::Chat::V1::ChatService::Client#list_custom_emojis.",
+      "file": "chat_service/list_custom_emojis.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_custom_emojis",
+        "full_name": "::Google::Apps::Chat::V1::ChatService::Client#list_custom_emojis",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Apps::Chat::V1::ListCustomEmojisRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Apps::Chat::V1::ListCustomEmojisResponse",
+        "client": {
+          "short_name": "ChatService::Client",
+          "full_name": "::Google::Apps::Chat::V1::ChatService::Client"
+        },
+        "method": {
+          "short_name": "ListCustomEmojis",
+          "full_name": "google.chat.v1.ChatService.ListCustomEmojis",
+          "service": {
+            "short_name": "ChatService",
+            "full_name": "google.chat.v1.ChatService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "chat_v1_generated_ChatService_DeleteCustomEmoji_sync",
+      "title": "Snippet for the delete_custom_emoji call in the ChatService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Apps::Chat::V1::ChatService::Client#delete_custom_emoji.",
+      "file": "chat_service/delete_custom_emoji.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_custom_emoji",
+        "full_name": "::Google::Apps::Chat::V1::ChatService::Client#delete_custom_emoji",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Apps::Chat::V1::DeleteCustomEmojiRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Protobuf::Empty",
+        "client": {
+          "short_name": "ChatService::Client",
+          "full_name": "::Google::Apps::Chat::V1::ChatService::Client"
+        },
+        "method": {
+          "short_name": "DeleteCustomEmoji",
+          "full_name": "google.chat.v1.ChatService.DeleteCustomEmoji",
           "service": {
             "short_name": "ChatService",
             "full_name": "google.chat.v1.ChatService"

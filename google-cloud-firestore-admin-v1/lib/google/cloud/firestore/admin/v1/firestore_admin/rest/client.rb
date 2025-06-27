@@ -1694,6 +1694,570 @@ module Google
                 end
 
                 ##
+                # Create a user creds.
+                #
+                # @overload create_user_creds(request, options = nil)
+                #   Pass arguments to `create_user_creds` via a request object, either of type
+                #   {::Google::Cloud::Firestore::Admin::V1::CreateUserCredsRequest} or an equivalent Hash.
+                #
+                #   @param request [::Google::Cloud::Firestore::Admin::V1::CreateUserCredsRequest, ::Hash]
+                #     A request object representing the call parameters. Required. To specify no
+                #     parameters, or to keep all the default parameter values, pass an empty Hash.
+                #   @param options [::Gapic::CallOptions, ::Hash]
+                #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+                #
+                # @overload create_user_creds(parent: nil, user_creds: nil, user_creds_id: nil)
+                #   Pass arguments to `create_user_creds` via keyword arguments. Note that at
+                #   least one keyword argument is required. To specify no parameters, or to keep all
+                #   the default parameter values, pass an empty Hash as a request object (see above).
+                #
+                #   @param parent [::String]
+                #     Required. A parent name of the form
+                #     `projects/{project_id}/databases/{database_id}`
+                #   @param user_creds [::Google::Cloud::Firestore::Admin::V1::UserCreds, ::Hash]
+                #     Required. The user creds to create.
+                #   @param user_creds_id [::String]
+                #     Required. The ID to use for the user creds, which will become the final
+                #     component of the user creds's resource name.
+                #
+                #     This value should be 4-63 characters. Valid characters are /[a-z][0-9]-/
+                #     with first character a letter and the last a letter or a number. Must not
+                #     be UUID-like /[0-9a-f]\\{8}(-[0-9a-f]\\{4})\\{3}-[0-9a-f]\\{12}/.
+                # @yield [result, operation] Access the result along with the TransportOperation object
+                # @yieldparam result [::Google::Cloud::Firestore::Admin::V1::UserCreds]
+                # @yieldparam operation [::Gapic::Rest::TransportOperation]
+                #
+                # @return [::Google::Cloud::Firestore::Admin::V1::UserCreds]
+                #
+                # @raise [::Google::Cloud::Error] if the REST call is aborted.
+                #
+                # @example Basic example
+                #   require "google/cloud/firestore/admin/v1"
+                #
+                #   # Create a client object. The client can be reused for multiple calls.
+                #   client = Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Rest::Client.new
+                #
+                #   # Create a request. To set request fields, pass in keyword arguments.
+                #   request = Google::Cloud::Firestore::Admin::V1::CreateUserCredsRequest.new
+                #
+                #   # Call the create_user_creds method.
+                #   result = client.create_user_creds request
+                #
+                #   # The returned object is of type Google::Cloud::Firestore::Admin::V1::UserCreds.
+                #   p result
+                #
+                def create_user_creds request, options = nil
+                  raise ::ArgumentError, "request must be provided" if request.nil?
+
+                  request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Firestore::Admin::V1::CreateUserCredsRequest
+
+                  # Converts hash and nil to an options object
+                  options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                  # Customize the options with defaults
+                  call_metadata = @config.rpcs.create_user_creds.metadata.to_h
+
+                  # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                  call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                    lib_name: @config.lib_name, lib_version: @config.lib_version,
+                    gapic_version: ::Google::Cloud::Firestore::Admin::V1::VERSION,
+                    transports_version_send: [:rest]
+
+                  call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                  call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                  options.apply_defaults timeout:      @config.rpcs.create_user_creds.timeout,
+                                         metadata:     call_metadata,
+                                         retry_policy: @config.rpcs.create_user_creds.retry_policy
+
+                  options.apply_defaults timeout:      @config.timeout,
+                                         metadata:     @config.metadata,
+                                         retry_policy: @config.retry_policy
+
+                  @firestore_admin_stub.create_user_creds request, options do |result, operation|
+                    yield result, operation if block_given?
+                  end
+                rescue ::Gapic::Rest::Error => e
+                  raise ::Google::Cloud::Error.from_error(e)
+                end
+
+                ##
+                # Gets a user creds resource. Note that the returned resource does not
+                # contain the secret value itself.
+                #
+                # @overload get_user_creds(request, options = nil)
+                #   Pass arguments to `get_user_creds` via a request object, either of type
+                #   {::Google::Cloud::Firestore::Admin::V1::GetUserCredsRequest} or an equivalent Hash.
+                #
+                #   @param request [::Google::Cloud::Firestore::Admin::V1::GetUserCredsRequest, ::Hash]
+                #     A request object representing the call parameters. Required. To specify no
+                #     parameters, or to keep all the default parameter values, pass an empty Hash.
+                #   @param options [::Gapic::CallOptions, ::Hash]
+                #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+                #
+                # @overload get_user_creds(name: nil)
+                #   Pass arguments to `get_user_creds` via keyword arguments. Note that at
+                #   least one keyword argument is required. To specify no parameters, or to keep all
+                #   the default parameter values, pass an empty Hash as a request object (see above).
+                #
+                #   @param name [::String]
+                #     Required. A name of the form
+                #     `projects/{project_id}/databases/{database_id}/userCreds/{user_creds_id}`
+                # @yield [result, operation] Access the result along with the TransportOperation object
+                # @yieldparam result [::Google::Cloud::Firestore::Admin::V1::UserCreds]
+                # @yieldparam operation [::Gapic::Rest::TransportOperation]
+                #
+                # @return [::Google::Cloud::Firestore::Admin::V1::UserCreds]
+                #
+                # @raise [::Google::Cloud::Error] if the REST call is aborted.
+                #
+                # @example Basic example
+                #   require "google/cloud/firestore/admin/v1"
+                #
+                #   # Create a client object. The client can be reused for multiple calls.
+                #   client = Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Rest::Client.new
+                #
+                #   # Create a request. To set request fields, pass in keyword arguments.
+                #   request = Google::Cloud::Firestore::Admin::V1::GetUserCredsRequest.new
+                #
+                #   # Call the get_user_creds method.
+                #   result = client.get_user_creds request
+                #
+                #   # The returned object is of type Google::Cloud::Firestore::Admin::V1::UserCreds.
+                #   p result
+                #
+                def get_user_creds request, options = nil
+                  raise ::ArgumentError, "request must be provided" if request.nil?
+
+                  request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Firestore::Admin::V1::GetUserCredsRequest
+
+                  # Converts hash and nil to an options object
+                  options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                  # Customize the options with defaults
+                  call_metadata = @config.rpcs.get_user_creds.metadata.to_h
+
+                  # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                  call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                    lib_name: @config.lib_name, lib_version: @config.lib_version,
+                    gapic_version: ::Google::Cloud::Firestore::Admin::V1::VERSION,
+                    transports_version_send: [:rest]
+
+                  call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                  call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                  options.apply_defaults timeout:      @config.rpcs.get_user_creds.timeout,
+                                         metadata:     call_metadata,
+                                         retry_policy: @config.rpcs.get_user_creds.retry_policy
+
+                  options.apply_defaults timeout:      @config.timeout,
+                                         metadata:     @config.metadata,
+                                         retry_policy: @config.retry_policy
+
+                  @firestore_admin_stub.get_user_creds request, options do |result, operation|
+                    yield result, operation if block_given?
+                  end
+                rescue ::Gapic::Rest::Error => e
+                  raise ::Google::Cloud::Error.from_error(e)
+                end
+
+                ##
+                # List all user creds in the database. Note that the returned resource
+                # does not contain the secret value itself.
+                #
+                # @overload list_user_creds(request, options = nil)
+                #   Pass arguments to `list_user_creds` via a request object, either of type
+                #   {::Google::Cloud::Firestore::Admin::V1::ListUserCredsRequest} or an equivalent Hash.
+                #
+                #   @param request [::Google::Cloud::Firestore::Admin::V1::ListUserCredsRequest, ::Hash]
+                #     A request object representing the call parameters. Required. To specify no
+                #     parameters, or to keep all the default parameter values, pass an empty Hash.
+                #   @param options [::Gapic::CallOptions, ::Hash]
+                #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+                #
+                # @overload list_user_creds(parent: nil)
+                #   Pass arguments to `list_user_creds` via keyword arguments. Note that at
+                #   least one keyword argument is required. To specify no parameters, or to keep all
+                #   the default parameter values, pass an empty Hash as a request object (see above).
+                #
+                #   @param parent [::String]
+                #     Required. A parent database name of the form
+                #     `projects/{project_id}/databases/{database_id}`
+                # @yield [result, operation] Access the result along with the TransportOperation object
+                # @yieldparam result [::Google::Cloud::Firestore::Admin::V1::ListUserCredsResponse]
+                # @yieldparam operation [::Gapic::Rest::TransportOperation]
+                #
+                # @return [::Google::Cloud::Firestore::Admin::V1::ListUserCredsResponse]
+                #
+                # @raise [::Google::Cloud::Error] if the REST call is aborted.
+                #
+                # @example Basic example
+                #   require "google/cloud/firestore/admin/v1"
+                #
+                #   # Create a client object. The client can be reused for multiple calls.
+                #   client = Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Rest::Client.new
+                #
+                #   # Create a request. To set request fields, pass in keyword arguments.
+                #   request = Google::Cloud::Firestore::Admin::V1::ListUserCredsRequest.new
+                #
+                #   # Call the list_user_creds method.
+                #   result = client.list_user_creds request
+                #
+                #   # The returned object is of type Google::Cloud::Firestore::Admin::V1::ListUserCredsResponse.
+                #   p result
+                #
+                def list_user_creds request, options = nil
+                  raise ::ArgumentError, "request must be provided" if request.nil?
+
+                  request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Firestore::Admin::V1::ListUserCredsRequest
+
+                  # Converts hash and nil to an options object
+                  options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                  # Customize the options with defaults
+                  call_metadata = @config.rpcs.list_user_creds.metadata.to_h
+
+                  # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                  call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                    lib_name: @config.lib_name, lib_version: @config.lib_version,
+                    gapic_version: ::Google::Cloud::Firestore::Admin::V1::VERSION,
+                    transports_version_send: [:rest]
+
+                  call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                  call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                  options.apply_defaults timeout:      @config.rpcs.list_user_creds.timeout,
+                                         metadata:     call_metadata,
+                                         retry_policy: @config.rpcs.list_user_creds.retry_policy
+
+                  options.apply_defaults timeout:      @config.timeout,
+                                         metadata:     @config.metadata,
+                                         retry_policy: @config.retry_policy
+
+                  @firestore_admin_stub.list_user_creds request, options do |result, operation|
+                    yield result, operation if block_given?
+                  end
+                rescue ::Gapic::Rest::Error => e
+                  raise ::Google::Cloud::Error.from_error(e)
+                end
+
+                ##
+                # Enables a user creds. No-op if the user creds are already enabled.
+                #
+                # @overload enable_user_creds(request, options = nil)
+                #   Pass arguments to `enable_user_creds` via a request object, either of type
+                #   {::Google::Cloud::Firestore::Admin::V1::EnableUserCredsRequest} or an equivalent Hash.
+                #
+                #   @param request [::Google::Cloud::Firestore::Admin::V1::EnableUserCredsRequest, ::Hash]
+                #     A request object representing the call parameters. Required. To specify no
+                #     parameters, or to keep all the default parameter values, pass an empty Hash.
+                #   @param options [::Gapic::CallOptions, ::Hash]
+                #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+                #
+                # @overload enable_user_creds(name: nil)
+                #   Pass arguments to `enable_user_creds` via keyword arguments. Note that at
+                #   least one keyword argument is required. To specify no parameters, or to keep all
+                #   the default parameter values, pass an empty Hash as a request object (see above).
+                #
+                #   @param name [::String]
+                #     Required. A name of the form
+                #     `projects/{project_id}/databases/{database_id}/userCreds/{user_creds_id}`
+                # @yield [result, operation] Access the result along with the TransportOperation object
+                # @yieldparam result [::Google::Cloud::Firestore::Admin::V1::UserCreds]
+                # @yieldparam operation [::Gapic::Rest::TransportOperation]
+                #
+                # @return [::Google::Cloud::Firestore::Admin::V1::UserCreds]
+                #
+                # @raise [::Google::Cloud::Error] if the REST call is aborted.
+                #
+                # @example Basic example
+                #   require "google/cloud/firestore/admin/v1"
+                #
+                #   # Create a client object. The client can be reused for multiple calls.
+                #   client = Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Rest::Client.new
+                #
+                #   # Create a request. To set request fields, pass in keyword arguments.
+                #   request = Google::Cloud::Firestore::Admin::V1::EnableUserCredsRequest.new
+                #
+                #   # Call the enable_user_creds method.
+                #   result = client.enable_user_creds request
+                #
+                #   # The returned object is of type Google::Cloud::Firestore::Admin::V1::UserCreds.
+                #   p result
+                #
+                def enable_user_creds request, options = nil
+                  raise ::ArgumentError, "request must be provided" if request.nil?
+
+                  request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Firestore::Admin::V1::EnableUserCredsRequest
+
+                  # Converts hash and nil to an options object
+                  options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                  # Customize the options with defaults
+                  call_metadata = @config.rpcs.enable_user_creds.metadata.to_h
+
+                  # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                  call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                    lib_name: @config.lib_name, lib_version: @config.lib_version,
+                    gapic_version: ::Google::Cloud::Firestore::Admin::V1::VERSION,
+                    transports_version_send: [:rest]
+
+                  call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                  call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                  options.apply_defaults timeout:      @config.rpcs.enable_user_creds.timeout,
+                                         metadata:     call_metadata,
+                                         retry_policy: @config.rpcs.enable_user_creds.retry_policy
+
+                  options.apply_defaults timeout:      @config.timeout,
+                                         metadata:     @config.metadata,
+                                         retry_policy: @config.retry_policy
+
+                  @firestore_admin_stub.enable_user_creds request, options do |result, operation|
+                    yield result, operation if block_given?
+                  end
+                rescue ::Gapic::Rest::Error => e
+                  raise ::Google::Cloud::Error.from_error(e)
+                end
+
+                ##
+                # Disables a user creds. No-op if the user creds are already disabled.
+                #
+                # @overload disable_user_creds(request, options = nil)
+                #   Pass arguments to `disable_user_creds` via a request object, either of type
+                #   {::Google::Cloud::Firestore::Admin::V1::DisableUserCredsRequest} or an equivalent Hash.
+                #
+                #   @param request [::Google::Cloud::Firestore::Admin::V1::DisableUserCredsRequest, ::Hash]
+                #     A request object representing the call parameters. Required. To specify no
+                #     parameters, or to keep all the default parameter values, pass an empty Hash.
+                #   @param options [::Gapic::CallOptions, ::Hash]
+                #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+                #
+                # @overload disable_user_creds(name: nil)
+                #   Pass arguments to `disable_user_creds` via keyword arguments. Note that at
+                #   least one keyword argument is required. To specify no parameters, or to keep all
+                #   the default parameter values, pass an empty Hash as a request object (see above).
+                #
+                #   @param name [::String]
+                #     Required. A name of the form
+                #     `projects/{project_id}/databases/{database_id}/userCreds/{user_creds_id}`
+                # @yield [result, operation] Access the result along with the TransportOperation object
+                # @yieldparam result [::Google::Cloud::Firestore::Admin::V1::UserCreds]
+                # @yieldparam operation [::Gapic::Rest::TransportOperation]
+                #
+                # @return [::Google::Cloud::Firestore::Admin::V1::UserCreds]
+                #
+                # @raise [::Google::Cloud::Error] if the REST call is aborted.
+                #
+                # @example Basic example
+                #   require "google/cloud/firestore/admin/v1"
+                #
+                #   # Create a client object. The client can be reused for multiple calls.
+                #   client = Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Rest::Client.new
+                #
+                #   # Create a request. To set request fields, pass in keyword arguments.
+                #   request = Google::Cloud::Firestore::Admin::V1::DisableUserCredsRequest.new
+                #
+                #   # Call the disable_user_creds method.
+                #   result = client.disable_user_creds request
+                #
+                #   # The returned object is of type Google::Cloud::Firestore::Admin::V1::UserCreds.
+                #   p result
+                #
+                def disable_user_creds request, options = nil
+                  raise ::ArgumentError, "request must be provided" if request.nil?
+
+                  request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Firestore::Admin::V1::DisableUserCredsRequest
+
+                  # Converts hash and nil to an options object
+                  options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                  # Customize the options with defaults
+                  call_metadata = @config.rpcs.disable_user_creds.metadata.to_h
+
+                  # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                  call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                    lib_name: @config.lib_name, lib_version: @config.lib_version,
+                    gapic_version: ::Google::Cloud::Firestore::Admin::V1::VERSION,
+                    transports_version_send: [:rest]
+
+                  call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                  call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                  options.apply_defaults timeout:      @config.rpcs.disable_user_creds.timeout,
+                                         metadata:     call_metadata,
+                                         retry_policy: @config.rpcs.disable_user_creds.retry_policy
+
+                  options.apply_defaults timeout:      @config.timeout,
+                                         metadata:     @config.metadata,
+                                         retry_policy: @config.retry_policy
+
+                  @firestore_admin_stub.disable_user_creds request, options do |result, operation|
+                    yield result, operation if block_given?
+                  end
+                rescue ::Gapic::Rest::Error => e
+                  raise ::Google::Cloud::Error.from_error(e)
+                end
+
+                ##
+                # Resets the password of a user creds.
+                #
+                # @overload reset_user_password(request, options = nil)
+                #   Pass arguments to `reset_user_password` via a request object, either of type
+                #   {::Google::Cloud::Firestore::Admin::V1::ResetUserPasswordRequest} or an equivalent Hash.
+                #
+                #   @param request [::Google::Cloud::Firestore::Admin::V1::ResetUserPasswordRequest, ::Hash]
+                #     A request object representing the call parameters. Required. To specify no
+                #     parameters, or to keep all the default parameter values, pass an empty Hash.
+                #   @param options [::Gapic::CallOptions, ::Hash]
+                #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+                #
+                # @overload reset_user_password(name: nil)
+                #   Pass arguments to `reset_user_password` via keyword arguments. Note that at
+                #   least one keyword argument is required. To specify no parameters, or to keep all
+                #   the default parameter values, pass an empty Hash as a request object (see above).
+                #
+                #   @param name [::String]
+                #     Required. A name of the form
+                #     `projects/{project_id}/databases/{database_id}/userCreds/{user_creds_id}`
+                # @yield [result, operation] Access the result along with the TransportOperation object
+                # @yieldparam result [::Google::Cloud::Firestore::Admin::V1::UserCreds]
+                # @yieldparam operation [::Gapic::Rest::TransportOperation]
+                #
+                # @return [::Google::Cloud::Firestore::Admin::V1::UserCreds]
+                #
+                # @raise [::Google::Cloud::Error] if the REST call is aborted.
+                #
+                # @example Basic example
+                #   require "google/cloud/firestore/admin/v1"
+                #
+                #   # Create a client object. The client can be reused for multiple calls.
+                #   client = Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Rest::Client.new
+                #
+                #   # Create a request. To set request fields, pass in keyword arguments.
+                #   request = Google::Cloud::Firestore::Admin::V1::ResetUserPasswordRequest.new
+                #
+                #   # Call the reset_user_password method.
+                #   result = client.reset_user_password request
+                #
+                #   # The returned object is of type Google::Cloud::Firestore::Admin::V1::UserCreds.
+                #   p result
+                #
+                def reset_user_password request, options = nil
+                  raise ::ArgumentError, "request must be provided" if request.nil?
+
+                  request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Firestore::Admin::V1::ResetUserPasswordRequest
+
+                  # Converts hash and nil to an options object
+                  options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                  # Customize the options with defaults
+                  call_metadata = @config.rpcs.reset_user_password.metadata.to_h
+
+                  # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                  call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                    lib_name: @config.lib_name, lib_version: @config.lib_version,
+                    gapic_version: ::Google::Cloud::Firestore::Admin::V1::VERSION,
+                    transports_version_send: [:rest]
+
+                  call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                  call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                  options.apply_defaults timeout:      @config.rpcs.reset_user_password.timeout,
+                                         metadata:     call_metadata,
+                                         retry_policy: @config.rpcs.reset_user_password.retry_policy
+
+                  options.apply_defaults timeout:      @config.timeout,
+                                         metadata:     @config.metadata,
+                                         retry_policy: @config.retry_policy
+
+                  @firestore_admin_stub.reset_user_password request, options do |result, operation|
+                    yield result, operation if block_given?
+                  end
+                rescue ::Gapic::Rest::Error => e
+                  raise ::Google::Cloud::Error.from_error(e)
+                end
+
+                ##
+                # Deletes a user creds.
+                #
+                # @overload delete_user_creds(request, options = nil)
+                #   Pass arguments to `delete_user_creds` via a request object, either of type
+                #   {::Google::Cloud::Firestore::Admin::V1::DeleteUserCredsRequest} or an equivalent Hash.
+                #
+                #   @param request [::Google::Cloud::Firestore::Admin::V1::DeleteUserCredsRequest, ::Hash]
+                #     A request object representing the call parameters. Required. To specify no
+                #     parameters, or to keep all the default parameter values, pass an empty Hash.
+                #   @param options [::Gapic::CallOptions, ::Hash]
+                #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+                #
+                # @overload delete_user_creds(name: nil)
+                #   Pass arguments to `delete_user_creds` via keyword arguments. Note that at
+                #   least one keyword argument is required. To specify no parameters, or to keep all
+                #   the default parameter values, pass an empty Hash as a request object (see above).
+                #
+                #   @param name [::String]
+                #     Required. A name of the form
+                #     `projects/{project_id}/databases/{database_id}/userCreds/{user_creds_id}`
+                # @yield [result, operation] Access the result along with the TransportOperation object
+                # @yieldparam result [::Google::Protobuf::Empty]
+                # @yieldparam operation [::Gapic::Rest::TransportOperation]
+                #
+                # @return [::Google::Protobuf::Empty]
+                #
+                # @raise [::Google::Cloud::Error] if the REST call is aborted.
+                #
+                # @example Basic example
+                #   require "google/cloud/firestore/admin/v1"
+                #
+                #   # Create a client object. The client can be reused for multiple calls.
+                #   client = Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Rest::Client.new
+                #
+                #   # Create a request. To set request fields, pass in keyword arguments.
+                #   request = Google::Cloud::Firestore::Admin::V1::DeleteUserCredsRequest.new
+                #
+                #   # Call the delete_user_creds method.
+                #   result = client.delete_user_creds request
+                #
+                #   # The returned object is of type Google::Protobuf::Empty.
+                #   p result
+                #
+                def delete_user_creds request, options = nil
+                  raise ::ArgumentError, "request must be provided" if request.nil?
+
+                  request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Firestore::Admin::V1::DeleteUserCredsRequest
+
+                  # Converts hash and nil to an options object
+                  options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                  # Customize the options with defaults
+                  call_metadata = @config.rpcs.delete_user_creds.metadata.to_h
+
+                  # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                  call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                    lib_name: @config.lib_name, lib_version: @config.lib_version,
+                    gapic_version: ::Google::Cloud::Firestore::Admin::V1::VERSION,
+                    transports_version_send: [:rest]
+
+                  call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                  call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                  options.apply_defaults timeout:      @config.rpcs.delete_user_creds.timeout,
+                                         metadata:     call_metadata,
+                                         retry_policy: @config.rpcs.delete_user_creds.retry_policy
+
+                  options.apply_defaults timeout:      @config.timeout,
+                                         metadata:     @config.metadata,
+                                         retry_policy: @config.retry_policy
+
+                  @firestore_admin_stub.delete_user_creds request, options do |result, operation|
+                    yield result, operation if block_given?
+                  end
+                rescue ::Gapic::Rest::Error => e
+                  raise ::Google::Cloud::Error.from_error(e)
+                end
+
+                ##
                 # Gets information about a backup.
                 #
                 # @overload get_backup(request, options = nil)
@@ -2579,7 +3143,7 @@ module Google
 
                   config_attr :endpoint,      nil, ::String, nil
                   config_attr :credentials,   nil do |value|
-                    allowed = [::String, ::Hash, ::Proc, ::Symbol, ::Google::Auth::Credentials, ::Signet::OAuth2::Client, nil]
+                    allowed = [::String, ::Hash, ::Proc, ::Symbol, ::Google::Auth::Credentials, ::Google::Auth::BaseClient, ::Signet::OAuth2::Client, nil]
                     allowed.any? { |klass| klass === value }
                   end
                   config_attr :scope,         nil, ::String, ::Array, nil
@@ -2705,6 +3269,41 @@ module Google
                     #
                     attr_reader :delete_database
                     ##
+                    # RPC-specific configuration for `create_user_creds`
+                    # @return [::Gapic::Config::Method]
+                    #
+                    attr_reader :create_user_creds
+                    ##
+                    # RPC-specific configuration for `get_user_creds`
+                    # @return [::Gapic::Config::Method]
+                    #
+                    attr_reader :get_user_creds
+                    ##
+                    # RPC-specific configuration for `list_user_creds`
+                    # @return [::Gapic::Config::Method]
+                    #
+                    attr_reader :list_user_creds
+                    ##
+                    # RPC-specific configuration for `enable_user_creds`
+                    # @return [::Gapic::Config::Method]
+                    #
+                    attr_reader :enable_user_creds
+                    ##
+                    # RPC-specific configuration for `disable_user_creds`
+                    # @return [::Gapic::Config::Method]
+                    #
+                    attr_reader :disable_user_creds
+                    ##
+                    # RPC-specific configuration for `reset_user_password`
+                    # @return [::Gapic::Config::Method]
+                    #
+                    attr_reader :reset_user_password
+                    ##
+                    # RPC-specific configuration for `delete_user_creds`
+                    # @return [::Gapic::Config::Method]
+                    #
+                    attr_reader :delete_user_creds
+                    ##
                     # RPC-specific configuration for `get_backup`
                     # @return [::Gapic::Config::Method]
                     #
@@ -2782,6 +3381,20 @@ module Google
                       @update_database = ::Gapic::Config::Method.new update_database_config
                       delete_database_config = parent_rpcs.delete_database if parent_rpcs.respond_to? :delete_database
                       @delete_database = ::Gapic::Config::Method.new delete_database_config
+                      create_user_creds_config = parent_rpcs.create_user_creds if parent_rpcs.respond_to? :create_user_creds
+                      @create_user_creds = ::Gapic::Config::Method.new create_user_creds_config
+                      get_user_creds_config = parent_rpcs.get_user_creds if parent_rpcs.respond_to? :get_user_creds
+                      @get_user_creds = ::Gapic::Config::Method.new get_user_creds_config
+                      list_user_creds_config = parent_rpcs.list_user_creds if parent_rpcs.respond_to? :list_user_creds
+                      @list_user_creds = ::Gapic::Config::Method.new list_user_creds_config
+                      enable_user_creds_config = parent_rpcs.enable_user_creds if parent_rpcs.respond_to? :enable_user_creds
+                      @enable_user_creds = ::Gapic::Config::Method.new enable_user_creds_config
+                      disable_user_creds_config = parent_rpcs.disable_user_creds if parent_rpcs.respond_to? :disable_user_creds
+                      @disable_user_creds = ::Gapic::Config::Method.new disable_user_creds_config
+                      reset_user_password_config = parent_rpcs.reset_user_password if parent_rpcs.respond_to? :reset_user_password
+                      @reset_user_password = ::Gapic::Config::Method.new reset_user_password_config
+                      delete_user_creds_config = parent_rpcs.delete_user_creds if parent_rpcs.respond_to? :delete_user_creds
+                      @delete_user_creds = ::Gapic::Config::Method.new delete_user_creds_config
                       get_backup_config = parent_rpcs.get_backup if parent_rpcs.respond_to? :get_backup
                       @get_backup = ::Gapic::Config::Method.new get_backup_config
                       list_backups_config = parent_rpcs.list_backups if parent_rpcs.respond_to? :list_backups

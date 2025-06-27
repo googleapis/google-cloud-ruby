@@ -31,7 +31,7 @@ module Google
     module Dataflow
       module V1beta3
         ##
-        # Provides a service for Flex templates. This feature is not ready yet.
+        # Provides a service for Flex templates.
         #
         # @example Load this service and instantiate a gRPC client
         #

@@ -7,7 +7,7 @@ The BigQuery Storage API provides fast access to BigQuery managed storage.
 Actual client classes for the various versions of this API are defined in
 _versioned_ client gems, with names of the form `google-cloud-bigquery-storage-v*`.
 The gem `google-cloud-bigquery-storage` is the main client library that brings the
-verisoned gems in as dependencies, and provides high-level methods for
+versioned gems in as dependencies, and provides high-level methods for
 constructing clients. More information on versioned clients can be found below
 in the section titled *Which client should I use?*.
 

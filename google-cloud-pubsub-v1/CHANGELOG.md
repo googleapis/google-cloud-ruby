@@ -1,5 +1,33 @@
 # Release History
 
+### 1.10.0 (2025-06-23)
+
+#### Features
+
+* Add SchemaViolationReason to IngestionFailureEvent ([#30433](https://github.com/googleapis/google-cloud-ruby/issues/30433)) 
+#### Documentation
+
+* Standardize spelling of "acknowledgment" in Pub/Sub protos 
+
+### 1.9.0 (2025-05-12)
+
+#### Features
+
+* Updated core dependencies including gapic-common 
+* Updated required Ruby version to 3.1 
+
+### 1.8.2 (2025-04-29)
+
+#### Bug Fixes
+
+* Fixed several issues with validating credential configs 
+
+### 1.8.1 (2025-04-18)
+
+#### Documentation
+
+* The message_id metadata field for JavaScriptUDF is optional, not required ([#29434](https://github.com/googleapis/google-cloud-ruby/issues/29434)) 
+
 ### 1.8.0 (2025-03-11)
 
 #### Features

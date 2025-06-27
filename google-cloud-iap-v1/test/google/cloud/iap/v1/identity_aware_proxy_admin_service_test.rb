@@ -364,6 +364,66 @@ class ::Google::Cloud::Iap::V1::IdentityAwareProxyAdminService::ClientTest < Min
     end
   end
 
+  def test_validate_iap_attribute_expression
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::Iap::V1::ValidateIapAttributeExpressionResponse.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+    expression = "hello world"
+
+    validate_iap_attribute_expression_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :validate_iap_attribute_expression, name
+      assert_kind_of ::Google::Cloud::Iap::V1::ValidateIapAttributeExpressionRequest, request
+      assert_equal "hello world", request["name"]
+      assert_equal "hello world", request["expression"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, validate_iap_attribute_expression_client_stub do
+      # Create client
+      client = ::Google::Cloud::Iap::V1::IdentityAwareProxyAdminService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.validate_iap_attribute_expression({ name: name, expression: expression }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.validate_iap_attribute_expression name: name, expression: expression do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.validate_iap_attribute_expression ::Google::Cloud::Iap::V1::ValidateIapAttributeExpressionRequest.new(name: name, expression: expression) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.validate_iap_attribute_expression({ name: name, expression: expression }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.validate_iap_attribute_expression(::Google::Cloud::Iap::V1::ValidateIapAttributeExpressionRequest.new(name: name, expression: expression), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, validate_iap_attribute_expression_client_stub.call_rpc_count
+    end
+  end
+
   def test_list_tunnel_dest_groups
     # Create GRPC objects.
     grpc_response = ::Google::Cloud::Iap::V1::ListTunnelDestGroupsResponse.new

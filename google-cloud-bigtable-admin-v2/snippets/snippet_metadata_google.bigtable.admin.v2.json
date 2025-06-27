@@ -1,7 +1,7 @@
 {
   "client_library": {
     "name": "google-cloud-bigtable-admin-v2",
-    "version": "1.8.0",
+    "version": "1.11.0",
     "language": "RUBY",
     "apis": [
       {
@@ -2435,6 +2435,206 @@
         "method": {
           "short_name": "TestIamPermissions",
           "full_name": "google.bigtable.admin.v2.BigtableTableAdmin.TestIamPermissions",
+          "service": {
+            "short_name": "BigtableTableAdmin",
+            "full_name": "google.bigtable.admin.v2.BigtableTableAdmin"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "bigtableadmin_v2_generated_BigtableTableAdmin_CreateSchemaBundle_sync",
+      "title": "Snippet for the create_schema_bundle call in the BigtableTableAdmin service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Bigtable::Admin::V2::BigtableTableAdmin::Client#create_schema_bundle.",
+      "file": "bigtable_table_admin/create_schema_bundle.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_schema_bundle",
+        "full_name": "::Google::Cloud::Bigtable::Admin::V2::BigtableTableAdmin::Client#create_schema_bundle",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Bigtable::Admin::V2::CreateSchemaBundleRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "BigtableTableAdmin::Client",
+          "full_name": "::Google::Cloud::Bigtable::Admin::V2::BigtableTableAdmin::Client"
+        },
+        "method": {
+          "short_name": "CreateSchemaBundle",
+          "full_name": "google.bigtable.admin.v2.BigtableTableAdmin.CreateSchemaBundle",
+          "service": {
+            "short_name": "BigtableTableAdmin",
+            "full_name": "google.bigtable.admin.v2.BigtableTableAdmin"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "bigtableadmin_v2_generated_BigtableTableAdmin_UpdateSchemaBundle_sync",
+      "title": "Snippet for the update_schema_bundle call in the BigtableTableAdmin service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Bigtable::Admin::V2::BigtableTableAdmin::Client#update_schema_bundle.",
+      "file": "bigtable_table_admin/update_schema_bundle.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_schema_bundle",
+        "full_name": "::Google::Cloud::Bigtable::Admin::V2::BigtableTableAdmin::Client#update_schema_bundle",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Bigtable::Admin::V2::UpdateSchemaBundleRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "BigtableTableAdmin::Client",
+          "full_name": "::Google::Cloud::Bigtable::Admin::V2::BigtableTableAdmin::Client"
+        },
+        "method": {
+          "short_name": "UpdateSchemaBundle",
+          "full_name": "google.bigtable.admin.v2.BigtableTableAdmin.UpdateSchemaBundle",
+          "service": {
+            "short_name": "BigtableTableAdmin",
+            "full_name": "google.bigtable.admin.v2.BigtableTableAdmin"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "bigtableadmin_v2_generated_BigtableTableAdmin_GetSchemaBundle_sync",
+      "title": "Snippet for the get_schema_bundle call in the BigtableTableAdmin service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Bigtable::Admin::V2::BigtableTableAdmin::Client#get_schema_bundle.",
+      "file": "bigtable_table_admin/get_schema_bundle.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_schema_bundle",
+        "full_name": "::Google::Cloud::Bigtable::Admin::V2::BigtableTableAdmin::Client#get_schema_bundle",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Bigtable::Admin::V2::GetSchemaBundleRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Bigtable::Admin::V2::SchemaBundle",
+        "client": {
+          "short_name": "BigtableTableAdmin::Client",
+          "full_name": "::Google::Cloud::Bigtable::Admin::V2::BigtableTableAdmin::Client"
+        },
+        "method": {
+          "short_name": "GetSchemaBundle",
+          "full_name": "google.bigtable.admin.v2.BigtableTableAdmin.GetSchemaBundle",
+          "service": {
+            "short_name": "BigtableTableAdmin",
+            "full_name": "google.bigtable.admin.v2.BigtableTableAdmin"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "bigtableadmin_v2_generated_BigtableTableAdmin_ListSchemaBundles_sync",
+      "title": "Snippet for the list_schema_bundles call in the BigtableTableAdmin service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Bigtable::Admin::V2::BigtableTableAdmin::Client#list_schema_bundles.",
+      "file": "bigtable_table_admin/list_schema_bundles.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_schema_bundles",
+        "full_name": "::Google::Cloud::Bigtable::Admin::V2::BigtableTableAdmin::Client#list_schema_bundles",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Bigtable::Admin::V2::ListSchemaBundlesRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Bigtable::Admin::V2::ListSchemaBundlesResponse",
+        "client": {
+          "short_name": "BigtableTableAdmin::Client",
+          "full_name": "::Google::Cloud::Bigtable::Admin::V2::BigtableTableAdmin::Client"
+        },
+        "method": {
+          "short_name": "ListSchemaBundles",
+          "full_name": "google.bigtable.admin.v2.BigtableTableAdmin.ListSchemaBundles",
+          "service": {
+            "short_name": "BigtableTableAdmin",
+            "full_name": "google.bigtable.admin.v2.BigtableTableAdmin"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "bigtableadmin_v2_generated_BigtableTableAdmin_DeleteSchemaBundle_sync",
+      "title": "Snippet for the delete_schema_bundle call in the BigtableTableAdmin service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Bigtable::Admin::V2::BigtableTableAdmin::Client#delete_schema_bundle.",
+      "file": "bigtable_table_admin/delete_schema_bundle.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_schema_bundle",
+        "full_name": "::Google::Cloud::Bigtable::Admin::V2::BigtableTableAdmin::Client#delete_schema_bundle",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Bigtable::Admin::V2::DeleteSchemaBundleRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Protobuf::Empty",
+        "client": {
+          "short_name": "BigtableTableAdmin::Client",
+          "full_name": "::Google::Cloud::Bigtable::Admin::V2::BigtableTableAdmin::Client"
+        },
+        "method": {
+          "short_name": "DeleteSchemaBundle",
+          "full_name": "google.bigtable.admin.v2.BigtableTableAdmin.DeleteSchemaBundle",
           "service": {
             "short_name": "BigtableTableAdmin",
             "full_name": "google.bigtable.admin.v2.BigtableTableAdmin"

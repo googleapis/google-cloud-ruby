@@ -32,7 +32,7 @@ In order to use this library, you first need to go through the following steps:
 ```ruby
 require "google/cloud/oracle_database/v1"
 
-client = ::Google::Cloud::OracleDatabase::V1::OracleDatabase::Rest::Client.new
+client = ::Google::Cloud::OracleDatabase::V1::OracleDatabase::Client.new
 request = ::Google::Cloud::OracleDatabase::V1::ListCloudExadataInfrastructuresRequest.new # (request fields as keyword arguments...)
 response = client.list_cloud_exadata_infrastructures request
 ```
@@ -75,7 +75,7 @@ constructing a client object. For example:
 require "google/cloud/oracle_database/v1"
 require "logger"
 
-client = ::Google::Cloud::OracleDatabase::V1::OracleDatabase::Rest::Client.new do |config|
+client = ::Google::Cloud::OracleDatabase::V1::OracleDatabase::Client.new do |config|
   config.logger = Logger.new "my-app.log"
 end
 ```

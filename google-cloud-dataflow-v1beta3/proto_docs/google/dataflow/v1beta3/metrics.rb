@@ -53,6 +53,7 @@ module Google
         end
 
         # Describes the state of a metric.
+        # Next ID: 14
         # @!attribute [rw] name
         #   @return [::Google::Cloud::Dataflow::V1beta3::MetricStructuredName]
         #     Name of the metric.
@@ -90,8 +91,12 @@ module Google
         #   @return [::Google::Protobuf::Value]
         #     Worker-computed aggregate value for the "Set" aggregation kind.  The only
         #     possible value type is a list of Values whose type can be Long, Double,
-        #     or String, according to the metric's type.  All Values in the list must
-        #     be of the same type.
+        #     String, or BoundedTrie according to the metric's type.  All Values in the
+        #     list must be of the same type.
+        # @!attribute [rw] trie
+        #   @return [::Google::Protobuf::Value]
+        #     Worker-computed aggregate value for the "Trie" aggregation kind.  The only
+        #     possible value type is a BoundedTrieNode.
         # @!attribute [rw] distribution
         #   @return [::Google::Protobuf::Value]
         #     A struct value describing properties of a distribution of numeric values.
@@ -137,7 +142,8 @@ module Google
 
         # JobMetrics contains a collection of metrics describing the detailed progress
         # of a Dataflow job. Metrics correspond to user-defined and system-defined
-        # metrics in the job.
+        # metrics in the job. For more information, see [Dataflow job metrics]
+        # (https://cloud.google.com/dataflow/docs/guides/using-monitoring-intf).
         #
         # This resource captures only the most recent values of each metric;
         # time-series data can be queried for them (under the same metric names)
@@ -206,6 +212,139 @@ module Google
           end
         end
 
+        # Information useful for straggler identification and debugging.
+        # @!attribute [rw] start_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     The time when the work item attempt became a straggler.
+        # @!attribute [rw] causes
+        #   @return [::Google::Protobuf::Map{::String => ::Google::Cloud::Dataflow::V1beta3::StragglerInfo::StragglerDebuggingInfo}]
+        #     The straggler causes, keyed by the string representation of the
+        #     StragglerCause enum and contains specialized debugging information for each
+        #     straggler cause.
+        class StragglerInfo
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Information useful for debugging a straggler. Each type will provide
+          # specialized debugging information relevant for a particular cause.
+          # The StragglerDebuggingInfo will be 1:1 mapping to the StragglerCause enum.
+          # @!attribute [rw] hot_key
+          #   @return [::Google::Cloud::Dataflow::V1beta3::HotKeyDebuggingInfo]
+          #     Hot key debugging details.
+          class StragglerDebuggingInfo
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # @!attribute [rw] key
+          #   @return [::String]
+          # @!attribute [rw] value
+          #   @return [::Google::Cloud::Dataflow::V1beta3::StragglerInfo::StragglerDebuggingInfo]
+          class CausesEntry
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+        end
+
+        # Information useful for streaming straggler identification and debugging.
+        # @!attribute [rw] start_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Start time of this straggler.
+        # @!attribute [rw] end_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     End time of this straggler.
+        # @!attribute [rw] worker_name
+        #   @return [::String]
+        #     Name of the worker where the straggler was detected.
+        # @!attribute [rw] data_watermark_lag
+        #   @return [::Google::Protobuf::Duration]
+        #     The event-time watermark lag at the time of the straggler detection.
+        # @!attribute [rw] system_watermark_lag
+        #   @return [::Google::Protobuf::Duration]
+        #     The system watermark lag at the time of the straggler detection.
+        class StreamingStragglerInfo
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Information for a straggler.
+        # @!attribute [rw] batch_straggler
+        #   @return [::Google::Cloud::Dataflow::V1beta3::StragglerInfo]
+        #     Batch straggler identification and debugging information.
+        #
+        #     Note: The following fields are mutually exclusive: `batch_straggler`, `streaming_straggler`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] streaming_straggler
+        #   @return [::Google::Cloud::Dataflow::V1beta3::StreamingStragglerInfo]
+        #     Streaming straggler identification and debugging information.
+        #
+        #     Note: The following fields are mutually exclusive: `streaming_straggler`, `batch_straggler`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        class Straggler
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Information useful for debugging a hot key detection.
+        # @!attribute [rw] detected_hot_keys
+        #   @return [::Google::Protobuf::Map{::Integer => ::Google::Cloud::Dataflow::V1beta3::HotKeyDebuggingInfo::HotKeyInfo}]
+        #     Debugging information for each detected hot key. Keyed by a hash of the
+        #     key.
+        class HotKeyDebuggingInfo
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Information about a hot key.
+          # @!attribute [rw] hot_key_age
+          #   @return [::Google::Protobuf::Duration]
+          #     The age of the hot key measured from when it was first detected.
+          # @!attribute [rw] key
+          #   @return [::String]
+          #     A detected hot key that is causing limited parallelism. This field will
+          #     be populated only if the following flag is set to true:
+          #     "--enable_hot_key_logging".
+          # @!attribute [rw] key_truncated
+          #   @return [::Boolean]
+          #     If true, then the above key is truncated and cannot be deserialized. This
+          #     occurs if the key above is populated and the key size is >5MB.
+          class HotKeyInfo
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # @!attribute [rw] key
+          #   @return [::Integer]
+          # @!attribute [rw] value
+          #   @return [::Google::Cloud::Dataflow::V1beta3::HotKeyDebuggingInfo::HotKeyInfo]
+          class DetectedHotKeysEntry
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+        end
+
+        # Summarized straggler identification details.
+        # @!attribute [rw] total_straggler_count
+        #   @return [::Integer]
+        #     The total count of stragglers.
+        # @!attribute [rw] straggler_cause_count
+        #   @return [::Google::Protobuf::Map{::String => ::Integer}]
+        #     Aggregated counts of straggler causes, keyed by the string representation
+        #     of the StragglerCause enum.
+        # @!attribute [rw] recent_stragglers
+        #   @return [::Array<::Google::Cloud::Dataflow::V1beta3::Straggler>]
+        #     The most recent stragglers.
+        class StragglerSummary
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # @!attribute [rw] key
+          #   @return [::String]
+          # @!attribute [rw] value
+          #   @return [::Integer]
+          class StragglerCauseCountEntry
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+        end
+
         # Information about a particular execution stage of a job.
         # @!attribute [rw] stage_id
         #   @return [::String]
@@ -229,6 +368,9 @@ module Google
         # @!attribute [rw] metrics
         #   @return [::Array<::Google::Cloud::Dataflow::V1beta3::MetricUpdate>]
         #     Metrics for this stage.
+        # @!attribute [rw] straggler_summary
+        #   @return [::Google::Cloud::Dataflow::V1beta3::StragglerSummary]
+        #     Straggler summary for this stage.
         class StageSummary
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -310,6 +452,9 @@ module Google
         # @!attribute [rw] metrics
         #   @return [::Array<::Google::Cloud::Dataflow::V1beta3::MetricUpdate>]
         #     Metrics for this work item.
+        # @!attribute [rw] straggler_info
+        #   @return [::Google::Cloud::Dataflow::V1beta3::StragglerInfo]
+        #     Information about straggler detections for this work item.
         class WorkItemDetails
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

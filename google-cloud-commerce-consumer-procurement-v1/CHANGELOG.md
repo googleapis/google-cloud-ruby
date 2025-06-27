@@ -1,5 +1,24 @@
 # Changelog
 
+### 1.4.1 (2025-06-24)
+
+#### Bug Fixes
+
+* Fixed transcoding for update_license_pool RPC ([#30441](https://github.com/googleapis/google-cloud-ruby/issues/30441)) 
+
+### 1.4.0 (2025-05-12)
+
+#### Features
+
+* Updated core dependencies including gapic-common 
+* Updated required Ruby version to 3.1 
+
+### 1.3.1 (2025-04-29)
+
+#### Bug Fixes
+
+* Fixed several issues with validating credential configs 
+
 ### 1.3.0 (2025-01-28)
 
 #### Features

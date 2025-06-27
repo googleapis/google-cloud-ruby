@@ -29,14 +29,25 @@ module Google
         #     {::Google::Cloud::DiscoveryEngine::V1::Engine#solution_type solution_type} is
         #     {::Google::Cloud::DiscoveryEngine::V1::SolutionType::SOLUTION_TYPE_CHAT SOLUTION_TYPE_CHAT}.
         #
-        #     Note: The following fields are mutually exclusive: `chat_engine_config`, `search_engine_config`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `chat_engine_config`, `search_engine_config`, `media_recommendation_engine_config`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] search_engine_config
         #   @return [::Google::Cloud::DiscoveryEngine::V1::Engine::SearchEngineConfig]
         #     Configurations for the Search Engine. Only applicable if
         #     {::Google::Cloud::DiscoveryEngine::V1::Engine#solution_type solution_type} is
         #     {::Google::Cloud::DiscoveryEngine::V1::SolutionType::SOLUTION_TYPE_SEARCH SOLUTION_TYPE_SEARCH}.
         #
-        #     Note: The following fields are mutually exclusive: `search_engine_config`, `chat_engine_config`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `search_engine_config`, `chat_engine_config`, `media_recommendation_engine_config`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] media_recommendation_engine_config
+        #   @return [::Google::Cloud::DiscoveryEngine::V1::Engine::MediaRecommendationEngineConfig]
+        #     Configurations for the Media Engine. Only applicable on the data
+        #     stores with
+        #     {::Google::Cloud::DiscoveryEngine::V1::Engine#solution_type solution_type}
+        #     {::Google::Cloud::DiscoveryEngine::V1::SolutionType::SOLUTION_TYPE_RECOMMENDATION SOLUTION_TYPE_RECOMMENDATION}
+        #     and
+        #     {::Google::Cloud::DiscoveryEngine::V1::IndustryVertical::MEDIA IndustryVertical.MEDIA}
+        #     vertical.
+        #
+        #     Note: The following fields are mutually exclusive: `media_recommendation_engine_config`, `chat_engine_config`, `search_engine_config`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [r] chat_engine_metadata
         #   @return [::Google::Cloud::DiscoveryEngine::V1::Engine::ChatEngineMetadata]
         #     Output only. Additional information of the Chat Engine. Only applicable
@@ -45,7 +56,7 @@ module Google
         #     {::Google::Cloud::DiscoveryEngine::V1::SolutionType::SOLUTION_TYPE_CHAT SOLUTION_TYPE_CHAT}.
         # @!attribute [rw] name
         #   @return [::String]
-        #     Immutable. The fully qualified resource name of the engine.
+        #     Immutable. Identifier. The fully qualified resource name of the engine.
         #
         #     This field must be a UTF-8 encoded string with a length limit of 1024
         #     characters.
@@ -66,7 +77,7 @@ module Google
         #     Output only. Timestamp the Recommendation Engine was last updated.
         # @!attribute [rw] data_store_ids
         #   @return [::Array<::String>]
-        #     The data stores associated with this engine.
+        #     Optional. The data stores associated with this engine.
         #
         #     For
         #     {::Google::Cloud::DiscoveryEngine::V1::SolutionType::SOLUTION_TYPE_SEARCH SOLUTION_TYPE_SEARCH}
@@ -89,7 +100,7 @@ module Google
         #     Required. The solutions of the engine.
         # @!attribute [rw] industry_vertical
         #   @return [::Google::Cloud::DiscoveryEngine::V1::IndustryVertical]
-        #     The industry vertical that the engine registers.
+        #     Optional. The industry vertical that the engine registers.
         #     The restriction of the Engine industry vertical is based on
         #     {::Google::Cloud::DiscoveryEngine::V1::DataStore DataStore}: Vertical on Engine
         #     has to match vertical of the DataStore linked to the engine.
@@ -121,6 +132,131 @@ module Google
           class SearchEngineConfig
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Additional config specs for a Media Recommendation engine.
+          # @!attribute [rw] type
+          #   @return [::String]
+          #     Required. The type of engine. e.g., `recommended-for-you`.
+          #
+          #     This field together with
+          #     {::Google::Cloud::DiscoveryEngine::V1::Engine::MediaRecommendationEngineConfig#optimization_objective optimization_objective}
+          #     describe engine metadata to use to control engine training and serving.
+          #
+          #     Currently supported values: `recommended-for-you`, `others-you-may-like`,
+          #     `more-like-this`, `most-popular-items`.
+          # @!attribute [rw] optimization_objective
+          #   @return [::String]
+          #     The optimization objective. e.g., `cvr`.
+          #
+          #     This field together with
+          #     {::Google::Cloud::DiscoveryEngine::V1::Engine::MediaRecommendationEngineConfig#type optimization_objective}
+          #     describe engine metadata to use to control engine training and serving.
+          #
+          #     Currently supported
+          #     values: `ctr`, `cvr`.
+          #
+          #      If not specified, we choose default based on engine type.
+          #     Default depends on type of recommendation:
+          #
+          #     `recommended-for-you` => `ctr`
+          #
+          #     `others-you-may-like` => `ctr`
+          # @!attribute [rw] optimization_objective_config
+          #   @return [::Google::Cloud::DiscoveryEngine::V1::Engine::MediaRecommendationEngineConfig::OptimizationObjectiveConfig]
+          #     Name and value of the custom threshold for cvr optimization_objective.
+          #     For target_field `watch-time`, target_field_value must be an integer
+          #     value indicating the media progress time in seconds between (0, 86400]
+          #     (excludes 0, includes 86400) (e.g., 90).
+          #     For target_field `watch-percentage`, the target_field_value must be a
+          #     valid float value between (0, 1.0] (excludes 0, includes 1.0) (e.g.,
+          #     0.5).
+          # @!attribute [rw] training_state
+          #   @return [::Google::Cloud::DiscoveryEngine::V1::Engine::MediaRecommendationEngineConfig::TrainingState]
+          #     The training state that the engine is in (e.g.
+          #     `TRAINING` or `PAUSED`).
+          #
+          #     Since part of the cost of running the service
+          #     is frequency of training - this can be used to determine when to train
+          #     engine in order to control cost. If not specified: the default value for
+          #     `CreateEngine` method is `TRAINING`. The default value for
+          #     `UpdateEngine` method is to keep the state the same as before.
+          # @!attribute [rw] engine_features_config
+          #   @return [::Google::Cloud::DiscoveryEngine::V1::Engine::MediaRecommendationEngineConfig::EngineFeaturesConfig]
+          #     Optional. Additional engine features config.
+          class MediaRecommendationEngineConfig
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+
+            # Custom threshold for `cvr` optimization_objective.
+            # @!attribute [rw] target_field
+            #   @return [::String]
+            #     Required. The name of the field to target. Currently supported
+            #     values: `watch-percentage`, `watch-time`.
+            # @!attribute [rw] target_field_value_float
+            #   @return [::Float]
+            #     Required. The threshold to be applied to the target (e.g., 0.5).
+            class OptimizationObjectiveConfig
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
+
+            # More feature configs of the selected engine type.
+            # @!attribute [rw] recommended_for_you_config
+            #   @return [::Google::Cloud::DiscoveryEngine::V1::Engine::MediaRecommendationEngineConfig::RecommendedForYouFeatureConfig]
+            #     Recommended for you engine feature config.
+            #
+            #     Note: The following fields are mutually exclusive: `recommended_for_you_config`, `most_popular_config`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+            # @!attribute [rw] most_popular_config
+            #   @return [::Google::Cloud::DiscoveryEngine::V1::Engine::MediaRecommendationEngineConfig::MostPopularFeatureConfig]
+            #     Most popular engine feature config.
+            #
+            #     Note: The following fields are mutually exclusive: `most_popular_config`, `recommended_for_you_config`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+            class EngineFeaturesConfig
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
+
+            # Additional feature configurations for creating a `recommended-for-you`
+            # engine.
+            # @!attribute [rw] context_event_type
+            #   @return [::String]
+            #     The type of event with which the engine is queried at prediction time.
+            #     If set to `generic`, only `view-item`, `media-play`,and
+            #     `media-complete` will be used as `context-event` in engine training. If
+            #     set to `view-home-page`, `view-home-page` will also be used as
+            #     `context-events` in addition to `view-item`, `media-play`, and
+            #     `media-complete`. Currently supported for the `recommended-for-you`
+            #     engine. Currently supported values: `view-home-page`, `generic`.
+            class RecommendedForYouFeatureConfig
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
+
+            # Feature configurations that are required for creating a Most Popular
+            # engine.
+            # @!attribute [rw] time_window_days
+            #   @return [::Integer]
+            #     The time window of which the engine is queried at training and
+            #     prediction time. Positive integers only. The value translates to the
+            #     last X days of events. Currently required for the `most-popular-items`
+            #     engine.
+            class MostPopularFeatureConfig
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
+
+            # The training state of the engine.
+            module TrainingState
+              # Unspecified training state.
+              TRAINING_STATE_UNSPECIFIED = 0
+
+              # The engine training is paused.
+              PAUSED = 1
+
+              # The engine is training.
+              TRAINING = 2
+            end
           end
 
           # Configurations for a Chat Engine.

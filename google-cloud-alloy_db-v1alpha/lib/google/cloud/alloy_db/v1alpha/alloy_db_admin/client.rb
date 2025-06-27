@@ -717,6 +717,234 @@ module Google
             end
 
             ##
+            # Exports data from the cluster.
+            # Imperative only.
+            #
+            # @overload export_cluster(request, options = nil)
+            #   Pass arguments to `export_cluster` via a request object, either of type
+            #   {::Google::Cloud::AlloyDB::V1alpha::ExportClusterRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::AlloyDB::V1alpha::ExportClusterRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload export_cluster(gcs_destination: nil, csv_export_options: nil, sql_export_options: nil, name: nil, database: nil)
+            #   Pass arguments to `export_cluster` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param gcs_destination [::Google::Cloud::AlloyDB::V1alpha::GcsDestination, ::Hash]
+            #     Required. Option to export data to cloud storage.
+            #   @param csv_export_options [::Google::Cloud::AlloyDB::V1alpha::ExportClusterRequest::CsvExportOptions, ::Hash]
+            #     Options for exporting data in CSV format. Required field to be set for
+            #     CSV file type.
+            #
+            #     Note: The following fields are mutually exclusive: `csv_export_options`, `sql_export_options`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+            #   @param sql_export_options [::Google::Cloud::AlloyDB::V1alpha::ExportClusterRequest::SqlExportOptions, ::Hash]
+            #     Options for exporting data in SQL format. Required field to be set for
+            #     SQL file type.
+            #
+            #     Note: The following fields are mutually exclusive: `sql_export_options`, `csv_export_options`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+            #   @param name [::String]
+            #     Required. The resource name of the cluster.
+            #   @param database [::String]
+            #     Required. Name of the database where the export command will be executed.
+            #     Note - Value provided should be the same as expected from
+            #     `SELECT current_database();` and NOT as a resource reference.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Gapic::Operation]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Gapic::Operation]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/alloy_db/v1alpha"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::AlloyDB::V1alpha::AlloyDBAdmin::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::AlloyDB::V1alpha::ExportClusterRequest.new
+            #
+            #   # Call the export_cluster method.
+            #   result = client.export_cluster request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "No response received."
+            #   end
+            #
+            def export_cluster request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::AlloyDB::V1alpha::ExportClusterRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.export_cluster.metadata.to_h
+
+              # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::AlloyDB::V1alpha::VERSION
+              metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.export_cluster.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.export_cluster.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @alloy_db_admin_stub.call_rpc :export_cluster, request, options: options do |response, operation|
+                response = ::Gapic::Operation.new response, @operations_client, options: options
+                yield response, operation if block_given?
+                throw :response, response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Imports data to the cluster.
+            # Imperative only.
+            #
+            # @overload import_cluster(request, options = nil)
+            #   Pass arguments to `import_cluster` via a request object, either of type
+            #   {::Google::Cloud::AlloyDB::V1alpha::ImportClusterRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::AlloyDB::V1alpha::ImportClusterRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload import_cluster(sql_import_options: nil, csv_import_options: nil, name: nil, gcs_uri: nil, database: nil, user: nil)
+            #   Pass arguments to `import_cluster` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param sql_import_options [::Google::Cloud::AlloyDB::V1alpha::ImportClusterRequest::SqlImportOptions, ::Hash]
+            #     Options for importing data in SQL format.
+            #
+            #     Note: The following fields are mutually exclusive: `sql_import_options`, `csv_import_options`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+            #   @param csv_import_options [::Google::Cloud::AlloyDB::V1alpha::ImportClusterRequest::CsvImportOptions, ::Hash]
+            #     Options for importing data in CSV format.
+            #
+            #     Note: The following fields are mutually exclusive: `csv_import_options`, `sql_import_options`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+            #   @param name [::String]
+            #     Required. The resource name of the cluster.
+            #   @param gcs_uri [::String]
+            #     Required. The path to the file in Google Cloud Storage where the source
+            #     file for import will be stored. The URI is in the form
+            #     `gs://bucketName/fileName`.
+            #   @param database [::String]
+            #     Optional. Name of the database to which the import will be done.
+            #     For import from SQL file, this is required only if the file does not
+            #     specify a database.
+            #     Note - Value provided should be the same as expected from `SELECT
+            #     current_database();` and NOT as a resource reference.
+            #   @param user [::String]
+            #     Optional. Database user to be used for importing the data.
+            #     Note - Value provided should be the same as expected from
+            #     `SELECT current_user;` and NOT as a resource reference.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Gapic::Operation]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Gapic::Operation]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/alloy_db/v1alpha"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::AlloyDB::V1alpha::AlloyDBAdmin::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::AlloyDB::V1alpha::ImportClusterRequest.new
+            #
+            #   # Call the import_cluster method.
+            #   result = client.import_cluster request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "No response received."
+            #   end
+            #
+            def import_cluster request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::AlloyDB::V1alpha::ImportClusterRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.import_cluster.metadata.to_h
+
+              # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::AlloyDB::V1alpha::VERSION
+              metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.import_cluster.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.import_cluster.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @alloy_db_admin_stub.call_rpc :import_cluster, request, options: options do |response, operation|
+                response = ::Gapic::Operation.new response, @operations_client, options: options
+                yield response, operation if block_given?
+                throw :response, response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
             # Upgrades a single Cluster.
             # Imperative only.
             #
@@ -3215,7 +3443,7 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload list_supported_database_flags(parent: nil, page_size: nil, page_token: nil)
+            # @overload list_supported_database_flags(parent: nil, page_size: nil, page_token: nil, scope: nil)
             #   Pass arguments to `list_supported_database_flags` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -3233,6 +3461,9 @@ module Google
             #     If unspecified, server will pick an appropriate default.
             #   @param page_token [::String]
             #     A token identifying a page of results the server should return.
+            #   @param scope [::Google::Cloud::AlloyDB::V1alpha::SupportedDatabaseFlag::Scope]
+            #     Optional. The scope for which supported flags are requested. If not
+            #     specified, default is DATABASE.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Gapic::PagedEnumerable<::Google::Cloud::AlloyDB::V1alpha::SupportedDatabaseFlag>]
@@ -3355,9 +3586,9 @@ module Google
             #   @param public_key [::String]
             #     Optional. The public key from the client.
             #   @param use_metadata_exchange [::Boolean]
-            #     Optional. An optional hint to the endpoint to generate a client
-            #     ceritificate that can be used by AlloyDB connectors to exchange additional
-            #     metadata with the server after TLS handshake.
+            #     Optional. An optional hint to the endpoint to generate a client certificate
+            #     that can be used by AlloyDB connectors to exchange additional metadata with
+            #     the server after TLS handshake.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::AlloyDB::V1alpha::GenerateClientCertificateResponse]
@@ -4236,8 +4467,8 @@ module Google
 
               config_attr :endpoint,      nil, ::String, nil
               config_attr :credentials,   nil do |value|
-                allowed = [::String, ::Hash, ::Proc, ::Symbol, ::Google::Auth::Credentials, ::Signet::OAuth2::Client, nil]
-                allowed += [::GRPC::Core::Channel, ::GRPC::Core::ChannelCredentials] if defined? ::GRPC
+                allowed = [::String, ::Hash, ::Proc, ::Symbol, ::Google::Auth::Credentials, ::Google::Auth::BaseClient, ::Signet::OAuth2::Client, nil]
+                allowed += [::GRPC::Core::Channel, ::GRPC::Core::ChannelCredentials] if defined? ::GRPC::Core::Channel
                 allowed.any? { |klass| klass === value }
               end
               config_attr :scope,         nil, ::String, ::Array, nil
@@ -4317,6 +4548,16 @@ module Google
                 # @return [::Gapic::Config::Method]
                 #
                 attr_reader :update_cluster
+                ##
+                # RPC-specific configuration for `export_cluster`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :export_cluster
+                ##
+                # RPC-specific configuration for `import_cluster`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :import_cluster
                 ##
                 # RPC-specific configuration for `upgrade_cluster`
                 # @return [::Gapic::Config::Method]
@@ -4483,6 +4724,10 @@ module Google
                   @create_cluster = ::Gapic::Config::Method.new create_cluster_config
                   update_cluster_config = parent_rpcs.update_cluster if parent_rpcs.respond_to? :update_cluster
                   @update_cluster = ::Gapic::Config::Method.new update_cluster_config
+                  export_cluster_config = parent_rpcs.export_cluster if parent_rpcs.respond_to? :export_cluster
+                  @export_cluster = ::Gapic::Config::Method.new export_cluster_config
+                  import_cluster_config = parent_rpcs.import_cluster if parent_rpcs.respond_to? :import_cluster
+                  @import_cluster = ::Gapic::Config::Method.new import_cluster_config
                   upgrade_cluster_config = parent_rpcs.upgrade_cluster if parent_rpcs.respond_to? :upgrade_cluster
                   @upgrade_cluster = ::Gapic::Config::Method.new upgrade_cluster_config
                   delete_cluster_config = parent_rpcs.delete_cluster if parent_rpcs.respond_to? :delete_cluster

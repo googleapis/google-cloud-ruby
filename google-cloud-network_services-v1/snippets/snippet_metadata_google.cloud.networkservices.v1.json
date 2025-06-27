@@ -1,7 +1,7 @@
 {
   "client_library": {
     "name": "google-cloud-network_services-v1",
-    "version": "2.0.0",
+    "version": "2.3.0",
     "language": "RUBY",
     "apis": [
       {
@@ -412,6 +412,206 @@
       ]
     },
     {
+      "region_tag": "networkservices_v1_generated_DepService_ListAuthzExtensions_sync",
+      "title": "Snippet for the list_authz_extensions call in the DepService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::NetworkServices::V1::DepService::Client#list_authz_extensions.",
+      "file": "dep_service/list_authz_extensions.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_authz_extensions",
+        "full_name": "::Google::Cloud::NetworkServices::V1::DepService::Client#list_authz_extensions",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::NetworkServices::V1::ListAuthzExtensionsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::NetworkServices::V1::ListAuthzExtensionsResponse",
+        "client": {
+          "short_name": "DepService::Client",
+          "full_name": "::Google::Cloud::NetworkServices::V1::DepService::Client"
+        },
+        "method": {
+          "short_name": "ListAuthzExtensions",
+          "full_name": "google.cloud.networkservices.v1.DepService.ListAuthzExtensions",
+          "service": {
+            "short_name": "DepService",
+            "full_name": "google.cloud.networkservices.v1.DepService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "networkservices_v1_generated_DepService_GetAuthzExtension_sync",
+      "title": "Snippet for the get_authz_extension call in the DepService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::NetworkServices::V1::DepService::Client#get_authz_extension.",
+      "file": "dep_service/get_authz_extension.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_authz_extension",
+        "full_name": "::Google::Cloud::NetworkServices::V1::DepService::Client#get_authz_extension",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::NetworkServices::V1::GetAuthzExtensionRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::NetworkServices::V1::AuthzExtension",
+        "client": {
+          "short_name": "DepService::Client",
+          "full_name": "::Google::Cloud::NetworkServices::V1::DepService::Client"
+        },
+        "method": {
+          "short_name": "GetAuthzExtension",
+          "full_name": "google.cloud.networkservices.v1.DepService.GetAuthzExtension",
+          "service": {
+            "short_name": "DepService",
+            "full_name": "google.cloud.networkservices.v1.DepService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "networkservices_v1_generated_DepService_CreateAuthzExtension_sync",
+      "title": "Snippet for the create_authz_extension call in the DepService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::NetworkServices::V1::DepService::Client#create_authz_extension.",
+      "file": "dep_service/create_authz_extension.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_authz_extension",
+        "full_name": "::Google::Cloud::NetworkServices::V1::DepService::Client#create_authz_extension",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::NetworkServices::V1::CreateAuthzExtensionRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "DepService::Client",
+          "full_name": "::Google::Cloud::NetworkServices::V1::DepService::Client"
+        },
+        "method": {
+          "short_name": "CreateAuthzExtension",
+          "full_name": "google.cloud.networkservices.v1.DepService.CreateAuthzExtension",
+          "service": {
+            "short_name": "DepService",
+            "full_name": "google.cloud.networkservices.v1.DepService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "networkservices_v1_generated_DepService_UpdateAuthzExtension_sync",
+      "title": "Snippet for the update_authz_extension call in the DepService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::NetworkServices::V1::DepService::Client#update_authz_extension.",
+      "file": "dep_service/update_authz_extension.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_authz_extension",
+        "full_name": "::Google::Cloud::NetworkServices::V1::DepService::Client#update_authz_extension",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::NetworkServices::V1::UpdateAuthzExtensionRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "DepService::Client",
+          "full_name": "::Google::Cloud::NetworkServices::V1::DepService::Client"
+        },
+        "method": {
+          "short_name": "UpdateAuthzExtension",
+          "full_name": "google.cloud.networkservices.v1.DepService.UpdateAuthzExtension",
+          "service": {
+            "short_name": "DepService",
+            "full_name": "google.cloud.networkservices.v1.DepService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "networkservices_v1_generated_DepService_DeleteAuthzExtension_sync",
+      "title": "Snippet for the delete_authz_extension call in the DepService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::NetworkServices::V1::DepService::Client#delete_authz_extension.",
+      "file": "dep_service/delete_authz_extension.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_authz_extension",
+        "full_name": "::Google::Cloud::NetworkServices::V1::DepService::Client#delete_authz_extension",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::NetworkServices::V1::DeleteAuthzExtensionRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "DepService::Client",
+          "full_name": "::Google::Cloud::NetworkServices::V1::DepService::Client"
+        },
+        "method": {
+          "short_name": "DeleteAuthzExtension",
+          "full_name": "google.cloud.networkservices.v1.DepService.DeleteAuthzExtension",
+          "service": {
+            "short_name": "DepService",
+            "full_name": "google.cloud.networkservices.v1.DepService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
       "region_tag": "networkservices_v1_generated_NetworkServices_ListEndpointPolicies_sync",
       "title": "Snippet for the list_endpoint_policies call in the NetworkServices service",
       "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::NetworkServices::V1::NetworkServices::Client#list_endpoint_policies.",
@@ -595,6 +795,366 @@
         "method": {
           "short_name": "DeleteEndpointPolicy",
           "full_name": "google.cloud.networkservices.v1.NetworkServices.DeleteEndpointPolicy",
+          "service": {
+            "short_name": "NetworkServices",
+            "full_name": "google.cloud.networkservices.v1.NetworkServices"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "networkservices_v1_generated_NetworkServices_ListWasmPluginVersions_sync",
+      "title": "Snippet for the list_wasm_plugin_versions call in the NetworkServices service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::NetworkServices::V1::NetworkServices::Client#list_wasm_plugin_versions.",
+      "file": "network_services/list_wasm_plugin_versions.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_wasm_plugin_versions",
+        "full_name": "::Google::Cloud::NetworkServices::V1::NetworkServices::Client#list_wasm_plugin_versions",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::NetworkServices::V1::ListWasmPluginVersionsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::NetworkServices::V1::ListWasmPluginVersionsResponse",
+        "client": {
+          "short_name": "NetworkServices::Client",
+          "full_name": "::Google::Cloud::NetworkServices::V1::NetworkServices::Client"
+        },
+        "method": {
+          "short_name": "ListWasmPluginVersions",
+          "full_name": "google.cloud.networkservices.v1.NetworkServices.ListWasmPluginVersions",
+          "service": {
+            "short_name": "NetworkServices",
+            "full_name": "google.cloud.networkservices.v1.NetworkServices"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "networkservices_v1_generated_NetworkServices_GetWasmPluginVersion_sync",
+      "title": "Snippet for the get_wasm_plugin_version call in the NetworkServices service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::NetworkServices::V1::NetworkServices::Client#get_wasm_plugin_version.",
+      "file": "network_services/get_wasm_plugin_version.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_wasm_plugin_version",
+        "full_name": "::Google::Cloud::NetworkServices::V1::NetworkServices::Client#get_wasm_plugin_version",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::NetworkServices::V1::GetWasmPluginVersionRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::NetworkServices::V1::WasmPluginVersion",
+        "client": {
+          "short_name": "NetworkServices::Client",
+          "full_name": "::Google::Cloud::NetworkServices::V1::NetworkServices::Client"
+        },
+        "method": {
+          "short_name": "GetWasmPluginVersion",
+          "full_name": "google.cloud.networkservices.v1.NetworkServices.GetWasmPluginVersion",
+          "service": {
+            "short_name": "NetworkServices",
+            "full_name": "google.cloud.networkservices.v1.NetworkServices"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "networkservices_v1_generated_NetworkServices_CreateWasmPluginVersion_sync",
+      "title": "Snippet for the create_wasm_plugin_version call in the NetworkServices service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::NetworkServices::V1::NetworkServices::Client#create_wasm_plugin_version.",
+      "file": "network_services/create_wasm_plugin_version.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_wasm_plugin_version",
+        "full_name": "::Google::Cloud::NetworkServices::V1::NetworkServices::Client#create_wasm_plugin_version",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::NetworkServices::V1::CreateWasmPluginVersionRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "NetworkServices::Client",
+          "full_name": "::Google::Cloud::NetworkServices::V1::NetworkServices::Client"
+        },
+        "method": {
+          "short_name": "CreateWasmPluginVersion",
+          "full_name": "google.cloud.networkservices.v1.NetworkServices.CreateWasmPluginVersion",
+          "service": {
+            "short_name": "NetworkServices",
+            "full_name": "google.cloud.networkservices.v1.NetworkServices"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "networkservices_v1_generated_NetworkServices_DeleteWasmPluginVersion_sync",
+      "title": "Snippet for the delete_wasm_plugin_version call in the NetworkServices service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::NetworkServices::V1::NetworkServices::Client#delete_wasm_plugin_version.",
+      "file": "network_services/delete_wasm_plugin_version.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_wasm_plugin_version",
+        "full_name": "::Google::Cloud::NetworkServices::V1::NetworkServices::Client#delete_wasm_plugin_version",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::NetworkServices::V1::DeleteWasmPluginVersionRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "NetworkServices::Client",
+          "full_name": "::Google::Cloud::NetworkServices::V1::NetworkServices::Client"
+        },
+        "method": {
+          "short_name": "DeleteWasmPluginVersion",
+          "full_name": "google.cloud.networkservices.v1.NetworkServices.DeleteWasmPluginVersion",
+          "service": {
+            "short_name": "NetworkServices",
+            "full_name": "google.cloud.networkservices.v1.NetworkServices"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "networkservices_v1_generated_NetworkServices_ListWasmPlugins_sync",
+      "title": "Snippet for the list_wasm_plugins call in the NetworkServices service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::NetworkServices::V1::NetworkServices::Client#list_wasm_plugins.",
+      "file": "network_services/list_wasm_plugins.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_wasm_plugins",
+        "full_name": "::Google::Cloud::NetworkServices::V1::NetworkServices::Client#list_wasm_plugins",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::NetworkServices::V1::ListWasmPluginsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::NetworkServices::V1::ListWasmPluginsResponse",
+        "client": {
+          "short_name": "NetworkServices::Client",
+          "full_name": "::Google::Cloud::NetworkServices::V1::NetworkServices::Client"
+        },
+        "method": {
+          "short_name": "ListWasmPlugins",
+          "full_name": "google.cloud.networkservices.v1.NetworkServices.ListWasmPlugins",
+          "service": {
+            "short_name": "NetworkServices",
+            "full_name": "google.cloud.networkservices.v1.NetworkServices"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "networkservices_v1_generated_NetworkServices_GetWasmPlugin_sync",
+      "title": "Snippet for the get_wasm_plugin call in the NetworkServices service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::NetworkServices::V1::NetworkServices::Client#get_wasm_plugin.",
+      "file": "network_services/get_wasm_plugin.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_wasm_plugin",
+        "full_name": "::Google::Cloud::NetworkServices::V1::NetworkServices::Client#get_wasm_plugin",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::NetworkServices::V1::GetWasmPluginRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::NetworkServices::V1::WasmPlugin",
+        "client": {
+          "short_name": "NetworkServices::Client",
+          "full_name": "::Google::Cloud::NetworkServices::V1::NetworkServices::Client"
+        },
+        "method": {
+          "short_name": "GetWasmPlugin",
+          "full_name": "google.cloud.networkservices.v1.NetworkServices.GetWasmPlugin",
+          "service": {
+            "short_name": "NetworkServices",
+            "full_name": "google.cloud.networkservices.v1.NetworkServices"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "networkservices_v1_generated_NetworkServices_CreateWasmPlugin_sync",
+      "title": "Snippet for the create_wasm_plugin call in the NetworkServices service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::NetworkServices::V1::NetworkServices::Client#create_wasm_plugin.",
+      "file": "network_services/create_wasm_plugin.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_wasm_plugin",
+        "full_name": "::Google::Cloud::NetworkServices::V1::NetworkServices::Client#create_wasm_plugin",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::NetworkServices::V1::CreateWasmPluginRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "NetworkServices::Client",
+          "full_name": "::Google::Cloud::NetworkServices::V1::NetworkServices::Client"
+        },
+        "method": {
+          "short_name": "CreateWasmPlugin",
+          "full_name": "google.cloud.networkservices.v1.NetworkServices.CreateWasmPlugin",
+          "service": {
+            "short_name": "NetworkServices",
+            "full_name": "google.cloud.networkservices.v1.NetworkServices"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "networkservices_v1_generated_NetworkServices_UpdateWasmPlugin_sync",
+      "title": "Snippet for the update_wasm_plugin call in the NetworkServices service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::NetworkServices::V1::NetworkServices::Client#update_wasm_plugin.",
+      "file": "network_services/update_wasm_plugin.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_wasm_plugin",
+        "full_name": "::Google::Cloud::NetworkServices::V1::NetworkServices::Client#update_wasm_plugin",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::NetworkServices::V1::UpdateWasmPluginRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "NetworkServices::Client",
+          "full_name": "::Google::Cloud::NetworkServices::V1::NetworkServices::Client"
+        },
+        "method": {
+          "short_name": "UpdateWasmPlugin",
+          "full_name": "google.cloud.networkservices.v1.NetworkServices.UpdateWasmPlugin",
+          "service": {
+            "short_name": "NetworkServices",
+            "full_name": "google.cloud.networkservices.v1.NetworkServices"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "networkservices_v1_generated_NetworkServices_DeleteWasmPlugin_sync",
+      "title": "Snippet for the delete_wasm_plugin call in the NetworkServices service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::NetworkServices::V1::NetworkServices::Client#delete_wasm_plugin.",
+      "file": "network_services/delete_wasm_plugin.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_wasm_plugin",
+        "full_name": "::Google::Cloud::NetworkServices::V1::NetworkServices::Client#delete_wasm_plugin",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::NetworkServices::V1::DeleteWasmPluginRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "NetworkServices::Client",
+          "full_name": "::Google::Cloud::NetworkServices::V1::NetworkServices::Client"
+        },
+        "method": {
+          "short_name": "DeleteWasmPlugin",
+          "full_name": "google.cloud.networkservices.v1.NetworkServices.DeleteWasmPlugin",
           "service": {
             "short_name": "NetworkServices",
             "full_name": "google.cloud.networkservices.v1.NetworkServices"
@@ -1732,6 +2292,46 @@
       ]
     },
     {
+      "region_tag": "networkservices_v1_generated_NetworkServices_UpdateServiceBinding_sync",
+      "title": "Snippet for the update_service_binding call in the NetworkServices service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::NetworkServices::V1::NetworkServices::Client#update_service_binding.",
+      "file": "network_services/update_service_binding.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_service_binding",
+        "full_name": "::Google::Cloud::NetworkServices::V1::NetworkServices::Client#update_service_binding",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::NetworkServices::V1::UpdateServiceBindingRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "NetworkServices::Client",
+          "full_name": "::Google::Cloud::NetworkServices::V1::NetworkServices::Client"
+        },
+        "method": {
+          "short_name": "UpdateServiceBinding",
+          "full_name": "google.cloud.networkservices.v1.NetworkServices.UpdateServiceBinding",
+          "service": {
+            "short_name": "NetworkServices",
+            "full_name": "google.cloud.networkservices.v1.NetworkServices"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
       "region_tag": "networkservices_v1_generated_NetworkServices_DeleteServiceBinding_sync",
       "title": "Snippet for the delete_service_binding call in the NetworkServices service",
       "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::NetworkServices::V1::NetworkServices::Client#delete_service_binding.",
@@ -1967,6 +2567,366 @@
         {
           "start": 20,
           "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "networkservices_v1_generated_NetworkServices_ListServiceLbPolicies_sync",
+      "title": "Snippet for the list_service_lb_policies call in the NetworkServices service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::NetworkServices::V1::NetworkServices::Client#list_service_lb_policies.",
+      "file": "network_services/list_service_lb_policies.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_service_lb_policies",
+        "full_name": "::Google::Cloud::NetworkServices::V1::NetworkServices::Client#list_service_lb_policies",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::NetworkServices::V1::ListServiceLbPoliciesRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::NetworkServices::V1::ListServiceLbPoliciesResponse",
+        "client": {
+          "short_name": "NetworkServices::Client",
+          "full_name": "::Google::Cloud::NetworkServices::V1::NetworkServices::Client"
+        },
+        "method": {
+          "short_name": "ListServiceLbPolicies",
+          "full_name": "google.cloud.networkservices.v1.NetworkServices.ListServiceLbPolicies",
+          "service": {
+            "short_name": "NetworkServices",
+            "full_name": "google.cloud.networkservices.v1.NetworkServices"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "networkservices_v1_generated_NetworkServices_GetServiceLbPolicy_sync",
+      "title": "Snippet for the get_service_lb_policy call in the NetworkServices service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::NetworkServices::V1::NetworkServices::Client#get_service_lb_policy.",
+      "file": "network_services/get_service_lb_policy.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_service_lb_policy",
+        "full_name": "::Google::Cloud::NetworkServices::V1::NetworkServices::Client#get_service_lb_policy",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::NetworkServices::V1::GetServiceLbPolicyRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::NetworkServices::V1::ServiceLbPolicy",
+        "client": {
+          "short_name": "NetworkServices::Client",
+          "full_name": "::Google::Cloud::NetworkServices::V1::NetworkServices::Client"
+        },
+        "method": {
+          "short_name": "GetServiceLbPolicy",
+          "full_name": "google.cloud.networkservices.v1.NetworkServices.GetServiceLbPolicy",
+          "service": {
+            "short_name": "NetworkServices",
+            "full_name": "google.cloud.networkservices.v1.NetworkServices"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "networkservices_v1_generated_NetworkServices_CreateServiceLbPolicy_sync",
+      "title": "Snippet for the create_service_lb_policy call in the NetworkServices service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::NetworkServices::V1::NetworkServices::Client#create_service_lb_policy.",
+      "file": "network_services/create_service_lb_policy.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_service_lb_policy",
+        "full_name": "::Google::Cloud::NetworkServices::V1::NetworkServices::Client#create_service_lb_policy",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::NetworkServices::V1::CreateServiceLbPolicyRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "NetworkServices::Client",
+          "full_name": "::Google::Cloud::NetworkServices::V1::NetworkServices::Client"
+        },
+        "method": {
+          "short_name": "CreateServiceLbPolicy",
+          "full_name": "google.cloud.networkservices.v1.NetworkServices.CreateServiceLbPolicy",
+          "service": {
+            "short_name": "NetworkServices",
+            "full_name": "google.cloud.networkservices.v1.NetworkServices"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "networkservices_v1_generated_NetworkServices_UpdateServiceLbPolicy_sync",
+      "title": "Snippet for the update_service_lb_policy call in the NetworkServices service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::NetworkServices::V1::NetworkServices::Client#update_service_lb_policy.",
+      "file": "network_services/update_service_lb_policy.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_service_lb_policy",
+        "full_name": "::Google::Cloud::NetworkServices::V1::NetworkServices::Client#update_service_lb_policy",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::NetworkServices::V1::UpdateServiceLbPolicyRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "NetworkServices::Client",
+          "full_name": "::Google::Cloud::NetworkServices::V1::NetworkServices::Client"
+        },
+        "method": {
+          "short_name": "UpdateServiceLbPolicy",
+          "full_name": "google.cloud.networkservices.v1.NetworkServices.UpdateServiceLbPolicy",
+          "service": {
+            "short_name": "NetworkServices",
+            "full_name": "google.cloud.networkservices.v1.NetworkServices"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "networkservices_v1_generated_NetworkServices_DeleteServiceLbPolicy_sync",
+      "title": "Snippet for the delete_service_lb_policy call in the NetworkServices service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::NetworkServices::V1::NetworkServices::Client#delete_service_lb_policy.",
+      "file": "network_services/delete_service_lb_policy.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_service_lb_policy",
+        "full_name": "::Google::Cloud::NetworkServices::V1::NetworkServices::Client#delete_service_lb_policy",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::NetworkServices::V1::DeleteServiceLbPolicyRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "NetworkServices::Client",
+          "full_name": "::Google::Cloud::NetworkServices::V1::NetworkServices::Client"
+        },
+        "method": {
+          "short_name": "DeleteServiceLbPolicy",
+          "full_name": "google.cloud.networkservices.v1.NetworkServices.DeleteServiceLbPolicy",
+          "service": {
+            "short_name": "NetworkServices",
+            "full_name": "google.cloud.networkservices.v1.NetworkServices"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "networkservices_v1_generated_NetworkServices_GetGatewayRouteView_sync",
+      "title": "Snippet for the get_gateway_route_view call in the NetworkServices service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::NetworkServices::V1::NetworkServices::Client#get_gateway_route_view.",
+      "file": "network_services/get_gateway_route_view.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_gateway_route_view",
+        "full_name": "::Google::Cloud::NetworkServices::V1::NetworkServices::Client#get_gateway_route_view",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::NetworkServices::V1::GetGatewayRouteViewRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::NetworkServices::V1::GatewayRouteView",
+        "client": {
+          "short_name": "NetworkServices::Client",
+          "full_name": "::Google::Cloud::NetworkServices::V1::NetworkServices::Client"
+        },
+        "method": {
+          "short_name": "GetGatewayRouteView",
+          "full_name": "google.cloud.networkservices.v1.NetworkServices.GetGatewayRouteView",
+          "service": {
+            "short_name": "NetworkServices",
+            "full_name": "google.cloud.networkservices.v1.NetworkServices"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "networkservices_v1_generated_NetworkServices_GetMeshRouteView_sync",
+      "title": "Snippet for the get_mesh_route_view call in the NetworkServices service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::NetworkServices::V1::NetworkServices::Client#get_mesh_route_view.",
+      "file": "network_services/get_mesh_route_view.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_mesh_route_view",
+        "full_name": "::Google::Cloud::NetworkServices::V1::NetworkServices::Client#get_mesh_route_view",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::NetworkServices::V1::GetMeshRouteViewRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::NetworkServices::V1::MeshRouteView",
+        "client": {
+          "short_name": "NetworkServices::Client",
+          "full_name": "::Google::Cloud::NetworkServices::V1::NetworkServices::Client"
+        },
+        "method": {
+          "short_name": "GetMeshRouteView",
+          "full_name": "google.cloud.networkservices.v1.NetworkServices.GetMeshRouteView",
+          "service": {
+            "short_name": "NetworkServices",
+            "full_name": "google.cloud.networkservices.v1.NetworkServices"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "networkservices_v1_generated_NetworkServices_ListGatewayRouteViews_sync",
+      "title": "Snippet for the list_gateway_route_views call in the NetworkServices service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::NetworkServices::V1::NetworkServices::Client#list_gateway_route_views.",
+      "file": "network_services/list_gateway_route_views.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_gateway_route_views",
+        "full_name": "::Google::Cloud::NetworkServices::V1::NetworkServices::Client#list_gateway_route_views",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::NetworkServices::V1::ListGatewayRouteViewsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::NetworkServices::V1::ListGatewayRouteViewsResponse",
+        "client": {
+          "short_name": "NetworkServices::Client",
+          "full_name": "::Google::Cloud::NetworkServices::V1::NetworkServices::Client"
+        },
+        "method": {
+          "short_name": "ListGatewayRouteViews",
+          "full_name": "google.cloud.networkservices.v1.NetworkServices.ListGatewayRouteViews",
+          "service": {
+            "short_name": "NetworkServices",
+            "full_name": "google.cloud.networkservices.v1.NetworkServices"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "networkservices_v1_generated_NetworkServices_ListMeshRouteViews_sync",
+      "title": "Snippet for the list_mesh_route_views call in the NetworkServices service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::NetworkServices::V1::NetworkServices::Client#list_mesh_route_views.",
+      "file": "network_services/list_mesh_route_views.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_mesh_route_views",
+        "full_name": "::Google::Cloud::NetworkServices::V1::NetworkServices::Client#list_mesh_route_views",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::NetworkServices::V1::ListMeshRouteViewsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::NetworkServices::V1::ListMeshRouteViewsResponse",
+        "client": {
+          "short_name": "NetworkServices::Client",
+          "full_name": "::Google::Cloud::NetworkServices::V1::NetworkServices::Client"
+        },
+        "method": {
+          "short_name": "ListMeshRouteViews",
+          "full_name": "google.cloud.networkservices.v1.NetworkServices.ListMeshRouteViews",
+          "service": {
+            "short_name": "NetworkServices",
+            "full_name": "google.cloud.networkservices.v1.NetworkServices"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
           "type": "FULL"
         }
       ]

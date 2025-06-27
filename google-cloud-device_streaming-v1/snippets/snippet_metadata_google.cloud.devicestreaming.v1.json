@@ -1,0 +1,255 @@
+{
+  "client_library": {
+    "name": "google-cloud-device_streaming-v1",
+    "version": "0.1.0",
+    "language": "RUBY",
+    "apis": [
+      {
+        "id": "google.cloud.devicestreaming.v1",
+        "version": "v1"
+      }
+    ]
+  },
+  "snippets": [
+    {
+      "region_tag": "devicestreaming_v1_generated_DirectAccessService_CreateDeviceSession_sync",
+      "title": "Snippet for the create_device_session call in the DirectAccessService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DeviceStreaming::V1::DirectAccessService::Client#create_device_session.",
+      "file": "direct_access_service/create_device_session.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_device_session",
+        "full_name": "::Google::Cloud::DeviceStreaming::V1::DirectAccessService::Client#create_device_session",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::DeviceStreaming::V1::CreateDeviceSessionRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::DeviceStreaming::V1::DeviceSession",
+        "client": {
+          "short_name": "DirectAccessService::Client",
+          "full_name": "::Google::Cloud::DeviceStreaming::V1::DirectAccessService::Client"
+        },
+        "method": {
+          "short_name": "CreateDeviceSession",
+          "full_name": "google.cloud.devicestreaming.v1.DirectAccessService.CreateDeviceSession",
+          "service": {
+            "short_name": "DirectAccessService",
+            "full_name": "google.cloud.devicestreaming.v1.DirectAccessService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "devicestreaming_v1_generated_DirectAccessService_ListDeviceSessions_sync",
+      "title": "Snippet for the list_device_sessions call in the DirectAccessService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DeviceStreaming::V1::DirectAccessService::Client#list_device_sessions.",
+      "file": "direct_access_service/list_device_sessions.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_device_sessions",
+        "full_name": "::Google::Cloud::DeviceStreaming::V1::DirectAccessService::Client#list_device_sessions",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::DeviceStreaming::V1::ListDeviceSessionsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::DeviceStreaming::V1::ListDeviceSessionsResponse",
+        "client": {
+          "short_name": "DirectAccessService::Client",
+          "full_name": "::Google::Cloud::DeviceStreaming::V1::DirectAccessService::Client"
+        },
+        "method": {
+          "short_name": "ListDeviceSessions",
+          "full_name": "google.cloud.devicestreaming.v1.DirectAccessService.ListDeviceSessions",
+          "service": {
+            "short_name": "DirectAccessService",
+            "full_name": "google.cloud.devicestreaming.v1.DirectAccessService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "devicestreaming_v1_generated_DirectAccessService_GetDeviceSession_sync",
+      "title": "Snippet for the get_device_session call in the DirectAccessService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DeviceStreaming::V1::DirectAccessService::Client#get_device_session.",
+      "file": "direct_access_service/get_device_session.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_device_session",
+        "full_name": "::Google::Cloud::DeviceStreaming::V1::DirectAccessService::Client#get_device_session",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::DeviceStreaming::V1::GetDeviceSessionRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::DeviceStreaming::V1::DeviceSession",
+        "client": {
+          "short_name": "DirectAccessService::Client",
+          "full_name": "::Google::Cloud::DeviceStreaming::V1::DirectAccessService::Client"
+        },
+        "method": {
+          "short_name": "GetDeviceSession",
+          "full_name": "google.cloud.devicestreaming.v1.DirectAccessService.GetDeviceSession",
+          "service": {
+            "short_name": "DirectAccessService",
+            "full_name": "google.cloud.devicestreaming.v1.DirectAccessService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "devicestreaming_v1_generated_DirectAccessService_CancelDeviceSession_sync",
+      "title": "Snippet for the cancel_device_session call in the DirectAccessService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DeviceStreaming::V1::DirectAccessService::Client#cancel_device_session.",
+      "file": "direct_access_service/cancel_device_session.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "cancel_device_session",
+        "full_name": "::Google::Cloud::DeviceStreaming::V1::DirectAccessService::Client#cancel_device_session",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::DeviceStreaming::V1::CancelDeviceSessionRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Protobuf::Empty",
+        "client": {
+          "short_name": "DirectAccessService::Client",
+          "full_name": "::Google::Cloud::DeviceStreaming::V1::DirectAccessService::Client"
+        },
+        "method": {
+          "short_name": "CancelDeviceSession",
+          "full_name": "google.cloud.devicestreaming.v1.DirectAccessService.CancelDeviceSession",
+          "service": {
+            "short_name": "DirectAccessService",
+            "full_name": "google.cloud.devicestreaming.v1.DirectAccessService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "devicestreaming_v1_generated_DirectAccessService_UpdateDeviceSession_sync",
+      "title": "Snippet for the update_device_session call in the DirectAccessService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DeviceStreaming::V1::DirectAccessService::Client#update_device_session.",
+      "file": "direct_access_service/update_device_session.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_device_session",
+        "full_name": "::Google::Cloud::DeviceStreaming::V1::DirectAccessService::Client#update_device_session",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::DeviceStreaming::V1::UpdateDeviceSessionRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::DeviceStreaming::V1::DeviceSession",
+        "client": {
+          "short_name": "DirectAccessService::Client",
+          "full_name": "::Google::Cloud::DeviceStreaming::V1::DirectAccessService::Client"
+        },
+        "method": {
+          "short_name": "UpdateDeviceSession",
+          "full_name": "google.cloud.devicestreaming.v1.DirectAccessService.UpdateDeviceSession",
+          "service": {
+            "short_name": "DirectAccessService",
+            "full_name": "google.cloud.devicestreaming.v1.DirectAccessService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "devicestreaming_v1_generated_DirectAccessService_AdbConnect_sync",
+      "title": "Snippet for the adb_connect call in the DirectAccessService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DeviceStreaming::V1::DirectAccessService::Client#adb_connect.",
+      "file": "direct_access_service/adb_connect.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "adb_connect",
+        "full_name": "::Google::Cloud::DeviceStreaming::V1::DirectAccessService::Client#adb_connect",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::DeviceStreaming::V1::AdbMessage",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::DeviceStreaming::V1::DeviceMessage",
+        "client": {
+          "short_name": "DirectAccessService::Client",
+          "full_name": "::Google::Cloud::DeviceStreaming::V1::DirectAccessService::Client"
+        },
+        "method": {
+          "short_name": "AdbConnect",
+          "full_name": "google.cloud.devicestreaming.v1.DirectAccessService.AdbConnect",
+          "service": {
+            "short_name": "DirectAccessService",
+            "full_name": "google.cloud.devicestreaming.v1.DirectAccessService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 55,
+          "type": "FULL"
+        }
+      ]
+    }
+  ]
+}

@@ -338,6 +338,49 @@ module Google
         # @!attribute [rw] tile_navigation_spec
         #   @return [::Google::Cloud::Retail::V2::SearchRequest::TileNavigationSpec]
         #     Optional. This field specifies tile navigation related parameters.
+        # @!attribute [rw] language_code
+        #   @return [::String]
+        #     Optional. The BCP-47 language code, such as "en-US" or "sr-Latn"
+        #     [list](https://www.unicode.org/cldr/charts/46/summary/root.html). For more
+        #     information, see [Standardized codes](https://google.aip.dev/143). This
+        #     field helps to better interpret the query. If a value isn't specified, the
+        #     query language code is automatically detected, which may not be accurate.
+        # @!attribute [rw] region_code
+        #   @return [::String]
+        #     Optional. The Unicode country/region code (CLDR) of a location, such as
+        #     "US" and "419"
+        #     [list](https://www.unicode.org/cldr/charts/46/supplemental/territory_information.html).
+        #     For more information, see [Standardized codes](https://google.aip.dev/143).
+        #     If set, then results will be boosted based on the region_code provided.
+        # @!attribute [rw] place_id
+        #   @return [::String]
+        #     Optional. An id corresponding to a place, such as a store id or region id.
+        #     When specified, we use the price from the local inventory with the matching
+        #     product's
+        #     {::Google::Cloud::Retail::V2::LocalInventory#place_id LocalInventory.place_id}
+        #     for revenue optimization.
+        # @!attribute [rw] user_attributes
+        #   @return [::Google::Protobuf::Map{::String => ::Google::Cloud::Retail::V2::StringList}]
+        #     Optional. The user attributes that could be used for personalization of
+        #     search results.
+        #     * Populate at most 100 key-value pairs per query.
+        #     * Only supports string keys and repeated string values.
+        #     * Duplcate keys are not allowed within a single query.
+        #
+        #     Example:
+        #        user_attributes: [
+        #         { key: "pets"
+        #           value {
+        #             values: "dog"
+        #             values: "cat"
+        #           }
+        #         },
+        #         { key: "state"
+        #           value {
+        #             values: "CA"
+        #           }
+        #         }
+        #        ]
         class SearchRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -356,7 +399,6 @@ module Google
           # @!attribute [rw] excluded_filter_keys
           #   @return [::Array<::String>]
           #     List of keys to exclude when faceting.
-          #
           #
           #     By default,
           #     {::Google::Cloud::Retail::V2::SearchRequest::FacetSpec::FacetKey#key FacetKey.key}
@@ -606,7 +648,7 @@ module Google
           # @!attribute [rw] condition_boost_specs
           #   @return [::Array<::Google::Cloud::Retail::V2::SearchRequest::BoostSpec::ConditionBoostSpec>]
           #     Condition boost specifications. If a product matches multiple conditions
-          #     in the specifictions, boost scores from these specifications are all
+          #     in the specifications, boost scores from these specifications are all
           #     applied and combined in a non-linear way. Maximum number of
           #     specifications is 20.
           # @!attribute [rw] skip_boost_spec_validation
@@ -669,7 +711,8 @@ module Google
           #     {::Google::Cloud::Retail::V2::SearchRequest::QueryExpansionSpec::Condition::DISABLED Condition.DISABLED}.
           # @!attribute [rw] pin_unexpanded_results
           #   @return [::Boolean]
-          #     Whether to pin unexpanded results. If this field is set to true,
+          #     Whether to pin unexpanded results. The default value is false. If this
+          #     field is set to true,
           #     unexpanded products are always at the top of the search results, followed
           #     by the expanded results.
           class QueryExpansionSpec
@@ -813,9 +856,14 @@ module Google
           #     navigation.
           # @!attribute [rw] applied_tiles
           #   @return [::Array<::Google::Cloud::Retail::V2::Tile>]
-          #     This field specifies the tiles which are already clicked in client side.
-          #     NOTE: This field is not being used for filtering search products. Client
-          #     side should also put all the applied tiles in
+          #     This optional field specifies the tiles which are already clicked in
+          #     client side. While the feature works without this field set, particularly
+          #     for an initial query, it is highly recommended to set this field because
+          #     it can improve the quality of the search response and removes possible
+          #     duplicate tiles.
+          #
+          #     NOTE: This field is not being used for filtering search
+          #     products. Client side should also put all the applied tiles in
           #     {::Google::Cloud::Retail::V2::SearchRequest#filter SearchRequest.filter}.
           class TileNavigationSpec
             include ::Google::Protobuf::MessageExts
@@ -827,6 +875,15 @@ module Google
           # @!attribute [rw] value
           #   @return [::String]
           class LabelsEntry
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # @!attribute [rw] key
+          #   @return [::String]
+          # @!attribute [rw] value
+          #   @return [::Google::Cloud::Retail::V2::StringList]
+          class UserAttributesEntry
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
@@ -915,6 +972,14 @@ module Google
         #   @return [::Array<::String>]
         #     The fully qualified resource name of applied
         #     [controls](https://cloud.google.com/retail/docs/serving-control-rules).
+        # @!attribute [rw] pin_control_metadata
+        #   @return [::Google::Cloud::Retail::V2::PinControlMetadata]
+        #     Metadata for pin controls which were applicable to the request.
+        #     This contains two map fields, one for all matched pins and one for pins
+        #     which were matched but not applied.
+        #
+        #     The two maps are keyed by pin position, and the values are the product ids
+        #     which were matched to that pin.
         # @!attribute [rw] invalid_condition_boost_specs
         #   @return [::Array<::Google::Cloud::Retail::V2::SearchRequest::BoostSpec::ConditionBoostSpec>]
         #     The invalid
@@ -922,7 +987,7 @@ module Google
         #     that are not applied during serving.
         # @!attribute [rw] experiment_info
         #   @return [::Array<::Google::Cloud::Retail::V2::ExperimentInfo>]
-        #     Metadata related to A/B testing [Experiment][] associated with this
+        #     Metadata related to A/B testing experiment associated with this
         #     response. Only exists when an experiment is triggered.
         # @!attribute [rw] conversational_search_result
         #   @return [::Google::Cloud::Retail::V2::SearchResponse::ConversationalSearchResult]
@@ -1023,6 +1088,9 @@ module Google
           #     Possible values:
           #
           #     * `purchased`: Indicates that this product has been purchased before.
+          # @!attribute [rw] model_scores
+          #   @return [::Google::Protobuf::Map{::String => ::Google::Cloud::Retail::V2::DoubleList}]
+          #     Google provided available scores.
           class SearchResult
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -1041,6 +1109,15 @@ module Google
             # @!attribute [rw] value
             #   @return [::Google::Protobuf::Value]
             class VariantRollupValuesEntry
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
+
+            # @!attribute [rw] key
+            #   @return [::String]
+            # @!attribute [rw] value
+            #   @return [::Google::Cloud::Retail::V2::DoubleList]
+            class ModelScoresEntry
               include ::Google::Protobuf::MessageExts
               extend ::Google::Protobuf::MessageExts::ClassMethods
             end
@@ -1186,7 +1263,7 @@ module Google
           end
         end
 
-        # Metadata for active A/B testing [Experiment][].
+        # Metadata for active A/B testing experiment.
         # @!attribute [rw] serving_config_experiment
         #   @return [::Google::Cloud::Retail::V2::ExperimentInfo::ServingConfigExperiment]
         #     A/B test between existing Cloud Retail Search
@@ -1210,7 +1287,7 @@ module Google
           # @!attribute [rw] experiment_serving_config
           #   @return [::String]
           #     The fully qualified resource name of the serving config
-          #     [Experiment.VariantArm.serving_config_id][] responsible for generating
+          #     `Experiment.VariantArm.serving_config_id` responsible for generating
           #     the search response. For example:
           #     `projects/*/locations/*/catalogs/*/servingConfigs/*`.
           class ServingConfigExperiment

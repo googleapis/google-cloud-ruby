@@ -792,7 +792,7 @@ module Google
                 #   @param options [::Gapic::CallOptions, ::Hash]
                 #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
                 #
-                # @overload update_database_ddl(database: nil, statements: nil, operation_id: nil, proto_descriptors: nil)
+                # @overload update_database_ddl(database: nil, statements: nil, operation_id: nil, proto_descriptors: nil, throughput_mode: nil)
                 #   Pass arguments to `update_database_ddl` via keyword arguments. Note that at
                 #   least one keyword argument is required. To specify no parameters, or to keep all
                 #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -838,6 +838,10 @@ module Google
                 #     ```
                 #     For more details, see protobuffer [self
                 #     description](https://developers.google.com/protocol-buffers/docs/techniques#self-description).
+                #   @param throughput_mode [::Boolean]
+                #     Optional. This field is exposed to be used by the Spanner Migration Tool.
+                #     For more details, see
+                #     [SMT](https://github.com/GoogleCloudPlatform/spanner-migration-tool).
                 #
                 # @yield [response, operation] Access the result along with the RPC operation
                 # @yieldparam response [::Gapic::Operation]
@@ -3283,8 +3287,8 @@ module Google
 
                   config_attr :endpoint,      nil, ::String, nil
                   config_attr :credentials,   nil do |value|
-                    allowed = [::String, ::Hash, ::Proc, ::Symbol, ::Google::Auth::Credentials, ::Signet::OAuth2::Client, nil]
-                    allowed += [::GRPC::Core::Channel, ::GRPC::Core::ChannelCredentials] if defined? ::GRPC
+                    allowed = [::String, ::Hash, ::Proc, ::Symbol, ::Google::Auth::Credentials, ::Google::Auth::BaseClient, ::Signet::OAuth2::Client, nil]
+                    allowed += [::GRPC::Core::Channel, ::GRPC::Core::ChannelCredentials] if defined? ::GRPC::Core::Channel
                     allowed.any? { |klass| klass === value }
                   end
                   config_attr :scope,         nil, ::String, ::Array, nil

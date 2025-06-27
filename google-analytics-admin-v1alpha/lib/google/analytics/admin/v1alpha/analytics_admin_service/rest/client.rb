@@ -12498,7 +12498,7 @@ module Google
               #   @param options [::Gapic::CallOptions, ::Hash]
               #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
               #
-              # @overload provision_subproperty(subproperty: nil, subproperty_event_filter: nil)
+              # @overload provision_subproperty(subproperty: nil, subproperty_event_filter: nil, custom_dimension_and_metric_synchronization_mode: nil)
               #   Pass arguments to `provision_subproperty` via keyword arguments. Note that at
               #   least one keyword argument is required. To specify no parameters, or to keep all
               #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -12507,6 +12507,9 @@ module Google
               #     Required. The subproperty to create.
               #   @param subproperty_event_filter [::Google::Analytics::Admin::V1alpha::SubpropertyEventFilter, ::Hash]
               #     Optional. The subproperty event filter to create on an ordinary property.
+              #   @param custom_dimension_and_metric_synchronization_mode [::Google::Analytics::Admin::V1alpha::SubpropertySyncConfig::SynchronizationMode]
+              #     Optional. The subproperty feature synchronization mode for Custom
+              #     Dimensions and Metrics
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Google::Analytics::Admin::V1alpha::ProvisionSubpropertyResponse]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
@@ -12989,6 +12992,834 @@ module Google
               end
 
               ##
+              # Creates a Reporting Data Annotation.
+              #
+              # @overload create_reporting_data_annotation(request, options = nil)
+              #   Pass arguments to `create_reporting_data_annotation` via a request object, either of type
+              #   {::Google::Analytics::Admin::V1alpha::CreateReportingDataAnnotationRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Analytics::Admin::V1alpha::CreateReportingDataAnnotationRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload create_reporting_data_annotation(parent: nil, reporting_data_annotation: nil)
+              #   Pass arguments to `create_reporting_data_annotation` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param parent [::String]
+              #     Required. The property for which to create a Reporting Data Annotation.
+              #     Format: properties/property_id
+              #     Example: properties/123
+              #   @param reporting_data_annotation [::Google::Analytics::Admin::V1alpha::ReportingDataAnnotation, ::Hash]
+              #     Required. The Reporting Data Annotation to create.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Analytics::Admin::V1alpha::ReportingDataAnnotation]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Analytics::Admin::V1alpha::ReportingDataAnnotation]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/analytics/admin/v1alpha"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Analytics::Admin::V1alpha::CreateReportingDataAnnotationRequest.new
+              #
+              #   # Call the create_reporting_data_annotation method.
+              #   result = client.create_reporting_data_annotation request
+              #
+              #   # The returned object is of type Google::Analytics::Admin::V1alpha::ReportingDataAnnotation.
+              #   p result
+              #
+              def create_reporting_data_annotation request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Analytics::Admin::V1alpha::CreateReportingDataAnnotationRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.create_reporting_data_annotation.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Analytics::Admin::V1alpha::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.create_reporting_data_annotation.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.create_reporting_data_annotation.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @analytics_admin_service_stub.create_reporting_data_annotation request, options do |result, operation|
+                  yield result, operation if block_given?
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Lookup a single Reporting Data Annotation.
+              #
+              # @overload get_reporting_data_annotation(request, options = nil)
+              #   Pass arguments to `get_reporting_data_annotation` via a request object, either of type
+              #   {::Google::Analytics::Admin::V1alpha::GetReportingDataAnnotationRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Analytics::Admin::V1alpha::GetReportingDataAnnotationRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload get_reporting_data_annotation(name: nil)
+              #   Pass arguments to `get_reporting_data_annotation` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param name [::String]
+              #     Required. Resource name of the Reporting Data Annotation to lookup.
+              #     Format:
+              #     properties/property_id/reportingDataAnnotations/reportingDataAnnotation
+              #     Example: properties/123/reportingDataAnnotations/456
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Analytics::Admin::V1alpha::ReportingDataAnnotation]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Analytics::Admin::V1alpha::ReportingDataAnnotation]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/analytics/admin/v1alpha"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Analytics::Admin::V1alpha::GetReportingDataAnnotationRequest.new
+              #
+              #   # Call the get_reporting_data_annotation method.
+              #   result = client.get_reporting_data_annotation request
+              #
+              #   # The returned object is of type Google::Analytics::Admin::V1alpha::ReportingDataAnnotation.
+              #   p result
+              #
+              def get_reporting_data_annotation request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Analytics::Admin::V1alpha::GetReportingDataAnnotationRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.get_reporting_data_annotation.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Analytics::Admin::V1alpha::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.get_reporting_data_annotation.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.get_reporting_data_annotation.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @analytics_admin_service_stub.get_reporting_data_annotation request, options do |result, operation|
+                  yield result, operation if block_given?
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # List all Reporting Data Annotations on a property.
+              #
+              # @overload list_reporting_data_annotations(request, options = nil)
+              #   Pass arguments to `list_reporting_data_annotations` via a request object, either of type
+              #   {::Google::Analytics::Admin::V1alpha::ListReportingDataAnnotationsRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Analytics::Admin::V1alpha::ListReportingDataAnnotationsRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload list_reporting_data_annotations(parent: nil, filter: nil, page_size: nil, page_token: nil)
+              #   Pass arguments to `list_reporting_data_annotations` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param parent [::String]
+              #     Required. Resource name of the property.
+              #     Format: properties/property_id
+              #     Example: properties/123
+              #   @param filter [::String]
+              #     Optional. Filter that restricts which reporting data annotations under the
+              #     parent property are listed.
+              #
+              #     Supported fields are:
+              #
+              #       * 'name'
+              #       * `title`
+              #       * `description`
+              #       * `annotation_date`
+              #       * `annotation_date_range`
+              #       * `color`
+              #
+              #     Additionally, this API provides the following helper functions:
+              #
+              #       * annotation_duration() : the duration that this annotation marks,
+              #       [durations](https://github.com/protocolbuffers/protobuf/blob/main/src/google/protobuf/duration.proto).
+              #       expect a numeric representation of seconds followed by an `s` suffix.
+              #       * is_annotation_in_range(start_date, end_date)  : if the annotation is in
+              #       the range specified by the `start_date` and `end_date`. The dates are in
+              #       ISO-8601 format, for example `2031-06-28`.
+              #
+              #     Supported operations:
+              #
+              #     * `=` : equals
+              #     * `!=` : not equals
+              #     * `<` : less than
+              #     * `>` : greater than
+              #     * `<=` :  less than or equals
+              #     * `>=` : greater than or equals
+              #     * `:` : has operator
+              #     * `=~` : [regular expression](https://github.com/google/re2/wiki/Syntax)
+              #     match
+              #     * `!~` : [regular expression](https://github.com/google/re2/wiki/Syntax)
+              #     does not match
+              #     * `NOT` : Logical not
+              #     * `AND` : Logical and
+              #     * `OR` : Logical or
+              #
+              #     Examples:
+              #
+              #       1. `title="Holiday Sale"`
+              #       2. `description=~"[Bb]ig [Gg]ame.*[Ss]ale"`
+              #       3. `is_annotation_in_range("2025-12-25", "2026-01-16") = true`
+              #       4. `annotation_duration() >= 172800s AND title:BOGO`
+              #   @param page_size [::Integer]
+              #     Optional. The maximum number of resources to return. The service may return
+              #     fewer than this value, even if there are additional pages. If unspecified,
+              #     at most 50 resources will be returned. The maximum value is 200; (higher
+              #     values will be coerced to the maximum)
+              #   @param page_token [::String]
+              #     Optional. A page token, received from a previous
+              #     `ListReportingDataAnnotations` call. Provide this to retrieve the
+              #     subsequent page. When paginating, all other parameters provided to
+              #     `ListReportingDataAnnotations` must match the call that provided the page
+              #     token.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Analytics::Admin::V1alpha::ReportingDataAnnotation>]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Gapic::Rest::PagedEnumerable<::Google::Analytics::Admin::V1alpha::ReportingDataAnnotation>]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/analytics/admin/v1alpha"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Analytics::Admin::V1alpha::ListReportingDataAnnotationsRequest.new
+              #
+              #   # Call the list_reporting_data_annotations method.
+              #   result = client.list_reporting_data_annotations request
+              #
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
+              #     # Each element is of type ::Google::Analytics::Admin::V1alpha::ReportingDataAnnotation.
+              #     p item
+              #   end
+              #
+              def list_reporting_data_annotations request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Analytics::Admin::V1alpha::ListReportingDataAnnotationsRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.list_reporting_data_annotations.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Analytics::Admin::V1alpha::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.list_reporting_data_annotations.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.list_reporting_data_annotations.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @analytics_admin_service_stub.list_reporting_data_annotations request, options do |result, operation|
+                  result = ::Gapic::Rest::PagedEnumerable.new @analytics_admin_service_stub, :list_reporting_data_annotations, "reporting_data_annotations", request, result, options
+                  yield result, operation if block_given?
+                  throw :response, result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Updates a Reporting Data Annotation.
+              #
+              # @overload update_reporting_data_annotation(request, options = nil)
+              #   Pass arguments to `update_reporting_data_annotation` via a request object, either of type
+              #   {::Google::Analytics::Admin::V1alpha::UpdateReportingDataAnnotationRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Analytics::Admin::V1alpha::UpdateReportingDataAnnotationRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload update_reporting_data_annotation(reporting_data_annotation: nil, update_mask: nil)
+              #   Pass arguments to `update_reporting_data_annotation` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param reporting_data_annotation [::Google::Analytics::Admin::V1alpha::ReportingDataAnnotation, ::Hash]
+              #     Required. The Reporting Data Annotation to update.
+              #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
+              #     Optional. The list of fields to update. Field names must be in snake case
+              #     (for example, "field_to_update"). Omitted fields will not be updated. To
+              #     replace the entire entity, use one path with the string "*" to match all
+              #     fields.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Analytics::Admin::V1alpha::ReportingDataAnnotation]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Analytics::Admin::V1alpha::ReportingDataAnnotation]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/analytics/admin/v1alpha"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Analytics::Admin::V1alpha::UpdateReportingDataAnnotationRequest.new
+              #
+              #   # Call the update_reporting_data_annotation method.
+              #   result = client.update_reporting_data_annotation request
+              #
+              #   # The returned object is of type Google::Analytics::Admin::V1alpha::ReportingDataAnnotation.
+              #   p result
+              #
+              def update_reporting_data_annotation request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Analytics::Admin::V1alpha::UpdateReportingDataAnnotationRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.update_reporting_data_annotation.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Analytics::Admin::V1alpha::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.update_reporting_data_annotation.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.update_reporting_data_annotation.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @analytics_admin_service_stub.update_reporting_data_annotation request, options do |result, operation|
+                  yield result, operation if block_given?
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Deletes a Reporting Data Annotation.
+              #
+              # @overload delete_reporting_data_annotation(request, options = nil)
+              #   Pass arguments to `delete_reporting_data_annotation` via a request object, either of type
+              #   {::Google::Analytics::Admin::V1alpha::DeleteReportingDataAnnotationRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Analytics::Admin::V1alpha::DeleteReportingDataAnnotationRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload delete_reporting_data_annotation(name: nil)
+              #   Pass arguments to `delete_reporting_data_annotation` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param name [::String]
+              #     Required. Resource name of the Reporting Data Annotation to delete.
+              #     Format:
+              #     properties/property_id/reportingDataAnnotations/reporting_data_annotation
+              #     Example: properties/123/reportingDataAnnotations/456
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Protobuf::Empty]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Protobuf::Empty]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/analytics/admin/v1alpha"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Analytics::Admin::V1alpha::DeleteReportingDataAnnotationRequest.new
+              #
+              #   # Call the delete_reporting_data_annotation method.
+              #   result = client.delete_reporting_data_annotation request
+              #
+              #   # The returned object is of type Google::Protobuf::Empty.
+              #   p result
+              #
+              def delete_reporting_data_annotation request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Analytics::Admin::V1alpha::DeleteReportingDataAnnotationRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.delete_reporting_data_annotation.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Analytics::Admin::V1alpha::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.delete_reporting_data_annotation.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.delete_reporting_data_annotation.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @analytics_admin_service_stub.delete_reporting_data_annotation request, options do |result, operation|
+                  yield result, operation if block_given?
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Submits a request for user deletion for a property.
+              #
+              # @overload submit_user_deletion(request, options = nil)
+              #   Pass arguments to `submit_user_deletion` via a request object, either of type
+              #   {::Google::Analytics::Admin::V1alpha::SubmitUserDeletionRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Analytics::Admin::V1alpha::SubmitUserDeletionRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload submit_user_deletion(user_id: nil, client_id: nil, app_instance_id: nil, user_provided_data: nil, name: nil)
+              #   Pass arguments to `submit_user_deletion` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param user_id [::String]
+              #     Google Analytics [user
+              #     ID](https://firebase.google.com/docs/analytics/userid).
+              #
+              #     Note: The following fields are mutually exclusive: `user_id`, `client_id`, `app_instance_id`, `user_provided_data`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+              #   @param client_id [::String]
+              #     Google Analytics [client
+              #     ID](https://support.google.com/analytics/answer/11593727).
+              #
+              #     Note: The following fields are mutually exclusive: `client_id`, `user_id`, `app_instance_id`, `user_provided_data`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+              #   @param app_instance_id [::String]
+              #     Firebase [application instance
+              #     ID](https://firebase.google.com/docs/reference/android/com/google/firebase/analytics/FirebaseAnalytics.html#getAppInstanceId).
+              #
+              #     Note: The following fields are mutually exclusive: `app_instance_id`, `user_id`, `client_id`, `user_provided_data`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+              #   @param user_provided_data [::String]
+              #     The un-hashed, unencrypted, [user-provided
+              #     data](https://support.google.com/analytics/answer/14077171).
+              #
+              #     Note: The following fields are mutually exclusive: `user_provided_data`, `user_id`, `client_id`, `app_instance_id`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+              #   @param name [::String]
+              #     Required. The name of the property to submit user deletion for.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Analytics::Admin::V1alpha::SubmitUserDeletionResponse]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Analytics::Admin::V1alpha::SubmitUserDeletionResponse]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/analytics/admin/v1alpha"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Analytics::Admin::V1alpha::SubmitUserDeletionRequest.new
+              #
+              #   # Call the submit_user_deletion method.
+              #   result = client.submit_user_deletion request
+              #
+              #   # The returned object is of type Google::Analytics::Admin::V1alpha::SubmitUserDeletionResponse.
+              #   p result
+              #
+              def submit_user_deletion request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Analytics::Admin::V1alpha::SubmitUserDeletionRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.submit_user_deletion.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Analytics::Admin::V1alpha::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.submit_user_deletion.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.submit_user_deletion.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @analytics_admin_service_stub.submit_user_deletion request, options do |result, operation|
+                  yield result, operation if block_given?
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # List all Subproperty Sync Configs on a property.
+              #
+              # @overload list_subproperty_sync_configs(request, options = nil)
+              #   Pass arguments to `list_subproperty_sync_configs` via a request object, either of type
+              #   {::Google::Analytics::Admin::V1alpha::ListSubpropertySyncConfigsRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Analytics::Admin::V1alpha::ListSubpropertySyncConfigsRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload list_subproperty_sync_configs(parent: nil, page_size: nil, page_token: nil)
+              #   Pass arguments to `list_subproperty_sync_configs` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param parent [::String]
+              #     Required. Resource name of the property.
+              #     Format: properties/property_id
+              #     Example: properties/123
+              #   @param page_size [::Integer]
+              #     Optional. The maximum number of resources to return. The service may return
+              #     fewer than this value, even if there are additional pages. If unspecified,
+              #     at most 50 resources will be returned. The maximum value is 200; (higher
+              #     values will be coerced to the maximum)
+              #   @param page_token [::String]
+              #     Optional. A page token, received from a previous
+              #     `ListSubpropertySyncConfig` call. Provide this to retrieve the subsequent
+              #     page. When paginating, all other parameters provided to
+              #     `ListSubpropertySyncConfig` must match the call that provided the page
+              #     token.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Analytics::Admin::V1alpha::SubpropertySyncConfig>]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Gapic::Rest::PagedEnumerable<::Google::Analytics::Admin::V1alpha::SubpropertySyncConfig>]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/analytics/admin/v1alpha"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Analytics::Admin::V1alpha::ListSubpropertySyncConfigsRequest.new
+              #
+              #   # Call the list_subproperty_sync_configs method.
+              #   result = client.list_subproperty_sync_configs request
+              #
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
+              #     # Each element is of type ::Google::Analytics::Admin::V1alpha::SubpropertySyncConfig.
+              #     p item
+              #   end
+              #
+              def list_subproperty_sync_configs request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Analytics::Admin::V1alpha::ListSubpropertySyncConfigsRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.list_subproperty_sync_configs.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Analytics::Admin::V1alpha::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.list_subproperty_sync_configs.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.list_subproperty_sync_configs.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @analytics_admin_service_stub.list_subproperty_sync_configs request, options do |result, operation|
+                  result = ::Gapic::Rest::PagedEnumerable.new @analytics_admin_service_stub, :list_subproperty_sync_configs, "subproperty_sync_configs", request, result, options
+                  yield result, operation if block_given?
+                  throw :response, result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Updates a Subproperty Sync Config.
+              #
+              # @overload update_subproperty_sync_config(request, options = nil)
+              #   Pass arguments to `update_subproperty_sync_config` via a request object, either of type
+              #   {::Google::Analytics::Admin::V1alpha::UpdateSubpropertySyncConfigRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Analytics::Admin::V1alpha::UpdateSubpropertySyncConfigRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload update_subproperty_sync_config(subproperty_sync_config: nil, update_mask: nil)
+              #   Pass arguments to `update_subproperty_sync_config` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param subproperty_sync_config [::Google::Analytics::Admin::V1alpha::SubpropertySyncConfig, ::Hash]
+              #     Required. The SubpropertySyncConfig to update.
+              #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
+              #     Optional. The list of fields to update. Field names must be in snake case
+              #     (for example, "field_to_update"). Omitted fields will not be updated. To
+              #     replace the entire entity, use one path with the string "*" to match all
+              #     fields.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Analytics::Admin::V1alpha::SubpropertySyncConfig]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Analytics::Admin::V1alpha::SubpropertySyncConfig]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/analytics/admin/v1alpha"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Analytics::Admin::V1alpha::UpdateSubpropertySyncConfigRequest.new
+              #
+              #   # Call the update_subproperty_sync_config method.
+              #   result = client.update_subproperty_sync_config request
+              #
+              #   # The returned object is of type Google::Analytics::Admin::V1alpha::SubpropertySyncConfig.
+              #   p result
+              #
+              def update_subproperty_sync_config request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Analytics::Admin::V1alpha::UpdateSubpropertySyncConfigRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.update_subproperty_sync_config.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Analytics::Admin::V1alpha::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.update_subproperty_sync_config.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.update_subproperty_sync_config.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @analytics_admin_service_stub.update_subproperty_sync_config request, options do |result, operation|
+                  yield result, operation if block_given?
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Lookup for a single Subproperty Sync Config.
+              #
+              # @overload get_subproperty_sync_config(request, options = nil)
+              #   Pass arguments to `get_subproperty_sync_config` via a request object, either of type
+              #   {::Google::Analytics::Admin::V1alpha::GetSubpropertySyncConfigRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Analytics::Admin::V1alpha::GetSubpropertySyncConfigRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload get_subproperty_sync_config(name: nil)
+              #   Pass arguments to `get_subproperty_sync_config` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param name [::String]
+              #     Required. Resource name of the SubpropertySyncConfig to lookup.
+              #     Format:
+              #     properties/\\{ordinary_property_id}/subpropertySyncConfigs/\\{subproperty_id}
+              #     Example: properties/1234/subpropertySyncConfigs/5678
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Analytics::Admin::V1alpha::SubpropertySyncConfig]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Analytics::Admin::V1alpha::SubpropertySyncConfig]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/analytics/admin/v1alpha"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Analytics::Admin::V1alpha::GetSubpropertySyncConfigRequest.new
+              #
+              #   # Call the get_subproperty_sync_config method.
+              #   result = client.get_subproperty_sync_config request
+              #
+              #   # The returned object is of type Google::Analytics::Admin::V1alpha::SubpropertySyncConfig.
+              #   p result
+              #
+              def get_subproperty_sync_config request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Analytics::Admin::V1alpha::GetSubpropertySyncConfigRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.get_subproperty_sync_config.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Analytics::Admin::V1alpha::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.get_subproperty_sync_config.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.get_subproperty_sync_config.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @analytics_admin_service_stub.get_subproperty_sync_config request, options do |result, operation|
+                  yield result, operation if block_given?
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
               # Configuration class for the AnalyticsAdminService REST API.
               #
               # This class represents the configuration for AnalyticsAdminService REST,
@@ -13084,7 +13915,7 @@ module Google
 
                 config_attr :endpoint,      nil, ::String, nil
                 config_attr :credentials,   nil do |value|
-                  allowed = [::String, ::Hash, ::Proc, ::Symbol, ::Google::Auth::Credentials, ::Signet::OAuth2::Client, nil]
+                  allowed = [::String, ::Hash, ::Proc, ::Symbol, ::Google::Auth::Credentials, ::Google::Auth::BaseClient, ::Signet::OAuth2::Client, nil]
                   allowed.any? { |klass| klass === value }
                 end
                 config_attr :scope,         nil, ::String, ::Array, nil
@@ -13884,6 +14715,51 @@ module Google
                   # @return [::Gapic::Config::Method]
                   #
                   attr_reader :delete_subproperty_event_filter
+                  ##
+                  # RPC-specific configuration for `create_reporting_data_annotation`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :create_reporting_data_annotation
+                  ##
+                  # RPC-specific configuration for `get_reporting_data_annotation`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :get_reporting_data_annotation
+                  ##
+                  # RPC-specific configuration for `list_reporting_data_annotations`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :list_reporting_data_annotations
+                  ##
+                  # RPC-specific configuration for `update_reporting_data_annotation`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :update_reporting_data_annotation
+                  ##
+                  # RPC-specific configuration for `delete_reporting_data_annotation`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :delete_reporting_data_annotation
+                  ##
+                  # RPC-specific configuration for `submit_user_deletion`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :submit_user_deletion
+                  ##
+                  # RPC-specific configuration for `list_subproperty_sync_configs`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :list_subproperty_sync_configs
+                  ##
+                  # RPC-specific configuration for `update_subproperty_sync_config`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :update_subproperty_sync_config
+                  ##
+                  # RPC-specific configuration for `get_subproperty_sync_config`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :get_subproperty_sync_config
 
                   # @private
                   def initialize parent_rpcs = nil
@@ -14187,6 +15063,24 @@ module Google
                     @update_subproperty_event_filter = ::Gapic::Config::Method.new update_subproperty_event_filter_config
                     delete_subproperty_event_filter_config = parent_rpcs.delete_subproperty_event_filter if parent_rpcs.respond_to? :delete_subproperty_event_filter
                     @delete_subproperty_event_filter = ::Gapic::Config::Method.new delete_subproperty_event_filter_config
+                    create_reporting_data_annotation_config = parent_rpcs.create_reporting_data_annotation if parent_rpcs.respond_to? :create_reporting_data_annotation
+                    @create_reporting_data_annotation = ::Gapic::Config::Method.new create_reporting_data_annotation_config
+                    get_reporting_data_annotation_config = parent_rpcs.get_reporting_data_annotation if parent_rpcs.respond_to? :get_reporting_data_annotation
+                    @get_reporting_data_annotation = ::Gapic::Config::Method.new get_reporting_data_annotation_config
+                    list_reporting_data_annotations_config = parent_rpcs.list_reporting_data_annotations if parent_rpcs.respond_to? :list_reporting_data_annotations
+                    @list_reporting_data_annotations = ::Gapic::Config::Method.new list_reporting_data_annotations_config
+                    update_reporting_data_annotation_config = parent_rpcs.update_reporting_data_annotation if parent_rpcs.respond_to? :update_reporting_data_annotation
+                    @update_reporting_data_annotation = ::Gapic::Config::Method.new update_reporting_data_annotation_config
+                    delete_reporting_data_annotation_config = parent_rpcs.delete_reporting_data_annotation if parent_rpcs.respond_to? :delete_reporting_data_annotation
+                    @delete_reporting_data_annotation = ::Gapic::Config::Method.new delete_reporting_data_annotation_config
+                    submit_user_deletion_config = parent_rpcs.submit_user_deletion if parent_rpcs.respond_to? :submit_user_deletion
+                    @submit_user_deletion = ::Gapic::Config::Method.new submit_user_deletion_config
+                    list_subproperty_sync_configs_config = parent_rpcs.list_subproperty_sync_configs if parent_rpcs.respond_to? :list_subproperty_sync_configs
+                    @list_subproperty_sync_configs = ::Gapic::Config::Method.new list_subproperty_sync_configs_config
+                    update_subproperty_sync_config_config = parent_rpcs.update_subproperty_sync_config if parent_rpcs.respond_to? :update_subproperty_sync_config
+                    @update_subproperty_sync_config = ::Gapic::Config::Method.new update_subproperty_sync_config_config
+                    get_subproperty_sync_config_config = parent_rpcs.get_subproperty_sync_config if parent_rpcs.respond_to? :get_subproperty_sync_config
+                    @get_subproperty_sync_config = ::Gapic::Config::Method.new get_subproperty_sync_config_config
 
                     yield self if block_given?
                   end

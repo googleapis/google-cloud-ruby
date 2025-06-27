@@ -447,6 +447,24 @@ module Google
             rpc :UpdateSubpropertyEventFilter, ::Google::Analytics::Admin::V1alpha::UpdateSubpropertyEventFilterRequest, ::Google::Analytics::Admin::V1alpha::SubpropertyEventFilter
             # Deletes a subproperty event filter.
             rpc :DeleteSubpropertyEventFilter, ::Google::Analytics::Admin::V1alpha::DeleteSubpropertyEventFilterRequest, ::Google::Protobuf::Empty
+            # Creates a Reporting Data Annotation.
+            rpc :CreateReportingDataAnnotation, ::Google::Analytics::Admin::V1alpha::CreateReportingDataAnnotationRequest, ::Google::Analytics::Admin::V1alpha::ReportingDataAnnotation
+            # Lookup a single Reporting Data Annotation.
+            rpc :GetReportingDataAnnotation, ::Google::Analytics::Admin::V1alpha::GetReportingDataAnnotationRequest, ::Google::Analytics::Admin::V1alpha::ReportingDataAnnotation
+            # List all Reporting Data Annotations on a property.
+            rpc :ListReportingDataAnnotations, ::Google::Analytics::Admin::V1alpha::ListReportingDataAnnotationsRequest, ::Google::Analytics::Admin::V1alpha::ListReportingDataAnnotationsResponse
+            # Updates a Reporting Data Annotation.
+            rpc :UpdateReportingDataAnnotation, ::Google::Analytics::Admin::V1alpha::UpdateReportingDataAnnotationRequest, ::Google::Analytics::Admin::V1alpha::ReportingDataAnnotation
+            # Deletes a Reporting Data Annotation.
+            rpc :DeleteReportingDataAnnotation, ::Google::Analytics::Admin::V1alpha::DeleteReportingDataAnnotationRequest, ::Google::Protobuf::Empty
+            # Submits a request for user deletion for a property.
+            rpc :SubmitUserDeletion, ::Google::Analytics::Admin::V1alpha::SubmitUserDeletionRequest, ::Google::Analytics::Admin::V1alpha::SubmitUserDeletionResponse
+            # List all Subproperty Sync Configs on a property.
+            rpc :ListSubpropertySyncConfigs, ::Google::Analytics::Admin::V1alpha::ListSubpropertySyncConfigsRequest, ::Google::Analytics::Admin::V1alpha::ListSubpropertySyncConfigsResponse
+            # Updates a Subproperty Sync Config.
+            rpc :UpdateSubpropertySyncConfig, ::Google::Analytics::Admin::V1alpha::UpdateSubpropertySyncConfigRequest, ::Google::Analytics::Admin::V1alpha::SubpropertySyncConfig
+            # Lookup for a single Subproperty Sync Config.
+            rpc :GetSubpropertySyncConfig, ::Google::Analytics::Admin::V1alpha::GetSubpropertySyncConfigRequest, ::Google::Analytics::Admin::V1alpha::SubpropertySyncConfig
           end
 
           Stub = Service.rpc_stub_class

@@ -1,5 +1,24 @@
 # Release History
 
+### 1.8.0 (2025-06-05)
+
+#### Features
+
+* Support throughput_mode in UpdateDatabaseDdlRequest to be used by Spanner Migration Tool 
+
+### 1.7.0 (2025-05-12)
+
+#### Features
+
+* Updated core dependencies including gapic-common 
+* Updated required Ruby version to 3.1 
+
+### 1.6.1 (2025-04-29)
+
+#### Bug Fixes
+
+* Fixed several issues with validating credential configs 
+
 ### 1.6.0 (2025-02-13)
 
 #### Features

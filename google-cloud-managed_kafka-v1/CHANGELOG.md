@@ -1,5 +1,30 @@
 # Changelog
 
+### 1.3.0 (2025-05-27)
+
+#### Features
+
+* add Managed Kafka ACL API ([#30437](https://github.com/googleapis/google-cloud-ruby/issues/30437)) 
+
+### 1.2.0 (2025-05-12)
+
+#### Features
+
+* Updated core dependencies including gapic-common 
+* Updated required Ruby version to 3.1 
+
+### 1.1.2 (2025-05-01)
+
+#### Documentation
+
+* Document default values for minimum_backoff ([#30038](https://github.com/googleapis/google-cloud-ruby/issues/30038)) 
+
+### 1.1.1 (2025-04-29)
+
+#### Bug Fixes
+
+* Fixed several issues with validating credential configs 
+
 ### 1.1.0 (2025-03-19)
 
 #### Features

@@ -138,6 +138,104 @@ module Google
           end
 
           # The request for
+          # {::Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Client#create_user_creds FirestoreAdmin.CreateUserCreds}.
+          # @!attribute [rw] parent
+          #   @return [::String]
+          #     Required. A parent name of the form
+          #     `projects/{project_id}/databases/{database_id}`
+          # @!attribute [rw] user_creds
+          #   @return [::Google::Cloud::Firestore::Admin::V1::UserCreds]
+          #     Required. The user creds to create.
+          # @!attribute [rw] user_creds_id
+          #   @return [::String]
+          #     Required. The ID to use for the user creds, which will become the final
+          #     component of the user creds's resource name.
+          #
+          #     This value should be 4-63 characters. Valid characters are /[a-z][0-9]-/
+          #     with first character a letter and the last a letter or a number. Must not
+          #     be UUID-like /[0-9a-f]\\{8}(-[0-9a-f]\\{4})\\{3}-[0-9a-f]\\{12}/.
+          class CreateUserCredsRequest
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # The request for
+          # {::Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Client#get_user_creds FirestoreAdmin.GetUserCreds}.
+          # @!attribute [rw] name
+          #   @return [::String]
+          #     Required. A name of the form
+          #     `projects/{project_id}/databases/{database_id}/userCreds/{user_creds_id}`
+          class GetUserCredsRequest
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # The request for
+          # {::Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Client#list_user_creds FirestoreAdmin.ListUserCreds}.
+          # @!attribute [rw] parent
+          #   @return [::String]
+          #     Required. A parent database name of the form
+          #     `projects/{project_id}/databases/{database_id}`
+          class ListUserCredsRequest
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # The response for
+          # {::Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Client#list_user_creds FirestoreAdmin.ListUserCreds}.
+          # @!attribute [rw] user_creds
+          #   @return [::Array<::Google::Cloud::Firestore::Admin::V1::UserCreds>]
+          #     The user creds for the database.
+          class ListUserCredsResponse
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # The request for
+          # {::Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Client#enable_user_creds FirestoreAdmin.EnableUserCreds}.
+          # @!attribute [rw] name
+          #   @return [::String]
+          #     Required. A name of the form
+          #     `projects/{project_id}/databases/{database_id}/userCreds/{user_creds_id}`
+          class EnableUserCredsRequest
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # The request for
+          # {::Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Client#disable_user_creds FirestoreAdmin.DisableUserCreds}.
+          # @!attribute [rw] name
+          #   @return [::String]
+          #     Required. A name of the form
+          #     `projects/{project_id}/databases/{database_id}/userCreds/{user_creds_id}`
+          class DisableUserCredsRequest
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # The request for
+          # {::Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Client#reset_user_password FirestoreAdmin.ResetUserPassword}.
+          # @!attribute [rw] name
+          #   @return [::String]
+          #     Required. A name of the form
+          #     `projects/{project_id}/databases/{database_id}/userCreds/{user_creds_id}`
+          class ResetUserPasswordRequest
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # The request for
+          # {::Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Client#delete_user_creds FirestoreAdmin.DeleteUserCreds}.
+          # @!attribute [rw] name
+          #   @return [::String]
+          #     Required. A name of the form
+          #     `projects/{project_id}/databases/{database_id}/userCreds/{user_creds_id}`
+          class DeleteUserCredsRequest
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # The request for
           # {::Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Client#create_backup_schedule FirestoreAdmin.CreateBackupSchedule}.
           # @!attribute [rw] parent
           #   @return [::String]

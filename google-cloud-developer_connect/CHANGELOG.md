@@ -1,5 +1,17 @@
 # Changelog
 
+### 2.1.0 (2025-06-24)
+
+#### Features
+
+* Support for the InsightsConfigService ([#30537](https://github.com/googleapis/google-cloud-ruby/issues/30537)) 
+
+### 2.0.1 (2025-04-29)
+
+#### Bug Fixes
+
+* Fixed several issues with validating credential configs 
+
 ### 2.0.0 (2025-02-13)
 
 ### ⚠ BREAKING CHANGES

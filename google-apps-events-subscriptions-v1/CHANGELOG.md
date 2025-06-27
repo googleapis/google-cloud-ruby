@@ -1,5 +1,21 @@
 # Changelog
 
+### 0.4.0 (2025-05-12)
+
+#### Features
+
+* Updated core dependencies including gapic-common 
+* Updated required Ruby version to 3.1 
+#### Bug Fixes
+
+* Fixed OAuth scopes 
+
+### 0.3.1 (2025-04-29)
+
+#### Bug Fixes
+
+* Fixed several issues with validating credential configs 
+
 ### 0.3.0 (2025-01-28)
 
 #### Features

@@ -413,14 +413,15 @@ module Google
               #
               # Using multiple branches can be useful when developers would like
               # to have a staging branch to test and verify for future usage. When it
-              # becomes ready, developers switch on the staging branch using this API while
-              # keeping using `projects/*/locations/*/catalogs/*/branches/default_branch`
-              # as {::Google::Cloud::Retail::V2::SearchRequest#branch SearchRequest.branch} to
+              # becomes ready, developers switch on the staging branch using this API
+              # while keeping using
+              # `projects/*/locations/*/catalogs/*/branches/default_branch` as
+              # {::Google::Cloud::Retail::V2::SearchRequest#branch SearchRequest.branch} to
               # route the traffic to this staging branch.
               #
               # CAUTION: If you have live predict/search traffic, switching the default
-              # branch could potentially cause outages if the ID space of the new branch is
-              # very different from the old one.
+              # branch could potentially cause outages if the ID space of the new branch
+              # is very different from the old one.
               #
               # More specifically:
               #
@@ -1323,7 +1324,7 @@ module Google
 
                 config_attr :endpoint,      nil, ::String, nil
                 config_attr :credentials,   nil do |value|
-                  allowed = [::String, ::Hash, ::Proc, ::Symbol, ::Google::Auth::Credentials, ::Signet::OAuth2::Client, nil]
+                  allowed = [::String, ::Hash, ::Proc, ::Symbol, ::Google::Auth::Credentials, ::Google::Auth::BaseClient, ::Signet::OAuth2::Client, nil]
                   allowed.any? { |klass| klass === value }
                 end
                 config_attr :scope,         nil, ::String, ::Array, nil

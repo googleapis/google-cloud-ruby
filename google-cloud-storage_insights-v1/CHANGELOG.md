@@ -1,5 +1,25 @@
 # Changelog
 
+### 1.2.0 (2025-05-16)
+
+#### Features
+
+* Support for DatasetConfig management RPCs 
+* Support for RPCS for linking and unliking Datasets 
+
+### 1.1.0 (2025-05-12)
+
+#### Features
+
+* Updated core dependencies including gapic-common 
+* Updated required Ruby version to 3.1 
+
+### 1.0.1 (2025-04-29)
+
+#### Bug Fixes
+
+* Fixed several issues with validating credential configs 
+
 ### 1.0.0 (2025-02-07)
 
 ### ⚠ BREAKING CHANGES

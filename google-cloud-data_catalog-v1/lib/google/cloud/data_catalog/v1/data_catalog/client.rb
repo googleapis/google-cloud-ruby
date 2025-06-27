@@ -1344,7 +1344,7 @@ module Google
             #     * `datacatalog.entry.{PROJECT_ID}.{LOCATION_ID}.{ENTRY_GROUP_ID}.{ENTRY_ID}`
             #
             #     Identifiers (`*_ID`) should comply with the
-            #     [Lexical structure in Standard SQL]
+            #     [Lexical structure in GoogleSQL]
             #     (https://cloud.google.com/bigquery/docs/reference/standard-sql/lexical).
             #
             #     Note: The following fields are mutually exclusive: `sql_resource`, `linked_resource`, `fully_qualified_name`. If a field in that set is populated, all other fields in the set will automatically be cleared.
@@ -4133,8 +4133,8 @@ module Google
 
               config_attr :endpoint,      nil, ::String, nil
               config_attr :credentials,   nil do |value|
-                allowed = [::String, ::Hash, ::Proc, ::Symbol, ::Google::Auth::Credentials, ::Signet::OAuth2::Client, nil]
-                allowed += [::GRPC::Core::Channel, ::GRPC::Core::ChannelCredentials] if defined? ::GRPC
+                allowed = [::String, ::Hash, ::Proc, ::Symbol, ::Google::Auth::Credentials, ::Google::Auth::BaseClient, ::Signet::OAuth2::Client, nil]
+                allowed += [::GRPC::Core::Channel, ::GRPC::Core::ChannelCredentials] if defined? ::GRPC::Core::Channel
                 allowed.any? { |klass| klass === value }
               end
               config_attr :scope,         nil, ::String, ::Array, nil

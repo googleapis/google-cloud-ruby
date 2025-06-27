@@ -1,0 +1,25 @@
+{
+  "generated": [
+    ".gitignore",
+    ".repo-metadata.json",
+    ".rubocop.yml",
+    ".toys.rb",
+    ".yardopts",
+    "AUTHENTICATION.md",
+    "CHANGELOG.md",
+    "Gemfile",
+    "LICENSE.md",
+    "README.md",
+    "Rakefile",
+    "google-cloud-storage_batch_operations.gemspec",
+    "lib/google-cloud-storage_batch_operations.rb",
+    "lib/google/cloud/storage_batch_operations.rb",
+    "lib/google/cloud/storage_batch_operations/version.rb",
+    "test/google/cloud/storage_batch_operations/client_test.rb",
+    "test/google/cloud/storage_batch_operations/version_test.rb",
+    "test/helper.rb"
+  ],
+  "static": [
+    ".OwlBot.yaml"
+  ]
+}

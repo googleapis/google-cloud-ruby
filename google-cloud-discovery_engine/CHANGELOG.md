@@ -1,5 +1,31 @@
 # Changelog
 
+### 2.2.0 (2025-06-13)
+
+#### Features
+
+* add CMEK config service ([#30497](https://github.com/googleapis/google-cloud-ruby/issues/30497)) 
+* add ConnectorRunErrorContext to error log 
+* add custom search operators for Workspace search 
+* add HealthcareFhirConfig to FHIR data store 
+* add identity mapping service 
+* add more indexing state for site search engine 
+* add more options for layout parser config 
+* add user license config service 
+* enable claim level score for grounding 
+* support ACL data store and document 
+* support media recommendation engine 
+* support structured content for chunk 
+#### Documentation
+
+* keep the API doc up-to-date with recent changes 
+
+### 2.1.1 (2025-04-29)
+
+#### Bug Fixes
+
+* Fixed several issues with validating credential configs 
+
 ### 2.1.0 (2025-03-28)
 
 #### Features

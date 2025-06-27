@@ -1,5 +1,33 @@
 # Changelog
 
+### 1.4.1 (2025-06-05)
+
+#### Documentation
+
+* Add clarifications on IAP CorsSettings behavior ([#30483](https://github.com/googleapis/google-cloud-ruby/issues/30483)) 
+
+### 1.4.0 (2025-05-12)
+
+#### Features
+
+* Updated core dependencies including gapic-common 
+* Updated required Ruby version to 3.1 
+
+### 1.3.1 (2025-04-29)
+
+#### Bug Fixes
+
+* Fixed several issues with validating credential configs 
+
+### 1.3.0 (2025-04-21)
+
+#### Features
+
+* Identity-aware Proxy (IAP) released a feature Use IAP with Workforce Identity Federation ([#29463](https://github.com/googleapis/google-cloud-ruby/issues/29463)) 
+#### Documentation
+
+* update fields to optional and other updates 
+
 ### 1.2.0 (2025-01-29)
 
 #### Features

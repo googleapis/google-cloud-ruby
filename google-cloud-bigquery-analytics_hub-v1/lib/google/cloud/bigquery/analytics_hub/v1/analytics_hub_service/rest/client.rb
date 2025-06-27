@@ -221,7 +221,7 @@ module Google
                 #
                 #   @param parent [::String]
                 #     Required. The parent resource path of the data exchanges.
-                #     e.g. `projects/myproject/locations/US`.
+                #     e.g. `projects/myproject/locations/us`.
                 #   @param page_size [::Integer]
                 #     The maximum number of results to return in a single response page. Leverage
                 #     the page tokens to iterate through the entire collection.
@@ -313,7 +313,7 @@ module Google
                 #
                 #   @param organization [::String]
                 #     Required. The organization resource path of the projects containing
-                #     DataExchanges. e.g. `organizations/myorg/locations/US`.
+                #     DataExchanges. e.g. `organizations/myorg/locations/us`.
                 #   @param page_size [::Integer]
                 #     The maximum number of results to return in a single response page. Leverage
                 #     the page tokens to iterate through the entire collection.
@@ -404,7 +404,7 @@ module Google
                 #
                 #   @param name [::String]
                 #     Required. The resource name of the data exchange.
-                #     e.g. `projects/myproject/locations/US/dataExchanges/123`.
+                #     e.g. `projects/myproject/locations/us/dataExchanges/123`.
                 # @yield [result, operation] Access the result along with the TransportOperation object
                 # @yieldparam result [::Google::Cloud::Bigquery::AnalyticsHub::V1::DataExchange]
                 # @yieldparam operation [::Gapic::Rest::TransportOperation]
@@ -483,10 +483,10 @@ module Google
                 #
                 #   @param parent [::String]
                 #     Required. The parent resource path of the data exchange.
-                #     e.g. `projects/myproject/locations/US`.
+                #     e.g. `projects/myproject/locations/us`.
                 #   @param data_exchange_id [::String]
                 #     Required. The ID of the data exchange.
-                #     Must contain only ASCII letters, numbers (0-9), underscores (_).
+                #     Must contain only Unicode letters, numbers (0-9), underscores (_).
                 #     Max length: 100 bytes.
                 #   @param data_exchange [::Google::Cloud::Bigquery::AnalyticsHub::V1::DataExchange, ::Hash]
                 #     Required. The data exchange to create.
@@ -650,7 +650,7 @@ module Google
                 #
                 #   @param name [::String]
                 #     Required. The full name of the data exchange resource that you want to
-                #     delete. For example, `projects/myproject/locations/US/dataExchanges/123`.
+                #     delete. For example, `projects/myproject/locations/us/dataExchanges/123`.
                 # @yield [result, operation] Access the result along with the TransportOperation object
                 # @yieldparam result [::Google::Protobuf::Empty]
                 # @yieldparam operation [::Gapic::Rest::TransportOperation]
@@ -729,7 +729,7 @@ module Google
                 #
                 #   @param parent [::String]
                 #     Required. The parent resource path of the listing.
-                #     e.g. `projects/myproject/locations/US/dataExchanges/123`.
+                #     e.g. `projects/myproject/locations/us/dataExchanges/123`.
                 #   @param page_size [::Integer]
                 #     The maximum number of results to return in a single response page. Leverage
                 #     the page tokens to iterate through the entire collection.
@@ -820,7 +820,7 @@ module Google
                 #
                 #   @param name [::String]
                 #     Required. The resource name of the listing.
-                #     e.g. `projects/myproject/locations/US/dataExchanges/123/listings/456`.
+                #     e.g. `projects/myproject/locations/us/dataExchanges/123/listings/456`.
                 # @yield [result, operation] Access the result along with the TransportOperation object
                 # @yieldparam result [::Google::Cloud::Bigquery::AnalyticsHub::V1::Listing]
                 # @yieldparam operation [::Gapic::Rest::TransportOperation]
@@ -899,10 +899,10 @@ module Google
                 #
                 #   @param parent [::String]
                 #     Required. The parent resource path of the listing.
-                #     e.g. `projects/myproject/locations/US/dataExchanges/123`.
+                #     e.g. `projects/myproject/locations/us/dataExchanges/123`.
                 #   @param listing_id [::String]
                 #     Required. The ID of the listing to create.
-                #     Must contain only ASCII letters, numbers (0-9), underscores (_).
+                #     Must contain only Unicode letters, numbers (0-9), underscores (_).
                 #     Max length: 100 bytes.
                 #   @param listing [::Google::Cloud::Bigquery::AnalyticsHub::V1::Listing, ::Hash]
                 #     Required. The listing to create.
@@ -1059,14 +1059,18 @@ module Google
                 #   @param options [::Gapic::CallOptions, ::Hash]
                 #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
                 #
-                # @overload delete_listing(name: nil)
+                # @overload delete_listing(name: nil, delete_commercial: nil)
                 #   Pass arguments to `delete_listing` via keyword arguments. Note that at
                 #   least one keyword argument is required. To specify no parameters, or to keep all
                 #   the default parameter values, pass an empty Hash as a request object (see above).
                 #
                 #   @param name [::String]
                 #     Required. Resource name of the listing to delete.
-                #     e.g. `projects/myproject/locations/US/dataExchanges/123/listings/456`.
+                #     e.g. `projects/myproject/locations/us/dataExchanges/123/listings/456`.
+                #   @param delete_commercial [::Boolean]
+                #     Optional. If the listing is commercial then this field must be set to true,
+                #     otherwise a failure is thrown. This acts as a safety guard to avoid
+                #     deleting commercial listings accidentally.
                 # @yield [result, operation] Access the result along with the TransportOperation object
                 # @yieldparam result [::Google::Protobuf::Empty]
                 # @yieldparam operation [::Gapic::Rest::TransportOperation]
@@ -1159,7 +1163,7 @@ module Google
                 #     Note: The following fields are mutually exclusive: `destination_pubsub_subscription`, `destination_dataset`. If a field in that set is populated, all other fields in the set will automatically be cleared.
                 #   @param name [::String]
                 #     Required. Resource name of the listing that you want to subscribe to.
-                #     e.g. `projects/myproject/locations/US/dataExchanges/123/listings/456`.
+                #     e.g. `projects/myproject/locations/us/dataExchanges/123/listings/456`.
                 # @yield [result, operation] Access the result along with the TransportOperation object
                 # @yieldparam result [::Google::Cloud::Bigquery::AnalyticsHub::V1::SubscribeListingResponse]
                 # @yieldparam operation [::Gapic::Rest::TransportOperation]
@@ -1219,8 +1223,10 @@ module Google
                 end
 
                 ##
-                # Creates a Subscription to a Data Clean Room. This is a long-running
-                # operation as it will create one or more linked datasets.
+                # Creates a Subscription to a Data Clean Room. This is a
+                # long-running operation as it will create one or more linked datasets.
+                # Throws a Bad Request error if the Data Exchange does not contain any
+                # listings.
                 #
                 # @overload subscribe_data_exchange(request, options = nil)
                 #   Pass arguments to `subscribe_data_exchange` via a request object, either of type
@@ -1239,10 +1245,10 @@ module Google
                 #
                 #   @param name [::String]
                 #     Required. Resource name of the Data Exchange.
-                #     e.g. `projects/publisherproject/locations/US/dataExchanges/123`
+                #     e.g. `projects/publisherproject/locations/us/dataExchanges/123`
                 #   @param destination [::String]
                 #     Required. The parent resource path of the Subscription.
-                #     e.g. `projects/subscriberproject/locations/US`
+                #     e.g. `projects/subscriberproject/locations/us`
                 #   @param destination_dataset [::Google::Cloud::Bigquery::AnalyticsHub::V1::DestinationDataset, ::Hash]
                 #     Optional. BigQuery destination dataset to create for the subscriber.
                 #   @param subscription [::String]
@@ -1339,7 +1345,7 @@ module Google
                 #
                 #   @param name [::String]
                 #     Required. Resource name of the Subscription to refresh.
-                #     e.g. `projects/subscriberproject/locations/US/subscriptions/123`
+                #     e.g. `projects/subscriberproject/locations/us/subscriptions/123`
                 # @yield [result, operation] Access the result along with the TransportOperation object
                 # @yieldparam result [::Gapic::Operation]
                 # @yieldparam operation [::Gapic::Rest::TransportOperation]
@@ -1427,7 +1433,7 @@ module Google
                 #
                 #   @param name [::String]
                 #     Required. Resource name of the subscription.
-                #     e.g. projects/123/locations/US/subscriptions/456
+                #     e.g. projects/123/locations/us/subscriptions/456
                 # @yield [result, operation] Access the result along with the TransportOperation object
                 # @yieldparam result [::Google::Cloud::Bigquery::AnalyticsHub::V1::Subscription]
                 # @yieldparam operation [::Gapic::Rest::TransportOperation]
@@ -1506,13 +1512,13 @@ module Google
                 #
                 #   @param parent [::String]
                 #     Required. The parent resource path of the subscription.
-                #     e.g. projects/myproject/locations/US
+                #     e.g. projects/myproject/locations/us
                 #   @param filter [::String]
                 #     An expression for filtering the results of the request. Eligible
                 #     fields for filtering are:
                 #
-                #      * `listing`
-                #      * `data_exchange`
+                #      + `listing`
+                #      + `data_exchange`
                 #
                 #     Alternatively, a literal wrapped in double quotes may be provided.
                 #     This will be checked for an exact match against both fields above.
@@ -1520,9 +1526,9 @@ module Google
                 #     In all cases, the full Data Exchange or Listing resource name must
                 #     be provided. Some example of using filters:
                 #
-                #      * data_exchange="projects/myproject/locations/us/dataExchanges/123"
-                #      * listing="projects/123/locations/us/dataExchanges/456/listings/789"
-                #      * "projects/myproject/locations/us/dataExchanges/123"
+                #      + data_exchange="projects/myproject/locations/us/dataExchanges/123"
+                #      + listing="projects/123/locations/us/dataExchanges/456/listings/789"
+                #      + "projects/myproject/locations/us/dataExchanges/123"
                 #   @param page_size [::Integer]
                 #     The maximum number of results to return in a single response page.
                 #   @param page_token [::String]
@@ -1612,8 +1618,8 @@ module Google
                 #   @param resource [::String]
                 #     Required. Resource name of the requested target. This resource may be
                 #     either a Listing or a DataExchange. e.g.
-                #     projects/123/locations/US/dataExchanges/456 OR e.g.
-                #     projects/123/locations/US/dataExchanges/456/listings/789
+                #     projects/123/locations/us/dataExchanges/456 OR e.g.
+                #     projects/123/locations/us/dataExchanges/456/listings/789
                 #   @param include_deleted_subscriptions [::Boolean]
                 #     If selected, includes deleted subscriptions in the response
                 #     (up to 63 days after deletion).
@@ -1698,14 +1704,18 @@ module Google
                 #   @param options [::Gapic::CallOptions, ::Hash]
                 #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
                 #
-                # @overload revoke_subscription(name: nil)
+                # @overload revoke_subscription(name: nil, revoke_commercial: nil)
                 #   Pass arguments to `revoke_subscription` via keyword arguments. Note that at
                 #   least one keyword argument is required. To specify no parameters, or to keep all
                 #   the default parameter values, pass an empty Hash as a request object (see above).
                 #
                 #   @param name [::String]
                 #     Required. Resource name of the subscription to revoke.
-                #     e.g. projects/123/locations/US/subscriptions/456
+                #     e.g. projects/123/locations/us/subscriptions/456
+                #   @param revoke_commercial [::Boolean]
+                #     Optional. If the subscription is commercial then this field must be set to
+                #     true, otherwise a failure is thrown. This acts as a safety guard to avoid
+                #     revoking commercial subscriptions accidentally.
                 # @yield [result, operation] Access the result along with the TransportOperation object
                 # @yieldparam result [::Google::Cloud::Bigquery::AnalyticsHub::V1::RevokeSubscriptionResponse]
                 # @yieldparam operation [::Gapic::Rest::TransportOperation]
@@ -1784,7 +1794,7 @@ module Google
                 #
                 #   @param name [::String]
                 #     Required. Resource name of the subscription to delete.
-                #     e.g. projects/123/locations/US/subscriptions/456
+                #     e.g. projects/123/locations/us/subscriptions/456
                 # @yield [result, operation] Access the result along with the TransportOperation object
                 # @yieldparam result [::Gapic::Operation]
                 # @yieldparam operation [::Gapic::Rest::TransportOperation]
@@ -2204,7 +2214,7 @@ module Google
 
                   config_attr :endpoint,      nil, ::String, nil
                   config_attr :credentials,   nil do |value|
-                    allowed = [::String, ::Hash, ::Proc, ::Symbol, ::Google::Auth::Credentials, ::Signet::OAuth2::Client, nil]
+                    allowed = [::String, ::Hash, ::Proc, ::Symbol, ::Google::Auth::Credentials, ::Google::Auth::BaseClient, ::Signet::OAuth2::Client, nil]
                     allowed.any? { |klass| klass === value }
                   end
                   config_attr :scope,         nil, ::String, ::Array, nil

@@ -47,13 +47,13 @@ describe "Google Cloud Firestore API samples - Quickstart" do
       get_all project_id: @firestore_project, collection_path: @collection_path
     end
     assert_includes out, "alovelace data:"
-    assert_includes out, ':first=>"Ada"'
-    assert_includes out, ':last=>"Lovelace"'
-    assert_includes out, ":born=>1815"
+    assert_includes out, 'first: "Ada"'
+    assert_includes out, 'last: "Lovelace"'
+    assert_includes out, "born: 1815"
     assert_includes out, "aturing data:"
-    assert_includes out, ':first=>"Alan"'
-    assert_includes out, ':middle=>"Mathison"'
-    assert_includes out, ':last=>"Turing"'
-    assert_includes out, ":born=>1912"
+    assert_includes out, 'first: "Alan"'
+    assert_includes out, 'middle: "Mathison"'
+    assert_includes out, 'last: "Turing"'
+    assert_includes out, "born: 1912"
   end
 end

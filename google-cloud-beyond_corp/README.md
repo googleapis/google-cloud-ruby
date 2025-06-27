@@ -7,7 +7,7 @@ Beyondcorp Enterprise provides identity and context aware access controls for en
 Actual client classes for the various versions of this API are defined in
 _versioned_ client gems, with names of the form `google-cloud-beyond_corp-app_connections-v*`.
 The gem `google-cloud-beyond_corp` is the main client library that brings the
-verisoned gems in as dependencies, and provides high-level methods for
+versioned gems in as dependencies, and provides high-level methods for
 constructing clients. More information on versioned clients can be found below
 in the section titled *Which client should I use?*.
 
@@ -18,10 +18,7 @@ themselves can be found in the client library documentation for the versioned
 client gems:
 [google-cloud-beyond_corp-app_connections-v1](https://cloud.google.com/ruby/docs/reference/google-cloud-beyond_corp-app_connections-v1/latest),
 [google-cloud-beyond_corp-app_connectors-v1](https://cloud.google.com/ruby/docs/reference/google-cloud-beyond_corp-app_connectors-v1/latest),
-[google-cloud-beyond_corp-app_connectors-v1](https://cloud.google.com/ruby/docs/reference/google-cloud-beyond_corp-app_connectors-v1/latest),
 [google-cloud-beyond_corp-app_gateways-v1](https://cloud.google.com/ruby/docs/reference/google-cloud-beyond_corp-app_gateways-v1/latest),
-[google-cloud-beyond_corp-app_gateways-v1](https://cloud.google.com/ruby/docs/reference/google-cloud-beyond_corp-app_gateways-v1/latest),
-[google-cloud-beyond_corp-client_gateways-v1](https://cloud.google.com/ruby/docs/reference/google-cloud-beyond_corp-client_gateways-v1/latest),
 [google-cloud-beyond_corp-client_gateways-v1](https://cloud.google.com/ruby/docs/reference/google-cloud-beyond_corp-client_gateways-v1/latest).
 
 See also the [Product Documentation](https://cloud.google.com/beyondcorp/)
@@ -68,7 +65,10 @@ results in logs appearing alongside your application logs in the
 Debug logging also requires that the versioned clients for this service be
 sufficiently recent, released after about Dec 10, 2024. If logging is not
 working, try updating the versioned clients in your bundle or installed gems:
-[google-cloud-beyond_corp-app_connections-v1](https://cloud.google.com/ruby/docs/reference/google-cloud-beyond_corp-app_connections-v1/latest).
+[google-cloud-beyond_corp-app_connections-v1](https://cloud.google.com/ruby/docs/reference/google-cloud-beyond_corp-app_connections-v1/latest),
+[google-cloud-beyond_corp-app_connectors-v1](https://cloud.google.com/ruby/docs/reference/google-cloud-beyond_corp-app_connectors-v1/latest),
+[google-cloud-beyond_corp-app_gateways-v1](https://cloud.google.com/ruby/docs/reference/google-cloud-beyond_corp-app_gateways-v1/latest),
+[google-cloud-beyond_corp-client_gateways-v1](https://cloud.google.com/ruby/docs/reference/google-cloud-beyond_corp-client_gateways-v1/latest).
 
 ## Supported Ruby Versions
 

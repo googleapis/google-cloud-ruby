@@ -27,7 +27,6 @@ module Google
             # Credentials for the SubscriptionsService API.
             class Credentials < ::Google::Auth::Credentials
               self.scope = [
-                "https://www.googleapis.com/auth/chat.bot",
                 "https://www.googleapis.com/auth/chat.memberships",
                 "https://www.googleapis.com/auth/chat.memberships.readonly",
                 "https://www.googleapis.com/auth/chat.messages",

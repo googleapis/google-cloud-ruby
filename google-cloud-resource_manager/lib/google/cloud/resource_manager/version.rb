@@ -20,7 +20,7 @@
 module Google
   module Cloud
     module ResourceManager
-      VERSION = "1.0.0"
+      VERSION = "1.0.2"
     end
   end
 end

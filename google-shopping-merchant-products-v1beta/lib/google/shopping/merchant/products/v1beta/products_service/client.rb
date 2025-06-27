@@ -29,7 +29,6 @@ module Google
             # Client for the ProductsService service.
             #
             # Service to use Product resource.
-            # This service works for products with online channel only.
             #
             class Client
               # @private
@@ -215,9 +214,9 @@ module Google
               #     Required. The name of the product to retrieve.
               #     Format: `accounts/{account}/products/{product}`
               #     where the last section `product` consists of 4 parts:
-              #     channel~content_language~feed_label~offer_id
+              #     `channel~content_language~feed_label~offer_id`
               #     example for product name is
-              #     "accounts/123/products/online~en~US~sku123"
+              #     `accounts/123/products/online~en~US~sku123`
               #
               # @yield [response, operation] Access the result along with the RPC operation
               # @yieldparam response [::Google::Shopping::Merchant::Products::V1beta::Product]
@@ -285,8 +284,8 @@ module Google
 
               ##
               # Lists the processed products in your Merchant Center account. The response
-              # might contain fewer items than specified by pageSize. Rely on pageToken to
-              # determine if there are more items to be requested.
+              # might contain fewer items than specified by `pageSize`. Rely on `pageToken`
+              # to determine if there are more items to be requested.
               #
               # After inserting, updating, or deleting a product input, it may take several
               # minutes before the updated processed product can be retrieved.
@@ -308,7 +307,7 @@ module Google
               #
               #   @param parent [::String]
               #     Required. The account to list processed products for.
-              #     Format: accounts/\\{account}
+              #     Format: `accounts/{account}`
               #   @param page_size [::Integer]
               #     The maximum number of products to return. The service may return fewer than
               #     this value.
@@ -496,8 +495,8 @@ module Google
 
                 config_attr :endpoint,      nil, ::String, nil
                 config_attr :credentials,   nil do |value|
-                  allowed = [::String, ::Hash, ::Proc, ::Symbol, ::Google::Auth::Credentials, ::Signet::OAuth2::Client, nil]
-                  allowed += [::GRPC::Core::Channel, ::GRPC::Core::ChannelCredentials] if defined? ::GRPC
+                  allowed = [::String, ::Hash, ::Proc, ::Symbol, ::Google::Auth::Credentials, ::Google::Auth::BaseClient, ::Signet::OAuth2::Client, nil]
+                  allowed += [::GRPC::Core::Channel, ::GRPC::Core::ChannelCredentials] if defined? ::GRPC::Core::Channel
                   allowed.any? { |klass| klass === value }
                 end
                 config_attr :scope,         nil, ::String, ::Array, nil

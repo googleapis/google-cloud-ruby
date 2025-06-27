@@ -1,5 +1,31 @@
 # Release History
 
+### 0.25.0 (2025-05-12)
+
+#### Features
+
+* Updated core dependencies including gapic-common 
+* Updated required Ruby version to 3.1 
+
+### 0.24.1 (2025-04-29)
+
+#### Bug Fixes
+
+* Fixed several issues with validating credential configs 
+
+### 0.24.0 (2025-04-21)
+
+#### Features
+
+* add ALAW support to RecognitionConfig 
+* add new fields to CustomClass and PhraseSet.Phrase messages 
+* deprecating speaker_tag (int) for speaker_label (string) 
+* expose google.cloud.location.Locations API ([#29445](https://github.com/googleapis/google-cloud-ruby/issues/29445)) 
+* make transcript_normalization field optional 
+#### Documentation
+
+* miscellaneous clarifications 
+
 ### 0.23.0 (2025-01-28)
 
 #### Features

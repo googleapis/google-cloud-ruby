@@ -207,15 +207,15 @@ module Google
         # Standard represents the standard deployment strategy.
         # @!attribute [rw] verify
         #   @return [::Boolean]
-        #     Optional. Whether to verify a deployment.
+        #     Optional. Whether to verify a deployment via `skaffold verify`.
         # @!attribute [rw] predeploy
         #   @return [::Google::Cloud::Deploy::V1::Predeploy]
         #     Optional. Configuration for the predeploy job. If this is not configured,
-        #     predeploy job will not be present.
+        #     the predeploy job will not be present.
         # @!attribute [rw] postdeploy
         #   @return [::Google::Cloud::Deploy::V1::Postdeploy]
         #     Optional. Configuration for the postdeploy job. If this is not configured,
-        #     postdeploy job will not be present.
+        #     the postdeploy job will not be present.
         class Standard
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -254,7 +254,8 @@ module Google
         #     n is 0 <= n <= 100.
         # @!attribute [rw] verify
         #   @return [::Boolean]
-        #     Optional. Whether to run verify tests after each percentage deployment.
+        #     Optional. Whether to run verify tests after each percentage deployment via
+        #     `skaffold verify`.
         # @!attribute [rw] predeploy
         #   @return [::Google::Cloud::Deploy::V1::Predeploy]
         #     Optional. Configuration for the predeploy job of the first phase. If this
@@ -297,7 +298,8 @@ module Google
           #     `DeliveryPipeline` stage.
           # @!attribute [rw] verify
           #   @return [::Boolean]
-          #     Optional. Whether to run verify tests after the deployment.
+          #     Optional. Whether to run verify tests after the deployment via `skaffold
+          #     verify`.
           # @!attribute [rw] predeploy
           #   @return [::Google::Cloud::Deploy::V1::Predeploy]
           #     Optional. Configuration for the predeploy job of this phase. If this is
@@ -1646,7 +1648,7 @@ module Google
         #     Required. Rules to apply. At least one rule must be present.
         # @!attribute [rw] etag
         #   @return [::String]
-        #     The weak etag of the `Automation` resource.
+        #     The weak etag of the `DeployPolicy` resource.
         #     This checksum is computed by the server based on the value of other
         #     fields, and may be sent on update and delete requests to ensure the
         #     client has an up-to-date value before proceeding.
@@ -2064,8 +2066,8 @@ module Google
               VERIFICATION_CONFIG_NOT_FOUND = 4
 
               # The render operation did not complete successfully because the custom
-              # action required for predeploy or postdeploy was not found in the
-              # Skaffold configuration. See failure_message for additional details.
+              # action(s) required for Rollout jobs were not found in the Skaffold
+              # configuration. See failure_message for additional details.
               CUSTOM_ACTION_NOT_FOUND = 5
 
               # Release failed during rendering because the release configuration is
@@ -2376,11 +2378,12 @@ module Google
         #     paths are relative to this location.
         # @!attribute [r] skaffold_config_path
         #   @return [::String]
-        #     Output only. File path of the resolved Skaffold configuration relative to
-        #     the URI.
+        #     Output only. File path of the resolved Skaffold configuration for the
+        #     stable phase, relative to the URI.
         # @!attribute [r] manifest_path
         #   @return [::String]
-        #     Output only. File path of the rendered manifest relative to the URI.
+        #     Output only. File path of the rendered manifest relative to the URI for the
+        #     stable phase.
         # @!attribute [r] phase_artifacts
         #   @return [::Google::Protobuf::Map{::String => ::Google::Cloud::Deploy::V1::TargetArtifact::PhaseArtifact}]
         #     Output only. Map from the phase ID to the phase artifacts for the `Target`.

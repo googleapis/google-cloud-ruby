@@ -308,6 +308,9 @@ module Google
         # @!attribute [r] satisfies_pzi
         #   @return [::Boolean]
         #     Output only. Reserved for future use.
+        # @!attribute [r] checkpoints
+        #   @return [::Array<::Google::Cloud::AIPlatform::V1::Checkpoint>]
+        #     Optional. Output only. The checkpoints of the model.
         class Model
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -760,6 +763,16 @@ module Google
         #       (Vertex AI makes this value available to your container code as the
         #       [`AIP_DEPLOYED_MODEL_ID` environment
         #       variable](https://cloud.google.com/vertex-ai/docs/predictions/custom-container-requirements#aip-variables).)
+        # @!attribute [rw] invoke_route_prefix
+        #   @return [::String]
+        #     Immutable. Invoke route prefix for the custom container. "/*" is the only
+        #     supported value right now. By setting this field, any non-root route on
+        #     this model will be accessible with invoke http call eg: "/invoke/foo/bar",
+        #     however the [PredictionService.Invoke] RPC is not supported yet.
+        #
+        #     Only one of `predict_route` or `invoke_route_prefix` can be set, and we
+        #     default to using `predict_route` if this field is not set. If this field
+        #     is set, the Model can only be deployed to dedicated endpoint.
         # @!attribute [rw] grpc_ports
         #   @return [::Array<::Google::Cloud::AIPlatform::V1::Port>]
         #     Immutable. List of ports to expose from the container. Vertex AI sends gRPC
@@ -988,6 +1001,21 @@ module Google
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
+        end
+
+        # Describes the machine learning model version checkpoint.
+        # @!attribute [rw] checkpoint_id
+        #   @return [::String]
+        #     The ID of the checkpoint.
+        # @!attribute [rw] epoch
+        #   @return [::Integer]
+        #     The epoch of the checkpoint.
+        # @!attribute [rw] step
+        #   @return [::Integer]
+        #     The step of the checkpoint.
+        class Checkpoint
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
       end
     end

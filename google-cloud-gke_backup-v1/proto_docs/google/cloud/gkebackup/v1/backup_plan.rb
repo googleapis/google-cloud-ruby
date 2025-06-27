@@ -93,7 +93,8 @@ module Google
         # @!attribute [r] state_reason
         #   @return [::String]
         #     Output only. Human-readable description of why BackupPlan is in the current
-        #     `state`
+        #     `state`. This field is only meant for human readability and should not be
+        #     used programmatically as this field is not guaranteed to be consistent.
         # @!attribute [r] rpo_risk_level
         #   @return [::Integer]
         #     Output only. A number that represents the current risk level of this
@@ -103,6 +104,18 @@ module Google
         #   @return [::String]
         #     Output only. Human-readable description of why the BackupPlan is in the
         #     current rpo_risk_level and action items if any.
+        # @!attribute [r] backup_channel
+        #   @return [::String]
+        #     Output only. The fully qualified name of the BackupChannel to be used to
+        #     create a backup. This field is set only if the cluster being backed up is
+        #     in a different project.
+        #     `projects/*/locations/*/backupChannels/*`
+        # @!attribute [r] last_successful_backup_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Output only. Completion time of the last successful Backup. This is sourced
+        #     from a successful Backup's complete_time field. This field is added to
+        #     maintain consistency with BackupPlanBinding to display last successful
+        #     backup time.
         class BackupPlan
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

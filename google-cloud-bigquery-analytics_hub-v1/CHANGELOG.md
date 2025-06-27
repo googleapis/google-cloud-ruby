@@ -1,5 +1,28 @@
 # Changelog
 
+### 0.13.0 (2025-05-16)
+
+#### Features
+
+* Provide a safety guard against accidentally deleting or revoking commercial subscriptions 
+* Support commercial data products associated with a listing 
+* Support for destination dataset to create for a subscriber 
+* Support for routine shared resources 
+* Support listings that are provided for metadata but are not subscribable 
+
+### 0.12.0 (2025-05-12)
+
+#### Features
+
+* Updated core dependencies including gapic-common 
+* Updated required Ruby version to 3.1 
+
+### 0.11.1 (2025-04-29)
+
+#### Bug Fixes
+
+* Fixed several issues with validating credential configs 
+
 ### 0.11.0 (2025-03-28)
 
 #### Features
