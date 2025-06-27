@@ -45,8 +45,8 @@ module Google
         #     characters.
         # @!attribute [rw] ad_unit_code
         #   @return [::String]
-        #     Immutable. A string used to uniquely identify the ad unit for the purposes
-        #     of serving the ad. This attribute is optional and can be set during ad unit
+        #     Optional. Immutable. A string used to uniquely identify the ad unit for the
+        #     purposes of serving the ad. This attribute can be set during ad unit
         #     creation. If it is not provided, it will be assigned by Google based on the
         #     ad unit ID.
         # @!attribute [r] status
@@ -91,6 +91,7 @@ module Google
         #   @return [::Array<::Google::Ads::AdManager::V1::AdUnitSize>]
         #     Optional. The sizes that can be served inside this ad unit.
         # @!attribute [rw] external_set_top_box_channel_id
+        #   @deprecated This field is deprecated and may be removed in the next major version update.
         #   @return [::String]
         #     Optional. Determines what set top box video on demand channel this ad unit
         #     corresponds to in an external set top box ad campaign system.
@@ -106,8 +107,8 @@ module Google
         #   @return [::Array<::Google::Ads::AdManager::V1::AppliedLabel>]
         #     Output only. Contains the set of labels applied directly to the ad unit as
         #     well as those inherited from the parent ad units. If a label has been
-        #     negated, only the negated label is returned. This field is readonly and is
-        #     assigned by Google.
+        #     negated, only the negated label is returned. This attribute is assigned by
+        #     Google.
         # @!attribute [rw] applied_label_frequency_caps
         #   @return [::Array<::Google::Ads::AdManager::V1::LabelFrequencyCap>]
         #     Optional. The set of label frequency caps applied directly to this ad unit.
@@ -118,13 +119,13 @@ module Google
         #     well as those inherited from parent ad units.
         # @!attribute [rw] smart_size_mode
         #   @return [::Google::Ads::AdManager::V1::SmartSizeModeEnum::SmartSizeMode]
-        #     Optional. The smart size mode for this ad unit. This attribute is optional
-        #     and defaults to SmartSizeMode.NONE for fixed sizes.
+        #     Optional. Non-empty default. The smart size mode for this ad unit. This
+        #     attribute defaults to SmartSizeMode.NONE for fixed sizes.
         # @!attribute [rw] applied_adsense_enabled
         #   @return [::Boolean]
-        #     Optional. The value of AdSense enabled directly applied to this ad unit.
-        #     This attribute is optional and if not specified this ad unit will inherit
-        #     the value of effectiveAdsenseEnabled from its ancestors.
+        #     Optional. The value of AdSense enabled directly applied to this ad unit. If
+        #     not specified this ad unit will inherit the value of
+        #     effectiveAdsenseEnabled from its ancestors.
         # @!attribute [r] effective_adsense_enabled
         #   @return [::Boolean]
         #     Output only. Specifies whether or not the AdUnit is enabled for serving ads

@@ -168,6 +168,13 @@ module Google
                                                           uri_method: :get,
                                                           uri_template: "/v1/{name}",
                                                           matches: [
+                                                            ["name", %r{^networks/[^/]+/customTargetingValues/[^/]+/?$}, false]
+                                                          ]
+                                                        )
+                                                        .with_bindings(
+                                                          uri_method: :get,
+                                                          uri_template: "/v1/{name}",
+                                                          matches: [
                                                             ["name", %r{^networks/[^/]+/customTargetingKeys/[^/]+/customTargetingValues/[^/]+/?$}, false]
                                                           ]
                                                         )
@@ -185,6 +192,13 @@ module Google
               #   Uri, Body, Query string parameters
               def self.transcode_list_custom_targeting_values_request request_pb
                 transcoder = Gapic::Rest::GrpcTranscoder.new
+                                                        .with_bindings(
+                                                          uri_method: :get,
+                                                          uri_template: "/v1/{parent}/customTargetingValues",
+                                                          matches: [
+                                                            ["parent", %r{^networks/[^/]+/?$}, false]
+                                                          ]
+                                                        )
                                                         .with_bindings(
                                                           uri_method: :get,
                                                           uri_template: "/v1/{parent}/customTargetingValues",

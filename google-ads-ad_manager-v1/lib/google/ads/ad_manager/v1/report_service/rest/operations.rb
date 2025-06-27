@@ -860,13 +860,6 @@ module Google
                                                             ["name", %r{^networks/[^/]+/operations/reports/runs/[^/]+/?$}, false]
                                                           ]
                                                         )
-                                                        .with_bindings(
-                                                          uri_method: :get,
-                                                          uri_template: "/v1/{name}",
-                                                          matches: [
-                                                            ["name", %r{^networks/[^/]+/operations/reports/exports/[^/]+/?$}, false]
-                                                          ]
-                                                        )
                 transcoder.transcode request_pb
               end
 

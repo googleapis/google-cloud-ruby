@@ -24,20 +24,16 @@ module Google
         # Represents the dimensions of an AdUnit, LineItem, or Creative.
         # @!attribute [rw] width
         #   @return [::Integer]
-        #     Required. The width of the [Creative](google.ads.admanager.v1.Creative),
-        #     [AdUnit](google.ads.admanager.v1.AdUnit), or
-        #     [LineItem](google.ads.admanager.v1.LineItem).
+        #     Required. The width of the Creative,
+        #     {::Google::Ads::AdManager::V1::AdUnit AdUnit}, or LineItem.
         # @!attribute [rw] height
         #   @return [::Integer]
-        #     Required. The height of the [Creative](google.ads.admanager.v1.Creative),
-        #     [AdUnit](google.ads.admanager.v1.AdUnit), or
-        #     [LineItem](google.ads.admanager.v1.LineItem).
+        #     Required. The height of the Creative,
+        #     {::Google::Ads::AdManager::V1::AdUnit AdUnit}, or LineItem.
         # @!attribute [rw] size_type
         #   @return [::Google::Ads::AdManager::V1::SizeTypeEnum::SizeType]
-        #     Required. The SizeType of the
-        #     [Creative](google.ads.admanager.v1.Creative),
-        #     [AdUnit](google.ads.admanager.v1.AdUnit), or
-        #     [LineItem](google.ads.admanager.v1.LineItem).
+        #     Required. The SizeType of the Creative,
+        #     {::Google::Ads::AdManager::V1::AdUnit AdUnit}, or LineItem.
         class Size
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

@@ -26,10 +26,6 @@ module Google
         #   @return [::String]
         #     Identifier. The resource name of the `Team`.
         #     Format: `networks/{network_code}/teams/{team_id}`
-        # @!attribute [r] team_id
-        #   @return [::Integer]
-        #     Output only. The unique ID of the Team. This value is assigned by Google.
-        #     Teams that are created by Google will have negative IDs.
         class Team
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

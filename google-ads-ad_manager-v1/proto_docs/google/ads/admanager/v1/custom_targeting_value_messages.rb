@@ -26,7 +26,12 @@ module Google
         #   @return [::String]
         #     Identifier. The resource name of the `CustomTargetingValue`.
         #     Format:
-        #     `networks/{network_code}/customTargetingKeys/{custom_targeting_key_id}/customTargetingValues/{custom_targeting_value_id}`
+        #     `networks/{network_code}/customTargetingValues/{custom_targeting_value_id}`
+        # @!attribute [rw] custom_targeting_key
+        #   @return [::String]
+        #     Required. Immutable. The resource name of the `CustomTargetingKey`.
+        #     Format:
+        #     `networks/{network_code}/customTargetingKeys/{custom_targeting_key_id}`
         # @!attribute [rw] ad_tag_name
         #   @return [::String]
         #     Immutable. Name of the `CustomTargetingValue`. Values can contain up to 40

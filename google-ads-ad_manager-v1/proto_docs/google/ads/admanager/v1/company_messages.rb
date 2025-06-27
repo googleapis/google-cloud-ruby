@@ -84,13 +84,13 @@ module Google
         #   @return [::Array<::String>]
         #     Optional. The resource names of Teams that are directly associated with the
         #     `Company`. Format: "networks/\\{network_code}/teams/\\{team_id}"
-        # @!attribute [r] update_time
-        #   @return [::Google::Protobuf::Timestamp]
-        #     Output only. The time the `Company` was last modified.
         # @!attribute [rw] third_party_company_id
         #   @return [::Integer]
         #     Optional. The ID of the Google-recognized canonicalized form of the
         #     `Company`.
+        # @!attribute [r] update_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Output only. The time the `Company` was last modified.
         class Company
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
