@@ -47,7 +47,7 @@ describe Google::Cloud::PubSub::MessageListener, :stream, :mock_pubsub do
       end
     end
 
-    subscriber.service.mocked_subscriber = stub
+    subscriber.service.mocked_subscription_admin = stub
     listener = subscriber.listen streams: 1 do |msg|
       msg.acknowledge!
       called = true
@@ -89,7 +89,7 @@ describe Google::Cloud::PubSub::MessageListener, :stream, :mock_pubsub do
       end
     end
 
-    subscriber.service.mocked_subscriber = stub
+    subscriber.service.mocked_subscription_admin = stub
     listener = subscriber.listen streams: 1 do |msg|
       msg.modify_ack_deadline! 120
       called = true
@@ -127,7 +127,7 @@ describe Google::Cloud::PubSub::MessageListener, :stream, :mock_pubsub do
       raise StandardError.new "Test failure"
     end
 
-    subscriber.service.mocked_subscriber = stub
+    subscriber.service.mocked_subscription_admin = stub
     listener = subscriber.listen streams: 1 do |msg|
       msg.modify_ack_deadline! 120 do |result|
         assert_kind_of Google::Cloud::PubSub::AcknowledgeResult, result,  Proc.new { raise "Result kind did not match!" }
@@ -170,7 +170,7 @@ describe Google::Cloud::PubSub::MessageListener, :stream, :mock_pubsub do
       raise StandardError.new "Test failure"
     end
 
-    subscriber.service.mocked_subscriber = stub
+    subscriber.service.mocked_subscription_admin = stub
     listener = subscriber.listen streams: 1 do |msg|
       msg.acknowledge! do |result|
         assert_kind_of Google::Cloud::PubSub::AcknowledgeResult, result,  Proc.new { raise "Result kind did not match!" }
@@ -212,7 +212,7 @@ describe Google::Cloud::PubSub::MessageListener, :stream, :mock_pubsub do
       raise Google::Cloud::PermissionDeniedError.new "Test failure"
     end
 
-    subscriber.service.mocked_subscriber = stub
+    subscriber.service.mocked_subscription_admin = stub
     listener = subscriber.listen streams: 1 do |msg|
       msg.acknowledge! do |result|
         assert_kind_of Google::Cloud::PubSub::AcknowledgeResult, result,  Proc.new { raise "Result kind did not match!" }
@@ -257,7 +257,7 @@ describe Google::Cloud::PubSub::MessageListener, :stream, :mock_pubsub do
       raise Google::Cloud::PermissionDeniedError.new "Test failure"
     end
 
-    subscriber.service.mocked_subscriber = stub
+    subscriber.service.mocked_subscription_admin = stub
     listener = subscriber.listen streams: 1 do |msg|
       msg.modify_ack_deadline! 120 do |result|
         assert_kind_of Google::Cloud::PubSub::AcknowledgeResult, result,  Proc.new { raise "Result kind did not match!" }
@@ -299,7 +299,7 @@ describe Google::Cloud::PubSub::MessageListener, :stream, :mock_pubsub do
       raise Google::Cloud::FailedPreconditionError.new "Test failure"
     end
 
-    subscriber.service.mocked_subscriber = stub
+    subscriber.service.mocked_subscription_admin = stub
     listener = subscriber.listen streams: 1 do |msg|
       msg.acknowledge! do |result|
         assert_kind_of Google::Cloud::PubSub::AcknowledgeResult, result,  Proc.new { raise "Result kind did not match!" }
@@ -344,7 +344,7 @@ describe Google::Cloud::PubSub::MessageListener, :stream, :mock_pubsub do
       raise Google::Cloud::FailedPreconditionError.new "Test failure"
     end
 
-    subscriber.service.mocked_subscriber = stub
+    subscriber.service.mocked_subscription_admin = stub
     listener = subscriber.listen streams: 1 do |msg|
       msg.modify_ack_deadline! 120 do |result|
         assert_kind_of Google::Cloud::PubSub::AcknowledgeResult, result,  Proc.new { raise "Result kind did not match!" }
@@ -383,7 +383,7 @@ describe Google::Cloud::PubSub::MessageListener, :stream, :mock_pubsub do
     called = false 
     errors = []
 
-    subscriber.service.mocked_subscriber = stub
+    subscriber.service.mocked_subscription_admin = stub
     listener = subscriber.listen streams: 1 do |msg|
       msg.modify_ack_deadline! 120 do |result|
         assert_kind_of Google::Cloud::PubSub::AcknowledgeResult, result,  Proc.new { raise "Result kind did not match!" }
@@ -422,7 +422,7 @@ describe Google::Cloud::PubSub::MessageListener, :stream, :mock_pubsub do
     called = false  
     errors = []
 
-    subscriber.service.mocked_subscriber = stub
+    subscriber.service.mocked_subscription_admin = stub
     listener = subscriber.listen streams: 1 do |msg|
       msg.acknowledge! do |result|
         assert_kind_of Google::Cloud::PubSub::AcknowledgeResult, result,  Proc.new { raise "Result kind did not match!" }
@@ -481,7 +481,7 @@ describe Google::Cloud::PubSub::MessageListener, :stream, :mock_pubsub do
       end
     end
 
-    subscriber.service.mocked_subscriber = stub
+    subscriber.service.mocked_subscription_admin = stub
     listener = subscriber.listen streams: 1 do |msg|
       msg.acknowledge!
       called = true
@@ -507,10 +507,10 @@ describe Google::Cloud::PubSub::MessageListener, :stream, :mock_pubsub do
   end
 
   it "should parse error_metadata to give temp and permanent errors" do
-    mocked_subscriber = Minitest::Mock.new
-    mocked_subscriber.expect :callback_threads, 4 
-    mocked_subscriber.expect :callback_threads, 4 
-    buffer = Google::Cloud::PubSub::MessageListener::TimedUnaryBuffer.new mocked_subscriber
+    mocked_subscription_admin = Minitest::Mock.new
+    mocked_subscription_admin.expect :callback_threads, 4 
+    mocked_subscription_admin.expect :callback_threads, 4 
+    buffer = Google::Cloud::PubSub::MessageListener::TimedUnaryBuffer.new mocked_subscription_admin
     temp_error = buffer.send(:parse_error, 
                             OpenStruct.new(error_metadata: {"12" =>"PERMANENT_FAILURE_INVALID_ACK_ID", 
                                                             "13" => "TRANSIENT_FAILURE"}))

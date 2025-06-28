@@ -55,7 +55,7 @@ describe Google::Cloud::PubSub::Publisher, :mock_pubsub do
     mock.expect :publish, publish_res do |actual_request, actual_option|
       actual_request == expected_request && actual_option.nil?
     end
-    publisher.service.mocked_publisher = mock
+    publisher.service.mocked_topic_admin = mock
 
     msg = publisher.publish message
 
@@ -76,7 +76,7 @@ describe Google::Cloud::PubSub::Publisher, :mock_pubsub do
     mock.expect :publish, publish_res do |actual_request, actual_option|
       actual_request == expected_request && actual_option == expected_option
     end
-    publisher.service.mocked_publisher = mock
+    publisher.service.mocked_topic_admin = mock
 
     msg = publisher.publish "d"*238, compress: true
 
@@ -97,7 +97,7 @@ describe Google::Cloud::PubSub::Publisher, :mock_pubsub do
     mock.expect :publish, publish_res do |actual_request, actual_option|
       actual_request == expected_request && actual_option == expected_option
     end
-    publisher.service.mocked_publisher = mock
+    publisher.service.mocked_topic_admin = mock
 
     msg = publisher.publish "d"*138, compress: true, compression_bytes_threshold: 140
 
@@ -119,7 +119,7 @@ describe Google::Cloud::PubSub::Publisher, :mock_pubsub do
     mock.expect :publish, publish_res do |actual_request|
       actual_request == expected_request
     end
-    publisher.service.mocked_publisher = mock
+    publisher.service.mocked_topic_admin = mock
 
     msg = publisher.publish message, format: :text
 
@@ -145,7 +145,7 @@ describe Google::Cloud::PubSub::Publisher, :mock_pubsub do
     mock.expect :publish, publish_res do |actual_request|
       actual_request == expected_request
     end
-    publisher.service.mocked_publisher = mock
+    publisher.service.mocked_topic_admin = mock
 
     msgs = publisher.publish do |batch|
       batch.publish message1

@@ -29,10 +29,13 @@ module Google
       # # Project
       #
       # Represents the project that pubsub messages are pushed to and pulled
-      # from. {Topic} is a named resource to which messages are sent by
-      # publishers. {Subscription} is a named resource representing the stream
+      # from.
+      #
+      # {Google::Cloud::PubSub::V1::Topic} is a named resource to which
+      # messages are sent by using {Publisher}.
+      # {Google::Cloud::PubSub::V1::Subscription} is a named resource representing the stream
       # of messages from a single, specific topic, to be delivered to the
-      # subscribing application. {Message} is a combination of data and
+      # subscribing application via {Subscriber}. {Message} is a combination of data and
       # attributes that a publisher sends to a topic and is eventually delivered
       # to subscribers.
       #
@@ -81,6 +84,79 @@ module Google
         #
         def universe_domain
           service.universe_domain
+        end
+
+        ##
+        # Retrieve a client for managing subscriptions.
+        #
+        # @return [Google::Cloud::PubSub::V1::SubscriptionAdmin::Client]
+        #
+        def subscription_admin
+          service.subscription_admin
+        end
+
+        ##
+        # Retrieve a client for managing topics.
+        #
+        # @return [Google::Cloud::PubSub::V1::TopicAdmin::Client]
+        #
+        def topic_admin
+          service.topic_admin
+        end
+
+        ##
+        # Retrieve a client for managing schemas.
+        #
+        # @return [Google::Cloud::PubSub::V1::SchemaService::Client]
+        #
+        def schemas
+          service.schemas
+        end
+
+        ##
+        # Retrieves a Publisher by topic name or full project path.
+        #
+        # @param [String] topic_name Name of a topic. The value can be a simple
+        #   topic ID (relative name) or a fully-qualified topic name.
+        # @param [String] project The alternate project ID can be specified here.
+        #   Optional. Not used if a fully-qualified topic name is provided
+        #   for `topic_name`.
+        # @param [Hash] async A hash of values to configure the topic's
+        #   {AsyncPublisher} that is created when {Publisher#publish_async}
+        #   is called. Optional.
+        #
+        # @return [Google::Cloud::PubSub::Publisher]
+        #
+        def publisher topic_name, project: nil, async: nil
+          ensure_service!
+          options = { project: project, async: async }
+          grpc = topic_admin.get_topic topic: service.publisher_path(topic_name, options)
+          Publisher.from_grpc grpc
+        end
+
+        ##
+        # Retrieves a Subscriber by subscription name or full project path.
+        #
+        # @param [String] subscription_name Name of a subscription. The value can
+        #   be a simple subscription ID (relative name) or a fully-qualified
+        #   subscription name.
+        # @param [String] project The alternate project ID can be specified here.
+        #   Optional. Not used if a fully-qualified topic name is provided
+        #   for `topic_name`.
+        # @param [Boolean] skip_lookup Optionally create a {Google::Cloud::PubSub::V1::Subscription}
+        #   object without verifying the subscription resource exists on the Pub/Sub
+        #   service. Calls made on this object will raise errors if the service
+        #   resource does not exist. Default is `false`.
+        #
+        # @return [Google::Cloud::PubSub::Subscriber, nil] Returns `nil` if
+        #   the subscription does not exist.
+        #
+        def subscriber subscription_name, project: nil, skip_lookup: nil
+          ensure_service!
+          options = { project: project }
+          return Subscriber.from_name subscription_name, service, options if skip_lookup
+          grpc = subscription_admin_client.get_subscription subscription: subscription_path(subscription_name, options)
+          Subscriber.from_grpc grpc
         end
 
         protected

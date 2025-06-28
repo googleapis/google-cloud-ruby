@@ -35,7 +35,7 @@ describe Google::Cloud::PubSub::Publisher, :publish, :mock_pubsub do
     mock.expect :publish, publish_res do |actual_request|
       actual_request == expected_request
     end
-    publisher.service.mocked_publisher = mock
+    publisher.service.mocked_topic_admin = mock
 
     msg = publisher.publish message1, ordering_key: ordering_key
 
@@ -55,7 +55,7 @@ describe Google::Cloud::PubSub::Publisher, :publish, :mock_pubsub do
     mock.expect :publish, publish_res do |actual_request|
       actual_request == expected_request
     end
-    publisher.service.mocked_publisher = mock
+    publisher.service.mocked_topic_admin = mock
 
     msg = publisher.publish message1, format: :text, ordering_key: ordering_key
 
@@ -78,7 +78,7 @@ describe Google::Cloud::PubSub::Publisher, :publish, :mock_pubsub do
     mock.expect :publish, publish_res do |actual_request|
       actual_request == expected_request
     end
-    publisher.service.mocked_publisher = mock
+    publisher.service.mocked_topic_admin = mock
 
     msgs = publisher.publish do |batch|
       batch.publish message1, ordering_key: ordering_key

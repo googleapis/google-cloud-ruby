@@ -70,7 +70,7 @@ describe Google::Cloud::PubSub::MessageListener, :message_ordering, :mock_pubsub
     message_hash = Hash.new { |hash, key| hash[key] = [] }
     callback_count = 0
 
-    subscriber.service.mocked_subscriber = stub
+    subscriber.service.mocked_subscription_admin = stub
     listener = subscriber.listen streams: 1, inventory: 100 do |msg|
       assert_kind_of Google::Cloud::PubSub::ReceivedMessage, msg
       callback_count += 1
@@ -115,7 +115,7 @@ describe Google::Cloud::PubSub::MessageListener, :message_ordering, :mock_pubsub
     message_hash = Hash.new { |hash, key| hash[key] = [] }
     callback_count = 0
 
-    subscriber.service.mocked_subscriber = stub
+    subscriber.service.mocked_subscription_admin = stub
     listener = subscriber.listen streams: 4, inventory: 1000 do |msg|
       assert_kind_of Google::Cloud::PubSub::ReceivedMessage, msg
       callback_count += 1

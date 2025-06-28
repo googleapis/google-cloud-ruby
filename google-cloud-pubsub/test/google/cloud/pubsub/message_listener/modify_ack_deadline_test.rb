@@ -38,7 +38,7 @@ describe Google::Cloud::PubSub::MessageListener, :modify_ack_deadline, :mock_pub
     stub = StreamingPullStub.new response_groups
     called = false
 
-    subscriber.service.mocked_subscriber = stub
+    subscriber.service.mocked_subscription_admin = stub
     subscriber.service.client_id = client_id
 
     listener = subscriber.listen streams: 1 do |msg|
@@ -97,7 +97,7 @@ describe Google::Cloud::PubSub::MessageListener, :modify_ack_deadline, :mock_pub
     stub = StreamingPullStub.new response_groups
     called = 0
 
-    subscriber.service.mocked_subscriber = stub
+    subscriber.service.mocked_subscription_admin = stub
     subscriber.service.client_id = client_id
 
     listener = subscriber.listen streams: 1 do |msg|

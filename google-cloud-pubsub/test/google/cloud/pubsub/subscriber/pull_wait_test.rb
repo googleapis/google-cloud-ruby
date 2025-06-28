@@ -26,7 +26,7 @@ describe Google::Cloud::PubSub::Subscriber, :pull, :wait, :mock_pubsub do
     pull_res = Google::Cloud::PubSub::V1::PullResponse.new rec_messages_hash(rec_message_msg)
     mock = Minitest::Mock.new
     mock.expect :pull, pull_res, subscription: subscription_path(sub_name), max_messages: 100, return_immediately: false
-    subscriber.service.mocked_subscriber = mock
+    subscriber.service.mocked_subscription_admin = mock
 
     rec_messages = subscriber.pull immediate: false
 
@@ -41,7 +41,7 @@ describe Google::Cloud::PubSub::Subscriber, :pull, :wait, :mock_pubsub do
     pull_res = Google::Cloud::PubSub::V1::PullResponse.new rec_messages_hash(rec_message_msg)
     mock = Minitest::Mock.new
     mock.expect :pull, pull_res, subscription: subscription_path(sub_name), max_messages: 100, return_immediately: false
-    subscriber.service.mocked_subscriber = mock
+    subscriber.service.mocked_subscription_admin = mock
 
     rec_messages = subscriber.wait_for_messages
 
@@ -56,7 +56,7 @@ describe Google::Cloud::PubSub::Subscriber, :pull, :wait, :mock_pubsub do
     def stub.pull *args
       raise Google::Cloud::DeadlineExceededError
     end
-    subscriber.service.mocked_subscriber = stub
+    subscriber.service.mocked_subscription_admin = stub
 
     rec_messages = subscriber.pull immediate: false
     _(rec_messages).must_be :empty?

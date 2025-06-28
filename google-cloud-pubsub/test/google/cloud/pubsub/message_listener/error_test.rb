@@ -38,7 +38,7 @@ describe Google::Cloud::PubSub::MessageListener, :error, :mock_pubsub do
     called = 0
     errors = []
 
-    subscriber.service.mocked_subscriber = stub
+    subscriber.service.mocked_subscription_admin = stub
     listener = subscriber.listen streams: 1 do |msg|
       assert_kind_of Google::Cloud::PubSub::ReceivedMessage, msg
       msg.ack!

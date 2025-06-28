@@ -25,17 +25,18 @@ module Google
       ##
       # # Publisher
       #
-      # A named resource to which messages are published.
-      #
-      # See {Project#create_topic} and {Project#topic}.
+      # A {Publisher} is the primary interface for data plane operations on a
+      # topic, including publishing messages, batching messages for higher
+      # throughput, and managing ordering keys.
       #
       # @example
       #   require "google/cloud/pubsub"
       #
       #   pubsub = Google::Cloud::PubSub.new
       #
-      #   topic = pubsub.topic "my-topic"
-      #   topic.publish "task completed"
+      #   publisher = pubsub.publisher "my-topic-only"
+      #
+      #   publisher.publish "task completed"
       #
       class Publisher
         ##
@@ -66,8 +67,8 @@ module Google
         #
         #   pubsub = Google::Cloud::PubSub.new
         #
-        #   topic = pubsub.topic "my-topic"
-        #   topic.publish_async "task completed" do |result|
+        #   publisher = pubsub.publisher "my-topic"
+        #   publisher.publish_async "task completed" do |result|
         #     if result.succeeded?
         #       log_publish_success result.data
         #     else
@@ -75,14 +76,14 @@ module Google
         #     end
         #   end
         #
-        #   topic.async_publisher.stop!
+        #   publisher.async_publisher.stop!
         #
         def async_publisher
           @async_publisher
         end
 
         ##
-        # The name of the topic.
+        # The name of the publisher.
         #
         # @return [String] A fully-qualified topic name in the form
         #   `projects/{project_id}/topics/{topic_id}`.
@@ -92,7 +93,7 @@ module Google
         end
 
         ##
-        # Publishes one or more messages to the topic.
+        # Publishes one or more messages to the publisher.
         #
         # The message payload must not be empty; it must contain either a
         # non-empty data field, or at least one attribute.
@@ -116,25 +117,25 @@ module Google
         #
         #   pubsub = Google::Cloud::PubSub.new
         #
-        #   topic = pubsub.topic "my-topic"
-        #   msg = topic.publish "task completed"
+        #   publisher = pubsub.publisher "my-topic"
+        #   msg = publisher.publish "task completed"
         #
         # @example A message can be published using a File object:
         #   require "google/cloud/pubsub"
         #
         #   pubsub = Google::Cloud::PubSub.new
         #
-        #   topic = pubsub.topic "my-topic"
+        #   publisher = pubsub.publisher "my-topic"
         #   file = File.open "message.txt", mode: "rb"
-        #   msg = topic.publish file
+        #   msg = publisher.publish file
         #
         # @example Additionally, a message can be published with attributes:
         #   require "google/cloud/pubsub"
         #
         #   pubsub = Google::Cloud::PubSub.new
         #
-        #   topic = pubsub.topic "my-topic"
-        #   msg = topic.publish "task completed",
+        #   publisher = pubsub.publisher "my-topic"
+        #   msg = publisher.publish "task completed",
         #                       foo: :bar,
         #                       this: :that
         #
@@ -143,11 +144,11 @@ module Google
         #
         #   pubsub = Google::Cloud::PubSub.new
         #
-        #   topic = pubsub.topic "my-topic"
-        #   msgs = topic.publish do |t|
-        #     t.publish "task 1 completed", foo: :bar
-        #     t.publish "task 2 completed", foo: :baz
-        #     t.publish "task 3 completed", foo: :bif
+        #   publisher = pubsub.ublisher "my-topic"
+        #   msgs = publisher.publish do |t|
+        #     p.publish "task 1 completed", foo: :bar
+        #     p.publish "task 2 completed", foo: :baz
+        #     p.publish "task 3 completed", foo: :bif
         #   end
         #
         # @example Ordered messages are supported using ordering_key:
@@ -155,13 +156,13 @@ module Google
         #
         #   pubsub = Google::Cloud::PubSub.new
         #
-        #   topic = pubsub.topic "my-ordered-topic"
+        #   publisher = pubsub.publisher "my-ordered-topic"
         #
         #   # Ensure that message ordering is enabled.
-        #   topic.enable_message_ordering!
+        #   publisher.enable_message_ordering!
         #
         #   # Publish an ordered message with an ordering key.
-        #   topic.publish "task completed",
+        #   publisher.publish "task completed",
         #                 ordering_key: "task-key"
         #
         def publish data = nil, attributes = nil, ordering_key: nil, compress: nil, compression_bytes_threshold: nil,
@@ -204,9 +205,7 @@ module Google
         #   enabled and requires special project enablements.
         #
         # Publisher flow control limits the number of outstanding messages that
-        # are allowed to wait to be published. See the `flow_control` key in the
-        # `async` parameter in {Project#topic} for more information about publisher
-        # flow control settings.
+        # are allowed to wait to be published.
         #
         # @param [String, File] data The message payload. This will be converted
         #   to bytes encoded as ASCII-8BIT.
@@ -232,16 +231,14 @@ module Google
         #   `flow_control.limit_exceeded_behavior` is set to `:error` or `:block`.
         #   If `flow_control.limit_exceeded_behavior` is set to `:block`, this error
         #   will be raised only when a limit would be exceeded by a single message.
-        #   See the `async` parameter in {Project#topic} for more information about
-        #   `flow_control` settings.
         #
         # @example
         #   require "google/cloud/pubsub"
         #
         #   pubsub = Google::Cloud::PubSub.new
         #
-        #   topic = pubsub.topic "my-topic"
-        #   topic.publish_async "task completed" do |result|
+        #   publisher = pubsub.publisher "my-topic"
+        #   publisher.publish_async "task completed" do |result|
         #     if result.succeeded?
         #       log_publish_success result.data
         #     else
@@ -250,48 +247,48 @@ module Google
         #   end
         #
         #   # Shut down the publisher when ready to stop publishing messages.
-        #   topic.async_publisher.stop!
+        #   publisher.async_publisher.stop!
         #
         # @example A message can be published using a File object:
         #   require "google/cloud/pubsub"
         #
         #   pubsub = Google::Cloud::PubSub.new
         #
-        #   topic = pubsub.topic "my-topic"
+        #   publisher = pubsub.publisher "my-topic"
         #   file = File.open "message.txt", mode: "rb"
-        #   topic.publish_async file
+        #   publisher.publish_async file
         #
         #   # Shut down the publisher when ready to stop publishing messages.
-        #   topic.async_publisher.stop!
+        #   publisher.async_publisher.stop!
         #
         # @example Additionally, a message can be published with attributes:
         #   require "google/cloud/pubsub"
         #
         #   pubsub = Google::Cloud::PubSub.new
         #
-        #   topic = pubsub.topic "my-topic"
-        #   topic.publish_async "task completed",
+        #   publisher = pubsub.publisher "my-topic"
+        #   publisher.publish_async "task completed",
         #                       foo: :bar, this: :that
         #
         #   # Shut down the publisher when ready to stop publishing messages.
-        #   topic.async_publisher.stop!
+        #   publisher.async_publisher.stop!
         #
         # @example Ordered messages are supported using ordering_key:
         #   require "google/cloud/pubsub"
         #
         #   pubsub = Google::Cloud::PubSub.new
         #
-        #   topic = pubsub.topic "my-ordered-topic"
+        #   publisher = pubsub.publisher "my-ordered-topic"
         #
         #   # Ensure that message ordering is enabled.
-        #   topic.enable_message_ordering!
+        #   publisher.enable_message_ordering!
         #
         #   # Publish an ordered message with an ordering key.
-        #   topic.publish_async "task completed",
+        #   publisher.publish_async "task completed",
         #                       ordering_key: "task-key"
         #
         #   # Shut down the publisher when ready to stop publishing messages.
-        #   topic.async_publisher.stop!
+        #   publisher.async_publisher.stop!
         #
         def publish_async data = nil, attributes = nil, ordering_key: nil, **extra_attrs, &callback
           ensure_service!
@@ -309,7 +306,7 @@ module Google
         #   enabled and requires special project enablements.
         #
         # See {#message_ordering?}.  See {#publish_async},
-        # {Subscription#listen}, and {Message#ordering_key}.
+        # {Subscriber#listen}, and {Message#ordering_key}.
         #
         def enable_message_ordering!
           @async_publisher ||= AsyncPublisher.new name, service, **@async_opts
@@ -323,7 +320,7 @@ module Google
         # published. When disabled, messages may be delivered in any order.
         #
         # See {#enable_message_ordering!}. See {#publish_async},
-        # {Subscription#listen}, and {Message#ordering_key}.
+        # {Subscriber#listen}, and {Message#ordering_key}.
         #
         # @return [Boolean]
         #

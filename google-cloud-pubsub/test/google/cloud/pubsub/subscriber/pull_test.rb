@@ -26,7 +26,7 @@ describe Google::Cloud::PubSub::Subscriber, :pull, :mock_pubsub do
     pull_res = Google::Cloud::PubSub::V1::PullResponse.new rec_messages_hash(rec_message_msg)
     mock = Minitest::Mock.new
     mock.expect :pull, pull_res, subscription: subscription_path(sub_name), max_messages: 100, return_immediately: true
-    subscriber.service.mocked_subscriber = mock
+    subscriber.service.mocked_subscription_admin = mock
 
     rec_messages = subscriber.pull
 
@@ -46,7 +46,7 @@ describe Google::Cloud::PubSub::Subscriber, :pull, :mock_pubsub do
       pull_res = Google::Cloud::PubSub::V1::PullResponse.new rec_messages_hash(rec_message_msg)
       mock = Minitest::Mock.new
       mock.expect :pull, pull_res, subscription: subscription_path(sub_name), max_messages: 100, return_immediately: true
-      subscriber.service.mocked_subscriber = mock
+      subscriber.service.mocked_subscription_admin = mock
 
       rec_messages = subscriber.pull
 
@@ -68,7 +68,7 @@ describe Google::Cloud::PubSub::Subscriber, :pull, :mock_pubsub do
       def stub.pull *args
         raise Google::Cloud::NotFoundError.new("not found")
       end
-      subscriber.service.mocked_subscriber = stub
+      subscriber.service.mocked_subscription_admin = stub
 
       expect do
         subscriber.pull

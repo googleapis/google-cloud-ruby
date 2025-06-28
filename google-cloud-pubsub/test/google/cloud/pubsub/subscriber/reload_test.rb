@@ -38,7 +38,7 @@ describe Google::Cloud::PubSub::Subscriber, :name, :mock_pubsub do
 
     mock = Minitest::Mock.new
     mock.expect :get_subscription, sub_grpc_new, subscription: sub_path
-    pubsub.service.mocked_subscriber = mock
+    pubsub.service.mocked_subscription_admin = mock
 
     sub_resource.reload!
 
@@ -57,7 +57,7 @@ describe Google::Cloud::PubSub::Subscriber, :name, :mock_pubsub do
 
     mock = Minitest::Mock.new
     mock.expect :get_subscription, sub_grpc_new, subscription: sub_path
-    pubsub.service.mocked_subscriber = mock
+    pubsub.service.mocked_subscription_admin = mock
 
     sub_reference.reload!
 

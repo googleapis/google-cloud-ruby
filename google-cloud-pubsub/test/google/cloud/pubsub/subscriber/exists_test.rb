@@ -38,7 +38,7 @@ describe Google::Cloud::PubSub::Subscriber, :exists, :mock_pubsub do
       get_res = Google::Cloud::PubSub::V1::Subscription.new subscription_hash(topic_name, sub_name)
       mock = Minitest::Mock.new
       mock.expect :get_subscription, get_res, subscription: subscription_path(sub_name)
-      subscriber.service.mocked_subscriber = mock
+      subscriber.service.mocked_subscription_admin = mock
 
       _(subscriber).must_be :exists?
 
@@ -60,7 +60,7 @@ describe Google::Cloud::PubSub::Subscriber, :exists, :mock_pubsub do
       def stub.get_subscription *args
         raise Google::Cloud::NotFoundError.new("not found")
       end
-      subscriber.service.mocked_subscriber = stub
+      subscriber.service.mocked_subscription_admin = stub
 
       _(subscriber).wont_be :exists?
       # Additional exists? calls do not make HTTP calls

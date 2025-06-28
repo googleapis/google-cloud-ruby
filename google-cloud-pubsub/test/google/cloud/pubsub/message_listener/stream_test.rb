@@ -35,7 +35,7 @@ describe Google::Cloud::PubSub::MessageListener, :stream, :mock_pubsub do
     stub = StreamingPullStub.new response_groups
     called = false
 
-    subscriber.service.mocked_subscriber = stub
+    subscriber.service.mocked_subscription_admin = stub
     listener = subscriber.listen streams: 1 do |msg|
       assert msg.subscription.exactly_once_delivery_enabled
       called = true
@@ -65,7 +65,7 @@ describe Google::Cloud::PubSub::MessageListener, :stream, :mock_pubsub do
     stub = StreamingPullStub.new response_groups
     called = false
 
-    subscriber.service.mocked_subscriber = stub
+    subscriber.service.mocked_subscription_admin = stub
     listener = subscriber.listen streams: 1 do |msg|
       assert msg.subscription.exactly_once_delivery_enabled
       called = true
@@ -100,7 +100,7 @@ describe Google::Cloud::PubSub::MessageListener, :stream, :mock_pubsub do
     stub = StreamingPullStub.new response_groups
     called = false
 
-    subscriber.service.mocked_subscriber = stub
+    subscriber.service.mocked_subscription_admin = stub
     listener = subscriber.listen streams: 1 do |msg|
       called = true
     end
@@ -129,7 +129,7 @@ describe Google::Cloud::PubSub::MessageListener, :stream, :mock_pubsub do
     stub = StreamingPullStub.new response_groups
     called = false
 
-    subscriber.service.mocked_subscriber = stub
+    subscriber.service.mocked_subscription_admin = stub
     def stub.modify_ack_deadline subscription:, ack_ids:, ack_deadline_seconds:
       if @modify_ack_deadline_requests.count == 0
         return  @modify_ack_deadline_requests << ["ack_ids"]
@@ -164,7 +164,7 @@ describe Google::Cloud::PubSub::MessageListener, :stream, :mock_pubsub do
     stub = StreamingPullStub.new response_groups
     called = false
 
-    subscriber.service.mocked_subscriber = stub
+    subscriber.service.mocked_subscription_admin = stub
     def stub.modify_ack_deadline subscription:, ack_ids:, ack_deadline_seconds:
       raise Google::Cloud::PermissionDeniedError.new "Test failure"
     end
@@ -196,7 +196,7 @@ describe Google::Cloud::PubSub::MessageListener, :stream, :mock_pubsub do
     stub = StreamingPullStub.new response_groups
     called = false
 
-    subscriber.service.mocked_subscriber = stub
+    subscriber.service.mocked_subscription_admin = stub
     def stub.modify_ack_deadline subscription:, ack_ids:, ack_deadline_seconds:
       raise Google::Cloud::PermissionDeniedError.new "Test failure"
     end

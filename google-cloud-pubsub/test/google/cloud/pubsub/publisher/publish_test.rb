@@ -34,7 +34,7 @@ describe Google::Cloud::PubSub::Publisher, :publish, :mock_pubsub do
     mock.expect :publish, publish_res do |actual_request|
       actual_request == expected_request
     end
-    publisher.service.mocked_publisher = mock
+    publisher.service.mocked_topic_admin = mock
 
     msg = publisher.publish message1
 
@@ -54,7 +54,7 @@ describe Google::Cloud::PubSub::Publisher, :publish, :mock_pubsub do
     mock.expect :publish, publish_res do |actual_request|
       actual_request == expected_request
     end
-    publisher.service.mocked_publisher = mock
+    publisher.service.mocked_topic_admin = mock
 
     msg = publisher.publish "あ"
 
@@ -75,7 +75,7 @@ describe Google::Cloud::PubSub::Publisher, :publish, :mock_pubsub do
     mock.expect :publish, publish_res do |actual_request|
       actual_request == expected_request
     end
-    publisher.service.mocked_publisher = mock
+    publisher.service.mocked_topic_admin = mock
 
     msg = nil
     Tempfile.open ["message", "txt"] do |tmpfile|
@@ -102,7 +102,7 @@ describe Google::Cloud::PubSub::Publisher, :publish, :mock_pubsub do
     mock.expect :publish, publish_res do |actual_request|
       actual_request == expected_request
     end
-    publisher.service.mocked_publisher = mock
+    publisher.service.mocked_topic_admin = mock
 
     msg = publisher.publish message1, format: :text
 
@@ -125,7 +125,7 @@ describe Google::Cloud::PubSub::Publisher, :publish, :mock_pubsub do
     mock.expect :publish, publish_res do |actual_request|
       actual_request == expected_request
     end
-    publisher.service.mocked_publisher = mock
+    publisher.service.mocked_topic_admin = mock
 
     msgs = publisher.publish do |batch|
       batch.publish message1
@@ -155,7 +155,7 @@ describe Google::Cloud::PubSub::Publisher, :publish, :mock_pubsub do
     mock.expect :publish, publish_res do |actual_request|
       actual_request == expected_request
     end
-      publisher.service.mocked_publisher = mock
+      publisher.service.mocked_topic_admin = mock
 
       msg = publisher.publish message1
 
@@ -175,7 +175,7 @@ describe Google::Cloud::PubSub::Publisher, :publish, :mock_pubsub do
     mock.expect :publish, publish_res do |actual_request|
       actual_request == expected_request
     end
-      publisher.service.mocked_publisher = mock
+      publisher.service.mocked_topic_admin = mock
 
       msg = publisher.publish message1, format: :text
 
@@ -198,7 +198,7 @@ describe Google::Cloud::PubSub::Publisher, :publish, :mock_pubsub do
     mock.expect :publish, publish_res do |actual_request|
       actual_request == expected_request
     end
-      publisher.service.mocked_publisher = mock
+      publisher.service.mocked_topic_admin = mock
 
       msgs = publisher.publish do |batch|
         batch.publish message1
@@ -224,7 +224,7 @@ describe Google::Cloud::PubSub::Publisher, :publish, :mock_pubsub do
       def stub.publish *args
         raise Google::Cloud::NotFoundError.new("not found")
       end
-      pubsub.service.mocked_publisher = stub
+      pubsub.service.mocked_topic_admin = stub
 
       expect do
         publisher.publish message1
@@ -236,7 +236,7 @@ describe Google::Cloud::PubSub::Publisher, :publish, :mock_pubsub do
       def stub.publish *args
         raise Google::Cloud::NotFoundError.new("not found")
       end
-      pubsub.service.mocked_publisher = stub
+      pubsub.service.mocked_topic_admin = stub
 
       expect do
         publisher.publish message1, format: :text
@@ -248,7 +248,7 @@ describe Google::Cloud::PubSub::Publisher, :publish, :mock_pubsub do
       def stub.publish *args
         raise Google::Cloud::NotFoundError.new("not found")
       end
-      pubsub.service.mocked_publisher = stub
+      pubsub.service.mocked_topic_admin = stub
 
       expect do
         publisher.publish do |batch|

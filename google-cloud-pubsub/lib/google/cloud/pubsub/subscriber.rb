@@ -25,33 +25,34 @@ module Google
     module PubSub
       ##
       # # Subscriber
-      #
-      # A named resource representing the stream of messages from a single,
-      # specific {Topic}, to be delivered to the subscribing application.
+
+      # A {Subscriber} is the primary interface for data plane operations,
+      # enabling you to receive messages from a subscription, either by streaming
+      # with a {MessageListener} or by pulling them directly.
       #
       # @example
       #   require "google/cloud/pubsub"
       #
       #   pubsub = Google::Cloud::PubSub.new
       #
-      #   sub = pubsub.subscription "my-topic-sub"
-      #   subscriber = sub.listen do |received_message|
+      #   subscriber = pubsub.subscriber "my-topic-sub"
+      #   listener = subscriber.listen do |received_message|
       #     # process message
       #     received_message.acknowledge!
       #   end
       #
       #   # Handle exceptions from listener
-      #   subscriber.on_error do |exception|
+      #   listener.on_error do |exception|
       #      puts "Exception: #{exception.class} #{exception.message}"
       #   end
       #
       #   # Gracefully shut down the subscriber
       #   at_exit do
-      #     subscriber.stop!
+      #     listener.stop!
       #   end
       #
       #   # Start background threads that will call the block passed to listen.
-      #   subscriber.start
+      #   listener.start
       #   sleep
       class Subscriber
         ##
@@ -105,7 +106,7 @@ module Google
         # @note At the time of this release, ordering keys are not yet publicly
         #   enabled and requires special project enablements.
         #
-        # See {Topic#publish_async}, {#listen}, and {Message#ordering_key}.
+        # See {Publisher#publish_async}, {#listen}, and {Message#ordering_key}.
         #
         # Makes an API call to retrieve the enable_message_ordering value when called on a
         # reference object. See {#reference?}.
@@ -130,8 +131,8 @@ module Google
         #
         #   pubsub = Google::Cloud::PubSub.new
         #
-        #   sub = pubsub.subscription "my-topic-sub"
-        #   sub.exists? #=> true
+        #   subscriber = pubsub.subscriber "my-topic-sub"
+        #   subscriber.exists? #=> true
         #
         def exists?
           # Always true if the object is not set as reference
@@ -181,8 +182,8 @@ module Google
         #
         #   pubsub = Google::Cloud::PubSub.new
         #
-        #   sub = pubsub.subscription "my-topic-sub"
-        #   received_messages = sub.pull immediate: false
+        #   subscriber = pubsub.subscriber "my-topic-sub"
+        #   received_messages = subscriber.pull immediate: false
         #   received_messages.each do |received_message|
         #     received_message.acknowledge!
         #   end
@@ -192,8 +193,8 @@ module Google
         #
         #   pubsub = Google::Cloud::PubSub.new
         #
-        #   sub = pubsub.subscription "my-topic-sub"
-        #   received_messages = sub.pull immediate: false, max: 10
+        #   subscriber = pubsub.subscriber "my-topic-sub"
+        #   received_messages = subcriber.pull immediate: false, max: 10
         #   received_messages.each do |received_message|
         #     received_message.acknowledge!
         #   end
@@ -213,7 +214,7 @@ module Google
         # Pulls from the server while waiting for messages to become available.
         # This is the same as:
         #
-        #   subscription.pull immediate: false
+        #   subscriber.pull immediate: false
         #
         # See also {#listen} for the preferred way to process messages as they
         # become available.
@@ -229,8 +230,8 @@ module Google
         #
         #   pubsub = Google::Cloud::PubSub.new
         #
-        #   sub = pubsub.subscription "my-topic-sub"
-        #   received_messages = sub.wait_for_messages
+        #   subscriber = pubsub.subscriber "my-topic-sub"
+        #   received_messages = subscriber.wait_for_messages
         #   received_messages.each do |received_message|
         #     received_message.acknowledge!
         #   end
@@ -240,7 +241,7 @@ module Google
         end
 
         ##
-        # Create a {Subscriber} object that receives and processes messages
+        # Create a {MessageListener} object that receives and processes messages
         # using the code provided in the callback. Messages passed to the
         # callback should acknowledge ({ReceivedMessage#acknowledge!}) or reject
         # ({ReceivedMessage#reject!}) the message. If no action is taken, the
@@ -258,15 +259,13 @@ module Google
         # different ordering keys across subscribers.
         #
         # To use ordering keys, the subscription must be created with message
-        # ordering enabled (See {Topic#subscribe} and {#message_ordering?})
-        # before calling {#listen}. When enabled, the subscriber will deliver
-        # messages with the same `ordering_key` in the order they were
+        # ordering enabled before calling {#listen}. When enabled, the subscriber
+        # will deliver messages with the same `ordering_key` in the order they were
         # published.
         #
         # @note At the time of this release, ordering keys are not yet publicly
         #   enabled and requires special project enablements.
         #
-        # @param [String] name
         # @param [Numeric] deadline The default number of seconds the stream
         #   will hold received messages before modifying the message's ack
         #   deadline. The minimum is 10, the maximum is 600. Default is
@@ -318,84 +317,84 @@ module Google
         # @yieldparam [ReceivedMessage] received_message the newly received
         #   message
         #
-        # @return [Subscriber]
+        # @return [MessageListener]
         #
         # @example
         #   require "google/cloud/pubsub"
         #
         #   pubsub = Google::Cloud::PubSub.new
         #
-        #   sub = pubsub.subscription "my-topic-sub"
+        #   subscriber = pubsub.subscriber "my-topic-sub"
         #
-        #   subscriber = sub.listen do |received_message|
+        #   listener = subscriber.listen do |received_message|
         #     # process message
         #     puts "Data: #{received_message.message.data}, published at #{received_message.message.published_at}"
         #     received_message.acknowledge!
         #   end
         #
         #   # Start background threads that will call block passed to listen.
-        #   subscriber.start
+        #   listener.start
         #
         #   # Shut down the subscriber when ready to stop receiving messages.
-        #   subscriber.stop!
+        #   listener.stop!
         #
         # @example Configuring to increase concurrent callbacks:
         #   require "google/cloud/pubsub"
         #
         #   pubsub = Google::Cloud::PubSub.new
         #
-        #   sub = pubsub.subscription "my-topic-sub"
+        #   subscriber = pubsub.subscription "my-topic-sub"
         #
-        #   subscriber = sub.listen threads: { callback: 16 } do |rec_message|
+        #   listener = subscriber.listen threads: { callback: 16 } do |rec_message|
         #     # store the message somewhere before acknowledging
         #     store_in_backend rec_message.data # takes a few seconds
         #     rec_message.acknowledge!
         #   end
         #
         #   # Start background threads that will call block passed to listen.
-        #   subscriber.start
+        #   listener.start
         #
         #   # Shut down the subscriber when ready to stop receiving messages.
-        #   subscriber.stop!
+        #   listener.stop!
         #
         # @example Ordered messages are supported using ordering_key:
         #   require "google/cloud/pubsub"
         #
         #   pubsub = Google::Cloud::PubSub.new
         #
-        #   sub = pubsub.subscription "my-ordered-topic-sub"
-        #   sub.message_ordering? #=> true
+        #   sub = pubsub.subscriber "my-ordered-topic-sub"
+        #   subscriber.message_ordering? #=> true
         #
-        #   subscriber = sub.listen do |received_message|
+        #   listener = subscriber.listen do |received_message|
         #     # messsages with the same ordering_key are received
         #     # in the order in which they were published.
         #     received_message.acknowledge!
         #   end
         #
         #   # Start background threads that will call block passed to listen.
-        #   subscriber.start
+        #   listener.start
         #
         #   # Shut down the subscriber when ready to stop receiving messages.
-        #   subscriber.stop!
+        #   listener.stop!
         #
         # @example Set the maximum amount of time before redelivery if the subscriber fails to extend the deadline:
         #   require "google/cloud/pubsub"
         #
         #   pubsub = Google::Cloud::PubSub.new
         #
-        #   sub = pubsub.subscription "my-topic-sub"
+        #   subscriber = pubsub.subscriber "my-topic-sub"
         #
-        #   subscriber = sub.listen inventory: { max_duration_per_lease_extension: 20 } do |received_message|
+        #   listener = subscriber.listen inventory: { max_duration_per_lease_extension: 20 } do |received_message|
         #     # Process message very slowly with possibility of failure.
         #     process rec_message.data # takes minutes
         #     rec_message.acknowledge!
         #   end
         #
         #   # Start background threads that will call block passed to listen.
-        #   subscriber.start
+        #   listener.start
         #
         #   # Shut down the subscriber when ready to stop receiving messages.
-        #   subscriber.stop!
+        #   listener.stop!
         #
         def listen deadline: nil, message_ordering: nil, streams: nil, inventory: nil, threads: {}, &block
           ensure_service!
@@ -424,9 +423,9 @@ module Google
         #
         #   pubsub = Google::Cloud::PubSub.new
         #
-        #   sub = pubsub.subscription "my-topic-sub"
+        #   subscriber = pubsub.subscriber "my-topic-sub"
         #   received_messages = sub.pull immediate: false
-        #   sub.acknowledge received_messages
+        #   subscriber.acknowledge received_messages
         #
         def acknowledge *messages
           ack_ids = coerce_ack_ids messages
@@ -459,9 +458,9 @@ module Google
         #
         #   pubsub = Google::Cloud::PubSub.new
         #
-        #   sub = pubsub.subscription "my-topic-sub"
-        #   received_messages = sub.pull immediate: false
-        #   sub.modify_ack_deadline 120, received_messages
+        #   subscriber = pubsub.subscriber "my-topic-sub"
+        #   received_messages = subscriber.pull immediate: false
+        #   subscriber.modify_ack_deadline 120, received_messages
         #
         def modify_ack_deadline new_deadline, *messages
           ack_ids = coerce_ack_ids messages
@@ -524,14 +523,15 @@ module Google
         #
         def reload!
           ensure_service!
-          @grpc = service.get_subscription name
+          subscription_path = service.subscription_path name
+          @grpc = service.subscription_admin.get_subscription subscription: subscription_path
           @resource_name = nil
           self
         end
 
         ##
         # @private
-        # New Subscription from a Google::Cloud::PubSub::V1::Subscription
+        # New Subscriber from a Google::Cloud::PubSub::V1::Subscription
         # object.
         def self.from_grpc grpc, service
           new.tap do |f|
@@ -541,7 +541,7 @@ module Google
         end
 
         ##
-        # @private New reference {Subscription} object without making an HTTP
+        # @private New reference {Subscriber} object without making an HTTP
         # request.
         def self.from_name name, service, options = {}
           name = service.subscription_path name, options
