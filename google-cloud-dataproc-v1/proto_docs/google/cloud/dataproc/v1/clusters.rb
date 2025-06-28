@@ -90,6 +90,9 @@ module Google
         end
 
         # The cluster config.
+        # @!attribute [rw] cluster_tier
+        #   @return [::Google::Cloud::Dataproc::V1::ClusterConfig::ClusterTier]
+        #     Optional. The cluster tier.
         # @!attribute [rw] config_bucket
         #   @return [::String]
         #     Optional. A Cloud Storage bucket used to stage job
@@ -178,6 +181,18 @@ module Google
         class ClusterConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # The cluster tier.
+          module ClusterTier
+            # Not set. Works the same as CLUSTER_TIER_STANDARD.
+            CLUSTER_TIER_UNSPECIFIED = 0
+
+            # Standard Dataproc cluster.
+            CLUSTER_TIER_STANDARD = 1
+
+            # Premium Dataproc cluster.
+            CLUSTER_TIER_PREMIUM = 2
+          end
         end
 
         # The Dataproc cluster config for a cluster that does not directly control the
