@@ -48,6 +48,9 @@ module Google
         # @!attribute [rw] disk_path
         #   @return [::Google::Cloud::SecurityCenter::V2::File::DiskPath]
         #     Path of the file in terms of underlying disk/partition identifiers.
+        # @!attribute [rw] operations
+        #   @return [::Array<::Google::Cloud::SecurityCenter::V2::File::FileOperation>]
+        #     Operation(s) performed on a file.
         class File
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -64,6 +67,36 @@ module Google
           class DiskPath
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Operation(s) performed on a file.
+          # @!attribute [rw] type
+          #   @return [::Google::Cloud::SecurityCenter::V2::File::FileOperation::OperationType]
+          #     The type of the operation
+          class FileOperation
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+
+            # The type of the operation
+            module OperationType
+              # The operation is unspecified.
+              OPERATION_TYPE_UNSPECIFIED = 0
+
+              # Represents an open operation.
+              OPEN = 1
+
+              # Represents a read operation.
+              READ = 2
+
+              # Represents a rename operation.
+              RENAME = 3
+
+              # Represents a write operation.
+              WRITE = 4
+
+              # Represents an execute operation.
+              EXECUTE = 5
+            end
           end
         end
       end
