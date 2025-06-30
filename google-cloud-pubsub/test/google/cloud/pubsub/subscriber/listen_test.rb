@@ -29,15 +29,10 @@ describe Google::Cloud::PubSub::Subscriber, :listen, :mock_pubsub do
     _(listener.subscription_name).must_equal subscriber.name
     _(listener.deadline).must_equal 60
     _(listener.streams).must_equal 2
-    _(listener.inventory).must_equal 1000
-    _(listener.inventory_limit).must_equal 1000
     _(listener.max_outstanding_messages).must_equal 1000
-    _(listener.inventory_bytesize).must_equal 100000000
     _(listener.max_outstanding_bytes).must_equal 100000000
-    _(listener.inventory_extension).must_equal 3600
     _(listener.max_total_lease_duration).must_equal 3600
     _(listener.max_duration_per_lease_extension).must_equal 0
-    _(listener.use_legacy_flow_control?).must_equal false
   end
 
   it "will set deadline while creating a MessageListener" do
@@ -48,15 +43,10 @@ describe Google::Cloud::PubSub::Subscriber, :listen, :mock_pubsub do
     _(listener.subscription_name).must_equal subscriber.name
     _(listener.deadline).must_equal 120
     _(listener.streams).must_equal 2
-    _(listener.inventory).must_equal 1000
-    _(listener.inventory_limit).must_equal 1000
     _(listener.max_outstanding_messages).must_equal 1000
-    _(listener.inventory_bytesize).must_equal 100000000
     _(listener.max_outstanding_bytes).must_equal 100000000
-    _(listener.inventory_extension).must_equal 3600
     _(listener.max_total_lease_duration).must_equal 3600
     _(listener.max_duration_per_lease_extension).must_equal 0
-    _(listener.use_legacy_flow_control?).must_equal false
   end
 
   it "will set deadline while creating a MessageListener" do
@@ -67,15 +57,10 @@ describe Google::Cloud::PubSub::Subscriber, :listen, :mock_pubsub do
     _(listener.subscription_name).must_equal subscriber.name
     _(listener.deadline).must_equal 60
     _(listener.streams).must_equal 2
-    _(listener.inventory).must_equal 1000
-    _(listener.inventory_limit).must_equal 1000
     _(listener.max_outstanding_messages).must_equal 1000
-    _(listener.inventory_bytesize).must_equal 100000000
     _(listener.max_outstanding_bytes).must_equal 100000000
-    _(listener.inventory_extension).must_equal 3600
     _(listener.max_total_lease_duration).must_equal 3600
     _(listener.max_duration_per_lease_extension).must_equal 0
-    _(listener.use_legacy_flow_control?).must_equal false
   end
 
   it "will set inventory (deprecated) while creating a MessageListener" do
@@ -86,15 +71,10 @@ describe Google::Cloud::PubSub::Subscriber, :listen, :mock_pubsub do
     _(listener.subscription_name).must_equal subscriber.name
     _(listener.deadline).must_equal 60
     _(listener.streams).must_equal 2
-    _(listener.inventory).must_equal 500
-    _(listener.inventory_limit).must_equal 500
     _(listener.max_outstanding_messages).must_equal 500
-    _(listener.inventory_bytesize).must_equal 100000000
     _(listener.max_outstanding_bytes).must_equal 100000000
-    _(listener.inventory_extension).must_equal 3600
     _(listener.max_total_lease_duration).must_equal 3600
     _(listener.max_duration_per_lease_extension).must_equal 0
-    _(listener.use_legacy_flow_control?).must_equal false
   end
 
   it "will set inventory max_outstanding_messages while creating a MessageListener" do
@@ -105,15 +85,10 @@ describe Google::Cloud::PubSub::Subscriber, :listen, :mock_pubsub do
     _(listener.subscription_name).must_equal subscriber.name
     _(listener.deadline).must_equal 60
     _(listener.streams).must_equal 2
-    _(listener.inventory).must_equal 500
-    _(listener.inventory_limit).must_equal 500
     _(listener.max_outstanding_messages).must_equal 500
-    _(listener.inventory_bytesize).must_equal 100000000
     _(listener.max_outstanding_bytes).must_equal 100000000
-    _(listener.inventory_extension).must_equal 3600
     _(listener.max_total_lease_duration).must_equal 3600
     _(listener.max_duration_per_lease_extension).must_equal 0
-    _(listener.use_legacy_flow_control?).must_equal false
   end
 
   it "will set inventory limit alias while creating a MessageListener" do
@@ -124,15 +99,10 @@ describe Google::Cloud::PubSub::Subscriber, :listen, :mock_pubsub do
     _(listener.subscription_name).must_equal subscriber.name
     _(listener.deadline).must_equal 60
     _(listener.streams).must_equal 2
-    _(listener.inventory).must_equal 500
-    _(listener.inventory_limit).must_equal 500
     _(listener.max_outstanding_messages).must_equal 500
-    _(listener.inventory_bytesize).must_equal 100000000
     _(listener.max_outstanding_bytes).must_equal 100000000
-    _(listener.inventory_extension).must_equal 3600
     _(listener.max_total_lease_duration).must_equal 3600
     _(listener.max_duration_per_lease_extension).must_equal 0
-    _(listener.use_legacy_flow_control?).must_equal false
   end
 
   it "will set inventory max_outstanding_bytes while creating a MessageListener" do
@@ -143,15 +113,10 @@ describe Google::Cloud::PubSub::Subscriber, :listen, :mock_pubsub do
     _(listener.subscription_name).must_equal subscriber.name
     _(listener.deadline).must_equal 60
     _(listener.streams).must_equal 2
-    _(listener.inventory).must_equal 1000
-    _(listener.inventory_limit).must_equal 1000
     _(listener.max_outstanding_messages).must_equal 1000
-    _(listener.inventory_bytesize).must_equal 50_000
     _(listener.max_outstanding_bytes).must_equal 50_000
-    _(listener.inventory_extension).must_equal 3600
     _(listener.max_total_lease_duration).must_equal 3600
     _(listener.max_duration_per_lease_extension).must_equal 0
-    _(listener.use_legacy_flow_control?).must_equal false
   end
 
   it "will set inventory bytesize alias while creating a MessageListener" do
@@ -162,15 +127,10 @@ describe Google::Cloud::PubSub::Subscriber, :listen, :mock_pubsub do
     _(listener.subscription_name).must_equal subscriber.name
     _(listener.deadline).must_equal 60
     _(listener.streams).must_equal 2
-    _(listener.inventory).must_equal 1000
-    _(listener.inventory_limit).must_equal 1000
     _(listener.max_outstanding_messages).must_equal 1000
-    _(listener.inventory_bytesize).must_equal 50_000
     _(listener.max_outstanding_bytes).must_equal 50_000
-    _(listener.inventory_extension).must_equal 3600
     _(listener.max_total_lease_duration).must_equal 3600
     _(listener.max_duration_per_lease_extension).must_equal 0
-    _(listener.use_legacy_flow_control?).must_equal false
   end
 
   it "will set inventory max_total_lease_duration while creating a MessageListener" do
@@ -181,15 +141,10 @@ describe Google::Cloud::PubSub::Subscriber, :listen, :mock_pubsub do
     _(listener.subscription_name).must_equal subscriber.name
     _(listener.deadline).must_equal 60
     _(listener.streams).must_equal 2
-    _(listener.inventory).must_equal 1000
-    _(listener.inventory_limit).must_equal 1000
     _(listener.max_outstanding_messages).must_equal 1000
-    _(listener.inventory_bytesize).must_equal 100000000
     _(listener.max_outstanding_bytes).must_equal 100000000
-    _(listener.inventory_extension).must_equal 7200
     _(listener.max_total_lease_duration).must_equal 7200
     _(listener.max_duration_per_lease_extension).must_equal 0
-    _(listener.use_legacy_flow_control?).must_equal false
   end
 
   it "will set inventory extension alias while creating a MessageListener" do
@@ -200,15 +155,10 @@ describe Google::Cloud::PubSub::Subscriber, :listen, :mock_pubsub do
     _(listener.subscription_name).must_equal subscriber.name
     _(listener.deadline).must_equal 60
     _(listener.streams).must_equal 2
-    _(listener.inventory).must_equal 1000
-    _(listener.inventory_limit).must_equal 1000
     _(listener.max_outstanding_messages).must_equal 1000
-    _(listener.inventory_bytesize).must_equal 100000000
     _(listener.max_outstanding_bytes).must_equal 100000000
-    _(listener.inventory_extension).must_equal 7200
     _(listener.max_total_lease_duration).must_equal 7200
     _(listener.max_duration_per_lease_extension).must_equal 0
-    _(listener.use_legacy_flow_control?).must_equal false
   end
 
   it "will set inventory max_duration_per_lease_extension while creating a MessageListener" do
@@ -219,15 +169,10 @@ describe Google::Cloud::PubSub::Subscriber, :listen, :mock_pubsub do
     _(listener.subscription_name).must_equal subscriber.name
     _(listener.deadline).must_equal 60
     _(listener.streams).must_equal 2
-    _(listener.inventory).must_equal 1000
-    _(listener.inventory_limit).must_equal 1000
     _(listener.max_outstanding_messages).must_equal 1000
-    _(listener.inventory_bytesize).must_equal 100000000
     _(listener.max_outstanding_bytes).must_equal 100000000
-    _(listener.inventory_extension).must_equal 3600
     _(listener.max_total_lease_duration).must_equal 3600
     _(listener.max_duration_per_lease_extension).must_equal 10
-    _(listener.use_legacy_flow_control?).must_equal false
   end
 
   it "will set inventory min_duration_per_lease_extension while creating a MessageListener" do
@@ -238,34 +183,10 @@ describe Google::Cloud::PubSub::Subscriber, :listen, :mock_pubsub do
     _(listener.subscription_name).must_equal subscriber.name
     _(listener.deadline).must_equal 60
     _(listener.streams).must_equal 2
-    _(listener.inventory).must_equal 1000
-    _(listener.inventory_limit).must_equal 1000
     _(listener.max_outstanding_messages).must_equal 1000
-    _(listener.inventory_bytesize).must_equal 100000000
     _(listener.max_outstanding_bytes).must_equal 100000000
-    _(listener.inventory_extension).must_equal 3600
     _(listener.max_total_lease_duration).must_equal 3600
     _(listener.max_duration_per_lease_extension).must_equal 0
     _(listener.min_duration_per_lease_extension).must_equal 10
-    _(listener.use_legacy_flow_control?).must_equal false
-  end
-
-  it "will use inventory use_legacy_flow_control while creating a MessageListener" do
-    listener = subscriber.listen inventory: { use_legacy_flow_control: true } do |msg|
-      puts msg.msg_id
-    end
-    _(listener).must_be_kind_of Google::Cloud::PubSub::MessageListener
-    _(listener.subscription_name).must_equal subscriber.name
-    _(listener.deadline).must_equal 60
-    _(listener.streams).must_equal 2
-    _(listener.inventory).must_equal 1000
-    _(listener.inventory_limit).must_equal 1000
-    _(listener.max_outstanding_messages).must_equal 1000
-    _(listener.inventory_bytesize).must_equal 100000000
-    _(listener.max_outstanding_bytes).must_equal 100000000
-    _(listener.inventory_extension).must_equal 3600
-    _(listener.max_total_lease_duration).must_equal 3600
-    _(listener.max_duration_per_lease_extension).must_equal 0
-    _(listener.use_legacy_flow_control?).must_equal true
   end
 end

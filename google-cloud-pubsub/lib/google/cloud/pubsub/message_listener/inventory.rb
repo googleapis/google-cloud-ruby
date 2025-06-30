@@ -36,10 +36,9 @@ module Google
           attr_reader :extension
           attr_reader :max_duration_per_lease_extension
           attr_accessor :min_duration_per_lease_extension
-          attr_reader :use_legacy_flow_control
 
           def initialize stream, limit:, bytesize:, extension:, max_duration_per_lease_extension:,
-                         min_duration_per_lease_extension:, use_legacy_flow_control:
+                         min_duration_per_lease_extension:
             super()
             @stream = stream
             @limit = limit
@@ -47,7 +46,6 @@ module Google
             @extension = extension
             @max_duration_per_lease_extension = max_duration_per_lease_extension
             @min_duration_per_lease_extension = min_duration_per_lease_extension
-            @use_legacy_flow_control = use_legacy_flow_control
             @inventory = {}
             @wait_cond = new_cond
           end

@@ -30,18 +30,18 @@ module Google
       #
       #   pubsub = Google::Cloud::PubSub.new
       #
-      #   sub = pubsub.subscription "my-topic-sub"
+      #   subscriber = pubsub.subscriber "my-topic-sub"
       #
-      #   subscriber = sub.listen do |received_message|
+      #   listener = subscriber.listen do |received_message|
       #     # process message
       #     received_message.acknowledge!
       #   end
       #
       #   # Start background threads that will call the block passed to listen.
-      #   subscriber.start
+      #   listener.start
       #
       #   # Shut down the subscriber when ready to stop receiving messages.
-      #   subscriber.stop!
+      #   listener.stop!
       #
       # @attr_reader [String] subscription_name The name of the subscription the
       #   messages are pulled from.
@@ -81,7 +81,7 @@ module Google
         attr_accessor :exactly_once_delivery_enabled
 
         ##
-        # @private Create an empty {Subscriber} object.
+        # @private Create an empty {MessageListener} object.
         def initialize subscription_name, callback, deadline: nil, message_ordering: nil, streams: nil, inventory: nil,
                        threads: {}, service: nil
           super() # to init MonitorMixin
@@ -110,10 +110,10 @@ module Google
         end
 
         ##
-        # Starts the subscriber pulling from the subscription and processing the
+        # Starts the listener pulling from the subscription and processing the
         # received messages.
         #
-        # @return [Subscriber] returns self so calls can be chained.
+        # @return [MessageListener] returns self so calls can be chained.
         #
         def start
           start_pool = synchronize do
@@ -132,13 +132,13 @@ module Google
         end
 
         ##
-        # Immediately stops the subscriber. No new messages will be pulled from
+        # Immediately stops the listener. No new messages will be pulled from
         # the subscription. Use {#wait!} to block until all received messages have
         # been processed or released: All actions taken on received messages that
         # have not yet been sent to the API will be sent to the API. All received
         # but unprocessed messages will be released back to the API and redelivered.
         #
-        # @return [Subscriber] returns self so calls can be chained.
+        # @return [MessageListener] returns self so calls can be chained.
         #
         def stop
           synchronize do
@@ -151,18 +151,18 @@ module Google
         end
 
         ##
-        # Blocks until the subscriber is fully stopped and all received messages
+        # Blocks until the listener is fully stopped and all received messages
         # have been processed or released, or until `timeout` seconds have
         # passed.
         #
-        # Does not stop the subscriber. To stop the subscriber, first call
-        # {#stop} and then call {#wait!} to block until the subscriber is
+        # Does not stop the listener. To stop the listener, first call
+        # {#stop} and then call {#wait!} to block until the listener is
         # stopped.
         #
         # @param [Number, nil] timeout The number of seconds to block until the
         #   subscriber is fully stopped. Default will block indefinitely.
         #
-        # @return [Subscriber] returns self so calls can be chained.
+        # @return [MessageListener] returns self so calls can be chained.
         #
         def wait! timeout = nil
           wait_stop_buffer_thread!
@@ -171,16 +171,16 @@ module Google
         end
 
         ##
-        # Stop this subscriber and block until the subscriber is fully stopped
+        # Stop this listener and block until the listener is fully stopped
         # and all received messages have been processed or released, or until
         # `timeout` seconds have passed.
         #
         # The same as calling {#stop} and {#wait!}.
         #
         # @param [Number, nil] timeout The number of seconds to block until the
-        #   subscriber is fully stopped. Default will block indefinitely.
+        #   listener is fully stopped. Default will block indefinitely.
         #
-        # @return [Subscriber] returns self so calls can be chained.
+        # @return [MessageListener] returns self so calls can be chained.
         #
         def stop! timeout = nil
           stop
@@ -188,7 +188,7 @@ module Google
         end
 
         ##
-        # Whether the subscriber has been started.
+        # Whether the listener has been started.
         #
         # @return [boolean] `true` when started, `false` otherwise.
         #
@@ -197,7 +197,7 @@ module Google
         end
 
         ##
-        # Whether the subscriber has been stopped.
+        # Whether the listener has been stopped.
         #
         # @return [boolean] `true` when stopped, `false` otherwise.
         #
@@ -208,7 +208,7 @@ module Google
         ##
         # Register to be notified of errors when raised.
         #
-        # If an unhandled error has occurred the subscriber will attempt to
+        # If an unhandled error has occurred the listener will attempt to
         # recover from the error and resume listening.
         #
         # Multiple error handlers can be added.
@@ -221,24 +221,24 @@ module Google
         #
         #   pubsub = Google::Cloud::PubSub.new
         #
-        #   sub = pubsub.subscription "my-topic-sub"
+        #   subscriber = pubsub.subscriber "my-topic-sub"
         #
-        #   subscriber = sub.listen do |received_message|
+        #   listener = subscriber.listen do |received_message|
         #     # process message
         #     received_message.acknowledge!
         #   end
         #
         #   # Register to be notified when unhandled errors occur.
-        #   subscriber.on_error do |error|
+        #   listener.on_error do |error|
         #     # log error
         #     puts error
         #   end
         #
         #   # Start listening for messages and errors.
-        #   subscriber.start
+        #   listener.start
         #
         #   # Shut down the subscriber when ready to stop receiving messages.
-        #   subscriber.stop!
+        #   listener.stop!
         #
         def on_error &block
           synchronize do
@@ -248,9 +248,9 @@ module Google
 
         ##
         # The most recent unhandled error to occur while listening to messages
-        # on the subscriber.
+        # on the listener.
         #
-        # If an unhandled error has occurred the subscriber will attempt to
+        # If an unhandled error has occurred the listener will attempt to
         # recover from the error and resume listening.
         #
         # @return [Exception, nil] error The most recent error raised.
@@ -260,59 +260,42 @@ module Google
         #
         #   pubsub = Google::Cloud::PubSub.new
         #
-        #   sub = pubsub.subscription "my-topic-sub"
+        #   subscriber = pubsub.subscriber "my-topic-sub"
         #
-        #   subscriber = sub.listen do |received_message|
+        #   listener = subscriber.listen do |received_message|
         #     # process message
         #     received_message.acknowledge!
         #   end
         #
         #   # Start listening for messages and errors.
-        #   subscriber.start
+        #   listener.start
         #
         #   # If an error was raised, it can be retrieved here:
-        #   subscriber.last_error #=> nil
+        #   listener.last_error #=> nil
         #
         #   # Shut down the subscriber when ready to stop receiving messages.
-        #   subscriber.stop!
+        #   listener.stop!
         #
         def last_error
           synchronize { @last_error }
         end
 
         ##
-        # The number of received messages to be collected by subscriber. Default is 1,000.
+        # The number of received messages to be collected by listener. Default is 1,000.
         #
         # @return [Integer] The maximum number of messages.
         #
         def max_outstanding_messages
           @inventory[:max_outstanding_messages]
         end
-        # @deprecated Use {#max_outstanding_messages}.
-        alias inventory_limit max_outstanding_messages
-        # @deprecated Use {#max_outstanding_messages}.
-        alias inventory max_outstanding_messages
 
         ##
-        # The total byte size of received messages to be collected by subscriber. Default is 100,000,000 (100MB).
+        # The total byte size of received messages to be collected by listener. Default is 100,000,000 (100MB).
         #
         # @return [Integer] The maximum number of bytes.
         #
         def max_outstanding_bytes
           @inventory[:max_outstanding_bytes]
-        end
-        # @deprecated Use {#max_outstanding_bytes}.
-        alias inventory_bytesize max_outstanding_bytes
-
-        ##
-        # Whether to enforce flow control at the client side only or to enforce it at both the client and
-        # the server. For more details about flow control see https://cloud.google.com/pubsub/docs/pull#config.
-        #
-        # @return [Boolean] `true` when only client side flow control is enforced, `false` when both client and
-        # server side flow control are enforced.
-        #
-        def use_legacy_flow_control?
-          @inventory[:use_legacy_flow_control]
         end
 
         ##
@@ -323,12 +306,10 @@ module Google
         def max_total_lease_duration
           @inventory[:max_total_lease_duration]
         end
-        # @deprecated Use {#max_total_lease_duration}.
-        alias inventory_extension max_total_lease_duration
 
         ##
         # The maximum amount of time in seconds for a single lease extension attempt. Bounds the delay before a message
-        # redelivery if the subscriber fails to extend the deadline. Default is 0 (disabled).
+        # redelivery if the listener fails to extend the deadline. Default is 0 (disabled).
         #
         # @return [Integer] The maximum number of seconds.
         #
@@ -338,7 +319,7 @@ module Google
 
         ##
         # The minimum amount of time in seconds for a single lease extension attempt. Bounds the delay before a message
-        # redelivery if the subscriber fails to extend the deadline. Default is 0 (disabled).
+        # redelivery if the listener fails to extend the deadline. Default is 0 (disabled).
         #
         # @return [Integer] The minimum number of seconds.
         #
@@ -355,7 +336,6 @@ module Google
             extension:                        @inventory[:max_total_lease_duration],
             max_duration_per_lease_extension: @inventory[:max_duration_per_lease_extension],
             min_duration_per_lease_extension: @inventory[:min_duration_per_lease_extension],
-            use_legacy_flow_control:          @inventory[:use_legacy_flow_control]
           }
         end
 
@@ -411,7 +391,6 @@ module Google
           @inventory[:max_total_lease_duration] = Integer(@inventory[:max_total_lease_duration] || 3600)
           @inventory[:max_duration_per_lease_extension] = Integer(@inventory[:max_duration_per_lease_extension] || 0)
           @inventory[:min_duration_per_lease_extension] = Integer(@inventory[:min_duration_per_lease_extension] || 0)
-          @inventory[:use_legacy_flow_control] = @inventory[:use_legacy_flow_control] || false
         end
 
         def default_error_callbacks

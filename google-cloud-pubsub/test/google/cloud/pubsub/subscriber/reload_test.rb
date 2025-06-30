@@ -30,7 +30,7 @@ describe Google::Cloud::PubSub::Subscriber, :name, :mock_pubsub do
     _(sub_reference).must_respond_to :reload!
   end
 
-  it "is reloads a resource by calling get_subscription API" do
+  it "reloads a resource by calling get_subscription API" do
     _(sub_resource.name).must_equal sub_path
     _(sub_resource.deadline).must_equal 60
     _(sub_resource).wont_be :reference?
@@ -50,7 +50,7 @@ describe Google::Cloud::PubSub::Subscriber, :name, :mock_pubsub do
     _(sub_resource).must_be :resource?
   end
 
-  it "is reloads a reference by calling get_subscription API" do
+  it "reloads a reference by calling get_subscription API" do
     _(sub_reference.name).must_equal sub_path
     _(sub_reference).must_be :reference?
     _(sub_reference).wont_be :resource?
@@ -68,4 +68,24 @@ describe Google::Cloud::PubSub::Subscriber, :name, :mock_pubsub do
     _(sub_reference).wont_be :reference?
     _(sub_reference).must_be :resource?
   end
+
+  it "reloads a subscription_resource by calling get_subscription API" do
+    _(sub_reference.name).must_equal sub_path
+    _(sub_reference).must_be :reference?
+    _(sub_reference).wont_be :resource?
+
+    mock = Minitest::Mock.new
+    mock.expect :get_subscription, sub_grpc_new, subscription: sub_path
+    pubsub.service.mocked_subscription_admin = mock
+
+    subs_resource = sub_reference.subscription_resource
+
+    mock.verify
+
+    _(subs_resource).must_be_kind_of Google::Cloud::PubSub::V1::Subscription
+    _(subs_resource.name).must_equal sub_path
+    _(sub_reference).wont_be :reference?
+    _(sub_reference).must_be :resource?
+  end
+
 end

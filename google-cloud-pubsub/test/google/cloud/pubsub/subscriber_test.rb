@@ -76,4 +76,10 @@ describe Google::Cloud::PubSub::Subscriber, :mock_pubsub do
 
     mock.verify
   end
+
+  it "retrieves a subscription_resource" do
+    subs_resource = subscriber.subscription_resource
+    _(subs_resource).must_be_kind_of Google::Cloud::PubSub::V1::Subscription
+    _(subs_resource).must_equal subscription_grpc
+  end
 end

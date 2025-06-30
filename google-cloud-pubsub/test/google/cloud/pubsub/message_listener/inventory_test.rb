@@ -175,8 +175,7 @@ describe Google::Cloud::PubSub::MessageListener, :inventory, :mock_pubsub do
                                                                  bytesize: 100_000,
                                                                  extension: 3600,
                                                                  max_duration_per_lease_extension: 0,
-                                                                 min_duration_per_lease_extension: 61,
-                                                                 use_legacy_flow_control: false
+                                                                 min_duration_per_lease_extension: 61
 
     inventory.add rec_msg1_grpc
     delay = inventory.send :calc_delay
@@ -190,8 +189,7 @@ describe Google::Cloud::PubSub::MessageListener, :inventory, :mock_pubsub do
                                                                  bytesize: 100_000,
                                                                  extension: 3600,
                                                                  max_duration_per_lease_extension: 0,
-                                                                 min_duration_per_lease_extension: 0,
-                                                                 use_legacy_flow_control: false
+                                                                 min_duration_per_lease_extension: 0
 
     inventory.add rec_msg1_grpc
     _(inventory).wont_be :full?
@@ -208,8 +206,7 @@ describe Google::Cloud::PubSub::MessageListener, :inventory, :mock_pubsub do
                                                                  bytesize: 100,
                                                                  extension: 3600,
                                                                  max_duration_per_lease_extension: 0,
-                                                                 min_duration_per_lease_extension: 0,
-                                                                 use_legacy_flow_control: false
+                                                                 min_duration_per_lease_extension: 0
 
     inventory.add rec_msg1_grpc
     _(inventory).wont_be :full?
@@ -226,8 +223,7 @@ describe Google::Cloud::PubSub::MessageListener, :inventory, :mock_pubsub do
                                                                  bytesize: 100_000,
                                                                  extension: 3600,
                                                                  max_duration_per_lease_extension: 0,
-                                                                 min_duration_per_lease_extension: 0,
-                                                                 use_legacy_flow_control: false
+                                                                 min_duration_per_lease_extension: 0
 
     expired_time = Time.now - 7200
 
@@ -250,8 +246,7 @@ describe Google::Cloud::PubSub::MessageListener, :inventory, :mock_pubsub do
                                                                  bytesize: 100,
                                                                  extension: 3600,
                                                                  max_duration_per_lease_extension: 10,
-                                                                 min_duration_per_lease_extension: 0,
-                                                                 use_legacy_flow_control: false
+                                                                 min_duration_per_lease_extension: 0
 
     _(inventory.max_duration_per_lease_extension).must_equal 10
   end
@@ -263,8 +258,7 @@ describe Google::Cloud::PubSub::MessageListener, :inventory, :mock_pubsub do
                                                                  bytesize: 100,
                                                                  extension: 3600,
                                                                  max_duration_per_lease_extension: 0,
-                                                                 min_duration_per_lease_extension: 10,
-                                                                 use_legacy_flow_control: false
+                                                                 min_duration_per_lease_extension: 10
 
     _(inventory.min_duration_per_lease_extension).must_equal 10
   end

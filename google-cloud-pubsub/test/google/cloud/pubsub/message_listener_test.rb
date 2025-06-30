@@ -46,16 +46,12 @@ describe Google::Cloud::PubSub::MessageListener, :mock_pubsub do
     _(listener).must_be_kind_of Google::Cloud::PubSub::MessageListener
     _(listener.deadline).must_equal 60
     _(listener.streams).must_equal 2
-    _(listener.inventory).must_equal 1000 # deprecated Use #max_outstanding_messages.
-    _(listener.inventory_limit).must_equal 1000 # deprecated Use #max_outstanding_messages.
     _(listener.max_outstanding_messages).must_equal 1000
-    _(listener.inventory_bytesize).must_equal 100_000_000 # deprecated Use #max_outstanding_bytes.
     _(listener.max_outstanding_bytes).must_equal 100_000_000
-    _(listener.inventory_extension).must_equal 3600 # deprecated Use #max_total_lease_duration.
     _(listener.max_total_lease_duration).must_equal 3600
     _(listener.max_duration_per_lease_extension).must_equal 0
     _(listener.min_duration_per_lease_extension).must_equal 0
-    _(listener.stream_inventory).must_equal({limit: 500, bytesize: 50000000, max_duration_per_lease_extension: 0, min_duration_per_lease_extension: 0, extension: 3600, use_legacy_flow_control: false})
+    _(listener.stream_inventory).must_equal({limit: 500, bytesize: 50000000, max_duration_per_lease_extension: 0, min_duration_per_lease_extension: 0, extension: 3600})
     _(listener.callback_threads).must_equal 8
     _(listener.push_threads).must_equal 4
   end
@@ -66,34 +62,16 @@ describe Google::Cloud::PubSub::MessageListener, :mock_pubsub do
     _(listener.subscription_name).must_equal subscription_name
     _(listener.deadline).must_equal deadline
     _(listener.streams).must_equal streams
-    _(listener.inventory).must_equal max_outstanding_messages # deprecated Use #max_outstanding_messages.
-    _(listener.inventory_limit).must_equal max_outstanding_messages # deprecated Use #max_outstanding_messages.
     _(listener.max_outstanding_messages).must_equal max_outstanding_messages
-    _(listener.inventory_bytesize).must_equal 100_000_000 # deprecated Use #max_outstanding_bytes.
     _(listener.max_outstanding_bytes).must_equal 100_000_000
-    _(listener.inventory_extension).must_equal 3600 # deprecated Use #max_total_lease_duration.
     _(listener.max_total_lease_duration).must_equal 3600
     _(listener.max_duration_per_lease_extension).must_equal 0
     _(listener.min_duration_per_lease_extension).must_equal 0
-    _(listener.stream_inventory).must_equal({limit: 250, bytesize: 12500000, max_duration_per_lease_extension: 0, min_duration_per_lease_extension: 0, extension: 3600, use_legacy_flow_control: false})
+    _(listener.stream_inventory).must_equal({limit: 250, bytesize: 12500000, max_duration_per_lease_extension: 0, min_duration_per_lease_extension: 0, extension: 3600})
     _(listener.callback_threads).must_equal callback_threads
     _(listener.push_threads).must_equal push_threads
 
     _(listener.to_s).must_equal "(subscription: subscription-name-goes-here, streams: [(inventory: 0, status: running, thread: not started), (inventory: 0, status: running, thread: not started), (inventory: 0, status: running, thread: not started), (inventory: 0, status: running, thread: not started), (inventory: 0, status: running, thread: not started), (inventory: 0, status: running, thread: not started), (inventory: 0, status: running, thread: not started), (inventory: 0, status: running, thread: not started)])"
     _(listener.stream_pool.first.to_s).must_equal "(inventory: 0, status: running, thread: not started)"
-  end
-
-  it "propagates use_legacy_flow_control" do
-    listener = Google::Cloud::PubSub::MessageListener.new(
-      subscription_name,
-      callback,
-      inventory: {
-        max_outstanding_messages: 999,
-        use_legacy_flow_control: true
-      }
-    )
-    _(listener.max_outstanding_messages).must_equal 999
-    _(listener.use_legacy_flow_control?).must_equal true
-    _(listener.stream_inventory).must_equal({limit: 500, bytesize: 50000000, max_duration_per_lease_extension: 0, min_duration_per_lease_extension: 0, extension: 3600, use_legacy_flow_control: true})
   end
 end
