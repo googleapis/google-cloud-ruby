@@ -1062,7 +1062,15 @@ describe Google::Cloud::Datastore::Dataset, :mock_datastore do
   it "run will fulfill a query with explain_options" do
     explain_options = { analyze: true }
     explain_options_grpc = Google::Cloud::Datastore::V1::ExplainOptions.new analyze: true
-    dataset.service.mocked_service.expect :run_query, run_query_res_with_explain, project_id: project, partition_id: nil, read_options: nil, query: query.to_grpc, gql_query: nil, database_id: default_database, explain_options: explain_options_grpc, explain_options: nil
+
+    dataset.service.mocked_service.expect :run_query, run_query_res_with_explain, 
+      project_id: project, 
+      partition_id: nil, 
+      read_options: nil, 
+      query: query.to_grpc, 
+      gql_query: nil, 
+      database_id: default_database, 
+      explain_options: explain_options_grpc      
 
     entities = dataset.run query, explain_options: explain_options
     _(entities.count).must_equal 2
