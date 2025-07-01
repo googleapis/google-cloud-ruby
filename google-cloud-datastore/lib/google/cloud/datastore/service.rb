@@ -71,7 +71,10 @@ module Google
 
         # Query for entities.
         def run_query query, namespace = nil, consistency: nil, transaction: nil, read_time: nil, explain_options: nil
-          explain_options = ::Gapic::Protobuf.coerce(explain_options, to: ::Google::Cloud::Datastore::V1::ExplainOptions) if explain_options
+          if explain_options
+            explain_options = ::Gapic::Protobuf.coerce(explain_options,
+                                                       to: ::Google::Cloud::Datastore::V1::ExplainOptions)
+          end
 
           gql_query = nil
           if query.is_a? Google::Cloud::Datastore::V1::GqlQuery

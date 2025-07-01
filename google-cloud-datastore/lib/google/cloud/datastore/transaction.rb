@@ -225,10 +225,11 @@ module Google
         # Retrieve entities specified by a Query. The query is run within the
         # transaction.
         #
-        # @param [Query, GqlQuery] query The object with the search criteria.
+        # @param [Query, GqlQuery] query The query with the search criteria.
         # @param [String] namespace The namespace the query is to run within.
-        # @param [Hash, Google::Cloud::Datastore::V1::ExplainOptions] explain_options The options for query explanation. See
-        #   {Google::Cloud::Datastore::V1::ExplainOptions} for details. Optional.
+        # @param [Hash, Google::Cloud::Datastore::V1::ExplainOptions] explain_options
+        #   The options for query explanation. See {Google::Cloud::Datastore::V1::ExplainOptions}
+        #   for details. Optional.
         #
         # @return [Google::Cloud::Datastore::Dataset::QueryResults]
         #

@@ -87,7 +87,7 @@ module Google
 
           # Query explain metrics. This is only present when the
           # [RunQueryRequest.explain_options][google.datastore.v1.RunQueryRequest.explain_options]
-          # is provided, and it is sent only once with the last response in the stream.
+          # is provided, and it is sent only once with the last QueryResult.
           attr_reader :explain_metrics
 
           ##
@@ -162,6 +162,8 @@ module Google
             not_finished?
           end
 
+          # rubocop:disable Metrics/AbcSize
+
           ##
           # Retrieve the next page of results.
           #
@@ -192,6 +194,8 @@ module Google
             query_res = service.run_query query, namespace, read_time: read_time, explain_options: explain_options
             self.class.from_grpc query_res, service, namespace, query, read_time, explain_options
           end
+
+          # rubocop:enable Metrics/AbcSize
 
           ##
           # Retrieve the {Cursor} for the provided result.
@@ -384,6 +388,8 @@ module Google
             end
           end
 
+          # rubocop:disable Metrics/AbcSize
+
           ##
           # @private New Dataset::QueryResults from a
           # Google::Dataset::V1::RunQueryResponse object.
@@ -412,6 +418,8 @@ module Google
               qr.instance_variable_set :@explain_options, explain_options
             end
           end
+
+          # rubocop:enable Metrics/AbcSize
 
           protected
 
