@@ -17,6 +17,7 @@ require "minitest/focus"
 require "minitest/rg"
 
 require "google/cloud/secret_manager"
+require "google/cloud/resource_manager"
 
 require_relative "../../../.toys/.lib/sample_loader"
 
@@ -39,6 +40,58 @@ class SecretManagerSnippetSpec < Minitest::Spec
   let(:label_value) { "label-value" }
 
   let(:time_to_live) { 86_400 }
+
+  let :tag_key do
+    resource_manager_client = Google::Cloud::ResourceManager.tag_keys
+    tag_key = Google::Cloud::ResourceManager::V3::TagKey.new(
+      parent: "projects/#{project_id}",
+      short_name: "sm_tags_sample_tag_key",
+      description: "Tag Key for Secret Manager Code Samples"
+    )
+    begin
+      puts "Attempting to create TagKey: '#{short_name}' under '#{parent}'..."
+      operation = resource_manager_client.create_tag_key tag_key
+      result = operation.wait_until_done!
+
+      if result.response?
+        created_tag_key = result.response
+        puts "SUCCESS: TagKey created: #{created_tag_key.name} (Short Name: #{created_tag_key.short_name})"
+        return created_tag_key
+      else
+        puts "FAILED to create TagKey '#{short_name}': #{result.error.message}"
+        return nil
+      end
+    rescue Google::Cloud::Error => e
+      puts "ERROR creating TagKey '#{short_name}': #{e.message}"
+      return nil
+    end
+  end
+
+  let :tag_value do
+    resource_manager_client = Google::Cloud::ResourceManager.tag_values
+    tag_value = Google::Cloud::ResourceManager::V3::TagValue.new(
+      parent: tag_key.name,
+      short_name: "sm_tags_sample_tag_value",
+      description: "Tag Value for Secret Manager Code Samples"
+    )
+    begin
+      puts "Attempting to create TagValue: '#{short_name}' for TagKey '#{parent_tag_key_name}'..."
+      operation = resource_manager_client.create_tag_value tag_value
+      result = operation.wait_until_done!
+
+      if result.response?
+        created_tag_value = result.response
+        puts "SUCCESS: TagValue created: #{created_tag_value.name} (Short Name: #{created_tag_value.short_name})"
+        return created_tag_value
+      else
+        puts "FAILED to create TagValue '#{short_name}': #{result.error.message}"
+        return nil
+      end
+    rescue Google::Cloud::Error => e
+      puts "ERROR creating TagValue '#{short_name}': #{e.message}"
+      return nil
+    end
+  end
 
   let :secret do
     client.create_secret(
