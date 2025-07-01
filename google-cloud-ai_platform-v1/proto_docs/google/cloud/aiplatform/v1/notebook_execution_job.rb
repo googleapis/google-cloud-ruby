@@ -76,10 +76,9 @@ module Google
         # @!attribute [rw] execution_timeout
         #   @return [::Google::Protobuf::Duration]
         #     Max running time of the execution job in seconds (default 86400s / 24 hrs).
-        # @!attribute [r] schedule_resource_name
+        # @!attribute [rw] schedule_resource_name
         #   @return [::String]
-        #     Output only. The Schedule resource name if this job is triggered by one.
-        #     Format:
+        #     The Schedule resource name if this job is triggered by one. Format:
         #     `projects/{project_id}/locations/{location}/schedules/{schedule_id}`
         # @!attribute [r] job_state
         #   @return [::Google::Cloud::AIPlatform::V1::JobState]
