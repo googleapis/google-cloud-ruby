@@ -70,7 +70,9 @@ module Google
         end
 
         # Query for entities.
-        def run_query query, namespace = nil, consistency: nil, transaction: nil, read_time: nil
+        def run_query query, namespace = nil, consistency: nil, transaction: nil, read_time: nil, explain_options: nil
+          explain_options = ::Gapic::Protobuf.coerce(explain_options, to: ::Google::Cloud::Datastore::V1::ExplainOptions) if explain_options
+
           gql_query = nil
           if query.is_a? Google::Cloud::Datastore::V1::GqlQuery
             gql_query = query
@@ -88,7 +90,8 @@ module Google
                             partition_id: partition_id,
                             read_options: read_options,
                             query: query,
-                            gql_query: gql_query
+                            gql_query: gql_query,
+                            explain_options: explain_options
         end
 
         ## Query for aggregates

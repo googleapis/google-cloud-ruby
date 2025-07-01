@@ -85,10 +85,19 @@ module Google
           # Datastore.
           attr_reader :batch_read_time
 
+          # Query explain metrics. This is only present when the
+          # [RunQueryRequest.explain_options][google.datastore.v1.RunQueryRequest.explain_options]
+          # is provided, and it is sent only once with the last response in the stream.
+          attr_reader :explain_metrics
+
           ##
           # Time at which the entities are being read. This would not be
           # older than 270 seconds.
           attr_reader :read_time
+
+          ##
+          # The options for query explanation.
+          attr_reader :explain_options
 
           ##
           # @private
@@ -96,7 +105,7 @@ module Google
 
           ##
           # @private
-          attr_writer :end_cursor, :more_results
+          attr_writer :end_cursor, :more_results, :explain_metrics
 
           ##
           # Convenience method for determining if the `more_results` value
@@ -180,8 +189,8 @@ module Google
               # Reduce the limit by the number of entities returned in the current batch
               query.limit.value -= count
             end
-            query_res = service.run_query query, namespace, read_time: read_time
-            self.class.from_grpc query_res, service, namespace, query, read_time
+            query_res = service.run_query query, namespace, read_time: read_time, explain_options: explain_options
+            self.class.from_grpc query_res, service, namespace, query, read_time, explain_options
           end
 
           ##
@@ -378,21 +387,29 @@ module Google
           ##
           # @private New Dataset::QueryResults from a
           # Google::Dataset::V1::RunQueryResponse object.
-          def self.from_grpc query_res, service, namespace, query, read_time = nil
-            r, c = Array(query_res.batch.entity_results).map do |result|
-              [Entity.from_grpc(result.entity), Cursor.from_grpc(result.cursor)]
-            end.transpose
+          def self.from_grpc query_res, service, namespace, query, read_time = nil, explain_options = nil
+            if query_res.batch
+              r, c = Array(query_res.batch.entity_results).map do |result|
+                [Entity.from_grpc(result.entity), Cursor.from_grpc(result.cursor)]
+              end.transpose
+            end
             r ||= []
             c ||= []
+
+            next_more_results = query_res.batch.more_results if query_res.batch
+            next_more_results ||= :NO_MORE_RESULTS
+
             new(r).tap do |qr|
               qr.cursors = c
-              qr.end_cursor = Cursor.from_grpc query_res.batch.end_cursor
-              qr.more_results = query_res.batch.more_results
+              qr.explain_metrics = query_res.explain_metrics
+              qr.end_cursor = Cursor.from_grpc query_res.batch.end_cursor if query_res.batch
+              qr.more_results = next_more_results
               qr.service = service
               qr.namespace = namespace
               qr.query = query_res.query || query
               qr.instance_variable_set :@read_time, read_time
-              qr.instance_variable_set :@batch_read_time, query_res.batch.read_time
+              qr.instance_variable_set :@batch_read_time, query_res.batch.read_time if query_res.batch
+              qr.instance_variable_set :@explain_options, explain_options
             end
           end
 
