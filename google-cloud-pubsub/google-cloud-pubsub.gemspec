@@ -20,6 +20,6 @@ Gem::Specification.new do |gem|
 
   gem.add_dependency "concurrent-ruby", "~> 1.3"
   gem.add_dependency "google-cloud-core", "~> 1.8"
-  gem.add_dependency "google-cloud-pubsub-v1", "~> 1.10"
+  gem.add_dependency "google-cloud-pubsub-v1", "~> 1.11"
   gem.add_dependency "retriable", "~> 3.1"
 end
