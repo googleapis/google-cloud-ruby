@@ -787,7 +787,7 @@ describe Google::Cloud::Datastore::Dataset, :mock_datastore do
   end
 
   it "run will fulfill a query on the secondary dataset" do
-    secondary_dataset.service.mocked_service.expect :run_query, run_query_res, project_id: project, partition_id: nil, read_options: nil, query: query.to_grpc, gql_query: nil, database_id: database_sec
+    secondary_dataset.service.mocked_service.expect :run_query, run_query_res, project_id: project, partition_id: nil, read_options: nil, query: query.to_grpc, gql_query: nil, database_id: database_sec, explain_options: nil
 
     entities = secondary_dataset.run query
     _(entities.count).must_equal 2
@@ -817,7 +817,7 @@ describe Google::Cloud::Datastore::Dataset, :mock_datastore do
   end
 
   it "run will fulfill a query" do
-    dataset.service.mocked_service.expect :run_query, run_query_res, project_id: project, partition_id: nil, read_options: nil, query: query.to_grpc, gql_query: nil, database_id: default_database
+    dataset.service.mocked_service.expect :run_query, run_query_res, project_id: project, partition_id: nil, read_options: nil, query: query.to_grpc, gql_query: nil, database_id: default_database, explain_options: nil
 
     entities = dataset.run query
     _(entities.count).must_equal 2
@@ -875,7 +875,7 @@ describe Google::Cloud::Datastore::Dataset, :mock_datastore do
   end
 
   it "run_query will fulfill a query" do
-    dataset.service.mocked_service.expect :run_query, run_query_res, project_id: project, partition_id: nil, read_options: nil, query: query.to_grpc, gql_query: nil, database_id: default_database
+    dataset.service.mocked_service.expect :run_query, run_query_res, project_id: project, partition_id: nil, read_options: nil, query: query.to_grpc, gql_query: nil, database_id: default_database, explain_options: nil
 
     entities = dataset.run_query query
     _(entities.count).must_equal 2
@@ -905,7 +905,7 @@ describe Google::Cloud::Datastore::Dataset, :mock_datastore do
 
   it "run_query will fulfill a query with a namespace" do
     partition_id = Google::Cloud::Datastore::V1::PartitionId.new(namespace_id: "foobar")
-    dataset.service.mocked_service.expect :run_query, run_query_res, project_id: project, partition_id: partition_id, read_options: nil, query: query.to_grpc, gql_query: nil, database_id: default_database
+    dataset.service.mocked_service.expect :run_query, run_query_res, project_id: project, partition_id: partition_id, read_options: nil, query: query.to_grpc, gql_query: nil, database_id: default_database, explain_options: nil
 
     entities = dataset.run_query query, namespace: "foobar"
     _(entities.count).must_equal 2
@@ -934,7 +934,7 @@ describe Google::Cloud::Datastore::Dataset, :mock_datastore do
   end
 
   it "run will fulfill a gql query" do
-    dataset.service.mocked_service.expect :run_query, run_query_res, project_id: project, partition_id: nil, read_options: nil, query: nil, gql_query: gql_query_grpc, database_id: default_database
+    dataset.service.mocked_service.expect :run_query, run_query_res, project_id: project, partition_id: nil, read_options: nil, query: nil, gql_query: gql_query_grpc, database_id: default_database, explain_options: nil
 
     gql = dataset.gql "SELECT * FROM Task"
     entities = dataset.run gql
@@ -966,7 +966,7 @@ describe Google::Cloud::Datastore::Dataset, :mock_datastore do
 
   it "run will fulfill a gql query with a namespace" do
     partition_id = Google::Cloud::Datastore::V1::PartitionId.new(namespace_id: "foobar")
-    dataset.service.mocked_service.expect :run_query, run_query_res, project_id: project, partition_id: partition_id, read_options: nil, query: nil, gql_query: gql_query_grpc, database_id: default_database
+    dataset.service.mocked_service.expect :run_query, run_query_res, project_id: project, partition_id: partition_id, read_options: nil, query: nil, gql_query: gql_query_grpc, database_id: default_database, explain_options: nil
 
     gql = dataset.gql "SELECT * FROM Task"
     entities = dataset.run gql, namespace: "foobar"
@@ -997,7 +997,7 @@ describe Google::Cloud::Datastore::Dataset, :mock_datastore do
   end
 
   it "run_query will fulfill a gql query" do
-    dataset.service.mocked_service.expect :run_query, run_query_res, project_id: project, partition_id: nil, read_options: nil, query: nil, gql_query: gql_query_grpc, database_id: default_database
+    dataset.service.mocked_service.expect :run_query, run_query_res, project_id: project, partition_id: nil, read_options: nil, query: nil, gql_query: gql_query_grpc, database_id: default_database, explain_options: nil
 
     gql = dataset.gql "SELECT * FROM Task"
     entities = dataset.run_query gql
@@ -1029,7 +1029,7 @@ describe Google::Cloud::Datastore::Dataset, :mock_datastore do
 
   it "run_query will fulfill a gql query with a namespace" do
     partition_id = Google::Cloud::Datastore::V1::PartitionId.new(namespace_id: "foobar")
-    dataset.service.mocked_service.expect :run_query, run_query_res, project_id: project, partition_id: partition_id, read_options: nil, query: nil, gql_query: gql_query_grpc, database_id: default_database
+    dataset.service.mocked_service.expect :run_query, run_query_res, project_id: project, partition_id: partition_id, read_options: nil, query: nil, gql_query: gql_query_grpc, database_id: default_database, explain_options: nil
 
     gql = dataset.gql "SELECT * FROM Task"
     entities = dataset.run_query gql, namespace: "foobar"
@@ -1062,7 +1062,7 @@ describe Google::Cloud::Datastore::Dataset, :mock_datastore do
   it "run will fulfill a query with explain_options" do
     explain_options = { analyze: true }
     explain_options_grpc = Google::Cloud::Datastore::V1::ExplainOptions.new analyze: true
-    dataset.service.mocked_service.expect :run_query, run_query_res_with_explain, project_id: project, partition_id: nil, read_options: nil, query: query.to_grpc, gql_query: nil, database_id: default_database, explain_options: explain_options_grpc
+    dataset.service.mocked_service.expect :run_query, run_query_res_with_explain, project_id: project, partition_id: nil, read_options: nil, query: query.to_grpc, gql_query: nil, database_id: default_database, explain_options: explain_options_grpc, explain_options: nil
 
     entities = dataset.run query, explain_options: explain_options
     _(entities.count).must_equal 2
