@@ -13,7 +13,6 @@
 # limitations under the License.
 
 require "google/cloud/errors"
-require "google/cloud/kms"
 require "google/cloud/storage"
 require "minitest/autorun"
 require "minitest/focus"
@@ -21,8 +20,6 @@ require "minitest/hooks/default"
 require "net/http"
 require "time"
 require "securerandom"
-require "uri"
-require "ostruct"
 
 def create_bucket_helper bucket_name
   storage_client = Google::Cloud::Storage.new

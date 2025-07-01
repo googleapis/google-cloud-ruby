@@ -12,21 +12,14 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# [START storage_dependencies]
 source "https://rubygems.org"
 
-# [END storage_dependencies]
-
 if ENV["GOOGLE_CLOUD_SAMPLES_TEST"] == "master"
-  gem "google-cloud-kms", group: :test, path: "../../google-cloud-kms"
   gem "google-cloud-storage", path: "../../google-cloud-storage"
   gem "google-cloud-storage_batch_operations", path: "../../google-cloud-storage_batch_operations"
 else
-  # [START storage_dependencies]
-  gem "google-cloud-kms"
   gem "google-cloud-storage"
   gem "google-cloud-storage_batch_operations"
-  # [END storage_dependencies]
 end
 gem "yard"
 group :test do
