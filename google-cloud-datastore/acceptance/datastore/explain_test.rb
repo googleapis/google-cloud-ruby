@@ -69,7 +69,7 @@ describe "Datastore Query Explain", :datastore do
       results = results.next
     end
 
-    # If `analyze: false` is passes, the `run` returns no results, just a plan summary
+    # If `analyze: false` is passed, the `run` returns no results, just a plan summary
     _(all_results.count).must_equal 0
     _(results.explain_metrics).must_be_kind_of Google::Cloud::Datastore::V1::ExplainMetrics
     _(results.explain_metrics.plan_summary).wont_be_nil
