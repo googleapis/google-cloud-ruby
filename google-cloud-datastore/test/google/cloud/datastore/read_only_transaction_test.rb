@@ -155,7 +155,7 @@ describe Google::Cloud::Datastore::ReadOnlyTransaction, :mock_datastore do
 
   it "run will fulfill a query" do
     query_grpc = Google::Cloud::Datastore::Query.new.kind("User").to_grpc
-    transaction.service.mocked_service.expect :run_query, run_query_res, project_id: project, partition_id: nil, read_options: read_options, query: query_grpc, gql_query: nil, database_id: default_database
+    transaction.service.mocked_service.expect :run_query, run_query_res, project_id: project, partition_id: nil, read_options: read_options, query: query_grpc, gql_query: nil, database_id: default_database, explain_options: nil
 
     query = Google::Cloud::Datastore::Query.new.kind("User")
     entities = transaction.run query
@@ -173,7 +173,7 @@ describe Google::Cloud::Datastore::ReadOnlyTransaction, :mock_datastore do
   end
 
   it "run will fulfill a gql query" do
-    transaction.service.mocked_service.expect :run_query, run_query_res, project_id: project, partition_id: nil, read_options: read_options, query: nil, gql_query: gql_query_grpc, database_id: default_database
+    transaction.service.mocked_service.expect :run_query, run_query_res, project_id: project, partition_id: nil, read_options: read_options, query: nil, gql_query: gql_query_grpc, database_id: default_database, explain_options: nil
 
     gql = transaction.gql "SELECT * FROM Task"
     entities = transaction.run gql
