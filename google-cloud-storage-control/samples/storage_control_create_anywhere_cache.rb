@@ -17,44 +17,34 @@ def create_anywhere_cache bucket_name:, zone:
   # The ID of your GCS bucket
   # bucket_name = "your-unique-bucket-name"
 
+  # Zone where you want to create cache
+  # zone = "your-zone-name"
 
-  require "google/cloud/storage/control"
-	require "google/cloud/storage/control/v2"
+  require "google/cloud/storage/control/v2"
 
-	# Create a client object. The client can be reused for multiple calls.
-	client = Google::Cloud::Storage::Control::V2::StorageControl::Client.new
-	parent = "projects/_/buckets/#{bucket_name}"
-	name=  "#{parent}/anywhereCaches/#{zone}"
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::Storage::Control::V2::StorageControl::Client.new
+  parent = "projects/_/buckets/#{bucket_name}"
+  name = "#{parent}/anywhereCaches/#{zone}"
 
-	anywhere_cache = Google::Cloud::Storage::Control::V2::AnywhereCache.new(
-		name: name,
-		zone: zone
-	)
-	# Create a request. Replace the placeholder values with actual data.
-	request = Google::Cloud::Storage::Control::V2::CreateAnywhereCacheRequest.new(
-		parent: parent,
-		anywhere_cache: anywhere_cache
-	)
-# Call the create_anywhere_cache method.
+  anywhere_cache = Google::Cloud::Storage::Control::V2::AnywhereCache.new(
+    name: name,
+    zone: zone
+  )
+  # Create a request. Replace the placeholder values with actual data.
+  request = Google::Cloud::Storage::Control::V2::CreateAnywhereCacheRequest.new(
+    parent: parent,
+    anywhere_cache: anywhere_cache
+  )
+  # Call the create_anywhere_cache method.
+  result = client.create_anywhere_cache request
 
-result = client.create_anywhere_cache(request)
-
-puts result
-
+  if result.instance_of?(Gapic::Operation)
+    puts "Anywhere cache created"
+  else
+    puts "operation failed"
+  end
 end
 # [END storage_control_create_anywhere_cache]
 
-create_anywhere_cache bucket_name: ARGV.shift if $PROGRAM_NAME == __FILE__
-
-# request=>
-#  <Google::Cloud::Storage::Control::V2::CreateAnywhereCacheRequest: 
-#  		parent: "projects/_/buckets/ruby-storage-control-samples-test-2025-06-20t04-23-38z-4690f615",
-# 		anywhere_cache: <Google::Cloud::Storage::Control::V2::AnywhereCache: 
-# 			name: "",
-# 			zone: "US",
-# 			admission_policy: "",
-# 			state: "",
-# 			pending_update: false>,
-# 		request_id: "">
-
-# GRPC::InvalidArgument: 3:This operation does not support custom billing projects at this time.. debug_error_string:{UNKNOWN:Error received from peer ipv4:64.233.189.207:443 {grpc_status:3, grpc_message:"This operation does not support custom billing projects at this time."}}
+create_anywhere_cache bucket_name: ARGV.shift, zone: ARGV.shift if $PROGRAM_NAME == __FILE__
