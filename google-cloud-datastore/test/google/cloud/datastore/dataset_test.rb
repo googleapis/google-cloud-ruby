@@ -34,6 +34,11 @@ describe Google::Cloud::Datastore::Dataset, :mock_datastore do
       )
     )
   end
+  let(:run_query_res_with_explain) do
+    run_query_res.dup.tap do |response|
+      response.explain_metrics = Google::Cloud::Datastore::V1::ExplainMetrics.new
+    end
+  end
   let(:begin_transaction_response) do
     Google::Cloud::Datastore::V1::BeginTransactionResponse.new.tap do |response|
       response.transaction = "giterdone"
@@ -1052,6 +1057,17 @@ describe Google::Cloud::Datastore::Dataset, :mock_datastore do
     refute entities.more_after_limit?
     refute entities.more_after_cursor?
     refute entities.no_more?
+  end
+
+  it "run will fulfill a query with explain_options" do
+    explain_options = { analyze: true }
+    explain_options_grpc = Google::Cloud::Datastore::V1::ExplainOptions.new analyze: true
+    dataset.service.mocked_service.expect :run_query, run_query_res_with_explain, project_id: project, partition_id: nil, read_options: nil, query: query.to_grpc, gql_query: nil, database_id: default_database, explain_options: explain_options_grpc
+
+    entities = dataset.run query, explain_options: explain_options
+    _(entities.count).must_equal 2
+    _(entities.explain_metrics).must_be_kind_of Google::Cloud::Datastore::V1::ExplainMetrics
+    _(entities.explain_options).must_equal explain_options
   end
 
   it "run will raise when given an unknown argument" do
