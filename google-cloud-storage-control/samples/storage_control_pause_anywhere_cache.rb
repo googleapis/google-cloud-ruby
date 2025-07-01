@@ -17,23 +17,23 @@ def pause_anywhere_cache bucket_name:, zone:
   # The ID of your GCS bucket
   # bucket_name = "your-unique-bucket-name"
 
+  # Zone where you want to create cache
+  # zone = "your-zone-name"
 
-  require "google/cloud/storage/control"
-	require "google/cloud/storage/control/v2"
+  require "google/cloud/storage/control/v2"
 
-
-	# Create a client object. The client can be reused for multiple calls.
-	client = Google::Cloud::Storage::Control::V2::StorageControl::Client.new
-	parent = "projects/_/buckets/#{bucket_name}"
-  name=  "#{parent}/anywhereCaches/#{zone}"
-# Create a request. Replace the placeholder values with actual data.
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::Storage::Control::V2::StorageControl::Client.new
+  parent = "projects/_/buckets/#{bucket_name}"
+  name =  "#{parent}/anywhereCaches/#{zone}"
+  # Create a request. Replace the placeholder values with actual data.
   request = Google::Cloud::Storage::Control::V2::PauseAnywhereCacheRequest.new(
     name: name
-	)
+  )
   # Call the create_anywhere_cache method.
-  result = client.pause_anywhere_cache(request)
+  result = client.pause_anywhere_cache request
   puts result
 end
 # [END storage_control_pause_anywhere_cache]
 
-pause_anywhere_cache bucket_name: ARGV.shift if $PROGRAM_NAME == __FILE__
+pause_anywhere_cache bucket_name: ARGV.shift, zone: ARGV.shift if $PROGRAM_NAME == __FILE__
