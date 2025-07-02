@@ -215,7 +215,7 @@ describe Google::Cloud::Bigquery::Table, :bigquery do
     fresh.description = "Description 1"
     _(stale.etag).wont_equal fresh.etag
     err = expect { stale.description = "Description 2" }.must_raise Google::Cloud::FailedPreconditionError
-    _(err.message).must_equal "failedPrecondition: Precondition check failed."
+    _(err.message).must_match(/^(failedPrecondition|FAILED_PRECONDITION): Precondition check failed\.$/)
   end
 
   it "create table returns valid etag equal to get table" do

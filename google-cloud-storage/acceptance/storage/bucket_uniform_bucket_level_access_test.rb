@@ -30,7 +30,7 @@ describe Google::Cloud::Storage::Bucket, :uniform_bucket_level_access, :storage 
   let(:user_val) { "user-test@example.com" }
 
   before do
-    sleep 1
+    sleep 2
   end
 
   after do
@@ -69,6 +69,8 @@ describe Google::Cloud::Storage::Bucket, :uniform_bucket_level_access, :storage 
     _(err.message).must_match /does not have storage.objects.get access to/
 
     bucket.uniform_bucket_level_access = false
+    refute bucket.uniform_bucket_level_access?
+    sleep 1
     file.reload!
   end
 
@@ -150,6 +152,7 @@ describe Google::Cloud::Storage::Bucket, :uniform_bucket_level_access, :storage 
     _(err.message).must_match /does not have storage.objects.get access to/
 
     bucket.policy_only = false
+    sleep 1
     file.reload!
   end
 
@@ -200,6 +203,7 @@ describe Google::Cloud::Storage::Bucket, :uniform_bucket_level_access, :storage 
     refute bucket.policy_only?
     _(bucket.policy_only_locked_at).must_be :nil?
 
+    sleep 1
     file_default_acl.reload!
     _(file_default_acl.acl.readers).must_equal ["allUsers"]
   end
