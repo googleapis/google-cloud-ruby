@@ -47,66 +47,62 @@ describe "#create_secret_with_tags", :secret_manager_snippet do
   let(:max_duration) { 60 }
 
   def cleanup_tag_value
-    if defined?(tag_value) && tag_value
-      start_time = Time.now
-      end_time = start_time + max_duration
-      deleted = false
+    return unless defined?(tag_value) && tag_value
+    start_time = Time.now
+    end_time = start_time + max_duration
+    deleted = false
 
-      while start_time < end_time && !deleted
-        begin
-          start_time += interval_duration
-          tag_value_client.delete_tag_value(name: tag_value.name).wait_until_done!
-          # Verify if tag value is deleted
-          tag_value_to_delete = tag_value_client.list_tag_values(parent: tag_key.name).to_a.find { |value| value.short_name == tag_value_short_name }
-          unless tag_value_to_delete
-            deleted = true
-          end
-        rescue Google::Cloud::NotFoundError
+    while start_time < end_time && !deleted
+      begin
+        start_time += interval_duration
+        tag_value_client.delete_tag_value(name: tag_value.name).wait_until_done!
+        # Verify if tag value is deleted
+        tag_value_to_delete = tag_value_client.list_tag_values(parent: tag_key.name).to_a.find { |value| value.short_name == tag_value_short_name }
+        unless tag_value_to_delete
           deleted = true
-        rescue StandardError => e
-          puts "An error occurred while deleting tag value: #{e.message}. Retrying."
         end
-
-        unless deleted
-          sleep interval_duration
-        end
+      rescue Google::Cloud::NotFoundError
+        deleted = true
+      rescue StandardError => e
+        puts "An error occurred while deleting tag value: #{e.message}. Retrying."
       end
+
       unless deleted
-        raise "Failed to delete tag value after #{max_duration} seconds."
+        sleep interval_duration
       end
     end
+    return if deleted
+    raise "Failed to delete tag value after #{max_duration} seconds."
   end
 
   def cleanup_tag_key
-    if defined?(tag_key) && tag_key
-      start_time = Time.now
-      end_time = start_time + max_duration
-      deleted = false
+    return unless defined?(tag_key) && tag_key
+    start_time = Time.now
+    end_time = start_time + max_duration
+    deleted = false
 
-      while start_time < end_time && !deleted
-        begin
-          start_time += interval_duration
-          tag_key_client.delete_tag_key(name: tag_key.name).wait_until_done!
-          # Verify if tag key is deleted
-          tag_key_to_delete = tag_key_client.list_tag_keys(parent: tag_parent).to_a.find { |key| key.short_name == tag_key_short_name }
-          unless tag_key_to_delete
-            deleted = true
-          end
-        rescue Google::Cloud::NotFoundError
+    while start_time < end_time && !deleted
+      begin
+        start_time += interval_duration
+        tag_key_client.delete_tag_key(name: tag_key.name).wait_until_done!
+        # Verify if tag key is deleted
+        tag_key_to_delete = tag_key_client.list_tag_keys(parent: tag_parent).to_a.find { |key| key.short_name == tag_key_short_name }
+        unless tag_key_to_delete
           deleted = true
-        rescue StandardError => e
-          puts "An error occurred while deleting tag key: #{e.message}. Retrying..."
         end
-
-        unless deleted
-          sleep interval_duration
-        end
+      rescue Google::Cloud::NotFoundError
+        deleted = true
+      rescue StandardError => e
+        puts "An error occurred while deleting tag key: #{e.message}. Retrying..."
       end
 
       unless deleted
-        raise "Failed to delete tag key after #{max_duration} seconds."
+        sleep interval_duration
       end
     end
+
+    return if deleted
+    raise "Failed to delete tag key after #{max_duration} seconds."
   end
 
   it "creates a secret with tags" do
