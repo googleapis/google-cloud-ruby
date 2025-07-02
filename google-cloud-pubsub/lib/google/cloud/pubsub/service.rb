@@ -164,6 +164,16 @@ module Google
           "#{project_path options}/subscriptions/#{subscription_name}"
         end
 
+        def snapshot_path snapshot_name, options = {}
+          return snapshot_name if snapshot_name.nil? || snapshot_name.to_s.include?("/")
+          "#{project_path options}/snapshots/#{snapshot_name}"
+        end
+
+        def schema_path schema_name, options = {}
+          return schema_name if schema_name.nil? || schema_name.to_s.include?("/")
+          "#{project_path options}/schemas/#{schema_name}"
+        end
+
         protected
 
         # Set the timeout in the client config.

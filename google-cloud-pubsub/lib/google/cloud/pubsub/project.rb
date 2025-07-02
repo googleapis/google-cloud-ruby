@@ -130,8 +130,8 @@ module Google
         def publisher topic_name, project: nil, async: nil
           ensure_service!
           options = { project: project, async: async }
-          grpc = topic_admin.get_topic topic: service.publisher_path(topic_name, options)
-          Publisher.from_grpc grpc
+          grpc = topic_admin.get_topic topic: service.topic_path(topic_name, options)
+          Publisher.from_grpc grpc, service
         end
 
         ##
@@ -155,8 +155,8 @@ module Google
           ensure_service!
           options = { project: project }
           return Subscriber.from_name subscription_name, service, options if skip_lookup
-          grpc = subscription_admin_client.get_subscription subscription: subscription_path(subscription_name, options)
-          Subscriber.from_grpc grpc
+          grpc = subscription_admin.get_subscription subscription: service.subscription_path(subscription_name, options)
+          Subscriber.from_grpc grpc, service
         end
 
         protected

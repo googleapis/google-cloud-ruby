@@ -72,7 +72,6 @@ module Google
           @exists = nil
         end
 
-
         ##
         # The underlying Subscription resource.
         #

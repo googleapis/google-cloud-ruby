@@ -335,7 +335,7 @@ module Google
             bytesize:                         @inventory[:max_outstanding_bytes].fdiv(@streams).ceil,
             extension:                        @inventory[:max_total_lease_duration],
             max_duration_per_lease_extension: @inventory[:max_duration_per_lease_extension],
-            min_duration_per_lease_extension: @inventory[:min_duration_per_lease_extension],
+            min_duration_per_lease_extension: @inventory[:min_duration_per_lease_extension]
           }
         end
 
