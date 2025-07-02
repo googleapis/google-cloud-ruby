@@ -17,7 +17,7 @@ require "avro"
 
 # This test is a ruby version of gcloud-node's pubsub test.
 
-describe Google::Cloud::PubSub::Schema, :pubsub do
+describe Google::Cloud::PubSub::V1::Schema, :pubsub do
   let(:topic_name) { $topic_names[10] }
   let(:topic_name_2) { $topic_names[11] }
   let(:schema_name) { $schema_names[0] }

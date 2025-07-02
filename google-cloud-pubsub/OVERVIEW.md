@@ -19,96 +19,128 @@ require "google/cloud/pubsub"
 
 pubsub = Google::Cloud::PubSub.new
 
-topic = pubsub.topic "my-topic"
-topic.publish "task completed"
+publisher = pubsub.publisher "my-topic"
+publisher.publish "topic-message"
+
+subscriber = pubsub.subscriber "my-topic-sub"
+subscriber.listen do |received_message|
+  puts "Message: #{received_message.message.data}"
+  received_message.acknowledge!
+end
 ```
+
+This guide provides an overview of the client library's operations, which are categorized into Admin Operations and Data Plane Operations.
+
+* **Admin Operations**: Used for creating, configuring, and managing Pub/Sub resources (topics, subscriptions, schemas).
+* **Data Plane Operations**: For the core functionality of publishing and receiving messages.
 
 To learn more about Pub/Sub, read the [Google Cloud Pub/Sub Overview
 ](https://cloud.google.com/pubsub/overview).
 
-## Retrieving Topics
+## Admin Operations
 
-A Topic is a named resource to which messages are sent by publishers. A Topic is
-found by its name. (See {Google::Cloud::PubSub::Project#topic Project#topic})
+### Topic Admin Client
 
-```ruby
-require "google/cloud/pubsub"
-
-pubsub = Google::Cloud::PubSub.new
-topic = pubsub.topic "my-topic"
-```
-
-## Creating a Topic
-
-A Topic is created from a Project. (See
-{Google::Cloud::PubSub::Project#create_topic Project#create_topic})
+Manages topic resources.
 
 ```ruby
 require "google/cloud/pubsub"
 
-pubsub = Google::Cloud::PubSub.new
-topic = pubsub.create_topic "my-topic"
+pubsub = Google::Cloud::PubSub.new project_id: "my-project-id"
+topic_admin = pubsub.topic_admin
 ```
 
-## Retrieving Subscriptions
+#### Creating a Topic
+
+A Topic is a named resource to which messages are sent by publishers. The resource must be created using `TopicAdmin::Client` before it can be used.
+
+```ruby
+topic_name = "projects/my-project/topics/my-topic"
+topic = topic_admin.create_topic name: topic_name
+
+puts "Topic #{topic.name} created."
+```
+
+#### Retrieving a Topic
+
+A Topic is found by its full name.
+
+```ruby
+topic_name = "my-topic"
+topic_path = pubsub.service.topic_path topic_name # Format is `projects/#{project_id}/topics/#{topic_name}`
+topic = topic_admin.get_topic topic: topic_path
+
+puts "Topic: #{topic.name}."
+```
+
+### Subscription Admin Client
+
+Manages subscription and snapshot resources.
+
+```ruby
+require "google/cloud/pubsub"
+
+pubsub = Google::Cloud::PubSub.new project_id: "my-project-id"
+subscription_admin = pubsub.subscription_admin
+```
+
+
+#### Creating a Subscription
 
 A Subscription is a named resource representing the stream of messages from a
-single, specific Topic, to be delivered to the subscribing application. A
-Subscription is found by its name. (See
-{Google::Cloud::PubSub::Topic#subscription Topic#subscription})
+single, specific Topic, to be delivered to the subscribing application.
 
 ```ruby
-require "google/cloud/pubsub"
-
-pubsub = Google::Cloud::PubSub.new
-
-topic = pubsub.topic "my-topic"
-subscription = topic.subscription "my-topic-subscription"
-puts subscription.name
-```
-
-## Creating a Subscription
-
-A Subscription is created from a Topic. (See
-{Google::Cloud::PubSub::Topic#subscribe Topic#subscribe})
-
-```ruby
-require "google/cloud/pubsub"
-
-pubsub = Google::Cloud::PubSub.new
-
-topic = pubsub.topic "my-topic"
-sub = topic.subscribe "my-topic-sub"
-puts sub.name # => "my-topic-sub"
+topic_path = pubsub.service.topic_path "my-topic" # Already created Topic resource
+subscription_path = pubsub.service.subscription_path "my-topic-subscription"
+subscription = subscription_admin.create_subscription name: subscription_path, topic: topic_path
 ```
 
 The subscription can be created that specifies the number of seconds to wait to
 be acknowledged as well as an endpoint URL to push the messages to:
 
 ```ruby
-require "google/cloud/pubsub"
-
-pubsub = Google::Cloud::PubSub.new
-
-topic = pubsub.topic "my-topic"
-sub = topic.subscribe "my-topic-sub",
-                      deadline: 120,
-                      endpoint: "https://example.com/push"
+topic_path = pubsub.service.topic_path "my-topic" # Already created Topic resource
+subscription_path = pubsub.service.subscription_path "my-topic-subscription"
+push_config = Google::Cloud::PubSub::V1::PushConfig.new push_endpoint: "https://example.com/push"
+subscription = subscription_admin.create_subscription name: subscription_path, topic: topic_path,
+                                                      push_config: push_config,
+                                                      ack_deadline_seconds: 120
 ```
 
-## Publishing Messages
+#### Retrieving Subscriptions
+
+A Subscription is found by its name.
+
+```ruby
+subscription_path = pubsub.service.subscription_path "my-topic-subscription"
+subscription = subscription_admin.get_subscription subscription: subscription_path
+```
+
+## Data Plane Operations
+
+### Publisher Client
+
+```ruby
+require "google/cloud/pubsub"
+
+pubsub = Google::Cloud::PubSub.new project_id: "my-project-id"
+publisher = pubsub.publisher "my-topic"
+```
+
+#### Publishing Messages
 
 Messages are published to a topic. Any message published to a topic without a
 subscription will be lost. Ensure the topic has a subscription before
-publishing. (See {Google::Cloud::PubSub::Topic#publish Topic#publish})
+publishing.
 
 ```ruby
 require "google/cloud/pubsub"
 
 pubsub = Google::Cloud::PubSub.new
 
-topic = pubsub.topic "my-topic"
-msg = topic.publish "task completed"
+publisher = pubsub.publisher "my-topic"
+msg = publisher.publish "task completed"
 ```
 
 Messages can also be published with attributes:
@@ -118,14 +150,14 @@ require "google/cloud/pubsub"
 
 pubsub = Google::Cloud::PubSub.new
 
-topic = pubsub.topic "my-topic"
-msg = topic.publish "task completed",
+publisher = pubsub.publisher "my-topic"
+msg = publisher.publish "task completed",
                     foo: :bar,
                     this: :that
 ```
 
 Messages can also be published in batches asynchronously using `publish_async`.
-(See {Google::Cloud::PubSub::Topic#publish_async Topic#publish_async} and
+(See {Google::Cloud::PubSub::Publisher#publish_async Publisher#publish_async} and
 {Google::Cloud::PubSub::AsyncPublisher AsyncPublisher})
 
 ```ruby
@@ -133,8 +165,8 @@ require "google/cloud/pubsub"
 
 pubsub = Google::Cloud::PubSub.new
 
-topic = pubsub.topic "my-topic"
-topic.publish_async "task completed" do |result|
+publisher = pubsub.publisher "my-topic"
+publisher.publish_async "task completed" do |result|
   if result.succeeded?
     log_publish_success result.data
   else
@@ -142,7 +174,7 @@ topic.publish_async "task completed" do |result|
   end
 end
 
-topic.async_publisher.stop!
+publisher.async_publisher.stop!
 ```
 
 Or multiple messages can be published in batches at the same time by passing a
@@ -153,57 +185,57 @@ require "google/cloud/pubsub"
 
 pubsub = Google::Cloud::PubSub.new
 
-topic = pubsub.topic "my-topic"
-msgs = topic.publish do |batch|
+publisher = pubsub.publisher "my-topic"
+msgs = publisher.publish do |batch|
   batch.publish "task 1 completed", foo: :bar
   batch.publish "task 2 completed", foo: :baz
   batch.publish "task 3 completed", foo: :bif
 end
 ```
 
-## Receiving Messages
+#### Receiving Messages
 
 Messages can be streamed from a subscription with a subscriber object that is
-created using `listen`. (See {Google::Cloud::PubSub::Subscription#listen
-Subscription#listen} and {Google::Cloud::PubSub::Subscriber Subscriber})
+created using `listen`. (See {Google::Cloud::PubSub::Subscriber#listen
+Subscriber#listen} and {Google::Cloud::PubSub::MessageListener MessageListener})
 
 ```ruby
 require "google/cloud/pubsub"
 
 pubsub = Google::Cloud::PubSub.new
 
-sub = pubsub.subscription "my-topic-sub"
+subscriber = pubsub.subscriber "my-topic-sub"
 
-# Create a subscriber to listen for available messages.
+# Create a MessageListener to listen for available messages.
 # By default, this block will be called on 8 concurrent threads
 # but this can be tuned with the `threads` option.
 # The `streams` and `inventory` parameters allow further tuning.
-subscriber = sub.listen threads: { callback: 16 } do |received_message|
+listener = subscriber.listen threads: { callback: 16 } do |received_message|
   # process message
   puts "Data: #{received_message.message.data}, published at #{received_message.message.published_at}"
   received_message.acknowledge!
 end
 
 # Handle exceptions from listener
-subscriber.on_error do |exception|
+listener.on_error do |exception|
   puts "Exception: #{exception.class} #{exception.message}"
 end
 
 # Gracefully shut down the subscriber on program exit, blocking until
 # all received messages have been processed or 10 seconds have passed
 at_exit do
-  subscriber.stop!(10)
+  listener.stop!(10)
 end
 
 # Start background threads that will call the block passed to listen.
-subscriber.start
+listener.start
 
 # Block, letting processing threads continue in the background
 sleep
 ```
 
 Messages also can be pulled directly in a one-time operation. (See
-{Google::Cloud::PubSub::Subscription#pull Subscription#pull})
+{Google::Cloud::PubSub::Subscriber#pull Subscriber#pull})
 
 The `immediate: false` option is recommended to avoid adverse impacts on the
 performance of pull operations.
@@ -213,8 +245,8 @@ require "google/cloud/pubsub"
 
 pubsub = Google::Cloud::PubSub.new
 
-sub = pubsub.subscription "my-topic-sub"
-received_messages = sub.pull immediate: false
+subscriber = pubsub.subscriber "my-topic-sub"
+received_messages = subscriber.pull immediate: false
 ```
 
 A maximum number of messages to pull can be specified:
@@ -224,11 +256,11 @@ require "google/cloud/pubsub"
 
 pubsub = Google::Cloud::PubSub.new
 
-sub = pubsub.subscription "my-topic-sub"
-received_messages = sub.pull immediate: false, max: 10
+subscriber = pubsub.subscriber "my-topic-sub"
+received_messages = subscriber.pull immediate: false, max: 10
 ```
 
-## Acknowledging a Message
+#### Acknowledging a Message
 
 Messages that are received can be acknowledged in Pub/Sub, marking the message
 to be removed so it cannot be pulled again.
@@ -243,34 +275,34 @@ require "google/cloud/pubsub"
 
 pubsub = Google::Cloud::PubSub.new
 
-sub = pubsub.subscription "my-topic-sub"
+subscriber = pubsub.subscriber "my-topic-sub"
 
-subscriber = sub.listen do |received_message|
+listener = subscriber.listen do |received_message|
   # process message
   received_message.acknowledge!
 end
 
 # Start background threads that will call the block passed to listen.
-subscriber.start
+listener.start
 
 # Shut down the subscriber when ready to stop receiving messages.
-subscriber.stop!
+listener.stop!
 ```
 
 Or, multiple messages can be acknowledged in a single API call: (See
-{Google::Cloud::PubSub::Subscription#acknowledge Subscription#acknowledge})
+{Google::Cloud::PubSub::Subscriber#acknowledge Subscriber#acknowledge})
 
 ```ruby
 require "google/cloud/pubsub"
 
 pubsub = Google::Cloud::PubSub.new
 
-sub = pubsub.subscription "my-topic-sub"
-received_messages = sub.pull immediate: false
-sub.acknowledge received_messages
+subscriber = pubsub.subscriber "my-topic-sub"
+received_messages = subscriber.pull immediate: false
+subscriber.acknowledge received_messages
 ```
 
-## Modifying a Deadline
+#### Modifying a Deadline
 
 A message must be acknowledged after it is pulled, or Pub/Sub will mark the
 message for redelivery. The message acknowledgement deadline can delayed if more
@@ -284,8 +316,8 @@ require "google/cloud/pubsub"
 
 pubsub = Google::Cloud::PubSub.new
 
-sub = pubsub.subscription "my-topic-sub"
-subscriber = sub.listen do |received_message|
+subscriber = pubsub.subscriber "my-topic-sub"
+listener = subscriber.listen do |received_message|
   puts received_message.message.data
 
   # Delay for 2 minutes
@@ -293,10 +325,10 @@ subscriber = sub.listen do |received_message|
 end
 
 # Start background threads that will call the block passed to listen.
-subscriber.start
+listener.start
 
 # Shut down the subscriber when ready to stop receiving messages.
-subscriber.stop!
+listener.stop!
 ```
 
 The message can also be made available for immediate redelivery:
@@ -306,8 +338,8 @@ require "google/cloud/pubsub"
 
 pubsub = Google::Cloud::PubSub.new
 
-sub = pubsub.subscription "my-topic-sub"
-subscriber = sub.listen do |received_message|
+subscriber = pubsub.subscriber "my-topic-sub"
+listener = subscriber.listen do |received_message|
   puts received_message.message.data
 
   # Mark for redelivery
@@ -315,27 +347,27 @@ subscriber = sub.listen do |received_message|
 end
 
 # Start background threads that will call the block passed to listen.
-subscriber.start
+listener.start
 
 # Shut down the subscriber when ready to stop receiving messages.
-subscriber.stop!
+listener.stop!
 ```
 
 Multiple messages can be delayed or made available for immediate redelivery:
-(See {Google::Cloud::PubSub::Subscription#modify_ack_deadline
-Subscription#modify_ack_deadline})
+(See {Google::Cloud::PubSub::Subscriber#modify_ack_deadline
+Subscriber#modify_ack_deadline})
 
 ```ruby
 require "google/cloud/pubsub"
 
 pubsub = Google::Cloud::PubSub.new
 
-sub = pubsub.subscription "my-topic-sub"
-received_messages = sub.pull immediate: false
-sub.modify_ack_deadline 120, received_messages
+subscriber = pubsub.subscriber "my-topic-sub"
+received_messages = subscriber.pull immediate: false
+subscriber.modify_ack_deadline 120, received_messages
 ```
 
-## Using Ordering Keys
+#### Using Ordering Keys
 
 Google Cloud Pub/Sub ordering keys provide the ability to ensure related
 messages are sent to subscribers in the order in which they were published.
@@ -349,50 +381,47 @@ messages for different ordering keys across subscribers.
 Note: At the time of this release, ordering keys are not yet publicly enabled
 and requires special project enablements.
 
-### Publishing Ordered Messages
+#### Publishing Ordered Messages
 
 To use ordering keys when publishing messages, a call to
-{Google::Cloud::PubSub::Topic#enable_message_ordering!
-Topic#enable_message_ordering!} must be made and the `ordering_key` argument
-must be provided when calling {Google::Cloud::PubSub::Topic#publish_async
-Topic#publish_async}.
+{Google::Cloud::PubSub::Publisher#enable_message_ordering!
+Publisher#enable_message_ordering!} must be made and the `ordering_key` argument
+must be provided when calling {Google::Cloud::PubSub::Publisher#publish_async
+Publisher#publish_async}.
 
 ```ruby
 require "google/cloud/pubsub"
 
 pubsub = Google::Cloud::PubSub.new
 
-topic = pubsub.topic "my-ordered-topic"
+publisher = pubsub.publisher "my-ordered-topic"
 
 # Ensure that message ordering is enabled.
-topic.enable_message_ordering!
+publisher.enable_message_ordering!
 
 # Publish an ordered message with an ordering key.
-topic.publish_async "task completed",
+publisher.publish_async "task completed",
                     ordering_key: "task-key"
 
 # Shut down the publisher when ready to stop publishing messages.
-topic.async_publisher.stop!
+publisher.async_publisher.stop!
 ```
 
-### Handling errors with Ordered Keys
+#### Handling errors with Ordered Keys
 
 Ordered messages that fail to publish to the Pub/Sub API due to error will put
 the `ordering_key` in a failed state, and future calls to
-{Google::Cloud::PubSub::Topic#publish_async Topic#publish_async} with the
+{Google::Cloud::PubSub::Publisher#publish_async Publisher#publish_async} with the
 `ordering_key` will raise {Google::Cloud::PubSub::OrderingKeyError
 OrderingKeyError}. To allow future messages with the `ordering_key` to be
 published, the `ordering_key` must be passed to
-{Google::Cloud::PubSub::Topic#resume_publish Topic#resume_publish}.
+{Google::Cloud::PubSub::Publisher#resume_publish Publisher#resume_publish}.
 
-### Receiving Ordered Messages
+#### Receiving Ordered Messages
 
 To use ordering keys when subscribing to messages, the subscription must be
-created with message ordering enabled (See
-{Google::Cloud::PubSub::Topic#subscribe Topic#subscribe} and
-{Google::Cloud::PubSub::Subscription#message_ordering?
-Subscription#message_ordering?}) before calling
-{Google::Cloud::PubSub::Subscription#listen Subscription#listen}. When enabled,
+created with message ordering enabled before calling
+{Google::Cloud::PubSub::Subscriber#listen Subscriber#listen}. When enabled,
 the subscriber will deliver messages with the same `ordering_key` in the order
 they were published.
 
@@ -401,30 +430,31 @@ require "google/cloud/pubsub"
 
 pubsub = Google::Cloud::PubSub.new
 
-sub = pubsub.subscription "my-ordered-topic-sub"
-sub.message_ordering? #=> true
+subscription = ... # "my-ordered-topic-sub" subscription with message ordering enabled
+puts subscription.enable_message_ordering #=> true
 
-subscriber = sub.listen do |received_message|
+subscriber = pubsub.subscriber "my-ordered-topic-sub"
+
+listener = subscriber.listen do |received_message|
   # Messsages with the same ordering_key are received
   # in the order in which they were published.
   received_message.acknowledge!
 end
 
 # Start background threads that will call block passed to listen.
-subscriber.start
+listener.start
 
 # Shut down the subscriber when ready to stop receiving messages.
-subscriber.stop!
+listener.stop!
 ```
 
 ## Minimizing API calls before receiving and acknowledging messages
 
-A subscription object can be created without making any API calls by providing
-the `skip_lookup` argument to {Google::Cloud::PubSub::Project#subscription
-Project#subscription} or {Google::Cloud::PubSub::Topic#subscription
-Topic#subscription}. A subscriber object can also be created without an API call
-by providing the `deadline` optional argument to
-{Google::Cloud::PubSub::Subscription#listen Subscription#listen}:
+A subscriber object can be created without making any API calls by providing
+the `skip_lookup` argument to {Google::Cloud::PubSub::Project#subscriber
+Project#subscriber}. A MessageListener object can also be created without an API
+call by providing the `deadline` optional argument to
+{Google::Cloud::PubSub::Subscriber#listen Subscriber#listen}
 
 ```ruby
 require "google/cloud/pubsub"
@@ -432,19 +462,19 @@ require "google/cloud/pubsub"
 pubsub = Google::Cloud::PubSub.new
 
 # No API call is made to retrieve the subscription resource.
-sub = pubsub.subscription "my-topic-sub", skip_lookup: true
+subscriber = pubsub.subscriber "my-topic-sub", skip_lookup: true
 
 # No API call is made to retrieve the subscription deadline.
-subscriber = sub.listen deadline: 60 do |received_message|
+listener = subscriber.listen deadline: 60 do |received_message|
   # process message
   received_message.acknowledge!
 end
 
 # Start background threads that will call block passed to listen.
-subscriber.start
+listener.start
 
 # Shut down the subscriber when ready to stop receiving messages.
-subscriber.stop!
+listener.stop!
 ```
 
 Skipping API calls may be used to avoid `Google::Cloud::PermissionDeniedError`
@@ -464,30 +494,28 @@ operation.
 
 Later, you can use `seek` to reset the subscription's backlog to the snapshot.
 
-(See {Google::Cloud::PubSub::Subscription#create_snapshot
-Subscription#create_snapshot} and {Google::Cloud::PubSub::Subscription#seek
-Subscription#seek})
-
 ```ruby
 require "google/cloud/pubsub"
 
 pubsub = Google::Cloud::PubSub.new
 
-sub = pubsub.subscription "my-topic-sub"
+subscription_admin = pubsub.subscription_admin
+snapshot_path = pubsub.service.snapshot_path "my-snapshot"
+subscription = ... # Already created Google::Cloud::PubSub::V1::Subscription
+snapshot = subscription_admin.create_snapshot name: snapshot_path, subscription: subscription.name
 
-snapshot = sub.create_snapshot
-
+subscriber = pubsub.subscriber "my-topic-sub"
 received_messages = sub.pull immediate: false
-sub.acknowledge received_messages
+subscriber.acknowledge received_messages
 
-sub.seek snapshot
+subcription_admin.seek subscription: subscription.name, snapshot: snapshot.name
 ```
 
 ## Working Across Projects
 
 All calls to the Pub/Sub service use the same project and credentials provided
 to the {Google::Cloud::PubSub.new PubSub.new} method. However, it is common to
-reference topics or subscriptions in other projects, which can be achieved by
+reference publishers or subscribers in other projects, which can be achieved by
 using the `project` option. The main credentials must have permissions to the
 topics and subscriptions in other projects.
 
@@ -496,12 +524,13 @@ require "google/cloud/pubsub"
 
 pubsub = Google::Cloud::PubSub.new # my-project
 
-# Get a topic in the current project
-my_topic = pubsub.topic "my-topic"
-my_topic.name #=> "projects/my-project/topics/my-topic"
-# Get a topic in another project
-other_topic = pubsub.topic "other-topic", project: "other-project-id"
-other_topic.name #=> "projects/other-project-id/topics/other-topic"
+# Get a Publisher for a topic in the current project
+publisher = pubsub.publisher "my-topic"
+publisher.name #=> "projects/my-project/topics/my-topic"
+
+# Get a Publisher for a topic in another project
+other_publisher = pubsub.publisher "other-topic", project: "other-project-id"
+other_publisher.name #=> "projects/other-project-id/topics/other-topic"
 ```
 
 It is possible to create a subscription in the current project that pulls
@@ -511,14 +540,17 @@ from a topic in another project:
 require "google/cloud/pubsub"
 
 pubsub = Google::Cloud::PubSub.new # my-project
+subscription_admin = pubsub.subscription_admin
 
-# Get a topic in another project
-topic = pubsub.topic "other-topic", project: "other-project-id"
+# Get a Publisher for a topic in another project
+publisher = pubsub.publisher "other-topic", project: "other-project-id"
 # Create a subscription in the current project that pulls from
 # the topic in another project
-sub = topic.subscribe "my-sub"
-sub.name #=> "projects/my-project/subscriptions/my-sub"
-sub.topic.name #=> "projects/other-project-id/topics/other-topic"
+subscription_path = pubsub.service.subscription_path "my-sub"
+subscription = subscription_admin.create_subscription name: subscription_path, topic: publisher.name
+
+subscription.name #=> "projects/my-project/subscriptions/my-sub"
+publisher.name #=> "projects/other-project-id/topics/other-topic"
 ```
 
 ## Additional information

@@ -41,7 +41,7 @@ module Google
       end
 
       ##
-      # Indicates that the {Subscriber} for a {Subscription} with message
+      # Indicates that the {MessageListener} for a {Subscriber} with message
       # ordering enabled has observed that a message has been delivered out of
       # order.
       #
@@ -57,11 +57,11 @@ module Google
 
       ##
       # Indicates that messages using the {#ordering_key} are not being
-      # published due to error. Future calls to {Topic#publish_async} with the
+      # published due to error. Future calls to {Publisher#publish_async} with the
       # {#ordering_key} will fail with this error.
       #
       # To allow future messages with the {#ordering_key} to be published, the
-      # {#ordering_key} must be passed to {Topic#resume_publish}.
+      # {#ordering_key} must be passed to {Publisher#resume_publish}.
       #
       # If this error is retrieved from {PublishResult#error}, inspect `cause`
       # for the error raised while publishing.

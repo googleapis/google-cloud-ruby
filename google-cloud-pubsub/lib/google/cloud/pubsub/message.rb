@@ -24,7 +24,7 @@ module Google
       #
       # Represents a Pub/Sub Message.
       #
-      # Message objects are created by {Topic#publish}. {Subscription#pull}
+      # Message objects are created by {Publisher#publish}. {Subscriber#pull}
       # returns an array of {ReceivedMessage} objects, each of which contains a
       # Message object. Each {ReceivedMessage} object can be acknowledged and/or
       # delayed.
@@ -113,7 +113,7 @@ module Google
         # or scalability, as the service automatically distributes messages for
         # different ordering keys across subscribers.
         #
-        # See {Topic#publish_async} and {Subscription#listen}.
+        # See {Publisher#publish_async} and {Subscriber#listen}.
         #
         # @return [String]
         #
