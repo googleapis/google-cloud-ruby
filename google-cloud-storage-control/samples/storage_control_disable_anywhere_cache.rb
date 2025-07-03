@@ -12,28 +12,29 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# [START storage_control_create_anywhere_cache]
-def disable_anywhere_cache bucket_name:, zone:
+# [START storage_control_disable_anywhere_cache]
+def disable_anywhere_cache bucket_name:, anywhere_cache_id:
+  require "google/cloud/storage/control/v2"
+
   # The ID of your GCS bucket
   # bucket_name = "your-unique-bucket-name"
 
-  # Zone where you want to create cache
-  # zone = "your-zone-name"
-  require "google/cloud/storage/control/v2"
+  # A value that, along with the bucket's name, uniquely identifies the cache
+  # anywhere_cache_id = value that, along with the bucket's name, uniquely identifies the cache
 
   # Create a client object. The client can be reused for multiple calls.
-  client = Google::Cloud::Storage::Control::V2::StorageControl::Client.new
+  storage_control_client = Google::Cloud::Storage::Control::V2::StorageControl::Client.new
   parent = "projects/_/buckets/#{bucket_name}"
-  name =  "#{parent}/anywhereCaches/#{zone}"
+  name =  "#{parent}/anywhereCaches/#{anywhere_cache_id}"
 
   # Create a request. Replace the placeholder values with actual data.
   request = Google::Cloud::Storage::Control::V2::DisableAnywhereCacheRequest.new(
     name: name
   )
   # Call the disable_anywhere_cache method.
-  result = client.disable_anywhere_cache request
-  puts result
+  result = storage_control_client.disable_anywhere_cache request
+  puts "AnywhereCache #{result.name} #{result.state}"
 end
-# [END storage_control_create_anywhere_cache]
+# [END storage_control_disable_anywhere_cache]
 
 disable_anywhere_cache bucket_name: ARGV.shift, zone: ARGV.shift if $PROGRAM_NAME == __FILE__
