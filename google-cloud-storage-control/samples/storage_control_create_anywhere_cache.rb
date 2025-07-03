@@ -39,7 +39,6 @@ def create_anywhere_cache bucket_name:, zone:
   )
   # The request creates a new cache in the specified zone.
   # The cache is created in the specified bucket.
-  # The cache is created in the specified zone.
   # Call the create_anywhere_cache method.
   result = storage_control_client.create_anywhere_cache request
 
