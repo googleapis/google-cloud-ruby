@@ -40,4 +40,3 @@ end
 # [END storage_control_disable_anywhere_cache]
 
 disable_anywhere_cache bucket_name: ARGV.shift, anywhere_cache_id: ARGV.shift if $PROGRAM_NAME == __FILE__
-
