@@ -31,10 +31,13 @@ def disable_anywhere_cache bucket_name:, anywhere_cache_id:
   request = Google::Cloud::Storage::Control::V2::DisableAnywhereCacheRequest.new(
     name: name
   )
+  # The request disables the cache, but does not delete it.
+  # The cache can be re-enabled later.
   # Call the disable_anywhere_cache method.
   result = storage_control_client.disable_anywhere_cache request
   puts "AnywhereCache #{result.name} #{result.state}"
 end
 # [END storage_control_disable_anywhere_cache]
 
-disable_anywhere_cache bucket_name: ARGV.shift, zone: ARGV.shift if $PROGRAM_NAME == __FILE__
+disable_anywhere_cache bucket_name: ARGV.shift, anywhere_cache_id: ARGV.shift if $PROGRAM_NAME == __FILE__
+

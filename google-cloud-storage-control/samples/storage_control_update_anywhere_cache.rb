@@ -37,6 +37,8 @@ def update_anywhere_cache bucket_name:, anywhere_cache_id:
     anywhere_cache: anywhere_cache,
     update_mask: mask
   )
+  # The request updates the cache in the specified bucket.
+  # The cache is identified by the specified ID.
   # Call the update_anywhere_cache method.
   result = storage_control_client.update_anywhere_cache request
 
@@ -48,4 +50,4 @@ def update_anywhere_cache bucket_name:, anywhere_cache_id:
 end
 # [END storage_control_update_anywhere_cache]
 
-update_anywhere_cache bucket_name: ARGV.shift, zone: ARGV.shift if $PROGRAM_NAME == __FILE__
+update_anywhere_cache bucket_name: ARGV.shift, anywhere_cache_id: ARGV.shift if $PROGRAM_NAME == __FILE__

@@ -31,10 +31,13 @@ def pause_anywhere_cache bucket_name:, anywhere_cache_id:
   request = Google::Cloud::Storage::Control::V2::PauseAnywhereCacheRequest.new(
     name: name
   )
+  # The request pauses the cache, but does not delete it.
+  # The cache can be resumed later.
+  # The cache is paused in the specified bucket.
   # Call the pause_anywhere_cache method.
   result = storage_control_client.pause_anywhere_cache request
   puts "AnywhereCache #{result.name} #{result.state}"
 end
 # [END storage_control_pause_anywhere_cache]
 
-pause_anywhere_cache bucket_name: ARGV.shift, zone: ARGV.shift if $PROGRAM_NAME == __FILE__
+pause_anywhere_cache bucket_name: ARGV.shift, anywhere_cache_id: ARGV.shift if $PROGRAM_NAME == __FILE__
