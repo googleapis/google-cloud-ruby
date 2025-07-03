@@ -31,10 +31,13 @@ def resume_anywhere_cache bucket_name:, anywhere_cache_id:
   request = Google::Cloud::Storage::Control::V2::ResumeAnywhereCacheRequest.new(
     name: name
   )
+  # The request resumes the cache, which was previously paused.
+  # The cache is resumed in the specified bucket.
+  # The cache is identified by the specified ID.
   # Call the resume_anywhere_cache method.
   result = client.resume_anywhere_cache request
   puts "AnywhereCache #{result.name} #{result.state}"
 end
 # [END storage_control_resume_anywhere_cache]
 
-resume_anywhere_cache bucket_name: ARGV.shift, zone: ARGV.shift if $PROGRAM_NAME == __FILE__
+resume_anywhere_cache bucket_name: ARGV.shift, anywhere_cache_id: ARGV.shift if $PROGRAM_NAME == __FILE__

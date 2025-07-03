@@ -26,6 +26,8 @@ def list_anywhere_caches bucket_name:
   request = Google::Cloud::Storage::Control::V2::ListAnywhereCachesRequest.new(
     parent: parent
   )
+  # The request lists all caches in the specified bucket.
+  # The caches are identified by the specified bucket name.
   # Call the list_anywhere_caches method.
   result = storage_control_client.list_anywhere_caches request
 
