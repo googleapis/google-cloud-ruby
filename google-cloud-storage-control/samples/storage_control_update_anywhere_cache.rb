@@ -49,5 +49,4 @@ def update_anywhere_cache bucket_name:, anywhere_cache_id:
   end
 end
 # [END storage_control_update_anywhere_cache]
-
 update_anywhere_cache bucket_name: ARGV.shift, anywhere_cache_id: ARGV.shift if $PROGRAM_NAME == __FILE__
