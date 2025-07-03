@@ -89,6 +89,18 @@ class ::Google::Cloud::Dialogflow::CX::V3::TestCases::ClientPathsTest < Minitest
     end
   end
 
+  def test_generator_path
+    grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
+      client = ::Google::Cloud::Dialogflow::CX::V3::TestCases::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      path = client.generator_path project: "value0", location: "value1", agent: "value2", generator: "value3"
+      assert_equal "projects/value0/locations/value1/agents/value2/generators/value3", path
+    end
+  end
+
   def test_intent_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
     ::Gapic::ServiceStub.stub :new, DummyStub.new do

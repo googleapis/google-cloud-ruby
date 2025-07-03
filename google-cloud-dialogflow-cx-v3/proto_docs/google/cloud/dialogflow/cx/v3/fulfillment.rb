@@ -82,6 +82,9 @@ module Google
           #     {::Google::Cloud::Dialogflow::CX::V3::Fulfillment#messages responses} in the
           #     fulfillment will be respected. This flag is only useful for fulfillments
           #     associated with no-match event handlers.
+          # @!attribute [rw] generators
+          #   @return [::Array<::Google::Cloud::Dialogflow::CX::V3::Fulfillment::GeneratorSettings>]
+          #     A list of Generators to be called during this fulfillment.
           class Fulfillment
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -140,6 +143,41 @@ module Google
                   include ::Google::Protobuf::MessageExts
                   extend ::Google::Protobuf::MessageExts::ClassMethods
                 end
+              end
+            end
+
+            # Generator settings used by the LLM to generate a text response.
+            # @!attribute [rw] generator
+            #   @return [::String]
+            #     Required. The generator to call.
+            #     Format:
+            #     `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>/generators/<GeneratorID>`.
+            # @!attribute [rw] input_parameters
+            #   @return [::Google::Protobuf::Map{::String => ::String}]
+            #     Map from [placeholder parameter][Generator.Parameter.id] in the
+            #     {::Google::Cloud::Dialogflow::CX::V3::Generator Generator} to corresponding
+            #     session parameters. By default, Dialogflow uses the session parameter
+            #     with the same name to fill in the generator template. e.g. If there is a
+            #     placeholder parameter `city` in the Generator, Dialogflow default to fill
+            #     in the `$city` with
+            #     `$session.params.city`. However, you may choose to fill `$city` with
+            #     `$session.params.desination-city`.
+            #     - Map key: [parameter ID][Genrator.Parameter.id]
+            #     - Map value: session parameter name
+            # @!attribute [rw] output_parameter
+            #   @return [::String]
+            #     Required. Output parameter which should contain the generator response.
+            class GeneratorSettings
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+
+              # @!attribute [rw] key
+              #   @return [::String]
+              # @!attribute [rw] value
+              #   @return [::String]
+              class InputParametersEntry
+                include ::Google::Protobuf::MessageExts
+                extend ::Google::Protobuf::MessageExts::ClassMethods
               end
             end
           end
