@@ -20,19 +20,18 @@ def list_anywhere_caches bucket_name:
   require "google/cloud/storage/control/v2"
 
   # Create a client object. The client can be reused for multiple calls.
-  client = Google::Cloud::Storage::Control::V2::StorageControl::Client.new
+  storage_control_client = Google::Cloud::Storage::Control::V2::StorageControl::Client.new
   parent = "projects/_/buckets/#{bucket_name}"
 
   request = Google::Cloud::Storage::Control::V2::ListAnywhereCachesRequest.new(
     parent: parent
   )
-  # Call the create_anywhere_cache method.
-  result = client.list_anywhere_caches request
+  # Call the list_anywhere_caches method.
+  result = storage_control_client.list_anywhere_caches request
 
   result.response.anywhere_caches.each do |item|
     puts item.name
   end
-
 end
 # [END storage_control_list_anywhere_caches]
 list_anywhere_caches bucket_name: ARGV.shift if $PROGRAM_NAME == __FILE__

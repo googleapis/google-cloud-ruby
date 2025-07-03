@@ -23,7 +23,7 @@ def create_anywhere_cache bucket_name:, zone:
   require "google/cloud/storage/control/v2"
 
   # Create a client object. The client can be reused for multiple calls.
-  client = Google::Cloud::Storage::Control::V2::StorageControl::Client.new
+  storage_control_client = Google::Cloud::Storage::Control::V2::StorageControl::Client.new
   parent = "projects/_/buckets/#{bucket_name}"
   name = "#{parent}/anywhereCaches/#{zone}"
 
@@ -31,20 +31,20 @@ def create_anywhere_cache bucket_name:, zone:
     name: name,
     zone: zone
   )
+
   # Create a request. Replace the placeholder values with actual data.
   request = Google::Cloud::Storage::Control::V2::CreateAnywhereCacheRequest.new(
     parent: parent,
     anywhere_cache: anywhere_cache
   )
   # Call the create_anywhere_cache method.
-  result = client.create_anywhere_cache request
+  result = storage_control_client.create_anywhere_cache request
 
   if result.instance_of?(Gapic::Operation)
-    puts "Anywhere cache created"
+    puts "AnywhereCache created - #{result.name}"
   else
     puts "operation failed"
   end
 end
 # [END storage_control_create_anywhere_cache]
-
 create_anywhere_cache bucket_name: ARGV.shift, zone: ARGV.shift if $PROGRAM_NAME == __FILE__
