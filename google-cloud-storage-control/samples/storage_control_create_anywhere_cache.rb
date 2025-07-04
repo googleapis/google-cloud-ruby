@@ -41,7 +41,7 @@ def create_anywhere_cache bucket_name:, zone:
   # Call the create_anywhere_cache method.
   result = storage_control_client.create_anywhere_cache request
 
-  if result.instance_of?(Gapic::Operation)
+  if result.instance_of? Gapic::Operation
     puts "AnywhereCache created - #{result.name}"
   else
     puts "operation failed"
