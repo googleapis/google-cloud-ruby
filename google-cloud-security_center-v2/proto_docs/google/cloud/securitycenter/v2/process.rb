@@ -56,6 +56,10 @@ module Google
         # @!attribute [rw] parent_pid
         #   @return [::Integer]
         #     The parent process ID.
+        # @!attribute [rw] user_id
+        #   @return [::Integer]
+        #     The ID of the user that executed the process. E.g. If this is the root user
+        #     this will always be 0.
         class Process
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

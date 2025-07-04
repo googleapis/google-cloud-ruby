@@ -30,7 +30,7 @@ module Google
         # finding.
         # @!attribute [rw] name
         #   @return [::String]
-        #     The [relative resource
+        #     Identifier. The [relative resource
         #     name](https://cloud.google.com/apis/design/resource_names#relative_resource_name)
         #     of the finding. The following list shows some examples:
         #
@@ -247,9 +247,15 @@ module Google
         # @!attribute [rw] org_policies
         #   @return [::Array<::Google::Cloud::SecurityCenter::V2::OrgPolicy>]
         #     Contains information about the org policies associated with the finding.
+        # @!attribute [rw] job
+        #   @return [::Google::Cloud::SecurityCenter::V2::Job]
+        #     Job associated with the finding.
         # @!attribute [rw] application
         #   @return [::Google::Cloud::SecurityCenter::V2::Application]
         #     Represents an application associated with the finding.
+        # @!attribute [rw] ip_rules
+        #   @return [::Google::Cloud::SecurityCenter::V2::IpRules]
+        #     IP rules associated with the finding.
         # @!attribute [rw] backup_disaster_recovery
         #   @return [::Google::Cloud::SecurityCenter::V2::BackupDisasterRecovery]
         #     Fields related to Backup and DR findings.
@@ -289,9 +295,27 @@ module Google
         # @!attribute [rw] data_flow_events
         #   @return [::Array<::Google::Cloud::SecurityCenter::V2::DataFlowEvent>]
         #     Data flow events associated with the finding.
+        # @!attribute [rw] networks
+        #   @return [::Array<::Google::Cloud::SecurityCenter::V2::Network>]
+        #     Represents the VPC networks that the resource is attached to.
         # @!attribute [rw] data_retention_deletion_events
         #   @return [::Array<::Google::Cloud::SecurityCenter::V2::DataRetentionDeletionEvent>]
         #     Data retention deletion events associated with the finding.
+        # @!attribute [rw] affected_resources
+        #   @return [::Google::Cloud::SecurityCenter::V2::AffectedResources]
+        #     AffectedResources associated with the finding.
+        # @!attribute [rw] ai_model
+        #   @return [::Google::Cloud::SecurityCenter::V2::AiModel]
+        #     The AI model associated with the finding.
+        # @!attribute [rw] chokepoint
+        #   @return [::Google::Cloud::SecurityCenter::V2::Chokepoint]
+        #     Contains details about a chokepoint, which is a resource or resource group
+        #     where high-risk attack paths converge, based on [attack path simulations]
+        #     (https://cloud.google.com/security-command-center/docs/attack-exposure-learn#attack_path_simulations).
+        #     This field cannot be updated. Its value is ignored in all update requests.
+        # @!attribute [rw] vertex_ai
+        #   @return [::Google::Cloud::SecurityCenter::V2::VertexAi]
+        #     VertexAi associated with the finding.
         class Finding
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -488,6 +512,10 @@ module Google
             # Describes a potential security risk to data assets that contain sensitive
             # data.
             SENSITIVE_DATA_RISK = 8
+
+            # Describes a resource or resource group where high risk attack paths
+            # converge, based on attack path simulations (APS).
+            CHOKEPOINT = 9
           end
         end
       end

@@ -5,7 +5,7 @@
 require 'google/protobuf'
 
 
-descriptor_data = "\n)google/cloud/securitycenter/v2/file.proto\x12\x1egoogle.cloud.securitycenter.v2\"\xf0\x01\n\x04\x46ile\x12\x0c\n\x04path\x18\x01 \x01(\t\x12\x0c\n\x04size\x18\x02 \x01(\x03\x12\x0e\n\x06sha256\x18\x03 \x01(\t\x12\x13\n\x0bhashed_size\x18\x04 \x01(\x03\x12\x18\n\x10partially_hashed\x18\x05 \x01(\x08\x12\x10\n\x08\x63ontents\x18\x06 \x01(\t\x12@\n\tdisk_path\x18\x07 \x01(\x0b\x32-.google.cloud.securitycenter.v2.File.DiskPath\x1a\x39\n\x08\x44iskPath\x12\x16\n\x0epartition_uuid\x18\x01 \x01(\t\x12\x15\n\rrelative_path\x18\x02 \x01(\tB\xe3\x01\n\"com.google.cloud.securitycenter.v2B\tFileProtoP\x01ZJcloud.google.com/go/securitycenter/apiv2/securitycenterpb;securitycenterpb\xaa\x02\x1eGoogle.Cloud.SecurityCenter.V2\xca\x02\x1eGoogle\\Cloud\\SecurityCenter\\V2\xea\x02!Google::Cloud::SecurityCenter::V2b\x06proto3"
+descriptor_data = "\n)google/cloud/securitycenter/v2/file.proto\x12\x1egoogle.cloud.securitycenter.v2\"\x83\x04\n\x04\x46ile\x12\x0c\n\x04path\x18\x01 \x01(\t\x12\x0c\n\x04size\x18\x02 \x01(\x03\x12\x0e\n\x06sha256\x18\x03 \x01(\t\x12\x13\n\x0bhashed_size\x18\x04 \x01(\x03\x12\x18\n\x10partially_hashed\x18\x05 \x01(\x08\x12\x10\n\x08\x63ontents\x18\x06 \x01(\t\x12@\n\tdisk_path\x18\x07 \x01(\x0b\x32-.google.cloud.securitycenter.v2.File.DiskPath\x12\x46\n\noperations\x18\x08 \x03(\x0b\x32\x32.google.cloud.securitycenter.v2.File.FileOperation\x1a\x39\n\x08\x44iskPath\x12\x16\n\x0epartition_uuid\x18\x01 \x01(\t\x12\x15\n\rrelative_path\x18\x02 \x01(\t\x1a\xc8\x01\n\rFileOperation\x12N\n\x04type\x18\x01 \x01(\x0e\x32@.google.cloud.securitycenter.v2.File.FileOperation.OperationType\"g\n\rOperationType\x12\x1e\n\x1aOPERATION_TYPE_UNSPECIFIED\x10\x00\x12\x08\n\x04OPEN\x10\x01\x12\x08\n\x04READ\x10\x02\x12\n\n\x06RENAME\x10\x03\x12\t\n\x05WRITE\x10\x04\x12\x0b\n\x07\x45XECUTE\x10\x05\x42\xe3\x01\n\"com.google.cloud.securitycenter.v2B\tFileProtoP\x01ZJcloud.google.com/go/securitycenter/apiv2/securitycenterpb;securitycenterpb\xaa\x02\x1eGoogle.Cloud.SecurityCenter.V2\xca\x02\x1eGoogle\\Cloud\\SecurityCenter\\V2\xea\x02!Google::Cloud::SecurityCenter::V2b\x06proto3"
 
 pool = Google::Protobuf::DescriptorPool.generated_pool
 
@@ -37,6 +37,8 @@ module Google
       module V2
         File = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.securitycenter.v2.File").msgclass
         File::DiskPath = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.securitycenter.v2.File.DiskPath").msgclass
+        File::FileOperation = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.securitycenter.v2.File.FileOperation").msgclass
+        File::FileOperation::OperationType = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.securitycenter.v2.File.FileOperation.OperationType").enummodule
       end
     end
   end

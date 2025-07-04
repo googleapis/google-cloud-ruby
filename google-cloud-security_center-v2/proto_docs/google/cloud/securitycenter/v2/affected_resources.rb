@@ -21,12 +21,11 @@ module Google
   module Cloud
     module SecurityCenter
       module V2
-        # Contains information about the disk associated with the finding.
-        # @!attribute [rw] name
-        #   @return [::String]
-        #     The name of the disk, for example,
-        #     "https://www.googleapis.com/compute/v1/projects/\\{project-id}/zones/\\{zone-id}/disks/\\{disk-id}".
-        class Disk
+        # Details about resources affected by this finding.
+        # @!attribute [rw] count
+        #   @return [::Integer]
+        #     The count of resources affected by the finding.
+        class AffectedResources
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end

@@ -50,6 +50,10 @@ module Google
         # @!attribute [rw] streaming_config
         #   @return [::Google::Cloud::SecurityCenter::V2::NotificationConfig::StreamingConfig]
         #     The config for triggering streaming-based notifications.
+        # @!attribute [r] update_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Output only. The timestamp of when the notification config was last
+        #     updated.
         class NotificationConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

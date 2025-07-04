@@ -21,12 +21,15 @@ module Google
   module Cloud
     module SecurityCenter
       module V2
-        # Contains information about the disk associated with the finding.
-        # @!attribute [rw] name
-        #   @return [::String]
-        #     The name of the disk, for example,
-        #     "https://www.googleapis.com/compute/v1/projects/\\{project-id}/zones/\\{zone-id}/disks/\\{disk-id}".
-        class Disk
+        # Contains details about a chokepoint, which is a resource or resource group
+        # where high-risk attack paths converge, based on [attack path simulations]
+        # (https://cloud.google.com/security-command-center/docs/attack-exposure-learn#attack_path_simulations).
+        # @!attribute [rw] related_findings
+        #   @return [::Array<::String>]
+        #     List of resource names of findings associated with this chokepoint.
+        #     For example, organizations/123/sources/456/findings/789.
+        #     This list will have at most 100 findings.
+        class Chokepoint
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end

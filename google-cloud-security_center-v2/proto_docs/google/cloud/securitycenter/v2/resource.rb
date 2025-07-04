@@ -76,8 +76,8 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # GCP metadata associated with the resource, only applicable if the finding's
-        # cloud provider is Google Cloud Platform.
+        # Google Cloud metadata associated with the resource. Only applicable if the
+        # finding's cloud provider is Google Cloud.
         # @!attribute [rw] project
         #   @return [::String]
         #     The full resource name of project that the resource belongs to.
@@ -299,7 +299,7 @@ module Google
           # The cloud provider is unspecified.
           CLOUD_PROVIDER_UNSPECIFIED = 0
 
-          # The cloud provider is Google Cloud Platform.
+          # The cloud provider is Google Cloud.
           GOOGLE_CLOUD_PLATFORM = 1
 
           # The cloud provider is Amazon Web Services.
