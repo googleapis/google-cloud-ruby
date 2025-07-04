@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# [START storage_control_create_anywhere_cache]
+# [START storage_control_pause_anywhere_cache]
 def pause_anywhere_cache bucket_name:, anywhere_cache_id:
   # The ID of your GCS bucket
   # bucket_name = "your-unique-bucket-name"
