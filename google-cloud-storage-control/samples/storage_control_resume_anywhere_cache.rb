@@ -14,16 +14,15 @@
 
 # [START storage_control_resume_anywhere_cache]
 def resume_anywhere_cache bucket_name:, anywhere_cache_id:
-  require "google/cloud/storage/control/v2"
-
   # The ID of your GCS bucket
   # bucket_name = "your-unique-bucket-name"
 
   # A value that, along with the bucket's name, uniquely identifies the cache
   # anywhere_cache_id = value that, along with the bucket's name, uniquely identifies the cache
+  require "google/cloud/storage/control/v2"
 
   # Create a client object. The client can be reused for multiple calls.
-  client = Google::Cloud::Storage::Control::V2::StorageControl::Client.new
+  storage_control_client = Google::Cloud::Storage::Control::V2::StorageControl::Client.new
   parent = "projects/_/buckets/#{bucket_name}"
   name = "#{parent}/anywhereCaches/#{anywhere_cache_id}"
 
@@ -35,7 +34,7 @@ def resume_anywhere_cache bucket_name:, anywhere_cache_id:
   # The cache is resumed in the specified bucket.
   # The cache is identified by the specified ID.
   # Call the resume_anywhere_cache method.
-  result = client.resume_anywhere_cache request
+  result = storage_control_client.resume_anywhere_cache request
   puts "AnywhereCache #{result.name} #{result.state}"
 end
 # [END storage_control_resume_anywhere_cache]

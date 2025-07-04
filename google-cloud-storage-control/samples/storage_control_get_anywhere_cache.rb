@@ -14,13 +14,12 @@
 
 # [START storage_control_get_anywhere_cache]
 def get_anywhere_cache bucket_name:, anywhere_cache_id:
-  require "google/cloud/storage/control/v2"
-
   # The ID of your GCS bucket
   # bucket_name = "your-unique-bucket-name"
 
   # A value that, along with the bucket's name, uniquely identifies the cache
   # anywhere_cache_id = value that, along with the bucket's name, uniquely identifies the cache
+  require "google/cloud/storage/control/v2"
 
   # Create a client object. The client can be reused for multiple calls.
   storage_control_client = Google::Cloud::Storage::Control::V2::StorageControl::Client.new
