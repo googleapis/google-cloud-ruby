@@ -718,6 +718,29 @@ module Google
         end
 
         ##
+        # Restart resumable upload
+        # @param [String, ::File] file Path of the file on the filesystem to
+        #   upload. Can be an File object, or File-like object such as StringIO.
+        #   (If the object does not have path, a `path` argument must be also be
+        #   provided.)
+        # @param [String] upload_id Unique Id of a resumable upload
+        #
+        # @example
+        #   require "google/cloud/storage"
+        #
+        #   storage = Google::Cloud::Storage.new
+        #
+        #   bucket = storage.bucket "my-bucket"
+        #   bucket.restart_resumable_upload file,upload_id
+
+        def restart_resumable_upload file, upload_id
+          ensure_service!
+          ensure_io_or_file_exists! file
+          raise "Upload Id missing" unless upload_id
+          service.restart_resumable_upload name, file, upload_id
+        end
+
+        ##
         # The period of time (in seconds) that files in the bucket must be
         # retained, and cannot be deleted, overwritten, or archived.
         # The value must be between 0 and 100 years (in seconds.)
@@ -1410,6 +1433,23 @@ module Google
                                 user_project: user_project
         end
 
+        ##
+        # Delete resumable upload
+        # @param [String] upload_id Unique Id of an resumable upload
+        #
+        # @example
+        #   require "google/cloud/storage"
+        #
+        #   storage = Google::Cloud::Storage.new
+        #
+        #   bucket = storage.bucket "my-bucket"
+        #   bucket.delete_resumable_upload file,upload_id
+
+        def delete_resumable_upload upload_id
+          ensure_service!
+          raise "Upload Id missing" unless upload_id
+          service.delete_resumable_upload name, upload_id
+        end
         ##
         # Retrieves a list of files matching the criteria.
         #
