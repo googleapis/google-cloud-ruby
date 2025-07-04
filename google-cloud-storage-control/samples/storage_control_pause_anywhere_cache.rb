@@ -18,7 +18,7 @@ def pause_anywhere_cache bucket_name:, anywhere_cache_id:
   # bucket_name = "your-unique-bucket-name"
 
   # A value that, along with the bucket's name, uniquely identifies the cache
-  # anywhere_cache_id = value that, along with the bucket's name, uniquely identifies the cache
+  # anywhere_cache_id = "us-east1-b"
   require "google/cloud/storage/control/v2"
 
   # Create a client object. The client can be reused for multiple calls.
