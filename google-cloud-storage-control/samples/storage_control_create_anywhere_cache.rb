@@ -14,13 +14,12 @@
 
 # [START storage_control_create_anywhere_cache]
 def create_anywhere_cache bucket_name:, zone:
-  require "google/cloud/storage/control/v2"
-
   # The ID of your GCS bucket
   # bucket_name = "your-unique-bucket-name"
 
   # Zone where you want to create cache
   # zone = "your-zone-name"
+  require "google/cloud/storage/control/v2"
 
   # Create a client object. The client can be reused for multiple calls.
   storage_control_client = Google::Cloud::Storage::Control::V2::StorageControl::Client.new

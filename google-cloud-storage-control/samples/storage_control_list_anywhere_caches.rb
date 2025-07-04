@@ -16,7 +16,6 @@
 def list_anywhere_caches bucket_name:
   # The ID of your GCS bucket
   # bucket_name = "your-unique-bucket-name"
-
   require "google/cloud/storage/control/v2"
 
   # Create a client object. The client can be reused for multiple calls.
