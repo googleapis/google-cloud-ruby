@@ -278,6 +278,10 @@ module Google
         #     Required. Changes to be atomically applied to the specified row. Entries
         #     are applied in order, meaning that earlier mutations can be masked by later
         #     ones. Must contain at least one entry and at most 100000.
+        # @!attribute [rw] idempotency
+        #   @return [::Google::Cloud::Bigtable::V2::Idempotency]
+        #     Optional parameter for ensuring a MutateRow request is only applied once.
+        #     Currently applicable only for certain aggregate types.
         class MutateRowRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

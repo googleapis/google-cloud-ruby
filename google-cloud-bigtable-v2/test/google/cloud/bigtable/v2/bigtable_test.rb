@@ -245,6 +245,7 @@ class ::Google::Cloud::Bigtable::V2::Bigtable::ClientTest < Minitest::Test
     app_profile_id = "hello world"
     row_key = "hello world"
     mutations = [{}]
+    idempotency = {}
 
     mutate_row_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :mutate_row, name
@@ -254,6 +255,7 @@ class ::Google::Cloud::Bigtable::V2::Bigtable::ClientTest < Minitest::Test
       assert_equal "hello world", request["app_profile_id"]
       assert_equal "hello world", request["row_key"]
       assert_kind_of ::Google::Cloud::Bigtable::V2::Mutation, request["mutations"].first
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Bigtable::V2::Idempotency), request["idempotency"]
       refute_nil options
     end
 
@@ -264,31 +266,31 @@ class ::Google::Cloud::Bigtable::V2::Bigtable::ClientTest < Minitest::Test
       end
 
       # Use hash object
-      client.mutate_row({ table_name: table_name, authorized_view_name: authorized_view_name, app_profile_id: app_profile_id, row_key: row_key, mutations: mutations }) do |response, operation|
+      client.mutate_row({ table_name: table_name, authorized_view_name: authorized_view_name, app_profile_id: app_profile_id, row_key: row_key, mutations: mutations, idempotency: idempotency }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.mutate_row table_name: table_name, authorized_view_name: authorized_view_name, app_profile_id: app_profile_id, row_key: row_key, mutations: mutations do |response, operation|
+      client.mutate_row table_name: table_name, authorized_view_name: authorized_view_name, app_profile_id: app_profile_id, row_key: row_key, mutations: mutations, idempotency: idempotency do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.mutate_row ::Google::Cloud::Bigtable::V2::MutateRowRequest.new(table_name: table_name, authorized_view_name: authorized_view_name, app_profile_id: app_profile_id, row_key: row_key, mutations: mutations) do |response, operation|
+      client.mutate_row ::Google::Cloud::Bigtable::V2::MutateRowRequest.new(table_name: table_name, authorized_view_name: authorized_view_name, app_profile_id: app_profile_id, row_key: row_key, mutations: mutations, idempotency: idempotency) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.mutate_row({ table_name: table_name, authorized_view_name: authorized_view_name, app_profile_id: app_profile_id, row_key: row_key, mutations: mutations }, grpc_options) do |response, operation|
+      client.mutate_row({ table_name: table_name, authorized_view_name: authorized_view_name, app_profile_id: app_profile_id, row_key: row_key, mutations: mutations, idempotency: idempotency }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.mutate_row(::Google::Cloud::Bigtable::V2::MutateRowRequest.new(table_name: table_name, authorized_view_name: authorized_view_name, app_profile_id: app_profile_id, row_key: row_key, mutations: mutations), grpc_options) do |response, operation|
+      client.mutate_row(::Google::Cloud::Bigtable::V2::MutateRowRequest.new(table_name: table_name, authorized_view_name: authorized_view_name, app_profile_id: app_profile_id, row_key: row_key, mutations: mutations, idempotency: idempotency), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end

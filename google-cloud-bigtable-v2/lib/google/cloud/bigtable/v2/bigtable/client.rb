@@ -477,7 +477,7 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload mutate_row(table_name: nil, authorized_view_name: nil, app_profile_id: nil, row_key: nil, mutations: nil)
+            # @overload mutate_row(table_name: nil, authorized_view_name: nil, app_profile_id: nil, row_key: nil, mutations: nil, idempotency: nil)
             #   Pass arguments to `mutate_row` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -503,6 +503,9 @@ module Google
             #     Required. Changes to be atomically applied to the specified row. Entries
             #     are applied in order, meaning that earlier mutations can be masked by later
             #     ones. Must contain at least one entry and at most 100000.
+            #   @param idempotency [::Google::Cloud::Bigtable::V2::Idempotency, ::Hash]
+            #     Optional parameter for ensuring a MutateRow request is only applied once.
+            #     Currently applicable only for certain aggregate types.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::Bigtable::V2::MutateRowResponse]
