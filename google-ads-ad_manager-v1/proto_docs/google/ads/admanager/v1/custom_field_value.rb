@@ -34,7 +34,6 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
 
           # Represent custom field value type.
-          # Next Id: 5
           # @!attribute [rw] dropdown_value
           #   @return [::Integer]
           #     The custom_field_option_id, if the CustomFieldDataType is DROPDOWN.

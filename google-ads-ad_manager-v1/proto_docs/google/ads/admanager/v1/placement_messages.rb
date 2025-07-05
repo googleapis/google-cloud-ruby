@@ -31,24 +31,23 @@ module Google
         #     Output only. `Placement` ID.
         # @!attribute [rw] display_name
         #   @return [::String]
-        #     Required. The display name of the placement. Its maximum length is 255
-        #     characters.
+        #     Required. The display name of the placement. This attribute has a maximum
+        #     length of 255 characters.
         # @!attribute [rw] description
         #   @return [::String]
-        #     Optional. A description of the Placement. This value is optional and its
-        #     maximum length is 65,535 characters.
+        #     Optional. A description of the Placement. This attribute has a maximum
+        #     length of 65,535 characters.
         # @!attribute [r] placement_code
         #   @return [::String]
         #     Output only. A string used to uniquely identify the Placement for purposes
-        #     of serving the ad. This attribute is read-only and is assigned by Google
-        #     when a placement is created.
+        #     of serving the ad. This attribute is assigned by Google.
         # @!attribute [r] status
         #   @return [::Google::Ads::AdManager::V1::PlacementStatusEnum::PlacementStatus]
-        #     Output only. The status of the Placement. This attribute is read-only.
+        #     Output only. The status of the Placement.
         # @!attribute [rw] targeted_ad_units
         #   @return [::Array<::String>]
         #     Optional. The resource names of AdUnits that constitute the Placement.
-        #     Format: "networks/\\{network_code}/adUnits/\\{ad_unit_id}"
+        #     Format: "networks/\\{network_code}/adUnits/\\{ad_unit}"
         # @!attribute [r] update_time
         #   @return [::Google::Protobuf::Timestamp]
         #     Output only. The instant this Placement was last modified.

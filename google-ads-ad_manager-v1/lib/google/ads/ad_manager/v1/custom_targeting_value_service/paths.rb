@@ -25,39 +25,34 @@ module Google
           # Path helper methods for the CustomTargetingValueService API.
           module Paths
             ##
-            # Create a fully-qualified CustomTargetingKey resource string.
-            #
-            # The resource will be in the following format:
-            #
-            # `networks/{network_code}/customTargetingKeys/{custom_targeting_key}`
-            #
-            # @param network_code [String]
-            # @param custom_targeting_key [String]
-            #
-            # @return [::String]
-            def custom_targeting_key_path network_code:, custom_targeting_key:
-              raise ::ArgumentError, "network_code cannot contain /" if network_code.to_s.include? "/"
-
-              "networks/#{network_code}/customTargetingKeys/#{custom_targeting_key}"
-            end
-
-            ##
             # Create a fully-qualified CustomTargetingValue resource string.
             #
             # The resource will be in the following format:
             #
-            # `networks/{network_code}/customTargetingKeys/{custom_targeting_key}/customTargetingValues/{custom_targeting_value}`
+            # `networks/{network_code}/customTargetingValues/{custom_targeting_value}`
             #
             # @param network_code [String]
-            # @param custom_targeting_key [String]
             # @param custom_targeting_value [String]
             #
             # @return [::String]
-            def custom_targeting_value_path network_code:, custom_targeting_key:, custom_targeting_value:
+            def custom_targeting_value_path network_code:, custom_targeting_value:
               raise ::ArgumentError, "network_code cannot contain /" if network_code.to_s.include? "/"
-              raise ::ArgumentError, "custom_targeting_key cannot contain /" if custom_targeting_key.to_s.include? "/"
 
-              "networks/#{network_code}/customTargetingKeys/#{custom_targeting_key}/customTargetingValues/#{custom_targeting_value}"
+              "networks/#{network_code}/customTargetingValues/#{custom_targeting_value}"
+            end
+
+            ##
+            # Create a fully-qualified Network resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `networks/{network_code}`
+            #
+            # @param network_code [String]
+            #
+            # @return [::String]
+            def network_path network_code:
+              "networks/#{network_code}"
             end
 
             extend self

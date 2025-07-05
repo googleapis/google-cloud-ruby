@@ -25,6 +25,9 @@ module Google
         module AdUnitService
           # Credentials for the AdUnitService API.
           class Credentials < ::Google::Auth::Credentials
+            self.scope = [
+              "https://www.googleapis.com/auth/admanager"
+            ]
             self.env_vars = [
               "GOOGLE_CLOUD_CREDENTIALS",
               "GOOGLE_CLOUD_KEYFILE",

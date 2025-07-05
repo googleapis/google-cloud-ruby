@@ -8,7 +8,7 @@ require 'google/api/field_behavior_pb'
 require 'google/api/resource_pb'
 
 
-descriptor_data = "\n.google/ads/admanager/v1/contact_messages.proto\x12\x17google.ads.admanager.v1\x1a\x1fgoogle/api/field_behavior.proto\x1a\x19google/api/resource.proto\"\x9b\x01\n\x07\x43ontact\x12\x11\n\x04name\x18\x01 \x01(\tB\x03\xe0\x41\x08\x12\x17\n\ncontact_id\x18\x02 \x01(\x03\x42\x03\xe0\x41\x03:d\xea\x41\x61\n admanager.googleapis.com/Contact\x12*networks/{network_code}/contacts/{contact}*\x08\x63ontacts2\x07\x63ontactB\xc8\x01\n\x1b\x63om.google.ads.admanager.v1B\x14\x43ontactMessagesProtoP\x01Z@google.golang.org/genproto/googleapis/ads/admanager/v1;admanager\xaa\x02\x17Google.Ads.AdManager.V1\xca\x02\x17Google\\Ads\\AdManager\\V1\xea\x02\x1aGoogle::Ads::AdManager::V1b\x06proto3"
+descriptor_data = "\n.google/ads/admanager/v1/contact_messages.proto\x12\x17google.ads.admanager.v1\x1a\x1fgoogle/api/field_behavior.proto\x1a\x19google/api/resource.proto\"\xc3\x01\n\x07\x43ontact\x12\x11\n\x04name\x18\x01 \x01(\tB\x03\xe0\x41\x08\x12&\n\x14\x63ompany_display_name\x18\x13 \x01(\tB\x03\xe0\x41\x03H\x00\x88\x01\x01:d\xea\x41\x61\n admanager.googleapis.com/Contact\x12*networks/{network_code}/contacts/{contact}*\x08\x63ontacts2\x07\x63ontactB\x17\n\x15_company_display_nameB\xc8\x01\n\x1b\x63om.google.ads.admanager.v1B\x14\x43ontactMessagesProtoP\x01Z@google.golang.org/genproto/googleapis/ads/admanager/v1;admanager\xaa\x02\x17Google.Ads.AdManager.V1\xca\x02\x17Google\\Ads\\AdManager\\V1\xea\x02\x1aGoogle::Ads::AdManager::V1b\x06proto3"
 
 pool = Google::Protobuf::DescriptorPool.generated_pool
 

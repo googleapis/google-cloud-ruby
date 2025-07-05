@@ -29,7 +29,7 @@ module Google
             ##
             # REST client for the NetworkService service.
             #
-            # Provides methods for handling Network objects.
+            # Provides methods for handling `Network` objects.
             #
             class Client
               # @private
