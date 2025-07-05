@@ -64,6 +64,11 @@ module Google
         # @!attribute [rw] url_context
         #   @return [::Google::Cloud::AIPlatform::V1::UrlContext]
         #     Optional. Tool to support URL context retrieval.
+        # @!attribute [rw] computer_use
+        #   @return [::Google::Cloud::AIPlatform::V1::Tool::ComputerUse]
+        #     Optional. Tool to support the model interacting directly with the computer.
+        #     If enabled, it automatically populates computer-use specific Function
+        #     Declarations.
         class Tool
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -83,6 +88,24 @@ module Google
           class CodeExecution
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Tool to support computer use.
+          # @!attribute [rw] environment
+          #   @return [::Google::Cloud::AIPlatform::V1::Tool::ComputerUse::Environment]
+          #     Required. The environment being operated.
+          class ComputerUse
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+
+            # Represents the environment being operated, such as a web browser.
+            module Environment
+              # Defaults to browser.
+              ENVIRONMENT_UNSPECIFIED = 0
+
+              # Operates in a web browser.
+              ENVIRONMENT_BROWSER = 1
+            end
           end
         end
 

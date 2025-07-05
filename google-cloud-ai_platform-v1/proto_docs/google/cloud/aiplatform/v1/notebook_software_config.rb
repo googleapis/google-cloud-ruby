@@ -28,7 +28,7 @@ module Google
         # @!attribute [rw] post_startup_script_url
         #   @return [::String]
         #     Optional. Post startup script url to download. Example:
-        #     https://bucket/script.sh
+        #     `gs://bucket/script.sh`
         # @!attribute [rw] post_startup_script_behavior
         #   @return [::Google::Cloud::AIPlatform::V1::PostStartupScriptConfig::PostStartupScriptBehavior]
         #     Optional. Post startup script behavior that defines download and execution
@@ -53,7 +53,26 @@ module Google
           end
         end
 
-        # Notebook Software Config.
+        # Colab image of the runtime.
+        # @!attribute [rw] release_name
+        #   @return [::String]
+        #     Optional. The release name of the NotebookRuntime Colab image, e.g.
+        #     "py310". If not specified, detault to the latest release.
+        # @!attribute [r] description
+        #   @return [::String]
+        #     Output only. A human-readable description of the specified colab image
+        #     release, populated by the system. Example: "Python 3.10", "Latest - current
+        #     Python 3.11"
+        class ColabImage
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Notebook Software Config. This is passed to the backend when user
+        # makes software configurations in UI.
+        # @!attribute [rw] colab_image
+        #   @return [::Google::Cloud::AIPlatform::V1::ColabImage]
+        #     Optional. Google-managed NotebookRuntime colab image.
         # @!attribute [rw] env
         #   @return [::Array<::Google::Cloud::AIPlatform::V1::EnvVar>]
         #     Optional. Environment variables to be passed to the container.
