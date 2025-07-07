@@ -26,6 +26,7 @@ class StorageAddBucketDefaultOwner
     bucket  = storage.bucket bucket_name
 
     bucket.default_acl.add_owner email
+    binding.pry
 
     puts "Added default OWNER permission for #{email} to #{bucket_name}"
     # [END storage_add_bucket_default_owner]
