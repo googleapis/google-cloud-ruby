@@ -33,6 +33,7 @@ scopes = ["https://www.googleapis.com/auth/devstorage.full_control", "https://ww
 $storage = Google::Cloud.new.storage retries: 10, scope: scopes
 
 # Create second storage object for tests requiring one, such as requester pays and user project.
+$storage_2 = nil
 if (proj = ENV["GCLOUD_TEST_STORAGE_REQUESTER_PAYS_PROJECT"]) &&
   (keyfile = ENV["GCLOUD_TEST_STORAGE_REQUESTER_PAYS_KEYFILE"] ||
     (ENV["GCLOUD_TEST_STORAGE_REQUESTER_PAYS_KEYFILE_JSON"] &&
