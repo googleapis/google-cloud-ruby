@@ -20,6 +20,7 @@ local_dependencies.each do |name|
 end
 
 gem "autotest-suffix", "~> 1.1"
+gem "csv"
 gem "google-cloud-data_catalog", path: "../google-cloud-data_catalog"
 gem "google-cloud-storage", path: "../google-cloud-storage"
 gem "google-style", "~> 1.30.1"

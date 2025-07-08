@@ -1,5 +1,11 @@
 # Changelog
 
+### 1.17.0 (2025-06-30)
+
+#### Features
+
+* Support for invoke_route_prefix ([#30572](https://github.com/googleapis/google-cloud-ruby/issues/30572)) 
+
 ### 1.16.0 (2025-06-24)
 
 #### Features

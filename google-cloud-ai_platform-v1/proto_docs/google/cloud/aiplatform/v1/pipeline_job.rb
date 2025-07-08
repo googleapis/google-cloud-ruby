@@ -310,6 +310,16 @@ module Google
         # @!attribute [r] outputs
         #   @return [::Google::Protobuf::Map{::String => ::Google::Cloud::AIPlatform::V1::PipelineTaskDetail::ArtifactList}]
         #     Output only. The runtime output artifacts of the task.
+        # @!attribute [r] task_unique_name
+        #   @return [::String]
+        #     Output only. The unique name of a task.
+        #     This field is used by rerun pipeline job.
+        #     Console UI and Vertex AI SDK will support triggering pipeline job reruns.
+        #     The name is constructed by concatenating all the parent tasks name with
+        #     the task name. For example, if a task named "child_task" has a parent task
+        #     named "parent_task_1" and parent task 1 has a parent task named
+        #     "parent_task_2", the task unique name will be
+        #     "parent_task_2.parent_task_1.child_task".
         class PipelineTaskDetail
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

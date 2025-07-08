@@ -1078,6 +1078,10 @@ module Google
         #     either be `organizations/<org_id>` or `projects/<project_ref>`. If it is
         #     unspecified, it defaults to the organization where the project provided in
         #     `name` is located.
+        # @!attribute [rw] semantic_search
+        #   @return [::Boolean]
+        #     Optional. Specifies whether the search should understand the meaning and
+        #     intent behind the query, rather than just matching keywords.
         class SearchEntriesRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

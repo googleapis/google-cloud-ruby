@@ -25,6 +25,9 @@ module Google
         module RoleService
           # Credentials for the RoleService API.
           class Credentials < ::Google::Auth::Credentials
+            self.scope = [
+              "https://www.googleapis.com/auth/admanager"
+            ]
             self.env_vars = [
               "GOOGLE_CLOUD_CREDENTIALS",
               "GOOGLE_CLOUD_KEYFILE",

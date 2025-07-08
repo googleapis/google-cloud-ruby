@@ -1453,6 +1453,7 @@ class ::Google::Cloud::Dataplex::V1::CatalogService::ClientTest < Minitest::Test
     page_token = "hello world"
     order_by = "hello world"
     scope = "hello world"
+    semantic_search = true
 
     search_entries_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :search_entries, name
@@ -1463,6 +1464,7 @@ class ::Google::Cloud::Dataplex::V1::CatalogService::ClientTest < Minitest::Test
       assert_equal "hello world", request["page_token"]
       assert_equal "hello world", request["order_by"]
       assert_equal "hello world", request["scope"]
+      assert_equal true, request["semantic_search"]
       refute_nil options
     end
 
@@ -1473,35 +1475,35 @@ class ::Google::Cloud::Dataplex::V1::CatalogService::ClientTest < Minitest::Test
       end
 
       # Use hash object
-      client.search_entries({ name: name, query: query, page_size: page_size, page_token: page_token, order_by: order_by, scope: scope }) do |response, operation|
+      client.search_entries({ name: name, query: query, page_size: page_size, page_token: page_token, order_by: order_by, scope: scope, semantic_search: semantic_search }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.search_entries name: name, query: query, page_size: page_size, page_token: page_token, order_by: order_by, scope: scope do |response, operation|
+      client.search_entries name: name, query: query, page_size: page_size, page_token: page_token, order_by: order_by, scope: scope, semantic_search: semantic_search do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.search_entries ::Google::Cloud::Dataplex::V1::SearchEntriesRequest.new(name: name, query: query, page_size: page_size, page_token: page_token, order_by: order_by, scope: scope) do |response, operation|
+      client.search_entries ::Google::Cloud::Dataplex::V1::SearchEntriesRequest.new(name: name, query: query, page_size: page_size, page_token: page_token, order_by: order_by, scope: scope, semantic_search: semantic_search) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.search_entries({ name: name, query: query, page_size: page_size, page_token: page_token, order_by: order_by, scope: scope }, grpc_options) do |response, operation|
+      client.search_entries({ name: name, query: query, page_size: page_size, page_token: page_token, order_by: order_by, scope: scope, semantic_search: semantic_search }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.search_entries(::Google::Cloud::Dataplex::V1::SearchEntriesRequest.new(name: name, query: query, page_size: page_size, page_token: page_token, order_by: order_by, scope: scope), grpc_options) do |response, operation|
+      client.search_entries(::Google::Cloud::Dataplex::V1::SearchEntriesRequest.new(name: name, query: query, page_size: page_size, page_token: page_token, order_by: order_by, scope: scope, semantic_search: semantic_search), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation

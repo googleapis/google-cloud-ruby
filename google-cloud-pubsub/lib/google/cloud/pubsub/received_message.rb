@@ -201,10 +201,10 @@ module Google
         #   # Shut down the subscriber when ready to stop receiving messages.
         #   listener.stop!
         #
-        def acknowledge! &block
+        def acknowledge!(&)
           ensure_subscription!
           if subscription.respond_to?(:exactly_once_delivery_enabled) && subscription.exactly_once_delivery_enabled
-            subscription.acknowledge ack_id, &block
+            subscription.acknowledge ack_id, &
           else
             subscription.acknowledge ack_id
             yield AcknowledgeResult.new(AcknowledgeResult::SUCCESS) if block_given?
@@ -267,10 +267,10 @@ module Google
         #   # Shut down the subscriber when ready to stop receiving messages.
         #   listener.stop!
         #
-        def modify_ack_deadline! new_deadline, &block
+        def modify_ack_deadline!(new_deadline, &)
           ensure_subscription!
           if subscription.respond_to?(:exactly_once_delivery_enabled) && subscription.exactly_once_delivery_enabled
-            subscription.modify_ack_deadline new_deadline, ack_id, &block
+            subscription.modify_ack_deadline new_deadline, ack_id, &
           else
             subscription.modify_ack_deadline new_deadline, ack_id
             yield AcknowledgeResult.new(AcknowledgeResult::SUCCESS) if block_given?
@@ -326,8 +326,8 @@ module Google
         #   # Shut down the subscriber when ready to stop receiving messages.
         #   listener.stop!
         #
-        def reject! &block
-          modify_ack_deadline! 0, &block
+        def reject!(&)
+          modify_ack_deadline! 0, &
         end
         alias nack! reject!
         alias ignore! reject!
