@@ -261,8 +261,9 @@ module Google
                 #     Optional. It must be unique within a location and match the regular
                 #     expression `[a-zA-Z0-9_-]{1,63}`. This field is required when using a
                 #     {::Google::Cloud::Security::PrivateCA::V1::CertificateAuthority CertificateAuthority}
-                #     in the Enterprise [CertificateAuthority.Tier][], but is optional and its
-                #     value is ignored otherwise.
+                #     in the Enterprise
+                #     {::Google::Cloud::Security::PrivateCA::V1::CertificateAuthority#tier CertificateAuthority.tier},
+                #     but is optional and its value is ignored otherwise.
                 #   @param certificate [::Google::Cloud::Security::PrivateCA::V1::Certificate, ::Hash]
                 #     Required. A {::Google::Cloud::Security::PrivateCA::V1::Certificate Certificate}
                 #     with initial field values.
