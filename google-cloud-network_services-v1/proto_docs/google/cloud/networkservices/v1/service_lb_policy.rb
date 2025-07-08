@@ -51,6 +51,10 @@ module Google
         # @!attribute [rw] failover_config
         #   @return [::Google::Cloud::NetworkServices::V1::ServiceLbPolicy::FailoverConfig]
         #     Optional. Configuration related to health based failover.
+        # @!attribute [rw] isolation_config
+        #   @return [::Google::Cloud::NetworkServices::V1::ServiceLbPolicy::IsolationConfig]
+        #     Optional. Configuration to provide isolation support for the associated
+        #     Backend Service.
         class ServiceLbPolicy
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -80,6 +84,19 @@ module Google
           #     and 99. The default value is 50 for Global external HTTP(S) load balancer
           #     (classic) and Proxyless service mesh, and 70 for others.
           class FailoverConfig
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Configuration to provide isolation support for the associated Backend
+          # Service.
+          # @!attribute [rw] isolation_granularity
+          #   @return [::Google::Cloud::NetworkServices::V1::ServiceLbPolicy::IsolationGranularity]
+          #     Optional. The isolation granularity of the load balancer.
+          # @!attribute [rw] isolation_mode
+          #   @return [::Google::Cloud::NetworkServices::V1::ServiceLbPolicy::IsolationMode]
+          #     Optional. The isolation mode of the load balancer.
+          class IsolationConfig
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
@@ -116,6 +133,30 @@ module Google
             # Attempt to keep traffic in a single zone closest to the client, before
             # spilling over to other zones.
             WATERFALL_BY_ZONE = 6
+          end
+
+          # The granularity of this isolation restriction.
+          module IsolationGranularity
+            # No isolation is configured for the backend service. Traffic can overflow
+            # based on the load balancing algorithm.
+            ISOLATION_GRANULARITY_UNSPECIFIED = 0
+
+            # Traffic for this service will be isolated at the cloud region level.
+            REGION = 1
+          end
+
+          # The mode of this isolation restriction, defining whether clients in a given
+          # region are allowed to reach out to another region.
+          module IsolationMode
+            # No isolation mode is configured for the backend service.
+            ISOLATION_MODE_UNSPECIFIED = 0
+
+            # Traffic will be sent to the nearest region.
+            NEAREST = 1
+
+            # Traffic will fail if no serving backends are available in the same region
+            # as the load balancer.
+            STRICT = 2
           end
         end
 
