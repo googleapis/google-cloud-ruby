@@ -970,6 +970,26 @@ module Google
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
+
+        # Parameters on mutations where clients want to ensure idempotency (i.e.
+        # at-most-once semantics). This is currently only needed for certain aggregate
+        # types.
+        # @!attribute [rw] token
+        #   @return [::String]
+        #     Unique token used to identify replays of this mutation.
+        #     Must be at least 8 bytes long.
+        # @!attribute [rw] start_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Client-assigned timestamp when the mutation's first attempt was sent.
+        #     Used to reject mutations that arrive after idempotency protection may
+        #     have expired. May cause spurious rejections if clock skew is too high.
+        #
+        #     Leave unset or zero to always accept the mutation, at the risk of
+        #     double counting if the protection for previous attempts has expired.
+        class Idempotency
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
       end
     end
   end
