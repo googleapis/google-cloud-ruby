@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright 2024 Google LLC
+# Copyright 2025 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -21,6 +21,35 @@ module Google
   module Ads
     module AdManager
       module V1
+        # Wrapper message for
+        # {::Google::Ads::AdManager::V1::CompanyTypeEnum::CompanyType CompanyType}
+        class CompanyTypeEnum
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # The type of a company.
+          module CompanyType
+            # No value specified
+            COMPANY_TYPE_UNSPECIFIED = 0
+
+            # A business entity that purchases ad inventory.
+            ADVERTISER = 1
+
+            # A company representing the publisher's own advertiser for house ads.
+            HOUSE_ADVERTISER = 2
+
+            # An organization that manages ad accounts and offers services, such as ad
+            # creation, placement, and management to advertisers.
+            AGENCY = 3
+
+            # A company representing the publisher's own agency.
+            HOUSE_AGENCY = 4
+
+            # A company representing multiple advertisers and agencies.
+            AD_NETWORK = 5
+          end
+        end
+
         # Wrapper message for
         # {::Google::Ads::AdManager::V1::CompanyCreditStatusEnum::CompanyCreditStatus CompanyCreditStatus}
         class CompanyCreditStatusEnum

@@ -30,7 +30,7 @@ module Google
     module AdManager
       module V1
         ##
-        # Provides methods for handling Network objects.
+        # Provides methods for handling `Network` objects.
         #
         # @example Load this service and instantiate a REST client
         #
