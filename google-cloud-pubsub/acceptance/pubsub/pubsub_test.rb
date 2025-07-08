@@ -115,11 +115,9 @@ describe Google::Cloud::PubSub, :pubsub do
     end
 
     it "should publish messages with ordering_key" do
-      #topic = $topic_admin.create_topic
       topic = retrieve_topic "#{$topic_prefix}-omt2-#{SecureRandom.hex(2)}"
       sub = retrieve_subscription topic, "#{$topic_prefix}-oms2-#{SecureRandom.hex(2)}", enable_message_ordering: true
 
-      #sub = topic.subscribe "#{$topic_prefix}-oms2-#{SecureRandom.hex(2)}", message_ordering: true
       assert sub.enable_message_ordering
 
       publisher = pubsub.publisher topic.name
@@ -242,7 +240,7 @@ describe Google::Cloud::PubSub, :pubsub do
       _(subscription.detached).must_equal true
 
       # delete
-    $subscription_admin.delete_subscription subscription: subscription.name
+      $subscription_admin.delete_subscription subscription: subscription.name
     end
 
     it "should be able to pull and ack" do
