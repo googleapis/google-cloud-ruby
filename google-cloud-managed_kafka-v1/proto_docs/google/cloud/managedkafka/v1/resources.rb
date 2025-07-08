@@ -54,6 +54,9 @@ module Google
         # @!attribute [r] satisfies_pzs
         #   @return [::Boolean]
         #     Output only. Reserved for future use.
+        # @!attribute [rw] tls_config
+        #   @return [::Google::Cloud::ManagedKafka::V1::TlsConfig]
+        #     Optional. TLS configuration for the Kafka cluster.
         class Cluster
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -161,6 +164,50 @@ module Google
         class GcpConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # The TLS configuration for the Kafka cluster.
+        # @!attribute [rw] trust_config
+        #   @return [::Google::Cloud::ManagedKafka::V1::TrustConfig]
+        #     Optional. The configuration of the broker truststore. If specified, clients
+        #     can use mTLS for authentication.
+        # @!attribute [rw] ssl_principal_mapping_rules
+        #   @return [::String]
+        #     Optional. A list of rules for mapping from SSL principal names to
+        #     short names. These are applied in order by Kafka.
+        #     Refer to the Apache Kafka documentation for `ssl.principal.mapping.rules`
+        #     for the precise formatting details and syntax.
+        #     Example: "RULE:^CN=(.*?),OU=ServiceUsers.*$/$1@example.com/,DEFAULT"
+        #
+        #     This is a static Kafka broker configuration. Setting or modifying this
+        #     field will trigger a rolling restart of the Kafka brokers to apply
+        #     the change. An empty string means no rules are applied (Kafka default).
+        class TlsConfig
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Sources of CA certificates to install in the broker's truststore.
+        # @!attribute [rw] cas_configs
+        #   @return [::Array<::Google::Cloud::ManagedKafka::V1::TrustConfig::CertificateAuthorityServiceConfig>]
+        #     Optional. Configuration for the Google Certificate Authority Service.
+        #     Maximum 10.
+        class TrustConfig
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # A configuration for the Google Certificate Authority Service.
+          # @!attribute [rw] ca_pool
+          #   @return [::String]
+          #     Required. The name of the CA pool to pull CA certificates from.
+          #     Structured like:
+          #     projects/\\{project}/locations/\\{location}/caPools/\\{ca_pool}.
+          #     The CA pool does not need to be in the same project or location as the
+          #     Kafka cluster.
+          class CertificateAuthorityServiceConfig
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
         end
 
         # A Kafka topic in a given cluster.
