@@ -21,12 +21,12 @@ module Google
   module Cloud
     module SecurityCenter
       module V2
-        # Contains information about the disk associated with the finding.
+        # Contains information about a VPC network associated with the finding.
         # @!attribute [rw] name
         #   @return [::String]
-        #     The name of the disk, for example,
-        #     "https://www.googleapis.com/compute/v1/projects/\\{project-id}/zones/\\{zone-id}/disks/\\{disk-id}".
-        class Disk
+        #     The name of the VPC network resource, for example,
+        #     `//compute.googleapis.com/projects/my-project/global/networks/my-network`.
+        class Network
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
