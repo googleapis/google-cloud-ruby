@@ -262,8 +262,8 @@ received_messages = subscriber.pull immediate: false, max: 10
 
 #### Acknowledging a Message
 
-Messages that are received can be acknowledged in Pub/Sub, marking the message
-to be removed so it cannot be pulled again.
+Messages that are received can be acknowledged in Pub/Sub, signaling the server
+not to deliver them again.
 
 A Message that can be acknowledged is called a ReceivedMessage. ReceivedMessages
 can be acknowledged one at a time: (See

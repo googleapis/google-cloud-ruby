@@ -45,7 +45,6 @@ describe Google::Cloud::PubSub::Service do
     end.configure
   end
 
-  focus
   it "configures the V1::SubscriptionAdmin::Client" do
     _(pubsub.project_id).wont_be :empty?
 
