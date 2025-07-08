@@ -66,6 +66,27 @@ module Google
               end
 
               ##
+              # Create a fully-qualified Generator resource string.
+              #
+              # The resource will be in the following format:
+              #
+              # `projects/{project}/locations/{location}/agents/{agent}/generators/{generator}`
+              #
+              # @param project [String]
+              # @param location [String]
+              # @param agent [String]
+              # @param generator [String]
+              #
+              # @return [::String]
+              def generator_path project:, location:, agent:, generator:
+                raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+                raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+                raise ::ArgumentError, "agent cannot contain /" if agent.to_s.include? "/"
+
+                "projects/#{project}/locations/#{location}/agents/#{agent}/generators/#{generator}"
+              end
+
+              ##
               # Create a fully-qualified Intent resource string.
               #
               # The resource will be in the following format:
