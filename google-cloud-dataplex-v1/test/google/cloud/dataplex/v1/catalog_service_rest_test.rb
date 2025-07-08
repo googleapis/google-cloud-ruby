@@ -1272,6 +1272,7 @@ class ::Google::Cloud::Dataplex::V1::CatalogService::Rest::ClientTest < Minitest
     page_token = "hello world"
     order_by = "hello world"
     scope = "hello world"
+    semantic_search = true
 
     search_entries_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
@@ -1287,27 +1288,27 @@ class ::Google::Cloud::Dataplex::V1::CatalogService::Rest::ClientTest < Minitest
         end
 
         # Use hash object
-        client.search_entries({ name: name, query: query, page_size: page_size, page_token: page_token, order_by: order_by, scope: scope }) do |_result, response|
+        client.search_entries({ name: name, query: query, page_size: page_size, page_token: page_token, order_by: order_by, scope: scope, semantic_search: semantic_search }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.search_entries name: name, query: query, page_size: page_size, page_token: page_token, order_by: order_by, scope: scope do |_result, response|
+        client.search_entries name: name, query: query, page_size: page_size, page_token: page_token, order_by: order_by, scope: scope, semantic_search: semantic_search do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.search_entries ::Google::Cloud::Dataplex::V1::SearchEntriesRequest.new(name: name, query: query, page_size: page_size, page_token: page_token, order_by: order_by, scope: scope) do |_result, response|
+        client.search_entries ::Google::Cloud::Dataplex::V1::SearchEntriesRequest.new(name: name, query: query, page_size: page_size, page_token: page_token, order_by: order_by, scope: scope, semantic_search: semantic_search) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.search_entries({ name: name, query: query, page_size: page_size, page_token: page_token, order_by: order_by, scope: scope }, call_options) do |_result, response|
+        client.search_entries({ name: name, query: query, page_size: page_size, page_token: page_token, order_by: order_by, scope: scope, semantic_search: semantic_search }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.search_entries(::Google::Cloud::Dataplex::V1::SearchEntriesRequest.new(name: name, query: query, page_size: page_size, page_token: page_token, order_by: order_by, scope: scope), call_options) do |_result, response|
+        client.search_entries(::Google::Cloud::Dataplex::V1::SearchEntriesRequest.new(name: name, query: query, page_size: page_size, page_token: page_token, order_by: order_by, scope: scope, semantic_search: semantic_search), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
