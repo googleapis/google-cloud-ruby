@@ -81,7 +81,7 @@ module Google
         def iam
           return mocked_iam if mocked_iam
           @iam ||= begin
-            iam = (@publisher || @subscriber || @schemas || subscriber).iam_policy_client
+            iam = (@topic_admin || @subscription_admin || @schemas).iam_policy_client
             iam.configure do |config|
               override_client_config_timeouts config if timeout
               config.lib_name = "gccl"

@@ -131,7 +131,7 @@ module Google
           ensure_service!
           options = { project: project, async: async }
           grpc = topic_admin.get_topic topic: service.topic_path(topic_name, options)
-          Publisher.from_grpc grpc, service
+          Publisher.from_grpc grpc, service, async: async
         end
 
         ##
