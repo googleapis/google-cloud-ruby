@@ -46,6 +46,25 @@ module Google
             end
 
             ##
+            # Create a fully-qualified CaPool resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `projects/{project}/locations/{location}/caPools/{ca_pool}`
+            #
+            # @param project [String]
+            # @param location [String]
+            # @param ca_pool [String]
+            #
+            # @return [::String]
+            def ca_pool_path project:, location:, ca_pool:
+              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+              raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+
+              "projects/#{project}/locations/#{location}/caPools/#{ca_pool}"
+            end
+
+            ##
             # Create a fully-qualified Cluster resource string.
             #
             # The resource will be in the following format:
