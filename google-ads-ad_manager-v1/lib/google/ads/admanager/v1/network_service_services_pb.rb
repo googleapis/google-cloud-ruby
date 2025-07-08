@@ -24,7 +24,7 @@ module Google
     module AdManager
       module V1
         module NetworkService
-          # Provides methods for handling Network objects.
+          # Provides methods for handling `Network` objects.
           class Service
 
             include ::GRPC::GenericService
