@@ -286,6 +286,34 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # The destination big query dataset to export findings to.
+        # @!attribute [rw] dataset
+        #   @return [::String]
+        #     Required. The relative resource name of the destination dataset, in the
+        #     form projects/\\{projectId}/datasets/\\{datasetId}.
+        class BigQueryDestination
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # The LRO metadata for a ExportFindings request.
+        # @!attribute [rw] export_start_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Optional. Timestamp at which export was started
+        # @!attribute [rw] big_query_destination
+        #   @return [::Google::Cloud::SecurityCenter::V2::BigQueryDestination]
+        #     Required. The destination big query dataset to export findings to.
+        class ExportFindingsMetadata
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # The response to a ExportFindings request. Contains the LRO information.
+        class ExportFindingsResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # Request message for retrieving a BigQuery export.
         # @!attribute [rw] name
         #   @return [::String]
