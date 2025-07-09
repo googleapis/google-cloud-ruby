@@ -233,6 +233,19 @@ module Google
         # @!attribute [rw] raw_location_accuracy
         #   @return [::Google::Protobuf::DoubleValue]
         #     Accuracy of `raw_location` as a radius, in meters.
+        # @!attribute [rw] flp_location
+        #   @return [::Google::Type::LatLng]
+        #     The location from Android's Fused Location Provider.
+        # @!attribute [rw] flp_update_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Update timestamp of `flp_location`.
+        # @!attribute [rw] flp_latlng_accuracy_meters
+        #   @return [::Google::Protobuf::DoubleValue]
+        #     Accuracy of `flp_location` in meters as a radius.
+        # @!attribute [rw] flp_heading_degrees
+        #   @return [::Google::Protobuf::Int32Value]
+        #     Direction the vehicle is moving in degrees, as determined by the Fused
+        #     Location Provider. 0 represents North. The valid range is [0,360).
         # @!attribute [rw] supplemental_location
         #   @return [::Google::Type::LatLng]
         #     Supplemental location provided by the integrating app.
@@ -251,6 +264,31 @@ module Google
         #   @return [::Boolean]
         #     Deprecated: Use `is_road_snapped` instead.
         class VehicleLocation
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Describes a trip attribute as a key-value pair. The "key:value" string length
+        # cannot exceed 256 characters.
+        # @!attribute [rw] key
+        #   @return [::String]
+        #     The attribute's key. Keys may not contain the colon character (:).
+        # @!attribute [rw] string_value
+        #   @return [::String]
+        #     String typed attribute value.
+        #
+        #     Note: The following fields are mutually exclusive: `string_value`, `bool_value`, `number_value`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] bool_value
+        #   @return [::Boolean]
+        #     Boolean typed attribute value.
+        #
+        #     Note: The following fields are mutually exclusive: `bool_value`, `string_value`, `number_value`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] number_value
+        #   @return [::Float]
+        #     Double typed attribute value.
+        #
+        #     Note: The following fields are mutually exclusive: `number_value`, `string_value`, `bool_value`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        class TripAttribute
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
