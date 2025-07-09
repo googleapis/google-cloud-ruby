@@ -21,7 +21,7 @@ describe Google::Cloud::PubSub::AsyncPublisher, :message_ordering, :mock_pubsub 
   let(:fixture_expected_hash) { Hash[fixture[:expected].map { |exp| [exp[:key],  exp[:messages]] }] }
 
   it "publishes messages with ordering_key" do
-    pubsub.service.mocked_publisher = AsyncPublisherStub.new
+    pubsub.service.mocked_topic_admin = AsyncPublisherStub.new
 
     publisher = Google::Cloud::PubSub::AsyncPublisher.new topic_name, pubsub.service, interval: 30
     publisher.enable_message_ordering!
@@ -40,7 +40,7 @@ describe Google::Cloud::PubSub::AsyncPublisher, :message_ordering, :mock_pubsub 
     _(publisher).wont_be :started?
     _(publisher).must_be :stopped?
 
-    published_messages_hash = pubsub.service.mocked_publisher.message_hash
+    published_messages_hash = pubsub.service.mocked_topic_admin.message_hash
     assert_equal fixture_expected_hash.keys.sort, published_messages_hash.keys.sort
     fixture_expected_hash.each do |key, messages|
       assert_equal messages.count, published_messages_hash[key].count, "Message count for #{key} is incorrect"
@@ -49,7 +49,7 @@ describe Google::Cloud::PubSub::AsyncPublisher, :message_ordering, :mock_pubsub 
   end
 
   it "publishes messages with ordering_key and callback" do
-    pubsub.service.mocked_publisher = AsyncPublisherStub.new
+    pubsub.service.mocked_topic_admin = AsyncPublisherStub.new
 
     publisher = Google::Cloud::PubSub::AsyncPublisher.new topic_name, pubsub.service, interval: 30
     publisher.enable_message_ordering!
@@ -70,7 +70,7 @@ describe Google::Cloud::PubSub::AsyncPublisher, :message_ordering, :mock_pubsub 
     _(publisher).wont_be :started?
     _(publisher).must_be :stopped?
 
-    published_messages_hash = pubsub.service.mocked_publisher.message_hash
+    published_messages_hash = pubsub.service.mocked_topic_admin.message_hash
     assert_equal fixture_expected_hash.keys.sort, published_messages_hash.keys.sort
     fixture_expected_hash.each do |key, messages|
       assert_equal messages.count, published_messages_hash[key].count, "Message count for #{key} is incorrect"
@@ -79,7 +79,7 @@ describe Google::Cloud::PubSub::AsyncPublisher, :message_ordering, :mock_pubsub 
   end
 
   it "publishes messages with ordering_key provided only when needed" do
-    pubsub.service.mocked_publisher = AsyncPublisherStub.new
+    pubsub.service.mocked_topic_admin = AsyncPublisherStub.new
 
     publisher = Google::Cloud::PubSub::AsyncPublisher.new topic_name, pubsub.service, interval: 30
     publisher.enable_message_ordering!
@@ -102,7 +102,7 @@ describe Google::Cloud::PubSub::AsyncPublisher, :message_ordering, :mock_pubsub 
     _(publisher).wont_be :started?
     _(publisher).must_be :stopped?
 
-    published_messages_hash = pubsub.service.mocked_publisher.message_hash
+    published_messages_hash = pubsub.service.mocked_topic_admin.message_hash
     assert_equal fixture_expected_hash.keys.sort, published_messages_hash.keys.sort
     fixture_expected_hash.each do |key, messages|
       assert_equal messages.count, published_messages_hash[key].count, "Message count for #{key} is incorrect"
@@ -111,7 +111,7 @@ describe Google::Cloud::PubSub::AsyncPublisher, :message_ordering, :mock_pubsub 
   end
 
   it "publishes messages with ordering_key in reverse order" do
-    pubsub.service.mocked_publisher = AsyncPublisherStub.new
+    pubsub.service.mocked_topic_admin = AsyncPublisherStub.new
 
     publisher = Google::Cloud::PubSub::AsyncPublisher.new topic_name, pubsub.service, interval: 30
     publisher.enable_message_ordering!
@@ -130,7 +130,7 @@ describe Google::Cloud::PubSub::AsyncPublisher, :message_ordering, :mock_pubsub 
     _(publisher).wont_be :started?
     _(publisher).must_be :stopped?
 
-    published_messages_hash = pubsub.service.mocked_publisher.message_hash
+    published_messages_hash = pubsub.service.mocked_topic_admin.message_hash
     assert_equal fixture_expected_hash.keys.sort, published_messages_hash.keys.sort
     fixture_expected_hash.each do |key, messages|
       assert_equal messages.count, published_messages_hash[key].count, "Message count for #{key} is incorrect"
@@ -139,7 +139,7 @@ describe Google::Cloud::PubSub::AsyncPublisher, :message_ordering, :mock_pubsub 
   end
 
   it "publishes messages with ordering_key with a low max_messages" do
-    pubsub.service.mocked_publisher = AsyncPublisherStub.new
+    pubsub.service.mocked_topic_admin = AsyncPublisherStub.new
 
     publisher = Google::Cloud::PubSub::AsyncPublisher.new topic_name, pubsub.service, interval: 30, max_messages: 100
     publisher.enable_message_ordering!
@@ -158,7 +158,7 @@ describe Google::Cloud::PubSub::AsyncPublisher, :message_ordering, :mock_pubsub 
     _(publisher).wont_be :started?
     _(publisher).must_be :stopped?
 
-    published_messages_hash = pubsub.service.mocked_publisher.message_hash
+    published_messages_hash = pubsub.service.mocked_topic_admin.message_hash
     assert_equal fixture_expected_hash.keys.sort, published_messages_hash.keys.sort
     fixture_expected_hash.each do |key, messages|
       assert_equal messages.count, published_messages_hash[key].count, "Message count for #{key} is incorrect"
@@ -176,7 +176,7 @@ describe Google::Cloud::PubSub::AsyncPublisher, :message_ordering, :mock_pubsub 
   end
 
   it "publishes messages with ordering_key and flow_controller" do
-    pubsub.service.mocked_publisher = AsyncPublisherStub.new
+    pubsub.service.mocked_topic_admin = AsyncPublisherStub.new
 
     flow_control = {
       message_limit: 1000,
@@ -230,7 +230,7 @@ describe Google::Cloud::PubSub::AsyncPublisher, :message_ordering, :mock_pubsub 
 
     _(publisher.flow_controller.outstanding_bytes).must_equal 0
 
-    published_messages_hash = pubsub.service.mocked_publisher.message_hash
+    published_messages_hash = pubsub.service.mocked_topic_admin.message_hash
     assert_equal ["a","b","c"], published_messages_hash["k1"].map(&:data)
   end
 end

@@ -28,6 +28,9 @@ end
 
 # Create shared pubsub object so we don't create new for each test
 $pubsub = Google::Cloud::PubSub.new
+$topic_admin = $pubsub.topic_admin
+$subscription_admin = $pubsub.subscription_admin
+$schema_admin = $pubsub.schemas
 
 # Dead Letter Queue (DLQ) testing requires IAM bindings to the Cloud Pub/Sub service account that is automatically
 # created and managed by the service team in a private project.
@@ -113,10 +116,12 @@ $schema_names = 3.times.map { "#{$schema_prefix}-#{SecureRandom.hex(4)}".downcas
 
 def clean_up_pubsub_topics
   puts "Cleaning up pubsub topics after tests."
-  $pubsub.topics.all do |topic|
+  $topic_admin.list_topics(project: $pubsub.project_path).each do |topic|
     if topic.name.include? $topic_prefix
-      topic.subscriptions.each(&:delete)
-      topic.delete
+      response = $topic_admin.list_topic_subscriptions(topic: topic.name)
+      response.subscriptions.each do |subscription|
+        $subscription_admin.delete_subscription(subscription: subscription)
+      end
     end
   end
 rescue => e
@@ -125,9 +130,10 @@ end
 
 def clean_up_pubsub_snapshots
   puts "Cleaning up pubsub snapshots after tests."
-  $pubsub.snapshots.all do |snapshot|
+  
+  $subscription_admin.list_snapshots(project: $pubsub.project_path).each do |snapshot|
     if snapshot.name.include? $snapshot_prefix
-      snapshot.delete
+      $subscription_admin.delete_snapshot(snapshot: snapshot.name)
     end
   end
 rescue => e
@@ -136,9 +142,9 @@ end
 
 def clean_up_pubsub_schemas
   puts "Cleaning up pubsub schemas after tests."
-  $pubsub.schemas.all do |schema|
+  $schema_admin.list_schemas(parent: $pubsub.project_path).each do |schema|
     if schema.name.include? $schema_prefix
-      schema.delete
+      $schema_admin.delete_schema name: schema.name
     end
   end
 rescue => e
