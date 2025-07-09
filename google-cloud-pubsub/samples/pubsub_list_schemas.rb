@@ -19,7 +19,12 @@ def list_schemas
 
   pubsub = Google::Cloud::Pubsub.new
 
-  schemas = pubsub.schemas
+  schema_service = pubsub.schemas
+
+  view = Google::Cloud::PubSub::V1::SchemaView.const_get "FULL"
+
+  schemas = schema_service.list_schemas parent: pubsub.project_path,
+                                        view: view
 
   puts "Schemas in project:"
   schemas.each do |schema|
