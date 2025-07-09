@@ -994,6 +994,166 @@ module Google
               end
 
               ##
+              # Baseline implementation for the list_resource_changes REST call
+              #
+              # @param request_pb [::Google::Cloud::ConfigService::V1::ListResourceChangesRequest]
+              #   A request object representing the call parameters. Required.
+              # @param options [::Gapic::CallOptions]
+              #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Cloud::ConfigService::V1::ListResourceChangesResponse]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Cloud::ConfigService::V1::ListResourceChangesResponse]
+              #   A result object deserialized from the server's reply
+              def list_resource_changes request_pb, options = nil
+                raise ::ArgumentError, "request must be provided" if request_pb.nil?
+
+                verb, uri, query_string_params, body = ServiceStub.transcode_list_resource_changes_request request_pb
+                query_string_params = if query_string_params.any?
+                                        query_string_params.to_h { |p| p.split "=", 2 }
+                                      else
+                                        {}
+                                      end
+
+                response = @client_stub.make_http_request(
+                  verb,
+                  uri: uri,
+                  body: body || "",
+                  params: query_string_params,
+                  method_name: "list_resource_changes",
+                  options: options
+                )
+                operation = ::Gapic::Rest::TransportOperation.new response
+                result = ::Google::Cloud::ConfigService::V1::ListResourceChangesResponse.decode_json response.body, ignore_unknown_fields: true
+                catch :response do
+                  yield result, operation if block_given?
+                  result
+                end
+              end
+
+              ##
+              # Baseline implementation for the get_resource_change REST call
+              #
+              # @param request_pb [::Google::Cloud::ConfigService::V1::GetResourceChangeRequest]
+              #   A request object representing the call parameters. Required.
+              # @param options [::Gapic::CallOptions]
+              #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Cloud::ConfigService::V1::ResourceChange]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Cloud::ConfigService::V1::ResourceChange]
+              #   A result object deserialized from the server's reply
+              def get_resource_change request_pb, options = nil
+                raise ::ArgumentError, "request must be provided" if request_pb.nil?
+
+                verb, uri, query_string_params, body = ServiceStub.transcode_get_resource_change_request request_pb
+                query_string_params = if query_string_params.any?
+                                        query_string_params.to_h { |p| p.split "=", 2 }
+                                      else
+                                        {}
+                                      end
+
+                response = @client_stub.make_http_request(
+                  verb,
+                  uri: uri,
+                  body: body || "",
+                  params: query_string_params,
+                  method_name: "get_resource_change",
+                  options: options
+                )
+                operation = ::Gapic::Rest::TransportOperation.new response
+                result = ::Google::Cloud::ConfigService::V1::ResourceChange.decode_json response.body, ignore_unknown_fields: true
+                catch :response do
+                  yield result, operation if block_given?
+                  result
+                end
+              end
+
+              ##
+              # Baseline implementation for the list_resource_drifts REST call
+              #
+              # @param request_pb [::Google::Cloud::ConfigService::V1::ListResourceDriftsRequest]
+              #   A request object representing the call parameters. Required.
+              # @param options [::Gapic::CallOptions]
+              #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Cloud::ConfigService::V1::ListResourceDriftsResponse]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Cloud::ConfigService::V1::ListResourceDriftsResponse]
+              #   A result object deserialized from the server's reply
+              def list_resource_drifts request_pb, options = nil
+                raise ::ArgumentError, "request must be provided" if request_pb.nil?
+
+                verb, uri, query_string_params, body = ServiceStub.transcode_list_resource_drifts_request request_pb
+                query_string_params = if query_string_params.any?
+                                        query_string_params.to_h { |p| p.split "=", 2 }
+                                      else
+                                        {}
+                                      end
+
+                response = @client_stub.make_http_request(
+                  verb,
+                  uri: uri,
+                  body: body || "",
+                  params: query_string_params,
+                  method_name: "list_resource_drifts",
+                  options: options
+                )
+                operation = ::Gapic::Rest::TransportOperation.new response
+                result = ::Google::Cloud::ConfigService::V1::ListResourceDriftsResponse.decode_json response.body, ignore_unknown_fields: true
+                catch :response do
+                  yield result, operation if block_given?
+                  result
+                end
+              end
+
+              ##
+              # Baseline implementation for the get_resource_drift REST call
+              #
+              # @param request_pb [::Google::Cloud::ConfigService::V1::GetResourceDriftRequest]
+              #   A request object representing the call parameters. Required.
+              # @param options [::Gapic::CallOptions]
+              #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Cloud::ConfigService::V1::ResourceDrift]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Cloud::ConfigService::V1::ResourceDrift]
+              #   A result object deserialized from the server's reply
+              def get_resource_drift request_pb, options = nil
+                raise ::ArgumentError, "request must be provided" if request_pb.nil?
+
+                verb, uri, query_string_params, body = ServiceStub.transcode_get_resource_drift_request request_pb
+                query_string_params = if query_string_params.any?
+                                        query_string_params.to_h { |p| p.split "=", 2 }
+                                      else
+                                        {}
+                                      end
+
+                response = @client_stub.make_http_request(
+                  verb,
+                  uri: uri,
+                  body: body || "",
+                  params: query_string_params,
+                  method_name: "get_resource_drift",
+                  options: options
+                )
+                operation = ::Gapic::Rest::TransportOperation.new response
+                result = ::Google::Cloud::ConfigService::V1::ResourceDrift.decode_json response.body, ignore_unknown_fields: true
+                catch :response do
+                  yield result, operation if block_given?
+                  result
+                end
+              end
+
+              ##
               # @private
               #
               # GRPC transcoding helper method for the list_deployments REST call
@@ -1481,6 +1641,90 @@ module Google
                                                           uri_template: "/v1/{name}",
                                                           matches: [
                                                             ["name", %r{^projects/[^/]+/locations/[^/]+/terraformVersions/[^/]+/?$}, false]
+                                                          ]
+                                                        )
+                transcoder.transcode request_pb
+              end
+
+              ##
+              # @private
+              #
+              # GRPC transcoding helper method for the list_resource_changes REST call
+              #
+              # @param request_pb [::Google::Cloud::ConfigService::V1::ListResourceChangesRequest]
+              #   A request object representing the call parameters. Required.
+              # @return [Array(String, [String, nil], Hash{String => String})]
+              #   Uri, Body, Query string parameters
+              def self.transcode_list_resource_changes_request request_pb
+                transcoder = Gapic::Rest::GrpcTranscoder.new
+                                                        .with_bindings(
+                                                          uri_method: :get,
+                                                          uri_template: "/v1/{parent}/resourceChanges",
+                                                          matches: [
+                                                            ["parent", %r{^projects/[^/]+/locations/[^/]+/previews/[^/]+/?$}, false]
+                                                          ]
+                                                        )
+                transcoder.transcode request_pb
+              end
+
+              ##
+              # @private
+              #
+              # GRPC transcoding helper method for the get_resource_change REST call
+              #
+              # @param request_pb [::Google::Cloud::ConfigService::V1::GetResourceChangeRequest]
+              #   A request object representing the call parameters. Required.
+              # @return [Array(String, [String, nil], Hash{String => String})]
+              #   Uri, Body, Query string parameters
+              def self.transcode_get_resource_change_request request_pb
+                transcoder = Gapic::Rest::GrpcTranscoder.new
+                                                        .with_bindings(
+                                                          uri_method: :get,
+                                                          uri_template: "/v1/{name}",
+                                                          matches: [
+                                                            ["name", %r{^projects/[^/]+/locations/[^/]+/previews/[^/]+/resourceChanges/[^/]+/?$}, false]
+                                                          ]
+                                                        )
+                transcoder.transcode request_pb
+              end
+
+              ##
+              # @private
+              #
+              # GRPC transcoding helper method for the list_resource_drifts REST call
+              #
+              # @param request_pb [::Google::Cloud::ConfigService::V1::ListResourceDriftsRequest]
+              #   A request object representing the call parameters. Required.
+              # @return [Array(String, [String, nil], Hash{String => String})]
+              #   Uri, Body, Query string parameters
+              def self.transcode_list_resource_drifts_request request_pb
+                transcoder = Gapic::Rest::GrpcTranscoder.new
+                                                        .with_bindings(
+                                                          uri_method: :get,
+                                                          uri_template: "/v1/{parent}/resourceDrifts",
+                                                          matches: [
+                                                            ["parent", %r{^projects/[^/]+/locations/[^/]+/previews/[^/]+/?$}, false]
+                                                          ]
+                                                        )
+                transcoder.transcode request_pb
+              end
+
+              ##
+              # @private
+              #
+              # GRPC transcoding helper method for the get_resource_drift REST call
+              #
+              # @param request_pb [::Google::Cloud::ConfigService::V1::GetResourceDriftRequest]
+              #   A request object representing the call parameters. Required.
+              # @return [Array(String, [String, nil], Hash{String => String})]
+              #   Uri, Body, Query string parameters
+              def self.transcode_get_resource_drift_request request_pb
+                transcoder = Gapic::Rest::GrpcTranscoder.new
+                                                        .with_bindings(
+                                                          uri_method: :get,
+                                                          uri_template: "/v1/{name}",
+                                                          matches: [
+                                                            ["name", %r{^projects/[^/]+/locations/[^/]+/previews/[^/]+/resourceDrifts/[^/]+/?$}, false]
                                                           ]
                                                         )
                 transcoder.transcode request_pb

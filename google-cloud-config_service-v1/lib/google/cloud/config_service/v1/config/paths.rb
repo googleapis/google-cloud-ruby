@@ -103,6 +103,48 @@ module Google
             end
 
             ##
+            # Create a fully-qualified ResourceChange resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `projects/{project}/locations/{location}/previews/{preview}/resourceChanges/{resource_change}`
+            #
+            # @param project [String]
+            # @param location [String]
+            # @param preview [String]
+            # @param resource_change [String]
+            #
+            # @return [::String]
+            def resource_change_path project:, location:, preview:, resource_change:
+              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+              raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+              raise ::ArgumentError, "preview cannot contain /" if preview.to_s.include? "/"
+
+              "projects/#{project}/locations/#{location}/previews/#{preview}/resourceChanges/#{resource_change}"
+            end
+
+            ##
+            # Create a fully-qualified ResourceDrift resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `projects/{project}/locations/{location}/previews/{preview}/resourceDrifts/{resource_drift}`
+            #
+            # @param project [String]
+            # @param location [String]
+            # @param preview [String]
+            # @param resource_drift [String]
+            #
+            # @return [::String]
+            def resource_drift_path project:, location:, preview:, resource_drift:
+              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+              raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+              raise ::ArgumentError, "preview cannot contain /" if preview.to_s.include? "/"
+
+              "projects/#{project}/locations/#{location}/previews/#{preview}/resourceDrifts/#{resource_drift}"
+            end
+
+            ##
             # Create a fully-qualified Revision resource string.
             #
             # The resource will be in the following format:

@@ -2239,13 +2239,13 @@ module Google
               #     parent value is in the format:
               #     'projects/\\{project_id}/locations/\\{location}'.
               #   @param page_size [::Integer]
-              #     Optional. When requesting a page of resources, 'page_size' specifies number
-              #     of resources to return. If unspecified, at most 500 will be returned. The
-              #     maximum value is 1000.
+              #     Optional. When requesting a page of terraform versions, 'page_size'
+              #     specifies number of terraform versions to return. If unspecified, at most
+              #     500 will be returned. The maximum value is 1000.
               #   @param page_token [::String]
               #     Optional. Token returned by previous call to 'ListTerraformVersions' which
               #     specifies the position in the list from where to continue listing the
-              #     resources.
+              #     terraform versions.
               #   @param filter [::String]
               #     Optional. Lists the TerraformVersions that match the filter expression. A
               #     filter expression filters the resources listed in the response. The
@@ -2395,6 +2395,388 @@ module Google
                                        retry_policy: @config.retry_policy
 
                 @config_stub.get_terraform_version request, options do |result, operation|
+                  yield result, operation if block_given?
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Lists ResourceChanges for a given preview.
+              #
+              # @overload list_resource_changes(request, options = nil)
+              #   Pass arguments to `list_resource_changes` via a request object, either of type
+              #   {::Google::Cloud::ConfigService::V1::ListResourceChangesRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::ConfigService::V1::ListResourceChangesRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload list_resource_changes(parent: nil, page_size: nil, page_token: nil, filter: nil, order_by: nil)
+              #   Pass arguments to `list_resource_changes` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param parent [::String]
+              #     Required. The parent in whose context the ResourceChanges are listed. The
+              #     parent value is in the format:
+              #     'projects/\\{project_id}/locations/\\{location}/previews/\\{preview}'.
+              #   @param page_size [::Integer]
+              #     Optional. When requesting a page of resource changes, 'page_size' specifies
+              #     number of resource changes to return. If unspecified, at most 500 will be
+              #     returned. The maximum value is 1000.
+              #   @param page_token [::String]
+              #     Optional. Token returned by previous call to 'ListResourceChanges' which
+              #     specifies the position in the list from where to continue listing the
+              #     resource changes.
+              #   @param filter [::String]
+              #     Optional. Lists the resource changes that match the filter expression. A
+              #     filter expression filters the resource changes listed in the response. The
+              #     expression must be of the form '\\{field} \\{operator} \\{value}' where
+              #     operators: '<', '>',
+              #     '<=',
+              #     '>=',
+              #     '!=', '=', ':' are supported (colon ':' represents a HAS operator which is
+              #     roughly synonymous with equality). \\{field} can refer to a proto or JSON
+              #     field, or a synthetic field. Field names can be camelCase or snake_case.
+              #
+              #     Examples:
+              #     - Filter by name:
+              #       name =
+              #       "projects/foo/locations/us-central1/previews/dep/resourceChanges/baz
+              #   @param order_by [::String]
+              #     Optional. Field to use to sort the list.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::ConfigService::V1::ResourceChange>]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::ConfigService::V1::ResourceChange>]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/config_service/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::ConfigService::V1::Config::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::ConfigService::V1::ListResourceChangesRequest.new
+              #
+              #   # Call the list_resource_changes method.
+              #   result = client.list_resource_changes request
+              #
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
+              #     # Each element is of type ::Google::Cloud::ConfigService::V1::ResourceChange.
+              #     p item
+              #   end
+              #
+              def list_resource_changes request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::ConfigService::V1::ListResourceChangesRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.list_resource_changes.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::ConfigService::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.list_resource_changes.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.list_resource_changes.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @config_stub.list_resource_changes request, options do |result, operation|
+                  result = ::Gapic::Rest::PagedEnumerable.new @config_stub, :list_resource_changes, "resource_changes", request, result, options
+                  yield result, operation if block_given?
+                  throw :response, result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Get a ResourceChange for a given preview.
+              #
+              # @overload get_resource_change(request, options = nil)
+              #   Pass arguments to `get_resource_change` via a request object, either of type
+              #   {::Google::Cloud::ConfigService::V1::GetResourceChangeRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::ConfigService::V1::GetResourceChangeRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload get_resource_change(name: nil)
+              #   Pass arguments to `get_resource_change` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param name [::String]
+              #     Required. The name of the resource change to retrieve.
+              #     Format:
+              #     'projects/\\{project_id}/locations/\\{location}/previews/\\{preview}/resourceChanges/\\{resource_change}'.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Cloud::ConfigService::V1::ResourceChange]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Cloud::ConfigService::V1::ResourceChange]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/config_service/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::ConfigService::V1::Config::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::ConfigService::V1::GetResourceChangeRequest.new
+              #
+              #   # Call the get_resource_change method.
+              #   result = client.get_resource_change request
+              #
+              #   # The returned object is of type Google::Cloud::ConfigService::V1::ResourceChange.
+              #   p result
+              #
+              def get_resource_change request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::ConfigService::V1::GetResourceChangeRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.get_resource_change.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::ConfigService::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.get_resource_change.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.get_resource_change.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @config_stub.get_resource_change request, options do |result, operation|
+                  yield result, operation if block_given?
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # List ResourceDrifts for a given preview.
+              #
+              # @overload list_resource_drifts(request, options = nil)
+              #   Pass arguments to `list_resource_drifts` via a request object, either of type
+              #   {::Google::Cloud::ConfigService::V1::ListResourceDriftsRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::ConfigService::V1::ListResourceDriftsRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload list_resource_drifts(parent: nil, page_size: nil, page_token: nil, filter: nil, order_by: nil)
+              #   Pass arguments to `list_resource_drifts` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param parent [::String]
+              #     Required. The parent in whose context the ResourceDrifts are listed. The
+              #     parent value is in the format:
+              #     'projects/\\{project_id}/locations/\\{location}/previews/\\{preview}'.
+              #   @param page_size [::Integer]
+              #     Optional. When requesting a page of resource drifts, 'page_size' specifies
+              #     number of resource drifts to return. If unspecified, at most 500 will be
+              #     returned. The maximum value is 1000.
+              #   @param page_token [::String]
+              #     Optional. Token returned by previous call to 'ListResourceDrifts' which
+              #     specifies the position in the list from where to continue listing the
+              #     resource drifts.
+              #   @param filter [::String]
+              #     Optional. Lists the resource drifts that match the filter expression. A
+              #     filter expression filters the resource drifts listed in the response. The
+              #     expression must be of the form '\\{field} \\{operator} \\{value}' where
+              #     operators: '<', '>',
+              #     '<=',
+              #     '>=',
+              #     '!=', '=', ':' are supported (colon ':' represents a HAS operator which is
+              #     roughly synonymous with equality). \\{field} can refer to a proto or JSON
+              #     field, or a synthetic field. Field names can be camelCase or snake_case.
+              #
+              #     Examples:
+              #     - Filter by name:
+              #       name =
+              #       "projects/foo/locations/us-central1/previews/dep/resourceDrifts/baz
+              #   @param order_by [::String]
+              #     Optional. Field to use to sort the list.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::ConfigService::V1::ResourceDrift>]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::ConfigService::V1::ResourceDrift>]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/config_service/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::ConfigService::V1::Config::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::ConfigService::V1::ListResourceDriftsRequest.new
+              #
+              #   # Call the list_resource_drifts method.
+              #   result = client.list_resource_drifts request
+              #
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
+              #     # Each element is of type ::Google::Cloud::ConfigService::V1::ResourceDrift.
+              #     p item
+              #   end
+              #
+              def list_resource_drifts request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::ConfigService::V1::ListResourceDriftsRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.list_resource_drifts.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::ConfigService::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.list_resource_drifts.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.list_resource_drifts.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @config_stub.list_resource_drifts request, options do |result, operation|
+                  result = ::Gapic::Rest::PagedEnumerable.new @config_stub, :list_resource_drifts, "resource_drifts", request, result, options
+                  yield result, operation if block_given?
+                  throw :response, result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Get a ResourceDrift for a given preview.
+              #
+              # @overload get_resource_drift(request, options = nil)
+              #   Pass arguments to `get_resource_drift` via a request object, either of type
+              #   {::Google::Cloud::ConfigService::V1::GetResourceDriftRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::ConfigService::V1::GetResourceDriftRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload get_resource_drift(name: nil)
+              #   Pass arguments to `get_resource_drift` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param name [::String]
+              #     Required. The name of the resource drift to retrieve.
+              #     Format:
+              #     'projects/\\{project_id}/locations/\\{location}/previews/\\{preview}/resourceDrifts/\\{resource_drift}'.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Cloud::ConfigService::V1::ResourceDrift]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Cloud::ConfigService::V1::ResourceDrift]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/config_service/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::ConfigService::V1::Config::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::ConfigService::V1::GetResourceDriftRequest.new
+              #
+              #   # Call the get_resource_drift method.
+              #   result = client.get_resource_drift request
+              #
+              #   # The returned object is of type Google::Cloud::ConfigService::V1::ResourceDrift.
+              #   p result
+              #
+              def get_resource_drift request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::ConfigService::V1::GetResourceDriftRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.get_resource_drift.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::ConfigService::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.get_resource_drift.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.get_resource_drift.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @config_stub.get_resource_drift request, options do |result, operation|
                   yield result, operation if block_given?
                 end
               rescue ::Gapic::Rest::Error => e
@@ -2669,6 +3051,26 @@ module Google
                   # @return [::Gapic::Config::Method]
                   #
                   attr_reader :get_terraform_version
+                  ##
+                  # RPC-specific configuration for `list_resource_changes`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :list_resource_changes
+                  ##
+                  # RPC-specific configuration for `get_resource_change`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :get_resource_change
+                  ##
+                  # RPC-specific configuration for `list_resource_drifts`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :list_resource_drifts
+                  ##
+                  # RPC-specific configuration for `get_resource_drift`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :get_resource_drift
 
                   # @private
                   def initialize parent_rpcs = nil
@@ -2718,6 +3120,14 @@ module Google
                     @list_terraform_versions = ::Gapic::Config::Method.new list_terraform_versions_config
                     get_terraform_version_config = parent_rpcs.get_terraform_version if parent_rpcs.respond_to? :get_terraform_version
                     @get_terraform_version = ::Gapic::Config::Method.new get_terraform_version_config
+                    list_resource_changes_config = parent_rpcs.list_resource_changes if parent_rpcs.respond_to? :list_resource_changes
+                    @list_resource_changes = ::Gapic::Config::Method.new list_resource_changes_config
+                    get_resource_change_config = parent_rpcs.get_resource_change if parent_rpcs.respond_to? :get_resource_change
+                    @get_resource_change = ::Gapic::Config::Method.new get_resource_change_config
+                    list_resource_drifts_config = parent_rpcs.list_resource_drifts if parent_rpcs.respond_to? :list_resource_drifts
+                    @list_resource_drifts = ::Gapic::Config::Method.new list_resource_drifts_config
+                    get_resource_drift_config = parent_rpcs.get_resource_drift if parent_rpcs.respond_to? :get_resource_drift
+                    @get_resource_drift = ::Gapic::Config::Method.new get_resource_drift_config
 
                     yield self if block_given?
                   end
