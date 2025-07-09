@@ -76,7 +76,7 @@ describe "#create_secret_with_tags", :secret_manager_snippet do
   end
 
   def cleanup_tag_key
-    return unless defined?(tag_key) && tag_key
+    return unless tag_key
     start_time = Time.now
     end_time = start_time + max_duration
     deleted = false
@@ -108,17 +108,19 @@ describe "#create_secret_with_tags", :secret_manager_snippet do
   it "creates a secret with tags" do
     sample = SampleLoader.load "create_secret_with_tags.rb"
 
-    out, _err = capture_io do
-      sample.run project_id: project_id, secret_id: secret_id, tag_key: tag_key, tag_value: tag_value
+    begin
+      out, _err = capture_io do
+        sample.run project_id: project_id, secret_id: secret_id, tag_key: tag_key, tag_value: tag_value
+      end
+      secret_id_regex = Regexp.escape secret_id
+      assert_match %r{Created secret with tag: projects/\S+/secrets/#{secret_id_regex}}, out
+    ensure
+      # Need to delete secret in the test file itself to clear the tag resources
+      client.delete_secret name: secret_name
+
+      # Deleting the tag key and value
+      cleanup_tag_value
+      cleanup_tag_key
     end
-    secret_id_regex = Regexp.escape secret_id
-    assert_match %r{Created secret with tag: projects/\S+/secrets/#{secret_id_regex}}, out
-
-    # Need to delete secret in the test file itself to clear the tag resources
-    client.delete_secret name: secret_name
-
-    # Deleting the tag key and value
-    cleanup_tag_value
-    cleanup_tag_key
   end
 end

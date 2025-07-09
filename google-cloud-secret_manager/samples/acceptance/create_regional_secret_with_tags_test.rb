@@ -76,7 +76,7 @@ describe "#create_regional_secret_with_tags", :regional_secret_manager_snippet d
   end
 
   def cleanup_tag_key
-    return unless defined?(tag_key) && tag_key
+    return unless tag_key
     start_time = Time.now
     end_time = start_time + max_duration
     deleted = false
@@ -107,18 +107,19 @@ describe "#create_regional_secret_with_tags", :regional_secret_manager_snippet d
 
   it "creates a regional secret with tags" do
     sample = SampleLoader.load "create_regional_secret_with_tags.rb"
+    begin
+      out, _err = capture_io do
+        sample.run project_id: project_id, location_id: location_id, secret_id: secret_id, tag_key: tag_key, tag_value: tag_value
+      end
+      secret_id_regex = Regexp.escape secret_id
+      assert_match %r{Created regional secret with tags: projects/\S+locations/\S+/secrets/#{secret_id_regex}}, out
+    ensure
+      # Need to delete secret in the test file itself to clear the tag resources
+      client.delete_secret name: secret_name
 
-    out, _err = capture_io do
-      sample.run project_id: project_id, location_id: location_id, secret_id: secret_id, tag_key: tag_key, tag_value: tag_value
+      # Clean up created tag key and value
+      cleanup_tag_value
+      cleanup_tag_key
     end
-    secret_id_regex = Regexp.escape secret_id
-    assert_match %r{Created regional secret with tags: projects/\S+locations/\S+/secrets/#{secret_id_regex}}, out
-
-    # Need to delete secret in the test file itself to clear the tag resources
-    client.delete_secret name: secret_name
-
-    # Clean up created tag key and value
-    cleanup_tag_value
-    cleanup_tag_key
   end
 end
