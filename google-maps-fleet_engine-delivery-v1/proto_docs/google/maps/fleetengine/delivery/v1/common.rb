@@ -142,6 +142,19 @@ module Google
           # @!attribute [rw] raw_location_accuracy
           #   @return [::Google::Protobuf::DoubleValue]
           #     Accuracy of `raw_location` as a radius, in meters.
+          # @!attribute [rw] flp_location
+          #   @return [::Google::Type::LatLng]
+          #     The location from Android's Fused Location Provider.
+          # @!attribute [rw] flp_update_time
+          #   @return [::Google::Protobuf::Timestamp]
+          #     Update timestamp of the `flp_location`
+          # @!attribute [rw] flp_latlng_accuracy_meters
+          #   @return [::Google::Protobuf::DoubleValue]
+          #     Accuracy of `flp_location` in meters as a radius.
+          # @!attribute [rw] flp_heading_degrees
+          #   @return [::Google::Protobuf::Int32Value]
+          #     Direction the vehicle is moving in degrees, as determined by the Fused
+          #     Location Provider. 0 represents North. The valid range is [0,360).
           # @!attribute [rw] supplemental_location
           #   @return [::Google::Type::LatLng]
           #     Supplemental location provided by the integrating app.
