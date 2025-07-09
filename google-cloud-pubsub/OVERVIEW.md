@@ -29,7 +29,8 @@ subscriber.listen do |received_message|
 end
 ```
 
-This guide provides an overview of the client library's operations, which are categorized into Admin Operations and Data Plane Operations.
+This guide provides an overview of the client library's operations, which are categorized
+into Admin Operations and Data Plane Operations.
 
 * **Admin Operations**: Used for creating, configuring, and managing Pub/Sub resources (topics, subscriptions, schemas).
 * **Data Plane Operations**: For the core functionality of publishing and receiving messages.
@@ -52,7 +53,8 @@ topic_admin = pubsub.topic_admin
 
 #### Creating a Topic
 
-A Topic is a named resource to which messages are sent by publishers. The resource must be created using `TopicAdmin::Client` before it can be used.
+A Topic is a named resource to which messages are sent by publishers. The resource must be created using
+a topic admin client before it can be used.
 
 ```ruby
 topic_name = "projects/my-project/topics/my-topic"
@@ -67,7 +69,7 @@ A Topic is found by its full name.
 
 ```ruby
 topic_name = "my-topic"
-topic_path = pubsub.service.topic_path topic_name # Format is `projects/#{project_id}/topics/#{topic_name}`
+topic_path = pubsub.topic_path topic_name # Format is `projects/#{project_id}/topics/#{topic_name}`
 topic = topic_admin.get_topic topic: topic_path
 
 puts "Topic: #{topic.name}."
@@ -91,8 +93,8 @@ A Subscription is a named resource representing the stream of messages from a
 single, specific Topic, to be delivered to the subscribing application.
 
 ```ruby
-topic_path = pubsub.service.topic_path "my-topic" # Already created Topic resource
-subscription_path = pubsub.service.subscription_path "my-topic-subscription"
+topic_path = pubsub.topic_path "my-topic" # Already created Topic resource
+subscription_path = pubsub.subscription_path "my-topic-subscription"
 subscription = subscription_admin.create_subscription name: subscription_path, topic: topic_path
 ```
 
@@ -100,8 +102,8 @@ The subscription can be created that specifies the number of seconds to wait to
 be acknowledged as well as an endpoint URL to push the messages to:
 
 ```ruby
-topic_path = pubsub.service.topic_path "my-topic" # Already created Topic resource
-subscription_path = pubsub.service.subscription_path "my-topic-subscription"
+topic_path = pubsub.topic_path "my-topic" # Already created Topic resource
+subscription_path = pubsub.subscription_path "my-topic-subscription"
 push_config = Google::Cloud::PubSub::V1::PushConfig.new push_endpoint: "https://example.com/push"
 subscription = subscription_admin.create_subscription name: subscription_path, topic: topic_path,
                                                       push_config: push_config,
@@ -113,7 +115,7 @@ subscription = subscription_admin.create_subscription name: subscription_path, t
 A Subscription is found by its name.
 
 ```ruby
-subscription_path = pubsub.service.subscription_path "my-topic-subscription"
+subscription_path = pubsub.subscription_path "my-topic-subscription"
 subscription = subscription_admin.get_subscription subscription: subscription_path
 ```
 
@@ -191,6 +193,16 @@ msgs = publisher.publish do |batch|
   batch.publish "task 2 completed", foo: :baz
   batch.publish "task 3 completed", foo: :bif
 end
+```
+
+### Subscriber Client
+
+```ruby
+require "google/cloud/pubsub"
+
+pubsub = Google::Cloud::PubSub.new project_id: "my-project-id"
+publisher = pubsub.subscriber "my-topic-subscription"
+
 ```
 
 #### Receiving Messages
@@ -367,7 +379,7 @@ received_messages = subscriber.pull immediate: false
 subscriber.modify_ack_deadline 120, received_messages
 ```
 
-#### Using Ordering Keys
+### Using Ordering Keys
 
 Google Cloud Pub/Sub ordering keys provide the ability to ensure related
 messages are sent to subscribers in the order in which they were published.
@@ -448,7 +460,7 @@ listener.start
 listener.stop!
 ```
 
-## Minimizing API calls before receiving and acknowledging messages
+### Minimizing API calls before receiving and acknowledging messages
 
 A subscriber object can be created without making any API calls by providing
 the `skip_lookup` argument to {Google::Cloud::PubSub::Project#subscriber
@@ -500,7 +512,7 @@ require "google/cloud/pubsub"
 pubsub = Google::Cloud::PubSub.new
 
 subscription_admin = pubsub.subscription_admin
-snapshot_path = pubsub.service.snapshot_path "my-snapshot"
+snapshot_path = pubsub.snapshot_path "my-snapshot"
 subscription = ... # Already created Google::Cloud::PubSub::V1::Subscription
 snapshot = subscription_admin.create_snapshot name: snapshot_path, subscription: subscription.name
 
@@ -546,7 +558,7 @@ subscription_admin = pubsub.subscription_admin
 publisher = pubsub.publisher "other-topic", project: "other-project-id"
 # Create a subscription in the current project that pulls from
 # the topic in another project
-subscription_path = pubsub.service.subscription_path "my-sub"
+subscription_path = pubsub.subscription_path "my-sub"
 subscription = subscription_admin.create_subscription name: subscription_path, topic: publisher.name
 
 subscription.name #=> "projects/my-project/subscriptions/my-sub"

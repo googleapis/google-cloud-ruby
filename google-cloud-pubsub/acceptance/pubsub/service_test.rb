@@ -75,7 +75,7 @@ describe Google::Cloud::PubSub::Service do
   it "configures the V1::IAMPolicy::Client" do
     _(pubsub.project_id).wont_be :empty?
     _topic_admin = pubsub.topic_admin
-    config = pubsub.service.iam.configure
+    config = pubsub.iam.configure
     _(config).must_be_kind_of Google::Iam::V1::IAMPolicy::Client::Configuration
     _(config.timeout).must_equal timeout
     _(config.endpoint).must_equal endpoint

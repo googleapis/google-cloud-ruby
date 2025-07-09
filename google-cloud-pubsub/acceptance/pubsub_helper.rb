@@ -116,7 +116,7 @@ $schema_names = 3.times.map { "#{$schema_prefix}-#{SecureRandom.hex(4)}".downcas
 
 def clean_up_pubsub_topics
   puts "Cleaning up pubsub topics after tests."
-  $topic_admin.list_topics(project: $pubsub.service.project_path).each do |topic|
+  $topic_admin.list_topics(project: $pubsub.project_path).each do |topic|
     if topic.name.include? $topic_prefix
       response = $topic_admin.list_topic_subscriptions(topic: topic.name)
       response.subscriptions.each do |subscription|
@@ -131,7 +131,7 @@ end
 def clean_up_pubsub_snapshots
   puts "Cleaning up pubsub snapshots after tests."
   
-  $subscription_admin.list_snapshots(project: $pubsub.service.project_path).each do |snapshot|
+  $subscription_admin.list_snapshots(project: $pubsub.project_path).each do |snapshot|
     if snapshot.name.include? $snapshot_prefix
       $subscription_admin.delete_snapshot(snapshot: snapshot.name)
     end
@@ -142,7 +142,7 @@ end
 
 def clean_up_pubsub_schemas
   puts "Cleaning up pubsub schemas after tests."
-  $schema_admin.list_schemas(parent: $pubsub.service.project_path).each do |schema|
+  $schema_admin.list_schemas(parent: $pubsub.project_path).each do |schema|
     if schema.name.include? $schema_prefix
       $schema_admin.delete_schema name: schema.name
     end

@@ -114,6 +114,15 @@ module Google
         end
 
         ##
+        # Retrieve a client specific for Iam Policy related functions.
+        #
+        # @return [Google::Iam::V1::IAMPolicy::Client]
+        #
+        def iam
+          service.iam
+        end
+
+        ##
         # Retrieves a Publisher by topic name or full project path.
         #
         # @param [String] topic_name Name of a topic. The value can be a simple
@@ -157,6 +166,60 @@ module Google
           return Subscriber.from_name subscription_name, service, options if skip_lookup
           grpc = subscription_admin.get_subscription subscription: service.subscription_path(subscription_name, options)
           Subscriber.from_grpc grpc, service
+        end
+
+        ##
+        # Returns a fully-qualified project path in the form of
+        #   `projects/{project_id}`
+        # @param [String] project_name A project name. Optional.
+        #   If provided, this will be used in place of the default `project_id`.
+        #
+        def project_path project_name: nil
+          service.project_path options: { "project" => project_name }.compact
+        end
+
+        ##
+        # Returns a fully-qualified topic path in the form of
+        #   `projects/{project_id}/topics/{topic_name}`
+        # @param [String] topic_name A topic name.
+        # @param [String] project_name A project name. Optional.
+        #   If provided, this will be used in place of the default `project_id`.
+        #
+        def topic_path topic_name, project_name: nil
+          service.topic_path topic_name, options: { "project" => project_name }.compact
+        end
+
+        ##
+        # Returns a fully-qualified subscription path in the form of
+        #   `projects/{project_id}/subscriptions/{subscription_name}`
+        # @param [String] subscription_name A subscription name.
+        # @param [String] project_name A project name. Optional.
+        #   If provided, this will be used in place of the default `project_id`.
+        #
+        def subscription_path subscription_name, project_name: nil
+          service.subscription_path subscription_name, options: { "project" => project_name }.compact
+        end
+
+        ##
+        # Returns a fully-qualified snapshot path in the form of
+        #   `projects/{project_id}/snapshots/{snapshot_name}`
+        # @param [String] snapshot_name A snapshot name.
+        # @param [String] project_name A project name. Optional.
+        #   If provided, this will be used in place of the default `project_id`.
+        #
+        def snapshot_path snapshot_name, project_name: nil
+          service.snapshot_path snapshot_name, options: { "project" => project_name }.compact
+        end
+
+        ##
+        # Returns a fully-qualified schema path in the form of
+        #   `projects/{project_id}/schemas/{schema_name}`
+        # @param [String] schema_name A schema name.
+        # @param [String] project_name A project name. Optional.
+        #   If provided, this will be used in place of the default `project_id`.
+        #
+        def schema_path schema_name, project_name: nil
+          service.schema_path schema_name, options: { "project" => project_name }.compact
         end
 
         protected

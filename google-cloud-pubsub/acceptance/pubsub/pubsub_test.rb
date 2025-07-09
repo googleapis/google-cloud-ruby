@@ -18,18 +18,18 @@ require "pubsub_helper"
 
 describe Google::Cloud::PubSub, :pubsub do
   def retrieve_topic topic_name
-    topic_path = pubsub.service.topic_path topic_name
+    topic_path = pubsub.topic_path topic_name
     $topic_admin.get_topic(topic: topic_path) rescue $topic_admin.create_topic(name: topic_path)
   end
 
   def retrieve_subscription topic, subscription_name, enable_message_ordering: false
-    subscription_path = pubsub.service.subscription_path subscription_name
+    subscription_path = pubsub.subscription_path subscription_name
     $subscription_admin.get_subscription(subscription: subscription_path) \
       rescue $subscription_admin.create_subscription(name: subscription_path, topic: topic.name, enable_message_ordering: enable_message_ordering)
   end
 
   def retrieve_snapshot subscription, snapshot_name
-    snapshot_path = pubsub.service.snapshot_path snapshot_name
+    snapshot_path = pubsub.snapshot_path snapshot_name
     $subscription_admin.get_snapshot snapshot: snapshot_path \
       rescue $subscription_admin.create_snapshot name: snapshot_path, subscription: subscription.name
   end
@@ -60,14 +60,14 @@ describe Google::Cloud::PubSub, :pubsub do
 
   describe "Topic", :pubsub do
     it "should be listed" do
-      topics = $topic_admin.list_topics(project: pubsub.service.project_path)
+      topics = $topic_admin.list_topics(project: pubsub.project_path)
       topics.each do |topic|
         _(topic).must_be_kind_of Google::Cloud::PubSub::V1::Topic
       end
     end
 
     it "should be created, updated and deleted" do
-      topic_path = pubsub.service.topic_path new_topic_name
+      topic_path = pubsub.topic_path new_topic_name
       retention_duration = Google::Cloud::PubSub::Convert.number_to_duration topic_retention
       topic = $topic_admin.create_topic name: topic_path, labels: labels,
                                         message_retention_duration: retention_duration
@@ -150,7 +150,7 @@ describe Google::Cloud::PubSub, :pubsub do
       listener.stop
       listener.wait!
       # Remove the subscription
-      $subscription_admin.delete_subscription(subscription: pubsub.service.subscription_path(sub.name))
+      $subscription_admin.delete_subscription(subscription: pubsub.subscription_path(sub.name))
 
       _(received_messages).must_equal ["ordered message 0", "ordered message 1", "ordered message 2", "ordered message 3"]
     end
@@ -166,7 +166,7 @@ describe Google::Cloud::PubSub, :pubsub do
     end
 
     it "should list all subscriptions registered to the project" do
-      $subscription_admin.list_subscriptions(project: pubsub.service.project_path).each do |subscription|
+      $subscription_admin.list_subscriptions(project: pubsub.project_path).each do |subscription|
         # subscriptions on project are objects...
         _(subscription).must_be_kind_of Google::Cloud::PubSub::V1::Subscription
       end
@@ -203,7 +203,7 @@ describe Google::Cloud::PubSub, :pubsub do
     end
 
     it "should create, update, detach and delete a subscription" do
-      subscription_path = pubsub.service.subscription_path "testdetachsubsxyz-#{$topic_prefix}-sub-detach" 
+      subscription_path = pubsub.subscription_path "testdetachsubsxyz-#{$topic_prefix}-sub-detach" 
       retention_duration = Google::Cloud::PubSub::Convert.number_to_duration subscription_retention
 
       subscription = $subscription_admin.create_subscription name: subscription_path, topic: topic.name, retain_acked_messages: true, 
@@ -343,7 +343,7 @@ describe Google::Cloud::PubSub, :pubsub do
     end
 
     it "creates a push subscription with push_config" do
-      subscription_path = pubsub.service.subscription_path "#{$topic_prefix}-sub-endpoint"
+      subscription_path = pubsub.subscription_path "#{$topic_prefix}-sub-endpoint"
       push_config = Google::Cloud::PubSub::V1::PushConfig.new push_endpoint: "https://pub-sub.test.com/pubsub"
       subscription = $subscription_admin.create_subscription name: subscription_path, topic: topic.name, push_config: push_config
 
@@ -356,7 +356,7 @@ describe Google::Cloud::PubSub, :pubsub do
         dead_letter_subscription_2 = nil
         begin
           dead_letter_topic = retrieve_topic dead_letter_topic_name
-          dead_subscription_path = pubsub.service.subscription_path "#{$topic_prefix}-dead-letter-sub1"
+          dead_subscription_path = pubsub.subscription_path "#{$topic_prefix}-dead-letter-sub1"
           dead_letter_subscription = $subscription_admin.create_subscription name: dead_subscription_path, topic: dead_letter_topic.name
 
           # Dead Letter Queue (DLQ) testing requires IAM bindings to the Cloud Pub/Sub service account that is
@@ -366,15 +366,15 @@ describe Google::Cloud::PubSub, :pubsub do
           # Update Publisher Iam policy
           publisher_bindings = Google::Iam::V1::Binding.new role: "roles/pubsub.publisher", members: [service_account_email]
           publisher_policy = Google::Iam::V1::Policy.new bindings: [publisher_bindings]
-          pubsub.service.iam.set_iam_policy resource: dead_letter_topic.name, policy: publisher_policy
+          pubsub.iam.set_iam_policy resource: dead_letter_topic.name, policy: publisher_policy
 
           # Update Subscriber Iam policy
           subscriber_bindings = Google::Iam::V1::Binding.new role: "roles/pubsub.subscriber", members: [service_account_email]
           subscriber_policy = Google::Iam::V1::Policy.new bindings: [subscriber_bindings]
-          pubsub.service.iam.set_iam_policy resource: dead_letter_subscription.name, policy: subscriber_policy 
+          pubsub.iam.set_iam_policy resource: dead_letter_subscription.name, policy: subscriber_policy 
 
           # create
-          subscription_path = pubsub.service.subscription_path "#{$topic_prefix}-sub6", topic: dead_letter_topic.name
+          subscription_path = pubsub.subscription_path "#{$topic_prefix}-sub6"
           dead_letter_policy = Google::Cloud::PubSub::V1::DeadLetterPolicy.new dead_letter_topic: dead_letter_topic.name,
                                                                                max_delivery_attempts: 6
           subscription = $subscription_admin.create_subscription name: subscription_path, topic: topic.name,
@@ -421,7 +421,7 @@ describe Google::Cloud::PubSub, :pubsub do
 
           # update
           dead_letter_topic_2 = retrieve_topic dead_letter_topic_name_2
-          dead_subscription_path_2 = pubsub.service.subscription_path "#{$topic_prefix}-dead-letter-sub2"
+          dead_subscription_path_2 = pubsub.subscription_path "#{$topic_prefix}-dead-letter-sub2"
           dead_letter_policy_2 = Google::Cloud::PubSub::V1::DeadLetterPolicy.new dead_letter_topic: dead_letter_topic_2.name,
                                                                                max_delivery_attempts: 5 
 
@@ -462,18 +462,18 @@ describe Google::Cloud::PubSub, :pubsub do
       it "allows policy to be updated on a topic" do
         # Check permissions first
         permissions = ["pubsub.topics.getIamPolicy", "pubsub.topics.setIamPolicy"]
-        result = pubsub.service.iam.test_iam_permissions resource: topic.name, permissions: permissions
+        result = pubsub.iam.test_iam_permissions resource: topic.name, permissions: permissions
         skip "Don't have permissions to get/set topic's policy" unless permissions == result.permissions
 
-        policy = pubsub.service.iam.get_iam_policy resource: topic.name
+        policy = pubsub.iam.get_iam_policy resource: topic.name
         _(policy).must_be_kind_of Google::Iam::V1::Policy
 
         role = "roles/pubsub.publisher"
         publisher_bindings = Google::Iam::V1::Binding.new role: role, members: [member]
         publisher_policy = Google::Iam::V1::Policy.new bindings: [publisher_bindings]
-        pubsub.service.iam.set_iam_policy resource: topic.name, policy: publisher_policy
+        pubsub.iam.set_iam_policy resource: topic.name, policy: publisher_policy
 
-        policy = pubsub.service.iam.get_iam_policy resource: topic.name
+        policy = pubsub.iam.get_iam_policy resource: topic.name
 
         _(policy.bindings.first.role).must_equal role
         _(policy.bindings.first.members.first).must_equal member
@@ -482,18 +482,18 @@ describe Google::Cloud::PubSub, :pubsub do
       it "allows policy to be updated on a subscription" do
         # Check permissions first
         permissions = ["pubsub.subscriptions.getIamPolicy", "pubsub.subscriptions.setIamPolicy"]
-        result = pubsub.service.iam.test_iam_permissions resource: subscription.name, permissions: permissions
+        result = pubsub.iam.test_iam_permissions resource: subscription.name, permissions: permissions
         skip "Don't have permissions to get/set subscription's policy" unless permissions == result.permissions
 
-        policy = pubsub.service.iam.get_iam_policy resource: subscription.name
+        policy = pubsub.iam.get_iam_policy resource: subscription.name
         _(policy).must_be_kind_of Google::Iam::V1::Policy
 
         role = "roles/pubsub.subscriber"
         subscriber_bindings = Google::Iam::V1::Binding.new role: role, members: [member]
         subscriber_policy = Google::Iam::V1::Policy.new bindings: [subscriber_bindings]
-        pubsub.service.iam.set_iam_policy resource: subscription.name, policy: subscriber_policy
+        pubsub.iam.set_iam_policy resource: subscription.name, policy: subscriber_policy
 
-        policy = pubsub.service.iam.get_iam_policy resource: subscription.name
+        policy = pubsub.iam.get_iam_policy resource: subscription.name
 
         _(policy.bindings.first.role).must_equal role
         _(policy.bindings.first.members.first).must_equal member
@@ -501,13 +501,13 @@ describe Google::Cloud::PubSub, :pubsub do
 
       it "allows permissions to be tested on a topic" do
         permissions = ["pubsub.topics.get", "pubsub.topics.publish"]
-        result = pubsub.service.iam.test_iam_permissions resource: topic.name, permissions: permissions
+        result = pubsub.iam.test_iam_permissions resource: topic.name, permissions: permissions
         _(result.permissions).must_equal permissions
       end
 
       it "allows permissions to be tested on a subscription" do
         permissions = ["pubsub.subscriptions.consume", "pubsub.subscriptions.get"]
-        result = pubsub.service.iam.test_iam_permissions resource: subscription.name, permissions: permissions
+        result = pubsub.iam.test_iam_permissions resource: subscription.name, permissions: permissions
         _(result.permissions).must_equal permissions
       end
     end
@@ -524,7 +524,7 @@ describe Google::Cloud::PubSub, :pubsub do
     end
 
     it "should list all snapshots registered to the project" do
-      $subscription_admin.list_snapshots(project: @pubsub.service.project_path).each do |snapshot|
+      $subscription_admin.list_snapshots(project: @pubsub.project_path).each do |snapshot|
         _(snapshot).must_be_kind_of Google::Cloud::PubSub::V1::Snapshot
       end
     end

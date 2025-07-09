@@ -17,12 +17,12 @@ require "concurrent/atomics"
 
 describe Google::Cloud::PubSub, :async, :pubsub do
   def retrieve_topic topic_name, async: nil
-    topic_path = pubsub.service.topic_path topic_name
+    topic_path = pubsub.topic_path topic_name
     $topic_admin.get_topic(topic: topic_path) rescue $topic_admin.create_topic(name: topic_path)
   end
 
   def retrieve_subscription topic, subscription_name, enable_message_ordering: false
-    subscription_path = pubsub.service.subscription_path subscription_name
+    subscription_path = pubsub.subscription_path subscription_name
     $subscription_admin.get_subscription(subscription: subscription_path) \
       rescue $subscription_admin.create_subscription(name: subscription_path, topic: topic.name, enable_message_ordering: enable_message_ordering)
   end
@@ -85,7 +85,7 @@ describe Google::Cloud::PubSub, :async, :pubsub do
     listener.wait!
 
     # Remove the subscription
-    $subscription_admin.delete_subscription(subscription: pubsub.service.subscription_path(sub.name))
+    $subscription_admin.delete_subscription(subscription: pubsub.subscription_path(sub.name))
   end
 
   it "publishes and pulls ordered messages" do
@@ -162,7 +162,7 @@ describe Google::Cloud::PubSub, :async, :pubsub do
     listener.stop
     listener.wait!
     # Remove the subscription
-    $subscription_admin.delete_subscription(subscription: pubsub.service.subscription_path(sub.name))
+    $subscription_admin.delete_subscription(subscription: pubsub.subscription_path(sub.name))
 
     _(received_message_hash).must_equal expected_message_hash
   end
@@ -206,7 +206,7 @@ describe Google::Cloud::PubSub, :async, :pubsub do
     _(msgs).must_be :empty?
 
     # Remove the subscription
-    $subscription_admin.delete_subscription(subscription: pubsub.service.subscription_path(sub.name))
+    $subscription_admin.delete_subscription(subscription: pubsub.subscription_path(sub.name))
   end
 
   it "will acknowledge asyncronously after subscriber stop only" do
@@ -247,7 +247,7 @@ describe Google::Cloud::PubSub, :async, :pubsub do
     _(msgs).must_be :empty?
 
     # Remove the subscription
-    $subscription_admin.delete_subscription(subscription: pubsub.service.subscription_path(sub.name))
+    $subscription_admin.delete_subscription(subscription: pubsub.subscription_path(sub.name))
   end
 
   it "will acknowledge asyncronously after subscriber wait! followed by stop in a different thread" do
@@ -292,7 +292,7 @@ describe Google::Cloud::PubSub, :async, :pubsub do
     _(msgs).must_be :empty?
 
     # Remove the subscription
-    $subscription_admin.delete_subscription(subscription: pubsub.service.subscription_path(sub.name))
+    $subscription_admin.delete_subscription(subscription: pubsub.subscription_path(sub.name))
   end
 
   it "publishes asyncronously with publisher flow control" do
