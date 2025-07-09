@@ -17,6 +17,7 @@ require "minitest/focus"
 require "minitest/rg"
 
 require "google/cloud/secret_manager"
+require "google/cloud/resource_manager/v3"
 
 require_relative "../../../.toys/.lib/sample_loader"
 

@@ -57,6 +57,7 @@ These samples show how to use the [Google Secret Manager API]
       create_secret_with_annotations <secret> <key> <value>       Create a new secret with annotations
       create_secret_with_delayed_destroy <secret> <time_to_live>  Create a new secret with delayed destroy
       create_secret_with_labels <secret> <key> <value>            Create a new secret with labels
+      create_secret_with_tags <secret> <key> <value>              Create a new secret with tags
       create_ummr_secret <secret> <locations>                     Create a new secret with user managed replication
       delete_secret <secret>                                      Delete an existing secret
       destroy_secret_version <secret> <version>                   Destroy a secret version
@@ -93,6 +94,7 @@ These samples show how to use the [Google Secret Manager API]
       access_regional_secret_version <secret> <version>                       Access a regional secret version
       add_regional_secret_version <secret>                                    Add a new regional secret version
       create_regional_secret <secret>                                         Create a new regional secret
+      create_regional_secret <secret> <key> <value>                           Create a new regional secret with tags
       delete_regional_secret_with_etag <secret> <etag>                        Delete an existing regional secret with associated etag
       delete_regional_secret <secret>                                         Delete an existing regional secret
       destroy_regional_secret_version_with_etag <secret> <version> <etag>     Destroy a regional secret version with associated etag
