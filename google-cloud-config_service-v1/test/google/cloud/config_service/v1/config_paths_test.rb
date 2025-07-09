@@ -89,6 +89,30 @@ class ::Google::Cloud::ConfigService::V1::Config::ClientPathsTest < Minitest::Te
     end
   end
 
+  def test_resource_change_path
+    grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
+      client = ::Google::Cloud::ConfigService::V1::Config::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      path = client.resource_change_path project: "value0", location: "value1", preview: "value2", resource_change: "value3"
+      assert_equal "projects/value0/locations/value1/previews/value2/resourceChanges/value3", path
+    end
+  end
+
+  def test_resource_drift_path
+    grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
+      client = ::Google::Cloud::ConfigService::V1::Config::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      path = client.resource_drift_path project: "value0", location: "value1", preview: "value2", resource_drift: "value3"
+      assert_equal "projects/value0/locations/value1/previews/value2/resourceDrifts/value3", path
+    end
+  end
+
   def test_revision_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
     ::Gapic::ServiceStub.stub :new, DummyStub.new do

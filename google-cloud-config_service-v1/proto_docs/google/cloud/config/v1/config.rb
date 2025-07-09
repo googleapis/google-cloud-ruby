@@ -29,7 +29,7 @@ module Google
         #     as a root module.
         # @!attribute [rw] name
         #   @return [::String]
-        #     Resource name of the deployment.
+        #     Identifier. Resource name of the deployment.
         #     Format: `projects/{project}/locations/{location}/deployments/{deployment}`
         # @!attribute [r] create_time
         #   @return [::Google::Protobuf::Timestamp]
@@ -39,7 +39,7 @@ module Google
         #     Output only. Time when the deployment was last modified.
         # @!attribute [rw] labels
         #   @return [::Google::Protobuf::Map{::String => ::String}]
-        #     User-defined metadata for the deployment.
+        #     Optional. User-defined metadata for the deployment.
         # @!attribute [r] state
         #   @return [::Google::Cloud::ConfigService::V1::Deployment::State]
         #     Output only. Current state of the deployment.
@@ -248,7 +248,7 @@ module Google
         #     Note: The following fields are mutually exclusive: `git_source`, `gcs_source`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] input_values
         #   @return [::Google::Protobuf::Map{::String => ::Google::Cloud::ConfigService::V1::TerraformVariable}]
-        #     Input variable values for the Terraform blueprint.
+        #     Optional. Input variable values for the Terraform blueprint.
         class TerraformBlueprint
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -266,7 +266,7 @@ module Google
         # A Terraform input variable.
         # @!attribute [rw] input_value
         #   @return [::Google::Protobuf::Value]
-        #     Input variable value.
+        #     Optional. Input variable value.
         class TerraformVariable
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -763,9 +763,10 @@ module Google
         # @!attribute [rw] error_description
         #   @return [::String]
         #     A human-readable error description.
-        # @!attribute [rw] error
+        # @!attribute [r] error
         #   @return [::Google::Rpc::Status]
-        #     Original error response from underlying Google API, if available.
+        #     Output only. Original error response from underlying Google API, if
+        #     available.
         class TerraformError
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -1233,7 +1234,7 @@ module Google
         # @!attribute [rw] annotations
         #   @return [::Google::Protobuf::Map{::String => ::String}]
         #     Optional. Arbitrary key-value metadata storage e.g. to help client tools
-        #     identifiy preview during automation. See
+        #     identify preview during automation. See
         #     https://google.aip.dev/148#annotations for details on format and size
         #     limitations.
         class Preview
@@ -1571,14 +1572,14 @@ module Google
         #     'projects/\\{project_id}/locations/\\{location}'.
         # @!attribute [rw] page_size
         #   @return [::Integer]
-        #     Optional. When requesting a page of resources, 'page_size' specifies number
-        #     of resources to return. If unspecified, at most 500 will be returned. The
-        #     maximum value is 1000.
+        #     Optional. When requesting a page of terraform versions, 'page_size'
+        #     specifies number of terraform versions to return. If unspecified, at most
+        #     500 will be returned. The maximum value is 1000.
         # @!attribute [rw] page_token
         #   @return [::String]
         #     Optional. Token returned by previous call to 'ListTerraformVersions' which
         #     specifies the position in the list from where to continue listing the
-        #     resources.
+        #     terraform versions.
         # @!attribute [rw] filter
         #   @return [::String]
         #     Optional. Lists the TerraformVersions that match the filter expression. A
@@ -1649,6 +1650,286 @@ module Google
             # The version is obsolete.
             OBSOLETE = 3
           end
+        end
+
+        # Terraform info of a ResourceChange.
+        # @!attribute [r] address
+        #   @return [::String]
+        #     Output only. TF resource address that uniquely identifies the resource.
+        # @!attribute [r] type
+        #   @return [::String]
+        #     Output only. TF resource type.
+        # @!attribute [r] resource_name
+        #   @return [::String]
+        #     Output only. TF resource name.
+        # @!attribute [r] provider
+        #   @return [::String]
+        #     Output only. TF resource provider.
+        # @!attribute [r] actions
+        #   @return [::Array<::String>]
+        #     Output only. TF resource actions.
+        class ResourceChangeTerraformInfo
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # A resource change represents a change to a resource in the state file.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Identifier. The name of the resource change.
+        #     Format:
+        #     'projects/\\{project_id}/locations/\\{location}/previews/\\{preview}/resourceChanges/\\{resource_change}'.
+        # @!attribute [r] terraform_info
+        #   @return [::Google::Cloud::ConfigService::V1::ResourceChangeTerraformInfo]
+        #     Output only. Terraform info of the resource change.
+        # @!attribute [r] intent
+        #   @return [::Google::Cloud::ConfigService::V1::ResourceChange::Intent]
+        #     Output only. The intent of the resource change.
+        # @!attribute [r] property_changes
+        #   @return [::Array<::Google::Cloud::ConfigService::V1::PropertyChange>]
+        #     Output only. The property changes of the resource change.
+        class ResourceChange
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Possible intent of the resource change.
+          module Intent
+            # The default value.
+            INTENT_UNSPECIFIED = 0
+
+            # The resource will be created.
+            CREATE = 1
+
+            # The resource will be updated.
+            UPDATE = 2
+
+            # The resource will be deleted.
+            DELETE = 3
+
+            # The resource will be recreated.
+            RECREATE = 4
+
+            # The resource will be untouched.
+            UNCHANGED = 5
+          end
+        end
+
+        # A property change represents a change to a property in the state file.
+        # @!attribute [r] path
+        #   @return [::String]
+        #     Output only. The path of the property change.
+        # @!attribute [r] before_sensitive_paths
+        #   @return [::Array<::String>]
+        #     Output only. The paths of sensitive fields in `before`. Paths are relative
+        #     to `path`.
+        # @!attribute [r] before
+        #   @return [::Google::Protobuf::Value]
+        #     Output only. Representations of the object value before the actions.
+        # @!attribute [r] after_sensitive_paths
+        #   @return [::Array<::String>]
+        #     Output only. The paths of sensitive fields in `after`. Paths are relative
+        #     to `path`.
+        # @!attribute [r] after
+        #   @return [::Google::Protobuf::Value]
+        #     Output only. Representations of the object value after the actions.
+        class PropertyChange
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # The request message for the ListResourceChanges method.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. The parent in whose context the ResourceChanges are listed. The
+        #     parent value is in the format:
+        #     'projects/\\{project_id}/locations/\\{location}/previews/\\{preview}'.
+        # @!attribute [rw] page_size
+        #   @return [::Integer]
+        #     Optional. When requesting a page of resource changes, 'page_size' specifies
+        #     number of resource changes to return. If unspecified, at most 500 will be
+        #     returned. The maximum value is 1000.
+        # @!attribute [rw] page_token
+        #   @return [::String]
+        #     Optional. Token returned by previous call to 'ListResourceChanges' which
+        #     specifies the position in the list from where to continue listing the
+        #     resource changes.
+        # @!attribute [rw] filter
+        #   @return [::String]
+        #     Optional. Lists the resource changes that match the filter expression. A
+        #     filter expression filters the resource changes listed in the response. The
+        #     expression must be of the form '\\{field} \\{operator} \\{value}' where
+        #     operators: '<', '>',
+        #     '<=',
+        #     '>=',
+        #     '!=', '=', ':' are supported (colon ':' represents a HAS operator which is
+        #     roughly synonymous with equality). \\{field} can refer to a proto or JSON
+        #     field, or a synthetic field. Field names can be camelCase or snake_case.
+        #
+        #     Examples:
+        #     - Filter by name:
+        #       name =
+        #       "projects/foo/locations/us-central1/previews/dep/resourceChanges/baz
+        # @!attribute [rw] order_by
+        #   @return [::String]
+        #     Optional. Field to use to sort the list.
+        class ListResourceChangesRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # A response to a 'ListResourceChanges' call. Contains a list of
+        # ResourceChanges.
+        # @!attribute [rw] resource_changes
+        #   @return [::Array<::Google::Cloud::ConfigService::V1::ResourceChange>]
+        #     List of ResourceChanges.
+        # @!attribute [rw] next_page_token
+        #   @return [::String]
+        #     A token to request the next page of resources from the
+        #     'ListResourceChanges' method. The value of an empty string means that
+        #      there are no more resources to return.
+        # @!attribute [rw] unreachable
+        #   @return [::Array<::String>]
+        #     Unreachable resources, if any.
+        class ListResourceChangesResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # The request message for the GetResourceChange method.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The name of the resource change to retrieve.
+        #     Format:
+        #     'projects/\\{project_id}/locations/\\{location}/previews/\\{preview}/resourceChanges/\\{resource_change}'.
+        class GetResourceChangeRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Terraform info of a ResourceChange.
+        # @!attribute [r] address
+        #   @return [::String]
+        #     Output only. The address of the drifted resource.
+        # @!attribute [r] type
+        #   @return [::String]
+        #     Output only. The type of the drifted resource.
+        # @!attribute [r] resource_name
+        #   @return [::String]
+        #     Output only. TF resource name.
+        # @!attribute [r] provider
+        #   @return [::String]
+        #     Output only. The provider of the drifted resource.
+        class ResourceDriftTerraformInfo
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # A resource drift represents a drift to a resource in the state file.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Identifier. The name of the resource drift.
+        #     Format:
+        #     'projects/\\{project_id}/locations/\\{location}/previews/\\{preview}/resourceDrifts/\\{resource_drift}'.
+        # @!attribute [r] terraform_info
+        #   @return [::Google::Cloud::ConfigService::V1::ResourceDriftTerraformInfo]
+        #     Output only. Terraform info of the resource drift.
+        # @!attribute [r] property_drifts
+        #   @return [::Array<::Google::Cloud::ConfigService::V1::PropertyDrift>]
+        #     Output only. The property drifts of the resource drift.
+        class ResourceDrift
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # A property drift represents a drift to a property in the state file.
+        # @!attribute [r] path
+        #   @return [::String]
+        #     Output only. The path of the property drift.
+        # @!attribute [r] before_sensitive_paths
+        #   @return [::Array<::String>]
+        #     Output only. The paths of sensitive fields in `before`. Paths are relative
+        #     to `path`.
+        # @!attribute [r] before
+        #   @return [::Google::Protobuf::Value]
+        #     Output only. Representations of the object value before the actions.
+        # @!attribute [r] after_sensitive_paths
+        #   @return [::Array<::String>]
+        #     Output only. The paths of sensitive fields in `after`. Paths are relative
+        #     to `path`.
+        # @!attribute [r] after
+        #   @return [::Google::Protobuf::Value]
+        #     Output only. Representations of the object value after the actions.
+        class PropertyDrift
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # The request message for the ListResourceDrifts method.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. The parent in whose context the ResourceDrifts are listed. The
+        #     parent value is in the format:
+        #     'projects/\\{project_id}/locations/\\{location}/previews/\\{preview}'.
+        # @!attribute [rw] page_size
+        #   @return [::Integer]
+        #     Optional. When requesting a page of resource drifts, 'page_size' specifies
+        #     number of resource drifts to return. If unspecified, at most 500 will be
+        #     returned. The maximum value is 1000.
+        # @!attribute [rw] page_token
+        #   @return [::String]
+        #     Optional. Token returned by previous call to 'ListResourceDrifts' which
+        #     specifies the position in the list from where to continue listing the
+        #     resource drifts.
+        # @!attribute [rw] filter
+        #   @return [::String]
+        #     Optional. Lists the resource drifts that match the filter expression. A
+        #     filter expression filters the resource drifts listed in the response. The
+        #     expression must be of the form '\\{field} \\{operator} \\{value}' where
+        #     operators: '<', '>',
+        #     '<=',
+        #     '>=',
+        #     '!=', '=', ':' are supported (colon ':' represents a HAS operator which is
+        #     roughly synonymous with equality). \\{field} can refer to a proto or JSON
+        #     field, or a synthetic field. Field names can be camelCase or snake_case.
+        #
+        #     Examples:
+        #     - Filter by name:
+        #       name =
+        #       "projects/foo/locations/us-central1/previews/dep/resourceDrifts/baz
+        # @!attribute [rw] order_by
+        #   @return [::String]
+        #     Optional. Field to use to sort the list.
+        class ListResourceDriftsRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # A response to a 'ListResourceDrifts' call. Contains a list of ResourceDrifts.
+        # @!attribute [rw] resource_drifts
+        #   @return [::Array<::Google::Cloud::ConfigService::V1::ResourceDrift>]
+        #     List of ResourceDrifts.
+        # @!attribute [rw] next_page_token
+        #   @return [::String]
+        #     A token to request the next page of resources from the
+        #     'ListResourceDrifts' method. The value of an empty string means that
+        #     there are no more resources to return.
+        # @!attribute [rw] unreachable
+        #   @return [::Array<::String>]
+        #     Unreachable resources, if any.
+        class ListResourceDriftsResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # The request message for the GetResourceDrift method.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The name of the resource drift to retrieve.
+        #     Format:
+        #     'projects/\\{project_id}/locations/\\{location}/previews/\\{preview}/resourceDrifts/\\{resource_drift}'.
+        class GetResourceDriftRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # Enum values to control quota checks for resources in terraform
