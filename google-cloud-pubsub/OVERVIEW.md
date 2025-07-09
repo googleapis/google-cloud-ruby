@@ -57,8 +57,8 @@ A Topic is a named resource to which messages are sent by publishers. The resour
 a topic admin client before it can be used.
 
 ```ruby
-topic_name = "projects/my-project/topics/my-topic"
-topic = topic_admin.create_topic name: topic_name
+topic_path = pubsub.topic_path "my-topic"
+topic = topic_admin.create_topic name: topic_path
 
 puts "Topic #{topic.name} created."
 ```
