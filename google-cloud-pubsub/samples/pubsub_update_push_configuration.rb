@@ -21,8 +21,16 @@ def update_push_configuration subscription_id:, new_endpoint:
 
   pubsub = Google::Cloud::Pubsub.new
 
-  subscription          = pubsub.subscription subscription_id
-  subscription.endpoint = new_endpoint
+  subscription_admin = pubsub.subscription_admin
+
+  subscription = subscription_admin.get_subscription subscription: pubsub.subscription_path(subscription_id)
+
+  push_config = Google::Cloud::PubSub::V1::PushConfig.new push_endpoint: new_endpoint
+  subscription.push_config = push_config
+  update_mask = Google::Protobuf::FieldMask.new paths: ["push_config"]
+
+  subscription_admin.update_subscription subscription: subscription,
+                                         update_mask: update_mask
 
   puts "Push endpoint updated."
   # [END pubsub_update_push_configuration]

@@ -22,7 +22,6 @@ def list_schema_revisions schema_id:
 
   schemas = pubsub.schemas
 
-  #schema = schemas.get_schema name: pubsub.schema_path(schema_id)
   view = Google::Cloud::PubSub::V1::SchemaView.const_get "FULL"
 
   response = schemas.list_schema_revisions name: pubsub.schema_path(schema_id),
