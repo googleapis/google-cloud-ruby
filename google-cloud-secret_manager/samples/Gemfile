@@ -17,6 +17,7 @@ source "https://rubygems.org"
 master = ENV["GOOGLE_CLOUD_SAMPLES_TEST"] == "master"
 
 gem "google-cloud-secret_manager", path: master ? "../../google-cloud-secret_manager" : nil
+gem "google-cloud-resource_manager-v3", "~> 1.3"
 
 group :test do
   gem "google-style", "~> 1.25.1"
