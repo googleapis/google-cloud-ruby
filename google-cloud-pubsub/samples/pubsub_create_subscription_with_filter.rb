@@ -12,32 +12,23 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# [START pubsub_create_subscription_with_filter]
 require "google/cloud/pubsub"
 
 # Shows how to create a new subscription with filter for a given topic
-class PubsubCreateSubscriptionWithFilter
-  def create_subscription_with_filter project_id:, topic_id:, subscription_id:, filter:
-    pubsub = Google::Cloud::Pubsub.new project_id: project_id
-    topic = pubsub.topic topic_id
-    subscription = topic.subscribe subscription_id, filter: filter
-    puts "Created subscription with filtering enabled: #{subscription_id}"
-  end
+def create_subscription_with_filter project_id:, topic_id:, subscription_id:, filter:
+  # [START pubsub_create_subscription_with_filter]
+  # project_id = "your-project-id"
+  # topic_id = "your-topic-id"
+  # subscription_id = "your-subscription-id"
+  # filter = "attributes.author=\"unknown\""
 
-  def self.run
-    # TODO(developer): Replace these variables before running the sample.
-    project_id = "your-project-id"
-    topic_id = "your-topic-id"
-    subscription_id = "id-for-new-subcription"
-    filter = "attributes.author=\"unknown\""
-    PubsubCreateSubscriptionWithFilter.new.create_subscription_with_filter project_id: project_id,
-                                                                           topic_id: topic_id,
-                                                                           subscription_id: subscription_id,
-                                                                           filter: filter
-  end
-end
+  pubsub = Google::Cloud::Pubsub.new project_id: project_id
 
-if $PROGRAM_NAME == __FILE__
-  PubsubCreateSubscriptionWithFilter.run
+  subscription_admin = pubsub.subscription_admin
+
+  subscription = subscription_admin.create_subscription name: pubsub.subscription_path(subscription_id),
+                                                        topic: pubsub.topic_path(topic_id),
+                                                        filter: filter
+  puts "Created subscription with filtering enabled: #{subscription_id}"
+  # [END pubsub_create_subscription_with_filter]
 end
-# [END pubsub_create_subscription_with_filter]

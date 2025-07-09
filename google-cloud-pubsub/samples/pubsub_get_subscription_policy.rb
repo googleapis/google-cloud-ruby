@@ -20,10 +20,11 @@ def get_subscription_policy subscription_id:
 
   pubsub = Google::Cloud::Pubsub.new
 
-  subscription = pubsub.subscription subscription_id
-  policy       = subscription.policy
+  subscription_admin = pubsub.subscription_admin
+
+  policy = pubsub.iam.get_iam_policy resource: pubsub.subscription_path(subscription_id)
 
   puts "Subscription policy:"
-  puts policy.roles
+  puts policy.bindings.first.role
   # [END pubsub_get_subscription_policy]
 end
