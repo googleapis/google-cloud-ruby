@@ -33,11 +33,14 @@ describe "schemas" do
   let(:topic_id) { random_topic_id }
   let(:subscription_id) { random_subscription_id }
   let(:avsc_file) { File.expand_path "data/us-states.avsc", __dir__ }
+  let(:topic_admin) { pubsub.topic_admin }
+  let(:subscription_admin) { pubsub.subscription_admin }
+  let(:schemas) { pubsub.schemas }
 
   after do
-    @subscription.delete if @subscription
-    @topic.delete if @topic
-    @schema.delete if @schema
+    subscription_admin.delete_subscription subscription: @subscription.name if @subscription
+    topic_admin.delete_topic topic: @topic.name if @topic
+    schemas.delete_schema name: @schema.name if @schema
   end
 
   it "supports pubsub_create_schema, pubsub_get_schema, pubsub_list_schemas, pubsub_delete_schema" do
@@ -45,7 +48,7 @@ describe "schemas" do
     assert_output "Schema projects/#{pubsub.project}/schemas/#{schema_id} created.\n" do
       create_avro_schema schema_id: schema_id, avsc_file: avsc_file
     end
-    @schema = pubsub.schema schema_id
+    @schema = schemas.get_schema name: pubsub.schema_path(schema_id)
     assert @schema
     assert_equal "projects/#{pubsub.project}/schemas/#{schema_id}", @schema.name
 
@@ -75,13 +78,19 @@ describe "schemas" do
     let(:record) { { "name" => "Alaska", "post_abbr" => "AK" } }
 
     it "supports pubsub_create_topic_with_schema, pubsub_publish_avro_records with binary encoding" do
-      @schema = pubsub.create_schema schema_id, :avro, avsc_definition
+      schema = Google::Cloud::PubSub::V1::Schema.new name: schema_id, 
+                                                     type: :AVRO,
+                                                     definition: avsc_definition
+      @schema = schemas.create_schema parent: pubsub.project_path,
+                                      schema: schema,
+                                      schema_id: schema_id
+
 
       # pubsub_create_topic_with_schema
       assert_output "Topic projects/#{pubsub.project}/topics/#{topic_id} created.\n" do
-        create_topic_with_schema topic_id: topic_id, schema_id: schema_id, message_encoding: :binary
+        create_topic_with_schema topic_id: topic_id, schema_id: schema_id, message_encoding: "BINARY"
       end
-      @topic = pubsub.topic topic_id
+      @topic = topic_admin.get_topic topic: pubsub.topic_path(topic_id)
       assert @topic
       assert_equal "projects/#{pubsub.project}/topics/#{topic_id}", @topic.name
 
@@ -92,13 +101,18 @@ describe "schemas" do
     end
 
     it "supports pubsub_create_topic_with_schema, pubsub_publish_avro_records with JSON encoding" do
-      @schema = pubsub.create_schema schema_id, :avro, avsc_definition
+      schema = Google::Cloud::PubSub::V1::Schema.new name: schema_id, 
+                                                     type: :AVRO,
+                                                     definition: avsc_definition
+      @schema = schemas.create_schema parent: pubsub.project_path,
+                                      schema: schema,
+                                      schema_id: schema_id
 
       # pubsub_create_topic_with_schema
       assert_output "Topic projects/#{pubsub.project}/topics/#{topic_id} created.\n" do
-        create_topic_with_schema topic_id: topic_id, schema_id: schema_id, message_encoding: :json
+        create_topic_with_schema topic_id: topic_id, schema_id: schema_id, message_encoding: "JSON"
       end
-      @topic = pubsub.topic topic_id
+      @topic = topic_admin.get_topic topic: pubsub.topic_path(topic_id)
       assert @topic
       assert_equal "projects/#{pubsub.project}/topics/#{topic_id}", @topic.name
 
@@ -109,15 +123,28 @@ describe "schemas" do
     end
 
     it "supports pubsub_subscribe_avro_records with binary encoding" do
-      @schema = pubsub.create_schema schema_id, :avro, avsc_definition
-      @topic = pubsub.create_topic random_topic_id, schema_name: schema_id, message_encoding: :binary
+      schema = Google::Cloud::PubSub::V1::Schema.new name: schema_id, 
+                                                     type: :AVRO,
+                                                     definition: avsc_definition
+      @schema = schemas.create_schema parent: pubsub.project_path,
+                                      schema: schema,
+                                      schema_id: schema_id
 
-      @subscription = @topic.subscribe random_subscription_id
+      schema_settings = Google::Cloud::PubSub::V1::SchemaSettings.new schema: pubsub.schema_path(schema_id),
+                                                                      encoding: "BINARY"
+
+
+      @topic = topic_admin.create_topic name: pubsub.topic_path(random_topic_id),
+                                        schema_settings: schema_settings
+
+      @subscription = subscription_admin.create_subscription name: pubsub.subscription_path(random_subscription_id),
+                                                             topic: @topic.name
 
       writer = Avro::IO::DatumWriter.new avro_schema
       buffer = StringIO.new
       writer.write record, Avro::IO::BinaryEncoder.new(buffer)
-      @topic.publish buffer
+      publisher = pubsub.publisher @topic.name
+      publisher.publish buffer
       sleep 5
 
       # pubsub_subscribe_avro_records
@@ -129,12 +156,24 @@ describe "schemas" do
     end
 
     it "supports pubsub_subscribe_avro_records with JSON encoding" do
-      @schema = pubsub.create_schema schema_id, :avro, avsc_definition
-      @topic = pubsub.create_topic random_topic_id, schema_name: schema_id, message_encoding: :json
+      schema = Google::Cloud::PubSub::V1::Schema.new name: schema_id, 
+                                                     type: :AVRO,
+                                                     definition: avsc_definition
+      @schema = schemas.create_schema parent: pubsub.project_path,
+                                      schema: schema,
+                                      schema_id: schema_id
+      schema_settings = Google::Cloud::PubSub::V1::SchemaSettings.new schema: pubsub.schema_path(schema_id),
+                                                                      encoding: "JSON"
 
-      @subscription = @topic.subscribe random_subscription_id
 
-      @topic.publish record.to_json
+      @topic = topic_admin.create_topic name: pubsub.topic_path(random_topic_id),
+                                        schema_settings: schema_settings
+
+      @subscription = subscription_admin.create_subscription name: pubsub.subscription_path(random_subscription_id),
+                                                             topic: @topic.name
+
+      publisher = pubsub.publisher @topic.name
+      publisher.publish record.to_json
       sleep 5
 
       # pubsub_subscribe_avro_records
@@ -153,13 +192,19 @@ describe "schemas" do
     let(:revision_file) { File.expand_path "data/us-states-revision.proto", __dir__ }
 
     it "supports pubsub_create_topic_with_schema, pubsub_publish_proto_messages with binary encoding" do
-      @schema = pubsub.create_schema schema_id, :protocol_buffer, proto_definition
+      schema = Google::Cloud::PubSub::V1::Schema.new name: schema_id, 
+                                                     type: :PROTOCOL_BUFFER,
+                                                     definition: proto_definition
+      @schema = schemas.create_schema parent: pubsub.project_path,
+                                      schema: schema,
+                                      schema_id: schema_id
 
       # pubsub_create_topic_with_schema
       assert_output "Topic projects/#{pubsub.project}/topics/#{topic_id} created.\n" do
-        create_topic_with_schema topic_id: topic_id, schema_id: schema_id, message_encoding: :binary
+        create_topic_with_schema topic_id: topic_id, schema_id: schema_id, message_encoding: "BINARY"
       end
-      @topic = pubsub.topic topic_id
+
+      @topic = topic_admin.get_topic topic: pubsub.topic_path(topic_id)
       assert @topic
       assert_equal "projects/#{pubsub.project}/topics/#{topic_id}", @topic.name
 
@@ -170,13 +215,19 @@ describe "schemas" do
     end
 
     it "supports pubsub_create_topic_with_schema, pubsub_publish_proto_messages with JSON encoding" do
-      @schema = pubsub.create_schema schema_id, :protocol_buffer, proto_definition
+      schema = Google::Cloud::PubSub::V1::Schema.new name: schema_id, 
+                                                     type: :PROTOCOL_BUFFER,
+                                                     definition: proto_definition
+      @schema = schemas.create_schema parent: pubsub.project_path,
+                                      schema: schema,
+                                      schema_id: schema_id
 
       # pubsub_create_topic_with_schema
       assert_output "Topic projects/#{pubsub.project}/topics/#{topic_id} created.\n" do
-        create_topic_with_schema topic_id: topic_id, schema_id: schema_id, message_encoding: :json
+        create_topic_with_schema topic_id: topic_id, schema_id: schema_id, message_encoding: "JSON"
       end
-      @topic = pubsub.topic topic_id
+
+      @topic = topic_admin.get_topic topic: pubsub.topic_path(topic_id)
       assert @topic
       assert_equal "projects/#{pubsub.project}/topics/#{topic_id}", @topic.name
 
@@ -187,13 +238,25 @@ describe "schemas" do
     end
 
     it "supports pubsub_subscribe_proto_messages with binary encoding" do
-      @schema = pubsub.create_schema schema_id, :protocol_buffer, proto_definition
-      @topic = pubsub.create_topic random_topic_id, schema_name: schema_id, message_encoding: :binary
+      schema = Google::Cloud::PubSub::V1::Schema.new name: schema_id, 
+                                                     type: :PROTOCOL_BUFFER,
+                                                     definition: proto_definition
+      @schema = schemas.create_schema parent: pubsub.project_path,
+                                      schema: schema,
+                                      schema_id: schema_id
 
-      @subscription = @topic.subscribe random_subscription_id
+      schema_settings = Google::Cloud::PubSub::V1::SchemaSettings.new schema: pubsub.schema_path(schema_id),
+                                                                      encoding: "BINARY"
+
+      @topic = topic_admin.create_topic name: pubsub.topic_path(random_topic_id),
+                                        schema_settings: schema_settings
+
+      @subscription = subscription_admin.create_subscription name: pubsub.subscription_path(random_subscription_id),
+                                                             topic: @topic.name
 
       state = Utilities::StateProto.new name: "Alaska", post_abbr: "AK"
-      @topic.publish Utilities::StateProto.encode(state)
+      publisher = pubsub.publisher @topic.name
+      publisher.publish Utilities::StateProto.encode(state)
       sleep 5
 
       # pubsub_subscribe_proto_messages
@@ -205,13 +268,25 @@ describe "schemas" do
     end
 
     it "supports pubsub_subscribe_proto_messages with JSON encoding" do
-      @schema = pubsub.create_schema schema_id, :protocol_buffer, proto_definition
-      @topic = pubsub.create_topic random_topic_id, schema_name: schema_id, message_encoding: :json
+      schema = Google::Cloud::PubSub::V1::Schema.new name: schema_id, 
+                                                     type: :PROTOCOL_BUFFER,
+                                                     definition: proto_definition
+      @schema = schemas.create_schema parent: pubsub.project_path,
+                                      schema: schema,
+                                      schema_id: schema_id
 
-      @subscription = @topic.subscribe random_subscription_id
+      schema_settings = Google::Cloud::PubSub::V1::SchemaSettings.new schema: pubsub.schema_path(schema_id),
+                                                                      encoding: "JSON"
+
+      @topic = topic_admin.create_topic name: pubsub.topic_path(random_topic_id),
+                                        schema_settings: schema_settings
+
+      @subscription = subscription_admin.create_subscription name: pubsub.subscription_path(random_subscription_id),
+                                                             topic: @topic.name
 
       state = Utilities::StateProto.new name: "Alaska", post_abbr: "AK"
-      @topic.publish Utilities::StateProto.encode_json(state)
+      publisher = pubsub.publisher @topic.name
+      publisher.publish Utilities::StateProto.encode_json(state)
       sleep 5
 
       # pubsub_subscribe_proto_messages
@@ -223,7 +298,13 @@ describe "schemas" do
     end
 
     it "supports pubsub_commit_proto_schema & pubsub_commit_list_schema_revisions" do
-      @schema = pubsub.create_schema schema_id, :protocol_buffer, proto_definition
+      schema = Google::Cloud::PubSub::V1::Schema.new name: schema_id, 
+                                                     type: :PROTOCOL_BUFFER,
+                                                     definition: proto_definition
+      @schema = schemas.create_schema parent: pubsub.project_path,
+                                      schema: schema,
+                                      schema_id: schema_id
+
       rev_id = @schema.revision_id
 
       # pubsub_commit_proto_schema
