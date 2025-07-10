@@ -20,9 +20,12 @@ def list_schema_revisions schema_id:
 
   pubsub = Google::Cloud::Pubsub.new
 
-  schema = pubsub.schema schema_id
+  schemas = pubsub.schemas
 
-  response = schema.list_revisions
+  view = Google::Cloud::PubSub::V1::SchemaView.const_get "FULL"
+
+  response = schemas.list_schema_revisions name: pubsub.schema_path(schema_id),
+                                           view: view
 
   puts "Listed revisions of schema #{schema_id}"
   response.each do |revision_schema|

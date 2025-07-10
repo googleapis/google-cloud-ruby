@@ -22,9 +22,13 @@ def set_topic_policy topic_id:, role:, service_account_email:
 
   pubsub = Google::Cloud::Pubsub.new
 
-  topic = pubsub.topic topic_id
-  topic.policy do |policy|
-    policy.add role, service_account_email
-  end
+  topic_admin = pubsub.topic_admin
+
+  bindings = Google::Iam::V1::Binding.new role: role, members: [service_account_email]
+
+  policy = Google::Iam::V1::Policy.new bindings: [bindings]
+
+  pubsub.iam.set_iam_policy resource: pubsub.topic_path(topic_id),
+                            policy: policy
   # [END pubsub_set_topic_policy]
 end

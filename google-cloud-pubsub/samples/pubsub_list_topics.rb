@@ -19,7 +19,9 @@ def list_topics
 
   pubsub = Google::Cloud::Pubsub.new
 
-  topics = pubsub.topics
+  topic_admin = pubsub.topic_admin
+
+  topics = topic_admin.list_topics project: pubsub.project_path
 
   puts "Topics in project:"
   topics.each do |topic|

@@ -21,12 +21,13 @@ def quickstart topic_id:
 
   # Instantiates a client
   pubsub = Google::Cloud::Pubsub.new
+  topic_admin = pubsub.topic_admin
 
   # The name for the new topic
   # topic_id = "your-topic-id"
 
   # Creates the new topic
-  topic = pubsub.create_topic topic_id
+  topic = topic_admin.create_topic name: pubsub.topic_path(topic_id)
 
   puts "Topic #{topic.name} created."
   # [END pubsub_quickstart_create_topic]

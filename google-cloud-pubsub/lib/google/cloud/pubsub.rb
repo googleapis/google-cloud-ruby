@@ -133,7 +133,7 @@ module Google
       #   `ENV["PUBSUB_EMULATOR_HOST"]`
       # * `on_error` - (Proc) A Proc to be run when an error is encountered
       #   on a background thread. The Proc must take the error object as the
-      #   single argument. (See {Subscriber.on_error}.)
+      #   single argument. (See {MessageListener.on_error}.)
       #
       # @return [Google::Cloud::Config] The configuration object the
       #   Google::Cloud::PubSub library uses.

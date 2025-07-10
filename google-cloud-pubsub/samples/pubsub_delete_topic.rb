@@ -20,8 +20,9 @@ def delete_topic topic_id:
 
   pubsub = Google::Cloud::Pubsub.new
 
-  topic = pubsub.topic topic_id
-  topic.delete
+  topic_admin = pubsub.topic_admin
+
+  topic_admin.delete_topic topic: pubsub.topic_path(topic_id)
 
   puts "Topic #{topic_id} deleted."
   # [END pubsub_delete_topic]
