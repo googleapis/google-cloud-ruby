@@ -191,9 +191,14 @@ module Google
               # Service calls
 
               ##
-              # Uploads a product input to your Merchant Center account. If an input
-              # with the same contentLanguage, offerId, and dataSource already exists,
-              # this method replaces that entry.
+              # [Uploads a product input to your Merchant Center
+              # account](/merchant/api/guides/products/overview#upload-product-input). You
+              # must have a products data source to be able to insert a product. The unique
+              # identifier of the data source is passed as a query parameter in the request
+              # URL.
+              #
+              # If an input with the same contentLanguage, offerId, and dataSource already
+              # exists, this method replaces that entry.
               #
               # After inserting, updating, or deleting a product input, it may take several
               # minutes before the processed product can be retrieved.
@@ -215,17 +220,20 @@ module Google
               #
               #   @param parent [::String]
               #     Required. The account where this product will be inserted.
-              #     Format: accounts/\\{account}
+              #     Format: `accounts/{account}`
               #   @param product_input [::Google::Shopping::Merchant::Products::V1beta::ProductInput, ::Hash]
               #     Required. The product input to insert.
               #   @param data_source [::String]
               #     Required. The primary or supplemental product data source name. If the
               #     product already exists and data source provided is different, then the
-              #     product will be moved to a new data source.
+              #     product will be moved to a new data source. For more information, see
+              #     [Overview of Data sources
+              #     sub-API](/merchant/api/guides/data-sources/overview).
               #
               #     Only API data sources are supported.
               #
-              #     Format: `accounts/{account}/dataSources/{datasource}`.
+              #     Format: `accounts/{account}/dataSources/{datasource}`. For example,
+              #     `accounts/123456/dataSources/104628`.
               #
               # @yield [response, operation] Access the result along with the RPC operation
               # @yieldparam response [::Google::Shopping::Merchant::Products::V1beta::ProductInput]
@@ -337,7 +345,8 @@ module Google
               #
               #     Only API data sources are supported.
               #
-              #     Format: `accounts/{account}/dataSources/{datasource}`.
+              #     Format: `accounts/{account}/dataSources/{datasource}`. For example,
+              #     `accounts/123456/dataSources/104628`.
               #
               # @yield [response, operation] Access the result along with the RPC operation
               # @yieldparam response [::Google::Shopping::Merchant::Products::V1beta::ProductInput]
@@ -426,15 +435,16 @@ module Google
               #
               #   @param name [::String]
               #     Required. The name of the product input resource to delete.
-              #     Format: accounts/\\{account}/productInputs/\\{product}
+              #     Format: `accounts/{account}/productInputs/{product}`
               #     where the last section `product` consists of 4 parts:
-              #     channel~content_language~feed_label~offer_id
+              #     `channel~content_language~feed_label~offer_id`
               #     example for product name is
-              #     "accounts/123/productInputs/online~en~US~sku123"
+              #     `accounts/123/productInputs/online~en~US~sku123`.
               #   @param data_source [::String]
               #     Required. The primary or supplemental data source from which the product
               #     input should be deleted. Format:
-              #     `accounts/{account}/dataSources/{datasource}`.
+              #     `accounts/{account}/dataSources/{datasource}`. For example,
+              #     `accounts/123456/dataSources/104628`.
               #
               # @yield [response, operation] Access the result along with the RPC operation
               # @yieldparam response [::Google::Protobuf::Empty]
