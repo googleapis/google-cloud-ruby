@@ -113,7 +113,7 @@ module Google
           #     Optional. A list of merchant review attributes.
           # @!attribute [rw] custom_attributes
           #   @return [::Array<::Google::Shopping::Type::CustomAttribute>]
-          #     Required. A list of custom (merchant-provided) attributes. It can also be
+          #     Optional. A list of custom (merchant-provided) attributes. It can also be
           #     used for submitting any attribute of the data specification in its generic
           #     form (for example,
           #     `{ "name": "size type", "value": "regular" }`).

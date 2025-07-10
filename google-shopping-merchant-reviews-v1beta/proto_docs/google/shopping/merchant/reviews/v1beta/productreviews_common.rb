@@ -76,7 +76,8 @@ module Google
           #     Optional. The title of the review.
           # @!attribute [rw] content
           #   @return [::String]
-          #     Required. The content of the review.
+          #     Optional. The content of the review. If empty, the content might still get
+          #     populated from pros and cons.
           # @!attribute [rw] pros
           #   @return [::Array<::String>]
           #     Optional. Contains the advantages based on the opinion of the reviewer.
@@ -135,6 +136,12 @@ module Google
           #   @return [::Boolean]
           #     Optional. Indicates whether the review is marked as spam in the publisher's
           #     system.
+          # @!attribute [rw] is_verified_purchase
+          #   @return [::Boolean]
+          #     Optional. Indicates whether the reviewer's purchase is verified.
+          # @!attribute [rw] is_incentivized_review
+          #   @return [::Boolean]
+          #     Optional. Indicates whether the review is incentivized.
           # @!attribute [rw] collection_method
           #   @return [::Google::Shopping::Merchant::Reviews::V1beta::ProductReviewAttributes::CollectionMethod]
           #     Optional. The method used to collect the review.
