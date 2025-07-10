@@ -1075,11 +1075,11 @@ module Google
               #     [Dialogflow access
               #     control](https://cloud.google.com/dialogflow/cx/docs/concept/access-control#storage).
               #
-              #     Note: The following fields are mutually exclusive: `flow_uri`, `flow_content`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+              #     Note: The following parameters are mutually exclusive: `flow_uri`, `flow_content`. At most one of these parameters can be set. If more than one is set, only one will be used, and it is not defined which one.
               #   @param flow_content [::String]
               #     Uncompressed raw byte content for flow.
               #
-              #     Note: The following fields are mutually exclusive: `flow_content`, `flow_uri`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+              #     Note: The following parameters are mutually exclusive: `flow_content`, `flow_uri`. At most one of these parameters can be set. If more than one is set, only one will be used, and it is not defined which one.
               #   @param import_option [::Google::Cloud::Dialogflow::CX::V3::ImportFlowRequest::ImportOption]
               #     Flow import mode. If not specified, `KEEP` is assumed.
               #   @param flow_import_strategy [::Google::Cloud::Dialogflow::CX::V3::FlowImportStrategy, ::Hash]

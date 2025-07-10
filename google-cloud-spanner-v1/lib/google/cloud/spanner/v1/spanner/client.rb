@@ -1708,7 +1708,7 @@ module Google
             #   @param transaction_id [::String]
             #     Commit a previously-started transaction.
             #
-            #     Note: The following fields are mutually exclusive: `transaction_id`, `single_use_transaction`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+            #     Note: The following parameters are mutually exclusive: `transaction_id`, `single_use_transaction`. At most one of these parameters can be set. If more than one is set, only one will be used, and it is not defined which one.
             #   @param single_use_transaction [::Google::Cloud::Spanner::V1::TransactionOptions, ::Hash]
             #     Execute mutations in a temporary transaction. Note that unlike
             #     commit of a previously-started transaction, commit with a
@@ -1720,7 +1720,7 @@ module Google
             #     {::Google::Cloud::Spanner::V1::Spanner::Client#begin_transaction BeginTransaction} and
             #     {::Google::Cloud::Spanner::V1::Spanner::Client#commit Commit} instead.
             #
-            #     Note: The following fields are mutually exclusive: `single_use_transaction`, `transaction_id`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+            #     Note: The following parameters are mutually exclusive: `single_use_transaction`, `transaction_id`. At most one of these parameters can be set. If more than one is set, only one will be used, and it is not defined which one.
             #   @param mutations [::Array<::Google::Cloud::Spanner::V1::Mutation, ::Hash>]
             #     The mutations to be executed when this transaction commits. All
             #     mutations are applied atomically, in the order they appear in

@@ -777,11 +777,11 @@ module Google
               #     [Dialogflow access
               #     control](https://cloud.google.com/dialogflow/cx/docs/concept/access-control#storage).
               #
-              #     Note: The following fields are mutually exclusive: `entity_types_uri`, `entity_types_content_inline`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+              #     Note: The following parameters are mutually exclusive: `entity_types_uri`, `entity_types_content_inline`. At most one of these parameters can be set. If more than one is set, only one will be used, and it is not defined which one.
               #   @param entity_types_content_inline [::Boolean]
               #     Optional. The option to return the serialized entity types inline.
               #
-              #     Note: The following fields are mutually exclusive: `entity_types_content_inline`, `entity_types_uri`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+              #     Note: The following parameters are mutually exclusive: `entity_types_content_inline`, `entity_types_uri`. At most one of these parameters can be set. If more than one is set, only one will be used, and it is not defined which one.
               #   @param data_format [::Google::Cloud::Dialogflow::CX::V3::ExportEntityTypesRequest::DataFormat]
               #     Optional. The data format of the exported entity types. If not specified,
               #     `BLOB` is assumed.
@@ -904,11 +904,11 @@ module Google
               #     [Dialogflow access
               #     control](https://cloud.google.com/dialogflow/cx/docs/concept/access-control#storage).
               #
-              #     Note: The following fields are mutually exclusive: `entity_types_uri`, `entity_types_content`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+              #     Note: The following parameters are mutually exclusive: `entity_types_uri`, `entity_types_content`. At most one of these parameters can be set. If more than one is set, only one will be used, and it is not defined which one.
               #   @param entity_types_content [::Google::Cloud::Dialogflow::CX::V3::InlineSource, ::Hash]
               #     Uncompressed byte content of entity types.
               #
-              #     Note: The following fields are mutually exclusive: `entity_types_content`, `entity_types_uri`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+              #     Note: The following parameters are mutually exclusive: `entity_types_content`, `entity_types_uri`. At most one of these parameters can be set. If more than one is set, only one will be used, and it is not defined which one.
               #   @param merge_option [::Google::Cloud::Dialogflow::CX::V3::ImportEntityTypesRequest::MergeOption]
               #     Required. Merge option for importing entity types.
               #   @param target_entity_type [::String]

@@ -738,11 +738,11 @@ module Google
             #     EntityBatch type) or a JSON object. Note: The URI must start with
             #     "gs://".
             #
-            #     Note: The following fields are mutually exclusive: `entity_type_batch_uri`, `entity_type_batch_inline`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+            #     Note: The following parameters are mutually exclusive: `entity_type_batch_uri`, `entity_type_batch_inline`. At most one of these parameters can be set. If more than one is set, only one will be used, and it is not defined which one.
             #   @param entity_type_batch_inline [::Google::Cloud::Dialogflow::V2::EntityTypeBatch, ::Hash]
             #     The collection of entity types to update or create.
             #
-            #     Note: The following fields are mutually exclusive: `entity_type_batch_inline`, `entity_type_batch_uri`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+            #     Note: The following parameters are mutually exclusive: `entity_type_batch_inline`, `entity_type_batch_uri`. At most one of these parameters can be set. If more than one is set, only one will be used, and it is not defined which one.
             #   @param language_code [::String]
             #     Optional. The language used to access language-specific data.
             #     If not specified, the agent's default language is used.

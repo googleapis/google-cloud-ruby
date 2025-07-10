@@ -961,11 +961,11 @@ module Google
                 #     [Dialogflow access
                 #     control](https://cloud.google.com/dialogflow/cx/docs/concept/access-control#storage).
                 #
-                #     Note: The following fields are mutually exclusive: `gcs_uri`, `content`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+                #     Note: The following parameters are mutually exclusive: `gcs_uri`, `content`. At most one of these parameters can be set. If more than one is set, only one will be used, and it is not defined which one.
                 #   @param content [::String]
                 #     Uncompressed raw byte content for test cases.
                 #
-                #     Note: The following fields are mutually exclusive: `content`, `gcs_uri`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+                #     Note: The following parameters are mutually exclusive: `content`, `gcs_uri`. At most one of these parameters can be set. If more than one is set, only one will be used, and it is not defined which one.
                 # @yield [result, operation] Access the result along with the TransportOperation object
                 # @yieldparam result [::Gapic::Operation]
                 # @yieldparam operation [::Gapic::Rest::TransportOperation]
