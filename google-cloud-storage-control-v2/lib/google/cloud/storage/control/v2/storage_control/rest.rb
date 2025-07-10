@@ -24,7 +24,6 @@ require "google/cloud/storage/control/v2/version"
 
 require "google/cloud/storage/control/v2/storage_control/credentials"
 require "google/cloud/storage/control/v2/storage_control/paths"
-require "google/cloud/storage/control/v2/storage_control/rest/operations"
 require "google/cloud/storage/control/v2/storage_control/rest/client"
 
 module Google
