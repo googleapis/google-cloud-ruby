@@ -4801,11 +4801,11 @@ module Google
             #   @param image_query [::Google::Cloud::VisionAI::V1::ImageQuery, ::Hash]
             #     An image-only query.
             #
-            #     Note: The following fields are mutually exclusive: `image_query`, `text_query`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+            #     Note: The following parameters are mutually exclusive: `image_query`, `text_query`. At most one of these parameters can be set. If more than one is set, only one will be used, and it is not defined which one.
             #   @param text_query [::String]
             #     A text-only query.
             #
-            #     Note: The following fields are mutually exclusive: `text_query`, `image_query`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+            #     Note: The following parameters are mutually exclusive: `text_query`, `image_query`. At most one of these parameters can be set. If more than one is set, only one will be used, and it is not defined which one.
             #   @param index_endpoint [::String]
             #     Required. The index endpoint to search.
             #     Format:
