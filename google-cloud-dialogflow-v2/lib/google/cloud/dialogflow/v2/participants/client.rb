@@ -602,19 +602,19 @@ module Google
             #   @param text_input [::Google::Cloud::Dialogflow::V2::TextInput, ::Hash]
             #     The natural language text to be processed.
             #
-            #     Note: The following fields are mutually exclusive: `text_input`, `audio_input`, `event_input`, `suggestion_input`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+            #     Note: The following parameters are mutually exclusive: `text_input`, `audio_input`, `event_input`, `suggestion_input`. At most one of these parameters can be set. If more than one is set, only one will be used, and it is not defined which one.
             #   @param audio_input [::Google::Cloud::Dialogflow::V2::AudioInput, ::Hash]
             #     The natural language speech audio to be processed.
             #
-            #     Note: The following fields are mutually exclusive: `audio_input`, `text_input`, `event_input`, `suggestion_input`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+            #     Note: The following parameters are mutually exclusive: `audio_input`, `text_input`, `event_input`, `suggestion_input`. At most one of these parameters can be set. If more than one is set, only one will be used, and it is not defined which one.
             #   @param event_input [::Google::Cloud::Dialogflow::V2::EventInput, ::Hash]
             #     An input event to send to Dialogflow.
             #
-            #     Note: The following fields are mutually exclusive: `event_input`, `text_input`, `audio_input`, `suggestion_input`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+            #     Note: The following parameters are mutually exclusive: `event_input`, `text_input`, `audio_input`, `suggestion_input`. At most one of these parameters can be set. If more than one is set, only one will be used, and it is not defined which one.
             #   @param suggestion_input [::Google::Cloud::Dialogflow::V2::SuggestionInput, ::Hash]
             #     An input representing the selection of a suggestion.
             #
-            #     Note: The following fields are mutually exclusive: `suggestion_input`, `text_input`, `audio_input`, `event_input`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+            #     Note: The following parameters are mutually exclusive: `suggestion_input`, `text_input`, `audio_input`, `event_input`. At most one of these parameters can be set. If more than one is set, only one will be used, and it is not defined which one.
             #   @param reply_audio_config [::Google::Cloud::Dialogflow::V2::OutputAudioConfig, ::Hash]
             #     Speech synthesis configuration.
             #     The speech synthesis settings for a virtual agent that may be configured
