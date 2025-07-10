@@ -22,11 +22,14 @@ def dead_letter_create_subscription topic_id:, subscription_id:, dead_letter_top
 
   pubsub = Google::Cloud::Pubsub.new
 
-  topic             = pubsub.topic topic_id
-  dead_letter_topic = pubsub.topic dead_letter_topic_id
-  subscription      = topic.subscribe subscription_id,
-                                      dead_letter_topic:                 dead_letter_topic,
-                                      dead_letter_max_delivery_attempts: 10
+  subscription_admin = pubsub.subscription_admin
+
+  dl_topic_path = pubsub.topic_path dead_letter_topic_id
+  dead_letter_policy = Google::Cloud::PubSub::V1::DeadLetterPolicy.new dead_letter_topic: dl_topic_path,
+                                                                       max_delivery_attempts: 10
+  subscription = subscription_admin.create_subscription name: pubsub.subscription_path(subscription_id),
+                                                        topic: pubsub.topic_path(topic_id),
+                                                        dead_letter_policy: dead_letter_policy
 
   puts "Created subscription #{subscription_id} with dead letter topic #{dead_letter_topic_id}."
   puts "To process dead letter messages, remember to add a subscription to your dead letter topic."

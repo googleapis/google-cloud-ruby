@@ -22,8 +22,17 @@ def dead_letter_update_subscription subscription_id:
 
   pubsub = Google::Cloud::Pubsub.new
 
-  subscription = pubsub.subscription subscription_id
-  subscription.dead_letter_max_delivery_attempts = 20
-  puts "Max delivery attempts is now #{subscription.dead_letter_max_delivery_attempts}."
+  subscription_admin = pubsub.subscription_admin
+
+  subscription = subscription_admin.get_subscription subscription: pubsub.subscription_path(subscription_id)
+
+  dead_letter_policy = subscription.dead_letter_policy
+  dead_letter_policy.max_delivery_attempts = 20
+  subscription.dead_letter_policy = dead_letter_policy
+
+  mask = Google::Protobuf::FieldMask.new paths: ["dead_letter_policy"]
+  subscription_admin.update_subscription subscription: subscription, update_mask: mask
+
+  puts "Max delivery attempts is now #{subscription.dead_letter_policy.max_delivery_attempts}."
   # [END pubsub_dead_letter_update_subscription]
 end

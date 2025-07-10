@@ -20,12 +20,15 @@ def test_topic_permissions topic_id:
 
   pubsub = Google::Cloud::Pubsub.new
 
-  topic       = pubsub.topic topic_id
-  permissions = topic.test_permissions "pubsub.topics.attachSubscription",
-                                       "pubsub.topics.publish", "pubsub.topics.update"
+  topic_admin = pubsub.topic_admin
+
+  permissions = ["pubsub.topics.attachSubscription", "pubsub.topics.publish", "pubsub.topics.update"]
+
+  response = pubsub.iam.test_iam_permissions resource: pubsub.topic_path(topic_id),
+                                             permissions: permissions
 
   puts "Permission to attach subscription" if permissions.include? "pubsub.topics.attachSubscription"
-  puts "Permission to publish" if permissions.include? "pubsub.topics.publish"
-  puts "Permission to update" if permissions.include? "pubsub.topics.update"
+  puts "Permission to publish" if response.permissions.include? "pubsub.topics.publish"
+  puts "Permission to update" if response.permissions.include? "pubsub.topics.update"
   # [END pubsub_test_topic_permissions]
 end

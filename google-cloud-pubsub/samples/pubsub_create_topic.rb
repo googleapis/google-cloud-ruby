@@ -20,7 +20,9 @@ def create_topic topic_id:
 
   pubsub = Google::Cloud::Pubsub.new
 
-  topic = pubsub.create_topic topic_id
+  topic_admin = pubsub.topic_admin
+
+  topic = topic_admin.create_topic name: pubsub.topic_path(topic_id)
 
   puts "Topic #{topic.name} created."
   # [END pubsub_create_topic]
