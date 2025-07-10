@@ -21,9 +21,11 @@ def enable_subscription_ordering topic_id:, subscription_id:
 
   pubsub = Google::Cloud::Pubsub.new
 
-  topic        = pubsub.topic topic_id
-  subscription = topic.subscribe subscription_id,
-                                 message_ordering: true
+  subscription_admin = pubsub.subscription_admin
+
+  subscription = subscription_admin.create_subscription name: pubsub.subscription_path(subscription_id),
+                                                        topic: pubsub.topic_path(topic_id),
+                                                        enable_message_ordering: true
 
   puts "Pull subscription #{subscription_id} created with message ordering."
   # [END pubsub_enable_subscription_ordering]
