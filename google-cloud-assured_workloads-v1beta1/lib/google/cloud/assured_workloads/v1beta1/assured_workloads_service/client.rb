@@ -706,7 +706,7 @@ module Google
             #     For example:
             #     "organizations/123/locations/us-east1/workloads/assured-workload-1"
             #
-            #     Note: The following fields are mutually exclusive: `source`, `project`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+            #     Note: The following parameters are mutually exclusive: `source`, `project`. At most one of these parameters can be set. If more than one is set, only one will be used, and it is not defined which one.
             #   @param project [::String]
             #     The source type is a project. Specify the project's relative resource
             #     name, formatted as either a project number or a project ID:
@@ -715,7 +715,7 @@ module Google
             #     "projects/951040570662" when specifying a project number, or
             #     "projects/my-project-123" when specifying a project ID.
             #
-            #     Note: The following fields are mutually exclusive: `project`, `source`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+            #     Note: The following parameters are mutually exclusive: `project`, `source`. At most one of these parameters can be set. If more than one is set, only one will be used, and it is not defined which one.
             #   @param target [::String]
             #     Required. The resource ID of the folder-based destination workload. This workload is
             #     where the source project will hypothetically be moved to. Specify the

@@ -1892,11 +1892,11 @@ module Google
               #   @param image_object_detection_model_deployment_metadata [::Google::Cloud::AutoML::V1beta1::ImageObjectDetectionModelDeploymentMetadata, ::Hash]
               #     Model deployment metadata specific to Image Object Detection.
               #
-              #     Note: The following fields are mutually exclusive: `image_object_detection_model_deployment_metadata`, `image_classification_model_deployment_metadata`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+              #     Note: The following parameters are mutually exclusive: `image_object_detection_model_deployment_metadata`, `image_classification_model_deployment_metadata`. At most one of these parameters can be set. If more than one is set, only one will be used, and it is not defined which one.
               #   @param image_classification_model_deployment_metadata [::Google::Cloud::AutoML::V1beta1::ImageClassificationModelDeploymentMetadata, ::Hash]
               #     Model deployment metadata specific to Image Classification.
               #
-              #     Note: The following fields are mutually exclusive: `image_classification_model_deployment_metadata`, `image_object_detection_model_deployment_metadata`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+              #     Note: The following parameters are mutually exclusive: `image_classification_model_deployment_metadata`, `image_object_detection_model_deployment_metadata`. At most one of these parameters can be set. If more than one is set, only one will be used, and it is not defined which one.
               #   @param name [::String]
               #     Required. Resource name of the model to deploy.
               # @yield [result, operation] Access the result along with the TransportOperation object

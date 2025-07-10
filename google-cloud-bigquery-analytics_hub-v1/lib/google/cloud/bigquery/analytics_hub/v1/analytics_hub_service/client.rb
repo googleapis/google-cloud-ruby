@@ -1239,12 +1239,12 @@ module Google
               #   @param destination_dataset [::Google::Cloud::Bigquery::AnalyticsHub::V1::DestinationDataset, ::Hash]
               #     Input only. BigQuery destination dataset to create for the subscriber.
               #
-              #     Note: The following fields are mutually exclusive: `destination_dataset`, `destination_pubsub_subscription`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+              #     Note: The following parameters are mutually exclusive: `destination_dataset`, `destination_pubsub_subscription`. At most one of these parameters can be set. If more than one is set, only one will be used, and it is not defined which one.
               #   @param destination_pubsub_subscription [::Google::Cloud::Bigquery::AnalyticsHub::V1::DestinationPubSubSubscription, ::Hash]
               #     Input only. Destination Pub/Sub subscription to create for the
               #     subscriber.
               #
-              #     Note: The following fields are mutually exclusive: `destination_pubsub_subscription`, `destination_dataset`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+              #     Note: The following parameters are mutually exclusive: `destination_pubsub_subscription`, `destination_dataset`. At most one of these parameters can be set. If more than one is set, only one will be used, and it is not defined which one.
               #   @param name [::String]
               #     Required. Resource name of the listing that you want to subscribe to.
               #     e.g. `projects/myproject/locations/us/dataExchanges/123/listings/456`.

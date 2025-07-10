@@ -308,11 +308,11 @@ module Google
               #   @param td_ccel [::Google::Cloud::ConfidentialComputing::V1::TdxCcelAttestation, ::Hash]
               #     Optional. A TDX with CCEL and RTMR Attestation Quote.
               #
-              #     Note: The following fields are mutually exclusive: `td_ccel`, `sev_snp_attestation`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+              #     Note: The following parameters are mutually exclusive: `td_ccel`, `sev_snp_attestation`. At most one of these parameters can be set. If more than one is set, only one will be used, and it is not defined which one.
               #   @param sev_snp_attestation [::Google::Cloud::ConfidentialComputing::V1::SevSnpAttestation, ::Hash]
               #     Optional. An SEV-SNP Attestation Report.
               #
-              #     Note: The following fields are mutually exclusive: `sev_snp_attestation`, `td_ccel`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+              #     Note: The following parameters are mutually exclusive: `sev_snp_attestation`, `td_ccel`. At most one of these parameters can be set. If more than one is set, only one will be used, and it is not defined which one.
               #   @param challenge [::String]
               #     Required. The name of the Challenge whose nonce was used to generate the
               #     attestation, in the format `projects/*/locations/*/challenges/*`. The

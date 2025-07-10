@@ -697,12 +697,12 @@ module Google
               #     Options for exporting data in CSV format. Required field to be set for
               #     CSV file type.
               #
-              #     Note: The following fields are mutually exclusive: `csv_export_options`, `sql_export_options`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+              #     Note: The following parameters are mutually exclusive: `csv_export_options`, `sql_export_options`. At most one of these parameters can be set. If more than one is set, only one will be used, and it is not defined which one.
               #   @param sql_export_options [::Google::Cloud::AlloyDB::V1::ExportClusterRequest::SqlExportOptions, ::Hash]
               #     Options for exporting data in SQL format. Required field to be set for
               #     SQL file type.
               #
-              #     Note: The following fields are mutually exclusive: `sql_export_options`, `csv_export_options`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+              #     Note: The following parameters are mutually exclusive: `sql_export_options`, `csv_export_options`. At most one of these parameters can be set. If more than one is set, only one will be used, and it is not defined which one.
               #   @param name [::String]
               #     Required. The resource name of the cluster.
               #   @param database [::String]
@@ -798,11 +798,11 @@ module Google
               #   @param sql_import_options [::Google::Cloud::AlloyDB::V1::ImportClusterRequest::SqlImportOptions, ::Hash]
               #     Options for importing data in SQL format.
               #
-              #     Note: The following fields are mutually exclusive: `sql_import_options`, `csv_import_options`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+              #     Note: The following parameters are mutually exclusive: `sql_import_options`, `csv_import_options`. At most one of these parameters can be set. If more than one is set, only one will be used, and it is not defined which one.
               #   @param csv_import_options [::Google::Cloud::AlloyDB::V1::ImportClusterRequest::CsvImportOptions, ::Hash]
               #     Options for importing data in CSV format.
               #
-              #     Note: The following fields are mutually exclusive: `csv_import_options`, `sql_import_options`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+              #     Note: The following parameters are mutually exclusive: `csv_import_options`, `sql_import_options`. At most one of these parameters can be set. If more than one is set, only one will be used, and it is not defined which one.
               #   @param name [::String]
               #     Required. The resource name of the cluster.
               #   @param gcs_uri [::String]
@@ -1354,12 +1354,12 @@ module Google
               #   @param backup_source [::Google::Cloud::AlloyDB::V1::BackupSource, ::Hash]
               #     Backup source.
               #
-              #     Note: The following fields are mutually exclusive: `backup_source`, `continuous_backup_source`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+              #     Note: The following parameters are mutually exclusive: `backup_source`, `continuous_backup_source`. At most one of these parameters can be set. If more than one is set, only one will be used, and it is not defined which one.
               #   @param continuous_backup_source [::Google::Cloud::AlloyDB::V1::ContinuousBackupSource, ::Hash]
               #     ContinuousBackup source. Continuous backup needs to be enabled in the
               #     source cluster for this operation to succeed.
               #
-              #     Note: The following fields are mutually exclusive: `continuous_backup_source`, `backup_source`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+              #     Note: The following parameters are mutually exclusive: `continuous_backup_source`, `backup_source`. At most one of these parameters can be set. If more than one is set, only one will be used, and it is not defined which one.
               #   @param parent [::String]
               #     Required. The name of the parent resource. For the required format, see the
               #     comment on the Cluster.name field.

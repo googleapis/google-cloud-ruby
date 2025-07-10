@@ -13482,22 +13482,22 @@ module Google
               #     Google Analytics [user
               #     ID](https://firebase.google.com/docs/analytics/userid).
               #
-              #     Note: The following fields are mutually exclusive: `user_id`, `client_id`, `app_instance_id`, `user_provided_data`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+              #     Note: The following parameters are mutually exclusive: `user_id`, `client_id`, `app_instance_id`, `user_provided_data`. At most one of these parameters can be set. If more than one is set, only one will be used, and it is not defined which one.
               #   @param client_id [::String]
               #     Google Analytics [client
               #     ID](https://support.google.com/analytics/answer/11593727).
               #
-              #     Note: The following fields are mutually exclusive: `client_id`, `user_id`, `app_instance_id`, `user_provided_data`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+              #     Note: The following parameters are mutually exclusive: `client_id`, `user_id`, `app_instance_id`, `user_provided_data`. At most one of these parameters can be set. If more than one is set, only one will be used, and it is not defined which one.
               #   @param app_instance_id [::String]
               #     Firebase [application instance
               #     ID](https://firebase.google.com/docs/reference/android/com/google/firebase/analytics/FirebaseAnalytics.html#getAppInstanceId).
               #
-              #     Note: The following fields are mutually exclusive: `app_instance_id`, `user_id`, `client_id`, `user_provided_data`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+              #     Note: The following parameters are mutually exclusive: `app_instance_id`, `user_id`, `client_id`, `user_provided_data`. At most one of these parameters can be set. If more than one is set, only one will be used, and it is not defined which one.
               #   @param user_provided_data [::String]
               #     The un-hashed, unencrypted, [user-provided
               #     data](https://support.google.com/analytics/answer/14077171).
               #
-              #     Note: The following fields are mutually exclusive: `user_provided_data`, `user_id`, `client_id`, `app_instance_id`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+              #     Note: The following parameters are mutually exclusive: `user_provided_data`, `user_id`, `client_id`, `app_instance_id`. At most one of these parameters can be set. If more than one is set, only one will be used, and it is not defined which one.
               #   @param name [::String]
               #     Required. The name of the property to submit user deletion for.
               # @yield [result, operation] Access the result along with the TransportOperation object

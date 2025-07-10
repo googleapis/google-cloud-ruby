@@ -350,12 +350,12 @@ module Google
             #     `publishers/{publisher}/models/{publisher_model}@{version_id}`, or
             #     `publishers/hf-{hugging-face-author}/models/{hugging-face-model-name}@001`.
             #
-            #     Note: The following fields are mutually exclusive: `publisher_model_name`, `hugging_face_model_id`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+            #     Note: The following parameters are mutually exclusive: `publisher_model_name`, `hugging_face_model_id`. At most one of these parameters can be set. If more than one is set, only one will be used, and it is not defined which one.
             #   @param hugging_face_model_id [::String]
             #     The Hugging Face model to deploy.
             #     Format: Hugging Face model ID like `google/gemma-2-2b-it`.
             #
-            #     Note: The following fields are mutually exclusive: `hugging_face_model_id`, `publisher_model_name`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+            #     Note: The following parameters are mutually exclusive: `hugging_face_model_id`, `publisher_model_name`. At most one of these parameters can be set. If more than one is set, only one will be used, and it is not defined which one.
             #   @param destination [::String]
             #     Required. The resource name of the Location to deploy the model in.
             #     Format: `projects/{project}/locations/{location}`

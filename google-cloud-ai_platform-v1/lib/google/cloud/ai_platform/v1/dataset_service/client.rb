@@ -1622,11 +1622,11 @@ module Google
             #     A comma-separated list of data item fields to order by, sorted in
             #     ascending order. Use "desc" after a field name for descending.
             #
-            #     Note: The following fields are mutually exclusive: `order_by_data_item`, `order_by_annotation`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+            #     Note: The following parameters are mutually exclusive: `order_by_data_item`, `order_by_annotation`. At most one of these parameters can be set. If more than one is set, only one will be used, and it is not defined which one.
             #   @param order_by_annotation [::Google::Cloud::AIPlatform::V1::SearchDataItemsRequest::OrderByAnnotation, ::Hash]
             #     Expression that allows ranking results based on annotation's property.
             #
-            #     Note: The following fields are mutually exclusive: `order_by_annotation`, `order_by_data_item`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+            #     Note: The following parameters are mutually exclusive: `order_by_annotation`, `order_by_data_item`. At most one of these parameters can be set. If more than one is set, only one will be used, and it is not defined which one.
             #   @param dataset [::String]
             #     Required. The resource name of the Dataset from which to search DataItems.
             #     Format:

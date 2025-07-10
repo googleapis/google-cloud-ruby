@@ -1432,11 +1432,11 @@ module Google
             #   @param vm_creation_config [::Google::Cloud::CloudDMS::V1::VmCreationConfig, ::Hash]
             #     The VM creation configuration
             #
-            #     Note: The following fields are mutually exclusive: `vm_creation_config`, `vm_selection_config`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+            #     Note: The following parameters are mutually exclusive: `vm_creation_config`, `vm_selection_config`. At most one of these parameters can be set. If more than one is set, only one will be used, and it is not defined which one.
             #   @param vm_selection_config [::Google::Cloud::CloudDMS::V1::VmSelectionConfig, ::Hash]
             #     The VM selection configuration
             #
-            #     Note: The following fields are mutually exclusive: `vm_selection_config`, `vm_creation_config`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+            #     Note: The following parameters are mutually exclusive: `vm_selection_config`, `vm_creation_config`. At most one of these parameters can be set. If more than one is set, only one will be used, and it is not defined which one.
             #   @param vm_port [::Integer]
             #     The port that will be open on the bastion host.
             #
@@ -3469,12 +3469,12 @@ module Google
             #   @param source_connection_profile [::String]
             #     Optional. Fully qualified (Uri) name of the source connection profile.
             #
-            #     Note: The following fields are mutually exclusive: `source_connection_profile`, `destination_connection_profile`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+            #     Note: The following parameters are mutually exclusive: `source_connection_profile`, `destination_connection_profile`. At most one of these parameters can be set. If more than one is set, only one will be used, and it is not defined which one.
             #   @param destination_connection_profile [::String]
             #     Optional. Fully qualified (Uri) name of the destination connection
             #     profile.
             #
-            #     Note: The following fields are mutually exclusive: `destination_connection_profile`, `source_connection_profile`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+            #     Note: The following parameters are mutually exclusive: `destination_connection_profile`, `source_connection_profile`. At most one of these parameters can be set. If more than one is set, only one will be used, and it is not defined which one.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Gapic::Operation]

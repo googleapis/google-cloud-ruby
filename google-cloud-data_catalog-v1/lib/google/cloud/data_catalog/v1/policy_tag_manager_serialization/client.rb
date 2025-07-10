@@ -334,11 +334,11 @@ module Google
             #   @param inline_source [::Google::Cloud::DataCatalog::V1::InlineSource, ::Hash]
             #     Inline source taxonomy to import.
             #
-            #     Note: The following fields are mutually exclusive: `inline_source`, `cross_regional_source`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+            #     Note: The following parameters are mutually exclusive: `inline_source`, `cross_regional_source`. At most one of these parameters can be set. If more than one is set, only one will be used, and it is not defined which one.
             #   @param cross_regional_source [::Google::Cloud::DataCatalog::V1::CrossRegionalSource, ::Hash]
             #     Cross-regional source taxonomy to import.
             #
-            #     Note: The following fields are mutually exclusive: `cross_regional_source`, `inline_source`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+            #     Note: The following parameters are mutually exclusive: `cross_regional_source`, `inline_source`. At most one of these parameters can be set. If more than one is set, only one will be used, and it is not defined which one.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::DataCatalog::V1::ImportTaxonomiesResponse]
