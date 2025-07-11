@@ -40,21 +40,26 @@ module Google
         #
         class AggregateQueryResults
           ##
-          # @private Object of type [Hash{String => Object}].
+          # The result of the aggregation query, returned as a hash of key-value
+          # pairs. The key is the alias of the aggregate function, and the value
+          # is the result of the aggregation.
           #
-          # String can have the following values:
-          #   - an aggregate literal "sum", "avg", or "count"
-          #   - a custom aggregate alias
-          # Object can have the following types:
-          #   - Integer
-          #   - Float
+          # The alias of the aggregate function can be:
+          #    - an aggregate literal "sum", "avg", or "count"
+          #    - a custom aggregate alias
+          #
+          # @return [Hash{String => Integer, Float}]
           attr_reader :aggregate_fields
 
           ##
-          # Read timestamp the query was done on the database at.
+          # The time when the query was executed.
           #
-          # @return Google::Protobuf::Timestamp
+          # @return [Google::Protobuf::Timestamp, nil]
           attr_reader :read_time
+
+          ##
+          # @private
+          attr_writer :aggregate_fields, :read_time
 
           ##
           # Retrieves the aggregate data.
@@ -121,9 +126,9 @@ module Google
                                  end
                                end
 
-            new.tap do |s|
-              s.instance_variable_set :@aggregate_fields, aggregate_fields.to_h
-              s.instance_variable_set :@read_time, aggregate_query_response.batch.read_time
+            new.tap do |aq_result|
+              aq_result.aggregate_fields = aggregate_fields.to_h
+              aq_result.read_time = aggregate_query_response.batch.read_time
             end
           end
         end
