@@ -29,7 +29,7 @@ describe "Datastore Query Explain", :datastore do
   end
 
   before do
-    dataset.save *tasks
+    dataset.save(*tasks)
     # Ensure the entities are created
     try_with_backoff "getting tasks" do
       entities = dataset.find_all tasks.map(&:key)
@@ -38,7 +38,7 @@ describe "Datastore Query Explain", :datastore do
   end
 
   after do
-    dataset.delete *tasks
+    dataset.delete(*tasks)
   end
 
   it "returns explain_metrics when analyze is true" do
