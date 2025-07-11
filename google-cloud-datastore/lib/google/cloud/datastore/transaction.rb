@@ -225,8 +225,11 @@ module Google
         # Retrieve entities specified by a Query. The query is run within the
         # transaction.
         #
-        # @param [Query] query The Query object with the search criteria.
+        # @param [Query, GqlQuery] query The query with the search criteria.
         # @param [String] namespace The namespace the query is to run within.
+        # @param [Hash, Google::Cloud::Datastore::V1::ExplainOptions] explain_options
+        #   The options for query explanation. See {Google::Cloud::Datastore::V1::ExplainOptions}
+        #   for details. Optional.
         #
         # @return [Google::Cloud::Datastore::Dataset::QueryResults]
         #
@@ -251,15 +254,59 @@ module Google
         #     tasks = tx.run query, namespace: "example-ns"
         #   end
         #
-        def run query, namespace: nil
+        # @example Run the query with explain options:
+        #   require "google/cloud/datastore"
+        #
+        #   datastore = Google::Cloud::Datastore.new
+        #
+        #   datastore.transaction do |tx|
+        #     query = datastore.query("Task")
+        #     results = tx.run query, explain_options: { analyze: true }
+        #
+        #     # You must iterate through all pages of results to get the metrics.
+        #     loop do
+        #       break unless results.next?
+        #       results = results.next
+        #     end
+        #
+        #     if results.explain_metrics
+        #       stats = results.explain_metrics.execution_stats
+        #       puts "Read operations: #{stats.read_operations}"
+        #     end
+        #   end
+        #
+        # @example Run the query with explain options using a `Google::Cloud::Datastore::V1::ExplainOptions` object.
+        #   require "google/cloud/datastore"
+        #
+        #   datastore = Google::Cloud::Datastore.new
+        #
+        #   datastore.transaction do |tx|
+        #     query = datastore.query("Task")
+        #     explain_options = Google::Cloud::Datastore::V1::ExplainOptions.new
+        #     results = tx.run query, explain_options: explain_options
+        #
+        #     # You must iterate through all pages of results to get the metrics.
+        #     loop do
+        #       break unless results.next?
+        #       results = results.next
+        #     end
+        #
+        #     if results.explain_metrics
+        #       stats = results.explain_metrics.execution_stats
+        #       puts "Read operations: #{stats.read_operations}"
+        #     end
+        #   end
+        #
+        def run query, namespace: nil, explain_options: nil
           ensure_service!
           unless query.is_a?(Query) || query.is_a?(GqlQuery)
             raise ArgumentError, "Cannot run a #{query.class} object."
           end
           query_res = service.run_query query.to_grpc, namespace,
+                                        explain_options: explain_options,
                                         transaction: @id
           QueryResults.from_grpc query_res, service, namespace,
-                                 query.to_grpc.dup
+                                 query.to_grpc.dup, nil, explain_options
         end
         alias run_query run
 
