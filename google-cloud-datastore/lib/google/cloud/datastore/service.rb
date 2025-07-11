@@ -174,6 +174,17 @@ module Google
           nil
         end
 
+        ##
+        # @private Converts a time-like object to a Google::Protobuf::Timestamp.
+        #
+        #   Any object that responds to `#to_time` is a valid input.
+        #
+        # @param time [Time, DateTime, Google::Protobuf::Timestamp, nil] The
+        #   time object to convert. If `nil`, `nil` will be returned.
+        #
+        # @return [Google::Protobuf::Timestamp, nil] The converted Protobuf timestamp,
+        #   or `nil` if the input was `nil`.
+        #
         def read_time_to_timestamp time
           return nil if time.nil?
 

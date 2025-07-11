@@ -500,7 +500,7 @@ describe Google::Cloud::Datastore::Dataset, :datastore do
     end
 
     before do
-      dataset.transaction { |tx| tx.save *characters }
+      dataset.transaction { |tx| tx.save(*characters) }
     end
 
     it "should limit queries" do
@@ -850,7 +850,7 @@ describe Google::Cloud::Datastore::Dataset, :datastore do
     end
 
     after do
-      dataset.delete *characters
+      dataset.delete(*characters)
     end
   end
 
