@@ -70,6 +70,7 @@ module Google
           # * `:MORE_RESULTS_AFTER_LIMIT`
           # * `:MORE_RESULTS_AFTER_CURSOR`
           # * `:NO_MORE_RESULTS`
+          # @return [Symbol]
           attr_reader :more_results
 
           ##
@@ -83,20 +84,24 @@ module Google
           # is valid for all preceding batches.
           # This value will not be set for eventually consistent queries in Cloud
           # Datastore.
+          # @return [Time, nil]
           attr_reader :batch_read_time
 
           # Query explain metrics. This is only present when the
           # [RunQueryRequest.explain_options][google.datastore.v1.RunQueryRequest.explain_options]
-          # is provided, and it is sent only once with the last QueryResult.
+          # is provided, and it is sent only once with the last QueryResult batch.
+          # @return [Google::Cloud::Datastore::V1::ExplainMetrics, nil]
           attr_reader :explain_metrics
 
           ##
           # Time at which the entities are being read. This would not be
           # older than 270 seconds.
+          # @return [Time, nil]
           attr_reader :read_time
 
           ##
           # The options for query explanation.
+          # @return [Google::Cloud::Datastore::V1::ExplainOptions, nil]
           attr_reader :explain_options
 
           ##
@@ -105,7 +110,9 @@ module Google
 
           ##
           # @private
-          attr_writer :end_cursor, :more_results, :explain_metrics
+          attr_writer :end_cursor, :more_results, :explain_metrics, :read_time, :batch_read_time, :explain_options
+
+          ##
 
           ##
           # Convenience method for determining if the `more_results` value
@@ -410,12 +417,12 @@ module Google
               qr.explain_metrics = query_res.explain_metrics
               qr.end_cursor = Cursor.from_grpc query_res.batch.end_cursor if query_res.batch
               qr.more_results = next_more_results
+              qr.read_time = read_time
+              qr.batch_read_time = query_res.batch.read_time if query_res.batch
+              qr.explain_options = explain_options
               qr.service = service
               qr.namespace = namespace
               qr.query = query_res.query || query
-              qr.instance_variable_set :@read_time, read_time
-              qr.instance_variable_set :@batch_read_time, query_res.batch.read_time if query_res.batch
-              qr.instance_variable_set :@explain_options, explain_options
             end
           end
 
