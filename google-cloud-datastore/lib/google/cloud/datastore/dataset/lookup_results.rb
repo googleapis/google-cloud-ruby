@@ -76,7 +76,7 @@ module Google
 
           ##
           # @private
-          attr_writer service, consistency, transaction, response_read_time, read_time
+          attr_writer :service, :consistency, :transaction, :response_read_time, :read_time
 
           ##
           # @private Create a new LookupResults with an array of values.
