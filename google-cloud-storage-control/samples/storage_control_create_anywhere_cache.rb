@@ -13,16 +13,17 @@
 # limitations under the License.
 
 # [START storage_control_create_anywhere_cache]
+require "google/cloud/storage/control"
+
 def create_anywhere_cache bucket_name:, zone:
   # The ID of your GCS bucket
   # bucket_name = "your-unique-bucket-name"
 
   # Zone where you want to create cache
   # zone = "your-zone-name"
-  require "google/cloud/storage/control/v2"
 
   # Create a client object. The client can be reused for multiple calls.
-  storage_control_client = Google::Cloud::Storage::Control::V2::StorageControl::Client.new
+  storage_control_client = Google::Cloud::Storage::Control.storage_control
   parent = "projects/_/buckets/#{bucket_name}"
   name = "#{parent}/anywhereCaches/#{zone}"
 
@@ -30,21 +31,18 @@ def create_anywhere_cache bucket_name:, zone:
     name: name,
     zone: zone
   )
-
-  # Create a request. Replace the placeholder values with actual data.
+  # Create a request.
   request = Google::Cloud::Storage::Control::V2::CreateAnywhereCacheRequest.new(
     parent: parent,
     anywhere_cache: anywhere_cache
   )
   # The request creates a new cache in the specified zone.
   # The cache is created in the specified bucket.
-  # Call the create_anywhere_cache method.
-  result = storage_control_client.create_anywhere_cache request
-
-  if result.instance_of? Gapic::Operation
+  begin
+    result = storage_control_client.create_anywhere_cache request
     puts "AnywhereCache created - #{result.name}"
-  else
-    puts "operation failed"
+  rescue StandardError => e
+    puts "Error creating AnywhereCache: #{e.message}"
   end
 end
 # [END storage_control_create_anywhere_cache]

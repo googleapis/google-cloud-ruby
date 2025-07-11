@@ -13,13 +13,14 @@
 # limitations under the License.
 
 # [START storage_control_list_anywhere_caches]
+require "google/cloud/storage/control"
+
 def list_anywhere_caches bucket_name:
   # The ID of your GCS bucket
   # bucket_name = "your-unique-bucket-name"
-  require "google/cloud/storage/control/v2"
 
   # Create a client object. The client can be reused for multiple calls.
-  storage_control_client = Google::Cloud::Storage::Control::V2::StorageControl::Client.new
+  storage_control_client = Google::Cloud::Storage::Control.storage_control
   parent = "projects/_/buckets/#{bucket_name}"
 
   request = Google::Cloud::Storage::Control::V2::ListAnywhereCachesRequest.new(
@@ -27,11 +28,13 @@ def list_anywhere_caches bucket_name:
   )
   # The request lists all caches in the specified bucket.
   # The caches are identified by the specified bucket name.
-  # Call the list_anywhere_caches method.
-  result = storage_control_client.list_anywhere_caches request
-
-  result.response.anywhere_caches.each do |item|
-    puts item.name
+  begin
+      result = storage_control_client.list_anywhere_caches request
+      result.response.anywhere_caches.each do |item|
+        puts item.name
+      end
+  rescue StandardError => e
+    puts "Error listing AnywhereCaches: #{e.message}"
   end
 end
 # [END storage_control_list_anywhere_caches]

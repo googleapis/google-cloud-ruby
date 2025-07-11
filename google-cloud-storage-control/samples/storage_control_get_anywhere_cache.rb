@@ -13,16 +13,17 @@
 # limitations under the License.
 
 # [START storage_control_get_anywhere_cache]
+require "google/cloud/storage/control"
+
 def get_anywhere_cache bucket_name:, anywhere_cache_id:
   # The ID of your GCS bucket
   # bucket_name = "your-unique-bucket-name"
 
   # A value that, along with the bucket's name, uniquely identifies the cache
   # anywhere_cache_id = "us-east1-b"
-  require "google/cloud/storage/control/v2"
 
   # Create a client object. The client can be reused for multiple calls.
-  storage_control_client = Google::Cloud::Storage::Control::V2::StorageControl::Client.new
+  storage_control_client = Google::Cloud::Storage::Control.storage_control
   parent = "projects/_/buckets/#{bucket_name}"
   name =  "#{parent}/anywhereCaches/#{anywhere_cache_id}"
 
@@ -33,9 +34,13 @@ def get_anywhere_cache bucket_name:, anywhere_cache_id:
   # The request retrieves the cache in the specified bucket.
   # The cache is identified by the specified ID.
   # The cache is in the specified bucket.
-  # Call the get_anywhere_cache method.
-  result = storage_control_client.get_anywhere_cache request
-  puts "AnywhereCache #{result.name}"
+
+  begin
+    result = storage_control_client.get_anywhere_cache request
+    puts "AnywhereCache fetched - #{result.name}"
+  rescue StandardError => e
+    puts "Error fetching AnywhereCache: #{e.message}"
+  end
 end
 # [END storage_control_get_anywhere_cache]
 get_anywhere_cache bucket_name: ARGV.shift, anywhere_cache_id: ARGV.shift if $PROGRAM_NAME == __FILE__
