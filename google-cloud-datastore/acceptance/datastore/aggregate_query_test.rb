@@ -79,11 +79,11 @@ describe "Aggregate Queries", :datastore do
   end
 
   before do
-    dataset.transaction { |tx| tx.save *characters }
+    dataset.transaction { |tx| tx.save(*characters) }
   end
 
   after do
-    dataset.delete *characters
+    dataset.delete(*characters)
   end
 
   describe "Common tests for aggregates" do
@@ -99,7 +99,7 @@ describe "Aggregate Queries", :datastore do
   describe "COUNT via AggregateQuery" do
     
     it "returns 0 for no records" do
-      dataset.delete *characters
+      dataset.delete(*characters)
       query = Google::Cloud::Datastore.new
                 .query("Character")
                 .ancestor(book)
@@ -301,7 +301,7 @@ describe "Aggregate Queries", :datastore do
 
   describe "SUM via AggregateQuery" do
     it "returns 0 for no records" do
-      dataset.delete *characters # delete dataset before querying
+      dataset.delete(*characters) # delete dataset before querying
       query = Google::Cloud::Datastore.new
                 .query("Character")
                 .ancestor(book)
@@ -325,11 +325,11 @@ describe "Aggregate Queries", :datastore do
 
     it "returns double sum for records with double values" do
       # delete integer dataset and save records with doubles
-      dataset.delete *characters
+      dataset.delete(*characters)
       characters.each do |ch|
         ch["appearances"] = ch["appearances"].to_f
       end
-      dataset.transaction { |tx| tx.save *characters }
+      dataset.transaction { |tx| tx.save(*characters) }
 
       query = Google::Cloud::Datastore.new
                 .query("Character")
@@ -519,7 +519,7 @@ describe "Aggregate Queries", :datastore do
 
   describe "AVG via AggregateQuery" do
     it "returns 0 for no records" do
-      dataset.delete *characters # delete dataset before querying
+      dataset.delete(*characters) # delete dataset before querying
       query = Google::Cloud::Datastore.new
                 .query("Character")
                 .ancestor(book)

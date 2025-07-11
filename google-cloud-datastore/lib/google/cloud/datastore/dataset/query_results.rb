@@ -88,6 +88,7 @@ module Google
           ##
           # Time at which the entities are being read. This would not be
           # older than 270 seconds.
+          # @return [Time, DateTime, Google::Protobuf::Timestamp, nil]
           attr_reader :read_time
 
           ##

@@ -55,20 +55,28 @@ module Google
         class LookupResults < DelegateClass(::Array)
           ##
           # The time at which these entities were read or found missing.
+          # @return [Google::Protobuf::Timestamp, nil]
           attr_reader :response_read_time
 
           ##
           # Time at which the entities are being read. This would not be
           # older than 270 seconds.
+          # @return [Time, DateTime, Google::Protobuf::Timestamp, nil]
           attr_reader :read_time
 
           ##
           # Keys that were not looked up due to resource constraints.
+          # @return [Array<Google::Cloud::Datastore::Key>]
           attr_accessor :deferred
 
           ##
           # Entities not found, with only the key populated.
+          # @return [Array<Google::Cloud::Datastore::Entity>]
           attr_accessor :missing
+
+          ##
+          # @private
+          attr_writer service, consistency, transaction, response_read_time, read_time
 
           ##
           # @private Create a new LookupResults with an array of values.
@@ -196,18 +204,19 @@ module Google
           ##
           # @private New Dataset::LookupResults from a
           # Google::Dataset::V1::LookupResponse object.
-          def self.from_grpc lookup_res, service, consistency = nil, transaction = nil, read_time = nil
-            entities = to_gcloud_entities lookup_res.found
-            deferred = to_gcloud_keys lookup_res.deferred
-            missing  = to_gcloud_entities lookup_res.missing
-            new(entities).tap do |lr|
-              lr.instance_variable_set :@service,     service
-              lr.instance_variable_set :@consistency, consistency
-              lr.instance_variable_set :@transaction, transaction
-              lr.instance_variable_set :@read_time, read_time
-              lr.instance_variable_set :@response_read_time, lookup_res.read_time
-              lr.instance_variable_set :@deferred,    deferred
-              lr.instance_variable_set :@missing,     missing
+          def self.from_grpc lookup_resp, service, consistency = nil, transaction = nil, read_time = nil
+            entities = to_gcloud_entities lookup_resp.found
+            deferred = to_gcloud_keys lookup_resp.deferred
+            missing  = to_gcloud_entities lookup_resp.missing
+
+            new(entities).tap do |lookup_results|
+              lookup_results.service = service
+              lookup_results.consistency = consistency
+              lookup_results.transaction = transaction
+              lookup_results.read_time = read_time
+              lookup_results.response_read_time = lookup_resp.read_time
+              lookup_results.deferred = deferred
+              lookup_results.missing = missing
             end
           end
 
