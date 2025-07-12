@@ -1,5 +1,11 @@
 # Changelog
 
+### 1.8.0 (2025-07-12)
+
+#### Features
+
+* Add support for generator settings on fulfillment ([#30596](https://github.com/googleapis/google-cloud-ruby/issues/30596)) 
+
 ### 1.7.0 (2025-05-12)
 
 #### Features
