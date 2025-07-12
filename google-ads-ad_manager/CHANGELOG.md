@@ -1,5 +1,19 @@
 # Changelog
 
+### 1.1.0 (2025-07-12)
+
+#### Features
+
+* Support for Contact company display name 
+* Support for custom targeting key 
+* Support for the AdBreakService 
+* Support for the BandwidthGroupService 
+* Support for the DeviceCategoryService 
+* Support for the GeoTargetService 
+* Support for the OperatingSystemService and OperatingSystemVersionService 
+* Support for the PrivateAuctionService and PrivateAuctionDealService 
+* Support for the ProgrammaticBuyerService 
+
 ### 1.0.1 (2025-04-29)
 
 #### Bug Fixes
