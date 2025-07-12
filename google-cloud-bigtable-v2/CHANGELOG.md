@@ -1,5 +1,11 @@
 # Release History
 
+### 1.8.0 (2025-07-12)
+
+#### Features
+
+* Support idempotency parameter to the mutate_row RPC ([#30581](https://github.com/googleapis/google-cloud-ruby/issues/30581)) 
+
 ### 1.7.0 (2025-05-12)
 
 #### Features
