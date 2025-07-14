@@ -89,7 +89,7 @@ describe Google::Cloud::PubSub::AsyncPublisher, :mock_pubsub do
       Google::Cloud::PubSub::V1::PubsubMessage.new(data: msg_encoded1)
     ]
 
-    publisher.service.mocked_publisher = AsyncPublisherStub.new
+    publisher.service.mocked_topic_admin = AsyncPublisherStub.new
 
     publisher.publish message1
 
@@ -102,7 +102,7 @@ describe Google::Cloud::PubSub::AsyncPublisher, :mock_pubsub do
     _(publisher).wont_be :started?
     _(publisher).must_be :stopped?
 
-    published_messages_hash = publisher.service.mocked_publisher.message_hash
+    published_messages_hash = publisher.service.mocked_topic_admin.message_hash
     expected_messages_hash = { "" => messages }
     assert_equal expected_messages_hash, published_messages_hash
   end
@@ -113,7 +113,7 @@ describe Google::Cloud::PubSub::AsyncPublisher, :mock_pubsub do
       Google::Cloud::PubSub::V1::PubsubMessage.new(data: msg_encoded1, attributes: {"format" => "text"})
     ]
 
-    publisher.service.mocked_publisher = AsyncPublisherStub.new
+    publisher.service.mocked_topic_admin = AsyncPublisherStub.new
 
     publisher.publish message1, format: :text
 
@@ -126,7 +126,7 @@ describe Google::Cloud::PubSub::AsyncPublisher, :mock_pubsub do
     _(publisher).wont_be :started?
     _(publisher).must_be :stopped?
 
-    published_messages_hash = publisher.service.mocked_publisher.message_hash
+    published_messages_hash = publisher.service.mocked_topic_admin.message_hash
     expected_messages_hash = { "" => messages }
     assert_equal expected_messages_hash, published_messages_hash
   end
@@ -138,7 +138,7 @@ describe Google::Cloud::PubSub::AsyncPublisher, :mock_pubsub do
     ]
     callback_called = false
 
-    publisher.service.mocked_publisher = AsyncPublisherStub.new
+    publisher.service.mocked_topic_admin = AsyncPublisherStub.new
 
     publisher.publish message1 do |result|
       assert_kind_of Google::Cloud::PubSub::PublishResult, result
@@ -154,7 +154,7 @@ describe Google::Cloud::PubSub::AsyncPublisher, :mock_pubsub do
     _(publisher).wont_be :started?
     _(publisher).must_be :stopped?
 
-    published_messages_hash = publisher.service.mocked_publisher.message_hash
+    published_messages_hash = publisher.service.mocked_topic_admin.message_hash
     expected_messages_hash = { "" => messages }
     assert_equal expected_messages_hash, published_messages_hash
     _(callback_called).must_equal true
@@ -168,7 +168,7 @@ describe Google::Cloud::PubSub::AsyncPublisher, :mock_pubsub do
       Google::Cloud::PubSub::V1::PubsubMessage.new(data: msg_encoded3, attributes: {"format" => "none"})
     ]
 
-    publisher.service.mocked_publisher = AsyncPublisherStub.new
+    publisher.service.mocked_topic_admin = AsyncPublisherStub.new
 
     publisher.publish message1
     publisher.publish message2
@@ -183,7 +183,7 @@ describe Google::Cloud::PubSub::AsyncPublisher, :mock_pubsub do
     _(publisher).wont_be :started?
     _(publisher).must_be :stopped?
 
-    published_messages_hash = publisher.service.mocked_publisher.message_hash
+    published_messages_hash = publisher.service.mocked_topic_admin.message_hash
     expected_messages_hash = { "" => messages }
     assert_equal expected_messages_hash, published_messages_hash
   end
@@ -197,7 +197,7 @@ describe Google::Cloud::PubSub::AsyncPublisher, :mock_pubsub do
     ]
     callback_count = 0
 
-    publisher.service.mocked_publisher = AsyncPublisherStub.new
+    publisher.service.mocked_topic_admin = AsyncPublisherStub.new
 
     publisher.publish message1 do |result|
       assert_kind_of Google::Cloud::PubSub::PublishResult, result
@@ -221,7 +221,7 @@ describe Google::Cloud::PubSub::AsyncPublisher, :mock_pubsub do
     _(publisher).wont_be :started?
     _(publisher).must_be :stopped?
 
-    published_messages_hash = publisher.service.mocked_publisher.message_hash
+    published_messages_hash = publisher.service.mocked_topic_admin.message_hash
     expected_messages_hash = { "" => messages }
     assert_equal expected_messages_hash, published_messages_hash
     _(callback_count).must_equal 3
@@ -235,7 +235,7 @@ describe Google::Cloud::PubSub::AsyncPublisher, :mock_pubsub do
     ]
     callback_count = 0
 
-    publisher.service.mocked_publisher = AsyncPublisherStub.new
+    publisher.service.mocked_topic_admin = AsyncPublisherStub.new
 
     30.times do |count|
       publisher.publish message1 do |msg|
@@ -258,7 +258,7 @@ describe Google::Cloud::PubSub::AsyncPublisher, :mock_pubsub do
       end
     end
 
-    assert_equal expected_messages, publisher.service.mocked_publisher.messages
+    assert_equal expected_messages, publisher.service.mocked_topic_admin.messages
     _(callback_count).must_equal 30
   end
 
@@ -270,7 +270,7 @@ describe Google::Cloud::PubSub::AsyncPublisher, :mock_pubsub do
     ]
     callback_count = 0
 
-    publisher.service.mocked_publisher = AsyncPublisherStub.new
+    publisher.service.mocked_topic_admin = AsyncPublisherStub.new
 
     30.times do
       publisher.publish message1 do |msg|
@@ -293,8 +293,8 @@ describe Google::Cloud::PubSub::AsyncPublisher, :mock_pubsub do
       end
     end
 
-    assert_equal expected_messages.map(&:count), publisher.service.mocked_publisher.messages.map(&:count)
-    assert_equal expected_messages, publisher.service.mocked_publisher.messages
+    assert_equal expected_messages.map(&:count), publisher.service.mocked_topic_admin.messages.map(&:count)
+    assert_equal expected_messages, publisher.service.mocked_topic_admin.messages
     _(callback_count).must_equal 30
   end
 
@@ -305,7 +305,7 @@ describe Google::Cloud::PubSub::AsyncPublisher, :mock_pubsub do
     big_msg_data = SecureRandom.random_bytes 120
     callback_count = 0
 
-    publisher.service.mocked_publisher = AsyncPublisherStub.new
+    publisher.service.mocked_topic_admin = AsyncPublisherStub.new
 
     publisher.publish message1 do |msg|
       callback_count += 1
@@ -327,7 +327,7 @@ describe Google::Cloud::PubSub::AsyncPublisher, :mock_pubsub do
       [Google::Cloud::PubSub::V1::PubsubMessage.new(data: msg_encoded1, message_id: "msg0")],
       [Google::Cloud::PubSub::V1::PubsubMessage.new(data: big_msg_data, message_id: "msg1")]
     ]
-    assert_equal publisher.service.mocked_publisher.messages, expected_messages
+    assert_equal publisher.service.mocked_topic_admin.messages, expected_messages
     _(callback_count).must_equal 2
   end
 
@@ -342,7 +342,7 @@ describe Google::Cloud::PubSub::AsyncPublisher, :mock_pubsub do
                                                           interval: 10,
                                                           flow_control: flow_control
 
-    publisher.service.mocked_publisher = AsyncPublisherStub.new
+    publisher.service.mocked_topic_admin = AsyncPublisherStub.new
 
     _(publisher.flow_controller.outstanding_messages).must_equal 0
 
@@ -366,7 +366,7 @@ describe Google::Cloud::PubSub::AsyncPublisher, :mock_pubsub do
 
     _(publisher.flow_controller.outstanding_messages).must_equal 0
 
-    published_messages_hash = publisher.service.mocked_publisher.message_hash
+    published_messages_hash = publisher.service.mocked_topic_admin.message_hash
     assert_equal ["a","b"], published_messages_hash[""].map(&:data)
   end
 
@@ -381,7 +381,7 @@ describe Google::Cloud::PubSub::AsyncPublisher, :mock_pubsub do
                                                           interval: 10,
                                                           flow_control: flow_control
 
-    publisher.service.mocked_publisher = AsyncPublisherStub.new
+    publisher.service.mocked_topic_admin = AsyncPublisherStub.new
 
     _(publisher.flow_controller.outstanding_bytes).must_equal 0
 
@@ -404,63 +404,63 @@ describe Google::Cloud::PubSub::AsyncPublisher, :mock_pubsub do
 
     _(publisher.flow_controller.outstanding_bytes).must_equal 0
 
-    published_messages_hash = publisher.service.mocked_publisher.message_hash
+    published_messages_hash = publisher.service.mocked_topic_admin.message_hash
     assert_equal ["a","b"], published_messages_hash[""].map(&:data)
     _(callback_called).must_equal true
   end
 
   it "passes compress true to service when compress enabled and size above default threshold" do
     publisher = Google::Cloud::PubSub::AsyncPublisher.new topic_name, pubsub.service, compress: true
-    mocked_publisher = Minitest::Mock.new
+    mocked_topic_admin = Minitest::Mock.new
     expected_request = {topic: "projects/test/topics/#{topic_name}", messages: ["data"]}
     expected_option = ::Gapic::CallOptions.new metadata: { "grpc-internal-encoding-request": "gzip" }
     actual_request = nil
     actual_option = nil
-    mocked_publisher.expect :publish, nil do |request, option|
+    mocked_topic_admin.expect :publish, nil do |request, option|
       actual_request = request
       actual_option = option
     end
-    publisher.service.mocked_publisher = mocked_publisher
+    publisher.service.mocked_topic_admin = mocked_topic_admin
     batch = OpenStruct.new( "rebalance!" => [OpenStruct.new(:msg => "data")], 
                             "total_message_bytes" => 241,
                             "ordering_key" => [],
                             "items" => [OpenStruct.new(:msg => "data")])
     publisher.send(:publish_batch_sync, topic_name, batch)
-    mocked_publisher.verify
+    mocked_topic_admin.verify
     assert_equal actual_option, expected_option
     assert_equal actual_request, expected_request
   end
 
   it "passes compress true to service when compress enabled and size equal default threshold" do
     publisher = Google::Cloud::PubSub::AsyncPublisher.new topic_name, pubsub.service, compress: true
-    mocked_publisher = Minitest::Mock.new
+    mocked_topic_admin = Minitest::Mock.new
     expected_request = {topic: "projects/test/topics/#{topic_name}", messages: ["data"]}
     expected_option = ::Gapic::CallOptions.new metadata: { "grpc-internal-encoding-request": "gzip" }
     actual_request = nil
     actual_option = nil
-    mocked_publisher.expect :publish, nil do |request, option|
+    mocked_topic_admin.expect :publish, nil do |request, option|
       actual_request = request
       actual_option = option
     end
-    publisher.service.mocked_publisher = mocked_publisher
+    publisher.service.mocked_topic_admin = mocked_topic_admin
     batch = OpenStruct.new( "rebalance!" => [OpenStruct.new(:msg => "data")], 
                             "total_message_bytes" => 240,
                             "ordering_key" => [],
                             "items" => [OpenStruct.new(:msg => "data")])
     publisher.send(:publish_batch_sync, topic_name, batch)
-    mocked_publisher.verify
+    mocked_topic_admin.verify
     assert_equal actual_option, expected_option
     assert_equal actual_request, expected_request
   end
 
   it "passes compress false to service when compress enabled and size below default threshold" do
     publisher = Google::Cloud::PubSub::AsyncPublisher.new topic_name, pubsub.service, compress: true
-    mocked_publisher = Minitest::Mock.new
-    publisher.service.mocked_publisher = mocked_publisher
+    mocked_topic_admin = Minitest::Mock.new
+    publisher.service.mocked_topic_admin = mocked_topic_admin
     expected_request = {topic: "projects/test/topics/#{topic_name}", messages: ["data"]}
     actual_request = nil
     actual_option = "test"
-    mocked_publisher.expect :publish, nil do |request, option|
+    mocked_topic_admin.expect :publish, nil do |request, option|
       actual_request = request
       actual_option = option
     end
@@ -469,20 +469,20 @@ describe Google::Cloud::PubSub::AsyncPublisher, :mock_pubsub do
                             "ordering_key" => [],
                             "items" => [OpenStruct.new(:msg => "data")])
     publisher.send(:publish_batch_sync, topic_name, batch)
-    mocked_publisher.verify
+    mocked_topic_admin.verify
     assert_nil actual_option
     assert_equal actual_request, expected_request
   end
 
   it "passes compress true to service when compress enabled and size above given threshold" do
     publisher = Google::Cloud::PubSub::AsyncPublisher.new topic_name, pubsub.service, compress: true, compression_bytes_threshold: 150
-    mocked_publisher = Minitest::Mock.new
-    publisher.service.mocked_publisher = mocked_publisher
+    mocked_topic_admin = Minitest::Mock.new
+    publisher.service.mocked_topic_admin = mocked_topic_admin
     expected_request = {topic: "projects/test/topics/#{topic_name}", messages: ["data"]}
     expected_option = ::Gapic::CallOptions.new metadata: { "grpc-internal-encoding-request": "gzip" }
     actual_request = nil
     actual_option = nil
-    mocked_publisher.expect :publish, nil do |request, option|
+    mocked_topic_admin.expect :publish, nil do |request, option|
       actual_request = request
       actual_option = option
     end
@@ -491,20 +491,20 @@ describe Google::Cloud::PubSub::AsyncPublisher, :mock_pubsub do
                             "ordering_key" => [],
                             "items" => [OpenStruct.new(:msg => "data")])
     publisher.send(:publish_batch_sync, topic_name, batch)
-    mocked_publisher.verify
+    mocked_topic_admin.verify
     assert_equal actual_option, expected_option
     assert_equal actual_request, expected_request
   end
 
   it "passes compress true to service when compress enabled and size equal given threshold" do
     publisher = Google::Cloud::PubSub::AsyncPublisher.new topic_name, pubsub.service, compress: true, compression_bytes_threshold: 150
-    mocked_publisher = Minitest::Mock.new
-    publisher.service.mocked_publisher = mocked_publisher
+    mocked_topic_admin = Minitest::Mock.new
+    publisher.service.mocked_topic_admin = mocked_topic_admin
     expected_request = {topic: "projects/test/topics/#{topic_name}", messages: ["data"]}
     expected_option = ::Gapic::CallOptions.new metadata: { "grpc-internal-encoding-request": "gzip" }
     actual_request = nil
     actual_option = nil
-    mocked_publisher.expect :publish, nil do |request, option|
+    mocked_topic_admin.expect :publish, nil do |request, option|
       actual_request = request
       actual_option = option
     end
@@ -513,19 +513,19 @@ describe Google::Cloud::PubSub::AsyncPublisher, :mock_pubsub do
                             "ordering_key" => [],
                             "items" => [OpenStruct.new(:msg => "data")])
     publisher.send(:publish_batch_sync, topic_name, batch)
-    mocked_publisher.verify
+    mocked_topic_admin.verify
     assert_equal actual_option, expected_option
     assert_equal actual_request, expected_request
   end
 
   it "passes compress false to service when compress enabled and size below given threshold" do
     publisher = Google::Cloud::PubSub::AsyncPublisher.new topic_name, pubsub.service, compress: true, compression_bytes_threshold: 150
-    mocked_publisher = Minitest::Mock.new
-    publisher.service.mocked_publisher = mocked_publisher
+    mocked_topic_admin = Minitest::Mock.new
+    publisher.service.mocked_topic_admin = mocked_topic_admin
     expected_request = {topic: "projects/test/topics/#{topic_name}", messages: ["data"]}
     actual_request = nil
     actual_option = "test"
-    mocked_publisher.expect :publish, nil do |request, option|
+    mocked_topic_admin.expect :publish, nil do |request, option|
       actual_request = request
       actual_option = option
     end
@@ -534,28 +534,28 @@ describe Google::Cloud::PubSub::AsyncPublisher, :mock_pubsub do
                             "ordering_key" => [],
                             "items" => [OpenStruct.new(:msg => "data")])
     publisher.send(:publish_batch_sync, topic_name, batch)
-    mocked_publisher.verify
+    mocked_topic_admin.verify
     assert_nil actual_option
     assert_equal actual_request, expected_request
   end
 
   it "passes compress false to service when compress disabled" do
     publisher = Google::Cloud::PubSub::AsyncPublisher.new topic_name, pubsub.service
-    mocked_publisher = Minitest::Mock.new
+    mocked_topic_admin = Minitest::Mock.new
     expected_request = {topic: "projects/test/topics/#{topic_name}", messages: ["data"]}
     actual_request = nil
     actual_option = "test"
-    mocked_publisher.expect :publish, nil do |request, option|
+    mocked_topic_admin.expect :publish, nil do |request, option|
       actual_request = request
       actual_option = option
     end
-    publisher.service.mocked_publisher = mocked_publisher
+    publisher.service.mocked_topic_admin = mocked_topic_admin
     batch = OpenStruct.new( "rebalance!" => [OpenStruct.new(:msg => "data")], 
                             "total_message_bytes" => 300,
                             "ordering_key" => [],
                             "items" => [OpenStruct.new(:msg => "data")])
     publisher.send(:publish_batch_sync, topic_name, batch)
-    mocked_publisher.verify
+    mocked_topic_admin.verify
     assert_nil actual_option
     assert_equal actual_request, expected_request
   end

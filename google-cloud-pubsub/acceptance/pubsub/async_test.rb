@@ -17,12 +17,14 @@ require "concurrent/atomics"
 
 describe Google::Cloud::PubSub, :async, :pubsub do
   def retrieve_topic topic_name, async: nil
-    pubsub.get_topic(topic_name, async: async) || pubsub.create_topic(topic_name, async: async)
+    topic_path = pubsub.topic_path topic_name
+    $topic_admin.get_topic(topic: topic_path) rescue $topic_admin.create_topic(name: topic_path)
   end
 
-  def retrieve_subscription topic, subscription_name
-    topic.get_subscription(subscription_name) ||
-      topic.subscribe(subscription_name)
+  def retrieve_subscription topic, subscription_name, enable_message_ordering: false
+    subscription_path = pubsub.subscription_path subscription_name
+    $subscription_admin.get_subscription(subscription: subscription_path) \
+      rescue $subscription_admin.create_subscription(name: subscription_path, topic: topic.name, enable_message_ordering: enable_message_ordering)
   end
 
   let(:nonce) { rand 100 }
@@ -40,11 +42,13 @@ describe Google::Cloud::PubSub, :async, :pubsub do
   let(:topic_flow_control) { retrieve_topic "#{$topic_prefix}-async#{nonce}", async: async_flow_control }
 
   it "publishes and pulls asyncronously" do
-    events = sub.pull
+    subscriber = pubsub.subscriber sub.name
+    events = subscriber.pull
     _(events).must_be :empty?
     # Publish a new message
     publish_result = nil
-    topic.publish_async "hello" do |result|
+    publisher = pubsub.publisher topic.name
+    publisher.publish_async "hello" do |result|
       publish_result = result
       assert_equal "hello", result.msg.data
     end
@@ -60,12 +64,12 @@ describe Google::Cloud::PubSub, :async, :pubsub do
     _(publish_result).must_be :succeeded?
 
     received_message = nil
-    subscriber = sub.listen do |msg|
+    listener = subscriber.listen do |msg|
       received_message = msg
       # Acknowledge the message
       msg.ack!
     end
-    subscriber.start
+    listener.start
 
     subscription_retries = 0
     while received_message.nil?
@@ -77,22 +81,25 @@ describe Google::Cloud::PubSub, :async, :pubsub do
     _(received_message).wont_be :nil?
     _(received_message.data).must_equal publish_result.data
 
-    subscriber.stop
-    subscriber.wait!
+    listener.stop
+    listener.wait!
 
     # Remove the subscription
-    sub.delete
+    $subscription_admin.delete_subscription(subscription: pubsub.subscription_path(sub.name))
   end
 
   it "publishes and pulls ordered messages" do
-    topic = pubsub.create_topic "#{$topic_prefix}-omt-#{SecureRandom.hex(2)}"
-    topic.enable_message_ordering!
-    assert topic.message_ordering?
+    topic = retrieve_topic "#{$topic_prefix}-omt-#{SecureRandom.hex(2)}"
+ 
+    sub = retrieve_subscription topic, "#{$topic_prefix}-oms2-#{SecureRandom.hex(2)}", enable_message_ordering: true
 
-    sub = topic.subscribe "#{$topic_prefix}-oms-#{SecureRandom.hex(2)}", message_ordering: true
-    assert sub.message_ordering?
+    assert sub.enable_message_ordering
 
-    events = sub.pull
+    publisher = pubsub.publisher topic.name
+    publisher.enable_message_ordering!
+    subscriber = pubsub.subscriber sub.name
+
+    events = subscriber.pull
     _(events).must_be :empty?
 
     expected_message_hash = {
@@ -116,7 +123,7 @@ describe Google::Cloud::PubSub, :async, :pubsub do
       publish_result = nil
       expected_message_hash[key].each do |data|
         # Publish a new message with ordering key
-        topic.publish_async data, ordering_key: key do |result|
+        publisher.publish_async data, ordering_key: key do |result|
           publish_result = result
           assert_equal data, result.msg.data
         end
@@ -135,15 +142,15 @@ describe Google::Cloud::PubSub, :async, :pubsub do
     end
 
     received_message_hash = Hash.new { |hash, key| hash[key] = [] }
-    subscriber = sub.listen do |msg|
+    listener = subscriber.listen do |msg|
       received_message_hash[msg.ordering_key].push msg.data
       # Acknowledge the message
       msg.ack!
     end
-    subscriber.on_error do |error|
+    listener.on_error do |error|
       fail error.inspect
     end
-    subscriber.start
+    listener.start
     
     counter = 0
     deadline = 300 # 5 min
@@ -152,30 +159,33 @@ describe Google::Cloud::PubSub, :async, :pubsub do
       counter += 1
     end
 
-    subscriber.stop
-    subscriber.wait!
+    listener.stop
+    listener.wait!
     # Remove the subscription
-    sub.delete
+    $subscription_admin.delete_subscription(subscription: pubsub.subscription_path(sub.name))
 
     _(received_message_hash).must_equal expected_message_hash
   end
 
   it "will acknowledge asyncronously after subscriber stop wait!" do
-    msgs = sub.pull
+    subscriber = pubsub.subscriber sub.name 
+    publisher = pubsub.publisher topic.name
+
+    msgs = subscriber.pull
     _(msgs).must_be :empty?
 
     # Publish a new message
-    topic.publish "ack me please"
+    publisher.publish "ack me please"
 
     received_message = nil
     acked = false
-    subscriber = sub.listen do |msg|
+    listener = subscriber.listen do |msg|
       received_message = msg
       sleep 3 # Provide enough delay to execute subscriber.stop before msg.ack!
       msg.ack!
       acked = true
     end
-    subscriber.start
+    listener.start
 
     subscription_retries = 0
     while received_message.nil?
@@ -186,35 +196,37 @@ describe Google::Cloud::PubSub, :async, :pubsub do
     _(received_message).wont_be :nil?
     _(received_message.data).must_equal "ack me please"
 
-    subscriber.stop # Should return before msg.ack! is called in the callback above.
+    listener.stop # Should return before msg.ack! is called in the callback above.
 
-    subscriber.wait! # Should block until TimedUnaryBuffer finally flushes the msg.ack! in the callback above.
+    listener.wait! # Should block until TimedUnaryBuffer finally flushes the msg.ack! in the callback above.
 
     _(acked).must_equal true
 
-    msgs = sub.pull immediate: false
+    msgs = subscriber.pull immediate: false
     _(msgs).must_be :empty?
 
     # Remove the subscription
-    sub.delete
+    $subscription_admin.delete_subscription(subscription: pubsub.subscription_path(sub.name))
   end
 
   it "will acknowledge asyncronously after subscriber stop only" do
-    msgs = sub.pull
+    publisher = pubsub.publisher topic.name
+    subscriber = pubsub.subscriber sub.name
+    msgs = subscriber.pull
     _(msgs).must_be :empty?
 
     # Publish a new message
-    topic.publish "ack me please"
+    publisher.publish "ack me please"
 
     received_message = nil
     acked = false
-    subscriber = sub.listen do |msg|
+    listener = subscriber.listen do |msg|
       received_message = msg
       sleep 3 # Provide enough delay to execute subscriber.stop before msg.ack!
       msg.ack!
       acked = true
     end
-    subscriber.start
+    listener.start
 
     subscription_retries = 0
     while received_message.nil?
@@ -225,35 +237,38 @@ describe Google::Cloud::PubSub, :async, :pubsub do
     _(received_message).wont_be :nil?
     _(received_message.data).must_equal "ack me please"
 
-    subscriber.stop # Should return before msg.ack! is called in the callback above.
+    listener.stop # Should return before msg.ack! is called in the callback above.
 
     sleep 4 # Do not call subscriber.wait!
 
     _(acked).must_equal true
 
-    msgs = sub.pull immediate: false
+    msgs = subscriber.pull immediate: false
     _(msgs).must_be :empty?
 
     # Remove the subscription
-    sub.delete
+    $subscription_admin.delete_subscription(subscription: pubsub.subscription_path(sub.name))
   end
 
   it "will acknowledge asyncronously after subscriber wait! followed by stop in a different thread" do
-    msgs = sub.pull
+    publisher = pubsub.publisher topic.name
+    subscriber = pubsub.subscriber sub.name
+
+    msgs = subscriber.pull
     _(msgs).must_be :empty?
 
     # Publish a new message
-    topic.publish "ack me please"
+    publisher.publish "ack me please"
 
     received_message = nil
     acked = false
-    subscriber = sub.listen do |msg|
+    listener = subscriber.listen do |msg|
       received_message = msg
       sleep 3 # Provide enough delay to execute subscriber.stop before msg.ack!
       msg.ack!
       acked = true
     end
-    subscriber.start
+    listener.start
 
     subscription_retries = 0
     while received_message.nil?
@@ -266,50 +281,51 @@ describe Google::Cloud::PubSub, :async, :pubsub do
 
     Thread.new do
       sleep 4
-      subscriber.stop # Follows wait!, below.
+      listener.stop # Follows wait!, below.
     end
 
-    subscriber.wait! # Should block until TimedUnaryBuffer finally flushes the msg.ack! in the callback above.
+    listener.wait! # Should block until TimedUnaryBuffer finally flushes the msg.ack! in the callback above.
 
     _(acked).must_equal true
 
-    msgs = sub.pull immediate: false
+    msgs = subscriber.pull immediate: false
     _(msgs).must_be :empty?
 
     # Remove the subscription
-    sub.delete
+    $subscription_admin.delete_subscription(subscription: pubsub.subscription_path(sub.name))
   end
 
   it "publishes asyncronously with publisher flow control" do
     publish_1_done = Concurrent::Event.new
     publish_2_done = Concurrent::Event.new
     publish_3_done = Concurrent::Event.new
+    publisher = pubsub.publisher topic_flow_control.name, async: async_flow_control 
 
-    topic_flow_control.publish_async("a") { publish_1_done.set }
+    publisher.publish_async("a") { publish_1_done.set }
 
-    flow_controller = topic_flow_control.async_publisher.flow_controller
+    flow_controller = publisher.async_publisher.flow_controller
     _(flow_controller.outstanding_messages).must_equal 1
 
-    topic_flow_control.publish_async("b") { publish_2_done.set }
+    publisher.publish_async("b") { publish_2_done.set }
     _(flow_controller.outstanding_messages).must_equal 2 # Limit
 
     expect do
-      topic_flow_control.publish_async "c"
+      publisher.publish_async "c"
     end.must_raise Google::Cloud::PubSub::FlowControlLimitError
 
     # Force the queued messages to be published and wait for events.
-    topic_flow_control.async_publisher.flush
+    publisher.async_publisher.flush
     assert publish_1_done.wait(1), "Publishing message 1 errored."
     assert publish_2_done.wait(1), "Publishing message 2 errored."
 
     _(flow_controller.outstanding_messages).must_equal 0
 
-    topic_flow_control.publish_async("c") { publish_3_done.set }
+    publisher.publish_async("c") { publish_3_done.set }
 
     _(flow_controller.outstanding_messages).must_equal 1
 
     # Force the queued message to be published and wait for event.
-    topic_flow_control.async_publisher.stop!
+    publisher.async_publisher.stop!
     assert publish_3_done.wait(1), "Publishing message 3 errored."
 
     _(flow_controller.outstanding_messages).must_equal 0
