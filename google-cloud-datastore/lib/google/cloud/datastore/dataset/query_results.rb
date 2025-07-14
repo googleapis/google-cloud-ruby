@@ -84,7 +84,7 @@ module Google
           # is valid for all preceding batches.
           # This value will not be set for eventually consistent queries in Cloud
           # Datastore.
-          # @return [Time, nil]
+          # @return [Google::Protobuf::Timestamp]
           attr_reader :batch_read_time
 
           # Query explain metrics. This is only present when the
@@ -96,7 +96,10 @@ module Google
           ##
           # Time at which the entities are being read. This would not be
           # older than 270 seconds.
-          # @return [Time, DateTime, Google::Protobuf::Timestamp, nil]
+          #
+          # This is a copy of the input parameter supplied to the {Dataset#run} function.
+          #
+          # @return [Time, nil]
           attr_reader :read_time
 
           ##
