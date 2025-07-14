@@ -15,7 +15,7 @@
 require "google/cloud/pubsub"
 
 def dead_letter_delivery_attempt subscription_id:
-  # [START pubsub_dead_letter_delivery_attempt]
+  # [START pubsub_old_version_dead_letter_delivery_attempt]
   # subscription_id = "your-subscription-id"
 
   pubsub = Google::Cloud::Pubsub.new
@@ -26,5 +26,5 @@ def dead_letter_delivery_attempt subscription_id:
     puts "Delivery Attempt: #{message.delivery_attempt}"
     message.acknowledge!
   end
-  # [END pubsub_dead_letter_delivery_attempt]
+  # [END pubsub_old_version_dead_letter_delivery_attempt]
 end

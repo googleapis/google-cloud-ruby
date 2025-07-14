@@ -15,7 +15,7 @@
 require "google/cloud/pubsub"
 
 def dead_letter_remove subscription_id:
-  # [START pubsub_dead_letter_remove]
+  # [START pubsub_old_version_dead_letter_remove]
   # subscription_id = "your-subscription-id"
 
   pubsub = Google::Cloud::Pubsub.new
@@ -23,5 +23,5 @@ def dead_letter_remove subscription_id:
   subscription = pubsub.subscription subscription_id
   subscription.remove_dead_letter_policy
   puts "Removed dead letter topic from #{subscription_id} subscription."
-  # [END pubsub_dead_letter_remove]
+  # [END pubsub_old_version_dead_letter_remove]
 end

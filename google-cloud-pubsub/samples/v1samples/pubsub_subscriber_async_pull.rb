@@ -15,8 +15,8 @@
 require "google/cloud/pubsub"
 
 def listen_for_messages subscription_id:
-  # [START pubsub_subscriber_async_pull]
-  # [START pubsub_quickstart_subscriber]
+  # [START pubsub_old_version_subscriber_async_pull]
+  # [START pubsub_old_version_quickstart_subscriber]
   # subscription_id = "your-subscription-id"
 
   pubsub = Google::Cloud::Pubsub.new
@@ -32,6 +32,6 @@ def listen_for_messages subscription_id:
   # messages does not quit
   sleep 60
   subscriber.stop.wait!
-  # [END pubsub_subscriber_async_pull]
-  # [END pubsub_quickstart_subscriber]
+  # [END pubsub_old_version_subscriber_async_pull]
+  # [END pubsub_old_version_quickstart_subscriber]
 end

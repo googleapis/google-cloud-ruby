@@ -15,7 +15,7 @@
 require "google/cloud/pubsub"
 
 def update_push_configuration subscription_id:, new_endpoint:
-  # [START pubsub_update_push_configuration]
+  # [START pubsub_old_version_update_push_configuration]
   # subscription_id   = "your-subscription-id"
   # new_endpoint      = "Endpoint where your app receives messages""
 
@@ -25,5 +25,5 @@ def update_push_configuration subscription_id:, new_endpoint:
   subscription.endpoint = new_endpoint
 
   puts "Push endpoint updated."
-  # [END pubsub_update_push_configuration]
+  # [END pubsub_old_version_update_push_configuration]
 end

@@ -15,7 +15,7 @@
 require "google/cloud/pubsub"
 
 def create_avro_schema schema_id:, avsc_file:
-  # [START pubsub_create_avro_schema]
+  # [START pubsub_old_version_create_avro_schema]
   # schema_id = "your-schema-id"
   # avsc_file = "path/to/an/avro/schema/file/(.avsc)/formatted/in/json"
 
@@ -25,5 +25,5 @@ def create_avro_schema schema_id:, avsc_file:
   schema = pubsub.create_schema schema_id, :avro, definition
 
   puts "Schema #{schema.name} created."
-  # [END pubsub_create_avro_schema]
+  # [END pubsub_old_version_create_avro_schema]
 end

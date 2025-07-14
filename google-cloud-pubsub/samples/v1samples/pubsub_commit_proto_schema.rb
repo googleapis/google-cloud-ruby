@@ -15,7 +15,7 @@
 require "google/cloud/pubsub"
 
 def commit_proto_schema schema_id:, proto_file:
-  # [START pubsub_commit_proto_schema]
+  # [START pubsub_old_version_commit_proto_schema]
   # schema_id = "your-schema-id"
   # proto_file = "path/to/a/proto_file.proto"
 
@@ -28,5 +28,5 @@ def commit_proto_schema schema_id:, proto_file:
 
   puts "Schema commited with revision #{result.revision_id}."
   result
-  # [END pubsub_commit_proto_schema]
+  # [END pubsub_old_version_commit_proto_schema]
 end

@@ -15,7 +15,7 @@
 require "google/cloud/pubsub"
 
 def create_pull_subscription topic_id:, subscription_id:
-  # [START pubsub_create_pull_subscription]
+  # [START pubsub_old_version_create_pull_subscription]
   # topic_id        = "your-topic-id"
   # subscription_id = "your-subscription-id"
 
@@ -25,5 +25,5 @@ def create_pull_subscription topic_id:, subscription_id:
   subscription = topic.subscribe subscription_id
 
   puts "Pull subscription #{subscription_id} created."
-  # [END pubsub_create_pull_subscription]
+  # [END pubsub_old_version_create_pull_subscription]
 end

@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# [START pubsub_create_subscription_with_exactly_once_delivery]
+# [START pubsub_old_version_create_subscription_with_exactly_once_delivery]
 require "google/cloud/pubsub"
 
 # Shows how to create a new subscription with exactly once delivery enabled
@@ -29,8 +29,8 @@ class PubsubCreateSubscriptionWithExactlyOnceDelivery
     project_id = "your-project-id"
     topic_id = "your-topic-id"
     subscription_id = "id-for-new-subcription"
-    pubsub_create_subscription_with_exactly_once_delivery = PubsubCreateSubscriptionWithExactlyOnceDelivery.new
-    pubsub_create_subscription_with_exactly_once_delivery.create_subscription_with_exactly_once_delivery(
+    pubsub_old_version_create_subscription_with_exactly_once_delivery = PubsubCreateSubscriptionWithExactlyOnceDelivery.new
+    pubsub_old_version_create_subscription_with_exactly_once_delivery.create_subscription_with_exactly_once_delivery(
       project_id: project_id,
       topic_id: topic_id,
       subscription_id: subscription_id
@@ -41,4 +41,4 @@ end
 if $PROGRAM_NAME == __FILE__
   PubsubCreateSubscriptionWithExactlyOnceDelivery.run
 end
-# [END pubsub_create_subscription_with_exactly_once_delivery]
+# [END pubsub_old_version_create_subscription_with_exactly_once_delivery]

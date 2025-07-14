@@ -15,7 +15,7 @@
 require "google/cloud/pubsub"
 
 def list_schema_revisions schema_id:
-  # [START pubsub_list_schema_revisions]
+  # [START pubsub_old_version_list_schema_revisions]
   # schema_id = "your-schema-id"
 
   pubsub = Google::Cloud::Pubsub.new
@@ -28,5 +28,5 @@ def list_schema_revisions schema_id:
   response.each do |revision_schema|
     puts revision_schema.revision_id
   end
-  # [END pubsub_list_schema_revisions]
+  # [END pubsub_old_version_list_schema_revisions]
 end

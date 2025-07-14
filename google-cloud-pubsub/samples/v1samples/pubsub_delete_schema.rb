@@ -15,7 +15,7 @@
 require "google/cloud/pubsub"
 
 def delete_schema schema_id:
-  # [START pubsub_delete_schema]
+  # [START pubsub_old_version_delete_schema]
   # schema_id = "your-schema-id"
 
   pubsub = Google::Cloud::Pubsub.new
@@ -24,5 +24,5 @@ def delete_schema schema_id:
   schema.delete
 
   puts "Schema #{schema_id} deleted."
-  # [END pubsub_delete_schema]
+  # [END pubsub_old_version_delete_schema]
 end

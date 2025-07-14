@@ -15,7 +15,7 @@
 require "google/cloud/pubsub"
 
 def dead_letter_update_subscription subscription_id:
-  # [START pubsub_dead_letter_update_subscription]
+  # [START pubsub_old_version_dead_letter_update_subscription]
   # subscription_id       = "your-subscription-id"
   # role                  = "roles/pubsub.publisher"
   # service_account_email = "serviceAccount:account_name@project_name.iam.gserviceaccount.com"
@@ -25,5 +25,5 @@ def dead_letter_update_subscription subscription_id:
   subscription = pubsub.subscription subscription_id
   subscription.dead_letter_max_delivery_attempts = 20
   puts "Max delivery attempts is now #{subscription.dead_letter_max_delivery_attempts}."
-  # [END pubsub_dead_letter_update_subscription]
+  # [END pubsub_old_version_dead_letter_update_subscription]
 end

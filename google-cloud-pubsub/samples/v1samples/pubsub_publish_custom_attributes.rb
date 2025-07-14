@@ -15,7 +15,7 @@
 require "google/cloud/pubsub"
 
 def publish_message_async_with_custom_attributes topic_id:
-  # [START pubsub_publish_custom_attributes]
+  # [START pubsub_old_version_publish_custom_attributes]
   # topic_id = "your-topic-id"
 
   pubsub = Google::Cloud::Pubsub.new
@@ -31,5 +31,5 @@ def publish_message_async_with_custom_attributes topic_id:
 
   # Stop the async_publisher to send all queued messages immediately.
   topic.async_publisher.stop.wait!
-  # [END pubsub_publish_custom_attributes]
+  # [END pubsub_old_version_publish_custom_attributes]
 end

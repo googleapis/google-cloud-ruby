@@ -15,7 +15,7 @@
 require "google/cloud/pubsub"
 
 def list_subscriptions
-  # [START pubsub_list_subscriptions]
+  # [START pubsub_old_version_list_subscriptions]
 
   pubsub = Google::Cloud::Pubsub.new
 
@@ -25,5 +25,5 @@ def list_subscriptions
   subscriptions.each do |subscription|
     puts subscription.name
   end
-  # [END pubsub_list_subscriptions]
+  # [END pubsub_old_version_list_subscriptions]
 end

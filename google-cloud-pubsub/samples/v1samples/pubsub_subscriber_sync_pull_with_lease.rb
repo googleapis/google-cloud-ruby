@@ -15,7 +15,7 @@
 require "google/cloud/pubsub"
 
 def subscriber_sync_pull_with_lease subscription_id:
-  # [START pubsub_subscriber_sync_pull_with_lease]
+  # [START pubsub_old_version_subscriber_sync_pull_with_lease]
   # subscription_id = "your-subscription-id"
 
   pubsub = Google::Cloud::Pubsub.new
@@ -52,5 +52,5 @@ def subscriber_sync_pull_with_lease subscription_id:
       puts "Reset ack deadline for \"#{message.data}\" for #{new_ack_deadline} seconds."
     end
   end
-  # [END pubsub_subscriber_sync_pull_with_lease]
+  # [END pubsub_old_version_subscriber_sync_pull_with_lease]
 end

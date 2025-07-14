@@ -13,7 +13,7 @@
 # limitations under the License.
 
 def quickstart topic_id:
-  # [START pubsub_quickstart_create_topic]
+  # [START pubsub_old_version_quickstart_create_topic]
   # [START require_library]
   # Imports the Google Cloud client library
   require "google/cloud/pubsub"
@@ -29,7 +29,7 @@ def quickstart topic_id:
   topic = pubsub.create_topic topic_id
 
   puts "Topic #{topic.name} created."
-  # [END pubsub_quickstart_create_topic]
+  # [END pubsub_old_version_quickstart_create_topic]
 end
 
 quickstart topic_id: ARGV.shift if $PROGRAM_NAME == __FILE__

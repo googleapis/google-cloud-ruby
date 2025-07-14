@@ -15,7 +15,7 @@
 require "google/cloud/pubsub"
 
 def delete_subscription subscription_id:
-  # [START pubsub_delete_subscription]
+  # [START pubsub_old_version_delete_subscription]
   # subscription_id = "your-subscription-id"
 
   pubsub = Google::Cloud::Pubsub.new
@@ -24,5 +24,5 @@ def delete_subscription subscription_id:
   subscription.delete
 
   puts "Subscription #{subscription_id} deleted."
-  # [END pubsub_delete_subscription]
+  # [END pubsub_old_version_delete_subscription]
 end

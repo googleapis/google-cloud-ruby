@@ -15,7 +15,7 @@
 require "google/cloud/pubsub"
 
 def publish_avro_records topic_id:, avsc_file:
-  # [START pubsub_publish_avro_records]
+  # [START pubsub_old_version_publish_avro_records]
   # topic_id = "your-topic-id"
   # avsc_file = "path/to/an/avro/schema/file/(.avsc)/formatted/in/json"
 
@@ -41,5 +41,5 @@ def publish_avro_records topic_id:, avsc_file:
   else
     raise "No encoding specified in #{topic.name}."
   end
-  # [END pubsub_publish_avro_records]
+  # [END pubsub_old_version_publish_avro_records]
 end

@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# [START pubsub_create_subscription_with_filter]
+# [START pubsub_old_version_create_subscription_with_filter]
 require "google/cloud/pubsub"
 
 # Shows how to create a new subscription with filter for a given topic
@@ -40,4 +40,4 @@ end
 if $PROGRAM_NAME == __FILE__
   PubsubCreateSubscriptionWithFilter.run
 end
-# [END pubsub_create_subscription_with_filter]
+# [END pubsub_old_version_create_subscription_with_filter]

@@ -15,7 +15,7 @@
 require "google/cloud/pubsub"
 
 def publish_message_async topic_id:
-  # [START pubsub_publish]
+  # [START pubsub_old_version_publish]
   # topic_id = "your-topic-id"
 
   pubsub = Google::Cloud::Pubsub.new
@@ -28,5 +28,5 @@ def publish_message_async topic_id:
 
   # Stop the async_publisher to send all queued messages immediately.
   topic.async_publisher.stop.wait!
-  # [END pubsub_publish]
+  # [END pubsub_old_version_publish]
 end

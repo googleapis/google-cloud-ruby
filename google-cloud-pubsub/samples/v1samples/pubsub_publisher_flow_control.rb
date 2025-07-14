@@ -15,7 +15,7 @@
 require "google/cloud/pubsub"
 
 def publish_messages_async_with_flow_control topic_id:
-  # [START pubsub_publisher_flow_control]
+  # [START pubsub_old_version_publisher_flow_control]
   # topic_id = "your-topic-id"
 
   pubsub = Google::Cloud::Pubsub.new
@@ -41,5 +41,5 @@ def publish_messages_async_with_flow_control topic_id:
   # Stop the async_publisher to send all queued messages immediately.
   topic.async_publisher.stop.wait!
   puts "Published messages with flow control settings to #{topic_id}."
-  # [END pubsub_publisher_flow_control]
+  # [END pubsub_old_version_publisher_flow_control]
 end

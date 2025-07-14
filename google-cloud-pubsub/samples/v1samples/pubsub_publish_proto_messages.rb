@@ -16,7 +16,7 @@ require "google/cloud/pubsub"
 require_relative "utilities/us-states_pb"
 
 def publish_proto_messages topic_id:
-  # [START pubsub_publish_proto_messages]
+  # [START pubsub_old_version_publish_proto_messages]
   # topic_id = "your-topic-id"
 
   pubsub = Google::Cloud::Pubsub.new
@@ -34,5 +34,5 @@ def publish_proto_messages topic_id:
   else
     raise "No encoding specified in #{topic.name}."
   end
-  # [END pubsub_publish_proto_messages]
+  # [END pubsub_old_version_publish_proto_messages]
 end

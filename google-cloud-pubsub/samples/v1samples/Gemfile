@@ -12,17 +12,17 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# [START pubsub_dependencies]
+# [START pubsub_old_version_dependencies]
 source "https://rubygems.org"
 
-# [END pubsub_dependencies]
+# [END pubsub_old_version_dependencies]
 
 if ENV["GOOGLE_CLOUD_SAMPLES_TEST"] == "master"
   gem "google-cloud-pubsub", path: "../../google-cloud-pubsub"
 else
-  # [START pubsub_dependencies]
+  # [START pubsub_old_version_dependencies]
   gem "google-cloud-pubsub"
-  # [END pubsub_dependencies]
+  # [END pubsub_old_version_dependencies]
 end
 
 gem "sinatra"

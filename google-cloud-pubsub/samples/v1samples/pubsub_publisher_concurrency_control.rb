@@ -15,7 +15,7 @@
 require "google/cloud/pubsub"
 
 def publish_messages_async_with_concurrency_control topic_id:
-  # [START pubsub_publisher_concurrency_control]
+  # [START pubsub_old_version_publisher_concurrency_control]
   # topic_id = "your-topic-id"
 
   pubsub = Google::Cloud::Pubsub.new
@@ -35,5 +35,5 @@ def publish_messages_async_with_concurrency_control topic_id:
 
   # Stop the async_publisher to send all queued messages immediately.
   topic.async_publisher.stop.wait!
-  # [END pubsub_publisher_concurrency_control]
+  # [END pubsub_old_version_publisher_concurrency_control]
 end

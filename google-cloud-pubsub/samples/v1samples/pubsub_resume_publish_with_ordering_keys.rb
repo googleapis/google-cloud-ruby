@@ -15,7 +15,7 @@
 require "google/cloud/pubsub"
 
 def publish_resume_publish topic_id:
-  # [START pubsub_resume_publish_with_ordering_keys]
+  # [START pubsub_old_version_resume_publish_with_ordering_keys]
   # topic_id = "your-topic-id"
 
   pubsub = Google::Cloud::Pubsub.new
@@ -43,5 +43,5 @@ def publish_resume_publish topic_id:
 
   # Stop the async_publisher to send all queued messages immediately.
   topic.async_publisher.stop!
-  # [END pubsub_resume_publish_with_ordering_keys]
+  # [END pubsub_old_version_resume_publish_with_ordering_keys]
 end

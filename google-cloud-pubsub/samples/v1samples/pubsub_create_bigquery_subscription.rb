@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# [START pubsub_create_bigquery_subscription]
+# [START pubsub_old_version_create_bigquery_subscription]
 require "google/cloud/pubsub"
 
 ##
@@ -28,7 +28,7 @@ require "google/cloud/pubsub"
 # @param bigquery_table_id [String]
 # ID of bigquery table (e.g "my-project:dataset-id.table-id")
 #
-def pubsub_create_bigquery_subscription project_id:, topic_id:, subscription_id:, bigquery_table_id:
+def pubsub_old_version_create_bigquery_subscription project_id:, topic_id:, subscription_id:, bigquery_table_id:
   pubsub = Google::Cloud::Pubsub.new project_id: project_id
   topic = pubsub.topic topic_id
   subscription = topic.subscribe subscription_id,
@@ -39,4 +39,4 @@ def pubsub_create_bigquery_subscription project_id:, topic_id:, subscription_id:
   puts "BigQuery subscription created: #{subscription_id}."
   puts "Table for subscription is: #{bigquery_table_id}"
 end
-# [END pubsub_create_bigquery_subscription]
+# [END pubsub_old_version_create_bigquery_subscription]

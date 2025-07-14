@@ -15,7 +15,7 @@
 require "google/cloud/pubsub"
 
 def listen_for_messages_with_concurrency_control subscription_id:
-  # [START pubsub_subscriber_concurrency_control]
+  # [START pubsub_old_version_subscriber_concurrency_control]
   # subscription_id = "your-subscription-id"
 
   pubsub = Google::Cloud::Pubsub.new
@@ -36,5 +36,5 @@ def listen_for_messages_with_concurrency_control subscription_id:
   # messages does not quit
   sleep 60
   subscriber.stop.wait!
-  # [END pubsub_subscriber_concurrency_control]
+  # [END pubsub_old_version_subscriber_concurrency_control]
 end

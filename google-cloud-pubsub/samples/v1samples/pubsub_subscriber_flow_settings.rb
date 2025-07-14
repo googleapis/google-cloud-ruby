@@ -15,7 +15,7 @@
 require "google/cloud/pubsub"
 
 def listen_for_messages_with_flow_control subscription_id:
-  # [START pubsub_subscriber_flow_settings]
+  # [START pubsub_old_version_subscriber_flow_settings]
   # subscription_id = "your-subscription-id"
 
   pubsub = Google::Cloud::Pubsub.new
@@ -31,5 +31,5 @@ def listen_for_messages_with_flow_control subscription_id:
   # messages does not quit
   sleep 60
   subscriber.stop.wait!
-  # [END pubsub_subscriber_flow_settings]
+  # [END pubsub_old_version_subscriber_flow_settings]
 end

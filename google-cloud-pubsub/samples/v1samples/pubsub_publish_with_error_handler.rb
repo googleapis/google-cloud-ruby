@@ -15,7 +15,7 @@
 require "google/cloud/pubsub"
 
 def publish_with_error_handler topic_id:
-  # [START pubsub_publish_with_error_handler]
+  # [START pubsub_old_version_publish_with_error_handler]
   # topic_id = "your-topic-id"
 
   pubsub = Google::Cloud::Pubsub.new
@@ -33,5 +33,5 @@ def publish_with_error_handler topic_id:
   rescue StandardError => e
     puts "Received error while publishing: #{e.message}"
   end
-  # [END pubsub_publish_with_error_handler]
+  # [END pubsub_old_version_publish_with_error_handler]
 end

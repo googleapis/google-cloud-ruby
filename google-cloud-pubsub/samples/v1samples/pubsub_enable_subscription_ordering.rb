@@ -15,7 +15,7 @@
 require "google/cloud/pubsub"
 
 def enable_subscription_ordering topic_id:, subscription_id:
-  # [START pubsub_enable_subscription_ordering]
+  # [START pubsub_old_version_enable_subscription_ordering]
   # topic_id        = "your-topic-id"
   # subscription_id = "your-subscription-id"
 
@@ -26,5 +26,5 @@ def enable_subscription_ordering topic_id:, subscription_id:
                                  message_ordering: true
 
   puts "Pull subscription #{subscription_id} created with message ordering."
-  # [END pubsub_enable_subscription_ordering]
+  # [END pubsub_old_version_enable_subscription_ordering]
 end

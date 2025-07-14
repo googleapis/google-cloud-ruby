@@ -15,7 +15,7 @@
 require "google/cloud/pubsub"
 
 def publish_message topic_id:
-  # [START pubsub_quickstart_publisher]
+  # [START pubsub_old_version_quickstart_publisher]
   # topic_id = "your-topic-id"
 
   pubsub = Google::Cloud::Pubsub.new
@@ -24,5 +24,5 @@ def publish_message topic_id:
   topic.publish "This is a test message."
 
   puts "Message published."
-  # [END pubsub_quickstart_publisher]
+  # [END pubsub_old_version_quickstart_publisher]
 end

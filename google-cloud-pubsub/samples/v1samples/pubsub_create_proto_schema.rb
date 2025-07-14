@@ -15,7 +15,7 @@
 require "google/cloud/pubsub"
 
 def create_proto_schema schema_id:, proto_file:
-  # [START pubsub_create_proto_schema]
+  # [START pubsub_old_version_create_proto_schema]
   # schema_id = "your-schema-id"
   # proto_file = "path/to/a/proto/file/(.proto)/formatted/in/protocol/buffers"
 
@@ -25,5 +25,5 @@ def create_proto_schema schema_id:, proto_file:
   schema = pubsub.create_schema schema_id, :protocol_buffer, definition
 
   puts "Schema #{schema.name} created."
-  # [END pubsub_create_proto_schema]
+  # [END pubsub_old_version_create_proto_schema]
 end

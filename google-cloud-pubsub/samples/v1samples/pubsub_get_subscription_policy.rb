@@ -15,7 +15,7 @@
 require "google/cloud/pubsub"
 
 def get_subscription_policy subscription_id:
-  # [START pubsub_get_subscription_policy]
+  # [START pubsub_old_version_get_subscription_policy]
   # subscription_id = "your-subscription-id"
 
   pubsub = Google::Cloud::Pubsub.new
@@ -25,5 +25,5 @@ def get_subscription_policy subscription_id:
 
   puts "Subscription policy:"
   puts policy.roles
-  # [END pubsub_get_subscription_policy]
+  # [END pubsub_old_version_get_subscription_policy]
 end

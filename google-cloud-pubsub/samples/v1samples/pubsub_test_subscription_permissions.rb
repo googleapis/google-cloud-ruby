@@ -15,7 +15,7 @@
 require "google/cloud/pubsub"
 
 def test_subscription_permissions subscription_id:
-  # [START pubsub_test_subscription_permissions]
+  # [START pubsub_old_version_test_subscription_permissions]
   # subscription_id = "your-subscription-id"
 
   pubsub = Google::Cloud::Pubsub.new
@@ -26,5 +26,5 @@ def test_subscription_permissions subscription_id:
 
   puts "Permission to consume" if permissions.include? "pubsub.subscriptions.consume"
   puts "Permission to update" if permissions.include? "pubsub.subscriptions.update"
-  # [END pubsub_test_subscription_permissions]
+  # [END pubsub_old_version_test_subscription_permissions]
 end

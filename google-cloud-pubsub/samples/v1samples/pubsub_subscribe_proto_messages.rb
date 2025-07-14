@@ -16,7 +16,7 @@ require "google/cloud/pubsub"
 require_relative "utilities/us-states_pb"
 
 def subscribe_proto_messages subscription_id:
-  # [START pubsub_subscribe_proto_messages]
+  # [START pubsub_old_version_subscribe_proto_messages]
   # subscription_id = "your-subscription-id"
 
   pubsub = Google::Cloud::Pubsub.new
@@ -44,5 +44,5 @@ def subscribe_proto_messages subscription_id:
   # messages does not quit
   sleep 60
   subscriber.stop.wait!
-  # [END pubsub_subscribe_proto_messages]
+  # [END pubsub_old_version_subscribe_proto_messages]
 end

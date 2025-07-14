@@ -15,7 +15,7 @@
 require "google/cloud/pubsub"
 
 def publish_ordered_messages topic_id:
-  # [START pubsub_publish_with_ordering_keys]
+  # [START pubsub_old_version_publish_with_ordering_keys]
   # topic_id = "your-topic-id"
 
   pubsub = Google::Cloud::Pubsub.new endpoint: "us-east1-pubsub.googleapis.com:443"
@@ -35,5 +35,5 @@ def publish_ordered_messages topic_id:
   # Stop the async_publisher to send all queued messages immediately.
   topic.async_publisher.stop!
   puts "Messages published with ordering key."
-  # [END pubsub_publish_with_ordering_keys]
+  # [END pubsub_old_version_publish_with_ordering_keys]
 end

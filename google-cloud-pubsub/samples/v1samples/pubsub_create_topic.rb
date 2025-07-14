@@ -15,7 +15,7 @@
 require "google/cloud/pubsub"
 
 def create_topic topic_id:
-  # [START pubsub_create_topic]
+  # [START pubsub_old_version_create_topic]
   # topic_id = "your-topic-id"
 
   pubsub = Google::Cloud::Pubsub.new
@@ -23,5 +23,5 @@ def create_topic topic_id:
   topic = pubsub.create_topic topic_id
 
   puts "Topic #{topic.name} created."
-  # [END pubsub_create_topic]
+  # [END pubsub_old_version_create_topic]
 end

@@ -15,7 +15,7 @@
 require "google/cloud/pubsub"
 
 def list_schemas
-  # [START pubsub_list_schemas]
+  # [START pubsub_old_version_list_schemas]
 
   pubsub = Google::Cloud::Pubsub.new
 
@@ -25,5 +25,5 @@ def list_schemas
   schemas.each do |schema|
     puts schema.name
   end
-  # [END pubsub_list_schemas]
+  # [END pubsub_old_version_list_schemas]
 end

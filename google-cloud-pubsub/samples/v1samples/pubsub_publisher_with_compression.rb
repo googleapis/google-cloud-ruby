@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# [START pubsub_publisher_with_compression]
+# [START pubsub_old_version_publisher_with_compression]
 require "google/cloud/pubsub"
 
 ##
@@ -24,7 +24,7 @@ require "google/cloud/pubsub"
 # @param topic_id [String]
 # Your topic name (e.g. "my-secret")
 #
-def pubsub_publisher_with_compression project_id:, topic_id:
+def pubsub_old_version_publisher_with_compression project_id:, topic_id:
   pubsub = Google::Cloud::Pubsub.new project_id: project_id
 
   # Enable compression and configure the compression threshold to 10 bytes (default to 240 B).
@@ -46,4 +46,4 @@ def pubsub_publisher_with_compression project_id:, topic_id:
     puts "Received error while publishing: #{e.message}"
   end
 end
-# [END pubsub_publisher_with_compression]
+# [END pubsub_old_version_publisher_with_compression]

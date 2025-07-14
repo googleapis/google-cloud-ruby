@@ -15,7 +15,7 @@
 require "google/cloud/pubsub"
 
 def list_topics
-  # [START pubsub_list_topics]
+  # [START pubsub_old_version_list_topics]
 
   pubsub = Google::Cloud::Pubsub.new
 
@@ -25,5 +25,5 @@ def list_topics
   topics.each do |topic|
     puts topic.name
   end
-  # [END pubsub_list_topics]
+  # [END pubsub_old_version_list_topics]
 end

@@ -15,7 +15,7 @@
 require "google/cloud/pubsub"
 
 def subscribe_avro_records subscription_id:, avsc_file:
-  # [START pubsub_subscribe_avro_records]
+  # [START pubsub_old_version_subscribe_avro_records]
   # subscription_id = "your-subscription-id"
   # avsc_file = "path/to/an/avro/schema/file/(.avsc)/formatted/in/json"
 
@@ -49,5 +49,5 @@ def subscribe_avro_records subscription_id:, avsc_file:
   # messages does not quit
   sleep 60
   subscriber.stop.wait!
-  # [END pubsub_subscribe_avro_records]
+  # [END pubsub_old_version_subscribe_avro_records]
 end

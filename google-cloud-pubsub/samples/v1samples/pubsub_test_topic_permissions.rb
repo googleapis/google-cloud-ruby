@@ -15,7 +15,7 @@
 require "google/cloud/pubsub"
 
 def test_topic_permissions topic_id:
-  # [START pubsub_test_topic_permissions]
+  # [START pubsub_old_version_test_topic_permissions]
   # topic_id = "your-topic-id"
 
   pubsub = Google::Cloud::Pubsub.new
@@ -27,5 +27,5 @@ def test_topic_permissions topic_id:
   puts "Permission to attach subscription" if permissions.include? "pubsub.topics.attachSubscription"
   puts "Permission to publish" if permissions.include? "pubsub.topics.publish"
   puts "Permission to update" if permissions.include? "pubsub.topics.update"
-  # [END pubsub_test_topic_permissions]
+  # [END pubsub_old_version_test_topic_permissions]
 end

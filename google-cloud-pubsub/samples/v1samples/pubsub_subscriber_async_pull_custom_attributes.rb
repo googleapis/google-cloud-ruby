@@ -15,7 +15,7 @@
 require "google/cloud/pubsub"
 
 def listen_for_messages_with_custom_attributes subscription_id:
-  # [START pubsub_subscriber_async_pull_custom_attributes]
+  # [START pubsub_old_version_subscriber_async_pull_custom_attributes]
   # subscription_id = "your-subscription-id"
 
   pubsub = Google::Cloud::Pubsub.new
@@ -37,5 +37,5 @@ def listen_for_messages_with_custom_attributes subscription_id:
   # messages does not quit
   sleep 60
   subscriber.stop.wait!
-  # [END pubsub_subscriber_async_pull_custom_attributes]
+  # [END pubsub_old_version_subscriber_async_pull_custom_attributes]
 end

@@ -15,7 +15,7 @@
 require "google/cloud/pubsub"
 
 def create_topic_with_schema topic_id:, schema_id:, message_encoding:
-  # [START pubsub_create_topic_with_schema]
+  # [START pubsub_old_version_create_topic_with_schema]
   # topic_id = "your-topic-id"
   # schema_id = "your-schema-id"
   # Choose either BINARY or JSON as valid message encoding in this topic.
@@ -26,5 +26,5 @@ def create_topic_with_schema topic_id:, schema_id:, message_encoding:
   topic = pubsub.create_topic topic_id, schema_name: schema_id, message_encoding: message_encoding
 
   puts "Topic #{topic.name} created."
-  # [END pubsub_create_topic_with_schema]
+  # [END pubsub_old_version_create_topic_with_schema]
 end

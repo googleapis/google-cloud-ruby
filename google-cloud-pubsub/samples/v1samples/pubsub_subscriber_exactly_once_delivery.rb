@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# [START pubsub_subscriber_exactly_once]
+# [START pubsub_old_version_subscriber_exactly_once]
 require "google/cloud/pubsub"
 
 # Shows how to register callback to acknowledge method and access the result passed in
@@ -52,4 +52,4 @@ end
 if $PROGRAM_NAME == __FILE__
   PubsubSubscriberExactlyOnceDelivery.run
 end
-# [END pubsub_subscriber_exactly_once]
+# [END pubsub_old_version_subscriber_exactly_once]
