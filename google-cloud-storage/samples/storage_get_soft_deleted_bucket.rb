@@ -23,10 +23,11 @@ def get_soft_deleted_bucket bucket_name:, generation:
 
   storage = Google::Cloud::Storage.new
   # fetching soft deleted bucket with soft_delete_time and hard_delete_time
+    puts "project_name while bucket deletion"
+  puts storage.project
   deleted_bucket_fetch = storage.bucket bucket_name, generation: generation, soft_deleted: true
 
-  puts "project_name while bucket deletion"
-  puts deleted_bucket_fetch.service.project
+
   soft_delete_time = deleted_bucket_fetch.soft_delete_time
   hard_delete_time = deleted_bucket_fetch.hard_delete_time
 
