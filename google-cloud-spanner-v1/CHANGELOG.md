@@ -1,5 +1,18 @@
 # Release History
 
+### 1.9.0 (2025-06-13)
+
+#### Features
+
+* add new change_stream.proto ([#30493](https://github.com/googleapis/google-cloud-ruby/issues/30493)) 
+
+### 1.8.0 (2025-05-12)
+
+#### Features
+
+* Updated core dependencies including gapic-common 
+* Updated required Ruby version to 3.1 
+
 ### 1.7.1 (2025-04-29)
 
 #### Bug Fixes

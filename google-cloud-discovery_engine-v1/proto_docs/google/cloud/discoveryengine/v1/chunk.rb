@@ -57,6 +57,20 @@ module Google
         # @!attribute [r] chunk_metadata
         #   @return [::Google::Cloud::DiscoveryEngine::V1::Chunk::ChunkMetadata]
         #     Output only. Metadata of the current chunk.
+        # @!attribute [r] data_urls
+        #   @return [::Array<::String>]
+        #     Output only. Image Data URLs if the current chunk contains images.
+        #     Data URLs are composed of four parts: a prefix (data:), a MIME type
+        #     indicating the type of data, an optional base64 token if non-textual,
+        #     and the data itself:
+        #     data:[<mediatype>][;base64],<data>
+        # @!attribute [r] annotation_contents
+        #   @return [::Array<::String>]
+        #     Output only. Annotation contents if the current chunk contains annotations.
+        # @!attribute [r] annotation_metadata
+        #   @return [::Array<::Google::Cloud::DiscoveryEngine::V1::Chunk::AnnotationMetadata>]
+        #     Output only. The annotation metadata includes structured content in the
+        #     current chunk.
         class Chunk
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -112,6 +126,46 @@ module Google
           class ChunkMetadata
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # The structured content information.
+          # @!attribute [r] structure_type
+          #   @return [::Google::Cloud::DiscoveryEngine::V1::Chunk::StructureType]
+          #     Output only. The structure type of the structured content.
+          # @!attribute [r] content
+          #   @return [::String]
+          #     Output only. The content of the structured content.
+          class StructuredContent
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # The annotation metadata includes structured content in the current chunk.
+          # @!attribute [r] structured_content
+          #   @return [::Google::Cloud::DiscoveryEngine::V1::Chunk::StructuredContent]
+          #     Output only. The structured content information.
+          # @!attribute [r] image_id
+          #   @return [::String]
+          #     Output only. Image id is provided if the structured content is based on
+          #     an image.
+          class AnnotationMetadata
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Defines the types of the structured content that can be extracted.
+          module StructureType
+            # Default value.
+            STRUCTURE_TYPE_UNSPECIFIED = 0
+
+            # Shareholder structure.
+            SHAREHOLDER_STRUCTURE = 1
+
+            # Signature structure.
+            SIGNATURE_STRUCTURE = 2
+
+            # Checkbox structure.
+            CHECKBOX_STRUCTURE = 3
           end
         end
       end

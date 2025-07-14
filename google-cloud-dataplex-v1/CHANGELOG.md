@@ -1,5 +1,18 @@
 # Changelog
 
+### 2.4.1 (2025-05-16)
+
+#### Documentation
+
+* Various reference documentation updates ([#30087](https://github.com/googleapis/google-cloud-ruby/issues/30087)) 
+
+### 2.4.0 (2025-05-12)
+
+#### Features
+
+* Updated core dependencies including gapic-common 
+* Updated required Ruby version to 3.1 
+
 ### 2.3.1 (2025-04-29)
 
 #### Bug Fixes

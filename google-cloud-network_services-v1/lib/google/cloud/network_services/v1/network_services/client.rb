@@ -244,7 +244,7 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload list_endpoint_policies(parent: nil, page_size: nil, page_token: nil)
+            # @overload list_endpoint_policies(parent: nil, page_size: nil, page_token: nil, return_partial_success: nil)
             #   Pass arguments to `list_endpoint_policies` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -259,6 +259,10 @@ module Google
             #     Indicates that this is a continuation of a prior
             #     `ListEndpointPolicies` call, and that the system should return the
             #     next page of data.
+            #   @param return_partial_success [::Boolean]
+            #     Optional. If true, allow partial responses for multi-regional Aggregated
+            #     List requests. Otherwise if one of the locations is down or unreachable,
+            #     the Aggregated List request will fail.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Gapic::PagedEnumerable<::Google::Cloud::NetworkServices::V1::EndpointPolicy>]
@@ -703,6 +707,887 @@ module Google
                                      retry_policy: @config.retry_policy
 
               @network_services_stub.call_rpc :delete_endpoint_policy, request, options: options do |response, operation|
+                response = ::Gapic::Operation.new response, @operations_client, options: options
+                yield response, operation if block_given?
+                throw :response, response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Lists `WasmPluginVersion` resources in a given project and
+            # location.
+            #
+            # @overload list_wasm_plugin_versions(request, options = nil)
+            #   Pass arguments to `list_wasm_plugin_versions` via a request object, either of type
+            #   {::Google::Cloud::NetworkServices::V1::ListWasmPluginVersionsRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::NetworkServices::V1::ListWasmPluginVersionsRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload list_wasm_plugin_versions(parent: nil, page_size: nil, page_token: nil)
+            #   Pass arguments to `list_wasm_plugin_versions` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param parent [::String]
+            #     Required. The `WasmPlugin` resource whose `WasmPluginVersion`s
+            #     are listed, specified in the following format:
+            #     `projects/{project}/locations/global/wasmPlugins/{wasm_plugin}`.
+            #   @param page_size [::Integer]
+            #     Maximum number of `WasmPluginVersion` resources to return per
+            #     call. If not specified, at most 50 `WasmPluginVersion` resources are
+            #     returned. The maximum value is 1000; values above 1000 are coerced to
+            #     1000.
+            #   @param page_token [::String]
+            #     The value returned by the last `ListWasmPluginVersionsResponse` call.
+            #     Indicates that this is a continuation of a prior
+            #     `ListWasmPluginVersions` call, and that the
+            #     next page of data is to be returned.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Gapic::PagedEnumerable<::Google::Cloud::NetworkServices::V1::WasmPluginVersion>]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Gapic::PagedEnumerable<::Google::Cloud::NetworkServices::V1::WasmPluginVersion>]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/network_services/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::NetworkServices::V1::NetworkServices::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::NetworkServices::V1::ListWasmPluginVersionsRequest.new
+            #
+            #   # Call the list_wasm_plugin_versions method.
+            #   result = client.list_wasm_plugin_versions request
+            #
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
+            #     # Each element is of type ::Google::Cloud::NetworkServices::V1::WasmPluginVersion.
+            #     p item
+            #   end
+            #
+            def list_wasm_plugin_versions request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::NetworkServices::V1::ListWasmPluginVersionsRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.list_wasm_plugin_versions.metadata.to_h
+
+              # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::NetworkServices::V1::VERSION
+              metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.list_wasm_plugin_versions.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.list_wasm_plugin_versions.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @network_services_stub.call_rpc :list_wasm_plugin_versions, request, options: options do |response, operation|
+                response = ::Gapic::PagedEnumerable.new @network_services_stub, :list_wasm_plugin_versions, request, response, operation, options
+                yield response, operation if block_given?
+                throw :response, response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Gets details of the specified `WasmPluginVersion` resource.
+            #
+            # @overload get_wasm_plugin_version(request, options = nil)
+            #   Pass arguments to `get_wasm_plugin_version` via a request object, either of type
+            #   {::Google::Cloud::NetworkServices::V1::GetWasmPluginVersionRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::NetworkServices::V1::GetWasmPluginVersionRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload get_wasm_plugin_version(name: nil)
+            #   Pass arguments to `get_wasm_plugin_version` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param name [::String]
+            #     Required. A name of the `WasmPluginVersion` resource to get. Must be in
+            #     the format
+            #     `projects/{project}/locations/global/wasmPlugins/{wasm_plugin}/versions/{wasm_plugin_version}`.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Google::Cloud::NetworkServices::V1::WasmPluginVersion]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Google::Cloud::NetworkServices::V1::WasmPluginVersion]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/network_services/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::NetworkServices::V1::NetworkServices::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::NetworkServices::V1::GetWasmPluginVersionRequest.new
+            #
+            #   # Call the get_wasm_plugin_version method.
+            #   result = client.get_wasm_plugin_version request
+            #
+            #   # The returned object is of type Google::Cloud::NetworkServices::V1::WasmPluginVersion.
+            #   p result
+            #
+            def get_wasm_plugin_version request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::NetworkServices::V1::GetWasmPluginVersionRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.get_wasm_plugin_version.metadata.to_h
+
+              # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::NetworkServices::V1::VERSION
+              metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.get_wasm_plugin_version.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.get_wasm_plugin_version.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @network_services_stub.call_rpc :get_wasm_plugin_version, request, options: options do |response, operation|
+                yield response, operation if block_given?
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Creates a new `WasmPluginVersion` resource in a given project
+            # and location.
+            #
+            # @overload create_wasm_plugin_version(request, options = nil)
+            #   Pass arguments to `create_wasm_plugin_version` via a request object, either of type
+            #   {::Google::Cloud::NetworkServices::V1::CreateWasmPluginVersionRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::NetworkServices::V1::CreateWasmPluginVersionRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload create_wasm_plugin_version(parent: nil, wasm_plugin_version_id: nil, wasm_plugin_version: nil)
+            #   Pass arguments to `create_wasm_plugin_version` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param parent [::String]
+            #     Required. The parent resource of the `WasmPluginVersion` resource. Must be
+            #     in the format
+            #     `projects/{project}/locations/global/wasmPlugins/{wasm_plugin}`.
+            #   @param wasm_plugin_version_id [::String]
+            #     Required. User-provided ID of the `WasmPluginVersion` resource to be
+            #     created.
+            #   @param wasm_plugin_version [::Google::Cloud::NetworkServices::V1::WasmPluginVersion, ::Hash]
+            #     Required. `WasmPluginVersion` resource to be created.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Gapic::Operation]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Gapic::Operation]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/network_services/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::NetworkServices::V1::NetworkServices::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::NetworkServices::V1::CreateWasmPluginVersionRequest.new
+            #
+            #   # Call the create_wasm_plugin_version method.
+            #   result = client.create_wasm_plugin_version request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "No response received."
+            #   end
+            #
+            def create_wasm_plugin_version request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::NetworkServices::V1::CreateWasmPluginVersionRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.create_wasm_plugin_version.metadata.to_h
+
+              # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::NetworkServices::V1::VERSION
+              metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.create_wasm_plugin_version.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.create_wasm_plugin_version.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @network_services_stub.call_rpc :create_wasm_plugin_version, request, options: options do |response, operation|
+                response = ::Gapic::Operation.new response, @operations_client, options: options
+                yield response, operation if block_given?
+                throw :response, response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Deletes the specified `WasmPluginVersion` resource.
+            #
+            # @overload delete_wasm_plugin_version(request, options = nil)
+            #   Pass arguments to `delete_wasm_plugin_version` via a request object, either of type
+            #   {::Google::Cloud::NetworkServices::V1::DeleteWasmPluginVersionRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::NetworkServices::V1::DeleteWasmPluginVersionRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload delete_wasm_plugin_version(name: nil)
+            #   Pass arguments to `delete_wasm_plugin_version` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param name [::String]
+            #     Required. A name of the `WasmPluginVersion` resource to delete. Must be in
+            #     the format
+            #     `projects/{project}/locations/global/wasmPlugins/{wasm_plugin}/versions/{wasm_plugin_version}`.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Gapic::Operation]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Gapic::Operation]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/network_services/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::NetworkServices::V1::NetworkServices::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::NetworkServices::V1::DeleteWasmPluginVersionRequest.new
+            #
+            #   # Call the delete_wasm_plugin_version method.
+            #   result = client.delete_wasm_plugin_version request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "No response received."
+            #   end
+            #
+            def delete_wasm_plugin_version request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::NetworkServices::V1::DeleteWasmPluginVersionRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.delete_wasm_plugin_version.metadata.to_h
+
+              # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::NetworkServices::V1::VERSION
+              metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.delete_wasm_plugin_version.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.delete_wasm_plugin_version.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @network_services_stub.call_rpc :delete_wasm_plugin_version, request, options: options do |response, operation|
+                response = ::Gapic::Operation.new response, @operations_client, options: options
+                yield response, operation if block_given?
+                throw :response, response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Lists `WasmPlugin` resources in a given project and
+            # location.
+            #
+            # @overload list_wasm_plugins(request, options = nil)
+            #   Pass arguments to `list_wasm_plugins` via a request object, either of type
+            #   {::Google::Cloud::NetworkServices::V1::ListWasmPluginsRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::NetworkServices::V1::ListWasmPluginsRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload list_wasm_plugins(parent: nil, page_size: nil, page_token: nil)
+            #   Pass arguments to `list_wasm_plugins` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param parent [::String]
+            #     Required. The project and location from which the `WasmPlugin` resources
+            #     are listed, specified in the following format:
+            #     `projects/{project}/locations/global`.
+            #   @param page_size [::Integer]
+            #     Maximum number of `WasmPlugin` resources to return per call.
+            #     If not specified, at most 50 `WasmPlugin` resources are returned.
+            #     The maximum value is 1000; values above 1000 are coerced to 1000.
+            #   @param page_token [::String]
+            #     The value returned by the last `ListWasmPluginsResponse` call.
+            #     Indicates that this is a continuation of a prior
+            #     `ListWasmPlugins` call, and that the
+            #     next page of data is to be returned.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Gapic::PagedEnumerable<::Google::Cloud::NetworkServices::V1::WasmPlugin>]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Gapic::PagedEnumerable<::Google::Cloud::NetworkServices::V1::WasmPlugin>]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/network_services/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::NetworkServices::V1::NetworkServices::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::NetworkServices::V1::ListWasmPluginsRequest.new
+            #
+            #   # Call the list_wasm_plugins method.
+            #   result = client.list_wasm_plugins request
+            #
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
+            #     # Each element is of type ::Google::Cloud::NetworkServices::V1::WasmPlugin.
+            #     p item
+            #   end
+            #
+            def list_wasm_plugins request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::NetworkServices::V1::ListWasmPluginsRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.list_wasm_plugins.metadata.to_h
+
+              # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::NetworkServices::V1::VERSION
+              metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.list_wasm_plugins.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.list_wasm_plugins.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @network_services_stub.call_rpc :list_wasm_plugins, request, options: options do |response, operation|
+                response = ::Gapic::PagedEnumerable.new @network_services_stub, :list_wasm_plugins, request, response, operation, options
+                yield response, operation if block_given?
+                throw :response, response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Gets details of the specified `WasmPlugin` resource.
+            #
+            # @overload get_wasm_plugin(request, options = nil)
+            #   Pass arguments to `get_wasm_plugin` via a request object, either of type
+            #   {::Google::Cloud::NetworkServices::V1::GetWasmPluginRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::NetworkServices::V1::GetWasmPluginRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload get_wasm_plugin(name: nil, view: nil)
+            #   Pass arguments to `get_wasm_plugin` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param name [::String]
+            #     Required. A name of the `WasmPlugin` resource to get. Must be in the
+            #     format `projects/{project}/locations/global/wasmPlugins/{wasm_plugin}`.
+            #   @param view [::Google::Cloud::NetworkServices::V1::WasmPluginView]
+            #     Determines how much data must be returned in the response. See
+            #     [AIP-157](https://google.aip.dev/157).
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Google::Cloud::NetworkServices::V1::WasmPlugin]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Google::Cloud::NetworkServices::V1::WasmPlugin]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/network_services/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::NetworkServices::V1::NetworkServices::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::NetworkServices::V1::GetWasmPluginRequest.new
+            #
+            #   # Call the get_wasm_plugin method.
+            #   result = client.get_wasm_plugin request
+            #
+            #   # The returned object is of type Google::Cloud::NetworkServices::V1::WasmPlugin.
+            #   p result
+            #
+            def get_wasm_plugin request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::NetworkServices::V1::GetWasmPluginRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.get_wasm_plugin.metadata.to_h
+
+              # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::NetworkServices::V1::VERSION
+              metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.get_wasm_plugin.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.get_wasm_plugin.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @network_services_stub.call_rpc :get_wasm_plugin, request, options: options do |response, operation|
+                yield response, operation if block_given?
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Creates a new `WasmPlugin` resource in a given project
+            # and location.
+            #
+            # @overload create_wasm_plugin(request, options = nil)
+            #   Pass arguments to `create_wasm_plugin` via a request object, either of type
+            #   {::Google::Cloud::NetworkServices::V1::CreateWasmPluginRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::NetworkServices::V1::CreateWasmPluginRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload create_wasm_plugin(parent: nil, wasm_plugin_id: nil, wasm_plugin: nil)
+            #   Pass arguments to `create_wasm_plugin` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param parent [::String]
+            #     Required. The parent resource of the `WasmPlugin` resource. Must be in the
+            #     format `projects/{project}/locations/global`.
+            #   @param wasm_plugin_id [::String]
+            #     Required. User-provided ID of the `WasmPlugin` resource to be created.
+            #   @param wasm_plugin [::Google::Cloud::NetworkServices::V1::WasmPlugin, ::Hash]
+            #     Required. `WasmPlugin` resource to be created.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Gapic::Operation]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Gapic::Operation]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/network_services/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::NetworkServices::V1::NetworkServices::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::NetworkServices::V1::CreateWasmPluginRequest.new
+            #
+            #   # Call the create_wasm_plugin method.
+            #   result = client.create_wasm_plugin request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "No response received."
+            #   end
+            #
+            def create_wasm_plugin request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::NetworkServices::V1::CreateWasmPluginRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.create_wasm_plugin.metadata.to_h
+
+              # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::NetworkServices::V1::VERSION
+              metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.create_wasm_plugin.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.create_wasm_plugin.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @network_services_stub.call_rpc :create_wasm_plugin, request, options: options do |response, operation|
+                response = ::Gapic::Operation.new response, @operations_client, options: options
+                yield response, operation if block_given?
+                throw :response, response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Updates the parameters of the specified `WasmPlugin` resource.
+            #
+            # @overload update_wasm_plugin(request, options = nil)
+            #   Pass arguments to `update_wasm_plugin` via a request object, either of type
+            #   {::Google::Cloud::NetworkServices::V1::UpdateWasmPluginRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::NetworkServices::V1::UpdateWasmPluginRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload update_wasm_plugin(update_mask: nil, wasm_plugin: nil)
+            #   Pass arguments to `update_wasm_plugin` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
+            #     Optional. Used to specify the fields to be overwritten in the
+            #     `WasmPlugin` resource by the update.
+            #     The fields specified in the `update_mask` field are relative to the
+            #     resource, not the full request.
+            #     An omitted `update_mask` field is treated as an implied `update_mask`
+            #     field equivalent to all fields that are populated (that have a non-empty
+            #     value).
+            #     The `update_mask` field supports a special value `*`, which means that
+            #     each field in the given `WasmPlugin` resource (including the empty ones)
+            #     replaces the current value.
+            #   @param wasm_plugin [::Google::Cloud::NetworkServices::V1::WasmPlugin, ::Hash]
+            #     Required. Updated `WasmPlugin` resource.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Gapic::Operation]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Gapic::Operation]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/network_services/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::NetworkServices::V1::NetworkServices::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::NetworkServices::V1::UpdateWasmPluginRequest.new
+            #
+            #   # Call the update_wasm_plugin method.
+            #   result = client.update_wasm_plugin request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "No response received."
+            #   end
+            #
+            def update_wasm_plugin request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::NetworkServices::V1::UpdateWasmPluginRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.update_wasm_plugin.metadata.to_h
+
+              # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::NetworkServices::V1::VERSION
+              metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.wasm_plugin&.name
+                header_params["wasm_plugin.name"] = request.wasm_plugin.name
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.update_wasm_plugin.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.update_wasm_plugin.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @network_services_stub.call_rpc :update_wasm_plugin, request, options: options do |response, operation|
+                response = ::Gapic::Operation.new response, @operations_client, options: options
+                yield response, operation if block_given?
+                throw :response, response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Deletes the specified `WasmPlugin` resource.
+            #
+            # @overload delete_wasm_plugin(request, options = nil)
+            #   Pass arguments to `delete_wasm_plugin` via a request object, either of type
+            #   {::Google::Cloud::NetworkServices::V1::DeleteWasmPluginRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::NetworkServices::V1::DeleteWasmPluginRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload delete_wasm_plugin(name: nil)
+            #   Pass arguments to `delete_wasm_plugin` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param name [::String]
+            #     Required. A name of the `WasmPlugin` resource to delete. Must be in the
+            #     format `projects/{project}/locations/global/wasmPlugins/{wasm_plugin}`.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Gapic::Operation]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Gapic::Operation]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/network_services/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::NetworkServices::V1::NetworkServices::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::NetworkServices::V1::DeleteWasmPluginRequest.new
+            #
+            #   # Call the delete_wasm_plugin method.
+            #   result = client.delete_wasm_plugin request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "No response received."
+            #   end
+            #
+            def delete_wasm_plugin request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::NetworkServices::V1::DeleteWasmPluginRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.delete_wasm_plugin.metadata.to_h
+
+              # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::NetworkServices::V1::VERSION
+              metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.delete_wasm_plugin.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.delete_wasm_plugin.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @network_services_stub.call_rpc :delete_wasm_plugin, request, options: options do |response, operation|
                 response = ::Gapic::Operation.new response, @operations_client, options: options
                 yield response, operation if block_given?
                 throw :response, response
@@ -1202,7 +2087,7 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload list_grpc_routes(parent: nil, page_size: nil, page_token: nil)
+            # @overload list_grpc_routes(parent: nil, page_size: nil, page_token: nil, return_partial_success: nil)
             #   Pass arguments to `list_grpc_routes` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -1216,6 +2101,10 @@ module Google
             #     The value returned by the last `ListGrpcRoutesResponse`
             #     Indicates that this is a continuation of a prior `ListGrpcRoutes` call,
             #     and that the system should return the next page of data.
+            #   @param return_partial_success [::Boolean]
+            #     Optional. If true, allow partial responses for multi-regional Aggregated
+            #     List requests. Otherwise if one of the locations is down or unreachable,
+            #     the Aggregated List request will fail.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Gapic::PagedEnumerable<::Google::Cloud::NetworkServices::V1::GrpcRoute>]
@@ -1680,7 +2569,7 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload list_http_routes(parent: nil, page_size: nil, page_token: nil)
+            # @overload list_http_routes(parent: nil, page_size: nil, page_token: nil, return_partial_success: nil)
             #   Pass arguments to `list_http_routes` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -1694,6 +2583,10 @@ module Google
             #     The value returned by the last `ListHttpRoutesResponse`
             #     Indicates that this is a continuation of a prior `ListHttpRoutes` call,
             #     and that the system should return the next page of data.
+            #   @param return_partial_success [::Boolean]
+            #     Optional. If true, allow partial responses for multi-regional Aggregated
+            #     List requests. Otherwise if one of the locations is down or unreachable,
+            #     the Aggregated List request will fail.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Gapic::PagedEnumerable<::Google::Cloud::NetworkServices::V1::HttpRoute>]
@@ -2158,7 +3051,7 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload list_tcp_routes(parent: nil, page_size: nil, page_token: nil)
+            # @overload list_tcp_routes(parent: nil, page_size: nil, page_token: nil, return_partial_success: nil)
             #   Pass arguments to `list_tcp_routes` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -2172,6 +3065,10 @@ module Google
             #     The value returned by the last `ListTcpRoutesResponse`
             #     Indicates that this is a continuation of a prior `ListTcpRoutes` call,
             #     and that the system should return the next page of data.
+            #   @param return_partial_success [::Boolean]
+            #     Optional. If true, allow partial responses for multi-regional Aggregated
+            #     List requests. Otherwise if one of the locations is down or unreachable,
+            #     the Aggregated List request will fail.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Gapic::PagedEnumerable<::Google::Cloud::NetworkServices::V1::TcpRoute>]
@@ -2636,7 +3533,7 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload list_tls_routes(parent: nil, page_size: nil, page_token: nil)
+            # @overload list_tls_routes(parent: nil, page_size: nil, page_token: nil, return_partial_success: nil)
             #   Pass arguments to `list_tls_routes` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -2650,6 +3547,10 @@ module Google
             #     The value returned by the last `ListTlsRoutesResponse`
             #     Indicates that this is a continuation of a prior `ListTlsRoutes` call,
             #     and that the system should return the next page of data.
+            #   @param return_partial_success [::Boolean]
+            #     Optional. If true, allow partial responses for multi-regional Aggregated
+            #     List requests. Otherwise if one of the locations is down or unreachable,
+            #     the Aggregated List request will fail.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Gapic::PagedEnumerable<::Google::Cloud::NetworkServices::V1::TlsRoute>]
@@ -3121,7 +4022,7 @@ module Google
             #
             #   @param parent [::String]
             #     Required. The project and location from which the ServiceBindings should be
-            #     listed, specified in the format `projects/*/locations/global`.
+            #     listed, specified in the format `projects/*/locations/*`.
             #   @param page_size [::Integer]
             #     Maximum number of ServiceBindings to return per call.
             #   @param page_token [::String]
@@ -3219,7 +4120,7 @@ module Google
             #
             #   @param name [::String]
             #     Required. A name of the ServiceBinding to get. Must be in the format
-            #     `projects/*/locations/global/serviceBindings/*`.
+            #     `projects/*/locations/*/serviceBindings/*`.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::NetworkServices::V1::ServiceBinding]
@@ -3305,7 +4206,7 @@ module Google
             #
             #   @param parent [::String]
             #     Required. The parent resource of the ServiceBinding. Must be in the
-            #     format `projects/*/locations/global`.
+            #     format `projects/*/locations/*`.
             #   @param service_binding_id [::String]
             #     Required. Short name of the ServiceBinding resource to be created.
             #   @param service_binding [::Google::Cloud::NetworkServices::V1::ServiceBinding, ::Hash]
@@ -3385,6 +4286,106 @@ module Google
             end
 
             ##
+            # Updates the parameters of a single ServiceBinding.
+            #
+            # @overload update_service_binding(request, options = nil)
+            #   Pass arguments to `update_service_binding` via a request object, either of type
+            #   {::Google::Cloud::NetworkServices::V1::UpdateServiceBindingRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::NetworkServices::V1::UpdateServiceBindingRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload update_service_binding(update_mask: nil, service_binding: nil)
+            #   Pass arguments to `update_service_binding` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
+            #     Optional. Field mask is used to specify the fields to be overwritten in the
+            #     ServiceBinding resource by the update.
+            #     The fields specified in the update_mask are relative to the resource, not
+            #     the full request. A field will be overwritten if it is in the mask. If the
+            #     user does not provide a mask then all fields will be overwritten.
+            #   @param service_binding [::Google::Cloud::NetworkServices::V1::ServiceBinding, ::Hash]
+            #     Required. Updated ServiceBinding resource.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Gapic::Operation]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Gapic::Operation]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/network_services/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::NetworkServices::V1::NetworkServices::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::NetworkServices::V1::UpdateServiceBindingRequest.new
+            #
+            #   # Call the update_service_binding method.
+            #   result = client.update_service_binding request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "No response received."
+            #   end
+            #
+            def update_service_binding request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::NetworkServices::V1::UpdateServiceBindingRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.update_service_binding.metadata.to_h
+
+              # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::NetworkServices::V1::VERSION
+              metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.service_binding&.name
+                header_params["service_binding.name"] = request.service_binding.name
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.update_service_binding.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.update_service_binding.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @network_services_stub.call_rpc :update_service_binding, request, options: options do |response, operation|
+                response = ::Gapic::Operation.new response, @operations_client, options: options
+                yield response, operation if block_given?
+                throw :response, response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
             # Deletes a single ServiceBinding.
             #
             # @overload delete_service_binding(request, options = nil)
@@ -3404,7 +4405,7 @@ module Google
             #
             #   @param name [::String]
             #     Required. A name of the ServiceBinding to delete. Must be in the format
-            #     `projects/*/locations/global/serviceBindings/*`.
+            #     `projects/*/locations/*/serviceBindings/*`.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Gapic::Operation]
@@ -3492,7 +4493,7 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload list_meshes(parent: nil, page_size: nil, page_token: nil)
+            # @overload list_meshes(parent: nil, page_size: nil, page_token: nil, return_partial_success: nil)
             #   Pass arguments to `list_meshes` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -3506,6 +4507,10 @@ module Google
             #     The value returned by the last `ListMeshesResponse`
             #     Indicates that this is a continuation of a prior `ListMeshes` call,
             #     and that the system should return the next page of data.
+            #   @param return_partial_success [::Boolean]
+            #     Optional. If true, allow partial responses for multi-regional Aggregated
+            #     List requests. Otherwise if one of the locations is down or unreachable,
+            #     the Aggregated List request will fail.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Gapic::PagedEnumerable<::Google::Cloud::NetworkServices::V1::Mesh>]
@@ -3958,6 +4963,860 @@ module Google
             end
 
             ##
+            # Lists ServiceLbPolicies in a given project and location.
+            #
+            # @overload list_service_lb_policies(request, options = nil)
+            #   Pass arguments to `list_service_lb_policies` via a request object, either of type
+            #   {::Google::Cloud::NetworkServices::V1::ListServiceLbPoliciesRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::NetworkServices::V1::ListServiceLbPoliciesRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload list_service_lb_policies(parent: nil, page_size: nil, page_token: nil)
+            #   Pass arguments to `list_service_lb_policies` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param parent [::String]
+            #     Required. The project and location from which the ServiceLbPolicies should
+            #     be listed, specified in the format
+            #     `projects/{project}/locations/{location}`.
+            #   @param page_size [::Integer]
+            #     Maximum number of ServiceLbPolicies to return per call.
+            #   @param page_token [::String]
+            #     The value returned by the last `ListServiceLbPoliciesResponse`
+            #     Indicates that this is a continuation of a prior `ListRouters` call,
+            #     and that the system should return the next page of data.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Gapic::PagedEnumerable<::Google::Cloud::NetworkServices::V1::ServiceLbPolicy>]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Gapic::PagedEnumerable<::Google::Cloud::NetworkServices::V1::ServiceLbPolicy>]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/network_services/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::NetworkServices::V1::NetworkServices::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::NetworkServices::V1::ListServiceLbPoliciesRequest.new
+            #
+            #   # Call the list_service_lb_policies method.
+            #   result = client.list_service_lb_policies request
+            #
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
+            #     # Each element is of type ::Google::Cloud::NetworkServices::V1::ServiceLbPolicy.
+            #     p item
+            #   end
+            #
+            def list_service_lb_policies request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::NetworkServices::V1::ListServiceLbPoliciesRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.list_service_lb_policies.metadata.to_h
+
+              # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::NetworkServices::V1::VERSION
+              metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.list_service_lb_policies.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.list_service_lb_policies.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @network_services_stub.call_rpc :list_service_lb_policies, request, options: options do |response, operation|
+                response = ::Gapic::PagedEnumerable.new @network_services_stub, :list_service_lb_policies, request, response, operation, options
+                yield response, operation if block_given?
+                throw :response, response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Gets details of a single ServiceLbPolicy.
+            #
+            # @overload get_service_lb_policy(request, options = nil)
+            #   Pass arguments to `get_service_lb_policy` via a request object, either of type
+            #   {::Google::Cloud::NetworkServices::V1::GetServiceLbPolicyRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::NetworkServices::V1::GetServiceLbPolicyRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload get_service_lb_policy(name: nil)
+            #   Pass arguments to `get_service_lb_policy` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param name [::String]
+            #     Required. A name of the ServiceLbPolicy to get. Must be in the format
+            #     `projects/{project}/locations/{location}/serviceLbPolicies/*`.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Google::Cloud::NetworkServices::V1::ServiceLbPolicy]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Google::Cloud::NetworkServices::V1::ServiceLbPolicy]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/network_services/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::NetworkServices::V1::NetworkServices::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::NetworkServices::V1::GetServiceLbPolicyRequest.new
+            #
+            #   # Call the get_service_lb_policy method.
+            #   result = client.get_service_lb_policy request
+            #
+            #   # The returned object is of type Google::Cloud::NetworkServices::V1::ServiceLbPolicy.
+            #   p result
+            #
+            def get_service_lb_policy request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::NetworkServices::V1::GetServiceLbPolicyRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.get_service_lb_policy.metadata.to_h
+
+              # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::NetworkServices::V1::VERSION
+              metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.get_service_lb_policy.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.get_service_lb_policy.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @network_services_stub.call_rpc :get_service_lb_policy, request, options: options do |response, operation|
+                yield response, operation if block_given?
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Creates a new ServiceLbPolicy in a given project and location.
+            #
+            # @overload create_service_lb_policy(request, options = nil)
+            #   Pass arguments to `create_service_lb_policy` via a request object, either of type
+            #   {::Google::Cloud::NetworkServices::V1::CreateServiceLbPolicyRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::NetworkServices::V1::CreateServiceLbPolicyRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload create_service_lb_policy(parent: nil, service_lb_policy_id: nil, service_lb_policy: nil)
+            #   Pass arguments to `create_service_lb_policy` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param parent [::String]
+            #     Required. The parent resource of the ServiceLbPolicy. Must be in the
+            #     format `projects/{project}/locations/{location}`.
+            #   @param service_lb_policy_id [::String]
+            #     Required. Short name of the ServiceLbPolicy resource to be created.
+            #     E.g. for resource name
+            #     `projects/{project}/locations/{location}/serviceLbPolicies/{service_lb_policy_name}`.
+            #     the id is value of \\{service_lb_policy_name}
+            #   @param service_lb_policy [::Google::Cloud::NetworkServices::V1::ServiceLbPolicy, ::Hash]
+            #     Required. ServiceLbPolicy resource to be created.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Gapic::Operation]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Gapic::Operation]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/network_services/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::NetworkServices::V1::NetworkServices::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::NetworkServices::V1::CreateServiceLbPolicyRequest.new
+            #
+            #   # Call the create_service_lb_policy method.
+            #   result = client.create_service_lb_policy request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "No response received."
+            #   end
+            #
+            def create_service_lb_policy request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::NetworkServices::V1::CreateServiceLbPolicyRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.create_service_lb_policy.metadata.to_h
+
+              # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::NetworkServices::V1::VERSION
+              metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.create_service_lb_policy.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.create_service_lb_policy.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @network_services_stub.call_rpc :create_service_lb_policy, request, options: options do |response, operation|
+                response = ::Gapic::Operation.new response, @operations_client, options: options
+                yield response, operation if block_given?
+                throw :response, response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Updates the parameters of a single ServiceLbPolicy.
+            #
+            # @overload update_service_lb_policy(request, options = nil)
+            #   Pass arguments to `update_service_lb_policy` via a request object, either of type
+            #   {::Google::Cloud::NetworkServices::V1::UpdateServiceLbPolicyRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::NetworkServices::V1::UpdateServiceLbPolicyRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload update_service_lb_policy(update_mask: nil, service_lb_policy: nil)
+            #   Pass arguments to `update_service_lb_policy` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
+            #     Optional. Field mask is used to specify the fields to be overwritten in the
+            #     ServiceLbPolicy resource by the update.
+            #     The fields specified in the update_mask are relative to the resource, not
+            #     the full request. A field will be overwritten if it is in the mask. If the
+            #     user does not provide a mask then all fields will be overwritten.
+            #   @param service_lb_policy [::Google::Cloud::NetworkServices::V1::ServiceLbPolicy, ::Hash]
+            #     Required. Updated ServiceLbPolicy resource.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Gapic::Operation]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Gapic::Operation]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/network_services/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::NetworkServices::V1::NetworkServices::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::NetworkServices::V1::UpdateServiceLbPolicyRequest.new
+            #
+            #   # Call the update_service_lb_policy method.
+            #   result = client.update_service_lb_policy request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "No response received."
+            #   end
+            #
+            def update_service_lb_policy request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::NetworkServices::V1::UpdateServiceLbPolicyRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.update_service_lb_policy.metadata.to_h
+
+              # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::NetworkServices::V1::VERSION
+              metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.service_lb_policy&.name
+                header_params["service_lb_policy.name"] = request.service_lb_policy.name
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.update_service_lb_policy.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.update_service_lb_policy.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @network_services_stub.call_rpc :update_service_lb_policy, request, options: options do |response, operation|
+                response = ::Gapic::Operation.new response, @operations_client, options: options
+                yield response, operation if block_given?
+                throw :response, response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Deletes a single ServiceLbPolicy.
+            #
+            # @overload delete_service_lb_policy(request, options = nil)
+            #   Pass arguments to `delete_service_lb_policy` via a request object, either of type
+            #   {::Google::Cloud::NetworkServices::V1::DeleteServiceLbPolicyRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::NetworkServices::V1::DeleteServiceLbPolicyRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload delete_service_lb_policy(name: nil)
+            #   Pass arguments to `delete_service_lb_policy` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param name [::String]
+            #     Required. A name of the ServiceLbPolicy to delete. Must be in the format
+            #     `projects/{project}/locations/{location}/serviceLbPolicies/*`.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Gapic::Operation]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Gapic::Operation]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/network_services/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::NetworkServices::V1::NetworkServices::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::NetworkServices::V1::DeleteServiceLbPolicyRequest.new
+            #
+            #   # Call the delete_service_lb_policy method.
+            #   result = client.delete_service_lb_policy request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "No response received."
+            #   end
+            #
+            def delete_service_lb_policy request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::NetworkServices::V1::DeleteServiceLbPolicyRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.delete_service_lb_policy.metadata.to_h
+
+              # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::NetworkServices::V1::VERSION
+              metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.delete_service_lb_policy.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.delete_service_lb_policy.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @network_services_stub.call_rpc :delete_service_lb_policy, request, options: options do |response, operation|
+                response = ::Gapic::Operation.new response, @operations_client, options: options
+                yield response, operation if block_given?
+                throw :response, response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Get a single RouteView of a Gateway.
+            #
+            # @overload get_gateway_route_view(request, options = nil)
+            #   Pass arguments to `get_gateway_route_view` via a request object, either of type
+            #   {::Google::Cloud::NetworkServices::V1::GetGatewayRouteViewRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::NetworkServices::V1::GetGatewayRouteViewRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload get_gateway_route_view(name: nil)
+            #   Pass arguments to `get_gateway_route_view` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param name [::String]
+            #     Required. Name of the GatewayRouteView resource.
+            #     Formats:
+            #       projects/\\{project}/locations/\\{location}/gateways/\\{gateway}/routeViews/\\{route_view}
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Google::Cloud::NetworkServices::V1::GatewayRouteView]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Google::Cloud::NetworkServices::V1::GatewayRouteView]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/network_services/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::NetworkServices::V1::NetworkServices::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::NetworkServices::V1::GetGatewayRouteViewRequest.new
+            #
+            #   # Call the get_gateway_route_view method.
+            #   result = client.get_gateway_route_view request
+            #
+            #   # The returned object is of type Google::Cloud::NetworkServices::V1::GatewayRouteView.
+            #   p result
+            #
+            def get_gateway_route_view request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::NetworkServices::V1::GetGatewayRouteViewRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.get_gateway_route_view.metadata.to_h
+
+              # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::NetworkServices::V1::VERSION
+              metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.get_gateway_route_view.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.get_gateway_route_view.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @network_services_stub.call_rpc :get_gateway_route_view, request, options: options do |response, operation|
+                yield response, operation if block_given?
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Get a single RouteView of a Mesh.
+            #
+            # @overload get_mesh_route_view(request, options = nil)
+            #   Pass arguments to `get_mesh_route_view` via a request object, either of type
+            #   {::Google::Cloud::NetworkServices::V1::GetMeshRouteViewRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::NetworkServices::V1::GetMeshRouteViewRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload get_mesh_route_view(name: nil)
+            #   Pass arguments to `get_mesh_route_view` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param name [::String]
+            #     Required. Name of the MeshRouteView resource.
+            #     Format:
+            #       projects/\\{project}/locations/\\{location}/meshes/\\{mesh}/routeViews/\\{route_view}
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Google::Cloud::NetworkServices::V1::MeshRouteView]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Google::Cloud::NetworkServices::V1::MeshRouteView]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/network_services/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::NetworkServices::V1::NetworkServices::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::NetworkServices::V1::GetMeshRouteViewRequest.new
+            #
+            #   # Call the get_mesh_route_view method.
+            #   result = client.get_mesh_route_view request
+            #
+            #   # The returned object is of type Google::Cloud::NetworkServices::V1::MeshRouteView.
+            #   p result
+            #
+            def get_mesh_route_view request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::NetworkServices::V1::GetMeshRouteViewRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.get_mesh_route_view.metadata.to_h
+
+              # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::NetworkServices::V1::VERSION
+              metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.get_mesh_route_view.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.get_mesh_route_view.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @network_services_stub.call_rpc :get_mesh_route_view, request, options: options do |response, operation|
+                yield response, operation if block_given?
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Lists RouteViews
+            #
+            # @overload list_gateway_route_views(request, options = nil)
+            #   Pass arguments to `list_gateway_route_views` via a request object, either of type
+            #   {::Google::Cloud::NetworkServices::V1::ListGatewayRouteViewsRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::NetworkServices::V1::ListGatewayRouteViewsRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload list_gateway_route_views(parent: nil, page_size: nil, page_token: nil)
+            #   Pass arguments to `list_gateway_route_views` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param parent [::String]
+            #     Required. The Gateway to which a Route is associated.
+            #     Formats:
+            #       projects/\\{project}/locations/\\{location}/gateways/\\{gateway}
+            #   @param page_size [::Integer]
+            #     Maximum number of GatewayRouteViews to return per call.
+            #   @param page_token [::String]
+            #     The value returned by the last `ListGatewayRouteViewsResponse`
+            #     Indicates that this is a continuation of a prior `ListGatewayRouteViews`
+            #     call, and that the system should return the next page of data.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Gapic::PagedEnumerable<::Google::Cloud::NetworkServices::V1::GatewayRouteView>]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Gapic::PagedEnumerable<::Google::Cloud::NetworkServices::V1::GatewayRouteView>]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/network_services/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::NetworkServices::V1::NetworkServices::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::NetworkServices::V1::ListGatewayRouteViewsRequest.new
+            #
+            #   # Call the list_gateway_route_views method.
+            #   result = client.list_gateway_route_views request
+            #
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
+            #     # Each element is of type ::Google::Cloud::NetworkServices::V1::GatewayRouteView.
+            #     p item
+            #   end
+            #
+            def list_gateway_route_views request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::NetworkServices::V1::ListGatewayRouteViewsRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.list_gateway_route_views.metadata.to_h
+
+              # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::NetworkServices::V1::VERSION
+              metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.list_gateway_route_views.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.list_gateway_route_views.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @network_services_stub.call_rpc :list_gateway_route_views, request, options: options do |response, operation|
+                response = ::Gapic::PagedEnumerable.new @network_services_stub, :list_gateway_route_views, request, response, operation, options
+                yield response, operation if block_given?
+                throw :response, response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Lists RouteViews
+            #
+            # @overload list_mesh_route_views(request, options = nil)
+            #   Pass arguments to `list_mesh_route_views` via a request object, either of type
+            #   {::Google::Cloud::NetworkServices::V1::ListMeshRouteViewsRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::NetworkServices::V1::ListMeshRouteViewsRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload list_mesh_route_views(parent: nil, page_size: nil, page_token: nil)
+            #   Pass arguments to `list_mesh_route_views` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param parent [::String]
+            #     Required. The Mesh to which a Route is associated.
+            #     Format:
+            #       projects/\\{project}/locations/\\{location}/meshes/\\{mesh}
+            #   @param page_size [::Integer]
+            #     Maximum number of MeshRouteViews to return per call.
+            #   @param page_token [::String]
+            #     The value returned by the last `ListMeshRouteViewsResponse`
+            #     Indicates that this is a continuation of a prior `ListMeshRouteViews` call,
+            #     and that the system should return the next page of data.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Gapic::PagedEnumerable<::Google::Cloud::NetworkServices::V1::MeshRouteView>]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Gapic::PagedEnumerable<::Google::Cloud::NetworkServices::V1::MeshRouteView>]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/network_services/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::NetworkServices::V1::NetworkServices::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::NetworkServices::V1::ListMeshRouteViewsRequest.new
+            #
+            #   # Call the list_mesh_route_views method.
+            #   result = client.list_mesh_route_views request
+            #
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
+            #     # Each element is of type ::Google::Cloud::NetworkServices::V1::MeshRouteView.
+            #     p item
+            #   end
+            #
+            def list_mesh_route_views request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::NetworkServices::V1::ListMeshRouteViewsRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.list_mesh_route_views.metadata.to_h
+
+              # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::NetworkServices::V1::VERSION
+              metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.list_mesh_route_views.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.list_mesh_route_views.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @network_services_stub.call_rpc :list_mesh_route_views, request, options: options do |response, operation|
+                response = ::Gapic::PagedEnumerable.new @network_services_stub, :list_mesh_route_views, request, response, operation, options
+                yield response, operation if block_given?
+                throw :response, response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
             # Configuration class for the NetworkServices API.
             #
             # This class represents the configuration for NetworkServices,
@@ -4149,6 +6008,51 @@ module Google
                 #
                 attr_reader :delete_endpoint_policy
                 ##
+                # RPC-specific configuration for `list_wasm_plugin_versions`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :list_wasm_plugin_versions
+                ##
+                # RPC-specific configuration for `get_wasm_plugin_version`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :get_wasm_plugin_version
+                ##
+                # RPC-specific configuration for `create_wasm_plugin_version`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :create_wasm_plugin_version
+                ##
+                # RPC-specific configuration for `delete_wasm_plugin_version`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :delete_wasm_plugin_version
+                ##
+                # RPC-specific configuration for `list_wasm_plugins`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :list_wasm_plugins
+                ##
+                # RPC-specific configuration for `get_wasm_plugin`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :get_wasm_plugin
+                ##
+                # RPC-specific configuration for `create_wasm_plugin`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :create_wasm_plugin
+                ##
+                # RPC-specific configuration for `update_wasm_plugin`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :update_wasm_plugin
+                ##
+                # RPC-specific configuration for `delete_wasm_plugin`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :delete_wasm_plugin
+                ##
                 # RPC-specific configuration for `list_gateways`
                 # @return [::Gapic::Config::Method]
                 #
@@ -4289,6 +6193,11 @@ module Google
                 #
                 attr_reader :create_service_binding
                 ##
+                # RPC-specific configuration for `update_service_binding`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :update_service_binding
+                ##
                 # RPC-specific configuration for `delete_service_binding`
                 # @return [::Gapic::Config::Method]
                 #
@@ -4318,6 +6227,51 @@ module Google
                 # @return [::Gapic::Config::Method]
                 #
                 attr_reader :delete_mesh
+                ##
+                # RPC-specific configuration for `list_service_lb_policies`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :list_service_lb_policies
+                ##
+                # RPC-specific configuration for `get_service_lb_policy`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :get_service_lb_policy
+                ##
+                # RPC-specific configuration for `create_service_lb_policy`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :create_service_lb_policy
+                ##
+                # RPC-specific configuration for `update_service_lb_policy`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :update_service_lb_policy
+                ##
+                # RPC-specific configuration for `delete_service_lb_policy`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :delete_service_lb_policy
+                ##
+                # RPC-specific configuration for `get_gateway_route_view`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :get_gateway_route_view
+                ##
+                # RPC-specific configuration for `get_mesh_route_view`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :get_mesh_route_view
+                ##
+                # RPC-specific configuration for `list_gateway_route_views`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :list_gateway_route_views
+                ##
+                # RPC-specific configuration for `list_mesh_route_views`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :list_mesh_route_views
 
                 # @private
                 def initialize parent_rpcs = nil
@@ -4331,6 +6285,24 @@ module Google
                   @update_endpoint_policy = ::Gapic::Config::Method.new update_endpoint_policy_config
                   delete_endpoint_policy_config = parent_rpcs.delete_endpoint_policy if parent_rpcs.respond_to? :delete_endpoint_policy
                   @delete_endpoint_policy = ::Gapic::Config::Method.new delete_endpoint_policy_config
+                  list_wasm_plugin_versions_config = parent_rpcs.list_wasm_plugin_versions if parent_rpcs.respond_to? :list_wasm_plugin_versions
+                  @list_wasm_plugin_versions = ::Gapic::Config::Method.new list_wasm_plugin_versions_config
+                  get_wasm_plugin_version_config = parent_rpcs.get_wasm_plugin_version if parent_rpcs.respond_to? :get_wasm_plugin_version
+                  @get_wasm_plugin_version = ::Gapic::Config::Method.new get_wasm_plugin_version_config
+                  create_wasm_plugin_version_config = parent_rpcs.create_wasm_plugin_version if parent_rpcs.respond_to? :create_wasm_plugin_version
+                  @create_wasm_plugin_version = ::Gapic::Config::Method.new create_wasm_plugin_version_config
+                  delete_wasm_plugin_version_config = parent_rpcs.delete_wasm_plugin_version if parent_rpcs.respond_to? :delete_wasm_plugin_version
+                  @delete_wasm_plugin_version = ::Gapic::Config::Method.new delete_wasm_plugin_version_config
+                  list_wasm_plugins_config = parent_rpcs.list_wasm_plugins if parent_rpcs.respond_to? :list_wasm_plugins
+                  @list_wasm_plugins = ::Gapic::Config::Method.new list_wasm_plugins_config
+                  get_wasm_plugin_config = parent_rpcs.get_wasm_plugin if parent_rpcs.respond_to? :get_wasm_plugin
+                  @get_wasm_plugin = ::Gapic::Config::Method.new get_wasm_plugin_config
+                  create_wasm_plugin_config = parent_rpcs.create_wasm_plugin if parent_rpcs.respond_to? :create_wasm_plugin
+                  @create_wasm_plugin = ::Gapic::Config::Method.new create_wasm_plugin_config
+                  update_wasm_plugin_config = parent_rpcs.update_wasm_plugin if parent_rpcs.respond_to? :update_wasm_plugin
+                  @update_wasm_plugin = ::Gapic::Config::Method.new update_wasm_plugin_config
+                  delete_wasm_plugin_config = parent_rpcs.delete_wasm_plugin if parent_rpcs.respond_to? :delete_wasm_plugin
+                  @delete_wasm_plugin = ::Gapic::Config::Method.new delete_wasm_plugin_config
                   list_gateways_config = parent_rpcs.list_gateways if parent_rpcs.respond_to? :list_gateways
                   @list_gateways = ::Gapic::Config::Method.new list_gateways_config
                   get_gateway_config = parent_rpcs.get_gateway if parent_rpcs.respond_to? :get_gateway
@@ -4387,6 +6359,8 @@ module Google
                   @get_service_binding = ::Gapic::Config::Method.new get_service_binding_config
                   create_service_binding_config = parent_rpcs.create_service_binding if parent_rpcs.respond_to? :create_service_binding
                   @create_service_binding = ::Gapic::Config::Method.new create_service_binding_config
+                  update_service_binding_config = parent_rpcs.update_service_binding if parent_rpcs.respond_to? :update_service_binding
+                  @update_service_binding = ::Gapic::Config::Method.new update_service_binding_config
                   delete_service_binding_config = parent_rpcs.delete_service_binding if parent_rpcs.respond_to? :delete_service_binding
                   @delete_service_binding = ::Gapic::Config::Method.new delete_service_binding_config
                   list_meshes_config = parent_rpcs.list_meshes if parent_rpcs.respond_to? :list_meshes
@@ -4399,6 +6373,24 @@ module Google
                   @update_mesh = ::Gapic::Config::Method.new update_mesh_config
                   delete_mesh_config = parent_rpcs.delete_mesh if parent_rpcs.respond_to? :delete_mesh
                   @delete_mesh = ::Gapic::Config::Method.new delete_mesh_config
+                  list_service_lb_policies_config = parent_rpcs.list_service_lb_policies if parent_rpcs.respond_to? :list_service_lb_policies
+                  @list_service_lb_policies = ::Gapic::Config::Method.new list_service_lb_policies_config
+                  get_service_lb_policy_config = parent_rpcs.get_service_lb_policy if parent_rpcs.respond_to? :get_service_lb_policy
+                  @get_service_lb_policy = ::Gapic::Config::Method.new get_service_lb_policy_config
+                  create_service_lb_policy_config = parent_rpcs.create_service_lb_policy if parent_rpcs.respond_to? :create_service_lb_policy
+                  @create_service_lb_policy = ::Gapic::Config::Method.new create_service_lb_policy_config
+                  update_service_lb_policy_config = parent_rpcs.update_service_lb_policy if parent_rpcs.respond_to? :update_service_lb_policy
+                  @update_service_lb_policy = ::Gapic::Config::Method.new update_service_lb_policy_config
+                  delete_service_lb_policy_config = parent_rpcs.delete_service_lb_policy if parent_rpcs.respond_to? :delete_service_lb_policy
+                  @delete_service_lb_policy = ::Gapic::Config::Method.new delete_service_lb_policy_config
+                  get_gateway_route_view_config = parent_rpcs.get_gateway_route_view if parent_rpcs.respond_to? :get_gateway_route_view
+                  @get_gateway_route_view = ::Gapic::Config::Method.new get_gateway_route_view_config
+                  get_mesh_route_view_config = parent_rpcs.get_mesh_route_view if parent_rpcs.respond_to? :get_mesh_route_view
+                  @get_mesh_route_view = ::Gapic::Config::Method.new get_mesh_route_view_config
+                  list_gateway_route_views_config = parent_rpcs.list_gateway_route_views if parent_rpcs.respond_to? :list_gateway_route_views
+                  @list_gateway_route_views = ::Gapic::Config::Method.new list_gateway_route_views_config
+                  list_mesh_route_views_config = parent_rpcs.list_mesh_route_views if parent_rpcs.respond_to? :list_mesh_route_views
+                  @list_mesh_route_views = ::Gapic::Config::Method.new list_mesh_route_views_config
 
                   yield self if block_given?
                 end

@@ -1,7 +1,7 @@
 {
   "client_library": {
     "name": "google-cloud-cloud_controls_partner-v1",
-    "version": "2.0.1",
+    "version": "2.1.0",
     "language": "RUBY",
     "apis": [
       {
@@ -315,6 +315,126 @@
         "method": {
           "short_name": "GetPartner",
           "full_name": "google.cloud.cloudcontrolspartner.v1.CloudControlsPartnerCore.GetPartner",
+          "service": {
+            "short_name": "CloudControlsPartnerCore",
+            "full_name": "google.cloud.cloudcontrolspartner.v1.CloudControlsPartnerCore"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "cloudcontrolspartner_v1_generated_CloudControlsPartnerCore_CreateCustomer_sync",
+      "title": "Snippet for the create_customer call in the CloudControlsPartnerCore service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::CloudControlsPartner::V1::CloudControlsPartnerCore::Client#create_customer.",
+      "file": "cloud_controls_partner_core/create_customer.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_customer",
+        "full_name": "::Google::Cloud::CloudControlsPartner::V1::CloudControlsPartnerCore::Client#create_customer",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::CloudControlsPartner::V1::CreateCustomerRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::CloudControlsPartner::V1::Customer",
+        "client": {
+          "short_name": "CloudControlsPartnerCore::Client",
+          "full_name": "::Google::Cloud::CloudControlsPartner::V1::CloudControlsPartnerCore::Client"
+        },
+        "method": {
+          "short_name": "CreateCustomer",
+          "full_name": "google.cloud.cloudcontrolspartner.v1.CloudControlsPartnerCore.CreateCustomer",
+          "service": {
+            "short_name": "CloudControlsPartnerCore",
+            "full_name": "google.cloud.cloudcontrolspartner.v1.CloudControlsPartnerCore"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "cloudcontrolspartner_v1_generated_CloudControlsPartnerCore_UpdateCustomer_sync",
+      "title": "Snippet for the update_customer call in the CloudControlsPartnerCore service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::CloudControlsPartner::V1::CloudControlsPartnerCore::Client#update_customer.",
+      "file": "cloud_controls_partner_core/update_customer.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_customer",
+        "full_name": "::Google::Cloud::CloudControlsPartner::V1::CloudControlsPartnerCore::Client#update_customer",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::CloudControlsPartner::V1::UpdateCustomerRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::CloudControlsPartner::V1::Customer",
+        "client": {
+          "short_name": "CloudControlsPartnerCore::Client",
+          "full_name": "::Google::Cloud::CloudControlsPartner::V1::CloudControlsPartnerCore::Client"
+        },
+        "method": {
+          "short_name": "UpdateCustomer",
+          "full_name": "google.cloud.cloudcontrolspartner.v1.CloudControlsPartnerCore.UpdateCustomer",
+          "service": {
+            "short_name": "CloudControlsPartnerCore",
+            "full_name": "google.cloud.cloudcontrolspartner.v1.CloudControlsPartnerCore"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "cloudcontrolspartner_v1_generated_CloudControlsPartnerCore_DeleteCustomer_sync",
+      "title": "Snippet for the delete_customer call in the CloudControlsPartnerCore service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::CloudControlsPartner::V1::CloudControlsPartnerCore::Client#delete_customer.",
+      "file": "cloud_controls_partner_core/delete_customer.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_customer",
+        "full_name": "::Google::Cloud::CloudControlsPartner::V1::CloudControlsPartnerCore::Client#delete_customer",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::CloudControlsPartner::V1::DeleteCustomerRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Protobuf::Empty",
+        "client": {
+          "short_name": "CloudControlsPartnerCore::Client",
+          "full_name": "::Google::Cloud::CloudControlsPartner::V1::CloudControlsPartnerCore::Client"
+        },
+        "method": {
+          "short_name": "DeleteCustomer",
+          "full_name": "google.cloud.cloudcontrolspartner.v1.CloudControlsPartnerCore.DeleteCustomer",
           "service": {
             "short_name": "CloudControlsPartnerCore",
             "full_name": "google.cloud.cloudcontrolspartner.v1.CloudControlsPartnerCore"

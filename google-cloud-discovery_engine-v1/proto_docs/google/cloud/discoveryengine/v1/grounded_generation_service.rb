@@ -476,6 +476,9 @@ module Google
         #     will lead to fewer but very strong citations, while choosing a lower
         #     threshold may lead to more but somewhat weaker citations. If unset, the
         #     threshold will default to 0.6.
+        # @!attribute [rw] enable_claim_level_score
+        #   @return [::Boolean]
+        #     The control flag that enables claim-level grounding score in the response.
         class CheckGroundingSpec
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -601,6 +604,11 @@ module Google
           #     the claim and therefore
           #     {::Google::Cloud::DiscoveryEngine::V1::CheckGroundingResponse::Claim#citation_indices citation_indices}
           #     should not be returned.
+          # @!attribute [rw] score
+          #   @return [::Float]
+          #     Confidence score for the claim in the answer candidate, in the range of
+          #     [0, 1]. This is set only when
+          #     `CheckGroundingRequest.grounding_spec.enable_claim_level_score` is true.
           class Claim
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods

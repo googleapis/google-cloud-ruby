@@ -1,5 +1,19 @@
 # Changelog
 
+### 0.24.0 (2025-05-16)
+
+#### Features
+
+* Support GPU zonal redundancy setting 
+* Support node selector in Cloud Run jobs for GPU setting 
+
+### 0.23.0 (2025-05-12)
+
+#### Features
+
+* Updated core dependencies including gapic-common 
+* Updated required Ruby version to 3.1 
+
 ### 0.22.1 (2025-04-29)
 
 #### Bug Fixes

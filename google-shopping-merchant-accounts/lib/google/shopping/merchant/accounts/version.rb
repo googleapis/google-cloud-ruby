@@ -21,7 +21,7 @@ module Google
   module Shopping
     module Merchant
       module Accounts
-        VERSION = "0.4.1"
+        VERSION = "0.6.0"
       end
     end
   end

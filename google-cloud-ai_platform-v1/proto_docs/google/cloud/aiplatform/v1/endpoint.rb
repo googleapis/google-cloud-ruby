@@ -132,9 +132,10 @@ module Google
         # @!attribute [r] dedicated_endpoint_dns
         #   @return [::String]
         #     Output only. DNS of the dedicated endpoint. Will only be populated if
-        #     dedicated_endpoint_enabled is true.
-        #     Format:
-        #     `https://{endpoint_id}.{region}-{project_number}.prediction.vertexai.goog`.
+        #     dedicated_endpoint_enabled is true. Depending on the features enabled, uid
+        #     might be a random number or a string. For example, if fast_tryout is
+        #     enabled, uid will be fasttryout. Format:
+        #     `https://{endpoint_id}.{region}-{uid}.prediction.vertexai.goog`.
         # @!attribute [rw] client_connection_config
         #   @return [::Google::Cloud::AIPlatform::V1::ClientConnectionConfig]
         #     Configurations that are applied to the endpoint for online prediction.
@@ -144,6 +145,11 @@ module Google
         # @!attribute [r] satisfies_pzi
         #   @return [::Boolean]
         #     Output only. Reserved for future use.
+        # @!attribute [rw] gen_ai_advanced_features_config
+        #   @return [::Google::Cloud::AIPlatform::V1::GenAiAdvancedFeaturesConfig]
+        #     Optional. Configuration for GenAiAdvancedFeatures. If the endpoint is
+        #     serving GenAI models, advanced features like native RAG integration can be
+        #     configured. Currently, only Model Garden models are supported.
         class Endpoint
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -195,9 +201,8 @@ module Google
         #     This value should be 1-10 characters, and valid characters are `/[0-9]/`.
         # @!attribute [rw] model
         #   @return [::String]
-        #     Required. The resource name of the Model that this is the deployment of.
-        #     Note that the Model may be in a different location than the DeployedModel's
-        #     Endpoint.
+        #     The resource name of the Model that this is the deployment of. Note that
+        #     the Model may be in a different location than the DeployedModel's Endpoint.
         #
         #     The resource name may contain version id or version alias to specify the
         #     version.
@@ -285,6 +290,9 @@ module Google
         #   @return [::Google::Protobuf::Map{::String => ::String}]
         #     System labels to apply to Model Garden deployments.
         #     System labels are managed by Google for internal use only.
+        # @!attribute [rw] checkpoint_id
+        #   @return [::String]
+        #     The checkpoint id of the model.
         # @!attribute [rw] speculative_decoding_spec
         #   @return [::Google::Cloud::AIPlatform::V1::SpeculativeDecodingSpec]
         #     Optional. Spec for configuring speculative decoding.
@@ -377,6 +385,26 @@ module Google
         class FasterDeploymentConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Configuration for GenAiAdvancedFeatures.
+        # @!attribute [rw] rag_config
+        #   @return [::Google::Cloud::AIPlatform::V1::GenAiAdvancedFeaturesConfig::RagConfig]
+        #     Configuration for Retrieval Augmented Generation feature.
+        class GenAiAdvancedFeaturesConfig
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Configuration for Retrieval Augmented Generation feature.
+          # @!attribute [rw] enable_rag
+          #   @return [::Boolean]
+          #     If true, enable Retrieval Augmented Generation in ChatCompletion request.
+          #     Once enabled, the endpoint will be identified as GenAI endpoint and
+          #     Arthedain router will be used.
+          class RagConfig
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
         end
 
         # Configuration for Speculative Decoding.

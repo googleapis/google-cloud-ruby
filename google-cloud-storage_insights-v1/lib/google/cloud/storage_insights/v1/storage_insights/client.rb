@@ -93,6 +93,36 @@ module Google
                   initial_delay: 1.0, max_delay: 60.0, multiplier: 1.3, retry_codes: [14]
                 }
 
+                default_config.rpcs.list_dataset_configs.timeout = 60.0
+                default_config.rpcs.list_dataset_configs.retry_policy = {
+                  initial_delay: 1.0, max_delay: 60.0, multiplier: 1.3, retry_codes: [14]
+                }
+
+                default_config.rpcs.create_dataset_config.timeout = 60.0
+                default_config.rpcs.create_dataset_config.retry_policy = {
+                  initial_delay: 1.0, max_delay: 60.0, multiplier: 1.3, retry_codes: [14]
+                }
+
+                default_config.rpcs.update_dataset_config.timeout = 60.0
+                default_config.rpcs.update_dataset_config.retry_policy = {
+                  initial_delay: 1.0, max_delay: 60.0, multiplier: 1.3, retry_codes: [14]
+                }
+
+                default_config.rpcs.delete_dataset_config.timeout = 60.0
+                default_config.rpcs.delete_dataset_config.retry_policy = {
+                  initial_delay: 1.0, max_delay: 60.0, multiplier: 1.3, retry_codes: [14]
+                }
+
+                default_config.rpcs.link_dataset.timeout = 60.0
+                default_config.rpcs.link_dataset.retry_policy = {
+                  initial_delay: 1.0, max_delay: 60.0, multiplier: 1.3, retry_codes: [14]
+                }
+
+                default_config.rpcs.unlink_dataset.timeout = 60.0
+                default_config.rpcs.unlink_dataset.retry_policy = {
+                  initial_delay: 1.0, max_delay: 60.0, multiplier: 1.3, retry_codes: [14]
+                }
+
                 default_config
               end
               yield @configure if block_given?
@@ -172,6 +202,13 @@ module Google
               @quota_project_id = @config.quota_project
               @quota_project_id ||= credentials.quota_project_id if credentials.respond_to? :quota_project_id
 
+              @operations_client = Operations.new do |config|
+                config.credentials = credentials
+                config.quota_project = @quota_project_id
+                config.endpoint = @config.endpoint
+                config.universe_domain = @config.universe_domain
+              end
+
               @storage_insights_stub = ::Gapic::ServiceStub.new(
                 ::Google::Cloud::StorageInsights::V1::StorageInsights::Stub,
                 credentials: credentials,
@@ -202,6 +239,13 @@ module Google
                 config.logger = @storage_insights_stub.logger if config.respond_to? :logger=
               end
             end
+
+            ##
+            # Get the associated client for long-running operations.
+            #
+            # @return [::Google::Cloud::StorageInsights::V1::StorageInsights::Operations]
+            #
+            attr_reader :operations_client
 
             ##
             # Get the associated client for mix-in of the Locations.
@@ -899,6 +943,711 @@ module Google
             end
 
             ##
+            # Lists the dataset configurations in a given project for a given location.
+            #
+            # @overload list_dataset_configs(request, options = nil)
+            #   Pass arguments to `list_dataset_configs` via a request object, either of type
+            #   {::Google::Cloud::StorageInsights::V1::ListDatasetConfigsRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::StorageInsights::V1::ListDatasetConfigsRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload list_dataset_configs(parent: nil, page_size: nil, page_token: nil, filter: nil, order_by: nil)
+            #   Pass arguments to `list_dataset_configs` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param parent [::String]
+            #     Required. Parent value for ListDatasetConfigsRequest
+            #   @param page_size [::Integer]
+            #     Requested page size. Server might return fewer items than requested.
+            #     If unspecified, server picks an appropriate default.
+            #   @param page_token [::String]
+            #     A token identifying a page of results the server should return.
+            #   @param filter [::String]
+            #     Filtering results
+            #   @param order_by [::String]
+            #     Hint for how to order the results
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Gapic::PagedEnumerable<::Google::Cloud::StorageInsights::V1::DatasetConfig>]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Gapic::PagedEnumerable<::Google::Cloud::StorageInsights::V1::DatasetConfig>]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/storage_insights/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::StorageInsights::V1::StorageInsights::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::StorageInsights::V1::ListDatasetConfigsRequest.new
+            #
+            #   # Call the list_dataset_configs method.
+            #   result = client.list_dataset_configs request
+            #
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
+            #     # Each element is of type ::Google::Cloud::StorageInsights::V1::DatasetConfig.
+            #     p item
+            #   end
+            #
+            def list_dataset_configs request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::StorageInsights::V1::ListDatasetConfigsRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.list_dataset_configs.metadata.to_h
+
+              # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::StorageInsights::V1::VERSION
+              metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.list_dataset_configs.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.list_dataset_configs.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @storage_insights_stub.call_rpc :list_dataset_configs, request, options: options do |response, operation|
+                response = ::Gapic::PagedEnumerable.new @storage_insights_stub, :list_dataset_configs, request, response, operation, options
+                yield response, operation if block_given?
+                throw :response, response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Gets the dataset configuration in a given project for a given location.
+            #
+            # @overload get_dataset_config(request, options = nil)
+            #   Pass arguments to `get_dataset_config` via a request object, either of type
+            #   {::Google::Cloud::StorageInsights::V1::GetDatasetConfigRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::StorageInsights::V1::GetDatasetConfigRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload get_dataset_config(name: nil)
+            #   Pass arguments to `get_dataset_config` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param name [::String]
+            #     Required. Name of the resource
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Google::Cloud::StorageInsights::V1::DatasetConfig]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Google::Cloud::StorageInsights::V1::DatasetConfig]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/storage_insights/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::StorageInsights::V1::StorageInsights::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::StorageInsights::V1::GetDatasetConfigRequest.new
+            #
+            #   # Call the get_dataset_config method.
+            #   result = client.get_dataset_config request
+            #
+            #   # The returned object is of type Google::Cloud::StorageInsights::V1::DatasetConfig.
+            #   p result
+            #
+            def get_dataset_config request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::StorageInsights::V1::GetDatasetConfigRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.get_dataset_config.metadata.to_h
+
+              # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::StorageInsights::V1::VERSION
+              metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.get_dataset_config.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.get_dataset_config.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @storage_insights_stub.call_rpc :get_dataset_config, request, options: options do |response, operation|
+                yield response, operation if block_given?
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Creates a dataset configuration in a given project for a given location.
+            #
+            # @overload create_dataset_config(request, options = nil)
+            #   Pass arguments to `create_dataset_config` via a request object, either of type
+            #   {::Google::Cloud::StorageInsights::V1::CreateDatasetConfigRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::StorageInsights::V1::CreateDatasetConfigRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload create_dataset_config(parent: nil, dataset_config_id: nil, dataset_config: nil, request_id: nil)
+            #   Pass arguments to `create_dataset_config` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param parent [::String]
+            #     Required. Value for parent.
+            #   @param dataset_config_id [::String]
+            #     Required. ID of the requesting object.
+            #     If auto-generating ID is enabled on the server-side, remove this field and
+            #     `dataset_config_id` from the method_signature of Create RPC
+            #     Note: The value should not contain any hyphens.
+            #   @param dataset_config [::Google::Cloud::StorageInsights::V1::DatasetConfig, ::Hash]
+            #     Required. The resource being created
+            #   @param request_id [::String]
+            #     Optional. A unique identifier for your request.
+            #     Specify the request ID if you need to retry the request.
+            #     If you retry the request with the same ID within 60 minutes, the server
+            #     ignores the request if it has already completed the original request.
+            #
+            #     For example, if your initial request times out and you retry the request
+            #     using the same request ID, the server recognizes the original request and
+            #     does not process the new request.
+            #
+            #     The request ID must be a valid UUID and cannot be a zero UUID
+            #     (00000000-0000-0000-0000-000000000000).
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Gapic::Operation]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Gapic::Operation]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/storage_insights/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::StorageInsights::V1::StorageInsights::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::StorageInsights::V1::CreateDatasetConfigRequest.new
+            #
+            #   # Call the create_dataset_config method.
+            #   result = client.create_dataset_config request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "No response received."
+            #   end
+            #
+            def create_dataset_config request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::StorageInsights::V1::CreateDatasetConfigRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.create_dataset_config.metadata.to_h
+
+              # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::StorageInsights::V1::VERSION
+              metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.create_dataset_config.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.create_dataset_config.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @storage_insights_stub.call_rpc :create_dataset_config, request, options: options do |response, operation|
+                response = ::Gapic::Operation.new response, @operations_client, options: options
+                yield response, operation if block_given?
+                throw :response, response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Updates a dataset configuration in a given project for a given location.
+            #
+            # @overload update_dataset_config(request, options = nil)
+            #   Pass arguments to `update_dataset_config` via a request object, either of type
+            #   {::Google::Cloud::StorageInsights::V1::UpdateDatasetConfigRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::StorageInsights::V1::UpdateDatasetConfigRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload update_dataset_config(update_mask: nil, dataset_config: nil, request_id: nil)
+            #   Pass arguments to `update_dataset_config` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
+            #     Required. Field mask is used to specify the fields to be overwritten in the
+            #     `DatasetConfig` resource by the update.
+            #     The fields specified in the `update_mask` are relative to the resource, not
+            #     the full request. A field is overwritten if it is in the mask. If the
+            #     user does not provide a mask then it returns an "Invalid Argument" error.
+            #   @param dataset_config [::Google::Cloud::StorageInsights::V1::DatasetConfig, ::Hash]
+            #     Required. The resource being updated
+            #   @param request_id [::String]
+            #     Optional. A unique identifier for your request.
+            #     Specify the request ID if you need to retry the request.
+            #     If you retry the request with the same ID within 60 minutes, the server
+            #     ignores the request if it has already completed the original request.
+            #
+            #     For example, if your initial request times out and you retry the request
+            #     using the same request ID, the server recognizes the original request and
+            #     does not process the new request.
+            #
+            #     The request ID must be a valid UUID and cannot be a zero UUID
+            #     (00000000-0000-0000-0000-000000000000).
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Gapic::Operation]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Gapic::Operation]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/storage_insights/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::StorageInsights::V1::StorageInsights::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::StorageInsights::V1::UpdateDatasetConfigRequest.new
+            #
+            #   # Call the update_dataset_config method.
+            #   result = client.update_dataset_config request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "No response received."
+            #   end
+            #
+            def update_dataset_config request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::StorageInsights::V1::UpdateDatasetConfigRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.update_dataset_config.metadata.to_h
+
+              # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::StorageInsights::V1::VERSION
+              metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.dataset_config&.name
+                header_params["dataset_config.name"] = request.dataset_config.name
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.update_dataset_config.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.update_dataset_config.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @storage_insights_stub.call_rpc :update_dataset_config, request, options: options do |response, operation|
+                response = ::Gapic::Operation.new response, @operations_client, options: options
+                yield response, operation if block_given?
+                throw :response, response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Deletes a dataset configuration in a given project for a given location.
+            #
+            # @overload delete_dataset_config(request, options = nil)
+            #   Pass arguments to `delete_dataset_config` via a request object, either of type
+            #   {::Google::Cloud::StorageInsights::V1::DeleteDatasetConfigRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::StorageInsights::V1::DeleteDatasetConfigRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload delete_dataset_config(name: nil, request_id: nil)
+            #   Pass arguments to `delete_dataset_config` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param name [::String]
+            #     Required. Name of the resource
+            #   @param request_id [::String]
+            #     Optional. A unique identifier for your request.
+            #     Specify the request ID if you need to retry the request.
+            #     If you retry the request with the same ID within 60 minutes, the server
+            #     ignores the request if it has already completed the original request.
+            #
+            #     For example, if your initial request times out and you retry the request
+            #     using the same request ID, the server recognizes the original request and
+            #     does not process the new request.
+            #
+            #     The request ID must be a valid UUID and cannot be a zero UUID
+            #     (00000000-0000-0000-0000-000000000000).
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Gapic::Operation]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Gapic::Operation]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/storage_insights/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::StorageInsights::V1::StorageInsights::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::StorageInsights::V1::DeleteDatasetConfigRequest.new
+            #
+            #   # Call the delete_dataset_config method.
+            #   result = client.delete_dataset_config request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "No response received."
+            #   end
+            #
+            def delete_dataset_config request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::StorageInsights::V1::DeleteDatasetConfigRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.delete_dataset_config.metadata.to_h
+
+              # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::StorageInsights::V1::VERSION
+              metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.delete_dataset_config.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.delete_dataset_config.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @storage_insights_stub.call_rpc :delete_dataset_config, request, options: options do |response, operation|
+                response = ::Gapic::Operation.new response, @operations_client, options: options
+                yield response, operation if block_given?
+                throw :response, response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Links a dataset to BigQuery in a given project for a given location.
+            #
+            # @overload link_dataset(request, options = nil)
+            #   Pass arguments to `link_dataset` via a request object, either of type
+            #   {::Google::Cloud::StorageInsights::V1::LinkDatasetRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::StorageInsights::V1::LinkDatasetRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload link_dataset(name: nil)
+            #   Pass arguments to `link_dataset` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param name [::String]
+            #     Required. Name of the resource
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Gapic::Operation]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Gapic::Operation]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/storage_insights/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::StorageInsights::V1::StorageInsights::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::StorageInsights::V1::LinkDatasetRequest.new
+            #
+            #   # Call the link_dataset method.
+            #   result = client.link_dataset request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "No response received."
+            #   end
+            #
+            def link_dataset request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::StorageInsights::V1::LinkDatasetRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.link_dataset.metadata.to_h
+
+              # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::StorageInsights::V1::VERSION
+              metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.link_dataset.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.link_dataset.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @storage_insights_stub.call_rpc :link_dataset, request, options: options do |response, operation|
+                response = ::Gapic::Operation.new response, @operations_client, options: options
+                yield response, operation if block_given?
+                throw :response, response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Unlinks a dataset from BigQuery in a given project
+            # for a given location.
+            #
+            # @overload unlink_dataset(request, options = nil)
+            #   Pass arguments to `unlink_dataset` via a request object, either of type
+            #   {::Google::Cloud::StorageInsights::V1::UnlinkDatasetRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::StorageInsights::V1::UnlinkDatasetRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload unlink_dataset(name: nil)
+            #   Pass arguments to `unlink_dataset` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param name [::String]
+            #     Required. Name of the resource
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Gapic::Operation]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Gapic::Operation]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/storage_insights/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::StorageInsights::V1::StorageInsights::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::StorageInsights::V1::UnlinkDatasetRequest.new
+            #
+            #   # Call the unlink_dataset method.
+            #   result = client.unlink_dataset request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "No response received."
+            #   end
+            #
+            def unlink_dataset request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::StorageInsights::V1::UnlinkDatasetRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.unlink_dataset.metadata.to_h
+
+              # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::StorageInsights::V1::VERSION
+              metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.unlink_dataset.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.unlink_dataset.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @storage_insights_stub.call_rpc :unlink_dataset, request, options: options do |response, operation|
+                response = ::Gapic::Operation.new response, @operations_client, options: options
+                yield response, operation if block_given?
+                throw :response, response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
             # Configuration class for the StorageInsights API.
             #
             # This class represents the configuration for StorageInsights,
@@ -1099,6 +1848,41 @@ module Google
                 # @return [::Gapic::Config::Method]
                 #
                 attr_reader :get_report_detail
+                ##
+                # RPC-specific configuration for `list_dataset_configs`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :list_dataset_configs
+                ##
+                # RPC-specific configuration for `get_dataset_config`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :get_dataset_config
+                ##
+                # RPC-specific configuration for `create_dataset_config`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :create_dataset_config
+                ##
+                # RPC-specific configuration for `update_dataset_config`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :update_dataset_config
+                ##
+                # RPC-specific configuration for `delete_dataset_config`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :delete_dataset_config
+                ##
+                # RPC-specific configuration for `link_dataset`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :link_dataset
+                ##
+                # RPC-specific configuration for `unlink_dataset`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :unlink_dataset
 
                 # @private
                 def initialize parent_rpcs = nil
@@ -1116,6 +1900,20 @@ module Google
                   @list_report_details = ::Gapic::Config::Method.new list_report_details_config
                   get_report_detail_config = parent_rpcs.get_report_detail if parent_rpcs.respond_to? :get_report_detail
                   @get_report_detail = ::Gapic::Config::Method.new get_report_detail_config
+                  list_dataset_configs_config = parent_rpcs.list_dataset_configs if parent_rpcs.respond_to? :list_dataset_configs
+                  @list_dataset_configs = ::Gapic::Config::Method.new list_dataset_configs_config
+                  get_dataset_config_config = parent_rpcs.get_dataset_config if parent_rpcs.respond_to? :get_dataset_config
+                  @get_dataset_config = ::Gapic::Config::Method.new get_dataset_config_config
+                  create_dataset_config_config = parent_rpcs.create_dataset_config if parent_rpcs.respond_to? :create_dataset_config
+                  @create_dataset_config = ::Gapic::Config::Method.new create_dataset_config_config
+                  update_dataset_config_config = parent_rpcs.update_dataset_config if parent_rpcs.respond_to? :update_dataset_config
+                  @update_dataset_config = ::Gapic::Config::Method.new update_dataset_config_config
+                  delete_dataset_config_config = parent_rpcs.delete_dataset_config if parent_rpcs.respond_to? :delete_dataset_config
+                  @delete_dataset_config = ::Gapic::Config::Method.new delete_dataset_config_config
+                  link_dataset_config = parent_rpcs.link_dataset if parent_rpcs.respond_to? :link_dataset
+                  @link_dataset = ::Gapic::Config::Method.new link_dataset_config
+                  unlink_dataset_config = parent_rpcs.unlink_dataset if parent_rpcs.respond_to? :unlink_dataset
+                  @unlink_dataset = ::Gapic::Config::Method.new unlink_dataset_config
 
                   yield self if block_given?
                 end

@@ -69,6 +69,26 @@ module Google
             rpc :FetchGitHubInstallations, ::Google::Cloud::DeveloperConnect::V1::FetchGitHubInstallationsRequest, ::Google::Cloud::DeveloperConnect::V1::FetchGitHubInstallationsResponse
             # Fetch the list of branches or tags for a given repository.
             rpc :FetchGitRefs, ::Google::Cloud::DeveloperConnect::V1::FetchGitRefsRequest, ::Google::Cloud::DeveloperConnect::V1::FetchGitRefsResponse
+            # Lists AccountConnectors in a given project and location.
+            rpc :ListAccountConnectors, ::Google::Cloud::DeveloperConnect::V1::ListAccountConnectorsRequest, ::Google::Cloud::DeveloperConnect::V1::ListAccountConnectorsResponse
+            # Gets details of a single AccountConnector.
+            rpc :GetAccountConnector, ::Google::Cloud::DeveloperConnect::V1::GetAccountConnectorRequest, ::Google::Cloud::DeveloperConnect::V1::AccountConnector
+            # Creates a new AccountConnector in a given project and location.
+            rpc :CreateAccountConnector, ::Google::Cloud::DeveloperConnect::V1::CreateAccountConnectorRequest, ::Google::Longrunning::Operation
+            # Updates the parameters of a single AccountConnector.
+            rpc :UpdateAccountConnector, ::Google::Cloud::DeveloperConnect::V1::UpdateAccountConnectorRequest, ::Google::Longrunning::Operation
+            # Deletes a single AccountConnector.
+            rpc :DeleteAccountConnector, ::Google::Cloud::DeveloperConnect::V1::DeleteAccountConnectorRequest, ::Google::Longrunning::Operation
+            # Fetches OAuth access token based on end user credentials.
+            rpc :FetchAccessToken, ::Google::Cloud::DeveloperConnect::V1::FetchAccessTokenRequest, ::Google::Cloud::DeveloperConnect::V1::FetchAccessTokenResponse
+            # Lists Users in a given project, location, and account_connector.
+            rpc :ListUsers, ::Google::Cloud::DeveloperConnect::V1::ListUsersRequest, ::Google::Cloud::DeveloperConnect::V1::ListUsersResponse
+            # Deletes a single User.
+            rpc :DeleteUser, ::Google::Cloud::DeveloperConnect::V1::DeleteUserRequest, ::Google::Longrunning::Operation
+            # Fetch the User based on the user credentials.
+            rpc :FetchSelf, ::Google::Cloud::DeveloperConnect::V1::FetchSelfRequest, ::Google::Cloud::DeveloperConnect::V1::User
+            # Delete the User based on the user credentials.
+            rpc :DeleteSelf, ::Google::Cloud::DeveloperConnect::V1::DeleteSelfRequest, ::Google::Longrunning::Operation
           end
 
           Stub = Service.rpc_stub_class

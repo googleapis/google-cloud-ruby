@@ -25,7 +25,7 @@ module Google
         # Mesh/Gateway resource.
         # @!attribute [rw] name
         #   @return [::String]
-        #     Required. Name of the TcpRoute resource. It matches pattern
+        #     Identifier. Name of the TcpRoute resource. It matches pattern
         #     `projects/*/locations/global/tcpRoutes/tcp_route_name>`.
         # @!attribute [r] self_link
         #   @return [::String]
@@ -93,12 +93,10 @@ module Google
           #     Required. Must be specified in the CIDR range format. A CIDR range
           #     consists of an IP Address and a prefix length to construct the subnet
           #     mask. By default, the prefix length is 32 (i.e. matches a single IP
-          #     address). Only IPV4 addresses are supported.
-          #     Examples:
-          #     "10.0.0.1" - matches against this exact IP address.
-          #     "10.0.0.0/8" - matches against any IP address within the 10.0.0.0 subnet
-          #     and 255.255.255.0 mask.
-          #     "0.0.0.0/0" - matches against any IP address'.
+          #     address). Only IPV4 addresses are supported. Examples: "10.0.0.1" -
+          #     matches against this exact IP address. "10.0.0.0/8" - matches against any
+          #     IP address within the 10.0.0.0 subnet and 255.255.255.0 mask. "0.0.0.0/0"
+          #     - matches against any IP address'.
           # @!attribute [rw] port
           #   @return [::String]
           #     Required. Specifies the destination port to match against.
@@ -118,6 +116,13 @@ module Google
           #     Optional. If true, Router will use the destination IP and port of the
           #     original connection as the destination of the request. Default is false.
           #     Only one of route destinations or original destination can be set.
+          # @!attribute [rw] idle_timeout
+          #   @return [::Google::Protobuf::Duration]
+          #     Optional. Specifies the idle timeout for the selected route. The idle
+          #     timeout is defined as the period in which there are no bytes sent or
+          #     received on either the upstream or downstream connection. If not set, the
+          #     default idle timeout is 30 seconds. If set to 0s, the timeout will be
+          #     disabled.
           class RouteAction
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -171,6 +176,11 @@ module Google
         #     The value returned by the last `ListTcpRoutesResponse`
         #     Indicates that this is a continuation of a prior `ListTcpRoutes` call,
         #     and that the system should return the next page of data.
+        # @!attribute [rw] return_partial_success
+        #   @return [::Boolean]
+        #     Optional. If true, allow partial responses for multi-regional Aggregated
+        #     List requests. Otherwise if one of the locations is down or unreachable,
+        #     the Aggregated List request will fail.
         class ListTcpRoutesRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -185,6 +195,12 @@ module Google
         #     If there might be more results than those appearing in this response, then
         #     `next_page_token` is included. To get the next set of results, call this
         #     method again using the value of `next_page_token` as `page_token`.
+        # @!attribute [rw] unreachable
+        #   @return [::Array<::String>]
+        #     Unreachable resources. Populated when the request opts into
+        #     {::Google::Cloud::NetworkServices::V1::ListTcpRoutesRequest#return_partial_success return_partial_success}
+        #     and reading across collections e.g. when attempting to list all resources
+        #     across all supported locations.
         class ListTcpRoutesResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

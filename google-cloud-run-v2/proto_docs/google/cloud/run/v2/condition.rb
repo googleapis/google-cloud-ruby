@@ -139,6 +139,9 @@ module Google
 
             # An internal error occurred. Further information may be in the message.
             INTERNAL = 16
+
+            # User-provided VPC network was not found.
+            VPC_NETWORK_NOT_FOUND = 17
           end
 
           # Reasons specific to Revision resource.

@@ -2705,6 +2705,10 @@ module Google
         # @!attribute [rw] subproperty_event_filter
         #   @return [::Google::Analytics::Admin::V1alpha::SubpropertyEventFilter]
         #     Optional. The subproperty event filter to create on an ordinary property.
+        # @!attribute [rw] custom_dimension_and_metric_synchronization_mode
+        #   @return [::Google::Analytics::Admin::V1alpha::SubpropertySyncConfig::SynchronizationMode]
+        #     Optional. The subproperty feature synchronization mode for Custom
+        #     Dimensions and Metrics
         class ProvisionSubpropertyRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -2987,6 +2991,70 @@ module Google
         #     deleted. This is set to the time at which the deletion request was
         #     received.
         class SubmitUserDeletionResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for GetSubpropertySyncConfig RPC.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. Resource name of the SubpropertySyncConfig to lookup.
+        #     Format:
+        #     properties/\\{ordinary_property_id}/subpropertySyncConfigs/\\{subproperty_id}
+        #     Example: properties/1234/subpropertySyncConfigs/5678
+        class GetSubpropertySyncConfigRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for ListSubpropertySyncConfigs RPC.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. Resource name of the property.
+        #     Format: properties/property_id
+        #     Example: properties/123
+        # @!attribute [rw] page_size
+        #   @return [::Integer]
+        #     Optional. The maximum number of resources to return. The service may return
+        #     fewer than this value, even if there are additional pages. If unspecified,
+        #     at most 50 resources will be returned. The maximum value is 200; (higher
+        #     values will be coerced to the maximum)
+        # @!attribute [rw] page_token
+        #   @return [::String]
+        #     Optional. A page token, received from a previous
+        #     `ListSubpropertySyncConfig` call. Provide this to retrieve the subsequent
+        #     page. When paginating, all other parameters provided to
+        #     `ListSubpropertySyncConfig` must match the call that provided the page
+        #     token.
+        class ListSubpropertySyncConfigsRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Response message for ListSubpropertySyncConfigs RPC.
+        # @!attribute [rw] subproperty_sync_configs
+        #   @return [::Array<::Google::Analytics::Admin::V1alpha::SubpropertySyncConfig>]
+        #     List of Subproperty Sync Configs.
+        # @!attribute [rw] next_page_token
+        #   @return [::String]
+        #     A token, which can be sent as `page_token` to retrieve the next page. If
+        #     this field is omitted, there are no subsequent pages.
+        class ListSubpropertySyncConfigsResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for UpdateSubpropertySyncConfig RPC.
+        # @!attribute [rw] subproperty_sync_config
+        #   @return [::Google::Analytics::Admin::V1alpha::SubpropertySyncConfig]
+        #     Required. The SubpropertySyncConfig to update.
+        # @!attribute [rw] update_mask
+        #   @return [::Google::Protobuf::FieldMask]
+        #     Optional. The list of fields to update. Field names must be in snake case
+        #     (for example, "field_to_update"). Omitted fields will not be updated. To
+        #     replace the entire entity, use one path with the string "*" to match all
+        #     fields.
+        class UpdateSubpropertySyncConfigRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end

@@ -1,5 +1,18 @@
 # Release History
 
+### 1.5.1 (2025-06-24)
+
+#### Documentation
+
+* Provide links to the language support page from the reference docs ([#30534](https://github.com/googleapis/google-cloud-ruby/issues/30534)) 
+
+### 1.5.0 (2025-05-12)
+
+#### Features
+
+* Updated core dependencies including gapic-common 
+* Updated required Ruby version to 3.1 
+
 ### 1.4.1 (2025-04-29)
 
 #### Bug Fixes

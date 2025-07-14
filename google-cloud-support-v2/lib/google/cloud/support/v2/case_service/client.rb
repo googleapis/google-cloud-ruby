@@ -212,7 +212,7 @@ module Google
             # Service calls
 
             ##
-            # Retrieve the specified case.
+            # Retrieve a case.
             #
             # @overload get_case(request, options = nil)
             #   Pass arguments to `get_case` via a request object, either of type
@@ -230,7 +230,7 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param name [::String]
-            #     Required. The fully qualified name of a case to be retrieved.
+            #     Required. The full name of a case to be retrieved.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::Support::V2::Case]
@@ -297,12 +297,11 @@ module Google
             end
 
             ##
-            # Retrieve all cases under the specified parent.
+            # Retrieve all cases under a parent, but not its children.
             #
-            # Note: Listing cases under an Organization returns only the cases directly
-            # parented by that organization. To retrieve all cases under an organization,
-            # including cases parented by projects under that organization, use
-            # `cases.search`.
+            # For example, listing cases under an organization only returns the cases
+            # that are directly parented by that organization. To retrieve cases
+            # under an organization and its projects, use `cases.search`.
             #
             # @overload list_cases(request, options = nil)
             #   Pass arguments to `list_cases` via a request object, either of type
@@ -320,21 +319,23 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param parent [::String]
-            #     Required. The fully qualified name of parent resource to list cases under.
+            #     Required. The name of a parent to list cases under.
             #   @param filter [::String]
-            #     An expression written in filter language. If non-empty, the query returns
-            #     the cases that match the filter. Else, the query doesn't filter the cases.
+            #     An expression used to filter cases.
             #
-            #     Filter expressions use the following fields with the operators equals (`=`)
-            #     and `AND`:
+            #     If it's an empty string, then no filtering happens. Otherwise, the endpoint
+            #     returns the cases that match the filter.
             #
-            #     - `state`: The accepted values are `OPEN` or `CLOSED`.
-            #     - `priority`: The accepted values are `P0`, `P1`, `P2`, `P3`, or `P4`. You
+            #     Expressions use the following fields separated by `AND` and specified with
+            #     `=`:
+            #
+            #     - `state`: Can be `OPEN` or `CLOSED`.
+            #     - `priority`: Can be `P0`, `P1`, `P2`, `P3`, or `P4`. You
             #     can specify multiple values for priority using the `OR` operator. For
             #     example, `priority=P1 OR priority=P2`.
             #     - `creator.email`: The email address of the case creator.
             #
-            #     Examples:
+            #     EXAMPLES:
             #
             #     - `state=CLOSED`
             #     - `state=OPEN AND creator.email="tester@example.com"`
@@ -416,7 +417,7 @@ module Google
             end
 
             ##
-            # Search cases using the specified query.
+            # Search for cases using a query.
             #
             # @overload search_cases(request, options = nil)
             #   Pass arguments to `search_cases` via a request object, either of type
@@ -434,23 +435,21 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param parent [::String]
-            #     The fully qualified name of parent resource to search cases under.
+            #     The name of the parent resource to search for cases under.
             #   @param query [::String]
-            #     An expression written in filter language.
+            #     An expression used to filter cases.
             #
-            #     A query uses the following fields with the operators equals (`=`) and
-            #     `AND`:
+            #     Expressions use the following fields separated by `AND` and specified with
+            #     `=`:
             #
             #     - `organization`: An organization name in the form
             #     `organizations/<organization_id>`.
             #     - `project`: A project name in the form `projects/<project_id>`.
-            #     - `state`: The accepted values are `OPEN` or `CLOSED`.
-            #     - `priority`: The accepted values are `P0`, `P1`, `P2`, `P3`, or `P4`. You
+            #     - `state`: Can be `OPEN` or `CLOSED`.
+            #     - `priority`: Can be `P0`, `P1`, `P2`, `P3`, or `P4`. You
             #     can specify multiple values for priority using the `OR` operator. For
             #     example, `priority=P1 OR priority=P2`.
             #     - `creator.email`: The email address of the case creator.
-            #     - `billingAccount`: A billing account in the form
-            #     `billingAccounts/<billing_account_id>`
             #
             #     You must specify either `organization` or `project`.
             #
@@ -467,7 +466,6 @@ module Google
             #     - `organization="organizations/123456789"`
             #     - `project="projects/my-project-id"`
             #     - `project="projects/123456789"`
-            #     - `billing_account="billingAccounts/123456-A0B0C0-CUZ789"`
             #     - `organization="organizations/123456789" AND state=CLOSED`
             #     - `project="projects/my-project-id" AND creator.email="tester@example.com"`
             #     - `project="projects/my-project-id" AND (priority=P0 OR priority=P1)`
@@ -549,9 +547,11 @@ module Google
             end
 
             ##
-            # Create a new case and associate it with the given Google Cloud Resource.
-            # The case object must have the following fields set: `display_name`,
-            # `description`, `classification`, and `priority`.
+            # Create a new case and associate it with a parent.
+            #
+            # It must have the following fields set: `display_name`, `description`,
+            # `classification`, and `priority`. If you're just testing the API and don't
+            # want to route your case to an agent, set `testCase=true`.
             #
             # @overload create_case(request, options = nil)
             #   Pass arguments to `create_case` via a request object, either of type
@@ -569,8 +569,7 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param parent [::String]
-            #     Required. The name of the Google Cloud Resource under which the case should
-            #     be created.
+            #     Required. The name of the parent under which the case should be created.
             #   @param case [::Google::Cloud::Support::V2::Case, ::Hash]
             #     Required. The case to be created.
             #
@@ -639,7 +638,7 @@ module Google
             end
 
             ##
-            # Update the specified case. Only a subset of fields can be updated.
+            # Update a case. Only some fields can be updated.
             #
             # @overload update_case(request, options = nil)
             #   Pass arguments to `update_case` via a request object, either of type
@@ -657,16 +656,15 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param case [::Google::Cloud::Support::V2::Case, ::Hash]
-            #     Required. The case object to update.
+            #     Required. The case to update.
             #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
-            #     A list of attributes of the case object that should be updated
-            #     as part of this request. Supported values are `priority`, `display_name`,
-            #     and `subscriber_email_addresses`. If no fields are specified, all supported
-            #     fields are updated.
+            #     A list of attributes of the case that should be updated. Supported values
+            #     are `priority`, `display_name`, and `subscriber_email_addresses`. If no
+            #     fields are specified, all supported fields are updated.
             #
-            #     WARNING: If you do not provide a field mask, then you might accidentally
-            #     clear some fields. For example, if you leave the field mask empty and do
-            #     not provide a value for `subscriber_email_addresses`, then
+            #     Be careful - if you do not provide a field mask, then you might
+            #     accidentally clear some fields. For example, if you leave the field mask
+            #     empty and do not provide a value for `subscriber_email_addresses`, then
             #     `subscriber_email_addresses` is updated to empty.
             #
             # @yield [response, operation] Access the result along with the RPC operation
@@ -734,13 +732,13 @@ module Google
             end
 
             ##
-            # Escalate a case. Escalating a case will initiate the Google Cloud Support
-            # escalation management process.
+            # Escalate a case, starting the Google Cloud Support escalation management
+            # process.
             #
-            # This operation is only available to certain Customer Care tiers. Go to
+            # This operation is only available for some support services. Go to
             # https://cloud.google.com/support and look for 'Technical support
-            # escalations' in the feature list to find out which tiers are able to
-            # perform escalations.
+            # escalations' in the feature list to find out which ones let you
+            # do that.
             #
             # @overload escalate_case(request, options = nil)
             #   Pass arguments to `escalate_case` via a request object, either of type
@@ -758,9 +756,9 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param name [::String]
-            #     Required. The fully qualified name of the Case resource to be escalated.
+            #     Required. The name of the case to be escalated.
             #   @param escalation [::Google::Cloud::Support::V2::Escalation, ::Hash]
-            #     The escalation object to be sent with the escalation request.
+            #     The escalation information to be sent with the escalation request.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::Support::V2::Case]
@@ -827,7 +825,7 @@ module Google
             end
 
             ##
-            # Close the specified case.
+            # Close a case.
             #
             # @overload close_case(request, options = nil)
             #   Pass arguments to `close_case` via a request object, either of type
@@ -845,7 +843,7 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param name [::String]
-            #     Required. The fully qualified name of the case resource to be closed.
+            #     Required. The name of the case to close.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::Support::V2::Case]
@@ -912,10 +910,16 @@ module Google
             end
 
             ##
-            # Retrieve valid classifications to be used when creating a support case.
-            # The classications are hierarchical, with each classification containing
-            # all levels of the hierarchy, separated by " > ". For example "Technical
-            # Issue > Compute > Compute Engine".
+            # Retrieve valid classifications to use when creating a support case.
+            #
+            # Classifications are hierarchical. Each classification is a string
+            # containing all levels of the hierarchy separated by `" > "`. For example,
+            # `"Technical Issue > Compute > Compute Engine"`.
+            #
+            # Classification IDs returned by this endpoint are valid for at least six
+            # months. When a classification is deactivated, this endpoint immediately
+            # stops returning it. After six months, `case.create` requests using the
+            # classification will fail.
             #
             # @overload search_case_classifications(request, options = nil)
             #   Pass arguments to `search_case_classifications` via a request object, either of type
@@ -933,11 +937,12 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param query [::String]
-            #     An expression written in the Google Cloud filter language. If non-empty,
-            #     then only cases whose fields match the filter are returned. If empty, then
-            #     no messages are filtered out.
+            #     An expression used to filter case classifications.
+            #
+            #     If it's an empty string, then no filtering happens. Otherwise, case
+            #     classifications will be returned that match the filter.
             #   @param page_size [::Integer]
-            #     The maximum number of cases fetched with each request.
+            #     The maximum number of classifications fetched with each request.
             #   @param page_token [::String]
             #     A token identifying the page of results to return. If unspecified, the
             #     first page is retrieved.

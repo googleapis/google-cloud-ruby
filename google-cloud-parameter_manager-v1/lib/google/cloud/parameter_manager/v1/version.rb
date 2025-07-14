@@ -21,7 +21,7 @@ module Google
   module Cloud
     module ParameterManager
       module V1
-        VERSION = "0.2.1"
+        VERSION = "0.4.0"
       end
     end
   end

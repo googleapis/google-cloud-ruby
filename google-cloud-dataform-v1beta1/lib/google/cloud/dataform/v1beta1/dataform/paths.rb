@@ -124,6 +124,25 @@ module Google
             end
 
             ##
+            # Create a fully-qualified NotebookRuntimeTemplate resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `projects/{project}/locations/{location}/notebookRuntimeTemplates/{notebook_runtime_template}`
+            #
+            # @param project [String]
+            # @param location [String]
+            # @param notebook_runtime_template [String]
+            #
+            # @return [::String]
+            def notebook_runtime_template_path project:, location:, notebook_runtime_template:
+              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+              raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+
+              "projects/#{project}/locations/#{location}/notebookRuntimeTemplates/#{notebook_runtime_template}"
+            end
+
+            ##
             # Create a fully-qualified ReleaseConfig resource string.
             #
             # The resource will be in the following format:

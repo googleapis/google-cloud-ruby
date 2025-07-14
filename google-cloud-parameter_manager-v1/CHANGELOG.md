@@ -1,5 +1,18 @@
 # Changelog
 
+### 0.4.0 (2025-06-24)
+
+#### Features
+
+* Provide a path helper for crypto key resources ([#30533](https://github.com/googleapis/google-cloud-ruby/issues/30533)) 
+
+### 0.3.0 (2025-05-12)
+
+#### Features
+
+* Updated core dependencies including gapic-common 
+* Updated required Ruby version to 3.1 
+
 ### 0.2.1 (2025-04-29)
 
 #### Bug Fixes

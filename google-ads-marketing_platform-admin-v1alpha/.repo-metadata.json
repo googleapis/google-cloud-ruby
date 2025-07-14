@@ -1,0 +1,17 @@
+{
+    "api_id": "marketingplatformadmin.googleapis.com",
+    "api_shortname": "marketingplatformadminapi",
+    "client_documentation": "https://rubydoc.info/gems/google-ads-marketing_platform-admin-v1alpha",
+    "distribution_name": "google-ads-marketing_platform-admin-v1alpha",
+    "is_cloud": false,
+    "language": "ruby",
+    "name": "marketingplatformadminapi",
+    "name_pretty": "Google Marketing Platform Admin V1ALPHA API",
+    "product_documentation": "https://developers.google.com/analytics/devguides/config/gmp/v1",
+    "release_level": "preview",
+    "repo": "googleapis/google-cloud-ruby",
+    "requires_billing": true,
+    "ruby-cloud-description": "The Google Marketing Platform Admin API allows for programmatic access to the Google Marketing Platform configuration data. You can use the Google Marketing Platform Admin API to manage links between your Google Marketing Platform organization and Google Analytics accounts, and to set the service level of your GA4 properties. Note that google-ads-marketing_platform-admin-v1alpha is a version-specific client library. For most uses, we recommend installing the main client library google-ads-marketing_platform-admin instead. See the readme for more details.",
+    "ruby-cloud-product-url": "https://developers.google.com/analytics/devguides/config/gmp/v1",
+    "library_type": "GAPIC_AUTO"
+}

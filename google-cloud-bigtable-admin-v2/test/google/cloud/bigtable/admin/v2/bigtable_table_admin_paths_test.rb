@@ -101,6 +101,18 @@ class ::Google::Cloud::Bigtable::Admin::V2::BigtableTableAdmin::ClientPathsTest 
     end
   end
 
+  def test_schema_bundle_path
+    grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
+      client = ::Google::Cloud::Bigtable::Admin::V2::BigtableTableAdmin::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      path = client.schema_bundle_path project: "value0", instance: "value1", table: "value2", schema_bundle: "value3"
+      assert_equal "projects/value0/instances/value1/tables/value2/schemaBundles/value3", path
+    end
+  end
+
   def test_snapshot_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
     ::Gapic::ServiceStub.stub :new, DummyStub.new do

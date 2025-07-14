@@ -127,6 +127,27 @@ module Google
               end
 
               ##
+              # Create a fully-qualified SchemaBundle resource string.
+              #
+              # The resource will be in the following format:
+              #
+              # `projects/{project}/instances/{instance}/tables/{table}/schemaBundles/{schema_bundle}`
+              #
+              # @param project [String]
+              # @param instance [String]
+              # @param table [String]
+              # @param schema_bundle [String]
+              #
+              # @return [::String]
+              def schema_bundle_path project:, instance:, table:, schema_bundle:
+                raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+                raise ::ArgumentError, "instance cannot contain /" if instance.to_s.include? "/"
+                raise ::ArgumentError, "table cannot contain /" if table.to_s.include? "/"
+
+                "projects/#{project}/instances/#{instance}/tables/#{table}/schemaBundles/#{schema_bundle}"
+              end
+
+              ##
               # Create a fully-qualified Snapshot resource string.
               #
               # The resource will be in the following format:

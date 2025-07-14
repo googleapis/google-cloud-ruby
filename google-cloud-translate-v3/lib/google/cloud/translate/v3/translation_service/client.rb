@@ -289,12 +289,14 @@ module Google
             #   @param source_language_code [::String]
             #     Optional. The ISO-639 language code of the input text if
             #     known, for example, "en-US" or "sr-Latn". Supported language codes are
-            #     listed in Language Support. If the source language isn't specified, the API
-            #     attempts to identify the source language automatically and returns the
-            #     source language within the response.
+            #     listed in [Language
+            #     Support](https://cloud.google.com/translate/docs/languages). If the source
+            #     language isn't specified, the API attempts to identify the source language
+            #     automatically and returns the source language within the response.
             #   @param target_language_code [::String]
             #     Required. The ISO-639 language code to use for translation of the input
-            #     text, set to one of the language codes listed in Language Support.
+            #     text, set to one of the language codes listed in [Language
+            #     Support](https://cloud.google.com/translate/docs/languages).
             #   @param parent [::String]
             #     Required. Project or location to make a call. Must refer to a caller's
             #     project.
@@ -441,9 +443,12 @@ module Google
             #     Required. The content of the input in string format.
             #   @param source_language_code [::String]
             #     Optional. The ISO-639 language code of the input text if
-            #     known, for example, "hi" or "zh". If the source language isn't specified,
-            #     the API attempts to identify the source language automatically and returns
-            #     the source language for each content in the response.
+            #     known, for example, "hi" or "zh". Supported language codes are
+            #     listed in [Language
+            #     Support](https://cloud.google.com/translate/docs/languages#roman). If the
+            #     source language isn't specified, the API attempts to identify the source
+            #     language automatically and returns the source language for each content in
+            #     the response.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::Translate::V3::RomanizeTextResponse]
@@ -778,13 +783,15 @@ module Google
             #   @param source_language_code [::String]
             #     Optional. The ISO-639 language code of the input document if known, for
             #     example, "en-US" or "sr-Latn". Supported language codes are listed in
-            #     Language Support. If the source language isn't specified, the API attempts
-            #     to identify the source language automatically and returns the source
-            #     language within the response. Source language must be specified if the
-            #     request contains a glossary or a custom model.
+            #     [Language Support](https://cloud.google.com/translate/docs/languages). If
+            #     the source language isn't specified, the API attempts to identify the
+            #     source language automatically and returns the source language within the
+            #     response. Source language must be specified if the request contains a
+            #     glossary or a custom model.
             #   @param target_language_code [::String]
             #     Required. The ISO-639 language code to use for translation of the input
-            #     document, set to one of the language codes listed in Language Support.
+            #     document, set to one of the language codes listed in [Language
+            #     Support](https://cloud.google.com/translate/docs/languages).
             #   @param document_input_config [::Google::Cloud::Translate::V3::DocumentInputConfig, ::Hash]
             #     Required. Input configurations.
             #   @param document_output_config [::Google::Cloud::Translate::V3::DocumentOutputConfig, ::Hash]
@@ -937,9 +944,13 @@ module Google
             #     the same location-id) can be used, otherwise an INVALID_ARGUMENT (400)
             #     error is returned.
             #   @param source_language_code [::String]
-            #     Required. Source language code.
+            #     Required. Source language code. Supported language codes are listed in
+            #     [Language
+            #     Support](https://cloud.google.com/translate/docs/languages).
             #   @param target_language_codes [::Array<::String>]
-            #     Required. Specify up to 10 language codes here.
+            #     Required. Specify up to 10 language codes here. Supported language codes
+            #     are listed in [Language
+            #     Support](https://cloud.google.com/translate/docs/languages).
             #   @param models [::Hash{::String => ::String}]
             #     Optional. The models to use for translation. Map's key is target language
             #     code. Map's value is model name. Value can be a built-in general model,
@@ -1092,7 +1103,9 @@ module Google
             #     [Language Support](https://cloud.google.com/translate/docs/languages).
             #   @param target_language_codes [::Array<::String>]
             #     Required. The ISO-639 language code to use for translation of the input
-            #     document. Specify up to 10 language codes here.
+            #     document. Specify up to 10 language codes here. Supported language codes
+            #     are listed in [Language
+            #     Support](https://cloud.google.com/translate/docs/languages).
             #   @param input_configs [::Array<::Google::Cloud::Translate::V3::BatchDocumentInputConfig, ::Hash>]
             #     Required. Input configurations.
             #     The total number of files matched should be <= 100.

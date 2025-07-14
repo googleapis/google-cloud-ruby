@@ -1,0 +1,55 @@
+{
+  "client_library": {
+    "name": "google-shopping-merchant-order_tracking-v1beta",
+    "version": "0.1.0",
+    "language": "RUBY",
+    "apis": [
+      {
+        "id": "google.shopping.merchant.ordertracking.v1beta",
+        "version": "v1beta"
+      }
+    ]
+  },
+  "snippets": [
+    {
+      "region_tag": "merchantapi_v1beta_generated_OrderTrackingSignalsService_CreateOrderTrackingSignal_sync",
+      "title": "Snippet for the create_order_tracking_signal call in the OrderTrackingSignalsService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Shopping::Merchant::OrderTracking::V1beta::OrderTrackingSignalsService::Client#create_order_tracking_signal.",
+      "file": "order_tracking_signals_service/create_order_tracking_signal.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_order_tracking_signal",
+        "full_name": "::Google::Shopping::Merchant::OrderTracking::V1beta::OrderTrackingSignalsService::Client#create_order_tracking_signal",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Shopping::Merchant::OrderTracking::V1beta::CreateOrderTrackingSignalRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Shopping::Merchant::OrderTracking::V1beta::OrderTrackingSignal",
+        "client": {
+          "short_name": "OrderTrackingSignalsService::Client",
+          "full_name": "::Google::Shopping::Merchant::OrderTracking::V1beta::OrderTrackingSignalsService::Client"
+        },
+        "method": {
+          "short_name": "CreateOrderTrackingSignal",
+          "full_name": "google.shopping.merchant.ordertracking.v1beta.OrderTrackingSignalsService.CreateOrderTrackingSignal",
+          "service": {
+            "short_name": "OrderTrackingSignalsService",
+            "full_name": "google.shopping.merchant.ordertracking.v1beta.OrderTrackingSignalsService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    }
+  ]
+}

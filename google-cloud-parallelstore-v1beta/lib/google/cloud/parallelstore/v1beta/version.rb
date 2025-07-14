@@ -21,7 +21,7 @@ module Google
   module Cloud
     module Parallelstore
       module V1beta
-        VERSION = "0.8.1"
+        VERSION = "0.9.1"
       end
     end
   end

@@ -1,5 +1,31 @@
 # Changelog
 
+### 1.3.0 (2025-06-24)
+
+#### Features
+
+* Additional instance network configs 
+* Support deny maintenance periods 
+* Support instance activation policy 
+
+### 1.2.0 (2025-05-16)
+
+#### Features
+
+* Support for cloudsql_backup_run_source 
+* Support for Instance observability configuration 
+* Support for machine type configuration 
+* Support for specifying the project number that needs to be allowlisted on the network attachment to enable outbound connectivity 
+* Support for the export_cluster, import_cluster, and upgrade_cluster RPCs 
+* Support for the restore_from_cloud_sql RPC 
+
+### 1.1.0 (2025-05-12)
+
+#### Features
+
+* Updated core dependencies including gapic-common 
+* Updated required Ruby version to 3.1 
+
 ### 1.0.1 (2025-04-29)
 
 #### Bug Fixes

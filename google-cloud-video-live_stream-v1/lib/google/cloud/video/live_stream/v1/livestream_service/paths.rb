@@ -85,6 +85,27 @@ module Google
               end
 
               ##
+              # Create a fully-qualified DvrSession resource string.
+              #
+              # The resource will be in the following format:
+              #
+              # `projects/{project}/locations/{location}/channels/{channel}/dvrSessions/{dvr_session}`
+              #
+              # @param project [String]
+              # @param location [String]
+              # @param channel [String]
+              # @param dvr_session [String]
+              #
+              # @return [::String]
+              def dvr_session_path project:, location:, channel:, dvr_session:
+                raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+                raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+                raise ::ArgumentError, "channel cannot contain /" if channel.to_s.include? "/"
+
+                "projects/#{project}/locations/#{location}/channels/#{channel}/dvrSessions/#{dvr_session}"
+              end
+
+              ##
               # Create a fully-qualified Event resource string.
               #
               # The resource will be in the following format:

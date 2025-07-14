@@ -1,4 +1,4 @@
-## Migrating to google-cloud-talent 0.20
+# Migrating to google-cloud-talent 0.20
 
 The 0.20 release of the google-cloud-talent client is a significant upgrade
 based on a [next-gen code generator](https://github.com/googleapis/gapic-generator-ruby),

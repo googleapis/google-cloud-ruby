@@ -1,5 +1,21 @@
 # Changelog
 
+### 0.13.0 (2025-05-16)
+
+#### Features
+
+* Support builtin assertion name prefix for code compilations 
+* Support Colab runtime template in the notebook runtime options 
+* Support for disabling automatic creation of workflow invocations 
+* Support workflow actions to execute a data preparation node 
+
+### 0.12.0 (2025-05-12)
+
+#### Features
+
+* Updated core dependencies including gapic-common 
+* Updated required Ruby version to 3.1 
+
 ### 0.11.1 (2025-04-29)
 
 #### Bug Fixes

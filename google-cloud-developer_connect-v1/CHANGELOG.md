@@ -1,5 +1,24 @@
 # Changelog
 
+### 1.2.0 (2025-06-24)
+
+#### Features
+
+* Support for BitBucket 
+* Support for fetch_access_token RPC 
+* Support for fetch_self and delete_self RPCs 
+* Support for git proxies 
+* Support for list_users and delete_user RPCs 
+* Support for RPCs for managing AccountConnector resources ([#30538](https://github.com/googleapis/google-cloud-ruby/issues/30538)) 
+* Support for RPCs for managing InsightsConfig resources 
+
+### 1.1.0 (2025-05-12)
+
+#### Features
+
+* Updated core dependencies including gapic-common 
+* Updated required Ruby version to 3.1 
+
 ### 1.0.1 (2025-04-29)
 
 #### Bug Fixes

@@ -25,6 +25,25 @@ module Google
           # Path helper methods for the DepService API.
           module Paths
             ##
+            # Create a fully-qualified AuthzExtension resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `projects/{project}/locations/{location}/authzExtensions/{authz_extension}`
+            #
+            # @param project [String]
+            # @param location [String]
+            # @param authz_extension [String]
+            #
+            # @return [::String]
+            def authz_extension_path project:, location:, authz_extension:
+              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+              raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+
+              "projects/#{project}/locations/#{location}/authzExtensions/#{authz_extension}"
+            end
+
+            ##
             # Create a fully-qualified LbRouteExtension resource string.
             #
             # The resource will be in the following format:

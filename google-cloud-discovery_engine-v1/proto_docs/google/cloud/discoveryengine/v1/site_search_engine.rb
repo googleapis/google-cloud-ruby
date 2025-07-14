@@ -128,6 +128,12 @@ module Google
             # 1. target site deleted if unindexing is successful;
             # 2. state reverts to SUCCEEDED if the unindexing fails.
             DELETING = 4
+
+            # The target site change is pending but cancellable.
+            CANCELLABLE = 5
+
+            # The target site change is cancelled.
+            CANCELLED = 6
           end
         end
 

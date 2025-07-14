@@ -1,4 +1,4 @@
-## Migrating to google-cloud-tasks 2.0
+# Migrating to google-cloud-tasks 2.0
 
 The 2.0 release of the google-cloud-tasks client is a significant upgrade
 based on a [next-gen code generator](https://github.com/googleapis/gapic-generator-ruby),

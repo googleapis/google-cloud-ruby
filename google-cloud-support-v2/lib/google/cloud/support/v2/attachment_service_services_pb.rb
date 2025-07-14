@@ -24,7 +24,7 @@ module Google
     module Support
       module V2
         module CaseAttachmentService
-          # A service to manage file attachment for Google Cloud support cases.
+          # A service to manage file attachments for Google Cloud support cases.
           class Service
 
             include ::GRPC::GenericService
@@ -33,7 +33,7 @@ module Google
             self.unmarshal_class_method = :decode
             self.service_name = 'google.cloud.support.v2.CaseAttachmentService'
 
-            # Retrieve all attachments associated with a support case.
+            # List all the attachments associated with a support case.
             rpc :ListAttachments, ::Google::Cloud::Support::V2::ListAttachmentsRequest, ::Google::Cloud::Support::V2::ListAttachmentsResponse
           end
 

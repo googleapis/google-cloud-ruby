@@ -109,6 +109,10 @@ module Google
         #   @return [::Array<::Google::Cloud::AIPlatform::V1::Schema>]
         #     Optional. The value should be validated against any (one or more) of the
         #     subschemas in the list.
+        # @!attribute [rw] additional_properties
+        #   @return [::Google::Protobuf::Value]
+        #     Optional. Can either be a boolean or an object; controls the presence of
+        #     additional properties.
         # @!attribute [rw] ref
         #   @return [::String]
         #     Optional. Allows indirect references between schema nodes. The value should

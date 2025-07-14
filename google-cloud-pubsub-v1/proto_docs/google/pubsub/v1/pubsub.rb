@@ -470,22 +470,27 @@ module Google
         #   @return [::Google::Cloud::PubSub::V1::IngestionFailureEvent::CloudStorageFailure]
         #     Optional. Failure when ingesting from Cloud Storage.
         #
-        #     Note: The following fields are mutually exclusive: `cloud_storage_failure`, `aws_msk_failure`, `azure_event_hubs_failure`, `confluent_cloud_failure`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `cloud_storage_failure`, `aws_msk_failure`, `azure_event_hubs_failure`, `confluent_cloud_failure`, `aws_kinesis_failure`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] aws_msk_failure
         #   @return [::Google::Cloud::PubSub::V1::IngestionFailureEvent::AwsMskFailureReason]
         #     Optional. Failure when ingesting from Amazon MSK.
         #
-        #     Note: The following fields are mutually exclusive: `aws_msk_failure`, `cloud_storage_failure`, `azure_event_hubs_failure`, `confluent_cloud_failure`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `aws_msk_failure`, `cloud_storage_failure`, `azure_event_hubs_failure`, `confluent_cloud_failure`, `aws_kinesis_failure`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] azure_event_hubs_failure
         #   @return [::Google::Cloud::PubSub::V1::IngestionFailureEvent::AzureEventHubsFailureReason]
         #     Optional. Failure when ingesting from Azure Event Hubs.
         #
-        #     Note: The following fields are mutually exclusive: `azure_event_hubs_failure`, `cloud_storage_failure`, `aws_msk_failure`, `confluent_cloud_failure`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `azure_event_hubs_failure`, `cloud_storage_failure`, `aws_msk_failure`, `confluent_cloud_failure`, `aws_kinesis_failure`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] confluent_cloud_failure
         #   @return [::Google::Cloud::PubSub::V1::IngestionFailureEvent::ConfluentCloudFailureReason]
         #     Optional. Failure when ingesting from Confluent Cloud.
         #
-        #     Note: The following fields are mutually exclusive: `confluent_cloud_failure`, `cloud_storage_failure`, `aws_msk_failure`, `azure_event_hubs_failure`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `confluent_cloud_failure`, `cloud_storage_failure`, `aws_msk_failure`, `azure_event_hubs_failure`, `aws_kinesis_failure`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] aws_kinesis_failure
+        #   @return [::Google::Cloud::PubSub::V1::IngestionFailureEvent::AwsKinesisFailureReason]
+        #     Optional. Failure when ingesting from AWS Kinesis.
+        #
+        #     Note: The following fields are mutually exclusive: `aws_kinesis_failure`, `cloud_storage_failure`, `aws_msk_failure`, `azure_event_hubs_failure`, `confluent_cloud_failure`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         class IngestionFailureEvent
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -510,6 +515,20 @@ module Google
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
 
+          # Set when a Pub/Sub message fails to get published due to a schema
+          # validation violation.
+          class SchemaViolationReason
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Set when a Pub/Sub message fails to get published due to a message
+          # transformation error.
+          class MessageTransformationFailureReason
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
           # Failure when ingesting from a Cloud Storage source.
           # @!attribute [rw] bucket
           #   @return [::String]
@@ -526,13 +545,24 @@ module Google
           #   @return [::Google::Cloud::PubSub::V1::IngestionFailureEvent::AvroFailureReason]
           #     Optional. Failure encountered when parsing an Avro file.
           #
-          #     Note: The following fields are mutually exclusive: `avro_failure_reason`, `api_violation_reason`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+          #     Note: The following fields are mutually exclusive: `avro_failure_reason`, `api_violation_reason`, `schema_violation_reason`, `message_transformation_failure_reason`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] api_violation_reason
           #   @return [::Google::Cloud::PubSub::V1::IngestionFailureEvent::ApiViolationReason]
           #     Optional. The Pub/Sub API limits prevented the desired message from
           #     being published.
           #
-          #     Note: The following fields are mutually exclusive: `api_violation_reason`, `avro_failure_reason`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+          #     Note: The following fields are mutually exclusive: `api_violation_reason`, `avro_failure_reason`, `schema_violation_reason`, `message_transformation_failure_reason`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+          # @!attribute [rw] schema_violation_reason
+          #   @return [::Google::Cloud::PubSub::V1::IngestionFailureEvent::SchemaViolationReason]
+          #     Optional. The Pub/Sub message failed schema validation.
+          #
+          #     Note: The following fields are mutually exclusive: `schema_violation_reason`, `avro_failure_reason`, `api_violation_reason`, `message_transformation_failure_reason`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+          # @!attribute [rw] message_transformation_failure_reason
+          #   @return [::Google::Cloud::PubSub::V1::IngestionFailureEvent::MessageTransformationFailureReason]
+          #     Optional. Failure encountered when applying a message transformation to
+          #     the Pub/Sub message.
+          #
+          #     Note: The following fields are mutually exclusive: `message_transformation_failure_reason`, `avro_failure_reason`, `api_violation_reason`, `schema_violation_reason`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           class CloudStorageFailure
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -556,6 +586,19 @@ module Google
           #   @return [::Google::Cloud::PubSub::V1::IngestionFailureEvent::ApiViolationReason]
           #     Optional. The Pub/Sub API limits prevented the desired message from
           #     being published.
+          #
+          #     Note: The following fields are mutually exclusive: `api_violation_reason`, `schema_violation_reason`, `message_transformation_failure_reason`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+          # @!attribute [rw] schema_violation_reason
+          #   @return [::Google::Cloud::PubSub::V1::IngestionFailureEvent::SchemaViolationReason]
+          #     Optional. The Pub/Sub message failed schema validation.
+          #
+          #     Note: The following fields are mutually exclusive: `schema_violation_reason`, `api_violation_reason`, `message_transformation_failure_reason`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+          # @!attribute [rw] message_transformation_failure_reason
+          #   @return [::Google::Cloud::PubSub::V1::IngestionFailureEvent::MessageTransformationFailureReason]
+          #     Optional. Failure encountered when applying a message transformation to
+          #     the Pub/Sub message.
+          #
+          #     Note: The following fields are mutually exclusive: `message_transformation_failure_reason`, `api_violation_reason`, `schema_violation_reason`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           class AwsMskFailureReason
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -579,6 +622,19 @@ module Google
           #   @return [::Google::Cloud::PubSub::V1::IngestionFailureEvent::ApiViolationReason]
           #     Optional. The Pub/Sub API limits prevented the desired message from
           #     being published.
+          #
+          #     Note: The following fields are mutually exclusive: `api_violation_reason`, `schema_violation_reason`, `message_transformation_failure_reason`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+          # @!attribute [rw] schema_violation_reason
+          #   @return [::Google::Cloud::PubSub::V1::IngestionFailureEvent::SchemaViolationReason]
+          #     Optional. The Pub/Sub message failed schema validation.
+          #
+          #     Note: The following fields are mutually exclusive: `schema_violation_reason`, `api_violation_reason`, `message_transformation_failure_reason`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+          # @!attribute [rw] message_transformation_failure_reason
+          #   @return [::Google::Cloud::PubSub::V1::IngestionFailureEvent::MessageTransformationFailureReason]
+          #     Optional. Failure encountered when applying a message transformation to
+          #     the Pub/Sub message.
+          #
+          #     Note: The following fields are mutually exclusive: `message_transformation_failure_reason`, `api_violation_reason`, `schema_violation_reason`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           class AzureEventHubsFailureReason
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -602,7 +658,46 @@ module Google
           #   @return [::Google::Cloud::PubSub::V1::IngestionFailureEvent::ApiViolationReason]
           #     Optional. The Pub/Sub API limits prevented the desired message from
           #     being published.
+          #
+          #     Note: The following fields are mutually exclusive: `api_violation_reason`, `schema_violation_reason`, `message_transformation_failure_reason`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+          # @!attribute [rw] schema_violation_reason
+          #   @return [::Google::Cloud::PubSub::V1::IngestionFailureEvent::SchemaViolationReason]
+          #     Optional. The Pub/Sub message failed schema validation.
+          #
+          #     Note: The following fields are mutually exclusive: `schema_violation_reason`, `api_violation_reason`, `message_transformation_failure_reason`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+          # @!attribute [rw] message_transformation_failure_reason
+          #   @return [::Google::Cloud::PubSub::V1::IngestionFailureEvent::MessageTransformationFailureReason]
+          #     Optional. Failure encountered when applying a message transformation to
+          #     the Pub/Sub message.
+          #
+          #     Note: The following fields are mutually exclusive: `message_transformation_failure_reason`, `api_violation_reason`, `schema_violation_reason`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           class ConfluentCloudFailureReason
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Failure when ingesting from an AWS Kinesis source.
+          # @!attribute [rw] stream_arn
+          #   @return [::String]
+          #     Optional. The stream ARN of the Kinesis stream being ingested from.
+          # @!attribute [rw] partition_key
+          #   @return [::String]
+          #     Optional. The partition key of the message that failed to be ingested.
+          # @!attribute [rw] sequence_number
+          #   @return [::String]
+          #     Optional. The sequence number of the message that failed to be ingested.
+          # @!attribute [rw] schema_violation_reason
+          #   @return [::Google::Cloud::PubSub::V1::IngestionFailureEvent::SchemaViolationReason]
+          #     Optional. The Pub/Sub message failed schema validation.
+          #
+          #     Note: The following fields are mutually exclusive: `schema_violation_reason`, `message_transformation_failure_reason`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+          # @!attribute [rw] message_transformation_failure_reason
+          #   @return [::Google::Cloud::PubSub::V1::IngestionFailureEvent::MessageTransformationFailureReason]
+          #     Optional. Failure encountered when applying a message transformation to
+          #     the Pub/Sub message.
+          #
+          #     Note: The following fields are mutually exclusive: `message_transformation_failure_reason`, `schema_violation_reason`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+          class AwsKinesisFailureReason
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
@@ -1083,8 +1178,8 @@ module Google
         #
         #     If not set, the default retry policy is applied. This generally implies
         #     that messages will be retried as soon as possible for healthy subscribers.
-        #     RetryPolicy will be triggered on NACKs or acknowledgement deadline
-        #     exceeded events for a given message.
+        #     RetryPolicy will be triggered on NACKs or acknowledgment deadline exceeded
+        #     events for a given message.
         # @!attribute [rw] detached
         #   @return [::Boolean]
         #     Optional. Indicates whether the subscription is detached from its topic.
@@ -1099,7 +1194,7 @@ module Google
         #     subscription:
         #
         #     * The message sent to a subscriber is guaranteed not to be resent
-        #     before the message's acknowledgement deadline expires.
+        #     before the message's acknowledgment deadline expires.
         #     * An acknowledged message will not be resent to a subscriber.
         #
         #     Note that subscribers may still receive multiple copies of a message
@@ -1176,7 +1271,7 @@ module Google
         # Retry delay will be exponential based on provided minimum and maximum
         # backoffs. https://en.wikipedia.org/wiki/Exponential_backoff.
         #
-        # RetryPolicy will be triggered on NACKs or acknowledgement deadline exceeded
+        # RetryPolicy will be triggered on NACKs or acknowledgment deadline exceeded
         # events for a given message.
         #
         # Retry Policy is implemented on a best effort basis. At times, the delay
@@ -1218,7 +1313,7 @@ module Google
         #     value must be between 5 and 100.
         #
         #     The number of delivery attempts is defined as 1 + (the sum of number of
-        #     NACKs and number of times the acknowledgement deadline has been exceeded
+        #     NACKs and number of times the acknowledgment deadline has been exceeded
         #     for the message).
         #
         #     A NACK is any call to ModifyAckDeadline with a 0 deadline. Note that
@@ -1459,7 +1554,7 @@ module Google
         #   @return [::Google::Protobuf::Duration]
         #     Optional. The maximum duration that can elapse before a new Cloud Storage
         #     file is created. Min 1 minute, max 10 minutes, default 5 minutes. May not
-        #     exceed the subscription's acknowledgement deadline.
+        #     exceed the subscription's acknowledgment deadline.
         # @!attribute [rw] max_bytes
         #   @return [::Integer]
         #     Optional. The maximum bytes that can be written to a Cloud Storage file
@@ -1728,7 +1823,7 @@ module Google
         end
 
         # Request for the `StreamingPull` streaming RPC method. This request is used to
-        # establish the initial stream as well as to stream acknowledgements and ack
+        # establish the initial stream as well as to stream acknowledgments and ack
         # deadline modifications from the client to the server.
         # @!attribute [rw] subscription
         #   @return [::String]
@@ -1738,12 +1833,11 @@ module Google
         #     Format is `projects/{project}/subscriptions/{sub}`.
         # @!attribute [rw] ack_ids
         #   @return [::Array<::String>]
-        #     Optional. List of acknowledgement IDs for acknowledging previously received
+        #     Optional. List of acknowledgment IDs for acknowledging previously received
         #     messages (received on this stream or a different stream). If an ack ID has
         #     expired, the corresponding message may be redelivered later. Acknowledging
-        #     a message more than once will not result in an error. If the
-        #     acknowledgement ID is malformed, the stream will be aborted with status
-        #     `INVALID_ARGUMENT`.
+        #     a message more than once will not result in an error. If the acknowledgment
+        #     ID is malformed, the stream will be aborted with status `INVALID_ARGUMENT`.
         # @!attribute [rw] modify_deadline_seconds
         #   @return [::Array<::Integer>]
         #     Optional. The list of new ack deadlines for the IDs listed in
@@ -1759,7 +1853,7 @@ module Google
         #     be aborted with status `INVALID_ARGUMENT`.
         # @!attribute [rw] modify_deadline_ack_ids
         #   @return [::Array<::String>]
-        #     Optional. List of acknowledgement IDs whose deadline will be modified based
+        #     Optional. List of acknowledgment IDs whose deadline will be modified based
         #     on the corresponding element in `modify_deadline_seconds`. This field can
         #     be used to indicate that more time is needed to process a message by the
         #     subscriber, or to make the message available for redelivery if the
@@ -1813,11 +1907,11 @@ module Google
         # @!attribute [rw] acknowledge_confirmation
         #   @return [::Google::Cloud::PubSub::V1::StreamingPullResponse::AcknowledgeConfirmation]
         #     Optional. This field will only be set if `enable_exactly_once_delivery` is
-        #     set to `true`.
+        #     set to `true` and is not guaranteed to be populated.
         # @!attribute [rw] modify_ack_deadline_confirmation
         #   @return [::Google::Cloud::PubSub::V1::StreamingPullResponse::ModifyAckDeadlineConfirmation]
         #     Optional. This field will only be set if `enable_exactly_once_delivery` is
-        #     set to `true`.
+        #     set to `true` and is not guaranteed to be populated.
         # @!attribute [rw] subscription_properties
         #   @return [::Google::Cloud::PubSub::V1::StreamingPullResponse::SubscriptionProperties]
         #     Optional. Properties associated with this subscription.
@@ -1825,39 +1919,39 @@ module Google
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
 
-          # Acknowledgement IDs sent in one or more previous requests to acknowledge a
+          # Acknowledgment IDs sent in one or more previous requests to acknowledge a
           # previously received message.
           # @!attribute [rw] ack_ids
           #   @return [::Array<::String>]
-          #     Optional. Successfully processed acknowledgement IDs.
+          #     Optional. Successfully processed acknowledgment IDs.
           # @!attribute [rw] invalid_ack_ids
           #   @return [::Array<::String>]
-          #     Optional. List of acknowledgement IDs that were malformed or whose
-          #     acknowledgement deadline has expired.
+          #     Optional. List of acknowledgment IDs that were malformed or whose
+          #     acknowledgment deadline has expired.
           # @!attribute [rw] unordered_ack_ids
           #   @return [::Array<::String>]
-          #     Optional. List of acknowledgement IDs that were out of order.
+          #     Optional. List of acknowledgment IDs that were out of order.
           # @!attribute [rw] temporary_failed_ack_ids
           #   @return [::Array<::String>]
-          #     Optional. List of acknowledgement IDs that failed processing with
+          #     Optional. List of acknowledgment IDs that failed processing with
           #     temporary issues.
           class AcknowledgeConfirmation
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
 
-          # Acknowledgement IDs sent in one or more previous requests to modify the
+          # Acknowledgment IDs sent in one or more previous requests to modify the
           # deadline for a specific message.
           # @!attribute [rw] ack_ids
           #   @return [::Array<::String>]
-          #     Optional. Successfully processed acknowledgement IDs.
+          #     Optional. Successfully processed acknowledgment IDs.
           # @!attribute [rw] invalid_ack_ids
           #   @return [::Array<::String>]
-          #     Optional. List of acknowledgement IDs that were malformed or whose
-          #     acknowledgement deadline has expired.
+          #     Optional. List of acknowledgment IDs that were malformed or whose
+          #     acknowledgment deadline has expired.
           # @!attribute [rw] temporary_failed_ack_ids
           #   @return [::Array<::String>]
-          #     Optional. List of acknowledgement IDs that failed processing with
+          #     Optional. List of acknowledgment IDs that failed processing with
           #     temporary issues.
           class ModifyAckDeadlineConfirmation
             include ::Google::Protobuf::MessageExts

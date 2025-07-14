@@ -1,5 +1,39 @@
 # Changelog
 
+### 0.17.0 (2025-06-24)
+
+#### Features
+
+* Additional instance network configs 
+* Support cluster activation policy 
+* Support deny maintenance periods 
+* Support for assisted experiences 
+* Support managed connection pool config 
+* Support per-cluster service agents 
+#### Documentation
+
+* Deprecated GeminiClusterConfig and GeminiInstanceConfig 
+
+### 0.16.0 (2025-05-16)
+
+#### Features
+
+* Support for Gemini Cloud Assist configuration for Instance 
+* Support for machine type configuration 
+* Support for PSC interface configuration 
+* Support for PSC service automation configuration 
+* Support for specifying the project number that needs to be allowlisted on the network attachment to enable outbound connectivity 
+* Support for the import_cluster RPC 
+* Support for the restore_from_cloud_sql RPC 
+* Support for the scope argument when listing supported database flags 
+
+### 0.15.0 (2025-05-12)
+
+#### Features
+
+* Updated core dependencies including gapic-common 
+* Updated required Ruby version to 3.1 
+
 ### 0.14.1 (2025-04-29)
 
 #### Bug Fixes

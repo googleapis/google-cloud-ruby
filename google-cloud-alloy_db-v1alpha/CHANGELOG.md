@@ -1,5 +1,37 @@
 # Changelog
 
+### 0.14.0 (2025-06-23)
+
+#### Features
+
+* Backup.create_completion_time output field 
+* Cluster.DenyMaintenancePeriod field 
+* Instance.ActivationPolicy field ([#30507](https://github.com/googleapis/google-cloud-ruby/issues/30507)) 
+* InstanceNetworkConfig.allocated_ip_range_override field 
+* InstanceNetworkConfig.network output field 
+#### Documentation
+
+* A comment for field `earliest_restorable_time` 
+* A comment for field `status` in message `PscAutoConnectionConfig` 
+
+### 0.13.0 (2025-05-16)
+
+#### Features
+
+* Support for Gemini Cloud Assist configuration for Instance 
+* Support for machine type configuration 
+* Support for PSC service automation configuration 
+* Support for the export_cluster and import_cluster RPCs 
+* Support for the restore_from_cloud_sql RPC 
+* Support for the scope argument when listing supported database flags 
+
+### 0.12.0 (2025-05-12)
+
+#### Features
+
+* Updated core dependencies including gapic-common 
+* Updated required Ruby version to 3.1 
+
 ### 0.11.1 (2025-04-29)
 
 #### Bug Fixes

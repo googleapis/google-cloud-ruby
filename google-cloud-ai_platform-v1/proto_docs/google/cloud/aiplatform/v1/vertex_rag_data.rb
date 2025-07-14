@@ -84,9 +84,56 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
 
           # The config for the default RAG-managed Vector DB.
+          # @!attribute [rw] knn
+          #   @return [::Google::Cloud::AIPlatform::V1::RagVectorDbConfig::RagManagedDb::KNN]
+          #     Performs a KNN search on RagCorpus.
+          #     Default choice if not specified.
+          #
+          #     Note: The following fields are mutually exclusive: `knn`, `ann`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+          # @!attribute [rw] ann
+          #   @return [::Google::Cloud::AIPlatform::V1::RagVectorDbConfig::RagManagedDb::ANN]
+          #     Performs an ANN search on RagCorpus. Use this if you have a lot of
+          #     files (> 10K) in your RagCorpus and want to reduce the search latency.
+          #
+          #     Note: The following fields are mutually exclusive: `ann`, `knn`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           class RagManagedDb
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
+
+            # Config for KNN search.
+            class KNN
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
+
+            # Config for ANN search.
+            #
+            # RagManagedDb uses a tree-based structure to partition data and
+            # facilitate faster searches. As a tradeoff, it requires longer indexing
+            # time and manual triggering of index rebuild via the ImportRagFiles and
+            # UpdateRagCorpus API.
+            # @!attribute [rw] tree_depth
+            #   @return [::Integer]
+            #     The depth of the tree-based structure. Only depth values of 2 and 3 are
+            #     supported.
+            #
+            #     Recommended value is 2 if you have if you have O(10K) files in the
+            #     RagCorpus and set this to 3 if more than that.
+            #
+            #     Default value is 2.
+            # @!attribute [rw] leaf_count
+            #   @return [::Integer]
+            #     Number of leaf nodes in the tree-based structure. Each leaf node
+            #     contains groups of closely related vectors along with their
+            #     corresponding centroid.
+            #
+            #     Recommended value is 10 * sqrt(num of RagFiles in your RagCorpus).
+            #
+            #     Default value is 500.
+            class ANN
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
           end
 
           # The config for the Pinecone.
@@ -213,6 +260,12 @@ module Google
         # @!attribute [r] corpus_status
         #   @return [::Google::Cloud::AIPlatform::V1::CorpusStatus]
         #     Output only. RagCorpus state.
+        # @!attribute [rw] encryption_spec
+        #   @return [::Google::Cloud::AIPlatform::V1::EncryptionSpec]
+        #     Optional. Immutable. The CMEK key name used to encrypt at-rest data related
+        #     to this Corpus. Only applicable to RagManagedDb option for Vector DB. This
+        #     field can only be set at corpus creation time, and cannot be updated or
+        #     deleted.
         class RagCorpus
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -478,7 +531,83 @@ module Google
         #     to this job and not shared across other import jobs. Consult the Quotas
         #     page on the project to set an appropriate value here.
         #     If unspecified, a default value of 1,000 QPM would be used.
+        # @!attribute [rw] rebuild_ann_index
+        #   @return [::Boolean]
+        #     Rebuilds the ANN index to optimize for recall on the imported data.
+        #     Only applicable for RagCorpora running on RagManagedDb with
+        #     `retrieval_strategy` set to `ANN`. The rebuild will be performed using the
+        #     existing ANN config set on the RagCorpus. To change the ANN config, please
+        #     use the UpdateRagCorpus API.
+        #
+        #     Default is false, i.e., index is not rebuilt.
         class ImportRagFilesConfig
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Configuration message for RagManagedDb used by RagEngine.
+        # @!attribute [rw] scaled
+        #   @return [::Google::Cloud::AIPlatform::V1::RagManagedDbConfig::Scaled]
+        #     Sets the RagManagedDb to the Scaled tier.
+        #
+        #     Note: The following fields are mutually exclusive: `scaled`, `basic`, `unprovisioned`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] basic
+        #   @return [::Google::Cloud::AIPlatform::V1::RagManagedDbConfig::Basic]
+        #     Sets the RagManagedDb to the Basic tier.
+        #
+        #     Note: The following fields are mutually exclusive: `basic`, `scaled`, `unprovisioned`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] unprovisioned
+        #   @return [::Google::Cloud::AIPlatform::V1::RagManagedDbConfig::Unprovisioned]
+        #     Sets the RagManagedDb to the Unprovisioned tier.
+        #
+        #     Note: The following fields are mutually exclusive: `unprovisioned`, `scaled`, `basic`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        class RagManagedDbConfig
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Scaled tier offers production grade performance along with
+          # autoscaling functionality. It is suitable for customers with large
+          # amounts of data or performance sensitive workloads.
+          class Scaled
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Basic tier is a cost-effective and low compute tier suitable for
+          # the following cases:
+          # * Experimenting with RagManagedDb.
+          # * Small data size.
+          # * Latency insensitive workload.
+          # * Only using RAG Engine with external vector DBs.
+          #
+          # NOTE: This is the default tier if not explicitly chosen.
+          class Basic
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Disables the RAG Engine service and deletes all your data held
+          # within this service. This will halt the billing of the service.
+          #
+          # NOTE: Once deleted the data cannot be recovered. To start using
+          # RAG Engine again, you will need to update the tier by calling the
+          # UpdateRagEngineConfig API.
+          class Unprovisioned
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+        end
+
+        # Config for RagEngine.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Identifier. The name of the RagEngineConfig.
+        #     Format:
+        #     `projects/{project}/locations/{location}/ragEngineConfig`
+        # @!attribute [rw] rag_managed_db_config
+        #   @return [::Google::Cloud::AIPlatform::V1::RagManagedDbConfig]
+        #     The config of the RagManagedDb used by RagEngine.
+        class RagEngineConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end

@@ -21,7 +21,7 @@ module Google
   module Cloud
     module Speech
       module V2
-        # Representes a singular feature of a model. If the feature is `recognizer`,
+        # Represents a singular feature of a model. If the feature is `recognizer`,
         # the release_state of the feature represents the release_state of the model
         # @!attribute [rw] feature
         #   @return [::String]

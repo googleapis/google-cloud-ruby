@@ -21,12 +21,17 @@ module Google
   module Cloud
     module NetworkServices
       module V1
-        # ServiceBinding is the resource that defines a Service Directory Service to
-        # be used in a BackendService resource.
+        # ServiceBinding can be used to:
+        # - Bind a Service Directory Service to be used in a BackendService resource.
+        #   This feature will be deprecated soon.
+        # - Bind a Private Service Connect producer service to be used in consumer
+        #   Cloud Service Mesh or Application Load Balancers.
+        # - Bind a Cloud Run service to be used in consumer Cloud Service Mesh or
+        #   Application Load Balancers.
         # @!attribute [rw] name
         #   @return [::String]
-        #     Required. Name of the ServiceBinding resource. It matches pattern
-        #     `projects/*/locations/global/serviceBindings/service_binding_name`.
+        #     Identifier. Name of the ServiceBinding resource. It matches pattern
+        #     `projects/*/locations/*/serviceBindings/<service_binding_name>`.
         # @!attribute [rw] description
         #   @return [::String]
         #     Optional. A free-text description of the resource. Max length 1024
@@ -38,9 +43,20 @@ module Google
         #   @return [::Google::Protobuf::Timestamp]
         #     Output only. The timestamp when the resource was updated.
         # @!attribute [rw] service
+        #   @deprecated This field is deprecated and may be removed in the next major version update.
         #   @return [::String]
-        #     Required. The full service directory service name of the format
-        #     /projects/*/locations/*/namespaces/*/services/*
+        #     Optional. The full Service Directory Service name of the format
+        #     `projects/*/locations/*/namespaces/*/services/*`.
+        #     This field is for Service Directory integration which will be deprecated
+        #     soon.
+        # @!attribute [r] service_id
+        #   @deprecated This field is deprecated and may be removed in the next major version update.
+        #   @return [::String]
+        #     Output only. The unique identifier of the Service Directory Service against
+        #     which the ServiceBinding resource is validated. This is populated when the
+        #     Service Binding resource is used in another resource (like Backend
+        #     Service). This is of the UUID4 format. This field is for Service Directory
+        #     integration which will be deprecated soon.
         # @!attribute [rw] labels
         #   @return [::Google::Protobuf::Map{::String => ::String}]
         #     Optional. Set of label tags associated with the ServiceBinding resource.
@@ -62,7 +78,7 @@ module Google
         # @!attribute [rw] parent
         #   @return [::String]
         #     Required. The project and location from which the ServiceBindings should be
-        #     listed, specified in the format `projects/*/locations/global`.
+        #     listed, specified in the format `projects/*/locations/*`.
         # @!attribute [rw] page_size
         #   @return [::Integer]
         #     Maximum number of ServiceBindings to return per call.
@@ -85,6 +101,11 @@ module Google
         #     If there might be more results than those appearing in this response, then
         #     `next_page_token` is included. To get the next set of results, call this
         #     method again using the value of `next_page_token` as `page_token`.
+        # @!attribute [rw] unreachable
+        #   @return [::Array<::String>]
+        #     Unreachable resources. Populated when the request attempts to list all
+        #     resources across all supported locations, while some locations are
+        #     temporarily unavailable.
         class ListServiceBindingsResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -94,7 +115,7 @@ module Google
         # @!attribute [rw] name
         #   @return [::String]
         #     Required. A name of the ServiceBinding to get. Must be in the format
-        #     `projects/*/locations/global/serviceBindings/*`.
+        #     `projects/*/locations/*/serviceBindings/*`.
         class GetServiceBindingRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -104,7 +125,7 @@ module Google
         # @!attribute [rw] parent
         #   @return [::String]
         #     Required. The parent resource of the ServiceBinding. Must be in the
-        #     format `projects/*/locations/global`.
+        #     format `projects/*/locations/*`.
         # @!attribute [rw] service_binding_id
         #   @return [::String]
         #     Required. Short name of the ServiceBinding resource to be created.
@@ -116,11 +137,27 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # Request used by the UpdateServiceBinding method.
+        # @!attribute [rw] update_mask
+        #   @return [::Google::Protobuf::FieldMask]
+        #     Optional. Field mask is used to specify the fields to be overwritten in the
+        #     ServiceBinding resource by the update.
+        #     The fields specified in the update_mask are relative to the resource, not
+        #     the full request. A field will be overwritten if it is in the mask. If the
+        #     user does not provide a mask then all fields will be overwritten.
+        # @!attribute [rw] service_binding
+        #   @return [::Google::Cloud::NetworkServices::V1::ServiceBinding]
+        #     Required. Updated ServiceBinding resource.
+        class UpdateServiceBindingRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # Request used by the DeleteServiceBinding method.
         # @!attribute [rw] name
         #   @return [::String]
         #     Required. A name of the ServiceBinding to delete. Must be in the format
-        #     `projects/*/locations/global/serviceBindings/*`.
+        #     `projects/*/locations/*/serviceBindings/*`.
         class DeleteServiceBindingRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

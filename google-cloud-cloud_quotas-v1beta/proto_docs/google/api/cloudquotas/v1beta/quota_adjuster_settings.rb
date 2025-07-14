@@ -52,12 +52,13 @@ module Google
         # Adjuster.
         # @!attribute [rw] name
         #   @return [::String]
-        #     Identifier. Name of the configuration, in the following format:
-        #       `projects/PROJECT_NUMBER/locations/global/quotaAdjusterSettings`.
-        #     Replace PROJECT_NUMBER with the project number for your project.
+        #     Identifier. Name of the config would be of the format:
+        #       projects/PROJECT_NUMBER/locations/global/quotaAdjusterSettings
+        #       folders/FOLDER_NUMBER/locations/global/quotaAdjusterSettings
+        #       organizations/ORGANIZATION_NUMBER/locations/global/quotaAdjusterSettings
         # @!attribute [rw] enablement
         #   @return [::Google::Cloud::CloudQuotas::V1beta::QuotaAdjusterSettings::Enablement]
-        #     Required. The configured value of the enablement at the given resource.
+        #     Optional. The configured value of the enablement at the given resource.
         # @!attribute [r] update_time
         #   @return [::Google::Protobuf::Timestamp]
         #     Output only. The timestamp when the QuotaAdjusterSettings resource was last
@@ -68,6 +69,18 @@ module Google
         #     provided on update and does not match the current server's ETag in the
         #     QuotaAdjusterSettings, the request is blocked and returns an ABORTED error.
         #     See https://google.aip.dev/134#etags for more details on ETags.
+        # @!attribute [rw] inherited
+        #   @return [::Boolean]
+        #     Optional. Indicates whether the setting is inherited or explicitly
+        #     specified.
+        # @!attribute [r] inherited_from
+        #   @return [::String]
+        #     Output only. The resource container from which the setting is inherited.
+        #     This refers to the  nearest ancestor with enablement set (either ENABLED or
+        #     DISABLED). The value can be an organizations/\\{organization_id},
+        #     folders/\\{folder_id}, or can be 'default' if no ancestor exists with
+        #     enablement set. The value will be empty when enablement is directly set on
+        #     this container.
         class QuotaAdjusterSettings
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

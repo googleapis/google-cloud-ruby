@@ -359,6 +359,28 @@ module Google
         #     product's
         #     {::Google::Cloud::Retail::V2::LocalInventory#place_id LocalInventory.place_id}
         #     for revenue optimization.
+        # @!attribute [rw] user_attributes
+        #   @return [::Google::Protobuf::Map{::String => ::Google::Cloud::Retail::V2::StringList}]
+        #     Optional. The user attributes that could be used for personalization of
+        #     search results.
+        #     * Populate at most 100 key-value pairs per query.
+        #     * Only supports string keys and repeated string values.
+        #     * Duplcate keys are not allowed within a single query.
+        #
+        #     Example:
+        #        user_attributes: [
+        #         { key: "pets"
+        #           value {
+        #             values: "dog"
+        #             values: "cat"
+        #           }
+        #         },
+        #         { key: "state"
+        #           value {
+        #             values: "CA"
+        #           }
+        #         }
+        #        ]
         class SearchRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -689,7 +711,8 @@ module Google
           #     {::Google::Cloud::Retail::V2::SearchRequest::QueryExpansionSpec::Condition::DISABLED Condition.DISABLED}.
           # @!attribute [rw] pin_unexpanded_results
           #   @return [::Boolean]
-          #     Whether to pin unexpanded results. If this field is set to true,
+          #     Whether to pin unexpanded results. The default value is false. If this
+          #     field is set to true,
           #     unexpanded products are always at the top of the search results, followed
           #     by the expanded results.
           class QueryExpansionSpec
@@ -852,6 +875,15 @@ module Google
           # @!attribute [rw] value
           #   @return [::String]
           class LabelsEntry
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # @!attribute [rw] key
+          #   @return [::String]
+          # @!attribute [rw] value
+          #   @return [::Google::Cloud::Retail::V2::StringList]
+          class UserAttributesEntry
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
@@ -1056,6 +1088,9 @@ module Google
           #     Possible values:
           #
           #     * `purchased`: Indicates that this product has been purchased before.
+          # @!attribute [rw] model_scores
+          #   @return [::Google::Protobuf::Map{::String => ::Google::Cloud::Retail::V2::DoubleList}]
+          #     Google provided available scores.
           class SearchResult
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -1074,6 +1109,15 @@ module Google
             # @!attribute [rw] value
             #   @return [::Google::Protobuf::Value]
             class VariantRollupValuesEntry
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
+
+            # @!attribute [rw] key
+            #   @return [::String]
+            # @!attribute [rw] value
+            #   @return [::Google::Cloud::Retail::V2::DoubleList]
+            class ModelScoresEntry
               include ::Google::Protobuf::MessageExts
               extend ::Google::Protobuf::MessageExts::ClassMethods
             end
