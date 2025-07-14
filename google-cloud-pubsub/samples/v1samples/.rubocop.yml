@@ -1,0 +1,15 @@
+inherit_gem:
+  google-style: google-style.yml
+
+AllCops:
+  Exclude:
+    - "acceptance/**/*"
+    - "utilities/**/*"
+
+Lint/RescueException:
+  Exclude:
+    - "subscriptions.rb"
+Lint/UselessAssignment:
+  Enabled: false
+Metrics/MethodLength:
+  Max: 26
