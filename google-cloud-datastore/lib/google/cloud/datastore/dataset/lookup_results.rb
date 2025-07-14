@@ -20,12 +20,12 @@ module Google
     module Datastore
       class Dataset
         ##
-        # LookupResults is a special case Array with additional values.
-        # A LookupResults object is returned from Dataset#find_all and
+        # {LookupResults} is a special case Array with additional values.
+        # A {LookupResults} object is returned from {Dataset#find_all} and
         # contains the entities as well as the Keys that were deferred from
         # the results and the Entities that were missing in the dataset.
         #
-        # Please be cautious when treating the QueryResults as an Array.
+        # Please be cautious when treating the {LookupResults} as an Array.
         # Many common Array methods will return a new Array instance.
         #
         # @example
@@ -55,13 +55,16 @@ module Google
         class LookupResults < DelegateClass(::Array)
           ##
           # The time at which these entities were read or found missing.
-          # @return [Google::Protobuf::Timestamp, nil]
+          # @return [Google::Protobuf::Timestamp]
           attr_reader :response_read_time
 
           ##
           # Time at which the entities are being read. This would not be
           # older than 270 seconds.
-          # @return [Time, DateTime, Google::Protobuf::Timestamp, nil]
+          #
+          # This is a copy of the input parameter supplied to the {Dataset#find_all} function.
+          #
+          # @return [Time, nil]
           attr_reader :read_time
 
           ##

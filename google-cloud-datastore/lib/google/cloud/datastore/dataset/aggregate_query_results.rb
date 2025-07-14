@@ -54,7 +54,7 @@ module Google
           ##
           # The time when the query was executed.
           #
-          # @return [Google::Protobuf::Timestamp, nil]
+          # @return [Google::Protobuf::Timestamp]
           attr_reader :read_time
 
           ##
