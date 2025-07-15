@@ -1,5 +1,16 @@
 # Changelog
 
+### 1.18.0 (2025-07-15)
+
+#### Features
+
+* Support for ColabImage 
+* Support for Tool to support computer use 
+* Support for unique names for pipeline tasks ([#30605](https://github.com/googleapis/google-cloud-ruby/issues/30605)) 
+#### Documentation
+
+* clarify documentation for cases when multiple parameters are mutually exclusive for an RPC method ([#30623](https://github.com/googleapis/google-cloud-ruby/issues/30623)) 
+
 ### 1.17.0 (2025-06-30)
 
 #### Features
