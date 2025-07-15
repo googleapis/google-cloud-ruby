@@ -1,5 +1,11 @@
 # Changelog
 
+### 1.4.0 (2025-07-15)
+
+#### Features
+
+* Support for Cluster TLS config ([#30601](https://github.com/googleapis/google-cloud-ruby/issues/30601)) 
+
 ### 1.3.0 (2025-05-27)
 
 #### Features
