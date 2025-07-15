@@ -157,26 +157,26 @@ class structure (`Topic`, `Subscription`, `Schema`, and `Project`) for easier re
 
 | v2 Method | v3 Method |
 | --------- | --------- |
-| name | SchemaAdminClient.get_schema |
-| type | SchemaAdminClient.get_schema |
-| definition | SchemaAdminClient.get_schema |
-| revision_id | SchemaAdminClient.get_schema |
-| validate_message | SchemaAdminClient.validate_message |
-| delete | SchemaAdminClient.delete_schema |
-| commit | SchemaAdminClient.commit_schema |
-| resource_full? | SchemaAdminClient.get_schema |
+| name | SchemaService::Client.get_schema |
+| type | SchemaService::Client.get_schema |
+| definition | SchemaService::Client.get_schema |
+| revision_id | SchemaService::Client.get_schema |
+| validate_message | SchemaService::Client.validate_message |
+| delete | SchemaService::Client.delete_schema |
+| commit | SchemaService::Client.commit_schema |
+| resource_full? | SchemaService::Client.get_schema |
 
 
 ### Project
 | v2 Method | v3 Method |
 | --------- | --------- |
-| topic | TopicAdminClient.get_topic |
-| create_topic | TopicAdminClient.create_topic |
-| topics | TopicAdminClient.list_topics |
-| subscription | SubscriptionAdminClient.get_subscription |
-| subscriptions | SubscriptionAdminClient.list_subscriptions |
-| snapshots | SubscriptionAdminClient.list_snapshots |
-| schema | SchemaClient.get_schema |
-| create_schema | SchemaClient.create_schema |
-| schemas | SchemaClient.list_schemas |
-| valid_schema? | SchemaClient.validate_schema |
+| topic | TopicAdmin::Client.get_topic |
+| create_topic | TopicAdmin::Client.create_topic |
+| topics | TopicAdmin::Client.list_topics |
+| subscription | SubscriptionAdmin::Client.get_subscription |
+| subscriptions | SubscriptionAdmin::Client.list_subscriptions |
+| snapshots | SubscriptionAdmin::Client.list_snapshots |
+| schema | SchemaService::Client.get_schema |
+| create_schema | SchemaService::Client.create_schema |
+| schemas | SchemaService::Client.list_schemas |
+| valid_schema? | SchemaService::Client.validate_schema |
