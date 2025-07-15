@@ -1,5 +1,12 @@
 # Changelog
 
+### 0.7.0 (2025-07-15)
+
+#### Features
+
+* Added maximum_retail_price field (applicable to India only) 
+* Renamed "gtin" field to "gtins" and deprecated the old field 
+
 ### 0.6.0 (2025-05-11)
 
 #### Features
