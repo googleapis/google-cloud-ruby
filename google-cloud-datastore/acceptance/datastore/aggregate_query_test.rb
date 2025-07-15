@@ -135,10 +135,10 @@ describe "Aggregate Queries", :datastore do
 
     it "returns count on filter with and without read time" do
       read_time = Time.now
-      sleep(1)
-
+      sleep(0.5)
       arya["alive"] = false
       dataset.transaction { |tx| tx.save arya }
+      sleep(0.5)
 
       query = Google::Cloud::Datastore.new
                                       .query("Character")
@@ -355,8 +355,9 @@ describe "Aggregate Queries", :datastore do
 
     it "returns sum on filter with and without read time" do
       read_time = Time.now
-      sleep(1)
+      sleep(0.5)
       dataset.transaction { |tx| tx.delete george }
+      sleep(0.5)
 
       query = Google::Cloud::Datastore.new
                                       .query("Character")
@@ -555,8 +556,9 @@ describe "Aggregate Queries", :datastore do
 
     it "returns average on filter with and without read time" do
       read_time = Time.now
-      sleep(1)
+      sleep(0.5)
       dataset.transaction { |tx| tx.delete george }
+      sleep(0.5)
 
       query = Google::Cloud::Datastore.new
                                       .query("Character")
