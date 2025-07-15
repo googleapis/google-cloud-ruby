@@ -297,7 +297,7 @@ module Google
                 #   @param page_size [::Integer]
                 #     The maximum number of products to return. The service may return fewer than
                 #     this value.
-                #     The maximum value is 250; values above 250 will be coerced to 250.
+                #     The maximum value is 1000; values above 1000 will be coerced to 1000.
                 #     If unspecified, the maximum number of products will be returned.
                 #   @param page_token [::String]
                 #     A page token, received from a previous `ListProducts` call.
