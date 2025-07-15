@@ -1,5 +1,14 @@
 # Changelog
 
+### 2.2.0 (2025-07-15)
+
+#### Features
+
+* Support for backdating certificates 
+* Support for the relative distinguished names 
+* Support for the TBS Certificate digest 
+* Support for user-defined URLs for certificate authorities 
+
 ### 2.1.0 (2025-05-12)
 
 #### Features
