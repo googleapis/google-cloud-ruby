@@ -1,5 +1,27 @@
 # Changelog
 
+### 2.0.0 (2025-07-15)
+
+### ⚠ BREAKING CHANGES
+
+* Removed Contact ID and Team ID fields
+
+#### Features
+
+* Support for Contact company display name 
+* Support for custom targeting key 
+* Support for the AdBreakService 
+* Support for the BandwidthGroupService 
+* Support for the DeviceCategoryService 
+* Support for the GeoTargetService 
+* Support for the OperatingSystemService and OperatingSystemVersionService 
+* Support for the PrivateAuctionService and PrivateAuctionDealService 
+* Support for the ProgrammaticBuyerService 
+* Added support for AdBreak resource ([#30579](https://github.com/googleapis/google-cloud-ruby/issues/30579)) 
+#### Bug Fixes
+
+* Removed Contact ID and Team ID fields 
+
 ### 1.1.0 (2025-05-12)
 
 #### Features
