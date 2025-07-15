@@ -22,6 +22,7 @@ require_relative "../pubsub_subscriber_sync_pull.rb"
 require_relative "../pubsub_subscriber_flow_settings.rb"
 require_relative "../pubsub_subscriber_async_pull.rb"
 require_relative "../pubsub_subscriber_concurrency_control.rb"
+require_relative "../pubsub_subscriber_error_listener.rb"
 require_relative "../pubsub_subscriber_sync_pull_with_lease.rb"
 require_relative "../pubsub_update_push_configuration.rb"
 require_relative "../pubsub_list_subscriptions.rb"
@@ -160,6 +161,19 @@ describe "subscriptions" do
     expect_with_retry "pubsub_subscriber_async_pull" do
       assert_output "Received message: This is a test message.\n" do
         listen_for_messages subscription_id: @subscription.name
+      end
+    end
+  end
+
+  it "supports pubsub_subscriber_error_listener" do
+    publisher = pubsub.publisher @topic.name
+    publisher.publish "This is a test message."
+    sleep 5
+
+    # pubsub_subscriber_error_listener
+    expect_with_retry "pubsub_subscriber_error_listener" do
+      assert_output "Received message: This is a test message.\n" do
+        listen_for_messages_with_error_handler subscription_id: @subscription.name
       end
     end
   end
