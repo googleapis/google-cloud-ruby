@@ -33,6 +33,7 @@ describe "Storage Quickstart" do
   end
 end
 
+
 describe "storage_soft_deleted_bucket" do
   let(:generation) { bucket.generation }
   let(:bucket) { fixture_bucket }
