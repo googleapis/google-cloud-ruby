@@ -13,6 +13,7 @@
 # limitations under the License.
 
 require_relative "helper"
+require_relative "../pubsub_commit_avro_schema"
 require_relative "../pubsub_commit_proto_schema"
 require_relative "../pubsub_create_avro_schema"
 require_relative "../pubsub_create_topic_with_schema"
@@ -182,6 +183,32 @@ describe "schemas" do
           subscribe_avro_records subscription_id: @subscription.name, avsc_file: nil
         end
       end
+    end
+
+    it "supports pubsub_commit_avro_schema & pubsub_commit_list_schema_revisions" do
+      schema = Google::Cloud::PubSub::V1::Schema.new name: schema_id, 
+                                                     type: :AVRO,
+                                                     definition: avsc_definition
+      @schema = schemas.create_schema parent: pubsub.project_path,
+                                      schema: schema,
+                                      schema_id: schema_id
+
+      rev_id = @schema.revision_id
+
+      schema1 = nil
+      # pubsub_commit_avro_schema
+      out, _err = capture_io do
+        schema1 = commit_avro_schema schema_id: schema_id, avsc_file: avsc_file
+      end
+      refute_equal out, "Schema commited with revision #{rev_id}."
+      assert_includes out, "Schema commited with revision"
+
+      # pubsub_list_schema_revisions
+      out, _err = capture_io do
+        list_schema_revisions schema_id: schema_id
+      end
+
+      assert_includes out, schema1.revision_id
     end
   end
 
