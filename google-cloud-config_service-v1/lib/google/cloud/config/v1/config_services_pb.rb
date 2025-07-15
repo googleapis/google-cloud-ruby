@@ -86,6 +86,14 @@ module Google
             # Gets details about a
             # [TerraformVersion][google.cloud.config.v1.TerraformVersion].
             rpc :GetTerraformVersion, ::Google::Cloud::ConfigService::V1::GetTerraformVersionRequest, ::Google::Cloud::ConfigService::V1::TerraformVersion
+            # Lists ResourceChanges for a given preview.
+            rpc :ListResourceChanges, ::Google::Cloud::ConfigService::V1::ListResourceChangesRequest, ::Google::Cloud::ConfigService::V1::ListResourceChangesResponse
+            # Get a ResourceChange for a given preview.
+            rpc :GetResourceChange, ::Google::Cloud::ConfigService::V1::GetResourceChangeRequest, ::Google::Cloud::ConfigService::V1::ResourceChange
+            # List ResourceDrifts for a given preview.
+            rpc :ListResourceDrifts, ::Google::Cloud::ConfigService::V1::ListResourceDriftsRequest, ::Google::Cloud::ConfigService::V1::ListResourceDriftsResponse
+            # Get a ResourceDrift for a given preview.
+            rpc :GetResourceDrift, ::Google::Cloud::ConfigService::V1::GetResourceDriftRequest, ::Google::Cloud::ConfigService::V1::ResourceDrift
           end
 
           Stub = Service.rpc_stub_class
