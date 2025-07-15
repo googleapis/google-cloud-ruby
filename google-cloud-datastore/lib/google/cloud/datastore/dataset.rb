@@ -418,6 +418,8 @@ module Google
         # @param [Time] read_time Reads entities as they were at the given time.
         #   This may not be older than 270 seconds. Optional.
         # @param [Hash, Google::Cloud::Datastore::V1::ExplainOptions] explain_options The options for query explanation.
+        #   Provide this argument to enable explain metrics. If this argument is left unset,
+        #   the results will not include explain metrics.
         #   See {Google::Cloud::Datastore::V1::ExplainOptions} for details. Optional.
         #
         # @return [Google::Cloud::Datastore::Dataset::QueryResults]

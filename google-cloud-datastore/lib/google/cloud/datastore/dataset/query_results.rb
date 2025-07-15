@@ -89,7 +89,11 @@ module Google
 
           # Query explain metrics. This is only present when the
           # [RunQueryRequest.explain_options][google.datastore.v1.RunQueryRequest.explain_options]
-          # is provided, and it is sent only once with the last QueryResult batch.
+          # is provided, and it is sent only once with or after the last QueryResults batch.
+          #
+          # To retrieve metrics, iterate over all QueryResults (e.g. with `next`). The explain_metrics
+          # field will be set on final QueryResults object.
+          #
           # @return [Google::Cloud::Datastore::V1::ExplainMetrics, nil]
           attr_reader :explain_metrics
 
@@ -104,6 +108,9 @@ module Google
 
           ##
           # The options for query explanation.
+          #
+          # This is a copy of the input parameter supplied to the {Dataset#run} function.
+          #
           # @return [Google::Cloud::Datastore::V1::ExplainOptions, nil]
           attr_reader :explain_options
 
