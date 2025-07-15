@@ -30,8 +30,9 @@ module Google
           #     Defaults to true, if not provided.
           # @!attribute [rw] is_bundle
           #   @return [::Boolean]
-          #     Whether the item is a merchant-defined bundle. A bundle is a custom
-          #     grouping of different products sold by a merchant for a single price.
+          #     Whether the item is a business-defined sub-API. A [sub-API]
+          #     (https://support.google.com/merchants/answer/6324449) is a custom
+          #     grouping of different products sold by a business for a single price.
           # @!attribute [rw] title
           #   @return [::String]
           #     Title of the item.
@@ -65,8 +66,9 @@ module Google
           #   @return [::Google::Protobuf::Timestamp]
           #     The date time when an offer becomes visible in search results across
           #     Google’s YouTube surfaces, in [ISO
-          #     8601](http://en.wikipedia.org/wiki/ISO_8601) format. See [Disclosure date](
-          #     https://support.google.com/merchants/answer/13034208) for more information.
+          #     8601](http://en.wikipedia.org/wiki/ISO_8601) format.
+          #     See [Disclosure date](https://support.google.com/merchants/answer/13034208)
+          #     for more information.
           # @!attribute [rw] adult
           #   @return [::Boolean]
           #     Set to true if the item is targeted towards adults.
@@ -76,23 +78,28 @@ module Google
           #     the item.
           # @!attribute [rw] availability
           #   @return [::String]
-          #     Availability status of the item.
+          #     [Availability](https://support.google.com/merchants/answer/6324448) status
+          #     of the item. For example, "in_stock" or "out_of_stock".
           # @!attribute [rw] availability_date
           #   @return [::Google::Protobuf::Timestamp]
           #     The day a pre-ordered product becomes available for delivery, in [ISO
           #     8601](http://en.wikipedia.org/wiki/ISO_8601) format.
           # @!attribute [rw] brand
           #   @return [::String]
-          #     Brand of the item.
+          #     [Brand](https://support.google.com/merchants/answer/6324351) of the item.
+          #     For example, "Google".
           # @!attribute [rw] color
           #   @return [::String]
-          #     Color of the item.
+          #     [Color](https://support.google.com/merchants/answer/6324487) of the item.
+          #     For example, "red".
           # @!attribute [rw] condition
           #   @return [::String]
-          #     Condition or state of the item.
+          #     [Condition](https://support.google.com/merchants/answer/6324469) or state
+          #     of the item. For example, "new" or "used".
           # @!attribute [rw] gender
           #   @return [::String]
-          #     Target gender of the item.
+          #     Target [gender](https://support.google.com/merchants/answer/6324479) of the
+          #     item. For example, "male" or "female".
           # @!attribute [rw] google_product_category
           #   @return [::String]
           #     Google's category of the item (see [Google product
@@ -101,6 +108,15 @@ module Google
           #     is currently no way to get back the auto assigned google product
           #     categories through the API.
           # @!attribute [rw] gtin
+          #   @deprecated This field is deprecated and may be removed in the next major version update.
+          #   @return [::Array<::String>]
+          #     Global Trade Item Numbers
+          #     ([GTIN](https://support.google.com/merchants/answer/188494#gtin)) of the
+          #     item.
+          #     You can provide up to 10 GTINs.
+          #
+          #     Deprecated: Use `gtins` instead.
+          # @!attribute [rw] gtins
           #   @return [::Array<::String>]
           #     Global Trade Item Numbers
           #     ([GTIN](https://support.google.com/merchants/answer/188494#gtin)) of the
@@ -111,7 +127,8 @@ module Google
           #     Shared identifier for all variants of the same product.
           # @!attribute [rw] material
           #   @return [::String]
-          #     The material of which the item is made.
+          #     The [material](https://support.google.com/merchants/answer/6324410) of
+          #     which the item is made. For example, "Leather" or "Cotton".
           # @!attribute [rw] mpn
           #   @return [::String]
           #     Manufacturer Part Number
@@ -119,10 +136,14 @@ module Google
           #     item.
           # @!attribute [rw] pattern
           #   @return [::String]
-          #     The item's pattern (for example, polka dots).
+          #     The item's [pattern](https://support.google.com/merchants/answer/6324483).
+          #     For example, polka dots.
           # @!attribute [rw] price
           #   @return [::Google::Shopping::Type::Price]
           #     Price of the item.
+          # @!attribute [rw] maximum_retail_price
+          #   @return [::Google::Shopping::Type::Price]
+          #     Maximum retail price (MRP) of the item. Applicable to India only.
           # @!attribute [rw] installment
           #   @return [::Google::Shopping::Merchant::Products::V1beta::Installment]
           #     Number and amount of installments to pay for an item.
@@ -141,14 +162,14 @@ module Google
           # @!attribute [rw] product_types
           #   @return [::Array<::String>]
           #     Categories of the item (formatted as in [product data
-          #     specification](https://support.google.com/merchants/answer/188494#product_type)).
+          #     specification](https://support.google.com/merchants/answer/7052112#product_category)).
           # @!attribute [rw] sale_price
           #   @return [::Google::Shopping::Type::Price]
           #     Advertised sale price of the item.
           # @!attribute [rw] sale_price_effective_date
           #   @return [::Google::Type::Interval]
-          #     Date range during which the item is on sale (see [product data
-          #     specification](https://support.google.com/merchants/answer/188494#sale_price_effective_date)).
+          #     Date range during which the item is on sale, see [product data
+          #     specification](https://support.google.com/merchants/answer/7052112#price_and_availability).
           # @!attribute [rw] sell_on_google_quantity
           #   @return [::Integer]
           #     The quantity of the product that is available for selling on Google.
@@ -206,22 +227,29 @@ module Google
           #   @return [::String]
           #     Size of the item. Only one value is allowed. For variants with different
           #     sizes, insert a separate product for each size with the same
-          #     `itemGroupId` value (see
-          #     [https://support.google.com/merchants/answer/6324492](size definition)).
+          #     `itemGroupId` value, see
+          #     [Size](https://support.google.com/merchants/answer/6324492).
           # @!attribute [rw] size_system
           #   @return [::String]
           #     System in which the size is specified. Recommended for apparel items.
+          #     For example, "US", "UK", "DE".
+          #     For more information, see
+          #     [Size system](https://support.google.com/merchants/answer/6324502).
           # @!attribute [rw] size_types
           #   @return [::Array<::String>]
           #     The cut of the item. It can be used to represent combined size types for
-          #     apparel items. Maximum two of size types can be provided (see
-          #     [https://support.google.com/merchants/answer/6324497](size type)).
+          #     apparel items. Maximum two of size types can be provided, see
+          #     [Size type](https://support.google.com/merchants/answer/6324497).
+          #     For example, "petite", "plus size".
           # @!attribute [rw] taxes
+          #   @deprecated This field is deprecated and may be removed in the next major version update.
           #   @return [::Array<::Google::Shopping::Merchant::Products::V1beta::Tax>]
           #     Tax information.
           # @!attribute [rw] tax_category
+          #   @deprecated This field is deprecated and may be removed in the next major version update.
           #   @return [::String]
-          #     The tax category of the product.
+          #     The [tax category](https://support.google.com/merchants/answer/7569847) of
+          #     the product.
           # @!attribute [rw] energy_efficiency_class
           #   @return [::String]
           #     The energy efficiency class as defined in EU directive 2010/30/EU.
@@ -239,11 +267,13 @@ module Google
           #     The preference of the denominator of the unit price.
           # @!attribute [rw] multipack
           #   @return [::Integer]
-          #     The number of identical products in a merchant-defined multipack.
+          #     The number of identical products in a business-defined multipack.
           # @!attribute [rw] ads_grouping
           #   @return [::String]
           #     Used to group items in an arbitrary way. Only for CPA%, discouraged
-          #     otherwise.
+          #     otherwise. For more information, see
+          #     [Display ads
+          #     attribute](https://support.google.com/merchants/answer/6069387).
           # @!attribute [rw] ads_labels
           #   @return [::Array<::String>]
           #     Similar to ads_grouping, but only works on CPC.
@@ -259,13 +289,16 @@ module Google
           #     Technical specification or additional product details.
           # @!attribute [rw] product_highlights
           #   @return [::Array<::String>]
-          #     Bullet points describing the most relevant highlights of a product.
+          #     Bullet points describing the most relevant [product
+          #     highlights](https://support.google.com/merchants/answer/9216100).
           # @!attribute [rw] display_ads_id
           #   @return [::String]
           #     An identifier for an item for dynamic remarketing campaigns.
           # @!attribute [rw] display_ads_similar_ids
           #   @return [::Array<::String>]
-          #     Advertiser-specified recommendations.
+          #     Advertiser-specified recommendations. For more information, see
+          #     [Display ads attribute
+          #     specification](https://support.google.com/merchants/answer/6069387).
           # @!attribute [rw] display_ads_title
           #   @return [::String]
           #     Title of an item for dynamic remarketing campaigns.
@@ -275,53 +308,78 @@ module Google
           #     campaigns.
           # @!attribute [rw] display_ads_value
           #   @return [::Float]
-          #     Offer margin for dynamic remarketing campaigns.
+          #     Offer margin for dynamic remarketing campaigns. For more information, see
+          #     [Display ads
+          #     attribute](https://support.google.com/merchants/answer/6069387).
           # @!attribute [rw] promotion_ids
           #   @return [::Array<::String>]
           #     The unique ID of a promotion.
           # @!attribute [rw] pickup_method
           #   @return [::String]
-          #     The pick up option for the item.
+          #     The [pickup](https://support.google.com/merchants/answer/14634021) option
+          #     for the item.
           # @!attribute [rw] pickup_sla
           #   @return [::String]
-          #     Item store pickup timeline.
+          #     Item store pickup timeline. For more information, see
+          #     [Pickup SLA](https://support.google.com/merchants/answer/14635400).
           # @!attribute [rw] link_template
           #   @return [::String]
-          #     Link template for merchant hosted local storefront.
+          #     [Link template](https://support.google.com/merchants/answer/13871172) for
+          #     business hosted local storefront.
           # @!attribute [rw] mobile_link_template
           #   @return [::String]
-          #     Link template for merchant hosted local storefront optimized for mobile
+          #     [Link template](https://support.google.com/merchants/answer/13870216) for
+          #     business hosted local storefront optimized for mobile
           #     devices.
           # @!attribute [rw] custom_label_0
           #   @return [::String]
-          #     Custom label 0 for custom grouping of items in a Shopping campaign.
+          #     [Custom label 0](https://support.google.com/merchants/answer/6324473) for
+          #     custom grouping of items in a Shopping campaign.
           # @!attribute [rw] custom_label_1
           #   @return [::String]
-          #     Custom label 1 for custom grouping of items in a Shopping campaign.
+          #     [Custom label 1](https://support.google.com/merchants/answer/6324473)
+          #     for custom grouping of items in a Shopping campaign.
           # @!attribute [rw] custom_label_2
           #   @return [::String]
-          #     Custom label 2 for custom grouping of items in a Shopping campaign.
+          #     [Custom label 2](https://support.google.com/merchants/answer/6324473)
+          #     for custom grouping of items in a Shopping campaign.
           # @!attribute [rw] custom_label_3
           #   @return [::String]
-          #     Custom label 3 for custom grouping of items in a Shopping campaign.
+          #     [Custom label 3](https://support.google.com/merchants/answer/6324473)
+          #     for custom grouping of items in a Shopping campaign.
           # @!attribute [rw] custom_label_4
           #   @return [::String]
-          #     Custom label 4 for custom grouping of items in a Shopping campaign.
+          #     [Custom label 4](https://support.google.com/merchants/answer/6324473) for
+          #     custom grouping of items in a Shopping campaign.
           # @!attribute [rw] included_destinations
           #   @return [::Array<::String>]
           #     The list of destinations to include for this target (corresponds to
           #     checked check boxes in Merchant Center). Default destinations are always
           #     included unless provided in `excludedDestinations`.
+          #
+          #     For more information, see
+          #     [Included
+          #     destination](https://support.google.com/merchants/answer/7501026).
+          #
+          #     Note: We recommend setting destinations on datasources level for most use
+          #     cases. Use this field within products to only setup exceptions.
           # @!attribute [rw] excluded_destinations
           #   @return [::Array<::String>]
           #     The list of destinations to exclude for this target (corresponds to
           #     unchecked check boxes in Merchant Center).
+          #
+          #     For more information, see
+          #     [Excluded
+          #     destination](https://support.google.com/merchants/answer/6324486).
+          #
+          #     Note: We recommend setting destinations on datasources level for most use
+          #     cases. Use this field within products to only setup exceptions.
           # @!attribute [rw] shopping_ads_excluded_countries
           #   @return [::Array<::String>]
-          #     List of country codes (ISO 3166-1 alpha-2) to exclude the offer from
-          #     Shopping Ads destination.
-          #     Countries from this list are removed from countries configured
-          #     in data source settings.
+          #     List of country codes [(ISO 3166-1
+          #     alpha-2)](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) to exclude the
+          #     offer from Shopping Ads destination. Countries from this list are removed
+          #     from countries configured in data source settings.
           # @!attribute [rw] external_seller_id
           #   @return [::String]
           #     Required for multi-seller accounts. Use this attribute if you're a
@@ -360,11 +418,11 @@ module Google
           #     Structured description, for algorithmically (AI)-generated descriptions.
           # @!attribute [rw] auto_pricing_min_price
           #   @return [::Google::Shopping::Type::Price]
-          #     A safeguard in the "Automated Discounts"
+          #     A safeguard in the [automated discounts]
           #     (https://support.google.com/merchants/answer/10295759) and
           #     "Dynamic Promotions"
           #     (https://support.google.com/merchants/answer/13949249) projects,
-          #     ensuring that discounts on merchants' offers do not fall below this value,
+          #     ensuring that discounts on business offers do not fall below this value,
           #     thereby preserving the offer's value and profitability.
           # @!attribute [rw] sustainability_incentives
           #   @return [::Array<::Google::Shopping::Merchant::Products::V1beta::ProductSustainabilityIncentive>]
@@ -516,10 +574,10 @@ module Google
           # @!attribute [rw] program_label
           #   @return [::String]
           #     The label of the loyalty program. This is an internal label that uniquely
-          #     identifies the relationship between a merchant entity and a loyalty
+          #     identifies the relationship between a business entity and a loyalty
           #     program entity. The label must be provided so that the system can associate
-          #     the assets below (for example, price and points) with a merchant. The
-          #     corresponding program must be linked to the merchant account.
+          #     the assets below (for example, price and points) with a business. The
+          #     corresponding program must be linked to the Merchant Center account.
           # @!attribute [rw] tier_label
           #   @return [::String]
           #     The label of the tier within the loyalty program.
@@ -807,7 +865,7 @@ module Google
             #     How this issue affects serving of the offer.
             # @!attribute [rw] resolution
             #   @return [::String]
-            #     Whether the issue can be resolved by the merchant.
+            #     Whether the issue can be resolved by the business.
             # @!attribute [rw] attribute
             #   @return [::String]
             #     The attribute's name, if the issue is caused by a single attribute.
