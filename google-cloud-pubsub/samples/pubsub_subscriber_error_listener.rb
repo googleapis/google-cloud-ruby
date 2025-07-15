@@ -20,8 +20,8 @@ def listen_for_messages_with_error_handler subscription_id:
 
   pubsub = Google::Cloud::PubSub.new
 
-  subscription = pubsub.subscription subscription_id
-  subscriber   = subscription.listen do |received_message|
+  subscriber = pubsub.subscriber subscription_id
+  listener   = subscriber.listen do |received_message|
     puts "Received message: #{received_message.data}"
     received_message.acknowledge!
   end
@@ -31,11 +31,11 @@ def listen_for_messages_with_error_handler subscription_id:
   Thread.abort_on_exception = true
 
   begin
-    subscriber.start
+    listener.start
     # Let the main thread sleep for 60 seconds so the thread for listening
     # messages does not quit
     sleep 60
-    subscriber.stop.wait!
+    listener.stop.wait!
   rescue StandardError => e
     puts "Exception #{e.inspect}: #{e.message}"
     raise "Stopped listening for messages."
