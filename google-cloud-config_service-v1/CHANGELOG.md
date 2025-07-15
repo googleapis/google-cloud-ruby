@@ -1,5 +1,11 @@
 # Changelog
 
+### 2.2.0 (2025-07-15)
+
+#### Features
+
+* added resource change and drift details for the preview ([#30606](https://github.com/googleapis/google-cloud-ruby/issues/30606)) 
+
 ### 2.1.0 (2025-05-12)
 
 #### Features
