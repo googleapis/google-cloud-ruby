@@ -373,10 +373,10 @@ module Google
             #     unchanged since this timestamp, the route field is not set in the response.
             #     If a minimum is unspecified, the route data are always retrieved.
             #   @param remaining_waypoints_version [::Google::Protobuf::Timestamp, ::Hash]
-            #     Indicates the minimum timestamp (exclusive) for which
-            #     `Trip.remaining_waypoints` are retrieved. If they are unchanged since this
-            #     timestamp, the `remaining_waypoints` are not set in the response. If this
-            #     field is unspecified, `remaining_waypoints` is always retrieved.
+            #     Deprecated: `Trip.remaining_waypoints` are always retrieved. Use
+            #     `remaining_waypoints_route_version` to control when
+            #     `Trip.remaining_waypoints.traffic_to_waypoint` and
+            #     `Trip.remaining_waypoints.path_to_waypoint` data are retrieved.
             #   @param route_format_type [::Google::Maps::FleetEngine::V1::PolylineFormatType]
             #     The returned current route format, `LAT_LNG_LIST_TYPE` (in `Trip.route`),
             #     or `ENCODED_POLYLINE_TYPE` (in `Trip.current_route_segment`). The default
