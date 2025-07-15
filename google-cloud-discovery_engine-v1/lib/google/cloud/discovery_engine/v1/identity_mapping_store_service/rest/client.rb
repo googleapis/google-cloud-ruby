@@ -228,13 +228,13 @@ module Google
               #     Resource name of the CmekConfig to use for protecting this Identity
               #     Mapping Store.
               #
-              #     Note: The following fields are mutually exclusive: `cmek_config_name`, `disable_cmek`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+              #     Note: The following parameters are mutually exclusive: `cmek_config_name`, `disable_cmek`. At most one of these parameters can be set. If more than one is set, only one will be used, and it is not defined which one.
               #   @param disable_cmek [::Boolean]
               #     Identity Mapping Store without CMEK protections. If a default CmekConfig
               #     is set for the project, setting this field will override the default
               #     CmekConfig as well.
               #
-              #     Note: The following fields are mutually exclusive: `disable_cmek`, `cmek_config_name`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+              #     Note: The following parameters are mutually exclusive: `disable_cmek`, `cmek_config_name`. At most one of these parameters can be set. If more than one is set, only one will be used, and it is not defined which one.
               #   @param parent [::String]
               #     Required. The parent collection resource name, such as
               #     `projects/{project}/locations/{location}`.
