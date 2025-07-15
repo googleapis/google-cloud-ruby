@@ -26,6 +26,7 @@ require_relative "../pubsub_list_topic_subscriptions.rb"
 require_relative "../pubsub_list_topics.rb"
 require_relative "../pubsub_publish.rb"
 require_relative "../pubsub_publish_custom_attributes.rb"
+require_relative "../pubsub_publish_with_error_handler.rb"
 require_relative "../pubsub_publish_with_ordering_keys.rb"
 require_relative "../pubsub_publisher_batch_settings.rb"
 require_relative "../pubsub_publisher_concurrency_control.rb"
@@ -398,7 +399,7 @@ describe "topics" do
 
     # publish_with_error_handler
     assert_output "Message published asynchronously.\n" do
-      publish_message_async topic_id: topic_id
+      publish_with_error_handler topic_id: topic_id
     end
 
     messages = []
