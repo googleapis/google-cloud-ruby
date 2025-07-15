@@ -70,6 +70,7 @@ module Google
           # * `:MORE_RESULTS_AFTER_LIMIT`
           # * `:MORE_RESULTS_AFTER_CURSOR`
           # * `:NO_MORE_RESULTS`
+          # @return [Symbol]
           attr_reader :more_results
 
           ##
@@ -83,12 +84,35 @@ module Google
           # is valid for all preceding batches.
           # This value will not be set for eventually consistent queries in Cloud
           # Datastore.
+          # @return [Google::Protobuf::Timestamp]
           attr_reader :batch_read_time
+
+          # Query explain metrics. This is only present when the
+          # [RunQueryRequest.explain_options][google.datastore.v1.RunQueryRequest.explain_options]
+          # is provided, and it is sent only once with or after the last QueryResults batch.
+          #
+          # To retrieve metrics, iterate over all QueryResults (e.g. with `next`). The explain_metrics
+          # field will be set on final QueryResults object.
+          #
+          # @return [Google::Cloud::Datastore::V1::ExplainMetrics, nil]
+          attr_reader :explain_metrics
 
           ##
           # Time at which the entities are being read. This would not be
           # older than 270 seconds.
+          #
+          # This is a copy of the input parameter supplied to the {Dataset#run} function.
+          #
+          # @return [Time, nil]
           attr_reader :read_time
+
+          ##
+          # The options for query explanation.
+          #
+          # This is a copy of the input parameter supplied to the {Dataset#run} function.
+          #
+          # @return [Google::Cloud::Datastore::V1::ExplainOptions, nil]
+          attr_reader :explain_options
 
           ##
           # @private
@@ -96,7 +120,9 @@ module Google
 
           ##
           # @private
-          attr_writer :end_cursor, :more_results
+          attr_writer :end_cursor, :more_results, :explain_metrics, :read_time, :batch_read_time, :explain_options
+
+          ##
 
           ##
           # Convenience method for determining if the `more_results` value
@@ -153,6 +179,8 @@ module Google
             not_finished?
           end
 
+          # rubocop:disable Metrics/AbcSize
+
           ##
           # Retrieve the next page of results.
           #
@@ -180,9 +208,11 @@ module Google
               # Reduce the limit by the number of entities returned in the current batch
               query.limit.value -= count
             end
-            query_res = service.run_query query, namespace, read_time: read_time
-            self.class.from_grpc query_res, service, namespace, query, read_time
+            query_res = service.run_query query, namespace, read_time: read_time, explain_options: explain_options
+            self.class.from_grpc query_res, service, namespace, query, read_time, explain_options
           end
+
+          # rubocop:enable Metrics/AbcSize
 
           ##
           # Retrieve the {Cursor} for the provided result.
@@ -375,26 +405,38 @@ module Google
             end
           end
 
+          # rubocop:disable Metrics/AbcSize
+
           ##
           # @private New Dataset::QueryResults from a
           # Google::Dataset::V1::RunQueryResponse object.
-          def self.from_grpc query_res, service, namespace, query, read_time = nil
-            r, c = Array(query_res.batch.entity_results).map do |result|
-              [Entity.from_grpc(result.entity), Cursor.from_grpc(result.cursor)]
-            end.transpose
+          def self.from_grpc query_res, service, namespace, query, read_time = nil, explain_options = nil
+            if query_res.batch
+              r, c = Array(query_res.batch.entity_results).map do |result|
+                [Entity.from_grpc(result.entity), Cursor.from_grpc(result.cursor)]
+              end.transpose
+            end
             r ||= []
             c ||= []
+
+            next_more_results = query_res.batch.more_results if query_res.batch
+            next_more_results ||= :NO_MORE_RESULTS
+
             new(r).tap do |qr|
               qr.cursors = c
-              qr.end_cursor = Cursor.from_grpc query_res.batch.end_cursor
-              qr.more_results = query_res.batch.more_results
+              qr.explain_metrics = query_res.explain_metrics
+              qr.end_cursor = Cursor.from_grpc query_res.batch.end_cursor if query_res.batch
+              qr.more_results = next_more_results
+              qr.read_time = read_time
+              qr.batch_read_time = query_res.batch.read_time if query_res.batch
+              qr.explain_options = explain_options
               qr.service = service
               qr.namespace = namespace
               qr.query = query_res.query || query
-              qr.instance_variable_set :@read_time, read_time
-              qr.instance_variable_set :@batch_read_time, query_res.batch.read_time
             end
           end
+
+          # rubocop:enable Metrics/AbcSize
 
           protected
 
