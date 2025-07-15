@@ -60,8 +60,8 @@ describe Google::Cloud::Datastore::Dataset, :all_with_more, :mock_datastore do
 
   before do
     dataset.service.mocked_service = Minitest::Mock.new
-    dataset.service.mocked_service.expect :run_query, first_run_query_res, project_id: project, partition_id: nil, read_options: nil, query: first_run_query, gql_query: nil, database_id: default_database
-    dataset.service.mocked_service.expect :run_query, next_run_query_res, project_id: project, partition_id: nil, read_options: nil, query: next_run_query, gql_query: nil, database_id: default_database
+    dataset.service.mocked_service.expect :run_query, first_run_query_res, project_id: project, partition_id: nil, read_options: nil, query: first_run_query, gql_query: nil, database_id: default_database, explain_options: nil
+    dataset.service.mocked_service.expect :run_query, next_run_query_res, project_id: project, partition_id: nil, read_options: nil, query: next_run_query, gql_query: nil, database_id: default_database, explain_options: nil
   end
 
   after do
