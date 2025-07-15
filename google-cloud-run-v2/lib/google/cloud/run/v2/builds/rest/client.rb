@@ -222,11 +222,11 @@ module Google
               #   @param buildpack_build [::Google::Cloud::Run::V2::SubmitBuildRequest::BuildpacksBuild, ::Hash]
               #     Build the source using Buildpacks.
               #
-              #     Note: The following fields are mutually exclusive: `buildpack_build`, `docker_build`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+              #     Note: The following parameters are mutually exclusive: `buildpack_build`, `docker_build`. At most one of these parameters can be set. If more than one is set, only one will be used, and it is not defined which one.
               #   @param docker_build [::Google::Cloud::Run::V2::SubmitBuildRequest::DockerBuild, ::Hash]
               #     Build the source using Docker. This means the source has a Dockerfile.
               #
-              #     Note: The following fields are mutually exclusive: `docker_build`, `buildpack_build`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+              #     Note: The following parameters are mutually exclusive: `docker_build`, `buildpack_build`. At most one of these parameters can be set. If more than one is set, only one will be used, and it is not defined which one.
               #   @param service_account [::String]
               #     Optional. The service account to use for the build. If not set, the default
               #     Cloud Build service account for the project will be used.

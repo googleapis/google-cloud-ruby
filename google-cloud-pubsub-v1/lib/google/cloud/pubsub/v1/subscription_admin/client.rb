@@ -1867,13 +1867,13 @@ module Google
             #     creation time), only retained messages will be marked as unacknowledged,
             #     and already-expunged messages will not be restored.
             #
-            #     Note: The following fields are mutually exclusive: `time`, `snapshot`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+            #     Note: The following parameters are mutually exclusive: `time`, `snapshot`. At most one of these parameters can be set. If more than one is set, only one will be used, and it is not defined which one.
             #   @param snapshot [::String]
             #     Optional. The snapshot to seek to. The snapshot's topic must be the same
             #     as that of the provided subscription. Format is
             #     `projects/{project}/snapshots/{snap}`.
             #
-            #     Note: The following fields are mutually exclusive: `snapshot`, `time`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+            #     Note: The following parameters are mutually exclusive: `snapshot`, `time`. At most one of these parameters can be set. If more than one is set, only one will be used, and it is not defined which one.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::PubSub::V1::SeekResponse]
