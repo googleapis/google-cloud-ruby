@@ -37,6 +37,7 @@ describe "schemas" do
   let(:topic_admin) { pubsub.topic_admin }
   let(:subscription_admin) { pubsub.subscription_admin }
   let(:schemas) { pubsub.schemas }
+  let(:proto_file) { File.expand_path "data/us-states.proto", __dir__ }
 
   after do
     subscription_admin.delete_subscription subscription: @subscription.name if @subscription
@@ -44,7 +45,7 @@ describe "schemas" do
     schemas.delete_schema name: @schema.name if @schema
   end
 
-  it "supports pubsub_create_schema, pubsub_get_schema, pubsub_list_schemas, pubsub_delete_schema" do
+  it "supports pubsub_create_avro_schema, pubsub_get_schema, pubsub_list_schemas, pubsub_delete_schema" do
     # create_avro_schema
     assert_output "Schema projects/#{pubsub.project}/schemas/#{schema_id} created.\n" do
       create_avro_schema schema_id: schema_id, avsc_file: avsc_file
@@ -69,6 +70,21 @@ describe "schemas" do
     assert_output "Schema #{schema_id} deleted.\n" do
       delete_schema schema_id: schema_id
       @schema = nil
+    end
+  end
+
+  it "supports pubsub_create_proto_schema, pubsub_get_schema" do
+    # create_proto_schema
+    assert_output "Schema projects/#{pubsub.project}/schemas/#{schema_id} created.\n" do
+      create_proto_schema schema_id: schema_id, proto_file: proto_file
+    end
+    @schema = schemas.get_schema name: pubsub.schema_path(schema_id)
+    assert @schema
+    assert_equal "projects/#{pubsub.project}/schemas/#{schema_id}", @schema.name
+
+    # pubsub_get_schema
+    assert_output "Schema projects/#{pubsub.project}/schemas/#{schema_id} retrieved.\n" do
+      get_schema schema_id: schema_id
     end
   end
 
@@ -214,7 +230,6 @@ describe "schemas" do
 
   describe "PROTOCOL_BUFFER" do
     require_relative "../utilities/us-states_pb"
-    let(:proto_file) { File.expand_path "data/us-states.proto", __dir__ }
     let(:proto_definition) { File.read proto_file }
     let(:revision_file) { File.expand_path "data/us-states-revision.proto", __dir__ }
 
