@@ -7,7 +7,6 @@ AllCops:
     - "support/**/*"
     - "test/**/*"
     - "samples/utilities/**/*"
-    - "samples/v1samples/**/*"
 
 Style/Documentation:
   Enabled: false
