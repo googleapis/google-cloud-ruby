@@ -29,10 +29,10 @@ def list_anywhere_caches bucket_name:
   # The request lists all caches in the specified bucket.
   # The caches are identified by the specified bucket name.
   begin
-      result = storage_control_client.list_anywhere_caches request
-      result.response.anywhere_caches.each do |item|
-        puts item.name
-      end
+    result = storage_control_client.list_anywhere_caches request
+    result.response.anywhere_caches.each do |item|
+      puts item.name
+    end
   rescue StandardError => e
     puts "Error listing AnywhereCaches: #{e.message}"
   end
