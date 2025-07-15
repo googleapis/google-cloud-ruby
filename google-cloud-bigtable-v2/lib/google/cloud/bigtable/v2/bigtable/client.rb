@@ -1170,7 +1170,7 @@ module Google
             #     current time, and after change stream creation, whichever is greater.
             #     This value is inclusive and will be truncated to microsecond granularity.
             #
-            #     Note: The following fields are mutually exclusive: `start_time`, `continuation_tokens`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+            #     Note: The following parameters are mutually exclusive: `start_time`, `continuation_tokens`. At most one of these parameters can be set. If more than one is set, only one will be used, and it is not defined which one.
             #   @param continuation_tokens [::Google::Cloud::Bigtable::V2::StreamContinuationTokens, ::Hash]
             #     Tokens that describe how to resume reading a stream where reading
             #     previously left off. If specified, changes will be read starting at the
@@ -1183,7 +1183,7 @@ module Google
             #     cover the request’s partition. Otherwise, INVALID_ARGUMENT will be
             #     returned.
             #
-            #     Note: The following fields are mutually exclusive: `continuation_tokens`, `start_time`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+            #     Note: The following parameters are mutually exclusive: `continuation_tokens`, `start_time`. At most one of these parameters can be set. If more than one is set, only one will be used, and it is not defined which one.
             #   @param end_time [::Google::Protobuf::Timestamp, ::Hash]
             #     If specified, OK will be returned when the stream advances beyond
             #     this time. Otherwise, changes will be continuously delivered on the stream.

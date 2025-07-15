@@ -1269,7 +1269,7 @@ module Google
             #      * //bigquery.googleapis.com/projects/projectId/datasets/datasetId/tables/tableId
             #      * //pubsub.googleapis.com/projects/projectId/topics/topicId
             #
-            #     Note: The following fields are mutually exclusive: `linked_resource`, `sql_resource`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+            #     Note: The following parameters are mutually exclusive: `linked_resource`, `sql_resource`. At most one of these parameters can be set. If more than one is set, only one will be used, and it is not defined which one.
             #   @param sql_resource [::String]
             #     The SQL name of the entry. SQL names are case-sensitive.
             #
@@ -1284,7 +1284,7 @@ module Google
             #     `*_id`s should satisfy the GoogleSQL rules for identifiers.
             #     https://cloud.google.com/bigquery/docs/reference/standard-sql/lexical.
             #
-            #     Note: The following fields are mutually exclusive: `sql_resource`, `linked_resource`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+            #     Note: The following parameters are mutually exclusive: `sql_resource`, `linked_resource`. At most one of these parameters can be set. If more than one is set, only one will be used, and it is not defined which one.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::DataCatalog::V1beta1::Entry]
