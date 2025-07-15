@@ -1,5 +1,11 @@
 # Changelog
 
+### 0.7.0 (2025-07-15)
+
+#### Features
+
+* add ability to specify trip attributes to Trip and deprecate Trip.remaining_waypoints_version ([#30620](https://github.com/googleapis/google-cloud-ruby/issues/30620)) 
+
 ### 0.6.0 (2025-05-11)
 
 #### Features
