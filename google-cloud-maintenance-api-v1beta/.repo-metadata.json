@@ -8,7 +8,7 @@
     "name": "maintenance",
     "name_pretty": "Maintenance V1BETA API",
     "product_documentation": "https://cloud.google.com/unified-maintenance/docs/overview",
-    "release_level": "unreleased",
+    "release_level": "preview",
     "repo": "googleapis/google-cloud-ruby",
     "requires_billing": true,
     "ruby-cloud-description": "The Maintenance API provides a centralized view of planned disruptive maintenance events across supported Google Cloud products. It offers users visibility into upcoming, ongoing, and completed maintenance, along with controls to manage certain maintenance activities, such as mainteance windows, rescheduling, and on-demand updates. Note that google-cloud-maintenance-api-v1beta is a version-specific client library. For most uses, we recommend installing the main client library google-cloud-maintenance-api instead. See the readme for more details.",
