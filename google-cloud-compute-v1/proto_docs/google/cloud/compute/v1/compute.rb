@@ -10904,12 +10904,31 @@ module Google
         # @!attribute [rw] reservation_block
         #   @return [::String]
         #     The name of the reservation block. Name should conform to RFC1035 or be a resource ID.
+        # @!attribute [rw] view
+        #   @return [::String]
+        #     View of the Block.
+        #     Check the View enum for the list of possible values.
         # @!attribute [rw] zone
         #   @return [::String]
         #     Name of the zone for this request. Zone name should conform to RFC1035.
         class GetReservationBlockRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # View of the Block.
+          module View
+            # A value indicating that the enum field is not set.
+            UNDEFINED_VIEW = 0
+
+            # This view includes basic information about the reservation block
+            BASIC = 62_970_894
+
+            # The default / unset value. The API will default to the BASIC view.
+            BLOCK_VIEW_UNSPECIFIED = 275_070_479
+
+            # Includes detailed topology view.
+            FULL = 2_169_487
+          end
         end
 
         # A request message for Reservations.Get. See the method description for details.
@@ -29336,7 +29355,37 @@ module Google
         # @!attribute [rw] cluster
         #   @return [::String]
         #     The cluster name of the reservation block.
+        # @!attribute [rw] instances
+        #   @return [::Array<::Google::Cloud::Compute::V1::ReservationBlockPhysicalTopologyInstance>]
+        #     The detailed instances information for a given Block
         class ReservationBlockPhysicalTopology
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # The instances information for a given Block
+        # @!attribute [rw] instance_id
+        #   @return [::Integer]
+        #     The InstanceId of the instance
+        # @!attribute [rw] physical_host_topology
+        #   @return [::Google::Cloud::Compute::V1::ReservationBlockPhysicalTopologyInstancePhysicalHostTopology]
+        #     The PhysicalHostTopology of instances within a Block resource.
+        # @!attribute [rw] project_id
+        #   @return [::Integer]
+        #     Project where the instance lives
+        class ReservationBlockPhysicalTopologyInstance
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # The PhysicalHostTopology of the instance within a Block resource.
+        # @!attribute [rw] host
+        #   @return [::String]
+        #     Host hash for a given instance
+        # @!attribute [rw] sub_block
+        #   @return [::String]
+        #     Sub block hash for a given instance
+        class ReservationBlockPhysicalTopologyInstancePhysicalHostTopology
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end

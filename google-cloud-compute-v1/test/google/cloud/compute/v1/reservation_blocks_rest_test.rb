@@ -89,6 +89,7 @@ class ::Google::Cloud::Compute::V1::ReservationBlocks::Rest::ClientTest < Minite
     project = "hello world"
     reservation = "hello world"
     reservation_block = "hello world"
+    view = "hello world"
     zone = "hello world"
 
     get_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
@@ -105,27 +106,27 @@ class ::Google::Cloud::Compute::V1::ReservationBlocks::Rest::ClientTest < Minite
         end
 
         # Use hash object
-        client.get({ project: project, reservation: reservation, reservation_block: reservation_block, zone: zone }) do |_result, response|
+        client.get({ project: project, reservation: reservation, reservation_block: reservation_block, view: view, zone: zone }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get project: project, reservation: reservation, reservation_block: reservation_block, zone: zone do |_result, response|
+        client.get project: project, reservation: reservation, reservation_block: reservation_block, view: view, zone: zone do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get ::Google::Cloud::Compute::V1::GetReservationBlockRequest.new(project: project, reservation: reservation, reservation_block: reservation_block, zone: zone) do |_result, response|
+        client.get ::Google::Cloud::Compute::V1::GetReservationBlockRequest.new(project: project, reservation: reservation, reservation_block: reservation_block, view: view, zone: zone) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get({ project: project, reservation: reservation, reservation_block: reservation_block, zone: zone }, call_options) do |_result, response|
+        client.get({ project: project, reservation: reservation, reservation_block: reservation_block, view: view, zone: zone }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get(::Google::Cloud::Compute::V1::GetReservationBlockRequest.new(project: project, reservation: reservation, reservation_block: reservation_block, zone: zone), call_options) do |_result, response|
+        client.get(::Google::Cloud::Compute::V1::GetReservationBlockRequest.new(project: project, reservation: reservation, reservation_block: reservation_block, view: view, zone: zone), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
