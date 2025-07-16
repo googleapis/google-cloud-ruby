@@ -105,6 +105,12 @@ module Google
           # @!attribute [r] source_info
           #   @return [::Google::Cloud::Firestore::Admin::V1::Database::SourceInfo]
           #     Output only. Information about the provenance of this database.
+          # @!attribute [rw] tags
+          #   @return [::Google::Protobuf::Map{::String => ::String}]
+          #     Optional. Input only. Immutable. Tag keys/values directly bound to this
+          #     resource. For example:
+          #       "123/environment": "production",
+          #       "123/costCenter": "marketing"
           # @!attribute [r] free_tier
           #   @return [::Boolean]
           #     Output only. Background: Free tier is the ability of a Firestore database
@@ -239,6 +245,15 @@ module Google
                 include ::Google::Protobuf::MessageExts
                 extend ::Google::Protobuf::MessageExts::ClassMethods
               end
+            end
+
+            # @!attribute [rw] key
+            #   @return [::String]
+            # @!attribute [rw] value
+            #   @return [::String]
+            class TagsEntry
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
             end
 
             # The type of the database.
