@@ -19,10 +19,10 @@
 require "helper"
 require "gapic/rest"
 require "google/cloud/compute/v1/compute_pb"
-require "google/cloud/compute/v1/reservation_blocks/rest"
+require "google/cloud/compute/v1/reservation_sub_blocks/rest"
 
 
-class ::Google::Cloud::Compute::V1::ReservationBlocks::Rest::ClientTest < Minitest::Test
+class ::Google::Cloud::Compute::V1::ReservationSubBlocks::Rest::ClientTest < Minitest::Test
   class ClientStub
     attr_accessor :call_count, :requests
 
@@ -80,16 +80,15 @@ class ::Google::Cloud::Compute::V1::ReservationBlocks::Rest::ClientTest < Minite
 
   def test_get
     # Create test objects.
-    client_result = ::Google::Cloud::Compute::V1::ReservationBlocksGetResponse.new
+    client_result = ::Google::Cloud::Compute::V1::ReservationSubBlocksGetResponse.new
     http_response = OpenStruct.new body: client_result.to_json
 
     call_options = {}
 
     # Create request parameters for a unary method.
+    parent_name = "hello world"
     project = "hello world"
-    reservation = "hello world"
-    reservation_block = "hello world"
-    view = "hello world"
+    reservation_sub_block = "hello world"
     zone = "hello world"
 
     get_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
@@ -98,35 +97,35 @@ class ::Google::Cloud::Compute::V1::ReservationBlocks::Rest::ClientTest < Minite
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
     end
 
-    ::Google::Cloud::Compute::V1::ReservationBlocks::Rest::ServiceStub.stub :transcode_get_request, ["", "", {}] do
+    ::Google::Cloud::Compute::V1::ReservationSubBlocks::Rest::ServiceStub.stub :transcode_get_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, get_client_stub do
         # Create client
-        client = ::Google::Cloud::Compute::V1::ReservationBlocks::Rest::Client.new do |config|
+        client = ::Google::Cloud::Compute::V1::ReservationSubBlocks::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.get({ project: project, reservation: reservation, reservation_block: reservation_block, view: view, zone: zone }) do |_result, response|
+        client.get({ parent_name: parent_name, project: project, reservation_sub_block: reservation_sub_block, zone: zone }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get project: project, reservation: reservation, reservation_block: reservation_block, view: view, zone: zone do |_result, response|
+        client.get parent_name: parent_name, project: project, reservation_sub_block: reservation_sub_block, zone: zone do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get ::Google::Cloud::Compute::V1::GetReservationBlockRequest.new(project: project, reservation: reservation, reservation_block: reservation_block, view: view, zone: zone) do |_result, response|
+        client.get ::Google::Cloud::Compute::V1::GetReservationSubBlockRequest.new(parent_name: parent_name, project: project, reservation_sub_block: reservation_sub_block, zone: zone) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get({ project: project, reservation: reservation, reservation_block: reservation_block, view: view, zone: zone }, call_options) do |_result, response|
+        client.get({ parent_name: parent_name, project: project, reservation_sub_block: reservation_sub_block, zone: zone }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get(::Google::Cloud::Compute::V1::GetReservationBlockRequest.new(project: project, reservation: reservation, reservation_block: reservation_block, view: view, zone: zone), call_options) do |_result, response|
+        client.get(::Google::Cloud::Compute::V1::GetReservationSubBlockRequest.new(parent_name: parent_name, project: project, reservation_sub_block: reservation_sub_block, zone: zone), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -138,7 +137,7 @@ class ::Google::Cloud::Compute::V1::ReservationBlocks::Rest::ClientTest < Minite
 
   def test_list
     # Create test objects.
-    client_result = ::Google::Cloud::Compute::V1::ReservationBlocksListResponse.new
+    client_result = ::Google::Cloud::Compute::V1::ReservationSubBlocksListResponse.new
     http_response = OpenStruct.new body: client_result.to_json
 
     call_options = {}
@@ -148,8 +147,8 @@ class ::Google::Cloud::Compute::V1::ReservationBlocks::Rest::ClientTest < Minite
     max_results = 42
     order_by = "hello world"
     page_token = "hello world"
+    parent_name = "hello world"
     project = "hello world"
-    reservation = "hello world"
     return_partial_success = true
     zone = "hello world"
 
@@ -159,35 +158,35 @@ class ::Google::Cloud::Compute::V1::ReservationBlocks::Rest::ClientTest < Minite
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
     end
 
-    ::Google::Cloud::Compute::V1::ReservationBlocks::Rest::ServiceStub.stub :transcode_list_request, ["", "", {}] do
+    ::Google::Cloud::Compute::V1::ReservationSubBlocks::Rest::ServiceStub.stub :transcode_list_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, list_client_stub do
         # Create client
-        client = ::Google::Cloud::Compute::V1::ReservationBlocks::Rest::Client.new do |config|
+        client = ::Google::Cloud::Compute::V1::ReservationSubBlocks::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.list({ filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, reservation: reservation, return_partial_success: return_partial_success, zone: zone }) do |_result, response|
+        client.list({ filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, parent_name: parent_name, project: project, return_partial_success: return_partial_success, zone: zone }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, reservation: reservation, return_partial_success: return_partial_success, zone: zone do |_result, response|
+        client.list filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, parent_name: parent_name, project: project, return_partial_success: return_partial_success, zone: zone do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list ::Google::Cloud::Compute::V1::ListReservationBlocksRequest.new(filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, reservation: reservation, return_partial_success: return_partial_success, zone: zone) do |_result, response|
+        client.list ::Google::Cloud::Compute::V1::ListReservationSubBlocksRequest.new(filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, parent_name: parent_name, project: project, return_partial_success: return_partial_success, zone: zone) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list({ filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, reservation: reservation, return_partial_success: return_partial_success, zone: zone }, call_options) do |_result, response|
+        client.list({ filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, parent_name: parent_name, project: project, return_partial_success: return_partial_success, zone: zone }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list(::Google::Cloud::Compute::V1::ListReservationBlocksRequest.new(filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, reservation: reservation, return_partial_success: return_partial_success, zone: zone), call_options) do |_result, response|
+        client.list(::Google::Cloud::Compute::V1::ListReservationSubBlocksRequest.new(filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, parent_name: parent_name, project: project, return_partial_success: return_partial_success, zone: zone), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -205,11 +204,10 @@ class ::Google::Cloud::Compute::V1::ReservationBlocks::Rest::ClientTest < Minite
     call_options = {}
 
     # Create request parameters for a unary method.
+    parent_name = "hello world"
     project = "hello world"
     request_id = "hello world"
-    reservation = "hello world"
-    reservation_block = "hello world"
-    reservations_blocks_perform_maintenance_request_resource = {}
+    reservation_sub_block = "hello world"
     zone = "hello world"
 
     perform_maintenance_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
@@ -218,35 +216,35 @@ class ::Google::Cloud::Compute::V1::ReservationBlocks::Rest::ClientTest < Minite
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
     end
 
-    ::Google::Cloud::Compute::V1::ReservationBlocks::Rest::ServiceStub.stub :transcode_perform_maintenance_request, ["", "", {}] do
+    ::Google::Cloud::Compute::V1::ReservationSubBlocks::Rest::ServiceStub.stub :transcode_perform_maintenance_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, perform_maintenance_client_stub do
         # Create client
-        client = ::Google::Cloud::Compute::V1::ReservationBlocks::Rest::Client.new do |config|
+        client = ::Google::Cloud::Compute::V1::ReservationSubBlocks::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
-        client.perform_maintenance({ project: project, request_id: request_id, reservation: reservation, reservation_block: reservation_block, reservations_blocks_perform_maintenance_request_resource: reservations_blocks_perform_maintenance_request_resource, zone: zone }) do |_result, response|
+        client.perform_maintenance({ parent_name: parent_name, project: project, request_id: request_id, reservation_sub_block: reservation_sub_block, zone: zone }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.perform_maintenance project: project, request_id: request_id, reservation: reservation, reservation_block: reservation_block, reservations_blocks_perform_maintenance_request_resource: reservations_blocks_perform_maintenance_request_resource, zone: zone do |_result, response|
+        client.perform_maintenance parent_name: parent_name, project: project, request_id: request_id, reservation_sub_block: reservation_sub_block, zone: zone do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.perform_maintenance ::Google::Cloud::Compute::V1::PerformMaintenanceReservationBlockRequest.new(project: project, request_id: request_id, reservation: reservation, reservation_block: reservation_block, reservations_blocks_perform_maintenance_request_resource: reservations_blocks_perform_maintenance_request_resource, zone: zone) do |_result, response|
+        client.perform_maintenance ::Google::Cloud::Compute::V1::PerformMaintenanceReservationSubBlockRequest.new(parent_name: parent_name, project: project, request_id: request_id, reservation_sub_block: reservation_sub_block, zone: zone) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.perform_maintenance({ project: project, request_id: request_id, reservation: reservation, reservation_block: reservation_block, reservations_blocks_perform_maintenance_request_resource: reservations_blocks_perform_maintenance_request_resource, zone: zone }, call_options) do |_result, response|
+        client.perform_maintenance({ parent_name: parent_name, project: project, request_id: request_id, reservation_sub_block: reservation_sub_block, zone: zone }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.perform_maintenance(::Google::Cloud::Compute::V1::PerformMaintenanceReservationBlockRequest.new(project: project, request_id: request_id, reservation: reservation, reservation_block: reservation_block, reservations_blocks_perform_maintenance_request_resource: reservations_blocks_perform_maintenance_request_resource, zone: zone), call_options) do |_result, response|
+        client.perform_maintenance(::Google::Cloud::Compute::V1::PerformMaintenanceReservationSubBlockRequest.new(parent_name: parent_name, project: project, request_id: request_id, reservation_sub_block: reservation_sub_block, zone: zone), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -262,7 +260,7 @@ class ::Google::Cloud::Compute::V1::ReservationBlocks::Rest::ClientTest < Minite
     client = block_config = config = nil
     dummy_stub = ClientStub.new nil
     Gapic::Rest::ClientStub.stub :new, dummy_stub do
-      client = ::Google::Cloud::Compute::V1::ReservationBlocks::Rest::Client.new do |config|
+      client = ::Google::Cloud::Compute::V1::ReservationSubBlocks::Rest::Client.new do |config|
         config.credentials = credentials_token
       end
     end
@@ -272,6 +270,6 @@ class ::Google::Cloud::Compute::V1::ReservationBlocks::Rest::ClientTest < Minite
     end
 
     assert_same block_config, config
-    assert_kind_of ::Google::Cloud::Compute::V1::ReservationBlocks::Rest::Client::Configuration, config
+    assert_kind_of ::Google::Cloud::Compute::V1::ReservationSubBlocks::Rest::Client::Configuration, config
   end
 end

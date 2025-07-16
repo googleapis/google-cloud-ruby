@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright 2021 Google LLC
+# Copyright 2025 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -18,19 +18,19 @@
 
 require "google/cloud/errors"
 require "google/cloud/compute/v1/compute_pb"
-require "google/cloud/compute/v1/licenses/rest/service_stub"
+require "google/cloud/compute/v1/interconnect_groups/rest/service_stub"
 require "google/cloud/compute/v1/global_operations/rest"
 
 module Google
   module Cloud
     module Compute
       module V1
-        module Licenses
+        module InterconnectGroups
           module Rest
             ##
-            # REST client for the Licenses service.
+            # REST client for the InterconnectGroups service.
             #
-            # The Licenses API.
+            # The InterconnectGroups API.
             #
             class Client
               # @private
@@ -40,18 +40,18 @@ module Google
               DEFAULT_ENDPOINT_TEMPLATE = "compute.$UNIVERSE_DOMAIN$"
 
               # @private
-              attr_reader :licenses_stub
+              attr_reader :interconnect_groups_stub
 
               ##
-              # Configure the Licenses Client class.
+              # Configure the InterconnectGroups Client class.
               #
-              # See {::Google::Cloud::Compute::V1::Licenses::Rest::Client::Configuration}
+              # See {::Google::Cloud::Compute::V1::InterconnectGroups::Rest::Client::Configuration}
               # for a description of the configuration fields.
               #
               # @example
               #
-              #   # Modify the configuration for all Licenses clients
-              #   ::Google::Cloud::Compute::V1::Licenses::Rest::Client.configure do |config|
+              #   # Modify the configuration for all InterconnectGroups clients
+              #   ::Google::Cloud::Compute::V1::InterconnectGroups::Rest::Client.configure do |config|
               #     config.timeout = 10.0
               #   end
               #
@@ -71,6 +71,8 @@ module Google
                                   end
                   default_config = Client::Configuration.new parent_config
 
+                  default_config.rpcs.create_members.timeout = 600.0
+
                   default_config.rpcs.delete.timeout = 600.0
 
                   default_config.rpcs.get.timeout = 600.0
@@ -83,6 +85,11 @@ module Google
                     initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [4, 14]
                   }
 
+                  default_config.rpcs.get_operational_status.timeout = 600.0
+                  default_config.rpcs.get_operational_status.retry_policy = {
+                    initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [4, 14]
+                  }
+
                   default_config.rpcs.insert.timeout = 600.0
 
                   default_config.rpcs.list.timeout = 600.0
@@ -90,11 +97,11 @@ module Google
                     initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [4, 14]
                   }
 
+                  default_config.rpcs.patch.timeout = 600.0
+
                   default_config.rpcs.set_iam_policy.timeout = 600.0
 
                   default_config.rpcs.test_iam_permissions.timeout = 600.0
-
-                  default_config.rpcs.update.timeout = 600.0
 
                   default_config
                 end
@@ -103,13 +110,13 @@ module Google
               end
 
               ##
-              # Configure the Licenses Client instance.
+              # Configure the InterconnectGroups Client instance.
               #
               # The configuration is set to the derived mode, meaning that values can be changed,
               # but structural changes (adding new fields, etc.) are not allowed. Structural changes
               # should be made on {Client.configure}.
               #
-              # See {::Google::Cloud::Compute::V1::Licenses::Rest::Client::Configuration}
+              # See {::Google::Cloud::Compute::V1::InterconnectGroups::Rest::Client::Configuration}
               # for a description of the configuration fields.
               #
               # @yield [config] Configure the Client client.
@@ -128,23 +135,23 @@ module Google
               # @return [String]
               #
               def universe_domain
-                @licenses_stub.universe_domain
+                @interconnect_groups_stub.universe_domain
               end
 
               ##
-              # Create a new Licenses REST client object.
+              # Create a new InterconnectGroups REST client object.
               #
               # @example
               #
               #   # Create a client using the default configuration
-              #   client = ::Google::Cloud::Compute::V1::Licenses::Rest::Client.new
+              #   client = ::Google::Cloud::Compute::V1::InterconnectGroups::Rest::Client.new
               #
               #   # Create a client using a custom configuration
-              #   client = ::Google::Cloud::Compute::V1::Licenses::Rest::Client.new do |config|
+              #   client = ::Google::Cloud::Compute::V1::InterconnectGroups::Rest::Client.new do |config|
               #     config.timeout = 10.0
               #   end
               #
-              # @yield [config] Configure the Licenses client.
+              # @yield [config] Configure the InterconnectGroups client.
               # @yieldparam config [Client::Configuration]
               #
               def initialize
@@ -177,7 +184,7 @@ module Google
                   config.universe_domain = @config.universe_domain
                 end
 
-                @licenses_stub = ::Google::Cloud::Compute::V1::Licenses::Rest::ServiceStub.new(
+                @interconnect_groups_stub = ::Google::Cloud::Compute::V1::InterconnectGroups::Rest::ServiceStub.new(
                   endpoint: @config.endpoint,
                   endpoint_template: DEFAULT_ENDPOINT_TEMPLATE,
                   universe_domain: @config.universe_domain,
@@ -185,7 +192,7 @@ module Google
                   logger: @config.logger
                 )
 
-                @licenses_stub.logger(stub: true)&.info do |entry|
+                @interconnect_groups_stub.logger(stub: true)&.info do |entry|
                   entry.set_system_name
                   entry.set_service
                   entry.message = "Created client for #{entry.service}"
@@ -209,35 +216,35 @@ module Google
               # @return [Logger]
               #
               def logger
-                @licenses_stub.logger
+                @interconnect_groups_stub.logger
               end
 
               # Service calls
 
               ##
-              # Deletes the specified license. *Caution* This resource is intended for use only by third-party partners who are creating Cloud Marketplace images.
+              # Create Interconnects with redundancy by creating them in a specified interconnect group.
               #
-              # @overload delete(request, options = nil)
-              #   Pass arguments to `delete` via a request object, either of type
-              #   {::Google::Cloud::Compute::V1::DeleteLicenseRequest} or an equivalent Hash.
+              # @overload create_members(request, options = nil)
+              #   Pass arguments to `create_members` via a request object, either of type
+              #   {::Google::Cloud::Compute::V1::CreateMembersInterconnectGroupRequest} or an equivalent Hash.
               #
-              #   @param request [::Google::Cloud::Compute::V1::DeleteLicenseRequest, ::Hash]
+              #   @param request [::Google::Cloud::Compute::V1::CreateMembersInterconnectGroupRequest, ::Hash]
               #     A request object representing the call parameters. Required. To specify no
               #     parameters, or to keep all the default parameter values, pass an empty Hash.
               #   @param options [::Gapic::CallOptions, ::Hash]
               #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
               #
-              # @overload delete(license: nil, project: nil, request_id: nil)
-              #   Pass arguments to `delete` via keyword arguments. Note that at
+              # @overload create_members(interconnect_group: nil, interconnect_groups_create_members_request_resource: nil, project: nil)
+              #   Pass arguments to `create_members` via keyword arguments. Note that at
               #   least one keyword argument is required. To specify no parameters, or to keep all
               #   the default parameter values, pass an empty Hash as a request object (see above).
               #
-              #   @param license [::String]
-              #     Name of the license resource to delete.
+              #   @param interconnect_group [::String]
+              #     Name of the group resource to create members for.
+              #   @param interconnect_groups_create_members_request_resource [::Google::Cloud::Compute::V1::InterconnectGroupsCreateMembersRequest, ::Hash]
+              #     The body resource for this request
               #   @param project [::String]
               #     Project ID for this request.
-              #   @param request_id [::String]
-              #     An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Gapic::GenericLRO::Operation]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
@@ -250,10 +257,101 @@ module Google
               #   require "google/cloud/compute/v1"
               #
               #   # Create a client object. The client can be reused for multiple calls.
-              #   client = Google::Cloud::Compute::V1::Licenses::Rest::Client.new
+              #   client = Google::Cloud::Compute::V1::InterconnectGroups::Rest::Client.new
               #
               #   # Create a request. To set request fields, pass in keyword arguments.
-              #   request = Google::Cloud::Compute::V1::DeleteLicenseRequest.new
+              #   request = Google::Cloud::Compute::V1::CreateMembersInterconnectGroupRequest.new
+              #
+              #   # Call the create_members method.
+              #   result = client.create_members request
+              #
+              #   # The returned object is of type Google::Cloud::Compute::V1::Operation.
+              #   p result
+              #
+              def create_members request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Compute::V1::CreateMembersInterconnectGroupRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.create_members.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::Compute::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.create_members.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.create_members.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @interconnect_groups_stub.create_members request, options do |result, response|
+                  result = ::Google::Cloud::Compute::V1::GlobalOperations::Rest::NonstandardLro.create_operation(
+                    operation: result,
+                    client: global_operations,
+                    request_values: {
+                      "project" => request.project
+                    },
+                    options: options
+                  )
+                  yield result, response if block_given?
+                  throw :response, result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Deletes the specified InterconnectGroup in the given scope
+              #
+              # @overload delete(request, options = nil)
+              #   Pass arguments to `delete` via a request object, either of type
+              #   {::Google::Cloud::Compute::V1::DeleteInterconnectGroupRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::Compute::V1::DeleteInterconnectGroupRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload delete(interconnect_group: nil, project: nil, request_id: nil)
+              #   Pass arguments to `delete` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param interconnect_group [::String]
+              #     Name of the InterconnectGroup resource to delete.
+              #   @param project [::String]
+              #     Project ID for this request.
+              #   @param request_id [::String]
+              #     An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000). end_interface: MixerMutationRequestBuilder
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Gapic::GenericLRO::Operation]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Gapic::GenericLRO::Operation]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/compute/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Compute::V1::InterconnectGroups::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Compute::V1::DeleteInterconnectGroupRequest.new
               #
               #   # Call the delete method.
               #   result = client.delete request
@@ -264,7 +362,7 @@ module Google
               def delete request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
-                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Compute::V1::DeleteLicenseRequest
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Compute::V1::DeleteInterconnectGroupRequest
 
                 # Converts hash and nil to an options object
                 options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
@@ -289,7 +387,7 @@ module Google
                                        metadata:     @config.metadata,
                                        retry_policy: @config.retry_policy
 
-                @licenses_stub.delete request, options do |result, response|
+                @interconnect_groups_stub.delete request, options do |result, response|
                   result = ::Google::Cloud::Compute::V1::GlobalOperations::Rest::NonstandardLro.create_operation(
                     operation: result,
                     client: global_operations,
@@ -306,32 +404,32 @@ module Google
               end
 
               ##
-              # Returns the specified License resource. *Caution* This resource is intended for use only by third-party partners who are creating Cloud Marketplace images.
+              # Returns the specified InterconnectGroup resource in the given scope.
               #
               # @overload get(request, options = nil)
               #   Pass arguments to `get` via a request object, either of type
-              #   {::Google::Cloud::Compute::V1::GetLicenseRequest} or an equivalent Hash.
+              #   {::Google::Cloud::Compute::V1::GetInterconnectGroupRequest} or an equivalent Hash.
               #
-              #   @param request [::Google::Cloud::Compute::V1::GetLicenseRequest, ::Hash]
+              #   @param request [::Google::Cloud::Compute::V1::GetInterconnectGroupRequest, ::Hash]
               #     A request object representing the call parameters. Required. To specify no
               #     parameters, or to keep all the default parameter values, pass an empty Hash.
               #   @param options [::Gapic::CallOptions, ::Hash]
               #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
               #
-              # @overload get(license: nil, project: nil)
+              # @overload get(interconnect_group: nil, project: nil)
               #   Pass arguments to `get` via keyword arguments. Note that at
               #   least one keyword argument is required. To specify no parameters, or to keep all
               #   the default parameter values, pass an empty Hash as a request object (see above).
               #
-              #   @param license [::String]
-              #     Name of the License resource to return.
+              #   @param interconnect_group [::String]
+              #     Name of the InterconnectGroup resource to return.
               #   @param project [::String]
               #     Project ID for this request.
               # @yield [result, operation] Access the result along with the TransportOperation object
-              # @yieldparam result [::Google::Cloud::Compute::V1::License]
+              # @yieldparam result [::Google::Cloud::Compute::V1::InterconnectGroup]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
-              # @return [::Google::Cloud::Compute::V1::License]
+              # @return [::Google::Cloud::Compute::V1::InterconnectGroup]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
               #
@@ -339,21 +437,21 @@ module Google
               #   require "google/cloud/compute/v1"
               #
               #   # Create a client object. The client can be reused for multiple calls.
-              #   client = Google::Cloud::Compute::V1::Licenses::Rest::Client.new
+              #   client = Google::Cloud::Compute::V1::InterconnectGroups::Rest::Client.new
               #
               #   # Create a request. To set request fields, pass in keyword arguments.
-              #   request = Google::Cloud::Compute::V1::GetLicenseRequest.new
+              #   request = Google::Cloud::Compute::V1::GetInterconnectGroupRequest.new
               #
               #   # Call the get method.
               #   result = client.get request
               #
-              #   # The returned object is of type Google::Cloud::Compute::V1::License.
+              #   # The returned object is of type Google::Cloud::Compute::V1::InterconnectGroup.
               #   p result
               #
               def get request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
-                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Compute::V1::GetLicenseRequest
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Compute::V1::GetInterconnectGroupRequest
 
                 # Converts hash and nil to an options object
                 options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
@@ -378,7 +476,7 @@ module Google
                                        metadata:     @config.metadata,
                                        retry_policy: @config.retry_policy
 
-                @licenses_stub.get request, options do |result, operation|
+                @interconnect_groups_stub.get request, options do |result, operation|
                   yield result, operation if block_given?
                 end
               rescue ::Gapic::Rest::Error => e
@@ -386,13 +484,13 @@ module Google
               end
 
               ##
-              # Gets the access control policy for a resource. May be empty if no such policy or resource exists. *Caution* This resource is intended for use only by third-party partners who are creating Cloud Marketplace images.
+              # Gets the access control policy for a resource. May be empty if no such policy or resource exists.
               #
               # @overload get_iam_policy(request, options = nil)
               #   Pass arguments to `get_iam_policy` via a request object, either of type
-              #   {::Google::Cloud::Compute::V1::GetIamPolicyLicenseRequest} or an equivalent Hash.
+              #   {::Google::Cloud::Compute::V1::GetIamPolicyInterconnectGroupRequest} or an equivalent Hash.
               #
-              #   @param request [::Google::Cloud::Compute::V1::GetIamPolicyLicenseRequest, ::Hash]
+              #   @param request [::Google::Cloud::Compute::V1::GetIamPolicyInterconnectGroupRequest, ::Hash]
               #     A request object representing the call parameters. Required. To specify no
               #     parameters, or to keep all the default parameter values, pass an empty Hash.
               #   @param options [::Gapic::CallOptions, ::Hash]
@@ -421,10 +519,10 @@ module Google
               #   require "google/cloud/compute/v1"
               #
               #   # Create a client object. The client can be reused for multiple calls.
-              #   client = Google::Cloud::Compute::V1::Licenses::Rest::Client.new
+              #   client = Google::Cloud::Compute::V1::InterconnectGroups::Rest::Client.new
               #
               #   # Create a request. To set request fields, pass in keyword arguments.
-              #   request = Google::Cloud::Compute::V1::GetIamPolicyLicenseRequest.new
+              #   request = Google::Cloud::Compute::V1::GetIamPolicyInterconnectGroupRequest.new
               #
               #   # Call the get_iam_policy method.
               #   result = client.get_iam_policy request
@@ -435,7 +533,7 @@ module Google
               def get_iam_policy request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
-                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Compute::V1::GetIamPolicyLicenseRequest
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Compute::V1::GetIamPolicyInterconnectGroupRequest
 
                 # Converts hash and nil to an options object
                 options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
@@ -460,7 +558,7 @@ module Google
                                        metadata:     @config.metadata,
                                        retry_policy: @config.retry_policy
 
-                @licenses_stub.get_iam_policy request, options do |result, operation|
+                @interconnect_groups_stub.get_iam_policy request, options do |result, operation|
                   yield result, operation if block_given?
                 end
               rescue ::Gapic::Rest::Error => e
@@ -468,29 +566,109 @@ module Google
               end
 
               ##
-              # Create a License resource in the specified project. *Caution* This resource is intended for use only by third-party partners who are creating Cloud Marketplace images.
+              # Returns the interconnectStatuses for the specified InterconnectGroup.
               #
-              # @overload insert(request, options = nil)
-              #   Pass arguments to `insert` via a request object, either of type
-              #   {::Google::Cloud::Compute::V1::InsertLicenseRequest} or an equivalent Hash.
+              # @overload get_operational_status(request, options = nil)
+              #   Pass arguments to `get_operational_status` via a request object, either of type
+              #   {::Google::Cloud::Compute::V1::GetOperationalStatusInterconnectGroupRequest} or an equivalent Hash.
               #
-              #   @param request [::Google::Cloud::Compute::V1::InsertLicenseRequest, ::Hash]
+              #   @param request [::Google::Cloud::Compute::V1::GetOperationalStatusInterconnectGroupRequest, ::Hash]
               #     A request object representing the call parameters. Required. To specify no
               #     parameters, or to keep all the default parameter values, pass an empty Hash.
               #   @param options [::Gapic::CallOptions, ::Hash]
               #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
               #
-              # @overload insert(license_resource: nil, project: nil, request_id: nil)
+              # @overload get_operational_status(interconnect_group: nil, project: nil)
+              #   Pass arguments to `get_operational_status` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param interconnect_group [::String]
+              #     Name of the interconnectGroup resource to query.
+              #   @param project [::String]
+              #     Project ID for this request.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Cloud::Compute::V1::InterconnectGroupsGetOperationalStatusResponse]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Cloud::Compute::V1::InterconnectGroupsGetOperationalStatusResponse]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/compute/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Compute::V1::InterconnectGroups::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Compute::V1::GetOperationalStatusInterconnectGroupRequest.new
+              #
+              #   # Call the get_operational_status method.
+              #   result = client.get_operational_status request
+              #
+              #   # The returned object is of type Google::Cloud::Compute::V1::InterconnectGroupsGetOperationalStatusResponse.
+              #   p result
+              #
+              def get_operational_status request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Compute::V1::GetOperationalStatusInterconnectGroupRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.get_operational_status.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::Compute::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.get_operational_status.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.get_operational_status.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @interconnect_groups_stub.get_operational_status request, options do |result, operation|
+                  yield result, operation if block_given?
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Creates a InterconnectGroup in the specified project in the given scope using the parameters that are included in the request.
+              #
+              # @overload insert(request, options = nil)
+              #   Pass arguments to `insert` via a request object, either of type
+              #   {::Google::Cloud::Compute::V1::InsertInterconnectGroupRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::Compute::V1::InsertInterconnectGroupRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload insert(interconnect_group_resource: nil, project: nil, request_id: nil)
               #   Pass arguments to `insert` via keyword arguments. Note that at
               #   least one keyword argument is required. To specify no parameters, or to keep all
               #   the default parameter values, pass an empty Hash as a request object (see above).
               #
-              #   @param license_resource [::Google::Cloud::Compute::V1::License, ::Hash]
+              #   @param interconnect_group_resource [::Google::Cloud::Compute::V1::InterconnectGroup, ::Hash]
               #     The body resource for this request
               #   @param project [::String]
               #     Project ID for this request.
               #   @param request_id [::String]
-              #     An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
+              #     An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000). end_interface: MixerMutationRequestBuilder
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Gapic::GenericLRO::Operation]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
@@ -503,10 +681,10 @@ module Google
               #   require "google/cloud/compute/v1"
               #
               #   # Create a client object. The client can be reused for multiple calls.
-              #   client = Google::Cloud::Compute::V1::Licenses::Rest::Client.new
+              #   client = Google::Cloud::Compute::V1::InterconnectGroups::Rest::Client.new
               #
               #   # Create a request. To set request fields, pass in keyword arguments.
-              #   request = Google::Cloud::Compute::V1::InsertLicenseRequest.new
+              #   request = Google::Cloud::Compute::V1::InsertInterconnectGroupRequest.new
               #
               #   # Call the insert method.
               #   result = client.insert request
@@ -517,7 +695,7 @@ module Google
               def insert request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
-                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Compute::V1::InsertLicenseRequest
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Compute::V1::InsertInterconnectGroupRequest
 
                 # Converts hash and nil to an options object
                 options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
@@ -542,7 +720,7 @@ module Google
                                        metadata:     @config.metadata,
                                        retry_policy: @config.retry_policy
 
-                @licenses_stub.insert request, options do |result, response|
+                @interconnect_groups_stub.insert request, options do |result, response|
                   result = ::Google::Cloud::Compute::V1::GlobalOperations::Rest::NonstandardLro.create_operation(
                     operation: result,
                     client: global_operations,
@@ -559,13 +737,13 @@ module Google
               end
 
               ##
-              # Retrieves the list of licenses available in the specified project. This method does not get any licenses that belong to other projects, including licenses attached to publicly-available images, like Debian 9. If you want to get a list of publicly-available licenses, use this method to make a request to the respective image project, such as debian-cloud or windows-cloud. *Caution* This resource is intended for use only by third-party partners who are creating Cloud Marketplace images.
+              # Lists the InterconnectGroups for a project in the given scope.
               #
               # @overload list(request, options = nil)
               #   Pass arguments to `list` via a request object, either of type
-              #   {::Google::Cloud::Compute::V1::ListLicensesRequest} or an equivalent Hash.
+              #   {::Google::Cloud::Compute::V1::ListInterconnectGroupsRequest} or an equivalent Hash.
               #
-              #   @param request [::Google::Cloud::Compute::V1::ListLicensesRequest, ::Hash]
+              #   @param request [::Google::Cloud::Compute::V1::ListInterconnectGroupsRequest, ::Hash]
               #     A request object representing the call parameters. Required. To specify no
               #     parameters, or to keep all the default parameter values, pass an empty Hash.
               #   @param options [::Gapic::CallOptions, ::Hash]
@@ -589,10 +767,10 @@ module Google
               #   @param return_partial_success [::Boolean]
               #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.
               # @yield [result, operation] Access the result along with the TransportOperation object
-              # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Compute::V1::License>]
+              # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Compute::V1::InterconnectGroup>]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
-              # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Compute::V1::License>]
+              # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Compute::V1::InterconnectGroup>]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
               #
@@ -600,21 +778,21 @@ module Google
               #   require "google/cloud/compute/v1"
               #
               #   # Create a client object. The client can be reused for multiple calls.
-              #   client = Google::Cloud::Compute::V1::Licenses::Rest::Client.new
+              #   client = Google::Cloud::Compute::V1::InterconnectGroups::Rest::Client.new
               #
               #   # Create a request. To set request fields, pass in keyword arguments.
-              #   request = Google::Cloud::Compute::V1::ListLicensesRequest.new
+              #   request = Google::Cloud::Compute::V1::ListInterconnectGroupsRequest.new
               #
               #   # Call the list method.
               #   result = client.list request
               #
-              #   # The returned object is of type Google::Cloud::Compute::V1::LicensesListResponse.
+              #   # The returned object is of type Google::Cloud::Compute::V1::InterconnectGroupsListResponse.
               #   p result
               #
               def list request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
-                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Compute::V1::ListLicensesRequest
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Compute::V1::ListInterconnectGroupsRequest
 
                 # Converts hash and nil to an options object
                 options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
@@ -639,8 +817,8 @@ module Google
                                        metadata:     @config.metadata,
                                        retry_policy: @config.retry_policy
 
-                @licenses_stub.list request, options do |result, operation|
-                  result = ::Gapic::Rest::PagedEnumerable.new @licenses_stub, :list, "items", request, result, options
+                @interconnect_groups_stub.list request, options do |result, operation|
+                  result = ::Gapic::Rest::PagedEnumerable.new @interconnect_groups_stub, :list, "items", request, result, options
                   yield result, operation if block_given?
                   throw :response, result
                 end
@@ -649,13 +827,108 @@ module Google
               end
 
               ##
-              # Sets the access control policy on the specified resource. Replaces any existing policy. *Caution* This resource is intended for use only by third-party partners who are creating Cloud Marketplace images.
+              # Patches the specified InterconnectGroup resource with the data included in the request. This method supports PATCH semantics and uses JSON merge patch format and processing rules.
+              #
+              # @overload patch(request, options = nil)
+              #   Pass arguments to `patch` via a request object, either of type
+              #   {::Google::Cloud::Compute::V1::PatchInterconnectGroupRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::Compute::V1::PatchInterconnectGroupRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload patch(interconnect_group: nil, interconnect_group_resource: nil, project: nil, request_id: nil, update_mask: nil)
+              #   Pass arguments to `patch` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param interconnect_group [::String]
+              #     Name of the InterconnectGroup resource to patch.
+              #   @param interconnect_group_resource [::Google::Cloud::Compute::V1::InterconnectGroup, ::Hash]
+              #     The body resource for this request
+              #   @param project [::String]
+              #     Project ID for this request.
+              #   @param request_id [::String]
+              #     An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000). end_interface: MixerMutationRequestBuilder
+              #   @param update_mask [::String]
+              #     The list of fields to update.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Gapic::GenericLRO::Operation]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Gapic::GenericLRO::Operation]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/compute/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Compute::V1::InterconnectGroups::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Compute::V1::PatchInterconnectGroupRequest.new
+              #
+              #   # Call the patch method.
+              #   result = client.patch request
+              #
+              #   # The returned object is of type Google::Cloud::Compute::V1::Operation.
+              #   p result
+              #
+              def patch request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Compute::V1::PatchInterconnectGroupRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.patch.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::Compute::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.patch.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.patch.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @interconnect_groups_stub.patch request, options do |result, response|
+                  result = ::Google::Cloud::Compute::V1::GlobalOperations::Rest::NonstandardLro.create_operation(
+                    operation: result,
+                    client: global_operations,
+                    request_values: {
+                      "project" => request.project
+                    },
+                    options: options
+                  )
+                  yield result, response if block_given?
+                  throw :response, result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Sets the access control policy on the specified resource. Replaces any existing policy.
               #
               # @overload set_iam_policy(request, options = nil)
               #   Pass arguments to `set_iam_policy` via a request object, either of type
-              #   {::Google::Cloud::Compute::V1::SetIamPolicyLicenseRequest} or an equivalent Hash.
+              #   {::Google::Cloud::Compute::V1::SetIamPolicyInterconnectGroupRequest} or an equivalent Hash.
               #
-              #   @param request [::Google::Cloud::Compute::V1::SetIamPolicyLicenseRequest, ::Hash]
+              #   @param request [::Google::Cloud::Compute::V1::SetIamPolicyInterconnectGroupRequest, ::Hash]
               #     A request object representing the call parameters. Required. To specify no
               #     parameters, or to keep all the default parameter values, pass an empty Hash.
               #   @param options [::Gapic::CallOptions, ::Hash]
@@ -684,10 +957,10 @@ module Google
               #   require "google/cloud/compute/v1"
               #
               #   # Create a client object. The client can be reused for multiple calls.
-              #   client = Google::Cloud::Compute::V1::Licenses::Rest::Client.new
+              #   client = Google::Cloud::Compute::V1::InterconnectGroups::Rest::Client.new
               #
               #   # Create a request. To set request fields, pass in keyword arguments.
-              #   request = Google::Cloud::Compute::V1::SetIamPolicyLicenseRequest.new
+              #   request = Google::Cloud::Compute::V1::SetIamPolicyInterconnectGroupRequest.new
               #
               #   # Call the set_iam_policy method.
               #   result = client.set_iam_policy request
@@ -698,7 +971,7 @@ module Google
               def set_iam_policy request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
-                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Compute::V1::SetIamPolicyLicenseRequest
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Compute::V1::SetIamPolicyInterconnectGroupRequest
 
                 # Converts hash and nil to an options object
                 options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
@@ -723,7 +996,7 @@ module Google
                                        metadata:     @config.metadata,
                                        retry_policy: @config.retry_policy
 
-                @licenses_stub.set_iam_policy request, options do |result, operation|
+                @interconnect_groups_stub.set_iam_policy request, options do |result, operation|
                   yield result, operation if block_given?
                 end
               rescue ::Gapic::Rest::Error => e
@@ -731,13 +1004,13 @@ module Google
               end
 
               ##
-              # Returns permissions that a caller has on the specified resource. *Caution* This resource is intended for use only by third-party partners who are creating Cloud Marketplace images.
+              # Returns permissions that a caller has on the specified resource.
               #
               # @overload test_iam_permissions(request, options = nil)
               #   Pass arguments to `test_iam_permissions` via a request object, either of type
-              #   {::Google::Cloud::Compute::V1::TestIamPermissionsLicenseRequest} or an equivalent Hash.
+              #   {::Google::Cloud::Compute::V1::TestIamPermissionsInterconnectGroupRequest} or an equivalent Hash.
               #
-              #   @param request [::Google::Cloud::Compute::V1::TestIamPermissionsLicenseRequest, ::Hash]
+              #   @param request [::Google::Cloud::Compute::V1::TestIamPermissionsInterconnectGroupRequest, ::Hash]
               #     A request object representing the call parameters. Required. To specify no
               #     parameters, or to keep all the default parameter values, pass an empty Hash.
               #   @param options [::Gapic::CallOptions, ::Hash]
@@ -766,10 +1039,10 @@ module Google
               #   require "google/cloud/compute/v1"
               #
               #   # Create a client object. The client can be reused for multiple calls.
-              #   client = Google::Cloud::Compute::V1::Licenses::Rest::Client.new
+              #   client = Google::Cloud::Compute::V1::InterconnectGroups::Rest::Client.new
               #
               #   # Create a request. To set request fields, pass in keyword arguments.
-              #   request = Google::Cloud::Compute::V1::TestIamPermissionsLicenseRequest.new
+              #   request = Google::Cloud::Compute::V1::TestIamPermissionsInterconnectGroupRequest.new
               #
               #   # Call the test_iam_permissions method.
               #   result = client.test_iam_permissions request
@@ -780,7 +1053,7 @@ module Google
               def test_iam_permissions request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
-                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Compute::V1::TestIamPermissionsLicenseRequest
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Compute::V1::TestIamPermissionsInterconnectGroupRequest
 
                 # Converts hash and nil to an options object
                 options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
@@ -805,7 +1078,7 @@ module Google
                                        metadata:     @config.metadata,
                                        retry_policy: @config.retry_policy
 
-                @licenses_stub.test_iam_permissions request, options do |result, operation|
+                @interconnect_groups_stub.test_iam_permissions request, options do |result, operation|
                   yield result, operation if block_given?
                 end
               rescue ::Gapic::Rest::Error => e
@@ -813,108 +1086,13 @@ module Google
               end
 
               ##
-              # Updates a License resource in the specified project. *Caution* This resource is intended for use only by third-party partners who are creating Cloud Marketplace images.
+              # Configuration class for the InterconnectGroups REST API.
               #
-              # @overload update(request, options = nil)
-              #   Pass arguments to `update` via a request object, either of type
-              #   {::Google::Cloud::Compute::V1::UpdateLicenseRequest} or an equivalent Hash.
-              #
-              #   @param request [::Google::Cloud::Compute::V1::UpdateLicenseRequest, ::Hash]
-              #     A request object representing the call parameters. Required. To specify no
-              #     parameters, or to keep all the default parameter values, pass an empty Hash.
-              #   @param options [::Gapic::CallOptions, ::Hash]
-              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
-              #
-              # @overload update(license: nil, license_resource: nil, project: nil, request_id: nil, update_mask: nil)
-              #   Pass arguments to `update` via keyword arguments. Note that at
-              #   least one keyword argument is required. To specify no parameters, or to keep all
-              #   the default parameter values, pass an empty Hash as a request object (see above).
-              #
-              #   @param license [::String]
-              #     The license name for this request.
-              #   @param license_resource [::Google::Cloud::Compute::V1::License, ::Hash]
-              #     The body resource for this request
-              #   @param project [::String]
-              #     Project ID for this request.
-              #   @param request_id [::String]
-              #     An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
-              #   @param update_mask [::String]
-              #     update_mask indicates fields to be updated as part of this request.
-              # @yield [result, operation] Access the result along with the TransportOperation object
-              # @yieldparam result [::Gapic::GenericLRO::Operation]
-              # @yieldparam operation [::Gapic::Rest::TransportOperation]
-              #
-              # @return [::Gapic::GenericLRO::Operation]
-              #
-              # @raise [::Google::Cloud::Error] if the REST call is aborted.
-              #
-              # @example Basic example
-              #   require "google/cloud/compute/v1"
-              #
-              #   # Create a client object. The client can be reused for multiple calls.
-              #   client = Google::Cloud::Compute::V1::Licenses::Rest::Client.new
-              #
-              #   # Create a request. To set request fields, pass in keyword arguments.
-              #   request = Google::Cloud::Compute::V1::UpdateLicenseRequest.new
-              #
-              #   # Call the update method.
-              #   result = client.update request
-              #
-              #   # The returned object is of type Google::Cloud::Compute::V1::Operation.
-              #   p result
-              #
-              def update request, options = nil
-                raise ::ArgumentError, "request must be provided" if request.nil?
-
-                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Compute::V1::UpdateLicenseRequest
-
-                # Converts hash and nil to an options object
-                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
-
-                # Customize the options with defaults
-                call_metadata = @config.rpcs.update.metadata.to_h
-
-                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
-                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
-                  lib_name: @config.lib_name, lib_version: @config.lib_version,
-                  gapic_version: ::Google::Cloud::Compute::V1::VERSION,
-                  transports_version_send: [:rest]
-
-                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
-                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
-
-                options.apply_defaults timeout:      @config.rpcs.update.timeout,
-                                       metadata:     call_metadata,
-                                       retry_policy: @config.rpcs.update.retry_policy
-
-                options.apply_defaults timeout:      @config.timeout,
-                                       metadata:     @config.metadata,
-                                       retry_policy: @config.retry_policy
-
-                @licenses_stub.update request, options do |result, response|
-                  result = ::Google::Cloud::Compute::V1::GlobalOperations::Rest::NonstandardLro.create_operation(
-                    operation: result,
-                    client: global_operations,
-                    request_values: {
-                      "project" => request.project
-                    },
-                    options: options
-                  )
-                  yield result, response if block_given?
-                  throw :response, result
-                end
-              rescue ::Gapic::Rest::Error => e
-                raise ::Google::Cloud::Error.from_error(e)
-              end
-
-              ##
-              # Configuration class for the Licenses REST API.
-              #
-              # This class represents the configuration for Licenses REST,
+              # This class represents the configuration for InterconnectGroups REST,
               # providing control over timeouts, retry behavior, logging, transport
               # parameters, and other low-level controls. Certain parameters can also be
               # applied individually to specific RPCs. See
-              # {::Google::Cloud::Compute::V1::Licenses::Rest::Client::Configuration::Rpcs}
+              # {::Google::Cloud::Compute::V1::InterconnectGroups::Rest::Client::Configuration::Rpcs}
               # for a list of RPCs that can be configured independently.
               #
               # Configuration can be applied globally to all clients, or to a single client
@@ -923,17 +1101,17 @@ module Google
               # @example
               #
               #   # Modify the global config, setting the timeout for
-              #   # delete to 20 seconds,
+              #   # create_members to 20 seconds,
               #   # and all remaining timeouts to 10 seconds.
-              #   ::Google::Cloud::Compute::V1::Licenses::Rest::Client.configure do |config|
+              #   ::Google::Cloud::Compute::V1::InterconnectGroups::Rest::Client.configure do |config|
               #     config.timeout = 10.0
-              #     config.rpcs.delete.timeout = 20.0
+              #     config.rpcs.create_members.timeout = 20.0
               #   end
               #
               #   # Apply the above configuration only to a new client.
-              #   client = ::Google::Cloud::Compute::V1::Licenses::Rest::Client.new do |config|
+              #   client = ::Google::Cloud::Compute::V1::InterconnectGroups::Rest::Client.new do |config|
               #     config.timeout = 10.0
-              #     config.rpcs.delete.timeout = 20.0
+              #     config.rpcs.create_members.timeout = 20.0
               #   end
               #
               # @!attribute [rw] endpoint
@@ -1036,7 +1214,7 @@ module Google
                 end
 
                 ##
-                # Configuration RPC class for the Licenses API.
+                # Configuration RPC class for the InterconnectGroups API.
                 #
                 # Includes fields providing the configuration for each RPC in this service.
                 # Each configuration object is of type `Gapic::Config::Method` and includes
@@ -1054,6 +1232,11 @@ module Google
                 #
                 class Rpcs
                   ##
+                  # RPC-specific configuration for `create_members`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :create_members
+                  ##
                   # RPC-specific configuration for `delete`
                   # @return [::Gapic::Config::Method]
                   #
@@ -1069,6 +1252,11 @@ module Google
                   #
                   attr_reader :get_iam_policy
                   ##
+                  # RPC-specific configuration for `get_operational_status`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :get_operational_status
+                  ##
                   # RPC-specific configuration for `insert`
                   # @return [::Gapic::Config::Method]
                   #
@@ -1079,6 +1267,11 @@ module Google
                   #
                   attr_reader :list
                   ##
+                  # RPC-specific configuration for `patch`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :patch
+                  ##
                   # RPC-specific configuration for `set_iam_policy`
                   # @return [::Gapic::Config::Method]
                   #
@@ -1088,30 +1281,29 @@ module Google
                   # @return [::Gapic::Config::Method]
                   #
                   attr_reader :test_iam_permissions
-                  ##
-                  # RPC-specific configuration for `update`
-                  # @return [::Gapic::Config::Method]
-                  #
-                  attr_reader :update
 
                   # @private
                   def initialize parent_rpcs = nil
+                    create_members_config = parent_rpcs.create_members if parent_rpcs.respond_to? :create_members
+                    @create_members = ::Gapic::Config::Method.new create_members_config
                     delete_config = parent_rpcs.delete if parent_rpcs.respond_to? :delete
                     @delete = ::Gapic::Config::Method.new delete_config
                     get_config = parent_rpcs.get if parent_rpcs.respond_to? :get
                     @get = ::Gapic::Config::Method.new get_config
                     get_iam_policy_config = parent_rpcs.get_iam_policy if parent_rpcs.respond_to? :get_iam_policy
                     @get_iam_policy = ::Gapic::Config::Method.new get_iam_policy_config
+                    get_operational_status_config = parent_rpcs.get_operational_status if parent_rpcs.respond_to? :get_operational_status
+                    @get_operational_status = ::Gapic::Config::Method.new get_operational_status_config
                     insert_config = parent_rpcs.insert if parent_rpcs.respond_to? :insert
                     @insert = ::Gapic::Config::Method.new insert_config
                     list_config = parent_rpcs.list if parent_rpcs.respond_to? :list
                     @list = ::Gapic::Config::Method.new list_config
+                    patch_config = parent_rpcs.patch if parent_rpcs.respond_to? :patch
+                    @patch = ::Gapic::Config::Method.new patch_config
                     set_iam_policy_config = parent_rpcs.set_iam_policy if parent_rpcs.respond_to? :set_iam_policy
                     @set_iam_policy = ::Gapic::Config::Method.new set_iam_policy_config
                     test_iam_permissions_config = parent_rpcs.test_iam_permissions if parent_rpcs.respond_to? :test_iam_permissions
                     @test_iam_permissions = ::Gapic::Config::Method.new test_iam_permissions_config
-                    update_config = parent_rpcs.update if parent_rpcs.respond_to? :update
-                    @update = ::Gapic::Config::Method.new update_config
 
                     yield self if block_given?
                   end
