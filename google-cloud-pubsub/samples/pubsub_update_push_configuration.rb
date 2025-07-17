@@ -19,7 +19,7 @@ def update_push_configuration subscription_id:, new_endpoint:
   # subscription_id   = "your-subscription-id"
   # new_endpoint      = "Endpoint where your app receives messages""
 
-  pubsub = Google::Cloud::Pubsub.new
+  pubsub = Google::Cloud::PubSub.new
 
   subscription_admin = pubsub.subscription_admin
 

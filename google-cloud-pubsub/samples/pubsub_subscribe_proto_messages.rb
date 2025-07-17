@@ -19,7 +19,7 @@ def subscribe_proto_messages subscription_id:
   # [START pubsub_subscribe_proto_messages]
   # subscription_id = "your-subscription-id"
 
-  pubsub = Google::Cloud::Pubsub.new
+  pubsub = Google::Cloud::PubSub.new
 
   subscriber = pubsub.subscriber subscription_id
   listener = subscriber.listen do |received_message|

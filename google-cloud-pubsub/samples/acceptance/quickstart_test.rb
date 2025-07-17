@@ -16,7 +16,7 @@ require_relative "helper"
 require_relative "../quickstart.rb"
 
 describe "quickstart" do
-  let(:pubsub) { Google::Cloud::Pubsub.new }
+  let(:pubsub) { Google::Cloud::PubSub.new }
   let(:topic_id) { random_topic_id }
   let(:topic_admin) { pubsub.topic_admin }
 

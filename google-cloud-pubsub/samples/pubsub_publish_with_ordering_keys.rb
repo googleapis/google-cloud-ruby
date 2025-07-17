@@ -18,7 +18,7 @@ def publish_ordered_messages topic_id:
   # [START pubsub_publish_with_ordering_keys]
   # topic_id = "your-topic-id"
 
-  pubsub = Google::Cloud::Pubsub.new
+  pubsub = Google::Cloud::PubSub.new
 
   # Start sending messages in one request once the size of all queued messages
   # reaches 1 MB or the number of queued messages reaches 20

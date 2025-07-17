@@ -18,7 +18,7 @@ def get_subscription_policy subscription_id:
   # [START pubsub_get_subscription_policy]
   # subscription_id = "your-subscription-id"
 
-  pubsub = Google::Cloud::Pubsub.new
+  pubsub = Google::Cloud::PubSub.new
 
   subscription_admin = pubsub.subscription_admin
 

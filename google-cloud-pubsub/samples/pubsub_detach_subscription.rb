@@ -18,7 +18,7 @@ def detach_subscription subscription_id:
   # [START pubsub_detach_subscription]
   # subscription_id = "your-subscription-id"
 
-  pubsub = Google::Cloud::Pubsub.new
+  pubsub = Google::Cloud::PubSub.new
 
   topic_admin = pubsub.topic_admin
   subscription_admin = pubsub.subscription_admin

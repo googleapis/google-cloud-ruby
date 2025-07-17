@@ -17,7 +17,7 @@ require "google/cloud/pubsub"
 def list_topics
   # [START pubsub_list_topics]
 
-  pubsub = Google::Cloud::Pubsub.new
+  pubsub = Google::Cloud::PubSub.new
 
   topic_admin = pubsub.topic_admin
 

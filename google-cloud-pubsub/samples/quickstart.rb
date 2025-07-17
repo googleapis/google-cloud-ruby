@@ -20,7 +20,7 @@ def quickstart topic_id:
   # [END require_library]
 
   # Instantiates a client
-  pubsub = Google::Cloud::Pubsub.new
+  pubsub = Google::Cloud::PubSub.new
   topic_admin = pubsub.topic_admin
 
   # The name for the new topic

@@ -18,7 +18,7 @@ def test_subscription_permissions subscription_id:
   # [START pubsub_test_subscription_permissions]
   # subscription_id = "your-subscription-id"
 
-  pubsub = Google::Cloud::Pubsub.new
+  pubsub = Google::Cloud::PubSub.new
 
   subscription_admin = pubsub.subscription_admin
 

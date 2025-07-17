@@ -18,7 +18,7 @@ def delete_schema schema_id:
   # [START pubsub_delete_schema]
   # schema_id = "your-schema-id"
 
-  pubsub = Google::Cloud::Pubsub.new
+  pubsub = Google::Cloud::PubSub.new
 
   schemas = pubsub.schemas
 

@@ -20,7 +20,7 @@ def set_subscription_policy subscription_id:, role:, service_account_email:
   # role                  = "roles/pubsub.subscriber"
   # service_account_email = "serviceAccount:account_name@project_name.iam.gserviceaccount.com"
 
-  pubsub = Google::Cloud::Pubsub.new
+  pubsub = Google::Cloud::PubSub.new
 
   subscription_admin = pubsub.subscription_admin
 

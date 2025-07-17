@@ -19,7 +19,7 @@ def publish_proto_messages topic_id:
   # [START pubsub_publish_proto_messages]
   # topic_id = "your-topic-id"
 
-  pubsub = Google::Cloud::Pubsub.new
+  pubsub = Google::Cloud::PubSub.new
 
   topic_admin = pubsub.topic_admin
 

@@ -20,7 +20,7 @@ def dead_letter_create_subscription topic_id:, subscription_id:, dead_letter_top
   # subscription_id      = "your-subscription-id"
   # dead_letter_topic_id = "your-dead-letter-topic-id"
 
-  pubsub = Google::Cloud::Pubsub.new
+  pubsub = Google::Cloud::PubSub.new
 
   subscription_admin = pubsub.subscription_admin
 

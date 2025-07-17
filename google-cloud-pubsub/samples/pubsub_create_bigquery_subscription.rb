@@ -24,7 +24,7 @@ def pubsub_create_bigquery_subscription project_id:, topic_id:, subscription_id:
   # topic_id = "your-topic-id"
   # subscription_id = "your-subscription-id"
   # bigquery_table_id = "my-project:dataset-id.table-id"
-  pubsub = Google::Cloud::Pubsub.new project_id: project_id
+  pubsub = Google::Cloud::PubSub.new project_id: project_id
 
   subscription_admin = pubsub.subscription_admin
 

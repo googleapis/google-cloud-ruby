@@ -18,7 +18,7 @@ def dead_letter_remove subscription_id:
   # [START pubsub_dead_letter_remove]
   # subscription_id = "your-subscription-id"
 
-  pubsub = Google::Cloud::Pubsub.new
+  pubsub = Google::Cloud::PubSub.new
 
   subscription_admin = pubsub.subscription_admin
 

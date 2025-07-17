@@ -18,7 +18,7 @@ def publish_messages_async_with_concurrency_control topic_id:
   # [START pubsub_publisher_concurrency_control]
   # topic_id = "your-topic-id"
 
-  pubsub = Google::Cloud::Pubsub.new
+  pubsub = Google::Cloud::PubSub.new
 
   publisher = pubsub.publisher topic_id, async: {
     threads: {

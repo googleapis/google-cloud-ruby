@@ -18,7 +18,7 @@ def subscriber_sync_pull_with_lease subscription_id:
   # [START pubsub_subscriber_sync_pull_with_lease]
   # subscription_id = "your-subscription-id"
 
-  pubsub = Google::Cloud::Pubsub.new
+  pubsub = Google::Cloud::PubSub.new
 
   subscriber = pubsub.subscriber subscription_id
 

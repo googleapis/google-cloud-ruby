@@ -18,7 +18,7 @@ def publish_message topic_id:
   # [START pubsub_quickstart_publisher]
   # topic_id = "your-topic-id"
 
-  pubsub = Google::Cloud::Pubsub.new
+  pubsub = Google::Cloud::PubSub.new
 
   publisher = pubsub.publisher topic_id
 

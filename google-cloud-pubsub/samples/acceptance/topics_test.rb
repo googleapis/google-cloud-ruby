@@ -37,7 +37,7 @@ require_relative "../pubsub_set_topic_policy.rb"
 require_relative "../pubsub_test_topic_permissions.rb"
 
 describe "topics" do
-  let(:pubsub) { Google::Cloud::Pubsub.new }
+  let(:pubsub) { Google::Cloud::PubSub.new }
   let(:role) { "roles/pubsub.publisher" }
   let(:service_account_email) { "serviceAccount:kokoro@#{pubsub.project}.iam.gserviceaccount.com" }
   let(:topic_id) { random_topic_id }

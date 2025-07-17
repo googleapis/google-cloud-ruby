@@ -18,7 +18,7 @@ def delete_subscription subscription_id:
   # [START pubsub_delete_subscription]
   # subscription_id = "your-subscription-id"
 
-  pubsub = Google::Cloud::Pubsub.new
+  pubsub = Google::Cloud::PubSub.new
 
   subscription_admin = pubsub.subscription_admin
 

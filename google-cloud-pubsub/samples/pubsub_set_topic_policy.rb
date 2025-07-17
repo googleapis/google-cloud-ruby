@@ -20,7 +20,7 @@ def set_topic_policy topic_id:, role:, service_account_email:
   # role                  = "roles/pubsub.publisher"
   # service_account_email = "serviceAccount:account_name@project_name.iam.gserviceaccount.com"
 
-  pubsub = Google::Cloud::Pubsub.new
+  pubsub = Google::Cloud::PubSub.new
 
   topic_admin = pubsub.topic_admin
 

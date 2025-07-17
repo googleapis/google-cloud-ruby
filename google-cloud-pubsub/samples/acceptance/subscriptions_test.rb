@@ -34,7 +34,7 @@ require_relative "../pubsub_delete_subscription.rb"
 require "google/cloud/bigquery"
 
 describe "subscriptions" do
-  let(:pubsub) { Google::Cloud::Pubsub.new }
+  let(:pubsub) { Google::Cloud::PubSub.new }
   let(:endpoint) { "https://#{pubsub.project}.appspot.com/push" }
   let(:role) { "roles/pubsub.subscriber" }
   let(:service_account_email) { "serviceAccount:kokoro@#{pubsub.project}.iam.gserviceaccount.com" }

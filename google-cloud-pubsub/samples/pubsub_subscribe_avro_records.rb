@@ -19,7 +19,7 @@ def subscribe_avro_records subscription_id:, avsc_file:
   # subscription_id = "your-subscription-id"
   # avsc_file = "path/to/an/avro/schema/file/(.avsc)/formatted/in/json"
 
-  pubsub = Google::Cloud::Pubsub.new
+  pubsub = Google::Cloud::PubSub.new
 
   subscriber = pubsub.subscriber subscription_id
 

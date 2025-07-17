@@ -19,7 +19,7 @@ def publish_avro_records topic_id:, avsc_file:
   # topic_id = "your-topic-id"
   # avsc_file = "path/to/an/avro/schema/file/(.avsc)/formatted/in/json"
 
-  pubsub = Google::Cloud::Pubsub.new
+  pubsub = Google::Cloud::PubSub.new
 
   topic_admin = pubsub.topic_admin
 

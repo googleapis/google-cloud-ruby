@@ -18,7 +18,7 @@ def publish_messages_async_with_batch_settings topic_id:
   # [START pubsub_publisher_batch_settings]
   # topic_id = "your-topic-id"
 
-  pubsub = Google::Cloud::Pubsub.new
+  pubsub = Google::Cloud::PubSub.new
 
   # Start sending messages in one request once the size of all queued messages
   # reaches 1 MB or the number of queued messages reaches 20

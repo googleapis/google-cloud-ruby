@@ -18,7 +18,7 @@ def publish_messages_async_with_flow_control topic_id:
   # [START pubsub_publisher_flow_control]
   # topic_id = "your-topic-id"
 
-  pubsub = Google::Cloud::Pubsub.new
+  pubsub = Google::Cloud::PubSub.new
 
   publisher = pubsub.publisher topic_id, async: {
     # Configure how many messages the publisher client can hold in memory

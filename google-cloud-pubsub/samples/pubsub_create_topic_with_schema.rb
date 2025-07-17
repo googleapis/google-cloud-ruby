@@ -21,7 +21,7 @@ def create_topic_with_schema topic_id:, schema_id:, message_encoding:
   # Choose either BINARY or JSON as valid message encoding in this topic.
   # message_encoding = :BINARY
 
-  pubsub = Google::Cloud::Pubsub.new
+  pubsub = Google::Cloud::PubSub.new
 
   topic_admin = pubsub.topic_admin
 

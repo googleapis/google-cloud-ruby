@@ -28,7 +28,7 @@ require_relative "../pubsub_subscribe_proto_messages"
 
 
 describe "schemas" do
-  let(:pubsub) { Google::Cloud::Pubsub.new }
+  let(:pubsub) { Google::Cloud::PubSub.new }
   let(:schema_id) { random_schema_id }
   let(:topic_id) { random_topic_id }
   let(:subscription_id) { random_subscription_id }

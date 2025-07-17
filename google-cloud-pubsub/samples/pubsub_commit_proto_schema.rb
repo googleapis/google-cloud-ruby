@@ -19,7 +19,7 @@ def commit_proto_schema schema_id:, proto_file:
   # schema_id = "your-schema-id"
   # proto_file = "path/to/a/proto_file.proto"
 
-  pubsub = Google::Cloud::Pubsub.new
+  pubsub = Google::Cloud::PubSub.new
 
   schemas = pubsub.schemas
 

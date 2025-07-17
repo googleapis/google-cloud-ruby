@@ -19,7 +19,7 @@ def listen_for_messages subscription_id:
   # [START pubsub_quickstart_subscriber]
   # subscription_id = "your-subscription-id"
 
-  pubsub = Google::Cloud::Pubsub.new
+  pubsub = Google::Cloud::PubSub.new
 
   subscriber = pubsub.subscriber subscription_id
 

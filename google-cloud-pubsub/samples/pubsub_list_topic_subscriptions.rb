@@ -18,7 +18,7 @@ def list_topic_subscriptions topic_id:
   # [START pubsub_list_topic_subscriptions]
   # topic_id = "your-topic-id"
 
-  pubsub = Google::Cloud::Pubsub.new
+  pubsub = Google::Cloud::PubSub.new
 
   topic_admin = pubsub.topic_admin
 

@@ -19,7 +19,7 @@ def create_avro_schema schema_id:, avsc_file:
   # schema_id = "your-schema-id"
   # avsc_file = "path/to/an/avro/schema/file/(.avsc)/formatted/in/json"
 
-  pubsub = Google::Cloud::Pubsub.new
+  pubsub = Google::Cloud::PubSub.new
 
   definition = File.read avsc_file
 

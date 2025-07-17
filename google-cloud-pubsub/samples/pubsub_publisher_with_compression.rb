@@ -23,7 +23,7 @@ def pubsub_publisher_with_compression project_id:, topic_id:
   # project_id = "your-project-id"
   # topic_id = "your-topic-id"
 
-  pubsub = Google::Cloud::Pubsub.new project_id: project_id
+  pubsub = Google::Cloud::PubSub.new project_id: project_id
 
   # Enable compression and configure the compression threshold to 10 bytes (default to 240 B).
   # Publish requests of sizes > 10 B (excluding the request headers) will get compressed.

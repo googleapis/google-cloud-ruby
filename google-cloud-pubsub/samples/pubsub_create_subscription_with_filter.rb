@@ -22,7 +22,7 @@ def create_subscription_with_filter project_id:, topic_id:, subscription_id:, fi
   # subscription_id = "your-subscription-id"
   # filter = "attributes.author=\"unknown\""
 
-  pubsub = Google::Cloud::Pubsub.new project_id: project_id
+  pubsub = Google::Cloud::PubSub.new project_id: project_id
 
   subscription_admin = pubsub.subscription_admin
 

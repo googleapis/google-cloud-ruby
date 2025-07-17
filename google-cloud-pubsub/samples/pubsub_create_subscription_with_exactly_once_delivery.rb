@@ -21,7 +21,7 @@ def create_subscription_with_exactly_once_delivery project_id:, topic_id:, subsc
   # topic_id = "your-topic-id"
   # subscription_id = "your-subscription-id"
 
-  pubsub = Google::Cloud::Pubsub.new project_id: project_id
+  pubsub = Google::Cloud::PubSub.new project_id: project_id
 
   subscription_admin = pubsub.subscription_admin
 
