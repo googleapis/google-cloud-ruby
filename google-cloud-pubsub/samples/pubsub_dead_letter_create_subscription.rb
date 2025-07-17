@@ -29,8 +29,8 @@ def dead_letter_create_subscription topic_id:, subscription_id:, dead_letter_top
   subscription = subscription_admin.create_subscription \
     name: pubsub.subscription_path(subscription_id),
     topic: pubsub.topic_path(topic_id),
-    dead_letter_policy: { 
-      dead_letter_topic: pubsub.topic_path(dead_letter_topic_id), 
+    dead_letter_policy: {
+      dead_letter_topic: pubsub.topic_path(dead_letter_topic_id),
       max_delivery_attempts: 10
     }
 

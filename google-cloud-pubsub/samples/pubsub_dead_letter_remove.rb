@@ -27,7 +27,7 @@ def dead_letter_remove subscription_id:
   subscription.dead_letter_policy = nil
 
   subscription_admin.update_subscription subscription: subscription,
-                                         update_mask: { 
+                                         update_mask: {
                                            paths: ["dead_letter_policy"]
                                          }
 

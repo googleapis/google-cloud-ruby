@@ -27,7 +27,7 @@ def set_subscription_policy subscription_id:, role:, service_account_email:
   bindings = Google::Iam::V1::Binding.new role: role, members: [service_account_email]
 
   pubsub.iam.set_iam_policy resource: pubsub.subscription_path(subscription_id),
-                            policy: { 
+                            policy: {
                               bindings: [bindings]
                             }
   # [END pubsub_set_subscription_policy]

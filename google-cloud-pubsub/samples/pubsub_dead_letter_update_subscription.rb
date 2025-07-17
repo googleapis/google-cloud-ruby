@@ -28,8 +28,8 @@ def dead_letter_update_subscription subscription_id:
 
   subscription.dead_letter_policy.max_delivery_attempts = 20
 
-  subscription_admin.update_subscription subscription: subscription, 
-                                         update_mask: { 
+  subscription_admin.update_subscription subscription: subscription,
+                                         update_mask: {
                                            paths: ["dead_letter_policy"]
                                          }
 

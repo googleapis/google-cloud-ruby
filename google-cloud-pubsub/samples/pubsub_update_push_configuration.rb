@@ -30,7 +30,7 @@ def update_push_configuration subscription_id:, new_endpoint:
     push_endpoint: new_endpoint
 
   subscription_admin.update_subscription subscription: subscription,
-                                         update_mask: { 
+                                         update_mask: {
                                            paths: ["push_config"]
                                          }
 
