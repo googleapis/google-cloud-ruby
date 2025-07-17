@@ -23,14 +23,14 @@ def create_avro_schema schema_id:, avsc_file:
 
   definition = File.read avsc_file
 
-  schema = Google::Cloud::PubSub::V1::Schema.new name: schema_id,
-                                                 type: :AVRO,
-                                                 definition: definition
-
   schemas = pubsub.schemas
 
   schema = schemas.create_schema parent: pubsub.project_path,
-                                 schema: schema,
+                                 schema: {
+                                   name: schema_id,
+                                   type: :AVRO,
+                                   definition: definition
+                                 },
                                  schema_id: schema_id
 
   puts "Schema #{schema.name} created."

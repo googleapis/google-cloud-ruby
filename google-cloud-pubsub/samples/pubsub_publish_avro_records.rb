@@ -31,7 +31,8 @@ def publish_avro_records topic_id:, avsc_file:
 
   record = { "name" => "Alaska", "post_abbr" => "AK" }
 
-  if encoding == :BINARY
+  case encoding
+  when :BINARY
     require "avro"
     avro_schema = Avro::Schema.parse File.read(avsc_file)
     writer = Avro::IO::DatumWriter.new avro_schema
@@ -40,7 +41,7 @@ def publish_avro_records topic_id:, avsc_file:
     writer.write record, encoder
     publisher.publish buffer
     puts "Published binary-encoded AVRO message."
-  elsif encoding == :JSON
+  when :JSON
     require "json"
     publisher.publish record.to_json
     puts "Published JSON-encoded AVRO message."

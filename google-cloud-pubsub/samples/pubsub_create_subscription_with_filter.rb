@@ -26,9 +26,10 @@ def create_subscription_with_filter project_id:, topic_id:, subscription_id:, fi
 
   subscription_admin = pubsub.subscription_admin
 
-  subscription = subscription_admin.create_subscription name: pubsub.subscription_path(subscription_id),
-                                                        topic: pubsub.topic_path(topic_id),
-                                                        filter: filter
+  subscription = subscription_admin.create_subscription \
+    name: pubsub.subscription_path(subscription_id),
+    topic: pubsub.topic_path(topic_id),
+    filter: filter
   puts "Created subscription with filtering enabled: #{subscription_id}"
   # [END pubsub_create_subscription_with_filter]
 end

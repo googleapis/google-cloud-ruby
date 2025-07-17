@@ -20,7 +20,6 @@ describe "quickstart" do
   let(:topic_id) { random_topic_id }
   let(:topic_admin) { pubsub.topic_admin }
 
-  focus
   it "supports quickstart_create_topic" do
     assert_output "Topic projects/#{pubsub.project}/topics/#{topic_id} created.\n" do
       quickstart topic_id: topic_id

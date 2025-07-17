@@ -26,9 +26,9 @@ def set_topic_policy topic_id:, role:, service_account_email:
 
   bindings = Google::Iam::V1::Binding.new role: role, members: [service_account_email]
 
-  policy = Google::Iam::V1::Policy.new bindings: [bindings]
-
   pubsub.iam.set_iam_policy resource: pubsub.topic_path(topic_id),
-                            policy: policy
+                            policy: {
+                              bindings: [bindings]
+                            }
   # [END pubsub_set_topic_policy]
 end

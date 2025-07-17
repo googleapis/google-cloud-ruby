@@ -89,7 +89,7 @@ describe "topics" do
     end
 
     assert_raises Google::Cloud::NotFoundError do
-      topic = topic_admin.get_topic topic: pubsub.topic_path(topic_id)
+      topic_admin.get_topic topic: pubsub.topic_path(topic_id)
     end
   end
 

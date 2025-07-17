@@ -108,7 +108,7 @@ describe "subscriptions" do
       delete_subscription subscription_id: @subscription.name
     end
     assert_raises Google::Cloud::NotFoundError do
-      @subscription = subscription_admin.get_subscription subscription: @subscription.name
+      subscription_admin.get_subscription subscription: @subscription.name
     end
     @subscription = nil
   end

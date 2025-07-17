@@ -22,11 +22,14 @@ def dead_letter_remove subscription_id:
 
   subscription_admin = pubsub.subscription_admin
 
-  subscription = subscription_admin.get_subscription subscription: pubsub.subscription_path(subscription_id)
+  subscription = subscription_admin.get_subscription \
+    subscription: pubsub.subscription_path(subscription_id)
   subscription.dead_letter_policy = nil
 
-  mask = Google::Protobuf::FieldMask.new paths: ["dead_letter_policy"]
-  subscription_admin.update_subscription subscription: subscription, update_mask: mask
+  subscription_admin.update_subscription subscription: subscription,
+                                         update_mask: { 
+                                           paths: ["dead_letter_policy"]
+                                         }
 
   puts "Removed dead letter topic from #{subscription_id} subscription."
   # [END pubsub_dead_letter_remove]

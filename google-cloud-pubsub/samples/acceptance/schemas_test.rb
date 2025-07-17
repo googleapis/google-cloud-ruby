@@ -88,7 +88,7 @@ describe "schemas" do
 
       # pubsub_create_topic_with_schema
       assert_output "Topic projects/#{pubsub.project}/topics/#{topic_id} created.\n" do
-        create_topic_with_schema topic_id: topic_id, schema_id: schema_id, message_encoding: "BINARY"
+        create_topic_with_schema topic_id: topic_id, schema_id: schema_id, message_encoding: :BINARY
       end
       @topic = topic_admin.get_topic topic: pubsub.topic_path(topic_id)
       assert @topic
@@ -110,7 +110,7 @@ describe "schemas" do
 
       # pubsub_create_topic_with_schema
       assert_output "Topic projects/#{pubsub.project}/topics/#{topic_id} created.\n" do
-        create_topic_with_schema topic_id: topic_id, schema_id: schema_id, message_encoding: "JSON"
+        create_topic_with_schema topic_id: topic_id, schema_id: schema_id, message_encoding: :JSON
       end
       @topic = topic_admin.get_topic topic: pubsub.topic_path(topic_id)
       assert @topic
@@ -131,7 +131,7 @@ describe "schemas" do
                                       schema_id: schema_id
 
       schema_settings = Google::Cloud::PubSub::V1::SchemaSettings.new schema: pubsub.schema_path(schema_id),
-                                                                      encoding: "BINARY"
+                                                                      encoding: :BINARY
 
 
       @topic = topic_admin.create_topic name: pubsub.topic_path(random_topic_id),
@@ -163,7 +163,7 @@ describe "schemas" do
                                       schema: schema,
                                       schema_id: schema_id
       schema_settings = Google::Cloud::PubSub::V1::SchemaSettings.new schema: pubsub.schema_path(schema_id),
-                                                                      encoding: "JSON"
+                                                                      encoding: :JSON
 
 
       @topic = topic_admin.create_topic name: pubsub.topic_path(random_topic_id),
@@ -201,7 +201,7 @@ describe "schemas" do
 
       # pubsub_create_topic_with_schema
       assert_output "Topic projects/#{pubsub.project}/topics/#{topic_id} created.\n" do
-        create_topic_with_schema topic_id: topic_id, schema_id: schema_id, message_encoding: "BINARY"
+        create_topic_with_schema topic_id: topic_id, schema_id: schema_id, message_encoding: :BINARY
       end
 
       @topic = topic_admin.get_topic topic: pubsub.topic_path(topic_id)
@@ -224,7 +224,7 @@ describe "schemas" do
 
       # pubsub_create_topic_with_schema
       assert_output "Topic projects/#{pubsub.project}/topics/#{topic_id} created.\n" do
-        create_topic_with_schema topic_id: topic_id, schema_id: schema_id, message_encoding: "JSON"
+        create_topic_with_schema topic_id: topic_id, schema_id: schema_id, message_encoding: :JSON
       end
 
       @topic = topic_admin.get_topic topic: pubsub.topic_path(topic_id)
@@ -246,7 +246,7 @@ describe "schemas" do
                                       schema_id: schema_id
 
       schema_settings = Google::Cloud::PubSub::V1::SchemaSettings.new schema: pubsub.schema_path(schema_id),
-                                                                      encoding: "BINARY"
+                                                                      encoding: :BINARY
 
       @topic = topic_admin.create_topic name: pubsub.topic_path(random_topic_id),
                                         schema_settings: schema_settings
@@ -276,7 +276,7 @@ describe "schemas" do
                                       schema_id: schema_id
 
       schema_settings = Google::Cloud::PubSub::V1::SchemaSettings.new schema: pubsub.schema_path(schema_id),
-                                                                      encoding: "JSON"
+                                                                      encoding: :JSON
 
       @topic = topic_admin.create_topic name: pubsub.topic_path(random_topic_id),
                                         schema_settings: schema_settings

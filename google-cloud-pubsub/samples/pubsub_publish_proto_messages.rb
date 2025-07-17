@@ -31,10 +31,11 @@ def publish_proto_messages topic_id:
 
   state = Utilities::StateProto.new name: "Alaska", post_abbr: "AK"
 
-  if encoding == :BINARY
+  case encoding
+  when :BINARY
     publisher.publish Utilities::StateProto.encode(state)
     puts "Published binary-encoded protobuf message."
-  elsif encoding == :JSON
+  when :JSON
     publisher.publish Utilities::StateProto.encode_json(state)
     puts "Published JSON-encoded protobuf message."
   else
