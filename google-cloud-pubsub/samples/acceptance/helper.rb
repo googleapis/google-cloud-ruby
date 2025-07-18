@@ -41,6 +41,10 @@ def random_table_id
   "ruby-pubsub-samples-test-table-#{SecureRandom.hex 4}"
 end
 
+def random_bucket_id
+  "ruby-pubsub-samples-test-bucket-#{SecureRandom.hex 4}"
+end
+
 def create_table
   bigquery = Google::Cloud::Bigquery.new
   @dataset = bigquery.create_dataset random_dataset_id

@@ -15,6 +15,7 @@
 require_relative "helper"
 require_relative "../pubsub_create_pull_subscription.rb"
 require_relative "../pubsub_create_push_subscription.rb"
+require_relative "../pubsub_create_topic_with_cloud_storage_ingestion.rb"
 require_relative "../pubsub_create_topic.rb"
 require_relative "../pubsub_create_unwrapped_push_subscription.rb"
 require_relative "../pubsub_dead_letter_create_subscription.rb"
@@ -37,6 +38,38 @@ require_relative "../pubsub_quickstart_publisher.rb"
 require_relative "../pubsub_resume_publish_with_ordering_keys.rb"
 require_relative "../pubsub_set_topic_policy.rb"
 require_relative "../pubsub_test_topic_permissions.rb"
+
+describe "emulator" do
+  let(:pubsub) { Google::Cloud::Pubsub.new }
+  let(:topic_id) { random_topic_id }
+  let(:topic_admin) { pubsub.topic_admin }
+
+  before do
+    pubsub_emulator_host = ENV["PUBSUB_EMULATOR_HOST"]
+    if pubsub_emulator_host.nil?
+      raise "PUBSUB_EMULATOR_HOST env variable must be set. Please follow instructions at https://cloud.google.com/pubsub/docs/emulator"
+    end
+  end
+
+  after do
+    @topic = topic_admin.get_topic topic: pubsub.topic_path(topic_id)
+    assert @topic
+    assert_equal "projects/#{pubsub.project}/topics/#{topic_id}", @topic.name
+    topic_admin.delete_topic topic: @topic.name
+  end
+
+  it "supports pubsub_create_topic_with_cloud_storage_ingestion" do
+    # pubsub_create_topic_with_cloud_storage_ingestion
+    assert_output "Topic with Cloud Storage Ingestion projects/#{pubsub.project}/topics/#{topic_id} created.\n" do
+      create_topic_with_cloud_storage_ingestion topic_id: topic_id, 
+                                                bucket: random_bucket_id, 
+                                                input_format: "text", 
+                                                text_delimiter: "\n", 
+                                                match_glob: "**.txt", 
+                                                minimum_object_create_time: Google::Protobuf::Timestamp.new
+    end
+  end
+end
 
 describe "topics" do
   let(:pubsub) { Google::Cloud::PubSub.new }
