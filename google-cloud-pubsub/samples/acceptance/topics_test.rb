@@ -15,6 +15,7 @@
 require_relative "helper"
 require_relative "../pubsub_create_pull_subscription.rb"
 require_relative "../pubsub_create_push_subscription.rb"
+require_relative "../pubsub_create_topic_with_aws_msk_ingestion.rb"
 require_relative "../pubsub_create_topic_with_cloud_storage_ingestion.rb"
 require_relative "../pubsub_create_topic_with_kinesis_ingestion.rb"
 require_relative "../pubsub_create_topic.rb"
@@ -79,6 +80,17 @@ describe "emulator" do
       create_topic_with_kinesis_ingestion topic_id: topic_id,
                                           stream_arn: "arn:aws:kinesis:us-west-2:111111111111:stream/fake-stream-name",
                                           consumer_arn: "arn:aws:kinesis:us-west-2:111111111111:stream/fake-stream-name/consumer/consumer-1:1111111111",
+                                          aws_role_arn: aws_role_arn,
+                                          gcp_service_account: gcp_service_account
+    end
+  end
+
+  it "supports pubsub_create_topic_with_aws_msk_ingestion" do
+    # pubsub_create_topic_with_aws_msk_ingestion
+    assert_output "Topic with Aws MSK Ingestion projects/#{pubsub.project}/topics/#{topic_id} created.\n" do
+      create_topic_with_aws_msk_ingestion topic_id: topic_id,
+                                          cluster_arn: "arn:aws:kafka:us-east-1:111111111111:cluster/fake-cluster-name/11111111-1111-1",
+                                          msk_topic: "fake-msk-topic-name",
                                           aws_role_arn: aws_role_arn,
                                           gcp_service_account: gcp_service_account
     end
