@@ -78,24 +78,31 @@ module Google
                                     end
                     default_config = Client::Configuration.new parent_config
 
-                    default_config.timeout = 60.0
-                    default_config.retry_policy = {
-                      initial_delay: 1.0, max_delay: 10.0, multiplier: 1.3, retry_codes: [14]
-                    }
-
                     default_config.rpcs.create_job.timeout = 60.0
 
                     default_config.rpcs.list_jobs.timeout = 60.0
+                    default_config.rpcs.list_jobs.retry_policy = {
+                      initial_delay: 1.0, max_delay: 10.0, multiplier: 1.3, retry_codes: [14]
+                    }
 
                     default_config.rpcs.get_job.timeout = 60.0
+                    default_config.rpcs.get_job.retry_policy = {
+                      initial_delay: 1.0, max_delay: 10.0, multiplier: 1.3, retry_codes: [14]
+                    }
 
                     default_config.rpcs.delete_job.timeout = 60.0
 
                     default_config.rpcs.create_job_template.timeout = 60.0
 
                     default_config.rpcs.list_job_templates.timeout = 60.0
+                    default_config.rpcs.list_job_templates.retry_policy = {
+                      initial_delay: 1.0, max_delay: 10.0, multiplier: 1.3, retry_codes: [14]
+                    }
 
                     default_config.rpcs.get_job_template.timeout = 60.0
+                    default_config.rpcs.get_job_template.retry_policy = {
+                      initial_delay: 1.0, max_delay: 10.0, multiplier: 1.3, retry_codes: [14]
+                    }
 
                     default_config.rpcs.delete_job_template.timeout = 60.0
 
