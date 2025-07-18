@@ -20,6 +20,7 @@ require_relative "../pubsub_create_topic_with_schema"
 require_relative "../pubsub_create_proto_schema"
 require_relative "../pubsub_delete_schema"
 require_relative "../pubsub_get_schema"
+require_relative "../pubsub_get_schema_revision"
 require_relative "../pubsub_list_schema_revisions"
 require_relative "../pubsub_list_schemas"
 require_relative "../pubsub_publish_avro_records"
@@ -73,7 +74,7 @@ describe "schemas" do
     end
   end
 
-  it "supports pubsub_create_proto_schema, pubsub_get_schema" do
+  it "supports pubsub_create_proto_schema, pubsub_get_schema_revision" do
     # create_proto_schema
     assert_output "Schema projects/#{pubsub.project}/schemas/#{schema_id} created.\n" do
       create_proto_schema schema_id: schema_id, proto_file: proto_file
@@ -82,9 +83,9 @@ describe "schemas" do
     assert @schema
     assert_equal "projects/#{pubsub.project}/schemas/#{schema_id}", @schema.name
 
-    # pubsub_get_schema
-    assert_output "Schema projects/#{pubsub.project}/schemas/#{schema_id} retrieved.\n" do
-      get_schema schema_id: schema_id
+    # pubsub_get_schema_revision
+    assert_output "Schema projects/#{pubsub.project}/schemas/#{schema_id}@#{@schema.revision_id} retrieved.\n" do
+      get_schema_revision schema_id: schema_id, revision_id: @schema.revision_id
     end
   end
 
