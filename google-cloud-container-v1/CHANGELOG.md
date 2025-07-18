@@ -1,5 +1,12 @@
 # Release History
 
+### 1.9.0 (2025-07-17)
+
+#### Features
+
+* Support for configuring the transparent hugepage on Linux nodes 
+* The update_node_pool RPC supports the boot disk parameter 
+
 ### 1.8.0 (2025-06-05)
 
 #### Features
