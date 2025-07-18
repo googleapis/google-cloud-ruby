@@ -16,6 +16,7 @@ require_relative "helper"
 require_relative "../pubsub_create_pull_subscription.rb"
 require_relative "../pubsub_create_push_subscription.rb"
 require_relative "../pubsub_create_topic.rb"
+require_relative "../pubsub_create_unwrapped_push_subscription.rb"
 require_relative "../pubsub_dead_letter_create_subscription.rb"
 require_relative "../pubsub_dead_letter_delivery_attempt.rb"
 require_relative "../pubsub_dead_letter_remove.rb"
@@ -190,9 +191,26 @@ describe "topics" do
 
     endpoint = "https://#{pubsub.project}.appspot.com/push"
 
-    # pubsub_create_pull_subscription
+    # pubsub_create_push_subscription
     assert_output "Push subscription #{subscription_id} created.\n" do
       create_push_subscription topic_id: topic_id, subscription_id: subscription_id, endpoint: endpoint
+    end
+
+    @subscription = subscription_admin.get_subscription subscription: pubsub.subscription_path(subscription_id)
+    assert @subscription
+    assert_equal "projects/#{pubsub.project}/subscriptions/#{subscription_id}", @subscription.name
+    assert_equal endpoint, @subscription.push_config.push_endpoint
+  end
+
+  it "supports pubsub_create_unwrapped_push_subscription" do
+    #setup
+    @topic = topic_admin.create_topic name: pubsub.topic_path(topic_id)
+
+    endpoint = "https://#{pubsub.project}.appspot.com/push"
+
+    # pubsub_create_unwrapped_push_subscription
+    assert_output "Unwrapped push subscription #{subscription_id} created.\n" do
+      create_unwrapped_push_subscription topic_id: topic_id, subscription_id: subscription_id, endpoint: endpoint
     end
 
     @subscription = subscription_admin.get_subscription subscription: pubsub.subscription_path(subscription_id)
