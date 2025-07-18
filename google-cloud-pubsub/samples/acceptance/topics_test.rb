@@ -16,6 +16,7 @@ require_relative "helper"
 require_relative "../pubsub_create_pull_subscription.rb"
 require_relative "../pubsub_create_push_subscription.rb"
 require_relative "../pubsub_create_topic_with_cloud_storage_ingestion.rb"
+require_relative "../pubsub_create_topic_with_kinesis_ingestion.rb"
 require_relative "../pubsub_create_topic.rb"
 require_relative "../pubsub_create_unwrapped_push_subscription.rb"
 require_relative "../pubsub_dead_letter_create_subscription.rb"
@@ -43,6 +44,8 @@ describe "emulator" do
   let(:pubsub) { Google::Cloud::Pubsub.new }
   let(:topic_id) { random_topic_id }
   let(:topic_admin) { pubsub.topic_admin }
+  let(:aws_role_arn) { "arn:aws:iam::111111111111:role/fake-role-name" }
+  let(:gcp_service_account) { "fake-service-account@project.iam.gserviceaccount.com" }
 
   before do
     pubsub_emulator_host = ENV["PUBSUB_EMULATOR_HOST"]
@@ -67,6 +70,17 @@ describe "emulator" do
                                                 text_delimiter: "\n", 
                                                 match_glob: "**.txt", 
                                                 minimum_object_create_time: Google::Protobuf::Timestamp.new
+    end
+  end
+
+  it "supports pubsub_create_topic_with_kinesis_ingestion" do
+    # pubsub_create_topic_with_kinesis_ingestion
+    assert_output "Topic with Kinesis Ingestion projects/#{pubsub.project}/topics/#{topic_id} created.\n" do
+      create_topic_with_kinesis_ingestion topic_id: topic_id,
+                                          stream_arn: "arn:aws:kinesis:us-west-2:111111111111:stream/fake-stream-name",
+                                          consumer_arn: "arn:aws:kinesis:us-west-2:111111111111:stream/fake-stream-name/consumer/consumer-1:1111111111",
+                                          aws_role_arn: aws_role_arn,
+                                          gcp_service_account: gcp_service_account
     end
   end
 end
