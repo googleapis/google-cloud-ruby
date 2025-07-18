@@ -63,9 +63,11 @@ module Google
         #     Required. The throughput of the instance in MB/s/TiB.
         #     Valid values are 125, 250, 500, 1000.
         # @!attribute [rw] gke_support_enabled
+        #   @deprecated This field is deprecated and may be removed in the next major version update.
         #   @return [::Boolean]
         #     Optional. Indicates whether you want to enable support for GKE clients. By
-        #     default, GKE clients are not supported.
+        #     default, GKE clients are not supported. Deprecated. No longer required for
+        #     GKE instance creation.
         class Instance
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -101,6 +103,9 @@ module Google
 
             # The instance is stopped.
             STOPPED = 6
+
+            # The instance is being updated.
+            UPDATING = 7
           end
         end
 
