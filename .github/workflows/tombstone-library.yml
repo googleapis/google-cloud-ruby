@@ -1,0 +1,31 @@
+name: Tombstone a Library
+
+on:
+  workflow_dispatch:
+    inputs:
+      gem:
+        description: "gem name to tombstone"
+        required: true
+      flags:
+        description: "Extra flags to pass to toys tombstone-library"
+        required: false
+
+jobs:
+  TombstoneLibrary:
+    if: ${{ github.repository == 'googleapis/google-cloud-ruby' }}
+    runs-on: ubuntu-latest
+    env:
+      GITHUB_TOKEN: ${{ secrets.YOSHI_CODE_BOT_TOKEN }}
+    steps:
+    - name: Checkout repo
+      uses: actions/checkout@v4
+    - name: Install Ruby 3.4
+      uses: ruby/setup-ruby@v1
+      with:
+        ruby-version: "3.4"
+    - name: Install tools
+      run: |
+        gem install --no-document toys
+    - name: Tombstone-library
+      run: |
+        toys tombstone-library -v --fork ${{ github.event.inputs.flags }} ${{ github.event.inputs.gem }}
