@@ -41,6 +41,27 @@ class Google::Cloud::PolicySimulator::ClientConstructionMinitest < Minitest::Tes
     end
   end
 
+  def test_org_policy_violations_preview_service_grpc
+    skip unless Google::Cloud::PolicySimulator.org_policy_violations_preview_service_available? transport: :grpc
+    Gapic::ServiceStub.stub :new, DummyStub.new do
+      grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+      client = Google::Cloud::PolicySimulator.org_policy_violations_preview_service transport: :grpc do |config|
+        config.credentials = grpc_channel
+      end
+      assert_kind_of Google::Cloud::PolicySimulator::V1::OrgPolicyViolationsPreviewService::Client, client
+    end
+  end
+
+  def test_org_policy_violations_preview_service_rest
+    skip unless Google::Cloud::PolicySimulator.org_policy_violations_preview_service_available? transport: :rest
+    Gapic::Rest::ClientStub.stub :new, DummyStub.new do
+      client = Google::Cloud::PolicySimulator.org_policy_violations_preview_service transport: :rest do |config|
+        config.credentials = :dummy_credentials
+      end
+      assert_kind_of Google::Cloud::PolicySimulator::V1::OrgPolicyViolationsPreviewService::Rest::Client, client
+    end
+  end
+
   def test_simulator_grpc
     skip unless Google::Cloud::PolicySimulator.simulator_available? transport: :grpc
     Gapic::ServiceStub.stub :new, DummyStub.new do
