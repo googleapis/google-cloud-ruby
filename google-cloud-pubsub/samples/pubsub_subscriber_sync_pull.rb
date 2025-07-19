@@ -18,10 +18,11 @@ def pull_messages subscription_id:
   # [START pubsub_subscriber_sync_pull]
   # subscription_id = "your-subscription-id"
 
-  pubsub = Google::Cloud::Pubsub.new
+  pubsub = Google::Cloud::PubSub.new
 
-  subscription = pubsub.subscription subscription_id
-  subscription.pull(immediate: false).each do |message|
+  subscriber = pubsub.subscriber subscription_id
+
+  subscriber.pull(immediate: false).each do |message|
     puts "Message pulled: #{message.data}"
     message.acknowledge!
   end

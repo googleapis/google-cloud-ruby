@@ -19,10 +19,12 @@ def create_pull_subscription topic_id:, subscription_id:
   # topic_id        = "your-topic-id"
   # subscription_id = "your-subscription-id"
 
-  pubsub = Google::Cloud::Pubsub.new
+  pubsub = Google::Cloud::PubSub.new
 
-  topic        = pubsub.topic topic_id
-  subscription = topic.subscribe subscription_id
+  subscription_admin = pubsub.subscription_admin
+
+  subscription = subscription_admin.create_subscription name: pubsub.subscription_path(subscription_id),
+                                                        topic: pubsub.topic_path(topic_id)
 
   puts "Pull subscription #{subscription_id} created."
   # [END pubsub_create_pull_subscription]

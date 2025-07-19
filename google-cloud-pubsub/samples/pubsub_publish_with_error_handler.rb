@@ -18,7 +18,7 @@ def publish_with_error_handler topic_id:
   # [START pubsub_publish_with_error_handler]
   # topic_id = "your-topic-id"
 
-  pubsub = Google::Cloud::Pubsub.new
+  pubsub = Google::Cloud::PubSub.new
 
   topic = pubsub.topic topic_id
 

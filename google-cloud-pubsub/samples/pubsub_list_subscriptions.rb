@@ -17,9 +17,11 @@ require "google/cloud/pubsub"
 def list_subscriptions
   # [START pubsub_list_subscriptions]
 
-  pubsub = Google::Cloud::Pubsub.new
+  pubsub = Google::Cloud::PubSub.new
 
-  subscriptions = pubsub.list_subscriptions
+  subscription_admin = pubsub.subscription_admin
+
+  subscriptions = subscription_admin.list_subscriptions project: pubsub.project_path
 
   puts "Subscriptions:"
   subscriptions.each do |subscription|

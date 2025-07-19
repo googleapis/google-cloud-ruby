@@ -17,9 +17,11 @@ require "google/cloud/pubsub"
 def list_topics
   # [START pubsub_list_topics]
 
-  pubsub = Google::Cloud::Pubsub.new
+  pubsub = Google::Cloud::PubSub.new
 
-  topics = pubsub.topics
+  topic_admin = pubsub.topic_admin
+
+  topics = topic_admin.list_topics project: pubsub.project_path
 
   puts "Topics in project:"
   topics.each do |topic|

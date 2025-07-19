@@ -19,7 +19,7 @@ def create_proto_schema schema_id:, proto_file:
   # schema_id = "your-schema-id"
   # proto_file = "path/to/a/proto/file/(.proto)/formatted/in/protocol/buffers"
 
-  pubsub = Google::Cloud::Pubsub.new
+  pubsub = Google::Cloud::PubSub.new
 
   definition = File.read proto_file
   schema = pubsub.create_schema schema_id, :protocol_buffer, definition
