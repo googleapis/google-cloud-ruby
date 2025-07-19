@@ -22,26 +22,26 @@ def publish_resume_publish topic_id:
 
   # Start sending messages in one request once the size of all queued messages
   # reaches 1 MB or the number of queued messages reaches 20
-  topic = pubsub.topic topic_id, async: {
+  publisher = pubsub.publisher topic_id, async: {
     max_bytes:    1_000_000,
     max_messages: 20
   }
-  topic.enable_message_ordering!
+  publisher.enable_message_ordering!
   10.times do |i|
-    topic.publish_async "This is message ##{i}.",
-                        ordering_key: "ordering-key" do |result|
+    publisher.publish_async "This is message ##{i}.",
+                            ordering_key: "ordering-key" do |result|
       if result.succeeded?
         puts "Message ##{i} successfully published."
       else
         puts "Message ##{i} failed to publish"
         # Allow publishing to continue on "ordering-key" after processing the
         # failure.
-        topic.resume_publish "ordering-key"
+        publisher.resume_publish "ordering-key"
       end
     end
   end
 
   # Stop the async_publisher to send all queued messages immediately.
-  topic.async_publisher.stop!
+  publisher.async_publisher.stop!
   # [END pubsub_resume_publish_with_ordering_keys]
 end

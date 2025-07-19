@@ -1,4 +1,4 @@
-# Copyright 2023 Google, Inc
+# Copyright 2025 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -14,19 +14,24 @@
 
 require "google/cloud/pubsub"
 
-def enable_subscription_ordering topic_id:, subscription_id:
-  # [START pubsub_enable_subscription_ordering]
-  # topic_id        = "your-topic-id"
-  # subscription_id = "your-subscription-id"
+def create_unwrapped_push_subscription topic_id:, subscription_id:, endpoint:
+  # [START pubsub_create_unwrapped_push_subscription]
+  # topic_id          = "your-topic-id"
+  # subscription_id   = "your-subscription-id"
+  # endpoint          = "https://your-test-project.appspot.com/push"
 
   pubsub = Google::Cloud::Pubsub.new
 
   subscription_admin = pubsub.subscription_admin
 
+  no_wrapper = Google::Cloud::PubSub::V1::PushConfig::NoWrapper.new write_metadata: true
+
+  push_config = Google::Cloud::PubSub::V1::PushConfig.new push_endpoint: endpoint, no_wrapper: no_wrapper
+
   subscription = subscription_admin.create_subscription name: pubsub.subscription_path(subscription_id),
                                                         topic: pubsub.topic_path(topic_id),
-                                                        enable_message_ordering: true
+                                                        push_config: push_config
 
-  puts "Pull subscription #{subscription_id} created with message ordering."
-  # [END pubsub_enable_subscription_ordering]
+  puts "Unwrapped push subscription #{subscription_id} created."
+  # [END pubsub_create_unwrapped_push_subscription]
 end

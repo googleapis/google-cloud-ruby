@@ -1,4 +1,4 @@
-# Copyright 2023 Google, Inc
+# Copyright 2025 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -14,16 +14,17 @@
 
 require "google/cloud/pubsub"
 
-def publish_message topic_id:
-  # [START pubsub_quickstart_publisher]
-  # topic_id = "your-topic-id"
+def get_schema_revision schema_id:, revision_id:
+  # [START pubsub_get_schema_revision]
+  # schema_id = "your-schema-id"
+  # revision_id = "your-revision-id"
 
   pubsub = Google::Cloud::Pubsub.new
 
-  publisher = pubsub.publisher topic_id
+  schemas = pubsub.schemas
 
-  publisher.publish "This is a test message."
+  schema = schemas.get_schema name: pubsub.schema_path("#{schema_id}@#{revision_id}")
 
-  puts "Message published."
-  # [END pubsub_quickstart_publisher]
+  puts "Schema #{schema.name} retrieved."
+  # [END pubsub_get_schema_revision]
 end

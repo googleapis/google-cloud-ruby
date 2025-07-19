@@ -1,4 +1,4 @@
-# Copyright 2023 Google, Inc
+# Copyright 2025 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -14,31 +14,36 @@
 
 require "google/cloud/pubsub"
 
-def listen_for_messages_with_error_handler subscription_id:
-  # [START pubsub_subscriber_error_listener]
+def optimistic_subscribe topic_id:, subscription_id:
+  # [START pubsub_optimistic_subscribe]
+  # topic_id = "your-topic-id"
   # subscription_id = "your-subscription-id"
 
   pubsub = Google::Cloud::Pubsub.new
 
-  subscriber = pubsub.subscriber subscription_id
-  listener   = subscriber.listen do |received_message|
-    puts "Received message: #{received_message.data}"
-    received_message.acknowledge!
-  end
   # Propagate expection from child threads to the main thread as soon as it is
   # raised. Exceptions happened in the callback thread are collected in the
   # callback thread pool and do not propagate to the main thread
   Thread.abort_on_exception = true
 
   begin
+    subscriber = pubsub.subscriber subscription_id
+    listener   = subscriber.listen do |received_message|
+      puts "Received message: #{received_message.data}"
+      received_message.acknowledge!
+    end
     listener.start
     # Let the main thread sleep for 60 seconds so the thread for listening
     # messages does not quit
     sleep 60
     listener.stop.wait!
-  rescue StandardError => e
-    puts "Exception #{e.inspect}: #{e.message}"
-    raise "Stopped listening for messages."
+  rescue Google::Cloud::NotFoundError => e
+    puts "Subscription #{subscription_id} does not exist."
+    subscription_admin = pubsub.subscription_admin
+
+    subscription = subscription_admin.create_subscription name: pubsub.subscription_path(subscription_id),
+                                                          topic: pubsub.topic_path(topic_id)
+    puts "Subscription #{subscription_id} created."
   end
-  # [END pubsub_subscriber_error_listener]
+  # [END pubsub_optimistic_subscribe]
 end

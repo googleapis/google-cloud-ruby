@@ -1,4 +1,4 @@
-# Copyright 2023 Google, Inc
+# Copyright 2025 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -14,16 +14,25 @@
 
 require "google/cloud/pubsub"
 
-def publish_message topic_id:
-  # [START pubsub_quickstart_publisher]
-  # topic_id = "your-topic-id"
+def commit_avro_schema schema_id:, avsc_file:
+  # [START pubsub_commit_avro_schema]
+  # schema_id = "your-schema-id"
+  # avsc_file = "path/to/a/avsc_file.avsc"
 
   pubsub = Google::Cloud::Pubsub.new
 
-  publisher = pubsub.publisher topic_id
+  schemas = pubsub.schemas
 
-  publisher.publish "This is a test message."
+  schema = schemas.get_schema name: pubsub.schema_path(schema_id)
 
-  puts "Message published."
-  # [END pubsub_quickstart_publisher]
+  definition = File.read avsc_file
+
+  schema.definition = definition
+
+  result = schemas.commit_schema name: schema.name,
+                                 schema: schema
+
+  puts "Schema commited with revision #{result.revision_id}."
+  result
+  # [END pubsub_commit_avro_schema]
 end
