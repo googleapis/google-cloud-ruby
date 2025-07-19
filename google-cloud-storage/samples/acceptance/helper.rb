@@ -40,6 +40,8 @@ end
 
 def delete_bucket_helper bucket_name
   storage_client = Google::Cloud::Storage.new
+  puts "project_name while deleting the bucket"
+  puts storage_client.project
   retry_resource_exhaustion do
     bucket = storage_client.bucket bucket_name
     return unless bucket
