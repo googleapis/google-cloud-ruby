@@ -14,7 +14,7 @@
 
 
 require "addressable/uri"
-require "cgi"
+require "cgi/escape"
 require "openssl"
 require "google/cloud/storage/errors"
 
