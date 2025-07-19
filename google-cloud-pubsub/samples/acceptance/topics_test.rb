@@ -16,6 +16,7 @@ require_relative "helper"
 require_relative "../pubsub_create_pull_subscription.rb"
 require_relative "../pubsub_create_push_subscription.rb"
 require_relative "../pubsub_create_topic_with_aws_msk_ingestion.rb"
+require_relative "../pubsub_create_topic_with_azure_event_hubs_ingestion.rb"
 require_relative "../pubsub_create_topic_with_cloud_storage_ingestion.rb"
 require_relative "../pubsub_create_topic_with_kinesis_ingestion.rb"
 require_relative "../pubsub_create_topic.rb"
@@ -93,6 +94,20 @@ describe "emulator" do
                                           msk_topic: "fake-msk-topic-name",
                                           aws_role_arn: aws_role_arn,
                                           gcp_service_account: gcp_service_account
+    end
+  end
+
+  it "supports pubsub_create_topic_with_azure_event_hubs_ingestion" do
+    # pubsub_create_topic_with_azure_event_hubs_ingestion
+    assert_output "Topic with Azure Event Hubs Ingestion projects/#{pubsub.project}/topics/#{topic_id} created.\n" do
+      create_topic_with_azure_event_hubs_ingestion topic_id: topic_id,
+                                                   resource_group: "fake-resource-group",
+                                                   namespace: "fake-namespace",
+                                                   event_hub: "fake-event-hub",
+                                                   client_id: "11111111-1111-1111-1111-11111111111",
+                                                   tenant_id: "22222222-2222-2222-2222-222222222222",
+                                                   subscription_id: "33333333-3333-3333-3333-333333333333",
+                                                   gcp_service_account: gcp_service_account
     end
   end
 end
