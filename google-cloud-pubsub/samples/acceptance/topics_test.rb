@@ -18,6 +18,7 @@ require_relative "../pubsub_create_push_subscription.rb"
 require_relative "../pubsub_create_topic_with_aws_msk_ingestion.rb"
 require_relative "../pubsub_create_topic_with_azure_event_hubs_ingestion.rb"
 require_relative "../pubsub_create_topic_with_cloud_storage_ingestion.rb"
+require_relative "../pubsub_create_topic_with_confluent_cloud_ingestion.rb"
 require_relative "../pubsub_create_topic_with_kinesis_ingestion.rb"
 require_relative "../pubsub_create_topic.rb"
 require_relative "../pubsub_create_unwrapped_push_subscription.rb"
@@ -108,6 +109,18 @@ describe "emulator" do
                                                    tenant_id: "22222222-2222-2222-2222-222222222222",
                                                    subscription_id: "33333333-3333-3333-3333-333333333333",
                                                    gcp_service_account: gcp_service_account
+    end
+  end
+
+  it "supports pubsub_create_topic_with_confluent_cloud_ingestion" do
+    # pubsub_create_topic_with_confluent_cloud_ingestion
+    assert_output "Topic with Confluent Cloud Ingestion projects/#{pubsub.project}/topics/#{topic_id} created.\n" do
+      create_topic_with_confluent_cloud_ingestion topic_id: topic_id,
+                                                  bootstrap_server: "fake-bootstrap-server-id.us-south1.gcp.confluent.cloud:9092",
+                                                  cluster_id: "fake-cluster-id",
+                                                  confluent_topic: "fake-confluent-topic-name",
+                                                  identity_pool_id: "fake-identity-pool-id",
+                                                  gcp_service_account: gcp_service_account
     end
   end
 end
