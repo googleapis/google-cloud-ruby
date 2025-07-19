@@ -13,6 +13,7 @@
 # limitations under the License.
 
 require_relative "helper"
+require_relative "../pubsub_create_cloud_storage_subscription.rb"
 require_relative "../pubsub_create_pull_subscription.rb"
 require_relative "../pubsub_create_push_subscription.rb"
 require_relative "../pubsub_create_topic_with_aws_msk_ingestion.rb"
@@ -50,6 +51,7 @@ describe "emulator" do
   let(:topic_admin) { pubsub.topic_admin }
   let(:aws_role_arn) { "arn:aws:iam::111111111111:role/fake-role-name" }
   let(:gcp_service_account) { "fake-service-account@project.iam.gserviceaccount.com" }
+  let(:subscription_admin) { pubsub.subscription_admin }
 
   before do
     pubsub_emulator_host = ENV["PUBSUB_EMULATOR_HOST"]
@@ -139,6 +141,26 @@ describe "emulator" do
                         aws_role_arn: aws_role_arn,
                         gcp_service_account: gcp_service_account
     end
+  end
+
+  it "supports pubsub_create_topic, pubsub_create_cloud_storage_subscription" do
+    # pubsub_create_topic
+    assert_output "Topic projects/#{pubsub.project}/topics/#{topic_id} created.\n" do
+      create_topic topic_id: topic_id
+    end
+
+    subscription_id = random_subscription_id
+    bucket_id = random_bucket_id
+
+    # pubsub_create_cloud_storage_subscription
+    assert_output "Cloud storage subscription #{subscription_id} created.\n" do
+      create_cloud_storage_subscription topic_id: topic_id, subscription_id: subscription_id, bucket: bucket_id 
+    end
+    @subscription = subscription_admin.get_subscription subscription: pubsub.subscription_path(subscription_id)
+    assert @subscription
+    assert_equal "projects/#{pubsub.project}/subscriptions/#{subscription_id}", @subscription.name
+    assert_equal bucket_id, @subscription.cloud_storage_config.bucket
+    subscription_admin.delete_subscription subscription: @subscription.name
   end
 end
 
