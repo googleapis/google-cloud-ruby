@@ -19,6 +19,7 @@ require_relative "../pubsub_create_avro_schema"
 require_relative "../pubsub_create_topic_with_schema"
 require_relative "../pubsub_create_proto_schema"
 require_relative "../pubsub_delete_schema"
+require_relative "../pubsub_delete_schema_revision"
 require_relative "../pubsub_get_schema"
 require_relative "../pubsub_get_schema_revision"
 require_relative "../pubsub_list_schema_revisions"
@@ -39,6 +40,7 @@ describe "schemas" do
   let(:subscription_admin) { pubsub.subscription_admin }
   let(:schemas) { pubsub.schemas }
   let(:proto_file) { File.expand_path "data/us-states.proto", __dir__ }
+  let(:revision_file) { File.expand_path "data/us-states-revision.proto", __dir__ }
 
   after do
     subscription_admin.delete_subscription subscription: @subscription.name if @subscription
@@ -74,7 +76,7 @@ describe "schemas" do
     end
   end
 
-  it "supports pubsub_create_proto_schema, pubsub_get_schema_revision" do
+  it "supports pubsub_create_proto_schema, pubsub_get_schema_revision, pubsub_commit_proto_schema, pubsub_delete_schema_revision" do
     # create_proto_schema
     assert_output "Schema projects/#{pubsub.project}/schemas/#{schema_id} created.\n" do
       create_proto_schema schema_id: schema_id, proto_file: proto_file
@@ -86,6 +88,18 @@ describe "schemas" do
     # pubsub_get_schema_revision
     assert_output "Schema projects/#{pubsub.project}/schemas/#{schema_id}@#{@schema.revision_id} retrieved.\n" do
       get_schema_revision schema_id: schema_id, revision_id: @schema.revision_id
+    end
+
+    # pubsub_commit_proto_schema
+    revised_schema = nil
+    out, _err = capture_io do
+      revised_schema = commit_proto_schema schema_id: schema_id, proto_file: revision_file
+    end
+    assert_includes out, "Schema commited with revision #{revised_schema.revision_id}."
+
+    #pubsub_delete_schema_revision
+    assert_output "Schema #{schema_id}@#{revised_schema.revision_id} deleted.\n" do
+      delete_schema_revision schema_id: schema_id, revision_id: revised_schema.revision_id
     end
   end
 
