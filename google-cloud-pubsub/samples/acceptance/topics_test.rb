@@ -42,6 +42,7 @@ require_relative "../pubsub_quickstart_publisher.rb"
 require_relative "../pubsub_resume_publish_with_ordering_keys.rb"
 require_relative "../pubsub_set_topic_policy.rb"
 require_relative "../pubsub_test_topic_permissions.rb"
+require_relative "../pubsub_update_topic_type.rb"
 
 describe "emulator" do
   let(:pubsub) { Google::Cloud::Pubsub.new }
@@ -121,6 +122,22 @@ describe "emulator" do
                                                   confluent_topic: "fake-confluent-topic-name",
                                                   identity_pool_id: "fake-identity-pool-id",
                                                   gcp_service_account: gcp_service_account
+    end
+  end
+
+  it "supports pubsub_create_topic, pubsub_update_topic_type" do
+    # pubsub_create_topic
+    assert_output "Topic projects/#{pubsub.project}/topics/#{topic_id} created.\n" do
+      create_topic topic_id: topic_id
+    end
+
+    # pubsub_update_topic_type
+    assert_output "Topic projects/#{pubsub.project}/topics/#{topic_id} updated.\n" do
+      update_topic_type topic_id: topic_id,
+                        stream_arn: "arn:aws:kinesis:us-west-2:111111111111:stream/fake-stream-name",
+                        consumer_arn: "arn:aws:kinesis:us-west-2:111111111111:stream/fake-stream-name/consumer/consumer-1:1111111111",
+                        aws_role_arn: aws_role_arn,
+                        gcp_service_account: gcp_service_account
     end
   end
 end
