@@ -57,9 +57,24 @@ module Google
           # @return [Google::Protobuf::Timestamp]
           attr_reader :read_time
 
+          # Query explain metrics. This is only present when the
+          # [RunQueryRequest.explain_options][google.datastore.v1.RunQueryRequest.explain_options]
+          # is provided, and it is sent only once with or after the last QueryResults batch.
+          #
+          # @return [Google::Cloud::Datastore::V1::ExplainMetrics, nil]
+          attr_reader :explain_metrics
+
+          ##
+          # The options for query explanation.
+          #
+          # This is a copy of the input parameter supplied to the {Dataset#run_aggregation} function.
+          #
+          # @return [Google::Cloud::Datastore::V1::ExplainOptions, nil]
+          attr_reader :explain_options
+
           ##
           # @private
-          attr_writer :aggregate_fields, :read_time
+          attr_writer :aggregate_fields, :read_time, :explain_metrics, :explain_options
 
           ##
           # Retrieves the aggregate data.
@@ -113,22 +128,33 @@ module Google
           ##
           # @private New AggregateQueryResults from a
           # Google::Cloud::Datastore::V1::RunAggregationQueryResponse object.
-          def self.from_grpc aggregate_query_response
-            aggregate_fields = aggregate_query_response
-                               .batch
-                               .aggregation_results[0]
-                               .aggregate_properties
-                               .map do |aggregate_alias, value|
-                                 if value.has_integer_value?
-                                   [aggregate_alias, value.integer_value]
-                                 else
-                                   [aggregate_alias, value.double_value]
-                                 end
-                               end
+          def self.from_grpc aggregate_query_response, explain_options
+            # If the aggregate query is run with explain_options and analyze = false,
+            # the RunAggregationQueryResponse will not have batch results
+            # only explain metrics.
+            aggregate_fields = {}
+            read_time = nil
+
+            if aggregate_query_response.batch
+              aggregate_fields = aggregate_query_response
+                                 .batch
+                                 .aggregation_results[0]
+                                 .aggregate_properties
+                                 .map do |aggregate_alias, value|
+                if value.has_integer_value?
+                  [aggregate_alias, value.integer_value]
+                else
+                  [aggregate_alias, value.double_value]
+                end
+              end
+              read_time = aggregate_query_response.batch.read_time
+            end
 
             new.tap do |aq_result|
+              aq_result.explain_options = explain_options
+              aq_result.explain_metrics = aggregate_query_response.explain_metrics
               aq_result.aggregate_fields = aggregate_fields.to_h
-              aq_result.read_time = aggregate_query_response.batch.read_time
+              aq_result.read_time = read_time
             end
           end
         end

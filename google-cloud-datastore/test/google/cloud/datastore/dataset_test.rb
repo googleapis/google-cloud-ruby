@@ -1078,6 +1078,57 @@ describe Google::Cloud::Datastore::Dataset, :mock_datastore do
     _(entities.explain_options).must_equal explain_options
   end
 
+  let(:run_aggregation_query_res) do
+    Google::Cloud::Datastore::V1::RunAggregationQueryResponse.new(
+      batch: Google::Cloud::Datastore::V1::AggregationResultBatch.new(
+        aggregation_results: [
+          Google::Cloud::Datastore::V1::AggregationResult.new(
+            aggregate_properties: {
+              "count" => Google::Cloud::Datastore::V1::Value.new(integer_value: 3)
+            }
+          )
+        ]
+      )
+    )
+  end
+  let(:run_aggregation_query_res_with_explain) do
+    run_aggregation_query_res.dup.tap do |response|
+      response.explain_metrics = Google::Cloud::Datastore::V1::ExplainMetrics.new
+    end
+  end
+  let(:aggregate_query) { dataset.query("User").aggregate_query.add_count }
+
+  it "run_aggregation will fulfill an aggregate query" do
+    dataset.service.mocked_service.expect :run_aggregation_query, run_aggregation_query_res,
+      project_id: project,
+      partition_id: nil,
+      read_options: nil,
+      aggregation_query: aggregate_query.to_grpc,
+      gql_query: nil,
+      explain_options: nil
+
+    results = dataset.run_aggregation aggregate_query
+    _(results.get("count")).must_equal 3
+  end
+
+  it "run_aggregation will fulfill an aggregate query with explain_options" do
+    explain_options = { analyze: true }
+    explain_options_grpc = Google::Cloud::Datastore::V1::ExplainOptions.new analyze: true
+
+    dataset.service.mocked_service.expect :run_aggregation_query, run_aggregation_query_res_with_explain,
+      project_id: project,
+      partition_id: nil,
+      read_options: nil,
+      aggregation_query: aggregate_query.to_grpc,
+      gql_query: nil,
+      explain_options: explain_options_grpc
+
+    results = dataset.run_aggregation aggregate_query, explain_options: explain_options
+    _(results.get("count")).must_equal 3
+    _(results.explain_metrics).must_be_kind_of Google::Cloud::Datastore::V1::ExplainMetrics
+    _(results.explain_options).must_equal explain_options
+  end
+
   it "run will raise when given an unknown argument" do
     expect do
       entities = dataset.run 123

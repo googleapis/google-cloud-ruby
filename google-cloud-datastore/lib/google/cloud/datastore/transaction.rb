@@ -311,6 +311,59 @@ module Google
         alias run_query run
 
         ##
+        # Retrieve aggregate query results specified by an AggregateQuery. The query is run within the
+        # transaction.
+        #
+        # @param [AggregateQuery, GqlQuery] aggregate_query The Query object
+        #   with the search criteria.
+        # @param [String] namespace The namespace the query is to run within.
+        # @param [Hash, Google::Cloud::Datastore::V1::ExplainOptions] explain_options
+        #   The options for query explanation. See {Google::Cloud::Datastore::V1::ExplainOptions}
+        #   for details. Optional.
+        #
+        # @return [Google::Cloud::Datastore::Dataset::AggregateQueryResults]
+        #
+        # @example
+        #   require "google/cloud/datastore"
+        #
+        #   datastore = Google::Cloud::Datastore.new
+        #
+        #   datastore.transaction do |tx|
+        #     query = tx.query("Task")
+        #               .where("done", "=", false)
+        #     aggregate_query = query.aggregate_query
+        #                            .add_count
+        #     res = tx.run_aggregation aggregate_query
+        #   end
+        #
+        # @example Run the aggregate query with explain options:
+        #   require "google/cloud/datastore"
+        #
+        #   datastore = Google::Cloud::Datastore.new
+        #
+        #   datastore.transaction do |tx|
+        #     query = tx.query("Task")
+        #     aggregate_query = query.aggregate_query.add_count aggregate_alias: "total"
+        #     results = tx.run_aggregation aggregate_query, explain_options: { analyze: true }
+        #
+        #     if results.explain_metrics
+        #       stats = results.explain_metrics.execution_stats
+        #       puts "Read operations: #{stats.read_operations}"
+        #     end
+        #   end
+        #
+        def run_aggregation aggregate_query, namespace: nil, explain_options: nil
+          ensure_service!
+          unless aggregate_query.is_a?(AggregateQuery) || aggregate_query.is_a?(GqlQuery)
+            raise ArgumentError, "Cannot run a #{aggregate_query.class} object."
+          end
+          aggregate_query_results = service.run_aggregation_query aggregate_query.to_grpc, namespace,
+                                                                  transaction: @id,
+                                                                  explain_options: explain_options
+          Dataset::AggregateQueryResults.from_grpc aggregate_query_results, explain_options
+        end
+
+        ##
         # Begins a transaction.
         # This method is run when a new Transaction is created.
         def start
