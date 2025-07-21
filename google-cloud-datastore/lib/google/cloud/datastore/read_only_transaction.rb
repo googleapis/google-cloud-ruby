@@ -236,14 +236,34 @@ module Google
         #                            .add_count
         #     res = tx.run_aggregation aggregate_query
         #   end
+        # @example Run the aggregate query with explain options:
+        #   require "google/cloud/datastore"
         #
-        def run_aggregation aggregate_query, namespace: nil
+        #   datastore = Google::Cloud::Datastore.new
+        #
+        #   datastore.read_only_transaction do |tx|
+        #     query = tx.query("Task")
+        #     aggregate_query = query.aggregate_query.add_count aggregate_alias: "total"
+        #     results = tx.run_aggregation aggregate_query, explain_options: { analyze: true }
+        #
+        #     if results.explain_metrics
+        #       stats = results.explain_metrics.execution_stats
+        #       puts "Read operations: #{stats.read_operations}"
+        #     end
+        #   end
+        #
+        def run_aggregation aggregate_query, namespace: nil, explain_options: nil
           ensure_service!
           unless aggregate_query.is_a?(AggregateQuery) || aggregate_query.is_a?(GqlQuery)
             raise ArgumentError, "Cannot run a #{aggregate_query.class} object."
           end
-          aggregate_query_results = service.run_aggregation_query aggregate_query.to_grpc, namespace, transaction: @id
-          Dataset::AggregateQueryResults.from_grpc aggregate_query_results
+
+          aggregate_query_results = service.run_aggregation_query aggregate_query.to_grpc,
+                                                                  namespace,
+                                                                  transaction: @id,
+                                                                  explain_options: explain_options
+
+          Dataset::AggregateQueryResults.from_grpc aggregate_query_results, explain_options
         end
 
         ##
