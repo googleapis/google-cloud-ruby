@@ -57,9 +57,9 @@ module Google
           # @return [Google::Protobuf::Timestamp]
           attr_reader :read_time
 
-          # Query explain metrics. This is only present when the
-          # [RunQueryRequest.explain_options][google.datastore.v1.RunQueryRequest.explain_options]
-          # is provided, and it is sent only once with or after the last QueryResults batch.
+          # Query explain metrics. This is only present when the `explain_options`
+          # are provided to {Google::Cloud::Datastore::Dataset#run_aggregation}.
+          # It is sent only once with the response.
           #
           # @return [Google::Cloud::Datastore::V1::ExplainMetrics, nil]
           attr_reader :explain_metrics
