@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright 2023 Google LLC
+# Copyright 2025 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -22,7 +22,7 @@ module Google
   module Cloud
     module PolicySimulator
       module V1
-        module Simulator
+        module OrgPolicyViolationsPreviewService
           module Rest
             # Service that implements Longrunning Operations API.
             class Operations
@@ -36,7 +36,7 @@ module Google
               attr_reader :operations_stub
 
               ##
-              # Configuration for the Simulator Operations API.
+              # Configuration for the OrgPolicyViolationsPreviewService Operations API.
               #
               # @yield [config] Configure the Operations client.
               # @yieldparam config [Operations::Configuration]
@@ -50,7 +50,7 @@ module Google
               end
 
               ##
-              # Configure the Simulator Operations instance.
+              # Configure the OrgPolicyViolationsPreviewService Operations instance.
               #
               # The configuration is set to the derived mode, meaning that values can be changed,
               # but structural changes (adding new fields, etc.) are not allowed. Structural changes

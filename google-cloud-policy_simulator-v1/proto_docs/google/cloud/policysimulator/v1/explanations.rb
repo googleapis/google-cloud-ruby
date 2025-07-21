@@ -64,7 +64,7 @@ module Google
         #     permission for the resource. There might be another policy that overrides
         #     this policy. To determine whether the principal actually has the
         #     permission, use the `access` field in the
-        #     [TroubleshootIamPolicyResponse][IamChecker.TroubleshootIamPolicyResponse].
+        #     [TroubleshootIamPolicyResponse][google.cloud.policytroubleshooter.v3.TroubleshootIamPolicyResponse].
         # @!attribute [rw] full_resource_name
         #   @return [::String]
         #     The full resource name that identifies the resource. For example,
@@ -94,7 +94,7 @@ module Google
         # @!attribute [rw] relevance
         #   @return [::Google::Cloud::PolicySimulator::V1::HeuristicRelevance]
         #     The relevance of this policy to the overall determination in the
-        #     [TroubleshootIamPolicyResponse][IamChecker.TroubleshootIamPolicyResponse].
+        #     [TroubleshootIamPolicyResponse][google.cloud.policytroubleshooter.v3.TroubleshootIamPolicyResponse].
         #
         #     If the user who created the
         #     {::Google::Cloud::PolicySimulator::V1::Replay Replay} does not have
@@ -115,7 +115,7 @@ module Google
         #     permission for the resource. There might be another binding that overrides
         #     this binding. To determine whether the principal actually has the
         #     permission, use the `access` field in the
-        #     [TroubleshootIamPolicyResponse][IamChecker.TroubleshootIamPolicyResponse].
+        #     [TroubleshootIamPolicyResponse][google.cloud.policytroubleshooter.v3.TroubleshootIamPolicyResponse].
         # @!attribute [rw] role
         #   @return [::String]
         #     The role that this binding grants. For example,
