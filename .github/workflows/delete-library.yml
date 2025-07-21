@@ -1,17 +1,17 @@
-name: Mark Library Obsolete
+name: Delete a library
 
 on:
   workflow_dispatch:
     inputs:
       gem:
-        description: "gem name to obsolete"
+        description: "name of gem to remove"
         required: true
       flags:
-        description: "Extra flags to pass to toys obsolete-library"
+        description: "Extra flags to pass to toys delete-library"
         required: false
 
 jobs:
-  ObsoleteLibrary:
+  DeleteLibrary:
     if: ${{ github.repository == 'googleapis/google-cloud-ruby' }}
     runs-on: ubuntu-latest
     env:
@@ -19,13 +19,13 @@ jobs:
     steps:
     - name: Checkout repo
       uses: actions/checkout@v4
-    - name: Install Ruby 3.3
+    - name: Install Ruby 3.4
       uses: ruby/setup-ruby@v1
       with:
-        ruby-version: "3.3"
+        ruby-version: "3.4"
     - name: Install tools
       run: |
         gem install --no-document toys
-    - name: Obsolete-library
+    - name: Delete-library
       run: |
-        toys obsolete-library -v --fork ${{ github.event.inputs.flags }} ${{ github.event.inputs.gem }}
+        toys delete-library -v --fork ${{ github.event.inputs.flags }} ${{ github.event.inputs.gem }}
