@@ -960,7 +960,8 @@ module Google
             #   @param rules [::Array<::Google::Cloud::Bigtable::V2::ReadModifyWriteRule, ::Hash>]
             #     Required. Rules specifying how the specified row's contents are to be
             #     transformed into writes. Entries are applied in order, meaning that earlier
-            #     rules will affect the results of later ones.
+            #     rules will affect the results of later ones. At least one entry must be
+            #     specified, and there can be at most 100000 rules.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::Bigtable::V2::ReadModifyWriteRowResponse]
@@ -1035,10 +1036,10 @@ module Google
             end
 
             ##
-            # NOTE: This API is intended to be used by Apache Beam BigtableIO.
             # Returns the current list of partitions that make up the table's
             # change stream. The union of partitions will cover the entire keyspace.
             # Partitions can be read with `ReadChangeStream`.
+            # NOTE: This API is only intended to be used by Apache Beam BigtableIO.
             #
             # @overload generate_initial_change_stream_partitions(request, options = nil)
             #   Pass arguments to `generate_initial_change_stream_partitions` via a request object, either of type
@@ -1133,10 +1134,10 @@ module Google
             end
 
             ##
-            # NOTE: This API is intended to be used by Apache Beam BigtableIO.
             # Reads changes from a table's change stream. Changes will
             # reflect both user-initiated mutations and mutations that are caused by
             # garbage collection.
+            # NOTE: This API is only intended to be used by Apache Beam BigtableIO.
             #
             # @overload read_change_stream(request, options = nil)
             #   Pass arguments to `read_change_stream` via a request object, either of type
@@ -1177,10 +1178,10 @@ module Google
             #     the position. Tokens are delivered on the stream as part of `Heartbeat`
             #     and `CloseStream` messages.
             #
-            #     If a single token is provided, the token’s partition must exactly match
-            #     the request’s partition. If multiple tokens are provided, as in the case
+            #     If a single token is provided, the token's partition must exactly match
+            #     the request's partition. If multiple tokens are provided, as in the case
             #     of a partition merge, the union of the token partitions must exactly
-            #     cover the request’s partition. Otherwise, INVALID_ARGUMENT will be
+            #     cover the request's partition. Otherwise, INVALID_ARGUMENT will be
             #     returned.
             #
             #     Note: The following parameters are mutually exclusive: `continuation_tokens`, `start_time`. At most one of these parameters can be set. If more than one is set, only one will be used, and it is not defined which one.

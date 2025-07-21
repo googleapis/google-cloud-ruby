@@ -109,25 +109,11 @@ module Google
         #     key, allowing the client to skip that work on a retry.
         # @!attribute [rw] request_stats
         #   @return [::Google::Cloud::Bigtable::V2::RequestStats]
-        #     If requested, provide enhanced query performance statistics. The semantics
-        #     dictate:
-        #       * request_stats is empty on every (streamed) response, except
-        #       * request_stats has non-empty information after all chunks have been
-        #         streamed, where the ReadRowsResponse message only contains
-        #         request_stats.
-        #           * For example, if a read request would have returned an empty
-        #             response instead a single ReadRowsResponse is streamed with empty
-        #             chunks and request_stats filled.
-        #
-        #     Visually, response messages will stream as follows:
-        #        ... -> \\{chunks: [...]} -> \\{chunks: [], request_stats: \\{...}}
-        #       \______________________/  \________________________________/
-        #           Primary response         Trailer of RequestStats info
-        #
-        #     Or if the read did not return any values:
-        #       \\{chunks: [], request_stats: \\{...}}
-        #       \________________________________/
-        #          Trailer of RequestStats info
+        #     If requested, return enhanced query performance statistics. The field
+        #     request_stats is empty in a streamed response unless the ReadRowsResponse
+        #     message contains request_stats in the last message of the stream. Always
+        #     returned when requested, even when the read request returns an empty
+        #     response.
         class ReadRowsResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -385,7 +371,7 @@ module Google
         #     target load should be 80. After adjusting, the client should ignore
         #     `factor` until another `period` has passed.
         #
-        #     The client can measure its load using any unit that's comparable over time
+        #     The client can measure its load using any unit that's comparable over time.
         #     For example, QPS can be used as long as each request involves a similar
         #     amount of work.
         class RateLimitInfo
@@ -499,7 +485,8 @@ module Google
         #   @return [::Array<::Google::Cloud::Bigtable::V2::ReadModifyWriteRule>]
         #     Required. Rules specifying how the specified row's contents are to be
         #     transformed into writes. Entries are applied in order, meaning that earlier
-        #     rules will affect the results of later ones.
+        #     rules will affect the results of later ones. At least one entry must be
+        #     specified, and there can be at most 100000 rules.
         class ReadModifyWriteRowRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -573,10 +560,10 @@ module Google
         #     the position. Tokens are delivered on the stream as part of `Heartbeat`
         #     and `CloseStream` messages.
         #
-        #     If a single token is provided, the token’s partition must exactly match
-        #     the request’s partition. If multiple tokens are provided, as in the case
+        #     If a single token is provided, the token's partition must exactly match
+        #     the request's partition. If multiple tokens are provided, as in the case
         #     of a partition merge, the union of the token partitions must exactly
-        #     cover the request’s partition. Otherwise, INVALID_ARGUMENT will be
+        #     cover the request's partition. Otherwise, INVALID_ARGUMENT will be
         #     returned.
         #
         #     Note: The following fields are mutually exclusive: `continuation_tokens`, `start_time`. If a field in that set is populated, all other fields in the set will automatically be cleared.
@@ -696,8 +683,8 @@ module Google
           #     An estimate of the commit timestamp that is usually lower than or equal
           #     to any timestamp for a record that will be delivered in the future on the
           #     stream. It is possible that, under particular circumstances that a future
-          #     record has a timestamp is is lower than a previously seen timestamp. For
-          #     an example usage see
+          #     record has a timestamp that is lower than a previously seen timestamp.
+          #     For an example usage see
           #     https://beam.apache.org/documentation/basics/#watermarks
           class DataChange
             include ::Google::Protobuf::MessageExts
@@ -731,8 +718,8 @@ module Google
           #     An estimate of the commit timestamp that is usually lower than or equal
           #     to any timestamp for a record that will be delivered in the future on the
           #     stream. It is possible that, under particular circumstances that a future
-          #     record has a timestamp is is lower than a previously seen timestamp. For
-          #     an example usage see
+          #     record has a timestamp that is lower than a previously seen timestamp.
+          #     For an example usage see
           #     https://beam.apache.org/documentation/basics/#watermarks
           class Heartbeat
             include ::Google::Protobuf::MessageExts
@@ -745,17 +732,19 @@ module Google
           # If `continuation_tokens` & `new_partitions` are present, then a change in
           # partitioning requires the client to open a new stream for each token to
           # resume reading. Example:
-          #                                  [B,      D) ends
-          #                                       |
-          #                                       v
-          #               new_partitions:  [A,  C) [C,  E)
-          # continuation_tokens.partitions:  [B,C) [C,D)
-          #                                  ^---^ ^---^
-          #                                  ^     ^
-          #                                  |     |
-          #                                  |     StreamContinuationToken 2
-          #                                  |
-          #                                  StreamContinuationToken 1
+          #
+          #                                      [B,      D) ends
+          #                                           |
+          #                                           v
+          #                   new_partitions:  [A,  C) [C,  E)
+          #     continuation_tokens.partitions:  [B,C) [C,D)
+          #                                      ^---^ ^---^
+          #                                      ^     ^
+          #                                      |     |
+          #                                      |     StreamContinuationToken 2
+          #                                      |
+          #                                      StreamContinuationToken 1
+          #
           # To read the new partition [A,C), supply the continuation tokens whose
           # ranges cover the new partition, for example ContinuationToken[A,B) &
           # ContinuationToken[B,C).

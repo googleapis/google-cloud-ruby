@@ -62,15 +62,15 @@ module Google
             # timestamp is the greater of the existing timestamp or the current server
             # time. The method returns the new contents of all modified cells.
             rpc :ReadModifyWriteRow, ::Google::Cloud::Bigtable::V2::ReadModifyWriteRowRequest, ::Google::Cloud::Bigtable::V2::ReadModifyWriteRowResponse
-            # NOTE: This API is intended to be used by Apache Beam BigtableIO.
             # Returns the current list of partitions that make up the table's
             # change stream. The union of partitions will cover the entire keyspace.
             # Partitions can be read with `ReadChangeStream`.
+            # NOTE: This API is only intended to be used by Apache Beam BigtableIO.
             rpc :GenerateInitialChangeStreamPartitions, ::Google::Cloud::Bigtable::V2::GenerateInitialChangeStreamPartitionsRequest, stream(::Google::Cloud::Bigtable::V2::GenerateInitialChangeStreamPartitionsResponse)
-            # NOTE: This API is intended to be used by Apache Beam BigtableIO.
             # Reads changes from a table's change stream. Changes will
             # reflect both user-initiated mutations and mutations that are caused by
             # garbage collection.
+            # NOTE: This API is only intended to be used by Apache Beam BigtableIO.
             rpc :ReadChangeStream, ::Google::Cloud::Bigtable::V2::ReadChangeStreamRequest, stream(::Google::Cloud::Bigtable::V2::ReadChangeStreamResponse)
             # Prepares a GoogleSQL query for execution on a particular Bigtable instance.
             rpc :PrepareQuery, ::Google::Cloud::Bigtable::V2::PrepareQueryRequest, ::Google::Cloud::Bigtable::V2::PrepareQueryResponse
