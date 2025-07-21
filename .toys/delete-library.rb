@@ -14,7 +14,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-desc "A tool that obsoletes a client library"
+desc "A tool that removes a client library from the repository"
 
 required_arg :gem_name
 
@@ -32,17 +32,16 @@ include "yoshi-pr-generator"
 def run
   setup
   branch_name = "pr/delete/#{gem_name}"
-  message = "chore: obsolete #{gem_name}"
+  message = "chore: remove #{gem_name}"
   result = yoshi_pr_generator.capture enabled: !git_remote.nil?,
                                       remote: git_remote,
                                       branch_name: branch_name,
                                       commit_message: message do
     remove_release_manifest
     remove_release_config
-    remove_owlbot_config
     remove_directory
   end
-  puts "result: #{result}"
+  puts "Pull request result: #{result}"
 end
 
 def setup
@@ -66,12 +65,6 @@ def remove_release_config
   File.write "release-please-config.json", "#{JSON.pretty_generate config_json}\n"
 end
 
-def remove_owlbot_config
-  rm_f "#{gem_name}/.OwlBot.yaml"
-  rm_f "#{gem_name}/.owlbot-manifest.json"
-  rm_f "#{gem_name}/.owlbot.rb"
-end
-
 def remove_directory
-  mv gem_name, "obsolete/#{gem_name}"
+  rm_rf gem_name
 end
