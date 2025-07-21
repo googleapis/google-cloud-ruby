@@ -32,9 +32,9 @@ In order to use this library, you first need to go through the following steps:
 ```ruby
 require "google/cloud/policy_simulator/v1"
 
-client = ::Google::Cloud::PolicySimulator::V1::Simulator::Client.new
-request = ::Google::Cloud::PolicySimulator::V1::GetReplayRequest.new # (request fields as keyword arguments...)
-response = client.get_replay request
+client = ::Google::Cloud::PolicySimulator::V1::OrgPolicyViolationsPreviewService::Client.new
+request = ::Google::Cloud::PolicySimulator::V1::ListOrgPolicyViolationsPreviewsRequest.new # (request fields as keyword arguments...)
+response = client.list_org_policy_violations_previews request
 ```
 
 View the [Client Library Documentation](https://cloud.google.com/ruby/docs/reference/google-cloud-policy_simulator-v1/latest)
@@ -75,7 +75,7 @@ constructing a client object. For example:
 require "google/cloud/policy_simulator/v1"
 require "logger"
 
-client = ::Google::Cloud::PolicySimulator::V1::Simulator::Client.new do |config|
+client = ::Google::Cloud::PolicySimulator::V1::OrgPolicyViolationsPreviewService::Client.new do |config|
   config.logger = Logger.new "my-app.log"
 end
 ```
