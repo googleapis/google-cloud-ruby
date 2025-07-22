@@ -88,8 +88,7 @@ module Google
 
         # RequestStats is the container for additional information pertaining to a
         # single request, helpful for evaluating the performance of the sent request.
-        # Currently, there are the following supported methods:
-        #   * google.bigtable.v2.ReadRows
+        # Currently, the following method is supported: google.bigtable.v2.ReadRows
         # @!attribute [rw] full_read_stats_view
         #   @return [::Google::Cloud::Bigtable::V2::FullReadStatsView]
         #     Available with the ReadRowsRequest.RequestStatsView.REQUEST_STATS_FULL
