@@ -18,9 +18,11 @@ def get_schema schema_id:
   # [START pubsub_get_schema]
   # schema_id = "your-schema-id"
 
-  pubsub = Google::Cloud::Pubsub.new
+  pubsub = Google::Cloud::PubSub.new
 
-  schema = pubsub.schema schema_id
+  schemas = pubsub.schemas
+
+  schema = schemas.get_schema name: pubsub.schema_path(schema_id)
 
   puts "Schema #{schema.name} retrieved."
   # [END pubsub_get_schema]
