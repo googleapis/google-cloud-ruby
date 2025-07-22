@@ -41,6 +41,7 @@ module Google
         #     net.ipv4.tcp_rmem
         #     net.ipv4.tcp_wmem
         #     net.ipv4.tcp_tw_reuse
+        #     net.ipv4.tcp_max_orphans
         #     net.netfilter.nf_conntrack_max
         #     net.netfilter.nf_conntrack_buckets
         #     net.netfilter.nf_conntrack_tcp_timeout_close_wait
@@ -50,13 +51,46 @@ module Google
         #     kernel.shmmni
         #     kernel.shmmax
         #     kernel.shmall
+        #     fs.aio-max-nr
+        #     fs.file-max
+        #     fs.inotify.max_user_instances
+        #     fs.inotify.max_user_watches
+        #     fs.nr_open
+        #     vm.dirty_background_ratio
+        #     vm.dirty_expire_centisecs
+        #     vm.dirty_ratio
+        #     vm.dirty_writeback_centisecs
         #     vm.max_map_count
+        #     vm.overcommit_memory
+        #     vm.overcommit_ratio
+        #     vm.vfs_cache_pressure
+        #     vm.swappiness
+        #     vm.watermark_scale_factor
+        #     vm.min_free_kbytes
         # @!attribute [rw] cgroup_mode
         #   @return [::Google::Cloud::Container::V1beta1::LinuxNodeConfig::CgroupMode]
         #     cgroup_mode specifies the cgroup mode to be used on the node.
         # @!attribute [rw] hugepages
         #   @return [::Google::Cloud::Container::V1beta1::LinuxNodeConfig::HugepagesConfig]
         #     Optional. Amounts for 2M and 1G hugepages
+        # @!attribute [rw] transparent_hugepage_enabled
+        #   @return [::Google::Cloud::Container::V1beta1::LinuxNodeConfig::TransparentHugepageEnabled]
+        #     Optional. Transparent hugepage support for anonymous memory can be entirely
+        #     disabled (mostly for debugging purposes) or only enabled inside
+        #     MADV_HUGEPAGE regions (to avoid the risk of consuming more memory
+        #     resources) or enabled system wide.
+        #
+        #     See https://docs.kernel.org/admin-guide/mm/transhuge.html
+        #     for more details.
+        # @!attribute [rw] transparent_hugepage_defrag
+        #   @return [::Google::Cloud::Container::V1beta1::LinuxNodeConfig::TransparentHugepageDefrag]
+        #     Optional. Defines the transparent hugepage defrag configuration on the
+        #     node. VM hugepage allocation can be managed by either limiting
+        #     defragmentation for delayed allocation or skipping it entirely for
+        #     immediate allocation only.
+        #
+        #     See https://docs.kernel.org/admin-guide/mm/transhuge.html
+        #     for more details.
         class LinuxNodeConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -95,6 +129,55 @@ module Google
             # CGROUP_MODE_V2 specifies to use cgroupv2 for the cgroup configuration on
             # the node image.
             CGROUP_MODE_V2 = 2
+          end
+
+          # Possible values for transparent hugepage enabled support.
+          module TransparentHugepageEnabled
+            # Default value. GKE will not modify the kernel configuration.
+            TRANSPARENT_HUGEPAGE_ENABLED_UNSPECIFIED = 0
+
+            # Transparent hugepage support for anonymous memory is enabled system wide.
+            TRANSPARENT_HUGEPAGE_ENABLED_ALWAYS = 1
+
+            # Transparent hugepage support for anonymous memory is enabled inside
+            # MADV_HUGEPAGE regions. This is the default kernel configuration.
+            TRANSPARENT_HUGEPAGE_ENABLED_MADVISE = 2
+
+            # Transparent hugepage support for anonymous memory is disabled.
+            TRANSPARENT_HUGEPAGE_ENABLED_NEVER = 3
+          end
+
+          # Possible values for transparent hugepage defrag support.
+          module TransparentHugepageDefrag
+            # Default value. GKE will not modify the kernel configuration.
+            TRANSPARENT_HUGEPAGE_DEFRAG_UNSPECIFIED = 0
+
+            # It means that an application requesting THP will stall on allocation
+            # failure and directly reclaim pages and compact memory in an effort to
+            # allocate a THP immediately.
+            TRANSPARENT_HUGEPAGE_DEFRAG_ALWAYS = 1
+
+            # It means that an application will wake kswapd in the background to
+            # reclaim pages and wake kcompactd to compact memory so that THP is
+            # available in the near future. It’s the responsibility of khugepaged to
+            # then install the THP pages later.
+            TRANSPARENT_HUGEPAGE_DEFRAG_DEFER = 2
+
+            # It means that an application will enter direct reclaim and compaction
+            # like always, but only for regions that have used madvise(MADV_HUGEPAGE);
+            # all other regions will wake kswapd in the background to reclaim pages and
+            # wake kcompactd to compact memory so that THP is available in the near
+            # future.
+            TRANSPARENT_HUGEPAGE_DEFRAG_DEFER_WITH_MADVISE = 3
+
+            # It means that an application will enter direct reclaim like always but
+            # only for regions that are have used madvise(MADV_HUGEPAGE). This is the
+            # default kernel configuration.
+            TRANSPARENT_HUGEPAGE_DEFRAG_MADVISE = 4
+
+            # It means that an application will never enter direct reclaim or
+            # compaction.
+            TRANSPARENT_HUGEPAGE_DEFRAG_NEVER = 5
           end
         end
 
@@ -257,6 +340,45 @@ module Google
         #
         #     See https://kubernetes.io/docs/tasks/administer-cluster/sysctl-cluster/
         #     for more details.
+        # @!attribute [rw] eviction_soft
+        #   @return [::Google::Cloud::Container::V1beta1::EvictionSignals]
+        #     Optional. eviction_soft is a map of signal names to quantities that defines
+        #     soft eviction thresholds. Each signal is compared to its corresponding
+        #     threshold to determine if a pod eviction should occur.
+        # @!attribute [rw] eviction_soft_grace_period
+        #   @return [::Google::Cloud::Container::V1beta1::EvictionGracePeriod]
+        #     Optional. eviction_soft_grace_period is a map of signal names to quantities
+        #     that defines grace periods for each soft eviction signal. The grace period
+        #     is the amount of time that a pod must be under pressure before an eviction
+        #     occurs.
+        # @!attribute [rw] eviction_minimum_reclaim
+        #   @return [::Google::Cloud::Container::V1beta1::EvictionMinimumReclaim]
+        #     Optional. eviction_minimum_reclaim is a map of signal names to quantities
+        #     that defines minimum reclaims, which describe the minimum amount of a given
+        #     resource the kubelet will reclaim when performing a pod eviction while that
+        #     resource is under pressure.
+        # @!attribute [rw] eviction_max_pod_grace_period_seconds
+        #   @return [::Integer]
+        #     Optional. eviction_max_pod_grace_period_seconds is the maximum allowed
+        #     grace period (in seconds) to use when terminating pods in response to a
+        #     soft eviction threshold being met. This value effectively caps the Pod's
+        #     terminationGracePeriodSeconds value during soft evictions. Default: 0.
+        #     Range: [0, 300].
+        # @!attribute [rw] max_parallel_image_pulls
+        #   @return [::Integer]
+        #     Optional. Defines the maximum number of image pulls in parallel.
+        #     The range is 2 to 5, inclusive.
+        #     The default value is 2 or 3 depending on the disk type.
+        #
+        #     See
+        #     https://kubernetes.io/docs/concepts/containers/images/#maximum-parallel-image-pulls
+        #     for more details.
+        # @!attribute [rw] single_process_oom_kill
+        #   @return [::Boolean]
+        #     Optional. Defines whether to enable single process OOM killer.
+        #     If true, will prevent the memory.oom.group flag from being set for
+        #     container cgroups in cgroups v2. This causes processes in the container to
+        #     be OOM killed individually instead of as a group.
         class NodeKubeletConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -320,6 +442,136 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # Eviction signals are the current state of a particular resource at a specific
+        # point in time. The kubelet uses eviction signals to make eviction decisions
+        # by comparing the signals to eviction thresholds, which are the minimum amount
+        # of the resource that should be available on the node.
+        # @!attribute [rw] memory_available
+        #   @return [::String]
+        #     Optional. Memory available (i.e. capacity - workingSet), in bytes. Defines
+        #     the amount of "memory.available" signal in kubelet. Default is unset, if
+        #     not specified in the kubelet config. Format: positive number + unit, e.g.
+        #     100Ki, 10Mi, 5Gi. Valid units are Ki, Mi, Gi. Must be >= 100Mi and <= 50%
+        #     of the node's memory. See
+        #     https://kubernetes.io/docs/concepts/scheduling-eviction/node-pressure-eviction/#eviction-signals
+        # @!attribute [rw] nodefs_available
+        #   @return [::String]
+        #     Optional. Amount of storage available on filesystem that kubelet uses for
+        #     volumes, daemon logs, etc. Defines the amount of "nodefs.available" signal
+        #     in kubelet. Default is unset, if not specified in the kubelet config.
+        #     Sample format: "30%". Must be >= 10%. See
+        #     https://kubernetes.io/docs/concepts/scheduling-eviction/node-pressure-eviction/#eviction-signals
+        # @!attribute [rw] nodefs_inodes_free
+        #   @return [::String]
+        #     Optional. Amount of inodes available on filesystem that kubelet uses for
+        #     volumes, daemon logs, etc. Defines the amount of "nodefs.inodesFree" signal
+        #     in kubelet. Default is unset, if not specified in the kubelet config. Linux
+        #     only. It takses percentage value for now. Sample format: "30%". Must be >=
+        #     5% and <= 50%. See
+        #     https://kubernetes.io/docs/concepts/scheduling-eviction/node-pressure-eviction/#eviction-signals
+        # @!attribute [rw] imagefs_available
+        #   @return [::String]
+        #     Optional. Amount of storage available on filesystem that container runtime
+        #     uses for storing images layers. If the container filesystem and image
+        #     filesystem are not separate, then imagefs can store both image layers and
+        #     writeable layers. Defines the amount of "imagefs.available" signal in
+        #     kubelet. Default is unset, if not specified in the kubelet config. Sample
+        #     format: "30%". Must be >= 15%. See
+        #     https://kubernetes.io/docs/concepts/scheduling-eviction/node-pressure-eviction/#eviction-signals
+        # @!attribute [rw] imagefs_inodes_free
+        #   @return [::String]
+        #     Optional. Amount of inodes available on filesystem that container runtime
+        #     uses for storing images layers. Defines the amount of "imagefs.inodesFree"
+        #     signal in kubelet. Default is unset, if not specified in the kubelet
+        #     config. Linux only. Sample format: "30%". Must be >= 5%. See
+        #     https://kubernetes.io/docs/concepts/scheduling-eviction/node-pressure-eviction/#eviction-signals
+        # @!attribute [rw] pid_available
+        #   @return [::String]
+        #     Optional. Amount of PID available for pod allocation. Defines the amount of
+        #     "pid.available" signal in kubelet. Default is unset, if not specified in
+        #     the kubelet config. Sample format: "30%". Must be >= 10%. See
+        #     https://kubernetes.io/docs/concepts/scheduling-eviction/node-pressure-eviction/#eviction-signals
+        class EvictionSignals
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Eviction grace periods are grace periods for each eviction signal.
+        # @!attribute [rw] memory_available
+        #   @return [::String]
+        #     Optional. Grace period for eviction due to memory available signal. Sample
+        #     format: "10s". Must be >= 0. See
+        #     https://kubernetes.io/docs/concepts/scheduling-eviction/node-pressure-eviction/#eviction-signals
+        # @!attribute [rw] nodefs_available
+        #   @return [::String]
+        #     Optional. Grace period for eviction due to nodefs available signal. Sample
+        #     format: "10s". Must be >= 0. See
+        #     https://kubernetes.io/docs/concepts/scheduling-eviction/node-pressure-eviction/#eviction-signals
+        # @!attribute [rw] nodefs_inodes_free
+        #   @return [::String]
+        #     Optional. Grace period for eviction due to nodefs inodes free signal.
+        #     Sample format: "10s". Must be >= 0. See
+        #     https://kubernetes.io/docs/concepts/scheduling-eviction/node-pressure-eviction/#eviction-signals
+        # @!attribute [rw] imagefs_available
+        #   @return [::String]
+        #     Optional. Grace period for eviction due to imagefs available signal. Sample
+        #     format: "10s". Must be >= 0. See
+        #     https://kubernetes.io/docs/concepts/scheduling-eviction/node-pressure-eviction/#eviction-signals
+        # @!attribute [rw] imagefs_inodes_free
+        #   @return [::String]
+        #     Optional. Grace period for eviction due to imagefs inodes free signal.
+        #     Sample format: "10s". Must be >= 0. See
+        #     https://kubernetes.io/docs/concepts/scheduling-eviction/node-pressure-eviction/#eviction-signals
+        # @!attribute [rw] pid_available
+        #   @return [::String]
+        #     Optional. Grace period for eviction due to pid available signal. Sample
+        #     format: "10s". Must be >= 0. See
+        #     https://kubernetes.io/docs/concepts/scheduling-eviction/node-pressure-eviction/#eviction-signals
+        class EvictionGracePeriod
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Eviction minimum reclaims are the resource amounts of minimum reclaims for
+        # each eviction signal.
+        # @!attribute [rw] memory_available
+        #   @return [::String]
+        #     Optional. Minimum reclaim for eviction due to memory available signal. Only
+        #     take percentage value for now. Sample format: "10%". Must be <=10%. See
+        #     https://kubernetes.io/docs/concepts/scheduling-eviction/node-pressure-eviction/#eviction-signals
+        # @!attribute [rw] nodefs_available
+        #   @return [::String]
+        #     Optional. Minimum reclaim for eviction due to nodefs available signal. Only
+        #     take percentage value for now. Sample format: "10%". Must be <=10%. See
+        #     https://kubernetes.io/docs/concepts/scheduling-eviction/node-pressure-eviction/#eviction-signals
+        # @!attribute [rw] nodefs_inodes_free
+        #   @return [::String]
+        #     Optional. Minimum reclaim for eviction due to nodefs inodes free signal.
+        #     Only take percentage value for now. Sample format: "10%". Must be <=10%.
+        #     See
+        #     https://kubernetes.io/docs/concepts/scheduling-eviction/node-pressure-eviction/#eviction-signals
+        # @!attribute [rw] imagefs_available
+        #   @return [::String]
+        #     Optional. Minimum reclaim for eviction due to imagefs available signal.
+        #     Only take percentage value for now. Sample format: "10%". Must be <=10%.
+        #     See
+        #     https://kubernetes.io/docs/concepts/scheduling-eviction/node-pressure-eviction/#eviction-signals
+        # @!attribute [rw] imagefs_inodes_free
+        #   @return [::String]
+        #     Optional. Minimum reclaim for eviction due to imagefs inodes free signal.
+        #     Only take percentage value for now. Sample format: "10%". Must be <=10%.
+        #     See
+        #     https://kubernetes.io/docs/concepts/scheduling-eviction/node-pressure-eviction/#eviction-signals
+        # @!attribute [rw] pid_available
+        #   @return [::String]
+        #     Optional. Minimum reclaim for eviction due to pid available signal. Only
+        #     take percentage value for now. Sample format: "10%". Must be <=10%. See
+        #     https://kubernetes.io/docs/concepts/scheduling-eviction/node-pressure-eviction/#eviction-signals
+        class EvictionMinimumReclaim
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # Parameters that describe the nodes in a cluster.
         #
         # GKE Autopilot clusters do not
@@ -337,6 +589,7 @@ module Google
         #   @return [::Integer]
         #     Size of the disk attached to each node, specified in GB.
         #     The smallest allowed disk size is 10GB.
+        #
         #     If unspecified, the default disk size is 100GB.
         # @!attribute [rw] oauth_scopes
         #   @return [::Array<::String>]
@@ -398,8 +651,8 @@ module Google
         #   @return [::String]
         #     The image type to use for this node. Note that for a given image type,
         #     the latest version of it will be used. Please see
-        #     https://cloud.google.com/kubernetes-engine/docs/concepts/node-images for
-        #     available image types.
+        #     https://cloud.google.com/kubernetes-engine/docs/concepts/node-images
+        #     for available image types.
         # @!attribute [rw] labels
         #   @return [::Google::Protobuf::Map{::String => ::String}]
         #     The map of Kubernetes labels (key/value pairs) to be applied to each node.
@@ -427,13 +680,14 @@ module Google
         # @!attribute [rw] preemptible
         #   @return [::Boolean]
         #     Whether the nodes are created as preemptible VM instances. See:
-        #     https://cloud.google.com/compute/docs/instances/preemptible for more
-        #     information about preemptible VM instances.
+        #     https://cloud.google.com/compute/docs/instances/preemptible
+        #     for more information about preemptible VM instances.
         # @!attribute [rw] accelerators
         #   @return [::Array<::Google::Cloud::Container::V1beta1::AcceleratorConfig>]
         #     A list of hardware accelerators to be attached to each node.
-        #     See https://cloud.google.com/compute/docs/gpus for more information about
-        #     support for GPUs.
+        #     See
+        #     https://cloud.google.com/compute/docs/gpus
+        #     for more information about support for GPUs.
         # @!attribute [rw] sandbox_config
         #   @return [::Google::Cloud::Container::V1beta1::SandboxConfig]
         #     Sandbox configuration for this node.
@@ -574,6 +828,9 @@ module Google
         # @!attribute [rw] flex_start
         #   @return [::Boolean]
         #     Flex Start flag for enabling Flex Start VM.
+        # @!attribute [rw] boot_disk
+        #   @return [::Google::Cloud::Container::V1beta1::BootDisk]
+        #     Boot disk configuration for the node pool.
         class NodeConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -658,7 +915,7 @@ module Google
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
 
-          # Level of PMU access
+          # Level of PMU access.
           module PerformanceMonitoringUnit
             # PMU not enabled.
             PERFORMANCE_MONITORING_UNIT_UNSPECIFIED = 0
@@ -751,6 +1008,13 @@ module Google
         #     Output only. The utilization of the IPv4 range for the pod.
         #     The ratio is Usage/[Total number of IPs in the secondary range],
         #     Usage=numNodes*numZones*podIPsPerNode.
+        # @!attribute [r] subnetwork
+        #   @return [::String]
+        #     Output only. The subnetwork path for the node pool.
+        #     Format: projects/\\{project}/regions/\\{region}/subnetworks/\\{subnetwork}
+        #     If the cluster is associated with multiple subnetworks, the subnetwork for
+        #     the node pool is picked based on the IP utilization during node pool
+        #     creation and is immutable.
         class NodeNetworkConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -982,6 +1246,11 @@ module Google
         # @!attribute [rw] node_affinities
         #   @return [::Array<::Google::Cloud::Container::V1beta1::SoleTenantConfig::NodeAffinity>]
         #     NodeAffinities used to match to a shared sole tenant node group.
+        # @!attribute [rw] min_node_cpus
+        #   @return [::Integer]
+        #     Optional. The minimum number of virtual CPUs this instance will consume
+        #     when running on a sole-tenant node. This field can only be set if the node
+        #     pool is created in a shared sole-tenant node group.
         class SoleTenantConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -1056,7 +1325,8 @@ module Google
               extend ::Google::Protobuf::MessageExts::ClassMethods
 
               # GCPSecretManagerCertificateConfig configures a secret from
-              # [Google Secret Manager](https://cloud.google.com/secret-manager).
+              # [Google Secret
+              # Manager](https://cloud.google.com/secret-manager).
               # @!attribute [rw] secret_uri
               #   @return [::String]
               #     Secret URI, in the form
@@ -1347,6 +1617,9 @@ module Google
         # @!attribute [rw] high_scale_checkpointing_config
         #   @return [::Google::Cloud::Container::V1beta1::HighScaleCheckpointingConfig]
         #     Configuration for the High Scale Checkpointing add-on.
+        # @!attribute [rw] lustre_csi_driver_config
+        #   @return [::Google::Cloud::Container::V1beta1::LustreCsiDriverConfig]
+        #     Configuration for the Lustre CSI driver.
         class AddonsConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -1486,6 +1759,19 @@ module Google
         #     Whether the High Scale Checkpointing is enabled for this
         #     cluster.
         class HighScaleCheckpointingConfig
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Configuration for the Lustre CSI driver.
+        # @!attribute [rw] enabled
+        #   @return [::Boolean]
+        #     Whether the Lustre CSI driver is enabled for this cluster.
+        # @!attribute [rw] enable_legacy_lustre_port
+        #   @return [::Boolean]
+        #     If set to true, the Lustre CSI driver will install Lustre kernel modules
+        #     using port 6988.
+        class LustreCsiDriverConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
@@ -1880,6 +2166,16 @@ module Google
         #     Output only. The utilization of the cluster default IPv4 range for the
         #     pod. The ratio is Usage/[Total number of IPs in the secondary range],
         #     Usage=numNodes*numZones*podIPsPerNode.
+        # @!attribute [r] additional_ip_ranges_configs
+        #   @return [::Array<::Google::Cloud::Container::V1beta1::AdditionalIPRangesConfig>]
+        #     Output only. The additional IP ranges that are added to the cluster.
+        #     These IP ranges can be used by new node pools to allocate node and pod IPs
+        #     automatically.
+        #     Each AdditionalIPRangesConfig corresponds to a single subnetwork.
+        #     Once a range is removed it will not show up in IPAllocationPolicy.
+        # @!attribute [rw] auto_ipam_config
+        #   @return [::Google::Cloud::Container::V1beta1::AutoIpamConfig]
+        #     Optional. AutoIpamConfig contains all information related to Auto IPAM
         class IPAllocationPolicy
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -2027,7 +2323,8 @@ module Google
         #   @deprecated This field is deprecated and may be removed in the next major version update.
         #   @return [::Integer]
         #     The number of nodes to create in this cluster. You must ensure that your
-        #     Compute Engine [resource quota](https://cloud.google.com/compute/quotas)
+        #     Compute Engine [resource
+        #     quota](https://cloud.google.com/compute/quotas)
         #     is sufficient for this number of instances. You must also have available
         #     firewall and routes quota.
         #     For requests, this field should only be used in lieu of a
@@ -2102,9 +2399,9 @@ module Google
         # @!attribute [rw] subnetwork
         #   @return [::String]
         #     The name of the Google Compute Engine
-        #     [subnetwork](https://cloud.google.com/compute/docs/subnetworks) to which
-        #     the cluster is connected. On output this shows the subnetwork ID instead of
-        #     the name.
+        #     [subnetwork](https://cloud.google.com/compute/docs/subnetworks)
+        #     to which the cluster is connected. On output this shows the subnetwork ID
+        #     instead of the name.
         # @!attribute [rw] node_pools
         #   @return [::Array<::Google::Cloud::Container::V1beta1::NodePool>]
         #     The node pools associated with this cluster.
@@ -2113,8 +2410,8 @@ module Google
         # @!attribute [rw] locations
         #   @return [::Array<::String>]
         #     The list of Google Compute Engine
-        #     [zones](https://cloud.google.com/compute/docs/zones#available) in which the
-        #     cluster's nodes should be located.
+        #     [zones](https://cloud.google.com/compute/docs/zones#available)
+        #     in which the cluster's nodes should be located.
         #
         #     This field provides a default value if
         #     [NodePool.Locations](https://cloud.google.com/kubernetes-engine/docs/reference/rest/v1/projects.locations.clusters.nodePools#NodePool.FIELDS.locations)
@@ -2267,8 +2564,9 @@ module Google
         #   @deprecated This field is deprecated and may be removed in the next major version update.
         #   @return [::String]
         #     Output only. The name of the Google Compute Engine
-        #     [zone](https://cloud.google.com/compute/docs/zones#available) in which the
-        #     cluster resides. This field is deprecated, use location instead.
+        #     [zone](https://cloud.google.com/compute/docs/zones#available)
+        #     in which the cluster resides. This field is deprecated, use location
+        #     instead.
         # @!attribute [r] endpoint
         #   @return [::String]
         #     Output only. The IP address of this cluster's master endpoint.
@@ -2437,6 +2735,9 @@ module Google
         #   @return [::Google::Cloud::Container::V1beta1::RBACBindingConfig]
         #     RBACBindingConfig allows user to restrict ClusterRoleBindings an
         #     RoleBindings that can be created.
+        # @!attribute [rw] gke_auto_upgrade_config
+        #   @return [::Google::Cloud::Container::V1beta1::GkeAutoUpgradeConfig]
+        #     Configuration for GKE auto upgrades.
         # @!attribute [rw] anonymous_authentication_config
         #   @return [::Google::Cloud::Container::V1beta1::AnonymousAuthenticationConfig]
         #     Configuration for limiting anonymous access to all endpoints except the
@@ -2546,9 +2847,25 @@ module Google
 
         # AnonymousAuthenticationConfig defines the settings needed to limit endpoints
         # that allow anonymous authentication.
+        # @!attribute [rw] mode
+        #   @return [::Google::Cloud::Container::V1beta1::AnonymousAuthenticationConfig::Mode]
+        #     Defines the mode of limiting anonymous access in the cluster.
         class AnonymousAuthenticationConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Mode defines the mode of anonymous authentication
+          # allowed in the cluster.
+          module Mode
+            # Default value not specified.
+            MODE_UNSPECIFIED = 0
+
+            # Anonymous authentication is allowed for all endpoints.
+            ENABLED = 1
+
+            # Anonymous authentication is allowed for only health check endpoints.
+            LIMITED = 2
+          end
         end
 
         # CompliancePostureConfig defines the settings needed to enable/disable
@@ -2804,8 +3121,8 @@ module Google
         # @!attribute [rw] desired_locations
         #   @return [::Array<::String>]
         #     The desired list of Google Compute Engine
-        #     [zones](https://cloud.google.com/compute/docs/zones#available) in which the
-        #     cluster's nodes should be located.
+        #     [zones](https://cloud.google.com/compute/docs/zones#available)
+        #     in which the cluster's nodes should be located.
         #
         #     This list must always include the cluster's primary zone.
         #
@@ -3070,15 +3387,27 @@ module Google
         #     The desired node kubelet config for all auto-provisioned node pools
         #     in autopilot clusters and node auto-provisioning enabled clusters.
         # @!attribute [rw] user_managed_keys_config
+        #   @deprecated This field is deprecated and may be removed in the next major version update.
         #   @return [::Google::Cloud::Container::V1beta1::UserManagedKeysConfig]
         #     The Custom keys configuration for the cluster.
+        #
+        #     This field is deprecated.
+        #     Use
+        #     {::Google::Cloud::Container::V1beta1::ClusterUpdate#desired_user_managed_keys_config ClusterUpdate.desired_user_managed_keys_config}
+        #     instead.
         # @!attribute [rw] desired_rbac_binding_config
         #   @return [::Google::Cloud::Container::V1beta1::RBACBindingConfig]
         #     RBACBindingConfig allows user to restrict ClusterRoleBindings an
         #     RoleBindings that can be created.
+        # @!attribute [rw] desired_additional_ip_ranges_config
+        #   @return [::Google::Cloud::Container::V1beta1::DesiredAdditionalIPRangesConfig]
+        #     The desired config for additional subnetworks attached to the cluster.
         # @!attribute [rw] desired_enterprise_config
         #   @return [::Google::Cloud::Container::V1beta1::DesiredEnterpriseConfig]
         #     The desired enterprise configuration for the cluster.
+        # @!attribute [rw] desired_auto_ipam_config
+        #   @return [::Google::Cloud::Container::V1beta1::AutoIpamConfig]
+        #     AutoIpamConfig contains all information related to Auto IPAM
         # @!attribute [rw] desired_disable_l4_lb_firewall_reconciliation
         #   @return [::Boolean]
         #     Enable/Disable L4 LB VPC firewall reconciliation for the cluster.
@@ -3088,10 +3417,16 @@ module Google
         #     in autopilot clusters and node auto-provisioning enabled clusters.
         #
         #     Currently only `cgroup_mode` can be set here.
+        # @!attribute [rw] desired_user_managed_keys_config
+        #   @return [::Google::Cloud::Container::V1beta1::UserManagedKeysConfig]
+        #     The desired user managed keys config for the cluster.
         # @!attribute [rw] desired_anonymous_authentication_config
         #   @return [::Google::Cloud::Container::V1beta1::AnonymousAuthenticationConfig]
         #     Configuration for limiting anonymous access to all endpoints except the
         #     health checks.
+        # @!attribute [rw] gke_auto_upgrade_config
+        #   @return [::Google::Cloud::Container::V1beta1::GkeAutoUpgradeConfig]
+        #     Configuration for GKE auto upgrade.
         class ClusterUpdate
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -3106,6 +3441,42 @@ module Google
         #   @return [::Array<::Google::Cloud::Container::V1beta1::RangeInfo>]
         #     Output only. Information for additional pod range.
         class AdditionalPodRangesConfig
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # AdditionalIPRangesConfig is the configuration for individual additional
+        # subnetwork attached to the cluster
+        # @!attribute [rw] subnetwork
+        #   @return [::String]
+        #     Name of the subnetwork. This can be the full path of the subnetwork or
+        #     just the name.
+        #     Example1: my-subnet
+        #     Example2: projects/gke-project/regions/us-central1/subnetworks/my-subnet
+        # @!attribute [rw] pod_ipv4_range_names
+        #   @return [::Array<::String>]
+        #     List of secondary ranges names within this subnetwork that can be used for
+        #     pod IPs.
+        #     Example1: gke-pod-range1
+        #     Example2: gke-pod-range1,gke-pod-range2
+        class AdditionalIPRangesConfig
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # DesiredAdditionalIPRangesConfig is a wrapper used for cluster update
+        # operation and contains multiple AdditionalIPRangesConfigs.
+        # @!attribute [rw] additional_ip_ranges_configs
+        #   @return [::Array<::Google::Cloud::Container::V1beta1::AdditionalIPRangesConfig>]
+        #     List of additional IP ranges configs where each AdditionalIPRangesConfig
+        #     corresponds to one subnetwork's IP ranges
+        class DesiredAdditionalIPRangesConfig
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # AutoIpamConfig contains all information related to Auto IPAM
+        class AutoIpamConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
@@ -3140,8 +3511,9 @@ module Google
         #   @deprecated This field is deprecated and may be removed in the next major version update.
         #   @return [::String]
         #     Output only. The name of the Google Compute Engine
-        #     [zone](https://cloud.google.com/compute/docs/zones#available) in which the
-        #     operation is taking place. This field is deprecated, use location instead.
+        #     [zone](https://cloud.google.com/compute/docs/zones#available)
+        #     in which the operation is taking place. This field is deprecated, use
+        #     location instead.
         # @!attribute [r] operation_type
         #   @return [::Google::Cloud::Container::V1beta1::Operation::Type]
         #     Output only. The operation type.
@@ -3417,9 +3789,9 @@ module Google
         #   @deprecated This field is deprecated and may be removed in the next major version update.
         #   @return [::String]
         #     Deprecated. The name of the Google Compute Engine
-        #     [zone](https://cloud.google.com/compute/docs/zones#available) in which the
-        #     cluster resides. This field has been deprecated and replaced by the parent
-        #     field.
+        #     [zone](https://cloud.google.com/compute/docs/zones#available)
+        #     in which the cluster resides. This field has been deprecated and replaced
+        #     by the parent field.
         # @!attribute [rw] cluster
         #   @return [::Google::Cloud::Container::V1beta1::Cluster]
         #     Required. A [cluster
@@ -3444,9 +3816,9 @@ module Google
         #   @deprecated This field is deprecated and may be removed in the next major version update.
         #   @return [::String]
         #     Deprecated. The name of the Google Compute Engine
-        #     [zone](https://cloud.google.com/compute/docs/zones#available) in which the
-        #     cluster resides. This field has been deprecated and replaced by the name
-        #     field.
+        #     [zone](https://cloud.google.com/compute/docs/zones#available)
+        #     in which the cluster resides. This field has been deprecated and replaced
+        #     by the name field.
         # @!attribute [rw] cluster_id
         #   @deprecated This field is deprecated and may be removed in the next major version update.
         #   @return [::String]
@@ -3472,9 +3844,9 @@ module Google
         #   @deprecated This field is deprecated and may be removed in the next major version update.
         #   @return [::String]
         #     Deprecated. The name of the Google Compute Engine
-        #     [zone](https://cloud.google.com/compute/docs/zones#available) in which the
-        #     cluster resides. This field has been deprecated and replaced by the name
-        #     field.
+        #     [zone](https://cloud.google.com/compute/docs/zones#available)
+        #     in which the cluster resides. This field has been deprecated and replaced
+        #     by the name field.
         # @!attribute [rw] cluster_id
         #   @deprecated This field is deprecated and may be removed in the next major version update.
         #   @return [::String]
@@ -3503,9 +3875,9 @@ module Google
         #   @deprecated This field is deprecated and may be removed in the next major version update.
         #   @return [::String]
         #     Deprecated. The name of the Google Compute Engine
-        #     [zone](https://cloud.google.com/compute/docs/zones#available) in which the
-        #     cluster resides. This field has been deprecated and replaced by the name
-        #     field.
+        #     [zone](https://cloud.google.com/compute/docs/zones#available)
+        #     in which the cluster resides. This field has been deprecated and replaced
+        #     by the name field.
         # @!attribute [rw] cluster_id
         #   @deprecated This field is deprecated and may be removed in the next major version update.
         #   @return [::String]
@@ -3532,15 +3904,15 @@ module Google
         # @!attribute [rw] image_type
         #   @return [::String]
         #     Required. The desired image type for the node pool. Please see
-        #     https://cloud.google.com/kubernetes-engine/docs/concepts/node-images for
-        #     available image types.
+        #     https://cloud.google.com/kubernetes-engine/docs/concepts/node-images
+        #     for available image types.
         # @!attribute [rw] locations
         #   @return [::Array<::String>]
         #     The desired list of Google Compute Engine
-        #     [zones](https://cloud.google.com/compute/docs/zones#available) in which the
-        #     node pool's nodes should be located. Changing the locations for a node pool
-        #     will result in nodes being either created or removed from the node pool,
-        #     depending on whether locations are being added or removed.
+        #     [zones](https://cloud.google.com/compute/docs/zones#available)
+        #     in which the node pool's nodes should be located. Changing the locations
+        #     for a node pool will result in nodes being either created or removed from
+        #     the node pool, depending on whether locations are being added or removed.
         # @!attribute [rw] workload_metadata_config
         #   @return [::Google::Cloud::Container::V1beta1::WorkloadMetadataConfig]
         #     The desired workload metadata config for the node pool.
@@ -3607,8 +3979,9 @@ module Google
         # @!attribute [rw] accelerators
         #   @return [::Array<::Google::Cloud::Container::V1beta1::AcceleratorConfig>]
         #     A list of hardware accelerators to be attached to each node.
-        #     See https://cloud.google.com/compute/docs/gpus for more information about
-        #     support for GPUs.
+        #     See
+        #     https://cloud.google.com/compute/docs/gpus
+        #     for more information about support for GPUs.
         # @!attribute [rw] machine_type
         #   @return [::String]
         #     Optional. The desired machine type for nodes in the node pool.
@@ -3648,6 +4021,11 @@ module Google
         # @!attribute [rw] flex_start
         #   @return [::Boolean]
         #     Flex Start flag for enabling Flex Start VM.
+        # @!attribute [rw] boot_disk
+        #   @return [::Google::Cloud::Container::V1beta1::BootDisk]
+        #     The desired boot disk config for nodes in the node pool.
+        #     Initiates an upgrade operation that migrates the nodes in the
+        #     node pool to the specified boot disk config.
         class UpdateNodePoolRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -3664,9 +4042,9 @@ module Google
         #   @deprecated This field is deprecated and may be removed in the next major version update.
         #   @return [::String]
         #     Deprecated. The name of the Google Compute Engine
-        #     [zone](https://cloud.google.com/compute/docs/zones#available) in which the
-        #     cluster resides. This field has been deprecated and replaced by the name
-        #     field.
+        #     [zone](https://cloud.google.com/compute/docs/zones#available)
+        #     in which the cluster resides. This field has been deprecated and replaced
+        #     by the name field.
         # @!attribute [rw] cluster_id
         #   @deprecated This field is deprecated and may be removed in the next major version update.
         #   @return [::String]
@@ -3701,9 +4079,9 @@ module Google
         #   @deprecated This field is deprecated and may be removed in the next major version update.
         #   @return [::String]
         #     Deprecated. The name of the Google Compute Engine
-        #     [zone](https://cloud.google.com/compute/docs/zones#available) in which the
-        #     cluster resides. This field has been deprecated and replaced by the name
-        #     field.
+        #     [zone](https://cloud.google.com/compute/docs/zones#available)
+        #     in which the cluster resides. This field has been deprecated and replaced
+        #     by the name field.
         # @!attribute [rw] cluster_id
         #   @deprecated This field is deprecated and may be removed in the next major version update.
         #   @return [::String]
@@ -3742,9 +4120,9 @@ module Google
         #   @deprecated This field is deprecated and may be removed in the next major version update.
         #   @return [::String]
         #     Deprecated. The name of the Google Compute Engine
-        #     [zone](https://cloud.google.com/compute/docs/zones#available) in which the
-        #     cluster resides. This field has been deprecated and replaced by the name
-        #     field.
+        #     [zone](https://cloud.google.com/compute/docs/zones#available)
+        #     in which the cluster resides. This field has been deprecated and replaced
+        #     by the name field.
         # @!attribute [rw] cluster_id
         #   @deprecated This field is deprecated and may be removed in the next major version update.
         #   @return [::String]
@@ -3783,9 +4161,9 @@ module Google
         #   @deprecated This field is deprecated and may be removed in the next major version update.
         #   @return [::String]
         #     Deprecated. The name of the Google Compute Engine
-        #     [zone](https://cloud.google.com/compute/docs/zones#available) in which the
-        #     cluster resides. This field has been deprecated and replaced by the name
-        #     field.
+        #     [zone](https://cloud.google.com/compute/docs/zones#available)
+        #     in which the cluster resides. This field has been deprecated and replaced
+        #     by the name field.
         # @!attribute [rw] cluster_id
         #   @deprecated This field is deprecated and may be removed in the next major version update.
         #   @return [::String]
@@ -3815,9 +4193,9 @@ module Google
         #   @deprecated This field is deprecated and may be removed in the next major version update.
         #   @return [::String]
         #     Deprecated. The name of the Google Compute Engine
-        #     [zone](https://cloud.google.com/compute/docs/zones#available) in which the
-        #     cluster resides. This field has been deprecated and replaced by the name
-        #     field.
+        #     [zone](https://cloud.google.com/compute/docs/zones#available)
+        #     in which the cluster resides. This field has been deprecated and replaced
+        #     by the name field.
         # @!attribute [rw] cluster_id
         #   @deprecated This field is deprecated and may be removed in the next major version update.
         #   @return [::String]
@@ -3826,10 +4204,10 @@ module Google
         # @!attribute [rw] locations
         #   @return [::Array<::String>]
         #     Required. The desired list of Google Compute Engine
-        #     [zones](https://cloud.google.com/compute/docs/zones#available) in which the
-        #     cluster's nodes should be located. Changing the locations a cluster is in
-        #     will result in nodes being either created or removed from the cluster,
-        #     depending on whether locations are being added or removed.
+        #     [zones](https://cloud.google.com/compute/docs/zones#available)
+        #     in which the cluster's nodes should be located. Changing the locations a
+        #     cluster is in will result in nodes being either created or removed from the
+        #     cluster, depending on whether locations are being added or removed.
         #
         #     This list must always include the cluster's primary zone.
         # @!attribute [rw] name
@@ -3852,9 +4230,9 @@ module Google
         #   @deprecated This field is deprecated and may be removed in the next major version update.
         #   @return [::String]
         #     Deprecated. The name of the Google Compute Engine
-        #     [zone](https://cloud.google.com/compute/docs/zones#available) in which the
-        #     cluster resides. This field has been deprecated and replaced by the name
-        #     field.
+        #     [zone](https://cloud.google.com/compute/docs/zones#available)
+        #     in which the cluster resides. This field has been deprecated and replaced
+        #     by the name field.
         # @!attribute [rw] cluster_id
         #   @deprecated This field is deprecated and may be removed in the next major version update.
         #   @return [::String]
@@ -3892,9 +4270,9 @@ module Google
         #   @deprecated This field is deprecated and may be removed in the next major version update.
         #   @return [::String]
         #     Deprecated. The name of the Google Compute Engine
-        #     [zone](https://cloud.google.com/compute/docs/zones#available) in which the
-        #     cluster resides. This field has been deprecated and replaced by the name
-        #     field.
+        #     [zone](https://cloud.google.com/compute/docs/zones#available)
+        #     in which the cluster resides. This field has been deprecated and replaced
+        #     by the name field.
         # @!attribute [rw] cluster_id
         #   @deprecated This field is deprecated and may be removed in the next major version update.
         #   @return [::String]
@@ -3944,9 +4322,9 @@ module Google
         #   @deprecated This field is deprecated and may be removed in the next major version update.
         #   @return [::String]
         #     Deprecated. The name of the Google Compute Engine
-        #     [zone](https://cloud.google.com/compute/docs/zones#available) in which the
-        #     cluster resides. This field has been deprecated and replaced by the name
-        #     field.
+        #     [zone](https://cloud.google.com/compute/docs/zones#available)
+        #     in which the cluster resides. This field has been deprecated and replaced
+        #     by the name field.
         # @!attribute [rw] cluster_id
         #   @deprecated This field is deprecated and may be removed in the next major version update.
         #   @return [::String]
@@ -3972,9 +4350,9 @@ module Google
         #   @deprecated This field is deprecated and may be removed in the next major version update.
         #   @return [::String]
         #     Deprecated. The name of the Google Compute Engine
-        #     [zone](https://cloud.google.com/compute/docs/zones#available) in which the
-        #     cluster resides, or "-" for all zones. This field has been deprecated and
-        #     replaced by the parent field.
+        #     [zone](https://cloud.google.com/compute/docs/zones#available)
+        #     in which the cluster resides, or "-" for all zones. This field has been
+        #     deprecated and replaced by the parent field.
         # @!attribute [rw] parent
         #   @return [::String]
         #     The parent (project and location) where the clusters will be listed.
@@ -4010,9 +4388,9 @@ module Google
         #   @deprecated This field is deprecated and may be removed in the next major version update.
         #   @return [::String]
         #     Deprecated. The name of the Google Compute Engine
-        #     [zone](https://cloud.google.com/compute/docs/zones#available) in which the
-        #     cluster resides. This field has been deprecated and replaced by the name
-        #     field.
+        #     [zone](https://cloud.google.com/compute/docs/zones#available)
+        #     in which the cluster resides. This field has been deprecated and replaced
+        #     by the name field.
         # @!attribute [rw] operation_id
         #   @deprecated This field is deprecated and may be removed in the next major version update.
         #   @return [::String]
@@ -4038,9 +4416,9 @@ module Google
         #   @deprecated This field is deprecated and may be removed in the next major version update.
         #   @return [::String]
         #     Deprecated. The name of the Google Compute Engine
-        #     [zone](https://cloud.google.com/compute/docs/zones#available) to return
-        #     operations for, or `-` for all zones. This field has been deprecated and
-        #     replaced by the parent field.
+        #     [zone](https://cloud.google.com/compute/docs/zones#available)
+        #     to return operations for, or `-` for all zones. This field has been
+        #     deprecated and replaced by the parent field.
         # @!attribute [rw] parent
         #   @return [::String]
         #     The parent (project and location) where the operations will be listed.
@@ -4062,9 +4440,9 @@ module Google
         #   @deprecated This field is deprecated and may be removed in the next major version update.
         #   @return [::String]
         #     Deprecated. The name of the Google Compute Engine
-        #     [zone](https://cloud.google.com/compute/docs/zones#available) in which the
-        #     operation resides. This field has been deprecated and replaced by the name
-        #     field.
+        #     [zone](https://cloud.google.com/compute/docs/zones#available)
+        #     in which the operation resides. This field has been deprecated and replaced
+        #     by the name field.
         # @!attribute [rw] operation_id
         #   @deprecated This field is deprecated and may be removed in the next major version update.
         #   @return [::String]
@@ -4103,9 +4481,9 @@ module Google
         #   @deprecated This field is deprecated and may be removed in the next major version update.
         #   @return [::String]
         #     Deprecated. The name of the Google Compute Engine
-        #     [zone](https://cloud.google.com/compute/docs/zones#available) to return
-        #     operations for. This field has been deprecated and replaced by the name
-        #     field.
+        #     [zone](https://cloud.google.com/compute/docs/zones#available)
+        #     to return operations for. This field has been deprecated and replaced by
+        #     the name field.
         # @!attribute [rw] name
         #   @return [::String]
         #     The name (project and location) of the server config to get,
@@ -4239,9 +4617,9 @@ module Google
         #   @deprecated This field is deprecated and may be removed in the next major version update.
         #   @return [::String]
         #     Deprecated. The name of the Google Compute Engine
-        #     [zone](https://cloud.google.com/compute/docs/zones#available) in which the
-        #     cluster resides. This field has been deprecated and replaced by the parent
-        #     field.
+        #     [zone](https://cloud.google.com/compute/docs/zones#available)
+        #     in which the cluster resides. This field has been deprecated and replaced
+        #     by the parent field.
         # @!attribute [rw] cluster_id
         #   @deprecated This field is deprecated and may be removed in the next major version update.
         #   @return [::String]
@@ -4271,9 +4649,9 @@ module Google
         #   @deprecated This field is deprecated and may be removed in the next major version update.
         #   @return [::String]
         #     Deprecated. The name of the Google Compute Engine
-        #     [zone](https://cloud.google.com/compute/docs/zones#available) in which the
-        #     cluster resides. This field has been deprecated and replaced by the name
-        #     field.
+        #     [zone](https://cloud.google.com/compute/docs/zones#available)
+        #     in which the cluster resides. This field has been deprecated and replaced
+        #     by the name field.
         # @!attribute [rw] cluster_id
         #   @deprecated This field is deprecated and may be removed in the next major version update.
         #   @return [::String]
@@ -4305,9 +4683,9 @@ module Google
         #   @deprecated This field is deprecated and may be removed in the next major version update.
         #   @return [::String]
         #     Deprecated. The name of the Google Compute Engine
-        #     [zone](https://cloud.google.com/compute/docs/zones#available) in which the
-        #     cluster resides. This field has been deprecated and replaced by the parent
-        #     field.
+        #     [zone](https://cloud.google.com/compute/docs/zones#available)
+        #     in which the cluster resides. This field has been deprecated and replaced
+        #     by the parent field.
         # @!attribute [rw] cluster_id
         #   @deprecated This field is deprecated and may be removed in the next major version update.
         #   @return [::String]
@@ -4333,9 +4711,9 @@ module Google
         #   @deprecated This field is deprecated and may be removed in the next major version update.
         #   @return [::String]
         #     Deprecated. The name of the Google Compute Engine
-        #     [zone](https://cloud.google.com/compute/docs/zones#available) in which the
-        #     cluster resides. This field has been deprecated and replaced by the name
-        #     field.
+        #     [zone](https://cloud.google.com/compute/docs/zones#available)
+        #     in which the cluster resides. This field has been deprecated and replaced
+        #     by the name field.
         # @!attribute [rw] cluster_id
         #   @deprecated This field is deprecated and may be removed in the next major version update.
         #   @return [::String]
@@ -4418,14 +4796,15 @@ module Google
         # @!attribute [rw] initial_node_count
         #   @return [::Integer]
         #     The initial node count for the pool. You must ensure that your
-        #     Compute Engine [resource quota](https://cloud.google.com/compute/quotas)
+        #     Compute Engine [resource
+        #     quota](https://cloud.google.com/compute/quotas)
         #     is sufficient for this number of instances. You must also have available
         #     firewall and routes quota.
         # @!attribute [rw] locations
         #   @return [::Array<::String>]
         #     The list of Google Compute Engine
-        #     [zones](https://cloud.google.com/compute/docs/zones#available) in which the
-        #     NodePool's nodes should be located.
+        #     [zones](https://cloud.google.com/compute/docs/zones#available)
+        #     in which the NodePool's nodes should be located.
         #
         #     If this value is unspecified during node pool creation, the
         #     [Cluster.Locations](https://cloud.google.com/kubernetes-engine/docs/reference/rest/v1/projects.locations.clusters#Cluster.FIELDS.locations)
@@ -4899,9 +5278,9 @@ module Google
         #   @deprecated This field is deprecated and may be removed in the next major version update.
         #   @return [::String]
         #     Deprecated. The name of the Google Compute Engine
-        #     [zone](https://cloud.google.com/compute/docs/zones#available) in which the
-        #     cluster resides. This field has been deprecated and replaced by the name
-        #     field.
+        #     [zone](https://cloud.google.com/compute/docs/zones#available)
+        #     in which the cluster resides. This field has been deprecated and replaced
+        #     by the name field.
         # @!attribute [rw] cluster_id
         #   @deprecated This field is deprecated and may be removed in the next major version update.
         #   @return [::String]
@@ -4936,9 +5315,9 @@ module Google
         #   @deprecated This field is deprecated and may be removed in the next major version update.
         #   @return [::String]
         #     Deprecated. The name of the Google Compute Engine
-        #     [zone](https://cloud.google.com/compute/docs/zones#available) in which the
-        #     cluster resides. This field has been deprecated and replaced by the name
-        #     field.
+        #     [zone](https://cloud.google.com/compute/docs/zones#available)
+        #     in which the cluster resides. This field has been deprecated and replaced
+        #     by the name field.
         # @!attribute [rw] cluster_id
         #   @deprecated This field is deprecated and may be removed in the next major version update.
         #   @return [::String]
@@ -4987,9 +5366,9 @@ module Google
         #   @deprecated This field is deprecated and may be removed in the next major version update.
         #   @return [::String]
         #     Deprecated. The name of the Google Compute Engine
-        #     [zone](https://cloud.google.com/compute/docs/zones#available) in which the
-        #     cluster resides. This field has been deprecated and replaced by the name
-        #     field.
+        #     [zone](https://cloud.google.com/compute/docs/zones#available)
+        #     in which the cluster resides. This field has been deprecated and replaced
+        #     by the name field.
         # @!attribute [rw] cluster_id
         #   @deprecated This field is deprecated and may be removed in the next major version update.
         #   @return [::String]
@@ -5044,8 +5423,11 @@ module Google
         # @!attribute [rw] autoprovisioning_locations
         #   @return [::Array<::String>]
         #     The list of Google Compute Engine
-        #     [zones](https://cloud.google.com/compute/docs/zones#available) in which the
-        #     NodePool's nodes can be created by NAP.
+        #     [zones](https://cloud.google.com/compute/docs/zones#available)
+        #     in which the NodePool's nodes can be created by NAP.
+        # @!attribute [rw] default_compute_class_config
+        #   @return [::Google::Cloud::Container::V1beta1::DefaultComputeClassConfig]
+        #     Default compute class is a configuration for default compute class.
         class ClusterAutoscaling
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -5133,8 +5515,8 @@ module Google
         # @!attribute [rw] image_type
         #   @return [::String]
         #     The image type to use for NAP created node. Please see
-        #     https://cloud.google.com/kubernetes-engine/docs/concepts/node-images for
-        #     available image types.
+        #     https://cloud.google.com/kubernetes-engine/docs/concepts/node-images
+        #     for available image types.
         # @!attribute [rw] insecure_kubelet_readonly_port_enabled
         #   @return [::Boolean]
         #     DEPRECATED. Use NodePoolAutoConfig.NodeKubeletConfig instead.
@@ -5155,6 +5537,16 @@ module Google
         #   @return [::Integer]
         #     Maximum amount of the resource in the cluster.
         class ResourceLimit
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # DefaultComputeClassConfig defines default compute class
+        #  configuration.
+        # @!attribute [rw] enabled
+        #   @return [::Boolean]
+        #     Enables default compute class.
+        class DefaultComputeClassConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
@@ -5222,9 +5614,9 @@ module Google
         #   @deprecated This field is deprecated and may be removed in the next major version update.
         #   @return [::String]
         #     Deprecated. The name of the Google Compute Engine
-        #     [zone](https://cloud.google.com/compute/docs/zones#available) in which the
-        #     cluster resides. This field has been deprecated and replaced by the name
-        #     field.
+        #     [zone](https://cloud.google.com/compute/docs/zones#available)
+        #     in which the cluster resides. This field has been deprecated and replaced
+        #     by the name field.
         # @!attribute [rw] cluster_id
         #   @deprecated This field is deprecated and may be removed in the next major version update.
         #   @return [::String]
@@ -5271,9 +5663,9 @@ module Google
         #   @deprecated This field is deprecated and may be removed in the next major version update.
         #   @return [::String]
         #     Deprecated. The name of the Google Compute Engine
-        #     [zone](https://cloud.google.com/compute/docs/zones#available) in which the
-        #     cluster resides. This field has been deprecated and replaced by the name
-        #     field.
+        #     [zone](https://cloud.google.com/compute/docs/zones#available)
+        #     in which the cluster resides. This field has been deprecated and replaced
+        #     by the name field.
         # @!attribute [rw] cluster_id
         #   @deprecated This field is deprecated and may be removed in the next major version update.
         #   @return [::String]
@@ -5303,9 +5695,9 @@ module Google
         #   @deprecated This field is deprecated and may be removed in the next major version update.
         #   @return [::String]
         #     Deprecated. The name of the Google Compute Engine
-        #     [zone](https://cloud.google.com/compute/docs/zones#available) in which the
-        #     cluster resides. This field has been deprecated and replaced by the name
-        #     field.
+        #     [zone](https://cloud.google.com/compute/docs/zones#available)
+        #     in which the cluster resides. This field has been deprecated and replaced
+        #     by the name field.
         # @!attribute [rw] cluster_id
         #   @deprecated This field is deprecated and may be removed in the next major version update.
         #   @return [::String]
@@ -5334,9 +5726,9 @@ module Google
         #   @deprecated This field is deprecated and may be removed in the next major version update.
         #   @return [::String]
         #     Deprecated. The name of the Google Compute Engine
-        #     [zone](https://cloud.google.com/compute/docs/zones#available) in which the
-        #     cluster resides. This field has been deprecated and replaced by the name
-        #     field.
+        #     [zone](https://cloud.google.com/compute/docs/zones#available)
+        #     in which the cluster resides. This field has been deprecated and replaced
+        #     by the name field.
         # @!attribute [rw] cluster_id
         #   @deprecated This field is deprecated and may be removed in the next major version update.
         #   @return [::String]
@@ -5535,9 +5927,9 @@ module Google
         #   @deprecated This field is deprecated and may be removed in the next major version update.
         #   @return [::String]
         #     Deprecated. The name of the Google Compute Engine
-        #     [zone](https://cloud.google.com/compute/docs/zones#available) in which the
-        #     cluster resides. This field has been deprecated and replaced by the name
-        #     field.
+        #     [zone](https://cloud.google.com/compute/docs/zones#available)
+        #     in which the cluster resides. This field has been deprecated and replaced
+        #     by the name field.
         # @!attribute [rw] cluster_id
         #   @deprecated This field is deprecated and may be removed in the next major version update.
         #   @return [::String]
@@ -5563,8 +5955,8 @@ module Google
         # @!attribute [rw] zone
         #   @return [::String]
         #     Required. The name of the Google Compute Engine
-        #     [zone](https://cloud.google.com/compute/docs/zones#available) in which the
-        #     cluster resides.
+        #     [zone](https://cloud.google.com/compute/docs/zones#available)
+        #     in which the cluster resides.
         # @!attribute [rw] cluster_id
         #   @return [::String]
         #     Required. The name of the cluster to update.
@@ -5684,6 +6076,10 @@ module Google
 
             # Node service account is missing permissions.
             NODE_SERVICE_ACCOUNT_MISSING_PERMISSIONS = 10
+
+            # Cloud KMS key version used for etcd level encryption has been destroyed.
+            # This is a permanent error.
+            CLOUD_KMS_KEY_DESTROYED = 11
           end
         end
 
@@ -5697,8 +6093,8 @@ module Google
         # @!attribute [r] subnetwork
         #   @return [::String]
         #     Output only. The relative name of the Google Compute Engine
-        #     [subnetwork](https://cloud.google.com/compute/docs/vpc) to which the
-        #     cluster is connected. Example:
+        #     [subnetwork](https://cloud.google.com/compute/docs/vpc)
+        #     to which the cluster is connected. Example:
         #     projects/my-project/regions/us-central1/subnetworks/my-subnet
         # @!attribute [rw] enable_intra_node_visibility
         #   @return [::Boolean]
@@ -7183,6 +7579,25 @@ module Google
           end
         end
 
+        # BootDisk specifies the boot disk configuration for nodepools.
+        # @!attribute [rw] disk_type
+        #   @return [::String]
+        #     Disk type of the boot disk.
+        #     (i.e. Hyperdisk-Balanced, PD-Balanced, etc.)
+        # @!attribute [rw] size_gb
+        #   @return [::Integer]
+        #     Disk size in GB. Replaces NodeConfig.disk_size_gb
+        # @!attribute [rw] provisioned_iops
+        #   @return [::Integer]
+        #     For Hyperdisk-Balanced only, the provisioned IOPS config value.
+        # @!attribute [rw] provisioned_throughput
+        #   @return [::Integer]
+        #     For Hyperdisk-Balanced only, the provisioned throughput config value.
+        class BootDisk
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # SecondaryBootDisk represents a persistent disk attached to a node
         # with special configurations based on its mode.
         # @!attribute [rw] mode
@@ -7434,6 +7849,29 @@ module Google
 
             # SYSTEM_CONFIG indicates the cluster upgrade is paused by system config.
             SYSTEM_CONFIG = 4
+          end
+        end
+
+        # GkeAutoUpgradeConfig is the configuration for GKE auto upgrades.
+        # @!attribute [rw] patch_mode
+        #   @return [::Google::Cloud::Container::V1beta1::GkeAutoUpgradeConfig::PatchMode]
+        #     PatchMode specifies how auto upgrade patch builds should be
+        #     selected.
+        class GkeAutoUpgradeConfig
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # PatchMode specifies how auto upgrade patch builds should be
+          # selected.
+          module PatchMode
+            # PATCH_MODE_UNSPECIFIED defaults to using the upgrade target from the
+            # channel's patch upgrade targets as the upgrade target for the
+            # version.
+            PATCH_MODE_UNSPECIFIED = 0
+
+            # ACCELERATED denotes that the latest patch build in the channel should be
+            # used as the upgrade target for the version.
+            ACCELERATED = 1
           end
         end
 
