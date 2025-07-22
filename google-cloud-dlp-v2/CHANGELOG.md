@@ -1,5 +1,22 @@
 # Release History
 
+### 1.12.0 (2025-06-24)
+
+#### Features
+
+* Provide a type for findings saved to Cloud Storage ([#30532](https://github.com/googleapis/google-cloud-ruby/issues/30532)) 
+
+### 1.11.0 (2025-06-05)
+
+#### Features
+
+* add a project ID to table reference so that org parents can create single table discovery configs. 
+* add Dataplex Catalog action for discovery configs ([#30482](https://github.com/googleapis/google-cloud-ruby/issues/30482)) 
+* new fields for data profile finding. 
+#### Documentation
+
+* various doc revisions 
+
 ### 1.10.0 (2025-05-12)
 
 #### Features

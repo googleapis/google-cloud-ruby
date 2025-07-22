@@ -1,5 +1,20 @@
 # Changelog
 
+### 0.11.0 (2025-06-30)
+
+#### Features
+
+* Support for CheckoutSettings ([#30576](https://github.com/googleapis/google-cloud-ruby/issues/30576)) 
+
+### 0.10.0 (2025-05-27)
+
+#### Features
+
+* Add new method signature `parent,online_return_policy` to `CreateOnlineReturnPolicy` ([#30431](https://github.com/googleapis/google-cloud-ruby/issues/30431)) 
+#### Documentation
+
+* Minor updates 
+
 ### 0.9.0 (2025-05-16)
 
 #### Features

@@ -61,4 +61,25 @@ class Google::Cloud::DeveloperConnect::ClientConstructionMinitest < Minitest::Te
       assert_kind_of Google::Cloud::DeveloperConnect::V1::DeveloperConnect::Rest::Client, client
     end
   end
+
+  def test_insights_config_service_grpc
+    skip unless Google::Cloud::DeveloperConnect.insights_config_service_available? transport: :grpc
+    Gapic::ServiceStub.stub :new, DummyStub.new do
+      grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+      client = Google::Cloud::DeveloperConnect.insights_config_service transport: :grpc do |config|
+        config.credentials = grpc_channel
+      end
+      assert_kind_of Google::Cloud::DeveloperConnect::V1::InsightsConfigService::Client, client
+    end
+  end
+
+  def test_insights_config_service_rest
+    skip unless Google::Cloud::DeveloperConnect.insights_config_service_available? transport: :rest
+    Gapic::Rest::ClientStub.stub :new, DummyStub.new do
+      client = Google::Cloud::DeveloperConnect.insights_config_service transport: :rest do |config|
+        config.credentials = :dummy_credentials
+      end
+      assert_kind_of Google::Cloud::DeveloperConnect::V1::InsightsConfigService::Rest::Client, client
+    end
+  end
 end

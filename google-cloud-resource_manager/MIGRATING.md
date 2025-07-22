@@ -1,4 +1,4 @@
-## Migrating to google-cloud-resource_manager 1.0
+# Migrating to google-cloud-resource_manager 1.0
 
 The 1.0 release of the google-cloud-resource_manager client is a significant
 upgrade to add a number of new features in version V3 of the resource manager

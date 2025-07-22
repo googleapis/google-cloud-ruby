@@ -223,7 +223,7 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload search(placement: nil, branch: nil, query: nil, visitor_id: nil, user_info: nil, page_size: nil, page_token: nil, offset: nil, filter: nil, canonical_filter: nil, order_by: nil, facet_specs: nil, dynamic_facet_spec: nil, boost_spec: nil, query_expansion_spec: nil, variant_rollup_keys: nil, page_categories: nil, search_mode: nil, personalization_spec: nil, labels: nil, spell_correction_spec: nil, entity: nil, conversational_search_spec: nil, tile_navigation_spec: nil, language_code: nil, region_code: nil, place_id: nil)
+            # @overload search(placement: nil, branch: nil, query: nil, visitor_id: nil, user_info: nil, page_size: nil, page_token: nil, offset: nil, filter: nil, canonical_filter: nil, order_by: nil, facet_specs: nil, dynamic_facet_spec: nil, boost_spec: nil, query_expansion_spec: nil, variant_rollup_keys: nil, page_categories: nil, search_mode: nil, personalization_spec: nil, labels: nil, spell_correction_spec: nil, entity: nil, conversational_search_spec: nil, tile_navigation_spec: nil, language_code: nil, region_code: nil, place_id: nil, user_attributes: nil)
             #   Pass arguments to `search` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -489,6 +489,27 @@ module Google
             #     product's
             #     {::Google::Cloud::Retail::V2::LocalInventory#place_id LocalInventory.place_id}
             #     for revenue optimization.
+            #   @param user_attributes [::Hash{::String => ::Google::Cloud::Retail::V2::StringList, ::Hash}]
+            #     Optional. The user attributes that could be used for personalization of
+            #     search results.
+            #     * Populate at most 100 key-value pairs per query.
+            #     * Only supports string keys and repeated string values.
+            #     * Duplcate keys are not allowed within a single query.
+            #
+            #     Example:
+            #        user_attributes: [
+            #         { key: "pets"
+            #           value {
+            #             values: "dog"
+            #             values: "cat"
+            #           }
+            #         },
+            #         { key: "state"
+            #           value {
+            #             values: "CA"
+            #           }
+            #         }
+            #        ]
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Gapic::PagedEnumerable<::Google::Cloud::Retail::V2::SearchResponse::SearchResult>]

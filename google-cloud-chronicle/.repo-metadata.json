@@ -8,7 +8,7 @@
     "name": "chronicle",
     "name_pretty": "Chronicle API",
     "product_documentation": "https://cloud.google.com/chronicle/docs/secops/secops-overview",
-    "release_level": "unreleased",
+    "release_level": "preview",
     "repo": "googleapis/google-cloud-ruby",
     "requires_billing": true,
     "ruby-cloud-description": "The Google Cloud Security Operations API, popularly known as the Chronicle API, serves endpoints that enable security analysts to analyze and mitigate a security threat throughout its lifecycle.",

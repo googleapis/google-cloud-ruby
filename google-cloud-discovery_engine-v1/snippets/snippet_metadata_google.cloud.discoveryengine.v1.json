@@ -1,7 +1,7 @@
 {
   "client_library": {
     "name": "google-cloud-discovery_engine-v1",
-    "version": "2.2.0",
+    "version": "2.3.0",
     "language": "RUBY",
     "apis": [
       {
@@ -11,6 +11,166 @@
     ]
   },
   "snippets": [
+    {
+      "region_tag": "discoveryengine_v1_generated_CmekConfigService_UpdateCmekConfig_sync",
+      "title": "Snippet for the update_cmek_config call in the CmekConfigService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DiscoveryEngine::V1::CmekConfigService::Client#update_cmek_config.",
+      "file": "cmek_config_service/update_cmek_config.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_cmek_config",
+        "full_name": "::Google::Cloud::DiscoveryEngine::V1::CmekConfigService::Client#update_cmek_config",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::DiscoveryEngine::V1::UpdateCmekConfigRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "CmekConfigService::Client",
+          "full_name": "::Google::Cloud::DiscoveryEngine::V1::CmekConfigService::Client"
+        },
+        "method": {
+          "short_name": "UpdateCmekConfig",
+          "full_name": "google.cloud.discoveryengine.v1.CmekConfigService.UpdateCmekConfig",
+          "service": {
+            "short_name": "CmekConfigService",
+            "full_name": "google.cloud.discoveryengine.v1.CmekConfigService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "discoveryengine_v1_generated_CmekConfigService_GetCmekConfig_sync",
+      "title": "Snippet for the get_cmek_config call in the CmekConfigService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DiscoveryEngine::V1::CmekConfigService::Client#get_cmek_config.",
+      "file": "cmek_config_service/get_cmek_config.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_cmek_config",
+        "full_name": "::Google::Cloud::DiscoveryEngine::V1::CmekConfigService::Client#get_cmek_config",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::DiscoveryEngine::V1::GetCmekConfigRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::DiscoveryEngine::V1::CmekConfig",
+        "client": {
+          "short_name": "CmekConfigService::Client",
+          "full_name": "::Google::Cloud::DiscoveryEngine::V1::CmekConfigService::Client"
+        },
+        "method": {
+          "short_name": "GetCmekConfig",
+          "full_name": "google.cloud.discoveryengine.v1.CmekConfigService.GetCmekConfig",
+          "service": {
+            "short_name": "CmekConfigService",
+            "full_name": "google.cloud.discoveryengine.v1.CmekConfigService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "discoveryengine_v1_generated_CmekConfigService_ListCmekConfigs_sync",
+      "title": "Snippet for the list_cmek_configs call in the CmekConfigService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DiscoveryEngine::V1::CmekConfigService::Client#list_cmek_configs.",
+      "file": "cmek_config_service/list_cmek_configs.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_cmek_configs",
+        "full_name": "::Google::Cloud::DiscoveryEngine::V1::CmekConfigService::Client#list_cmek_configs",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::DiscoveryEngine::V1::ListCmekConfigsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::DiscoveryEngine::V1::ListCmekConfigsResponse",
+        "client": {
+          "short_name": "CmekConfigService::Client",
+          "full_name": "::Google::Cloud::DiscoveryEngine::V1::CmekConfigService::Client"
+        },
+        "method": {
+          "short_name": "ListCmekConfigs",
+          "full_name": "google.cloud.discoveryengine.v1.CmekConfigService.ListCmekConfigs",
+          "service": {
+            "short_name": "CmekConfigService",
+            "full_name": "google.cloud.discoveryengine.v1.CmekConfigService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "discoveryengine_v1_generated_CmekConfigService_DeleteCmekConfig_sync",
+      "title": "Snippet for the delete_cmek_config call in the CmekConfigService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DiscoveryEngine::V1::CmekConfigService::Client#delete_cmek_config.",
+      "file": "cmek_config_service/delete_cmek_config.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_cmek_config",
+        "full_name": "::Google::Cloud::DiscoveryEngine::V1::CmekConfigService::Client#delete_cmek_config",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::DiscoveryEngine::V1::DeleteCmekConfigRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "CmekConfigService::Client",
+          "full_name": "::Google::Cloud::DiscoveryEngine::V1::CmekConfigService::Client"
+        },
+        "method": {
+          "short_name": "DeleteCmekConfig",
+          "full_name": "google.cloud.discoveryengine.v1.CmekConfigService.DeleteCmekConfig",
+          "service": {
+            "short_name": "CmekConfigService",
+            "full_name": "google.cloud.discoveryengine.v1.CmekConfigService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
     {
       "region_tag": "discoveryengine_v1_generated_CompletionService_CompleteQuery_sync",
       "title": "Snippet for the complete_query call in the CompletionService service",
@@ -1892,6 +2052,286 @@
       ]
     },
     {
+      "region_tag": "discoveryengine_v1_generated_IdentityMappingStoreService_CreateIdentityMappingStore_sync",
+      "title": "Snippet for the create_identity_mapping_store call in the IdentityMappingStoreService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DiscoveryEngine::V1::IdentityMappingStoreService::Client#create_identity_mapping_store.",
+      "file": "identity_mapping_store_service/create_identity_mapping_store.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_identity_mapping_store",
+        "full_name": "::Google::Cloud::DiscoveryEngine::V1::IdentityMappingStoreService::Client#create_identity_mapping_store",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::DiscoveryEngine::V1::CreateIdentityMappingStoreRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::DiscoveryEngine::V1::IdentityMappingStore",
+        "client": {
+          "short_name": "IdentityMappingStoreService::Client",
+          "full_name": "::Google::Cloud::DiscoveryEngine::V1::IdentityMappingStoreService::Client"
+        },
+        "method": {
+          "short_name": "CreateIdentityMappingStore",
+          "full_name": "google.cloud.discoveryengine.v1.IdentityMappingStoreService.CreateIdentityMappingStore",
+          "service": {
+            "short_name": "IdentityMappingStoreService",
+            "full_name": "google.cloud.discoveryengine.v1.IdentityMappingStoreService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "discoveryengine_v1_generated_IdentityMappingStoreService_GetIdentityMappingStore_sync",
+      "title": "Snippet for the get_identity_mapping_store call in the IdentityMappingStoreService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DiscoveryEngine::V1::IdentityMappingStoreService::Client#get_identity_mapping_store.",
+      "file": "identity_mapping_store_service/get_identity_mapping_store.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_identity_mapping_store",
+        "full_name": "::Google::Cloud::DiscoveryEngine::V1::IdentityMappingStoreService::Client#get_identity_mapping_store",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::DiscoveryEngine::V1::GetIdentityMappingStoreRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::DiscoveryEngine::V1::IdentityMappingStore",
+        "client": {
+          "short_name": "IdentityMappingStoreService::Client",
+          "full_name": "::Google::Cloud::DiscoveryEngine::V1::IdentityMappingStoreService::Client"
+        },
+        "method": {
+          "short_name": "GetIdentityMappingStore",
+          "full_name": "google.cloud.discoveryengine.v1.IdentityMappingStoreService.GetIdentityMappingStore",
+          "service": {
+            "short_name": "IdentityMappingStoreService",
+            "full_name": "google.cloud.discoveryengine.v1.IdentityMappingStoreService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "discoveryengine_v1_generated_IdentityMappingStoreService_DeleteIdentityMappingStore_sync",
+      "title": "Snippet for the delete_identity_mapping_store call in the IdentityMappingStoreService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DiscoveryEngine::V1::IdentityMappingStoreService::Client#delete_identity_mapping_store.",
+      "file": "identity_mapping_store_service/delete_identity_mapping_store.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_identity_mapping_store",
+        "full_name": "::Google::Cloud::DiscoveryEngine::V1::IdentityMappingStoreService::Client#delete_identity_mapping_store",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::DiscoveryEngine::V1::DeleteIdentityMappingStoreRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "IdentityMappingStoreService::Client",
+          "full_name": "::Google::Cloud::DiscoveryEngine::V1::IdentityMappingStoreService::Client"
+        },
+        "method": {
+          "short_name": "DeleteIdentityMappingStore",
+          "full_name": "google.cloud.discoveryengine.v1.IdentityMappingStoreService.DeleteIdentityMappingStore",
+          "service": {
+            "short_name": "IdentityMappingStoreService",
+            "full_name": "google.cloud.discoveryengine.v1.IdentityMappingStoreService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "discoveryengine_v1_generated_IdentityMappingStoreService_ImportIdentityMappings_sync",
+      "title": "Snippet for the import_identity_mappings call in the IdentityMappingStoreService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DiscoveryEngine::V1::IdentityMappingStoreService::Client#import_identity_mappings.",
+      "file": "identity_mapping_store_service/import_identity_mappings.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "import_identity_mappings",
+        "full_name": "::Google::Cloud::DiscoveryEngine::V1::IdentityMappingStoreService::Client#import_identity_mappings",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::DiscoveryEngine::V1::ImportIdentityMappingsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "IdentityMappingStoreService::Client",
+          "full_name": "::Google::Cloud::DiscoveryEngine::V1::IdentityMappingStoreService::Client"
+        },
+        "method": {
+          "short_name": "ImportIdentityMappings",
+          "full_name": "google.cloud.discoveryengine.v1.IdentityMappingStoreService.ImportIdentityMappings",
+          "service": {
+            "short_name": "IdentityMappingStoreService",
+            "full_name": "google.cloud.discoveryengine.v1.IdentityMappingStoreService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "discoveryengine_v1_generated_IdentityMappingStoreService_PurgeIdentityMappings_sync",
+      "title": "Snippet for the purge_identity_mappings call in the IdentityMappingStoreService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DiscoveryEngine::V1::IdentityMappingStoreService::Client#purge_identity_mappings.",
+      "file": "identity_mapping_store_service/purge_identity_mappings.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "purge_identity_mappings",
+        "full_name": "::Google::Cloud::DiscoveryEngine::V1::IdentityMappingStoreService::Client#purge_identity_mappings",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::DiscoveryEngine::V1::PurgeIdentityMappingsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "IdentityMappingStoreService::Client",
+          "full_name": "::Google::Cloud::DiscoveryEngine::V1::IdentityMappingStoreService::Client"
+        },
+        "method": {
+          "short_name": "PurgeIdentityMappings",
+          "full_name": "google.cloud.discoveryengine.v1.IdentityMappingStoreService.PurgeIdentityMappings",
+          "service": {
+            "short_name": "IdentityMappingStoreService",
+            "full_name": "google.cloud.discoveryengine.v1.IdentityMappingStoreService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "discoveryengine_v1_generated_IdentityMappingStoreService_ListIdentityMappings_sync",
+      "title": "Snippet for the list_identity_mappings call in the IdentityMappingStoreService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DiscoveryEngine::V1::IdentityMappingStoreService::Client#list_identity_mappings.",
+      "file": "identity_mapping_store_service/list_identity_mappings.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_identity_mappings",
+        "full_name": "::Google::Cloud::DiscoveryEngine::V1::IdentityMappingStoreService::Client#list_identity_mappings",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::DiscoveryEngine::V1::ListIdentityMappingsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::DiscoveryEngine::V1::ListIdentityMappingsResponse",
+        "client": {
+          "short_name": "IdentityMappingStoreService::Client",
+          "full_name": "::Google::Cloud::DiscoveryEngine::V1::IdentityMappingStoreService::Client"
+        },
+        "method": {
+          "short_name": "ListIdentityMappings",
+          "full_name": "google.cloud.discoveryengine.v1.IdentityMappingStoreService.ListIdentityMappings",
+          "service": {
+            "short_name": "IdentityMappingStoreService",
+            "full_name": "google.cloud.discoveryengine.v1.IdentityMappingStoreService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "discoveryengine_v1_generated_IdentityMappingStoreService_ListIdentityMappingStores_sync",
+      "title": "Snippet for the list_identity_mapping_stores call in the IdentityMappingStoreService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DiscoveryEngine::V1::IdentityMappingStoreService::Client#list_identity_mapping_stores.",
+      "file": "identity_mapping_store_service/list_identity_mapping_stores.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_identity_mapping_stores",
+        "full_name": "::Google::Cloud::DiscoveryEngine::V1::IdentityMappingStoreService::Client#list_identity_mapping_stores",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::DiscoveryEngine::V1::ListIdentityMappingStoresRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::DiscoveryEngine::V1::ListIdentityMappingStoresResponse",
+        "client": {
+          "short_name": "IdentityMappingStoreService::Client",
+          "full_name": "::Google::Cloud::DiscoveryEngine::V1::IdentityMappingStoreService::Client"
+        },
+        "method": {
+          "short_name": "ListIdentityMappingStores",
+          "full_name": "google.cloud.discoveryengine.v1.IdentityMappingStoreService.ListIdentityMappingStores",
+          "service": {
+            "short_name": "IdentityMappingStoreService",
+            "full_name": "google.cloud.discoveryengine.v1.IdentityMappingStoreService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
       "region_tag": "discoveryengine_v1_generated_ProjectService_ProvisionProject_sync",
       "title": "Snippet for the provision_project call in the ProjectService service",
       "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DiscoveryEngine::V1::ProjectService::Client#provision_project.",
@@ -3078,6 +3518,86 @@
           "service": {
             "short_name": "UserEventService",
             "full_name": "google.cloud.discoveryengine.v1.UserEventService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "discoveryengine_v1_generated_UserLicenseService_ListUserLicenses_sync",
+      "title": "Snippet for the list_user_licenses call in the UserLicenseService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DiscoveryEngine::V1::UserLicenseService::Client#list_user_licenses.",
+      "file": "user_license_service/list_user_licenses.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_user_licenses",
+        "full_name": "::Google::Cloud::DiscoveryEngine::V1::UserLicenseService::Client#list_user_licenses",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::DiscoveryEngine::V1::ListUserLicensesRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::DiscoveryEngine::V1::ListUserLicensesResponse",
+        "client": {
+          "short_name": "UserLicenseService::Client",
+          "full_name": "::Google::Cloud::DiscoveryEngine::V1::UserLicenseService::Client"
+        },
+        "method": {
+          "short_name": "ListUserLicenses",
+          "full_name": "google.cloud.discoveryengine.v1.UserLicenseService.ListUserLicenses",
+          "service": {
+            "short_name": "UserLicenseService",
+            "full_name": "google.cloud.discoveryengine.v1.UserLicenseService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "discoveryengine_v1_generated_UserLicenseService_BatchUpdateUserLicenses_sync",
+      "title": "Snippet for the batch_update_user_licenses call in the UserLicenseService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DiscoveryEngine::V1::UserLicenseService::Client#batch_update_user_licenses.",
+      "file": "user_license_service/batch_update_user_licenses.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "batch_update_user_licenses",
+        "full_name": "::Google::Cloud::DiscoveryEngine::V1::UserLicenseService::Client#batch_update_user_licenses",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::DiscoveryEngine::V1::BatchUpdateUserLicensesRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "UserLicenseService::Client",
+          "full_name": "::Google::Cloud::DiscoveryEngine::V1::UserLicenseService::Client"
+        },
+        "method": {
+          "short_name": "BatchUpdateUserLicenses",
+          "full_name": "google.cloud.discoveryengine.v1.UserLicenseService.BatchUpdateUserLicenses",
+          "service": {
+            "short_name": "UserLicenseService",
+            "full_name": "google.cloud.discoveryengine.v1.UserLicenseService"
           }
         }
       },

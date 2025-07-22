@@ -125,7 +125,7 @@ module Google
             # Pulls messages from the server.
             rpc :Pull, ::Google::Cloud::PubSub::V1::PullRequest, ::Google::Cloud::PubSub::V1::PullResponse
             # Establishes a stream with the server, which sends messages down to the
-            # client. The client streams acknowledgements and ack deadline modifications
+            # client. The client streams acknowledgments and ack deadline modifications
             # back to the server. The server will close the stream and return the status
             # on any error. The server may close the stream with status `UNAVAILABLE` to
             # reassign server-side resources, in which case, the client should

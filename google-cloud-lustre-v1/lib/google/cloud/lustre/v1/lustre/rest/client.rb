@@ -727,15 +727,18 @@ module Google
               #
               #   @param gcs_path [::Google::Cloud::Lustre::V1::GcsPath, ::Hash]
               #     The Cloud Storage source bucket and, optionally, path inside the bucket.
+              #     If a path inside the bucket is specified, it must end with a forward
+              #     slash (`/`).
               #   @param lustre_path [::Google::Cloud::Lustre::V1::LustrePath, ::Hash]
               #     Lustre path destination.
               #   @param name [::String]
-              #     Required. Name of the resource.
+              #     Required. The name of the Managed Lustre instance in the format
+              #     `projects/{project}/locations/{location}/instances/{instance}`.
               #   @param request_id [::String]
               #     Optional. UUID to identify requests.
               #   @param service_account [::String]
               #     Optional. User-specified service account used to perform the transfer.
-              #     If unspecified, the default Lustre P4 service account will be used.
+              #     If unspecified, the default Managed Lustre service agent will be used.
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Gapic::Operation]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
@@ -822,11 +825,16 @@ module Google
               #   the default parameter values, pass an empty Hash as a request object (see above).
               #
               #   @param lustre_path [::Google::Cloud::Lustre::V1::LustrePath, ::Hash]
-              #     Lustre path source.
+              #     The root directory path to the Managed Lustre file system. Must start
+              #     with `/`. Default is `/`.
               #   @param gcs_path [::Google::Cloud::Lustre::V1::GcsPath, ::Hash]
-              #     Cloud Storage destination.
+              #     The URI to a Cloud Storage bucket, or a path within a bucket, using
+              #     the format `gs://<bucket_name>/<optional_path_inside_bucket>/`. If a
+              #     path inside the bucket is specified, it must end with a forward slash
+              #     (`/`).
               #   @param name [::String]
-              #     Required. Name of the resource.
+              #     Required. The name of the Managed Lustre instance in the format
+              #     `projects/{project}/locations/{location}/instances/{instance}`.
               #   @param request_id [::String]
               #     Optional. UUID to identify requests.
               #   @param service_account [::String]

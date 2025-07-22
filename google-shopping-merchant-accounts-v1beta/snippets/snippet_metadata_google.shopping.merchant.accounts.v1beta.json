@@ -1,7 +1,7 @@
 {
   "client_library": {
     "name": "google-shopping-merchant-accounts-v1beta",
-    "version": "0.9.0",
+    "version": "0.11.0",
     "language": "RUBY",
     "apis": [
       {
@@ -918,6 +918,166 @@
           "service": {
             "short_name": "BusinessInfoService",
             "full_name": "google.shopping.merchant.accounts.v1beta.BusinessInfoService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "merchantapi_v1beta_generated_CheckoutSettingsService_GetCheckoutSettings_sync",
+      "title": "Snippet for the get_checkout_settings call in the CheckoutSettingsService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Shopping::Merchant::Accounts::V1beta::CheckoutSettingsService::Client#get_checkout_settings.",
+      "file": "checkout_settings_service/get_checkout_settings.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_checkout_settings",
+        "full_name": "::Google::Shopping::Merchant::Accounts::V1beta::CheckoutSettingsService::Client#get_checkout_settings",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Shopping::Merchant::Accounts::V1beta::GetCheckoutSettingsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Shopping::Merchant::Accounts::V1beta::CheckoutSettings",
+        "client": {
+          "short_name": "CheckoutSettingsService::Client",
+          "full_name": "::Google::Shopping::Merchant::Accounts::V1beta::CheckoutSettingsService::Client"
+        },
+        "method": {
+          "short_name": "GetCheckoutSettings",
+          "full_name": "google.shopping.merchant.accounts.v1beta.CheckoutSettingsService.GetCheckoutSettings",
+          "service": {
+            "short_name": "CheckoutSettingsService",
+            "full_name": "google.shopping.merchant.accounts.v1beta.CheckoutSettingsService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "merchantapi_v1beta_generated_CheckoutSettingsService_CreateCheckoutSettings_sync",
+      "title": "Snippet for the create_checkout_settings call in the CheckoutSettingsService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Shopping::Merchant::Accounts::V1beta::CheckoutSettingsService::Client#create_checkout_settings.",
+      "file": "checkout_settings_service/create_checkout_settings.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_checkout_settings",
+        "full_name": "::Google::Shopping::Merchant::Accounts::V1beta::CheckoutSettingsService::Client#create_checkout_settings",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Shopping::Merchant::Accounts::V1beta::CreateCheckoutSettingsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Shopping::Merchant::Accounts::V1beta::CheckoutSettings",
+        "client": {
+          "short_name": "CheckoutSettingsService::Client",
+          "full_name": "::Google::Shopping::Merchant::Accounts::V1beta::CheckoutSettingsService::Client"
+        },
+        "method": {
+          "short_name": "CreateCheckoutSettings",
+          "full_name": "google.shopping.merchant.accounts.v1beta.CheckoutSettingsService.CreateCheckoutSettings",
+          "service": {
+            "short_name": "CheckoutSettingsService",
+            "full_name": "google.shopping.merchant.accounts.v1beta.CheckoutSettingsService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "merchantapi_v1beta_generated_CheckoutSettingsService_UpdateCheckoutSettings_sync",
+      "title": "Snippet for the update_checkout_settings call in the CheckoutSettingsService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Shopping::Merchant::Accounts::V1beta::CheckoutSettingsService::Client#update_checkout_settings.",
+      "file": "checkout_settings_service/update_checkout_settings.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_checkout_settings",
+        "full_name": "::Google::Shopping::Merchant::Accounts::V1beta::CheckoutSettingsService::Client#update_checkout_settings",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Shopping::Merchant::Accounts::V1beta::UpdateCheckoutSettingsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Shopping::Merchant::Accounts::V1beta::CheckoutSettings",
+        "client": {
+          "short_name": "CheckoutSettingsService::Client",
+          "full_name": "::Google::Shopping::Merchant::Accounts::V1beta::CheckoutSettingsService::Client"
+        },
+        "method": {
+          "short_name": "UpdateCheckoutSettings",
+          "full_name": "google.shopping.merchant.accounts.v1beta.CheckoutSettingsService.UpdateCheckoutSettings",
+          "service": {
+            "short_name": "CheckoutSettingsService",
+            "full_name": "google.shopping.merchant.accounts.v1beta.CheckoutSettingsService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "merchantapi_v1beta_generated_CheckoutSettingsService_DeleteCheckoutSettings_sync",
+      "title": "Snippet for the delete_checkout_settings call in the CheckoutSettingsService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Shopping::Merchant::Accounts::V1beta::CheckoutSettingsService::Client#delete_checkout_settings.",
+      "file": "checkout_settings_service/delete_checkout_settings.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_checkout_settings",
+        "full_name": "::Google::Shopping::Merchant::Accounts::V1beta::CheckoutSettingsService::Client#delete_checkout_settings",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Shopping::Merchant::Accounts::V1beta::DeleteCheckoutSettingsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Protobuf::Empty",
+        "client": {
+          "short_name": "CheckoutSettingsService::Client",
+          "full_name": "::Google::Shopping::Merchant::Accounts::V1beta::CheckoutSettingsService::Client"
+        },
+        "method": {
+          "short_name": "DeleteCheckoutSettings",
+          "full_name": "google.shopping.merchant.accounts.v1beta.CheckoutSettingsService.DeleteCheckoutSettings",
+          "service": {
+            "short_name": "CheckoutSettingsService",
+            "full_name": "google.shopping.merchant.accounts.v1beta.CheckoutSettingsService"
           }
         }
       },

@@ -1,7 +1,7 @@
 {
   "client_library": {
     "name": "google-cloud-container-v1",
-    "version": "1.7.0",
+    "version": "1.8.0",
     "language": "RUBY",
     "apis": [
       {
@@ -1355,6 +1355,86 @@
         "method": {
           "short_name": "CheckAutopilotCompatibility",
           "full_name": "google.container.v1.ClusterManager.CheckAutopilotCompatibility",
+          "service": {
+            "short_name": "ClusterManager",
+            "full_name": "google.container.v1.ClusterManager"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "container_v1_generated_ClusterManager_FetchClusterUpgradeInfo_sync",
+      "title": "Snippet for the fetch_cluster_upgrade_info call in the ClusterManager service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Container::V1::ClusterManager::Client#fetch_cluster_upgrade_info.",
+      "file": "cluster_manager/fetch_cluster_upgrade_info.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "fetch_cluster_upgrade_info",
+        "full_name": "::Google::Cloud::Container::V1::ClusterManager::Client#fetch_cluster_upgrade_info",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Container::V1::FetchClusterUpgradeInfoRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Container::V1::ClusterUpgradeInfo",
+        "client": {
+          "short_name": "ClusterManager::Client",
+          "full_name": "::Google::Cloud::Container::V1::ClusterManager::Client"
+        },
+        "method": {
+          "short_name": "FetchClusterUpgradeInfo",
+          "full_name": "google.container.v1.ClusterManager.FetchClusterUpgradeInfo",
+          "service": {
+            "short_name": "ClusterManager",
+            "full_name": "google.container.v1.ClusterManager"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "container_v1_generated_ClusterManager_FetchNodePoolUpgradeInfo_sync",
+      "title": "Snippet for the fetch_node_pool_upgrade_info call in the ClusterManager service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Container::V1::ClusterManager::Client#fetch_node_pool_upgrade_info.",
+      "file": "cluster_manager/fetch_node_pool_upgrade_info.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "fetch_node_pool_upgrade_info",
+        "full_name": "::Google::Cloud::Container::V1::ClusterManager::Client#fetch_node_pool_upgrade_info",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Container::V1::FetchNodePoolUpgradeInfoRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Container::V1::NodePoolUpgradeInfo",
+        "client": {
+          "short_name": "ClusterManager::Client",
+          "full_name": "::Google::Cloud::Container::V1::ClusterManager::Client"
+        },
+        "method": {
+          "short_name": "FetchNodePoolUpgradeInfo",
+          "full_name": "google.container.v1.ClusterManager.FetchNodePoolUpgradeInfo",
           "service": {
             "short_name": "ClusterManager",
             "full_name": "google.container.v1.ClusterManager"

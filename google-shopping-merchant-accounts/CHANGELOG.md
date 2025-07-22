@@ -1,5 +1,11 @@
 # Changelog
 
+### 0.6.0 (2025-06-30)
+
+#### Features
+
+* Support for CheckoutSettingsService ([#30575](https://github.com/googleapis/google-cloud-ruby/issues/30575)) 
+
 ### 0.5.0 (2025-05-16)
 
 #### Features

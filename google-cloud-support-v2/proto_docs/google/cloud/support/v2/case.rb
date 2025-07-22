@@ -50,7 +50,7 @@ module Google
         # about project identifiers, see [AIP-2510](https://google.aip.dev/cloud/2510).
         # @!attribute [rw] name
         #   @return [::String]
-        #     The resource name for the case.
+        #     Identifier. The resource name for the case.
         # @!attribute [rw] display_name
         #   @return [::String]
         #     The short summary of the issue reported in this case.

@@ -643,6 +643,49 @@ module Google
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
 
+          # Represents a protobuf schema.
+          # @!attribute [rw] proto_descriptors
+          #   @return [::String]
+          #     Required. Contains a protobuf-serialized
+          #     [google.protobuf.FileDescriptorSet](https://github.com/protocolbuffers/protobuf/blob/main/src/google/protobuf/descriptor.proto),
+          #     which could include multiple proto files.
+          #     To generate it, [install](https://grpc.io/docs/protoc-installation/) and
+          #     run `protoc` with
+          #     `--include_imports` and `--descriptor_set_out`. For example, to generate
+          #     for moon/shot/app.proto, run
+          #     ```
+          #     $protoc  --proto_path=/app_path --proto_path=/lib_path \
+          #              --include_imports \
+          #              --descriptor_set_out=descriptors.pb \
+          #              moon/shot/app.proto
+          #     ```
+          #     For more details, see protobuffer [self
+          #     description](https://developers.google.com/protocol-buffers/docs/techniques#self-description).
+          class ProtoSchema
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # A named collection of related schemas.
+          # @!attribute [rw] name
+          #   @return [::String]
+          #     Identifier. The unique name identifying this schema bundle.
+          #     Values are of the form
+          #     `projects/{project}/instances/{instance}/tables/{table}/schemaBundles/{schema_bundle}`
+          # @!attribute [rw] proto_schema
+          #   @return [::Google::Cloud::Bigtable::Admin::V2::ProtoSchema]
+          #     Schema for Protobufs.
+          # @!attribute [rw] etag
+          #   @return [::String]
+          #     Optional. The etag for this schema bundle.
+          #     This may be sent on update and delete requests to ensure the
+          #     client has an up-to-date value before proceeding. The server
+          #     returns an ABORTED error on a mismatched etag.
+          class SchemaBundle
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
           # Indicates the type of the restore source.
           module RestoreSourceType
             # No restore associated.

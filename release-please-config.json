@@ -991,10 +991,6 @@
       "component": "google-cloud-memorystore-v1beta",
       "version_file": "lib/google/cloud/memorystore/v1beta/version.rb"
     },
-    "google-cloud-merchant-issue_resolution-v1beta": {
-      "component": "google-cloud-merchant-issue_resolution-v1beta",
-      "version_file": "lib/google/cloud/merchant/issue_resolution/v1beta/version.rb"
-    },
     "google-cloud-metastore": {
       "component": "google-cloud-metastore",
       "version_file": "lib/google/cloud/metastore/version.rb"
@@ -1850,6 +1846,14 @@
     "google-shopping-merchant-inventories-v1beta": {
       "component": "google-shopping-merchant-inventories-v1beta",
       "version_file": "lib/google/shopping/merchant/inventories/v1beta/version.rb"
+    },
+    "google-shopping-merchant-issue_resolution": {
+      "component": "google-shopping-merchant-issue_resolution",
+      "version_file": "lib/google/shopping/merchant/issue_resolution/version.rb"
+    },
+    "google-shopping-merchant-issue_resolution-v1beta": {
+      "component": "google-shopping-merchant-issue_resolution-v1beta",
+      "version_file": "lib/google/shopping/merchant/issue_resolution/v1beta/version.rb"
     },
     "google-shopping-merchant-lfp": {
       "component": "google-shopping-merchant-lfp",

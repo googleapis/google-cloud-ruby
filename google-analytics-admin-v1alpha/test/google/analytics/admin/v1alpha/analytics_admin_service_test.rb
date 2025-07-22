@@ -8812,12 +8812,14 @@ class ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::ClientTest < M
     # Create request parameters for a unary method.
     subproperty = {}
     subproperty_event_filter = {}
+    custom_dimension_and_metric_synchronization_mode = :SYNCHRONIZATION_MODE_UNSPECIFIED
 
     provision_subproperty_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :provision_subproperty, name
       assert_kind_of ::Google::Analytics::Admin::V1alpha::ProvisionSubpropertyRequest, request
       assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Analytics::Admin::V1alpha::Property), request["subproperty"]
       assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Analytics::Admin::V1alpha::SubpropertyEventFilter), request["subproperty_event_filter"]
+      assert_equal :SYNCHRONIZATION_MODE_UNSPECIFIED, request["custom_dimension_and_metric_synchronization_mode"]
       refute_nil options
     end
 
@@ -8828,31 +8830,31 @@ class ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::ClientTest < M
       end
 
       # Use hash object
-      client.provision_subproperty({ subproperty: subproperty, subproperty_event_filter: subproperty_event_filter }) do |response, operation|
+      client.provision_subproperty({ subproperty: subproperty, subproperty_event_filter: subproperty_event_filter, custom_dimension_and_metric_synchronization_mode: custom_dimension_and_metric_synchronization_mode }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.provision_subproperty subproperty: subproperty, subproperty_event_filter: subproperty_event_filter do |response, operation|
+      client.provision_subproperty subproperty: subproperty, subproperty_event_filter: subproperty_event_filter, custom_dimension_and_metric_synchronization_mode: custom_dimension_and_metric_synchronization_mode do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.provision_subproperty ::Google::Analytics::Admin::V1alpha::ProvisionSubpropertyRequest.new(subproperty: subproperty, subproperty_event_filter: subproperty_event_filter) do |response, operation|
+      client.provision_subproperty ::Google::Analytics::Admin::V1alpha::ProvisionSubpropertyRequest.new(subproperty: subproperty, subproperty_event_filter: subproperty_event_filter, custom_dimension_and_metric_synchronization_mode: custom_dimension_and_metric_synchronization_mode) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.provision_subproperty({ subproperty: subproperty, subproperty_event_filter: subproperty_event_filter }, grpc_options) do |response, operation|
+      client.provision_subproperty({ subproperty: subproperty, subproperty_event_filter: subproperty_event_filter, custom_dimension_and_metric_synchronization_mode: custom_dimension_and_metric_synchronization_mode }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.provision_subproperty(::Google::Analytics::Admin::V1alpha::ProvisionSubpropertyRequest.new(subproperty: subproperty, subproperty_event_filter: subproperty_event_filter), grpc_options) do |response, operation|
+      client.provision_subproperty(::Google::Analytics::Admin::V1alpha::ProvisionSubpropertyRequest.new(subproperty: subproperty, subproperty_event_filter: subproperty_event_filter, custom_dimension_and_metric_synchronization_mode: custom_dimension_and_metric_synchronization_mode), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -9528,6 +9530,191 @@ class ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::ClientTest < M
 
       # Verify method calls
       assert_equal 5, submit_user_deletion_client_stub.call_rpc_count
+    end
+  end
+
+  def test_list_subproperty_sync_configs
+    # Create GRPC objects.
+    grpc_response = ::Google::Analytics::Admin::V1alpha::ListSubpropertySyncConfigsResponse.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    page_size = 42
+    page_token = "hello world"
+
+    list_subproperty_sync_configs_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :list_subproperty_sync_configs, name
+      assert_kind_of ::Google::Analytics::Admin::V1alpha::ListSubpropertySyncConfigsRequest, request
+      assert_equal "hello world", request["parent"]
+      assert_equal 42, request["page_size"]
+      assert_equal "hello world", request["page_token"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, list_subproperty_sync_configs_client_stub do
+      # Create client
+      client = ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.list_subproperty_sync_configs({ parent: parent, page_size: page_size, page_token: page_token }) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.list_subproperty_sync_configs parent: parent, page_size: page_size, page_token: page_token do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.list_subproperty_sync_configs ::Google::Analytics::Admin::V1alpha::ListSubpropertySyncConfigsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.list_subproperty_sync_configs({ parent: parent, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.list_subproperty_sync_configs(::Google::Analytics::Admin::V1alpha::ListSubpropertySyncConfigsRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, list_subproperty_sync_configs_client_stub.call_rpc_count
+    end
+  end
+
+  def test_update_subproperty_sync_config
+    # Create GRPC objects.
+    grpc_response = ::Google::Analytics::Admin::V1alpha::SubpropertySyncConfig.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    subproperty_sync_config = {}
+    update_mask = {}
+
+    update_subproperty_sync_config_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :update_subproperty_sync_config, name
+      assert_kind_of ::Google::Analytics::Admin::V1alpha::UpdateSubpropertySyncConfigRequest, request
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Analytics::Admin::V1alpha::SubpropertySyncConfig), request["subproperty_sync_config"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request["update_mask"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, update_subproperty_sync_config_client_stub do
+      # Create client
+      client = ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.update_subproperty_sync_config({ subproperty_sync_config: subproperty_sync_config, update_mask: update_mask }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.update_subproperty_sync_config subproperty_sync_config: subproperty_sync_config, update_mask: update_mask do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.update_subproperty_sync_config ::Google::Analytics::Admin::V1alpha::UpdateSubpropertySyncConfigRequest.new(subproperty_sync_config: subproperty_sync_config, update_mask: update_mask) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.update_subproperty_sync_config({ subproperty_sync_config: subproperty_sync_config, update_mask: update_mask }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.update_subproperty_sync_config(::Google::Analytics::Admin::V1alpha::UpdateSubpropertySyncConfigRequest.new(subproperty_sync_config: subproperty_sync_config, update_mask: update_mask), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, update_subproperty_sync_config_client_stub.call_rpc_count
+    end
+  end
+
+  def test_get_subproperty_sync_config
+    # Create GRPC objects.
+    grpc_response = ::Google::Analytics::Admin::V1alpha::SubpropertySyncConfig.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    get_subproperty_sync_config_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :get_subproperty_sync_config, name
+      assert_kind_of ::Google::Analytics::Admin::V1alpha::GetSubpropertySyncConfigRequest, request
+      assert_equal "hello world", request["name"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, get_subproperty_sync_config_client_stub do
+      # Create client
+      client = ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.get_subproperty_sync_config({ name: name }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.get_subproperty_sync_config name: name do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.get_subproperty_sync_config ::Google::Analytics::Admin::V1alpha::GetSubpropertySyncConfigRequest.new(name: name) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.get_subproperty_sync_config({ name: name }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.get_subproperty_sync_config(::Google::Analytics::Admin::V1alpha::GetSubpropertySyncConfigRequest.new(name: name), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, get_subproperty_sync_config_client_stub.call_rpc_count
     end
   end
 

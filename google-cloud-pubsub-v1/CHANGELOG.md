@@ -1,5 +1,21 @@
 # Release History
 
+### 1.11.0 (2025-07-01)
+
+#### Features
+
+* Support for message_transformation_failure_reason ([#30574](https://github.com/googleapis/google-cloud-ruby/issues/30574)) 
+* Rename Publisher to TopicAdmin and Subscriber to SubscriptionAdmin with aliases for backwards compatibility ([#29519](https://github.com/googleapis/google-cloud-ruby/issues/29519)) 
+
+### 1.10.0 (2025-06-23)
+
+#### Features
+
+* Add SchemaViolationReason to IngestionFailureEvent ([#30433](https://github.com/googleapis/google-cloud-ruby/issues/30433)) 
+#### Documentation
+
+* Standardize spelling of "acknowledgment" in Pub/Sub protos 
+
 ### 1.9.0 (2025-05-12)
 
 #### Features

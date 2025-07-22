@@ -46,6 +46,76 @@ module Google
   module Cloud
     module DiscoveryEngine
       ##
+      # Create a new client object for CmekConfigService.
+      #
+      # By default, this returns an instance of
+      # [Google::Cloud::DiscoveryEngine::V1::CmekConfigService::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-discovery_engine-v1/latest/Google-Cloud-DiscoveryEngine-V1-CmekConfigService-Client)
+      # for a gRPC client for version V1 of the API.
+      # However, you can specify a different API version by passing it in the
+      # `version` parameter. If the CmekConfigService service is
+      # supported by that API version, and the corresponding gem is available, the
+      # appropriate versioned client will be returned.
+      # You can also specify a different transport by passing `:rest` or `:grpc` in
+      # the `transport` parameter.
+      #
+      # Raises an exception if the currently installed versioned client gem for the
+      # given API version does not support the given transport of the CmekConfigService service.
+      # You can determine whether the method will succeed by calling
+      # {Google::Cloud::DiscoveryEngine.cmek_config_service_available?}.
+      #
+      # ## About CmekConfigService
+      #
+      # Service for managing CMEK related tasks
+      #
+      # @param version [::String, ::Symbol] The API version to connect to. Optional.
+      #   Defaults to `:v1`.
+      # @param transport [:grpc, :rest] The transport to use. Defaults to `:grpc`.
+      # @return [::Object] A client object for the specified version.
+      #
+      def self.cmek_config_service version: :v1, transport: :grpc, &block
+        require "google/cloud/discovery_engine/#{version.to_s.downcase}"
+
+        package_name = Google::Cloud::DiscoveryEngine
+                       .constants
+                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                       .first
+        service_module = Google::Cloud::DiscoveryEngine.const_get(package_name).const_get(:CmekConfigService)
+        service_module = service_module.const_get(:Rest) if transport == :rest
+        service_module.const_get(:Client).new(&block)
+      end
+
+      ##
+      # Determines whether the CmekConfigService service is supported by the current client.
+      # If true, you can retrieve a client object by calling {Google::Cloud::DiscoveryEngine.cmek_config_service}.
+      # If false, that method will raise an exception. This could happen if the given
+      # API version does not exist or does not support the CmekConfigService service,
+      # or if the versioned client gem needs an update to support the CmekConfigService service.
+      #
+      # @param version [::String, ::Symbol] The API version to connect to. Optional.
+      #   Defaults to `:v1`.
+      # @param transport [:grpc, :rest] The transport to use. Defaults to `:grpc`.
+      # @return [boolean] Whether the service is available.
+      #
+      def self.cmek_config_service_available? version: :v1, transport: :grpc
+        require "google/cloud/discovery_engine/#{version.to_s.downcase}"
+        package_name = Google::Cloud::DiscoveryEngine
+                       .constants
+                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                       .first
+        return false unless package_name
+        service_module = Google::Cloud::DiscoveryEngine.const_get package_name
+        return false unless service_module.const_defined? :CmekConfigService
+        service_module = service_module.const_get :CmekConfigService
+        if transport == :rest
+          return false unless service_module.const_defined? :Rest
+          service_module = service_module.const_get :Rest
+        end
+        service_module.const_defined? :Client
+      rescue ::LoadError
+        false
+      end
+
+      ##
       # Create a new client object for CompletionService.
       #
       # By default, this returns an instance of
@@ -612,6 +682,76 @@ module Google
       end
 
       ##
+      # Create a new client object for IdentityMappingStoreService.
+      #
+      # By default, this returns an instance of
+      # [Google::Cloud::DiscoveryEngine::V1::IdentityMappingStoreService::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-discovery_engine-v1/latest/Google-Cloud-DiscoveryEngine-V1-IdentityMappingStoreService-Client)
+      # for a gRPC client for version V1 of the API.
+      # However, you can specify a different API version by passing it in the
+      # `version` parameter. If the IdentityMappingStoreService service is
+      # supported by that API version, and the corresponding gem is available, the
+      # appropriate versioned client will be returned.
+      # You can also specify a different transport by passing `:rest` or `:grpc` in
+      # the `transport` parameter.
+      #
+      # Raises an exception if the currently installed versioned client gem for the
+      # given API version does not support the given transport of the IdentityMappingStoreService service.
+      # You can determine whether the method will succeed by calling
+      # {Google::Cloud::DiscoveryEngine.identity_mapping_store_service_available?}.
+      #
+      # ## About IdentityMappingStoreService
+      #
+      # Service for managing Identity Mapping Stores.
+      #
+      # @param version [::String, ::Symbol] The API version to connect to. Optional.
+      #   Defaults to `:v1`.
+      # @param transport [:grpc, :rest] The transport to use. Defaults to `:grpc`.
+      # @return [::Object] A client object for the specified version.
+      #
+      def self.identity_mapping_store_service version: :v1, transport: :grpc, &block
+        require "google/cloud/discovery_engine/#{version.to_s.downcase}"
+
+        package_name = Google::Cloud::DiscoveryEngine
+                       .constants
+                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                       .first
+        service_module = Google::Cloud::DiscoveryEngine.const_get(package_name).const_get(:IdentityMappingStoreService)
+        service_module = service_module.const_get(:Rest) if transport == :rest
+        service_module.const_get(:Client).new(&block)
+      end
+
+      ##
+      # Determines whether the IdentityMappingStoreService service is supported by the current client.
+      # If true, you can retrieve a client object by calling {Google::Cloud::DiscoveryEngine.identity_mapping_store_service}.
+      # If false, that method will raise an exception. This could happen if the given
+      # API version does not exist or does not support the IdentityMappingStoreService service,
+      # or if the versioned client gem needs an update to support the IdentityMappingStoreService service.
+      #
+      # @param version [::String, ::Symbol] The API version to connect to. Optional.
+      #   Defaults to `:v1`.
+      # @param transport [:grpc, :rest] The transport to use. Defaults to `:grpc`.
+      # @return [boolean] Whether the service is available.
+      #
+      def self.identity_mapping_store_service_available? version: :v1, transport: :grpc
+        require "google/cloud/discovery_engine/#{version.to_s.downcase}"
+        package_name = Google::Cloud::DiscoveryEngine
+                       .constants
+                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                       .first
+        return false unless package_name
+        service_module = Google::Cloud::DiscoveryEngine.const_get package_name
+        return false unless service_module.const_defined? :IdentityMappingStoreService
+        service_module = service_module.const_get :IdentityMappingStoreService
+        if transport == :rest
+          return false unless service_module.const_defined? :Rest
+          service_module = service_module.const_get :Rest
+        end
+        service_module.const_defined? :Client
+      rescue ::LoadError
+        false
+      end
+
+      ##
       # Create a new client object for ProjectService.
       #
       # By default, this returns an instance of
@@ -1164,6 +1304,76 @@ module Google
         service_module = Google::Cloud::DiscoveryEngine.const_get package_name
         return false unless service_module.const_defined? :UserEventService
         service_module = service_module.const_get :UserEventService
+        if transport == :rest
+          return false unless service_module.const_defined? :Rest
+          service_module = service_module.const_get :Rest
+        end
+        service_module.const_defined? :Client
+      rescue ::LoadError
+        false
+      end
+
+      ##
+      # Create a new client object for UserLicenseService.
+      #
+      # By default, this returns an instance of
+      # [Google::Cloud::DiscoveryEngine::V1::UserLicenseService::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-discovery_engine-v1/latest/Google-Cloud-DiscoveryEngine-V1-UserLicenseService-Client)
+      # for a gRPC client for version V1 of the API.
+      # However, you can specify a different API version by passing it in the
+      # `version` parameter. If the UserLicenseService service is
+      # supported by that API version, and the corresponding gem is available, the
+      # appropriate versioned client will be returned.
+      # You can also specify a different transport by passing `:rest` or `:grpc` in
+      # the `transport` parameter.
+      #
+      # Raises an exception if the currently installed versioned client gem for the
+      # given API version does not support the given transport of the UserLicenseService service.
+      # You can determine whether the method will succeed by calling
+      # {Google::Cloud::DiscoveryEngine.user_license_service_available?}.
+      #
+      # ## About UserLicenseService
+      #
+      # Service for managing User Licenses.
+      #
+      # @param version [::String, ::Symbol] The API version to connect to. Optional.
+      #   Defaults to `:v1`.
+      # @param transport [:grpc, :rest] The transport to use. Defaults to `:grpc`.
+      # @return [::Object] A client object for the specified version.
+      #
+      def self.user_license_service version: :v1, transport: :grpc, &block
+        require "google/cloud/discovery_engine/#{version.to_s.downcase}"
+
+        package_name = Google::Cloud::DiscoveryEngine
+                       .constants
+                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                       .first
+        service_module = Google::Cloud::DiscoveryEngine.const_get(package_name).const_get(:UserLicenseService)
+        service_module = service_module.const_get(:Rest) if transport == :rest
+        service_module.const_get(:Client).new(&block)
+      end
+
+      ##
+      # Determines whether the UserLicenseService service is supported by the current client.
+      # If true, you can retrieve a client object by calling {Google::Cloud::DiscoveryEngine.user_license_service}.
+      # If false, that method will raise an exception. This could happen if the given
+      # API version does not exist or does not support the UserLicenseService service,
+      # or if the versioned client gem needs an update to support the UserLicenseService service.
+      #
+      # @param version [::String, ::Symbol] The API version to connect to. Optional.
+      #   Defaults to `:v1`.
+      # @param transport [:grpc, :rest] The transport to use. Defaults to `:grpc`.
+      # @return [boolean] Whether the service is available.
+      #
+      def self.user_license_service_available? version: :v1, transport: :grpc
+        require "google/cloud/discovery_engine/#{version.to_s.downcase}"
+        package_name = Google::Cloud::DiscoveryEngine
+                       .constants
+                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                       .first
+        return false unless package_name
+        service_module = Google::Cloud::DiscoveryEngine.const_get package_name
+        return false unless service_module.const_defined? :UserLicenseService
+        service_module = service_module.const_get :UserLicenseService
         if transport == :rest
           return false unless service_module.const_defined? :Rest
           service_module = service_module.const_get :Rest

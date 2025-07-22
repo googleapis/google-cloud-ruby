@@ -346,6 +346,8 @@ class ::Google::Cloud::Container::V1::ClusterManager::Rest::ClientTest < Minites
     containerd_config = {}
     queued_provisioning = {}
     storage_pools = ["hello world"]
+    max_run_duration = {}
+    flex_start = true
 
     update_node_pool_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
@@ -361,27 +363,27 @@ class ::Google::Cloud::Container::V1::ClusterManager::Rest::ClientTest < Minites
         end
 
         # Use hash object
-        client.update_node_pool({ project_id: project_id, zone: zone, cluster_id: cluster_id, node_pool_id: node_pool_id, node_version: node_version, image_type: image_type, name: name, locations: locations, workload_metadata_config: workload_metadata_config, upgrade_settings: upgrade_settings, tags: tags, taints: taints, labels: labels, linux_node_config: linux_node_config, kubelet_config: kubelet_config, node_network_config: node_network_config, gcfs_config: gcfs_config, confidential_nodes: confidential_nodes, gvnic: gvnic, etag: etag, fast_socket: fast_socket, logging_config: logging_config, resource_labels: resource_labels, windows_node_config: windows_node_config, accelerators: accelerators, machine_type: machine_type, disk_type: disk_type, disk_size_gb: disk_size_gb, resource_manager_tags: resource_manager_tags, containerd_config: containerd_config, queued_provisioning: queued_provisioning, storage_pools: storage_pools }) do |_result, response|
+        client.update_node_pool({ project_id: project_id, zone: zone, cluster_id: cluster_id, node_pool_id: node_pool_id, node_version: node_version, image_type: image_type, name: name, locations: locations, workload_metadata_config: workload_metadata_config, upgrade_settings: upgrade_settings, tags: tags, taints: taints, labels: labels, linux_node_config: linux_node_config, kubelet_config: kubelet_config, node_network_config: node_network_config, gcfs_config: gcfs_config, confidential_nodes: confidential_nodes, gvnic: gvnic, etag: etag, fast_socket: fast_socket, logging_config: logging_config, resource_labels: resource_labels, windows_node_config: windows_node_config, accelerators: accelerators, machine_type: machine_type, disk_type: disk_type, disk_size_gb: disk_size_gb, resource_manager_tags: resource_manager_tags, containerd_config: containerd_config, queued_provisioning: queued_provisioning, storage_pools: storage_pools, max_run_duration: max_run_duration, flex_start: flex_start }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.update_node_pool project_id: project_id, zone: zone, cluster_id: cluster_id, node_pool_id: node_pool_id, node_version: node_version, image_type: image_type, name: name, locations: locations, workload_metadata_config: workload_metadata_config, upgrade_settings: upgrade_settings, tags: tags, taints: taints, labels: labels, linux_node_config: linux_node_config, kubelet_config: kubelet_config, node_network_config: node_network_config, gcfs_config: gcfs_config, confidential_nodes: confidential_nodes, gvnic: gvnic, etag: etag, fast_socket: fast_socket, logging_config: logging_config, resource_labels: resource_labels, windows_node_config: windows_node_config, accelerators: accelerators, machine_type: machine_type, disk_type: disk_type, disk_size_gb: disk_size_gb, resource_manager_tags: resource_manager_tags, containerd_config: containerd_config, queued_provisioning: queued_provisioning, storage_pools: storage_pools do |_result, response|
+        client.update_node_pool project_id: project_id, zone: zone, cluster_id: cluster_id, node_pool_id: node_pool_id, node_version: node_version, image_type: image_type, name: name, locations: locations, workload_metadata_config: workload_metadata_config, upgrade_settings: upgrade_settings, tags: tags, taints: taints, labels: labels, linux_node_config: linux_node_config, kubelet_config: kubelet_config, node_network_config: node_network_config, gcfs_config: gcfs_config, confidential_nodes: confidential_nodes, gvnic: gvnic, etag: etag, fast_socket: fast_socket, logging_config: logging_config, resource_labels: resource_labels, windows_node_config: windows_node_config, accelerators: accelerators, machine_type: machine_type, disk_type: disk_type, disk_size_gb: disk_size_gb, resource_manager_tags: resource_manager_tags, containerd_config: containerd_config, queued_provisioning: queued_provisioning, storage_pools: storage_pools, max_run_duration: max_run_duration, flex_start: flex_start do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.update_node_pool ::Google::Cloud::Container::V1::UpdateNodePoolRequest.new(project_id: project_id, zone: zone, cluster_id: cluster_id, node_pool_id: node_pool_id, node_version: node_version, image_type: image_type, name: name, locations: locations, workload_metadata_config: workload_metadata_config, upgrade_settings: upgrade_settings, tags: tags, taints: taints, labels: labels, linux_node_config: linux_node_config, kubelet_config: kubelet_config, node_network_config: node_network_config, gcfs_config: gcfs_config, confidential_nodes: confidential_nodes, gvnic: gvnic, etag: etag, fast_socket: fast_socket, logging_config: logging_config, resource_labels: resource_labels, windows_node_config: windows_node_config, accelerators: accelerators, machine_type: machine_type, disk_type: disk_type, disk_size_gb: disk_size_gb, resource_manager_tags: resource_manager_tags, containerd_config: containerd_config, queued_provisioning: queued_provisioning, storage_pools: storage_pools) do |_result, response|
+        client.update_node_pool ::Google::Cloud::Container::V1::UpdateNodePoolRequest.new(project_id: project_id, zone: zone, cluster_id: cluster_id, node_pool_id: node_pool_id, node_version: node_version, image_type: image_type, name: name, locations: locations, workload_metadata_config: workload_metadata_config, upgrade_settings: upgrade_settings, tags: tags, taints: taints, labels: labels, linux_node_config: linux_node_config, kubelet_config: kubelet_config, node_network_config: node_network_config, gcfs_config: gcfs_config, confidential_nodes: confidential_nodes, gvnic: gvnic, etag: etag, fast_socket: fast_socket, logging_config: logging_config, resource_labels: resource_labels, windows_node_config: windows_node_config, accelerators: accelerators, machine_type: machine_type, disk_type: disk_type, disk_size_gb: disk_size_gb, resource_manager_tags: resource_manager_tags, containerd_config: containerd_config, queued_provisioning: queued_provisioning, storage_pools: storage_pools, max_run_duration: max_run_duration, flex_start: flex_start) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.update_node_pool({ project_id: project_id, zone: zone, cluster_id: cluster_id, node_pool_id: node_pool_id, node_version: node_version, image_type: image_type, name: name, locations: locations, workload_metadata_config: workload_metadata_config, upgrade_settings: upgrade_settings, tags: tags, taints: taints, labels: labels, linux_node_config: linux_node_config, kubelet_config: kubelet_config, node_network_config: node_network_config, gcfs_config: gcfs_config, confidential_nodes: confidential_nodes, gvnic: gvnic, etag: etag, fast_socket: fast_socket, logging_config: logging_config, resource_labels: resource_labels, windows_node_config: windows_node_config, accelerators: accelerators, machine_type: machine_type, disk_type: disk_type, disk_size_gb: disk_size_gb, resource_manager_tags: resource_manager_tags, containerd_config: containerd_config, queued_provisioning: queued_provisioning, storage_pools: storage_pools }, call_options) do |_result, response|
+        client.update_node_pool({ project_id: project_id, zone: zone, cluster_id: cluster_id, node_pool_id: node_pool_id, node_version: node_version, image_type: image_type, name: name, locations: locations, workload_metadata_config: workload_metadata_config, upgrade_settings: upgrade_settings, tags: tags, taints: taints, labels: labels, linux_node_config: linux_node_config, kubelet_config: kubelet_config, node_network_config: node_network_config, gcfs_config: gcfs_config, confidential_nodes: confidential_nodes, gvnic: gvnic, etag: etag, fast_socket: fast_socket, logging_config: logging_config, resource_labels: resource_labels, windows_node_config: windows_node_config, accelerators: accelerators, machine_type: machine_type, disk_type: disk_type, disk_size_gb: disk_size_gb, resource_manager_tags: resource_manager_tags, containerd_config: containerd_config, queued_provisioning: queued_provisioning, storage_pools: storage_pools, max_run_duration: max_run_duration, flex_start: flex_start }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.update_node_pool(::Google::Cloud::Container::V1::UpdateNodePoolRequest.new(project_id: project_id, zone: zone, cluster_id: cluster_id, node_pool_id: node_pool_id, node_version: node_version, image_type: image_type, name: name, locations: locations, workload_metadata_config: workload_metadata_config, upgrade_settings: upgrade_settings, tags: tags, taints: taints, labels: labels, linux_node_config: linux_node_config, kubelet_config: kubelet_config, node_network_config: node_network_config, gcfs_config: gcfs_config, confidential_nodes: confidential_nodes, gvnic: gvnic, etag: etag, fast_socket: fast_socket, logging_config: logging_config, resource_labels: resource_labels, windows_node_config: windows_node_config, accelerators: accelerators, machine_type: machine_type, disk_type: disk_type, disk_size_gb: disk_size_gb, resource_manager_tags: resource_manager_tags, containerd_config: containerd_config, queued_provisioning: queued_provisioning, storage_pools: storage_pools), call_options) do |_result, response|
+        client.update_node_pool(::Google::Cloud::Container::V1::UpdateNodePoolRequest.new(project_id: project_id, zone: zone, cluster_id: cluster_id, node_pool_id: node_pool_id, node_version: node_version, image_type: image_type, name: name, locations: locations, workload_metadata_config: workload_metadata_config, upgrade_settings: upgrade_settings, tags: tags, taints: taints, labels: labels, linux_node_config: linux_node_config, kubelet_config: kubelet_config, node_network_config: node_network_config, gcfs_config: gcfs_config, confidential_nodes: confidential_nodes, gvnic: gvnic, etag: etag, fast_socket: fast_socket, logging_config: logging_config, resource_labels: resource_labels, windows_node_config: windows_node_config, accelerators: accelerators, machine_type: machine_type, disk_type: disk_type, disk_size_gb: disk_size_gb, resource_manager_tags: resource_manager_tags, containerd_config: containerd_config, queued_provisioning: queued_provisioning, storage_pools: storage_pools, max_run_duration: max_run_duration, flex_start: flex_start), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -2053,6 +2055,116 @@ class ::Google::Cloud::Container::V1::ClusterManager::Rest::ClientTest < Minites
 
         # Verify method calls
         assert_equal 5, check_autopilot_compatibility_client_stub.call_count
+      end
+    end
+  end
+
+  def test_fetch_cluster_upgrade_info
+    # Create test objects.
+    client_result = ::Google::Cloud::Container::V1::ClusterUpgradeInfo.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+    version = "hello world"
+
+    fetch_cluster_upgrade_info_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::Container::V1::ClusterManager::Rest::ServiceStub.stub :transcode_fetch_cluster_upgrade_info_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, fetch_cluster_upgrade_info_client_stub do
+        # Create client
+        client = ::Google::Cloud::Container::V1::ClusterManager::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.fetch_cluster_upgrade_info({ name: name, version: version }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.fetch_cluster_upgrade_info name: name, version: version do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.fetch_cluster_upgrade_info ::Google::Cloud::Container::V1::FetchClusterUpgradeInfoRequest.new(name: name, version: version) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.fetch_cluster_upgrade_info({ name: name, version: version }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.fetch_cluster_upgrade_info(::Google::Cloud::Container::V1::FetchClusterUpgradeInfoRequest.new(name: name, version: version), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, fetch_cluster_upgrade_info_client_stub.call_count
+      end
+    end
+  end
+
+  def test_fetch_node_pool_upgrade_info
+    # Create test objects.
+    client_result = ::Google::Cloud::Container::V1::NodePoolUpgradeInfo.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+    version = "hello world"
+
+    fetch_node_pool_upgrade_info_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::Container::V1::ClusterManager::Rest::ServiceStub.stub :transcode_fetch_node_pool_upgrade_info_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, fetch_node_pool_upgrade_info_client_stub do
+        # Create client
+        client = ::Google::Cloud::Container::V1::ClusterManager::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.fetch_node_pool_upgrade_info({ name: name, version: version }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.fetch_node_pool_upgrade_info name: name, version: version do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.fetch_node_pool_upgrade_info ::Google::Cloud::Container::V1::FetchNodePoolUpgradeInfoRequest.new(name: name, version: version) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.fetch_node_pool_upgrade_info({ name: name, version: version }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.fetch_node_pool_upgrade_info(::Google::Cloud::Container::V1::FetchNodePoolUpgradeInfoRequest.new(name: name, version: version), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, fetch_node_pool_upgrade_info_client_stub.call_count
       end
     end
   end

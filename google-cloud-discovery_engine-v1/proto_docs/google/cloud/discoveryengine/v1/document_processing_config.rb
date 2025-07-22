@@ -132,6 +132,29 @@ module Google
             end
 
             # The layout parsing configurations for documents.
+            # @!attribute [rw] enable_table_annotation
+            #   @return [::Boolean]
+            #     Optional. If true, the LLM based annotation is added to the table
+            #     during parsing.
+            # @!attribute [rw] enable_image_annotation
+            #   @return [::Boolean]
+            #     Optional. If true, the LLM based annotation is added to the image
+            #     during parsing.
+            # @!attribute [rw] structured_content_types
+            #   @return [::Array<::String>]
+            #     Optional. Contains the required structure types to extract from the
+            #     document. Supported values:
+            #
+            #     * `shareholder-structure`
+            # @!attribute [rw] exclude_html_elements
+            #   @return [::Array<::String>]
+            #     Optional. List of HTML elements to exclude from the parsed content.
+            # @!attribute [rw] exclude_html_classes
+            #   @return [::Array<::String>]
+            #     Optional. List of HTML classes to exclude from the parsed content.
+            # @!attribute [rw] exclude_html_ids
+            #   @return [::Array<::String>]
+            #     Optional. List of HTML ids to exclude from the parsed content.
             class LayoutParsingConfig
               include ::Google::Protobuf::MessageExts
               extend ::Google::Protobuf::MessageExts::ClassMethods
