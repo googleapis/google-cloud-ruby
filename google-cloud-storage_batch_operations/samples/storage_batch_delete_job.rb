@@ -11,6 +11,7 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
+require "google/cloud/storage_batch_operations"
 
 # [START storage_batch_delete_job]
 def delete_job project_name:, job_name:
@@ -20,9 +21,7 @@ def delete_job project_name:, job_name:
   # The name of your Storage batch operation job
   # job_name = "your-job-name"
 
-  require "google/cloud/storage_batch_operations/v1"
-
-  client = Google::Cloud::StorageBatchOperations::V1::StorageBatchOperations::Client.new
+  client = Google::Cloud::StorageBatchOperations.storage_batch_operations
   parent = "projects/#{project_name}/locations/global"
   request = Google::Cloud::StorageBatchOperations::V1::DeleteJobRequest.new name: "#{parent}/jobs/#{job_name}"
   result = client.delete_job request

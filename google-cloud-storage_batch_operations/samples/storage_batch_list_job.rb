@@ -11,14 +11,13 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
+require "google/cloud/storage_batch_operations"
 
 # [START storage_batch_list_job]
 def list_job project_name:
   # The Name/ID of your project
   # project_name = "your-project-id"
-
-  require "google/cloud/storage_batch_operations/v1"
-  client = Google::Cloud::StorageBatchOperations::V1::StorageBatchOperations::Client.new
+  client = Google::Cloud::StorageBatchOperations.storage_batch_operations
   parent = "projects/#{project_name}/locations/global"
   request = Google::Cloud::StorageBatchOperations::V1::ListJobsRequest.new parent: parent, page_size: 10
   result = client.list_jobs request
