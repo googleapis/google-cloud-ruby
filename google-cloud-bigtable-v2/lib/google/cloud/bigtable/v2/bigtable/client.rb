@@ -504,8 +504,8 @@ module Google
             #     are applied in order, meaning that earlier mutations can be masked by later
             #     ones. Must contain at least one entry and at most 100000.
             #   @param idempotency [::Google::Cloud::Bigtable::V2::Idempotency, ::Hash]
-            #     Optional parameter for ensuring a MutateRow request is only applied once.
-            #     Currently applicable only for certain aggregate types.
+            #     If set consistently across retries, prevents this mutation from being
+            #     double applied to aggregate column families within a 15m window.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::Bigtable::V2::MutateRowResponse]
