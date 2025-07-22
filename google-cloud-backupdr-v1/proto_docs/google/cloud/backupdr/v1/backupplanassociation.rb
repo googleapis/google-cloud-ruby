@@ -34,8 +34,13 @@ module Google
         #     applied
         # @!attribute [rw] resource
         #   @return [::String]
-        #     Required. Immutable. Resource name of workload on which backupplan is
-        #     applied
+        #     Required. Immutable. Resource name of workload on which the backup plan is
+        #     applied.
+        #
+        #     The format can either be the resource name (e.g.,
+        #     "projects/my-project/zones/us-central1-a/instances/my-instance") or the
+        #     full resource URI (e.g.,
+        #     "https://www.googleapis.com/compute/v1/projects/my-project/zones/us-central1-a/instances/my-instance").
         # @!attribute [rw] backup_plan
         #   @return [::String]
         #     Required. Resource name of backup plan which needs to be applied on
@@ -58,6 +63,20 @@ module Google
         #     Output only. Resource name of data source which will be used as storage
         #     location for backups taken. Format :
         #     projects/\\{project}/locations/\\{location}/backupVaults/\\{backupvault}/dataSources/\\{datasource}
+        # @!attribute [r] cloud_sql_instance_backup_plan_association_properties
+        #   @return [::Google::Cloud::BackupDR::V1::CloudSqlInstanceBackupPlanAssociationProperties]
+        #     Output only. Cloud SQL instance's backup plan association properties.
+        # @!attribute [r] backup_plan_revision_id
+        #   @return [::String]
+        #     Output only. The user friendly revision ID of the `BackupPlanRevision`.
+        #
+        #     Example: v0, v1, v2, etc.
+        # @!attribute [r] backup_plan_revision_name
+        #   @return [::String]
+        #     Output only. The resource id of the `BackupPlanRevision`.
+        #
+        #     Format:
+        #     `projects/{project}/locations/{location}/backupPlans/{backup_plan}/revisions/{revision_id}`
         class BackupPlanAssociation
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -78,6 +97,9 @@ module Google
 
             # The resource has been created but is not usable.
             INACTIVE = 4
+
+            # The resource is being updated.
+            UPDATING = 5
           end
         end
 
@@ -198,6 +220,66 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # Request for the FetchBackupPlanAssociationsForResourceType method.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. The parent resource name.
+        #     Format: projects/\\{project}/locations/\\{location}
+        # @!attribute [rw] resource_type
+        #   @return [::String]
+        #     Required. The type of the GCP resource.
+        #     Ex: sql.googleapis.com/Instance
+        # @!attribute [rw] page_size
+        #   @return [::Integer]
+        #     Optional. The maximum number of BackupPlanAssociations to return. The
+        #     service may return fewer than this value. If unspecified, at most 50
+        #     BackupPlanAssociations will be returned. The maximum value is 100; values
+        #     above 100 will be coerced to 100.
+        # @!attribute [rw] page_token
+        #   @return [::String]
+        #     Optional. A page token, received from a previous call of
+        #     `FetchBackupPlanAssociationsForResourceType`.
+        #     Provide this to retrieve the subsequent page.
+        #
+        #     When paginating, all other parameters provided to
+        #     `FetchBackupPlanAssociationsForResourceType` must match
+        #     the call that provided the page token.
+        # @!attribute [rw] filter
+        #   @return [::String]
+        #     Optional. A filter expression that filters the results fetched in the
+        #     response. The expression must specify the field name, a comparison
+        #     operator, and the value that you want to use for filtering. Supported
+        #     fields:
+        #     * resource
+        #     * backup_plan
+        #     * state
+        #     * data_source
+        #     * cloud_sql_instance_backup_plan_association_properties.instance_create_time
+        # @!attribute [rw] order_by
+        #   @return [::String]
+        #     Optional. A comma-separated list of fields to order by, sorted in ascending
+        #     order. Use "desc" after a field name for descending.
+        #
+        #     Supported fields:
+        #     * name
+        class FetchBackupPlanAssociationsForResourceTypeRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Response for the FetchBackupPlanAssociationsForResourceType method.
+        # @!attribute [r] backup_plan_associations
+        #   @return [::Array<::Google::Cloud::BackupDR::V1::BackupPlanAssociation>]
+        #     Output only. The BackupPlanAssociations from the specified parent.
+        # @!attribute [r] next_page_token
+        #   @return [::String]
+        #     Output only. A token, which can be sent as `page_token` to retrieve the
+        #     next page. If this field is omitted, there are no subsequent pages.
+        class FetchBackupPlanAssociationsForResourceTypeResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # Request message for getting a BackupPlanAssociation resource.
         # @!attribute [rw] name
         #   @return [::String]
@@ -229,6 +311,39 @@ module Google
         #     The request ID must be a valid UUID with the exception that zero UUID is
         #     not supported (00000000-0000-0000-0000-000000000000).
         class DeleteBackupPlanAssociationRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for updating a backup plan association.
+        # @!attribute [rw] backup_plan_association
+        #   @return [::Google::Cloud::BackupDR::V1::BackupPlanAssociation]
+        #     Required. The resource being updated
+        # @!attribute [rw] update_mask
+        #   @return [::Google::Protobuf::FieldMask]
+        #     Required. The list of fields to update.
+        #     Field mask is used to specify the fields to be overwritten in the
+        #     BackupPlanAssociation resource by the update.
+        #     The fields specified in the update_mask are relative to the resource, not
+        #     the full request. A field will be overwritten if it is in the mask. If the
+        #     user does not provide a mask then the request will fail.
+        #     Currently backup_plan_association.backup_plan is the only supported field.
+        # @!attribute [rw] request_id
+        #   @return [::String]
+        #     Optional. An optional request ID to identify requests. Specify a unique
+        #     request ID so that if you must retry your request, the server will know to
+        #     ignore the request if it has already been completed. The server will
+        #     guarantee that for at least 60 minutes since the first request.
+        #
+        #     For example, consider a situation where you make an initial request and t
+        #     he request times out. If you make the request again with the same request
+        #     ID, the server can check if original operation with the same request ID
+        #     was received, and if so, will ignore the second request. This prevents
+        #     clients from accidentally creating duplicate commitments.
+        #
+        #     The request ID must be a valid UUID with the exception that zero UUID is
+        #     not supported (00000000-0000-0000-0000-000000000000).
+        class UpdateBackupPlanAssociationRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end

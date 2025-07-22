@@ -73,22 +73,36 @@ module Google
             rpc :RestoreBackup, ::Google::Cloud::BackupDR::V1::RestoreBackupRequest, ::Google::Longrunning::Operation
             # Create a BackupPlan
             rpc :CreateBackupPlan, ::Google::Cloud::BackupDR::V1::CreateBackupPlanRequest, ::Google::Longrunning::Operation
+            # Update a BackupPlan.
+            rpc :UpdateBackupPlan, ::Google::Cloud::BackupDR::V1::UpdateBackupPlanRequest, ::Google::Longrunning::Operation
             # Gets details of a single BackupPlan.
             rpc :GetBackupPlan, ::Google::Cloud::BackupDR::V1::GetBackupPlanRequest, ::Google::Cloud::BackupDR::V1::BackupPlan
             # Lists BackupPlans in a given project and location.
             rpc :ListBackupPlans, ::Google::Cloud::BackupDR::V1::ListBackupPlansRequest, ::Google::Cloud::BackupDR::V1::ListBackupPlansResponse
             # Deletes a single BackupPlan.
             rpc :DeleteBackupPlan, ::Google::Cloud::BackupDR::V1::DeleteBackupPlanRequest, ::Google::Longrunning::Operation
+            # Gets details of a single BackupPlanRevision.
+            rpc :GetBackupPlanRevision, ::Google::Cloud::BackupDR::V1::GetBackupPlanRevisionRequest, ::Google::Cloud::BackupDR::V1::BackupPlanRevision
+            # Lists BackupPlanRevisions in a given project and location.
+            rpc :ListBackupPlanRevisions, ::Google::Cloud::BackupDR::V1::ListBackupPlanRevisionsRequest, ::Google::Cloud::BackupDR::V1::ListBackupPlanRevisionsResponse
             # Create a BackupPlanAssociation
             rpc :CreateBackupPlanAssociation, ::Google::Cloud::BackupDR::V1::CreateBackupPlanAssociationRequest, ::Google::Longrunning::Operation
+            # Update a BackupPlanAssociation.
+            rpc :UpdateBackupPlanAssociation, ::Google::Cloud::BackupDR::V1::UpdateBackupPlanAssociationRequest, ::Google::Longrunning::Operation
             # Gets details of a single BackupPlanAssociation.
             rpc :GetBackupPlanAssociation, ::Google::Cloud::BackupDR::V1::GetBackupPlanAssociationRequest, ::Google::Cloud::BackupDR::V1::BackupPlanAssociation
             # Lists BackupPlanAssociations in a given project and location.
             rpc :ListBackupPlanAssociations, ::Google::Cloud::BackupDR::V1::ListBackupPlanAssociationsRequest, ::Google::Cloud::BackupDR::V1::ListBackupPlanAssociationsResponse
+            # List BackupPlanAssociations for a given resource type.
+            rpc :FetchBackupPlanAssociationsForResourceType, ::Google::Cloud::BackupDR::V1::FetchBackupPlanAssociationsForResourceTypeRequest, ::Google::Cloud::BackupDR::V1::FetchBackupPlanAssociationsForResourceTypeResponse
             # Deletes a single BackupPlanAssociation.
             rpc :DeleteBackupPlanAssociation, ::Google::Cloud::BackupDR::V1::DeleteBackupPlanAssociationRequest, ::Google::Longrunning::Operation
             # Triggers a new Backup.
             rpc :TriggerBackup, ::Google::Cloud::BackupDR::V1::TriggerBackupRequest, ::Google::Longrunning::Operation
+            # Gets details of a single DataSourceReference.
+            rpc :GetDataSourceReference, ::Google::Cloud::BackupDR::V1::GetDataSourceReferenceRequest, ::Google::Cloud::BackupDR::V1::DataSourceReference
+            # Fetch DataSourceReferences for a given project, location and resource type.
+            rpc :FetchDataSourceReferencesForResourceType, ::Google::Cloud::BackupDR::V1::FetchDataSourceReferencesForResourceTypeRequest, ::Google::Cloud::BackupDR::V1::FetchDataSourceReferencesForResourceTypeResponse
             # Initializes the service related config for a project.
             rpc :InitializeService, ::Google::Cloud::BackupDR::V1::InitializeServiceRequest, ::Google::Longrunning::Operation
           end

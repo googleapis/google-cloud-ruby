@@ -834,6 +834,46 @@ module Google
               end
 
               ##
+              # Baseline implementation for the update_backup_plan REST call
+              #
+              # @param request_pb [::Google::Cloud::BackupDR::V1::UpdateBackupPlanRequest]
+              #   A request object representing the call parameters. Required.
+              # @param options [::Gapic::CallOptions]
+              #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Longrunning::Operation]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Longrunning::Operation]
+              #   A result object deserialized from the server's reply
+              def update_backup_plan request_pb, options = nil
+                raise ::ArgumentError, "request must be provided" if request_pb.nil?
+
+                verb, uri, query_string_params, body = ServiceStub.transcode_update_backup_plan_request request_pb
+                query_string_params = if query_string_params.any?
+                                        query_string_params.to_h { |p| p.split "=", 2 }
+                                      else
+                                        {}
+                                      end
+
+                response = @client_stub.make_http_request(
+                  verb,
+                  uri: uri,
+                  body: body || "",
+                  params: query_string_params,
+                  method_name: "update_backup_plan",
+                  options: options
+                )
+                operation = ::Gapic::Rest::TransportOperation.new response
+                result = ::Google::Longrunning::Operation.decode_json response.body, ignore_unknown_fields: true
+                catch :response do
+                  yield result, operation if block_given?
+                  result
+                end
+              end
+
+              ##
               # Baseline implementation for the get_backup_plan REST call
               #
               # @param request_pb [::Google::Cloud::BackupDR::V1::GetBackupPlanRequest]
@@ -954,6 +994,86 @@ module Google
               end
 
               ##
+              # Baseline implementation for the get_backup_plan_revision REST call
+              #
+              # @param request_pb [::Google::Cloud::BackupDR::V1::GetBackupPlanRevisionRequest]
+              #   A request object representing the call parameters. Required.
+              # @param options [::Gapic::CallOptions]
+              #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Cloud::BackupDR::V1::BackupPlanRevision]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Cloud::BackupDR::V1::BackupPlanRevision]
+              #   A result object deserialized from the server's reply
+              def get_backup_plan_revision request_pb, options = nil
+                raise ::ArgumentError, "request must be provided" if request_pb.nil?
+
+                verb, uri, query_string_params, body = ServiceStub.transcode_get_backup_plan_revision_request request_pb
+                query_string_params = if query_string_params.any?
+                                        query_string_params.to_h { |p| p.split "=", 2 }
+                                      else
+                                        {}
+                                      end
+
+                response = @client_stub.make_http_request(
+                  verb,
+                  uri: uri,
+                  body: body || "",
+                  params: query_string_params,
+                  method_name: "get_backup_plan_revision",
+                  options: options
+                )
+                operation = ::Gapic::Rest::TransportOperation.new response
+                result = ::Google::Cloud::BackupDR::V1::BackupPlanRevision.decode_json response.body, ignore_unknown_fields: true
+                catch :response do
+                  yield result, operation if block_given?
+                  result
+                end
+              end
+
+              ##
+              # Baseline implementation for the list_backup_plan_revisions REST call
+              #
+              # @param request_pb [::Google::Cloud::BackupDR::V1::ListBackupPlanRevisionsRequest]
+              #   A request object representing the call parameters. Required.
+              # @param options [::Gapic::CallOptions]
+              #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Cloud::BackupDR::V1::ListBackupPlanRevisionsResponse]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Cloud::BackupDR::V1::ListBackupPlanRevisionsResponse]
+              #   A result object deserialized from the server's reply
+              def list_backup_plan_revisions request_pb, options = nil
+                raise ::ArgumentError, "request must be provided" if request_pb.nil?
+
+                verb, uri, query_string_params, body = ServiceStub.transcode_list_backup_plan_revisions_request request_pb
+                query_string_params = if query_string_params.any?
+                                        query_string_params.to_h { |p| p.split "=", 2 }
+                                      else
+                                        {}
+                                      end
+
+                response = @client_stub.make_http_request(
+                  verb,
+                  uri: uri,
+                  body: body || "",
+                  params: query_string_params,
+                  method_name: "list_backup_plan_revisions",
+                  options: options
+                )
+                operation = ::Gapic::Rest::TransportOperation.new response
+                result = ::Google::Cloud::BackupDR::V1::ListBackupPlanRevisionsResponse.decode_json response.body, ignore_unknown_fields: true
+                catch :response do
+                  yield result, operation if block_given?
+                  result
+                end
+              end
+
+              ##
               # Baseline implementation for the create_backup_plan_association REST call
               #
               # @param request_pb [::Google::Cloud::BackupDR::V1::CreateBackupPlanAssociationRequest]
@@ -983,6 +1103,46 @@ module Google
                   body: body || "",
                   params: query_string_params,
                   method_name: "create_backup_plan_association",
+                  options: options
+                )
+                operation = ::Gapic::Rest::TransportOperation.new response
+                result = ::Google::Longrunning::Operation.decode_json response.body, ignore_unknown_fields: true
+                catch :response do
+                  yield result, operation if block_given?
+                  result
+                end
+              end
+
+              ##
+              # Baseline implementation for the update_backup_plan_association REST call
+              #
+              # @param request_pb [::Google::Cloud::BackupDR::V1::UpdateBackupPlanAssociationRequest]
+              #   A request object representing the call parameters. Required.
+              # @param options [::Gapic::CallOptions]
+              #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Longrunning::Operation]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Longrunning::Operation]
+              #   A result object deserialized from the server's reply
+              def update_backup_plan_association request_pb, options = nil
+                raise ::ArgumentError, "request must be provided" if request_pb.nil?
+
+                verb, uri, query_string_params, body = ServiceStub.transcode_update_backup_plan_association_request request_pb
+                query_string_params = if query_string_params.any?
+                                        query_string_params.to_h { |p| p.split "=", 2 }
+                                      else
+                                        {}
+                                      end
+
+                response = @client_stub.make_http_request(
+                  verb,
+                  uri: uri,
+                  body: body || "",
+                  params: query_string_params,
+                  method_name: "update_backup_plan_association",
                   options: options
                 )
                 operation = ::Gapic::Rest::TransportOperation.new response
@@ -1074,6 +1234,46 @@ module Google
               end
 
               ##
+              # Baseline implementation for the fetch_backup_plan_associations_for_resource_type REST call
+              #
+              # @param request_pb [::Google::Cloud::BackupDR::V1::FetchBackupPlanAssociationsForResourceTypeRequest]
+              #   A request object representing the call parameters. Required.
+              # @param options [::Gapic::CallOptions]
+              #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Cloud::BackupDR::V1::FetchBackupPlanAssociationsForResourceTypeResponse]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Cloud::BackupDR::V1::FetchBackupPlanAssociationsForResourceTypeResponse]
+              #   A result object deserialized from the server's reply
+              def fetch_backup_plan_associations_for_resource_type request_pb, options = nil
+                raise ::ArgumentError, "request must be provided" if request_pb.nil?
+
+                verb, uri, query_string_params, body = ServiceStub.transcode_fetch_backup_plan_associations_for_resource_type_request request_pb
+                query_string_params = if query_string_params.any?
+                                        query_string_params.to_h { |p| p.split "=", 2 }
+                                      else
+                                        {}
+                                      end
+
+                response = @client_stub.make_http_request(
+                  verb,
+                  uri: uri,
+                  body: body || "",
+                  params: query_string_params,
+                  method_name: "fetch_backup_plan_associations_for_resource_type",
+                  options: options
+                )
+                operation = ::Gapic::Rest::TransportOperation.new response
+                result = ::Google::Cloud::BackupDR::V1::FetchBackupPlanAssociationsForResourceTypeResponse.decode_json response.body, ignore_unknown_fields: true
+                catch :response do
+                  yield result, operation if block_given?
+                  result
+                end
+              end
+
+              ##
               # Baseline implementation for the delete_backup_plan_association REST call
               #
               # @param request_pb [::Google::Cloud::BackupDR::V1::DeleteBackupPlanAssociationRequest]
@@ -1147,6 +1347,86 @@ module Google
                 )
                 operation = ::Gapic::Rest::TransportOperation.new response
                 result = ::Google::Longrunning::Operation.decode_json response.body, ignore_unknown_fields: true
+                catch :response do
+                  yield result, operation if block_given?
+                  result
+                end
+              end
+
+              ##
+              # Baseline implementation for the get_data_source_reference REST call
+              #
+              # @param request_pb [::Google::Cloud::BackupDR::V1::GetDataSourceReferenceRequest]
+              #   A request object representing the call parameters. Required.
+              # @param options [::Gapic::CallOptions]
+              #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Cloud::BackupDR::V1::DataSourceReference]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Cloud::BackupDR::V1::DataSourceReference]
+              #   A result object deserialized from the server's reply
+              def get_data_source_reference request_pb, options = nil
+                raise ::ArgumentError, "request must be provided" if request_pb.nil?
+
+                verb, uri, query_string_params, body = ServiceStub.transcode_get_data_source_reference_request request_pb
+                query_string_params = if query_string_params.any?
+                                        query_string_params.to_h { |p| p.split "=", 2 }
+                                      else
+                                        {}
+                                      end
+
+                response = @client_stub.make_http_request(
+                  verb,
+                  uri: uri,
+                  body: body || "",
+                  params: query_string_params,
+                  method_name: "get_data_source_reference",
+                  options: options
+                )
+                operation = ::Gapic::Rest::TransportOperation.new response
+                result = ::Google::Cloud::BackupDR::V1::DataSourceReference.decode_json response.body, ignore_unknown_fields: true
+                catch :response do
+                  yield result, operation if block_given?
+                  result
+                end
+              end
+
+              ##
+              # Baseline implementation for the fetch_data_source_references_for_resource_type REST call
+              #
+              # @param request_pb [::Google::Cloud::BackupDR::V1::FetchDataSourceReferencesForResourceTypeRequest]
+              #   A request object representing the call parameters. Required.
+              # @param options [::Gapic::CallOptions]
+              #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Cloud::BackupDR::V1::FetchDataSourceReferencesForResourceTypeResponse]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Cloud::BackupDR::V1::FetchDataSourceReferencesForResourceTypeResponse]
+              #   A result object deserialized from the server's reply
+              def fetch_data_source_references_for_resource_type request_pb, options = nil
+                raise ::ArgumentError, "request must be provided" if request_pb.nil?
+
+                verb, uri, query_string_params, body = ServiceStub.transcode_fetch_data_source_references_for_resource_type_request request_pb
+                query_string_params = if query_string_params.any?
+                                        query_string_params.to_h { |p| p.split "=", 2 }
+                                      else
+                                        {}
+                                      end
+
+                response = @client_stub.make_http_request(
+                  verb,
+                  uri: uri,
+                  body: body || "",
+                  params: query_string_params,
+                  method_name: "fetch_data_source_references_for_resource_type",
+                  options: options
+                )
+                operation = ::Gapic::Rest::TransportOperation.new response
+                result = ::Google::Cloud::BackupDR::V1::FetchDataSourceReferencesForResourceTypeResponse.decode_json response.body, ignore_unknown_fields: true
                 catch :response do
                   yield result, operation if block_given?
                   result
@@ -1602,6 +1882,28 @@ module Google
               ##
               # @private
               #
+              # GRPC transcoding helper method for the update_backup_plan REST call
+              #
+              # @param request_pb [::Google::Cloud::BackupDR::V1::UpdateBackupPlanRequest]
+              #   A request object representing the call parameters. Required.
+              # @return [Array(String, [String, nil], Hash{String => String})]
+              #   Uri, Body, Query string parameters
+              def self.transcode_update_backup_plan_request request_pb
+                transcoder = Gapic::Rest::GrpcTranscoder.new
+                                                        .with_bindings(
+                                                          uri_method: :patch,
+                                                          uri_template: "/v1/{backup_plan.name}",
+                                                          body: "backup_plan",
+                                                          matches: [
+                                                            ["backup_plan.name", %r{^projects/[^/]+/locations/[^/]+/backupPlans/[^/]+/?$}, false]
+                                                          ]
+                                                        )
+                transcoder.transcode request_pb
+              end
+
+              ##
+              # @private
+              #
               # GRPC transcoding helper method for the get_backup_plan REST call
               #
               # @param request_pb [::Google::Cloud::BackupDR::V1::GetBackupPlanRequest]
@@ -1665,6 +1967,48 @@ module Google
               ##
               # @private
               #
+              # GRPC transcoding helper method for the get_backup_plan_revision REST call
+              #
+              # @param request_pb [::Google::Cloud::BackupDR::V1::GetBackupPlanRevisionRequest]
+              #   A request object representing the call parameters. Required.
+              # @return [Array(String, [String, nil], Hash{String => String})]
+              #   Uri, Body, Query string parameters
+              def self.transcode_get_backup_plan_revision_request request_pb
+                transcoder = Gapic::Rest::GrpcTranscoder.new
+                                                        .with_bindings(
+                                                          uri_method: :get,
+                                                          uri_template: "/v1/{name}",
+                                                          matches: [
+                                                            ["name", %r{^projects/[^/]+/locations/[^/]+/backupPlans/[^/]+/revisions/[^/]+/?$}, false]
+                                                          ]
+                                                        )
+                transcoder.transcode request_pb
+              end
+
+              ##
+              # @private
+              #
+              # GRPC transcoding helper method for the list_backup_plan_revisions REST call
+              #
+              # @param request_pb [::Google::Cloud::BackupDR::V1::ListBackupPlanRevisionsRequest]
+              #   A request object representing the call parameters. Required.
+              # @return [Array(String, [String, nil], Hash{String => String})]
+              #   Uri, Body, Query string parameters
+              def self.transcode_list_backup_plan_revisions_request request_pb
+                transcoder = Gapic::Rest::GrpcTranscoder.new
+                                                        .with_bindings(
+                                                          uri_method: :get,
+                                                          uri_template: "/v1/{parent}/revisions",
+                                                          matches: [
+                                                            ["parent", %r{^projects/[^/]+/locations/[^/]+/backupPlans/[^/]+/?$}, false]
+                                                          ]
+                                                        )
+                transcoder.transcode request_pb
+              end
+
+              ##
+              # @private
+              #
               # GRPC transcoding helper method for the create_backup_plan_association REST call
               #
               # @param request_pb [::Google::Cloud::BackupDR::V1::CreateBackupPlanAssociationRequest]
@@ -1679,6 +2023,28 @@ module Google
                                                           body: "backup_plan_association",
                                                           matches: [
                                                             ["parent", %r{^projects/[^/]+/locations/[^/]+/?$}, false]
+                                                          ]
+                                                        )
+                transcoder.transcode request_pb
+              end
+
+              ##
+              # @private
+              #
+              # GRPC transcoding helper method for the update_backup_plan_association REST call
+              #
+              # @param request_pb [::Google::Cloud::BackupDR::V1::UpdateBackupPlanAssociationRequest]
+              #   A request object representing the call parameters. Required.
+              # @return [Array(String, [String, nil], Hash{String => String})]
+              #   Uri, Body, Query string parameters
+              def self.transcode_update_backup_plan_association_request request_pb
+                transcoder = Gapic::Rest::GrpcTranscoder.new
+                                                        .with_bindings(
+                                                          uri_method: :patch,
+                                                          uri_template: "/v1/{backup_plan_association.name}",
+                                                          body: "backup_plan_association",
+                                                          matches: [
+                                                            ["backup_plan_association.name", %r{^projects/[^/]+/locations/[^/]+/backupPlanAssociations/[^/]+/?$}, false]
                                                           ]
                                                         )
                 transcoder.transcode request_pb
@@ -1729,6 +2095,27 @@ module Google
               ##
               # @private
               #
+              # GRPC transcoding helper method for the fetch_backup_plan_associations_for_resource_type REST call
+              #
+              # @param request_pb [::Google::Cloud::BackupDR::V1::FetchBackupPlanAssociationsForResourceTypeRequest]
+              #   A request object representing the call parameters. Required.
+              # @return [Array(String, [String, nil], Hash{String => String})]
+              #   Uri, Body, Query string parameters
+              def self.transcode_fetch_backup_plan_associations_for_resource_type_request request_pb
+                transcoder = Gapic::Rest::GrpcTranscoder.new
+                                                        .with_bindings(
+                                                          uri_method: :get,
+                                                          uri_template: "/v1/{parent}/backupPlanAssociations:fetchForResourceType",
+                                                          matches: [
+                                                            ["parent", %r{^projects/[^/]+/locations/[^/]+/?$}, false]
+                                                          ]
+                                                        )
+                transcoder.transcode request_pb
+              end
+
+              ##
+              # @private
+              #
               # GRPC transcoding helper method for the delete_backup_plan_association REST call
               #
               # @param request_pb [::Google::Cloud::BackupDR::V1::DeleteBackupPlanAssociationRequest]
@@ -1764,6 +2151,48 @@ module Google
                                                           body: "*",
                                                           matches: [
                                                             ["name", %r{^projects/[^/]+/locations/[^/]+/backupPlanAssociations/[^/]+/?$}, false]
+                                                          ]
+                                                        )
+                transcoder.transcode request_pb
+              end
+
+              ##
+              # @private
+              #
+              # GRPC transcoding helper method for the get_data_source_reference REST call
+              #
+              # @param request_pb [::Google::Cloud::BackupDR::V1::GetDataSourceReferenceRequest]
+              #   A request object representing the call parameters. Required.
+              # @return [Array(String, [String, nil], Hash{String => String})]
+              #   Uri, Body, Query string parameters
+              def self.transcode_get_data_source_reference_request request_pb
+                transcoder = Gapic::Rest::GrpcTranscoder.new
+                                                        .with_bindings(
+                                                          uri_method: :get,
+                                                          uri_template: "/v1/{name}",
+                                                          matches: [
+                                                            ["name", %r{^projects/[^/]+/locations/[^/]+/dataSourceReferences/[^/]+/?$}, false]
+                                                          ]
+                                                        )
+                transcoder.transcode request_pb
+              end
+
+              ##
+              # @private
+              #
+              # GRPC transcoding helper method for the fetch_data_source_references_for_resource_type REST call
+              #
+              # @param request_pb [::Google::Cloud::BackupDR::V1::FetchDataSourceReferencesForResourceTypeRequest]
+              #   A request object representing the call parameters. Required.
+              # @return [Array(String, [String, nil], Hash{String => String})]
+              #   Uri, Body, Query string parameters
+              def self.transcode_fetch_data_source_references_for_resource_type_request request_pb
+                transcoder = Gapic::Rest::GrpcTranscoder.new
+                                                        .with_bindings(
+                                                          uri_method: :get,
+                                                          uri_template: "/v1/{parent}/dataSourceReferences:fetchForResourceType",
+                                                          matches: [
+                                                            ["parent", %r{^projects/[^/]+/locations/[^/]+/?$}, false]
                                                           ]
                                                         )
                 transcoder.transcode request_pb

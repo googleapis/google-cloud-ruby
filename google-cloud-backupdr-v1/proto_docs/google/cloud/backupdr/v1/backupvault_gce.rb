@@ -133,7 +133,8 @@ module Google
         # @!attribute [rw] disks
         #   @return [::Array<::Google::Cloud::BackupDR::V1::AttachedDisk>]
         #     Optional. Array of disks associated with this instance. Persistent disks
-        #     must be created before you can assign them.
+        #     must be created before you can assign them. Source regional persistent
+        #     disks will be restored with default replica zones if not specified.
         # @!attribute [rw] display_device
         #   @return [::Google::Cloud::BackupDR::V1::DisplayDevice]
         #     Optional. Enables display device for the instance.
@@ -173,7 +174,7 @@ module Google
         #     Optional. An array of network configurations for this instance. These
         #     specify how interfaces are configured to interact with other network
         #     services, such as connecting to the internet. Multiple interfaces are
-        #     supported per instance.
+        #     supported per instance. Required to restore in different project or region.
         # @!attribute [rw] network_performance_config
         #   @return [::Google::Cloud::BackupDR::V1::NetworkPerformanceConfig]
         #     Optional. Configure network performance such as egress bandwidth tier.
@@ -191,6 +192,7 @@ module Google
         # @!attribute [rw] resource_policies
         #   @return [::Array<::String>]
         #     Optional. Resource policies applied to this instance.
+        #     By default, no resource policies will be applied.
         # @!attribute [rw] scheduling
         #   @return [::Google::Cloud::BackupDR::V1::Scheduling]
         #     Optional. Sets the scheduling options for this instance.
@@ -522,9 +524,9 @@ module Google
         # @!attribute [rw] type
         #   @return [::Google::Cloud::BackupDR::V1::AccessConfig::AccessType]
         #     Optional. In accessConfigs (IPv4), the
-        #      default and only option is ONE_TO_ONE_NAT. In
-        #      ipv6AccessConfigs, the default and only option is
-        #      DIRECT_IPV6.
+        #     default and only option is ONE_TO_ONE_NAT. In
+        #     ipv6AccessConfigs, the default and only option is
+        #     DIRECT_IPV6.
         # @!attribute [rw] name
         #   @return [::String]
         #     Optional. The name of this access configuration.
