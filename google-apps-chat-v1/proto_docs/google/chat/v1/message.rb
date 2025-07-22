@@ -124,7 +124,9 @@ module Google
         #     [Card builder](https://addons.gsuite.google.com/uikit/builder)
         # @!attribute [r] annotations
         #   @return [::Array<::Google::Apps::Chat::V1::Annotation>]
-        #     Output only. Annotations associated with the `text` in this message.
+        #     Output only. Annotations can be associated with the plain-text body of the
+        #     message or with chips that link to Google Workspace resources like Google
+        #     Docs or Sheets with `start_index` and `length` of 0.
         # @!attribute [rw] thread
         #   @return [::Google::Apps::Chat::V1::Thread]
         #     The thread the message belongs to. For example usage, see
