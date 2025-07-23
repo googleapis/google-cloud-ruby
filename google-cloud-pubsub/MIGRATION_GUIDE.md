@@ -3,7 +3,7 @@
 This page summarizes the changes needed to migrate from `google-cloud-pubsub`
 `v2.x` to `google-cloud-pubsub` `v3.x`.
 In line with [Google's Breaking Change Policy](https://opensource.google/documentation/policies/library-breaking-change),
-we plan to support the existing `v2.x` library for 12 months from the `v3.x` release,
+we plan to support the existing `v2.x` library until July 31st, 2026 (12 months from the `v3.x` release),
 including bug and security patches, but it will not receive new features.
 
 Note that this is a major version bump that includes breaking changes for the
@@ -13,20 +13,20 @@ Ruby library specifically, but the Pub/Sub API itself remains the same.
 
 This major version update involves several significant changes to the Ruby Pub/Sub client library:
 
-1. Removal of handwritten resource management APIs:
+1. **Removal of handwritten resource management APIs**:
 The APIs for resource management, also known as admin operations, have been replaced with
 auto-generated clients. Using these generated clients ensures you have access to the latest
 features and updates to the API.
-2. Service Renaming: 
+2. **Service Renaming**:
 The `Publisher` and `Subscriber` services within the auto-generated layer have
 been renamed to `TopicAdmin` and `SubscriptionAdmin`, respectively.
-3. Restructured Publishing and Subscribing: 
+3. **Restructured Publishing and Subscribing**:
 To better reflect their purpose, `Publisher` and `Subscriber` objects now exclusively
 handle publishing and receiving messages. These operations were formerly handled
 by `Topic` and `Subscription`.
-4. Auto-generated Client Exposure: 
+4. **Auto-generated Client Exposure**:
 The `TopicAdmin::Client`, `SubscriptionAdmin::Client`, and `SchemaService::Client` are now directly
-accessible from the a `Google::Cloud::PubSub::Project`.
+accessible from `Google::Cloud::PubSub::Project`.
 
 ## Admin Operations
 
@@ -184,7 +184,8 @@ publisher.publish "This is a test message."
 
 ### Receiving Messages
 
-Similarly, a `Subscription` object no longer manages receiving messages; that action is now performed by a `Subscriber`.
+Similarly, a `Subscription` object no longer manages receiving messages; that action
+is now performed by a `Subscriber`.
 
 `v2.x`:
 
@@ -216,9 +217,9 @@ end
 listener.start
 ```
 
-Because admin operations like `create_topic` no longer return an object that can perform data
-operations such as publishing messages, you will need to instantiate a Publisher client
-separately after creating the topic resource. The following example illustrates the new workflow:
+Admin operations like `create_topic` no longer return an object that can perform data operations.
+Consequently, after creating the topic resource, you must separately instantiate a `Publisher` client
+to publish messages. The following example illustrates the new workflow:
 
 ```ruby
 # topic_id = "your-topic-id"
@@ -238,7 +239,7 @@ publisher.publish "This is a message."
 
 ## FAQs
 
-### Why are you changing the admin API surface?
+### Why is the admin API surface changing?
 
 One of the primary goals is to reduce confusion between the data plane and admin plane surfaces. 
 Creating a topic is a server-side operation, while creating a publisher is a client-side
@@ -246,7 +247,7 @@ operation; this separation makes the library's behavior more explicit.
 Additionally, replacing handwritten admin operations with auto-generated clients ensures more
 timely availability of the latest features.
 
-### What do I have to do to migrate?
+### What is required for migration?
 
 Migration primarily involves the following:
 
