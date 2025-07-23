@@ -12,6 +12,126 @@
   },
   "snippets": [
     {
+      "region_tag": "discoveryengine_v1_generated_SearchService_Search_sync",
+      "title": "Snippet for the search call in the SearchService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DiscoveryEngine::V1::SearchService::Client#search.",
+      "file": "search_service/search.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "search",
+        "full_name": "::Google::Cloud::DiscoveryEngine::V1::SearchService::Client#search",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::DiscoveryEngine::V1::SearchRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::DiscoveryEngine::V1::SearchResponse",
+        "client": {
+          "short_name": "SearchService::Client",
+          "full_name": "::Google::Cloud::DiscoveryEngine::V1::SearchService::Client"
+        },
+        "method": {
+          "short_name": "Search",
+          "full_name": "google.cloud.discoveryengine.v1.SearchService.Search",
+          "service": {
+            "short_name": "SearchService",
+            "full_name": "google.cloud.discoveryengine.v1.SearchService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "discoveryengine_v1_generated_SearchService_SearchLite_sync",
+      "title": "Snippet for the search_lite call in the SearchService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DiscoveryEngine::V1::SearchService::Client#search_lite.",
+      "file": "search_service/search_lite.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "search_lite",
+        "full_name": "::Google::Cloud::DiscoveryEngine::V1::SearchService::Client#search_lite",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::DiscoveryEngine::V1::SearchRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::DiscoveryEngine::V1::SearchResponse",
+        "client": {
+          "short_name": "SearchService::Client",
+          "full_name": "::Google::Cloud::DiscoveryEngine::V1::SearchService::Client"
+        },
+        "method": {
+          "short_name": "SearchLite",
+          "full_name": "google.cloud.discoveryengine.v1.SearchService.SearchLite",
+          "service": {
+            "short_name": "SearchService",
+            "full_name": "google.cloud.discoveryengine.v1.SearchService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "discoveryengine_v1_generated_AssistantService_StreamAssist_sync",
+      "title": "Snippet for the stream_assist call in the AssistantService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DiscoveryEngine::V1::AssistantService::Client#stream_assist.",
+      "file": "assistant_service/stream_assist.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "stream_assist",
+        "full_name": "::Google::Cloud::DiscoveryEngine::V1::AssistantService::Client#stream_assist",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::DiscoveryEngine::V1::StreamAssistRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::DiscoveryEngine::V1::StreamAssistResponse",
+        "client": {
+          "short_name": "AssistantService::Client",
+          "full_name": "::Google::Cloud::DiscoveryEngine::V1::AssistantService::Client"
+        },
+        "method": {
+          "short_name": "StreamAssist",
+          "full_name": "google.cloud.discoveryengine.v1.AssistantService.StreamAssist",
+          "service": {
+            "short_name": "AssistantService",
+            "full_name": "google.cloud.discoveryengine.v1.AssistantService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 49,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
       "region_tag": "discoveryengine_v1_generated_CmekConfigService_UpdateCmekConfig_sync",
       "title": "Snippet for the update_cmek_config call in the CmekConfigService service",
       "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DiscoveryEngine::V1::CmekConfigService::Client#update_cmek_config.",
@@ -558,86 +678,6 @@
           "service": {
             "short_name": "ControlService",
             "full_name": "google.cloud.discoveryengine.v1.ControlService"
-          }
-        }
-      },
-      "canonical": true,
-      "origin": "API_DEFINITION",
-      "segments": [
-        {
-          "start": 20,
-          "end": 50,
-          "type": "FULL"
-        }
-      ]
-    },
-    {
-      "region_tag": "discoveryengine_v1_generated_SearchService_Search_sync",
-      "title": "Snippet for the search call in the SearchService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DiscoveryEngine::V1::SearchService::Client#search.",
-      "file": "search_service/search.rb",
-      "language": "RUBY",
-      "client_method": {
-        "short_name": "search",
-        "full_name": "::Google::Cloud::DiscoveryEngine::V1::SearchService::Client#search",
-        "async": false,
-        "parameters": [
-          {
-            "type": "::Google::Cloud::DiscoveryEngine::V1::SearchRequest",
-            "name": "request"
-          }
-        ],
-        "result_type": "::Google::Cloud::DiscoveryEngine::V1::SearchResponse",
-        "client": {
-          "short_name": "SearchService::Client",
-          "full_name": "::Google::Cloud::DiscoveryEngine::V1::SearchService::Client"
-        },
-        "method": {
-          "short_name": "Search",
-          "full_name": "google.cloud.discoveryengine.v1.SearchService.Search",
-          "service": {
-            "short_name": "SearchService",
-            "full_name": "google.cloud.discoveryengine.v1.SearchService"
-          }
-        }
-      },
-      "canonical": true,
-      "origin": "API_DEFINITION",
-      "segments": [
-        {
-          "start": 20,
-          "end": 50,
-          "type": "FULL"
-        }
-      ]
-    },
-    {
-      "region_tag": "discoveryengine_v1_generated_SearchService_SearchLite_sync",
-      "title": "Snippet for the search_lite call in the SearchService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DiscoveryEngine::V1::SearchService::Client#search_lite.",
-      "file": "search_service/search_lite.rb",
-      "language": "RUBY",
-      "client_method": {
-        "short_name": "search_lite",
-        "full_name": "::Google::Cloud::DiscoveryEngine::V1::SearchService::Client#search_lite",
-        "async": false,
-        "parameters": [
-          {
-            "type": "::Google::Cloud::DiscoveryEngine::V1::SearchRequest",
-            "name": "request"
-          }
-        ],
-        "result_type": "::Google::Cloud::DiscoveryEngine::V1::SearchResponse",
-        "client": {
-          "short_name": "SearchService::Client",
-          "full_name": "::Google::Cloud::DiscoveryEngine::V1::SearchService::Client"
-        },
-        "method": {
-          "short_name": "SearchLite",
-          "full_name": "google.cloud.discoveryengine.v1.SearchService.SearchLite",
-          "service": {
-            "short_name": "SearchService",
-            "full_name": "google.cloud.discoveryengine.v1.SearchService"
           }
         }
       },

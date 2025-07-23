@@ -5,6 +5,39 @@
   "protoPackage": "google.cloud.discoveryengine.v1",
   "libraryPackage": "::Google::Cloud::DiscoveryEngine::V1",
   "services": {
+    "SearchService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::DiscoveryEngine::V1::SearchService::Client",
+          "rpcs": {
+            "Search": {
+              "methods": [
+                "search"
+              ]
+            },
+            "SearchLite": {
+              "methods": [
+                "search_lite"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "AssistantService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::DiscoveryEngine::V1::AssistantService::Client",
+          "rpcs": {
+            "StreamAssist": {
+              "methods": [
+                "stream_assist"
+              ]
+            }
+          }
+        }
+      }
+    },
     "CmekConfigService": {
       "clients": {
         "grpc": {
@@ -96,25 +129,6 @@
             "ListControls": {
               "methods": [
                 "list_controls"
-              ]
-            }
-          }
-        }
-      }
-    },
-    "SearchService": {
-      "clients": {
-        "grpc": {
-          "libraryClient": "::Google::Cloud::DiscoveryEngine::V1::SearchService::Client",
-          "rpcs": {
-            "Search": {
-              "methods": [
-                "search"
-              ]
-            },
-            "SearchLite": {
-              "methods": [
-                "search_lite"
               ]
             }
           }
