@@ -38,6 +38,19 @@ One of the key differences between version `2.x` and `3.x` is the change to the 
 The handwritten methods have been removed, and the new way to make admin calls is through
 auto-generated clients. You can access them directly from a `Google::Cloud::PubSub::Project` object.
 
+```ruby
+pubsub = Google::Cloud::PubSub.new
+
+# Get the auto-generated client for managing topic resources
+topic_admin = pubsub.topic_admin
+
+# Get the auto-generated client for managing subscription resources
+subscription_admin = pubsub.subscription_admin
+
+# Get the auto-generated client for managing schema resources
+schema_admin = pubsub.schema
+```
+
 There is a mostly one-to-one mapping of existing admin methods to the new admin methods.
 A notable exception is that the auto-generated admin library does not provide an `exists?` method.
 The recommended pattern is to optimistically perform an operation like `get_topic` and handle
@@ -95,7 +108,7 @@ topic_admin = pubsub.topic_admin
 topic_admin.delete_topic topic: pubsub.topic_path(topic_id)
 ```
 
-## Update RPCs
+### Update RPCs
 
 Update RPCs now require passing a `FieldMask` along with the resource you are modifying.
 The service uses the field mask to know which fields should be updated.
@@ -103,7 +116,8 @@ The strings passed into the update field mask should be the `snake_case` name of
 you are editing (e.g., `dead_letter_policy`).
 
 If a field mask is not present, the operation applies to all fields and overrides
-the entire resource.
+the entire resource. For more information on FieldMasks, refer to
+[google.aip.dev/161](https://google.aip.dev/161).
 
 `v2.x`:
 
@@ -140,13 +154,13 @@ subscription_admin.update_subscription subscription: subscription,
 In contrast with admin operations that deal with resource management, the data plane handles
 the movement of data, which in Pub/Sub is the publishing and receiving of messages.
 
-In the current version `2.x`, the data plane clients are intermixed with the admin
-plane resources; for example, the `Topic` object has a `publish` method. In version `3.x`,
-these are separate.
+In version 3.x, admin operations have been moved to separate auto-generated clients as illustrated
+above. The data operations have not been moved, but a few of the class names have been modified to
+clarify their intent.
 
 ### Publishing Messages
 
-Instead of instantiating a `Topic` for data plane operations, you will now create a `Publisher` instead. 
+Instead of instantiating a `Topic` for data plane operations, you will now create a `Publisher`. 
 The `publisher` method can accept either the resource ID (e.g., `"my-topic"`) or the fully qualified
 resource name (e.g., `"projects/my-project/topics/my-topic"`) for convenience.
 
@@ -202,9 +216,9 @@ end
 listener.start
 ```
 
-Because admin operations like `create_topic` no longer return a data plane client,
-you will need to instantiate a Publisher client separately after creating the topic resource.
-The following example illustrates the new workflow:
+Because admin operations like `create_topic` no longer return an object that can perform data
+operations such as publishing messages, you will need to instantiate a Publisher client
+separately after creating the topic resource. The following example illustrates the new workflow:
 
 ```ruby
 # topic_id = "your-topic-id"
@@ -225,12 +239,12 @@ publisher.publish "This is a message."
 ## FAQs
 
 ### Why are you changing the admin API surface?
-One of the primary goals is to reduce confusion between the data plane and admin plane surfaces). 
+
+One of the primary goals is to reduce confusion between the data plane and admin plane surfaces. 
 Creating a topic is a server-side operation, while creating a publisher is a client-side
-operation; this separation makes the library's behavior more explicit. Another goal is to
-improve development velocity by replacing handwritten admin operations with auto-generated
-clients, which allows new admin features to be released sooner and ensures availability of
-the latest features.
+operation; this separation makes the library's behavior more explicit. 
+Additionally, replacing handwritten admin operations with auto-generated clients ensures more
+timely availability of the latest features.
 
 ### What do I have to do to migrate?
 
@@ -242,8 +256,6 @@ for publishing and receiving messages.
 the new admin clients (e.g. `topic_admin`, `subscription_admin`).
 3. Updating code that creates a resource and then uses the returned object for data plane calls.
 You will now need to instantiate a `Publisher` or `Subscriber` separately after the resource is created.
-
-
 
 ## Appendix: Method Mappings
 
