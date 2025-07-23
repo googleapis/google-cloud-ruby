@@ -59,10 +59,11 @@ module Google
           # answer from service.
           # @!attribute [rw] query
           #   @return [::Google::Cloud::DiscoveryEngine::V1::Query]
-          #     The user query.
+          #     Optional. The user query. May not be set if this turn is merely
+          #     regenerating an answer to a different turn
           # @!attribute [rw] answer
           #   @return [::String]
-          #     The resource name of the answer to the user query.
+          #     Optional. The resource name of the answer to the user query.
           #
           #     Only set if the answer generation (/answer API call) happened in this
           #     turn.
@@ -74,9 +75,24 @@ module Google
           #     {::Google::Cloud::DiscoveryEngine::V1::GetSessionRequest#include_answer_details GetSessionRequest.include_answer_details}
           #     is set to true, this field will be populated when getting answer query
           #     session.
+          # @!attribute [rw] query_config
+          #   @return [::Google::Protobuf::Map{::String => ::String}]
+          #     Optional. Represents metadata related to the query config, for example
+          #     LLM model and version used, model parameters (temperature, grounding
+          #     parameters, etc.). The prefix "google." is reserved for Google-developed
+          #     functionality.
           class Turn
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
+
+            # @!attribute [rw] key
+            #   @return [::String]
+            # @!attribute [rw] value
+            #   @return [::String]
+            class QueryConfigEntry
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
           end
 
           # Enumeration of the state of the session.
@@ -93,9 +109,9 @@ module Google
         # @!attribute [rw] text
         #   @return [::String]
         #     Plain text.
-        # @!attribute [rw] query_id
+        # @!attribute [r] query_id
         #   @return [::String]
-        #     Unique Id for the query.
+        #     Output only. Unique Id for the query.
         class Query
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
