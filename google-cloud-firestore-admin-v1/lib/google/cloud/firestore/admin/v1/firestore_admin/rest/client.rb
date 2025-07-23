@@ -2542,7 +2542,7 @@ module Google
                 #   @param options [::Gapic::CallOptions, ::Hash]
                 #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
                 #
-                # @overload restore_database(parent: nil, database_id: nil, backup: nil, encryption_config: nil)
+                # @overload restore_database(parent: nil, database_id: nil, backup: nil, encryption_config: nil, tags: nil)
                 #   Pass arguments to `restore_database` via keyword arguments. Note that at
                 #   least one keyword argument is required. To specify no parameters, or to keep all
                 #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -2574,6 +2574,11 @@ module Google
                 #     If this field is not specified, the restored database will use
                 #     the same encryption configuration as the backup, namely
                 #     {::Google::Cloud::Firestore::Admin::V1::Database::EncryptionConfig#use_source_encryption use_source_encryption}.
+                #   @param tags [::Hash{::String => ::String}]
+                #     Optional. Immutable. Tags to be bound to the restored database.
+                #
+                #     The tags should be provided in the format of
+                #     `tagKeys/{tag_key_id} -> tagValues/{tag_value_id}`.
                 # @yield [result, operation] Access the result along with the TransportOperation object
                 # @yieldparam result [::Gapic::Operation]
                 # @yieldparam operation [::Gapic::Rest::TransportOperation]

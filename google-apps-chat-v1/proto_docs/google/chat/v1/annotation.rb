@@ -21,9 +21,10 @@ module Google
   module Apps
     module Chat
       module V1
-        # Output only. Annotations associated with the plain-text body of the message.
-        # To add basic formatting to a text message, see
-        # [Format text
+        # Output only. Annotations can be associated with the plain-text body of the
+        # message or with chips that link to Google Workspace resources like Google
+        # Docs or Sheets with `start_index` and `length` of 0. To add basic formatting
+        # to a text message, see [Format text
         # messages](https://developers.google.com/workspace/chat/format-messages).
         #
         # Example plain-text message body:
@@ -58,7 +59,7 @@ module Google
         # @!attribute [rw] length
         #   @return [::Integer]
         #     Length of the substring in the plain-text message body this annotation
-        #     corresponds to.
+        #     corresponds to. If not present, indicates a length of 0.
         # @!attribute [rw] user_mention
         #   @return [::Google::Apps::Chat::V1::UserMentionMetadata]
         #     The metadata of user mention.
@@ -139,7 +140,10 @@ module Google
           end
         end
 
-        # A rich link to a resource.
+        # A rich link to a resource. Rich links can be associated with the plain-text
+        # body of the message or represent chips that link to Google Workspace
+        # resources like Google Docs or Sheets with `start_index` and `length`
+        # of 0.
         # @!attribute [rw] uri
         #   @return [::String]
         #     The URI of this link.
@@ -150,12 +154,22 @@ module Google
         #   @return [::Google::Apps::Chat::V1::DriveLinkData]
         #     Data for a drive link.
         #
-        #     Note: The following fields are mutually exclusive: `drive_link_data`, `chat_space_link_data`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `drive_link_data`, `chat_space_link_data`, `meet_space_link_data`, `calendar_event_link_data`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] chat_space_link_data
         #   @return [::Google::Apps::Chat::V1::ChatSpaceLinkData]
         #     Data for a chat space link.
         #
-        #     Note: The following fields are mutually exclusive: `chat_space_link_data`, `drive_link_data`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `chat_space_link_data`, `drive_link_data`, `meet_space_link_data`, `calendar_event_link_data`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] meet_space_link_data
+        #   @return [::Google::Apps::Chat::V1::MeetSpaceLinkData]
+        #     Data for a Meet space link.
+        #
+        #     Note: The following fields are mutually exclusive: `meet_space_link_data`, `drive_link_data`, `chat_space_link_data`, `calendar_event_link_data`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] calendar_event_link_data
+        #   @return [::Google::Apps::Chat::V1::CalendarEventLinkData]
+        #     Data for a Calendar event link.
+        #
+        #     Note: The following fields are mutually exclusive: `calendar_event_link_data`, `drive_link_data`, `chat_space_link_data`, `meet_space_link_data`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         class RichLinkMetadata
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -170,6 +184,12 @@ module Google
 
             # A Chat space rich link type. For example, a space smart chip.
             CHAT_SPACE = 2
+
+            # A Meet message rich link type. For example, a Meet chip.
+            MEET_SPACE = 4
+
+            # A Calendar message rich link type. For example, a Calendar chip.
+            CALENDAR_EVENT = 5
           end
         end
 
@@ -213,6 +233,67 @@ module Google
         #
         #     Format: `spaces/{space}/messages/{message}`
         class ChatSpaceLinkData
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Data for Meet space links.
+        # @!attribute [rw] meeting_code
+        #   @return [::String]
+        #     Meeting code of the linked Meet space.
+        # @!attribute [rw] type
+        #   @return [::Google::Apps::Chat::V1::MeetSpaceLinkData::Type]
+        #     Indicates the type of the Meet space.
+        # @!attribute [r] huddle_status
+        #   @return [::Google::Apps::Chat::V1::MeetSpaceLinkData::HuddleStatus]
+        #     Optional. Output only. If the Meet is a Huddle, indicates the status of the
+        #     huddle. Otherwise, this is unset.
+        class MeetSpaceLinkData
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # The type of the Meet space.
+          module Type
+            # Default value for the enum. Don't use.
+            TYPE_UNSPECIFIED = 0
+
+            # The Meet space is a meeting.
+            MEETING = 1
+
+            # The Meet space is a huddle.
+            HUDDLE = 2
+          end
+
+          # The status of the huddle
+          module HuddleStatus
+            # Default value for the enum. Don't use.
+            HUDDLE_STATUS_UNSPECIFIED = 0
+
+            # The huddle has started.
+            STARTED = 1
+
+            # The huddle has ended. In this case the Meet space URI and identifiers
+            # will no longer be valid.
+            ENDED = 2
+
+            # The huddle has been missed. In this case the Meet space URI and
+            # identifiers will no longer be valid.
+            MISSED = 3
+          end
+        end
+
+        # Data for Calendar event links.
+        # @!attribute [rw] calendar_id
+        #   @return [::String]
+        #     The [Calendar
+        #     identifier](https://developers.google.com/workspace/calendar/api/v3/reference/calendars)
+        #     of the linked Calendar.
+        # @!attribute [rw] event_id
+        #   @return [::String]
+        #     The [Event
+        #     identifier](https://developers.google.com/workspace/calendar/api/v3/reference/events)
+        #     of the linked Calendar event.
+        class CalendarEventLinkData
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end

@@ -148,6 +148,7 @@ module Google
         # @!attribute [rw] float_value
         #   @return [::Float]
         #     Represents a typed value transported as a floating point number.
+        #     Does not support NaN or infinities.
         #
         #     Note: The following fields are mutually exclusive: `float_value`, `raw_value`, `raw_timestamp_micros`, `bytes_value`, `string_value`, `int_value`, `bool_value`, `timestamp_value`, `date_value`, `array_value`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] timestamp_value

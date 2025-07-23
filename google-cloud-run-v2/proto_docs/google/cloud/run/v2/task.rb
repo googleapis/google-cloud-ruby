@@ -198,6 +198,10 @@ module Google
         # @!attribute [r] node_selector
         #   @return [::Google::Cloud::Run::V2::NodeSelector]
         #     Output only. The node selector for the task.
+        # @!attribute [r] gpu_zonal_redundancy_disabled
+        #   @return [::Boolean]
+        #     Optional. Output only. True if GPU zonal redundancy is disabled on this
+        #     task.
         # @!attribute [r] etag
         #   @return [::String]
         #     Output only. A system-generated fingerprint for this version of the
@@ -236,6 +240,14 @@ module Google
         #     This may be unset if the container was unable to exit cleanly with a code
         #     due to some other failure.
         #     See status field for possible failure details.
+        #
+        #     At most one of exit_code or term_signal will be set.
+        # @!attribute [r] term_signal
+        #   @return [::Integer]
+        #     Output only. Termination signal of the container. This is set to non-zero
+        #     if the container is terminated by the system.
+        #
+        #     At most one of exit_code or term_signal will be set.
         class TaskAttemptResult
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

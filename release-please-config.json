@@ -943,6 +943,14 @@
       "component": "google-cloud-lustre-v1",
       "version_file": "lib/google/cloud/lustre/v1/version.rb"
     },
+    "google-cloud-maintenance-api": {
+      "component": "google-cloud-maintenance-api",
+      "version_file": "lib/google/cloud/maintenance/api/version.rb"
+    },
+    "google-cloud-maintenance-api-v1beta": {
+      "component": "google-cloud-maintenance-api-v1beta",
+      "version_file": "lib/google/cloud/maintenance/api/v1beta/version.rb"
+    },
     "google-cloud-managed_identities": {
       "component": "google-cloud-managed_identities",
       "version_file": "lib/google/cloud/managed_identities/version.rb"

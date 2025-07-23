@@ -22,9 +22,6 @@ module Google
     module Bigtable
       module V2
         # Response metadata proto
-        # This is an experimental feature that will be used to get zone_id and
-        # cluster_id from response trailers to tag the metrics. This should not be
-        # used by customers directly
         # @!attribute [rw] zone_id
         #   @return [::String]
         #     The cloud bigtable zone associated with the cluster.

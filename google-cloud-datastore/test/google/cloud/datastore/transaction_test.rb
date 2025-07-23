@@ -60,6 +60,71 @@ describe Google::Cloud::Datastore::Transaction, :mock_datastore do
     Google::Cloud::Datastore::V1::BeginTransactionResponse.new(transaction: tx_id)
   end
   let(:tx_id) { "giterdone".encode("ASCII-8BIT") }
+  let(:query_grpc) do
+    Google::Cloud::Datastore::V1::Query.new(
+      projection: [],
+      kind: [Google::Cloud::Datastore::V1::KindExpression.new(name: "User")],
+      order: [],
+      distinct_on: [],
+      start_cursor: "",
+      end_cursor: "",
+      offset: 0
+    )
+  end
+  let(:run_aggregation_query_res) do
+    aggregation_results = [
+      Google::Cloud::Datastore::V1::AggregationResult.new(
+        aggregate_properties: {
+          'count' => Google::Cloud::Datastore::V1::Value.new(meaning: 0, exclude_from_indexes: false, integer_value: 2)
+        }
+      )
+    ]
+    Google::Cloud::Datastore::V1::RunAggregationQueryResponse.new(
+      batch: Google::Cloud::Datastore::V1::AggregationResultBatch.new(
+        read_time: Google::Protobuf::Timestamp.new(seconds: 1673852227, nanos: 370563000),
+        more_results: :NO_MORE_RESULTS,
+        aggregation_results: aggregation_results
+      )
+    )
+  end
+  let(:run_aggregation_query_res_with_explain) do
+    run_aggregation_query_res.dup.tap do |response|
+      response.explain_metrics = Google::Cloud::Datastore::V1::ExplainMetrics.new
+    end
+  end
+  let(:aggregate_query_grpc) do
+    aggregations = [
+      Google::Cloud::Datastore::V1::AggregationQuery::Aggregation.new(
+        alias: 'count',
+        count: Google::Cloud::Datastore::V1::AggregationQuery::Aggregation::Count.new
+      )
+    ]
+    Google::Cloud::Datastore::V1::AggregationQuery.new(nested_query: query_grpc, aggregations: aggregations)
+  end
+  let(:aggregate_gql_query_res) do
+    aggregation_results = [
+      Google::Cloud::Datastore::V1::AggregationResult.new(aggregate_properties: { 'total' => Google::Cloud::Datastore::V1::Value.new(meaning: 0, exclude_from_indexes: false, integer_value: 2) })
+    ]
+    Google::Cloud::Datastore::V1::RunAggregationQueryResponse.new(
+      batch: Google::Cloud::Datastore::V1::AggregationResultBatch.new(
+        read_time: Google::Protobuf::Timestamp.new(seconds: 1673852227, nanos: 370563000),
+        more_results: :NO_MORE_RESULTS,
+        aggregation_results: aggregation_results
+      ),
+      query: Google::Cloud::Datastore::V1::AggregationQuery.new(
+        nested_query: query_grpc,
+        aggregations: [
+          Google::Cloud::Datastore::V1::AggregationQuery::Aggregation.new(
+            alias: "total",
+            count: Google::Cloud::Datastore::V1::AggregationQuery::Aggregation::Count.new
+          )
+        ]
+      )
+    )
+  end
+  let(:read_options) { Google::Cloud::Datastore::V1::ReadOptions.new(transaction: tx_id) }
+  let(:gql_query_grpc) { Google::Cloud::Datastore::V1::GqlQuery.new(query_string: "SELECT * FROM Task") }
+  let(:gql_aggregate_query_grpc) { Google::Cloud::Datastore::V1::GqlQuery.new(query_string: "SELECT COUNT(*) as total FROM Task") }
 
   after do
     transaction.service.mocked_service.verify
@@ -379,6 +444,35 @@ describe Google::Cloud::Datastore::Transaction, :mock_datastore do
     refute entities.more_after_limit?
     refute entities.more_after_cursor?
     refute entities.no_more?
+  end
+
+  it "run_aggregation will fulfill an aggregate query" do
+    transaction.service.mocked_service.expect :run_aggregation_query, run_aggregation_query_res, project_id: project, partition_id: nil, read_options: read_options, aggregation_query: aggregate_query_grpc, gql_query: nil, explain_options: nil
+    query = Google::Cloud::Datastore::Query.new.kind("User")
+    aq = query.aggregate_query
+              .add_count
+    res = transaction.run_aggregation aq
+    _(res.get('count')).must_equal 2
+  end
+
+  it "run_aggregation will fulfill an aggregate query with explain_options" do
+    explain_options = { analyze: true }
+    explain_options_grpc = Google::Cloud::Datastore::V1::ExplainOptions.new analyze: true
+    transaction.service.mocked_service.expect :run_aggregation_query, run_aggregation_query_res_with_explain, project_id: project, partition_id: nil, read_options: read_options, aggregation_query: aggregate_query_grpc, gql_query: nil, explain_options: explain_options_grpc
+    query = Google::Cloud::Datastore::Query.new.kind("User")
+    aq = query.aggregate_query
+              .add_count
+    res = transaction.run_aggregation aq, explain_options: explain_options
+    _(res.get('count')).must_equal 2
+    _(res.explain_metrics).must_be_kind_of Google::Cloud::Datastore::V1::ExplainMetrics
+    _(res.explain_options).must_equal explain_options
+  end
+
+  it "run_aggregation will fulfill an aggregate gql query" do
+    transaction.service.mocked_service.expect :run_aggregation_query, aggregate_gql_query_res, project_id: project, partition_id: nil, read_options: read_options, aggregation_query: nil, gql_query: gql_aggregate_query_grpc, explain_options: nil
+    gql = dataset.gql "SELECT COUNT(*) as total FROM Task"
+    res = transaction.run_aggregation gql
+    _(res.get('total')).must_equal 2
   end
 
   it "commit persists entities with complete keys" do

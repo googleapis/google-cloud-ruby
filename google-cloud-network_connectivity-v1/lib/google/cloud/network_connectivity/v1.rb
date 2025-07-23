@@ -18,6 +18,7 @@
 
 require "google/cloud/network_connectivity/v1/cross_network_automation_service"
 require "google/cloud/network_connectivity/v1/hub_service"
+require "google/cloud/network_connectivity/v1/internal_range_service"
 require "google/cloud/network_connectivity/v1/policy_based_routing_service"
 require "google/cloud/network_connectivity/v1/version"
 

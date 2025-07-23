@@ -46,6 +46,86 @@ module Google
   module Cloud
     module PolicySimulator
       ##
+      # Create a new client object for OrgPolicyViolationsPreviewService.
+      #
+      # By default, this returns an instance of
+      # [Google::Cloud::PolicySimulator::V1::OrgPolicyViolationsPreviewService::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-policy_simulator-v1/latest/Google-Cloud-PolicySimulator-V1-OrgPolicyViolationsPreviewService-Client)
+      # for a gRPC client for version V1 of the API.
+      # However, you can specify a different API version by passing it in the
+      # `version` parameter. If the OrgPolicyViolationsPreviewService service is
+      # supported by that API version, and the corresponding gem is available, the
+      # appropriate versioned client will be returned.
+      # You can also specify a different transport by passing `:rest` or `:grpc` in
+      # the `transport` parameter.
+      #
+      # Raises an exception if the currently installed versioned client gem for the
+      # given API version does not support the given transport of the OrgPolicyViolationsPreviewService service.
+      # You can determine whether the method will succeed by calling
+      # {Google::Cloud::PolicySimulator.org_policy_violations_preview_service_available?}.
+      #
+      # ## About OrgPolicyViolationsPreviewService
+      #
+      # Violations Preview API service for OrgPolicy.
+      #
+      # An
+      # OrgPolicyViolationsPreview
+      # is a preview of the violations that will exist as soon as a proposed
+      # OrgPolicy change is submitted. To create an
+      # OrgPolicyViolationsPreview,
+      # the API user specifies the changes they wish to make and requests the
+      # generation of a preview via [GenerateViolationsPreview][]. the OrgPolicy
+      # Simulator service then scans the API user's currently existing resources to
+      # determine these resources violate the newly set OrgPolicy.
+      #
+      # @param version [::String, ::Symbol] The API version to connect to. Optional.
+      #   Defaults to `:v1`.
+      # @param transport [:grpc, :rest] The transport to use. Defaults to `:grpc`.
+      # @return [::Object] A client object for the specified version.
+      #
+      def self.org_policy_violations_preview_service version: :v1, transport: :grpc, &block
+        require "google/cloud/policy_simulator/#{version.to_s.downcase}"
+
+        package_name = Google::Cloud::PolicySimulator
+                       .constants
+                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                       .first
+        service_module = Google::Cloud::PolicySimulator.const_get(package_name).const_get(:OrgPolicyViolationsPreviewService)
+        service_module = service_module.const_get(:Rest) if transport == :rest
+        service_module.const_get(:Client).new(&block)
+      end
+
+      ##
+      # Determines whether the OrgPolicyViolationsPreviewService service is supported by the current client.
+      # If true, you can retrieve a client object by calling {Google::Cloud::PolicySimulator.org_policy_violations_preview_service}.
+      # If false, that method will raise an exception. This could happen if the given
+      # API version does not exist or does not support the OrgPolicyViolationsPreviewService service,
+      # or if the versioned client gem needs an update to support the OrgPolicyViolationsPreviewService service.
+      #
+      # @param version [::String, ::Symbol] The API version to connect to. Optional.
+      #   Defaults to `:v1`.
+      # @param transport [:grpc, :rest] The transport to use. Defaults to `:grpc`.
+      # @return [boolean] Whether the service is available.
+      #
+      def self.org_policy_violations_preview_service_available? version: :v1, transport: :grpc
+        require "google/cloud/policy_simulator/#{version.to_s.downcase}"
+        package_name = Google::Cloud::PolicySimulator
+                       .constants
+                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                       .first
+        return false unless package_name
+        service_module = Google::Cloud::PolicySimulator.const_get package_name
+        return false unless service_module.const_defined? :OrgPolicyViolationsPreviewService
+        service_module = service_module.const_get :OrgPolicyViolationsPreviewService
+        if transport == :rest
+          return false unless service_module.const_defined? :Rest
+          service_module = service_module.const_get :Rest
+        end
+        service_module.const_defined? :Client
+      rescue ::LoadError
+        false
+      end
+
+      ##
       # Create a new client object for Simulator.
       #
       # By default, this returns an instance of
