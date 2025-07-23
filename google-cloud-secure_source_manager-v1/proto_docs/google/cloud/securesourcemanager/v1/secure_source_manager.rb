@@ -62,6 +62,10 @@ module Google
         # @!attribute [r] host_config
         #   @return [::Google::Cloud::SecureSourceManager::V1::Instance::HostConfig]
         #     Output only. A list of hostnames for this instance.
+        # @!attribute [rw] workforce_identity_federation_config
+        #   @return [::Google::Cloud::SecureSourceManager::V1::Instance::WorkforceIdentityFederationConfig]
+        #     Optional. Configuration for Workforce Identity Federation to support
+        #     third party identity provider. If unset, defaults to the Google OIDC IdP.
         class Instance
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -72,8 +76,7 @@ module Google
           #     Output only. HTML hostname.
           # @!attribute [r] api
           #   @return [::String]
-          #     Output only. API hostname. This is the hostname to use for **Host: Data
-          #     Plane** endpoints.
+          #     Output only. API hostname.
           # @!attribute [r] git_http
           #   @return [::String]
           #     Output only. Git HTTP hostname.
@@ -91,7 +94,7 @@ module Google
           #     Required. Immutable. Indicate if it's private instance.
           # @!attribute [rw] ca_pool
           #   @return [::String]
-          #     Required. Immutable. CA pool resource, resource must in the format of
+          #     Optional. Immutable. CA pool resource, resource must in the format of
           #     `projects/{project}/locations/{location}/caPools/{ca_pool}`.
           # @!attribute [r] http_service_attachment
           #   @return [::String]
@@ -107,6 +110,16 @@ module Google
           #     Instance host project is automatically allowed and does not need to be
           #     included in this list.
           class PrivateConfig
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # WorkforceIdentityFederationConfig allows this instance to support users
+          # from external identity providers.
+          # @!attribute [rw] enabled
+          #   @return [::Boolean]
+          #     Optional. Immutable. Whether Workforce Identity Federation is enabled.
+          class WorkforceIdentityFederationConfig
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
@@ -170,10 +183,9 @@ module Google
         #     Optional. The name of the instance in which the repository is hosted,
         #     formatted as
         #     `projects/{project_number}/locations/{location_id}/instances/{instance_id}`
-        #     When creating repository via
-        #     securesourcemanager.googleapis.com (Control Plane API), this field is used
-        #     as input. When creating repository via *.sourcemanager.dev (Data Plane
-        #     API), this field is output only.
+        #     When creating repository via securesourcemanager.googleapis.com, this field
+        #     is used as input. When creating repository via *.sourcemanager.dev, this
+        #     field is output only.
         # @!attribute [r] uid
         #   @return [::String]
         #     Output only. Unique identifier of the repository.
@@ -357,8 +369,67 @@ module Google
           end
         end
 
+        # Metadata of a Secure Source Manager Hook.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Identifier. A unique identifier for a Hook. The name should be of the
+        #     format:
+        #     `projects/{project}/locations/{location_id}/repositories/{repository_id}/hooks/{hook_id}`
+        # @!attribute [rw] target_uri
+        #   @return [::String]
+        #     Required. The target URI to which the payloads will be delivered.
+        # @!attribute [rw] disabled
+        #   @return [::Boolean]
+        #     Optional. Determines if the hook disabled or not.
+        #     Set to true to stop sending traffic.
+        # @!attribute [rw] events
+        #   @return [::Array<::Google::Cloud::SecureSourceManager::V1::Hook::HookEventType>]
+        #     Optional. The events that trigger hook on.
+        # @!attribute [r] create_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Output only. Create timestamp.
+        # @!attribute [r] update_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Output only. Update timestamp.
+        # @!attribute [r] uid
+        #   @return [::String]
+        #     Output only. Unique identifier of the hook.
+        # @!attribute [rw] push_option
+        #   @return [::Google::Cloud::SecureSourceManager::V1::Hook::PushOption]
+        #     Optional. The trigger option for push events.
+        # @!attribute [rw] sensitive_query_string
+        #   @return [::String]
+        #     Optional. The sensitive query string to be appended to the target URI.
+        class Hook
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # @!attribute [rw] branch_filter
+          #   @return [::String]
+          #     Optional. Trigger hook for matching branches only.
+          #     Specified as glob pattern. If empty or *, events for all branches are
+          #     reported. Examples: main, \\{main,release*}.
+          #     See https://pkg.go.dev/github.com/gobwas/glob documentation.
+          class PushOption
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          module HookEventType
+            # Unspecified.
+            UNSPECIFIED = 0
+
+            # Push events are triggered when pushing to the repository.
+            PUSH = 1
+
+            # Pull request events are triggered when a pull request is opened, closed,
+            # reopened, or edited.
+            PULL_REQUEST = 2
+          end
+        end
+
         # Metadata of a BranchRule. BranchRule is the protection rule to enforce
-        # pre-defined rules on desginated branches within a repository.
+        # pre-defined rules on designated branches within a repository.
         # @!attribute [rw] name
         #   @return [::String]
         #     Optional. A unique identifier for a BranchRule. The name should be of the
@@ -436,6 +507,281 @@ module Google
           # @!attribute [rw] value
           #   @return [::String]
           class AnnotationsEntry
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+        end
+
+        # Metadata of a PullRequest. PullRequest is the request
+        # from a user to merge a branch (head) into another branch (base).
+        # @!attribute [r] name
+        #   @return [::String]
+        #     Output only. A unique identifier for a PullRequest. The number appended at
+        #     the end is generated by the server. Format:
+        #     `projects/{project}/locations/{location}/repositories/{repository}/pullRequests/{pull_request_id}`
+        # @!attribute [rw] title
+        #   @return [::String]
+        #     Required. The pull request title.
+        # @!attribute [rw] body
+        #   @return [::String]
+        #     Optional. The pull request body. Provides a detailed description of the
+        #     changes.
+        # @!attribute [rw] base
+        #   @return [::Google::Cloud::SecureSourceManager::V1::PullRequest::Branch]
+        #     Required. The branch to merge changes in.
+        # @!attribute [rw] head
+        #   @return [::Google::Cloud::SecureSourceManager::V1::PullRequest::Branch]
+        #     Immutable. The branch containing the changes to be merged.
+        # @!attribute [r] state
+        #   @return [::Google::Cloud::SecureSourceManager::V1::PullRequest::State]
+        #     Output only. State of the pull request (open, closed or merged).
+        # @!attribute [r] create_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Output only. Creation timestamp.
+        # @!attribute [r] update_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Output only. Last updated timestamp.
+        # @!attribute [r] close_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Output only. Close timestamp (if closed or merged). Cleared when pull
+        #     request is re-opened.
+        class PullRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Branch represents a branch involved in a pull request.
+          # @!attribute [rw] ref
+          #   @return [::String]
+          #     Required. Name of the branch.
+          # @!attribute [r] sha
+          #   @return [::String]
+          #     Output only. The commit at the tip of the branch.
+          class Branch
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # State of the pull request.
+          module State
+            # Unspecified.
+            STATE_UNSPECIFIED = 0
+
+            # An open pull request.
+            OPEN = 1
+
+            # A closed pull request.
+            CLOSED = 2
+
+            # A merged pull request.
+            MERGED = 3
+          end
+        end
+
+        # Metadata of a FileDiff. FileDiff represents a single file diff in a pull
+        # request.
+        # @!attribute [r] name
+        #   @return [::String]
+        #     Output only. The name of the file.
+        # @!attribute [r] action
+        #   @return [::Google::Cloud::SecureSourceManager::V1::FileDiff::Action]
+        #     Output only. The action taken on the file (eg. added, modified, deleted).
+        # @!attribute [r] sha
+        #   @return [::String]
+        #     Output only. The commit pointing to the file changes.
+        # @!attribute [r] patch
+        #   @return [::String]
+        #     Output only. The git patch containing the file changes.
+        class FileDiff
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Action taken on the file.
+          module Action
+            # Unspecified.
+            ACTION_UNSPECIFIED = 0
+
+            # The file was added.
+            ADDED = 1
+
+            # The file was modified.
+            MODIFIED = 2
+
+            # The file was deleted.
+            DELETED = 3
+          end
+        end
+
+        # Metadata of an Issue.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Identifier. Unique identifier for an issue. The issue id is generated by
+        #     the server. Format:
+        #     `projects/{project}/locations/{location}/repositories/{repository}/issues/{issue_id}`
+        # @!attribute [rw] title
+        #   @return [::String]
+        #     Required. Issue title.
+        # @!attribute [rw] body
+        #   @return [::String]
+        #     Optional. Issue body. Provides a detailed description of the issue.
+        # @!attribute [r] state
+        #   @return [::Google::Cloud::SecureSourceManager::V1::Issue::State]
+        #     Output only. State of the issue.
+        # @!attribute [r] create_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Output only. Creation timestamp.
+        # @!attribute [r] update_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Output only. Last updated timestamp.
+        # @!attribute [r] close_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Output only. Close timestamp (if closed). Cleared when is re-opened.
+        # @!attribute [rw] etag
+        #   @return [::String]
+        #     Optional. This checksum is computed by the server based on the value of
+        #     other fields, and may be sent on update and delete requests to ensure the
+        #     client has an up-to-date value before proceeding.
+        class Issue
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Possible states of an issue.
+          module State
+            # Unspecified.
+            STATE_UNSPECIFIED = 0
+
+            # An open issue.
+            OPEN = 1
+
+            # A closed issue.
+            CLOSED = 2
+          end
+        end
+
+        # IssueComment represents a comment on an issue.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Identifier. Unique identifier for an issue comment. The comment id is
+        #     generated by the server. Format:
+        #     `projects/{project}/locations/{location}/repositories/{repository}/issues/{issue}/issueComments/{comment_id}`
+        # @!attribute [rw] body
+        #   @return [::String]
+        #     Required. The comment body.
+        # @!attribute [r] create_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Output only. Creation timestamp.
+        # @!attribute [r] update_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Output only. Last updated timestamp.
+        class IssueComment
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # PullRequestComment represents a comment on a pull request.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Identifier. Unique identifier for the pull request comment. The comment id
+        #     is generated by the server. Format:
+        #     `projects/{project}/locations/{location}/repositories/{repository}/pullRequests/{pull_request}/pullRequestComments/{comment_id}`
+        # @!attribute [r] create_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Output only. Creation timestamp.
+        # @!attribute [r] update_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Output only. Last updated timestamp.
+        # @!attribute [rw] review
+        #   @return [::Google::Cloud::SecureSourceManager::V1::PullRequestComment::Review]
+        #     Optional. The review summary comment.
+        #
+        #     Note: The following fields are mutually exclusive: `review`, `comment`, `code`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] comment
+        #   @return [::Google::Cloud::SecureSourceManager::V1::PullRequestComment::Comment]
+        #     Optional. The general pull request comment.
+        #
+        #     Note: The following fields are mutually exclusive: `comment`, `review`, `code`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] code
+        #   @return [::Google::Cloud::SecureSourceManager::V1::PullRequestComment::Code]
+        #     Optional. The comment on a code line.
+        #
+        #     Note: The following fields are mutually exclusive: `code`, `review`, `comment`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        class PullRequestComment
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # The review summary comment.
+          # @!attribute [rw] action_type
+          #   @return [::Google::Cloud::SecureSourceManager::V1::PullRequestComment::Review::ActionType]
+          #     Required. The review action type.
+          # @!attribute [rw] body
+          #   @return [::String]
+          #     Optional. The comment body.
+          # @!attribute [r] effective_commit_sha
+          #   @return [::String]
+          #     Output only. The effective commit sha this review is pointing to.
+          class Review
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+
+            # The review action type.
+            module ActionType
+              # Unspecified.
+              ACTION_TYPE_UNSPECIFIED = 0
+
+              # A general review comment.
+              COMMENT = 1
+
+              # Change required from this review.
+              CHANGE_REQUESTED = 2
+
+              # Change approved from this review.
+              APPROVED = 3
+            end
+          end
+
+          # The general pull request comment.
+          # @!attribute [rw] body
+          #   @return [::String]
+          #     Required. The comment body.
+          class Comment
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # The comment on a code line.
+          # @!attribute [rw] body
+          #   @return [::String]
+          #     Required. The comment body.
+          # @!attribute [rw] reply
+          #   @return [::String]
+          #     Optional. Input only. The PullRequestComment resource name that this
+          #     comment is replying to.
+          # @!attribute [rw] position
+          #   @return [::Google::Cloud::SecureSourceManager::V1::PullRequestComment::Position]
+          #     Optional. The position of the comment.
+          # @!attribute [r] effective_root_comment
+          #   @return [::String]
+          #     Output only. The root comment of the conversation, derived from the reply
+          #     field.
+          # @!attribute [r] resolved
+          #   @return [::Boolean]
+          #     Output only. Boolean indicator if the comment is resolved.
+          # @!attribute [r] effective_commit_sha
+          #   @return [::String]
+          #     Output only. The effective commit sha this code comment is pointing to.
+          class Code
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # The position of the code comment.
+          # @!attribute [rw] path
+          #   @return [::String]
+          #     Required. The path of the file.
+          # @!attribute [rw] line
+          #   @return [::Integer]
+          #     Required. The line number of the comment. Positive value means it's on
+          #     the new side of the diff, negative value means it's on the old side.
+          class Position
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
@@ -560,7 +906,7 @@ module Google
         #   @return [::Boolean]
         #     Output only. Identifies whether the user has requested cancellation
         #     of the operation. Operations that have successfully been cancelled
-        #     have [Operation.error][] value with a
+        #     have {::Google::Longrunning::Operation#error Operation.error} value with a
         #     {::Google::Rpc::Status#code google.rpc.Status.code} of 1, corresponding to
         #     `Code.CANCELLED`.
         # @!attribute [r] api_version
@@ -590,10 +936,9 @@ module Google
         #     Optional. The name of the instance in which the repository is hosted,
         #     formatted as
         #     `projects/{project_number}/locations/{location_id}/instances/{instance_id}`.
-        #     When listing repositories via
-        #     securesourcemanager.googleapis.com (Control Plane API), this field is
-        #     required. When listing repositories via *.sourcemanager.dev (Data Plane
-        #     API), this field is ignored.
+        #     When listing repositories via securesourcemanager.googleapis.com, this
+        #     field is required. When listing repositories via *.sourcemanager.dev, this
+        #     field is ignored.
         class ListRepositoriesRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -639,17 +984,123 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # UpdateRepositoryRequest is the request to update a repository.
+        # @!attribute [rw] update_mask
+        #   @return [::Google::Protobuf::FieldMask]
+        #     Optional. Field mask is used to specify the fields to be overwritten in the
+        #     repository resource by the update.
+        #     The fields specified in the update_mask are relative to the resource, not
+        #     the full request. A field will be overwritten if it is in the mask. If the
+        #     user does not provide a mask then all fields will be overwritten.
+        # @!attribute [rw] repository
+        #   @return [::Google::Cloud::SecureSourceManager::V1::Repository]
+        #     Required. The repository being updated.
+        # @!attribute [rw] validate_only
+        #   @return [::Boolean]
+        #     Optional. False by default. If set to true, the request is validated and
+        #     the user is provided with an expected result, but no actual change is made.
+        class UpdateRepositoryRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # DeleteRepositoryRequest is the request to delete a repository.
         # @!attribute [rw] name
         #   @return [::String]
         #     Required. Name of the repository to delete.
         #     The format is
-        #     projects/\\{project_number}/locations/\\{location_id}/repositories/\\{repository_id}.
+        #     `projects/{project_number}/locations/{location_id}/repositories/{repository_id}`.
         # @!attribute [rw] allow_missing
         #   @return [::Boolean]
         #     Optional. If set to true, and the repository is not found, the request will
         #     succeed but no action will be taken on the server.
         class DeleteRepositoryRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # ListHooksRequest is request to list hooks.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. Parent value for ListHooksRequest.
+        # @!attribute [rw] page_size
+        #   @return [::Integer]
+        #     Optional. Requested page size. Server may return fewer items than
+        #     requested. If unspecified, server will pick an appropriate default.
+        # @!attribute [rw] page_token
+        #   @return [::String]
+        #     Optional. A token identifying a page of results the server should return.
+        class ListHooksRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # ListHooksResponse is response to list hooks.
+        # @!attribute [rw] hooks
+        #   @return [::Array<::Google::Cloud::SecureSourceManager::V1::Hook>]
+        #     The list of hooks.
+        # @!attribute [rw] next_page_token
+        #   @return [::String]
+        #     A token identifying a page of results the server should return.
+        class ListHooksResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # GetHookRequest is the request for getting a hook.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. Name of the hook to retrieve.
+        #     The format is
+        #     `projects/{project_number}/locations/{location_id}/repositories/{repository_id}/hooks/{hook_id}`.
+        class GetHookRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # CreateHookRequest is the request for creating a hook.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. The repository in which to create the hook. Values are of the
+        #     form
+        #     `projects/{project_number}/locations/{location_id}/repositories/{repository_id}`
+        # @!attribute [rw] hook
+        #   @return [::Google::Cloud::SecureSourceManager::V1::Hook]
+        #     Required. The resource being created.
+        # @!attribute [rw] hook_id
+        #   @return [::String]
+        #     Required. The ID to use for the hook, which will become the final component
+        #     of the hook's resource name. This value restricts to lower-case letters,
+        #     numbers, and hyphen, with the first character a letter, the last a letter
+        #     or a number, and a 63 character maximum.
+        class CreateHookRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # UpdateHookRequest is the request to update a hook.
+        # @!attribute [rw] update_mask
+        #   @return [::Google::Protobuf::FieldMask]
+        #     Required. Field mask is used to specify the fields to be overwritten in the
+        #     hook resource by the update.
+        #     The fields specified in the update_mask are relative to the resource, not
+        #     the full request. A field will be overwritten if it is in the mask.
+        #     The special value "*" means full replacement.
+        # @!attribute [rw] hook
+        #   @return [::Google::Cloud::SecureSourceManager::V1::Hook]
+        #     Required. The hook being updated.
+        class UpdateHookRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # DeleteHookRequest is the request to delete a hook.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. Name of the hook to delete.
+        #     The format is
+        #     `projects/{project_number}/locations/{location_id}/repositories/{repository_id}/hooks/{hook_id}`.
+        class DeleteHookRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
@@ -728,6 +1179,610 @@ module Google
         #   @return [::String]
         #     A token identifying a page of results the server should return.
         class ListBranchRulesResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # CreatePullRequestRequest is the request to create a pull request.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. The repository that the pull request is created from. Format:
+        #     `projects/{project_number}/locations/{location_id}/repositories/{repository_id}`
+        # @!attribute [rw] pull_request
+        #   @return [::Google::Cloud::SecureSourceManager::V1::PullRequest]
+        #     Required. The pull request to create.
+        class CreatePullRequestRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # GetPullRequestRequest is the request to get a pull request.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. Name of the pull request to retrieve.
+        #     The format is
+        #     `projects/{project}/locations/{location}/repositories/{repository}/pullRequests/{pull_request}`.
+        class GetPullRequestRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # ListPullRequestsRequest is the request to list pull requests.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. The repository in which to list pull requests. Format:
+        #     `projects/{project_number}/locations/{location_id}/repositories/{repository_id}`
+        # @!attribute [rw] page_size
+        #   @return [::Integer]
+        #     Optional. Requested page size. Server may return fewer items than
+        #     requested. If unspecified, server will pick an appropriate default.
+        # @!attribute [rw] page_token
+        #   @return [::String]
+        #     Optional. A token identifying a page of results the server should return.
+        class ListPullRequestsRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # ListPullRequestsResponse is the response to list pull requests.
+        # @!attribute [rw] pull_requests
+        #   @return [::Array<::Google::Cloud::SecureSourceManager::V1::PullRequest>]
+        #     The list of pull requests.
+        # @!attribute [rw] next_page_token
+        #   @return [::String]
+        #     A token identifying a page of results the server should return.
+        class ListPullRequestsResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # UpdatePullRequestRequest is the request to update a pull request.
+        # @!attribute [rw] pull_request
+        #   @return [::Google::Cloud::SecureSourceManager::V1::PullRequest]
+        #     Required. The pull request to update.
+        # @!attribute [rw] update_mask
+        #   @return [::Google::Protobuf::FieldMask]
+        #     Optional. Field mask is used to specify the fields to be overwritten in the
+        #     pull request resource by the update.
+        #     The fields specified in the update_mask are relative to the resource, not
+        #     the full request. A field will be overwritten if it is in the mask.
+        #     The special value "*" means full replacement.
+        class UpdatePullRequestRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # MergePullRequestRequest is the request to merge a pull request.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The pull request to merge.
+        #     Format:
+        #     `projects/{project_number}/locations/{location_id}/repositories/{repository_id}/pullRequests/{pull_request_id}`
+        class MergePullRequestRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # OpenPullRequestRequest is the request to open a pull request.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The pull request to open.
+        #     Format:
+        #     `projects/{project_number}/locations/{location_id}/repositories/{repository_id}/pullRequests/{pull_request_id}`
+        class OpenPullRequestRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # ClosePullRequestRequest is the request to close a pull request.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The pull request to close.
+        #     Format:
+        #     `projects/{project_number}/locations/{location_id}/repositories/{repository_id}/pullRequests/{pull_request_id}`
+        class ClosePullRequestRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # ListPullRequestFileDiffsRequest is the request to list pull request file
+        # diffs.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The pull request to list file diffs for.
+        #     Format:
+        #     `projects/{project_number}/locations/{location_id}/repositories/{repository_id}/pullRequests/{pull_request_id}`
+        # @!attribute [rw] page_size
+        #   @return [::Integer]
+        #     Optional. Requested page size. Server may return fewer items than
+        #     requested. If unspecified, server will pick an appropriate default.
+        # @!attribute [rw] page_token
+        #   @return [::String]
+        #     Optional. A token identifying a page of results the server should return.
+        class ListPullRequestFileDiffsRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # ListPullRequestFileDiffsResponse is the response containing file diffs
+        # returned from ListPullRequestFileDiffs.
+        # @!attribute [rw] file_diffs
+        #   @return [::Array<::Google::Cloud::SecureSourceManager::V1::FileDiff>]
+        #     The list of pull request file diffs.
+        # @!attribute [rw] next_page_token
+        #   @return [::String]
+        #     A token identifying a page of results the server should return.
+        class ListPullRequestFileDiffsResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # The request to create an issue.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. The repository in which to create the issue. Format:
+        #     `projects/{project_number}/locations/{location_id}/repositories/{repository_id}`
+        # @!attribute [rw] issue
+        #   @return [::Google::Cloud::SecureSourceManager::V1::Issue]
+        #     Required. The issue to create.
+        class CreateIssueRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # The request to get an issue.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. Name of the issue to retrieve.
+        #     The format is
+        #     `projects/{project}/locations/{location}/repositories/{repository}/issues/{issue_id}`.
+        class GetIssueRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # The request to list issues.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. The repository in which to list issues. Format:
+        #     `projects/{project_number}/locations/{location_id}/repositories/{repository_id}`
+        # @!attribute [rw] page_size
+        #   @return [::Integer]
+        #     Optional. Requested page size. Server may return fewer items than
+        #     requested. If unspecified, server will pick an appropriate default.
+        # @!attribute [rw] page_token
+        #   @return [::String]
+        #     Optional. A token identifying a page of results the server should return.
+        # @!attribute [rw] filter
+        #   @return [::String]
+        #     Optional. Used to filter the resulting issues list.
+        class ListIssuesRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # The response to list issues.
+        # @!attribute [rw] issues
+        #   @return [::Array<::Google::Cloud::SecureSourceManager::V1::Issue>]
+        #     The list of issues.
+        # @!attribute [rw] next_page_token
+        #   @return [::String]
+        #     A token identifying a page of results the server should return.
+        class ListIssuesResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # The request to update an issue.
+        # @!attribute [rw] issue
+        #   @return [::Google::Cloud::SecureSourceManager::V1::Issue]
+        #     Required. The issue to update.
+        # @!attribute [rw] update_mask
+        #   @return [::Google::Protobuf::FieldMask]
+        #     Optional. Field mask is used to specify the fields to be overwritten in the
+        #     issue resource by the update.
+        #     The fields specified in the update_mask are relative to the resource, not
+        #     the full request. A field will be overwritten if it is in the mask.
+        #     The special value "*" means full replacement.
+        class UpdateIssueRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # The request to delete an issue.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. Name of the issue to delete.
+        #     The format is
+        #     `projects/{project_number}/locations/{location_id}/repositories/{repository_id}/issues/{issue_id}`.
+        # @!attribute [rw] etag
+        #   @return [::String]
+        #     Optional. The current etag of the issue.
+        #     If the etag is provided and does not match the current etag of the issue,
+        #     deletion will be blocked and an ABORTED error will be returned.
+        class DeleteIssueRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # The request to close an issue.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. Name of the issue to close.
+        #     The format is
+        #     `projects/{project_number}/locations/{location_id}/repositories/{repository_id}/issues/{issue_id}`.
+        # @!attribute [rw] etag
+        #   @return [::String]
+        #     Optional. The current etag of the issue.
+        #     If the etag is provided and does not match the current etag of the issue,
+        #     closing will be blocked and an ABORTED error will be returned.
+        class CloseIssueRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # The request to open an issue.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. Name of the issue to open.
+        #     The format is
+        #     `projects/{project_number}/locations/{location_id}/repositories/{repository_id}/issues/{issue_id}`.
+        # @!attribute [rw] etag
+        #   @return [::String]
+        #     Optional. The current etag of the issue.
+        #     If the etag is provided and does not match the current etag of the issue,
+        #     opening will be blocked and an ABORTED error will be returned.
+        class OpenIssueRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Represents an entry within a tree structure (like a Git tree).
+        # @!attribute [r] type
+        #   @return [::Google::Cloud::SecureSourceManager::V1::TreeEntry::ObjectType]
+        #     Output only. The type of the object (TREE, BLOB, COMMIT).  Output-only.
+        # @!attribute [r] sha
+        #   @return [::String]
+        #     Output only. The SHA-1 hash of the object (unique identifier). Output-only.
+        # @!attribute [r] path
+        #   @return [::String]
+        #     Output only. The path of the file or directory within the tree (e.g.,
+        #     "src/main/java/MyClass.java"). Output-only.
+        # @!attribute [r] mode
+        #   @return [::String]
+        #     Output only. The file mode as a string (e.g., "100644"). Indicates file
+        #     type. Output-only.
+        # @!attribute [r] size
+        #   @return [::Integer]
+        #     Output only. The size of the object in bytes (only for blobs). Output-only.
+        class TreeEntry
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Defines the type of object the TreeEntry represents.
+          module ObjectType
+            # Default value, indicating the object type is unspecified.
+            OBJECT_TYPE_UNSPECIFIED = 0
+
+            # Represents a directory (folder).
+            TREE = 1
+
+            # Represents a file (contains file data).
+            BLOB = 2
+
+            # Represents a pointer to another repository (submodule).
+            COMMIT = 3
+          end
+        end
+
+        # Request message for fetching a tree structure from a repository.
+        # @!attribute [rw] repository
+        #   @return [::String]
+        #     Required. The format is
+        #     `projects/{project_number}/locations/{location_id}/repositories/{repository_id}`.
+        #     Specifies the repository to fetch the tree from.
+        # @!attribute [rw] ref
+        #   @return [::String]
+        #     Optional. `ref` can be a SHA-1 hash, a branch name, or a tag. Specifies
+        #     which tree to fetch. If not specified, the default branch will be used.
+        # @!attribute [rw] recursive
+        #   @return [::Boolean]
+        #     Optional. If true, include all subfolders and their files in the response.
+        #     If false, only the immediate children are returned.
+        # @!attribute [rw] page_size
+        #   @return [::Integer]
+        #     Optional. Requested page size.  Server may return fewer items than
+        #     requested. If unspecified, at most 10,000 items will be returned.
+        # @!attribute [rw] page_token
+        #   @return [::String]
+        #     Optional. A token identifying a page of results the server should return.
+        class FetchTreeRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Response message containing a list of TreeEntry objects.
+        # @!attribute [rw] tree_entries
+        #   @return [::Array<::Google::Cloud::SecureSourceManager::V1::TreeEntry>]
+        #     The list of TreeEntry objects.
+        # @!attribute [rw] next_page_token
+        #   @return [::String]
+        #     A token identifying a page of results the server should return.
+        class FetchTreeResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for fetching a blob (file content) from a repository.
+        # @!attribute [rw] repository
+        #   @return [::String]
+        #     Required. The format is
+        #     `projects/{project_number}/locations/{location_id}/repositories/{repository_id}`.
+        #     Specifies the repository containing the blob.
+        # @!attribute [rw] sha
+        #   @return [::String]
+        #     Required. The SHA-1 hash of the blob to retrieve.
+        class FetchBlobRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Response message containing the content of a blob.
+        # @!attribute [rw] sha
+        #   @return [::String]
+        #     The SHA-1 hash of the blob.
+        # @!attribute [rw] content
+        #   @return [::String]
+        #     The content of the blob, encoded as base64.
+        class FetchBlobResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # The request to list pull request comments.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. The pull request in which to list pull request comments. Format:
+        #     `projects/{project_number}/locations/{location_id}/repositories/{repository_id}/pullRequests/{pull_request_id}`
+        # @!attribute [rw] page_size
+        #   @return [::Integer]
+        #     Optional. Requested page size. If unspecified, at most 100 pull request
+        #     comments will be returned. The maximum value is 100; values above 100 will
+        #     be coerced to 100.
+        # @!attribute [rw] page_token
+        #   @return [::String]
+        #     Optional. A token identifying a page of results the server should return.
+        class ListPullRequestCommentsRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # The response to list pull request comments.
+        # @!attribute [rw] pull_request_comments
+        #   @return [::Array<::Google::Cloud::SecureSourceManager::V1::PullRequestComment>]
+        #     The list of pull request comments.
+        # @!attribute [rw] next_page_token
+        #   @return [::String]
+        #     A token to set as page_token to retrieve the next page. If this field is
+        #     omitted, there are no subsequent pages.
+        class ListPullRequestCommentsResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # The request to create a pull request comment.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. The pull request in which to create the pull request comment.
+        #     Format:
+        #     `projects/{project_number}/locations/{location_id}/repositories/{repository_id}/pullRequests/{pull_request_id}`
+        # @!attribute [rw] pull_request_comment
+        #   @return [::Google::Cloud::SecureSourceManager::V1::PullRequestComment]
+        #     Required. The pull request comment to create.
+        class CreatePullRequestCommentRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # The request to batch create pull request comments.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. The pull request in which to create the pull request comments.
+        #     Format:
+        #     `projects/{project_number}/locations/{location_id}/repositories/{repository_id}/pullRequests/{pull_request_id}`
+        # @!attribute [rw] requests
+        #   @return [::Array<::Google::Cloud::SecureSourceManager::V1::CreatePullRequestCommentRequest>]
+        #     Required. The request message specifying the resources to create. There
+        #     should be exactly one CreatePullRequestCommentRequest with CommentDetail
+        #     being REVIEW in the list, and no more than 100
+        #     CreatePullRequestCommentRequests with CommentDetail being CODE in the list
+        class BatchCreatePullRequestCommentsRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # The response to batch create pull request comments.
+        # @!attribute [rw] pull_request_comments
+        #   @return [::Array<::Google::Cloud::SecureSourceManager::V1::PullRequestComment>]
+        #     The list of pull request comments created.
+        class BatchCreatePullRequestCommentsResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # The request to update a pull request comment.
+        # @!attribute [rw] pull_request_comment
+        #   @return [::Google::Cloud::SecureSourceManager::V1::PullRequestComment]
+        #     Required. The pull request comment to update.
+        # @!attribute [rw] update_mask
+        #   @return [::Google::Protobuf::FieldMask]
+        #     Optional. Field mask is used to specify the fields to be overwritten in the
+        #     pull request comment resource by the update. Updatable fields are
+        #     `body`.
+        class UpdatePullRequestCommentRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # The request to delete a pull request comment. A Review PullRequestComment
+        # cannot be deleted.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. Name of the pull request comment to delete.
+        #     The format is
+        #     `projects/{project_number}/locations/{location_id}/repositories/{repository_id}/pullRequests/{pull_request_id}/pullRequestComments/{comment_id}`.
+        class DeletePullRequestCommentRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # The request to get a pull request comment.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. Name of the pull request comment to retrieve.
+        #     The format is
+        #     `projects/{project_number}/locations/{location_id}/repositories/{repository_id}/pullRequests/{pull_request_id}/pullRequestComments/{comment_id}`.
+        class GetPullRequestCommentRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # The request to resolve multiple pull request comments.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. The pull request in which to resolve the pull request comments.
+        #     Format:
+        #     `projects/{project_number}/locations/{location_id}/repositories/{repository_id}/pullRequests/{pull_request_id}`
+        # @!attribute [rw] names
+        #   @return [::Array<::String>]
+        #     Required. The names of the pull request comments to resolve. Format:
+        #     `projects/{project_number}/locations/{location_id}/repositories/{repository_id}/pullRequests/{pull_request_id}/pullRequestComments/{comment_id}`
+        #     Only comments from the same threads are allowed in the same request.
+        # @!attribute [rw] auto_fill
+        #   @return [::Boolean]
+        #     Optional. If set, at least one comment in a thread is required, rest of the
+        #     comments in the same thread will be automatically updated to resolved. If
+        #     unset, all comments in the same thread need be present.
+        class ResolvePullRequestCommentsRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # The response to resolve multiple pull request comments.
+        # @!attribute [rw] pull_request_comments
+        #   @return [::Array<::Google::Cloud::SecureSourceManager::V1::PullRequestComment>]
+        #     The list of pull request comments resolved.
+        class ResolvePullRequestCommentsResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # The request to unresolve multiple pull request comments.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. The pull request in which to resolve the pull request comments.
+        #     Format:
+        #     `projects/{project_number}/locations/{location_id}/repositories/{repository_id}/pullRequests/{pull_request_id}`
+        # @!attribute [rw] names
+        #   @return [::Array<::String>]
+        #     Required. The names of the pull request comments to unresolve. Format:
+        #     `projects/{project_number}/locations/{location_id}/repositories/{repository_id}/pullRequests/{pull_request_id}/pullRequestComments/{comment_id}`
+        #     Only comments from the same threads are allowed in the same request.
+        # @!attribute [rw] auto_fill
+        #   @return [::Boolean]
+        #     Optional. If set, at least one comment in a thread is required, rest of the
+        #     comments in the same thread will be automatically updated to unresolved. If
+        #     unset, all comments in the same thread need be present.
+        class UnresolvePullRequestCommentsRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # The response to unresolve multiple pull request comments.
+        # @!attribute [rw] pull_request_comments
+        #   @return [::Array<::Google::Cloud::SecureSourceManager::V1::PullRequestComment>]
+        #     The list of pull request comments unresolved.
+        class UnresolvePullRequestCommentsResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # The request to create an issue comment.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. The issue in which to create the issue comment. Format:
+        #     `projects/{project_number}/locations/{location_id}/repositories/{repository_id}/issues/{issue_id}`
+        # @!attribute [rw] issue_comment
+        #   @return [::Google::Cloud::SecureSourceManager::V1::IssueComment]
+        #     Required. The issue comment to create.
+        class CreateIssueCommentRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # The request to get an issue comment.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. Name of the issue comment to retrieve.
+        #     The format is
+        #     `projects/{project}/locations/{location}/repositories/{repository}/issues/{issue_id}/issueComments/{comment_id}`.
+        class GetIssueCommentRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # The request to list issue comments.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. The issue in which to list the comments. Format:
+        #     `projects/{project_number}/locations/{location_id}/repositories/{repository_id}/issues/{issue_id}`
+        # @!attribute [rw] page_size
+        #   @return [::Integer]
+        #     Optional. Requested page size. Server may return fewer items than
+        #     requested. If unspecified, server will pick an appropriate default.
+        # @!attribute [rw] page_token
+        #   @return [::String]
+        #     Optional. A token identifying a page of results the server should return.
+        class ListIssueCommentsRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # The response to list issue comments.
+        # @!attribute [rw] issue_comments
+        #   @return [::Array<::Google::Cloud::SecureSourceManager::V1::IssueComment>]
+        #     The list of issue comments.
+        # @!attribute [rw] next_page_token
+        #   @return [::String]
+        #     A token identifying a page of results the server should return.
+        class ListIssueCommentsResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # The request to update an issue comment.
+        # @!attribute [rw] issue_comment
+        #   @return [::Google::Cloud::SecureSourceManager::V1::IssueComment]
+        #     Required. The issue comment to update.
+        # @!attribute [rw] update_mask
+        #   @return [::Google::Protobuf::FieldMask]
+        #     Optional. Field mask is used to specify the fields to be overwritten in the
+        #     issue comment resource by the update.
+        #     The fields specified in the update_mask are relative to the resource, not
+        #     the full request. A field will be overwritten if it is in the mask.
+        #     The special value "*" means full replacement.
+        class UpdateIssueCommentRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # The request to delete an issue comment.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. Name of the issue comment to delete.
+        #     The format is
+        #     `projects/{project_number}/locations/{location_id}/repositories/{repository_id}/issues/{issue_id}/issueComments/{comment_id}`.
+        class DeleteIssueCommentRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end

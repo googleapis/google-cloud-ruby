@@ -86,6 +86,27 @@ module Google
             end
 
             ##
+            # Create a fully-qualified Hook resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `projects/{project}/locations/{location}/repositories/{repository}/hooks/{hook}`
+            #
+            # @param project [String]
+            # @param location [String]
+            # @param repository [String]
+            # @param hook [String]
+            #
+            # @return [::String]
+            def hook_path project:, location:, repository:, hook:
+              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+              raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+              raise ::ArgumentError, "repository cannot contain /" if repository.to_s.include? "/"
+
+              "projects/#{project}/locations/#{location}/repositories/#{repository}/hooks/#{hook}"
+            end
+
+            ##
             # Create a fully-qualified Instance resource string.
             #
             # The resource will be in the following format:
@@ -105,6 +126,50 @@ module Google
             end
 
             ##
+            # Create a fully-qualified Issue resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `projects/{project}/locations/{location}/repositories/{repository}/issues/{issue}`
+            #
+            # @param project [String]
+            # @param location [String]
+            # @param repository [String]
+            # @param issue [String]
+            #
+            # @return [::String]
+            def issue_path project:, location:, repository:, issue:
+              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+              raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+              raise ::ArgumentError, "repository cannot contain /" if repository.to_s.include? "/"
+
+              "projects/#{project}/locations/#{location}/repositories/#{repository}/issues/#{issue}"
+            end
+
+            ##
+            # Create a fully-qualified IssueComment resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `projects/{project}/locations/{location}/repositories/{repository}/issues/{issue}/issueComments/{comment}`
+            #
+            # @param project [String]
+            # @param location [String]
+            # @param repository [String]
+            # @param issue [String]
+            # @param comment [String]
+            #
+            # @return [::String]
+            def issue_comment_path project:, location:, repository:, issue:, comment:
+              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+              raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+              raise ::ArgumentError, "repository cannot contain /" if repository.to_s.include? "/"
+              raise ::ArgumentError, "issue cannot contain /" if issue.to_s.include? "/"
+
+              "projects/#{project}/locations/#{location}/repositories/#{repository}/issues/#{issue}/issueComments/#{comment}"
+            end
+
+            ##
             # Create a fully-qualified Location resource string.
             #
             # The resource will be in the following format:
@@ -119,6 +184,50 @@ module Google
               raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
 
               "projects/#{project}/locations/#{location}"
+            end
+
+            ##
+            # Create a fully-qualified PullRequest resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `projects/{project}/locations/{location}/repositories/{repository}/pullRequests/{pull_request}`
+            #
+            # @param project [String]
+            # @param location [String]
+            # @param repository [String]
+            # @param pull_request [String]
+            #
+            # @return [::String]
+            def pull_request_path project:, location:, repository:, pull_request:
+              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+              raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+              raise ::ArgumentError, "repository cannot contain /" if repository.to_s.include? "/"
+
+              "projects/#{project}/locations/#{location}/repositories/#{repository}/pullRequests/#{pull_request}"
+            end
+
+            ##
+            # Create a fully-qualified PullRequestComment resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `projects/{project}/locations/{location}/repositories/{repository}/pullRequests/{pull_request}/pullRequestComments/{comment}`
+            #
+            # @param project [String]
+            # @param location [String]
+            # @param repository [String]
+            # @param pull_request [String]
+            # @param comment [String]
+            #
+            # @return [::String]
+            def pull_request_comment_path project:, location:, repository:, pull_request:, comment:
+              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+              raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+              raise ::ArgumentError, "repository cannot contain /" if repository.to_s.include? "/"
+              raise ::ArgumentError, "pull_request cannot contain /" if pull_request.to_s.include? "/"
+
+              "projects/#{project}/locations/#{location}/repositories/#{repository}/pullRequests/#{pull_request}/pullRequestComments/#{comment}"
             end
 
             ##
