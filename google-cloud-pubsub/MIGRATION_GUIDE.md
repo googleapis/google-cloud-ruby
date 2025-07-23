@@ -271,8 +271,8 @@ The following tables provide a mapping from the `v2.x` methods to their `v3.x` e
 | labels= | TopicAdmin::Client.update_topic |
 | kms_key | TopicAdmin::Client.get_topic |
 | kms_key= | TopicAdmin::Client.update_topic |
-| persistance_regions | TopicAdmin::Client.get_topic |
-| persistance_regions= | TopicAdmin::Client.update_topic |
+| persistence_regions | TopicAdmin::Client.get_topic |
+| persistence_regions= | TopicAdmin::Client.update_topic |
 | schema_name	| TopicAdmin::Client.get_topic |
 | message_encoding	| TopicAdmin::Client.get_topic |
 | retention	| TopicAdmin::Client.get_topic |
