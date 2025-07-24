@@ -1,5 +1,11 @@
 # Changelog
 
+### 1.7.0 (2025-07-24)
+
+#### Features
+
+* add Network Connectivity Center APIs for Internal Range service ([#30707](https://github.com/googleapis/google-cloud-ruby/issues/30707)) 
+
 ### 1.6.0 (2025-05-12)
 
 #### Features
