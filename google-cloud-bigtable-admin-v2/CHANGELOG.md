@@ -1,5 +1,11 @@
 # Release History
 
+### 1.12.0 (2025-07-24)
+
+#### Features
+
+* Added type support for Proto and Enum ([#30694](https://github.com/googleapis/google-cloud-ruby/issues/30694)) 
+
 ### 1.11.1 (2025-07-15)
 
 #### Documentation
