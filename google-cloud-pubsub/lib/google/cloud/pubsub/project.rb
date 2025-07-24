@@ -46,8 +46,8 @@ module Google
       #
       #   pubsub = Google::Cloud::PubSub.new
       #
-      #   topic = pubsub.topic "my-topic"
-      #   topic.publish "task completed"
+      #   publisher = pubsub.publisher "my-topic"
+      #   publisher.publish "task completed"
       #
       class Project
         ##

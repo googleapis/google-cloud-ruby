@@ -27,8 +27,8 @@ module Google
       #
       #   pubsub = Google::Cloud::PubSub.new
       #
-      #   topic = pubsub.topic "my-topic"
-      #   msgs = topic.publish do |batch_publisher|
+      #   publisher = pubsub.publisher "my-topic"
+      #   msgs = publisher.publish do |batch_publisher|
       #     batch_publisher.publish "task 1 completed", foo: :bar
       #     batch_publisher.publish "task 2 completed", foo: :baz
       #     batch_publisher.publish "task 3 completed", foo: :bif
@@ -86,8 +86,8 @@ module Google
         #
         #   pubsub = Google::Cloud::PubSub.new
         #
-        #   topic = pubsub.topic "my-topic"
-        #   msgs = topic.publish do |batch_publisher|
+        #   publisher = pubsub.publisher "my-topic"
+        #   msgs = publisher.publish do |batch_publisher|
         #     batch_publisher.publish "task 1 completed", foo: :bar
         #     batch_publisher.publish "task 2 completed", foo: :baz
         #     batch_publisher.publish "task 3 completed", foo: :bif

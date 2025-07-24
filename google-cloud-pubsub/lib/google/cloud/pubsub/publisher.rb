@@ -16,8 +16,6 @@
 require "google/cloud/errors"
 require "google/cloud/pubsub/async_publisher"
 require "google/cloud/pubsub/batch_publisher"
-require "google/cloud/pubsub/policy"
-require "google/cloud/pubsub/retry_policy"
 
 module Google
   module Cloud
@@ -144,8 +142,9 @@ module Google
         #
         #   pubsub = Google::Cloud::PubSub.new
         #
-        #   publisher = pubsub.ublisher "my-topic"
-        #   msgs = publisher.publish do |t|
+        #   publisher = pubsub.publisher "my-topic"
+        #
+        #   msgs = publisher.publish do |p|
         #     p.publish "task 1 completed", foo: :bar
         #     p.publish "task 2 completed", foo: :baz
         #     p.publish "task 3 completed", foo: :bif
