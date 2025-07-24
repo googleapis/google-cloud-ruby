@@ -20,10 +20,10 @@ def delete_schema_revision schema_id:, revision_id:
   # revision_id = "your-revision-id"
 
   pubsub = Google::Cloud::Pubsub.new
-
   schemas = pubsub.schemas
 
-  result = schemas.delete_schema_revision name: pubsub.schema_path("#{schema_id}@#{revision_id}")
+  result = schemas.delete_schema_revision \
+    name: pubsub.schema_path("#{schema_id}@#{revision_id}")
 
   puts "Schema #{schema_id}@#{revision_id} deleted."
   # [END pubsub_delete_schema_revision]

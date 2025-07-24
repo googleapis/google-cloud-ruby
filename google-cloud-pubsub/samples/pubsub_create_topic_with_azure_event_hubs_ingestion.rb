@@ -14,8 +14,14 @@
 
 require "google/cloud/pubsub"
 
-def create_topic_with_azure_event_hubs_ingestion topic_id:, resource_group:, namespace:, event_hub:, client_id:,
-                                                 tenant_id:, subscription_id:, gcp_service_account:
+def create_topic_with_azure_event_hubs_ingestion topic_id:,
+                                                 resource_group:,
+                                                 namespace:,
+                                                 event_hub:,
+                                                 client_id:,
+                                                 tenant_id:,
+                                                 subscription_id:,
+                                                 gcp_service_account:
   # [START pubsub_create_topic_with_azure_event_hubs_ingestion]
   # topic_id = "your-topic-id"
   # resource_group = "resource-group"

@@ -14,15 +14,19 @@
 
 require "google/cloud/pubsub"
 
-def create_topic_with_aws_msk_ingestion topic_id:, cluster_arn:, msk_topic:, aws_role_arn:, gcp_service_account:
+def create_topic_with_aws_msk_ingestion topic_id:,
+                                        cluster_arn:,
+                                        msk_topic:,
+                                        aws_role_arn:,
+                                        gcp_service_account:
   # [START pubsub_create_topic_with_aws_msk_ingestion]
   # topic_id = "your-topic-id"
-  # cluster_arn = "arn:aws:kafka:us-east-1:111111111111:cluster/cluster-name/11111111-1111-1"
+  # cluster_arn = "arn:aws:kafka:us-east-1:111111111111:" \
+  #               "cluster/cluster-name/11111111-1111-1"
   # msk_topic = "msk-topic-name"
   # aws_role_arn = "arn:aws:iam::111111111111:role/role-name"
   # gcp_service_account = "service-account@project.iam.gserviceaccount.com"
   pubsub = Google::Cloud::Pubsub.new
-
   topic_admin = pubsub.topic_admin
 
   topic = topic_admin.create_topic name: pubsub.topic_path(topic_id),
