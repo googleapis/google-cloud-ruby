@@ -1,5 +1,14 @@
 # Changelog
 
+### 0.13.0 (2025-07-24)
+
+#### Features
+
+* Exposing 1p integration message content (drive, calendar, huddle, meet chips) ([#30712](https://github.com/googleapis/google-cloud-ruby/issues/30712)) 
+#### Documentation
+
+* Update reference documentation for annotations. Introduce new richlink metadata types 
+
 ### 0.12.0 (2025-05-12)
 
 #### Features
