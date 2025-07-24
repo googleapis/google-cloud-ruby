@@ -12,4 +12,4 @@ Lint/RescueException:
 Lint/UselessAssignment:
   Enabled: false
 Metrics/MethodLength:
-  Max: 26
+  Max: 30
