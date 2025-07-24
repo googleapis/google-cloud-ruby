@@ -16,7 +16,6 @@
 require "google/cloud/pubsub/convert"
 require "google/cloud/errors"
 require "google/cloud/pubsub/received_message"
-require "google/cloud/pubsub/retry_policy"
 require "google/cloud/pubsub/message_listener"
 require "google/cloud/pubsub/v1"
 
@@ -210,7 +209,7 @@ module Google
         #   pubsub = Google::Cloud::PubSub.new
         #
         #   subscriber = pubsub.subscriber "my-topic-sub"
-        #   received_messages = subcriber.pull immediate: false, max: 10
+        #   received_messages = subscriber.pull immediate: false, max: 10
         #   received_messages.each do |received_message|
         #     received_message.acknowledge!
         #   end
@@ -356,7 +355,7 @@ module Google
         #
         #   pubsub = Google::Cloud::PubSub.new
         #
-        #   subscriber = pubsub.subscription "my-topic-sub"
+        #   subscriber = pubsub.subscriber "my-topic-sub"
         #
         #   listener = subscriber.listen threads: { callback: 16 } do |rec_message|
         #     # store the message somewhere before acknowledging
@@ -375,7 +374,7 @@ module Google
         #
         #   pubsub = Google::Cloud::PubSub.new
         #
-        #   sub = pubsub.subscriber "my-ordered-topic-sub"
+        #   subscriber = pubsub.subscriber "my-ordered-topic-sub"
         #   subscriber.message_ordering? #=> true
         #
         #   listener = subscriber.listen do |received_message|
@@ -494,8 +493,9 @@ module Google
         #
         #   pubsub = Google::Cloud::PubSub.new
         #
-        #   sub = pubsub.get_subscription "my-topic-sub", skip_lookup: true
-        #   sub.reference? #=> true
+        #   subscriber = pubsub.subscriber "my-topic-sub", skip_lookup: true
+        #
+        #   subscriber.reference? #=> true
         #
         def reference?
           @grpc.nil?
@@ -513,8 +513,9 @@ module Google
         #
         #   pubsub = Google::Cloud::PubSub.new
         #
-        #   sub = pubsub.get_subscription "my-topic-sub"
-        #   sub.resource? #=> true
+        #   subscriber = pubsub.subscriber "my-topic-sub"
+        #
+        #   subscriber.resource? #=> true
         #
         def resource?
           !@grpc.nil?
@@ -531,7 +532,8 @@ module Google
         #
         #   pubsub = Google::Cloud::PubSub.new
         #
-        #   sub = pubsub.get_subscription "my-topic-sub"
+        #   sub = Google::Cloud::PubSub::Subscriber.from_name "my-topic-sub", pubsub.service
+        #
         #   sub.reload!
         #
         def reload!

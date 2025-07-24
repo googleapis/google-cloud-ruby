@@ -34,8 +34,8 @@ module Google
       #
       #   pubsub = Google::Cloud::PubSub.new
       #
-      #   topic = pubsub.topic "my-topic"
-      #   topic.publish_async "task completed" do |result|
+      #   publisher = pubsub.publisher "my-topic"
+      #   publisher.publish_async "task completed" do |result|
       #     if result.succeeded?
       #       log_publish_success result.data
       #     else
@@ -43,7 +43,7 @@ module Google
       #     end
       #   end
       #
-      #   topic.async_publisher.stop!
+      #   publisher.async_publisher.stop!
       #
       # @attr_reader [String] topic_name The name of the topic the messages are published to. The value is a
       #   fully-qualified topic name in the form `projects/{project_id}/topics/{topic_id}`.

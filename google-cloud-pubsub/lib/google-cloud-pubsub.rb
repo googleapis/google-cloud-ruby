@@ -50,8 +50,9 @@ module Google
     #
     #   gcloud = Google::Cloud.new
     #   pubsub = gcloud.pubsub
-    #   topic = pubsub.topic "my-topic"
-    #   topic.publish "task completed"
+    #   topic_admin = pubsub.topic_admin
+    #   publisher = pubsub.publisher "my-topic"
+    #   publisher.publish "task completed"
     #
     # @example The default scope can be overridden with the `scope` option:
     #   require "google/cloud"
@@ -96,8 +97,8 @@ module Google
     #
     #   pubsub = Google::Cloud.pubsub
     #
-    #   topic = pubsub.topic "my-topic"
-    #   topic.publish "task completed"
+    #   publisher = pubsub.publisher "my-topic"
+    #   publisher.publish "task completed"
     #
     def self.pubsub project_id = nil,
                     credentials = nil,

@@ -199,7 +199,7 @@ describe Google::Cloud do
           File.stub :read, found_credentials, ["path/to/keyfile.json"] do
             Google::Cloud::PubSub::Credentials.stub :new, stubbed_credentials do
               Google::Cloud::PubSub::Service.stub :new, stubbed_service do
-                pubsub = Google::Cloud::PubSub.new project: "project-id", keyfile: "path/to/keyfile.json"
+                pubsub = Google::Cloud::PubSub.new project_id: "project-id", credentials: "path/to/keyfile.json"
                 _(pubsub).must_be_kind_of Google::Cloud::PubSub::Project
                 _(pubsub.project).must_equal "project-id"
                 _(pubsub.service).must_be_kind_of OpenStruct
