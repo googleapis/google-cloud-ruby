@@ -54,10 +54,7 @@ describe "emulator" do
   let(:subscription_admin) { pubsub.subscription_admin }
 
   before do
-    pubsub_emulator_host = ENV["PUBSUB_EMULATOR_HOST"]
-    if pubsub_emulator_host.nil?
-      raise "PUBSUB_EMULATOR_HOST env variable must be set. Please follow instructions at https://cloud.google.com/pubsub/docs/emulator"
-    end
+    skip unless ENV["PUBSUB_EMULATOR_HOST"]
   end
 
   after do
