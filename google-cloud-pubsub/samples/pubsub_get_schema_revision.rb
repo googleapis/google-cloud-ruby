@@ -20,10 +20,10 @@ def get_schema_revision schema_id:, revision_id:
   # revision_id = "your-revision-id"
 
   pubsub = Google::Cloud::Pubsub.new
-
   schemas = pubsub.schemas
 
-  schema = schemas.get_schema name: pubsub.schema_path("#{schema_id}@#{revision_id}")
+  schema = schemas.get_schema \
+    name: pubsub.schema_path("#{schema_id}@#{revision_id}")
 
   puts "Schema #{schema.name} retrieved."
   # [END pubsub_get_schema_revision]

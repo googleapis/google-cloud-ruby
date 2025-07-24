@@ -21,17 +21,17 @@ def create_unwrapped_push_subscription topic_id:, subscription_id:, endpoint:
   # endpoint          = "https://your-test-project.appspot.com/push"
 
   pubsub = Google::Cloud::Pubsub.new
-
   subscription_admin = pubsub.subscription_admin
 
-  subscription = subscription_admin.create_subscription name: pubsub.subscription_path(subscription_id),
-                                                        topic: pubsub.topic_path(topic_id),
-                                                        push_config: {
-                                                          push_endpoint: endpoint,
-                                                          no_wrapper: {
-                                                            write_metadata: true
-                                                          }
-                                                        }
+  subscription = subscription_admin.create_subscription \
+    name: pubsub.subscription_path(subscription_id),
+    topic: pubsub.topic_path(topic_id),
+    push_config: {
+      push_endpoint: endpoint,
+      no_wrapper: {
+        write_metadata: true
+      }
+    }
 
   puts "Unwrapped push subscription #{subscription_id} created."
   # [END pubsub_create_unwrapped_push_subscription]
