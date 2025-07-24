@@ -1,5 +1,11 @@
 # Release History
 
+### 1.10.0 (2025-07-24)
+
+#### Features
+
+* Support for snapshot timestamp for the REPEATABLE_READ isolation level ([#30697](https://github.com/googleapis/google-cloud-ruby/issues/30697)) 
+
 ### 1.9.1 (2025-07-15)
 
 #### Documentation
