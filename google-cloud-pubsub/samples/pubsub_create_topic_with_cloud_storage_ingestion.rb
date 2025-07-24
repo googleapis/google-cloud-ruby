@@ -14,7 +14,11 @@
 
 require "google/cloud/pubsub"
 
-def create_topic_with_cloud_storage_ingestion topic_id:, bucket:, input_format:, text_delimiter:, match_glob:,
+def create_topic_with_cloud_storage_ingestion topic_id:,
+                                              bucket:,
+                                              input_format:,
+                                              text_delimiter:,
+                                              match_glob:,
                                               minimum_object_create_time:
   # [START pubsub_create_topic_with_cloud_storage_ingestion]
   # topic_id = "your-topic-id"
@@ -24,33 +28,34 @@ def create_topic_with_cloud_storage_ingestion topic_id:, bucket:, input_format:,
   # match_glob = "**.txt"
   # minimum_object_create_time = Google::Protobuf::Timestamp.new
   pubsub = Google::Cloud::Pubsub.new
-
   topic_admin = pubsub.topic_admin
-
   cloud_storage =
-    Google::Cloud::PubSub::V1::IngestionDataSourceSettings::CloudStorage.new bucket: bucket,
-                                                                             minimum_object_create_time:
-                                                                             minimum_object_create_time
+    Google::Cloud::PubSub::V1::IngestionDataSourceSettings::CloudStorage
+
+  settings = cloud_storage.new \
+    bucket: bucket,
+    minimum_object_create_time: minimum_object_create_time
 
   case input_format
   when "text"
-    cloud_storage.text_format =
-      Google::Cloud::PubSub::V1::IngestionDataSourceSettings::CloudStorage::TextFormat.new delimiter: text_delimiter
+    settings.text_format = cloud_storage::TextFormat.new \
+      delimiter: text_delimiter
   when "avro"
-    cloud_storage.avro_format = Google::Cloud::PubSub::V1::IngestionDataSourceSettings::CloudStorage::AvroFormat.new
+    settings.avro_format = cloud_storage::AvroFormat.new
   when "pubsub_avro"
-    cloud_storage.pubsub_avro_format = Google::Cloud::PubSub::V1::IngestionDataSourceSettings::CloudStorage::PubSubAvroFormat.new
+    settings.pubsub_avro_format = cloud_storage::PubSubAvroFormat.new
   else
-    raise "input_format must be in ('text', 'avro', 'pubsub_avro'); got value: #{input_format}"
+    raise "input_format must be in ('text', 'avro', 'pubsub_avro');" \
+          "got value: #{input_format}"
   end
 
   if !match_glob.nil? && !match_glob.empty?
-    cloud_storage.match_glob = match_glob
+    settings.match_glob = match_glob
   end
 
   topic = topic_admin.create_topic name: pubsub.topic_path(topic_id),
                                    ingestion_data_source_settings: {
-                                     cloud_storage: cloud_storage
+                                     cloud_storage: settings
                                    }
 
   puts "Topic with Cloud Storage Ingestion #{topic.name} created."
