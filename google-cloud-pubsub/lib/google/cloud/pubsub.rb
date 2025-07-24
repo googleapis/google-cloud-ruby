@@ -59,9 +59,6 @@ module Google
       #   If the param is nil, uses the default endpoint.
       # @param [String] emulator_host Pub/Sub emulator host. Optional.
       #   If the param is nil, uses the value of the `emulator_host` config.
-      # @param [String] project Alias for the `project_id` argument. Deprecated.
-      # @param [String] keyfile Alias for the `credentials` argument.
-      #   Deprecated.
       # @param universe_domain [String] A custom universe domain. Optional.
       #
       # @return [Google::Cloud::PubSub::Project]
@@ -71,8 +68,8 @@ module Google
       #
       #   pubsub = Google::Cloud::PubSub.new
       #
-      #   topic = pubsub.topic "my-topic"
-      #   topic.publish "task completed"
+      #   publisher = pubsub.publisher "my-topic"
+      #   publisher.publish "task completed"
       #
       def self.new project_id: nil,
                    credentials: nil,
@@ -80,10 +77,8 @@ module Google
                    timeout: nil,
                    universe_domain: nil,
                    endpoint: nil,
-                   emulator_host: nil,
-                   project: nil,
-                   keyfile: nil
-        project_id ||= project || default_project_id
+                   emulator_host: nil
+        project_id ||= default_project_id
         scope ||= configure.scope
         timeout ||= configure.timeout
         endpoint ||= configure.endpoint
@@ -94,7 +89,7 @@ module Google
           credentials = :this_channel_is_insecure
           endpoint = emulator_host
         else
-          credentials ||= keyfile || default_credentials(scope: scope)
+          credentials ||= default_credentials(scope: scope)
           unless credentials.is_a? Google::Auth::Credentials
             credentials = PubSub::Credentials.new credentials, scope: scope
           end
@@ -116,12 +111,10 @@ module Google
       #
       # The following PubSub configuration parameters are supported:
       #
-      # * `project_id` - (String) Identifier for a PubSub project. (The
-      #   parameter `project` is considered deprecated, but may also be used.)
+      # * `project_id` - (String) Identifier for a PubSub project.
       # * `credentials` - (String, Hash, Google::Auth::Credentials) The path to
       #   the keyfile as a String, the contents of the keyfile as a Hash, or a
-      #   Google::Auth::Credentials object. (See {PubSub::Credentials}) (The
-      #   parameter `keyfile` is considered deprecated, but may also be used.)
+      #   Google::Auth::Credentials object. (See {PubSub::Credentials})
       # * `scope` - (String, Array<String>) The OAuth 2.0 scopes controlling
       #   the set of resources and operations that the connection can access.
       # * `quota_project` - (String) The project ID for a project that can be

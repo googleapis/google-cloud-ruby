@@ -85,11 +85,17 @@ module Google
         #
         #   pubsub = Google::Cloud::PubSub.new
         #
-        #   topic = pubsub.topic "my-topic"
-        #   dead_letter_topic = pubsub.topic "my-dead-letter-topic", skip_lookup: true
-        #   subscriber = topic.subscribe "my-topic-sub",
-        #                         dead_letter_topic: dead_letter_topic,
-        #                         dead_letter_max_delivery_attempts: 10
+        #   subscription_admin = pubsub.subscription_admin
+        #
+        #   subscription = subscription_admin.create_subscription \
+        #     name: pubsub.subscription_path("my-topic-sub"),
+        #     topic: pubsub.topic_path("my-topic"),
+        #     dead_letter_policy: {
+        #       dead_letter_topic: pubsub.topic_path("my-dead-letter-topic"),
+        #       max_delivery_attempts: 10
+        #     }
+        #
+        #   subscriber = pubsub.subscriber "my-topic-sub"
         #
         #   listener = subscriber.listen do |received_message|
         #     puts received_message.message.delivery_attempt
