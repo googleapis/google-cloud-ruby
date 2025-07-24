@@ -39,10 +39,12 @@ def optimistic_subscribe topic_id:, subscription_id:
     listener.stop.wait!
   rescue Google::Cloud::NotFoundError => e
     puts "Subscription #{subscription_id} does not exist."
-    subscription_admin = pubsub.subscription_admin
 
-    subscription = subscription_admin.create_subscription name: pubsub.subscription_path(subscription_id),
-                                                          topic: pubsub.topic_path(topic_id)
+    subscription_admin = pubsub.subscription_admin
+    subscription = subscription_admin.create_subscription \
+      name: pubsub.subscription_path(subscription_id),
+      topic: pubsub.topic_path(topic_id)
+
     puts "Subscription #{subscription_id} created."
   end
   # [END pubsub_optimistic_subscribe]

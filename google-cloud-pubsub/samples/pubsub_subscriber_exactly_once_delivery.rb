@@ -18,11 +18,12 @@ def subscriber_exactly_once_delivery project_id:, subscription_id:
   # [START pubsub_subscriber_exactly_once]
   # project_id = "your-project-id"
   # subscription_id = "your-subscription-id"
-  pubsub = Google::Cloud::Pubsub.new project_id: project_id, endpoint: "us-west1-pubsub.googleapis.com:443"
+  pubsub = Google::Cloud::Pubsub.new \
+    project_id: project_id,
+    endpoint: "us-west1-pubsub.googleapis.com:443"
   subscriber = pubsub.subscriber subscription_id
   listener = subscriber.listen do |received_message|
     puts "Received message: #{received_message.data}"
-
     # Pass in callback to access the acknowledge result.
     # For subscription with Exactly once delivery disabled the result will be success always.
     received_message.acknowledge! do |result|

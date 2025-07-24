@@ -14,26 +14,30 @@
 
 require "google/cloud/pubsub"
 
-def update_topic_type topic_id:, stream_arn:, consumer_arn:, aws_role_arn:, gcp_service_account:
+def update_topic_type topic_id:,
+                      stream_arn:,
+                      consumer_arn:,
+                      aws_role_arn:,
+                      gcp_service_account:
   # [START pubsub_update_topic_type]
   # topic_id = "your-topic-id"
   # stream_arn = "arn:aws:kinesis:us-west-2:111111111111:stream/stream-name"
-  # consumer_arn = "arn:aws:kinesis:us-west-2:111111111111:stream/stream-name/consumer/consumer-1:1111111111"
+  # consumer_arn = "arn:aws:kinesis:us-west-2:111111111111:" \
+  #   "stream/stream-name/consumer/consumer-1:1111111111"
   # aws_role_arn = "arn:aws:iam::111111111111:role/role-name"
   # gcp_service_account = "service-account@project.iam.gserviceaccount.com"
   pubsub = Google::Cloud::Pubsub.new
-
   topic_admin = pubsub.topic_admin
 
-  ingestion_data_source_settings = Google::Cloud::PubSub::V1::IngestionDataSourceSettings.new aws_kinesis: {
-    stream_arn: stream_arn,
-    consumer_arn: consumer_arn,
-    aws_role_arn: aws_role_arn,
-    gcp_service_account: gcp_service_account
-  }
-
+  ingestion_data_source_settings =
+    Google::Cloud::PubSub::V1::IngestionDataSourceSettings.new \
+      aws_kinesis: {
+        stream_arn: stream_arn,
+        consumer_arn: consumer_arn,
+        aws_role_arn: aws_role_arn,
+        gcp_service_account: gcp_service_account
+      }
   topic = topic_admin.get_topic topic: pubsub.topic_path(topic_id)
-
   topic.ingestion_data_source_settings = ingestion_data_source_settings
 
   topic = topic_admin.update_topic topic: topic,

@@ -14,8 +14,12 @@
 
 require "google/cloud/pubsub"
 
-def create_topic_with_confluent_cloud_ingestion topic_id:, bootstrap_server:, cluster_id:, confluent_topic:,
-                                                identity_pool_id:, gcp_service_account:
+def create_topic_with_confluent_cloud_ingestion topic_id:,
+                                                bootstrap_server:,
+                                                cluster_id:,
+                                                confluent_topic:,
+                                                identity_pool_id:,
+                                                gcp_service_account:
   # [START pubsub_create_topic_with_confluent_cloud_ingestion]
   # topic_id = "your-topic-id"
   # bootstrap_server = "bootstrap-server-id.us-south1.gcp.confluent.cloud:9092"
@@ -24,7 +28,6 @@ def create_topic_with_confluent_cloud_ingestion topic_id:, bootstrap_server:, cl
   # identity_pool_id = "identity-pool-id"
   # gcp_service_account = "service-account@project.iam.gserviceaccount.com"
   pubsub = Google::Cloud::Pubsub.new
-
   topic_admin = pubsub.topic_admin
 
   topic = topic_admin.create_topic name: pubsub.topic_path(topic_id),
