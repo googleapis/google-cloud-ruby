@@ -58,10 +58,10 @@ describe "emulator" do
   end
 
   after do
-    @topic = topic_admin.get_topic topic: pubsub.topic_path(topic_id)
-    assert @topic
-    assert_equal "projects/#{pubsub.project}/topics/#{topic_id}", @topic.name
-    topic_admin.delete_topic topic: @topic.name
+    topic = topic_admin.get_topic topic: pubsub.topic_path(topic_id)
+    assert topic
+    assert_equal "projects/#{pubsub.project}/topics/#{topic_id}", topic.name
+    topic_admin.delete_topic topic: topic.name
   end
 
   it "supports pubsub_create_topic_with_cloud_storage_ingestion" do
@@ -153,11 +153,11 @@ describe "emulator" do
     assert_output "Cloud storage subscription #{subscription_id} created.\n" do
       create_cloud_storage_subscription topic_id: topic_id, subscription_id: subscription_id, bucket: bucket_id 
     end
-    @subscription = subscription_admin.get_subscription subscription: pubsub.subscription_path(subscription_id)
-    assert @subscription
-    assert_equal "projects/#{pubsub.project}/subscriptions/#{subscription_id}", @subscription.name
-    assert_equal bucket_id, @subscription.cloud_storage_config.bucket
-    subscription_admin.delete_subscription subscription: @subscription.name
+    subscription = subscription_admin.get_subscription subscription: pubsub.subscription_path(subscription_id)
+    assert subscription
+    assert_equal "projects/#{pubsub.project}/subscriptions/#{subscription_id}", subscription.name
+    assert_equal bucket_id, subscription.cloud_storage_config.bucket
+    subscription_admin.delete_subscription subscription: subscription.name
   end
 end
 
