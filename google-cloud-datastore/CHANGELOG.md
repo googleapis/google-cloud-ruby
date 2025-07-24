@@ -1,5 +1,11 @@
 # Release History
 
+### 2.13.0 (2025-07-24)
+
+#### Features
+
+* add explain query features to aggregate query in Cloud Datastore ([#30704](https://github.com/googleapis/google-cloud-ruby/issues/30704)) 
+
 ### 2.12.0 (2025-07-15)
 
 #### Features
