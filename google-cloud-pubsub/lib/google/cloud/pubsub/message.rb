@@ -35,22 +35,22 @@ module Google
       #   pubsub = Google::Cloud::PubSub.new
       #
       #   # Publish a message
-      #   topic = pubsub.topic "my-topic"
-      #   message = topic.publish "task completed"
+      #   publisher = pubsub.publisher "my-topic"
+      #   message = publisher.publish "task completed"
       #   message.data #=> "task completed"
       #
       #   # Listen for messages
-      #   sub = pubsub.subscription "my-topic-sub"
-      #   subscriber = sub.listen do |received_message|
+      #   subscriber = pubsub.subscriber "my-topic-sub"
+      #   listener = subscriber.listen do |received_message|
       #     # process message
       #     received_message.acknowledge!
       #   end
       #
       #   # Start background threads that will call the block passed to listen.
-      #   subscriber.start
+      #   listener.start
       #
       #   # Shut down the subscriber when ready to stop receiving messages.
-      #   subscriber.stop!
+      #   listener.stop!
       #
       class Message
         ##
