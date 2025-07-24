@@ -108,7 +108,7 @@ module Google
           #   @return [::String]
           #     Required. The user provided merchant review ID to uniquely identify the
           #     merchant review.
-          # @!attribute [rw] attributes
+          # @!attribute [rw] merchant_review_attributes
           #   @return [::Google::Shopping::Merchant::Reviews::V1beta::MerchantReviewAttributes]
           #     Optional. A list of merchant review attributes.
           # @!attribute [rw] custom_attributes
