@@ -1,5 +1,17 @@
 # Release History
 
+### 1.12.1 (2025-07-15)
+
+#### Documentation
+
+* Clarify documentation for cases when multiple parameters are mutually exclusive for an RPC method ([#30624](https://github.com/googleapis/google-cloud-ruby/issues/30624)) 
+
+### 1.12.0 (2025-06-24)
+
+#### Features
+
+* Provide a type for findings saved to Cloud Storage ([#30532](https://github.com/googleapis/google-cloud-ruby/issues/30532)) 
+
 ### 1.11.0 (2025-06-05)
 
 #### Features

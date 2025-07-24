@@ -1,5 +1,11 @@
 # Changelog
 
+### 0.4.0 (2025-07-15)
+
+#### Features
+
+* Added is_verified_purchase and is_incentivized_review to product review attributes ([#30621](https://github.com/googleapis/google-cloud-ruby/issues/30621)) 
+
 ### 0.3.0 (2025-05-11)
 
 #### Features

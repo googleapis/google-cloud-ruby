@@ -1,5 +1,17 @@
 # Release History
 
+### 1.9.1 (2025-07-15)
+
+#### Documentation
+
+* Clarify documentation for cases when multiple parameters are mutually exclusive for an RPC method ([#30624](https://github.com/googleapis/google-cloud-ruby/issues/30624)) 
+
+### 1.9.0 (2025-06-13)
+
+#### Features
+
+* add new change_stream.proto ([#30493](https://github.com/googleapis/google-cloud-ruby/issues/30493)) 
+
 ### 1.8.0 (2025-05-12)
 
 #### Features

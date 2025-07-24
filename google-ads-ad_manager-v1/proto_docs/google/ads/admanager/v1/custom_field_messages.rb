@@ -25,11 +25,11 @@ module Google
         # @!attribute [rw] name
         #   @return [::String]
         #     Identifier. The resource name of the `CustomField`.
-        #     Format: `networks/{network_code}/customFields/{custom_field_id}`
+        #     Format: `networks/{network_code}/customFields/{custom_field}`
         # @!attribute [r] custom_field_id
         #   @return [::Integer]
-        #     Output only. Unique ID of the CustomField. This value is readonly and is
-        #     assigned by Google.
+        #     Output only. Unique ID of the CustomField. This attribute is assigned by
+        #     Google.
         # @!attribute [rw] display_name
         #   @return [::String]
         #     Required. Name of the CustomField. The max length is 127 characters.

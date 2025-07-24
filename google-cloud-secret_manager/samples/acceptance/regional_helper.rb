@@ -17,6 +17,7 @@ require "minitest/focus"
 require "minitest/rg"
 
 require "google/cloud/secret_manager"
+require "google/cloud/resource_manager/v3"
 
 require_relative "../../../.toys/.lib/sample_loader"
 
@@ -35,6 +36,8 @@ class RegionalSecretManagerSnippetSpec < Minitest::Spec
 
   let(:label_key) { "label-key" }
   let(:label_value) { "label-value" }
+
+  let(:time_to_live) { 86_400 }
 
   let :client do
     Google::Cloud::SecretManager.secret_manager_service do |config|

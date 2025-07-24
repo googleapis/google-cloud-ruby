@@ -5,7 +5,7 @@
 require 'google/protobuf'
 
 
-descriptor_data = "\n5google/cloud/securitycenter/v2/group_membership.proto\x12\x1egoogle.cloud.securitycenter.v2\"\xbd\x01\n\x0fGroupMembership\x12M\n\ngroup_type\x18\x01 \x01(\x0e\x32\x39.google.cloud.securitycenter.v2.GroupMembership.GroupType\x12\x10\n\x08group_id\x18\x02 \x01(\t\"I\n\tGroupType\x12\x1a\n\x16GROUP_TYPE_UNSPECIFIED\x10\x00\x12 \n\x1cGROUP_TYPE_TOXIC_COMBINATION\x10\x01\x42\xee\x01\n\"com.google.cloud.securitycenter.v2B\x14GroupMembershipProtoP\x01ZJcloud.google.com/go/securitycenter/apiv2/securitycenterpb;securitycenterpb\xaa\x02\x1eGoogle.Cloud.SecurityCenter.V2\xca\x02\x1eGoogle\\Cloud\\SecurityCenter\\V2\xea\x02!Google::Cloud::SecurityCenter::V2b\x06proto3"
+descriptor_data = "\n5google/cloud/securitycenter/v2/group_membership.proto\x12\x1egoogle.cloud.securitycenter.v2\"\xd8\x01\n\x0fGroupMembership\x12M\n\ngroup_type\x18\x01 \x01(\x0e\x32\x39.google.cloud.securitycenter.v2.GroupMembership.GroupType\x12\x10\n\x08group_id\x18\x02 \x01(\t\"d\n\tGroupType\x12\x1a\n\x16GROUP_TYPE_UNSPECIFIED\x10\x00\x12 \n\x1cGROUP_TYPE_TOXIC_COMBINATION\x10\x01\x12\x19\n\x15GROUP_TYPE_CHOKEPOINT\x10\x03\x42\xee\x01\n\"com.google.cloud.securitycenter.v2B\x14GroupMembershipProtoP\x01ZJcloud.google.com/go/securitycenter/apiv2/securitycenterpb;securitycenterpb\xaa\x02\x1eGoogle.Cloud.SecurityCenter.V2\xca\x02\x1eGoogle\\Cloud\\SecurityCenter\\V2\xea\x02!Google::Cloud::SecurityCenter::V2b\x06proto3"
 
 pool = Google::Protobuf::DescriptorPool.generated_pool
 

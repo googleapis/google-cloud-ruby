@@ -1186,6 +1186,190 @@ module Google
             end
 
             ##
+            # Updates a RagEngineConfig.
+            #
+            # @overload update_rag_engine_config(request, options = nil)
+            #   Pass arguments to `update_rag_engine_config` via a request object, either of type
+            #   {::Google::Cloud::AIPlatform::V1::UpdateRagEngineConfigRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::AIPlatform::V1::UpdateRagEngineConfigRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload update_rag_engine_config(rag_engine_config: nil)
+            #   Pass arguments to `update_rag_engine_config` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param rag_engine_config [::Google::Cloud::AIPlatform::V1::RagEngineConfig, ::Hash]
+            #     Required. The updated RagEngineConfig.
+            #
+            #     NOTE: Downgrading your RagManagedDb's ComputeTier could temporarily
+            #     increase request latencies until the operation is fully complete.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Gapic::Operation]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Gapic::Operation]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/ai_platform/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::AIPlatform::V1::VertexRagDataService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::AIPlatform::V1::UpdateRagEngineConfigRequest.new
+            #
+            #   # Call the update_rag_engine_config method.
+            #   result = client.update_rag_engine_config request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "No response received."
+            #   end
+            #
+            def update_rag_engine_config request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::AIPlatform::V1::UpdateRagEngineConfigRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.update_rag_engine_config.metadata.to_h
+
+              # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::AIPlatform::V1::VERSION
+              metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.rag_engine_config&.name
+                header_params["rag_engine_config.name"] = request.rag_engine_config.name
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.update_rag_engine_config.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.update_rag_engine_config.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @vertex_rag_data_service_stub.call_rpc :update_rag_engine_config, request, options: options do |response, operation|
+                response = ::Gapic::Operation.new response, @operations_client, options: options
+                yield response, operation if block_given?
+                throw :response, response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Gets a RagEngineConfig.
+            #
+            # @overload get_rag_engine_config(request, options = nil)
+            #   Pass arguments to `get_rag_engine_config` via a request object, either of type
+            #   {::Google::Cloud::AIPlatform::V1::GetRagEngineConfigRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::AIPlatform::V1::GetRagEngineConfigRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload get_rag_engine_config(name: nil)
+            #   Pass arguments to `get_rag_engine_config` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param name [::String]
+            #     Required. The name of the RagEngineConfig resource.
+            #     Format:
+            #     `projects/{project}/locations/{location}/ragEngineConfig`
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Google::Cloud::AIPlatform::V1::RagEngineConfig]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Google::Cloud::AIPlatform::V1::RagEngineConfig]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/ai_platform/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::AIPlatform::V1::VertexRagDataService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::AIPlatform::V1::GetRagEngineConfigRequest.new
+            #
+            #   # Call the get_rag_engine_config method.
+            #   result = client.get_rag_engine_config request
+            #
+            #   # The returned object is of type Google::Cloud::AIPlatform::V1::RagEngineConfig.
+            #   p result
+            #
+            def get_rag_engine_config request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::AIPlatform::V1::GetRagEngineConfigRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.get_rag_engine_config.metadata.to_h
+
+              # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::AIPlatform::V1::VERSION
+              metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.get_rag_engine_config.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.get_rag_engine_config.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @vertex_rag_data_service_stub.call_rpc :get_rag_engine_config, request, options: options do |response, operation|
+                yield response, operation if block_given?
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
             # Configuration class for the VertexRagDataService API.
             #
             # This class represents the configuration for VertexRagDataService,
@@ -1401,6 +1585,16 @@ module Google
                 # @return [::Gapic::Config::Method]
                 #
                 attr_reader :delete_rag_file
+                ##
+                # RPC-specific configuration for `update_rag_engine_config`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :update_rag_engine_config
+                ##
+                # RPC-specific configuration for `get_rag_engine_config`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :get_rag_engine_config
 
                 # @private
                 def initialize parent_rpcs = nil
@@ -1424,6 +1618,10 @@ module Google
                   @list_rag_files = ::Gapic::Config::Method.new list_rag_files_config
                   delete_rag_file_config = parent_rpcs.delete_rag_file if parent_rpcs.respond_to? :delete_rag_file
                   @delete_rag_file = ::Gapic::Config::Method.new delete_rag_file_config
+                  update_rag_engine_config_config = parent_rpcs.update_rag_engine_config if parent_rpcs.respond_to? :update_rag_engine_config
+                  @update_rag_engine_config = ::Gapic::Config::Method.new update_rag_engine_config_config
+                  get_rag_engine_config_config = parent_rpcs.get_rag_engine_config if parent_rpcs.respond_to? :get_rag_engine_config
+                  @get_rag_engine_config = ::Gapic::Config::Method.new get_rag_engine_config_config
 
                   yield self if block_given?
                 end

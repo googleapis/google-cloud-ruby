@@ -1,5 +1,31 @@
 # Changelog
 
+### 2.3.1 (2025-07-15)
+
+#### Documentation
+
+* Clarify documentation for cases when multiple parameters are mutually exclusive for an RPC method ([#30624](https://github.com/googleapis/google-cloud-ruby/issues/30624)) 
+
+### 2.3.0 (2025-06-13)
+
+#### Features
+
+* add CMEK config service ([#30498](https://github.com/googleapis/google-cloud-ruby/issues/30498)) 
+* add ConnectorRunErrorContext to error log 
+* add custom search operators for Workspace search 
+* add HealthcareFhirConfig to FHIR data store 
+* add identity mapping service 
+* add more indexing state for site search engine 
+* add more options for layout parser config 
+* add user license config service 
+* enable claim level score for grounding 
+* support ACL data store and document 
+* support media recommendation engine 
+* support structured content for chunk 
+#### Documentation
+
+* keep the API doc up-to-date with recent changes 
+
 ### 2.2.0 (2025-05-12)
 
 #### Features

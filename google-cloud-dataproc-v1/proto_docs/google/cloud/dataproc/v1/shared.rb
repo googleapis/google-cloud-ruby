@@ -574,6 +574,12 @@ module Google
 
             # Memory management for workloads.
             MEMORY = 4
+
+            # No autotuning.
+            NONE = 5
+
+            # Automatic selection of scenarios.
+            AUTO = 6
           end
         end
 
@@ -607,6 +613,9 @@ module Google
           # Compute Engine image versions.
           ANACONDA = 5
 
+          # Delta Lake.
+          DELTA = 20
+
           # Docker
           DOCKER = 13
 
@@ -625,8 +634,14 @@ module Google
           # Hudi.
           HUDI = 18
 
+          # Iceberg.
+          ICEBERG = 19
+
           # The Jupyter Notebook.
           JUPYTER = 1
+
+          # The Pig component.
+          PIG = 21
 
           # The Presto query engine.
           PRESTO = 6

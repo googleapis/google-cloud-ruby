@@ -451,4 +451,16 @@ class ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::ClientPathsTes
       assert_equal "properties/value0/subpropertyEventFilters/value1", path
     end
   end
+
+  def test_subproperty_sync_config_path
+    grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
+      client = ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      path = client.subproperty_sync_config_path property: "value0", subproperty_sync_config: "value1"
+      assert_equal "properties/value0/subpropertySyncConfigs/value1", path
+    end
+  end
 end

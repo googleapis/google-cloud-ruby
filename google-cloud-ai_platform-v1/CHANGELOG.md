@@ -1,5 +1,37 @@
 # Changelog
 
+### 1.18.0 (2025-07-15)
+
+#### Features
+
+* Support for ColabImage 
+* Support for Tool to support computer use 
+* Support for unique names for pipeline tasks ([#30605](https://github.com/googleapis/google-cloud-ruby/issues/30605)) 
+#### Documentation
+
+* clarify documentation for cases when multiple parameters are mutually exclusive for an RPC method ([#30623](https://github.com/googleapis/google-cloud-ruby/issues/30623)) 
+
+### 1.17.0 (2025-06-30)
+
+#### Features
+
+* Support for invoke_route_prefix ([#30572](https://github.com/googleapis/google-cloud-ruby/issues/30572)) 
+
+### 1.16.0 (2025-06-24)
+
+#### Features
+
+* Support for GenAiAdvancedFeaturesConfig 
+* Support for ModelGarden deploy RPC 
+* Support for update_rag_engine_config and get_rag_engine_config RPCs 
+* Updates to PSCAutomationConfig and PscInterfaceConfig 
+
+### 1.15.0 (2025-06-16)
+
+#### Features
+
+* add EncryptionSpec field for RagCorpus CMEK feature to v1 ([#30485](https://github.com/googleapis/google-cloud-ruby/issues/30485)) 
+
 ### 1.14.0 (2025-05-27)
 
 #### Features

@@ -1,5 +1,19 @@
 # Release History
 
+### 0.36.1 (2025-07-15)
+
+#### Documentation
+
+* clarify documentation for cases when multiple parameters are mutually exclusive for an RPC method ([#30623](https://github.com/googleapis/google-cloud-ruby/issues/30623)) 
+
+### 0.36.0 (2025-06-16)
+
+#### Features
+
+* add the `GetSubpropertySyncConfigRequest` method ([#30512](https://github.com/googleapis/google-cloud-ruby/issues/30512)) 
+* add the `ListSubpropertySyncConfigsRequest` method 
+* add the `UpdateSubpropertySyncConfigRequest` method 
+
 ### 0.35.0 (2025-05-12)
 
 #### Features

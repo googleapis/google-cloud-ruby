@@ -477,7 +477,7 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload mutate_row(table_name: nil, authorized_view_name: nil, app_profile_id: nil, row_key: nil, mutations: nil)
+            # @overload mutate_row(table_name: nil, authorized_view_name: nil, app_profile_id: nil, row_key: nil, mutations: nil, idempotency: nil)
             #   Pass arguments to `mutate_row` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -503,6 +503,9 @@ module Google
             #     Required. Changes to be atomically applied to the specified row. Entries
             #     are applied in order, meaning that earlier mutations can be masked by later
             #     ones. Must contain at least one entry and at most 100000.
+            #   @param idempotency [::Google::Cloud::Bigtable::V2::Idempotency, ::Hash]
+            #     If set consistently across retries, prevents this mutation from being
+            #     double applied to aggregate column families within a 15m window.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::Bigtable::V2::MutateRowResponse]
@@ -957,7 +960,8 @@ module Google
             #   @param rules [::Array<::Google::Cloud::Bigtable::V2::ReadModifyWriteRule, ::Hash>]
             #     Required. Rules specifying how the specified row's contents are to be
             #     transformed into writes. Entries are applied in order, meaning that earlier
-            #     rules will affect the results of later ones.
+            #     rules will affect the results of later ones. At least one entry must be
+            #     specified, and there can be at most 100000 rules.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::Bigtable::V2::ReadModifyWriteRowResponse]
@@ -1032,10 +1036,10 @@ module Google
             end
 
             ##
-            # NOTE: This API is intended to be used by Apache Beam BigtableIO.
             # Returns the current list of partitions that make up the table's
             # change stream. The union of partitions will cover the entire keyspace.
             # Partitions can be read with `ReadChangeStream`.
+            # NOTE: This API is only intended to be used by Apache Beam BigtableIO.
             #
             # @overload generate_initial_change_stream_partitions(request, options = nil)
             #   Pass arguments to `generate_initial_change_stream_partitions` via a request object, either of type
@@ -1130,10 +1134,10 @@ module Google
             end
 
             ##
-            # NOTE: This API is intended to be used by Apache Beam BigtableIO.
             # Reads changes from a table's change stream. Changes will
             # reflect both user-initiated mutations and mutations that are caused by
             # garbage collection.
+            # NOTE: This API is only intended to be used by Apache Beam BigtableIO.
             #
             # @overload read_change_stream(request, options = nil)
             #   Pass arguments to `read_change_stream` via a request object, either of type
@@ -1167,20 +1171,20 @@ module Google
             #     current time, and after change stream creation, whichever is greater.
             #     This value is inclusive and will be truncated to microsecond granularity.
             #
-            #     Note: The following fields are mutually exclusive: `start_time`, `continuation_tokens`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+            #     Note: The following parameters are mutually exclusive: `start_time`, `continuation_tokens`. At most one of these parameters can be set. If more than one is set, only one will be used, and it is not defined which one.
             #   @param continuation_tokens [::Google::Cloud::Bigtable::V2::StreamContinuationTokens, ::Hash]
             #     Tokens that describe how to resume reading a stream where reading
             #     previously left off. If specified, changes will be read starting at the
             #     the position. Tokens are delivered on the stream as part of `Heartbeat`
             #     and `CloseStream` messages.
             #
-            #     If a single token is provided, the token’s partition must exactly match
-            #     the request’s partition. If multiple tokens are provided, as in the case
+            #     If a single token is provided, the token's partition must exactly match
+            #     the request's partition. If multiple tokens are provided, as in the case
             #     of a partition merge, the union of the token partitions must exactly
-            #     cover the request’s partition. Otherwise, INVALID_ARGUMENT will be
+            #     cover the request's partition. Otherwise, INVALID_ARGUMENT will be
             #     returned.
             #
-            #     Note: The following fields are mutually exclusive: `continuation_tokens`, `start_time`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+            #     Note: The following parameters are mutually exclusive: `continuation_tokens`, `start_time`. At most one of these parameters can be set. If more than one is set, only one will be used, and it is not defined which one.
             #   @param end_time [::Google::Protobuf::Timestamp, ::Hash]
             #     If specified, OK will be returned when the stream advances beyond
             #     this time. Otherwise, changes will be continuously delivered on the stream.

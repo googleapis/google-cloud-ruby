@@ -28,9 +28,9 @@ module Google
           # {::Google::Cloud::Security::PrivateCA::V1::CertificateAuthority CertificateAuthority}
           # can be used to create
           # {::Google::Cloud::Security::PrivateCA::V1::Certificate Certificates}.
-          # @!attribute [r] name
+          # @!attribute [rw] name
           #   @return [::String]
-          #     Output only. The resource name for this
+          #     Identifier. The resource name for this
           #     {::Google::Cloud::Security::PrivateCA::V1::CertificateAuthority CertificateAuthority}
           #     in the format `projects/*/locations/*/caPools/*/certificateAuthorities/*`.
           # @!attribute [rw] type
@@ -132,6 +132,17 @@ module Google
           # @!attribute [rw] labels
           #   @return [::Google::Protobuf::Map{::String => ::String}]
           #     Optional. Labels with user-defined metadata.
+          # @!attribute [rw] user_defined_access_urls
+          #   @return [::Google::Cloud::Security::PrivateCA::V1::CertificateAuthority::UserDefinedAccessUrls]
+          #     Optional. User-defined URLs for CA certificate and CRLs. The service does
+          #     not publish content to these URLs. It is up to the user to mirror content
+          #     to these URLs.
+          # @!attribute [r] satisfies_pzs
+          #   @return [::Boolean]
+          #     Output only. Reserved for future use.
+          # @!attribute [r] satisfies_pzi
+          #   @return [::Boolean]
+          #     Output only. Reserved for future use.
           class CertificateAuthority
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -176,6 +187,29 @@ module Google
             #
             #     Note: The following fields are mutually exclusive: `algorithm`, `cloud_kms_key_version`. If a field in that set is populated, all other fields in the set will automatically be cleared.
             class KeyVersionSpec
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
+
+            # User-defined URLs for accessing content published by this
+            # {::Google::Cloud::Security::PrivateCA::V1::CertificateAuthority CertificateAuthority}.
+            # @!attribute [rw] aia_issuing_certificate_urls
+            #   @return [::Array<::String>]
+            #     Optional. A list of URLs where the issuer CA certificate may be
+            #     downloaded, which appears in the "Authority Information Access" extension
+            #     in the certificate. If specified, the default [Cloud Storage
+            #     URLs][google.cloud.security.privateca.v1.CertificateAuthority.AccessUrls.ca_certificate_access_url]
+            #     will be omitted.
+            # @!attribute [rw] crl_access_urls
+            #   @return [::Array<::String>]
+            #     Optional. A list of URLs where to obtain CRL information, i.e.
+            #     the DistributionPoint.fullName described by
+            #     https://tools.ietf.org/html/rfc5280#section-4.2.1.13.
+            #     If specified, the default
+            #     [Cloud Storage
+            #     URLs][google.cloud.security.privateca.v1.CertificateAuthority.AccessUrls.crl_access_urls]
+            #     will be omitted.
+            class UserDefinedAccessUrls
               include ::Google::Protobuf::MessageExts
               extend ::Google::Protobuf::MessageExts::ClassMethods
             end
@@ -298,9 +332,9 @@ module Google
           # issuance policies for one or more
           # {::Google::Cloud::Security::PrivateCA::V1::CertificateAuthority CertificateAuthority}
           # resources and to rotate CA certificates in and out of the trust anchor.
-          # @!attribute [r] name
+          # @!attribute [rw] name
           #   @return [::String]
-          #     Output only. The resource name for this
+          #     Identifier. The resource name for this
           #     {::Google::Cloud::Security::PrivateCA::V1::CaPool CaPool} in the format
           #     `projects/*/locations/*/caPools/*`.
           # @!attribute [rw] tier
@@ -392,6 +426,15 @@ module Google
             #     {::Google::Cloud::Security::PrivateCA::V1::CaPool::IssuancePolicy::AllowedKeyType AllowedKeyType}
             #     is specified, then the certificate request's public key must match one of
             #     the key types listed here. Otherwise, any key may be used.
+            # @!attribute [rw] backdate_duration
+            #   @return [::Google::Protobuf::Duration]
+            #     Optional. The duration to backdate all certificates issued from this
+            #     {::Google::Cloud::Security::PrivateCA::V1::CaPool CaPool}. If not set, the
+            #     certificates will be issued with a not_before_time of the issuance time
+            #     (i.e. the current time). If set, the certificates will be issued with a
+            #     not_before_time of the issuance time minus the backdate_duration. The
+            #     not_after_time will be adjusted to preserve the requested lifetime. The
+            #     backdate_duration must be less than or equal to 48 hours.
             # @!attribute [rw] maximum_lifetime
             #   @return [::Google::Protobuf::Duration]
             #     Optional. The maximum lifetime allowed for issued
@@ -568,9 +611,9 @@ module Google
           # {::Google::Cloud::Security::PrivateCA::V1::CertificateRevocationList CertificateRevocationList}
           # corresponds to a signed X.509 certificate Revocation List (CRL). A CRL
           # contains the serial numbers of certificates that should no longer be trusted.
-          # @!attribute [r] name
+          # @!attribute [rw] name
           #   @return [::String]
-          #     Output only. The resource name for this
+          #     Identifier. The resource name for this
           #     {::Google::Cloud::Security::PrivateCA::V1::CertificateRevocationList CertificateRevocationList}
           #     in the format `projects/*/locations/*/caPools/*certificateAuthorities/*/
           #        certificateRevocationLists/*`.
@@ -667,9 +710,9 @@ module Google
           # A {::Google::Cloud::Security::PrivateCA::V1::Certificate Certificate} corresponds
           # to a signed X.509 certificate issued by a
           # {::Google::Cloud::Security::PrivateCA::V1::CertificateAuthority CertificateAuthority}.
-          # @!attribute [r] name
+          # @!attribute [rw] name
           #   @return [::String]
-          #     Output only. The resource name for this
+          #     Identifier. The resource name for this
           #     {::Google::Cloud::Security::PrivateCA::V1::Certificate Certificate} in the format
           #     `projects/*/locations/*/caPools/*/certificates/*`.
           # @!attribute [rw] pem_csr
@@ -771,9 +814,9 @@ module Google
           # A
           # {::Google::Cloud::Security::PrivateCA::V1::CertificateTemplate CertificateTemplate}
           # refers to a managed template for certificate issuance.
-          # @!attribute [r] name
+          # @!attribute [rw] name
           #   @return [::String]
-          #     Output only. The resource name for this
+          #     Identifier. The resource name for this
           #     {::Google::Cloud::Security::PrivateCA::V1::CertificateTemplate CertificateTemplate}
           #     in the format `projects/*/locations/*/certificateTemplates/*`.
           # @!attribute [rw] maximum_lifetime
@@ -872,7 +915,9 @@ module Google
           #   @return [::Google::Cloud::Security::PrivateCA::V1::X509Parameters::CaOptions]
           #     Optional. Describes options in this
           #     {::Google::Cloud::Security::PrivateCA::V1::X509Parameters X509Parameters} that
-          #     are relevant in a CA certificate.
+          #     are relevant in a CA certificate. If not specified, a default basic
+          #     constraints extension with `is_ca=false` will be added for leaf
+          #     certificates.
           # @!attribute [rw] policy_ids
           #   @return [::Array<::Google::Cloud::Security::PrivateCA::V1::ObjectId>]
           #     Optional. Describes the X.509 certificate policy object identifiers, per
@@ -892,20 +937,20 @@ module Google
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
 
-            # Describes values that are relevant in a CA certificate.
+            # Describes the X.509 basic constraints extension, per [RFC 5280
+            # section 4.2.1.9](https://tools.ietf.org/html/rfc5280#section-4.2.1.9)
             # @!attribute [rw] is_ca
             #   @return [::Boolean]
-            #     Optional. Refers to the "CA" X.509 extension, which is a boolean value.
-            #     When this value is missing, the extension will be omitted from the CA
-            #     certificate.
+            #     Optional. Refers to the "CA" boolean field in the X.509 extension.
+            #     When this value is missing, the basic constraints extension will be
+            #     omitted from the certificate.
             # @!attribute [rw] max_issuer_path_length
             #   @return [::Integer]
-            #     Optional. Refers to the path length restriction X.509 extension. For a CA
-            #     certificate, this value describes the depth of subordinate CA
-            #     certificates that are allowed.
-            #     If this value is less than 0, the request will fail.
-            #     If this value is missing, the max path length will be omitted from the
-            #     CA certificate.
+            #     Optional. Refers to the path length constraint field in the X.509
+            #     extension. For a CA certificate, this value describes the depth of
+            #     subordinate CA certificates that are allowed. If this value is less than
+            #     0, the request will fail. If this value is missing, the max path length
+            #     will be omitted from the certificate.
             class CaOptions
               include ::Google::Protobuf::MessageExts
               extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -1134,6 +1179,12 @@ module Google
           # @!attribute [rw] cert_fingerprint
           #   @return [::Google::Cloud::Security::PrivateCA::V1::CertificateDescription::CertificateFingerprint]
           #     The hash of the x.509 certificate.
+          # @!attribute [rw] tbs_certificate_digest
+          #   @return [::String]
+          #     The hash of the pre-signed certificate, which will be signed by the CA.
+          #     Corresponds to the TBS Certificate in
+          #     https://tools.ietf.org/html/rfc5280#section-4.1.2. The field will always be
+          #     populated.
           class CertificateDescription
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -1305,6 +1356,38 @@ module Google
             end
           end
 
+          # {::Google::Cloud::Security::PrivateCA::V1::AttributeTypeAndValue AttributeTypeAndValue}
+          # specifies an attribute type and value. It can use either a OID or enum value
+          # to specify the attribute type.
+          # @!attribute [rw] type
+          #   @return [::Google::Cloud::Security::PrivateCA::V1::AttributeType]
+          #     The attribute type of the attribute and value pair.
+          #
+          #     Note: The following fields are mutually exclusive: `type`, `object_id`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+          # @!attribute [rw] object_id
+          #   @return [::Google::Cloud::Security::PrivateCA::V1::ObjectId]
+          #     Object ID for an attribute type of an attribute and value pair.
+          #
+          #     Note: The following fields are mutually exclusive: `object_id`, `type`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+          # @!attribute [rw] value
+          #   @return [::String]
+          #     The value for the attribute type.
+          class AttributeTypeAndValue
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # {::Google::Cloud::Security::PrivateCA::V1::RelativeDistinguishedName RelativeDistinguishedName}
+          # specifies a relative distinguished name which will be used to build a
+          # distinguished name.
+          # @!attribute [rw] attributes
+          #   @return [::Array<::Google::Cloud::Security::PrivateCA::V1::AttributeTypeAndValue>]
+          #     Attributes describes the attribute value assertions in the RDN.
+          class RelativeDistinguishedName
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
           # {::Google::Cloud::Security::PrivateCA::V1::Subject Subject} describes parts of a
           # distinguished name that, in turn, describes the subject of the certificate.
           # @!attribute [rw] common_name
@@ -1331,6 +1414,9 @@ module Google
           # @!attribute [rw] postal_code
           #   @return [::String]
           #     The postal code of the subject.
+          # @!attribute [rw] rdn_sequence
+          #   @return [::Array<::Google::Cloud::Security::PrivateCA::V1::RelativeDistinguishedName>]
+          #     This field can be used in place of the named subject fields.
           class Subject
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -1465,6 +1551,37 @@ module Google
             end
           end
 
+          # {::Google::Cloud::Security::PrivateCA::V1::AttributeType AttributeType} specifies
+          # the type of Attribute in a relative distinguished name.
+          module AttributeType
+            # Attribute type is unspecified.
+            ATTRIBUTE_TYPE_UNSPECIFIED = 0
+
+            # The "common name" of the subject.
+            COMMON_NAME = 1
+
+            # The country code of the subject.
+            COUNTRY_CODE = 2
+
+            # The organization of the subject.
+            ORGANIZATION = 3
+
+            # The organizational unit of the subject.
+            ORGANIZATIONAL_UNIT = 4
+
+            # The locality or city of the subject.
+            LOCALITY = 5
+
+            # The province, territory, or regional state of the subject.
+            PROVINCE = 6
+
+            # The street address of the subject.
+            STREET_ADDRESS = 7
+
+            # The postal code of the subject.
+            POSTAL_CODE = 8
+          end
+
           # A {::Google::Cloud::Security::PrivateCA::V1::RevocationReason RevocationReason}
           # indicates whether a
           # {::Google::Cloud::Security::PrivateCA::V1::Certificate Certificate} has been
@@ -1529,6 +1646,17 @@ module Google
             # specified in the certificate request. This mode requires the caller to have
             # the `privateca.certificates.create` permission.
             DEFAULT = 1
+
+            # A mode used to get an accurate representation of the Subject
+            # field's distinguished name. Indicates that the certificate's
+            # {::Google::Cloud::Security::PrivateCA::V1::Subject Subject} and/or
+            # {::Google::Cloud::Security::PrivateCA::V1::SubjectAltNames SubjectAltNames} are
+            # specified in the certificate request. When parsing a PEM CSR this mode will
+            # maintain the sequence of RDNs found in the CSR's subject field in the
+            # issued {::Google::Cloud::Security::PrivateCA::V1::Certificate Certificate}. This
+            # mode requires the caller to have the `privateca.certificates.create`
+            # permission.
+            RDN_SEQUENCE = 3
 
             # A mode reserved for special cases. Indicates that the certificate should
             # have one SPIFFE

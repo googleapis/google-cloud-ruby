@@ -187,6 +187,9 @@ module Google
         #   @return [::Google::Maps::FleetEngine::V1::TripView]
         #     The subset of Trip fields that are populated and how they should be
         #     interpreted.
+        # @!attribute [rw] attributes
+        #   @return [::Array<::Google::Maps::FleetEngine::V1::TripAttribute>]
+        #     A list of custom Trip attributes. Each attribute must have a unique key.
         class Trip
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

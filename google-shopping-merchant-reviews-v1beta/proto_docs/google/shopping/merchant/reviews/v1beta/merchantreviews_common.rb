@@ -79,7 +79,7 @@ module Google
           #     Required. The timestamp indicating when the review was written.
           # @!attribute [rw] review_language
           #   @return [::String]
-          #     Required. The language of the review defined by BCP-47 language code.
+          #     Optional. The language of the review defined by BCP-47 language code.
           # @!attribute [rw] review_country
           #   @return [::String]
           #     Optional. The country where the reviewer made the order defined by ISO

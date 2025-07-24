@@ -33,7 +33,7 @@ module Google
         # @!attribute [rw] capacity_gib
         #   @return [::Integer]
         #     Required. The storage capacity of the instance in gibibytes (GiB). Allowed
-        #     values are from `18000` to `936000`, in increments of 9000.
+        #     values are from `18000` to `954000`, in increments of 9000.
         # @!attribute [rw] network
         #   @return [::String]
         #     Required. Immutable. The full name of the VPC network to which the instance
@@ -60,13 +60,14 @@ module Google
         #     Optional. Labels as key value pairs.
         # @!attribute [rw] per_unit_storage_throughput
         #   @return [::Integer]
-        #     Optional. The throughput of the instance in MB/s/TiB.
-        #     Valid values are 250, 500, 1000.
-        #     Default value is 1000.
+        #     Required. The throughput of the instance in MB/s/TiB.
+        #     Valid values are 125, 250, 500, 1000.
         # @!attribute [rw] gke_support_enabled
+        #   @deprecated This field is deprecated and may be removed in the next major version update.
         #   @return [::Boolean]
         #     Optional. Indicates whether you want to enable support for GKE clients. By
-        #     default, GKE clients are not supported.
+        #     default, GKE clients are not supported. Deprecated. No longer required for
+        #     GKE instance creation.
         class Instance
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -102,6 +103,9 @@ module Google
 
             # The instance is stopped.
             STOPPED = 6
+
+            # The instance is being updated.
+            UPDATING = 7
           end
         end
 

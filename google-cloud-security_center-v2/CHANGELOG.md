@@ -1,5 +1,12 @@
 # Changelog
 
+### 1.3.0 (2025-07-15)
+
+#### Features
+
+* Support for File operations 
+* Support for various additional Finding fields 
+
 ### 1.2.0 (2025-05-12)
 
 #### Features

@@ -51,20 +51,30 @@ These samples show how to use the [Google Secret Manager API]
     Usage: bundle exec ruby snippets.rb [command] [arguments]
 
     Commands:
-      access_secret_version <secret> <version>           Access a secret version
-      add_secret_version <secret>                        Add a new secret version
-      create_secret <secret>                             Create a new secret
-      delete_secret <secret>                             Delete an existing secret
-      destroy_secret_version <secret> <version>          Destroy a secret version
-      disable_secret_version <secret> <version>          Disable a secret version
-      enable_secret_version <secret> <version>           Enable a secret version
-      get_secret <secret>                                Get a secret
-      get_secret_version <secret> <version>              Get a secret version
-      iam_grant_access <secret> <version> <member>       Grant the member access to the secret
-      iam_revoke_access <secret> <version> <member>      Revoke the member access to the secret
-      list_secret_versions <secret>                      List all versions for a secret
-      list_secrets                                       List all secrets
-      update_secret <secret>                             Update a secret
+      access_secret_version <secret> <version>                    Access a secret version
+      add_secret_version <secret>                                 Add a new secret version
+      create_secret <secret>                                      Create a new secret
+      create_secret_with_annotations <secret> <key> <value>       Create a new secret with annotations
+      create_secret_with_delayed_destroy <secret> <time_to_live>  Create a new secret with delayed destroy
+      create_secret_with_labels <secret> <key> <value>            Create a new secret with labels
+      create_secret_with_tags <secret> <key> <value>              Create a new secret with tags
+      create_ummr_secret <secret> <locations>                     Create a new secret with user managed replication
+      delete_secret <secret>                                      Delete an existing secret
+      destroy_secret_version <secret> <version>                   Destroy a secret version
+      disable_secret_version <secret> <version>                   Disable a secret version
+      disable_secret_delayed_destroy <secret>                     Disable a secret delayed destroy
+      edit_secret_annotations <secret> <key> <value>              Edit existing secret annotations
+      enable_secret_version <secret> <version>                    Enable a secret version
+      get_secret <secret>                                         Get a secret
+      get_secret_version <secret> <version>                       Get a secret version
+      iam_grant_access <secret> <version> <member>                Grant the member access to the secret
+      iam_revoke_access <secret> <version> <member>               Revoke the member access to the secret
+      list_secret_versions <secret>                               List all versions for a secret
+      list_secrets                                                List all secrets
+      update_secret <secret>                                      Update a secret
+      updated_secret_with_delayed_destroy <secret> <time_to_live> Update a secret delayed destroy value.
+      view_secret_annotations <secret>                            View a secret annotations
+      view_secret_labels <secret>                                 View a secret labels
 
     Environment variables:
       GOOGLE_CLOUD_PROJECT    ID of the Google Cloud project to run snippets
@@ -84,6 +94,7 @@ These samples show how to use the [Google Secret Manager API]
       access_regional_secret_version <secret> <version>                       Access a regional secret version
       add_regional_secret_version <secret>                                    Add a new regional secret version
       create_regional_secret <secret>                                         Create a new regional secret
+      create_regional_secret <secret> <key> <value>                           Create a new regional secret with tags
       delete_regional_secret_with_etag <secret> <etag>                        Delete an existing regional secret with associated etag
       delete_regional_secret <secret>                                         Delete an existing regional secret
       destroy_regional_secret_version_with_etag <secret> <version> <etag>     Destroy a regional secret version with associated etag

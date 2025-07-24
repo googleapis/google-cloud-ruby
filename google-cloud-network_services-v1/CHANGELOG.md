@@ -1,5 +1,29 @@
 # Changelog
 
+### 2.4.0 (2025-07-15)
+
+#### Features
+
+* Support for Backend Service isolation configs ([#30604](https://github.com/googleapis/google-cloud-ruby/issues/30604)) 
+
+### 2.3.0 (2025-06-24)
+
+#### Features
+
+* Support for extension metadata 
+* Support for RPCs for managing AuthzExtensions 
+* Support for RPCs for managing WasmPlugins 
+* Support for RPCs for managing WasmPluginVersions 
+
+### 2.2.0 (2025-06-16)
+
+#### Features
+
+* update NetworkServices protos ([#30508](https://github.com/googleapis/google-cloud-ruby/issues/30508)) 
+#### Documentation
+
+* Various updates 
+
 ### 2.1.0 (2025-05-12)
 
 #### Features

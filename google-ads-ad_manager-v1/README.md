@@ -32,9 +32,9 @@ In order to use this library, you first need to go through the following steps:
 ```ruby
 require "google/ads/ad_manager/v1"
 
-client = ::Google::Ads::AdManager::V1::AdUnitService::Rest::Client.new
-request = ::Google::Ads::AdManager::V1::GetAdUnitRequest.new # (request fields as keyword arguments...)
-response = client.get_ad_unit request
+client = ::Google::Ads::AdManager::V1::AdBreakService::Rest::Client.new
+request = ::Google::Ads::AdManager::V1::GetAdBreakRequest.new # (request fields as keyword arguments...)
+response = client.get_ad_break request
 ```
 
 View the [Client Library Documentation](https://rubydoc.info/gems/google-ads-ad_manager-v1)
@@ -75,7 +75,7 @@ constructing a client object. For example:
 require "google/ads/ad_manager/v1"
 require "logger"
 
-client = ::Google::Ads::AdManager::V1::AdUnitService::Rest::Client.new do |config|
+client = ::Google::Ads::AdManager::V1::AdBreakService::Rest::Client.new do |config|
   config.logger = Logger.new "my-app.log"
 end
 ```

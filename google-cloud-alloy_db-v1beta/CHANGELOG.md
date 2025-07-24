@@ -1,5 +1,25 @@
 # Changelog
 
+### 0.17.1 (2025-07-15)
+
+#### Documentation
+
+* clarify documentation for cases when multiple parameters are mutually exclusive for an RPC method ([#30623](https://github.com/googleapis/google-cloud-ruby/issues/30623)) 
+
+### 0.17.0 (2025-06-24)
+
+#### Features
+
+* Additional instance network configs 
+* Support cluster activation policy 
+* Support deny maintenance periods 
+* Support for assisted experiences 
+* Support managed connection pool config 
+* Support per-cluster service agents 
+#### Documentation
+
+* Deprecated GeminiClusterConfig and GeminiInstanceConfig 
+
 ### 0.16.0 (2025-05-16)
 
 #### Features

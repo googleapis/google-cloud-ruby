@@ -79,11 +79,11 @@ describe "Aggregate Queries", :datastore do
   end
 
   before do
-    dataset.transaction { |tx| tx.save *characters }
+    dataset.transaction { |tx| tx.save(*characters) }
   end
 
   after do
-    dataset.delete *characters
+    dataset.delete(*characters)
   end
 
   describe "Common tests for aggregates" do
@@ -99,7 +99,7 @@ describe "Aggregate Queries", :datastore do
   describe "COUNT via AggregateQuery" do
     
     it "returns 0 for no records" do
-      dataset.delete *characters
+      dataset.delete(*characters)
       query = Google::Cloud::Datastore.new
                 .query("Character")
                 .ancestor(book)
@@ -134,11 +134,12 @@ describe "Aggregate Queries", :datastore do
     end
 
     it "returns count on filter with and without read time" do
+      sleep(0.5) # wait for `before` tx that saves all characters to settle
       read_time = Time.now
-      sleep(1)
-
+      sleep(0.5) # wait so that "arya" tx happens definitely after `read_time` (for read time aggregation query)
       arya["alive"] = false
       dataset.transaction { |tx| tx.save arya }
+      sleep(0.5) # wait for the "arya" tx to settle (so that something is changed since `read_time`)
 
       query = Google::Cloud::Datastore.new
                                       .query("Character")
@@ -301,7 +302,7 @@ describe "Aggregate Queries", :datastore do
 
   describe "SUM via AggregateQuery" do
     it "returns 0 for no records" do
-      dataset.delete *characters # delete dataset before querying
+      dataset.delete(*characters) # delete dataset before querying
       query = Google::Cloud::Datastore.new
                 .query("Character")
                 .ancestor(book)
@@ -325,11 +326,11 @@ describe "Aggregate Queries", :datastore do
 
     it "returns double sum for records with double values" do
       # delete integer dataset and save records with doubles
-      dataset.delete *characters
+      dataset.delete(*characters)
       characters.each do |ch|
         ch["appearances"] = ch["appearances"].to_f
       end
-      dataset.transaction { |tx| tx.save *characters }
+      dataset.transaction { |tx| tx.save(*characters) }
 
       query = Google::Cloud::Datastore.new
                 .query("Character")
@@ -354,9 +355,19 @@ describe "Aggregate Queries", :datastore do
     end
 
     it "returns sum on filter with and without read time" do
+      sleep(0.5) # wait for `before` tx that saves all characters to settle
       read_time = Time.now
-      sleep(1)
-      dataset.transaction { |tx| tx.delete george }
+      sleep(0.5) # wait so the "Paul" tx happens definitely after `read_time` (for read time aggregation query)
+      paul = Google::Cloud::Datastore::Entity.new.tap do |e|
+        e["name"]        = "Paul"
+        e["family"]      = "Martin"
+        e["appearances"] = 3
+        e["alive"]       = true
+      end
+      paul.key = Google::Cloud::Datastore::Key.new "Character", "Paul"
+      paul.key.parent = book
+      dataset.transaction { |tx| tx.save paul }
+      sleep(0.5) # wait for the "Paul" tx to settle (so that something is changed since `read_time`)
 
       query = Google::Cloud::Datastore.new
                                       .query("Character")
@@ -370,7 +381,7 @@ describe "Aggregate Queries", :datastore do
       _(res.get).must_equal 1
       res = dataset.run_aggregation aggregate_query
       _(res.get).must_be_kind_of Integer
-      _(res.get).must_equal 0
+      _(res.get).must_equal 4
     end
 
     it "returns sum on limit" do
@@ -519,7 +530,7 @@ describe "Aggregate Queries", :datastore do
 
   describe "AVG via AggregateQuery" do
     it "returns 0 for no records" do
-      dataset.delete *characters # delete dataset before querying
+      dataset.delete(*characters) # delete dataset before querying
       query = Google::Cloud::Datastore.new
                 .query("Character")
                 .ancestor(book)
@@ -554,9 +565,19 @@ describe "Aggregate Queries", :datastore do
     end
 
     it "returns average on filter with and without read time" do
+      sleep(0.5) # wait for `before` tx that saves all characters to settle
       read_time = Time.now
-      sleep(1)
-      dataset.transaction { |tx| tx.delete george }
+      sleep(0.5) # wait so the "Paul" tx happens definitely after `read_time` (for read time aggregation query)
+      paul = Google::Cloud::Datastore::Entity.new.tap do |e|
+        e["name"]        = "Paul"
+        e["family"]      = "Martin"
+        e["appearances"] = 3
+        e["alive"]       = true
+      end
+      paul.key = Google::Cloud::Datastore::Key.new "Character", "Paul"
+      paul.key.parent = book
+      dataset.transaction { |tx| tx.save paul }
+      sleep(0.5) # wait for the "Paul" tx to settle (so that something is changed since `read_time`)
 
       query = Google::Cloud::Datastore.new
                                       .query("Character")
@@ -570,7 +591,7 @@ describe "Aggregate Queries", :datastore do
       _(res.get).must_equal 1.0
       res = dataset.run_aggregation aggregate_query
       _(res.get).must_be_kind_of Float
-      _(res.get).must_equal 0.0
+      _(res.get).must_equal 2.0
     end
 
     it "returns average on limit" do

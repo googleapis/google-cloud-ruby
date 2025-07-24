@@ -1,5 +1,14 @@
 # Release History
 
+### 2.23.0 (2025-07-08)
+
+#### Features
+
+* Update minimum Ruby version to 3.1 ([#30587](https://github.com/googleapis/google-cloud-ruby/issues/30587)) 
+#### Bug Fixes
+
+* Update google-cloud-pubsub-v1 dependency ([#30591](https://github.com/googleapis/google-cloud-ruby/issues/30591)) 
+
 ### 2.22.0 (2025-03-27)
 
 #### Features

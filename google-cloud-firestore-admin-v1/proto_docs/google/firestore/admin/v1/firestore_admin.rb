@@ -669,9 +669,24 @@ module Google
           #     If this field is not specified, the restored database will use
           #     the same encryption configuration as the backup, namely
           #     {::Google::Cloud::Firestore::Admin::V1::Database::EncryptionConfig#use_source_encryption use_source_encryption}.
+          # @!attribute [rw] tags
+          #   @return [::Google::Protobuf::Map{::String => ::String}]
+          #     Optional. Immutable. Tags to be bound to the restored database.
+          #
+          #     The tags should be provided in the format of
+          #     `tagKeys/{tag_key_id} -> tagValues/{tag_value_id}`.
           class RestoreDatabaseRequest
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
+
+            # @!attribute [rw] key
+            #   @return [::String]
+            # @!attribute [rw] value
+            #   @return [::String]
+            class TagsEntry
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
           end
         end
       end

@@ -76,9 +76,28 @@ module Google
         #   @return [::String]
         #     Optional. External CRM ID for the customer.
         #     Populated only if a CRM ID exists for this customer.
+        # @!attribute [rw] customer_attestation_state
+        #   @return [::Google::Cloud::Channel::V1::Customer::CustomerAttestationState]
+        #     Optional. Indicate whether a customer is attesting about the correctness of
+        #     provided information. Only required if creating a GCP Entitlement.
         class Customer
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # The enum represents whether a customer belongs to public sector
+          module CustomerAttestationState
+            # Default value if not set yet
+            CUSTOMER_ATTESTATION_STATE_UNSPECIFIED = 0
+
+            # Customer is exempt from attesting based on exemption list at
+            # https://cloud.google.com/terms/direct-tos-exemptions. Contact information
+            # of customer will be mandatory.
+            EXEMPT = 1
+
+            # Customer is not exempt and has verified the information provided is
+            # correct. Contact information of customer will be mandatory.
+            NON_EXEMPT_AND_INFO_VERIFIED = 2
+          end
         end
 
         # Contact information for a customer account.

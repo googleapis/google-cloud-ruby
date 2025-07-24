@@ -26,7 +26,8 @@ module Google
           #  processed product that you see in Merchant Center, in Shopping ads, or
           #  across Google surfaces. Product inputs, rules and supplemental data source
           #  data are combined to create the processed
-          #  {::Google::Shopping::Merchant::Products::V1beta::Product Product}.
+          #  {::Google::Shopping::Merchant::Products::V1beta::Product Product}. For more
+          #  information, see [Manage products](/merchant/api/guides/products/overview).
           #
           #  Required product input attributes to pass data validation checks are
           #  primarily defined in the [Products Data
@@ -41,21 +42,24 @@ module Google
           #  minutes before the processed product can be retrieved.
           #
           #  All fields in the product input and its sub-messages match the English name
-          #  of their corresponding attribute in the vertical spec with [some
-          #  exceptions](https://support.google.com/merchants/answer/7052112).
+          #  of their corresponding attribute in the [Products Data
+          #  Specification](https://support.google.com/merchants/answer/188494) with
+          #  [some exceptions](https://support.google.com/merchants/answer/7052112).
+          #  The following reference documentation lists the field names in the
+          #  **camelCase** casing style while the Products Data Specification lists the
+          #  names in the **snake_case** casing style.
           # @!attribute [rw] name
           #   @return [::String]
           #     Identifier. The name of the product input.
-          #     Format: accounts/\\{account}/productInputs/\\{productinput}
+          #     Format: `accounts/{account}/productInputs/{productinput}`
           #     where the last section `productinput` consists of 4 parts:
-          #     channel~content_language~feed_label~offer_id
+          #     `channel~content_language~feed_label~offer_id`
           #     example for product input name is
-          #     "accounts/123/productInputs/online~en~US~sku123"
+          #     `accounts/123/productInputs/online~en~US~sku123`
           # @!attribute [r] product
           #   @return [::String]
           #     Output only. The name of the processed product.
-          #     Format:
-          #     `"{product.name=accounts/{account}/products/{product}}"`
+          #     Format: `accounts/{account}/products/{product}`
           # @!attribute [rw] channel
           #   @return [::Google::Shopping::Type::Channel::ChannelEnum]
           #     Immutable. The
@@ -76,14 +80,16 @@ module Google
           #     product.
           # @!attribute [rw] feed_label
           #   @return [::String]
-          #     Required. Immutable. The [feed
-          #     label](https://developers.google.com/shopping-content/guides/products/feed-labels)
-          #     for the product.
+          #     Required. Immutable. The label that lets you categorize and identify your
+          #     products. The maximum allowed characters are 20, and the supported
+          #     characters are `A-Z`, `0-9`, hyphen, and underscore. The feed label must
+          #     not include any spaces. For more information, see [Using feed
+          #     labels](//support.google.com/merchants/answer/14994087).
           # @!attribute [rw] version_number
           #   @return [::Integer]
-          #     Optional. Represents the existing version (freshness) of the product, which
-          #     can be used to preserve the right order when multiple updates are done at
-          #     the same time.
+          #     Optional. Immutable. Represents the existing version (freshness) of the
+          #     product, which can be used to preserve the right order when multiple
+          #     updates are done at the same time.
           #
           #     If set, the insertion is prevented when version number is lower than
           #     the current version number of the existing product. Re-insertion (for
@@ -91,6 +97,8 @@ module Google
           #     `version_number`.
           #
           #     Only supported for insertions into primary data sources.
+          #     Do not set this field for updates.
+          #     Do not set this field for insertions into supplemental data sources.
           #
           #     If the operation is prevented, the aborted exception will be
           #     thrown.
@@ -104,7 +112,7 @@ module Google
           #     form (for example,
           #     `{ "name": "size type", "value": "regular" }`).
           #     This is useful for submitting attributes not explicitly exposed by the
-          #     API, such as additional attributes used for Buy on Google.
+          #     API.
           #     Maximum allowed number of characters for each
           #     custom attribute is 10240 (represents sum of characters for name and
           #     value). Maximum 2500 custom attributes can be set per product, with total
@@ -119,7 +127,7 @@ module Google
           # @!attribute [rw] parent
           #   @return [::String]
           #     Required. The account where this product will be inserted.
-          #     Format: accounts/\\{account}
+          #     Format: `accounts/{account}`
           # @!attribute [rw] product_input
           #   @return [::Google::Shopping::Merchant::Products::V1beta::ProductInput]
           #     Required. The product input to insert.
@@ -127,11 +135,14 @@ module Google
           #   @return [::String]
           #     Required. The primary or supplemental product data source name. If the
           #     product already exists and data source provided is different, then the
-          #     product will be moved to a new data source.
+          #     product will be moved to a new data source. For more information, see
+          #     [Overview of Data sources
+          #     sub-API](/merchant/api/guides/data-sources/overview).
           #
           #     Only API data sources are supported.
           #
-          #     Format: `accounts/{account}/dataSources/{datasource}`.
+          #     Format: `accounts/{account}/dataSources/{datasource}`. For example,
+          #     `accounts/123456/dataSources/104628`.
           class InsertProductInputRequest
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -169,7 +180,8 @@ module Google
           #
           #     Only API data sources are supported.
           #
-          #     Format: `accounts/{account}/dataSources/{datasource}`.
+          #     Format: `accounts/{account}/dataSources/{datasource}`. For example,
+          #     `accounts/123456/dataSources/104628`.
           class UpdateProductInputRequest
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -179,16 +191,17 @@ module Google
           # @!attribute [rw] name
           #   @return [::String]
           #     Required. The name of the product input resource to delete.
-          #     Format: accounts/\\{account}/productInputs/\\{product}
+          #     Format: `accounts/{account}/productInputs/{product}`
           #     where the last section `product` consists of 4 parts:
-          #     channel~content_language~feed_label~offer_id
+          #     `channel~content_language~feed_label~offer_id`
           #     example for product name is
-          #     "accounts/123/productInputs/online~en~US~sku123"
+          #     `accounts/123/productInputs/online~en~US~sku123`.
           # @!attribute [rw] data_source
           #   @return [::String]
           #     Required. The primary or supplemental data source from which the product
           #     input should be deleted. Format:
-          #     `accounts/{account}/dataSources/{datasource}`.
+          #     `accounts/{account}/dataSources/{datasource}`. For example,
+          #     `accounts/123456/dataSources/104628`.
           class DeleteProductInputRequest
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods

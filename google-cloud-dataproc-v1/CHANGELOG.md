@@ -1,5 +1,18 @@
 # Release History
 
+### 1.6.0 (2025-07-15)
+
+#### Features
+
+* Support for creating premium clusters ([#30583](https://github.com/googleapis/google-cloud-ruby/issues/30583)) 
+
+### 1.5.0 (2025-06-16)
+
+#### Features
+
+* add scenarios AUTO/NONE to autotuning config 
+* Added support for DELTA, ICEBERG, PIG components ([#30496](https://github.com/googleapis/google-cloud-ruby/issues/30496)) 
+
 ### 1.4.0 (2025-05-12)
 
 #### Features

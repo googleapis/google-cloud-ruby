@@ -132,8 +132,9 @@ module Google
         end
 
         # A runtime is a virtual machine allocated to a particular user for a
-        # particular Notebook file on temporary basis with lifetime limited to 24
-        # hours.
+        # particular Notebook file on temporary basis with lifetime. Default runtimes
+        # have a lifetime of 18 hours, while custom runtimes last for 6 months from
+        # their creation or last upgrade.
         # @!attribute [r] name
         #   @return [::String]
         #     Output only. The resource name of the NotebookRuntime.
@@ -285,7 +286,8 @@ module Google
             # NotebookRuntime is in running state.
             RUNNING = 1
 
-            # NotebookRuntime is in starting state.
+            # NotebookRuntime is in starting state. This is when the runtime is being
+            # started from a stopped state.
             BEING_STARTED = 2
 
             # NotebookRuntime is in stopping state.

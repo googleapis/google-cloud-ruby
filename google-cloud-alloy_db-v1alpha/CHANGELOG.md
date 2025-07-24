@@ -1,5 +1,25 @@
 # Changelog
 
+### 0.14.1 (2025-07-15)
+
+#### Documentation
+
+* clarify documentation for cases when multiple parameters are mutually exclusive for an RPC method ([#30623](https://github.com/googleapis/google-cloud-ruby/issues/30623)) 
+
+### 0.14.0 (2025-06-23)
+
+#### Features
+
+* Backup.create_completion_time output field 
+* Cluster.DenyMaintenancePeriod field 
+* Instance.ActivationPolicy field ([#30507](https://github.com/googleapis/google-cloud-ruby/issues/30507)) 
+* InstanceNetworkConfig.allocated_ip_range_override field 
+* InstanceNetworkConfig.network output field 
+#### Documentation
+
+* A comment for field `earliest_restorable_time` 
+* A comment for field `status` in message `PscAutoConnectionConfig` 
+
 ### 0.13.0 (2025-05-16)
 
 #### Features

@@ -18,7 +18,7 @@ def listen_for_messages_with_error_handler subscription_id:
   # [START pubsub_subscriber_error_listener]
   # subscription_id = "your-subscription-id"
 
-  pubsub = Google::Cloud::Pubsub.new
+  pubsub = Google::Cloud::PubSub.new
 
   subscription = pubsub.subscription subscription_id
   subscriber   = subscription.listen do |received_message|

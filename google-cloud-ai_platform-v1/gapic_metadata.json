@@ -1165,6 +1165,11 @@
               "methods": [
                 "get_publisher_model"
               ]
+            },
+            "Deploy": {
+              "methods": [
+                "deploy"
+              ]
             }
           }
         }
@@ -1814,6 +1819,16 @@
             "DeleteRagFile": {
               "methods": [
                 "delete_rag_file"
+              ]
+            },
+            "UpdateRagEngineConfig": {
+              "methods": [
+                "update_rag_engine_config"
+              ]
+            },
+            "GetRagEngineConfig": {
+              "methods": [
+                "get_rag_engine_config"
               ]
             }
           }

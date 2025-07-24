@@ -409,19 +409,19 @@ module Google
                 #     be found here:
                 #     https://github.com/cloudevents/spec/blob/v1.0.2/cloudevents/formats/protobuf-format.md
                 #
-                #     Note: The following fields are mutually exclusive: `proto_message`, `json_message`, `avro_message`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+                #     Note: The following parameters are mutually exclusive: `proto_message`, `json_message`, `avro_message`. At most one of these parameters can be set. If more than one is set, only one will be used, and it is not defined which one.
                 #   @param json_message [::String]
                 #     The JSON format of the CloudEvent being published. Specification can be
                 #     found here:
                 #     https://github.com/cloudevents/spec/blob/v1.0.2/cloudevents/formats/json-format.md
                 #
-                #     Note: The following fields are mutually exclusive: `json_message`, `proto_message`, `avro_message`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+                #     Note: The following parameters are mutually exclusive: `json_message`, `proto_message`, `avro_message`. At most one of these parameters can be set. If more than one is set, only one will be used, and it is not defined which one.
                 #   @param avro_message [::String]
                 #     The Avro format of the CloudEvent being published. Specification can
                 #     be found here:
                 #     https://github.com/cloudevents/spec/blob/v1.0.2/cloudevents/formats/avro-format.md
                 #
-                #     Note: The following fields are mutually exclusive: `avro_message`, `proto_message`, `json_message`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+                #     Note: The following parameters are mutually exclusive: `avro_message`, `proto_message`, `json_message`. At most one of these parameters can be set. If more than one is set, only one will be used, and it is not defined which one.
                 # @yield [result, operation] Access the result along with the TransportOperation object
                 # @yieldparam result [::Google::Cloud::Eventarc::Publishing::V1::PublishResponse]
                 # @yieldparam operation [::Gapic::Rest::TransportOperation]

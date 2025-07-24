@@ -1,5 +1,11 @@
 # Changelog
 
+### 2.5.0 (2025-07-15)
+
+#### Features
+
+* Support for semantic search ([#30602](https://github.com/googleapis/google-cloud-ruby/issues/30602)) 
+
 ### 2.4.1 (2025-05-16)
 
 #### Documentation

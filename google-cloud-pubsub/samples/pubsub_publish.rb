@@ -18,15 +18,16 @@ def publish_message_async topic_id:
   # [START pubsub_publish]
   # topic_id = "your-topic-id"
 
-  pubsub = Google::Cloud::Pubsub.new
+  pubsub = Google::Cloud::PubSub.new
 
-  topic = pubsub.topic topic_id
-  topic.publish_async "This is a test message." do |result|
+  publisher = pubsub.publisher topic_id
+
+  publisher.publish_async "This is a test message." do |result|
     raise "Failed to publish the message." unless result.succeeded?
     puts "Message published asynchronously."
   end
 
   # Stop the async_publisher to send all queued messages immediately.
-  topic.async_publisher.stop.wait!
+  publisher.async_publisher.stop.wait!
   # [END pubsub_publish]
 end

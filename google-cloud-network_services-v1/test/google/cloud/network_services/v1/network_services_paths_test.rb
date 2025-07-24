@@ -41,6 +41,18 @@ class ::Google::Cloud::NetworkServices::V1::NetworkServices::ClientPathsTest < M
     end
   end
 
+  def test_address_path
+    grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
+      client = ::Google::Cloud::NetworkServices::V1::NetworkServices::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      path = client.address_path project: "value0", region: "value1", address: "value2"
+      assert_equal "projects/value0/regions/value1/addresses/value2", path
+    end
+  end
+
   def test_authorization_policy_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
     ::Gapic::ServiceStub.stub :new, DummyStub.new do
@@ -62,6 +74,18 @@ class ::Google::Cloud::NetworkServices::V1::NetworkServices::ClientPathsTest < M
 
       path = client.backend_service_path project: "value0", location: "value1", backend_service: "value2"
       assert_equal "projects/value0/locations/value1/backendServices/value2", path
+    end
+  end
+
+  def test_certificate_path
+    grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
+      client = ::Google::Cloud::NetworkServices::V1::NetworkServices::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      path = client.certificate_path project: "value0", location: "value1", certificate: "value2"
+      assert_equal "projects/value0/locations/value1/certificates/value2", path
     end
   end
 
@@ -98,6 +122,30 @@ class ::Google::Cloud::NetworkServices::V1::NetworkServices::ClientPathsTest < M
 
       path = client.gateway_path project: "value0", location: "value1", gateway: "value2"
       assert_equal "projects/value0/locations/value1/gateways/value2", path
+    end
+  end
+
+  def test_gateway_route_view_path
+    grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
+      client = ::Google::Cloud::NetworkServices::V1::NetworkServices::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      path = client.gateway_route_view_path project: "value0", location: "value1", gateway: "value2", route_view: "value3"
+      assert_equal "projects/value0/locations/value1/gateways/value2/routeViews/value3", path
+    end
+  end
+
+  def test_gateway_security_policy_path
+    grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
+      client = ::Google::Cloud::NetworkServices::V1::NetworkServices::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      path = client.gateway_security_policy_path project: "value0", location: "value1", gateway_security_policy: "value2"
+      assert_equal "projects/value0/locations/value1/gatewaySecurityPolicies/value2", path
     end
   end
 
@@ -149,6 +197,30 @@ class ::Google::Cloud::NetworkServices::V1::NetworkServices::ClientPathsTest < M
     end
   end
 
+  def test_mesh_route_view_path
+    grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
+      client = ::Google::Cloud::NetworkServices::V1::NetworkServices::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      path = client.mesh_route_view_path project: "value0", location: "value1", mesh: "value2", route_view: "value3"
+      assert_equal "projects/value0/locations/value1/meshes/value2/routeViews/value3", path
+    end
+  end
+
+  def test_network_path
+    grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
+      client = ::Google::Cloud::NetworkServices::V1::NetworkServices::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      path = client.network_path project: "value0", network: "value1"
+      assert_equal "projects/value0/global/networks/value1", path
+    end
+  end
+
   def test_server_tls_policy_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
     ::Gapic::ServiceStub.stub :new, DummyStub.new do
@@ -161,6 +233,18 @@ class ::Google::Cloud::NetworkServices::V1::NetworkServices::ClientPathsTest < M
     end
   end
 
+  def test_service_path
+    grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
+      client = ::Google::Cloud::NetworkServices::V1::NetworkServices::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      path = client.service_path project: "value0", location: "value1", namespace: "value2", service: "value3"
+      assert_equal "projects/value0/locations/value1/namespaces/value2/services/value3", path
+    end
+  end
+
   def test_service_binding_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
     ::Gapic::ServiceStub.stub :new, DummyStub.new do
@@ -170,6 +254,30 @@ class ::Google::Cloud::NetworkServices::V1::NetworkServices::ClientPathsTest < M
 
       path = client.service_binding_path project: "value0", location: "value1", service_binding: "value2"
       assert_equal "projects/value0/locations/value1/serviceBindings/value2", path
+    end
+  end
+
+  def test_service_lb_policy_path
+    grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
+      client = ::Google::Cloud::NetworkServices::V1::NetworkServices::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      path = client.service_lb_policy_path project: "value0", location: "value1", service_lb_policy: "value2"
+      assert_equal "projects/value0/locations/value1/serviceLbPolicies/value2", path
+    end
+  end
+
+  def test_subnetwork_path
+    grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
+      client = ::Google::Cloud::NetworkServices::V1::NetworkServices::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      path = client.subnetwork_path project: "value0", region: "value1", subnetwork: "value2"
+      assert_equal "projects/value0/regions/value1/subnetworks/value2", path
     end
   end
 
@@ -194,6 +302,30 @@ class ::Google::Cloud::NetworkServices::V1::NetworkServices::ClientPathsTest < M
 
       path = client.tls_route_path project: "value0", location: "value1", tls_route: "value2"
       assert_equal "projects/value0/locations/value1/tlsRoutes/value2", path
+    end
+  end
+
+  def test_wasm_plugin_path
+    grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
+      client = ::Google::Cloud::NetworkServices::V1::NetworkServices::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      path = client.wasm_plugin_path project: "value0", location: "value1", wasm_plugin: "value2"
+      assert_equal "projects/value0/locations/value1/wasmPlugins/value2", path
+    end
+  end
+
+  def test_wasm_plugin_version_path
+    grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
+      client = ::Google::Cloud::NetworkServices::V1::NetworkServices::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      path = client.wasm_plugin_version_path project: "value0", location: "value1", wasm_plugin: "value2", wasm_plugin_version: "value3"
+      assert_equal "projects/value0/locations/value1/wasmPlugins/value2/versions/value3", path
     end
   end
 end

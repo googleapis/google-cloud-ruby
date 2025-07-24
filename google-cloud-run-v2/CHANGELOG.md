@@ -1,5 +1,18 @@
 # Changelog
 
+### 0.25.0 (2025-07-17)
+
+#### Features
+
+* Support for disabling GPU zonal redundancy 
+* Task attempt results include the container termination signal 
+
+### 0.24.1 (2025-07-15)
+
+#### Documentation
+
+* Clarify documentation for cases when multiple parameters are mutually exclusive for an RPC method ([#30624](https://github.com/googleapis/google-cloud-ruby/issues/30624)) 
+
 ### 0.24.0 (2025-05-16)
 
 #### Features
