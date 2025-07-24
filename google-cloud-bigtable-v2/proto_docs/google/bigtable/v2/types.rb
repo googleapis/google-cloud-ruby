@@ -49,62 +49,72 @@ module Google
         #   @return [::Google::Cloud::Bigtable::V2::Type::Bytes]
         #     Bytes
         #
-        #     Note: The following fields are mutually exclusive: `bytes_type`, `string_type`, `int64_type`, `float32_type`, `float64_type`, `bool_type`, `timestamp_type`, `date_type`, `aggregate_type`, `struct_type`, `array_type`, `map_type`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `bytes_type`, `string_type`, `int64_type`, `float32_type`, `float64_type`, `bool_type`, `timestamp_type`, `date_type`, `aggregate_type`, `struct_type`, `array_type`, `map_type`, `proto_type`, `enum_type`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] string_type
         #   @return [::Google::Cloud::Bigtable::V2::Type::String]
         #     String
         #
-        #     Note: The following fields are mutually exclusive: `string_type`, `bytes_type`, `int64_type`, `float32_type`, `float64_type`, `bool_type`, `timestamp_type`, `date_type`, `aggregate_type`, `struct_type`, `array_type`, `map_type`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `string_type`, `bytes_type`, `int64_type`, `float32_type`, `float64_type`, `bool_type`, `timestamp_type`, `date_type`, `aggregate_type`, `struct_type`, `array_type`, `map_type`, `proto_type`, `enum_type`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] int64_type
         #   @return [::Google::Cloud::Bigtable::V2::Type::Int64]
         #     Int64
         #
-        #     Note: The following fields are mutually exclusive: `int64_type`, `bytes_type`, `string_type`, `float32_type`, `float64_type`, `bool_type`, `timestamp_type`, `date_type`, `aggregate_type`, `struct_type`, `array_type`, `map_type`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `int64_type`, `bytes_type`, `string_type`, `float32_type`, `float64_type`, `bool_type`, `timestamp_type`, `date_type`, `aggregate_type`, `struct_type`, `array_type`, `map_type`, `proto_type`, `enum_type`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] float32_type
         #   @return [::Google::Cloud::Bigtable::V2::Type::Float32]
         #     Float32
         #
-        #     Note: The following fields are mutually exclusive: `float32_type`, `bytes_type`, `string_type`, `int64_type`, `float64_type`, `bool_type`, `timestamp_type`, `date_type`, `aggregate_type`, `struct_type`, `array_type`, `map_type`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `float32_type`, `bytes_type`, `string_type`, `int64_type`, `float64_type`, `bool_type`, `timestamp_type`, `date_type`, `aggregate_type`, `struct_type`, `array_type`, `map_type`, `proto_type`, `enum_type`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] float64_type
         #   @return [::Google::Cloud::Bigtable::V2::Type::Float64]
         #     Float64
         #
-        #     Note: The following fields are mutually exclusive: `float64_type`, `bytes_type`, `string_type`, `int64_type`, `float32_type`, `bool_type`, `timestamp_type`, `date_type`, `aggregate_type`, `struct_type`, `array_type`, `map_type`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `float64_type`, `bytes_type`, `string_type`, `int64_type`, `float32_type`, `bool_type`, `timestamp_type`, `date_type`, `aggregate_type`, `struct_type`, `array_type`, `map_type`, `proto_type`, `enum_type`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] bool_type
         #   @return [::Google::Cloud::Bigtable::V2::Type::Bool]
         #     Bool
         #
-        #     Note: The following fields are mutually exclusive: `bool_type`, `bytes_type`, `string_type`, `int64_type`, `float32_type`, `float64_type`, `timestamp_type`, `date_type`, `aggregate_type`, `struct_type`, `array_type`, `map_type`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `bool_type`, `bytes_type`, `string_type`, `int64_type`, `float32_type`, `float64_type`, `timestamp_type`, `date_type`, `aggregate_type`, `struct_type`, `array_type`, `map_type`, `proto_type`, `enum_type`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] timestamp_type
         #   @return [::Google::Cloud::Bigtable::V2::Type::Timestamp]
         #     Timestamp
         #
-        #     Note: The following fields are mutually exclusive: `timestamp_type`, `bytes_type`, `string_type`, `int64_type`, `float32_type`, `float64_type`, `bool_type`, `date_type`, `aggregate_type`, `struct_type`, `array_type`, `map_type`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `timestamp_type`, `bytes_type`, `string_type`, `int64_type`, `float32_type`, `float64_type`, `bool_type`, `date_type`, `aggregate_type`, `struct_type`, `array_type`, `map_type`, `proto_type`, `enum_type`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] date_type
         #   @return [::Google::Cloud::Bigtable::V2::Type::Date]
         #     Date
         #
-        #     Note: The following fields are mutually exclusive: `date_type`, `bytes_type`, `string_type`, `int64_type`, `float32_type`, `float64_type`, `bool_type`, `timestamp_type`, `aggregate_type`, `struct_type`, `array_type`, `map_type`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `date_type`, `bytes_type`, `string_type`, `int64_type`, `float32_type`, `float64_type`, `bool_type`, `timestamp_type`, `aggregate_type`, `struct_type`, `array_type`, `map_type`, `proto_type`, `enum_type`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] aggregate_type
         #   @return [::Google::Cloud::Bigtable::V2::Type::Aggregate]
         #     Aggregate
         #
-        #     Note: The following fields are mutually exclusive: `aggregate_type`, `bytes_type`, `string_type`, `int64_type`, `float32_type`, `float64_type`, `bool_type`, `timestamp_type`, `date_type`, `struct_type`, `array_type`, `map_type`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `aggregate_type`, `bytes_type`, `string_type`, `int64_type`, `float32_type`, `float64_type`, `bool_type`, `timestamp_type`, `date_type`, `struct_type`, `array_type`, `map_type`, `proto_type`, `enum_type`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] struct_type
         #   @return [::Google::Cloud::Bigtable::V2::Type::Struct]
         #     Struct
         #
-        #     Note: The following fields are mutually exclusive: `struct_type`, `bytes_type`, `string_type`, `int64_type`, `float32_type`, `float64_type`, `bool_type`, `timestamp_type`, `date_type`, `aggregate_type`, `array_type`, `map_type`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `struct_type`, `bytes_type`, `string_type`, `int64_type`, `float32_type`, `float64_type`, `bool_type`, `timestamp_type`, `date_type`, `aggregate_type`, `array_type`, `map_type`, `proto_type`, `enum_type`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] array_type
         #   @return [::Google::Cloud::Bigtable::V2::Type::Array]
         #     Array
         #
-        #     Note: The following fields are mutually exclusive: `array_type`, `bytes_type`, `string_type`, `int64_type`, `float32_type`, `float64_type`, `bool_type`, `timestamp_type`, `date_type`, `aggregate_type`, `struct_type`, `map_type`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `array_type`, `bytes_type`, `string_type`, `int64_type`, `float32_type`, `float64_type`, `bool_type`, `timestamp_type`, `date_type`, `aggregate_type`, `struct_type`, `map_type`, `proto_type`, `enum_type`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] map_type
         #   @return [::Google::Cloud::Bigtable::V2::Type::Map]
         #     Map
         #
-        #     Note: The following fields are mutually exclusive: `map_type`, `bytes_type`, `string_type`, `int64_type`, `float32_type`, `float64_type`, `bool_type`, `timestamp_type`, `date_type`, `aggregate_type`, `struct_type`, `array_type`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `map_type`, `bytes_type`, `string_type`, `int64_type`, `float32_type`, `float64_type`, `bool_type`, `timestamp_type`, `date_type`, `aggregate_type`, `struct_type`, `array_type`, `proto_type`, `enum_type`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] proto_type
+        #   @return [::Google::Cloud::Bigtable::V2::Type::Proto]
+        #     Proto
+        #
+        #     Note: The following fields are mutually exclusive: `proto_type`, `bytes_type`, `string_type`, `int64_type`, `float32_type`, `float64_type`, `bool_type`, `timestamp_type`, `date_type`, `aggregate_type`, `struct_type`, `array_type`, `map_type`, `enum_type`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] enum_type
+        #   @return [::Google::Cloud::Bigtable::V2::Type::Enum]
+        #     Enum
+        #
+        #     Note: The following fields are mutually exclusive: `enum_type`, `bytes_type`, `string_type`, `int64_type`, `float32_type`, `float64_type`, `bool_type`, `timestamp_type`, `date_type`, `aggregate_type`, `struct_type`, `array_type`, `map_type`, `proto_type`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         class Type
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -276,6 +286,34 @@ module Google
               include ::Google::Protobuf::MessageExts
               extend ::Google::Protobuf::MessageExts::ClassMethods
             end
+          end
+
+          # A protobuf message type.
+          # Values of type `Proto` are stored in `Value.bytes_value`.
+          # @!attribute [rw] schema_bundle_id
+          #   @return [::String]
+          #     The ID of the schema bundle that this proto is defined in.
+          # @!attribute [rw] message_name
+          #   @return [::String]
+          #     The fully qualified name of the protobuf message, including package. In
+          #     the format of "foo.bar.Message".
+          class Proto
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # A protobuf enum type.
+          # Values of type `Enum` are stored in `Value.int_value`.
+          # @!attribute [rw] schema_bundle_id
+          #   @return [::String]
+          #     The ID of the schema bundle that this enum is defined in.
+          # @!attribute [rw] enum_name
+          #   @return [::String]
+          #     The fully qualified name of the protobuf enum message, including package.
+          #     In the format of "foo.bar.EnumMessage".
+          class Enum
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
           end
 
           # An ordered list of elements of a given type.
