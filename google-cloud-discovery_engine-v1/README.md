@@ -31,9 +31,9 @@ In order to use this library, you first need to go through the following steps:
 ```ruby
 require "google/cloud/discovery_engine/v1"
 
-client = ::Google::Cloud::DiscoveryEngine::V1::CmekConfigService::Client.new
-request = ::Google::Cloud::DiscoveryEngine::V1::UpdateCmekConfigRequest.new # (request fields as keyword arguments...)
-response = client.update_cmek_config request
+client = ::Google::Cloud::DiscoveryEngine::V1::SearchService::Client.new
+request = ::Google::Cloud::DiscoveryEngine::V1::SearchRequest.new # (request fields as keyword arguments...)
+response = client.search request
 ```
 
 View the [Client Library Documentation](https://cloud.google.com/ruby/docs/reference/google-cloud-discovery_engine-v1/latest)
@@ -74,7 +74,7 @@ constructing a client object. For example:
 require "google/cloud/discovery_engine/v1"
 require "logger"
 
-client = ::Google::Cloud::DiscoveryEngine::V1::CmekConfigService::Client.new do |config|
+client = ::Google::Cloud::DiscoveryEngine::V1::SearchService::Client.new do |config|
   config.logger = Logger.new "my-app.log"
 end
 ```
