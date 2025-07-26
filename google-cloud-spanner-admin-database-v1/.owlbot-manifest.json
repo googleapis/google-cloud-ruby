@@ -66,6 +66,7 @@
     "snippets/database_admin/get_database.rb",
     "snippets/database_admin/get_database_ddl.rb",
     "snippets/database_admin/get_iam_policy.rb",
+    "snippets/database_admin/internal_update_graph_operation.rb",
     "snippets/database_admin/list_backup_operations.rb",
     "snippets/database_admin/list_backup_schedules.rb",
     "snippets/database_admin/list_backups.rb",
