@@ -59,7 +59,8 @@ module Google
         #   @return [::String]
         #     Required. The resource type to which the `BackupPlan` will be applied.
         #     Examples include, "compute.googleapis.com/Instance",
-        #     "sqladmin.googleapis.com/Instance", or "alloydb.googleapis.com/Cluster".
+        #     "sqladmin.googleapis.com/Instance", "alloydb.googleapis.com/Cluster",
+        #     "compute.googleapis.com/Disk".
         # @!attribute [rw] etag
         #   @return [::String]
         #     Optional. `etag` is returned from the service in the response. As a user of
@@ -75,6 +76,27 @@ module Google
         #     Output only. The Google Cloud Platform Service Account to be used by the
         #     BackupVault for taking backups. Specify the email address of the Backup
         #     Vault Service Account.
+        # @!attribute [rw] log_retention_days
+        #   @return [::Integer]
+        #     Optional. Applicable only for CloudSQL resource_type.
+        #
+        #     Configures how long logs will be stored. It is defined in “days”. This
+        #     value should be greater than or equal to minimum enforced log retention
+        #     duration of the backup vault.
+        # @!attribute [r] supported_resource_types
+        #   @return [::Array<::String>]
+        #     Output only. All resource types to which backupPlan can be applied.
+        # @!attribute [r] revision_id
+        #   @return [::String]
+        #     Output only. The user friendly revision ID of the `BackupPlanRevision`.
+        #
+        #     Example: v0, v1, v2, etc.
+        # @!attribute [r] revision_name
+        #   @return [::String]
+        #     Output only. The resource id of the `BackupPlanRevision`.
+        #
+        #     Format:
+        #     `projects/{project}/locations/{location}/backupPlans/{backup_plan}/revisions/{revision_id}`
         class BackupPlan
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -104,6 +126,9 @@ module Google
 
             # The resource has been created but is not usable.
             INACTIVE = 4
+
+            # The resource is being updated.
+            UPDATING = 5
           end
         end
 
@@ -120,14 +145,12 @@ module Google
         #     defined in “days”. The value should be greater than or equal to minimum
         #     enforced retention of the backup vault.
         #
-        #     Minimum value is 1 and maximum value is 90 for hourly backups.
-        #     Minimum value is 1 and maximum value is 90 for daily backups.
-        #     Minimum value is 7 and maximum value is 186 for weekly backups.
-        #     Minimum value is 30 and maximum value is 732 for monthly backups.
-        #     Minimum value is 365 and maximum value is 36159 for yearly backups.
+        #     Minimum value is 1 and maximum value is 36159 for custom retention
+        #     on-demand backup.
+        #     Minimum and maximum values are workload specific for all other rules.
         # @!attribute [rw] standard_schedule
         #   @return [::Google::Cloud::BackupDR::V1::StandardSchedule]
-        #     Required. Defines a schedule that runs within the confines of a defined
+        #     Optional. Defines a schedule that runs within the confines of a defined
         #     window of time.
         class BackupRule
           include ::Google::Protobuf::MessageExts
@@ -149,7 +172,7 @@ module Google
         #     otherwise. A validation error will occur if a value is supplied and
         #     `recurrence_type` is not `HOURLY`.
         #
-        #     Value of hourly frequency should be between 6 and 23.
+        #     Value of hourly frequency should be between 4 and 23.
         #
         #     Reason for limit : We found that there is bandwidth limitation of 3GB/S for
         #     GMI while taking a backup and 5GB/S while doing a restore. Given the amount
@@ -411,6 +434,151 @@ module Google
         #     The request ID must be a valid UUID with the exception that zero UUID is
         #     not supported (00000000-0000-0000-0000-000000000000).
         class DeleteBackupPlanRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for updating a backup plan.
+        # @!attribute [rw] backup_plan
+        #   @return [::Google::Cloud::BackupDR::V1::BackupPlan]
+        #     Required. The resource being updated
+        # @!attribute [rw] update_mask
+        #   @return [::Google::Protobuf::FieldMask]
+        #     Required. The list of fields to update.
+        #     Field mask is used to specify the fields to be overwritten in the
+        #     BackupPlan resource by the update.
+        #     The fields specified in the update_mask are relative to the resource, not
+        #     the full request. A field will be overwritten if it is in the mask. If the
+        #     user does not provide a mask then the request will fail.
+        #     Currently, these fields are supported in update: description, schedules,
+        #     retention period, adding and removing Backup Rules.
+        # @!attribute [rw] request_id
+        #   @return [::String]
+        #     Optional. An optional request ID to identify requests. Specify a unique
+        #     request ID so that if you must retry your request, the server will know to
+        #     ignore the request if it has already been completed. The server will
+        #     guarantee that for at least 60 minutes since the first request.
+        #
+        #     For example, consider a situation where you make an initial request and t
+        #     he request times out. If you make the request again with the same request
+        #     ID, the server can check if original operation with the same request ID
+        #     was received, and if so, will ignore the second request. This prevents
+        #     clients from accidentally creating duplicate commitments.
+        #
+        #     The request ID must be a valid UUID with the exception that zero UUID is
+        #     not supported (00000000-0000-0000-0000-000000000000).
+        class UpdateBackupPlanRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # `BackupPlanRevision` represents a snapshot of a `BackupPlan` at a point in
+        # time.
+        # @!attribute [r] name
+        #   @return [::String]
+        #     Output only. Identifier. The resource name of the `BackupPlanRevision`.
+        #
+        #     Format:
+        #     `projects/{project}/locations/{location}/backupPlans/{backup_plan}/revisions/{revision}`
+        # @!attribute [r] revision_id
+        #   @return [::String]
+        #     Output only. The user friendly revision ID of the `BackupPlanRevision`.
+        #
+        #     Example: v0, v1, v2, etc.
+        # @!attribute [r] state
+        #   @return [::Google::Cloud::BackupDR::V1::BackupPlanRevision::State]
+        #     Output only. Resource State
+        # @!attribute [rw] backup_plan_snapshot
+        #   @return [::Google::Cloud::BackupDR::V1::BackupPlan]
+        #     The Backup Plan being encompassed by this revision.
+        # @!attribute [r] create_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Output only. The timestamp that the revision was created.
+        class BackupPlanRevision
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # The state of the `BackupPlanRevision`.
+          module State
+            # State not set.
+            STATE_UNSPECIFIED = 0
+
+            # The resource is being created.
+            CREATING = 1
+
+            # The resource has been created and is fully usable.
+            ACTIVE = 2
+
+            # The resource is being deleted.
+            DELETING = 3
+
+            # The resource has been created but is not usable.
+            INACTIVE = 4
+          end
+        end
+
+        # The request message for getting a `BackupPlanRevision`.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The resource name of the `BackupPlanRevision` to retrieve.
+        #
+        #     Format:
+        #     `projects/{project}/locations/{location}/backupPlans/{backup_plan}/revisions/{revision}`
+        class GetBackupPlanRevisionRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # The request message for getting a list of `BackupPlanRevision`.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. The project and location for which to retrieve
+        #     `BackupPlanRevisions` information. Format:
+        #     `projects/{project}/locations/{location}/backupPlans/{backup_plan}`. In
+        #     Cloud BackupDR, locations map to GCP regions, for e.g. **us-central1**.
+        # @!attribute [rw] page_size
+        #   @return [::Integer]
+        #     Optional. The maximum number of `BackupPlans` to return in a single
+        #     response. If not specified, a default value will be chosen by the service.
+        #     Note that the response may include a partial list and a caller should
+        #     only rely on the response's
+        #     {::Google::Cloud::BackupDR::V1::ListBackupPlansResponse#next_page_token next_page_token}
+        #     to determine if there are more instances left to be queried.
+        # @!attribute [rw] page_token
+        #   @return [::String]
+        #     Optional. The value of
+        #     {::Google::Cloud::BackupDR::V1::ListBackupPlansResponse#next_page_token next_page_token}
+        #     received from a previous `ListBackupPlans` call.
+        #     Provide this to retrieve the subsequent page in a multi-page list of
+        #     results. When paginating, all other parameters provided to
+        #     `ListBackupPlans` must match the call that provided the page token.
+        class ListBackupPlanRevisionsRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # The response message for getting a list of `BackupPlanRevision`.
+        # @!attribute [rw] backup_plan_revisions
+        #   @return [::Array<::Google::Cloud::BackupDR::V1::BackupPlanRevision>]
+        #     The list of `BackupPlanRevisions` in the project for the specified
+        #     location.
+        #
+        #     If the `{location}` value in the request is "-", the response contains a
+        #     list of resources from all locations. In case any location is unreachable,
+        #     the response will only return backup plans in reachable locations and
+        #     the 'unreachable' field will be populated with a list of unreachable
+        #     locations.
+        # @!attribute [rw] next_page_token
+        #   @return [::String]
+        #     A token which may be sent as
+        #     {::Google::Cloud::BackupDR::V1::ListBackupPlanRevisionsRequest#page_token page_token}
+        #     in a subsequent `ListBackupPlanRevisions` call to retrieve the next page of
+        #     results. If this field is omitted or empty, then there are no more results
+        #     to return.
+        # @!attribute [rw] unreachable
+        #   @return [::Array<::String>]
+        #     Locations that could not be reached.
+        class ListBackupPlanRevisionsResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
