@@ -22,6 +22,13 @@ module Google
     module AIPlatform
       module V1
         # ReasoningEngine configurations
+        # @!attribute [rw] service_account
+        #   @return [::String]
+        #     Optional. The service account that the Reasoning Engine artifact runs as.
+        #     It should have "roles/storage.objectViewer" for reading the user project's
+        #     Cloud Storage and "roles/aiplatform.user" for using Vertex extensions. If
+        #     not specified, the Vertex AI Reasoning Engine Service Agent in the project
+        #     will be used.
         # @!attribute [rw] package_spec
         #   @return [::Google::Cloud::AIPlatform::V1::ReasoningEngineSpec::PackageSpec]
         #     Optional. User provided package spec of the ReasoningEngine.
