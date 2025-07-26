@@ -37,23 +37,6 @@ module Google
         #
         # Access Secure Source Manager instances, resources, and repositories.
         #
-        # This API is split across two servers: the Control Plane and the Data Plane.
-        #
-        # Data Plane endpoints are hosted directly by your Secure Source Manager
-        # instance, so you must connect to your instance's API hostname to access
-        # them. The API hostname looks like the following:
-        #
-        #    https://[instance-id]-[project-number]-api.[location].sourcemanager.dev
-        #
-        # For example,
-        #
-        #    https://my-instance-702770452863-api.us-central1.sourcemanager.dev
-        #
-        # Data Plane endpoints are denoted with **Host: Data Plane**.
-        #
-        # All other endpoints are found in the normal Cloud API location, namely,
-        # `securcesourcemanager.googleapis.com`.
-        #
         # @example Load this service and instantiate a gRPC client
         #
         #     require "google/cloud/secure_source_manager/v1/secure_source_manager"
