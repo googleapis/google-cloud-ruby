@@ -1,5 +1,12 @@
 # Changelog
 
+### 2.2.0 (2025-07-25)
+
+#### Features
+
+* Support for filling content gaps 
+* Support for fmp4 container configuration 
+
 ### 2.1.0 (2025-05-12)
 
 #### Features
