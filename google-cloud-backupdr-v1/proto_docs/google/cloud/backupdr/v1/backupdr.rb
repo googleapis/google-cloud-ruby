@@ -341,6 +341,9 @@ module Google
         #
         #     The request ID must be a valid UUID with the exception that zero UUID is
         #     not supported (00000000-0000-0000-0000-000000000000).
+        # @!attribute [rw] cloud_sql_instance_initialization_config
+        #   @return [::Google::Cloud::BackupDR::V1::CloudSqlInstanceInitializationConfig]
+        #     Optional. The configuration for initializing a Cloud SQL instance.
         class InitializeServiceRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

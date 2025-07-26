@@ -86,6 +86,27 @@ module Google
             end
 
             ##
+            # Create a fully-qualified BackupPlanRevision resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `projects/{project}/locations/{location}/backupPlans/{backup_plan}/revisions/{revision}`
+            #
+            # @param project [String]
+            # @param location [String]
+            # @param backup_plan [String]
+            # @param revision [String]
+            #
+            # @return [::String]
+            def backup_plan_revision_path project:, location:, backup_plan:, revision:
+              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+              raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+              raise ::ArgumentError, "backup_plan cannot contain /" if backup_plan.to_s.include? "/"
+
+              "projects/#{project}/locations/#{location}/backupPlans/#{backup_plan}/revisions/#{revision}"
+            end
+
+            ##
             # Create a fully-qualified BackupVault resource string.
             #
             # The resource will be in the following format:
@@ -126,6 +147,42 @@ module Google
             end
 
             ##
+            # Create a fully-qualified DataSourceReference resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `projects/{project}/locations/{location}/dataSourceReferences/{data_source_reference}`
+            #
+            # @param project [String]
+            # @param location [String]
+            # @param data_source_reference [String]
+            #
+            # @return [::String]
+            def data_source_reference_path project:, location:, data_source_reference:
+              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+              raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+
+              "projects/#{project}/locations/#{location}/dataSourceReferences/#{data_source_reference}"
+            end
+
+            ##
+            # Create a fully-qualified Instance resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `projects/{project}/instances/{instance}`
+            #
+            # @param project [String]
+            # @param instance [String]
+            #
+            # @return [::String]
+            def instance_path project:, instance:
+              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+
+              "projects/#{project}/instances/#{instance}"
+            end
+
+            ##
             # Create a fully-qualified Location resource string.
             #
             # The resource will be in the following format:
@@ -159,6 +216,25 @@ module Google
               raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
 
               "projects/#{project}/locations/#{location}/managementServers/#{managementserver}"
+            end
+
+            ##
+            # Create a fully-qualified StoragePool resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `projects/{project}/zones/{zone}/storagePools/{storage_pool}`
+            #
+            # @param project [String]
+            # @param zone [String]
+            # @param storage_pool [String]
+            #
+            # @return [::String]
+            def storage_pool_path project:, zone:, storage_pool:
+              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+              raise ::ArgumentError, "zone cannot contain /" if zone.to_s.include? "/"
+
+              "projects/#{project}/zones/#{zone}/storagePools/#{storage_pool}"
             end
 
             extend self
