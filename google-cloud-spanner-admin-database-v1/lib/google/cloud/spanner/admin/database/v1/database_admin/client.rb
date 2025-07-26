@@ -3183,6 +3183,92 @@ module Google
                 end
 
                 ##
+                # This is an internal API called by Spanner Graph jobs. You should never need
+                # to call this API directly.
+                #
+                # @overload internal_update_graph_operation(request, options = nil)
+                #   Pass arguments to `internal_update_graph_operation` via a request object, either of type
+                #   {::Google::Cloud::Spanner::Admin::Database::V1::InternalUpdateGraphOperationRequest} or an equivalent Hash.
+                #
+                #   @param request [::Google::Cloud::Spanner::Admin::Database::V1::InternalUpdateGraphOperationRequest, ::Hash]
+                #     A request object representing the call parameters. Required. To specify no
+                #     parameters, or to keep all the default parameter values, pass an empty Hash.
+                #   @param options [::Gapic::CallOptions, ::Hash]
+                #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+                #
+                # @overload internal_update_graph_operation(database: nil, operation_id: nil, vm_identity_token: nil, progress: nil, status: nil)
+                #   Pass arguments to `internal_update_graph_operation` via keyword arguments. Note that at
+                #   least one keyword argument is required. To specify no parameters, or to keep all
+                #   the default parameter values, pass an empty Hash as a request object (see above).
+                #
+                #   @param database [::String]
+                #     Internal field, do not use directly.
+                #   @param operation_id [::String]
+                #     Internal field, do not use directly.
+                #   @param vm_identity_token [::String]
+                #     Internal field, do not use directly.
+                #   @param progress [::Float]
+                #     Internal field, do not use directly.
+                #   @param status [::Google::Rpc::Status, ::Hash]
+                #     Internal field, do not use directly.
+                #
+                # @yield [response, operation] Access the result along with the RPC operation
+                # @yieldparam response [::Google::Cloud::Spanner::Admin::Database::V1::InternalUpdateGraphOperationResponse]
+                # @yieldparam operation [::GRPC::ActiveCall::Operation]
+                #
+                # @return [::Google::Cloud::Spanner::Admin::Database::V1::InternalUpdateGraphOperationResponse]
+                #
+                # @raise [::Google::Cloud::Error] if the RPC is aborted.
+                #
+                # @example Basic example
+                #   require "google/cloud/spanner/admin/database/v1"
+                #
+                #   # Create a client object. The client can be reused for multiple calls.
+                #   client = Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Client.new
+                #
+                #   # Create a request. To set request fields, pass in keyword arguments.
+                #   request = Google::Cloud::Spanner::Admin::Database::V1::InternalUpdateGraphOperationRequest.new
+                #
+                #   # Call the internal_update_graph_operation method.
+                #   result = client.internal_update_graph_operation request
+                #
+                #   # The returned object is of type Google::Cloud::Spanner::Admin::Database::V1::InternalUpdateGraphOperationResponse.
+                #   p result
+                #
+                def internal_update_graph_operation request, options = nil
+                  raise ::ArgumentError, "request must be provided" if request.nil?
+
+                  request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Spanner::Admin::Database::V1::InternalUpdateGraphOperationRequest
+
+                  # Converts hash and nil to an options object
+                  options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                  # Customize the options with defaults
+                  metadata = @config.rpcs.internal_update_graph_operation.metadata.to_h
+
+                  # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                  metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                    lib_name: @config.lib_name, lib_version: @config.lib_version,
+                    gapic_version: ::Google::Cloud::Spanner::Admin::Database::V1::VERSION
+                  metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                  metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                  options.apply_defaults timeout:      @config.rpcs.internal_update_graph_operation.timeout,
+                                         metadata:     metadata,
+                                         retry_policy: @config.rpcs.internal_update_graph_operation.retry_policy
+
+                  options.apply_defaults timeout:      @config.timeout,
+                                         metadata:     @config.metadata,
+                                         retry_policy: @config.retry_policy
+
+                  @database_admin_stub.call_rpc :internal_update_graph_operation, request, options: options do |response, operation|
+                    yield response, operation if block_given?
+                  end
+                rescue ::GRPC::BadStatus => e
+                  raise ::Google::Cloud::Error.from_error(e)
+                end
+
+                ##
                 # Configuration class for the DatabaseAdmin API.
                 #
                 # This class represents the configuration for DatabaseAdmin,
@@ -3478,6 +3564,11 @@ module Google
                     # @return [::Gapic::Config::Method]
                     #
                     attr_reader :list_backup_schedules
+                    ##
+                    # RPC-specific configuration for `internal_update_graph_operation`
+                    # @return [::Gapic::Config::Method]
+                    #
+                    attr_reader :internal_update_graph_operation
 
                     # @private
                     def initialize parent_rpcs = nil
@@ -3533,6 +3624,8 @@ module Google
                       @delete_backup_schedule = ::Gapic::Config::Method.new delete_backup_schedule_config
                       list_backup_schedules_config = parent_rpcs.list_backup_schedules if parent_rpcs.respond_to? :list_backup_schedules
                       @list_backup_schedules = ::Gapic::Config::Method.new list_backup_schedules_config
+                      internal_update_graph_operation_config = parent_rpcs.internal_update_graph_operation if parent_rpcs.respond_to? :internal_update_graph_operation
+                      @internal_update_graph_operation = ::Gapic::Config::Method.new internal_update_graph_operation_config
 
                       yield self if block_given?
                     end
