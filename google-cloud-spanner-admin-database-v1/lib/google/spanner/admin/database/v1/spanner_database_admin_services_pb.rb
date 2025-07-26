@@ -230,6 +230,9 @@ module Google
                 rpc :DeleteBackupSchedule, ::Google::Cloud::Spanner::Admin::Database::V1::DeleteBackupScheduleRequest, ::Google::Protobuf::Empty
                 # Lists all the backup schedules for the database.
                 rpc :ListBackupSchedules, ::Google::Cloud::Spanner::Admin::Database::V1::ListBackupSchedulesRequest, ::Google::Cloud::Spanner::Admin::Database::V1::ListBackupSchedulesResponse
+                # This is an internal API called by Spanner Graph jobs. You should never need
+                # to call this API directly.
+                rpc :InternalUpdateGraphOperation, ::Google::Cloud::Spanner::Admin::Database::V1::InternalUpdateGraphOperationRequest, ::Google::Cloud::Spanner::Admin::Database::V1::InternalUpdateGraphOperationResponse
               end
 
               Stub = Service.rpc_stub_class

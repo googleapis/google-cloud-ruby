@@ -139,6 +139,11 @@
               "methods": [
                 "list_backup_schedules"
               ]
+            },
+            "InternalUpdateGraphOperation": {
+              "methods": [
+                "internal_update_graph_operation"
+              ]
             }
           }
         }
