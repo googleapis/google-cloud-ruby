@@ -77,6 +77,18 @@ class ::Google::Cloud::SecureSourceManager::V1::SecureSourceManager::ClientPaths
     end
   end
 
+  def test_hook_path
+    grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
+      client = ::Google::Cloud::SecureSourceManager::V1::SecureSourceManager::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      path = client.hook_path project: "value0", location: "value1", repository: "value2", hook: "value3"
+      assert_equal "projects/value0/locations/value1/repositories/value2/hooks/value3", path
+    end
+  end
+
   def test_instance_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
     ::Gapic::ServiceStub.stub :new, DummyStub.new do
@@ -89,6 +101,30 @@ class ::Google::Cloud::SecureSourceManager::V1::SecureSourceManager::ClientPaths
     end
   end
 
+  def test_issue_path
+    grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
+      client = ::Google::Cloud::SecureSourceManager::V1::SecureSourceManager::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      path = client.issue_path project: "value0", location: "value1", repository: "value2", issue: "value3"
+      assert_equal "projects/value0/locations/value1/repositories/value2/issues/value3", path
+    end
+  end
+
+  def test_issue_comment_path
+    grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
+      client = ::Google::Cloud::SecureSourceManager::V1::SecureSourceManager::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      path = client.issue_comment_path project: "value0", location: "value1", repository: "value2", issue: "value3", comment: "value4"
+      assert_equal "projects/value0/locations/value1/repositories/value2/issues/value3/issueComments/value4", path
+    end
+  end
+
   def test_location_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
     ::Gapic::ServiceStub.stub :new, DummyStub.new do
@@ -98,6 +134,30 @@ class ::Google::Cloud::SecureSourceManager::V1::SecureSourceManager::ClientPaths
 
       path = client.location_path project: "value0", location: "value1"
       assert_equal "projects/value0/locations/value1", path
+    end
+  end
+
+  def test_pull_request_path
+    grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
+      client = ::Google::Cloud::SecureSourceManager::V1::SecureSourceManager::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      path = client.pull_request_path project: "value0", location: "value1", repository: "value2", pull_request: "value3"
+      assert_equal "projects/value0/locations/value1/repositories/value2/pullRequests/value3", path
+    end
+  end
+
+  def test_pull_request_comment_path
+    grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
+      client = ::Google::Cloud::SecureSourceManager::V1::SecureSourceManager::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      path = client.pull_request_comment_path project: "value0", location: "value1", repository: "value2", pull_request: "value3", comment: "value4"
+      assert_equal "projects/value0/locations/value1/repositories/value2/pullRequests/value3/pullRequestComments/value4", path
     end
   end
 
