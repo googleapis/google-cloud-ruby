@@ -708,6 +708,7 @@ class ::Google::Cloud::DiscoveryEngine::V1beta::ConversationalSearchService::Res
 
     # Create request parameters for a unary method.
     name = "hello world"
+    include_answer_details = true
 
     get_session_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
@@ -723,27 +724,27 @@ class ::Google::Cloud::DiscoveryEngine::V1beta::ConversationalSearchService::Res
         end
 
         # Use hash object
-        client.get_session({ name: name }) do |_result, response|
+        client.get_session({ name: name, include_answer_details: include_answer_details }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_session name: name do |_result, response|
+        client.get_session name: name, include_answer_details: include_answer_details do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_session ::Google::Cloud::DiscoveryEngine::V1beta::GetSessionRequest.new(name: name) do |_result, response|
+        client.get_session ::Google::Cloud::DiscoveryEngine::V1beta::GetSessionRequest.new(name: name, include_answer_details: include_answer_details) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_session({ name: name }, call_options) do |_result, response|
+        client.get_session({ name: name, include_answer_details: include_answer_details }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_session(::Google::Cloud::DiscoveryEngine::V1beta::GetSessionRequest.new(name: name), call_options) do |_result, response|
+        client.get_session(::Google::Cloud::DiscoveryEngine::V1beta::GetSessionRequest.new(name: name, include_answer_details: include_answer_details), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 

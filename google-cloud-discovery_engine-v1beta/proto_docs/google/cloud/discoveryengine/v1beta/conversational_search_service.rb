@@ -791,6 +791,10 @@ module Google
         #   @return [::String]
         #     Required. The resource name of the Session to get. Format:
         #     `projects/{project}/locations/{location}/collections/{collection}/dataStores/{data_store_id}/sessions/{session_id}`
+        # @!attribute [rw] include_answer_details
+        #   @return [::Boolean]
+        #     Optional. If set to true, the full session including all answer details
+        #     will be returned.
         class GetSessionRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -811,23 +815,40 @@ module Google
         #     Provide this to retrieve the subsequent page.
         # @!attribute [rw] filter
         #   @return [::String]
-        #     A filter to apply on the list results. The supported features are:
-        #     user_pseudo_id, state.
+        #     A comma-separated list of fields to filter by, in EBNF grammar.
+        #     The supported fields are:
+        #     * `user_pseudo_id`
+        #     * `state`
+        #     * `display_name`
+        #     * `starred`
+        #     * `is_pinned`
+        #     * `labels`
+        #     * `create_time`
+        #     * `update_time`
         #
-        #     Example:
+        #     Examples:
         #     "user_pseudo_id = some_id"
+        #     "display_name = \"some_name\""
+        #     "starred = true"
+        #     "is_pinned=true AND (NOT labels:hidden)"
+        #     "create_time > \"1970-01-01T12:00:00Z\""
         # @!attribute [rw] order_by
         #   @return [::String]
         #     A comma-separated list of fields to order by, sorted in ascending order.
         #     Use "desc" after a field name for descending.
         #     Supported fields:
+        #
         #       * `update_time`
         #       * `create_time`
         #       * `session_name`
+        #       * `is_pinned`
         #
         #     Example:
-        #     "update_time desc"
-        #     "create_time"
+        #
+        #     * "update_time desc"
+        #     * "create_time"
+        #     * "is_pinned desc,update_time desc": list sessions by is_pinned first, then
+        #        by update_time.
         class ListSessionsRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
