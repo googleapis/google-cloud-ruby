@@ -45,9 +45,39 @@
                 "create_repository"
               ]
             },
+            "UpdateRepository": {
+              "methods": [
+                "update_repository"
+              ]
+            },
             "DeleteRepository": {
               "methods": [
                 "delete_repository"
+              ]
+            },
+            "ListHooks": {
+              "methods": [
+                "list_hooks"
+              ]
+            },
+            "GetHook": {
+              "methods": [
+                "get_hook"
+              ]
+            },
+            "CreateHook": {
+              "methods": [
+                "create_hook"
+              ]
+            },
+            "UpdateHook": {
+              "methods": [
+                "update_hook"
+              ]
+            },
+            "DeleteHook": {
+              "methods": [
+                "delete_hook"
               ]
             },
             "GetIamPolicyRepo": {
@@ -88,6 +118,156 @@
             "DeleteBranchRule": {
               "methods": [
                 "delete_branch_rule"
+              ]
+            },
+            "CreatePullRequest": {
+              "methods": [
+                "create_pull_request"
+              ]
+            },
+            "GetPullRequest": {
+              "methods": [
+                "get_pull_request"
+              ]
+            },
+            "ListPullRequests": {
+              "methods": [
+                "list_pull_requests"
+              ]
+            },
+            "UpdatePullRequest": {
+              "methods": [
+                "update_pull_request"
+              ]
+            },
+            "MergePullRequest": {
+              "methods": [
+                "merge_pull_request"
+              ]
+            },
+            "OpenPullRequest": {
+              "methods": [
+                "open_pull_request"
+              ]
+            },
+            "ClosePullRequest": {
+              "methods": [
+                "close_pull_request"
+              ]
+            },
+            "ListPullRequestFileDiffs": {
+              "methods": [
+                "list_pull_request_file_diffs"
+              ]
+            },
+            "FetchTree": {
+              "methods": [
+                "fetch_tree"
+              ]
+            },
+            "FetchBlob": {
+              "methods": [
+                "fetch_blob"
+              ]
+            },
+            "CreateIssue": {
+              "methods": [
+                "create_issue"
+              ]
+            },
+            "GetIssue": {
+              "methods": [
+                "get_issue"
+              ]
+            },
+            "ListIssues": {
+              "methods": [
+                "list_issues"
+              ]
+            },
+            "UpdateIssue": {
+              "methods": [
+                "update_issue"
+              ]
+            },
+            "DeleteIssue": {
+              "methods": [
+                "delete_issue"
+              ]
+            },
+            "OpenIssue": {
+              "methods": [
+                "open_issue"
+              ]
+            },
+            "CloseIssue": {
+              "methods": [
+                "close_issue"
+              ]
+            },
+            "GetPullRequestComment": {
+              "methods": [
+                "get_pull_request_comment"
+              ]
+            },
+            "ListPullRequestComments": {
+              "methods": [
+                "list_pull_request_comments"
+              ]
+            },
+            "CreatePullRequestComment": {
+              "methods": [
+                "create_pull_request_comment"
+              ]
+            },
+            "UpdatePullRequestComment": {
+              "methods": [
+                "update_pull_request_comment"
+              ]
+            },
+            "DeletePullRequestComment": {
+              "methods": [
+                "delete_pull_request_comment"
+              ]
+            },
+            "BatchCreatePullRequestComments": {
+              "methods": [
+                "batch_create_pull_request_comments"
+              ]
+            },
+            "ResolvePullRequestComments": {
+              "methods": [
+                "resolve_pull_request_comments"
+              ]
+            },
+            "UnresolvePullRequestComments": {
+              "methods": [
+                "unresolve_pull_request_comments"
+              ]
+            },
+            "CreateIssueComment": {
+              "methods": [
+                "create_issue_comment"
+              ]
+            },
+            "GetIssueComment": {
+              "methods": [
+                "get_issue_comment"
+              ]
+            },
+            "ListIssueComments": {
+              "methods": [
+                "list_issue_comments"
+              ]
+            },
+            "UpdateIssueComment": {
+              "methods": [
+                "update_issue_comment"
+              ]
+            },
+            "DeleteIssueComment": {
+              "methods": [
+                "delete_issue_comment"
               ]
             }
           }
