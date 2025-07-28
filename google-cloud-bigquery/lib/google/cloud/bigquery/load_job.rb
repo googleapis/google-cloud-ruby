@@ -653,6 +653,90 @@ module Google
         end
 
         ##
+        # Format used to parse DATE values. Supports C-style and SQL-style
+        # values.
+        #
+        # @return [String, nil] The date format pattern, such as
+        #   `%Y-%m-%d`. `nil` if not set.
+        def date_format
+          @gapi.configuration.load.date_format
+        end
+
+        ##
+        # Format used to parse DATETIME values. Supports C-style and SQL-style
+        # values.
+        #
+        # @return [String, nil] The datetime format pattern, such as
+        #   `%Y-%m-%d %H:%M:%S`. `nil` if not set.
+        def datetime_format
+          @gapi.configuration.load.datetime_format
+        end
+
+        ##
+        # Format used to parse TIME values. Supports C-style and SQL-style
+        # values.
+        #
+        # @return [String, nil] The time format pattern, such as
+        #   `%H:%M:%S`. `nil` if not set.
+        def time_format
+          @gapi.configuration.load.time_format
+        end
+
+        ##
+        # Format used to parse TIMESTAMP values. Supports C-style and SQL-style
+        # values.
+        #
+        # @return [String, nil] The timestamp format pattern, such as
+        #   `%Y-%m-%d %H:%M:%S.%f %z`. `nil` if not set.
+        def timestamp_format
+          @gapi.configuration.load.timestamp_format
+        end
+
+        ##
+        # A list of strings represented as SQL NULL value in a CSV file.
+        # null_marker and null_markers can't be set at the same time. If null_marker
+        # is set, null_markers has to be not set. If null_markers is set, null_marker
+        # has to be not set. If both null_marker and null_markers are set at the same
+        # time, a user error would be thrown. Any strings listed in null_markers,
+        # including empty string would be interpreted as SQL NULL. This applies to all
+        # column types.
+        #
+        # @return [Array<String>] The array of null marker strings.
+        def null_markers
+          @gapi.configuration.load.null_markers || []
+        end
+
+        ##
+        # Controls the strategy used to match loaded columns to the schema. If
+        # not set, a sensible default is chosen based on how the schema is provided.
+        # If autodetect is used, then columns are matched by name. Otherwise,
+        # columns are matched by position. This is done to keep the behavior
+        # backward-compatible.
+        #
+        # Acceptable values are:
+        # * `POSITION` - matches by position. This assumes that the columns are
+        #   ordered the same way as the schema.
+        # * `NAME` - matches by name. This reads the header row as column names
+        #   and reorders columns to match the field names in the schema.
+        #
+        # @return [String, nil] The source column match strategy, such as
+        #   `POSITION`. `nil` if not set.
+        def source_column_match
+          @gapi.configuration.load.source_column_match
+        end
+
+        ##
+        # Time zone used when parsing timestamp values that do not have specific
+        # time zone information (e.g. `2024-04-20 12:34:56`). The expected format
+        # is an IANA timezone string (e.g. `America/Los_Angeles`).
+        #
+        # @return [String, nil] The IANA time zone name, such as
+        #   `America/Los_Angeles`. `nil` if not set.
+        def time_zone
+          @gapi.configuration.load.time_zone
+        end
+
+        ##
         # Yielded to a block to accumulate changes for a patch request.
         class Updater < LoadJob
           ##
@@ -2583,6 +2667,89 @@ module Google
           def clustering_fields= fields
             @gapi.configuration.load.clustering ||= Google::Apis::BigqueryV2::Clustering.new
             @gapi.configuration.load.clustering.fields = fields
+          end
+
+          ##
+          # Sets the format used to parse DATE values. Supports C-style and SQL-style
+          # values.
+          #
+          # @param [String, nil] date_format The date format pattern, such as
+          #   `%Y-%m-%d`. `nil` to unset.
+          def date_format= date_format
+            @gapi.configuration.load.update! date_format: date_format
+          end
+
+          ##
+          # Sets the format used to parse DATETIME values. Supports C-style and SQL-style
+          # values.
+          #
+          # @param [String, nil] datetime_format The datetime format pattern, such as
+          #   `%Y-%m-%d %H:%M:%S`. `nil` to unset.
+          def datetime_format= datetime_format
+            @gapi.configuration.load.update! datetime_format: datetime_format
+          end
+
+          ##
+          # Sets the format used to parse TIME values. Supports C-style and SQL-style
+          # values.
+          #
+          # @param [String, nil] time_format The time format pattern, such as
+          #   `%H:%M:%S`. `nil` to unset.
+          def time_format= time_format
+            @gapi.configuration.load.update! time_format: time_format
+          end
+
+          ##
+          # Sets the format used to parse TIMESTAMP values. Supports C-style and SQL-style
+          # values.
+          #
+          # @param [String, nil] timestamp_format The timestamp format pattern, such as
+          #   `%Y-%m-%d %H:%M:%S.%f %z`. `nil` to unset.
+          def timestamp_format= timestamp_format
+            @gapi.configuration.load.update! timestamp_format: timestamp_format
+          end
+
+          ##
+          # Sets the list of strings represented as SQL NULL value in a CSV file.
+          # null_marker and null_markers can't be set at the same time. If null_marker is
+          # set, null_markers has to be not set. If null_markers is set, null_marker has
+          # to be not set. If both null_marker and null_markers are set at the same time,
+          # a user error would be thrown. Any strings listed in null_markers, including
+          # empty string would be interpreted as SQL NULL. This applies to all column
+          # types.
+          #
+          # @param [Array<String>] null_markers The array of null marker strings.
+          def null_markers= null_markers
+            @gapi.configuration.load.update! null_markers: null_markers
+          end
+
+          # Sets the strategy used to match loaded columns to the schema.
+          # If not set, a sensible default is chosen based on how the schema is
+          # provided. If autodetect is used, then columns are matched by name.
+          # Otherwise, columns are matched by position. This is done to keep the
+          # behavior backward-compatible.
+          #
+          # Acceptable values are:
+          # - `POSITION`: matches by position. Assumes columns are ordered the
+          #   same way as the schema.
+          # - `NAME`: matches by name. Reads the header row as column names and
+          #   reorders columns to match the schema.
+          #
+          # @param [String, nil] source_column_match The new source column match value.
+          #   `nil` to unset.
+          def source_column_match= source_column_match
+            @gapi.configuration.load.update! source_column_match: source_column_match
+          end
+
+          ##
+          # Sets the time zone used when parsing timestamp values that do not have
+          # specific time zone information (e.g. `2024-04-20 12:34:56`). The expected
+          # format is an IANA timezone string (e.g. `America/Los_Angeles`).
+          #
+          # @param [String, nil] time_zone The IANA time zone name, such as
+          #   `America/Los_Angeles`. `nil` to unset.
+          def time_zone= time_zone
+            @gapi.configuration.load.update! time_zone: time_zone
           end
 
           def cancel
