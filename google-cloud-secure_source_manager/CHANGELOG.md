@@ -1,5 +1,12 @@
 # Changelog
 
+### 2.1.0 (2025-07-28)
+
+#### Features
+
+* add new UpdateRepository API 
+* add support for new API resources: Issues, IssueComments, PullRequests, PullRequestComments, Blobs ([#30723](https://github.com/googleapis/google-cloud-ruby/issues/30723)) 
+
 ### 2.0.1 (2025-04-29)
 
 #### Bug Fixes
