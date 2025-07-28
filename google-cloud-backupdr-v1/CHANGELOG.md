@@ -1,5 +1,12 @@
 # Changelog
 
+### 1.2.0 (2025-07-28)
+
+#### Features
+
+* Add support for Cloud SQL backup and restore ([#30713](https://github.com/googleapis/google-cloud-ruby/issues/30713)) 
+* Add support for GCE Disk backup and restore 
+
 ### 1.1.0 (2025-05-12)
 
 #### Features
