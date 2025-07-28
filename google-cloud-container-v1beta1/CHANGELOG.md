@@ -1,5 +1,12 @@
 # Release History
 
+### 0.48.0 (2025-07-28)
+
+#### Features
+
+* A new enum `TransparentHugepageDefrag` is added 
+* A new enum `TransparentHugepageEnabled` is added ([#30714](https://github.com/googleapis/google-cloud-ruby/issues/30714)) 
+
 ### 0.47.0 (2025-06-05)
 
 #### Features
