@@ -27,6 +27,8 @@ by `Topic` and `Subscription`.
 4. **Auto-generated Client Exposure**:
 The `TopicAdmin::Client`, `SubscriptionAdmin::Client`, and `SchemaService::Client` are now directly
 accessible from `Google::Cloud::PubSub::Project`.
+5. **Default number concurrent of streams changed to 1**:
+`MessageListener` now defaults to using a single stream for receiving messages. This is a more suitable default for most applications and helps reduce the number of idle streams, especially in low-throughput scenarios.
 
 ## Admin Operations
 
