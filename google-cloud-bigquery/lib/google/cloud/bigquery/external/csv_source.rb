@@ -368,6 +368,65 @@ module Google
           end
 
           ##
+          # The list of strings represented as SQL NULL value in a CSV file.
+          # null_marker and null_markers can't be set at the same time. If null_marker is
+          # set, null_markers has to be not set. If null_markers is set, null_marker has
+          # to be not set. If both null_marker and null_markers are set at the same time,
+          # a user error would be thrown. Any strings listed in null_markers, including
+          # empty string would be interpreted as SQL NULL. This applies to all column
+          # types.
+          #
+          # @return [Array<String>] The array of null marker strings.
+          def null_markers
+            @gapi.csv_options.null_markers || []
+          end
+
+          ##
+          # Sets the list of strings represented as SQL NULL value in a CSV file.
+          # null_marker and null_markers can't be set at the same time. If null_marker is
+          # set, null_markers has to be not set. If null_markers is set, null_marker has
+          # to be not set. If both null_marker and null_markers are set at the same time,
+          # a user error would be thrown. Any strings listed in null_markers, including
+          # empty string would be interpreted as SQL NULL. This applies to all column
+          # types.
+          #
+          # @param [Array<String>] null_markers The array of null marker strings.
+          def null_markers= null_markers
+            frozen_check!
+            @gapi.csv_options.null_markers = null_markers
+          end
+
+          # Controls the strategy used to match loaded columns to the schema. If
+          # not set, a sensible default is chosen based on how the schema is provided. If
+          # autodetect is used, then columns are matched by name. Otherwise, columns are
+          # matched by position. This is done to keep the behavior backward-compatible.
+          # Acceptable values are: POSITION - matches by position. This assumes that the
+          # columns are ordered the same way as the schema. NAME - matches by name. This
+          # reads the header row as column names and reorders columns to match the field
+          # names in the schema.
+          # Corresponds to the JSON property `sourceColumnMatch`
+          #
+          # @return [String]
+          def source_column_match
+            @gapi.csv_options.source_column_match
+          end
+
+          # Sets the strategy used to match loaded columns to the schema.
+          # If not set, a sensible default is chosen based on how the schema is provided.
+          # If autodetect is used, then columns are matched by name. Otherwise, columns are
+          # matched by position. This is done to keep the behavior backward-compatible.
+          # Acceptable values are: POSITION - matches by position. This assumes that the
+          # columns are ordered the same way as the schema. NAME - matches by name. This
+          # reads the header row as column names and reorders columns to match the field
+          # names in the schema.
+          #
+          # @param [String] source_column_match The new source column match value.
+          def source_column_match= source_column_match
+            frozen_check!
+            @gapi.csv_options.source_column_match = source_column_match
+          end
+
+          ##
           # The schema for the data.
           #
           # @param [Boolean] replace Whether to replace the existing schema with
