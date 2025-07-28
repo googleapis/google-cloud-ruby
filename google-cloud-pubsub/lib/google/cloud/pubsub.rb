@@ -17,6 +17,7 @@ require "google-cloud-pubsub"
 require "google/cloud/pubsub/project"
 require "google/cloud/config"
 require "google/cloud/env"
+require "google/cloud/pubsub/admin_clients_overrides"
 
 module Google
   module Cloud

@@ -33,7 +33,7 @@ describe Google::Cloud::PubSub::Subscriber, :mock_pubsub do
     rec_message_msg = "pulled-message"
     pull_res = Google::Cloud::PubSub::V1::PullResponse.new rec_messages_hash(rec_message_msg)
     mock = Minitest::Mock.new
-    mock.expect :pull, pull_res, subscription: subscription_path(subscription_name), max_messages: 100, return_immediately: true
+    mock.expect :pull_internal, pull_res, subscription: subscription_path(subscription_name), max_messages: 100, return_immediately: true
     subscriber.service.mocked_subscription_admin = mock
 
     rec_messages = subscriber.pull
@@ -47,7 +47,7 @@ describe Google::Cloud::PubSub::Subscriber, :mock_pubsub do
   it "can acknowledge one message" do
     ack_res = nil
     mock = Minitest::Mock.new
-    mock.expect :acknowledge, ack_res, subscription: subscription_path(subscription_name), ack_ids: ["ack-id-1"]
+    mock.expect :acknowledge_internal, ack_res, subscription: subscription_path(subscription_name), ack_ids: ["ack-id-1"]
     subscriber.service.mocked_subscription_admin = mock
 
     subscriber.acknowledge "ack-id-1"
@@ -58,7 +58,7 @@ describe Google::Cloud::PubSub::Subscriber, :mock_pubsub do
   it "can acknowledge many messages" do
     ack_res = nil
     mock = Minitest::Mock.new
-    mock.expect :acknowledge, ack_res, subscription: subscription_path(subscription_name), ack_ids: ["ack-id-1", "ack-id-2", "ack-id-3"]
+    mock.expect :acknowledge_internal, ack_res, subscription: subscription_path(subscription_name), ack_ids: ["ack-id-1", "ack-id-2", "ack-id-3"]
     subscriber.service.mocked_subscription_admin = mock
 
     subscriber.acknowledge "ack-id-1", "ack-id-2", "ack-id-3"
@@ -69,7 +69,7 @@ describe Google::Cloud::PubSub::Subscriber, :mock_pubsub do
   it "can acknowledge with ack" do
     ack_res = nil
     mock = Minitest::Mock.new
-    mock.expect :acknowledge, ack_res, subscription: subscription_path(subscription_name), ack_ids: ["ack-id-1"]
+    mock.expect :acknowledge_internal, ack_res, subscription: subscription_path(subscription_name), ack_ids: ["ack-id-1"]
     subscriber.service.mocked_subscription_admin = mock
 
     subscriber.ack "ack-id-1"

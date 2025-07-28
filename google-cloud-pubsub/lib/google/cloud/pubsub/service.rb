@@ -115,7 +115,11 @@ module Google
         def publish topic, messages, compress: false
           request = { topic: topic_path(topic), messages: messages }
           compress_options = ::Gapic::CallOptions.new metadata: { "grpc-internal-encoding-request": "gzip" }
-          compress ? (topic_admin.publish request, compress_options) : (topic_admin.publish request)
+          if compress
+            (topic_admin.publish_internal request, compress_options)
+          else
+            (topic_admin.publish_internal request)
+          end
         end
 
         ##
@@ -124,27 +128,28 @@ module Google
           max_messages = options.fetch(:max, 100).to_i
           return_immediately = !(!options.fetch(:immediate, true))
 
-          subscription_admin.pull subscription:       subscription_path(subscription, options),
-                                  max_messages:       max_messages,
-                                  return_immediately: return_immediately
+          subscription_admin.pull_internal subscription: subscription_path(subscription, options),
+                                           max_messages: max_messages,
+                                           return_immediately: return_immediately
         end
 
         def streaming_pull request_enum, options = {}
-          subscription_admin.streaming_pull request_enum, options
+          subscription_admin.streaming_pull_internal request_enum, options
         end
 
         ##
         # Acknowledges receipt of a message.
         def acknowledge subscription, *ack_ids
-          subscription_admin.acknowledge subscription: subscription_path(subscription), ack_ids: ack_ids
+          subscription_admin.acknowledge_internal subscription: subscription_path(subscription),
+                                                  ack_ids: ack_ids
         end
 
         ##
         # Modifies the ack deadline for a specific message.
         def modify_ack_deadline subscription, ids, deadline
-          subscription_admin.modify_ack_deadline subscription:         subscription_path(subscription),
-                                                 ack_ids:              Array(ids),
-                                                 ack_deadline_seconds: deadline
+          subscription_admin.modify_ack_deadline_internal subscription: subscription_path(subscription),
+                                                          ack_ids: Array(ids),
+                                                          ack_deadline_seconds: deadline
         end
 
         # Helper methods

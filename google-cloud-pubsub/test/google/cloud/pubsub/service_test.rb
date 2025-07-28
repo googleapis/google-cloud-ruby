@@ -206,7 +206,7 @@ describe Google::Cloud::PubSub::Service do
     service = Google::Cloud::PubSub::Service.new project, nil
     mocked_subscription_admin = Minitest::Mock.new
     service.mocked_subscription_admin = mocked_subscription_admin
-    def mocked_subscription_admin.acknowledge *args
+    def mocked_subscription_admin.acknowledge_internal *args
       raise RuntimeError.new "test"
     end
     assert_raises RuntimeError do 
@@ -218,7 +218,7 @@ describe Google::Cloud::PubSub::Service do
     service = Google::Cloud::PubSub::Service.new project, nil
     mocked_subscription_admin = Minitest::Mock.new
     service.mocked_subscription_admin = mocked_subscription_admin
-    def mocked_subscription_admin.modify_ack_deadline *args
+    def mocked_subscription_admin.modify_ack_deadline_internal *args
       raise RuntimeError.new "test"
     end
     assert_raises RuntimeError do 
@@ -232,7 +232,7 @@ describe Google::Cloud::PubSub::Service do
     service.mocked_topic_admin = mocked_topic_admin
     expected_request = {topic: "projects/test/topics/test", messages: "data"}
     expected_options = ::Gapic::CallOptions.new metadata: { "grpc-internal-encoding-request": "gzip" }
-    mocked_topic_admin.expect :publish, nil do |actual_request, actual_option|
+    mocked_topic_admin.expect :publish_internal, nil do |actual_request, actual_option|
       actual_request == expected_request && actual_option == expected_options
     end
     service.publish "test", "data", compress: true
@@ -244,7 +244,7 @@ describe Google::Cloud::PubSub::Service do
     mocked_topic_admin = Minitest::Mock.new
     service.mocked_topic_admin = mocked_topic_admin
     expected_request = {topic: "projects/test/topics/test", messages: "data"}
-    mocked_topic_admin.expect :publish, nil do |actual_request, actual_option|
+    mocked_topic_admin.expect :publish_internal, nil do |actual_request, actual_option|
       actual_request == expected_request && actual_option.nil?
     end
     service.publish "test", "data"
