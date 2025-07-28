@@ -745,6 +745,103 @@ module Google
           end
 
           ##
+          # Time zone used when parsing timestamp values that do not have
+          # specific time zone information (e.g. 2024-04-20 12:34:56). The expected format
+          # is a IANA timezone string (e.g. America/Los_Angeles).
+          #
+          # @return [String, nil] The IANA time zone name, such as "America/Los_Angeles".
+          def time_zone
+            @gapi.time_zone
+          end
+
+          ##
+          # Sets the time zone used when parsing timestamp values that do not have
+          # specific time zone information (e.g. 2024-04-20 12:34:56). The expected forma
+          # is a IANA timezone string (e.g. America/Los_Angeles).
+          #
+          # @param [String] time_zone The IANA time zone name, such as "America/Los_Angeles".
+          def time_zone= time_zone
+            frozen_check!
+            @gapi.time_zone = time_zone
+          end
+
+          ##
+          # Format used to parse TIME values. Supports C-style and SQL-style
+          # values.
+          #
+          # @return [String, nil] The time format pattern, such as "%H:%M:%S".
+          def time_format
+            @gapi.time_format
+          end
+
+          ##
+          # Sets the format used to parse TIME values. Supports C-style and SQL-style
+          # values.
+          #
+          # @param [String] time_format The time format pattern, such as "%H:%M:%S".
+          def time_format= time_format
+            frozen_check!
+            @gapi.time_format = time_format
+          end
+
+          ##
+          # Format used to parse TIMESTAMP values. Supports C-style and SQL-style
+          # values.
+          #
+          # @return [String, nil] The timestamp format pattern, such as "%Y-%m-%d %H:%M:%S.%f %z".
+          def timestamp_format
+            @gapi.timestamp_format
+          end
+
+          ##
+          # Sets the format used to parse TIMESTAMP values. Supports C-style and SQL-style
+          # values.
+          #
+          # @param [String] timestamp_format The timestamp format pattern, such as "%Y-%m-%d %H:%M:%S.%f %z".
+          def timestamp_format= timestamp_format
+            frozen_check!
+            @gapi.timestamp_format = timestamp_format
+          end
+
+          ##
+          # Format used to parse DATETIME values. Supports C-style and SQL-style
+          # values.
+          #
+          # @return [String, nil] The datetime format pattern, such as "%Y-%m-%d %H:%M:%S".
+          def datetime_format
+            @gapi.datetime_format
+          end
+
+          ##
+          # Sets the format used to parse DATETIME values. Supports C-style and SQL-style
+          # values.
+          #
+          # @param [String] datetime_format The datetime format pattern, such as "%Y-%m-%d %H:%M:%S".
+          def datetime_format= datetime_format
+            frozen_check!
+            @gapi.datetime_format = datetime_format
+          end
+
+          ##
+          # Format used to parse DATE values. Supports C-style and SQL-style
+          # values.
+          #
+          # @return [String, nil] The date format pattern, such as "%Y-%m-%d".
+          def date_format
+            @gapi.date_format
+          end
+
+          ##
+          # Sets the format used to parse DATE values. Supports C-style and SQL-style
+          # values.
+          #
+          # @param [String] date_format The date format pattern, such as "%Y-%m-%d".
+          def date_format= date_format
+            frozen_check!
+            @gapi.date_format = date_format
+          end
+
+          ##
           # @private Google API Client object.
           def to_gapi
             @gapi
