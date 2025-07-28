@@ -1,5 +1,11 @@
 # Changelog
 
+### 1.19.0 (2025-07-28)
+
+#### Features
+
+* Add service_account to Reasoning Engine public protos ([#30715](https://github.com/googleapis/google-cloud-ruby/issues/30715)) 
+
 ### 1.18.0 (2025-07-15)
 
 #### Features
