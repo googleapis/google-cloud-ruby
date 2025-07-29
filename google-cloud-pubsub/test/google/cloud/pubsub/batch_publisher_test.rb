@@ -24,7 +24,7 @@ describe Google::Cloud::PubSub::BatchPublisher, :mock_pubsub do
                         messages: [Google::Cloud::PubSub::V1::PubsubMessage.new(data:"d"*241)]}
     expected_option = ::Gapic::CallOptions.new metadata: { "grpc-internal-encoding-request": "gzip" }
     publish_res = Google::Cloud::PubSub::V1::PublishResponse.new({ message_ids: ["msg1"] })
-    mocked_topic_admin.expect :publish, publish_res do |actual_request, actual_option|
+    mocked_topic_admin.expect :publish_internal, publish_res do |actual_request, actual_option|
         actual_request == expected_request && actual_option == expected_option
     end
     service = pubsub.service
@@ -40,7 +40,7 @@ describe Google::Cloud::PubSub::BatchPublisher, :mock_pubsub do
                         messages: [Google::Cloud::PubSub::V1::PubsubMessage.new(data:"d"*238)]}
     expected_option = ::Gapic::CallOptions.new metadata: { "grpc-internal-encoding-request": "gzip" }
     publish_res = Google::Cloud::PubSub::V1::PublishResponse.new({ message_ids: ["msg1"] })
-    mocked_topic_admin.expect :publish, publish_res do |actual_request, actual_option|
+    mocked_topic_admin.expect :publish_internal, publish_res do |actual_request, actual_option|
         actual_request == expected_request && actual_option == expected_option
     end
     service = pubsub.service
@@ -55,7 +55,7 @@ describe Google::Cloud::PubSub::BatchPublisher, :mock_pubsub do
     expected_request = {topic: "projects/test/topics/#{topic_name}", 
                         messages: [Google::Cloud::PubSub::V1::PubsubMessage.new(data:"data")]}
     publish_res = Google::Cloud::PubSub::V1::PublishResponse.new({ message_ids: ["msg1"] })
-    mocked_topic_admin.expect :publish, publish_res do |actual_request, actual_option|
+    mocked_topic_admin.expect :publish_internal, publish_res do |actual_request, actual_option|
         actual_request == expected_request && actual_option.nil?
     end
     service = pubsub.service
@@ -71,7 +71,7 @@ describe Google::Cloud::PubSub::BatchPublisher, :mock_pubsub do
                         messages: [Google::Cloud::PubSub::V1::PubsubMessage.new(data:"d"*141)]}
     expected_option = ::Gapic::CallOptions.new metadata: { "grpc-internal-encoding-request": "gzip" }
     publish_res = Google::Cloud::PubSub::V1::PublishResponse.new({ message_ids: ["msg1"] })
-    mocked_topic_admin.expect :publish, publish_res do |actual_request, actual_option|
+    mocked_topic_admin.expect :publish_internal, publish_res do |actual_request, actual_option|
         actual_request == expected_request && actual_option == expected_option
     end
     service = pubsub.service
@@ -87,7 +87,7 @@ describe Google::Cloud::PubSub::BatchPublisher, :mock_pubsub do
                         messages: [Google::Cloud::PubSub::V1::PubsubMessage.new(data:"d"*138)]}
     expected_option = ::Gapic::CallOptions.new metadata: { "grpc-internal-encoding-request": "gzip" }
     publish_res = Google::Cloud::PubSub::V1::PublishResponse.new({ message_ids: ["msg1"] })
-    mocked_topic_admin.expect :publish, publish_res do |actual_request, actual_option|
+    mocked_topic_admin.expect :publish_internal, publish_res do |actual_request, actual_option|
         actual_request == expected_request && actual_option == expected_option
     end
     service = pubsub.service
@@ -102,7 +102,7 @@ describe Google::Cloud::PubSub::BatchPublisher, :mock_pubsub do
     expected_request = {topic: "projects/test/topics/#{topic_name}", 
                         messages: [Google::Cloud::PubSub::V1::PubsubMessage.new(data:"data")]}
     publish_res = Google::Cloud::PubSub::V1::PublishResponse.new({ message_ids: ["msg1"] })
-    mocked_topic_admin.expect :publish, publish_res do |actual_request, actual_option|
+    mocked_topic_admin.expect :publish_internal, publish_res do |actual_request, actual_option|
         actual_request == expected_request && actual_option.nil?
     end
     service = pubsub.service
@@ -117,7 +117,7 @@ describe Google::Cloud::PubSub::BatchPublisher, :mock_pubsub do
     expected_request = {topic: "projects/test/topics/#{topic_name}", 
                         messages: [Google::Cloud::PubSub::V1::PubsubMessage.new(data:"d"*241)]}
     publish_res = Google::Cloud::PubSub::V1::PublishResponse.new({ message_ids: ["msg1"] })
-    mocked_topic_admin.expect :publish, publish_res do |actual_request, actual_option|
+    mocked_topic_admin.expect :publish_internal, publish_res do |actual_request, actual_option|
         actual_request == expected_request && actual_option.nil?
     end
     service = pubsub.service

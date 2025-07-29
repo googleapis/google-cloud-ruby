@@ -416,7 +416,7 @@ describe Google::Cloud::PubSub::AsyncPublisher, :mock_pubsub do
     expected_option = ::Gapic::CallOptions.new metadata: { "grpc-internal-encoding-request": "gzip" }
     actual_request = nil
     actual_option = nil
-    mocked_topic_admin.expect :publish, nil do |request, option|
+    mocked_topic_admin.expect :publish_internal, nil do |request, option|
       actual_request = request
       actual_option = option
     end
@@ -438,7 +438,7 @@ describe Google::Cloud::PubSub::AsyncPublisher, :mock_pubsub do
     expected_option = ::Gapic::CallOptions.new metadata: { "grpc-internal-encoding-request": "gzip" }
     actual_request = nil
     actual_option = nil
-    mocked_topic_admin.expect :publish, nil do |request, option|
+    mocked_topic_admin.expect :publish_internal, nil do |request, option|
       actual_request = request
       actual_option = option
     end
@@ -460,7 +460,7 @@ describe Google::Cloud::PubSub::AsyncPublisher, :mock_pubsub do
     expected_request = {topic: "projects/test/topics/#{topic_name}", messages: ["data"]}
     actual_request = nil
     actual_option = "test"
-    mocked_topic_admin.expect :publish, nil do |request, option|
+    mocked_topic_admin.expect :publish_internal, nil do |request, option|
       actual_request = request
       actual_option = option
     end
@@ -482,7 +482,7 @@ describe Google::Cloud::PubSub::AsyncPublisher, :mock_pubsub do
     expected_option = ::Gapic::CallOptions.new metadata: { "grpc-internal-encoding-request": "gzip" }
     actual_request = nil
     actual_option = nil
-    mocked_topic_admin.expect :publish, nil do |request, option|
+    mocked_topic_admin.expect :publish_internal, nil do |request, option|
       actual_request = request
       actual_option = option
     end
@@ -504,7 +504,7 @@ describe Google::Cloud::PubSub::AsyncPublisher, :mock_pubsub do
     expected_option = ::Gapic::CallOptions.new metadata: { "grpc-internal-encoding-request": "gzip" }
     actual_request = nil
     actual_option = nil
-    mocked_topic_admin.expect :publish, nil do |request, option|
+    mocked_topic_admin.expect :publish_internal, nil do |request, option|
       actual_request = request
       actual_option = option
     end
@@ -525,7 +525,7 @@ describe Google::Cloud::PubSub::AsyncPublisher, :mock_pubsub do
     expected_request = {topic: "projects/test/topics/#{topic_name}", messages: ["data"]}
     actual_request = nil
     actual_option = "test"
-    mocked_topic_admin.expect :publish, nil do |request, option|
+    mocked_topic_admin.expect :publish_internal, nil do |request, option|
       actual_request = request
       actual_option = option
     end
@@ -545,7 +545,7 @@ describe Google::Cloud::PubSub::AsyncPublisher, :mock_pubsub do
     expected_request = {topic: "projects/test/topics/#{topic_name}", messages: ["data"]}
     actual_request = nil
     actual_option = "test"
-    mocked_topic_admin.expect :publish, nil do |request, option|
+    mocked_topic_admin.expect :publish_internal, nil do |request, option|
       actual_request = request
       actual_option = option
     end
