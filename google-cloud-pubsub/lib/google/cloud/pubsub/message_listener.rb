@@ -53,7 +53,7 @@ module Google
       # @attr_reader [Boolean] message_ordering Whether message ordering has
       #   been enabled.
       # @attr_reader [Integer] streams The number of concurrent streams to open
-      #   to pull messages from the subscription. Default is 2.
+      #   to pull messages from the subscription. Default is 1.
       # @attr_reader [Integer] callback_threads The number of threads used to
       #   handle the received messages. Default is 8.
       # @attr_reader [Integer] push_threads The number of threads to handle
@@ -90,7 +90,7 @@ module Google
           @error_callbacks = []
           @subscription_name = subscription_name
           @deadline = deadline || 60
-          @streams = streams || 2
+          @streams = streams || 1
           coerce_inventory inventory
           @message_ordering = message_ordering
           @callback_threads = Integer(threads[:callback] || 8)
