@@ -18,6 +18,7 @@ require "google/cloud/pubsub/credentials"
 require "google/cloud/pubsub/convert"
 require "google/cloud/pubsub/version"
 require "google/cloud/pubsub/v1"
+require "google/cloud/pubsub/admin_clients"
 require "securerandom"
 
 module Google
@@ -52,7 +53,7 @@ module Google
 
         def subscription_admin
           return mocked_subscription_admin if mocked_subscription_admin
-          @subscription_admin ||= V1::SubscriptionAdmin::Client.new do |config|
+          @subscription_admin ||= SubscriptionAdmin::Client.new do |config|
             config.credentials = credentials if credentials
             override_client_config_timeouts config if timeout
             config.endpoint = host if host
@@ -66,7 +67,7 @@ module Google
 
         def topic_admin
           return mocked_topic_admin if mocked_topic_admin
-          @topic_admin ||= V1::TopicAdmin::Client.new do |config|
+          @topic_admin ||= TopicAdmin::Client.new do |config|
             config.credentials = credentials if credentials
             override_client_config_timeouts config if timeout
             config.endpoint = host if host

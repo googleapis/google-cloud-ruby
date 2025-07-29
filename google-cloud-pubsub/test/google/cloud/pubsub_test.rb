@@ -14,7 +14,6 @@
 
 require "helper"
 require "google/cloud/pubsub"
-require "google/cloud/pubsub/admin_clients_overrides"
 
 describe Google::Cloud do
   let(:default_host) { "pubsub.googleapis.com" }
@@ -566,46 +565,3 @@ describe Google::Cloud do
     end
   end
 end
-describe Google::Cloud::PubSub::V1::TopicAdmin::Client do
-  it "raises when publish is called" do
-    client = Google::Cloud::PubSub::V1::TopicAdmin::Client.new do |config|
-      config.credentials = :this_channel_is_insecure
-    end
-    assert_raises NotImplementedError do
-      client.publish
-    end
-  end
-end
-
-describe Google::Cloud::PubSub::V1::SubscriptionAdmin::Client do
-  let(:client) do
-    Google::Cloud::PubSub::V1::SubscriptionAdmin::Client.new do |config|
-      config.credentials = :this_channel_is_insecure
-    end
-  end
-
-  it "raises when modify_ack_deadline is called" do
-    assert_raises NotImplementedError do
-      client.modify_ack_deadline
-    end
-  end
-
-  it "raises when acknowledge is called" do
-    assert_raises NotImplementedError do
-      client.acknowledge
-    end
-  end
-
-  it "raises when pull is called" do
-    assert_raises NotImplementedError do
-      client.pull
-    end
-  end
-
-  it "raises when streaming_pull is called" do
-    assert_raises NotImplementedError do
-      client.streaming_pull
-    end
-  end
-end
-

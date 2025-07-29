@@ -279,3 +279,54 @@ describe Google::Cloud::PubSub::Service do
     end
   end
 end
+
+describe Google::Cloud::PubSub::TopicAdmin::Client do
+  it "is a subclass of V1::TopicAdmin::Client" do
+    assert(Google::Cloud::PubSub::TopicAdmin::Client < Google::Cloud::PubSub::V1::TopicAdmin::Client)
+  end
+
+  it "raises when publish is called" do
+    client = Google::Cloud::PubSub::TopicAdmin::Client.new do |config|
+      config.credentials = :this_channel_is_insecure
+    end
+    assert_raises NotImplementedError do
+      client.publish
+    end
+  end
+end
+
+describe Google::Cloud::PubSub::SubscriptionAdmin::Client do
+  let(:client) do
+    Google::Cloud::PubSub::SubscriptionAdmin::Client.new do |config|
+      config.credentials = :this_channel_is_insecure
+    end
+  end
+
+  it "is a subclass of V1::SubscriptionAdmin::Client" do
+    assert(Google::Cloud::PubSub::SubscriptionAdmin::Client < Google::Cloud::PubSub::V1::SubscriptionAdmin::Client)
+  end
+
+  it "raises when modify_ack_deadline is called" do
+    assert_raises NotImplementedError do
+      client.modify_ack_deadline
+    end
+  end
+
+  it "raises when acknowledge is called" do
+    assert_raises NotImplementedError do
+      client.acknowledge
+    end
+  end
+
+  it "raises when pull is called" do
+    assert_raises NotImplementedError do
+      client.pull
+    end
+  end
+
+  it "raises when streaming_pull is called" do
+    assert_raises NotImplementedError do
+      client.streaming_pull
+    end
+  end
+end
