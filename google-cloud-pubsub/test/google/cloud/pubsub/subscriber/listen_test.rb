@@ -28,7 +28,7 @@ describe Google::Cloud::PubSub::Subscriber, :listen, :mock_pubsub do
     _(listener).must_be_kind_of Google::Cloud::PubSub::MessageListener
     _(listener.subscription_name).must_equal subscriber.name
     _(listener.deadline).must_equal 60
-    _(listener.streams).must_equal 2
+    _(listener.streams).must_equal 1
     _(listener.max_outstanding_messages).must_equal 1000
     _(listener.max_outstanding_bytes).must_equal 100000000
     _(listener.max_total_lease_duration).must_equal 3600
@@ -42,7 +42,7 @@ describe Google::Cloud::PubSub::Subscriber, :listen, :mock_pubsub do
     _(listener).must_be_kind_of Google::Cloud::PubSub::MessageListener
     _(listener.subscription_name).must_equal subscriber.name
     _(listener.deadline).must_equal 120
-    _(listener.streams).must_equal 2
+    _(listener.streams).must_equal 1
     _(listener.max_outstanding_messages).must_equal 1000
     _(listener.max_outstanding_bytes).must_equal 100000000
     _(listener.max_total_lease_duration).must_equal 3600
@@ -70,7 +70,7 @@ describe Google::Cloud::PubSub::Subscriber, :listen, :mock_pubsub do
     _(listener).must_be_kind_of Google::Cloud::PubSub::MessageListener
     _(listener.subscription_name).must_equal subscriber.name
     _(listener.deadline).must_equal 60
-    _(listener.streams).must_equal 2
+    _(listener.streams).must_equal 1
     _(listener.max_outstanding_messages).must_equal 500
     _(listener.max_outstanding_bytes).must_equal 100000000
     _(listener.max_total_lease_duration).must_equal 3600
@@ -84,7 +84,7 @@ describe Google::Cloud::PubSub::Subscriber, :listen, :mock_pubsub do
     _(listener).must_be_kind_of Google::Cloud::PubSub::MessageListener
     _(listener.subscription_name).must_equal subscriber.name
     _(listener.deadline).must_equal 60
-    _(listener.streams).must_equal 2
+    _(listener.streams).must_equal 1
     _(listener.max_outstanding_messages).must_equal 500
     _(listener.max_outstanding_bytes).must_equal 100000000
     _(listener.max_total_lease_duration).must_equal 3600
@@ -98,7 +98,7 @@ describe Google::Cloud::PubSub::Subscriber, :listen, :mock_pubsub do
     _(listener).must_be_kind_of Google::Cloud::PubSub::MessageListener
     _(listener.subscription_name).must_equal subscriber.name
     _(listener.deadline).must_equal 60
-    _(listener.streams).must_equal 2
+    _(listener.streams).must_equal 1
     _(listener.max_outstanding_messages).must_equal 500
     _(listener.max_outstanding_bytes).must_equal 100000000
     _(listener.max_total_lease_duration).must_equal 3600
@@ -112,7 +112,7 @@ describe Google::Cloud::PubSub::Subscriber, :listen, :mock_pubsub do
     _(listener).must_be_kind_of Google::Cloud::PubSub::MessageListener
     _(listener.subscription_name).must_equal subscriber.name
     _(listener.deadline).must_equal 60
-    _(listener.streams).must_equal 2
+    _(listener.streams).must_equal 1
     _(listener.max_outstanding_messages).must_equal 1000
     _(listener.max_outstanding_bytes).must_equal 50_000
     _(listener.max_total_lease_duration).must_equal 3600
@@ -126,7 +126,7 @@ describe Google::Cloud::PubSub::Subscriber, :listen, :mock_pubsub do
     _(listener).must_be_kind_of Google::Cloud::PubSub::MessageListener
     _(listener.subscription_name).must_equal subscriber.name
     _(listener.deadline).must_equal 60
-    _(listener.streams).must_equal 2
+    _(listener.streams).must_equal 1
     _(listener.max_outstanding_messages).must_equal 1000
     _(listener.max_outstanding_bytes).must_equal 50_000
     _(listener.max_total_lease_duration).must_equal 3600
@@ -140,7 +140,7 @@ describe Google::Cloud::PubSub::Subscriber, :listen, :mock_pubsub do
     _(listener).must_be_kind_of Google::Cloud::PubSub::MessageListener
     _(listener.subscription_name).must_equal subscriber.name
     _(listener.deadline).must_equal 60
-    _(listener.streams).must_equal 2
+    _(listener.streams).must_equal 1
     _(listener.max_outstanding_messages).must_equal 1000
     _(listener.max_outstanding_bytes).must_equal 100000000
     _(listener.max_total_lease_duration).must_equal 7200
@@ -154,7 +154,7 @@ describe Google::Cloud::PubSub::Subscriber, :listen, :mock_pubsub do
     _(listener).must_be_kind_of Google::Cloud::PubSub::MessageListener
     _(listener.subscription_name).must_equal subscriber.name
     _(listener.deadline).must_equal 60
-    _(listener.streams).must_equal 2
+    _(listener.streams).must_equal 1
     _(listener.max_outstanding_messages).must_equal 1000
     _(listener.max_outstanding_bytes).must_equal 100000000
     _(listener.max_total_lease_duration).must_equal 7200
@@ -168,7 +168,7 @@ describe Google::Cloud::PubSub::Subscriber, :listen, :mock_pubsub do
     _(listener).must_be_kind_of Google::Cloud::PubSub::MessageListener
     _(listener.subscription_name).must_equal subscriber.name
     _(listener.deadline).must_equal 60
-    _(listener.streams).must_equal 2
+    _(listener.streams).must_equal 1
     _(listener.max_outstanding_messages).must_equal 1000
     _(listener.max_outstanding_bytes).must_equal 100000000
     _(listener.max_total_lease_duration).must_equal 3600
@@ -182,7 +182,7 @@ describe Google::Cloud::PubSub::Subscriber, :listen, :mock_pubsub do
     _(listener).must_be_kind_of Google::Cloud::PubSub::MessageListener
     _(listener.subscription_name).must_equal subscriber.name
     _(listener.deadline).must_equal 60
-    _(listener.streams).must_equal 2
+    _(listener.streams).must_equal 1
     _(listener.max_outstanding_messages).must_equal 1000
     _(listener.max_outstanding_bytes).must_equal 100000000
     _(listener.max_total_lease_duration).must_equal 3600

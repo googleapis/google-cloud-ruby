@@ -45,13 +45,13 @@ describe Google::Cloud::PubSub::MessageListener, :mock_pubsub do
     )
     _(listener).must_be_kind_of Google::Cloud::PubSub::MessageListener
     _(listener.deadline).must_equal 60
-    _(listener.streams).must_equal 2
+    _(listener.streams).must_equal 1
     _(listener.max_outstanding_messages).must_equal 1000
     _(listener.max_outstanding_bytes).must_equal 100_000_000
     _(listener.max_total_lease_duration).must_equal 3600
     _(listener.max_duration_per_lease_extension).must_equal 0
     _(listener.min_duration_per_lease_extension).must_equal 0
-    _(listener.stream_inventory).must_equal({limit: 500, bytesize: 50000000, max_duration_per_lease_extension: 0, min_duration_per_lease_extension: 0, extension: 3600})
+    _(listener.stream_inventory).must_equal({limit: 1000, bytesize: 100000000, max_duration_per_lease_extension: 0, min_duration_per_lease_extension: 0, extension: 3600})
     _(listener.callback_threads).must_equal 8
     _(listener.push_threads).must_equal 4
   end
