@@ -124,17 +124,31 @@ module Google
             rpc :GetPullRequestComment, ::Google::Cloud::SecureSourceManager::V1::GetPullRequestCommentRequest, ::Google::Cloud::SecureSourceManager::V1::PullRequestComment
             # Lists pull request comments.
             rpc :ListPullRequestComments, ::Google::Cloud::SecureSourceManager::V1::ListPullRequestCommentsRequest, ::Google::Cloud::SecureSourceManager::V1::ListPullRequestCommentsResponse
-            # Creates a pull request comment.
+            # Creates a pull request comment. This function is used to create a single
+            # PullRequestComment of type Comment, or a single PullRequestComment of type
+            # Code that's replying to another PullRequestComment of type Code. Use
+            # BatchCreatePullRequestComments to create multiple PullRequestComments for
+            # code reviews.
             rpc :CreatePullRequestComment, ::Google::Cloud::SecureSourceManager::V1::CreatePullRequestCommentRequest, ::Google::Longrunning::Operation
             # Updates a pull request comment.
             rpc :UpdatePullRequestComment, ::Google::Cloud::SecureSourceManager::V1::UpdatePullRequestCommentRequest, ::Google::Longrunning::Operation
             # Deletes a pull request comment.
             rpc :DeletePullRequestComment, ::Google::Cloud::SecureSourceManager::V1::DeletePullRequestCommentRequest, ::Google::Longrunning::Operation
-            # Batch creates pull request comments.
+            # Batch creates pull request comments. This function is used to create
+            # multiple PullRequestComments for code review. There needs to be exactly one
+            # PullRequestComment of type Review, and at most 100 PullRequestComments of
+            # type Code per request. The Postition of the code comments must be unique
+            # within the request.
             rpc :BatchCreatePullRequestComments, ::Google::Cloud::SecureSourceManager::V1::BatchCreatePullRequestCommentsRequest, ::Google::Longrunning::Operation
-            # Resolves pull request comments.
+            # Resolves pull request comments. A list of PullRequestComment names must be
+            # provided. The PullRequestComment names must be in the same conversation
+            # thread. If auto_fill is set, all comments in the conversation thread will
+            # be resolved.
             rpc :ResolvePullRequestComments, ::Google::Cloud::SecureSourceManager::V1::ResolvePullRequestCommentsRequest, ::Google::Longrunning::Operation
-            # Unresolves pull request comment.
+            # Unresolves pull request comments. A list of PullRequestComment names must
+            # be provided. The PullRequestComment names must be in the same conversation
+            # thread. If auto_fill is set, all comments in the conversation thread will
+            # be unresolved.
             rpc :UnresolvePullRequestComments, ::Google::Cloud::SecureSourceManager::V1::UnresolvePullRequestCommentsRequest, ::Google::Longrunning::Operation
             # Creates an issue comment.
             rpc :CreateIssueComment, ::Google::Cloud::SecureSourceManager::V1::CreateIssueCommentRequest, ::Google::Longrunning::Operation
