@@ -38,7 +38,7 @@ describe Google::Cloud::PubSub::MessageListener, :stream, :mock_pubsub do
 
     stub = StreamingPullStub.new response_groups
     called = false  
-    def stub.acknowledge subscription:, ack_ids:
+    def stub.acknowledge_internal subscription:, ack_ids:
       @acknowledge_requests << [subscription, ack_ids.flatten.sort]
       begin
         raise GRPC::InvalidArgument.new "test"
@@ -77,7 +77,7 @@ describe Google::Cloud::PubSub::MessageListener, :stream, :mock_pubsub do
 
     stub = StreamingPullStub.new response_groups
     called = false  
-    def stub.modify_ack_deadline subscription:, ack_ids:, ack_deadline_seconds:
+    def stub.modify_ack_deadline_internal subscription:, ack_ids:, ack_deadline_seconds:
       if @modify_ack_deadline_requests.count == 0
         return @modify_ack_deadline_requests << [subscription, ack_ids.sort, ack_deadline_seconds]
       end
@@ -120,7 +120,7 @@ describe Google::Cloud::PubSub::MessageListener, :stream, :mock_pubsub do
     stub = StreamingPullStub.new response_groups
     called = false  
     errors = []
-    def stub.modify_ack_deadline subscription:, ack_ids:, ack_deadline_seconds:
+    def stub.modify_ack_deadline_internal subscription:, ack_ids:, ack_deadline_seconds:
       if @modify_ack_deadline_requests.count == 0
         return @modify_ack_deadline_requests << [subscription, ack_ids.sort, ack_deadline_seconds]
       end
@@ -166,7 +166,7 @@ describe Google::Cloud::PubSub::MessageListener, :stream, :mock_pubsub do
     stub = StreamingPullStub.new response_groups
     called = false  
     errors = []
-    def stub.acknowledge subscription:, ack_ids:
+    def stub.acknowledge_internal subscription:, ack_ids:
       raise StandardError.new "Test failure"
     end
 
@@ -208,7 +208,7 @@ describe Google::Cloud::PubSub::MessageListener, :stream, :mock_pubsub do
     stub = StreamingPullStub.new response_groups
     called = false  
     errors = []
-    def stub.acknowledge subscription:, ack_ids:
+    def stub.acknowledge_internal subscription:, ack_ids:
       raise Google::Cloud::PermissionDeniedError.new "Test failure"
     end
 
@@ -250,7 +250,7 @@ describe Google::Cloud::PubSub::MessageListener, :stream, :mock_pubsub do
     stub = StreamingPullStub.new response_groups
     called = false  
     errors = []
-    def stub.modify_ack_deadline subscription:, ack_ids:, ack_deadline_seconds:
+    def stub.modify_ack_deadline_internal subscription:, ack_ids:, ack_deadline_seconds:
       if @modify_ack_deadline_requests.count == 0
         return @modify_ack_deadline_requests << ["ack_ids"]
       end
@@ -295,7 +295,7 @@ describe Google::Cloud::PubSub::MessageListener, :stream, :mock_pubsub do
     stub = StreamingPullStub.new response_groups
     called = false  
     errors = []
-    def stub.acknowledge subscription:, ack_ids:
+    def stub.acknowledge_internal subscription:, ack_ids:
       raise Google::Cloud::FailedPreconditionError.new "Test failure"
     end
 
@@ -337,7 +337,7 @@ describe Google::Cloud::PubSub::MessageListener, :stream, :mock_pubsub do
     stub = StreamingPullStub.new response_groups
     called = false  
     errors = []
-    def stub.modify_ack_deadline subscription:, ack_ids:, ack_deadline_seconds:
+    def stub.modify_ack_deadline_internal subscription:, ack_ids:, ack_deadline_seconds:
       if @modify_ack_deadline_requests.count == 0
         return @modify_ack_deadline_requests << ["ack_ids"]
       end
@@ -468,7 +468,7 @@ describe Google::Cloud::PubSub::MessageListener, :stream, :mock_pubsub do
     stub = StreamingPullStub.new response_groups
     called = false  
     errors = []
-    def stub.acknowledge subscription:, ack_ids:
+    def stub.acknowledge_internal subscription:, ack_ids:
       @acknowledge_requests << [subscription, ack_ids.flatten.sort]
       begin
         raise GRPC::InvalidArgument.new

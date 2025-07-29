@@ -31,7 +31,7 @@ describe Google::Cloud::PubSub::Publisher, :publish, :mock_pubsub do
     publish_res = Google::Cloud::PubSub::V1::PublishResponse.new({ message_ids: ["msg1"] })
     mock = Minitest::Mock.new
     expected_request = {topic: topic_path(topic_name), messages: messages}
-    mock.expect :publish, publish_res do |actual_request|
+    mock.expect :publish_internal, publish_res do |actual_request|
       actual_request == expected_request
     end
     publisher.service.mocked_topic_admin = mock
@@ -51,7 +51,7 @@ describe Google::Cloud::PubSub::Publisher, :publish, :mock_pubsub do
     publish_res = Google::Cloud::PubSub::V1::PublishResponse.new({ message_ids: ["msg1"] })
     mock = Minitest::Mock.new
     expected_request = {topic: topic_path(topic_name), messages: messages}
-    mock.expect :publish, publish_res do |actual_request|
+    mock.expect :publish_internal, publish_res do |actual_request|
       actual_request == expected_request
     end
     publisher.service.mocked_topic_admin = mock
@@ -72,7 +72,7 @@ describe Google::Cloud::PubSub::Publisher, :publish, :mock_pubsub do
     publish_res = Google::Cloud::PubSub::V1::PublishResponse.new({ message_ids: ["msg1"] })
     mock = Minitest::Mock.new
     expected_request = {topic: topic_path(topic_name), messages: messages}
-    mock.expect :publish, publish_res do |actual_request|
+    mock.expect :publish_internal, publish_res do |actual_request|
       actual_request == expected_request
     end
     publisher.service.mocked_topic_admin = mock
@@ -99,7 +99,7 @@ describe Google::Cloud::PubSub::Publisher, :publish, :mock_pubsub do
     publish_res = Google::Cloud::PubSub::V1::PublishResponse.new({ message_ids: ["msg1"] })
     mock = Minitest::Mock.new
     expected_request = {topic: topic_path(topic_name), messages: messages}
-    mock.expect :publish, publish_res do |actual_request|
+    mock.expect :publish_internal, publish_res do |actual_request|
       actual_request == expected_request
     end
     publisher.service.mocked_topic_admin = mock
@@ -122,7 +122,7 @@ describe Google::Cloud::PubSub::Publisher, :publish, :mock_pubsub do
     publish_res = Google::Cloud::PubSub::V1::PublishResponse.new({ message_ids: ["msg1", "msg2", "msg3"] })
     mock = Minitest::Mock.new
     expected_request = {topic: topic_path(topic_name), messages: messages}
-    mock.expect :publish, publish_res do |actual_request|
+    mock.expect :publish_internal, publish_res do |actual_request|
       actual_request == expected_request
     end
     publisher.service.mocked_topic_admin = mock
@@ -152,7 +152,7 @@ describe Google::Cloud::PubSub::Publisher, :publish, :mock_pubsub do
       publish_res = Google::Cloud::PubSub::V1::PublishResponse.new({ message_ids: ["msg1"] })
       mock = Minitest::Mock.new
       expected_request = {topic: topic_path(topic_name), messages: messages}
-    mock.expect :publish, publish_res do |actual_request|
+      mock.expect :publish_internal, publish_res do |actual_request|
       actual_request == expected_request
     end
       publisher.service.mocked_topic_admin = mock
@@ -172,7 +172,7 @@ describe Google::Cloud::PubSub::Publisher, :publish, :mock_pubsub do
       publish_res = Google::Cloud::PubSub::V1::PublishResponse.new({ message_ids: ["msg1"] })
       mock = Minitest::Mock.new
       expected_request = {topic: topic_path(topic_name), messages: messages}
-    mock.expect :publish, publish_res do |actual_request|
+      mock.expect :publish_internal, publish_res do |actual_request|
       actual_request == expected_request
     end
       publisher.service.mocked_topic_admin = mock
@@ -195,7 +195,7 @@ describe Google::Cloud::PubSub::Publisher, :publish, :mock_pubsub do
       publish_res = Google::Cloud::PubSub::V1::PublishResponse.new({ message_ids: ["msg1", "msg2", "msg3"] })
       mock = Minitest::Mock.new
       expected_request = {topic: topic_path(topic_name), messages: messages}
-    mock.expect :publish, publish_res do |actual_request|
+      mock.expect :publish_internal, publish_res do |actual_request|
       actual_request == expected_request
     end
       publisher.service.mocked_topic_admin = mock
@@ -221,7 +221,7 @@ describe Google::Cloud::PubSub::Publisher, :publish, :mock_pubsub do
 
     it "publishes a message" do
       stub = Object.new
-      def stub.publish *args
+      def stub.publish_internal *args
         raise Google::Cloud::NotFoundError.new("not found")
       end
       pubsub.service.mocked_topic_admin = stub
@@ -233,7 +233,7 @@ describe Google::Cloud::PubSub::Publisher, :publish, :mock_pubsub do
 
     it "publishes a message with attributes" do
       stub = Object.new
-      def stub.publish *args
+      def stub.publish_internal *args
         raise Google::Cloud::NotFoundError.new("not found")
       end
       pubsub.service.mocked_topic_admin = stub
@@ -245,7 +245,7 @@ describe Google::Cloud::PubSub::Publisher, :publish, :mock_pubsub do
 
     it "publishes multiple messages with a block" do
       stub = Object.new
-      def stub.publish *args
+      def stub.publish_internal *args
         raise Google::Cloud::NotFoundError.new("not found")
       end
       pubsub.service.mocked_topic_admin = stub

@@ -89,7 +89,7 @@ module Google
         ##
         # Retrieve a client for managing subscriptions.
         #
-        # @return [Google::Cloud::PubSub::V1::SubscriptionAdmin::Client]
+        # @return [Google::Cloud::PubSub::SubscriptionAdmin::Client]
         #
         def subscription_admin
           service.subscription_admin
@@ -98,7 +98,7 @@ module Google
         ##
         # Retrieve a client for managing topics.
         #
-        # @return [Google::Cloud::PubSub::V1::TopicAdmin::Client]
+        # @return [Google::Cloud::PubSub::TopicAdmin::Client]
         #
         def topic_admin
           service.topic_admin
