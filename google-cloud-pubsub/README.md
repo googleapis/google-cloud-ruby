@@ -54,7 +54,7 @@ end
 # Gracefully shut down the subscriber on program exit, blocking until
 # all received messages have been processed or 10 seconds have passed
 at_exit do
-	listener.stop!(10)
+  listener.stop!(10)
 end
 
 # Start background threads that will call the block passed to listen.
