@@ -105,7 +105,7 @@ module Google
           #   @return [::String]
           #     Required. The permanent, unique identifier for the product review in the
           #     publisher’s system.
-          # @!attribute [rw] attributes
+          # @!attribute [rw] product_review_attributes
           #   @return [::Google::Shopping::Merchant::Reviews::V1beta::ProductReviewAttributes]
           #     Optional. A list of product review attributes.
           # @!attribute [rw] custom_attributes
