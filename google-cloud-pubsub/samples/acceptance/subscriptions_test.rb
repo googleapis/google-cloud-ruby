@@ -17,11 +17,13 @@ require_relative "../pubsub_create_subscription_with_filter.rb"
 require_relative "../pubsub_subscriber_exactly_once_delivery.rb"
 require_relative "../pubsub_create_subscription_with_exactly_once_delivery.rb"
 require_relative "../pubsub_create_bigquery_subscription.rb"
+require_relative "../pubsub_optimistic_subscribe.rb"
 require_relative "../pubsub_subscriber_async_pull_custom_attributes.rb"
 require_relative "../pubsub_subscriber_sync_pull.rb"
 require_relative "../pubsub_subscriber_flow_settings.rb"
 require_relative "../pubsub_subscriber_async_pull.rb"
 require_relative "../pubsub_subscriber_concurrency_control.rb"
+require_relative "../pubsub_subscriber_error_listener.rb"
 require_relative "../pubsub_subscriber_sync_pull_with_lease.rb"
 require_relative "../pubsub_update_push_configuration.rb"
 require_relative "../pubsub_list_subscriptions.rb"
@@ -164,6 +166,19 @@ describe "subscriptions" do
     end
   end
 
+  it "supports pubsub_subscriber_error_listener" do
+    publisher = pubsub.publisher @topic.name
+    publisher.publish "This is a test message."
+    sleep 5
+
+    # pubsub_subscriber_error_listener
+    expect_with_retry "pubsub_subscriber_error_listener" do
+      assert_output "Received message: This is a test message.\n" do
+        listen_for_messages_with_error_handler subscription_id: @subscription.name
+      end
+    end
+  end
+
   it "supports pubsub_subscriber_async_pull_custom_attributes" do
     publisher = pubsub.publisher @topic.name
     publisher.publish "This is a test message.", origin: "ruby-sample"
@@ -267,4 +282,27 @@ describe "subscriptions" do
       )
     end
   end 
+
+  it "supports pubsub_optimistic_subscribe" do
+    topic_id = @topic.name
+    subscription_id = random_subscription_id
+    publisher = pubsub.publisher @topic.name
+
+    out, _err = capture_io do
+      optimistic_subscribe topic_id: topic_id, subscription_id: subscription_id
+    end
+
+    assert_includes out, "Subscription #{subscription_id} does not exist."
+    assert_includes out, "Subscription #{subscription_id} created."
+
+    @created_subscriptions << subscription_id
+    publisher.publish "This is a test message."
+    sleep 5
+
+    out, _err = capture_io do
+      optimistic_subscribe topic_id: topic_id, subscription_id: subscription_id
+    end
+
+    assert_includes out, "Received message: This is a test message."
+  end
 end

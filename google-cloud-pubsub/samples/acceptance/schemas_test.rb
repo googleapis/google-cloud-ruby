@@ -13,12 +13,15 @@
 # limitations under the License.
 
 require_relative "helper"
+require_relative "../pubsub_commit_avro_schema"
 require_relative "../pubsub_commit_proto_schema"
 require_relative "../pubsub_create_avro_schema"
 require_relative "../pubsub_create_topic_with_schema"
 require_relative "../pubsub_create_proto_schema"
 require_relative "../pubsub_delete_schema"
+require_relative "../pubsub_delete_schema_revision"
 require_relative "../pubsub_get_schema"
+require_relative "../pubsub_get_schema_revision"
 require_relative "../pubsub_list_schema_revisions"
 require_relative "../pubsub_list_schemas"
 require_relative "../pubsub_publish_avro_records"
@@ -36,6 +39,8 @@ describe "schemas" do
   let(:topic_admin) { pubsub.topic_admin }
   let(:subscription_admin) { pubsub.subscription_admin }
   let(:schemas) { pubsub.schemas }
+  let(:proto_file) { File.expand_path "data/us-states.proto", __dir__ }
+  let(:revision_file) { File.expand_path "data/us-states-revision.proto", __dir__ }
 
   after do
     subscription_admin.delete_subscription subscription: @subscription.name if @subscription
@@ -43,7 +48,7 @@ describe "schemas" do
     schemas.delete_schema name: @schema.name if @schema
   end
 
-  it "supports pubsub_create_schema, pubsub_get_schema, pubsub_list_schemas, pubsub_delete_schema" do
+  it "supports pubsub_create_avro_schema, pubsub_get_schema, pubsub_list_schemas, pubsub_delete_schema" do
     # create_avro_schema
     assert_output "Schema projects/#{pubsub.project}/schemas/#{schema_id} created.\n" do
       create_avro_schema schema_id: schema_id, avsc_file: avsc_file
@@ -71,21 +76,49 @@ describe "schemas" do
     end
   end
 
+  it "supports pubsub_create_proto_schema, pubsub_get_schema_revision, pubsub_commit_proto_schema, pubsub_delete_schema_revision" do
+    # create_proto_schema
+    assert_output "Schema projects/#{pubsub.project}/schemas/#{schema_id} created.\n" do
+      create_proto_schema schema_id: schema_id, proto_file: proto_file
+    end
+    @schema = schemas.get_schema name: pubsub.schema_path(schema_id)
+    assert @schema
+    assert_equal "projects/#{pubsub.project}/schemas/#{schema_id}", @schema.name
+
+    # pubsub_get_schema_revision
+    assert_output "Schema projects/#{pubsub.project}/schemas/#{schema_id}@#{@schema.revision_id} retrieved.\n" do
+      get_schema_revision schema_id: schema_id, revision_id: @schema.revision_id
+    end
+
+    # pubsub_commit_proto_schema
+    revised_schema = nil
+    out, _err = capture_io do
+      revised_schema = commit_proto_schema schema_id: schema_id, proto_file: revision_file
+    end
+    assert_includes out, "Schema commited with revision #{revised_schema.revision_id}."
+
+    #pubsub_delete_schema_revision
+    assert_output "Schema #{schema_id}@#{revised_schema.revision_id} deleted.\n" do
+      delete_schema_revision schema_id: schema_id, revision_id: revised_schema.revision_id
+    end
+  end
+
   describe "AVRO" do
     require "avro"
     let(:avsc_definition) { File.read avsc_file }
     let(:avro_schema) { Avro::Schema.parse avsc_definition }
     let(:record) { { "name" => "Alaska", "post_abbr" => "AK" } }
 
-    it "supports pubsub_create_topic_with_schema, pubsub_publish_avro_records with binary encoding" do
+    before do
       schema = Google::Cloud::PubSub::V1::Schema.new name: schema_id, 
                                                      type: :AVRO,
                                                      definition: avsc_definition
       @schema = schemas.create_schema parent: pubsub.project_path,
                                       schema: schema,
                                       schema_id: schema_id
+    end
 
-
+    it "supports pubsub_create_topic_with_schema, pubsub_publish_avro_records with binary encoding" do
       # pubsub_create_topic_with_schema
       assert_output "Topic projects/#{pubsub.project}/topics/#{topic_id} created.\n" do
         create_topic_with_schema topic_id: topic_id, schema_id: schema_id, message_encoding: :BINARY
@@ -101,13 +134,6 @@ describe "schemas" do
     end
 
     it "supports pubsub_create_topic_with_schema, pubsub_publish_avro_records with JSON encoding" do
-      schema = Google::Cloud::PubSub::V1::Schema.new name: schema_id, 
-                                                     type: :AVRO,
-                                                     definition: avsc_definition
-      @schema = schemas.create_schema parent: pubsub.project_path,
-                                      schema: schema,
-                                      schema_id: schema_id
-
       # pubsub_create_topic_with_schema
       assert_output "Topic projects/#{pubsub.project}/topics/#{topic_id} created.\n" do
         create_topic_with_schema topic_id: topic_id, schema_id: schema_id, message_encoding: :JSON
@@ -123,13 +149,6 @@ describe "schemas" do
     end
 
     it "supports pubsub_subscribe_avro_records with binary encoding" do
-      schema = Google::Cloud::PubSub::V1::Schema.new name: schema_id, 
-                                                     type: :AVRO,
-                                                     definition: avsc_definition
-      @schema = schemas.create_schema parent: pubsub.project_path,
-                                      schema: schema,
-                                      schema_id: schema_id
-
       schema_settings = Google::Cloud::PubSub::V1::SchemaSettings.new schema: pubsub.schema_path(schema_id),
                                                                       encoding: :BINARY
 
@@ -138,30 +157,24 @@ describe "schemas" do
                                         schema_settings: schema_settings
 
       @subscription = subscription_admin.create_subscription name: pubsub.subscription_path(random_subscription_id),
-                                                             topic: @topic.name
+                                                             topic: @topic.name,
+                                                             ack_deadline_seconds: 60
 
       writer = Avro::IO::DatumWriter.new avro_schema
       buffer = StringIO.new
       writer.write record, Avro::IO::BinaryEncoder.new(buffer)
       publisher = pubsub.publisher @topic.name
       publisher.publish buffer
-      sleep 5
 
       # pubsub_subscribe_avro_records
       expect_with_retry "pubsub_subscribe_avro_records" do
-        assert_output "Received a binary-encoded message:\n{\"name\"=>\"Alaska\", \"post_abbr\"=>\"AK\"}\n" do
+        assert_output "Received a binary-encoded message:\n{\"name\" => \"Alaska\", \"post_abbr\" => \"AK\"}\n" do
           subscribe_avro_records subscription_id: @subscription.name, avsc_file: avsc_file
         end
       end
     end
 
     it "supports pubsub_subscribe_avro_records with JSON encoding" do
-      schema = Google::Cloud::PubSub::V1::Schema.new name: schema_id, 
-                                                     type: :AVRO,
-                                                     definition: avsc_definition
-      @schema = schemas.create_schema parent: pubsub.project_path,
-                                      schema: schema,
-                                      schema_id: schema_id
       schema_settings = Google::Cloud::PubSub::V1::SchemaSettings.new schema: pubsub.schema_path(schema_id),
                                                                       encoding: :JSON
 
@@ -170,24 +183,49 @@ describe "schemas" do
                                         schema_settings: schema_settings
 
       @subscription = subscription_admin.create_subscription name: pubsub.subscription_path(random_subscription_id),
-                                                             topic: @topic.name
+                                                             topic: @topic.name,
+                                                             ack_deadline_seconds: 60
 
       publisher = pubsub.publisher @topic.name
       publisher.publish record.to_json
-      sleep 5
 
       # pubsub_subscribe_avro_records
       expect_with_retry "pubsub_subscribe_avro_records" do
-        assert_output "Received a JSON-encoded message:\n{\"name\"=>\"Alaska\", \"post_abbr\"=>\"AK\"}\n" do
+        assert_output "Received a JSON-encoded message:\n{\"name\" => \"Alaska\", \"post_abbr\" => \"AK\"}\n" do
           subscribe_avro_records subscription_id: @subscription.name, avsc_file: nil
         end
       end
+    end
+
+    it "supports pubsub_commit_avro_schema & pubsub_commit_list_schema_revisions" do
+      schema = Google::Cloud::PubSub::V1::Schema.new name: schema_id, 
+                                                     type: :AVRO,
+                                                     definition: avsc_definition
+      @schema = schemas.create_schema parent: pubsub.project_path,
+                                      schema: schema,
+                                      schema_id: schema_id
+
+      rev_id = @schema.revision_id
+
+      schema1 = nil
+      # pubsub_commit_avro_schema
+      out, _err = capture_io do
+        schema1 = commit_avro_schema schema_id: schema_id, avsc_file: avsc_file
+      end
+      refute_equal out, "Schema commited with revision #{rev_id}."
+      assert_includes out, "Schema commited with revision"
+
+      # pubsub_list_schema_revisions
+      out, _err = capture_io do
+        list_schema_revisions schema_id: schema_id
+      end
+
+      assert_includes out, schema1.revision_id
     end
   end
 
   describe "PROTOCOL_BUFFER" do
     require_relative "../utilities/us-states_pb"
-    let(:proto_file) { File.expand_path "data/us-states.proto", __dir__ }
     let(:proto_definition) { File.read proto_file }
     let(:revision_file) { File.expand_path "data/us-states-revision.proto", __dir__ }
 

@@ -20,16 +20,16 @@ def publish_with_error_handler topic_id:
 
   pubsub = Google::Cloud::PubSub.new
 
-  topic = pubsub.topic topic_id
+  publisher = pubsub.publisher topic_id
 
   begin
-    topic.publish_async "This is a test message." do |result|
+    publisher.publish_async "This is a test message." do |result|
       raise "Failed to publish the message." unless result.succeeded?
       puts "Message published asynchronously."
     end
 
     # Stop the async_publisher to send all queued messages immediately.
-    topic.async_publisher.stop.wait!
+    publisher.async_publisher.stop.wait!
   rescue StandardError => e
     puts "Received error while publishing: #{e.message}"
   end
