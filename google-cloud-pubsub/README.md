@@ -102,8 +102,7 @@ support schedule.
 
 This library follows [Semantic Versioning](http://semver.org/).
 
-It is currently in major version zero (0.y.z), which means that anything may
-change at any time and the public API should not be considered stable.
+This library is considered to be stable and will not have backwards-incompatible changes introduced in subsequent minor releases.
 
 ## Contributing
 
