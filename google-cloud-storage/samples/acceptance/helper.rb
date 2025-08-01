@@ -25,6 +25,23 @@ require "uri"
 require "ostruct"
 
 
+def grant_storage_permissions bucket_name:
+  storage = Google::Cloud::Storage.new
+  bucket = storage.bucket bucket_name
+
+  # object_viewer = "roles/storage.objectViewer"
+  bucket_reader = "roles/storage.admin"
+  # bucket_writer = "roles/storage.legacyBucketWriter"
+  member = "serviceAccount:#{storage.service_account_email}"
+
+  bucket.policy do |p|
+    p.add bucket_reader,
+          member
+  end
+  puts bucket.policy
+  bucket
+
+end
 def fixture_bucket
   storage_client = Google::Cloud::Storage.new
   storage_client.bucket($fixture_bucket_name) ||
@@ -36,6 +53,7 @@ def create_bucket_helper bucket_name
   retry_resource_exhaustion do
     storage_client.create_bucket bucket_name
   end
+  grant_storage_permissions bucket_name: bucket_name
 end
 
 def delete_bucket_helper bucket_name
@@ -43,7 +61,6 @@ def delete_bucket_helper bucket_name
   retry_resource_exhaustion do
     bucket = storage_client.bucket bucket_name
     return unless bucket
-
     bucket.files.each(&:delete)
     bucket.delete
   end
