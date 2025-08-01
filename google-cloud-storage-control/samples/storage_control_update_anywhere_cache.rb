@@ -18,7 +18,6 @@ require "google/cloud/storage/control"
 def update_anywhere_cache bucket_name:, anywhere_cache_id:
   # The ID of your GCS bucket
   # bucket_name = "your-unique-bucket-name"
-
   # A value that, along with the bucket's name, uniquely identifies the cache
   # anywhere_cache_id = "us-east1-b"
   require "google/cloud/storage/control/v2"
