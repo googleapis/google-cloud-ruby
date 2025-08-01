@@ -38,6 +38,7 @@ def grant_storage_permissions bucket_name:
     p.add bucket_reader,
           member
   end
+  puts bucket.policy
   bucket
 
 end
