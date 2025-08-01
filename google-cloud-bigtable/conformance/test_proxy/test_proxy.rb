@@ -223,8 +223,8 @@ class TestProxyServer < Google::Bigtable::Testproxy::CloudBigtableV2TestProxy::S
     end
   rescue Google::Cloud::Error => e
     LOGGER.info "ReadRows failed: Caught #{e}"
-    Google::Bigtable::Testproxy::RowResult.new(
-      status: make_status(e.code)
+    Google::Bigtable::Testproxy::RowsResult.new(
+      status: make_status(e.code, e.message)
     )
   end
   # rubocop:enable Metrics/AbcSize
