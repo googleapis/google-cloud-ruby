@@ -1,5 +1,18 @@
 # Changelog
 
+### 2.4.0 (2025-07-25)
+
+#### Features
+
+* add AssistantService 
+* add SessionService ([#30717](https://github.com/googleapis/google-cloud-ruby/issues/30717)) 
+
+### 2.3.1 (2025-07-15)
+
+#### Documentation
+
+* Clarify documentation for cases when multiple parameters are mutually exclusive for an RPC method ([#30624](https://github.com/googleapis/google-cloud-ruby/issues/30624)) 
+
 ### 2.3.0 (2025-06-13)
 
 #### Features

@@ -25,7 +25,7 @@ module Google
         # @!attribute [rw] name
         #   @return [::String]
         #     The name of the disk, for example,
-        #     `https://www.googleapis.com/compute/v1/projects/{project-id}/zones/{zone-id}/disks/{disk-id}`.
+        #     "https://www.googleapis.com/compute/v1/projects/\\{project-id}/zones/\\{zone-id}/disks/\\{disk-id}".
         class Disk
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

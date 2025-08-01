@@ -1,0 +1,31 @@
+name: Delete a library
+
+on:
+  workflow_dispatch:
+    inputs:
+      gem:
+        description: "name of gem to remove"
+        required: true
+      flags:
+        description: "Extra flags to pass to toys delete-library"
+        required: false
+
+jobs:
+  DeleteLibrary:
+    if: ${{ github.repository == 'googleapis/google-cloud-ruby' }}
+    runs-on: ubuntu-latest
+    env:
+      GITHUB_TOKEN: ${{ secrets.YOSHI_CODE_BOT_TOKEN }}
+    steps:
+    - name: Checkout repo
+      uses: actions/checkout@v4
+    - name: Install Ruby 3.4
+      uses: ruby/setup-ruby@v1
+      with:
+        ruby-version: "3.4"
+    - name: Install tools
+      run: |
+        gem install --no-document toys
+    - name: Delete-library
+      run: |
+        toys delete-library -v --fork ${{ github.event.inputs.flags }} ${{ github.event.inputs.gem }}

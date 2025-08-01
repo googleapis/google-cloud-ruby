@@ -1,5 +1,11 @@
 # Release History
 
+### 1.6.1 (2025-07-28)
+
+#### Documentation
+
+* Updated Private Service Connect IP ranges when route_all_traffic is false ([#30731](https://github.com/googleapis/google-cloud-ruby/issues/30731)) 
+
 ### 1.6.0 (2025-05-12)
 
 #### Features

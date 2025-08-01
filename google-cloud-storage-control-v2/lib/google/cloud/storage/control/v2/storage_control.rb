@@ -26,6 +26,7 @@ require "google/cloud/storage/control/v2/storage_control/credentials"
 require "google/cloud/storage/control/v2/storage_control/paths"
 require "google/cloud/storage/control/v2/storage_control/operations"
 require "google/cloud/storage/control/v2/storage_control/client"
+require "google/cloud/storage/control/v2/storage_control/rest"
 
 module Google
   module Cloud
@@ -39,6 +40,11 @@ module Google
           #
           #     require "google/cloud/storage/control/v2/storage_control"
           #     client = ::Google::Cloud::Storage::Control::V2::StorageControl::Client.new
+          #
+          # @example Load this service and instantiate a REST client
+          #
+          #     require "google/cloud/storage/control/v2/storage_control/rest"
+          #     client = ::Google::Cloud::Storage::Control::V2::StorageControl::Rest::Client.new
           #
           module StorageControl
           end

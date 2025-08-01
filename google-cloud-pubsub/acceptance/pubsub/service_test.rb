@@ -45,10 +45,11 @@ describe Google::Cloud::PubSub::Service do
     end.configure
   end
 
-  it "configures the V1::Subscriber::Client" do
+  it "configures the V1::SubscriptionAdmin::Client" do
     _(pubsub.project_id).wont_be :empty?
-    config = pubsub.service.subscriber.configure
-    _(config).must_be_kind_of Google::Cloud::PubSub::V1::Subscriber::Client::Configuration
+
+    config = pubsub.subscription_admin.configure
+    _(config).must_be_kind_of Google::Cloud::PubSub::V1::SubscriptionAdmin::Client::Configuration
     _(config.timeout).must_equal timeout
     _(config.endpoint).must_be :nil?
     _(config.universe_domain).must_equal universe_domain
@@ -58,9 +59,9 @@ describe Google::Cloud::PubSub::Service do
     assert_config_rpcs_equals subscriber_default_config.rpcs, 16, config.rpcs, timeout: timeout
   end
 
-  it "configures the V1::Publisher::Client" do
+  it "configures the V1::TopicAdmin::Client" do
     _(pubsub.project_id).wont_be :empty?
-    config = pubsub.service.publisher.configure
+    config = pubsub.topic_admin.configure
     _(config).must_be_kind_of Google::Cloud::PubSub::V1::Publisher::Client::Configuration
     _(config.timeout).must_equal timeout
     _(config.endpoint).must_be :nil?
@@ -73,7 +74,8 @@ describe Google::Cloud::PubSub::Service do
 
   it "configures the V1::IAMPolicy::Client" do
     _(pubsub.project_id).wont_be :empty?
-    config = pubsub.service.iam.configure
+    _topic_admin = pubsub.topic_admin
+    config = pubsub.iam.configure
     _(config).must_be_kind_of Google::Iam::V1::IAMPolicy::Client::Configuration
     _(config.timeout).must_equal timeout
     _(config.endpoint).must_equal endpoint
@@ -86,7 +88,7 @@ describe Google::Cloud::PubSub::Service do
 
   it "configures the V1::SchemaService::Client" do
     _(pubsub.project_id).wont_be :empty?
-    config = pubsub.service.schemas.configure
+    config = pubsub.schemas.configure
     _(config).must_be_kind_of Google::Cloud::PubSub::V1::SchemaService::Client::Configuration
     _(config.timeout).must_equal timeout
     _(config.endpoint).must_be :nil?

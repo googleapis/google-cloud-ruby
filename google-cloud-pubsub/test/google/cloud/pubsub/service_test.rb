@@ -49,12 +49,12 @@ describe Google::Cloud::PubSub::Service do
   let(:expected_metadata) { { "google-cloud-resource-prefix": "projects/#{project}" } }
 
   let(:subscriber_default_config) do
-    Google::Cloud::PubSub::V1::Subscriber::Client.new do |config|
+    Google::Cloud::PubSub::V1::SubscriptionAdmin::Client.new do |config|
       config.credentials = :this_channel_is_insecure
     end.configure
   end
   let(:publisher_default_config) do
-    Google::Cloud::PubSub::V1::Publisher::Client.new do |config|
+    Google::Cloud::PubSub::V1::TopicAdmin::Client.new do |config|
       config.credentials = :this_channel_is_insecure
     end.configure
   end
@@ -70,15 +70,15 @@ describe Google::Cloud::PubSub::Service do
   end
   let(:dummy_stub) { PubSubServiceTestDummyStub.new }
 
-  it "configures the V1::Subscriber::Client" do
+  it "configures the V1::SubscriptionAdmin::Client" do
     # Clear all environment variables
     ENV.stub :[], nil do
       Google::Auth::Credentials.stub :default, credentials do
         Gapic::ServiceStub.stub :new, dummy_stub do
           service = Google::Cloud::PubSub::Service.new project, nil
           _(service.project).must_equal project
-          config = service.subscriber.configure
-          _(config).must_be_kind_of Google::Cloud::PubSub::V1::Subscriber::Client::Configuration
+          config = service.subscription_admin.configure
+          _(config).must_be_kind_of Google::Cloud::PubSub::V1::SubscriptionAdmin::Client::Configuration
           _(config.timeout).must_be :nil?
           _(config.endpoint).must_be :nil?
           _(config.universe_domain).must_equal universe_domain
@@ -92,15 +92,15 @@ describe Google::Cloud::PubSub::Service do
     end
   end
 
-  it "configures the V1::Subscriber::Client with host, universe_domain, and timeout" do
+  it "configures the V1::SubscriptionAdmin::Client with host, universe_domain, and timeout" do
     # Clear all environment variables
     ENV.stub :[], nil do
       Google::Auth::Credentials.stub :default, credentials do
         Gapic::ServiceStub.stub :new, dummy_stub do
           service = Google::Cloud::PubSub::Service.new project, nil, host: endpoint_2, timeout: timeout, universe_domain: universe_domain_2
           _(service.project).must_equal project
-          config = service.subscriber.configure
-          _(config).must_be_kind_of Google::Cloud::PubSub::V1::Subscriber::Client::Configuration
+          config = service.subscription_admin.configure
+          _(config).must_be_kind_of Google::Cloud::PubSub::V1::SubscriptionAdmin::Client::Configuration
           _(config.timeout).must_equal timeout
           _(config.endpoint).must_equal endpoint_2
           _(config.universe_domain).must_equal universe_domain_2
@@ -114,15 +114,15 @@ describe Google::Cloud::PubSub::Service do
     end
   end
 
-  it "configures the V1::Publisher::Client" do
+  it "configures the V1::TopicAdmin::Client" do
     # Clear all environment variables
     ENV.stub :[], nil do
       Google::Auth::Credentials.stub :default, credentials do
         Gapic::ServiceStub.stub :new, dummy_stub do
           service = Google::Cloud::PubSub::Service.new project, nil
           _(service.project).must_equal project
-          config = service.publisher.configure
-          _(config).must_be_kind_of Google::Cloud::PubSub::V1::Publisher::Client::Configuration
+          config = service.topic_admin.configure
+          _(config).must_be_kind_of Google::Cloud::PubSub::V1::TopicAdmin::Client::Configuration
           _(config.timeout).must_be :nil?
           _(config.endpoint).must_be :nil?
           _(config.universe_domain).must_equal universe_domain
@@ -136,15 +136,15 @@ describe Google::Cloud::PubSub::Service do
     end
   end
 
-  it "configures the V1::Publisher::Client with host and timeout" do
+  it "configures the V1::TopicAdmin::Client with host and timeout" do
     # Clear all environment variables
     ENV.stub :[], nil do
       Google::Auth::Credentials.stub :default, credentials do
         Gapic::ServiceStub.stub :new, dummy_stub do
           service = Google::Cloud::PubSub::Service.new project, nil, host: endpoint_2, timeout: timeout, universe_domain: universe_domain_2
           _(service.project).must_equal project
-          config = service.publisher.configure
-          _(config).must_be_kind_of Google::Cloud::PubSub::V1::Publisher::Client::Configuration
+          config = service.topic_admin.configure
+          _(config).must_be_kind_of Google::Cloud::PubSub::V1::TopicAdmin::Client::Configuration
           _(config.timeout).must_equal timeout
           _(config.endpoint).must_equal endpoint_2
           _(config.universe_domain).must_equal universe_domain_2
@@ -204,9 +204,9 @@ describe Google::Cloud::PubSub::Service do
 
   it "should raise errors other than grpc on ack" do
     service = Google::Cloud::PubSub::Service.new project, nil
-    mocked_subscriber = Minitest::Mock.new
-    service.mocked_subscriber = mocked_subscriber
-    def mocked_subscriber.acknowledge *args
+    mocked_subscription_admin = Minitest::Mock.new
+    service.mocked_subscription_admin = mocked_subscription_admin
+    def mocked_subscription_admin.acknowledge_internal *args
       raise RuntimeError.new "test"
     end
     assert_raises RuntimeError do 
@@ -216,9 +216,9 @@ describe Google::Cloud::PubSub::Service do
 
   it "should raise errors other than grpc on modack" do
     service = Google::Cloud::PubSub::Service.new project, nil
-    mocked_subscriber = Minitest::Mock.new
-    service.mocked_subscriber = mocked_subscriber
-    def mocked_subscriber.modify_ack_deadline *args
+    mocked_subscription_admin = Minitest::Mock.new
+    service.mocked_subscription_admin = mocked_subscription_admin
+    def mocked_subscription_admin.modify_ack_deadline_internal *args
       raise RuntimeError.new "test"
     end
     assert_raises RuntimeError do 
@@ -228,27 +228,27 @@ describe Google::Cloud::PubSub::Service do
 
   it "should pass call option with compression header when compress enabled" do
     service = Google::Cloud::PubSub::Service.new project, nil
-    mocked_publisher = Minitest::Mock.new
-    service.mocked_publisher = mocked_publisher
+    mocked_topic_admin = Minitest::Mock.new
+    service.mocked_topic_admin = mocked_topic_admin
     expected_request = {topic: "projects/test/topics/test", messages: "data"}
     expected_options = ::Gapic::CallOptions.new metadata: { "grpc-internal-encoding-request": "gzip" }
-    mocked_publisher.expect :publish, nil do |actual_request, actual_option|
+    mocked_topic_admin.expect :publish_internal, nil do |actual_request, actual_option|
       actual_request == expected_request && actual_option == expected_options
     end
     service.publish "test", "data", compress: true
-    mocked_publisher.verify
+    mocked_topic_admin.verify
   end
 
   it "should not add call option when compress disabled" do
     service = Google::Cloud::PubSub::Service.new project, nil
-    mocked_publisher = Minitest::Mock.new
-    service.mocked_publisher = mocked_publisher
+    mocked_topic_admin = Minitest::Mock.new
+    service.mocked_topic_admin = mocked_topic_admin
     expected_request = {topic: "projects/test/topics/test", messages: "data"}
-    mocked_publisher.expect :publish, nil do |actual_request, actual_option|
+    mocked_topic_admin.expect :publish_internal, nil do |actual_request, actual_option|
       actual_request == expected_request && actual_option.nil?
     end
     service.publish "test", "data"
-    mocked_publisher.verify
+    mocked_topic_admin.verify
   end
 
   # @param [Numeric, nil] timeout Expected non-default timeout.
@@ -276,6 +276,57 @@ describe Google::Cloud::PubSub::Service do
                      actual.retry_policy[:retry_codes],
                      "Unexpected retry_codes for #{rpc_name}"
       end
+    end
+  end
+end
+
+describe Google::Cloud::PubSub::TopicAdmin::Client do
+  it "is a subclass of V1::TopicAdmin::Client" do
+    assert(Google::Cloud::PubSub::TopicAdmin::Client < Google::Cloud::PubSub::V1::TopicAdmin::Client)
+  end
+
+  it "raises when publish is called" do
+    client = Google::Cloud::PubSub::TopicAdmin::Client.new do |config|
+      config.credentials = :this_channel_is_insecure
+    end
+    assert_raises NotImplementedError do
+      client.publish
+    end
+  end
+end
+
+describe Google::Cloud::PubSub::SubscriptionAdmin::Client do
+  let(:client) do
+    Google::Cloud::PubSub::SubscriptionAdmin::Client.new do |config|
+      config.credentials = :this_channel_is_insecure
+    end
+  end
+
+  it "is a subclass of V1::SubscriptionAdmin::Client" do
+    assert(Google::Cloud::PubSub::SubscriptionAdmin::Client < Google::Cloud::PubSub::V1::SubscriptionAdmin::Client)
+  end
+
+  it "raises when modify_ack_deadline is called" do
+    assert_raises NotImplementedError do
+      client.modify_ack_deadline
+    end
+  end
+
+  it "raises when acknowledge is called" do
+    assert_raises NotImplementedError do
+      client.acknowledge
+    end
+  end
+
+  it "raises when pull is called" do
+    assert_raises NotImplementedError do
+      client.pull
+    end
+  end
+
+  it "raises when streaming_pull is called" do
+    assert_raises NotImplementedError do
+      client.streaming_pull
     end
   end
 end

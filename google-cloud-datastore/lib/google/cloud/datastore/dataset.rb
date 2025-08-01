@@ -416,7 +416,11 @@ module Google
         #   Datastore](https://cloud.google.com/datastore/docs/articles/balancing-strong-and-eventual-consistency-with-google-cloud-datastore/#h.tf76fya5nqk8)
         #   for more information.
         # @param [Time] read_time Reads entities as they were at the given time.
-        #   This may not be older than 270 seconds. Optional
+        #   This may not be older than 270 seconds. Optional.
+        # @param [Hash, Google::Cloud::Datastore::V1::ExplainOptions] explain_options The options for query explanation.
+        #   Provide this argument to enable explain metrics. If this argument is left unset,
+        #   the results will not include explain metrics.
+        #   See {Google::Cloud::Datastore::V1::ExplainOptions} for details. Optional.
         #
         # @return [Google::Cloud::Datastore::Dataset::QueryResults]
         #
@@ -467,16 +471,65 @@ module Google
         #                             done: false
         #   tasks = datastore.run gql_query, namespace: "example-ns"
         #
-        def run query, namespace: nil, consistency: nil, read_time: nil
+        # @example Run the query with explain options to get query plan and execution statistics.
+        #   require "google/cloud/datastore"
+        #
+        #   datastore = Google::Cloud::Datastore.new
+        #
+        #   query = datastore.query("Task")
+        #   results = datastore.run query, explain_options: { analyze: true }
+        #
+        #   # The explain_metrics are available on the results object only after
+        #   # all results have been retrieved. You must iterate through all
+        #   # pages of results to get the metrics.
+        #   all_tasks = []
+        #   loop do
+        #     results.each { |task| all_tasks << task }
+        #     break unless results.next?
+        #     results = results.next
+        #   end
+        #
+        #   # The `results` object now holds the last page of results,
+        #   # and contains the explain_metrics.
+        #   if results.explain_metrics
+        #     stats = results.explain_metrics.execution_stats
+        #     puts "Results returned: #{stats.results_returned}"
+        #     puts "Read operations: #{stats.read_operations}"
+        #   end
+        #
+        # @example Run the query with explain options using a `Google::Cloud::Datastore::V1::ExplainOptions` object.
+        #   require "google/cloud/datastore"
+        #
+        #   datastore = Google::Cloud::Datastore.new
+        #
+        #   query = datastore.query("Task")
+        #   explain_options = Google::Cloud::Datastore::V1::ExplainOptions.new
+        #   results = datastore.run query, explain_options: explain_options
+        #
+        #   # You must iterate through all pages of results to get the metrics.
+        #   loop do
+        #     break unless results.next?
+        #     results = results.next
+        #   end
+        #
+        #   if results.explain_metrics
+        #     stats = results.explain_metrics.execution_stats
+        #     puts "Read operations: #{stats.read_operations}"
+        #   end
+        #
+        def run query, namespace: nil, consistency: nil, read_time: nil, explain_options: nil
           ensure_service!
           unless query.is_a?(Query) || query.is_a?(GqlQuery)
             raise ArgumentError, "Cannot run a #{query.class} object."
           end
           check_consistency! consistency
+
           query_res = service.run_query query.to_grpc, namespace,
-                                        consistency: consistency, read_time: read_time
+                                        consistency: consistency, read_time: read_time,
+                                        explain_options: explain_options
+
           QueryResults.from_grpc query_res, service, namespace,
-                                 query.to_grpc.dup, read_time
+                                 query.to_grpc.dup, read_time, explain_options
         end
         alias run_query run
 
@@ -496,6 +549,10 @@ module Google
         #   [Eventual Consistency in Google Cloud
         #   Datastore](https://cloud.google.com/datastore/docs/articles/balancing-strong-and-eventual-consistency-with-google-cloud-datastore/#h.tf76fya5nqk8)
         #   for more information.
+        # @param [Hash, Google::Cloud::Datastore::V1::ExplainOptions] explain_options The options for query explanation.
+        #   Provide this argument to enable explain metrics. If this argument is left unset,
+        #   the results will not include explain metrics.
+        #   See {Google::Cloud::Datastore::V1::ExplainOptions} for details. Optional.
         #
         # @return [Google::Cloud::Datastore::Dataset::AggregateQueryResults]
         #
@@ -554,15 +611,32 @@ module Google
         #                             done: false
         #   res = datastore.run_aggregation gql_query, namespace: "example-ns"
         #
-        def run_aggregation aggregate_query, namespace: nil, consistency: nil, read_time: nil
+        # @example Run the aggregate query with explain options to get query plan and execution statistics.
+        #   require "google/cloud/datastore"
+        #
+        #   datastore = Google::Cloud::Datastore.new
+        #
+        #   query = datastore.query("Task")
+        #   aggregate_query = query.aggregate_query.add_count aggregate_alias: "total"
+        #   results = datastore.run_aggregation aggregate_query, explain_options: { analyze: true }
+        #
+        #   if results.explain_metrics
+        #     stats = results.explain_metrics.execution_stats
+        #     puts "Read operations: #{stats.read_operations}"
+        #   end
+        #
+        def run_aggregation aggregate_query, namespace: nil, consistency: nil, read_time: nil, explain_options: nil
           ensure_service!
           unless aggregate_query.is_a?(AggregateQuery) || aggregate_query.is_a?(GqlQuery)
             raise ArgumentError, "Cannot run a #{aggregate_query.class} object."
           end
           check_consistency! consistency
           aggregate_query_res = service.run_aggregation_query aggregate_query.to_grpc, namespace,
-                                                              consistency: consistency, read_time: read_time
-          AggregateQueryResults.from_grpc aggregate_query_res
+                                                              consistency: consistency,
+                                                              read_time: read_time,
+                                                              explain_options: explain_options
+
+          AggregateQueryResults.from_grpc aggregate_query_res, explain_options
         end
 
         ##

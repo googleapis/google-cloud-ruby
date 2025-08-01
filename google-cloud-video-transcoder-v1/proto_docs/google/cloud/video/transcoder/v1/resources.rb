@@ -79,7 +79,9 @@ module Google
           # @!attribute [r] error
           #   @return [::Google::Rpc::Status]
           #     Output only. An error object that describes the reason for the failure.
-          #     This property is always present when `state` is `FAILED`.
+          #     This property is always present when
+          #     {::Google::Cloud::Video::Transcoder::V1::Job::ProcessingState ProcessingState} is
+          #     `FAILED`.
           # @!attribute [rw] mode
           #   @return [::Google::Cloud::Video::Transcoder::V1::Job::ProcessingMode]
           #     The processing mode of the job.
@@ -94,6 +96,10 @@ module Google
           #   @return [::Google::Cloud::Video::Transcoder::V1::Job::OptimizationStrategy]
           #     Optional. The optimization strategy of the job. The default is
           #     `AUTODETECT`.
+          # @!attribute [rw] fill_content_gaps
+          #   @return [::Boolean]
+          #     Optional. Insert silence and duplicate frames when timestamp gaps are
+          #     detected in a given stream.
           class Job
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -121,8 +127,8 @@ module Google
               # The job has been completed successfully.
               SUCCEEDED = 3
 
-              # The job has failed. For additional information, see `failure_reason` and
-              # `failure_details`
+              # The job has failed. For additional information, see
+              # [Troubleshooting](https://cloud.google.com/transcoder/docs/troubleshooting).
               FAILED = 4
             end
 
@@ -187,7 +193,7 @@ module Google
           #     List of input assets stored in Cloud Storage.
           # @!attribute [rw] edit_list
           #   @return [::Array<::Google::Cloud::Video::Transcoder::V1::EditAtom>]
-          #     List of `Edit atom`s. Defines the ultimate timeline of the resulting
+          #     List of edit atoms. Defines the ultimate timeline of the resulting
           #     file or manifest.
           # @!attribute [rw] elementary_streams
           #   @return [::Array<::Google::Cloud::Video::Transcoder::V1::ElementaryStream>]
@@ -235,7 +241,8 @@ module Google
           #   @return [::String]
           #     URI of the media. Input files must be at least 5 seconds in duration and
           #     stored in Cloud Storage (for example, `gs://bucket/inputs/file.mp4`).
-          #     If empty, the value is populated from `Job.input_uri`. See
+          #     If empty, the value is populated from
+          #     {::Google::Cloud::Video::Transcoder::V1::Job#input_uri Job.input_uri}. See
           #     [Supported input and output
           #     formats](https://cloud.google.com/transcoder/docs/concepts/supported-input-and-output-formats).
           # @!attribute [rw] preprocessing_config
@@ -249,8 +256,9 @@ module Google
           # Location of output file(s) in a Cloud Storage bucket.
           # @!attribute [rw] uri
           #   @return [::String]
-          #     URI for the output file(s). For example, `gs://my-bucket/outputs/`.
-          #     If empty, the value is populated from `Job.output_uri`. See
+          #     URI for the output file(s). For example, `gs://my-bucket/outputs/`. Must be
+          #     a directory and not a top-level bucket. If empty, the value is populated
+          #     from {::Google::Cloud::Video::Transcoder::V1::Job#output_uri Job.output_uri}. See
           #     [Supported input and output
           #     formats](https://cloud.google.com/transcoder/docs/concepts/supported-input-and-output-formats).
           class Output
@@ -265,8 +273,9 @@ module Google
           #     mapping.
           # @!attribute [rw] inputs
           #   @return [::Array<::String>]
-          #     List of `Input.key`s identifying files that should be used in this atom.
-          #     The listed `inputs` must have the same timeline.
+          #     List of {::Google::Cloud::Video::Transcoder::V1::Input#key Input.key} values
+          #     identifying files that should be used in this atom. The listed `inputs`
+          #     must have the same timeline.
           # @!attribute [rw] end_time_offset
           #   @return [::Google::Protobuf::Duration]
           #     End time in seconds for the atom, relative to the input file timeline.
@@ -320,12 +329,13 @@ module Google
           # Multiplexing settings for output stream.
           # @!attribute [rw] key
           #   @return [::String]
-          #     A unique key for this multiplexed stream. HLS media manifests will be
-          #     named `MuxStream.key` with the `.m3u8` extension suffix.
+          #     A unique key for this multiplexed stream.
           # @!attribute [rw] file_name
           #   @return [::String]
-          #     The name of the generated file. The default is `MuxStream.key` with the
-          #     extension suffix corresponding to the `MuxStream.container`.
+          #     The name of the generated file. The default is
+          #     {::Google::Cloud::Video::Transcoder::V1::MuxStream#key MuxStream.key} with the
+          #     extension suffix corresponding to the
+          #     {::Google::Cloud::Video::Transcoder::V1::MuxStream#container MuxStream.container}.
           #
           #     Individual segments also have an incremental 10-digit zero-padded suffix
           #     starting from 0 before the extension, such as `mux_stream0000000123.ts`.
@@ -333,11 +343,16 @@ module Google
           #   @return [::String]
           #     The container format. The default is `mp4`
           #
-          #     Supported container formats:
+          #     Supported streaming formats:
           #
           #     - `ts`
           #     - `fmp4`- the corresponding file extension is `.m4s`
+          #
+          #     Supported standalone file formats:
+          #
           #     - `mp4`
+          #     - `mp3`
+          #     - `ogg`
           #     - `vtt`
           #
           #     See also:
@@ -345,7 +360,9 @@ module Google
           #     formats](https://cloud.google.com/transcoder/docs/concepts/supported-input-and-output-formats)
           # @!attribute [rw] elementary_streams
           #   @return [::Array<::String>]
-          #     List of `ElementaryStream.key`s multiplexed in this stream.
+          #     List of
+          #     {::Google::Cloud::Video::Transcoder::V1::ElementaryStream#key ElementaryStream.key}
+          #     values multiplexed in this stream.
           # @!attribute [rw] segment_settings
           #   @return [::Google::Cloud::Video::Transcoder::V1::SegmentSettings]
           #     Segment settings for `ts`, `fmp4` and `vtt`.
@@ -353,27 +370,48 @@ module Google
           #   @return [::String]
           #     Identifier of the encryption configuration to use. If omitted, output will
           #     be unencrypted.
+          # @!attribute [rw] fmp4
+          #   @return [::Google::Cloud::Video::Transcoder::V1::MuxStream::Fmp4Config]
+          #     Optional. `fmp4` container configuration.
           class MuxStream
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
+
+            # `fmp4` container configuration.
+            # @!attribute [rw] codec_tag
+            #   @return [::String]
+            #     Optional. Specify the codec tag string that will be used in the media
+            #     bitstream. When not specified, the codec appropriate value is used.
+            #
+            #     Supported H265 codec tags:
+            #
+            #     - `hvc1` (default)
+            #     - `hev1`
+            class Fmp4Config
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
           end
 
           # Manifest configuration.
           # @!attribute [rw] file_name
           #   @return [::String]
           #     The name of the generated file. The default is `manifest` with the
-          #     extension suffix corresponding to the `Manifest.type`.
+          #     extension suffix corresponding to the
+          #     {::Google::Cloud::Video::Transcoder::V1::Manifest#type Manifest.type}.
           # @!attribute [rw] type
           #   @return [::Google::Cloud::Video::Transcoder::V1::Manifest::ManifestType]
           #     Required. Type of the manifest.
           # @!attribute [rw] mux_streams
           #   @return [::Array<::String>]
-          #     Required. List of user given `MuxStream.key`s that should appear in this
-          #     manifest.
+          #     Required. List of user supplied
+          #     {::Google::Cloud::Video::Transcoder::V1::MuxStream#key MuxStream.key} values that
+          #     should appear in this manifest.
           #
-          #     When `Manifest.type` is `HLS`, a media manifest with name `MuxStream.key`
-          #     and `.m3u8` extension is generated for each element of the
-          #     `Manifest.mux_streams`.
+          #     When {::Google::Cloud::Video::Transcoder::V1::Manifest#type Manifest.type} is
+          #     `HLS`, a media manifest with name
+          #     {::Google::Cloud::Video::Transcoder::V1::MuxStream#key MuxStream.key} and `.m3u8`
+          #     extension is generated for each element in this list.
           # @!attribute [rw] dash
           #   @return [::Google::Cloud::Video::Transcoder::V1::Manifest::DashConfig]
           #     `DASH` manifest configuration.
@@ -395,10 +433,31 @@ module Google
                 # The segment reference scheme is not specified.
                 SEGMENT_REFERENCE_SCHEME_UNSPECIFIED = 0
 
-                # Lists the URLs of media files for each segment.
+                # Explicitly lists the URLs of media files for each segment. For example,
+                # if
+                # {::Google::Cloud::Video::Transcoder::V1::SegmentSettings#individual_segments SegmentSettings.individual_segments}
+                # is `true`, then the manifest contains fields similar to the following:
+                # ```xml
+                # <Initialization sourceURL="my-hd-stream-init.m4s"/>
+                #   <SegmentList presentationTimeOffset="0" duration="1000"
+                #   timescale="10000">
+                #     <SegmentURL media="hd-stream0000000000.m4s"/>
+                #     <SegmentURL media="hd-stream0000000001.m4s"/>
+                #     ...
+                # ```
                 SEGMENT_LIST = 1
 
-                # Lists each segment from a template with $Number$ variable.
+                # {::Google::Cloud::Video::Transcoder::V1::SegmentSettings#individual_segments SegmentSettings.individual_segments}
+                # must be set to `true` to use this segment reference scheme. Uses the
+                # DASH specification
+                # `<SegmentTemplate>` tag to determine the URLs of media files for each
+                # segment. For example:
+                # ```xml
+                # <SegmentTemplate presentationTimeOffset="0" timescale="10000"
+                #       initialization="my-hd-stream-init.m4s"
+                #       media="hd-stream$Number%010d$.m4s" startNumber="0">
+                #   ...
+                # ```
                 SEGMENT_TEMPLATE_NUMBER = 2
               end
             end
@@ -516,7 +575,7 @@ module Google
           #     Image overlay.
           # @!attribute [rw] animations
           #   @return [::Array<::Google::Cloud::Video::Transcoder::V1::Overlay::Animation>]
-          #     List of Animations. The list should be chronological, without any time
+          #     List of animations. The list should be chronological, without any time
           #     overlap.
           class Overlay
             include ::Google::Protobuf::MessageExts
@@ -593,7 +652,7 @@ module Google
               extend ::Google::Protobuf::MessageExts::ClassMethods
             end
 
-            # End previous overlay animation from the video. Without AnimationEnd, the
+            # End previous overlay animation from the video. Without `AnimationEnd`, the
             # overlay object will keep the state of previous animation until the end of
             # the video.
             # @!attribute [rw] start_time_offset
@@ -885,6 +944,18 @@ module Google
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
 
+            # Convert the input video to a Standard Dynamic Range (SDR) video.
+            class H264ColorFormatSDR
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
+
+            # Convert the input video to a Hybrid Log Gamma (HLG) video.
+            class H264ColorFormatHLG
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
+
             # H264 codec settings.
             # @!attribute [rw] width_pixels
             #   @return [::Integer]
@@ -909,12 +980,11 @@ module Google
             # @!attribute [rw] frame_rate
             #   @return [::Float]
             #     Required. The target video frame rate in frames per second (FPS). Must be
-            #     less than or equal to 120. Will default to the input frame rate if larger
-            #     than the input frame rate. The API will generate an output FPS that is
-            #     divisible by the input FPS, and smaller or equal to the target FPS. See
-            #     [Calculating frame
-            #     rate](https://cloud.google.com/transcoder/docs/concepts/frame-rate) for
-            #     more information.
+            #     less than or equal to 120.
+            # @!attribute [rw] frame_rate_conversion_strategy
+            #   @return [::Google::Cloud::Video::Transcoder::V1::VideoStream::FrameRateConversionStrategy]
+            #     Optional. Frame rate conversion strategy for desired frame rate. The
+            #     default is `DOWNSAMPLE`.
             # @!attribute [rw] bitrate_bps
             #   @return [::Integer]
             #     Required. The video bitrate in bits per second. The minimum value is
@@ -936,7 +1006,7 @@ module Google
             #     - `yuv444p12` 12-bit HDR pixel format
             # @!attribute [rw] rate_control_mode
             #   @return [::String]
-            #     Specify the `rate_control_mode`. The default is `vbr`.
+            #     Specify the mode. The default is `vbr`.
             #
             #     Supported rate control modes:
             #
@@ -968,16 +1038,18 @@ module Google
             # @!attribute [rw] enable_two_pass
             #   @return [::Boolean]
             #     Use two-pass encoding strategy to achieve better video quality.
-            #     `VideoStream.rate_control_mode` must be `vbr`. The default is `false`.
+            #     {::Google::Cloud::Video::Transcoder::V1::VideoStream::H264CodecSettings#rate_control_mode H264CodecSettings.rate_control_mode}
+            #     must be `vbr`. The default is `false`.
             # @!attribute [rw] vbv_size_bits
             #   @return [::Integer]
             #     Size of the Video Buffering Verifier (VBV) buffer in bits. Must be
-            #     greater than zero. The default is equal to `VideoStream.bitrate_bps`.
+            #     greater than zero. The default is equal to
+            #     {::Google::Cloud::Video::Transcoder::V1::VideoStream::H264CodecSettings#bitrate_bps H264CodecSettings.bitrate_bps}.
             # @!attribute [rw] vbv_fullness_bits
             #   @return [::Integer]
             #     Initial fullness of the Video Buffering Verifier (VBV) buffer in bits.
             #     Must be greater than zero. The default is equal to 90% of
-            #     `VideoStream.vbv_size_bits`.
+            #     {::Google::Cloud::Video::Transcoder::V1::VideoStream::H264CodecSettings#vbv_size_bits H264CodecSettings.vbv_size_bits}.
             # @!attribute [rw] entropy_coder
             #   @return [::String]
             #     The entropy coder to use. The default is `cabac`.
@@ -993,8 +1065,9 @@ module Google
             # @!attribute [rw] b_frame_count
             #   @return [::Integer]
             #     The number of consecutive B-frames. Must be greater than or equal to
-            #     zero. Must be less than `VideoStream.gop_frame_count` if set. The default
-            #     is 0.
+            #     zero. Must be less than
+            #     {::Google::Cloud::Video::Transcoder::V1::VideoStream::H264CodecSettings#gop_frame_count H264CodecSettings.gop_frame_count}
+            #     if set. The default is 0.
             # @!attribute [rw] aq_strength
             #   @return [::Float]
             #     Specify the intensity of the adaptive quantizer (AQ). Must be between 0
@@ -1029,7 +1102,35 @@ module Google
             #     Note that certain values for this field may cause the
             #     transcoder to override other fields you set in the `H264CodecSettings`
             #     message.
+            # @!attribute [rw] sdr
+            #   @return [::Google::Cloud::Video::Transcoder::V1::VideoStream::H264ColorFormatSDR]
+            #     Optional. SDR color format setting for H264.
+            #
+            #     Note: The following fields are mutually exclusive: `sdr`, `hlg`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+            # @!attribute [rw] hlg
+            #   @return [::Google::Cloud::Video::Transcoder::V1::VideoStream::H264ColorFormatHLG]
+            #     Optional. HLG color format setting for H264.
+            #
+            #     Note: The following fields are mutually exclusive: `hlg`, `sdr`. If a field in that set is populated, all other fields in the set will automatically be cleared.
             class H264CodecSettings
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
+
+            # Convert the input video to a Standard Dynamic Range (SDR) video.
+            class H265ColorFormatSDR
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
+
+            # Convert the input video to a Hybrid Log Gamma (HLG) video.
+            class H265ColorFormatHLG
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
+
+            # Convert the input video to a High Dynamic Range 10 (HDR10) video.
+            class H265ColorFormatHDR10
               include ::Google::Protobuf::MessageExts
               extend ::Google::Protobuf::MessageExts::ClassMethods
             end
@@ -1058,12 +1159,11 @@ module Google
             # @!attribute [rw] frame_rate
             #   @return [::Float]
             #     Required. The target video frame rate in frames per second (FPS). Must be
-            #     less than or equal to 120. Will default to the input frame rate if larger
-            #     than the input frame rate. The API will generate an output FPS that is
-            #     divisible by the input FPS, and smaller or equal to the target FPS. See
-            #     [Calculating frame
-            #     rate](https://cloud.google.com/transcoder/docs/concepts/frame-rate) for
-            #     more information.
+            #     less than or equal to 120.
+            # @!attribute [rw] frame_rate_conversion_strategy
+            #   @return [::Google::Cloud::Video::Transcoder::V1::VideoStream::FrameRateConversionStrategy]
+            #     Optional. Frame rate conversion strategy for desired frame rate. The
+            #     default is `DOWNSAMPLE`.
             # @!attribute [rw] bitrate_bps
             #   @return [::Integer]
             #     Required. The video bitrate in bits per second. The minimum value is
@@ -1085,7 +1185,7 @@ module Google
             #     - `yuv444p12` 12-bit HDR pixel format
             # @!attribute [rw] rate_control_mode
             #   @return [::String]
-            #     Specify the `rate_control_mode`. The default is `vbr`.
+            #     Specify the mode. The default is `vbr`.
             #
             #     Supported rate control modes:
             #
@@ -1117,7 +1217,8 @@ module Google
             # @!attribute [rw] enable_two_pass
             #   @return [::Boolean]
             #     Use two-pass encoding strategy to achieve better video quality.
-            #     `VideoStream.rate_control_mode` must be `vbr`. The default is `false`.
+            #     {::Google::Cloud::Video::Transcoder::V1::VideoStream::H265CodecSettings#rate_control_mode H265CodecSettings.rate_control_mode}
+            #     must be `vbr`. The default is `false`.
             # @!attribute [rw] vbv_size_bits
             #   @return [::Integer]
             #     Size of the Video Buffering Verifier (VBV) buffer in bits. Must be
@@ -1126,7 +1227,7 @@ module Google
             #   @return [::Integer]
             #     Initial fullness of the Video Buffering Verifier (VBV) buffer in bits.
             #     Must be greater than zero. The default is equal to 90% of
-            #     `VideoStream.vbv_size_bits`.
+            #     {::Google::Cloud::Video::Transcoder::V1::VideoStream::H265CodecSettings#vbv_size_bits H265CodecSettings.vbv_size_bits}.
             # @!attribute [rw] b_pyramid
             #   @return [::Boolean]
             #     Allow B-pyramid for reference frame selection. This may not be supported
@@ -1134,8 +1235,9 @@ module Google
             # @!attribute [rw] b_frame_count
             #   @return [::Integer]
             #     The number of consecutive B-frames. Must be greater than or equal to
-            #     zero. Must be less than `VideoStream.gop_frame_count` if set. The default
-            #     is 0.
+            #     zero. Must be less than
+            #     {::Google::Cloud::Video::Transcoder::V1::VideoStream::H265CodecSettings#gop_frame_count H265CodecSettings.gop_frame_count}
+            #     if set. The default is 0.
             # @!attribute [rw] aq_strength
             #   @return [::Float]
             #     Specify the intensity of the adaptive quantizer (AQ). Must be between 0
@@ -1185,7 +1287,34 @@ module Google
             #     Note that certain values for this field may cause the
             #     transcoder to override other fields you set in the `H265CodecSettings`
             #     message.
+            # @!attribute [rw] sdr
+            #   @return [::Google::Cloud::Video::Transcoder::V1::VideoStream::H265ColorFormatSDR]
+            #     Optional. SDR color format setting for H265.
+            #
+            #     Note: The following fields are mutually exclusive: `sdr`, `hlg`, `hdr10`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+            # @!attribute [rw] hlg
+            #   @return [::Google::Cloud::Video::Transcoder::V1::VideoStream::H265ColorFormatHLG]
+            #     Optional. HLG color format setting for H265.
+            #
+            #     Note: The following fields are mutually exclusive: `hlg`, `sdr`, `hdr10`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+            # @!attribute [rw] hdr10
+            #   @return [::Google::Cloud::Video::Transcoder::V1::VideoStream::H265ColorFormatHDR10]
+            #     Optional. HDR10 color format setting for H265.
+            #
+            #     Note: The following fields are mutually exclusive: `hdr10`, `sdr`, `hlg`. If a field in that set is populated, all other fields in the set will automatically be cleared.
             class H265CodecSettings
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
+
+            # Convert the input video to a Standard Dynamic Range (SDR) video.
+            class Vp9ColorFormatSDR
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
+
+            # Convert the input video to a Hybrid Log Gamma (HLG) video.
+            class Vp9ColorFormatHLG
               include ::Google::Protobuf::MessageExts
               extend ::Google::Protobuf::MessageExts::ClassMethods
             end
@@ -1214,12 +1343,11 @@ module Google
             # @!attribute [rw] frame_rate
             #   @return [::Float]
             #     Required. The target video frame rate in frames per second (FPS). Must be
-            #     less than or equal to 120. Will default to the input frame rate if larger
-            #     than the input frame rate. The API will generate an output FPS that is
-            #     divisible by the input FPS, and smaller or equal to the target FPS. See
-            #     [Calculating frame
-            #     rate](https://cloud.google.com/transcoder/docs/concepts/frame-rate) for
-            #     more information.
+            #     less than or equal to 120.
+            # @!attribute [rw] frame_rate_conversion_strategy
+            #   @return [::Google::Cloud::Video::Transcoder::V1::VideoStream::FrameRateConversionStrategy]
+            #     Optional. Frame rate conversion strategy for desired frame rate. The
+            #     default is `DOWNSAMPLE`.
             # @!attribute [rw] bitrate_bps
             #   @return [::Integer]
             #     Required. The video bitrate in bits per second. The minimum value is
@@ -1241,7 +1369,7 @@ module Google
             #     - `yuv444p12` 12-bit HDR pixel format
             # @!attribute [rw] rate_control_mode
             #   @return [::String]
-            #     Specify the `rate_control_mode`. The default is `vbr`.
+            #     Specify the mode. The default is `vbr`.
             #
             #     Supported rate control modes:
             #
@@ -1282,9 +1410,38 @@ module Google
             #     Note that certain values for this field may cause the
             #     transcoder to override other fields you set in the `Vp9CodecSettings`
             #     message.
+            # @!attribute [rw] sdr
+            #   @return [::Google::Cloud::Video::Transcoder::V1::VideoStream::Vp9ColorFormatSDR]
+            #     Optional. SDR color format setting for VP9.
+            #
+            #     Note: The following fields are mutually exclusive: `sdr`, `hlg`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+            # @!attribute [rw] hlg
+            #   @return [::Google::Cloud::Video::Transcoder::V1::VideoStream::Vp9ColorFormatHLG]
+            #     Optional. HLG color format setting for VP9.
+            #
+            #     Note: The following fields are mutually exclusive: `hlg`, `sdr`. If a field in that set is populated, all other fields in the set will automatically be cleared.
             class Vp9CodecSettings
               include ::Google::Protobuf::MessageExts
               extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
+
+            # The conversion strategy for desired frame rate.
+            module FrameRateConversionStrategy
+              # Unspecified frame rate conversion strategy.
+              FRAME_RATE_CONVERSION_STRATEGY_UNSPECIFIED = 0
+
+              # Selectively retain frames to reduce the output frame rate.
+              # Every _n_ th frame is kept, where `n = ceil(input frame rate / target
+              # frame rate)`. When _n_ = 1 (that is, the target frame rate is greater
+              # than the input frame rate), the output frame rate matches the input frame
+              # rate. When _n_ > 1, frames are dropped and the output frame rate is
+              # equal to `(input frame rate / n)`. For more information, see
+              # [Calculate frame
+              # rate](https://cloud.google.com/transcoder/docs/concepts/frame-rate).
+              DOWNSAMPLE = 1
+
+              # Drop or duplicate frames to match the specified frame rate.
+              DROP_DUPLICATE = 2
             end
           end
 
@@ -1301,6 +1458,7 @@ module Google
           #     - `mp3`
           #     - `ac3`
           #     - `eac3`
+          #     - `vorbis`
           # @!attribute [rw] bitrate_bps
           #   @return [::Integer]
           #     Required. Audio bitrate in bits per second. Must be between 1 and
@@ -1324,7 +1482,10 @@ module Google
           #     - `lfe` - Low frequency
           # @!attribute [rw] mapping
           #   @return [::Array<::Google::Cloud::Video::Transcoder::V1::AudioStream::AudioMapping>]
-          #     The mapping for the `Job.edit_list` atoms with audio `EditAtom.inputs`.
+          #     The mapping for the
+          #     {::Google::Cloud::Video::Transcoder::V1::JobConfig#edit_list JobConfig.edit_list}
+          #     atoms with audio
+          #     {::Google::Cloud::Video::Transcoder::V1::EditAtom#inputs EditAtom.inputs}.
           # @!attribute [rw] sample_rate_hertz
           #   @return [::Integer]
           #     The audio sample rate in Hertz. The default is 48000 Hertz.
@@ -1342,14 +1503,20 @@ module Google
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
 
-            # The mapping for the `Job.edit_list` atoms with audio `EditAtom.inputs`.
+            # The mapping for the
+            # {::Google::Cloud::Video::Transcoder::V1::JobConfig#edit_list JobConfig.edit_list}
+            # atoms with audio
+            # {::Google::Cloud::Video::Transcoder::V1::EditAtom#inputs EditAtom.inputs}.
             # @!attribute [rw] atom_key
             #   @return [::String]
-            #     Required. The `EditAtom.key` that references the atom with audio inputs
-            #     in the `Job.edit_list`.
+            #     Required. The
+            #     {::Google::Cloud::Video::Transcoder::V1::EditAtom#key EditAtom.key} that
+            #     references the atom with audio inputs in the
+            #     {::Google::Cloud::Video::Transcoder::V1::JobConfig#edit_list JobConfig.edit_list}.
             # @!attribute [rw] input_key
             #   @return [::String]
-            #     Required. The `Input.key` that identifies the input file.
+            #     Required. The {::Google::Cloud::Video::Transcoder::V1::Input#key Input.key}
+            #     that identifies the input file.
             # @!attribute [rw] input_track
             #   @return [::Integer]
             #     Required. The zero-based index of the track in the input file.
@@ -1389,7 +1556,10 @@ module Google
           #     supported in MP4 files.
           # @!attribute [rw] mapping
           #   @return [::Array<::Google::Cloud::Video::Transcoder::V1::TextStream::TextMapping>]
-          #     The mapping for the `Job.edit_list` atoms with text `EditAtom.inputs`.
+          #     The mapping for the
+          #     {::Google::Cloud::Video::Transcoder::V1::JobConfig#edit_list JobConfig.edit_list}
+          #     atoms with text
+          #     {::Google::Cloud::Video::Transcoder::V1::EditAtom#inputs EditAtom.inputs}.
           # @!attribute [rw] display_name
           #   @return [::String]
           #     The name for this particular text stream that
@@ -1398,14 +1568,20 @@ module Google
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
 
-            # The mapping for the `Job.edit_list` atoms with text `EditAtom.inputs`.
+            # The mapping for the
+            # {::Google::Cloud::Video::Transcoder::V1::JobConfig#edit_list JobConfig.edit_list}
+            # atoms with text
+            # {::Google::Cloud::Video::Transcoder::V1::EditAtom#inputs EditAtom.inputs}.
             # @!attribute [rw] atom_key
             #   @return [::String]
-            #     Required. The `EditAtom.key` that references atom with text inputs in the
-            #     `Job.edit_list`.
+            #     Required. The
+            #     {::Google::Cloud::Video::Transcoder::V1::EditAtom#key EditAtom.key} that
+            #     references atom with text inputs in the
+            #     {::Google::Cloud::Video::Transcoder::V1::JobConfig#edit_list JobConfig.edit_list}.
             # @!attribute [rw] input_key
             #   @return [::String]
-            #     Required. The `Input.key` that identifies the input file.
+            #     Required. The {::Google::Cloud::Video::Transcoder::V1::Input#key Input.key}
+            #     that identifies the input file.
             # @!attribute [rw] input_track
             #   @return [::Integer]
             #     Required. The zero-based index of the track in the input file.

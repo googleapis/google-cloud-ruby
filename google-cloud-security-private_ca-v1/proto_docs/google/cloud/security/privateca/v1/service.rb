@@ -35,8 +35,9 @@ module Google
           #     Optional. It must be unique within a location and match the regular
           #     expression `[a-zA-Z0-9_-]{1,63}`. This field is required when using a
           #     {::Google::Cloud::Security::PrivateCA::V1::CertificateAuthority CertificateAuthority}
-          #     in the Enterprise [CertificateAuthority.Tier][], but is optional and its
-          #     value is ignored otherwise.
+          #     in the Enterprise
+          #     {::Google::Cloud::Security::PrivateCA::V1::CertificateAuthority#tier CertificateAuthority.tier},
+          #     but is optional and its value is ignored otherwise.
           # @!attribute [rw] certificate
           #   @return [::Google::Cloud::Security::PrivateCA::V1::Certificate]
           #     Required. A {::Google::Cloud::Security::PrivateCA::V1::Certificate Certificate}
@@ -148,8 +149,8 @@ module Google
           # @!attribute [rw] next_page_token
           #   @return [::String]
           #     A token to retrieve next page of results. Pass this value in
-          #     [ListCertificatesRequest.next_page_token][] to retrieve the
-          #     next page of results.
+          #     {::Google::Cloud::Security::PrivateCA::V1::ListCertificatesRequest#page_token ListCertificatesRequest.page_token}
+          #     to retrieve the next page of results.
           # @!attribute [rw] unreachable
           #   @return [::Array<::String>]
           #     A list of locations (e.g. "us-west1") that could not be reached.
@@ -428,8 +429,8 @@ module Google
           # @!attribute [rw] next_page_token
           #   @return [::String]
           #     A token to retrieve next page of results. Pass this value in
-          #     [ListCertificateAuthoritiesRequest.next_page_token][] to retrieve the next
-          #     page of results.
+          #     {::Google::Cloud::Security::PrivateCA::V1::ListCertificateAuthoritiesRequest#page_token ListCertificateAuthoritiesRequest.page_token}
+          #     to retrieve the next page of results.
           # @!attribute [rw] unreachable
           #   @return [::Array<::String>]
           #     A list of locations (e.g. "us-west1") that could not be reached.
@@ -731,8 +732,8 @@ module Google
           # @!attribute [rw] next_page_token
           #   @return [::String]
           #     A token to retrieve next page of results. Pass this value in
-          #     [ListCertificateAuthoritiesRequest.next_page_token][] to retrieve the next
-          #     page of results.
+          #     {::Google::Cloud::Security::PrivateCA::V1::ListCertificateAuthoritiesRequest#page_token ListCertificateAuthoritiesRequest.page_token}
+          #     to retrieve the next page of results.
           # @!attribute [rw] unreachable
           #   @return [::Array<::String>]
           #     A list of locations (e.g. "us-west1") that could not be reached.
@@ -796,8 +797,8 @@ module Google
           # @!attribute [rw] next_page_token
           #   @return [::String]
           #     A token to retrieve next page of results. Pass this value in
-          #     [ListCertificateRevocationListsRequest.next_page_token][] to retrieve the
-          #     next page of results.
+          #     {::Google::Cloud::Security::PrivateCA::V1::ListCertificateRevocationListsRequest#page_token ListCertificateRevocationListsRequest.page_token}
+          #     to retrieve the next page of results.
           # @!attribute [rw] unreachable
           #   @return [::Array<::String>]
           #     A list of locations (e.g. "us-west1") that could not be reached.
@@ -953,8 +954,8 @@ module Google
           # @!attribute [rw] next_page_token
           #   @return [::String]
           #     A token to retrieve next page of results. Pass this value in
-          #     [ListCertificateTemplatesRequest.next_page_token][] to retrieve
-          #     the next page of results.
+          #     {::Google::Cloud::Security::PrivateCA::V1::ListCertificateTemplatesRequest#page_token ListCertificateTemplatesRequest.page_token}
+          #     to retrieve the next page of results.
           # @!attribute [rw] unreachable
           #   @return [::Array<::String>]
           #     A list of locations (e.g. "us-west1") that could not be reached.
@@ -1013,9 +1014,10 @@ module Google
           #   @return [::Boolean]
           #     Output only. Identifies whether the user has requested cancellation
           #     of the operation. Operations that have successfully been cancelled
-          #     have [Operation.error][] value with a
-          #     {::Google::Rpc::Status#code google.rpc.Status.code} of 1, corresponding to
-          #     `Code.CANCELLED`.
+          #     have
+          #     {::Google::Longrunning::Operation#error google.longrunning.Operation.error}
+          #     value with a {::Google::Rpc::Status#code google.rpc.Status.code} of 1,
+          #     corresponding to `Code.CANCELLED`.
           # @!attribute [r] api_version
           #   @return [::String]
           #     Output only. API version used to start the operation.

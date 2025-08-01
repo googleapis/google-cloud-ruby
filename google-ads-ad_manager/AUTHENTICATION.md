@@ -56,7 +56,7 @@ To configure a credentials file for an individual client initialization:
 ```ruby
 require "google/ads/ad_manager"
 
-client = Google::Ads::AdManager.ad_unit_service do |config|
+client = Google::Ads::AdManager.ad_break_service do |config|
   config.credentials = "path/to/credentialfile.json"
 end
 ```
@@ -70,7 +70,7 @@ Google::Ads::AdManager.configure do |config|
   config.credentials = "path/to/credentialfile.json"
 end
 
-client = Google::Ads::AdManager.ad_unit_service
+client = Google::Ads::AdManager.ad_break_service
 ```
 
 ### Environment Variables
@@ -100,7 +100,7 @@ require "google/ads/ad_manager"
 
 ENV["GOOGLE_APPLICATION_CREDENTIALS"] = "path/to/credentialfile.json"
 
-client = Google::Ads::AdManager.ad_unit_service
+client = Google::Ads::AdManager.ad_break_service
 ```
 
 ### Local ADC file

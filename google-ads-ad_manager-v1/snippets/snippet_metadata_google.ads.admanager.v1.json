@@ -1,7 +1,7 @@
 {
   "client_library": {
     "name": "google-ads-ad_manager-v1",
-    "version": "1.1.0",
+    "version": "2.0.0",
     "language": "RUBY",
     "apis": [
       {
@@ -11,6 +11,206 @@
     ]
   },
   "snippets": [
+    {
+      "region_tag": "admanager_v1_generated_AdBreakService_GetAdBreak_sync",
+      "title": "Snippet for the get_ad_break call in the AdBreakService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Ads::AdManager::V1::AdBreakService::Rest::Client#get_ad_break.",
+      "file": "ad_break_service/get_ad_break.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_ad_break",
+        "full_name": "::Google::Ads::AdManager::V1::AdBreakService::Rest::Client#get_ad_break",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Ads::AdManager::V1::GetAdBreakRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Ads::AdManager::V1::AdBreak",
+        "client": {
+          "short_name": "AdBreakService::Rest::Client",
+          "full_name": "::Google::Ads::AdManager::V1::AdBreakService::Rest::Client"
+        },
+        "method": {
+          "short_name": "GetAdBreak",
+          "full_name": "google.ads.admanager.v1.AdBreakService.GetAdBreak",
+          "service": {
+            "short_name": "AdBreakService",
+            "full_name": "google.ads.admanager.v1.AdBreakService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "admanager_v1_generated_AdBreakService_ListAdBreaks_sync",
+      "title": "Snippet for the list_ad_breaks call in the AdBreakService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Ads::AdManager::V1::AdBreakService::Rest::Client#list_ad_breaks.",
+      "file": "ad_break_service/list_ad_breaks.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_ad_breaks",
+        "full_name": "::Google::Ads::AdManager::V1::AdBreakService::Rest::Client#list_ad_breaks",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Ads::AdManager::V1::ListAdBreaksRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Ads::AdManager::V1::ListAdBreaksResponse",
+        "client": {
+          "short_name": "AdBreakService::Rest::Client",
+          "full_name": "::Google::Ads::AdManager::V1::AdBreakService::Rest::Client"
+        },
+        "method": {
+          "short_name": "ListAdBreaks",
+          "full_name": "google.ads.admanager.v1.AdBreakService.ListAdBreaks",
+          "service": {
+            "short_name": "AdBreakService",
+            "full_name": "google.ads.admanager.v1.AdBreakService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "admanager_v1_generated_AdBreakService_CreateAdBreak_sync",
+      "title": "Snippet for the create_ad_break call in the AdBreakService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Ads::AdManager::V1::AdBreakService::Rest::Client#create_ad_break.",
+      "file": "ad_break_service/create_ad_break.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_ad_break",
+        "full_name": "::Google::Ads::AdManager::V1::AdBreakService::Rest::Client#create_ad_break",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Ads::AdManager::V1::CreateAdBreakRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Ads::AdManager::V1::AdBreak",
+        "client": {
+          "short_name": "AdBreakService::Rest::Client",
+          "full_name": "::Google::Ads::AdManager::V1::AdBreakService::Rest::Client"
+        },
+        "method": {
+          "short_name": "CreateAdBreak",
+          "full_name": "google.ads.admanager.v1.AdBreakService.CreateAdBreak",
+          "service": {
+            "short_name": "AdBreakService",
+            "full_name": "google.ads.admanager.v1.AdBreakService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "admanager_v1_generated_AdBreakService_UpdateAdBreak_sync",
+      "title": "Snippet for the update_ad_break call in the AdBreakService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Ads::AdManager::V1::AdBreakService::Rest::Client#update_ad_break.",
+      "file": "ad_break_service/update_ad_break.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_ad_break",
+        "full_name": "::Google::Ads::AdManager::V1::AdBreakService::Rest::Client#update_ad_break",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Ads::AdManager::V1::UpdateAdBreakRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Ads::AdManager::V1::AdBreak",
+        "client": {
+          "short_name": "AdBreakService::Rest::Client",
+          "full_name": "::Google::Ads::AdManager::V1::AdBreakService::Rest::Client"
+        },
+        "method": {
+          "short_name": "UpdateAdBreak",
+          "full_name": "google.ads.admanager.v1.AdBreakService.UpdateAdBreak",
+          "service": {
+            "short_name": "AdBreakService",
+            "full_name": "google.ads.admanager.v1.AdBreakService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "admanager_v1_generated_AdBreakService_DeleteAdBreak_sync",
+      "title": "Snippet for the delete_ad_break call in the AdBreakService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Ads::AdManager::V1::AdBreakService::Rest::Client#delete_ad_break.",
+      "file": "ad_break_service/delete_ad_break.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_ad_break",
+        "full_name": "::Google::Ads::AdManager::V1::AdBreakService::Rest::Client#delete_ad_break",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Ads::AdManager::V1::DeleteAdBreakRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Protobuf::Empty",
+        "client": {
+          "short_name": "AdBreakService::Rest::Client",
+          "full_name": "::Google::Ads::AdManager::V1::AdBreakService::Rest::Client"
+        },
+        "method": {
+          "short_name": "DeleteAdBreak",
+          "full_name": "google.ads.admanager.v1.AdBreakService.DeleteAdBreak",
+          "service": {
+            "short_name": "AdBreakService",
+            "full_name": "google.ads.admanager.v1.AdBreakService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
     {
       "region_tag": "admanager_v1_generated_AdUnitService_GetAdUnit_sync",
       "title": "Snippet for the get_ad_unit call in the AdUnitService service",
@@ -118,6 +318,86 @@
           "service": {
             "short_name": "AdUnitService",
             "full_name": "google.ads.admanager.v1.AdUnitService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "admanager_v1_generated_BandwidthGroupService_GetBandwidthGroup_sync",
+      "title": "Snippet for the get_bandwidth_group call in the BandwidthGroupService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Ads::AdManager::V1::BandwidthGroupService::Rest::Client#get_bandwidth_group.",
+      "file": "bandwidth_group_service/get_bandwidth_group.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_bandwidth_group",
+        "full_name": "::Google::Ads::AdManager::V1::BandwidthGroupService::Rest::Client#get_bandwidth_group",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Ads::AdManager::V1::GetBandwidthGroupRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Ads::AdManager::V1::BandwidthGroup",
+        "client": {
+          "short_name": "BandwidthGroupService::Rest::Client",
+          "full_name": "::Google::Ads::AdManager::V1::BandwidthGroupService::Rest::Client"
+        },
+        "method": {
+          "short_name": "GetBandwidthGroup",
+          "full_name": "google.ads.admanager.v1.BandwidthGroupService.GetBandwidthGroup",
+          "service": {
+            "short_name": "BandwidthGroupService",
+            "full_name": "google.ads.admanager.v1.BandwidthGroupService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "admanager_v1_generated_BandwidthGroupService_ListBandwidthGroups_sync",
+      "title": "Snippet for the list_bandwidth_groups call in the BandwidthGroupService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Ads::AdManager::V1::BandwidthGroupService::Rest::Client#list_bandwidth_groups.",
+      "file": "bandwidth_group_service/list_bandwidth_groups.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_bandwidth_groups",
+        "full_name": "::Google::Ads::AdManager::V1::BandwidthGroupService::Rest::Client#list_bandwidth_groups",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Ads::AdManager::V1::ListBandwidthGroupsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Ads::AdManager::V1::ListBandwidthGroupsResponse",
+        "client": {
+          "short_name": "BandwidthGroupService::Rest::Client",
+          "full_name": "::Google::Ads::AdManager::V1::BandwidthGroupService::Rest::Client"
+        },
+        "method": {
+          "short_name": "ListBandwidthGroups",
+          "full_name": "google.ads.admanager.v1.BandwidthGroupService.ListBandwidthGroups",
+          "service": {
+            "short_name": "BandwidthGroupService",
+            "full_name": "google.ads.admanager.v1.BandwidthGroupService"
           }
         }
       },
@@ -452,6 +732,86 @@
       ]
     },
     {
+      "region_tag": "admanager_v1_generated_DeviceCategoryService_GetDeviceCategory_sync",
+      "title": "Snippet for the get_device_category call in the DeviceCategoryService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Ads::AdManager::V1::DeviceCategoryService::Rest::Client#get_device_category.",
+      "file": "device_category_service/get_device_category.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_device_category",
+        "full_name": "::Google::Ads::AdManager::V1::DeviceCategoryService::Rest::Client#get_device_category",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Ads::AdManager::V1::GetDeviceCategoryRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Ads::AdManager::V1::DeviceCategory",
+        "client": {
+          "short_name": "DeviceCategoryService::Rest::Client",
+          "full_name": "::Google::Ads::AdManager::V1::DeviceCategoryService::Rest::Client"
+        },
+        "method": {
+          "short_name": "GetDeviceCategory",
+          "full_name": "google.ads.admanager.v1.DeviceCategoryService.GetDeviceCategory",
+          "service": {
+            "short_name": "DeviceCategoryService",
+            "full_name": "google.ads.admanager.v1.DeviceCategoryService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "admanager_v1_generated_DeviceCategoryService_ListDeviceCategories_sync",
+      "title": "Snippet for the list_device_categories call in the DeviceCategoryService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Ads::AdManager::V1::DeviceCategoryService::Rest::Client#list_device_categories.",
+      "file": "device_category_service/list_device_categories.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_device_categories",
+        "full_name": "::Google::Ads::AdManager::V1::DeviceCategoryService::Rest::Client#list_device_categories",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Ads::AdManager::V1::ListDeviceCategoriesRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Ads::AdManager::V1::ListDeviceCategoriesResponse",
+        "client": {
+          "short_name": "DeviceCategoryService::Rest::Client",
+          "full_name": "::Google::Ads::AdManager::V1::DeviceCategoryService::Rest::Client"
+        },
+        "method": {
+          "short_name": "ListDeviceCategories",
+          "full_name": "google.ads.admanager.v1.DeviceCategoryService.ListDeviceCategories",
+          "service": {
+            "short_name": "DeviceCategoryService",
+            "full_name": "google.ads.admanager.v1.DeviceCategoryService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
       "region_tag": "admanager_v1_generated_EntitySignalsMappingService_GetEntitySignalsMapping_sync",
       "title": "Snippet for the get_entity_signals_mapping call in the EntitySignalsMappingService service",
       "description": "This is an auto-generated example demonstrating basic usage of Google::Ads::AdManager::V1::EntitySignalsMappingService::Rest::Client#get_entity_signals_mapping.",
@@ -692,6 +1052,86 @@
       ]
     },
     {
+      "region_tag": "admanager_v1_generated_GeoTargetService_GetGeoTarget_sync",
+      "title": "Snippet for the get_geo_target call in the GeoTargetService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Ads::AdManager::V1::GeoTargetService::Rest::Client#get_geo_target.",
+      "file": "geo_target_service/get_geo_target.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_geo_target",
+        "full_name": "::Google::Ads::AdManager::V1::GeoTargetService::Rest::Client#get_geo_target",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Ads::AdManager::V1::GetGeoTargetRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Ads::AdManager::V1::GeoTarget",
+        "client": {
+          "short_name": "GeoTargetService::Rest::Client",
+          "full_name": "::Google::Ads::AdManager::V1::GeoTargetService::Rest::Client"
+        },
+        "method": {
+          "short_name": "GetGeoTarget",
+          "full_name": "google.ads.admanager.v1.GeoTargetService.GetGeoTarget",
+          "service": {
+            "short_name": "GeoTargetService",
+            "full_name": "google.ads.admanager.v1.GeoTargetService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "admanager_v1_generated_GeoTargetService_ListGeoTargets_sync",
+      "title": "Snippet for the list_geo_targets call in the GeoTargetService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Ads::AdManager::V1::GeoTargetService::Rest::Client#list_geo_targets.",
+      "file": "geo_target_service/list_geo_targets.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_geo_targets",
+        "full_name": "::Google::Ads::AdManager::V1::GeoTargetService::Rest::Client#list_geo_targets",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Ads::AdManager::V1::ListGeoTargetsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Ads::AdManager::V1::ListGeoTargetsResponse",
+        "client": {
+          "short_name": "GeoTargetService::Rest::Client",
+          "full_name": "::Google::Ads::AdManager::V1::GeoTargetService::Rest::Client"
+        },
+        "method": {
+          "short_name": "ListGeoTargets",
+          "full_name": "google.ads.admanager.v1.GeoTargetService.ListGeoTargets",
+          "service": {
+            "short_name": "GeoTargetService",
+            "full_name": "google.ads.admanager.v1.GeoTargetService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
       "region_tag": "admanager_v1_generated_NetworkService_GetNetwork_sync",
       "title": "Snippet for the get_network call in the NetworkService service",
       "description": "This is an auto-generated example demonstrating basic usage of Google::Ads::AdManager::V1::NetworkService::Rest::Client#get_network.",
@@ -767,6 +1207,166 @@
         {
           "start": 20,
           "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "admanager_v1_generated_OperatingSystemService_GetOperatingSystem_sync",
+      "title": "Snippet for the get_operating_system call in the OperatingSystemService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Ads::AdManager::V1::OperatingSystemService::Rest::Client#get_operating_system.",
+      "file": "operating_system_service/get_operating_system.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_operating_system",
+        "full_name": "::Google::Ads::AdManager::V1::OperatingSystemService::Rest::Client#get_operating_system",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Ads::AdManager::V1::GetOperatingSystemRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Ads::AdManager::V1::OperatingSystem",
+        "client": {
+          "short_name": "OperatingSystemService::Rest::Client",
+          "full_name": "::Google::Ads::AdManager::V1::OperatingSystemService::Rest::Client"
+        },
+        "method": {
+          "short_name": "GetOperatingSystem",
+          "full_name": "google.ads.admanager.v1.OperatingSystemService.GetOperatingSystem",
+          "service": {
+            "short_name": "OperatingSystemService",
+            "full_name": "google.ads.admanager.v1.OperatingSystemService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "admanager_v1_generated_OperatingSystemService_ListOperatingSystems_sync",
+      "title": "Snippet for the list_operating_systems call in the OperatingSystemService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Ads::AdManager::V1::OperatingSystemService::Rest::Client#list_operating_systems.",
+      "file": "operating_system_service/list_operating_systems.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_operating_systems",
+        "full_name": "::Google::Ads::AdManager::V1::OperatingSystemService::Rest::Client#list_operating_systems",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Ads::AdManager::V1::ListOperatingSystemsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Ads::AdManager::V1::ListOperatingSystemsResponse",
+        "client": {
+          "short_name": "OperatingSystemService::Rest::Client",
+          "full_name": "::Google::Ads::AdManager::V1::OperatingSystemService::Rest::Client"
+        },
+        "method": {
+          "short_name": "ListOperatingSystems",
+          "full_name": "google.ads.admanager.v1.OperatingSystemService.ListOperatingSystems",
+          "service": {
+            "short_name": "OperatingSystemService",
+            "full_name": "google.ads.admanager.v1.OperatingSystemService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "admanager_v1_generated_OperatingSystemVersionService_GetOperatingSystemVersion_sync",
+      "title": "Snippet for the get_operating_system_version call in the OperatingSystemVersionService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Ads::AdManager::V1::OperatingSystemVersionService::Rest::Client#get_operating_system_version.",
+      "file": "operating_system_version_service/get_operating_system_version.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_operating_system_version",
+        "full_name": "::Google::Ads::AdManager::V1::OperatingSystemVersionService::Rest::Client#get_operating_system_version",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Ads::AdManager::V1::GetOperatingSystemVersionRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Ads::AdManager::V1::OperatingSystemVersion",
+        "client": {
+          "short_name": "OperatingSystemVersionService::Rest::Client",
+          "full_name": "::Google::Ads::AdManager::V1::OperatingSystemVersionService::Rest::Client"
+        },
+        "method": {
+          "short_name": "GetOperatingSystemVersion",
+          "full_name": "google.ads.admanager.v1.OperatingSystemVersionService.GetOperatingSystemVersion",
+          "service": {
+            "short_name": "OperatingSystemVersionService",
+            "full_name": "google.ads.admanager.v1.OperatingSystemVersionService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "admanager_v1_generated_OperatingSystemVersionService_ListOperatingSystemVersions_sync",
+      "title": "Snippet for the list_operating_system_versions call in the OperatingSystemVersionService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Ads::AdManager::V1::OperatingSystemVersionService::Rest::Client#list_operating_system_versions.",
+      "file": "operating_system_version_service/list_operating_system_versions.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_operating_system_versions",
+        "full_name": "::Google::Ads::AdManager::V1::OperatingSystemVersionService::Rest::Client#list_operating_system_versions",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Ads::AdManager::V1::ListOperatingSystemVersionsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Ads::AdManager::V1::ListOperatingSystemVersionsResponse",
+        "client": {
+          "short_name": "OperatingSystemVersionService::Rest::Client",
+          "full_name": "::Google::Ads::AdManager::V1::OperatingSystemVersionService::Rest::Client"
+        },
+        "method": {
+          "short_name": "ListOperatingSystemVersions",
+          "full_name": "google.ads.admanager.v1.OperatingSystemVersionService.ListOperatingSystemVersions",
+          "service": {
+            "short_name": "OperatingSystemVersionService",
+            "full_name": "google.ads.admanager.v1.OperatingSystemVersionService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
           "type": "FULL"
         }
       ]
@@ -918,6 +1518,406 @@
           "service": {
             "short_name": "PlacementService",
             "full_name": "google.ads.admanager.v1.PlacementService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "admanager_v1_generated_PrivateAuctionDealService_GetPrivateAuctionDeal_sync",
+      "title": "Snippet for the get_private_auction_deal call in the PrivateAuctionDealService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Ads::AdManager::V1::PrivateAuctionDealService::Rest::Client#get_private_auction_deal.",
+      "file": "private_auction_deal_service/get_private_auction_deal.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_private_auction_deal",
+        "full_name": "::Google::Ads::AdManager::V1::PrivateAuctionDealService::Rest::Client#get_private_auction_deal",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Ads::AdManager::V1::GetPrivateAuctionDealRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Ads::AdManager::V1::PrivateAuctionDeal",
+        "client": {
+          "short_name": "PrivateAuctionDealService::Rest::Client",
+          "full_name": "::Google::Ads::AdManager::V1::PrivateAuctionDealService::Rest::Client"
+        },
+        "method": {
+          "short_name": "GetPrivateAuctionDeal",
+          "full_name": "google.ads.admanager.v1.PrivateAuctionDealService.GetPrivateAuctionDeal",
+          "service": {
+            "short_name": "PrivateAuctionDealService",
+            "full_name": "google.ads.admanager.v1.PrivateAuctionDealService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "admanager_v1_generated_PrivateAuctionDealService_ListPrivateAuctionDeals_sync",
+      "title": "Snippet for the list_private_auction_deals call in the PrivateAuctionDealService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Ads::AdManager::V1::PrivateAuctionDealService::Rest::Client#list_private_auction_deals.",
+      "file": "private_auction_deal_service/list_private_auction_deals.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_private_auction_deals",
+        "full_name": "::Google::Ads::AdManager::V1::PrivateAuctionDealService::Rest::Client#list_private_auction_deals",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Ads::AdManager::V1::ListPrivateAuctionDealsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Ads::AdManager::V1::ListPrivateAuctionDealsResponse",
+        "client": {
+          "short_name": "PrivateAuctionDealService::Rest::Client",
+          "full_name": "::Google::Ads::AdManager::V1::PrivateAuctionDealService::Rest::Client"
+        },
+        "method": {
+          "short_name": "ListPrivateAuctionDeals",
+          "full_name": "google.ads.admanager.v1.PrivateAuctionDealService.ListPrivateAuctionDeals",
+          "service": {
+            "short_name": "PrivateAuctionDealService",
+            "full_name": "google.ads.admanager.v1.PrivateAuctionDealService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "admanager_v1_generated_PrivateAuctionDealService_CreatePrivateAuctionDeal_sync",
+      "title": "Snippet for the create_private_auction_deal call in the PrivateAuctionDealService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Ads::AdManager::V1::PrivateAuctionDealService::Rest::Client#create_private_auction_deal.",
+      "file": "private_auction_deal_service/create_private_auction_deal.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_private_auction_deal",
+        "full_name": "::Google::Ads::AdManager::V1::PrivateAuctionDealService::Rest::Client#create_private_auction_deal",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Ads::AdManager::V1::CreatePrivateAuctionDealRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Ads::AdManager::V1::PrivateAuctionDeal",
+        "client": {
+          "short_name": "PrivateAuctionDealService::Rest::Client",
+          "full_name": "::Google::Ads::AdManager::V1::PrivateAuctionDealService::Rest::Client"
+        },
+        "method": {
+          "short_name": "CreatePrivateAuctionDeal",
+          "full_name": "google.ads.admanager.v1.PrivateAuctionDealService.CreatePrivateAuctionDeal",
+          "service": {
+            "short_name": "PrivateAuctionDealService",
+            "full_name": "google.ads.admanager.v1.PrivateAuctionDealService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "admanager_v1_generated_PrivateAuctionDealService_UpdatePrivateAuctionDeal_sync",
+      "title": "Snippet for the update_private_auction_deal call in the PrivateAuctionDealService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Ads::AdManager::V1::PrivateAuctionDealService::Rest::Client#update_private_auction_deal.",
+      "file": "private_auction_deal_service/update_private_auction_deal.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_private_auction_deal",
+        "full_name": "::Google::Ads::AdManager::V1::PrivateAuctionDealService::Rest::Client#update_private_auction_deal",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Ads::AdManager::V1::UpdatePrivateAuctionDealRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Ads::AdManager::V1::PrivateAuctionDeal",
+        "client": {
+          "short_name": "PrivateAuctionDealService::Rest::Client",
+          "full_name": "::Google::Ads::AdManager::V1::PrivateAuctionDealService::Rest::Client"
+        },
+        "method": {
+          "short_name": "UpdatePrivateAuctionDeal",
+          "full_name": "google.ads.admanager.v1.PrivateAuctionDealService.UpdatePrivateAuctionDeal",
+          "service": {
+            "short_name": "PrivateAuctionDealService",
+            "full_name": "google.ads.admanager.v1.PrivateAuctionDealService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "admanager_v1_generated_PrivateAuctionService_GetPrivateAuction_sync",
+      "title": "Snippet for the get_private_auction call in the PrivateAuctionService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Ads::AdManager::V1::PrivateAuctionService::Rest::Client#get_private_auction.",
+      "file": "private_auction_service/get_private_auction.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_private_auction",
+        "full_name": "::Google::Ads::AdManager::V1::PrivateAuctionService::Rest::Client#get_private_auction",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Ads::AdManager::V1::GetPrivateAuctionRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Ads::AdManager::V1::PrivateAuction",
+        "client": {
+          "short_name": "PrivateAuctionService::Rest::Client",
+          "full_name": "::Google::Ads::AdManager::V1::PrivateAuctionService::Rest::Client"
+        },
+        "method": {
+          "short_name": "GetPrivateAuction",
+          "full_name": "google.ads.admanager.v1.PrivateAuctionService.GetPrivateAuction",
+          "service": {
+            "short_name": "PrivateAuctionService",
+            "full_name": "google.ads.admanager.v1.PrivateAuctionService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "admanager_v1_generated_PrivateAuctionService_ListPrivateAuctions_sync",
+      "title": "Snippet for the list_private_auctions call in the PrivateAuctionService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Ads::AdManager::V1::PrivateAuctionService::Rest::Client#list_private_auctions.",
+      "file": "private_auction_service/list_private_auctions.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_private_auctions",
+        "full_name": "::Google::Ads::AdManager::V1::PrivateAuctionService::Rest::Client#list_private_auctions",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Ads::AdManager::V1::ListPrivateAuctionsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Ads::AdManager::V1::ListPrivateAuctionsResponse",
+        "client": {
+          "short_name": "PrivateAuctionService::Rest::Client",
+          "full_name": "::Google::Ads::AdManager::V1::PrivateAuctionService::Rest::Client"
+        },
+        "method": {
+          "short_name": "ListPrivateAuctions",
+          "full_name": "google.ads.admanager.v1.PrivateAuctionService.ListPrivateAuctions",
+          "service": {
+            "short_name": "PrivateAuctionService",
+            "full_name": "google.ads.admanager.v1.PrivateAuctionService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "admanager_v1_generated_PrivateAuctionService_CreatePrivateAuction_sync",
+      "title": "Snippet for the create_private_auction call in the PrivateAuctionService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Ads::AdManager::V1::PrivateAuctionService::Rest::Client#create_private_auction.",
+      "file": "private_auction_service/create_private_auction.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_private_auction",
+        "full_name": "::Google::Ads::AdManager::V1::PrivateAuctionService::Rest::Client#create_private_auction",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Ads::AdManager::V1::CreatePrivateAuctionRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Ads::AdManager::V1::PrivateAuction",
+        "client": {
+          "short_name": "PrivateAuctionService::Rest::Client",
+          "full_name": "::Google::Ads::AdManager::V1::PrivateAuctionService::Rest::Client"
+        },
+        "method": {
+          "short_name": "CreatePrivateAuction",
+          "full_name": "google.ads.admanager.v1.PrivateAuctionService.CreatePrivateAuction",
+          "service": {
+            "short_name": "PrivateAuctionService",
+            "full_name": "google.ads.admanager.v1.PrivateAuctionService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "admanager_v1_generated_PrivateAuctionService_UpdatePrivateAuction_sync",
+      "title": "Snippet for the update_private_auction call in the PrivateAuctionService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Ads::AdManager::V1::PrivateAuctionService::Rest::Client#update_private_auction.",
+      "file": "private_auction_service/update_private_auction.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_private_auction",
+        "full_name": "::Google::Ads::AdManager::V1::PrivateAuctionService::Rest::Client#update_private_auction",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Ads::AdManager::V1::UpdatePrivateAuctionRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Ads::AdManager::V1::PrivateAuction",
+        "client": {
+          "short_name": "PrivateAuctionService::Rest::Client",
+          "full_name": "::Google::Ads::AdManager::V1::PrivateAuctionService::Rest::Client"
+        },
+        "method": {
+          "short_name": "UpdatePrivateAuction",
+          "full_name": "google.ads.admanager.v1.PrivateAuctionService.UpdatePrivateAuction",
+          "service": {
+            "short_name": "PrivateAuctionService",
+            "full_name": "google.ads.admanager.v1.PrivateAuctionService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "admanager_v1_generated_ProgrammaticBuyerService_GetProgrammaticBuyer_sync",
+      "title": "Snippet for the get_programmatic_buyer call in the ProgrammaticBuyerService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Ads::AdManager::V1::ProgrammaticBuyerService::Rest::Client#get_programmatic_buyer.",
+      "file": "programmatic_buyer_service/get_programmatic_buyer.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_programmatic_buyer",
+        "full_name": "::Google::Ads::AdManager::V1::ProgrammaticBuyerService::Rest::Client#get_programmatic_buyer",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Ads::AdManager::V1::GetProgrammaticBuyerRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Ads::AdManager::V1::ProgrammaticBuyer",
+        "client": {
+          "short_name": "ProgrammaticBuyerService::Rest::Client",
+          "full_name": "::Google::Ads::AdManager::V1::ProgrammaticBuyerService::Rest::Client"
+        },
+        "method": {
+          "short_name": "GetProgrammaticBuyer",
+          "full_name": "google.ads.admanager.v1.ProgrammaticBuyerService.GetProgrammaticBuyer",
+          "service": {
+            "short_name": "ProgrammaticBuyerService",
+            "full_name": "google.ads.admanager.v1.ProgrammaticBuyerService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "admanager_v1_generated_ProgrammaticBuyerService_ListProgrammaticBuyers_sync",
+      "title": "Snippet for the list_programmatic_buyers call in the ProgrammaticBuyerService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Ads::AdManager::V1::ProgrammaticBuyerService::Rest::Client#list_programmatic_buyers.",
+      "file": "programmatic_buyer_service/list_programmatic_buyers.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_programmatic_buyers",
+        "full_name": "::Google::Ads::AdManager::V1::ProgrammaticBuyerService::Rest::Client#list_programmatic_buyers",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Ads::AdManager::V1::ListProgrammaticBuyersRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Ads::AdManager::V1::ListProgrammaticBuyersResponse",
+        "client": {
+          "short_name": "ProgrammaticBuyerService::Rest::Client",
+          "full_name": "::Google::Ads::AdManager::V1::ProgrammaticBuyerService::Rest::Client"
+        },
+        "method": {
+          "short_name": "ListProgrammaticBuyers",
+          "full_name": "google.ads.admanager.v1.ProgrammaticBuyerService.ListProgrammaticBuyers",
+          "service": {
+            "short_name": "ProgrammaticBuyerService",
+            "full_name": "google.ads.admanager.v1.ProgrammaticBuyerService"
           }
         }
       },

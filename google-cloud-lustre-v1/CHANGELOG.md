@@ -1,5 +1,14 @@
 # Changelog
 
+### 0.2.0 (2025-07-24)
+
+#### Features
+
+* Added a new instance state UPDATING ([#30687](https://github.com/googleapis/google-cloud-ruby/issues/30687)) 
+#### Documentation
+
+* Deprecated gke_support_enabled flag 
+
 ### 0.1.1 (2025-06-23)
 
 #### Bug Fixes

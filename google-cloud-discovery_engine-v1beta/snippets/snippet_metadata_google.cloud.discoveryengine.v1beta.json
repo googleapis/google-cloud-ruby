@@ -1,7 +1,7 @@
 {
   "client_library": {
     "name": "google-cloud-discovery_engine-v1beta",
-    "version": "0.20.0",
+    "version": "0.21.0",
     "language": "RUBY",
     "apis": [
       {
@@ -3118,6 +3118,206 @@
           "service": {
             "short_name": "ServingConfigService",
             "full_name": "google.cloud.discoveryengine.v1beta.ServingConfigService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "discoveryengine_v1beta_generated_SessionService_CreateSession_sync",
+      "title": "Snippet for the create_session call in the SessionService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DiscoveryEngine::V1beta::SessionService::Client#create_session.",
+      "file": "session_service/create_session.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_session",
+        "full_name": "::Google::Cloud::DiscoveryEngine::V1beta::SessionService::Client#create_session",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::DiscoveryEngine::V1beta::CreateSessionRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::DiscoveryEngine::V1beta::Session",
+        "client": {
+          "short_name": "SessionService::Client",
+          "full_name": "::Google::Cloud::DiscoveryEngine::V1beta::SessionService::Client"
+        },
+        "method": {
+          "short_name": "CreateSession",
+          "full_name": "google.cloud.discoveryengine.v1beta.SessionService.CreateSession",
+          "service": {
+            "short_name": "SessionService",
+            "full_name": "google.cloud.discoveryengine.v1beta.SessionService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "discoveryengine_v1beta_generated_SessionService_DeleteSession_sync",
+      "title": "Snippet for the delete_session call in the SessionService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DiscoveryEngine::V1beta::SessionService::Client#delete_session.",
+      "file": "session_service/delete_session.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_session",
+        "full_name": "::Google::Cloud::DiscoveryEngine::V1beta::SessionService::Client#delete_session",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::DiscoveryEngine::V1beta::DeleteSessionRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Protobuf::Empty",
+        "client": {
+          "short_name": "SessionService::Client",
+          "full_name": "::Google::Cloud::DiscoveryEngine::V1beta::SessionService::Client"
+        },
+        "method": {
+          "short_name": "DeleteSession",
+          "full_name": "google.cloud.discoveryengine.v1beta.SessionService.DeleteSession",
+          "service": {
+            "short_name": "SessionService",
+            "full_name": "google.cloud.discoveryengine.v1beta.SessionService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "discoveryengine_v1beta_generated_SessionService_UpdateSession_sync",
+      "title": "Snippet for the update_session call in the SessionService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DiscoveryEngine::V1beta::SessionService::Client#update_session.",
+      "file": "session_service/update_session.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_session",
+        "full_name": "::Google::Cloud::DiscoveryEngine::V1beta::SessionService::Client#update_session",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::DiscoveryEngine::V1beta::UpdateSessionRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::DiscoveryEngine::V1beta::Session",
+        "client": {
+          "short_name": "SessionService::Client",
+          "full_name": "::Google::Cloud::DiscoveryEngine::V1beta::SessionService::Client"
+        },
+        "method": {
+          "short_name": "UpdateSession",
+          "full_name": "google.cloud.discoveryengine.v1beta.SessionService.UpdateSession",
+          "service": {
+            "short_name": "SessionService",
+            "full_name": "google.cloud.discoveryengine.v1beta.SessionService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "discoveryengine_v1beta_generated_SessionService_GetSession_sync",
+      "title": "Snippet for the get_session call in the SessionService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DiscoveryEngine::V1beta::SessionService::Client#get_session.",
+      "file": "session_service/get_session.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_session",
+        "full_name": "::Google::Cloud::DiscoveryEngine::V1beta::SessionService::Client#get_session",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::DiscoveryEngine::V1beta::GetSessionRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::DiscoveryEngine::V1beta::Session",
+        "client": {
+          "short_name": "SessionService::Client",
+          "full_name": "::Google::Cloud::DiscoveryEngine::V1beta::SessionService::Client"
+        },
+        "method": {
+          "short_name": "GetSession",
+          "full_name": "google.cloud.discoveryengine.v1beta.SessionService.GetSession",
+          "service": {
+            "short_name": "SessionService",
+            "full_name": "google.cloud.discoveryengine.v1beta.SessionService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "discoveryengine_v1beta_generated_SessionService_ListSessions_sync",
+      "title": "Snippet for the list_sessions call in the SessionService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DiscoveryEngine::V1beta::SessionService::Client#list_sessions.",
+      "file": "session_service/list_sessions.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_sessions",
+        "full_name": "::Google::Cloud::DiscoveryEngine::V1beta::SessionService::Client#list_sessions",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::DiscoveryEngine::V1beta::ListSessionsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::DiscoveryEngine::V1beta::ListSessionsResponse",
+        "client": {
+          "short_name": "SessionService::Client",
+          "full_name": "::Google::Cloud::DiscoveryEngine::V1beta::SessionService::Client"
+        },
+        "method": {
+          "short_name": "ListSessions",
+          "full_name": "google.cloud.discoveryengine.v1beta.SessionService.ListSessions",
+          "service": {
+            "short_name": "SessionService",
+            "full_name": "google.cloud.discoveryengine.v1beta.SessionService"
           }
         }
       },

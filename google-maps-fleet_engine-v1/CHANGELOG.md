@@ -1,5 +1,12 @@
 # Changelog
 
+### 0.7.0 (2025-07-15)
+
+#### Features
+
+* Support for Android's Fused Location Provider 
+* Support for custom Trip attributes 
+
 ### 0.6.0 (2025-05-11)
 
 #### Features

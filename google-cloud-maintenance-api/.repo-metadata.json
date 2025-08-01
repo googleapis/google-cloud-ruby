@@ -1,0 +1,17 @@
+{
+    "api_id": "maintenance.googleapis.com",
+    "api_shortname": "maintenance",
+    "client_documentation": "https://cloud.google.com/ruby/docs/reference/google-cloud-maintenance-api/latest",
+    "distribution_name": "google-cloud-maintenance-api",
+    "is_cloud": true,
+    "language": "ruby",
+    "name": "maintenance",
+    "name_pretty": "Maintenance API",
+    "product_documentation": "https://cloud.google.com/unified-maintenance/docs/overview",
+    "release_level": "preview",
+    "repo": "googleapis/google-cloud-ruby",
+    "requires_billing": true,
+    "ruby-cloud-description": "The Maintenance API provides a centralized view of planned disruptive maintenance events across supported Google Cloud products. It offers users visibility into upcoming, ongoing, and completed maintenance, along with controls to manage certain maintenance activities, such as mainteance windows, rescheduling, and on-demand updates.",
+    "ruby-cloud-product-url": "https://cloud.google.com/unified-maintenance/docs/overview",
+    "library_type": "GAPIC_MANUAL"
+}

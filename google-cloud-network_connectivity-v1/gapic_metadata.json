@@ -228,6 +228,40 @@
         }
       }
     },
+    "InternalRangeService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::NetworkConnectivity::V1::InternalRangeService::Client",
+          "rpcs": {
+            "ListInternalRanges": {
+              "methods": [
+                "list_internal_ranges"
+              ]
+            },
+            "GetInternalRange": {
+              "methods": [
+                "get_internal_range"
+              ]
+            },
+            "CreateInternalRange": {
+              "methods": [
+                "create_internal_range"
+              ]
+            },
+            "UpdateInternalRange": {
+              "methods": [
+                "update_internal_range"
+              ]
+            },
+            "DeleteInternalRange": {
+              "methods": [
+                "delete_internal_range"
+              ]
+            }
+          }
+        }
+      }
+    },
     "PolicyBasedRoutingService": {
       "clients": {
         "grpc": {

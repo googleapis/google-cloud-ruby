@@ -1,7 +1,7 @@
 {
   "client_library": {
     "name": "google-cloud-network_connectivity-v1",
-    "version": "1.6.0",
+    "version": "1.7.0",
     "language": "RUBY",
     "apis": [
       {
@@ -1638,6 +1638,206 @@
           "service": {
             "short_name": "HubService",
             "full_name": "google.cloud.networkconnectivity.v1.HubService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "networkconnectivity_v1_generated_InternalRangeService_ListInternalRanges_sync",
+      "title": "Snippet for the list_internal_ranges call in the InternalRangeService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::NetworkConnectivity::V1::InternalRangeService::Client#list_internal_ranges.",
+      "file": "internal_range_service/list_internal_ranges.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_internal_ranges",
+        "full_name": "::Google::Cloud::NetworkConnectivity::V1::InternalRangeService::Client#list_internal_ranges",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::NetworkConnectivity::V1::ListInternalRangesRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::NetworkConnectivity::V1::ListInternalRangesResponse",
+        "client": {
+          "short_name": "InternalRangeService::Client",
+          "full_name": "::Google::Cloud::NetworkConnectivity::V1::InternalRangeService::Client"
+        },
+        "method": {
+          "short_name": "ListInternalRanges",
+          "full_name": "google.cloud.networkconnectivity.v1.InternalRangeService.ListInternalRanges",
+          "service": {
+            "short_name": "InternalRangeService",
+            "full_name": "google.cloud.networkconnectivity.v1.InternalRangeService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "networkconnectivity_v1_generated_InternalRangeService_GetInternalRange_sync",
+      "title": "Snippet for the get_internal_range call in the InternalRangeService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::NetworkConnectivity::V1::InternalRangeService::Client#get_internal_range.",
+      "file": "internal_range_service/get_internal_range.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_internal_range",
+        "full_name": "::Google::Cloud::NetworkConnectivity::V1::InternalRangeService::Client#get_internal_range",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::NetworkConnectivity::V1::GetInternalRangeRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::NetworkConnectivity::V1::InternalRange",
+        "client": {
+          "short_name": "InternalRangeService::Client",
+          "full_name": "::Google::Cloud::NetworkConnectivity::V1::InternalRangeService::Client"
+        },
+        "method": {
+          "short_name": "GetInternalRange",
+          "full_name": "google.cloud.networkconnectivity.v1.InternalRangeService.GetInternalRange",
+          "service": {
+            "short_name": "InternalRangeService",
+            "full_name": "google.cloud.networkconnectivity.v1.InternalRangeService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "networkconnectivity_v1_generated_InternalRangeService_CreateInternalRange_sync",
+      "title": "Snippet for the create_internal_range call in the InternalRangeService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::NetworkConnectivity::V1::InternalRangeService::Client#create_internal_range.",
+      "file": "internal_range_service/create_internal_range.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_internal_range",
+        "full_name": "::Google::Cloud::NetworkConnectivity::V1::InternalRangeService::Client#create_internal_range",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::NetworkConnectivity::V1::CreateInternalRangeRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "InternalRangeService::Client",
+          "full_name": "::Google::Cloud::NetworkConnectivity::V1::InternalRangeService::Client"
+        },
+        "method": {
+          "short_name": "CreateInternalRange",
+          "full_name": "google.cloud.networkconnectivity.v1.InternalRangeService.CreateInternalRange",
+          "service": {
+            "short_name": "InternalRangeService",
+            "full_name": "google.cloud.networkconnectivity.v1.InternalRangeService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "networkconnectivity_v1_generated_InternalRangeService_UpdateInternalRange_sync",
+      "title": "Snippet for the update_internal_range call in the InternalRangeService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::NetworkConnectivity::V1::InternalRangeService::Client#update_internal_range.",
+      "file": "internal_range_service/update_internal_range.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_internal_range",
+        "full_name": "::Google::Cloud::NetworkConnectivity::V1::InternalRangeService::Client#update_internal_range",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::NetworkConnectivity::V1::UpdateInternalRangeRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "InternalRangeService::Client",
+          "full_name": "::Google::Cloud::NetworkConnectivity::V1::InternalRangeService::Client"
+        },
+        "method": {
+          "short_name": "UpdateInternalRange",
+          "full_name": "google.cloud.networkconnectivity.v1.InternalRangeService.UpdateInternalRange",
+          "service": {
+            "short_name": "InternalRangeService",
+            "full_name": "google.cloud.networkconnectivity.v1.InternalRangeService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "networkconnectivity_v1_generated_InternalRangeService_DeleteInternalRange_sync",
+      "title": "Snippet for the delete_internal_range call in the InternalRangeService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::NetworkConnectivity::V1::InternalRangeService::Client#delete_internal_range.",
+      "file": "internal_range_service/delete_internal_range.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_internal_range",
+        "full_name": "::Google::Cloud::NetworkConnectivity::V1::InternalRangeService::Client#delete_internal_range",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::NetworkConnectivity::V1::DeleteInternalRangeRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "InternalRangeService::Client",
+          "full_name": "::Google::Cloud::NetworkConnectivity::V1::InternalRangeService::Client"
+        },
+        "method": {
+          "short_name": "DeleteInternalRange",
+          "full_name": "google.cloud.networkconnectivity.v1.InternalRangeService.DeleteInternalRange",
+          "service": {
+            "short_name": "InternalRangeService",
+            "full_name": "google.cloud.networkconnectivity.v1.InternalRangeService"
           }
         }
       },

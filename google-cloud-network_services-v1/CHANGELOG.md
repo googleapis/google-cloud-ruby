@@ -1,5 +1,11 @@
 # Changelog
 
+### 2.4.0 (2025-07-15)
+
+#### Features
+
+* Support for Backend Service isolation configs ([#30604](https://github.com/googleapis/google-cloud-ruby/issues/30604)) 
+
 ### 2.3.0 (2025-06-24)
 
 #### Features

@@ -138,8 +138,11 @@ module Google
         # Retrieve entities specified by a Query. The query is run within the
         # transaction.
         #
-        # @param [Query] query The Query object with the search criteria.
+        # @param [Query, GqlQuery] query The query with the search criteria.
         # @param [String] namespace The namespace the query is to run within.
+        # @param [Hash, Google::Cloud::Datastore::V1::ExplainOptions] explain_options
+        #   The options for query explanation. See {Google::Cloud::Datastore::V1::ExplainOptions}
+        #   for details. Optional.
         #
         # @return [Google::Cloud::Datastore::Dataset::QueryResults]
         #
@@ -154,15 +157,60 @@ module Google
         #     tasks = tx.run query
         #   end
         #
-        def run query, namespace: nil
+        # @example Run the query with explain options:
+        #   require "google/cloud/datastore"
+        #
+        #   datastore = Google::Cloud::Datastore.new
+        #
+        #   datastore.read_only_transaction do |tx|
+        #     query = tx.query("Task")
+        #     results = tx.run query, explain_options: { analyze: true }
+        #
+        #     # You must iterate through all pages of results to get the metrics.
+        #     loop do
+        #       break unless results.next?
+        #       results = results.next
+        #     end
+        #
+        #     if results.explain_metrics
+        #       stats = results.explain_metrics.execution_stats
+        #       puts "Read operations: #{stats.read_operations}"
+        #     end
+        #   end
+        #
+        # @example Run the query with explain options using a `Google::Cloud::Datastore::V1::ExplainOptions` object.
+        #   require "google/cloud/datastore"
+        #
+        #   datastore = Google::Cloud::Datastore.new
+        #
+        #   datastore.read_only_transaction do |tx|
+        #     query = tx.query("Task")
+        #     explain_options = Google::Cloud::Datastore::V1::ExplainOptions.new
+        #     results = tx.run query, explain_options: explain_options
+        #
+        #     # You must iterate through all pages of results to get the metrics.
+        #     loop do
+        #       break unless results.next?
+        #       results = results.next
+        #     end
+        #
+        #     if results.explain_metrics
+        #       stats = results.explain_metrics.execution_stats
+        #       puts "Read operations: #{stats.read_operations}"
+        #     end
+        #   end
+        #
+        def run query, namespace: nil, explain_options: nil
           ensure_service!
           unless query.is_a?(Query) || query.is_a?(GqlQuery)
             raise ArgumentError, "Cannot run a #{query.class} object."
           end
           query_res = service.run_query query.to_grpc, namespace,
+                                        explain_options: explain_options,
                                         transaction: @id
+
           Dataset::QueryResults.from_grpc query_res, service, namespace,
-                                          query.to_grpc.dup
+                                          query.to_grpc.dup, nil, explain_options
         end
         alias run_query run
 
@@ -188,14 +236,34 @@ module Google
         #                            .add_count
         #     res = tx.run_aggregation aggregate_query
         #   end
+        # @example Run the aggregate query with explain options:
+        #   require "google/cloud/datastore"
         #
-        def run_aggregation aggregate_query, namespace: nil
+        #   datastore = Google::Cloud::Datastore.new
+        #
+        #   datastore.read_only_transaction do |tx|
+        #     query = tx.query("Task")
+        #     aggregate_query = query.aggregate_query.add_count aggregate_alias: "total"
+        #     results = tx.run_aggregation aggregate_query, explain_options: { analyze: true }
+        #
+        #     if results.explain_metrics
+        #       stats = results.explain_metrics.execution_stats
+        #       puts "Read operations: #{stats.read_operations}"
+        #     end
+        #   end
+        #
+        def run_aggregation aggregate_query, namespace: nil, explain_options: nil
           ensure_service!
           unless aggregate_query.is_a?(AggregateQuery) || aggregate_query.is_a?(GqlQuery)
             raise ArgumentError, "Cannot run a #{aggregate_query.class} object."
           end
-          aggregate_query_results = service.run_aggregation_query aggregate_query.to_grpc, namespace, transaction: @id
-          Dataset::AggregateQueryResults.from_grpc aggregate_query_results
+
+          aggregate_query_results = service.run_aggregation_query aggregate_query.to_grpc,
+                                                                  namespace,
+                                                                  transaction: @id,
+                                                                  explain_options: explain_options
+
+          Dataset::AggregateQueryResults.from_grpc aggregate_query_results, explain_options
         end
 
         ##

@@ -1,5 +1,11 @@
 # Changelog
 
+### 1.4.0 (2025-07-24)
+
+#### Features
+
+* Support for OrgPolicyViolationsPreview resources ([#30699](https://github.com/googleapis/google-cloud-ruby/issues/30699)) 
+
 ### 1.3.0 (2025-05-12)
 
 #### Features

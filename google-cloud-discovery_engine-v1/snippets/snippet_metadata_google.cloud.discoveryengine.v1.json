@@ -1,7 +1,7 @@
 {
   "client_library": {
     "name": "google-cloud-discovery_engine-v1",
-    "version": "2.3.0",
+    "version": "2.4.0",
     "language": "RUBY",
     "apis": [
       {
@@ -11,6 +11,126 @@
     ]
   },
   "snippets": [
+    {
+      "region_tag": "discoveryengine_v1_generated_SearchService_Search_sync",
+      "title": "Snippet for the search call in the SearchService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DiscoveryEngine::V1::SearchService::Client#search.",
+      "file": "search_service/search.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "search",
+        "full_name": "::Google::Cloud::DiscoveryEngine::V1::SearchService::Client#search",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::DiscoveryEngine::V1::SearchRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::DiscoveryEngine::V1::SearchResponse",
+        "client": {
+          "short_name": "SearchService::Client",
+          "full_name": "::Google::Cloud::DiscoveryEngine::V1::SearchService::Client"
+        },
+        "method": {
+          "short_name": "Search",
+          "full_name": "google.cloud.discoveryengine.v1.SearchService.Search",
+          "service": {
+            "short_name": "SearchService",
+            "full_name": "google.cloud.discoveryengine.v1.SearchService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "discoveryengine_v1_generated_SearchService_SearchLite_sync",
+      "title": "Snippet for the search_lite call in the SearchService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DiscoveryEngine::V1::SearchService::Client#search_lite.",
+      "file": "search_service/search_lite.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "search_lite",
+        "full_name": "::Google::Cloud::DiscoveryEngine::V1::SearchService::Client#search_lite",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::DiscoveryEngine::V1::SearchRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::DiscoveryEngine::V1::SearchResponse",
+        "client": {
+          "short_name": "SearchService::Client",
+          "full_name": "::Google::Cloud::DiscoveryEngine::V1::SearchService::Client"
+        },
+        "method": {
+          "short_name": "SearchLite",
+          "full_name": "google.cloud.discoveryengine.v1.SearchService.SearchLite",
+          "service": {
+            "short_name": "SearchService",
+            "full_name": "google.cloud.discoveryengine.v1.SearchService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "discoveryengine_v1_generated_AssistantService_StreamAssist_sync",
+      "title": "Snippet for the stream_assist call in the AssistantService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DiscoveryEngine::V1::AssistantService::Client#stream_assist.",
+      "file": "assistant_service/stream_assist.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "stream_assist",
+        "full_name": "::Google::Cloud::DiscoveryEngine::V1::AssistantService::Client#stream_assist",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::DiscoveryEngine::V1::StreamAssistRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::DiscoveryEngine::V1::StreamAssistResponse",
+        "client": {
+          "short_name": "AssistantService::Client",
+          "full_name": "::Google::Cloud::DiscoveryEngine::V1::AssistantService::Client"
+        },
+        "method": {
+          "short_name": "StreamAssist",
+          "full_name": "google.cloud.discoveryengine.v1.AssistantService.StreamAssist",
+          "service": {
+            "short_name": "AssistantService",
+            "full_name": "google.cloud.discoveryengine.v1.AssistantService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 49,
+          "type": "FULL"
+        }
+      ]
+    },
     {
       "region_tag": "discoveryengine_v1_generated_CmekConfigService_UpdateCmekConfig_sync",
       "title": "Snippet for the update_cmek_config call in the CmekConfigService service",
@@ -558,86 +678,6 @@
           "service": {
             "short_name": "ControlService",
             "full_name": "google.cloud.discoveryengine.v1.ControlService"
-          }
-        }
-      },
-      "canonical": true,
-      "origin": "API_DEFINITION",
-      "segments": [
-        {
-          "start": 20,
-          "end": 50,
-          "type": "FULL"
-        }
-      ]
-    },
-    {
-      "region_tag": "discoveryengine_v1_generated_SearchService_Search_sync",
-      "title": "Snippet for the search call in the SearchService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DiscoveryEngine::V1::SearchService::Client#search.",
-      "file": "search_service/search.rb",
-      "language": "RUBY",
-      "client_method": {
-        "short_name": "search",
-        "full_name": "::Google::Cloud::DiscoveryEngine::V1::SearchService::Client#search",
-        "async": false,
-        "parameters": [
-          {
-            "type": "::Google::Cloud::DiscoveryEngine::V1::SearchRequest",
-            "name": "request"
-          }
-        ],
-        "result_type": "::Google::Cloud::DiscoveryEngine::V1::SearchResponse",
-        "client": {
-          "short_name": "SearchService::Client",
-          "full_name": "::Google::Cloud::DiscoveryEngine::V1::SearchService::Client"
-        },
-        "method": {
-          "short_name": "Search",
-          "full_name": "google.cloud.discoveryengine.v1.SearchService.Search",
-          "service": {
-            "short_name": "SearchService",
-            "full_name": "google.cloud.discoveryengine.v1.SearchService"
-          }
-        }
-      },
-      "canonical": true,
-      "origin": "API_DEFINITION",
-      "segments": [
-        {
-          "start": 20,
-          "end": 50,
-          "type": "FULL"
-        }
-      ]
-    },
-    {
-      "region_tag": "discoveryengine_v1_generated_SearchService_SearchLite_sync",
-      "title": "Snippet for the search_lite call in the SearchService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DiscoveryEngine::V1::SearchService::Client#search_lite.",
-      "file": "search_service/search_lite.rb",
-      "language": "RUBY",
-      "client_method": {
-        "short_name": "search_lite",
-        "full_name": "::Google::Cloud::DiscoveryEngine::V1::SearchService::Client#search_lite",
-        "async": false,
-        "parameters": [
-          {
-            "type": "::Google::Cloud::DiscoveryEngine::V1::SearchRequest",
-            "name": "request"
-          }
-        ],
-        "result_type": "::Google::Cloud::DiscoveryEngine::V1::SearchResponse",
-        "client": {
-          "short_name": "SearchService::Client",
-          "full_name": "::Google::Cloud::DiscoveryEngine::V1::SearchService::Client"
-        },
-        "method": {
-          "short_name": "SearchLite",
-          "full_name": "google.cloud.discoveryengine.v1.SearchService.SearchLite",
-          "service": {
-            "short_name": "SearchService",
-            "full_name": "google.cloud.discoveryengine.v1.SearchService"
           }
         }
       },
@@ -2767,6 +2807,206 @@
         {
           "start": 20,
           "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "discoveryengine_v1_generated_SessionService_CreateSession_sync",
+      "title": "Snippet for the create_session call in the SessionService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DiscoveryEngine::V1::SessionService::Client#create_session.",
+      "file": "session_service/create_session.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_session",
+        "full_name": "::Google::Cloud::DiscoveryEngine::V1::SessionService::Client#create_session",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::DiscoveryEngine::V1::CreateSessionRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::DiscoveryEngine::V1::Session",
+        "client": {
+          "short_name": "SessionService::Client",
+          "full_name": "::Google::Cloud::DiscoveryEngine::V1::SessionService::Client"
+        },
+        "method": {
+          "short_name": "CreateSession",
+          "full_name": "google.cloud.discoveryengine.v1.SessionService.CreateSession",
+          "service": {
+            "short_name": "SessionService",
+            "full_name": "google.cloud.discoveryengine.v1.SessionService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "discoveryengine_v1_generated_SessionService_DeleteSession_sync",
+      "title": "Snippet for the delete_session call in the SessionService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DiscoveryEngine::V1::SessionService::Client#delete_session.",
+      "file": "session_service/delete_session.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_session",
+        "full_name": "::Google::Cloud::DiscoveryEngine::V1::SessionService::Client#delete_session",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::DiscoveryEngine::V1::DeleteSessionRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Protobuf::Empty",
+        "client": {
+          "short_name": "SessionService::Client",
+          "full_name": "::Google::Cloud::DiscoveryEngine::V1::SessionService::Client"
+        },
+        "method": {
+          "short_name": "DeleteSession",
+          "full_name": "google.cloud.discoveryengine.v1.SessionService.DeleteSession",
+          "service": {
+            "short_name": "SessionService",
+            "full_name": "google.cloud.discoveryengine.v1.SessionService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "discoveryengine_v1_generated_SessionService_UpdateSession_sync",
+      "title": "Snippet for the update_session call in the SessionService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DiscoveryEngine::V1::SessionService::Client#update_session.",
+      "file": "session_service/update_session.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_session",
+        "full_name": "::Google::Cloud::DiscoveryEngine::V1::SessionService::Client#update_session",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::DiscoveryEngine::V1::UpdateSessionRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::DiscoveryEngine::V1::Session",
+        "client": {
+          "short_name": "SessionService::Client",
+          "full_name": "::Google::Cloud::DiscoveryEngine::V1::SessionService::Client"
+        },
+        "method": {
+          "short_name": "UpdateSession",
+          "full_name": "google.cloud.discoveryengine.v1.SessionService.UpdateSession",
+          "service": {
+            "short_name": "SessionService",
+            "full_name": "google.cloud.discoveryengine.v1.SessionService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "discoveryengine_v1_generated_SessionService_GetSession_sync",
+      "title": "Snippet for the get_session call in the SessionService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DiscoveryEngine::V1::SessionService::Client#get_session.",
+      "file": "session_service/get_session.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_session",
+        "full_name": "::Google::Cloud::DiscoveryEngine::V1::SessionService::Client#get_session",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::DiscoveryEngine::V1::GetSessionRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::DiscoveryEngine::V1::Session",
+        "client": {
+          "short_name": "SessionService::Client",
+          "full_name": "::Google::Cloud::DiscoveryEngine::V1::SessionService::Client"
+        },
+        "method": {
+          "short_name": "GetSession",
+          "full_name": "google.cloud.discoveryengine.v1.SessionService.GetSession",
+          "service": {
+            "short_name": "SessionService",
+            "full_name": "google.cloud.discoveryengine.v1.SessionService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "discoveryengine_v1_generated_SessionService_ListSessions_sync",
+      "title": "Snippet for the list_sessions call in the SessionService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DiscoveryEngine::V1::SessionService::Client#list_sessions.",
+      "file": "session_service/list_sessions.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_sessions",
+        "full_name": "::Google::Cloud::DiscoveryEngine::V1::SessionService::Client#list_sessions",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::DiscoveryEngine::V1::ListSessionsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::DiscoveryEngine::V1::ListSessionsResponse",
+        "client": {
+          "short_name": "SessionService::Client",
+          "full_name": "::Google::Cloud::DiscoveryEngine::V1::SessionService::Client"
+        },
+        "method": {
+          "short_name": "ListSessions",
+          "full_name": "google.cloud.discoveryengine.v1.SessionService.ListSessions",
+          "service": {
+            "short_name": "SessionService",
+            "full_name": "google.cloud.discoveryengine.v1.SessionService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
           "type": "FULL"
         }
       ]

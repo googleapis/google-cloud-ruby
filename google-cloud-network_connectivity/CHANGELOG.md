@@ -1,5 +1,11 @@
 # Release History
 
+### 2.2.0 (2025-07-24)
+
+#### Features
+
+* add Network Connectivity Center APIs for Internal Range service ([#30706](https://github.com/googleapis/google-cloud-ruby/issues/30706)) 
+
 ### 2.1.1 (2025-04-29)
 
 #### Bug Fixes

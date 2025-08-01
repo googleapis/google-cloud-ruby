@@ -29,21 +29,21 @@ module Google
       #
       #   pubsub = Google::Cloud::PubSub.new
       #
-      #   sub = pubsub.subscription "my-topic-sub"
-      #   subscriber = sub.listen do |received_message|
+      #   subscriber = pubsub.subscriber "my-topic-sub"
+      #   listener = subscriber.listen do |received_message|
       #     puts received_message.message.data
       #     received_message.acknowledge!
       #   end
       #
       #   # Start background threads that will call the block passed to listen.
-      #   subscriber.start
+      #   listener.start
       #
       #   # Shut down the subscriber when ready to stop receiving messages.
-      #   subscriber.stop!
+      #   listener.stop!
       #
       class ReceivedMessage
         ##
-        # @private The {Subscription} object.
+        # @private The {Google::Cloud::PubSub::V1::Subscription} object.
         attr_accessor :subscription
 
         ##
@@ -51,7 +51,7 @@ module Google
         attr_accessor :grpc
 
         ##
-        # @private Create an empty {Subscription} object.
+        # @private Create an empty {Google::Cloud::PubSub::V1::Subscription} object.
         def initialize
           @subscription = nil
           @grpc = Google::Cloud::PubSub::V1::ReceivedMessage.new
@@ -65,8 +65,7 @@ module Google
 
         ##
         # Returns the delivery attempt counter for the message. If a dead letter policy is not set on the subscription,
-        # this will be `nil`. See {Topic#subscribe}, {Subscription#dead_letter_topic=} and
-        # {Subscription#dead_letter_max_delivery_attempts=}.
+        # this will be `nil`.
         #
         # The delivery attempt counter is `1 + (the sum of number of NACKs and number of ack_deadline exceeds)` for the
         # message.
@@ -86,13 +85,19 @@ module Google
         #
         #   pubsub = Google::Cloud::PubSub.new
         #
-        #   topic = pubsub.topic "my-topic"
-        #   dead_letter_topic = pubsub.topic "my-dead-letter-topic", skip_lookup: true
-        #   sub = topic.subscribe "my-topic-sub",
-        #                         dead_letter_topic: dead_letter_topic,
-        #                         dead_letter_max_delivery_attempts: 10
+        #   subscription_admin = pubsub.subscription_admin
         #
-        #   subscriber = sub.listen do |received_message|
+        #   subscription = subscription_admin.create_subscription \
+        #     name: pubsub.subscription_path("my-topic-sub"),
+        #     topic: pubsub.topic_path("my-topic"),
+        #     dead_letter_policy: {
+        #       dead_letter_topic: pubsub.topic_path("my-dead-letter-topic"),
+        #       max_delivery_attempts: 10
+        #     }
+        #
+        #   subscriber = pubsub.subscriber "my-topic-sub"
+        #
+        #   listener = subscriber.listen do |received_message|
         #     puts received_message.message.delivery_attempt
         #   end
         #
@@ -143,7 +148,7 @@ module Google
         # or scalability, as the service automatically distributes messages for
         # different ordering keys across subscribers.
         #
-        # See {Topic#publish_async} and {Subscription#listen}.
+        # See {Publisher#publish_async} and {Subscriber#listen}.
         #
         # @return [String]
         #
@@ -169,8 +174,8 @@ module Google
         #
         #   pubsub = Google::Cloud::PubSub.new
         #
-        #   sub = pubsub.subscription "my-topic-sub"
-        #   subscriber = sub.listen do |received_message|
+        #   subscriber = pubsub.subscriber "my-topic-sub"
+        #   listener = subscriber.listen do |received_message|
         #     puts received_message.message.data
         #
         #     received_message.acknowledge! do |result|
@@ -179,28 +184,28 @@ module Google
         #   end
         #
         #   # Start background threads that will call block passed to listen.
-        #   subscriber.start
+        #   listener.start
         #
         #   # Shut down the subscriber when ready to stop receiving messages.
-        #   subscriber.stop!
+        #   listener.stop!
         #
         # @example
         #   require "google/cloud/pubsub"
         #
         #   pubsub = Google::Cloud::PubSub.new
         #
-        #   sub = pubsub.subscription "my-topic-sub"
-        #   subscriber = sub.listen do |received_message|
+        #   subscriber = pubsub.subscriber "my-topic-sub"
+        #   listener = subscriber.listen do |received_message|
         #     puts received_message.message.data
         #
         #     received_message.acknowledge!
         #   end
         #
         #   # Start background threads that will call block passed to listen.
-        #   subscriber.start
+        #   listener.start
         #
         #   # Shut down the subscriber when ready to stop receiving messages.
-        #   subscriber.stop!
+        #   listener.stop!
         #
         def acknowledge!(&)
           ensure_subscription!
@@ -233,8 +238,8 @@ module Google
         #
         #   pubsub = Google::Cloud::PubSub.new
         #
-        #   sub = pubsub.subscription "my-topic-sub"
-        #   subscriber = sub.listen do |received_message|
+        #   subscriber = pubsub.subscriber "my-topic-sub"
+        #   listener = subscriber.listen do |received_message|
         #     puts received_message.message.data
         #
         #     # Delay for 2 minutes
@@ -244,18 +249,18 @@ module Google
         #   end
         #
         #   # Start background threads that will call block passed to listen.
-        #   subscriber.start
+        #   listener.start
         #
         #   # Shut down the subscriber when ready to stop receiving messages.
-        #   subscriber.stop!
+        #   listener.stop!
         #
         # @example
         #   require "google/cloud/pubsub"
         #
         #   pubsub = Google::Cloud::PubSub.new
         #
-        #   sub = pubsub.subscription "my-topic-sub"
-        #   subscriber = sub.listen do |received_message|
+        #   subscriber = pubsub.subscriber "my-topic-sub"
+        #   listener = subscriber.listen do |received_message|
         #     puts received_message.message.data
         #
         #     # Delay for 2 minutes
@@ -263,10 +268,10 @@ module Google
         #   end
         #
         #   # Start background threads that will call block passed to listen.
-        #   subscriber.start
+        #   listener.start
         #
         #   # Shut down the subscriber when ready to stop receiving messages.
-        #   subscriber.stop!
+        #   listener.stop!
         #
         def modify_ack_deadline!(new_deadline, &)
           ensure_subscription!
@@ -292,8 +297,8 @@ module Google
         #
         #   pubsub = Google::Cloud::PubSub.new
         #
-        #   sub = pubsub.subscription "my-topic-sub"
-        #   subscriber = sub.listen do |received_message|
+        #   subscriber = pubsub.subscriber "my-topic-sub"
+        #   listener = subscriber.listen do |received_message|
         #     puts received_message.message.data
         #
         #     # Release message back to the API.
@@ -303,18 +308,18 @@ module Google
         #   end
         #
         #   # Start background threads that will call block passed to listen.
-        #   subscriber.start
+        #   listener.start
         #
         #   # Shut down the subscriber when ready to stop receiving messages.
-        #   subscriber.stop!
+        #   listener.stop!
         #
         # @example
         #   require "google/cloud/pubsub"
         #
         #   pubsub = Google::Cloud::PubSub.new
         #
-        #   sub = pubsub.subscription "my-topic-sub"
-        #   subscriber = sub.listen do |received_message|
+        #   subscriber = pubsub.subscriber "my-topic-sub"
+        #   listener = subscriber.listen do |received_message|
         #     puts received_message.message.data
         #
         #     # Release message back to the API.
@@ -322,10 +327,10 @@ module Google
         #   end
         #
         #   # Start background threads that will call block passed to listen.
-        #   subscriber.start
+        #   listener.start
         #
         #   # Shut down the subscriber when ready to stop receiving messages.
-        #   subscriber.stop!
+        #   listener.stop!
         #
         def reject!(&)
           modify_ack_deadline! 0, &

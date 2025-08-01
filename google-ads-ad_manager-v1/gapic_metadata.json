@@ -5,6 +5,40 @@
   "protoPackage": "google.ads.admanager.v1",
   "libraryPackage": "::Google::Ads::AdManager::V1",
   "services": {
+    "AdBreakService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Ads::AdManager::V1::AdBreakService::Client",
+          "rpcs": {
+            "GetAdBreak": {
+              "methods": [
+                "get_ad_break"
+              ]
+            },
+            "ListAdBreaks": {
+              "methods": [
+                "list_ad_breaks"
+              ]
+            },
+            "CreateAdBreak": {
+              "methods": [
+                "create_ad_break"
+              ]
+            },
+            "UpdateAdBreak": {
+              "methods": [
+                "update_ad_break"
+              ]
+            },
+            "DeleteAdBreak": {
+              "methods": [
+                "delete_ad_break"
+              ]
+            }
+          }
+        }
+      }
+    },
     "AdUnitService": {
       "clients": {
         "grpc": {
@@ -23,6 +57,25 @@
             "ListAdUnitSizes": {
               "methods": [
                 "list_ad_unit_sizes"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "BandwidthGroupService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Ads::AdManager::V1::BandwidthGroupService::Client",
+          "rpcs": {
+            "GetBandwidthGroup": {
+              "methods": [
+                "get_bandwidth_group"
+              ]
+            },
+            "ListBandwidthGroups": {
+              "methods": [
+                "list_bandwidth_groups"
               ]
             }
           }
@@ -105,6 +158,25 @@
         }
       }
     },
+    "DeviceCategoryService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Ads::AdManager::V1::DeviceCategoryService::Client",
+          "rpcs": {
+            "GetDeviceCategory": {
+              "methods": [
+                "get_device_category"
+              ]
+            },
+            "ListDeviceCategories": {
+              "methods": [
+                "list_device_categories"
+              ]
+            }
+          }
+        }
+      }
+    },
     "EntitySignalsMappingService": {
       "clients": {
         "grpc": {
@@ -144,6 +216,25 @@
         }
       }
     },
+    "GeoTargetService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Ads::AdManager::V1::GeoTargetService::Client",
+          "rpcs": {
+            "GetGeoTarget": {
+              "methods": [
+                "get_geo_target"
+              ]
+            },
+            "ListGeoTargets": {
+              "methods": [
+                "list_geo_targets"
+              ]
+            }
+          }
+        }
+      }
+    },
     "NetworkService": {
       "clients": {
         "grpc": {
@@ -157,6 +248,44 @@
             "ListNetworks": {
               "methods": [
                 "list_networks"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "OperatingSystemService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Ads::AdManager::V1::OperatingSystemService::Client",
+          "rpcs": {
+            "GetOperatingSystem": {
+              "methods": [
+                "get_operating_system"
+              ]
+            },
+            "ListOperatingSystems": {
+              "methods": [
+                "list_operating_systems"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "OperatingSystemVersionService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Ads::AdManager::V1::OperatingSystemVersionService::Client",
+          "rpcs": {
+            "GetOperatingSystemVersion": {
+              "methods": [
+                "get_operating_system_version"
+              ]
+            },
+            "ListOperatingSystemVersions": {
+              "methods": [
+                "list_operating_system_versions"
               ]
             }
           }
@@ -195,6 +324,83 @@
             "ListPlacements": {
               "methods": [
                 "list_placements"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "PrivateAuctionDealService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Ads::AdManager::V1::PrivateAuctionDealService::Client",
+          "rpcs": {
+            "GetPrivateAuctionDeal": {
+              "methods": [
+                "get_private_auction_deal"
+              ]
+            },
+            "ListPrivateAuctionDeals": {
+              "methods": [
+                "list_private_auction_deals"
+              ]
+            },
+            "CreatePrivateAuctionDeal": {
+              "methods": [
+                "create_private_auction_deal"
+              ]
+            },
+            "UpdatePrivateAuctionDeal": {
+              "methods": [
+                "update_private_auction_deal"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "PrivateAuctionService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Ads::AdManager::V1::PrivateAuctionService::Client",
+          "rpcs": {
+            "GetPrivateAuction": {
+              "methods": [
+                "get_private_auction"
+              ]
+            },
+            "ListPrivateAuctions": {
+              "methods": [
+                "list_private_auctions"
+              ]
+            },
+            "CreatePrivateAuction": {
+              "methods": [
+                "create_private_auction"
+              ]
+            },
+            "UpdatePrivateAuction": {
+              "methods": [
+                "update_private_auction"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "ProgrammaticBuyerService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Ads::AdManager::V1::ProgrammaticBuyerService::Client",
+          "rpcs": {
+            "GetProgrammaticBuyer": {
+              "methods": [
+                "get_programmatic_buyer"
+              ]
+            },
+            "ListProgrammaticBuyers": {
+              "methods": [
+                "list_programmatic_buyers"
               ]
             }
           }
