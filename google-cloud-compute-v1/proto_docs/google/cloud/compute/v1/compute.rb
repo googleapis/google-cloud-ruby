@@ -2445,6 +2445,9 @@ module Google
         end
 
         # [Output Only] Contains output only fields.
+        # @!attribute [rw] health_info
+        #   @return [::Google::Cloud::Compute::V1::AllocationResourceStatusHealthInfo]
+        #     [Output only] Health information for the reservation.
         # @!attribute [rw] reservation_block_count
         #   @return [::Integer]
         #     The number of reservation blocks associated with this reservation.
@@ -2457,6 +2460,37 @@ module Google
         class AllocationResourceStatus
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Health information for the reservation.
+        # @!attribute [rw] degraded_block_count
+        #   @return [::Integer]
+        #     The number of reservation blocks that are degraded.
+        # @!attribute [rw] health_status
+        #   @return [::String]
+        #     The health status of the reservation.
+        #     Check the HealthStatus enum for the list of possible values.
+        # @!attribute [rw] healthy_block_count
+        #   @return [::Integer]
+        #     The number of reservation blocks that are healthy.
+        class AllocationResourceStatusHealthInfo
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # The health status of the reservation.
+          module HealthStatus
+            # A value indicating that the enum field is not set.
+            UNDEFINED_HEALTH_STATUS = 0
+
+            # The reservation is degraded.
+            DEGRADED = 396_890_926
+
+            # The reservation is healthy.
+            HEALTHY = 439_801_213
+
+            # The health status of the reservation is unspecified.
+            HEALTH_STATUS_UNSPECIFIED = 482_246_925
+          end
         end
 
         # Contains Properties set for the reservation.
@@ -29150,6 +29184,10 @@ module Google
         # @!attribute [rw] satisfies_pzs
         #   @return [::Boolean]
         #     [Output Only] Reserved for future use.
+        # @!attribute [rw] scheduling_type
+        #   @return [::String]
+        #     The type of maintenance for the reservation.
+        #     Check the SchedulingType enum for the list of possible values.
         # @!attribute [rw] self_link
         #   @return [::String]
         #     [Output Only] Server-defined fully-qualified URL for this resource.
@@ -29191,6 +29229,21 @@ module Google
             DENSE = 64_932_607
 
             DEPLOYMENT_TYPE_UNSPECIFIED = 234_847_180
+          end
+
+          # The type of maintenance for the reservation.
+          module SchedulingType
+            # A value indicating that the enum field is not set.
+            UNDEFINED_SCHEDULING_TYPE = 0
+
+            # Maintenance on all reserved instances in the reservation is synchronized.
+            GROUPED = 474_540_862
+
+            # Unknown maintenance type.
+            GROUP_MAINTENANCE_TYPE_UNSPECIFIED = 447_183_678
+
+            # Maintenance is not synchronized for this reservation. Instead, each instance has its own maintenance window.
+            INDEPENDENT = 127_011_674
           end
 
           # [Output Only] The status of the reservation. - CREATING: Reservation resources are being allocated. - READY: Reservation resources have been allocated, and the reservation is ready for use. - DELETING: Reservation deletion is in progress. - UPDATING: Reservation update is in progress.
@@ -29290,6 +29343,9 @@ module Google
         # @!attribute [rw] creation_timestamp
         #   @return [::String]
         #     [Output Only] Creation timestamp in RFC3339 text format.
+        # @!attribute [rw] health_info
+        #   @return [::Google::Cloud::Compute::V1::ReservationBlockHealthInfo]
+        #     [Output Only] Health information for the reservation block.
         # @!attribute [rw] id
         #   @return [::Integer]
         #     [Output Only] The unique identifier for the resource. This identifier is defined by the server.
@@ -29346,6 +29402,37 @@ module Google
 
             # Reservation block has allocated all its resources.
             READY = 77_848_963
+          end
+        end
+
+        # Health information for the reservation block.
+        # @!attribute [rw] degraded_sub_block_count
+        #   @return [::Integer]
+        #     The number of subBlocks that are degraded.
+        # @!attribute [rw] health_status
+        #   @return [::String]
+        #     The health status of the reservation block.
+        #     Check the HealthStatus enum for the list of possible values.
+        # @!attribute [rw] healthy_sub_block_count
+        #   @return [::Integer]
+        #     The number of subBlocks that are healthy.
+        class ReservationBlockHealthInfo
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # The health status of the reservation block.
+          module HealthStatus
+            # A value indicating that the enum field is not set.
+            UNDEFINED_HEALTH_STATUS = 0
+
+            # The reservation block is degraded.
+            DEGRADED = 396_890_926
+
+            # The reservation block is healthy.
+            HEALTHY = 439_801_213
+
+            # The health status of the reservation block is unspecified.
+            HEALTH_STATUS_UNSPECIFIED = 482_246_925
           end
         end
 
@@ -29451,6 +29538,9 @@ module Google
         # @!attribute [rw] creation_timestamp
         #   @return [::String]
         #     [Output Only] Creation timestamp in RFC3339 text format.
+        # @!attribute [rw] health_info
+        #   @return [::Google::Cloud::Compute::V1::ReservationSubBlockHealthInfo]
+        #     [Output Only] Health information for the reservation subBlock.
         # @!attribute [rw] id
         #   @return [::Integer]
         #     [Output Only] The unique identifier for the resource. This identifier is defined by the server.
@@ -29501,6 +29591,43 @@ module Google
 
             # Reservation subBlock has allocated all its resources.
             READY = 77_848_963
+          end
+        end
+
+        # Health information for the reservation subBlock.
+        # @!attribute [rw] degraded_host_count
+        #   @return [::Integer]
+        #     The number of degraded hosts in the reservation subBlock.
+        # @!attribute [rw] degraded_infra_count
+        #   @return [::Integer]
+        #     The number of degraded infrastructure (e.g NV link domain) in the reservation subblock.
+        # @!attribute [rw] health_status
+        #   @return [::String]
+        #     The health status of the reservation subBlock.
+        #     Check the HealthStatus enum for the list of possible values.
+        # @!attribute [rw] healthy_host_count
+        #   @return [::Integer]
+        #     The number of healthy hosts in the reservation subBlock.
+        # @!attribute [rw] healthy_infra_count
+        #   @return [::Integer]
+        #     The number of healthy infrastructure (e.g NV link domain) in the reservation subblock.
+        class ReservationSubBlockHealthInfo
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # The health status of the reservation subBlock.
+          module HealthStatus
+            # A value indicating that the enum field is not set.
+            UNDEFINED_HEALTH_STATUS = 0
+
+            # The reservation subBlock is degraded.
+            DEGRADED = 396_890_926
+
+            # The reservation subBlock is healthy.
+            HEALTHY = 439_801_213
+
+            # The health status of the reservation subBlock is unspecified.
+            HEALTH_STATUS_UNSPECIFIED = 482_246_925
           end
         end
 
@@ -38562,6 +38689,13 @@ module Google
         # @!attribute [rw] latest_window_start_time
         #   @return [::String]
         #     The latest time for the planned maintenance window to start. This timestamp value is in RFC3339 text format.
+        # @!attribute [rw] maintenance_on_shutdown
+        #   @return [::Boolean]
+        #     Indicates whether the UpcomingMaintenance will be triggered on VM shutdown.
+        # @!attribute [rw] maintenance_reasons
+        #   @return [::Array<::String>]
+        #     The reasons for the maintenance. Only valid for vms.
+        #     Check the MaintenanceReasons enum for the list of possible values.
         # @!attribute [rw] maintenance_status
         #   @return [::String]
         #     Check the MaintenanceStatus enum for the list of possible values.
@@ -38579,6 +38713,44 @@ module Google
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
 
+
+          module MaintenanceReasons
+            # A value indicating that the enum field is not set.
+            UNDEFINED_MAINTENANCE_REASONS = 0
+
+            # Maintenance due to disk errors.
+            FAILURE_DISK = 8_573_778
+
+            # Maintenance due to GPU errors.
+            FAILURE_GPU = 467_876_919
+
+            # Maintenance due to high GPU temperature.
+            FAILURE_GPU_TEMPERATURE = 24_926_540
+
+            # Maintenance due to GPU xid failure.
+            FAILURE_GPU_XID = 51_956_587
+
+            # Maintenance due to infrastructure errors.
+            FAILURE_INFRA = 270_541_467
+
+            # Maintenance due to interface errors.
+            FAILURE_INTERFACE = 390_068_356
+
+            # Maintenance due to memory errors.
+            FAILURE_MEMORY = 440_132_982
+
+            # Maintenance due to network errors.
+            FAILURE_NETWORK = 42_811_449
+
+            # Maintenance due to NVLink failure.
+            FAILURE_NVLINK = 484_426_295
+
+            # Maintenance due to infrastructure relocation.
+            INFRASTRUCTURE_RELOCATION = 359_845_636
+
+            # Unknown maintenance reason. Do not use this value.
+            MAINTENANCE_REASON_UNKNOWN = 50_570_235
+          end
 
           module MaintenanceStatus
             # A value indicating that the enum field is not set.
