@@ -30,7 +30,7 @@ def grant_storage_permissions bucket_name:
   bucket = storage.bucket bucket_name
 
   # object_viewer = "roles/storage.objectViewer"
-  bucket_reader = "roles/storage.legacyBucketReader"
+  bucket_reader = "roles/storage.admin"
   # bucket_writer = "roles/storage.legacyBucketWriter"
   member = "serviceAccount:#{storage.service_account_email}"
 
