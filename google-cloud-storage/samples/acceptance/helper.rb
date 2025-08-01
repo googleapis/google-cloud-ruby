@@ -29,13 +29,13 @@ def grant_storage_permissions bucket_name:
   storage = Google::Cloud::Storage.new
   bucket = storage.bucket bucket_name
 
-  object_viewer = "roles/storage.objectViewer"
-  # bucket_reader = "roles/storage.legacyBucketReader"
+  # object_viewer = "roles/storage.objectViewer"
+  bucket_reader = "roles/storage.legacyBucketReader"
   # bucket_writer = "roles/storage.legacyBucketWriter"
   member = "serviceAccount:#{storage.service_account_email}"
 
   bucket.policy do |p|
-    p.add object_viewer,
+    p.add bucket_reader,
           member
   end
   bucket
