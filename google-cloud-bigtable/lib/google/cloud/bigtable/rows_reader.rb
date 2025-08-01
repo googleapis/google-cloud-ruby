@@ -92,6 +92,10 @@ module Google
               yield row
               @rows_count += 1
             end
+
+            if res.last_scanned_row_key && !res.last_scanned_row_key.empty?
+              @chunk_processor.last_key = res.last_scanned_row_key
+            end
           end
 
           @chunk_processor.validate_last_row_complete
