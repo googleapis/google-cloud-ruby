@@ -134,8 +134,11 @@ describe "Buckets Snippets" do
 
     it "get soft deleted bucket, its soft_delete_time and hard_delete_time" do
       # fetching a soft deleted bucket
-            puts "project_name while bucket creation"
+      puts "project_name while bucket creation"
       puts new_bucket.service.project
+            puts "service account while bucket creation"
+
+      puts storage_client.service_account_email
       # output, _err = capture_io do
         get_soft_deleted_bucket bucket_name: new_bucket_name, generation: new_generation
       # end
