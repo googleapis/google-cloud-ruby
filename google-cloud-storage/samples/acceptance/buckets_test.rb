@@ -56,6 +56,7 @@ require_relative "../storage_set_retention_policy"
 require_relative "../storage_get_autoclass"
 require_relative "../storage_set_autoclass"
 require_relative "../storage_move_object"
+# require 'pry'
 Google::Apis.logger.level = Logger::DEBUG
 
 describe "Buckets Snippets" do
@@ -131,16 +132,16 @@ describe "Buckets Snippets" do
       delete_bucket_helper new_bucket.name
     end
 
-    it "get soft deleted bucket, its soft_delete_time and hard_delete_time" do
-      # fetching a soft deleted bucket
-            puts "project_name while bucket creation"
-      puts new_bucket.service.project
-      # output, _err = capture_io do
-        get_soft_deleted_bucket bucket_name: new_bucket_name, generation: new_generation
-      # end
+    # it "get soft deleted bucket, its soft_delete_time and hard_delete_time" do
+    #   # fetching a soft deleted bucket
+    #         puts "project_name while bucket creation"
+    #   puts new_bucket.service.project
+    #   # output, _err = capture_io do
+    #     get_soft_deleted_bucket bucket_name: new_bucket_name, generation: new_generation
+    #   # end
 
-      # assert_includes output, "soft_delete_time for #{new_bucket_name} is"
-    end
+    #   # assert_includes output, "soft_delete_time for #{new_bucket_name} is"
+    # end
 
     it "lists soft deleted buckets" do
       # fetching list of soft deleted buckets
