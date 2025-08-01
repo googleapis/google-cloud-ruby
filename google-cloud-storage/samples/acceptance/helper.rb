@@ -30,8 +30,8 @@ def grant_storage_permissions bucket_name:
   bucket = storage.bucket bucket_name
 
   object_viewer = "roles/storage.objectViewer"
-  bucket_reader = "roles/storage.legacyBucketReader"
-  bucket_writer = "roles/storage.legacyBucketWriter"
+  # bucket_reader = "roles/storage.legacyBucketReader"
+  # bucket_writer = "roles/storage.legacyBucketWriter"
   member = "serviceAccount:#{storage.service_account_email}"
 
   bucket.policy do |p|
@@ -52,7 +52,7 @@ def create_bucket_helper bucket_name
   retry_resource_exhaustion do
     storage_client.create_bucket bucket_name
   end
-  # grant_storage_permissions bucket_name: bucket_name
+  grant_storage_permissions bucket_name: bucket_name
 end
 
 def delete_bucket_helper bucket_name
