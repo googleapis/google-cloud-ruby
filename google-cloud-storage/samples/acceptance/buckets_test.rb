@@ -57,7 +57,7 @@ require_relative "../storage_get_autoclass"
 require_relative "../storage_set_autoclass"
 require_relative "../storage_move_object"
 # require 'pry'
-Google::Apis.logger.level = Logger::DEBUG
+# Google::Apis.logger.level = Logger::DEBUG
 
 describe "Buckets Snippets" do
   let(:storage_client)   { Google::Cloud::Storage.new }
