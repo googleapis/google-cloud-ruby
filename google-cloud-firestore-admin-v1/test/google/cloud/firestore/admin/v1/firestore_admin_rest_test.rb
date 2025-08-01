@@ -1783,6 +1783,64 @@ class ::Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Rest::ClientTest < 
     end
   end
 
+  def test_clone_database
+    # Create test objects.
+    client_result = ::Google::Longrunning::Operation.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    database_id = "hello world"
+    pitr_snapshot = {}
+    encryption_config = {}
+    tags = {}
+
+    clone_database_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Rest::ServiceStub.stub :transcode_clone_database_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, clone_database_client_stub do
+        # Create client
+        client = ::Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.clone_database({ parent: parent, database_id: database_id, pitr_snapshot: pitr_snapshot, encryption_config: encryption_config, tags: tags }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.clone_database parent: parent, database_id: database_id, pitr_snapshot: pitr_snapshot, encryption_config: encryption_config, tags: tags do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.clone_database ::Google::Cloud::Firestore::Admin::V1::CloneDatabaseRequest.new(parent: parent, database_id: database_id, pitr_snapshot: pitr_snapshot, encryption_config: encryption_config, tags: tags) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.clone_database({ parent: parent, database_id: database_id, pitr_snapshot: pitr_snapshot, encryption_config: encryption_config, tags: tags }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.clone_database(::Google::Cloud::Firestore::Admin::V1::CloneDatabaseRequest.new(parent: parent, database_id: database_id, pitr_snapshot: pitr_snapshot, encryption_config: encryption_config, tags: tags), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, clone_database_client_stub.call_count
+      end
+    end
+  end
+
   def test_configure
     credentials_token = :dummy_value
 

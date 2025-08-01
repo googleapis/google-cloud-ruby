@@ -275,6 +275,31 @@ module Google
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
 
+          # Metadata for the {::Google::Longrunning::Operation long-running operation} from
+          # the [CloneDatabase][google.firestore.admin.v1.CloneDatabase] request.
+          # @!attribute [rw] start_time
+          #   @return [::Google::Protobuf::Timestamp]
+          #     The time the clone was started.
+          # @!attribute [rw] end_time
+          #   @return [::Google::Protobuf::Timestamp]
+          #     The time the clone finished, unset for ongoing clones.
+          # @!attribute [rw] operation_state
+          #   @return [::Google::Cloud::Firestore::Admin::V1::OperationState]
+          #     The operation state of the clone.
+          # @!attribute [rw] database
+          #   @return [::String]
+          #     The name of the database being cloned to.
+          # @!attribute [rw] pitr_snapshot
+          #   @return [::Google::Cloud::Firestore::Admin::V1::PitrSnapshot]
+          #     The snapshot from which this database was cloned.
+          # @!attribute [rw] progress_percentage
+          #   @return [::Google::Cloud::Firestore::Admin::V1::Progress]
+          #     How far along the clone is as an estimated percentage of remaining time.
+          class CloneDatabaseMetadata
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
           # Describes the progress of the operation.
           # Unit of work is generic and must be interpreted based on where
           # {::Google::Cloud::Firestore::Admin::V1::Progress Progress} is used.
