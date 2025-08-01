@@ -191,6 +191,24 @@ module Google
               rpc :UpdateBackupSchedule, ::Google::Cloud::Firestore::Admin::V1::UpdateBackupScheduleRequest, ::Google::Cloud::Firestore::Admin::V1::BackupSchedule
               # Deletes a backup schedule.
               rpc :DeleteBackupSchedule, ::Google::Cloud::Firestore::Admin::V1::DeleteBackupScheduleRequest, ::Google::Protobuf::Empty
+              # Creates a new database by cloning an existing one.
+              #
+              # The new database must be in the same cloud region or multi-region location
+              # as the existing database. This behaves similar to
+              # [FirestoreAdmin.CreateDatabase][google.firestore.admin.v1.FirestoreAdmin.CreateDatabase]
+              # except instead of creating a new empty database, a new database is created
+              # with the database type, index configuration, and documents from an existing
+              # database.
+              #
+              # The [long-running operation][google.longrunning.Operation] can be used to
+              # track the progress of the clone, with the Operation's
+              # [metadata][google.longrunning.Operation.metadata] field type being the
+              # [CloneDatabaseMetadata][google.firestore.admin.v1.CloneDatabaseMetadata].
+              # The [response][google.longrunning.Operation.response] type is the
+              # [Database][google.firestore.admin.v1.Database] if the clone was
+              # successful. The new database is not readable or writeable until the LRO has
+              # completed.
+              rpc :CloneDatabase, ::Google::Cloud::Firestore::Admin::V1::CloneDatabaseRequest, ::Google::Longrunning::Operation
             end
 
             Stub = Service.rpc_stub_class

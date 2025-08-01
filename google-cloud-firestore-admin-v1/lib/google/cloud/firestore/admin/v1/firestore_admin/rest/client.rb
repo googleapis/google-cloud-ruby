@@ -140,6 +140,8 @@ module Google
 
                     default_config.rpcs.restore_database.timeout = 120.0
 
+                    default_config.rpcs.clone_database.timeout = 120.0
+
                     default_config
                   end
                   yield @configure if block_given?
@@ -3053,6 +3055,137 @@ module Google
                 end
 
                 ##
+                # Creates a new database by cloning an existing one.
+                #
+                # The new database must be in the same cloud region or multi-region location
+                # as the existing database. This behaves similar to
+                # {::Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Rest::Client#create_database FirestoreAdmin.CreateDatabase}
+                # except instead of creating a new empty database, a new database is created
+                # with the database type, index configuration, and documents from an existing
+                # database.
+                #
+                # The {::Google::Longrunning::Operation long-running operation} can be used to
+                # track the progress of the clone, with the Operation's
+                # {::Google::Longrunning::Operation#metadata metadata} field type being the
+                # {::Google::Cloud::Firestore::Admin::V1::CloneDatabaseMetadata CloneDatabaseMetadata}.
+                # The {::Google::Longrunning::Operation#response response} type is the
+                # {::Google::Cloud::Firestore::Admin::V1::Database Database} if the clone was
+                # successful. The new database is not readable or writeable until the LRO has
+                # completed.
+                #
+                # @overload clone_database(request, options = nil)
+                #   Pass arguments to `clone_database` via a request object, either of type
+                #   {::Google::Cloud::Firestore::Admin::V1::CloneDatabaseRequest} or an equivalent Hash.
+                #
+                #   @param request [::Google::Cloud::Firestore::Admin::V1::CloneDatabaseRequest, ::Hash]
+                #     A request object representing the call parameters. Required. To specify no
+                #     parameters, or to keep all the default parameter values, pass an empty Hash.
+                #   @param options [::Gapic::CallOptions, ::Hash]
+                #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+                #
+                # @overload clone_database(parent: nil, database_id: nil, pitr_snapshot: nil, encryption_config: nil, tags: nil)
+                #   Pass arguments to `clone_database` via keyword arguments. Note that at
+                #   least one keyword argument is required. To specify no parameters, or to keep all
+                #   the default parameter values, pass an empty Hash as a request object (see above).
+                #
+                #   @param parent [::String]
+                #     Required. The project to clone the database in. Format is
+                #     `projects/{project_id}`.
+                #   @param database_id [::String]
+                #     Required. The ID to use for the database, which will become the final
+                #     component of the database's resource name. This database ID must not be
+                #     associated with an existing database.
+                #
+                #     This value should be 4-63 characters. Valid characters are /[a-z][0-9]-/
+                #     with first character a letter and the last a letter or a number. Must not
+                #     be UUID-like /[0-9a-f]\\{8}(-[0-9a-f]\\{4})\\{3}-[0-9a-f]\\{12}/.
+                #
+                #     "(default)" database ID is also valid.
+                #   @param pitr_snapshot [::Google::Cloud::Firestore::Admin::V1::PitrSnapshot, ::Hash]
+                #     Required. Specification of the PITR data to clone from. The source database
+                #     must exist.
+                #
+                #     The cloned database will be created in the same location as the source
+                #     database.
+                #   @param encryption_config [::Google::Cloud::Firestore::Admin::V1::Database::EncryptionConfig, ::Hash]
+                #     Optional. Encryption configuration for the cloned database.
+                #
+                #     If this field is not specified, the cloned database will use
+                #     the same encryption configuration as the source database, namely
+                #     {::Google::Cloud::Firestore::Admin::V1::Database::EncryptionConfig#use_source_encryption use_source_encryption}.
+                #   @param tags [::Hash{::String => ::String}]
+                #     Optional. Immutable. Tags to be bound to the cloned database.
+                #
+                #     The tags should be provided in the format of
+                #     `tagKeys/{tag_key_id} -> tagValues/{tag_value_id}`.
+                # @yield [result, operation] Access the result along with the TransportOperation object
+                # @yieldparam result [::Gapic::Operation]
+                # @yieldparam operation [::Gapic::Rest::TransportOperation]
+                #
+                # @return [::Gapic::Operation]
+                #
+                # @raise [::Google::Cloud::Error] if the REST call is aborted.
+                #
+                # @example Basic example
+                #   require "google/cloud/firestore/admin/v1"
+                #
+                #   # Create a client object. The client can be reused for multiple calls.
+                #   client = Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Rest::Client.new
+                #
+                #   # Create a request. To set request fields, pass in keyword arguments.
+                #   request = Google::Cloud::Firestore::Admin::V1::CloneDatabaseRequest.new
+                #
+                #   # Call the clone_database method.
+                #   result = client.clone_database request
+                #
+                #   # The returned object is of type Gapic::Operation. You can use it to
+                #   # check the status of an operation, cancel it, or wait for results.
+                #   # Here is how to wait for a response.
+                #   result.wait_until_done! timeout: 60
+                #   if result.response?
+                #     p result.response
+                #   else
+                #     puts "No response received."
+                #   end
+                #
+                def clone_database request, options = nil
+                  raise ::ArgumentError, "request must be provided" if request.nil?
+
+                  request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Firestore::Admin::V1::CloneDatabaseRequest
+
+                  # Converts hash and nil to an options object
+                  options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                  # Customize the options with defaults
+                  call_metadata = @config.rpcs.clone_database.metadata.to_h
+
+                  # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                  call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                    lib_name: @config.lib_name, lib_version: @config.lib_version,
+                    gapic_version: ::Google::Cloud::Firestore::Admin::V1::VERSION,
+                    transports_version_send: [:rest]
+
+                  call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                  call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                  options.apply_defaults timeout:      @config.rpcs.clone_database.timeout,
+                                         metadata:     call_metadata,
+                                         retry_policy: @config.rpcs.clone_database.retry_policy
+
+                  options.apply_defaults timeout:      @config.timeout,
+                                         metadata:     @config.metadata,
+                                         retry_policy: @config.retry_policy
+
+                  @firestore_admin_stub.clone_database request, options do |result, operation|
+                    result = ::Gapic::Operation.new result, @operations_client, options: options
+                    yield result, operation if block_given?
+                    throw :response, result
+                  end
+                rescue ::Gapic::Rest::Error => e
+                  raise ::Google::Cloud::Error.from_error(e)
+                end
+
+                ##
                 # Configuration class for the FirestoreAdmin REST API.
                 #
                 # This class represents the configuration for FirestoreAdmin REST,
@@ -3353,6 +3486,11 @@ module Google
                     # @return [::Gapic::Config::Method]
                     #
                     attr_reader :delete_backup_schedule
+                    ##
+                    # RPC-specific configuration for `clone_database`
+                    # @return [::Gapic::Config::Method]
+                    #
+                    attr_reader :clone_database
 
                     # @private
                     def initialize parent_rpcs = nil
@@ -3418,6 +3556,8 @@ module Google
                       @update_backup_schedule = ::Gapic::Config::Method.new update_backup_schedule_config
                       delete_backup_schedule_config = parent_rpcs.delete_backup_schedule if parent_rpcs.respond_to? :delete_backup_schedule
                       @delete_backup_schedule = ::Gapic::Config::Method.new delete_backup_schedule_config
+                      clone_database_config = parent_rpcs.clone_database if parent_rpcs.respond_to? :clone_database
+                      @clone_database = ::Gapic::Config::Method.new clone_database_config
 
                       yield self if block_given?
                     end
