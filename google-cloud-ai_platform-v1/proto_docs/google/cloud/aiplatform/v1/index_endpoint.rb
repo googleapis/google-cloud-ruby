@@ -208,6 +208,18 @@ module Google
         #     Note that logs may incur a cost, especially if the deployed
         #     index receives a high queries per second rate (QPS).
         #     Estimate your costs before enabling this option.
+        # @!attribute [rw] enable_datapoint_upsert_logging
+        #   @return [::Boolean]
+        #     Optional. If true, logs to Cloud Logging errors relating to datapoint
+        #     upserts.
+        #
+        #     Under normal operation conditions, these log entries should be very rare.
+        #     However, if incompatible datapoint updates are being uploaded to an index,
+        #     a high volume of log entries may be generated in a short period of time.
+        #
+        #     Note that logs may incur a cost, especially if the deployed index receives
+        #     a high volume of datapoint upserts. Estimate your costs before enabling
+        #     this option.
         # @!attribute [rw] deployed_index_auth_config
         #   @return [::Google::Cloud::AIPlatform::V1::DeployedIndexAuthConfig]
         #     Optional. If set, the authentication is enabled for the private endpoint.
