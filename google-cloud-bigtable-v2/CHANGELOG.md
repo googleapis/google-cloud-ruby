@@ -1,5 +1,16 @@
 # Release History
 
+### 1.9.0 (2025-08-02)
+
+#### Features
+
+* add Idempotency to Cloud Bigtable MutateRowsRequest API ([#30709](https://github.com/googleapis/google-cloud-ruby/issues/30709)) 
+* Publish Proto and Enum types to CBT data API ([#30726](https://github.com/googleapis/google-cloud-ruby/issues/30726)) 
+#### Documentation
+
+* Minor comment update for field `idempotency` in message `.google.bigtable.v2.MutateRowRequest` 
+* Sync generated comments from the API Protos 
+
 ### 1.8.0 (2025-07-15)
 
 #### Features
