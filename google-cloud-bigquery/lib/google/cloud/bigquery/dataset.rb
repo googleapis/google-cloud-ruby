@@ -1710,6 +1710,8 @@ module Google
         #   `flatten` is false. Optional. The default value is false.
         # @param [String] session_id The ID of an existing session. See the
         #   `create_session` param in {#query_job} and {Job#session_id}.
+        # @param [Boolean] format_options_use_int64_timestamp Output timestamp
+        #   as usec int64. Default is true.
         # @yield [job] a job configuration object
         # @yieldparam [Google::Cloud::Bigquery::QueryJob::Updater] job a job
         #   configuration object for setting additional options for the query.
@@ -1864,6 +1866,7 @@ module Google
                   standard_sql: nil,
                   legacy_sql: nil,
                   session_id: nil,
+                  format_options_use_int64_timestamp: true,
                   &block
           job = query_job query,
                           params: params,
@@ -1877,7 +1880,7 @@ module Google
           job.wait_until_done!
           ensure_job_succeeded! job
 
-          job.data max: max
+          job.data max: max, format_options_use_int64_timestamp: format_options_use_int64_timestamp
         end
 
         ##
