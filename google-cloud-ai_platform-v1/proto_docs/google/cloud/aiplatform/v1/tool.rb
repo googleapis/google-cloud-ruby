@@ -75,6 +75,11 @@ module Google
 
           # GoogleSearch tool type.
           # Tool to support Google Search in Model. Powered by Google.
+          # @!attribute [rw] exclude_domains
+          #   @return [::Array<::String>]
+          #     Optional. List of domains to be excluded from the search results.
+          #     The default limit is 2000 domains.
+          #     Example: ["amazon.com", "facebook.com"].
           class GoogleSearch
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -395,6 +400,10 @@ module Google
 
         # Tool to search public web data, powered by Vertex AI Search and Sec4
         # compliance.
+        # @!attribute [rw] exclude_domains
+        #   @return [::Array<::String>]
+        #     Optional. List of domains to be excluded from the search results.
+        #     The default limit is 2000 domains.
         class EnterpriseWebSearch
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
