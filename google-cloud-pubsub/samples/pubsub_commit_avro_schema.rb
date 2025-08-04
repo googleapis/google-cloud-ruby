@@ -23,14 +23,12 @@ def commit_avro_schema schema_id:, avsc_file:
   schemas = pubsub.schemas
 
   schema = schemas.get_schema name: pubsub.schema_path(schema_id)
-
-  definition = File.read avsc_file
-  schema.definition = definition
+  schema.definition = File.read avsc_file
 
   result = schemas.commit_schema name: schema.name,
                                  schema: schema
 
-  puts "Schema commited with revision #{result.revision_id}."
+  puts "Schema committed with revision #{result.revision_id}."
   # [END pubsub_commit_avro_schema]
   result
 end

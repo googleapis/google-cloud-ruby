@@ -18,7 +18,6 @@ def list_topics
   # [START pubsub_list_topics]
 
   pubsub = Google::Cloud::PubSub.new
-
   topic_admin = pubsub.topic_admin
 
   topics = topic_admin.list_topics project: pubsub.project_path

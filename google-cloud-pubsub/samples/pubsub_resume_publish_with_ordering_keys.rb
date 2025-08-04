@@ -19,13 +19,13 @@ def publish_resume_publish topic_id:
   # topic_id = "your-topic-id"
 
   pubsub = Google::Cloud::PubSub.new
-
   # Start sending messages in one request once the size of all queued messages
   # reaches 1 MB or the number of queued messages reaches 20
   publisher = pubsub.publisher topic_id, async: {
     max_bytes:    1_000_000,
     max_messages: 20
   }
+
   publisher.enable_message_ordering!
   10.times do |i|
     publisher.publish_async "This is message ##{i}.",

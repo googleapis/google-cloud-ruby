@@ -18,14 +18,15 @@ require "google/cloud/pubsub"
 # Shows how to create a BigQuery subscription where messages published
 # to a topic populates a BigQuery table.
 #
-def pubsub_create_bigquery_subscription project_id:, topic_id:, subscription_id:, bigquery_table_id:
+def pubsub_create_bigquery_subscription project_id:, topic_id:,
+                                        subscription_id:, bigquery_table_id:
   # [START pubsub_create_bigquery_subscription]
   # project_id = "your-project-id"
   # topic_id = "your-topic-id"
   # subscription_id = "your-subscription-id"
   # bigquery_table_id = "my-project:dataset-id.table-id"
-  pubsub = Google::Cloud::PubSub.new project_id: project_id
 
+  pubsub = Google::Cloud::PubSub.new project_id: project_id
   subscription_admin = pubsub.subscription_admin
 
   subscription = subscription_admin.create_subscription \

@@ -18,7 +18,6 @@ def list_schemas
   # [START pubsub_list_schemas]
 
   pubsub = Google::Cloud::PubSub.new
-
   schema_service = pubsub.schemas
 
   schemas = schema_service.list_schemas \

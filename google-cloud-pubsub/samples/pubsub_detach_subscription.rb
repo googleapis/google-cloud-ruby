@@ -19,15 +19,15 @@ def detach_subscription subscription_id:
   # subscription_id = "your-subscription-id"
 
   pubsub = Google::Cloud::PubSub.new
-
   topic_admin = pubsub.topic_admin
   subscription_admin = pubsub.subscription_admin
   subscription_path = pubsub.subscription_path subscription_id
 
   topic_admin.detach_subscription subscription: subscription_path
-
   sleep 120
-  subscription = subscription_admin.get_subscription subscription: subscription_path
+  subscription = subscription_admin.get_subscription \
+    subscription: subscription_path
+
   if subscription.detached
     puts "Subscription is detached."
   else

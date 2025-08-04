@@ -19,13 +19,14 @@ def listen_for_messages_with_error_handler subscription_id:
   # subscription_id = "your-subscription-id"
 
   pubsub = Google::Cloud::PubSub.new
-
   subscriber = pubsub.subscriber subscription_id
-  listener   = subscriber.listen do |received_message|
+
+  listener = subscriber.listen do |received_message|
     puts "Received message: #{received_message.data}"
     received_message.acknowledge!
   end
-  # Propagate expection from child threads to the main thread as soon as it is
+
+  # Propagate exception from child threads to the main thread as soon as it is
   # raised. Exceptions happened in the callback thread are collected in the
   # callback thread pool and do not propagate to the main thread
   Thread.abort_on_exception = true
