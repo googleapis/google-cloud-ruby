@@ -19,7 +19,6 @@ def delete_schema schema_id:
   # schema_id = "your-schema-id"
 
   pubsub = Google::Cloud::PubSub.new
-
   schemas = pubsub.schemas
 
   result = schemas.delete_schema name: pubsub.schema_path(schema_id)

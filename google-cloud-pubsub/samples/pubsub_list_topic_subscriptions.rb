@@ -19,10 +19,10 @@ def list_topic_subscriptions topic_id:
   # topic_id = "your-topic-id"
 
   pubsub = Google::Cloud::PubSub.new
-
   topic_admin = pubsub.topic_admin
 
-  response = topic_admin.list_topic_subscriptions topic: pubsub.topic_path(topic_id)
+  response = topic_admin.list_topic_subscriptions \
+    topic: pubsub.topic_path(topic_id)
 
   puts "Subscriptions in topic #{topic_id}:"
   response.subscriptions.each do |subscription_name|

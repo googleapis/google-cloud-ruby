@@ -20,7 +20,6 @@ def listen_for_messages subscription_id:
   # subscription_id = "your-subscription-id"
 
   pubsub = Google::Cloud::PubSub.new
-
   subscriber = pubsub.subscriber subscription_id
 
   listener = subscriber.listen do |received_message|

@@ -19,7 +19,6 @@ def listen_for_messages_with_concurrency_control subscription_id:
   # subscription_id = "your-subscription-id"
 
   pubsub = Google::Cloud::PubSub.new
-
   subscriber = pubsub.subscriber subscription_id
 
   # Use 2 threads for streaming, 4 threads for executing callbacks and 2 threads

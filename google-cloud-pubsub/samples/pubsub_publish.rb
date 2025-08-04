@@ -19,7 +19,6 @@ def publish_message_async topic_id:
   # topic_id = "your-topic-id"
 
   pubsub = Google::Cloud::PubSub.new
-
   publisher = pubsub.publisher topic_id
 
   publisher.publish_async "This is a test message." do |result|

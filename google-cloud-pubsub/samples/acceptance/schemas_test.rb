@@ -95,7 +95,7 @@ describe "schemas" do
     out, _err = capture_io do
       revised_schema = commit_proto_schema schema_id: schema_id, proto_file: revision_file
     end
-    assert_includes out, "Schema commited with revision #{revised_schema.revision_id}."
+    assert_includes out, "Schema committed with revision #{revised_schema.revision_id}."
 
     #pubsub_delete_schema_revision
     assert_output "Schema #{schema_id}@#{revised_schema.revision_id} deleted.\n" do
@@ -206,8 +206,8 @@ describe "schemas" do
       out, _err = capture_io do
         schema1 = commit_avro_schema schema_id: schema_id, avsc_file: avsc_file
       end
-      refute_equal out, "Schema commited with revision #{rev_id}."
-      assert_includes out, "Schema commited with revision"
+      refute_equal out, "Schema committed with revision #{rev_id}."
+      assert_includes out, "Schema committed with revision"
 
       # pubsub_list_schema_revisions
       out, _err = capture_io do
@@ -344,8 +344,8 @@ describe "schemas" do
       out, _err = capture_io do
         schema1 = commit_proto_schema schema_id: schema_id, proto_file: revision_file
       end
-      refute_equal out, "Schema commited with revision #{rev_id}."
-      assert_includes out, "Schema commited with revision"
+      refute_equal out, "Schema committed with revision #{rev_id}."
+      assert_includes out, "Schema committed with revision"
 
       # pubsub_list_schema_revisions
       schema2 = nil

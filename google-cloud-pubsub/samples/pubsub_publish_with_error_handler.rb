@@ -19,7 +19,6 @@ def publish_with_error_handler topic_id:
   # topic_id = "your-topic-id"
 
   pubsub = Google::Cloud::PubSub.new
-
   publisher = pubsub.publisher topic_id
 
   begin
@@ -27,7 +26,6 @@ def publish_with_error_handler topic_id:
       raise "Failed to publish the message." unless result.succeeded?
       puts "Message published asynchronously."
     end
-
     # Stop the async_publisher to send all queued messages immediately.
     publisher.async_publisher.stop.wait!
   rescue StandardError => e

@@ -19,10 +19,10 @@ def delete_subscription subscription_id:
   # subscription_id = "your-subscription-id"
 
   pubsub = Google::Cloud::PubSub.new
-
   subscription_admin = pubsub.subscription_admin
 
-  subscription_admin.delete_subscription subscription: pubsub.subscription_path(subscription_id)
+  subscription_admin.delete_subscription \
+    subscription: pubsub.subscription_path(subscription_id)
 
   puts "Subscription #{subscription_id} deleted."
   # [END pubsub_delete_subscription]

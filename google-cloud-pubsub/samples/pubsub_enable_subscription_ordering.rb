@@ -20,7 +20,6 @@ def enable_subscription_ordering topic_id:, subscription_id:
   # subscription_id = "your-subscription-id"
 
   pubsub = Google::Cloud::PubSub.new
-
   subscription_admin = pubsub.subscription_admin
 
   subscription = subscription_admin.create_subscription \

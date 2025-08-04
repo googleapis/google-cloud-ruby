@@ -19,7 +19,6 @@ def list_schema_revisions schema_id:
   # schema_id = "your-schema-id"
 
   pubsub = Google::Cloud::PubSub.new
-
   schemas = pubsub.schemas
 
   response = schemas.list_schema_revisions \
