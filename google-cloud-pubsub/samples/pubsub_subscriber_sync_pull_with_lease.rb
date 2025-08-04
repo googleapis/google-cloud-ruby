@@ -19,20 +19,18 @@ def subscriber_sync_pull_with_lease subscription_id:
   # subscription_id = "your-subscription-id"
 
   pubsub = Google::Cloud::PubSub.new
-
   subscriber = pubsub.subscriber subscription_id
-
   new_ack_deadline = 30
   processed = false
 
   # The subscriber pulls a specified number of messages.
   received_messages = subscriber.pull immediate: false, max: 1
-
   # Obtain the first message.
   message = received_messages.first
 
-  # Send the message to a non-blocking worker that starts a long-running process, such as writing
-  # the message to a table, which may take longer than the default 10-sec acknowledge deadline.
+  # Send the message to a non-blocking worker that starts a long-running
+  # process, such as writing the message to a table, which may take longer than
+  # the default 10-second acknowledge deadline.
   Thread.new do
     sleep 15
     processed = true
@@ -50,7 +48,8 @@ def subscriber_sync_pull_with_lease subscription_id:
     else
       # If the message has not yet been processed, reset its ack deadline.
       message.modify_ack_deadline! new_ack_deadline
-      puts "Reset ack deadline for \"#{message.data}\" for #{new_ack_deadline} seconds."
+      puts "Reset ack deadline for \"#{message.data}\" for " \
+           "#{new_ack_deadline} seconds."
     end
   end
   # [END pubsub_subscriber_sync_pull_with_lease]

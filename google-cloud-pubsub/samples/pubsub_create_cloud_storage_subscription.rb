@@ -21,14 +21,14 @@ def create_cloud_storage_subscription topic_id:, subscription_id:, bucket:
   # bucket = "your-bucket"
 
   pubsub = Google::Cloud::Pubsub.new
-
   subscription_admin = pubsub.subscription_admin
 
-  subscription = subscription_admin.create_subscription name: pubsub.subscription_path(subscription_id),
-                                                        topic: pubsub.topic_path(topic_id),
-                                                        cloud_storage_config: {
-                                                          bucket: bucket
-                                                        }
+  subscription = subscription_admin.create_subscription \
+    name: pubsub.subscription_path(subscription_id),
+    topic: pubsub.topic_path(topic_id),
+    cloud_storage_config: {
+      bucket: bucket
+    }
 
   puts "Cloud storage subscription #{subscription_id} created."
   # [END pubsub_create_cloud_storage_subscription]

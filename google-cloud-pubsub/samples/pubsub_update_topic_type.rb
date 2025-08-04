@@ -22,10 +22,11 @@ def update_topic_type topic_id:,
   # [START pubsub_update_topic_type]
   # topic_id = "your-topic-id"
   # stream_arn = "arn:aws:kinesis:us-west-2:111111111111:stream/stream-name"
-  # consumer_arn = "arn:aws:kinesis:us-west-2:111111111111:" \
-  #   "stream/stream-name/consumer/consumer-1:1111111111"
+  # consumer_arn =
+  # "arn:aws:kinesis:us-west-2:111111111111:stream/x/consumer/y:1111111111"
   # aws_role_arn = "arn:aws:iam::111111111111:role/role-name"
   # gcp_service_account = "service-account@project.iam.gserviceaccount.com"
+
   pubsub = Google::Cloud::Pubsub.new
   topic_admin = pubsub.topic_admin
 

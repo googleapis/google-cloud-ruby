@@ -19,7 +19,6 @@ def get_topic_policy topic_id:
   # topic_id = "your-topic-id"
 
   pubsub = Google::Cloud::PubSub.new
-
   topic_admin = pubsub.topic_admin
 
   policy = pubsub.iam.get_iam_policy resource: pubsub.topic_path(topic_id)

@@ -22,10 +22,10 @@ def create_proto_schema schema_id:, proto_file:
   pubsub = Google::Cloud::PubSub.new
   schemas = pubsub.schemas
 
-  definition = File.read proto_file
-  schema = Google::Cloud::PubSub::V1::Schema.new name: schema_id,
-                                                 type: :PROTOCOL_BUFFER,
-                                                 definition: definition
+  schema = Google::Cloud::PubSub::V1::Schema.new \
+    name: schema_id,
+    type: :PROTOCOL_BUFFER,
+    definition: File.read(proto_file)
 
   schema = schemas.create_schema parent: pubsub.project_path,
                                  schema: schema,

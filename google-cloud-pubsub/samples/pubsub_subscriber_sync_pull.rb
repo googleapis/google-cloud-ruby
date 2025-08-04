@@ -19,7 +19,6 @@ def pull_messages subscription_id:
   # subscription_id = "your-subscription-id"
 
   pubsub = Google::Cloud::PubSub.new
-
   subscriber = pubsub.subscriber subscription_id
 
   subscriber.pull(immediate: false).each do |message|

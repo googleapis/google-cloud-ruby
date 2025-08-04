@@ -27,6 +27,7 @@ def create_topic_with_confluent_cloud_ingestion topic_id:,
   # confluent_topic = "confluent-topic-name"
   # identity_pool_id = "identity-pool-id"
   # gcp_service_account = "service-account@project.iam.gserviceaccount.com"
+
   pubsub = Google::Cloud::Pubsub.new
   topic_admin = pubsub.topic_admin
 

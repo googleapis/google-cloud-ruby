@@ -22,7 +22,6 @@ def create_topic_with_schema topic_id:, schema_id:, message_encoding:
   # message_encoding = :BINARY
 
   pubsub = Google::Cloud::PubSub.new
-
   topic_admin = pubsub.topic_admin
 
   topic = topic_admin.create_topic name: pubsub.topic_path(topic_id),
