@@ -21,7 +21,7 @@ def optimistic_subscribe topic_id:, subscription_id:
 
   pubsub = Google::Cloud::Pubsub.new
 
-  # Propagate expection from child threads to the main thread as soon as it is
+  # Propagate exception from child threads to the main thread as soon as it is
   # raised. Exceptions happened in the callback thread are collected in the
   # callback thread pool and do not propagate to the main thread
   Thread.abort_on_exception = true
@@ -40,8 +40,7 @@ def optimistic_subscribe topic_id:, subscription_id:
   rescue Google::Cloud::NotFoundError => e
     puts "Subscription #{subscription_id} does not exist."
 
-    subscription_admin = pubsub.subscription_admin
-    subscription = subscription_admin.create_subscription \
+    subscription = pubsub.subscription_admin.create_subscription \
       name: pubsub.subscription_path(subscription_id),
       topic: pubsub.topic_path(topic_id)
 

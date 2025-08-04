@@ -19,7 +19,6 @@ def listen_for_messages_with_flow_control subscription_id:
   # subscription_id = "your-subscription-id"
 
   pubsub = Google::Cloud::PubSub.new
-
   subscriber = pubsub.subscriber subscription_id
 
   listener = subscriber.listen inventory: 10 do |received_message|

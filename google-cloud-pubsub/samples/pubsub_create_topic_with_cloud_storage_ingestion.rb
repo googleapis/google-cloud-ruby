@@ -27,6 +27,7 @@ def create_topic_with_cloud_storage_ingestion topic_id:,
   # text_delimiter = "\n"
   # match_glob = "**.txt"
   # minimum_object_create_time = Google::Protobuf::Timestamp.new
+
   pubsub = Google::Cloud::Pubsub.new
   topic_admin = pubsub.topic_admin
   cloud_storage =

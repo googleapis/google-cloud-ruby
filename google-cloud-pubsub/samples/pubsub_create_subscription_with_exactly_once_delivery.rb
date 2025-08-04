@@ -15,14 +15,14 @@
 require "google/cloud/pubsub"
 
 # Shows how to create a new subscription with exactly once delivery enabled
-def create_subscription_with_exactly_once_delivery project_id:, topic_id:, subscription_id:
+def create_subscription_with_exactly_once_delivery project_id:, topic_id:,
+                                                   subscription_id:
   # [START pubsub_create_subscription_with_exactly_once_delivery]
   # project_id = "your-project-id"
   # topic_id = "your-topic-id"
   # subscription_id = "your-subscription-id"
 
   pubsub = Google::Cloud::PubSub.new project_id: project_id
-
   subscription_admin = pubsub.subscription_admin
 
   subscription = subscription_admin.create_subscription \
@@ -30,6 +30,7 @@ def create_subscription_with_exactly_once_delivery project_id:, topic_id:, subsc
     topic: pubsub.topic_path(topic_id),
     enable_exactly_once_delivery: true
 
-  puts "Created subscription with exactly once delivery enabled: #{subscription_id}"
+  puts "Created subscription with exactly once delivery enabled: " \
+       "#{subscription_id}"
   # [END pubsub_create_subscription_with_exactly_once_delivery]
 end

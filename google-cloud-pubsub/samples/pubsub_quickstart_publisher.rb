@@ -19,7 +19,6 @@ def publish_message topic_id:
   # topic_id = "your-topic-id"
 
   pubsub = Google::Cloud::PubSub.new
-
   publisher = pubsub.publisher topic_id
 
   publisher.publish "This is a test message."

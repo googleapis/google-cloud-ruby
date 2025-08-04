@@ -31,8 +31,8 @@ def create_topic_with_azure_event_hubs_ingestion topic_id:,
   # tenant_id = "22222222-2222-2222-2222-222222222222"
   # subscription_id = "33333333-3333-3333-3333-333333333333"
   # gcp_service_account = "service-account@project.iam.gserviceaccount.com"
-  pubsub = Google::Cloud::Pubsub.new
 
+  pubsub = Google::Cloud::Pubsub.new
   topic_admin = pubsub.topic_admin
 
   topic = topic_admin.create_topic name: pubsub.topic_path(topic_id),

@@ -20,16 +20,12 @@ def publish_avro_records topic_id:, avsc_file:
   # avsc_file = "path/to/an/avro/schema/file/(.avsc)/formatted/in/json"
 
   pubsub = Google::Cloud::PubSub.new
-
   topic_admin = pubsub.topic_admin
+  publisher = pubsub.publisher topic_id
+  record = { "name" => "Alaska", "post_abbr" => "AK" }
 
   topic = topic_admin.get_topic topic: pubsub.topic_path(topic_id)
-
   encoding = topic.schema_settings.encoding
-
-  publisher = pubsub.publisher topic_id
-
-  record = { "name" => "Alaska", "post_abbr" => "AK" }
 
   case encoding
   when :BINARY

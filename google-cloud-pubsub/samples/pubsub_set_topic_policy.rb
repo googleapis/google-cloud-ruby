@@ -18,13 +18,15 @@ def set_topic_policy topic_id:, role:, service_account_email:
   # [START pubsub_set_topic_policy]
   # topic_id              = "your-topic-id"
   # role                  = "roles/pubsub.publisher"
-  # service_account_email = "serviceAccount:account_name@project_name.iam.gserviceaccount.com"
+  # service_account_email =
+  # "serviceAccount:account_name@project_name.iam.gserviceaccount.com"
 
   pubsub = Google::Cloud::PubSub.new
-
   topic_admin = pubsub.topic_admin
 
-  bindings = Google::Iam::V1::Binding.new role: role, members: [service_account_email]
+  bindings = Google::Iam::V1::Binding.new \
+    role: role,
+    members: [service_account_email]
 
   pubsub.iam.set_iam_policy resource: pubsub.topic_path(topic_id),
                             policy: {

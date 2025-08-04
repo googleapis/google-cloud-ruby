@@ -19,7 +19,6 @@ def publish_messages_async_with_flow_control topic_id:
   # topic_id = "your-topic-id"
 
   pubsub = Google::Cloud::PubSub.new
-
   publisher = pubsub.publisher topic_id, async: {
     # Configure how many messages the publisher client can hold in memory
     # and what to do when messages exceed the limit.
@@ -31,7 +30,9 @@ def publish_messages_async_with_flow_control topic_id:
       limit_exceeded_behavior: :block
     }
   }
-  # Rapidly publishing 1000 messages in a loop may be constrained by flow control.
+
+  # Rapidly publishing 1000 messages in a loop may be constrained by flow
+  # control.
   1000.times do |i|
     publisher.publish_async "message #{i}" do |result|
       raise "Failed to publish the message." unless result.succeeded?

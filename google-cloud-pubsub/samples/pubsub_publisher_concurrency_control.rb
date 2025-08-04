@@ -19,7 +19,6 @@ def publish_messages_async_with_concurrency_control topic_id:
   # topic_id = "your-topic-id"
 
   pubsub = Google::Cloud::PubSub.new
-
   publisher = pubsub.publisher topic_id, async: {
     threads: {
       # Use exactly one thread for publishing message and exactly one thread
@@ -28,6 +27,7 @@ def publish_messages_async_with_concurrency_control topic_id:
       callback: 1
     }
   }
+
   publisher.publish_async "This is a test message." do |result|
     raise "Failed to publish the message." unless result.succeeded?
     puts "Message published asynchronously."

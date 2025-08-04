@@ -19,7 +19,6 @@ def dead_letter_delivery_attempt subscription_id:
   # subscription_id = "your-subscription-id"
 
   pubsub = Google::Cloud::PubSub.new
-
   subscriber = pubsub.subscriber subscription_id
 
   subscriber.pull(immediate: false).each do |message|

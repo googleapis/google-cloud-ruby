@@ -19,7 +19,6 @@ def publish_message_async_with_custom_attributes topic_id:
   # topic_id = "your-topic-id"
 
   pubsub = Google::Cloud::PubSub.new
-
   publisher = pubsub.publisher topic_id
 
   # Add two attributes, origin and username, to the message

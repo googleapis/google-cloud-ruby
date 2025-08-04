@@ -24,9 +24,10 @@ def pubsub_publisher_with_compression project_id:, topic_id:
   # topic_id = "your-topic-id"
 
   pubsub = Google::Cloud::PubSub.new project_id: project_id
-
-  # Enable compression and configure the compression threshold to 10 bytes (default to 240 B).
-  # Publish requests of sizes > 10 B (excluding the request headers) will get compressed.
+  # Enable compression and configure the compression threshold to 10 bytes
+  # (default to 240 B).
+  # Publish requests of sizes > 10 B (excluding the request headers) will get
+  # compressed.
   publisher = pubsub.publisher topic_id, async: {
     compress: true,
     compression_bytes_threshold: 10
@@ -37,7 +38,6 @@ def pubsub_publisher_with_compression project_id:, topic_id:
       raise "Failed to publish the message." unless result.succeeded?
       puts "Published a compressed message of message ID: #{result.message_id}"
     end
-
     # Stop the async_publisher to send all queued messages immediately.
     publisher.async_publisher.stop.wait!
   rescue StandardError => e

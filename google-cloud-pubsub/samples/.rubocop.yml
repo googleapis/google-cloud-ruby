@@ -13,3 +13,5 @@ Lint/UselessAssignment:
   Enabled: false
 Metrics/MethodLength:
   Max: 30
+LineLength:
+  Max: 80
