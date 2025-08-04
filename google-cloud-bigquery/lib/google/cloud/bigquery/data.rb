@@ -66,6 +66,10 @@ module Google
         # @private The query Job gapi object, or nil if from Table#data.
         attr_accessor :job_gapi
 
+        ##
+        # @private Whether to output timestamp as usec int64.
+        attr_accessor :format_options_use_int64_timestamp
+
         # @private
         def initialize arr = []
           @service = nil
@@ -473,8 +477,9 @@ module Google
           data_json = service.list_tabledata \
             @table_gapi.table_reference.dataset_id,
             @table_gapi.table_reference.table_id,
-            token: token
-          self.class.from_gapi_json data_json, @table_gapi, job_gapi, @service
+            token: token,
+            format_options_use_int64_timestamp: @format_options_use_int64_timestamp
+          self.class.from_gapi_json data_json, @table_gapi, job_gapi, @service, @format_options_use_int64_timestamp
         end
 
         ##
@@ -549,7 +554,7 @@ module Google
 
         ##
         # @private New Data from a response object.
-        def self.from_gapi_json gapi_json, table_gapi, job_gapi, service
+        def self.from_gapi_json gapi_json, table_gapi, job_gapi, service, format_options_use_int64_timestamp
           rows = gapi_json[:rows] || []
           rows = Convert.format_rows rows, table_gapi.schema.fields unless rows.empty?
 
@@ -558,6 +563,7 @@ module Google
           data.gapi_json = gapi_json
           data.job_gapi = job_gapi
           data.service = service
+          data.format_options_use_int64_timestamp = format_options_use_int64_timestamp
           data
         end
 

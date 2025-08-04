@@ -723,6 +723,8 @@ module Google
         #   identifying the result set.
         # @param [Integer] max Maximum number of results to return.
         # @param [Integer] start Zero-based index of the starting row to read.
+        # @param [Boolean] format_options_use_int64_timestamp Output timestamp
+        #   as usec int64. Default is true.
         #
         # @return [Google::Cloud::Bigquery::Data] An object providing access to
         #   data read from the destination table for the job.
@@ -745,20 +747,21 @@ module Google
         #   # Retrieve the next page of results
         #   data = data.next if data.next?
         #
-        def data token: nil, max: nil, start: nil
+        def data token: nil, max: nil, start: nil, format_options_use_int64_timestamp: true
           return nil unless done?
-          return Data.from_gapi_json({ rows: [] }, nil, @gapi, service) if dryrun?
+          return Data.from_gapi_json({ rows: [] }, nil, @gapi, service, format_options_use_int64_timestamp) if dryrun?
           if ddl? || dml? || !ensure_schema!
             data_hash = { totalRows: nil, rows: [] }
-            return Data.from_gapi_json data_hash, nil, @gapi, service
+            return Data.from_gapi_json data_hash, nil, @gapi, service, format_options_use_int64_timestamp
           end
 
           data_hash = service.list_tabledata destination_table_dataset_id,
                                              destination_table_table_id,
                                              token: token,
                                              max: max,
-                                             start: start
-          Data.from_gapi_json data_hash, destination_table_gapi, @gapi, service
+                                             start: start,
+                                             format_options_use_int64_timestamp: format_options_use_int64_timestamp
+          Data.from_gapi_json data_hash, destination_table_gapi, @gapi, service, format_options_use_int64_timestamp
         end
         alias query_results data
 
