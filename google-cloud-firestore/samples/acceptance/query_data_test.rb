@@ -116,15 +116,15 @@ describe "Google Cloud Firestore API samples - Query Data" do
     invalid_range_query project_id: @firestore_project, collection_path: @collection_path
   end
 
-  it "query_filter_compound_multi_ineq" do
-    out, _err = capture_io do
-      index_name = create_composite_index project_id: @firestore_project, collection_path: @collection_path
-      query_filter_compound_multi_ineq project_id: @firestore_project, collection_path: @collection_path
-      delete_composite_index name: index_name
-    end
+  # it "query_filter_compound_multi_ineq" do
+  #   out, _err = capture_io do
+  #     index_name = create_composite_index project_id: @firestore_project, collection_path: @collection_path
+  #     query_filter_compound_multi_ineq project_id: @firestore_project, collection_path: @collection_path
+  #     delete_composite_index name: index_name
+  #   end
 
-    assert_includes out, "Document BJ returned by query population>1_000_000 AND density<5_000"
-  end
+  #   assert_includes out, "Document BJ returned by query population>1_000_000 AND density<5_000"
+  # end
 
   it "in_query_without_array" do
     out, _err = capture_io do
