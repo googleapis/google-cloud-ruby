@@ -55,6 +55,10 @@ describe "storage_soft_deleted_bucket" do
   end
   it "restores a soft deleted bucket" do
     # restoring deleted bucket
+
+    new_bucket
+    puts "--------- new bucket create------------"
+    puts "#{new_bucket_name} created"
     _out, _err = capture_io do
       restore_bucket bucket_name: new_bucket.name, generation: generation
     end
