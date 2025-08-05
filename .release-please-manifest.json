@@ -229,6 +229,8 @@
   "google-cloud-confidential_computing+FILLER": "0.0.0",
   "google-cloud-confidential_computing-v1": "1.6.1",
   "google-cloud-confidential_computing-v1+FILLER": "0.0.0",
+  "google-cloud-config_delivery-v1": "0.0.1",
+  "google-cloud-config_delivery-v1+FILLER": "0.0.0",
   "google-cloud-config_service": "2.0.1",
   "google-cloud-config_service+FILLER": "0.0.0",
   "google-cloud-config_service-v1": "2.2.0",
