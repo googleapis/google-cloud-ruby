@@ -38,6 +38,7 @@ def grant_storage_permissions bucket_name:
   end
   bucket
 end
+
 def fixture_bucket
   storage_client = Google::Cloud::Storage.new
   storage_client.bucket($fixture_bucket_name) ||

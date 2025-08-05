@@ -45,6 +45,9 @@ describe "storage_soft_deleted_bucket" do
 
   it "get soft deleted bucket, its soft_delete_time and hard_delete_time" do
     # fetching a soft deleted bucket
+    new_bucket
+    puts "--------- new bucket create------------"
+    puts "#{new_bucket_name} created"
     output, _err = capture_io do
       get_soft_deleted_bucket bucket_name: new_bucket_name, generation: generation
     end
@@ -55,6 +58,8 @@ describe "storage_soft_deleted_bucket" do
     _out, _err = capture_io do
       restore_bucket bucket_name: new_bucket.name, generation: generation
     end
+    puts "--- bucket restored-----"
+    puts "#{new_bucket.name} Bucket restored"
     assert "#{new_bucket.name} Bucket restored"
   end
 end
