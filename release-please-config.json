@@ -59,6 +59,10 @@
       "component": "google-apps-events-subscriptions-v1",
       "version_file": "lib/google/apps/events/subscriptions/v1/version.rb"
     },
+    "google-apps-events-subscriptions-v1beta": {
+      "component": "google-apps-events-subscriptions-v1beta",
+      "version_file": "lib/google/apps/events/subscriptions/v1beta/version.rb"
+    },
     "google-apps-meet": {
       "component": "google-apps-meet",
       "version_file": "lib/google/apps/meet/version.rb"
