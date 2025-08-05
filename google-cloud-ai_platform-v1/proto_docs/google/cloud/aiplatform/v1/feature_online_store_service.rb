@@ -315,6 +315,87 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # Request message for
+        # {::Google::Cloud::AIPlatform::V1::FeatureOnlineStoreService::Client#feature_view_direct_write FeatureOnlineStoreService.FeatureViewDirectWrite}.
+        # @!attribute [rw] feature_view
+        #   @return [::String]
+        #     FeatureView resource format
+        #     `projects/{project}/locations/{location}/featureOnlineStores/{featureOnlineStore}/featureViews/{featureView}`
+        # @!attribute [rw] data_key_and_feature_values
+        #   @return [::Array<::Google::Cloud::AIPlatform::V1::FeatureViewDirectWriteRequest::DataKeyAndFeatureValues>]
+        #     Required. The data keys and associated feature values.
+        class FeatureViewDirectWriteRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # A data key and associated feature values to write to the feature view.
+          # @!attribute [rw] data_key
+          #   @return [::Google::Cloud::AIPlatform::V1::FeatureViewDataKey]
+          #     The data key.
+          # @!attribute [rw] features
+          #   @return [::Array<::Google::Cloud::AIPlatform::V1::FeatureViewDirectWriteRequest::DataKeyAndFeatureValues::Feature>]
+          #     List of features to write.
+          class DataKeyAndFeatureValues
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+
+            # Feature name & value pair.
+            # @!attribute [rw] value
+            #   @return [::Google::Cloud::AIPlatform::V1::FeatureValue]
+            #     Feature value. A user provided timestamp may be set in the
+            #     `FeatureValue.metadata.generate_time` field.
+            # @!attribute [rw] name
+            #   @return [::String]
+            #     Feature short name.
+            class Feature
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
+          end
+        end
+
+        # Response message for
+        # {::Google::Cloud::AIPlatform::V1::FeatureOnlineStoreService::Client#feature_view_direct_write FeatureOnlineStoreService.FeatureViewDirectWrite}.
+        # @!attribute [rw] status
+        #   @return [::Google::Rpc::Status]
+        #     Response status for the keys listed in
+        #     {::Google::Cloud::AIPlatform::V1::FeatureViewDirectWriteResponse#write_responses FeatureViewDirectWriteResponse.write_responses}.
+        #
+        #     The error only applies to the
+        #     listed data keys - the stream will remain open for further
+        #     [FeatureOnlineStoreService.FeatureViewDirectWriteRequest][] requests.
+        #
+        #     Partial failures (e.g. if the first 10 keys of a request fail, but the
+        #     rest succeed) from a single request may result in multiple responses -
+        #     there will be one response for the successful request keys and one response
+        #     for the failing request keys.
+        # @!attribute [rw] write_responses
+        #   @return [::Array<::Google::Cloud::AIPlatform::V1::FeatureViewDirectWriteResponse::WriteResponse>]
+        #     Details about write for each key. If status is not OK,
+        #     {::Google::Cloud::AIPlatform::V1::FeatureViewDirectWriteResponse::WriteResponse#data_key WriteResponse.data_key}
+        #     will have the key with error, but
+        #     {::Google::Cloud::AIPlatform::V1::FeatureViewDirectWriteResponse::WriteResponse#online_store_write_time WriteResponse.online_store_write_time}
+        #     will not be present.
+        class FeatureViewDirectWriteResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Details about the write for each key.
+          # @!attribute [rw] data_key
+          #   @return [::Google::Cloud::AIPlatform::V1::FeatureViewDataKey]
+          #     What key is this write response associated with.
+          # @!attribute [rw] online_store_write_time
+          #   @return [::Google::Protobuf::Timestamp]
+          #     When the feature values were written to the online store.
+          #     If
+          #     {::Google::Cloud::AIPlatform::V1::FeatureViewDirectWriteResponse#status FeatureViewDirectWriteResponse.status}
+          #     is not OK, this field is not populated.
+          class WriteResponse
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+        end
+
         # Format of the data in the Feature View.
         module FeatureViewDataFormat
           # Not set. Will be treated as the KeyValue format.

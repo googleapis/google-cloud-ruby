@@ -665,6 +665,7 @@
     "snippets/feature_online_store_admin_service/sync_feature_view.rb",
     "snippets/feature_online_store_admin_service/update_feature_online_store.rb",
     "snippets/feature_online_store_admin_service/update_feature_view.rb",
+    "snippets/feature_online_store_service/feature_view_direct_write.rb",
     "snippets/feature_online_store_service/fetch_feature_values.rb",
     "snippets/feature_online_store_service/search_nearest_entities.rb",
     "snippets/feature_registry_service/batch_create_features.rb",
