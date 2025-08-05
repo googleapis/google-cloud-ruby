@@ -15,12 +15,12 @@
 require_relative "helper"
 require_relative "../storage_get_service_account"
 require_relative "../storage_restore_bucket"
+require_relative "../storage_get_soft_deleted_bucket"
+
 
 describe "Storage Quickstart" do
   let(:project) { Google::Cloud::Storage.new }
   let(:bucket) { fixture_bucket }
-  let(:generation) { bucket.generation }
-  let(:new_bucket_name) { random_bucket_name }
 
   it "get_service_account" do
     email = nil
@@ -35,15 +35,26 @@ end
 
 
 describe "storage_soft_deleted_bucket" do
-  let(:generation) { bucket.generation }
-  let(:bucket) { fixture_bucket }
+  let(:new_bucket_name) { random_bucket_name }
+  let(:new_bucket) { create_bucket_helper new_bucket_name }
+  let(:generation) { new_bucket.generation }
 
+  before do
+    delete_bucket_helper new_bucket.name
+  end
+
+  it "get soft deleted bucket, its soft_delete_time and hard_delete_time" do
+    # fetching a soft deleted bucket
+    output, _err = capture_io do
+      get_soft_deleted_bucket bucket_name: new_bucket_name, generation: generation
+    end
+    assert_includes output, "soft_delete_time for #{new_bucket_name} is"
+  end
   it "restores a soft deleted bucket" do
-    delete_bucket_helper bucket.name
     # restoring deleted bucket
     _out, _err = capture_io do
-      restore_bucket bucket_name: bucket.name, generation: generation
+      restore_bucket bucket_name: new_bucket.name, generation: generation
     end
-    assert "#{bucket.name} Bucket restored"
+    assert "#{new_bucket.name} Bucket restored"
   end
 end
