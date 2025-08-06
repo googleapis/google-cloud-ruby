@@ -939,6 +939,8 @@
   "google-shopping-merchant-order_tracking-v1beta+FILLER": "0.0.0",
   "google-shopping-merchant-products": "0.2.2",
   "google-shopping-merchant-products+FILLER": "0.0.0",
+  "google-shopping-merchant-products-v1": "0.0.1",
+  "google-shopping-merchant-products-v1+FILLER": "0.0.0",
   "google-shopping-merchant-products-v1beta": "0.7.0",
   "google-shopping-merchant-products-v1beta+FILLER": "0.0.0",
   "google-shopping-merchant-promotions": "0.2.1",
