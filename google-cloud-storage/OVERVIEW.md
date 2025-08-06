@@ -531,14 +531,23 @@ created and owns the topic.)
 require "google/cloud/pubsub"
 require "google/cloud/storage"
 
-pubsub = Google::Cloud::Pubsub.new
+pubsub = Google::Cloud::PubSub.new
 storage = Google::Cloud::Storage.new
 
-topic = pubsub.create_topic "my-topic"
-topic.policy do |p|
-  p.add "roles/pubsub.publisher",
-        "serviceAccount:#{storage.service_account_email}"
-end
+topic_admin = pubsub.topic_admin
+topic_path = pubsub.topic_path "my-topic"
+topic = topic_admin.create_topic name: topic_path
+
+policy = {
+  bindings: [
+    {
+      role: "roles/pubsub.publisher",
+      members: ["serviceAccount:#{storage.service_account_email}"]
+    }
+  ]
+}
+
+pubsub.iam.set_iam_policy resource: topic_path, policy: policy
 
 bucket = storage.bucket "my-bucket"
 
