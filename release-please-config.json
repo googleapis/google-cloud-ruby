@@ -1919,6 +1919,10 @@
       "component": "google-shopping-merchant-products",
       "version_file": "lib/google/shopping/merchant/products/version.rb"
     },
+    "google-shopping-merchant-products-v1": {
+      "component": "google-shopping-merchant-products-v1",
+      "version_file": "lib/google/shopping/merchant/products/v1/version.rb"
+    },
     "google-shopping-merchant-products-v1beta": {
       "component": "google-shopping-merchant-products-v1beta",
       "version_file": "lib/google/shopping/merchant/products/v1beta/version.rb"
