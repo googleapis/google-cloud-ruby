@@ -1923,6 +1923,10 @@
       "component": "google-shopping-merchant-promotions",
       "version_file": "lib/google/shopping/merchant/promotions/version.rb"
     },
+    "google-shopping-merchant-promotions-v1": {
+      "component": "google-shopping-merchant-promotions-v1",
+      "version_file": "lib/google/shopping/merchant/promotions/v1/version.rb"
+    },
     "google-shopping-merchant-promotions-v1beta": {
       "component": "google-shopping-merchant-promotions-v1beta",
       "version_file": "lib/google/shopping/merchant/promotions/v1beta/version.rb"
