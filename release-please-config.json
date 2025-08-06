@@ -1879,6 +1879,10 @@
       "component": "google-shopping-merchant-lfp",
       "version_file": "lib/google/shopping/merchant/lfp/version.rb"
     },
+    "google-shopping-merchant-lfp-v1": {
+      "component": "google-shopping-merchant-lfp-v1",
+      "version_file": "lib/google/shopping/merchant/lfp/v1/version.rb"
+    },
     "google-shopping-merchant-lfp-v1beta": {
       "component": "google-shopping-merchant-lfp-v1beta",
       "version_file": "lib/google/shopping/merchant/lfp/v1beta/version.rb"
