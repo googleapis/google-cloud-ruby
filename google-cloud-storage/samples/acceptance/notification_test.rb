@@ -26,9 +26,9 @@ describe "Buckets Notification Snippets" do
 
   before :all do
     @bucket = create_bucket_helper random_bucket_name
-    @pubsub = Google::Cloud::PubSub.new
-    @topic_admin = @pubsub.topic_admin
-    @topic = @topic_admin.create_topic name: @pubsub.topic_path(random_topic_name)
+    pubsub = Google::Cloud::PubSub.new
+    @topic_admin = pubsub.topic_admin
+    @topic = @topic_admin.create_topic name: pubsub.topic_path(random_topic_name)
 
     policy = {
       bindings: [
@@ -38,7 +38,7 @@ describe "Buckets Notification Snippets" do
         }
       ]
     }
-    @pubsub.iam.set_iam_policy resource: @topic.name, policy: policy
+    pubsub.iam.set_iam_policy resource: @topic.name, policy: policy
   end
 
   after :all do
