@@ -26,17 +26,24 @@ describe "Buckets Notification Snippets" do
 
   before :all do
     @bucket = create_bucket_helper random_bucket_name
-    pubsub = Google::Cloud::Pubsub.new
-    @topic = pubsub.create_topic random_topic_name
-    topic.policy do |p|
-      p.add "roles/pubsub.publisher",
-            "serviceAccount:#{storage_client.service_account_email}"
-    end
+    @pubsub = Google::Cloud::PubSub.new
+    @topic_admin = @pubsub.topic_admin
+    @topic = @topic_admin.create_topic name: @pubsub.topic_path(random_topic_name)
+
+    policy = {
+      bindings: [
+        {
+          role: "roles/pubsub.publisher",
+          members: ["serviceAccount:#{storage_client.service_account_email}"]
+        }
+      ]
+    }
+    @pubsub.iam.set_iam_policy resource: @topic.name, policy: policy
   end
 
   after :all do
     delete_bucket_helper @bucket.name
-    topic.delete
+    @topic_admin.delete_topic topic: @topic.name if @topic
   end
 
   describe "Notification Lifecycle" do
