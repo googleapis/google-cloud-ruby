@@ -1843,6 +1843,10 @@
       "component": "google-shopping-merchant-data_sources",
       "version_file": "lib/google/shopping/merchant/data_sources/version.rb"
     },
+    "google-shopping-merchant-data_sources-v1": {
+      "component": "google-shopping-merchant-data_sources-v1",
+      "version_file": "lib/google/shopping/merchant/data_sources/v1/version.rb"
+    },
     "google-shopping-merchant-data_sources-v1beta": {
       "component": "google-shopping-merchant-data_sources-v1beta",
       "version_file": "lib/google/shopping/merchant/data_sources/v1beta/version.rb"
