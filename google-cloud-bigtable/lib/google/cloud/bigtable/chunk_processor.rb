@@ -94,15 +94,23 @@ module Google
         #   or if family name or column qualifier are empty
         #
         def validate_new_row
-          raise_if row.key, "A new row cannot have existing state"
-          raise_if chunk.row_key.empty?, "A row key must be set"
-          raise_if chunk.reset_row, "A new row cannot be reset"
-          raise_if last_key == chunk.row_key, "A commit happened but the same key followed"
-          raise_if last_key && chunk.row_key < last_key,
-                   "Out of order row key, must be strictly increasing. " \
-                   "New key: '#{chunk.row_key}', Previous key: '#{last_key}'"
-          raise_if chunk.family_name.nil?, "A family must be set"
-          raise_if chunk.qualifier.nil?, "A column qualifier must be set"
+          validations = [
+            [row.key, "A new row cannot have existing state"],
+            [chunk.row_key.empty?, "A row key must be set"],
+            [chunk.reset_row, "A new row cannot be reset"],
+            [last_key == chunk.row_key, "A commit happened but the same key followed"],
+            [
+              last_key && chunk.row_key < last_key,
+              "Out of order row key, must be strictly increasing. " \
+              "New key: '#{chunk.row_key}', Previous key: '#{last_key}'"
+            ],
+            [chunk.family_name.nil?, "A family must be set"],
+            [chunk.qualifier.nil?, "A column qualifier must be set"]
+          ]
+
+          validations.each do |condition, message|
+            raise_if condition, message
+          end
         end
 
         ##
