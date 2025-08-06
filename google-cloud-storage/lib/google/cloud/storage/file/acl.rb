@@ -335,7 +335,7 @@ module Google
                                    if_metageneration_match: if_metageneration_match,
                                    if_metageneration_not_match: if_metageneration_not_match
           end
-          alias authenticatedRead! auth!
+          alias authenticatedRead! auth! # rubocop:disable Naming/MethodName
           alias auth_read! auth!
           alias authenticated! auth!
           alias authenticated_read! auth!
@@ -382,7 +382,7 @@ module Google
                                    if_metageneration_match: if_metageneration_match,
                                    if_metageneration_not_match: if_metageneration_not_match
           end
-          alias bucketOwnerFullControl! owner_full!
+          alias bucketOwnerFullControl! owner_full! # rubocop:disable Naming/MethodName
 
           ##
           # Convenience method to apply the `bucketOwnerRead` predefined ACL
@@ -426,7 +426,7 @@ module Google
                                    if_metageneration_match: if_metageneration_match,
                                    if_metageneration_not_match: if_metageneration_not_match
           end
-          alias bucketOwnerRead! owner_read!
+          alias bucketOwnerRead! owner_read! # rubocop:disable Naming/MethodName
 
           ##
           # Convenience method to apply the `private` predefined ACL
@@ -513,7 +513,7 @@ module Google
                                    if_metageneration_match: if_metageneration_match,
                                    if_metageneration_not_match: if_metageneration_not_match
           end
-          alias projectPrivate! project_private!
+          alias projectPrivate! project_private! # rubocop:disable Naming/MethodName
 
           ##
           # Convenience method to apply the `publicRead` predefined ACL
@@ -557,7 +557,7 @@ module Google
                                    if_metageneration_match: if_metageneration_match,
                                    if_metageneration_not_match: if_metageneration_not_match
           end
-          alias publicRead! public!
+          alias publicRead! public! # rubocop:disable Naming/MethodName
           alias public_read! public!
 
           protected
