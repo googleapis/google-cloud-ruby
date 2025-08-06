@@ -1875,6 +1875,10 @@
       "component": "google-shopping-merchant-issue_resolution",
       "version_file": "lib/google/shopping/merchant/issue_resolution/version.rb"
     },
+    "google-shopping-merchant-issue_resolution-v1": {
+      "component": "google-shopping-merchant-issue_resolution-v1",
+      "version_file": "lib/google/shopping/merchant/issue_resolution/v1/version.rb"
+    },
     "google-shopping-merchant-issue_resolution-v1beta": {
       "component": "google-shopping-merchant-issue_resolution-v1beta",
       "version_file": "lib/google/shopping/merchant/issue_resolution/v1beta/version.rb"
