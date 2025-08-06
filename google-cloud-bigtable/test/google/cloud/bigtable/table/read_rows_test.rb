@@ -435,7 +435,7 @@ describe Google::Cloud::Bigtable::Table, :read_rows, :mock_bigtable do
     _(rows.first).must_equal expected_row
   end
 
-  it "TestReadRows_NoRetry_OutOfOrderError" do
+  it "reports an error if the client detects that the server sent row keys out of order" do
     mock = Minitest::Mock.new
     bigtable.service.mocked_client = mock
     table = bigtable.table(instance_id, table_id)
@@ -474,7 +474,7 @@ describe Google::Cloud::Bigtable::Table, :read_rows, :mock_bigtable do
     _(err.message).must_match /Out of order row key/
   end
 
-  it "TestReadRows_Retry_LastScannedRow" do
+  it "resumes a read from the last scanned row key after a retryable error" do
     mock = Minitest::Mock.new
     bigtable.service.mocked_client = mock
     table = bigtable.table(instance_id, table_id)
