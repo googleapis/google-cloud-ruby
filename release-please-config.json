@@ -1875,6 +1875,10 @@
       "component": "google-shopping-merchant-notifications",
       "version_file": "lib/google/shopping/merchant/notifications/version.rb"
     },
+    "google-shopping-merchant-notifications-v1": {
+      "component": "google-shopping-merchant-notifications-v1",
+      "version_file": "lib/google/shopping/merchant/notifications/v1/version.rb"
+    },
     "google-shopping-merchant-notifications-v1beta": {
       "component": "google-shopping-merchant-notifications-v1beta",
       "version_file": "lib/google/shopping/merchant/notifications/v1beta/version.rb"
