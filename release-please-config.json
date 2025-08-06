@@ -1827,6 +1827,10 @@
       "component": "google-shopping-merchant-accounts",
       "version_file": "lib/google/shopping/merchant/accounts/version.rb"
     },
+    "google-shopping-merchant-accounts-v1": {
+      "component": "google-shopping-merchant-accounts-v1",
+      "version_file": "lib/google/shopping/merchant/accounts/v1/version.rb"
+    },
     "google-shopping-merchant-accounts-v1beta": {
       "component": "google-shopping-merchant-accounts-v1beta",
       "version_file": "lib/google/shopping/merchant/accounts/v1beta/version.rb"
