@@ -434,4 +434,109 @@ describe Google::Cloud::Bigtable::Table, :read_rows, :mock_bigtable do
     _(rows.length).must_equal 1
     _(rows.first).must_equal expected_row
   end
+
+  it "reports an error if the client detects that the server sent row keys out of order" do
+    mock = Minitest::Mock.new
+    bigtable.service.mocked_client = mock
+    table = bigtable.table(instance_id, table_id)
+
+    chunks = [
+      Google::Cloud::Bigtable::V2::ReadRowsResponse::CellChunk.new(
+        row_key: "row-2",
+        family_name: Google::Protobuf::StringValue.new(value: "cf"),
+        qualifier: Google::Protobuf::BytesValue.new(value: "cq"),
+        value: "v",
+        commit_row: true
+      ),
+      Google::Cloud::Bigtable::V2::ReadRowsResponse::CellChunk.new(
+        row_key: "row-1", # Out of order
+        family_name: Google::Protobuf::StringValue.new(value: "cf"),
+        qualifier: Google::Protobuf::BytesValue.new(value: "cq"),
+        value: "v",
+        commit_row: true
+      )
+    ]
+    responses = [
+      Google::Cloud::Bigtable::V2::ReadRowsResponse.new(chunks: [chunks[0]]),
+      Google::Cloud::Bigtable::V2::ReadRowsResponse.new(chunks: [chunks[1]])
+    ]
+
+    mock.expect :read_rows, responses,
+                table_name: table_path(instance_id, table_id),
+                rows: Google::Cloud::Bigtable::V2::RowSet.new(row_ranges: [Google::Cloud::Bigtable::V2::RowRange.new]),
+                filter: nil,
+                rows_limit: nil,
+                app_profile_id: nil
+
+    err = assert_raises Google::Cloud::Error do
+      table.read_rows.to_a
+    end
+    _(err.message).must_match /Out of order row key/
+  end
+
+  it "resumes a read from the last scanned row key after a retryable error" do
+    mock = Minitest::Mock.new
+    bigtable.service.mocked_client = mock
+    table = bigtable.table(instance_id, table_id)
+
+    first_mock_responses = [
+      Google::Cloud::Bigtable::V2::ReadRowsResponse.new(last_scanned_row_key: ""),
+      "error"
+    ]
+    first_mock_itr = OpenStruct.new(read_response: first_mock_responses)
+    def first_mock_itr.each
+      self.read_response.each do |res|
+        raise GRPC::DeadlineExceeded, "Deadline exceeded" if res == "error"
+        yield res
+      end
+    end
+
+    second_mock_responses = [
+      Google::Cloud::Bigtable::V2::ReadRowsResponse.new(last_scanned_row_key: "row-a"),
+      "error"
+    ]
+    second_mock_itr = OpenStruct.new(read_response: second_mock_responses)
+    def second_mock_itr.each
+      self.read_response.each do |res|
+        raise GRPC::DeadlineExceeded, "Deadline exceeded" if res == "error"
+        yield res
+      end
+    end
+
+    final_chunk = Google::Cloud::Bigtable::V2::ReadRowsResponse::CellChunk.new(
+      row_key: "row-b",
+      family_name: Google::Protobuf::StringValue.new(value: "cf"),
+      qualifier: Google::Protobuf::BytesValue.new(value: "cq"),
+      value: "v",
+      commit_row: true
+    )
+    final_response = [Google::Cloud::Bigtable::V2::ReadRowsResponse.new(chunks: [final_chunk])]
+
+    mock.expect :read_rows, first_mock_itr,
+                table_name: table_path(instance_id, table_id),
+                rows: Google::Cloud::Bigtable::V2::RowSet.new(row_ranges: [Google::Cloud::Bigtable::V2::RowRange.new]),
+                filter: nil,
+                rows_limit: nil,
+                app_profile_id: nil
+
+    mock.expect :read_rows, second_mock_itr,
+                table_name: table_path(instance_id, table_id),
+                rows: Google::Cloud::Bigtable::V2::RowSet.new(row_ranges: [Google::Cloud::Bigtable::V2::RowRange.new]),
+                filter: nil,
+                rows_limit: nil,
+                app_profile_id: nil
+
+    mock.expect :read_rows, final_response,
+                table_name: table_path(instance_id, table_id),
+                rows: Google::Cloud::Bigtable::V2::RowSet.new(
+                  row_ranges: [Google::Cloud::Bigtable::V2::RowRange.new(start_key_open: "row-a")]
+                ),
+                filter: nil,
+                rows_limit: nil,
+                app_profile_id: nil
+
+    rows = table.read_rows.to_a
+    _(rows.map(&:key)).must_equal ["row-b"]
+    mock.verify
+  end
 end
