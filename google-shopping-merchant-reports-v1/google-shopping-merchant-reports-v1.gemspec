@@ -25,4 +25,5 @@ Gem::Specification.new do |gem|
 
   gem.add_dependency "gapic-common", "~> 1.0"
   gem.add_dependency "google-cloud-errors", "~> 1.0"
+  gem.add_dependency "google-shopping-type", "~> 1.0"
 end
