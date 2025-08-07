@@ -110,17 +110,19 @@ module Google
           labels
         end
 
+        TIMESTAMP_SECONDS_THRESHOLD = (2**31) - 1
+
         ##
         # @private
         #
-        # active support event's time is:
-        #
-        # - rails >= 7: timestamp in milliseconds
-        # - rails <  7: time
+        # Normalizes potentially inconsistent timestamps from
+        # ActiveSupport::Notifications into a consistent format in seconds since
+        # the Unix epoch. Some older Rails versions passed `Time` objects, while
+        # some versions of Rails 7+ passes a `Float` in milliseconds.
         def self.normalize_time time_or_float
-          return time_or_float if Rails::VERSION::MAJOR < 7
+          return time_or_float unless time_or_float.is_a? Numeric
 
-          Time.at time_or_float / 1000
+          time_or_float > TIMESTAMP_SECONDS_THRESHOLD ? time_or_float / 1000.0 : time_or_float
         end
       end
     end
