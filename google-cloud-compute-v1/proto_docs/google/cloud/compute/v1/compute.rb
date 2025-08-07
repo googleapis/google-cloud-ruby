@@ -3704,7 +3704,7 @@ module Google
         #     Optional parameter to define a target utilization for the Custom Metrics balancing mode. The valid range is [0.0, 1.0].
         # @!attribute [rw] name
         #   @return [::String]
-        #     Name of a custom utilization signal. The name must be 1-64 characters long and match the regular expression [a-z]([-_.a-z0-9]*[a-z0-9])? which means the first character must be a lowercase letter, and all following characters must be a dash, period, underscore, lowercase letter, or digit, except the last character, which cannot be a dash, period, or underscore. For usage guidelines, see Custom Metrics balancing mode. This field can only be used for a global or regional backend service with the loadBalancingScheme set to EXTERNAL_MANAGED, INTERNAL_MANAGED INTERNAL_SELF_MANAGED.
+        #     Name of a custom utilization signal. The name must be 1-64 characters long and match the regular expression [a-z]([-_.a-z0-9]*[a-z0-9])? which means that the first character must be a lowercase letter, and all following characters must be a dash, period, underscore, lowercase letter, or digit, except the last character, which cannot be a dash, period, or underscore. For usage guidelines, see Custom Metrics balancing mode. This field can only be used for a global or regional backend service with the loadBalancingScheme set to EXTERNAL_MANAGED, INTERNAL_MANAGED INTERNAL_SELF_MANAGED.
         class BackendCustomMetric
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -3797,7 +3797,7 @@ module Google
         #     A list of locality load-balancing policies to be used in order of preference. When you use localityLbPolicies, you must set at least one value for either the localityLbPolicies[].policy or the localityLbPolicies[].customPolicy field. localityLbPolicies overrides any value set in the localityLbPolicy field. For an example of how to use this field, see Define a list of preferred policies. Caution: This field and its children are intended for use in a service mesh that includes gRPC clients only. Envoy proxies can't use backend services that have this configuration.
         # @!attribute [rw] locality_lb_policy
         #   @return [::String]
-        #     The load balancing algorithm used within the scope of the locality. The possible values are: - ROUND_ROBIN: This is a simple policy in which each healthy backend is selected in round robin order. This is the default. - LEAST_REQUEST: An O(1) algorithm which selects two random healthy hosts and picks the host which has fewer active requests. - RING_HASH: The ring/modulo hash load balancer implements consistent hashing to backends. The algorithm has the property that the addition/removal of a host from a set of N hosts only affects 1/N of the requests. - RANDOM: The load balancer selects a random healthy host. - ORIGINAL_DESTINATION: Backend host is selected based on the client connection metadata, i.e., connections are opened to the same address as the destination address of the incoming connection before the connection was redirected to the load balancer. - MAGLEV: used as a drop in replacement for the ring hash load balancer. Maglev is not as stable as ring hash but has faster table lookup build times and host selection times. For more information about Maglev, see https://ai.google/research/pubs/pub44824 This field is applicable to either: - A regional backend service with the service_protocol set to HTTP, HTTPS, HTTP2 or H2C, and load_balancing_scheme set to INTERNAL_MANAGED. - A global backend service with the load_balancing_scheme set to INTERNAL_SELF_MANAGED, INTERNAL_MANAGED, or EXTERNAL_MANAGED. If sessionAffinity is not configured—that is, if session affinity remains at the default value of NONE—then the default value for localityLbPolicy is ROUND_ROBIN. If session affinity is set to a value other than NONE, then the default value for localityLbPolicy is MAGLEV. Only ROUND_ROBIN and RING_HASH are supported when the backend service is referenced by a URL map that is bound to target gRPC proxy that has validateForProxyless field set to true. localityLbPolicy cannot be specified with haPolicy.
+        #     The load balancing algorithm used within the scope of the locality. The possible values are: - ROUND_ROBIN: This is a simple policy in which each healthy backend is selected in round robin order. This is the default. - LEAST_REQUEST: An O(1) algorithm which selects two random healthy hosts and picks the host which has fewer active requests. - RING_HASH: The ring/modulo hash load balancer implements consistent hashing to backends. The algorithm has the property that the addition/removal of a host from a set of N hosts only affects 1/N of the requests. - RANDOM: The load balancer selects a random healthy host. - ORIGINAL_DESTINATION: Backend host is selected based on the client connection metadata, i.e., connections are opened to the same address as the destination address of the incoming connection before the connection was redirected to the load balancer. - MAGLEV: used as a drop in replacement for the ring hash load balancer. Maglev is not as stable as ring hash but has faster table lookup build times and host selection times. For more information about Maglev, see https://ai.google/research/pubs/pub44824 - WEIGHTED_ROUND_ROBIN: Per-endpoint Weighted Round Robin Load Balancing using weights computed from Backend reported Custom Metrics. If set, the Backend Service responses are expected to contain non-standard HTTP response header field Endpoint-Load-Metrics. The reported metrics to use for computing the weights are specified via the customMetrics field. This field is applicable to either: - A regional backend service with the service_protocol set to HTTP, HTTPS, HTTP2 or H2C, and load_balancing_scheme set to INTERNAL_MANAGED. - A global backend service with the load_balancing_scheme set to INTERNAL_SELF_MANAGED, INTERNAL_MANAGED, or EXTERNAL_MANAGED. If sessionAffinity is not configured—that is, if session affinity remains at the default value of NONE—then the default value for localityLbPolicy is ROUND_ROBIN. If session affinity is set to a value other than NONE, then the default value for localityLbPolicy is MAGLEV. Only ROUND_ROBIN and RING_HASH are supported when the backend service is referenced by a URL map that is bound to target gRPC proxy that has validateForProxyless field set to true. localityLbPolicy cannot be specified with haPolicy.
         #     Check the LocalityLbPolicy enum for the list of possible values.
         # @!attribute [rw] log_config
         #   @return [::Google::Cloud::Compute::V1::BackendServiceLogConfig]
@@ -3942,7 +3942,7 @@ module Google
             INVALID_LOAD_BALANCING_SCHEME = 275_352_060
           end
 
-          # The load balancing algorithm used within the scope of the locality. The possible values are: - ROUND_ROBIN: This is a simple policy in which each healthy backend is selected in round robin order. This is the default. - LEAST_REQUEST: An O(1) algorithm which selects two random healthy hosts and picks the host which has fewer active requests. - RING_HASH: The ring/modulo hash load balancer implements consistent hashing to backends. The algorithm has the property that the addition/removal of a host from a set of N hosts only affects 1/N of the requests. - RANDOM: The load balancer selects a random healthy host. - ORIGINAL_DESTINATION: Backend host is selected based on the client connection metadata, i.e., connections are opened to the same address as the destination address of the incoming connection before the connection was redirected to the load balancer. - MAGLEV: used as a drop in replacement for the ring hash load balancer. Maglev is not as stable as ring hash but has faster table lookup build times and host selection times. For more information about Maglev, see https://ai.google/research/pubs/pub44824 This field is applicable to either: - A regional backend service with the service_protocol set to HTTP, HTTPS, HTTP2 or H2C, and load_balancing_scheme set to INTERNAL_MANAGED. - A global backend service with the load_balancing_scheme set to INTERNAL_SELF_MANAGED, INTERNAL_MANAGED, or EXTERNAL_MANAGED. If sessionAffinity is not configured—that is, if session affinity remains at the default value of NONE—then the default value for localityLbPolicy is ROUND_ROBIN. If session affinity is set to a value other than NONE, then the default value for localityLbPolicy is MAGLEV. Only ROUND_ROBIN and RING_HASH are supported when the backend service is referenced by a URL map that is bound to target gRPC proxy that has validateForProxyless field set to true. localityLbPolicy cannot be specified with haPolicy.
+          # The load balancing algorithm used within the scope of the locality. The possible values are: - ROUND_ROBIN: This is a simple policy in which each healthy backend is selected in round robin order. This is the default. - LEAST_REQUEST: An O(1) algorithm which selects two random healthy hosts and picks the host which has fewer active requests. - RING_HASH: The ring/modulo hash load balancer implements consistent hashing to backends. The algorithm has the property that the addition/removal of a host from a set of N hosts only affects 1/N of the requests. - RANDOM: The load balancer selects a random healthy host. - ORIGINAL_DESTINATION: Backend host is selected based on the client connection metadata, i.e., connections are opened to the same address as the destination address of the incoming connection before the connection was redirected to the load balancer. - MAGLEV: used as a drop in replacement for the ring hash load balancer. Maglev is not as stable as ring hash but has faster table lookup build times and host selection times. For more information about Maglev, see https://ai.google/research/pubs/pub44824 - WEIGHTED_ROUND_ROBIN: Per-endpoint Weighted Round Robin Load Balancing using weights computed from Backend reported Custom Metrics. If set, the Backend Service responses are expected to contain non-standard HTTP response header field Endpoint-Load-Metrics. The reported metrics to use for computing the weights are specified via the customMetrics field. This field is applicable to either: - A regional backend service with the service_protocol set to HTTP, HTTPS, HTTP2 or H2C, and load_balancing_scheme set to INTERNAL_MANAGED. - A global backend service with the load_balancing_scheme set to INTERNAL_SELF_MANAGED, INTERNAL_MANAGED, or EXTERNAL_MANAGED. If sessionAffinity is not configured—that is, if session affinity remains at the default value of NONE—then the default value for localityLbPolicy is ROUND_ROBIN. If session affinity is set to a value other than NONE, then the default value for localityLbPolicy is MAGLEV. Only ROUND_ROBIN and RING_HASH are supported when the backend service is referenced by a URL map that is bound to target gRPC proxy that has validateForProxyless field set to true. localityLbPolicy cannot be specified with haPolicy.
           module LocalityLbPolicy
             # A value indicating that the enum field is not set.
             UNDEFINED_LOCALITY_LB_POLICY = 0
@@ -3970,7 +3970,7 @@ module Google
             # Per-instance weighted Load Balancing via health check reported weights. If set, the Backend Service must configure a non legacy HTTP-based Health Check, and health check replies are expected to contain non-standard HTTP response header field X-Load-Balancing-Endpoint-Weight to specify the per-instance weights. If set, Load Balancing is weighted based on the per-instance weights reported in the last processed health check replies, as long as every instance either reported a valid weight or had UNAVAILABLE_WEIGHT. Otherwise, Load Balancing remains equal-weight. This option is only supported in Network Load Balancing.
             WEIGHTED_MAGLEV = 254_930_962
 
-            # Per-endpoint weighted round-robin Load Balancing using weights computed from Backend reported Custom Metrics. If set, the Backend Service responses are expected to contain non-standard HTTP response header field X-Endpoint-Load-Metrics. The reported metrics to use for computing the weights are specified via the backends[].customMetrics fields.
+            # Per-endpoint weighted round-robin Load Balancing using weights computed from Backend reported Custom Metrics. If set, the Backend Service responses are expected to contain non-standard HTTP response header field Endpoint-Load-Metrics. The reported metrics to use for computing the weights are specified via the customMetrics fields.
             WEIGHTED_ROUND_ROBIN = 5_584_977
           end
 
@@ -4206,7 +4206,7 @@ module Google
         #     If true, the metric data is not used for load balancing.
         # @!attribute [rw] name
         #   @return [::String]
-        #     Name of a custom utilization signal. The name must be 1-64 characters long and match the regular expression [a-z]([-_.a-z0-9]*[a-z0-9])? which means the first character must be a lowercase letter, and all following characters must be a dash, period, underscore, lowercase letter, or digit, except the last character, which cannot be a dash, period, or underscore. For usage guidelines, see Custom Metrics balancing mode. This field can only be used for a global or regional backend service with the loadBalancingScheme set to EXTERNAL_MANAGED, INTERNAL_MANAGED INTERNAL_SELF_MANAGED.
+        #     Name of a custom utilization signal. The name must be 1-64 characters long and match the regular expression [a-z]([-_.a-z0-9]*[a-z0-9])? which means that the first character must be a lowercase letter, and all following characters must be a dash, period, underscore, lowercase letter, or digit, except the last character, which cannot be a dash, period, or underscore. For usage guidelines, see Custom Metrics balancing mode. This field can only be used for a global or regional backend service with the loadBalancingScheme set to EXTERNAL_MANAGED, INTERNAL_MANAGED INTERNAL_SELF_MANAGED.
         class BackendServiceCustomMetric
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -4431,7 +4431,7 @@ module Google
             # Per-instance weighted Load Balancing via health check reported weights. If set, the Backend Service must configure a non legacy HTTP-based Health Check, and health check replies are expected to contain non-standard HTTP response header field X-Load-Balancing-Endpoint-Weight to specify the per-instance weights. If set, Load Balancing is weighted based on the per-instance weights reported in the last processed health check replies, as long as every instance either reported a valid weight or had UNAVAILABLE_WEIGHT. Otherwise, Load Balancing remains equal-weight. This option is only supported in Network Load Balancing.
             WEIGHTED_MAGLEV = 254_930_962
 
-            # Per-endpoint weighted round-robin Load Balancing using weights computed from Backend reported Custom Metrics. If set, the Backend Service responses are expected to contain non-standard HTTP response header field X-Endpoint-Load-Metrics. The reported metrics to use for computing the weights are specified via the backends[].customMetrics fields.
+            # Per-endpoint weighted round-robin Load Balancing using weights computed from Backend reported Custom Metrics. If set, the Backend Service responses are expected to contain non-standard HTTP response header field Endpoint-Load-Metrics. The reported metrics to use for computing the weights are specified via the customMetrics fields.
             WEIGHTED_ROUND_ROBIN = 5_584_977
           end
         end
@@ -9517,10 +9517,10 @@ module Google
         # A request message for GlobalOrganizationOperations.Get. See the method description for details.
         # @!attribute [rw] operation
         #   @return [::String]
-        #     Name of the Operations resource to return, or its unique numeric identifier.
+        #     Name of the Operations resource to return. Parent is derived from this field.
         # @!attribute [rw] parent_id
         #   @return [::String]
-        #     Parent ID for this request.
+        #     Parent ID for this request. Not used. Parent is derived from resource_id.
         class GetGlobalOrganizationOperationRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -21804,6 +21804,9 @@ module Google
         # @!attribute [rw] return_partial_success
         #   @return [::Boolean]
         #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.
+        # @!attribute [rw] service_project
+        #   @return [::String]
+        #     The project id or project number in which the subnetwork is intended to be used. Only applied for Shared VPC. See [Shared VPC documentation](https://cloud.google.com/vpc/docs/shared-vpc/)
         class ListUsableSubnetworksRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -32624,13 +32627,13 @@ module Google
         #     Target for the redirect action. This is required if the type is EXTERNAL_302 and cannot be specified for GOOGLE_RECAPTCHA.
         # @!attribute [rw] type
         #   @return [::String]
-        #     Type of the redirect action.
+        #     Type of the redirect action. Possible values are: - GOOGLE_RECAPTCHA: redirect to reCAPTCHA for manual challenge assessment. - EXTERNAL_302: redirect to a different URL via a 302 response.
         #     Check the Type enum for the list of possible values.
         class SecurityPolicyRuleRedirectOptions
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
 
-          # Type of the redirect action.
+          # Type of the redirect action. Possible values are: - GOOGLE_RECAPTCHA: redirect to reCAPTCHA for manual challenge assessment. - EXTERNAL_302: redirect to a different URL via a 302 response.
           module Type
             # A value indicating that the enum field is not set.
             UNDEFINED_TYPE = 0
@@ -32777,7 +32780,7 @@ module Google
         #     Check the ConnectionPreference enum for the list of possible values.
         # @!attribute [rw] consumer_accept_lists
         #   @return [::Array<::Google::Cloud::Compute::V1::ServiceAttachmentConsumerProjectLimit>]
-        #     Specifies which consumer projects or networks are allowed to connect to the service attachment. Each project or network has a connection limit. A given service attachment can manage connections at either the project or network level. Therefore, both the accept and reject lists for a given service attachment must contain either only projects or only networks.
+        #     Specifies which consumer projects or networks are allowed to connect to the service attachment. Each project or network has a connection limit. A given service attachment can manage connections at either the project or network level. Therefore, both the accept and reject lists for a given service attachment must contain either only projects or only networks or only endpoints.
         # @!attribute [rw] consumer_reject_lists
         #   @return [::Array<::String>]
         #     Specifies a list of projects or networks that are not allowed to connect to this service attachment. The project can be specified using its project ID or project number and the network can be specified using its URL. A given service attachment can manage connections at either the project or network level. Therefore, both the reject and accept lists for a given service attachment must contain either only projects or only networks.
@@ -32802,6 +32805,9 @@ module Google
         # @!attribute [rw] kind
         #   @return [::String]
         #     [Output Only] Type of the resource. Always compute#serviceAttachment for service attachments.
+        # @!attribute [rw] metadata
+        #   @return [::Google::Protobuf::Map{::String => ::String}]
+        #     Metadata of the service attachment.
         # @!attribute [rw] name
         #   @return [::String]
         #     Name of the resource. Provided by the client when the resource is created. The name must be 1-63 characters long, and comply with RFC1035. Specifically, the name must be 1-63 characters long and match the regular expression `[a-z]([-a-z0-9]*[a-z0-9])?` which means the first character must be a lowercase letter, and all following characters must be a dash, lowercase letter, or digit, except the last character, which cannot be a dash.
@@ -32832,6 +32838,15 @@ module Google
         class ServiceAttachment
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # @!attribute [rw] key
+          #   @return [::String]
+          # @!attribute [rw] value
+          #   @return [::String]
+          class MetadataEntry
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
 
           # The connection preference of service attachment. The value can be set to ACCEPT_AUTOMATIC. An ACCEPT_AUTOMATIC service attachment is one that always accepts the connection from consumer forwarding rules.
           module ConnectionPreference
@@ -32929,7 +32944,7 @@ module Google
 
         # @!attribute [rw] connection_limit
         #   @return [::Integer]
-        #     The value of the limit to set.
+        #     The value of the limit to set. For endpoint_url, the limit should be no more than 1.
         # @!attribute [rw] network_url
         #   @return [::String]
         #     The network URL for the network to set the limit for.
@@ -36057,13 +36072,13 @@ module Google
         #     Check the PerformanceProvisioningType enum for the list of possible values.
         # @!attribute [rw] pool_provisioned_capacity_gb
         #   @return [::Integer]
-        #     Size, in GiB, of the storage pool. For more information about the size limits, see https://cloud.google.com/compute/docs/disks/storage-pools.
+        #     Size of the storage pool in GiB. For more information about the size limits, see https://cloud.google.com/compute/docs/disks/storage-pools.
         # @!attribute [rw] pool_provisioned_iops
         #   @return [::Integer]
         #     Provisioned IOPS of the storage pool. Only relevant if the storage pool type is hyperdisk-balanced.
         # @!attribute [rw] pool_provisioned_throughput
         #   @return [::Integer]
-        #     Provisioned throughput of the storage pool. Only relevant if the storage pool type is hyperdisk-balanced or hyperdisk-throughput.
+        #     Provisioned throughput of the storage pool in MiB/s. Only relevant if the storage pool type is hyperdisk-balanced or hyperdisk-throughput.
         # @!attribute [rw] resource_status
         #   @return [::Google::Cloud::Compute::V1::StoragePoolResourceStatus]
         #     [Output Only] Status information for the storage pool resource.
@@ -36304,7 +36319,7 @@ module Google
         #     [Output Only] Timestamp of the last successful resize in RFC3339 text format.
         # @!attribute [rw] max_total_provisioned_disk_capacity_gb
         #   @return [::Integer]
-        #     [Output Only] Maximum allowed aggregate disk size in gigabytes.
+        #     [Output Only] Maximum allowed aggregate disk size in GiB.
         # @!attribute [rw] pool_used_capacity_bytes
         #   @return [::Integer]
         #     [Output Only] Space used by data stored in disks within the storage pool (in bytes). This will reflect the total number of bytes written to the disks in the pool, in contrast to the capacity of those disks.
@@ -36313,19 +36328,19 @@ module Google
         #     [Output Only] Sum of all the disks' provisioned IOPS, minus some amount that is allowed per disk that is not counted towards pool's IOPS capacity. For more information, see https://cloud.google.com/compute/docs/disks/storage-pools.
         # @!attribute [rw] pool_used_throughput
         #   @return [::Integer]
-        #     [Output Only] Sum of all the disks' provisioned throughput in MB/s.
+        #     [Output Only] Sum of all the disks' provisioned throughput in MiB/s.
         # @!attribute [rw] pool_user_written_bytes
         #   @return [::Integer]
         #     [Output Only] Amount of data written into the pool, before it is compacted.
         # @!attribute [rw] total_provisioned_disk_capacity_gb
         #   @return [::Integer]
-        #     [Output Only] Sum of all the capacity provisioned in disks in this storage pool. A disk's provisioned capacity is the same as its total capacity.
+        #     [Output Only] Sum of all the disks' provisioned capacity (in GiB) in this storage pool. A disk's provisioned capacity is the same as its total capacity.
         # @!attribute [rw] total_provisioned_disk_iops
         #   @return [::Integer]
         #     [Output Only] Sum of all the disks' provisioned IOPS.
         # @!attribute [rw] total_provisioned_disk_throughput
         #   @return [::Integer]
-        #     [Output Only] Sum of all the disks' provisioned throughput in MB/s, minus some amount that is allowed per disk that is not counted towards pool's throughput capacity.
+        #     [Output Only] Sum of all the disks' provisioned throughput in MiB/s, minus some amount that is allowed per disk that is not counted towards pool's throughput capacity.
         class StoragePoolResourceStatus
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -38750,6 +38765,12 @@ module Google
 
             # Unknown maintenance reason. Do not use this value.
             MAINTENANCE_REASON_UNKNOWN = 50_570_235
+
+            # Maintenance due to planned network update.
+            PLANNED_NETWORK_UPDATE = 135_494_677
+
+            # Maintenance due to planned update to the instance.
+            PLANNED_UPDATE = 161_733_572
           end
 
           module MaintenanceStatus
@@ -38770,6 +38791,9 @@ module Google
           module Type
             # A value indicating that the enum field is not set.
             UNDEFINED_TYPE = 0
+
+            # Multiple maintenance types in one window. This is only intended to be used for groups.
+            MULTIPLE = 362_714_640
 
             # Scheduled maintenance (e.g. maintenance after uptime guarantee is complete).
             SCHEDULED = 478_400_653

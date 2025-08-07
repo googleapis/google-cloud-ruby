@@ -285,9 +285,9 @@ module Google
               #   the default parameter values, pass an empty Hash as a request object (see above).
               #
               #   @param operation [::String]
-              #     Name of the Operations resource to return, or its unique numeric identifier.
+              #     Name of the Operations resource to return. Parent is derived from this field.
               #   @param parent_id [::String]
-              #     Parent ID for this request.
+              #     Parent ID for this request. Not used. Parent is derived from resource_id.
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Google::Cloud::Compute::V1::Operation]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
