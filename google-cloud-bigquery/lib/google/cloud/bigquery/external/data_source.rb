@@ -745,6 +745,222 @@ module Google
           end
 
           ##
+          # Time zone used when parsing timestamp values that do not have specific
+          # time zone information (e.g. `2024-04-20 12:34:56`). The expected format
+          # is an IANA timezone string (e.g. `America/Los_Angeles`).
+          #
+          # @return [String, nil] The IANA time zone name. `nil` if not set.
+          #
+          # @example
+          #   require "google/cloud/bigquery"
+          #
+          #   bigquery = Google::Cloud::Bigquery.new
+          #
+          #   external_data = bigquery.external "gs://bucket/path/to/data.csv" do |ext|
+          #     ext.time_zone = "America/Los_Angeles"
+          #   end
+          #
+          #   external_data.time_zone #=> "America/Los_Angeles"
+          #
+          def time_zone
+            @gapi.time_zone
+          end
+
+          ##
+          # Sets the time zone used when parsing timestamp values that do not have
+          # specific time zone information (e.g. `2024-04-20 12:34:56`). The expected
+          # format is an IANA timezone string (e.g. `America/Los_Angeles`).
+          #
+          # @param [String, nil] time_zone The IANA time zone name. `nil` to unset.
+          #
+          # @example
+          #   require "google/cloud/bigquery"
+          #
+          #   bigquery = Google::Cloud::Bigquery.new
+          #
+          #   external_data = bigquery.external "gs://bucket/path/to/data.csv" do |ext|
+          #     ext.time_zone = "America/Los_Angeles"
+          #   end
+          #
+          #   external_data.time_zone #=> "America/Los_Angeles"
+          #
+          def time_zone= time_zone
+            frozen_check!
+            @gapi.time_zone = time_zone
+          end
+
+          ##
+          # Format used to parse TIME values. Supports C-style and SQL-style values.
+          #
+          # @return [String, nil] The time format pattern. `nil` if not set.
+          #
+          # @example
+          #   require "google/cloud/bigquery"
+          #
+          #   bigquery = Google::Cloud::Bigquery.new
+          #
+          #   external_data = bigquery.external "gs://bucket/path/to/data.csv" do |ext|
+          #     ext.time_format = "%H:%M:%S"
+          #   end
+          #
+          #   external_data.time_format #=> "%H:%M:%S"
+          #
+          def time_format
+            @gapi.time_format
+          end
+
+          ##
+          # Sets the format used to parse TIME values. Supports C-style and SQL-style
+          # values.
+          #
+          # @param [String, nil] time_format The time format pattern. `nil` if not set.
+          #
+          # @example
+          #   require "google/cloud/bigquery"
+          #
+          #   bigquery = Google::Cloud::Bigquery.new
+          #
+          #   external_data = bigquery.external "gs://bucket/path/to/data.csv" do |ext|
+          #     ext.time_format = "%H:%M:%S"
+          #   end
+          #
+          #   external_data.time_format #=> "%H:%M:%S"
+          #
+          def time_format= time_format
+            frozen_check!
+            @gapi.time_format = time_format
+          end
+
+          ##
+          # Format used to parse TIMESTAMP values. Supports C-style and SQL-style
+          # values.
+          #
+          # @return [String, nil] The timestamp format pattern. `nil` if not set.
+          #
+          # @example
+          #   require "google/cloud/bigquery"
+          #
+          #   bigquery = Google::Cloud::Bigquery.new
+          #
+          #   external_data = bigquery.external "gs://bucket/path/to/data.csv" do |ext|
+          #     ext.timestamp_format = "%Y-%m-%d %H:%M:%S.%f %z"
+          #   end
+          #
+          #   external_data.timestamp_format #=> "%Y-%m-%d %H:%M:%S.%f %z"
+          #
+          def timestamp_format
+            @gapi.timestamp_format
+          end
+
+          ##
+          # Sets the format used to parse TIMESTAMP values. Supports C-style and SQL-style
+          # values.
+          #
+          # @param [String, nil] timestamp_format The timestamp format pattern. `nil` to unset.
+          #
+          # @example
+          #   require "google/cloud/bigquery"
+          #
+          #   bigquery = Google::Cloud::Bigquery.new
+          #
+          #   external_data = bigquery.external "gs://bucket/path/to/data.csv" do |ext|
+          #     ext.timestamp_format = "%Y-%m-%d %H:%M:%S.%f %z"
+          #   end
+          #
+          #   external_data.timestamp_format #=> "%Y-%m-%d %H:%M:%S.%f %z"
+          #
+          def timestamp_format= timestamp_format
+            frozen_check!
+            @gapi.timestamp_format = timestamp_format
+          end
+
+          ##
+          # Format used to parse DATETIME values. Supports C-style and SQL-style
+          # values.
+          #
+          # @return [String, nil] The datetime format pattern. `nil` if not set.
+          #
+          # @example
+          #   require "google/cloud/bigquery"
+          #
+          #   bigquery = Google::Cloud::Bigquery.new
+          #
+          #   external_data = bigquery.external "gs://bucket/path/to/data.csv" do |ext|
+          #     ext.datetime_format = "%Y-%m-%d %H:%M:%S"
+          #   end
+          #
+          #   external_data.datetime_format #=> "%Y-%m-%d %H:%M:%S"
+          #
+          def datetime_format
+            @gapi.datetime_format
+          end
+
+          ##
+          # Sets the format used to parse DATETIME values. Supports C-style and SQL-style
+          # values.
+          #
+          # @param [String, nil] datetime_format The datetime format pattern. `nil` to unset.
+          #
+          # @example
+          #   require "google/cloud/bigquery"
+          #
+          #   bigquery = Google::Cloud::Bigquery.new
+          #
+          #   external_data = bigquery.external "gs://bucket/path/to/data.csv" do |ext|
+          #     ext.datetime_format = "%Y-%m-%d %H:%M:%S"
+          #   end
+          #
+          #   external_data.datetime_format #=> "%Y-%m-%d %H:%M:%S"
+          #
+          def datetime_format= datetime_format
+            frozen_check!
+            @gapi.datetime_format = datetime_format
+          end
+
+          ##
+          # Format used to parse DATE values. Supports C-style and SQL-style
+          # values.
+          #
+          # @return [String, nil] The date format pattern. `nil` if not set.
+          #
+          # @example
+          #   require "google/cloud/bigquery"
+          #
+          #   bigquery = Google::Cloud::Bigquery.new
+          #
+          #   external_data = bigquery.external "gs://bucket/path/to/data.csv" do |ext|
+          #     ext.date_format = "%Y-%m-%d"
+          #   end
+          #
+          #   external_data.date_format #=> "%Y-%m-%d"
+          #
+          def date_format
+            @gapi.date_format
+          end
+
+          ##
+          # Sets the format used to parse DATE values. Supports C-style and SQL-style
+          # values.
+          #
+          # @param [String, nil] date_format The date format pattern. `nil` to unset.
+          #
+          # @example
+          #   require "google/cloud/bigquery"
+          #
+          #   bigquery = Google::Cloud::Bigquery.new
+          #
+          #   external_data = bigquery.external "gs://bucket/path/to/data.csv" do |ext|
+          #     ext.date_format = "%Y-%m-%d"
+          #   end
+          #
+          #   external_data.date_format #=> "%Y-%m-%d"
+          #
+          def date_format= date_format
+            frozen_check!
+            @gapi.date_format = date_format
+          end
+
+          ##
           # @private Google API Client object.
           def to_gapi
             @gapi
