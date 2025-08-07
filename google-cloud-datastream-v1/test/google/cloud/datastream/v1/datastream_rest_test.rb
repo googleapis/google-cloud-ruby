@@ -1101,6 +1101,7 @@ class ::Google::Cloud::Datastream::V1::Datastream::Rest::ClientTest < Minitest::
     private_connection = {}
     request_id = "hello world"
     force = true
+    validate_only = true
 
     create_private_connection_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
@@ -1116,27 +1117,27 @@ class ::Google::Cloud::Datastream::V1::Datastream::Rest::ClientTest < Minitest::
         end
 
         # Use hash object
-        client.create_private_connection({ parent: parent, private_connection_id: private_connection_id, private_connection: private_connection, request_id: request_id, force: force }) do |_result, response|
+        client.create_private_connection({ parent: parent, private_connection_id: private_connection_id, private_connection: private_connection, request_id: request_id, force: force, validate_only: validate_only }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.create_private_connection parent: parent, private_connection_id: private_connection_id, private_connection: private_connection, request_id: request_id, force: force do |_result, response|
+        client.create_private_connection parent: parent, private_connection_id: private_connection_id, private_connection: private_connection, request_id: request_id, force: force, validate_only: validate_only do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.create_private_connection ::Google::Cloud::Datastream::V1::CreatePrivateConnectionRequest.new(parent: parent, private_connection_id: private_connection_id, private_connection: private_connection, request_id: request_id, force: force) do |_result, response|
+        client.create_private_connection ::Google::Cloud::Datastream::V1::CreatePrivateConnectionRequest.new(parent: parent, private_connection_id: private_connection_id, private_connection: private_connection, request_id: request_id, force: force, validate_only: validate_only) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.create_private_connection({ parent: parent, private_connection_id: private_connection_id, private_connection: private_connection, request_id: request_id, force: force }, call_options) do |_result, response|
+        client.create_private_connection({ parent: parent, private_connection_id: private_connection_id, private_connection: private_connection, request_id: request_id, force: force, validate_only: validate_only }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.create_private_connection(::Google::Cloud::Datastream::V1::CreatePrivateConnectionRequest.new(parent: parent, private_connection_id: private_connection_id, private_connection: private_connection, request_id: request_id, force: force), call_options) do |_result, response|
+        client.create_private_connection(::Google::Cloud::Datastream::V1::CreatePrivateConnectionRequest.new(parent: parent, private_connection_id: private_connection_id, private_connection: private_connection, request_id: request_id, force: force, validate_only: validate_only), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
