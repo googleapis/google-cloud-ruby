@@ -53,6 +53,10 @@ module Google
         #   @return [::Google::Cloud::AIPlatform::V1::GoogleSearchRetrieval]
         #     Optional. GoogleSearchRetrieval tool type.
         #     Specialized retrieval tool that is powered by Google search.
+        # @!attribute [rw] google_maps
+        #   @return [::Google::Cloud::AIPlatform::V1::GoogleMaps]
+        #     Optional. GoogleMaps tool type.
+        #     Tool to support Google Maps in Model.
         # @!attribute [rw] enterprise_web_search
         #   @return [::Google::Cloud::AIPlatform::V1::EnterpriseWebSearch]
         #     Optional. Tool to support searching public web data, powered by Vertex AI
@@ -394,6 +398,12 @@ module Google
         #   @return [::Google::Cloud::AIPlatform::V1::DynamicRetrievalConfig]
         #     Specifies the dynamic retrieval configuration for the given source.
         class GoogleSearchRetrieval
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Tool to retrieve public maps data for grounding, powered by Google.
+        class GoogleMaps
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end

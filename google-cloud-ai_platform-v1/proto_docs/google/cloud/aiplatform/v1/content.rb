@@ -640,12 +640,17 @@ module Google
         #   @return [::Google::Cloud::AIPlatform::V1::GroundingChunk::Web]
         #     Grounding chunk from the web.
         #
-        #     Note: The following fields are mutually exclusive: `web`, `retrieved_context`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `web`, `retrieved_context`, `maps`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] retrieved_context
         #   @return [::Google::Cloud::AIPlatform::V1::GroundingChunk::RetrievedContext]
         #     Grounding chunk from context retrieved by the retrieval tools.
         #
-        #     Note: The following fields are mutually exclusive: `retrieved_context`, `web`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `retrieved_context`, `web`, `maps`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] maps
+        #   @return [::Google::Cloud::AIPlatform::V1::GroundingChunk::Maps]
+        #     Grounding chunk from Google Maps.
+        #
+        #     Note: The following fields are mutually exclusive: `maps`, `web`, `retrieved_context`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         class GroundingChunk
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -677,6 +682,25 @@ module Google
           #   @return [::String]
           #     Text of the attribution.
           class RetrievedContext
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Chunk from Google Maps.
+          # @!attribute [rw] uri
+          #   @return [::String]
+          #     URI reference of the chunk.
+          # @!attribute [rw] title
+          #   @return [::String]
+          #     Title of the chunk.
+          # @!attribute [rw] text
+          #   @return [::String]
+          #     Text of the chunk.
+          # @!attribute [rw] place_id
+          #   @return [::String]
+          #     This Place's resource name, in `places/{place_id}` format.  Can be used
+          #     to look up the Place.
+          class Maps
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
@@ -718,6 +742,11 @@ module Google
         # @!attribute [r] retrieval_metadata
         #   @return [::Google::Cloud::AIPlatform::V1::RetrievalMetadata]
         #     Optional. Output only. Retrieval metadata.
+        # @!attribute [r] google_maps_widget_context_token
+        #   @return [::String]
+        #     Optional. Output only. Resource name of the Google Maps widget context
+        #     token to be used with the PlacesContextElement widget to render contextual
+        #     data. This is populated only for Google Maps grounding.
         class GroundingMetadata
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
