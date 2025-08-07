@@ -3538,6 +3538,9 @@ module Google
         # @!attribute [rw] name
         #   @return [::String]
         #     Name of the resource. Provided by the client when the resource is created. The name must be 1-63 characters long, and comply with RFC1035. Specifically, the name must be 1-63 characters long and match the regular expression `[a-z]([-a-z0-9]*[a-z0-9])?` which means the first character must be a lowercase letter, and all following characters must be a dash, lowercase letter, or digit, except the last character, which cannot be a dash.
+        # @!attribute [rw] params
+        #   @return [::Google::Cloud::Compute::V1::BackendBucketParams]
+        #     Input only. [Input Only] Additional params passed with the request, but not persisted as part of resource payload.
         # @!attribute [rw] self_link
         #   @return [::String]
         #     [Output Only] Server-defined URL for the resource.
@@ -3687,6 +3690,24 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # Additional Backend Bucket parameters.
+        # @!attribute [rw] resource_manager_tags
+        #   @return [::Google::Protobuf::Map{::String => ::String}]
+        #     Tag keys/values directly bound to this resource. Tag keys and values have the same definition as resource manager tags. The field is allowed for INSERT only. The keys/values to set on the resource should be specified in either ID { : } or Namespaced format { : }. For example the following are valid inputs: * \\{"tagKeys/333" : "tagValues/444", "tagKeys/123" : "tagValues/456"} * \\{"123/environment" : "production", "345/abc" : "xyz"} Note: * Invalid combinations of ID & namespaced format is not supported. For instance: \\{"123/environment" : "tagValues/444"} is invalid.
+        class BackendBucketParams
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # @!attribute [rw] key
+          #   @return [::String]
+          # @!attribute [rw] value
+          #   @return [::String]
+          class ResourceManagerTagsEntry
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+        end
+
         # @!attribute [rw] reference
         #   @return [::String]
         #     [Output Only] Server-defined URL for UrlMaps referencing that BackendBucket.
@@ -3817,6 +3838,9 @@ module Google
         # @!attribute [rw] outlier_detection
         #   @return [::Google::Cloud::Compute::V1::OutlierDetection]
         #     Settings controlling the ejection of unhealthy backend endpoints from the load balancing pool of each individual proxy instance that processes the traffic for the given backend service. If not set, this feature is considered disabled. Results of the outlier detection algorithm (ejection of endpoints from the load balancing pool and returning them back to the pool) are executed independently by each proxy instance of the load balancer. In most cases, more than one proxy instance handles the traffic received by a backend service. Thus, it is possible that an unhealthy endpoint is detected and ejected by only some of the proxies, and while this happens, other proxies may continue to send requests to the same unhealthy endpoint until they detect and eject the unhealthy endpoint. Applicable backend endpoints can be: - VM instances in an Instance Group - Endpoints in a Zonal NEG (GCE_VM_IP, GCE_VM_IP_PORT) - Endpoints in a Hybrid Connectivity NEG (NON_GCP_PRIVATE_IP_PORT) - Serverless NEGs, that resolve to Cloud Run, App Engine, or Cloud Functions Services - Private Service Connect NEGs, that resolve to Google-managed regional API endpoints or managed services published using Private Service Connect Applicable backend service types can be: - A global backend service with the loadBalancingScheme set to INTERNAL_SELF_MANAGED or EXTERNAL_MANAGED. - A regional backend service with the serviceProtocol set to HTTP, HTTPS, HTTP2 or H2C, and loadBalancingScheme set to INTERNAL_MANAGED or EXTERNAL_MANAGED. Not supported for Serverless NEGs. Not supported when the backend service is referenced by a URL map that is bound to target gRPC proxy that has validateForProxyless field set to true.
+        # @!attribute [rw] params
+        #   @return [::Google::Cloud::Compute::V1::BackendServiceParams]
+        #     Input only. [Input Only] Additional params passed with the request, but not persisted as part of resource payload.
         # @!attribute [rw] port
         #   @return [::Integer]
         #     Deprecated in favor of portName. The TCP port to connect on the backend. The default value is 80. For internal passthrough Network Load Balancers and external passthrough Network Load Balancers, omit port.
@@ -4467,6 +4491,24 @@ module Google
 
             # All optional fields.
             INCLUDE_ALL_OPTIONAL = 535_606_965
+          end
+        end
+
+        # Additional Backend Service parameters.
+        # @!attribute [rw] resource_manager_tags
+        #   @return [::Google::Protobuf::Map{::String => ::String}]
+        #     Tag keys/values directly bound to this resource. Tag keys and values have the same definition as resource manager tags. The field is allowed for INSERT only. The keys/values to set on the resource should be specified in either ID { : } or Namespaced format { : }. For example the following are valid inputs: * \\{"tagKeys/333" : "tagValues/444", "tagKeys/123" : "tagValues/456"} * \\{"123/environment" : "production", "345/abc" : "xyz"} Note: * Invalid combinations of ID & namespaced format is not supported. For instance: \\{"123/environment" : "tagValues/444"} is invalid.
+        class BackendServiceParams
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # @!attribute [rw] key
+          #   @return [::String]
+          # @!attribute [rw] value
+          #   @return [::String]
+          class ResourceManagerTagsEntry
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
           end
         end
 
@@ -16392,9 +16434,15 @@ module Google
         end
 
         # Represents an Interconnect resource. An Interconnect resource is a dedicated connection between the Google Cloud network and your on-premises network. For more information, read the Dedicated Interconnect Overview.
+        # @!attribute [rw] aai_enabled
+        #   @return [::Boolean]
+        #     Enable or disable the application awareness feature on this Cloud Interconnect.
         # @!attribute [rw] admin_enabled
         #   @return [::Boolean]
         #     Administrative status of the interconnect. When this is set to true, the Interconnect is functional and can carry traffic. When set to false, no packets can be carried over the interconnect and no BGP routes are exchanged over it. By default, the status is set to true.
+        # @!attribute [rw] application_aware_interconnect
+        #   @return [::Google::Cloud::Compute::V1::InterconnectApplicationAwareInterconnect]
+        #     Configuration information for application awareness on this Cloud Interconnect.
         # @!attribute [rw] available_features
         #   @return [::Array<::String>]
         #     [Output only] List of features available for this Interconnect connection, which can take one of the following values: - IF_MACSEC If present then the Interconnect connection is provisioned on MACsec capable hardware ports. If not present then the Interconnect connection is provisioned on non-MACsec capable ports and MACsec isn't supported and enabling MACsec fails.
@@ -16571,6 +16619,73 @@ module Google
             # The interconnect has not completed turnup. No attachments may be provisioned on this interconnect.
             UNPROVISIONED = 517_333_979
           end
+        end
+
+        # Configuration information for application awareness on this Cloud Interconnect.
+        # @!attribute [rw] bandwidth_percentage_policy
+        #   @return [::Google::Cloud::Compute::V1::InterconnectApplicationAwareInterconnectBandwidthPercentagePolicy]
+        # @!attribute [rw] profile_description
+        #   @return [::String]
+        #     Description for the application awareness profile on this Cloud Interconnect.
+        # @!attribute [rw] shape_average_percentages
+        #   @return [::Array<::Google::Cloud::Compute::V1::InterconnectApplicationAwareInterconnectBandwidthPercentage>]
+        #     Optional field to specify a list of shape average percentages to be applied in conjunction with StrictPriorityPolicy or BandwidthPercentagePolicy.
+        # @!attribute [rw] strict_priority_policy
+        #   @return [::Google::Cloud::Compute::V1::InterconnectApplicationAwareInterconnectStrictPriorityPolicy]
+        class InterconnectApplicationAwareInterconnect
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Specify bandwidth percentages [1-100] for various traffic classes in BandwidthPercentagePolicy. The sum of all percentages must equal 100. All traffic classes must have a percentage value specified.
+        # @!attribute [rw] percentage
+        #   @return [::Integer]
+        #     Bandwidth percentage for a specific traffic class.
+        # @!attribute [rw] traffic_class
+        #   @return [::String]
+        #     TrafficClass whose bandwidth percentage is being specified.
+        #     Check the TrafficClass enum for the list of possible values.
+        class InterconnectApplicationAwareInterconnectBandwidthPercentage
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # TrafficClass whose bandwidth percentage is being specified.
+          module TrafficClass
+            # A value indicating that the enum field is not set.
+            UNDEFINED_TRAFFIC_CLASS = 0
+
+            # Traffic Class 1, corresponding to DSCP ranges (0-7) 000xxx.
+            TC1 = 82_850
+
+            # Traffic Class 2, corresponding to DSCP ranges (8-15) 001xxx.
+            TC2 = 82_851
+
+            # Traffic Class 3, corresponding to DSCP ranges (16-23) 010xxx.
+            TC3 = 82_852
+
+            # Traffic Class 4, corresponding to DSCP ranges (24-31) 011xxx.
+            TC4 = 82_853
+
+            # Traffic Class 5, corresponding to DSCP ranges (32-47) 10xxxx.
+            TC5 = 82_854
+
+            # Traffic Class 6, corresponding to DSCP ranges (48-63) 11xxxx.
+            TC6 = 82_855
+          end
+        end
+
+        # @!attribute [rw] bandwidth_percentages
+        #   @return [::Array<::Google::Cloud::Compute::V1::InterconnectApplicationAwareInterconnectBandwidthPercentage>]
+        #     Specify bandwidth percentages for various traffic classes for queuing type Bandwidth Percent.
+        class InterconnectApplicationAwareInterconnectBandwidthPercentagePolicy
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Specify configuration for StrictPriorityPolicy.
+        class InterconnectApplicationAwareInterconnectStrictPriorityPolicy
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # Represents an Interconnect Attachment (VLAN) resource. You can use Interconnect attachments (VLANS) to connect your Virtual Private Cloud networks to your on-premises networks through an Interconnect. For more information, read Creating VLAN Attachments.
@@ -23589,6 +23704,9 @@ module Google
         # @!attribute [rw] auto_create_routes
         #   @return [::Boolean]
         #     This field will be deprecated soon. Use the exchange_subnet_routes field instead. Indicates whether full mesh connectivity is created and managed automatically between peered networks. Currently this field should always be true since Google Compute Engine will automatically create and manage subnetwork routes between two networks when peering state is ACTIVE.
+        # @!attribute [rw] connection_status
+        #   @return [::Google::Cloud::Compute::V1::NetworkPeeringConnectionStatus]
+        #     [Output Only] The effective state of the peering connection as a whole.
         # @!attribute [rw] exchange_subnet_routes
         #   @return [::Boolean]
         #     Indicates whether full mesh connectivity is created and managed automatically between peered networks. Currently this field should always be true since Google Compute Engine will automatically create and manage subnetwork routes between two networks when peering state is ACTIVE.
@@ -23624,6 +23742,10 @@ module Google
         # @!attribute [rw] state_details
         #   @return [::String]
         #     [Output Only] Details about the current state of the peering.
+        # @!attribute [rw] update_strategy
+        #   @return [::String]
+        #     The update strategy determines the semantics for updates and deletes to the peering connection configuration.
+        #     Check the UpdateStrategy enum for the list of possible values.
         class NetworkPeering
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -23650,6 +23772,133 @@ module Google
 
             # There is no matching configuration on the peer, including the case when peer does not exist.
             INACTIVE = 270_421_099
+          end
+
+          # The update strategy determines the semantics for updates and deletes to the peering connection configuration.
+          module UpdateStrategy
+            # A value indicating that the enum field is not set.
+            UNDEFINED_UPDATE_STRATEGY = 0
+
+            # Updates are reflected in the local peering but aren't applied to the peering connection until a complementary change is made to the matching peering. To delete a peering with the consensus update strategy, both the peerings must request the deletion of the peering before the peering can be deleted.
+            CONSENSUS = 203_373_655
+
+            # In this mode, changes to the peering configuration can be unilaterally altered by changing either side of the peering. This is the default value if the field is unspecified.
+            INDEPENDENT = 127_011_674
+
+            # Peerings with update strategy UNSPECIFIED are created with update strategy INDEPENDENT.
+            UNSPECIFIED = 526_786_327
+          end
+        end
+
+        # [Output Only] Describes the state of a peering connection, not just the local peering. This field provides information about the effective settings for the connection as a whole, including pending delete/update requests for CONSENSUS peerings.
+        # @!attribute [rw] consensus_state
+        #   @return [::Google::Cloud::Compute::V1::NetworkPeeringConnectionStatusConsensusState]
+        #     The consensus state contains information about the status of update and delete for a consensus peering connection.
+        # @!attribute [rw] traffic_configuration
+        #   @return [::Google::Cloud::Compute::V1::NetworkPeeringConnectionStatusTrafficConfiguration]
+        #     The active connectivity settings for the peering connection based on the settings of the network peerings.
+        # @!attribute [rw] update_strategy
+        #   @return [::String]
+        #     The update strategy determines the update/delete semantics for this peering connection.
+        #     Check the UpdateStrategy enum for the list of possible values.
+        class NetworkPeeringConnectionStatus
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # The update strategy determines the update/delete semantics for this peering connection.
+          module UpdateStrategy
+            # A value indicating that the enum field is not set.
+            UNDEFINED_UPDATE_STRATEGY = 0
+
+            # Updates are reflected in the local peering but aren't applied to the peering connection until a complementary change is made to the matching peering. To delete a peering with the consensus update strategy, both the peerings must request the deletion of the peering before the peering can be deleted.
+            CONSENSUS = 203_373_655
+
+            # In this mode, changes to the peering configuration can be unilaterally altered by changing either side of the peering. This is the default value if the field is unspecified.
+            INDEPENDENT = 127_011_674
+
+            # Peerings with update strategy UNSPECIFIED are created with update strategy INDEPENDENT.
+            UNSPECIFIED = 526_786_327
+          end
+        end
+
+        # The status of update/delete for a consensus peering connection. Only set when connection_status.update_strategy is CONSENSUS or a network peering is proposing to update the strategy to CONSENSUS.
+        # @!attribute [rw] delete_status
+        #   @return [::String]
+        #     The status of the delete request.
+        #     Check the DeleteStatus enum for the list of possible values.
+        # @!attribute [rw] update_status
+        #   @return [::String]
+        #     The status of the update request.
+        #     Check the UpdateStatus enum for the list of possible values.
+        class NetworkPeeringConnectionStatusConsensusState
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # The status of the delete request.
+          module DeleteStatus
+            # A value indicating that the enum field is not set.
+            UNDEFINED_DELETE_STATUS = 0
+
+            # Both network admins have agreed this consensus peering connection can be deleted.
+            DELETE_ACKNOWLEDGED = 325_293_916
+
+            DELETE_STATUS_UNSPECIFIED = 395_396_446
+
+            # Network admin has requested deletion of this peering connection.
+            LOCAL_DELETE_REQUESTED = 227_335_214
+
+            # The peer network admin has requested deletion of this peering connection.
+            PEER_DELETE_REQUESTED = 197_847_799
+          end
+
+          # The status of the update request.
+          module UpdateStatus
+            # A value indicating that the enum field is not set.
+            UNDEFINED_UPDATE_STATUS = 0
+
+            # No pending configuration update proposals to the peering connection.
+            IN_SYNC = 2_273_653
+
+            # The peer network admin has made an updatePeering call. The change is awaiting acknowledgment from this peering's network admin.
+            PENDING_LOCAL_ACKNOWLEDMENT = 229_926_592
+
+            # The local network admin has made an updatePeering call. The change is awaiting acknowledgment from the peer network admin.
+            PENDING_PEER_ACKNOWLEDGEMENT = 420_185_797
+
+            UPDATE_STATUS_UNSPECIFIED = 120_836_480
+          end
+        end
+
+        # @!attribute [rw] export_custom_routes_to_peer
+        #   @return [::Boolean]
+        #     Whether custom routes are being exported to the peer network.
+        # @!attribute [rw] export_subnet_routes_with_public_ip_to_peer
+        #   @return [::Boolean]
+        #     Whether subnet routes with public IP ranges are being exported to the peer network.
+        # @!attribute [rw] import_custom_routes_from_peer
+        #   @return [::Boolean]
+        #     Whether custom routes are being imported from the peer network.
+        # @!attribute [rw] import_subnet_routes_with_public_ip_from_peer
+        #   @return [::Boolean]
+        #     Whether subnet routes with public IP ranges are being imported from the peer network.
+        # @!attribute [rw] stack_type
+        #   @return [::String]
+        #     Which IP version(s) of traffic and routes are being imported or exported between peer networks.
+        #     Check the StackType enum for the list of possible values.
+        class NetworkPeeringConnectionStatusTrafficConfiguration
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Which IP version(s) of traffic and routes are being imported or exported between peer networks.
+          module StackType
+            # A value indicating that the enum field is not set.
+            UNDEFINED_STACK_TYPE = 0
+
+            # This Peering will allow IPv4 traffic and routes to be exchanged. Additionally if the matching peering is IPV4_IPV6, IPv6 traffic and routes will be exchanged as well.
+            IPV4_IPV6 = 22_197_249
+
+            # This Peering will only allow IPv4 traffic and routes to be exchanged, even if the matching peering is IPV4_IPV6.
+            IPV4_ONLY = 22_373_798
           end
         end
 
@@ -24350,6 +24599,14 @@ module Google
         #   @return [::String]
         #     Name of the peering, which should conform to RFC1035.
         class NetworksRemovePeeringRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Name of the peering, which should conform to RFC1035.
+        class NetworksRequestRemovePeeringRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
@@ -29137,7 +29394,28 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # A request message for Networks.RequestRemovePeering. See the method description for details.
+        # @!attribute [rw] network
+        #   @return [::String]
+        #     Name of the network resource to remove peering from.
+        # @!attribute [rw] networks_request_remove_peering_request_resource
+        #   @return [::Google::Cloud::Compute::V1::NetworksRequestRemovePeeringRequest]
+        #     The body resource for this request
+        # @!attribute [rw] project
+        #   @return [::String]
+        #     Project ID for this request.
+        # @!attribute [rw] request_id
+        #   @return [::String]
+        #     An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
+        class RequestRemovePeeringNetworkRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # Represents a reservation resource. A reservation ensures that capacity is held in a specific zone even if the reserved VMs are not running. For more information, read Reserving zonal resources.
+        # @!attribute [rw] advanced_deployment_control
+        #   @return [::Google::Cloud::Compute::V1::ReservationAdvancedDeploymentControl]
+        #     Advanced control for cluster management, applicable only to DENSE deployment type reservations.
         # @!attribute [rw] aggregate_reservation
         #   @return [::Google::Cloud::Compute::V1::AllocationAggregateReservation]
         #     Reservation for aggregated resources, providing shape flexibility.
@@ -29267,6 +29545,30 @@ module Google
 
             # Reservation update is in progress.
             UPDATING = 494_614_342
+          end
+        end
+
+        # Advance control for cluster management, applicable only to DENSE deployment type reservations.
+        # @!attribute [rw] reservation_operational_mode
+        #   @return [::String]
+        #     Indicates chosen reservation operational mode for the reservation.
+        #     Check the ReservationOperationalMode enum for the list of possible values.
+        class ReservationAdvancedDeploymentControl
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Indicates chosen reservation operational mode for the reservation.
+          module ReservationOperationalMode
+            # A value indicating that the enum field is not set.
+            UNDEFINED_RESERVATION_OPERATIONAL_MODE = 0
+
+            # Google Cloud does not manage the failure of machines, but provides additional capacity, which is not guaranteed to be available.
+            ALL_CAPACITY = 500_029_880
+
+            # Google Cloud manages the failure of machines to provide high availability.
+            HIGHLY_AVAILABLE_CAPACITY = 110_861_600
+
+            RESERVATION_OPERATIONAL_MODE_UNSPECIFIED = 194_296_603
           end
         end
 
@@ -29967,6 +30269,7 @@ module Google
         #     Check the Status enum for the list of possible values.
         # @!attribute [rw] workload_policy
         #   @return [::Google::Cloud::Compute::V1::ResourcePolicyWorkloadPolicy]
+        #     Resource policy for defining instance placement for MIGs.
         class ResourcePolicy
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -30298,17 +30601,20 @@ module Google
         # Represents the workload policy.
         # @!attribute [rw] accelerator_topology
         #   @return [::String]
+        #     Specifies the topology required to create a partition for VMs that have interconnected GPUs.
         # @!attribute [rw] max_topology_distance
         #   @return [::String]
+        #     Specifies the maximum distance between instances.
         #     Check the MaxTopologyDistance enum for the list of possible values.
         # @!attribute [rw] type
         #   @return [::String]
+        #     Specifies the intent of the instance placement in the MIG.
         #     Check the Type enum for the list of possible values.
         class ResourcePolicyWorkloadPolicy
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
 
-
+          # Specifies the maximum distance between instances.
           module MaxTopologyDistance
             # A value indicating that the enum field is not set.
             UNDEFINED_MAX_TOPOLOGY_DISTANCE = 0
@@ -30323,14 +30629,15 @@ module Google
             SUBBLOCK = 316_202_573
           end
 
+          # Specifies the intent of the instance placement in the MIG.
           module Type
             # A value indicating that the enum field is not set.
             UNDEFINED_TYPE = 0
 
-            # VMs will be provisioned in such a way which provides high availability.
+            # MIG spreads out the instances as much as possible for high availability.
             HIGH_AVAILABILITY = 409_487_576
 
-            # VMs will be provisioned in such a way which provides high throughput.
+            # MIG provisions instances as close to each other as possible for high throughput.
             HIGH_THROUGHPUT = 146_499_815
           end
         end

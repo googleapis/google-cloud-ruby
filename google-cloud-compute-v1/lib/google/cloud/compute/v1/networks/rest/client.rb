@@ -101,6 +101,8 @@ module Google
 
                   default_config.rpcs.remove_peering.timeout = 600.0
 
+                  default_config.rpcs.request_remove_peering.timeout = 600.0
+
                   default_config.rpcs.switch_to_custom_mode.timeout = 600.0
 
                   default_config.rpcs.update_peering.timeout = 600.0
@@ -1034,6 +1036,99 @@ module Google
               end
 
               ##
+              # Requests to remove a peering from the specified network. Applicable only for PeeringConnection with update_strategy=CONSENSUS.
+              #
+              # @overload request_remove_peering(request, options = nil)
+              #   Pass arguments to `request_remove_peering` via a request object, either of type
+              #   {::Google::Cloud::Compute::V1::RequestRemovePeeringNetworkRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::Compute::V1::RequestRemovePeeringNetworkRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload request_remove_peering(network: nil, networks_request_remove_peering_request_resource: nil, project: nil, request_id: nil)
+              #   Pass arguments to `request_remove_peering` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param network [::String]
+              #     Name of the network resource to remove peering from.
+              #   @param networks_request_remove_peering_request_resource [::Google::Cloud::Compute::V1::NetworksRequestRemovePeeringRequest, ::Hash]
+              #     The body resource for this request
+              #   @param project [::String]
+              #     Project ID for this request.
+              #   @param request_id [::String]
+              #     An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Gapic::GenericLRO::Operation]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Gapic::GenericLRO::Operation]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/compute/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Compute::V1::Networks::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Compute::V1::RequestRemovePeeringNetworkRequest.new
+              #
+              #   # Call the request_remove_peering method.
+              #   result = client.request_remove_peering request
+              #
+              #   # The returned object is of type Google::Cloud::Compute::V1::Operation.
+              #   p result
+              #
+              def request_remove_peering request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Compute::V1::RequestRemovePeeringNetworkRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.request_remove_peering.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::Compute::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.request_remove_peering.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.request_remove_peering.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @networks_stub.request_remove_peering request, options do |result, response|
+                  result = ::Google::Cloud::Compute::V1::GlobalOperations::Rest::NonstandardLro.create_operation(
+                    operation: result,
+                    client: global_operations,
+                    request_values: {
+                      "project" => request.project
+                    },
+                    options: options
+                  )
+                  yield result, response if block_given?
+                  throw :response, result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
               # Switches the network mode from auto subnet mode to custom subnet mode.
               #
               # @overload switch_to_custom_mode(request, options = nil)
@@ -1409,6 +1504,11 @@ module Google
                   #
                   attr_reader :remove_peering
                   ##
+                  # RPC-specific configuration for `request_remove_peering`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :request_remove_peering
+                  ##
                   # RPC-specific configuration for `switch_to_custom_mode`
                   # @return [::Gapic::Config::Method]
                   #
@@ -1439,6 +1539,8 @@ module Google
                     @patch = ::Gapic::Config::Method.new patch_config
                     remove_peering_config = parent_rpcs.remove_peering if parent_rpcs.respond_to? :remove_peering
                     @remove_peering = ::Gapic::Config::Method.new remove_peering_config
+                    request_remove_peering_config = parent_rpcs.request_remove_peering if parent_rpcs.respond_to? :request_remove_peering
+                    @request_remove_peering = ::Gapic::Config::Method.new request_remove_peering_config
                     switch_to_custom_mode_config = parent_rpcs.switch_to_custom_mode if parent_rpcs.respond_to? :switch_to_custom_mode
                     @switch_to_custom_mode = ::Gapic::Config::Method.new switch_to_custom_mode_config
                     update_peering_config = parent_rpcs.update_peering if parent_rpcs.respond_to? :update_peering
