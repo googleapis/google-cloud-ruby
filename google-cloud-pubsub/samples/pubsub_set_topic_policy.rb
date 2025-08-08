@@ -22,7 +22,6 @@ def set_topic_policy topic_id:, role:, service_account_email:
   # "serviceAccount:account_name@project_name.iam.gserviceaccount.com"
 
   pubsub = Google::Cloud::PubSub.new
-  topic_admin = pubsub.topic_admin
 
   bindings = Google::Iam::V1::Binding.new \
     role: role,
