@@ -19,7 +19,6 @@ def get_subscription_policy subscription_id:
   # subscription_id = "your-subscription-id"
 
   pubsub = Google::Cloud::PubSub.new
-  subscription_admin = pubsub.subscription_admin
 
   policy = pubsub.iam.get_iam_policy \
     resource: pubsub.subscription_path(subscription_id)
