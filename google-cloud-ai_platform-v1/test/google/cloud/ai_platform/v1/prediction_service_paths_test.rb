@@ -79,4 +79,16 @@ class ::Google::Cloud::AIPlatform::V1::PredictionService::ClientPathsTest < Mini
       assert_equal "projects/value0/locations/value1/ragCorpora/value2", path
     end
   end
+
+  def test_template_path
+    grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
+      client = ::Google::Cloud::AIPlatform::V1::PredictionService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      path = client.template_path project: "value0", location: "value1", template: "value2"
+      assert_equal "projects/value0/locations/value1/templates/value2", path
+    end
+  end
 end

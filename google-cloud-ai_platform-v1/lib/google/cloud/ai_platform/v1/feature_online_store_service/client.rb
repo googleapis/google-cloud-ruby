@@ -403,6 +403,86 @@ module Google
             end
 
             ##
+            # Bidirectional streaming RPC to directly write to feature values in a
+            # feature view. Requests may not have a one-to-one mapping to responses and
+            # responses may be returned out-of-order to reduce latency.
+            #
+            # @param request [::Gapic::StreamInput, ::Enumerable<::Google::Cloud::AIPlatform::V1::FeatureViewDirectWriteRequest, ::Hash>]
+            #   An enumerable of {::Google::Cloud::AIPlatform::V1::FeatureViewDirectWriteRequest} instances.
+            # @param options [::Gapic::CallOptions, ::Hash]
+            #   Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Enumerable<::Google::Cloud::AIPlatform::V1::FeatureViewDirectWriteResponse>]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Enumerable<::Google::Cloud::AIPlatform::V1::FeatureViewDirectWriteResponse>]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/ai_platform/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::AIPlatform::V1::FeatureOnlineStoreService::Client.new
+            #
+            #   # Create an input stream.
+            #   input = Gapic::StreamInput.new
+            #
+            #   # Call the feature_view_direct_write method to start streaming.
+            #   output = client.feature_view_direct_write input
+            #
+            #   # Send requests on the stream. For each request object, set fields by
+            #   # passing keyword arguments. Be sure to close the stream when done.
+            #   input << Google::Cloud::AIPlatform::V1::FeatureViewDirectWriteRequest.new
+            #   input << Google::Cloud::AIPlatform::V1::FeatureViewDirectWriteRequest.new
+            #   input.close
+            #
+            #   # The returned object is a streamed enumerable yielding elements of type
+            #   # ::Google::Cloud::AIPlatform::V1::FeatureViewDirectWriteResponse
+            #   output.each do |current_response|
+            #     p current_response
+            #   end
+            #
+            def feature_view_direct_write request, options = nil
+              unless request.is_a? ::Enumerable
+                raise ::ArgumentError, "request must be an Enumerable" unless request.respond_to? :to_enum
+                request = request.to_enum
+              end
+
+              request = request.lazy.map do |req|
+                ::Gapic::Protobuf.coerce req, to: ::Google::Cloud::AIPlatform::V1::FeatureViewDirectWriteRequest
+              end
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.feature_view_direct_write.metadata.to_h
+
+              # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::AIPlatform::V1::VERSION
+              metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              options.apply_defaults timeout:      @config.rpcs.feature_view_direct_write.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.feature_view_direct_write.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @feature_online_store_service_stub.call_rpc :feature_view_direct_write, request, options: options do |response, operation|
+                yield response, operation if block_given?
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
             # Configuration class for the FeatureOnlineStoreService API.
             #
             # This class represents the configuration for FeatureOnlineStoreService,
@@ -578,6 +658,11 @@ module Google
                 # @return [::Gapic::Config::Method]
                 #
                 attr_reader :search_nearest_entities
+                ##
+                # RPC-specific configuration for `feature_view_direct_write`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :feature_view_direct_write
 
                 # @private
                 def initialize parent_rpcs = nil
@@ -585,6 +670,8 @@ module Google
                   @fetch_feature_values = ::Gapic::Config::Method.new fetch_feature_values_config
                   search_nearest_entities_config = parent_rpcs.search_nearest_entities if parent_rpcs.respond_to? :search_nearest_entities
                   @search_nearest_entities = ::Gapic::Config::Method.new search_nearest_entities_config
+                  feature_view_direct_write_config = parent_rpcs.feature_view_direct_write if parent_rpcs.respond_to? :feature_view_direct_write
+                  @feature_view_direct_write = ::Gapic::Config::Method.new feature_view_direct_write_config
 
                   yield self if block_given?
                 end

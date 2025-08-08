@@ -152,6 +152,9 @@ module Google
         #   @return [::Google::Cloud::AIPlatform::V1::IndexDatapoint::CrowdingTag]
         #     Optional. CrowdingTag of the datapoint, the number of neighbors to return
         #     in each crowding can be configured during query.
+        # @!attribute [rw] embedding_metadata
+        #   @return [::Google::Protobuf::Struct]
+        #     Optional. The key-value map of additional metadata for the datapoint.
         class IndexDatapoint
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

@@ -188,6 +188,96 @@ class ::Google::Cloud::AIPlatform::V1::FeatureOnlineStoreService::ClientTest < M
     end
   end
 
+  def test_feature_view_direct_write
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::AIPlatform::V1::FeatureViewDirectWriteResponse.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a bidi streaming method.
+    feature_view = "hello world"
+    data_key_and_feature_values = [{}]
+
+    feature_view_direct_write_client_stub = ClientStub.new [grpc_response].to_enum, grpc_operation do |name, request, options:|
+      assert_equal :feature_view_direct_write, name
+      assert_kind_of Enumerable, request
+      refute_nil options
+      request
+    end
+
+    Gapic::ServiceStub.stub :new, feature_view_direct_write_client_stub do
+      # Create client
+      client = ::Google::Cloud::AIPlatform::V1::FeatureOnlineStoreService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use enumerable object with hash and protobuf object.
+      request_hash = { feature_view: feature_view, data_key_and_feature_values: data_key_and_feature_values }
+      request_proto = ::Google::Cloud::AIPlatform::V1::FeatureViewDirectWriteRequest.new feature_view: feature_view, data_key_and_feature_values: data_key_and_feature_values
+      enum_input = [request_hash, request_proto].to_enum
+      client.feature_view_direct_write enum_input do |response, operation|
+        assert_kind_of Enumerable, response
+        response.to_a.each do |r|
+          assert_kind_of ::Google::Cloud::AIPlatform::V1::FeatureViewDirectWriteResponse, r
+        end
+        assert_equal grpc_operation, operation
+      end
+
+      # Use stream input object (from gapic-common).
+      request_hash = { feature_view: feature_view, data_key_and_feature_values: data_key_and_feature_values }
+      request_proto = ::Google::Cloud::AIPlatform::V1::FeatureViewDirectWriteRequest.new feature_view: feature_view, data_key_and_feature_values: data_key_and_feature_values
+      stream_input = Gapic::StreamInput.new
+      client.feature_view_direct_write stream_input do |response, operation|
+        assert_kind_of Enumerable, response
+        response.to_a.each do |r|
+          assert_kind_of ::Google::Cloud::AIPlatform::V1::FeatureViewDirectWriteResponse, r
+        end
+        assert_equal grpc_operation, operation
+      end
+      stream_input << request_hash
+      stream_input << request_proto
+      stream_input.close
+
+      # Use enumerable object with hash and protobuf object with options.
+      request_hash = { feature_view: feature_view, data_key_and_feature_values: data_key_and_feature_values }
+      request_proto = ::Google::Cloud::AIPlatform::V1::FeatureViewDirectWriteRequest.new feature_view: feature_view, data_key_and_feature_values: data_key_and_feature_values
+      enum_input = [request_hash, request_proto].to_enum
+      client.feature_view_direct_write enum_input, grpc_options do |response, operation|
+        assert_kind_of Enumerable, response
+        response.to_a.each do |r|
+          assert_kind_of ::Google::Cloud::AIPlatform::V1::FeatureViewDirectWriteResponse, r
+        end
+        assert_equal grpc_operation, operation
+      end
+
+      # Use stream input object (from gapic-common) with options.
+      request_hash = { feature_view: feature_view, data_key_and_feature_values: data_key_and_feature_values }
+      request_proto = ::Google::Cloud::AIPlatform::V1::FeatureViewDirectWriteRequest.new feature_view: feature_view, data_key_and_feature_values: data_key_and_feature_values
+      stream_input = Gapic::StreamInput.new
+      client.feature_view_direct_write stream_input, grpc_options do |response, operation|
+        assert_kind_of Enumerable, response
+        response.to_a.each do |r|
+          assert_kind_of ::Google::Cloud::AIPlatform::V1::FeatureViewDirectWriteResponse, r
+        end
+        assert_equal grpc_operation, operation
+      end
+      stream_input << request_hash
+      stream_input << request_proto
+      stream_input.close
+
+      # Verify method calls
+      assert_equal 4, feature_view_direct_write_client_stub.call_rpc_count
+      feature_view_direct_write_client_stub.requests.each do |request|
+        request.to_a.each do |r|
+          assert_kind_of ::Google::Cloud::AIPlatform::V1::FeatureViewDirectWriteRequest, r
+          assert_equal "hello world", r["feature_view"]
+          assert_kind_of ::Google::Cloud::AIPlatform::V1::FeatureViewDirectWriteRequest::DataKeyAndFeatureValues, r["data_key_and_feature_values"].first
+        end
+      end
+    end
+  end
+
   def test_configure
     grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
 

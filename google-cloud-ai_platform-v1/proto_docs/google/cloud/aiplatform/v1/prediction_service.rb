@@ -534,6 +534,10 @@ module Google
         #   @return [::Array<::Google::Cloud::AIPlatform::V1::SafetySetting>]
         #     Optional. Per request settings for blocking unsafe content.
         #     Enforced on GenerateContentResponse.candidates.
+        # @!attribute [rw] model_armor_config
+        #   @return [::Google::Cloud::AIPlatform::V1::ModelArmorConfig]
+        #     Optional. Settings for prompt and response sanitization using the Model
+        #     Armor service. If supplied, safety_settings must not be supplied.
         # @!attribute [rw] generation_config
         #   @return [::Google::Cloud::AIPlatform::V1::GenerationConfig]
         #     Optional. Generation config.
@@ -608,6 +612,9 @@ module Google
 
               # Candidates blocked due to prohibited content.
               PROHIBITED_CONTENT = 4
+
+              # The user prompt was blocked by Model Armor.
+              MODEL_ARMOR = 5
             end
           end
 

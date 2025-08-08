@@ -39,6 +39,10 @@ module Google
             # Search only works for indexable feature view; if a feature view isn't
             # indexable, returns Invalid argument response.
             rpc :SearchNearestEntities, ::Google::Cloud::AIPlatform::V1::SearchNearestEntitiesRequest, ::Google::Cloud::AIPlatform::V1::SearchNearestEntitiesResponse
+            # Bidirectional streaming RPC to directly write to feature values in a
+            # feature view. Requests may not have a one-to-one mapping to responses and
+            # responses may be returned out-of-order to reduce latency.
+            rpc :FeatureViewDirectWrite, stream(::Google::Cloud::AIPlatform::V1::FeatureViewDirectWriteRequest), stream(::Google::Cloud::AIPlatform::V1::FeatureViewDirectWriteResponse)
           end
 
           Stub = Service.rpc_stub_class

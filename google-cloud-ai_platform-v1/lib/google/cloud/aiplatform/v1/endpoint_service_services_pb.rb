@@ -51,9 +51,9 @@ module Google
             # freeing all resources it's using.
             rpc :UndeployModel, ::Google::Cloud::AIPlatform::V1::UndeployModelRequest, ::Google::Longrunning::Operation
             # Updates an existing deployed model. Updatable fields include
-            # `min_replica_count`, `max_replica_count`, `autoscaling_metric_specs`,
-            # `disable_container_logging` (v1 only), and `enable_container_logging`
-            # (v1beta1 only).
+            # `min_replica_count`, `max_replica_count`, `required_replica_count`,
+            # `autoscaling_metric_specs`, `disable_container_logging` (v1 only), and
+            # `enable_container_logging` (v1beta1 only).
             rpc :MutateDeployedModel, ::Google::Cloud::AIPlatform::V1::MutateDeployedModelRequest, ::Google::Longrunning::Operation
           end
 

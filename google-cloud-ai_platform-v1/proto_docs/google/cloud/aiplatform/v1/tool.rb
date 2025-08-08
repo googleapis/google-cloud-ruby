@@ -53,6 +53,10 @@ module Google
         #   @return [::Google::Cloud::AIPlatform::V1::GoogleSearchRetrieval]
         #     Optional. GoogleSearchRetrieval tool type.
         #     Specialized retrieval tool that is powered by Google search.
+        # @!attribute [rw] google_maps
+        #   @return [::Google::Cloud::AIPlatform::V1::GoogleMaps]
+        #     Optional. GoogleMaps tool type.
+        #     Tool to support Google Maps in Model.
         # @!attribute [rw] enterprise_web_search
         #   @return [::Google::Cloud::AIPlatform::V1::EnterpriseWebSearch]
         #     Optional. Tool to support searching public web data, powered by Vertex AI
@@ -75,6 +79,11 @@ module Google
 
           # GoogleSearch tool type.
           # Tool to support Google Search in Model. Powered by Google.
+          # @!attribute [rw] exclude_domains
+          #   @return [::Array<::String>]
+          #     Optional. List of domains to be excluded from the search results.
+          #     The default limit is 2000 domains.
+          #     Example: ["amazon.com", "facebook.com"].
           class GoogleSearch
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -393,8 +402,18 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # Tool to retrieve public maps data for grounding, powered by Google.
+        class GoogleMaps
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # Tool to search public web data, powered by Vertex AI Search and Sec4
         # compliance.
+        # @!attribute [rw] exclude_domains
+        #   @return [::Array<::String>]
+        #     Optional. List of domains to be excluded from the search results.
+        #     The default limit is 2000 domains.
         class EnterpriseWebSearch
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

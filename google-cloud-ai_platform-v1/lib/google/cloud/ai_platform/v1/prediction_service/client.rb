@@ -1262,7 +1262,7 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload generate_content(model: nil, contents: nil, system_instruction: nil, cached_content: nil, tools: nil, tool_config: nil, labels: nil, safety_settings: nil, generation_config: nil)
+            # @overload generate_content(model: nil, contents: nil, system_instruction: nil, cached_content: nil, tools: nil, tool_config: nil, labels: nil, safety_settings: nil, model_armor_config: nil, generation_config: nil)
             #   Pass arguments to `generate_content` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -1313,6 +1313,9 @@ module Google
             #   @param safety_settings [::Array<::Google::Cloud::AIPlatform::V1::SafetySetting, ::Hash>]
             #     Optional. Per request settings for blocking unsafe content.
             #     Enforced on GenerateContentResponse.candidates.
+            #   @param model_armor_config [::Google::Cloud::AIPlatform::V1::ModelArmorConfig, ::Hash]
+            #     Optional. Settings for prompt and response sanitization using the Model
+            #     Armor service. If supplied, safety_settings must not be supplied.
             #   @param generation_config [::Google::Cloud::AIPlatform::V1::GenerationConfig, ::Hash]
             #     Optional. Generation config.
             #
@@ -1393,7 +1396,7 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload stream_generate_content(model: nil, contents: nil, system_instruction: nil, cached_content: nil, tools: nil, tool_config: nil, labels: nil, safety_settings: nil, generation_config: nil)
+            # @overload stream_generate_content(model: nil, contents: nil, system_instruction: nil, cached_content: nil, tools: nil, tool_config: nil, labels: nil, safety_settings: nil, model_armor_config: nil, generation_config: nil)
             #   Pass arguments to `stream_generate_content` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -1444,6 +1447,9 @@ module Google
             #   @param safety_settings [::Array<::Google::Cloud::AIPlatform::V1::SafetySetting, ::Hash>]
             #     Optional. Per request settings for blocking unsafe content.
             #     Enforced on GenerateContentResponse.candidates.
+            #   @param model_armor_config [::Google::Cloud::AIPlatform::V1::ModelArmorConfig, ::Hash]
+            #     Optional. Settings for prompt and response sanitization using the Model
+            #     Armor service. If supplied, safety_settings must not be supplied.
             #   @param generation_config [::Google::Cloud::AIPlatform::V1::GenerationConfig, ::Hash]
             #     Optional. Generation config.
             #
