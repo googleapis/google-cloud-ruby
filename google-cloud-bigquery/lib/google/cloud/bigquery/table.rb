@@ -1630,6 +1630,8 @@ module Google
         #
         # @param [Integer] max Maximum number of results to return.
         # @param [Integer] start Zero-based index of the starting row to read.
+        # @param [Boolean] format_options_use_int64_timestamp Output timestamp
+        #   as usec int64. Default is true.
         #
         # @return [Google::Cloud::Bigquery::Data]
         #
@@ -1664,11 +1666,12 @@ module Google
         #
         # @!group Data
         #
-        def data token: nil, max: nil, start: nil
+        def data token: nil, max: nil, start: nil, format_options_use_int64_timestamp: true
           ensure_service!
           reload! unless resource_full?
-          data_json = service.list_tabledata dataset_id, table_id, token: token, max: max, start: start
-          Data.from_gapi_json data_json, gapi, nil, service
+          data_json = service.list_tabledata dataset_id, table_id, token: token, max: max, start: start,
+format_options_use_int64_timestamp: format_options_use_int64_timestamp
+          Data.from_gapi_json data_json, gapi, nil, service, format_options_use_int64_timestamp
         end
 
         ##

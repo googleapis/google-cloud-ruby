@@ -205,7 +205,7 @@ describe Google::Cloud::Bigquery::Table, :reference, :mock_bigquery do
     mock.expect :get_table, table_gapi, [table.project_id, table.dataset_id, table.table_id], **patch_table_args
     mock.expect :list_table_data,
                 table_data_gapi.to_json,
-                [project, dataset_id, table_id],   max_results: nil, page_token: nil, start_index: nil, options: {skip_deserialization: true} 
+                [project, dataset_id, table_id],   max_results: nil, page_token: nil, start_index: nil, options: {skip_deserialization: true}, format_options_use_int64_timestamp: true
 
     data = table.data
     mock.verify

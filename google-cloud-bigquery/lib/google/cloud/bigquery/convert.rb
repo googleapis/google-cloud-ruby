@@ -60,6 +60,10 @@ module Google
           end
         end
 
+        def self.is_int? value
+          /\A\s*[-+]?\d+\s*\z/.match? value.to_s
+        end
+
         # rubocop:disable all
 
         def self.format_value value, field
@@ -96,7 +100,12 @@ module Google
           elsif field.type == "BYTES"
             StringIO.new Base64.decode64 value[:v]
           elsif field.type == "TIMESTAMP"
-            ::Time.at Float(value[:v])
+            if is_int?(value[:v])
+              # Convert microseconds to seconds
+              ::Time.at Rational(Integer(value[:v]), 1_000_000)
+            else
+              ::Time.at Rational(value[:v])
+            end
           elsif field.type == "TIME"
             Bigquery::Time.new value[:v]
           elsif field.type == "DATETIME"
