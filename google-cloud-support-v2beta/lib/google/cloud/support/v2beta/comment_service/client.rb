@@ -376,6 +376,91 @@ module Google
             end
 
             ##
+            # Retrieve a comment.
+            #
+            # @overload get_comment(request, options = nil)
+            #   Pass arguments to `get_comment` via a request object, either of type
+            #   {::Google::Cloud::Support::V2beta::GetCommentRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::Support::V2beta::GetCommentRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload get_comment(name: nil)
+            #   Pass arguments to `get_comment` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param name [::String]
+            #     Required. The name of the comment to retrieve.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Google::Cloud::Support::V2beta::Comment]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Google::Cloud::Support::V2beta::Comment]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/support/v2beta"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Support::V2beta::CommentService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Support::V2beta::GetCommentRequest.new
+            #
+            #   # Call the get_comment method.
+            #   result = client.get_comment request
+            #
+            #   # The returned object is of type Google::Cloud::Support::V2beta::Comment.
+            #   p result
+            #
+            def get_comment request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Support::V2beta::GetCommentRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.get_comment.metadata.to_h
+
+              # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::Support::V2beta::VERSION
+              metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.get_comment.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.get_comment.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @comment_service_stub.call_rpc :get_comment, request, options: options do |response, operation|
+                yield response, operation if block_given?
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
             # Configuration class for the CommentService API.
             #
             # This class represents the configuration for CommentService,
@@ -551,6 +636,11 @@ module Google
                 # @return [::Gapic::Config::Method]
                 #
                 attr_reader :create_comment
+                ##
+                # RPC-specific configuration for `get_comment`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :get_comment
 
                 # @private
                 def initialize parent_rpcs = nil
@@ -558,6 +648,8 @@ module Google
                   @list_comments = ::Gapic::Config::Method.new list_comments_config
                   create_comment_config = parent_rpcs.create_comment if parent_rpcs.respond_to? :create_comment
                   @create_comment = ::Gapic::Config::Method.new create_comment_config
+                  get_comment_config = parent_rpcs.get_comment if parent_rpcs.respond_to? :get_comment
+                  @get_comment = ::Gapic::Config::Method.new get_comment_config
 
                   yield self if block_given?
                 end

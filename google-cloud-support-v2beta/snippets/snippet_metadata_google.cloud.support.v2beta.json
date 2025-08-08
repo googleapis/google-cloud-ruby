@@ -52,6 +52,46 @@
       ]
     },
     {
+      "region_tag": "cloudsupport_v2beta_generated_CaseAttachmentService_GetAttachment_sync",
+      "title": "Snippet for the get_attachment call in the CaseAttachmentService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Support::V2beta::CaseAttachmentService::Client#get_attachment.",
+      "file": "case_attachment_service/get_attachment.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_attachment",
+        "full_name": "::Google::Cloud::Support::V2beta::CaseAttachmentService::Client#get_attachment",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Support::V2beta::GetAttachmentRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Support::V2beta::Attachment",
+        "client": {
+          "short_name": "CaseAttachmentService::Client",
+          "full_name": "::Google::Cloud::Support::V2beta::CaseAttachmentService::Client"
+        },
+        "method": {
+          "short_name": "GetAttachment",
+          "full_name": "google.cloud.support.v2beta.CaseAttachmentService.GetAttachment",
+          "service": {
+            "short_name": "CaseAttachmentService",
+            "full_name": "google.cloud.support.v2beta.CaseAttachmentService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
       "region_tag": "cloudsupport_v2beta_generated_CaseService_GetCase_sync",
       "title": "Snippet for the get_case call in the CaseService service",
       "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Support::V2beta::CaseService::Client#get_case.",
@@ -435,6 +475,46 @@
         "method": {
           "short_name": "CreateComment",
           "full_name": "google.cloud.support.v2beta.CommentService.CreateComment",
+          "service": {
+            "short_name": "CommentService",
+            "full_name": "google.cloud.support.v2beta.CommentService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "cloudsupport_v2beta_generated_CommentService_GetComment_sync",
+      "title": "Snippet for the get_comment call in the CommentService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Support::V2beta::CommentService::Client#get_comment.",
+      "file": "comment_service/get_comment.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_comment",
+        "full_name": "::Google::Cloud::Support::V2beta::CommentService::Client#get_comment",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Support::V2beta::GetCommentRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Support::V2beta::Comment",
+        "client": {
+          "short_name": "CommentService::Client",
+          "full_name": "::Google::Cloud::Support::V2beta::CommentService::Client"
+        },
+        "method": {
+          "short_name": "GetComment",
+          "full_name": "google.cloud.support.v2beta.CommentService.GetComment",
           "service": {
             "short_name": "CommentService",
             "full_name": "google.cloud.support.v2beta.CommentService"

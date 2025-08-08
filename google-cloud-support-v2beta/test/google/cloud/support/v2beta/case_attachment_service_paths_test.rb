@@ -41,6 +41,21 @@ class ::Google::Cloud::Support::V2beta::CaseAttachmentService::ClientPathsTest <
     end
   end
 
+  def test_attachment_path
+    grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
+      client = ::Google::Cloud::Support::V2beta::CaseAttachmentService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      path = client.attachment_path organization: "value0", case: "value1", attachment_id: "value2"
+      assert_equal "organizations/value0/cases/value1/attachments/value2", path
+
+      path = client.attachment_path project: "value0", case: "value1", attachment_id: "value2"
+      assert_equal "projects/value0/cases/value1/attachments/value2", path
+    end
+  end
+
   def test_case_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
     ::Gapic::ServiceStub.stub :new, DummyStub.new do

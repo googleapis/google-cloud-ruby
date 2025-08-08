@@ -35,6 +35,8 @@ module Google
 
             # List all the attachments associated with a support case.
             rpc :ListAttachments, ::Google::Cloud::Support::V2beta::ListAttachmentsRequest, ::Google::Cloud::Support::V2beta::ListAttachmentsResponse
+            # Retrieve an attachment.
+            rpc :GetAttachment, ::Google::Cloud::Support::V2beta::GetAttachmentRequest, ::Google::Cloud::Support::V2beta::Attachment
           end
 
           Stub = Service.rpc_stub_class

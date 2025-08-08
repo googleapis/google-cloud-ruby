@@ -44,6 +44,15 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # Request for getting an attachment.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The name of the attachment to get.
+        class GetAttachmentRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # The response message for the ListAttachments endpoint.
         # @!attribute [rw] attachments
         #   @return [::Array<::Google::Cloud::Support::V2beta::Attachment>]
