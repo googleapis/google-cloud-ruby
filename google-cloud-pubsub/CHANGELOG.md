@@ -1,5 +1,11 @@
 # Release History
 
+### 3.0.1 (2025-08-07)
+
+#### Documentation
+
+* Update README.md to v3.x ([#30751](https://github.com/googleapis/google-cloud-ruby/issues/30751)) 
+
 ### 3.0.0 (2025-07-29)
 
 ### ⚠ BREAKING CHANGES

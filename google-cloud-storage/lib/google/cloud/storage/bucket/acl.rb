@@ -352,7 +352,7 @@ module Google
           def auth! if_metageneration_match: nil
             update_predefined_acl! "authenticatedRead", if_metageneration_match: if_metageneration_match
           end
-          alias authenticatedRead! auth!
+          alias authenticatedRead! auth! # rubocop:disable Naming/MethodName
           alias auth_read! auth!
           alias authenticated! auth!
           alias authenticated_read! auth!
@@ -390,7 +390,7 @@ module Google
           def project_private! if_metageneration_match: nil
             update_predefined_acl! "projectPrivate", if_metageneration_match: if_metageneration_match
           end
-          alias projectPrivate! project_private!
+          alias projectPrivate! project_private! # rubocop:disable Naming/MethodName
 
           ##
           # Convenience method to apply the `publicRead` predefined ACL
@@ -408,7 +408,7 @@ module Google
           def public! if_metageneration_match: nil
             update_predefined_acl! "publicRead", if_metageneration_match: if_metageneration_match
           end
-          alias publicRead! public!
+          alias publicRead! public! # rubocop:disable Naming/MethodName
           alias public_read! public!
 
           # Convenience method to apply the `publicReadWrite` predefined ACL
@@ -426,7 +426,7 @@ module Google
           def public_write! if_metageneration_match: nil
             update_predefined_acl! "publicReadWrite", if_metageneration_match: if_metageneration_match
           end
-          alias publicReadWrite! public_write!
+          alias publicReadWrite! public_write! # rubocop:disable Naming/MethodName
 
           protected
 
@@ -718,7 +718,7 @@ module Google
           def auth! if_metageneration_match: nil
             update_predefined_default_acl! "authenticatedRead", if_metageneration_match: if_metageneration_match
           end
-          alias authenticatedRead! auth!
+          alias authenticatedRead! auth! # rubocop:disable Naming/MethodName
           alias auth_read! auth!
           alias authenticated! auth!
           alias authenticated_read! auth!
@@ -739,7 +739,7 @@ module Google
           def owner_full! if_metageneration_match: nil
             update_predefined_default_acl! "bucketOwnerFullControl", if_metageneration_match: if_metageneration_match
           end
-          alias bucketOwnerFullControl! owner_full!
+          alias bucketOwnerFullControl! owner_full! # rubocop:disable Naming/MethodName
 
           ##
           # Convenience method to apply the default `bucketOwnerRead`
@@ -757,7 +757,7 @@ module Google
           def owner_read! if_metageneration_match: nil
             update_predefined_default_acl! "bucketOwnerRead", if_metageneration_match: if_metageneration_match
           end
-          alias bucketOwnerRead! owner_read!
+          alias bucketOwnerRead! owner_read! # rubocop:disable Naming/MethodName
 
           ##
           # Convenience method to apply the default `private`
@@ -792,7 +792,7 @@ module Google
           def project_private! if_metageneration_match: nil
             update_predefined_default_acl! "projectPrivate", if_metageneration_match: if_metageneration_match
           end
-          alias projectPrivate! project_private!
+          alias projectPrivate! project_private! # rubocop:disable Naming/MethodName
 
           ##
           # Convenience method to apply the default `publicRead`
@@ -810,7 +810,7 @@ module Google
           def public! if_metageneration_match: nil
             update_predefined_default_acl! "publicRead", if_metageneration_match: if_metageneration_match
           end
-          alias publicRead! public!
+          alias publicRead! public! # rubocop:disable Naming/MethodName
           alias public_read! public!
 
           protected

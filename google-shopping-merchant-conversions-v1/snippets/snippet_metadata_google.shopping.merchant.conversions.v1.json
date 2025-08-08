@@ -1,0 +1,255 @@
+{
+  "client_library": {
+    "name": "google-shopping-merchant-conversions-v1",
+    "version": "0.1.0",
+    "language": "RUBY",
+    "apis": [
+      {
+        "id": "google.shopping.merchant.conversions.v1",
+        "version": "v1"
+      }
+    ]
+  },
+  "snippets": [
+    {
+      "region_tag": "merchantapi_v1_generated_ConversionSourcesService_CreateConversionSource_sync",
+      "title": "Snippet for the create_conversion_source call in the ConversionSourcesService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Shopping::Merchant::Conversions::V1::ConversionSourcesService::Client#create_conversion_source.",
+      "file": "conversion_sources_service/create_conversion_source.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_conversion_source",
+        "full_name": "::Google::Shopping::Merchant::Conversions::V1::ConversionSourcesService::Client#create_conversion_source",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Shopping::Merchant::Conversions::V1::CreateConversionSourceRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Shopping::Merchant::Conversions::V1::ConversionSource",
+        "client": {
+          "short_name": "ConversionSourcesService::Client",
+          "full_name": "::Google::Shopping::Merchant::Conversions::V1::ConversionSourcesService::Client"
+        },
+        "method": {
+          "short_name": "CreateConversionSource",
+          "full_name": "google.shopping.merchant.conversions.v1.ConversionSourcesService.CreateConversionSource",
+          "service": {
+            "short_name": "ConversionSourcesService",
+            "full_name": "google.shopping.merchant.conversions.v1.ConversionSourcesService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "merchantapi_v1_generated_ConversionSourcesService_UpdateConversionSource_sync",
+      "title": "Snippet for the update_conversion_source call in the ConversionSourcesService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Shopping::Merchant::Conversions::V1::ConversionSourcesService::Client#update_conversion_source.",
+      "file": "conversion_sources_service/update_conversion_source.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_conversion_source",
+        "full_name": "::Google::Shopping::Merchant::Conversions::V1::ConversionSourcesService::Client#update_conversion_source",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Shopping::Merchant::Conversions::V1::UpdateConversionSourceRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Shopping::Merchant::Conversions::V1::ConversionSource",
+        "client": {
+          "short_name": "ConversionSourcesService::Client",
+          "full_name": "::Google::Shopping::Merchant::Conversions::V1::ConversionSourcesService::Client"
+        },
+        "method": {
+          "short_name": "UpdateConversionSource",
+          "full_name": "google.shopping.merchant.conversions.v1.ConversionSourcesService.UpdateConversionSource",
+          "service": {
+            "short_name": "ConversionSourcesService",
+            "full_name": "google.shopping.merchant.conversions.v1.ConversionSourcesService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "merchantapi_v1_generated_ConversionSourcesService_DeleteConversionSource_sync",
+      "title": "Snippet for the delete_conversion_source call in the ConversionSourcesService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Shopping::Merchant::Conversions::V1::ConversionSourcesService::Client#delete_conversion_source.",
+      "file": "conversion_sources_service/delete_conversion_source.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_conversion_source",
+        "full_name": "::Google::Shopping::Merchant::Conversions::V1::ConversionSourcesService::Client#delete_conversion_source",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Shopping::Merchant::Conversions::V1::DeleteConversionSourceRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Protobuf::Empty",
+        "client": {
+          "short_name": "ConversionSourcesService::Client",
+          "full_name": "::Google::Shopping::Merchant::Conversions::V1::ConversionSourcesService::Client"
+        },
+        "method": {
+          "short_name": "DeleteConversionSource",
+          "full_name": "google.shopping.merchant.conversions.v1.ConversionSourcesService.DeleteConversionSource",
+          "service": {
+            "short_name": "ConversionSourcesService",
+            "full_name": "google.shopping.merchant.conversions.v1.ConversionSourcesService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "merchantapi_v1_generated_ConversionSourcesService_UndeleteConversionSource_sync",
+      "title": "Snippet for the undelete_conversion_source call in the ConversionSourcesService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Shopping::Merchant::Conversions::V1::ConversionSourcesService::Client#undelete_conversion_source.",
+      "file": "conversion_sources_service/undelete_conversion_source.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "undelete_conversion_source",
+        "full_name": "::Google::Shopping::Merchant::Conversions::V1::ConversionSourcesService::Client#undelete_conversion_source",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Shopping::Merchant::Conversions::V1::UndeleteConversionSourceRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Shopping::Merchant::Conversions::V1::ConversionSource",
+        "client": {
+          "short_name": "ConversionSourcesService::Client",
+          "full_name": "::Google::Shopping::Merchant::Conversions::V1::ConversionSourcesService::Client"
+        },
+        "method": {
+          "short_name": "UndeleteConversionSource",
+          "full_name": "google.shopping.merchant.conversions.v1.ConversionSourcesService.UndeleteConversionSource",
+          "service": {
+            "short_name": "ConversionSourcesService",
+            "full_name": "google.shopping.merchant.conversions.v1.ConversionSourcesService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "merchantapi_v1_generated_ConversionSourcesService_GetConversionSource_sync",
+      "title": "Snippet for the get_conversion_source call in the ConversionSourcesService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Shopping::Merchant::Conversions::V1::ConversionSourcesService::Client#get_conversion_source.",
+      "file": "conversion_sources_service/get_conversion_source.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_conversion_source",
+        "full_name": "::Google::Shopping::Merchant::Conversions::V1::ConversionSourcesService::Client#get_conversion_source",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Shopping::Merchant::Conversions::V1::GetConversionSourceRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Shopping::Merchant::Conversions::V1::ConversionSource",
+        "client": {
+          "short_name": "ConversionSourcesService::Client",
+          "full_name": "::Google::Shopping::Merchant::Conversions::V1::ConversionSourcesService::Client"
+        },
+        "method": {
+          "short_name": "GetConversionSource",
+          "full_name": "google.shopping.merchant.conversions.v1.ConversionSourcesService.GetConversionSource",
+          "service": {
+            "short_name": "ConversionSourcesService",
+            "full_name": "google.shopping.merchant.conversions.v1.ConversionSourcesService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "merchantapi_v1_generated_ConversionSourcesService_ListConversionSources_sync",
+      "title": "Snippet for the list_conversion_sources call in the ConversionSourcesService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Shopping::Merchant::Conversions::V1::ConversionSourcesService::Client#list_conversion_sources.",
+      "file": "conversion_sources_service/list_conversion_sources.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_conversion_sources",
+        "full_name": "::Google::Shopping::Merchant::Conversions::V1::ConversionSourcesService::Client#list_conversion_sources",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Shopping::Merchant::Conversions::V1::ListConversionSourcesRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Shopping::Merchant::Conversions::V1::ListConversionSourcesResponse",
+        "client": {
+          "short_name": "ConversionSourcesService::Client",
+          "full_name": "::Google::Shopping::Merchant::Conversions::V1::ConversionSourcesService::Client"
+        },
+        "method": {
+          "short_name": "ListConversionSources",
+          "full_name": "google.shopping.merchant.conversions.v1.ConversionSourcesService.ListConversionSources",
+          "service": {
+            "short_name": "ConversionSourcesService",
+            "full_name": "google.shopping.merchant.conversions.v1.ConversionSourcesService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    }
+  ]
+}
