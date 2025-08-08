@@ -25,6 +25,49 @@ module Google
           # Path helper methods for the CaseAttachmentService API.
           module Paths
             ##
+            # Create a fully-qualified Attachment resource string.
+            #
+            # @overload attachment_path(organization:, case:, attachment_id:)
+            #   The resource will be in the following format:
+            #
+            #   `organizations/{organization}/cases/{case}/attachments/{attachment_id}`
+            #
+            #   @param organization [String]
+            #   @param case [String]
+            #   @param attachment_id [String]
+            #
+            # @overload attachment_path(project:, case:, attachment_id:)
+            #   The resource will be in the following format:
+            #
+            #   `projects/{project}/cases/{case}/attachments/{attachment_id}`
+            #
+            #   @param project [String]
+            #   @param case [String]
+            #   @param attachment_id [String]
+            #
+            # @return [::String]
+            def attachment_path **args
+              resources = {
+                "attachment_id:case:organization" => (proc do |organization:, case:, attachment_id:|
+                  raise ::ArgumentError, "organization cannot contain /" if organization.to_s.include? "/"
+                  raise ::ArgumentError, "case cannot contain /" if binding.local_variable_get(:case).to_s.include? "/"
+
+                  "organizations/#{organization}/cases/#{binding.local_variable_get :case}/attachments/#{attachment_id}"
+                end),
+                "attachment_id:case:project" => (proc do |project:, case:, attachment_id:|
+                  raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+                  raise ::ArgumentError, "case cannot contain /" if binding.local_variable_get(:case).to_s.include? "/"
+
+                  "projects/#{project}/cases/#{binding.local_variable_get :case}/attachments/#{attachment_id}"
+                end)
+              }
+
+              resource = resources[args.keys.sort.join(":")]
+              raise ::ArgumentError, "no resource found for values #{args.keys}" if resource.nil?
+              resource.call(**args)
+            end
+
+            ##
             # Create a fully-qualified Case resource string.
             #
             # @overload case_path(organization:, case:)
