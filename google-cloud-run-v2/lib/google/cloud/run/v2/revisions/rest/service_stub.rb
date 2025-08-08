@@ -211,6 +211,13 @@ module Google
                                                             ["name", %r{^projects/[^/]+/locations/[^/]+/services/[^/]+/revisions/[^/]+/?$}, false]
                                                           ]
                                                         )
+                                                        .with_bindings(
+                                                          uri_method: :get,
+                                                          uri_template: "/v2/{name}",
+                                                          matches: [
+                                                            ["name", %r{^projects/[^/]+/locations/[^/]+/workerPools/[^/]+/revisions/[^/]+/?$}, false]
+                                                          ]
+                                                        )
                 transcoder.transcode request_pb
               end
 
@@ -232,6 +239,13 @@ module Google
                                                             ["parent", %r{^projects/[^/]+/locations/[^/]+/services/[^/]+/?$}, false]
                                                           ]
                                                         )
+                                                        .with_bindings(
+                                                          uri_method: :get,
+                                                          uri_template: "/v2/{parent}/revisions",
+                                                          matches: [
+                                                            ["parent", %r{^projects/[^/]+/locations/[^/]+/workerPools/[^/]+/?$}, false]
+                                                          ]
+                                                        )
                 transcoder.transcode request_pb
               end
 
@@ -251,6 +265,13 @@ module Google
                                                           uri_template: "/v2/{name}",
                                                           matches: [
                                                             ["name", %r{^projects/[^/]+/locations/[^/]+/services/[^/]+/revisions/[^/]+/?$}, false]
+                                                          ]
+                                                        )
+                                                        .with_bindings(
+                                                          uri_method: :delete,
+                                                          uri_template: "/v2/{name}",
+                                                          matches: [
+                                                            ["name", %r{^projects/[^/]+/locations/[^/]+/workerPools/[^/]+/revisions/[^/]+/?$}, false]
                                                           ]
                                                         )
                 transcoder.transcode request_pb

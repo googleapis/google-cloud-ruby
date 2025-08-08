@@ -163,6 +163,15 @@ module Google
           end
         end
 
+        # Worker pool scaling settings.
+        # @!attribute [rw] manual_instance_count
+        #   @return [::Integer]
+        #     Optional. The total number of instances in manual scaling mode.
+        class WorkerPoolScaling
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # Hardware constraints configuration.
         # @!attribute [rw] accelerator
         #   @return [::String]

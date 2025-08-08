@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright 2022 Google LLC
+# Copyright 2025 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -21,47 +21,9 @@ module Google
   module Cloud
     module Run
       module V2
-        module Services
-          # Path helper methods for the Services API.
+        module WorkerPools
+          # Path helper methods for the WorkerPools API.
           module Paths
-            ##
-            # Create a fully-qualified Build resource string.
-            #
-            # The resource will be in the following format:
-            #
-            # `projects/{project}/locations/{location}/builds/{build}`
-            #
-            # @param project [String]
-            # @param location [String]
-            # @param build [String]
-            #
-            # @return [::String]
-            def build_path project:, location:, build:
-              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
-              raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
-
-              "projects/#{project}/locations/#{location}/builds/#{build}"
-            end
-
-            ##
-            # Create a fully-qualified BuildWorkerPool resource string.
-            #
-            # The resource will be in the following format:
-            #
-            # `projects/{project}/locations/{location}/workerPools/{worker_pool}`
-            #
-            # @param project [String]
-            # @param location [String]
-            # @param worker_pool [String]
-            #
-            # @return [::String]
-            def build_worker_pool_path project:, location:, worker_pool:
-              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
-              raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
-
-              "projects/#{project}/locations/#{location}/workerPools/#{worker_pool}"
-            end
-
             ##
             # Create a fully-qualified Connector resource string.
             #
@@ -229,22 +191,22 @@ module Google
             end
 
             ##
-            # Create a fully-qualified Service resource string.
+            # Create a fully-qualified WorkerPool resource string.
             #
             # The resource will be in the following format:
             #
-            # `projects/{project}/locations/{location}/services/{service}`
+            # `projects/{project}/locations/{location}/workerPools/{worker_pool}`
             #
             # @param project [String]
             # @param location [String]
-            # @param service [String]
+            # @param worker_pool [String]
             #
             # @return [::String]
-            def service_path project:, location:, service:
+            def worker_pool_path project:, location:, worker_pool:
               raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
               raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
 
-              "projects/#{project}/locations/#{location}/services/#{service}"
+              "projects/#{project}/locations/#{location}/workerPools/#{worker_pool}"
             end
 
             extend self
