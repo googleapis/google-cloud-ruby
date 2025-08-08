@@ -218,6 +218,27 @@ describe Google::Cloud::Bigquery::Table, :reference, :update, :mock_bigquery do
     mock.verify
   end
 
+  it "updates its resource_tags" do
+    new_resource_tags = { "bar" => "baz" }
+
+    mock = Minitest::Mock.new
+    bigquery.service.mocked_service = mock
+    table_hash = random_table_hash dataset_id, table_id, table_name, description
+    table_hash["resourceTags"] = new_resource_tags
+    request_table_gapi = Google::Apis::BigqueryV2::Table.new resource_tags: new_resource_tags, etag: etag
+    mock.expect :get_table, return_table(table_hash), [project, dataset_id, table_id], **patch_table_args
+    mock.expect :patch_table, return_table(table_hash),
+      [project, dataset_id, table_id, request_table_gapi], options: {header: {"If-Match" => etag}}
+    table.service.mocked_service = mock
+
+    _(table.resource_tags).must_be_nil
+
+    table.resource_tags = new_resource_tags
+
+    _(table.resource_tags).must_equal new_resource_tags
+    mock.verify
+  end
+
   def return_table table_hash
     Google::Apis::BigqueryV2::Table.from_json(table_hash.to_json)
   end
