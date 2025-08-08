@@ -74,6 +74,7 @@ describe Google::Cloud::Bigquery::Routine, :reference, :mock_bigquery do
   let(:new_body) { "x * 4" }
   let(:new_description) { "This is my updated routine" }
   let(:new_determinism_level) { "NOT_DETERMINISTIC" }
+  let(:new_data_governance_type) { "DATA_MASKING" }
   let(:routine_hash) { random_routine_hash dataset, routine_id }
   let(:routine_gapi) { Google::Apis::BigqueryV2::Routine.from_json routine_hash.to_json }
   let(:routine) { Google::Cloud::Bigquery::Routine.new_reference project, dataset, routine_id, bigquery.service }
@@ -98,6 +99,7 @@ describe Google::Cloud::Bigquery::Routine, :reference, :mock_bigquery do
     _(routine.body).must_be_nil
     _(routine.description).must_be_nil
     _(routine.determinism_level).must_be_nil
+    _(routine.data_governance_type).must_be_nil
   end
 
   it "can test its existence" do
@@ -315,6 +317,22 @@ describe Google::Cloud::Bigquery::Routine, :reference, :mock_bigquery do
     _(routine.determinism_level_not_deterministic?).must_equal true
   end
 
+  it "updates its data_governance_type" do
+    mock = Minitest::Mock.new
+    mock.expect :get_routine, routine_gapi, [routine.project_id, routine.dataset_id, routine.routine_id]
+    updated_routine_gapi = routine_gapi.dup
+    updated_routine_gapi.data_governance_type = new_data_governance_type
+    mock.expect :update_routine, updated_routine_gapi,
+      [project, dataset, routine_id, updated_routine_gapi], options: { header: { "If-Match" => etag } }
+    routine.service.mocked_service = mock
+
+    routine.data_governance_type = new_data_governance_type
+
+    mock.verify
+
+    _(routine.data_governance_type).must_equal new_data_governance_type
+  end
+
   it "updates its attributes in a block" do
     mock = Minitest::Mock.new
     mock.expect :get_routine, routine_gapi, [routine.project_id, routine.dataset_id, routine.routine_id]
@@ -327,6 +345,7 @@ describe Google::Cloud::Bigquery::Routine, :reference, :mock_bigquery do
     updated_routine_gapi.definition_body = new_body
     updated_routine_gapi.description = new_description
     updated_routine_gapi.determinism_level = new_determinism_level
+    updated_routine_gapi.data_governance_type = new_data_governance_type
     mock.expect :update_routine, updated_routine_gapi,
       [project, dataset, routine_id, updated_routine_gapi], options: { header: { "If-Match" => etag } }
     routine.service.mocked_service = mock
@@ -340,6 +359,7 @@ describe Google::Cloud::Bigquery::Routine, :reference, :mock_bigquery do
       r.body = new_body
       r.description = new_description
       r.determinism_level = new_determinism_level
+      r.data_governance_type = new_data_governance_type
     end
 
     mock.verify
@@ -354,6 +374,7 @@ describe Google::Cloud::Bigquery::Routine, :reference, :mock_bigquery do
     _(routine.determinism_level).must_equal new_determinism_level
     _(routine.determinism_level_deterministic?).must_equal false
     _(routine.determinism_level_not_deterministic?).must_equal true
+    _(routine.data_governance_type).must_equal new_data_governance_type
   end
 
   it "skips update when no updates are made in a block" do
