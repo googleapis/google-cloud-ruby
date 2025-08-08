@@ -51,22 +51,32 @@ module Google
         #   @return [::Google::Cloud::Datastream::V1::OracleRdbms]
         #     Oracle RDBMS to enrich with child data objects and metadata.
         #
-        #     Note: The following fields are mutually exclusive: `oracle_rdbms`, `mysql_rdbms`, `postgresql_rdbms`, `sql_server_rdbms`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `oracle_rdbms`, `mysql_rdbms`, `postgresql_rdbms`, `sql_server_rdbms`, `salesforce_org`, `mongodb_cluster`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] mysql_rdbms
         #   @return [::Google::Cloud::Datastream::V1::MysqlRdbms]
         #     MySQL RDBMS to enrich with child data objects and metadata.
         #
-        #     Note: The following fields are mutually exclusive: `mysql_rdbms`, `oracle_rdbms`, `postgresql_rdbms`, `sql_server_rdbms`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `mysql_rdbms`, `oracle_rdbms`, `postgresql_rdbms`, `sql_server_rdbms`, `salesforce_org`, `mongodb_cluster`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] postgresql_rdbms
         #   @return [::Google::Cloud::Datastream::V1::PostgresqlRdbms]
         #     PostgreSQL RDBMS to enrich with child data objects and metadata.
         #
-        #     Note: The following fields are mutually exclusive: `postgresql_rdbms`, `oracle_rdbms`, `mysql_rdbms`, `sql_server_rdbms`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `postgresql_rdbms`, `oracle_rdbms`, `mysql_rdbms`, `sql_server_rdbms`, `salesforce_org`, `mongodb_cluster`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] sql_server_rdbms
         #   @return [::Google::Cloud::Datastream::V1::SqlServerRdbms]
         #     SQLServer RDBMS to enrich with child data objects and metadata.
         #
-        #     Note: The following fields are mutually exclusive: `sql_server_rdbms`, `oracle_rdbms`, `mysql_rdbms`, `postgresql_rdbms`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `sql_server_rdbms`, `oracle_rdbms`, `mysql_rdbms`, `postgresql_rdbms`, `salesforce_org`, `mongodb_cluster`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] salesforce_org
+        #   @return [::Google::Cloud::Datastream::V1::SalesforceOrg]
+        #     Salesforce organization to enrich with child data objects and metadata.
+        #
+        #     Note: The following fields are mutually exclusive: `salesforce_org`, `oracle_rdbms`, `mysql_rdbms`, `postgresql_rdbms`, `sql_server_rdbms`, `mongodb_cluster`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] mongodb_cluster
+        #   @return [::Google::Cloud::Datastream::V1::MongodbCluster]
+        #     MongoDB cluster to enrich with child data objects and metadata.
+        #
+        #     Note: The following fields are mutually exclusive: `mongodb_cluster`, `oracle_rdbms`, `mysql_rdbms`, `postgresql_rdbms`, `sql_server_rdbms`, `salesforce_org`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         class DiscoverConnectionProfileRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -77,22 +87,32 @@ module Google
         #   @return [::Google::Cloud::Datastream::V1::OracleRdbms]
         #     Enriched Oracle RDBMS object.
         #
-        #     Note: The following fields are mutually exclusive: `oracle_rdbms`, `mysql_rdbms`, `postgresql_rdbms`, `sql_server_rdbms`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `oracle_rdbms`, `mysql_rdbms`, `postgresql_rdbms`, `sql_server_rdbms`, `salesforce_org`, `mongodb_cluster`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] mysql_rdbms
         #   @return [::Google::Cloud::Datastream::V1::MysqlRdbms]
         #     Enriched MySQL RDBMS object.
         #
-        #     Note: The following fields are mutually exclusive: `mysql_rdbms`, `oracle_rdbms`, `postgresql_rdbms`, `sql_server_rdbms`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `mysql_rdbms`, `oracle_rdbms`, `postgresql_rdbms`, `sql_server_rdbms`, `salesforce_org`, `mongodb_cluster`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] postgresql_rdbms
         #   @return [::Google::Cloud::Datastream::V1::PostgresqlRdbms]
         #     Enriched PostgreSQL RDBMS object.
         #
-        #     Note: The following fields are mutually exclusive: `postgresql_rdbms`, `oracle_rdbms`, `mysql_rdbms`, `sql_server_rdbms`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `postgresql_rdbms`, `oracle_rdbms`, `mysql_rdbms`, `sql_server_rdbms`, `salesforce_org`, `mongodb_cluster`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] sql_server_rdbms
         #   @return [::Google::Cloud::Datastream::V1::SqlServerRdbms]
         #     Enriched SQLServer RDBMS object.
         #
-        #     Note: The following fields are mutually exclusive: `sql_server_rdbms`, `oracle_rdbms`, `mysql_rdbms`, `postgresql_rdbms`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `sql_server_rdbms`, `oracle_rdbms`, `mysql_rdbms`, `postgresql_rdbms`, `salesforce_org`, `mongodb_cluster`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] salesforce_org
+        #   @return [::Google::Cloud::Datastream::V1::SalesforceOrg]
+        #     Enriched Salesforce organization.
+        #
+        #     Note: The following fields are mutually exclusive: `salesforce_org`, `oracle_rdbms`, `mysql_rdbms`, `postgresql_rdbms`, `sql_server_rdbms`, `mongodb_cluster`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] mongodb_cluster
+        #   @return [::Google::Cloud::Datastream::V1::MongodbCluster]
+        #     Enriched MongoDB cluster.
+        #
+        #     Note: The following fields are mutually exclusive: `mongodb_cluster`, `oracle_rdbms`, `mysql_rdbms`, `postgresql_rdbms`, `sql_server_rdbms`, `salesforce_org`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         class DiscoverConnectionProfileResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -604,6 +624,11 @@ module Google
         # @!attribute [rw] force
         #   @return [::Boolean]
         #     Optional. If set to true, will skip validations.
+        # @!attribute [rw] validate_only
+        #   @return [::Boolean]
+        #     Optional. When supplied with PSC Interface config, will get/create the
+        #     tenant project required for the customer to allow list and won't actually
+        #     create the private connection.
         class CreatePrivateConnectionRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
