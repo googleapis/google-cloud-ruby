@@ -581,7 +581,7 @@ module Google
               #   @param options [::Gapic::CallOptions, ::Hash]
               #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
               #
-              # @overload update_instance(name: nil, display_name: nil, type: nil, labels: nil)
+              # @overload update_instance(name: nil, display_name: nil, type: nil, labels: nil, tags: nil)
               #   Pass arguments to `update_instance` via keyword arguments. Note that at
               #   least one keyword argument is required. To specify no parameters, or to keep all
               #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -607,6 +607,16 @@ module Google
               #       the regular expression: `[\p{Ll}\p{Lo}\p{N}_-]{0,63}`.
               #     * No more than 64 labels can be associated with a given resource.
               #     * Keys and values must both be under 128 bytes.
+              #   @param tags [::Hash{::String => ::String}]
+              #     Optional. Input only. Immutable. Tag keys/values directly bound to this
+              #     resource. For example:
+              #     - "123/environment": "production",
+              #     - "123/costCenter": "marketing"
+              #
+              #     Tags and Labels (above) are both used to bind metadata to resources, with
+              #     different use-cases. See
+              #     https://cloud.google.com/resource-manager/docs/tags/tags-overview for an
+              #     in-depth overview on the difference between tags and labels.
               #
               # @yield [response, operation] Access the result along with the RPC operation
               # @yieldparam response [::Google::Cloud::Bigtable::Admin::V2::Instance]
