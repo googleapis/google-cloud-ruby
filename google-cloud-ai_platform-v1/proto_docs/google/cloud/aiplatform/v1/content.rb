@@ -681,6 +681,10 @@ module Google
           # @!attribute [rw] text
           #   @return [::String]
           #     Text of the attribution.
+          # @!attribute [r] document_name
+          #   @return [::String]
+          #     Output only. The full document name for the referenced Vertex AI Search
+          #     document.
           class RetrievedContext
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
