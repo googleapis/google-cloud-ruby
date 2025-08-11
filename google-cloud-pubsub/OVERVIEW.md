@@ -201,7 +201,7 @@ end
 require "google/cloud/pubsub"
 
 pubsub = Google::Cloud::PubSub.new project_id: "my-project-id"
-publisher = pubsub.subscriber "my-topic-subscription"
+subscriber = pubsub.subscriber "my-topic-subscription"
 
 ```
 
