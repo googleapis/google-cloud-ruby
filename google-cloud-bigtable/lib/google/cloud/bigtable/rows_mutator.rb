@@ -39,6 +39,10 @@ module Google
         RETRY_LIMIT = 3
 
         # @private
+        # The prefix for routing cookies. Used to dynamically find cookie
+        # headers in metadata.
+        COOKIE_KEY_PREFIX = "x-goog-cbt-cookie"
+
         #
         # Creates a mutate rows instance.
         #
@@ -57,18 +61,20 @@ module Google
         #
         def apply_mutations
           @req_entries = @entries.map(&:to_grpc)
-          statuses = mutate_rows @req_entries
+          statuses, delay, cookies = mutate_rows @req_entries
 
-          # Collects retryable mutations indices.
           indices = statuses.each_with_object [] do |e, r|
             r << e.index if @entries[e.index].retryable? && RETRYABLE_CODES[e.status.code]
           end
 
           return statuses if indices.empty?
 
-          (RETRY_LIMIT - 1).times do
+          RETRY_LIMIT.times do
             break if indices.empty?
-            indices = retry_entries statuses, indices
+
+            sleep delay if delay
+
+            indices, delay, cookies = retry_entries statuses, indices, cookies
           end
 
           statuses
@@ -80,13 +86,35 @@ module Google
         # Mutates rows.
         #
         # @param entries [Array<Google::Cloud::Bigtable::MutationEntry>]
-        # @return [Array<Google::Cloud::Bigtable::V2::MutateRowsResponse::Entry>]
+        # @param cookies [Hash]
+        # @return [Array<Google::Cloud::Bigtable::V2::MutateRowsResponse::Entry>, Float|nil, Hash]
         #
-        def mutate_rows entries
-          response = @table.service.mutate_rows @table.path, entries, app_profile_id: @table.app_profile_id
-          response.each_with_object [] do |res, statuses|
-            statuses.concat res.entries
+        def mutate_rows entries, cookies = {}
+          call_options = Gapic::CallOptions.new(metadata: cookies) unless cookies.empty?
+
+          response = @table.service.mutate_rows(
+            @table.path,
+            entries,
+            app_profile_id: @table.app_profile_id,
+            call_options: call_options
+          )
+          [response.flat_map(&:entries), nil, cookies]
+        rescue GRPC::BadStatus => e
+          info = e.status_details.find { |d| d.is_a? Google::Rpc::RetryInfo }
+          delay = if info&.retry_delay
+                    info.retry_delay.seconds + (info.retry_delay.nanos / 1_000_000_000.0)
+                  end
+
+          cookies.merge!(e.metadata.select { |k, _| k.start_with? COOKIE_KEY_PREFIX })
+
+          status = Google::Rpc::Status.new code: e.code, message: e.message
+          statuses = entries.map.with_index do |_, i|
+            Google::Cloud::Bigtable::V2::MutateRowsResponse::Entry.new(
+              index: i,
+              status: status
+            )
           end
+          [statuses, delay, cookies]
         end
 
         ##
@@ -94,18 +122,19 @@ module Google
         #
         # @param statuses [Array<Google::Cloud::Bigtable::V2::MutateRowsResponse::Entry>]
         # @param indices [Array<Integer>]
-        #   Retry entries position mapping list
-        # @return [Array<Integer>]
-        #   New list of failed entries positions
+        # @param cookies [Hash]
+        # @return [Array<Integer>, Float|nil, Hash]
         #
-        def retry_entries statuses, indices
+        def retry_entries statuses, indices, cookies
           entries = indices.map { |i| @req_entries[i] }
-          retry_statuses = mutate_rows entries
+          retry_statuses, delay, cookies = mutate_rows entries, cookies
 
-          retry_statuses.each_with_object [] do |e, next_indices|
-            next_indices << indices[e.index] if RETRYABLE_CODES[e.status.code]
-            statuses[indices[e.index]].status = e.status
+          next_indices = retry_statuses.each_with_object [] do |e, list|
+            next_index = indices[e.index]
+            statuses[next_index].status = e.status
+            list << next_index if RETRYABLE_CODES[e.status.code]
           end
+          [next_indices, delay, cookies]
         end
       end
     end

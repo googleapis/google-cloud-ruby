@@ -689,14 +689,13 @@ module Google
           )
         end
 
-        def mutate_rows table_name, entries, app_profile_id: nil
-          client(table_name, app_profile_id).mutate_rows(
-            **{
-              table_name:     table_name,
-              app_profile_id: app_profile_id,
-              entries:        entries
-            }.compact
-          )
+        def mutate_rows table_name, entries, app_profile_id: nil, call_options: nil
+          request = {
+            table_name:     table_name,
+            app_profile_id: app_profile_id,
+            entries:        entries
+          }.compact
+          client(table_name, app_profile_id).mutate_rows request, call_options
         end
 
         def check_and_mutate_row table_name,
