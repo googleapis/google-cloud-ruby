@@ -39,6 +39,8 @@ module Google
             #
             # The comment must have the following fields set: `body`.
             rpc :CreateComment, ::Google::Cloud::Support::V2beta::CreateCommentRequest, ::Google::Cloud::Support::V2beta::Comment
+            # Retrieve a comment.
+            rpc :GetComment, ::Google::Cloud::Support::V2beta::GetCommentRequest, ::Google::Cloud::Support::V2beta::Comment
           end
 
           Stub = Service.rpc_stub_class
