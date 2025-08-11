@@ -44,6 +44,7 @@ require_relative "../pubsub_resume_publish_with_ordering_keys.rb"
 require_relative "../pubsub_set_topic_policy.rb"
 require_relative "../pubsub_test_topic_permissions.rb"
 require_relative "../pubsub_update_topic_type.rb"
+require_relative "../pubsub_create_topic_with_schema_revisions.rb"
 
 describe "emulator" do
   let(:pubsub) { Google::Cloud::Pubsub.new }
@@ -552,6 +553,37 @@ describe "topics" do
       end
       assert_equal 1, messages.length
       assert_equal "This is a test message.", messages[0].data
+    end
+  end
+
+  it "supports pubsub_create_topic_with_schema_revisions" do
+    schema_id = random_schema_id
+    schemas = pubsub.schemas
+    schema = schemas.create_schema(
+      parent: pubsub.project_path,
+      schema: {
+        name: pubsub.schema_path(schema_id),
+        type: :PROTOCOL_BUFFER,
+        definition: File.read(File.expand_path("data/us-states.proto", __dir__))
+      },
+      schema_id: schema_id
+    )
+    last_rev = schemas.commit_schema(
+      name: schema.name,
+      schema: {
+        name: schema.name,
+        type: schema.type,
+        definition: File.read(File.expand_path("data/us-states-revision.proto", __dir__))
+      }
+    )
+
+    assert_output "Topic projects/#{pubsub.project}/topics/#{topic_id} created " \
+                  "with revision interval [#{schema.revision_id}, #{last_rev.revision_id}].\n" do
+      create_topic_with_schema_revisions topic_id: topic_id,
+                                         schema_id: schema_id,
+                                         message_encoding: :JSON,
+                                         first_revision_id: schema.revision_id,
+                                         last_revision_id: last_rev.revision_id
     end
   end
 
