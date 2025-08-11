@@ -25,11 +25,15 @@ describe Google::Cloud::Bigquery::Table, :mock_bigquery do
   let(:location_code) { "US" }
   let(:labels) { { "foo" => "bar" } }
   let(:kms_key) { "path/to/encryption_key_name" }
+  let(:resource_tags) { { "bar" => "baz" } }
   let(:gapi_encrypt_config) { Google::Apis::BigqueryV2::EncryptionConfiguration.new kms_key_name: kms_key }
   let(:gapi_encrypt_config) { Google::Apis::BigqueryV2::EncryptionConfiguration.new kms_key_name: kms_key }
   let(:api_url) { "http://googleapi/bigquery/v2/projects/#{project}/datasets/#{dataset}/tables/#{table_id}" }
   let(:table_hash) { random_table_hash dataset, table_id, table_name, description }
-  let(:table_gapi) { Google::Apis::BigqueryV2::Table.from_json(table_hash.to_json).tap { |t| t.encryption_configuration = gapi_encrypt_config } }
+  let(:table_gapi) { Google::Apis::BigqueryV2::Table.from_json(table_hash.to_json).tap do |t|
+    t.encryption_configuration = gapi_encrypt_config
+    t.resource_tags = resource_tags
+  end }
   let(:table) { Google::Cloud::Bigquery::Table.from_gapi table_gapi, bigquery.service }
   let(:clone_table) { Google::Cloud::Bigquery::Table.from_gapi random_clone_gapi(dataset), bigquery.service }
   let(:snapshot_table) { Google::Cloud::Bigquery::Table.from_gapi random_snapshot_gapi(dataset), bigquery.service }
@@ -65,6 +69,8 @@ describe Google::Cloud::Bigquery::Table, :mock_bigquery do
     _(table.encryption).must_be_kind_of Google::Cloud::Bigquery::EncryptionConfiguration
     _(table.encryption.kms_key).must_equal kms_key
     _(table.encryption).must_be :frozen?
+    _(table.resource_tags).must_equal resource_tags
+    _(table.resource_tags).must_be :frozen?
   end
 
   it "knows its fully-qualified ID" do
