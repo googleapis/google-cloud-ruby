@@ -592,7 +592,8 @@ class MockBigquery < Minitest::Spec
                           description: "This is my routine", 
                           creation_time: time_millis,
                           last_modified_time: time_millis,
-                          determinism_level: nil
+                          determinism_level: nil,
+                          data_governance_type: nil
     id ||= "my_routine"
 
     h = {
@@ -650,6 +651,7 @@ class MockBigquery < Minitest::Spec
     h[:etag] = etag if etag
     h[:creationTime] = creation_time if creation_time
     h[:lastModifiedTime] = last_modified_time if last_modified_time
+    h[:dataGovernanceType] = data_governance_type if data_governance_type
     h
   end
 
