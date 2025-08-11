@@ -1,5 +1,15 @@
 # Changelog
 
+### 0.5.0 (2025-08-11)
+
+### ⚠ BREAKING CHANGES
+
+* Renamed MerchantReview#attributes field to MerchantReview#merchant_review_attributes
+
+#### Bug Fixes
+
+* Renamed MerchantReview#attributes field to MerchantReview#merchant_review_attributes 
+
 ### 0.4.0 (2025-07-15)
 
 #### Features
