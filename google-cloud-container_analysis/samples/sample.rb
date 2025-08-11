@@ -219,22 +219,28 @@ def occurrence_pubsub subscription_id:, timeout_seconds:, project_id:
 
   require "google/cloud/pubsub"
 
-  pubsub = Google::Cloud::Pubsub.new project: project_id
-  topic = pubsub.topic "container-analysis-occurrences-v1"
-  subscription = topic.subscribe subscription_id
+  pubsub = Google::Cloud::PubSub.new project_id: project_id
+  subscription_admin = pubsub.subscription_admin
+  subscription = subscription_admin.create_subscription \
+    name: pubsub.subscription_path(subscription_id),
+    topic: pubsub.topic_path("container-analysis-occurrences-v1")
 
+  subscriber = pubsub.subscriber subscription.name
   count = 0
-  subscriber = subscription.listen do |received_message|
+  listener = subscriber.listen do |received_message|
     count += 1
     # Process incoming occurrence here
     puts "Message #{count}: #{received_message.data}"
     received_message.acknowledge!
   end
-  subscriber.start
-  # Wait for incomming occurrences
+
+  listener.start
+  # Wait for incoming occurrences
   sleep timeout_seconds
-  subscriber.stop.wait!
-  subscription.delete
+  listener.stop.wait!
+
+  subscription_admin.delete_subscription subscription: subscription.name
+
   # Print and return the total number of Pub/Sub messages received
   puts "Total Messages Received: #{count}"
   count
