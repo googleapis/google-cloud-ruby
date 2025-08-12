@@ -18,6 +18,7 @@ require "google/cloud/bigquery/convert"
 require "google/cloud/bigquery/service"
 require "google/cloud/bigquery/routine/list"
 require "google/cloud/bigquery/argument"
+require "google/cloud/bigquery/remote_function_options"
 
 module Google
   module Cloud
@@ -744,6 +745,55 @@ module Google
         end
 
         ##
+        # Remote function specific options. Optional.
+        #
+        # @return [RemoteFunctionOptions, nil] The remote function options, or `nil` if not set or the object is a
+        #   reference (see {#reference?}).
+        #
+        # @example
+        #   require "google/cloud/bigquery"
+        #
+        #   bigquery = Google::Cloud::Bigquery.new
+        #   dataset = bigquery.dataset "my_dataset"
+        #   routine = dataset.routine "my_routine"
+        #
+        #   puts routine.remote_function_options.endpoint
+        #
+        # @!group Attributes
+        #
+        def remote_function_options
+          return nil if reference?
+          ensure_full_data!
+          RemoteFunctionOptions.from_gapi @gapi.remote_function_options
+        end
+
+        ##
+        # Updates the remote function specific options. Optional.
+        #
+        # @param [RemoteFunctionOptions] new_remote_function_options The new remote function options.
+        #
+        # @example
+        #   require "google/cloud/bigquery"
+        #
+        #   bigquery = Google::Cloud::Bigquery.new
+        #   dataset = bigquery.dataset "my_dataset"
+        #   routine = dataset.routine "my_routine"
+        #
+        #   rfo = Google::Cloud::Bigquery::RemoteFunctionOptions.new.tap do |rfo|
+        #     rfo.endpoint = "https://us-east1-my_gcf_project.cloudfunctions.net/remote_add"
+        #     rfo.connection = "projects/my-project/locations/us-east1/connections/my-connection"
+        #   end
+        #   routine.remote_function_options = rfo
+        #
+        # @!group Attributes
+        #
+        def remote_function_options= new_remote_function_options
+          ensure_full_data!
+          @gapi.remote_function_options = new_remote_function_options.to_gapi
+          update_gapi!
+        end
+
+        ##
         # Updates the routine with changes made in the given block in a single update request. The following attributes
         # may be set: {Updater#routine_type=}, {Updater#language=}, {Updater#arguments=}, {Updater#return_type=},
         # {Updater#imported_libraries=}, {Updater#body=}, and {Updater#description=}.
@@ -1273,6 +1323,32 @@ module Google
           #
           def data_governance_type= new_data_governance_type
             @gapi.data_governance_type = new_data_governance_type
+          end
+
+          ##
+          # Updates the remote function specific options. Optional.
+          #
+          # @param [Google::Cloud::Bigquery::RemoteFunctionOptions] new_remote_function_options The new
+          #   remote function options.
+          #
+          # @example
+          #   require "google/cloud/bigquery"
+          #
+          #   bigquery = Google::Cloud::Bigquery.new
+          #   dataset = bigquery.dataset "my_dataset"
+          #   routine = dataset.routine "my_routine"
+          #
+          #   routine.update do |r|
+          #     rfo = Google::Cloud::Bigquery::RemoteFunctionOptions.new
+          #     rfo.endpoint = "https://us-east1-my_gcf_project.cloudfunctions.net/remote_add"
+          #     rfo.connection = "projects/my-project/locations/us-east1/connections/my-connection"
+          #     r.remote_function_options = rfo
+          #   end
+          #
+          # @!group Attributes
+          #
+          def remote_function_options= new_remote_function_options
+            @gapi.remote_function_options = new_remote_function_options.to_gapi
           end
 
           def update
