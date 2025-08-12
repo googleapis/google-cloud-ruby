@@ -1,5 +1,11 @@
 # Release History
 
+### 1.5.3 (2025-08-12)
+
+#### Bug Fixes
+
+* Update google-cloud-pubsub dependency to v3.x ([#30814](https://github.com/googleapis/google-cloud-ruby/issues/30814)) 
+
 ### 1.5.2 (2025-05-27)
 
 #### Documentation
