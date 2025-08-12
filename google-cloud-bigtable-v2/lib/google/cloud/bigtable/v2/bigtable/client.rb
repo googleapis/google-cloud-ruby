@@ -330,6 +330,12 @@ module Google
               if request.app_profile_id && !request.app_profile_id.empty?
                 header_params["app_profile_id"] = request.app_profile_id
               end
+              if request.materialized_view_name
+                regex_match = %r{^(?<name>projects/[^/]+/instances/[^/]+)(?:/.*)?$}.match request.materialized_view_name
+                if regex_match
+                  header_params["name"] = regex_match["name".to_s]
+                end
+              end
 
               request_params_header = URI.encode_www_form header_params
               metadata[:"x-goog-request-params"] ||= request_params_header
@@ -447,6 +453,12 @@ module Google
               end
               if request.app_profile_id && !request.app_profile_id.empty?
                 header_params["app_profile_id"] = request.app_profile_id
+              end
+              if request.materialized_view_name
+                regex_match = %r{^(?<name>projects/[^/]+/instances/[^/]+)(?:/.*)?$}.match request.materialized_view_name
+                if regex_match
+                  header_params["name"] = regex_match["name".to_s]
+                end
               end
 
               request_params_header = URI.encode_www_form header_params
