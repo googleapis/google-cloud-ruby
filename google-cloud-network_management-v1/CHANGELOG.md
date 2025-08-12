@@ -1,5 +1,11 @@
 # Changelog
 
+### 2.3.0 (2025-08-12)
+
+#### Features
+
+* add `service_uri` field to CloudRunRevisionEndpoint ([#30810](https://github.com/googleapis/google-cloud-ruby/issues/30810)) 
+
 ### 2.2.0 (2025-05-12)
 
 #### Features
