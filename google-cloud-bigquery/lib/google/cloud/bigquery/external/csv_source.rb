@@ -368,6 +368,177 @@ module Google
           end
 
           ##
+          # Specifies a string that represents a null value in a CSV file. For
+          # example, if you specify `\N`, BigQuery interprets `\N` as a null value when
+          # querying a CSV file. The default value is the empty string. If you set this
+          # property to a custom value, BigQuery throws an error if an empty string is
+          # present for all data types except for STRING and BYTE. For STRING and BYTE
+          # columns, BigQuery interprets the empty string as an empty value.
+          #
+          # @return [String, nil] The null marker string. `nil` if not set.
+          #
+          # @example
+          #   require "google/cloud/bigquery"
+          #
+          #   bigquery = Google::Cloud::Bigquery.new
+          #
+          #   csv_url = "gs://bucket/path/to/data.csv"
+          #   csv_table = bigquery.external csv_url do |csv|
+          #     csv.null_marker = "\N"
+          #   end
+          #
+          #   csv_table.null_marker #=> "\N"
+          #
+          def null_marker
+            @gapi.csv_options.null_marker
+          end
+
+          ##
+          # Sets a string that represents a null value in a CSV file. For
+          # example, if you specify `\N`, BigQuery interprets `\N` as a null value when
+          # querying a CSV file. The default value is the empty string. If you set this
+          # property to a custom value, BigQuery throws an error if an empty string is
+          # present for all data types except for STRING and BYTE. For STRING and BYTE
+          # columns, BigQuery interprets the empty string as an empty value.
+          #
+          # @param [String, nil] null_marker The null marker string. `nil` to unset.
+          #
+          # @example
+          #   require "google/cloud/bigquery"
+          #
+          #   bigquery = Google::Cloud::Bigquery.new
+          #
+          #   csv_url = "gs://bucket/path/to/data.csv"
+          #   csv_table = bigquery.external csv_url do |csv|
+          #     csv.null_marker = "\N"
+          #   end
+          #
+          #   csv_table.null_marker #=> "\N"
+          #
+          def null_marker= null_marker
+            frozen_check!
+            @gapi.csv_options.null_marker = null_marker
+          end
+
+          ##
+          # The list of strings represented as SQL NULL value in a CSV file.
+          # null_marker and null_markers can't be set at the same time. If null_marker is
+          # set, null_markers has to be not set. If null_markers is set, null_marker has
+          # to be not set. If both null_marker and null_markers are set at the same time,
+          # a user error would be thrown. Any strings listed in null_markers, including
+          # empty string would be interpreted as SQL NULL. This applies to all column
+          # types.
+          #
+          # @return [Array<String>] The array of null marker strings.
+          #
+          # @example
+          #   require "google/cloud/bigquery"
+          #
+          #   bigquery = Google::Cloud::Bigquery.new
+          #
+          #   csv_url = "gs://bucket/path/to/data.csv"
+          #   csv_table = bigquery.external csv_url do |csv|
+          #     csv.null_markers = ["\N", "NULL"]
+          #   end
+          #
+          #   csv_table.null_markers #=> ["\N", "NULL"]
+          #
+          def null_markers
+            @gapi.csv_options.null_markers || []
+          end
+
+          ##
+          # Sets the list of strings represented as SQL NULL value in a CSV file.
+          # null_marker and null_markers can't be set at the same time. If null_marker is
+          # set, null_markers has to be not set. If null_markers is set, null_marker has
+          # to be not set. If both null_marker and null_markers are set at the same time,
+          # a user error would be thrown. Any strings listed in null_markers, including
+          # empty string would be interpreted as SQL NULL. This applies to all column
+          # types.
+          #
+          # @param [Array<String>] null_markers The array of null marker strings.
+          #
+          #
+          # @example
+          #   require "google/cloud/bigquery"
+          #
+          #   bigquery = Google::Cloud::Bigquery.new
+          #
+          #   csv_url = "gs://bucket/path/to/data.csv"
+          #   csv_table = bigquery.external csv_url do |csv|
+          #     csv.null_markers = ["\N", "NULL"]
+          #   end
+          #
+          #   csv_table.null_markers #=> ["\N", "NULL"]
+          #
+          def null_markers= null_markers
+            frozen_check!
+            @gapi.csv_options.null_markers = null_markers
+          end
+
+          # Controls the strategy used to match loaded columns to the schema.
+          # If not set, a sensible default is chosen based on how the schema is
+          # provided. If autodetect is used, then columns are matched by name.
+          # Otherwise, columns are matched by position. This is done to keep the
+          # behavior backward-compatible.
+          #
+          # Acceptable values are:
+          # - `POSITION`: matches by position. Assumes columns are ordered the
+          #   same way as the schema.
+          # - `NAME`: matches by name. Reads the header row as column names and
+          #   reorders columns to match the schema.
+          #
+          # @return [String, nil] The source column match value. `nil` if not set.
+          #
+          # @example
+          #   require "google/cloud/bigquery"
+          #
+          #   bigquery = Google::Cloud::Bigquery.new
+          #
+          #   csv_url = "gs://bucket/path/to/data.csv"
+          #   csv_table = bigquery.external csv_url do |csv|
+          #     csv.source_column_match = "NAME"
+          #   end
+          #
+          #   csv_table.source_column_match #=> "NAME"
+          #
+          def source_column_match
+            @gapi.csv_options.source_column_match
+          end
+
+          # Sets the strategy used to match loaded columns to the schema.
+          # If not set, a sensible default is chosen based on how the schema is
+          # provided. If autodetect is used, then columns are matched by name.
+          # Otherwise, columns are matched by position. This is done to keep the
+          # behavior backward-compatible. Optional.
+          #
+          # Acceptable values are:
+          # - `POSITION`: matches by position. Assumes columns are ordered the
+          #   same way as the schema.
+          # - `NAME`: matches by name. Reads the header row as column names and
+          #   reorders columns to match the schema.
+          #
+          # @param [String, nil] source_column_match The new source column match value. `nil` to unset.
+          #
+          #
+          # @example
+          #   require "google/cloud/bigquery"
+          #
+          #   bigquery = Google::Cloud::Bigquery.new
+          #
+          #   csv_url = "gs://bucket/path/to/data.csv"
+          #   csv_table = bigquery.external csv_url do |csv|
+          #     csv.source_column_match = "NAME"
+          #   end
+          #
+          #   csv_table.source_column_match #=> "NAME"
+          #
+          def source_column_match= source_column_match
+            frozen_check!
+            @gapi.csv_options.source_column_match = source_column_match
+          end
+
+          ##
           # The schema for the data.
           #
           # @param [Boolean] replace Whether to replace the existing schema with

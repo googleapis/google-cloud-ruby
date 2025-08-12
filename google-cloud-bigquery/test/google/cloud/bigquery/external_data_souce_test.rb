@@ -118,4 +118,105 @@ describe Google::Cloud::Bigquery::External::DataSource do
 
     _(table.to_gapi.to_h).must_equal table_gapi.to_h
   end
+
+  it "sets time_zone" do
+    table = Google::Cloud::Bigquery::External::DataSource.new.tap do |e|
+      e.gapi.source_uris = ["gs://my-bucket/path/to/*.avro"]
+      e.gapi.source_format = "AVRO"
+    end
+    table_gapi = Google::Apis::BigqueryV2::ExternalDataConfiguration.new(
+      source_uris: ["gs://my-bucket/path/to/*.avro"],
+      source_format: "AVRO",
+      time_zone: "America/Los_Angeles"
+    )
+
+    _(table.time_zone).must_be :nil?
+
+    table.time_zone = "America/Los_Angeles"
+
+    _(table.time_zone).must_equal "America/Los_Angeles"
+
+    _(table.to_gapi.to_h).must_equal table_gapi.to_h
+  end
+
+  it "sets time_format" do
+    table = Google::Cloud::Bigquery::External::DataSource.new.tap do |e|
+      e.gapi.source_uris = ["gs://my-bucket/path/to/*.avro"]
+      e.gapi.source_format = "AVRO"
+    end
+    table_gapi = Google::Apis::BigqueryV2::ExternalDataConfiguration.new(
+      source_uris: ["gs://my-bucket/path/to/*.avro"],
+      source_format: "AVRO",
+      time_format: "%H:%M:%S"
+    )
+
+    _(table.time_format).must_be :nil?
+
+    table.time_format = "%H:%M:%S"
+
+    _(table.time_format).must_equal "%H:%M:%S"
+
+    _(table.to_gapi.to_h).must_equal table_gapi.to_h
+  end
+
+  it "sets timestamp_format" do
+    table = Google::Cloud::Bigquery::External::DataSource.new.tap do |e|
+      e.gapi.source_uris = ["gs://my-bucket/path/to/*.avro"]
+      e.gapi.source_format = "AVRO"
+    end
+    table_gapi = Google::Apis::BigqueryV2::ExternalDataConfiguration.new(
+      source_uris: ["gs://my-bucket/path/to/*.avro"],
+      source_format: "AVRO",
+      timestamp_format: "%Y-%m-%d %H:%M:%S.%f %z"
+    )
+
+    _(table.timestamp_format).must_be :nil?
+
+    table.timestamp_format = "%Y-%m-%d %H:%M:%S.%f %z"
+
+    _(table.timestamp_format).must_equal "%Y-%m-%d %H:%M:%S.%f %z"
+
+    _(table.to_gapi.to_h).must_equal table_gapi.to_h
+  end
+
+  it "sets datetime_format" do
+    table = Google::Cloud::Bigquery::External::DataSource.new.tap do |e|
+      e.gapi.source_uris = ["gs://my-bucket/path/to/*.avro"]
+      e.gapi.source_format = "AVRO"
+    end
+    table_gapi = Google::Apis::BigqueryV2::ExternalDataConfiguration.new(
+      source_uris: ["gs://my-bucket/path/to/*.avro"],
+      source_format: "AVRO",
+      datetime_format: "%Y-%m-%d %H:%M:%S.%f %z"
+    )
+
+    _(table.datetime_format).must_be :nil?
+
+    table.datetime_format = "%Y-%m-%d %H:%M:%S.%f %z"
+
+    _(table.datetime_format).must_equal "%Y-%m-%d %H:%M:%S.%f %z"
+
+    _(table.to_gapi.to_h).must_equal table_gapi.to_h
+  end
+
+  it "sets date_format" do
+    table = Google::Cloud::Bigquery::External::DataSource.new.tap do |e|
+      e.gapi.source_uris = ["gs://my-bucket/path/to/*.avro"]
+      e.gapi.source_format = "AVRO"
+    end
+    table_gapi = Google::Apis::BigqueryV2::ExternalDataConfiguration.new(
+      source_uris: ["gs://my-bucket/path/to/*.avro"],
+      source_format: "AVRO",
+      date_format: "%Y-%m-%d"
+    )
+
+    _(table.date_format).must_be :nil?
+
+    table.date_format = "%Y-%m-%d"
+
+    _(table.date_format).must_equal "%Y-%m-%d"
+
+    _(table.to_gapi.to_h).must_equal table_gapi.to_h
+  end
+  
 end
