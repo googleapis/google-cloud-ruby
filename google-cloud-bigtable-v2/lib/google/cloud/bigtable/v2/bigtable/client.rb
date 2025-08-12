@@ -321,12 +321,20 @@ module Google
                  %r{^projects/[^/]+/instances/[^/]+/tables/[^/]+/?$}.match?(request.table_name)
                 header_params["table_name"] = request.table_name
               end
+              if request.authorized_view_name
+                regex_match = %r{^(?<table_name>projects/[^/]+/instances/[^/]+/tables/[^/]+)(?:/.*)?$}.match request.authorized_view_name
+                if regex_match
+                  header_params["table_name"] = regex_match["table_name".to_s]
+                end
+              end
               if request.app_profile_id && !request.app_profile_id.empty?
                 header_params["app_profile_id"] = request.app_profile_id
               end
-              if request.authorized_view_name &&
-                 %r{^projects/[^/]+/instances/[^/]+/tables/[^/]+/authorizedViews/[^/]+/?$}.match?(request.authorized_view_name)
-                header_params["authorized_view_name"] = request.authorized_view_name
+              if request.materialized_view_name
+                regex_match = %r{^(?<name>projects/[^/]+/instances/[^/]+)(?:/.*)?$}.match request.materialized_view_name
+                if regex_match
+                  header_params["name"] = regex_match["name".to_s]
+                end
               end
 
               request_params_header = URI.encode_www_form header_params
@@ -437,12 +445,20 @@ module Google
                  %r{^projects/[^/]+/instances/[^/]+/tables/[^/]+/?$}.match?(request.table_name)
                 header_params["table_name"] = request.table_name
               end
+              if request.authorized_view_name
+                regex_match = %r{^(?<table_name>projects/[^/]+/instances/[^/]+/tables/[^/]+)(?:/.*)?$}.match request.authorized_view_name
+                if regex_match
+                  header_params["table_name"] = regex_match["table_name".to_s]
+                end
+              end
               if request.app_profile_id && !request.app_profile_id.empty?
                 header_params["app_profile_id"] = request.app_profile_id
               end
-              if request.authorized_view_name &&
-                 %r{^projects/[^/]+/instances/[^/]+/tables/[^/]+/authorizedViews/[^/]+/?$}.match?(request.authorized_view_name)
-                header_params["authorized_view_name"] = request.authorized_view_name
+              if request.materialized_view_name
+                regex_match = %r{^(?<name>projects/[^/]+/instances/[^/]+)(?:/.*)?$}.match request.materialized_view_name
+                if regex_match
+                  header_params["name"] = regex_match["name".to_s]
+                end
               end
 
               request_params_header = URI.encode_www_form header_params
@@ -553,12 +569,14 @@ module Google
                  %r{^projects/[^/]+/instances/[^/]+/tables/[^/]+/?$}.match?(request.table_name)
                 header_params["table_name"] = request.table_name
               end
+              if request.authorized_view_name
+                regex_match = %r{^(?<table_name>projects/[^/]+/instances/[^/]+/tables/[^/]+)(?:/.*)?$}.match request.authorized_view_name
+                if regex_match
+                  header_params["table_name"] = regex_match["table_name".to_s]
+                end
+              end
               if request.app_profile_id && !request.app_profile_id.empty?
                 header_params["app_profile_id"] = request.app_profile_id
-              end
-              if request.authorized_view_name &&
-                 %r{^projects/[^/]+/instances/[^/]+/tables/[^/]+/authorizedViews/[^/]+/?$}.match?(request.authorized_view_name)
-                header_params["authorized_view_name"] = request.authorized_view_name
               end
 
               request_params_header = URI.encode_www_form header_params
@@ -670,12 +688,14 @@ module Google
                  %r{^projects/[^/]+/instances/[^/]+/tables/[^/]+/?$}.match?(request.table_name)
                 header_params["table_name"] = request.table_name
               end
+              if request.authorized_view_name
+                regex_match = %r{^(?<table_name>projects/[^/]+/instances/[^/]+/tables/[^/]+)(?:/.*)?$}.match request.authorized_view_name
+                if regex_match
+                  header_params["table_name"] = regex_match["table_name".to_s]
+                end
+              end
               if request.app_profile_id && !request.app_profile_id.empty?
                 header_params["app_profile_id"] = request.app_profile_id
-              end
-              if request.authorized_view_name &&
-                 %r{^projects/[^/]+/instances/[^/]+/tables/[^/]+/authorizedViews/[^/]+/?$}.match?(request.authorized_view_name)
-                header_params["authorized_view_name"] = request.authorized_view_name
               end
 
               request_params_header = URI.encode_www_form header_params
@@ -796,12 +816,14 @@ module Google
                  %r{^projects/[^/]+/instances/[^/]+/tables/[^/]+/?$}.match?(request.table_name)
                 header_params["table_name"] = request.table_name
               end
+              if request.authorized_view_name
+                regex_match = %r{^(?<table_name>projects/[^/]+/instances/[^/]+/tables/[^/]+)(?:/.*)?$}.match request.authorized_view_name
+                if regex_match
+                  header_params["table_name"] = regex_match["table_name".to_s]
+                end
+              end
               if request.app_profile_id && !request.app_profile_id.empty?
                 header_params["app_profile_id"] = request.app_profile_id
-              end
-              if request.authorized_view_name &&
-                 %r{^projects/[^/]+/instances/[^/]+/tables/[^/]+/authorizedViews/[^/]+/?$}.match?(request.authorized_view_name)
-                header_params["authorized_view_name"] = request.authorized_view_name
               end
 
               request_params_header = URI.encode_www_form header_params
@@ -1009,12 +1031,14 @@ module Google
                  %r{^projects/[^/]+/instances/[^/]+/tables/[^/]+/?$}.match?(request.table_name)
                 header_params["table_name"] = request.table_name
               end
+              if request.authorized_view_name
+                regex_match = %r{^(?<table_name>projects/[^/]+/instances/[^/]+/tables/[^/]+)(?:/.*)?$}.match request.authorized_view_name
+                if regex_match
+                  header_params["table_name"] = regex_match["table_name".to_s]
+                end
+              end
               if request.app_profile_id && !request.app_profile_id.empty?
                 header_params["app_profile_id"] = request.app_profile_id
-              end
-              if request.authorized_view_name &&
-                 %r{^projects/[^/]+/instances/[^/]+/tables/[^/]+/authorizedViews/[^/]+/?$}.match?(request.authorized_view_name)
-                header_params["authorized_view_name"] = request.authorized_view_name
               end
 
               request_params_header = URI.encode_www_form header_params
