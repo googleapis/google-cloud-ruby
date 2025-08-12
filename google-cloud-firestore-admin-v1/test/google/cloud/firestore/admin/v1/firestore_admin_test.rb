@@ -1979,6 +1979,77 @@ class ::Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::ClientTest < Minite
     end
   end
 
+  def test_clone_database
+    # Create GRPC objects.
+    grpc_response = ::Google::Longrunning::Operation.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    database_id = "hello world"
+    pitr_snapshot = {}
+    encryption_config = {}
+    tags = {}
+
+    clone_database_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :clone_database, name
+      assert_kind_of ::Google::Cloud::Firestore::Admin::V1::CloneDatabaseRequest, request
+      assert_equal "hello world", request["parent"]
+      assert_equal "hello world", request["database_id"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Firestore::Admin::V1::PitrSnapshot), request["pitr_snapshot"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Firestore::Admin::V1::Database::EncryptionConfig), request["encryption_config"]
+      assert_equal({}, request["tags"].to_h)
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, clone_database_client_stub do
+      # Create client
+      client = ::Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.clone_database({ parent: parent, database_id: database_id, pitr_snapshot: pitr_snapshot, encryption_config: encryption_config, tags: tags }) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.clone_database parent: parent, database_id: database_id, pitr_snapshot: pitr_snapshot, encryption_config: encryption_config, tags: tags do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.clone_database ::Google::Cloud::Firestore::Admin::V1::CloneDatabaseRequest.new(parent: parent, database_id: database_id, pitr_snapshot: pitr_snapshot, encryption_config: encryption_config, tags: tags) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.clone_database({ parent: parent, database_id: database_id, pitr_snapshot: pitr_snapshot, encryption_config: encryption_config, tags: tags }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.clone_database(::Google::Cloud::Firestore::Admin::V1::CloneDatabaseRequest.new(parent: parent, database_id: database_id, pitr_snapshot: pitr_snapshot, encryption_config: encryption_config, tags: tags), grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, clone_database_client_stub.call_rpc_count
+    end
+  end
+
   def test_configure
     grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
 
