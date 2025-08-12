@@ -1,5 +1,13 @@
 # Release History
 
+### 1.53.0 (2025-08-12)
+
+#### Features
+
+* add data governance type to routine ([#30732](https://github.com/googleapis/google-cloud-ruby/issues/30732)) 
+* Add table resource tags support ([#30804](https://github.com/googleapis/google-cloud-ruby/issues/30804)) 
+* Support for using Faraday for HTTP requests ([#30760](https://github.com/googleapis/google-cloud-ruby/issues/30760)) 
+
 ### 1.52.1 (2025-04-25)
 
 #### Documentation
