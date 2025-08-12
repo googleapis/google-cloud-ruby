@@ -1,5 +1,11 @@
 # Release History
 
+### 2.12.1 (2025-08-12)
+
+#### Bug Fixes
+
+* Fix mutate rows logic to handle errors ([#30766](https://github.com/googleapis/google-cloud-ruby/issues/30766)) 
+
 ### 2.12.0 (2025-02-25)
 
 #### Features
