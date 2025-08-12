@@ -1,5 +1,14 @@
 # Changelog
 
+### 0.14.0 (2025-08-12)
+
+#### Features
+
+* Addition of app auth support for chat api ([#30748](https://github.com/googleapis/google-cloud-ruby/issues/30748)) 
+#### Documentation
+
+* Update reference documentation 
+
 ### 0.13.0 (2025-07-24)
 
 #### Features

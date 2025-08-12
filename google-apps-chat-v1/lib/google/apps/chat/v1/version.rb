@@ -21,7 +21,7 @@ module Google
   module Apps
     module Chat
       module V1
-        VERSION = "0.13.0"
+        VERSION = "0.14.0"
       end
     end
   end
