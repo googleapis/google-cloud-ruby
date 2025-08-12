@@ -1,5 +1,14 @@
 # Release History
 
+### 3.0.2 (2025-08-12)
+
+#### Bug Fixes
+
+* Initialize topic_admin by default for the IAM client ([#30780](https://github.com/googleapis/google-cloud-ruby/issues/30780)) 
+#### Documentation
+
+* Fix subscriber snippet in OVERVIEW.md ([#30813](https://github.com/googleapis/google-cloud-ruby/issues/30813)) 
+
 ### 3.0.1 (2025-08-07)
 
 #### Documentation
