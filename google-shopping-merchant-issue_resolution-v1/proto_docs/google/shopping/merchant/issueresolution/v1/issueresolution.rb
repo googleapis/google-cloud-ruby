@@ -490,7 +490,7 @@ module Google
           # business. They can start the action only when they provided all required
           # inputs. The application will request processing of the action by calling the
           # [triggeraction
-          # method](https://developers.google.com/merchant/api/reference/rest/issueresolution_v1beta/issueresolution/triggeraction).
+          # method](https://developers.google.com/merchant/api/reference/rest/issueresolution_v1/issueresolution/triggeraction).
           # @!attribute [rw] action_context
           #   @return [::String]
           #     Contains the action's context that must be included as part of the
