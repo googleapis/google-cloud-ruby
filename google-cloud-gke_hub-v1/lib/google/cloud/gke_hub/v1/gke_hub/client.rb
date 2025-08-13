@@ -362,8 +362,8 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param parent [::String]
-            #     Required. The parent (project and location) where the Features will be listed.
-            #     Specified in the format `projects/*/locations/*`.
+            #     Required. The parent (project and location) where the Features will be
+            #     listed. Specified in the format `projects/*/locations/*`.
             #   @param page_size [::Integer]
             #     When requesting a 'page' of resources, `page_size` specifies number of
             #     resources to return. If unspecified or set to 0, all resources will
@@ -779,8 +779,8 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param parent [::String]
-            #     Required. The parent (project and location) where the Feature will be created.
-            #     Specified in the format `projects/*/locations/*`.
+            #     Required. The parent (project and location) where the Feature will be
+            #     created. Specified in the format `projects/*/locations/*`.
             #   @param feature_id [::String]
             #     The ID of the feature to create.
             #   @param resource [::Google::Cloud::GkeHub::V1::Feature, ::Hash]
