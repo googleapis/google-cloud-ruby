@@ -284,8 +284,8 @@ module Google
         # Request message for `GkeHub.ListFeatures` method.
         # @!attribute [rw] parent
         #   @return [::String]
-        #     Required. The parent (project and location) where the Features will be listed.
-        #     Specified in the format `projects/*/locations/*`.
+        #     Required. The parent (project and location) where the Features will be
+        #     listed. Specified in the format `projects/*/locations/*`.
         # @!attribute [rw] page_size
         #   @return [::Integer]
         #     When requesting a 'page' of resources, `page_size` specifies number of
@@ -350,8 +350,8 @@ module Google
         # Request message for the `GkeHub.CreateFeature` method.
         # @!attribute [rw] parent
         #   @return [::String]
-        #     Required. The parent (project and location) where the Feature will be created.
-        #     Specified in the format `projects/*/locations/*`.
+        #     Required. The parent (project and location) where the Feature will be
+        #     created. Specified in the format `projects/*/locations/*`.
         # @!attribute [rw] feature_id
         #   @return [::String]
         #     The ID of the feature to create.
@@ -466,8 +466,9 @@ module Google
         #   @return [::Boolean]
         #     Output only. Identifies whether the user has requested cancellation
         #     of the operation. Operations that have successfully been cancelled
-        #     have [Operation.error][] value with a {::Google::Rpc::Status#code google.rpc.Status.code} of 1,
-        #     corresponding to `Code.CANCELLED`.
+        #     have [Operation.error][] value with a
+        #     {::Google::Rpc::Status#code google.rpc.Status.code} of 1, corresponding to
+        #     `Code.CANCELLED`.
         # @!attribute [r] api_version
         #   @return [::String]
         #     Output only. API version used to start the operation.
