@@ -64,6 +64,9 @@ module Google
           # Nvidia B200 GPU.
           NVIDIA_B200 = 16
 
+          # Nvidia GB200 GPU.
+          NVIDIA_GB200 = 17
+
           # TPU v2.
           TPU_V2 = 6
 

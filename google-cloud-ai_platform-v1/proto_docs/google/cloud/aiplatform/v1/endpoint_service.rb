@@ -56,6 +56,10 @@ module Google
         # @!attribute [rw] generic_metadata
         #   @return [::Google::Cloud::AIPlatform::V1::GenericOperationMetadata]
         #     The operation generic information.
+        # @!attribute [r] deployment_stage
+        #   @return [::Google::Cloud::AIPlatform::V1::DeploymentStage]
+        #     Output only. The deployment stage of the model. Only populated if this
+        #     CreateEndpoint request deploys a model at the same time.
         class CreateEndpointOperationMetadata
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -252,6 +256,9 @@ module Google
         # @!attribute [rw] generic_metadata
         #   @return [::Google::Cloud::AIPlatform::V1::GenericOperationMetadata]
         #     The operation generic information.
+        # @!attribute [r] deployment_stage
+        #   @return [::Google::Cloud::AIPlatform::V1::DeploymentStage]
+        #     Output only. The deployment stage of the model.
         class DeployModelOperationMetadata
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -325,6 +332,8 @@ module Google
         #     * `max_replica_count` in either
         #     {::Google::Cloud::AIPlatform::V1::DedicatedResources DedicatedResources} or
         #     {::Google::Cloud::AIPlatform::V1::AutomaticResources AutomaticResources}
+        #     * `required_replica_count` in
+        #     {::Google::Cloud::AIPlatform::V1::DedicatedResources DedicatedResources}
         #     * {::Google::Cloud::AIPlatform::V1::DedicatedResources#autoscaling_metric_specs autoscaling_metric_specs}
         #     * `disable_container_logging` (v1 only)
         #     * `enable_container_logging` (v1beta1 only)
