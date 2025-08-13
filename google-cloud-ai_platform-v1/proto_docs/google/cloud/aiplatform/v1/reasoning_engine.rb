@@ -45,7 +45,8 @@ module Google
         # @!attribute [rw] agent_framework
         #   @return [::String]
         #     Optional. The OSS agent framework used to develop the agent.
-        #     Currently supported values: "langchain", "langgraph", "ag2", "custom".
+        #     Currently supported values: "google-adk", "langchain", "langgraph", "ag2",
+        #     "llama-index", "custom".
         class ReasoningEngineSpec
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -82,9 +83,46 @@ module Google
           #     To use this feature, add 'Secret Manager Secret Accessor' role
           #     (roles/secretmanager.secretAccessor) to AI Platform Reasoning Engine
           #     Service Agent.
+          # @!attribute [rw] psc_interface_config
+          #   @return [::Google::Cloud::AIPlatform::V1::PscInterfaceConfig]
+          #     Optional. Configuration for PSC-I.
+          # @!attribute [rw] min_instances
+          #   @return [::Integer]
+          #     Optional. The minimum number of application instances that will be kept
+          #     running at all times. Defaults to 1. Range: [0, 10].
+          # @!attribute [rw] max_instances
+          #   @return [::Integer]
+          #     Optional. The maximum number of application instances that can be
+          #     launched to handle increased traffic. Defaults to 100. Range: [1, 1000].
+          #
+          #     If VPC-SC or PSC-I is enabled, the acceptable range is [1, 100].
+          # @!attribute [rw] resource_limits
+          #   @return [::Google::Protobuf::Map{::String => ::String}]
+          #     Optional. Resource limits for each container. Only 'cpu' and 'memory'
+          #     keys are supported. Defaults to \\{"cpu": "4", "memory": "4Gi"}.
+          #
+          #       * The only supported values for CPU are '1', '2', '4', '6' and '8'. For
+          #       more information, go to
+          #       https://cloud.google.com/run/docs/configuring/cpu.
+          #       * The only supported values for memory are '1Gi', '2Gi', ... '32 Gi'.
+          #       * For required cpu on different memory values, go to
+          #       https://cloud.google.com/run/docs/configuring/memory-limits
+          # @!attribute [rw] container_concurrency
+          #   @return [::Integer]
+          #     Optional. Concurrency for each container and agent server. Recommended
+          #     value: 2 * cpu + 1. Defaults to 9.
           class DeploymentSpec
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
+
+            # @!attribute [rw] key
+            #   @return [::String]
+            # @!attribute [rw] value
+            #   @return [::String]
+            class ResourceLimitsEntry
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
           end
         end
 
@@ -93,6 +131,8 @@ module Google
         # @!attribute [rw] name
         #   @return [::String]
         #     Identifier. The resource name of the ReasoningEngine.
+        #     Format:
+        #     `projects/{project}/locations/{location}/reasoningEngines/{reasoning_engine}`
         # @!attribute [rw] display_name
         #   @return [::String]
         #     Required. The display name of the ReasoningEngine.
@@ -112,6 +152,11 @@ module Google
         #   @return [::String]
         #     Optional. Used to perform consistent read-modify-write updates. If not set,
         #     a blind "overwrite" update happens.
+        # @!attribute [rw] encryption_spec
+        #   @return [::Google::Cloud::AIPlatform::V1::EncryptionSpec]
+        #     Customer-managed encryption key spec for a ReasoningEngine. If set, this
+        #     ReasoningEngine and all sub-resources of this ReasoningEngine will be
+        #     secured by this key.
         class ReasoningEngine
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

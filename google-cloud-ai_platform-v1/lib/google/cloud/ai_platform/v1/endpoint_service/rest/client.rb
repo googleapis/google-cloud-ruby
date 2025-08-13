@@ -1005,9 +1005,9 @@ module Google
 
               ##
               # Updates an existing deployed model. Updatable fields include
-              # `min_replica_count`, `max_replica_count`, `autoscaling_metric_specs`,
-              # `disable_container_logging` (v1 only), and `enable_container_logging`
-              # (v1beta1 only).
+              # `min_replica_count`, `max_replica_count`, `required_replica_count`,
+              # `autoscaling_metric_specs`, `disable_container_logging` (v1 only), and
+              # `enable_container_logging` (v1beta1 only).
               #
               # @overload mutate_deployed_model(request, options = nil)
               #   Pass arguments to `mutate_deployed_model` via a request object, either of type
@@ -1038,6 +1038,8 @@ module Google
               #     * `max_replica_count` in either
               #     {::Google::Cloud::AIPlatform::V1::DedicatedResources DedicatedResources} or
               #     {::Google::Cloud::AIPlatform::V1::AutomaticResources AutomaticResources}
+              #     * `required_replica_count` in
+              #     {::Google::Cloud::AIPlatform::V1::DedicatedResources DedicatedResources}
               #     * {::Google::Cloud::AIPlatform::V1::DedicatedResources#autoscaling_metric_specs autoscaling_metric_specs}
               #     * `disable_container_logging` (v1 only)
               #     * `enable_container_logging` (v1beta1 only)

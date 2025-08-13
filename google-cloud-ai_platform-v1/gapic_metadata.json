@@ -328,6 +328,11 @@
               "methods": [
                 "search_nearest_entities"
               ]
+            },
+            "FeatureViewDirectWrite": {
+              "methods": [
+                "feature_view_direct_write"
+              ]
             }
           }
         }
