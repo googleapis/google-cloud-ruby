@@ -21,7 +21,6 @@ require "helper"
 require "gapic/grpc/service_stub"
 
 require "google/cloud/datacatalog/v1beta1/policytagmanager_pb"
-require "google/cloud/datacatalog/v1beta1/policytagmanager_services_pb"
 require "google/cloud/data_catalog/v1beta1/policy_tag_manager"
 
 class ::Google::Cloud::DataCatalog::V1beta1::PolicyTagManager::ClientTest < Minitest::Test
