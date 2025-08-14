@@ -65,6 +65,17 @@ module Google
           # @!attribute [r] satisfies_pzi
           #   @return [::Boolean]
           #     Output only. Reserved for future use.
+          # @!attribute [rw] tags
+          #   @return [::Google::Protobuf::Map{::String => ::String}]
+          #     Optional. Input only. Immutable. Tag keys/values directly bound to this
+          #     resource. For example:
+          #     - "123/environment": "production",
+          #     - "123/costCenter": "marketing"
+          #
+          #     Tags and Labels (above) are both used to bind metadata to resources, with
+          #     different use-cases. See
+          #     https://cloud.google.com/resource-manager/docs/tags/tags-overview for an
+          #     in-depth overview on the difference between tags and labels.
           class Instance
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -74,6 +85,15 @@ module Google
             # @!attribute [rw] value
             #   @return [::String]
             class LabelsEntry
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
+
+            # @!attribute [rw] key
+            #   @return [::String]
+            # @!attribute [rw] value
+            #   @return [::String]
+            class TagsEntry
               include ::Google::Protobuf::MessageExts
               extend ::Google::Protobuf::MessageExts::ClassMethods
             end
