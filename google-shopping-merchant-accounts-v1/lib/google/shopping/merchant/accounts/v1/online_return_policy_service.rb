@@ -37,7 +37,7 @@ module Google
           # configuration, encompassing return policies for both ads and free listings
           # ## programs. This API defines the following resource model:
           #
-          # [OnlineReturnPolicy](/merchant/api/reference/rpc/google.shopping.merchant.accounts.v1#google.shopping.merchant.accounts.v1.OnlineReturnPolicy)
+          # {::Google::Shopping::Merchant::Accounts::V1::OnlineReturnPolicy OnlineReturnPolicy}
           #
           # @example Load this service and instantiate a gRPC client
           #
