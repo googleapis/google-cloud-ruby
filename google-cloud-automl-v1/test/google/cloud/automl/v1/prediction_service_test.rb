@@ -21,7 +21,6 @@ require "helper"
 require "gapic/grpc/service_stub"
 
 require "google/cloud/automl/v1/prediction_service_pb"
-require "google/cloud/automl/v1/prediction_service_services_pb"
 require "google/cloud/automl/v1/prediction_service"
 
 class ::Google::Cloud::AutoML::V1::PredictionService::ClientTest < Minitest::Test
