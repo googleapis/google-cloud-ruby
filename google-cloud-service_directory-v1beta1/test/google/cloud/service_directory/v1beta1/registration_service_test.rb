@@ -21,7 +21,6 @@ require "helper"
 require "gapic/grpc/service_stub"
 
 require "google/cloud/servicedirectory/v1beta1/registration_service_pb"
-require "google/cloud/servicedirectory/v1beta1/registration_service_services_pb"
 require "google/cloud/service_directory/v1beta1/registration_service"
 
 class ::Google::Cloud::ServiceDirectory::V1beta1::RegistrationService::ClientTest < Minitest::Test

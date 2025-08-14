@@ -21,7 +21,6 @@ require "helper"
 require "gapic/grpc/service_stub"
 
 require "google/cloud/secrets/v1beta1/service_pb"
-require "google/cloud/secrets/v1beta1/service_services_pb"
 require "google/cloud/secret_manager/v1beta1/secret_manager_service"
 
 class ::Google::Cloud::SecretManager::V1beta1::SecretManagerService::ClientTest < Minitest::Test

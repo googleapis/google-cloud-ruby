@@ -21,7 +21,6 @@ require "helper"
 require "gapic/grpc/service_stub"
 
 require "google/cloud/servicedirectory/v1beta1/lookup_service_pb"
-require "google/cloud/servicedirectory/v1beta1/lookup_service_services_pb"
 require "google/cloud/service_directory/v1beta1/lookup_service"
 
 class ::Google::Cloud::ServiceDirectory::V1beta1::LookupService::ClientTest < Minitest::Test

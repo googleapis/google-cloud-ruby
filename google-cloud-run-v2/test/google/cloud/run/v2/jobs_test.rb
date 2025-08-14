@@ -21,7 +21,6 @@ require "helper"
 require "gapic/grpc/service_stub"
 
 require "google/cloud/run/v2/job_pb"
-require "google/cloud/run/v2/job_services_pb"
 require "google/cloud/run/v2/jobs"
 
 class ::Google::Cloud::Run::V2::Jobs::ClientTest < Minitest::Test

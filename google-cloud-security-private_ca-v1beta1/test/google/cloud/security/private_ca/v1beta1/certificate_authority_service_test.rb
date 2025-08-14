@@ -21,7 +21,6 @@ require "helper"
 require "gapic/grpc/service_stub"
 
 require "google/cloud/security/privateca/v1beta1/service_pb"
-require "google/cloud/security/privateca/v1beta1/service_services_pb"
 require "google/cloud/security/private_ca/v1beta1/certificate_authority_service"
 
 class ::Google::Cloud::Security::PrivateCA::V1beta1::CertificateAuthorityService::ClientTest < Minitest::Test

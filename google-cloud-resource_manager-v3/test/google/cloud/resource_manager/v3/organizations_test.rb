@@ -21,7 +21,6 @@ require "helper"
 require "gapic/grpc/service_stub"
 
 require "google/cloud/resourcemanager/v3/organizations_pb"
-require "google/cloud/resourcemanager/v3/organizations_services_pb"
 require "google/cloud/resource_manager/v3/organizations"
 
 class ::Google::Cloud::ResourceManager::V3::Organizations::ClientTest < Minitest::Test
