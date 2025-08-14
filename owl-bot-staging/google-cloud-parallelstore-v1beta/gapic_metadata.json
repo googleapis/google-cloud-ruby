@@ -1,0 +1,53 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "ruby",
+  "protoPackage": "google.cloud.parallelstore.v1beta",
+  "libraryPackage": "::Google::Cloud::Parallelstore::V1beta",
+  "services": {
+    "Parallelstore": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::Parallelstore::V1beta::Parallelstore::Client",
+          "rpcs": {
+            "ListInstances": {
+              "methods": [
+                "list_instances"
+              ]
+            },
+            "GetInstance": {
+              "methods": [
+                "get_instance"
+              ]
+            },
+            "CreateInstance": {
+              "methods": [
+                "create_instance"
+              ]
+            },
+            "UpdateInstance": {
+              "methods": [
+                "update_instance"
+              ]
+            },
+            "DeleteInstance": {
+              "methods": [
+                "delete_instance"
+              ]
+            },
+            "ImportData": {
+              "methods": [
+                "import_data"
+              ]
+            },
+            "ExportData": {
+              "methods": [
+                "export_data"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}
