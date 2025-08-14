@@ -47,7 +47,7 @@ describe Google::Cloud::Bigquery::Schema, :policy_tags, :bigquery do
     taxonomy_id = nil
     begin
       taxonomy = Google::Cloud::DataCatalog::V1::Taxonomy.new(
-        display_name: "google-cloud-ruby bigquery testing taxonomy",
+        display_name: "google-cloud-ruby bigquery testing taxonomy #{SecureRandom.hex(4)}",
 			  description: "Taxonomy created for google-cloud-ruby acceptance tests",
 			  activated_policy_types: [:FINE_GRAINED_ACCESS_CONTROL]
       )
