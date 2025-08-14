@@ -311,4 +311,20 @@ describe Google::Cloud::Bigquery, :bigquery do
     data = bigquery.query "SELECT * FROM #{dataset_id}.temp_table;", session_id: session_id
     _(data.count).must_equal 6
   end
+
+  it "tests timestamp queries" do
+    query_string = "SELECT * FROM UNNEST(GENERATE_TIMESTAMP_ARRAY(" \
+                    "'2099-10-01 00:00:00.123456', " \
+                    "'2099-10-01 00:10:00.123456', INTERVAL 1 MINUTE))" \
+                    " AS dob"
+
+    int64_data = bigquery.query query_string, format_options_use_int64_timestamp: true
+    float_data = bigquery.query query_string, format_options_use_int64_timestamp: false
+    _(int64_data.class).must_equal Google::Cloud::Bigquery::Data
+    _(float_data.class).must_equal Google::Cloud::Bigquery::Data
+    _(int64_data).must_equal float_data
+    int64_data.each do |row|
+      _(row[:dob]).must_be_kind_of ::Time
+    end
+  end
 end
