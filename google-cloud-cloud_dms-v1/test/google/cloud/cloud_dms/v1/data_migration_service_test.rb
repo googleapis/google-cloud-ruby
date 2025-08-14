@@ -21,7 +21,6 @@ require "helper"
 require "gapic/grpc/service_stub"
 
 require "google/cloud/clouddms/v1/clouddms_pb"
-require "google/cloud/clouddms/v1/clouddms_services_pb"
 require "google/cloud/cloud_dms/v1/data_migration_service"
 
 class ::Google::Cloud::CloudDMS::V1::DataMigrationService::ClientTest < Minitest::Test

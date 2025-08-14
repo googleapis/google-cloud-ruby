@@ -21,7 +21,6 @@ require "helper"
 require "gapic/grpc/service_stub"
 
 require "google/cloud/binaryauthorization/v1/service_pb"
-require "google/cloud/binaryauthorization/v1/service_services_pb"
 require "google/cloud/binary_authorization/v1/binauthz_management_service"
 
 class ::Google::Cloud::BinaryAuthorization::V1::BinauthzManagementService::ClientTest < Minitest::Test

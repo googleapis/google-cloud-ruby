@@ -21,7 +21,6 @@ require "helper"
 require "gapic/grpc/service_stub"
 
 require "google/cloud/certificatemanager/v1/certificate_manager_pb"
-require "google/cloud/certificatemanager/v1/certificate_manager_services_pb"
 require "google/cloud/certificate_manager/v1/certificate_manager"
 
 class ::Google::Cloud::CertificateManager::V1::CertificateManager::ClientTest < Minitest::Test

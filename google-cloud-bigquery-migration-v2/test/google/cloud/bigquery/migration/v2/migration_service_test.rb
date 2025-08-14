@@ -21,7 +21,6 @@ require "helper"
 require "gapic/grpc/service_stub"
 
 require "google/cloud/bigquery/migration/v2/migration_service_pb"
-require "google/cloud/bigquery/migration/v2/migration_service_services_pb"
 require "google/cloud/bigquery/migration/v2/migration_service"
 
 class ::Google::Cloud::Bigquery::Migration::V2::MigrationService::ClientTest < Minitest::Test

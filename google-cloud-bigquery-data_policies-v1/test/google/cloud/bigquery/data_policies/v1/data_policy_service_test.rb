@@ -21,7 +21,6 @@ require "helper"
 require "gapic/grpc/service_stub"
 
 require "google/cloud/bigquery/datapolicies/v1/datapolicy_pb"
-require "google/cloud/bigquery/datapolicies/v1/datapolicy_services_pb"
 require "google/cloud/bigquery/data_policies/v1/data_policy_service"
 
 class ::Google::Cloud::Bigquery::DataPolicies::V1::DataPolicyService::ClientTest < Minitest::Test

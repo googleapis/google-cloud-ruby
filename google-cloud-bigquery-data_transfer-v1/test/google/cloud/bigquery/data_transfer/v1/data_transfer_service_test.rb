@@ -21,7 +21,6 @@ require "helper"
 require "gapic/grpc/service_stub"
 
 require "google/cloud/bigquery/datatransfer/v1/datatransfer_pb"
-require "google/cloud/bigquery/datatransfer/v1/datatransfer_services_pb"
 require "google/cloud/bigquery/data_transfer/v1/data_transfer_service"
 
 class ::Google::Cloud::Bigquery::DataTransfer::V1::DataTransferService::ClientTest < Minitest::Test

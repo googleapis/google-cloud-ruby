@@ -21,7 +21,6 @@ require "helper"
 require "gapic/grpc/service_stub"
 
 require "google/cloud/cloudcontrolspartner/v1/core_pb"
-require "google/cloud/cloudcontrolspartner/v1/core_services_pb"
 require "google/cloud/cloud_controls_partner/v1/cloud_controls_partner_core"
 
 class ::Google::Cloud::CloudControlsPartner::V1::CloudControlsPartnerCore::ClientTest < Minitest::Test

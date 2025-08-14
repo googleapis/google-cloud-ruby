@@ -21,7 +21,6 @@ require "helper"
 require "gapic/grpc/service_stub"
 
 require "google/cloud/billing/budgets/v1/budget_service_pb"
-require "google/cloud/billing/budgets/v1/budget_service_services_pb"
 require "google/cloud/billing/budgets/v1/budget_service"
 
 class ::Google::Cloud::Billing::Budgets::V1::BudgetService::ClientTest < Minitest::Test

@@ -21,7 +21,6 @@ require "helper"
 require "gapic/grpc/service_stub"
 
 require "google/bigtable/v2/bigtable_pb"
-require "google/bigtable/v2/bigtable_services_pb"
 require "google/cloud/bigtable/v2/bigtable"
 
 class ::Google::Cloud::Bigtable::V2::Bigtable::ClientTest < Minitest::Test
