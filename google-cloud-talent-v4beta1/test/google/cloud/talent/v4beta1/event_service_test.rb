@@ -21,7 +21,6 @@ require "helper"
 require "gapic/grpc/service_stub"
 
 require "google/cloud/talent/v4beta1/event_service_pb"
-require "google/cloud/talent/v4beta1/event_service_services_pb"
 require "google/cloud/talent/v4beta1/event_service"
 
 class ::Google::Cloud::Talent::V4beta1::EventService::ClientTest < Minitest::Test

@@ -21,7 +21,6 @@ require "helper"
 require "gapic/grpc/service_stub"
 
 require "google/cloud/servicehealth/v1/event_service_pb"
-require "google/cloud/servicehealth/v1/event_service_services_pb"
 require "google/cloud/service_health/v1/service_health"
 
 class ::Google::Cloud::ServiceHealth::V1::ServiceHealth::ClientTest < Minitest::Test

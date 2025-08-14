@@ -21,7 +21,6 @@ require "helper"
 require "gapic/grpc/service_stub"
 
 require "google/spanner/admin/instance/v1/spanner_instance_admin_pb"
-require "google/spanner/admin/instance/v1/spanner_instance_admin_services_pb"
 require "google/cloud/spanner/admin/instance/v1/instance_admin"
 
 class ::Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdmin::ClientTest < Minitest::Test

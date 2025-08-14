@@ -501,7 +501,7 @@ module Google
             #
             #     The list of allowed locations can be obtained by calling Cloud
             #     Tasks' implementation of
-            #     `::Google::Cloud::Location::Locations::Client#list_locations`.
+            #     [ListLocations][google.cloud.location.Locations.ListLocations].
             #   @param queue [::Google::Cloud::Tasks::V2::Queue, ::Hash]
             #     Required. The queue to create.
             #
