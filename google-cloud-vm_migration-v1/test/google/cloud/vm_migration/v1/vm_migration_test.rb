@@ -21,7 +21,6 @@ require "helper"
 require "gapic/grpc/service_stub"
 
 require "google/cloud/vmmigration/v1/vmmigration_pb"
-require "google/cloud/vmmigration/v1/vmmigration_services_pb"
 require "google/cloud/vm_migration/v1/vm_migration"
 
 class ::Google::Cloud::VMMigration::V1::VMMigration::ClientTest < Minitest::Test

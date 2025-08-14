@@ -21,7 +21,6 @@ require "helper"
 require "gapic/grpc/service_stub"
 
 require "google/cloud/workstations/v1beta/workstations_pb"
-require "google/cloud/workstations/v1beta/workstations_services_pb"
 require "google/cloud/workstations/v1beta/workstations"
 
 class ::Google::Cloud::Workstations::V1beta::Workstations::ClientTest < Minitest::Test

@@ -21,7 +21,6 @@ require "helper"
 require "gapic/grpc/service_stub"
 
 require "google/identity/accesscontextmanager/v1/access_context_manager_pb"
-require "google/identity/accesscontextmanager/v1/access_context_manager_services_pb"
 require "google/identity/access_context_manager/v1/access_context_manager"
 
 class ::Google::Identity::AccessContextManager::V1::AccessContextManager::ClientTest < Minitest::Test

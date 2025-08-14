@@ -21,7 +21,6 @@ require "helper"
 require "gapic/grpc/service_stub"
 
 require "google/cloud/websecurityscanner/v1/web_security_scanner_pb"
-require "google/cloud/websecurityscanner/v1/web_security_scanner_services_pb"
 require "google/cloud/web_security_scanner/v1/web_security_scanner"
 
 class ::Google::Cloud::WebSecurityScanner::V1::WebSecurityScanner::ClientTest < Minitest::Test

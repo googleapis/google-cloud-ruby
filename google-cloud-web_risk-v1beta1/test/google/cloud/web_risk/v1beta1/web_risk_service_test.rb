@@ -21,7 +21,6 @@ require "helper"
 require "gapic/grpc/service_stub"
 
 require "google/cloud/webrisk/v1beta1/webrisk_pb"
-require "google/cloud/webrisk/v1beta1/webrisk_services_pb"
 require "google/cloud/web_risk/v1beta1/web_risk_service"
 
 class ::Google::Cloud::WebRisk::V1beta1::WebRiskService::ClientTest < Minitest::Test
