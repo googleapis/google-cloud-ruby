@@ -21,7 +21,6 @@ require "helper"
 require "gapic/grpc/service_stub"
 
 require "google/chat/v1/chat_service_pb"
-require "google/chat/v1/chat_service_services_pb"
 require "google/apps/chat/v1/chat_service"
 
 class ::Google::Apps::Chat::V1::ChatService::ClientTest < Minitest::Test

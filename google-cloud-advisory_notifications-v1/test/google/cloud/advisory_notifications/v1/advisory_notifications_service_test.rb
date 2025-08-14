@@ -21,7 +21,6 @@ require "helper"
 require "gapic/grpc/service_stub"
 
 require "google/cloud/advisorynotifications/v1/service_pb"
-require "google/cloud/advisorynotifications/v1/service_services_pb"
 require "google/cloud/advisory_notifications/v1/advisory_notifications_service"
 
 class ::Google::Cloud::AdvisoryNotifications::V1::AdvisoryNotificationsService::ClientTest < Minitest::Test

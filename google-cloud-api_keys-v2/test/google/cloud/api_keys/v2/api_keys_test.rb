@@ -21,7 +21,6 @@ require "helper"
 require "gapic/grpc/service_stub"
 
 require "google/api/apikeys/v2/apikeys_pb"
-require "google/api/apikeys/v2/apikeys_services_pb"
 require "google/cloud/api_keys/v2/api_keys"
 
 class ::Google::Cloud::ApiKeys::V2::ApiKeys::ClientTest < Minitest::Test
