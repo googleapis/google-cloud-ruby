@@ -109,4 +109,81 @@ describe Google::Cloud::Bigquery::LoadJob::Updater do
     job_gapi = updater.to_gapi
     _(job_gapi.configuration.load.write_disposition).must_equal "SOME_NEW_UNSUPPORTED_DISPOSITION"
   end
+
+  it "can set null_markers" do
+    updater = new_updater
+    updater.null_markers = ["", "NULL"]
+    job_gapi = updater.to_gapi
+    _(job_gapi.configuration.load.null_markers).must_equal ["", "NULL"]
+
+    updater.null_markers = nil
+    job_gapi = updater.to_gapi
+    _(job_gapi.configuration.load.null_markers).must_be :nil?
+  end
+
+  it "can set source_column_match" do
+    updater = new_updater
+    updater.source_column_match = "POSITION"
+    job_gapi = updater.to_gapi
+    _(job_gapi.configuration.load.source_column_match).must_equal "POSITION"
+
+    updater.source_column_match = nil
+    job_gapi = updater.to_gapi
+    _(job_gapi.configuration.load.source_column_match).must_be :nil?
+  end
+
+  it "can set time_zone" do
+    updater = new_updater
+    updater.time_zone = "America/Los_Angeles"
+    job_gapi = updater.to_gapi
+    _(job_gapi.configuration.load.time_zone).must_equal "America/Los_Angeles"
+
+    updater.time_zone = nil
+    job_gapi = updater.to_gapi
+    _(job_gapi.configuration.load.time_zone).must_be :nil?
+  end
+
+  it "can set timestamp_format" do
+    updater = new_updater
+    updater.timestamp_format = "%Y-%m-%d %H:%M:%S.%f %z"
+    job_gapi = updater.to_gapi
+    _(job_gapi.configuration.load.timestamp_format).must_equal "%Y-%m-%d %H:%M:%S.%f %z"
+
+    updater.timestamp_format = nil
+    job_gapi = updater.to_gapi
+    _(job_gapi.configuration.load.timestamp_format).must_be :nil?
+  end
+
+  it "can set time_format" do
+    updater = new_updater
+    updater.time_format = "%H:%M:%S"
+    job_gapi = updater.to_gapi
+    _(job_gapi.configuration.load.time_format).must_equal "%H:%M:%S"
+
+    updater.time_format = nil
+    job_gapi = updater.to_gapi
+    _(job_gapi.configuration.load.time_format).must_be :nil?
+  end
+
+  it "can set date_format" do
+    updater = new_updater
+    updater.date_format = "%Y-%m-%d"
+    job_gapi = updater.to_gapi
+    _(job_gapi.configuration.load.date_format).must_equal "%Y-%m-%d"
+
+    updater.date_format = nil
+    job_gapi = updater.to_gapi
+    _(job_gapi.configuration.load.date_format).must_be :nil?
+  end
+
+  it "can set datetime_format" do
+    updater = new_updater
+    updater.datetime_format = "%Y-%m-%d %H:%M:%S"
+    job_gapi = updater.to_gapi
+    _(job_gapi.configuration.load.datetime_format).must_equal "%Y-%m-%d %H:%M:%S"
+
+    updater.datetime_format = nil
+    job_gapi = updater.to_gapi
+    _(job_gapi.configuration.load.datetime_format).must_be :nil?
+  end
 end
