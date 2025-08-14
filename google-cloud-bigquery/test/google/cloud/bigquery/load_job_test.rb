@@ -97,6 +97,7 @@ describe Google::Cloud::Bigquery::LoadJob, :mock_bigquery do
     _(job_defaults.null_markers).must_equal []
     _(job_defaults.source_column_match).must_be :nil?
     _(job_defaults.time_zone).must_be :nil?
+    _(job_defaults.preserve_ascii_control_characters).must_be :nil?
   end
 
   it "knows its full attributes" do
@@ -121,6 +122,7 @@ describe Google::Cloud::Bigquery::LoadJob, :mock_bigquery do
     _(job.null_markers).must_equal ["NULL", "nil"]
     _(job.source_column_match).must_equal "POSITION"
     _(job.time_zone).must_equal "America/Los_Angeles"
+    _(job.preserve_ascii_control_characters).must_equal true
   end
 
   it "knows its statistics data" do
@@ -197,6 +199,7 @@ describe Google::Cloud::Bigquery::LoadJob, :mock_bigquery do
       "nullMarkers" => ["NULL", "nil"],
       "sourceColumnMatch" => "POSITION",
       "timeZone" => "America/Los_Angeles",
+      "preserveAsciiControlCharacters" => true
     }
     hash["statistics"]["load"] = {
       "inputFiles" => "3", # String per google/google-api-ruby-client#439
