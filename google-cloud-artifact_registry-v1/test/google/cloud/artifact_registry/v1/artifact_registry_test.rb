@@ -21,7 +21,6 @@ require "helper"
 require "gapic/grpc/service_stub"
 
 require "google/devtools/artifactregistry/v1/service_pb"
-require "google/devtools/artifactregistry/v1/service_services_pb"
 require "google/cloud/artifact_registry/v1/artifact_registry"
 
 class ::Google::Cloud::ArtifactRegistry::V1::ArtifactRegistry::ClientTest < Minitest::Test

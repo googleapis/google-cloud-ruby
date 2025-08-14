@@ -21,7 +21,6 @@ require "helper"
 require "gapic/grpc/service_stub"
 
 require "google/cloud/apigeeregistry/v1/provisioning_service_pb"
-require "google/cloud/apigeeregistry/v1/provisioning_service_services_pb"
 require "google/cloud/apigee_registry/v1/provisioning"
 
 class ::Google::Cloud::ApigeeRegistry::V1::Provisioning::ClientTest < Minitest::Test

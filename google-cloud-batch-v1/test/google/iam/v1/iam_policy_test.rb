@@ -21,7 +21,6 @@ require "helper"
 require "gapic/grpc/service_stub"
 
 require "google/iam/v1/iam_policy_pb"
-require "google/iam/v1/iam_policy_services_pb"
 require "google/iam/v1/iam_policy"
 
 class ::Google::Iam::V1::IAMPolicy::ClientTest < Minitest::Test

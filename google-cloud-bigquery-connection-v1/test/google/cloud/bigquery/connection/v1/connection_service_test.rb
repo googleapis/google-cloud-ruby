@@ -21,7 +21,6 @@ require "helper"
 require "gapic/grpc/service_stub"
 
 require "google/cloud/bigquery/connection/v1/connection_pb"
-require "google/cloud/bigquery/connection/v1/connection_services_pb"
 require "google/cloud/bigquery/connection/v1/connection_service"
 
 class ::Google::Cloud::Bigquery::Connection::V1::ConnectionService::ClientTest < Minitest::Test

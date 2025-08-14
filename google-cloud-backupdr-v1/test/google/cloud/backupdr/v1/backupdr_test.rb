@@ -21,7 +21,6 @@ require "helper"
 require "gapic/grpc/service_stub"
 
 require "google/cloud/backupdr/v1/backupdr_pb"
-require "google/cloud/backupdr/v1/backupdr_services_pb"
 require "google/cloud/backupdr/v1/backupdr"
 
 class ::Google::Cloud::BackupDR::V1::BackupDR::ClientTest < Minitest::Test

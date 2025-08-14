@@ -21,7 +21,6 @@ require "helper"
 require "gapic/grpc/service_stub"
 
 require "google/cloud/assuredworkloads/v1beta1/assuredworkloads_service_pb"
-require "google/cloud/assuredworkloads/v1beta1/assuredworkloads_service_services_pb"
 require "google/cloud/assured_workloads/v1beta1/assured_workloads_service"
 
 class ::Google::Cloud::AssuredWorkloads::V1beta1::AssuredWorkloadsService::ClientTest < Minitest::Test

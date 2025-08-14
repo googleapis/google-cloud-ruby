@@ -21,7 +21,6 @@ require "helper"
 require "gapic/grpc/service_stub"
 
 require "google/cloud/bigquery/analyticshub/v1/analyticshub_pb"
-require "google/cloud/bigquery/analyticshub/v1/analyticshub_services_pb"
 require "google/cloud/bigquery/analytics_hub/v1/analytics_hub_service"
 
 class ::Google::Cloud::Bigquery::AnalyticsHub::V1::AnalyticsHubService::ClientTest < Minitest::Test
