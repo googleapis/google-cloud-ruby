@@ -21,7 +21,6 @@ require "helper"
 require "gapic/grpc/service_stub"
 
 require "google/cloud/orgpolicy/v2/orgpolicy_pb"
-require "google/cloud/orgpolicy/v2/orgpolicy_services_pb"
 require "google/cloud/org_policy/v2/org_policy"
 
 class ::Google::Cloud::OrgPolicy::V2::OrgPolicy::ClientTest < Minitest::Test
