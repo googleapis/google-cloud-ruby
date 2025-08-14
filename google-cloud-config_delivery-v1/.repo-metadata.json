@@ -8,7 +8,7 @@
     "name": "configdelivery",
     "name_pretty": "Config Delivery V1 API",
     "product_documentation": "https://cloud.google.com/kubernetes-engine/enterprise/config-sync/docs/concepts/fleet-packages",
-    "release_level": "unreleased",
+    "release_level": "preview",
     "repo": "googleapis/google-cloud-ruby",
     "requires_billing": true,
     "ruby-cloud-description": "ConfigDelivery service manages the deployment of kubernetes configuration to a fleet of kubernetes clusters. Note that google-cloud-config_delivery-v1 is a version-specific client library. For most uses, we recommend installing the main client library google-cloud-config_delivery instead. See the readme for more details.",
