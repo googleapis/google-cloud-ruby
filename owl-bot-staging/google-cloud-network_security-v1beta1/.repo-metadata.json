@@ -1,0 +1,17 @@
+{
+    "api_id": "networksecurity.googleapis.com",
+    "api_shortname": "networksecurity",
+    "client_documentation": "https://cloud.google.com/ruby/docs/reference/google-cloud-network_security-v1beta1/latest",
+    "distribution_name": "google-cloud-network_security-v1beta1",
+    "is_cloud": true,
+    "language": "ruby",
+    "name": "networksecurity",
+    "name_pretty": "Network Security V1beta1 API",
+    "product_documentation": "https://cloud.google.com/traffic-director/docs/reference/network-security/rest/",
+    "release_level": "unreleased",
+    "repo": "googleapis/google-cloud-ruby",
+    "requires_billing": true,
+    "ruby-cloud-description": "The client library for the Google Network Security V1beta1 API. Note that google-cloud-network_security-v1beta1 is a version-specific client library. For most uses, we recommend installing the main client library google-cloud-network_security instead. See the readme for more details.",
+    "ruby-cloud-product-url": "https://cloud.google.com/traffic-director/docs/reference/network-security/rest/",
+    "library_type": "GAPIC_AUTO"
+}
