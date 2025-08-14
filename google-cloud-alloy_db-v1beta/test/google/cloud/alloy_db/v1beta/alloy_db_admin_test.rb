@@ -21,7 +21,6 @@ require "helper"
 require "gapic/grpc/service_stub"
 
 require "google/cloud/alloydb/v1beta/service_pb"
-require "google/cloud/alloydb/v1beta/service_services_pb"
 require "google/cloud/alloy_db/v1beta/alloy_db_admin"
 
 class ::Google::Cloud::AlloyDB::V1beta::AlloyDBAdmin::ClientTest < Minitest::Test

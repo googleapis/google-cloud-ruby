@@ -21,7 +21,6 @@ require "helper"
 require "gapic/grpc/service_stub"
 
 require "google/apps/meet/v2/service_pb"
-require "google/apps/meet/v2/service_services_pb"
 require "google/apps/meet/v2/conference_records_service"
 
 class ::Google::Apps::Meet::V2::ConferenceRecordsService::ClientTest < Minitest::Test

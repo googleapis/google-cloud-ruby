@@ -21,7 +21,6 @@ require "helper"
 require "gapic/grpc/service_stub"
 
 require "google/cloud/aiplatform/v1/feature_registry_service_pb"
-require "google/cloud/aiplatform/v1/feature_registry_service_services_pb"
 require "google/cloud/ai_platform/v1/feature_registry_service"
 
 class ::Google::Cloud::AIPlatform::V1::FeatureRegistryService::ClientTest < Minitest::Test

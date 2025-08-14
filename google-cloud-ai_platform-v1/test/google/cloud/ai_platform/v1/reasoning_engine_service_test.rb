@@ -21,7 +21,6 @@ require "helper"
 require "gapic/grpc/service_stub"
 
 require "google/cloud/aiplatform/v1/reasoning_engine_service_pb"
-require "google/cloud/aiplatform/v1/reasoning_engine_service_services_pb"
 require "google/cloud/ai_platform/v1/reasoning_engine_service"
 
 class ::Google::Cloud::AIPlatform::V1::ReasoningEngineService::ClientTest < Minitest::Test

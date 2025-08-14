@@ -21,7 +21,6 @@ require "helper"
 require "gapic/grpc/service_stub"
 
 require "google/apps/meet/v2/service_pb"
-require "google/apps/meet/v2/service_services_pb"
 require "google/apps/meet/v2/spaces_service"
 
 class ::Google::Apps::Meet::V2::SpacesService::ClientTest < Minitest::Test

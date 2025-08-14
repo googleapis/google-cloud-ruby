@@ -21,7 +21,6 @@ require "helper"
 require "gapic/grpc/service_stub"
 
 require "google/analytics/data/v1beta/analytics_data_api_pb"
-require "google/analytics/data/v1beta/analytics_data_api_services_pb"
 require "google/analytics/data/v1beta/analytics_data"
 
 class ::Google::Analytics::Data::V1beta::AnalyticsData::ClientTest < Minitest::Test

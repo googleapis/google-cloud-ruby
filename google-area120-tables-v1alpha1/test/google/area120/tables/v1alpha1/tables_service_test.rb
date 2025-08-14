@@ -21,7 +21,6 @@ require "helper"
 require "gapic/grpc/service_stub"
 
 require "google/area120/tables/v1alpha1/tables_pb"
-require "google/area120/tables/v1alpha1/tables_services_pb"
 require "google/area120/tables/v1alpha1/tables_service"
 
 class ::Google::Area120::Tables::V1alpha1::TablesService::ClientTest < Minitest::Test

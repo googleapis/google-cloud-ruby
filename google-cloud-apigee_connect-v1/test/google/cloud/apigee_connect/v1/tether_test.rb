@@ -21,7 +21,6 @@ require "helper"
 require "gapic/grpc/service_stub"
 
 require "google/cloud/apigeeconnect/v1/tether_pb"
-require "google/cloud/apigeeconnect/v1/tether_services_pb"
 require "google/cloud/apigee_connect/v1/tether"
 
 class ::Google::Cloud::ApigeeConnect::V1::Tether::ClientTest < Minitest::Test

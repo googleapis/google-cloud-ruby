@@ -21,7 +21,6 @@ require "helper"
 require "gapic/grpc/service_stub"
 
 require "google/cloud/apigateway/v1/apigateway_service_pb"
-require "google/cloud/apigateway/v1/apigateway_service_services_pb"
 require "google/cloud/api_gateway/v1/api_gateway_service"
 
 class ::Google::Cloud::ApiGateway::V1::ApiGatewayService::ClientTest < Minitest::Test

@@ -21,7 +21,6 @@ require "helper"
 require "gapic/grpc/service_stub"
 
 require "google/cloud/accessapproval/v1/accessapproval_pb"
-require "google/cloud/accessapproval/v1/accessapproval_services_pb"
 require "google/cloud/access_approval/v1/access_approval"
 
 class ::Google::Cloud::AccessApproval::V1::AccessApproval::ClientTest < Minitest::Test
