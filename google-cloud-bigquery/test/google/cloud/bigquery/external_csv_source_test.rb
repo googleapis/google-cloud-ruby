@@ -245,6 +245,26 @@ describe Google::Cloud::Bigquery::External::CsvSource do
     _(table.to_gapi.to_h).must_equal table_gapi.to_h
   end
 
+  it "sets preserve_ascii_control_characters" do
+    table = Google::Cloud::Bigquery::External::CsvSource.new.tap do |e|
+      e.gapi.source_uris = ["gs://my-bucket/path/to/file.csv"]
+      e.gapi.source_format = "CSV"
+    end
+    table_gapi = Google::Apis::BigqueryV2::ExternalDataConfiguration.new(
+      source_uris: ["gs://my-bucket/path/to/file.csv"],
+      source_format: "CSV",
+      csv_options: Google::Apis::BigqueryV2::CsvOptions.new(
+        preserve_ascii_control_characters: true
+      )
+    )
+    _(table.preserve_ascii_control_characters).must_be :nil?
+
+    table.preserve_ascii_control_characters = true
+
+    _(table.preserve_ascii_control_characters).must_equal true
+
+    _(table.to_gapi.to_h).must_equal table_gapi.to_h
+  end
 
   it "sets schema using block" do
     table = Google::Cloud::Bigquery::External::CsvSource.new.tap do |e|
