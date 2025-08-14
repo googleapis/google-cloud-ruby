@@ -1,0 +1,18 @@
+{
+    "api_id": "cloudscheduler.googleapis.com",
+    "api_shortname": "cloudscheduler",
+    "client_documentation": "https://cloud.google.com/ruby/docs/reference/google-cloud-scheduler-v1/latest",
+    "distribution_name": "google-cloud-scheduler-v1",
+    "is_cloud": true,
+    "language": "ruby",
+    "name": "cloudscheduler",
+    "name_pretty": "Cloud Scheduler V1 API",
+    "product_documentation": "https://cloud.google.com/scheduler",
+    "release_level": "unreleased",
+    "repo": "googleapis/google-cloud-ruby",
+    "requires_billing": true,
+    "ruby-cloud-description": "Cloud Scheduler is a fully managed enterprise-grade cron job scheduler. It allows you to schedule virtually any job, including batch, big data jobs, cloud infrastructure operations, and more. You can automate everything, including retries in case of failure to reduce manual toil and intervention. Cloud Scheduler even acts as a single pane of glass, allowing you to manage all your automation tasks from one place. Note that google-cloud-scheduler-v1 is a version-specific client library. For most uses, we recommend installing the main client library google-cloud-scheduler instead. See the readme for more details.",
+    "ruby-cloud-env-prefix": "SCHEDULER",
+    "ruby-cloud-product-url": "https://cloud.google.com/scheduler",
+    "library_type": "GAPIC_AUTO"
+}
