@@ -21,7 +21,6 @@ require "helper"
 require "gapic/grpc/service_stub"
 
 require "google/cloud/gkemulticloud/v1/azure_service_pb"
-require "google/cloud/gkemulticloud/v1/azure_service_services_pb"
 require "google/cloud/gke_multi_cloud/v1/azure_clusters"
 
 class ::Google::Cloud::GkeMultiCloud::V1::AzureClusters::ClientTest < Minitest::Test

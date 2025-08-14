@@ -21,7 +21,6 @@ require "helper"
 require "gapic/grpc/service_stub"
 
 require "google/cloud/gkehub/v1beta1/membership_pb"
-require "google/cloud/gkehub/v1beta1/membership_services_pb"
 require "google/cloud/gke_hub/v1beta1/gke_hub_membership_service"
 
 class ::Google::Cloud::GkeHub::V1beta1::GkeHubMembershipService::ClientTest < Minitest::Test
