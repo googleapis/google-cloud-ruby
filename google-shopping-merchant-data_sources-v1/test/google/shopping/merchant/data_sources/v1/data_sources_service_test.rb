@@ -21,7 +21,6 @@ require "helper"
 require "gapic/grpc/service_stub"
 
 require "google/shopping/merchant/datasources/v1/datasources_pb"
-require "google/shopping/merchant/datasources/v1/datasources_services_pb"
 require "google/shopping/merchant/data_sources/v1/data_sources_service"
 
 class ::Google::Shopping::Merchant::DataSources::V1::DataSourcesService::ClientTest < Minitest::Test

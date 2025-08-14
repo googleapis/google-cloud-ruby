@@ -21,7 +21,6 @@ require "helper"
 require "gapic/grpc/service_stub"
 
 require "google/shopping/merchant/accounts/v1/developerregistration_pb"
-require "google/shopping/merchant/accounts/v1/developerregistration_services_pb"
 require "google/shopping/merchant/accounts/v1/developer_registration_service"
 
 class ::Google::Shopping::Merchant::Accounts::V1::DeveloperRegistrationService::ClientTest < Minitest::Test

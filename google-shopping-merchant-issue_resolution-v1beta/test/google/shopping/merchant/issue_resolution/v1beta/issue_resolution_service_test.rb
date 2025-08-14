@@ -21,7 +21,6 @@ require "helper"
 require "gapic/grpc/service_stub"
 
 require "google/shopping/merchant/issueresolution/v1beta/issueresolution_pb"
-require "google/shopping/merchant/issueresolution/v1beta/issueresolution_services_pb"
 require "google/shopping/merchant/issue_resolution/v1beta/issue_resolution_service"
 
 class ::Google::Shopping::Merchant::IssueResolution::V1beta::IssueResolutionService::ClientTest < Minitest::Test

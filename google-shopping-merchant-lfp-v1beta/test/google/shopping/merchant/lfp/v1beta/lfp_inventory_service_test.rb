@@ -21,7 +21,6 @@ require "helper"
 require "gapic/grpc/service_stub"
 
 require "google/shopping/merchant/lfp/v1beta/lfpinventory_pb"
-require "google/shopping/merchant/lfp/v1beta/lfpinventory_services_pb"
 require "google/shopping/merchant/lfp/v1beta/lfp_inventory_service"
 
 class ::Google::Shopping::Merchant::Lfp::V1beta::LfpInventoryService::ClientTest < Minitest::Test

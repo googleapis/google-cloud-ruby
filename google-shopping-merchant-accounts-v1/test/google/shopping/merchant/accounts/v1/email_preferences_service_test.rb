@@ -21,7 +21,6 @@ require "helper"
 require "gapic/grpc/service_stub"
 
 require "google/shopping/merchant/accounts/v1/emailpreferences_pb"
-require "google/shopping/merchant/accounts/v1/emailpreferences_services_pb"
 require "google/shopping/merchant/accounts/v1/email_preferences_service"
 
 class ::Google::Shopping::Merchant::Accounts::V1::EmailPreferencesService::ClientTest < Minitest::Test
