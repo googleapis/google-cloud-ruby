@@ -21,7 +21,6 @@ require "helper"
 require "gapic/grpc/service_stub"
 
 require "google/bigtable/admin/v2/bigtable_instance_admin_pb"
-require "google/bigtable/admin/v2/bigtable_instance_admin_services_pb"
 require "google/cloud/bigtable/admin/v2/bigtable_instance_admin"
 
 class ::Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdmin::ClientTest < Minitest::Test
