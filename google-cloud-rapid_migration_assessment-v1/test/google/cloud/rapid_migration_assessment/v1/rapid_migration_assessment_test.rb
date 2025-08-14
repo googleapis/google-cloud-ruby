@@ -21,7 +21,6 @@ require "helper"
 require "gapic/grpc/service_stub"
 
 require "google/cloud/rapidmigrationassessment/v1/rapidmigrationassessment_pb"
-require "google/cloud/rapidmigrationassessment/v1/rapidmigrationassessment_services_pb"
 require "google/cloud/rapid_migration_assessment/v1/rapid_migration_assessment"
 
 class ::Google::Cloud::RapidMigrationAssessment::V1::RapidMigrationAssessment::ClientTest < Minitest::Test

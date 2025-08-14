@@ -21,7 +21,6 @@ require "helper"
 require "gapic/grpc/service_stub"
 
 require "google/cloud/policytroubleshooter/iam/v3/troubleshooter_pb"
-require "google/cloud/policytroubleshooter/iam/v3/troubleshooter_services_pb"
 require "google/cloud/policy_troubleshooter/iam/v3/policy_troubleshooter"
 
 class ::Google::Cloud::PolicyTroubleshooter::Iam::V3::PolicyTroubleshooter::ClientTest < Minitest::Test

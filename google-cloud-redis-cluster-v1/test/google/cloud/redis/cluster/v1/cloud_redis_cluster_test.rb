@@ -21,7 +21,6 @@ require "helper"
 require "gapic/grpc/service_stub"
 
 require "google/cloud/redis/cluster/v1/cloud_redis_cluster_pb"
-require "google/cloud/redis/cluster/v1/cloud_redis_cluster_services_pb"
 require "google/cloud/redis/cluster/v1/cloud_redis_cluster"
 
 class ::Google::Cloud::Redis::Cluster::V1::CloudRedisCluster::ClientTest < Minitest::Test

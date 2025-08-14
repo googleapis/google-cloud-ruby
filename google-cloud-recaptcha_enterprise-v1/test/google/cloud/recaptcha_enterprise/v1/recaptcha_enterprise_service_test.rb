@@ -21,7 +21,6 @@ require "helper"
 require "gapic/grpc/service_stub"
 
 require "google/cloud/recaptchaenterprise/v1/recaptchaenterprise_pb"
-require "google/cloud/recaptchaenterprise/v1/recaptchaenterprise_services_pb"
 require "google/cloud/recaptcha_enterprise/v1/recaptcha_enterprise_service"
 
 class ::Google::Cloud::RecaptchaEnterprise::V1::RecaptchaEnterpriseService::ClientTest < Minitest::Test

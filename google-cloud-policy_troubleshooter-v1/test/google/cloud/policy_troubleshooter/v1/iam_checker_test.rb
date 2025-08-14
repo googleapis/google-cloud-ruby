@@ -21,7 +21,6 @@ require "helper"
 require "gapic/grpc/service_stub"
 
 require "google/cloud/policytroubleshooter/v1/checker_pb"
-require "google/cloud/policytroubleshooter/v1/checker_services_pb"
 require "google/cloud/policy_troubleshooter/v1/iam_checker"
 
 class ::Google::Cloud::PolicyTroubleshooter::V1::IamChecker::ClientTest < Minitest::Test

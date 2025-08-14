@@ -21,7 +21,6 @@ require "helper"
 require "gapic/grpc/service_stub"
 
 require "google/cloud/privatecatalog/v1beta1/private_catalog_pb"
-require "google/cloud/privatecatalog/v1beta1/private_catalog_services_pb"
 require "google/cloud/private_catalog/v1beta1/private_catalog"
 
 class ::Google::Cloud::PrivateCatalog::V1beta1::PrivateCatalog::ClientTest < Minitest::Test

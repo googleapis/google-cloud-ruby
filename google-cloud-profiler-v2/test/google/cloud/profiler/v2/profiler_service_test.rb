@@ -21,7 +21,6 @@ require "helper"
 require "gapic/grpc/service_stub"
 
 require "google/devtools/cloudprofiler/v2/profiler_pb"
-require "google/devtools/cloudprofiler/v2/profiler_services_pb"
 require "google/cloud/profiler/v2/profiler_service"
 
 class ::Google::Cloud::Profiler::V2::ProfilerService::ClientTest < Minitest::Test
