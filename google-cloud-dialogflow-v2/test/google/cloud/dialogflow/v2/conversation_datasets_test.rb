@@ -21,7 +21,6 @@ require "helper"
 require "gapic/grpc/service_stub"
 
 require "google/cloud/dialogflow/v2/conversation_dataset_pb"
-require "google/cloud/dialogflow/v2/conversation_dataset_services_pb"
 require "google/cloud/dialogflow/v2/conversation_datasets"
 
 class ::Google::Cloud::Dialogflow::V2::ConversationDatasets::ClientTest < Minitest::Test

@@ -21,7 +21,6 @@ require "helper"
 require "gapic/grpc/service_stub"
 
 require "google/cloud/dialogflow/cx/v3/webhook_pb"
-require "google/cloud/dialogflow/cx/v3/webhook_services_pb"
 require "google/cloud/dialogflow/cx/v3/webhooks"
 
 class ::Google::Cloud::Dialogflow::CX::V3::Webhooks::ClientTest < Minitest::Test
