@@ -21,7 +21,6 @@ require "helper"
 require "gapic/grpc/service_stub"
 
 require "google/iam/credentials/v1/iamcredentials_pb"
-require "google/iam/credentials/v1/iamcredentials_services_pb"
 require "google/iam/credentials/v1/iam_credentials"
 
 class ::Google::Iam::Credentials::V1::IAMCredentials::ClientTest < Minitest::Test

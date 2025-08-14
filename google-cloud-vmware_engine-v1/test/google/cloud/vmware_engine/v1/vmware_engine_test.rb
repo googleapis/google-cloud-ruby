@@ -21,7 +21,6 @@ require "helper"
 require "gapic/grpc/service_stub"
 
 require "google/cloud/vmwareengine/v1/vmwareengine_pb"
-require "google/cloud/vmwareengine/v1/vmwareengine_services_pb"
 require "google/cloud/vmware_engine/v1/vmware_engine"
 
 class ::Google::Cloud::VmwareEngine::V1::VmwareEngine::ClientTest < Minitest::Test

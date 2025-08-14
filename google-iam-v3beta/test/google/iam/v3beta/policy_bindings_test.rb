@@ -21,7 +21,6 @@ require "helper"
 require "gapic/grpc/service_stub"
 
 require "google/iam/v3beta/policy_bindings_service_pb"
-require "google/iam/v3beta/policy_bindings_service_services_pb"
 require "google/iam/v3beta/policy_bindings"
 
 class ::Google::Iam::V3beta::PolicyBindings::ClientTest < Minitest::Test

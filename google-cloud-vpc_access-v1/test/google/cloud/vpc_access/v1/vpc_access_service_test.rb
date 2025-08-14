@@ -21,7 +21,6 @@ require "helper"
 require "gapic/grpc/service_stub"
 
 require "google/cloud/vpcaccess/v1/vpc_access_pb"
-require "google/cloud/vpcaccess/v1/vpc_access_services_pb"
 require "google/cloud/vpc_access/v1/vpc_access_service"
 
 class ::Google::Cloud::VpcAccess::V1::VpcAccessService::ClientTest < Minitest::Test
