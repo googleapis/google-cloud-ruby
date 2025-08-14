@@ -21,7 +21,6 @@ require "helper"
 require "gapic/grpc/service_stub"
 
 require "google/pubsub/v1/schema_pb"
-require "google/pubsub/v1/schema_services_pb"
 require "google/cloud/pubsub/v1/schema_service"
 
 class ::Google::Cloud::PubSub::V1::SchemaService::ClientTest < Minitest::Test
