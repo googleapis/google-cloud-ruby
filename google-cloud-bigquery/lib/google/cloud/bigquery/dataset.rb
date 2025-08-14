@@ -60,11 +60,16 @@ module Google
         attr_reader :reference
 
         ##
+        # @private Access Policy Version for get, update, patch, and insert API calls
+        attr_accessor :access_policy_version
+
+        ##
         # @private Create an empty Dataset object.
         def initialize
           @service = nil
           @gapi = nil
           @reference = nil
+          @access_policy_version = nil
         end
 
         ##
@@ -2447,7 +2452,7 @@ module Google
         #
         def reload!
           ensure_service!
-          @gapi = service.get_project_dataset project_id, dataset_id
+          @gapi = service.get_project_dataset project_id, dataset_id, access_policy_version: @access_policy_version
           @reference = nil
           @exists = nil
           self
@@ -2576,10 +2581,11 @@ module Google
 
         ##
         # @private New Dataset from a Google API Client object.
-        def self.from_gapi gapi, conn
+        def self.from_gapi gapi, conn, access_policy_version: nil
           new.tap do |f|
             f.gapi = gapi
             f.service = conn
+            f.access_policy_version = access_policy_version
           end
         end
 
@@ -2903,7 +2909,7 @@ module Google
           patch_args = attributes.to_h { |attr| [attr, @gapi.send(attr)] }
           patch_gapi = Google::Apis::BigqueryV2::Dataset.new(**patch_args)
           patch_gapi.etag = etag if etag
-          @gapi = service.patch_dataset dataset_id, patch_gapi
+          @gapi = service.patch_dataset dataset_id, patch_gapi, access_policy_version: @access_policy_version
         end
 
         ##

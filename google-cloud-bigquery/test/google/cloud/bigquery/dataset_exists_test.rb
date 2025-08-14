@@ -67,7 +67,7 @@ describe Google::Cloud::Bigquery::Dataset, :exists, :mock_bigquery do
 
     it "checks if the dataset exists by making an HTTP call" do
       mock = Minitest::Mock.new
-      mock.expect :get_dataset, dataset_gapi, [project, dataset_id]
+      mock.expect :get_dataset, dataset_gapi, [project, dataset_id], access_policy_version: nil
       dataset.service.mocked_service = mock
 
       _(dataset).must_be :reference?
