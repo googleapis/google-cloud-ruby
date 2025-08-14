@@ -1195,10 +1195,10 @@ module Google
               #   @param router [::String]
               #     Name or id of the resource for this request. Name should conform to RFC1035.
               # @yield [result, operation] Access the result along with the TransportOperation object
-              # @yieldparam result [::Google::Cloud::Compute::V1::RoutersListBgpRoutes]
+              # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Compute::V1::BgpRoute>]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
-              # @return [::Google::Cloud::Compute::V1::RoutersListBgpRoutes]
+              # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Compute::V1::BgpRoute>]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
               #
@@ -1246,7 +1246,9 @@ module Google
                                        retry_policy: @config.retry_policy
 
                 @routers_stub.list_bgp_routes request, options do |result, operation|
+                  result = ::Gapic::Rest::PagedEnumerable.new @routers_stub, :list_bgp_routes, "result", request, result, options
                   yield result, operation if block_given?
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -1287,10 +1289,10 @@ module Google
               #   @param router [::String]
               #     Name or id of the resource for this request. Name should conform to RFC1035.
               # @yield [result, operation] Access the result along with the TransportOperation object
-              # @yieldparam result [::Google::Cloud::Compute::V1::RoutersListRoutePolicies]
+              # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Compute::V1::RoutePolicy>]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
-              # @return [::Google::Cloud::Compute::V1::RoutersListRoutePolicies]
+              # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Compute::V1::RoutePolicy>]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
               #
@@ -1338,7 +1340,9 @@ module Google
                                        retry_policy: @config.retry_policy
 
                 @routers_stub.list_route_policies request, options do |result, operation|
+                  result = ::Gapic::Rest::PagedEnumerable.new @routers_stub, :list_route_policies, "result", request, result, options
                   yield result, operation if block_given?
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)

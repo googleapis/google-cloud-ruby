@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright 2021 Google LLC
+# Copyright 2025 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -18,19 +18,19 @@
 
 require "google/cloud/errors"
 require "google/cloud/compute/v1/compute_pb"
-require "google/cloud/compute/v1/networks/rest/service_stub"
+require "google/cloud/compute/v1/interconnect_groups/rest/service_stub"
 require "google/cloud/compute/v1/global_operations/rest"
 
 module Google
   module Cloud
     module Compute
       module V1
-        module Networks
+        module InterconnectGroups
           module Rest
             ##
-            # REST client for the Networks service.
+            # REST client for the InterconnectGroups service.
             #
-            # The Networks API.
+            # The InterconnectGroups API.
             #
             class Client
               # @private
@@ -40,18 +40,18 @@ module Google
               DEFAULT_ENDPOINT_TEMPLATE = "compute.$UNIVERSE_DOMAIN$"
 
               # @private
-              attr_reader :networks_stub
+              attr_reader :interconnect_groups_stub
 
               ##
-              # Configure the Networks Client class.
+              # Configure the InterconnectGroups Client class.
               #
-              # See {::Google::Cloud::Compute::V1::Networks::Rest::Client::Configuration}
+              # See {::Google::Cloud::Compute::V1::InterconnectGroups::Rest::Client::Configuration}
               # for a description of the configuration fields.
               #
               # @example
               #
-              #   # Modify the configuration for all Networks clients
-              #   ::Google::Cloud::Compute::V1::Networks::Rest::Client.configure do |config|
+              #   # Modify the configuration for all InterconnectGroups clients
+              #   ::Google::Cloud::Compute::V1::InterconnectGroups::Rest::Client.configure do |config|
               #     config.timeout = 10.0
               #   end
               #
@@ -71,7 +71,7 @@ module Google
                                   end
                   default_config = Client::Configuration.new parent_config
 
-                  default_config.rpcs.add_peering.timeout = 600.0
+                  default_config.rpcs.create_members.timeout = 600.0
 
                   default_config.rpcs.delete.timeout = 600.0
 
@@ -80,8 +80,13 @@ module Google
                     initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [4, 14]
                   }
 
-                  default_config.rpcs.get_effective_firewalls.timeout = 600.0
-                  default_config.rpcs.get_effective_firewalls.retry_policy = {
+                  default_config.rpcs.get_iam_policy.timeout = 600.0
+                  default_config.rpcs.get_iam_policy.retry_policy = {
+                    initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [4, 14]
+                  }
+
+                  default_config.rpcs.get_operational_status.timeout = 600.0
+                  default_config.rpcs.get_operational_status.retry_policy = {
                     initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [4, 14]
                   }
 
@@ -92,20 +97,11 @@ module Google
                     initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [4, 14]
                   }
 
-                  default_config.rpcs.list_peering_routes.timeout = 600.0
-                  default_config.rpcs.list_peering_routes.retry_policy = {
-                    initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [4, 14]
-                  }
-
                   default_config.rpcs.patch.timeout = 600.0
 
-                  default_config.rpcs.remove_peering.timeout = 600.0
+                  default_config.rpcs.set_iam_policy.timeout = 600.0
 
-                  default_config.rpcs.request_remove_peering.timeout = 600.0
-
-                  default_config.rpcs.switch_to_custom_mode.timeout = 600.0
-
-                  default_config.rpcs.update_peering.timeout = 600.0
+                  default_config.rpcs.test_iam_permissions.timeout = 600.0
 
                   default_config
                 end
@@ -114,13 +110,13 @@ module Google
               end
 
               ##
-              # Configure the Networks Client instance.
+              # Configure the InterconnectGroups Client instance.
               #
               # The configuration is set to the derived mode, meaning that values can be changed,
               # but structural changes (adding new fields, etc.) are not allowed. Structural changes
               # should be made on {Client.configure}.
               #
-              # See {::Google::Cloud::Compute::V1::Networks::Rest::Client::Configuration}
+              # See {::Google::Cloud::Compute::V1::InterconnectGroups::Rest::Client::Configuration}
               # for a description of the configuration fields.
               #
               # @yield [config] Configure the Client client.
@@ -139,23 +135,23 @@ module Google
               # @return [String]
               #
               def universe_domain
-                @networks_stub.universe_domain
+                @interconnect_groups_stub.universe_domain
               end
 
               ##
-              # Create a new Networks REST client object.
+              # Create a new InterconnectGroups REST client object.
               #
               # @example
               #
               #   # Create a client using the default configuration
-              #   client = ::Google::Cloud::Compute::V1::Networks::Rest::Client.new
+              #   client = ::Google::Cloud::Compute::V1::InterconnectGroups::Rest::Client.new
               #
               #   # Create a client using a custom configuration
-              #   client = ::Google::Cloud::Compute::V1::Networks::Rest::Client.new do |config|
+              #   client = ::Google::Cloud::Compute::V1::InterconnectGroups::Rest::Client.new do |config|
               #     config.timeout = 10.0
               #   end
               #
-              # @yield [config] Configure the Networks client.
+              # @yield [config] Configure the InterconnectGroups client.
               # @yieldparam config [Client::Configuration]
               #
               def initialize
@@ -188,7 +184,7 @@ module Google
                   config.universe_domain = @config.universe_domain
                 end
 
-                @networks_stub = ::Google::Cloud::Compute::V1::Networks::Rest::ServiceStub.new(
+                @interconnect_groups_stub = ::Google::Cloud::Compute::V1::InterconnectGroups::Rest::ServiceStub.new(
                   endpoint: @config.endpoint,
                   endpoint_template: DEFAULT_ENDPOINT_TEMPLATE,
                   universe_domain: @config.universe_domain,
@@ -196,7 +192,7 @@ module Google
                   logger: @config.logger
                 )
 
-                @networks_stub.logger(stub: true)&.info do |entry|
+                @interconnect_groups_stub.logger(stub: true)&.info do |entry|
                   entry.set_system_name
                   entry.set_service
                   entry.message = "Created client for #{entry.service}"
@@ -220,37 +216,35 @@ module Google
               # @return [Logger]
               #
               def logger
-                @networks_stub.logger
+                @interconnect_groups_stub.logger
               end
 
               # Service calls
 
               ##
-              # Adds a peering to the specified network.
+              # Create Interconnects with redundancy by creating them in a specified interconnect group.
               #
-              # @overload add_peering(request, options = nil)
-              #   Pass arguments to `add_peering` via a request object, either of type
-              #   {::Google::Cloud::Compute::V1::AddPeeringNetworkRequest} or an equivalent Hash.
+              # @overload create_members(request, options = nil)
+              #   Pass arguments to `create_members` via a request object, either of type
+              #   {::Google::Cloud::Compute::V1::CreateMembersInterconnectGroupRequest} or an equivalent Hash.
               #
-              #   @param request [::Google::Cloud::Compute::V1::AddPeeringNetworkRequest, ::Hash]
+              #   @param request [::Google::Cloud::Compute::V1::CreateMembersInterconnectGroupRequest, ::Hash]
               #     A request object representing the call parameters. Required. To specify no
               #     parameters, or to keep all the default parameter values, pass an empty Hash.
               #   @param options [::Gapic::CallOptions, ::Hash]
               #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
               #
-              # @overload add_peering(network: nil, networks_add_peering_request_resource: nil, project: nil, request_id: nil)
-              #   Pass arguments to `add_peering` via keyword arguments. Note that at
+              # @overload create_members(interconnect_group: nil, interconnect_groups_create_members_request_resource: nil, project: nil)
+              #   Pass arguments to `create_members` via keyword arguments. Note that at
               #   least one keyword argument is required. To specify no parameters, or to keep all
               #   the default parameter values, pass an empty Hash as a request object (see above).
               #
-              #   @param network [::String]
-              #     Name of the network resource to add peering to.
-              #   @param networks_add_peering_request_resource [::Google::Cloud::Compute::V1::NetworksAddPeeringRequest, ::Hash]
+              #   @param interconnect_group [::String]
+              #     Name of the group resource to create members for.
+              #   @param interconnect_groups_create_members_request_resource [::Google::Cloud::Compute::V1::InterconnectGroupsCreateMembersRequest, ::Hash]
               #     The body resource for this request
               #   @param project [::String]
               #     Project ID for this request.
-              #   @param request_id [::String]
-              #     An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Gapic::GenericLRO::Operation]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
@@ -263,27 +257,27 @@ module Google
               #   require "google/cloud/compute/v1"
               #
               #   # Create a client object. The client can be reused for multiple calls.
-              #   client = Google::Cloud::Compute::V1::Networks::Rest::Client.new
+              #   client = Google::Cloud::Compute::V1::InterconnectGroups::Rest::Client.new
               #
               #   # Create a request. To set request fields, pass in keyword arguments.
-              #   request = Google::Cloud::Compute::V1::AddPeeringNetworkRequest.new
+              #   request = Google::Cloud::Compute::V1::CreateMembersInterconnectGroupRequest.new
               #
-              #   # Call the add_peering method.
-              #   result = client.add_peering request
+              #   # Call the create_members method.
+              #   result = client.create_members request
               #
               #   # The returned object is of type Google::Cloud::Compute::V1::Operation.
               #   p result
               #
-              def add_peering request, options = nil
+              def create_members request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
-                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Compute::V1::AddPeeringNetworkRequest
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Compute::V1::CreateMembersInterconnectGroupRequest
 
                 # Converts hash and nil to an options object
                 options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
                 # Customize the options with defaults
-                call_metadata = @config.rpcs.add_peering.metadata.to_h
+                call_metadata = @config.rpcs.create_members.metadata.to_h
 
                 # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
                 call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
@@ -294,15 +288,15 @@ module Google
                 call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
                 call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-                options.apply_defaults timeout:      @config.rpcs.add_peering.timeout,
+                options.apply_defaults timeout:      @config.rpcs.create_members.timeout,
                                        metadata:     call_metadata,
-                                       retry_policy: @config.rpcs.add_peering.retry_policy
+                                       retry_policy: @config.rpcs.create_members.retry_policy
 
                 options.apply_defaults timeout:      @config.timeout,
                                        metadata:     @config.metadata,
                                        retry_policy: @config.retry_policy
 
-                @networks_stub.add_peering request, options do |result, response|
+                @interconnect_groups_stub.create_members request, options do |result, response|
                   result = ::Google::Cloud::Compute::V1::GlobalOperations::Rest::NonstandardLro.create_operation(
                     operation: result,
                     client: global_operations,
@@ -319,29 +313,29 @@ module Google
               end
 
               ##
-              # Deletes the specified network.
+              # Deletes the specified InterconnectGroup in the given scope
               #
               # @overload delete(request, options = nil)
               #   Pass arguments to `delete` via a request object, either of type
-              #   {::Google::Cloud::Compute::V1::DeleteNetworkRequest} or an equivalent Hash.
+              #   {::Google::Cloud::Compute::V1::DeleteInterconnectGroupRequest} or an equivalent Hash.
               #
-              #   @param request [::Google::Cloud::Compute::V1::DeleteNetworkRequest, ::Hash]
+              #   @param request [::Google::Cloud::Compute::V1::DeleteInterconnectGroupRequest, ::Hash]
               #     A request object representing the call parameters. Required. To specify no
               #     parameters, or to keep all the default parameter values, pass an empty Hash.
               #   @param options [::Gapic::CallOptions, ::Hash]
               #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
               #
-              # @overload delete(network: nil, project: nil, request_id: nil)
+              # @overload delete(interconnect_group: nil, project: nil, request_id: nil)
               #   Pass arguments to `delete` via keyword arguments. Note that at
               #   least one keyword argument is required. To specify no parameters, or to keep all
               #   the default parameter values, pass an empty Hash as a request object (see above).
               #
-              #   @param network [::String]
-              #     Name of the network to delete.
+              #   @param interconnect_group [::String]
+              #     Name of the InterconnectGroup resource to delete.
               #   @param project [::String]
               #     Project ID for this request.
               #   @param request_id [::String]
-              #     An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
+              #     An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000). end_interface: MixerMutationRequestBuilder
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Gapic::GenericLRO::Operation]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
@@ -354,10 +348,10 @@ module Google
               #   require "google/cloud/compute/v1"
               #
               #   # Create a client object. The client can be reused for multiple calls.
-              #   client = Google::Cloud::Compute::V1::Networks::Rest::Client.new
+              #   client = Google::Cloud::Compute::V1::InterconnectGroups::Rest::Client.new
               #
               #   # Create a request. To set request fields, pass in keyword arguments.
-              #   request = Google::Cloud::Compute::V1::DeleteNetworkRequest.new
+              #   request = Google::Cloud::Compute::V1::DeleteInterconnectGroupRequest.new
               #
               #   # Call the delete method.
               #   result = client.delete request
@@ -368,7 +362,7 @@ module Google
               def delete request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
-                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Compute::V1::DeleteNetworkRequest
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Compute::V1::DeleteInterconnectGroupRequest
 
                 # Converts hash and nil to an options object
                 options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
@@ -393,7 +387,7 @@ module Google
                                        metadata:     @config.metadata,
                                        retry_policy: @config.retry_policy
 
-                @networks_stub.delete request, options do |result, response|
+                @interconnect_groups_stub.delete request, options do |result, response|
                   result = ::Google::Cloud::Compute::V1::GlobalOperations::Rest::NonstandardLro.create_operation(
                     operation: result,
                     client: global_operations,
@@ -410,32 +404,32 @@ module Google
               end
 
               ##
-              # Returns the specified network.
+              # Returns the specified InterconnectGroup resource in the given scope.
               #
               # @overload get(request, options = nil)
               #   Pass arguments to `get` via a request object, either of type
-              #   {::Google::Cloud::Compute::V1::GetNetworkRequest} or an equivalent Hash.
+              #   {::Google::Cloud::Compute::V1::GetInterconnectGroupRequest} or an equivalent Hash.
               #
-              #   @param request [::Google::Cloud::Compute::V1::GetNetworkRequest, ::Hash]
+              #   @param request [::Google::Cloud::Compute::V1::GetInterconnectGroupRequest, ::Hash]
               #     A request object representing the call parameters. Required. To specify no
               #     parameters, or to keep all the default parameter values, pass an empty Hash.
               #   @param options [::Gapic::CallOptions, ::Hash]
               #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
               #
-              # @overload get(network: nil, project: nil)
+              # @overload get(interconnect_group: nil, project: nil)
               #   Pass arguments to `get` via keyword arguments. Note that at
               #   least one keyword argument is required. To specify no parameters, or to keep all
               #   the default parameter values, pass an empty Hash as a request object (see above).
               #
-              #   @param network [::String]
-              #     Name of the network to return.
+              #   @param interconnect_group [::String]
+              #     Name of the InterconnectGroup resource to return.
               #   @param project [::String]
               #     Project ID for this request.
               # @yield [result, operation] Access the result along with the TransportOperation object
-              # @yieldparam result [::Google::Cloud::Compute::V1::Network]
+              # @yieldparam result [::Google::Cloud::Compute::V1::InterconnectGroup]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
-              # @return [::Google::Cloud::Compute::V1::Network]
+              # @return [::Google::Cloud::Compute::V1::InterconnectGroup]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
               #
@@ -443,21 +437,21 @@ module Google
               #   require "google/cloud/compute/v1"
               #
               #   # Create a client object. The client can be reused for multiple calls.
-              #   client = Google::Cloud::Compute::V1::Networks::Rest::Client.new
+              #   client = Google::Cloud::Compute::V1::InterconnectGroups::Rest::Client.new
               #
               #   # Create a request. To set request fields, pass in keyword arguments.
-              #   request = Google::Cloud::Compute::V1::GetNetworkRequest.new
+              #   request = Google::Cloud::Compute::V1::GetInterconnectGroupRequest.new
               #
               #   # Call the get method.
               #   result = client.get request
               #
-              #   # The returned object is of type Google::Cloud::Compute::V1::Network.
+              #   # The returned object is of type Google::Cloud::Compute::V1::InterconnectGroup.
               #   p result
               #
               def get request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
-                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Compute::V1::GetNetworkRequest
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Compute::V1::GetInterconnectGroupRequest
 
                 # Converts hash and nil to an options object
                 options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
@@ -482,7 +476,7 @@ module Google
                                        metadata:     @config.metadata,
                                        retry_policy: @config.retry_policy
 
-                @networks_stub.get request, options do |result, operation|
+                @interconnect_groups_stub.get request, options do |result, operation|
                   yield result, operation if block_given?
                 end
               rescue ::Gapic::Rest::Error => e
@@ -490,32 +484,34 @@ module Google
               end
 
               ##
-              # Returns the effective firewalls on a given network.
+              # Gets the access control policy for a resource. May be empty if no such policy or resource exists.
               #
-              # @overload get_effective_firewalls(request, options = nil)
-              #   Pass arguments to `get_effective_firewalls` via a request object, either of type
-              #   {::Google::Cloud::Compute::V1::GetEffectiveFirewallsNetworkRequest} or an equivalent Hash.
+              # @overload get_iam_policy(request, options = nil)
+              #   Pass arguments to `get_iam_policy` via a request object, either of type
+              #   {::Google::Cloud::Compute::V1::GetIamPolicyInterconnectGroupRequest} or an equivalent Hash.
               #
-              #   @param request [::Google::Cloud::Compute::V1::GetEffectiveFirewallsNetworkRequest, ::Hash]
+              #   @param request [::Google::Cloud::Compute::V1::GetIamPolicyInterconnectGroupRequest, ::Hash]
               #     A request object representing the call parameters. Required. To specify no
               #     parameters, or to keep all the default parameter values, pass an empty Hash.
               #   @param options [::Gapic::CallOptions, ::Hash]
               #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
               #
-              # @overload get_effective_firewalls(network: nil, project: nil)
-              #   Pass arguments to `get_effective_firewalls` via keyword arguments. Note that at
+              # @overload get_iam_policy(options_requested_policy_version: nil, project: nil, resource: nil)
+              #   Pass arguments to `get_iam_policy` via keyword arguments. Note that at
               #   least one keyword argument is required. To specify no parameters, or to keep all
               #   the default parameter values, pass an empty Hash as a request object (see above).
               #
-              #   @param network [::String]
-              #     Name of the network for this request.
+              #   @param options_requested_policy_version [::Integer]
+              #     Requested IAM Policy version.
               #   @param project [::String]
               #     Project ID for this request.
+              #   @param resource [::String]
+              #     Name or id of the resource for this request.
               # @yield [result, operation] Access the result along with the TransportOperation object
-              # @yieldparam result [::Google::Cloud::Compute::V1::NetworksGetEffectiveFirewallsResponse]
+              # @yieldparam result [::Google::Cloud::Compute::V1::Policy]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
-              # @return [::Google::Cloud::Compute::V1::NetworksGetEffectiveFirewallsResponse]
+              # @return [::Google::Cloud::Compute::V1::Policy]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
               #
@@ -523,27 +519,27 @@ module Google
               #   require "google/cloud/compute/v1"
               #
               #   # Create a client object. The client can be reused for multiple calls.
-              #   client = Google::Cloud::Compute::V1::Networks::Rest::Client.new
+              #   client = Google::Cloud::Compute::V1::InterconnectGroups::Rest::Client.new
               #
               #   # Create a request. To set request fields, pass in keyword arguments.
-              #   request = Google::Cloud::Compute::V1::GetEffectiveFirewallsNetworkRequest.new
+              #   request = Google::Cloud::Compute::V1::GetIamPolicyInterconnectGroupRequest.new
               #
-              #   # Call the get_effective_firewalls method.
-              #   result = client.get_effective_firewalls request
+              #   # Call the get_iam_policy method.
+              #   result = client.get_iam_policy request
               #
-              #   # The returned object is of type Google::Cloud::Compute::V1::NetworksGetEffectiveFirewallsResponse.
+              #   # The returned object is of type Google::Cloud::Compute::V1::Policy.
               #   p result
               #
-              def get_effective_firewalls request, options = nil
+              def get_iam_policy request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
-                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Compute::V1::GetEffectiveFirewallsNetworkRequest
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Compute::V1::GetIamPolicyInterconnectGroupRequest
 
                 # Converts hash and nil to an options object
                 options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
                 # Customize the options with defaults
-                call_metadata = @config.rpcs.get_effective_firewalls.metadata.to_h
+                call_metadata = @config.rpcs.get_iam_policy.metadata.to_h
 
                 # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
                 call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
@@ -554,15 +550,15 @@ module Google
                 call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
                 call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-                options.apply_defaults timeout:      @config.rpcs.get_effective_firewalls.timeout,
+                options.apply_defaults timeout:      @config.rpcs.get_iam_policy.timeout,
                                        metadata:     call_metadata,
-                                       retry_policy: @config.rpcs.get_effective_firewalls.retry_policy
+                                       retry_policy: @config.rpcs.get_iam_policy.retry_policy
 
                 options.apply_defaults timeout:      @config.timeout,
                                        metadata:     @config.metadata,
                                        retry_policy: @config.retry_policy
 
-                @networks_stub.get_effective_firewalls request, options do |result, operation|
+                @interconnect_groups_stub.get_iam_policy request, options do |result, operation|
                   yield result, operation if block_given?
                 end
               rescue ::Gapic::Rest::Error => e
@@ -570,29 +566,109 @@ module Google
               end
 
               ##
-              # Creates a network in the specified project using the data included in the request.
+              # Returns the interconnectStatuses for the specified InterconnectGroup.
               #
-              # @overload insert(request, options = nil)
-              #   Pass arguments to `insert` via a request object, either of type
-              #   {::Google::Cloud::Compute::V1::InsertNetworkRequest} or an equivalent Hash.
+              # @overload get_operational_status(request, options = nil)
+              #   Pass arguments to `get_operational_status` via a request object, either of type
+              #   {::Google::Cloud::Compute::V1::GetOperationalStatusInterconnectGroupRequest} or an equivalent Hash.
               #
-              #   @param request [::Google::Cloud::Compute::V1::InsertNetworkRequest, ::Hash]
+              #   @param request [::Google::Cloud::Compute::V1::GetOperationalStatusInterconnectGroupRequest, ::Hash]
               #     A request object representing the call parameters. Required. To specify no
               #     parameters, or to keep all the default parameter values, pass an empty Hash.
               #   @param options [::Gapic::CallOptions, ::Hash]
               #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
               #
-              # @overload insert(network_resource: nil, project: nil, request_id: nil)
+              # @overload get_operational_status(interconnect_group: nil, project: nil)
+              #   Pass arguments to `get_operational_status` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param interconnect_group [::String]
+              #     Name of the interconnectGroup resource to query.
+              #   @param project [::String]
+              #     Project ID for this request.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Cloud::Compute::V1::InterconnectGroupsGetOperationalStatusResponse]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Cloud::Compute::V1::InterconnectGroupsGetOperationalStatusResponse]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/compute/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Compute::V1::InterconnectGroups::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Compute::V1::GetOperationalStatusInterconnectGroupRequest.new
+              #
+              #   # Call the get_operational_status method.
+              #   result = client.get_operational_status request
+              #
+              #   # The returned object is of type Google::Cloud::Compute::V1::InterconnectGroupsGetOperationalStatusResponse.
+              #   p result
+              #
+              def get_operational_status request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Compute::V1::GetOperationalStatusInterconnectGroupRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.get_operational_status.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::Compute::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.get_operational_status.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.get_operational_status.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @interconnect_groups_stub.get_operational_status request, options do |result, operation|
+                  yield result, operation if block_given?
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Creates a InterconnectGroup in the specified project in the given scope using the parameters that are included in the request.
+              #
+              # @overload insert(request, options = nil)
+              #   Pass arguments to `insert` via a request object, either of type
+              #   {::Google::Cloud::Compute::V1::InsertInterconnectGroupRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::Compute::V1::InsertInterconnectGroupRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload insert(interconnect_group_resource: nil, project: nil, request_id: nil)
               #   Pass arguments to `insert` via keyword arguments. Note that at
               #   least one keyword argument is required. To specify no parameters, or to keep all
               #   the default parameter values, pass an empty Hash as a request object (see above).
               #
-              #   @param network_resource [::Google::Cloud::Compute::V1::Network, ::Hash]
+              #   @param interconnect_group_resource [::Google::Cloud::Compute::V1::InterconnectGroup, ::Hash]
               #     The body resource for this request
               #   @param project [::String]
               #     Project ID for this request.
               #   @param request_id [::String]
-              #     An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
+              #     An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000). end_interface: MixerMutationRequestBuilder
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Gapic::GenericLRO::Operation]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
@@ -605,10 +681,10 @@ module Google
               #   require "google/cloud/compute/v1"
               #
               #   # Create a client object. The client can be reused for multiple calls.
-              #   client = Google::Cloud::Compute::V1::Networks::Rest::Client.new
+              #   client = Google::Cloud::Compute::V1::InterconnectGroups::Rest::Client.new
               #
               #   # Create a request. To set request fields, pass in keyword arguments.
-              #   request = Google::Cloud::Compute::V1::InsertNetworkRequest.new
+              #   request = Google::Cloud::Compute::V1::InsertInterconnectGroupRequest.new
               #
               #   # Call the insert method.
               #   result = client.insert request
@@ -619,7 +695,7 @@ module Google
               def insert request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
-                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Compute::V1::InsertNetworkRequest
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Compute::V1::InsertInterconnectGroupRequest
 
                 # Converts hash and nil to an options object
                 options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
@@ -644,7 +720,7 @@ module Google
                                        metadata:     @config.metadata,
                                        retry_policy: @config.retry_policy
 
-                @networks_stub.insert request, options do |result, response|
+                @interconnect_groups_stub.insert request, options do |result, response|
                   result = ::Google::Cloud::Compute::V1::GlobalOperations::Rest::NonstandardLro.create_operation(
                     operation: result,
                     client: global_operations,
@@ -661,13 +737,13 @@ module Google
               end
 
               ##
-              # Retrieves the list of networks available to the specified project.
+              # Lists the InterconnectGroups for a project in the given scope.
               #
               # @overload list(request, options = nil)
               #   Pass arguments to `list` via a request object, either of type
-              #   {::Google::Cloud::Compute::V1::ListNetworksRequest} or an equivalent Hash.
+              #   {::Google::Cloud::Compute::V1::ListInterconnectGroupsRequest} or an equivalent Hash.
               #
-              #   @param request [::Google::Cloud::Compute::V1::ListNetworksRequest, ::Hash]
+              #   @param request [::Google::Cloud::Compute::V1::ListInterconnectGroupsRequest, ::Hash]
               #     A request object representing the call parameters. Required. To specify no
               #     parameters, or to keep all the default parameter values, pass an empty Hash.
               #   @param options [::Gapic::CallOptions, ::Hash]
@@ -691,10 +767,10 @@ module Google
               #   @param return_partial_success [::Boolean]
               #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.
               # @yield [result, operation] Access the result along with the TransportOperation object
-              # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Compute::V1::Network>]
+              # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Compute::V1::InterconnectGroup>]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
-              # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Compute::V1::Network>]
+              # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Compute::V1::InterconnectGroup>]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
               #
@@ -702,21 +778,21 @@ module Google
               #   require "google/cloud/compute/v1"
               #
               #   # Create a client object. The client can be reused for multiple calls.
-              #   client = Google::Cloud::Compute::V1::Networks::Rest::Client.new
+              #   client = Google::Cloud::Compute::V1::InterconnectGroups::Rest::Client.new
               #
               #   # Create a request. To set request fields, pass in keyword arguments.
-              #   request = Google::Cloud::Compute::V1::ListNetworksRequest.new
+              #   request = Google::Cloud::Compute::V1::ListInterconnectGroupsRequest.new
               #
               #   # Call the list method.
               #   result = client.list request
               #
-              #   # The returned object is of type Google::Cloud::Compute::V1::NetworkList.
+              #   # The returned object is of type Google::Cloud::Compute::V1::InterconnectGroupsListResponse.
               #   p result
               #
               def list request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
-                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Compute::V1::ListNetworksRequest
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Compute::V1::ListInterconnectGroupsRequest
 
                 # Converts hash and nil to an options object
                 options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
@@ -741,8 +817,8 @@ module Google
                                        metadata:     @config.metadata,
                                        retry_policy: @config.retry_policy
 
-                @networks_stub.list request, options do |result, operation|
-                  result = ::Gapic::Rest::PagedEnumerable.new @networks_stub, :list, "items", request, result, options
+                @interconnect_groups_stub.list request, options do |result, operation|
+                  result = ::Gapic::Rest::PagedEnumerable.new @interconnect_groups_stub, :list, "items", request, result, options
                   yield result, operation if block_given?
                   throw :response, result
                 end
@@ -751,130 +827,33 @@ module Google
               end
 
               ##
-              # Lists the peering routes exchanged over peering connection.
-              #
-              # @overload list_peering_routes(request, options = nil)
-              #   Pass arguments to `list_peering_routes` via a request object, either of type
-              #   {::Google::Cloud::Compute::V1::ListPeeringRoutesNetworksRequest} or an equivalent Hash.
-              #
-              #   @param request [::Google::Cloud::Compute::V1::ListPeeringRoutesNetworksRequest, ::Hash]
-              #     A request object representing the call parameters. Required. To specify no
-              #     parameters, or to keep all the default parameter values, pass an empty Hash.
-              #   @param options [::Gapic::CallOptions, ::Hash]
-              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
-              #
-              # @overload list_peering_routes(direction: nil, filter: nil, max_results: nil, network: nil, order_by: nil, page_token: nil, peering_name: nil, project: nil, region: nil, return_partial_success: nil)
-              #   Pass arguments to `list_peering_routes` via keyword arguments. Note that at
-              #   least one keyword argument is required. To specify no parameters, or to keep all
-              #   the default parameter values, pass an empty Hash as a request object (see above).
-              #
-              #   @param direction [::String]
-              #     The direction of the exchanged routes.
-              #     Check the Direction enum for the list of possible values.
-              #   @param filter [::String]
-              #     A filter expression that filters resources listed in the response. Most Compute resources support two types of filter expressions: expressions that support regular expressions and expressions that follow API improvement proposal AIP-160. These two types of filter expressions cannot be mixed in one request. If you want to use AIP-160, your expression must specify the field name, an operator, and the value that you want to use for filtering. The value must be a string, a number, or a boolean. The operator must be either `=`, `!=`, `>`, `<`, `<=`, `>=` or `:`. For example, if you are filtering Compute Engine instances, you can exclude instances named `example-instance` by specifying `name != example-instance`. The `:*` comparison can be used to test whether a key has been defined. For example, to find all objects with `owner` label use: ``` labels.owner:* ``` You can also filter nested fields. For example, you could specify `scheduling.automaticRestart = false` to include instances only if they are not scheduled for automatic restarts. You can use filtering on nested fields to filter based on resource labels. To filter on multiple expressions, provide each separate expression within parentheses. For example: ``` (scheduling.automaticRestart = true) (cpuPlatform = "Intel Skylake") ``` By default, each expression is an `AND` expression. However, you can include `AND` and `OR` expressions explicitly. For example: ``` (cpuPlatform = "Intel Skylake") OR (cpuPlatform = "Intel Broadwell") AND (scheduling.automaticRestart = true) ``` If you want to use a regular expression, use the `eq` (equal) or `ne` (not equal) operator against a single un-parenthesized expression with or without quotes or against multiple parenthesized expressions. Examples: `fieldname eq unquoted literal` `fieldname eq 'single quoted literal'` `fieldname eq "double quoted literal"` `(fieldname1 eq literal) (fieldname2 ne "literal")` The literal value is interpreted as a regular expression using Google RE2 library syntax. The literal value must match the entire field. For example, to filter for instances that do not end with name "instance", you would use `name ne .*instance`. You cannot combine constraints on multiple fields using regular expressions.
-              #   @param max_results [::Integer]
-              #     The maximum number of results per page that should be returned. If the number of available results is larger than `maxResults`, Compute Engine returns a `nextPageToken` that can be used to get the next page of results in subsequent list requests. Acceptable values are `0` to `500`, inclusive. (Default: `500`)
-              #   @param network [::String]
-              #     Name of the network for this request.
-              #   @param order_by [::String]
-              #     Sorts list results by a certain order. By default, results are returned in alphanumerical order based on the resource name. You can also sort results in descending order based on the creation timestamp using `orderBy="creationTimestamp desc"`. This sorts results based on the `creationTimestamp` field in reverse chronological order (newest result first). Use this to sort resources like operations so that the newest operation is returned first. Currently, only sorting by `name` or `creationTimestamp desc` is supported.
-              #   @param page_token [::String]
-              #     Specifies a page token to use. Set `pageToken` to the `nextPageToken` returned by a previous list request to get the next page of results.
-              #   @param peering_name [::String]
-              #     The response will show routes exchanged over the given peering connection.
-              #   @param project [::String]
-              #     Project ID for this request.
-              #   @param region [::String]
-              #     The region of the request. The response will include all subnet routes, static routes and dynamic routes in the region.
-              #   @param return_partial_success [::Boolean]
-              #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.
-              # @yield [result, operation] Access the result along with the TransportOperation object
-              # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Compute::V1::ExchangedPeeringRoute>]
-              # @yieldparam operation [::Gapic::Rest::TransportOperation]
-              #
-              # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Compute::V1::ExchangedPeeringRoute>]
-              #
-              # @raise [::Google::Cloud::Error] if the REST call is aborted.
-              #
-              # @example Basic example
-              #   require "google/cloud/compute/v1"
-              #
-              #   # Create a client object. The client can be reused for multiple calls.
-              #   client = Google::Cloud::Compute::V1::Networks::Rest::Client.new
-              #
-              #   # Create a request. To set request fields, pass in keyword arguments.
-              #   request = Google::Cloud::Compute::V1::ListPeeringRoutesNetworksRequest.new
-              #
-              #   # Call the list_peering_routes method.
-              #   result = client.list_peering_routes request
-              #
-              #   # The returned object is of type Google::Cloud::Compute::V1::ExchangedPeeringRoutesList.
-              #   p result
-              #
-              def list_peering_routes request, options = nil
-                raise ::ArgumentError, "request must be provided" if request.nil?
-
-                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Compute::V1::ListPeeringRoutesNetworksRequest
-
-                # Converts hash and nil to an options object
-                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
-
-                # Customize the options with defaults
-                call_metadata = @config.rpcs.list_peering_routes.metadata.to_h
-
-                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
-                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
-                  lib_name: @config.lib_name, lib_version: @config.lib_version,
-                  gapic_version: ::Google::Cloud::Compute::V1::VERSION,
-                  transports_version_send: [:rest]
-
-                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
-                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
-
-                options.apply_defaults timeout:      @config.rpcs.list_peering_routes.timeout,
-                                       metadata:     call_metadata,
-                                       retry_policy: @config.rpcs.list_peering_routes.retry_policy
-
-                options.apply_defaults timeout:      @config.timeout,
-                                       metadata:     @config.metadata,
-                                       retry_policy: @config.retry_policy
-
-                @networks_stub.list_peering_routes request, options do |result, operation|
-                  result = ::Gapic::Rest::PagedEnumerable.new @networks_stub, :list_peering_routes, "items", request, result, options
-                  yield result, operation if block_given?
-                  throw :response, result
-                end
-              rescue ::Gapic::Rest::Error => e
-                raise ::Google::Cloud::Error.from_error(e)
-              end
-
-              ##
-              # Patches the specified network with the data included in the request. Only routingConfig can be modified.
+              # Patches the specified InterconnectGroup resource with the data included in the request. This method supports PATCH semantics and uses JSON merge patch format and processing rules.
               #
               # @overload patch(request, options = nil)
               #   Pass arguments to `patch` via a request object, either of type
-              #   {::Google::Cloud::Compute::V1::PatchNetworkRequest} or an equivalent Hash.
+              #   {::Google::Cloud::Compute::V1::PatchInterconnectGroupRequest} or an equivalent Hash.
               #
-              #   @param request [::Google::Cloud::Compute::V1::PatchNetworkRequest, ::Hash]
+              #   @param request [::Google::Cloud::Compute::V1::PatchInterconnectGroupRequest, ::Hash]
               #     A request object representing the call parameters. Required. To specify no
               #     parameters, or to keep all the default parameter values, pass an empty Hash.
               #   @param options [::Gapic::CallOptions, ::Hash]
               #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
               #
-              # @overload patch(network: nil, network_resource: nil, project: nil, request_id: nil)
+              # @overload patch(interconnect_group: nil, interconnect_group_resource: nil, project: nil, request_id: nil, update_mask: nil)
               #   Pass arguments to `patch` via keyword arguments. Note that at
               #   least one keyword argument is required. To specify no parameters, or to keep all
               #   the default parameter values, pass an empty Hash as a request object (see above).
               #
-              #   @param network [::String]
-              #     Name of the network to update.
-              #   @param network_resource [::Google::Cloud::Compute::V1::Network, ::Hash]
+              #   @param interconnect_group [::String]
+              #     Name of the InterconnectGroup resource to patch.
+              #   @param interconnect_group_resource [::Google::Cloud::Compute::V1::InterconnectGroup, ::Hash]
               #     The body resource for this request
               #   @param project [::String]
               #     Project ID for this request.
               #   @param request_id [::String]
-              #     An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
+              #     An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000). end_interface: MixerMutationRequestBuilder
+              #   @param update_mask [::String]
+              #     The list of fields to update.
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Gapic::GenericLRO::Operation]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
@@ -887,10 +866,10 @@ module Google
               #   require "google/cloud/compute/v1"
               #
               #   # Create a client object. The client can be reused for multiple calls.
-              #   client = Google::Cloud::Compute::V1::Networks::Rest::Client.new
+              #   client = Google::Cloud::Compute::V1::InterconnectGroups::Rest::Client.new
               #
               #   # Create a request. To set request fields, pass in keyword arguments.
-              #   request = Google::Cloud::Compute::V1::PatchNetworkRequest.new
+              #   request = Google::Cloud::Compute::V1::PatchInterconnectGroupRequest.new
               #
               #   # Call the patch method.
               #   result = client.patch request
@@ -901,7 +880,7 @@ module Google
               def patch request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
-                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Compute::V1::PatchNetworkRequest
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Compute::V1::PatchInterconnectGroupRequest
 
                 # Converts hash and nil to an options object
                 options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
@@ -926,7 +905,7 @@ module Google
                                        metadata:     @config.metadata,
                                        retry_policy: @config.retry_policy
 
-                @networks_stub.patch request, options do |result, response|
+                @interconnect_groups_stub.patch request, options do |result, response|
                   result = ::Google::Cloud::Compute::V1::GlobalOperations::Rest::NonstandardLro.create_operation(
                     operation: result,
                     client: global_operations,
@@ -943,36 +922,34 @@ module Google
               end
 
               ##
-              # Removes a peering from the specified network.
+              # Sets the access control policy on the specified resource. Replaces any existing policy.
               #
-              # @overload remove_peering(request, options = nil)
-              #   Pass arguments to `remove_peering` via a request object, either of type
-              #   {::Google::Cloud::Compute::V1::RemovePeeringNetworkRequest} or an equivalent Hash.
+              # @overload set_iam_policy(request, options = nil)
+              #   Pass arguments to `set_iam_policy` via a request object, either of type
+              #   {::Google::Cloud::Compute::V1::SetIamPolicyInterconnectGroupRequest} or an equivalent Hash.
               #
-              #   @param request [::Google::Cloud::Compute::V1::RemovePeeringNetworkRequest, ::Hash]
+              #   @param request [::Google::Cloud::Compute::V1::SetIamPolicyInterconnectGroupRequest, ::Hash]
               #     A request object representing the call parameters. Required. To specify no
               #     parameters, or to keep all the default parameter values, pass an empty Hash.
               #   @param options [::Gapic::CallOptions, ::Hash]
               #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
               #
-              # @overload remove_peering(network: nil, networks_remove_peering_request_resource: nil, project: nil, request_id: nil)
-              #   Pass arguments to `remove_peering` via keyword arguments. Note that at
+              # @overload set_iam_policy(global_set_policy_request_resource: nil, project: nil, resource: nil)
+              #   Pass arguments to `set_iam_policy` via keyword arguments. Note that at
               #   least one keyword argument is required. To specify no parameters, or to keep all
               #   the default parameter values, pass an empty Hash as a request object (see above).
               #
-              #   @param network [::String]
-              #     Name of the network resource to remove peering from.
-              #   @param networks_remove_peering_request_resource [::Google::Cloud::Compute::V1::NetworksRemovePeeringRequest, ::Hash]
+              #   @param global_set_policy_request_resource [::Google::Cloud::Compute::V1::GlobalSetPolicyRequest, ::Hash]
               #     The body resource for this request
               #   @param project [::String]
               #     Project ID for this request.
-              #   @param request_id [::String]
-              #     An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
+              #   @param resource [::String]
+              #     Name or id of the resource for this request.
               # @yield [result, operation] Access the result along with the TransportOperation object
-              # @yieldparam result [::Gapic::GenericLRO::Operation]
+              # @yieldparam result [::Google::Cloud::Compute::V1::Policy]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
-              # @return [::Gapic::GenericLRO::Operation]
+              # @return [::Google::Cloud::Compute::V1::Policy]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
               #
@@ -980,27 +957,27 @@ module Google
               #   require "google/cloud/compute/v1"
               #
               #   # Create a client object. The client can be reused for multiple calls.
-              #   client = Google::Cloud::Compute::V1::Networks::Rest::Client.new
+              #   client = Google::Cloud::Compute::V1::InterconnectGroups::Rest::Client.new
               #
               #   # Create a request. To set request fields, pass in keyword arguments.
-              #   request = Google::Cloud::Compute::V1::RemovePeeringNetworkRequest.new
+              #   request = Google::Cloud::Compute::V1::SetIamPolicyInterconnectGroupRequest.new
               #
-              #   # Call the remove_peering method.
-              #   result = client.remove_peering request
+              #   # Call the set_iam_policy method.
+              #   result = client.set_iam_policy request
               #
-              #   # The returned object is of type Google::Cloud::Compute::V1::Operation.
+              #   # The returned object is of type Google::Cloud::Compute::V1::Policy.
               #   p result
               #
-              def remove_peering request, options = nil
+              def set_iam_policy request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
-                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Compute::V1::RemovePeeringNetworkRequest
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Compute::V1::SetIamPolicyInterconnectGroupRequest
 
                 # Converts hash and nil to an options object
                 options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
                 # Customize the options with defaults
-                call_metadata = @config.rpcs.remove_peering.metadata.to_h
+                call_metadata = @config.rpcs.set_iam_policy.metadata.to_h
 
                 # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
                 call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
@@ -1011,61 +988,50 @@ module Google
                 call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
                 call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-                options.apply_defaults timeout:      @config.rpcs.remove_peering.timeout,
+                options.apply_defaults timeout:      @config.rpcs.set_iam_policy.timeout,
                                        metadata:     call_metadata,
-                                       retry_policy: @config.rpcs.remove_peering.retry_policy
+                                       retry_policy: @config.rpcs.set_iam_policy.retry_policy
 
                 options.apply_defaults timeout:      @config.timeout,
                                        metadata:     @config.metadata,
                                        retry_policy: @config.retry_policy
 
-                @networks_stub.remove_peering request, options do |result, response|
-                  result = ::Google::Cloud::Compute::V1::GlobalOperations::Rest::NonstandardLro.create_operation(
-                    operation: result,
-                    client: global_operations,
-                    request_values: {
-                      "project" => request.project
-                    },
-                    options: options
-                  )
-                  yield result, response if block_given?
-                  throw :response, result
+                @interconnect_groups_stub.set_iam_policy request, options do |result, operation|
+                  yield result, operation if block_given?
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
               end
 
               ##
-              # Requests to remove a peering from the specified network. Applicable only for PeeringConnection with update_strategy=CONSENSUS.
+              # Returns permissions that a caller has on the specified resource.
               #
-              # @overload request_remove_peering(request, options = nil)
-              #   Pass arguments to `request_remove_peering` via a request object, either of type
-              #   {::Google::Cloud::Compute::V1::RequestRemovePeeringNetworkRequest} or an equivalent Hash.
+              # @overload test_iam_permissions(request, options = nil)
+              #   Pass arguments to `test_iam_permissions` via a request object, either of type
+              #   {::Google::Cloud::Compute::V1::TestIamPermissionsInterconnectGroupRequest} or an equivalent Hash.
               #
-              #   @param request [::Google::Cloud::Compute::V1::RequestRemovePeeringNetworkRequest, ::Hash]
+              #   @param request [::Google::Cloud::Compute::V1::TestIamPermissionsInterconnectGroupRequest, ::Hash]
               #     A request object representing the call parameters. Required. To specify no
               #     parameters, or to keep all the default parameter values, pass an empty Hash.
               #   @param options [::Gapic::CallOptions, ::Hash]
               #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
               #
-              # @overload request_remove_peering(network: nil, networks_request_remove_peering_request_resource: nil, project: nil, request_id: nil)
-              #   Pass arguments to `request_remove_peering` via keyword arguments. Note that at
+              # @overload test_iam_permissions(project: nil, resource: nil, test_permissions_request_resource: nil)
+              #   Pass arguments to `test_iam_permissions` via keyword arguments. Note that at
               #   least one keyword argument is required. To specify no parameters, or to keep all
               #   the default parameter values, pass an empty Hash as a request object (see above).
               #
-              #   @param network [::String]
-              #     Name of the network resource to remove peering from.
-              #   @param networks_request_remove_peering_request_resource [::Google::Cloud::Compute::V1::NetworksRequestRemovePeeringRequest, ::Hash]
+              #   @param project [::String]
+              #     Project ID for this request.
+              #   @param resource [::String]
+              #     Name or id of the resource for this request.
+              #   @param test_permissions_request_resource [::Google::Cloud::Compute::V1::TestPermissionsRequest, ::Hash]
               #     The body resource for this request
-              #   @param project [::String]
-              #     Project ID for this request.
-              #   @param request_id [::String]
-              #     An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
               # @yield [result, operation] Access the result along with the TransportOperation object
-              # @yieldparam result [::Gapic::GenericLRO::Operation]
+              # @yieldparam result [::Google::Cloud::Compute::V1::TestPermissionsResponse]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
-              # @return [::Gapic::GenericLRO::Operation]
+              # @return [::Google::Cloud::Compute::V1::TestPermissionsResponse]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
               #
@@ -1073,27 +1039,27 @@ module Google
               #   require "google/cloud/compute/v1"
               #
               #   # Create a client object. The client can be reused for multiple calls.
-              #   client = Google::Cloud::Compute::V1::Networks::Rest::Client.new
+              #   client = Google::Cloud::Compute::V1::InterconnectGroups::Rest::Client.new
               #
               #   # Create a request. To set request fields, pass in keyword arguments.
-              #   request = Google::Cloud::Compute::V1::RequestRemovePeeringNetworkRequest.new
+              #   request = Google::Cloud::Compute::V1::TestIamPermissionsInterconnectGroupRequest.new
               #
-              #   # Call the request_remove_peering method.
-              #   result = client.request_remove_peering request
+              #   # Call the test_iam_permissions method.
+              #   result = client.test_iam_permissions request
               #
-              #   # The returned object is of type Google::Cloud::Compute::V1::Operation.
+              #   # The returned object is of type Google::Cloud::Compute::V1::TestPermissionsResponse.
               #   p result
               #
-              def request_remove_peering request, options = nil
+              def test_iam_permissions request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
-                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Compute::V1::RequestRemovePeeringNetworkRequest
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Compute::V1::TestIamPermissionsInterconnectGroupRequest
 
                 # Converts hash and nil to an options object
                 options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
                 # Customize the options with defaults
-                call_metadata = @config.rpcs.request_remove_peering.metadata.to_h
+                call_metadata = @config.rpcs.test_iam_permissions.metadata.to_h
 
                 # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
                 call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
@@ -1104,222 +1070,29 @@ module Google
                 call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
                 call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-                options.apply_defaults timeout:      @config.rpcs.request_remove_peering.timeout,
+                options.apply_defaults timeout:      @config.rpcs.test_iam_permissions.timeout,
                                        metadata:     call_metadata,
-                                       retry_policy: @config.rpcs.request_remove_peering.retry_policy
+                                       retry_policy: @config.rpcs.test_iam_permissions.retry_policy
 
                 options.apply_defaults timeout:      @config.timeout,
                                        metadata:     @config.metadata,
                                        retry_policy: @config.retry_policy
 
-                @networks_stub.request_remove_peering request, options do |result, response|
-                  result = ::Google::Cloud::Compute::V1::GlobalOperations::Rest::NonstandardLro.create_operation(
-                    operation: result,
-                    client: global_operations,
-                    request_values: {
-                      "project" => request.project
-                    },
-                    options: options
-                  )
-                  yield result, response if block_given?
-                  throw :response, result
+                @interconnect_groups_stub.test_iam_permissions request, options do |result, operation|
+                  yield result, operation if block_given?
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
               end
 
               ##
-              # Switches the network mode from auto subnet mode to custom subnet mode.
+              # Configuration class for the InterconnectGroups REST API.
               #
-              # @overload switch_to_custom_mode(request, options = nil)
-              #   Pass arguments to `switch_to_custom_mode` via a request object, either of type
-              #   {::Google::Cloud::Compute::V1::SwitchToCustomModeNetworkRequest} or an equivalent Hash.
-              #
-              #   @param request [::Google::Cloud::Compute::V1::SwitchToCustomModeNetworkRequest, ::Hash]
-              #     A request object representing the call parameters. Required. To specify no
-              #     parameters, or to keep all the default parameter values, pass an empty Hash.
-              #   @param options [::Gapic::CallOptions, ::Hash]
-              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
-              #
-              # @overload switch_to_custom_mode(network: nil, project: nil, request_id: nil)
-              #   Pass arguments to `switch_to_custom_mode` via keyword arguments. Note that at
-              #   least one keyword argument is required. To specify no parameters, or to keep all
-              #   the default parameter values, pass an empty Hash as a request object (see above).
-              #
-              #   @param network [::String]
-              #     Name of the network to be updated.
-              #   @param project [::String]
-              #     Project ID for this request.
-              #   @param request_id [::String]
-              #     An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
-              # @yield [result, operation] Access the result along with the TransportOperation object
-              # @yieldparam result [::Gapic::GenericLRO::Operation]
-              # @yieldparam operation [::Gapic::Rest::TransportOperation]
-              #
-              # @return [::Gapic::GenericLRO::Operation]
-              #
-              # @raise [::Google::Cloud::Error] if the REST call is aborted.
-              #
-              # @example Basic example
-              #   require "google/cloud/compute/v1"
-              #
-              #   # Create a client object. The client can be reused for multiple calls.
-              #   client = Google::Cloud::Compute::V1::Networks::Rest::Client.new
-              #
-              #   # Create a request. To set request fields, pass in keyword arguments.
-              #   request = Google::Cloud::Compute::V1::SwitchToCustomModeNetworkRequest.new
-              #
-              #   # Call the switch_to_custom_mode method.
-              #   result = client.switch_to_custom_mode request
-              #
-              #   # The returned object is of type Google::Cloud::Compute::V1::Operation.
-              #   p result
-              #
-              def switch_to_custom_mode request, options = nil
-                raise ::ArgumentError, "request must be provided" if request.nil?
-
-                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Compute::V1::SwitchToCustomModeNetworkRequest
-
-                # Converts hash and nil to an options object
-                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
-
-                # Customize the options with defaults
-                call_metadata = @config.rpcs.switch_to_custom_mode.metadata.to_h
-
-                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
-                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
-                  lib_name: @config.lib_name, lib_version: @config.lib_version,
-                  gapic_version: ::Google::Cloud::Compute::V1::VERSION,
-                  transports_version_send: [:rest]
-
-                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
-                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
-
-                options.apply_defaults timeout:      @config.rpcs.switch_to_custom_mode.timeout,
-                                       metadata:     call_metadata,
-                                       retry_policy: @config.rpcs.switch_to_custom_mode.retry_policy
-
-                options.apply_defaults timeout:      @config.timeout,
-                                       metadata:     @config.metadata,
-                                       retry_policy: @config.retry_policy
-
-                @networks_stub.switch_to_custom_mode request, options do |result, response|
-                  result = ::Google::Cloud::Compute::V1::GlobalOperations::Rest::NonstandardLro.create_operation(
-                    operation: result,
-                    client: global_operations,
-                    request_values: {
-                      "project" => request.project
-                    },
-                    options: options
-                  )
-                  yield result, response if block_given?
-                  throw :response, result
-                end
-              rescue ::Gapic::Rest::Error => e
-                raise ::Google::Cloud::Error.from_error(e)
-              end
-
-              ##
-              # Updates the specified network peering with the data included in the request. You can only modify the NetworkPeering.export_custom_routes field and the NetworkPeering.import_custom_routes field.
-              #
-              # @overload update_peering(request, options = nil)
-              #   Pass arguments to `update_peering` via a request object, either of type
-              #   {::Google::Cloud::Compute::V1::UpdatePeeringNetworkRequest} or an equivalent Hash.
-              #
-              #   @param request [::Google::Cloud::Compute::V1::UpdatePeeringNetworkRequest, ::Hash]
-              #     A request object representing the call parameters. Required. To specify no
-              #     parameters, or to keep all the default parameter values, pass an empty Hash.
-              #   @param options [::Gapic::CallOptions, ::Hash]
-              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
-              #
-              # @overload update_peering(network: nil, networks_update_peering_request_resource: nil, project: nil, request_id: nil)
-              #   Pass arguments to `update_peering` via keyword arguments. Note that at
-              #   least one keyword argument is required. To specify no parameters, or to keep all
-              #   the default parameter values, pass an empty Hash as a request object (see above).
-              #
-              #   @param network [::String]
-              #     Name of the network resource which the updated peering is belonging to.
-              #   @param networks_update_peering_request_resource [::Google::Cloud::Compute::V1::NetworksUpdatePeeringRequest, ::Hash]
-              #     The body resource for this request
-              #   @param project [::String]
-              #     Project ID for this request.
-              #   @param request_id [::String]
-              #     An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
-              # @yield [result, operation] Access the result along with the TransportOperation object
-              # @yieldparam result [::Gapic::GenericLRO::Operation]
-              # @yieldparam operation [::Gapic::Rest::TransportOperation]
-              #
-              # @return [::Gapic::GenericLRO::Operation]
-              #
-              # @raise [::Google::Cloud::Error] if the REST call is aborted.
-              #
-              # @example Basic example
-              #   require "google/cloud/compute/v1"
-              #
-              #   # Create a client object. The client can be reused for multiple calls.
-              #   client = Google::Cloud::Compute::V1::Networks::Rest::Client.new
-              #
-              #   # Create a request. To set request fields, pass in keyword arguments.
-              #   request = Google::Cloud::Compute::V1::UpdatePeeringNetworkRequest.new
-              #
-              #   # Call the update_peering method.
-              #   result = client.update_peering request
-              #
-              #   # The returned object is of type Google::Cloud::Compute::V1::Operation.
-              #   p result
-              #
-              def update_peering request, options = nil
-                raise ::ArgumentError, "request must be provided" if request.nil?
-
-                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Compute::V1::UpdatePeeringNetworkRequest
-
-                # Converts hash and nil to an options object
-                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
-
-                # Customize the options with defaults
-                call_metadata = @config.rpcs.update_peering.metadata.to_h
-
-                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
-                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
-                  lib_name: @config.lib_name, lib_version: @config.lib_version,
-                  gapic_version: ::Google::Cloud::Compute::V1::VERSION,
-                  transports_version_send: [:rest]
-
-                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
-                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
-
-                options.apply_defaults timeout:      @config.rpcs.update_peering.timeout,
-                                       metadata:     call_metadata,
-                                       retry_policy: @config.rpcs.update_peering.retry_policy
-
-                options.apply_defaults timeout:      @config.timeout,
-                                       metadata:     @config.metadata,
-                                       retry_policy: @config.retry_policy
-
-                @networks_stub.update_peering request, options do |result, response|
-                  result = ::Google::Cloud::Compute::V1::GlobalOperations::Rest::NonstandardLro.create_operation(
-                    operation: result,
-                    client: global_operations,
-                    request_values: {
-                      "project" => request.project
-                    },
-                    options: options
-                  )
-                  yield result, response if block_given?
-                  throw :response, result
-                end
-              rescue ::Gapic::Rest::Error => e
-                raise ::Google::Cloud::Error.from_error(e)
-              end
-
-              ##
-              # Configuration class for the Networks REST API.
-              #
-              # This class represents the configuration for Networks REST,
+              # This class represents the configuration for InterconnectGroups REST,
               # providing control over timeouts, retry behavior, logging, transport
               # parameters, and other low-level controls. Certain parameters can also be
               # applied individually to specific RPCs. See
-              # {::Google::Cloud::Compute::V1::Networks::Rest::Client::Configuration::Rpcs}
+              # {::Google::Cloud::Compute::V1::InterconnectGroups::Rest::Client::Configuration::Rpcs}
               # for a list of RPCs that can be configured independently.
               #
               # Configuration can be applied globally to all clients, or to a single client
@@ -1328,17 +1101,17 @@ module Google
               # @example
               #
               #   # Modify the global config, setting the timeout for
-              #   # add_peering to 20 seconds,
+              #   # create_members to 20 seconds,
               #   # and all remaining timeouts to 10 seconds.
-              #   ::Google::Cloud::Compute::V1::Networks::Rest::Client.configure do |config|
+              #   ::Google::Cloud::Compute::V1::InterconnectGroups::Rest::Client.configure do |config|
               #     config.timeout = 10.0
-              #     config.rpcs.add_peering.timeout = 20.0
+              #     config.rpcs.create_members.timeout = 20.0
               #   end
               #
               #   # Apply the above configuration only to a new client.
-              #   client = ::Google::Cloud::Compute::V1::Networks::Rest::Client.new do |config|
+              #   client = ::Google::Cloud::Compute::V1::InterconnectGroups::Rest::Client.new do |config|
               #     config.timeout = 10.0
-              #     config.rpcs.add_peering.timeout = 20.0
+              #     config.rpcs.create_members.timeout = 20.0
               #   end
               #
               # @!attribute [rw] endpoint
@@ -1441,7 +1214,7 @@ module Google
                 end
 
                 ##
-                # Configuration RPC class for the Networks API.
+                # Configuration RPC class for the InterconnectGroups API.
                 #
                 # Includes fields providing the configuration for each RPC in this service.
                 # Each configuration object is of type `Gapic::Config::Method` and includes
@@ -1459,10 +1232,10 @@ module Google
                 #
                 class Rpcs
                   ##
-                  # RPC-specific configuration for `add_peering`
+                  # RPC-specific configuration for `create_members`
                   # @return [::Gapic::Config::Method]
                   #
-                  attr_reader :add_peering
+                  attr_reader :create_members
                   ##
                   # RPC-specific configuration for `delete`
                   # @return [::Gapic::Config::Method]
@@ -1474,10 +1247,15 @@ module Google
                   #
                   attr_reader :get
                   ##
-                  # RPC-specific configuration for `get_effective_firewalls`
+                  # RPC-specific configuration for `get_iam_policy`
                   # @return [::Gapic::Config::Method]
                   #
-                  attr_reader :get_effective_firewalls
+                  attr_reader :get_iam_policy
+                  ##
+                  # RPC-specific configuration for `get_operational_status`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :get_operational_status
                   ##
                   # RPC-specific configuration for `insert`
                   # @return [::Gapic::Config::Method]
@@ -1489,62 +1267,43 @@ module Google
                   #
                   attr_reader :list
                   ##
-                  # RPC-specific configuration for `list_peering_routes`
-                  # @return [::Gapic::Config::Method]
-                  #
-                  attr_reader :list_peering_routes
-                  ##
                   # RPC-specific configuration for `patch`
                   # @return [::Gapic::Config::Method]
                   #
                   attr_reader :patch
                   ##
-                  # RPC-specific configuration for `remove_peering`
+                  # RPC-specific configuration for `set_iam_policy`
                   # @return [::Gapic::Config::Method]
                   #
-                  attr_reader :remove_peering
+                  attr_reader :set_iam_policy
                   ##
-                  # RPC-specific configuration for `request_remove_peering`
+                  # RPC-specific configuration for `test_iam_permissions`
                   # @return [::Gapic::Config::Method]
                   #
-                  attr_reader :request_remove_peering
-                  ##
-                  # RPC-specific configuration for `switch_to_custom_mode`
-                  # @return [::Gapic::Config::Method]
-                  #
-                  attr_reader :switch_to_custom_mode
-                  ##
-                  # RPC-specific configuration for `update_peering`
-                  # @return [::Gapic::Config::Method]
-                  #
-                  attr_reader :update_peering
+                  attr_reader :test_iam_permissions
 
                   # @private
                   def initialize parent_rpcs = nil
-                    add_peering_config = parent_rpcs.add_peering if parent_rpcs.respond_to? :add_peering
-                    @add_peering = ::Gapic::Config::Method.new add_peering_config
+                    create_members_config = parent_rpcs.create_members if parent_rpcs.respond_to? :create_members
+                    @create_members = ::Gapic::Config::Method.new create_members_config
                     delete_config = parent_rpcs.delete if parent_rpcs.respond_to? :delete
                     @delete = ::Gapic::Config::Method.new delete_config
                     get_config = parent_rpcs.get if parent_rpcs.respond_to? :get
                     @get = ::Gapic::Config::Method.new get_config
-                    get_effective_firewalls_config = parent_rpcs.get_effective_firewalls if parent_rpcs.respond_to? :get_effective_firewalls
-                    @get_effective_firewalls = ::Gapic::Config::Method.new get_effective_firewalls_config
+                    get_iam_policy_config = parent_rpcs.get_iam_policy if parent_rpcs.respond_to? :get_iam_policy
+                    @get_iam_policy = ::Gapic::Config::Method.new get_iam_policy_config
+                    get_operational_status_config = parent_rpcs.get_operational_status if parent_rpcs.respond_to? :get_operational_status
+                    @get_operational_status = ::Gapic::Config::Method.new get_operational_status_config
                     insert_config = parent_rpcs.insert if parent_rpcs.respond_to? :insert
                     @insert = ::Gapic::Config::Method.new insert_config
                     list_config = parent_rpcs.list if parent_rpcs.respond_to? :list
                     @list = ::Gapic::Config::Method.new list_config
-                    list_peering_routes_config = parent_rpcs.list_peering_routes if parent_rpcs.respond_to? :list_peering_routes
-                    @list_peering_routes = ::Gapic::Config::Method.new list_peering_routes_config
                     patch_config = parent_rpcs.patch if parent_rpcs.respond_to? :patch
                     @patch = ::Gapic::Config::Method.new patch_config
-                    remove_peering_config = parent_rpcs.remove_peering if parent_rpcs.respond_to? :remove_peering
-                    @remove_peering = ::Gapic::Config::Method.new remove_peering_config
-                    request_remove_peering_config = parent_rpcs.request_remove_peering if parent_rpcs.respond_to? :request_remove_peering
-                    @request_remove_peering = ::Gapic::Config::Method.new request_remove_peering_config
-                    switch_to_custom_mode_config = parent_rpcs.switch_to_custom_mode if parent_rpcs.respond_to? :switch_to_custom_mode
-                    @switch_to_custom_mode = ::Gapic::Config::Method.new switch_to_custom_mode_config
-                    update_peering_config = parent_rpcs.update_peering if parent_rpcs.respond_to? :update_peering
-                    @update_peering = ::Gapic::Config::Method.new update_peering_config
+                    set_iam_policy_config = parent_rpcs.set_iam_policy if parent_rpcs.respond_to? :set_iam_policy
+                    @set_iam_policy = ::Gapic::Config::Method.new set_iam_policy_config
+                    test_iam_permissions_config = parent_rpcs.test_iam_permissions if parent_rpcs.respond_to? :test_iam_permissions
+                    @test_iam_permissions = ::Gapic::Config::Method.new test_iam_permissions_config
 
                     yield self if block_given?
                   end
