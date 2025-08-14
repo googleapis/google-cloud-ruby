@@ -21,7 +21,6 @@ require "helper"
 require "gapic/grpc/service_stub"
 
 require "google/cloud/aiplatform/v1/gen_ai_cache_service_pb"
-require "google/cloud/aiplatform/v1/gen_ai_cache_service_services_pb"
 require "google/cloud/ai_platform/v1/gen_ai_cache_service"
 
 class ::Google::Cloud::AIPlatform::V1::GenAiCacheService::ClientTest < Minitest::Test

@@ -21,7 +21,6 @@ require "helper"
 require "gapic/grpc/service_stub"
 
 require "google/analytics/admin/v1alpha/analytics_admin_pb"
-require "google/analytics/admin/v1alpha/analytics_admin_services_pb"
 require "google/analytics/admin/v1alpha/analytics_admin_service"
 
 class ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::ClientTest < Minitest::Test
