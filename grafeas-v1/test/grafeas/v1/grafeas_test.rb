@@ -21,7 +21,6 @@ require "helper"
 require "gapic/grpc/service_stub"
 
 require "grafeas/v1/grafeas_pb"
-require "grafeas/v1/grafeas_services_pb"
 require "grafeas/v1/grafeas"
 
 class ::Grafeas::V1::Grafeas::ClientTest < Minitest::Test
