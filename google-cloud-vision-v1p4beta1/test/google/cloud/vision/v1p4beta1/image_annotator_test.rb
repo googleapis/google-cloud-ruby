@@ -21,7 +21,6 @@ require "helper"
 require "gapic/grpc/service_stub"
 
 require "google/cloud/vision/v1p4beta1/image_annotator_pb"
-require "google/cloud/vision/v1p4beta1/image_annotator_services_pb"
 require "google/cloud/vision/v1p4beta1/image_annotator"
 
 class ::Google::Cloud::Vision::V1p4beta1::ImageAnnotator::ClientTest < Minitest::Test

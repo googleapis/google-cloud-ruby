@@ -21,7 +21,6 @@ require "helper"
 require "gapic/grpc/service_stub"
 
 require "google/cloud/visionai/v1/platform_pb"
-require "google/cloud/visionai/v1/platform_services_pb"
 require "google/cloud/vision_ai/v1/app_platform"
 
 class ::Google::Cloud::VisionAI::V1::AppPlatform::ClientTest < Minitest::Test

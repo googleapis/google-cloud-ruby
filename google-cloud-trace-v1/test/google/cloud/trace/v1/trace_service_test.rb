@@ -21,7 +21,6 @@ require "helper"
 require "gapic/grpc/service_stub"
 
 require "google/devtools/cloudtrace/v1/trace_pb"
-require "google/devtools/cloudtrace/v1/trace_services_pb"
 require "google/cloud/trace/v1/trace_service"
 
 class ::Google::Cloud::Trace::V1::TraceService::ClientTest < Minitest::Test
