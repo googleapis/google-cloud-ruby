@@ -21,7 +21,6 @@ require "helper"
 require "gapic/grpc/service_stub"
 
 require "google/shopping/merchant/accounts/v1/online_return_policy_pb"
-require "google/shopping/merchant/accounts/v1/online_return_policy_services_pb"
 require "google/shopping/merchant/accounts/v1/online_return_policy_service"
 
 class ::Google::Shopping::Merchant::Accounts::V1::OnlineReturnPolicyService::ClientTest < Minitest::Test

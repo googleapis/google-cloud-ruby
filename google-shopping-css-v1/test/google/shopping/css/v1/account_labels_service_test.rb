@@ -21,7 +21,6 @@ require "helper"
 require "gapic/grpc/service_stub"
 
 require "google/shopping/css/v1/accounts_labels_pb"
-require "google/shopping/css/v1/accounts_labels_services_pb"
 require "google/shopping/css/v1/account_labels_service"
 
 class ::Google::Shopping::Css::V1::AccountLabelsService::ClientTest < Minitest::Test

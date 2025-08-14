@@ -21,7 +21,6 @@ require "helper"
 require "gapic/grpc/service_stub"
 
 require "google/maps/fleetengine/delivery/v1/delivery_api_pb"
-require "google/maps/fleetengine/delivery/v1/delivery_api_services_pb"
 require "google/maps/fleet_engine/delivery/v1/delivery_service"
 
 class ::Google::Maps::FleetEngine::Delivery::V1::DeliveryService::ClientTest < Minitest::Test

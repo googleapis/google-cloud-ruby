@@ -21,7 +21,6 @@ require "helper"
 require "gapic/grpc/service_stub"
 
 require "google/shopping/merchant/notifications/v1beta/notificationsapi_pb"
-require "google/shopping/merchant/notifications/v1beta/notificationsapi_services_pb"
 require "google/shopping/merchant/notifications/v1beta/notifications_api_service"
 
 class ::Google::Shopping::Merchant::Notifications::V1beta::NotificationsApiService::ClientTest < Minitest::Test
