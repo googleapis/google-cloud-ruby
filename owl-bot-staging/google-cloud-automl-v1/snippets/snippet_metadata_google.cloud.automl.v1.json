@@ -1,0 +1,815 @@
+{
+  "client_library": {
+    "name": "google-cloud-automl-v1",
+    "version": "",
+    "language": "RUBY",
+    "apis": [
+      {
+        "id": "google.cloud.automl.v1",
+        "version": "v1"
+      }
+    ]
+  },
+  "snippets": [
+    {
+      "region_tag": "automl_v1_generated_PredictionService_Predict_sync",
+      "title": "Snippet for the predict call in the PredictionService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AutoML::V1::PredictionService::Client#predict.",
+      "file": "prediction_service/predict.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "predict",
+        "full_name": "::Google::Cloud::AutoML::V1::PredictionService::Client#predict",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::AutoML::V1::PredictRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::AutoML::V1::PredictResponse",
+        "client": {
+          "short_name": "PredictionService::Client",
+          "full_name": "::Google::Cloud::AutoML::V1::PredictionService::Client"
+        },
+        "method": {
+          "short_name": "Predict",
+          "full_name": "google.cloud.automl.v1.PredictionService.Predict",
+          "service": {
+            "short_name": "PredictionService",
+            "full_name": "google.cloud.automl.v1.PredictionService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "automl_v1_generated_PredictionService_BatchPredict_sync",
+      "title": "Snippet for the batch_predict call in the PredictionService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AutoML::V1::PredictionService::Client#batch_predict.",
+      "file": "prediction_service/batch_predict.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "batch_predict",
+        "full_name": "::Google::Cloud::AutoML::V1::PredictionService::Client#batch_predict",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::AutoML::V1::BatchPredictRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "PredictionService::Client",
+          "full_name": "::Google::Cloud::AutoML::V1::PredictionService::Client"
+        },
+        "method": {
+          "short_name": "BatchPredict",
+          "full_name": "google.cloud.automl.v1.PredictionService.BatchPredict",
+          "service": {
+            "short_name": "PredictionService",
+            "full_name": "google.cloud.automl.v1.PredictionService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "automl_v1_generated_AutoML_CreateDataset_sync",
+      "title": "Snippet for the create_dataset call in the AutoML service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AutoML::V1::AutoML::Client#create_dataset.",
+      "file": "automl/create_dataset.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_dataset",
+        "full_name": "::Google::Cloud::AutoML::V1::AutoML::Client#create_dataset",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::AutoML::V1::CreateDatasetRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "AutoML::Client",
+          "full_name": "::Google::Cloud::AutoML::V1::AutoML::Client"
+        },
+        "method": {
+          "short_name": "CreateDataset",
+          "full_name": "google.cloud.automl.v1.AutoMl.CreateDataset",
+          "service": {
+            "short_name": "AutoMl",
+            "full_name": "google.cloud.automl.v1.AutoMl"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "automl_v1_generated_AutoML_GetDataset_sync",
+      "title": "Snippet for the get_dataset call in the AutoML service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AutoML::V1::AutoML::Client#get_dataset.",
+      "file": "automl/get_dataset.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_dataset",
+        "full_name": "::Google::Cloud::AutoML::V1::AutoML::Client#get_dataset",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::AutoML::V1::GetDatasetRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::AutoML::V1::Dataset",
+        "client": {
+          "short_name": "AutoML::Client",
+          "full_name": "::Google::Cloud::AutoML::V1::AutoML::Client"
+        },
+        "method": {
+          "short_name": "GetDataset",
+          "full_name": "google.cloud.automl.v1.AutoMl.GetDataset",
+          "service": {
+            "short_name": "AutoMl",
+            "full_name": "google.cloud.automl.v1.AutoMl"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "automl_v1_generated_AutoML_ListDatasets_sync",
+      "title": "Snippet for the list_datasets call in the AutoML service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AutoML::V1::AutoML::Client#list_datasets.",
+      "file": "automl/list_datasets.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_datasets",
+        "full_name": "::Google::Cloud::AutoML::V1::AutoML::Client#list_datasets",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::AutoML::V1::ListDatasetsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::AutoML::V1::ListDatasetsResponse",
+        "client": {
+          "short_name": "AutoML::Client",
+          "full_name": "::Google::Cloud::AutoML::V1::AutoML::Client"
+        },
+        "method": {
+          "short_name": "ListDatasets",
+          "full_name": "google.cloud.automl.v1.AutoMl.ListDatasets",
+          "service": {
+            "short_name": "AutoMl",
+            "full_name": "google.cloud.automl.v1.AutoMl"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "automl_v1_generated_AutoML_UpdateDataset_sync",
+      "title": "Snippet for the update_dataset call in the AutoML service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AutoML::V1::AutoML::Client#update_dataset.",
+      "file": "automl/update_dataset.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_dataset",
+        "full_name": "::Google::Cloud::AutoML::V1::AutoML::Client#update_dataset",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::AutoML::V1::UpdateDatasetRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::AutoML::V1::Dataset",
+        "client": {
+          "short_name": "AutoML::Client",
+          "full_name": "::Google::Cloud::AutoML::V1::AutoML::Client"
+        },
+        "method": {
+          "short_name": "UpdateDataset",
+          "full_name": "google.cloud.automl.v1.AutoMl.UpdateDataset",
+          "service": {
+            "short_name": "AutoMl",
+            "full_name": "google.cloud.automl.v1.AutoMl"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "automl_v1_generated_AutoML_DeleteDataset_sync",
+      "title": "Snippet for the delete_dataset call in the AutoML service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AutoML::V1::AutoML::Client#delete_dataset.",
+      "file": "automl/delete_dataset.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_dataset",
+        "full_name": "::Google::Cloud::AutoML::V1::AutoML::Client#delete_dataset",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::AutoML::V1::DeleteDatasetRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "AutoML::Client",
+          "full_name": "::Google::Cloud::AutoML::V1::AutoML::Client"
+        },
+        "method": {
+          "short_name": "DeleteDataset",
+          "full_name": "google.cloud.automl.v1.AutoMl.DeleteDataset",
+          "service": {
+            "short_name": "AutoMl",
+            "full_name": "google.cloud.automl.v1.AutoMl"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "automl_v1_generated_AutoML_ImportData_sync",
+      "title": "Snippet for the import_data call in the AutoML service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AutoML::V1::AutoML::Client#import_data.",
+      "file": "automl/import_data.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "import_data",
+        "full_name": "::Google::Cloud::AutoML::V1::AutoML::Client#import_data",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::AutoML::V1::ImportDataRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "AutoML::Client",
+          "full_name": "::Google::Cloud::AutoML::V1::AutoML::Client"
+        },
+        "method": {
+          "short_name": "ImportData",
+          "full_name": "google.cloud.automl.v1.AutoMl.ImportData",
+          "service": {
+            "short_name": "AutoMl",
+            "full_name": "google.cloud.automl.v1.AutoMl"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "automl_v1_generated_AutoML_ExportData_sync",
+      "title": "Snippet for the export_data call in the AutoML service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AutoML::V1::AutoML::Client#export_data.",
+      "file": "automl/export_data.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "export_data",
+        "full_name": "::Google::Cloud::AutoML::V1::AutoML::Client#export_data",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::AutoML::V1::ExportDataRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "AutoML::Client",
+          "full_name": "::Google::Cloud::AutoML::V1::AutoML::Client"
+        },
+        "method": {
+          "short_name": "ExportData",
+          "full_name": "google.cloud.automl.v1.AutoMl.ExportData",
+          "service": {
+            "short_name": "AutoMl",
+            "full_name": "google.cloud.automl.v1.AutoMl"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "automl_v1_generated_AutoML_GetAnnotationSpec_sync",
+      "title": "Snippet for the get_annotation_spec call in the AutoML service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AutoML::V1::AutoML::Client#get_annotation_spec.",
+      "file": "automl/get_annotation_spec.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_annotation_spec",
+        "full_name": "::Google::Cloud::AutoML::V1::AutoML::Client#get_annotation_spec",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::AutoML::V1::GetAnnotationSpecRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::AutoML::V1::AnnotationSpec",
+        "client": {
+          "short_name": "AutoML::Client",
+          "full_name": "::Google::Cloud::AutoML::V1::AutoML::Client"
+        },
+        "method": {
+          "short_name": "GetAnnotationSpec",
+          "full_name": "google.cloud.automl.v1.AutoMl.GetAnnotationSpec",
+          "service": {
+            "short_name": "AutoMl",
+            "full_name": "google.cloud.automl.v1.AutoMl"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "automl_v1_generated_AutoML_CreateModel_sync",
+      "title": "Snippet for the create_model call in the AutoML service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AutoML::V1::AutoML::Client#create_model.",
+      "file": "automl/create_model.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_model",
+        "full_name": "::Google::Cloud::AutoML::V1::AutoML::Client#create_model",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::AutoML::V1::CreateModelRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "AutoML::Client",
+          "full_name": "::Google::Cloud::AutoML::V1::AutoML::Client"
+        },
+        "method": {
+          "short_name": "CreateModel",
+          "full_name": "google.cloud.automl.v1.AutoMl.CreateModel",
+          "service": {
+            "short_name": "AutoMl",
+            "full_name": "google.cloud.automl.v1.AutoMl"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "automl_v1_generated_AutoML_GetModel_sync",
+      "title": "Snippet for the get_model call in the AutoML service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AutoML::V1::AutoML::Client#get_model.",
+      "file": "automl/get_model.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_model",
+        "full_name": "::Google::Cloud::AutoML::V1::AutoML::Client#get_model",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::AutoML::V1::GetModelRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::AutoML::V1::Model",
+        "client": {
+          "short_name": "AutoML::Client",
+          "full_name": "::Google::Cloud::AutoML::V1::AutoML::Client"
+        },
+        "method": {
+          "short_name": "GetModel",
+          "full_name": "google.cloud.automl.v1.AutoMl.GetModel",
+          "service": {
+            "short_name": "AutoMl",
+            "full_name": "google.cloud.automl.v1.AutoMl"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "automl_v1_generated_AutoML_ListModels_sync",
+      "title": "Snippet for the list_models call in the AutoML service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AutoML::V1::AutoML::Client#list_models.",
+      "file": "automl/list_models.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_models",
+        "full_name": "::Google::Cloud::AutoML::V1::AutoML::Client#list_models",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::AutoML::V1::ListModelsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::AutoML::V1::ListModelsResponse",
+        "client": {
+          "short_name": "AutoML::Client",
+          "full_name": "::Google::Cloud::AutoML::V1::AutoML::Client"
+        },
+        "method": {
+          "short_name": "ListModels",
+          "full_name": "google.cloud.automl.v1.AutoMl.ListModels",
+          "service": {
+            "short_name": "AutoMl",
+            "full_name": "google.cloud.automl.v1.AutoMl"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "automl_v1_generated_AutoML_DeleteModel_sync",
+      "title": "Snippet for the delete_model call in the AutoML service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AutoML::V1::AutoML::Client#delete_model.",
+      "file": "automl/delete_model.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_model",
+        "full_name": "::Google::Cloud::AutoML::V1::AutoML::Client#delete_model",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::AutoML::V1::DeleteModelRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "AutoML::Client",
+          "full_name": "::Google::Cloud::AutoML::V1::AutoML::Client"
+        },
+        "method": {
+          "short_name": "DeleteModel",
+          "full_name": "google.cloud.automl.v1.AutoMl.DeleteModel",
+          "service": {
+            "short_name": "AutoMl",
+            "full_name": "google.cloud.automl.v1.AutoMl"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "automl_v1_generated_AutoML_UpdateModel_sync",
+      "title": "Snippet for the update_model call in the AutoML service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AutoML::V1::AutoML::Client#update_model.",
+      "file": "automl/update_model.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_model",
+        "full_name": "::Google::Cloud::AutoML::V1::AutoML::Client#update_model",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::AutoML::V1::UpdateModelRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::AutoML::V1::Model",
+        "client": {
+          "short_name": "AutoML::Client",
+          "full_name": "::Google::Cloud::AutoML::V1::AutoML::Client"
+        },
+        "method": {
+          "short_name": "UpdateModel",
+          "full_name": "google.cloud.automl.v1.AutoMl.UpdateModel",
+          "service": {
+            "short_name": "AutoMl",
+            "full_name": "google.cloud.automl.v1.AutoMl"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "automl_v1_generated_AutoML_DeployModel_sync",
+      "title": "Snippet for the deploy_model call in the AutoML service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AutoML::V1::AutoML::Client#deploy_model.",
+      "file": "automl/deploy_model.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "deploy_model",
+        "full_name": "::Google::Cloud::AutoML::V1::AutoML::Client#deploy_model",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::AutoML::V1::DeployModelRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "AutoML::Client",
+          "full_name": "::Google::Cloud::AutoML::V1::AutoML::Client"
+        },
+        "method": {
+          "short_name": "DeployModel",
+          "full_name": "google.cloud.automl.v1.AutoMl.DeployModel",
+          "service": {
+            "short_name": "AutoMl",
+            "full_name": "google.cloud.automl.v1.AutoMl"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "automl_v1_generated_AutoML_UndeployModel_sync",
+      "title": "Snippet for the undeploy_model call in the AutoML service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AutoML::V1::AutoML::Client#undeploy_model.",
+      "file": "automl/undeploy_model.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "undeploy_model",
+        "full_name": "::Google::Cloud::AutoML::V1::AutoML::Client#undeploy_model",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::AutoML::V1::UndeployModelRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "AutoML::Client",
+          "full_name": "::Google::Cloud::AutoML::V1::AutoML::Client"
+        },
+        "method": {
+          "short_name": "UndeployModel",
+          "full_name": "google.cloud.automl.v1.AutoMl.UndeployModel",
+          "service": {
+            "short_name": "AutoMl",
+            "full_name": "google.cloud.automl.v1.AutoMl"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "automl_v1_generated_AutoML_ExportModel_sync",
+      "title": "Snippet for the export_model call in the AutoML service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AutoML::V1::AutoML::Client#export_model.",
+      "file": "automl/export_model.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "export_model",
+        "full_name": "::Google::Cloud::AutoML::V1::AutoML::Client#export_model",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::AutoML::V1::ExportModelRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "AutoML::Client",
+          "full_name": "::Google::Cloud::AutoML::V1::AutoML::Client"
+        },
+        "method": {
+          "short_name": "ExportModel",
+          "full_name": "google.cloud.automl.v1.AutoMl.ExportModel",
+          "service": {
+            "short_name": "AutoMl",
+            "full_name": "google.cloud.automl.v1.AutoMl"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "automl_v1_generated_AutoML_GetModelEvaluation_sync",
+      "title": "Snippet for the get_model_evaluation call in the AutoML service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AutoML::V1::AutoML::Client#get_model_evaluation.",
+      "file": "automl/get_model_evaluation.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_model_evaluation",
+        "full_name": "::Google::Cloud::AutoML::V1::AutoML::Client#get_model_evaluation",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::AutoML::V1::GetModelEvaluationRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::AutoML::V1::ModelEvaluation",
+        "client": {
+          "short_name": "AutoML::Client",
+          "full_name": "::Google::Cloud::AutoML::V1::AutoML::Client"
+        },
+        "method": {
+          "short_name": "GetModelEvaluation",
+          "full_name": "google.cloud.automl.v1.AutoMl.GetModelEvaluation",
+          "service": {
+            "short_name": "AutoMl",
+            "full_name": "google.cloud.automl.v1.AutoMl"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "automl_v1_generated_AutoML_ListModelEvaluations_sync",
+      "title": "Snippet for the list_model_evaluations call in the AutoML service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AutoML::V1::AutoML::Client#list_model_evaluations.",
+      "file": "automl/list_model_evaluations.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_model_evaluations",
+        "full_name": "::Google::Cloud::AutoML::V1::AutoML::Client#list_model_evaluations",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::AutoML::V1::ListModelEvaluationsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::AutoML::V1::ListModelEvaluationsResponse",
+        "client": {
+          "short_name": "AutoML::Client",
+          "full_name": "::Google::Cloud::AutoML::V1::AutoML::Client"
+        },
+        "method": {
+          "short_name": "ListModelEvaluations",
+          "full_name": "google.cloud.automl.v1.AutoMl.ListModelEvaluations",
+          "service": {
+            "short_name": "AutoMl",
+            "full_name": "google.cloud.automl.v1.AutoMl"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    }
+  ]
+}
