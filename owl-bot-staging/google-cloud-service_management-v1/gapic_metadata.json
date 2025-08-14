@@ -1,0 +1,83 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "ruby",
+  "protoPackage": "google.api.servicemanagement.v1",
+  "libraryPackage": "::Google::Cloud::ServiceManagement::V1",
+  "services": {
+    "ServiceManager": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::ServiceManagement::V1::ServiceManager::Client",
+          "rpcs": {
+            "ListServices": {
+              "methods": [
+                "list_services"
+              ]
+            },
+            "GetService": {
+              "methods": [
+                "get_service"
+              ]
+            },
+            "CreateService": {
+              "methods": [
+                "create_service"
+              ]
+            },
+            "DeleteService": {
+              "methods": [
+                "delete_service"
+              ]
+            },
+            "UndeleteService": {
+              "methods": [
+                "undelete_service"
+              ]
+            },
+            "ListServiceConfigs": {
+              "methods": [
+                "list_service_configs"
+              ]
+            },
+            "GetServiceConfig": {
+              "methods": [
+                "get_service_config"
+              ]
+            },
+            "CreateServiceConfig": {
+              "methods": [
+                "create_service_config"
+              ]
+            },
+            "SubmitConfigSource": {
+              "methods": [
+                "submit_config_source"
+              ]
+            },
+            "ListServiceRollouts": {
+              "methods": [
+                "list_service_rollouts"
+              ]
+            },
+            "GetServiceRollout": {
+              "methods": [
+                "get_service_rollout"
+              ]
+            },
+            "CreateServiceRollout": {
+              "methods": [
+                "create_service_rollout"
+              ]
+            },
+            "GenerateConfigReport": {
+              "methods": [
+                "generate_config_report"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}

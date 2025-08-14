@@ -1,0 +1,88 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "ruby",
+  "protoPackage": "google.storagetransfer.v1",
+  "libraryPackage": "::Google::Cloud::StorageTransfer::V1",
+  "services": {
+    "StorageTransferService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::StorageTransfer::V1::StorageTransferService::Client",
+          "rpcs": {
+            "GetGoogleServiceAccount": {
+              "methods": [
+                "get_google_service_account"
+              ]
+            },
+            "CreateTransferJob": {
+              "methods": [
+                "create_transfer_job"
+              ]
+            },
+            "UpdateTransferJob": {
+              "methods": [
+                "update_transfer_job"
+              ]
+            },
+            "GetTransferJob": {
+              "methods": [
+                "get_transfer_job"
+              ]
+            },
+            "ListTransferJobs": {
+              "methods": [
+                "list_transfer_jobs"
+              ]
+            },
+            "PauseTransferOperation": {
+              "methods": [
+                "pause_transfer_operation"
+              ]
+            },
+            "ResumeTransferOperation": {
+              "methods": [
+                "resume_transfer_operation"
+              ]
+            },
+            "RunTransferJob": {
+              "methods": [
+                "run_transfer_job"
+              ]
+            },
+            "DeleteTransferJob": {
+              "methods": [
+                "delete_transfer_job"
+              ]
+            },
+            "CreateAgentPool": {
+              "methods": [
+                "create_agent_pool"
+              ]
+            },
+            "UpdateAgentPool": {
+              "methods": [
+                "update_agent_pool"
+              ]
+            },
+            "GetAgentPool": {
+              "methods": [
+                "get_agent_pool"
+              ]
+            },
+            "ListAgentPools": {
+              "methods": [
+                "list_agent_pools"
+              ]
+            },
+            "DeleteAgentPool": {
+              "methods": [
+                "delete_agent_pool"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}
