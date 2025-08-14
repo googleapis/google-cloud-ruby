@@ -21,7 +21,6 @@ require "helper"
 require "gapic/grpc/service_stub"
 
 require "google/cloud/dataproc/v1/sessions_pb"
-require "google/cloud/dataproc/v1/sessions_services_pb"
 require "google/cloud/dataproc/v1/session_controller"
 
 class ::Google::Cloud::Dataproc::V1::SessionController::ClientTest < Minitest::Test

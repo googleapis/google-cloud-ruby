@@ -21,7 +21,6 @@ require "helper"
 require "gapic/grpc/service_stub"
 
 require "google/cloud/discoveryengine/v1/identity_mapping_store_service_pb"
-require "google/cloud/discoveryengine/v1/identity_mapping_store_service_services_pb"
 require "google/cloud/discovery_engine/v1/identity_mapping_store_service"
 
 class ::Google::Cloud::DiscoveryEngine::V1::IdentityMappingStoreService::ClientTest < Minitest::Test

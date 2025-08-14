@@ -21,7 +21,6 @@ require "helper"
 require "gapic/grpc/service_stub"
 
 require "google/cloud/discoveryengine/v1beta/site_search_engine_service_pb"
-require "google/cloud/discoveryengine/v1beta/site_search_engine_service_services_pb"
 require "google/cloud/discovery_engine/v1beta/site_search_engine_service"
 
 class ::Google::Cloud::DiscoveryEngine::V1beta::SiteSearchEngineService::ClientTest < Minitest::Test

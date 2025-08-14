@@ -21,7 +21,6 @@ require "helper"
 require "gapic/grpc/service_stub"
 
 require "google/cloud/dataqna/v1alpha/question_service_pb"
-require "google/cloud/dataqna/v1alpha/question_service_services_pb"
 require "google/cloud/dataqna/v1alpha/question_service"
 
 class ::Google::Cloud::DataQnA::V1alpha::QuestionService::ClientTest < Minitest::Test

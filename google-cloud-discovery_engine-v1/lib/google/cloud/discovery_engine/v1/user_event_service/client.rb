@@ -248,7 +248,7 @@ module Google
             #     is:
             #     `projects/{project}/locations/{location}/collections/{collection}/dataStores/{data_store}`.
             #     If the write user event action is applied in
-            #     `::Google::Cloud::Location::Location` level, for example, the event
+            #     [Location][google.cloud.location.Location] level, for example, the event
             #     with {::Google::Cloud::DiscoveryEngine::V1::Document Document} across multiple
             #     {::Google::Cloud::DiscoveryEngine::V1::DataStore DataStore}, the format is:
             #     `projects/{project}/locations/{location}`.
@@ -351,7 +351,7 @@ module Google
             #     is:
             #     `projects/{project}/locations/{location}/collections/{collection}/dataStores/{data_store}`.
             #     If the collect user event action is applied in
-            #     `::Google::Cloud::Location::Location` level, for example, the event
+            #     [Location][google.cloud.location.Location] level, for example, the event
             #     with {::Google::Cloud::DiscoveryEngine::V1::Document Document} across multiple
             #     {::Google::Cloud::DiscoveryEngine::V1::DataStore DataStore}, the format is:
             #     `projects/{project}/locations/{location}`.

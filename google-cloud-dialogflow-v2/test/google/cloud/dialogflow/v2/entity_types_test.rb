@@ -21,7 +21,6 @@ require "helper"
 require "gapic/grpc/service_stub"
 
 require "google/cloud/dialogflow/v2/entity_type_pb"
-require "google/cloud/dialogflow/v2/entity_type_services_pb"
 require "google/cloud/dialogflow/v2/entity_types"
 
 class ::Google::Cloud::Dialogflow::V2::EntityTypes::ClientTest < Minitest::Test

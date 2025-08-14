@@ -21,7 +21,6 @@ require "helper"
 require "gapic/grpc/service_stub"
 
 require "google/cloud/devicestreaming/v1/service_pb"
-require "google/cloud/devicestreaming/v1/service_services_pb"
 require "google/cloud/device_streaming/v1/direct_access_service"
 
 class ::Google::Cloud::DeviceStreaming::V1::DirectAccessService::ClientTest < Minitest::Test

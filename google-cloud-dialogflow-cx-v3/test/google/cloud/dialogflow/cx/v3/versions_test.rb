@@ -21,7 +21,6 @@ require "helper"
 require "gapic/grpc/service_stub"
 
 require "google/cloud/dialogflow/cx/v3/version_pb"
-require "google/cloud/dialogflow/cx/v3/version_services_pb"
 require "google/cloud/dialogflow/cx/v3/versions"
 
 class ::Google::Cloud::Dialogflow::CX::V3::Versions::ClientTest < Minitest::Test

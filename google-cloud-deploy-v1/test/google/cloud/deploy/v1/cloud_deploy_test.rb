@@ -21,7 +21,6 @@ require "helper"
 require "gapic/grpc/service_stub"
 
 require "google/cloud/deploy/v1/cloud_deploy_pb"
-require "google/cloud/deploy/v1/cloud_deploy_services_pb"
 require "google/cloud/deploy/v1/cloud_deploy"
 
 class ::Google::Cloud::Deploy::V1::CloudDeploy::ClientTest < Minitest::Test

@@ -21,7 +21,6 @@ require "helper"
 require "gapic/grpc/service_stub"
 
 require "google/cloud/discoveryengine/v1beta/sample_query_service_pb"
-require "google/cloud/discoveryengine/v1beta/sample_query_service_services_pb"
 require "google/cloud/discovery_engine/v1beta/sample_query_service"
 
 class ::Google::Cloud::DiscoveryEngine::V1beta::SampleQueryService::ClientTest < Minitest::Test

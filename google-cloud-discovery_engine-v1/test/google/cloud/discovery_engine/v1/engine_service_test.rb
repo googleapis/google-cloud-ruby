@@ -21,7 +21,6 @@ require "helper"
 require "gapic/grpc/service_stub"
 
 require "google/cloud/discoveryengine/v1/engine_service_pb"
-require "google/cloud/discoveryengine/v1/engine_service_services_pb"
 require "google/cloud/discovery_engine/v1/engine_service"
 
 class ::Google::Cloud::DiscoveryEngine::V1::EngineService::ClientTest < Minitest::Test

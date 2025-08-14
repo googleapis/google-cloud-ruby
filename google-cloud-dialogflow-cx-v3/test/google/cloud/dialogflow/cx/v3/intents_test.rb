@@ -21,7 +21,6 @@ require "helper"
 require "gapic/grpc/service_stub"
 
 require "google/cloud/dialogflow/cx/v3/intent_pb"
-require "google/cloud/dialogflow/cx/v3/intent_services_pb"
 require "google/cloud/dialogflow/cx/v3/intents"
 
 class ::Google::Cloud::Dialogflow::CX::V3::Intents::ClientTest < Minitest::Test

@@ -21,7 +21,6 @@ require "helper"
 require "gapic/grpc/service_stub"
 
 require "google/cloud/discoveryengine/v1beta/schema_service_pb"
-require "google/cloud/discoveryengine/v1beta/schema_service_services_pb"
 require "google/cloud/discovery_engine/v1beta/schema_service"
 
 class ::Google::Cloud::DiscoveryEngine::V1beta::SchemaService::ClientTest < Minitest::Test

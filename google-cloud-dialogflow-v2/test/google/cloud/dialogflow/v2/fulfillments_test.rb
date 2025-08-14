@@ -21,7 +21,6 @@ require "helper"
 require "gapic/grpc/service_stub"
 
 require "google/cloud/dialogflow/v2/fulfillment_pb"
-require "google/cloud/dialogflow/v2/fulfillment_services_pb"
 require "google/cloud/dialogflow/v2/fulfillments"
 
 class ::Google::Cloud::Dialogflow::V2::Fulfillments::ClientTest < Minitest::Test

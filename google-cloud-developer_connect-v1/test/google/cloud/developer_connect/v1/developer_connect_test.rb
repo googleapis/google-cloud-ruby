@@ -21,7 +21,6 @@ require "helper"
 require "gapic/grpc/service_stub"
 
 require "google/cloud/developerconnect/v1/developer_connect_pb"
-require "google/cloud/developerconnect/v1/developer_connect_services_pb"
 require "google/cloud/developer_connect/v1/developer_connect"
 
 class ::Google::Cloud::DeveloperConnect::V1::DeveloperConnect::ClientTest < Minitest::Test

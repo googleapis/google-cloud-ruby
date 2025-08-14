@@ -21,7 +21,6 @@ require "helper"
 require "gapic/grpc/service_stub"
 
 require "google/privacy/dlp/v2/dlp_pb"
-require "google/privacy/dlp/v2/dlp_services_pb"
 require "google/cloud/dlp/v2/dlp_service"
 
 class ::Google::Cloud::Dlp::V2::DlpService::ClientTest < Minitest::Test

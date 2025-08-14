@@ -21,7 +21,6 @@ require "helper"
 require "gapic/grpc/service_stub"
 
 require "google/cloud/dataproc/v1/batches_pb"
-require "google/cloud/dataproc/v1/batches_services_pb"
 require "google/cloud/dataproc/v1/batch_controller"
 
 class ::Google::Cloud::Dataproc::V1::BatchController::ClientTest < Minitest::Test

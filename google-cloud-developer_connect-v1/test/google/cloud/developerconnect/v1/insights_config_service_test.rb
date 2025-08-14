@@ -21,7 +21,6 @@ require "helper"
 require "gapic/grpc/service_stub"
 
 require "google/cloud/developerconnect/v1/insights_config_pb"
-require "google/cloud/developerconnect/v1/insights_config_services_pb"
 require "google/cloud/developerconnect/v1/insights_config_service"
 
 class ::Google::Cloud::Developerconnect::V1::InsightsConfigService::ClientTest < Minitest::Test
