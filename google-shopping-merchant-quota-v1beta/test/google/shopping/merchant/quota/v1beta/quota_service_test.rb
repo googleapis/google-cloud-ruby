@@ -21,7 +21,6 @@ require "helper"
 require "gapic/grpc/service_stub"
 
 require "google/shopping/merchant/quota/v1beta/quota_pb"
-require "google/shopping/merchant/quota/v1beta/quota_services_pb"
 require "google/shopping/merchant/quota/v1beta/quota_service"
 
 class ::Google::Shopping::Merchant::Quota::V1beta::QuotaService::ClientTest < Minitest::Test

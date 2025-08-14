@@ -21,7 +21,6 @@ require "helper"
 require "gapic/grpc/service_stub"
 
 require "google/shopping/merchant/reviews/v1beta/merchantreviews_pb"
-require "google/shopping/merchant/reviews/v1beta/merchantreviews_services_pb"
 require "google/shopping/merchant/reviews/v1beta/merchant_reviews_service"
 
 class ::Google::Shopping::Merchant::Reviews::V1beta::MerchantReviewsService::ClientTest < Minitest::Test
