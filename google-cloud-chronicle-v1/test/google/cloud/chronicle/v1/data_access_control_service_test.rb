@@ -21,7 +21,6 @@ require "helper"
 require "gapic/grpc/service_stub"
 
 require "google/cloud/chronicle/v1/data_access_control_pb"
-require "google/cloud/chronicle/v1/data_access_control_services_pb"
 require "google/cloud/chronicle/v1/data_access_control_service"
 
 class ::Google::Cloud::Chronicle::V1::DataAccessControlService::ClientTest < Minitest::Test
