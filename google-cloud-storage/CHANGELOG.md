@@ -1,5 +1,12 @@
 # Release History
 
+### 1.57.0 (2025-08-15)
+
+#### Features
+
+* Require Ruby 3.1 or later ([#30765](https://github.com/googleapis/google-cloud-ruby/issues/30765)) 
+* Support for using Faraday for HTTP requests ([#30759](https://github.com/googleapis/google-cloud-ruby/issues/30759)) 
+
 ### 1.56.0 (2025-04-21)
 
 #### Features
