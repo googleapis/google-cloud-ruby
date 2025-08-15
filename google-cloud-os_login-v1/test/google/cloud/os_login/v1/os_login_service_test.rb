@@ -21,7 +21,6 @@ require "helper"
 require "gapic/grpc/service_stub"
 
 require "google/cloud/oslogin/v1/oslogin_pb"
-require "google/cloud/oslogin/v1/oslogin_services_pb"
 require "google/cloud/os_login/v1/os_login_service"
 
 class ::Google::Cloud::OsLogin::V1::OsLoginService::ClientTest < Minitest::Test

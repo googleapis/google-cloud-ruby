@@ -21,7 +21,6 @@ require "helper"
 require "gapic/grpc/service_stub"
 
 require "google/monitoring/metricsscope/v1/metrics_scopes_pb"
-require "google/monitoring/metricsscope/v1/metrics_scopes_services_pb"
 require "google/cloud/monitoring/metrics_scope/v1/metrics_scopes"
 
 class ::Google::Cloud::Monitoring::MetricsScope::V1::MetricsScopes::ClientTest < Minitest::Test

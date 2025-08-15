@@ -21,7 +21,6 @@ require "helper"
 require "gapic/grpc/service_stub"
 
 require "google/cloud/networksecurity/v1beta1/network_security_pb"
-require "google/cloud/networksecurity/v1beta1/network_security_services_pb"
 require "google/cloud/network_security/v1beta1/network_security"
 
 class ::Google::Cloud::NetworkSecurity::V1beta1::NetworkSecurity::ClientTest < Minitest::Test

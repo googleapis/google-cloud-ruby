@@ -21,7 +21,6 @@ require "helper"
 require "gapic/grpc/service_stub"
 
 require "google/cloud/networkconnectivity/v1alpha1/hub_pb"
-require "google/cloud/networkconnectivity/v1alpha1/hub_services_pb"
 require "google/cloud/network_connectivity/v1alpha1/hub_service"
 
 class ::Google::Cloud::NetworkConnectivity::V1alpha1::HubService::ClientTest < Minitest::Test

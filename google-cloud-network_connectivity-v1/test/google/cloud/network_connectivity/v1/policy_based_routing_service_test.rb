@@ -21,7 +21,6 @@ require "helper"
 require "gapic/grpc/service_stub"
 
 require "google/cloud/networkconnectivity/v1/policy_based_routing_pb"
-require "google/cloud/networkconnectivity/v1/policy_based_routing_services_pb"
 require "google/cloud/network_connectivity/v1/policy_based_routing_service"
 
 class ::Google::Cloud::NetworkConnectivity::V1::PolicyBasedRoutingService::ClientTest < Minitest::Test

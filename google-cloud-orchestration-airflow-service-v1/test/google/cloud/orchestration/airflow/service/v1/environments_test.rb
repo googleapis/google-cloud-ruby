@@ -21,7 +21,6 @@ require "helper"
 require "gapic/grpc/service_stub"
 
 require "google/cloud/orchestration/airflow/service/v1/environments_pb"
-require "google/cloud/orchestration/airflow/service/v1/environments_services_pb"
 require "google/cloud/orchestration/airflow/service/v1/environments"
 
 class ::Google::Cloud::Orchestration::Airflow::Service::V1::Environments::ClientTest < Minitest::Test

@@ -21,7 +21,6 @@ require "helper"
 require "gapic/grpc/service_stub"
 
 require "google/cloud/networkconnectivity/v1/internal_range_pb"
-require "google/cloud/networkconnectivity/v1/internal_range_services_pb"
 require "google/cloud/network_connectivity/v1/internal_range_service"
 
 class ::Google::Cloud::NetworkConnectivity::V1::InternalRangeService::ClientTest < Minitest::Test

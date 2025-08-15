@@ -21,7 +21,6 @@ require "helper"
 require "gapic/grpc/service_stub"
 
 require "google/monitoring/dashboard/v1/dashboards_service_pb"
-require "google/monitoring/dashboard/v1/dashboards_service_services_pb"
 require "google/cloud/monitoring/dashboard/v1/dashboards_service"
 
 class ::Google::Cloud::Monitoring::Dashboard::V1::DashboardsService::ClientTest < Minitest::Test

@@ -21,7 +21,6 @@ require "helper"
 require "gapic/grpc/service_stub"
 
 require "google/cloud/notebooks/v1/managed_service_pb"
-require "google/cloud/notebooks/v1/managed_service_services_pb"
 require "google/cloud/notebooks/v1/managed_notebook_service"
 
 class ::Google::Cloud::Notebooks::V1::ManagedNotebookService::ClientTest < Minitest::Test

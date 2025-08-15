@@ -21,7 +21,6 @@ require "helper"
 require "gapic/grpc/service_stub"
 
 require "google/monitoring/v3/notification_service_pb"
-require "google/monitoring/v3/notification_service_services_pb"
 require "google/cloud/monitoring/v3/notification_channel_service"
 
 class ::Google::Cloud::Monitoring::V3::NotificationChannelService::ClientTest < Minitest::Test

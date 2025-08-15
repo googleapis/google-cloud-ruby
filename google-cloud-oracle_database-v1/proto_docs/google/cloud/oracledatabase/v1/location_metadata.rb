@@ -21,7 +21,7 @@ module Google
   module Cloud
     module OracleDatabase
       module V1
-        # Metadata for a given `::Google::Cloud::Location::Location`.
+        # Metadata for a given [Location][google.cloud.location.Location].
         # @!attribute [r] gcp_oracle_zones
         #   @return [::Array<::String>]
         #     Output only. Google Cloud Platform Oracle zones in a location.

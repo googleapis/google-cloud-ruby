@@ -21,7 +21,6 @@ require "helper"
 require "gapic/grpc/service_stub"
 
 require "google/cloud/orchestration/airflow/service/v1/image_versions_pb"
-require "google/cloud/orchestration/airflow/service/v1/image_versions_services_pb"
 require "google/cloud/orchestration/airflow/service/v1/image_versions"
 
 class ::Google::Cloud::Orchestration::Airflow::Service::V1::ImageVersions::ClientTest < Minitest::Test

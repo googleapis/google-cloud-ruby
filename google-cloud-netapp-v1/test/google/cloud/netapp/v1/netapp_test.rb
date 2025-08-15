@@ -21,7 +21,6 @@ require "helper"
 require "gapic/grpc/service_stub"
 
 require "google/cloud/netapp/v1/cloud_netapp_service_pb"
-require "google/cloud/netapp/v1/cloud_netapp_service_services_pb"
 require "google/cloud/netapp/v1/netapp"
 
 class ::Google::Cloud::NetApp::V1::NetApp::ClientTest < Minitest::Test

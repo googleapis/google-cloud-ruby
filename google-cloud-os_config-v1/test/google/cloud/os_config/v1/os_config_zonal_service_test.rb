@@ -21,7 +21,6 @@ require "helper"
 require "gapic/grpc/service_stub"
 
 require "google/cloud/osconfig/v1/osconfig_zonal_service_pb"
-require "google/cloud/osconfig/v1/osconfig_zonal_service_services_pb"
 require "google/cloud/os_config/v1/os_config_zonal_service"
 
 class ::Google::Cloud::OsConfig::V1::OsConfigZonalService::ClientTest < Minitest::Test

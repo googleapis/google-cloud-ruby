@@ -21,7 +21,6 @@ require "helper"
 require "gapic/grpc/service_stub"
 
 require "google/cloud/oracledatabase/v1/oracledatabase_pb"
-require "google/cloud/oracledatabase/v1/oracledatabase_services_pb"
 require "google/cloud/oracle_database/v1/oracle_database"
 
 class ::Google::Cloud::OracleDatabase::V1::OracleDatabase::ClientTest < Minitest::Test
