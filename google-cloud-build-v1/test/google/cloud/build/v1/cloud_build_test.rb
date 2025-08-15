@@ -21,7 +21,6 @@ require "helper"
 require "gapic/grpc/service_stub"
 
 require "google/devtools/cloudbuild/v1/cloudbuild_pb"
-require "google/devtools/cloudbuild/v1/cloudbuild_services_pb"
 require "google/cloud/build/v1/cloud_build"
 
 class ::Google::Cloud::Build::V1::CloudBuild::ClientTest < Minitest::Test
