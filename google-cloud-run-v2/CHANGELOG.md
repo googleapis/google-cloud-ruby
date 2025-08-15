@@ -1,5 +1,11 @@
 # Changelog
 
+### 0.26.0 (2025-08-15)
+
+#### Features
+
+* Support for worker pools ([#30802](https://github.com/googleapis/google-cloud-ruby/issues/30802)) 
+
 ### 0.25.0 (2025-07-17)
 
 #### Features
