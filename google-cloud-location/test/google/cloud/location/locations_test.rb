@@ -21,7 +21,6 @@ require "helper"
 require "gapic/grpc/service_stub"
 
 require "google/cloud/location/locations_pb"
-require "google/cloud/location/locations_services_pb"
 require "google/cloud/location/locations"
 
 class ::Google::Cloud::Location::Locations::ClientTest < Minitest::Test

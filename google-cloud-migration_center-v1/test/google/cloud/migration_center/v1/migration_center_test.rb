@@ -21,7 +21,6 @@ require "helper"
 require "gapic/grpc/service_stub"
 
 require "google/cloud/migrationcenter/v1/migrationcenter_pb"
-require "google/cloud/migrationcenter/v1/migrationcenter_services_pb"
 require "google/cloud/migration_center/v1/migration_center"
 
 class ::Google::Cloud::MigrationCenter::V1::MigrationCenter::ClientTest < Minitest::Test

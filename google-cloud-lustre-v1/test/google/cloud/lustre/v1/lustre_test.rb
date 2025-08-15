@@ -21,7 +21,6 @@ require "helper"
 require "gapic/grpc/service_stub"
 
 require "google/cloud/lustre/v1/lustre_pb"
-require "google/cloud/lustre/v1/lustre_services_pb"
 require "google/cloud/lustre/v1/lustre"
 
 class ::Google::Cloud::Lustre::V1::Lustre::ClientTest < Minitest::Test

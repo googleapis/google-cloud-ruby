@@ -21,7 +21,6 @@ require "helper"
 require "gapic/grpc/service_stub"
 
 require "google/logging/v2/logging_config_pb"
-require "google/logging/v2/logging_config_services_pb"
 require "google/cloud/logging/v2/config_service"
 
 class ::Google::Cloud::Logging::V2::ConfigService::ClientTest < Minitest::Test

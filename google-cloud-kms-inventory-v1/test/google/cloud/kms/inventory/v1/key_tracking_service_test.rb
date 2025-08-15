@@ -21,7 +21,6 @@ require "helper"
 require "gapic/grpc/service_stub"
 
 require "google/cloud/kms/inventory/v1/key_tracking_service_pb"
-require "google/cloud/kms/inventory/v1/key_tracking_service_services_pb"
 require "google/cloud/kms/inventory/v1/key_tracking_service"
 
 class ::Google::Cloud::Kms::Inventory::V1::KeyTrackingService::ClientTest < Minitest::Test

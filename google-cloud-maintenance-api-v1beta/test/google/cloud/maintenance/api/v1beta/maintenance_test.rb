@@ -21,7 +21,6 @@ require "helper"
 require "gapic/grpc/service_stub"
 
 require "google/cloud/maintenance/api/v1beta/maintenance_service_pb"
-require "google/cloud/maintenance/api/v1beta/maintenance_service_services_pb"
 require "google/cloud/maintenance/api/v1beta/maintenance"
 
 class ::Google::Cloud::Maintenance::Api::V1beta::Maintenance::ClientTest < Minitest::Test

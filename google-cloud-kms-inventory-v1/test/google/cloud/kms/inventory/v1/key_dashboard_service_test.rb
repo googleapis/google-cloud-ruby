@@ -21,7 +21,6 @@ require "helper"
 require "gapic/grpc/service_stub"
 
 require "google/cloud/kms/inventory/v1/key_dashboard_service_pb"
-require "google/cloud/kms/inventory/v1/key_dashboard_service_services_pb"
 require "google/cloud/kms/inventory/v1/key_dashboard_service"
 
 class ::Google::Cloud::Kms::Inventory::V1::KeyDashboardService::ClientTest < Minitest::Test

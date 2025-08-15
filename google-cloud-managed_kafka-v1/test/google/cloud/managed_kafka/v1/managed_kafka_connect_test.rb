@@ -21,7 +21,6 @@ require "helper"
 require "gapic/grpc/service_stub"
 
 require "google/cloud/managedkafka/v1/managed_kafka_connect_pb"
-require "google/cloud/managedkafka/v1/managed_kafka_connect_services_pb"
 require "google/cloud/managed_kafka/v1/managed_kafka_connect"
 
 class ::Google::Cloud::ManagedKafka::V1::ManagedKafkaConnect::ClientTest < Minitest::Test

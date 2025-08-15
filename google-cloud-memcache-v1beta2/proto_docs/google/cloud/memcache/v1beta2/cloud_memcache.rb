@@ -526,7 +526,7 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Metadata for the given `::Google::Cloud::Location::Location`.
+        # Metadata for the given [google.cloud.location.Location][google.cloud.location.Location].
         # @!attribute [r] available_zones
         #   @return [::Google::Protobuf::Map{::String => ::Google::Cloud::Memcache::V1beta2::ZoneMetadata}]
         #     Output only. The set of available zones in the location. The map is keyed
