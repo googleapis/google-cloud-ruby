@@ -21,7 +21,6 @@ require "helper"
 require "gapic/grpc/service_stub"
 
 require "google/storage/control/v2/storage_control_pb"
-require "google/storage/control/v2/storage_control_services_pb"
 require "google/cloud/storage/control/v2/storage_control"
 
 class ::Google::Cloud::Storage::Control::V2::StorageControl::ClientTest < Minitest::Test

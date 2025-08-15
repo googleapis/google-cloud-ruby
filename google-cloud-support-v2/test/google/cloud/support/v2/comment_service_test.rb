@@ -21,7 +21,6 @@ require "helper"
 require "gapic/grpc/service_stub"
 
 require "google/cloud/support/v2/comment_service_pb"
-require "google/cloud/support/v2/comment_service_services_pb"
 require "google/cloud/support/v2/comment_service"
 
 class ::Google::Cloud::Support::V2::CommentService::ClientTest < Minitest::Test

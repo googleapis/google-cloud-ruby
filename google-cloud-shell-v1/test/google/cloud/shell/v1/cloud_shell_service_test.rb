@@ -21,7 +21,6 @@ require "helper"
 require "gapic/grpc/service_stub"
 
 require "google/cloud/shell/v1/cloudshell_pb"
-require "google/cloud/shell/v1/cloudshell_services_pb"
 require "google/cloud/shell/v1/cloud_shell_service"
 
 class ::Google::Cloud::Shell::V1::CloudShellService::ClientTest < Minitest::Test
