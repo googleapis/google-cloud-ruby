@@ -737,6 +737,16 @@ module Google
         end
 
         ##
+        # The URI of thereference file with the reader schema. This file is only
+        # loaded if it is part of source URIs, but is not loaded otherwise.
+        # It is enabled for the following formats: `AVRO`, `PARQUET`, `ORC`.
+        #
+        # @return [String, nil] The URI of the reference file, or `nil` if not set.
+        def reference_file_schema_uri
+          @gapi.configuration.load.reference_file_schema_uri
+        end
+
+        ##
         # Yielded to a block to accumulate changes for a patch request.
         class Updater < LoadJob
           ##
@@ -2750,6 +2760,17 @@ module Google
           #   `America/Los_Angeles`. `nil` to unset.
           def time_zone= time_zone
             @gapi.configuration.load.update! time_zone: time_zone
+          end
+
+          ##
+          # Sets the URI of thereference file with the reader schema. This file
+          # is only loaded if it is part of source URIs, but is not loaded
+          # otherwise. It is enabled for the following formats: `AVRO`,
+          # `PARQUET`, `ORC`.
+          #
+          # @param [String, nil] uri The URI of the reference file, or `nil` to unset.
+          def reference_file_schema_uri= uri
+            @gapi.configuration.load.update! reference_file_schema_uri: uri
           end
 
           def cancel

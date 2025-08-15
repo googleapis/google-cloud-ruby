@@ -504,6 +504,49 @@ module Google
             @gapi.max_bad_records = new_max_bad_records
           end
 
+          ##
+          # The URI of a reference file with the table schema. This is enabled
+          # for the following formats: `AVRO`, `PARQUET`, `ORC`.
+          #
+          # @return [String, nil] The URI. `nil` if not set.
+          #
+          # @example
+          #   require "google/cloud/bigquery"
+          #
+          #   bigquery = Google::Cloud::Bigquery.new
+          #
+          #   external_data = bigquery.external "gs://bucket/path/to/data.avro", format: :avro do |ext|
+          #     ext.reference_file_schema_uri = "gs://bucket/path/to/schema.json"
+          #   end
+          #
+          #   external_data.reference_file_schema_uri #=> "gs://bucket/path/to/schema.json"
+          #
+          def reference_file_schema_uri
+            @gapi.reference_file_schema_uri
+          end
+
+          ##
+          # Sets the URI of a reference file with the table schema. This is
+          # enabled for the following formats: `AVRO`, `PARQUET`, `ORC`.
+          #
+          # @param [String, nil] uri The URI. `nil` to unset.
+          #
+          # @example
+          #   require "google/cloud/bigquery"
+          #
+          #   bigquery = Google::Cloud::Bigquery.new
+          #
+          #   external_data = bigquery.external "gs://bucket/path/to/data.avro", format: :avro do |ext|
+          #     ext.reference_file_schema_uri = "gs://bucket/path/to/schema.json"
+          #   end
+          #
+          #   external_data.reference_file_schema_uri #=> "gs://bucket/path/to/schema.json"
+          #
+          def reference_file_schema_uri= uri
+            frozen_check!
+            @gapi.reference_file_schema_uri = uri
+          end
+
           ###
           # Checks if hive partitioning options are set.
           #
