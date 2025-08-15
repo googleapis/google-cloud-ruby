@@ -21,7 +21,6 @@ require "helper"
 require "gapic/grpc/service_stub"
 
 require "google/cloud/video/stitcher/v1/video_stitcher_service_pb"
-require "google/cloud/video/stitcher/v1/video_stitcher_service_services_pb"
 require "google/cloud/video/stitcher/v1/video_stitcher_service"
 
 class ::Google::Cloud::Video::Stitcher::V1::VideoStitcherService::ClientTest < Minitest::Test

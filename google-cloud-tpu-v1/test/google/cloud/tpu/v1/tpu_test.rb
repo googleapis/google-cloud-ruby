@@ -21,7 +21,6 @@ require "helper"
 require "gapic/grpc/service_stub"
 
 require "google/cloud/tpu/v1/cloud_tpu_pb"
-require "google/cloud/tpu/v1/cloud_tpu_services_pb"
 require "google/cloud/tpu/v1/tpu"
 
 class ::Google::Cloud::Tpu::V1::Tpu::ClientTest < Minitest::Test

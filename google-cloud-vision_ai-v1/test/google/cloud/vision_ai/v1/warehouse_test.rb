@@ -21,7 +21,6 @@ require "helper"
 require "gapic/grpc/service_stub"
 
 require "google/cloud/visionai/v1/warehouse_pb"
-require "google/cloud/visionai/v1/warehouse_services_pb"
 require "google/cloud/vision_ai/v1/warehouse"
 
 class ::Google::Cloud::VisionAI::V1::Warehouse::ClientTest < Minitest::Test
