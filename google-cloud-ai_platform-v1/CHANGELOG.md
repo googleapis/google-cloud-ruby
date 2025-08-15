@@ -1,5 +1,12 @@
 # Changelog
 
+### 1.20.0 (2025-08-15)
+
+#### Features
+
+* Support for the feature_view_direct_write RPC 
+* Support for using the Model Armor service when generating content 
+
 ### 1.19.0 (2025-07-28)
 
 #### Features
