@@ -1,5 +1,11 @@
 # Changelog
 
+### 1.2.0 (2025-08-15)
+
+#### Features
+
+* Introducing new Grant states for Withdrawal operation ([#30750](https://github.com/googleapis/google-cloud-ruby/issues/30750)) 
+
 ### 1.1.0 (2025-05-12)
 
 #### Features
