@@ -21,7 +21,6 @@ require "helper"
 require "gapic/grpc/service_stub"
 
 require "google/cloud/resourcemanager/v3/folders_pb"
-require "google/cloud/resourcemanager/v3/folders_services_pb"
 require "google/cloud/resource_manager/v3/folders"
 
 class ::Google::Cloud::ResourceManager::V3::Folders::ClientTest < Minitest::Test

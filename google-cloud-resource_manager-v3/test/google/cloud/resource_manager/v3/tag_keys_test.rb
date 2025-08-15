@@ -21,7 +21,6 @@ require "helper"
 require "gapic/grpc/service_stub"
 
 require "google/cloud/resourcemanager/v3/tag_keys_pb"
-require "google/cloud/resourcemanager/v3/tag_keys_services_pb"
 require "google/cloud/resource_manager/v3/tag_keys"
 
 class ::Google::Cloud::ResourceManager::V3::TagKeys::ClientTest < Minitest::Test
