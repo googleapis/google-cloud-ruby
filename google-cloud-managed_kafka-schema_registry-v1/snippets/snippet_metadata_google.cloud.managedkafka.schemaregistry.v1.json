@@ -1,7 +1,7 @@
 {
   "client_library": {
     "name": "google-cloud-managed_kafka-schema_registry-v1",
-    "version": "",
+    "version": "0.1.0",
     "language": "RUBY",
     "apis": [
       {
