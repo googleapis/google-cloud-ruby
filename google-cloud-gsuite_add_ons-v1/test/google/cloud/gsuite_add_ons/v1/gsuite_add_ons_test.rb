@@ -21,7 +21,6 @@ require "helper"
 require "gapic/grpc/service_stub"
 
 require "google/cloud/gsuiteaddons/v1/gsuiteaddons_pb"
-require "google/cloud/gsuiteaddons/v1/gsuiteaddons_services_pb"
 require "google/cloud/gsuite_add_ons/v1/gsuite_add_ons"
 
 class ::Google::Cloud::GSuiteAddOns::V1::GSuiteAddOns::ClientTest < Minitest::Test

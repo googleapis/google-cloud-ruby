@@ -21,7 +21,6 @@ require "helper"
 require "gapic/grpc/service_stub"
 
 require "google/firestore/admin/v1/firestore_admin_pb"
-require "google/firestore/admin/v1/firestore_admin_services_pb"
 require "google/cloud/firestore/admin/v1/firestore_admin"
 
 class ::Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::ClientTest < Minitest::Test

@@ -21,7 +21,6 @@ require "helper"
 require "gapic/grpc/service_stub"
 
 require "google/cloud/ids/v1/ids_pb"
-require "google/cloud/ids/v1/ids_services_pb"
 require "google/cloud/ids/v1/ids"
 
 class ::Google::Cloud::IDS::V1::IDS::ClientTest < Minitest::Test

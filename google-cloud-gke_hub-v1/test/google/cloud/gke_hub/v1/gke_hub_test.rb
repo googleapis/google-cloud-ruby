@@ -21,7 +21,6 @@ require "helper"
 require "gapic/grpc/service_stub"
 
 require "google/cloud/gkehub/v1/service_pb"
-require "google/cloud/gkehub/v1/service_services_pb"
 require "google/cloud/gke_hub/v1/gke_hub"
 
 class ::Google::Cloud::GkeHub::V1::GkeHub::ClientTest < Minitest::Test

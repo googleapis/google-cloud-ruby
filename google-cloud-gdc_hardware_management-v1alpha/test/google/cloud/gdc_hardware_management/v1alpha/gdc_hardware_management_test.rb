@@ -21,7 +21,6 @@ require "helper"
 require "gapic/grpc/service_stub"
 
 require "google/cloud/gdchardwaremanagement/v1alpha/service_pb"
-require "google/cloud/gdchardwaremanagement/v1alpha/service_services_pb"
 require "google/cloud/gdc_hardware_management/v1alpha/gdc_hardware_management"
 
 class ::Google::Cloud::GDCHardwareManagement::V1alpha::GDCHardwareManagement::ClientTest < Minitest::Test

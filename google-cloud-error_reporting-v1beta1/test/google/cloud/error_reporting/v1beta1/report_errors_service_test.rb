@@ -21,7 +21,6 @@ require "helper"
 require "gapic/grpc/service_stub"
 
 require "google/devtools/clouderrorreporting/v1beta1/report_errors_service_pb"
-require "google/devtools/clouderrorreporting/v1beta1/report_errors_service_services_pb"
 require "google/cloud/error_reporting/v1beta1/report_errors_service"
 
 class ::Google::Cloud::ErrorReporting::V1beta1::ReportErrorsService::ClientTest < Minitest::Test

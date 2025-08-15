@@ -21,7 +21,6 @@ require "helper"
 require "gapic/grpc/service_stub"
 
 require "google/cloud/essentialcontacts/v1/service_pb"
-require "google/cloud/essentialcontacts/v1/service_services_pb"
 require "google/cloud/essential_contacts/v1/essential_contacts_service"
 
 class ::Google::Cloud::EssentialContacts::V1::EssentialContactsService::ClientTest < Minitest::Test

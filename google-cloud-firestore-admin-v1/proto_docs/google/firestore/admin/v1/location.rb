@@ -23,7 +23,7 @@ module Google
       module Admin
         module V1
           # The metadata message for
-          # `::Google::Cloud::Location::Location#metadata`.
+          # [google.cloud.location.Location.metadata][google.cloud.location.Location.metadata].
           class LocationMetadata
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods

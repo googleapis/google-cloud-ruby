@@ -21,7 +21,6 @@ require "helper"
 require "gapic/grpc/service_stub"
 
 require "google/cloud/eventarc/v1/eventarc_pb"
-require "google/cloud/eventarc/v1/eventarc_services_pb"
 require "google/cloud/eventarc/v1/eventarc"
 
 class ::Google::Cloud::Eventarc::V1::Eventarc::ClientTest < Minitest::Test

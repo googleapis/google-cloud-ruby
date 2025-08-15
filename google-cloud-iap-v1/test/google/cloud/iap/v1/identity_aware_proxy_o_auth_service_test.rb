@@ -21,7 +21,6 @@ require "helper"
 require "gapic/grpc/service_stub"
 
 require "google/cloud/iap/v1/service_pb"
-require "google/cloud/iap/v1/service_services_pb"
 require "google/cloud/iap/v1/identity_aware_proxy_o_auth_service"
 
 class ::Google::Cloud::Iap::V1::IdentityAwareProxyOAuthService::ClientTest < Minitest::Test
