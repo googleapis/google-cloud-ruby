@@ -90,6 +90,13 @@ describe Google::Cloud::Bigquery::LoadJob, :mock_bigquery do
     _(job_defaults).wont_be :backup?
     _(job_defaults).wont_be :allow_jagged_rows?
     _(job_defaults).wont_be :ignore_unknown_values?
+    _(job_defaults.date_format).must_be :nil?
+    _(job_defaults.time_format).must_be :nil?
+    _(job_defaults.datetime_format).must_be :nil?
+    _(job_defaults.timestamp_format).must_be :nil?
+    _(job_defaults.null_markers).must_equal []
+    _(job_defaults.source_column_match).must_be :nil?
+    _(job_defaults.time_zone).must_be :nil?
   end
 
   it "knows its full attributes" do
