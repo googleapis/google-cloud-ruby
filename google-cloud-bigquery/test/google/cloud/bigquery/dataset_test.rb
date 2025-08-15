@@ -102,7 +102,7 @@ describe Google::Cloud::Bigquery::Dataset, :mock_bigquery do
 
   it "can test its existence with force reload" do
     mock = Minitest::Mock.new
-    mock.expect :get_dataset, dataset_gapi, [project, dataset_id]
+    mock.expect :get_dataset, dataset_gapi, [project, dataset_id], access_policy_version: nil
     dataset.service.mocked_service = mock
 
     _(dataset.exists?(force: true)).must_equal true
