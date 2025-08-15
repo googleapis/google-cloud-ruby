@@ -21,7 +21,6 @@ require "helper"
 require "gapic/grpc/service_stub"
 
 require "google/dataflow/v1beta3/metrics_pb"
-require "google/dataflow/v1beta3/metrics_services_pb"
 require "google/cloud/dataflow/v1beta3/metrics"
 
 class ::Google::Cloud::Dataflow::V1beta3::Metrics::ClientTest < Minitest::Test

@@ -21,7 +21,6 @@ require "helper"
 require "gapic/grpc/service_stub"
 
 require "google/cloud/datacatalog/v1beta1/policytagmanagerserialization_pb"
-require "google/cloud/datacatalog/v1beta1/policytagmanagerserialization_services_pb"
 require "google/cloud/data_catalog/v1beta1/policy_tag_manager_serialization"
 
 class ::Google::Cloud::DataCatalog::V1beta1::PolicyTagManagerSerialization::ClientTest < Minitest::Test

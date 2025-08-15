@@ -21,7 +21,6 @@ require "helper"
 require "gapic/grpc/service_stub"
 
 require "google/cloud/dataplex/v1/catalog_pb"
-require "google/cloud/dataplex/v1/catalog_services_pb"
 require "google/cloud/dataplex/v1/catalog_service"
 
 class ::Google::Cloud::Dataplex::V1::CatalogService::ClientTest < Minitest::Test

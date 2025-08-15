@@ -21,7 +21,6 @@ require "helper"
 require "gapic/grpc/service_stub"
 
 require "google/cloud/dataplex/v1/metadata_pb"
-require "google/cloud/dataplex/v1/metadata_services_pb"
 require "google/cloud/dataplex/v1/metadata_service"
 
 class ::Google::Cloud::Dataplex::V1::MetadataService::ClientTest < Minitest::Test

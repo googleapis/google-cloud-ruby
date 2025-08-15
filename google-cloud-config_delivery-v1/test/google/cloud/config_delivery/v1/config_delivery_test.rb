@@ -21,7 +21,6 @@ require "helper"
 require "gapic/grpc/service_stub"
 
 require "google/cloud/configdelivery/v1/config_delivery_pb"
-require "google/cloud/configdelivery/v1/config_delivery_services_pb"
 require "google/cloud/config_delivery/v1/config_delivery"
 
 class ::Google::Cloud::ConfigDelivery::V1::ConfigDelivery::ClientTest < Minitest::Test

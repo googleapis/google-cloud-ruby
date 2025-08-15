@@ -21,7 +21,6 @@ require "helper"
 require "gapic/grpc/service_stub"
 
 require "google/cloud/dataform/v1beta1/dataform_pb"
-require "google/cloud/dataform/v1beta1/dataform_services_pb"
 require "google/cloud/dataform/v1beta1/dataform"
 
 class ::Google::Cloud::Dataform::V1beta1::Dataform::ClientTest < Minitest::Test

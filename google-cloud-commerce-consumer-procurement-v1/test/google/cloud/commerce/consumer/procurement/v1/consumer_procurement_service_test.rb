@@ -21,7 +21,6 @@ require "helper"
 require "gapic/grpc/service_stub"
 
 require "google/cloud/commerce/consumer/procurement/v1/procurement_service_pb"
-require "google/cloud/commerce/consumer/procurement/v1/procurement_service_services_pb"
 require "google/cloud/commerce/consumer/procurement/v1/consumer_procurement_service"
 
 class ::Google::Cloud::Commerce::Consumer::Procurement::V1::ConsumerProcurementService::ClientTest < Minitest::Test

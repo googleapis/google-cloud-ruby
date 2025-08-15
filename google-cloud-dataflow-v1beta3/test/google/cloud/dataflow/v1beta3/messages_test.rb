@@ -21,7 +21,6 @@ require "helper"
 require "gapic/grpc/service_stub"
 
 require "google/dataflow/v1beta3/messages_pb"
-require "google/dataflow/v1beta3/messages_services_pb"
 require "google/cloud/dataflow/v1beta3/messages"
 
 class ::Google::Cloud::Dataflow::V1beta3::Messages::ClientTest < Minitest::Test

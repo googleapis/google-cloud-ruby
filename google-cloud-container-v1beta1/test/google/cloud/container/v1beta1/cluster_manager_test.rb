@@ -21,7 +21,6 @@ require "helper"
 require "gapic/grpc/service_stub"
 
 require "google/container/v1beta1/cluster_service_pb"
-require "google/container/v1beta1/cluster_service_services_pb"
 require "google/cloud/container/v1beta1/cluster_manager"
 
 class ::Google::Cloud::Container::V1beta1::ClusterManager::ClientTest < Minitest::Test

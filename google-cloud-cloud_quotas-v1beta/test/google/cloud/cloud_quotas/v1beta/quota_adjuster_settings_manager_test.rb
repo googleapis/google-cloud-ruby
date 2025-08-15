@@ -21,7 +21,6 @@ require "helper"
 require "gapic/grpc/service_stub"
 
 require "google/api/cloudquotas/v1beta/quota_adjuster_settings_pb"
-require "google/api/cloudquotas/v1beta/quota_adjuster_settings_services_pb"
 require "google/cloud/cloud_quotas/v1beta/quota_adjuster_settings_manager"
 
 class ::Google::Cloud::CloudQuotas::V1beta::QuotaAdjusterSettingsManager::ClientTest < Minitest::Test

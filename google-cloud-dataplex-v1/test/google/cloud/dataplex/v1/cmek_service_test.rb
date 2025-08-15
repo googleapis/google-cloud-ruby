@@ -21,7 +21,6 @@ require "helper"
 require "gapic/grpc/service_stub"
 
 require "google/cloud/dataplex/v1/cmek_pb"
-require "google/cloud/dataplex/v1/cmek_services_pb"
 require "google/cloud/dataplex/v1/cmek_service"
 
 class ::Google::Cloud::Dataplex::V1::CmekService::ClientTest < Minitest::Test

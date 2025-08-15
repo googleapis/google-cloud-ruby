@@ -21,7 +21,6 @@ require "helper"
 require "gapic/grpc/service_stub"
 
 require "google/dataflow/v1beta3/templates_pb"
-require "google/dataflow/v1beta3/templates_services_pb"
 require "google/cloud/dataflow/v1beta3/flex_templates_service"
 
 class ::Google::Cloud::Dataflow::V1beta3::FlexTemplatesService::ClientTest < Minitest::Test

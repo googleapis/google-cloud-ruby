@@ -21,7 +21,6 @@ require "helper"
 require "gapic/grpc/service_stub"
 
 require "google/cloud/datacatalog/lineage/v1/lineage_pb"
-require "google/cloud/datacatalog/lineage/v1/lineage_services_pb"
 require "google/cloud/data_catalog/lineage/v1/lineage"
 
 class ::Google::Cloud::DataCatalog::Lineage::V1::Lineage::ClientTest < Minitest::Test

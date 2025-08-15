@@ -21,7 +21,6 @@ require "helper"
 require "gapic/grpc/service_stub"
 
 require "google/cloud/contactcenterinsights/v1/contact_center_insights_pb"
-require "google/cloud/contactcenterinsights/v1/contact_center_insights_services_pb"
 require "google/cloud/contact_center_insights/v1/contact_center_insights"
 
 class ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::ClientTest < Minitest::Test
