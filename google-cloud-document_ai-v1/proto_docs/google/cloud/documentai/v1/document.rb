@@ -724,6 +724,9 @@ module Google
           #   @return [::Boolean]
           #     Optional. Whether the entity will be redacted for de-identification
           #     purposes.
+          # @!attribute [rw] method
+          #   @return [::Google::Cloud::DocumentAI::V1::Document::Entity::Method]
+          #     Optional. Specifies how the entity's value is obtained.
           class Entity
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -734,41 +737,44 @@ module Google
             #     Money value. See also:
             #     https://github.com/googleapis/googleapis/blob/master/google/type/money.proto
             #
-            #     Note: The following fields are mutually exclusive: `money_value`, `date_value`, `datetime_value`, `address_value`, `boolean_value`, `integer_value`, `float_value`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+            #     Note: The following fields are mutually exclusive: `money_value`, `date_value`, `datetime_value`, `address_value`, `boolean_value`, `integer_value`, `float_value`, `signature_value`. If a field in that set is populated, all other fields in the set will automatically be cleared.
             # @!attribute [rw] date_value
             #   @return [::Google::Type::Date]
             #     Date value. Includes year, month, day. See also:
             #     https://github.com/googleapis/googleapis/blob/master/google/type/date.proto
             #
-            #     Note: The following fields are mutually exclusive: `date_value`, `money_value`, `datetime_value`, `address_value`, `boolean_value`, `integer_value`, `float_value`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+            #     Note: The following fields are mutually exclusive: `date_value`, `money_value`, `datetime_value`, `address_value`, `boolean_value`, `integer_value`, `float_value`, `signature_value`. If a field in that set is populated, all other fields in the set will automatically be cleared.
             # @!attribute [rw] datetime_value
             #   @return [::Google::Type::DateTime]
             #     DateTime value. Includes date, time, and timezone. See also:
             #     https://github.com/googleapis/googleapis/blob/master/google/type/datetime.proto
             #
-            #     Note: The following fields are mutually exclusive: `datetime_value`, `money_value`, `date_value`, `address_value`, `boolean_value`, `integer_value`, `float_value`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+            #     Note: The following fields are mutually exclusive: `datetime_value`, `money_value`, `date_value`, `address_value`, `boolean_value`, `integer_value`, `float_value`, `signature_value`. If a field in that set is populated, all other fields in the set will automatically be cleared.
             # @!attribute [rw] address_value
             #   @return [::Google::Type::PostalAddress]
             #     Postal address. See also:
             #     https://github.com/googleapis/googleapis/blob/master/google/type/postal_address.proto
             #
-            #     Note: The following fields are mutually exclusive: `address_value`, `money_value`, `date_value`, `datetime_value`, `boolean_value`, `integer_value`, `float_value`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+            #     Note: The following fields are mutually exclusive: `address_value`, `money_value`, `date_value`, `datetime_value`, `boolean_value`, `integer_value`, `float_value`, `signature_value`. If a field in that set is populated, all other fields in the set will automatically be cleared.
             # @!attribute [rw] boolean_value
             #   @return [::Boolean]
             #     Boolean value. Can be used for entities with binary values, or for
             #     checkboxes.
             #
-            #     Note: The following fields are mutually exclusive: `boolean_value`, `money_value`, `date_value`, `datetime_value`, `address_value`, `integer_value`, `float_value`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+            #     Note: The following fields are mutually exclusive: `boolean_value`, `money_value`, `date_value`, `datetime_value`, `address_value`, `integer_value`, `float_value`, `signature_value`. If a field in that set is populated, all other fields in the set will automatically be cleared.
             # @!attribute [rw] integer_value
             #   @return [::Integer]
             #     Integer value.
             #
-            #     Note: The following fields are mutually exclusive: `integer_value`, `money_value`, `date_value`, `datetime_value`, `address_value`, `boolean_value`, `float_value`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+            #     Note: The following fields are mutually exclusive: `integer_value`, `money_value`, `date_value`, `datetime_value`, `address_value`, `boolean_value`, `float_value`, `signature_value`. If a field in that set is populated, all other fields in the set will automatically be cleared.
             # @!attribute [rw] float_value
             #   @return [::Float]
             #     Float value.
             #
-            #     Note: The following fields are mutually exclusive: `float_value`, `money_value`, `date_value`, `datetime_value`, `address_value`, `boolean_value`, `integer_value`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+            #     Note: The following fields are mutually exclusive: `float_value`, `money_value`, `date_value`, `datetime_value`, `address_value`, `boolean_value`, `integer_value`, `signature_value`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+            # @!attribute [rw] signature_value
+            #   @return [::Boolean]
+            #     Note: The following fields are mutually exclusive: `signature_value`, `money_value`, `date_value`, `datetime_value`, `address_value`, `boolean_value`, `integer_value`, `float_value`. If a field in that set is populated, all other fields in the set will automatically be cleared.
             # @!attribute [rw] text
             #   @return [::String]
             #     Optional. An optional field to store a normalized string.
@@ -785,6 +791,20 @@ module Google
             class NormalizedValue
               include ::Google::Protobuf::MessageExts
               extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
+
+            # Specifies how the entity's value is obtained.
+            module Method
+              # When the method is not specified, it should be treated as `EXTRACT`.
+              METHOD_UNSPECIFIED = 0
+
+              # The entity's value is directly extracted as-is from the document
+              # text.
+              EXTRACT = 1
+
+              # The entity's value is derived through inference and is not
+              # necessarily an exact text extraction from the document.
+              DERIVE = 2
             end
           end
 

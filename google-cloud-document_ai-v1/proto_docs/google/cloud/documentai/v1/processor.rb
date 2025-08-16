@@ -33,30 +33,32 @@ module Google
         # @!attribute [rw] display_name
         #   @return [::String]
         #     The display name of the processor version.
-        # @!attribute [rw] document_schema
+        # @!attribute [r] document_schema
         #   @return [::Google::Cloud::DocumentAI::V1::DocumentSchema]
-        #     The schema of the processor version. Describes the output.
+        #     Output only. The schema of the processor version. Describes the output.
         # @!attribute [r] state
         #   @return [::Google::Cloud::DocumentAI::V1::ProcessorVersion::State]
         #     Output only. The state of the processor version.
-        # @!attribute [rw] create_time
+        # @!attribute [r] create_time
         #   @return [::Google::Protobuf::Timestamp]
-        #     The time the processor version was created.
-        # @!attribute [rw] latest_evaluation
+        #     Output only. The time the processor version was created.
+        # @!attribute [r] latest_evaluation
         #   @return [::Google::Cloud::DocumentAI::V1::EvaluationReference]
-        #     The most recently invoked evaluation for the processor version.
-        # @!attribute [rw] kms_key_name
+        #     Output only. The most recently invoked evaluation for the processor
+        #     version.
+        # @!attribute [r] kms_key_name
         #   @return [::String]
-        #     The KMS key name used for encryption.
-        # @!attribute [rw] kms_key_version_name
+        #     Output only. The KMS key name used for encryption.
+        # @!attribute [r] kms_key_version_name
         #   @return [::String]
-        #     The KMS key version with which data is encrypted.
+        #     Output only. The KMS key version with which data is encrypted.
         # @!attribute [r] google_managed
         #   @return [::Boolean]
         #     Output only. Denotes that this `ProcessorVersion` is managed by Google.
-        # @!attribute [rw] deprecation_info
+        # @!attribute [r] deprecation_info
         #   @return [::Google::Cloud::DocumentAI::V1::ProcessorVersion::DeprecationInfo]
-        #     If set, information about the eventual deprecation of this version.
+        #     Output only. If set, information about the eventual deprecation of this
+        #     version.
         # @!attribute [r] model_type
         #   @return [::Google::Cloud::DocumentAI::V1::ProcessorVersion::ModelType]
         #     Output only. The model type of this processor version.
@@ -223,9 +225,9 @@ module Google
         #   @return [::String]
         #     Output only. Immutable. The http endpoint that can be called to invoke
         #     processing.
-        # @!attribute [rw] create_time
+        # @!attribute [r] create_time
         #   @return [::Google::Protobuf::Timestamp]
-        #     The time the processor was created.
+        #     Output only. The time the processor was created.
         # @!attribute [rw] kms_key_name
         #   @return [::String]
         #     The [KMS key](https://cloud.google.com/security-key-management) used for
