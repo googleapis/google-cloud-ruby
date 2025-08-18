@@ -21,7 +21,6 @@ require "helper"
 require "gapic/grpc/service_stub"
 
 require "google/cloud/beyondcorp/appconnections/v1/app_connections_service_pb"
-require "google/cloud/beyondcorp/appconnections/v1/app_connections_service_services_pb"
 require "google/cloud/beyond_corp/app_connections/v1/app_connections_service"
 
 class ::Google::Cloud::BeyondCorp::AppConnections::V1::AppConnectionsService::ClientTest < Minitest::Test

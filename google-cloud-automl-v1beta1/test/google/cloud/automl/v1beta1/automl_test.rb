@@ -21,7 +21,6 @@ require "helper"
 require "gapic/grpc/service_stub"
 
 require "google/cloud/automl/v1beta1/service_pb"
-require "google/cloud/automl/v1beta1/service_services_pb"
 require "google/cloud/automl/v1beta1/automl"
 
 class ::Google::Cloud::AutoML::V1beta1::AutoML::ClientTest < Minitest::Test

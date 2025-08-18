@@ -21,7 +21,6 @@ require "helper"
 require "gapic/grpc/service_stub"
 
 require "google/cloud/apphub/v1/apphub_service_pb"
-require "google/cloud/apphub/v1/apphub_service_services_pb"
 require "google/cloud/app_hub/v1/app_hub"
 
 class ::Google::Cloud::AppHub::V1::AppHub::ClientTest < Minitest::Test
