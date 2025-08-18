@@ -21,7 +21,6 @@ require "helper"
 require "gapic/grpc/service_stub"
 
 require "google/cloud/aiplatform/v1/feature_online_store_service_pb"
-require "google/cloud/aiplatform/v1/feature_online_store_service_services_pb"
 require "google/cloud/ai_platform/v1/feature_online_store_service"
 
 class ::Google::Cloud::AIPlatform::V1::FeatureOnlineStoreService::ClientTest < Minitest::Test
