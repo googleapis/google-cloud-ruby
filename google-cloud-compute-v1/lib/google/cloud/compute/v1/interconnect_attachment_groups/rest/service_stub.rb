@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright 2021 Google LLC
+# Copyright 2025 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -22,10 +22,10 @@ module Google
   module Cloud
     module Compute
       module V1
-        module Licenses
+        module InterconnectAttachmentGroups
           module Rest
             ##
-            # REST service stub for the Licenses service.
+            # REST service stub for the InterconnectAttachmentGroups service.
             # Service stub contains baseline method implementations
             # including transcoding, making the REST call, and deserialing the response.
             #
@@ -76,7 +76,7 @@ module Google
               ##
               # Baseline implementation for the delete REST call
               #
-              # @param request_pb [::Google::Cloud::Compute::V1::DeleteLicenseRequest]
+              # @param request_pb [::Google::Cloud::Compute::V1::DeleteInterconnectAttachmentGroupRequest]
               #   A request object representing the call parameters. Required.
               # @param options [::Gapic::CallOptions]
               #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
@@ -116,16 +116,16 @@ module Google
               ##
               # Baseline implementation for the get REST call
               #
-              # @param request_pb [::Google::Cloud::Compute::V1::GetLicenseRequest]
+              # @param request_pb [::Google::Cloud::Compute::V1::GetInterconnectAttachmentGroupRequest]
               #   A request object representing the call parameters. Required.
               # @param options [::Gapic::CallOptions]
               #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
               #
               # @yield [result, operation] Access the result along with the TransportOperation object
-              # @yieldparam result [::Google::Cloud::Compute::V1::License]
+              # @yieldparam result [::Google::Cloud::Compute::V1::InterconnectAttachmentGroup]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
-              # @return [::Google::Cloud::Compute::V1::License]
+              # @return [::Google::Cloud::Compute::V1::InterconnectAttachmentGroup]
               #   A result object deserialized from the server's reply
               def get request_pb, options = nil
                 raise ::ArgumentError, "request must be provided" if request_pb.nil?
@@ -146,7 +146,7 @@ module Google
                   options: options
                 )
                 operation = ::Gapic::Rest::TransportOperation.new response
-                result = ::Google::Cloud::Compute::V1::License.decode_json response.body, ignore_unknown_fields: true
+                result = ::Google::Cloud::Compute::V1::InterconnectAttachmentGroup.decode_json response.body, ignore_unknown_fields: true
                 catch :response do
                   yield result, operation if block_given?
                   result
@@ -156,7 +156,7 @@ module Google
               ##
               # Baseline implementation for the get_iam_policy REST call
               #
-              # @param request_pb [::Google::Cloud::Compute::V1::GetIamPolicyLicenseRequest]
+              # @param request_pb [::Google::Cloud::Compute::V1::GetIamPolicyInterconnectAttachmentGroupRequest]
               #   A request object representing the call parameters. Required.
               # @param options [::Gapic::CallOptions]
               #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
@@ -194,9 +194,49 @@ module Google
               end
 
               ##
+              # Baseline implementation for the get_operational_status REST call
+              #
+              # @param request_pb [::Google::Cloud::Compute::V1::GetOperationalStatusInterconnectAttachmentGroupRequest]
+              #   A request object representing the call parameters. Required.
+              # @param options [::Gapic::CallOptions]
+              #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Cloud::Compute::V1::InterconnectAttachmentGroupsGetOperationalStatusResponse]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Cloud::Compute::V1::InterconnectAttachmentGroupsGetOperationalStatusResponse]
+              #   A result object deserialized from the server's reply
+              def get_operational_status request_pb, options = nil
+                raise ::ArgumentError, "request must be provided" if request_pb.nil?
+
+                verb, uri, query_string_params, body = ServiceStub.transcode_get_operational_status_request request_pb
+                query_string_params = if query_string_params.any?
+                                        query_string_params.to_h { |p| p.split "=", 2 }
+                                      else
+                                        {}
+                                      end
+
+                response = @client_stub.make_http_request(
+                  verb,
+                  uri: uri,
+                  body: body || "",
+                  params: query_string_params,
+                  method_name: "get_operational_status",
+                  options: options
+                )
+                operation = ::Gapic::Rest::TransportOperation.new response
+                result = ::Google::Cloud::Compute::V1::InterconnectAttachmentGroupsGetOperationalStatusResponse.decode_json response.body, ignore_unknown_fields: true
+                catch :response do
+                  yield result, operation if block_given?
+                  result
+                end
+              end
+
+              ##
               # Baseline implementation for the insert REST call
               #
-              # @param request_pb [::Google::Cloud::Compute::V1::InsertLicenseRequest]
+              # @param request_pb [::Google::Cloud::Compute::V1::InsertInterconnectAttachmentGroupRequest]
               #   A request object representing the call parameters. Required.
               # @param options [::Gapic::CallOptions]
               #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
@@ -236,16 +276,16 @@ module Google
               ##
               # Baseline implementation for the list REST call
               #
-              # @param request_pb [::Google::Cloud::Compute::V1::ListLicensesRequest]
+              # @param request_pb [::Google::Cloud::Compute::V1::ListInterconnectAttachmentGroupsRequest]
               #   A request object representing the call parameters. Required.
               # @param options [::Gapic::CallOptions]
               #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
               #
               # @yield [result, operation] Access the result along with the TransportOperation object
-              # @yieldparam result [::Google::Cloud::Compute::V1::LicensesListResponse]
+              # @yieldparam result [::Google::Cloud::Compute::V1::InterconnectAttachmentGroupsListResponse]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
-              # @return [::Google::Cloud::Compute::V1::LicensesListResponse]
+              # @return [::Google::Cloud::Compute::V1::InterconnectAttachmentGroupsListResponse]
               #   A result object deserialized from the server's reply
               def list request_pb, options = nil
                 raise ::ArgumentError, "request must be provided" if request_pb.nil?
@@ -266,7 +306,47 @@ module Google
                   options: options
                 )
                 operation = ::Gapic::Rest::TransportOperation.new response
-                result = ::Google::Cloud::Compute::V1::LicensesListResponse.decode_json response.body, ignore_unknown_fields: true
+                result = ::Google::Cloud::Compute::V1::InterconnectAttachmentGroupsListResponse.decode_json response.body, ignore_unknown_fields: true
+                catch :response do
+                  yield result, operation if block_given?
+                  result
+                end
+              end
+
+              ##
+              # Baseline implementation for the patch REST call
+              #
+              # @param request_pb [::Google::Cloud::Compute::V1::PatchInterconnectAttachmentGroupRequest]
+              #   A request object representing the call parameters. Required.
+              # @param options [::Gapic::CallOptions]
+              #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Cloud::Compute::V1::Operation]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Cloud::Compute::V1::Operation]
+              #   A result object deserialized from the server's reply
+              def patch request_pb, options = nil
+                raise ::ArgumentError, "request must be provided" if request_pb.nil?
+
+                verb, uri, query_string_params, body = ServiceStub.transcode_patch_request request_pb
+                query_string_params = if query_string_params.any?
+                                        query_string_params.to_h { |p| p.split "=", 2 }
+                                      else
+                                        {}
+                                      end
+
+                response = @client_stub.make_http_request(
+                  verb,
+                  uri: uri,
+                  body: body || "",
+                  params: query_string_params,
+                  method_name: "patch",
+                  options: options
+                )
+                operation = ::Gapic::Rest::TransportOperation.new response
+                result = ::Google::Cloud::Compute::V1::Operation.decode_json response.body, ignore_unknown_fields: true
                 catch :response do
                   yield result, operation if block_given?
                   result
@@ -276,7 +356,7 @@ module Google
               ##
               # Baseline implementation for the set_iam_policy REST call
               #
-              # @param request_pb [::Google::Cloud::Compute::V1::SetIamPolicyLicenseRequest]
+              # @param request_pb [::Google::Cloud::Compute::V1::SetIamPolicyInterconnectAttachmentGroupRequest]
               #   A request object representing the call parameters. Required.
               # @param options [::Gapic::CallOptions]
               #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
@@ -316,7 +396,7 @@ module Google
               ##
               # Baseline implementation for the test_iam_permissions REST call
               #
-              # @param request_pb [::Google::Cloud::Compute::V1::TestIamPermissionsLicenseRequest]
+              # @param request_pb [::Google::Cloud::Compute::V1::TestIamPermissionsInterconnectAttachmentGroupRequest]
               #   A request object representing the call parameters. Required.
               # @param options [::Gapic::CallOptions]
               #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
@@ -354,51 +434,11 @@ module Google
               end
 
               ##
-              # Baseline implementation for the update REST call
-              #
-              # @param request_pb [::Google::Cloud::Compute::V1::UpdateLicenseRequest]
-              #   A request object representing the call parameters. Required.
-              # @param options [::Gapic::CallOptions]
-              #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
-              #
-              # @yield [result, operation] Access the result along with the TransportOperation object
-              # @yieldparam result [::Google::Cloud::Compute::V1::Operation]
-              # @yieldparam operation [::Gapic::Rest::TransportOperation]
-              #
-              # @return [::Google::Cloud::Compute::V1::Operation]
-              #   A result object deserialized from the server's reply
-              def update request_pb, options = nil
-                raise ::ArgumentError, "request must be provided" if request_pb.nil?
-
-                verb, uri, query_string_params, body = ServiceStub.transcode_update_request request_pb
-                query_string_params = if query_string_params.any?
-                                        query_string_params.to_h { |p| p.split "=", 2 }
-                                      else
-                                        {}
-                                      end
-
-                response = @client_stub.make_http_request(
-                  verb,
-                  uri: uri,
-                  body: body || "",
-                  params: query_string_params,
-                  method_name: "update",
-                  options: options
-                )
-                operation = ::Gapic::Rest::TransportOperation.new response
-                result = ::Google::Cloud::Compute::V1::Operation.decode_json response.body, ignore_unknown_fields: true
-                catch :response do
-                  yield result, operation if block_given?
-                  result
-                end
-              end
-
-              ##
               # @private
               #
               # GRPC transcoding helper method for the delete REST call
               #
-              # @param request_pb [::Google::Cloud::Compute::V1::DeleteLicenseRequest]
+              # @param request_pb [::Google::Cloud::Compute::V1::DeleteInterconnectAttachmentGroupRequest]
               #   A request object representing the call parameters. Required.
               # @return [Array(String, [String, nil], Hash{String => String})]
               #   Uri, Body, Query string parameters
@@ -406,10 +446,10 @@ module Google
                 transcoder = Gapic::Rest::GrpcTranscoder.new
                                                         .with_bindings(
                                                           uri_method: :delete,
-                                                          uri_template: "/compute/v1/projects/{project}/global/licenses/{license}",
+                                                          uri_template: "/compute/v1/projects/{project}/global/interconnectAttachmentGroups/{interconnect_attachment_group}",
                                                           matches: [
                                                             ["project", %r{^[^/]+/?$}, false],
-                                                            ["license", %r{^[^/]+/?$}, false]
+                                                            ["interconnect_attachment_group", %r{^[^/]+/?$}, false]
                                                           ]
                                                         )
                 transcoder.transcode request_pb
@@ -420,7 +460,7 @@ module Google
               #
               # GRPC transcoding helper method for the get REST call
               #
-              # @param request_pb [::Google::Cloud::Compute::V1::GetLicenseRequest]
+              # @param request_pb [::Google::Cloud::Compute::V1::GetInterconnectAttachmentGroupRequest]
               #   A request object representing the call parameters. Required.
               # @return [Array(String, [String, nil], Hash{String => String})]
               #   Uri, Body, Query string parameters
@@ -428,10 +468,10 @@ module Google
                 transcoder = Gapic::Rest::GrpcTranscoder.new
                                                         .with_bindings(
                                                           uri_method: :get,
-                                                          uri_template: "/compute/v1/projects/{project}/global/licenses/{license}",
+                                                          uri_template: "/compute/v1/projects/{project}/global/interconnectAttachmentGroups/{interconnect_attachment_group}",
                                                           matches: [
                                                             ["project", %r{^[^/]+/?$}, false],
-                                                            ["license", %r{^[^/]+/?$}, false]
+                                                            ["interconnect_attachment_group", %r{^[^/]+/?$}, false]
                                                           ]
                                                         )
                 transcoder.transcode request_pb
@@ -442,7 +482,7 @@ module Google
               #
               # GRPC transcoding helper method for the get_iam_policy REST call
               #
-              # @param request_pb [::Google::Cloud::Compute::V1::GetIamPolicyLicenseRequest]
+              # @param request_pb [::Google::Cloud::Compute::V1::GetIamPolicyInterconnectAttachmentGroupRequest]
               #   A request object representing the call parameters. Required.
               # @return [Array(String, [String, nil], Hash{String => String})]
               #   Uri, Body, Query string parameters
@@ -450,7 +490,7 @@ module Google
                 transcoder = Gapic::Rest::GrpcTranscoder.new
                                                         .with_bindings(
                                                           uri_method: :get,
-                                                          uri_template: "/compute/v1/projects/{project}/global/licenses/{resource}/getIamPolicy",
+                                                          uri_template: "/compute/v1/projects/{project}/global/interconnectAttachmentGroups/{resource}/getIamPolicy",
                                                           matches: [
                                                             ["project", %r{^[^/]+/?$}, false],
                                                             ["resource", %r{^[^/]+/?$}, false]
@@ -462,9 +502,31 @@ module Google
               ##
               # @private
               #
+              # GRPC transcoding helper method for the get_operational_status REST call
+              #
+              # @param request_pb [::Google::Cloud::Compute::V1::GetOperationalStatusInterconnectAttachmentGroupRequest]
+              #   A request object representing the call parameters. Required.
+              # @return [Array(String, [String, nil], Hash{String => String})]
+              #   Uri, Body, Query string parameters
+              def self.transcode_get_operational_status_request request_pb
+                transcoder = Gapic::Rest::GrpcTranscoder.new
+                                                        .with_bindings(
+                                                          uri_method: :get,
+                                                          uri_template: "/compute/v1/projects/{project}/global/interconnectAttachmentGroups/{interconnect_attachment_group}/getOperationalStatus",
+                                                          matches: [
+                                                            ["project", %r{^[^/]+/?$}, false],
+                                                            ["interconnect_attachment_group", %r{^[^/]+/?$}, false]
+                                                          ]
+                                                        )
+                transcoder.transcode request_pb
+              end
+
+              ##
+              # @private
+              #
               # GRPC transcoding helper method for the insert REST call
               #
-              # @param request_pb [::Google::Cloud::Compute::V1::InsertLicenseRequest]
+              # @param request_pb [::Google::Cloud::Compute::V1::InsertInterconnectAttachmentGroupRequest]
               #   A request object representing the call parameters. Required.
               # @return [Array(String, [String, nil], Hash{String => String})]
               #   Uri, Body, Query string parameters
@@ -472,8 +534,8 @@ module Google
                 transcoder = Gapic::Rest::GrpcTranscoder.new
                                                         .with_bindings(
                                                           uri_method: :post,
-                                                          uri_template: "/compute/v1/projects/{project}/global/licenses",
-                                                          body: "license_resource",
+                                                          uri_template: "/compute/v1/projects/{project}/global/interconnectAttachmentGroups",
+                                                          body: "interconnect_attachment_group_resource",
                                                           matches: [
                                                             ["project", %r{^[^/]+/?$}, false]
                                                           ]
@@ -486,7 +548,7 @@ module Google
               #
               # GRPC transcoding helper method for the list REST call
               #
-              # @param request_pb [::Google::Cloud::Compute::V1::ListLicensesRequest]
+              # @param request_pb [::Google::Cloud::Compute::V1::ListInterconnectAttachmentGroupsRequest]
               #   A request object representing the call parameters. Required.
               # @return [Array(String, [String, nil], Hash{String => String})]
               #   Uri, Body, Query string parameters
@@ -494,7 +556,7 @@ module Google
                 transcoder = Gapic::Rest::GrpcTranscoder.new
                                                         .with_bindings(
                                                           uri_method: :get,
-                                                          uri_template: "/compute/v1/projects/{project}/global/licenses",
+                                                          uri_template: "/compute/v1/projects/{project}/global/interconnectAttachmentGroups",
                                                           matches: [
                                                             ["project", %r{^[^/]+/?$}, false]
                                                           ]
@@ -505,9 +567,32 @@ module Google
               ##
               # @private
               #
+              # GRPC transcoding helper method for the patch REST call
+              #
+              # @param request_pb [::Google::Cloud::Compute::V1::PatchInterconnectAttachmentGroupRequest]
+              #   A request object representing the call parameters. Required.
+              # @return [Array(String, [String, nil], Hash{String => String})]
+              #   Uri, Body, Query string parameters
+              def self.transcode_patch_request request_pb
+                transcoder = Gapic::Rest::GrpcTranscoder.new
+                                                        .with_bindings(
+                                                          uri_method: :patch,
+                                                          uri_template: "/compute/v1/projects/{project}/global/interconnectAttachmentGroups/{interconnect_attachment_group}",
+                                                          body: "interconnect_attachment_group_resource",
+                                                          matches: [
+                                                            ["project", %r{^[^/]+/?$}, false],
+                                                            ["interconnect_attachment_group", %r{^[^/]+/?$}, false]
+                                                          ]
+                                                        )
+                transcoder.transcode request_pb
+              end
+
+              ##
+              # @private
+              #
               # GRPC transcoding helper method for the set_iam_policy REST call
               #
-              # @param request_pb [::Google::Cloud::Compute::V1::SetIamPolicyLicenseRequest]
+              # @param request_pb [::Google::Cloud::Compute::V1::SetIamPolicyInterconnectAttachmentGroupRequest]
               #   A request object representing the call parameters. Required.
               # @return [Array(String, [String, nil], Hash{String => String})]
               #   Uri, Body, Query string parameters
@@ -515,7 +600,7 @@ module Google
                 transcoder = Gapic::Rest::GrpcTranscoder.new
                                                         .with_bindings(
                                                           uri_method: :post,
-                                                          uri_template: "/compute/v1/projects/{project}/global/licenses/{resource}/setIamPolicy",
+                                                          uri_template: "/compute/v1/projects/{project}/global/interconnectAttachmentGroups/{resource}/setIamPolicy",
                                                           body: "global_set_policy_request_resource",
                                                           matches: [
                                                             ["project", %r{^[^/]+/?$}, false],
@@ -530,7 +615,7 @@ module Google
               #
               # GRPC transcoding helper method for the test_iam_permissions REST call
               #
-              # @param request_pb [::Google::Cloud::Compute::V1::TestIamPermissionsLicenseRequest]
+              # @param request_pb [::Google::Cloud::Compute::V1::TestIamPermissionsInterconnectAttachmentGroupRequest]
               #   A request object representing the call parameters. Required.
               # @return [Array(String, [String, nil], Hash{String => String})]
               #   Uri, Body, Query string parameters
@@ -538,34 +623,11 @@ module Google
                 transcoder = Gapic::Rest::GrpcTranscoder.new
                                                         .with_bindings(
                                                           uri_method: :post,
-                                                          uri_template: "/compute/v1/projects/{project}/global/licenses/{resource}/testIamPermissions",
+                                                          uri_template: "/compute/v1/projects/{project}/global/interconnectAttachmentGroups/{resource}/testIamPermissions",
                                                           body: "test_permissions_request_resource",
                                                           matches: [
                                                             ["project", %r{^[^/]+/?$}, false],
                                                             ["resource", %r{^[^/]+/?$}, false]
-                                                          ]
-                                                        )
-                transcoder.transcode request_pb
-              end
-
-              ##
-              # @private
-              #
-              # GRPC transcoding helper method for the update REST call
-              #
-              # @param request_pb [::Google::Cloud::Compute::V1::UpdateLicenseRequest]
-              #   A request object representing the call parameters. Required.
-              # @return [Array(String, [String, nil], Hash{String => String})]
-              #   Uri, Body, Query string parameters
-              def self.transcode_update_request request_pb
-                transcoder = Gapic::Rest::GrpcTranscoder.new
-                                                        .with_bindings(
-                                                          uri_method: :patch,
-                                                          uri_template: "/compute/v1/projects/{project}/global/licenses/{license}",
-                                                          body: "license_resource",
-                                                          matches: [
-                                                            ["project", %r{^[^/]+/?$}, false],
-                                                            ["license", %r{^[^/]+/?$}, false]
                                                           ]
                                                         )
                 transcoder.transcode request_pb
