@@ -21,7 +21,6 @@ require "helper"
 require "gapic/grpc/service_stub"
 
 require "google/shopping/css/v1/css_product_inputs_pb"
-require "google/shopping/css/v1/css_product_inputs_services_pb"
 require "google/shopping/css/v1/css_product_inputs_service"
 
 class ::Google::Shopping::Css::V1::CssProductInputsService::ClientTest < Minitest::Test
