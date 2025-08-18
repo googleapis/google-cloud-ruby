@@ -21,7 +21,6 @@ require "helper"
 require "gapic/grpc/service_stub"
 
 require "google/cloud/bigquery/reservation/v1/reservation_pb"
-require "google/cloud/bigquery/reservation/v1/reservation_services_pb"
 require "google/cloud/bigquery/reservation/v1/reservation_service"
 
 class ::Google::Cloud::Bigquery::Reservation::V1::ReservationService::ClientTest < Minitest::Test
