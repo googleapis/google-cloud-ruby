@@ -21,7 +21,6 @@ require "helper"
 require "gapic/grpc/service_stub"
 
 require "google/shopping/merchant/ordertracking/v1beta/order_tracking_signals_pb"
-require "google/shopping/merchant/ordertracking/v1beta/order_tracking_signals_services_pb"
 require "google/shopping/merchant/order_tracking/v1beta/order_tracking_signals_service"
 
 class ::Google::Shopping::Merchant::OrderTracking::V1beta::OrderTrackingSignalsService::ClientTest < Minitest::Test

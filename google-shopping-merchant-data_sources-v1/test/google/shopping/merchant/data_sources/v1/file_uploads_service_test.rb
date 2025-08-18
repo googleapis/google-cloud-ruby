@@ -21,7 +21,6 @@ require "helper"
 require "gapic/grpc/service_stub"
 
 require "google/shopping/merchant/datasources/v1/fileuploads_pb"
-require "google/shopping/merchant/datasources/v1/fileuploads_services_pb"
 require "google/shopping/merchant/data_sources/v1/file_uploads_service"
 
 class ::Google::Shopping::Merchant::DataSources::V1::FileUploadsService::ClientTest < Minitest::Test

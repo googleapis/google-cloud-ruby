@@ -21,7 +21,6 @@ require "helper"
 require "gapic/grpc/service_stub"
 
 require "google/shopping/merchant/conversions/v1/conversionsources_pb"
-require "google/shopping/merchant/conversions/v1/conversionsources_services_pb"
 require "google/shopping/merchant/conversions/v1/conversion_sources_service"
 
 class ::Google::Shopping::Merchant::Conversions::V1::ConversionSourcesService::ClientTest < Minitest::Test

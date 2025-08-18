@@ -21,7 +21,6 @@ require "helper"
 require "gapic/grpc/service_stub"
 
 require "google/shopping/merchant/accounts/v1/omnichannelsettings_pb"
-require "google/shopping/merchant/accounts/v1/omnichannelsettings_services_pb"
 require "google/shopping/merchant/accounts/v1/omnichannel_settings_service"
 
 class ::Google::Shopping::Merchant::Accounts::V1::OmnichannelSettingsService::ClientTest < Minitest::Test

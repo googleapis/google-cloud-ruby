@@ -21,7 +21,6 @@ require "helper"
 require "gapic/grpc/service_stub"
 
 require "google/shopping/merchant/accounts/v1/shippingsettings_pb"
-require "google/shopping/merchant/accounts/v1/shippingsettings_services_pb"
 require "google/shopping/merchant/accounts/v1/shipping_settings_service"
 
 class ::Google::Shopping::Merchant::Accounts::V1::ShippingSettingsService::ClientTest < Minitest::Test
