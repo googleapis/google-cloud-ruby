@@ -498,6 +498,7 @@ class ::Google::Cloud::Compute::V1::Subnetworks::Rest::ClientTest < Minitest::Te
     page_token = "hello world"
     project = "hello world"
     return_partial_success = true
+    service_project = "hello world"
 
     list_usable_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
@@ -513,27 +514,27 @@ class ::Google::Cloud::Compute::V1::Subnetworks::Rest::ClientTest < Minitest::Te
         end
 
         # Use hash object
-        client.list_usable({ filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success }) do |_result, response|
+        client.list_usable({ filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success, service_project: service_project }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_usable filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success do |_result, response|
+        client.list_usable filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success, service_project: service_project do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_usable ::Google::Cloud::Compute::V1::ListUsableSubnetworksRequest.new(filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success) do |_result, response|
+        client.list_usable ::Google::Cloud::Compute::V1::ListUsableSubnetworksRequest.new(filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success, service_project: service_project) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_usable({ filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success }, call_options) do |_result, response|
+        client.list_usable({ filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success, service_project: service_project }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_usable(::Google::Cloud::Compute::V1::ListUsableSubnetworksRequest.new(filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success), call_options) do |_result, response|
+        client.list_usable(::Google::Cloud::Compute::V1::ListUsableSubnetworksRequest.new(filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success, service_project: service_project), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 

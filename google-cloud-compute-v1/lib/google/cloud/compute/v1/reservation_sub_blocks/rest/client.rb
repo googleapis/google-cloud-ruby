@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright 2021 Google LLC
+# Copyright 2025 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -18,18 +18,19 @@
 
 require "google/cloud/errors"
 require "google/cloud/compute/v1/compute_pb"
-require "google/cloud/compute/v1/global_organization_operations/rest/service_stub"
+require "google/cloud/compute/v1/reservation_sub_blocks/rest/service_stub"
+require "google/cloud/compute/v1/zone_operations/rest"
 
 module Google
   module Cloud
     module Compute
       module V1
-        module GlobalOrganizationOperations
+        module ReservationSubBlocks
           module Rest
             ##
-            # REST client for the GlobalOrganizationOperations service.
+            # REST client for the ReservationSubBlocks service.
             #
-            # The GlobalOrganizationOperations API.
+            # The ReservationSubBlocks API.
             #
             class Client
               # @private
@@ -39,18 +40,18 @@ module Google
               DEFAULT_ENDPOINT_TEMPLATE = "compute.$UNIVERSE_DOMAIN$"
 
               # @private
-              attr_reader :global_organization_operations_stub
+              attr_reader :reservation_sub_blocks_stub
 
               ##
-              # Configure the GlobalOrganizationOperations Client class.
+              # Configure the ReservationSubBlocks Client class.
               #
-              # See {::Google::Cloud::Compute::V1::GlobalOrganizationOperations::Rest::Client::Configuration}
+              # See {::Google::Cloud::Compute::V1::ReservationSubBlocks::Rest::Client::Configuration}
               # for a description of the configuration fields.
               #
               # @example
               #
-              #   # Modify the configuration for all GlobalOrganizationOperations clients
-              #   ::Google::Cloud::Compute::V1::GlobalOrganizationOperations::Rest::Client.configure do |config|
+              #   # Modify the configuration for all ReservationSubBlocks clients
+              #   ::Google::Cloud::Compute::V1::ReservationSubBlocks::Rest::Client.configure do |config|
               #     config.timeout = 10.0
               #   end
               #
@@ -70,8 +71,6 @@ module Google
                                   end
                   default_config = Client::Configuration.new parent_config
 
-                  default_config.rpcs.delete.timeout = 600.0
-
                   default_config.rpcs.get.timeout = 600.0
                   default_config.rpcs.get.retry_policy = {
                     initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [4, 14]
@@ -82,6 +81,8 @@ module Google
                     initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [4, 14]
                   }
 
+                  default_config.rpcs.perform_maintenance.timeout = 600.0
+
                   default_config
                 end
                 yield @configure if block_given?
@@ -89,13 +90,13 @@ module Google
               end
 
               ##
-              # Configure the GlobalOrganizationOperations Client instance.
+              # Configure the ReservationSubBlocks Client instance.
               #
               # The configuration is set to the derived mode, meaning that values can be changed,
               # but structural changes (adding new fields, etc.) are not allowed. Structural changes
               # should be made on {Client.configure}.
               #
-              # See {::Google::Cloud::Compute::V1::GlobalOrganizationOperations::Rest::Client::Configuration}
+              # See {::Google::Cloud::Compute::V1::ReservationSubBlocks::Rest::Client::Configuration}
               # for a description of the configuration fields.
               #
               # @yield [config] Configure the Client client.
@@ -114,23 +115,23 @@ module Google
               # @return [String]
               #
               def universe_domain
-                @global_organization_operations_stub.universe_domain
+                @reservation_sub_blocks_stub.universe_domain
               end
 
               ##
-              # Create a new GlobalOrganizationOperations REST client object.
+              # Create a new ReservationSubBlocks REST client object.
               #
               # @example
               #
               #   # Create a client using the default configuration
-              #   client = ::Google::Cloud::Compute::V1::GlobalOrganizationOperations::Rest::Client.new
+              #   client = ::Google::Cloud::Compute::V1::ReservationSubBlocks::Rest::Client.new
               #
               #   # Create a client using a custom configuration
-              #   client = ::Google::Cloud::Compute::V1::GlobalOrganizationOperations::Rest::Client.new do |config|
+              #   client = ::Google::Cloud::Compute::V1::ReservationSubBlocks::Rest::Client.new do |config|
               #     config.timeout = 10.0
               #   end
               #
-              # @yield [config] Configure the GlobalOrganizationOperations client.
+              # @yield [config] Configure the ReservationSubBlocks client.
               # @yieldparam config [Client::Configuration]
               #
               def initialize
@@ -156,7 +157,14 @@ module Google
                 @quota_project_id = @config.quota_project
                 @quota_project_id ||= credentials.quota_project_id if credentials.respond_to? :quota_project_id
 
-                @global_organization_operations_stub = ::Google::Cloud::Compute::V1::GlobalOrganizationOperations::Rest::ServiceStub.new(
+                @zone_operations = ::Google::Cloud::Compute::V1::ZoneOperations::Rest::Client.new do |config|
+                  config.credentials = credentials
+                  config.quota_project = @quota_project_id
+                  config.endpoint = @config.endpoint
+                  config.universe_domain = @config.universe_domain
+                end
+
+                @reservation_sub_blocks_stub = ::Google::Cloud::Compute::V1::ReservationSubBlocks::Rest::ServiceStub.new(
                   endpoint: @config.endpoint,
                   endpoint_template: DEFAULT_ENDPOINT_TEMPLATE,
                   universe_domain: @config.universe_domain,
@@ -164,7 +172,7 @@ module Google
                   logger: @config.logger
                 )
 
-                @global_organization_operations_stub.logger(stub: true)&.info do |entry|
+                @reservation_sub_blocks_stub.logger(stub: true)&.info do |entry|
                   entry.set_system_name
                   entry.set_service
                   entry.message = "Created client for #{entry.service}"
@@ -176,123 +184,54 @@ module Google
               end
 
               ##
+              # Get the associated client for long-running operations via ZoneOperations.
+              #
+              # @return [::Google::Cloud::Compute::V1::ZoneOperations::Rest::Client]
+              #
+              attr_reader :zone_operations
+
+              ##
               # The logger used for request/response debug logging.
               #
               # @return [Logger]
               #
               def logger
-                @global_organization_operations_stub.logger
+                @reservation_sub_blocks_stub.logger
               end
 
               # Service calls
 
               ##
-              # Deletes the specified Operations resource.
-              #
-              # @overload delete(request, options = nil)
-              #   Pass arguments to `delete` via a request object, either of type
-              #   {::Google::Cloud::Compute::V1::DeleteGlobalOrganizationOperationRequest} or an equivalent Hash.
-              #
-              #   @param request [::Google::Cloud::Compute::V1::DeleteGlobalOrganizationOperationRequest, ::Hash]
-              #     A request object representing the call parameters. Required. To specify no
-              #     parameters, or to keep all the default parameter values, pass an empty Hash.
-              #   @param options [::Gapic::CallOptions, ::Hash]
-              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
-              #
-              # @overload delete(operation: nil, parent_id: nil)
-              #   Pass arguments to `delete` via keyword arguments. Note that at
-              #   least one keyword argument is required. To specify no parameters, or to keep all
-              #   the default parameter values, pass an empty Hash as a request object (see above).
-              #
-              #   @param operation [::String]
-              #     Name of the Operations resource to delete, or its unique numeric identifier.
-              #   @param parent_id [::String]
-              #     Parent ID for this request.
-              # @yield [result, operation] Access the result along with the TransportOperation object
-              # @yieldparam result [::Google::Cloud::Compute::V1::DeleteGlobalOrganizationOperationResponse]
-              # @yieldparam operation [::Gapic::Rest::TransportOperation]
-              #
-              # @return [::Google::Cloud::Compute::V1::DeleteGlobalOrganizationOperationResponse]
-              #
-              # @raise [::Google::Cloud::Error] if the REST call is aborted.
-              #
-              # @example Basic example
-              #   require "google/cloud/compute/v1"
-              #
-              #   # Create a client object. The client can be reused for multiple calls.
-              #   client = Google::Cloud::Compute::V1::GlobalOrganizationOperations::Rest::Client.new
-              #
-              #   # Create a request. To set request fields, pass in keyword arguments.
-              #   request = Google::Cloud::Compute::V1::DeleteGlobalOrganizationOperationRequest.new
-              #
-              #   # Call the delete method.
-              #   result = client.delete request
-              #
-              #   # The returned object is of type Google::Cloud::Compute::V1::DeleteGlobalOrganizationOperationResponse.
-              #   p result
-              #
-              def delete request, options = nil
-                raise ::ArgumentError, "request must be provided" if request.nil?
-
-                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Compute::V1::DeleteGlobalOrganizationOperationRequest
-
-                # Converts hash and nil to an options object
-                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
-
-                # Customize the options with defaults
-                call_metadata = @config.rpcs.delete.metadata.to_h
-
-                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
-                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
-                  lib_name: @config.lib_name, lib_version: @config.lib_version,
-                  gapic_version: ::Google::Cloud::Compute::V1::VERSION,
-                  transports_version_send: [:rest]
-
-                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
-                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
-
-                options.apply_defaults timeout:      @config.rpcs.delete.timeout,
-                                       metadata:     call_metadata,
-                                       retry_policy: @config.rpcs.delete.retry_policy
-
-                options.apply_defaults timeout:      @config.timeout,
-                                       metadata:     @config.metadata,
-                                       retry_policy: @config.retry_policy
-
-                @global_organization_operations_stub.delete request, options do |result, operation|
-                  yield result, operation if block_given?
-                end
-              rescue ::Gapic::Rest::Error => e
-                raise ::Google::Cloud::Error.from_error(e)
-              end
-
-              ##
-              # Retrieves the specified Operations resource. Gets a list of operations by making a `list()` request.
+              # Retrieves information about the specified reservation subBlock.
               #
               # @overload get(request, options = nil)
               #   Pass arguments to `get` via a request object, either of type
-              #   {::Google::Cloud::Compute::V1::GetGlobalOrganizationOperationRequest} or an equivalent Hash.
+              #   {::Google::Cloud::Compute::V1::GetReservationSubBlockRequest} or an equivalent Hash.
               #
-              #   @param request [::Google::Cloud::Compute::V1::GetGlobalOrganizationOperationRequest, ::Hash]
+              #   @param request [::Google::Cloud::Compute::V1::GetReservationSubBlockRequest, ::Hash]
               #     A request object representing the call parameters. Required. To specify no
               #     parameters, or to keep all the default parameter values, pass an empty Hash.
               #   @param options [::Gapic::CallOptions, ::Hash]
               #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
               #
-              # @overload get(operation: nil, parent_id: nil)
+              # @overload get(parent_name: nil, project: nil, reservation_sub_block: nil, zone: nil)
               #   Pass arguments to `get` via keyword arguments. Note that at
               #   least one keyword argument is required. To specify no parameters, or to keep all
               #   the default parameter values, pass an empty Hash as a request object (see above).
               #
-              #   @param operation [::String]
-              #     Name of the Operations resource to return. Parent is derived from this field.
-              #   @param parent_id [::String]
-              #     Parent ID for this request. Not used. Parent is derived from resource_id.
+              #   @param parent_name [::String]
+              #     The name of the parent reservation and parent block. In the format of reservations/\\{reservation_name}/reservationBlocks/\\{reservation_block_name}
+              #   @param project [::String]
+              #     Project ID for this request.
+              #   @param reservation_sub_block [::String]
+              #     The name of the reservation subBlock. Name should conform to RFC1035 or be a resource ID.
+              #   @param zone [::String]
+              #     Name of the zone for this request. Zone name should conform to RFC1035.
               # @yield [result, operation] Access the result along with the TransportOperation object
-              # @yieldparam result [::Google::Cloud::Compute::V1::Operation]
+              # @yieldparam result [::Google::Cloud::Compute::V1::ReservationSubBlocksGetResponse]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
-              # @return [::Google::Cloud::Compute::V1::Operation]
+              # @return [::Google::Cloud::Compute::V1::ReservationSubBlocksGetResponse]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
               #
@@ -300,21 +239,21 @@ module Google
               #   require "google/cloud/compute/v1"
               #
               #   # Create a client object. The client can be reused for multiple calls.
-              #   client = Google::Cloud::Compute::V1::GlobalOrganizationOperations::Rest::Client.new
+              #   client = Google::Cloud::Compute::V1::ReservationSubBlocks::Rest::Client.new
               #
               #   # Create a request. To set request fields, pass in keyword arguments.
-              #   request = Google::Cloud::Compute::V1::GetGlobalOrganizationOperationRequest.new
+              #   request = Google::Cloud::Compute::V1::GetReservationSubBlockRequest.new
               #
               #   # Call the get method.
               #   result = client.get request
               #
-              #   # The returned object is of type Google::Cloud::Compute::V1::Operation.
+              #   # The returned object is of type Google::Cloud::Compute::V1::ReservationSubBlocksGetResponse.
               #   p result
               #
               def get request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
-                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Compute::V1::GetGlobalOrganizationOperationRequest
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Compute::V1::GetReservationSubBlockRequest
 
                 # Converts hash and nil to an options object
                 options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
@@ -339,7 +278,7 @@ module Google
                                        metadata:     @config.metadata,
                                        retry_policy: @config.retry_policy
 
-                @global_organization_operations_stub.get request, options do |result, operation|
+                @reservation_sub_blocks_stub.get request, options do |result, operation|
                   yield result, operation if block_given?
                 end
               rescue ::Gapic::Rest::Error => e
@@ -347,19 +286,19 @@ module Google
               end
 
               ##
-              # Retrieves a list of Operation resources contained within the specified organization.
+              # Retrieves a list of reservation subBlocks under a single reservation.
               #
               # @overload list(request, options = nil)
               #   Pass arguments to `list` via a request object, either of type
-              #   {::Google::Cloud::Compute::V1::ListGlobalOrganizationOperationsRequest} or an equivalent Hash.
+              #   {::Google::Cloud::Compute::V1::ListReservationSubBlocksRequest} or an equivalent Hash.
               #
-              #   @param request [::Google::Cloud::Compute::V1::ListGlobalOrganizationOperationsRequest, ::Hash]
+              #   @param request [::Google::Cloud::Compute::V1::ListReservationSubBlocksRequest, ::Hash]
               #     A request object representing the call parameters. Required. To specify no
               #     parameters, or to keep all the default parameter values, pass an empty Hash.
               #   @param options [::Gapic::CallOptions, ::Hash]
               #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
               #
-              # @overload list(filter: nil, max_results: nil, order_by: nil, page_token: nil, parent_id: nil, return_partial_success: nil)
+              # @overload list(filter: nil, max_results: nil, order_by: nil, page_token: nil, parent_name: nil, project: nil, return_partial_success: nil, zone: nil)
               #   Pass arguments to `list` via keyword arguments. Note that at
               #   least one keyword argument is required. To specify no parameters, or to keep all
               #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -372,15 +311,19 @@ module Google
               #     Sorts list results by a certain order. By default, results are returned in alphanumerical order based on the resource name. You can also sort results in descending order based on the creation timestamp using `orderBy="creationTimestamp desc"`. This sorts results based on the `creationTimestamp` field in reverse chronological order (newest result first). Use this to sort resources like operations so that the newest operation is returned first. Currently, only sorting by `name` or `creationTimestamp desc` is supported.
               #   @param page_token [::String]
               #     Specifies a page token to use. Set `pageToken` to the `nextPageToken` returned by a previous list request to get the next page of results.
-              #   @param parent_id [::String]
-              #     Parent ID for this request.
+              #   @param parent_name [::String]
+              #     The name of the parent reservation and parent block. In the format of reservations/\\{reservation_name}/reservationBlocks/\\{reservation_block_name}
+              #   @param project [::String]
+              #     Project ID for this request.
               #   @param return_partial_success [::Boolean]
               #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.
+              #   @param zone [::String]
+              #     Name of the zone for this request. Zone name should conform to RFC1035.
               # @yield [result, operation] Access the result along with the TransportOperation object
-              # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Compute::V1::Operation>]
+              # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Compute::V1::ReservationSubBlock>]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
-              # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Compute::V1::Operation>]
+              # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Compute::V1::ReservationSubBlock>]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
               #
@@ -388,21 +331,21 @@ module Google
               #   require "google/cloud/compute/v1"
               #
               #   # Create a client object. The client can be reused for multiple calls.
-              #   client = Google::Cloud::Compute::V1::GlobalOrganizationOperations::Rest::Client.new
+              #   client = Google::Cloud::Compute::V1::ReservationSubBlocks::Rest::Client.new
               #
               #   # Create a request. To set request fields, pass in keyword arguments.
-              #   request = Google::Cloud::Compute::V1::ListGlobalOrganizationOperationsRequest.new
+              #   request = Google::Cloud::Compute::V1::ListReservationSubBlocksRequest.new
               #
               #   # Call the list method.
               #   result = client.list request
               #
-              #   # The returned object is of type Google::Cloud::Compute::V1::OperationList.
+              #   # The returned object is of type Google::Cloud::Compute::V1::ReservationSubBlocksListResponse.
               #   p result
               #
               def list request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
-                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Compute::V1::ListGlobalOrganizationOperationsRequest
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Compute::V1::ListReservationSubBlocksRequest
 
                 # Converts hash and nil to an options object
                 options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
@@ -427,8 +370,8 @@ module Google
                                        metadata:     @config.metadata,
                                        retry_policy: @config.retry_policy
 
-                @global_organization_operations_stub.list request, options do |result, operation|
-                  result = ::Gapic::Rest::PagedEnumerable.new @global_organization_operations_stub, :list, "items", request, result, options
+                @reservation_sub_blocks_stub.list request, options do |result, operation|
+                  result = ::Gapic::Rest::PagedEnumerable.new @reservation_sub_blocks_stub, :list, "items", request, result, options
                   yield result, operation if block_given?
                   throw :response, result
                 end
@@ -437,13 +380,109 @@ module Google
               end
 
               ##
-              # Configuration class for the GlobalOrganizationOperations REST API.
+              # Allows customers to perform maintenance on a reservation subBlock
               #
-              # This class represents the configuration for GlobalOrganizationOperations REST,
+              # @overload perform_maintenance(request, options = nil)
+              #   Pass arguments to `perform_maintenance` via a request object, either of type
+              #   {::Google::Cloud::Compute::V1::PerformMaintenanceReservationSubBlockRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::Compute::V1::PerformMaintenanceReservationSubBlockRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload perform_maintenance(parent_name: nil, project: nil, request_id: nil, reservation_sub_block: nil, zone: nil)
+              #   Pass arguments to `perform_maintenance` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param parent_name [::String]
+              #     The name of the parent reservation and parent block. In the format of reservations/\\{reservation_name}/reservationBlocks/\\{reservation_block_name}
+              #   @param project [::String]
+              #     Project ID for this request.
+              #   @param request_id [::String]
+              #     An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
+              #   @param reservation_sub_block [::String]
+              #     The name of the reservation subBlock. Name should conform to RFC1035 or be a resource ID.
+              #   @param zone [::String]
+              #     Name of the zone for this request. Zone name should conform to RFC1035.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Gapic::GenericLRO::Operation]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Gapic::GenericLRO::Operation]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/compute/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Compute::V1::ReservationSubBlocks::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Compute::V1::PerformMaintenanceReservationSubBlockRequest.new
+              #
+              #   # Call the perform_maintenance method.
+              #   result = client.perform_maintenance request
+              #
+              #   # The returned object is of type Google::Cloud::Compute::V1::Operation.
+              #   p result
+              #
+              def perform_maintenance request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Compute::V1::PerformMaintenanceReservationSubBlockRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.perform_maintenance.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::Compute::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.perform_maintenance.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.perform_maintenance.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @reservation_sub_blocks_stub.perform_maintenance request, options do |result, response|
+                  result = ::Google::Cloud::Compute::V1::ZoneOperations::Rest::NonstandardLro.create_operation(
+                    operation: result,
+                    client: zone_operations,
+                    request_values: {
+                      "project" => request.project,
+                      "zone" => request.zone
+                    },
+                    options: options
+                  )
+                  yield result, response if block_given?
+                  throw :response, result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Configuration class for the ReservationSubBlocks REST API.
+              #
+              # This class represents the configuration for ReservationSubBlocks REST,
               # providing control over timeouts, retry behavior, logging, transport
               # parameters, and other low-level controls. Certain parameters can also be
               # applied individually to specific RPCs. See
-              # {::Google::Cloud::Compute::V1::GlobalOrganizationOperations::Rest::Client::Configuration::Rpcs}
+              # {::Google::Cloud::Compute::V1::ReservationSubBlocks::Rest::Client::Configuration::Rpcs}
               # for a list of RPCs that can be configured independently.
               #
               # Configuration can be applied globally to all clients, or to a single client
@@ -452,17 +491,17 @@ module Google
               # @example
               #
               #   # Modify the global config, setting the timeout for
-              #   # delete to 20 seconds,
+              #   # get to 20 seconds,
               #   # and all remaining timeouts to 10 seconds.
-              #   ::Google::Cloud::Compute::V1::GlobalOrganizationOperations::Rest::Client.configure do |config|
+              #   ::Google::Cloud::Compute::V1::ReservationSubBlocks::Rest::Client.configure do |config|
               #     config.timeout = 10.0
-              #     config.rpcs.delete.timeout = 20.0
+              #     config.rpcs.get.timeout = 20.0
               #   end
               #
               #   # Apply the above configuration only to a new client.
-              #   client = ::Google::Cloud::Compute::V1::GlobalOrganizationOperations::Rest::Client.new do |config|
+              #   client = ::Google::Cloud::Compute::V1::ReservationSubBlocks::Rest::Client.new do |config|
               #     config.timeout = 10.0
-              #     config.rpcs.delete.timeout = 20.0
+              #     config.rpcs.get.timeout = 20.0
               #   end
               #
               # @!attribute [rw] endpoint
@@ -565,7 +604,7 @@ module Google
                 end
 
                 ##
-                # Configuration RPC class for the GlobalOrganizationOperations API.
+                # Configuration RPC class for the ReservationSubBlocks API.
                 #
                 # Includes fields providing the configuration for each RPC in this service.
                 # Each configuration object is of type `Gapic::Config::Method` and includes
@@ -583,11 +622,6 @@ module Google
                 #
                 class Rpcs
                   ##
-                  # RPC-specific configuration for `delete`
-                  # @return [::Gapic::Config::Method]
-                  #
-                  attr_reader :delete
-                  ##
                   # RPC-specific configuration for `get`
                   # @return [::Gapic::Config::Method]
                   #
@@ -597,15 +631,20 @@ module Google
                   # @return [::Gapic::Config::Method]
                   #
                   attr_reader :list
+                  ##
+                  # RPC-specific configuration for `perform_maintenance`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :perform_maintenance
 
                   # @private
                   def initialize parent_rpcs = nil
-                    delete_config = parent_rpcs.delete if parent_rpcs.respond_to? :delete
-                    @delete = ::Gapic::Config::Method.new delete_config
                     get_config = parent_rpcs.get if parent_rpcs.respond_to? :get
                     @get = ::Gapic::Config::Method.new get_config
                     list_config = parent_rpcs.list if parent_rpcs.respond_to? :list
                     @list = ::Gapic::Config::Method.new list_config
+                    perform_maintenance_config = parent_rpcs.perform_maintenance if parent_rpcs.respond_to? :perform_maintenance
+                    @perform_maintenance = ::Gapic::Config::Method.new perform_maintenance_config
 
                     yield self if block_given?
                   end
