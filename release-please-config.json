@@ -975,6 +975,10 @@
       "component": "google-cloud-managed_kafka",
       "version_file": "lib/google/cloud/managed_kafka/version.rb"
     },
+    "google-cloud-managed_kafka-schema_registry": {
+      "component": "google-cloud-managed_kafka-schema_registry",
+      "version_file": "lib/google/cloud/managed_kafka/schema_registry/version.rb"
+    },
     "google-cloud-managed_kafka-schema_registry-v1": {
       "component": "google-cloud-managed_kafka-schema_registry-v1",
       "version_file": "lib/google/cloud/managed_kafka/schema_registry/v1/version.rb"
