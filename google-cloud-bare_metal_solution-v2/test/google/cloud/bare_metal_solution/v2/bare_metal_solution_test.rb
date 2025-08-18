@@ -21,7 +21,6 @@ require "helper"
 require "gapic/grpc/service_stub"
 
 require "google/cloud/baremetalsolution/v2/baremetalsolution_pb"
-require "google/cloud/baremetalsolution/v2/baremetalsolution_services_pb"
 require "google/cloud/bare_metal_solution/v2/bare_metal_solution"
 
 class ::Google::Cloud::BareMetalSolution::V2::BareMetalSolution::ClientTest < Minitest::Test

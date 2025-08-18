@@ -21,7 +21,6 @@ require "helper"
 require "gapic/grpc/service_stub"
 
 require "google/cloud/batch/v1/batch_pb"
-require "google/cloud/batch/v1/batch_services_pb"
 require "google/cloud/batch/v1/batch_service"
 
 class ::Google::Cloud::Batch::V1::BatchService::ClientTest < Minitest::Test
