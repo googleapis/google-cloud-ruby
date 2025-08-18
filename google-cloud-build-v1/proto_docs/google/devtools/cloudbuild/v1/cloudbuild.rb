@@ -2406,7 +2406,7 @@ module Google
           # the pool.
           # @!attribute [rw] machine_type
           #   @return [::String]
-          #     Machine type of a worker, such as `e2-medium`.
+          #     Optional. Machine type of a worker, such as `e2-medium`.
           #     See [Worker pool config
           #     file](https://cloud.google.com/build/docs/private-pools/worker-pool-config-file-schema).
           #     If left blank, Cloud Build will use a sensible default.
@@ -2415,8 +2415,12 @@ module Google
           #     Size of the disk attached to the worker, in GB.
           #     See [Worker pool config
           #     file](https://cloud.google.com/build/docs/private-pools/worker-pool-config-file-schema).
-          #     Specify a value of up to 2000. If `0` is specified, Cloud Build will use
+          #     Specify a value of up to 4000. If `0` is specified, Cloud Build will use
           #     a standard disk size.
+          # @!attribute [rw] enable_nested_virtualization
+          #   @return [::Boolean]
+          #     Optional. Enable nested virtualization on the worker, if supported by the
+          #     machine type. By default, nested virtualization is disabled.
           class WorkerConfig
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
