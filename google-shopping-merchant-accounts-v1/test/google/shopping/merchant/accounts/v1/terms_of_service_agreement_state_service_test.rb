@@ -21,7 +21,6 @@ require "helper"
 require "gapic/grpc/service_stub"
 
 require "google/shopping/merchant/accounts/v1/termsofserviceagreementstate_pb"
-require "google/shopping/merchant/accounts/v1/termsofserviceagreementstate_services_pb"
 require "google/shopping/merchant/accounts/v1/terms_of_service_agreement_state_service"
 
 class ::Google::Shopping::Merchant::Accounts::V1::TermsOfServiceAgreementStateService::ClientTest < Minitest::Test

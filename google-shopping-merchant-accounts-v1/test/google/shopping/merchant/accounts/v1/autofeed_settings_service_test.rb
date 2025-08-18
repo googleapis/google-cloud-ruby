@@ -21,7 +21,6 @@ require "helper"
 require "gapic/grpc/service_stub"
 
 require "google/shopping/merchant/accounts/v1/autofeedsettings_pb"
-require "google/shopping/merchant/accounts/v1/autofeedsettings_services_pb"
 require "google/shopping/merchant/accounts/v1/autofeed_settings_service"
 
 class ::Google::Shopping::Merchant::Accounts::V1::AutofeedSettingsService::ClientTest < Minitest::Test

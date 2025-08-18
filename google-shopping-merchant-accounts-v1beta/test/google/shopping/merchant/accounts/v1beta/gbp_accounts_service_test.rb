@@ -21,7 +21,6 @@ require "helper"
 require "gapic/grpc/service_stub"
 
 require "google/shopping/merchant/accounts/v1beta/gbpaccounts_pb"
-require "google/shopping/merchant/accounts/v1beta/gbpaccounts_services_pb"
 require "google/shopping/merchant/accounts/v1beta/gbp_accounts_service"
 
 class ::Google::Shopping::Merchant::Accounts::V1beta::GbpAccountsService::ClientTest < Minitest::Test
