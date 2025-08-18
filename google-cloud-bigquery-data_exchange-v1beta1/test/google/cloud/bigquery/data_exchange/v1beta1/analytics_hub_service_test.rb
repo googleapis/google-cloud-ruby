@@ -21,7 +21,6 @@ require "helper"
 require "gapic/grpc/service_stub"
 
 require "google/cloud/bigquery/dataexchange/v1beta1/dataexchange_pb"
-require "google/cloud/bigquery/dataexchange/v1beta1/dataexchange_services_pb"
 require "google/cloud/bigquery/data_exchange/v1beta1/analytics_hub_service"
 
 class ::Google::Cloud::Bigquery::DataExchange::V1beta1::AnalyticsHubService::ClientTest < Minitest::Test
