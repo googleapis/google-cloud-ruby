@@ -31,7 +31,7 @@ describe Google::Cloud::Bigquery::Dataset, :attributes, :mock_bigquery do
   it "gets full data for created_at" do
     mock = Minitest::Mock.new
     bigquery.service.mocked_service = mock
-    mock.expect :get_dataset, dataset_full_gapi, [project, dataset_id]
+    mock.expect :get_dataset, dataset_full_gapi, [project, dataset_id], access_policy_version: nil
 
     _(dataset.created_at).must_be_close_to ::Time.now, 1
 
@@ -43,7 +43,7 @@ describe Google::Cloud::Bigquery::Dataset, :attributes, :mock_bigquery do
   it "gets full data for modified_at" do
     mock = Minitest::Mock.new
     bigquery.service.mocked_service = mock
-    mock.expect :get_dataset, dataset_full_gapi, [project, dataset_id]
+    mock.expect :get_dataset, dataset_full_gapi, [project, dataset_id], access_policy_version: nil
 
     _(dataset.modified_at).must_be_close_to ::Time.now, 1
 
@@ -55,7 +55,7 @@ describe Google::Cloud::Bigquery::Dataset, :attributes, :mock_bigquery do
   it "gets full data for default_encryption" do
     mock = Minitest::Mock.new
     bigquery.service.mocked_service = mock
-    mock.expect :get_dataset, dataset_full_gapi, [project, dataset_id]
+    mock.expect :get_dataset, dataset_full_gapi, [project, dataset_id], access_policy_version: nil
 
     _(dataset.default_encryption).must_be_nil
 
@@ -67,7 +67,7 @@ describe Google::Cloud::Bigquery::Dataset, :attributes, :mock_bigquery do
   it "gets full data for storage_billing_model" do
     mock = Minitest::Mock.new
     bigquery.service.mocked_service = mock
-    mock.expect :get_dataset, dataset_full_gapi, [project, dataset_id]
+    mock.expect :get_dataset, dataset_full_gapi, [project, dataset_id], access_policy_version: nil
 
     _(dataset.storage_billing_model).must_be_nil
 
@@ -79,7 +79,7 @@ describe Google::Cloud::Bigquery::Dataset, :attributes, :mock_bigquery do
   it "gets full data for tags" do
     mock = Minitest::Mock.new
     bigquery.service.mocked_service = mock
-    mock.expect :get_dataset, dataset_full_gapi, [project, dataset_id]
+    mock.expect :get_dataset, dataset_full_gapi, [project, dataset_id], access_policy_version: nil
 
     _(dataset.tags).must_be_kind_of Array
 
@@ -93,7 +93,7 @@ describe Google::Cloud::Bigquery::Dataset, :attributes, :mock_bigquery do
     define_method "test_#{attr}" do
       mock = Minitest::Mock.new
       bigquery.service.mocked_service = mock
-      mock.expect :get_dataset, dataset_full_gapi, [project, dataset_id]
+      mock.expect :get_dataset, dataset_full_gapi, [project, dataset_id], access_policy_version: nil
 
       _(dataset.send(attr)).must_equal val
 

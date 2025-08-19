@@ -13,6 +13,7 @@
 # limitations under the License.
 
 require "bigquery_helper"
+require "google/cloud/bigquery/condition"
 
 describe Google::Cloud::Bigquery::Dataset, :access, :bigquery do
   let(:publicdata_query) { "SELECT url FROM `bigquery-public-data.samples.github_nested` LIMIT 100" }
@@ -159,6 +160,291 @@ describe Google::Cloud::Bigquery::Dataset, :access, :bigquery do
       dataset = bigquery.dataset dataset_access_id, skip_lookup: true
       routine = dataset_access.routine routine.routine_id, skip_lookup: true
       refute dataset.access.reader_routine? routine
+    end
+  end
+
+  describe :condition do
+    let(:dataset_id) { "#{prefix}_dataset_with_condition" }
+    let(:dataset) do
+      bigquery.dataset(dataset_id, access_policy_version: 3) ||
+        bigquery.create_dataset(dataset_id, access_policy_version: 3)
+    end
+    let(:condition) do
+      Google::Cloud::Bigquery::Condition.new(
+        "true",
+        description: "example description",
+        location: "path/to/example/location",
+        title: "example title"
+      )
+    end
+    let(:condition_hash) { condition.to_gapi.to_h }
+    let(:group_val) { "ruby-cloud-eng@google.com" }
+    let(:service_account) { "helical-zone-771@appspot.gserviceaccount.com" }
+    let(:iam_member_val) { "serviceAccount:#{service_account}" }
+    let(:domain_val) { "google.com" }
+    
+    it "adds a reader access entry with specifying user scope and condition" do
+      dataset.access do |acl|
+        acl.add_reader_user user_val, condition: condition
+      end
+
+      dataset.reload!
+      assert dataset.access.reader_user? user_val
+
+      dataset.access do |acl|
+        assert(acl.rules.find do |rule|
+          rule_hash = rule.to_h
+          rule_hash[:user_by_email] == user_val && rule_hash[:condition] == condition_hash && rule_hash[:role] == "READER"
+        end)
+      end
+
+      dataset.access do |acl|
+        acl.remove_reader_user user_val
+      end
+      dataset.reload!
+      refute dataset.access.reader_user? user_val
+    end
+    
+    it "adds a reader access entry with specifying group scope and condition" do
+      dataset.access do |acl|
+        acl.add_reader_group group_val, condition: condition
+      end
+
+      dataset.reload!
+      assert dataset.access.reader_group? group_val
+
+      dataset.access do |acl|
+        assert(acl.rules.find do |rule|
+          rule_hash = rule.to_h
+          rule_hash[:group_by_email] == group_val && rule_hash[:condition] == condition_hash && rule_hash[:role] == "READER"
+        end)
+      end
+
+      dataset.access do |acl|
+        acl.remove_reader_group group_val
+      end
+      dataset.reload!
+      refute dataset.access.reader_group? group_val
+    end
+    
+    it "adds a reader access entry with specifying iam_member scope and condition" do
+      dataset.access do |acl|
+        acl.add_reader_iam_member iam_member_val, condition: condition
+      end
+
+      dataset.reload!
+      assert dataset.access.reader_user? service_account
+
+      dataset.access do |acl|
+        assert(acl.rules.find do |rule|
+          rule_hash = rule.to_h
+          rule_hash[:user_by_email] == service_account && rule_hash[:condition] == condition_hash && rule_hash[:role] == "READER"
+        end)
+      end
+
+      dataset.access do |acl|
+        acl.remove_reader_user service_account
+      end
+      dataset.reload!
+      refute dataset.access.reader_user? service_account
+    end
+    
+    it "adds a reader access entry with specifying domain scope and condition" do
+      dataset.access do |acl|
+        acl.add_reader_domain domain_val, condition: condition
+      end
+
+      dataset.reload!
+      assert dataset.access.reader_domain? domain_val
+
+      dataset.access do |acl|
+        assert(acl.rules.find do |rule|
+          rule_hash = rule.to_h
+          rule_hash[:domain] == domain_val && rule_hash[:condition] == condition_hash && rule_hash[:role] == "READER"
+        end)
+      end
+
+      dataset.access do |acl|
+        acl.remove_reader_domain domain_val
+      end
+      dataset.reload!
+      refute dataset.access.reader_domain? domain_val
+    end
+    
+    it "adds a writer access entry with specifying user scope and condition" do
+      dataset.access do |acl|
+        acl.add_writer_user user_val, condition: condition
+      end
+
+      dataset.reload!
+      assert dataset.access.writer_user? user_val
+
+      dataset.access do |acl|
+        assert(acl.rules.find do |rule|
+          rule_hash = rule.to_h
+          rule_hash[:user_by_email] == user_val && rule_hash[:condition] == condition_hash && rule_hash[:role] == "WRITER"
+        end)
+      end
+
+      dataset.access do |acl|
+        acl.remove_writer_user user_val
+      end
+      dataset.reload!
+      refute dataset.access.writer_user? user_val
+    end
+    
+    it "adds a writer access entry with specifying group scope and condition" do
+      dataset.access do |acl|
+        acl.add_writer_group group_val, condition: condition
+      end
+
+      dataset.reload!
+      assert dataset.access.writer_group? group_val
+
+      dataset.access do |acl|
+        assert(acl.rules.find do |rule|
+          rule_hash = rule.to_h
+          rule_hash[:group_by_email] == group_val && rule_hash[:condition] == condition_hash && rule_hash[:role] == "WRITER"
+        end)
+      end
+
+      dataset.access do |acl|
+        acl.remove_writer_group group_val
+      end
+      dataset.reload!
+      refute dataset.access.writer_group? group_val
+    end
+
+    it "adds a writer access entry with specifying iam_member scope and condition" do
+      dataset.access do |acl|
+        acl.add_writer_iam_member iam_member_val, condition: condition
+      end
+
+      dataset.reload!
+      assert dataset.access.writer_user? service_account
+
+      dataset.access do |acl|
+        assert(acl.rules.find do |rule|
+          rule_hash = rule.to_h
+          rule_hash[:user_by_email] == service_account && rule_hash[:condition] == condition_hash && rule_hash[:role] == "WRITER"
+        end)
+      end
+
+      dataset.access do |acl|
+        acl.remove_writer_user service_account
+      end
+      dataset.reload!
+      refute dataset.access.writer_user? service_account
+    end
+    
+    it "adds a writer access entry with specifying domain scope and condition" do
+      dataset.access do |acl|
+        acl.add_writer_domain domain_val, condition: condition
+      end
+
+      dataset.reload!
+      assert dataset.access.writer_domain? domain_val
+
+      dataset.access do |acl|
+        assert(acl.rules.find do |rule|
+          rule_hash = rule.to_h
+          rule_hash[:domain] == domain_val && rule_hash[:condition] == condition_hash && rule_hash[:role] == "WRITER"
+        end)
+      end
+
+      dataset.access do |acl|
+        acl.remove_writer_domain domain_val
+      end
+      dataset.reload!
+      refute dataset.access.writer_domain? domain_val
+    end
+    
+    it "adds a owner access entry with specifying user scope and condition" do
+      dataset.access do |acl|
+        acl.add_owner_user user_val, condition: condition
+      end
+
+      dataset.reload!
+      assert dataset.access.owner_user? user_val
+
+      dataset.access do |acl|
+        assert(acl.rules.find do |rule|
+          rule_hash = rule.to_h
+          rule_hash[:user_by_email] == user_val && rule_hash[:condition] == condition_hash && rule_hash[:role] == "OWNER"
+        end)
+      end
+
+      dataset.access do |acl|
+        acl.remove_owner_user user_val
+      end
+      dataset.reload!
+      refute dataset.access.owner_user? user_val
+    end
+    
+    it "adds a owner access entry with specifying group scope and condition" do
+      dataset.access do |acl|
+        acl.add_owner_group group_val, condition: condition
+      end
+
+      dataset.reload!
+      assert dataset.access.owner_group? group_val
+
+      dataset.access do |acl|
+        assert(acl.rules.find do |rule|
+          rule_hash = rule.to_h
+          rule_hash[:group_by_email] == group_val && rule_hash[:condition] == condition_hash && rule_hash[:role] == "OWNER"
+        end)
+      end
+
+      dataset.access do |acl|
+        acl.remove_owner_group group_val
+      end
+      dataset.reload!
+      refute dataset.access.owner_group? group_val
+    end
+    
+    it "adds a owner access entry with specifying iam_member scope and condition" do
+      dataset.access do |acl|
+        acl.add_owner_iam_member iam_member_val, condition: condition
+      end
+
+      dataset.reload!
+      assert dataset.access.owner_user? service_account
+
+      dataset.access do |acl|
+        assert(acl.rules.find do |rule|
+          rule_hash = rule.to_h
+          rule_hash[:user_by_email] == service_account && rule_hash[:condition] == condition_hash && rule_hash[:role] == "OWNER"
+        end)
+      end
+
+      dataset.access do |acl|
+        acl.remove_owner_user service_account
+      end
+      dataset.reload!
+      refute dataset.access.owner_user? service_account
+    end
+    
+    it "adds a owner access entry with specifying domain scope and condition" do
+      dataset.access do |acl|
+        acl.add_owner_domain domain_val, condition: condition
+      end
+
+      dataset.reload!
+      assert dataset.access.owner_domain? domain_val
+
+      dataset.access do |acl|
+        assert(acl.rules.find do |rule|
+          rule_hash = rule.to_h
+          rule_hash[:domain] == domain_val && rule_hash[:condition] == condition_hash && rule_hash[:role] == "OWNER"
+        end)
+      end
+
+      dataset.access do |acl|
+        acl.remove_owner_domain domain_val
+      end
+      dataset.reload!
+      refute dataset.access.owner_domain? domain_val
     end
   end
 end
