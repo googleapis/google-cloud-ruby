@@ -109,29 +109,29 @@ module Google
 
         ##
         # Returns the dataset specified by datasetID.
-        def get_dataset dataset_id
-          get_project_dataset @project, dataset_id
+        def get_dataset dataset_id, access_policy_version: nil
+          get_project_dataset @project, dataset_id, access_policy_version: access_policy_version
         end
 
         ##
         # Gets the specified dataset resource by full dataset reference.
-        def get_project_dataset project_id, dataset_id
+        def get_project_dataset project_id, dataset_id, access_policy_version: nil
           # The get operation is considered idempotent
           execute backoff: true do
-            service.get_dataset project_id, dataset_id
+            service.get_dataset project_id, dataset_id, access_policy_version: access_policy_version
           end
         end
 
         ##
         # Creates a new empty dataset.
-        def insert_dataset new_dataset_gapi
-          execute { service.insert_dataset @project, new_dataset_gapi }
+        def insert_dataset new_dataset_gapi, access_policy_version: nil
+          execute { service.insert_dataset @project, new_dataset_gapi, access_policy_version: access_policy_version }
         end
 
         ##
         # Updates information in an existing dataset, only replacing
         # fields that are provided in the submitted dataset resource.
-        def patch_dataset dataset_id, patched_dataset_gapi
+        def patch_dataset dataset_id, patched_dataset_gapi, access_policy_version: nil
           patch_with_backoff = false
           options = {}
           if patched_dataset_gapi.etag
@@ -140,7 +140,8 @@ module Google
             patch_with_backoff = true
           end
           execute backoff: patch_with_backoff do
-            service.patch_dataset @project, dataset_id, patched_dataset_gapi, options: options
+            service.patch_dataset @project, dataset_id, patched_dataset_gapi, options: options,
+access_policy_version: access_policy_version
           end
         end
 
