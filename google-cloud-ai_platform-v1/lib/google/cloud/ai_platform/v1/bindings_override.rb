@@ -25,7 +25,7 @@ module Google
       # @example Loading just the REST part of this package, including all its services, and instantiating a REST client
       #
       #     require "google/cloud/ai_platform/v1/rest"
-      #     client = ::Google::Cloud::AIPlatform::V1::DatasetService::Rest::Client.new
+      #     client = ::Google::Cloud::AIPlatform::V1::DataFoundryService::Rest::Client.new
       #
       module V1
         ##
