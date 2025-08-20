@@ -1805,7 +1805,7 @@ module Google
           path ||= file.path if file.respond_to? :path
           path ||= file if file.is_a? String
           raise ArgumentError, "must provide path" if path.nil?
-          checksum = :crc32c if checksum == nil && crc32c.nil? && md5.nil?
+          checksum = :crc32c if checksum.nil? && crc32c.nil? && md5.nil?
           crc32c = crc32c_for file, checksum, crc32c
           md5 = md5_for file, checksum, md5
 
