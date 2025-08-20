@@ -2451,6 +2451,39 @@ format_options_use_int64_timestamp: format_options_use_int64_timestamp
         #   Note: This will work only for tables in _SESSION dataset
         #         else the property will be ignored by the backend.
         # @param [string] session_id Session ID in which the load job must run.
+        # @param [String] date_format Format used to parse DATE values.
+        #   Supports SQL-style format strings. See
+        #   [date and time formatting guide](https://cloud.google.com/bigquery/docs/reference/standard-sql/format-elements#format_date_time_as_string)
+        # @param [String] datetime_format Format used to parse DATETIME
+        #   values. Supports SQL-style format strings. See
+        #   [date and time formatting guide](https://cloud.google.com/bigquery/docs/reference/standard-sql/format-elements#format_date_time_as_string)
+        # @param [String] time_format Format used to parse TIME values.
+        #   Supports SQL-style format strings. See
+        #   [date and time formatting guide](https://cloud.google.com/bigquery/docs/reference/standard-sql/format-elements#format_date_time_as_string)
+        # @param [String] timestamp_format Format used to parse
+        #   TIMESTAMP values. Supports SQL-style format strings. See
+        #   [date and time formatting guide](https://cloud.google.com/bigquery/docs/reference/standard-sql/format-elements#format_date_time_as_string)
+        # @param [Array<String>] null_markers A list of strings represented as
+        #   SQL NULL value in a CSV file. null_marker and null_markers can't be
+        #   set at the same time. If null_marker is set, null_markers has to be
+        #   not set. If null_markers is set, null_marker has to be not set. If
+        #   both null_marker and null_markers are set at the same time, a user
+        #   error would be thrown. Any strings listed in null_markers, including
+        #   empty string would be interpreted as SQL NULL. This applies to all
+        #   column types.
+        # @param [String] source_column_match Controls the strategy used to
+        #   match loaded columns to the schema. If not set, a sensible default is
+        #   chosen based on how the schema is provided. If autodetect is used,
+        #   then columns are matched by name. Otherwise, columns are matched by
+        #   position. This is done to keep the behavior backward-compatible.
+        #
+        #   Acceptable values are:
+        #   * `POSITION` - matches by position. This assumes that the columns are
+        #     ordered the same way as the schema.
+        #   * `NAME` - matches by name. This reads the header row as column names
+        #     and reorders columns to match the field names in the schema.
+        # @param [String] time_zone The time zone used when parsing timestamp
+        #   values.
         #
         # @yield [load_job] a block for setting the load job
         # @yieldparam [LoadJob] load_job the load job object to be updated
@@ -2633,6 +2666,39 @@ format_options_use_int64_timestamp: format_options_use_int64_timestamp
         #   value is `0`. This property is useful if you have header rows in the
         #   file that should be skipped.
         # @param [string] session_id Session ID in which the load job must run.
+        # @param [String] date_format Format used to parse DATE values.
+        #   Supports SQL-style format strings. See
+        #   [date and time formatting guide](https://cloud.google.com/bigquery/docs/reference/standard-sql/format-elements#format_date_time_as_string)
+        # @param [String] datetime_format Format used to parse DATETIME
+        #   values. Supports SQL-style format strings. See
+        #   [date and time formatting guide](https://cloud.google.com/bigquery/docs/reference/standard-sql/format-elements#format_date_time_as_string)
+        # @param [String] time_format Format used to parse TIME values.
+        #   Supports SQL-style format strings. See
+        #   [date and time formatting guide](https://cloud.google.com/bigquery/docs/reference/standard-sql/format-elements#format_date_time_as_string)
+        # @param [String] timestamp_format Format used to parse
+        #   TIMESTAMP values. Supports SQL-style format strings. See
+        #   [date and time formatting guide](https://cloud.google.com/bigquery/docs/reference/standard-sql/format-elements#format_date_time_as_string)
+        # @param [Array<String>] null_markers A list of strings represented as
+        #   SQL NULL value in a CSV file. null_marker and null_markers can't be
+        #   set at the same time. If null_marker is set, null_markers has to be
+        #   not set. If null_markers is set, null_marker has to be not set. If
+        #   both null_marker and null_markers are set at the same time, a user
+        #   error would be thrown. Any strings listed in null_markers, including
+        #   empty string would be interpreted as SQL NULL. This applies to all
+        #   column types.
+        # @param [String] source_column_match Controls the strategy used to
+        #   match loaded columns to the schema. If not set, a sensible default is
+        #   chosen based on how the schema is provided. If autodetect is used,
+        #   then columns are matched by name. Otherwise, columns are matched by
+        #   position. This is done to keep the behavior backward-compatible.
+        #
+        #   Acceptable values are:
+        #   * `POSITION` - matches by position. This assumes that the columns are
+        #     ordered the same way as the schema.
+        #   * `NAME` - matches by name. This reads the header row as column names
+        #     and reorders columns to match the field names in the schema.
+        # @param [String] time_zone The time zone used when parsing timestamp
+        #   values.
         #
         # @yield [updater] A block for setting the schema of the destination
         #   table and other options for the load job. The schema can be omitted

@@ -833,7 +833,8 @@ module Google
           end
 
           ##
-          # Format used to parse TIME values. Supports C-style and SQL-style values.
+          # Format used to parse TIME values. Supports SQL-style values. See
+          # [date and time formatting guide](https://cloud.google.com/bigquery/docs/reference/standard-sql/format-elements#format_date_time_as_string)
           #
           # @return [String, nil] The time format pattern. `nil` if not set.
           #
@@ -843,17 +844,18 @@ module Google
           #   bigquery = Google::Cloud::Bigquery.new
           #
           #   external_data = bigquery.external "gs://bucket/path/to/data.csv" do |ext|
-          #     ext.time_format = "%H:%M:%S"
+          #     ext.time_format = "HH24:MI:SS"
           #   end
           #
-          #   external_data.time_format #=> "%H:%M:%S"
+          #   external_data.time_format #=> "HH24:MI:SS"
           #
           def time_format
             @gapi.time_format
           end
 
           ##
-          # Sets the format used to parse TIME values. Supports C-style and SQL-style
+          # Sets the format used to parse TIME values. Supports SQL-style See
+          # [date and time formatting guide](https://cloud.google.com/bigquery/docs/reference/standard-sql/format-elements#format_date_time_as_string)
           # values.
           #
           # @param [String, nil] time_format The time format pattern. `nil` if not set.
@@ -864,10 +866,10 @@ module Google
           #   bigquery = Google::Cloud::Bigquery.new
           #
           #   external_data = bigquery.external "gs://bucket/path/to/data.csv" do |ext|
-          #     ext.time_format = "%H:%M:%S"
+          #     ext.time_format = "HH24:MI:SS"
           #   end
           #
-          #   external_data.time_format #=> "%H:%M:%S"
+          #   external_data.time_format #=> "HH24:MI:SS"
           #
           def time_format= time_format
             frozen_check!
@@ -875,8 +877,8 @@ module Google
           end
 
           ##
-          # Format used to parse TIMESTAMP values. Supports C-style and SQL-style
-          # values.
+          # Format used to parse TIMESTAMP values. Supports SQL-style values. See
+          # [date and time formatting guide](https://cloud.google.com/bigquery/docs/reference/standard-sql/format-elements#format_date_time_as_string)
           #
           # @return [String, nil] The timestamp format pattern. `nil` if not set.
           #
@@ -886,18 +888,19 @@ module Google
           #   bigquery = Google::Cloud::Bigquery.new
           #
           #   external_data = bigquery.external "gs://bucket/path/to/data.csv" do |ext|
-          #     ext.timestamp_format = "%Y-%m-%d %H:%M:%S.%f %z"
+          #     ext.timestamp_format = "YYYY-MM-DD HH24:MI:SS.FF3 TZH"
           #   end
           #
-          #   external_data.timestamp_format #=> "%Y-%m-%d %H:%M:%S.%f %z"
+          #   external_data.timestamp_format #=> "YYYY-MM-DD HH24:MI:SS.FF3 TZH"
           #
           def timestamp_format
             @gapi.timestamp_format
           end
 
           ##
-          # Sets the format used to parse TIMESTAMP values. Supports C-style and SQL-style
-          # values.
+          # Sets the format used to parse TIMESTAMP values. Supports SQL-style
+          # values. See
+          # [date and time formatting guide](https://cloud.google.com/bigquery/docs/reference/standard-sql/format-elements#format_date_time_as_string)
           #
           # @param [String, nil] timestamp_format The timestamp format pattern. `nil` to unset.
           #
@@ -907,10 +910,10 @@ module Google
           #   bigquery = Google::Cloud::Bigquery.new
           #
           #   external_data = bigquery.external "gs://bucket/path/to/data.csv" do |ext|
-          #     ext.timestamp_format = "%Y-%m-%d %H:%M:%S.%f %z"
+          #     ext.timestamp_format = "YYYY-MM-DD HH24:MI:SS.FF3 TZH"
           #   end
           #
-          #   external_data.timestamp_format #=> "%Y-%m-%d %H:%M:%S.%f %z"
+          #   external_data.timestamp_format #=> "YYYY-MM-DD HH24:MI:SS.FF3 TZH"
           #
           def timestamp_format= timestamp_format
             frozen_check!
@@ -918,8 +921,8 @@ module Google
           end
 
           ##
-          # Format used to parse DATETIME values. Supports C-style and SQL-style
-          # values.
+          # Format used to parse DATETIME values. Supports SQL-style values. See
+          # [date and time formatting guide](https://cloud.google.com/bigquery/docs/reference/standard-sql/format-elements#format_date_time_as_string)
           #
           # @return [String, nil] The datetime format pattern. `nil` if not set.
           #
@@ -929,18 +932,19 @@ module Google
           #   bigquery = Google::Cloud::Bigquery.new
           #
           #   external_data = bigquery.external "gs://bucket/path/to/data.csv" do |ext|
-          #     ext.datetime_format = "%Y-%m-%d %H:%M:%S"
+          #     ext.datetime_format = "YYYY-MM-DD HH24:MI:SS"
           #   end
           #
-          #   external_data.datetime_format #=> "%Y-%m-%d %H:%M:%S"
+          #   external_data.datetime_format #=> "YYYY-MM-DD HH24:MI:SS"
           #
           def datetime_format
             @gapi.datetime_format
           end
 
           ##
-          # Sets the format used to parse DATETIME values. Supports C-style and SQL-style
-          # values.
+          # Sets the format used to parse DATETIME values. Supports SQL-style
+          # values. See
+          # [date and time formatting guide](https://cloud.google.com/bigquery/docs/reference/standard-sql/format-elements#format_date_time_as_string)
           #
           # @param [String, nil] datetime_format The datetime format pattern. `nil` to unset.
           #
@@ -950,10 +954,10 @@ module Google
           #   bigquery = Google::Cloud::Bigquery.new
           #
           #   external_data = bigquery.external "gs://bucket/path/to/data.csv" do |ext|
-          #     ext.datetime_format = "%Y-%m-%d %H:%M:%S"
+          #     ext.datetime_format = "YYYY-MM-DD HH24:MI:SS"
           #   end
           #
-          #   external_data.datetime_format #=> "%Y-%m-%d %H:%M:%S"
+          #   external_data.datetime_format #=> "YYYY-MM-DD HH24:MI:SS"
           #
           def datetime_format= datetime_format
             frozen_check!
@@ -961,8 +965,8 @@ module Google
           end
 
           ##
-          # Format used to parse DATE values. Supports C-style and SQL-style
-          # values.
+          # Format used to parse DATE values. Supports SQL-style values. See
+          # [date and time formatting guide](https://cloud.google.com/bigquery/docs/reference/standard-sql/format-elements#format_date_time_as_string)
           #
           # @return [String, nil] The date format pattern. `nil` if not set.
           #
@@ -972,18 +976,19 @@ module Google
           #   bigquery = Google::Cloud::Bigquery.new
           #
           #   external_data = bigquery.external "gs://bucket/path/to/data.csv" do |ext|
-          #     ext.date_format = "%Y-%m-%d"
+          #     ext.date_format = "YYYY-MM-DD"
           #   end
           #
-          #   external_data.date_format #=> "%Y-%m-%d"
+          #   external_data.date_format #=> "YYYY-MM-DD"
           #
           def date_format
             @gapi.date_format
           end
 
           ##
-          # Sets the format used to parse DATE values. Supports C-style and SQL-style
-          # values.
+          # Sets the format used to parse DATE values. Supports SQL-style
+          # values. See
+          # [date and time formatting guide](https://cloud.google.com/bigquery/docs/reference/standard-sql/format-elements#format_date_time_as_string)
           #
           # @param [String, nil] date_format The date format pattern. `nil` to unset.
           #
@@ -993,10 +998,10 @@ module Google
           #   bigquery = Google::Cloud::Bigquery.new
           #
           #   external_data = bigquery.external "gs://bucket/path/to/data.csv" do |ext|
-          #     ext.date_format = "%Y-%m-%d"
+          #     ext.date_format = "YYYY-MM-DD"
           #   end
           #
-          #   external_data.date_format #=> "%Y-%m-%d"
+          #   external_data.date_format #=> "YYYY-MM-DD"
           #
           def date_format= date_format
             frozen_check!

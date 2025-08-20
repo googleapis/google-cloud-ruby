@@ -1116,6 +1116,42 @@ module Google
         #         else the property will be ignored by the backend.
         # @param [string] session_id Session ID in which the load job must run.
         # @param [string] project_id Project ID where the destination table exists.
+        # @param [Boolean] dryrun  If set, don't actually run this job. Behavior
+        #   is undefined however for non-query jobs and may result in an error.
+        #   Deprecated.
+        # @param [String] date_format Format used to parse DATE values.
+        #   Supports SQL-style format strings. See
+        #   [date and time formatting guide](https://cloud.google.com/bigquery/docs/reference/standard-sql/format-elements#format_date_time_as_string)
+        # @param [String] datetime_format Format used to parse DATETIME
+        #   values. Supports SQL-style format strings. See
+        #   [date and time formatting guide](https://cloud.google.com/bigquery/docs/reference/standard-sql/format-elements#format_date_time_as_string)
+        # @param [String] time_format Format used to parse TIME values.
+        #   Supports SQL-style format strings. See
+        #   [date and time formatting guide](https://cloud.google.com/bigquery/docs/reference/standard-sql/format-elements#format_date_time_as_string)
+        # @param [String] timestamp_format Format used to parse
+        #   TIMESTAMP values. Supports SQL-style format strings. See
+        #   [date and time formatting guide](https://cloud.google.com/bigquery/docs/reference/standard-sql/format-elements#format_date_time_as_string)
+        # @param [Array<String>] null_markers A list of strings represented as
+        #   SQL NULL value in a CSV file. null_marker and null_markers can't be
+        #   set at the same time. If null_marker is set, null_markers has to be
+        #   not set. If null_markers is set, null_marker has to be not set. If
+        #   both null_marker and null_markers are set at the same time, a user
+        #   error would be thrown. Any strings listed in null_markers, including
+        #   empty string would be interpreted as SQL NULL. This applies to all
+        #   column types.
+        # @param [String] source_column_match Controls the strategy used to
+        #   match loaded columns to the schema. If not set, a sensible default is
+        #   chosen based on how the schema is provided. If autodetect is used,
+        #   then columns are matched by name. Otherwise, columns are matched by
+        #   position. This is done to keep the behavior backward-compatible.
+        #
+        #   Acceptable values are:
+        #   * `POSITION` - matches by position. This assumes that the columns are
+        #     ordered the same way as the schema.
+        #   * `NAME` - matches by name. This reads the header row as column names
+        #     and reorders columns to match the field names in the schema.
+        # @param [String] time_zone The time zone used when parsing timestamp
+        #   values.
         #
         # @yield [updater] A block for setting the schema and other
         #   options for the destination table. The schema can be omitted if the
@@ -1277,6 +1313,39 @@ module Google
         #   this option. Also note that for most use cases, the block yielded by
         #   this method is a more convenient way to configure the schema.
         # @param [string] session_id Session ID in which the load job must run.
+        # @param [String] date_format Format used to parse DATE values.
+        #   Supports SQL-style format strings. See
+        #   [date and time formatting guide](https://cloud.google.com/bigquery/docs/reference/standard-sql/format-elements#format_date_time_as_string)
+        # @param [String] datetime_format Format used to parse DATETIME
+        #   values. Supports SQL-style format strings. See
+        #   [date and time formatting guide](https://cloud.google.com/bigquery/docs/reference/standard-sql/format-elements#format_date_time_as_string)
+        # @param [String] time_format Format used to parse TIME values.
+        #   Supports SQL-style format strings. See
+        #   [date and time formatting guide](https://cloud.google.com/bigquery/docs/reference/standard-sql/format-elements#format_date_time_as_string)
+        # @param [String] timestamp_format Format used to parse
+        #   TIMESTAMP values. Supports SQL-style format strings. See
+        #   [date and time formatting guide](https://cloud.google.com/bigquery/docs/reference/standard-sql/format-elements#format_date_time_as_string)
+        # @param [Array<String>] null_markers A list of strings represented as
+        #   SQL NULL value in a CSV file. null_marker and null_markers can't be
+        #   set at the same time. If null_marker is set, null_markers has to be
+        #   not set. If null_markers is set, null_marker has to be not set. If
+        #   both null_marker and null_markers are set at the same time, a user
+        #   error would be thrown. Any strings listed in null_markers, including
+        #   empty string would be interpreted as SQL NULL. This applies to all
+        #   column types.
+        # @param [String] source_column_match Controls the strategy used to
+        #   match loaded columns to the schema. If not set, a sensible default is
+        #   chosen based on how the schema is provided. If autodetect is used,
+        #   then columns are matched by name. Otherwise, columns are matched by
+        #   position. This is done to keep the behavior backward-compatible.
+        #
+        #   Acceptable values are:
+        #   * `POSITION` - matches by position. This assumes that the columns are
+        #     ordered the same way as the schema.
+        #   * `NAME` - matches by name. This reads the header row as column names
+        #     and reorders columns to match the field names in the schema.
+        # @param [String] time_zone The time zone used when parsing timestamp
+        #   values.
         #
         # @yield [updater] A block for setting the schema of the destination
         #   table and other options for the load job. The schema can be omitted
