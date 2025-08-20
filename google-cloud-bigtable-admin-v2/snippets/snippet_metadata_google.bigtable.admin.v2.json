@@ -12,7 +12,7 @@
   },
   "snippets": [
     {
-      "region_tag": "bigtable_v2_generated_BigtableInstanceAdmin_CreateInstance_sync",
+      "region_tag": "bigtableadmin_v2_generated_BigtableInstanceAdmin_CreateInstance_sync",
       "title": "Snippet for the create_instance call in the BigtableInstanceAdmin service",
       "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdmin::Client#create_instance.",
       "file": "bigtable_instance_admin/create_instance.rb",
@@ -52,7 +52,7 @@
       ]
     },
     {
-      "region_tag": "bigtable_v2_generated_BigtableInstanceAdmin_GetInstance_sync",
+      "region_tag": "bigtableadmin_v2_generated_BigtableInstanceAdmin_GetInstance_sync",
       "title": "Snippet for the get_instance call in the BigtableInstanceAdmin service",
       "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdmin::Client#get_instance.",
       "file": "bigtable_instance_admin/get_instance.rb",
@@ -92,7 +92,7 @@
       ]
     },
     {
-      "region_tag": "bigtable_v2_generated_BigtableInstanceAdmin_ListInstances_sync",
+      "region_tag": "bigtableadmin_v2_generated_BigtableInstanceAdmin_ListInstances_sync",
       "title": "Snippet for the list_instances call in the BigtableInstanceAdmin service",
       "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdmin::Client#list_instances.",
       "file": "bigtable_instance_admin/list_instances.rb",
@@ -132,7 +132,7 @@
       ]
     },
     {
-      "region_tag": "bigtable_v2_generated_BigtableInstanceAdmin_UpdateInstance_sync",
+      "region_tag": "bigtableadmin_v2_generated_BigtableInstanceAdmin_UpdateInstance_sync",
       "title": "Snippet for the update_instance call in the BigtableInstanceAdmin service",
       "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdmin::Client#update_instance.",
       "file": "bigtable_instance_admin/update_instance.rb",
@@ -172,7 +172,7 @@
       ]
     },
     {
-      "region_tag": "bigtable_v2_generated_BigtableInstanceAdmin_PartialUpdateInstance_sync",
+      "region_tag": "bigtableadmin_v2_generated_BigtableInstanceAdmin_PartialUpdateInstance_sync",
       "title": "Snippet for the partial_update_instance call in the BigtableInstanceAdmin service",
       "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdmin::Client#partial_update_instance.",
       "file": "bigtable_instance_admin/partial_update_instance.rb",
@@ -212,7 +212,7 @@
       ]
     },
     {
-      "region_tag": "bigtable_v2_generated_BigtableInstanceAdmin_DeleteInstance_sync",
+      "region_tag": "bigtableadmin_v2_generated_BigtableInstanceAdmin_DeleteInstance_sync",
       "title": "Snippet for the delete_instance call in the BigtableInstanceAdmin service",
       "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdmin::Client#delete_instance.",
       "file": "bigtable_instance_admin/delete_instance.rb",
@@ -252,7 +252,7 @@
       ]
     },
     {
-      "region_tag": "bigtable_v2_generated_BigtableInstanceAdmin_CreateCluster_sync",
+      "region_tag": "bigtableadmin_v2_generated_BigtableInstanceAdmin_CreateCluster_sync",
       "title": "Snippet for the create_cluster call in the BigtableInstanceAdmin service",
       "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdmin::Client#create_cluster.",
       "file": "bigtable_instance_admin/create_cluster.rb",
@@ -292,7 +292,7 @@
       ]
     },
     {
-      "region_tag": "bigtable_v2_generated_BigtableInstanceAdmin_GetCluster_sync",
+      "region_tag": "bigtableadmin_v2_generated_BigtableInstanceAdmin_GetCluster_sync",
       "title": "Snippet for the get_cluster call in the BigtableInstanceAdmin service",
       "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdmin::Client#get_cluster.",
       "file": "bigtable_instance_admin/get_cluster.rb",
@@ -332,7 +332,7 @@
       ]
     },
     {
-      "region_tag": "bigtable_v2_generated_BigtableInstanceAdmin_ListClusters_sync",
+      "region_tag": "bigtableadmin_v2_generated_BigtableInstanceAdmin_ListClusters_sync",
       "title": "Snippet for the list_clusters call in the BigtableInstanceAdmin service",
       "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdmin::Client#list_clusters.",
       "file": "bigtable_instance_admin/list_clusters.rb",
@@ -372,7 +372,7 @@
       ]
     },
     {
-      "region_tag": "bigtable_v2_generated_BigtableInstanceAdmin_UpdateCluster_sync",
+      "region_tag": "bigtableadmin_v2_generated_BigtableInstanceAdmin_UpdateCluster_sync",
       "title": "Snippet for the update_cluster call in the BigtableInstanceAdmin service",
       "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdmin::Client#update_cluster.",
       "file": "bigtable_instance_admin/update_cluster.rb",
@@ -412,7 +412,7 @@
       ]
     },
     {
-      "region_tag": "bigtable_v2_generated_BigtableInstanceAdmin_PartialUpdateCluster_sync",
+      "region_tag": "bigtableadmin_v2_generated_BigtableInstanceAdmin_PartialUpdateCluster_sync",
       "title": "Snippet for the partial_update_cluster call in the BigtableInstanceAdmin service",
       "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdmin::Client#partial_update_cluster.",
       "file": "bigtable_instance_admin/partial_update_cluster.rb",
@@ -452,7 +452,7 @@
       ]
     },
     {
-      "region_tag": "bigtable_v2_generated_BigtableInstanceAdmin_DeleteCluster_sync",
+      "region_tag": "bigtableadmin_v2_generated_BigtableInstanceAdmin_DeleteCluster_sync",
       "title": "Snippet for the delete_cluster call in the BigtableInstanceAdmin service",
       "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdmin::Client#delete_cluster.",
       "file": "bigtable_instance_admin/delete_cluster.rb",
@@ -492,7 +492,7 @@
       ]
     },
     {
-      "region_tag": "bigtable_v2_generated_BigtableInstanceAdmin_CreateAppProfile_sync",
+      "region_tag": "bigtableadmin_v2_generated_BigtableInstanceAdmin_CreateAppProfile_sync",
       "title": "Snippet for the create_app_profile call in the BigtableInstanceAdmin service",
       "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdmin::Client#create_app_profile.",
       "file": "bigtable_instance_admin/create_app_profile.rb",
@@ -532,7 +532,7 @@
       ]
     },
     {
-      "region_tag": "bigtable_v2_generated_BigtableInstanceAdmin_GetAppProfile_sync",
+      "region_tag": "bigtableadmin_v2_generated_BigtableInstanceAdmin_GetAppProfile_sync",
       "title": "Snippet for the get_app_profile call in the BigtableInstanceAdmin service",
       "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdmin::Client#get_app_profile.",
       "file": "bigtable_instance_admin/get_app_profile.rb",
@@ -572,7 +572,7 @@
       ]
     },
     {
-      "region_tag": "bigtable_v2_generated_BigtableInstanceAdmin_ListAppProfiles_sync",
+      "region_tag": "bigtableadmin_v2_generated_BigtableInstanceAdmin_ListAppProfiles_sync",
       "title": "Snippet for the list_app_profiles call in the BigtableInstanceAdmin service",
       "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdmin::Client#list_app_profiles.",
       "file": "bigtable_instance_admin/list_app_profiles.rb",
@@ -612,7 +612,7 @@
       ]
     },
     {
-      "region_tag": "bigtable_v2_generated_BigtableInstanceAdmin_UpdateAppProfile_sync",
+      "region_tag": "bigtableadmin_v2_generated_BigtableInstanceAdmin_UpdateAppProfile_sync",
       "title": "Snippet for the update_app_profile call in the BigtableInstanceAdmin service",
       "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdmin::Client#update_app_profile.",
       "file": "bigtable_instance_admin/update_app_profile.rb",
@@ -652,7 +652,7 @@
       ]
     },
     {
-      "region_tag": "bigtable_v2_generated_BigtableInstanceAdmin_DeleteAppProfile_sync",
+      "region_tag": "bigtableadmin_v2_generated_BigtableInstanceAdmin_DeleteAppProfile_sync",
       "title": "Snippet for the delete_app_profile call in the BigtableInstanceAdmin service",
       "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdmin::Client#delete_app_profile.",
       "file": "bigtable_instance_admin/delete_app_profile.rb",
@@ -692,7 +692,7 @@
       ]
     },
     {
-      "region_tag": "bigtable_v2_generated_BigtableInstanceAdmin_GetIamPolicy_sync",
+      "region_tag": "bigtableadmin_v2_generated_BigtableInstanceAdmin_GetIamPolicy_sync",
       "title": "Snippet for the get_iam_policy call in the BigtableInstanceAdmin service",
       "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdmin::Client#get_iam_policy.",
       "file": "bigtable_instance_admin/get_iam_policy.rb",
@@ -732,7 +732,7 @@
       ]
     },
     {
-      "region_tag": "bigtable_v2_generated_BigtableInstanceAdmin_SetIamPolicy_sync",
+      "region_tag": "bigtableadmin_v2_generated_BigtableInstanceAdmin_SetIamPolicy_sync",
       "title": "Snippet for the set_iam_policy call in the BigtableInstanceAdmin service",
       "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdmin::Client#set_iam_policy.",
       "file": "bigtable_instance_admin/set_iam_policy.rb",
@@ -772,7 +772,7 @@
       ]
     },
     {
-      "region_tag": "bigtable_v2_generated_BigtableInstanceAdmin_TestIamPermissions_sync",
+      "region_tag": "bigtableadmin_v2_generated_BigtableInstanceAdmin_TestIamPermissions_sync",
       "title": "Snippet for the test_iam_permissions call in the BigtableInstanceAdmin service",
       "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdmin::Client#test_iam_permissions.",
       "file": "bigtable_instance_admin/test_iam_permissions.rb",
@@ -812,7 +812,7 @@
       ]
     },
     {
-      "region_tag": "bigtable_v2_generated_BigtableInstanceAdmin_ListHotTablets_sync",
+      "region_tag": "bigtableadmin_v2_generated_BigtableInstanceAdmin_ListHotTablets_sync",
       "title": "Snippet for the list_hot_tablets call in the BigtableInstanceAdmin service",
       "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdmin::Client#list_hot_tablets.",
       "file": "bigtable_instance_admin/list_hot_tablets.rb",
@@ -852,7 +852,7 @@
       ]
     },
     {
-      "region_tag": "bigtable_v2_generated_BigtableInstanceAdmin_CreateLogicalView_sync",
+      "region_tag": "bigtableadmin_v2_generated_BigtableInstanceAdmin_CreateLogicalView_sync",
       "title": "Snippet for the create_logical_view call in the BigtableInstanceAdmin service",
       "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdmin::Client#create_logical_view.",
       "file": "bigtable_instance_admin/create_logical_view.rb",
@@ -892,7 +892,7 @@
       ]
     },
     {
-      "region_tag": "bigtable_v2_generated_BigtableInstanceAdmin_GetLogicalView_sync",
+      "region_tag": "bigtableadmin_v2_generated_BigtableInstanceAdmin_GetLogicalView_sync",
       "title": "Snippet for the get_logical_view call in the BigtableInstanceAdmin service",
       "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdmin::Client#get_logical_view.",
       "file": "bigtable_instance_admin/get_logical_view.rb",
@@ -932,7 +932,7 @@
       ]
     },
     {
-      "region_tag": "bigtable_v2_generated_BigtableInstanceAdmin_ListLogicalViews_sync",
+      "region_tag": "bigtableadmin_v2_generated_BigtableInstanceAdmin_ListLogicalViews_sync",
       "title": "Snippet for the list_logical_views call in the BigtableInstanceAdmin service",
       "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdmin::Client#list_logical_views.",
       "file": "bigtable_instance_admin/list_logical_views.rb",
@@ -972,7 +972,7 @@
       ]
     },
     {
-      "region_tag": "bigtable_v2_generated_BigtableInstanceAdmin_UpdateLogicalView_sync",
+      "region_tag": "bigtableadmin_v2_generated_BigtableInstanceAdmin_UpdateLogicalView_sync",
       "title": "Snippet for the update_logical_view call in the BigtableInstanceAdmin service",
       "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdmin::Client#update_logical_view.",
       "file": "bigtable_instance_admin/update_logical_view.rb",
@@ -1012,7 +1012,7 @@
       ]
     },
     {
-      "region_tag": "bigtable_v2_generated_BigtableInstanceAdmin_DeleteLogicalView_sync",
+      "region_tag": "bigtableadmin_v2_generated_BigtableInstanceAdmin_DeleteLogicalView_sync",
       "title": "Snippet for the delete_logical_view call in the BigtableInstanceAdmin service",
       "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdmin::Client#delete_logical_view.",
       "file": "bigtable_instance_admin/delete_logical_view.rb",
@@ -1052,7 +1052,7 @@
       ]
     },
     {
-      "region_tag": "bigtable_v2_generated_BigtableInstanceAdmin_CreateMaterializedView_sync",
+      "region_tag": "bigtableadmin_v2_generated_BigtableInstanceAdmin_CreateMaterializedView_sync",
       "title": "Snippet for the create_materialized_view call in the BigtableInstanceAdmin service",
       "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdmin::Client#create_materialized_view.",
       "file": "bigtable_instance_admin/create_materialized_view.rb",
@@ -1092,7 +1092,7 @@
       ]
     },
     {
-      "region_tag": "bigtable_v2_generated_BigtableInstanceAdmin_GetMaterializedView_sync",
+      "region_tag": "bigtableadmin_v2_generated_BigtableInstanceAdmin_GetMaterializedView_sync",
       "title": "Snippet for the get_materialized_view call in the BigtableInstanceAdmin service",
       "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdmin::Client#get_materialized_view.",
       "file": "bigtable_instance_admin/get_materialized_view.rb",
@@ -1132,7 +1132,7 @@
       ]
     },
     {
-      "region_tag": "bigtable_v2_generated_BigtableInstanceAdmin_ListMaterializedViews_sync",
+      "region_tag": "bigtableadmin_v2_generated_BigtableInstanceAdmin_ListMaterializedViews_sync",
       "title": "Snippet for the list_materialized_views call in the BigtableInstanceAdmin service",
       "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdmin::Client#list_materialized_views.",
       "file": "bigtable_instance_admin/list_materialized_views.rb",
@@ -1172,7 +1172,7 @@
       ]
     },
     {
-      "region_tag": "bigtable_v2_generated_BigtableInstanceAdmin_UpdateMaterializedView_sync",
+      "region_tag": "bigtableadmin_v2_generated_BigtableInstanceAdmin_UpdateMaterializedView_sync",
       "title": "Snippet for the update_materialized_view call in the BigtableInstanceAdmin service",
       "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdmin::Client#update_materialized_view.",
       "file": "bigtable_instance_admin/update_materialized_view.rb",
@@ -1212,7 +1212,7 @@
       ]
     },
     {
-      "region_tag": "bigtable_v2_generated_BigtableInstanceAdmin_DeleteMaterializedView_sync",
+      "region_tag": "bigtableadmin_v2_generated_BigtableInstanceAdmin_DeleteMaterializedView_sync",
       "title": "Snippet for the delete_materialized_view call in the BigtableInstanceAdmin service",
       "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdmin::Client#delete_materialized_view.",
       "file": "bigtable_instance_admin/delete_materialized_view.rb",
@@ -1252,7 +1252,7 @@
       ]
     },
     {
-      "region_tag": "bigtable_v2_generated_BigtableTableAdmin_CreateTable_sync",
+      "region_tag": "bigtableadmin_v2_generated_BigtableTableAdmin_CreateTable_sync",
       "title": "Snippet for the create_table call in the BigtableTableAdmin service",
       "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Bigtable::Admin::V2::BigtableTableAdmin::Client#create_table.",
       "file": "bigtable_table_admin/create_table.rb",
@@ -1292,7 +1292,7 @@
       ]
     },
     {
-      "region_tag": "bigtable_v2_generated_BigtableTableAdmin_CreateTableFromSnapshot_sync",
+      "region_tag": "bigtableadmin_v2_generated_BigtableTableAdmin_CreateTableFromSnapshot_sync",
       "title": "Snippet for the create_table_from_snapshot call in the BigtableTableAdmin service",
       "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Bigtable::Admin::V2::BigtableTableAdmin::Client#create_table_from_snapshot.",
       "file": "bigtable_table_admin/create_table_from_snapshot.rb",
@@ -1332,7 +1332,7 @@
       ]
     },
     {
-      "region_tag": "bigtable_v2_generated_BigtableTableAdmin_ListTables_sync",
+      "region_tag": "bigtableadmin_v2_generated_BigtableTableAdmin_ListTables_sync",
       "title": "Snippet for the list_tables call in the BigtableTableAdmin service",
       "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Bigtable::Admin::V2::BigtableTableAdmin::Client#list_tables.",
       "file": "bigtable_table_admin/list_tables.rb",
@@ -1372,7 +1372,7 @@
       ]
     },
     {
-      "region_tag": "bigtable_v2_generated_BigtableTableAdmin_GetTable_sync",
+      "region_tag": "bigtableadmin_v2_generated_BigtableTableAdmin_GetTable_sync",
       "title": "Snippet for the get_table call in the BigtableTableAdmin service",
       "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Bigtable::Admin::V2::BigtableTableAdmin::Client#get_table.",
       "file": "bigtable_table_admin/get_table.rb",
@@ -1412,7 +1412,7 @@
       ]
     },
     {
-      "region_tag": "bigtable_v2_generated_BigtableTableAdmin_UpdateTable_sync",
+      "region_tag": "bigtableadmin_v2_generated_BigtableTableAdmin_UpdateTable_sync",
       "title": "Snippet for the update_table call in the BigtableTableAdmin service",
       "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Bigtable::Admin::V2::BigtableTableAdmin::Client#update_table.",
       "file": "bigtable_table_admin/update_table.rb",
@@ -1452,7 +1452,7 @@
       ]
     },
     {
-      "region_tag": "bigtable_v2_generated_BigtableTableAdmin_DeleteTable_sync",
+      "region_tag": "bigtableadmin_v2_generated_BigtableTableAdmin_DeleteTable_sync",
       "title": "Snippet for the delete_table call in the BigtableTableAdmin service",
       "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Bigtable::Admin::V2::BigtableTableAdmin::Client#delete_table.",
       "file": "bigtable_table_admin/delete_table.rb",
@@ -1492,7 +1492,7 @@
       ]
     },
     {
-      "region_tag": "bigtable_v2_generated_BigtableTableAdmin_UndeleteTable_sync",
+      "region_tag": "bigtableadmin_v2_generated_BigtableTableAdmin_UndeleteTable_sync",
       "title": "Snippet for the undelete_table call in the BigtableTableAdmin service",
       "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Bigtable::Admin::V2::BigtableTableAdmin::Client#undelete_table.",
       "file": "bigtable_table_admin/undelete_table.rb",
@@ -1532,7 +1532,7 @@
       ]
     },
     {
-      "region_tag": "bigtable_v2_generated_BigtableTableAdmin_CreateAuthorizedView_sync",
+      "region_tag": "bigtableadmin_v2_generated_BigtableTableAdmin_CreateAuthorizedView_sync",
       "title": "Snippet for the create_authorized_view call in the BigtableTableAdmin service",
       "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Bigtable::Admin::V2::BigtableTableAdmin::Client#create_authorized_view.",
       "file": "bigtable_table_admin/create_authorized_view.rb",
@@ -1572,7 +1572,7 @@
       ]
     },
     {
-      "region_tag": "bigtable_v2_generated_BigtableTableAdmin_ListAuthorizedViews_sync",
+      "region_tag": "bigtableadmin_v2_generated_BigtableTableAdmin_ListAuthorizedViews_sync",
       "title": "Snippet for the list_authorized_views call in the BigtableTableAdmin service",
       "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Bigtable::Admin::V2::BigtableTableAdmin::Client#list_authorized_views.",
       "file": "bigtable_table_admin/list_authorized_views.rb",
@@ -1612,7 +1612,7 @@
       ]
     },
     {
-      "region_tag": "bigtable_v2_generated_BigtableTableAdmin_GetAuthorizedView_sync",
+      "region_tag": "bigtableadmin_v2_generated_BigtableTableAdmin_GetAuthorizedView_sync",
       "title": "Snippet for the get_authorized_view call in the BigtableTableAdmin service",
       "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Bigtable::Admin::V2::BigtableTableAdmin::Client#get_authorized_view.",
       "file": "bigtable_table_admin/get_authorized_view.rb",
@@ -1652,7 +1652,7 @@
       ]
     },
     {
-      "region_tag": "bigtable_v2_generated_BigtableTableAdmin_UpdateAuthorizedView_sync",
+      "region_tag": "bigtableadmin_v2_generated_BigtableTableAdmin_UpdateAuthorizedView_sync",
       "title": "Snippet for the update_authorized_view call in the BigtableTableAdmin service",
       "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Bigtable::Admin::V2::BigtableTableAdmin::Client#update_authorized_view.",
       "file": "bigtable_table_admin/update_authorized_view.rb",
@@ -1692,7 +1692,7 @@
       ]
     },
     {
-      "region_tag": "bigtable_v2_generated_BigtableTableAdmin_DeleteAuthorizedView_sync",
+      "region_tag": "bigtableadmin_v2_generated_BigtableTableAdmin_DeleteAuthorizedView_sync",
       "title": "Snippet for the delete_authorized_view call in the BigtableTableAdmin service",
       "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Bigtable::Admin::V2::BigtableTableAdmin::Client#delete_authorized_view.",
       "file": "bigtable_table_admin/delete_authorized_view.rb",
@@ -1732,7 +1732,7 @@
       ]
     },
     {
-      "region_tag": "bigtable_v2_generated_BigtableTableAdmin_ModifyColumnFamilies_sync",
+      "region_tag": "bigtableadmin_v2_generated_BigtableTableAdmin_ModifyColumnFamilies_sync",
       "title": "Snippet for the modify_column_families call in the BigtableTableAdmin service",
       "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Bigtable::Admin::V2::BigtableTableAdmin::Client#modify_column_families.",
       "file": "bigtable_table_admin/modify_column_families.rb",
@@ -1772,7 +1772,7 @@
       ]
     },
     {
-      "region_tag": "bigtable_v2_generated_BigtableTableAdmin_DropRowRange_sync",
+      "region_tag": "bigtableadmin_v2_generated_BigtableTableAdmin_DropRowRange_sync",
       "title": "Snippet for the drop_row_range call in the BigtableTableAdmin service",
       "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Bigtable::Admin::V2::BigtableTableAdmin::Client#drop_row_range.",
       "file": "bigtable_table_admin/drop_row_range.rb",
@@ -1812,7 +1812,7 @@
       ]
     },
     {
-      "region_tag": "bigtable_v2_generated_BigtableTableAdmin_GenerateConsistencyToken_sync",
+      "region_tag": "bigtableadmin_v2_generated_BigtableTableAdmin_GenerateConsistencyToken_sync",
       "title": "Snippet for the generate_consistency_token call in the BigtableTableAdmin service",
       "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Bigtable::Admin::V2::BigtableTableAdmin::Client#generate_consistency_token.",
       "file": "bigtable_table_admin/generate_consistency_token.rb",
@@ -1852,7 +1852,7 @@
       ]
     },
     {
-      "region_tag": "bigtable_v2_generated_BigtableTableAdmin_CheckConsistency_sync",
+      "region_tag": "bigtableadmin_v2_generated_BigtableTableAdmin_CheckConsistency_sync",
       "title": "Snippet for the check_consistency call in the BigtableTableAdmin service",
       "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Bigtable::Admin::V2::BigtableTableAdmin::Client#check_consistency.",
       "file": "bigtable_table_admin/check_consistency.rb",
@@ -1892,7 +1892,7 @@
       ]
     },
     {
-      "region_tag": "bigtable_v2_generated_BigtableTableAdmin_SnapshotTable_sync",
+      "region_tag": "bigtableadmin_v2_generated_BigtableTableAdmin_SnapshotTable_sync",
       "title": "Snippet for the snapshot_table call in the BigtableTableAdmin service",
       "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Bigtable::Admin::V2::BigtableTableAdmin::Client#snapshot_table.",
       "file": "bigtable_table_admin/snapshot_table.rb",
@@ -1932,7 +1932,7 @@
       ]
     },
     {
-      "region_tag": "bigtable_v2_generated_BigtableTableAdmin_GetSnapshot_sync",
+      "region_tag": "bigtableadmin_v2_generated_BigtableTableAdmin_GetSnapshot_sync",
       "title": "Snippet for the get_snapshot call in the BigtableTableAdmin service",
       "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Bigtable::Admin::V2::BigtableTableAdmin::Client#get_snapshot.",
       "file": "bigtable_table_admin/get_snapshot.rb",
@@ -1972,7 +1972,7 @@
       ]
     },
     {
-      "region_tag": "bigtable_v2_generated_BigtableTableAdmin_ListSnapshots_sync",
+      "region_tag": "bigtableadmin_v2_generated_BigtableTableAdmin_ListSnapshots_sync",
       "title": "Snippet for the list_snapshots call in the BigtableTableAdmin service",
       "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Bigtable::Admin::V2::BigtableTableAdmin::Client#list_snapshots.",
       "file": "bigtable_table_admin/list_snapshots.rb",
@@ -2012,7 +2012,7 @@
       ]
     },
     {
-      "region_tag": "bigtable_v2_generated_BigtableTableAdmin_DeleteSnapshot_sync",
+      "region_tag": "bigtableadmin_v2_generated_BigtableTableAdmin_DeleteSnapshot_sync",
       "title": "Snippet for the delete_snapshot call in the BigtableTableAdmin service",
       "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Bigtable::Admin::V2::BigtableTableAdmin::Client#delete_snapshot.",
       "file": "bigtable_table_admin/delete_snapshot.rb",
@@ -2052,7 +2052,7 @@
       ]
     },
     {
-      "region_tag": "bigtable_v2_generated_BigtableTableAdmin_CreateBackup_sync",
+      "region_tag": "bigtableadmin_v2_generated_BigtableTableAdmin_CreateBackup_sync",
       "title": "Snippet for the create_backup call in the BigtableTableAdmin service",
       "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Bigtable::Admin::V2::BigtableTableAdmin::Client#create_backup.",
       "file": "bigtable_table_admin/create_backup.rb",
@@ -2092,7 +2092,7 @@
       ]
     },
     {
-      "region_tag": "bigtable_v2_generated_BigtableTableAdmin_GetBackup_sync",
+      "region_tag": "bigtableadmin_v2_generated_BigtableTableAdmin_GetBackup_sync",
       "title": "Snippet for the get_backup call in the BigtableTableAdmin service",
       "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Bigtable::Admin::V2::BigtableTableAdmin::Client#get_backup.",
       "file": "bigtable_table_admin/get_backup.rb",
@@ -2132,7 +2132,7 @@
       ]
     },
     {
-      "region_tag": "bigtable_v2_generated_BigtableTableAdmin_UpdateBackup_sync",
+      "region_tag": "bigtableadmin_v2_generated_BigtableTableAdmin_UpdateBackup_sync",
       "title": "Snippet for the update_backup call in the BigtableTableAdmin service",
       "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Bigtable::Admin::V2::BigtableTableAdmin::Client#update_backup.",
       "file": "bigtable_table_admin/update_backup.rb",
@@ -2172,7 +2172,7 @@
       ]
     },
     {
-      "region_tag": "bigtable_v2_generated_BigtableTableAdmin_DeleteBackup_sync",
+      "region_tag": "bigtableadmin_v2_generated_BigtableTableAdmin_DeleteBackup_sync",
       "title": "Snippet for the delete_backup call in the BigtableTableAdmin service",
       "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Bigtable::Admin::V2::BigtableTableAdmin::Client#delete_backup.",
       "file": "bigtable_table_admin/delete_backup.rb",
@@ -2212,7 +2212,7 @@
       ]
     },
     {
-      "region_tag": "bigtable_v2_generated_BigtableTableAdmin_ListBackups_sync",
+      "region_tag": "bigtableadmin_v2_generated_BigtableTableAdmin_ListBackups_sync",
       "title": "Snippet for the list_backups call in the BigtableTableAdmin service",
       "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Bigtable::Admin::V2::BigtableTableAdmin::Client#list_backups.",
       "file": "bigtable_table_admin/list_backups.rb",
@@ -2252,7 +2252,7 @@
       ]
     },
     {
-      "region_tag": "bigtable_v2_generated_BigtableTableAdmin_RestoreTable_sync",
+      "region_tag": "bigtableadmin_v2_generated_BigtableTableAdmin_RestoreTable_sync",
       "title": "Snippet for the restore_table call in the BigtableTableAdmin service",
       "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Bigtable::Admin::V2::BigtableTableAdmin::Client#restore_table.",
       "file": "bigtable_table_admin/restore_table.rb",
@@ -2292,7 +2292,7 @@
       ]
     },
     {
-      "region_tag": "bigtable_v2_generated_BigtableTableAdmin_CopyBackup_sync",
+      "region_tag": "bigtableadmin_v2_generated_BigtableTableAdmin_CopyBackup_sync",
       "title": "Snippet for the copy_backup call in the BigtableTableAdmin service",
       "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Bigtable::Admin::V2::BigtableTableAdmin::Client#copy_backup.",
       "file": "bigtable_table_admin/copy_backup.rb",
@@ -2332,7 +2332,7 @@
       ]
     },
     {
-      "region_tag": "bigtable_v2_generated_BigtableTableAdmin_GetIamPolicy_sync",
+      "region_tag": "bigtableadmin_v2_generated_BigtableTableAdmin_GetIamPolicy_sync",
       "title": "Snippet for the get_iam_policy call in the BigtableTableAdmin service",
       "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Bigtable::Admin::V2::BigtableTableAdmin::Client#get_iam_policy.",
       "file": "bigtable_table_admin/get_iam_policy.rb",
@@ -2372,7 +2372,7 @@
       ]
     },
     {
-      "region_tag": "bigtable_v2_generated_BigtableTableAdmin_SetIamPolicy_sync",
+      "region_tag": "bigtableadmin_v2_generated_BigtableTableAdmin_SetIamPolicy_sync",
       "title": "Snippet for the set_iam_policy call in the BigtableTableAdmin service",
       "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Bigtable::Admin::V2::BigtableTableAdmin::Client#set_iam_policy.",
       "file": "bigtable_table_admin/set_iam_policy.rb",
@@ -2412,7 +2412,7 @@
       ]
     },
     {
-      "region_tag": "bigtable_v2_generated_BigtableTableAdmin_TestIamPermissions_sync",
+      "region_tag": "bigtableadmin_v2_generated_BigtableTableAdmin_TestIamPermissions_sync",
       "title": "Snippet for the test_iam_permissions call in the BigtableTableAdmin service",
       "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Bigtable::Admin::V2::BigtableTableAdmin::Client#test_iam_permissions.",
       "file": "bigtable_table_admin/test_iam_permissions.rb",
@@ -2452,7 +2452,7 @@
       ]
     },
     {
-      "region_tag": "bigtable_v2_generated_BigtableTableAdmin_CreateSchemaBundle_sync",
+      "region_tag": "bigtableadmin_v2_generated_BigtableTableAdmin_CreateSchemaBundle_sync",
       "title": "Snippet for the create_schema_bundle call in the BigtableTableAdmin service",
       "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Bigtable::Admin::V2::BigtableTableAdmin::Client#create_schema_bundle.",
       "file": "bigtable_table_admin/create_schema_bundle.rb",
@@ -2492,7 +2492,7 @@
       ]
     },
     {
-      "region_tag": "bigtable_v2_generated_BigtableTableAdmin_UpdateSchemaBundle_sync",
+      "region_tag": "bigtableadmin_v2_generated_BigtableTableAdmin_UpdateSchemaBundle_sync",
       "title": "Snippet for the update_schema_bundle call in the BigtableTableAdmin service",
       "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Bigtable::Admin::V2::BigtableTableAdmin::Client#update_schema_bundle.",
       "file": "bigtable_table_admin/update_schema_bundle.rb",
@@ -2532,7 +2532,7 @@
       ]
     },
     {
-      "region_tag": "bigtable_v2_generated_BigtableTableAdmin_GetSchemaBundle_sync",
+      "region_tag": "bigtableadmin_v2_generated_BigtableTableAdmin_GetSchemaBundle_sync",
       "title": "Snippet for the get_schema_bundle call in the BigtableTableAdmin service",
       "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Bigtable::Admin::V2::BigtableTableAdmin::Client#get_schema_bundle.",
       "file": "bigtable_table_admin/get_schema_bundle.rb",
@@ -2572,7 +2572,7 @@
       ]
     },
     {
-      "region_tag": "bigtable_v2_generated_BigtableTableAdmin_ListSchemaBundles_sync",
+      "region_tag": "bigtableadmin_v2_generated_BigtableTableAdmin_ListSchemaBundles_sync",
       "title": "Snippet for the list_schema_bundles call in the BigtableTableAdmin service",
       "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Bigtable::Admin::V2::BigtableTableAdmin::Client#list_schema_bundles.",
       "file": "bigtable_table_admin/list_schema_bundles.rb",
@@ -2612,7 +2612,7 @@
       ]
     },
     {
-      "region_tag": "bigtable_v2_generated_BigtableTableAdmin_DeleteSchemaBundle_sync",
+      "region_tag": "bigtableadmin_v2_generated_BigtableTableAdmin_DeleteSchemaBundle_sync",
       "title": "Snippet for the delete_schema_bundle call in the BigtableTableAdmin service",
       "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Bigtable::Admin::V2::BigtableTableAdmin::Client#delete_schema_bundle.",
       "file": "bigtable_table_admin/delete_schema_bundle.rb",
