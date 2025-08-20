@@ -101,6 +101,40 @@ describe Google::Cloud::Storage::Bucket, :mock_storage do
     _(bucket_complete.autoclass_enabled).must_equal bucket_autoclass_enabled
     _(bucket_complete.autoclass_terminal_storage_class).must_equal bucket_autoclass_terminal_storage_class
   end
+  
+  it "creates a file with checksum: :crc32c by default" do
+    new_file_name = random_file_path
+
+    Tempfile.open ["google-cloud", ".txt"] do |tmpfile|
+      tmpfile.write "Hello world!"
+      tmpfile.rewind
+
+      crc32c = Google::Cloud::Storage::File::Verifier.crc32c_for tmpfile
+
+      mock = Minitest::Mock.new
+      mock.expect :insert_object, create_file_gapi(bucket.name, new_file_name),
+        [bucket.name, empty_file_gapi(crc32c: crc32c)], **insert_object_args(name: new_file_name, upload_source: tmpfile, options: {retries: 0})
+
+      bucket.service.mocked_service = mock
+      bucket.create_file tmpfile, new_file_name
+
+      mock.verify
+    end
+  end
+
+  it "creates a file with a StringIO and checksum: :crc32c by default" do
+    new_file_name = random_file_path
+    new_file_contents = StringIO.new "Hello world"
+    mock = Minitest::Mock.new
+    mock.expect :insert_object, create_file_gapi(bucket.name, new_file_name),
+      [bucket.name, empty_file_gapi(crc32c: "crUfeA==")], **insert_object_args(name: new_file_name, upload_source: new_file_contents, options: {retries: 0})
+
+    bucket.service.mocked_service = mock
+
+    bucket.create_file new_file_contents, new_file_name
+
+    mock.verify
+  end
 
   it "returns frozen cors" do
     bucket_complete.cors.each do |cors|
@@ -597,7 +631,7 @@ describe Google::Cloud::Storage::Bucket, :mock_storage do
     Tempfile.create ["google-cloud", ".txt"] do |tmpfile|
       mock = Minitest::Mock.new
       mock.expect :insert_object, create_file_gapi(bucket_user_project.name, new_file_name),
-        [bucket.name, empty_file_gapi], **insert_object_args(name: new_file_name, upload_source: tmpfile, user_project: "test", options: {retries: 0})
+        [bucket.name, empty_file_gapi(crc32c: "AAAAAA==")], **insert_object_args(name: new_file_name, upload_source: tmpfile, user_project: "test", options: {retries: 0})
 
       bucket_user_project.service.mocked_service = mock
 
@@ -610,7 +644,7 @@ describe Google::Cloud::Storage::Bucket, :mock_storage do
 
   it "creates an file with a StringIO" do
     new_file_name = random_file_path
-    new_file_contents = StringIO.new
+    new_file_contents = StringIO.new("Hello world")
 
     mock = Minitest::Mock.new
     mock.expect :insert_object, create_file_gapi(bucket.name, new_file_name),
@@ -1417,6 +1451,13 @@ describe Google::Cloud::Storage::Bucket, :mock_storage do
                       content_type: nil, crc32c: nil, md5: nil, metadata: nil,
                       storage_class: nil, temporary_hold: nil,
                       event_based_hold: nil
+
+  # new_file_contents = StringIO.new
+  # Set crc32c if both md5 and crc32c are not provided
+  if md5.nil? && crc32c.nil?
+    crc32c = Google::Cloud::Storage::File::Verifier.crc32c_for(StringIO.new("Hello world"))
+  end
+
     params = {
       cache_control: cache_control, content_type: content_type,
       content_disposition: content_disposition, md5_hash: md5,
