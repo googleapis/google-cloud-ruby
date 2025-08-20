@@ -1159,9 +1159,6 @@ module Google
         #   Google Cloud Datastore backup.
         # @yieldparam [Google::Cloud::Bigquery::LoadJob::Updater] updater An
         #   updater to modify the load job and its schema.
-        # @param [Boolean] dryrun  If set, don't actually run this job. Behavior
-        #   is undefined however for non-query jobs and may result in an error.
-        #   Deprecated.
         #
         # @return [Google::Cloud::Bigquery::LoadJob] A new load job object.
         #
@@ -1179,7 +1176,9 @@ module Google
                      projection_fields: nil, jagged_rows: nil, quoted_newlines: nil, encoding: nil,
                      delimiter: nil, ignore_unknown: nil, max_bad_records: nil, quote: nil,
                      skip_leading: nil, schema: nil, job_id: nil, prefix: nil, labels: nil, autodetect: nil,
-                     null_marker: nil, dryrun: nil, create_session: nil, session_id: nil, project_id: nil, &block
+                     null_marker: nil, dryrun: nil, create_session: nil, session_id: nil, project_id: nil,
+                     date_format: nil, datetime_format: nil, time_format: nil, timestamp_format: nil,
+                     null_markers: nil, source_column_match: nil, time_zone: nil, &block
           ensure_service!
           dataset_id ||= "_SESSION" unless create_session.nil? && session_id.nil?
           session_dataset = dataset dataset_id, skip_lookup: true, project_id: project_id
@@ -1191,7 +1190,10 @@ module Google
                           max_bad_records: max_bad_records, quote: quote, skip_leading: skip_leading,
                           dryrun: dryrun, schema: schema, job_id: job_id, prefix: prefix, labels: labels,
                           autodetect: autodetect, null_marker: null_marker, create_session: create_session,
-                          session_id: session_id, &block
+                          session_id: session_id, date_format: date_format, datetime_format: datetime_format,
+                          time_format: time_format, timestamp_format: timestamp_format,
+                          null_markers: null_markers, source_column_match: source_column_match,
+                          time_zone: time_zone, &block
         end
 
         ##
@@ -1375,13 +1377,18 @@ module Google
         def load table_id, files, dataset_id: "_SESSION", format: nil, create: nil, write: nil,
                  projection_fields: nil, jagged_rows: nil, quoted_newlines: nil, encoding: nil,
                  delimiter: nil, ignore_unknown: nil, max_bad_records: nil, quote: nil,
-                 skip_leading: nil, schema: nil, autodetect: nil, null_marker: nil, session_id: nil, &block
+                 skip_leading: nil, schema: nil, autodetect: nil, null_marker: nil, session_id: nil,
+                 date_format: nil, datetime_format: nil, time_format: nil, timestamp_format: nil,
+                 null_markers: nil, source_column_match: nil, time_zone: nil, &block
           job = load_job table_id, files, dataset_id: dataset_id,
                         format: format, create: create, write: write, projection_fields: projection_fields,
                         jagged_rows: jagged_rows, quoted_newlines: quoted_newlines, encoding: encoding,
                         delimiter: delimiter, ignore_unknown: ignore_unknown, max_bad_records: max_bad_records,
                         quote: quote, skip_leading: skip_leading, schema: schema, autodetect: autodetect,
-                        null_marker: null_marker, session_id: session_id, &block
+                        null_marker: null_marker, session_id: session_id, date_format: date_format,
+                        datetime_format: datetime_format, time_format: time_format,
+                        timestamp_format: timestamp_format, null_markers: null_markers,
+                        source_column_match: source_column_match, time_zone: time_zone, &block
 
           job.wait_until_done!
           ensure_job_succeeded! job
