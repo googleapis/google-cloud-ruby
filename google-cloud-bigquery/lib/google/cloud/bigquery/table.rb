@@ -2540,7 +2540,9 @@ format_options_use_int64_timestamp: format_options_use_int64_timestamp
         def load_job files, format: nil, create: nil, write: nil, projection_fields: nil, jagged_rows: nil,
                      quoted_newlines: nil, encoding: nil, delimiter: nil, ignore_unknown: nil, max_bad_records: nil,
                      quote: nil, skip_leading: nil, job_id: nil, prefix: nil, labels: nil, autodetect: nil,
-                     null_marker: nil, dryrun: nil, create_session: nil, session_id: nil, schema: self.schema
+                     null_marker: nil, dryrun: nil, create_session: nil, session_id: nil, schema: self.schema,
+                     date_format: nil, datetime_format: nil, time_format: nil, timestamp_format: nil,
+                     null_markers: nil, source_column_match: nil, time_zone: nil
           ensure_service!
 
           updater = load_job_updater format: format, create: create, write: write, projection_fields: projection_fields,
@@ -2549,8 +2551,10 @@ format_options_use_int64_timestamp: format_options_use_int64_timestamp
                                      max_bad_records: max_bad_records, quote: quote, skip_leading: skip_leading,
                                      dryrun: dryrun, job_id: job_id, prefix: prefix, schema: schema, labels: labels,
                                      autodetect: autodetect, null_marker: null_marker, create_session: create_session,
-                                     session_id: session_id
-
+                                     session_id: session_id, date_format: date_format,
+                                     datetime_format: datetime_format, time_format: time_format,
+                                     timestamp_format: timestamp_format, null_markers: null_markers,
+                                     source_column_match: source_column_match, time_zone: time_zone
 
           yield updater if block_given?
 
@@ -2761,12 +2765,16 @@ format_options_use_int64_timestamp: format_options_use_int64_timestamp
         def load files, format: nil, create: nil, write: nil, projection_fields: nil, jagged_rows: nil,
                  quoted_newlines: nil, encoding: nil, delimiter: nil, ignore_unknown: nil, max_bad_records: nil,
                  quote: nil, skip_leading: nil, autodetect: nil, null_marker: nil, session_id: nil,
-                 schema: self.schema, &block
+                 schema: self.schema, date_format: nil, datetime_format: nil, time_format: nil, timestamp_format: nil,
+                 null_markers: nil, source_column_match: nil, time_zone: nil, &block
           job = load_job files, format: format, create: create, write: write, projection_fields: projection_fields,
                                 jagged_rows: jagged_rows, quoted_newlines: quoted_newlines, encoding: encoding,
                                 delimiter: delimiter, ignore_unknown: ignore_unknown, max_bad_records: max_bad_records,
                                 quote: quote, skip_leading: skip_leading, autodetect: autodetect,
-                                null_marker: null_marker, session_id: session_id, schema: schema, &block
+                                null_marker: null_marker, session_id: session_id, schema: schema,
+                                date_format: date_format, datetime_format: datetime_format, time_format: time_format,
+                                timestamp_format: timestamp_format, null_markers: null_markers,
+                                source_column_match: source_column_match, time_zone: time_zone, &block
 
           job.wait_until_done!
           ensure_job_succeeded! job
@@ -3233,36 +3241,49 @@ format_options_use_int64_timestamp: format_options_use_int64_timestamp
         end
 
         def load_job_csv_options! job, jagged_rows: nil, quoted_newlines: nil, delimiter: nil, quote: nil,
-                                  skip_leading: nil, null_marker: nil
+                                  skip_leading: nil, null_marker: nil, null_markers: nil, source_column_match: nil
           job.jagged_rows = jagged_rows unless jagged_rows.nil?
           job.quoted_newlines = quoted_newlines unless quoted_newlines.nil?
           job.delimiter = delimiter unless delimiter.nil?
           job.null_marker = null_marker unless null_marker.nil?
           job.quote = quote unless quote.nil?
           job.skip_leading = skip_leading unless skip_leading.nil?
+          job.null_markers = null_markers unless null_markers.nil?
+          job.source_column_match = source_column_match unless source_column_match.nil?
         end
 
         def load_job_file_options! job, format: nil, projection_fields: nil, jagged_rows: nil, quoted_newlines: nil,
                                    encoding: nil, delimiter: nil, ignore_unknown: nil, max_bad_records: nil, quote: nil,
-                                   skip_leading: nil, null_marker: nil
+                                   skip_leading: nil, null_marker: nil, date_format: nil, datetime_format: nil,
+                                   time_format: nil, timestamp_format: nil, null_markers: nil, source_column_match: nil,
+                                   time_zone: nil
           job.format = format unless format.nil?
           job.projection_fields = projection_fields unless projection_fields.nil?
           job.encoding = encoding unless encoding.nil?
           job.ignore_unknown = ignore_unknown unless ignore_unknown.nil?
           job.max_bad_records = max_bad_records unless max_bad_records.nil?
+          job.date_format = date_format unless date_format.nil?
+          job.datetime_format = datetime_format unless datetime_format.nil?
+          job.time_format = time_format unless time_format.nil?
+          job.timestamp_format = timestamp_format unless timestamp_format.nil?
+          job.time_zone = time_zone unless time_zone.nil?
           load_job_csv_options! job, jagged_rows:     jagged_rows,
                                      quoted_newlines: quoted_newlines,
                                      delimiter:       delimiter,
                                      quote:           quote,
                                      skip_leading:    skip_leading,
-                                     null_marker:     null_marker
+                                     null_marker:     null_marker,
+                                     null_markers:    null_markers,
+                                     source_column_match: source_column_match
         end
 
         def load_job_updater format: nil, create: nil, write: nil, projection_fields: nil, jagged_rows: nil,
                              quoted_newlines: nil, encoding: nil, delimiter: nil, ignore_unknown: nil,
                              max_bad_records: nil, quote: nil, skip_leading: nil, dryrun: nil, schema: nil, job_id: nil,
                              prefix: nil, labels: nil, autodetect: nil, null_marker: nil,
-                             create_session: nil, session_id: nil
+                             create_session: nil, session_id: nil, date_format: nil, datetime_format: nil,
+                             time_format: nil, timestamp_format: nil, null_markers: nil, source_column_match: nil,
+                             time_zone: nil
           new_job = load_job_gapi table_id, dryrun, job_id: job_id, prefix: prefix
           LoadJob::Updater.new(new_job).tap do |job|
             job.location = location if location # may be table reference
@@ -3283,7 +3304,14 @@ format_options_use_int64_timestamp: format_options_use_int64_timestamp
                                         max_bad_records:   max_bad_records,
                                         quote:             quote,
                                         skip_leading:      skip_leading,
-                                        null_marker:       null_marker
+                                        null_marker:       null_marker,
+                                        date_format:       date_format,
+                                        datetime_format:  datetime_format,
+                                        time_format:       time_format,
+                                        timestamp_format:  timestamp_format,
+                                        null_markers:      null_markers,
+                                        source_column_match: source_column_match,
+                                        time_zone:         time_zone
           end
         end
 
