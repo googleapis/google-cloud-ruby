@@ -1454,7 +1454,6 @@ describe Google::Cloud::Storage::Bucket, :mock_storage do
                       storage_class: nil, temporary_hold: nil,
                       event_based_hold: nil
 
-  # new_file_contents = StringIO.new
   # Set crc32c if both md5 and crc32c are not provided
   if md5.nil? && crc32c.nil?
     crc32c = Google::Cloud::Storage::File::Verifier.crc32c_for(StringIO.new("Hello world"))
