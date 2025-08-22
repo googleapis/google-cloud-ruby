@@ -21,7 +21,6 @@ require "helper"
 require "gapic/grpc/service_stub"
 
 require "google/cloud/chronicle/v1/reference_list_pb"
-require "google/cloud/chronicle/v1/reference_list_services_pb"
 require "google/cloud/chronicle/v1/reference_list_service"
 
 class ::Google::Cloud::Chronicle::V1::ReferenceListService::ClientTest < Minitest::Test
