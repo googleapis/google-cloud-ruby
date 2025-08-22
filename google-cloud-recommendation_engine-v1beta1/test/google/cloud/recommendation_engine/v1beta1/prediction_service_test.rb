@@ -21,7 +21,6 @@ require "helper"
 require "gapic/grpc/service_stub"
 
 require "google/cloud/recommendationengine/v1beta1/prediction_service_pb"
-require "google/cloud/recommendationengine/v1beta1/prediction_service_services_pb"
 require "google/cloud/recommendation_engine/v1beta1/prediction_service"
 
 class ::Google::Cloud::RecommendationEngine::V1beta1::PredictionService::ClientTest < Minitest::Test

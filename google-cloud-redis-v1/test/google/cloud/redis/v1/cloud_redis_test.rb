@@ -21,7 +21,6 @@ require "helper"
 require "gapic/grpc/service_stub"
 
 require "google/cloud/redis/v1/cloud_redis_pb"
-require "google/cloud/redis/v1/cloud_redis_services_pb"
 require "google/cloud/redis/v1/cloud_redis"
 
 class ::Google::Cloud::Redis::V1::CloudRedis::ClientTest < Minitest::Test

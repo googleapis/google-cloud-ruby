@@ -21,7 +21,6 @@ require "helper"
 require "gapic/grpc/service_stub"
 
 require "google/cloud/recommender/v1/recommender_service_pb"
-require "google/cloud/recommender/v1/recommender_service_services_pb"
 require "google/cloud/recommender/v1/recommender"
 
 class ::Google::Cloud::Recommender::V1::Recommender::ClientTest < Minitest::Test
