@@ -21,7 +21,6 @@ require "helper"
 require "gapic/grpc/service_stub"
 
 require "google/cloud/privilegedaccessmanager/v1/privilegedaccessmanager_pb"
-require "google/cloud/privilegedaccessmanager/v1/privilegedaccessmanager_services_pb"
 require "google/cloud/privileged_access_manager/v1/privileged_access_manager"
 
 class ::Google::Cloud::PrivilegedAccessManager::V1::PrivilegedAccessManager::ClientTest < Minitest::Test

@@ -21,7 +21,6 @@ require "helper"
 require "gapic/grpc/service_stub"
 
 require "google/cloud/phishingprotection/v1beta1/phishingprotection_pb"
-require "google/cloud/phishingprotection/v1beta1/phishingprotection_services_pb"
 require "google/cloud/phishing_protection/v1beta1/phishing_protection_service"
 
 class ::Google::Cloud::PhishingProtection::V1beta1::PhishingProtectionService::ClientTest < Minitest::Test

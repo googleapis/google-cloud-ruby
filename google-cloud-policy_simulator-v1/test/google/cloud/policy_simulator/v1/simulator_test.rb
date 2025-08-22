@@ -21,7 +21,6 @@ require "helper"
 require "gapic/grpc/service_stub"
 
 require "google/cloud/policysimulator/v1/simulator_pb"
-require "google/cloud/policysimulator/v1/simulator_services_pb"
 require "google/cloud/policy_simulator/v1/simulator"
 
 class ::Google::Cloud::PolicySimulator::V1::Simulator::ClientTest < Minitest::Test
