@@ -21,7 +21,6 @@ require "helper"
 require "gapic/grpc/service_stub"
 
 require "google/cloud/managedidentities/v1/managed_identities_service_pb"
-require "google/cloud/managedidentities/v1/managed_identities_service_services_pb"
 require "google/cloud/managed_identities/v1/managed_identities_service"
 
 class ::Google::Cloud::ManagedIdentities::V1::ManagedIdentitiesService::ClientTest < Minitest::Test

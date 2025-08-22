@@ -21,7 +21,6 @@ require "helper"
 require "gapic/grpc/service_stub"
 
 require "google/cloud/memcache/v1beta2/cloud_memcache_pb"
-require "google/cloud/memcache/v1beta2/cloud_memcache_services_pb"
 require "google/cloud/memcache/v1beta2/cloud_memcache"
 
 class ::Google::Cloud::Memcache::V1beta2::CloudMemcache::ClientTest < Minitest::Test
