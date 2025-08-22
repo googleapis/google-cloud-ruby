@@ -21,7 +21,6 @@ require "helper"
 require "gapic/grpc/service_stub"
 
 require "google/cloud/networkmanagement/v1/reachability_pb"
-require "google/cloud/networkmanagement/v1/reachability_services_pb"
 require "google/cloud/network_management/v1/reachability_service"
 
 class ::Google::Cloud::NetworkManagement::V1::ReachabilityService::ClientTest < Minitest::Test
