@@ -21,7 +21,6 @@ require "helper"
 require "gapic/grpc/service_stub"
 
 require "google/cloud/networkservices/v1/dep_pb"
-require "google/cloud/networkservices/v1/dep_services_pb"
 require "google/cloud/network_services/v1/dep_service"
 
 class ::Google::Cloud::NetworkServices::V1::DepService::ClientTest < Minitest::Test

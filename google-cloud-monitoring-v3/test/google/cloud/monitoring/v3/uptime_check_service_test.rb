@@ -21,7 +21,6 @@ require "helper"
 require "gapic/grpc/service_stub"
 
 require "google/monitoring/v3/uptime_service_pb"
-require "google/monitoring/v3/uptime_service_services_pb"
 require "google/cloud/monitoring/v3/uptime_check_service"
 
 class ::Google::Cloud::Monitoring::V3::UptimeCheckService::ClientTest < Minitest::Test

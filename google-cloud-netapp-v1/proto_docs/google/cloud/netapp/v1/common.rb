@@ -22,7 +22,7 @@ module Google
     module NetApp
       module V1
         # Metadata for a given
-        # Location.
+        # [google.cloud.location.Location][google.cloud.location.Location].
         # @!attribute [r] supported_service_levels
         #   @return [::Array<::Google::Cloud::NetApp::V1::ServiceLevel>]
         #     Output only. Supported service levels in a location.

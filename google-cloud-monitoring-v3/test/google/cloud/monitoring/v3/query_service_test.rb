@@ -21,7 +21,6 @@ require "helper"
 require "gapic/grpc/service_stub"
 
 require "google/monitoring/v3/query_service_pb"
-require "google/monitoring/v3/query_service_services_pb"
 require "google/cloud/monitoring/v3/query_service"
 
 class ::Google::Cloud::Monitoring::V3::QueryService::ClientTest < Minitest::Test
