@@ -21,7 +21,6 @@ require "helper"
 require "gapic/grpc/service_stub"
 
 require "google/api/cloudquotas/v1beta/cloudquotas_pb"
-require "google/api/cloudquotas/v1beta/cloudquotas_services_pb"
 require "google/cloud/cloud_quotas/v1beta/cloud_quotas"
 
 class ::Google::Cloud::CloudQuotas::V1beta::CloudQuotas::ClientTest < Minitest::Test

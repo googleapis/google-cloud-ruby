@@ -21,7 +21,6 @@ require "helper"
 require "gapic/grpc/service_stub"
 
 require "google/dataflow/v1beta3/jobs_pb"
-require "google/dataflow/v1beta3/jobs_services_pb"
 require "google/cloud/dataflow/v1beta3/jobs"
 
 class ::Google::Cloud::Dataflow::V1beta3::Jobs::ClientTest < Minitest::Test

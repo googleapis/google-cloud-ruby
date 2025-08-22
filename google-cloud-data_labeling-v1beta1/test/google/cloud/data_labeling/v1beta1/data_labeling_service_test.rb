@@ -21,7 +21,6 @@ require "helper"
 require "gapic/grpc/service_stub"
 
 require "google/cloud/datalabeling/v1beta1/data_labeling_service_pb"
-require "google/cloud/datalabeling/v1beta1/data_labeling_service_services_pb"
 require "google/cloud/data_labeling/v1beta1/data_labeling_service"
 
 class ::Google::Cloud::DataLabeling::V1beta1::DataLabelingService::ClientTest < Minitest::Test
