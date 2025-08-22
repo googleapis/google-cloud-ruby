@@ -21,7 +21,6 @@ require "helper"
 require "gapic/grpc/service_stub"
 
 require "google/cloud/dataproc/v1/workflow_templates_pb"
-require "google/cloud/dataproc/v1/workflow_templates_services_pb"
 require "google/cloud/dataproc/v1/workflow_template_service"
 
 class ::Google::Cloud::Dataproc::V1::WorkflowTemplateService::ClientTest < Minitest::Test
