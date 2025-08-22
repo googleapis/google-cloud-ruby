@@ -1748,6 +1748,69 @@ module Google
       end
 
       ##
+      # Create a new client object for InterconnectAttachmentGroups.
+      #
+      # By default, this returns an instance of
+      # [Google::Cloud::Compute::V1::InterconnectAttachmentGroups::Rest::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-compute-v1/latest/Google-Cloud-Compute-V1-InterconnectAttachmentGroups-Rest-Client)
+      # for a REST client for version V1 of the API.
+      # However, you can specify a different API version by passing it in the
+      # `version` parameter. If the InterconnectAttachmentGroups service is
+      # supported by that API version, and the corresponding gem is available, the
+      # appropriate versioned client will be returned.
+      #
+      # Raises an exception if the currently installed versioned client gem for the
+      # given API version does not support the InterconnectAttachmentGroups service.
+      # You can determine whether the method will succeed by calling
+      # {Google::Cloud::Compute.interconnect_attachment_groups_available?}.
+      #
+      # ## About InterconnectAttachmentGroups
+      #
+      # The InterconnectAttachmentGroups API.
+      #
+      # @param version [::String, ::Symbol] The API version to connect to. Optional.
+      #   Defaults to `:v1`.
+      # @return [::Object] A client object for the specified version.
+      #
+      def self.interconnect_attachment_groups version: :v1, &block
+        require "google/cloud/compute/#{version.to_s.downcase}"
+
+        package_name = Google::Cloud::Compute
+                       .constants
+                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                       .first
+        service_module = Google::Cloud::Compute.const_get(package_name).const_get(:InterconnectAttachmentGroups)
+        service_module.const_get(:Rest).const_get(:Client).new(&block)
+      end
+
+      ##
+      # Determines whether the InterconnectAttachmentGroups service is supported by the current client.
+      # If true, you can retrieve a client object by calling {Google::Cloud::Compute.interconnect_attachment_groups}.
+      # If false, that method will raise an exception. This could happen if the given
+      # API version does not exist or does not support the InterconnectAttachmentGroups service,
+      # or if the versioned client gem needs an update to support the InterconnectAttachmentGroups service.
+      #
+      # @param version [::String, ::Symbol] The API version to connect to. Optional.
+      #   Defaults to `:v1`.
+      # @return [boolean] Whether the service is available.
+      #
+      def self.interconnect_attachment_groups_available? version: :v1
+        require "google/cloud/compute/#{version.to_s.downcase}"
+        package_name = Google::Cloud::Compute
+                       .constants
+                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                       .first
+        return false unless package_name
+        service_module = Google::Cloud::Compute.const_get package_name
+        return false unless service_module.const_defined? :InterconnectAttachmentGroups
+        service_module = service_module.const_get :InterconnectAttachmentGroups
+        return false unless service_module.const_defined? :Rest
+        service_module = service_module.const_get :Rest
+        service_module.const_defined? :Client
+      rescue ::LoadError
+        false
+      end
+
+      ##
       # Create a new client object for InterconnectAttachments.
       #
       # By default, this returns an instance of
@@ -1803,6 +1866,69 @@ module Google
         service_module = Google::Cloud::Compute.const_get package_name
         return false unless service_module.const_defined? :InterconnectAttachments
         service_module = service_module.const_get :InterconnectAttachments
+        return false unless service_module.const_defined? :Rest
+        service_module = service_module.const_get :Rest
+        service_module.const_defined? :Client
+      rescue ::LoadError
+        false
+      end
+
+      ##
+      # Create a new client object for InterconnectGroups.
+      #
+      # By default, this returns an instance of
+      # [Google::Cloud::Compute::V1::InterconnectGroups::Rest::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-compute-v1/latest/Google-Cloud-Compute-V1-InterconnectGroups-Rest-Client)
+      # for a REST client for version V1 of the API.
+      # However, you can specify a different API version by passing it in the
+      # `version` parameter. If the InterconnectGroups service is
+      # supported by that API version, and the corresponding gem is available, the
+      # appropriate versioned client will be returned.
+      #
+      # Raises an exception if the currently installed versioned client gem for the
+      # given API version does not support the InterconnectGroups service.
+      # You can determine whether the method will succeed by calling
+      # {Google::Cloud::Compute.interconnect_groups_available?}.
+      #
+      # ## About InterconnectGroups
+      #
+      # The InterconnectGroups API.
+      #
+      # @param version [::String, ::Symbol] The API version to connect to. Optional.
+      #   Defaults to `:v1`.
+      # @return [::Object] A client object for the specified version.
+      #
+      def self.interconnect_groups version: :v1, &block
+        require "google/cloud/compute/#{version.to_s.downcase}"
+
+        package_name = Google::Cloud::Compute
+                       .constants
+                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                       .first
+        service_module = Google::Cloud::Compute.const_get(package_name).const_get(:InterconnectGroups)
+        service_module.const_get(:Rest).const_get(:Client).new(&block)
+      end
+
+      ##
+      # Determines whether the InterconnectGroups service is supported by the current client.
+      # If true, you can retrieve a client object by calling {Google::Cloud::Compute.interconnect_groups}.
+      # If false, that method will raise an exception. This could happen if the given
+      # API version does not exist or does not support the InterconnectGroups service,
+      # or if the versioned client gem needs an update to support the InterconnectGroups service.
+      #
+      # @param version [::String, ::Symbol] The API version to connect to. Optional.
+      #   Defaults to `:v1`.
+      # @return [boolean] Whether the service is available.
+      #
+      def self.interconnect_groups_available? version: :v1
+        require "google/cloud/compute/#{version.to_s.downcase}"
+        package_name = Google::Cloud::Compute
+                       .constants
+                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                       .first
+        return false unless package_name
+        service_module = Google::Cloud::Compute.const_get package_name
+        return false unless service_module.const_defined? :InterconnectGroups
+        service_module = service_module.const_get :InterconnectGroups
         return false unless service_module.const_defined? :Rest
         service_module = service_module.const_get :Rest
         service_module.const_defined? :Client
@@ -4701,6 +4827,69 @@ module Google
         service_module = Google::Cloud::Compute.const_get package_name
         return false unless service_module.const_defined? :ReservationBlocks
         service_module = service_module.const_get :ReservationBlocks
+        return false unless service_module.const_defined? :Rest
+        service_module = service_module.const_get :Rest
+        service_module.const_defined? :Client
+      rescue ::LoadError
+        false
+      end
+
+      ##
+      # Create a new client object for ReservationSubBlocks.
+      #
+      # By default, this returns an instance of
+      # [Google::Cloud::Compute::V1::ReservationSubBlocks::Rest::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-compute-v1/latest/Google-Cloud-Compute-V1-ReservationSubBlocks-Rest-Client)
+      # for a REST client for version V1 of the API.
+      # However, you can specify a different API version by passing it in the
+      # `version` parameter. If the ReservationSubBlocks service is
+      # supported by that API version, and the corresponding gem is available, the
+      # appropriate versioned client will be returned.
+      #
+      # Raises an exception if the currently installed versioned client gem for the
+      # given API version does not support the ReservationSubBlocks service.
+      # You can determine whether the method will succeed by calling
+      # {Google::Cloud::Compute.reservation_sub_blocks_available?}.
+      #
+      # ## About ReservationSubBlocks
+      #
+      # The ReservationSubBlocks API.
+      #
+      # @param version [::String, ::Symbol] The API version to connect to. Optional.
+      #   Defaults to `:v1`.
+      # @return [::Object] A client object for the specified version.
+      #
+      def self.reservation_sub_blocks version: :v1, &block
+        require "google/cloud/compute/#{version.to_s.downcase}"
+
+        package_name = Google::Cloud::Compute
+                       .constants
+                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                       .first
+        service_module = Google::Cloud::Compute.const_get(package_name).const_get(:ReservationSubBlocks)
+        service_module.const_get(:Rest).const_get(:Client).new(&block)
+      end
+
+      ##
+      # Determines whether the ReservationSubBlocks service is supported by the current client.
+      # If true, you can retrieve a client object by calling {Google::Cloud::Compute.reservation_sub_blocks}.
+      # If false, that method will raise an exception. This could happen if the given
+      # API version does not exist or does not support the ReservationSubBlocks service,
+      # or if the versioned client gem needs an update to support the ReservationSubBlocks service.
+      #
+      # @param version [::String, ::Symbol] The API version to connect to. Optional.
+      #   Defaults to `:v1`.
+      # @return [boolean] Whether the service is available.
+      #
+      def self.reservation_sub_blocks_available? version: :v1
+        require "google/cloud/compute/#{version.to_s.downcase}"
+        package_name = Google::Cloud::Compute
+                       .constants
+                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                       .first
+        return false unless package_name
+        service_module = Google::Cloud::Compute.const_get package_name
+        return false unless service_module.const_defined? :ReservationSubBlocks
+        service_module = service_module.const_get :ReservationSubBlocks
         return false unless service_module.const_defined? :Rest
         service_module = service_module.const_get :Rest
         service_module.const_defined? :Client
