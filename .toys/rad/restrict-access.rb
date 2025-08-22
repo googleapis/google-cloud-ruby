@@ -35,7 +35,7 @@ def run
   end
 end
 
-def each_gem &block
+def each_gem(&)
   omit_list = [
     "gcloud",
     "google-cloud",
@@ -53,7 +53,7 @@ def each_gem &block
     name = File.dirname path
     yield name unless omit_list.include? name
   end
-  extra_list.each(&block)
+  extra_list.each(&)
 end
 
 def piper_client_dir

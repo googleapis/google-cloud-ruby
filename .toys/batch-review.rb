@@ -31,7 +31,7 @@ batch_reviewer = Yoshi::BatchReviewer.new "googleapis/google-cloud-ruby"
 batch_reviewer.define_preset "releases", based_on: :basic_releases do |preset|
   preset.message << :pr_title_number
   preset.diff_expectations.expect name: "snippet metadata" do |expect|
-    expect.change_type(:changed).path_pattern(/\/snippets\/snippet_metadata_[\w\.]+\.json$/)
+    expect.change_type(:changed).path_pattern(/\/snippets\/snippet_metadata_[\w.]+\.json$/)
   end
   preset.diff_expectations.expect name: "repo metadata" do |expect|
     expect.change_type(:changed).path_pattern(/\/\.repo-metadata\.json$/)
