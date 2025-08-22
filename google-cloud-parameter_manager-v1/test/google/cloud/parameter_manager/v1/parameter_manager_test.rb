@@ -21,7 +21,6 @@ require "helper"
 require "gapic/grpc/service_stub"
 
 require "google/cloud/parametermanager/v1/service_pb"
-require "google/cloud/parametermanager/v1/service_services_pb"
 require "google/cloud/parameter_manager/v1/parameter_manager"
 
 class ::Google::Cloud::ParameterManager::V1::ParameterManager::ClientTest < Minitest::Test

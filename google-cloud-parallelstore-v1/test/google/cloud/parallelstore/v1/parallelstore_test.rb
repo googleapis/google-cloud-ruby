@@ -21,7 +21,6 @@ require "helper"
 require "gapic/grpc/service_stub"
 
 require "google/cloud/parallelstore/v1/parallelstore_pb"
-require "google/cloud/parallelstore/v1/parallelstore_services_pb"
 require "google/cloud/parallelstore/v1/parallelstore"
 
 class ::Google::Cloud::Parallelstore::V1::Parallelstore::ClientTest < Minitest::Test
