@@ -21,7 +21,6 @@ require "helper"
 require "gapic/grpc/service_stub"
 
 require "google/datastore/v1/datastore_pb"
-require "google/datastore/v1/datastore_services_pb"
 require "google/cloud/datastore/v1/datastore"
 
 class ::Google::Cloud::Datastore::V1::Datastore::ClientTest < Minitest::Test

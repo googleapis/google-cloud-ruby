@@ -21,7 +21,6 @@ require "helper"
 require "gapic/grpc/service_stub"
 
 require "google/cloud/dialogflow/v2/answer_record_pb"
-require "google/cloud/dialogflow/v2/answer_record_services_pb"
 require "google/cloud/dialogflow/v2/answer_records"
 
 class ::Google::Cloud::Dialogflow::V2::AnswerRecords::ClientTest < Minitest::Test

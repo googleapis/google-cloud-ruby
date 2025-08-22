@@ -21,7 +21,6 @@ require "helper"
 require "gapic/grpc/service_stub"
 
 require "google/cloud/discoveryengine/v1/cmek_config_service_pb"
-require "google/cloud/discoveryengine/v1/cmek_config_service_services_pb"
 require "google/cloud/discovery_engine/v1/cmek_config_service"
 
 class ::Google::Cloud::DiscoveryEngine::V1::CmekConfigService::ClientTest < Minitest::Test
