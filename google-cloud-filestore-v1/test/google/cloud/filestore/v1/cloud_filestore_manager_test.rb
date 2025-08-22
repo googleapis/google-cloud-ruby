@@ -21,7 +21,6 @@ require "helper"
 require "gapic/grpc/service_stub"
 
 require "google/cloud/filestore/v1/cloud_filestore_service_pb"
-require "google/cloud/filestore/v1/cloud_filestore_service_services_pb"
 require "google/cloud/filestore/v1/cloud_filestore_manager"
 
 class ::Google::Cloud::Filestore::V1::CloudFilestoreManager::ClientTest < Minitest::Test
