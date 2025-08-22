@@ -21,7 +21,6 @@ require "helper"
 require "gapic/grpc/service_stub"
 
 require "google/cloud/financialservices/v1/service_pb"
-require "google/cloud/financialservices/v1/service_services_pb"
 require "google/cloud/financial_services/v1/aml"
 
 class ::Google::Cloud::FinancialServices::V1::AML::ClientTest < Minitest::Test
