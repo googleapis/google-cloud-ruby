@@ -21,7 +21,6 @@ require "helper"
 require "gapic/grpc/service_stub"
 
 require "google/cloud/datafusion/v1/datafusion_pb"
-require "google/cloud/datafusion/v1/datafusion_services_pb"
 require "google/cloud/data_fusion/v1/data_fusion"
 
 class ::Google::Cloud::DataFusion::V1::DataFusion::ClientTest < Minitest::Test

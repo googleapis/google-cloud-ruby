@@ -21,7 +21,6 @@ require "helper"
 require "gapic/grpc/service_stub"
 
 require "google/cloud/dataplex/v1/data_taxonomy_pb"
-require "google/cloud/dataplex/v1/data_taxonomy_services_pb"
 require "google/cloud/dataplex/v1/data_taxonomy_service"
 
 class ::Google::Cloud::Dataplex::V1::DataTaxonomyService::ClientTest < Minitest::Test
