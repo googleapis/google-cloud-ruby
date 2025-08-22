@@ -21,7 +21,6 @@ require "helper"
 require "gapic/grpc/service_stub"
 
 require "google/cloud/dataproc/v1/node_groups_pb"
-require "google/cloud/dataproc/v1/node_groups_services_pb"
 require "google/cloud/dataproc/v1/node_group_controller"
 
 class ::Google::Cloud::Dataproc::V1::NodeGroupController::ClientTest < Minitest::Test

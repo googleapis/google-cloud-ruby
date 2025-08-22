@@ -21,7 +21,6 @@ require "helper"
 require "gapic/grpc/service_stub"
 
 require "google/cloud/dataproc/v1/autoscaling_policies_pb"
-require "google/cloud/dataproc/v1/autoscaling_policies_services_pb"
 require "google/cloud/dataproc/v1/autoscaling_policy_service"
 
 class ::Google::Cloud::Dataproc::V1::AutoscalingPolicyService::ClientTest < Minitest::Test

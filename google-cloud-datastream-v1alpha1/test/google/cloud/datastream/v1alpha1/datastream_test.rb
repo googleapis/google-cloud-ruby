@@ -21,7 +21,6 @@ require "helper"
 require "gapic/grpc/service_stub"
 
 require "google/cloud/datastream/v1alpha1/datastream_pb"
-require "google/cloud/datastream/v1alpha1/datastream_services_pb"
 require "google/cloud/datastream/v1alpha1/datastream"
 
 class ::Google::Cloud::Datastream::V1alpha1::Datastream::ClientTest < Minitest::Test

@@ -21,7 +21,6 @@ require "helper"
 require "gapic/grpc/service_stub"
 
 require "google/cloud/edgenetwork/v1/service_pb"
-require "google/cloud/edgenetwork/v1/service_services_pb"
 require "google/cloud/edge_network/v1/edge_network"
 
 class ::Google::Cloud::EdgeNetwork::V1::EdgeNetwork::ClientTest < Minitest::Test
