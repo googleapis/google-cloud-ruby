@@ -21,7 +21,6 @@ require "helper"
 require "gapic/grpc/service_stub"
 
 require "google/cloud/scheduler/v1/cloudscheduler_pb"
-require "google/cloud/scheduler/v1/cloudscheduler_services_pb"
 require "google/cloud/scheduler/v1/cloud_scheduler"
 
 class ::Google::Cloud::Scheduler::V1::CloudScheduler::ClientTest < Minitest::Test

@@ -21,7 +21,6 @@ require "helper"
 require "gapic/grpc/service_stub"
 
 require "google/api/servicecontrol/v1/quota_controller_pb"
-require "google/api/servicecontrol/v1/quota_controller_services_pb"
 require "google/cloud/service_control/v1/quota_controller"
 
 class ::Google::Cloud::ServiceControl::V1::QuotaController::ClientTest < Minitest::Test

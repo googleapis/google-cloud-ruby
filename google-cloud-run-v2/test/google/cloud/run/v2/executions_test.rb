@@ -21,7 +21,6 @@ require "helper"
 require "gapic/grpc/service_stub"
 
 require "google/cloud/run/v2/execution_pb"
-require "google/cloud/run/v2/execution_services_pb"
 require "google/cloud/run/v2/executions"
 
 class ::Google::Cloud::Run::V2::Executions::ClientTest < Minitest::Test
