@@ -21,7 +21,6 @@ require "helper"
 require "gapic/grpc/service_stub"
 
 require "google/cloud/visionai/v1/health_service_pb"
-require "google/cloud/visionai/v1/health_service_services_pb"
 require "google/cloud/vision_ai/v1/health_check_service"
 
 class ::Google::Cloud::VisionAI::V1::HealthCheckService::ClientTest < Minitest::Test

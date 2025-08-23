@@ -21,7 +21,6 @@ require "helper"
 require "gapic/grpc/service_stub"
 
 require "google/cloud/telcoautomation/v1/telcoautomation_pb"
-require "google/cloud/telcoautomation/v1/telcoautomation_services_pb"
 require "google/cloud/telco_automation/v1/telco_automation"
 
 class ::Google::Cloud::TelcoAutomation::V1::TelcoAutomation::ClientTest < Minitest::Test

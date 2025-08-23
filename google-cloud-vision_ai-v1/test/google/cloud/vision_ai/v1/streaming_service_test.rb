@@ -21,7 +21,6 @@ require "helper"
 require "gapic/grpc/service_stub"
 
 require "google/cloud/visionai/v1/streaming_service_pb"
-require "google/cloud/visionai/v1/streaming_service_services_pb"
 require "google/cloud/vision_ai/v1/streaming_service"
 
 class ::Google::Cloud::VisionAI::V1::StreamingService::ClientTest < Minitest::Test
