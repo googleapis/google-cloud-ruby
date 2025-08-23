@@ -21,7 +21,6 @@ require "helper"
 require "gapic/grpc/service_stub"
 
 require "google/cloud/video/transcoder/v1/services_pb"
-require "google/cloud/video/transcoder/v1/services_services_pb"
 require "google/cloud/video/transcoder/v1/transcoder_service"
 
 class ::Google::Cloud::Video::Transcoder::V1::TranscoderService::ClientTest < Minitest::Test

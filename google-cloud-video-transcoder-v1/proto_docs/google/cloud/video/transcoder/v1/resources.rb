@@ -248,6 +248,9 @@ module Google
           # @!attribute [rw] preprocessing_config
           #   @return [::Google::Cloud::Video::Transcoder::V1::PreprocessingConfig]
           #     Preprocessing configurations.
+          # @!attribute [rw] attributes
+          #   @return [::Google::Cloud::Video::Transcoder::V1::InputAttributes]
+          #     Optional. Input Attributes.
           class Input
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -922,6 +925,41 @@ module Google
                 extend ::Google::Protobuf::MessageExts::ClassMethods
               end
             end
+          end
+
+          # Track definition for the input asset.
+          # @!attribute [rw] input_track
+          #   @return [::Integer]
+          #     The input track.
+          # @!attribute [rw] languages
+          #   @return [::Array<::String>]
+          #     Optional. A list of languages spoken in the input asset, represented by a
+          #     BCP 47 language code, such as "en-US" or "sr-Latn". For more information,
+          #     see https://www.unicode.org/reports/tr35/#Unicode_locale_identifier.
+          # @!attribute [rw] detect_languages
+          #   @return [::Boolean]
+          #     Optional. Whether to automatically detect the languages present in the
+          #     track. If true, the system will attempt to identify all the languages
+          #     present in the track and populate the languages field.
+          # @!attribute [r] detected_languages
+          #   @return [::Array<::String>]
+          #     Output only. A list of languages detected in the input asset, represented
+          #     by a BCP 47 language code, such as "en-US" or "sr-Latn". For more
+          #     information, see
+          #     https://www.unicode.org/reports/tr35/#Unicode_locale_identifier.
+          #     This field is only populated if the detect_languages field is set to true.
+          class TrackDefinition
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Input attributes that provide additional information about the input asset.
+          # @!attribute [rw] track_definitions
+          #   @return [::Array<::Google::Cloud::Video::Transcoder::V1::TrackDefinition>]
+          #     Optional. A list of track definitions for the input asset.
+          class InputAttributes
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
           end
 
           # Video stream resource.
