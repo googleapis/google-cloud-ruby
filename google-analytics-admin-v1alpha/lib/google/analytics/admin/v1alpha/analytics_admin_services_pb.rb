@@ -332,14 +332,6 @@ module Google
             rpc :UpdateChannelGroup, ::Google::Analytics::Admin::V1alpha::UpdateChannelGroupRequest, ::Google::Analytics::Admin::V1alpha::ChannelGroup
             # Deletes a ChannelGroup on a property.
             rpc :DeleteChannelGroup, ::Google::Analytics::Admin::V1alpha::DeleteChannelGroupRequest, ::Google::Protobuf::Empty
-            # Sets the opt out status for the automated GA4 setup process for a UA
-            # property.
-            # Note: this has no effect on GA4 property.
-            rpc :SetAutomatedGa4ConfigurationOptOut, ::Google::Analytics::Admin::V1alpha::SetAutomatedGa4ConfigurationOptOutRequest, ::Google::Analytics::Admin::V1alpha::SetAutomatedGa4ConfigurationOptOutResponse
-            # Fetches the opt out status for the automated GA4 setup process for a UA
-            # property.
-            # Note: this has no effect on GA4 property.
-            rpc :FetchAutomatedGa4ConfigurationOptOut, ::Google::Analytics::Admin::V1alpha::FetchAutomatedGa4ConfigurationOptOutRequest, ::Google::Analytics::Admin::V1alpha::FetchAutomatedGa4ConfigurationOptOutResponse
             # Creates a BigQueryLink.
             rpc :CreateBigQueryLink, ::Google::Analytics::Admin::V1alpha::CreateBigQueryLinkRequest, ::Google::Analytics::Admin::V1alpha::BigQueryLink
             # Lookup for a single BigQuery Link.
@@ -358,20 +350,6 @@ module Google
             # Note that the stream must enable enhanced measurement for these settings to
             # take effect.
             rpc :UpdateEnhancedMeasurementSettings, ::Google::Analytics::Admin::V1alpha::UpdateEnhancedMeasurementSettingsRequest, ::Google::Analytics::Admin::V1alpha::EnhancedMeasurementSettings
-            # Creates a connected site tag for a Universal Analytics property. You can
-            # create a maximum of 20 connected site tags per property.
-            # Note: This API cannot be used on GA4 properties.
-            rpc :CreateConnectedSiteTag, ::Google::Analytics::Admin::V1alpha::CreateConnectedSiteTagRequest, ::Google::Analytics::Admin::V1alpha::CreateConnectedSiteTagResponse
-            # Deletes a connected site tag for a Universal Analytics property.
-            # Note: this has no effect on GA4 properties.
-            rpc :DeleteConnectedSiteTag, ::Google::Analytics::Admin::V1alpha::DeleteConnectedSiteTagRequest, ::Google::Protobuf::Empty
-            # Lists the connected site tags for a Universal Analytics property. A maximum
-            # of 20 connected site tags will be returned. Note: this has no effect on GA4
-            # property.
-            rpc :ListConnectedSiteTags, ::Google::Analytics::Admin::V1alpha::ListConnectedSiteTagsRequest, ::Google::Analytics::Admin::V1alpha::ListConnectedSiteTagsResponse
-            # Given a specified UA property, looks up the GA4 property connected to it.
-            # Note: this cannot be used with GA4 properties.
-            rpc :FetchConnectedGa4Property, ::Google::Analytics::Admin::V1alpha::FetchConnectedGa4PropertyRequest, ::Google::Analytics::Admin::V1alpha::FetchConnectedGa4PropertyResponse
             # Looks up a single AdSenseLink.
             rpc :GetAdSenseLink, ::Google::Analytics::Admin::V1alpha::GetAdSenseLinkRequest, ::Google::Analytics::Admin::V1alpha::AdSenseLink
             # Creates an AdSenseLink.
@@ -459,12 +437,14 @@ module Google
             rpc :DeleteReportingDataAnnotation, ::Google::Analytics::Admin::V1alpha::DeleteReportingDataAnnotationRequest, ::Google::Protobuf::Empty
             # Submits a request for user deletion for a property.
             rpc :SubmitUserDeletion, ::Google::Analytics::Admin::V1alpha::SubmitUserDeletionRequest, ::Google::Analytics::Admin::V1alpha::SubmitUserDeletionResponse
-            # List all Subproperty Sync Configs on a property.
+            # List all `SubpropertySyncConfig` resources for a property.
             rpc :ListSubpropertySyncConfigs, ::Google::Analytics::Admin::V1alpha::ListSubpropertySyncConfigsRequest, ::Google::Analytics::Admin::V1alpha::ListSubpropertySyncConfigsResponse
-            # Updates a Subproperty Sync Config.
+            # Updates a `SubpropertySyncConfig`.
             rpc :UpdateSubpropertySyncConfig, ::Google::Analytics::Admin::V1alpha::UpdateSubpropertySyncConfigRequest, ::Google::Analytics::Admin::V1alpha::SubpropertySyncConfig
-            # Lookup for a single Subproperty Sync Config.
+            # Lookup for a single `SubpropertySyncConfig`.
             rpc :GetSubpropertySyncConfig, ::Google::Analytics::Admin::V1alpha::GetSubpropertySyncConfigRequest, ::Google::Analytics::Admin::V1alpha::SubpropertySyncConfig
+            # Returns the singleton data retention settings for this property.
+            rpc :GetReportingIdentitySettings, ::Google::Analytics::Admin::V1alpha::GetReportingIdentitySettingsRequest, ::Google::Analytics::Admin::V1alpha::ReportingIdentitySettings
           end
 
           Stub = Service.rpc_stub_class

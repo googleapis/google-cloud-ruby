@@ -2079,50 +2079,6 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Request for setting the opt out status for the automated GA4 setup process.
-        # @!attribute [rw] property
-        #   @return [::String]
-        #     Required. The UA property to set the opt out status. Note this request uses
-        #     the internal property ID, not the tracking ID of the form UA-XXXXXX-YY.
-        #     Format: properties/\\{internalWebPropertyId}
-        #     Example: properties/1234
-        # @!attribute [rw] opt_out
-        #   @return [::Boolean]
-        #     The status to set.
-        class SetAutomatedGa4ConfigurationOptOutRequest
-          include ::Google::Protobuf::MessageExts
-          extend ::Google::Protobuf::MessageExts::ClassMethods
-        end
-
-        # Response message for setting the opt out status for the automated GA4 setup
-        # process.
-        class SetAutomatedGa4ConfigurationOptOutResponse
-          include ::Google::Protobuf::MessageExts
-          extend ::Google::Protobuf::MessageExts::ClassMethods
-        end
-
-        # Request for fetching the opt out status for the automated GA4 setup process.
-        # @!attribute [rw] property
-        #   @return [::String]
-        #     Required. The UA property to get the opt out status. Note this request uses
-        #     the internal property ID, not the tracking ID of the form UA-XXXXXX-YY.
-        #     Format: properties/\\{internalWebPropertyId}
-        #     Example: properties/1234
-        class FetchAutomatedGa4ConfigurationOptOutRequest
-          include ::Google::Protobuf::MessageExts
-          extend ::Google::Protobuf::MessageExts::ClassMethods
-        end
-
-        # Response message for fetching the opt out status for the automated GA4 setup
-        # process.
-        # @!attribute [rw] opt_out
-        #   @return [::Boolean]
-        #     The opt out status for the UA property.
-        class FetchAutomatedGa4ConfigurationOptOutResponse
-          include ::Google::Protobuf::MessageExts
-          extend ::Google::Protobuf::MessageExts::ClassMethods
-        end
-
         # Request message for CreateBigQueryLink RPC.
         # @!attribute [rw] parent
         #   @return [::String]
@@ -2264,65 +2220,6 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Request message for CreateConnectedSiteTag RPC.
-        # @!attribute [rw] property
-        #   @return [::String]
-        #     The Universal Analytics property to create connected site tags for.
-        #     This API does not support GA4 properties.
-        #     Format: properties/\\{universalAnalyticsPropertyId}
-        #     Example: properties/1234
-        # @!attribute [rw] connected_site_tag
-        #   @return [::Google::Analytics::Admin::V1alpha::ConnectedSiteTag]
-        #     Required. The tag to add to the Universal Analytics property
-        class CreateConnectedSiteTagRequest
-          include ::Google::Protobuf::MessageExts
-          extend ::Google::Protobuf::MessageExts::ClassMethods
-        end
-
-        # Response message for CreateConnectedSiteTag RPC.
-        class CreateConnectedSiteTagResponse
-          include ::Google::Protobuf::MessageExts
-          extend ::Google::Protobuf::MessageExts::ClassMethods
-        end
-
-        # Request message for DeleteConnectedSiteTag RPC.
-        # @!attribute [rw] property
-        #   @return [::String]
-        #     The Universal Analytics property to delete connected site tags for.
-        #     This API does not support GA4 properties.
-        #     Format: properties/\\{universalAnalyticsPropertyId}
-        #     Example: properties/1234
-        # @!attribute [rw] tag_id
-        #   @return [::String]
-        #     Tag ID to forward events to. Also known as the Measurement ID, or the
-        #     "G-ID"  (For example: G-12345).
-        class DeleteConnectedSiteTagRequest
-          include ::Google::Protobuf::MessageExts
-          extend ::Google::Protobuf::MessageExts::ClassMethods
-        end
-
-        # Request message for ListConnectedSiteTags RPC.
-        # @!attribute [rw] property
-        #   @return [::String]
-        #     The Universal Analytics property to fetch connected site tags for.
-        #     This does not work on GA4 properties. A maximum of 20 connected site tags
-        #     will be returned.
-        #     Example Format: `properties/1234`
-        class ListConnectedSiteTagsRequest
-          include ::Google::Protobuf::MessageExts
-          extend ::Google::Protobuf::MessageExts::ClassMethods
-        end
-
-        # Response message for ListConnectedSiteTags RPC.
-        # @!attribute [rw] connected_site_tags
-        #   @return [::Array<::Google::Analytics::Admin::V1alpha::ConnectedSiteTag>]
-        #     The site tags for the Universal Analytics property. A maximum of 20
-        #     connected site tags will be returned.
-        class ListConnectedSiteTagsResponse
-          include ::Google::Protobuf::MessageExts
-          extend ::Google::Protobuf::MessageExts::ClassMethods
-        end
-
         # Request message to be passed to CreateAdSenseLink method.
         # @!attribute [rw] parent
         #   @return [::String]
@@ -2391,31 +2288,6 @@ module Google
         #     A token, which can be sent as `page_token` to retrieve the next page.
         #     If this field is omitted, there are no subsequent pages.
         class ListAdSenseLinksResponse
-          include ::Google::Protobuf::MessageExts
-          extend ::Google::Protobuf::MessageExts::ClassMethods
-        end
-
-        # Request for looking up GA4 property connected to a UA property.
-        # @!attribute [rw] property
-        #   @return [::String]
-        #     Required. The UA property for which to look up the connected GA4 property.
-        #     Note this request uses the
-        #     internal property ID, not the tracking ID of the form UA-XXXXXX-YY.
-        #     Format: properties/\\{internal_web_property_id}
-        #     Example: properties/1234
-        class FetchConnectedGa4PropertyRequest
-          include ::Google::Protobuf::MessageExts
-          extend ::Google::Protobuf::MessageExts::ClassMethods
-        end
-
-        # Response for looking up GA4 property connected to a UA property.
-        # @!attribute [rw] property
-        #   @return [::String]
-        #     The GA4 property connected to the UA property. An empty string is returned
-        #     when there is no connected GA4 property.
-        #     Format: properties/\\{property_id}
-        #     Example: properties/1234
-        class FetchConnectedGa4PropertyResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
@@ -2972,8 +2844,20 @@ module Google
         #     Note: The following fields are mutually exclusive: `app_instance_id`, `user_id`, `client_id`, `user_provided_data`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] user_provided_data
         #   @return [::String]
-        #     The un-hashed, unencrypted, [user-provided
-        #     data](https://support.google.com/analytics/answer/14077171).
+        #     [User-provided
+        #     data](https://support.google.com/analytics/answer/14077171).  May contain
+        #     either one email address or one phone number.
+        #
+        #     Email addresses should be normalized as such:
+        #
+        #     * lowercase
+        #     * remove periods before @ for gmail.com/googlemail.com addresses
+        #     * remove all spaces
+        #
+        #     Phone numbers should be normalized as such:
+        #
+        #     * remove all non digit characters
+        #     * add + prefix
         #
         #     Note: The following fields are mutually exclusive: `user_provided_data`, `user_id`, `client_id`, `app_instance_id`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] name
@@ -3034,7 +2918,7 @@ module Google
         # Response message for ListSubpropertySyncConfigs RPC.
         # @!attribute [rw] subproperty_sync_configs
         #   @return [::Array<::Google::Analytics::Admin::V1alpha::SubpropertySyncConfig>]
-        #     List of Subproperty Sync Configs.
+        #     List of `SubpropertySyncConfig` resources.
         # @!attribute [rw] next_page_token
         #   @return [::String]
         #     A token, which can be sent as `page_token` to retrieve the next page. If
@@ -3047,7 +2931,7 @@ module Google
         # Request message for UpdateSubpropertySyncConfig RPC.
         # @!attribute [rw] subproperty_sync_config
         #   @return [::Google::Analytics::Admin::V1alpha::SubpropertySyncConfig]
-        #     Required. The SubpropertySyncConfig to update.
+        #     Required. The `SubpropertySyncConfig` to update.
         # @!attribute [rw] update_mask
         #   @return [::Google::Protobuf::FieldMask]
         #     Optional. The list of fields to update. Field names must be in snake case
@@ -3055,6 +2939,18 @@ module Google
         #     replace the entire entity, use one path with the string "*" to match all
         #     fields.
         class UpdateSubpropertySyncConfigRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for GetReportingIdentitySettings RPC.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The name of the settings to lookup.
+        #     Format:
+        #     properties/\\{property}/reportingIdentitySettings
+        #     Example: "properties/1000/reportingIdentitySettings"
+        class GetReportingIdentitySettingsRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end

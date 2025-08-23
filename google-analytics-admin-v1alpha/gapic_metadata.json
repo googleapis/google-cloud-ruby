@@ -530,16 +530,6 @@
                 "delete_channel_group"
               ]
             },
-            "SetAutomatedGa4ConfigurationOptOut": {
-              "methods": [
-                "set_automated_ga4_configuration_opt_out"
-              ]
-            },
-            "FetchAutomatedGa4ConfigurationOptOut": {
-              "methods": [
-                "fetch_automated_ga4_configuration_opt_out"
-              ]
-            },
             "CreateBigQueryLink": {
               "methods": [
                 "create_big_query_link"
@@ -573,26 +563,6 @@
             "UpdateEnhancedMeasurementSettings": {
               "methods": [
                 "update_enhanced_measurement_settings"
-              ]
-            },
-            "CreateConnectedSiteTag": {
-              "methods": [
-                "create_connected_site_tag"
-              ]
-            },
-            "DeleteConnectedSiteTag": {
-              "methods": [
-                "delete_connected_site_tag"
-              ]
-            },
-            "ListConnectedSiteTags": {
-              "methods": [
-                "list_connected_site_tags"
-              ]
-            },
-            "FetchConnectedGa4Property": {
-              "methods": [
-                "fetch_connected_ga4_property"
               ]
             },
             "GetAdSenseLink": {
@@ -803,6 +773,11 @@
             "GetSubpropertySyncConfig": {
               "methods": [
                 "get_subproperty_sync_config"
+              ]
+            },
+            "GetReportingIdentitySettings": {
+              "methods": [
+                "get_reporting_identity_settings"
               ]
             }
           }
