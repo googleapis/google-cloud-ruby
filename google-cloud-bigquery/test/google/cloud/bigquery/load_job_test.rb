@@ -91,6 +91,7 @@ describe Google::Cloud::Bigquery::LoadJob, :mock_bigquery do
     _(job_defaults).wont_be :allow_jagged_rows?
     _(job_defaults).wont_be :ignore_unknown_values?
     _(job_defaults.date_format).must_be :nil?
+    _(job_defaults.reference_file_schema_uri).must_be :nil?
     _(job_defaults.time_format).must_be :nil?
     _(job_defaults.datetime_format).must_be :nil?
     _(job_defaults.timestamp_format).must_be :nil?
@@ -121,6 +122,7 @@ describe Google::Cloud::Bigquery::LoadJob, :mock_bigquery do
     _(job.null_markers).must_equal ["NULL", "nil"]
     _(job.source_column_match).must_equal "POSITION"
     _(job.time_zone).must_equal "America/Los_Angeles"
+    _(job.reference_file_schema_uri).must_equal "gs://bucket/schema.json"
   end
 
   it "knows its statistics data" do
@@ -197,6 +199,7 @@ describe Google::Cloud::Bigquery::LoadJob, :mock_bigquery do
       "nullMarkers" => ["NULL", "nil"],
       "sourceColumnMatch" => "POSITION",
       "timeZone" => "America/Los_Angeles",
+      "referenceFileSchemaUri" => "gs://bucket/schema.json"
     }
     hash["statistics"]["load"] = {
       "inputFiles" => "3", # String per google/google-api-ruby-client#439

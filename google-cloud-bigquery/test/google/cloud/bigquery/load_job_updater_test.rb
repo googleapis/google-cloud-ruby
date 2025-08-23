@@ -186,4 +186,15 @@ describe Google::Cloud::Bigquery::LoadJob::Updater do
     job_gapi = updater.to_gapi
     _(job_gapi.configuration.load.datetime_format).must_be :nil?
   end
+  
+  it "can set reference_file_schema_uri" do
+    updater = new_updater
+    updater.reference_file_schema_uri = "gs://bucket/schema.json"
+    job_gapi = updater.to_gapi
+    _(job_gapi.configuration.load.reference_file_schema_uri).must_equal "gs://bucket/schema.json"
+
+    updater.reference_file_schema_uri = nil
+    job_gapi = updater.to_gapi
+    _(job_gapi.configuration.load.reference_file_schema_uri).must_be :nil?
+  end
 end
