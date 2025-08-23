@@ -737,6 +737,18 @@ module Google
         end
 
         ##
+        # When source_format is set to `CSV`, indicates if the embedded ASCII
+        # control characters (the first 32 characters in the ASCII-table, from
+        # `\x00` to `\x1F`) are preserved. By default, ASCII control
+        # characters are not preserved.
+        #
+        # @return [Boolean, nil] whether or not ASCII control characters are
+        #   preserved. `nil` if not set.
+        def preserve_ascii_control_characters
+          @gapi.configuration.load.preserve_ascii_control_characters
+        end
+
+        ##
         # Yielded to a block to accumulate changes for a patch request.
         class Updater < LoadJob
           ##
@@ -2750,6 +2762,18 @@ module Google
           #   `America/Los_Angeles`. `nil` to unset.
           def time_zone= time_zone
             @gapi.configuration.load.update! time_zone: time_zone
+          end
+
+          ##
+          # When source_format is set to `CSV`, sets whether the embedded ASCII
+          # control characters (the first 32 characters in the ASCII-table, from
+          # `\x00` to `\x1F`) are preserved. By default, ASCII control
+          # characters are not preserved.
+          #
+          # @param [Boolean, nil] val whether or not ASCII control characters
+          #   are preserved. `nil` to unset.
+          def preserve_ascii_control_characters= val
+            @gapi.configuration.load.update! preserve_ascii_control_characters: val
           end
 
           def cancel
