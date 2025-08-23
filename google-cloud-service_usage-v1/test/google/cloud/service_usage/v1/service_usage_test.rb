@@ -21,7 +21,6 @@ require "helper"
 require "gapic/grpc/service_stub"
 
 require "google/api/serviceusage/v1/serviceusage_pb"
-require "google/api/serviceusage/v1/serviceusage_services_pb"
 require "google/cloud/service_usage/v1/service_usage"
 
 class ::Google::Cloud::ServiceUsage::V1::ServiceUsage::ClientTest < Minitest::Test

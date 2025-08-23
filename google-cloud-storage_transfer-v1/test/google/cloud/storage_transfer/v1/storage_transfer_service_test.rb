@@ -21,7 +21,6 @@ require "helper"
 require "gapic/grpc/service_stub"
 
 require "google/storagetransfer/v1/transfer_pb"
-require "google/storagetransfer/v1/transfer_services_pb"
 require "google/cloud/storage_transfer/v1/storage_transfer_service"
 
 class ::Google::Cloud::StorageTransfer::V1::StorageTransferService::ClientTest < Minitest::Test

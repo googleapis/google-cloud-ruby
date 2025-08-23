@@ -21,7 +21,6 @@ require "helper"
 require "gapic/grpc/service_stub"
 
 require "google/cloud/support/v2beta/attachment_service_pb"
-require "google/cloud/support/v2beta/attachment_service_services_pb"
 require "google/cloud/support/v2beta/case_attachment_service"
 
 class ::Google::Cloud::Support::V2beta::CaseAttachmentService::ClientTest < Minitest::Test

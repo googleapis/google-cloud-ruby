@@ -21,7 +21,6 @@ require "helper"
 require "gapic/grpc/service_stub"
 
 require "google/api/servicemanagement/v1/servicemanager_pb"
-require "google/api/servicemanagement/v1/servicemanager_services_pb"
 require "google/cloud/service_management/v1/service_manager"
 
 class ::Google::Cloud::ServiceManagement::V1::ServiceManager::ClientTest < Minitest::Test

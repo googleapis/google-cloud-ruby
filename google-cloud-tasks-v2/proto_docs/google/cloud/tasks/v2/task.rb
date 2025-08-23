@@ -39,7 +39,7 @@ module Google
         #        projects](https://cloud.google.com/resource-manager/docs/creating-managing-projects#identifying_projects)
         #     * `LOCATION_ID` is the canonical ID for the task's location.
         #        The list of available locations can be obtained by calling
-        #        `::Google::Cloud::Location::Locations::Client#list_locations`.
+        #        [ListLocations][google.cloud.location.Locations.ListLocations].
         #        For more information, see https://cloud.google.com/about/locations/.
         #     * `QUEUE_ID` can contain letters ([A-Za-z]), numbers ([0-9]), or
         #       hyphens (-). The maximum length is 100 characters.

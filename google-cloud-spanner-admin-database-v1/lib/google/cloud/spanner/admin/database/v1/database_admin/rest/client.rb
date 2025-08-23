@@ -1043,9 +1043,9 @@ module Google
                   # Replaces any existing policy.
                   #
                   # Authorization requires `spanner.databases.setIamPolicy`
-                  # permission on {::Google::Iam::V1::SetIamPolicyRequest#resource resource}.
+                  # permission on [resource][google.iam.v1.SetIamPolicyRequest.resource].
                   # For backups, authorization requires `spanner.backups.setIamPolicy`
-                  # permission on {::Google::Iam::V1::SetIamPolicyRequest#resource resource}.
+                  # permission on [resource][google.iam.v1.SetIamPolicyRequest.resource].
                   #
                   # @overload set_iam_policy(request, options = nil)
                   #   Pass arguments to `set_iam_policy` via a request object, either of type
@@ -1140,9 +1140,9 @@ module Google
                   # policy set.
                   #
                   # Authorization requires `spanner.databases.getIamPolicy` permission on
-                  # {::Google::Iam::V1::GetIamPolicyRequest#resource resource}.
+                  # [resource][google.iam.v1.GetIamPolicyRequest.resource].
                   # For backups, authorization requires `spanner.backups.getIamPolicy`
-                  # permission on {::Google::Iam::V1::GetIamPolicyRequest#resource resource}.
+                  # permission on [resource][google.iam.v1.GetIamPolicyRequest.resource].
                   #
                   # @overload get_iam_policy(request, options = nil)
                   #   Pass arguments to `get_iam_policy` via a request object, either of type
