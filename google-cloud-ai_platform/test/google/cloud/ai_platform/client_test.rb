@@ -41,6 +41,27 @@ class Google::Cloud::AIPlatform::ClientConstructionMinitest < Minitest::Test
     end
   end
 
+  def test_data_foundry_service_grpc
+    skip unless Google::Cloud::AIPlatform.data_foundry_service_available? transport: :grpc
+    Gapic::ServiceStub.stub :new, DummyStub.new do
+      grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+      client = Google::Cloud::AIPlatform.data_foundry_service transport: :grpc do |config|
+        config.credentials = grpc_channel
+      end
+      assert_kind_of Google::Cloud::AIPlatform::V1::DataFoundryService::Client, client
+    end
+  end
+
+  def test_data_foundry_service_rest
+    skip unless Google::Cloud::AIPlatform.data_foundry_service_available? transport: :rest
+    Gapic::Rest::ClientStub.stub :new, DummyStub.new do
+      client = Google::Cloud::AIPlatform.data_foundry_service transport: :rest do |config|
+        config.credentials = :dummy_credentials
+      end
+      assert_kind_of Google::Cloud::AIPlatform::V1::DataFoundryService::Rest::Client, client
+    end
+  end
+
   def test_dataset_service_grpc
     skip unless Google::Cloud::AIPlatform.dataset_service_available? transport: :grpc
     Gapic::ServiceStub.stub :new, DummyStub.new do
