@@ -1,0 +1,83 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "ruby",
+  "protoPackage": "google.cloud.licensemanager.v1",
+  "libraryPackage": "::Google::Cloud::LicenseManager::V1",
+  "services": {
+    "LicenseManager": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::LicenseManager::V1::LicenseManager::Client",
+          "rpcs": {
+            "ListConfigurations": {
+              "methods": [
+                "list_configurations"
+              ]
+            },
+            "GetConfiguration": {
+              "methods": [
+                "get_configuration"
+              ]
+            },
+            "CreateConfiguration": {
+              "methods": [
+                "create_configuration"
+              ]
+            },
+            "UpdateConfiguration": {
+              "methods": [
+                "update_configuration"
+              ]
+            },
+            "DeleteConfiguration": {
+              "methods": [
+                "delete_configuration"
+              ]
+            },
+            "ListInstances": {
+              "methods": [
+                "list_instances"
+              ]
+            },
+            "GetInstance": {
+              "methods": [
+                "get_instance"
+              ]
+            },
+            "DeactivateConfiguration": {
+              "methods": [
+                "deactivate_configuration"
+              ]
+            },
+            "ReactivateConfiguration": {
+              "methods": [
+                "reactivate_configuration"
+              ]
+            },
+            "QueryConfigurationLicenseUsage": {
+              "methods": [
+                "query_configuration_license_usage"
+              ]
+            },
+            "AggregateUsage": {
+              "methods": [
+                "aggregate_usage"
+              ]
+            },
+            "ListProducts": {
+              "methods": [
+                "list_products"
+              ]
+            },
+            "GetProduct": {
+              "methods": [
+                "get_product"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}
