@@ -21,7 +21,6 @@ require "helper"
 require "gapic/grpc/service_stub"
 
 require "google/cloud/securitycentermanagement/v1/security_center_management_pb"
-require "google/cloud/securitycentermanagement/v1/security_center_management_services_pb"
 require "google/cloud/security_center_management/v1/security_center_management"
 
 class ::Google::Cloud::SecurityCenterManagement::V1::SecurityCenterManagement::ClientTest < Minitest::Test
