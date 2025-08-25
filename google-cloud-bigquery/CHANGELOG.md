@@ -1,5 +1,11 @@
 # Release History
 
+### 1.55.0 (2025-08-25)
+
+#### Features
+
+* Add support for IAM Condition in Dataset Access ([#30854](https://github.com/googleapis/google-cloud-ruby/issues/30854)) 
+
 ### 1.54.0 (2025-08-15)
 
 #### Features
