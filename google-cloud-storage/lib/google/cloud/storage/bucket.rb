@@ -1511,7 +1511,6 @@ module Google
         #     puts file.name
         #   end
         #
-
         def files prefix: nil, delimiter: nil, token: nil, max: nil,
                   versions: nil, match_glob: nil, include_folders_as_prefixes: nil,
                   soft_deleted: nil
