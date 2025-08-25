@@ -56,7 +56,7 @@ To configure a credentials file for an individual client initialization:
 ```ruby
 require "google/cloud/ai_platform"
 
-client = Google::Cloud::AIPlatform.dataset_service do |config|
+client = Google::Cloud::AIPlatform.data_foundry_service do |config|
   config.credentials = "path/to/credentialfile.json"
 end
 ```
@@ -70,7 +70,7 @@ Google::Cloud::AIPlatform.configure do |config|
   config.credentials = "path/to/credentialfile.json"
 end
 
-client = Google::Cloud::AIPlatform.dataset_service
+client = Google::Cloud::AIPlatform.data_foundry_service
 ```
 
 ### Environment Variables
@@ -100,7 +100,7 @@ require "google/cloud/ai_platform"
 
 ENV["GOOGLE_APPLICATION_CREDENTIALS"] = "path/to/credentialfile.json"
 
-client = Google::Cloud::AIPlatform.dataset_service
+client = Google::Cloud::AIPlatform.data_foundry_service
 ```
 
 ### Local ADC file
