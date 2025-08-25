@@ -359,7 +359,7 @@ module Google
             end
 
             ##
-            # Performs bidirectional streaming speech synthesis: receive audio while
+            # Performs bidirectional streaming speech synthesis: receives audio while
             # sending text.
             #
             # @param request [::Gapic::StreamInput, ::Enumerable<::Google::Cloud::TextToSpeech::V1beta1::StreamingSynthesizeRequest, ::Hash>]
