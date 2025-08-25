@@ -21,7 +21,6 @@ require "helper"
 require "gapic/grpc/service_stub"
 
 require "google/cloud/storageinsights/v1/storageinsights_pb"
-require "google/cloud/storageinsights/v1/storageinsights_services_pb"
 require "google/cloud/storage_insights/v1/storage_insights"
 
 class ::Google::Cloud::StorageInsights::V1::StorageInsights::ClientTest < Minitest::Test

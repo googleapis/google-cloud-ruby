@@ -21,7 +21,6 @@ require "helper"
 require "gapic/grpc/service_stub"
 
 require "google/cloud/storagebatchoperations/v1/storage_batch_operations_pb"
-require "google/cloud/storagebatchoperations/v1/storage_batch_operations_services_pb"
 require "google/cloud/storage_batch_operations/v1/storage_batch_operations"
 
 class ::Google::Cloud::StorageBatchOperations::V1::StorageBatchOperations::ClientTest < Minitest::Test

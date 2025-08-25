@@ -21,7 +21,6 @@ require "helper"
 require "gapic/grpc/service_stub"
 
 require "google/spanner/v1/spanner_pb"
-require "google/spanner/v1/spanner_services_pb"
 require "google/cloud/spanner/v1/spanner"
 
 class ::Google::Cloud::Spanner::V1::Spanner::ClientTest < Minitest::Test
