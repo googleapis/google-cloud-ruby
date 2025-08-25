@@ -1,5 +1,15 @@
 # Release History
 
+### 3.0.0 (2025-08-25)
+
+### ⚠ BREAKING CHANGES
+
+* return type for a number of `list` and `list_<resource>` methods is changed to `::Gapic::Rest::PagedEnumerable` ([#30628](https://github.com/googleapis/google-cloud-ruby/issues/30628))
+
+#### Bug Fixes
+
+* return type for a number of `list` and `list_<resource>` methods is changed to `::Gapic::Rest::PagedEnumerable` ([#30628](https://github.com/googleapis/google-cloud-ruby/issues/30628)) 
+
 ### 2.22.0 (2025-05-12)
 
 #### Features
