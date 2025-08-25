@@ -21,7 +21,6 @@ require "helper"
 require "gapic/grpc/service_stub"
 
 require "google/cloud/vision/v1p4beta1/product_search_service_pb"
-require "google/cloud/vision/v1p4beta1/product_search_service_services_pb"
 require "google/cloud/vision/v1p4beta1/product_search"
 
 class ::Google::Cloud::Vision::V1p4beta1::ProductSearch::ClientTest < Minitest::Test

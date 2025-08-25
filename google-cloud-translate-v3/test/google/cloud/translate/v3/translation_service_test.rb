@@ -21,7 +21,6 @@ require "helper"
 require "gapic/grpc/service_stub"
 
 require "google/cloud/translate/v3/translation_service_pb"
-require "google/cloud/translate/v3/translation_service_services_pb"
 require "google/cloud/translate/v3/translation_service"
 
 class ::Google::Cloud::Translate::V3::TranslationService::ClientTest < Minitest::Test

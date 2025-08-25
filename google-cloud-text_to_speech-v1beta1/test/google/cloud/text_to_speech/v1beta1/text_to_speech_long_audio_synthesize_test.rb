@@ -21,7 +21,6 @@ require "helper"
 require "gapic/grpc/service_stub"
 
 require "google/cloud/texttospeech/v1beta1/cloud_tts_lrs_pb"
-require "google/cloud/texttospeech/v1beta1/cloud_tts_lrs_services_pb"
 require "google/cloud/text_to_speech/v1beta1/text_to_speech_long_audio_synthesize"
 
 class ::Google::Cloud::TextToSpeech::V1beta1::TextToSpeechLongAudioSynthesize::ClientTest < Minitest::Test

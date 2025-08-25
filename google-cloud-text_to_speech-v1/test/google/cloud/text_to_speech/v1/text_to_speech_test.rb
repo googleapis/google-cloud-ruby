@@ -21,7 +21,6 @@ require "helper"
 require "gapic/grpc/service_stub"
 
 require "google/cloud/texttospeech/v1/cloud_tts_pb"
-require "google/cloud/texttospeech/v1/cloud_tts_services_pb"
 require "google/cloud/text_to_speech/v1/text_to_speech"
 
 class ::Google::Cloud::TextToSpeech::V1::TextToSpeech::ClientTest < Minitest::Test
