@@ -1454,7 +1454,7 @@ describe Google::Cloud::Storage::Bucket, :mock_storage do
       [bucket.name, upload_id],
       **resumable_upload_args(options: {})
     bucket.service.mocked_service = mock
-    returned_value = bucket.delete_resumable_upload  upload_id
+    returned_value = bucket.delete_resumable_upload upload_id
     assert_equal expected_return_value, returned_value
     mock.verify
   end
