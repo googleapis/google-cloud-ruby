@@ -721,8 +721,6 @@ module Google
         # Restart resumable upload
         # @param [String, ::File] file Path of the file on the filesystem to
         #   upload. Can be an File object, or File-like object such as StringIO.
-        #   (If the object does not have path, a `path` argument must be also be
-        #   provided.)
         # @param [String] upload_id Unique Id of a resumable upload
         #
         # @return [Google::Apis::StorageV1::Object]
@@ -734,7 +732,7 @@ module Google
         #   storage = Google::Cloud::Storage.new
         #
         #   bucket = storage.bucket "my-bucket"
-        #   bucket.restart_resumable_upload file,upload_id
+        #   bucket.restart_resumable_upload file, upload_id
 
         def restart_resumable_upload file, upload_id
           ensure_service!
@@ -1438,7 +1436,7 @@ module Google
 
         ##
         # Delete resumable upload
-        # @param [String] upload_id Unique Id of an resumable upload
+        # @param [String] upload_id Unique Id of a resumable upload
         #
         # @return [Boolean] Returns `true` if the resumable upload was deleted.
         #
