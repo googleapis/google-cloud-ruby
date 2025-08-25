@@ -1410,7 +1410,7 @@ describe Google::Cloud::Storage::Bucket, :mock_storage do
 
   it "restarts a resumable upload with upload_id" do
     new_file_name = random_file_path
-    upload_id= "TEST_ID"
+    upload_id = "TEST_ID"
 
     Tempfile.open ["google-cloud", ".txt"] do |tmpfile|
       tmpfile.write "Hello world"
@@ -1429,7 +1429,7 @@ describe Google::Cloud::Storage::Bucket, :mock_storage do
 
   it "raises ArgumentError if upload_id is not provided to restart_resumable_upload" do
     new_file_name = random_file_path
-    upload_id= "TEST_ID"
+    upload_id = "TEST_ID"
 
     Tempfile.open ["google-cloud", ".txt"] do |tmpfile|
       tmpfile.write "Hello world"
