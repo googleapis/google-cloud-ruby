@@ -1,5 +1,24 @@
 # Release History
 
+### 3.0.0 (2025-08-25)
+
+### ⚠ BREAKING CHANGES
+
+* return type for a number of `list` and `list_<resource>` methods is changed to `::Gapic::Rest::PagedEnumerable` ([#30628](https://github.com/googleapis/google-cloud-ruby/issues/30628))
+  Certain methods were not classified as Paged and has an incorrect return type. With this update their return type has changed to `::Gapic::Rest::PagedEnumerable` with an appropriate pagination type.
+  These methods and their pagination types are:
+  * `InterconnectAttachmentGroups.list` -- new pagination element `InterconnectAttachmentGroup`
+  * `InterconnectGroups.list` -- `InterconnectGroup`
+  * `NetworkProfiles.list` -- `NetworkProfile`
+  * `Routers.list_bgp_routes` -- `BgpRoute`
+  * `Routers.list_route_policies` -- `RoutePolicy`
+  * `StoragePools.list` -- `StoragePool`
+  * `StoragePools.list_disks` -- `StoragePoolDisk`
+
+#### Bug Fixes
+
+* return type for a number of `list` and `list_<resource>` methods is changed to `::Gapic::Rest::PagedEnumerable` ([#30628](https://github.com/googleapis/google-cloud-ruby/issues/30628)) 
+
 ### 2.22.0 (2025-05-12)
 
 #### Features
