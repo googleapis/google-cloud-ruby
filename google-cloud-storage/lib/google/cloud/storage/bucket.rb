@@ -725,8 +725,8 @@ module Google
         #   provided.)
         # @param [String] upload_id Unique Id of a resumable upload
         #
-        # @return [Google::Cloud::Storage::File]
-        #   The newly created File object.
+        # @return [Google::Apis::StorageV1::Object]
+        #   The newly created storage object.
         #
         # @example
         #   require "google/cloud/storage"
@@ -740,8 +740,7 @@ module Google
           ensure_service!
           ensure_io_or_file_exists! file
           raise ArgumentError, "Upload Id missing" unless upload_id
-          # service.restart_resumable_upload name, file, upload_id
-          File.from_gapi service.restart_resumable_upload(name, file, upload_id), service
+          service.restart_resumable_upload name, file, upload_id
         end
 
         ##
