@@ -696,6 +696,18 @@ module Google
           end
         end
 
+        def restart_resumable_upload bucket_name, source, upload_id, options: {}
+          execute do
+            service.restart_resumable_upload bucket_name, source, upload_id, options: options
+          end
+        end
+
+        def delete_resumable_upload bucket_name, upload_id, options: {}
+          execute do
+            service.delete_resumable_upload bucket_name, upload_id, options: options
+          end
+        end
+
         ##
         # Restore soft deleted bucket
         def restore_bucket bucket_name,
