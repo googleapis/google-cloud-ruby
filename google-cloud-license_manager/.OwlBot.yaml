@@ -1,0 +1,3 @@
+deep-copy-regex:
+  - source: /google/cloud/licensemanager/[^/]+-ruby/(.*)
+    dest: /owl-bot-staging/google-cloud-license_manager/$1
