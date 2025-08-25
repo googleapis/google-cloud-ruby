@@ -1339,6 +1339,10 @@
       "component": "google-cloud-run-v2",
       "version_file": "lib/google/cloud/run/v2/version.rb"
     },
+    "google-cloud-saas_platform-saas_service_mgmt-v1beta1": {
+      "component": "google-cloud-saas_platform-saas_service_mgmt-v1beta1",
+      "version_file": "lib/google/cloud/saas_platform/saas_service_mgmt/v1beta1/version.rb"
+    },
     "google-cloud-scheduler": {
       "component": "google-cloud-scheduler",
       "version_file": "lib/google/cloud/scheduler/version.rb"
