@@ -1459,7 +1459,7 @@ describe Google::Cloud::Storage::Bucket, :mock_storage do
     mock.verify
   end
 
-  it "Raises ArgumentError if upload_id is not provided to delete_resumable_upload" do
+  it "raises ArgumentError if upload_id is not provided to delete_resumable_upload" do
     upload_id = "TEST_ID"
     mock = Minitest::Mock.new
     mock.expect :delete_resumable_upload, true,
