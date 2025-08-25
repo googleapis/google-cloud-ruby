@@ -927,6 +927,10 @@
       "component": "google-cloud-language-v2",
       "version_file": "lib/google/cloud/language/v2/version.rb"
     },
+    "google-cloud-license_manager-v1": {
+      "component": "google-cloud-license_manager-v1",
+      "version_file": "lib/google/cloud/license_manager/v1/version.rb"
+    },
     "google-cloud-life_sciences": {
       "component": "google-cloud-life_sciences",
       "version_file": "lib/google/cloud/life_sciences/version.rb"
