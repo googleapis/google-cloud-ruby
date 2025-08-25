@@ -41,7 +41,7 @@ CONFIGS = {
       /\.release-please-manifest\.json$/,
       /\/CHANGELOG\.md$/,
       /\/version\.rb$/,
-      /\/snippets\/snippet_metadata_[\w\.]+\.json$/,
+      /\/snippets\/snippet_metadata_[\w.]+\.json$/,
     ],
   },
   "releases-wrappers" => {
@@ -62,7 +62,7 @@ CONFIGS = {
       /\.release-please-manifest\.json$/,
       /\/CHANGELOG\.md$/,
       /\/version\.rb$/,
-      /\/snippets\/snippet_metadata_[\w\.]+\.json$/,
+      /\/snippets\/snippet_metadata_[\w.]+\.json$/,
     ],
   },
 }.freeze
