@@ -32,9 +32,9 @@ In order to use this library, you first need to go through the following steps:
 ```ruby
 require "google/cloud/ai_platform/v1"
 
-client = ::Google::Cloud::AIPlatform::V1::DatasetService::Client.new
-request = ::Google::Cloud::AIPlatform::V1::CreateDatasetRequest.new # (request fields as keyword arguments...)
-response = client.create_dataset request
+client = ::Google::Cloud::AIPlatform::V1::DataFoundryService::Client.new
+request = ::Google::Cloud::AIPlatform::V1::GenerateSyntheticDataRequest.new # (request fields as keyword arguments...)
+response = client.generate_synthetic_data request
 ```
 
 View the [Client Library Documentation](https://cloud.google.com/ruby/docs/reference/google-cloud-ai_platform-v1/latest)
@@ -75,7 +75,7 @@ constructing a client object. For example:
 require "google/cloud/ai_platform/v1"
 require "logger"
 
-client = ::Google::Cloud::AIPlatform::V1::DatasetService::Client.new do |config|
+client = ::Google::Cloud::AIPlatform::V1::DataFoundryService::Client.new do |config|
   config.logger = Logger.new "my-app.log"
 end
 ```
