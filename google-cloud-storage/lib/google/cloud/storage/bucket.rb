@@ -725,6 +725,9 @@ module Google
         #   provided.)
         # @param [String] upload_id Unique Id of a resumable upload
         #
+        # @return [Hash(String => String)]
+        #   A Hash of file object returned from server.
+        #
         # @example
         #   require "google/cloud/storage"
         #
@@ -736,7 +739,7 @@ module Google
         def restart_resumable_upload file, upload_id
           ensure_service!
           ensure_io_or_file_exists! file
-          raise "Upload Id missing" unless upload_id
+          raise ArgumentError, "Upload Id missing" unless upload_id
           service.restart_resumable_upload name, file, upload_id
         end
 
@@ -1437,19 +1440,22 @@ module Google
         # Delete resumable upload
         # @param [String] upload_id Unique Id of an resumable upload
         #
+        # @return [Boolean] Returns `true` if the bucket was deleted.
+        #
         # @example
         #   require "google/cloud/storage"
         #
         #   storage = Google::Cloud::Storage.new
         #
         #   bucket = storage.bucket "my-bucket"
-        #   bucket.delete_resumable_upload file,upload_id
+        #   bucket.delete_resumable_upload upload_id
 
         def delete_resumable_upload upload_id
           ensure_service!
-          raise "Upload Id missing" unless upload_id
+          raise ArgumentError, "Upload Id missing" unless upload_id
           service.delete_resumable_upload name, upload_id
         end
+
         ##
         # Retrieves a list of files matching the criteria.
         #

@@ -1408,7 +1408,26 @@ describe Google::Cloud::Storage::Bucket, :mock_storage do
     end
   end
 
-   it "restarts a resumable upload with upload_id" do
+  it "restarts a resumable upload with upload_id" do
+    new_file_name = random_file_path
+    upload_id= "TEST_ID"
+
+    Tempfile.open ["google-cloud", ".txt"] do |tmpfile|
+      tmpfile.write "Hello world"
+      tmpfile.rewind
+      mock = Minitest::Mock.new
+      expected_return_value = create_file_gapi(bucket.name, new_file_name)
+      mock.expect :restart_resumable_upload, expected_return_value,
+        [bucket.name, tmpfile, upload_id],
+        **resumable_upload_args(options: {})
+      bucket.service.mocked_service = mock
+      returned_value= bucket.restart_resumable_upload tmpfile, upload_id
+      assert_equal expected_return_value, returned_value
+      mock.verify
+    end
+  end
+
+  it "raises ArgumentError if upload_id is not provided to restart_resumable_upload" do
     new_file_name = random_file_path
     upload_id= "TEST_ID"
 
@@ -1418,24 +1437,38 @@ describe Google::Cloud::Storage::Bucket, :mock_storage do
       mock = Minitest::Mock.new
       mock.expect :restart_resumable_upload, create_file_gapi(bucket.name, new_file_name),
         [bucket.name, tmpfile, upload_id],
-        **restart_resumable_upload_args(options: {})
+        **resumable_upload_args(options: {})
       bucket.service.mocked_service = mock
-      bucket.restart_resumable_upload tmpfile, upload_id
-
-      mock.verify
+      expect do
+        bucket.restart_resumable_upload tmpfile
+      end.must_raise ArgumentError
     end
   end
 
-   it "deletes a resumable upload with upload_id" do
-    upload_id= "TEST_ID"
+  it "deletes a resumable upload with upload_id" do
+    upload_id = "TEST_ID"
 
+    mock = Minitest::Mock.new
+    expected_return_value = true
+    mock.expect :delete_resumable_upload, expected_return_value,
+      [bucket.name, upload_id],
+      **resumable_upload_args(options: {})
+    bucket.service.mocked_service = mock
+    returned_value = bucket.delete_resumable_upload  upload_id
+    assert_equal expected_return_value, returned_value
+    mock.verify
+  end
+
+  it "Raises ArgumentError if upload_id is not provided to delete_resumable_upload" do
+    upload_id = "TEST_ID"
     mock = Minitest::Mock.new
     mock.expect :delete_resumable_upload, true,
       [bucket.name, upload_id],
-      **delete_resumable_upload_args(options: {})
+      **resumable_upload_args(options: {})
     bucket.service.mocked_service = mock
-    bucket.delete_resumable_upload  upload_id
-    mock.verify
+    expect do
+      bucket.delete_resumable_upload
+    end.must_raise ArgumentError    
   end
 
   def create_file_gapi bucket=nil, name = nil

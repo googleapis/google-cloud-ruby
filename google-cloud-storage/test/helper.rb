@@ -391,13 +391,7 @@ class MockStorage < Minitest::Spec
     }
   end
 
-  def delete_resumable_upload_args options: {}
-    {
-      options: options
-    }
-  end
-
-  def restart_resumable_upload_args options: {}
+  def resumable_upload_args options: {}
     {
       options: options
     }
