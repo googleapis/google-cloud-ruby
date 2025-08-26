@@ -1,0 +1,3 @@
+deep-copy-regex:
+  - source: /google/cloud/saasplatform/saasservicemgmt/[^/]+-ruby/(.*)
+    dest: /owl-bot-staging/google-cloud-saas_platform-saas_service_mgmt/$1
