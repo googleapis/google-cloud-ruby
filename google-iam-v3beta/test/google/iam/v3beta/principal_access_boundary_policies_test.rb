@@ -21,7 +21,6 @@ require "helper"
 require "gapic/grpc/service_stub"
 
 require "google/iam/v3beta/principal_access_boundary_policies_service_pb"
-require "google/iam/v3beta/principal_access_boundary_policies_service_services_pb"
 require "google/iam/v3beta/principal_access_boundary_policies"
 
 class ::Google::Iam::V3beta::PrincipalAccessBoundaryPolicies::ClientTest < Minitest::Test
