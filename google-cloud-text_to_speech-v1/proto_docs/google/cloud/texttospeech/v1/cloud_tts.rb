@@ -263,6 +263,10 @@ module Google
         #     Optional. The configuration for a voice clone. If
         #     [VoiceCloneParams.voice_clone_key] is set, the service chooses the voice
         #     clone matching the specified configuration.
+        # @!attribute [rw] model_name
+        #   @return [::String]
+        #     Optional. The name of the model. If set, the service will choose the model
+        #     matching the specified configuration.
         class VoiceSelectionParams
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -424,6 +428,9 @@ module Google
         #     other voices.
         #
         #     Note: The following fields are mutually exclusive: `markup`, `text`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] prompt
+        #   @return [::String]
+        #     This is system instruction supported only for controllable voice models.
         class StreamingSynthesisInput
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -486,7 +493,8 @@ module Google
         # Configuration to set up audio encoder. The encoding determines the output
         # audio format that we'd like.
         module AudioEncoding
-          # Not specified. Will return result
+          # Not specified. Only used by GenerateVoiceCloningKey. Otherwise, will return
+          # result
           # [google.rpc.Code.INVALID_ARGUMENT][google.rpc.Code.INVALID_ARGUMENT].
           AUDIO_ENCODING_UNSPECIFIED = 0
 
@@ -515,6 +523,9 @@ module Google
           # Note that as opposed to LINEAR16, audio won't be wrapped in a WAV (or
           # any other) header.
           PCM = 7
+
+          # M4A audio.
+          M4A = 8
         end
       end
     end
