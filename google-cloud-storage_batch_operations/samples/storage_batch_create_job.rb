@@ -68,5 +68,6 @@ if $PROGRAM_NAME == __FILE__
     bucket_name: ARGV.shift,
     prefix: ARGV.shift,
     job_name: ARGV.shift,
-    project_name: ARGV.shift  )
+    project_name: ARGV.shift
+  )
 end

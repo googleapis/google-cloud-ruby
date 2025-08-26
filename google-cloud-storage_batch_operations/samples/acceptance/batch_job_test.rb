@@ -19,10 +19,9 @@ require_relative "../storage_batch_delete_job"
 require_relative "../storage_batch_cancel_job"
 require_relative "../storage_batch_list_job"
 require_relative "../storage_batch_get_job"
-require 'pry'
 
 describe "Batch jobs Snippets" do
-  let(:storage)   {  Google::Cloud::Storage.new}
+  let(:storage) { Google::Cloud::Storage.new }
   let(:project_name)   { storage.project }
   let(:bucket)         { @bucket }
   let(:file_content)   { "some content" }
