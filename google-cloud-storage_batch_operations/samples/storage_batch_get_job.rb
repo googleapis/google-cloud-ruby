@@ -13,14 +13,14 @@
 # limitations under the License.
 
 # [START storage_batch_get_job]
+require "google/cloud/storage_batch_operations"
+
 def get_job project_name:, job_name:
-  # The Name/ID of your project
+  # The ID of your project
   # project_name = "your-project-id"
 
   # The name of your Storage batch operation job
   # job_name = "your-job-name"
-
-  require "google/cloud/storage_batch_operations"
 
   client = Google::Cloud::StorageBatchOperations.storage_batch_operations
   parent = "projects/#{project_name}/locations/global"

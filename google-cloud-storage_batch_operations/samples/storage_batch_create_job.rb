@@ -22,11 +22,12 @@ def create_job bucket_name:, prefix:, job_name:, project_name:
   # Prefix is the first part of filename on which job has to be executed
   # prefix = 'test'
 
-  # The Name/ID of your project
-  # project_name = "your-project-id"
-
   # The name of your Storage batch operation job
   # job_name = "your-job-name"
+
+  # The ID of your project
+  # project_name = "your-project-id"
+
 
   client = Google::Cloud::StorageBatchOperations.storage_batch_operations
 

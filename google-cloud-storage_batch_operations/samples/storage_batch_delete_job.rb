@@ -16,7 +16,7 @@
 require "google/cloud/storage_batch_operations"
 
 def delete_job project_name:, job_name:
-  # The Name/ID of your project
+  # The ID of your project
   # project_name = "your-project-id"
 
   # The name of your Storage batch operation job

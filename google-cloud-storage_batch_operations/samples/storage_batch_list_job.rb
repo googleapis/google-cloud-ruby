@@ -16,7 +16,7 @@
 require "google/cloud/storage_batch_operations"
 
 def list_job project_name:
-  # The Name/ID of your project
+  # The ID of your project
   # project_name = "your-project-id"
   client = Google::Cloud::StorageBatchOperations.storage_batch_operations
   parent = "projects/#{project_name}/locations/global"
