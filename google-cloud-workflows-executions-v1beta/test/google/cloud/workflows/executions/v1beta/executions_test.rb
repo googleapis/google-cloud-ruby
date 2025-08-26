@@ -21,7 +21,6 @@ require "helper"
 require "gapic/grpc/service_stub"
 
 require "google/cloud/workflows/executions/v1beta/executions_pb"
-require "google/cloud/workflows/executions/v1beta/executions_services_pb"
 require "google/cloud/workflows/executions/v1beta/executions"
 
 class ::Google::Cloud::Workflows::Executions::V1beta::Executions::ClientTest < Minitest::Test

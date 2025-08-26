@@ -21,7 +21,6 @@ require "helper"
 require "gapic/grpc/service_stub"
 
 require "google/iam/v1beta/workload_identity_pool_pb"
-require "google/iam/v1beta/workload_identity_pool_services_pb"
 require "google/iam/v1beta/workload_identity_pools"
 
 class ::Google::Iam::V1beta::WorkloadIdentityPools::ClientTest < Minitest::Test

@@ -1628,7 +1628,7 @@ module Google
         end
 
         # VmwareEngine specific metadata for the given
-        # `::Google::Cloud::Location::Location`. It is
+        # [google.cloud.location.Location][google.cloud.location.Location]. It is
         # returned as a content of the `google.cloud.location.Location.metadata` field.
         # @!attribute [r] capabilities
         #   @return [::Array<::Google::Cloud::VmwareEngine::V1::LocationMetadata::Capability>]
