@@ -538,6 +538,53 @@ module Google
             @gapi.csv_options.source_column_match = source_column_match
           end
 
+          # Indicates if the embedded ASCII control characters (the first 32
+          # characters in the ASCII-table, from `\x00` to `\x1F`) are preserved.
+          # By default, ASCII control characters are not preserved.
+          #
+          # @return [Boolean, nil] whether or not ASCII control characters are
+          #   preserved. `nil` if not set.
+          #
+          # @example
+          #   require "google/cloud/bigquery"
+          #
+          #   bigquery = Google::Cloud::Bigquery.new
+          #
+          #   csv_url = "gs://bucket/path/to/data.csv"
+          #   csv_table = bigquery.external csv_url do |csv|
+          #     csv.preserve_ascii_control_characters = true
+          #   end
+          #
+          #   csv_table.preserve_ascii_control_characters #=> true
+          #
+          def preserve_ascii_control_characters
+            @gapi.csv_options.preserve_ascii_control_characters
+          end
+
+          # Sets whether the embedded ASCII control characters (the first 32
+          # characters in the ASCII-table, from `\x00` to `\x1F`) are preserved.
+          # By default, ASCII control characters are not preserved.
+          #
+          # @param [Boolean, nil] val whether or not ASCII control characters
+          #    are preserved. `nil` to unset.
+          #
+          # @example
+          #   require "google/cloud/bigquery"
+          #
+          #   bigquery = Google::Cloud::Bigquery.new
+          #
+          #   csv_url = "gs://bucket/path/to/data.csv"
+          #   csv_table = bigquery.external csv_url do |csv|
+          #     csv.preserve_ascii_control_characters = true
+          #   end
+          #
+          #   csv_table.preserve_ascii_control_characters #=> true
+          #
+          def preserve_ascii_control_characters= val
+            frozen_check!
+            @gapi.csv_options.preserve_ascii_control_characters = val
+          end
+
           ##
           # The schema for the data.
           #

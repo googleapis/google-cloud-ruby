@@ -21,7 +21,6 @@ require "helper"
 require "gapic/grpc/service_stub"
 
 require "google/cloud/bigquery/storage/v1/storage_pb"
-require "google/cloud/bigquery/storage/v1/storage_services_pb"
 require "google/cloud/bigquery/storage/v1/big_query_write"
 
 class ::Google::Cloud::Bigquery::Storage::V1::BigQueryWrite::ClientTest < Minitest::Test

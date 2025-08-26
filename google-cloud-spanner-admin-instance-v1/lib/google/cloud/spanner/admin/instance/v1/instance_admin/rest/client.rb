@@ -1621,7 +1621,7 @@ module Google
                   # existing policy.
                   #
                   # Authorization requires `spanner.instances.setIamPolicy` on
-                  # {::Google::Iam::V1::SetIamPolicyRequest#resource resource}.
+                  # [resource][google.iam.v1.SetIamPolicyRequest.resource].
                   #
                   # @overload set_iam_policy(request, options = nil)
                   #   Pass arguments to `set_iam_policy` via a request object, either of type
@@ -1715,7 +1715,7 @@ module Google
                   # policy if an instance exists but does not have a policy set.
                   #
                   # Authorization requires `spanner.instances.getIamPolicy` on
-                  # {::Google::Iam::V1::GetIamPolicyRequest#resource resource}.
+                  # [resource][google.iam.v1.GetIamPolicyRequest.resource].
                   #
                   # @overload get_iam_policy(request, options = nil)
                   #   Pass arguments to `get_iam_policy` via a request object, either of type

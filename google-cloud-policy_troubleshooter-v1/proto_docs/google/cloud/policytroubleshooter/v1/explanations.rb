@@ -53,7 +53,7 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Details about how a specific IAM {::Google::Iam::V1::Policy Policy} contributed
+        # Details about how a specific IAM [Policy][google.iam.v1.Policy] contributed
         # to the access check.
         # @!attribute [rw] access
         #   @return [::Google::Cloud::PolicyTroubleshooter::V1::AccessState]

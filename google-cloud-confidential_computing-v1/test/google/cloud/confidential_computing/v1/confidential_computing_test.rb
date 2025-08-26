@@ -21,7 +21,6 @@ require "helper"
 require "gapic/grpc/service_stub"
 
 require "google/cloud/confidentialcomputing/v1/service_pb"
-require "google/cloud/confidentialcomputing/v1/service_services_pb"
 require "google/cloud/confidential_computing/v1/confidential_computing"
 
 class ::Google::Cloud::ConfidentialComputing::V1::ConfidentialComputing::ClientTest < Minitest::Test

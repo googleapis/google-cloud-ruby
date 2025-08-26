@@ -21,7 +21,6 @@ require "helper"
 require "gapic/grpc/service_stub"
 
 require "google/cloud/securesourcemanager/v1/secure_source_manager_pb"
-require "google/cloud/securesourcemanager/v1/secure_source_manager_services_pb"
 require "google/cloud/secure_source_manager/v1/secure_source_manager"
 
 class ::Google::Cloud::SecureSourceManager::V1::SecureSourceManager::ClientTest < Minitest::Test

@@ -21,7 +21,6 @@ require "helper"
 require "gapic/grpc/service_stub"
 
 require "google/cloud/dialogflow/cx/v3/transition_route_group_pb"
-require "google/cloud/dialogflow/cx/v3/transition_route_group_services_pb"
 require "google/cloud/dialogflow/cx/v3/transition_route_groups"
 
 class ::Google::Cloud::Dialogflow::CX::V3::TransitionRouteGroups::ClientTest < Minitest::Test

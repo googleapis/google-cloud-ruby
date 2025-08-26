@@ -746,6 +746,17 @@ module Google
           @gapi.configuration.load.reference_file_schema_uri
         end
 
+        # When source_format is set to `CSV`, indicates if the embedded ASCII
+        # control characters (the first 32 characters in the ASCII-table, from
+        # `\x00` to `\x1F`) are preserved. By default, ASCII control
+        # characters are not preserved.
+        #
+        # @return [Boolean, nil] whether or not ASCII control characters are
+        #   preserved. `nil` if not set.
+        def preserve_ascii_control_characters
+          @gapi.configuration.load.preserve_ascii_control_characters
+        end
+
         ##
         # Yielded to a block to accumulate changes for a patch request.
         class Updater < LoadJob
@@ -2763,6 +2774,7 @@ module Google
           end
 
           ##
+
           # Sets the URI of thereference file with the reader schema. This file
           # is only loaded if it is part of source URIs, but is not loaded
           # otherwise. It is enabled for the following formats: `AVRO`,
@@ -2771,6 +2783,17 @@ module Google
           # @param [String, nil] uri The URI of the reference file, or `nil` to unset.
           def reference_file_schema_uri= uri
             @gapi.configuration.load.update! reference_file_schema_uri: uri
+          end
+
+          # When source_format is set to `CSV`, sets whether the embedded ASCII
+          # control characters (the first 32 characters in the ASCII-table, from
+          # `\x00` to `\x1F`) are preserved. By default, ASCII control
+          # characters are not preserved.
+          #
+          # @param [Boolean, nil] val whether or not ASCII control characters
+          #   are preserved. `nil` to unset.
+          def preserve_ascii_control_characters= val
+            @gapi.configuration.load.update! preserve_ascii_control_characters: val
           end
 
           def cancel

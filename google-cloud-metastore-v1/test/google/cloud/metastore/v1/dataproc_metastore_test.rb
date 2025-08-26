@@ -21,7 +21,6 @@ require "helper"
 require "gapic/grpc/service_stub"
 
 require "google/cloud/metastore/v1/metastore_pb"
-require "google/cloud/metastore/v1/metastore_services_pb"
 require "google/cloud/metastore/v1/dataproc_metastore"
 
 class ::Google::Cloud::Metastore::V1::DataprocMetastore::ClientTest < Minitest::Test

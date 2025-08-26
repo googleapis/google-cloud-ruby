@@ -21,7 +21,6 @@ require "helper"
 require "gapic/grpc/service_stub"
 
 require "google/cloud/commerce/consumer/procurement/v1/license_management_service_pb"
-require "google/cloud/commerce/consumer/procurement/v1/license_management_service_services_pb"
 require "google/cloud/commerce/consumer/procurement/v1/license_management_service"
 
 class ::Google::Cloud::Commerce::Consumer::Procurement::V1::LicenseManagementService::ClientTest < Minitest::Test

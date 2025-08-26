@@ -21,7 +21,6 @@ require "helper"
 require "gapic/grpc/service_stub"
 
 require "google/cloud/talent/v4beta1/tenant_service_pb"
-require "google/cloud/talent/v4beta1/tenant_service_services_pb"
 require "google/cloud/talent/v4beta1/tenant_service"
 
 class ::Google::Cloud::Talent::V4beta1::TenantService::ClientTest < Minitest::Test

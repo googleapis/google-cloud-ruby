@@ -21,7 +21,6 @@ require "helper"
 require "gapic/grpc/service_stub"
 
 require "google/devtools/cloudbuild/v2/repositories_pb"
-require "google/devtools/cloudbuild/v2/repositories_services_pb"
 require "google/cloud/build/v2/repository_manager"
 
 class ::Google::Cloud::Build::V2::RepositoryManager::ClientTest < Minitest::Test

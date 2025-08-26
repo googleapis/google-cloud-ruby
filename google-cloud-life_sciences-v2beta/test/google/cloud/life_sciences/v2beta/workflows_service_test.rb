@@ -21,7 +21,6 @@ require "helper"
 require "gapic/grpc/service_stub"
 
 require "google/cloud/lifesciences/v2beta/workflows_pb"
-require "google/cloud/lifesciences/v2beta/workflows_services_pb"
 require "google/cloud/life_sciences/v2beta/workflows_service"
 
 class ::Google::Cloud::LifeSciences::V2beta::WorkflowsService::ClientTest < Minitest::Test

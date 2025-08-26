@@ -21,7 +21,6 @@ require "helper"
 require "gapic/grpc/service_stub"
 
 require "google/cloud/retail/v2/generative_question_service_pb"
-require "google/cloud/retail/v2/generative_question_service_services_pb"
 require "google/cloud/retail/v2/generative_question_service"
 
 class ::Google::Cloud::Retail::V2::GenerativeQuestionService::ClientTest < Minitest::Test

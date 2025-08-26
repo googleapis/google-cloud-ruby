@@ -21,7 +21,6 @@ require "helper"
 require "gapic/grpc/service_stub"
 
 require "google/cloud/dialogflow/v2/encryption_spec_pb"
-require "google/cloud/dialogflow/v2/encryption_spec_services_pb"
 require "google/cloud/dialogflow/v2/encryption_spec_service"
 
 class ::Google::Cloud::Dialogflow::V2::EncryptionSpecService::ClientTest < Minitest::Test

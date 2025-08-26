@@ -21,7 +21,6 @@ require "helper"
 require "gapic/grpc/service_stub"
 
 require "google/cloud/talent/v4/company_service_pb"
-require "google/cloud/talent/v4/company_service_services_pb"
 require "google/cloud/talent/v4/company_service"
 
 class ::Google::Cloud::Talent::V4::CompanyService::ClientTest < Minitest::Test

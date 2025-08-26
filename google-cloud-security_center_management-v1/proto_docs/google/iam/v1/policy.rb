@@ -313,7 +313,7 @@ module Google
       #     Specifies the identities that do not cause logging for this type of
       #     permission.
       #     Follows the same format of
-      #     {::Google::Iam::V1::Binding#members Binding.members}.
+      #     [Binding.members][google.iam.v1.Binding.members].
       class AuditLogConfig
         include ::Google::Protobuf::MessageExts
         extend ::Google::Protobuf::MessageExts::ClassMethods

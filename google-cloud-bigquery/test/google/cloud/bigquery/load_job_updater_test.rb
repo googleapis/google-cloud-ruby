@@ -197,4 +197,19 @@ describe Google::Cloud::Bigquery::LoadJob::Updater do
     job_gapi = updater.to_gapi
     _(job_gapi.configuration.load.reference_file_schema_uri).must_be :nil?
   end
+  
+  it "can set preserve_ascii_control_characters" do
+    updater = new_updater
+    updater.preserve_ascii_control_characters = true
+    job_gapi = updater.to_gapi
+    _(job_gapi.configuration.load.preserve_ascii_control_characters).must_equal true
+
+    updater.preserve_ascii_control_characters = false
+    job_gapi = updater.to_gapi
+    _(job_gapi.configuration.load.preserve_ascii_control_characters).must_equal false
+
+    updater.preserve_ascii_control_characters = nil
+    job_gapi = updater.to_gapi
+    _(job_gapi.configuration.load.preserve_ascii_control_characters).must_be :nil?
+  end
 end

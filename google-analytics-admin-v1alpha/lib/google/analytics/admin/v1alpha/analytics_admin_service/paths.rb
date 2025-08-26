@@ -542,6 +542,20 @@ module Google
             end
 
             ##
+            # Create a fully-qualified ReportingIdentitySettings resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `properties/{property}/reportingIdentitySettings`
+            #
+            # @param property [String]
+            #
+            # @return [::String]
+            def reporting_identity_settings_path property:
+              "properties/#{property}/reportingIdentitySettings"
+            end
+
+            ##
             # Create a fully-qualified RollupPropertySourceLink resource string.
             #
             # The resource will be in the following format:

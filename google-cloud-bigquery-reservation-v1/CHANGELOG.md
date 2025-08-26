@@ -1,5 +1,12 @@
 # Release History
 
+### 1.6.0 (2025-08-26)
+
+#### Features
+
+* Add Reservation.max_slots field to Reservation proto, indicating the total max number of slots this reservation can use up to ([#30863](https://github.com/googleapis/google-cloud-ruby/issues/30863)) 
+* Add Reservation.scaling_mode field and its corresponding enum message ScalingMode. This field should be used together with Reservation.max_slots 
+
 ### 1.5.0 (2025-05-12)
 
 #### Features

@@ -242,7 +242,7 @@ module Google
         #     For examples of full resource names for Google Cloud services, see
         #     https://cloud.google.com/iam/help/troubleshooter/full-resource-names.
         #
-        #     Values are {::Google::Iam::V1::Policy Policy} objects representing the policies
+        #     Values are [Policy][google.iam.v1.Policy] objects representing the policies
         #     that you want to simulate.
         #
         #     Replays automatically take into account any IAM policies inherited through

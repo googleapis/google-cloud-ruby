@@ -21,7 +21,6 @@ require "helper"
 require "gapic/grpc/service_stub"
 
 require "google/cloud/support/v2beta/feed_service_pb"
-require "google/cloud/support/v2beta/feed_service_services_pb"
 require "google/cloud/support/v2beta/feed_service"
 
 class ::Google::Cloud::Support::V2beta::FeedService::ClientTest < Minitest::Test

@@ -13,5 +13,5 @@ assign_issues_by:
     - GoogleCloudPlatform/cloud-parameters-team
 
 assign_issues:
- - dazuma
+ - 'viacheslav-rostovtsev'
  - aandreassa

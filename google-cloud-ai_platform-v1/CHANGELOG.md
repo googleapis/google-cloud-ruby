@@ -1,5 +1,11 @@
 # Changelog
 
+### 1.21.0 (2025-08-26)
+
+#### Features
+
+* add data foundry service synthetic data generation API for v1 ([#30874](https://github.com/googleapis/google-cloud-ruby/issues/30874)) 
+
 ### 1.20.0 (2025-08-15)
 
 #### Features

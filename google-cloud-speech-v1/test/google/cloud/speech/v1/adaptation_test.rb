@@ -21,7 +21,6 @@ require "helper"
 require "gapic/grpc/service_stub"
 
 require "google/cloud/speech/v1/cloud_speech_adaptation_pb"
-require "google/cloud/speech/v1/cloud_speech_adaptation_services_pb"
 require "google/cloud/speech/v1/adaptation"
 
 class ::Google::Cloud::Speech::V1::Adaptation::ClientTest < Minitest::Test

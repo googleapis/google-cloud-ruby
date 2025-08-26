@@ -927,6 +927,14 @@
       "component": "google-cloud-language-v2",
       "version_file": "lib/google/cloud/language/v2/version.rb"
     },
+    "google-cloud-license_manager": {
+      "component": "google-cloud-license_manager",
+      "version_file": "lib/google/cloud/license_manager/version.rb"
+    },
+    "google-cloud-license_manager-v1": {
+      "component": "google-cloud-license_manager-v1",
+      "version_file": "lib/google/cloud/license_manager/v1/version.rb"
+    },
     "google-cloud-life_sciences": {
       "component": "google-cloud-life_sciences",
       "version_file": "lib/google/cloud/life_sciences/version.rb"
@@ -1334,6 +1342,10 @@
     "google-cloud-run-v2": {
       "component": "google-cloud-run-v2",
       "version_file": "lib/google/cloud/run/v2/version.rb"
+    },
+    "google-cloud-saas_platform-saas_service_mgmt-v1beta1": {
+      "component": "google-cloud-saas_platform-saas_service_mgmt-v1beta1",
+      "version_file": "lib/google/cloud/saas_platform/saas_service_mgmt/v1beta1/version.rb"
     },
     "google-cloud-scheduler": {
       "component": "google-cloud-scheduler",

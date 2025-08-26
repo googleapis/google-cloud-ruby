@@ -121,6 +121,13 @@ module Google
           # Add reader access to a user.
           #
           # @param [String] email The email address for the entity.
+          # @param [Google::Cloud::Bigquery::Condition, nil] condition An
+          #   optional condition for the access rule. A condition is a CEL
+          #   expression that is evaluated to determine if the access rule
+          #   should be applied. See {Google::Cloud::Bigquery::Condition} for
+          #   more information. To specify a condition, the
+          #   `access_policy_version` on the dataset must be set to `3`. `nil`
+          #   represents an absence of a condition. The default is `nil`.
           #
           # @example
           #   require "google/cloud/bigquery"
@@ -132,14 +139,35 @@ module Google
           #     access.add_reader_user "entity@example.com"
           #   end
           #
-          def add_reader_user email
-            add_access_role_scope_value :reader, :user, email
+          # @example With a condition:
+          #   require "google/cloud/bigquery"
+          #
+          #   bigquery = Google::Cloud::Bigquery.new
+          #   dataset = bigquery.dataset "my_dataset"
+          #   condition = Google::Cloud::Bigquery::Condition.new(
+          #     "resource.name.startsWith(\"projects/my-project/datasets/my_dataset/tables/foo\")",
+          #     title: "Table foo only"
+          #   )
+          #
+          #   dataset.access do |access|
+          #     access.add_reader_user "entity@example.com", condition: condition
+          #   end
+          #
+          def add_reader_user email, condition: nil
+            add_access_role_scope_value :reader, :user, email, condition
           end
 
           ##
           # Add reader access to a group.
           #
           # @param [String] email The email address for the entity.
+          # @param [Google::Cloud::Bigquery::Condition, nil] condition An
+          #   optional condition for the access rule. A condition is a CEL
+          #   expression that is evaluated to determine if the access rule
+          #   should be applied. See {Google::Cloud::Bigquery::Condition} for
+          #   more information. To specify a condition, the
+          #   `access_policy_version` on the dataset must be set to `3`. `nil`
+          #   represents an absence of a condition. The default is `nil`.
           #
           # @example
           #   require "google/cloud/bigquery"
@@ -151,8 +179,22 @@ module Google
           #     access.add_reader_group "entity@example.com"
           #   end
           #
-          def add_reader_group email
-            add_access_role_scope_value :reader, :group, email
+          # @example With a condition:
+          #   require "google/cloud/bigquery"
+          #
+          #   bigquery = Google::Cloud::Bigquery.new
+          #   dataset = bigquery.dataset "my_dataset"
+          #   condition = Google::Cloud::Bigquery::Condition.new(
+          #     "resource.name.startsWith(\"projects/my-project/datasets/my_dataset/tables/foo\")",
+          #     title: "Table foo only"
+          #   )
+          #
+          #   dataset.access do |access|
+          #     access.add_reader_group "entity@example.com", condition: condition
+          #   end
+          #
+          def add_reader_group email, condition: nil
+            add_access_role_scope_value :reader, :group, email, condition
           end
 
           ##
@@ -160,6 +202,13 @@ module Google
           # Policy but isn't a user, group, domain, or special group.
           #
           # @param [String] identity The identity reference.
+          # @param [Google::Cloud::Bigquery::Condition, nil] condition An
+          #   optional condition for the access rule. A condition is a CEL
+          #   expression that is evaluated to determine if the access rule
+          #   should be applied. See {Google::Cloud::Bigquery::Condition} for
+          #   more information. To specify a condition, the
+          #   `access_policy_version` on the dataset must be set to `3`. `nil`
+          #   represents an absence of a condition. The default is `nil`.
           #
           # @example
           #   require "google/cloud/bigquery"
@@ -171,8 +220,22 @@ module Google
           #     access.add_reader_iam_member "entity@example.com"
           #   end
           #
-          def add_reader_iam_member identity
-            add_access_role_scope_value :reader, :iam_member, identity
+          # @example With a condition:
+          #   require "google/cloud/bigquery"
+          #
+          #   bigquery = Google::Cloud::Bigquery.new
+          #   dataset = bigquery.dataset "my_dataset"
+          #   condition = Google::Cloud::Bigquery::Condition.new(
+          #     "resource.name.startsWith(\"projects/my-project/datasets/my_dataset/tables/foo\")",
+          #     title: "Table foo only"
+          #   )
+          #
+          #   dataset.access do |access|
+          #     access.add_reader_iam_member "entity@example.com", condition: condition
+          #   end
+          #
+          def add_reader_iam_member identity, condition: nil
+            add_access_role_scope_value :reader, :iam_member, identity, condition
           end
 
           ##
@@ -180,6 +243,13 @@ module Google
           #
           # @param [String] domain A [Cloud Identity
           #   domain](https://cloud.google.com/iam/docs/overview#cloudid_name_domain).
+          # @param [Google::Cloud::Bigquery::Condition, nil] condition An
+          #   optional condition for the access rule. A condition is a CEL
+          #   expression that is evaluated to determine if the access rule
+          #   should be applied. See {Google::Cloud::Bigquery::Condition} for
+          #   more information. To specify a condition, the
+          #   `access_policy_version` on the dataset must be set to `3`. `nil`
+          #   represents an absence of a condition. The default is `nil`.
           #
           # @example
           #   require "google/cloud/bigquery"
@@ -191,8 +261,22 @@ module Google
           #     access.add_reader_domain "example.com"
           #   end
           #
-          def add_reader_domain domain
-            add_access_role_scope_value :reader, :domain, domain
+          # @example With a condition:
+          #   require "google/cloud/bigquery"
+          #
+          #   bigquery = Google::Cloud::Bigquery.new
+          #   dataset = bigquery.dataset "my_dataset"
+          #   condition = Google::Cloud::Bigquery::Condition.new(
+          #     "resource.name.startsWith(\"projects/my-project/datasets/my_dataset/tables/foo\")",
+          #     title: "Table foo only"
+          #   )
+          #
+          #   dataset.access do |access|
+          #     access.add_reader_domain "example.com", condition: condition
+          #   end
+          #
+          def add_reader_domain domain, condition: nil
+            add_access_role_scope_value :reader, :domain, domain, condition
           end
 
           ##
@@ -212,7 +296,7 @@ module Google
           #   end
           #
           def add_reader_special group
-            add_access_role_scope_value :reader, :special, group
+            add_access_role_scope_value :reader, :special, group, nil
           end
 
           ##
@@ -311,6 +395,13 @@ module Google
           # Add writer access to a user.
           #
           # @param [String] email The email address for the entity.
+          # @param [Google::Cloud::Bigquery::Condition, nil] condition An
+          #   optional condition for the access rule. A condition is a CEL
+          #   expression that is evaluated to determine if the access rule
+          #   should be applied. See {Google::Cloud::Bigquery::Condition} for
+          #   more information. To specify a condition, the
+          #   `access_policy_version` on the dataset must be set to `3`. `nil`
+          #   represents an absence of a condition. The default is `nil`.
           #
           # @example
           #   require "google/cloud/bigquery"
@@ -322,14 +413,35 @@ module Google
           #     access.add_writer_user "entity@example.com"
           #   end
           #
-          def add_writer_user email
-            add_access_role_scope_value :writer, :user, email
+          # @example With a condition:
+          #   require "google/cloud/bigquery"
+          #
+          #   bigquery = Google::Cloud::Bigquery.new
+          #   dataset = bigquery.dataset "my_dataset"
+          #   condition = Google::Cloud::Bigquery::Condition.new(
+          #     "resource.name.startsWith(\"projects/my-project/datasets/my_dataset/tables/foo\")",
+          #     title: "Table foo only"
+          #   )
+          #
+          #   dataset.access do |access|
+          #     access.add_writer_user "entity@example.com", condition: condition
+          #   end
+          #
+          def add_writer_user email, condition: nil
+            add_access_role_scope_value :writer, :user, email, condition
           end
 
           ##
           # Add writer access to a group.
           #
           # @param [String] email The email address for the entity.
+          # @param [Google::Cloud::Bigquery::Condition, nil] condition An
+          #   optional condition for the access rule. A condition is a CEL
+          #   expression that is evaluated to determine if the access rule
+          #   should be applied. See {Google::Cloud::Bigquery::Condition} for
+          #   more information. To specify a condition, the
+          #   `access_policy_version` on the dataset must be set to `3`. `nil`
+          #   represents an absence of a condition. The default is `nil`.
           #
           # @example
           #   require "google/cloud/bigquery"
@@ -341,8 +453,22 @@ module Google
           #     access.add_writer_group "entity@example.com"
           #   end
           #
-          def add_writer_group email
-            add_access_role_scope_value :writer, :group, email
+          # @example With a condition:
+          #   require "google/cloud/bigquery"
+          #
+          #   bigquery = Google::Cloud::Bigquery.new
+          #   dataset = bigquery.dataset "my_dataset"
+          #   condition = Google::Cloud::Bigquery::Condition.new(
+          #     "resource.name.startsWith(\"projects/my-project/datasets/my_dataset/tables/foo\")",
+          #     title: "Table foo only"
+          #   )
+          #
+          #   dataset.access do |access|
+          #     access.add_writer_group "entity@example.com", condition: condition
+          #   end
+          #
+          def add_writer_group email, condition: nil
+            add_access_role_scope_value :writer, :group, email, condition
           end
 
           ##
@@ -350,6 +476,13 @@ module Google
           # Policy but isn't a user, group, domain, or special group.
           #
           # @param [String] identity The identity reference.
+          # @param [Google::Cloud::Bigquery::Condition, nil] condition An
+          #   optional condition for the access rule. A condition is a CEL
+          #   expression that is evaluated to determine if the access rule
+          #   should be applied. See {Google::Cloud::Bigquery::Condition} for
+          #   more information. To specify a condition, the
+          #   `access_policy_version` on the dataset must be set to `3`. `nil`
+          #   represents an absence of a condition. The default is `nil`.
           #
           # @example
           #   require "google/cloud/bigquery"
@@ -361,8 +494,22 @@ module Google
           #     access.add_writer_iam_member "entity@example.com"
           #   end
           #
-          def add_writer_iam_member identity
-            add_access_role_scope_value :writer, :iam_member, identity
+          # @example With a condition:
+          #   require "google/cloud/bigquery"
+          #
+          #   bigquery = Google::Cloud::Bigquery.new
+          #   dataset = bigquery.dataset "my_dataset"
+          #   condition = Google::Cloud::Bigquery::Condition.new(
+          #     "resource.name.startsWith(\"projects/my-project/datasets/my_dataset/tables/foo\")",
+          #     title: "Table foo only"
+          #   )
+          #
+          #   dataset.access do |access|
+          #     access.add_writer_iam_member "entity@example.com", condition: condition
+          #   end
+          #
+          def add_writer_iam_member identity, condition: nil
+            add_access_role_scope_value :writer, :iam_member, identity, condition
           end
 
           ##
@@ -370,6 +517,13 @@ module Google
           #
           # @param [String] domain A [Cloud Identity
           #   domain](https://cloud.google.com/iam/docs/overview#cloudid_name_domain).
+          # @param [Google::Cloud::Bigquery::Condition, nil] condition An
+          #   optional condition for the access rule. A condition is a CEL
+          #   expression that is evaluated to determine if the access rule
+          #   should be applied. See {Google::Cloud::Bigquery::Condition} for
+          #   more information. To specify a condition, the
+          #   `access_policy_version` on the dataset must be set to `3`. `nil`
+          #   represents an absence of a condition. The default is `nil`.
           #
           # @example
           #   require "google/cloud/bigquery"
@@ -381,8 +535,22 @@ module Google
           #     access.add_writer_domain "example.com"
           #   end
           #
-          def add_writer_domain domain
-            add_access_role_scope_value :writer, :domain, domain
+          # @example With a condition:
+          #   require "google/cloud/bigquery"
+          #
+          #   bigquery = Google::Cloud::Bigquery.new
+          #   dataset = bigquery.dataset "my_dataset"
+          #   condition = Google::Cloud::Bigquery::Condition.new(
+          #     "resource.name.startsWith(\"projects/my-project/datasets/my_dataset/tables/foo\")",
+          #     title: "Table foo only"
+          #   )
+          #
+          #   dataset.access do |access|
+          #     access.add_writer_domain "example.com", condition: condition
+          #   end
+          #
+          def add_writer_domain domain, condition: nil
+            add_access_role_scope_value :writer, :domain, domain, condition
           end
 
           ##
@@ -402,13 +570,20 @@ module Google
           #   end
           #
           def add_writer_special group
-            add_access_role_scope_value :writer, :special, group
+            add_access_role_scope_value :writer, :special, group, nil
           end
 
           ##
           # Add owner access to a user.
           #
           # @param [String] email The email address for the entity.
+          # @param [Google::Cloud::Bigquery::Condition, nil] condition An
+          #   optional condition for the access rule. A condition is a CEL
+          #   expression that is evaluated to determine if the access rule
+          #   should be applied. See {Google::Cloud::Bigquery::Condition} for
+          #   more information. To specify a condition, the
+          #   `access_policy_version` on the dataset must be set to `3`. `nil`
+          #   represents an absence of a condition. The default is `nil`.
           #
           # @example
           #   require "google/cloud/bigquery"
@@ -420,14 +595,35 @@ module Google
           #     access.add_owner_user "entity@example.com"
           #   end
           #
-          def add_owner_user email
-            add_access_role_scope_value :owner, :user, email
+          # @example With a condition:
+          #   require "google/cloud/bigquery"
+          #
+          #   bigquery = Google::Cloud::Bigquery.new
+          #   dataset = bigquery.dataset "my_dataset"
+          #   condition = Google::Cloud::Bigquery::Condition.new(
+          #     "resource.name.startsWith(\"projects/my-project/datasets/my_dataset/tables/foo\")",
+          #     title: "Table foo only"
+          #   )
+          #
+          #   dataset.access do |access|
+          #     access.add_owner_user "entity@example.com", condition: condition
+          #   end
+          #
+          def add_owner_user email, condition: nil
+            add_access_role_scope_value :owner, :user, email, condition
           end
 
           ##
           # Add owner access to a group.
           #
           # @param [String] email The email address for the entity.
+          # @param [Google::Cloud::Bigquery::Condition, nil] condition An
+          #   optional condition for the access rule. A condition is a CEL
+          #   expression that is evaluated to determine if the access rule
+          #   should be applied. See {Google::Cloud::Bigquery::Condition} for
+          #   more information. To specify a condition, the
+          #   `access_policy_version` on the dataset must be set to `3`. `nil`
+          #   represents an absence of a condition. The default is `nil`.
           #
           # @example
           #   require "google/cloud/bigquery"
@@ -439,8 +635,22 @@ module Google
           #     access.add_owner_group "entity@example.com"
           #   end
           #
-          def add_owner_group email
-            add_access_role_scope_value :owner, :group, email
+          # @example With a condition:
+          #   require "google/cloud/bigquery"
+          #
+          #   bigquery = Google::Cloud::Bigquery.new
+          #   dataset = bigquery.dataset "my_dataset"
+          #   condition = Google::Cloud::Bigquery::Condition.new(
+          #     "resource.name.startsWith(\"projects/my-project/datasets/my_dataset/tables/foo\")",
+          #     title: "Table foo only"
+          #   )
+          #
+          #   dataset.access do |access|
+          #     access.add_owner_group "entity@example.com", condition: condition
+          #   end
+          #
+          def add_owner_group email, condition: nil
+            add_access_role_scope_value :owner, :group, email, condition
           end
 
           ##
@@ -448,6 +658,13 @@ module Google
           # Policy but isn't a user, group, domain, or special group.
           #
           # @param [String] identity The identity reference.
+          # @param [Google::Cloud::Bigquery::Condition, nil] condition An
+          #   optional condition for the access rule. A condition is a CEL
+          #   expression that is evaluated to determine if the access rule
+          #   should be applied. See {Google::Cloud::Bigquery::Condition} for
+          #   more information. To specify a condition, the
+          #   `access_policy_version` on the dataset must be set to `3`. `nil`
+          #   represents an absence of a condition. The default is `nil`.
           #
           # @example
           #   require "google/cloud/bigquery"
@@ -459,8 +676,22 @@ module Google
           #     access.add_owner_iam_member "entity@example.com"
           #   end
           #
-          def add_owner_iam_member identity
-            add_access_role_scope_value :owner, :iam_member, identity
+          # @example With a condition:
+          #   require "google/cloud/bigquery"
+          #
+          #   bigquery = Google::Cloud::Bigquery.new
+          #   dataset = bigquery.dataset "my_dataset"
+          #   condition = Google::Cloud::Bigquery::Condition.new(
+          #     "resource.name.startsWith(\"projects/my-project/datasets/my_dataset/tables/foo\")",
+          #     title: "Table foo only"
+          #   )
+          #
+          #   dataset.access do |access|
+          #     access.add_owner_iam_member "entity@example.com", condition: condition
+          #   end
+          #
+          def add_owner_iam_member identity, condition: nil
+            add_access_role_scope_value :owner, :iam_member, identity, condition
           end
 
           ##
@@ -468,6 +699,13 @@ module Google
           #
           # @param [String] domain A [Cloud Identity
           #   domain](https://cloud.google.com/iam/docs/overview#cloudid_name_domain).
+          # @param [Google::Cloud::Bigquery::Condition, nil] condition An
+          #   optional condition for the access rule. A condition is a CEL
+          #   expression that is evaluated to determine if the access rule
+          #   should be applied. See {Google::Cloud::Bigquery::Condition} for
+          #   more information. To specify a condition, the
+          #   `access_policy_version` on the dataset must be set to `3`. `nil`
+          #   represents an absence of a condition. The default is `nil`.
           #
           # @example
           #   require "google/cloud/bigquery"
@@ -479,8 +717,22 @@ module Google
           #     access.add_owner_domain "example.com"
           #   end
           #
-          def add_owner_domain domain
-            add_access_role_scope_value :owner, :domain, domain
+          # @example With a condition:
+          #   require "google/cloud/bigquery"
+          #
+          #   bigquery = Google::Cloud::Bigquery.new
+          #   dataset = bigquery.dataset "my_dataset"
+          #   condition = Google::Cloud::Bigquery::Condition.new(
+          #     "resource.name.startsWith(\"projects/my-project/datasets/my_dataset/tables/foo\")",
+          #     title: "Table foo only"
+          #   )
+          #
+          #   dataset.access do |access|
+          #     access.add_owner_domain "example.com", condition: condition
+          #   end
+          #
+          def add_owner_domain domain, condition: nil
+            add_access_role_scope_value :owner, :domain, domain, condition
           end
 
           ##
@@ -500,7 +752,7 @@ module Google
           #   end
           #
           def add_owner_special group
-            add_access_role_scope_value :owner, :special, group
+            add_access_role_scope_value :owner, :special, group, nil
           end
 
           ##
@@ -1309,7 +1561,7 @@ module Google
           end
 
           # @private
-          def add_access_role_scope_value role, scope, value
+          def add_access_role_scope_value role, scope, value, condition
             role = validate_role role
             scope = validate_scope scope
             # If scope is special group, make sure value is in the list
@@ -1318,6 +1570,7 @@ module Google
             @rules.reject!(&find_by_scope_and_value(scope, value))
             # Add new rule for this role, scope, and value
             opts = { role: role, scope => value }
+            opts[:condition] = condition.to_gapi unless condition.nil?
             @rules << Google::Apis::BigqueryV2::Dataset::Access.new(**opts)
           end
 

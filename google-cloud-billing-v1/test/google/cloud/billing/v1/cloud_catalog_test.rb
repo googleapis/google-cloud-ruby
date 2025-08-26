@@ -21,7 +21,6 @@ require "helper"
 require "gapic/grpc/service_stub"
 
 require "google/cloud/billing/v1/cloud_catalog_pb"
-require "google/cloud/billing/v1/cloud_catalog_services_pb"
 require "google/cloud/billing/v1/cloud_catalog"
 
 class ::Google::Cloud::Billing::V1::CloudCatalog::ClientTest < Minitest::Test

@@ -21,7 +21,6 @@ require "helper"
 require "gapic/grpc/service_stub"
 
 require "google/monitoring/v3/snooze_service_pb"
-require "google/monitoring/v3/snooze_service_services_pb"
 require "google/cloud/monitoring/v3/snooze_service"
 
 class ::Google::Cloud::Monitoring::V3::SnoozeService::ClientTest < Minitest::Test

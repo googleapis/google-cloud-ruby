@@ -21,7 +21,6 @@ require "helper"
 require "gapic/grpc/service_stub"
 
 require "google/cloud/video/livestream/v1/service_pb"
-require "google/cloud/video/livestream/v1/service_services_pb"
 require "google/cloud/video/live_stream/v1/livestream_service"
 
 class ::Google::Cloud::Video::LiveStream::V1::LivestreamService::ClientTest < Minitest::Test

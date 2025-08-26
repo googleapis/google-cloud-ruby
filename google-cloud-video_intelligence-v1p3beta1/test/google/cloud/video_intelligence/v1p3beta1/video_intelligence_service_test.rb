@@ -21,7 +21,6 @@ require "helper"
 require "gapic/grpc/service_stub"
 
 require "google/cloud/videointelligence/v1p3beta1/video_intelligence_pb"
-require "google/cloud/videointelligence/v1p3beta1/video_intelligence_services_pb"
 require "google/cloud/video_intelligence/v1p3beta1/video_intelligence_service"
 
 class ::Google::Cloud::VideoIntelligence::V1p3beta1::VideoIntelligenceService::ClientTest < Minitest::Test

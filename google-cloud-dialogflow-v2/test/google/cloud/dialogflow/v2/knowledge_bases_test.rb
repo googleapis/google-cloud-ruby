@@ -21,7 +21,6 @@ require "helper"
 require "gapic/grpc/service_stub"
 
 require "google/cloud/dialogflow/v2/knowledge_base_pb"
-require "google/cloud/dialogflow/v2/knowledge_base_services_pb"
 require "google/cloud/dialogflow/v2/knowledge_bases"
 
 class ::Google::Cloud::Dialogflow::V2::KnowledgeBases::ClientTest < Minitest::Test

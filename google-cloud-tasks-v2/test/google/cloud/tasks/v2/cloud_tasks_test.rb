@@ -21,7 +21,6 @@ require "helper"
 require "gapic/grpc/service_stub"
 
 require "google/cloud/tasks/v2/cloudtasks_pb"
-require "google/cloud/tasks/v2/cloudtasks_services_pb"
 require "google/cloud/tasks/v2/cloud_tasks"
 
 class ::Google::Cloud::Tasks::V2::CloudTasks::ClientTest < Minitest::Test

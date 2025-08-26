@@ -21,7 +21,6 @@ require "helper"
 require "gapic/grpc/service_stub"
 
 require "google/cloud/visionai/v1/lva_service_pb"
-require "google/cloud/visionai/v1/lva_service_services_pb"
 require "google/cloud/vision_ai/v1/live_video_analytics"
 
 class ::Google::Cloud::VisionAI::V1::LiveVideoAnalytics::ClientTest < Minitest::Test

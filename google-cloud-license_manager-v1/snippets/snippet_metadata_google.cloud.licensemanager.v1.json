@@ -1,0 +1,535 @@
+{
+  "client_library": {
+    "name": "google-cloud-license_manager-v1",
+    "version": "0.1.0",
+    "language": "RUBY",
+    "apis": [
+      {
+        "id": "google.cloud.licensemanager.v1",
+        "version": "v1"
+      }
+    ]
+  },
+  "snippets": [
+    {
+      "region_tag": "licensemanager_v1_generated_LicenseManager_ListConfigurations_sync",
+      "title": "Snippet for the list_configurations call in the LicenseManager service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::LicenseManager::V1::LicenseManager::Client#list_configurations.",
+      "file": "license_manager/list_configurations.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_configurations",
+        "full_name": "::Google::Cloud::LicenseManager::V1::LicenseManager::Client#list_configurations",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::LicenseManager::V1::ListConfigurationsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::LicenseManager::V1::ListConfigurationsResponse",
+        "client": {
+          "short_name": "LicenseManager::Client",
+          "full_name": "::Google::Cloud::LicenseManager::V1::LicenseManager::Client"
+        },
+        "method": {
+          "short_name": "ListConfigurations",
+          "full_name": "google.cloud.licensemanager.v1.LicenseManager.ListConfigurations",
+          "service": {
+            "short_name": "LicenseManager",
+            "full_name": "google.cloud.licensemanager.v1.LicenseManager"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "licensemanager_v1_generated_LicenseManager_GetConfiguration_sync",
+      "title": "Snippet for the get_configuration call in the LicenseManager service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::LicenseManager::V1::LicenseManager::Client#get_configuration.",
+      "file": "license_manager/get_configuration.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_configuration",
+        "full_name": "::Google::Cloud::LicenseManager::V1::LicenseManager::Client#get_configuration",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::LicenseManager::V1::GetConfigurationRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::LicenseManager::V1::Configuration",
+        "client": {
+          "short_name": "LicenseManager::Client",
+          "full_name": "::Google::Cloud::LicenseManager::V1::LicenseManager::Client"
+        },
+        "method": {
+          "short_name": "GetConfiguration",
+          "full_name": "google.cloud.licensemanager.v1.LicenseManager.GetConfiguration",
+          "service": {
+            "short_name": "LicenseManager",
+            "full_name": "google.cloud.licensemanager.v1.LicenseManager"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "licensemanager_v1_generated_LicenseManager_CreateConfiguration_sync",
+      "title": "Snippet for the create_configuration call in the LicenseManager service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::LicenseManager::V1::LicenseManager::Client#create_configuration.",
+      "file": "license_manager/create_configuration.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_configuration",
+        "full_name": "::Google::Cloud::LicenseManager::V1::LicenseManager::Client#create_configuration",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::LicenseManager::V1::CreateConfigurationRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "LicenseManager::Client",
+          "full_name": "::Google::Cloud::LicenseManager::V1::LicenseManager::Client"
+        },
+        "method": {
+          "short_name": "CreateConfiguration",
+          "full_name": "google.cloud.licensemanager.v1.LicenseManager.CreateConfiguration",
+          "service": {
+            "short_name": "LicenseManager",
+            "full_name": "google.cloud.licensemanager.v1.LicenseManager"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "licensemanager_v1_generated_LicenseManager_UpdateConfiguration_sync",
+      "title": "Snippet for the update_configuration call in the LicenseManager service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::LicenseManager::V1::LicenseManager::Client#update_configuration.",
+      "file": "license_manager/update_configuration.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_configuration",
+        "full_name": "::Google::Cloud::LicenseManager::V1::LicenseManager::Client#update_configuration",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::LicenseManager::V1::UpdateConfigurationRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "LicenseManager::Client",
+          "full_name": "::Google::Cloud::LicenseManager::V1::LicenseManager::Client"
+        },
+        "method": {
+          "short_name": "UpdateConfiguration",
+          "full_name": "google.cloud.licensemanager.v1.LicenseManager.UpdateConfiguration",
+          "service": {
+            "short_name": "LicenseManager",
+            "full_name": "google.cloud.licensemanager.v1.LicenseManager"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "licensemanager_v1_generated_LicenseManager_DeleteConfiguration_sync",
+      "title": "Snippet for the delete_configuration call in the LicenseManager service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::LicenseManager::V1::LicenseManager::Client#delete_configuration.",
+      "file": "license_manager/delete_configuration.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_configuration",
+        "full_name": "::Google::Cloud::LicenseManager::V1::LicenseManager::Client#delete_configuration",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::LicenseManager::V1::DeleteConfigurationRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "LicenseManager::Client",
+          "full_name": "::Google::Cloud::LicenseManager::V1::LicenseManager::Client"
+        },
+        "method": {
+          "short_name": "DeleteConfiguration",
+          "full_name": "google.cloud.licensemanager.v1.LicenseManager.DeleteConfiguration",
+          "service": {
+            "short_name": "LicenseManager",
+            "full_name": "google.cloud.licensemanager.v1.LicenseManager"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "licensemanager_v1_generated_LicenseManager_ListInstances_sync",
+      "title": "Snippet for the list_instances call in the LicenseManager service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::LicenseManager::V1::LicenseManager::Client#list_instances.",
+      "file": "license_manager/list_instances.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_instances",
+        "full_name": "::Google::Cloud::LicenseManager::V1::LicenseManager::Client#list_instances",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::LicenseManager::V1::ListInstancesRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::LicenseManager::V1::ListInstancesResponse",
+        "client": {
+          "short_name": "LicenseManager::Client",
+          "full_name": "::Google::Cloud::LicenseManager::V1::LicenseManager::Client"
+        },
+        "method": {
+          "short_name": "ListInstances",
+          "full_name": "google.cloud.licensemanager.v1.LicenseManager.ListInstances",
+          "service": {
+            "short_name": "LicenseManager",
+            "full_name": "google.cloud.licensemanager.v1.LicenseManager"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "licensemanager_v1_generated_LicenseManager_GetInstance_sync",
+      "title": "Snippet for the get_instance call in the LicenseManager service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::LicenseManager::V1::LicenseManager::Client#get_instance.",
+      "file": "license_manager/get_instance.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_instance",
+        "full_name": "::Google::Cloud::LicenseManager::V1::LicenseManager::Client#get_instance",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::LicenseManager::V1::GetInstanceRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::LicenseManager::V1::Instance",
+        "client": {
+          "short_name": "LicenseManager::Client",
+          "full_name": "::Google::Cloud::LicenseManager::V1::LicenseManager::Client"
+        },
+        "method": {
+          "short_name": "GetInstance",
+          "full_name": "google.cloud.licensemanager.v1.LicenseManager.GetInstance",
+          "service": {
+            "short_name": "LicenseManager",
+            "full_name": "google.cloud.licensemanager.v1.LicenseManager"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "licensemanager_v1_generated_LicenseManager_DeactivateConfiguration_sync",
+      "title": "Snippet for the deactivate_configuration call in the LicenseManager service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::LicenseManager::V1::LicenseManager::Client#deactivate_configuration.",
+      "file": "license_manager/deactivate_configuration.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "deactivate_configuration",
+        "full_name": "::Google::Cloud::LicenseManager::V1::LicenseManager::Client#deactivate_configuration",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::LicenseManager::V1::DeactivateConfigurationRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "LicenseManager::Client",
+          "full_name": "::Google::Cloud::LicenseManager::V1::LicenseManager::Client"
+        },
+        "method": {
+          "short_name": "DeactivateConfiguration",
+          "full_name": "google.cloud.licensemanager.v1.LicenseManager.DeactivateConfiguration",
+          "service": {
+            "short_name": "LicenseManager",
+            "full_name": "google.cloud.licensemanager.v1.LicenseManager"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "licensemanager_v1_generated_LicenseManager_ReactivateConfiguration_sync",
+      "title": "Snippet for the reactivate_configuration call in the LicenseManager service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::LicenseManager::V1::LicenseManager::Client#reactivate_configuration.",
+      "file": "license_manager/reactivate_configuration.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "reactivate_configuration",
+        "full_name": "::Google::Cloud::LicenseManager::V1::LicenseManager::Client#reactivate_configuration",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::LicenseManager::V1::ReactivateConfigurationRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "LicenseManager::Client",
+          "full_name": "::Google::Cloud::LicenseManager::V1::LicenseManager::Client"
+        },
+        "method": {
+          "short_name": "ReactivateConfiguration",
+          "full_name": "google.cloud.licensemanager.v1.LicenseManager.ReactivateConfiguration",
+          "service": {
+            "short_name": "LicenseManager",
+            "full_name": "google.cloud.licensemanager.v1.LicenseManager"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "licensemanager_v1_generated_LicenseManager_QueryConfigurationLicenseUsage_sync",
+      "title": "Snippet for the query_configuration_license_usage call in the LicenseManager service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::LicenseManager::V1::LicenseManager::Client#query_configuration_license_usage.",
+      "file": "license_manager/query_configuration_license_usage.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "query_configuration_license_usage",
+        "full_name": "::Google::Cloud::LicenseManager::V1::LicenseManager::Client#query_configuration_license_usage",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::LicenseManager::V1::QueryConfigurationLicenseUsageRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::LicenseManager::V1::QueryConfigurationLicenseUsageResponse",
+        "client": {
+          "short_name": "LicenseManager::Client",
+          "full_name": "::Google::Cloud::LicenseManager::V1::LicenseManager::Client"
+        },
+        "method": {
+          "short_name": "QueryConfigurationLicenseUsage",
+          "full_name": "google.cloud.licensemanager.v1.LicenseManager.QueryConfigurationLicenseUsage",
+          "service": {
+            "short_name": "LicenseManager",
+            "full_name": "google.cloud.licensemanager.v1.LicenseManager"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "licensemanager_v1_generated_LicenseManager_AggregateUsage_sync",
+      "title": "Snippet for the aggregate_usage call in the LicenseManager service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::LicenseManager::V1::LicenseManager::Client#aggregate_usage.",
+      "file": "license_manager/aggregate_usage.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "aggregate_usage",
+        "full_name": "::Google::Cloud::LicenseManager::V1::LicenseManager::Client#aggregate_usage",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::LicenseManager::V1::AggregateUsageRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::LicenseManager::V1::AggregateUsageResponse",
+        "client": {
+          "short_name": "LicenseManager::Client",
+          "full_name": "::Google::Cloud::LicenseManager::V1::LicenseManager::Client"
+        },
+        "method": {
+          "short_name": "AggregateUsage",
+          "full_name": "google.cloud.licensemanager.v1.LicenseManager.AggregateUsage",
+          "service": {
+            "short_name": "LicenseManager",
+            "full_name": "google.cloud.licensemanager.v1.LicenseManager"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "licensemanager_v1_generated_LicenseManager_ListProducts_sync",
+      "title": "Snippet for the list_products call in the LicenseManager service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::LicenseManager::V1::LicenseManager::Client#list_products.",
+      "file": "license_manager/list_products.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_products",
+        "full_name": "::Google::Cloud::LicenseManager::V1::LicenseManager::Client#list_products",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::LicenseManager::V1::ListProductsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::LicenseManager::V1::ListProductsResponse",
+        "client": {
+          "short_name": "LicenseManager::Client",
+          "full_name": "::Google::Cloud::LicenseManager::V1::LicenseManager::Client"
+        },
+        "method": {
+          "short_name": "ListProducts",
+          "full_name": "google.cloud.licensemanager.v1.LicenseManager.ListProducts",
+          "service": {
+            "short_name": "LicenseManager",
+            "full_name": "google.cloud.licensemanager.v1.LicenseManager"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "licensemanager_v1_generated_LicenseManager_GetProduct_sync",
+      "title": "Snippet for the get_product call in the LicenseManager service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::LicenseManager::V1::LicenseManager::Client#get_product.",
+      "file": "license_manager/get_product.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_product",
+        "full_name": "::Google::Cloud::LicenseManager::V1::LicenseManager::Client#get_product",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::LicenseManager::V1::GetProductRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::LicenseManager::V1::Product",
+        "client": {
+          "short_name": "LicenseManager::Client",
+          "full_name": "::Google::Cloud::LicenseManager::V1::LicenseManager::Client"
+        },
+        "method": {
+          "short_name": "GetProduct",
+          "full_name": "google.cloud.licensemanager.v1.LicenseManager.GetProduct",
+          "service": {
+            "short_name": "LicenseManager",
+            "full_name": "google.cloud.licensemanager.v1.LicenseManager"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    }
+  ]
+}
