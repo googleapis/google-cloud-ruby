@@ -200,10 +200,19 @@ module Google
         #   @return [::Google::Apps::Chat::V1::DeletionMetadata]
         #     Output only. Information about a deleted message. A message is deleted when
         #     `delete_time` is set.
-        # @!attribute [r] quoted_message_metadata
+        # @!attribute [rw] quoted_message_metadata
         #   @return [::Google::Apps::Chat::V1::QuotedMessageMetadata]
-        #     Output only. Information about a message that's quoted by a Google Chat
-        #     user in a space. Google Chat users can quote a message to reply to it.
+        #     Optional. Information about a message that another message quotes.
+        #
+        #     When you create a message, you can quote messages within the same
+        #     thread, or quote a root message to create a new root message.
+        #     However, you can't quote a message reply from a different thread.
+        #
+        #     When you update a message, you can't add or replace the
+        #     `quotedMessageMetadata` field, but you can remove it.
+        #
+        #     For example usage, see [Quote another
+        #     message](https://developers.google.com/workspace/chat/create-messages#quote-a-message).
         # @!attribute [r] attached_gifs
         #   @return [::Array<::Google::Apps::Chat::V1::AttachedGif>]
         #     Output only. GIF images that are attached to the message.
@@ -232,16 +241,32 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Information about a quoted message.
-        # @!attribute [r] name
+        # Information about a message that another message quotes.
+        #
+        # When you create a message, you can quote messages within the same
+        # thread, or quote a root message to create a new root message.
+        # However, you can't quote a message reply from a different thread.
+        #
+        # When you update a message, you can't add or replace the
+        # `quotedMessageMetadata` field, but you can remove it.
+        #
+        # For example usage, see [Quote another
+        # message](https://developers.google.com/workspace/chat/create-messages#quote-a-message).
+        # @!attribute [rw] name
         #   @return [::String]
-        #     Output only. Resource name of the quoted message.
+        #     Required. Resource name of the message that is quoted.
         #
         #     Format: `spaces/{space}/messages/{message}`
-        # @!attribute [r] last_update_time
+        # @!attribute [rw] last_update_time
         #   @return [::Google::Protobuf::Timestamp]
-        #     Output only. The timestamp when the quoted message was created or when the
+        #     Required. The timestamp when the quoted message was created or when the
         #     quoted message was last updated.
+        #
+        #     If the message was edited, use this field, `last_update_time`.
+        #     If the message was never edited, use `create_time`.
+        #
+        #     If `last_update_time` doesn't match the latest version of the quoted
+        #     message, the request fails.
         class QuotedMessageMetadata
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -421,6 +446,8 @@ module Google
         #
         #     - `accessory_widgets`  (Requires [app
         #     authentication](/chat/api/guides/auth/service-accounts).)
+        #
+        #     - `quoted_message_metadata` (Only allows removal of the quoted message.)
         # @!attribute [rw] allow_missing
         #   @return [::Boolean]
         #     Optional. If `true` and the message isn't found, a new message is created
