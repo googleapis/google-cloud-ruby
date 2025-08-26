@@ -1,7 +1,7 @@
 {
   "client_library": {
     "name": "google-cloud-saas_platform-saas_service_mgmt-v1beta1",
-    "version": "",
+    "version": "0.1.0",
     "language": "RUBY",
     "apis": [
       {
