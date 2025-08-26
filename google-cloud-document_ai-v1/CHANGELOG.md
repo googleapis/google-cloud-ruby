@@ -1,5 +1,11 @@
 # Changelog
 
+### 1.7.0 (2025-08-26)
+
+#### Features
+
+* Added config options for derived fields and signature detection. Some annotation changes changes to mark fields explicitly output only (no changes in semantics just readability) ([#30864](https://github.com/googleapis/google-cloud-ruby/issues/30864)) 
+
 ### 1.6.1 (2025-07-15)
 
 #### Documentation
