@@ -15,19 +15,19 @@
 # [START storage_batch_delete_job]
 require "google/cloud/storage_batch_operations"
 
-def delete_job project_name:, job_name:
+def delete_job project_id:, job_id:
   # The ID of your project
-  # project_name = "your-project-id"
+  # project_id = "your-project-id"
 
-  # The name of your Storage batch operation job
-  # job_name = "your-job-name"
+  # The ID of your Storage batch operation job
+  # job_id = "your-job-id"
 
   client = Google::Cloud::StorageBatchOperations.storage_batch_operations
-  parent = "projects/#{project_name}/locations/global"
-  request = Google::Cloud::StorageBatchOperations::V1::DeleteJobRequest.new name: "#{parent}/jobs/#{job_name}"
+  parent = "projects/#{project_id}/locations/global"
+  request = Google::Cloud::StorageBatchOperations::V1::DeleteJobRequest.new name: "#{parent}/jobs/#{job_id}"
   result = client.delete_job request
-  puts result.is_a?(Google::Protobuf::Empty) ? "The #{job_name} is deleted." : "The #{job_name} is not deleted."
+  puts result.is_a?(Google::Protobuf::Empty) ? "The #{job_id} is deleted." : "The #{job_id} is not deleted."
 end
 # [END storage_batch_delete_job]
 
-delete_job project_name: ARGV.shift, job_name: ARGV.shift if $PROGRAM_NAME == __FILE__
+delete_job project_id: ARGV.shift, job_id: ARGV.shift if $PROGRAM_NAME == __FILE__

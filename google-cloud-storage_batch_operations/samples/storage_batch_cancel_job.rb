@@ -15,25 +15,25 @@
 # [START storage_batch_cancel_job]
 require "google/cloud/storage_batch_operations"
 
-def cancel_job project_name:, job_name:
+def cancel_job project_id:, job_id:
   # The ID of your project
-  # project_name = "your-project-id"
+  # project_id = "your-project-id"
 
-  # The name of your Storage batch operation job
-  # job_name = "your-job-name"
+  # The ID of your Storage batch operation job
+  # job_id = "your-job-id"
 
   client = Google::Cloud::StorageBatchOperations.storage_batch_operations
-  parent = "projects/#{project_name}/locations/global"
+  parent = "projects/#{project_id}/locations/global"
 
-  request = Google::Cloud::StorageBatchOperations::V1::CancelJobRequest.new name: "#{parent}/jobs/#{job_name}"
+  request = Google::Cloud::StorageBatchOperations::V1::CancelJobRequest.new name: "#{parent}/jobs/#{job_id}"
   result = client.cancel_job request
   message = if result.is_a? Google::Cloud::StorageBatchOperations::V1::CancelJobResponse
-              "The #{job_name} is canceled."
+              "The #{job_id} is canceled."
             else
-              "The #{job_name} is not canceled."
+              "The #{job_id} is not canceled."
             end
   puts message
 end
 # [END storage_batch_cancel_job]
 
-cancel_job project_name: ARGV.shift, job_name: ARGV.shift if $PROGRAM_NAME == __FILE__
+cancel_job project_id: ARGV.shift, job_id: ARGV.shift if $PROGRAM_NAME == __FILE__

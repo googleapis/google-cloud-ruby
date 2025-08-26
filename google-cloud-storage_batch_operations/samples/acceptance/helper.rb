@@ -28,6 +28,10 @@ def create_bucket_helper bucket_name
   end
 end
 
+def get_project_id
+  Google::Cloud::Storage.new.project
+end
+
 def delete_bucket_helper bucket_name
   storage_client = Google::Cloud::Storage.new
   retry_resource_exhaustion do
@@ -64,5 +68,5 @@ end
 
 def random_bucket_name
   t = Time.now.utc.iso8601.gsub ":", "-"
-  "ruby-storage-samples-test-#{t}-#{SecureRandom.hex 4}".downcase
+  "ruby-sbo-samples-test-#{t}-#{SecureRandom.hex 4}".downcase
 end

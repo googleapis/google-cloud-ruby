@@ -15,11 +15,11 @@
 # [START storage_batch_list_job]
 require "google/cloud/storage_batch_operations"
 
-def list_job project_name:
+def list_job project_id:
   # The ID of your project
-  # project_name = "your-project-id"
+  # project_id = "your-project-id"
   client = Google::Cloud::StorageBatchOperations.storage_batch_operations
-  parent = "projects/#{project_name}/locations/global"
+  parent = "projects/#{project_id}/locations/global"
   request = Google::Cloud::StorageBatchOperations::V1::ListJobsRequest.new parent: parent, page_size: 10
   result = client.list_jobs request
   result.each do |job|
@@ -28,4 +28,4 @@ def list_job project_name:
 end
 # [END storage_batch_list_job]
 
-list_job project_name: ARGV.shift if $PROGRAM_NAME == __FILE__
+list_job project_id: ARGV.shift if $PROGRAM_NAME == __FILE__
