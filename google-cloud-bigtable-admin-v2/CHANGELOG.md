@@ -1,5 +1,11 @@
 # Release History
 
+### 1.13.0 (2025-08-26)
+
+#### Features
+
+* added tags for `update_instance` in BigTable admin 
+
 ### 1.12.0 (2025-07-24)
 
 #### Features
