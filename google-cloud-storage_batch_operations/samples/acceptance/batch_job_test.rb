@@ -13,14 +13,17 @@
 # limitations under the License.
 
 require_relative "helper"
+require "google/cloud/storage"
 require_relative "../storage_batch_create_job"
 require_relative "../storage_batch_delete_job"
 require_relative "../storage_batch_cancel_job"
 require_relative "../storage_batch_list_job"
 require_relative "../storage_batch_get_job"
+require 'pry'
 
 describe "Batch jobs Snippets" do
-  let(:project_name)   { ENV["GCLOUD_TEST_PROJECT"] }
+  let(:storage)   {  Google::Cloud::Storage.new}
+  let(:project_name)   { storage.project }
   let(:bucket)         { @bucket }
   let(:file_content)   { "some content" }
   let(:remote_file_name) { "ruby_file_#{SecureRandom.hex}" }

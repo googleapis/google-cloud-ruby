@@ -11,7 +11,6 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-require "google/cloud/storage_batch_operations"
 
 # [START storage_batch_get_job]
 def get_job project_name:, job_name:

@@ -27,4 +27,4 @@ def list_job project_name:
 end
 # [END storage_batch_list_job]
 
-delete_job project_name: ARGV.shift, job_name: ARGV.shift if $PROGRAM_NAME == __FILE__
+list_job project_name: ARGV.shift if $PROGRAM_NAME == __FILE__
