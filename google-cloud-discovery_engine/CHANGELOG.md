@@ -1,5 +1,12 @@
 # Changelog
 
+### 2.3.0 (2025-07-25)
+
+#### Features
+
+* add AssistantService 
+* add SessionService ([#30716](https://github.com/googleapis/google-cloud-ruby/issues/30716)) 
+
 ### 2.2.0 (2025-06-13)
 
 #### Features

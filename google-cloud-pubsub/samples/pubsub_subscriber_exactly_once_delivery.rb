@@ -12,44 +12,31 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# [START pubsub_subscriber_exactly_once]
 require "google/cloud/pubsub"
 
-# Shows how to register callback to acknowledge method and access the result passed in
-class PubsubSubscriberExactlyOnceDelivery
-  def subscriber_exactly_once_delivery project_id:, topic_id:, subscription_id:
-    pubsub = Google::Cloud::Pubsub.new project_id: project_id
-    topic = pubsub.topic topic_id
-    subscription = pubsub.subscription subscription_id
-    subscriber   = subscription.listen do |received_message|
-      puts "Received message: #{received_message.data}"
+def subscriber_exactly_once_delivery project_id:, subscription_id:
+  # [START pubsub_subscriber_exactly_once]
+  # project_id = "your-project-id"
+  # subscription_id = "your-subscription-id"
+  pubsub = Google::Cloud::Pubsub.new \
+    project_id: project_id,
+    endpoint: "us-west1-pubsub.googleapis.com:443"
+  subscriber = pubsub.subscriber subscription_id
 
-      # Pass in callback to access the acknowledge result.
-      # For subscription with Exactly once delivery disabled the result will be success always.
-      received_message.acknowledge! do |result|
-        puts "Acknowledge result's status: #{result.status}"
-      end
+  listener = subscriber.listen do |received_message|
+    puts "Received message: #{received_message.data}"
+    # Pass in callback to access the acknowledge result.
+    # For subscription with Exactly once delivery disabled the result will be
+    # success always.
+    received_message.acknowledge! do |result|
+      puts "Acknowledge result's status: #{result.status}"
     end
-
-    subscriber.start
-    # Let the main thread sleep for 60 seconds so the thread for listening
-    # messages does not quit
-    sleep 60
-    subscriber.stop.wait!
   end
 
-  def self.run
-    # TODO(developer): Replace these variables before running the sample.
-    project_id = "your-project-id"
-    topic_id = "your-topic-id"
-    subscription_id = "id-for-new-subcription" # subscription with exactly once delivery enabled
-    PubsubSubscriberExactlyOnceDelivery.new.subscriber_exactly_once_delivery project_id: project_id,
-                                                                             topic_id: topic_id,
-                                                                             subscription_id: subscription_id
-  end
+  listener.start
+  # Let the main thread sleep for 60 seconds so the thread for listening
+  # messages does not quit
+  sleep 60
+  listener.stop.wait!
+  # [END pubsub_subscriber_exactly_once]
 end
-
-if $PROGRAM_NAME == __FILE__
-  PubsubSubscriberExactlyOnceDelivery.run
-end
-# [END pubsub_subscriber_exactly_once]

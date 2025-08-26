@@ -22,6 +22,7 @@ require "google/cloud/run/v2/jobs/rest"
 require "google/cloud/run/v2/revisions/rest"
 require "google/cloud/run/v2/services/rest"
 require "google/cloud/run/v2/tasks/rest"
+require "google/cloud/run/v2/worker_pools/rest"
 require "google/cloud/run/v2/version"
 
 module Google

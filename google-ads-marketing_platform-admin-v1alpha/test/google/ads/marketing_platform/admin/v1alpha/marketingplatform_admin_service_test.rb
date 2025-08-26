@@ -21,7 +21,6 @@ require "helper"
 require "gapic/grpc/service_stub"
 
 require "google/marketingplatform/admin/v1alpha/marketingplatform_admin_pb"
-require "google/marketingplatform/admin/v1alpha/marketingplatform_admin_services_pb"
 require "google/ads/marketing_platform/admin/v1alpha/marketingplatform_admin_service"
 
 class ::Google::Ads::MarketingPlatform::Admin::V1alpha::MarketingplatformAdminService::ClientTest < Minitest::Test

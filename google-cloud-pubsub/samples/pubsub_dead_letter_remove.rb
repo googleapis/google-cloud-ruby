@@ -18,10 +18,18 @@ def dead_letter_remove subscription_id:
   # [START pubsub_dead_letter_remove]
   # subscription_id = "your-subscription-id"
 
-  pubsub = Google::Cloud::Pubsub.new
+  pubsub = Google::Cloud::PubSub.new
+  subscription_admin = pubsub.subscription_admin
 
-  subscription = pubsub.subscription subscription_id
-  subscription.remove_dead_letter_policy
+  subscription = subscription_admin.get_subscription \
+    subscription: pubsub.subscription_path(subscription_id)
+  subscription.dead_letter_policy = nil
+
+  subscription_admin.update_subscription subscription: subscription,
+                                         update_mask: {
+                                           paths: ["dead_letter_policy"]
+                                         }
+
   puts "Removed dead letter topic from #{subscription_id} subscription."
   # [END pubsub_dead_letter_remove]
 end

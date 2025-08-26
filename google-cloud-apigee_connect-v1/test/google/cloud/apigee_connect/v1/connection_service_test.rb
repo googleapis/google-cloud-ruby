@@ -21,7 +21,6 @@ require "helper"
 require "gapic/grpc/service_stub"
 
 require "google/cloud/apigeeconnect/v1/connection_pb"
-require "google/cloud/apigeeconnect/v1/connection_services_pb"
 require "google/cloud/apigee_connect/v1/connection_service"
 
 class ::Google::Cloud::ApigeeConnect::V1::ConnectionService::ClientTest < Minitest::Test

@@ -783,6 +783,9 @@ module Google
         #   `flatten` is false. Optional. The default value is false.
         # @param [String] session_id The ID of an existing session. See the
         #   `create_session` param in {#query_job} and {Job#session_id}.
+        # @param [Boolean] format_options_use_int64_timestamp Output timestamp
+        #   as usec int64. Default is true.
+        #
         # @yield [job] a job configuration object
         # @yieldparam [Google::Cloud::Bigquery::QueryJob::Updater] job a job
         #   configuration object for setting additional options for the query.
@@ -929,6 +932,7 @@ module Google
                   standard_sql: nil,
                   legacy_sql: nil,
                   session_id: nil,
+                  format_options_use_int64_timestamp: true,
                   &block
           job = query_job query,
                           params: params,
@@ -953,7 +957,7 @@ module Google
             end
           end
 
-          job.data max: max
+          job.data max: max, format_options_use_int64_timestamp: format_options_use_int64_timestamp
         end
 
         ##
@@ -1378,6 +1382,20 @@ module Google
         #   service. Calls made on this object will raise errors if the resource
         #   does not exist. Default is `false`. Optional.
         # @param [String] project_id The GCP Project where the dataset lives.
+        # @param [Integer] access_policy_version Optional. The version of the
+        #   provided access policy schema. Valid values are `0`, `1`, and `3`.
+        #   Requests specifying an invalid value will be rejected. This
+        #   version refers to the schema version of the access policy and not
+        #   the version of access policy. This field's value can be equal or
+        #   more than the access policy schema provided in the request. For
+        #   example, requests with conditional access policy binding in datasets
+        #   must specify version `3`. But dataset with no conditional role
+        #   bindings in access policy may specify any valid value or leave the
+        #   field unset. If unset or if `0` or `1` value is used for dataset with
+        #   conditional bindings, request will be rejected. This field will be
+        #   mapped to
+        #   [IAM Policy version](https://cloud.google.com/iam/docs/policies#versions)
+        #   and will be used to set policy in IAM.
         #
         # @return [Google::Cloud::Bigquery::Dataset, nil] Returns `nil` if the
         #   dataset does not exist.
@@ -1405,12 +1423,12 @@ module Google
         #
         #   dataset = bigquery.dataset "my_dataset", skip_lookup: true
         #
-        def dataset dataset_id, skip_lookup: nil, project_id: nil
+        def dataset dataset_id, skip_lookup: nil, project_id: nil, access_policy_version: nil
           ensure_service!
           project_id ||= project
           return Dataset.new_reference project_id, dataset_id, service if skip_lookup
-          gapi = service.get_project_dataset project_id, dataset_id
-          Dataset.from_gapi gapi, service
+          gapi = service.get_project_dataset project_id, dataset_id, access_policy_version: access_policy_version
+          Dataset.from_gapi gapi, service, access_policy_version: access_policy_version
         rescue Google::Cloud::NotFoundError
           nil
         end
@@ -1429,6 +1447,20 @@ module Google
         # @param [String] location The geographic location where the dataset
         #   should reside. Possible values include `EU` and `US`. The default
         #   value is `US`.
+        # @param [Integer] access_policy_version Optional. The version of the
+        #   provided access policy schema. Valid values are `0`, `1`, and `3`.
+        #   Requests specifying an invalid value will be rejected. This
+        #   version refers to the schema version of the access policy and not
+        #   the version of access policy. This field's value can be equal or
+        #   more than the access policy schema provided in the request. For
+        #   example, requests with conditional access policy binding in datasets
+        #   must specify version `3`. But dataset with no conditional role
+        #   bindings in access policy may specify any valid value or leave the
+        #   field unset. If unset or if `0` or `1` value is used for dataset with
+        #   conditional bindings, request will be rejected. This field will be
+        #   mapped to
+        #   [IAM Policy version](https://cloud.google.com/iam/docs/policies#versions)
+        #   and will be used to set policy in IAM.
         # @yield [access] a block for setting rules
         # @yieldparam [Google::Cloud::Bigquery::Dataset] access the object
         #   accepting rules
@@ -1461,7 +1493,7 @@ module Google
         #   end
         #
         def create_dataset dataset_id, name: nil, description: nil,
-                           expiration: nil, location: nil
+                           expiration: nil, location: nil, access_policy_version: nil
           ensure_service!
 
           new_ds = Google::Apis::BigqueryV2::Dataset.new(
@@ -1484,8 +1516,8 @@ module Google
             updater.check_for_mutated_access!
           end
 
-          gapi = service.insert_dataset new_ds
-          Dataset.from_gapi gapi, service
+          gapi = service.insert_dataset new_ds, access_policy_version: access_policy_version
+          Dataset.from_gapi gapi, service, access_policy_version: access_policy_version
         end
 
         ##

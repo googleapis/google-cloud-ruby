@@ -27,23 +27,6 @@ module Google
           # Secure Source Manager API
           #
           # Access Secure Source Manager instances, resources, and repositories.
-          #
-          # This API is split across two servers: the Control Plane and the Data Plane.
-          #
-          # Data Plane endpoints are hosted directly by your Secure Source Manager
-          # instance, so you must connect to your instance's API hostname to access
-          # them. The API hostname looks like the following:
-          #
-          #    https://[instance-id]-[project-number]-api.[location].sourcemanager.dev
-          #
-          # For example,
-          #
-          #    https://my-instance-702770452863-api.us-central1.sourcemanager.dev
-          #
-          # Data Plane endpoints are denoted with **Host: Data Plane**.
-          #
-          # All other endpoints are found in the normal Cloud API location, namely,
-          # `securcesourcemanager.googleapis.com`.
           class Service
 
             include ::GRPC::GenericService
@@ -62,20 +45,30 @@ module Google
             rpc :DeleteInstance, ::Google::Cloud::SecureSourceManager::V1::DeleteInstanceRequest, ::Google::Longrunning::Operation
             # Lists Repositories in a given project and location.
             #
-            # **Host: Data Plane**
+            # The instance field is required in the query parameter for requests using
+            # the securesourcemanager.googleapis.com endpoint.
             rpc :ListRepositories, ::Google::Cloud::SecureSourceManager::V1::ListRepositoriesRequest, ::Google::Cloud::SecureSourceManager::V1::ListRepositoriesResponse
             # Gets metadata of a repository.
-            #
-            # **Host: Data Plane**
             rpc :GetRepository, ::Google::Cloud::SecureSourceManager::V1::GetRepositoryRequest, ::Google::Cloud::SecureSourceManager::V1::Repository
             # Creates a new repository in a given project and location.
             #
-            # **Host: Data Plane**
+            # The Repository.Instance field is required in the request body for requests
+            # using the securesourcemanager.googleapis.com endpoint.
             rpc :CreateRepository, ::Google::Cloud::SecureSourceManager::V1::CreateRepositoryRequest, ::Google::Longrunning::Operation
+            # Updates the metadata of a repository.
+            rpc :UpdateRepository, ::Google::Cloud::SecureSourceManager::V1::UpdateRepositoryRequest, ::Google::Longrunning::Operation
             # Deletes a Repository.
-            #
-            # **Host: Data Plane**
             rpc :DeleteRepository, ::Google::Cloud::SecureSourceManager::V1::DeleteRepositoryRequest, ::Google::Longrunning::Operation
+            # Lists hooks in a given repository.
+            rpc :ListHooks, ::Google::Cloud::SecureSourceManager::V1::ListHooksRequest, ::Google::Cloud::SecureSourceManager::V1::ListHooksResponse
+            # Gets metadata of a hook.
+            rpc :GetHook, ::Google::Cloud::SecureSourceManager::V1::GetHookRequest, ::Google::Cloud::SecureSourceManager::V1::Hook
+            # Creates a new hook in a given repository.
+            rpc :CreateHook, ::Google::Cloud::SecureSourceManager::V1::CreateHookRequest, ::Google::Longrunning::Operation
+            # Updates the metadata of a hook.
+            rpc :UpdateHook, ::Google::Cloud::SecureSourceManager::V1::UpdateHookRequest, ::Google::Longrunning::Operation
+            # Deletes a Hook.
+            rpc :DeleteHook, ::Google::Cloud::SecureSourceManager::V1::DeleteHookRequest, ::Google::Longrunning::Operation
             # Get IAM policy for a repository.
             rpc :GetIamPolicyRepo, ::Google::Iam::V1::GetIamPolicyRequest, ::Google::Iam::V1::Policy
             # Set IAM policy on a repository.
@@ -93,6 +86,80 @@ module Google
             rpc :UpdateBranchRule, ::Google::Cloud::SecureSourceManager::V1::UpdateBranchRuleRequest, ::Google::Longrunning::Operation
             # DeleteBranchRule deletes a branch rule.
             rpc :DeleteBranchRule, ::Google::Cloud::SecureSourceManager::V1::DeleteBranchRuleRequest, ::Google::Longrunning::Operation
+            # Creates a pull request.
+            rpc :CreatePullRequest, ::Google::Cloud::SecureSourceManager::V1::CreatePullRequestRequest, ::Google::Longrunning::Operation
+            # Gets a pull request.
+            rpc :GetPullRequest, ::Google::Cloud::SecureSourceManager::V1::GetPullRequestRequest, ::Google::Cloud::SecureSourceManager::V1::PullRequest
+            # Lists pull requests in a repository.
+            rpc :ListPullRequests, ::Google::Cloud::SecureSourceManager::V1::ListPullRequestsRequest, ::Google::Cloud::SecureSourceManager::V1::ListPullRequestsResponse
+            # Updates a pull request.
+            rpc :UpdatePullRequest, ::Google::Cloud::SecureSourceManager::V1::UpdatePullRequestRequest, ::Google::Longrunning::Operation
+            # Merges a pull request.
+            rpc :MergePullRequest, ::Google::Cloud::SecureSourceManager::V1::MergePullRequestRequest, ::Google::Longrunning::Operation
+            # Opens a pull request.
+            rpc :OpenPullRequest, ::Google::Cloud::SecureSourceManager::V1::OpenPullRequestRequest, ::Google::Longrunning::Operation
+            # Closes a pull request without merging.
+            rpc :ClosePullRequest, ::Google::Cloud::SecureSourceManager::V1::ClosePullRequestRequest, ::Google::Longrunning::Operation
+            # Lists a pull request's file diffs.
+            rpc :ListPullRequestFileDiffs, ::Google::Cloud::SecureSourceManager::V1::ListPullRequestFileDiffsRequest, ::Google::Cloud::SecureSourceManager::V1::ListPullRequestFileDiffsResponse
+            # Fetches a tree from a repository.
+            rpc :FetchTree, ::Google::Cloud::SecureSourceManager::V1::FetchTreeRequest, ::Google::Cloud::SecureSourceManager::V1::FetchTreeResponse
+            # Fetches a blob from a repository.
+            rpc :FetchBlob, ::Google::Cloud::SecureSourceManager::V1::FetchBlobRequest, ::Google::Cloud::SecureSourceManager::V1::FetchBlobResponse
+            # Creates an issue.
+            rpc :CreateIssue, ::Google::Cloud::SecureSourceManager::V1::CreateIssueRequest, ::Google::Longrunning::Operation
+            # Gets an issue.
+            rpc :GetIssue, ::Google::Cloud::SecureSourceManager::V1::GetIssueRequest, ::Google::Cloud::SecureSourceManager::V1::Issue
+            # Lists issues in a repository.
+            rpc :ListIssues, ::Google::Cloud::SecureSourceManager::V1::ListIssuesRequest, ::Google::Cloud::SecureSourceManager::V1::ListIssuesResponse
+            # Updates a issue.
+            rpc :UpdateIssue, ::Google::Cloud::SecureSourceManager::V1::UpdateIssueRequest, ::Google::Longrunning::Operation
+            # Deletes an issue.
+            rpc :DeleteIssue, ::Google::Cloud::SecureSourceManager::V1::DeleteIssueRequest, ::Google::Longrunning::Operation
+            # Opens an issue.
+            rpc :OpenIssue, ::Google::Cloud::SecureSourceManager::V1::OpenIssueRequest, ::Google::Longrunning::Operation
+            # Closes an issue.
+            rpc :CloseIssue, ::Google::Cloud::SecureSourceManager::V1::CloseIssueRequest, ::Google::Longrunning::Operation
+            # Gets a pull request comment.
+            rpc :GetPullRequestComment, ::Google::Cloud::SecureSourceManager::V1::GetPullRequestCommentRequest, ::Google::Cloud::SecureSourceManager::V1::PullRequestComment
+            # Lists pull request comments.
+            rpc :ListPullRequestComments, ::Google::Cloud::SecureSourceManager::V1::ListPullRequestCommentsRequest, ::Google::Cloud::SecureSourceManager::V1::ListPullRequestCommentsResponse
+            # Creates a pull request comment. This function is used to create a single
+            # PullRequestComment of type Comment, or a single PullRequestComment of type
+            # Code that's replying to another PullRequestComment of type Code. Use
+            # BatchCreatePullRequestComments to create multiple PullRequestComments for
+            # code reviews.
+            rpc :CreatePullRequestComment, ::Google::Cloud::SecureSourceManager::V1::CreatePullRequestCommentRequest, ::Google::Longrunning::Operation
+            # Updates a pull request comment.
+            rpc :UpdatePullRequestComment, ::Google::Cloud::SecureSourceManager::V1::UpdatePullRequestCommentRequest, ::Google::Longrunning::Operation
+            # Deletes a pull request comment.
+            rpc :DeletePullRequestComment, ::Google::Cloud::SecureSourceManager::V1::DeletePullRequestCommentRequest, ::Google::Longrunning::Operation
+            # Batch creates pull request comments. This function is used to create
+            # multiple PullRequestComments for code review. There needs to be exactly one
+            # PullRequestComment of type Review, and at most 100 PullRequestComments of
+            # type Code per request. The Postition of the code comments must be unique
+            # within the request.
+            rpc :BatchCreatePullRequestComments, ::Google::Cloud::SecureSourceManager::V1::BatchCreatePullRequestCommentsRequest, ::Google::Longrunning::Operation
+            # Resolves pull request comments. A list of PullRequestComment names must be
+            # provided. The PullRequestComment names must be in the same conversation
+            # thread. If auto_fill is set, all comments in the conversation thread will
+            # be resolved.
+            rpc :ResolvePullRequestComments, ::Google::Cloud::SecureSourceManager::V1::ResolvePullRequestCommentsRequest, ::Google::Longrunning::Operation
+            # Unresolves pull request comments. A list of PullRequestComment names must
+            # be provided. The PullRequestComment names must be in the same conversation
+            # thread. If auto_fill is set, all comments in the conversation thread will
+            # be unresolved.
+            rpc :UnresolvePullRequestComments, ::Google::Cloud::SecureSourceManager::V1::UnresolvePullRequestCommentsRequest, ::Google::Longrunning::Operation
+            # Creates an issue comment.
+            rpc :CreateIssueComment, ::Google::Cloud::SecureSourceManager::V1::CreateIssueCommentRequest, ::Google::Longrunning::Operation
+            # Gets an issue comment.
+            rpc :GetIssueComment, ::Google::Cloud::SecureSourceManager::V1::GetIssueCommentRequest, ::Google::Cloud::SecureSourceManager::V1::IssueComment
+            # Lists comments in an issue.
+            rpc :ListIssueComments, ::Google::Cloud::SecureSourceManager::V1::ListIssueCommentsRequest, ::Google::Cloud::SecureSourceManager::V1::ListIssueCommentsResponse
+            # Updates an issue comment.
+            rpc :UpdateIssueComment, ::Google::Cloud::SecureSourceManager::V1::UpdateIssueCommentRequest, ::Google::Longrunning::Operation
+            # Deletes an issue comment.
+            rpc :DeleteIssueComment, ::Google::Cloud::SecureSourceManager::V1::DeleteIssueCommentRequest, ::Google::Longrunning::Operation
           end
 
           Stub = Service.rpc_stub_class

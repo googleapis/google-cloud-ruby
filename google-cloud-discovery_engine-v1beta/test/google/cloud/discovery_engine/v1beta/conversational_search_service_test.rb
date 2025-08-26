@@ -21,7 +21,6 @@ require "helper"
 require "gapic/grpc/service_stub"
 
 require "google/cloud/discoveryengine/v1beta/conversational_search_service_pb"
-require "google/cloud/discoveryengine/v1beta/conversational_search_service_services_pb"
 require "google/cloud/discovery_engine/v1beta/conversational_search_service"
 
 class ::Google::Cloud::DiscoveryEngine::V1beta::ConversationalSearchService::ClientTest < Minitest::Test
@@ -770,11 +769,13 @@ class ::Google::Cloud::DiscoveryEngine::V1beta::ConversationalSearchService::Cli
 
     # Create request parameters for a unary method.
     name = "hello world"
+    include_answer_details = true
 
     get_session_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :get_session, name
       assert_kind_of ::Google::Cloud::DiscoveryEngine::V1beta::GetSessionRequest, request
       assert_equal "hello world", request["name"]
+      assert_equal true, request["include_answer_details"]
       refute_nil options
     end
 
@@ -785,31 +786,31 @@ class ::Google::Cloud::DiscoveryEngine::V1beta::ConversationalSearchService::Cli
       end
 
       # Use hash object
-      client.get_session({ name: name }) do |response, operation|
+      client.get_session({ name: name, include_answer_details: include_answer_details }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_session name: name do |response, operation|
+      client.get_session name: name, include_answer_details: include_answer_details do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_session ::Google::Cloud::DiscoveryEngine::V1beta::GetSessionRequest.new(name: name) do |response, operation|
+      client.get_session ::Google::Cloud::DiscoveryEngine::V1beta::GetSessionRequest.new(name: name, include_answer_details: include_answer_details) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_session({ name: name }, grpc_options) do |response, operation|
+      client.get_session({ name: name, include_answer_details: include_answer_details }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_session(::Google::Cloud::DiscoveryEngine::V1beta::GetSessionRequest.new(name: name), grpc_options) do |response, operation|
+      client.get_session(::Google::Cloud::DiscoveryEngine::V1beta::GetSessionRequest.new(name: name, include_answer_details: include_answer_details), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end

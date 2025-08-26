@@ -19,10 +19,16 @@ def create_avro_schema schema_id:, avsc_file:
   # schema_id = "your-schema-id"
   # avsc_file = "path/to/an/avro/schema/file/(.avsc)/formatted/in/json"
 
-  pubsub = Google::Cloud::Pubsub.new
+  pubsub = Google::Cloud::PubSub.new
+  schemas = pubsub.schemas
 
-  definition = File.read avsc_file
-  schema = pubsub.create_schema schema_id, :avro, definition
+  schema = schemas.create_schema parent: pubsub.project_path,
+                                 schema: {
+                                   name: schema_id,
+                                   type: :AVRO,
+                                   definition: File.read(avsc_file)
+                                 },
+                                 schema_id: schema_id
 
   puts "Schema #{schema.name} created."
   # [END pubsub_create_avro_schema]

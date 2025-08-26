@@ -1,5 +1,11 @@
 # Changelog
 
+### 0.13.1 (2025-07-15)
+
+#### Documentation
+
+* Clarify documentation for cases when multiple parameters are mutually exclusive for an RPC method ([#30624](https://github.com/googleapis/google-cloud-ruby/issues/30624)) 
+
 ### 0.13.0 (2025-05-12)
 
 #### Features

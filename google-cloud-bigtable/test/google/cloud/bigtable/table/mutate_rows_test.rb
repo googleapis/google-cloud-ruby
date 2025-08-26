@@ -65,10 +65,12 @@ describe Google::Cloud::Bigtable::Table, :mutate_rows, :mock_bigtable do
       }]
     )
 
-    mock.expect :mutate_rows, [res],
+    req = {
       table_name: table_path(instance_id, table_id),
       entries: [mutation_entry_grpc],
       app_profile_id: app_profile_id
+    }
+    mock.expect :mutate_rows, [res], [req, nil]
 
     entry = Google::Cloud::Bigtable::MutationEntry.new(row_key)
     entry.set_cell(family, qualifier, cell_value, timestamp: timestamp)
@@ -100,7 +102,12 @@ describe Google::Cloud::Bigtable::Table, :mutate_rows, :mock_bigtable do
       }]
     )
     mock = Minitest::Mock.new
-    mock.expect :mutate_rows, [res], table_name: table_path(instance_id, table_id), entries: [entry], app_profile_id: app_profile_id
+    req = {
+      table_name: table_path(instance_id, table_id),
+      app_profile_id: app_profile_id,
+      entries: [entry]
+    }
+    mock.expect :mutate_rows, [res], [req, nil]
 
     bigtable.service.mocked_client = mock
 
@@ -119,10 +126,11 @@ describe Google::Cloud::Bigtable::Table, :mutate_rows, :mock_bigtable do
     mock.verify
   end
 
-  it "retry for failed mutation with 3 times" do
+  it "retries a failed mutation 3 times" do
     req_entries = req_entries_grpc
     retry_entries = [
       req_entries,
+      [req_entries.last],
       [req_entries.last],
       [req_entries.last]
     ]
@@ -131,6 +139,9 @@ describe Google::Cloud::Bigtable::Table, :mutate_rows, :mock_bigtable do
       [
         { index: 0, status: { code: Google::Rpc::Code::OK, message: "success" }},
         { index: 1, status: { code: Google::Rpc::Code::DEADLINE_EXCEEDED, message: "failed" }}
+      ],
+      [
+        { index: 0, status: { code: Google::Rpc::Code::DEADLINE_EXCEEDED, message: "failed" }}
       ],
       [
         { index: 0, status: { code: Google::Rpc::Code::DEADLINE_EXCEEDED, message: "failed" }}
@@ -152,10 +163,11 @@ describe Google::Cloud::Bigtable::Table, :mutate_rows, :mock_bigtable do
       req_retry_entries: retry_entries,
       req_retry_response: retry_responses
     )
-    def mock.mutate_rows request
+    def mock.mutate_rows request, call_options
       t._(request[:table_name]).must_equal expected_table_path
       t._(request[:entries]).must_equal req_retry_entries[self.retry_count]
       t._(request[:app_profile_id]).must_equal expected_req_app_profile_id
+      t.assert_kind_of Gapic::CallOptions, call_options if call_options
 
       res = req_retry_response[self.retry_count]
       self.retry_count += 1
@@ -171,7 +183,7 @@ describe Google::Cloud::Bigtable::Table, :mutate_rows, :mock_bigtable do
     end
     responses = table.mutate_rows(mutation_entries)
 
-    _(mock.retry_count).must_equal 3
+    _(mock.retry_count).must_equal 4
     _(responses.length).must_equal 2
     _(responses[0].index).must_equal 0
     _(responses[0].status.code).must_equal Google::Rpc::Code::OK
@@ -219,10 +231,11 @@ describe Google::Cloud::Bigtable::Table, :mutate_rows, :mock_bigtable do
       req_retry_entries: retry_entries,
       req_retry_response: retry_responses
     )
-    def mock.mutate_rows request
+    def mock.mutate_rows request, call_options
       t._(request[:table_name]).must_equal expected_table_path
       t._(request[:entries]).must_equal req_retry_entries[self.retry_count]
       t._(request[:app_profile_id]).must_equal expected_req_app_profile_id
+      t.assert_kind_of Gapic::CallOptions, call_options if call_options
 
       res = req_retry_response[self.retry_count]
       self.retry_count += 1

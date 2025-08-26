@@ -208,7 +208,7 @@ class MockBigquery < Minitest::Spec
           { "v" => "3.141592654" },
           { "v" => "true" },
           { "v" => "aW1hZ2UgZGF0YQ==" },
-          { "v" => "1482670800.0" },
+          { "v" => "1482670800000000" },
           { "v" => "04:00:00" },
           { "v" => "2017-01-01 00:00:00" },
           { "v" => "1968-10-20" },
@@ -225,7 +225,7 @@ class MockBigquery < Minitest::Spec
           { "v" => nil },
           { "v" => "false" },
           { "v" => nil },
-          { "v" => nil },
+          { "v" => "1482670800.0" },
           { "v" => "04:32:10.555555" },
           { "v" => nil },
           { "v" => nil },
@@ -592,7 +592,8 @@ class MockBigquery < Minitest::Spec
                           description: "This is my routine", 
                           creation_time: time_millis,
                           last_modified_time: time_millis,
-                          determinism_level: nil
+                          determinism_level: nil,
+                          data_governance_type: nil
     id ||= "my_routine"
 
     h = {
@@ -650,6 +651,7 @@ class MockBigquery < Minitest::Spec
     h[:etag] = etag if etag
     h[:creationTime] = creation_time if creation_time
     h[:lastModifiedTime] = last_modified_time if last_modified_time
+    h[:dataGovernanceType] = data_governance_type if data_governance_type
     h
   end
 

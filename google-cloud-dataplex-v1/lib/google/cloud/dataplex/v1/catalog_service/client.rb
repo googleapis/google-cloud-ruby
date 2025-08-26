@@ -2447,7 +2447,7 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload search_entries(name: nil, query: nil, page_size: nil, page_token: nil, order_by: nil, scope: nil)
+            # @overload search_entries(name: nil, query: nil, page_size: nil, page_token: nil, order_by: nil, scope: nil, semantic_search: nil)
             #   Pass arguments to `search_entries` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -2478,6 +2478,9 @@ module Google
             #     either be `organizations/<org_id>` or `projects/<project_ref>`. If it is
             #     unspecified, it defaults to the organization where the project provided in
             #     `name` is located.
+            #   @param semantic_search [::Boolean]
+            #     Optional. Specifies whether the search should understand the meaning and
+            #     intent behind the query, rather than just matching keywords.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Gapic::PagedEnumerable<::Google::Cloud::Dataplex::V1::SearchEntriesResult>]

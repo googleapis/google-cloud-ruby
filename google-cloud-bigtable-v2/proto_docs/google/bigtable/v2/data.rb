@@ -148,6 +148,7 @@ module Google
         # @!attribute [rw] float_value
         #   @return [::Float]
         #     Represents a typed value transported as a floating point number.
+        #     Does not support NaN or infinities.
         #
         #     Note: The following fields are mutually exclusive: `float_value`, `raw_value`, `raw_timestamp_micros`, `bytes_value`, `string_value`, `int_value`, `bool_value`, `timestamp_value`, `date_value`, `array_value`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] timestamp_value
@@ -967,6 +968,26 @@ module Google
         #     results. This helps minimize the number of allocations required, though the
         #     buffer size may still need to be increased if the estimate is too low.
         class PartialResultSet
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Parameters on mutations where clients want to ensure idempotency (i.e.
+        # at-most-once semantics). This is currently only needed for certain aggregate
+        # types.
+        # @!attribute [rw] token
+        #   @return [::String]
+        #     Unique token used to identify replays of this mutation.
+        #     Must be at least 8 bytes long.
+        # @!attribute [rw] start_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Client-assigned timestamp when the mutation's first attempt was sent.
+        #     Used to reject mutations that arrive after idempotency protection may
+        #     have expired. May cause spurious rejections if clock skew is too high.
+        #
+        #     Leave unset or zero to always accept the mutation, at the risk of
+        #     double counting if the protection for previous attempts has expired.
+        class Idempotency
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end

@@ -16,10 +16,10 @@ Gem::Specification.new do |gem|
                       ["OVERVIEW.md", "AUTHENTICATION.md", "LOGGING.md", "CONTRIBUTING.md", "TROUBLESHOOTING.md", "CHANGELOG.md", "CODE_OF_CONDUCT.md", "LICENSE", ".yardopts"]
   gem.require_paths = ["lib"]
 
-  gem.required_ruby_version = ">= 3.0.0"
+  gem.required_ruby_version = ">= 3.1.0"
 
   gem.add_dependency "google-cloud-core", "~> 1.6"
-  gem.add_dependency "google-apis-core", "~> 0.13"
+  gem.add_dependency "google-apis-core", ">= 0.18", "< 2"
   gem.add_dependency "google-apis-iamcredentials_v1", "~> 0.18"
   gem.add_dependency "google-apis-storage_v1", ">= 0.42"
   gem.add_dependency "googleauth", "~> 1.9"
@@ -27,7 +27,7 @@ Gem::Specification.new do |gem|
   gem.add_dependency "addressable", "~> 2.8"
   gem.add_dependency "mini_mime", "~> 1.0"
 
-  gem.add_development_dependency "google-style", "~> 1.30.0"
+  gem.add_development_dependency "google-style", "~> 1.31.1"
   gem.add_development_dependency "minitest", "~> 5.16"
   gem.add_development_dependency "minitest-autotest", "~> 1.0"
   gem.add_development_dependency "minitest-focus", "~> 1.1"

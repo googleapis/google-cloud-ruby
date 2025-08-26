@@ -1610,11 +1610,11 @@ module Google
               #     Delete all rows that start with this row key prefix. Prefix cannot be
               #     zero length.
               #
-              #     Note: The following fields are mutually exclusive: `row_key_prefix`, `delete_all_data_from_table`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+              #     Note: The following parameters are mutually exclusive: `row_key_prefix`, `delete_all_data_from_table`. At most one of these parameters can be set. If more than one is set, only one will be used, and it is not defined which one.
               #   @param delete_all_data_from_table [::Boolean]
               #     Delete all rows in the table. Setting this to false is a no-op.
               #
-              #     Note: The following fields are mutually exclusive: `delete_all_data_from_table`, `row_key_prefix`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+              #     Note: The following parameters are mutually exclusive: `delete_all_data_from_table`, `row_key_prefix`. At most one of these parameters can be set. If more than one is set, only one will be used, and it is not defined which one.
               #
               # @yield [response, operation] Access the result along with the RPC operation
               # @yieldparam response [::Google::Protobuf::Empty]
@@ -1801,13 +1801,13 @@ module Google
               #     see all writes committed before the token was created, even if the
               #     read and write target different clusters.
               #
-              #     Note: The following fields are mutually exclusive: `standard_read_remote_writes`, `data_boost_read_local_writes`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+              #     Note: The following parameters are mutually exclusive: `standard_read_remote_writes`, `data_boost_read_local_writes`. At most one of these parameters can be set. If more than one is set, only one will be used, and it is not defined which one.
               #   @param data_boost_read_local_writes [::Google::Cloud::Bigtable::Admin::V2::DataBoostReadLocalWrites, ::Hash]
               #     Checks that reads using an app profile with `DataBoostIsolationReadOnly`
               #     can see all writes committed before the token was created, but only if
               #     the read and write target the same cluster.
               #
-              #     Note: The following fields are mutually exclusive: `data_boost_read_local_writes`, `standard_read_remote_writes`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+              #     Note: The following parameters are mutually exclusive: `data_boost_read_local_writes`, `standard_read_remote_writes`. At most one of these parameters can be set. If more than one is set, only one will be used, and it is not defined which one.
               #
               # @yield [response, operation] Access the result along with the RPC operation
               # @yieldparam response [::Google::Cloud::Bigtable::Admin::V2::CheckConsistencyResponse]

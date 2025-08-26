@@ -1,0 +1,1095 @@
+{
+  "client_library": {
+    "name": "google-cloud-managed_kafka-schema_registry-v1",
+    "version": "0.1.0",
+    "language": "RUBY",
+    "apis": [
+      {
+        "id": "google.cloud.managedkafka.schemaregistry.v1",
+        "version": "v1"
+      }
+    ]
+  },
+  "snippets": [
+    {
+      "region_tag": "managedkafka_v1_generated_ManagedSchemaRegistry_GetSchemaRegistry_sync",
+      "title": "Snippet for the get_schema_registry call in the ManagedSchemaRegistry service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ManagedKafka::SchemaRegistry::V1::ManagedSchemaRegistry::Client#get_schema_registry.",
+      "file": "managed_schema_registry/get_schema_registry.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_schema_registry",
+        "full_name": "::Google::Cloud::ManagedKafka::SchemaRegistry::V1::ManagedSchemaRegistry::Client#get_schema_registry",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::ManagedKafka::SchemaRegistry::V1::GetSchemaRegistryRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::ManagedKafka::SchemaRegistry::V1::SchemaRegistry",
+        "client": {
+          "short_name": "ManagedSchemaRegistry::Client",
+          "full_name": "::Google::Cloud::ManagedKafka::SchemaRegistry::V1::ManagedSchemaRegistry::Client"
+        },
+        "method": {
+          "short_name": "GetSchemaRegistry",
+          "full_name": "google.cloud.managedkafka.schemaregistry.v1.ManagedSchemaRegistry.GetSchemaRegistry",
+          "service": {
+            "short_name": "ManagedSchemaRegistry",
+            "full_name": "google.cloud.managedkafka.schemaregistry.v1.ManagedSchemaRegistry"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "managedkafka_v1_generated_ManagedSchemaRegistry_ListSchemaRegistries_sync",
+      "title": "Snippet for the list_schema_registries call in the ManagedSchemaRegistry service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ManagedKafka::SchemaRegistry::V1::ManagedSchemaRegistry::Client#list_schema_registries.",
+      "file": "managed_schema_registry/list_schema_registries.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_schema_registries",
+        "full_name": "::Google::Cloud::ManagedKafka::SchemaRegistry::V1::ManagedSchemaRegistry::Client#list_schema_registries",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::ManagedKafka::SchemaRegistry::V1::ListSchemaRegistriesRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::ManagedKafka::SchemaRegistry::V1::ListSchemaRegistriesResponse",
+        "client": {
+          "short_name": "ManagedSchemaRegistry::Client",
+          "full_name": "::Google::Cloud::ManagedKafka::SchemaRegistry::V1::ManagedSchemaRegistry::Client"
+        },
+        "method": {
+          "short_name": "ListSchemaRegistries",
+          "full_name": "google.cloud.managedkafka.schemaregistry.v1.ManagedSchemaRegistry.ListSchemaRegistries",
+          "service": {
+            "short_name": "ManagedSchemaRegistry",
+            "full_name": "google.cloud.managedkafka.schemaregistry.v1.ManagedSchemaRegistry"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "managedkafka_v1_generated_ManagedSchemaRegistry_CreateSchemaRegistry_sync",
+      "title": "Snippet for the create_schema_registry call in the ManagedSchemaRegistry service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ManagedKafka::SchemaRegistry::V1::ManagedSchemaRegistry::Client#create_schema_registry.",
+      "file": "managed_schema_registry/create_schema_registry.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_schema_registry",
+        "full_name": "::Google::Cloud::ManagedKafka::SchemaRegistry::V1::ManagedSchemaRegistry::Client#create_schema_registry",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::ManagedKafka::SchemaRegistry::V1::CreateSchemaRegistryRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::ManagedKafka::SchemaRegistry::V1::SchemaRegistry",
+        "client": {
+          "short_name": "ManagedSchemaRegistry::Client",
+          "full_name": "::Google::Cloud::ManagedKafka::SchemaRegistry::V1::ManagedSchemaRegistry::Client"
+        },
+        "method": {
+          "short_name": "CreateSchemaRegistry",
+          "full_name": "google.cloud.managedkafka.schemaregistry.v1.ManagedSchemaRegistry.CreateSchemaRegistry",
+          "service": {
+            "short_name": "ManagedSchemaRegistry",
+            "full_name": "google.cloud.managedkafka.schemaregistry.v1.ManagedSchemaRegistry"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "managedkafka_v1_generated_ManagedSchemaRegistry_DeleteSchemaRegistry_sync",
+      "title": "Snippet for the delete_schema_registry call in the ManagedSchemaRegistry service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ManagedKafka::SchemaRegistry::V1::ManagedSchemaRegistry::Client#delete_schema_registry.",
+      "file": "managed_schema_registry/delete_schema_registry.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_schema_registry",
+        "full_name": "::Google::Cloud::ManagedKafka::SchemaRegistry::V1::ManagedSchemaRegistry::Client#delete_schema_registry",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::ManagedKafka::SchemaRegistry::V1::DeleteSchemaRegistryRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Protobuf::Empty",
+        "client": {
+          "short_name": "ManagedSchemaRegistry::Client",
+          "full_name": "::Google::Cloud::ManagedKafka::SchemaRegistry::V1::ManagedSchemaRegistry::Client"
+        },
+        "method": {
+          "short_name": "DeleteSchemaRegistry",
+          "full_name": "google.cloud.managedkafka.schemaregistry.v1.ManagedSchemaRegistry.DeleteSchemaRegistry",
+          "service": {
+            "short_name": "ManagedSchemaRegistry",
+            "full_name": "google.cloud.managedkafka.schemaregistry.v1.ManagedSchemaRegistry"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "managedkafka_v1_generated_ManagedSchemaRegistry_GetContext_sync",
+      "title": "Snippet for the get_context call in the ManagedSchemaRegistry service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ManagedKafka::SchemaRegistry::V1::ManagedSchemaRegistry::Client#get_context.",
+      "file": "managed_schema_registry/get_context.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_context",
+        "full_name": "::Google::Cloud::ManagedKafka::SchemaRegistry::V1::ManagedSchemaRegistry::Client#get_context",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::ManagedKafka::SchemaRegistry::V1::GetContextRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::ManagedKafka::SchemaRegistry::V1::Context",
+        "client": {
+          "short_name": "ManagedSchemaRegistry::Client",
+          "full_name": "::Google::Cloud::ManagedKafka::SchemaRegistry::V1::ManagedSchemaRegistry::Client"
+        },
+        "method": {
+          "short_name": "GetContext",
+          "full_name": "google.cloud.managedkafka.schemaregistry.v1.ManagedSchemaRegistry.GetContext",
+          "service": {
+            "short_name": "ManagedSchemaRegistry",
+            "full_name": "google.cloud.managedkafka.schemaregistry.v1.ManagedSchemaRegistry"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "managedkafka_v1_generated_ManagedSchemaRegistry_ListContexts_sync",
+      "title": "Snippet for the list_contexts call in the ManagedSchemaRegistry service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ManagedKafka::SchemaRegistry::V1::ManagedSchemaRegistry::Client#list_contexts.",
+      "file": "managed_schema_registry/list_contexts.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_contexts",
+        "full_name": "::Google::Cloud::ManagedKafka::SchemaRegistry::V1::ManagedSchemaRegistry::Client#list_contexts",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::ManagedKafka::SchemaRegistry::V1::ListContextsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Api::HttpBody",
+        "client": {
+          "short_name": "ManagedSchemaRegistry::Client",
+          "full_name": "::Google::Cloud::ManagedKafka::SchemaRegistry::V1::ManagedSchemaRegistry::Client"
+        },
+        "method": {
+          "short_name": "ListContexts",
+          "full_name": "google.cloud.managedkafka.schemaregistry.v1.ManagedSchemaRegistry.ListContexts",
+          "service": {
+            "short_name": "ManagedSchemaRegistry",
+            "full_name": "google.cloud.managedkafka.schemaregistry.v1.ManagedSchemaRegistry"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "managedkafka_v1_generated_ManagedSchemaRegistry_GetSchema_sync",
+      "title": "Snippet for the get_schema call in the ManagedSchemaRegistry service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ManagedKafka::SchemaRegistry::V1::ManagedSchemaRegistry::Client#get_schema.",
+      "file": "managed_schema_registry/get_schema.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_schema",
+        "full_name": "::Google::Cloud::ManagedKafka::SchemaRegistry::V1::ManagedSchemaRegistry::Client#get_schema",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::ManagedKafka::SchemaRegistry::V1::GetSchemaRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::ManagedKafka::SchemaRegistry::V1::Schema",
+        "client": {
+          "short_name": "ManagedSchemaRegistry::Client",
+          "full_name": "::Google::Cloud::ManagedKafka::SchemaRegistry::V1::ManagedSchemaRegistry::Client"
+        },
+        "method": {
+          "short_name": "GetSchema",
+          "full_name": "google.cloud.managedkafka.schemaregistry.v1.ManagedSchemaRegistry.GetSchema",
+          "service": {
+            "short_name": "ManagedSchemaRegistry",
+            "full_name": "google.cloud.managedkafka.schemaregistry.v1.ManagedSchemaRegistry"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "managedkafka_v1_generated_ManagedSchemaRegistry_GetRawSchema_sync",
+      "title": "Snippet for the get_raw_schema call in the ManagedSchemaRegistry service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ManagedKafka::SchemaRegistry::V1::ManagedSchemaRegistry::Client#get_raw_schema.",
+      "file": "managed_schema_registry/get_raw_schema.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_raw_schema",
+        "full_name": "::Google::Cloud::ManagedKafka::SchemaRegistry::V1::ManagedSchemaRegistry::Client#get_raw_schema",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::ManagedKafka::SchemaRegistry::V1::GetSchemaRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Api::HttpBody",
+        "client": {
+          "short_name": "ManagedSchemaRegistry::Client",
+          "full_name": "::Google::Cloud::ManagedKafka::SchemaRegistry::V1::ManagedSchemaRegistry::Client"
+        },
+        "method": {
+          "short_name": "GetRawSchema",
+          "full_name": "google.cloud.managedkafka.schemaregistry.v1.ManagedSchemaRegistry.GetRawSchema",
+          "service": {
+            "short_name": "ManagedSchemaRegistry",
+            "full_name": "google.cloud.managedkafka.schemaregistry.v1.ManagedSchemaRegistry"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "managedkafka_v1_generated_ManagedSchemaRegistry_ListSchemaVersions_sync",
+      "title": "Snippet for the list_schema_versions call in the ManagedSchemaRegistry service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ManagedKafka::SchemaRegistry::V1::ManagedSchemaRegistry::Client#list_schema_versions.",
+      "file": "managed_schema_registry/list_schema_versions.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_schema_versions",
+        "full_name": "::Google::Cloud::ManagedKafka::SchemaRegistry::V1::ManagedSchemaRegistry::Client#list_schema_versions",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::ManagedKafka::SchemaRegistry::V1::ListSchemaVersionsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Api::HttpBody",
+        "client": {
+          "short_name": "ManagedSchemaRegistry::Client",
+          "full_name": "::Google::Cloud::ManagedKafka::SchemaRegistry::V1::ManagedSchemaRegistry::Client"
+        },
+        "method": {
+          "short_name": "ListSchemaVersions",
+          "full_name": "google.cloud.managedkafka.schemaregistry.v1.ManagedSchemaRegistry.ListSchemaVersions",
+          "service": {
+            "short_name": "ManagedSchemaRegistry",
+            "full_name": "google.cloud.managedkafka.schemaregistry.v1.ManagedSchemaRegistry"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "managedkafka_v1_generated_ManagedSchemaRegistry_ListSchemaTypes_sync",
+      "title": "Snippet for the list_schema_types call in the ManagedSchemaRegistry service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ManagedKafka::SchemaRegistry::V1::ManagedSchemaRegistry::Client#list_schema_types.",
+      "file": "managed_schema_registry/list_schema_types.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_schema_types",
+        "full_name": "::Google::Cloud::ManagedKafka::SchemaRegistry::V1::ManagedSchemaRegistry::Client#list_schema_types",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::ManagedKafka::SchemaRegistry::V1::ListSchemaTypesRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Api::HttpBody",
+        "client": {
+          "short_name": "ManagedSchemaRegistry::Client",
+          "full_name": "::Google::Cloud::ManagedKafka::SchemaRegistry::V1::ManagedSchemaRegistry::Client"
+        },
+        "method": {
+          "short_name": "ListSchemaTypes",
+          "full_name": "google.cloud.managedkafka.schemaregistry.v1.ManagedSchemaRegistry.ListSchemaTypes",
+          "service": {
+            "short_name": "ManagedSchemaRegistry",
+            "full_name": "google.cloud.managedkafka.schemaregistry.v1.ManagedSchemaRegistry"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "managedkafka_v1_generated_ManagedSchemaRegistry_ListSubjects_sync",
+      "title": "Snippet for the list_subjects call in the ManagedSchemaRegistry service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ManagedKafka::SchemaRegistry::V1::ManagedSchemaRegistry::Client#list_subjects.",
+      "file": "managed_schema_registry/list_subjects.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_subjects",
+        "full_name": "::Google::Cloud::ManagedKafka::SchemaRegistry::V1::ManagedSchemaRegistry::Client#list_subjects",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::ManagedKafka::SchemaRegistry::V1::ListSubjectsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Api::HttpBody",
+        "client": {
+          "short_name": "ManagedSchemaRegistry::Client",
+          "full_name": "::Google::Cloud::ManagedKafka::SchemaRegistry::V1::ManagedSchemaRegistry::Client"
+        },
+        "method": {
+          "short_name": "ListSubjects",
+          "full_name": "google.cloud.managedkafka.schemaregistry.v1.ManagedSchemaRegistry.ListSubjects",
+          "service": {
+            "short_name": "ManagedSchemaRegistry",
+            "full_name": "google.cloud.managedkafka.schemaregistry.v1.ManagedSchemaRegistry"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "managedkafka_v1_generated_ManagedSchemaRegistry_ListSubjectsBySchemaId_sync",
+      "title": "Snippet for the list_subjects_by_schema_id call in the ManagedSchemaRegistry service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ManagedKafka::SchemaRegistry::V1::ManagedSchemaRegistry::Client#list_subjects_by_schema_id.",
+      "file": "managed_schema_registry/list_subjects_by_schema_id.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_subjects_by_schema_id",
+        "full_name": "::Google::Cloud::ManagedKafka::SchemaRegistry::V1::ManagedSchemaRegistry::Client#list_subjects_by_schema_id",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::ManagedKafka::SchemaRegistry::V1::ListSubjectsBySchemaIdRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Api::HttpBody",
+        "client": {
+          "short_name": "ManagedSchemaRegistry::Client",
+          "full_name": "::Google::Cloud::ManagedKafka::SchemaRegistry::V1::ManagedSchemaRegistry::Client"
+        },
+        "method": {
+          "short_name": "ListSubjectsBySchemaId",
+          "full_name": "google.cloud.managedkafka.schemaregistry.v1.ManagedSchemaRegistry.ListSubjectsBySchemaId",
+          "service": {
+            "short_name": "ManagedSchemaRegistry",
+            "full_name": "google.cloud.managedkafka.schemaregistry.v1.ManagedSchemaRegistry"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "managedkafka_v1_generated_ManagedSchemaRegistry_DeleteSubject_sync",
+      "title": "Snippet for the delete_subject call in the ManagedSchemaRegistry service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ManagedKafka::SchemaRegistry::V1::ManagedSchemaRegistry::Client#delete_subject.",
+      "file": "managed_schema_registry/delete_subject.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_subject",
+        "full_name": "::Google::Cloud::ManagedKafka::SchemaRegistry::V1::ManagedSchemaRegistry::Client#delete_subject",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::ManagedKafka::SchemaRegistry::V1::DeleteSubjectRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Api::HttpBody",
+        "client": {
+          "short_name": "ManagedSchemaRegistry::Client",
+          "full_name": "::Google::Cloud::ManagedKafka::SchemaRegistry::V1::ManagedSchemaRegistry::Client"
+        },
+        "method": {
+          "short_name": "DeleteSubject",
+          "full_name": "google.cloud.managedkafka.schemaregistry.v1.ManagedSchemaRegistry.DeleteSubject",
+          "service": {
+            "short_name": "ManagedSchemaRegistry",
+            "full_name": "google.cloud.managedkafka.schemaregistry.v1.ManagedSchemaRegistry"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "managedkafka_v1_generated_ManagedSchemaRegistry_LookupVersion_sync",
+      "title": "Snippet for the lookup_version call in the ManagedSchemaRegistry service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ManagedKafka::SchemaRegistry::V1::ManagedSchemaRegistry::Client#lookup_version.",
+      "file": "managed_schema_registry/lookup_version.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "lookup_version",
+        "full_name": "::Google::Cloud::ManagedKafka::SchemaRegistry::V1::ManagedSchemaRegistry::Client#lookup_version",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::ManagedKafka::SchemaRegistry::V1::LookupVersionRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::ManagedKafka::SchemaRegistry::V1::SchemaVersion",
+        "client": {
+          "short_name": "ManagedSchemaRegistry::Client",
+          "full_name": "::Google::Cloud::ManagedKafka::SchemaRegistry::V1::ManagedSchemaRegistry::Client"
+        },
+        "method": {
+          "short_name": "LookupVersion",
+          "full_name": "google.cloud.managedkafka.schemaregistry.v1.ManagedSchemaRegistry.LookupVersion",
+          "service": {
+            "short_name": "ManagedSchemaRegistry",
+            "full_name": "google.cloud.managedkafka.schemaregistry.v1.ManagedSchemaRegistry"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "managedkafka_v1_generated_ManagedSchemaRegistry_GetVersion_sync",
+      "title": "Snippet for the get_version call in the ManagedSchemaRegistry service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ManagedKafka::SchemaRegistry::V1::ManagedSchemaRegistry::Client#get_version.",
+      "file": "managed_schema_registry/get_version.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_version",
+        "full_name": "::Google::Cloud::ManagedKafka::SchemaRegistry::V1::ManagedSchemaRegistry::Client#get_version",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::ManagedKafka::SchemaRegistry::V1::GetVersionRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::ManagedKafka::SchemaRegistry::V1::SchemaVersion",
+        "client": {
+          "short_name": "ManagedSchemaRegistry::Client",
+          "full_name": "::Google::Cloud::ManagedKafka::SchemaRegistry::V1::ManagedSchemaRegistry::Client"
+        },
+        "method": {
+          "short_name": "GetVersion",
+          "full_name": "google.cloud.managedkafka.schemaregistry.v1.ManagedSchemaRegistry.GetVersion",
+          "service": {
+            "short_name": "ManagedSchemaRegistry",
+            "full_name": "google.cloud.managedkafka.schemaregistry.v1.ManagedSchemaRegistry"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "managedkafka_v1_generated_ManagedSchemaRegistry_GetRawSchemaVersion_sync",
+      "title": "Snippet for the get_raw_schema_version call in the ManagedSchemaRegistry service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ManagedKafka::SchemaRegistry::V1::ManagedSchemaRegistry::Client#get_raw_schema_version.",
+      "file": "managed_schema_registry/get_raw_schema_version.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_raw_schema_version",
+        "full_name": "::Google::Cloud::ManagedKafka::SchemaRegistry::V1::ManagedSchemaRegistry::Client#get_raw_schema_version",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::ManagedKafka::SchemaRegistry::V1::GetVersionRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Api::HttpBody",
+        "client": {
+          "short_name": "ManagedSchemaRegistry::Client",
+          "full_name": "::Google::Cloud::ManagedKafka::SchemaRegistry::V1::ManagedSchemaRegistry::Client"
+        },
+        "method": {
+          "short_name": "GetRawSchemaVersion",
+          "full_name": "google.cloud.managedkafka.schemaregistry.v1.ManagedSchemaRegistry.GetRawSchemaVersion",
+          "service": {
+            "short_name": "ManagedSchemaRegistry",
+            "full_name": "google.cloud.managedkafka.schemaregistry.v1.ManagedSchemaRegistry"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "managedkafka_v1_generated_ManagedSchemaRegistry_ListVersions_sync",
+      "title": "Snippet for the list_versions call in the ManagedSchemaRegistry service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ManagedKafka::SchemaRegistry::V1::ManagedSchemaRegistry::Client#list_versions.",
+      "file": "managed_schema_registry/list_versions.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_versions",
+        "full_name": "::Google::Cloud::ManagedKafka::SchemaRegistry::V1::ManagedSchemaRegistry::Client#list_versions",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::ManagedKafka::SchemaRegistry::V1::ListVersionsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Api::HttpBody",
+        "client": {
+          "short_name": "ManagedSchemaRegistry::Client",
+          "full_name": "::Google::Cloud::ManagedKafka::SchemaRegistry::V1::ManagedSchemaRegistry::Client"
+        },
+        "method": {
+          "short_name": "ListVersions",
+          "full_name": "google.cloud.managedkafka.schemaregistry.v1.ManagedSchemaRegistry.ListVersions",
+          "service": {
+            "short_name": "ManagedSchemaRegistry",
+            "full_name": "google.cloud.managedkafka.schemaregistry.v1.ManagedSchemaRegistry"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "managedkafka_v1_generated_ManagedSchemaRegistry_CreateVersion_sync",
+      "title": "Snippet for the create_version call in the ManagedSchemaRegistry service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ManagedKafka::SchemaRegistry::V1::ManagedSchemaRegistry::Client#create_version.",
+      "file": "managed_schema_registry/create_version.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_version",
+        "full_name": "::Google::Cloud::ManagedKafka::SchemaRegistry::V1::ManagedSchemaRegistry::Client#create_version",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::ManagedKafka::SchemaRegistry::V1::CreateVersionRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::ManagedKafka::SchemaRegistry::V1::CreateVersionResponse",
+        "client": {
+          "short_name": "ManagedSchemaRegistry::Client",
+          "full_name": "::Google::Cloud::ManagedKafka::SchemaRegistry::V1::ManagedSchemaRegistry::Client"
+        },
+        "method": {
+          "short_name": "CreateVersion",
+          "full_name": "google.cloud.managedkafka.schemaregistry.v1.ManagedSchemaRegistry.CreateVersion",
+          "service": {
+            "short_name": "ManagedSchemaRegistry",
+            "full_name": "google.cloud.managedkafka.schemaregistry.v1.ManagedSchemaRegistry"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "managedkafka_v1_generated_ManagedSchemaRegistry_DeleteVersion_sync",
+      "title": "Snippet for the delete_version call in the ManagedSchemaRegistry service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ManagedKafka::SchemaRegistry::V1::ManagedSchemaRegistry::Client#delete_version.",
+      "file": "managed_schema_registry/delete_version.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_version",
+        "full_name": "::Google::Cloud::ManagedKafka::SchemaRegistry::V1::ManagedSchemaRegistry::Client#delete_version",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::ManagedKafka::SchemaRegistry::V1::DeleteVersionRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Api::HttpBody",
+        "client": {
+          "short_name": "ManagedSchemaRegistry::Client",
+          "full_name": "::Google::Cloud::ManagedKafka::SchemaRegistry::V1::ManagedSchemaRegistry::Client"
+        },
+        "method": {
+          "short_name": "DeleteVersion",
+          "full_name": "google.cloud.managedkafka.schemaregistry.v1.ManagedSchemaRegistry.DeleteVersion",
+          "service": {
+            "short_name": "ManagedSchemaRegistry",
+            "full_name": "google.cloud.managedkafka.schemaregistry.v1.ManagedSchemaRegistry"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "managedkafka_v1_generated_ManagedSchemaRegistry_ListReferencedSchemas_sync",
+      "title": "Snippet for the list_referenced_schemas call in the ManagedSchemaRegistry service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ManagedKafka::SchemaRegistry::V1::ManagedSchemaRegistry::Client#list_referenced_schemas.",
+      "file": "managed_schema_registry/list_referenced_schemas.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_referenced_schemas",
+        "full_name": "::Google::Cloud::ManagedKafka::SchemaRegistry::V1::ManagedSchemaRegistry::Client#list_referenced_schemas",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::ManagedKafka::SchemaRegistry::V1::ListReferencedSchemasRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Api::HttpBody",
+        "client": {
+          "short_name": "ManagedSchemaRegistry::Client",
+          "full_name": "::Google::Cloud::ManagedKafka::SchemaRegistry::V1::ManagedSchemaRegistry::Client"
+        },
+        "method": {
+          "short_name": "ListReferencedSchemas",
+          "full_name": "google.cloud.managedkafka.schemaregistry.v1.ManagedSchemaRegistry.ListReferencedSchemas",
+          "service": {
+            "short_name": "ManagedSchemaRegistry",
+            "full_name": "google.cloud.managedkafka.schemaregistry.v1.ManagedSchemaRegistry"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "managedkafka_v1_generated_ManagedSchemaRegistry_CheckCompatibility_sync",
+      "title": "Snippet for the check_compatibility call in the ManagedSchemaRegistry service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ManagedKafka::SchemaRegistry::V1::ManagedSchemaRegistry::Client#check_compatibility.",
+      "file": "managed_schema_registry/check_compatibility.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "check_compatibility",
+        "full_name": "::Google::Cloud::ManagedKafka::SchemaRegistry::V1::ManagedSchemaRegistry::Client#check_compatibility",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::ManagedKafka::SchemaRegistry::V1::CheckCompatibilityRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::ManagedKafka::SchemaRegistry::V1::CheckCompatibilityResponse",
+        "client": {
+          "short_name": "ManagedSchemaRegistry::Client",
+          "full_name": "::Google::Cloud::ManagedKafka::SchemaRegistry::V1::ManagedSchemaRegistry::Client"
+        },
+        "method": {
+          "short_name": "CheckCompatibility",
+          "full_name": "google.cloud.managedkafka.schemaregistry.v1.ManagedSchemaRegistry.CheckCompatibility",
+          "service": {
+            "short_name": "ManagedSchemaRegistry",
+            "full_name": "google.cloud.managedkafka.schemaregistry.v1.ManagedSchemaRegistry"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "managedkafka_v1_generated_ManagedSchemaRegistry_GetSchemaConfig_sync",
+      "title": "Snippet for the get_schema_config call in the ManagedSchemaRegistry service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ManagedKafka::SchemaRegistry::V1::ManagedSchemaRegistry::Client#get_schema_config.",
+      "file": "managed_schema_registry/get_schema_config.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_schema_config",
+        "full_name": "::Google::Cloud::ManagedKafka::SchemaRegistry::V1::ManagedSchemaRegistry::Client#get_schema_config",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::ManagedKafka::SchemaRegistry::V1::GetSchemaConfigRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::ManagedKafka::SchemaRegistry::V1::SchemaConfig",
+        "client": {
+          "short_name": "ManagedSchemaRegistry::Client",
+          "full_name": "::Google::Cloud::ManagedKafka::SchemaRegistry::V1::ManagedSchemaRegistry::Client"
+        },
+        "method": {
+          "short_name": "GetSchemaConfig",
+          "full_name": "google.cloud.managedkafka.schemaregistry.v1.ManagedSchemaRegistry.GetSchemaConfig",
+          "service": {
+            "short_name": "ManagedSchemaRegistry",
+            "full_name": "google.cloud.managedkafka.schemaregistry.v1.ManagedSchemaRegistry"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "managedkafka_v1_generated_ManagedSchemaRegistry_UpdateSchemaConfig_sync",
+      "title": "Snippet for the update_schema_config call in the ManagedSchemaRegistry service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ManagedKafka::SchemaRegistry::V1::ManagedSchemaRegistry::Client#update_schema_config.",
+      "file": "managed_schema_registry/update_schema_config.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_schema_config",
+        "full_name": "::Google::Cloud::ManagedKafka::SchemaRegistry::V1::ManagedSchemaRegistry::Client#update_schema_config",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::ManagedKafka::SchemaRegistry::V1::UpdateSchemaConfigRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::ManagedKafka::SchemaRegistry::V1::SchemaConfig",
+        "client": {
+          "short_name": "ManagedSchemaRegistry::Client",
+          "full_name": "::Google::Cloud::ManagedKafka::SchemaRegistry::V1::ManagedSchemaRegistry::Client"
+        },
+        "method": {
+          "short_name": "UpdateSchemaConfig",
+          "full_name": "google.cloud.managedkafka.schemaregistry.v1.ManagedSchemaRegistry.UpdateSchemaConfig",
+          "service": {
+            "short_name": "ManagedSchemaRegistry",
+            "full_name": "google.cloud.managedkafka.schemaregistry.v1.ManagedSchemaRegistry"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "managedkafka_v1_generated_ManagedSchemaRegistry_DeleteSchemaConfig_sync",
+      "title": "Snippet for the delete_schema_config call in the ManagedSchemaRegistry service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ManagedKafka::SchemaRegistry::V1::ManagedSchemaRegistry::Client#delete_schema_config.",
+      "file": "managed_schema_registry/delete_schema_config.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_schema_config",
+        "full_name": "::Google::Cloud::ManagedKafka::SchemaRegistry::V1::ManagedSchemaRegistry::Client#delete_schema_config",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::ManagedKafka::SchemaRegistry::V1::DeleteSchemaConfigRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::ManagedKafka::SchemaRegistry::V1::SchemaConfig",
+        "client": {
+          "short_name": "ManagedSchemaRegistry::Client",
+          "full_name": "::Google::Cloud::ManagedKafka::SchemaRegistry::V1::ManagedSchemaRegistry::Client"
+        },
+        "method": {
+          "short_name": "DeleteSchemaConfig",
+          "full_name": "google.cloud.managedkafka.schemaregistry.v1.ManagedSchemaRegistry.DeleteSchemaConfig",
+          "service": {
+            "short_name": "ManagedSchemaRegistry",
+            "full_name": "google.cloud.managedkafka.schemaregistry.v1.ManagedSchemaRegistry"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "managedkafka_v1_generated_ManagedSchemaRegistry_GetSchemaMode_sync",
+      "title": "Snippet for the get_schema_mode call in the ManagedSchemaRegistry service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ManagedKafka::SchemaRegistry::V1::ManagedSchemaRegistry::Client#get_schema_mode.",
+      "file": "managed_schema_registry/get_schema_mode.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_schema_mode",
+        "full_name": "::Google::Cloud::ManagedKafka::SchemaRegistry::V1::ManagedSchemaRegistry::Client#get_schema_mode",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::ManagedKafka::SchemaRegistry::V1::GetSchemaModeRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::ManagedKafka::SchemaRegistry::V1::SchemaMode",
+        "client": {
+          "short_name": "ManagedSchemaRegistry::Client",
+          "full_name": "::Google::Cloud::ManagedKafka::SchemaRegistry::V1::ManagedSchemaRegistry::Client"
+        },
+        "method": {
+          "short_name": "GetSchemaMode",
+          "full_name": "google.cloud.managedkafka.schemaregistry.v1.ManagedSchemaRegistry.GetSchemaMode",
+          "service": {
+            "short_name": "ManagedSchemaRegistry",
+            "full_name": "google.cloud.managedkafka.schemaregistry.v1.ManagedSchemaRegistry"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "managedkafka_v1_generated_ManagedSchemaRegistry_UpdateSchemaMode_sync",
+      "title": "Snippet for the update_schema_mode call in the ManagedSchemaRegistry service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ManagedKafka::SchemaRegistry::V1::ManagedSchemaRegistry::Client#update_schema_mode.",
+      "file": "managed_schema_registry/update_schema_mode.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_schema_mode",
+        "full_name": "::Google::Cloud::ManagedKafka::SchemaRegistry::V1::ManagedSchemaRegistry::Client#update_schema_mode",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::ManagedKafka::SchemaRegistry::V1::UpdateSchemaModeRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::ManagedKafka::SchemaRegistry::V1::SchemaMode",
+        "client": {
+          "short_name": "ManagedSchemaRegistry::Client",
+          "full_name": "::Google::Cloud::ManagedKafka::SchemaRegistry::V1::ManagedSchemaRegistry::Client"
+        },
+        "method": {
+          "short_name": "UpdateSchemaMode",
+          "full_name": "google.cloud.managedkafka.schemaregistry.v1.ManagedSchemaRegistry.UpdateSchemaMode",
+          "service": {
+            "short_name": "ManagedSchemaRegistry",
+            "full_name": "google.cloud.managedkafka.schemaregistry.v1.ManagedSchemaRegistry"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "managedkafka_v1_generated_ManagedSchemaRegistry_DeleteSchemaMode_sync",
+      "title": "Snippet for the delete_schema_mode call in the ManagedSchemaRegistry service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ManagedKafka::SchemaRegistry::V1::ManagedSchemaRegistry::Client#delete_schema_mode.",
+      "file": "managed_schema_registry/delete_schema_mode.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_schema_mode",
+        "full_name": "::Google::Cloud::ManagedKafka::SchemaRegistry::V1::ManagedSchemaRegistry::Client#delete_schema_mode",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::ManagedKafka::SchemaRegistry::V1::DeleteSchemaModeRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::ManagedKafka::SchemaRegistry::V1::SchemaMode",
+        "client": {
+          "short_name": "ManagedSchemaRegistry::Client",
+          "full_name": "::Google::Cloud::ManagedKafka::SchemaRegistry::V1::ManagedSchemaRegistry::Client"
+        },
+        "method": {
+          "short_name": "DeleteSchemaMode",
+          "full_name": "google.cloud.managedkafka.schemaregistry.v1.ManagedSchemaRegistry.DeleteSchemaMode",
+          "service": {
+            "short_name": "ManagedSchemaRegistry",
+            "full_name": "google.cloud.managedkafka.schemaregistry.v1.ManagedSchemaRegistry"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    }
+  ]
+}

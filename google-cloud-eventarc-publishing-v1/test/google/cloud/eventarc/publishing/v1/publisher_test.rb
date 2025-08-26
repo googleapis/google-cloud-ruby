@@ -21,7 +21,6 @@ require "helper"
 require "gapic/grpc/service_stub"
 
 require "google/cloud/eventarc/publishing/v1/publisher_pb"
-require "google/cloud/eventarc/publishing/v1/publisher_services_pb"
 require "google/cloud/eventarc/publishing/v1/publisher"
 
 class ::Google::Cloud::Eventarc::Publishing::V1::Publisher::ClientTest < Minitest::Test

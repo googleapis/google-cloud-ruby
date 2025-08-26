@@ -12,33 +12,25 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# [START pubsub_create_subscription_with_exactly_once_delivery]
 require "google/cloud/pubsub"
 
 # Shows how to create a new subscription with exactly once delivery enabled
-class PubsubCreateSubscriptionWithExactlyOnceDelivery
-  def create_subscription_with_exactly_once_delivery project_id:, topic_id:, subscription_id:
-    pubsub = Google::Cloud::Pubsub.new project_id: project_id
-    topic = pubsub.topic topic_id
-    subscription = topic.subscribe subscription_id, enable_exactly_once_delivery: true
-    puts "Created subscription with exactly once delivery enabled: #{subscription_id}"
-  end
+def create_subscription_with_exactly_once_delivery project_id:, topic_id:,
+                                                   subscription_id:
+  # [START pubsub_create_subscription_with_exactly_once_delivery]
+  # project_id = "your-project-id"
+  # topic_id = "your-topic-id"
+  # subscription_id = "your-subscription-id"
 
-  def self.run
-    # TODO(developer): Replace these variables before running the sample.
-    project_id = "your-project-id"
-    topic_id = "your-topic-id"
-    subscription_id = "id-for-new-subcription"
-    pubsub_create_subscription_with_exactly_once_delivery = PubsubCreateSubscriptionWithExactlyOnceDelivery.new
-    pubsub_create_subscription_with_exactly_once_delivery.create_subscription_with_exactly_once_delivery(
-      project_id: project_id,
-      topic_id: topic_id,
-      subscription_id: subscription_id
-    )
-  end
-end
+  pubsub = Google::Cloud::PubSub.new project_id: project_id
+  subscription_admin = pubsub.subscription_admin
 
-if $PROGRAM_NAME == __FILE__
-  PubsubCreateSubscriptionWithExactlyOnceDelivery.run
+  subscription = subscription_admin.create_subscription \
+    name: pubsub.subscription_path(subscription_id),
+    topic: pubsub.topic_path(topic_id),
+    enable_exactly_once_delivery: true
+
+  puts "Created subscription with exactly once delivery enabled: " \
+       "#{subscription_id}"
+  # [END pubsub_create_subscription_with_exactly_once_delivery]
 end
-# [END pubsub_create_subscription_with_exactly_once_delivery]

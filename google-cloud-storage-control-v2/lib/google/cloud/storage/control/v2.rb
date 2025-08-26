@@ -31,6 +31,11 @@ module Google
         #     require "google/cloud/storage/control/v2"
         #     client = ::Google::Cloud::Storage::Control::V2::StorageControl::Client.new
         #
+        # @example Load this package, including all its services, and instantiate a REST client
+        #
+        #     require "google/cloud/storage/control/v2"
+        #     client = ::Google::Cloud::Storage::Control::V2::StorageControl::Rest::Client.new
+        #
         module V2
         end
       end

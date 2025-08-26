@@ -102,6 +102,9 @@ module Google
             #   @return [::Google::Cloud::DocumentAI::V1::DocumentSchema::EntityType::Property::OccurrenceType]
             #     Occurrence type limits the number of instances an entity type appears
             #     in the document.
+            # @!attribute [rw] method
+            #   @return [::Google::Cloud::DocumentAI::V1::DocumentSchema::EntityType::Property::Method]
+            #     Specifies how the entity's value is obtained.
             class Property
               include ::Google::Protobuf::MessageExts
               extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -132,6 +135,20 @@ module Google
 
                 # The entity type will appear once or more times.
                 REQUIRED_MULTIPLE = 4
+              end
+
+              # Specifies how the entity's value is obtained from the document.
+              module Method
+                # Unspecified method. It defaults to `EXTRACT`.
+                METHOD_UNSPECIFIED = 0
+
+                # The entity's value is directly extracted as-is from the document
+                # text.
+                EXTRACT = 1
+
+                # The entity's value is derived through inference and is not
+                # necessarily an exact text extraction from the document.
+                DERIVE = 2
               end
             end
           end

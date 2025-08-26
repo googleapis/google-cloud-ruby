@@ -19,19 +19,19 @@ def listen_for_messages subscription_id:
   # [START pubsub_quickstart_subscriber]
   # subscription_id = "your-subscription-id"
 
-  pubsub = Google::Cloud::Pubsub.new
+  pubsub = Google::Cloud::PubSub.new
+  subscriber = pubsub.subscriber subscription_id
 
-  subscription = pubsub.subscription subscription_id
-  subscriber   = subscription.listen do |received_message|
+  listener = subscriber.listen do |received_message|
     puts "Received message: #{received_message.data}"
     received_message.acknowledge!
   end
 
-  subscriber.start
+  listener.start
   # Let the main thread sleep for 60 seconds so the thread for listening
   # messages does not quit
   sleep 60
-  subscriber.stop.wait!
+  listener.stop.wait!
   # [END pubsub_subscriber_async_pull]
   # [END pubsub_quickstart_subscriber]
 end

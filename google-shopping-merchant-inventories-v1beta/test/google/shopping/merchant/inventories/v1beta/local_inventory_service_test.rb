@@ -21,7 +21,6 @@ require "helper"
 require "gapic/grpc/service_stub"
 
 require "google/shopping/merchant/inventories/v1beta/localinventory_pb"
-require "google/shopping/merchant/inventories/v1beta/localinventory_services_pb"
 require "google/shopping/merchant/inventories/v1beta/local_inventory_service"
 
 class ::Google::Shopping::Merchant::Inventories::V1beta::LocalInventoryService::ClientTest < Minitest::Test

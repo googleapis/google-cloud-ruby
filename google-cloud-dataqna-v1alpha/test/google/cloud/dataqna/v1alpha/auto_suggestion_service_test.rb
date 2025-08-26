@@ -21,7 +21,6 @@ require "helper"
 require "gapic/grpc/service_stub"
 
 require "google/cloud/dataqna/v1alpha/auto_suggestion_service_pb"
-require "google/cloud/dataqna/v1alpha/auto_suggestion_service_services_pb"
 require "google/cloud/dataqna/v1alpha/auto_suggestion_service"
 
 class ::Google::Cloud::DataQnA::V1alpha::AutoSuggestionService::ClientTest < Minitest::Test

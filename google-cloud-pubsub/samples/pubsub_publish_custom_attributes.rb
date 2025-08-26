@@ -18,18 +18,18 @@ def publish_message_async_with_custom_attributes topic_id:
   # [START pubsub_publish_custom_attributes]
   # topic_id = "your-topic-id"
 
-  pubsub = Google::Cloud::Pubsub.new
+  pubsub = Google::Cloud::PubSub.new
+  publisher = pubsub.publisher topic_id
 
-  topic = pubsub.topic topic_id
   # Add two attributes, origin and username, to the message
-  topic.publish_async "This is a test message.",
-                      origin:   "ruby-sample",
-                      username: "gcp" do |result|
+  publisher.publish_async "This is a test message.",
+                          origin:   "ruby-sample",
+                          username: "gcp" do |result|
     raise "Failed to publish the message." unless result.succeeded?
     puts "Message with custom attributes published asynchronously."
   end
 
   # Stop the async_publisher to send all queued messages immediately.
-  topic.async_publisher.stop.wait!
+  publisher.async_publisher.stop.wait!
   # [END pubsub_publish_custom_attributes]
 end

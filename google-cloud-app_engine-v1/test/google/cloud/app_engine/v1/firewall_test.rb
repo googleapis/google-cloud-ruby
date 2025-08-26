@@ -21,7 +21,6 @@ require "helper"
 require "gapic/grpc/service_stub"
 
 require "google/appengine/v1/appengine_pb"
-require "google/appengine/v1/appengine_services_pb"
 require "google/cloud/app_engine/v1/firewall"
 
 class ::Google::Cloud::AppEngine::V1::Firewall::ClientTest < Minitest::Test

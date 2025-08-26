@@ -21,7 +21,6 @@ require "helper"
 require "gapic/grpc/service_stub"
 
 require "google/cloud/osconfig/v1/osconfig_service_pb"
-require "google/cloud/osconfig/v1/osconfig_service_services_pb"
 require "google/cloud/os_config/v1/os_config_service"
 
 class ::Google::Cloud::OsConfig::V1::OsConfigService::ClientTest < Minitest::Test

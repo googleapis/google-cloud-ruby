@@ -62,6 +62,17 @@ class Google::Cloud::NetworkConnectivity::ClientConstructionMinitest < Minitest:
     end
   end
 
+  def test_internal_range_service_grpc
+    skip unless Google::Cloud::NetworkConnectivity.internal_range_service_available?
+    Gapic::ServiceStub.stub :new, DummyStub.new do
+      grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+      client = Google::Cloud::NetworkConnectivity.internal_range_service do |config|
+        config.credentials = grpc_channel
+      end
+      assert_kind_of Google::Cloud::NetworkConnectivity::V1::InternalRangeService::Client, client
+    end
+  end
+
   def test_policy_based_routing_service_grpc
     skip unless Google::Cloud::NetworkConnectivity.policy_based_routing_service_available?
     Gapic::ServiceStub.stub :new, DummyStub.new do

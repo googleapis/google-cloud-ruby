@@ -1723,6 +1723,72 @@ class ::Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::ClientTest <
     end
   end
 
+  def test_internal_update_graph_operation
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::Spanner::Admin::Database::V1::InternalUpdateGraphOperationResponse.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    database = "hello world"
+    operation_id = "hello world"
+    vm_identity_token = "hello world"
+    progress = 3.5
+    status = {}
+
+    internal_update_graph_operation_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :internal_update_graph_operation, name
+      assert_kind_of ::Google::Cloud::Spanner::Admin::Database::V1::InternalUpdateGraphOperationRequest, request
+      assert_equal "hello world", request["database"]
+      assert_equal "hello world", request["operation_id"]
+      assert_equal "hello world", request["vm_identity_token"]
+      assert_equal 3.5, request["progress"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Rpc::Status), request["status"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, internal_update_graph_operation_client_stub do
+      # Create client
+      client = ::Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.internal_update_graph_operation({ database: database, operation_id: operation_id, vm_identity_token: vm_identity_token, progress: progress, status: status }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.internal_update_graph_operation database: database, operation_id: operation_id, vm_identity_token: vm_identity_token, progress: progress, status: status do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.internal_update_graph_operation ::Google::Cloud::Spanner::Admin::Database::V1::InternalUpdateGraphOperationRequest.new(database: database, operation_id: operation_id, vm_identity_token: vm_identity_token, progress: progress, status: status) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.internal_update_graph_operation({ database: database, operation_id: operation_id, vm_identity_token: vm_identity_token, progress: progress, status: status }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.internal_update_graph_operation(::Google::Cloud::Spanner::Admin::Database::V1::InternalUpdateGraphOperationRequest.new(database: database, operation_id: operation_id, vm_identity_token: vm_identity_token, progress: progress, status: status), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, internal_update_graph_operation_client_stub.call_rpc_count
+    end
+  end
+
   def test_configure
     grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
 

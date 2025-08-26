@@ -21,12 +21,12 @@ module Google
   module Apps
     module Chat
       module V1
-        # A [slash
+        # Metadata about a [slash
         # command](https://developers.google.com/workspace/chat/commands) in
         # Google Chat.
         # @!attribute [rw] command_id
         #   @return [::Integer]
-        #     The ID of the slash command invoked.
+        #     The ID of the slash command.
         class SlashCommand
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

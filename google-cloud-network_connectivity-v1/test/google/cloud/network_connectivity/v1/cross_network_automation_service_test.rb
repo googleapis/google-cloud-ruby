@@ -21,7 +21,6 @@ require "helper"
 require "gapic/grpc/service_stub"
 
 require "google/cloud/networkconnectivity/v1/cross_network_automation_pb"
-require "google/cloud/networkconnectivity/v1/cross_network_automation_services_pb"
 require "google/cloud/network_connectivity/v1/cross_network_automation_service"
 
 class ::Google::Cloud::NetworkConnectivity::V1::CrossNetworkAutomationService::ClientTest < Minitest::Test

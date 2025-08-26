@@ -21,7 +21,6 @@ require "helper"
 require "gapic/grpc/service_stub"
 
 require "google/cloud/functions/v1/functions_pb"
-require "google/cloud/functions/v1/functions_services_pb"
 require "google/cloud/functions/v1/cloud_functions_service"
 
 class ::Google::Cloud::Functions::V1::CloudFunctionsService::ClientTest < Minitest::Test

@@ -18,13 +18,17 @@ def test_subscription_permissions subscription_id:
   # [START pubsub_test_subscription_permissions]
   # subscription_id = "your-subscription-id"
 
-  pubsub = Google::Cloud::Pubsub.new
+  pubsub = Google::Cloud::PubSub.new
+  subscription_admin = pubsub.subscription_admin
+  permissions = ["pubsub.subscriptions.consume", "pubsub.subscriptions.update"]
 
-  subscription = pubsub.subscription subscription_id
-  permissions  = subscription.test_permissions "pubsub.subscriptions.consume",
-                                               "pubsub.subscriptions.update"
+  response = pubsub.iam.test_iam_permissions \
+    resource: pubsub.subscription_path(subscription_id),
+    permissions: permissions
 
-  puts "Permission to consume" if permissions.include? "pubsub.subscriptions.consume"
-  puts "Permission to update" if permissions.include? "pubsub.subscriptions.update"
+  puts "Permission to consume" \
+   if response.permissions.include? "pubsub.subscriptions.consume"
+  puts "Permission to update" \
+   if response.permissions.include? "pubsub.subscriptions.update"
   # [END pubsub_test_subscription_permissions]
 end

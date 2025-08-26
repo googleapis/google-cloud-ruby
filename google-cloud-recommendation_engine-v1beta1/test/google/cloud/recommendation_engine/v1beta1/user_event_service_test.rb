@@ -21,7 +21,6 @@ require "helper"
 require "gapic/grpc/service_stub"
 
 require "google/cloud/recommendationengine/v1beta1/user_event_service_pb"
-require "google/cloud/recommendationengine/v1beta1/user_event_service_services_pb"
 require "google/cloud/recommendation_engine/v1beta1/user_event_service"
 
 class ::Google::Cloud::RecommendationEngine::V1beta1::UserEventService::ClientTest < Minitest::Test

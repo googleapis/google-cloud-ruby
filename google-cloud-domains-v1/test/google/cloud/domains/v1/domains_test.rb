@@ -21,7 +21,6 @@ require "helper"
 require "gapic/grpc/service_stub"
 
 require "google/cloud/domains/v1/domains_pb"
-require "google/cloud/domains/v1/domains_services_pb"
 require "google/cloud/domains/v1/domains"
 
 class ::Google::Cloud::Domains::V1::Domains::ClientTest < Minitest::Test

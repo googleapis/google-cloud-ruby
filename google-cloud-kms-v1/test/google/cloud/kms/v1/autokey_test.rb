@@ -21,7 +21,6 @@ require "helper"
 require "gapic/grpc/service_stub"
 
 require "google/cloud/kms/v1/autokey_pb"
-require "google/cloud/kms/v1/autokey_services_pb"
 require "google/cloud/kms/v1/autokey"
 
 class ::Google::Cloud::Kms::V1::Autokey::ClientTest < Minitest::Test

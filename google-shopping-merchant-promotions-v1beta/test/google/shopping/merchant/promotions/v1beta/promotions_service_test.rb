@@ -21,7 +21,6 @@ require "helper"
 require "gapic/grpc/service_stub"
 
 require "google/shopping/merchant/promotions/v1beta/promotions_pb"
-require "google/shopping/merchant/promotions/v1beta/promotions_services_pb"
 require "google/shopping/merchant/promotions/v1beta/promotions_service"
 
 class ::Google::Shopping::Merchant::Promotions::V1beta::PromotionsService::ClientTest < Minitest::Test

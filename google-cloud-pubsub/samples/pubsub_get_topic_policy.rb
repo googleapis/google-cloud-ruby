@@ -18,12 +18,11 @@ def get_topic_policy topic_id:
   # [START pubsub_get_topic_policy]
   # topic_id = "your-topic-id"
 
-  pubsub = Google::Cloud::Pubsub.new
+  pubsub = Google::Cloud::PubSub.new
 
-  topic  = pubsub.topic topic_id
-  policy = topic.policy
+  policy = pubsub.iam.get_iam_policy resource: pubsub.topic_path(topic_id)
 
   puts "Topic policy:"
-  puts policy.roles
+  puts policy.bindings.first.role
   # [END pubsub_get_topic_policy]
 end

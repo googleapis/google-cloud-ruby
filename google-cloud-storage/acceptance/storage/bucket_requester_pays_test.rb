@@ -122,11 +122,21 @@ describe Google::Cloud::Storage::Bucket, :requester_pays, :storage do
   end
 
   it "creates a Pub/Sub subscription notification" do
+    pubsub = Google::Cloud::PubSub.new
+    topic_admin = pubsub.topic_admin
+    topic = nil
     begin
-      topic = Google::Cloud.pubsub.create_topic topic_name
-      topic.policy do |p|
-        p.add "roles/pubsub.publisher", project_email
-      end
+      topic = topic_admin.create_topic name: pubsub.topic_path(topic_name)
+      
+      policy = {
+        bindings: [
+          {
+            role: "roles/pubsub.publisher",
+            members: [project_email]
+          }
+        ]
+      }
+      pubsub.iam.set_iam_policy resource: topic.name, policy: policy
 
       notification = bucket.create_notification topic.name, custom_attrs: custom_attrs,
                                                             event_types: event_types,
@@ -156,8 +166,7 @@ describe Google::Cloud::Storage::Bucket, :requester_pays, :storage do
       fresh_notification.delete
     ensure
       bucket.notifications.map(&:delete)
-      post_topic = Google::Cloud.pubsub.topic "#{prefix}_bucket_notification_topic"
-      post_topic.delete if post_topic # Assume no subscriptions to clean up.
+      topic_admin.delete_topic topic: topic.name if topic
     end
   end
 

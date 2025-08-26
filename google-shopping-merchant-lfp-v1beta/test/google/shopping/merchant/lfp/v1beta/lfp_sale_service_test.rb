@@ -21,7 +21,6 @@ require "helper"
 require "gapic/grpc/service_stub"
 
 require "google/shopping/merchant/lfp/v1beta/lfpsale_pb"
-require "google/shopping/merchant/lfp/v1beta/lfpsale_services_pb"
 require "google/shopping/merchant/lfp/v1beta/lfp_sale_service"
 
 class ::Google::Shopping::Merchant::Lfp::V1beta::LfpSaleService::ClientTest < Minitest::Test

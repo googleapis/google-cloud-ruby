@@ -1,7 +1,7 @@
 {
   "client_library": {
     "name": "google-cloud-run-v2",
-    "version": "0.24.0",
+    "version": "0.26.0",
     "language": "RUBY",
     "apis": [
       {
@@ -1087,6 +1087,326 @@
         {
           "start": 20,
           "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "run_v2_generated_WorkerPools_CreateWorkerPool_sync",
+      "title": "Snippet for the create_worker_pool call in the WorkerPools service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Run::V2::WorkerPools::Client#create_worker_pool.",
+      "file": "worker_pools/create_worker_pool.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_worker_pool",
+        "full_name": "::Google::Cloud::Run::V2::WorkerPools::Client#create_worker_pool",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Run::V2::CreateWorkerPoolRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "WorkerPools::Client",
+          "full_name": "::Google::Cloud::Run::V2::WorkerPools::Client"
+        },
+        "method": {
+          "short_name": "CreateWorkerPool",
+          "full_name": "google.cloud.run.v2.WorkerPools.CreateWorkerPool",
+          "service": {
+            "short_name": "WorkerPools",
+            "full_name": "google.cloud.run.v2.WorkerPools"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "run_v2_generated_WorkerPools_GetWorkerPool_sync",
+      "title": "Snippet for the get_worker_pool call in the WorkerPools service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Run::V2::WorkerPools::Client#get_worker_pool.",
+      "file": "worker_pools/get_worker_pool.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_worker_pool",
+        "full_name": "::Google::Cloud::Run::V2::WorkerPools::Client#get_worker_pool",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Run::V2::GetWorkerPoolRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Run::V2::WorkerPool",
+        "client": {
+          "short_name": "WorkerPools::Client",
+          "full_name": "::Google::Cloud::Run::V2::WorkerPools::Client"
+        },
+        "method": {
+          "short_name": "GetWorkerPool",
+          "full_name": "google.cloud.run.v2.WorkerPools.GetWorkerPool",
+          "service": {
+            "short_name": "WorkerPools",
+            "full_name": "google.cloud.run.v2.WorkerPools"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "run_v2_generated_WorkerPools_ListWorkerPools_sync",
+      "title": "Snippet for the list_worker_pools call in the WorkerPools service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Run::V2::WorkerPools::Client#list_worker_pools.",
+      "file": "worker_pools/list_worker_pools.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_worker_pools",
+        "full_name": "::Google::Cloud::Run::V2::WorkerPools::Client#list_worker_pools",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Run::V2::ListWorkerPoolsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Run::V2::ListWorkerPoolsResponse",
+        "client": {
+          "short_name": "WorkerPools::Client",
+          "full_name": "::Google::Cloud::Run::V2::WorkerPools::Client"
+        },
+        "method": {
+          "short_name": "ListWorkerPools",
+          "full_name": "google.cloud.run.v2.WorkerPools.ListWorkerPools",
+          "service": {
+            "short_name": "WorkerPools",
+            "full_name": "google.cloud.run.v2.WorkerPools"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "run_v2_generated_WorkerPools_UpdateWorkerPool_sync",
+      "title": "Snippet for the update_worker_pool call in the WorkerPools service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Run::V2::WorkerPools::Client#update_worker_pool.",
+      "file": "worker_pools/update_worker_pool.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_worker_pool",
+        "full_name": "::Google::Cloud::Run::V2::WorkerPools::Client#update_worker_pool",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Run::V2::UpdateWorkerPoolRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "WorkerPools::Client",
+          "full_name": "::Google::Cloud::Run::V2::WorkerPools::Client"
+        },
+        "method": {
+          "short_name": "UpdateWorkerPool",
+          "full_name": "google.cloud.run.v2.WorkerPools.UpdateWorkerPool",
+          "service": {
+            "short_name": "WorkerPools",
+            "full_name": "google.cloud.run.v2.WorkerPools"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "run_v2_generated_WorkerPools_DeleteWorkerPool_sync",
+      "title": "Snippet for the delete_worker_pool call in the WorkerPools service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Run::V2::WorkerPools::Client#delete_worker_pool.",
+      "file": "worker_pools/delete_worker_pool.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_worker_pool",
+        "full_name": "::Google::Cloud::Run::V2::WorkerPools::Client#delete_worker_pool",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Run::V2::DeleteWorkerPoolRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "WorkerPools::Client",
+          "full_name": "::Google::Cloud::Run::V2::WorkerPools::Client"
+        },
+        "method": {
+          "short_name": "DeleteWorkerPool",
+          "full_name": "google.cloud.run.v2.WorkerPools.DeleteWorkerPool",
+          "service": {
+            "short_name": "WorkerPools",
+            "full_name": "google.cloud.run.v2.WorkerPools"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "run_v2_generated_WorkerPools_GetIamPolicy_sync",
+      "title": "Snippet for the get_iam_policy call in the WorkerPools service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Run::V2::WorkerPools::Client#get_iam_policy.",
+      "file": "worker_pools/get_iam_policy.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_iam_policy",
+        "full_name": "::Google::Cloud::Run::V2::WorkerPools::Client#get_iam_policy",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Iam::V1::GetIamPolicyRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Iam::V1::Policy",
+        "client": {
+          "short_name": "WorkerPools::Client",
+          "full_name": "::Google::Cloud::Run::V2::WorkerPools::Client"
+        },
+        "method": {
+          "short_name": "GetIamPolicy",
+          "full_name": "google.cloud.run.v2.WorkerPools.GetIamPolicy",
+          "service": {
+            "short_name": "WorkerPools",
+            "full_name": "google.cloud.run.v2.WorkerPools"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "run_v2_generated_WorkerPools_SetIamPolicy_sync",
+      "title": "Snippet for the set_iam_policy call in the WorkerPools service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Run::V2::WorkerPools::Client#set_iam_policy.",
+      "file": "worker_pools/set_iam_policy.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "set_iam_policy",
+        "full_name": "::Google::Cloud::Run::V2::WorkerPools::Client#set_iam_policy",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Iam::V1::SetIamPolicyRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Iam::V1::Policy",
+        "client": {
+          "short_name": "WorkerPools::Client",
+          "full_name": "::Google::Cloud::Run::V2::WorkerPools::Client"
+        },
+        "method": {
+          "short_name": "SetIamPolicy",
+          "full_name": "google.cloud.run.v2.WorkerPools.SetIamPolicy",
+          "service": {
+            "short_name": "WorkerPools",
+            "full_name": "google.cloud.run.v2.WorkerPools"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "run_v2_generated_WorkerPools_TestIamPermissions_sync",
+      "title": "Snippet for the test_iam_permissions call in the WorkerPools service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Run::V2::WorkerPools::Client#test_iam_permissions.",
+      "file": "worker_pools/test_iam_permissions.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "test_iam_permissions",
+        "full_name": "::Google::Cloud::Run::V2::WorkerPools::Client#test_iam_permissions",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Iam::V1::TestIamPermissionsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Iam::V1::TestIamPermissionsResponse",
+        "client": {
+          "short_name": "WorkerPools::Client",
+          "full_name": "::Google::Cloud::Run::V2::WorkerPools::Client"
+        },
+        "method": {
+          "short_name": "TestIamPermissions",
+          "full_name": "google.cloud.run.v2.WorkerPools.TestIamPermissions",
+          "service": {
+            "short_name": "WorkerPools",
+            "full_name": "google.cloud.run.v2.WorkerPools"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
           "type": "FULL"
         }
       ]

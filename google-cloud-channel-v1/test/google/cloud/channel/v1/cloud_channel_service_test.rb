@@ -21,7 +21,6 @@ require "helper"
 require "gapic/grpc/service_stub"
 
 require "google/cloud/channel/v1/service_pb"
-require "google/cloud/channel/v1/service_services_pb"
 require "google/cloud/channel/v1/cloud_channel_service"
 
 class ::Google::Cloud::Channel::V1::CloudChannelService::ClientTest < Minitest::Test

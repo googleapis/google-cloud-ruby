@@ -21,7 +21,6 @@ require "helper"
 require "gapic/grpc/service_stub"
 
 require "google/cloud/connectors/v1/connectors_service_pb"
-require "google/cloud/connectors/v1/connectors_service_services_pb"
 require "google/cloud/connectors/v1/connectors"
 
 class ::Google::Cloud::Connectors::V1::Connectors::ClientTest < Minitest::Test

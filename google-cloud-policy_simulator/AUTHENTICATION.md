@@ -56,7 +56,7 @@ To configure a credentials file for an individual client initialization:
 ```ruby
 require "google/cloud/policy_simulator"
 
-client = Google::Cloud::PolicySimulator.simulator do |config|
+client = Google::Cloud::PolicySimulator.org_policy_violations_preview_service do |config|
   config.credentials = "path/to/credentialfile.json"
 end
 ```
@@ -70,7 +70,7 @@ Google::Cloud::PolicySimulator.configure do |config|
   config.credentials = "path/to/credentialfile.json"
 end
 
-client = Google::Cloud::PolicySimulator.simulator
+client = Google::Cloud::PolicySimulator.org_policy_violations_preview_service
 ```
 
 ### Environment Variables
@@ -100,7 +100,7 @@ require "google/cloud/policy_simulator"
 
 ENV["GOOGLE_APPLICATION_CREDENTIALS"] = "path/to/credentialfile.json"
 
-client = Google::Cloud::PolicySimulator.simulator
+client = Google::Cloud::PolicySimulator.org_policy_violations_preview_service
 ```
 
 ### Local ADC file

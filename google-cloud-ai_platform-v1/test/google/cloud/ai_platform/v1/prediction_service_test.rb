@@ -21,7 +21,6 @@ require "helper"
 require "gapic/grpc/service_stub"
 
 require "google/cloud/aiplatform/v1/prediction_service_pb"
-require "google/cloud/aiplatform/v1/prediction_service_services_pb"
 require "google/cloud/ai_platform/v1/prediction_service"
 
 class ::Google::Cloud::AIPlatform::V1::PredictionService::ClientTest < Minitest::Test
@@ -912,6 +911,7 @@ class ::Google::Cloud::AIPlatform::V1::PredictionService::ClientTest < Minitest:
     tool_config = {}
     labels = {}
     safety_settings = [{}]
+    model_armor_config = {}
     generation_config = {}
 
     generate_content_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
@@ -926,6 +926,7 @@ class ::Google::Cloud::AIPlatform::V1::PredictionService::ClientTest < Minitest:
       assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::AIPlatform::V1::ToolConfig), request["tool_config"]
       assert_equal({}, request["labels"].to_h)
       assert_kind_of ::Google::Cloud::AIPlatform::V1::SafetySetting, request["safety_settings"].first
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::AIPlatform::V1::ModelArmorConfig), request["model_armor_config"]
       assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::AIPlatform::V1::GenerationConfig), request["generation_config"]
       refute_nil options
     end
@@ -937,31 +938,31 @@ class ::Google::Cloud::AIPlatform::V1::PredictionService::ClientTest < Minitest:
       end
 
       # Use hash object
-      client.generate_content({ model: model, contents: contents, system_instruction: system_instruction, cached_content: cached_content, tools: tools, tool_config: tool_config, labels: labels, safety_settings: safety_settings, generation_config: generation_config }) do |response, operation|
+      client.generate_content({ model: model, contents: contents, system_instruction: system_instruction, cached_content: cached_content, tools: tools, tool_config: tool_config, labels: labels, safety_settings: safety_settings, model_armor_config: model_armor_config, generation_config: generation_config }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.generate_content model: model, contents: contents, system_instruction: system_instruction, cached_content: cached_content, tools: tools, tool_config: tool_config, labels: labels, safety_settings: safety_settings, generation_config: generation_config do |response, operation|
+      client.generate_content model: model, contents: contents, system_instruction: system_instruction, cached_content: cached_content, tools: tools, tool_config: tool_config, labels: labels, safety_settings: safety_settings, model_armor_config: model_armor_config, generation_config: generation_config do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.generate_content ::Google::Cloud::AIPlatform::V1::GenerateContentRequest.new(model: model, contents: contents, system_instruction: system_instruction, cached_content: cached_content, tools: tools, tool_config: tool_config, labels: labels, safety_settings: safety_settings, generation_config: generation_config) do |response, operation|
+      client.generate_content ::Google::Cloud::AIPlatform::V1::GenerateContentRequest.new(model: model, contents: contents, system_instruction: system_instruction, cached_content: cached_content, tools: tools, tool_config: tool_config, labels: labels, safety_settings: safety_settings, model_armor_config: model_armor_config, generation_config: generation_config) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.generate_content({ model: model, contents: contents, system_instruction: system_instruction, cached_content: cached_content, tools: tools, tool_config: tool_config, labels: labels, safety_settings: safety_settings, generation_config: generation_config }, grpc_options) do |response, operation|
+      client.generate_content({ model: model, contents: contents, system_instruction: system_instruction, cached_content: cached_content, tools: tools, tool_config: tool_config, labels: labels, safety_settings: safety_settings, model_armor_config: model_armor_config, generation_config: generation_config }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.generate_content(::Google::Cloud::AIPlatform::V1::GenerateContentRequest.new(model: model, contents: contents, system_instruction: system_instruction, cached_content: cached_content, tools: tools, tool_config: tool_config, labels: labels, safety_settings: safety_settings, generation_config: generation_config), grpc_options) do |response, operation|
+      client.generate_content(::Google::Cloud::AIPlatform::V1::GenerateContentRequest.new(model: model, contents: contents, system_instruction: system_instruction, cached_content: cached_content, tools: tools, tool_config: tool_config, labels: labels, safety_settings: safety_settings, model_armor_config: model_armor_config, generation_config: generation_config), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -987,6 +988,7 @@ class ::Google::Cloud::AIPlatform::V1::PredictionService::ClientTest < Minitest:
     tool_config = {}
     labels = {}
     safety_settings = [{}]
+    model_armor_config = {}
     generation_config = {}
 
     stream_generate_content_client_stub = ClientStub.new [grpc_response].to_enum, grpc_operation do |name, request, options:|
@@ -1001,6 +1003,7 @@ class ::Google::Cloud::AIPlatform::V1::PredictionService::ClientTest < Minitest:
       assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::AIPlatform::V1::ToolConfig), request["tool_config"]
       assert_equal({}, request["labels"].to_h)
       assert_kind_of ::Google::Cloud::AIPlatform::V1::SafetySetting, request["safety_settings"].first
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::AIPlatform::V1::ModelArmorConfig), request["model_armor_config"]
       assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::AIPlatform::V1::GenerationConfig), request["generation_config"]
       refute_nil options
     end
@@ -1012,7 +1015,7 @@ class ::Google::Cloud::AIPlatform::V1::PredictionService::ClientTest < Minitest:
       end
 
       # Use hash object
-      client.stream_generate_content({ model: model, contents: contents, system_instruction: system_instruction, cached_content: cached_content, tools: tools, tool_config: tool_config, labels: labels, safety_settings: safety_settings, generation_config: generation_config }) do |response, operation|
+      client.stream_generate_content({ model: model, contents: contents, system_instruction: system_instruction, cached_content: cached_content, tools: tools, tool_config: tool_config, labels: labels, safety_settings: safety_settings, model_armor_config: model_armor_config, generation_config: generation_config }) do |response, operation|
         assert_kind_of Enumerable, response
         response.to_a.each do |r|
           assert_kind_of ::Google::Cloud::AIPlatform::V1::GenerateContentResponse, r
@@ -1021,7 +1024,7 @@ class ::Google::Cloud::AIPlatform::V1::PredictionService::ClientTest < Minitest:
       end
 
       # Use named arguments
-      client.stream_generate_content model: model, contents: contents, system_instruction: system_instruction, cached_content: cached_content, tools: tools, tool_config: tool_config, labels: labels, safety_settings: safety_settings, generation_config: generation_config do |response, operation|
+      client.stream_generate_content model: model, contents: contents, system_instruction: system_instruction, cached_content: cached_content, tools: tools, tool_config: tool_config, labels: labels, safety_settings: safety_settings, model_armor_config: model_armor_config, generation_config: generation_config do |response, operation|
         assert_kind_of Enumerable, response
         response.to_a.each do |r|
           assert_kind_of ::Google::Cloud::AIPlatform::V1::GenerateContentResponse, r
@@ -1030,7 +1033,7 @@ class ::Google::Cloud::AIPlatform::V1::PredictionService::ClientTest < Minitest:
       end
 
       # Use protobuf object
-      client.stream_generate_content ::Google::Cloud::AIPlatform::V1::GenerateContentRequest.new(model: model, contents: contents, system_instruction: system_instruction, cached_content: cached_content, tools: tools, tool_config: tool_config, labels: labels, safety_settings: safety_settings, generation_config: generation_config) do |response, operation|
+      client.stream_generate_content ::Google::Cloud::AIPlatform::V1::GenerateContentRequest.new(model: model, contents: contents, system_instruction: system_instruction, cached_content: cached_content, tools: tools, tool_config: tool_config, labels: labels, safety_settings: safety_settings, model_armor_config: model_armor_config, generation_config: generation_config) do |response, operation|
         assert_kind_of Enumerable, response
         response.to_a.each do |r|
           assert_kind_of ::Google::Cloud::AIPlatform::V1::GenerateContentResponse, r
@@ -1039,7 +1042,7 @@ class ::Google::Cloud::AIPlatform::V1::PredictionService::ClientTest < Minitest:
       end
 
       # Use hash object with options
-      client.stream_generate_content({ model: model, contents: contents, system_instruction: system_instruction, cached_content: cached_content, tools: tools, tool_config: tool_config, labels: labels, safety_settings: safety_settings, generation_config: generation_config }, grpc_options) do |response, operation|
+      client.stream_generate_content({ model: model, contents: contents, system_instruction: system_instruction, cached_content: cached_content, tools: tools, tool_config: tool_config, labels: labels, safety_settings: safety_settings, model_armor_config: model_armor_config, generation_config: generation_config }, grpc_options) do |response, operation|
         assert_kind_of Enumerable, response
         response.to_a.each do |r|
           assert_kind_of ::Google::Cloud::AIPlatform::V1::GenerateContentResponse, r
@@ -1048,7 +1051,7 @@ class ::Google::Cloud::AIPlatform::V1::PredictionService::ClientTest < Minitest:
       end
 
       # Use protobuf object with options
-      client.stream_generate_content(::Google::Cloud::AIPlatform::V1::GenerateContentRequest.new(model: model, contents: contents, system_instruction: system_instruction, cached_content: cached_content, tools: tools, tool_config: tool_config, labels: labels, safety_settings: safety_settings, generation_config: generation_config), grpc_options) do |response, operation|
+      client.stream_generate_content(::Google::Cloud::AIPlatform::V1::GenerateContentRequest.new(model: model, contents: contents, system_instruction: system_instruction, cached_content: cached_content, tools: tools, tool_config: tool_config, labels: labels, safety_settings: safety_settings, model_armor_config: model_armor_config, generation_config: generation_config), grpc_options) do |response, operation|
         assert_kind_of Enumerable, response
         response.to_a.each do |r|
           assert_kind_of ::Google::Cloud::AIPlatform::V1::GenerateContentResponse, r

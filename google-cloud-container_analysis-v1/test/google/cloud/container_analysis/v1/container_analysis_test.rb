@@ -21,7 +21,6 @@ require "helper"
 require "gapic/grpc/service_stub"
 
 require "google/devtools/containeranalysis/v1/containeranalysis_pb"
-require "google/devtools/containeranalysis/v1/containeranalysis_services_pb"
 require "google/cloud/container_analysis/v1/container_analysis"
 
 class ::Google::Cloud::ContainerAnalysis::V1::ContainerAnalysis::ClientTest < Minitest::Test

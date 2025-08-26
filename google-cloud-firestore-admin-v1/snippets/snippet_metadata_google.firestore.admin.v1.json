@@ -1,7 +1,7 @@
 {
   "client_library": {
     "name": "google-cloud-firestore-admin-v1",
-    "version": "1.5.0",
+    "version": "1.7.0",
     "language": "RUBY",
     "apis": [
       {
@@ -1247,6 +1247,46 @@
         {
           "start": 20,
           "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "firestore_v1_generated_FirestoreAdmin_CloneDatabase_sync",
+      "title": "Snippet for the clone_database call in the FirestoreAdmin service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Client#clone_database.",
+      "file": "firestore_admin/clone_database.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "clone_database",
+        "full_name": "::Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Client#clone_database",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Firestore::Admin::V1::CloneDatabaseRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "FirestoreAdmin::Client",
+          "full_name": "::Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Client"
+        },
+        "method": {
+          "short_name": "CloneDatabase",
+          "full_name": "google.firestore.admin.v1.FirestoreAdmin.CloneDatabase",
+          "service": {
+            "short_name": "FirestoreAdmin",
+            "full_name": "google.firestore.admin.v1.FirestoreAdmin"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
           "type": "FULL"
         }
       ]

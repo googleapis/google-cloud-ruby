@@ -90,6 +90,13 @@ describe Google::Cloud::Bigquery::LoadJob, :mock_bigquery do
     _(job_defaults).wont_be :backup?
     _(job_defaults).wont_be :allow_jagged_rows?
     _(job_defaults).wont_be :ignore_unknown_values?
+    _(job_defaults.date_format).must_be :nil?
+    _(job_defaults.time_format).must_be :nil?
+    _(job_defaults.datetime_format).must_be :nil?
+    _(job_defaults.timestamp_format).must_be :nil?
+    _(job_defaults.null_markers).must_equal []
+    _(job_defaults.source_column_match).must_be :nil?
+    _(job_defaults.time_zone).must_be :nil?
   end
 
   it "knows its full attributes" do
@@ -107,6 +114,13 @@ describe Google::Cloud::Bigquery::LoadJob, :mock_bigquery do
     _(job).wont_be :backup?
     _(job).must_be :allow_jagged_rows?
     _(job).must_be :ignore_unknown_values?
+    _(job.date_format).must_equal "%Y-%m-%d"
+    _(job.time_format).must_equal "%H:%M:%S"
+    _(job.datetime_format).must_equal "%Y-%m-%d %H:%M:%S"
+    _(job.timestamp_format).must_equal "%Y-%m-%d %H:%M:%S.%f %z"
+    _(job.null_markers).must_equal ["NULL", "nil"]
+    _(job.source_column_match).must_equal "POSITION"
+    _(job.time_zone).must_equal "America/Los_Angeles"
   end
 
   it "knows its statistics data" do
@@ -175,7 +189,14 @@ describe Google::Cloud::Bigquery::LoadJob, :mock_bigquery do
       "autodetect" => true,
       "sourceFormat" => "NEWLINE_DELIMITED_JSON",
       "allowJaggedRows" => true,
-      "ignoreUnknownValues" => true
+      "ignoreUnknownValues" => true,
+      "dateFormat" => "%Y-%m-%d",
+      "timeFormat" => "%H:%M:%S",
+      "datetimeFormat" => "%Y-%m-%d %H:%M:%S",
+      "timestampFormat" => "%Y-%m-%d %H:%M:%S.%f %z",
+      "nullMarkers" => ["NULL", "nil"],
+      "sourceColumnMatch" => "POSITION",
+      "timeZone" => "America/Los_Angeles",
     }
     hash["statistics"]["load"] = {
       "inputFiles" => "3", # String per google/google-api-ruby-client#439

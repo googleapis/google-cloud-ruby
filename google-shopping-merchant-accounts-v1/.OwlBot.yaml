@@ -1,0 +1,3 @@
+deep-copy-regex:
+  - source: /google/shopping/merchant/accounts/v1/[^/]+-ruby/(.*)
+    dest: /owl-bot-staging/google-shopping-merchant-accounts-v1/$1

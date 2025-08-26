@@ -46,16 +46,16 @@ class StreamingPullStub
   # @param options [::Gapic::CallOptions, ::Hash]
   #   Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
   #
-  def streaming_pull request, options = nil
+  def streaming_pull_internal request, options = nil
     @requests << request
     @responses.shift.each
   end
 
-  def acknowledge subscription:, ack_ids:
+  def acknowledge_internal subscription:, ack_ids:
     @acknowledge_requests << [subscription, ack_ids.flatten.sort]
   end
 
-  def modify_ack_deadline subscription:, ack_ids:, ack_deadline_seconds:
+  def modify_ack_deadline_internal subscription:, ack_ids:, ack_deadline_seconds:
     @modify_ack_deadline_requests << [subscription, ack_ids.sort, ack_deadline_seconds]
   end
 
@@ -90,7 +90,7 @@ class AsyncPublisherStub
     @messages = []
   end
 
-  def publish request, options=nil
+  def publish_internal request, options=nil
     @messages << request[:messages]
     message_ids = Array.new(request[:messages].count) { |i| "msg#{i}" }
     Google::Cloud::PubSub::V1::PublishResponse.new({ message_ids: message_ids })

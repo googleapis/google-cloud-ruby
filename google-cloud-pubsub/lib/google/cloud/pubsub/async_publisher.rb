@@ -27,15 +27,15 @@ module Google
     module PubSub
       ##
       # Used to publish multiple messages in batches to a topic. See
-      # {Google::Cloud::PubSub::Topic#async_publisher}
+      # {Google::Cloud::PubSub::Publisher#async_publisher}
       #
       # @example
       #   require "google/cloud/pubsub"
       #
       #   pubsub = Google::Cloud::PubSub.new
       #
-      #   topic = pubsub.topic "my-topic"
-      #   topic.publish_async "task completed" do |result|
+      #   publisher = pubsub.publisher "my-topic"
+      #   publisher.publish_async "task completed" do |result|
       #     if result.succeeded?
       #       log_publish_success result.data
       #     else
@@ -43,7 +43,7 @@ module Google
       #     end
       #   end
       #
-      #   topic.async_publisher.stop!
+      #   publisher.async_publisher.stop!
       #
       # @attr_reader [String] topic_name The name of the topic the messages are published to. The value is a
       #   fully-qualified topic name in the form `projects/{project_id}/topics/{topic_id}`.
@@ -116,7 +116,7 @@ module Google
         ##
         # Add a message to the async publisher to be published to the topic.
         # Messages will be collected in batches and published together.
-        # See {Google::Cloud::PubSub::Topic#publish_async}
+        # See {Google::Cloud::PubSub::Publisher#publish_async}
         #
         # @param [String, File] data The message payload. This will be converted
         #   to bytes encoded as ASCII-8BIT.
@@ -262,8 +262,8 @@ module Google
         # enabled, messages published with the same `ordering_key` will be
         # delivered in the order they were published.
         #
-        # See {#message_ordering?}. See {Topic#publish_async},
-        # {Subscription#listen}, and {Message#ordering_key}.
+        # See {#message_ordering?}. See {Publisher#publish_async},
+        # {Subscriber#listen}, and {Message#ordering_key}.
         #
         def enable_message_ordering!
           synchronize { @ordered = true }
@@ -275,8 +275,8 @@ module Google
         # will be delivered in the order they were published. When disabled,
         # messages may be delivered in any order.
         #
-        # See {#enable_message_ordering!}. See {Topic#publish_async},
-        # {Subscription#listen}, and {Message#ordering_key}.
+        # See {#enable_message_ordering!}. See {Publisher#publish_async},
+        # {Subscriber#listen}, and {Message#ordering_key}.
         #
         # @return [Boolean]
         #

@@ -24,3 +24,5 @@ Naming/FileName:
 Style/BisectedAttrAccessor:
   Exclude:
     - "lib/google/cloud/datastore/dataset/query_results.rb"
+    - "lib/google/cloud/datastore/dataset/lookup_results.rb"
+    - "lib/google/cloud/datastore/dataset/aggregate_query_results.rb"

@@ -21,7 +21,6 @@ require "helper"
 require "gapic/grpc/service_stub"
 
 require "google/firestore/v1/firestore_pb"
-require "google/firestore/v1/firestore_services_pb"
 require "google/cloud/firestore/v1/firestore"
 
 class ::Google::Cloud::Firestore::V1::Firestore::ClientTest < Minitest::Test

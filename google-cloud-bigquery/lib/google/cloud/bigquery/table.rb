@@ -1018,6 +1018,77 @@ module Google
         end
 
         ##
+        # The resource tags associated with this table. Tag keys are globally unique.
+        #
+        # @see https://cloud.google.com/iam/docs/tags-access-control#definitions
+        #   For additional information on tags.
+        #
+        # The returned hash is frozen and changes are not allowed. Use
+        # {#resource_tags=} to replace the entire hash.
+        #
+        # @return [Hash<String, String>, nil] A hash containing key/value pairs.
+        #
+        #   * The key is the namespaced friendly name of the tag key, e.g.
+        #     "12345/environment" where 12345 is the ID of the parent organization
+        #     or project resource for this tag key.
+        #   * The value is the friendly short name of the tag value, e.g. "production".
+        #
+        # @example
+        #   require "google/cloud/bigquery"
+        #
+        #   bigquery = Google::Cloud::Bigquery.new
+        #   dataset = bigquery.dataset "my_dataset"
+        #   table = dataset.table "my_table"
+        #
+        #   resource_tags = table.resource_tags
+        #   resource_tags["12345/environment"] #=> "production"
+        #
+        # @!group Attributes
+        #
+        def resource_tags
+          return nil if reference?
+          m = @gapi.resource_tags
+          m = m.to_h if m.respond_to? :to_h
+          m.dup.freeze
+        end
+
+        ##
+        # Updates the resource tags associated with this table. Tag keys are globally
+        # unique.
+        #
+        # @see https://cloud.google.com/iam/docs/tags-access-control#definitions
+        #   For additional information on tags.
+        #
+        # If the table is not a full resource representation (see
+        # {#resource_full?}), the full representation will be retrieved before
+        # the update to comply with ETag-based optimistic concurrency control.
+        #
+        # @param [Hash<String, String>] resource_tags A hash containing key/value
+        #   pairs.
+        #
+        #   * The key is the namespaced friendly name of the tag key, e.g.
+        #     "12345/environment" where 12345 is the ID of the parent organization
+        #     or project resource for this tag key.
+        #   * The value is the friendly short name of the tag value, e.g. "production".
+        #
+        # @example
+        #   require "google/cloud/bigquery"
+        #
+        #   bigquery = Google::Cloud::Bigquery.new
+        #   dataset = bigquery.dataset "my_dataset"
+        #   table = dataset.table "my_table"
+        #
+        #   table.resource_tags = { "12345/environment" => "production" }
+        #
+        # @!group Attributes
+        #
+        def resource_tags= resource_tags
+          reload! unless resource_full?
+          @gapi.resource_tags = resource_tags
+          patch_gapi! :resource_tags
+        end
+
+        ##
         # Returns the table's schema. If the table is not a view (See {#view?}),
         # this method can also be used to set, replace, or add to the schema by
         # passing a block. See {Schema} for available methods.
@@ -1630,6 +1701,8 @@ module Google
         #
         # @param [Integer] max Maximum number of results to return.
         # @param [Integer] start Zero-based index of the starting row to read.
+        # @param [Boolean] format_options_use_int64_timestamp Output timestamp
+        #   as usec int64. Default is true.
         #
         # @return [Google::Cloud::Bigquery::Data]
         #
@@ -1664,11 +1737,12 @@ module Google
         #
         # @!group Data
         #
-        def data token: nil, max: nil, start: nil
+        def data token: nil, max: nil, start: nil, format_options_use_int64_timestamp: true
           ensure_service!
           reload! unless resource_full?
-          data_json = service.list_tabledata dataset_id, table_id, token: token, max: max, start: start
-          Data.from_gapi_json data_json, gapi, nil, service
+          data_json = service.list_tabledata dataset_id, table_id, token: token, max: max, start: start,
+format_options_use_int64_timestamp: format_options_use_int64_timestamp
+          Data.from_gapi_json data_json, gapi, nil, service, format_options_use_int64_timestamp
         end
 
         ##

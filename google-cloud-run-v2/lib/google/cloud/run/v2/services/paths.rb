@@ -44,6 +44,25 @@ module Google
             end
 
             ##
+            # Create a fully-qualified BuildWorkerPool resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `projects/{project}/locations/{location}/workerPools/{worker_pool}`
+            #
+            # @param project [String]
+            # @param location [String]
+            # @param worker_pool [String]
+            #
+            # @return [::String]
+            def build_worker_pool_path project:, location:, worker_pool:
+              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+              raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+
+              "projects/#{project}/locations/#{location}/workerPools/#{worker_pool}"
+            end
+
+            ##
             # Create a fully-qualified Connector resource string.
             #
             # The resource will be in the following format:
@@ -226,25 +245,6 @@ module Google
               raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
 
               "projects/#{project}/locations/#{location}/services/#{service}"
-            end
-
-            ##
-            # Create a fully-qualified WorkerPool resource string.
-            #
-            # The resource will be in the following format:
-            #
-            # `projects/{project}/locations/{location}/workerPools/{worker_pool}`
-            #
-            # @param project [String]
-            # @param location [String]
-            # @param worker_pool [String]
-            #
-            # @return [::String]
-            def worker_pool_path project:, location:, worker_pool:
-              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
-              raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
-
-              "projects/#{project}/locations/#{location}/workerPools/#{worker_pool}"
             end
 
             extend self

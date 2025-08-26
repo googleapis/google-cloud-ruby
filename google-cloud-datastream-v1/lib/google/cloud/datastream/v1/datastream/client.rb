@@ -805,7 +805,7 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload discover_connection_profile(parent: nil, connection_profile: nil, connection_profile_name: nil, full_hierarchy: nil, hierarchy_depth: nil, oracle_rdbms: nil, mysql_rdbms: nil, postgresql_rdbms: nil, sql_server_rdbms: nil)
+            # @overload discover_connection_profile(parent: nil, connection_profile: nil, connection_profile_name: nil, full_hierarchy: nil, hierarchy_depth: nil, oracle_rdbms: nil, mysql_rdbms: nil, postgresql_rdbms: nil, sql_server_rdbms: nil, salesforce_org: nil, mongodb_cluster: nil)
             #   Pass arguments to `discover_connection_profile` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -816,36 +816,44 @@ module Google
             #   @param connection_profile [::Google::Cloud::Datastream::V1::ConnectionProfile, ::Hash]
             #     An ad-hoc connection profile configuration.
             #
-            #     Note: The following fields are mutually exclusive: `connection_profile`, `connection_profile_name`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+            #     Note: The following parameters are mutually exclusive: `connection_profile`, `connection_profile_name`. At most one of these parameters can be set. If more than one is set, only one will be used, and it is not defined which one.
             #   @param connection_profile_name [::String]
             #     A reference to an existing connection profile.
             #
-            #     Note: The following fields are mutually exclusive: `connection_profile_name`, `connection_profile`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+            #     Note: The following parameters are mutually exclusive: `connection_profile_name`, `connection_profile`. At most one of these parameters can be set. If more than one is set, only one will be used, and it is not defined which one.
             #   @param full_hierarchy [::Boolean]
             #     Whether to retrieve the full hierarchy of data objects (TRUE) or only the
             #     current level (FALSE).
             #
-            #     Note: The following fields are mutually exclusive: `full_hierarchy`, `hierarchy_depth`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+            #     Note: The following parameters are mutually exclusive: `full_hierarchy`, `hierarchy_depth`. At most one of these parameters can be set. If more than one is set, only one will be used, and it is not defined which one.
             #   @param hierarchy_depth [::Integer]
             #     The number of hierarchy levels below the current level to be retrieved.
             #
-            #     Note: The following fields are mutually exclusive: `hierarchy_depth`, `full_hierarchy`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+            #     Note: The following parameters are mutually exclusive: `hierarchy_depth`, `full_hierarchy`. At most one of these parameters can be set. If more than one is set, only one will be used, and it is not defined which one.
             #   @param oracle_rdbms [::Google::Cloud::Datastream::V1::OracleRdbms, ::Hash]
             #     Oracle RDBMS to enrich with child data objects and metadata.
             #
-            #     Note: The following fields are mutually exclusive: `oracle_rdbms`, `mysql_rdbms`, `postgresql_rdbms`, `sql_server_rdbms`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+            #     Note: The following parameters are mutually exclusive: `oracle_rdbms`, `mysql_rdbms`, `postgresql_rdbms`, `sql_server_rdbms`, `salesforce_org`, `mongodb_cluster`. At most one of these parameters can be set. If more than one is set, only one will be used, and it is not defined which one.
             #   @param mysql_rdbms [::Google::Cloud::Datastream::V1::MysqlRdbms, ::Hash]
             #     MySQL RDBMS to enrich with child data objects and metadata.
             #
-            #     Note: The following fields are mutually exclusive: `mysql_rdbms`, `oracle_rdbms`, `postgresql_rdbms`, `sql_server_rdbms`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+            #     Note: The following parameters are mutually exclusive: `mysql_rdbms`, `oracle_rdbms`, `postgresql_rdbms`, `sql_server_rdbms`, `salesforce_org`, `mongodb_cluster`. At most one of these parameters can be set. If more than one is set, only one will be used, and it is not defined which one.
             #   @param postgresql_rdbms [::Google::Cloud::Datastream::V1::PostgresqlRdbms, ::Hash]
             #     PostgreSQL RDBMS to enrich with child data objects and metadata.
             #
-            #     Note: The following fields are mutually exclusive: `postgresql_rdbms`, `oracle_rdbms`, `mysql_rdbms`, `sql_server_rdbms`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+            #     Note: The following parameters are mutually exclusive: `postgresql_rdbms`, `oracle_rdbms`, `mysql_rdbms`, `sql_server_rdbms`, `salesforce_org`, `mongodb_cluster`. At most one of these parameters can be set. If more than one is set, only one will be used, and it is not defined which one.
             #   @param sql_server_rdbms [::Google::Cloud::Datastream::V1::SqlServerRdbms, ::Hash]
             #     SQLServer RDBMS to enrich with child data objects and metadata.
             #
-            #     Note: The following fields are mutually exclusive: `sql_server_rdbms`, `oracle_rdbms`, `mysql_rdbms`, `postgresql_rdbms`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+            #     Note: The following parameters are mutually exclusive: `sql_server_rdbms`, `oracle_rdbms`, `mysql_rdbms`, `postgresql_rdbms`, `salesforce_org`, `mongodb_cluster`. At most one of these parameters can be set. If more than one is set, only one will be used, and it is not defined which one.
+            #   @param salesforce_org [::Google::Cloud::Datastream::V1::SalesforceOrg, ::Hash]
+            #     Salesforce organization to enrich with child data objects and metadata.
+            #
+            #     Note: The following parameters are mutually exclusive: `salesforce_org`, `oracle_rdbms`, `mysql_rdbms`, `postgresql_rdbms`, `sql_server_rdbms`, `mongodb_cluster`. At most one of these parameters can be set. If more than one is set, only one will be used, and it is not defined which one.
+            #   @param mongodb_cluster [::Google::Cloud::Datastream::V1::MongodbCluster, ::Hash]
+            #     MongoDB cluster to enrich with child data objects and metadata.
+            #
+            #     Note: The following parameters are mutually exclusive: `mongodb_cluster`, `oracle_rdbms`, `mysql_rdbms`, `postgresql_rdbms`, `sql_server_rdbms`, `salesforce_org`. At most one of these parameters can be set. If more than one is set, only one will be used, and it is not defined which one.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::Datastream::V1::DiscoverConnectionProfileResponse]
@@ -2096,7 +2104,7 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload create_private_connection(parent: nil, private_connection_id: nil, private_connection: nil, request_id: nil, force: nil)
+            # @overload create_private_connection(parent: nil, private_connection_id: nil, private_connection: nil, request_id: nil, force: nil, validate_only: nil)
             #   Pass arguments to `create_private_connection` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -2123,6 +2131,10 @@ module Google
             #     not supported (00000000-0000-0000-0000-000000000000).
             #   @param force [::Boolean]
             #     Optional. If set to true, will skip validations.
+            #   @param validate_only [::Boolean]
+            #     Optional. When supplied with PSC Interface config, will get/create the
+            #     tenant project required for the customer to allow list and won't actually
+            #     create the private connection.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Gapic::Operation]

@@ -1359,13 +1359,13 @@ module Google
               #     This value may be up to 63 characters, and valid characters are
               #     `[a-z0-9_-]`. The first character cannot be a number or hyphen.
               #
-              #     Note: The following fields are mutually exclusive: `model_id`, `parent_model`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+              #     Note: The following parameters are mutually exclusive: `model_id`, `parent_model`. At most one of these parameters can be set. If more than one is set, only one will be used, and it is not defined which one.
               #   @param parent_model [::String]
               #     Optional. Specify this field to copy source_model into this existing
               #     Model as a new version. Format:
               #     `projects/{project}/locations/{location}/models/{model}`
               #
-              #     Note: The following fields are mutually exclusive: `parent_model`, `model_id`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+              #     Note: The following parameters are mutually exclusive: `parent_model`, `model_id`. At most one of these parameters can be set. If more than one is set, only one will be used, and it is not defined which one.
               #   @param parent [::String]
               #     Required. The resource name of the Location into which to copy the Model.
               #     Format: `projects/{project}/locations/{location}`

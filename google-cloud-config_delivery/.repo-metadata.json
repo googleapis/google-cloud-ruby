@@ -1,0 +1,13 @@
+{
+    "api_shortname": "unknown",
+    "client_documentation": "https://cloud.google.com/ruby/docs/reference/google-cloud-config_delivery/latest",
+    "distribution_name": "google-cloud-config_delivery",
+    "is_cloud": true,
+    "language": "ruby",
+    "name_pretty": "Google Cloud ConfigDelivery API",
+    "release_level": "preview",
+    "repo": "googleapis/google-cloud-ruby",
+    "requires_billing": true,
+    "ruby-cloud-description": "google-cloud-config_delivery is the official client library for the Google Cloud ConfigDelivery API.",
+    "library_type": "GAPIC_MANUAL"
+}

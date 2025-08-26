@@ -19,10 +19,17 @@ def create_proto_schema schema_id:, proto_file:
   # schema_id = "your-schema-id"
   # proto_file = "path/to/a/proto/file/(.proto)/formatted/in/protocol/buffers"
 
-  pubsub = Google::Cloud::Pubsub.new
+  pubsub = Google::Cloud::PubSub.new
+  schemas = pubsub.schemas
 
-  definition = File.read proto_file
-  schema = pubsub.create_schema schema_id, :protocol_buffer, definition
+  schema = Google::Cloud::PubSub::V1::Schema.new \
+    name: schema_id,
+    type: :PROTOCOL_BUFFER,
+    definition: File.read(proto_file)
+
+  schema = schemas.create_schema parent: pubsub.project_path,
+                                 schema: schema,
+                                 schema_id: schema_id
 
   puts "Schema #{schema.name} created."
   # [END pubsub_create_proto_schema]

@@ -27,13 +27,19 @@ module Google
         #     The Cloud Spanner timestamp at which the transaction committed.
         # @!attribute [rw] commit_stats
         #   @return [::Google::Cloud::Spanner::V1::CommitResponse::CommitStats]
-        #     The statistics about this Commit. Not returned by default.
+        #     The statistics about this `Commit`. Not returned by default.
         #     For more information, see
         #     {::Google::Cloud::Spanner::V1::CommitRequest#return_commit_stats CommitRequest.return_commit_stats}.
         # @!attribute [rw] precommit_token
         #   @return [::Google::Cloud::Spanner::V1::MultiplexedSessionPrecommitToken]
         #     If specified, transaction has not committed yet.
-        #     Clients must retry the commit with the new precommit token.
+        #     You must retry the commit with the new precommit token.
+        # @!attribute [rw] snapshot_timestamp
+        #   @return [::Google::Protobuf::Timestamp]
+        #     If `TransactionOptions.isolation_level` is set to
+        #     `IsolationLevel.REPEATABLE_READ`, then the snapshot timestamp is the
+        #     timestamp at which all reads in the transaction ran. This timestamp is
+        #     never returned.
         class CommitResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

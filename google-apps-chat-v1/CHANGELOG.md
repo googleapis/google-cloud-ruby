@@ -1,5 +1,23 @@
 # Changelog
 
+### 0.14.0 (2025-08-12)
+
+#### Features
+
+* Addition of app auth support for chat api ([#30748](https://github.com/googleapis/google-cloud-ruby/issues/30748)) 
+#### Documentation
+
+* Update reference documentation 
+
+### 0.13.0 (2025-07-24)
+
+#### Features
+
+* Exposing 1p integration message content (drive, calendar, huddle, meet chips) ([#30712](https://github.com/googleapis/google-cloud-ruby/issues/30712)) 
+#### Documentation
+
+* Update reference documentation for annotations. Introduce new richlink metadata types 
+
 ### 0.12.0 (2025-05-12)
 
 #### Features

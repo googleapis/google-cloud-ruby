@@ -17,14 +17,19 @@ require "google/cloud/pubsub"
 def set_subscription_policy subscription_id:, role:, service_account_email:
   # [START pubsub_set_subscription_policy]
   # subscription_id       = "your-subscription-id"
-  # role                  = "roles/pubsub.publisher"
-  # service_account_email = "serviceAccount:account_name@project_name.iam.gserviceaccount.com"
+  # role                  = "roles/pubsub.subscriber"
+  # service_account_email =
+  # "serviceAccount:account_name@project_name.iam.gserviceaccount.com"
 
-  pubsub = Google::Cloud::Pubsub.new
+  pubsub = Google::Cloud::PubSub.new
 
-  subscription = pubsub.subscription subscription_id
-  subscription.policy do |policy|
-    policy.add role, service_account_email
-  end
+  bindings = Google::Iam::V1::Binding.new \
+    role: role,
+    members: [service_account_email]
+
+  pubsub.iam.set_iam_policy resource: pubsub.subscription_path(subscription_id),
+                            policy: {
+                              bindings: [bindings]
+                            }
   # [END pubsub_set_subscription_policy]
 end

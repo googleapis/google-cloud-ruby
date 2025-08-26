@@ -13,9 +13,16 @@
 # limitations under the License.
 
 require_relative "helper"
+require_relative "../pubsub_create_cloud_storage_subscription.rb"
 require_relative "../pubsub_create_pull_subscription.rb"
 require_relative "../pubsub_create_push_subscription.rb"
+require_relative "../pubsub_create_topic_with_aws_msk_ingestion.rb"
+require_relative "../pubsub_create_topic_with_azure_event_hubs_ingestion.rb"
+require_relative "../pubsub_create_topic_with_cloud_storage_ingestion.rb"
+require_relative "../pubsub_create_topic_with_confluent_cloud_ingestion.rb"
+require_relative "../pubsub_create_topic_with_kinesis_ingestion.rb"
 require_relative "../pubsub_create_topic.rb"
+require_relative "../pubsub_create_unwrapped_push_subscription.rb"
 require_relative "../pubsub_dead_letter_create_subscription.rb"
 require_relative "../pubsub_dead_letter_delivery_attempt.rb"
 require_relative "../pubsub_dead_letter_remove.rb"
@@ -26,26 +33,147 @@ require_relative "../pubsub_list_topic_subscriptions.rb"
 require_relative "../pubsub_list_topics.rb"
 require_relative "../pubsub_publish.rb"
 require_relative "../pubsub_publish_custom_attributes.rb"
+require_relative "../pubsub_publish_with_error_handler.rb"
 require_relative "../pubsub_publish_with_ordering_keys.rb"
 require_relative "../pubsub_publisher_batch_settings.rb"
 require_relative "../pubsub_publisher_concurrency_control.rb"
 require_relative "../pubsub_publisher_flow_control.rb"
+require_relative "../pubsub_publisher_with_compression.rb"
 require_relative "../pubsub_quickstart_publisher.rb"
 require_relative "../pubsub_resume_publish_with_ordering_keys.rb"
 require_relative "../pubsub_set_topic_policy.rb"
 require_relative "../pubsub_test_topic_permissions.rb"
+require_relative "../pubsub_update_topic_type.rb"
+
+describe "emulator" do
+  let(:pubsub) { Google::Cloud::Pubsub.new }
+  let(:topic_id) { random_topic_id }
+  let(:topic_admin) { pubsub.topic_admin }
+  let(:aws_role_arn) { "arn:aws:iam::111111111111:role/fake-role-name" }
+  let(:gcp_service_account) { "fake-service-account@project.iam.gserviceaccount.com" }
+  let(:subscription_admin) { pubsub.subscription_admin }
+
+  before do
+    skip unless ENV["PUBSUB_EMULATOR_HOST"]
+  end
+
+  after do
+    topic = topic_admin.get_topic topic: pubsub.topic_path(topic_id)
+    assert topic
+    assert_equal "projects/#{pubsub.project}/topics/#{topic_id}", topic.name
+    topic_admin.delete_topic topic: topic.name
+  end
+
+  it "supports pubsub_create_topic_with_cloud_storage_ingestion" do
+    # pubsub_create_topic_with_cloud_storage_ingestion
+    assert_output "Topic with Cloud Storage Ingestion projects/#{pubsub.project}/topics/#{topic_id} created.\n" do
+      create_topic_with_cloud_storage_ingestion topic_id: topic_id, 
+                                                bucket: random_bucket_id, 
+                                                input_format: "text", 
+                                                text_delimiter: "\n", 
+                                                match_glob: "**.txt", 
+                                                minimum_object_create_time: Google::Protobuf::Timestamp.new
+    end
+  end
+
+  it "supports pubsub_create_topic_with_kinesis_ingestion" do
+    # pubsub_create_topic_with_kinesis_ingestion
+    assert_output "Topic with Kinesis Ingestion projects/#{pubsub.project}/topics/#{topic_id} created.\n" do
+      create_topic_with_kinesis_ingestion topic_id: topic_id,
+                                          stream_arn: "arn:aws:kinesis:us-west-2:111111111111:stream/fake-stream-name",
+                                          consumer_arn: "arn:aws:kinesis:us-west-2:111111111111:stream/fake-stream-name/consumer/consumer-1:1111111111",
+                                          aws_role_arn: aws_role_arn,
+                                          gcp_service_account: gcp_service_account
+    end
+  end
+
+  it "supports pubsub_create_topic_with_aws_msk_ingestion" do
+    # pubsub_create_topic_with_aws_msk_ingestion
+    assert_output "Topic with Aws MSK Ingestion projects/#{pubsub.project}/topics/#{topic_id} created.\n" do
+      create_topic_with_aws_msk_ingestion topic_id: topic_id,
+                                          cluster_arn: "arn:aws:kafka:us-east-1:111111111111:cluster/fake-cluster-name/11111111-1111-1",
+                                          msk_topic: "fake-msk-topic-name",
+                                          aws_role_arn: aws_role_arn,
+                                          gcp_service_account: gcp_service_account
+    end
+  end
+
+  it "supports pubsub_create_topic_with_azure_event_hubs_ingestion" do
+    # pubsub_create_topic_with_azure_event_hubs_ingestion
+    assert_output "Topic with Azure Event Hubs Ingestion projects/#{pubsub.project}/topics/#{topic_id} created.\n" do
+      create_topic_with_azure_event_hubs_ingestion topic_id: topic_id,
+                                                   resource_group: "fake-resource-group",
+                                                   namespace: "fake-namespace",
+                                                   event_hub: "fake-event-hub",
+                                                   client_id: "11111111-1111-1111-1111-11111111111",
+                                                   tenant_id: "22222222-2222-2222-2222-222222222222",
+                                                   subscription_id: "33333333-3333-3333-3333-333333333333",
+                                                   gcp_service_account: gcp_service_account
+    end
+  end
+
+  it "supports pubsub_create_topic_with_confluent_cloud_ingestion" do
+    # pubsub_create_topic_with_confluent_cloud_ingestion
+    assert_output "Topic with Confluent Cloud Ingestion projects/#{pubsub.project}/topics/#{topic_id} created.\n" do
+      create_topic_with_confluent_cloud_ingestion topic_id: topic_id,
+                                                  bootstrap_server: "fake-bootstrap-server-id.us-south1.gcp.confluent.cloud:9092",
+                                                  cluster_id: "fake-cluster-id",
+                                                  confluent_topic: "fake-confluent-topic-name",
+                                                  identity_pool_id: "fake-identity-pool-id",
+                                                  gcp_service_account: gcp_service_account
+    end
+  end
+
+  it "supports pubsub_create_topic, pubsub_update_topic_type" do
+    # pubsub_create_topic
+    assert_output "Topic projects/#{pubsub.project}/topics/#{topic_id} created.\n" do
+      create_topic topic_id: topic_id
+    end
+
+    # pubsub_update_topic_type
+    assert_output "Topic projects/#{pubsub.project}/topics/#{topic_id} updated.\n" do
+      update_topic_type topic_id: topic_id,
+                        stream_arn: "arn:aws:kinesis:us-west-2:111111111111:stream/fake-stream-name",
+                        consumer_arn: "arn:aws:kinesis:us-west-2:111111111111:stream/fake-stream-name/consumer/consumer-1:1111111111",
+                        aws_role_arn: aws_role_arn,
+                        gcp_service_account: gcp_service_account
+    end
+  end
+
+  it "supports pubsub_create_topic, pubsub_create_cloud_storage_subscription" do
+    # pubsub_create_topic
+    assert_output "Topic projects/#{pubsub.project}/topics/#{topic_id} created.\n" do
+      create_topic topic_id: topic_id
+    end
+
+    subscription_id = random_subscription_id
+    bucket_id = random_bucket_id
+
+    # pubsub_create_cloud_storage_subscription
+    assert_output "Cloud storage subscription #{subscription_id} created.\n" do
+      create_cloud_storage_subscription topic_id: topic_id, subscription_id: subscription_id, bucket: bucket_id 
+    end
+    subscription = subscription_admin.get_subscription subscription: pubsub.subscription_path(subscription_id)
+    assert subscription
+    assert_equal "projects/#{pubsub.project}/subscriptions/#{subscription_id}", subscription.name
+    assert_equal bucket_id, subscription.cloud_storage_config.bucket
+    subscription_admin.delete_subscription subscription: subscription.name
+  end
+end
 
 describe "topics" do
-  let(:pubsub) { Google::Cloud::Pubsub.new }
+  let(:pubsub) { Google::Cloud::PubSub.new }
   let(:role) { "roles/pubsub.publisher" }
   let(:service_account_email) { "serviceAccount:kokoro@#{pubsub.project}.iam.gserviceaccount.com" }
   let(:topic_id) { random_topic_id }
   let(:subscription_id) { random_subscription_id }
   let(:dead_letter_topic_id) { random_topic_id }
+  let(:topic_admin) { pubsub.topic_admin }
+  let(:subscription_admin) { pubsub.subscription_admin }
 
   after do
-    @subscription.delete if @subscription
-    @topic.delete if @topic
+    subscription_admin.delete_subscription subscription: @subscription.name if @subscription
+    topic_admin.delete_topic topic: @topic.name if @topic
   end
 
   it "supports pubsub_create_topic, pubsub_list_topics, pubsub_set_topic_policy, pubsub_get_topic_policy, pubsub_test_topic_permissions, pubsub_delete_topic" do
@@ -53,7 +181,7 @@ describe "topics" do
     assert_output "Topic projects/#{pubsub.project}/topics/#{topic_id} created.\n" do
       create_topic topic_id: topic_id
     end
-    topic = pubsub.topic topic_id
+    topic = topic_admin.get_topic topic: pubsub.topic_path(topic_id)
     assert topic
     assert_equal "projects/#{pubsub.project}/topics/#{topic_id}", topic.name
 
@@ -66,11 +194,12 @@ describe "topics" do
 
     # pubsub_set_topic_policy
     set_topic_policy topic_id: topic.name, role: role, service_account_email: service_account_email
-    topic.reload!
-    assert_equal [service_account_email], topic.policy.roles[role]
+    policy = pubsub.iam.get_iam_policy resource: pubsub.topic_path(topic_id)
+
+    assert_equal [service_account_email], policy.bindings.first.members
 
     # pubsub_get_topic_policy
-    assert_output "Topic policy:\n#{topic.policy.roles}\n" do
+    assert_output "Topic policy:\n#{policy.bindings.first.role}\n" do
       get_topic_policy topic_id: topic_id
     end
 
@@ -83,24 +212,26 @@ describe "topics" do
     assert_output "Topic #{topic_id} deleted.\n" do
       delete_topic topic_id: topic_id
     end
-    topic = pubsub.topic topic_id
-    refute topic
+
+    assert_raises Google::Cloud::NotFoundError do
+      topic_admin.get_topic topic: pubsub.topic_path(topic_id)
+    end
   end
 
   it "supports pubsub_create_pull_subscription, pubsub_list_topic_subscriptions, pubsub_quickstart_publisher, pubsub_subscriber_sync_pull" do
     #setup
-    @topic = pubsub.create_topic topic_id
+    @topic = topic_admin.create_topic name: pubsub.topic_path(topic_id)
 
     # pubsub_create_pull_subscription
     assert_output "Pull subscription #{subscription_id} created.\n" do
       create_pull_subscription topic_id: topic_id, subscription_id: subscription_id
     end
-    @subscription = @topic.subscription subscription_id
+    @subscription = subscription_admin.get_subscription subscription: pubsub.subscription_path(subscription_id)
     assert @subscription
     assert_equal "projects/#{pubsub.project}/subscriptions/#{subscription_id}", @subscription.name
 
     # pubsub_list_topic_subscriptions
-    assert_output "Subscriptions in topic #{@topic.name}:\n#{@subscription.name}\n" do
+    assert_output "Subscriptions in topic #{topic_id}:\n#{@subscription.name}\n" do
       list_topic_subscriptions topic_id: topic_id
     end
 
@@ -119,16 +250,16 @@ describe "topics" do
 
   it "supports pubsub_enable_subscription_ordering, pubsub_publish_with_ordering_keys, pubsub_resume_publish_with_ordering_keys" do
     #setup
-    @topic = pubsub.create_topic topic_id
+    @topic = topic_admin.create_topic name: pubsub.topic_path(topic_id)
 
     # pubsub_enable_subscription_ordering
     assert_output "Pull subscription #{subscription_id} created with message ordering.\n" do
       enable_subscription_ordering topic_id: topic_id, subscription_id: subscription_id
     end
-    @subscription = @topic.subscription subscription_id
+    @subscription = subscription_admin.get_subscription subscription: pubsub.subscription_path(subscription_id)
     assert @subscription
     assert_equal "projects/#{pubsub.project}/subscriptions/#{subscription_id}", @subscription.name
-    assert @subscription.message_ordering?
+    assert @subscription.enable_message_ordering
 
     # pubsub_publish_with_ordering_keys
     assert_output "Messages published with ordering key.\n" do
@@ -137,7 +268,8 @@ describe "topics" do
 
     messages = []
     expect_with_retry "pubsub_publish_with_ordering_keys" do
-      @subscription.pull(immediate: false, max: 20).each do |message|
+      subscriber = pubsub.subscriber @subscription.name
+      subscriber.pull(immediate: false, max: 20).each do |message|
         messages << message
         message.acknowledge!
       end
@@ -160,7 +292,8 @@ describe "topics" do
 
     messages = []
     expect_with_retry "pubsub_resume_publish_with_ordering_keys" do
-      @subscription.pull(immediate: false, max: 20).each do |message|
+      subscriber = pubsub.subscriber @subscription.name
+      subscriber.pull(immediate: false, max: 20).each do |message|
         messages << message
         message.acknowledge!
       end
@@ -177,25 +310,43 @@ describe "topics" do
 
   it "supports pubsub_create_push_subscription" do
     #setup
-    @topic = pubsub.create_topic topic_id
+    @topic = topic_admin.create_topic name: pubsub.topic_path(topic_id)
+
     endpoint = "https://#{pubsub.project}.appspot.com/push"
 
-    # pubsub_create_pull_subscription
+    # pubsub_create_push_subscription
     assert_output "Push subscription #{subscription_id} created.\n" do
       create_push_subscription topic_id: topic_id, subscription_id: subscription_id, endpoint: endpoint
     end
-    @subscription = @topic.subscription subscription_id
+
+    @subscription = subscription_admin.get_subscription subscription: pubsub.subscription_path(subscription_id)
     assert @subscription
     assert_equal "projects/#{pubsub.project}/subscriptions/#{subscription_id}", @subscription.name
-    assert_equal endpoint, @subscription.endpoint
-    assert @subscription.push_config
-    assert_equal endpoint, @subscription.push_config.endpoint
+    assert_equal endpoint, @subscription.push_config.push_endpoint
+  end
+
+  it "supports pubsub_create_unwrapped_push_subscription" do
+    #setup
+    @topic = topic_admin.create_topic name: pubsub.topic_path(topic_id)
+
+    endpoint = "https://#{pubsub.project}.appspot.com/push"
+
+    # pubsub_create_unwrapped_push_subscription
+    assert_output "Unwrapped push subscription #{subscription_id} created.\n" do
+      create_unwrapped_push_subscription topic_id: topic_id, subscription_id: subscription_id, endpoint: endpoint
+    end
+
+    @subscription = subscription_admin.get_subscription subscription: pubsub.subscription_path(subscription_id)
+    assert @subscription
+    assert_equal "projects/#{pubsub.project}/subscriptions/#{subscription_id}", @subscription.name
+    assert_equal endpoint, @subscription.push_config.push_endpoint
   end
 
   it "supports pubsub_dead_letter_create_subscription, pubsub_dead_letter_update_subscription, pubsub_dead_letter_delivery_attempt" do
     #setup
-    @topic = pubsub.create_topic topic_id
-    @dead_letter_topic = pubsub.create_topic dead_letter_topic_id
+    @topic = topic_admin.create_topic name: pubsub.topic_path(topic_id)
+
+    @dead_letter_topic = topic_admin.create_topic name: pubsub.topic_path(dead_letter_topic_id)
     
     begin
       # pubsub_dead_letter_create_subscription
@@ -206,23 +357,25 @@ describe "topics" do
       end
       assert_includes out, "Created subscription #{subscription_id} with dead letter topic #{dead_letter_topic_id}."
 
-      @subscription = @topic.subscription subscription_id
+      @subscription = subscription_admin.get_subscription subscription: pubsub.subscription_path(subscription_id)
       assert @subscription
       assert_equal "projects/#{pubsub.project}/subscriptions/#{subscription_id}", @subscription.name
-      assert @subscription.dead_letter_topic
-      assert_equal "projects/#{pubsub.project}/topics/#{dead_letter_topic_id}", @subscription.dead_letter_topic.name
-      assert_equal 10, @subscription.dead_letter_max_delivery_attempts
+      assert @subscription.dead_letter_policy
+      assert_equal "projects/#{pubsub.project}/topics/#{dead_letter_topic_id}", @subscription.dead_letter_policy.dead_letter_topic
+      assert_equal 10, @subscription.dead_letter_policy.max_delivery_attempts
 
       # pubsub_dead_letter_update_subscription
       assert_output "Max delivery attempts is now 20.\n" do
         dead_letter_update_subscription subscription_id: subscription_id
       end
-      @subscription.reload!
-      assert @subscription.dead_letter_topic
-      assert_equal "projects/#{pubsub.project}/topics/#{dead_letter_topic_id}", @subscription.dead_letter_topic.name
-      assert_equal 20, @subscription.dead_letter_max_delivery_attempts
 
-      @topic.publish "This is a dead letter topic test message."
+      @subscription = subscription_admin.get_subscription subscription: pubsub.subscription_path(subscription_id)
+      assert @subscription.dead_letter_policy
+      assert_equal "projects/#{pubsub.project}/topics/#{dead_letter_topic_id}", @subscription.dead_letter_policy.dead_letter_topic
+      assert_equal 20, @subscription.dead_letter_policy.max_delivery_attempts
+
+      publisher = pubsub.publisher @topic.name
+      publisher.publish "This is a dead letter topic test message."
       # pubsub_dead_letter_delivery_attempt
       expect_with_retry "pubsub_dead_letter_delivery_attempt" do
         out, _err = capture_io do
@@ -236,19 +389,20 @@ describe "topics" do
       assert_output "Removed dead letter topic from #{subscription_id} subscription.\n" do
         dead_letter_remove subscription_id: subscription_id
       end
-      @subscription.reload!
-      refute @subscription.dead_letter_topic
-      refute @subscription.dead_letter_max_delivery_attempts
+      @subscription = subscription_admin.get_subscription subscription: pubsub.subscription_path(subscription_id)
+      refute @subscription.dead_letter_policy
 
     ensure
-      @dead_letter_topic.delete
+      topic_admin.delete_topic topic: @dead_letter_topic.name
     end
   end
 
   it "supports pubsub_publish" do
     #setup
-    @topic = pubsub.create_topic topic_id
-    @subscription = @topic.subscribe random_subscription_id
+    @topic = topic_admin.create_topic name: pubsub.topic_path(topic_id)
+
+    @subscription = subscription_admin.create_subscription name: pubsub.subscription_path(random_subscription_id),
+                                                           topic: @topic.name
 
     # pubsub_publish
     assert_output "Message published asynchronously.\n" do
@@ -257,7 +411,8 @@ describe "topics" do
 
     messages = []
     expect_with_retry "pubsub_publish" do
-      @subscription.pull(immediate: false, max: 1).each do |message|
+      subscriber = pubsub.subscriber @subscription.name
+      subscriber.pull(immediate: false, max: 1).each do |message|
         messages << message
         message.acknowledge!
       end
@@ -268,18 +423,19 @@ describe "topics" do
 
   it "supports pubsub_publisher_with_compression" do
     #setup
-    sample = SampleLoader.load "pubsub_publisher_with_compression.rb"
-    @topic = pubsub.create_topic topic_id
-    @subscription = @topic.subscribe random_subscription_id
+    @topic = topic_admin.create_topic name: pubsub.topic_path(topic_id)
+    @subscription = subscription_admin.create_subscription name: pubsub.subscription_path(random_subscription_id),
+                                                           topic: @topic.name
 
     # pubsub_publisher_with_compression
     assert_output /Published a compressed message of message ID:/ do
-      sample.run project_id: pubsub.project, topic_id: topic_id
+      pubsub_publisher_with_compression project_id: pubsub.project, topic_id: topic_id
     end
 
     messages = []
     expect_with_retry "pubsub_publisher_with_compression" do
-      @subscription.pull(immediate: false, max: 1).each do |message|
+      subscriber = pubsub.subscriber @subscription.name
+      subscriber.pull(immediate: false, max: 1).each do |message|
         messages << message
         message.acknowledge!
       end
@@ -290,8 +446,9 @@ describe "topics" do
 
   it "supports pubsub_publish_custom_attributes" do
     #setup
-    @topic = pubsub.create_topic topic_id
-    @subscription = @topic.subscribe random_subscription_id
+    @topic = topic_admin.create_topic name: pubsub.topic_path(topic_id)
+    @subscription = subscription_admin.create_subscription name: pubsub.subscription_path(random_subscription_id),
+                                                           topic: @topic.name
 
     # pubsub_publish_custom_attributes
     assert_output "Message with custom attributes published asynchronously.\n" do
@@ -300,7 +457,8 @@ describe "topics" do
 
     messages = []
     expect_with_retry "pubsub_publish_custom_attributes" do
-      @subscription.pull(immediate: false, max: 1).each do |message|
+      subscriber = pubsub.subscriber @subscription.name
+      subscriber.pull(immediate: false, max: 1).each do |message|
         messages << message
         message.acknowledge!
       end
@@ -314,8 +472,9 @@ describe "topics" do
 
   it "supports pubsub_publisher_batch_settings" do
     #setup
-    @topic = pubsub.create_topic topic_id
-    @subscription = @topic.subscribe random_subscription_id
+    @topic = topic_admin.create_topic name: pubsub.topic_path(topic_id)
+    @subscription = subscription_admin.create_subscription name: pubsub.subscription_path(random_subscription_id),
+                                                           topic: @topic.name
 
     # pubsub_publisher_batch_settings
     assert_output "Messages published asynchronously in batch.\n" do
@@ -324,7 +483,8 @@ describe "topics" do
 
     messages = []
     expect_with_retry "pubsub_publisher_batch_settings" do
-      @subscription.pull(immediate: false, max: 20).each do |message|
+      subscriber = pubsub.subscriber @subscription.name
+      subscriber.pull(immediate: false, max: 20).each do |message|
         messages << message
         message.acknowledge!
       end
@@ -339,8 +499,9 @@ describe "topics" do
 
   it "supports pubsub_publisher_concurrency_control" do
     #setup
-    @topic = pubsub.create_topic topic_id
-    @subscription = @topic.subscribe random_subscription_id
+    @topic = topic_admin.create_topic name: pubsub.topic_path(topic_id)
+    @subscription = subscription_admin.create_subscription name: pubsub.subscription_path(random_subscription_id),
+                                                           topic: @topic.name
 
     # pubsub_publisher_concurrency_control
     assert_output "Message published asynchronously.\n" do
@@ -349,7 +510,8 @@ describe "topics" do
 
     messages = []
     expect_with_retry "pubsub_publisher_concurrency_control" do
-      @subscription.pull(immediate: false, max: 1).each do |message|
+      subscriber = pubsub.subscriber @subscription.name
+      subscriber.pull(immediate: false, max: 1).each do |message|
         messages << message
         message.acknowledge!
       end
@@ -360,8 +522,9 @@ describe "topics" do
 
   it "supports pubsub_publisher_flow_control" do
     #setup
-    @topic = pubsub.create_topic topic_id
-    @subscription = @topic.subscribe random_subscription_id
+    @topic = topic_admin.create_topic name: pubsub.topic_path(topic_id)
+    @subscription = subscription_admin.create_subscription name: pubsub.subscription_path(random_subscription_id),
+                                                           topic: @topic.name
 
     # pubsub_publisher_flow_control
     assert_output "Published messages with flow control settings to #{topic_id}.\n" do
@@ -371,17 +534,19 @@ describe "topics" do
 
   it "supports publish_with_error_handler" do
     #setup
-    @topic = pubsub.create_topic topic_id
-    @subscription = @topic.subscribe random_subscription_id
+    @topic = topic_admin.create_topic name: pubsub.topic_path(topic_id)
+    @subscription = subscription_admin.create_subscription name: pubsub.subscription_path(random_subscription_id),
+                                                           topic: @topic.name
 
     # publish_with_error_handler
     assert_output "Message published asynchronously.\n" do
-      publish_message_async topic_id: topic_id
+      publish_with_error_handler topic_id: topic_id
     end
 
     messages = []
     expect_with_retry "pubsub_publish" do
-      @subscription.pull(immediate: false, max: 1).each do |message|
+      subscriber = pubsub.subscriber @subscription.name
+      subscriber.pull(immediate: false, max: 1).each do |message|
         messages << message
         message.acknowledge!
       end

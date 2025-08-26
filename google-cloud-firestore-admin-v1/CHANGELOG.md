@@ -1,5 +1,17 @@
 # Release History
 
+### 1.7.0 (2025-08-14)
+
+#### Features
+
+* add Firestore CloneDatabase support ([#30753](https://github.com/googleapis/google-cloud-ruby/issues/30753)) 
+
+### 1.6.0 (2025-07-17)
+
+#### Features
+
+* Support for tags when restoring a database ([#30683](https://github.com/googleapis/google-cloud-ruby/issues/30683)) 
+
 ### 1.5.0 (2025-05-12)
 
 #### Features

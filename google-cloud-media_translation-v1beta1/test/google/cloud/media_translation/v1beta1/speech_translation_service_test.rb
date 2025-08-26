@@ -21,7 +21,6 @@ require "helper"
 require "gapic/grpc/service_stub"
 
 require "google/cloud/mediatranslation/v1beta1/media_translation_pb"
-require "google/cloud/mediatranslation/v1beta1/media_translation_services_pb"
 require "google/cloud/media_translation/v1beta1/speech_translation_service"
 
 class ::Google::Cloud::MediaTranslation::V1beta1::SpeechTranslationService::ClientTest < Minitest::Test

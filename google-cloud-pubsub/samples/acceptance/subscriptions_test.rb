@@ -17,11 +17,13 @@ require_relative "../pubsub_create_subscription_with_filter.rb"
 require_relative "../pubsub_subscriber_exactly_once_delivery.rb"
 require_relative "../pubsub_create_subscription_with_exactly_once_delivery.rb"
 require_relative "../pubsub_create_bigquery_subscription.rb"
+require_relative "../pubsub_optimistic_subscribe.rb"
 require_relative "../pubsub_subscriber_async_pull_custom_attributes.rb"
 require_relative "../pubsub_subscriber_sync_pull.rb"
 require_relative "../pubsub_subscriber_flow_settings.rb"
 require_relative "../pubsub_subscriber_async_pull.rb"
 require_relative "../pubsub_subscriber_concurrency_control.rb"
+require_relative "../pubsub_subscriber_error_listener.rb"
 require_relative "../pubsub_subscriber_sync_pull_with_lease.rb"
 require_relative "../pubsub_update_push_configuration.rb"
 require_relative "../pubsub_list_subscriptions.rb"
@@ -34,29 +36,32 @@ require_relative "../pubsub_delete_subscription.rb"
 require "google/cloud/bigquery"
 
 describe "subscriptions" do
-  let(:pubsub) { Google::Cloud::Pubsub.new }
+  let(:pubsub) { Google::Cloud::PubSub.new }
   let(:endpoint) { "https://#{pubsub.project}.appspot.com/push" }
   let(:role) { "roles/pubsub.subscriber" }
   let(:service_account_email) { "serviceAccount:kokoro@#{pubsub.project}.iam.gserviceaccount.com" }
+  let(:topic_admin) { pubsub.topic_admin }
+  let(:subscription_admin) { pubsub.subscription_admin }
 
   before :all do
-    @topic = pubsub.create_topic random_topic_id
+    @topic = topic_admin.create_topic name: pubsub.topic_path(random_topic_id)
     @created_subscriptions = []
   end
 
   after :all do
-    @topic.delete
+    topic_admin.delete_topic topic: @topic.name if @topic
     @created_subscriptions.each do |sub|
-      pubsub.subscription(sub).delete
+      subscription_admin.delete_subscription subscription: pubsub.subscription_path(sub)
     end
   end
 
   before do
-    @subscription = @topic.subscribe random_subscription_id
+    @subscription = subscription_admin.create_subscription name: pubsub.subscription_path(random_subscription_id),
+                                                           topic: @topic.name
   end
 
   after do
-    @subscription.delete if @subscription
+    subscription_admin.delete_subscription subscription: @subscription.name if @subscription
     @subscription = nil
     cleanup_bq @table, @dataset if @table 
   end
@@ -67,11 +72,9 @@ describe "subscriptions" do
     assert_output "Push endpoint updated.\n" do
       update_push_configuration subscription_id: @subscription.name, new_endpoint: endpoint
     end
-    @subscription = @topic.subscription @subscription.name
+    @subscription = subscription_admin.get_subscription subscription: @subscription.name
     assert @subscription
-    assert_equal endpoint, @subscription.endpoint
-    assert @subscription.push_config
-    assert_equal endpoint, @subscription.push_config.endpoint
+    assert_equal endpoint, @subscription.push_config.push_endpoint
 
     # pubsub_list_subscriptions
     out, _err = capture_io do
@@ -82,11 +85,13 @@ describe "subscriptions" do
 
     # pubsub_set_subscription_policy
     set_subscription_policy subscription_id: @subscription.name, role: role, service_account_email: service_account_email
-    @subscription.reload!
-    assert_equal [service_account_email], @subscription.policy.roles[role]
+    @subscription = subscription_admin.get_subscription subscription: @subscription.name
+    policy = pubsub.iam.get_iam_policy resource: @subscription.name
+
+    assert_equal [service_account_email], policy.bindings.first.members
 
     # pubsub_get_subscription_policy
-    assert_output "Subscription policy:\n#{@subscription.policy.roles}\n" do
+    assert_output "Subscription policy:\n#{policy.bindings.first.role}\n" do
       get_subscription_policy subscription_id: @subscription.name
     end
 
@@ -104,12 +109,15 @@ describe "subscriptions" do
     assert_output "Subscription #{@subscription.name} deleted.\n" do
       delete_subscription subscription_id: @subscription.name
     end
-    @subscription = @topic.subscription @subscription.name
-    refute @subscription
+    assert_raises Google::Cloud::NotFoundError do
+      subscription_admin.get_subscription subscription: @subscription.name
+    end
+    @subscription = nil
   end
 
   it "supports pubsub_subscriber_sync_pull" do
-    @topic.publish "This is a test message."
+    publisher = pubsub.publisher @topic.name
+    publisher.publish "This is a test message."
     sleep 5
 
     # pubsub_subscriber_sync_pull
@@ -124,18 +132,19 @@ describe "subscriptions" do
     project_id = pubsub.project
     topic_id = @topic.name
     subscription_id = random_subscription_id
+
+    subscription_admin.create_subscription name: pubsub.subscription_path(subscription_id),
+                                           topic: @topic.name
     @created_subscriptions << subscription_id
 
-    @topic.subscribe subscription_id, enable_exactly_once_delivery: true
+    publisher = pubsub.publisher @topic.name
 
-    @topic.publish "This is a test message."
+    publisher.publish "This is a test message."
     sleep 5
 
     expect_with_retry "pubsub_subscriber_async_pull_with_ack_response" do
       out, _err = capture_io do
-        PubsubSubscriberExactlyOnceDelivery.new.subscriber_exactly_once_delivery project_id: project_id,
-                                                                                 topic_id: topic_id,
-                                                                                 subscription_id: subscription_id
+        subscriber_exactly_once_delivery project_id: project_id, subscription_id: subscription_id
       end
 
       assert_includes out, "Received message: This is a test message."
@@ -144,7 +153,8 @@ describe "subscriptions" do
   end
 
   it "supports pubsub_subscriber_async_pull, pubsub_quickstart_subscriber" do
-    @topic.publish "This is a test message."
+    publisher = pubsub.publisher @topic.name
+    publisher.publish "This is a test message."
     sleep 5
 
     # pubsub_subscriber_async_pull
@@ -156,8 +166,22 @@ describe "subscriptions" do
     end
   end
 
+  it "supports pubsub_subscriber_error_listener" do
+    publisher = pubsub.publisher @topic.name
+    publisher.publish "This is a test message."
+    sleep 5
+
+    # pubsub_subscriber_error_listener
+    expect_with_retry "pubsub_subscriber_error_listener" do
+      assert_output "Received message: This is a test message.\n" do
+        listen_for_messages_with_error_handler subscription_id: @subscription.name
+      end
+    end
+  end
+
   it "supports pubsub_subscriber_async_pull_custom_attributes" do
-    @topic.publish "This is a test message.", origin: "ruby-sample"
+    publisher = pubsub.publisher @topic.name
+    publisher.publish "This is a test message.", origin: "ruby-sample"
     sleep 5
 
     # pubsub_subscriber_async_pull_custom_attributes
@@ -172,7 +196,8 @@ describe "subscriptions" do
   end
 
   it "supports pubsub_subscriber_flow_settings" do
-    @topic.publish "This is a test message."
+    publisher = pubsub.publisher @topic.name
+    publisher.publish "This is a test message."
     sleep 5
 
     # pubsub_subscriber_flow_settings
@@ -184,7 +209,8 @@ describe "subscriptions" do
   end
 
   it "supports pubsub_subscriber_concurrency_control" do
-    @topic.publish "This is a test message."
+    publisher = pubsub.publisher @topic.name
+    publisher.publish "This is a test message."
     sleep 5
 
     # pubsub_subscriber_concurrency_control
@@ -196,7 +222,8 @@ describe "subscriptions" do
   end
 
   it "supports pubsub_subscriber_sync_pull_with_lease" do
-    @topic.publish "This is a test message."
+    publisher = pubsub.publisher @topic.name
+    publisher.publish "This is a test message."
     sleep 5
 
     # # pubsub_subscriber_sync_pull_with_lease
@@ -219,10 +246,10 @@ describe "subscriptions" do
     filter = "attributes.author=\"unknown\""
 
     assert_output "Created subscription with filtering enabled: #{subscription_id}\n" do     
-      PubsubCreateSubscriptionWithFilter.new.create_subscription_with_filter project_id: project_id,
-                                                                             topic_id: topic_id,
-                                                                             subscription_id: subscription_id,
-                                                                             filter: filter
+      create_subscription_with_filter project_id: project_id,
+                                      topic_id: @topic.name,
+                                      subscription_id: subscription_id,
+                                      filter: filter
     end
   end 
 
@@ -233,11 +260,9 @@ describe "subscriptions" do
     @created_subscriptions << subscription_id
 
     assert_output "Created subscription with exactly once delivery enabled: #{subscription_id}\n" do     
-      PubsubCreateSubscriptionWithExactlyOnceDelivery.new.create_subscription_with_exactly_once_delivery(
-        project_id: project_id,
-        topic_id: topic_id,
-        subscription_id: subscription_id
-      )
+      create_subscription_with_exactly_once_delivery project_id: project_id,
+                                                     topic_id: topic_id,
+                                                     subscription_id: subscription_id
     end
   end 
 
@@ -257,4 +282,27 @@ describe "subscriptions" do
       )
     end
   end 
+
+  it "supports pubsub_optimistic_subscribe" do
+    topic_id = @topic.name
+    subscription_id = random_subscription_id
+    publisher = pubsub.publisher @topic.name
+
+    out, _err = capture_io do
+      optimistic_subscribe topic_id: topic_id, subscription_id: subscription_id
+    end
+
+    assert_includes out, "Subscription #{subscription_id} does not exist."
+    assert_includes out, "Subscription #{subscription_id} created."
+
+    @created_subscriptions << subscription_id
+    publisher.publish "This is a test message."
+    sleep 5
+
+    out, _err = capture_io do
+      optimistic_subscribe topic_id: topic_id, subscription_id: subscription_id
+    end
+
+    assert_includes out, "Received message: This is a test message."
+  end
 end

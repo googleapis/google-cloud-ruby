@@ -1,5 +1,14 @@
 # Release History
 
+### 1.4.0 (2025-08-12)
+
+#### Features
+
+* Add highest_upgradable_cve_severity field to Vulnerability report ([#30807](https://github.com/googleapis/google-cloud-ruby/issues/30807)) 
+#### Documentation
+
+* A comment for field `update_time` in message `.google.cloud.osconfig.v1.VulnerabilityReport` is changed 
+
 ### 1.3.0 (2025-05-12)
 
 #### Features

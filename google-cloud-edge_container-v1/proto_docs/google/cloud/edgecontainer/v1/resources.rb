@@ -768,7 +768,7 @@ module Google
         end
 
         # Metadata for a given
-        # `::Google::Cloud::Location::Location`.
+        # [google.cloud.location.Location][google.cloud.location.Location].
         # @!attribute [rw] available_zones
         #   @return [::Google::Protobuf::Map{::String => ::Google::Cloud::EdgeContainer::V1::ZoneMetadata}]
         #     The set of available Google Distributed Cloud Edge zones in the location.

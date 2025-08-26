@@ -21,7 +21,6 @@ require "helper"
 require "gapic/grpc/service_stub"
 
 require "google/cloud/language/v1beta2/language_service_pb"
-require "google/cloud/language/v1beta2/language_service_services_pb"
 require "google/cloud/language/v1beta2/language_service"
 
 class ::Google::Cloud::Language::V1beta2::LanguageService::ClientTest < Minitest::Test

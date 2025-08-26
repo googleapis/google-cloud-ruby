@@ -669,9 +669,75 @@ module Google
           #     If this field is not specified, the restored database will use
           #     the same encryption configuration as the backup, namely
           #     {::Google::Cloud::Firestore::Admin::V1::Database::EncryptionConfig#use_source_encryption use_source_encryption}.
+          # @!attribute [rw] tags
+          #   @return [::Google::Protobuf::Map{::String => ::String}]
+          #     Optional. Immutable. Tags to be bound to the restored database.
+          #
+          #     The tags should be provided in the format of
+          #     `tagKeys/{tag_key_id} -> tagValues/{tag_value_id}`.
           class RestoreDatabaseRequest
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
+
+            # @!attribute [rw] key
+            #   @return [::String]
+            # @!attribute [rw] value
+            #   @return [::String]
+            class TagsEntry
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
+          end
+
+          # The request message for
+          # {::Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Client#clone_database FirestoreAdmin.CloneDatabase}.
+          # @!attribute [rw] parent
+          #   @return [::String]
+          #     Required. The project to clone the database in. Format is
+          #     `projects/{project_id}`.
+          # @!attribute [rw] database_id
+          #   @return [::String]
+          #     Required. The ID to use for the database, which will become the final
+          #     component of the database's resource name. This database ID must not be
+          #     associated with an existing database.
+          #
+          #     This value should be 4-63 characters. Valid characters are /[a-z][0-9]-/
+          #     with first character a letter and the last a letter or a number. Must not
+          #     be UUID-like /[0-9a-f]\\{8}(-[0-9a-f]\\{4})\\{3}-[0-9a-f]\\{12}/.
+          #
+          #     "(default)" database ID is also valid.
+          # @!attribute [rw] pitr_snapshot
+          #   @return [::Google::Cloud::Firestore::Admin::V1::PitrSnapshot]
+          #     Required. Specification of the PITR data to clone from. The source database
+          #     must exist.
+          #
+          #     The cloned database will be created in the same location as the source
+          #     database.
+          # @!attribute [rw] encryption_config
+          #   @return [::Google::Cloud::Firestore::Admin::V1::Database::EncryptionConfig]
+          #     Optional. Encryption configuration for the cloned database.
+          #
+          #     If this field is not specified, the cloned database will use
+          #     the same encryption configuration as the source database, namely
+          #     {::Google::Cloud::Firestore::Admin::V1::Database::EncryptionConfig#use_source_encryption use_source_encryption}.
+          # @!attribute [rw] tags
+          #   @return [::Google::Protobuf::Map{::String => ::String}]
+          #     Optional. Immutable. Tags to be bound to the cloned database.
+          #
+          #     The tags should be provided in the format of
+          #     `tagKeys/{tag_key_id} -> tagValues/{tag_value_id}`.
+          class CloneDatabaseRequest
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+
+            # @!attribute [rw] key
+            #   @return [::String]
+            # @!attribute [rw] value
+            #   @return [::String]
+            class TagsEntry
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
           end
         end
       end

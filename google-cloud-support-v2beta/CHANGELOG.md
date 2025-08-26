@@ -1,5 +1,11 @@
 # Changelog
 
+### 0.2.0 (2025-08-12)
+
+#### Features
+
+* A new message `GetAttachmentRequest` and `GetComment` is added ([#30806](https://github.com/googleapis/google-cloud-ruby/issues/30806)) 
+
 ### 0.1.1 (2025-05-27)
 
 #### Documentation

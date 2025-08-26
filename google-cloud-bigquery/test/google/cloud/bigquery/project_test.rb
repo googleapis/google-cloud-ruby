@@ -52,7 +52,7 @@ describe Google::Cloud::Bigquery::Project, :mock_bigquery do
       dataset_reference: Google::Apis::BigqueryV2::DatasetReference.new(
         project_id: project, dataset_id: dataset_id)
     )
-    mock.expect :insert_dataset, created_dataset, [project, inserted_dataset]
+    mock.expect :insert_dataset, created_dataset, [project, inserted_dataset], access_policy_version: nil
     bigquery.service.mocked_service = mock
 
     dataset = bigquery.create_dataset dataset_id
@@ -77,7 +77,7 @@ describe Google::Cloud::Bigquery::Project, :mock_bigquery do
       description: description,
       default_table_expiration_ms: default_expiration,
       location: location)
-    mock.expect :insert_dataset, created_dataset, [project, inserted_dataset]
+    mock.expect :insert_dataset, created_dataset, [project, inserted_dataset], access_policy_version: nil
     bigquery.service.mocked_service = mock
 
     dataset = bigquery.create_dataset dataset_id, name: name,
@@ -104,7 +104,7 @@ describe Google::Cloud::Bigquery::Project, :mock_bigquery do
       dataset_reference: Google::Apis::BigqueryV2::DatasetReference.new(
         project_id: project, dataset_id: dataset_id),
       access: filled_access)
-    mock.expect :insert_dataset, created_dataset, [project, inserted_dataset]
+    mock.expect :insert_dataset, created_dataset, [project, inserted_dataset], access_policy_version: nil
     bigquery.service.mocked_service = mock
 
     dataset = bigquery.create_dataset dataset_id do |ds|
@@ -142,7 +142,7 @@ describe Google::Cloud::Bigquery::Project, :mock_bigquery do
       labels: labels,
       location: location,
       access: filled_access)
-    mock.expect :insert_dataset, created_dataset, [project, inserted_dataset]
+    mock.expect :insert_dataset, created_dataset, [project, inserted_dataset], access_policy_version: nil
     bigquery.service.mocked_service = mock
 
     dataset = bigquery.create_dataset dataset_id, location: location do |ds|
@@ -205,7 +205,7 @@ describe Google::Cloud::Bigquery::Project, :mock_bigquery do
       default_table_expiration_ms: default_expiration,
       location: location,
       access: filled_access)
-    mock.expect :insert_dataset, created_dataset, [project, inserted_dataset]
+    mock.expect :insert_dataset, created_dataset, [project, inserted_dataset], access_policy_version: nil
     bigquery.service.mocked_service = mock
 
     dataset = bigquery.create_dataset dataset_id, location: location do |ds|
@@ -518,7 +518,7 @@ describe Google::Cloud::Bigquery::Project, :mock_bigquery do
 
     mock = Minitest::Mock.new
     mock.expect :get_dataset, find_dataset_gapi(dataset_id, dataset_name),
-      [project, dataset_id]
+      [project, dataset_id], access_policy_version: nil
     bigquery.service.mocked_service = mock
 
     dataset = bigquery.dataset dataset_id
@@ -549,7 +549,7 @@ describe Google::Cloud::Bigquery::Project, :mock_bigquery do
 
     mock = Minitest::Mock.new
     mock.expect :get_dataset, find_dataset_gapi(dataset_id, dataset_name),
-      [project, dataset_id]
+      [project, dataset_id], access_policy_version: nil
     bigquery.service.mocked_service = mock
 
     dataset = bigquery.dataset dataset_id, skip_lookup: true
@@ -577,7 +577,7 @@ describe Google::Cloud::Bigquery::Project, :mock_bigquery do
 
     mock = Minitest::Mock.new
     mock.expect :get_dataset, find_dataset_gapi(dataset_id, dataset_name),
-      [project, dataset_id]
+      [project, dataset_id], access_policy_version: nil
     bigquery.service.mocked_service = mock
 
     dataset = bigquery.dataset dataset_id, skip_lookup: true

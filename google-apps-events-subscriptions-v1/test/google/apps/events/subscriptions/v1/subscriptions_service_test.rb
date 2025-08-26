@@ -21,7 +21,6 @@ require "helper"
 require "gapic/grpc/service_stub"
 
 require "google/apps/events/subscriptions/v1/subscriptions_service_pb"
-require "google/apps/events/subscriptions/v1/subscriptions_service_services_pb"
 require "google/apps/events/subscriptions/v1/subscriptions_service"
 
 class ::Google::Apps::Events::Subscriptions::V1::SubscriptionsService::ClientTest < Minitest::Test

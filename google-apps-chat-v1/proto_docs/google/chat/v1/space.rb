@@ -124,6 +124,20 @@ module Google
         #     Optional. Specifies the [access
         #     setting](https://support.google.com/chat/answer/11971020) of the space.
         #     Only populated when the `space_type` is `SPACE`.
+        # @!attribute [rw] customer
+        #   @return [::String]
+        #     Optional. Immutable. The customer id of the domain of the space.
+        #     Required only when creating a space with [app
+        #     authentication](https://developers.google.com/workspace/chat/authenticate-authorize-chat-app)
+        #     and `SpaceType` is `SPACE`, otherwise should not be set.
+        #
+        #     In the format `customers/{customer}`, where `customer` is the `id` from the
+        #     [Admin SDK customer resource](
+        #     https://developers.google.com/admin-sdk/directory/reference/rest/v1/customers).
+        #     Private apps can also use the `customers/my_customer` alias to create
+        #     the space in the same Google Workspace organization as the app.
+        #
+        #     For DMs, this field isn't populated.
         # @!attribute [r] space_uri
         #   @return [::String]
         #     Output only. The URI for a user to access the space.
@@ -134,12 +148,35 @@ module Google
         #     created. After you create the space, settings are populated in the
         #     `PermissionSettings` field.
         #
+        #     Setting predefined permission settings supports:
+        #
+        #     - [App
+        #     authentication](https://developers.google.com/workspace/chat/authenticate-authorize-chat-app)
+        #     with [administrator
+        #     approval](https://support.google.com/a?p=chat-app-auth) with the
+        #     `chat.app.spaces` or `chat.app.spaces.create` scopes.
+        #
+        #     - [User
+        #     authentication](https://developers.google.com/workspace/chat/authenticate-authorize-chat-user)
+        #
         #     Note: The following fields are mutually exclusive: `predefined_permission_settings`, `permission_settings`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] permission_settings
         #   @return [::Google::Apps::Chat::V1::Space::PermissionSettings]
         #     Optional. Space permission settings for existing spaces. Input for
         #     updating exact space permission settings, where existing permission
         #     settings are replaced. Output lists current permission settings.
+        #
+        #     Reading and updating permission settings supports:
+        #
+        #     - [App
+        #     authentication](https://developers.google.com/workspace/chat/authenticate-authorize-chat-app)
+        #     with [administrator
+        #     approval](https://support.google.com/a?p=chat-app-auth) with the
+        #     `chat.app.spaces` scope. Only populated and settable when the Chat app
+        #     created the space.
+        #
+        #     - [User
+        #     authentication](https://developers.google.com/workspace/chat/authenticate-authorize-chat-user)
         #
         #     Note: The following fields are mutually exclusive: `permission_settings`, `predefined_permission_settings`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [r] import_mode_expire_time
@@ -214,8 +251,7 @@ module Google
           #     authentication](https://developers.google.com/workspace/chat/authenticate-authorize-chat-app)
           #     with [administrator
           #     approval](https://support.google.com/a?p=chat-app-auth)
-          #     with the `chat.app.spaces` scope in [Developer
-          #     Preview](https://developers.google.com/workspace/preview).
+          #     with the `chat.app.spaces` scope.
           #
           #     This field is not populated when using the `chat.bot` scope with [app
           #     authentication](https://developers.google.com/workspace/chat/authenticate-authorize-chat-app).

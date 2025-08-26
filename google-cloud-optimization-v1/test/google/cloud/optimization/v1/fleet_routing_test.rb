@@ -21,7 +21,6 @@ require "helper"
 require "gapic/grpc/service_stub"
 
 require "google/cloud/optimization/v1/fleet_routing_pb"
-require "google/cloud/optimization/v1/fleet_routing_services_pb"
 require "google/cloud/optimization/v1/fleet_routing"
 
 class ::Google::Cloud::Optimization::V1::FleetRouting::ClientTest < Minitest::Test

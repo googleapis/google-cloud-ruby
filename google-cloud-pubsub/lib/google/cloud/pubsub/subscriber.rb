@@ -1,4 +1,4 @@
-# Copyright 2017 Google LLC
+# Copyright 2015 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -13,417 +13,580 @@
 # limitations under the License.
 
 
-require "google/cloud/pubsub/service"
-require "google/cloud/pubsub/subscriber/stream"
-require "google/cloud/pubsub/subscriber/timed_unary_buffer"
-require "monitor"
+require "google/cloud/pubsub/convert"
+require "google/cloud/errors"
+require "google/cloud/pubsub/received_message"
+require "google/cloud/pubsub/message_listener"
+require "google/cloud/pubsub/v1"
 
 module Google
   module Cloud
     module PubSub
       ##
-      # Subscriber object used to stream and process messages from a
-      # Subscription. See {Google::Cloud::PubSub::Subscription#listen}
+      # # Subscriber
+
+      # A {Subscriber} is the primary interface for data plane operations,
+      # enabling you to receive messages from a subscription, either by streaming
+      # with a {MessageListener} or by pulling them directly.
       #
       # @example
       #   require "google/cloud/pubsub"
       #
       #   pubsub = Google::Cloud::PubSub.new
       #
-      #   sub = pubsub.subscription "my-topic-sub"
-      #
-      #   subscriber = sub.listen do |received_message|
+      #   subscriber = pubsub.subscriber "my-topic-sub"
+      #   listener = subscriber.listen do |received_message|
       #     # process message
       #     received_message.acknowledge!
       #   end
       #
+      #   # Handle exceptions from listener
+      #   listener.on_error do |exception|
+      #      puts "Exception: #{exception.class} #{exception.message}"
+      #   end
+      #
+      #   # Gracefully shut down the subscriber
+      #   at_exit do
+      #     listener.stop!
+      #   end
+      #
       #   # Start background threads that will call the block passed to listen.
-      #   subscriber.start
-      #
-      #   # Shut down the subscriber when ready to stop receiving messages.
-      #   subscriber.stop!
-      #
-      # @attr_reader [String] subscription_name The name of the subscription the
-      #   messages are pulled from.
-      # @attr_reader [Proc] callback The procedure that will handle the messages
-      #   received from the subscription.
-      # @attr_reader [Numeric] deadline The default number of seconds the stream
-      #   will hold received messages before modifying the message's ack
-      #   deadline. The minimum is 10, the maximum is 600. Default is 60.
-      # @attr_reader [Boolean] message_ordering Whether message ordering has
-      #   been enabled.
-      # @attr_reader [Integer] streams The number of concurrent streams to open
-      #   to pull messages from the subscription. Default is 2.
-      # @attr_reader [Integer] callback_threads The number of threads used to
-      #   handle the received messages. Default is 8.
-      # @attr_reader [Integer] push_threads The number of threads to handle
-      #   acknowledgement ({ReceivedMessage#ack!}) and delay messages
-      #   ({ReceivedMessage#nack!}, {ReceivedMessage#modify_ack_deadline!}).
-      #   Default is 4.
-      #
+      #   listener.start
+      #   sleep
       class Subscriber
-        include MonitorMixin
-
-        attr_reader :subscription_name
-        attr_reader :callback
-        attr_reader :deadline
-        attr_reader :streams
-        attr_reader :message_ordering
-        attr_reader :callback_threads
-        attr_reader :push_threads
+        ##
+        # @private The Service object.
+        attr_accessor :service
 
         ##
-        # @private Implementation attributes.
-        attr_reader :stream_pool, :thread_pool, :buffer, :service
-
-        ##
-        # @private Implementation attributes.
-        attr_accessor :exactly_once_delivery_enabled
+        # @private The gRPC Google::Cloud::PubSub::V1::Subscription object.
+        attr_accessor :grpc
 
         ##
         # @private Create an empty {Subscriber} object.
-        def initialize subscription_name, callback, deadline: nil, message_ordering: nil, streams: nil, inventory: nil,
-                       threads: {}, service: nil
-          super() # to init MonitorMixin
-
-          @callback = callback
-          @error_callbacks = []
-          @subscription_name = subscription_name
-          @deadline = deadline || 60
-          @streams = streams || 2
-          coerce_inventory inventory
-          @message_ordering = message_ordering
-          @callback_threads = Integer(threads[:callback] || 8)
-          @push_threads = Integer(threads[:push] || 4)
-          @exactly_once_delivery_enabled = nil
-
-          @service = service
-
-          @started = @stopped = nil
-
-          stream_pool = Array.new @streams do
-            Thread.new { Stream.new self }
-          end
-          @stream_pool = stream_pool.map(&:value)
-
-          @buffer = TimedUnaryBuffer.new self
+        def initialize
+          @service = nil
+          @grpc = nil
+          @resource_name = nil
+          @exists = nil
         end
 
         ##
-        # Starts the subscriber pulling from the subscription and processing the
-        # received messages.
+        # The underlying Subscription resource.
         #
-        # @return [Subscriber] returns self so calls can be chained.
+        # Provides access to the `Google::Cloud::PubSub::V1::Subscription`
+        # resource managed by this subscriber.
         #
-        def start
-          start_pool = synchronize do
-            @started = true
-            @stopped = false
-
-            # Start the buffer before the streams are all started
-            @buffer.start
-            @stream_pool.map do |stream|
-              Thread.new { stream.start }
-            end
-          end
-          start_pool.map(&:join)
-
-          self
+        # Makes an API call to retrieve the actual subscription when called
+        # on a reference object. See {#reference?}.
+        #
+        # @return [Google::Cloud::PubSub::V1::Subscription]
+        #
+        def subscription_resource
+          ensure_grpc!
+          @grpc
         end
 
         ##
-        # Immediately stops the subscriber. No new messages will be pulled from
-        # the subscription. Use {#wait!} to block until all received messages have
-        # been processed or released: All actions taken on received messages that
-        # have not yet been sent to the API will be sent to the API. All received
-        # but unprocessed messages will be released back to the API and redelivered.
+        # The name of the subscription.
         #
-        # @return [Subscriber] returns self so calls can be chained.
+        # @return [String] A fully-qualified subscription name in the form
+        #   `projects/{project_id}/subscriptions/{subscription_id}`.
         #
-        def stop
-          synchronize do
-            @started = false
-            @stopped = true
-            @stream_pool.map(&:stop)
-            wait_stop_buffer_thread!
-            self
-          end
+        def name
+          return @resource_name if reference?
+          @grpc.name
         end
 
         ##
-        # Blocks until the subscriber is fully stopped and all received messages
-        # have been processed or released, or until `timeout` seconds have
-        # passed.
+        # This value is the maximum number of seconds after a subscriber
+        # receives a message before the subscriber should acknowledge the
+        # message.
         #
-        # Does not stop the subscriber. To stop the subscriber, first call
-        # {#stop} and then call {#wait!} to block until the subscriber is
-        # stopped.
+        # Makes an API call to retrieve the deadline value when called on a
+        # reference object. See {#reference?}.
         #
-        # @param [Number, nil] timeout The number of seconds to block until the
-        #   subscriber is fully stopped. Default will block indefinitely.
-        #
-        # @return [Subscriber] returns self so calls can be chained.
-        #
-        def wait! timeout = nil
-          wait_stop_buffer_thread!
-          @wait_stop_buffer_thread.join timeout
-          self
+        # @return [Integer]
+        def deadline
+          ensure_grpc!
+          @grpc.ack_deadline_seconds
         end
 
         ##
-        # Stop this subscriber and block until the subscriber is fully stopped
-        # and all received messages have been processed or released, or until
-        # `timeout` seconds have passed.
+        # Whether message ordering has been enabled. When enabled, messages
+        # published with the same `ordering_key` will be delivered in the order
+        # they were published. When disabled, messages may be delivered in any
+        # order.
         #
-        # The same as calling {#stop} and {#wait!}.
+        # @note At the time of this release, ordering keys are not yet publicly
+        #   enabled and requires special project enablements.
         #
-        # @param [Number, nil] timeout The number of seconds to block until the
-        #   subscriber is fully stopped. Default will block indefinitely.
+        # See {Publisher#publish_async}, {#listen}, and {Message#ordering_key}.
         #
-        # @return [Subscriber] returns self so calls can be chained.
+        # Makes an API call to retrieve the enable_message_ordering value when called on a
+        # reference object. See {#reference?}.
         #
-        def stop! timeout = nil
-          stop
-          wait! timeout
+        # @return [Boolean]
+        #
+        def message_ordering?
+          ensure_grpc!
+          @grpc.enable_message_ordering
         end
 
         ##
-        # Whether the subscriber has been started.
+        # Determines whether the subscription exists in the Pub/Sub service.
         #
-        # @return [boolean] `true` when started, `false` otherwise.
+        # Makes an API call to determine whether the subscription resource
+        # exists when called on a reference object. See {#reference?}.
         #
-        def started?
-          synchronize { @started }
-        end
-
-        ##
-        # Whether the subscriber has been stopped.
-        #
-        # @return [boolean] `true` when stopped, `false` otherwise.
-        #
-        def stopped?
-          synchronize { @stopped }
-        end
-
-        ##
-        # Register to be notified of errors when raised.
-        #
-        # If an unhandled error has occurred the subscriber will attempt to
-        # recover from the error and resume listening.
-        #
-        # Multiple error handlers can be added.
-        #
-        # @yield [callback] The block to be called when an error is raised.
-        # @yieldparam [Exception] error The error raised.
+        # @return [Boolean]
         #
         # @example
         #   require "google/cloud/pubsub"
         #
         #   pubsub = Google::Cloud::PubSub.new
         #
-        #   sub = pubsub.subscription "my-topic-sub"
+        #   subscriber = pubsub.subscriber "my-topic-sub"
+        #   subscriber.exists? #=> true
         #
-        #   subscriber = sub.listen do |received_message|
-        #     # process message
-        #     received_message.acknowledge!
-        #   end
-        #
-        #   # Register to be notified when unhandled errors occur.
-        #   subscriber.on_error do |error|
-        #     # log error
-        #     puts error
-        #   end
-        #
-        #   # Start listening for messages and errors.
-        #   subscriber.start
-        #
-        #   # Shut down the subscriber when ready to stop receiving messages.
-        #   subscriber.stop!
-        #
-        def on_error &block
-          synchronize do
-            @error_callbacks << block
-          end
+        def exists?
+          # Always true if the object is not set as reference
+          return true unless reference?
+          # If we have a value, return it
+          return @exists unless @exists.nil?
+          ensure_grpc!
+          @exists = true
+        rescue Google::Cloud::NotFoundError
+          @exists = false
         end
 
         ##
-        # The most recent unhandled error to occur while listening to messages
-        # on the subscriber.
+        # Pulls messages from the server, blocking until messages are available
+        # when called with the `immediate: false` option, which is recommended
+        # to avoid adverse impacts on the performance of pull operations.
         #
-        # If an unhandled error has occurred the subscriber will attempt to
-        # recover from the error and resume listening.
+        # Raises an API error with status `UNAVAILABLE` if there are too many
+        # concurrent pull requests pending for the given subscription.
         #
-        # @return [Exception, nil] error The most recent error raised.
+        # See also {#listen} for the preferred way to process messages as they
+        # become available.
+        #
+        # @param [Boolean] immediate Whether to return immediately or block until
+        #   messages are available.
+        #
+        #   **Warning:** The default value of this field is `true`. However, sending
+        #   `true` is discouraged because it adversely impacts the performance of
+        #   pull operations. We recommend that users always explicitly set this field
+        #   to `false`.
+        #
+        #   If this field set to `true`, the system will respond immediately
+        #   even if it there are no messages available to return in the pull
+        #   response. Otherwise, the system may wait (for a bounded amount of time)
+        #   until at least one message is available, rather than returning no messages.
+        #
+        #   See also {#listen} for the preferred way to process messages as they
+        #   become available.
+        # @param [Integer] max The maximum number of messages to return for this
+        #   request. The Pub/Sub system may return fewer than the number
+        #   specified. The default value is `100`, the maximum value is `1000`.
+        #
+        # @return [Array<Google::Cloud::PubSub::ReceivedMessage>]
+        #
+        # @example The `immediate: false` option is now recommended to avoid adverse impacts on pull operations:
+        #   require "google/cloud/pubsub"
+        #
+        #   pubsub = Google::Cloud::PubSub.new
+        #
+        #   subscriber = pubsub.subscriber "my-topic-sub"
+        #   received_messages = subscriber.pull immediate: false
+        #   received_messages.each do |received_message|
+        #     received_message.acknowledge!
+        #   end
+        #
+        # @example A maximum number of messages returned can also be specified:
+        #   require "google/cloud/pubsub"
+        #
+        #   pubsub = Google::Cloud::PubSub.new
+        #
+        #   subscriber = pubsub.subscriber "my-topic-sub"
+        #   received_messages = subscriber.pull immediate: false, max: 10
+        #   received_messages.each do |received_message|
+        #     received_message.acknowledge!
+        #   end
+        #
+        def pull immediate: true, max: 100
+          ensure_service!
+          options = { immediate: immediate, max: max }
+          list_grpc = service.pull name, options
+          Array(list_grpc.received_messages).map do |msg_grpc|
+            ReceivedMessage.from_grpc msg_grpc, self
+          end
+        rescue Google::Cloud::DeadlineExceededError
+          []
+        end
+
+        ##
+        # Pulls from the server while waiting for messages to become available.
+        # This is the same as:
+        #
+        #   subscriber.pull immediate: false
+        #
+        # See also {#listen} for the preferred way to process messages as they
+        # become available.
+        #
+        # @param [Integer] max The maximum number of messages to return for this
+        #   request. The Pub/Sub system may return fewer than the number
+        #   specified. The default value is `100`, the maximum value is `1000`.
+        #
+        # @return [Array<Google::Cloud::PubSub::ReceivedMessage>]
         #
         # @example
         #   require "google/cloud/pubsub"
         #
         #   pubsub = Google::Cloud::PubSub.new
         #
-        #   sub = pubsub.subscription "my-topic-sub"
-        #
-        #   subscriber = sub.listen do |received_message|
-        #     # process message
+        #   subscriber = pubsub.subscriber "my-topic-sub"
+        #   received_messages = subscriber.wait_for_messages
+        #   received_messages.each do |received_message|
         #     received_message.acknowledge!
         #   end
         #
-        #   # Start listening for messages and errors.
-        #   subscriber.start
+        def wait_for_messages max: 100
+          pull immediate: false, max: max
+        end
+
+        ##
+        # Create a {MessageListener} object that receives and processes messages
+        # using the code provided in the callback. Messages passed to the
+        # callback should acknowledge ({ReceivedMessage#acknowledge!}) or reject
+        # ({ReceivedMessage#reject!}) the message. If no action is taken, the
+        # message will be removed from the subscriber and made available for
+        # redelivery after the callback is completed.
         #
-        #   # If an error was raised, it can be retrieved here:
-        #   subscriber.last_error #=> nil
+        # Google Cloud Pub/Sub ordering keys provide the ability to ensure
+        # related messages are sent to subscribers in the order in which they
+        # were published. Messages can be tagged with an ordering key, a string
+        # that identifies related messages for which publish order should be
+        # respected. The service guarantees that, for a given ordering key and
+        # publisher, messages are sent to subscribers in the order in which they
+        # were published. Ordering does not require sacrificing high throughput
+        # or scalability, as the service automatically distributes messages for
+        # different ordering keys across subscribers.
+        #
+        # To use ordering keys, the subscription must be created with message
+        # ordering enabled before calling {#listen}. When enabled, the subscriber
+        # will deliver messages with the same `ordering_key` in the order they were
+        # published.
+        #
+        # @note At the time of this release, ordering keys are not yet publicly
+        #   enabled and requires special project enablements.
+        #
+        # @param [Numeric] deadline The default number of seconds the stream
+        #   will hold received messages before modifying the message's ack
+        #   deadline. The minimum is 10, the maximum is 600. Default is
+        #   {#deadline}. Optional.
+        #
+        #   When using a reference object an API call will be made to retrieve
+        #   the default deadline value for the subscription when this argument
+        #   is not provided. See {#reference?}.
+        # @param [Boolean] message_ordering Whether message ordering has been
+        #   enabled. The value provided must match the value set on the Pub/Sub
+        #   service. See {#message_ordering?}. Optional.
+        #
+        #   When using a reference object an API call will be made to retrieve
+        #   the default message_ordering value for the subscription when this
+        #   argument is not provided. See {#reference?}.
+        # @param [Integer] streams The number of concurrent streams to open to
+        #   pull messages from the subscription. Default is 1. Optional.
+        # @param [Hash, Integer] inventory The settings to control how received messages are to be handled by the
+        #   subscriber. When provided as an Integer instead of a Hash only `max_outstanding_messages` will be set.
+        #   Optional.
+        #
+        #   Hash keys and values may include the following:
+        #
+        #     * `:max_outstanding_messages` [Integer] The number of received messages to be collected by subscriber.
+        #       Default is 1,000. (Note: replaces `:limit`, which is deprecated.)
+        #     * `:max_outstanding_bytes` [Integer] The total byte size of received messages to be collected by
+        #       subscriber. Default is 100,000,000 (100MB). (Note: replaces `:bytesize`, which is deprecated.)
+        #     * `:max_total_lease_duration` [Integer] The number of seconds that received messages can be held awaiting
+        #       processing. Default is 3,600 (1 hour). (Note: replaces `:extension`, which is deprecated.)
+        #     * `:max_duration_per_lease_extension` [Integer] The maximum amount of time in seconds for a single lease
+        #       extension attempt. Bounds the delay before a message redelivery if the subscriber fails to extend the
+        #       deadline. Default is 0 (disabled).
+        # @param [Hash] threads The number of threads to create to handle
+        #   concurrent calls by each stream opened by the subscriber. Optional.
+        #
+        #   Hash keys and values may include the following:
+        #
+        #     * `:callback` (Integer) The number of threads used to handle the
+        #       received messages. Default is 8.
+        #     * `:push` (Integer) The number of threads to handle
+        #       acknowledgement ({ReceivedMessage#ack!}) and modify ack deadline
+        #       messages ({ReceivedMessage#nack!},
+        #       {ReceivedMessage#modify_ack_deadline!}). Default is 4.
+        #
+        # @yield [received_message] a block for processing new messages
+        # @yieldparam [ReceivedMessage] received_message the newly received
+        #   message
+        #
+        # @return [MessageListener]
+        #
+        # @example
+        #   require "google/cloud/pubsub"
+        #
+        #   pubsub = Google::Cloud::PubSub.new
+        #
+        #   subscriber = pubsub.subscriber "my-topic-sub"
+        #
+        #   listener = subscriber.listen do |received_message|
+        #     # process message
+        #     puts "Data: #{received_message.message.data}, published at #{received_message.message.published_at}"
+        #     received_message.acknowledge!
+        #   end
+        #
+        #   # Start background threads that will call block passed to listen.
+        #   listener.start
         #
         #   # Shut down the subscriber when ready to stop receiving messages.
-        #   subscriber.stop!
+        #   listener.stop!
         #
-        def last_error
-          synchronize { @last_error }
+        # @example Configuring to increase concurrent callbacks:
+        #   require "google/cloud/pubsub"
+        #
+        #   pubsub = Google::Cloud::PubSub.new
+        #
+        #   subscriber = pubsub.subscriber "my-topic-sub"
+        #
+        #   listener = subscriber.listen threads: { callback: 16 } do |rec_message|
+        #     # store the message somewhere before acknowledging
+        #     store_in_backend rec_message.data # takes a few seconds
+        #     rec_message.acknowledge!
+        #   end
+        #
+        #   # Start background threads that will call block passed to listen.
+        #   listener.start
+        #
+        #   # Shut down the subscriber when ready to stop receiving messages.
+        #   listener.stop!
+        #
+        # @example Ordered messages are supported using ordering_key:
+        #   require "google/cloud/pubsub"
+        #
+        #   pubsub = Google::Cloud::PubSub.new
+        #
+        #   subscriber = pubsub.subscriber "my-ordered-topic-sub"
+        #   subscriber.message_ordering? #=> true
+        #
+        #   listener = subscriber.listen do |received_message|
+        #     # messsages with the same ordering_key are received
+        #     # in the order in which they were published.
+        #     received_message.acknowledge!
+        #   end
+        #
+        #   # Start background threads that will call block passed to listen.
+        #   listener.start
+        #
+        #   # Shut down the subscriber when ready to stop receiving messages.
+        #   listener.stop!
+        #
+        # @example Set the maximum amount of time before redelivery if the subscriber fails to extend the deadline:
+        #   require "google/cloud/pubsub"
+        #
+        #   pubsub = Google::Cloud::PubSub.new
+        #
+        #   subscriber = pubsub.subscriber "my-topic-sub"
+        #
+        #   listener = subscriber.listen inventory: { max_duration_per_lease_extension: 20 } do |received_message|
+        #     # Process message very slowly with possibility of failure.
+        #     process rec_message.data # takes minutes
+        #     rec_message.acknowledge!
+        #   end
+        #
+        #   # Start background threads that will call block passed to listen.
+        #   listener.start
+        #
+        #   # Shut down the subscriber when ready to stop receiving messages.
+        #   listener.stop!
+        #
+        def listen deadline: nil, message_ordering: nil, streams: nil, inventory: nil, threads: {}, &block
+          ensure_service!
+          deadline ||= self.deadline
+          message_ordering = message_ordering? if message_ordering.nil?
+
+          MessageListener.new name, block, deadline: deadline, streams: streams, inventory: inventory,
+                                      message_ordering: message_ordering, threads: threads, service: service
         end
 
         ##
-        # The number of received messages to be collected by subscriber. Default is 1,000.
+        # Acknowledges receipt of a message. After an ack,
+        # the Pub/Sub system can remove the message from the subscription.
+        # Acknowledging a message whose ack deadline has expired may succeed,
+        # although the message may have been sent again.
+        # Acknowledging a message more than once will not result in an error.
+        # This is only used for messages received via pull.
         #
-        # @return [Integer] The maximum number of messages.
+        # See also {ReceivedMessage#acknowledge!}.
         #
-        def max_outstanding_messages
-          @inventory[:max_outstanding_messages]
+        # @param [ReceivedMessage, String] messages One or more
+        #   {ReceivedMessage} objects or ack_id values.
+        #
+        # @example
+        #   require "google/cloud/pubsub"
+        #
+        #   pubsub = Google::Cloud::PubSub.new
+        #
+        #   subscriber = pubsub.subscriber "my-topic-sub"
+        #   received_messages = sub.pull immediate: false
+        #   subscriber.acknowledge received_messages
+        #
+        def acknowledge *messages
+          ack_ids = coerce_ack_ids messages
+          return true if ack_ids.empty?
+          ensure_service!
+          service.acknowledge name, *ack_ids
+          true
         end
-        # @deprecated Use {#max_outstanding_messages}.
-        alias inventory_limit max_outstanding_messages
-        # @deprecated Use {#max_outstanding_messages}.
-        alias inventory max_outstanding_messages
+        alias ack acknowledge
 
         ##
-        # The total byte size of received messages to be collected by subscriber. Default is 100,000,000 (100MB).
+        # Modifies the acknowledge deadline for messages.
         #
-        # @return [Integer] The maximum number of bytes.
+        # This indicates that more time is needed to process the messages, or to
+        # make the messages available for redelivery if the processing was
+        # interrupted.
         #
-        def max_outstanding_bytes
-          @inventory[:max_outstanding_bytes]
-        end
-        # @deprecated Use {#max_outstanding_bytes}.
-        alias inventory_bytesize max_outstanding_bytes
-
-        ##
-        # Whether to enforce flow control at the client side only or to enforce it at both the client and
-        # the server. For more details about flow control see https://cloud.google.com/pubsub/docs/pull#config.
+        # See also {ReceivedMessage#modify_ack_deadline!}.
         #
-        # @return [Boolean] `true` when only client side flow control is enforced, `false` when both client and
-        # server side flow control are enforced.
+        # @param [Integer] new_deadline The new ack deadline in seconds from the
+        #   time this request is sent to the Pub/Sub system. Must be >= 0. For
+        #   example, if the value is `10`, the new ack deadline will expire 10
+        #   seconds after the call is made. Specifying `0` may immediately make
+        #   the message available for another pull request.
+        # @param [ReceivedMessage, String] messages One or more
+        #   {ReceivedMessage} objects or ack_id values.
         #
-        def use_legacy_flow_control?
-          @inventory[:use_legacy_flow_control]
-        end
-
-        ##
-        # The number of seconds that received messages can be held awaiting processing. Default is 3,600 (1 hour).
+        # @example
+        #   require "google/cloud/pubsub"
         #
-        # @return [Integer] The maximum number of seconds.
+        #   pubsub = Google::Cloud::PubSub.new
         #
-        def max_total_lease_duration
-          @inventory[:max_total_lease_duration]
-        end
-        # @deprecated Use {#max_total_lease_duration}.
-        alias inventory_extension max_total_lease_duration
-
-        ##
-        # The maximum amount of time in seconds for a single lease extension attempt. Bounds the delay before a message
-        # redelivery if the subscriber fails to extend the deadline. Default is 0 (disabled).
+        #   subscriber = pubsub.subscriber "my-topic-sub"
+        #   received_messages = subscriber.pull immediate: false
+        #   subscriber.modify_ack_deadline 120, received_messages
         #
-        # @return [Integer] The maximum number of seconds.
-        #
-        def max_duration_per_lease_extension
-          @inventory[:max_duration_per_lease_extension]
+        def modify_ack_deadline new_deadline, *messages
+          ack_ids = coerce_ack_ids messages
+          ensure_service!
+          service.modify_ack_deadline name, ack_ids, new_deadline
+          true
         end
 
         ##
-        # The minimum amount of time in seconds for a single lease extension attempt. Bounds the delay before a message
-        # redelivery if the subscriber fails to extend the deadline. Default is 0 (disabled).
+        # Determines whether the subscription object was created without
+        # retrieving the resource representation from the Pub/Sub service.
         #
-        # @return [Integer] The minimum number of seconds.
+        # @return [Boolean] `true` when the subscription was created without a
+        #   resource representation, `false` otherwise.
         #
-        def min_duration_per_lease_extension
-          @inventory[:min_duration_per_lease_extension]
+        # @example
+        #   require "google/cloud/pubsub"
+        #
+        #   pubsub = Google::Cloud::PubSub.new
+        #
+        #   subscriber = pubsub.subscriber "my-topic-sub", skip_lookup: true
+        #
+        #   subscriber.reference? #=> true
+        #
+        def reference?
+          @grpc.nil?
+        end
+
+        ##
+        # Determines whether the subscription object was created with a resource
+        # representation from the Pub/Sub service.
+        #
+        # @return [Boolean] `true` when the subscription was created with a
+        #   resource representation, `false` otherwise.
+        #
+        # @example
+        #   require "google/cloud/pubsub"
+        #
+        #   pubsub = Google::Cloud::PubSub.new
+        #
+        #   subscriber = pubsub.subscriber "my-topic-sub"
+        #
+        #   subscriber.resource? #=> true
+        #
+        def resource?
+          !@grpc.nil?
+        end
+
+        ##
+        # Reloads the subscription with current data from the Pub/Sub service.
+        #
+        # @return [Google::Cloud::PubSub::Subscription] Returns the reloaded
+        #   subscription
+        #
+        # @example
+        #   require "google/cloud/pubsub"
+        #
+        #   pubsub = Google::Cloud::PubSub.new
+        #
+        #   sub = Google::Cloud::PubSub::Subscriber.from_name "my-topic-sub", pubsub.service
+        #
+        #   sub.reload!
+        #
+        def reload!
+          ensure_service!
+          subscription_path = service.subscription_path name
+          @grpc = service.subscription_admin.get_subscription subscription: subscription_path
+          @resource_name = nil
+          self
         end
 
         ##
         # @private
-        def stream_inventory
-          {
-            limit:                            @inventory[:max_outstanding_messages].fdiv(@streams).ceil,
-            bytesize:                         @inventory[:max_outstanding_bytes].fdiv(@streams).ceil,
-            extension:                        @inventory[:max_total_lease_duration],
-            max_duration_per_lease_extension: @inventory[:max_duration_per_lease_extension],
-            min_duration_per_lease_extension: @inventory[:min_duration_per_lease_extension],
-            use_legacy_flow_control:          @inventory[:use_legacy_flow_control]
-          }
-        end
-
-        # @private returns error object from the stream thread.
-        def error! error
-          error_callbacks = synchronize do
-            @last_error = error
-            @error_callbacks
+        # New Subscriber from a Google::Cloud::PubSub::V1::Subscription
+        # object.
+        def self.from_grpc grpc, service
+          new.tap do |f|
+            f.grpc = grpc
+            f.service = service
           end
-          error_callbacks = default_error_callbacks if error_callbacks.empty?
-          error_callbacks.each { |error_callback| error_callback.call error }
         end
 
         ##
-        # @private
-        def to_s
-          "(subscription: #{subscription_name}, streams: [#{stream_pool.map(&:to_s).join(', ')}])"
-        end
-
-        ##
-        # @private
-        def inspect
-          "#<#{self.class.name} #{self}>"
+        # @private New reference {Subscriber} object without making an HTTP
+        # request.
+        def self.from_name name, service, options = {}
+          name = service.subscription_path name, options
+          from_grpc(nil, service).tap do |s|
+            s.instance_variable_set :@resource_name, name
+          end
         end
 
         protected
 
         ##
-        # Starts a new thread to call wait! (blocking) on each Stream and then stop the TimedUnaryBuffer.
-        def wait_stop_buffer_thread!
-          synchronize do
-            @wait_stop_buffer_thread ||= Thread.new do
-              @stream_pool.map(&:wait!)
-              # Shutdown the buffer TimerTask (and flush the buffer) after the streams are all stopped.
-              @buffer.stop
-            end
-          end
+        # @private Raise an error unless an active connection to the service is
+        # available.
+        def ensure_service!
+          raise "Must have active connection to service" unless service
         end
 
-        def coerce_inventory inventory
-          @inventory = inventory
-          if @inventory.is_a? Hash
-            @inventory = @inventory.dup
-            # Support deprecated field names
-            @inventory[:max_outstanding_messages] ||= @inventory.delete :limit
-            @inventory[:max_outstanding_bytes] ||= @inventory.delete :bytesize
-            @inventory[:max_total_lease_duration] ||= @inventory.delete :extension
-          else
-            @inventory = { max_outstanding_messages: @inventory }
-          end
-          @inventory[:max_outstanding_messages] = Integer(@inventory[:max_outstanding_messages] || 1000)
-          @inventory[:max_outstanding_bytes] = Integer(@inventory[:max_outstanding_bytes] || 100_000_000)
-          @inventory[:max_total_lease_duration] = Integer(@inventory[:max_total_lease_duration] || 3600)
-          @inventory[:max_duration_per_lease_extension] = Integer(@inventory[:max_duration_per_lease_extension] || 0)
-          @inventory[:min_duration_per_lease_extension] = Integer(@inventory[:min_duration_per_lease_extension] || 0)
-          @inventory[:use_legacy_flow_control] = @inventory[:use_legacy_flow_control] || false
+        ##
+        # Ensures a Google::Cloud::PubSub::V1::Subscription object exists.
+        def ensure_grpc!
+          ensure_service!
+          reload! if reference?
         end
 
-        def default_error_callbacks
-          # This is memoized to reduce calls to the configuration.
-          @default_error_callbacks ||= begin
-            error_callback = Google::Cloud::PubSub.configure.on_error
-            error_callback ||= Google::Cloud.configure.on_error
-            if error_callback
-              [error_callback]
-            else
-              []
-            end
+        ##
+        # Makes sure the values are the `ack_id`. If given several
+        # {ReceivedMessage} objects extract the `ack_id` values.
+        def coerce_ack_ids messages
+          Array(messages).flatten.map do |msg|
+            msg.respond_to?(:ack_id) ? msg.ack_id : msg.to_s
           end
         end
       end

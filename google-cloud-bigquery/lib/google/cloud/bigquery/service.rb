@@ -109,29 +109,29 @@ module Google
 
         ##
         # Returns the dataset specified by datasetID.
-        def get_dataset dataset_id
-          get_project_dataset @project, dataset_id
+        def get_dataset dataset_id, access_policy_version: nil
+          get_project_dataset @project, dataset_id, access_policy_version: access_policy_version
         end
 
         ##
         # Gets the specified dataset resource by full dataset reference.
-        def get_project_dataset project_id, dataset_id
+        def get_project_dataset project_id, dataset_id, access_policy_version: nil
           # The get operation is considered idempotent
           execute backoff: true do
-            service.get_dataset project_id, dataset_id
+            service.get_dataset project_id, dataset_id, access_policy_version: access_policy_version
           end
         end
 
         ##
         # Creates a new empty dataset.
-        def insert_dataset new_dataset_gapi
-          execute { service.insert_dataset @project, new_dataset_gapi }
+        def insert_dataset new_dataset_gapi, access_policy_version: nil
+          execute { service.insert_dataset @project, new_dataset_gapi, access_policy_version: access_policy_version }
         end
 
         ##
         # Updates information in an existing dataset, only replacing
         # fields that are provided in the submitted dataset resource.
-        def patch_dataset dataset_id, patched_dataset_gapi
+        def patch_dataset dataset_id, patched_dataset_gapi, access_policy_version: nil
           patch_with_backoff = false
           options = {}
           if patched_dataset_gapi.etag
@@ -140,7 +140,8 @@ module Google
             patch_with_backoff = true
           end
           execute backoff: patch_with_backoff do
-            service.patch_dataset @project, dataset_id, patched_dataset_gapi, options: options
+            service.patch_dataset @project, dataset_id, patched_dataset_gapi, options: options,
+access_policy_version: access_policy_version
           end
         end
 
@@ -244,7 +245,8 @@ module Google
 
         ##
         # Retrieves data from the table.
-        def list_tabledata dataset_id, table_id, max: nil, token: nil, start: nil
+        def list_tabledata dataset_id, table_id, max: nil, token: nil, start: nil,
+                           format_options_use_int64_timestamp: nil
           # The list operation is considered idempotent
           execute backoff: true do
             json_txt = service.list_table_data \
@@ -252,7 +254,8 @@ module Google
               max_results: max,
               page_token:  token,
               start_index: start,
-              options:     { skip_deserialization: true }
+              options:     { skip_deserialization: true },
+              format_options_use_int64_timestamp: format_options_use_int64_timestamp
             JSON.parse json_txt, symbolize_names: true
           end
         end
@@ -456,7 +459,8 @@ module Google
 
         ##
         # Returns the query data for the job
-        def job_query_results job_id, location: nil, max: nil, token: nil, start: nil, timeout: nil
+        def job_query_results job_id, location: nil, max: nil, token: nil,
+                              start: nil, timeout: nil, format_options_use_int64_timestamp: nil
           # The get operation is considered idempotent
           execute backoff: true do
             service.get_job_query_results @project, job_id,
@@ -464,7 +468,8 @@ module Google
                                           max_results: max,
                                           page_token:  token,
                                           start_index: start,
-                                          timeout_ms:  timeout
+                                          timeout_ms:  timeout,
+                                          format_options_use_int64_timestamp: format_options_use_int64_timestamp
           end
         end
 

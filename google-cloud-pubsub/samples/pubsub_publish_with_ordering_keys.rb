@@ -18,22 +18,22 @@ def publish_ordered_messages topic_id:
   # [START pubsub_publish_with_ordering_keys]
   # topic_id = "your-topic-id"
 
-  pubsub = Google::Cloud::Pubsub.new endpoint: "us-east1-pubsub.googleapis.com:443"
-
+  pubsub = Google::Cloud::PubSub.new
   # Start sending messages in one request once the size of all queued messages
   # reaches 1 MB or the number of queued messages reaches 20
-  topic = pubsub.topic topic_id, async: {
+  publisher = pubsub.publisher topic_id, async: {
     max_bytes:    1_000_000,
     max_messages: 20
   }
-  topic.enable_message_ordering!
+
+  publisher.enable_message_ordering!
   10.times do |i|
-    topic.publish_async "This is message ##{i}.",
-                        ordering_key: "ordering-key"
+    publisher.publish_async "This is message ##{i}.",
+                            ordering_key: "ordering-key"
   end
 
   # Stop the async_publisher to send all queued messages immediately.
-  topic.async_publisher.stop!
+  publisher.async_publisher.stop!
   puts "Messages published with ordering key."
   # [END pubsub_publish_with_ordering_keys]
 end

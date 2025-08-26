@@ -125,8 +125,8 @@ module Google
         #     used for protocol forwarding, Private Service Connect and other network
         #     services to provide forwarding information in the control plane. Applicable
         #     only to destination endpoint. Format:
-        #      projects/\\{project}/global/forwardingRules/\\{id} or
-        #      projects/\\{project}/regions/\\{region}/forwardingRules/\\{id}
+        #      `projects/{project}/global/forwardingRules/{id}` or
+        #      `projects/{project}/regions/{region}/forwardingRules/{id}`
         # @!attribute [r] forwarding_rule_target
         #   @return [::Google::Cloud::NetworkManagement::V1::Endpoint::ForwardingRuleTarget]
         #     Output only. Specifies the type of the target of the forwarding rule.
@@ -221,7 +221,12 @@ module Google
           #     A [Cloud Run](https://cloud.google.com/run)
           #     [revision](https://cloud.google.com/run/docs/reference/rest/v1/namespaces.revisions/get)
           #     URI. The format is:
-          #     projects/\\{project}/locations/\\{location}/revisions/\\{revision}
+          #     `projects/{project}/locations/{location}/revisions/{revision}`
+          # @!attribute [r] service_uri
+          #   @return [::String]
+          #     Output only. The URI of the Cloud Run service that the revision belongs
+          #     to. The format is:
+          #     `projects/{project}/locations/{location}/services/{service}`
           class CloudRunRevisionEndpoint
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods

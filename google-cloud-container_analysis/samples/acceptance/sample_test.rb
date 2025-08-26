@@ -125,10 +125,16 @@ describe "Container Analysis API samples" do
 
   it "runs occurrence_pubsub" do
     # create topic if needed
-    pubsub = Google::Cloud::Pubsub.new project: @project_id
+    pubsub = Google::Cloud::PubSub.new project_id: @project_id
     topic_name = "container-analysis-occurrences-v1"
-    topic = pubsub.topic topic_name
-    pubsub.create_topic topic_name unless topic&.exists?
+    topic_admin = pubsub.topic_admin
+    topic_path = pubsub.topic_path topic_name
+    topic =
+      begin
+        topic_admin.get_topic topic: topic_path
+      rescue Google::Cloud::NotFoundError
+        topic_admin.create_topic name: topic_path
+      end
 
     try = 0
     count = -1
@@ -172,6 +178,7 @@ describe "Container Analysis API samples" do
       count = t2[:output]
     end
     _(count).must_be :>=, total_num
+    topic_admin.delete_topic topic: topic.name if topic
   end
 
   it "runs poll_discovery_finished" do

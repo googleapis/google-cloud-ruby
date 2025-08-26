@@ -21,7 +21,6 @@ require "helper"
 require "gapic/grpc/service_stub"
 
 require "google/cloud/discoveryengine/v1/user_event_service_pb"
-require "google/cloud/discoveryengine/v1/user_event_service_services_pb"
 require "google/cloud/discovery_engine/v1/user_event_service"
 
 class ::Google::Cloud::DiscoveryEngine::V1::UserEventService::ClientTest < Minitest::Test

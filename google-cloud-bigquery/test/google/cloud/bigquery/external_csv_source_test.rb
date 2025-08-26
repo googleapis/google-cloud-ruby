@@ -182,6 +182,70 @@ describe Google::Cloud::Bigquery::External::CsvSource do
     _(table.to_gapi.to_h).must_equal table_gapi.to_h
   end
 
+  it "sets source_column_match" do
+    table = Google::Cloud::Bigquery::External::CsvSource.new.tap do |e|
+      e.gapi.source_uris = ["gs://my-bucket/path/to/file.csv"]
+      e.gapi.source_format = "CSV"
+    end
+    table_gapi = Google::Apis::BigqueryV2::ExternalDataConfiguration.new(
+      source_uris: ["gs://my-bucket/path/to/file.csv"],
+      source_format: "CSV",
+      csv_options: Google::Apis::BigqueryV2::CsvOptions.new(
+        source_column_match: "POSITION"
+      )
+    )
+    _(table.source_column_match).must_be :nil?
+
+    table.source_column_match = "POSITION"
+
+    _(table.source_column_match).must_equal "POSITION"
+
+    _(table.to_gapi.to_h).must_equal table_gapi.to_h
+  end
+
+  it "sets null_markers" do
+    table = Google::Cloud::Bigquery::External::CsvSource.new.tap do |e|
+      e.gapi.source_uris = ["gs://my-bucket/path/to/file.csv"]
+      e.gapi.source_format = "CSV"
+    end
+    table_gapi = Google::Apis::BigqueryV2::ExternalDataConfiguration.new(
+      source_uris: ["gs://my-bucket/path/to/file.csv"],
+      source_format: "CSV",
+      csv_options: Google::Apis::BigqueryV2::CsvOptions.new(
+        null_markers: ["NULL"]
+      )
+    )
+    _(table.null_markers).must_equal []
+
+    table.null_markers = ["NULL"]
+
+    _(table.null_markers).must_equal ["NULL"]
+
+    _(table.to_gapi.to_h).must_equal table_gapi.to_h
+  end
+
+  it "sets null_marker" do
+    table = Google::Cloud::Bigquery::External::CsvSource.new.tap do |e|
+      e.gapi.source_uris = ["gs://my-bucket/path/to/file.csv"]
+      e.gapi.source_format = "CSV"
+    end
+    table_gapi = Google::Apis::BigqueryV2::ExternalDataConfiguration.new(
+      source_uris: ["gs://my-bucket/path/to/file.csv"],
+      source_format: "CSV",
+      csv_options: Google::Apis::BigqueryV2::CsvOptions.new(
+        null_marker: "NULL"
+      )
+    )
+    _(table.null_marker).must_be :nil?
+
+    table.null_marker = "NULL"
+
+    _(table.null_marker).must_equal "NULL"
+
+    _(table.to_gapi.to_h).must_equal table_gapi.to_h
+  end
+
+
   it "sets schema using block" do
     table = Google::Cloud::Bigquery::External::CsvSource.new.tap do |e|
       e.gapi.source_uris = ["gs://my-bucket/path/to/file.csv"]

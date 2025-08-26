@@ -21,7 +21,6 @@ require "helper"
 require "gapic/grpc/service_stub"
 
 require "google/cloud/dataproc/v1/jobs_pb"
-require "google/cloud/dataproc/v1/jobs_services_pb"
 require "google/cloud/dataproc/v1/job_controller"
 
 class ::Google::Cloud::Dataproc::V1::JobController::ClientTest < Minitest::Test

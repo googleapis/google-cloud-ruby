@@ -14,21 +14,27 @@
 
 require "google/cloud/pubsub"
 
-def dead_letter_create_subscription topic_id:, subscription_id:, dead_letter_topic_id:
+def dead_letter_create_subscription topic_id:, subscription_id:,
+                                    dead_letter_topic_id:
   # [START pubsub_dead_letter_create_subscription]
   # topic_id             = "your-topic-id"
   # subscription_id      = "your-subscription-id"
   # dead_letter_topic_id = "your-dead-letter-topic-id"
 
-  pubsub = Google::Cloud::Pubsub.new
+  pubsub = Google::Cloud::PubSub.new
+  subscription_admin = pubsub.subscription_admin
 
-  topic             = pubsub.topic topic_id
-  dead_letter_topic = pubsub.topic dead_letter_topic_id
-  subscription      = topic.subscribe subscription_id,
-                                      dead_letter_topic:                 dead_letter_topic,
-                                      dead_letter_max_delivery_attempts: 10
+  subscription = subscription_admin.create_subscription \
+    name: pubsub.subscription_path(subscription_id),
+    topic: pubsub.topic_path(topic_id),
+    dead_letter_policy: {
+      dead_letter_topic: pubsub.topic_path(dead_letter_topic_id),
+      max_delivery_attempts: 10
+    }
 
-  puts "Created subscription #{subscription_id} with dead letter topic #{dead_letter_topic_id}."
-  puts "To process dead letter messages, remember to add a subscription to your dead letter topic."
+  puts "Created subscription #{subscription_id} with dead letter topic " \
+       "#{dead_letter_topic_id}."
+  puts "To process dead letter messages, remember to add a subscription to " \
+       "your dead letter topic."
   # [END pubsub_dead_letter_create_subscription]
 end

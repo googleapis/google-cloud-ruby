@@ -1,0 +1,175 @@
+{
+  "client_library": {
+    "name": "google-shopping-merchant-issue_resolution-v1",
+    "version": "0.1.1",
+    "language": "RUBY",
+    "apis": [
+      {
+        "id": "google.shopping.merchant.issueresolution.v1",
+        "version": "v1"
+      }
+    ]
+  },
+  "snippets": [
+    {
+      "region_tag": "merchantapi_v1_generated_AggregateProductStatusesService_ListAggregateProductStatuses_sync",
+      "title": "Snippet for the list_aggregate_product_statuses call in the AggregateProductStatusesService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Shopping::Merchant::IssueResolution::V1::AggregateProductStatusesService::Client#list_aggregate_product_statuses.",
+      "file": "aggregate_product_statuses_service/list_aggregate_product_statuses.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_aggregate_product_statuses",
+        "full_name": "::Google::Shopping::Merchant::IssueResolution::V1::AggregateProductStatusesService::Client#list_aggregate_product_statuses",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Shopping::Merchant::IssueResolution::V1::ListAggregateProductStatusesRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Shopping::Merchant::IssueResolution::V1::ListAggregateProductStatusesResponse",
+        "client": {
+          "short_name": "AggregateProductStatusesService::Client",
+          "full_name": "::Google::Shopping::Merchant::IssueResolution::V1::AggregateProductStatusesService::Client"
+        },
+        "method": {
+          "short_name": "ListAggregateProductStatuses",
+          "full_name": "google.shopping.merchant.issueresolution.v1.AggregateProductStatusesService.ListAggregateProductStatuses",
+          "service": {
+            "short_name": "AggregateProductStatusesService",
+            "full_name": "google.shopping.merchant.issueresolution.v1.AggregateProductStatusesService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "merchantapi_v1_generated_IssueResolutionService_RenderAccountIssues_sync",
+      "title": "Snippet for the render_account_issues call in the IssueResolutionService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Shopping::Merchant::IssueResolution::V1::IssueResolutionService::Client#render_account_issues.",
+      "file": "issue_resolution_service/render_account_issues.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "render_account_issues",
+        "full_name": "::Google::Shopping::Merchant::IssueResolution::V1::IssueResolutionService::Client#render_account_issues",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Shopping::Merchant::IssueResolution::V1::RenderAccountIssuesRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Shopping::Merchant::IssueResolution::V1::RenderAccountIssuesResponse",
+        "client": {
+          "short_name": "IssueResolutionService::Client",
+          "full_name": "::Google::Shopping::Merchant::IssueResolution::V1::IssueResolutionService::Client"
+        },
+        "method": {
+          "short_name": "RenderAccountIssues",
+          "full_name": "google.shopping.merchant.issueresolution.v1.IssueResolutionService.RenderAccountIssues",
+          "service": {
+            "short_name": "IssueResolutionService",
+            "full_name": "google.shopping.merchant.issueresolution.v1.IssueResolutionService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "merchantapi_v1_generated_IssueResolutionService_RenderProductIssues_sync",
+      "title": "Snippet for the render_product_issues call in the IssueResolutionService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Shopping::Merchant::IssueResolution::V1::IssueResolutionService::Client#render_product_issues.",
+      "file": "issue_resolution_service/render_product_issues.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "render_product_issues",
+        "full_name": "::Google::Shopping::Merchant::IssueResolution::V1::IssueResolutionService::Client#render_product_issues",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Shopping::Merchant::IssueResolution::V1::RenderProductIssuesRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Shopping::Merchant::IssueResolution::V1::RenderProductIssuesResponse",
+        "client": {
+          "short_name": "IssueResolutionService::Client",
+          "full_name": "::Google::Shopping::Merchant::IssueResolution::V1::IssueResolutionService::Client"
+        },
+        "method": {
+          "short_name": "RenderProductIssues",
+          "full_name": "google.shopping.merchant.issueresolution.v1.IssueResolutionService.RenderProductIssues",
+          "service": {
+            "short_name": "IssueResolutionService",
+            "full_name": "google.shopping.merchant.issueresolution.v1.IssueResolutionService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "merchantapi_v1_generated_IssueResolutionService_TriggerAction_sync",
+      "title": "Snippet for the trigger_action call in the IssueResolutionService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Shopping::Merchant::IssueResolution::V1::IssueResolutionService::Client#trigger_action.",
+      "file": "issue_resolution_service/trigger_action.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "trigger_action",
+        "full_name": "::Google::Shopping::Merchant::IssueResolution::V1::IssueResolutionService::Client#trigger_action",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Shopping::Merchant::IssueResolution::V1::TriggerActionRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Shopping::Merchant::IssueResolution::V1::TriggerActionResponse",
+        "client": {
+          "short_name": "IssueResolutionService::Client",
+          "full_name": "::Google::Shopping::Merchant::IssueResolution::V1::IssueResolutionService::Client"
+        },
+        "method": {
+          "short_name": "TriggerAction",
+          "full_name": "google.shopping.merchant.issueresolution.v1.IssueResolutionService.TriggerAction",
+          "service": {
+            "short_name": "IssueResolutionService",
+            "full_name": "google.shopping.merchant.issueresolution.v1.IssueResolutionService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    }
+  ]
+}

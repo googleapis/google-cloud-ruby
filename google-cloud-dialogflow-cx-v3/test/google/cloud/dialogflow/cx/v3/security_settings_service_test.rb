@@ -21,7 +21,6 @@ require "helper"
 require "gapic/grpc/service_stub"
 
 require "google/cloud/dialogflow/cx/v3/security_settings_pb"
-require "google/cloud/dialogflow/cx/v3/security_settings_services_pb"
 require "google/cloud/dialogflow/cx/v3/security_settings_service"
 
 class ::Google::Cloud::Dialogflow::CX::V3::SecuritySettingsService::ClientTest < Minitest::Test

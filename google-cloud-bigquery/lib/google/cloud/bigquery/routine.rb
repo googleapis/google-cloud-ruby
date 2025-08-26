@@ -691,6 +691,59 @@ module Google
         end
 
         ##
+        # The data governance type of the routine. Optional.
+        #
+        # If set to `DATA_MASKING`, the function is validated and made
+        # available as a masking function. For more information, see [Create custom
+        # masking routines](https://cloud.google.com/bigquery/docs/user-defined-functions#custom-mask).
+        #
+        # @return [String, nil] The data governance type, or `nil` if not set or the object is a reference
+        #   (see {#reference?}).
+        #
+        # @example
+        #   require "google/cloud/bigquery"
+        #
+        #   bigquery = Google::Cloud::Bigquery.new
+        #   dataset = bigquery.dataset "my_dataset"
+        #   routine = dataset.routine "my_routine"
+        #
+        #   routine.data_governance_type #=> "DATA_MASKING"
+        #
+        # @!group Attributes
+        #
+        def data_governance_type
+          return nil if reference?
+          ensure_full_data!
+          @gapi.data_governance_type
+        end
+
+        ##
+        # Updates the data governance type of the routine. Optional.
+        #
+        # If set to `DATA_MASKING`, the function is validated and made
+        # available as a masking function. For more information, see [Create custom
+        # masking routines](https://cloud.google.com/bigquery/docs/user-defined-functions#custom-mask).
+        #
+        # @param [String, nil] new_data_governance_type The new data governance type. `nil` to unset.
+        #
+        # @example
+        #   require "google/cloud/bigquery"
+        #
+        #   bigquery = Google::Cloud::Bigquery.new
+        #   dataset = bigquery.dataset "my_dataset"
+        #   routine = dataset.routine "my_routine"
+        #
+        #   routine.data_governance_type = "DATA_MASKING"
+        #
+        # @!group Attributes
+        #
+        def data_governance_type= new_data_governance_type
+          ensure_full_data!
+          @gapi.data_governance_type = new_data_governance_type
+          update_gapi!
+        end
+
+        ##
         # Updates the routine with changes made in the given block in a single update request. The following attributes
         # may be set: {Updater#routine_type=}, {Updater#language=}, {Updater#arguments=}, {Updater#return_type=},
         # {Updater#imported_libraries=}, {Updater#body=}, and {Updater#description=}.
@@ -1196,6 +1249,30 @@ module Google
           #
           def determinism_level= new_determinism_level
             @gapi.determinism_level = new_determinism_level
+          end
+
+          ##
+          # Updates the data governance type of the routine. Optional.
+          #
+          # If set to `DATA_MASKING`, the function is validated and made
+          # available as a masking function. For more information, see [Create custom
+          # masking routines](https://cloud.google.com/bigquery/docs/user-defined-functions#custom-mask).
+          #
+          # @param [String, nil] new_data_governance_type The new data governance type. `nil` to unset.
+          #
+          # @example
+          #   require "google/cloud/bigquery"
+          #
+          #   bigquery = Google::Cloud::Bigquery.new
+          #   dataset = bigquery.dataset "my_dataset"
+          #   routine = dataset.routine "my_routine"
+          #
+          #   routine.data_governance_type = "DATA_MASKING"
+          #
+          # @!group Attributes
+          #
+          def data_governance_type= new_data_governance_type
+            @gapi.data_governance_type = new_data_governance_type
           end
 
           def update

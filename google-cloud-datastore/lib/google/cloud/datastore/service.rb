@@ -70,7 +70,12 @@ module Google
         end
 
         # Query for entities.
-        def run_query query, namespace = nil, consistency: nil, transaction: nil, read_time: nil
+        def run_query query, namespace = nil, consistency: nil, transaction: nil, read_time: nil, explain_options: nil
+          if explain_options
+            explain_options = ::Gapic::Protobuf.coerce(explain_options,
+                                                       to: ::Google::Cloud::Datastore::V1::ExplainOptions)
+          end
+
           gql_query = nil
           if query.is_a? Google::Cloud::Datastore::V1::GqlQuery
             gql_query = query
@@ -88,11 +93,20 @@ module Google
                             partition_id: partition_id,
                             read_options: read_options,
                             query: query,
-                            gql_query: gql_query
+                            gql_query: gql_query,
+                            explain_options: explain_options
         end
 
         ## Query for aggregates
-        def run_aggregation_query query, namespace = nil, consistency: nil, transaction: nil, read_time: nil
+        def run_aggregation_query query, namespace = nil, consistency: nil, transaction: nil, read_time: nil,
+                                  explain_options: nil
+          if explain_options
+            explain_options = ::Gapic::Protobuf.coerce(
+              explain_options,
+              to: ::Google::Cloud::Datastore::V1::ExplainOptions
+            )
+          end
+
           gql_query = nil
           if query.is_a? Google::Cloud::Datastore::V1::GqlQuery
             gql_query = query
@@ -109,7 +123,8 @@ module Google
                                         partition_id: partition_id,
                                         read_options: read_options,
                                         aggregation_query: query,
-                                        gql_query: gql_query
+                                        gql_query: gql_query,
+                                        explain_options: explain_options
         end
 
         ##
@@ -174,6 +189,17 @@ module Google
           nil
         end
 
+        ##
+        # @private Converts a time-like object to a Google::Protobuf::Timestamp.
+        #
+        #   Any object that responds to `#to_time` is a valid input.
+        #
+        # @param time [Time, DateTime, Google::Protobuf::Timestamp, nil] The
+        #   time object to convert. If `nil`, `nil` will be returned.
+        #
+        # @return [Google::Protobuf::Timestamp, nil] The converted Protobuf timestamp,
+        #   or `nil` if the input was `nil`.
+        #
         def read_time_to_timestamp time
           return nil if time.nil?
 

@@ -19,17 +19,20 @@ def publish_proto_messages topic_id:
   # [START pubsub_publish_proto_messages]
   # topic_id = "your-topic-id"
 
-  pubsub = Google::Cloud::Pubsub.new
-
-  topic = pubsub.topic topic_id
-
+  pubsub = Google::Cloud::PubSub.new
+  topic_admin = pubsub.topic_admin
+  publisher = pubsub.publisher topic_id
   state = Utilities::StateProto.new name: "Alaska", post_abbr: "AK"
 
-  if topic.message_encoding_binary?
-    topic.publish Utilities::StateProto.encode(state)
+  topic = topic_admin.get_topic topic: pubsub.topic_path(topic_id)
+  encoding = topic.schema_settings.encoding
+
+  case encoding
+  when :BINARY
+    publisher.publish Utilities::StateProto.encode(state)
     puts "Published binary-encoded protobuf message."
-  elsif topic.message_encoding_json?
-    topic.publish Utilities::StateProto.encode_json(state)
+  when :JSON
+    publisher.publish Utilities::StateProto.encode_json(state)
     puts "Published JSON-encoded protobuf message."
   else
     raise "No encoding specified in #{topic.name}."

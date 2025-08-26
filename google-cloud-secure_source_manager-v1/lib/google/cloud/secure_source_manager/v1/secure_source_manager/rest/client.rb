@@ -35,23 +35,6 @@ module Google
             #
             # Access Secure Source Manager instances, resources, and repositories.
             #
-            # This API is split across two servers: the Control Plane and the Data Plane.
-            #
-            # Data Plane endpoints are hosted directly by your Secure Source Manager
-            # instance, so you must connect to your instance's API hostname to access
-            # them. The API hostname looks like the following:
-            #
-            #    https://[instance-id]-[project-number]-api.[location].sourcemanager.dev
-            #
-            # For example,
-            #
-            #    https://my-instance-702770452863-api.us-central1.sourcemanager.dev
-            #
-            # Data Plane endpoints are denoted with **Host: Data Plane**.
-            #
-            # All other endpoints are found in the normal Cloud API location, namely,
-            # `securcesourcemanager.googleapis.com`.
-            #
             class Client
               # @private
               API_VERSION = ""
@@ -648,7 +631,8 @@ module Google
               ##
               # Lists Repositories in a given project and location.
               #
-              # **Host: Data Plane**
+              # The instance field is required in the query parameter for requests using
+              # the securesourcemanager.googleapis.com endpoint.
               #
               # @overload list_repositories(request, options = nil)
               #   Pass arguments to `list_repositories` via a request object, either of type
@@ -678,10 +662,9 @@ module Google
               #     Optional. The name of the instance in which the repository is hosted,
               #     formatted as
               #     `projects/{project_number}/locations/{location_id}/instances/{instance_id}`.
-              #     When listing repositories via
-              #     securesourcemanager.googleapis.com (Control Plane API), this field is
-              #     required. When listing repositories via *.sourcemanager.dev (Data Plane
-              #     API), this field is ignored.
+              #     When listing repositories via securesourcemanager.googleapis.com, this
+              #     field is required. When listing repositories via *.sourcemanager.dev, this
+              #     field is ignored.
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::SecureSourceManager::V1::Repository>]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
@@ -748,8 +731,6 @@ module Google
 
               ##
               # Gets metadata of a repository.
-              #
-              # **Host: Data Plane**
               #
               # @overload get_repository(request, options = nil)
               #   Pass arguments to `get_repository` via a request object, either of type
@@ -831,7 +812,8 @@ module Google
               ##
               # Creates a new repository in a given project and location.
               #
-              # **Host: Data Plane**
+              # The Repository.Instance field is required in the request body for requests
+              # using the securesourcemanager.googleapis.com endpoint.
               #
               # @overload create_repository(request, options = nil)
               #   Pass arguments to `create_repository` via a request object, either of type
@@ -925,9 +907,103 @@ module Google
               end
 
               ##
-              # Deletes a Repository.
+              # Updates the metadata of a repository.
               #
-              # **Host: Data Plane**
+              # @overload update_repository(request, options = nil)
+              #   Pass arguments to `update_repository` via a request object, either of type
+              #   {::Google::Cloud::SecureSourceManager::V1::UpdateRepositoryRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::SecureSourceManager::V1::UpdateRepositoryRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload update_repository(update_mask: nil, repository: nil, validate_only: nil)
+              #   Pass arguments to `update_repository` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
+              #     Optional. Field mask is used to specify the fields to be overwritten in the
+              #     repository resource by the update.
+              #     The fields specified in the update_mask are relative to the resource, not
+              #     the full request. A field will be overwritten if it is in the mask. If the
+              #     user does not provide a mask then all fields will be overwritten.
+              #   @param repository [::Google::Cloud::SecureSourceManager::V1::Repository, ::Hash]
+              #     Required. The repository being updated.
+              #   @param validate_only [::Boolean]
+              #     Optional. False by default. If set to true, the request is validated and
+              #     the user is provided with an expected result, but no actual change is made.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Gapic::Operation]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Gapic::Operation]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/secure_source_manager/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::SecureSourceManager::V1::SecureSourceManager::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::SecureSourceManager::V1::UpdateRepositoryRequest.new
+              #
+              #   # Call the update_repository method.
+              #   result = client.update_repository request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
+              def update_repository request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::SecureSourceManager::V1::UpdateRepositoryRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.update_repository.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::SecureSourceManager::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.update_repository.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.update_repository.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @secure_source_manager_stub.update_repository request, options do |result, operation|
+                  result = ::Gapic::Operation.new result, @operations_client, options: options
+                  yield result, operation if block_given?
+                  throw :response, result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Deletes a Repository.
               #
               # @overload delete_repository(request, options = nil)
               #   Pass arguments to `delete_repository` via a request object, either of type
@@ -947,7 +1023,7 @@ module Google
               #   @param name [::String]
               #     Required. Name of the repository to delete.
               #     The format is
-              #     projects/\\{project_number}/locations/\\{location_id}/repositories/\\{repository_id}.
+              #     `projects/{project_number}/locations/{location_id}/repositories/{repository_id}`.
               #   @param allow_missing [::Boolean]
               #     Optional. If set to true, and the repository is not found, the request will
               #     succeed but no action will be taken on the server.
@@ -1010,6 +1086,453 @@ module Google
                                        retry_policy: @config.retry_policy
 
                 @secure_source_manager_stub.delete_repository request, options do |result, operation|
+                  result = ::Gapic::Operation.new result, @operations_client, options: options
+                  yield result, operation if block_given?
+                  throw :response, result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Lists hooks in a given repository.
+              #
+              # @overload list_hooks(request, options = nil)
+              #   Pass arguments to `list_hooks` via a request object, either of type
+              #   {::Google::Cloud::SecureSourceManager::V1::ListHooksRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::SecureSourceManager::V1::ListHooksRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload list_hooks(parent: nil, page_size: nil, page_token: nil)
+              #   Pass arguments to `list_hooks` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param parent [::String]
+              #     Required. Parent value for ListHooksRequest.
+              #   @param page_size [::Integer]
+              #     Optional. Requested page size. Server may return fewer items than
+              #     requested. If unspecified, server will pick an appropriate default.
+              #   @param page_token [::String]
+              #     Optional. A token identifying a page of results the server should return.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::SecureSourceManager::V1::Hook>]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::SecureSourceManager::V1::Hook>]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/secure_source_manager/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::SecureSourceManager::V1::SecureSourceManager::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::SecureSourceManager::V1::ListHooksRequest.new
+              #
+              #   # Call the list_hooks method.
+              #   result = client.list_hooks request
+              #
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
+              #     # Each element is of type ::Google::Cloud::SecureSourceManager::V1::Hook.
+              #     p item
+              #   end
+              #
+              def list_hooks request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::SecureSourceManager::V1::ListHooksRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.list_hooks.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::SecureSourceManager::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.list_hooks.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.list_hooks.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @secure_source_manager_stub.list_hooks request, options do |result, operation|
+                  result = ::Gapic::Rest::PagedEnumerable.new @secure_source_manager_stub, :list_hooks, "hooks", request, result, options
+                  yield result, operation if block_given?
+                  throw :response, result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Gets metadata of a hook.
+              #
+              # @overload get_hook(request, options = nil)
+              #   Pass arguments to `get_hook` via a request object, either of type
+              #   {::Google::Cloud::SecureSourceManager::V1::GetHookRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::SecureSourceManager::V1::GetHookRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload get_hook(name: nil)
+              #   Pass arguments to `get_hook` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param name [::String]
+              #     Required. Name of the hook to retrieve.
+              #     The format is
+              #     `projects/{project_number}/locations/{location_id}/repositories/{repository_id}/hooks/{hook_id}`.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Cloud::SecureSourceManager::V1::Hook]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Cloud::SecureSourceManager::V1::Hook]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/secure_source_manager/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::SecureSourceManager::V1::SecureSourceManager::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::SecureSourceManager::V1::GetHookRequest.new
+              #
+              #   # Call the get_hook method.
+              #   result = client.get_hook request
+              #
+              #   # The returned object is of type Google::Cloud::SecureSourceManager::V1::Hook.
+              #   p result
+              #
+              def get_hook request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::SecureSourceManager::V1::GetHookRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.get_hook.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::SecureSourceManager::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.get_hook.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.get_hook.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @secure_source_manager_stub.get_hook request, options do |result, operation|
+                  yield result, operation if block_given?
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Creates a new hook in a given repository.
+              #
+              # @overload create_hook(request, options = nil)
+              #   Pass arguments to `create_hook` via a request object, either of type
+              #   {::Google::Cloud::SecureSourceManager::V1::CreateHookRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::SecureSourceManager::V1::CreateHookRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload create_hook(parent: nil, hook: nil, hook_id: nil)
+              #   Pass arguments to `create_hook` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param parent [::String]
+              #     Required. The repository in which to create the hook. Values are of the
+              #     form
+              #     `projects/{project_number}/locations/{location_id}/repositories/{repository_id}`
+              #   @param hook [::Google::Cloud::SecureSourceManager::V1::Hook, ::Hash]
+              #     Required. The resource being created.
+              #   @param hook_id [::String]
+              #     Required. The ID to use for the hook, which will become the final component
+              #     of the hook's resource name. This value restricts to lower-case letters,
+              #     numbers, and hyphen, with the first character a letter, the last a letter
+              #     or a number, and a 63 character maximum.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Gapic::Operation]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Gapic::Operation]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/secure_source_manager/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::SecureSourceManager::V1::SecureSourceManager::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::SecureSourceManager::V1::CreateHookRequest.new
+              #
+              #   # Call the create_hook method.
+              #   result = client.create_hook request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
+              def create_hook request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::SecureSourceManager::V1::CreateHookRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.create_hook.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::SecureSourceManager::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.create_hook.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.create_hook.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @secure_source_manager_stub.create_hook request, options do |result, operation|
+                  result = ::Gapic::Operation.new result, @operations_client, options: options
+                  yield result, operation if block_given?
+                  throw :response, result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Updates the metadata of a hook.
+              #
+              # @overload update_hook(request, options = nil)
+              #   Pass arguments to `update_hook` via a request object, either of type
+              #   {::Google::Cloud::SecureSourceManager::V1::UpdateHookRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::SecureSourceManager::V1::UpdateHookRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload update_hook(update_mask: nil, hook: nil)
+              #   Pass arguments to `update_hook` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
+              #     Required. Field mask is used to specify the fields to be overwritten in the
+              #     hook resource by the update.
+              #     The fields specified in the update_mask are relative to the resource, not
+              #     the full request. A field will be overwritten if it is in the mask.
+              #     The special value "*" means full replacement.
+              #   @param hook [::Google::Cloud::SecureSourceManager::V1::Hook, ::Hash]
+              #     Required. The hook being updated.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Gapic::Operation]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Gapic::Operation]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/secure_source_manager/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::SecureSourceManager::V1::SecureSourceManager::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::SecureSourceManager::V1::UpdateHookRequest.new
+              #
+              #   # Call the update_hook method.
+              #   result = client.update_hook request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
+              def update_hook request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::SecureSourceManager::V1::UpdateHookRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.update_hook.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::SecureSourceManager::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.update_hook.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.update_hook.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @secure_source_manager_stub.update_hook request, options do |result, operation|
+                  result = ::Gapic::Operation.new result, @operations_client, options: options
+                  yield result, operation if block_given?
+                  throw :response, result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Deletes a Hook.
+              #
+              # @overload delete_hook(request, options = nil)
+              #   Pass arguments to `delete_hook` via a request object, either of type
+              #   {::Google::Cloud::SecureSourceManager::V1::DeleteHookRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::SecureSourceManager::V1::DeleteHookRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload delete_hook(name: nil)
+              #   Pass arguments to `delete_hook` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param name [::String]
+              #     Required. Name of the hook to delete.
+              #     The format is
+              #     `projects/{project_number}/locations/{location_id}/repositories/{repository_id}/hooks/{hook_id}`.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Gapic::Operation]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Gapic::Operation]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/secure_source_manager/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::SecureSourceManager::V1::SecureSourceManager::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::SecureSourceManager::V1::DeleteHookRequest.new
+              #
+              #   # Call the delete_hook method.
+              #   result = client.delete_hook request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
+              def delete_hook request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::SecureSourceManager::V1::DeleteHookRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.delete_hook.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::SecureSourceManager::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.delete_hook.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.delete_hook.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @secure_source_manager_stub.delete_hook request, options do |result, operation|
                   result = ::Gapic::Operation.new result, @operations_client, options: options
                   yield result, operation if block_given?
                   throw :response, result
@@ -1713,6 +2236,2716 @@ module Google
               end
 
               ##
+              # Creates a pull request.
+              #
+              # @overload create_pull_request(request, options = nil)
+              #   Pass arguments to `create_pull_request` via a request object, either of type
+              #   {::Google::Cloud::SecureSourceManager::V1::CreatePullRequestRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::SecureSourceManager::V1::CreatePullRequestRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload create_pull_request(parent: nil, pull_request: nil)
+              #   Pass arguments to `create_pull_request` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param parent [::String]
+              #     Required. The repository that the pull request is created from. Format:
+              #     `projects/{project_number}/locations/{location_id}/repositories/{repository_id}`
+              #   @param pull_request [::Google::Cloud::SecureSourceManager::V1::PullRequest, ::Hash]
+              #     Required. The pull request to create.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Gapic::Operation]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Gapic::Operation]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/secure_source_manager/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::SecureSourceManager::V1::SecureSourceManager::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::SecureSourceManager::V1::CreatePullRequestRequest.new
+              #
+              #   # Call the create_pull_request method.
+              #   result = client.create_pull_request request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
+              def create_pull_request request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::SecureSourceManager::V1::CreatePullRequestRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.create_pull_request.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::SecureSourceManager::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.create_pull_request.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.create_pull_request.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @secure_source_manager_stub.create_pull_request request, options do |result, operation|
+                  result = ::Gapic::Operation.new result, @operations_client, options: options
+                  yield result, operation if block_given?
+                  throw :response, result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Gets a pull request.
+              #
+              # @overload get_pull_request(request, options = nil)
+              #   Pass arguments to `get_pull_request` via a request object, either of type
+              #   {::Google::Cloud::SecureSourceManager::V1::GetPullRequestRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::SecureSourceManager::V1::GetPullRequestRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload get_pull_request(name: nil)
+              #   Pass arguments to `get_pull_request` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param name [::String]
+              #     Required. Name of the pull request to retrieve.
+              #     The format is
+              #     `projects/{project}/locations/{location}/repositories/{repository}/pullRequests/{pull_request}`.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Cloud::SecureSourceManager::V1::PullRequest]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Cloud::SecureSourceManager::V1::PullRequest]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/secure_source_manager/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::SecureSourceManager::V1::SecureSourceManager::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::SecureSourceManager::V1::GetPullRequestRequest.new
+              #
+              #   # Call the get_pull_request method.
+              #   result = client.get_pull_request request
+              #
+              #   # The returned object is of type Google::Cloud::SecureSourceManager::V1::PullRequest.
+              #   p result
+              #
+              def get_pull_request request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::SecureSourceManager::V1::GetPullRequestRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.get_pull_request.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::SecureSourceManager::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.get_pull_request.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.get_pull_request.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @secure_source_manager_stub.get_pull_request request, options do |result, operation|
+                  yield result, operation if block_given?
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Lists pull requests in a repository.
+              #
+              # @overload list_pull_requests(request, options = nil)
+              #   Pass arguments to `list_pull_requests` via a request object, either of type
+              #   {::Google::Cloud::SecureSourceManager::V1::ListPullRequestsRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::SecureSourceManager::V1::ListPullRequestsRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload list_pull_requests(parent: nil, page_size: nil, page_token: nil)
+              #   Pass arguments to `list_pull_requests` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param parent [::String]
+              #     Required. The repository in which to list pull requests. Format:
+              #     `projects/{project_number}/locations/{location_id}/repositories/{repository_id}`
+              #   @param page_size [::Integer]
+              #     Optional. Requested page size. Server may return fewer items than
+              #     requested. If unspecified, server will pick an appropriate default.
+              #   @param page_token [::String]
+              #     Optional. A token identifying a page of results the server should return.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::SecureSourceManager::V1::PullRequest>]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::SecureSourceManager::V1::PullRequest>]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/secure_source_manager/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::SecureSourceManager::V1::SecureSourceManager::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::SecureSourceManager::V1::ListPullRequestsRequest.new
+              #
+              #   # Call the list_pull_requests method.
+              #   result = client.list_pull_requests request
+              #
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
+              #     # Each element is of type ::Google::Cloud::SecureSourceManager::V1::PullRequest.
+              #     p item
+              #   end
+              #
+              def list_pull_requests request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::SecureSourceManager::V1::ListPullRequestsRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.list_pull_requests.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::SecureSourceManager::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.list_pull_requests.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.list_pull_requests.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @secure_source_manager_stub.list_pull_requests request, options do |result, operation|
+                  result = ::Gapic::Rest::PagedEnumerable.new @secure_source_manager_stub, :list_pull_requests, "pull_requests", request, result, options
+                  yield result, operation if block_given?
+                  throw :response, result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Updates a pull request.
+              #
+              # @overload update_pull_request(request, options = nil)
+              #   Pass arguments to `update_pull_request` via a request object, either of type
+              #   {::Google::Cloud::SecureSourceManager::V1::UpdatePullRequestRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::SecureSourceManager::V1::UpdatePullRequestRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload update_pull_request(pull_request: nil, update_mask: nil)
+              #   Pass arguments to `update_pull_request` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param pull_request [::Google::Cloud::SecureSourceManager::V1::PullRequest, ::Hash]
+              #     Required. The pull request to update.
+              #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
+              #     Optional. Field mask is used to specify the fields to be overwritten in the
+              #     pull request resource by the update.
+              #     The fields specified in the update_mask are relative to the resource, not
+              #     the full request. A field will be overwritten if it is in the mask.
+              #     The special value "*" means full replacement.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Gapic::Operation]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Gapic::Operation]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/secure_source_manager/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::SecureSourceManager::V1::SecureSourceManager::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::SecureSourceManager::V1::UpdatePullRequestRequest.new
+              #
+              #   # Call the update_pull_request method.
+              #   result = client.update_pull_request request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
+              def update_pull_request request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::SecureSourceManager::V1::UpdatePullRequestRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.update_pull_request.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::SecureSourceManager::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.update_pull_request.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.update_pull_request.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @secure_source_manager_stub.update_pull_request request, options do |result, operation|
+                  result = ::Gapic::Operation.new result, @operations_client, options: options
+                  yield result, operation if block_given?
+                  throw :response, result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Merges a pull request.
+              #
+              # @overload merge_pull_request(request, options = nil)
+              #   Pass arguments to `merge_pull_request` via a request object, either of type
+              #   {::Google::Cloud::SecureSourceManager::V1::MergePullRequestRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::SecureSourceManager::V1::MergePullRequestRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload merge_pull_request(name: nil)
+              #   Pass arguments to `merge_pull_request` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param name [::String]
+              #     Required. The pull request to merge.
+              #     Format:
+              #     `projects/{project_number}/locations/{location_id}/repositories/{repository_id}/pullRequests/{pull_request_id}`
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Gapic::Operation]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Gapic::Operation]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/secure_source_manager/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::SecureSourceManager::V1::SecureSourceManager::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::SecureSourceManager::V1::MergePullRequestRequest.new
+              #
+              #   # Call the merge_pull_request method.
+              #   result = client.merge_pull_request request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
+              def merge_pull_request request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::SecureSourceManager::V1::MergePullRequestRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.merge_pull_request.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::SecureSourceManager::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.merge_pull_request.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.merge_pull_request.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @secure_source_manager_stub.merge_pull_request request, options do |result, operation|
+                  result = ::Gapic::Operation.new result, @operations_client, options: options
+                  yield result, operation if block_given?
+                  throw :response, result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Opens a pull request.
+              #
+              # @overload open_pull_request(request, options = nil)
+              #   Pass arguments to `open_pull_request` via a request object, either of type
+              #   {::Google::Cloud::SecureSourceManager::V1::OpenPullRequestRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::SecureSourceManager::V1::OpenPullRequestRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload open_pull_request(name: nil)
+              #   Pass arguments to `open_pull_request` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param name [::String]
+              #     Required. The pull request to open.
+              #     Format:
+              #     `projects/{project_number}/locations/{location_id}/repositories/{repository_id}/pullRequests/{pull_request_id}`
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Gapic::Operation]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Gapic::Operation]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/secure_source_manager/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::SecureSourceManager::V1::SecureSourceManager::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::SecureSourceManager::V1::OpenPullRequestRequest.new
+              #
+              #   # Call the open_pull_request method.
+              #   result = client.open_pull_request request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
+              def open_pull_request request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::SecureSourceManager::V1::OpenPullRequestRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.open_pull_request.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::SecureSourceManager::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.open_pull_request.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.open_pull_request.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @secure_source_manager_stub.open_pull_request request, options do |result, operation|
+                  result = ::Gapic::Operation.new result, @operations_client, options: options
+                  yield result, operation if block_given?
+                  throw :response, result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Closes a pull request without merging.
+              #
+              # @overload close_pull_request(request, options = nil)
+              #   Pass arguments to `close_pull_request` via a request object, either of type
+              #   {::Google::Cloud::SecureSourceManager::V1::ClosePullRequestRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::SecureSourceManager::V1::ClosePullRequestRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload close_pull_request(name: nil)
+              #   Pass arguments to `close_pull_request` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param name [::String]
+              #     Required. The pull request to close.
+              #     Format:
+              #     `projects/{project_number}/locations/{location_id}/repositories/{repository_id}/pullRequests/{pull_request_id}`
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Gapic::Operation]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Gapic::Operation]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/secure_source_manager/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::SecureSourceManager::V1::SecureSourceManager::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::SecureSourceManager::V1::ClosePullRequestRequest.new
+              #
+              #   # Call the close_pull_request method.
+              #   result = client.close_pull_request request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
+              def close_pull_request request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::SecureSourceManager::V1::ClosePullRequestRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.close_pull_request.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::SecureSourceManager::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.close_pull_request.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.close_pull_request.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @secure_source_manager_stub.close_pull_request request, options do |result, operation|
+                  result = ::Gapic::Operation.new result, @operations_client, options: options
+                  yield result, operation if block_given?
+                  throw :response, result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Lists a pull request's file diffs.
+              #
+              # @overload list_pull_request_file_diffs(request, options = nil)
+              #   Pass arguments to `list_pull_request_file_diffs` via a request object, either of type
+              #   {::Google::Cloud::SecureSourceManager::V1::ListPullRequestFileDiffsRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::SecureSourceManager::V1::ListPullRequestFileDiffsRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload list_pull_request_file_diffs(name: nil, page_size: nil, page_token: nil)
+              #   Pass arguments to `list_pull_request_file_diffs` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param name [::String]
+              #     Required. The pull request to list file diffs for.
+              #     Format:
+              #     `projects/{project_number}/locations/{location_id}/repositories/{repository_id}/pullRequests/{pull_request_id}`
+              #   @param page_size [::Integer]
+              #     Optional. Requested page size. Server may return fewer items than
+              #     requested. If unspecified, server will pick an appropriate default.
+              #   @param page_token [::String]
+              #     Optional. A token identifying a page of results the server should return.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::SecureSourceManager::V1::FileDiff>]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::SecureSourceManager::V1::FileDiff>]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/secure_source_manager/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::SecureSourceManager::V1::SecureSourceManager::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::SecureSourceManager::V1::ListPullRequestFileDiffsRequest.new
+              #
+              #   # Call the list_pull_request_file_diffs method.
+              #   result = client.list_pull_request_file_diffs request
+              #
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
+              #     # Each element is of type ::Google::Cloud::SecureSourceManager::V1::FileDiff.
+              #     p item
+              #   end
+              #
+              def list_pull_request_file_diffs request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::SecureSourceManager::V1::ListPullRequestFileDiffsRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.list_pull_request_file_diffs.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::SecureSourceManager::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.list_pull_request_file_diffs.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.list_pull_request_file_diffs.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @secure_source_manager_stub.list_pull_request_file_diffs request, options do |result, operation|
+                  result = ::Gapic::Rest::PagedEnumerable.new @secure_source_manager_stub, :list_pull_request_file_diffs, "file_diffs", request, result, options
+                  yield result, operation if block_given?
+                  throw :response, result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Fetches a tree from a repository.
+              #
+              # @overload fetch_tree(request, options = nil)
+              #   Pass arguments to `fetch_tree` via a request object, either of type
+              #   {::Google::Cloud::SecureSourceManager::V1::FetchTreeRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::SecureSourceManager::V1::FetchTreeRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload fetch_tree(repository: nil, ref: nil, recursive: nil, page_size: nil, page_token: nil)
+              #   Pass arguments to `fetch_tree` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param repository [::String]
+              #     Required. The format is
+              #     `projects/{project_number}/locations/{location_id}/repositories/{repository_id}`.
+              #     Specifies the repository to fetch the tree from.
+              #   @param ref [::String]
+              #     Optional. `ref` can be a SHA-1 hash, a branch name, or a tag. Specifies
+              #     which tree to fetch. If not specified, the default branch will be used.
+              #   @param recursive [::Boolean]
+              #     Optional. If true, include all subfolders and their files in the response.
+              #     If false, only the immediate children are returned.
+              #   @param page_size [::Integer]
+              #     Optional. Requested page size.  Server may return fewer items than
+              #     requested. If unspecified, at most 10,000 items will be returned.
+              #   @param page_token [::String]
+              #     Optional. A token identifying a page of results the server should return.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::SecureSourceManager::V1::TreeEntry>]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::SecureSourceManager::V1::TreeEntry>]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/secure_source_manager/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::SecureSourceManager::V1::SecureSourceManager::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::SecureSourceManager::V1::FetchTreeRequest.new
+              #
+              #   # Call the fetch_tree method.
+              #   result = client.fetch_tree request
+              #
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
+              #     # Each element is of type ::Google::Cloud::SecureSourceManager::V1::TreeEntry.
+              #     p item
+              #   end
+              #
+              def fetch_tree request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::SecureSourceManager::V1::FetchTreeRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.fetch_tree.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::SecureSourceManager::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.fetch_tree.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.fetch_tree.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @secure_source_manager_stub.fetch_tree request, options do |result, operation|
+                  result = ::Gapic::Rest::PagedEnumerable.new @secure_source_manager_stub, :fetch_tree, "tree_entries", request, result, options
+                  yield result, operation if block_given?
+                  throw :response, result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Fetches a blob from a repository.
+              #
+              # @overload fetch_blob(request, options = nil)
+              #   Pass arguments to `fetch_blob` via a request object, either of type
+              #   {::Google::Cloud::SecureSourceManager::V1::FetchBlobRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::SecureSourceManager::V1::FetchBlobRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload fetch_blob(repository: nil, sha: nil)
+              #   Pass arguments to `fetch_blob` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param repository [::String]
+              #     Required. The format is
+              #     `projects/{project_number}/locations/{location_id}/repositories/{repository_id}`.
+              #     Specifies the repository containing the blob.
+              #   @param sha [::String]
+              #     Required. The SHA-1 hash of the blob to retrieve.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Cloud::SecureSourceManager::V1::FetchBlobResponse]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Cloud::SecureSourceManager::V1::FetchBlobResponse]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/secure_source_manager/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::SecureSourceManager::V1::SecureSourceManager::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::SecureSourceManager::V1::FetchBlobRequest.new
+              #
+              #   # Call the fetch_blob method.
+              #   result = client.fetch_blob request
+              #
+              #   # The returned object is of type Google::Cloud::SecureSourceManager::V1::FetchBlobResponse.
+              #   p result
+              #
+              def fetch_blob request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::SecureSourceManager::V1::FetchBlobRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.fetch_blob.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::SecureSourceManager::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.fetch_blob.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.fetch_blob.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @secure_source_manager_stub.fetch_blob request, options do |result, operation|
+                  yield result, operation if block_given?
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Creates an issue.
+              #
+              # @overload create_issue(request, options = nil)
+              #   Pass arguments to `create_issue` via a request object, either of type
+              #   {::Google::Cloud::SecureSourceManager::V1::CreateIssueRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::SecureSourceManager::V1::CreateIssueRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload create_issue(parent: nil, issue: nil)
+              #   Pass arguments to `create_issue` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param parent [::String]
+              #     Required. The repository in which to create the issue. Format:
+              #     `projects/{project_number}/locations/{location_id}/repositories/{repository_id}`
+              #   @param issue [::Google::Cloud::SecureSourceManager::V1::Issue, ::Hash]
+              #     Required. The issue to create.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Gapic::Operation]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Gapic::Operation]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/secure_source_manager/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::SecureSourceManager::V1::SecureSourceManager::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::SecureSourceManager::V1::CreateIssueRequest.new
+              #
+              #   # Call the create_issue method.
+              #   result = client.create_issue request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
+              def create_issue request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::SecureSourceManager::V1::CreateIssueRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.create_issue.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::SecureSourceManager::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.create_issue.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.create_issue.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @secure_source_manager_stub.create_issue request, options do |result, operation|
+                  result = ::Gapic::Operation.new result, @operations_client, options: options
+                  yield result, operation if block_given?
+                  throw :response, result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Gets an issue.
+              #
+              # @overload get_issue(request, options = nil)
+              #   Pass arguments to `get_issue` via a request object, either of type
+              #   {::Google::Cloud::SecureSourceManager::V1::GetIssueRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::SecureSourceManager::V1::GetIssueRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload get_issue(name: nil)
+              #   Pass arguments to `get_issue` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param name [::String]
+              #     Required. Name of the issue to retrieve.
+              #     The format is
+              #     `projects/{project}/locations/{location}/repositories/{repository}/issues/{issue_id}`.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Cloud::SecureSourceManager::V1::Issue]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Cloud::SecureSourceManager::V1::Issue]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/secure_source_manager/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::SecureSourceManager::V1::SecureSourceManager::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::SecureSourceManager::V1::GetIssueRequest.new
+              #
+              #   # Call the get_issue method.
+              #   result = client.get_issue request
+              #
+              #   # The returned object is of type Google::Cloud::SecureSourceManager::V1::Issue.
+              #   p result
+              #
+              def get_issue request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::SecureSourceManager::V1::GetIssueRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.get_issue.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::SecureSourceManager::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.get_issue.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.get_issue.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @secure_source_manager_stub.get_issue request, options do |result, operation|
+                  yield result, operation if block_given?
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Lists issues in a repository.
+              #
+              # @overload list_issues(request, options = nil)
+              #   Pass arguments to `list_issues` via a request object, either of type
+              #   {::Google::Cloud::SecureSourceManager::V1::ListIssuesRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::SecureSourceManager::V1::ListIssuesRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload list_issues(parent: nil, page_size: nil, page_token: nil, filter: nil)
+              #   Pass arguments to `list_issues` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param parent [::String]
+              #     Required. The repository in which to list issues. Format:
+              #     `projects/{project_number}/locations/{location_id}/repositories/{repository_id}`
+              #   @param page_size [::Integer]
+              #     Optional. Requested page size. Server may return fewer items than
+              #     requested. If unspecified, server will pick an appropriate default.
+              #   @param page_token [::String]
+              #     Optional. A token identifying a page of results the server should return.
+              #   @param filter [::String]
+              #     Optional. Used to filter the resulting issues list.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::SecureSourceManager::V1::Issue>]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::SecureSourceManager::V1::Issue>]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/secure_source_manager/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::SecureSourceManager::V1::SecureSourceManager::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::SecureSourceManager::V1::ListIssuesRequest.new
+              #
+              #   # Call the list_issues method.
+              #   result = client.list_issues request
+              #
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
+              #     # Each element is of type ::Google::Cloud::SecureSourceManager::V1::Issue.
+              #     p item
+              #   end
+              #
+              def list_issues request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::SecureSourceManager::V1::ListIssuesRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.list_issues.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::SecureSourceManager::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.list_issues.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.list_issues.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @secure_source_manager_stub.list_issues request, options do |result, operation|
+                  result = ::Gapic::Rest::PagedEnumerable.new @secure_source_manager_stub, :list_issues, "issues", request, result, options
+                  yield result, operation if block_given?
+                  throw :response, result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Updates a issue.
+              #
+              # @overload update_issue(request, options = nil)
+              #   Pass arguments to `update_issue` via a request object, either of type
+              #   {::Google::Cloud::SecureSourceManager::V1::UpdateIssueRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::SecureSourceManager::V1::UpdateIssueRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload update_issue(issue: nil, update_mask: nil)
+              #   Pass arguments to `update_issue` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param issue [::Google::Cloud::SecureSourceManager::V1::Issue, ::Hash]
+              #     Required. The issue to update.
+              #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
+              #     Optional. Field mask is used to specify the fields to be overwritten in the
+              #     issue resource by the update.
+              #     The fields specified in the update_mask are relative to the resource, not
+              #     the full request. A field will be overwritten if it is in the mask.
+              #     The special value "*" means full replacement.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Gapic::Operation]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Gapic::Operation]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/secure_source_manager/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::SecureSourceManager::V1::SecureSourceManager::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::SecureSourceManager::V1::UpdateIssueRequest.new
+              #
+              #   # Call the update_issue method.
+              #   result = client.update_issue request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
+              def update_issue request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::SecureSourceManager::V1::UpdateIssueRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.update_issue.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::SecureSourceManager::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.update_issue.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.update_issue.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @secure_source_manager_stub.update_issue request, options do |result, operation|
+                  result = ::Gapic::Operation.new result, @operations_client, options: options
+                  yield result, operation if block_given?
+                  throw :response, result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Deletes an issue.
+              #
+              # @overload delete_issue(request, options = nil)
+              #   Pass arguments to `delete_issue` via a request object, either of type
+              #   {::Google::Cloud::SecureSourceManager::V1::DeleteIssueRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::SecureSourceManager::V1::DeleteIssueRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload delete_issue(name: nil, etag: nil)
+              #   Pass arguments to `delete_issue` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param name [::String]
+              #     Required. Name of the issue to delete.
+              #     The format is
+              #     `projects/{project_number}/locations/{location_id}/repositories/{repository_id}/issues/{issue_id}`.
+              #   @param etag [::String]
+              #     Optional. The current etag of the issue.
+              #     If the etag is provided and does not match the current etag of the issue,
+              #     deletion will be blocked and an ABORTED error will be returned.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Gapic::Operation]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Gapic::Operation]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/secure_source_manager/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::SecureSourceManager::V1::SecureSourceManager::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::SecureSourceManager::V1::DeleteIssueRequest.new
+              #
+              #   # Call the delete_issue method.
+              #   result = client.delete_issue request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
+              def delete_issue request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::SecureSourceManager::V1::DeleteIssueRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.delete_issue.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::SecureSourceManager::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.delete_issue.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.delete_issue.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @secure_source_manager_stub.delete_issue request, options do |result, operation|
+                  result = ::Gapic::Operation.new result, @operations_client, options: options
+                  yield result, operation if block_given?
+                  throw :response, result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Opens an issue.
+              #
+              # @overload open_issue(request, options = nil)
+              #   Pass arguments to `open_issue` via a request object, either of type
+              #   {::Google::Cloud::SecureSourceManager::V1::OpenIssueRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::SecureSourceManager::V1::OpenIssueRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload open_issue(name: nil, etag: nil)
+              #   Pass arguments to `open_issue` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param name [::String]
+              #     Required. Name of the issue to open.
+              #     The format is
+              #     `projects/{project_number}/locations/{location_id}/repositories/{repository_id}/issues/{issue_id}`.
+              #   @param etag [::String]
+              #     Optional. The current etag of the issue.
+              #     If the etag is provided and does not match the current etag of the issue,
+              #     opening will be blocked and an ABORTED error will be returned.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Gapic::Operation]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Gapic::Operation]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/secure_source_manager/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::SecureSourceManager::V1::SecureSourceManager::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::SecureSourceManager::V1::OpenIssueRequest.new
+              #
+              #   # Call the open_issue method.
+              #   result = client.open_issue request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
+              def open_issue request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::SecureSourceManager::V1::OpenIssueRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.open_issue.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::SecureSourceManager::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.open_issue.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.open_issue.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @secure_source_manager_stub.open_issue request, options do |result, operation|
+                  result = ::Gapic::Operation.new result, @operations_client, options: options
+                  yield result, operation if block_given?
+                  throw :response, result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Closes an issue.
+              #
+              # @overload close_issue(request, options = nil)
+              #   Pass arguments to `close_issue` via a request object, either of type
+              #   {::Google::Cloud::SecureSourceManager::V1::CloseIssueRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::SecureSourceManager::V1::CloseIssueRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload close_issue(name: nil, etag: nil)
+              #   Pass arguments to `close_issue` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param name [::String]
+              #     Required. Name of the issue to close.
+              #     The format is
+              #     `projects/{project_number}/locations/{location_id}/repositories/{repository_id}/issues/{issue_id}`.
+              #   @param etag [::String]
+              #     Optional. The current etag of the issue.
+              #     If the etag is provided and does not match the current etag of the issue,
+              #     closing will be blocked and an ABORTED error will be returned.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Gapic::Operation]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Gapic::Operation]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/secure_source_manager/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::SecureSourceManager::V1::SecureSourceManager::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::SecureSourceManager::V1::CloseIssueRequest.new
+              #
+              #   # Call the close_issue method.
+              #   result = client.close_issue request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
+              def close_issue request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::SecureSourceManager::V1::CloseIssueRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.close_issue.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::SecureSourceManager::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.close_issue.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.close_issue.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @secure_source_manager_stub.close_issue request, options do |result, operation|
+                  result = ::Gapic::Operation.new result, @operations_client, options: options
+                  yield result, operation if block_given?
+                  throw :response, result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Gets a pull request comment.
+              #
+              # @overload get_pull_request_comment(request, options = nil)
+              #   Pass arguments to `get_pull_request_comment` via a request object, either of type
+              #   {::Google::Cloud::SecureSourceManager::V1::GetPullRequestCommentRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::SecureSourceManager::V1::GetPullRequestCommentRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload get_pull_request_comment(name: nil)
+              #   Pass arguments to `get_pull_request_comment` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param name [::String]
+              #     Required. Name of the pull request comment to retrieve.
+              #     The format is
+              #     `projects/{project_number}/locations/{location_id}/repositories/{repository_id}/pullRequests/{pull_request_id}/pullRequestComments/{comment_id}`.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Cloud::SecureSourceManager::V1::PullRequestComment]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Cloud::SecureSourceManager::V1::PullRequestComment]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/secure_source_manager/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::SecureSourceManager::V1::SecureSourceManager::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::SecureSourceManager::V1::GetPullRequestCommentRequest.new
+              #
+              #   # Call the get_pull_request_comment method.
+              #   result = client.get_pull_request_comment request
+              #
+              #   # The returned object is of type Google::Cloud::SecureSourceManager::V1::PullRequestComment.
+              #   p result
+              #
+              def get_pull_request_comment request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::SecureSourceManager::V1::GetPullRequestCommentRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.get_pull_request_comment.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::SecureSourceManager::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.get_pull_request_comment.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.get_pull_request_comment.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @secure_source_manager_stub.get_pull_request_comment request, options do |result, operation|
+                  yield result, operation if block_given?
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Lists pull request comments.
+              #
+              # @overload list_pull_request_comments(request, options = nil)
+              #   Pass arguments to `list_pull_request_comments` via a request object, either of type
+              #   {::Google::Cloud::SecureSourceManager::V1::ListPullRequestCommentsRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::SecureSourceManager::V1::ListPullRequestCommentsRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload list_pull_request_comments(parent: nil, page_size: nil, page_token: nil)
+              #   Pass arguments to `list_pull_request_comments` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param parent [::String]
+              #     Required. The pull request in which to list pull request comments. Format:
+              #     `projects/{project_number}/locations/{location_id}/repositories/{repository_id}/pullRequests/{pull_request_id}`
+              #   @param page_size [::Integer]
+              #     Optional. Requested page size. If unspecified, at most 100 pull request
+              #     comments will be returned. The maximum value is 100; values above 100 will
+              #     be coerced to 100.
+              #   @param page_token [::String]
+              #     Optional. A token identifying a page of results the server should return.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::SecureSourceManager::V1::PullRequestComment>]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::SecureSourceManager::V1::PullRequestComment>]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/secure_source_manager/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::SecureSourceManager::V1::SecureSourceManager::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::SecureSourceManager::V1::ListPullRequestCommentsRequest.new
+              #
+              #   # Call the list_pull_request_comments method.
+              #   result = client.list_pull_request_comments request
+              #
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
+              #     # Each element is of type ::Google::Cloud::SecureSourceManager::V1::PullRequestComment.
+              #     p item
+              #   end
+              #
+              def list_pull_request_comments request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::SecureSourceManager::V1::ListPullRequestCommentsRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.list_pull_request_comments.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::SecureSourceManager::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.list_pull_request_comments.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.list_pull_request_comments.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @secure_source_manager_stub.list_pull_request_comments request, options do |result, operation|
+                  result = ::Gapic::Rest::PagedEnumerable.new @secure_source_manager_stub, :list_pull_request_comments, "pull_request_comments", request, result, options
+                  yield result, operation if block_given?
+                  throw :response, result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Creates a pull request comment. This function is used to create a single
+              # PullRequestComment of type Comment, or a single PullRequestComment of type
+              # Code that's replying to another PullRequestComment of type Code. Use
+              # BatchCreatePullRequestComments to create multiple PullRequestComments for
+              # code reviews.
+              #
+              # @overload create_pull_request_comment(request, options = nil)
+              #   Pass arguments to `create_pull_request_comment` via a request object, either of type
+              #   {::Google::Cloud::SecureSourceManager::V1::CreatePullRequestCommentRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::SecureSourceManager::V1::CreatePullRequestCommentRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload create_pull_request_comment(parent: nil, pull_request_comment: nil)
+              #   Pass arguments to `create_pull_request_comment` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param parent [::String]
+              #     Required. The pull request in which to create the pull request comment.
+              #     Format:
+              #     `projects/{project_number}/locations/{location_id}/repositories/{repository_id}/pullRequests/{pull_request_id}`
+              #   @param pull_request_comment [::Google::Cloud::SecureSourceManager::V1::PullRequestComment, ::Hash]
+              #     Required. The pull request comment to create.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Gapic::Operation]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Gapic::Operation]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/secure_source_manager/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::SecureSourceManager::V1::SecureSourceManager::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::SecureSourceManager::V1::CreatePullRequestCommentRequest.new
+              #
+              #   # Call the create_pull_request_comment method.
+              #   result = client.create_pull_request_comment request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
+              def create_pull_request_comment request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::SecureSourceManager::V1::CreatePullRequestCommentRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.create_pull_request_comment.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::SecureSourceManager::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.create_pull_request_comment.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.create_pull_request_comment.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @secure_source_manager_stub.create_pull_request_comment request, options do |result, operation|
+                  result = ::Gapic::Operation.new result, @operations_client, options: options
+                  yield result, operation if block_given?
+                  throw :response, result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Updates a pull request comment.
+              #
+              # @overload update_pull_request_comment(request, options = nil)
+              #   Pass arguments to `update_pull_request_comment` via a request object, either of type
+              #   {::Google::Cloud::SecureSourceManager::V1::UpdatePullRequestCommentRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::SecureSourceManager::V1::UpdatePullRequestCommentRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload update_pull_request_comment(pull_request_comment: nil, update_mask: nil)
+              #   Pass arguments to `update_pull_request_comment` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param pull_request_comment [::Google::Cloud::SecureSourceManager::V1::PullRequestComment, ::Hash]
+              #     Required. The pull request comment to update.
+              #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
+              #     Optional. Field mask is used to specify the fields to be overwritten in the
+              #     pull request comment resource by the update. Updatable fields are
+              #     `body`.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Gapic::Operation]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Gapic::Operation]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/secure_source_manager/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::SecureSourceManager::V1::SecureSourceManager::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::SecureSourceManager::V1::UpdatePullRequestCommentRequest.new
+              #
+              #   # Call the update_pull_request_comment method.
+              #   result = client.update_pull_request_comment request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
+              def update_pull_request_comment request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::SecureSourceManager::V1::UpdatePullRequestCommentRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.update_pull_request_comment.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::SecureSourceManager::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.update_pull_request_comment.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.update_pull_request_comment.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @secure_source_manager_stub.update_pull_request_comment request, options do |result, operation|
+                  result = ::Gapic::Operation.new result, @operations_client, options: options
+                  yield result, operation if block_given?
+                  throw :response, result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Deletes a pull request comment.
+              #
+              # @overload delete_pull_request_comment(request, options = nil)
+              #   Pass arguments to `delete_pull_request_comment` via a request object, either of type
+              #   {::Google::Cloud::SecureSourceManager::V1::DeletePullRequestCommentRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::SecureSourceManager::V1::DeletePullRequestCommentRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload delete_pull_request_comment(name: nil)
+              #   Pass arguments to `delete_pull_request_comment` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param name [::String]
+              #     Required. Name of the pull request comment to delete.
+              #     The format is
+              #     `projects/{project_number}/locations/{location_id}/repositories/{repository_id}/pullRequests/{pull_request_id}/pullRequestComments/{comment_id}`.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Gapic::Operation]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Gapic::Operation]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/secure_source_manager/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::SecureSourceManager::V1::SecureSourceManager::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::SecureSourceManager::V1::DeletePullRequestCommentRequest.new
+              #
+              #   # Call the delete_pull_request_comment method.
+              #   result = client.delete_pull_request_comment request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
+              def delete_pull_request_comment request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::SecureSourceManager::V1::DeletePullRequestCommentRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.delete_pull_request_comment.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::SecureSourceManager::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.delete_pull_request_comment.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.delete_pull_request_comment.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @secure_source_manager_stub.delete_pull_request_comment request, options do |result, operation|
+                  result = ::Gapic::Operation.new result, @operations_client, options: options
+                  yield result, operation if block_given?
+                  throw :response, result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Batch creates pull request comments. This function is used to create
+              # multiple PullRequestComments for code review. There needs to be exactly one
+              # PullRequestComment of type Review, and at most 100 PullRequestComments of
+              # type Code per request. The Postition of the code comments must be unique
+              # within the request.
+              #
+              # @overload batch_create_pull_request_comments(request, options = nil)
+              #   Pass arguments to `batch_create_pull_request_comments` via a request object, either of type
+              #   {::Google::Cloud::SecureSourceManager::V1::BatchCreatePullRequestCommentsRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::SecureSourceManager::V1::BatchCreatePullRequestCommentsRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload batch_create_pull_request_comments(parent: nil, requests: nil)
+              #   Pass arguments to `batch_create_pull_request_comments` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param parent [::String]
+              #     Required. The pull request in which to create the pull request comments.
+              #     Format:
+              #     `projects/{project_number}/locations/{location_id}/repositories/{repository_id}/pullRequests/{pull_request_id}`
+              #   @param requests [::Array<::Google::Cloud::SecureSourceManager::V1::CreatePullRequestCommentRequest, ::Hash>]
+              #     Required. The request message specifying the resources to create. There
+              #     should be exactly one CreatePullRequestCommentRequest with CommentDetail
+              #     being REVIEW in the list, and no more than 100
+              #     CreatePullRequestCommentRequests with CommentDetail being CODE in the list
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Gapic::Operation]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Gapic::Operation]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/secure_source_manager/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::SecureSourceManager::V1::SecureSourceManager::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::SecureSourceManager::V1::BatchCreatePullRequestCommentsRequest.new
+              #
+              #   # Call the batch_create_pull_request_comments method.
+              #   result = client.batch_create_pull_request_comments request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
+              def batch_create_pull_request_comments request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::SecureSourceManager::V1::BatchCreatePullRequestCommentsRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.batch_create_pull_request_comments.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::SecureSourceManager::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.batch_create_pull_request_comments.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.batch_create_pull_request_comments.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @secure_source_manager_stub.batch_create_pull_request_comments request, options do |result, operation|
+                  result = ::Gapic::Operation.new result, @operations_client, options: options
+                  yield result, operation if block_given?
+                  throw :response, result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Resolves pull request comments. A list of PullRequestComment names must be
+              # provided. The PullRequestComment names must be in the same conversation
+              # thread. If auto_fill is set, all comments in the conversation thread will
+              # be resolved.
+              #
+              # @overload resolve_pull_request_comments(request, options = nil)
+              #   Pass arguments to `resolve_pull_request_comments` via a request object, either of type
+              #   {::Google::Cloud::SecureSourceManager::V1::ResolvePullRequestCommentsRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::SecureSourceManager::V1::ResolvePullRequestCommentsRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload resolve_pull_request_comments(parent: nil, names: nil, auto_fill: nil)
+              #   Pass arguments to `resolve_pull_request_comments` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param parent [::String]
+              #     Required. The pull request in which to resolve the pull request comments.
+              #     Format:
+              #     `projects/{project_number}/locations/{location_id}/repositories/{repository_id}/pullRequests/{pull_request_id}`
+              #   @param names [::Array<::String>]
+              #     Required. The names of the pull request comments to resolve. Format:
+              #     `projects/{project_number}/locations/{location_id}/repositories/{repository_id}/pullRequests/{pull_request_id}/pullRequestComments/{comment_id}`
+              #     Only comments from the same threads are allowed in the same request.
+              #   @param auto_fill [::Boolean]
+              #     Optional. If set, at least one comment in a thread is required, rest of the
+              #     comments in the same thread will be automatically updated to resolved. If
+              #     unset, all comments in the same thread need be present.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Gapic::Operation]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Gapic::Operation]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/secure_source_manager/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::SecureSourceManager::V1::SecureSourceManager::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::SecureSourceManager::V1::ResolvePullRequestCommentsRequest.new
+              #
+              #   # Call the resolve_pull_request_comments method.
+              #   result = client.resolve_pull_request_comments request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
+              def resolve_pull_request_comments request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::SecureSourceManager::V1::ResolvePullRequestCommentsRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.resolve_pull_request_comments.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::SecureSourceManager::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.resolve_pull_request_comments.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.resolve_pull_request_comments.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @secure_source_manager_stub.resolve_pull_request_comments request, options do |result, operation|
+                  result = ::Gapic::Operation.new result, @operations_client, options: options
+                  yield result, operation if block_given?
+                  throw :response, result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Unresolves pull request comments. A list of PullRequestComment names must
+              # be provided. The PullRequestComment names must be in the same conversation
+              # thread. If auto_fill is set, all comments in the conversation thread will
+              # be unresolved.
+              #
+              # @overload unresolve_pull_request_comments(request, options = nil)
+              #   Pass arguments to `unresolve_pull_request_comments` via a request object, either of type
+              #   {::Google::Cloud::SecureSourceManager::V1::UnresolvePullRequestCommentsRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::SecureSourceManager::V1::UnresolvePullRequestCommentsRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload unresolve_pull_request_comments(parent: nil, names: nil, auto_fill: nil)
+              #   Pass arguments to `unresolve_pull_request_comments` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param parent [::String]
+              #     Required. The pull request in which to resolve the pull request comments.
+              #     Format:
+              #     `projects/{project_number}/locations/{location_id}/repositories/{repository_id}/pullRequests/{pull_request_id}`
+              #   @param names [::Array<::String>]
+              #     Required. The names of the pull request comments to unresolve. Format:
+              #     `projects/{project_number}/locations/{location_id}/repositories/{repository_id}/pullRequests/{pull_request_id}/pullRequestComments/{comment_id}`
+              #     Only comments from the same threads are allowed in the same request.
+              #   @param auto_fill [::Boolean]
+              #     Optional. If set, at least one comment in a thread is required, rest of the
+              #     comments in the same thread will be automatically updated to unresolved. If
+              #     unset, all comments in the same thread need be present.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Gapic::Operation]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Gapic::Operation]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/secure_source_manager/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::SecureSourceManager::V1::SecureSourceManager::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::SecureSourceManager::V1::UnresolvePullRequestCommentsRequest.new
+              #
+              #   # Call the unresolve_pull_request_comments method.
+              #   result = client.unresolve_pull_request_comments request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
+              def unresolve_pull_request_comments request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::SecureSourceManager::V1::UnresolvePullRequestCommentsRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.unresolve_pull_request_comments.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::SecureSourceManager::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.unresolve_pull_request_comments.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.unresolve_pull_request_comments.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @secure_source_manager_stub.unresolve_pull_request_comments request, options do |result, operation|
+                  result = ::Gapic::Operation.new result, @operations_client, options: options
+                  yield result, operation if block_given?
+                  throw :response, result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Creates an issue comment.
+              #
+              # @overload create_issue_comment(request, options = nil)
+              #   Pass arguments to `create_issue_comment` via a request object, either of type
+              #   {::Google::Cloud::SecureSourceManager::V1::CreateIssueCommentRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::SecureSourceManager::V1::CreateIssueCommentRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload create_issue_comment(parent: nil, issue_comment: nil)
+              #   Pass arguments to `create_issue_comment` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param parent [::String]
+              #     Required. The issue in which to create the issue comment. Format:
+              #     `projects/{project_number}/locations/{location_id}/repositories/{repository_id}/issues/{issue_id}`
+              #   @param issue_comment [::Google::Cloud::SecureSourceManager::V1::IssueComment, ::Hash]
+              #     Required. The issue comment to create.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Gapic::Operation]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Gapic::Operation]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/secure_source_manager/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::SecureSourceManager::V1::SecureSourceManager::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::SecureSourceManager::V1::CreateIssueCommentRequest.new
+              #
+              #   # Call the create_issue_comment method.
+              #   result = client.create_issue_comment request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
+              def create_issue_comment request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::SecureSourceManager::V1::CreateIssueCommentRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.create_issue_comment.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::SecureSourceManager::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.create_issue_comment.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.create_issue_comment.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @secure_source_manager_stub.create_issue_comment request, options do |result, operation|
+                  result = ::Gapic::Operation.new result, @operations_client, options: options
+                  yield result, operation if block_given?
+                  throw :response, result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Gets an issue comment.
+              #
+              # @overload get_issue_comment(request, options = nil)
+              #   Pass arguments to `get_issue_comment` via a request object, either of type
+              #   {::Google::Cloud::SecureSourceManager::V1::GetIssueCommentRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::SecureSourceManager::V1::GetIssueCommentRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload get_issue_comment(name: nil)
+              #   Pass arguments to `get_issue_comment` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param name [::String]
+              #     Required. Name of the issue comment to retrieve.
+              #     The format is
+              #     `projects/{project}/locations/{location}/repositories/{repository}/issues/{issue_id}/issueComments/{comment_id}`.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Cloud::SecureSourceManager::V1::IssueComment]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Cloud::SecureSourceManager::V1::IssueComment]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/secure_source_manager/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::SecureSourceManager::V1::SecureSourceManager::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::SecureSourceManager::V1::GetIssueCommentRequest.new
+              #
+              #   # Call the get_issue_comment method.
+              #   result = client.get_issue_comment request
+              #
+              #   # The returned object is of type Google::Cloud::SecureSourceManager::V1::IssueComment.
+              #   p result
+              #
+              def get_issue_comment request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::SecureSourceManager::V1::GetIssueCommentRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.get_issue_comment.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::SecureSourceManager::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.get_issue_comment.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.get_issue_comment.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @secure_source_manager_stub.get_issue_comment request, options do |result, operation|
+                  yield result, operation if block_given?
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Lists comments in an issue.
+              #
+              # @overload list_issue_comments(request, options = nil)
+              #   Pass arguments to `list_issue_comments` via a request object, either of type
+              #   {::Google::Cloud::SecureSourceManager::V1::ListIssueCommentsRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::SecureSourceManager::V1::ListIssueCommentsRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload list_issue_comments(parent: nil, page_size: nil, page_token: nil)
+              #   Pass arguments to `list_issue_comments` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param parent [::String]
+              #     Required. The issue in which to list the comments. Format:
+              #     `projects/{project_number}/locations/{location_id}/repositories/{repository_id}/issues/{issue_id}`
+              #   @param page_size [::Integer]
+              #     Optional. Requested page size. Server may return fewer items than
+              #     requested. If unspecified, server will pick an appropriate default.
+              #   @param page_token [::String]
+              #     Optional. A token identifying a page of results the server should return.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::SecureSourceManager::V1::IssueComment>]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::SecureSourceManager::V1::IssueComment>]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/secure_source_manager/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::SecureSourceManager::V1::SecureSourceManager::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::SecureSourceManager::V1::ListIssueCommentsRequest.new
+              #
+              #   # Call the list_issue_comments method.
+              #   result = client.list_issue_comments request
+              #
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
+              #     # Each element is of type ::Google::Cloud::SecureSourceManager::V1::IssueComment.
+              #     p item
+              #   end
+              #
+              def list_issue_comments request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::SecureSourceManager::V1::ListIssueCommentsRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.list_issue_comments.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::SecureSourceManager::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.list_issue_comments.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.list_issue_comments.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @secure_source_manager_stub.list_issue_comments request, options do |result, operation|
+                  result = ::Gapic::Rest::PagedEnumerable.new @secure_source_manager_stub, :list_issue_comments, "issue_comments", request, result, options
+                  yield result, operation if block_given?
+                  throw :response, result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Updates an issue comment.
+              #
+              # @overload update_issue_comment(request, options = nil)
+              #   Pass arguments to `update_issue_comment` via a request object, either of type
+              #   {::Google::Cloud::SecureSourceManager::V1::UpdateIssueCommentRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::SecureSourceManager::V1::UpdateIssueCommentRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload update_issue_comment(issue_comment: nil, update_mask: nil)
+              #   Pass arguments to `update_issue_comment` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param issue_comment [::Google::Cloud::SecureSourceManager::V1::IssueComment, ::Hash]
+              #     Required. The issue comment to update.
+              #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
+              #     Optional. Field mask is used to specify the fields to be overwritten in the
+              #     issue comment resource by the update.
+              #     The fields specified in the update_mask are relative to the resource, not
+              #     the full request. A field will be overwritten if it is in the mask.
+              #     The special value "*" means full replacement.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Gapic::Operation]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Gapic::Operation]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/secure_source_manager/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::SecureSourceManager::V1::SecureSourceManager::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::SecureSourceManager::V1::UpdateIssueCommentRequest.new
+              #
+              #   # Call the update_issue_comment method.
+              #   result = client.update_issue_comment request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
+              def update_issue_comment request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::SecureSourceManager::V1::UpdateIssueCommentRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.update_issue_comment.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::SecureSourceManager::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.update_issue_comment.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.update_issue_comment.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @secure_source_manager_stub.update_issue_comment request, options do |result, operation|
+                  result = ::Gapic::Operation.new result, @operations_client, options: options
+                  yield result, operation if block_given?
+                  throw :response, result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Deletes an issue comment.
+              #
+              # @overload delete_issue_comment(request, options = nil)
+              #   Pass arguments to `delete_issue_comment` via a request object, either of type
+              #   {::Google::Cloud::SecureSourceManager::V1::DeleteIssueCommentRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::SecureSourceManager::V1::DeleteIssueCommentRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload delete_issue_comment(name: nil)
+              #   Pass arguments to `delete_issue_comment` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param name [::String]
+              #     Required. Name of the issue comment to delete.
+              #     The format is
+              #     `projects/{project_number}/locations/{location_id}/repositories/{repository_id}/issues/{issue_id}/issueComments/{comment_id}`.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Gapic::Operation]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Gapic::Operation]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/secure_source_manager/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::SecureSourceManager::V1::SecureSourceManager::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::SecureSourceManager::V1::DeleteIssueCommentRequest.new
+              #
+              #   # Call the delete_issue_comment method.
+              #   result = client.delete_issue_comment request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
+              def delete_issue_comment request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::SecureSourceManager::V1::DeleteIssueCommentRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.delete_issue_comment.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::SecureSourceManager::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.delete_issue_comment.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.delete_issue_comment.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @secure_source_manager_stub.delete_issue_comment request, options do |result, operation|
+                  result = ::Gapic::Operation.new result, @operations_client, options: options
+                  yield result, operation if block_given?
+                  throw :response, result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
               # Configuration class for the SecureSourceManager REST API.
               #
               # This class represents the configuration for SecureSourceManager REST,
@@ -1901,10 +5134,40 @@ module Google
                   #
                   attr_reader :create_repository
                   ##
+                  # RPC-specific configuration for `update_repository`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :update_repository
+                  ##
                   # RPC-specific configuration for `delete_repository`
                   # @return [::Gapic::Config::Method]
                   #
                   attr_reader :delete_repository
+                  ##
+                  # RPC-specific configuration for `list_hooks`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :list_hooks
+                  ##
+                  # RPC-specific configuration for `get_hook`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :get_hook
+                  ##
+                  # RPC-specific configuration for `create_hook`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :create_hook
+                  ##
+                  # RPC-specific configuration for `update_hook`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :update_hook
+                  ##
+                  # RPC-specific configuration for `delete_hook`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :delete_hook
                   ##
                   # RPC-specific configuration for `get_iam_policy_repo`
                   # @return [::Gapic::Config::Method]
@@ -1945,6 +5208,156 @@ module Google
                   # @return [::Gapic::Config::Method]
                   #
                   attr_reader :delete_branch_rule
+                  ##
+                  # RPC-specific configuration for `create_pull_request`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :create_pull_request
+                  ##
+                  # RPC-specific configuration for `get_pull_request`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :get_pull_request
+                  ##
+                  # RPC-specific configuration for `list_pull_requests`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :list_pull_requests
+                  ##
+                  # RPC-specific configuration for `update_pull_request`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :update_pull_request
+                  ##
+                  # RPC-specific configuration for `merge_pull_request`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :merge_pull_request
+                  ##
+                  # RPC-specific configuration for `open_pull_request`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :open_pull_request
+                  ##
+                  # RPC-specific configuration for `close_pull_request`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :close_pull_request
+                  ##
+                  # RPC-specific configuration for `list_pull_request_file_diffs`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :list_pull_request_file_diffs
+                  ##
+                  # RPC-specific configuration for `fetch_tree`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :fetch_tree
+                  ##
+                  # RPC-specific configuration for `fetch_blob`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :fetch_blob
+                  ##
+                  # RPC-specific configuration for `create_issue`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :create_issue
+                  ##
+                  # RPC-specific configuration for `get_issue`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :get_issue
+                  ##
+                  # RPC-specific configuration for `list_issues`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :list_issues
+                  ##
+                  # RPC-specific configuration for `update_issue`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :update_issue
+                  ##
+                  # RPC-specific configuration for `delete_issue`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :delete_issue
+                  ##
+                  # RPC-specific configuration for `open_issue`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :open_issue
+                  ##
+                  # RPC-specific configuration for `close_issue`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :close_issue
+                  ##
+                  # RPC-specific configuration for `get_pull_request_comment`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :get_pull_request_comment
+                  ##
+                  # RPC-specific configuration for `list_pull_request_comments`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :list_pull_request_comments
+                  ##
+                  # RPC-specific configuration for `create_pull_request_comment`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :create_pull_request_comment
+                  ##
+                  # RPC-specific configuration for `update_pull_request_comment`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :update_pull_request_comment
+                  ##
+                  # RPC-specific configuration for `delete_pull_request_comment`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :delete_pull_request_comment
+                  ##
+                  # RPC-specific configuration for `batch_create_pull_request_comments`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :batch_create_pull_request_comments
+                  ##
+                  # RPC-specific configuration for `resolve_pull_request_comments`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :resolve_pull_request_comments
+                  ##
+                  # RPC-specific configuration for `unresolve_pull_request_comments`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :unresolve_pull_request_comments
+                  ##
+                  # RPC-specific configuration for `create_issue_comment`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :create_issue_comment
+                  ##
+                  # RPC-specific configuration for `get_issue_comment`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :get_issue_comment
+                  ##
+                  # RPC-specific configuration for `list_issue_comments`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :list_issue_comments
+                  ##
+                  # RPC-specific configuration for `update_issue_comment`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :update_issue_comment
+                  ##
+                  # RPC-specific configuration for `delete_issue_comment`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :delete_issue_comment
 
                   # @private
                   def initialize parent_rpcs = nil
@@ -1962,8 +5375,20 @@ module Google
                     @get_repository = ::Gapic::Config::Method.new get_repository_config
                     create_repository_config = parent_rpcs.create_repository if parent_rpcs.respond_to? :create_repository
                     @create_repository = ::Gapic::Config::Method.new create_repository_config
+                    update_repository_config = parent_rpcs.update_repository if parent_rpcs.respond_to? :update_repository
+                    @update_repository = ::Gapic::Config::Method.new update_repository_config
                     delete_repository_config = parent_rpcs.delete_repository if parent_rpcs.respond_to? :delete_repository
                     @delete_repository = ::Gapic::Config::Method.new delete_repository_config
+                    list_hooks_config = parent_rpcs.list_hooks if parent_rpcs.respond_to? :list_hooks
+                    @list_hooks = ::Gapic::Config::Method.new list_hooks_config
+                    get_hook_config = parent_rpcs.get_hook if parent_rpcs.respond_to? :get_hook
+                    @get_hook = ::Gapic::Config::Method.new get_hook_config
+                    create_hook_config = parent_rpcs.create_hook if parent_rpcs.respond_to? :create_hook
+                    @create_hook = ::Gapic::Config::Method.new create_hook_config
+                    update_hook_config = parent_rpcs.update_hook if parent_rpcs.respond_to? :update_hook
+                    @update_hook = ::Gapic::Config::Method.new update_hook_config
+                    delete_hook_config = parent_rpcs.delete_hook if parent_rpcs.respond_to? :delete_hook
+                    @delete_hook = ::Gapic::Config::Method.new delete_hook_config
                     get_iam_policy_repo_config = parent_rpcs.get_iam_policy_repo if parent_rpcs.respond_to? :get_iam_policy_repo
                     @get_iam_policy_repo = ::Gapic::Config::Method.new get_iam_policy_repo_config
                     set_iam_policy_repo_config = parent_rpcs.set_iam_policy_repo if parent_rpcs.respond_to? :set_iam_policy_repo
@@ -1980,6 +5405,66 @@ module Google
                     @update_branch_rule = ::Gapic::Config::Method.new update_branch_rule_config
                     delete_branch_rule_config = parent_rpcs.delete_branch_rule if parent_rpcs.respond_to? :delete_branch_rule
                     @delete_branch_rule = ::Gapic::Config::Method.new delete_branch_rule_config
+                    create_pull_request_config = parent_rpcs.create_pull_request if parent_rpcs.respond_to? :create_pull_request
+                    @create_pull_request = ::Gapic::Config::Method.new create_pull_request_config
+                    get_pull_request_config = parent_rpcs.get_pull_request if parent_rpcs.respond_to? :get_pull_request
+                    @get_pull_request = ::Gapic::Config::Method.new get_pull_request_config
+                    list_pull_requests_config = parent_rpcs.list_pull_requests if parent_rpcs.respond_to? :list_pull_requests
+                    @list_pull_requests = ::Gapic::Config::Method.new list_pull_requests_config
+                    update_pull_request_config = parent_rpcs.update_pull_request if parent_rpcs.respond_to? :update_pull_request
+                    @update_pull_request = ::Gapic::Config::Method.new update_pull_request_config
+                    merge_pull_request_config = parent_rpcs.merge_pull_request if parent_rpcs.respond_to? :merge_pull_request
+                    @merge_pull_request = ::Gapic::Config::Method.new merge_pull_request_config
+                    open_pull_request_config = parent_rpcs.open_pull_request if parent_rpcs.respond_to? :open_pull_request
+                    @open_pull_request = ::Gapic::Config::Method.new open_pull_request_config
+                    close_pull_request_config = parent_rpcs.close_pull_request if parent_rpcs.respond_to? :close_pull_request
+                    @close_pull_request = ::Gapic::Config::Method.new close_pull_request_config
+                    list_pull_request_file_diffs_config = parent_rpcs.list_pull_request_file_diffs if parent_rpcs.respond_to? :list_pull_request_file_diffs
+                    @list_pull_request_file_diffs = ::Gapic::Config::Method.new list_pull_request_file_diffs_config
+                    fetch_tree_config = parent_rpcs.fetch_tree if parent_rpcs.respond_to? :fetch_tree
+                    @fetch_tree = ::Gapic::Config::Method.new fetch_tree_config
+                    fetch_blob_config = parent_rpcs.fetch_blob if parent_rpcs.respond_to? :fetch_blob
+                    @fetch_blob = ::Gapic::Config::Method.new fetch_blob_config
+                    create_issue_config = parent_rpcs.create_issue if parent_rpcs.respond_to? :create_issue
+                    @create_issue = ::Gapic::Config::Method.new create_issue_config
+                    get_issue_config = parent_rpcs.get_issue if parent_rpcs.respond_to? :get_issue
+                    @get_issue = ::Gapic::Config::Method.new get_issue_config
+                    list_issues_config = parent_rpcs.list_issues if parent_rpcs.respond_to? :list_issues
+                    @list_issues = ::Gapic::Config::Method.new list_issues_config
+                    update_issue_config = parent_rpcs.update_issue if parent_rpcs.respond_to? :update_issue
+                    @update_issue = ::Gapic::Config::Method.new update_issue_config
+                    delete_issue_config = parent_rpcs.delete_issue if parent_rpcs.respond_to? :delete_issue
+                    @delete_issue = ::Gapic::Config::Method.new delete_issue_config
+                    open_issue_config = parent_rpcs.open_issue if parent_rpcs.respond_to? :open_issue
+                    @open_issue = ::Gapic::Config::Method.new open_issue_config
+                    close_issue_config = parent_rpcs.close_issue if parent_rpcs.respond_to? :close_issue
+                    @close_issue = ::Gapic::Config::Method.new close_issue_config
+                    get_pull_request_comment_config = parent_rpcs.get_pull_request_comment if parent_rpcs.respond_to? :get_pull_request_comment
+                    @get_pull_request_comment = ::Gapic::Config::Method.new get_pull_request_comment_config
+                    list_pull_request_comments_config = parent_rpcs.list_pull_request_comments if parent_rpcs.respond_to? :list_pull_request_comments
+                    @list_pull_request_comments = ::Gapic::Config::Method.new list_pull_request_comments_config
+                    create_pull_request_comment_config = parent_rpcs.create_pull_request_comment if parent_rpcs.respond_to? :create_pull_request_comment
+                    @create_pull_request_comment = ::Gapic::Config::Method.new create_pull_request_comment_config
+                    update_pull_request_comment_config = parent_rpcs.update_pull_request_comment if parent_rpcs.respond_to? :update_pull_request_comment
+                    @update_pull_request_comment = ::Gapic::Config::Method.new update_pull_request_comment_config
+                    delete_pull_request_comment_config = parent_rpcs.delete_pull_request_comment if parent_rpcs.respond_to? :delete_pull_request_comment
+                    @delete_pull_request_comment = ::Gapic::Config::Method.new delete_pull_request_comment_config
+                    batch_create_pull_request_comments_config = parent_rpcs.batch_create_pull_request_comments if parent_rpcs.respond_to? :batch_create_pull_request_comments
+                    @batch_create_pull_request_comments = ::Gapic::Config::Method.new batch_create_pull_request_comments_config
+                    resolve_pull_request_comments_config = parent_rpcs.resolve_pull_request_comments if parent_rpcs.respond_to? :resolve_pull_request_comments
+                    @resolve_pull_request_comments = ::Gapic::Config::Method.new resolve_pull_request_comments_config
+                    unresolve_pull_request_comments_config = parent_rpcs.unresolve_pull_request_comments if parent_rpcs.respond_to? :unresolve_pull_request_comments
+                    @unresolve_pull_request_comments = ::Gapic::Config::Method.new unresolve_pull_request_comments_config
+                    create_issue_comment_config = parent_rpcs.create_issue_comment if parent_rpcs.respond_to? :create_issue_comment
+                    @create_issue_comment = ::Gapic::Config::Method.new create_issue_comment_config
+                    get_issue_comment_config = parent_rpcs.get_issue_comment if parent_rpcs.respond_to? :get_issue_comment
+                    @get_issue_comment = ::Gapic::Config::Method.new get_issue_comment_config
+                    list_issue_comments_config = parent_rpcs.list_issue_comments if parent_rpcs.respond_to? :list_issue_comments
+                    @list_issue_comments = ::Gapic::Config::Method.new list_issue_comments_config
+                    update_issue_comment_config = parent_rpcs.update_issue_comment if parent_rpcs.respond_to? :update_issue_comment
+                    @update_issue_comment = ::Gapic::Config::Method.new update_issue_comment_config
+                    delete_issue_comment_config = parent_rpcs.delete_issue_comment if parent_rpcs.respond_to? :delete_issue_comment
+                    @delete_issue_comment = ::Gapic::Config::Method.new delete_issue_comment_config
 
                     yield self if block_given?
                   end

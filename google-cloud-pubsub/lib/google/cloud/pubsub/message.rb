@@ -24,7 +24,7 @@ module Google
       #
       # Represents a Pub/Sub Message.
       #
-      # Message objects are created by {Topic#publish}. {Subscription#pull}
+      # Message objects are created by {Publisher#publish}. {Subscriber#pull}
       # returns an array of {ReceivedMessage} objects, each of which contains a
       # Message object. Each {ReceivedMessage} object can be acknowledged and/or
       # delayed.
@@ -35,22 +35,22 @@ module Google
       #   pubsub = Google::Cloud::PubSub.new
       #
       #   # Publish a message
-      #   topic = pubsub.topic "my-topic"
-      #   message = topic.publish "task completed"
+      #   publisher = pubsub.publisher "my-topic"
+      #   message = publisher.publish "task completed"
       #   message.data #=> "task completed"
       #
       #   # Listen for messages
-      #   sub = pubsub.subscription "my-topic-sub"
-      #   subscriber = sub.listen do |received_message|
+      #   subscriber = pubsub.subscriber "my-topic-sub"
+      #   listener = subscriber.listen do |received_message|
       #     # process message
       #     received_message.acknowledge!
       #   end
       #
       #   # Start background threads that will call the block passed to listen.
-      #   subscriber.start
+      #   listener.start
       #
       #   # Shut down the subscriber when ready to stop receiving messages.
-      #   subscriber.stop!
+      #   listener.stop!
       #
       class Message
         ##
@@ -113,7 +113,7 @@ module Google
         # or scalability, as the service automatically distributes messages for
         # different ordering keys across subscribers.
         #
-        # See {Topic#publish_async} and {Subscription#listen}.
+        # See {Publisher#publish_async} and {Subscriber#listen}.
         #
         # @return [String]
         #

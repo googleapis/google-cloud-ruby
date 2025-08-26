@@ -21,7 +21,6 @@ require "helper"
 require "gapic/grpc/service_stub"
 
 require "google/cloud/beyondcorp/clientgateways/v1/client_gateways_service_pb"
-require "google/cloud/beyondcorp/clientgateways/v1/client_gateways_service_services_pb"
 require "google/cloud/beyond_corp/client_gateways/v1/client_gateways_service"
 
 class ::Google::Cloud::BeyondCorp::ClientGateways::V1::ClientGatewaysService::ClientTest < Minitest::Test

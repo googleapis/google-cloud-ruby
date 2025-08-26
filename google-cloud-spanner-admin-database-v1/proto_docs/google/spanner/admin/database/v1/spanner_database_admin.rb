@@ -791,6 +791,33 @@ module Google
               end
             end
 
+            # Internal request proto, do not use directly.
+            # @!attribute [rw] database
+            #   @return [::String]
+            #     Internal field, do not use directly.
+            # @!attribute [rw] operation_id
+            #   @return [::String]
+            #     Internal field, do not use directly.
+            # @!attribute [rw] vm_identity_token
+            #   @return [::String]
+            #     Internal field, do not use directly.
+            # @!attribute [rw] progress
+            #   @return [::Float]
+            #     Internal field, do not use directly.
+            # @!attribute [rw] status
+            #   @return [::Google::Rpc::Status]
+            #     Internal field, do not use directly.
+            class InternalUpdateGraphOperationRequest
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
+
+            # Internal response proto, do not use directly.
+            class InternalUpdateGraphOperationResponse
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
+
             # Indicates the type of the restore source.
             module RestoreSourceType
               # No restore associated.

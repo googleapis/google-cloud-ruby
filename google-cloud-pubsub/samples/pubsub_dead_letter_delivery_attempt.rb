@@ -18,10 +18,10 @@ def dead_letter_delivery_attempt subscription_id:
   # [START pubsub_dead_letter_delivery_attempt]
   # subscription_id = "your-subscription-id"
 
-  pubsub = Google::Cloud::Pubsub.new
+  pubsub = Google::Cloud::PubSub.new
+  subscriber = pubsub.subscriber subscription_id
 
-  subscription = pubsub.subscription subscription_id
-  subscription.pull(immediate: false).each do |message|
+  subscriber.pull(immediate: false).each do |message|
     puts "Received message: #{message.data}"
     puts "Delivery Attempt: #{message.delivery_attempt}"
     message.acknowledge!

@@ -60,11 +60,16 @@ module Google
         attr_reader :reference
 
         ##
+        # @private Access Policy Version for get, update, patch, and insert API calls
+        attr_accessor :access_policy_version
+
+        ##
         # @private Create an empty Dataset object.
         def initialize
           @service = nil
           @gapi = nil
           @reference = nil
+          @access_policy_version = nil
         end
 
         ##
@@ -1710,6 +1715,8 @@ module Google
         #   `flatten` is false. Optional. The default value is false.
         # @param [String] session_id The ID of an existing session. See the
         #   `create_session` param in {#query_job} and {Job#session_id}.
+        # @param [Boolean] format_options_use_int64_timestamp Output timestamp
+        #   as usec int64. Default is true.
         # @yield [job] a job configuration object
         # @yieldparam [Google::Cloud::Bigquery::QueryJob::Updater] job a job
         #   configuration object for setting additional options for the query.
@@ -1864,6 +1871,7 @@ module Google
                   standard_sql: nil,
                   legacy_sql: nil,
                   session_id: nil,
+                  format_options_use_int64_timestamp: true,
                   &block
           job = query_job query,
                           params: params,
@@ -1877,7 +1885,7 @@ module Google
           job.wait_until_done!
           ensure_job_succeeded! job
 
-          job.data max: max
+          job.data max: max, format_options_use_int64_timestamp: format_options_use_int64_timestamp
         end
 
         ##
@@ -2444,7 +2452,7 @@ module Google
         #
         def reload!
           ensure_service!
-          @gapi = service.get_project_dataset project_id, dataset_id
+          @gapi = service.get_project_dataset project_id, dataset_id, access_policy_version: @access_policy_version
           @reference = nil
           @exists = nil
           self
@@ -2573,10 +2581,11 @@ module Google
 
         ##
         # @private New Dataset from a Google API Client object.
-        def self.from_gapi gapi, conn
+        def self.from_gapi gapi, conn, access_policy_version: nil
           new.tap do |f|
             f.gapi = gapi
             f.service = conn
+            f.access_policy_version = access_policy_version
           end
         end
 
@@ -2900,7 +2909,7 @@ module Google
           patch_args = attributes.to_h { |attr| [attr, @gapi.send(attr)] }
           patch_gapi = Google::Apis::BigqueryV2::Dataset.new(**patch_args)
           patch_gapi.etag = etag if etag
-          @gapi = service.patch_dataset dataset_id, patch_gapi
+          @gapi = service.patch_dataset dataset_id, patch_gapi, access_policy_version: @access_policy_version
         end
 
         ##

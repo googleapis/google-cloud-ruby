@@ -21,7 +21,6 @@ require "helper"
 require "gapic/grpc/service_stub"
 
 require "google/cloud/networkmanagement/v1/vpc_flow_logs_pb"
-require "google/cloud/networkmanagement/v1/vpc_flow_logs_services_pb"
 require "google/cloud/network_management/v1/vpc_flow_logs_service"
 
 class ::Google::Cloud::NetworkManagement::V1::VpcFlowLogsService::ClientTest < Minitest::Test

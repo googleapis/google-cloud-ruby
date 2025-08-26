@@ -53,6 +53,10 @@ module Google
         #   @return [::Google::Cloud::AIPlatform::V1::GoogleSearchRetrieval]
         #     Optional. GoogleSearchRetrieval tool type.
         #     Specialized retrieval tool that is powered by Google search.
+        # @!attribute [rw] google_maps
+        #   @return [::Google::Cloud::AIPlatform::V1::GoogleMaps]
+        #     Optional. GoogleMaps tool type.
+        #     Tool to support Google Maps in Model.
         # @!attribute [rw] enterprise_web_search
         #   @return [::Google::Cloud::AIPlatform::V1::EnterpriseWebSearch]
         #     Optional. Tool to support searching public web data, powered by Vertex AI
@@ -64,12 +68,22 @@ module Google
         # @!attribute [rw] url_context
         #   @return [::Google::Cloud::AIPlatform::V1::UrlContext]
         #     Optional. Tool to support URL context retrieval.
+        # @!attribute [rw] computer_use
+        #   @return [::Google::Cloud::AIPlatform::V1::Tool::ComputerUse]
+        #     Optional. Tool to support the model interacting directly with the computer.
+        #     If enabled, it automatically populates computer-use specific Function
+        #     Declarations.
         class Tool
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
 
           # GoogleSearch tool type.
           # Tool to support Google Search in Model. Powered by Google.
+          # @!attribute [rw] exclude_domains
+          #   @return [::Array<::String>]
+          #     Optional. List of domains to be excluded from the search results.
+          #     The default limit is 2000 domains.
+          #     Example: ["amazon.com", "facebook.com"].
           class GoogleSearch
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -83,6 +97,24 @@ module Google
           class CodeExecution
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Tool to support computer use.
+          # @!attribute [rw] environment
+          #   @return [::Google::Cloud::AIPlatform::V1::Tool::ComputerUse::Environment]
+          #     Required. The environment being operated.
+          class ComputerUse
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+
+            # Represents the environment being operated, such as a web browser.
+            module Environment
+              # Defaults to browser.
+              ENVIRONMENT_UNSPECIFIED = 0
+
+              # Operates in a web browser.
+              ENVIRONMENT_BROWSER = 1
+            end
           end
         end
 
@@ -370,8 +402,18 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # Tool to retrieve public maps data for grounding, powered by Google.
+        class GoogleMaps
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # Tool to search public web data, powered by Vertex AI Search and Sec4
         # compliance.
+        # @!attribute [rw] exclude_domains
+        #   @return [::Array<::String>]
+        #     Optional. List of domains to be excluded from the search results.
+        #     The default limit is 2000 domains.
         class EnterpriseWebSearch
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

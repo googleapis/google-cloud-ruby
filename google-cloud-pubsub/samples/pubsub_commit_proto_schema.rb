@@ -19,14 +19,16 @@ def commit_proto_schema schema_id:, proto_file:
   # schema_id = "your-schema-id"
   # proto_file = "path/to/a/proto_file.proto"
 
-  pubsub = Google::Cloud::Pubsub.new
-  schema = pubsub.schema schema_id
+  pubsub = Google::Cloud::PubSub.new
+  schemas = pubsub.schemas
 
-  definition = File.read proto_file
+  schema = schemas.get_schema name: pubsub.schema_path(schema_id)
+  schema.definition = File.read proto_file
 
-  result = schema.commit definition, :protocol_buffer
+  result = schemas.commit_schema name: schema.name,
+                                 schema: schema
 
-  puts "Schema commited with revision #{result.revision_id}."
-  result
+  puts "Schema committed with revision #{result.revision_id}."
   # [END pubsub_commit_proto_schema]
+  result
 end

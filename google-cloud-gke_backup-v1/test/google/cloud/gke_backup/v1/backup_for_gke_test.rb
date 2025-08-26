@@ -21,7 +21,6 @@ require "helper"
 require "gapic/grpc/service_stub"
 
 require "google/cloud/gkebackup/v1/gkebackup_pb"
-require "google/cloud/gkebackup/v1/gkebackup_services_pb"
 require "google/cloud/gke_backup/v1/backup_for_gke"
 
 class ::Google::Cloud::GkeBackup::V1::BackupForGKE::ClientTest < Minitest::Test

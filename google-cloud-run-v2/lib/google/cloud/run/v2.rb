@@ -22,6 +22,7 @@ require "google/cloud/run/v2/jobs"
 require "google/cloud/run/v2/revisions"
 require "google/cloud/run/v2/services"
 require "google/cloud/run/v2/tasks"
+require "google/cloud/run/v2/worker_pools"
 require "google/cloud/run/v2/version"
 
 module Google

@@ -1,5 +1,28 @@
 # Release History
 
+### 1.9.0 (2025-08-18)
+
+#### Features
+
+* add Idempotency to Cloud Bigtable MutateRowsRequest API ([#30709](https://github.com/googleapis/google-cloud-ruby/issues/30709)) 
+* Publish Proto and Enum types to CBT data API ([#30726](https://github.com/googleapis/google-cloud-ruby/issues/30726)) 
+#### Bug Fixes
+
+* Fixed routing headers when there is an authorized view ([#30741](https://github.com/googleapis/google-cloud-ruby/issues/30741)) 
+#### Documentation
+
+* Minor comment update for field `idempotency` in message `.google.bigtable.v2.MutateRowRequest` 
+* Sync generated comments from the API Protos 
+
+### 1.8.0 (2025-07-15)
+
+#### Features
+
+* Support idempotency parameter to the mutate_row RPC ([#30581](https://github.com/googleapis/google-cloud-ruby/issues/30581)) 
+#### Documentation
+
+* clarify documentation for cases when multiple parameters are mutually exclusive for an RPC method ([#30623](https://github.com/googleapis/google-cloud-ruby/issues/30623)) 
+
 ### 1.7.0 (2025-05-12)
 
 #### Features

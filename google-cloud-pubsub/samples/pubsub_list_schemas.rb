@@ -17,9 +17,12 @@ require "google/cloud/pubsub"
 def list_schemas
   # [START pubsub_list_schemas]
 
-  pubsub = Google::Cloud::Pubsub.new
+  pubsub = Google::Cloud::PubSub.new
+  schema_service = pubsub.schemas
 
-  schemas = pubsub.schemas
+  schemas = schema_service.list_schemas \
+    parent: pubsub.project_path,
+    view: Google::Cloud::PubSub::V1::SchemaView::FULL
 
   puts "Schemas in project:"
   schemas.each do |schema|

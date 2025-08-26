@@ -214,7 +214,7 @@ module Google
               #   @param options [::Gapic::CallOptions, ::Hash]
               #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
               #
-              # @overload get(project: nil, reservation: nil, reservation_block: nil, zone: nil)
+              # @overload get(project: nil, reservation: nil, reservation_block: nil, view: nil, zone: nil)
               #   Pass arguments to `get` via keyword arguments. Note that at
               #   least one keyword argument is required. To specify no parameters, or to keep all
               #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -225,6 +225,9 @@ module Google
               #     The name of the reservation. Name should conform to RFC1035 or be a resource ID.
               #   @param reservation_block [::String]
               #     The name of the reservation block. Name should conform to RFC1035 or be a resource ID.
+              #   @param view [::String]
+              #     View of the Block.
+              #     Check the View enum for the list of possible values.
               #   @param zone [::String]
               #     Name of the zone for this request. Zone name should conform to RFC1035.
               # @yield [result, operation] Access the result along with the TransportOperation object

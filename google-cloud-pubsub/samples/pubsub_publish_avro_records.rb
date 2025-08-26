@@ -19,24 +19,27 @@ def publish_avro_records topic_id:, avsc_file:
   # topic_id = "your-topic-id"
   # avsc_file = "path/to/an/avro/schema/file/(.avsc)/formatted/in/json"
 
-  pubsub = Google::Cloud::Pubsub.new
-
-  topic = pubsub.topic topic_id
-
+  pubsub = Google::Cloud::PubSub.new
+  topic_admin = pubsub.topic_admin
+  publisher = pubsub.publisher topic_id
   record = { "name" => "Alaska", "post_abbr" => "AK" }
 
-  if topic.message_encoding_binary?
+  topic = topic_admin.get_topic topic: pubsub.topic_path(topic_id)
+  encoding = topic.schema_settings.encoding
+
+  case encoding
+  when :BINARY
     require "avro"
     avro_schema = Avro::Schema.parse File.read(avsc_file)
     writer = Avro::IO::DatumWriter.new avro_schema
     buffer = StringIO.new
     encoder = Avro::IO::BinaryEncoder.new buffer
     writer.write record, encoder
-    topic.publish buffer
+    publisher.publish buffer
     puts "Published binary-encoded AVRO message."
-  elsif topic.message_encoding_json?
+  when :JSON
     require "json"
-    topic.publish record.to_json
+    publisher.publish record.to_json
     puts "Published JSON-encoded AVRO message."
   else
     raise "No encoding specified in #{topic.name}."

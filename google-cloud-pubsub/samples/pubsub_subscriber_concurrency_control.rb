@@ -18,12 +18,12 @@ def listen_for_messages_with_concurrency_control subscription_id:
   # [START pubsub_subscriber_concurrency_control]
   # subscription_id = "your-subscription-id"
 
-  pubsub = Google::Cloud::Pubsub.new
+  pubsub = Google::Cloud::PubSub.new
+  subscriber = pubsub.subscriber subscription_id
 
-  subscription = pubsub.subscription subscription_id
   # Use 2 threads for streaming, 4 threads for executing callbacks and 2 threads
   # for sending acknowledgements and/or delays
-  subscriber   = subscription.listen streams: 2, threads: {
+  listener = subscriber.listen streams: 2, threads: {
     callback: 4,
     push:     2
   } do |received_message|
@@ -31,10 +31,10 @@ def listen_for_messages_with_concurrency_control subscription_id:
     received_message.acknowledge!
   end
 
-  subscriber.start
+  listener.start
   # Let the main thread sleep for 60 seconds so the thread for listening
   # messages does not quit
   sleep 60
-  subscriber.stop.wait!
+  listener.stop.wait!
   # [END pubsub_subscriber_concurrency_control]
 end

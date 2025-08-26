@@ -21,7 +21,6 @@ require "helper"
 require "gapic/grpc/service_stub"
 
 require "google/cloud/documentai/v1/document_processor_service_pb"
-require "google/cloud/documentai/v1/document_processor_service_services_pb"
 require "google/cloud/document_ai/v1/document_processor_service"
 
 class ::Google::Cloud::DocumentAI::V1::DocumentProcessorService::ClientTest < Minitest::Test

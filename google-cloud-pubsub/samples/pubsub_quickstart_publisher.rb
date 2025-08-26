@@ -18,10 +18,10 @@ def publish_message topic_id:
   # [START pubsub_quickstart_publisher]
   # topic_id = "your-topic-id"
 
-  pubsub = Google::Cloud::Pubsub.new
+  pubsub = Google::Cloud::PubSub.new
+  publisher = pubsub.publisher topic_id
 
-  topic = pubsub.topic topic_id
-  topic.publish "This is a test message."
+  publisher.publish "This is a test message."
 
   puts "Message published."
   # [END pubsub_quickstart_publisher]

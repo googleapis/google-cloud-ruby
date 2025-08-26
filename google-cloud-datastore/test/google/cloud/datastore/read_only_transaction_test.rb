@@ -83,6 +83,11 @@ describe Google::Cloud::Datastore::ReadOnlyTransaction, :mock_datastore do
       )
     )
   end
+  let(:run_aggregation_query_res_with_explain) do
+    run_aggregation_query_res.dup.tap do |response|
+      response.explain_metrics = Google::Cloud::Datastore::V1::ExplainMetrics.new
+    end
+  end
   let(:aggregate_query_grpc) do
     aggregations = [
       Google::Cloud::Datastore::V1::AggregationQuery::Aggregation.new(
@@ -155,7 +160,7 @@ describe Google::Cloud::Datastore::ReadOnlyTransaction, :mock_datastore do
 
   it "run will fulfill a query" do
     query_grpc = Google::Cloud::Datastore::Query.new.kind("User").to_grpc
-    transaction.service.mocked_service.expect :run_query, run_query_res, project_id: project, partition_id: nil, read_options: read_options, query: query_grpc, gql_query: nil, database_id: default_database
+    transaction.service.mocked_service.expect :run_query, run_query_res, project_id: project, partition_id: nil, read_options: read_options, query: query_grpc, gql_query: nil, database_id: default_database, explain_options: nil
 
     query = Google::Cloud::Datastore::Query.new.kind("User")
     entities = transaction.run query
@@ -173,7 +178,7 @@ describe Google::Cloud::Datastore::ReadOnlyTransaction, :mock_datastore do
   end
 
   it "run will fulfill a gql query" do
-    transaction.service.mocked_service.expect :run_query, run_query_res, project_id: project, partition_id: nil, read_options: read_options, query: nil, gql_query: gql_query_grpc, database_id: default_database
+    transaction.service.mocked_service.expect :run_query, run_query_res, project_id: project, partition_id: nil, read_options: read_options, query: nil, gql_query: gql_query_grpc, database_id: default_database, explain_options: nil
 
     gql = transaction.gql "SELECT * FROM Task"
     entities = transaction.run gql
@@ -204,7 +209,7 @@ describe Google::Cloud::Datastore::ReadOnlyTransaction, :mock_datastore do
   end
 
   it "run_aggregate will fulfill an aggregate query" do
-    transaction.service.mocked_service.expect :run_aggregation_query, run_aggregation_query_res, project_id: project, partition_id: nil, read_options: read_options, aggregation_query: aggregate_query_grpc, gql_query: nil
+    transaction.service.mocked_service.expect :run_aggregation_query, run_aggregation_query_res, project_id: project, partition_id: nil, read_options: read_options, aggregation_query: aggregate_query_grpc, gql_query: nil, explain_options: nil
     query = Google::Cloud::Datastore::Query.new.kind("User")
     aq = query.aggregate_query
               .add_count
@@ -212,8 +217,21 @@ describe Google::Cloud::Datastore::ReadOnlyTransaction, :mock_datastore do
     _(res.get('count')).must_equal 2
   end
 
+  it "run_aggregate will fulfill an aggregate query with explain_options" do
+    explain_options = { analyze: true }
+    explain_options_grpc = Google::Cloud::Datastore::V1::ExplainOptions.new analyze: true
+    transaction.service.mocked_service.expect :run_aggregation_query, run_aggregation_query_res_with_explain, project_id: project, partition_id: nil, read_options: read_options, aggregation_query: aggregate_query_grpc, gql_query: nil, explain_options: explain_options_grpc
+    query = Google::Cloud::Datastore::Query.new.kind("User")
+    aq = query.aggregate_query
+              .add_count
+    res = transaction.run_aggregation aq, explain_options: explain_options
+    _(res.get('count')).must_equal 2
+    _(res.explain_metrics).must_be_kind_of Google::Cloud::Datastore::V1::ExplainMetrics
+    _(res.explain_options).must_equal explain_options
+  end
+
   it "run_aggregate will fulfill an aggregate gql query" do
-    transaction.service.mocked_service.expect :run_aggregation_query, aggregate_gql_query_res, project_id: project, partition_id: nil, read_options: read_options, aggregation_query: nil, gql_query: gql_aggregate_query_grpc
+    transaction.service.mocked_service.expect :run_aggregation_query, aggregate_gql_query_res, project_id: project, partition_id: nil, read_options: read_options, aggregation_query: nil, gql_query: gql_aggregate_query_grpc, explain_options: nil
     gql = dataset.gql "SELECT COUNT(*) as total FROM Task"
     res = transaction.run_aggregation gql
     _(res.get('total')).must_equal 2
