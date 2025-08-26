@@ -258,7 +258,7 @@ module Google
 
           ##
           # Lists all non-deleted
-          # [WorkloadIdentityPool][google.iam.v1beta.WorkloadIdentityPool]s in a
+          # {::Google::Iam::V1beta::WorkloadIdentityPool WorkloadIdentityPool}s in a
           # project. If `show_deleted` is set to `true`, then deleted pools are also
           # listed.
           #
@@ -361,7 +361,7 @@ module Google
 
           ##
           # Gets an individual
-          # [WorkloadIdentityPool][google.iam.v1beta.WorkloadIdentityPool].
+          # {::Google::Iam::V1beta::WorkloadIdentityPool WorkloadIdentityPool}.
           #
           # @overload get_workload_identity_pool(request, options = nil)
           #   Pass arguments to `get_workload_identity_pool` via a request object, either of type
@@ -447,7 +447,7 @@ module Google
 
           ##
           # Creates a new
-          # [WorkloadIdentityPool][google.iam.v1beta.WorkloadIdentityPool].
+          # {::Google::Iam::V1beta::WorkloadIdentityPool WorkloadIdentityPool}.
           #
           # You cannot reuse the name of a deleted pool until 30 days after deletion.
           #
@@ -552,7 +552,7 @@ module Google
 
           ##
           # Updates an existing
-          # [WorkloadIdentityPool][google.iam.v1beta.WorkloadIdentityPool].
+          # {::Google::Iam::V1beta::WorkloadIdentityPool WorkloadIdentityPool}.
           #
           # @overload update_workload_identity_pool(request, options = nil)
           #   Pass arguments to `update_workload_identity_pool` via a request object, either of type
@@ -649,7 +649,7 @@ module Google
 
           ##
           # Deletes a
-          # [WorkloadIdentityPool][google.iam.v1beta.WorkloadIdentityPool].
+          # {::Google::Iam::V1beta::WorkloadIdentityPool WorkloadIdentityPool}.
           #
           # You cannot use a deleted pool to exchange external
           # credentials for Google Cloud credentials. However, deletion does
@@ -753,7 +753,7 @@ module Google
           end
 
           ##
-          # Undeletes a [WorkloadIdentityPool][google.iam.v1beta.WorkloadIdentityPool],
+          # Undeletes a {::Google::Iam::V1beta::WorkloadIdentityPool WorkloadIdentityPool},
           # as long as it was deleted fewer than 30 days ago.
           #
           # @overload undelete_workload_identity_pool(request, options = nil)
@@ -849,8 +849,8 @@ module Google
 
           ##
           # Lists all non-deleted
-          # [WorkloadIdentityPoolProvider][google.iam.v1beta.WorkloadIdentityPoolProvider]s
-          # in a [WorkloadIdentityPool][google.iam.v1beta.WorkloadIdentityPool].
+          # {::Google::Iam::V1beta::WorkloadIdentityPoolProvider WorkloadIdentityPoolProvider}s
+          # in a {::Google::Iam::V1beta::WorkloadIdentityPool WorkloadIdentityPool}.
           # If `show_deleted` is set to `true`, then deleted providers are also listed.
           #
           # @overload list_workload_identity_pool_providers(request, options = nil)
@@ -953,7 +953,7 @@ module Google
 
           ##
           # Gets an individual
-          # [WorkloadIdentityPoolProvider][google.iam.v1beta.WorkloadIdentityPoolProvider].
+          # {::Google::Iam::V1beta::WorkloadIdentityPoolProvider WorkloadIdentityPoolProvider}.
           #
           # @overload get_workload_identity_pool_provider(request, options = nil)
           #   Pass arguments to `get_workload_identity_pool_provider` via a request object, either of type
@@ -1040,7 +1040,7 @@ module Google
           ##
           # Creates a new
           # [WorkloadIdentityPoolProvider][google.iam.v1beta.WorkloadIdentityProvider]
-          # in a [WorkloadIdentityPool][google.iam.v1beta.WorkloadIdentityPool].
+          # in a {::Google::Iam::V1beta::WorkloadIdentityPool WorkloadIdentityPool}.
           #
           # You cannot reuse the name of a deleted provider until 30 days after
           # deletion.

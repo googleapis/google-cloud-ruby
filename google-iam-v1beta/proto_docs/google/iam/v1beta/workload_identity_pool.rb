@@ -53,7 +53,7 @@ module Google
 
           # The pool is soft-deleted. Soft-deleted pools are permanently deleted
           # after approximately 30 days. You can restore a soft-deleted pool using
-          # [UndeleteWorkloadIdentityPool][google.iam.v1beta.WorkloadIdentityPools.UndeleteWorkloadIdentityPool].
+          # {::Google::Iam::V1beta::WorkloadIdentityPools::Client#undelete_workload_identity_pool UndeleteWorkloadIdentityPool}.
           #
           # You cannot reuse the ID of a soft-deleted pool until it is permanently
           # deleted.
@@ -259,7 +259,7 @@ module Google
           # The provider is soft-deleted. Soft-deleted providers are permanently
           # deleted after approximately 30 days. You can restore a soft-deleted
           # provider using
-          # [UndeleteWorkloadIdentityPoolProvider][google.iam.v1beta.WorkloadIdentityPools.UndeleteWorkloadIdentityPoolProvider].
+          # {::Google::Iam::V1beta::WorkloadIdentityPools::Client#undelete_workload_identity_pool_provider UndeleteWorkloadIdentityPoolProvider}.
           #
           # You cannot reuse the ID of a soft-deleted provider until it is
           # permanently deleted.
