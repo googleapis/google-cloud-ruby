@@ -100,6 +100,15 @@ describe Google::Cloud::Bigquery::Table, :bigquery do
   end
   let(:insert_ids) { Array.new(3) {SecureRandom.uuid} }
   let(:local_file) { "acceptance/data/kitten-test-data.json" }
+  let(:control_char_data) do
+    [
+      ["id", "name", "breed", "dob"],
+      [1, "foo\x01\x1Fbar", "baz\x01\x1Fqux", Time.now.utc.to_s]
+    ]
+  end
+  let(:control_char_data_csv) { CSV.generate { |csv| control_char_data.each { |row| csv << row } } }
+  let(:control_char_data_io) { StringIO.new control_char_data_csv }
+  let(:control_char_file) { bucket.file("pets_control_chars_with_dob.csv") || bucket.create_file(control_char_data_io, "pets_control_chars_with_dob.csv") }
   let(:target_table_id) { "kittens_copy" }
   let(:target_table_2_id) { "kittens_copy_2" }
   let(:target_table_3_id) { "kittens_copy_3" }
@@ -1186,5 +1195,45 @@ describe Google::Cloud::Bigquery::Table, :bigquery do
     ensure
       restored_table.delete  
     end
+  end
+  
+  it "loads data from a local file with preserve_ascii_control_characters" do
+    table_id = "control_char_table_#{SecureRandom.hex(4)}"
+    table = dataset.create_table table_id do |t|
+      t.schema do |s|
+        s.integer "id", mode: :required
+        s.string "name", mode: :required
+        s.string "breed", mode: :required
+        s.timestamp "dob", mode: :required
+      end
+    end
+
+    job = table.load_job control_char_file do |j|
+      j.format = "csv"
+      j.skip_leading = 1
+      j.preserve_ascii_control_characters = true
+    end
+    job.wait_until_done!
+    _(job).wont_be :failed?
+    _(job.output_rows).must_equal 1
+
+    data = table.data
+    _(data.count).must_equal 1
+    _(data.first[:id]).must_equal 1
+    _(data.first[:name]).must_equal "foo\x01\x1Fbar"
+    _(data.first[:breed]).must_equal "baz\x01\x1Fqux"
+
+    # Test with preserve_ascii_control_characters = false (default)
+    control_char_data_io.rewind
+    job_stripped = table.load_job control_char_file, write: "truncate", format: "csv", skip_leading: 1
+    job_stripped.wait_until_done!
+    _(job_stripped).wont_be :failed?
+    _(job_stripped.output_rows).must_equal 1
+
+    data_stripped = table.data
+    _(data_stripped.count).must_equal 1
+    _(data_stripped.first[:id]).must_equal 1
+    _(data_stripped.first[:name]).must_equal "foo  bar"
+    _(data_stripped.first[:breed]).must_equal "baz  qux"
   end
 end
