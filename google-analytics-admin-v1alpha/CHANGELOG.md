@@ -1,5 +1,15 @@
 # Release History
 
+### 0.37.0 (2025-08-26)
+
+### ⚠ BREAKING CHANGES
+
+* remove the `SetAutomatedGa4ConfigurationOptOut` method ([#30875](https://github.com/googleapis/google-cloud-ruby/issues/30875))
+
+#### Bug Fixes
+
+* remove the `SetAutomatedGa4ConfigurationOptOut` method ([#30875](https://github.com/googleapis/google-cloud-ruby/issues/30875)) 
+
 ### 0.36.1 (2025-07-15)
 
 #### Documentation
