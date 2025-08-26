@@ -11,11 +11,12 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-require "google/cloud/storage_batch_operations"
 
 # [START storage_batch_create_job]
+require "google/cloud/storage_batch_operations"
+
 def create_job bucket_name:, prefix:, job_name:, project_name:
-  # The ID of your GCS bucket
+  # The name of your GCS bucket
   # bucket_name = "your-unique-bucket-name"
 
   # Prefix is the first part of filename on which job has to be executed

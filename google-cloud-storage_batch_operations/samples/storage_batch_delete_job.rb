@@ -11,9 +11,10 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-require "google/cloud/storage_batch_operations"
 
 # [START storage_batch_delete_job]
+require "google/cloud/storage_batch_operations"
+
 def delete_job project_name:, job_name:
   # The Name/ID of your project
   # project_name = "your-project-id"
