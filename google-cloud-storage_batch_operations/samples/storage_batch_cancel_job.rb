@@ -16,7 +16,6 @@
 require "google/cloud/storage_batch_operations"
 
 def cancel_job project_name:, job_name:
-
   # The ID of your project
   # project_name = "your-project-id"
 
