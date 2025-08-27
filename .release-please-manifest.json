@@ -411,7 +411,7 @@
   "google-cloud-gdc_hardware_management-v1alpha+FILLER": "0.0.0",
   "google-cloud-gemini_data_analytics": "0.0.1",
   "google-cloud-gemini_data_analytics+FILLER": "0.0.0",
-  "google-cloud-gemini_data_analytics-v1beta": "0.0.1",
+  "google-cloud-gemini_data_analytics-v1beta": "0.1.0",
   "google-cloud-gemini_data_analytics-v1beta+FILLER": "0.0.0",
   "google-cloud-gke_backup": "2.0.1",
   "google-cloud-gke_backup+FILLER": "0.0.0",
