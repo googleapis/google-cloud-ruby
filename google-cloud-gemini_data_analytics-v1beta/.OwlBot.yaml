@@ -1,0 +1,3 @@
+deep-copy-regex:
+  - source: /google/cloud/geminidataanalytics/v1beta/[^/]+-ruby/(.*)
+    dest: /owl-bot-staging/google-cloud-gemini_data_analytics-v1beta/$1

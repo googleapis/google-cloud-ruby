@@ -831,6 +831,10 @@
       "component": "google-cloud-gdc_hardware_management-v1alpha",
       "version_file": "lib/google/cloud/gdc_hardware_management/v1alpha/version.rb"
     },
+    "google-cloud-gemini_data_analytics-v1beta": {
+      "component": "google-cloud-gemini_data_analytics-v1beta",
+      "version_file": "lib/google/cloud/gemini_data_analytics/v1beta/version.rb"
+    },
     "google-cloud-gke_backup": {
       "component": "google-cloud-gke_backup",
       "version_file": "lib/google/cloud/gke_backup/version.rb"

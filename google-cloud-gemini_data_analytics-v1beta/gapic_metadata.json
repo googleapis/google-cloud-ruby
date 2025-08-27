@@ -1,0 +1,92 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "ruby",
+  "protoPackage": "google.cloud.geminidataanalytics.v1beta",
+  "libraryPackage": "::Google::Cloud::GeminiDataAnalytics::V1beta",
+  "services": {
+    "DataAgentService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::GeminiDataAnalytics::V1beta::DataAgentService::Client",
+          "rpcs": {
+            "ListDataAgents": {
+              "methods": [
+                "list_data_agents"
+              ]
+            },
+            "ListAccessibleDataAgents": {
+              "methods": [
+                "list_accessible_data_agents"
+              ]
+            },
+            "GetDataAgent": {
+              "methods": [
+                "get_data_agent"
+              ]
+            },
+            "CreateDataAgent": {
+              "methods": [
+                "create_data_agent"
+              ]
+            },
+            "UpdateDataAgent": {
+              "methods": [
+                "update_data_agent"
+              ]
+            },
+            "DeleteDataAgent": {
+              "methods": [
+                "delete_data_agent"
+              ]
+            },
+            "GetIamPolicy": {
+              "methods": [
+                "get_iam_policy"
+              ]
+            },
+            "SetIamPolicy": {
+              "methods": [
+                "set_iam_policy"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "DataChatService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::GeminiDataAnalytics::V1beta::DataChatService::Client",
+          "rpcs": {
+            "Chat": {
+              "methods": [
+                "chat"
+              ]
+            },
+            "CreateConversation": {
+              "methods": [
+                "create_conversation"
+              ]
+            },
+            "GetConversation": {
+              "methods": [
+                "get_conversation"
+              ]
+            },
+            "ListConversations": {
+              "methods": [
+                "list_conversations"
+              ]
+            },
+            "ListMessages": {
+              "methods": [
+                "list_messages"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}
