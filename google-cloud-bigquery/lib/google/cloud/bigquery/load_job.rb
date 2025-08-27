@@ -737,6 +737,15 @@ module Google
         end
 
         ##
+        # The URI of thereference file with the reader schema. This file is only
+        # loaded if it is part of source URIs, but is not loaded otherwise.
+        # It is enabled for the following formats: `AVRO`, `PARQUET`, `ORC`.
+        #
+        # @return [String, nil] The URI of the reference file, or `nil` if not set.
+        def reference_file_schema_uri
+          @gapi.configuration.load.reference_file_schema_uri
+        end
+
         # When source_format is set to `CSV`, indicates if the embedded ASCII
         # control characters (the first 32 characters in the ASCII-table, from
         # `\x00` to `\x1F`) are preserved. By default, ASCII control
@@ -2765,6 +2774,17 @@ module Google
           end
 
           ##
+
+          # Sets the URI of thereference file with the reader schema. This file
+          # is only loaded if it is part of source URIs, but is not loaded
+          # otherwise. It is enabled for the following formats: `AVRO`,
+          # `PARQUET`, `ORC`.
+          #
+          # @param [String, nil] uri The URI of the reference file, or `nil` to unset.
+          def reference_file_schema_uri= uri
+            @gapi.configuration.load.update! reference_file_schema_uri: uri
+          end
+
           # When source_format is set to `CSV`, sets whether the embedded ASCII
           # control characters (the first 32 characters in the ASCII-table, from
           # `\x00` to `\x1F`) are preserved. By default, ASCII control
