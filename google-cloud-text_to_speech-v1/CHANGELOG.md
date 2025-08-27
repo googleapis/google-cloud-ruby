@@ -1,5 +1,12 @@
 # Release History
 
+### 1.10.0 (2025-08-27)
+
+#### Features
+
+* Add enum value M4A to enum AudioEncoding 
+* Support promptable voices by specifying a model name and a prompt ([#30901](https://github.com/googleapis/google-cloud-ruby/issues/30901)) 
+
 ### 1.9.0 (2025-05-12)
 
 #### Features
