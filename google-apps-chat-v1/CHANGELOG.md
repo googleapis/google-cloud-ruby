@@ -1,5 +1,15 @@
 # Changelog
 
+### 0.15.0 (2025-08-27)
+
+### ⚠ BREAKING CHANGES
+
+* Changed field behavior for an existing field `name` in message `.google.chat.v1.QuotedMessageMetadata` ([#30899](https://github.com/googleapis/google-cloud-ruby/issues/30899))
+
+#### Bug Fixes
+
+* Changed field behavior for an existing field `name` in message `.google.chat.v1.QuotedMessageMetadata` ([#30899](https://github.com/googleapis/google-cloud-ruby/issues/30899)) 
+
 ### 0.14.0 (2025-08-12)
 
 #### Features
