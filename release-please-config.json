@@ -1351,6 +1351,10 @@
       "component": "google-cloud-run-v2",
       "version_file": "lib/google/cloud/run/v2/version.rb"
     },
+    "google-cloud-saas_platform-saas_service_mgmt": {
+      "component": "google-cloud-saas_platform-saas_service_mgmt",
+      "version_file": "lib/google/cloud/saas_platform/saas_service_mgmt/version.rb"
+    },
     "google-cloud-saas_platform-saas_service_mgmt-v1beta1": {
       "component": "google-cloud-saas_platform-saas_service_mgmt-v1beta1",
       "version_file": "lib/google/cloud/saas_platform/saas_service_mgmt/v1beta1/version.rb"

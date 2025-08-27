@@ -1,0 +1,25 @@
+{
+  "generated": [
+    ".gitignore",
+    ".repo-metadata.json",
+    ".rubocop.yml",
+    ".toys.rb",
+    ".yardopts",
+    "AUTHENTICATION.md",
+    "CHANGELOG.md",
+    "Gemfile",
+    "LICENSE.md",
+    "README.md",
+    "Rakefile",
+    "google-cloud-saas_platform-saas_service_mgmt.gemspec",
+    "lib/google-cloud-saas_platform-saas_service_mgmt.rb",
+    "lib/google/cloud/saas_platform/saas_service_mgmt.rb",
+    "lib/google/cloud/saas_platform/saas_service_mgmt/version.rb",
+    "test/google/cloud/saas_platform/saas_service_mgmt/client_test.rb",
+    "test/google/cloud/saas_platform/saas_service_mgmt/version_test.rb",
+    "test/helper.rb"
+  ],
+  "static": [
+    ".OwlBot.yaml"
+  ]
+}
