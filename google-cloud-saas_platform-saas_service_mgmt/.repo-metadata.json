@@ -8,7 +8,7 @@
     "name": "saasservicemgmt",
     "name_pretty": "SaaS Runtime API",
     "product_documentation": "https://cloud.google.com/saas-runtime/docs/overview",
-    "release_level": "unreleased",
+    "release_level": "preview",
     "repo": "googleapis/google-cloud-ruby",
     "requires_billing": true,
     "ruby-cloud-description": "SaaS Runtime lets you store, host, manage, and monitor software as a service (SaaS) applications on Google Cloud.",
