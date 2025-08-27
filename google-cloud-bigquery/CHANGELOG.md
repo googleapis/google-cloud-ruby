@@ -1,5 +1,11 @@
 # Release History
 
+### 1.56.0 (2025-08-27)
+
+#### Features
+
+* Add support for preserve_ascii_control_characters in CSVOptions and LoadJobConfiguration ([#30857](https://github.com/googleapis/google-cloud-ruby/issues/30857)) 
+
 ### 1.55.0 (2025-08-26)
 
 #### Features
