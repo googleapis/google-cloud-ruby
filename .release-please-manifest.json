@@ -669,7 +669,7 @@
   "google-cloud-run-client+FILLER": "0.0.0",
   "google-cloud-run-v2": "0.26.0",
   "google-cloud-run-v2+FILLER": "0.0.0",
-  "google-cloud-saas_platform-saas_service_mgmt": "0.0.1",
+  "google-cloud-saas_platform-saas_service_mgmt": "0.1.0",
   "google-cloud-saas_platform-saas_service_mgmt+FILLER": "0.0.0",
   "google-cloud-saas_platform-saas_service_mgmt-v1beta1": "0.1.0",
   "google-cloud-saas_platform-saas_service_mgmt-v1beta1+FILLER": "0.0.0",
