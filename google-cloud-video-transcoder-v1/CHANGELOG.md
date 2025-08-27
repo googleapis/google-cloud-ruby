@@ -1,5 +1,11 @@
 # Changelog
 
+### 2.3.0 (2025-08-27)
+
+#### Features
+
+* add support for automatically generating subtitle for input videos ([#30880](https://github.com/googleapis/google-cloud-ruby/issues/30880)) 
+
 ### 2.2.0 (2025-07-25)
 
 #### Features
