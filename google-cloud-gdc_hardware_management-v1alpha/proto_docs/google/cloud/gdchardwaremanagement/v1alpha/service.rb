@@ -181,6 +181,20 @@ module Google
           end
         end
 
+        # A request to cancel an order.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The name of the order.
+        #     Format: `projects/{project}/locations/{location}/orders/{order}`
+        # @!attribute [rw] request_id
+        #   @return [::String]
+        #     Optional. An optional unique identifier for this request. See
+        #     [AIP-155](https://google.aip.dev/155).
+        class CancelOrderRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # A request to list sites.
         # @!attribute [rw] parent
         #   @return [::String]
@@ -877,6 +891,9 @@ module Google
 
             # The Zone failed in factory turnup checks.
             FACTORY_TURNUP_CHECKS_FAILED = 2
+
+            # Verify that a valid cluster intent is present.
+            VERIFY_CLUSTER_INTENT_PRESENCE = 4
           end
 
           # Valid provisioning state signals for a zone.
@@ -919,6 +936,20 @@ module Google
         #   @return [::String]
         #     Output only. API version used to start the operation.
         class OperationMetadata
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # A request to change the requested date of an order.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The name of the order to update.
+        #     Format: projects/\\{project}/locations/\\{location}/orders/\\{order}
+        # @!attribute [rw] requested_date
+        #   @return [::Google::Type::Date]
+        #     Required. The date to which the customer or Google wants to set the
+        #     scheduled installation date.
+        class RequestOrderDateChangeRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end

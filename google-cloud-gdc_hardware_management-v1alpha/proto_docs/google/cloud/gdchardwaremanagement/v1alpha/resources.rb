@@ -57,9 +57,12 @@ module Google
         #     Required. Information about the customer's motivation for this order. The
         #     length of this field must be <= 1000 characters.
         # @!attribute [rw] fulfillment_time
+        #   @deprecated This field is deprecated and may be removed in the next major version update.
         #   @return [::Google::Protobuf::Timestamp]
-        #     Required. Customer specified deadline by when this order should be
-        #     fulfilled.
+        #     Deprecated: Please use customer_requested_installation_date instead.
+        # @!attribute [rw] customer_requested_installation_date
+        #   @return [::Google::Type::Date]
+        #     Optional. Customer requested installation date for this order.
         # @!attribute [rw] region_code
         #   @return [::String]
         #     Required. [Unicode CLDR](http://cldr.unicode.org/) region code where this
@@ -92,6 +95,26 @@ module Google
         # @!attribute [r] estimated_installation_date
         #   @return [::Google::Type::Date]
         #     Output only. Estimated installation date for this order.
+        # @!attribute [r] estimated_delivery_date
+        #   @return [::Google::Type::Date]
+        #     Output only. Estimated delivery date for this order.
+        # @!attribute [rw] migration
+        #   @return [::Boolean]
+        #     Optional. Whether this order is a migration from customer's existing
+        #     infrastructure.
+        # @!attribute [r] accepted_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Output only. The time when the order was moved to ACCEPTED state.
+        # @!attribute [r] requested_date_change
+        #   @return [::Google::Type::Date]
+        #     Output only. The date to which the customer or Google wants to set the
+        #     scheduled installation date.
+        # @!attribute [r] vendor_notes
+        #   @return [::String]
+        #     Output only. Notes for this order, provided by the vendor.
+        # @!attribute [r] vendor_contact
+        #   @return [::Google::Cloud::GDCHardwareManagement::V1alpha::OrganizationContact]
+        #     Output only. Contact information of the SI assigned to this order.
         class Order
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -286,9 +309,10 @@ module Google
         #     Optional. Name of the zone that the hardware in this HardwareGroup belongs
         #     to. Format: `projects/{project}/locations/{location}/zones/{zone}`
         # @!attribute [rw] requested_installation_date
+        #   @deprecated This field is deprecated and may be removed in the next major version update.
         #   @return [::Google::Type::Date]
-        #     Optional. Requested installation date for the hardware in this
-        #     HardwareGroup. Filled in by the customer.
+        #     Deprecated: This value is not used. Use the requested_installation_date
+        #     field in the Order resource instead.
         class HardwareGroup
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -397,6 +421,9 @@ module Google
         # @!attribute [r] machine_infos
         #   @return [::Array<::Google::Cloud::GDCHardwareManagement::V1alpha::Hardware::MachineInfo>]
         #     Output only. Per machine asset information needed for turnup.
+        # @!attribute [r] estimated_delivery_date
+        #   @return [::Google::Type::Date]
+        #     Output only. The estimated delivery date of the hardware.
         class Hardware
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -695,6 +722,22 @@ module Google
         # @!attribute [r] provisioning_state
         #   @return [::Google::Cloud::GDCHardwareManagement::V1alpha::Zone::ProvisioningState]
         #     Output only. Provisioning state for configurations like MAC addresses.
+        # @!attribute [rw] skip_cluster_provisioning
+        #   @return [::Boolean]
+        #     Optional. Whether to skip the cluster provisioning step during factory
+        #     turnup. If true, indicates that the Kubernetes cluster will be created
+        #     after the zone's hardware is installed at the customer site.
+        # @!attribute [r] cluster_intent_required
+        #   @return [::Boolean]
+        #     Output only. Indicates whether a valid cluster intent must be provided by
+        #     the customer before accepting the order. If true, the order cannot be
+        #     accepted until cluster intent is present. This is used to enforce early
+        #     validation and prevent delays caused by missing configuration.
+        # @!attribute [r] cluster_intent_verified
+        #   @return [::Boolean]
+        #     Output only. Indicates whether the provided cluster intent has been
+        #     successfully verified. This flag ensures cluster intent exists before order
+        #     can be accepted.
         class Zone
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -888,8 +931,21 @@ module Google
             # C13.
             C_13 = 2
 
-            # Standard european receptacle.
+            # Deprecated: Please use TYPE_G_BS1363, CEE_7_3, CEE_7_5 or TYPE_F
+            # instead.
             STANDARD_EU = 3
+
+            # Type G / BS1363.
+            TYPE_G_BS1363 = 4
+
+            # C 7/3.
+            CEE_7_3 = 5
+
+            # C 7/5.
+            CEE_7_5 = 6
+
+            # Type F.
+            TYPE_F = 7
           end
 
           # Valid network uplink types.
