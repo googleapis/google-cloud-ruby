@@ -1,0 +1,2935 @@
+{
+  "client_library": {
+    "name": "google-shopping-merchant-accounts-v1",
+    "version": "",
+    "language": "RUBY",
+    "apis": [
+      {
+        "id": "google.shopping.merchant.accounts.v1",
+        "version": "v1"
+      }
+    ]
+  },
+  "snippets": [
+    {
+      "region_tag": "merchantapi_v1_generated_AccountIssueService_ListAccountIssues_sync",
+      "title": "Snippet for the list_account_issues call in the AccountIssueService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Shopping::Merchant::Accounts::V1::AccountIssueService::Client#list_account_issues.",
+      "file": "account_issue_service/list_account_issues.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_account_issues",
+        "full_name": "::Google::Shopping::Merchant::Accounts::V1::AccountIssueService::Client#list_account_issues",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Shopping::Merchant::Accounts::V1::ListAccountIssuesRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Shopping::Merchant::Accounts::V1::ListAccountIssuesResponse",
+        "client": {
+          "short_name": "AccountIssueService::Client",
+          "full_name": "::Google::Shopping::Merchant::Accounts::V1::AccountIssueService::Client"
+        },
+        "method": {
+          "short_name": "ListAccountIssues",
+          "full_name": "google.shopping.merchant.accounts.v1.AccountIssueService.ListAccountIssues",
+          "service": {
+            "short_name": "AccountIssueService",
+            "full_name": "google.shopping.merchant.accounts.v1.AccountIssueService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "merchantapi_v1_generated_AccountRelationshipsService_GetAccountRelationship_sync",
+      "title": "Snippet for the get_account_relationship call in the AccountRelationshipsService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Shopping::Merchant::Accounts::V1::AccountRelationshipsService::Client#get_account_relationship.",
+      "file": "account_relationships_service/get_account_relationship.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_account_relationship",
+        "full_name": "::Google::Shopping::Merchant::Accounts::V1::AccountRelationshipsService::Client#get_account_relationship",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Shopping::Merchant::Accounts::V1::GetAccountRelationshipRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Shopping::Merchant::Accounts::V1::AccountRelationship",
+        "client": {
+          "short_name": "AccountRelationshipsService::Client",
+          "full_name": "::Google::Shopping::Merchant::Accounts::V1::AccountRelationshipsService::Client"
+        },
+        "method": {
+          "short_name": "GetAccountRelationship",
+          "full_name": "google.shopping.merchant.accounts.v1.AccountRelationshipsService.GetAccountRelationship",
+          "service": {
+            "short_name": "AccountRelationshipsService",
+            "full_name": "google.shopping.merchant.accounts.v1.AccountRelationshipsService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "merchantapi_v1_generated_AccountRelationshipsService_UpdateAccountRelationship_sync",
+      "title": "Snippet for the update_account_relationship call in the AccountRelationshipsService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Shopping::Merchant::Accounts::V1::AccountRelationshipsService::Client#update_account_relationship.",
+      "file": "account_relationships_service/update_account_relationship.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_account_relationship",
+        "full_name": "::Google::Shopping::Merchant::Accounts::V1::AccountRelationshipsService::Client#update_account_relationship",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Shopping::Merchant::Accounts::V1::UpdateAccountRelationshipRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Shopping::Merchant::Accounts::V1::AccountRelationship",
+        "client": {
+          "short_name": "AccountRelationshipsService::Client",
+          "full_name": "::Google::Shopping::Merchant::Accounts::V1::AccountRelationshipsService::Client"
+        },
+        "method": {
+          "short_name": "UpdateAccountRelationship",
+          "full_name": "google.shopping.merchant.accounts.v1.AccountRelationshipsService.UpdateAccountRelationship",
+          "service": {
+            "short_name": "AccountRelationshipsService",
+            "full_name": "google.shopping.merchant.accounts.v1.AccountRelationshipsService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "merchantapi_v1_generated_AccountRelationshipsService_ListAccountRelationships_sync",
+      "title": "Snippet for the list_account_relationships call in the AccountRelationshipsService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Shopping::Merchant::Accounts::V1::AccountRelationshipsService::Client#list_account_relationships.",
+      "file": "account_relationships_service/list_account_relationships.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_account_relationships",
+        "full_name": "::Google::Shopping::Merchant::Accounts::V1::AccountRelationshipsService::Client#list_account_relationships",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Shopping::Merchant::Accounts::V1::ListAccountRelationshipsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Shopping::Merchant::Accounts::V1::ListAccountRelationshipsResponse",
+        "client": {
+          "short_name": "AccountRelationshipsService::Client",
+          "full_name": "::Google::Shopping::Merchant::Accounts::V1::AccountRelationshipsService::Client"
+        },
+        "method": {
+          "short_name": "ListAccountRelationships",
+          "full_name": "google.shopping.merchant.accounts.v1.AccountRelationshipsService.ListAccountRelationships",
+          "service": {
+            "short_name": "AccountRelationshipsService",
+            "full_name": "google.shopping.merchant.accounts.v1.AccountRelationshipsService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "merchantapi_v1_generated_AccountServicesService_GetAccountService_sync",
+      "title": "Snippet for the get_account_service call in the AccountServicesService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Shopping::Merchant::Accounts::V1::AccountServicesService::Client#get_account_service.",
+      "file": "account_services_service/get_account_service.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_account_service",
+        "full_name": "::Google::Shopping::Merchant::Accounts::V1::AccountServicesService::Client#get_account_service",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Shopping::Merchant::Accounts::V1::GetAccountServiceRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Shopping::Merchant::Accounts::V1::AccountService",
+        "client": {
+          "short_name": "AccountServicesService::Client",
+          "full_name": "::Google::Shopping::Merchant::Accounts::V1::AccountServicesService::Client"
+        },
+        "method": {
+          "short_name": "GetAccountService",
+          "full_name": "google.shopping.merchant.accounts.v1.AccountServicesService.GetAccountService",
+          "service": {
+            "short_name": "AccountServicesService",
+            "full_name": "google.shopping.merchant.accounts.v1.AccountServicesService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "merchantapi_v1_generated_AccountServicesService_ListAccountServices_sync",
+      "title": "Snippet for the list_account_services call in the AccountServicesService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Shopping::Merchant::Accounts::V1::AccountServicesService::Client#list_account_services.",
+      "file": "account_services_service/list_account_services.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_account_services",
+        "full_name": "::Google::Shopping::Merchant::Accounts::V1::AccountServicesService::Client#list_account_services",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Shopping::Merchant::Accounts::V1::ListAccountServicesRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Shopping::Merchant::Accounts::V1::ListAccountServicesResponse",
+        "client": {
+          "short_name": "AccountServicesService::Client",
+          "full_name": "::Google::Shopping::Merchant::Accounts::V1::AccountServicesService::Client"
+        },
+        "method": {
+          "short_name": "ListAccountServices",
+          "full_name": "google.shopping.merchant.accounts.v1.AccountServicesService.ListAccountServices",
+          "service": {
+            "short_name": "AccountServicesService",
+            "full_name": "google.shopping.merchant.accounts.v1.AccountServicesService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "merchantapi_v1_generated_AccountServicesService_ProposeAccountService_sync",
+      "title": "Snippet for the propose_account_service call in the AccountServicesService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Shopping::Merchant::Accounts::V1::AccountServicesService::Client#propose_account_service.",
+      "file": "account_services_service/propose_account_service.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "propose_account_service",
+        "full_name": "::Google::Shopping::Merchant::Accounts::V1::AccountServicesService::Client#propose_account_service",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Shopping::Merchant::Accounts::V1::ProposeAccountServiceRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Shopping::Merchant::Accounts::V1::AccountService",
+        "client": {
+          "short_name": "AccountServicesService::Client",
+          "full_name": "::Google::Shopping::Merchant::Accounts::V1::AccountServicesService::Client"
+        },
+        "method": {
+          "short_name": "ProposeAccountService",
+          "full_name": "google.shopping.merchant.accounts.v1.AccountServicesService.ProposeAccountService",
+          "service": {
+            "short_name": "AccountServicesService",
+            "full_name": "google.shopping.merchant.accounts.v1.AccountServicesService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "merchantapi_v1_generated_AccountServicesService_ApproveAccountService_sync",
+      "title": "Snippet for the approve_account_service call in the AccountServicesService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Shopping::Merchant::Accounts::V1::AccountServicesService::Client#approve_account_service.",
+      "file": "account_services_service/approve_account_service.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "approve_account_service",
+        "full_name": "::Google::Shopping::Merchant::Accounts::V1::AccountServicesService::Client#approve_account_service",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Shopping::Merchant::Accounts::V1::ApproveAccountServiceRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Shopping::Merchant::Accounts::V1::AccountService",
+        "client": {
+          "short_name": "AccountServicesService::Client",
+          "full_name": "::Google::Shopping::Merchant::Accounts::V1::AccountServicesService::Client"
+        },
+        "method": {
+          "short_name": "ApproveAccountService",
+          "full_name": "google.shopping.merchant.accounts.v1.AccountServicesService.ApproveAccountService",
+          "service": {
+            "short_name": "AccountServicesService",
+            "full_name": "google.shopping.merchant.accounts.v1.AccountServicesService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "merchantapi_v1_generated_AccountServicesService_RejectAccountService_sync",
+      "title": "Snippet for the reject_account_service call in the AccountServicesService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Shopping::Merchant::Accounts::V1::AccountServicesService::Client#reject_account_service.",
+      "file": "account_services_service/reject_account_service.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "reject_account_service",
+        "full_name": "::Google::Shopping::Merchant::Accounts::V1::AccountServicesService::Client#reject_account_service",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Shopping::Merchant::Accounts::V1::RejectAccountServiceRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Protobuf::Empty",
+        "client": {
+          "short_name": "AccountServicesService::Client",
+          "full_name": "::Google::Shopping::Merchant::Accounts::V1::AccountServicesService::Client"
+        },
+        "method": {
+          "short_name": "RejectAccountService",
+          "full_name": "google.shopping.merchant.accounts.v1.AccountServicesService.RejectAccountService",
+          "service": {
+            "short_name": "AccountServicesService",
+            "full_name": "google.shopping.merchant.accounts.v1.AccountServicesService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "merchantapi_v1_generated_UserService_GetUser_sync",
+      "title": "Snippet for the get_user call in the UserService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Shopping::Merchant::Accounts::V1::UserService::Client#get_user.",
+      "file": "user_service/get_user.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_user",
+        "full_name": "::Google::Shopping::Merchant::Accounts::V1::UserService::Client#get_user",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Shopping::Merchant::Accounts::V1::GetUserRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Shopping::Merchant::Accounts::V1::User",
+        "client": {
+          "short_name": "UserService::Client",
+          "full_name": "::Google::Shopping::Merchant::Accounts::V1::UserService::Client"
+        },
+        "method": {
+          "short_name": "GetUser",
+          "full_name": "google.shopping.merchant.accounts.v1.UserService.GetUser",
+          "service": {
+            "short_name": "UserService",
+            "full_name": "google.shopping.merchant.accounts.v1.UserService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "merchantapi_v1_generated_UserService_CreateUser_sync",
+      "title": "Snippet for the create_user call in the UserService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Shopping::Merchant::Accounts::V1::UserService::Client#create_user.",
+      "file": "user_service/create_user.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_user",
+        "full_name": "::Google::Shopping::Merchant::Accounts::V1::UserService::Client#create_user",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Shopping::Merchant::Accounts::V1::CreateUserRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Shopping::Merchant::Accounts::V1::User",
+        "client": {
+          "short_name": "UserService::Client",
+          "full_name": "::Google::Shopping::Merchant::Accounts::V1::UserService::Client"
+        },
+        "method": {
+          "short_name": "CreateUser",
+          "full_name": "google.shopping.merchant.accounts.v1.UserService.CreateUser",
+          "service": {
+            "short_name": "UserService",
+            "full_name": "google.shopping.merchant.accounts.v1.UserService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "merchantapi_v1_generated_UserService_DeleteUser_sync",
+      "title": "Snippet for the delete_user call in the UserService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Shopping::Merchant::Accounts::V1::UserService::Client#delete_user.",
+      "file": "user_service/delete_user.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_user",
+        "full_name": "::Google::Shopping::Merchant::Accounts::V1::UserService::Client#delete_user",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Shopping::Merchant::Accounts::V1::DeleteUserRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Protobuf::Empty",
+        "client": {
+          "short_name": "UserService::Client",
+          "full_name": "::Google::Shopping::Merchant::Accounts::V1::UserService::Client"
+        },
+        "method": {
+          "short_name": "DeleteUser",
+          "full_name": "google.shopping.merchant.accounts.v1.UserService.DeleteUser",
+          "service": {
+            "short_name": "UserService",
+            "full_name": "google.shopping.merchant.accounts.v1.UserService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "merchantapi_v1_generated_UserService_UpdateUser_sync",
+      "title": "Snippet for the update_user call in the UserService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Shopping::Merchant::Accounts::V1::UserService::Client#update_user.",
+      "file": "user_service/update_user.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_user",
+        "full_name": "::Google::Shopping::Merchant::Accounts::V1::UserService::Client#update_user",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Shopping::Merchant::Accounts::V1::UpdateUserRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Shopping::Merchant::Accounts::V1::User",
+        "client": {
+          "short_name": "UserService::Client",
+          "full_name": "::Google::Shopping::Merchant::Accounts::V1::UserService::Client"
+        },
+        "method": {
+          "short_name": "UpdateUser",
+          "full_name": "google.shopping.merchant.accounts.v1.UserService.UpdateUser",
+          "service": {
+            "short_name": "UserService",
+            "full_name": "google.shopping.merchant.accounts.v1.UserService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "merchantapi_v1_generated_UserService_ListUsers_sync",
+      "title": "Snippet for the list_users call in the UserService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Shopping::Merchant::Accounts::V1::UserService::Client#list_users.",
+      "file": "user_service/list_users.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_users",
+        "full_name": "::Google::Shopping::Merchant::Accounts::V1::UserService::Client#list_users",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Shopping::Merchant::Accounts::V1::ListUsersRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Shopping::Merchant::Accounts::V1::ListUsersResponse",
+        "client": {
+          "short_name": "UserService::Client",
+          "full_name": "::Google::Shopping::Merchant::Accounts::V1::UserService::Client"
+        },
+        "method": {
+          "short_name": "ListUsers",
+          "full_name": "google.shopping.merchant.accounts.v1.UserService.ListUsers",
+          "service": {
+            "short_name": "UserService",
+            "full_name": "google.shopping.merchant.accounts.v1.UserService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "merchantapi_v1_generated_AccountsService_GetAccount_sync",
+      "title": "Snippet for the get_account call in the AccountsService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Shopping::Merchant::Accounts::V1::AccountsService::Client#get_account.",
+      "file": "accounts_service/get_account.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_account",
+        "full_name": "::Google::Shopping::Merchant::Accounts::V1::AccountsService::Client#get_account",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Shopping::Merchant::Accounts::V1::GetAccountRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Shopping::Merchant::Accounts::V1::Account",
+        "client": {
+          "short_name": "AccountsService::Client",
+          "full_name": "::Google::Shopping::Merchant::Accounts::V1::AccountsService::Client"
+        },
+        "method": {
+          "short_name": "GetAccount",
+          "full_name": "google.shopping.merchant.accounts.v1.AccountsService.GetAccount",
+          "service": {
+            "short_name": "AccountsService",
+            "full_name": "google.shopping.merchant.accounts.v1.AccountsService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "merchantapi_v1_generated_AccountsService_CreateAndConfigureAccount_sync",
+      "title": "Snippet for the create_and_configure_account call in the AccountsService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Shopping::Merchant::Accounts::V1::AccountsService::Client#create_and_configure_account.",
+      "file": "accounts_service/create_and_configure_account.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_and_configure_account",
+        "full_name": "::Google::Shopping::Merchant::Accounts::V1::AccountsService::Client#create_and_configure_account",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Shopping::Merchant::Accounts::V1::CreateAndConfigureAccountRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Shopping::Merchant::Accounts::V1::Account",
+        "client": {
+          "short_name": "AccountsService::Client",
+          "full_name": "::Google::Shopping::Merchant::Accounts::V1::AccountsService::Client"
+        },
+        "method": {
+          "short_name": "CreateAndConfigureAccount",
+          "full_name": "google.shopping.merchant.accounts.v1.AccountsService.CreateAndConfigureAccount",
+          "service": {
+            "short_name": "AccountsService",
+            "full_name": "google.shopping.merchant.accounts.v1.AccountsService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "merchantapi_v1_generated_AccountsService_DeleteAccount_sync",
+      "title": "Snippet for the delete_account call in the AccountsService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Shopping::Merchant::Accounts::V1::AccountsService::Client#delete_account.",
+      "file": "accounts_service/delete_account.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_account",
+        "full_name": "::Google::Shopping::Merchant::Accounts::V1::AccountsService::Client#delete_account",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Shopping::Merchant::Accounts::V1::DeleteAccountRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Protobuf::Empty",
+        "client": {
+          "short_name": "AccountsService::Client",
+          "full_name": "::Google::Shopping::Merchant::Accounts::V1::AccountsService::Client"
+        },
+        "method": {
+          "short_name": "DeleteAccount",
+          "full_name": "google.shopping.merchant.accounts.v1.AccountsService.DeleteAccount",
+          "service": {
+            "short_name": "AccountsService",
+            "full_name": "google.shopping.merchant.accounts.v1.AccountsService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "merchantapi_v1_generated_AccountsService_UpdateAccount_sync",
+      "title": "Snippet for the update_account call in the AccountsService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Shopping::Merchant::Accounts::V1::AccountsService::Client#update_account.",
+      "file": "accounts_service/update_account.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_account",
+        "full_name": "::Google::Shopping::Merchant::Accounts::V1::AccountsService::Client#update_account",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Shopping::Merchant::Accounts::V1::UpdateAccountRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Shopping::Merchant::Accounts::V1::Account",
+        "client": {
+          "short_name": "AccountsService::Client",
+          "full_name": "::Google::Shopping::Merchant::Accounts::V1::AccountsService::Client"
+        },
+        "method": {
+          "short_name": "UpdateAccount",
+          "full_name": "google.shopping.merchant.accounts.v1.AccountsService.UpdateAccount",
+          "service": {
+            "short_name": "AccountsService",
+            "full_name": "google.shopping.merchant.accounts.v1.AccountsService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "merchantapi_v1_generated_AccountsService_ListAccounts_sync",
+      "title": "Snippet for the list_accounts call in the AccountsService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Shopping::Merchant::Accounts::V1::AccountsService::Client#list_accounts.",
+      "file": "accounts_service/list_accounts.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_accounts",
+        "full_name": "::Google::Shopping::Merchant::Accounts::V1::AccountsService::Client#list_accounts",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Shopping::Merchant::Accounts::V1::ListAccountsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Shopping::Merchant::Accounts::V1::ListAccountsResponse",
+        "client": {
+          "short_name": "AccountsService::Client",
+          "full_name": "::Google::Shopping::Merchant::Accounts::V1::AccountsService::Client"
+        },
+        "method": {
+          "short_name": "ListAccounts",
+          "full_name": "google.shopping.merchant.accounts.v1.AccountsService.ListAccounts",
+          "service": {
+            "short_name": "AccountsService",
+            "full_name": "google.shopping.merchant.accounts.v1.AccountsService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "merchantapi_v1_generated_AccountsService_ListSubAccounts_sync",
+      "title": "Snippet for the list_sub_accounts call in the AccountsService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Shopping::Merchant::Accounts::V1::AccountsService::Client#list_sub_accounts.",
+      "file": "accounts_service/list_sub_accounts.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_sub_accounts",
+        "full_name": "::Google::Shopping::Merchant::Accounts::V1::AccountsService::Client#list_sub_accounts",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Shopping::Merchant::Accounts::V1::ListSubAccountsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Shopping::Merchant::Accounts::V1::ListSubAccountsResponse",
+        "client": {
+          "short_name": "AccountsService::Client",
+          "full_name": "::Google::Shopping::Merchant::Accounts::V1::AccountsService::Client"
+        },
+        "method": {
+          "short_name": "ListSubAccounts",
+          "full_name": "google.shopping.merchant.accounts.v1.AccountsService.ListSubAccounts",
+          "service": {
+            "short_name": "AccountsService",
+            "full_name": "google.shopping.merchant.accounts.v1.AccountsService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "merchantapi_v1_generated_AutofeedSettingsService_GetAutofeedSettings_sync",
+      "title": "Snippet for the get_autofeed_settings call in the AutofeedSettingsService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Shopping::Merchant::Accounts::V1::AutofeedSettingsService::Client#get_autofeed_settings.",
+      "file": "autofeed_settings_service/get_autofeed_settings.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_autofeed_settings",
+        "full_name": "::Google::Shopping::Merchant::Accounts::V1::AutofeedSettingsService::Client#get_autofeed_settings",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Shopping::Merchant::Accounts::V1::GetAutofeedSettingsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Shopping::Merchant::Accounts::V1::AutofeedSettings",
+        "client": {
+          "short_name": "AutofeedSettingsService::Client",
+          "full_name": "::Google::Shopping::Merchant::Accounts::V1::AutofeedSettingsService::Client"
+        },
+        "method": {
+          "short_name": "GetAutofeedSettings",
+          "full_name": "google.shopping.merchant.accounts.v1.AutofeedSettingsService.GetAutofeedSettings",
+          "service": {
+            "short_name": "AutofeedSettingsService",
+            "full_name": "google.shopping.merchant.accounts.v1.AutofeedSettingsService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "merchantapi_v1_generated_AutofeedSettingsService_UpdateAutofeedSettings_sync",
+      "title": "Snippet for the update_autofeed_settings call in the AutofeedSettingsService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Shopping::Merchant::Accounts::V1::AutofeedSettingsService::Client#update_autofeed_settings.",
+      "file": "autofeed_settings_service/update_autofeed_settings.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_autofeed_settings",
+        "full_name": "::Google::Shopping::Merchant::Accounts::V1::AutofeedSettingsService::Client#update_autofeed_settings",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Shopping::Merchant::Accounts::V1::UpdateAutofeedSettingsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Shopping::Merchant::Accounts::V1::AutofeedSettings",
+        "client": {
+          "short_name": "AutofeedSettingsService::Client",
+          "full_name": "::Google::Shopping::Merchant::Accounts::V1::AutofeedSettingsService::Client"
+        },
+        "method": {
+          "short_name": "UpdateAutofeedSettings",
+          "full_name": "google.shopping.merchant.accounts.v1.AutofeedSettingsService.UpdateAutofeedSettings",
+          "service": {
+            "short_name": "AutofeedSettingsService",
+            "full_name": "google.shopping.merchant.accounts.v1.AutofeedSettingsService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "merchantapi_v1_generated_AutomaticImprovementsService_GetAutomaticImprovements_sync",
+      "title": "Snippet for the get_automatic_improvements call in the AutomaticImprovementsService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Shopping::Merchant::Accounts::V1::AutomaticImprovementsService::Client#get_automatic_improvements.",
+      "file": "automatic_improvements_service/get_automatic_improvements.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_automatic_improvements",
+        "full_name": "::Google::Shopping::Merchant::Accounts::V1::AutomaticImprovementsService::Client#get_automatic_improvements",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Shopping::Merchant::Accounts::V1::GetAutomaticImprovementsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Shopping::Merchant::Accounts::V1::AutomaticImprovements",
+        "client": {
+          "short_name": "AutomaticImprovementsService::Client",
+          "full_name": "::Google::Shopping::Merchant::Accounts::V1::AutomaticImprovementsService::Client"
+        },
+        "method": {
+          "short_name": "GetAutomaticImprovements",
+          "full_name": "google.shopping.merchant.accounts.v1.AutomaticImprovementsService.GetAutomaticImprovements",
+          "service": {
+            "short_name": "AutomaticImprovementsService",
+            "full_name": "google.shopping.merchant.accounts.v1.AutomaticImprovementsService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "merchantapi_v1_generated_AutomaticImprovementsService_UpdateAutomaticImprovements_sync",
+      "title": "Snippet for the update_automatic_improvements call in the AutomaticImprovementsService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Shopping::Merchant::Accounts::V1::AutomaticImprovementsService::Client#update_automatic_improvements.",
+      "file": "automatic_improvements_service/update_automatic_improvements.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_automatic_improvements",
+        "full_name": "::Google::Shopping::Merchant::Accounts::V1::AutomaticImprovementsService::Client#update_automatic_improvements",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Shopping::Merchant::Accounts::V1::UpdateAutomaticImprovementsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Shopping::Merchant::Accounts::V1::AutomaticImprovements",
+        "client": {
+          "short_name": "AutomaticImprovementsService::Client",
+          "full_name": "::Google::Shopping::Merchant::Accounts::V1::AutomaticImprovementsService::Client"
+        },
+        "method": {
+          "short_name": "UpdateAutomaticImprovements",
+          "full_name": "google.shopping.merchant.accounts.v1.AutomaticImprovementsService.UpdateAutomaticImprovements",
+          "service": {
+            "short_name": "AutomaticImprovementsService",
+            "full_name": "google.shopping.merchant.accounts.v1.AutomaticImprovementsService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "merchantapi_v1_generated_BusinessIdentityService_GetBusinessIdentity_sync",
+      "title": "Snippet for the get_business_identity call in the BusinessIdentityService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Shopping::Merchant::Accounts::V1::BusinessIdentityService::Client#get_business_identity.",
+      "file": "business_identity_service/get_business_identity.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_business_identity",
+        "full_name": "::Google::Shopping::Merchant::Accounts::V1::BusinessIdentityService::Client#get_business_identity",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Shopping::Merchant::Accounts::V1::GetBusinessIdentityRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Shopping::Merchant::Accounts::V1::BusinessIdentity",
+        "client": {
+          "short_name": "BusinessIdentityService::Client",
+          "full_name": "::Google::Shopping::Merchant::Accounts::V1::BusinessIdentityService::Client"
+        },
+        "method": {
+          "short_name": "GetBusinessIdentity",
+          "full_name": "google.shopping.merchant.accounts.v1.BusinessIdentityService.GetBusinessIdentity",
+          "service": {
+            "short_name": "BusinessIdentityService",
+            "full_name": "google.shopping.merchant.accounts.v1.BusinessIdentityService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "merchantapi_v1_generated_BusinessIdentityService_UpdateBusinessIdentity_sync",
+      "title": "Snippet for the update_business_identity call in the BusinessIdentityService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Shopping::Merchant::Accounts::V1::BusinessIdentityService::Client#update_business_identity.",
+      "file": "business_identity_service/update_business_identity.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_business_identity",
+        "full_name": "::Google::Shopping::Merchant::Accounts::V1::BusinessIdentityService::Client#update_business_identity",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Shopping::Merchant::Accounts::V1::UpdateBusinessIdentityRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Shopping::Merchant::Accounts::V1::BusinessIdentity",
+        "client": {
+          "short_name": "BusinessIdentityService::Client",
+          "full_name": "::Google::Shopping::Merchant::Accounts::V1::BusinessIdentityService::Client"
+        },
+        "method": {
+          "short_name": "UpdateBusinessIdentity",
+          "full_name": "google.shopping.merchant.accounts.v1.BusinessIdentityService.UpdateBusinessIdentity",
+          "service": {
+            "short_name": "BusinessIdentityService",
+            "full_name": "google.shopping.merchant.accounts.v1.BusinessIdentityService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "merchantapi_v1_generated_BusinessInfoService_GetBusinessInfo_sync",
+      "title": "Snippet for the get_business_info call in the BusinessInfoService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Shopping::Merchant::Accounts::V1::BusinessInfoService::Client#get_business_info.",
+      "file": "business_info_service/get_business_info.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_business_info",
+        "full_name": "::Google::Shopping::Merchant::Accounts::V1::BusinessInfoService::Client#get_business_info",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Shopping::Merchant::Accounts::V1::GetBusinessInfoRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Shopping::Merchant::Accounts::V1::BusinessInfo",
+        "client": {
+          "short_name": "BusinessInfoService::Client",
+          "full_name": "::Google::Shopping::Merchant::Accounts::V1::BusinessInfoService::Client"
+        },
+        "method": {
+          "short_name": "GetBusinessInfo",
+          "full_name": "google.shopping.merchant.accounts.v1.BusinessInfoService.GetBusinessInfo",
+          "service": {
+            "short_name": "BusinessInfoService",
+            "full_name": "google.shopping.merchant.accounts.v1.BusinessInfoService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "merchantapi_v1_generated_BusinessInfoService_UpdateBusinessInfo_sync",
+      "title": "Snippet for the update_business_info call in the BusinessInfoService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Shopping::Merchant::Accounts::V1::BusinessInfoService::Client#update_business_info.",
+      "file": "business_info_service/update_business_info.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_business_info",
+        "full_name": "::Google::Shopping::Merchant::Accounts::V1::BusinessInfoService::Client#update_business_info",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Shopping::Merchant::Accounts::V1::UpdateBusinessInfoRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Shopping::Merchant::Accounts::V1::BusinessInfo",
+        "client": {
+          "short_name": "BusinessInfoService::Client",
+          "full_name": "::Google::Shopping::Merchant::Accounts::V1::BusinessInfoService::Client"
+        },
+        "method": {
+          "short_name": "UpdateBusinessInfo",
+          "full_name": "google.shopping.merchant.accounts.v1.BusinessInfoService.UpdateBusinessInfo",
+          "service": {
+            "short_name": "BusinessInfoService",
+            "full_name": "google.shopping.merchant.accounts.v1.BusinessInfoService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "merchantapi_v1_generated_CheckoutSettingsService_GetCheckoutSettings_sync",
+      "title": "Snippet for the get_checkout_settings call in the CheckoutSettingsService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Shopping::Merchant::Accounts::V1::CheckoutSettingsService::Client#get_checkout_settings.",
+      "file": "checkout_settings_service/get_checkout_settings.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_checkout_settings",
+        "full_name": "::Google::Shopping::Merchant::Accounts::V1::CheckoutSettingsService::Client#get_checkout_settings",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Shopping::Merchant::Accounts::V1::GetCheckoutSettingsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Shopping::Merchant::Accounts::V1::CheckoutSettings",
+        "client": {
+          "short_name": "CheckoutSettingsService::Client",
+          "full_name": "::Google::Shopping::Merchant::Accounts::V1::CheckoutSettingsService::Client"
+        },
+        "method": {
+          "short_name": "GetCheckoutSettings",
+          "full_name": "google.shopping.merchant.accounts.v1.CheckoutSettingsService.GetCheckoutSettings",
+          "service": {
+            "short_name": "CheckoutSettingsService",
+            "full_name": "google.shopping.merchant.accounts.v1.CheckoutSettingsService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "merchantapi_v1_generated_CheckoutSettingsService_CreateCheckoutSettings_sync",
+      "title": "Snippet for the create_checkout_settings call in the CheckoutSettingsService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Shopping::Merchant::Accounts::V1::CheckoutSettingsService::Client#create_checkout_settings.",
+      "file": "checkout_settings_service/create_checkout_settings.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_checkout_settings",
+        "full_name": "::Google::Shopping::Merchant::Accounts::V1::CheckoutSettingsService::Client#create_checkout_settings",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Shopping::Merchant::Accounts::V1::CreateCheckoutSettingsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Shopping::Merchant::Accounts::V1::CheckoutSettings",
+        "client": {
+          "short_name": "CheckoutSettingsService::Client",
+          "full_name": "::Google::Shopping::Merchant::Accounts::V1::CheckoutSettingsService::Client"
+        },
+        "method": {
+          "short_name": "CreateCheckoutSettings",
+          "full_name": "google.shopping.merchant.accounts.v1.CheckoutSettingsService.CreateCheckoutSettings",
+          "service": {
+            "short_name": "CheckoutSettingsService",
+            "full_name": "google.shopping.merchant.accounts.v1.CheckoutSettingsService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "merchantapi_v1_generated_CheckoutSettingsService_UpdateCheckoutSettings_sync",
+      "title": "Snippet for the update_checkout_settings call in the CheckoutSettingsService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Shopping::Merchant::Accounts::V1::CheckoutSettingsService::Client#update_checkout_settings.",
+      "file": "checkout_settings_service/update_checkout_settings.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_checkout_settings",
+        "full_name": "::Google::Shopping::Merchant::Accounts::V1::CheckoutSettingsService::Client#update_checkout_settings",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Shopping::Merchant::Accounts::V1::UpdateCheckoutSettingsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Shopping::Merchant::Accounts::V1::CheckoutSettings",
+        "client": {
+          "short_name": "CheckoutSettingsService::Client",
+          "full_name": "::Google::Shopping::Merchant::Accounts::V1::CheckoutSettingsService::Client"
+        },
+        "method": {
+          "short_name": "UpdateCheckoutSettings",
+          "full_name": "google.shopping.merchant.accounts.v1.CheckoutSettingsService.UpdateCheckoutSettings",
+          "service": {
+            "short_name": "CheckoutSettingsService",
+            "full_name": "google.shopping.merchant.accounts.v1.CheckoutSettingsService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "merchantapi_v1_generated_CheckoutSettingsService_DeleteCheckoutSettings_sync",
+      "title": "Snippet for the delete_checkout_settings call in the CheckoutSettingsService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Shopping::Merchant::Accounts::V1::CheckoutSettingsService::Client#delete_checkout_settings.",
+      "file": "checkout_settings_service/delete_checkout_settings.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_checkout_settings",
+        "full_name": "::Google::Shopping::Merchant::Accounts::V1::CheckoutSettingsService::Client#delete_checkout_settings",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Shopping::Merchant::Accounts::V1::DeleteCheckoutSettingsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Protobuf::Empty",
+        "client": {
+          "short_name": "CheckoutSettingsService::Client",
+          "full_name": "::Google::Shopping::Merchant::Accounts::V1::CheckoutSettingsService::Client"
+        },
+        "method": {
+          "short_name": "DeleteCheckoutSettings",
+          "full_name": "google.shopping.merchant.accounts.v1.CheckoutSettingsService.DeleteCheckoutSettings",
+          "service": {
+            "short_name": "CheckoutSettingsService",
+            "full_name": "google.shopping.merchant.accounts.v1.CheckoutSettingsService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "merchantapi_v1_generated_DeveloperRegistrationService_RegisterGcp_sync",
+      "title": "Snippet for the register_gcp call in the DeveloperRegistrationService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Shopping::Merchant::Accounts::V1::DeveloperRegistrationService::Client#register_gcp.",
+      "file": "developer_registration_service/register_gcp.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "register_gcp",
+        "full_name": "::Google::Shopping::Merchant::Accounts::V1::DeveloperRegistrationService::Client#register_gcp",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Shopping::Merchant::Accounts::V1::RegisterGcpRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Shopping::Merchant::Accounts::V1::DeveloperRegistration",
+        "client": {
+          "short_name": "DeveloperRegistrationService::Client",
+          "full_name": "::Google::Shopping::Merchant::Accounts::V1::DeveloperRegistrationService::Client"
+        },
+        "method": {
+          "short_name": "RegisterGcp",
+          "full_name": "google.shopping.merchant.accounts.v1.DeveloperRegistrationService.RegisterGcp",
+          "service": {
+            "short_name": "DeveloperRegistrationService",
+            "full_name": "google.shopping.merchant.accounts.v1.DeveloperRegistrationService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "merchantapi_v1_generated_DeveloperRegistrationService_GetDeveloperRegistration_sync",
+      "title": "Snippet for the get_developer_registration call in the DeveloperRegistrationService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Shopping::Merchant::Accounts::V1::DeveloperRegistrationService::Client#get_developer_registration.",
+      "file": "developer_registration_service/get_developer_registration.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_developer_registration",
+        "full_name": "::Google::Shopping::Merchant::Accounts::V1::DeveloperRegistrationService::Client#get_developer_registration",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Shopping::Merchant::Accounts::V1::GetDeveloperRegistrationRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Shopping::Merchant::Accounts::V1::DeveloperRegistration",
+        "client": {
+          "short_name": "DeveloperRegistrationService::Client",
+          "full_name": "::Google::Shopping::Merchant::Accounts::V1::DeveloperRegistrationService::Client"
+        },
+        "method": {
+          "short_name": "GetDeveloperRegistration",
+          "full_name": "google.shopping.merchant.accounts.v1.DeveloperRegistrationService.GetDeveloperRegistration",
+          "service": {
+            "short_name": "DeveloperRegistrationService",
+            "full_name": "google.shopping.merchant.accounts.v1.DeveloperRegistrationService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "merchantapi_v1_generated_DeveloperRegistrationService_UnregisterGcp_sync",
+      "title": "Snippet for the unregister_gcp call in the DeveloperRegistrationService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Shopping::Merchant::Accounts::V1::DeveloperRegistrationService::Client#unregister_gcp.",
+      "file": "developer_registration_service/unregister_gcp.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "unregister_gcp",
+        "full_name": "::Google::Shopping::Merchant::Accounts::V1::DeveloperRegistrationService::Client#unregister_gcp",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Shopping::Merchant::Accounts::V1::UnregisterGcpRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Protobuf::Empty",
+        "client": {
+          "short_name": "DeveloperRegistrationService::Client",
+          "full_name": "::Google::Shopping::Merchant::Accounts::V1::DeveloperRegistrationService::Client"
+        },
+        "method": {
+          "short_name": "UnregisterGcp",
+          "full_name": "google.shopping.merchant.accounts.v1.DeveloperRegistrationService.UnregisterGcp",
+          "service": {
+            "short_name": "DeveloperRegistrationService",
+            "full_name": "google.shopping.merchant.accounts.v1.DeveloperRegistrationService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "merchantapi_v1_generated_EmailPreferencesService_GetEmailPreferences_sync",
+      "title": "Snippet for the get_email_preferences call in the EmailPreferencesService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Shopping::Merchant::Accounts::V1::EmailPreferencesService::Client#get_email_preferences.",
+      "file": "email_preferences_service/get_email_preferences.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_email_preferences",
+        "full_name": "::Google::Shopping::Merchant::Accounts::V1::EmailPreferencesService::Client#get_email_preferences",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Shopping::Merchant::Accounts::V1::GetEmailPreferencesRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Shopping::Merchant::Accounts::V1::EmailPreferences",
+        "client": {
+          "short_name": "EmailPreferencesService::Client",
+          "full_name": "::Google::Shopping::Merchant::Accounts::V1::EmailPreferencesService::Client"
+        },
+        "method": {
+          "short_name": "GetEmailPreferences",
+          "full_name": "google.shopping.merchant.accounts.v1.EmailPreferencesService.GetEmailPreferences",
+          "service": {
+            "short_name": "EmailPreferencesService",
+            "full_name": "google.shopping.merchant.accounts.v1.EmailPreferencesService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "merchantapi_v1_generated_EmailPreferencesService_UpdateEmailPreferences_sync",
+      "title": "Snippet for the update_email_preferences call in the EmailPreferencesService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Shopping::Merchant::Accounts::V1::EmailPreferencesService::Client#update_email_preferences.",
+      "file": "email_preferences_service/update_email_preferences.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_email_preferences",
+        "full_name": "::Google::Shopping::Merchant::Accounts::V1::EmailPreferencesService::Client#update_email_preferences",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Shopping::Merchant::Accounts::V1::UpdateEmailPreferencesRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Shopping::Merchant::Accounts::V1::EmailPreferences",
+        "client": {
+          "short_name": "EmailPreferencesService::Client",
+          "full_name": "::Google::Shopping::Merchant::Accounts::V1::EmailPreferencesService::Client"
+        },
+        "method": {
+          "short_name": "UpdateEmailPreferences",
+          "full_name": "google.shopping.merchant.accounts.v1.EmailPreferencesService.UpdateEmailPreferences",
+          "service": {
+            "short_name": "EmailPreferencesService",
+            "full_name": "google.shopping.merchant.accounts.v1.EmailPreferencesService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "merchantapi_v1_generated_GbpAccountsService_ListGbpAccounts_sync",
+      "title": "Snippet for the list_gbp_accounts call in the GbpAccountsService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Shopping::Merchant::Accounts::V1::GbpAccountsService::Client#list_gbp_accounts.",
+      "file": "gbp_accounts_service/list_gbp_accounts.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_gbp_accounts",
+        "full_name": "::Google::Shopping::Merchant::Accounts::V1::GbpAccountsService::Client#list_gbp_accounts",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Shopping::Merchant::Accounts::V1::ListGbpAccountsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Shopping::Merchant::Accounts::V1::ListGbpAccountsResponse",
+        "client": {
+          "short_name": "GbpAccountsService::Client",
+          "full_name": "::Google::Shopping::Merchant::Accounts::V1::GbpAccountsService::Client"
+        },
+        "method": {
+          "short_name": "ListGbpAccounts",
+          "full_name": "google.shopping.merchant.accounts.v1.GbpAccountsService.ListGbpAccounts",
+          "service": {
+            "short_name": "GbpAccountsService",
+            "full_name": "google.shopping.merchant.accounts.v1.GbpAccountsService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "merchantapi_v1_generated_GbpAccountsService_LinkGbpAccount_sync",
+      "title": "Snippet for the link_gbp_account call in the GbpAccountsService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Shopping::Merchant::Accounts::V1::GbpAccountsService::Client#link_gbp_account.",
+      "file": "gbp_accounts_service/link_gbp_account.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "link_gbp_account",
+        "full_name": "::Google::Shopping::Merchant::Accounts::V1::GbpAccountsService::Client#link_gbp_account",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Shopping::Merchant::Accounts::V1::LinkGbpAccountRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Shopping::Merchant::Accounts::V1::LinkGbpAccountResponse",
+        "client": {
+          "short_name": "GbpAccountsService::Client",
+          "full_name": "::Google::Shopping::Merchant::Accounts::V1::GbpAccountsService::Client"
+        },
+        "method": {
+          "short_name": "LinkGbpAccount",
+          "full_name": "google.shopping.merchant.accounts.v1.GbpAccountsService.LinkGbpAccount",
+          "service": {
+            "short_name": "GbpAccountsService",
+            "full_name": "google.shopping.merchant.accounts.v1.GbpAccountsService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "merchantapi_v1_generated_HomepageService_GetHomepage_sync",
+      "title": "Snippet for the get_homepage call in the HomepageService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Shopping::Merchant::Accounts::V1::HomepageService::Client#get_homepage.",
+      "file": "homepage_service/get_homepage.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_homepage",
+        "full_name": "::Google::Shopping::Merchant::Accounts::V1::HomepageService::Client#get_homepage",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Shopping::Merchant::Accounts::V1::GetHomepageRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Shopping::Merchant::Accounts::V1::Homepage",
+        "client": {
+          "short_name": "HomepageService::Client",
+          "full_name": "::Google::Shopping::Merchant::Accounts::V1::HomepageService::Client"
+        },
+        "method": {
+          "short_name": "GetHomepage",
+          "full_name": "google.shopping.merchant.accounts.v1.HomepageService.GetHomepage",
+          "service": {
+            "short_name": "HomepageService",
+            "full_name": "google.shopping.merchant.accounts.v1.HomepageService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "merchantapi_v1_generated_HomepageService_UpdateHomepage_sync",
+      "title": "Snippet for the update_homepage call in the HomepageService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Shopping::Merchant::Accounts::V1::HomepageService::Client#update_homepage.",
+      "file": "homepage_service/update_homepage.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_homepage",
+        "full_name": "::Google::Shopping::Merchant::Accounts::V1::HomepageService::Client#update_homepage",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Shopping::Merchant::Accounts::V1::UpdateHomepageRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Shopping::Merchant::Accounts::V1::Homepage",
+        "client": {
+          "short_name": "HomepageService::Client",
+          "full_name": "::Google::Shopping::Merchant::Accounts::V1::HomepageService::Client"
+        },
+        "method": {
+          "short_name": "UpdateHomepage",
+          "full_name": "google.shopping.merchant.accounts.v1.HomepageService.UpdateHomepage",
+          "service": {
+            "short_name": "HomepageService",
+            "full_name": "google.shopping.merchant.accounts.v1.HomepageService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "merchantapi_v1_generated_HomepageService_ClaimHomepage_sync",
+      "title": "Snippet for the claim_homepage call in the HomepageService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Shopping::Merchant::Accounts::V1::HomepageService::Client#claim_homepage.",
+      "file": "homepage_service/claim_homepage.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "claim_homepage",
+        "full_name": "::Google::Shopping::Merchant::Accounts::V1::HomepageService::Client#claim_homepage",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Shopping::Merchant::Accounts::V1::ClaimHomepageRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Shopping::Merchant::Accounts::V1::Homepage",
+        "client": {
+          "short_name": "HomepageService::Client",
+          "full_name": "::Google::Shopping::Merchant::Accounts::V1::HomepageService::Client"
+        },
+        "method": {
+          "short_name": "ClaimHomepage",
+          "full_name": "google.shopping.merchant.accounts.v1.HomepageService.ClaimHomepage",
+          "service": {
+            "short_name": "HomepageService",
+            "full_name": "google.shopping.merchant.accounts.v1.HomepageService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "merchantapi_v1_generated_HomepageService_UnclaimHomepage_sync",
+      "title": "Snippet for the unclaim_homepage call in the HomepageService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Shopping::Merchant::Accounts::V1::HomepageService::Client#unclaim_homepage.",
+      "file": "homepage_service/unclaim_homepage.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "unclaim_homepage",
+        "full_name": "::Google::Shopping::Merchant::Accounts::V1::HomepageService::Client#unclaim_homepage",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Shopping::Merchant::Accounts::V1::UnclaimHomepageRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Shopping::Merchant::Accounts::V1::Homepage",
+        "client": {
+          "short_name": "HomepageService::Client",
+          "full_name": "::Google::Shopping::Merchant::Accounts::V1::HomepageService::Client"
+        },
+        "method": {
+          "short_name": "UnclaimHomepage",
+          "full_name": "google.shopping.merchant.accounts.v1.HomepageService.UnclaimHomepage",
+          "service": {
+            "short_name": "HomepageService",
+            "full_name": "google.shopping.merchant.accounts.v1.HomepageService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "merchantapi_v1_generated_LfpProvidersService_FindLfpProviders_sync",
+      "title": "Snippet for the find_lfp_providers call in the LfpProvidersService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Shopping::Merchant::Accounts::V1::LfpProvidersService::Client#find_lfp_providers.",
+      "file": "lfp_providers_service/find_lfp_providers.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "find_lfp_providers",
+        "full_name": "::Google::Shopping::Merchant::Accounts::V1::LfpProvidersService::Client#find_lfp_providers",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Shopping::Merchant::Accounts::V1::FindLfpProvidersRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Shopping::Merchant::Accounts::V1::FindLfpProvidersResponse",
+        "client": {
+          "short_name": "LfpProvidersService::Client",
+          "full_name": "::Google::Shopping::Merchant::Accounts::V1::LfpProvidersService::Client"
+        },
+        "method": {
+          "short_name": "FindLfpProviders",
+          "full_name": "google.shopping.merchant.accounts.v1.LfpProvidersService.FindLfpProviders",
+          "service": {
+            "short_name": "LfpProvidersService",
+            "full_name": "google.shopping.merchant.accounts.v1.LfpProvidersService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "merchantapi_v1_generated_LfpProvidersService_LinkLfpProvider_sync",
+      "title": "Snippet for the link_lfp_provider call in the LfpProvidersService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Shopping::Merchant::Accounts::V1::LfpProvidersService::Client#link_lfp_provider.",
+      "file": "lfp_providers_service/link_lfp_provider.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "link_lfp_provider",
+        "full_name": "::Google::Shopping::Merchant::Accounts::V1::LfpProvidersService::Client#link_lfp_provider",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Shopping::Merchant::Accounts::V1::LinkLfpProviderRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Shopping::Merchant::Accounts::V1::LinkLfpProviderResponse",
+        "client": {
+          "short_name": "LfpProvidersService::Client",
+          "full_name": "::Google::Shopping::Merchant::Accounts::V1::LfpProvidersService::Client"
+        },
+        "method": {
+          "short_name": "LinkLfpProvider",
+          "full_name": "google.shopping.merchant.accounts.v1.LfpProvidersService.LinkLfpProvider",
+          "service": {
+            "short_name": "LfpProvidersService",
+            "full_name": "google.shopping.merchant.accounts.v1.LfpProvidersService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "merchantapi_v1_generated_OmnichannelSettingsService_GetOmnichannelSetting_sync",
+      "title": "Snippet for the get_omnichannel_setting call in the OmnichannelSettingsService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Shopping::Merchant::Accounts::V1::OmnichannelSettingsService::Client#get_omnichannel_setting.",
+      "file": "omnichannel_settings_service/get_omnichannel_setting.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_omnichannel_setting",
+        "full_name": "::Google::Shopping::Merchant::Accounts::V1::OmnichannelSettingsService::Client#get_omnichannel_setting",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Shopping::Merchant::Accounts::V1::GetOmnichannelSettingRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Shopping::Merchant::Accounts::V1::OmnichannelSetting",
+        "client": {
+          "short_name": "OmnichannelSettingsService::Client",
+          "full_name": "::Google::Shopping::Merchant::Accounts::V1::OmnichannelSettingsService::Client"
+        },
+        "method": {
+          "short_name": "GetOmnichannelSetting",
+          "full_name": "google.shopping.merchant.accounts.v1.OmnichannelSettingsService.GetOmnichannelSetting",
+          "service": {
+            "short_name": "OmnichannelSettingsService",
+            "full_name": "google.shopping.merchant.accounts.v1.OmnichannelSettingsService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "merchantapi_v1_generated_OmnichannelSettingsService_ListOmnichannelSettings_sync",
+      "title": "Snippet for the list_omnichannel_settings call in the OmnichannelSettingsService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Shopping::Merchant::Accounts::V1::OmnichannelSettingsService::Client#list_omnichannel_settings.",
+      "file": "omnichannel_settings_service/list_omnichannel_settings.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_omnichannel_settings",
+        "full_name": "::Google::Shopping::Merchant::Accounts::V1::OmnichannelSettingsService::Client#list_omnichannel_settings",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Shopping::Merchant::Accounts::V1::ListOmnichannelSettingsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Shopping::Merchant::Accounts::V1::ListOmnichannelSettingsResponse",
+        "client": {
+          "short_name": "OmnichannelSettingsService::Client",
+          "full_name": "::Google::Shopping::Merchant::Accounts::V1::OmnichannelSettingsService::Client"
+        },
+        "method": {
+          "short_name": "ListOmnichannelSettings",
+          "full_name": "google.shopping.merchant.accounts.v1.OmnichannelSettingsService.ListOmnichannelSettings",
+          "service": {
+            "short_name": "OmnichannelSettingsService",
+            "full_name": "google.shopping.merchant.accounts.v1.OmnichannelSettingsService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "merchantapi_v1_generated_OmnichannelSettingsService_CreateOmnichannelSetting_sync",
+      "title": "Snippet for the create_omnichannel_setting call in the OmnichannelSettingsService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Shopping::Merchant::Accounts::V1::OmnichannelSettingsService::Client#create_omnichannel_setting.",
+      "file": "omnichannel_settings_service/create_omnichannel_setting.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_omnichannel_setting",
+        "full_name": "::Google::Shopping::Merchant::Accounts::V1::OmnichannelSettingsService::Client#create_omnichannel_setting",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Shopping::Merchant::Accounts::V1::CreateOmnichannelSettingRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Shopping::Merchant::Accounts::V1::OmnichannelSetting",
+        "client": {
+          "short_name": "OmnichannelSettingsService::Client",
+          "full_name": "::Google::Shopping::Merchant::Accounts::V1::OmnichannelSettingsService::Client"
+        },
+        "method": {
+          "short_name": "CreateOmnichannelSetting",
+          "full_name": "google.shopping.merchant.accounts.v1.OmnichannelSettingsService.CreateOmnichannelSetting",
+          "service": {
+            "short_name": "OmnichannelSettingsService",
+            "full_name": "google.shopping.merchant.accounts.v1.OmnichannelSettingsService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "merchantapi_v1_generated_OmnichannelSettingsService_UpdateOmnichannelSetting_sync",
+      "title": "Snippet for the update_omnichannel_setting call in the OmnichannelSettingsService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Shopping::Merchant::Accounts::V1::OmnichannelSettingsService::Client#update_omnichannel_setting.",
+      "file": "omnichannel_settings_service/update_omnichannel_setting.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_omnichannel_setting",
+        "full_name": "::Google::Shopping::Merchant::Accounts::V1::OmnichannelSettingsService::Client#update_omnichannel_setting",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Shopping::Merchant::Accounts::V1::UpdateOmnichannelSettingRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Shopping::Merchant::Accounts::V1::OmnichannelSetting",
+        "client": {
+          "short_name": "OmnichannelSettingsService::Client",
+          "full_name": "::Google::Shopping::Merchant::Accounts::V1::OmnichannelSettingsService::Client"
+        },
+        "method": {
+          "short_name": "UpdateOmnichannelSetting",
+          "full_name": "google.shopping.merchant.accounts.v1.OmnichannelSettingsService.UpdateOmnichannelSetting",
+          "service": {
+            "short_name": "OmnichannelSettingsService",
+            "full_name": "google.shopping.merchant.accounts.v1.OmnichannelSettingsService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "merchantapi_v1_generated_OmnichannelSettingsService_RequestInventoryVerification_sync",
+      "title": "Snippet for the request_inventory_verification call in the OmnichannelSettingsService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Shopping::Merchant::Accounts::V1::OmnichannelSettingsService::Client#request_inventory_verification.",
+      "file": "omnichannel_settings_service/request_inventory_verification.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "request_inventory_verification",
+        "full_name": "::Google::Shopping::Merchant::Accounts::V1::OmnichannelSettingsService::Client#request_inventory_verification",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Shopping::Merchant::Accounts::V1::RequestInventoryVerificationRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Shopping::Merchant::Accounts::V1::RequestInventoryVerificationResponse",
+        "client": {
+          "short_name": "OmnichannelSettingsService::Client",
+          "full_name": "::Google::Shopping::Merchant::Accounts::V1::OmnichannelSettingsService::Client"
+        },
+        "method": {
+          "short_name": "RequestInventoryVerification",
+          "full_name": "google.shopping.merchant.accounts.v1.OmnichannelSettingsService.RequestInventoryVerification",
+          "service": {
+            "short_name": "OmnichannelSettingsService",
+            "full_name": "google.shopping.merchant.accounts.v1.OmnichannelSettingsService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "merchantapi_v1_generated_OnlineReturnPolicyService_GetOnlineReturnPolicy_sync",
+      "title": "Snippet for the get_online_return_policy call in the OnlineReturnPolicyService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Shopping::Merchant::Accounts::V1::OnlineReturnPolicyService::Client#get_online_return_policy.",
+      "file": "online_return_policy_service/get_online_return_policy.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_online_return_policy",
+        "full_name": "::Google::Shopping::Merchant::Accounts::V1::OnlineReturnPolicyService::Client#get_online_return_policy",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Shopping::Merchant::Accounts::V1::GetOnlineReturnPolicyRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Shopping::Merchant::Accounts::V1::OnlineReturnPolicy",
+        "client": {
+          "short_name": "OnlineReturnPolicyService::Client",
+          "full_name": "::Google::Shopping::Merchant::Accounts::V1::OnlineReturnPolicyService::Client"
+        },
+        "method": {
+          "short_name": "GetOnlineReturnPolicy",
+          "full_name": "google.shopping.merchant.accounts.v1.OnlineReturnPolicyService.GetOnlineReturnPolicy",
+          "service": {
+            "short_name": "OnlineReturnPolicyService",
+            "full_name": "google.shopping.merchant.accounts.v1.OnlineReturnPolicyService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "merchantapi_v1_generated_OnlineReturnPolicyService_ListOnlineReturnPolicies_sync",
+      "title": "Snippet for the list_online_return_policies call in the OnlineReturnPolicyService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Shopping::Merchant::Accounts::V1::OnlineReturnPolicyService::Client#list_online_return_policies.",
+      "file": "online_return_policy_service/list_online_return_policies.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_online_return_policies",
+        "full_name": "::Google::Shopping::Merchant::Accounts::V1::OnlineReturnPolicyService::Client#list_online_return_policies",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Shopping::Merchant::Accounts::V1::ListOnlineReturnPoliciesRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Shopping::Merchant::Accounts::V1::ListOnlineReturnPoliciesResponse",
+        "client": {
+          "short_name": "OnlineReturnPolicyService::Client",
+          "full_name": "::Google::Shopping::Merchant::Accounts::V1::OnlineReturnPolicyService::Client"
+        },
+        "method": {
+          "short_name": "ListOnlineReturnPolicies",
+          "full_name": "google.shopping.merchant.accounts.v1.OnlineReturnPolicyService.ListOnlineReturnPolicies",
+          "service": {
+            "short_name": "OnlineReturnPolicyService",
+            "full_name": "google.shopping.merchant.accounts.v1.OnlineReturnPolicyService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "merchantapi_v1_generated_OnlineReturnPolicyService_CreateOnlineReturnPolicy_sync",
+      "title": "Snippet for the create_online_return_policy call in the OnlineReturnPolicyService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Shopping::Merchant::Accounts::V1::OnlineReturnPolicyService::Client#create_online_return_policy.",
+      "file": "online_return_policy_service/create_online_return_policy.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_online_return_policy",
+        "full_name": "::Google::Shopping::Merchant::Accounts::V1::OnlineReturnPolicyService::Client#create_online_return_policy",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Shopping::Merchant::Accounts::V1::CreateOnlineReturnPolicyRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Shopping::Merchant::Accounts::V1::OnlineReturnPolicy",
+        "client": {
+          "short_name": "OnlineReturnPolicyService::Client",
+          "full_name": "::Google::Shopping::Merchant::Accounts::V1::OnlineReturnPolicyService::Client"
+        },
+        "method": {
+          "short_name": "CreateOnlineReturnPolicy",
+          "full_name": "google.shopping.merchant.accounts.v1.OnlineReturnPolicyService.CreateOnlineReturnPolicy",
+          "service": {
+            "short_name": "OnlineReturnPolicyService",
+            "full_name": "google.shopping.merchant.accounts.v1.OnlineReturnPolicyService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "merchantapi_v1_generated_OnlineReturnPolicyService_DeleteOnlineReturnPolicy_sync",
+      "title": "Snippet for the delete_online_return_policy call in the OnlineReturnPolicyService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Shopping::Merchant::Accounts::V1::OnlineReturnPolicyService::Client#delete_online_return_policy.",
+      "file": "online_return_policy_service/delete_online_return_policy.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_online_return_policy",
+        "full_name": "::Google::Shopping::Merchant::Accounts::V1::OnlineReturnPolicyService::Client#delete_online_return_policy",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Shopping::Merchant::Accounts::V1::DeleteOnlineReturnPolicyRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Protobuf::Empty",
+        "client": {
+          "short_name": "OnlineReturnPolicyService::Client",
+          "full_name": "::Google::Shopping::Merchant::Accounts::V1::OnlineReturnPolicyService::Client"
+        },
+        "method": {
+          "short_name": "DeleteOnlineReturnPolicy",
+          "full_name": "google.shopping.merchant.accounts.v1.OnlineReturnPolicyService.DeleteOnlineReturnPolicy",
+          "service": {
+            "short_name": "OnlineReturnPolicyService",
+            "full_name": "google.shopping.merchant.accounts.v1.OnlineReturnPolicyService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "merchantapi_v1_generated_ProgramsService_GetProgram_sync",
+      "title": "Snippet for the get_program call in the ProgramsService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Shopping::Merchant::Accounts::V1::ProgramsService::Client#get_program.",
+      "file": "programs_service/get_program.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_program",
+        "full_name": "::Google::Shopping::Merchant::Accounts::V1::ProgramsService::Client#get_program",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Shopping::Merchant::Accounts::V1::GetProgramRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Shopping::Merchant::Accounts::V1::Program",
+        "client": {
+          "short_name": "ProgramsService::Client",
+          "full_name": "::Google::Shopping::Merchant::Accounts::V1::ProgramsService::Client"
+        },
+        "method": {
+          "short_name": "GetProgram",
+          "full_name": "google.shopping.merchant.accounts.v1.ProgramsService.GetProgram",
+          "service": {
+            "short_name": "ProgramsService",
+            "full_name": "google.shopping.merchant.accounts.v1.ProgramsService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "merchantapi_v1_generated_ProgramsService_ListPrograms_sync",
+      "title": "Snippet for the list_programs call in the ProgramsService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Shopping::Merchant::Accounts::V1::ProgramsService::Client#list_programs.",
+      "file": "programs_service/list_programs.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_programs",
+        "full_name": "::Google::Shopping::Merchant::Accounts::V1::ProgramsService::Client#list_programs",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Shopping::Merchant::Accounts::V1::ListProgramsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Shopping::Merchant::Accounts::V1::ListProgramsResponse",
+        "client": {
+          "short_name": "ProgramsService::Client",
+          "full_name": "::Google::Shopping::Merchant::Accounts::V1::ProgramsService::Client"
+        },
+        "method": {
+          "short_name": "ListPrograms",
+          "full_name": "google.shopping.merchant.accounts.v1.ProgramsService.ListPrograms",
+          "service": {
+            "short_name": "ProgramsService",
+            "full_name": "google.shopping.merchant.accounts.v1.ProgramsService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "merchantapi_v1_generated_ProgramsService_EnableProgram_sync",
+      "title": "Snippet for the enable_program call in the ProgramsService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Shopping::Merchant::Accounts::V1::ProgramsService::Client#enable_program.",
+      "file": "programs_service/enable_program.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "enable_program",
+        "full_name": "::Google::Shopping::Merchant::Accounts::V1::ProgramsService::Client#enable_program",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Shopping::Merchant::Accounts::V1::EnableProgramRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Shopping::Merchant::Accounts::V1::Program",
+        "client": {
+          "short_name": "ProgramsService::Client",
+          "full_name": "::Google::Shopping::Merchant::Accounts::V1::ProgramsService::Client"
+        },
+        "method": {
+          "short_name": "EnableProgram",
+          "full_name": "google.shopping.merchant.accounts.v1.ProgramsService.EnableProgram",
+          "service": {
+            "short_name": "ProgramsService",
+            "full_name": "google.shopping.merchant.accounts.v1.ProgramsService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "merchantapi_v1_generated_ProgramsService_DisableProgram_sync",
+      "title": "Snippet for the disable_program call in the ProgramsService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Shopping::Merchant::Accounts::V1::ProgramsService::Client#disable_program.",
+      "file": "programs_service/disable_program.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "disable_program",
+        "full_name": "::Google::Shopping::Merchant::Accounts::V1::ProgramsService::Client#disable_program",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Shopping::Merchant::Accounts::V1::DisableProgramRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Shopping::Merchant::Accounts::V1::Program",
+        "client": {
+          "short_name": "ProgramsService::Client",
+          "full_name": "::Google::Shopping::Merchant::Accounts::V1::ProgramsService::Client"
+        },
+        "method": {
+          "short_name": "DisableProgram",
+          "full_name": "google.shopping.merchant.accounts.v1.ProgramsService.DisableProgram",
+          "service": {
+            "short_name": "ProgramsService",
+            "full_name": "google.shopping.merchant.accounts.v1.ProgramsService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "merchantapi_v1_generated_RegionsService_GetRegion_sync",
+      "title": "Snippet for the get_region call in the RegionsService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Shopping::Merchant::Accounts::V1::RegionsService::Client#get_region.",
+      "file": "regions_service/get_region.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_region",
+        "full_name": "::Google::Shopping::Merchant::Accounts::V1::RegionsService::Client#get_region",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Shopping::Merchant::Accounts::V1::GetRegionRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Shopping::Merchant::Accounts::V1::Region",
+        "client": {
+          "short_name": "RegionsService::Client",
+          "full_name": "::Google::Shopping::Merchant::Accounts::V1::RegionsService::Client"
+        },
+        "method": {
+          "short_name": "GetRegion",
+          "full_name": "google.shopping.merchant.accounts.v1.RegionsService.GetRegion",
+          "service": {
+            "short_name": "RegionsService",
+            "full_name": "google.shopping.merchant.accounts.v1.RegionsService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "merchantapi_v1_generated_RegionsService_CreateRegion_sync",
+      "title": "Snippet for the create_region call in the RegionsService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Shopping::Merchant::Accounts::V1::RegionsService::Client#create_region.",
+      "file": "regions_service/create_region.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_region",
+        "full_name": "::Google::Shopping::Merchant::Accounts::V1::RegionsService::Client#create_region",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Shopping::Merchant::Accounts::V1::CreateRegionRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Shopping::Merchant::Accounts::V1::Region",
+        "client": {
+          "short_name": "RegionsService::Client",
+          "full_name": "::Google::Shopping::Merchant::Accounts::V1::RegionsService::Client"
+        },
+        "method": {
+          "short_name": "CreateRegion",
+          "full_name": "google.shopping.merchant.accounts.v1.RegionsService.CreateRegion",
+          "service": {
+            "short_name": "RegionsService",
+            "full_name": "google.shopping.merchant.accounts.v1.RegionsService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "merchantapi_v1_generated_RegionsService_BatchCreateRegions_sync",
+      "title": "Snippet for the batch_create_regions call in the RegionsService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Shopping::Merchant::Accounts::V1::RegionsService::Client#batch_create_regions.",
+      "file": "regions_service/batch_create_regions.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "batch_create_regions",
+        "full_name": "::Google::Shopping::Merchant::Accounts::V1::RegionsService::Client#batch_create_regions",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Shopping::Merchant::Accounts::V1::BatchCreateRegionsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Shopping::Merchant::Accounts::V1::BatchCreateRegionsResponse",
+        "client": {
+          "short_name": "RegionsService::Client",
+          "full_name": "::Google::Shopping::Merchant::Accounts::V1::RegionsService::Client"
+        },
+        "method": {
+          "short_name": "BatchCreateRegions",
+          "full_name": "google.shopping.merchant.accounts.v1.RegionsService.BatchCreateRegions",
+          "service": {
+            "short_name": "RegionsService",
+            "full_name": "google.shopping.merchant.accounts.v1.RegionsService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "merchantapi_v1_generated_RegionsService_UpdateRegion_sync",
+      "title": "Snippet for the update_region call in the RegionsService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Shopping::Merchant::Accounts::V1::RegionsService::Client#update_region.",
+      "file": "regions_service/update_region.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_region",
+        "full_name": "::Google::Shopping::Merchant::Accounts::V1::RegionsService::Client#update_region",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Shopping::Merchant::Accounts::V1::UpdateRegionRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Shopping::Merchant::Accounts::V1::Region",
+        "client": {
+          "short_name": "RegionsService::Client",
+          "full_name": "::Google::Shopping::Merchant::Accounts::V1::RegionsService::Client"
+        },
+        "method": {
+          "short_name": "UpdateRegion",
+          "full_name": "google.shopping.merchant.accounts.v1.RegionsService.UpdateRegion",
+          "service": {
+            "short_name": "RegionsService",
+            "full_name": "google.shopping.merchant.accounts.v1.RegionsService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "merchantapi_v1_generated_RegionsService_BatchUpdateRegions_sync",
+      "title": "Snippet for the batch_update_regions call in the RegionsService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Shopping::Merchant::Accounts::V1::RegionsService::Client#batch_update_regions.",
+      "file": "regions_service/batch_update_regions.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "batch_update_regions",
+        "full_name": "::Google::Shopping::Merchant::Accounts::V1::RegionsService::Client#batch_update_regions",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Shopping::Merchant::Accounts::V1::BatchUpdateRegionsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Shopping::Merchant::Accounts::V1::BatchUpdateRegionsResponse",
+        "client": {
+          "short_name": "RegionsService::Client",
+          "full_name": "::Google::Shopping::Merchant::Accounts::V1::RegionsService::Client"
+        },
+        "method": {
+          "short_name": "BatchUpdateRegions",
+          "full_name": "google.shopping.merchant.accounts.v1.RegionsService.BatchUpdateRegions",
+          "service": {
+            "short_name": "RegionsService",
+            "full_name": "google.shopping.merchant.accounts.v1.RegionsService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "merchantapi_v1_generated_RegionsService_DeleteRegion_sync",
+      "title": "Snippet for the delete_region call in the RegionsService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Shopping::Merchant::Accounts::V1::RegionsService::Client#delete_region.",
+      "file": "regions_service/delete_region.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_region",
+        "full_name": "::Google::Shopping::Merchant::Accounts::V1::RegionsService::Client#delete_region",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Shopping::Merchant::Accounts::V1::DeleteRegionRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Protobuf::Empty",
+        "client": {
+          "short_name": "RegionsService::Client",
+          "full_name": "::Google::Shopping::Merchant::Accounts::V1::RegionsService::Client"
+        },
+        "method": {
+          "short_name": "DeleteRegion",
+          "full_name": "google.shopping.merchant.accounts.v1.RegionsService.DeleteRegion",
+          "service": {
+            "short_name": "RegionsService",
+            "full_name": "google.shopping.merchant.accounts.v1.RegionsService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "merchantapi_v1_generated_RegionsService_BatchDeleteRegions_sync",
+      "title": "Snippet for the batch_delete_regions call in the RegionsService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Shopping::Merchant::Accounts::V1::RegionsService::Client#batch_delete_regions.",
+      "file": "regions_service/batch_delete_regions.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "batch_delete_regions",
+        "full_name": "::Google::Shopping::Merchant::Accounts::V1::RegionsService::Client#batch_delete_regions",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Shopping::Merchant::Accounts::V1::BatchDeleteRegionsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Protobuf::Empty",
+        "client": {
+          "short_name": "RegionsService::Client",
+          "full_name": "::Google::Shopping::Merchant::Accounts::V1::RegionsService::Client"
+        },
+        "method": {
+          "short_name": "BatchDeleteRegions",
+          "full_name": "google.shopping.merchant.accounts.v1.RegionsService.BatchDeleteRegions",
+          "service": {
+            "short_name": "RegionsService",
+            "full_name": "google.shopping.merchant.accounts.v1.RegionsService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "merchantapi_v1_generated_RegionsService_ListRegions_sync",
+      "title": "Snippet for the list_regions call in the RegionsService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Shopping::Merchant::Accounts::V1::RegionsService::Client#list_regions.",
+      "file": "regions_service/list_regions.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_regions",
+        "full_name": "::Google::Shopping::Merchant::Accounts::V1::RegionsService::Client#list_regions",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Shopping::Merchant::Accounts::V1::ListRegionsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Shopping::Merchant::Accounts::V1::ListRegionsResponse",
+        "client": {
+          "short_name": "RegionsService::Client",
+          "full_name": "::Google::Shopping::Merchant::Accounts::V1::RegionsService::Client"
+        },
+        "method": {
+          "short_name": "ListRegions",
+          "full_name": "google.shopping.merchant.accounts.v1.RegionsService.ListRegions",
+          "service": {
+            "short_name": "RegionsService",
+            "full_name": "google.shopping.merchant.accounts.v1.RegionsService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "merchantapi_v1_generated_ShippingSettingsService_GetShippingSettings_sync",
+      "title": "Snippet for the get_shipping_settings call in the ShippingSettingsService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Shopping::Merchant::Accounts::V1::ShippingSettingsService::Client#get_shipping_settings.",
+      "file": "shipping_settings_service/get_shipping_settings.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_shipping_settings",
+        "full_name": "::Google::Shopping::Merchant::Accounts::V1::ShippingSettingsService::Client#get_shipping_settings",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Shopping::Merchant::Accounts::V1::GetShippingSettingsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Shopping::Merchant::Accounts::V1::ShippingSettings",
+        "client": {
+          "short_name": "ShippingSettingsService::Client",
+          "full_name": "::Google::Shopping::Merchant::Accounts::V1::ShippingSettingsService::Client"
+        },
+        "method": {
+          "short_name": "GetShippingSettings",
+          "full_name": "google.shopping.merchant.accounts.v1.ShippingSettingsService.GetShippingSettings",
+          "service": {
+            "short_name": "ShippingSettingsService",
+            "full_name": "google.shopping.merchant.accounts.v1.ShippingSettingsService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "merchantapi_v1_generated_ShippingSettingsService_InsertShippingSettings_sync",
+      "title": "Snippet for the insert_shipping_settings call in the ShippingSettingsService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Shopping::Merchant::Accounts::V1::ShippingSettingsService::Client#insert_shipping_settings.",
+      "file": "shipping_settings_service/insert_shipping_settings.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "insert_shipping_settings",
+        "full_name": "::Google::Shopping::Merchant::Accounts::V1::ShippingSettingsService::Client#insert_shipping_settings",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Shopping::Merchant::Accounts::V1::InsertShippingSettingsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Shopping::Merchant::Accounts::V1::ShippingSettings",
+        "client": {
+          "short_name": "ShippingSettingsService::Client",
+          "full_name": "::Google::Shopping::Merchant::Accounts::V1::ShippingSettingsService::Client"
+        },
+        "method": {
+          "short_name": "InsertShippingSettings",
+          "full_name": "google.shopping.merchant.accounts.v1.ShippingSettingsService.InsertShippingSettings",
+          "service": {
+            "short_name": "ShippingSettingsService",
+            "full_name": "google.shopping.merchant.accounts.v1.ShippingSettingsService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "merchantapi_v1_generated_TermsOfServiceAgreementStateService_GetTermsOfServiceAgreementState_sync",
+      "title": "Snippet for the get_terms_of_service_agreement_state call in the TermsOfServiceAgreementStateService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Shopping::Merchant::Accounts::V1::TermsOfServiceAgreementStateService::Client#get_terms_of_service_agreement_state.",
+      "file": "terms_of_service_agreement_state_service/get_terms_of_service_agreement_state.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_terms_of_service_agreement_state",
+        "full_name": "::Google::Shopping::Merchant::Accounts::V1::TermsOfServiceAgreementStateService::Client#get_terms_of_service_agreement_state",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Shopping::Merchant::Accounts::V1::GetTermsOfServiceAgreementStateRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Shopping::Merchant::Accounts::V1::TermsOfServiceAgreementState",
+        "client": {
+          "short_name": "TermsOfServiceAgreementStateService::Client",
+          "full_name": "::Google::Shopping::Merchant::Accounts::V1::TermsOfServiceAgreementStateService::Client"
+        },
+        "method": {
+          "short_name": "GetTermsOfServiceAgreementState",
+          "full_name": "google.shopping.merchant.accounts.v1.TermsOfServiceAgreementStateService.GetTermsOfServiceAgreementState",
+          "service": {
+            "short_name": "TermsOfServiceAgreementStateService",
+            "full_name": "google.shopping.merchant.accounts.v1.TermsOfServiceAgreementStateService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "merchantapi_v1_generated_TermsOfServiceAgreementStateService_RetrieveForApplicationTermsOfServiceAgreementState_sync",
+      "title": "Snippet for the retrieve_for_application_terms_of_service_agreement_state call in the TermsOfServiceAgreementStateService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Shopping::Merchant::Accounts::V1::TermsOfServiceAgreementStateService::Client#retrieve_for_application_terms_of_service_agreement_state.",
+      "file": "terms_of_service_agreement_state_service/retrieve_for_application_terms_of_service_agreement_state.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "retrieve_for_application_terms_of_service_agreement_state",
+        "full_name": "::Google::Shopping::Merchant::Accounts::V1::TermsOfServiceAgreementStateService::Client#retrieve_for_application_terms_of_service_agreement_state",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Shopping::Merchant::Accounts::V1::RetrieveForApplicationTermsOfServiceAgreementStateRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Shopping::Merchant::Accounts::V1::TermsOfServiceAgreementState",
+        "client": {
+          "short_name": "TermsOfServiceAgreementStateService::Client",
+          "full_name": "::Google::Shopping::Merchant::Accounts::V1::TermsOfServiceAgreementStateService::Client"
+        },
+        "method": {
+          "short_name": "RetrieveForApplicationTermsOfServiceAgreementState",
+          "full_name": "google.shopping.merchant.accounts.v1.TermsOfServiceAgreementStateService.RetrieveForApplicationTermsOfServiceAgreementState",
+          "service": {
+            "short_name": "TermsOfServiceAgreementStateService",
+            "full_name": "google.shopping.merchant.accounts.v1.TermsOfServiceAgreementStateService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "merchantapi_v1_generated_TermsOfServiceService_GetTermsOfService_sync",
+      "title": "Snippet for the get_terms_of_service call in the TermsOfServiceService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Shopping::Merchant::Accounts::V1::TermsOfServiceService::Client#get_terms_of_service.",
+      "file": "terms_of_service_service/get_terms_of_service.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_terms_of_service",
+        "full_name": "::Google::Shopping::Merchant::Accounts::V1::TermsOfServiceService::Client#get_terms_of_service",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Shopping::Merchant::Accounts::V1::GetTermsOfServiceRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Shopping::Merchant::Accounts::V1::TermsOfService",
+        "client": {
+          "short_name": "TermsOfServiceService::Client",
+          "full_name": "::Google::Shopping::Merchant::Accounts::V1::TermsOfServiceService::Client"
+        },
+        "method": {
+          "short_name": "GetTermsOfService",
+          "full_name": "google.shopping.merchant.accounts.v1.TermsOfServiceService.GetTermsOfService",
+          "service": {
+            "short_name": "TermsOfServiceService",
+            "full_name": "google.shopping.merchant.accounts.v1.TermsOfServiceService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "merchantapi_v1_generated_TermsOfServiceService_RetrieveLatestTermsOfService_sync",
+      "title": "Snippet for the retrieve_latest_terms_of_service call in the TermsOfServiceService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Shopping::Merchant::Accounts::V1::TermsOfServiceService::Client#retrieve_latest_terms_of_service.",
+      "file": "terms_of_service_service/retrieve_latest_terms_of_service.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "retrieve_latest_terms_of_service",
+        "full_name": "::Google::Shopping::Merchant::Accounts::V1::TermsOfServiceService::Client#retrieve_latest_terms_of_service",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Shopping::Merchant::Accounts::V1::RetrieveLatestTermsOfServiceRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Shopping::Merchant::Accounts::V1::TermsOfService",
+        "client": {
+          "short_name": "TermsOfServiceService::Client",
+          "full_name": "::Google::Shopping::Merchant::Accounts::V1::TermsOfServiceService::Client"
+        },
+        "method": {
+          "short_name": "RetrieveLatestTermsOfService",
+          "full_name": "google.shopping.merchant.accounts.v1.TermsOfServiceService.RetrieveLatestTermsOfService",
+          "service": {
+            "short_name": "TermsOfServiceService",
+            "full_name": "google.shopping.merchant.accounts.v1.TermsOfServiceService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "merchantapi_v1_generated_TermsOfServiceService_AcceptTermsOfService_sync",
+      "title": "Snippet for the accept_terms_of_service call in the TermsOfServiceService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Shopping::Merchant::Accounts::V1::TermsOfServiceService::Client#accept_terms_of_service.",
+      "file": "terms_of_service_service/accept_terms_of_service.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "accept_terms_of_service",
+        "full_name": "::Google::Shopping::Merchant::Accounts::V1::TermsOfServiceService::Client#accept_terms_of_service",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Shopping::Merchant::Accounts::V1::AcceptTermsOfServiceRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Shopping::Merchant::Accounts::V1::AcceptTermsOfServiceResponse",
+        "client": {
+          "short_name": "TermsOfServiceService::Client",
+          "full_name": "::Google::Shopping::Merchant::Accounts::V1::TermsOfServiceService::Client"
+        },
+        "method": {
+          "short_name": "AcceptTermsOfService",
+          "full_name": "google.shopping.merchant.accounts.v1.TermsOfServiceService.AcceptTermsOfService",
+          "service": {
+            "short_name": "TermsOfServiceService",
+            "full_name": "google.shopping.merchant.accounts.v1.TermsOfServiceService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    }
+  ]
+}
