@@ -40,6 +40,11 @@
                 "submit_order"
               ]
             },
+            "CancelOrder": {
+              "methods": [
+                "cancel_order"
+              ]
+            },
             "ListSites": {
               "methods": [
                 "list_sites"
@@ -183,6 +188,11 @@
             "SignalZoneState": {
               "methods": [
                 "signal_zone_state"
+              ]
+            },
+            "RequestOrderDateChange": {
+              "methods": [
+                "request_order_date_change"
               ]
             }
           }

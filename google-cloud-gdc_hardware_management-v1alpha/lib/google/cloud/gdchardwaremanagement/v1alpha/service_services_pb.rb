@@ -45,6 +45,8 @@ module Google
             rpc :DeleteOrder, ::Google::Cloud::GDCHardwareManagement::V1alpha::DeleteOrderRequest, ::Google::Longrunning::Operation
             # Submits an order.
             rpc :SubmitOrder, ::Google::Cloud::GDCHardwareManagement::V1alpha::SubmitOrderRequest, ::Google::Longrunning::Operation
+            # Cancels an order.
+            rpc :CancelOrder, ::Google::Cloud::GDCHardwareManagement::V1alpha::CancelOrderRequest, ::Google::Longrunning::Operation
             # Lists sites in a given project and location.
             rpc :ListSites, ::Google::Cloud::GDCHardwareManagement::V1alpha::ListSitesRequest, ::Google::Cloud::GDCHardwareManagement::V1alpha::ListSitesResponse
             # Gets details of a site.
@@ -106,6 +108,8 @@ module Google
             rpc :DeleteZone, ::Google::Cloud::GDCHardwareManagement::V1alpha::DeleteZoneRequest, ::Google::Longrunning::Operation
             # Signals the state of a zone.
             rpc :SignalZoneState, ::Google::Cloud::GDCHardwareManagement::V1alpha::SignalZoneStateRequest, ::Google::Longrunning::Operation
+            # Updates the requested date change of a single Order.
+            rpc :RequestOrderDateChange, ::Google::Cloud::GDCHardwareManagement::V1alpha::RequestOrderDateChangeRequest, ::Google::Longrunning::Operation
           end
 
           Stub = Service.rpc_stub_class

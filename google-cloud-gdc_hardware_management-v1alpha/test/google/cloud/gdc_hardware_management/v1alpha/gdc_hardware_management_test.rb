@@ -462,6 +462,71 @@ class ::Google::Cloud::GDCHardwareManagement::V1alpha::GDCHardwareManagement::Cl
     end
   end
 
+  def test_cancel_order
+    # Create GRPC objects.
+    grpc_response = ::Google::Longrunning::Operation.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+    request_id = "hello world"
+
+    cancel_order_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :cancel_order, name
+      assert_kind_of ::Google::Cloud::GDCHardwareManagement::V1alpha::CancelOrderRequest, request
+      assert_equal "hello world", request["name"]
+      assert_equal "hello world", request["request_id"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, cancel_order_client_stub do
+      # Create client
+      client = ::Google::Cloud::GDCHardwareManagement::V1alpha::GDCHardwareManagement::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.cancel_order({ name: name, request_id: request_id }) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.cancel_order name: name, request_id: request_id do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.cancel_order ::Google::Cloud::GDCHardwareManagement::V1alpha::CancelOrderRequest.new(name: name, request_id: request_id) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.cancel_order({ name: name, request_id: request_id }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.cancel_order(::Google::Cloud::GDCHardwareManagement::V1alpha::CancelOrderRequest.new(name: name, request_id: request_id), grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, cancel_order_client_stub.call_rpc_count
+    end
+  end
+
   def test_list_sites
     # Create GRPC objects.
     grpc_response = ::Google::Cloud::GDCHardwareManagement::V1alpha::ListSitesResponse.new
@@ -2366,6 +2431,71 @@ class ::Google::Cloud::GDCHardwareManagement::V1alpha::GDCHardwareManagement::Cl
 
       # Verify method calls
       assert_equal 5, signal_zone_state_client_stub.call_rpc_count
+    end
+  end
+
+  def test_request_order_date_change
+    # Create GRPC objects.
+    grpc_response = ::Google::Longrunning::Operation.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+    requested_date = {}
+
+    request_order_date_change_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :request_order_date_change, name
+      assert_kind_of ::Google::Cloud::GDCHardwareManagement::V1alpha::RequestOrderDateChangeRequest, request
+      assert_equal "hello world", request["name"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Type::Date), request["requested_date"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, request_order_date_change_client_stub do
+      # Create client
+      client = ::Google::Cloud::GDCHardwareManagement::V1alpha::GDCHardwareManagement::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.request_order_date_change({ name: name, requested_date: requested_date }) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.request_order_date_change name: name, requested_date: requested_date do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.request_order_date_change ::Google::Cloud::GDCHardwareManagement::V1alpha::RequestOrderDateChangeRequest.new(name: name, requested_date: requested_date) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.request_order_date_change({ name: name, requested_date: requested_date }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.request_order_date_change(::Google::Cloud::GDCHardwareManagement::V1alpha::RequestOrderDateChangeRequest.new(name: name, requested_date: requested_date), grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, request_order_date_change_client_stub.call_rpc_count
     end
   end
 

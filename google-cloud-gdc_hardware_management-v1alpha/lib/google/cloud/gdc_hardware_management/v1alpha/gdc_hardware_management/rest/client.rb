@@ -100,6 +100,11 @@ module Google
                     initial_delay: 1.0, max_delay: 10.0, multiplier: 1.3, retry_codes: [14]
                   }
 
+                  default_config.rpcs.cancel_order.timeout = 60.0
+                  default_config.rpcs.cancel_order.retry_policy = {
+                    initial_delay: 1.0, max_delay: 10.0, multiplier: 1.3, retry_codes: [14]
+                  }
+
                   default_config.rpcs.list_sites.timeout = 60.0
                   default_config.rpcs.list_sites.retry_policy = {
                     initial_delay: 1.0, max_delay: 10.0, multiplier: 1.3, retry_codes: [14]
@@ -909,6 +914,97 @@ module Google
                                        retry_policy: @config.retry_policy
 
                 @gdc_hardware_management_stub.submit_order request, options do |result, operation|
+                  result = ::Gapic::Operation.new result, @operations_client, options: options
+                  yield result, operation if block_given?
+                  throw :response, result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Cancels an order.
+              #
+              # @overload cancel_order(request, options = nil)
+              #   Pass arguments to `cancel_order` via a request object, either of type
+              #   {::Google::Cloud::GDCHardwareManagement::V1alpha::CancelOrderRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::GDCHardwareManagement::V1alpha::CancelOrderRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload cancel_order(name: nil, request_id: nil)
+              #   Pass arguments to `cancel_order` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param name [::String]
+              #     Required. The name of the order.
+              #     Format: `projects/{project}/locations/{location}/orders/{order}`
+              #   @param request_id [::String]
+              #     Optional. An optional unique identifier for this request. See
+              #     [AIP-155](https://google.aip.dev/155).
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Gapic::Operation]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Gapic::Operation]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/gdc_hardware_management/v1alpha"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::GDCHardwareManagement::V1alpha::GDCHardwareManagement::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::GDCHardwareManagement::V1alpha::CancelOrderRequest.new
+              #
+              #   # Call the cancel_order method.
+              #   result = client.cancel_order request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
+              def cancel_order request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::GDCHardwareManagement::V1alpha::CancelOrderRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.cancel_order.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::GDCHardwareManagement::V1alpha::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.cancel_order.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.cancel_order.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @gdc_hardware_management_stub.cancel_order request, options do |result, operation|
                   result = ::Gapic::Operation.new result, @operations_client, options: options
                   yield result, operation if block_given?
                   throw :response, result
@@ -3590,6 +3686,97 @@ module Google
               end
 
               ##
+              # Updates the requested date change of a single Order.
+              #
+              # @overload request_order_date_change(request, options = nil)
+              #   Pass arguments to `request_order_date_change` via a request object, either of type
+              #   {::Google::Cloud::GDCHardwareManagement::V1alpha::RequestOrderDateChangeRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::GDCHardwareManagement::V1alpha::RequestOrderDateChangeRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload request_order_date_change(name: nil, requested_date: nil)
+              #   Pass arguments to `request_order_date_change` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param name [::String]
+              #     Required. The name of the order to update.
+              #     Format: projects/\\{project}/locations/\\{location}/orders/\\{order}
+              #   @param requested_date [::Google::Type::Date, ::Hash]
+              #     Required. The date to which the customer or Google wants to set the
+              #     scheduled installation date.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Gapic::Operation]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Gapic::Operation]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/gdc_hardware_management/v1alpha"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::GDCHardwareManagement::V1alpha::GDCHardwareManagement::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::GDCHardwareManagement::V1alpha::RequestOrderDateChangeRequest.new
+              #
+              #   # Call the request_order_date_change method.
+              #   result = client.request_order_date_change request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
+              def request_order_date_change request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::GDCHardwareManagement::V1alpha::RequestOrderDateChangeRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.request_order_date_change.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::GDCHardwareManagement::V1alpha::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.request_order_date_change.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.request_order_date_change.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @gdc_hardware_management_stub.request_order_date_change request, options do |result, operation|
+                  result = ::Gapic::Operation.new result, @operations_client, options: options
+                  yield result, operation if block_given?
+                  throw :response, result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
               # Configuration class for the GDCHardwareManagement REST API.
               #
               # This class represents the configuration for GDCHardwareManagement REST,
@@ -3773,6 +3960,11 @@ module Google
                   #
                   attr_reader :submit_order
                   ##
+                  # RPC-specific configuration for `cancel_order`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :cancel_order
+                  ##
                   # RPC-specific configuration for `list_sites`
                   # @return [::Gapic::Config::Method]
                   #
@@ -3917,6 +4109,11 @@ module Google
                   # @return [::Gapic::Config::Method]
                   #
                   attr_reader :signal_zone_state
+                  ##
+                  # RPC-specific configuration for `request_order_date_change`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :request_order_date_change
 
                   # @private
                   def initialize parent_rpcs = nil
@@ -3932,6 +4129,8 @@ module Google
                     @delete_order = ::Gapic::Config::Method.new delete_order_config
                     submit_order_config = parent_rpcs.submit_order if parent_rpcs.respond_to? :submit_order
                     @submit_order = ::Gapic::Config::Method.new submit_order_config
+                    cancel_order_config = parent_rpcs.cancel_order if parent_rpcs.respond_to? :cancel_order
+                    @cancel_order = ::Gapic::Config::Method.new cancel_order_config
                     list_sites_config = parent_rpcs.list_sites if parent_rpcs.respond_to? :list_sites
                     @list_sites = ::Gapic::Config::Method.new list_sites_config
                     get_site_config = parent_rpcs.get_site if parent_rpcs.respond_to? :get_site
@@ -3990,6 +4189,8 @@ module Google
                     @delete_zone = ::Gapic::Config::Method.new delete_zone_config
                     signal_zone_state_config = parent_rpcs.signal_zone_state if parent_rpcs.respond_to? :signal_zone_state
                     @signal_zone_state = ::Gapic::Config::Method.new signal_zone_state_config
+                    request_order_date_change_config = parent_rpcs.request_order_date_change if parent_rpcs.respond_to? :request_order_date_change
+                    @request_order_date_change = ::Gapic::Config::Method.new request_order_date_change_config
 
                     yield self if block_given?
                   end
