@@ -13,25 +13,27 @@
 # limitations under the License.
 
 # [START bigquery_export_model]
+require "google/cloud/bigquery"
+
+##
+# Exports a model to a Google Cloud Storage bucket.
+#
+# @param dataset_id [String] The ID of the dataset that contains the model.
+# @param model_id   [String] The ID of the model to export.
+# @param destination_uri [String] The Google Cloud Storage bucket to export the model to.
 def export_model dataset_id, model_id, destination_uri
-  # dataset_id      = "your-dataset-id"
-  # model_id        = "your-model-id"
-  # destination_uri = "gs://your-bucket/path/to/your-model"
-
-  require "google/cloud/bigquery"
-
   bigquery = Google::Cloud::Bigquery.new
   dataset = bigquery.dataset dataset_id
   model = dataset.model model_id
 
   puts "Extracting model #{model.model_id} to #{destination_uri}"
+  job = model.extract_job destination_uri
+  job.wait_until_done!
 
-  success = model.extract destination_uri
-
-  if success
-    puts "Model extracted successfully"
+  if job.failed?
+    puts "Error extracting model: #{job.error}"
   else
-    puts "Error extracting model"
+    puts "Model extracted successfully"
   end
 end
 # [END bigquery_export_model]

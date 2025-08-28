@@ -13,12 +13,14 @@
 # limitations under the License.
 
 # [START bigquery_create_table_range_partitioned]
+require "google/cloud/bigquery"
+
+##
+# Creates a table with range partitioning.
+#
+# @param dataset_id [String] The ID of the dataset to create the table in.
+# @param table_id   [String] The ID of the table to create.
 def create_range_partitioned_table dataset_id, table_id
-  # dataset_id = "your-dataset-id"
-  # table_id   = "your-table-id"
-
-  require "google/cloud/bigquery"
-
   bigquery = Google::Cloud::Bigquery.new
   dataset = bigquery.dataset dataset_id
 

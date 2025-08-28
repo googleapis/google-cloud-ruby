@@ -16,10 +16,12 @@
 require "google/cloud/bigquery"
 require "base64"
 
+##
+# Inserts a row with various data types into a table.
+#
+# @param dataset_id [String] The ID of the dataset to create the table in.
+# @param table_id   [String] The ID of the table to create.
 def inserting_data_types dataset_id, table_id
-  # dataset_id = "ID of the dataset to create the table in"
-  # table_id   = "ID of the table to create"
-
   bigquery = Google::Cloud::Bigquery.new
   dataset = bigquery.dataset dataset_id
   table = dataset.table table_id
