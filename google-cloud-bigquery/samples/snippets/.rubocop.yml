@@ -12,3 +12,5 @@ Style/IfUnlessModifier:
     Enabled: false
 Metrics/MethodLength:
     Max: 50
+Metrics/BlockLength:
+    Max: 50
