@@ -391,6 +391,12 @@ class MockStorage < Minitest::Spec
     }
   end
 
+  def resumable_upload_args options: {}
+    {
+      options: options
+    }
+  end
+
   def get_object_args generation: nil,
                       if_generation_match: nil,
                       if_generation_not_match: nil,
