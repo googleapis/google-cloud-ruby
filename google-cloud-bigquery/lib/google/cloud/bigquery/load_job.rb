@@ -653,41 +653,41 @@ module Google
         end
 
         ##
-        # Format used to parse DATE values. Supports C-style and SQL-style
-        # values.
+        # Format used to parse DATE values. Supports SQL-style values. See
+        # [date and time formatting guide](https://cloud.google.com/bigquery/docs/reference/standard-sql/format-elements#format_date_time_as_string)
         #
         # @return [String, nil] The date format pattern, such as
-        #   `%Y-%m-%d`. `nil` if not set.
+        #   `YYYY-MM-DD`. `nil` if not set.
         def date_format
           @gapi.configuration.load.date_format
         end
 
         ##
-        # Format used to parse DATETIME values. Supports C-style and SQL-style
-        # values.
+        # Format used to parse DATETIME values. Supports SQL-style values. See
+        # [date and time formatting guide](https://cloud.google.com/bigquery/docs/reference/standard-sql/format-elements#format_date_time_as_string)
         #
         # @return [String, nil] The datetime format pattern, such as
-        #   `%Y-%m-%d %H:%M:%S`. `nil` if not set.
+        #   `YYYY-MM-DD HH24:MI:SS`. `nil` if not set.
         def datetime_format
           @gapi.configuration.load.datetime_format
         end
 
         ##
-        # Format used to parse TIME values. Supports C-style and SQL-style
-        # values.
+        # Format used to parse TIME values. Supports SQL-style values. See
+        # [date and time formatting guide](https://cloud.google.com/bigquery/docs/reference/standard-sql/format-elements#format_date_time_as_string)
         #
         # @return [String, nil] The time format pattern, such as
-        #   `%H:%M:%S`. `nil` if not set.
+        #   `HH24:MI:SS`. `nil` if not set.
         def time_format
           @gapi.configuration.load.time_format
         end
 
         ##
-        # Format used to parse TIMESTAMP values. Supports C-style and SQL-style
-        # values.
+        # Format used to parse TIMESTAMP values. Supports SQL-style values. See
+        # [date and time formatting guide](https://cloud.google.com/bigquery/docs/reference/standard-sql/format-elements#format_date_time_as_string)
         #
         # @return [String, nil] The timestamp format pattern, such as
-        #   `%Y-%m-%d %H:%M:%S.%f %z`. `nil` if not set.
+        #   `YYYY-MM-DD HH24:MI:SS.FF3 TZH`. `nil` if not set.
         def timestamp_format
           @gapi.configuration.load.timestamp_format
         end
@@ -2691,41 +2691,45 @@ module Google
           end
 
           ##
-          # Sets the format used to parse DATE values. Supports C-style and SQL-style
-          # values.
+          # Sets the format used to parse DATE values. Supports SQL-style
+          # values. See
+          # [date and time formatting guide](https://cloud.google.com/bigquery/docs/reference/standard-sql/format-elements#format_date_time_as_string)
           #
           # @param [String, nil] date_format The date format pattern, such as
-          #   `%Y-%m-%d`. `nil` to unset.
+          #   `YYYY-MM-DD`. `nil` to unset.
           def date_format= date_format
             @gapi.configuration.load.update! date_format: date_format
           end
 
           ##
-          # Sets the format used to parse DATETIME values. Supports C-style and SQL-style
-          # values.
+          # Sets the format used to parse DATETIME values. Supports SQL-style
+          # values. See
+          # [date and time formatting guide](https://cloud.google.com/bigquery/docs/reference/standard-sql/format-elements#format_date_time_as_string)
           #
           # @param [String, nil] datetime_format The datetime format pattern, such as
-          #   `%Y-%m-%d %H:%M:%S`. `nil` to unset.
+          #   `YYYY-MM-DD HH24:MI:SS`. `nil` to unset.
           def datetime_format= datetime_format
             @gapi.configuration.load.update! datetime_format: datetime_format
           end
 
           ##
-          # Sets the format used to parse TIME values. Supports C-style and SQL-style
-          # values.
+          # Sets the format used to parse TIME values. Supports SQL-style
+          # values. See
+          # [date and time formatting guide](https://cloud.google.com/bigquery/docs/reference/standard-sql/format-elements#format_date_time_as_string)
           #
           # @param [String, nil] time_format The time format pattern, such as
-          #   `%H:%M:%S`. `nil` to unset.
+          #   `HH24:MI:SS`. `nil` to unset.
           def time_format= time_format
             @gapi.configuration.load.update! time_format: time_format
           end
 
           ##
-          # Sets the format used to parse TIMESTAMP values. Supports C-style and SQL-style
-          # values.
+          # Sets the format used to parse TIMESTAMP values. Supports SQL-style
+          # values. See
+          # [date and time formatting guide](https://cloud.google.com/bigquery/docs/reference/standard-sql/format-elements#format_date_time_as_string)
           #
           # @param [String, nil] timestamp_format The timestamp format pattern, such as
-          #   `%Y-%m-%d %H:%M:%S.%f %z`. `nil` to unset.
+          #   `YYYY-MM-DD HH24:MI:SS.FF3 TZH`. `nil` to unset.
           def timestamp_format= timestamp_format
             @gapi.configuration.load.update! timestamp_format: timestamp_format
           end

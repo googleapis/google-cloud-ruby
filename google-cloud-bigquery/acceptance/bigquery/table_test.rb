@@ -1236,4 +1236,71 @@ describe Google::Cloud::Bigquery::Table, :bigquery do
     _(data_stripped.first[:name]).must_equal "foo  bar"
     _(data_stripped.first[:breed]).must_equal "baz  qux"
   end
+  
+  it "loads data with date and time formats, null markers, and source column match" do
+    data = [
+      ["name", "join_date", "last_seen_time", "last_updated_ts", "last_seen_datetime", "time_zone_offset"],
+      ["Gandalf", "2023/01/01", "10-00-00", "2023-01-01 10:00:00", "2023-01-01 10:00:00", "N/A"],
+      ["Frodo", "2023/02/01", "12-30-00", "2023-02-01 12:30:00", "2023-02-01 12:30:00", "-08:00"],
+      ["Samwise", "N/A", "14-00-59", "2023-03-01 14:00:59", "2023-03-01 14:00:59", "-07:00"]
+    ]
+    csv_data = CSV.generate { |csv| data.each { |row| csv << row } }
+    csv_io = StringIO.new csv_data
+    file = bucket.create_file csv_io, "load_job_test_data.csv"
+
+    load_table = dataset.create_table "load_job_test_table" do |schema|
+      schema.string "name"
+      schema.date "join_date"
+      schema.time "last_seen_time"
+      schema.timestamp "last_updated_ts"
+      schema.datetime "last_seen_datetime"
+      schema.string "time_zone_offset"
+    end
+
+    job = load_table.load_job file,
+                              format: "csv",
+                              skip_leading: 1,
+                              date_format: "YYYY/MM/DD",
+                              time_format: "HH24-MI-SS",
+                              timestamp_format: "YYYY-MM-DD HH24:MI:SS",
+                              datetime_format: "YYYY-MM-DD HH24:MI:SS",
+                              time_zone: "America/Los_Angeles",
+                              null_markers: ["N/A"],
+                              source_column_match: "NAME"
+
+    job.wait_until_done!
+    _(job).wont_be :failed?
+
+    _(job.date_format).must_equal "YYYY/MM/DD"
+    _(job.time_format).must_equal "HH24-MI-SS"
+    _(job.timestamp_format).must_equal "YYYY-MM-DD HH24:MI:SS"
+    _(job.datetime_format).must_equal "YYYY-MM-DD HH24:MI:SS"
+    _(job.time_zone).must_equal "America/Los_Angeles"
+    _(job.null_markers).must_equal ["N/A"]
+    _(job.source_column_match).must_equal "NAME"
+
+    loaded_data = load_table.data
+    _(loaded_data.count).must_equal 3
+
+    row1 = loaded_data.find { |r| r[:name] == "Gandalf" }
+    _(row1[:join_date]).must_equal Date.new(2023, 1, 1)
+    _(row1[:last_seen_time].value).must_equal "10:00:00"
+    _(row1[:last_updated_ts]).must_equal Time.new(2023, 1, 1, 10, 0, 0, "-08:00")
+    _(row1[:last_seen_datetime]).must_equal DateTime.new(2023, 1, 1, 10, 0, 0)
+    _(row1[:time_zone_offset]).must_be :nil?
+
+    row2 = loaded_data.find { |r| r[:name] == "Frodo" }
+    _(row2[:join_date]).must_equal Date.new(2023, 2, 1)
+    _(row2[:last_seen_time].value).must_equal "12:30:00"
+    _(row2[:last_updated_ts]).must_equal Time.new(2023, 2, 1, 12, 30, 0, "-08:00")
+    _(row2[:last_seen_datetime]).must_equal DateTime.new(2023, 2, 1, 12, 30, 0)
+    _(row2[:time_zone_offset]).must_equal "-08:00"
+
+    row3 = loaded_data.find { |r| r[:name] == "Samwise" }
+    _(row3[:join_date]).must_be :nil?
+    _(row3[:last_seen_time].value).must_equal "14:00:59"
+    _(row3[:last_updated_ts]).must_equal Time.new(2023, 3, 1, 14, 0, 59, "-08:00")
+    _(row3[:last_seen_datetime]).must_equal DateTime.new(2023, 3, 1, 14, 0, 59)
+    _(row3[:time_zone_offset]).must_equal "-07:00"
+  end
 end

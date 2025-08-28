@@ -1116,6 +1116,42 @@ module Google
         #         else the property will be ignored by the backend.
         # @param [string] session_id Session ID in which the load job must run.
         # @param [string] project_id Project ID where the destination table exists.
+        # @param [Boolean] dryrun  If set, don't actually run this job. Behavior
+        #   is undefined however for non-query jobs and may result in an error.
+        #   Deprecated.
+        # @param [String] date_format Format used to parse DATE values.
+        #   Supports SQL-style format strings. See
+        #   [date and time formatting guide](https://cloud.google.com/bigquery/docs/reference/standard-sql/format-elements#format_date_time_as_string)
+        # @param [String] datetime_format Format used to parse DATETIME
+        #   values. Supports SQL-style format strings. See
+        #   [date and time formatting guide](https://cloud.google.com/bigquery/docs/reference/standard-sql/format-elements#format_date_time_as_string)
+        # @param [String] time_format Format used to parse TIME values.
+        #   Supports SQL-style format strings. See
+        #   [date and time formatting guide](https://cloud.google.com/bigquery/docs/reference/standard-sql/format-elements#format_date_time_as_string)
+        # @param [String] timestamp_format Format used to parse
+        #   TIMESTAMP values. Supports SQL-style format strings. See
+        #   [date and time formatting guide](https://cloud.google.com/bigquery/docs/reference/standard-sql/format-elements#format_date_time_as_string)
+        # @param [Array<String>] null_markers A list of strings represented as
+        #   SQL NULL value in a CSV file. null_marker and null_markers can't be
+        #   set at the same time. If null_marker is set, null_markers has to be
+        #   not set. If null_markers is set, null_marker has to be not set. If
+        #   both null_marker and null_markers are set at the same time, a user
+        #   error would be thrown. Any strings listed in null_markers, including
+        #   empty string would be interpreted as SQL NULL. This applies to all
+        #   column types.
+        # @param [String] source_column_match Controls the strategy used to
+        #   match loaded columns to the schema. If not set, a sensible default is
+        #   chosen based on how the schema is provided. If autodetect is used,
+        #   then columns are matched by name. Otherwise, columns are matched by
+        #   position. This is done to keep the behavior backward-compatible.
+        #
+        #   Acceptable values are:
+        #   * `POSITION` - matches by position. This assumes that the columns are
+        #     ordered the same way as the schema.
+        #   * `NAME` - matches by name. This reads the header row as column names
+        #     and reorders columns to match the field names in the schema.
+        # @param [String] time_zone The time zone used when parsing timestamp
+        #   values.
         #
         # @yield [updater] A block for setting the schema and other
         #   options for the destination table. The schema can be omitted if the
@@ -1123,9 +1159,6 @@ module Google
         #   Google Cloud Datastore backup.
         # @yieldparam [Google::Cloud::Bigquery::LoadJob::Updater] updater An
         #   updater to modify the load job and its schema.
-        # @param [Boolean] dryrun  If set, don't actually run this job. Behavior
-        #   is undefined however for non-query jobs and may result in an error.
-        #   Deprecated.
         #
         # @return [Google::Cloud::Bigquery::LoadJob] A new load job object.
         #
@@ -1143,7 +1176,9 @@ module Google
                      projection_fields: nil, jagged_rows: nil, quoted_newlines: nil, encoding: nil,
                      delimiter: nil, ignore_unknown: nil, max_bad_records: nil, quote: nil,
                      skip_leading: nil, schema: nil, job_id: nil, prefix: nil, labels: nil, autodetect: nil,
-                     null_marker: nil, dryrun: nil, create_session: nil, session_id: nil, project_id: nil, &block
+                     null_marker: nil, dryrun: nil, create_session: nil, session_id: nil, project_id: nil,
+                     date_format: nil, datetime_format: nil, time_format: nil, timestamp_format: nil,
+                     null_markers: nil, source_column_match: nil, time_zone: nil, &block
           ensure_service!
           dataset_id ||= "_SESSION" unless create_session.nil? && session_id.nil?
           session_dataset = dataset dataset_id, skip_lookup: true, project_id: project_id
@@ -1155,7 +1190,10 @@ module Google
                           max_bad_records: max_bad_records, quote: quote, skip_leading: skip_leading,
                           dryrun: dryrun, schema: schema, job_id: job_id, prefix: prefix, labels: labels,
                           autodetect: autodetect, null_marker: null_marker, create_session: create_session,
-                          session_id: session_id, &block
+                          session_id: session_id, date_format: date_format, datetime_format: datetime_format,
+                          time_format: time_format, timestamp_format: timestamp_format,
+                          null_markers: null_markers, source_column_match: source_column_match,
+                          time_zone: time_zone, &block
         end
 
         ##
@@ -1277,6 +1315,39 @@ module Google
         #   this option. Also note that for most use cases, the block yielded by
         #   this method is a more convenient way to configure the schema.
         # @param [string] session_id Session ID in which the load job must run.
+        # @param [String] date_format Format used to parse DATE values.
+        #   Supports SQL-style format strings. See
+        #   [date and time formatting guide](https://cloud.google.com/bigquery/docs/reference/standard-sql/format-elements#format_date_time_as_string)
+        # @param [String] datetime_format Format used to parse DATETIME
+        #   values. Supports SQL-style format strings. See
+        #   [date and time formatting guide](https://cloud.google.com/bigquery/docs/reference/standard-sql/format-elements#format_date_time_as_string)
+        # @param [String] time_format Format used to parse TIME values.
+        #   Supports SQL-style format strings. See
+        #   [date and time formatting guide](https://cloud.google.com/bigquery/docs/reference/standard-sql/format-elements#format_date_time_as_string)
+        # @param [String] timestamp_format Format used to parse
+        #   TIMESTAMP values. Supports SQL-style format strings. See
+        #   [date and time formatting guide](https://cloud.google.com/bigquery/docs/reference/standard-sql/format-elements#format_date_time_as_string)
+        # @param [Array<String>] null_markers A list of strings represented as
+        #   SQL NULL value in a CSV file. null_marker and null_markers can't be
+        #   set at the same time. If null_marker is set, null_markers has to be
+        #   not set. If null_markers is set, null_marker has to be not set. If
+        #   both null_marker and null_markers are set at the same time, a user
+        #   error would be thrown. Any strings listed in null_markers, including
+        #   empty string would be interpreted as SQL NULL. This applies to all
+        #   column types.
+        # @param [String] source_column_match Controls the strategy used to
+        #   match loaded columns to the schema. If not set, a sensible default is
+        #   chosen based on how the schema is provided. If autodetect is used,
+        #   then columns are matched by name. Otherwise, columns are matched by
+        #   position. This is done to keep the behavior backward-compatible.
+        #
+        #   Acceptable values are:
+        #   * `POSITION` - matches by position. This assumes that the columns are
+        #     ordered the same way as the schema.
+        #   * `NAME` - matches by name. This reads the header row as column names
+        #     and reorders columns to match the field names in the schema.
+        # @param [String] time_zone The time zone used when parsing timestamp
+        #   values.
         #
         # @yield [updater] A block for setting the schema of the destination
         #   table and other options for the load job. The schema can be omitted
@@ -1306,13 +1377,18 @@ module Google
         def load table_id, files, dataset_id: "_SESSION", format: nil, create: nil, write: nil,
                  projection_fields: nil, jagged_rows: nil, quoted_newlines: nil, encoding: nil,
                  delimiter: nil, ignore_unknown: nil, max_bad_records: nil, quote: nil,
-                 skip_leading: nil, schema: nil, autodetect: nil, null_marker: nil, session_id: nil, &block
+                 skip_leading: nil, schema: nil, autodetect: nil, null_marker: nil, session_id: nil,
+                 date_format: nil, datetime_format: nil, time_format: nil, timestamp_format: nil,
+                 null_markers: nil, source_column_match: nil, time_zone: nil, &block
           job = load_job table_id, files, dataset_id: dataset_id,
                         format: format, create: create, write: write, projection_fields: projection_fields,
                         jagged_rows: jagged_rows, quoted_newlines: quoted_newlines, encoding: encoding,
                         delimiter: delimiter, ignore_unknown: ignore_unknown, max_bad_records: max_bad_records,
                         quote: quote, skip_leading: skip_leading, schema: schema, autodetect: autodetect,
-                        null_marker: null_marker, session_id: session_id, &block
+                        null_marker: null_marker, session_id: session_id, date_format: date_format,
+                        datetime_format: datetime_format, time_format: time_format,
+                        timestamp_format: timestamp_format, null_markers: null_markers,
+                        source_column_match: source_column_match, time_zone: time_zone, &block
 
           job.wait_until_done!
           ensure_job_succeeded! job
