@@ -18,7 +18,7 @@ def speech_sync_recognize audio_file_path: nil
 
   require "google/cloud/speech"
 
-  speech = Google::Cloud::Speech.speech
+  speech = Google::Cloud::Speech.speech version: :v1
 
   # [START speech_ruby_migration_sync_response]
   audio_file = File.binread audio_file_path
@@ -45,7 +45,7 @@ def speech_sync_recognize_words audio_file_path: nil
 
   require "google/cloud/speech"
 
-  speech = Google::Cloud::Speech.speech
+  speech = Google::Cloud::Speech.speech version: :v1
 
   audio_file = File.binread audio_file_path
 
@@ -79,7 +79,7 @@ def speech_sync_recognize_gcs storage_path: nil
 
   require "google/cloud/speech"
 
-  speech = Google::Cloud::Speech.speech
+  speech = Google::Cloud::Speech.speech version: :v1
 
   # [START speech_ruby_migration_config_gcs]
   config = { encoding:          :LINEAR16,
@@ -105,7 +105,7 @@ def speech_async_recognize audio_file_path: nil
 
   require "google/cloud/speech"
 
-  speech = Google::Cloud::Speech.speech
+  speech = Google::Cloud::Speech.speech version: :v1
 
   # [START speech_ruby_migration_async_response]
   # [START speech_ruby_migration_async_request]
@@ -140,7 +140,7 @@ def speech_async_recognize_gcs storage_path: nil
 
   require "google/cloud/speech"
 
-  speech = Google::Cloud::Speech.speech
+  speech = Google::Cloud::Speech.speech version: :v1
 
   config = { encoding:          :LINEAR16,
              sample_rate_hertz: 16_000,
@@ -170,7 +170,7 @@ def speech_async_recognize_gcs_words storage_path: nil
 
   require "google/cloud/speech"
 
-  speech = Google::Cloud::Speech.speech
+  speech = Google::Cloud::Speech.speech version: :v1
 
   config = { encoding:                 :LINEAR16,
              sample_rate_hertz:        16_000,
@@ -207,7 +207,7 @@ def speech_streaming_recognize audio_file_path: nil
 
   require "google/cloud/speech"
 
-  speech = Google::Cloud::Speech.speech
+  speech = Google::Cloud::Speech.speech version: :v1
 
   # [START speech_ruby_migration_streaming_response]
   # [START speech_ruby_migration_streaming_request]
@@ -256,7 +256,7 @@ def speech_transcribe_auto_punctuation audio_file_path: nil
 
   require "google/cloud/speech"
 
-  speech = Google::Cloud::Speech.speech
+  speech = Google::Cloud::Speech.speech version: :v1
 
   config = {
     encoding:                     :LINEAR16,
@@ -293,7 +293,7 @@ def speech_transcribe_enhanced_model audio_file_path: nil
 
   require "google/cloud/speech"
 
-  speech = Google::Cloud::Speech.speech
+  speech = Google::Cloud::Speech.speech version: :v1
 
   config = {
     encoding:          :LINEAR16,
@@ -331,7 +331,7 @@ def speech_transcribe_model_selection file_path: nil, model: nil
 
   require "google/cloud/speech"
 
-  speech = Google::Cloud::Speech.speech
+  speech = Google::Cloud::Speech.speech version: :v1
 
   config = {
     encoding:          :LINEAR16,
@@ -368,7 +368,7 @@ def speech_transcribe_multichannel audio_file_path: nil
 
   require "google/cloud/speech"
 
-  speech = Google::Cloud::Speech.speech
+  speech = Google::Cloud::Speech.speech version: :v1
 
   config = {
     encoding:                                :LINEAR16,
@@ -401,7 +401,7 @@ def speech_transcribe_multichannel_gcs storage_path: nil
 
   require "google/cloud/speech"
 
-  speech = Google::Cloud::Speech.speech
+  speech = Google::Cloud::Speech.speech version: :v1
 
   config = {
     encoding:                                :LINEAR16,
