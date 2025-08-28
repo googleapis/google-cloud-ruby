@@ -1,5 +1,11 @@
 # Release History
 
+### 1.57.0 (2025-08-28)
+
+#### Features
+
+* Add support for reference_file_schema_uri for LoadJobConfig and ExternalDataSource ([#30859](https://github.com/googleapis/google-cloud-ruby/issues/30859)) 
+
 ### 1.56.0 (2025-08-27)
 
 #### Features
