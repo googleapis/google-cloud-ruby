@@ -372,6 +372,96 @@ module Google
               end
 
               ##
+              # Creates one or more regions in your Merchant Center account.
+              # Executing this method requires admin access.
+              #
+              # @overload batch_create_regions(request, options = nil)
+              #   Pass arguments to `batch_create_regions` via a request object, either of type
+              #   {::Google::Shopping::Merchant::Accounts::V1::BatchCreateRegionsRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Shopping::Merchant::Accounts::V1::BatchCreateRegionsRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+              #
+              # @overload batch_create_regions(parent: nil, requests: nil)
+              #   Pass arguments to `batch_create_regions` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param parent [::String]
+              #     Required. The account to create one or more regions for.
+              #     Format: `accounts/{account}`
+              #   @param requests [::Array<::Google::Shopping::Merchant::Accounts::V1::CreateRegionRequest, ::Hash>]
+              #     Required. The region(s) to create.
+              #     The maximum number of regions that can be created in a batch is 100.
+              #
+              # @yield [response, operation] Access the result along with the RPC operation
+              # @yieldparam response [::Google::Shopping::Merchant::Accounts::V1::BatchCreateRegionsResponse]
+              # @yieldparam operation [::GRPC::ActiveCall::Operation]
+              #
+              # @return [::Google::Shopping::Merchant::Accounts::V1::BatchCreateRegionsResponse]
+              #
+              # @raise [::Google::Cloud::Error] if the RPC is aborted.
+              #
+              # @example Basic example
+              #   require "google/shopping/merchant/accounts/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Shopping::Merchant::Accounts::V1::RegionsService::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Shopping::Merchant::Accounts::V1::BatchCreateRegionsRequest.new
+              #
+              #   # Call the batch_create_regions method.
+              #   result = client.batch_create_regions request
+              #
+              #   # The returned object is of type Google::Shopping::Merchant::Accounts::V1::BatchCreateRegionsResponse.
+              #   p result
+              #
+              def batch_create_regions request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Shopping::Merchant::Accounts::V1::BatchCreateRegionsRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                metadata = @config.rpcs.batch_create_regions.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Shopping::Merchant::Accounts::V1::VERSION
+                metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                header_params = {}
+                if request.parent
+                  header_params["parent"] = request.parent
+                end
+
+                request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+                metadata[:"x-goog-request-params"] ||= request_params_header
+
+                options.apply_defaults timeout:      @config.rpcs.batch_create_regions.timeout,
+                                       metadata:     metadata,
+                                       retry_policy: @config.rpcs.batch_create_regions.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @regions_service_stub.call_rpc :batch_create_regions, request, options: options do |response, operation|
+                  yield response, operation if block_given?
+                end
+              rescue ::GRPC::BadStatus => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
               # Updates a region definition in your Merchant Center account.
               # Executing this method requires admin access.
               #
@@ -462,6 +552,96 @@ module Google
               end
 
               ##
+              # Updates one or more regions in your Merchant Center account.
+              # Executing this method requires admin access.
+              #
+              # @overload batch_update_regions(request, options = nil)
+              #   Pass arguments to `batch_update_regions` via a request object, either of type
+              #   {::Google::Shopping::Merchant::Accounts::V1::BatchUpdateRegionsRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Shopping::Merchant::Accounts::V1::BatchUpdateRegionsRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+              #
+              # @overload batch_update_regions(parent: nil, requests: nil)
+              #   Pass arguments to `batch_update_regions` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param parent [::String]
+              #     Required. The account to update one or more regions for.
+              #     Format: `accounts/{account}`
+              #   @param requests [::Array<::Google::Shopping::Merchant::Accounts::V1::UpdateRegionRequest, ::Hash>]
+              #     Required. The region(s) to update.
+              #     The maximum number of regions that can be updated in a batch is 100.
+              #
+              # @yield [response, operation] Access the result along with the RPC operation
+              # @yieldparam response [::Google::Shopping::Merchant::Accounts::V1::BatchUpdateRegionsResponse]
+              # @yieldparam operation [::GRPC::ActiveCall::Operation]
+              #
+              # @return [::Google::Shopping::Merchant::Accounts::V1::BatchUpdateRegionsResponse]
+              #
+              # @raise [::Google::Cloud::Error] if the RPC is aborted.
+              #
+              # @example Basic example
+              #   require "google/shopping/merchant/accounts/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Shopping::Merchant::Accounts::V1::RegionsService::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Shopping::Merchant::Accounts::V1::BatchUpdateRegionsRequest.new
+              #
+              #   # Call the batch_update_regions method.
+              #   result = client.batch_update_regions request
+              #
+              #   # The returned object is of type Google::Shopping::Merchant::Accounts::V1::BatchUpdateRegionsResponse.
+              #   p result
+              #
+              def batch_update_regions request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Shopping::Merchant::Accounts::V1::BatchUpdateRegionsRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                metadata = @config.rpcs.batch_update_regions.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Shopping::Merchant::Accounts::V1::VERSION
+                metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                header_params = {}
+                if request.parent
+                  header_params["parent"] = request.parent
+                end
+
+                request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+                metadata[:"x-goog-request-params"] ||= request_params_header
+
+                options.apply_defaults timeout:      @config.rpcs.batch_update_regions.timeout,
+                                       metadata:     metadata,
+                                       retry_policy: @config.rpcs.batch_update_regions.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @regions_service_stub.call_rpc :batch_update_regions, request, options: options do |response, operation|
+                  yield response, operation if block_given?
+                end
+              rescue ::GRPC::BadStatus => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
               # Deletes a region definition from your Merchant Center account. Executing
               # this method requires admin access.
               #
@@ -542,6 +722,96 @@ module Google
                                        retry_policy: @config.retry_policy
 
                 @regions_service_stub.call_rpc :delete_region, request, options: options do |response, operation|
+                  yield response, operation if block_given?
+                end
+              rescue ::GRPC::BadStatus => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Deletes multiple regions by name from your Merchant Center account.
+              # Executing this method requires admin access.
+              #
+              # @overload batch_delete_regions(request, options = nil)
+              #   Pass arguments to `batch_delete_regions` via a request object, either of type
+              #   {::Google::Shopping::Merchant::Accounts::V1::BatchDeleteRegionsRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Shopping::Merchant::Accounts::V1::BatchDeleteRegionsRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+              #
+              # @overload batch_delete_regions(parent: nil, requests: nil)
+              #   Pass arguments to `batch_delete_regions` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param parent [::String]
+              #     Required. The account to delete one or more regions from.
+              #     Format: `accounts/{account}`
+              #   @param requests [::Array<::Google::Shopping::Merchant::Accounts::V1::DeleteRegionRequest, ::Hash>]
+              #     Required. The names of the regions to delete.
+              #     A maximum of 100 regions can be deleted in a batch.
+              #
+              # @yield [response, operation] Access the result along with the RPC operation
+              # @yieldparam response [::Google::Protobuf::Empty]
+              # @yieldparam operation [::GRPC::ActiveCall::Operation]
+              #
+              # @return [::Google::Protobuf::Empty]
+              #
+              # @raise [::Google::Cloud::Error] if the RPC is aborted.
+              #
+              # @example Basic example
+              #   require "google/shopping/merchant/accounts/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Shopping::Merchant::Accounts::V1::RegionsService::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Shopping::Merchant::Accounts::V1::BatchDeleteRegionsRequest.new
+              #
+              #   # Call the batch_delete_regions method.
+              #   result = client.batch_delete_regions request
+              #
+              #   # The returned object is of type Google::Protobuf::Empty.
+              #   p result
+              #
+              def batch_delete_regions request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Shopping::Merchant::Accounts::V1::BatchDeleteRegionsRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                metadata = @config.rpcs.batch_delete_regions.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Shopping::Merchant::Accounts::V1::VERSION
+                metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                header_params = {}
+                if request.parent
+                  header_params["parent"] = request.parent
+                end
+
+                request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+                metadata[:"x-goog-request-params"] ||= request_params_header
+
+                options.apply_defaults timeout:      @config.rpcs.batch_delete_regions.timeout,
+                                       metadata:     metadata,
+                                       retry_policy: @config.rpcs.batch_delete_regions.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @regions_service_stub.call_rpc :batch_delete_regions, request, options: options do |response, operation|
                   yield response, operation if block_given?
                 end
               rescue ::GRPC::BadStatus => e
@@ -828,15 +1098,30 @@ module Google
                   #
                   attr_reader :create_region
                   ##
+                  # RPC-specific configuration for `batch_create_regions`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :batch_create_regions
+                  ##
                   # RPC-specific configuration for `update_region`
                   # @return [::Gapic::Config::Method]
                   #
                   attr_reader :update_region
                   ##
+                  # RPC-specific configuration for `batch_update_regions`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :batch_update_regions
+                  ##
                   # RPC-specific configuration for `delete_region`
                   # @return [::Gapic::Config::Method]
                   #
                   attr_reader :delete_region
+                  ##
+                  # RPC-specific configuration for `batch_delete_regions`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :batch_delete_regions
                   ##
                   # RPC-specific configuration for `list_regions`
                   # @return [::Gapic::Config::Method]
@@ -849,10 +1134,16 @@ module Google
                     @get_region = ::Gapic::Config::Method.new get_region_config
                     create_region_config = parent_rpcs.create_region if parent_rpcs.respond_to? :create_region
                     @create_region = ::Gapic::Config::Method.new create_region_config
+                    batch_create_regions_config = parent_rpcs.batch_create_regions if parent_rpcs.respond_to? :batch_create_regions
+                    @batch_create_regions = ::Gapic::Config::Method.new batch_create_regions_config
                     update_region_config = parent_rpcs.update_region if parent_rpcs.respond_to? :update_region
                     @update_region = ::Gapic::Config::Method.new update_region_config
+                    batch_update_regions_config = parent_rpcs.batch_update_regions if parent_rpcs.respond_to? :batch_update_regions
+                    @batch_update_regions = ::Gapic::Config::Method.new batch_update_regions_config
                     delete_region_config = parent_rpcs.delete_region if parent_rpcs.respond_to? :delete_region
                     @delete_region = ::Gapic::Config::Method.new delete_region_config
+                    batch_delete_regions_config = parent_rpcs.batch_delete_regions if parent_rpcs.respond_to? :batch_delete_regions
+                    @batch_delete_regions = ::Gapic::Config::Method.new batch_delete_regions_config
                     list_regions_config = parent_rpcs.list_regions if parent_rpcs.respond_to? :list_regions
                     @list_regions = ::Gapic::Config::Method.new list_regions_config
 

@@ -2412,6 +2412,46 @@
       ]
     },
     {
+      "region_tag": "merchantapi_v1_generated_RegionsService_BatchCreateRegions_sync",
+      "title": "Snippet for the batch_create_regions call in the RegionsService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Shopping::Merchant::Accounts::V1::RegionsService::Client#batch_create_regions.",
+      "file": "regions_service/batch_create_regions.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "batch_create_regions",
+        "full_name": "::Google::Shopping::Merchant::Accounts::V1::RegionsService::Client#batch_create_regions",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Shopping::Merchant::Accounts::V1::BatchCreateRegionsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Shopping::Merchant::Accounts::V1::BatchCreateRegionsResponse",
+        "client": {
+          "short_name": "RegionsService::Client",
+          "full_name": "::Google::Shopping::Merchant::Accounts::V1::RegionsService::Client"
+        },
+        "method": {
+          "short_name": "BatchCreateRegions",
+          "full_name": "google.shopping.merchant.accounts.v1.RegionsService.BatchCreateRegions",
+          "service": {
+            "short_name": "RegionsService",
+            "full_name": "google.shopping.merchant.accounts.v1.RegionsService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
       "region_tag": "merchantapi_v1_generated_RegionsService_UpdateRegion_sync",
       "title": "Snippet for the update_region call in the RegionsService service",
       "description": "This is an auto-generated example demonstrating basic usage of Google::Shopping::Merchant::Accounts::V1::RegionsService::Client#update_region.",
@@ -2452,6 +2492,46 @@
       ]
     },
     {
+      "region_tag": "merchantapi_v1_generated_RegionsService_BatchUpdateRegions_sync",
+      "title": "Snippet for the batch_update_regions call in the RegionsService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Shopping::Merchant::Accounts::V1::RegionsService::Client#batch_update_regions.",
+      "file": "regions_service/batch_update_regions.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "batch_update_regions",
+        "full_name": "::Google::Shopping::Merchant::Accounts::V1::RegionsService::Client#batch_update_regions",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Shopping::Merchant::Accounts::V1::BatchUpdateRegionsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Shopping::Merchant::Accounts::V1::BatchUpdateRegionsResponse",
+        "client": {
+          "short_name": "RegionsService::Client",
+          "full_name": "::Google::Shopping::Merchant::Accounts::V1::RegionsService::Client"
+        },
+        "method": {
+          "short_name": "BatchUpdateRegions",
+          "full_name": "google.shopping.merchant.accounts.v1.RegionsService.BatchUpdateRegions",
+          "service": {
+            "short_name": "RegionsService",
+            "full_name": "google.shopping.merchant.accounts.v1.RegionsService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
       "region_tag": "merchantapi_v1_generated_RegionsService_DeleteRegion_sync",
       "title": "Snippet for the delete_region call in the RegionsService service",
       "description": "This is an auto-generated example demonstrating basic usage of Google::Shopping::Merchant::Accounts::V1::RegionsService::Client#delete_region.",
@@ -2475,6 +2555,46 @@
         "method": {
           "short_name": "DeleteRegion",
           "full_name": "google.shopping.merchant.accounts.v1.RegionsService.DeleteRegion",
+          "service": {
+            "short_name": "RegionsService",
+            "full_name": "google.shopping.merchant.accounts.v1.RegionsService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "merchantapi_v1_generated_RegionsService_BatchDeleteRegions_sync",
+      "title": "Snippet for the batch_delete_regions call in the RegionsService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Shopping::Merchant::Accounts::V1::RegionsService::Client#batch_delete_regions.",
+      "file": "regions_service/batch_delete_regions.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "batch_delete_regions",
+        "full_name": "::Google::Shopping::Merchant::Accounts::V1::RegionsService::Client#batch_delete_regions",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Shopping::Merchant::Accounts::V1::BatchDeleteRegionsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Protobuf::Empty",
+        "client": {
+          "short_name": "RegionsService::Client",
+          "full_name": "::Google::Shopping::Merchant::Accounts::V1::RegionsService::Client"
+        },
+        "method": {
+          "short_name": "BatchDeleteRegions",
+          "full_name": "google.shopping.merchant.accounts.v1.RegionsService.BatchDeleteRegions",
           "service": {
             "short_name": "RegionsService",
             "full_name": "google.shopping.merchant.accounts.v1.RegionsService"

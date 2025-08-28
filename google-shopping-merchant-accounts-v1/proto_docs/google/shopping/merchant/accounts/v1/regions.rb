@@ -49,6 +49,29 @@ module Google
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
 
+          # Request message for the `BatchCreateRegions` method.
+          # @!attribute [rw] parent
+          #   @return [::String]
+          #     Required. The account to create one or more regions for.
+          #     Format: `accounts/{account}`
+          # @!attribute [rw] requests
+          #   @return [::Array<::Google::Shopping::Merchant::Accounts::V1::CreateRegionRequest>]
+          #     Required. The region(s) to create.
+          #     The maximum number of regions that can be created in a batch is 100.
+          class BatchCreateRegionsRequest
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Response message for the `BatchCreateRegions` method.
+          # @!attribute [rw] regions
+          #   @return [::Array<::Google::Shopping::Merchant::Accounts::V1::Region>]
+          #     The created region(s).
+          class BatchCreateRegionsResponse
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
           # Request message for the `UpdateRegion` method.
           # @!attribute [rw] region
           #   @return [::Google::Shopping::Merchant::Accounts::V1::Region]
@@ -63,12 +86,49 @@ module Google
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
 
+          # Request message for the `BatchUpdateRegions` method.
+          # @!attribute [rw] parent
+          #   @return [::String]
+          #     Required. The account to update one or more regions for.
+          #     Format: `accounts/{account}`
+          # @!attribute [rw] requests
+          #   @return [::Array<::Google::Shopping::Merchant::Accounts::V1::UpdateRegionRequest>]
+          #     Required. The region(s) to update.
+          #     The maximum number of regions that can be updated in a batch is 100.
+          class BatchUpdateRegionsRequest
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Response message for the `BatchUpdateRegions` method.
+          # @!attribute [rw] regions
+          #   @return [::Array<::Google::Shopping::Merchant::Accounts::V1::Region>]
+          #     The updated region(s).
+          class BatchUpdateRegionsResponse
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
           # Request message for the `DeleteRegion` method.
           # @!attribute [rw] name
           #   @return [::String]
           #     Required. The name of the region to delete.
           #     Format: `accounts/{account}/regions/{region}`
           class DeleteRegionRequest
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Request message for the `BatchDeleteRegions` method.
+          # @!attribute [rw] parent
+          #   @return [::String]
+          #     Required. The account to delete one or more regions from.
+          #     Format: `accounts/{account}`
+          # @!attribute [rw] requests
+          #   @return [::Array<::Google::Shopping::Merchant::Accounts::V1::DeleteRegionRequest>]
+          #     Required. The names of the regions to delete.
+          #     A maximum of 100 regions can be deleted in a batch.
+          class BatchDeleteRegionsRequest
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
