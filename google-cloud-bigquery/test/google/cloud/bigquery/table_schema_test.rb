@@ -421,4 +421,32 @@ describe Google::Cloud::Bigquery::Table, :mock_bigquery do
 
     _(table.schema.fields.map(&:default_value_expression)).must_be :==, [field_string_required_gapi_default.default_value_expression]
   end
+
+  it "sets the collation on a string field" do
+    mock = Minitest::Mock.new
+    field_string_collation_gapi = Google::Apis::BigqueryV2::TableFieldSchema.new(
+      name: "first_name",
+      type: "STRING",
+      mode: "REQUIRED",
+      collation: "und:ci",
+      description: nil,
+      fields: []
+    )
+    new_schema_gapi = Google::Apis::BigqueryV2::TableSchema.new(
+      fields: [field_string_collation_gapi])
+    returned_table_gapi = table_gapi.dup
+    returned_table_gapi.schema = new_schema_gapi
+    patch_table_gapi = Google::Apis::BigqueryV2::Table.new schema: new_schema_gapi, etag: etag
+    mock.expect :patch_table, returned_table_gapi,
+      [table.project_id, table.dataset_id, table.table_id, patch_table_gapi], options: {header: {"If-Match" => etag}}
+    table.service.mocked_service = mock
+
+    table.schema replace: true do |schema|
+      schema.string "first_name", mode: :required, collation: "und:ci"
+    end
+
+    mock.verify
+
+    _(table.schema.field("first_name").collation).must_equal "und:ci"
+  end
 end

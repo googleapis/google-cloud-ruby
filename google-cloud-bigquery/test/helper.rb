@@ -84,6 +84,7 @@ class MockBigquery < Minitest::Spec
       "friendlyName" => name,
       "description" => description,
       "defaultTableExpirationMs" => default_expiration,
+      "defaultCollation" => "und:ci",
       "access" => [],
       "creationTime" => time_millis,
       "lastModifiedTime" => time_millis,
@@ -275,6 +276,7 @@ class MockBigquery < Minitest::Spec
       "lastModifiedTime" => time_millis,
       "location" => "US",
       "labels" => { "foo" => "bar" },
+      "defaultCollation" => "und:ci",
       "streamingBuffer" => {
         "estimatedBytes" => "2000", # String per google/google-api-ruby-client
         "estimatedRows" => "200", # String per google/google-api-ruby-client

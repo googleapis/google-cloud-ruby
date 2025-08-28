@@ -318,13 +318,14 @@ module Google
         #         "[CURRENT_DATE(), DATE '2020-01-01'"]
         #
         def string name, description: nil, mode: :nullable, policy_tags: nil,
-                   max_length: nil, default_value_expression: nil
+                   max_length: nil, default_value_expression: nil, collation: nil
           add_field name, :string,
                     description: description,
                     mode: mode,
                     policy_tags: policy_tags,
                     max_length: max_length,
-                    default_value_expression: default_value_expression
+                    default_value_expression: default_value_expression,
+                    collation: collation
         end
 
         ##
@@ -981,7 +982,8 @@ module Google
                       max_length: nil,
                       precision: nil,
                       scale: nil,
-                      default_value_expression: nil
+                      default_value_expression: nil,
+                      collation: nil
           frozen_check!
 
           new_gapi = Google::Apis::BigqueryV2::TableFieldSchema.new(
@@ -999,6 +1001,7 @@ module Google
           new_gapi.precision = precision if precision
           new_gapi.scale = scale if scale
           new_gapi.default_value_expression = default_value_expression if default_value_expression
+          new_gapi.collation = collation if collation
           # Remove any existing field of this name
           @gapi.fields ||= []
           @gapi.fields.reject! { |f| f.name == new_gapi.name }
