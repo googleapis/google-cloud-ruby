@@ -183,6 +183,66 @@ class ::Google::Shopping::Merchant::Accounts::V1::RegionsService::ClientTest < M
     end
   end
 
+  def test_batch_create_regions
+    # Create GRPC objects.
+    grpc_response = ::Google::Shopping::Merchant::Accounts::V1::BatchCreateRegionsResponse.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    requests = [{}]
+
+    batch_create_regions_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :batch_create_regions, name
+      assert_kind_of ::Google::Shopping::Merchant::Accounts::V1::BatchCreateRegionsRequest, request
+      assert_equal "hello world", request["parent"]
+      assert_kind_of ::Google::Shopping::Merchant::Accounts::V1::CreateRegionRequest, request["requests"].first
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, batch_create_regions_client_stub do
+      # Create client
+      client = ::Google::Shopping::Merchant::Accounts::V1::RegionsService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.batch_create_regions({ parent: parent, requests: requests }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.batch_create_regions parent: parent, requests: requests do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.batch_create_regions ::Google::Shopping::Merchant::Accounts::V1::BatchCreateRegionsRequest.new(parent: parent, requests: requests) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.batch_create_regions({ parent: parent, requests: requests }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.batch_create_regions(::Google::Shopping::Merchant::Accounts::V1::BatchCreateRegionsRequest.new(parent: parent, requests: requests), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, batch_create_regions_client_stub.call_rpc_count
+    end
+  end
+
   def test_update_region
     # Create GRPC objects.
     grpc_response = ::Google::Shopping::Merchant::Accounts::V1::Region.new
@@ -243,6 +303,66 @@ class ::Google::Shopping::Merchant::Accounts::V1::RegionsService::ClientTest < M
     end
   end
 
+  def test_batch_update_regions
+    # Create GRPC objects.
+    grpc_response = ::Google::Shopping::Merchant::Accounts::V1::BatchUpdateRegionsResponse.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    requests = [{}]
+
+    batch_update_regions_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :batch_update_regions, name
+      assert_kind_of ::Google::Shopping::Merchant::Accounts::V1::BatchUpdateRegionsRequest, request
+      assert_equal "hello world", request["parent"]
+      assert_kind_of ::Google::Shopping::Merchant::Accounts::V1::UpdateRegionRequest, request["requests"].first
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, batch_update_regions_client_stub do
+      # Create client
+      client = ::Google::Shopping::Merchant::Accounts::V1::RegionsService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.batch_update_regions({ parent: parent, requests: requests }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.batch_update_regions parent: parent, requests: requests do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.batch_update_regions ::Google::Shopping::Merchant::Accounts::V1::BatchUpdateRegionsRequest.new(parent: parent, requests: requests) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.batch_update_regions({ parent: parent, requests: requests }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.batch_update_regions(::Google::Shopping::Merchant::Accounts::V1::BatchUpdateRegionsRequest.new(parent: parent, requests: requests), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, batch_update_regions_client_stub.call_rpc_count
+    end
+  end
+
   def test_delete_region
     # Create GRPC objects.
     grpc_response = ::Google::Protobuf::Empty.new
@@ -298,6 +418,66 @@ class ::Google::Shopping::Merchant::Accounts::V1::RegionsService::ClientTest < M
 
       # Verify method calls
       assert_equal 5, delete_region_client_stub.call_rpc_count
+    end
+  end
+
+  def test_batch_delete_regions
+    # Create GRPC objects.
+    grpc_response = ::Google::Protobuf::Empty.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    requests = [{}]
+
+    batch_delete_regions_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :batch_delete_regions, name
+      assert_kind_of ::Google::Shopping::Merchant::Accounts::V1::BatchDeleteRegionsRequest, request
+      assert_equal "hello world", request["parent"]
+      assert_kind_of ::Google::Shopping::Merchant::Accounts::V1::DeleteRegionRequest, request["requests"].first
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, batch_delete_regions_client_stub do
+      # Create client
+      client = ::Google::Shopping::Merchant::Accounts::V1::RegionsService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.batch_delete_regions({ parent: parent, requests: requests }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.batch_delete_regions parent: parent, requests: requests do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.batch_delete_regions ::Google::Shopping::Merchant::Accounts::V1::BatchDeleteRegionsRequest.new(parent: parent, requests: requests) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.batch_delete_regions({ parent: parent, requests: requests }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.batch_delete_regions(::Google::Shopping::Merchant::Accounts::V1::BatchDeleteRegionsRequest.new(parent: parent, requests: requests), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, batch_delete_regions_client_stub.call_rpc_count
     end
   end
 

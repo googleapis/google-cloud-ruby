@@ -43,12 +43,21 @@ module Google
               # Creates a region definition in your Merchant Center account. Executing this
               # method requires admin access.
               rpc :CreateRegion, ::Google::Shopping::Merchant::Accounts::V1::CreateRegionRequest, ::Google::Shopping::Merchant::Accounts::V1::Region
+              # Creates one or more regions in your Merchant Center account.
+              # Executing this method requires admin access.
+              rpc :BatchCreateRegions, ::Google::Shopping::Merchant::Accounts::V1::BatchCreateRegionsRequest, ::Google::Shopping::Merchant::Accounts::V1::BatchCreateRegionsResponse
               # Updates a region definition in your Merchant Center account.
               # Executing this method requires admin access.
               rpc :UpdateRegion, ::Google::Shopping::Merchant::Accounts::V1::UpdateRegionRequest, ::Google::Shopping::Merchant::Accounts::V1::Region
+              # Updates one or more regions in your Merchant Center account.
+              # Executing this method requires admin access.
+              rpc :BatchUpdateRegions, ::Google::Shopping::Merchant::Accounts::V1::BatchUpdateRegionsRequest, ::Google::Shopping::Merchant::Accounts::V1::BatchUpdateRegionsResponse
               # Deletes a region definition from your Merchant Center account. Executing
               # this method requires admin access.
               rpc :DeleteRegion, ::Google::Shopping::Merchant::Accounts::V1::DeleteRegionRequest, ::Google::Protobuf::Empty
+              # Deletes multiple regions by name from your Merchant Center account.
+              # Executing this method requires admin access.
+              rpc :BatchDeleteRegions, ::Google::Shopping::Merchant::Accounts::V1::BatchDeleteRegionsRequest, ::Google::Protobuf::Empty
               # Lists the regions in your Merchant Center account.
               rpc :ListRegions, ::Google::Shopping::Merchant::Accounts::V1::ListRegionsRequest, ::Google::Shopping::Merchant::Accounts::V1::ListRegionsResponse
             end

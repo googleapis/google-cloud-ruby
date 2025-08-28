@@ -472,14 +472,29 @@
                 "create_region"
               ]
             },
+            "BatchCreateRegions": {
+              "methods": [
+                "batch_create_regions"
+              ]
+            },
             "UpdateRegion": {
               "methods": [
                 "update_region"
               ]
             },
+            "BatchUpdateRegions": {
+              "methods": [
+                "batch_update_regions"
+              ]
+            },
             "DeleteRegion": {
               "methods": [
                 "delete_region"
+              ]
+            },
+            "BatchDeleteRegions": {
+              "methods": [
+                "batch_delete_regions"
               ]
             },
             "ListRegions": {
