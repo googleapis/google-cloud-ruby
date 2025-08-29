@@ -40,8 +40,10 @@ require_relative "../storage_get_default_event_based_hold"
 require_relative "../storage_get_public_access_prevention"
 require_relative "../storage_get_requester_pays_status"
 require_relative "../storage_get_retention_policy"
+require_relative "../storage_get_soft_deleted_bucket"
 require_relative "../storage_get_uniform_bucket_level_access"
 require_relative "../storage_list_buckets"
+require_relative "../storage_list_soft_deleted_buckets"
 require_relative "../storage_lock_retention_policy"
 require_relative "../storage_remove_bucket_label"
 require_relative "../storage_remove_cors_configuration"
@@ -117,6 +119,31 @@ describe "Buckets Snippets" do
 
       delete_bucket_helper bucket_name
       delete_bucket_helper secondary_bucket_name
+    end
+  end
+
+  describe "storage_soft_deleted_bucket" do
+    let(:new_bucket_name) { random_bucket_name }
+    let(:new_bucket) { create_bucket_helper new_bucket_name }
+    let(:new_generation) { new_bucket.generation }
+    before do
+      delete_bucket_helper new_bucket.name
+    end
+
+    it "get soft deleted bucket, its soft_delete_time and hard_delete_time" do
+      # fetching a soft deleted bucket
+      output, _err = capture_io do
+        get_soft_deleted_bucket bucket_name: new_bucket_name, generation: new_generation
+      end
+      assert_includes output, "soft_delete_time for #{new_bucket_name} is"
+    end
+
+    it "lists soft deleted buckets" do
+      # fetching list of soft deleted buckets
+      list_deleted_bucket, _err = capture_io do
+        list_soft_deleted_buckets
+      end
+      assert_includes list_deleted_bucket, new_bucket_name
     end
   end
 
