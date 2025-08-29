@@ -1,5 +1,11 @@
 # Release History
 
+### 2.0.3 (2025-08-29)
+
+#### Bug Fixes
+
+* Use google-cloud-speech-v1 for samples ([#30916](https://github.com/googleapis/google-cloud-ruby/issues/30916)) 
+
 ### 2.0.2 (2025-05-27)
 
 #### Documentation
