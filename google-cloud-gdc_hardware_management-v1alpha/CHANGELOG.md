@@ -1,5 +1,11 @@
 # Changelog
 
+### 0.10.0 (2025-08-29)
+
+#### Features
+
+* Added RequestOrderDateChange RPC - allows Customers to request date changes ([#30918](https://github.com/googleapis/google-cloud-ruby/issues/30918)) 
+
 ### 0.9.0 (2025-05-12)
 
 #### Features
