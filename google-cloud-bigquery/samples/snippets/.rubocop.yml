@@ -6,6 +6,9 @@ Lint/UselessAssignment:
 Metrics/BlockLength:
     Exclude:
         - "acceptance/*.rb"
+Metrics/MethodLength:
+    Exclude:
+        - "inserting_data_types.rb"
 Style/GlobalVars:
     Enabled: false
 Style/IfUnlessModifier:
