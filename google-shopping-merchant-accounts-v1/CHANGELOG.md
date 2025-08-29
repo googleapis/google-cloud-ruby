@@ -1,5 +1,11 @@
 # Changelog
 
+### 0.2.0 (2025-08-29)
+
+#### Features
+
+* Add batch operations for custom regions ([#30922](https://github.com/googleapis/google-cloud-ruby/issues/30922)) 
+
 ### 0.1.1 (2025-08-15)
 
 #### Documentation
