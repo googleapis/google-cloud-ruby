@@ -38,21 +38,24 @@ module Google
         #     Note: The following fields are mutually exclusive: `update`, `insert`, `insert_or_update`, `replace`, `delete`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] insert_or_update
         #   @return [::Google::Cloud::Spanner::V1::Mutation::Write]
-        #     Like {::Google::Cloud::Spanner::V1::Mutation#insert insert}, except that if the row already exists, then
-        #     its column values are overwritten with the ones provided. Any
-        #     column values not explicitly written are preserved.
+        #     Like {::Google::Cloud::Spanner::V1::Mutation#insert insert}, except that if the row
+        #     already exists, then its column values are overwritten with the ones
+        #     provided. Any column values not explicitly written are preserved.
         #
-        #     When using {::Google::Cloud::Spanner::V1::Mutation#insert_or_update insert_or_update}, just as when using {::Google::Cloud::Spanner::V1::Mutation#insert insert}, all `NOT
-        #     NULL` columns in the table must be given a value. This holds true
-        #     even when the row already exists and will therefore actually be updated.
+        #     When using
+        #     {::Google::Cloud::Spanner::V1::Mutation#insert_or_update insert_or_update}, just as
+        #     when using {::Google::Cloud::Spanner::V1::Mutation#insert insert}, all `NOT NULL`
+        #     columns in the table must be given a value. This holds true even when the
+        #     row already exists and will therefore actually be updated.
         #
         #     Note: The following fields are mutually exclusive: `insert_or_update`, `insert`, `update`, `replace`, `delete`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] replace
         #   @return [::Google::Cloud::Spanner::V1::Mutation::Write]
-        #     Like {::Google::Cloud::Spanner::V1::Mutation#insert insert}, except that if the row already exists, it is
-        #     deleted, and the column values provided are inserted
-        #     instead. Unlike {::Google::Cloud::Spanner::V1::Mutation#insert_or_update insert_or_update}, this means any values not
-        #     explicitly written become `NULL`.
+        #     Like {::Google::Cloud::Spanner::V1::Mutation#insert insert}, except that if the row
+        #     already exists, it is deleted, and the column values provided are
+        #     inserted instead. Unlike
+        #     {::Google::Cloud::Spanner::V1::Mutation#insert_or_update insert_or_update}, this
+        #     means any values not explicitly written become `NULL`.
         #
         #     In an interleaved table, if you create the child table with the
         #     `ON DELETE CASCADE` annotation, then replacing a parent row
@@ -70,14 +73,17 @@ module Google
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
 
-          # Arguments to {::Google::Cloud::Spanner::V1::Mutation#insert insert}, {::Google::Cloud::Spanner::V1::Mutation#update update}, {::Google::Cloud::Spanner::V1::Mutation#insert_or_update insert_or_update}, and
+          # Arguments to {::Google::Cloud::Spanner::V1::Mutation#insert insert},
+          # {::Google::Cloud::Spanner::V1::Mutation#update update},
+          # {::Google::Cloud::Spanner::V1::Mutation#insert_or_update insert_or_update}, and
           # {::Google::Cloud::Spanner::V1::Mutation#replace replace} operations.
           # @!attribute [rw] table
           #   @return [::String]
           #     Required. The table whose rows will be written.
           # @!attribute [rw] columns
           #   @return [::Array<::String>]
-          #     The names of the columns in {::Google::Cloud::Spanner::V1::Mutation::Write#table table} to be written.
+          #     The names of the columns in
+          #     {::Google::Cloud::Spanner::V1::Mutation::Write#table table} to be written.
           #
           #     The list of columns must contain enough columns to allow
           #     Cloud Spanner to derive values for all primary key columns in the
@@ -87,11 +93,13 @@ module Google
           #     The values to be written. `values` can contain more than one
           #     list of values. If it does, then multiple rows are written, one
           #     for each entry in `values`. Each list in `values` must have
-          #     exactly as many entries as there are entries in {::Google::Cloud::Spanner::V1::Mutation::Write#columns columns}
-          #     above. Sending multiple lists is equivalent to sending multiple
-          #     `Mutation`s, each containing one `values` entry and repeating
-          #     {::Google::Cloud::Spanner::V1::Mutation::Write#table table} and {::Google::Cloud::Spanner::V1::Mutation::Write#columns columns}. Individual values in each list are
-          #     encoded as described {::Google::Cloud::Spanner::V1::TypeCode here}.
+          #     exactly as many entries as there are entries in
+          #     {::Google::Cloud::Spanner::V1::Mutation::Write#columns columns} above. Sending
+          #     multiple lists is equivalent to sending multiple `Mutation`s, each
+          #     containing one `values` entry and repeating
+          #     {::Google::Cloud::Spanner::V1::Mutation::Write#table table} and
+          #     {::Google::Cloud::Spanner::V1::Mutation::Write#columns columns}. Individual values in
+          #     each list are encoded as described {::Google::Cloud::Spanner::V1::TypeCode here}.
           class Write
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -103,12 +111,12 @@ module Google
           #     Required. The table whose rows will be deleted.
           # @!attribute [rw] key_set
           #   @return [::Google::Cloud::Spanner::V1::KeySet]
-          #     Required. The primary keys of the rows within {::Google::Cloud::Spanner::V1::Mutation::Delete#table table} to delete.  The
-          #     primary keys must be specified in the order in which they appear in the
-          #     `PRIMARY KEY()` clause of the table's equivalent DDL statement (the DDL
-          #     statement used to create the table).
-          #     Delete is idempotent. The transaction will succeed even if some or all
-          #     rows do not exist.
+          #     Required. The primary keys of the rows within
+          #     {::Google::Cloud::Spanner::V1::Mutation::Delete#table table} to delete.  The primary
+          #     keys must be specified in the order in which they appear in the `PRIMARY
+          #     KEY()` clause of the table's equivalent DDL statement (the DDL statement
+          #     used to create the table). Delete is idempotent. The transaction will
+          #     succeed even if some or all rows do not exist.
           class Delete
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
