@@ -1438,7 +1438,8 @@ module Google
         # Delete resumable upload
         # @param [String] upload_id Unique Id of a resumable upload
         #
-        # @return [Boolean,nil] Returns `true` if the resumable upload was deleted, 'nil' if the request is not completed.
+        # @return [Boolean,nil] Returns `true` if the resumable upload was deleted,
+        #  'nil' if the request is not completed.
         #
         # @example
         #   require "google/cloud/storage"
