@@ -720,7 +720,7 @@ module Google
         ##
         # Restart resumable upload
         # @param [String, ::File] file Path of the file on the filesystem to
-        #   upload. Can be an File object, or File-like object such as StringIO.
+        #   upload. Can be a File object, or File-like object such as StringIO.
         # @param [String] upload_id Unique Id of a resumable upload
         #
         # @return [Google::Apis::StorageV1::Object, Integer]
