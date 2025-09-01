@@ -1560,6 +1560,7 @@ module Google
         rescue Google::Cloud::NotFoundError
           nil
         end
+        
         alias find_file file
 
         ##
