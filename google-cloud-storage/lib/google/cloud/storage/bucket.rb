@@ -724,7 +724,7 @@ module Google
         # @param [String] upload_id Unique Id of a resumable upload
         #
         # @return [Google::Apis::StorageV1::Object, Integer]
-        #   The object metadata on success, or 0 request is not completed.
+        #   The object metadata on success, or 0 if request is not completed.
         #
         # @example
         #   require "google/cloud/storage"
