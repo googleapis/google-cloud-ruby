@@ -436,4 +436,49 @@ describe Google::Cloud::Bigquery::Routine, :resource, :mock_bigquery do
       expect { r.refresh! }.must_raise RuntimeError
     end
   end
+
+  it "returns nil for remote function options when not present" do
+    _(routine.remote_function_options).must_be_nil
+  end
+
+  it "has default remote function options when the object is present but empty" do
+    routine_hash_with_options = routine_hash.dup
+    routine_hash_with_options["remoteFunctionOptions"] = {}
+    routine_with_options_gapi = Google::Apis::BigqueryV2::Routine.from_json routine_hash_with_options.to_json
+    routine_with_options = Google::Cloud::Bigquery::Routine.from_gapi routine_with_options_gapi, bigquery.service
+
+    _(routine_with_options.remote_function_options).wont_be_nil
+    _(routine_with_options.remote_function_options.endpoint).must_equal ""
+    _(routine_with_options.remote_function_options.connection).must_equal ""
+    _(routine_with_options.remote_function_options.user_defined_context).must_equal({})
+    _(routine_with_options.remote_function_options.max_batching_rows).must_equal 0
+  end
+
+  it "allows setting remote function option properties to nil" do
+    routine_hash_with_options = routine_hash.dup
+    routine_hash_with_options["remoteFunctionOptions"] = {
+      endpoint: "https://example.com",
+      connection: "projects/p/locations/l/connections/c",
+      userDefinedContext: { "foo" => "bar" },
+      maxBatchingRows: 100
+    }
+    routine_with_options_gapi = Google::Apis::BigqueryV2::Routine.from_json routine_hash_with_options.to_json
+    routine_with_options = Google::Cloud::Bigquery::Routine.from_gapi routine_with_options_gapi, bigquery.service
+
+    _(routine_with_options.remote_function_options).wont_be_nil
+    _(routine_with_options.remote_function_options.endpoint).wont_be :empty?
+    _(routine_with_options.remote_function_options.connection).wont_be :empty?
+    _(routine_with_options.remote_function_options.user_defined_context).wont_be :empty?
+    _(routine_with_options.remote_function_options.max_batching_rows).wont_equal 0
+
+    routine_with_options.remote_function_options.endpoint = nil
+    routine_with_options.remote_function_options.connection = nil
+    routine_with_options.remote_function_options.user_defined_context = nil
+    routine_with_options.remote_function_options.max_batching_rows = nil
+
+    _(routine_with_options.remote_function_options.endpoint).must_equal ""
+    _(routine_with_options.remote_function_options.connection).must_equal ""
+    _(routine_with_options.remote_function_options.user_defined_context).must_equal({})
+    _(routine_with_options.remote_function_options.max_batching_rows).must_equal 0
+  end
 end

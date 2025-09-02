@@ -13,6 +13,7 @@
 # limitations under the License.
 
 require "bigquery_helper"
+require "google/cloud/bigquery/connection/v1"
 
 describe Google::Cloud::Bigquery, :bigquery do
   let(:dataset_id) { "#{prefix}_dataset" }
@@ -275,5 +276,62 @@ describe Google::Cloud::Bigquery, :bigquery do
     _(routine.delete).must_equal true
 
     _(dataset.routine(routine_id)).must_be_nil
+  end
+
+  it "can create and update a remote function routine" do
+    connection_id = "connection_#{SecureRandom.hex(4)}"
+    connection_client = Google::Cloud::Bigquery::Connection::V1::ConnectionService::Client.new
+    parent = connection_client.location_path project: bigquery.project, location: "us"
+    
+    connection = connection_client.create_connection(
+      parent: parent,
+      connection_id: connection_id,
+      connection: {
+        cloud_resource: {
+          service_account_id: "bigquery-test@bigquery.gserviceaccount.com"
+        }
+      }
+    )
+
+    remote_function_options = Google::Cloud::Bigquery::RemoteFunctionOptions.new.tap do |rfo|
+      rfo.endpoint = "https://aaabbbccc-uc.a.run.app"
+      rfo.connection = connection.name
+      rfo.user_defined_context = { "foo" => "bar" }
+    end
+
+    routine = dataset.create_routine routine_id do |r|
+      r.routine_type = "SCALAR_FUNCTION"
+      r.return_type = "INT64"
+      r.remote_function_options = remote_function_options
+    end
+
+    _(routine).must_be_kind_of Google::Cloud::Bigquery::Routine
+    _(routine.project_id).must_equal bigquery.project
+    _(routine.dataset_id).must_equal dataset.dataset_id
+    _(routine.routine_id).must_equal routine_id
+
+    _(routine.routine_type).must_equal "SCALAR_FUNCTION"
+    _(routine.language).must_be :nil?
+    _(routine.remote_function_options).wont_be :nil?
+    _(routine.remote_function_options.endpoint).must_equal "https://aaabbbccc-uc.a.run.app"
+    _(routine.remote_function_options.connection).must_equal connection.name
+    _(routine.remote_function_options.user_defined_context).must_equal({ "foo" => "bar" })
+
+    # update
+    new_remote_function_options = Google::Cloud::Bigquery::RemoteFunctionOptions.new.tap do |rfo|
+      rfo.endpoint = "https://dddeeefff-uc.a.run.app"
+      rfo.connection = connection.name
+      rfo.user_defined_context = { "bar" => "baz" }
+    end
+    routine.remote_function_options = new_remote_function_options
+    routine.reload!
+    _(routine.remote_function_options.endpoint).must_equal "https://dddeeefff-uc.a.run.app"
+    _(routine.remote_function_options.user_defined_context).must_equal({ "bar" => "baz" })
+
+    # delete
+    _(routine.delete).must_equal true
+    _(dataset.routine(routine_id)).must_be_nil
+
+    connection_client.delete_connection name: connection.name
   end
 end
