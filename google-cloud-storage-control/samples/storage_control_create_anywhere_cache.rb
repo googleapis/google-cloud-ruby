@@ -39,8 +39,15 @@ def create_anywhere_cache bucket_name:, zone:
   # The request creates a new cache in the specified zone.
   # The cache is created in the specified bucket.
   begin
-    result = storage_control_client.create_anywhere_cache request
-    puts "AnywhereCache created - #{result.name}"
+    operation = storage_control_client.create_anywhere_cache request
+
+    puts "********************AnywhereCache operation created - #{operation.name}"
+    while !operation.done?
+      sleep 3600 # Wait for 1 hour before checking again
+      operation.refresh!
+    end
+    puts "********************AnywhereCache create operation completed - #{operation.name}"
+
   rescue StandardError => e
     puts "Error creating AnywhereCache: #{e.message}"
   end
