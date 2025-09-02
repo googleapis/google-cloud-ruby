@@ -21,8 +21,6 @@ require_relative "../storage_control_pause_anywhere_cache"
 require_relative "../storage_control_resume_anywhere_cache"
 require_relative "../storage_control_disable_anywhere_cache"
 
-require 'pry'
-
 describe "Storage Control Anywhere Cache" do
   let(:bucket_name) { random_bucket_name }
   let(:storage_client) { Google::Cloud::Storage.new }
