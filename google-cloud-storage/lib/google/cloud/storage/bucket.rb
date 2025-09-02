@@ -1561,7 +1561,6 @@ module Google
           nil
         end
         alias find_file file
-
         ##
         # Creates a new {File} object by providing a path to a local file (or
         # any File-like object such as StringIO) to upload, along with the path
