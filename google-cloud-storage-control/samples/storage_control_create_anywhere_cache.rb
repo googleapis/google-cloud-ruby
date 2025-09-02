@@ -43,8 +43,10 @@ def create_anywhere_cache bucket_name:, zone:
 
     puts "********************AnywhereCache operation created - #{operation.name}"
     while !operation.done?
-      sleep 3600 # Wait for 1 hour before checking again
+      sleep 1800 # Wait for 1/2 hour before checking again
       operation.refresh!
+      puts "********************AnywhereCache operation refreshed"
+      puts "********************AnywhereCache operation status check retried"
     end
     puts "********************AnywhereCache create operation completed - #{operation.name}"
 
