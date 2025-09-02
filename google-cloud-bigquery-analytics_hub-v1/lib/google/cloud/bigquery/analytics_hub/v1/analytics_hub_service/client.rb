@@ -2280,6 +2280,634 @@ module Google
               end
 
               ##
+              # Creates a new QueryTemplate
+              #
+              # @overload create_query_template(request, options = nil)
+              #   Pass arguments to `create_query_template` via a request object, either of type
+              #   {::Google::Cloud::Bigquery::AnalyticsHub::V1::CreateQueryTemplateRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::Bigquery::AnalyticsHub::V1::CreateQueryTemplateRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+              #
+              # @overload create_query_template(parent: nil, query_template_id: nil, query_template: nil)
+              #   Pass arguments to `create_query_template` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param parent [::String]
+              #     Required. The parent resource path of the QueryTemplate.
+              #     e.g.
+              #     `projects/myproject/locations/us/dataExchanges/123/queryTemplates/myQueryTemplate`.
+              #   @param query_template_id [::String]
+              #     Required. The ID of the QueryTemplate to create.
+              #     Must contain only Unicode letters, numbers (0-9), underscores (_).
+              #     Max length: 100 bytes.
+              #   @param query_template [::Google::Cloud::Bigquery::AnalyticsHub::V1::QueryTemplate, ::Hash]
+              #     Required. The QueryTemplate to create.
+              #
+              # @yield [response, operation] Access the result along with the RPC operation
+              # @yieldparam response [::Google::Cloud::Bigquery::AnalyticsHub::V1::QueryTemplate]
+              # @yieldparam operation [::GRPC::ActiveCall::Operation]
+              #
+              # @return [::Google::Cloud::Bigquery::AnalyticsHub::V1::QueryTemplate]
+              #
+              # @raise [::Google::Cloud::Error] if the RPC is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/bigquery/analytics_hub/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Bigquery::AnalyticsHub::V1::AnalyticsHubService::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Bigquery::AnalyticsHub::V1::CreateQueryTemplateRequest.new
+              #
+              #   # Call the create_query_template method.
+              #   result = client.create_query_template request
+              #
+              #   # The returned object is of type Google::Cloud::Bigquery::AnalyticsHub::V1::QueryTemplate.
+              #   p result
+              #
+              def create_query_template request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Bigquery::AnalyticsHub::V1::CreateQueryTemplateRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                metadata = @config.rpcs.create_query_template.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::Bigquery::AnalyticsHub::V1::VERSION
+                metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                header_params = {}
+                if request.parent
+                  header_params["parent"] = request.parent
+                end
+
+                request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+                metadata[:"x-goog-request-params"] ||= request_params_header
+
+                options.apply_defaults timeout:      @config.rpcs.create_query_template.timeout,
+                                       metadata:     metadata,
+                                       retry_policy: @config.rpcs.create_query_template.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @analytics_hub_service_stub.call_rpc :create_query_template, request, options: options do |response, operation|
+                  yield response, operation if block_given?
+                end
+              rescue ::GRPC::BadStatus => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Gets a QueryTemplate
+              #
+              # @overload get_query_template(request, options = nil)
+              #   Pass arguments to `get_query_template` via a request object, either of type
+              #   {::Google::Cloud::Bigquery::AnalyticsHub::V1::GetQueryTemplateRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::Bigquery::AnalyticsHub::V1::GetQueryTemplateRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+              #
+              # @overload get_query_template(name: nil)
+              #   Pass arguments to `get_query_template` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param name [::String]
+              #     Required. The parent resource path of the QueryTemplate.
+              #     e.g.
+              #     `projects/myproject/locations/us/dataExchanges/123/queryTemplates/myqueryTemplate`.
+              #
+              # @yield [response, operation] Access the result along with the RPC operation
+              # @yieldparam response [::Google::Cloud::Bigquery::AnalyticsHub::V1::QueryTemplate]
+              # @yieldparam operation [::GRPC::ActiveCall::Operation]
+              #
+              # @return [::Google::Cloud::Bigquery::AnalyticsHub::V1::QueryTemplate]
+              #
+              # @raise [::Google::Cloud::Error] if the RPC is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/bigquery/analytics_hub/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Bigquery::AnalyticsHub::V1::AnalyticsHubService::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Bigquery::AnalyticsHub::V1::GetQueryTemplateRequest.new
+              #
+              #   # Call the get_query_template method.
+              #   result = client.get_query_template request
+              #
+              #   # The returned object is of type Google::Cloud::Bigquery::AnalyticsHub::V1::QueryTemplate.
+              #   p result
+              #
+              def get_query_template request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Bigquery::AnalyticsHub::V1::GetQueryTemplateRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                metadata = @config.rpcs.get_query_template.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::Bigquery::AnalyticsHub::V1::VERSION
+                metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                header_params = {}
+                if request.name
+                  header_params["name"] = request.name
+                end
+
+                request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+                metadata[:"x-goog-request-params"] ||= request_params_header
+
+                options.apply_defaults timeout:      @config.rpcs.get_query_template.timeout,
+                                       metadata:     metadata,
+                                       retry_policy: @config.rpcs.get_query_template.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @analytics_hub_service_stub.call_rpc :get_query_template, request, options: options do |response, operation|
+                  yield response, operation if block_given?
+                end
+              rescue ::GRPC::BadStatus => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Lists all QueryTemplates in a given project and location.
+              #
+              # @overload list_query_templates(request, options = nil)
+              #   Pass arguments to `list_query_templates` via a request object, either of type
+              #   {::Google::Cloud::Bigquery::AnalyticsHub::V1::ListQueryTemplatesRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::Bigquery::AnalyticsHub::V1::ListQueryTemplatesRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+              #
+              # @overload list_query_templates(parent: nil, page_size: nil, page_token: nil)
+              #   Pass arguments to `list_query_templates` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param parent [::String]
+              #     Required. The parent resource path of the QueryTemplates.
+              #     e.g. `projects/myproject/locations/us/dataExchanges/123`.
+              #   @param page_size [::Integer]
+              #     Optional. The maximum number of results to return in a single response
+              #     page. Leverage the page tokens to iterate through the entire collection.
+              #   @param page_token [::String]
+              #     Optional. Page token, returned by a previous call, to request the next page
+              #     of results.
+              #
+              # @yield [response, operation] Access the result along with the RPC operation
+              # @yieldparam response [::Gapic::PagedEnumerable<::Google::Cloud::Bigquery::AnalyticsHub::V1::QueryTemplate>]
+              # @yieldparam operation [::GRPC::ActiveCall::Operation]
+              #
+              # @return [::Gapic::PagedEnumerable<::Google::Cloud::Bigquery::AnalyticsHub::V1::QueryTemplate>]
+              #
+              # @raise [::Google::Cloud::Error] if the RPC is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/bigquery/analytics_hub/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Bigquery::AnalyticsHub::V1::AnalyticsHubService::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Bigquery::AnalyticsHub::V1::ListQueryTemplatesRequest.new
+              #
+              #   # Call the list_query_templates method.
+              #   result = client.list_query_templates request
+              #
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
+              #     # Each element is of type ::Google::Cloud::Bigquery::AnalyticsHub::V1::QueryTemplate.
+              #     p item
+              #   end
+              #
+              def list_query_templates request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Bigquery::AnalyticsHub::V1::ListQueryTemplatesRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                metadata = @config.rpcs.list_query_templates.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::Bigquery::AnalyticsHub::V1::VERSION
+                metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                header_params = {}
+                if request.parent
+                  header_params["parent"] = request.parent
+                end
+
+                request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+                metadata[:"x-goog-request-params"] ||= request_params_header
+
+                options.apply_defaults timeout:      @config.rpcs.list_query_templates.timeout,
+                                       metadata:     metadata,
+                                       retry_policy: @config.rpcs.list_query_templates.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @analytics_hub_service_stub.call_rpc :list_query_templates, request, options: options do |response, operation|
+                  response = ::Gapic::PagedEnumerable.new @analytics_hub_service_stub, :list_query_templates, request, response, operation, options
+                  yield response, operation if block_given?
+                  throw :response, response
+                end
+              rescue ::GRPC::BadStatus => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Updates an existing QueryTemplate
+              #
+              # @overload update_query_template(request, options = nil)
+              #   Pass arguments to `update_query_template` via a request object, either of type
+              #   {::Google::Cloud::Bigquery::AnalyticsHub::V1::UpdateQueryTemplateRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::Bigquery::AnalyticsHub::V1::UpdateQueryTemplateRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+              #
+              # @overload update_query_template(update_mask: nil, query_template: nil)
+              #   Pass arguments to `update_query_template` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
+              #     Optional. Field mask specifies the fields to update in the query template
+              #     resource. The fields specified in the `updateMask` are relative to the
+              #     resource and are not a full request.
+              #   @param query_template [::Google::Cloud::Bigquery::AnalyticsHub::V1::QueryTemplate, ::Hash]
+              #     Required. The QueryTemplate to update.
+              #
+              # @yield [response, operation] Access the result along with the RPC operation
+              # @yieldparam response [::Google::Cloud::Bigquery::AnalyticsHub::V1::QueryTemplate]
+              # @yieldparam operation [::GRPC::ActiveCall::Operation]
+              #
+              # @return [::Google::Cloud::Bigquery::AnalyticsHub::V1::QueryTemplate]
+              #
+              # @raise [::Google::Cloud::Error] if the RPC is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/bigquery/analytics_hub/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Bigquery::AnalyticsHub::V1::AnalyticsHubService::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Bigquery::AnalyticsHub::V1::UpdateQueryTemplateRequest.new
+              #
+              #   # Call the update_query_template method.
+              #   result = client.update_query_template request
+              #
+              #   # The returned object is of type Google::Cloud::Bigquery::AnalyticsHub::V1::QueryTemplate.
+              #   p result
+              #
+              def update_query_template request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Bigquery::AnalyticsHub::V1::UpdateQueryTemplateRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                metadata = @config.rpcs.update_query_template.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::Bigquery::AnalyticsHub::V1::VERSION
+                metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                header_params = {}
+                if request.query_template&.name
+                  header_params["query_template.name"] = request.query_template.name
+                end
+
+                request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+                metadata[:"x-goog-request-params"] ||= request_params_header
+
+                options.apply_defaults timeout:      @config.rpcs.update_query_template.timeout,
+                                       metadata:     metadata,
+                                       retry_policy: @config.rpcs.update_query_template.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @analytics_hub_service_stub.call_rpc :update_query_template, request, options: options do |response, operation|
+                  yield response, operation if block_given?
+                end
+              rescue ::GRPC::BadStatus => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Deletes a query template.
+              #
+              # @overload delete_query_template(request, options = nil)
+              #   Pass arguments to `delete_query_template` via a request object, either of type
+              #   {::Google::Cloud::Bigquery::AnalyticsHub::V1::DeleteQueryTemplateRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::Bigquery::AnalyticsHub::V1::DeleteQueryTemplateRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+              #
+              # @overload delete_query_template(name: nil)
+              #   Pass arguments to `delete_query_template` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param name [::String]
+              #     Required. The resource path of the QueryTemplate.
+              #     e.g.
+              #     `projects/myproject/locations/us/dataExchanges/123/queryTemplates/myqueryTemplate`.
+              #
+              # @yield [response, operation] Access the result along with the RPC operation
+              # @yieldparam response [::Google::Protobuf::Empty]
+              # @yieldparam operation [::GRPC::ActiveCall::Operation]
+              #
+              # @return [::Google::Protobuf::Empty]
+              #
+              # @raise [::Google::Cloud::Error] if the RPC is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/bigquery/analytics_hub/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Bigquery::AnalyticsHub::V1::AnalyticsHubService::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Bigquery::AnalyticsHub::V1::DeleteQueryTemplateRequest.new
+              #
+              #   # Call the delete_query_template method.
+              #   result = client.delete_query_template request
+              #
+              #   # The returned object is of type Google::Protobuf::Empty.
+              #   p result
+              #
+              def delete_query_template request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Bigquery::AnalyticsHub::V1::DeleteQueryTemplateRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                metadata = @config.rpcs.delete_query_template.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::Bigquery::AnalyticsHub::V1::VERSION
+                metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                header_params = {}
+                if request.name
+                  header_params["name"] = request.name
+                end
+
+                request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+                metadata[:"x-goog-request-params"] ||= request_params_header
+
+                options.apply_defaults timeout:      @config.rpcs.delete_query_template.timeout,
+                                       metadata:     metadata,
+                                       retry_policy: @config.rpcs.delete_query_template.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @analytics_hub_service_stub.call_rpc :delete_query_template, request, options: options do |response, operation|
+                  yield response, operation if block_given?
+                end
+              rescue ::GRPC::BadStatus => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Submits a query template for approval.
+              #
+              # @overload submit_query_template(request, options = nil)
+              #   Pass arguments to `submit_query_template` via a request object, either of type
+              #   {::Google::Cloud::Bigquery::AnalyticsHub::V1::SubmitQueryTemplateRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::Bigquery::AnalyticsHub::V1::SubmitQueryTemplateRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+              #
+              # @overload submit_query_template(name: nil)
+              #   Pass arguments to `submit_query_template` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param name [::String]
+              #     Required. The resource path of the QueryTemplate.
+              #     e.g.
+              #     `projects/myproject/locations/us/dataExchanges/123/queryTemplates/myqueryTemplate`.
+              #
+              # @yield [response, operation] Access the result along with the RPC operation
+              # @yieldparam response [::Google::Cloud::Bigquery::AnalyticsHub::V1::QueryTemplate]
+              # @yieldparam operation [::GRPC::ActiveCall::Operation]
+              #
+              # @return [::Google::Cloud::Bigquery::AnalyticsHub::V1::QueryTemplate]
+              #
+              # @raise [::Google::Cloud::Error] if the RPC is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/bigquery/analytics_hub/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Bigquery::AnalyticsHub::V1::AnalyticsHubService::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Bigquery::AnalyticsHub::V1::SubmitQueryTemplateRequest.new
+              #
+              #   # Call the submit_query_template method.
+              #   result = client.submit_query_template request
+              #
+              #   # The returned object is of type Google::Cloud::Bigquery::AnalyticsHub::V1::QueryTemplate.
+              #   p result
+              #
+              def submit_query_template request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Bigquery::AnalyticsHub::V1::SubmitQueryTemplateRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                metadata = @config.rpcs.submit_query_template.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::Bigquery::AnalyticsHub::V1::VERSION
+                metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                header_params = {}
+                if request.name
+                  header_params["name"] = request.name
+                end
+
+                request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+                metadata[:"x-goog-request-params"] ||= request_params_header
+
+                options.apply_defaults timeout:      @config.rpcs.submit_query_template.timeout,
+                                       metadata:     metadata,
+                                       retry_policy: @config.rpcs.submit_query_template.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @analytics_hub_service_stub.call_rpc :submit_query_template, request, options: options do |response, operation|
+                  yield response, operation if block_given?
+                end
+              rescue ::GRPC::BadStatus => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Approves a query template.
+              #
+              # @overload approve_query_template(request, options = nil)
+              #   Pass arguments to `approve_query_template` via a request object, either of type
+              #   {::Google::Cloud::Bigquery::AnalyticsHub::V1::ApproveQueryTemplateRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::Bigquery::AnalyticsHub::V1::ApproveQueryTemplateRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+              #
+              # @overload approve_query_template(name: nil)
+              #   Pass arguments to `approve_query_template` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param name [::String]
+              #     Required. The resource path of the QueryTemplate.
+              #     e.g.
+              #     `projects/myproject/locations/us/dataExchanges/123/queryTemplates/myqueryTemplate`.
+              #
+              # @yield [response, operation] Access the result along with the RPC operation
+              # @yieldparam response [::Google::Cloud::Bigquery::AnalyticsHub::V1::QueryTemplate]
+              # @yieldparam operation [::GRPC::ActiveCall::Operation]
+              #
+              # @return [::Google::Cloud::Bigquery::AnalyticsHub::V1::QueryTemplate]
+              #
+              # @raise [::Google::Cloud::Error] if the RPC is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/bigquery/analytics_hub/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Bigquery::AnalyticsHub::V1::AnalyticsHubService::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Bigquery::AnalyticsHub::V1::ApproveQueryTemplateRequest.new
+              #
+              #   # Call the approve_query_template method.
+              #   result = client.approve_query_template request
+              #
+              #   # The returned object is of type Google::Cloud::Bigquery::AnalyticsHub::V1::QueryTemplate.
+              #   p result
+              #
+              def approve_query_template request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Bigquery::AnalyticsHub::V1::ApproveQueryTemplateRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                metadata = @config.rpcs.approve_query_template.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::Bigquery::AnalyticsHub::V1::VERSION
+                metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                header_params = {}
+                if request.name
+                  header_params["name"] = request.name
+                end
+
+                request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+                metadata[:"x-goog-request-params"] ||= request_params_header
+
+                options.apply_defaults timeout:      @config.rpcs.approve_query_template.timeout,
+                                       metadata:     metadata,
+                                       retry_policy: @config.rpcs.approve_query_template.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @analytics_hub_service_stub.call_rpc :approve_query_template, request, options: options do |response, operation|
+                  yield response, operation if block_given?
+                end
+              rescue ::GRPC::BadStatus => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
               # Configuration class for the AnalyticsHubService API.
               #
               # This class represents the configuration for AnalyticsHubService,
@@ -2555,6 +3183,41 @@ module Google
                   # @return [::Gapic::Config::Method]
                   #
                   attr_reader :test_iam_permissions
+                  ##
+                  # RPC-specific configuration for `create_query_template`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :create_query_template
+                  ##
+                  # RPC-specific configuration for `get_query_template`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :get_query_template
+                  ##
+                  # RPC-specific configuration for `list_query_templates`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :list_query_templates
+                  ##
+                  # RPC-specific configuration for `update_query_template`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :update_query_template
+                  ##
+                  # RPC-specific configuration for `delete_query_template`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :delete_query_template
+                  ##
+                  # RPC-specific configuration for `submit_query_template`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :submit_query_template
+                  ##
+                  # RPC-specific configuration for `approve_query_template`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :approve_query_template
 
                   # @private
                   def initialize parent_rpcs = nil
@@ -2602,6 +3265,20 @@ module Google
                     @set_iam_policy = ::Gapic::Config::Method.new set_iam_policy_config
                     test_iam_permissions_config = parent_rpcs.test_iam_permissions if parent_rpcs.respond_to? :test_iam_permissions
                     @test_iam_permissions = ::Gapic::Config::Method.new test_iam_permissions_config
+                    create_query_template_config = parent_rpcs.create_query_template if parent_rpcs.respond_to? :create_query_template
+                    @create_query_template = ::Gapic::Config::Method.new create_query_template_config
+                    get_query_template_config = parent_rpcs.get_query_template if parent_rpcs.respond_to? :get_query_template
+                    @get_query_template = ::Gapic::Config::Method.new get_query_template_config
+                    list_query_templates_config = parent_rpcs.list_query_templates if parent_rpcs.respond_to? :list_query_templates
+                    @list_query_templates = ::Gapic::Config::Method.new list_query_templates_config
+                    update_query_template_config = parent_rpcs.update_query_template if parent_rpcs.respond_to? :update_query_template
+                    @update_query_template = ::Gapic::Config::Method.new update_query_template_config
+                    delete_query_template_config = parent_rpcs.delete_query_template if parent_rpcs.respond_to? :delete_query_template
+                    @delete_query_template = ::Gapic::Config::Method.new delete_query_template_config
+                    submit_query_template_config = parent_rpcs.submit_query_template if parent_rpcs.respond_to? :submit_query_template
+                    @submit_query_template = ::Gapic::Config::Method.new submit_query_template_config
+                    approve_query_template_config = parent_rpcs.approve_query_template if parent_rpcs.respond_to? :approve_query_template
+                    @approve_query_template = ::Gapic::Config::Method.new approve_query_template_config
 
                     yield self if block_given?
                   end

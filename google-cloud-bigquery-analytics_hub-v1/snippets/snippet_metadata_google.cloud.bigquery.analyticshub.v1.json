@@ -890,6 +890,286 @@
           "type": "FULL"
         }
       ]
+    },
+    {
+      "region_tag": "analyticshub_v1_generated_AnalyticsHubService_CreateQueryTemplate_sync",
+      "title": "Snippet for the create_query_template call in the AnalyticsHubService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Bigquery::AnalyticsHub::V1::AnalyticsHubService::Client#create_query_template.",
+      "file": "analytics_hub_service/create_query_template.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_query_template",
+        "full_name": "::Google::Cloud::Bigquery::AnalyticsHub::V1::AnalyticsHubService::Client#create_query_template",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Bigquery::AnalyticsHub::V1::CreateQueryTemplateRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Bigquery::AnalyticsHub::V1::QueryTemplate",
+        "client": {
+          "short_name": "AnalyticsHubService::Client",
+          "full_name": "::Google::Cloud::Bigquery::AnalyticsHub::V1::AnalyticsHubService::Client"
+        },
+        "method": {
+          "short_name": "CreateQueryTemplate",
+          "full_name": "google.cloud.bigquery.analyticshub.v1.AnalyticsHubService.CreateQueryTemplate",
+          "service": {
+            "short_name": "AnalyticsHubService",
+            "full_name": "google.cloud.bigquery.analyticshub.v1.AnalyticsHubService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "analyticshub_v1_generated_AnalyticsHubService_GetQueryTemplate_sync",
+      "title": "Snippet for the get_query_template call in the AnalyticsHubService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Bigquery::AnalyticsHub::V1::AnalyticsHubService::Client#get_query_template.",
+      "file": "analytics_hub_service/get_query_template.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_query_template",
+        "full_name": "::Google::Cloud::Bigquery::AnalyticsHub::V1::AnalyticsHubService::Client#get_query_template",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Bigquery::AnalyticsHub::V1::GetQueryTemplateRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Bigquery::AnalyticsHub::V1::QueryTemplate",
+        "client": {
+          "short_name": "AnalyticsHubService::Client",
+          "full_name": "::Google::Cloud::Bigquery::AnalyticsHub::V1::AnalyticsHubService::Client"
+        },
+        "method": {
+          "short_name": "GetQueryTemplate",
+          "full_name": "google.cloud.bigquery.analyticshub.v1.AnalyticsHubService.GetQueryTemplate",
+          "service": {
+            "short_name": "AnalyticsHubService",
+            "full_name": "google.cloud.bigquery.analyticshub.v1.AnalyticsHubService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "analyticshub_v1_generated_AnalyticsHubService_ListQueryTemplates_sync",
+      "title": "Snippet for the list_query_templates call in the AnalyticsHubService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Bigquery::AnalyticsHub::V1::AnalyticsHubService::Client#list_query_templates.",
+      "file": "analytics_hub_service/list_query_templates.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_query_templates",
+        "full_name": "::Google::Cloud::Bigquery::AnalyticsHub::V1::AnalyticsHubService::Client#list_query_templates",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Bigquery::AnalyticsHub::V1::ListQueryTemplatesRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Bigquery::AnalyticsHub::V1::ListQueryTemplatesResponse",
+        "client": {
+          "short_name": "AnalyticsHubService::Client",
+          "full_name": "::Google::Cloud::Bigquery::AnalyticsHub::V1::AnalyticsHubService::Client"
+        },
+        "method": {
+          "short_name": "ListQueryTemplates",
+          "full_name": "google.cloud.bigquery.analyticshub.v1.AnalyticsHubService.ListQueryTemplates",
+          "service": {
+            "short_name": "AnalyticsHubService",
+            "full_name": "google.cloud.bigquery.analyticshub.v1.AnalyticsHubService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "analyticshub_v1_generated_AnalyticsHubService_UpdateQueryTemplate_sync",
+      "title": "Snippet for the update_query_template call in the AnalyticsHubService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Bigquery::AnalyticsHub::V1::AnalyticsHubService::Client#update_query_template.",
+      "file": "analytics_hub_service/update_query_template.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_query_template",
+        "full_name": "::Google::Cloud::Bigquery::AnalyticsHub::V1::AnalyticsHubService::Client#update_query_template",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Bigquery::AnalyticsHub::V1::UpdateQueryTemplateRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Bigquery::AnalyticsHub::V1::QueryTemplate",
+        "client": {
+          "short_name": "AnalyticsHubService::Client",
+          "full_name": "::Google::Cloud::Bigquery::AnalyticsHub::V1::AnalyticsHubService::Client"
+        },
+        "method": {
+          "short_name": "UpdateQueryTemplate",
+          "full_name": "google.cloud.bigquery.analyticshub.v1.AnalyticsHubService.UpdateQueryTemplate",
+          "service": {
+            "short_name": "AnalyticsHubService",
+            "full_name": "google.cloud.bigquery.analyticshub.v1.AnalyticsHubService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "analyticshub_v1_generated_AnalyticsHubService_DeleteQueryTemplate_sync",
+      "title": "Snippet for the delete_query_template call in the AnalyticsHubService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Bigquery::AnalyticsHub::V1::AnalyticsHubService::Client#delete_query_template.",
+      "file": "analytics_hub_service/delete_query_template.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_query_template",
+        "full_name": "::Google::Cloud::Bigquery::AnalyticsHub::V1::AnalyticsHubService::Client#delete_query_template",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Bigquery::AnalyticsHub::V1::DeleteQueryTemplateRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Protobuf::Empty",
+        "client": {
+          "short_name": "AnalyticsHubService::Client",
+          "full_name": "::Google::Cloud::Bigquery::AnalyticsHub::V1::AnalyticsHubService::Client"
+        },
+        "method": {
+          "short_name": "DeleteQueryTemplate",
+          "full_name": "google.cloud.bigquery.analyticshub.v1.AnalyticsHubService.DeleteQueryTemplate",
+          "service": {
+            "short_name": "AnalyticsHubService",
+            "full_name": "google.cloud.bigquery.analyticshub.v1.AnalyticsHubService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "analyticshub_v1_generated_AnalyticsHubService_SubmitQueryTemplate_sync",
+      "title": "Snippet for the submit_query_template call in the AnalyticsHubService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Bigquery::AnalyticsHub::V1::AnalyticsHubService::Client#submit_query_template.",
+      "file": "analytics_hub_service/submit_query_template.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "submit_query_template",
+        "full_name": "::Google::Cloud::Bigquery::AnalyticsHub::V1::AnalyticsHubService::Client#submit_query_template",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Bigquery::AnalyticsHub::V1::SubmitQueryTemplateRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Bigquery::AnalyticsHub::V1::QueryTemplate",
+        "client": {
+          "short_name": "AnalyticsHubService::Client",
+          "full_name": "::Google::Cloud::Bigquery::AnalyticsHub::V1::AnalyticsHubService::Client"
+        },
+        "method": {
+          "short_name": "SubmitQueryTemplate",
+          "full_name": "google.cloud.bigquery.analyticshub.v1.AnalyticsHubService.SubmitQueryTemplate",
+          "service": {
+            "short_name": "AnalyticsHubService",
+            "full_name": "google.cloud.bigquery.analyticshub.v1.AnalyticsHubService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "analyticshub_v1_generated_AnalyticsHubService_ApproveQueryTemplate_sync",
+      "title": "Snippet for the approve_query_template call in the AnalyticsHubService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Bigquery::AnalyticsHub::V1::AnalyticsHubService::Client#approve_query_template.",
+      "file": "analytics_hub_service/approve_query_template.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "approve_query_template",
+        "full_name": "::Google::Cloud::Bigquery::AnalyticsHub::V1::AnalyticsHubService::Client#approve_query_template",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Bigquery::AnalyticsHub::V1::ApproveQueryTemplateRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Bigquery::AnalyticsHub::V1::QueryTemplate",
+        "client": {
+          "short_name": "AnalyticsHubService::Client",
+          "full_name": "::Google::Cloud::Bigquery::AnalyticsHub::V1::AnalyticsHubService::Client"
+        },
+        "method": {
+          "short_name": "ApproveQueryTemplate",
+          "full_name": "google.cloud.bigquery.analyticshub.v1.AnalyticsHubService.ApproveQueryTemplate",
+          "service": {
+            "short_name": "AnalyticsHubService",
+            "full_name": "google.cloud.bigquery.analyticshub.v1.AnalyticsHubService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
     }
   ]
 }
