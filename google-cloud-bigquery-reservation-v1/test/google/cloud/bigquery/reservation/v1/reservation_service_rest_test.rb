@@ -362,6 +362,7 @@ class ::Google::Cloud::Bigquery::Reservation::V1::ReservationService::Rest::Clie
 
     # Create request parameters for a unary method.
     name = "hello world"
+    failover_mode = :FAILOVER_MODE_UNSPECIFIED
 
     failover_reservation_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
@@ -377,27 +378,27 @@ class ::Google::Cloud::Bigquery::Reservation::V1::ReservationService::Rest::Clie
         end
 
         # Use hash object
-        client.failover_reservation({ name: name }) do |_result, response|
+        client.failover_reservation({ name: name, failover_mode: failover_mode }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.failover_reservation name: name do |_result, response|
+        client.failover_reservation name: name, failover_mode: failover_mode do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.failover_reservation ::Google::Cloud::Bigquery::Reservation::V1::FailoverReservationRequest.new(name: name) do |_result, response|
+        client.failover_reservation ::Google::Cloud::Bigquery::Reservation::V1::FailoverReservationRequest.new(name: name, failover_mode: failover_mode) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.failover_reservation({ name: name }, call_options) do |_result, response|
+        client.failover_reservation({ name: name, failover_mode: failover_mode }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.failover_reservation(::Google::Cloud::Bigquery::Reservation::V1::FailoverReservationRequest.new(name: name), call_options) do |_result, response|
+        client.failover_reservation(::Google::Cloud::Bigquery::Reservation::V1::FailoverReservationRequest.new(name: name, failover_mode: failover_mode), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 

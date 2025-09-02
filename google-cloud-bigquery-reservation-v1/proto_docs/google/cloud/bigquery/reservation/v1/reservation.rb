@@ -193,6 +193,13 @@ module Google
             #   @return [::Google::Protobuf::Timestamp]
             #     Output only. A timestamp corresponding to the last change on the primary
             #     that was successfully replicated to the secondary.
+            # @!attribute [r] soft_failover_start_time
+            #   @return [::Google::Protobuf::Timestamp]
+            #     Output only. The time at which a soft failover for the reservation and
+            #     its associated datasets was initiated. After this field is set, all
+            #     subsequent changes to the reservation will be rejected unless a hard
+            #     failover overrides this operation. This field will be cleared once the
+            #     failover is complete.
             class ReplicationStatus
               include ::Google::Protobuf::MessageExts
               extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -487,6 +494,11 @@ module Google
           #   @return [::String]
           #     Required. Resource name of the reservation to failover. E.g.,
           #        `projects/myproject/locations/US/reservations/team1-prod`
+          # @!attribute [rw] failover_mode
+          #   @return [::Google::Cloud::Bigquery::Reservation::V1::FailoverMode]
+          #     Optional. A parameter that determines how writes that are pending
+          #     replication are handled after a failover is initiated. If not specified,
+          #     HARD failover mode is used by default.
           class FailoverReservationRequest
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -978,6 +990,24 @@ module Google
 
             # Enterprise Plus edition.
             ENTERPRISE_PLUS = 3
+          end
+
+          # The failover mode when a user initiates a failover on a reservation
+          # determines how writes that arepending replication are handled after the
+          # failover is initiated.
+          module FailoverMode
+            # Invalid value.
+            FAILOVER_MODE_UNSPECIFIED = 0
+
+            # When customers initiate a soft failover, BigQuery will wait until all
+            # committed writes are replicated to the secondary. This mode requires both
+            # regions to be available for the failover to succeed and prevents data loss.
+            SOFT = 1
+
+            # When customers initiate a hard failover, BigQuery will not wait until all
+            # committed writes are replicated to the secondary. There can be data loss
+            # for hard failover.
+            HARD = 2
           end
         end
       end

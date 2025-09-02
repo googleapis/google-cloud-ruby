@@ -377,11 +377,13 @@ class ::Google::Cloud::Bigquery::Reservation::V1::ReservationService::ClientTest
 
     # Create request parameters for a unary method.
     name = "hello world"
+    failover_mode = :FAILOVER_MODE_UNSPECIFIED
 
     failover_reservation_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :failover_reservation, name
       assert_kind_of ::Google::Cloud::Bigquery::Reservation::V1::FailoverReservationRequest, request
       assert_equal "hello world", request["name"]
+      assert_equal :FAILOVER_MODE_UNSPECIFIED, request["failover_mode"]
       refute_nil options
     end
 
@@ -392,31 +394,31 @@ class ::Google::Cloud::Bigquery::Reservation::V1::ReservationService::ClientTest
       end
 
       # Use hash object
-      client.failover_reservation({ name: name }) do |response, operation|
+      client.failover_reservation({ name: name, failover_mode: failover_mode }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.failover_reservation name: name do |response, operation|
+      client.failover_reservation name: name, failover_mode: failover_mode do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.failover_reservation ::Google::Cloud::Bigquery::Reservation::V1::FailoverReservationRequest.new(name: name) do |response, operation|
+      client.failover_reservation ::Google::Cloud::Bigquery::Reservation::V1::FailoverReservationRequest.new(name: name, failover_mode: failover_mode) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.failover_reservation({ name: name }, grpc_options) do |response, operation|
+      client.failover_reservation({ name: name, failover_mode: failover_mode }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.failover_reservation(::Google::Cloud::Bigquery::Reservation::V1::FailoverReservationRequest.new(name: name), grpc_options) do |response, operation|
+      client.failover_reservation(::Google::Cloud::Bigquery::Reservation::V1::FailoverReservationRequest.new(name: name, failover_mode: failover_mode), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
