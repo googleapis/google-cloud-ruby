@@ -101,6 +101,18 @@ class ::Google::Cloud::Bigquery::AnalyticsHub::V1::AnalyticsHubService::ClientPa
     end
   end
 
+  def test_query_template_path
+    grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
+      client = ::Google::Cloud::Bigquery::AnalyticsHub::V1::AnalyticsHubService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      path = client.query_template_path project: "value0", location: "value1", data_exchange: "value2", query_template: "value3"
+      assert_equal "projects/value0/locations/value1/dataExchanges/value2/queryTemplates/value3", path
+    end
+  end
+
   def test_routine_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
     ::Gapic::ServiceStub.stub :new, DummyStub.new do

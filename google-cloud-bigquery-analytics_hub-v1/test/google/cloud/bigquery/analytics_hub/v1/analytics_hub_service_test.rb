@@ -1438,6 +1438,427 @@ class ::Google::Cloud::Bigquery::AnalyticsHub::V1::AnalyticsHubService::ClientTe
     end
   end
 
+  def test_create_query_template
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::Bigquery::AnalyticsHub::V1::QueryTemplate.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    query_template_id = "hello world"
+    query_template = {}
+
+    create_query_template_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :create_query_template, name
+      assert_kind_of ::Google::Cloud::Bigquery::AnalyticsHub::V1::CreateQueryTemplateRequest, request
+      assert_equal "hello world", request["parent"]
+      assert_equal "hello world", request["query_template_id"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Bigquery::AnalyticsHub::V1::QueryTemplate), request["query_template"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, create_query_template_client_stub do
+      # Create client
+      client = ::Google::Cloud::Bigquery::AnalyticsHub::V1::AnalyticsHubService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.create_query_template({ parent: parent, query_template_id: query_template_id, query_template: query_template }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.create_query_template parent: parent, query_template_id: query_template_id, query_template: query_template do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.create_query_template ::Google::Cloud::Bigquery::AnalyticsHub::V1::CreateQueryTemplateRequest.new(parent: parent, query_template_id: query_template_id, query_template: query_template) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.create_query_template({ parent: parent, query_template_id: query_template_id, query_template: query_template }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.create_query_template(::Google::Cloud::Bigquery::AnalyticsHub::V1::CreateQueryTemplateRequest.new(parent: parent, query_template_id: query_template_id, query_template: query_template), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, create_query_template_client_stub.call_rpc_count
+    end
+  end
+
+  def test_get_query_template
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::Bigquery::AnalyticsHub::V1::QueryTemplate.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    get_query_template_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :get_query_template, name
+      assert_kind_of ::Google::Cloud::Bigquery::AnalyticsHub::V1::GetQueryTemplateRequest, request
+      assert_equal "hello world", request["name"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, get_query_template_client_stub do
+      # Create client
+      client = ::Google::Cloud::Bigquery::AnalyticsHub::V1::AnalyticsHubService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.get_query_template({ name: name }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.get_query_template name: name do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.get_query_template ::Google::Cloud::Bigquery::AnalyticsHub::V1::GetQueryTemplateRequest.new(name: name) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.get_query_template({ name: name }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.get_query_template(::Google::Cloud::Bigquery::AnalyticsHub::V1::GetQueryTemplateRequest.new(name: name), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, get_query_template_client_stub.call_rpc_count
+    end
+  end
+
+  def test_list_query_templates
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::Bigquery::AnalyticsHub::V1::ListQueryTemplatesResponse.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    page_size = 42
+    page_token = "hello world"
+
+    list_query_templates_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :list_query_templates, name
+      assert_kind_of ::Google::Cloud::Bigquery::AnalyticsHub::V1::ListQueryTemplatesRequest, request
+      assert_equal "hello world", request["parent"]
+      assert_equal 42, request["page_size"]
+      assert_equal "hello world", request["page_token"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, list_query_templates_client_stub do
+      # Create client
+      client = ::Google::Cloud::Bigquery::AnalyticsHub::V1::AnalyticsHubService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.list_query_templates({ parent: parent, page_size: page_size, page_token: page_token }) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.list_query_templates parent: parent, page_size: page_size, page_token: page_token do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.list_query_templates ::Google::Cloud::Bigquery::AnalyticsHub::V1::ListQueryTemplatesRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.list_query_templates({ parent: parent, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.list_query_templates(::Google::Cloud::Bigquery::AnalyticsHub::V1::ListQueryTemplatesRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, list_query_templates_client_stub.call_rpc_count
+    end
+  end
+
+  def test_update_query_template
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::Bigquery::AnalyticsHub::V1::QueryTemplate.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    update_mask = {}
+    query_template = {}
+
+    update_query_template_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :update_query_template, name
+      assert_kind_of ::Google::Cloud::Bigquery::AnalyticsHub::V1::UpdateQueryTemplateRequest, request
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request["update_mask"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Bigquery::AnalyticsHub::V1::QueryTemplate), request["query_template"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, update_query_template_client_stub do
+      # Create client
+      client = ::Google::Cloud::Bigquery::AnalyticsHub::V1::AnalyticsHubService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.update_query_template({ update_mask: update_mask, query_template: query_template }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.update_query_template update_mask: update_mask, query_template: query_template do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.update_query_template ::Google::Cloud::Bigquery::AnalyticsHub::V1::UpdateQueryTemplateRequest.new(update_mask: update_mask, query_template: query_template) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.update_query_template({ update_mask: update_mask, query_template: query_template }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.update_query_template(::Google::Cloud::Bigquery::AnalyticsHub::V1::UpdateQueryTemplateRequest.new(update_mask: update_mask, query_template: query_template), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, update_query_template_client_stub.call_rpc_count
+    end
+  end
+
+  def test_delete_query_template
+    # Create GRPC objects.
+    grpc_response = ::Google::Protobuf::Empty.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    delete_query_template_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :delete_query_template, name
+      assert_kind_of ::Google::Cloud::Bigquery::AnalyticsHub::V1::DeleteQueryTemplateRequest, request
+      assert_equal "hello world", request["name"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, delete_query_template_client_stub do
+      # Create client
+      client = ::Google::Cloud::Bigquery::AnalyticsHub::V1::AnalyticsHubService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.delete_query_template({ name: name }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.delete_query_template name: name do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.delete_query_template ::Google::Cloud::Bigquery::AnalyticsHub::V1::DeleteQueryTemplateRequest.new(name: name) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.delete_query_template({ name: name }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.delete_query_template(::Google::Cloud::Bigquery::AnalyticsHub::V1::DeleteQueryTemplateRequest.new(name: name), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, delete_query_template_client_stub.call_rpc_count
+    end
+  end
+
+  def test_submit_query_template
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::Bigquery::AnalyticsHub::V1::QueryTemplate.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    submit_query_template_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :submit_query_template, name
+      assert_kind_of ::Google::Cloud::Bigquery::AnalyticsHub::V1::SubmitQueryTemplateRequest, request
+      assert_equal "hello world", request["name"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, submit_query_template_client_stub do
+      # Create client
+      client = ::Google::Cloud::Bigquery::AnalyticsHub::V1::AnalyticsHubService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.submit_query_template({ name: name }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.submit_query_template name: name do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.submit_query_template ::Google::Cloud::Bigquery::AnalyticsHub::V1::SubmitQueryTemplateRequest.new(name: name) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.submit_query_template({ name: name }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.submit_query_template(::Google::Cloud::Bigquery::AnalyticsHub::V1::SubmitQueryTemplateRequest.new(name: name), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, submit_query_template_client_stub.call_rpc_count
+    end
+  end
+
+  def test_approve_query_template
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::Bigquery::AnalyticsHub::V1::QueryTemplate.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    approve_query_template_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :approve_query_template, name
+      assert_kind_of ::Google::Cloud::Bigquery::AnalyticsHub::V1::ApproveQueryTemplateRequest, request
+      assert_equal "hello world", request["name"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, approve_query_template_client_stub do
+      # Create client
+      client = ::Google::Cloud::Bigquery::AnalyticsHub::V1::AnalyticsHubService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.approve_query_template({ name: name }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.approve_query_template name: name do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.approve_query_template ::Google::Cloud::Bigquery::AnalyticsHub::V1::ApproveQueryTemplateRequest.new(name: name) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.approve_query_template({ name: name }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.approve_query_template(::Google::Cloud::Bigquery::AnalyticsHub::V1::ApproveQueryTemplateRequest.new(name: name), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, approve_query_template_client_stub.call_rpc_count
+    end
+  end
+
   def test_configure
     grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
 

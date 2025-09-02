@@ -119,6 +119,41 @@
               "methods": [
                 "test_iam_permissions"
               ]
+            },
+            "CreateQueryTemplate": {
+              "methods": [
+                "create_query_template"
+              ]
+            },
+            "GetQueryTemplate": {
+              "methods": [
+                "get_query_template"
+              ]
+            },
+            "ListQueryTemplates": {
+              "methods": [
+                "list_query_templates"
+              ]
+            },
+            "UpdateQueryTemplate": {
+              "methods": [
+                "update_query_template"
+              ]
+            },
+            "DeleteQueryTemplate": {
+              "methods": [
+                "delete_query_template"
+              ]
+            },
+            "SubmitQueryTemplate": {
+              "methods": [
+                "submit_query_template"
+              ]
+            },
+            "ApproveQueryTemplate": {
+              "methods": [
+                "approve_query_template"
+              ]
             }
           }
         }
