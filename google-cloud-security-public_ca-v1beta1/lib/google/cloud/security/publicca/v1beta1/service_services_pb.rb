@@ -36,7 +36,9 @@ module Google
               self.unmarshal_class_method = :decode
               self.service_name = 'google.cloud.security.publicca.v1beta1.PublicCertificateAuthorityService'
 
-              # Creates a new [ExternalAccountKey][google.cloud.security.publicca.v1beta1.ExternalAccountKey] bound to the project.
+              # Creates a new
+              # [ExternalAccountKey][google.cloud.security.publicca.v1beta1.ExternalAccountKey]
+              # bound to the project.
               rpc :CreateExternalAccountKey, ::Google::Cloud::Security::PublicCA::V1beta1::CreateExternalAccountKeyRequest, ::Google::Cloud::Security::PublicCA::V1beta1::ExternalAccountKey
             end
 

@@ -22,17 +22,19 @@ module Google
     module Security
       module PublicCA
         module V1beta1
-          # Creates a new {::Google::Cloud::Security::PublicCA::V1beta1::ExternalAccountKey ExternalAccountKey} in a given project.
+          # Creates a new
+          # {::Google::Cloud::Security::PublicCA::V1beta1::ExternalAccountKey ExternalAccountKey}
+          # in a given project.
           # @!attribute [rw] parent
           #   @return [::String]
-          #     Required. The parent resource where this external_account_key will be created.
-          #     Format: projects/[project_id]/locations/[location].
-          #     At present only the "global" location is supported.
+          #     Required. The parent resource where this external_account_key will be
+          #     created. Format: projects/[project_id]/locations/[location]. At present
+          #     only the "global" location is supported.
           # @!attribute [rw] external_account_key
           #   @return [::Google::Cloud::Security::PublicCA::V1beta1::ExternalAccountKey]
-          #     Required. The external account key to create. This field only exists to future-proof
-          #     the API. At present, all fields in ExternalAccountKey are output only and
-          #     all values are ignored. For the purpose of the
+          #     Required. The external account key to create. This field only exists to
+          #     future-proof the API. At present, all fields in ExternalAccountKey are
+          #     output only and all values are ignored. For the purpose of the
           #     CreateExternalAccountKeyRequest, set it to a default/empty value.
           class CreateExternalAccountKeyRequest
             include ::Google::Protobuf::MessageExts
