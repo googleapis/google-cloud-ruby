@@ -692,7 +692,7 @@ module Google
                 #   @param options [::Gapic::CallOptions, ::Hash]
                 #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
                 #
-                # @overload failover_reservation(name: nil)
+                # @overload failover_reservation(name: nil, failover_mode: nil)
                 #   Pass arguments to `failover_reservation` via keyword arguments. Note that at
                 #   least one keyword argument is required. To specify no parameters, or to keep all
                 #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -700,6 +700,10 @@ module Google
                 #   @param name [::String]
                 #     Required. Resource name of the reservation to failover. E.g.,
                 #        `projects/myproject/locations/US/reservations/team1-prod`
+                #   @param failover_mode [::Google::Cloud::Bigquery::Reservation::V1::FailoverMode]
+                #     Optional. A parameter that determines how writes that are pending
+                #     replication are handled after a failover is initiated. If not specified,
+                #     HARD failover mode is used by default.
                 # @yield [result, operation] Access the result along with the TransportOperation object
                 # @yieldparam result [::Google::Cloud::Bigquery::Reservation::V1::Reservation]
                 # @yieldparam operation [::Gapic::Rest::TransportOperation]
