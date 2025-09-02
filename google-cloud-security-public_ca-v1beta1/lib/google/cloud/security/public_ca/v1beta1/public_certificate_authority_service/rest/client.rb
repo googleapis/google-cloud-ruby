@@ -185,7 +185,9 @@ module Google
                 # Service calls
 
                 ##
-                # Creates a new {::Google::Cloud::Security::PublicCA::V1beta1::ExternalAccountKey ExternalAccountKey} bound to the project.
+                # Creates a new
+                # {::Google::Cloud::Security::PublicCA::V1beta1::ExternalAccountKey ExternalAccountKey}
+                # bound to the project.
                 #
                 # @overload create_external_account_key(request, options = nil)
                 #   Pass arguments to `create_external_account_key` via a request object, either of type
@@ -203,13 +205,13 @@ module Google
                 #   the default parameter values, pass an empty Hash as a request object (see above).
                 #
                 #   @param parent [::String]
-                #     Required. The parent resource where this external_account_key will be created.
-                #     Format: projects/[project_id]/locations/[location].
-                #     At present only the "global" location is supported.
+                #     Required. The parent resource where this external_account_key will be
+                #     created. Format: projects/[project_id]/locations/[location]. At present
+                #     only the "global" location is supported.
                 #   @param external_account_key [::Google::Cloud::Security::PublicCA::V1beta1::ExternalAccountKey, ::Hash]
-                #     Required. The external account key to create. This field only exists to future-proof
-                #     the API. At present, all fields in ExternalAccountKey are output only and
-                #     all values are ignored. For the purpose of the
+                #     Required. The external account key to create. This field only exists to
+                #     future-proof the API. At present, all fields in ExternalAccountKey are
+                #     output only and all values are ignored. For the purpose of the
                 #     CreateExternalAccountKeyRequest, set it to a default/empty value.
                 # @yield [result, operation] Access the result along with the TransportOperation object
                 # @yieldparam result [::Google::Cloud::Security::PublicCA::V1beta1::ExternalAccountKey]
