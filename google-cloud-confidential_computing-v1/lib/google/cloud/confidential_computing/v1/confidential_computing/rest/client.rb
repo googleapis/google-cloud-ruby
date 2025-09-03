@@ -85,6 +85,16 @@ module Google
                     initial_delay: 1.0, max_delay: 60.0, multiplier: 1.3, retry_codes: [14]
                   }
 
+                  default_config.rpcs.verify_confidential_space.timeout = 60.0
+                  default_config.rpcs.verify_confidential_space.retry_policy = {
+                    initial_delay: 1.0, max_delay: 60.0, multiplier: 1.3, retry_codes: [14]
+                  }
+
+                  default_config.rpcs.verify_confidential_gke.timeout = 60.0
+                  default_config.rpcs.verify_confidential_gke.retry_policy = {
+                    initial_delay: 1.0, max_delay: 60.0, multiplier: 1.3, retry_codes: [14]
+                  }
+
                   default_config
                 end
                 yield @configure if block_given?
@@ -288,7 +298,8 @@ module Google
               end
 
               ##
-              # Verifies the provided attestation info, returning a signed OIDC token.
+              # Verifies the provided attestation info, returning a signed attestation
+              # token.
               #
               # @overload verify_attestation(request, options = nil)
               #   Pass arguments to `verify_attestation` via a request object, either of type
@@ -383,6 +394,192 @@ module Google
                                        retry_policy: @config.retry_policy
 
                 @confidential_computing_stub.verify_attestation request, options do |result, operation|
+                  yield result, operation if block_given?
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Verifies whether the provided attestation info is valid, returning a signed
+              # attestation token if so.
+              #
+              # @overload verify_confidential_space(request, options = nil)
+              #   Pass arguments to `verify_confidential_space` via a request object, either of type
+              #   {::Google::Cloud::ConfidentialComputing::V1::VerifyConfidentialSpaceRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::ConfidentialComputing::V1::VerifyConfidentialSpaceRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload verify_confidential_space(td_ccel: nil, tpm_attestation: nil, challenge: nil, gcp_credentials: nil, signed_entities: nil, gce_shielded_identity: nil, options: nil)
+              #   Pass arguments to `verify_confidential_space` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param td_ccel [::Google::Cloud::ConfidentialComputing::V1::TdxCcelAttestation, ::Hash]
+              #     Input only. A TDX with CCEL and RTMR Attestation Quote.
+              #
+              #     Note: The following parameters are mutually exclusive: `td_ccel`, `tpm_attestation`. At most one of these parameters can be set. If more than one is set, only one will be used, and it is not defined which one.
+              #   @param tpm_attestation [::Google::Cloud::ConfidentialComputing::V1::TpmAttestation, ::Hash]
+              #     Input only. The TPM-specific data provided by the attesting platform,
+              #     used to populate any of the claims regarding platform state.
+              #
+              #     Note: The following parameters are mutually exclusive: `tpm_attestation`, `td_ccel`. At most one of these parameters can be set. If more than one is set, only one will be used, and it is not defined which one.
+              #   @param challenge [::String]
+              #     Required. The name of the Challenge whose nonce was used to generate the
+              #     attestation, in the format `projects/*/locations/*/challenges/*`. The
+              #     provided Challenge will be consumed, and cannot be used again.
+              #   @param gcp_credentials [::Google::Cloud::ConfidentialComputing::V1::GcpCredentials, ::Hash]
+              #     Optional. Credentials used to populate the "emails" claim in the
+              #     claims_token. If not present, token will not contain the "emails" claim.
+              #   @param signed_entities [::Array<::Google::Cloud::ConfidentialComputing::V1::SignedEntity, ::Hash>]
+              #     Optional. A list of signed entities containing container image signatures
+              #     that can be used for server-side signature verification.
+              #   @param gce_shielded_identity [::Google::Cloud::ConfidentialComputing::V1::GceShieldedIdentity, ::Hash]
+              #     Optional. Information about the associated Compute Engine instance.
+              #     Required for td_ccel requests only - tpm_attestation requests will provide
+              #     this information in the attestation.
+              #   @param options [::Google::Cloud::ConfidentialComputing::V1::VerifyConfidentialSpaceRequest::ConfidentialSpaceOptions, ::Hash]
+              #     Optional. A collection of fields that modify the token output.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Cloud::ConfidentialComputing::V1::VerifyConfidentialSpaceResponse]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Cloud::ConfidentialComputing::V1::VerifyConfidentialSpaceResponse]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/confidential_computing/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::ConfidentialComputing::V1::ConfidentialComputing::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::ConfidentialComputing::V1::VerifyConfidentialSpaceRequest.new
+              #
+              #   # Call the verify_confidential_space method.
+              #   result = client.verify_confidential_space request
+              #
+              #   # The returned object is of type Google::Cloud::ConfidentialComputing::V1::VerifyConfidentialSpaceResponse.
+              #   p result
+              #
+              def verify_confidential_space request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::ConfidentialComputing::V1::VerifyConfidentialSpaceRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.verify_confidential_space.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::ConfidentialComputing::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.verify_confidential_space.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.verify_confidential_space.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @confidential_computing_stub.verify_confidential_space request, options do |result, operation|
+                  yield result, operation if block_given?
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Verifies the provided Confidential GKE attestation info, returning a signed
+              # OIDC token.
+              #
+              # @overload verify_confidential_gke(request, options = nil)
+              #   Pass arguments to `verify_confidential_gke` via a request object, either of type
+              #   {::Google::Cloud::ConfidentialComputing::V1::VerifyConfidentialGkeRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::ConfidentialComputing::V1::VerifyConfidentialGkeRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload verify_confidential_gke(tpm_attestation: nil, challenge: nil)
+              #   Pass arguments to `verify_confidential_gke` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param tpm_attestation [::Google::Cloud::ConfidentialComputing::V1::TpmAttestation, ::Hash]
+              #     The TPM-specific data provided by the attesting platform, used to
+              #     populate any of the claims regarding platform state.
+              #   @param challenge [::String]
+              #     Required. The name of the Challenge whose nonce was used to generate the
+              #     attestation, in the format projects/*/locations/*/challenges/*. The
+              #     provided Challenge will be consumed, and cannot be used again.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Cloud::ConfidentialComputing::V1::VerifyConfidentialGkeResponse]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Cloud::ConfidentialComputing::V1::VerifyConfidentialGkeResponse]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/confidential_computing/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::ConfidentialComputing::V1::ConfidentialComputing::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::ConfidentialComputing::V1::VerifyConfidentialGkeRequest.new
+              #
+              #   # Call the verify_confidential_gke method.
+              #   result = client.verify_confidential_gke request
+              #
+              #   # The returned object is of type Google::Cloud::ConfidentialComputing::V1::VerifyConfidentialGkeResponse.
+              #   p result
+              #
+              def verify_confidential_gke request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::ConfidentialComputing::V1::VerifyConfidentialGkeRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.verify_confidential_gke.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::ConfidentialComputing::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.verify_confidential_gke.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.verify_confidential_gke.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @confidential_computing_stub.verify_confidential_gke request, options do |result, operation|
                   yield result, operation if block_given?
                 end
               rescue ::Gapic::Rest::Error => e
@@ -552,6 +749,16 @@ module Google
                   # @return [::Gapic::Config::Method]
                   #
                   attr_reader :verify_attestation
+                  ##
+                  # RPC-specific configuration for `verify_confidential_space`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :verify_confidential_space
+                  ##
+                  # RPC-specific configuration for `verify_confidential_gke`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :verify_confidential_gke
 
                   # @private
                   def initialize parent_rpcs = nil
@@ -559,6 +766,10 @@ module Google
                     @create_challenge = ::Gapic::Config::Method.new create_challenge_config
                     verify_attestation_config = parent_rpcs.verify_attestation if parent_rpcs.respond_to? :verify_attestation
                     @verify_attestation = ::Gapic::Config::Method.new verify_attestation_config
+                    verify_confidential_space_config = parent_rpcs.verify_confidential_space if parent_rpcs.respond_to? :verify_confidential_space
+                    @verify_confidential_space = ::Gapic::Config::Method.new verify_confidential_space_config
+                    verify_confidential_gke_config = parent_rpcs.verify_confidential_gke if parent_rpcs.respond_to? :verify_confidential_gke
+                    @verify_confidential_gke = ::Gapic::Config::Method.new verify_confidential_gke_config
 
                     yield self if block_given?
                   end
