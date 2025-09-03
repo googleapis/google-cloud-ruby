@@ -1,5 +1,11 @@
 # Changelog
 
+### 0.14.0 (2025-09-03)
+
+#### Features
+
+* You can now configure listings for multiple regions for shared datasets and linked dataset replicas in BigQuery sharing ([#30933](https://github.com/googleapis/google-cloud-ruby/issues/30933)) 
+
 ### 0.13.1 (2025-07-15)
 
 #### Documentation
