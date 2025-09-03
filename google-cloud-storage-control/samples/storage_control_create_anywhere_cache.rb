@@ -42,17 +42,18 @@ def create_anywhere_cache bucket_name:, zone:
     operation = storage_control_client.create_anywhere_cache request
     if operation.response? == false
 
-    puts "********************AnywhereCache operation created - #{operation.name}"
-    if !operation.done?
-      get_request = Google::Cloud::Storage::Control::V2::GetAnywhereCacheRequest.new(
-          name: name
-        )
-      result = storage_control_client.get_anywhere_cache get_request
-      while result.state == "creating"
-        sleep 1800 # Wait for 1/2 hour before checking again
+      puts "********************AnywhereCache operation created - #{operation.name}"
+      if !operation.done?
+        get_request = Google::Cloud::Storage::Control::V2::GetAnywhereCacheRequest.new(
+            name: name
+          )
         result = storage_control_client.get_anywhere_cache get_request
-        puts "********************AnywhereCache operation refreshed"
-        puts "********************AnywhereCache operation status check retried"
+        while result.state == "creating"
+          sleep 1800 # Wait for 1/2 hour before checking again
+          result = storage_control_client.get_anywhere_cache get_request
+          puts "********************AnywhereCache operation refreshed"
+          puts "********************AnywhereCache operation status check retried"
+        end
       end
     end
     puts "********************AnywhereCache create operation completed - #{operation.name}"
