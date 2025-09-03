@@ -1,5 +1,11 @@
 # Release History
 
+### 1.7.0 (2025-09-03)
+
+#### Features
+
+* Add a new field `soft_failover_start_time` in the existing `replication_status` in `.google.cloud.bigquery.reservation.v1.Reservation` to provide visibility into the state of ongoing soft failover operations on the reservation ([#30932](https://github.com/googleapis/google-cloud-ruby/issues/30932)) 
+
 ### 1.6.0 (2025-08-26)
 
 #### Features
