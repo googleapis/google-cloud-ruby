@@ -1,5 +1,11 @@
 # Changelog
 
+### 2.3.0 (2025-09-03)
+
+#### Features
+
+* added support for service maintained provider ([#30934](https://github.com/googleapis/google-cloud-ruby/issues/30934)) 
+
 ### 2.2.0 (2025-07-15)
 
 #### Features
