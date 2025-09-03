@@ -1,5 +1,11 @@
 # Release History
 
+### 1.10.1 (2025-09-03)
+
+#### Documentation
+
+* A comment for field `ranges` in message `.google.spanner.v1.KeySet` is changed ([#30926](https://github.com/googleapis/google-cloud-ruby/issues/30926)) 
+
 ### 1.10.0 (2025-07-24)
 
 #### Features
