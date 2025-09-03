@@ -1,5 +1,11 @@
 # Changelog
 
+### 0.9.1 (2025-09-03)
+
+#### Documentation
+
+* Add API publishing information for public CA.googleapis.com ([#30931](https://github.com/googleapis/google-cloud-ruby/issues/30931)) 
+
 ### 0.9.0 (2025-05-12)
 
 #### Features
