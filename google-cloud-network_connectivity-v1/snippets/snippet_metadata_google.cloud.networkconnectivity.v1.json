@@ -732,6 +732,486 @@
       ]
     },
     {
+      "region_tag": "networkconnectivity_v1_generated_DataTransferService_ListMulticloudDataTransferConfigs_sync",
+      "title": "Snippet for the list_multicloud_data_transfer_configs call in the DataTransferService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::NetworkConnectivity::V1::DataTransferService::Client#list_multicloud_data_transfer_configs.",
+      "file": "data_transfer_service/list_multicloud_data_transfer_configs.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_multicloud_data_transfer_configs",
+        "full_name": "::Google::Cloud::NetworkConnectivity::V1::DataTransferService::Client#list_multicloud_data_transfer_configs",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::NetworkConnectivity::V1::ListMulticloudDataTransferConfigsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::NetworkConnectivity::V1::ListMulticloudDataTransferConfigsResponse",
+        "client": {
+          "short_name": "DataTransferService::Client",
+          "full_name": "::Google::Cloud::NetworkConnectivity::V1::DataTransferService::Client"
+        },
+        "method": {
+          "short_name": "ListMulticloudDataTransferConfigs",
+          "full_name": "google.cloud.networkconnectivity.v1.DataTransferService.ListMulticloudDataTransferConfigs",
+          "service": {
+            "short_name": "DataTransferService",
+            "full_name": "google.cloud.networkconnectivity.v1.DataTransferService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "networkconnectivity_v1_generated_DataTransferService_GetMulticloudDataTransferConfig_sync",
+      "title": "Snippet for the get_multicloud_data_transfer_config call in the DataTransferService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::NetworkConnectivity::V1::DataTransferService::Client#get_multicloud_data_transfer_config.",
+      "file": "data_transfer_service/get_multicloud_data_transfer_config.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_multicloud_data_transfer_config",
+        "full_name": "::Google::Cloud::NetworkConnectivity::V1::DataTransferService::Client#get_multicloud_data_transfer_config",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::NetworkConnectivity::V1::GetMulticloudDataTransferConfigRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::NetworkConnectivity::V1::MulticloudDataTransferConfig",
+        "client": {
+          "short_name": "DataTransferService::Client",
+          "full_name": "::Google::Cloud::NetworkConnectivity::V1::DataTransferService::Client"
+        },
+        "method": {
+          "short_name": "GetMulticloudDataTransferConfig",
+          "full_name": "google.cloud.networkconnectivity.v1.DataTransferService.GetMulticloudDataTransferConfig",
+          "service": {
+            "short_name": "DataTransferService",
+            "full_name": "google.cloud.networkconnectivity.v1.DataTransferService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "networkconnectivity_v1_generated_DataTransferService_CreateMulticloudDataTransferConfig_sync",
+      "title": "Snippet for the create_multicloud_data_transfer_config call in the DataTransferService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::NetworkConnectivity::V1::DataTransferService::Client#create_multicloud_data_transfer_config.",
+      "file": "data_transfer_service/create_multicloud_data_transfer_config.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_multicloud_data_transfer_config",
+        "full_name": "::Google::Cloud::NetworkConnectivity::V1::DataTransferService::Client#create_multicloud_data_transfer_config",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::NetworkConnectivity::V1::CreateMulticloudDataTransferConfigRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "DataTransferService::Client",
+          "full_name": "::Google::Cloud::NetworkConnectivity::V1::DataTransferService::Client"
+        },
+        "method": {
+          "short_name": "CreateMulticloudDataTransferConfig",
+          "full_name": "google.cloud.networkconnectivity.v1.DataTransferService.CreateMulticloudDataTransferConfig",
+          "service": {
+            "short_name": "DataTransferService",
+            "full_name": "google.cloud.networkconnectivity.v1.DataTransferService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "networkconnectivity_v1_generated_DataTransferService_UpdateMulticloudDataTransferConfig_sync",
+      "title": "Snippet for the update_multicloud_data_transfer_config call in the DataTransferService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::NetworkConnectivity::V1::DataTransferService::Client#update_multicloud_data_transfer_config.",
+      "file": "data_transfer_service/update_multicloud_data_transfer_config.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_multicloud_data_transfer_config",
+        "full_name": "::Google::Cloud::NetworkConnectivity::V1::DataTransferService::Client#update_multicloud_data_transfer_config",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::NetworkConnectivity::V1::UpdateMulticloudDataTransferConfigRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "DataTransferService::Client",
+          "full_name": "::Google::Cloud::NetworkConnectivity::V1::DataTransferService::Client"
+        },
+        "method": {
+          "short_name": "UpdateMulticloudDataTransferConfig",
+          "full_name": "google.cloud.networkconnectivity.v1.DataTransferService.UpdateMulticloudDataTransferConfig",
+          "service": {
+            "short_name": "DataTransferService",
+            "full_name": "google.cloud.networkconnectivity.v1.DataTransferService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "networkconnectivity_v1_generated_DataTransferService_DeleteMulticloudDataTransferConfig_sync",
+      "title": "Snippet for the delete_multicloud_data_transfer_config call in the DataTransferService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::NetworkConnectivity::V1::DataTransferService::Client#delete_multicloud_data_transfer_config.",
+      "file": "data_transfer_service/delete_multicloud_data_transfer_config.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_multicloud_data_transfer_config",
+        "full_name": "::Google::Cloud::NetworkConnectivity::V1::DataTransferService::Client#delete_multicloud_data_transfer_config",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::NetworkConnectivity::V1::DeleteMulticloudDataTransferConfigRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "DataTransferService::Client",
+          "full_name": "::Google::Cloud::NetworkConnectivity::V1::DataTransferService::Client"
+        },
+        "method": {
+          "short_name": "DeleteMulticloudDataTransferConfig",
+          "full_name": "google.cloud.networkconnectivity.v1.DataTransferService.DeleteMulticloudDataTransferConfig",
+          "service": {
+            "short_name": "DataTransferService",
+            "full_name": "google.cloud.networkconnectivity.v1.DataTransferService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "networkconnectivity_v1_generated_DataTransferService_ListDestinations_sync",
+      "title": "Snippet for the list_destinations call in the DataTransferService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::NetworkConnectivity::V1::DataTransferService::Client#list_destinations.",
+      "file": "data_transfer_service/list_destinations.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_destinations",
+        "full_name": "::Google::Cloud::NetworkConnectivity::V1::DataTransferService::Client#list_destinations",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::NetworkConnectivity::V1::ListDestinationsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::NetworkConnectivity::V1::ListDestinationsResponse",
+        "client": {
+          "short_name": "DataTransferService::Client",
+          "full_name": "::Google::Cloud::NetworkConnectivity::V1::DataTransferService::Client"
+        },
+        "method": {
+          "short_name": "ListDestinations",
+          "full_name": "google.cloud.networkconnectivity.v1.DataTransferService.ListDestinations",
+          "service": {
+            "short_name": "DataTransferService",
+            "full_name": "google.cloud.networkconnectivity.v1.DataTransferService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "networkconnectivity_v1_generated_DataTransferService_GetDestination_sync",
+      "title": "Snippet for the get_destination call in the DataTransferService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::NetworkConnectivity::V1::DataTransferService::Client#get_destination.",
+      "file": "data_transfer_service/get_destination.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_destination",
+        "full_name": "::Google::Cloud::NetworkConnectivity::V1::DataTransferService::Client#get_destination",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::NetworkConnectivity::V1::GetDestinationRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::NetworkConnectivity::V1::Destination",
+        "client": {
+          "short_name": "DataTransferService::Client",
+          "full_name": "::Google::Cloud::NetworkConnectivity::V1::DataTransferService::Client"
+        },
+        "method": {
+          "short_name": "GetDestination",
+          "full_name": "google.cloud.networkconnectivity.v1.DataTransferService.GetDestination",
+          "service": {
+            "short_name": "DataTransferService",
+            "full_name": "google.cloud.networkconnectivity.v1.DataTransferService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "networkconnectivity_v1_generated_DataTransferService_CreateDestination_sync",
+      "title": "Snippet for the create_destination call in the DataTransferService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::NetworkConnectivity::V1::DataTransferService::Client#create_destination.",
+      "file": "data_transfer_service/create_destination.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_destination",
+        "full_name": "::Google::Cloud::NetworkConnectivity::V1::DataTransferService::Client#create_destination",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::NetworkConnectivity::V1::CreateDestinationRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "DataTransferService::Client",
+          "full_name": "::Google::Cloud::NetworkConnectivity::V1::DataTransferService::Client"
+        },
+        "method": {
+          "short_name": "CreateDestination",
+          "full_name": "google.cloud.networkconnectivity.v1.DataTransferService.CreateDestination",
+          "service": {
+            "short_name": "DataTransferService",
+            "full_name": "google.cloud.networkconnectivity.v1.DataTransferService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "networkconnectivity_v1_generated_DataTransferService_UpdateDestination_sync",
+      "title": "Snippet for the update_destination call in the DataTransferService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::NetworkConnectivity::V1::DataTransferService::Client#update_destination.",
+      "file": "data_transfer_service/update_destination.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_destination",
+        "full_name": "::Google::Cloud::NetworkConnectivity::V1::DataTransferService::Client#update_destination",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::NetworkConnectivity::V1::UpdateDestinationRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "DataTransferService::Client",
+          "full_name": "::Google::Cloud::NetworkConnectivity::V1::DataTransferService::Client"
+        },
+        "method": {
+          "short_name": "UpdateDestination",
+          "full_name": "google.cloud.networkconnectivity.v1.DataTransferService.UpdateDestination",
+          "service": {
+            "short_name": "DataTransferService",
+            "full_name": "google.cloud.networkconnectivity.v1.DataTransferService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "networkconnectivity_v1_generated_DataTransferService_DeleteDestination_sync",
+      "title": "Snippet for the delete_destination call in the DataTransferService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::NetworkConnectivity::V1::DataTransferService::Client#delete_destination.",
+      "file": "data_transfer_service/delete_destination.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_destination",
+        "full_name": "::Google::Cloud::NetworkConnectivity::V1::DataTransferService::Client#delete_destination",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::NetworkConnectivity::V1::DeleteDestinationRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "DataTransferService::Client",
+          "full_name": "::Google::Cloud::NetworkConnectivity::V1::DataTransferService::Client"
+        },
+        "method": {
+          "short_name": "DeleteDestination",
+          "full_name": "google.cloud.networkconnectivity.v1.DataTransferService.DeleteDestination",
+          "service": {
+            "short_name": "DataTransferService",
+            "full_name": "google.cloud.networkconnectivity.v1.DataTransferService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "networkconnectivity_v1_generated_DataTransferService_GetMulticloudDataTransferSupportedService_sync",
+      "title": "Snippet for the get_multicloud_data_transfer_supported_service call in the DataTransferService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::NetworkConnectivity::V1::DataTransferService::Client#get_multicloud_data_transfer_supported_service.",
+      "file": "data_transfer_service/get_multicloud_data_transfer_supported_service.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_multicloud_data_transfer_supported_service",
+        "full_name": "::Google::Cloud::NetworkConnectivity::V1::DataTransferService::Client#get_multicloud_data_transfer_supported_service",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::NetworkConnectivity::V1::GetMulticloudDataTransferSupportedServiceRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::NetworkConnectivity::V1::MulticloudDataTransferSupportedService",
+        "client": {
+          "short_name": "DataTransferService::Client",
+          "full_name": "::Google::Cloud::NetworkConnectivity::V1::DataTransferService::Client"
+        },
+        "method": {
+          "short_name": "GetMulticloudDataTransferSupportedService",
+          "full_name": "google.cloud.networkconnectivity.v1.DataTransferService.GetMulticloudDataTransferSupportedService",
+          "service": {
+            "short_name": "DataTransferService",
+            "full_name": "google.cloud.networkconnectivity.v1.DataTransferService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "networkconnectivity_v1_generated_DataTransferService_ListMulticloudDataTransferSupportedServices_sync",
+      "title": "Snippet for the list_multicloud_data_transfer_supported_services call in the DataTransferService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::NetworkConnectivity::V1::DataTransferService::Client#list_multicloud_data_transfer_supported_services.",
+      "file": "data_transfer_service/list_multicloud_data_transfer_supported_services.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_multicloud_data_transfer_supported_services",
+        "full_name": "::Google::Cloud::NetworkConnectivity::V1::DataTransferService::Client#list_multicloud_data_transfer_supported_services",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::NetworkConnectivity::V1::ListMulticloudDataTransferSupportedServicesRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::NetworkConnectivity::V1::ListMulticloudDataTransferSupportedServicesResponse",
+        "client": {
+          "short_name": "DataTransferService::Client",
+          "full_name": "::Google::Cloud::NetworkConnectivity::V1::DataTransferService::Client"
+        },
+        "method": {
+          "short_name": "ListMulticloudDataTransferSupportedServices",
+          "full_name": "google.cloud.networkconnectivity.v1.DataTransferService.ListMulticloudDataTransferSupportedServices",
+          "service": {
+            "short_name": "DataTransferService",
+            "full_name": "google.cloud.networkconnectivity.v1.DataTransferService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
       "region_tag": "networkconnectivity_v1_generated_HubService_ListHubs_sync",
       "title": "Snippet for the list_hubs call in the HubService service",
       "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::NetworkConnectivity::V1::HubService::Client#list_hubs.",
