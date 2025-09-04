@@ -48,6 +48,27 @@ module Google
             end
 
             ##
+            # Create a fully-qualified CryptoKey resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `projects/{project}/locations/{location}/keyRings/{key_ring}/cryptoKeys/{crypto_key}`
+            #
+            # @param project [String]
+            # @param location [String]
+            # @param key_ring [String]
+            # @param crypto_key [String]
+            #
+            # @return [::String]
+            def crypto_key_path project:, location:, key_ring:, crypto_key:
+              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+              raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+              raise ::ArgumentError, "key_ring cannot contain /" if key_ring.to_s.include? "/"
+
+              "projects/#{project}/locations/#{location}/keyRings/#{key_ring}/cryptoKeys/#{crypto_key}"
+            end
+
+            ##
             # Create a fully-qualified CutoverJob resource string.
             #
             # The resource will be in the following format:
@@ -92,6 +113,27 @@ module Google
             end
 
             ##
+            # Create a fully-qualified DiskMigrationJob resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `projects/{project}/locations/{location}/sources/{source}/diskMigrationJobs/{disk_migration_job}`
+            #
+            # @param project [String]
+            # @param location [String]
+            # @param source [String]
+            # @param disk_migration_job [String]
+            #
+            # @return [::String]
+            def disk_migration_job_path project:, location:, source:, disk_migration_job:
+              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+              raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+              raise ::ArgumentError, "source cannot contain /" if source.to_s.include? "/"
+
+              "projects/#{project}/locations/#{location}/sources/#{source}/diskMigrationJobs/#{disk_migration_job}"
+            end
+
+            ##
             # Create a fully-qualified Group resource string.
             #
             # The resource will be in the following format:
@@ -108,6 +150,63 @@ module Google
               raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
 
               "projects/#{project}/locations/#{location}/groups/#{group}"
+            end
+
+            ##
+            # Create a fully-qualified Image resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `projects/{project}/global/images/{image}`
+            #
+            # @param project [String]
+            # @param image [String]
+            #
+            # @return [::String]
+            def image_path project:, image:
+              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+
+              "projects/#{project}/global/images/#{image}"
+            end
+
+            ##
+            # Create a fully-qualified ImageImport resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `projects/{project}/locations/{location}/imageImports/{job}`
+            #
+            # @param project [String]
+            # @param location [String]
+            # @param job [String]
+            #
+            # @return [::String]
+            def image_import_path project:, location:, job:
+              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+              raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+
+              "projects/#{project}/locations/#{location}/imageImports/#{job}"
+            end
+
+            ##
+            # Create a fully-qualified ImageImportJob resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `projects/{project}/locations/{location}/imageImports/{job}/imageImportJobs/{result}`
+            #
+            # @param project [String]
+            # @param location [String]
+            # @param job [String]
+            # @param result [String]
+            #
+            # @return [::String]
+            def image_import_job_path project:, location:, job:, result:
+              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+              raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+              raise ::ArgumentError, "job cannot contain /" if job.to_s.include? "/"
+
+              "projects/#{project}/locations/#{location}/imageImports/#{job}/imageImportJobs/#{result}"
             end
 
             ##
@@ -169,6 +268,23 @@ module Google
               raise ::ArgumentError, "migrating_vm cannot contain /" if migrating_vm.to_s.include? "/"
 
               "projects/#{project}/locations/#{location}/sources/#{source}/migratingVms/#{migrating_vm}/replicationCycles/#{replication_cycle}"
+            end
+
+            ##
+            # Create a fully-qualified ServiceAccount resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `projects/{project}/serviceAccounts/{service_account}`
+            #
+            # @param project [String]
+            # @param service_account [String]
+            #
+            # @return [::String]
+            def service_account_path project:, service_account:
+              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+
+              "projects/#{project}/serviceAccounts/#{service_account}"
             end
 
             ##

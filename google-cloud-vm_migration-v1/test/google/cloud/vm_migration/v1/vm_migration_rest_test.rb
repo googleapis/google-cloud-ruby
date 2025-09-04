@@ -413,6 +413,64 @@ class ::Google::Cloud::VMMigration::V1::VMMigration::Rest::ClientTest < Minitest
     end
   end
 
+  def test_fetch_storage_inventory
+    # Create test objects.
+    client_result = ::Google::Cloud::VMMigration::V1::FetchStorageInventoryResponse.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    source = "hello world"
+    type = :STORAGE_TYPE_UNSPECIFIED
+    force_refresh = true
+    page_size = 42
+    page_token = "hello world"
+
+    fetch_storage_inventory_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::VMMigration::V1::VMMigration::Rest::ServiceStub.stub :transcode_fetch_storage_inventory_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, fetch_storage_inventory_client_stub do
+        # Create client
+        client = ::Google::Cloud::VMMigration::V1::VMMigration::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.fetch_storage_inventory({ source: source, type: type, force_refresh: force_refresh, page_size: page_size, page_token: page_token }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.fetch_storage_inventory source: source, type: type, force_refresh: force_refresh, page_size: page_size, page_token: page_token do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.fetch_storage_inventory ::Google::Cloud::VMMigration::V1::FetchStorageInventoryRequest.new(source: source, type: type, force_refresh: force_refresh, page_size: page_size, page_token: page_token) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.fetch_storage_inventory({ source: source, type: type, force_refresh: force_refresh, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.fetch_storage_inventory(::Google::Cloud::VMMigration::V1::FetchStorageInventoryRequest.new(source: source, type: type, force_refresh: force_refresh, page_size: page_size, page_token: page_token), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, fetch_storage_inventory_client_stub.call_count
+      end
+    end
+  end
+
   def test_list_utilization_reports
     # Create test objects.
     client_result = ::Google::Cloud::VMMigration::V1::ListUtilizationReportsResponse.new
@@ -1411,6 +1469,60 @@ class ::Google::Cloud::VMMigration::V1::VMMigration::Rest::ClientTest < Minitest
 
         # Verify method calls
         assert_equal 5, finalize_migration_client_stub.call_count
+      end
+    end
+  end
+
+  def test_extend_migration
+    # Create test objects.
+    client_result = ::Google::Longrunning::Operation.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    migrating_vm = "hello world"
+
+    extend_migration_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::VMMigration::V1::VMMigration::Rest::ServiceStub.stub :transcode_extend_migration_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, extend_migration_client_stub do
+        # Create client
+        client = ::Google::Cloud::VMMigration::V1::VMMigration::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.extend_migration({ migrating_vm: migrating_vm }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.extend_migration migrating_vm: migrating_vm do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.extend_migration ::Google::Cloud::VMMigration::V1::ExtendMigrationRequest.new(migrating_vm: migrating_vm) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.extend_migration({ migrating_vm: migrating_vm }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.extend_migration(::Google::Cloud::VMMigration::V1::ExtendMigrationRequest.new(migrating_vm: migrating_vm), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, extend_migration_client_stub.call_count
       end
     end
   end
@@ -2639,6 +2751,783 @@ class ::Google::Cloud::VMMigration::V1::VMMigration::Rest::ClientTest < Minitest
 
         # Verify method calls
         assert_equal 5, get_replication_cycle_client_stub.call_count
+      end
+    end
+  end
+
+  def test_list_image_imports
+    # Create test objects.
+    client_result = ::Google::Cloud::VMMigration::V1::ListImageImportsResponse.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    page_size = 42
+    page_token = "hello world"
+    filter = "hello world"
+    order_by = "hello world"
+
+    list_image_imports_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::VMMigration::V1::VMMigration::Rest::ServiceStub.stub :transcode_list_image_imports_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, list_image_imports_client_stub do
+        # Create client
+        client = ::Google::Cloud::VMMigration::V1::VMMigration::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.list_image_imports({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.list_image_imports parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.list_image_imports ::Google::Cloud::VMMigration::V1::ListImageImportsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.list_image_imports({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.list_image_imports(::Google::Cloud::VMMigration::V1::ListImageImportsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, list_image_imports_client_stub.call_count
+      end
+    end
+  end
+
+  def test_get_image_import
+    # Create test objects.
+    client_result = ::Google::Cloud::VMMigration::V1::ImageImport.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    get_image_import_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::VMMigration::V1::VMMigration::Rest::ServiceStub.stub :transcode_get_image_import_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, get_image_import_client_stub do
+        # Create client
+        client = ::Google::Cloud::VMMigration::V1::VMMigration::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.get_image_import({ name: name }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.get_image_import name: name do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.get_image_import ::Google::Cloud::VMMigration::V1::GetImageImportRequest.new(name: name) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.get_image_import({ name: name }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.get_image_import(::Google::Cloud::VMMigration::V1::GetImageImportRequest.new(name: name), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, get_image_import_client_stub.call_count
+      end
+    end
+  end
+
+  def test_create_image_import
+    # Create test objects.
+    client_result = ::Google::Longrunning::Operation.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    image_import_id = "hello world"
+    image_import = {}
+    request_id = "hello world"
+
+    create_image_import_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::VMMigration::V1::VMMigration::Rest::ServiceStub.stub :transcode_create_image_import_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, create_image_import_client_stub do
+        # Create client
+        client = ::Google::Cloud::VMMigration::V1::VMMigration::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.create_image_import({ parent: parent, image_import_id: image_import_id, image_import: image_import, request_id: request_id }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.create_image_import parent: parent, image_import_id: image_import_id, image_import: image_import, request_id: request_id do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.create_image_import ::Google::Cloud::VMMigration::V1::CreateImageImportRequest.new(parent: parent, image_import_id: image_import_id, image_import: image_import, request_id: request_id) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.create_image_import({ parent: parent, image_import_id: image_import_id, image_import: image_import, request_id: request_id }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.create_image_import(::Google::Cloud::VMMigration::V1::CreateImageImportRequest.new(parent: parent, image_import_id: image_import_id, image_import: image_import, request_id: request_id), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, create_image_import_client_stub.call_count
+      end
+    end
+  end
+
+  def test_delete_image_import
+    # Create test objects.
+    client_result = ::Google::Longrunning::Operation.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+    request_id = "hello world"
+
+    delete_image_import_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::VMMigration::V1::VMMigration::Rest::ServiceStub.stub :transcode_delete_image_import_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, delete_image_import_client_stub do
+        # Create client
+        client = ::Google::Cloud::VMMigration::V1::VMMigration::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.delete_image_import({ name: name, request_id: request_id }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.delete_image_import name: name, request_id: request_id do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.delete_image_import ::Google::Cloud::VMMigration::V1::DeleteImageImportRequest.new(name: name, request_id: request_id) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.delete_image_import({ name: name, request_id: request_id }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.delete_image_import(::Google::Cloud::VMMigration::V1::DeleteImageImportRequest.new(name: name, request_id: request_id), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, delete_image_import_client_stub.call_count
+      end
+    end
+  end
+
+  def test_list_image_import_jobs
+    # Create test objects.
+    client_result = ::Google::Cloud::VMMigration::V1::ListImageImportJobsResponse.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    page_size = 42
+    page_token = "hello world"
+    filter = "hello world"
+    order_by = "hello world"
+
+    list_image_import_jobs_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::VMMigration::V1::VMMigration::Rest::ServiceStub.stub :transcode_list_image_import_jobs_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, list_image_import_jobs_client_stub do
+        # Create client
+        client = ::Google::Cloud::VMMigration::V1::VMMigration::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.list_image_import_jobs({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.list_image_import_jobs parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.list_image_import_jobs ::Google::Cloud::VMMigration::V1::ListImageImportJobsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.list_image_import_jobs({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.list_image_import_jobs(::Google::Cloud::VMMigration::V1::ListImageImportJobsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, list_image_import_jobs_client_stub.call_count
+      end
+    end
+  end
+
+  def test_get_image_import_job
+    # Create test objects.
+    client_result = ::Google::Cloud::VMMigration::V1::ImageImportJob.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    get_image_import_job_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::VMMigration::V1::VMMigration::Rest::ServiceStub.stub :transcode_get_image_import_job_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, get_image_import_job_client_stub do
+        # Create client
+        client = ::Google::Cloud::VMMigration::V1::VMMigration::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.get_image_import_job({ name: name }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.get_image_import_job name: name do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.get_image_import_job ::Google::Cloud::VMMigration::V1::GetImageImportJobRequest.new(name: name) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.get_image_import_job({ name: name }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.get_image_import_job(::Google::Cloud::VMMigration::V1::GetImageImportJobRequest.new(name: name), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, get_image_import_job_client_stub.call_count
+      end
+    end
+  end
+
+  def test_cancel_image_import_job
+    # Create test objects.
+    client_result = ::Google::Longrunning::Operation.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    cancel_image_import_job_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::VMMigration::V1::VMMigration::Rest::ServiceStub.stub :transcode_cancel_image_import_job_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, cancel_image_import_job_client_stub do
+        # Create client
+        client = ::Google::Cloud::VMMigration::V1::VMMigration::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.cancel_image_import_job({ name: name }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.cancel_image_import_job name: name do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.cancel_image_import_job ::Google::Cloud::VMMigration::V1::CancelImageImportJobRequest.new(name: name) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.cancel_image_import_job({ name: name }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.cancel_image_import_job(::Google::Cloud::VMMigration::V1::CancelImageImportJobRequest.new(name: name), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, cancel_image_import_job_client_stub.call_count
+      end
+    end
+  end
+
+  def test_create_disk_migration_job
+    # Create test objects.
+    client_result = ::Google::Longrunning::Operation.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    disk_migration_job_id = "hello world"
+    disk_migration_job = {}
+    request_id = "hello world"
+
+    create_disk_migration_job_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::VMMigration::V1::VMMigration::Rest::ServiceStub.stub :transcode_create_disk_migration_job_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, create_disk_migration_job_client_stub do
+        # Create client
+        client = ::Google::Cloud::VMMigration::V1::VMMigration::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.create_disk_migration_job({ parent: parent, disk_migration_job_id: disk_migration_job_id, disk_migration_job: disk_migration_job, request_id: request_id }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.create_disk_migration_job parent: parent, disk_migration_job_id: disk_migration_job_id, disk_migration_job: disk_migration_job, request_id: request_id do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.create_disk_migration_job ::Google::Cloud::VMMigration::V1::CreateDiskMigrationJobRequest.new(parent: parent, disk_migration_job_id: disk_migration_job_id, disk_migration_job: disk_migration_job, request_id: request_id) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.create_disk_migration_job({ parent: parent, disk_migration_job_id: disk_migration_job_id, disk_migration_job: disk_migration_job, request_id: request_id }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.create_disk_migration_job(::Google::Cloud::VMMigration::V1::CreateDiskMigrationJobRequest.new(parent: parent, disk_migration_job_id: disk_migration_job_id, disk_migration_job: disk_migration_job, request_id: request_id), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, create_disk_migration_job_client_stub.call_count
+      end
+    end
+  end
+
+  def test_list_disk_migration_jobs
+    # Create test objects.
+    client_result = ::Google::Cloud::VMMigration::V1::ListDiskMigrationJobsResponse.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    page_size = 42
+    page_token = "hello world"
+    filter = "hello world"
+    order_by = "hello world"
+
+    list_disk_migration_jobs_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::VMMigration::V1::VMMigration::Rest::ServiceStub.stub :transcode_list_disk_migration_jobs_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, list_disk_migration_jobs_client_stub do
+        # Create client
+        client = ::Google::Cloud::VMMigration::V1::VMMigration::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.list_disk_migration_jobs({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.list_disk_migration_jobs parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.list_disk_migration_jobs ::Google::Cloud::VMMigration::V1::ListDiskMigrationJobsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.list_disk_migration_jobs({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.list_disk_migration_jobs(::Google::Cloud::VMMigration::V1::ListDiskMigrationJobsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, list_disk_migration_jobs_client_stub.call_count
+      end
+    end
+  end
+
+  def test_get_disk_migration_job
+    # Create test objects.
+    client_result = ::Google::Cloud::VMMigration::V1::DiskMigrationJob.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    get_disk_migration_job_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::VMMigration::V1::VMMigration::Rest::ServiceStub.stub :transcode_get_disk_migration_job_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, get_disk_migration_job_client_stub do
+        # Create client
+        client = ::Google::Cloud::VMMigration::V1::VMMigration::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.get_disk_migration_job({ name: name }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.get_disk_migration_job name: name do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.get_disk_migration_job ::Google::Cloud::VMMigration::V1::GetDiskMigrationJobRequest.new(name: name) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.get_disk_migration_job({ name: name }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.get_disk_migration_job(::Google::Cloud::VMMigration::V1::GetDiskMigrationJobRequest.new(name: name), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, get_disk_migration_job_client_stub.call_count
+      end
+    end
+  end
+
+  def test_update_disk_migration_job
+    # Create test objects.
+    client_result = ::Google::Longrunning::Operation.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    update_mask = {}
+    disk_migration_job = {}
+    request_id = "hello world"
+
+    update_disk_migration_job_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::VMMigration::V1::VMMigration::Rest::ServiceStub.stub :transcode_update_disk_migration_job_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, update_disk_migration_job_client_stub do
+        # Create client
+        client = ::Google::Cloud::VMMigration::V1::VMMigration::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.update_disk_migration_job({ update_mask: update_mask, disk_migration_job: disk_migration_job, request_id: request_id }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.update_disk_migration_job update_mask: update_mask, disk_migration_job: disk_migration_job, request_id: request_id do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.update_disk_migration_job ::Google::Cloud::VMMigration::V1::UpdateDiskMigrationJobRequest.new(update_mask: update_mask, disk_migration_job: disk_migration_job, request_id: request_id) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.update_disk_migration_job({ update_mask: update_mask, disk_migration_job: disk_migration_job, request_id: request_id }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.update_disk_migration_job(::Google::Cloud::VMMigration::V1::UpdateDiskMigrationJobRequest.new(update_mask: update_mask, disk_migration_job: disk_migration_job, request_id: request_id), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, update_disk_migration_job_client_stub.call_count
+      end
+    end
+  end
+
+  def test_delete_disk_migration_job
+    # Create test objects.
+    client_result = ::Google::Longrunning::Operation.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    delete_disk_migration_job_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::VMMigration::V1::VMMigration::Rest::ServiceStub.stub :transcode_delete_disk_migration_job_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, delete_disk_migration_job_client_stub do
+        # Create client
+        client = ::Google::Cloud::VMMigration::V1::VMMigration::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.delete_disk_migration_job({ name: name }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.delete_disk_migration_job name: name do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.delete_disk_migration_job ::Google::Cloud::VMMigration::V1::DeleteDiskMigrationJobRequest.new(name: name) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.delete_disk_migration_job({ name: name }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.delete_disk_migration_job(::Google::Cloud::VMMigration::V1::DeleteDiskMigrationJobRequest.new(name: name), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, delete_disk_migration_job_client_stub.call_count
+      end
+    end
+  end
+
+  def test_run_disk_migration_job
+    # Create test objects.
+    client_result = ::Google::Longrunning::Operation.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    run_disk_migration_job_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::VMMigration::V1::VMMigration::Rest::ServiceStub.stub :transcode_run_disk_migration_job_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, run_disk_migration_job_client_stub do
+        # Create client
+        client = ::Google::Cloud::VMMigration::V1::VMMigration::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.run_disk_migration_job({ name: name }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.run_disk_migration_job name: name do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.run_disk_migration_job ::Google::Cloud::VMMigration::V1::RunDiskMigrationJobRequest.new(name: name) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.run_disk_migration_job({ name: name }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.run_disk_migration_job(::Google::Cloud::VMMigration::V1::RunDiskMigrationJobRequest.new(name: name), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, run_disk_migration_job_client_stub.call_count
+      end
+    end
+  end
+
+  def test_cancel_disk_migration_job
+    # Create test objects.
+    client_result = ::Google::Longrunning::Operation.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    cancel_disk_migration_job_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::VMMigration::V1::VMMigration::Rest::ServiceStub.stub :transcode_cancel_disk_migration_job_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, cancel_disk_migration_job_client_stub do
+        # Create client
+        client = ::Google::Cloud::VMMigration::V1::VMMigration::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.cancel_disk_migration_job({ name: name }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.cancel_disk_migration_job name: name do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.cancel_disk_migration_job ::Google::Cloud::VMMigration::V1::CancelDiskMigrationJobRequest.new(name: name) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.cancel_disk_migration_job({ name: name }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.cancel_disk_migration_job(::Google::Cloud::VMMigration::V1::CancelDiskMigrationJobRequest.new(name: name), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, cancel_disk_migration_job_client_stub.call_count
       end
     end
   end
