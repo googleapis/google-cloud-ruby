@@ -222,6 +222,12 @@ module Google
         #     multi-speaker synthesis.
         #
         #     Note: The following fields are mutually exclusive: `multi_speaker_markup`, `text`, `markup`, `ssml`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] prompt
+        #   @return [::String]
+        #     This system instruction is supported only for controllable/promptable voice
+        #     models. If this system instruction is used, we pass the unedited text to
+        #     Gemini-TTS. Otherwise, a default system instruction is used. AI Studio
+        #     calls this system instruction, Style Instructions.
         # @!attribute [rw] custom_pronunciations
         #   @return [::Google::Cloud::TextToSpeech::V1beta1::CustomPronunciations]
         #     Optional. The pronunciation customizations are applied to the input. If
