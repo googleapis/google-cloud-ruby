@@ -198,6 +198,37 @@ module Google
         end
 
         ##
+        # The default collation of the dataset.
+        #
+        # @return [String, nil] The default collation, or `nil` if not present or the object is a
+        #   reference (see {#reference?}).
+        #
+        # @!group Attributes
+        #
+        def default_collation
+          return nil if reference?
+          ensure_full_data!
+          @gapi.default_collation
+        end
+
+        ##
+        # Updates the default collation of the dataset.
+        #
+        # If the dataset is not a full resource representation (see
+        # {#resource_full?}), the full representation will be retrieved before
+        # the update to comply with ETag-based optimistic concurrency control.
+        #
+        # @param [String] new_default_collation The new default collation for the dataset.
+        #
+        # @!group Attributes
+        #
+        def default_collation= new_default_collation
+          reload! unless resource_full?
+          @gapi.update! default_collation: new_default_collation
+          patch_gapi! :default_collation
+        end
+
+        ##
         # The default lifetime of all tables in the dataset, in milliseconds.
         #
         # @return [Integer, nil] The default table expiration in milliseconds,

@@ -107,4 +107,16 @@ describe Google::Cloud::Bigquery::Dataset, :attributes, :mock_bigquery do
   attr_test :default_expiration, 999
   attr_test :etag, "etag123456789"
   attr_test :api_url, "http://googleapi/bigquery/v2/projects/test-project/datasets/my_dataset"
+
+  it "gets full data for default_collation" do
+    mock = Minitest::Mock.new
+    bigquery.service.mocked_service = mock
+    mock.expect :get_dataset, dataset_full_gapi, [project, dataset_id], access_policy_version: nil
+
+    _(dataset.default_collation).must_equal "und:ci"
+
+    # A second call to attribute does not make a second HTTP API call
+    _(dataset.default_collation).must_equal "und:ci"
+    mock.verify
+  end
 end
