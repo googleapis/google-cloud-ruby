@@ -1,5 +1,11 @@
 # Release History
 
+### 0.23.0 (2025-09-04)
+
+#### Features
+
+* Add string value prompt to SynthesisInput ([#30942](https://github.com/googleapis/google-cloud-ruby/issues/30942)) 
+
 ### 0.22.0 (2025-08-27)
 
 #### Features
