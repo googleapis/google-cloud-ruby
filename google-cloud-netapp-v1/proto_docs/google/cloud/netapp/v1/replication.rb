@@ -115,6 +115,10 @@ module Google
         # @!attribute [r] hybrid_replication_type
         #   @return [::Google::Cloud::NetApp::V1::Replication::HybridReplicationType]
         #     Output only. Type of the hybrid replication.
+        # @!attribute [r] hybrid_replication_user_commands
+        #   @return [::Google::Cloud::NetApp::V1::UserCommands]
+        #     Output only. Copy pastable snapmirror commands to be executed on onprem
+        #     cluster by the customer.
         class Replication
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -154,6 +158,13 @@ module Google
 
             # Replication is waiting for SVM peering to be established.
             PENDING_SVM_PEERING = 9
+
+            # Replication is waiting for Commands to be executed on Onprem ONTAP.
+            PENDING_REMOTE_RESYNC = 10
+
+            # Onprem ONTAP is destination and Replication can only be managed from
+            # Onprem.
+            EXTERNALLY_MANAGED_REPLICATION = 11
           end
 
           # New enum values may be added in future to support different replication
@@ -210,6 +221,12 @@ module Google
 
             # Replication is aborted.
             ABORTED = 6
+
+            # Replication is being managed from Onprem ONTAP.
+            EXTERNALLY_MANAGED = 7
+
+            # Peering is yet to be established.
+            PENDING_PEERING = 8
           end
 
           # Hybrid replication type.
@@ -222,36 +239,45 @@ module Google
 
             # Hybrid replication type for continuous replication.
             CONTINUOUS_REPLICATION = 2
+
+            # New field for reversible OnPrem replication, to be used for data
+            # protection.
+            ONPREM_REPLICATION = 3
+
+            # Hybrid replication type for incremental Transfer in the reverse direction
+            # (GCNV is source and Onprem is destination)
+            REVERSE_ONPREM_REPLICATION = 4
           end
         end
 
         # HybridPeeringDetails contains details about the hybrid peering.
-        # @!attribute [rw] subnet_ip
+        # @!attribute [r] subnet_ip
         #   @return [::String]
-        #     Optional. IP address of the subnet.
-        # @!attribute [rw] command
+        #     Output only. IP address of the subnet.
+        # @!attribute [r] command
         #   @return [::String]
-        #     Optional. Copy-paste-able commands to be used on user's ONTAP to accept
+        #     Output only. Copy-paste-able commands to be used on user's ONTAP to accept
         #     peering requests.
-        # @!attribute [rw] command_expiry_time
+        # @!attribute [r] command_expiry_time
         #   @return [::Google::Protobuf::Timestamp]
-        #     Optional. Expiration time for the peering command to be executed on user's
-        #     ONTAP.
-        # @!attribute [rw] passphrase
+        #     Output only. Expiration time for the peering command to be executed on
+        #     user's ONTAP.
+        # @!attribute [r] passphrase
         #   @return [::String]
-        #     Optional. Temporary passphrase generated to accept cluster peering command.
-        # @!attribute [rw] peer_volume_name
+        #     Output only. Temporary passphrase generated to accept cluster peering
+        #     command.
+        # @!attribute [r] peer_volume_name
         #   @return [::String]
-        #     Optional. Name of the user's local source volume to be peered with the
+        #     Output only. Name of the user's local source volume to be peered with the
         #     destination volume.
-        # @!attribute [rw] peer_cluster_name
+        # @!attribute [r] peer_cluster_name
         #   @return [::String]
-        #     Optional. Name of the user's local source cluster to be peered with the
+        #     Output only. Name of the user's local source cluster to be peered with the
         #     destination cluster.
-        # @!attribute [rw] peer_svm_name
+        # @!attribute [r] peer_svm_name
         #   @return [::String]
-        #     Optional. Name of the user's local source vserver svm to be peered with the
-        #     destination vserver svm.
+        #     Output only. Name of the user's local source vserver svm to be peered with
+        #     the destination vserver svm.
         class HybridPeeringDetails
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
