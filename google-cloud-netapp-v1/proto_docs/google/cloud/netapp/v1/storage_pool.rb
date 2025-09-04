@@ -203,11 +203,37 @@ module Google
         #     (Hyperdisk) By default set to false
         # @!attribute [rw] total_throughput_mibps
         #   @return [::Integer]
-        #     Optional. Custom Performance Total Throughput of the pool (in MiB/s)
+        #     Optional. Custom Performance Total Throughput of the pool (in MiBps)
         # @!attribute [rw] total_iops
         #   @return [::Integer]
         #     Optional. Custom Performance Total IOPS of the pool
-        #     If not provided, it will be calculated based on the total_throughput_mibps
+        #     if not provided, it will be calculated based on the total_throughput_mibps
+        # @!attribute [rw] hot_tier_size_gib
+        #   @return [::Integer]
+        #     Optional. Total hot tier capacity for the Storage Pool. It is applicable
+        #     only to Flex service level. It should be less than the minimum storage pool
+        #     size and cannot be more than the current storage pool size. It cannot be
+        #     decreased once set.
+        # @!attribute [rw] enable_hot_tier_auto_resize
+        #   @return [::Boolean]
+        #     Optional. Flag indicating that the hot-tier threshold will be
+        #     auto-increased by 10% of the hot-tier when it hits 100%. Default is true.
+        #     The increment will kick in only if the new size after increment is
+        #     still less than or equal to storage pool size.
+        # @!attribute [rw] qos_type
+        #   @return [::Google::Cloud::NetApp::V1::QosType]
+        #     Optional. QoS (Quality of Service) Type of the storage pool
+        # @!attribute [r] available_throughput_mibps
+        #   @return [::Float]
+        #     Output only. Available throughput of the storage pool (in MiB/s).
+        # @!attribute [r] cold_tier_size_used_gib
+        #   @return [::Integer]
+        #     Output only. Total cold tier data rounded down to the nearest GiB used by
+        #     the storage pool.
+        # @!attribute [r] hot_tier_size_used_gib
+        #   @return [::Integer]
+        #     Output only. Total hot tier data rounded down to the nearest GiB used by
+        #     the storage pool.
         class StoragePool
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
