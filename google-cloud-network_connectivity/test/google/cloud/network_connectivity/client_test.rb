@@ -51,6 +51,17 @@ class Google::Cloud::NetworkConnectivity::ClientConstructionMinitest < Minitest:
     end
   end
 
+  def test_data_transfer_service_grpc
+    skip unless Google::Cloud::NetworkConnectivity.data_transfer_service_available?
+    Gapic::ServiceStub.stub :new, DummyStub.new do
+      grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+      client = Google::Cloud::NetworkConnectivity.data_transfer_service do |config|
+        config.credentials = grpc_channel
+      end
+      assert_kind_of Google::Cloud::NetworkConnectivity::V1::DataTransferService::Client, client
+    end
+  end
+
   def test_hub_service_grpc
     skip unless Google::Cloud::NetworkConnectivity.hub_service_available?
     Gapic::ServiceStub.stub :new, DummyStub.new do
