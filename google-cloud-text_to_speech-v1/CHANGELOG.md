@@ -1,5 +1,11 @@
 # Release History
 
+### 1.11.0 (2025-09-04)
+
+#### Features
+
+* Add prompt to SynthesisInput ([#30943](https://github.com/googleapis/google-cloud-ruby/issues/30943)) 
+
 ### 1.10.0 (2025-08-27)
 
 #### Features
