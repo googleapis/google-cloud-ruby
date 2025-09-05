@@ -15,6 +15,8 @@
 require "helper"
 require "json"
 require "v1/proto/google/cloud/conformance/storage/v1/tests_pb"
+#require_relative "../../../../../v1/proto/google/cloud/conformance/storage/v1/tests_pb"
+
 
 class PostObjectConformanceTest < MockStorage
   def setup
