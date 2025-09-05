@@ -453,6 +453,77 @@ class ::Google::Cloud::VMMigration::V1::VMMigration::ClientTest < Minitest::Test
     end
   end
 
+  def test_fetch_storage_inventory
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::VMMigration::V1::FetchStorageInventoryResponse.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    source = "hello world"
+    type = :STORAGE_TYPE_UNSPECIFIED
+    force_refresh = true
+    page_size = 42
+    page_token = "hello world"
+
+    fetch_storage_inventory_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :fetch_storage_inventory, name
+      assert_kind_of ::Google::Cloud::VMMigration::V1::FetchStorageInventoryRequest, request
+      assert_equal "hello world", request["source"]
+      assert_equal :STORAGE_TYPE_UNSPECIFIED, request["type"]
+      assert_equal true, request["force_refresh"]
+      assert_equal 42, request["page_size"]
+      assert_equal "hello world", request["page_token"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, fetch_storage_inventory_client_stub do
+      # Create client
+      client = ::Google::Cloud::VMMigration::V1::VMMigration::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.fetch_storage_inventory({ source: source, type: type, force_refresh: force_refresh, page_size: page_size, page_token: page_token }) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.fetch_storage_inventory source: source, type: type, force_refresh: force_refresh, page_size: page_size, page_token: page_token do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.fetch_storage_inventory ::Google::Cloud::VMMigration::V1::FetchStorageInventoryRequest.new(source: source, type: type, force_refresh: force_refresh, page_size: page_size, page_token: page_token) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.fetch_storage_inventory({ source: source, type: type, force_refresh: force_refresh, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.fetch_storage_inventory(::Google::Cloud::VMMigration::V1::FetchStorageInventoryRequest.new(source: source, type: type, force_refresh: force_refresh, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, fetch_storage_inventory_client_stub.call_rpc_count
+    end
+  end
+
   def test_list_utilization_reports
     # Create GRPC objects.
     grpc_response = ::Google::Cloud::VMMigration::V1::ListUtilizationReportsResponse.new
@@ -1629,6 +1700,69 @@ class ::Google::Cloud::VMMigration::V1::VMMigration::ClientTest < Minitest::Test
 
       # Verify method calls
       assert_equal 5, finalize_migration_client_stub.call_rpc_count
+    end
+  end
+
+  def test_extend_migration
+    # Create GRPC objects.
+    grpc_response = ::Google::Longrunning::Operation.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    migrating_vm = "hello world"
+
+    extend_migration_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :extend_migration, name
+      assert_kind_of ::Google::Cloud::VMMigration::V1::ExtendMigrationRequest, request
+      assert_equal "hello world", request["migrating_vm"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, extend_migration_client_stub do
+      # Create client
+      client = ::Google::Cloud::VMMigration::V1::VMMigration::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.extend_migration({ migrating_vm: migrating_vm }) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.extend_migration migrating_vm: migrating_vm do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.extend_migration ::Google::Cloud::VMMigration::V1::ExtendMigrationRequest.new(migrating_vm: migrating_vm) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.extend_migration({ migrating_vm: migrating_vm }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.extend_migration(::Google::Cloud::VMMigration::V1::ExtendMigrationRequest.new(migrating_vm: migrating_vm), grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, extend_migration_client_stub.call_rpc_count
     end
   end
 
@@ -3070,6 +3204,915 @@ class ::Google::Cloud::VMMigration::V1::VMMigration::ClientTest < Minitest::Test
 
       # Verify method calls
       assert_equal 5, get_replication_cycle_client_stub.call_rpc_count
+    end
+  end
+
+  def test_list_image_imports
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::VMMigration::V1::ListImageImportsResponse.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    page_size = 42
+    page_token = "hello world"
+    filter = "hello world"
+    order_by = "hello world"
+
+    list_image_imports_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :list_image_imports, name
+      assert_kind_of ::Google::Cloud::VMMigration::V1::ListImageImportsRequest, request
+      assert_equal "hello world", request["parent"]
+      assert_equal 42, request["page_size"]
+      assert_equal "hello world", request["page_token"]
+      assert_equal "hello world", request["filter"]
+      assert_equal "hello world", request["order_by"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, list_image_imports_client_stub do
+      # Create client
+      client = ::Google::Cloud::VMMigration::V1::VMMigration::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.list_image_imports({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.list_image_imports parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.list_image_imports ::Google::Cloud::VMMigration::V1::ListImageImportsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.list_image_imports({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.list_image_imports(::Google::Cloud::VMMigration::V1::ListImageImportsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), grpc_options) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, list_image_imports_client_stub.call_rpc_count
+    end
+  end
+
+  def test_get_image_import
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::VMMigration::V1::ImageImport.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    get_image_import_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :get_image_import, name
+      assert_kind_of ::Google::Cloud::VMMigration::V1::GetImageImportRequest, request
+      assert_equal "hello world", request["name"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, get_image_import_client_stub do
+      # Create client
+      client = ::Google::Cloud::VMMigration::V1::VMMigration::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.get_image_import({ name: name }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.get_image_import name: name do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.get_image_import ::Google::Cloud::VMMigration::V1::GetImageImportRequest.new(name: name) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.get_image_import({ name: name }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.get_image_import(::Google::Cloud::VMMigration::V1::GetImageImportRequest.new(name: name), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, get_image_import_client_stub.call_rpc_count
+    end
+  end
+
+  def test_create_image_import
+    # Create GRPC objects.
+    grpc_response = ::Google::Longrunning::Operation.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    image_import_id = "hello world"
+    image_import = {}
+    request_id = "hello world"
+
+    create_image_import_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :create_image_import, name
+      assert_kind_of ::Google::Cloud::VMMigration::V1::CreateImageImportRequest, request
+      assert_equal "hello world", request["parent"]
+      assert_equal "hello world", request["image_import_id"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::VMMigration::V1::ImageImport), request["image_import"]
+      assert_equal "hello world", request["request_id"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, create_image_import_client_stub do
+      # Create client
+      client = ::Google::Cloud::VMMigration::V1::VMMigration::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.create_image_import({ parent: parent, image_import_id: image_import_id, image_import: image_import, request_id: request_id }) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.create_image_import parent: parent, image_import_id: image_import_id, image_import: image_import, request_id: request_id do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.create_image_import ::Google::Cloud::VMMigration::V1::CreateImageImportRequest.new(parent: parent, image_import_id: image_import_id, image_import: image_import, request_id: request_id) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.create_image_import({ parent: parent, image_import_id: image_import_id, image_import: image_import, request_id: request_id }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.create_image_import(::Google::Cloud::VMMigration::V1::CreateImageImportRequest.new(parent: parent, image_import_id: image_import_id, image_import: image_import, request_id: request_id), grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, create_image_import_client_stub.call_rpc_count
+    end
+  end
+
+  def test_delete_image_import
+    # Create GRPC objects.
+    grpc_response = ::Google::Longrunning::Operation.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+    request_id = "hello world"
+
+    delete_image_import_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :delete_image_import, name
+      assert_kind_of ::Google::Cloud::VMMigration::V1::DeleteImageImportRequest, request
+      assert_equal "hello world", request["name"]
+      assert_equal "hello world", request["request_id"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, delete_image_import_client_stub do
+      # Create client
+      client = ::Google::Cloud::VMMigration::V1::VMMigration::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.delete_image_import({ name: name, request_id: request_id }) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.delete_image_import name: name, request_id: request_id do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.delete_image_import ::Google::Cloud::VMMigration::V1::DeleteImageImportRequest.new(name: name, request_id: request_id) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.delete_image_import({ name: name, request_id: request_id }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.delete_image_import(::Google::Cloud::VMMigration::V1::DeleteImageImportRequest.new(name: name, request_id: request_id), grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, delete_image_import_client_stub.call_rpc_count
+    end
+  end
+
+  def test_list_image_import_jobs
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::VMMigration::V1::ListImageImportJobsResponse.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    page_size = 42
+    page_token = "hello world"
+    filter = "hello world"
+    order_by = "hello world"
+
+    list_image_import_jobs_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :list_image_import_jobs, name
+      assert_kind_of ::Google::Cloud::VMMigration::V1::ListImageImportJobsRequest, request
+      assert_equal "hello world", request["parent"]
+      assert_equal 42, request["page_size"]
+      assert_equal "hello world", request["page_token"]
+      assert_equal "hello world", request["filter"]
+      assert_equal "hello world", request["order_by"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, list_image_import_jobs_client_stub do
+      # Create client
+      client = ::Google::Cloud::VMMigration::V1::VMMigration::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.list_image_import_jobs({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.list_image_import_jobs parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.list_image_import_jobs ::Google::Cloud::VMMigration::V1::ListImageImportJobsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.list_image_import_jobs({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.list_image_import_jobs(::Google::Cloud::VMMigration::V1::ListImageImportJobsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), grpc_options) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, list_image_import_jobs_client_stub.call_rpc_count
+    end
+  end
+
+  def test_get_image_import_job
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::VMMigration::V1::ImageImportJob.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    get_image_import_job_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :get_image_import_job, name
+      assert_kind_of ::Google::Cloud::VMMigration::V1::GetImageImportJobRequest, request
+      assert_equal "hello world", request["name"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, get_image_import_job_client_stub do
+      # Create client
+      client = ::Google::Cloud::VMMigration::V1::VMMigration::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.get_image_import_job({ name: name }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.get_image_import_job name: name do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.get_image_import_job ::Google::Cloud::VMMigration::V1::GetImageImportJobRequest.new(name: name) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.get_image_import_job({ name: name }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.get_image_import_job(::Google::Cloud::VMMigration::V1::GetImageImportJobRequest.new(name: name), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, get_image_import_job_client_stub.call_rpc_count
+    end
+  end
+
+  def test_cancel_image_import_job
+    # Create GRPC objects.
+    grpc_response = ::Google::Longrunning::Operation.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    cancel_image_import_job_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :cancel_image_import_job, name
+      assert_kind_of ::Google::Cloud::VMMigration::V1::CancelImageImportJobRequest, request
+      assert_equal "hello world", request["name"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, cancel_image_import_job_client_stub do
+      # Create client
+      client = ::Google::Cloud::VMMigration::V1::VMMigration::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.cancel_image_import_job({ name: name }) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.cancel_image_import_job name: name do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.cancel_image_import_job ::Google::Cloud::VMMigration::V1::CancelImageImportJobRequest.new(name: name) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.cancel_image_import_job({ name: name }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.cancel_image_import_job(::Google::Cloud::VMMigration::V1::CancelImageImportJobRequest.new(name: name), grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, cancel_image_import_job_client_stub.call_rpc_count
+    end
+  end
+
+  def test_create_disk_migration_job
+    # Create GRPC objects.
+    grpc_response = ::Google::Longrunning::Operation.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    disk_migration_job_id = "hello world"
+    disk_migration_job = {}
+    request_id = "hello world"
+
+    create_disk_migration_job_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :create_disk_migration_job, name
+      assert_kind_of ::Google::Cloud::VMMigration::V1::CreateDiskMigrationJobRequest, request
+      assert_equal "hello world", request["parent"]
+      assert_equal "hello world", request["disk_migration_job_id"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::VMMigration::V1::DiskMigrationJob), request["disk_migration_job"]
+      assert_equal "hello world", request["request_id"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, create_disk_migration_job_client_stub do
+      # Create client
+      client = ::Google::Cloud::VMMigration::V1::VMMigration::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.create_disk_migration_job({ parent: parent, disk_migration_job_id: disk_migration_job_id, disk_migration_job: disk_migration_job, request_id: request_id }) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.create_disk_migration_job parent: parent, disk_migration_job_id: disk_migration_job_id, disk_migration_job: disk_migration_job, request_id: request_id do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.create_disk_migration_job ::Google::Cloud::VMMigration::V1::CreateDiskMigrationJobRequest.new(parent: parent, disk_migration_job_id: disk_migration_job_id, disk_migration_job: disk_migration_job, request_id: request_id) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.create_disk_migration_job({ parent: parent, disk_migration_job_id: disk_migration_job_id, disk_migration_job: disk_migration_job, request_id: request_id }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.create_disk_migration_job(::Google::Cloud::VMMigration::V1::CreateDiskMigrationJobRequest.new(parent: parent, disk_migration_job_id: disk_migration_job_id, disk_migration_job: disk_migration_job, request_id: request_id), grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, create_disk_migration_job_client_stub.call_rpc_count
+    end
+  end
+
+  def test_list_disk_migration_jobs
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::VMMigration::V1::ListDiskMigrationJobsResponse.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    page_size = 42
+    page_token = "hello world"
+    filter = "hello world"
+    order_by = "hello world"
+
+    list_disk_migration_jobs_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :list_disk_migration_jobs, name
+      assert_kind_of ::Google::Cloud::VMMigration::V1::ListDiskMigrationJobsRequest, request
+      assert_equal "hello world", request["parent"]
+      assert_equal 42, request["page_size"]
+      assert_equal "hello world", request["page_token"]
+      assert_equal "hello world", request["filter"]
+      assert_equal "hello world", request["order_by"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, list_disk_migration_jobs_client_stub do
+      # Create client
+      client = ::Google::Cloud::VMMigration::V1::VMMigration::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.list_disk_migration_jobs({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.list_disk_migration_jobs parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.list_disk_migration_jobs ::Google::Cloud::VMMigration::V1::ListDiskMigrationJobsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.list_disk_migration_jobs({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.list_disk_migration_jobs(::Google::Cloud::VMMigration::V1::ListDiskMigrationJobsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), grpc_options) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, list_disk_migration_jobs_client_stub.call_rpc_count
+    end
+  end
+
+  def test_get_disk_migration_job
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::VMMigration::V1::DiskMigrationJob.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    get_disk_migration_job_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :get_disk_migration_job, name
+      assert_kind_of ::Google::Cloud::VMMigration::V1::GetDiskMigrationJobRequest, request
+      assert_equal "hello world", request["name"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, get_disk_migration_job_client_stub do
+      # Create client
+      client = ::Google::Cloud::VMMigration::V1::VMMigration::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.get_disk_migration_job({ name: name }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.get_disk_migration_job name: name do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.get_disk_migration_job ::Google::Cloud::VMMigration::V1::GetDiskMigrationJobRequest.new(name: name) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.get_disk_migration_job({ name: name }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.get_disk_migration_job(::Google::Cloud::VMMigration::V1::GetDiskMigrationJobRequest.new(name: name), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, get_disk_migration_job_client_stub.call_rpc_count
+    end
+  end
+
+  def test_update_disk_migration_job
+    # Create GRPC objects.
+    grpc_response = ::Google::Longrunning::Operation.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    update_mask = {}
+    disk_migration_job = {}
+    request_id = "hello world"
+
+    update_disk_migration_job_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :update_disk_migration_job, name
+      assert_kind_of ::Google::Cloud::VMMigration::V1::UpdateDiskMigrationJobRequest, request
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request["update_mask"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::VMMigration::V1::DiskMigrationJob), request["disk_migration_job"]
+      assert_equal "hello world", request["request_id"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, update_disk_migration_job_client_stub do
+      # Create client
+      client = ::Google::Cloud::VMMigration::V1::VMMigration::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.update_disk_migration_job({ update_mask: update_mask, disk_migration_job: disk_migration_job, request_id: request_id }) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.update_disk_migration_job update_mask: update_mask, disk_migration_job: disk_migration_job, request_id: request_id do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.update_disk_migration_job ::Google::Cloud::VMMigration::V1::UpdateDiskMigrationJobRequest.new(update_mask: update_mask, disk_migration_job: disk_migration_job, request_id: request_id) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.update_disk_migration_job({ update_mask: update_mask, disk_migration_job: disk_migration_job, request_id: request_id }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.update_disk_migration_job(::Google::Cloud::VMMigration::V1::UpdateDiskMigrationJobRequest.new(update_mask: update_mask, disk_migration_job: disk_migration_job, request_id: request_id), grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, update_disk_migration_job_client_stub.call_rpc_count
+    end
+  end
+
+  def test_delete_disk_migration_job
+    # Create GRPC objects.
+    grpc_response = ::Google::Longrunning::Operation.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    delete_disk_migration_job_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :delete_disk_migration_job, name
+      assert_kind_of ::Google::Cloud::VMMigration::V1::DeleteDiskMigrationJobRequest, request
+      assert_equal "hello world", request["name"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, delete_disk_migration_job_client_stub do
+      # Create client
+      client = ::Google::Cloud::VMMigration::V1::VMMigration::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.delete_disk_migration_job({ name: name }) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.delete_disk_migration_job name: name do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.delete_disk_migration_job ::Google::Cloud::VMMigration::V1::DeleteDiskMigrationJobRequest.new(name: name) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.delete_disk_migration_job({ name: name }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.delete_disk_migration_job(::Google::Cloud::VMMigration::V1::DeleteDiskMigrationJobRequest.new(name: name), grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, delete_disk_migration_job_client_stub.call_rpc_count
+    end
+  end
+
+  def test_run_disk_migration_job
+    # Create GRPC objects.
+    grpc_response = ::Google::Longrunning::Operation.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    run_disk_migration_job_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :run_disk_migration_job, name
+      assert_kind_of ::Google::Cloud::VMMigration::V1::RunDiskMigrationJobRequest, request
+      assert_equal "hello world", request["name"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, run_disk_migration_job_client_stub do
+      # Create client
+      client = ::Google::Cloud::VMMigration::V1::VMMigration::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.run_disk_migration_job({ name: name }) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.run_disk_migration_job name: name do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.run_disk_migration_job ::Google::Cloud::VMMigration::V1::RunDiskMigrationJobRequest.new(name: name) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.run_disk_migration_job({ name: name }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.run_disk_migration_job(::Google::Cloud::VMMigration::V1::RunDiskMigrationJobRequest.new(name: name), grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, run_disk_migration_job_client_stub.call_rpc_count
+    end
+  end
+
+  def test_cancel_disk_migration_job
+    # Create GRPC objects.
+    grpc_response = ::Google::Longrunning::Operation.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    cancel_disk_migration_job_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :cancel_disk_migration_job, name
+      assert_kind_of ::Google::Cloud::VMMigration::V1::CancelDiskMigrationJobRequest, request
+      assert_equal "hello world", request["name"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, cancel_disk_migration_job_client_stub do
+      # Create client
+      client = ::Google::Cloud::VMMigration::V1::VMMigration::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.cancel_disk_migration_job({ name: name }) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.cancel_disk_migration_job name: name do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.cancel_disk_migration_job ::Google::Cloud::VMMigration::V1::CancelDiskMigrationJobRequest.new(name: name) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.cancel_disk_migration_job({ name: name }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.cancel_disk_migration_job(::Google::Cloud::VMMigration::V1::CancelDiskMigrationJobRequest.new(name: name), grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, cancel_disk_migration_job_client_stub.call_rpc_count
     end
   end
 

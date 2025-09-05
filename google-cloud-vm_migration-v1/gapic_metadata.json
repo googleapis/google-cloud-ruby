@@ -40,6 +40,11 @@
                 "fetch_inventory"
               ]
             },
+            "FetchStorageInventory": {
+              "methods": [
+                "fetch_storage_inventory"
+              ]
+            },
             "ListUtilizationReports": {
               "methods": [
                 "list_utilization_reports"
@@ -128,6 +133,11 @@
             "FinalizeMigration": {
               "methods": [
                 "finalize_migration"
+              ]
+            },
+            "ExtendMigration": {
+              "methods": [
+                "extend_migration"
               ]
             },
             "CreateCloneJob": {
@@ -238,6 +248,76 @@
             "GetReplicationCycle": {
               "methods": [
                 "get_replication_cycle"
+              ]
+            },
+            "ListImageImports": {
+              "methods": [
+                "list_image_imports"
+              ]
+            },
+            "GetImageImport": {
+              "methods": [
+                "get_image_import"
+              ]
+            },
+            "CreateImageImport": {
+              "methods": [
+                "create_image_import"
+              ]
+            },
+            "DeleteImageImport": {
+              "methods": [
+                "delete_image_import"
+              ]
+            },
+            "ListImageImportJobs": {
+              "methods": [
+                "list_image_import_jobs"
+              ]
+            },
+            "GetImageImportJob": {
+              "methods": [
+                "get_image_import_job"
+              ]
+            },
+            "CancelImageImportJob": {
+              "methods": [
+                "cancel_image_import_job"
+              ]
+            },
+            "CreateDiskMigrationJob": {
+              "methods": [
+                "create_disk_migration_job"
+              ]
+            },
+            "ListDiskMigrationJobs": {
+              "methods": [
+                "list_disk_migration_jobs"
+              ]
+            },
+            "GetDiskMigrationJob": {
+              "methods": [
+                "get_disk_migration_job"
+              ]
+            },
+            "UpdateDiskMigrationJob": {
+              "methods": [
+                "update_disk_migration_job"
+              ]
+            },
+            "DeleteDiskMigrationJob": {
+              "methods": [
+                "delete_disk_migration_job"
+              ]
+            },
+            "RunDiskMigrationJob": {
+              "methods": [
+                "run_disk_migration_job"
+              ]
+            },
+            "CancelDiskMigrationJob": {
+              "methods": [
+                "cancel_disk_migration_job"
               ]
             }
           }

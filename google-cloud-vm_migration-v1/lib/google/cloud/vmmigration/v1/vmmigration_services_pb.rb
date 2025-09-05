@@ -49,6 +49,13 @@ module Google
             # source. Note that this operation lists the VMs on the remote source, as
             # opposed to listing the MigratingVms resources in the vmmigration service.
             rpc :FetchInventory, ::Google::Cloud::VMMigration::V1::FetchInventoryRequest, ::Google::Cloud::VMMigration::V1::FetchInventoryResponse
+            # List remote source's inventory of storage resources.
+            # The remote source is another cloud vendor (e.g. AWS, Azure).
+            # The inventory describes the list of existing storage resources in that
+            # source. Note that this operation lists the resources on the remote source,
+            # as opposed to listing the MigratingVms resources in the vmmigration
+            # service.
+            rpc :FetchStorageInventory, ::Google::Cloud::VMMigration::V1::FetchStorageInventoryRequest, ::Google::Cloud::VMMigration::V1::FetchStorageInventoryResponse
             # Lists Utilization Reports of the given Source.
             rpc :ListUtilizationReports, ::Google::Cloud::VMMigration::V1::ListUtilizationReportsRequest, ::Google::Cloud::VMMigration::V1::ListUtilizationReportsResponse
             # Gets a single Utilization Report.
@@ -93,11 +100,14 @@ module Google
             # Marks a migration as completed, deleting migration resources that are no
             # longer being used. Only applicable after cutover is done.
             rpc :FinalizeMigration, ::Google::Cloud::VMMigration::V1::FinalizeMigrationRequest, ::Google::Longrunning::Operation
+            # Extend the migrating VM time to live.
+            rpc :ExtendMigration, ::Google::Cloud::VMMigration::V1::ExtendMigrationRequest, ::Google::Longrunning::Operation
             # Initiates a Clone of a specific migrating VM.
             rpc :CreateCloneJob, ::Google::Cloud::VMMigration::V1::CreateCloneJobRequest, ::Google::Longrunning::Operation
             # Initiates the cancellation of a running clone job.
             rpc :CancelCloneJob, ::Google::Cloud::VMMigration::V1::CancelCloneJobRequest, ::Google::Longrunning::Operation
-            # Lists CloneJobs of a given migrating VM.
+            # Lists the CloneJobs of a migrating VM. Only 25 most recent CloneJobs are
+            # listed.
             rpc :ListCloneJobs, ::Google::Cloud::VMMigration::V1::ListCloneJobsRequest, ::Google::Cloud::VMMigration::V1::ListCloneJobsResponse
             # Gets details of a single CloneJob.
             rpc :GetCloneJob, ::Google::Cloud::VMMigration::V1::GetCloneJobRequest, ::Google::Cloud::VMMigration::V1::CloneJob
@@ -107,7 +117,8 @@ module Google
             rpc :CreateCutoverJob, ::Google::Cloud::VMMigration::V1::CreateCutoverJobRequest, ::Google::Longrunning::Operation
             # Initiates the cancellation of a running cutover job.
             rpc :CancelCutoverJob, ::Google::Cloud::VMMigration::V1::CancelCutoverJobRequest, ::Google::Longrunning::Operation
-            # Lists CutoverJobs of a given migrating VM.
+            # Lists the CutoverJobs of a migrating VM. Only 25 most recent CutoverJobs
+            # are listed.
             rpc :ListCutoverJobs, ::Google::Cloud::VMMigration::V1::ListCutoverJobsRequest, ::Google::Cloud::VMMigration::V1::ListCutoverJobsResponse
             # Gets details of a single CutoverJob.
             rpc :GetCutoverJob, ::Google::Cloud::VMMigration::V1::GetCutoverJobRequest, ::Google::Cloud::VMMigration::V1::CutoverJob
@@ -154,6 +165,34 @@ module Google
             rpc :ListReplicationCycles, ::Google::Cloud::VMMigration::V1::ListReplicationCyclesRequest, ::Google::Cloud::VMMigration::V1::ListReplicationCyclesResponse
             # Gets details of a single ReplicationCycle.
             rpc :GetReplicationCycle, ::Google::Cloud::VMMigration::V1::GetReplicationCycleRequest, ::Google::Cloud::VMMigration::V1::ReplicationCycle
+            # Lists ImageImports in a given project.
+            rpc :ListImageImports, ::Google::Cloud::VMMigration::V1::ListImageImportsRequest, ::Google::Cloud::VMMigration::V1::ListImageImportsResponse
+            # Gets details of a single ImageImport.
+            rpc :GetImageImport, ::Google::Cloud::VMMigration::V1::GetImageImportRequest, ::Google::Cloud::VMMigration::V1::ImageImport
+            # Creates a new ImageImport in a given project.
+            rpc :CreateImageImport, ::Google::Cloud::VMMigration::V1::CreateImageImportRequest, ::Google::Longrunning::Operation
+            # Deletes a single ImageImport.
+            rpc :DeleteImageImport, ::Google::Cloud::VMMigration::V1::DeleteImageImportRequest, ::Google::Longrunning::Operation
+            # Lists ImageImportJobs in a given project.
+            rpc :ListImageImportJobs, ::Google::Cloud::VMMigration::V1::ListImageImportJobsRequest, ::Google::Cloud::VMMigration::V1::ListImageImportJobsResponse
+            # Gets details of a single ImageImportJob.
+            rpc :GetImageImportJob, ::Google::Cloud::VMMigration::V1::GetImageImportJobRequest, ::Google::Cloud::VMMigration::V1::ImageImportJob
+            # Initiates the cancellation of a running clone job.
+            rpc :CancelImageImportJob, ::Google::Cloud::VMMigration::V1::CancelImageImportJobRequest, ::Google::Longrunning::Operation
+            # Creates a new disk migration job in a given Source.
+            rpc :CreateDiskMigrationJob, ::Google::Cloud::VMMigration::V1::CreateDiskMigrationJobRequest, ::Google::Longrunning::Operation
+            # Lists DiskMigrationJobs in a given Source.
+            rpc :ListDiskMigrationJobs, ::Google::Cloud::VMMigration::V1::ListDiskMigrationJobsRequest, ::Google::Cloud::VMMigration::V1::ListDiskMigrationJobsResponse
+            # Gets details of a single DiskMigrationJob.
+            rpc :GetDiskMigrationJob, ::Google::Cloud::VMMigration::V1::GetDiskMigrationJobRequest, ::Google::Cloud::VMMigration::V1::DiskMigrationJob
+            # Updates the parameters of a single DiskMigrationJob.
+            rpc :UpdateDiskMigrationJob, ::Google::Cloud::VMMigration::V1::UpdateDiskMigrationJobRequest, ::Google::Longrunning::Operation
+            # Deletes a single DiskMigrationJob.
+            rpc :DeleteDiskMigrationJob, ::Google::Cloud::VMMigration::V1::DeleteDiskMigrationJobRequest, ::Google::Longrunning::Operation
+            # Runs the disk migration job.
+            rpc :RunDiskMigrationJob, ::Google::Cloud::VMMigration::V1::RunDiskMigrationJobRequest, ::Google::Longrunning::Operation
+            # Cancels the disk migration job.
+            rpc :CancelDiskMigrationJob, ::Google::Cloud::VMMigration::V1::CancelDiskMigrationJobRequest, ::Google::Longrunning::Operation
           end
 
           Stub = Service.rpc_stub_class

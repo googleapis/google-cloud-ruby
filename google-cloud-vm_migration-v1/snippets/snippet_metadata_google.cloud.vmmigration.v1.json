@@ -252,6 +252,46 @@
       ]
     },
     {
+      "region_tag": "vmmigration_v1_generated_VMMigration_FetchStorageInventory_sync",
+      "title": "Snippet for the fetch_storage_inventory call in the VMMigration service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::VMMigration::V1::VMMigration::Client#fetch_storage_inventory.",
+      "file": "vm_migration/fetch_storage_inventory.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "fetch_storage_inventory",
+        "full_name": "::Google::Cloud::VMMigration::V1::VMMigration::Client#fetch_storage_inventory",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::VMMigration::V1::FetchStorageInventoryRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::VMMigration::V1::FetchStorageInventoryResponse",
+        "client": {
+          "short_name": "VMMigration::Client",
+          "full_name": "::Google::Cloud::VMMigration::V1::VMMigration::Client"
+        },
+        "method": {
+          "short_name": "FetchStorageInventory",
+          "full_name": "google.cloud.vmmigration.v1.VmMigration.FetchStorageInventory",
+          "service": {
+            "short_name": "VmMigration",
+            "full_name": "google.cloud.vmmigration.v1.VmMigration"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
       "region_tag": "vmmigration_v1_generated_VMMigration_ListUtilizationReports_sync",
       "title": "Snippet for the list_utilization_reports call in the VMMigration service",
       "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::VMMigration::V1::VMMigration::Client#list_utilization_reports.",
@@ -955,6 +995,46 @@
         "method": {
           "short_name": "FinalizeMigration",
           "full_name": "google.cloud.vmmigration.v1.VmMigration.FinalizeMigration",
+          "service": {
+            "short_name": "VmMigration",
+            "full_name": "google.cloud.vmmigration.v1.VmMigration"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "vmmigration_v1_generated_VMMigration_ExtendMigration_sync",
+      "title": "Snippet for the extend_migration call in the VMMigration service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::VMMigration::V1::VMMigration::Client#extend_migration.",
+      "file": "vm_migration/extend_migration.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "extend_migration",
+        "full_name": "::Google::Cloud::VMMigration::V1::VMMigration::Client#extend_migration",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::VMMigration::V1::ExtendMigrationRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "VMMigration::Client",
+          "full_name": "::Google::Cloud::VMMigration::V1::VMMigration::Client"
+        },
+        "method": {
+          "short_name": "ExtendMigration",
+          "full_name": "google.cloud.vmmigration.v1.VmMigration.ExtendMigration",
           "service": {
             "short_name": "VmMigration",
             "full_name": "google.cloud.vmmigration.v1.VmMigration"
@@ -1847,6 +1927,566 @@
         {
           "start": 20,
           "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "vmmigration_v1_generated_VMMigration_ListImageImports_sync",
+      "title": "Snippet for the list_image_imports call in the VMMigration service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::VMMigration::V1::VMMigration::Client#list_image_imports.",
+      "file": "vm_migration/list_image_imports.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_image_imports",
+        "full_name": "::Google::Cloud::VMMigration::V1::VMMigration::Client#list_image_imports",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::VMMigration::V1::ListImageImportsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::VMMigration::V1::ListImageImportsResponse",
+        "client": {
+          "short_name": "VMMigration::Client",
+          "full_name": "::Google::Cloud::VMMigration::V1::VMMigration::Client"
+        },
+        "method": {
+          "short_name": "ListImageImports",
+          "full_name": "google.cloud.vmmigration.v1.VmMigration.ListImageImports",
+          "service": {
+            "short_name": "VmMigration",
+            "full_name": "google.cloud.vmmigration.v1.VmMigration"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "vmmigration_v1_generated_VMMigration_GetImageImport_sync",
+      "title": "Snippet for the get_image_import call in the VMMigration service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::VMMigration::V1::VMMigration::Client#get_image_import.",
+      "file": "vm_migration/get_image_import.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_image_import",
+        "full_name": "::Google::Cloud::VMMigration::V1::VMMigration::Client#get_image_import",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::VMMigration::V1::GetImageImportRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::VMMigration::V1::ImageImport",
+        "client": {
+          "short_name": "VMMigration::Client",
+          "full_name": "::Google::Cloud::VMMigration::V1::VMMigration::Client"
+        },
+        "method": {
+          "short_name": "GetImageImport",
+          "full_name": "google.cloud.vmmigration.v1.VmMigration.GetImageImport",
+          "service": {
+            "short_name": "VmMigration",
+            "full_name": "google.cloud.vmmigration.v1.VmMigration"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "vmmigration_v1_generated_VMMigration_CreateImageImport_sync",
+      "title": "Snippet for the create_image_import call in the VMMigration service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::VMMigration::V1::VMMigration::Client#create_image_import.",
+      "file": "vm_migration/create_image_import.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_image_import",
+        "full_name": "::Google::Cloud::VMMigration::V1::VMMigration::Client#create_image_import",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::VMMigration::V1::CreateImageImportRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "VMMigration::Client",
+          "full_name": "::Google::Cloud::VMMigration::V1::VMMigration::Client"
+        },
+        "method": {
+          "short_name": "CreateImageImport",
+          "full_name": "google.cloud.vmmigration.v1.VmMigration.CreateImageImport",
+          "service": {
+            "short_name": "VmMigration",
+            "full_name": "google.cloud.vmmigration.v1.VmMigration"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "vmmigration_v1_generated_VMMigration_DeleteImageImport_sync",
+      "title": "Snippet for the delete_image_import call in the VMMigration service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::VMMigration::V1::VMMigration::Client#delete_image_import.",
+      "file": "vm_migration/delete_image_import.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_image_import",
+        "full_name": "::Google::Cloud::VMMigration::V1::VMMigration::Client#delete_image_import",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::VMMigration::V1::DeleteImageImportRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "VMMigration::Client",
+          "full_name": "::Google::Cloud::VMMigration::V1::VMMigration::Client"
+        },
+        "method": {
+          "short_name": "DeleteImageImport",
+          "full_name": "google.cloud.vmmigration.v1.VmMigration.DeleteImageImport",
+          "service": {
+            "short_name": "VmMigration",
+            "full_name": "google.cloud.vmmigration.v1.VmMigration"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "vmmigration_v1_generated_VMMigration_ListImageImportJobs_sync",
+      "title": "Snippet for the list_image_import_jobs call in the VMMigration service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::VMMigration::V1::VMMigration::Client#list_image_import_jobs.",
+      "file": "vm_migration/list_image_import_jobs.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_image_import_jobs",
+        "full_name": "::Google::Cloud::VMMigration::V1::VMMigration::Client#list_image_import_jobs",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::VMMigration::V1::ListImageImportJobsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::VMMigration::V1::ListImageImportJobsResponse",
+        "client": {
+          "short_name": "VMMigration::Client",
+          "full_name": "::Google::Cloud::VMMigration::V1::VMMigration::Client"
+        },
+        "method": {
+          "short_name": "ListImageImportJobs",
+          "full_name": "google.cloud.vmmigration.v1.VmMigration.ListImageImportJobs",
+          "service": {
+            "short_name": "VmMigration",
+            "full_name": "google.cloud.vmmigration.v1.VmMigration"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "vmmigration_v1_generated_VMMigration_GetImageImportJob_sync",
+      "title": "Snippet for the get_image_import_job call in the VMMigration service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::VMMigration::V1::VMMigration::Client#get_image_import_job.",
+      "file": "vm_migration/get_image_import_job.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_image_import_job",
+        "full_name": "::Google::Cloud::VMMigration::V1::VMMigration::Client#get_image_import_job",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::VMMigration::V1::GetImageImportJobRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::VMMigration::V1::ImageImportJob",
+        "client": {
+          "short_name": "VMMigration::Client",
+          "full_name": "::Google::Cloud::VMMigration::V1::VMMigration::Client"
+        },
+        "method": {
+          "short_name": "GetImageImportJob",
+          "full_name": "google.cloud.vmmigration.v1.VmMigration.GetImageImportJob",
+          "service": {
+            "short_name": "VmMigration",
+            "full_name": "google.cloud.vmmigration.v1.VmMigration"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "vmmigration_v1_generated_VMMigration_CancelImageImportJob_sync",
+      "title": "Snippet for the cancel_image_import_job call in the VMMigration service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::VMMigration::V1::VMMigration::Client#cancel_image_import_job.",
+      "file": "vm_migration/cancel_image_import_job.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "cancel_image_import_job",
+        "full_name": "::Google::Cloud::VMMigration::V1::VMMigration::Client#cancel_image_import_job",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::VMMigration::V1::CancelImageImportJobRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "VMMigration::Client",
+          "full_name": "::Google::Cloud::VMMigration::V1::VMMigration::Client"
+        },
+        "method": {
+          "short_name": "CancelImageImportJob",
+          "full_name": "google.cloud.vmmigration.v1.VmMigration.CancelImageImportJob",
+          "service": {
+            "short_name": "VmMigration",
+            "full_name": "google.cloud.vmmigration.v1.VmMigration"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "vmmigration_v1_generated_VMMigration_CreateDiskMigrationJob_sync",
+      "title": "Snippet for the create_disk_migration_job call in the VMMigration service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::VMMigration::V1::VMMigration::Client#create_disk_migration_job.",
+      "file": "vm_migration/create_disk_migration_job.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_disk_migration_job",
+        "full_name": "::Google::Cloud::VMMigration::V1::VMMigration::Client#create_disk_migration_job",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::VMMigration::V1::CreateDiskMigrationJobRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "VMMigration::Client",
+          "full_name": "::Google::Cloud::VMMigration::V1::VMMigration::Client"
+        },
+        "method": {
+          "short_name": "CreateDiskMigrationJob",
+          "full_name": "google.cloud.vmmigration.v1.VmMigration.CreateDiskMigrationJob",
+          "service": {
+            "short_name": "VmMigration",
+            "full_name": "google.cloud.vmmigration.v1.VmMigration"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "vmmigration_v1_generated_VMMigration_ListDiskMigrationJobs_sync",
+      "title": "Snippet for the list_disk_migration_jobs call in the VMMigration service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::VMMigration::V1::VMMigration::Client#list_disk_migration_jobs.",
+      "file": "vm_migration/list_disk_migration_jobs.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_disk_migration_jobs",
+        "full_name": "::Google::Cloud::VMMigration::V1::VMMigration::Client#list_disk_migration_jobs",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::VMMigration::V1::ListDiskMigrationJobsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::VMMigration::V1::ListDiskMigrationJobsResponse",
+        "client": {
+          "short_name": "VMMigration::Client",
+          "full_name": "::Google::Cloud::VMMigration::V1::VMMigration::Client"
+        },
+        "method": {
+          "short_name": "ListDiskMigrationJobs",
+          "full_name": "google.cloud.vmmigration.v1.VmMigration.ListDiskMigrationJobs",
+          "service": {
+            "short_name": "VmMigration",
+            "full_name": "google.cloud.vmmigration.v1.VmMigration"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "vmmigration_v1_generated_VMMigration_GetDiskMigrationJob_sync",
+      "title": "Snippet for the get_disk_migration_job call in the VMMigration service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::VMMigration::V1::VMMigration::Client#get_disk_migration_job.",
+      "file": "vm_migration/get_disk_migration_job.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_disk_migration_job",
+        "full_name": "::Google::Cloud::VMMigration::V1::VMMigration::Client#get_disk_migration_job",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::VMMigration::V1::GetDiskMigrationJobRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::VMMigration::V1::DiskMigrationJob",
+        "client": {
+          "short_name": "VMMigration::Client",
+          "full_name": "::Google::Cloud::VMMigration::V1::VMMigration::Client"
+        },
+        "method": {
+          "short_name": "GetDiskMigrationJob",
+          "full_name": "google.cloud.vmmigration.v1.VmMigration.GetDiskMigrationJob",
+          "service": {
+            "short_name": "VmMigration",
+            "full_name": "google.cloud.vmmigration.v1.VmMigration"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "vmmigration_v1_generated_VMMigration_UpdateDiskMigrationJob_sync",
+      "title": "Snippet for the update_disk_migration_job call in the VMMigration service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::VMMigration::V1::VMMigration::Client#update_disk_migration_job.",
+      "file": "vm_migration/update_disk_migration_job.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_disk_migration_job",
+        "full_name": "::Google::Cloud::VMMigration::V1::VMMigration::Client#update_disk_migration_job",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::VMMigration::V1::UpdateDiskMigrationJobRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "VMMigration::Client",
+          "full_name": "::Google::Cloud::VMMigration::V1::VMMigration::Client"
+        },
+        "method": {
+          "short_name": "UpdateDiskMigrationJob",
+          "full_name": "google.cloud.vmmigration.v1.VmMigration.UpdateDiskMigrationJob",
+          "service": {
+            "short_name": "VmMigration",
+            "full_name": "google.cloud.vmmigration.v1.VmMigration"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "vmmigration_v1_generated_VMMigration_DeleteDiskMigrationJob_sync",
+      "title": "Snippet for the delete_disk_migration_job call in the VMMigration service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::VMMigration::V1::VMMigration::Client#delete_disk_migration_job.",
+      "file": "vm_migration/delete_disk_migration_job.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_disk_migration_job",
+        "full_name": "::Google::Cloud::VMMigration::V1::VMMigration::Client#delete_disk_migration_job",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::VMMigration::V1::DeleteDiskMigrationJobRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "VMMigration::Client",
+          "full_name": "::Google::Cloud::VMMigration::V1::VMMigration::Client"
+        },
+        "method": {
+          "short_name": "DeleteDiskMigrationJob",
+          "full_name": "google.cloud.vmmigration.v1.VmMigration.DeleteDiskMigrationJob",
+          "service": {
+            "short_name": "VmMigration",
+            "full_name": "google.cloud.vmmigration.v1.VmMigration"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "vmmigration_v1_generated_VMMigration_RunDiskMigrationJob_sync",
+      "title": "Snippet for the run_disk_migration_job call in the VMMigration service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::VMMigration::V1::VMMigration::Client#run_disk_migration_job.",
+      "file": "vm_migration/run_disk_migration_job.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "run_disk_migration_job",
+        "full_name": "::Google::Cloud::VMMigration::V1::VMMigration::Client#run_disk_migration_job",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::VMMigration::V1::RunDiskMigrationJobRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "VMMigration::Client",
+          "full_name": "::Google::Cloud::VMMigration::V1::VMMigration::Client"
+        },
+        "method": {
+          "short_name": "RunDiskMigrationJob",
+          "full_name": "google.cloud.vmmigration.v1.VmMigration.RunDiskMigrationJob",
+          "service": {
+            "short_name": "VmMigration",
+            "full_name": "google.cloud.vmmigration.v1.VmMigration"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "vmmigration_v1_generated_VMMigration_CancelDiskMigrationJob_sync",
+      "title": "Snippet for the cancel_disk_migration_job call in the VMMigration service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::VMMigration::V1::VMMigration::Client#cancel_disk_migration_job.",
+      "file": "vm_migration/cancel_disk_migration_job.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "cancel_disk_migration_job",
+        "full_name": "::Google::Cloud::VMMigration::V1::VMMigration::Client#cancel_disk_migration_job",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::VMMigration::V1::CancelDiskMigrationJobRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "VMMigration::Client",
+          "full_name": "::Google::Cloud::VMMigration::V1::VMMigration::Client"
+        },
+        "method": {
+          "short_name": "CancelDiskMigrationJob",
+          "full_name": "google.cloud.vmmigration.v1.VmMigration.CancelDiskMigrationJob",
+          "service": {
+            "short_name": "VmMigration",
+            "full_name": "google.cloud.vmmigration.v1.VmMigration"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
           "type": "FULL"
         }
       ]
