@@ -1,5 +1,11 @@
 # Changelog
 
+### 2.4.0 (2025-09-05)
+
+#### Features
+
+* add new fields for flex auto tiering ([#30946](https://github.com/googleapis/google-cloud-ruby/issues/30946)) 
+
 ### 2.3.0 (2025-05-16)
 
 #### Features
