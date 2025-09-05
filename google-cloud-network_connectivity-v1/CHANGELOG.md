@@ -1,5 +1,11 @@
 # Changelog
 
+### 1.8.0 (2025-09-05)
+
+#### Features
+
+* introduce DataTransfer APIs ([#30950](https://github.com/googleapis/google-cloud-ruby/issues/30950)) 
+
 ### 1.7.0 (2025-07-24)
 
 #### Features
