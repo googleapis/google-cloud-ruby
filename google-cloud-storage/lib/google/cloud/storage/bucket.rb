@@ -1542,6 +1542,8 @@ module Google
                  skip_lookup: nil,
                  encryption_key: nil,
                  soft_deleted: nil
+          Google::Apis.logger.level = Logger::DEBUG
+
           ensure_service!
           if skip_lookup
             return File.new_lazy name, path, service,
