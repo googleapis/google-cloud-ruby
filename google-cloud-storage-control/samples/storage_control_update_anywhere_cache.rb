@@ -27,7 +27,7 @@ def update_anywhere_cache bucket_name:, anywhere_cache_id:
   # Set project to "_" to signify global bucket
   parent = "projects/_/buckets/#{bucket_name}"
   name = "#{parent}/anywhereCaches/#{anywhere_cache_id}"
-  ttl_in_seconds= 7200
+  ttl_in_seconds = 7200
 
   anywhere_cache = Google::Cloud::Storage::Control::V2::AnywhereCache.new(
     name: name,
@@ -43,13 +43,13 @@ def update_anywhere_cache bucket_name:, anywhere_cache_id:
   # The cache is identified by the specified ID.
   begin
     operation = storage_control_client.update_anywhere_cache request
-    if operation.class == Gapic::Operation
+    if operation.instance_of?(Gapic::Operation)
       puts "AnywhereCache operation created - #{operation.name}"
       get_request = Google::Cloud::Storage::Control::V2::GetAnywhereCacheRequest.new(
         name: name
       )
       result = storage_control_client.get_anywhere_cache get_request
-      puts "AnywhereCache #{result.name} updated" if operation.class == Gapic::Operation
+      puts "AnywhereCache #{result.name} updated" 
     else
       puts "AnywhereCache update operation failed"
     end
