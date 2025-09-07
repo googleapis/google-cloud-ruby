@@ -41,7 +41,7 @@ def create_anywhere_cache bucket_name:, zone:
   # The cache is created in the specified bucket.
   begin
     operation = storage_control_client.create_anywhere_cache request
-    if operation.instance_of?(Gapic::Operation)
+    if operation.instance_of? Gapic::Operation
       puts "AnywhereCache operation created - #{operation.name}"
       get_request = Google::Cloud::Storage::Control::V2::GetAnywhereCacheRequest.new(
         name: name
