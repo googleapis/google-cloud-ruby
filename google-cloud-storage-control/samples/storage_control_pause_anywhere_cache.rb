@@ -24,10 +24,11 @@ def pause_anywhere_cache bucket_name:, anywhere_cache_id:
 
   # Create a client object. The client can be reused for multiple calls.
   storage_control_client = Google::Cloud::Storage::Control.storage_control
+  # Set project to "_" to signify global bucket
   parent = "projects/_/buckets/#{bucket_name}"
-  name =  "#{parent}/anywhereCaches/#{anywhere_cache_id}"
+  name = "#{parent}/anywhereCaches/#{anywhere_cache_id}"
 
-  # Create a request. Replace the placeholder values with actual data.
+  # Create a request.
   request = Google::Cloud::Storage::Control::V2::PauseAnywhereCacheRequest.new(
     name: name
   )

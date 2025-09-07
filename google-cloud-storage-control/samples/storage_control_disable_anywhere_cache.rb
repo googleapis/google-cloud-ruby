@@ -24,8 +24,9 @@ def disable_anywhere_cache bucket_name:, anywhere_cache_id:
 
   # Create a client object. The client can be reused for multiple calls.
   storage_control_client = Google::Cloud::Storage::Control.storage_control
+  # Set project to "_" to signify global bucket
   parent = "projects/_/buckets/#{bucket_name}"
-  name =  "#{parent}/anywhereCaches/#{anywhere_cache_id}"
+  name = "#{parent}/anywhereCaches/#{anywhere_cache_id}"
 
   # Create a request.
   request = Google::Cloud::Storage::Control::V2::DisableAnywhereCacheRequest.new(
@@ -35,7 +36,7 @@ def disable_anywhere_cache bucket_name:, anywhere_cache_id:
   # The cache can be re-enabled later.
   begin
     result = storage_control_client.disable_anywhere_cache request
-    puts "AnywhereCache #{result.name} #{result.state}"
+    puts "AnywhereCache #{result.name} #{result.state} "
   rescue StandardError => e
     puts "Error disabling AnywhereCache: #{e.message}"
   end

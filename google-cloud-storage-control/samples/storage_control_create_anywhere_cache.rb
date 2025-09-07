@@ -24,6 +24,7 @@ def create_anywhere_cache bucket_name:, zone:
 
   # Create a client object. The client can be reused for multiple calls.
   storage_control_client = Google::Cloud::Storage::Control.storage_control
+  # Set project to "_" to signify global bucket
   parent = "projects/_/buckets/#{bucket_name}"
   name = "#{parent}/anywhereCaches/#{zone}"
 
@@ -40,24 +41,21 @@ def create_anywhere_cache bucket_name:, zone:
   # The cache is created in the specified bucket.
   begin
     operation = storage_control_client.create_anywhere_cache request
-    if operation.response? == false
-
-      puts "********************AnywhereCache operation created - #{operation.name}"
-      if !operation.done?
-        get_request = Google::Cloud::Storage::Control::V2::GetAnywhereCacheRequest.new(
-            name: name
-          )
+    if operation.class == Gapic::Operation
+      puts "AnywhereCache operation created - #{operation.name}"
+      get_request = Google::Cloud::Storage::Control::V2::GetAnywhereCacheRequest.new(
+        name: name
+      )
+      result = storage_control_client.get_anywhere_cache get_request
+      until result.state == "running"
+        sleep 1800 # Wait for 1/2 hour before checking again
         result = storage_control_client.get_anywhere_cache get_request
-        while result.state == "creating"
-          sleep 1800 # Wait for 1/2 hour before checking again
-          result = storage_control_client.get_anywhere_cache get_request
-          puts "********************AnywhereCache operation refreshed"
-          puts "********************AnywhereCache operation status check retried"
-        end
+        puts "AnywhereCache status check retried"
       end
+      puts "AnywhereCache created - #{result.name}"
+    else
+      puts "AnywhereCache create operation failed"
     end
-    puts "********************AnywhereCache create operation completed - #{operation.name}"
-
   rescue StandardError => e
     puts "Error creating AnywhereCache: #{e.message}"
   end

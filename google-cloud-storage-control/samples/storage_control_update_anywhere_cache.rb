@@ -14,22 +14,24 @@
 
 # [START storage_control_update_anywhere_cache]
 require "google/cloud/storage/control"
+require "google/cloud/storage/control/v2"
 
 def update_anywhere_cache bucket_name:, anywhere_cache_id:
   # The ID of your GCS bucket
   # bucket_name = "your-unique-bucket-name"
   # A value that, along with the bucket's name, uniquely identifies the cache
   # anywhere_cache_id = "us-east1-b"
-  require "google/cloud/storage/control/v2"
 
   # Create a client object. The client can be reused for multiple calls.
   storage_control_client = Google::Cloud::Storage::Control.storage_control
+  # Set project to "_" to signify global bucket
   parent = "projects/_/buckets/#{bucket_name}"
   name = "#{parent}/anywhereCaches/#{anywhere_cache_id}"
+  ttl_in_seconds= 7200
 
   anywhere_cache = Google::Cloud::Storage::Control::V2::AnywhereCache.new(
     name: name,
-    ttl: 7200
+    ttl: ttl_in_seconds
   )
   mask = Google::Protobuf::FieldMask.new paths: ["ttl"]
   # Create a request.
@@ -40,8 +42,17 @@ def update_anywhere_cache bucket_name:, anywhere_cache_id:
   # The request updates the cache in the specified bucket.
   # The cache is identified by the specified ID.
   begin
-    result = storage_control_client.update_anywhere_cache request
-    puts "AnywhereCache updated - #{result.name}"
+    operation = storage_control_client.update_anywhere_cache request
+    if operation.class == Gapic::Operation
+      puts "AnywhereCache operation created - #{operation.name}"
+      get_request = Google::Cloud::Storage::Control::V2::GetAnywhereCacheRequest.new(
+        name: name
+      )
+      result = storage_control_client.get_anywhere_cache get_request
+      puts "AnywhereCache #{result.name} updated" if operation.class == Gapic::Operation
+    else
+      puts "AnywhereCache update operation failed"
+    end
   rescue StandardError => e
     puts "Error updating AnywhereCache: #{e.message}"
   end
