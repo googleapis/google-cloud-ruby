@@ -21,8 +21,10 @@ def list_anywhere_caches bucket_name:
 
   # Create a client object. The client can be reused for multiple calls.
   storage_control_client = Google::Cloud::Storage::Control.storage_control
+  # Set project to "_" to signify global bucket
   parent = "projects/_/buckets/#{bucket_name}"
 
+  # Create a request.
   request = Google::Cloud::Storage::Control::V2::ListAnywhereCachesRequest.new(
     parent: parent
   )
@@ -31,7 +33,7 @@ def list_anywhere_caches bucket_name:
   begin
     result = storage_control_client.list_anywhere_caches request
     result.response.anywhere_caches.each do |item|
-      puts item.name
+      puts "AnywhereCache #{item.name} found in list"
     end
   rescue StandardError => e
     puts "Error listing AnywhereCaches: #{e.message}"
