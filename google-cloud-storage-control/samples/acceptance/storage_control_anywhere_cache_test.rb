@@ -33,7 +33,7 @@ describe "Storage Control Anywhere Cache" do
   end
 
   after do
-    delete_bucket_helper bucket_name until count_anywhere_caches(bucket_name)
+    delete_bucket_helper bucket_name until count_anywhere_caches bucket_name
   end
 
   it "handles Anywhere cache lifecycle in sequence" do
