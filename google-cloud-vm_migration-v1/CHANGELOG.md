@@ -1,5 +1,11 @@
 # Changelog
 
+### 2.3.0 (2025-09-08)
+
+#### Features
+
+* [‎google-cloud-vm_migration-v1] Azure as a source ([#30951](https://github.com/googleapis/google-cloud-ruby/issues/30951)) 
+
 ### 2.2.0 (2025-05-12)
 
 #### Features
