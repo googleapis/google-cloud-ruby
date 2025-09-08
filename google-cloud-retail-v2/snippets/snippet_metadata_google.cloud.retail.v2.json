@@ -772,6 +772,86 @@
       ]
     },
     {
+      "region_tag": "retail_v2_generated_SearchService_Search_sync",
+      "title": "Snippet for the search call in the SearchService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Retail::V2::SearchService::Client#search.",
+      "file": "search_service/search.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "search",
+        "full_name": "::Google::Cloud::Retail::V2::SearchService::Client#search",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Retail::V2::SearchRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Retail::V2::SearchResponse",
+        "client": {
+          "short_name": "SearchService::Client",
+          "full_name": "::Google::Cloud::Retail::V2::SearchService::Client"
+        },
+        "method": {
+          "short_name": "Search",
+          "full_name": "google.cloud.retail.v2.SearchService.Search",
+          "service": {
+            "short_name": "SearchService",
+            "full_name": "google.cloud.retail.v2.SearchService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "retail_v2_generated_ConversationalSearchService_ConversationalSearch_sync",
+      "title": "Snippet for the conversational_search call in the ConversationalSearchService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Retail::V2::ConversationalSearchService::Client#conversational_search.",
+      "file": "conversational_search_service/conversational_search.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "conversational_search",
+        "full_name": "::Google::Cloud::Retail::V2::ConversationalSearchService::Client#conversational_search",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Retail::V2::ConversationalSearchRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Retail::V2::ConversationalSearchResponse",
+        "client": {
+          "short_name": "ConversationalSearchService::Client",
+          "full_name": "::Google::Cloud::Retail::V2::ConversationalSearchService::Client"
+        },
+        "method": {
+          "short_name": "ConversationalSearch",
+          "full_name": "google.cloud.retail.v2.ConversationalSearchService.ConversationalSearch",
+          "service": {
+            "short_name": "ConversationalSearchService",
+            "full_name": "google.cloud.retail.v2.ConversationalSearchService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 49,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
       "region_tag": "retail_v2_generated_GenerativeQuestionService_UpdateGenerativeQuestionsFeatureConfig_sync",
       "title": "Snippet for the update_generative_questions_feature_config call in the GenerativeQuestionService service",
       "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Retail::V2::GenerativeQuestionService::Client#update_generative_questions_feature_config.",
@@ -1807,46 +1887,6 @@
         {
           "start": 20,
           "end": 53,
-          "type": "FULL"
-        }
-      ]
-    },
-    {
-      "region_tag": "retail_v2_generated_SearchService_Search_sync",
-      "title": "Snippet for the search call in the SearchService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Retail::V2::SearchService::Client#search.",
-      "file": "search_service/search.rb",
-      "language": "RUBY",
-      "client_method": {
-        "short_name": "search",
-        "full_name": "::Google::Cloud::Retail::V2::SearchService::Client#search",
-        "async": false,
-        "parameters": [
-          {
-            "type": "::Google::Cloud::Retail::V2::SearchRequest",
-            "name": "request"
-          }
-        ],
-        "result_type": "::Google::Cloud::Retail::V2::SearchResponse",
-        "client": {
-          "short_name": "SearchService::Client",
-          "full_name": "::Google::Cloud::Retail::V2::SearchService::Client"
-        },
-        "method": {
-          "short_name": "Search",
-          "full_name": "google.cloud.retail.v2.SearchService.Search",
-          "service": {
-            "short_name": "SearchService",
-            "full_name": "google.cloud.retail.v2.SearchService"
-          }
-        }
-      },
-      "canonical": true,
-      "origin": "API_DEFINITION",
-      "segments": [
-        {
-          "start": 20,
-          "end": 50,
           "type": "FULL"
         }
       ]
