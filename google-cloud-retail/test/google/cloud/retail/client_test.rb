@@ -125,6 +125,48 @@ class Google::Cloud::Retail::ClientConstructionMinitest < Minitest::Test
     end
   end
 
+  def test_search_service_grpc
+    skip unless Google::Cloud::Retail.search_service_available? transport: :grpc
+    Gapic::ServiceStub.stub :new, DummyStub.new do
+      grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+      client = Google::Cloud::Retail.search_service transport: :grpc do |config|
+        config.credentials = grpc_channel
+      end
+      assert_kind_of Google::Cloud::Retail::V2::SearchService::Client, client
+    end
+  end
+
+  def test_search_service_rest
+    skip unless Google::Cloud::Retail.search_service_available? transport: :rest
+    Gapic::Rest::ClientStub.stub :new, DummyStub.new do
+      client = Google::Cloud::Retail.search_service transport: :rest do |config|
+        config.credentials = :dummy_credentials
+      end
+      assert_kind_of Google::Cloud::Retail::V2::SearchService::Rest::Client, client
+    end
+  end
+
+  def test_conversational_search_service_grpc
+    skip unless Google::Cloud::Retail.conversational_search_service_available? transport: :grpc
+    Gapic::ServiceStub.stub :new, DummyStub.new do
+      grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+      client = Google::Cloud::Retail.conversational_search_service transport: :grpc do |config|
+        config.credentials = grpc_channel
+      end
+      assert_kind_of Google::Cloud::Retail::V2::ConversationalSearchService::Client, client
+    end
+  end
+
+  def test_conversational_search_service_rest
+    skip unless Google::Cloud::Retail.conversational_search_service_available? transport: :rest
+    Gapic::Rest::ClientStub.stub :new, DummyStub.new do
+      client = Google::Cloud::Retail.conversational_search_service transport: :rest do |config|
+        config.credentials = :dummy_credentials
+      end
+      assert_kind_of Google::Cloud::Retail::V2::ConversationalSearchService::Rest::Client, client
+    end
+  end
+
   def test_generative_question_service_grpc
     skip unless Google::Cloud::Retail.generative_question_service_available? transport: :grpc
     Gapic::ServiceStub.stub :new, DummyStub.new do
@@ -206,27 +248,6 @@ class Google::Cloud::Retail::ClientConstructionMinitest < Minitest::Test
         config.credentials = :dummy_credentials
       end
       assert_kind_of Google::Cloud::Retail::V2::ProductService::Rest::Client, client
-    end
-  end
-
-  def test_search_service_grpc
-    skip unless Google::Cloud::Retail.search_service_available? transport: :grpc
-    Gapic::ServiceStub.stub :new, DummyStub.new do
-      grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-      client = Google::Cloud::Retail.search_service transport: :grpc do |config|
-        config.credentials = grpc_channel
-      end
-      assert_kind_of Google::Cloud::Retail::V2::SearchService::Client, client
-    end
-  end
-
-  def test_search_service_rest
-    skip unless Google::Cloud::Retail.search_service_available? transport: :rest
-    Gapic::Rest::ClientStub.stub :new, DummyStub.new do
-      client = Google::Cloud::Retail.search_service transport: :rest do |config|
-        config.credentials = :dummy_credentials
-      end
-      assert_kind_of Google::Cloud::Retail::V2::SearchService::Rest::Client, client
     end
   end
 
