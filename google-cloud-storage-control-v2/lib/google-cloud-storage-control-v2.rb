@@ -18,4 +18,5 @@
 
 # This gem does not autoload during Bundler.require. To load this gem,
 # issue explicit require statements for the packages desired, e.g.:
+# require "google/iam/v1"
 # require "google/cloud/storage/control/v2"

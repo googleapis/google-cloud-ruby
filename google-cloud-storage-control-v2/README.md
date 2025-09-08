@@ -30,11 +30,11 @@ In order to use this library, you first need to go through the following steps:
 ## Quick Start
 
 ```ruby
-require "google/cloud/storage/control/v2"
+require "google/iam/v1"
 
-client = ::Google::Cloud::Storage::Control::V2::StorageControl::Client.new
-request = ::Google::Cloud::Storage::Control::V2::CreateFolderRequest.new # (request fields as keyword arguments...)
-response = client.create_folder request
+client = ::Google::Iam::V1::IAMPolicy::Client.new
+request = ::Google::Iam::V1::SetIamPolicyRequest.new # (request fields as keyword arguments...)
+response = client.set_iam_policy request
 ```
 
 View the [Client Library Documentation](https://cloud.google.com/ruby/docs/reference/google-cloud-storage-control-v2/latest)
@@ -72,10 +72,10 @@ You can customize logging by modifying the `logger` configuration when
 constructing a client object. For example:
 
 ```ruby
-require "google/cloud/storage/control/v2"
+require "google/iam/v1"
 require "logger"
 
-client = ::Google::Cloud::Storage::Control::V2::StorageControl::Client.new do |config|
+client = ::Google::Iam::V1::IAMPolicy::Client.new do |config|
   config.logger = Logger.new "my-app.log"
 end
 ```

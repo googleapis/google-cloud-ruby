@@ -54,9 +54,9 @@ whenever possible.
 To configure a credentials file for an individual client initialization:
 
 ```ruby
-require "google/cloud/storage/control/v2"
+require "google/iam/v1"
 
-client = ::Google::Cloud::Storage::Control::V2::StorageControl::Client.new do |config|
+client = ::Google::Iam::V1::IAMPolicy::Client.new do |config|
   config.credentials = "path/to/credentialfile.json"
 end
 ```
@@ -64,13 +64,13 @@ end
 To configure a credentials file globally for all clients:
 
 ```ruby
-require "google/cloud/storage/control/v2"
+require "google/iam/v1"
 
-::Google::Cloud::Storage::Control::V2::StorageControl::Client.configure do |config|
+::Google::Iam::V1::IAMPolicy::Client.configure do |config|
   config.credentials = "path/to/credentialfile.json"
 end
 
-client = ::Google::Cloud::Storage::Control::V2::StorageControl::Client.new
+client = ::Google::Iam::V1::IAMPolicy::Client.new
 ```
 
 ### Environment Variables
@@ -96,11 +96,11 @@ checks for credentials are:
 * `GOOGLE_APPLICATION_CREDENTIALS` - Path to JSON file
 
 ```ruby
-require "google/cloud/storage/control/v2"
+require "google/iam/v1"
 
 ENV["GOOGLE_APPLICATION_CREDENTIALS"] = "path/to/credentialfile.json"
 
-client = ::Google::Cloud::Storage::Control::V2::StorageControl::Client.new
+client = ::Google::Iam::V1::IAMPolicy::Client.new
 ```
 
 ### Local ADC file
