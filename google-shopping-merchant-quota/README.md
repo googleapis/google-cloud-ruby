@@ -33,6 +33,16 @@ In order to use this library, you first need to go through the following steps:
 1. [Enable the API.](https://console.cloud.google.com/apis/library/merchantapi.googleapis.com)
 1. [Set up authentication.](AUTHENTICATION.md)
 
+## Quick Start
+
+```ruby
+require "google/shopping/merchant/quota"
+
+client = Google::Shopping::Merchant::Quota.quota_service
+request = ::Google::Shopping::Merchant::Quota::V1beta::ListQuotaGroupsRequest.new # (request fields as keyword arguments...)
+response = client.list_quota_groups request
+```
+
 ## Debug Logging
 
 This library comes with opt-in Debug Logging that can help you troubleshoot

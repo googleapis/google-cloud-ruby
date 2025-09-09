@@ -34,6 +34,16 @@ In order to use this library, you first need to go through the following steps:
 1. [Enable the API.](https://console.cloud.google.com/apis/library/merchantapi.googleapis.com)
 1. [Set up authentication.](AUTHENTICATION.md)
 
+## Quick Start
+
+```ruby
+require "google/shopping/merchant/reviews"
+
+client = Google::Shopping::Merchant::Reviews.merchant_reviews_service
+request = ::Google::Shopping::Merchant::Reviews::V1beta::GetMerchantReviewRequest.new # (request fields as keyword arguments...)
+response = client.get_merchant_review request
+```
+
 ## Debug Logging
 
 This library comes with opt-in Debug Logging that can help you troubleshoot
