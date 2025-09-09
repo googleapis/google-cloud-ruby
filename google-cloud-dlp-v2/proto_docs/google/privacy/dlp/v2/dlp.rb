@@ -1088,7 +1088,7 @@ module Google
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
 
-          # All result fields mentioned below are updated while the job is processing.
+          # All Result fields are updated while the job is processing.
           # @!attribute [rw] processed_bytes
           #   @return [::Integer]
           #     Total size in bytes that were processed.
@@ -1210,6 +1210,32 @@ module Google
           end
         end
 
+        # Locations at which a feature can be used.
+        # @!attribute [rw] regionalization_scope
+        #   @return [::Google::Cloud::Dlp::V2::LocationSupport::RegionalizationScope]
+        #     The current scope for location on this feature. This may expand over time.
+        # @!attribute [rw] locations
+        #   @return [::Array<::String>]
+        #     Specific locations where the feature may be used.
+        #     Examples: us-central1, us, asia, global
+        #     If scope is ANY_LOCATION, no regions will be listed.
+        class LocationSupport
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # The location scope for a feature.
+          module RegionalizationScope
+            # Invalid.
+            REGIONALIZATION_SCOPE_UNSPECIFIED = 0
+
+            # Feature may be used with one or more regions. See locations for details.
+            REGIONAL = 1
+
+            # Feature may be used anywhere. Default value.
+            ANY_LOCATION = 2
+          end
+        end
+
         # InfoType description.
         # @!attribute [rw] name
         #   @return [::String]
@@ -1224,6 +1250,9 @@ module Google
         #   @return [::String]
         #     Description of the infotype. Translated when language is provided in the
         #     request.
+        # @!attribute [rw] location_support
+        #   @return [::Google::Cloud::Dlp::V2::LocationSupport]
+        #     Locations at which this feature can be used. May change over time.
         # @!attribute [rw] example
         #   @return [::String]
         #     A sample that is a true positive for this infoType.
@@ -1288,6 +1317,9 @@ module Google
 
             # The infoType is typically used in Australia.
             AUSTRALIA = 3
+
+            # The infoType is typically used in Austria.
+            AUSTRIA = 53
 
             # The infoType is typically used in Azerbaijan.
             AZERBAIJAN = 48
@@ -1564,7 +1596,7 @@ module Google
         #   @return [::String]
         #     A column can be tagged with a custom tag. In this case, the user must
         #     indicate an auxiliary table that contains statistical information on
-        #     the possible values of this column (below).
+        #     the possible values of this column.
         #
         #     Note: The following fields are mutually exclusive: `custom_tag`, `info_type`, `inferred`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] inferred
@@ -1608,7 +1640,7 @@ module Google
           #   @return [::String]
           #     A column can be tagged with a custom tag. In this case, the user must
           #     indicate an auxiliary table that contains statistical information on
-          #     the possible values of this column (below).
+          #     the possible values of this column.
           class QuasiIdentifierField
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -1754,7 +1786,7 @@ module Google
             #   @return [::String]
             #     A column can be tagged with a custom tag. In this case, the user must
             #     indicate an auxiliary table that contains statistical information on
-            #     the possible values of this column (below).
+            #     the possible values of this column.
             #
             #     Note: The following fields are mutually exclusive: `custom_tag`, `info_type`, `inferred`. If a field in that set is populated, all other fields in the set will automatically be cleared.
             # @!attribute [rw] inferred
@@ -3730,12 +3762,12 @@ module Google
           # @!attribute [rw] file_types_to_transform
           #   @return [::Array<::Google::Cloud::Dlp::V2::FileType>]
           #     List of user-specified file type groups to transform. If specified, only
-          #     the files with these file types will be transformed. If empty, all
-          #     supported files will be transformed. Supported types may be automatically
-          #     added over time. If a file type is set in this field that isn't supported
-          #     by the Deidentify action then the job will fail and will not be
-          #     successfully created/started. Currently the only file types supported
-          #     are: IMAGES, TEXT_FILES, CSV, TSV.
+          #     the files with these file types are transformed. If empty, all
+          #     supported files are transformed. Supported types may be automatically
+          #     added over time. Any unsupported file types that are set in this field
+          #     are excluded from de-identification. An error is recorded for each
+          #     unsupported file in the TransformationDetails output table. Currently the
+          #     only file types supported are: IMAGES, TEXT_FILES, CSV, TSV.
           class Deidentify
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -6757,6 +6789,7 @@ module Google
         #         - `resource_visibility`: PUBLIC|RESTRICTED
         #         - `status_code` - an RPC status code as defined in
         #         https://github.com/googleapis/googleapis/blob/master/google/rpc/code.proto
+        #
         #     * The operator must be `=` or `!=`.
         #
         #     Examples:
@@ -6994,7 +7027,8 @@ module Google
         #     May be empty if the profile is still being generated.
         # @!attribute [rw] state
         #   @return [::Google::Cloud::Dlp::V2::TableDataProfile::State]
-        #     State of a profile.
+        #     State of a profile. This will always be set to DONE when the table data
+        #     profile is written to another service like BigQuery or Pub/Sub.
         # @!attribute [rw] sensitivity_score
         #   @return [::Google::Cloud::Dlp::V2::SensitivityScore]
         #     The sensitivity score of this table.
@@ -7055,6 +7089,9 @@ module Google
         # @!attribute [rw] related_resources
         #   @return [::Array<::Google::Cloud::Dlp::V2::RelatedResource>]
         #     Resources related to this profile.
+        # @!attribute [rw] domains
+        #   @return [::Array<::Google::Cloud::Dlp::V2::Domain>]
+        #     Domains associated with the profile.
         class TableDataProfile
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -7397,6 +7434,9 @@ module Google
         # @!attribute [rw] related_resources
         #   @return [::Array<::Google::Cloud::Dlp::V2::RelatedResource>]
         #     Resources related to this profile.
+        # @!attribute [rw] domains
+        #   @return [::Array<::Google::Cloud::Dlp::V2::Domain>]
+        #     Domains associated with the profile.
         class FileStoreDataProfile
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -7605,6 +7645,7 @@ module Google
         #         - `resource_visibility`: PUBLIC|RESTRICTED
         #         - `status_code` - an RPC status code as defined in
         #         https://github.com/googleapis/googleapis/blob/master/google/rpc/code.proto
+        #
         #     * The operator must be `=` or `!=`.
         #
         #     Examples:
@@ -8040,34 +8081,53 @@ module Google
         # ProcessingLocation will redirect OCR to a location where OCR is provided.
         # @!attribute [rw] image_fallback_location
         #   @return [::Google::Cloud::Dlp::V2::ProcessingLocation::ImageFallbackLocation]
-        #     Image processing will fall back using this configuration.
+        #     Image processing falls back using this configuration.
+        # @!attribute [rw] document_fallback_location
+        #   @return [::Google::Cloud::Dlp::V2::ProcessingLocation::DocumentFallbackLocation]
+        #     Document processing falls back using this configuration.
         class ProcessingLocation
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
 
-          # Processing will happen in a multi-region that contains the current region
+          # Processing occurs in a multi-region that contains the current region
           # if available.
           class MultiRegionProcessing
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
 
-          # Processing will happen in the global region.
+          # Processing occurs in the global region.
           class GlobalProcessing
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
 
-          # Configure image processing to fall back to the configured processing option
-          # below if unavailable in the request location.
+          # Configure image processing to fall back to any of the following processing
+          # options if image processing is unavailable in the original request
+          # location.
           # @!attribute [rw] multi_region_processing
           #   @return [::Google::Cloud::Dlp::V2::ProcessingLocation::MultiRegionProcessing]
-          #     Processing will happen in a multi-region that contains the current region
+          #     Processing occurs in a multi-region that contains the current region
           #     if available.
           # @!attribute [rw] global_processing
           #   @return [::Google::Cloud::Dlp::V2::ProcessingLocation::GlobalProcessing]
-          #     Processing will happen in the global region.
+          #     Processing occurs in the global region.
           class ImageFallbackLocation
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Configure document processing to fall back to any of the following
+          # processing options if document processing is unavailable in the original
+          # request location.
+          # @!attribute [rw] multi_region_processing
+          #   @return [::Google::Cloud::Dlp::V2::ProcessingLocation::MultiRegionProcessing]
+          #     Processing occurs in a multi-region that contains the current region
+          #     if available.
+          # @!attribute [rw] global_processing
+          #   @return [::Google::Cloud::Dlp::V2::ProcessingLocation::GlobalProcessing]
+          #     Processing occurs in the global region.
+          class DocumentFallbackLocation
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
@@ -8075,13 +8135,70 @@ module Google
 
         # Collection of findings saved to a Cloud Storage bucket. This is used as the
         # proto schema for textproto files created when specifying a cloud storage
-        # path to save inspection findings.
+        # path to save Inspect findings.
         # @!attribute [rw] findings
         #   @return [::Array<::Google::Cloud::Dlp::V2::Finding>]
         #     List of findings.
         class SaveToGcsFindingsOutput
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # A domain represents a thematic category that a data profile can fall under.
+        # @!attribute [rw] category
+        #   @return [::Google::Cloud::Dlp::V2::Domain::Category]
+        #     A domain category that this profile is related to.
+        # @!attribute [rw] signals
+        #   @return [::Array<::Google::Cloud::Dlp::V2::Domain::Signal>]
+        #     The collection of signals that influenced selection of the category.
+        class Domain
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # This enum defines the various domain categories a data profile can fall
+          # under.
+          module Category
+            # Category unspecified.
+            CATEGORY_UNSPECIFIED = 0
+
+            # Indicates that the data profile is related to artificial intelligence.
+            # When set, all findings stored to Security Command Center will set the
+            # corresponding AI domain field of `Finding` objects.
+            AI = 1
+
+            # Indicates that the data profile is related to code.
+            CODE = 2
+          end
+
+          # The signal used to determine the category.
+          # This list may increase over time.
+          module Signal
+            # Unused.
+            SIGNAL_UNSPECIFIED = 0
+
+            # One or more machine learning models are present.
+            MODEL = 1
+
+            # A table appears to be a text embedding.
+            TEXT_EMBEDDING = 2
+
+            # The [Cloud SQL Vertex
+            # AI](https://cloud.google.com/sql/docs/postgres/integrate-cloud-sql-with-vertex-ai)
+            # plugin is installed on the database.
+            VERTEX_PLUGIN = 3
+
+            # Support for [Cloud SQL vector
+            # embeddings](https://cloud.google.com/sql/docs/mysql/enable-vector-search)
+            # is enabled on the database.
+            VECTOR_PLUGIN = 4
+
+            # Source code is present.
+            SOURCE_CODE = 5
+
+            # If the service determines the category type. For example, Vertex AI
+            # assets would always have a `Category` of `AI`.
+            SERVICE = 6
+          end
         end
 
         # Enum of possible outcomes of transformations. SUCCESS if transformation and
