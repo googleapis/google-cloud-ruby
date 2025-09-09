@@ -91,6 +91,26 @@ module Google
               rpc :GetOrganizationIntelligenceConfig, ::Google::Cloud::Storage::Control::V2::GetOrganizationIntelligenceConfigRequest, ::Google::Cloud::Storage::Control::V2::IntelligenceConfig
               # Updates the Organization scoped singleton IntelligenceConfig resource.
               rpc :UpdateOrganizationIntelligenceConfig, ::Google::Cloud::Storage::Control::V2::UpdateOrganizationIntelligenceConfigRequest, ::Google::Cloud::Storage::Control::V2::IntelligenceConfig
+              # Gets the IAM policy for a specified bucket.
+              # The `resource` field in the request should be
+              # `projects/_/buckets/{bucket}` for a bucket, or
+              # `projects/_/buckets/{bucket}/managedFolders/{managedFolder}`
+              # for a managed folder.
+              rpc :GetIamPolicy, ::Google::Iam::V1::GetIamPolicyRequest, ::Google::Iam::V1::Policy
+              # Updates an IAM policy for the specified bucket.
+              # The `resource` field in the request should be
+              # `projects/_/buckets/{bucket}` for a bucket, or
+              # `projects/_/buckets/{bucket}/managedFolders/{managedFolder}`
+              # for a managed folder.
+              rpc :SetIamPolicy, ::Google::Iam::V1::SetIamPolicyRequest, ::Google::Iam::V1::Policy
+              # Tests a set of permissions on the given bucket, object, or managed folder
+              # to see which, if any, are held by the caller.
+              # The `resource` field in the request should be
+              # `projects/_/buckets/{bucket}` for a bucket,
+              # `projects/_/buckets/{bucket}/objects/{object}` for an object, or
+              # `projects/_/buckets/{bucket}/managedFolders/{managedFolder}`
+              # for a managed folder.
+              rpc :TestIamPermissions, ::Google::Iam::V1::TestIamPermissionsRequest, ::Google::Iam::V1::TestIamPermissionsResponse
             end
 
             Stub = Service.rpc_stub_class

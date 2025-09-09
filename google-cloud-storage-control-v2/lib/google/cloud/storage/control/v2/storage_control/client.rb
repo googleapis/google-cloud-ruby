@@ -2562,6 +2562,321 @@ module Google
               end
 
               ##
+              # Gets the IAM policy for a specified bucket.
+              # The `resource` field in the request should be
+              # `projects/_/buckets/{bucket}` for a bucket, or
+              # `projects/_/buckets/{bucket}/managedFolders/{managedFolder}`
+              # for a managed folder.
+              #
+              # @overload get_iam_policy(request, options = nil)
+              #   Pass arguments to `get_iam_policy` via a request object, either of type
+              #   {::Google::Iam::V1::GetIamPolicyRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Iam::V1::GetIamPolicyRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+              #
+              # @overload get_iam_policy(resource: nil, options: nil)
+              #   Pass arguments to `get_iam_policy` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param resource [::String]
+              #     REQUIRED: The resource for which the policy is being requested.
+              #     See the operation documentation for the appropriate value for this field.
+              #   @param options [::Google::Iam::V1::GetPolicyOptions, ::Hash]
+              #     OPTIONAL: A `GetPolicyOptions` object for specifying options to
+              #     `GetIamPolicy`.
+              #
+              # @yield [response, operation] Access the result along with the RPC operation
+              # @yieldparam response [::Google::Iam::V1::Policy]
+              # @yieldparam operation [::GRPC::ActiveCall::Operation]
+              #
+              # @return [::Google::Iam::V1::Policy]
+              #
+              # @raise [::Google::Cloud::Error] if the RPC is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/storage/control/v2"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Storage::Control::V2::StorageControl::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Iam::V1::GetIamPolicyRequest.new
+              #
+              #   # Call the get_iam_policy method.
+              #   result = client.get_iam_policy request
+              #
+              #   # The returned object is of type Google::Iam::V1::Policy.
+              #   p result
+              #
+              def get_iam_policy request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Iam::V1::GetIamPolicyRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                metadata = @config.rpcs.get_iam_policy.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::Storage::Control::V2::VERSION
+                metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                header_params = {}
+                if request.resource && !request.resource.empty?
+                  header_params["bucket"] = request.resource
+                end
+                if request.resource
+                  regex_match = %r{^(?<bucket>projects/[^/]+/buckets/[^/]+)(?:/.*)?$}.match request.resource
+                  if regex_match
+                    header_params["bucket"] = regex_match["bucket".to_s]
+                  end
+                end
+
+                request_params_header = URI.encode_www_form header_params
+                metadata[:"x-goog-request-params"] ||= request_params_header
+
+                options.apply_defaults timeout:      @config.rpcs.get_iam_policy.timeout,
+                                       metadata:     metadata,
+                                       retry_policy: @config.rpcs.get_iam_policy.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @storage_control_stub.call_rpc :get_iam_policy, request, options: options do |response, operation|
+                  yield response, operation if block_given?
+                end
+              rescue ::GRPC::BadStatus => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Updates an IAM policy for the specified bucket.
+              # The `resource` field in the request should be
+              # `projects/_/buckets/{bucket}` for a bucket, or
+              # `projects/_/buckets/{bucket}/managedFolders/{managedFolder}`
+              # for a managed folder.
+              #
+              # @overload set_iam_policy(request, options = nil)
+              #   Pass arguments to `set_iam_policy` via a request object, either of type
+              #   {::Google::Iam::V1::SetIamPolicyRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Iam::V1::SetIamPolicyRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+              #
+              # @overload set_iam_policy(resource: nil, policy: nil, update_mask: nil)
+              #   Pass arguments to `set_iam_policy` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param resource [::String]
+              #     REQUIRED: The resource for which the policy is being specified.
+              #     See the operation documentation for the appropriate value for this field.
+              #   @param policy [::Google::Iam::V1::Policy, ::Hash]
+              #     REQUIRED: The complete policy to be applied to the `resource`. The size of
+              #     the policy is limited to a few 10s of KB. An empty policy is a
+              #     valid policy but certain Cloud Platform services (such as Projects)
+              #     might reject them.
+              #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
+              #     OPTIONAL: A FieldMask specifying which fields of the policy to modify. Only
+              #     the fields in the mask will be modified. If no mask is provided, the
+              #     following default mask is used:
+              #
+              #     `paths: "bindings, etag"`
+              #
+              # @yield [response, operation] Access the result along with the RPC operation
+              # @yieldparam response [::Google::Iam::V1::Policy]
+              # @yieldparam operation [::GRPC::ActiveCall::Operation]
+              #
+              # @return [::Google::Iam::V1::Policy]
+              #
+              # @raise [::Google::Cloud::Error] if the RPC is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/storage/control/v2"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Storage::Control::V2::StorageControl::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Iam::V1::SetIamPolicyRequest.new
+              #
+              #   # Call the set_iam_policy method.
+              #   result = client.set_iam_policy request
+              #
+              #   # The returned object is of type Google::Iam::V1::Policy.
+              #   p result
+              #
+              def set_iam_policy request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Iam::V1::SetIamPolicyRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                metadata = @config.rpcs.set_iam_policy.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::Storage::Control::V2::VERSION
+                metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                header_params = {}
+                if request.resource && !request.resource.empty?
+                  header_params["bucket"] = request.resource
+                end
+                if request.resource
+                  regex_match = %r{^(?<bucket>projects/[^/]+/buckets/[^/]+)(?:/.*)?$}.match request.resource
+                  if regex_match
+                    header_params["bucket"] = regex_match["bucket".to_s]
+                  end
+                end
+
+                request_params_header = URI.encode_www_form header_params
+                metadata[:"x-goog-request-params"] ||= request_params_header
+
+                options.apply_defaults timeout:      @config.rpcs.set_iam_policy.timeout,
+                                       metadata:     metadata,
+                                       retry_policy: @config.rpcs.set_iam_policy.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @storage_control_stub.call_rpc :set_iam_policy, request, options: options do |response, operation|
+                  yield response, operation if block_given?
+                end
+              rescue ::GRPC::BadStatus => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Tests a set of permissions on the given bucket, object, or managed folder
+              # to see which, if any, are held by the caller.
+              # The `resource` field in the request should be
+              # `projects/_/buckets/{bucket}` for a bucket,
+              # `projects/_/buckets/{bucket}/objects/{object}` for an object, or
+              # `projects/_/buckets/{bucket}/managedFolders/{managedFolder}`
+              # for a managed folder.
+              #
+              # @overload test_iam_permissions(request, options = nil)
+              #   Pass arguments to `test_iam_permissions` via a request object, either of type
+              #   {::Google::Iam::V1::TestIamPermissionsRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Iam::V1::TestIamPermissionsRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+              #
+              # @overload test_iam_permissions(resource: nil, permissions: nil)
+              #   Pass arguments to `test_iam_permissions` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param resource [::String]
+              #     REQUIRED: The resource for which the policy detail is being requested.
+              #     See the operation documentation for the appropriate value for this field.
+              #   @param permissions [::Array<::String>]
+              #     The set of permissions to check for the `resource`. Permissions with
+              #     wildcards (such as '*' or 'storage.*') are not allowed. For more
+              #     information see
+              #     [IAM Overview](https://cloud.google.com/iam/docs/overview#permissions).
+              #
+              # @yield [response, operation] Access the result along with the RPC operation
+              # @yieldparam response [::Google::Iam::V1::TestIamPermissionsResponse]
+              # @yieldparam operation [::GRPC::ActiveCall::Operation]
+              #
+              # @return [::Google::Iam::V1::TestIamPermissionsResponse]
+              #
+              # @raise [::Google::Cloud::Error] if the RPC is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/storage/control/v2"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Storage::Control::V2::StorageControl::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Iam::V1::TestIamPermissionsRequest.new
+              #
+              #   # Call the test_iam_permissions method.
+              #   result = client.test_iam_permissions request
+              #
+              #   # The returned object is of type Google::Iam::V1::TestIamPermissionsResponse.
+              #   p result
+              #
+              def test_iam_permissions request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Iam::V1::TestIamPermissionsRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                metadata = @config.rpcs.test_iam_permissions.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::Storage::Control::V2::VERSION
+                metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                header_params = {}
+                if request.resource && !request.resource.empty?
+                  header_params["bucket"] = request.resource
+                end
+                if request.resource
+                  regex_match = %r{^(?<bucket>projects/[^/]+/buckets/[^/]+)/objects(?:/.*)?$}.match request.resource
+                  if regex_match
+                    header_params["bucket"] = regex_match["bucket".to_s]
+                  end
+                end
+                if request.resource
+                  regex_match = %r{^(?<bucket>projects/[^/]+/buckets/[^/]+)/managedFolders(?:/.*)?$}.match request.resource
+                  if regex_match
+                    header_params["bucket"] = regex_match["bucket".to_s]
+                  end
+                end
+
+                request_params_header = URI.encode_www_form header_params
+                metadata[:"x-goog-request-params"] ||= request_params_header
+
+                options.apply_defaults timeout:      @config.rpcs.test_iam_permissions.timeout,
+                                       metadata:     metadata,
+                                       retry_policy: @config.rpcs.test_iam_permissions.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @storage_control_stub.call_rpc :test_iam_permissions, request, options: options do |response, operation|
+                  yield response, operation if block_given?
+                end
+              rescue ::GRPC::BadStatus => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
               # Configuration class for the StorageControl API.
               #
               # This class represents the configuration for StorageControl,
@@ -2842,6 +3157,21 @@ module Google
                   # @return [::Gapic::Config::Method]
                   #
                   attr_reader :update_organization_intelligence_config
+                  ##
+                  # RPC-specific configuration for `get_iam_policy`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :get_iam_policy
+                  ##
+                  # RPC-specific configuration for `set_iam_policy`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :set_iam_policy
+                  ##
+                  # RPC-specific configuration for `test_iam_permissions`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :test_iam_permissions
 
                   # @private
                   def initialize parent_rpcs = nil
@@ -2891,6 +3221,12 @@ module Google
                     @get_organization_intelligence_config = ::Gapic::Config::Method.new get_organization_intelligence_config_config
                     update_organization_intelligence_config_config = parent_rpcs.update_organization_intelligence_config if parent_rpcs.respond_to? :update_organization_intelligence_config
                     @update_organization_intelligence_config = ::Gapic::Config::Method.new update_organization_intelligence_config_config
+                    get_iam_policy_config = parent_rpcs.get_iam_policy if parent_rpcs.respond_to? :get_iam_policy
+                    @get_iam_policy = ::Gapic::Config::Method.new get_iam_policy_config
+                    set_iam_policy_config = parent_rpcs.set_iam_policy if parent_rpcs.respond_to? :set_iam_policy
+                    @set_iam_policy = ::Gapic::Config::Method.new set_iam_policy_config
+                    test_iam_permissions_config = parent_rpcs.test_iam_permissions if parent_rpcs.respond_to? :test_iam_permissions
+                    @test_iam_permissions = ::Gapic::Config::Method.new test_iam_permissions_config
 
                     yield self if block_given?
                   end

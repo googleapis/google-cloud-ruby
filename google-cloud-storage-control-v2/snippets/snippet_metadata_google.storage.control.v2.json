@@ -930,6 +930,126 @@
           "type": "FULL"
         }
       ]
+    },
+    {
+      "region_tag": "storage_v2_generated_StorageControl_GetIamPolicy_sync",
+      "title": "Snippet for the get_iam_policy call in the StorageControl service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Storage::Control::V2::StorageControl::Client#get_iam_policy.",
+      "file": "storage_control/get_iam_policy.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_iam_policy",
+        "full_name": "::Google::Cloud::Storage::Control::V2::StorageControl::Client#get_iam_policy",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Iam::V1::GetIamPolicyRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Iam::V1::Policy",
+        "client": {
+          "short_name": "StorageControl::Client",
+          "full_name": "::Google::Cloud::Storage::Control::V2::StorageControl::Client"
+        },
+        "method": {
+          "short_name": "GetIamPolicy",
+          "full_name": "google.storage.control.v2.StorageControl.GetIamPolicy",
+          "service": {
+            "short_name": "StorageControl",
+            "full_name": "google.storage.control.v2.StorageControl"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "storage_v2_generated_StorageControl_SetIamPolicy_sync",
+      "title": "Snippet for the set_iam_policy call in the StorageControl service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Storage::Control::V2::StorageControl::Client#set_iam_policy.",
+      "file": "storage_control/set_iam_policy.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "set_iam_policy",
+        "full_name": "::Google::Cloud::Storage::Control::V2::StorageControl::Client#set_iam_policy",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Iam::V1::SetIamPolicyRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Iam::V1::Policy",
+        "client": {
+          "short_name": "StorageControl::Client",
+          "full_name": "::Google::Cloud::Storage::Control::V2::StorageControl::Client"
+        },
+        "method": {
+          "short_name": "SetIamPolicy",
+          "full_name": "google.storage.control.v2.StorageControl.SetIamPolicy",
+          "service": {
+            "short_name": "StorageControl",
+            "full_name": "google.storage.control.v2.StorageControl"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "storage_v2_generated_StorageControl_TestIamPermissions_sync",
+      "title": "Snippet for the test_iam_permissions call in the StorageControl service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Storage::Control::V2::StorageControl::Client#test_iam_permissions.",
+      "file": "storage_control/test_iam_permissions.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "test_iam_permissions",
+        "full_name": "::Google::Cloud::Storage::Control::V2::StorageControl::Client#test_iam_permissions",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Iam::V1::TestIamPermissionsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Iam::V1::TestIamPermissionsResponse",
+        "client": {
+          "short_name": "StorageControl::Client",
+          "full_name": "::Google::Cloud::Storage::Control::V2::StorageControl::Client"
+        },
+        "method": {
+          "short_name": "TestIamPermissions",
+          "full_name": "google.storage.control.v2.StorageControl.TestIamPermissions",
+          "service": {
+            "short_name": "StorageControl",
+            "full_name": "google.storage.control.v2.StorageControl"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
     }
   ]
 }
