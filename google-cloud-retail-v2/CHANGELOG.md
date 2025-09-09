@@ -1,5 +1,11 @@
 # Release History
 
+### 2.4.0 (2025-09-09)
+
+#### Features
+
+* conversational search public SDK ([#30956](https://github.com/googleapis/google-cloud-ruby/issues/30956)) 
+
 ### 2.3.0 (2025-06-26)
 
 #### Features
