@@ -27,6 +27,16 @@ for more usage information.
 $ gem install grafeas
 ```
 
+## Quick Start
+
+```ruby
+require "grafeas"
+
+client = Grafeas.grafeas
+request = ::Grafeas::V1::GetOccurrenceRequest.new # (request fields as keyword arguments...)
+response = client.get_occurrence request
+```
+
 ## Migrating from 0.x versions
 
 The 1.0 release of the grafeas client is a significant upgrade
