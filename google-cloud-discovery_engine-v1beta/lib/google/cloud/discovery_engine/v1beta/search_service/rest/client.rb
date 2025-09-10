@@ -210,7 +210,7 @@ module Google
               #   @param options [::Gapic::CallOptions, ::Hash]
               #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
               #
-              # @overload search(serving_config: nil, branch: nil, query: nil, image_query: nil, page_size: nil, page_token: nil, offset: nil, one_box_page_size: nil, data_store_specs: nil, filter: nil, canonical_filter: nil, order_by: nil, user_info: nil, language_code: nil, region_code: nil, facet_specs: nil, boost_spec: nil, params: nil, query_expansion_spec: nil, spell_correction_spec: nil, user_pseudo_id: nil, content_search_spec: nil, embedding_spec: nil, ranking_expression: nil, safe_search: nil, user_labels: nil, natural_language_query_understanding_spec: nil, search_as_you_type_spec: nil, session: nil, session_spec: nil, relevance_threshold: nil, personalization_spec: nil)
+              # @overload search(serving_config: nil, branch: nil, query: nil, image_query: nil, page_size: nil, page_token: nil, offset: nil, one_box_page_size: nil, data_store_specs: nil, filter: nil, canonical_filter: nil, order_by: nil, user_info: nil, language_code: nil, region_code: nil, facet_specs: nil, boost_spec: nil, params: nil, query_expansion_spec: nil, spell_correction_spec: nil, user_pseudo_id: nil, content_search_spec: nil, embedding_spec: nil, ranking_expression: nil, ranking_expression_backend: nil, safe_search: nil, user_labels: nil, natural_language_query_understanding_spec: nil, search_as_you_type_spec: nil, session: nil, session_spec: nil, relevance_threshold: nil, personalization_spec: nil)
               #   Pass arguments to `search` via keyword arguments. Note that at
               #   least one keyword argument is required. To specify no parameters, or to keep all
               #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -390,8 +390,14 @@ module Google
               #     The ranking expression controls the customized ranking on retrieval
               #     documents. This overrides
               #     {::Google::Cloud::DiscoveryEngine::V1beta::ServingConfig#ranking_expression ServingConfig.ranking_expression}.
-              #     The ranking expression is a single function or multiple functions that are
-              #     joined by "+".
+              #     The syntax and supported features depend on the
+              #     `ranking_expression_backend` value. If `ranking_expression_backend` is not
+              #     provided, it defaults to `RANK_BY_EMBEDDING`.
+              #
+              #     If
+              #     {::Google::Cloud::DiscoveryEngine::V1beta::SearchRequest#ranking_expression_backend ranking_expression_backend}
+              #     is not provided or set to `RANK_BY_EMBEDDING`, it should be a single
+              #     function or multiple functions that are joined by "+".
               #
               #       * ranking_expression = function, { " + ", function };
               #
@@ -406,13 +412,73 @@ module Google
               #       between query and document.
               #       * `embedding_field_path`: the document embedding field
               #       used with query embedding vector.
-              #       * `dotProduct`: embedding function between embedding_field_path and query
-              #       embedding vector.
+              #       * `dotProduct`: embedding function between `embedding_field_path` and
+              #       query embedding vector.
               #
               #      Example ranking expression:
               #
               #        If document has an embedding field doc_embedding, the ranking expression
               #        could be `0.5 * relevance_score + 0.3 * dotProduct(doc_embedding)`.
+              #
+              #     If
+              #     {::Google::Cloud::DiscoveryEngine::V1beta::SearchRequest#ranking_expression_backend ranking_expression_backend}
+              #     is set to `RANK_BY_FORMULA`, the following expression types (and
+              #     combinations of those chained using + or
+              #     * operators) are supported:
+              #
+              #       * `double`
+              #       * `signal`
+              #       * `log(signal)`
+              #       * `exp(signal)`
+              #       * `rr(signal, double > 0)`  -- reciprocal rank transformation with second
+              #       argument being a denominator constant.
+              #       * `is_nan(signal)` -- returns 0 if signal is NaN, 1 otherwise.
+              #       * `fill_nan(signal1, signal2 | double)` -- if signal1 is NaN, returns
+              #       signal2 | double, else returns signal1.
+              #
+              #       Here are a few examples of ranking formulas that use the supported
+              #       ranking expression types:
+              #
+              #       - `0.2 * semantic_similarity_score + 0.8 * log(keyword_similarity_score)`
+              #       -- mostly rank by the logarithm of `keyword_similarity_score` with slight
+              #       `semantic_smilarity_score` adjustment.
+              #       - `0.2 * exp(fill_nan(semantic_similarity_score, 0)) + 0.3 *
+              #       is_nan(keyword_similarity_score)` -- rank by the exponent of
+              #       `semantic_similarity_score` filling the value with 0 if it's NaN, also
+              #       add constant 0.3 adjustment to the final score if
+              #       `semantic_similarity_score` is NaN.
+              #       - `0.2 * rr(semantic_similarity_score, 16) + 0.8 *
+              #       rr(keyword_similarity_score, 16)` -- mostly rank by the reciprocal rank
+              #       of `keyword_similarity_score` with slight adjustment of reciprocal rank
+              #       of `semantic_smilarity_score`.
+              #
+              #     The following signals are supported:
+              #
+              #       * `semantic_similarity_score`: semantic similarity adjustment that is
+              #       calculated using the embeddings generated by a proprietary Google model.
+              #       This score determines how semantically similar a search query is to a
+              #       document.
+              #       * `keyword_similarity_score`: keyword match adjustment uses the Best
+              #       Match 25 (BM25) ranking function. This score is calculated using a
+              #       probabilistic model to estimate the probability that a document is
+              #       relevant to a given query.
+              #       * `relevance_score`: semantic relevance adjustment that uses a
+              #       proprietary Google model to determine the meaning and intent behind a
+              #       user's query in context with the content in the documents.
+              #       * `pctr_rank`: predicted conversion rate adjustment as a rank use
+              #       predicted Click-through rate (pCTR) to gauge the relevance and
+              #       attractiveness of a search result from a user's perspective. A higher
+              #       pCTR suggests that the result is more likely to satisfy the user's query
+              #       and intent, making it a valuable signal for ranking.
+              #       * `freshness_rank`: freshness adjustment as a rank
+              #       * `document_age`: The time in hours elapsed since the document was last
+              #       updated, a floating-point number (e.g., 0.25 means 15 minutes).
+              #       * `topicality_rank`: topicality adjustment as a rank. Uses proprietary
+              #       Google model to determine the keyword-based overlap between the query and
+              #       the document.
+              #       * `base_rank`: the default rank of the result
+              #   @param ranking_expression_backend [::Google::Cloud::DiscoveryEngine::V1beta::SearchRequest::RankingExpressionBackend]
+              #     The backend to use for the ranking expression evaluation.
               #   @param safe_search [::Boolean]
               #     Whether to turn on safe search. This is only supported for
               #     website search.
@@ -572,7 +638,7 @@ module Google
               #   @param options [::Gapic::CallOptions, ::Hash]
               #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
               #
-              # @overload search_lite(serving_config: nil, branch: nil, query: nil, image_query: nil, page_size: nil, page_token: nil, offset: nil, one_box_page_size: nil, data_store_specs: nil, filter: nil, canonical_filter: nil, order_by: nil, user_info: nil, language_code: nil, region_code: nil, facet_specs: nil, boost_spec: nil, params: nil, query_expansion_spec: nil, spell_correction_spec: nil, user_pseudo_id: nil, content_search_spec: nil, embedding_spec: nil, ranking_expression: nil, safe_search: nil, user_labels: nil, natural_language_query_understanding_spec: nil, search_as_you_type_spec: nil, session: nil, session_spec: nil, relevance_threshold: nil, personalization_spec: nil)
+              # @overload search_lite(serving_config: nil, branch: nil, query: nil, image_query: nil, page_size: nil, page_token: nil, offset: nil, one_box_page_size: nil, data_store_specs: nil, filter: nil, canonical_filter: nil, order_by: nil, user_info: nil, language_code: nil, region_code: nil, facet_specs: nil, boost_spec: nil, params: nil, query_expansion_spec: nil, spell_correction_spec: nil, user_pseudo_id: nil, content_search_spec: nil, embedding_spec: nil, ranking_expression: nil, ranking_expression_backend: nil, safe_search: nil, user_labels: nil, natural_language_query_understanding_spec: nil, search_as_you_type_spec: nil, session: nil, session_spec: nil, relevance_threshold: nil, personalization_spec: nil)
               #   Pass arguments to `search_lite` via keyword arguments. Note that at
               #   least one keyword argument is required. To specify no parameters, or to keep all
               #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -752,8 +818,14 @@ module Google
               #     The ranking expression controls the customized ranking on retrieval
               #     documents. This overrides
               #     {::Google::Cloud::DiscoveryEngine::V1beta::ServingConfig#ranking_expression ServingConfig.ranking_expression}.
-              #     The ranking expression is a single function or multiple functions that are
-              #     joined by "+".
+              #     The syntax and supported features depend on the
+              #     `ranking_expression_backend` value. If `ranking_expression_backend` is not
+              #     provided, it defaults to `RANK_BY_EMBEDDING`.
+              #
+              #     If
+              #     {::Google::Cloud::DiscoveryEngine::V1beta::SearchRequest#ranking_expression_backend ranking_expression_backend}
+              #     is not provided or set to `RANK_BY_EMBEDDING`, it should be a single
+              #     function or multiple functions that are joined by "+".
               #
               #       * ranking_expression = function, { " + ", function };
               #
@@ -768,13 +840,73 @@ module Google
               #       between query and document.
               #       * `embedding_field_path`: the document embedding field
               #       used with query embedding vector.
-              #       * `dotProduct`: embedding function between embedding_field_path and query
-              #       embedding vector.
+              #       * `dotProduct`: embedding function between `embedding_field_path` and
+              #       query embedding vector.
               #
               #      Example ranking expression:
               #
               #        If document has an embedding field doc_embedding, the ranking expression
               #        could be `0.5 * relevance_score + 0.3 * dotProduct(doc_embedding)`.
+              #
+              #     If
+              #     {::Google::Cloud::DiscoveryEngine::V1beta::SearchRequest#ranking_expression_backend ranking_expression_backend}
+              #     is set to `RANK_BY_FORMULA`, the following expression types (and
+              #     combinations of those chained using + or
+              #     * operators) are supported:
+              #
+              #       * `double`
+              #       * `signal`
+              #       * `log(signal)`
+              #       * `exp(signal)`
+              #       * `rr(signal, double > 0)`  -- reciprocal rank transformation with second
+              #       argument being a denominator constant.
+              #       * `is_nan(signal)` -- returns 0 if signal is NaN, 1 otherwise.
+              #       * `fill_nan(signal1, signal2 | double)` -- if signal1 is NaN, returns
+              #       signal2 | double, else returns signal1.
+              #
+              #       Here are a few examples of ranking formulas that use the supported
+              #       ranking expression types:
+              #
+              #       - `0.2 * semantic_similarity_score + 0.8 * log(keyword_similarity_score)`
+              #       -- mostly rank by the logarithm of `keyword_similarity_score` with slight
+              #       `semantic_smilarity_score` adjustment.
+              #       - `0.2 * exp(fill_nan(semantic_similarity_score, 0)) + 0.3 *
+              #       is_nan(keyword_similarity_score)` -- rank by the exponent of
+              #       `semantic_similarity_score` filling the value with 0 if it's NaN, also
+              #       add constant 0.3 adjustment to the final score if
+              #       `semantic_similarity_score` is NaN.
+              #       - `0.2 * rr(semantic_similarity_score, 16) + 0.8 *
+              #       rr(keyword_similarity_score, 16)` -- mostly rank by the reciprocal rank
+              #       of `keyword_similarity_score` with slight adjustment of reciprocal rank
+              #       of `semantic_smilarity_score`.
+              #
+              #     The following signals are supported:
+              #
+              #       * `semantic_similarity_score`: semantic similarity adjustment that is
+              #       calculated using the embeddings generated by a proprietary Google model.
+              #       This score determines how semantically similar a search query is to a
+              #       document.
+              #       * `keyword_similarity_score`: keyword match adjustment uses the Best
+              #       Match 25 (BM25) ranking function. This score is calculated using a
+              #       probabilistic model to estimate the probability that a document is
+              #       relevant to a given query.
+              #       * `relevance_score`: semantic relevance adjustment that uses a
+              #       proprietary Google model to determine the meaning and intent behind a
+              #       user's query in context with the content in the documents.
+              #       * `pctr_rank`: predicted conversion rate adjustment as a rank use
+              #       predicted Click-through rate (pCTR) to gauge the relevance and
+              #       attractiveness of a search result from a user's perspective. A higher
+              #       pCTR suggests that the result is more likely to satisfy the user's query
+              #       and intent, making it a valuable signal for ranking.
+              #       * `freshness_rank`: freshness adjustment as a rank
+              #       * `document_age`: The time in hours elapsed since the document was last
+              #       updated, a floating-point number (e.g., 0.25 means 15 minutes).
+              #       * `topicality_rank`: topicality adjustment as a rank. Uses proprietary
+              #       Google model to determine the keyword-based overlap between the query and
+              #       the document.
+              #       * `base_rank`: the default rank of the result
+              #   @param ranking_expression_backend [::Google::Cloud::DiscoveryEngine::V1beta::SearchRequest::RankingExpressionBackend]
+              #     The backend to use for the ranking expression evaluation.
               #   @param safe_search [::Boolean]
               #     Whether to turn on safe search. This is only supported for
               #     website search.
