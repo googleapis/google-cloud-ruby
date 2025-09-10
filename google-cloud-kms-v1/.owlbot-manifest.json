@@ -96,6 +96,7 @@
     "snippets/key_management_service/create_crypto_key_version.rb",
     "snippets/key_management_service/create_import_job.rb",
     "snippets/key_management_service/create_key_ring.rb",
+    "snippets/key_management_service/decapsulate.rb",
     "snippets/key_management_service/decrypt.rb",
     "snippets/key_management_service/destroy_crypto_key_version.rb",
     "snippets/key_management_service/encrypt.rb",

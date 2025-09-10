@@ -1612,6 +1612,46 @@
       ]
     },
     {
+      "region_tag": "cloudkms_v1_generated_KeyManagementService_Decapsulate_sync",
+      "title": "Snippet for the decapsulate call in the KeyManagementService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Kms::V1::KeyManagementService::Client#decapsulate.",
+      "file": "key_management_service/decapsulate.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "decapsulate",
+        "full_name": "::Google::Cloud::Kms::V1::KeyManagementService::Client#decapsulate",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Kms::V1::DecapsulateRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Kms::V1::DecapsulateResponse",
+        "client": {
+          "short_name": "KeyManagementService::Client",
+          "full_name": "::Google::Cloud::Kms::V1::KeyManagementService::Client"
+        },
+        "method": {
+          "short_name": "Decapsulate",
+          "full_name": "google.cloud.kms.v1.KeyManagementService.Decapsulate",
+          "service": {
+            "short_name": "KeyManagementService",
+            "full_name": "google.cloud.kms.v1.KeyManagementService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
       "region_tag": "cloudkms_v1_generated_KeyManagementService_GenerateRandomBytes_sync",
       "title": "Snippet for the generate_random_bytes call in the KeyManagementService service",
       "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Kms::V1::KeyManagementService::Client#generate_random_bytes.",

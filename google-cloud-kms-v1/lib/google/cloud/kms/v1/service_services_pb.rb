@@ -199,6 +199,12 @@ module Google
             # [CryptoKey.purpose][google.cloud.kms.v1.CryptoKey.purpose] MAC, and returns
             # a response that indicates whether or not the verification was successful.
             rpc :MacVerify, ::Google::Cloud::Kms::V1::MacVerifyRequest, ::Google::Cloud::Kms::V1::MacVerifyResponse
+            # Decapsulates data that was encapsulated with a public key retrieved from
+            # [GetPublicKey][google.cloud.kms.v1.KeyManagementService.GetPublicKey]
+            # corresponding to a [CryptoKeyVersion][google.cloud.kms.v1.CryptoKeyVersion]
+            # with [CryptoKey.purpose][google.cloud.kms.v1.CryptoKey.purpose]
+            # KEY_ENCAPSULATION.
+            rpc :Decapsulate, ::Google::Cloud::Kms::V1::DecapsulateRequest, ::Google::Cloud::Kms::V1::DecapsulateResponse
             # Generate random bytes using the Cloud KMS randomness source in the provided
             # location.
             rpc :GenerateRandomBytes, ::Google::Cloud::Kms::V1::GenerateRandomBytesRequest, ::Google::Cloud::Kms::V1::GenerateRandomBytesResponse
