@@ -237,6 +237,11 @@
                 "mac_verify"
               ]
             },
+            "Decapsulate": {
+              "methods": [
+                "decapsulate"
+              ]
+            },
             "GenerateRandomBytes": {
               "methods": [
                 "generate_random_bytes"
