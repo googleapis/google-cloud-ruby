@@ -198,6 +198,12 @@ module Google
             # {::Google::Cloud::Kms::V1::CryptoKey CryptoKeys} with this purpose may be used
             # with [MacSign][google.cloud.kms.v1.KeyManagementService.MacSign].
             MAC = 9
+
+            # {::Google::Cloud::Kms::V1::CryptoKey CryptoKeys} with this purpose may be used
+            # with
+            # [GetPublicKey][google.cloud.kms.v1.KeyManagementService.GetPublicKey]
+            # and [Decapsulate][google.cloud.kms.v1.KeyManagementService.Decapsulate].
+            KEY_ENCAPSULATION = 10
           end
         end
 
@@ -549,6 +555,16 @@ module Google
             # Algorithm representing symmetric encryption by an external key manager.
             EXTERNAL_SYMMETRIC_ENCRYPTION = 18
 
+            # ML-KEM-768 (FIPS 203)
+            ML_KEM_768 = 47
+
+            # ML-KEM-1024 (FIPS 203)
+            ML_KEM_1024 = 48
+
+            # X-Wing hybrid KEM combining ML-KEM-768 with X25519 following
+            # datatracker.ietf.org/doc/draft-connolly-cfrg-xwing-kem/.
+            KEM_XWING = 63
+
             # The post-quantum Module-Lattice-Based Digital Signature Algorithm, at
             # security level 3. Randomized version.
             PQ_SIGN_ML_DSA_65 = 56
@@ -751,10 +767,18 @@ module Google
             # (https://tools.ietf.org/html/rfc7468#section-13) for more information.
             PEM = 1
 
+            # The returned public key will be encoded in DER format (the
+            # PrivateKeyInfo structure from RFC 5208).
+            DER = 2
+
             # This is supported only for PQC algorithms.
             # The key material is returned in the format defined by NIST PQC
             # standards (FIPS 203, FIPS 204, and FIPS 205).
             NIST_PQC = 3
+
+            # The returned public key is in raw bytes format defined in its standard
+            # https://datatracker.ietf.org/doc/draft-connolly-cfrg-xwing-kem.
+            XWING_RAW_BYTES = 4
           end
         end
 
