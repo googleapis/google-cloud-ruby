@@ -57,6 +57,12 @@ module Google
 
             # Google Kubernetes Engine.
             GKE = 2
+
+            # Google Compute Engine.
+            GCE = 3
+
+            # Fine tuned model.
+            FINE_TUNED_MODEL = 4
           end
         end
       end
