@@ -509,7 +509,7 @@
   "google-cloud-memorystore+FILLER": "0.0.0",
   "google-cloud-memorystore-v1": "1.2.0",
   "google-cloud-memorystore-v1+FILLER": "0.0.0",
-  "google-cloud-memorystore-v1beta": "0.6.0",
+  "google-cloud-memorystore-v1beta": "0.7.0",
   "google-cloud-memorystore-v1beta+FILLER": "0.0.0",
   "google-cloud-metastore": "2.0.1",
   "google-cloud-metastore+FILLER": "0.0.0",
