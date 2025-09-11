@@ -34,6 +34,14 @@ In order to use this library, you first need to go through the following steps:
 1. [Enable the API.](https://console.cloud.google.com/apis/library/documentai.googleapis.com)
 1. [Set up authentication.](AUTHENTICATION.md)
 
+```ruby
+require "google/cloud/document_ai"
+
+client = Google::Cloud::DocumentAI.document_processor_service
+request = ::Google::Cloud::DocumentAI::V1::ProcessRequest.new # (request fields as keyword arguments...)
+response = client.process_document request
+```
+
 ## Debug Logging
 
 This library comes with opt-in Debug Logging that can help you troubleshoot

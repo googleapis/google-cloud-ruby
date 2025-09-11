@@ -34,6 +34,14 @@ In order to use this library, you first need to go through the following steps:
 1. [Enable the API.](https://console.cloud.google.com/apis/library/securitycentermanagement.googleapis.com)
 1. [Set up authentication.](AUTHENTICATION.md)
 
+```ruby
+require "google/cloud/security_center_management"
+
+client = Google::Cloud::SecurityCenterManagement.security_center_management
+request = ::Google::Cloud::SecurityCenterManagement::V1::ListEffectiveSecurityHealthAnalyticsCustomModulesRequest.new # (request fields as keyword arguments...)
+response = client.list_effective_security_health_analytics_custom_modules request
+```
+
 ## Debug Logging
 
 This library comes with opt-in Debug Logging that can help you troubleshoot

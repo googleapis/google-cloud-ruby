@@ -37,6 +37,14 @@ In order to use this library, you first need to go through the following steps:
 1. [Enable the API.](https://console.cloud.google.com/apis/library/beyondcorp.googleapis.com)
 1. [Set up authentication.](AUTHENTICATION.md)
 
+```ruby
+require "google/cloud/beyond_corp/app_connections"
+
+client = Google::Cloud::BeyondCorp::AppConnections.app_connections_service
+request = ::Google::Cloud::BeyondCorp::AppConnections::V1::ListAppConnectionsRequest.new # (request fields as keyword arguments...)
+response = client.list_app_connections request
+```
+
 ## Debug Logging
 
 This library comes with opt-in Debug Logging that can help you troubleshoot

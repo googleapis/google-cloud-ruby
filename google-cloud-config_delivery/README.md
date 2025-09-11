@@ -30,6 +30,14 @@ In order to use this library, you first need to go through the following steps:
 1. [Enable billing for your project.](https://cloud.google.com/billing/docs/how-to/modify-project#enable_billing_for_a_project)
 1. [Set up authentication.](AUTHENTICATION.md)
 
+```ruby
+require "google/cloud/config_delivery"
+
+client = Google::Cloud::ConfigDelivery.config_delivery
+request = ::Google::Cloud::ConfigDelivery::V1alpha::ListResourceBundlesRequest.new # (request fields as keyword arguments...)
+response = client.list_resource_bundles request
+```
+
 ## Debug Logging
 
 This library comes with opt-in Debug Logging that can help you troubleshoot

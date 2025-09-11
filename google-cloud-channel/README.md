@@ -34,6 +34,14 @@ In order to use this library, you first need to go through the following steps:
 1. [Enable the API.](https://console.cloud.google.com/apis/library/cloudchannel.googleapis.com)
 1. [Set up authentication.](AUTHENTICATION.md)
 
+```ruby
+require "google/cloud/channel"
+
+client = Google::Cloud::Channel.cloud_channel_reports_service
+request = ::Google::Cloud::Channel::V1::RunReportJobRequest.new # (request fields as keyword arguments...)
+response = client.run_report_job request
+```
+
 ## Debug Logging
 
 This library comes with opt-in Debug Logging that can help you troubleshoot

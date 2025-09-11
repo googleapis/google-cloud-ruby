@@ -34,6 +34,14 @@ In order to use this library, you first need to go through the following steps:
 1. [Enable the API.](https://console.cloud.google.com/apis/library/cloudprivatecatalog.googleapis.com)
 1. [Set up authentication.](AUTHENTICATION.md)
 
+```ruby
+require "google/cloud/private_catalog"
+
+client = Google::Cloud::PrivateCatalog.private_catalog
+request = ::Google::Cloud::PrivateCatalog::V1beta1::SearchCatalogsRequest.new # (request fields as keyword arguments...)
+response = client.search_catalogs request
+```
+
 ## Debug Logging
 
 This library comes with opt-in Debug Logging that can help you troubleshoot

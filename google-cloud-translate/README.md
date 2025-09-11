@@ -35,6 +35,14 @@ In order to use this library, you first need to go through the following steps:
 1. [Enable the API.](https://console.cloud.google.com/apis/library/translate.googleapis.com)
 1. [Set up authentication.](AUTHENTICATION.md)
 
+```ruby
+require "google/cloud/translate"
+
+client = Google::Cloud::Translate.translation_service
+request = ::Google::Cloud::Translate::V3::TranslateTextRequest.new # (request fields as keyword arguments...)
+response = client.translate_text request
+```
+
 ## Migrating from 2.x versions
 
 The 3.0 release of the google-cloud-translate client is a significant upgrade

@@ -34,6 +34,14 @@ In order to use this library, you first need to go through the following steps:
 1. [Enable the API.](https://console.cloud.google.com/apis/library/storagetransfer.googleapis.com)
 1. [Set up authentication.](AUTHENTICATION.md)
 
+```ruby
+require "google/cloud/storage_transfer"
+
+client = Google::Cloud::StorageTransfer.storage_transfer_service
+request = ::Google::Cloud::StorageTransfer::V1::GetGoogleServiceAccountRequest.new # (request fields as keyword arguments...)
+response = client.get_google_service_account request
+```
+
 ## Debug Logging
 
 This library comes with opt-in Debug Logging that can help you troubleshoot

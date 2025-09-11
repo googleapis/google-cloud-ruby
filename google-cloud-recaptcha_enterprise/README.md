@@ -34,6 +34,14 @@ In order to use this library, you first need to go through the following steps:
 1. [Enable the API.](https://console.cloud.google.com/apis/library/recaptchaenterprise.googleapis.com)
 1. [Set up authentication.](AUTHENTICATION.md)
 
+```ruby
+require "google/cloud/recaptcha_enterprise"
+
+client = Google::Cloud::RecaptchaEnterprise.recaptcha_enterprise_service
+request = ::Google::Cloud::RecaptchaEnterprise::V1::CreateAssessmentRequest.new # (request fields as keyword arguments...)
+response = client.create_assessment request
+```
+
 ## Debug Logging
 
 This library comes with opt-in Debug Logging that can help you troubleshoot

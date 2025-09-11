@@ -34,6 +34,14 @@ In order to use this library, you first need to go through the following steps:
 1. [Enable the API.](https://console.cloud.google.com/apis/library/storage.googleapis.com)
 1. [Set up authentication.](AUTHENTICATION.md)
 
+```ruby
+require "google/cloud/storage/control"
+
+client = Google::Cloud::Storage::Control.storage_control
+request = ::Google::Cloud::Storage::Control::V2::CreateFolderRequest.new # (request fields as keyword arguments...)
+response = client.create_folder request
+```
+
 ## Debug Logging
 
 This library comes with opt-in Debug Logging that can help you troubleshoot

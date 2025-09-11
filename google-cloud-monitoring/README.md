@@ -36,6 +36,14 @@ In order to use this library, you first need to go through the following steps:
 1. [Enable the API.](https://console.cloud.google.com/apis/library/monitoring.googleapis.com)
 1. [Set up authentication.](AUTHENTICATION.md)
 
+```ruby
+require "google/cloud/monitoring"
+
+client = Google::Cloud::Monitoring.alert_policy_service
+request = ::Google::Cloud::Monitoring::V3::ListAlertPoliciesRequest.new # (request fields as keyword arguments...)
+response = client.list_alert_policies request
+```
+
 ## Migrating from 0.x versions
 
 The 1.0 release of the google-cloud-monitoring client is a significant upgrade

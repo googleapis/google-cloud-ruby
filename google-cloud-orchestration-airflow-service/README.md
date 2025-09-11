@@ -34,6 +34,14 @@ In order to use this library, you first need to go through the following steps:
 1. [Enable the API.](https://console.cloud.google.com/apis/library/composer.googleapis.com)
 1. [Set up authentication.](AUTHENTICATION.md)
 
+```ruby
+require "google/cloud/orchestration/airflow/service"
+
+client = Google::Cloud::Orchestration::Airflow::Service.environments
+request = ::Google::Cloud::Orchestration::Airflow::Service::V1::CreateEnvironmentRequest.new # (request fields as keyword arguments...)
+response = client.create_environment request
+```
+
 ## Debug Logging
 
 This library comes with opt-in Debug Logging that can help you troubleshoot

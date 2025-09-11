@@ -34,6 +34,14 @@ In order to use this library, you first need to go through the following steps:
 1. [Enable the API.](https://console.cloud.google.com/apis/library/datacatalog.googleapis.com)
 1. [Set up authentication.](AUTHENTICATION.md)
 
+```ruby
+require "google/cloud/data_catalog"
+
+client = Google::Cloud::DataCatalog.data_catalog
+request = ::Google::Cloud::DataCatalog::V1::SearchCatalogRequest.new # (request fields as keyword arguments...)
+response = client.search_catalog request
+```
+
 ## Debug Logging
 
 This library comes with opt-in Debug Logging that can help you troubleshoot

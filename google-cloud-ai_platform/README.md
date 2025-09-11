@@ -34,6 +34,14 @@ In order to use this library, you first need to go through the following steps:
 1. [Enable the API.](https://console.cloud.google.com/apis/library/aiplatform.googleapis.com)
 1. [Set up authentication.](AUTHENTICATION.md)
 
+```ruby
+require "google/cloud/ai_platform"
+
+client = Google::Cloud::AIPlatform.data_foundry_service
+request = ::Google::Cloud::AIPlatform::V1::GenerateSyntheticDataRequest.new # (request fields as keyword arguments...)
+response = client.generate_synthetic_data request
+```
+
 ## Debug Logging
 
 This library comes with opt-in Debug Logging that can help you troubleshoot

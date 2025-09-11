@@ -34,6 +34,14 @@ In order to use this library, you first need to go through the following steps:
 1. [Enable the API.](https://console.cloud.google.com/apis/library/backupdr.googleapis.com)
 1. [Set up authentication.](AUTHENTICATION.md)
 
+```ruby
+require "google/cloud/backupdr"
+
+client = Google::Cloud::BackupDR.backupdr
+request = ::Google::Cloud::BackupDR::V1::ListManagementServersRequest.new # (request fields as keyword arguments...)
+response = client.list_management_servers request
+```
+
 ## Debug Logging
 
 This library comes with opt-in Debug Logging that can help you troubleshoot

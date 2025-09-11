@@ -34,6 +34,14 @@ In order to use this library, you first need to go through the following steps:
 1. [Enable the API.](https://console.cloud.google.com/apis/library/merchantapi.googleapis.com)
 1. [Set up authentication.](AUTHENTICATION.md)
 
+```ruby
+require "google/shopping/merchant/data_sources"
+
+client = Google::Shopping::Merchant::DataSources.data_sources_service
+request = ::Google::Shopping::Merchant::DataSources::V1beta::GetDataSourceRequest.new # (request fields as keyword arguments...)
+response = client.get_data_source request
+```
+
 ## Debug Logging
 
 This library comes with opt-in Debug Logging that can help you troubleshoot

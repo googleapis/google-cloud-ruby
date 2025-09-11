@@ -34,6 +34,14 @@ In order to use this library, you first need to go through the following steps:
 1. [Enable the API.](https://console.cloud.google.com/apis/library/apigateway.googleapis.com)
 1. [Set up authentication.](AUTHENTICATION.md)
 
+```ruby
+require "google/cloud/api_gateway"
+
+client = Google::Cloud::ApiGateway.api_gateway_service
+request = ::Google::Cloud::ApiGateway::V1::ListGatewaysRequest.new # (request fields as keyword arguments...)
+response = client.list_gateways request
+```
+
 ## Debug Logging
 
 This library comes with opt-in Debug Logging that can help you troubleshoot

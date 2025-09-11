@@ -34,6 +34,14 @@ In order to use this library, you first need to go through the following steps:
 1. [Enable the API.](https://console.cloud.google.com/apis/library/cloudkms.googleapis.com)
 1. [Set up authentication.](AUTHENTICATION.md)
 
+```ruby
+require "google/cloud/kms"
+
+client = Google::Cloud::Kms.autokey
+request = ::Google::Cloud::Kms::V1::CreateKeyHandleRequest.new # (request fields as keyword arguments...)
+response = client.create_key_handle request
+```
+
 ## Migrating from 1.x versions
 
 The 2.0 release of the google-cloud-kms client is a significant upgrade
