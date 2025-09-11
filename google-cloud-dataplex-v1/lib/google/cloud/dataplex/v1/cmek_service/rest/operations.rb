@@ -841,9 +841,9 @@ module Google
                                                         )
                                                         .with_bindings(
                                                           uri_method: :get,
-                                                          uri_template: "/v1/{name}",
+                                                          uri_template: "/v1/{name}/operations",
                                                           matches: [
-                                                            ["name", %r{^organizations/[^/]+/locations/[^/]+/operations/[^/]+/?$}, false]
+                                                            ["name", %r{^organizations/[^/]+/locations/[^/]+/?$}, false]
                                                           ]
                                                         )
                 transcoder.transcode request_pb

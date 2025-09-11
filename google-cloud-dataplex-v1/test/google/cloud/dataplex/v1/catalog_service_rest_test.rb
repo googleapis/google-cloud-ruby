@@ -1541,6 +1541,170 @@ class ::Google::Cloud::Dataplex::V1::CatalogService::Rest::ClientTest < Minitest
     end
   end
 
+  def test_create_entry_link
+    # Create test objects.
+    client_result = ::Google::Cloud::Dataplex::V1::EntryLink.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    entry_link_id = "hello world"
+    entry_link = {}
+
+    create_entry_link_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::Dataplex::V1::CatalogService::Rest::ServiceStub.stub :transcode_create_entry_link_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, create_entry_link_client_stub do
+        # Create client
+        client = ::Google::Cloud::Dataplex::V1::CatalogService::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.create_entry_link({ parent: parent, entry_link_id: entry_link_id, entry_link: entry_link }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.create_entry_link parent: parent, entry_link_id: entry_link_id, entry_link: entry_link do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.create_entry_link ::Google::Cloud::Dataplex::V1::CreateEntryLinkRequest.new(parent: parent, entry_link_id: entry_link_id, entry_link: entry_link) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.create_entry_link({ parent: parent, entry_link_id: entry_link_id, entry_link: entry_link }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.create_entry_link(::Google::Cloud::Dataplex::V1::CreateEntryLinkRequest.new(parent: parent, entry_link_id: entry_link_id, entry_link: entry_link), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, create_entry_link_client_stub.call_count
+      end
+    end
+  end
+
+  def test_delete_entry_link
+    # Create test objects.
+    client_result = ::Google::Cloud::Dataplex::V1::EntryLink.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    delete_entry_link_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::Dataplex::V1::CatalogService::Rest::ServiceStub.stub :transcode_delete_entry_link_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, delete_entry_link_client_stub do
+        # Create client
+        client = ::Google::Cloud::Dataplex::V1::CatalogService::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.delete_entry_link({ name: name }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.delete_entry_link name: name do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.delete_entry_link ::Google::Cloud::Dataplex::V1::DeleteEntryLinkRequest.new(name: name) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.delete_entry_link({ name: name }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.delete_entry_link(::Google::Cloud::Dataplex::V1::DeleteEntryLinkRequest.new(name: name), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, delete_entry_link_client_stub.call_count
+      end
+    end
+  end
+
+  def test_get_entry_link
+    # Create test objects.
+    client_result = ::Google::Cloud::Dataplex::V1::EntryLink.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    get_entry_link_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::Dataplex::V1::CatalogService::Rest::ServiceStub.stub :transcode_get_entry_link_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, get_entry_link_client_stub do
+        # Create client
+        client = ::Google::Cloud::Dataplex::V1::CatalogService::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.get_entry_link({ name: name }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.get_entry_link name: name do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.get_entry_link ::Google::Cloud::Dataplex::V1::GetEntryLinkRequest.new(name: name) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.get_entry_link({ name: name }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.get_entry_link(::Google::Cloud::Dataplex::V1::GetEntryLinkRequest.new(name: name), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, get_entry_link_client_stub.call_count
+      end
+    end
+  end
+
   def test_configure
     credentials_token = :dummy_value
 

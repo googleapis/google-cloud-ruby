@@ -27,7 +27,7 @@ module Google
         #     Required. The resource name of the parent location:
         #     `projects/{project}/locations/{location_id}`
         #     where `project` refers to a *project_id* or *project_number* and
-        #     `location_id` refers to a GCP region.
+        #     `location_id` refers to a Google Cloud region.
         # @!attribute [rw] data_scan
         #   @return [::Google::Cloud::Dataplex::V1::DataScan]
         #     Required. DataScan resource.
@@ -73,7 +73,7 @@ module Google
         #     Required. The resource name of the dataScan:
         #     `projects/{project}/locations/{location_id}/dataScans/{data_scan_id}`
         #     where `project` refers to a *project_id* or *project_number* and
-        #     `location_id` refers to a GCP region.
+        #     `location_id` refers to a Google Cloud region.
         # @!attribute [rw] force
         #   @return [::Boolean]
         #     Optional. If set to true, any child resources of this data scan will also
@@ -90,7 +90,7 @@ module Google
         #     Required. The resource name of the dataScan:
         #     `projects/{project}/locations/{location_id}/dataScans/{data_scan_id}`
         #     where `project` refers to a *project_id* or *project_number* and
-        #     `location_id` refers to a GCP region.
+        #     `location_id` refers to a Google Cloud region.
         # @!attribute [rw] view
         #   @return [::Google::Cloud::Dataplex::V1::GetDataScanRequest::DataScanView]
         #     Optional. Select the DataScan view to return. Defaults to `BASIC`.
@@ -117,7 +117,7 @@ module Google
         #     Required. The resource name of the parent location:
         #     `projects/{project}/locations/{location_id}`
         #     where `project` refers to a *project_id* or *project_number* and
-        #     `location_id` refers to a GCP region.
+        #     `location_id` refers to a Google Cloud region.
         # @!attribute [rw] page_size
         #   @return [::Integer]
         #     Optional. Maximum number of dataScans to return. The service may return
@@ -163,7 +163,7 @@ module Google
         #     Required. The resource name of the DataScan:
         #     `projects/{project}/locations/{location_id}/dataScans/{data_scan_id}`.
         #     where `project` refers to a *project_id* or *project_number* and
-        #     `location_id` refers to a GCP region.
+        #     `location_id` refers to a Google Cloud region.
         #
         #     Only **OnDemand** data scans are allowed.
         class RunDataScanRequest
@@ -186,7 +186,7 @@ module Google
         #     Required. The resource name of the DataScanJob:
         #     `projects/{project}/locations/{location_id}/dataScans/{data_scan_id}/jobs/{data_scan_job_id}`
         #     where `project` refers to a *project_id* or *project_number* and
-        #     `location_id` refers to a GCP region.
+        #     `location_id` refers to a Google Cloud region.
         # @!attribute [rw] view
         #   @return [::Google::Cloud::Dataplex::V1::GetDataScanJobRequest::DataScanJobView]
         #     Optional. Select the DataScanJob view to return. Defaults to `BASIC`.
@@ -213,7 +213,7 @@ module Google
         #     Required. The resource name of the parent environment:
         #     `projects/{project}/locations/{location_id}/dataScans/{data_scan_id}`
         #     where `project` refers to a *project_id* or *project_number* and
-        #     `location_id` refers to a GCP region.
+        #     `location_id` refers to a Google Cloud region.
         # @!attribute [rw] page_size
         #   @return [::Integer]
         #     Optional. Maximum number of DataScanJobs to return. The service may return
@@ -280,8 +280,8 @@ module Google
         # Response details for data quality rule recommendations.
         # @!attribute [rw] rule
         #   @return [::Array<::Google::Cloud::Dataplex::V1::DataQualityRule>]
-        #     The data quality rules that Dataplex generates based on the results
-        #     of a data profiling scan.
+        #     The data quality rules that Dataplex Universal Catalog generates based on
+        #     the results of a data profiling scan.
         class GenerateDataQualityRulesResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -308,7 +308,7 @@ module Google
         #     Output only. Identifier. The relative resource name of the scan, of the
         #     form: `projects/{project}/locations/{location_id}/dataScans/{datascan_id}`,
         #     where `project` refers to a *project_id* or *project_number* and
-        #     `location_id` refers to a GCP region.
+        #     `location_id` refers to a Google Cloud region.
         # @!attribute [r] uid
         #   @return [::String]
         #     Output only. System generated globally unique ID for the scan. This ID will
@@ -433,7 +433,7 @@ module Google
         #     the form:
         #     `projects/{project}/locations/{location_id}/dataScans/{datascan_id}/jobs/{job_id}`,
         #     where `project` refers to a *project_id* or *project_number* and
-        #     `location_id` refers to a GCP region.
+        #     `location_id` refers to a Google Cloud region.
         # @!attribute [r] uid
         #   @return [::String]
         #     Output only. System generated globally unique ID for the DataScanJob.

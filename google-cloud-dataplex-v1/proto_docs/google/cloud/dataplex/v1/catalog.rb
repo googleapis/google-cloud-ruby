@@ -65,12 +65,12 @@ module Google
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
 
-          # Autorization for an AspectType.
+          # Authorization for an AspectType.
           # @!attribute [rw] alternate_use_permission
           #   @return [::String]
           #     Immutable. The IAM permission grantable on the EntryGroup to allow access
-          #     to instantiate Aspects of Dataplex owned AspectTypes, only settable for
-          #     Dataplex owned Types.
+          #     to instantiate Aspects of Dataplex Universal Catalog owned AspectTypes,
+          #     only settable for Dataplex Universal Catalog owned Types.
           class Authorization
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -95,8 +95,8 @@ module Google
           #     Primitive types:
           #
           #     * string
-          #     * integer
-          #     * boolean
+          #     * int
+          #     * bool
           #     * double
           #     * datetime. Must be of the format RFC3339 UTC "Zulu" (Examples:
           #     "2014-10-02T15:01:23Z" and "2014-10-02T15:01:23.045123456Z").
@@ -330,8 +330,8 @@ module Google
           # @!attribute [rw] alternate_use_permission
           #   @return [::String]
           #     Immutable. The IAM permission grantable on the Entry Group to allow
-          #     access to instantiate Entries of Dataplex owned Entry Types, only
-          #     settable for Dataplex owned Types.
+          #     access to instantiate Entries of Dataplex Universal Catalog owned Entry
+          #     Types, only settable for Dataplex Universal Catalog owned Types.
           class Authorization
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -402,10 +402,12 @@ module Google
         #     `projects/{project_id_or_number}/locations/{location_id}/entryTypes/{entry_type_id}`.
         # @!attribute [r] create_time
         #   @return [::Google::Protobuf::Timestamp]
-        #     Output only. The time when the entry was created in Dataplex.
+        #     Output only. The time when the entry was created in Dataplex Universal
+        #     Catalog.
         # @!attribute [r] update_time
         #   @return [::Google::Protobuf::Timestamp]
-        #     Output only. The time when the entry was last updated in Dataplex.
+        #     Output only. The time when the entry was last updated in Dataplex Universal
+        #     Catalog.
         # @!attribute [rw] aspects
         #   @return [::Google::Protobuf::Map{::String => ::Google::Cloud::Dataplex::V1::Aspect}]
         #     Optional. The aspects that are attached to the entry. Depending on how the
@@ -521,7 +523,7 @@ module Google
         #   @return [::String]
         #     Required. The resource name of the entryGroup, of the form:
         #     projects/\\{project_number}/locations/\\{location_id}
-        #     where `location_id` refers to a GCP region.
+        #     where `location_id` refers to a Google Cloud region.
         # @!attribute [rw] entry_group_id
         #   @return [::String]
         #     Required. EntryGroup identifier.
@@ -660,7 +662,7 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Delele EntryType Request.
+        # Delete EntryType Request.
         # @!attribute [rw] name
         #   @return [::String]
         #     Required. The resource name of the EntryType:
@@ -774,7 +776,7 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Delele AspectType Request.
+        # Delete AspectType Request.
         # @!attribute [rw] name
         #   @return [::String]
         #     Required. The resource name of the AspectType:
@@ -1049,11 +1051,11 @@ module Google
         # @!attribute [rw] name
         #   @return [::String]
         #     Required. The project to which the request should be attributed in the
-        #     following form: `projects/{project}/locations/{location}`.
+        #     following form: `projects/{project}/locations/global`.
         # @!attribute [rw] query
         #   @return [::String]
         #     Required. The query against which entries in scope should be matched.
-        #     The query syntax is defined in [Search syntax for Dataplex
+        #     The query syntax is defined in [Search syntax for Dataplex Universal
         #     Catalog](https://cloud.google.com/dataplex/docs/search-syntax).
         # @!attribute [rw] page_size
         #   @return [::Integer]
@@ -1069,7 +1071,7 @@ module Google
         #     Optional. Specifies the ordering of results.
         #     Supported values are:
         #
-        #     * `relevance` (default)
+        #     * `relevance`
         #     * `last_modified_timestamp`
         #     * `last_modified_timestamp asc`
         # @!attribute [rw] scope
@@ -1146,17 +1148,22 @@ module Google
         # @!attribute [rw] entry
         #   @return [::Google::Cloud::Dataplex::V1::Entry]
         #     Information about an entry and its attached aspects.
+        # @!attribute [rw] entry_link
+        #   @return [::Google::Cloud::Dataplex::V1::EntryLink]
+        #     Information about the entry link. User should provide either one of the
+        #     entry or entry_link. While providing entry_link, user should not
+        #     provide update_mask and aspect_keys.
         # @!attribute [rw] update_mask
         #   @return [::Google::Protobuf::FieldMask]
         #     The fields to update, in paths that are relative to the `Entry` resource.
         #     Separate each field with a comma.
         #
-        #     In `FULL` entry sync mode, Dataplex includes the paths of all of the fields
-        #     for an entry that can be modified, including aspects. This means that
-        #     Dataplex replaces the existing entry with the entry in the metadata import
-        #     file. All modifiable fields are updated, regardless of the fields that are
-        #     listed in the update mask, and regardless of whether a field is present
-        #     in the `entry` object.
+        #     In `FULL` entry sync mode, Dataplex Universal Catalog includes the paths of
+        #     all of the fields for an entry that can be modified, including aspects.
+        #     This means that Dataplex Universal Catalog replaces the existing entry with
+        #     the entry in the metadata import file. All modifiable fields are updated,
+        #     regardless of the fields that are listed in the update mask, and regardless
+        #     of whether a field is present in the `entry` object.
         #
         #     The `update_mask` field is ignored when an entry is created or re-created.
         #
@@ -1164,10 +1171,10 @@ module Google
         #     value to `aspects`.
         #
         #
-        #     Dataplex also determines which entries and aspects to modify by comparing
-        #     the values and timestamps that you provide in the metadata import file with
-        #     the values and timestamps that exist in your project. For more information,
-        #     see [Comparison
+        #     Dataplex Universal Catalog also determines which entries and aspects to
+        #     modify by comparing the values and timestamps that you provide in the
+        #     metadata import file with the values and timestamps that exist in your
+        #     project. For more information, see [Comparison
         #     logic](https://cloud.google.com/dataplex/docs/import-metadata#data-modification-logic).
         # @!attribute [rw] aspect_keys
         #   @return [::Array<::String>]
@@ -1187,8 +1194,8 @@ module Google
         #
         #     In `FULL` entry sync mode, if you leave this field empty, it is treated as
         #     specifying exactly those aspects that are present within the specified
-        #     entry. Dataplex implicitly adds the keys for all of the required aspects of
-        #     an entry.
+        #     entry. Dataplex Universal Catalog implicitly adds the keys for all of the
+        #     required aspects of an entry.
         class ImportItem
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -1356,6 +1363,17 @@ module Google
           # @!attribute [r] update_time
           #   @return [::Google::Protobuf::Timestamp]
           #     Output only. The time when the status was updated.
+          # @!attribute [r] deleted_entry_links
+          #   @return [::Integer]
+          #     Output only. The total number of entry links that were successfully
+          #     deleted.
+          # @!attribute [r] created_entry_links
+          #   @return [::Integer]
+          #     Output only. The total number of entry links that were successfully
+          #     created.
+          # @!attribute [r] unchanged_entry_links
+          #   @return [::Integer]
+          #     Output only. The total number of entry links that were left unchanged.
           class ImportJobResult
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -1474,6 +1492,42 @@ module Google
             #
             #     The location of an aspect type must either match the location of the
             #     job, or the aspect type must be global.
+            # @!attribute [rw] glossaries
+            #   @return [::Array<::String>]
+            #     Optional. The glossaries that are in scope for the import job,
+            #     specified as relative resource names in the format
+            #     `projects/{project_number_or_id}/locations/{location_id}/glossaries/{glossary_id}`.
+            #
+            #     While importing Business Glossary entries, the user must
+            #     provide glossaries. While importing entries, the user does not have to
+            #     provide glossaries. If the metadata import file attempts to modify
+            #     Business Glossary entries whose glossary isn't included in this list,
+            #     the import job will skip those entries.
+            #
+            #     The location of a glossary must either match the location of the
+            #     job, or the glossary must be global.
+            # @!attribute [rw] entry_link_types
+            #   @return [::Array<::String>]
+            #     Optional. The entry link types that are in scope for the import job,
+            #     specified as relative resource names in the format
+            #     `projects/{project_number_or_id}/locations/{location_id}/entryLinkTypes/{entry_link_type_id}`.
+            #     The job modifies only the entryLinks that belong to these entry link
+            #     types.
+            #
+            #     If the metadata import file attempts to create or delete an entry link
+            #     whose entry link type isn't included in this list, the import job will
+            #     skip those entry links.
+            # @!attribute [rw] referenced_entry_scopes
+            #   @return [::Array<::String>]
+            #     Optional. Defines the scope of entries that can be referenced in the
+            #     entry links.
+            #
+            #     Currently, projects are supported as valid scopes.
+            #     Format: `projects/{project_number_or_id}`
+            #
+            #     If the metadata import file attempts to create an entry link
+            #     which references an entry that is not in the scope, the import job will
+            #     skip that entry link.
             class ImportJobScope
               include ::Google::Protobuf::MessageExts
               extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -1487,9 +1541,9 @@ module Google
               SYNC_MODE_UNSPECIFIED = 0
 
               # All resources in the job's scope are modified. If a resource exists in
-              # Dataplex but isn't included in the metadata import file, the resource
-              # is deleted when you run the metadata job. Use this mode to perform a
-              # full sync of the set of entries in the job scope.
+              # Dataplex Universal Catalog but isn't included in the metadata import
+              # file, the resource is deleted when you run the metadata job. Use this
+              # mode to perform a full sync of the set of entries in the job scope.
               #
               # This sync mode is supported for entries.
               FULL = 1
@@ -1543,9 +1597,9 @@ module Google
           #     metadata to, in the format `gs://{bucket}/`. You can optionally specify a
           #     custom prefix after the bucket name, in the format
           #     `gs://{bucket}/{prefix}/`. The maximum length of the custom prefix is 128
-          #     characters. Dataplex constructs the object path for the exported files by
-          #     using the bucket name and prefix that you provide, followed by a
-          #     system-generated path.
+          #     characters. Dataplex Universal Catalog constructs the object path for the
+          #     exported files by using the bucket name and prefix that you provide,
+          #     followed by a system-generated path.
           #
           #     The bucket must be in the same VPC Service Controls perimeter as the job.
           class ExportJobSpec
@@ -1675,6 +1729,111 @@ module Google
             # Export job.
             EXPORT = 2
           end
+        end
+
+        # EntryLink represents a link between two Entries.
+        # @!attribute [r] name
+        #   @return [::String]
+        #     Output only. Immutable. Identifier. The relative resource name of the Entry
+        #     Link, of the form:
+        #     `projects/{project_id_or_number}/locations/{location_id}/entryGroups/{entry_group_id}/entryLinks/{entry_link_id}`
+        # @!attribute [rw] entry_link_type
+        #   @return [::String]
+        #     Required. Immutable. Relative resource name of the Entry Link Type used to
+        #     create this Entry Link. For example:
+        #
+        #     - Entry link between synonym terms in a glossary:
+        #     `projects/dataplex-types/locations/global/entryLinkTypes/synonym`
+        #     - Entry link between related terms in a glossary:
+        #     `projects/dataplex-types/locations/global/entryLinkTypes/related`
+        #     - Entry link between glossary terms and data assets:
+        #     `projects/dataplex-types/locations/global/entryLinkTypes/definition`
+        # @!attribute [r] create_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Output only. The time when the Entry Link was created.
+        # @!attribute [r] update_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Output only. The time when the Entry Link was last updated.
+        # @!attribute [rw] entry_references
+        #   @return [::Array<::Google::Cloud::Dataplex::V1::EntryLink::EntryReference>]
+        #     Required. Specifies the Entries referenced in the Entry Link. There should
+        #     be exactly two entry references.
+        class EntryLink
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Reference to the Entry that is linked through the Entry Link.
+          # @!attribute [rw] name
+          #   @return [::String]
+          #     Required. Immutable. The relative resource name of the referenced Entry,
+          #     of the form:
+          #     `projects/{project_id_or_number}/locations/{location_id}/entryGroups/{entry_group_id}/entries/{entry_id}`
+          # @!attribute [rw] path
+          #   @return [::String]
+          #     Immutable. The path in the Entry that is referenced in the Entry Link.
+          #     Empty path denotes that the Entry itself is referenced in the Entry
+          #     Link.
+          # @!attribute [rw] type
+          #   @return [::Google::Cloud::Dataplex::V1::EntryLink::EntryReference::Type]
+          #     Required. Immutable. The reference type of the Entry.
+          class EntryReference
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+
+            # Reference type of the Entry.
+            module Type
+              # Unspecified reference type. Implies that the Entry is referenced
+              # in a non-directional Entry Link.
+              UNSPECIFIED = 0
+
+              # The Entry is referenced as the source of the directional Entry Link.
+              SOURCE = 2
+
+              # The Entry is referenced as the target of the directional Entry Link.
+              TARGET = 3
+            end
+          end
+        end
+
+        # Request message for CreateEntryLink.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. The resource name of the parent Entry Group:
+        #     `projects/{project_id_or_number}/locations/{location_id}/entryGroups/{entry_group_id}`.
+        # @!attribute [rw] entry_link_id
+        #   @return [::String]
+        #     Required. Entry Link identifier
+        #     * Must contain only lowercase letters, numbers and hyphens.
+        #     * Must start with a letter.
+        #     * Must be between 1-63 characters.
+        #     * Must end with a number or a letter.
+        #     * Must be unique within the EntryGroup.
+        # @!attribute [rw] entry_link
+        #   @return [::Google::Cloud::Dataplex::V1::EntryLink]
+        #     Required. Entry Link resource.
+        class CreateEntryLinkRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for DeleteEntryLink.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The resource name of the Entry Link:
+        #     `projects/{project_id_or_number}/locations/{location_id}/entryGroups/{entry_group_id}/entryLinks/{entry_link_id}`.
+        class DeleteEntryLinkRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for GetEntryLink.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The resource name of the Entry Link:
+        #     `projects/{project_id_or_number}/locations/{location_id}/entryGroups/{entry_group_id}/entryLinks/{entry_link_id}`.
+        class GetEntryLinkRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # View for controlling which parts of an entry are to be returned.
