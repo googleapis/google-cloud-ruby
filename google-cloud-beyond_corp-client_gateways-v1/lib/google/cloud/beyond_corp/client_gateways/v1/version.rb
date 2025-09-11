@@ -22,7 +22,7 @@ module Google
     module BeyondCorp
       module ClientGateways
         module V1
-          VERSION = "0.8.0"
+          VERSION = "0.9.0"
         end
       end
     end
