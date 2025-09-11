@@ -1198,6 +1198,19 @@ describe Google::Cloud::Bigquery::Table, :bigquery do
     _(table.schema.fields.map(&:default_value_expression)).must_be :==, schema_fields_default.map(&:default_value_expression)
   end
 
+  it "creates a table with a field with collation" do
+    t = nil
+    begin
+      t = dataset.create_table "#{prefix}_table_collation_test" do |schema|
+        schema.string "name", mode: :required, collation: "und:ci"
+      end
+      t.reload!
+      _(t.schema.field("name").collation).must_equal "und:ci"
+    ensure
+      t.delete if t
+    end
+  end
+
   it "restores snapshot into a table" do
     begin
       result = table.clone target_clone_table
