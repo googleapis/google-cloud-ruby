@@ -65,6 +65,12 @@ module Google
           #
           #     For supported values, refer to
           #     https://cloud.google.com/bigquery/docs/locations#supported_locations.
+          # @!attribute [rw] project
+          #   @return [::String]
+          #     Optional. The project of the BigQuery dataset to publish BigLake external
+          #     or non-BigLake external tables to. If not specified, the project of the
+          #     Cloud Storage bucket will be used. The format is
+          #     "projects/\\{project_id_or_number}".
           class BigQueryPublishingConfig
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods

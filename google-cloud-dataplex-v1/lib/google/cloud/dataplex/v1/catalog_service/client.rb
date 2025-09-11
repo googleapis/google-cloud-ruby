@@ -30,10 +30,10 @@ module Google
           # Client for the CatalogService service.
           #
           # The primary resources offered by this service are EntryGroups, EntryTypes,
-          # AspectTypes, and Entries. They collectively let data administrators organize,
-          # manage, secure, and catalog data located across cloud projects in their
-          # organization in a variety of storage systems, including Cloud Storage and
-          # BigQuery.
+          # AspectTypes, Entries and EntryLinks. They collectively let data
+          # administrators organize, manage, secure, and catalog data located across
+          # cloud projects in their organization in a variety of storage systems,
+          # including Cloud Storage and BigQuery.
           #
           class Client
             # @private
@@ -1334,7 +1334,7 @@ module Google
             #   @param parent [::String]
             #     Required. The resource name of the entryGroup, of the form:
             #     projects/\\{project_number}/locations/\\{location_id}
-            #     where `location_id` refers to a GCP region.
+            #     where `location_id` refers to a Google Cloud region.
             #   @param entry_group_id [::String]
             #     Required. EntryGroup identifier.
             #   @param entry_group [::Google::Cloud::Dataplex::V1::EntryGroup, ::Hash]
@@ -2454,10 +2454,10 @@ module Google
             #
             #   @param name [::String]
             #     Required. The project to which the request should be attributed in the
-            #     following form: `projects/{project}/locations/{location}`.
+            #     following form: `projects/{project}/locations/global`.
             #   @param query [::String]
             #     Required. The query against which entries in scope should be matched.
-            #     The query syntax is defined in [Search syntax for Dataplex
+            #     The query syntax is defined in [Search syntax for Dataplex Universal
             #     Catalog](https://cloud.google.com/dataplex/docs/search-syntax).
             #   @param page_size [::Integer]
             #     Optional. Number of results in the search page. If <=0, then defaults
@@ -2470,7 +2470,7 @@ module Google
             #     Optional. Specifies the ordering of results.
             #     Supported values are:
             #
-            #     * `relevance` (default)
+            #     * `relevance`
             #     * `last_modified_timestamp`
             #     * `last_modified_timestamp asc`
             #   @param scope [::String]
@@ -2553,8 +2553,8 @@ module Google
             end
 
             ##
-            # Creates a metadata job. For example, use a metadata job to import Dataplex
-            # Catalog entries and aspects from a third-party system into Dataplex.
+            # Creates a metadata job. For example, use a metadata job to import metadata
+            # from a third-party system into Dataplex Universal Catalog.
             #
             # @overload create_metadata_job(request, options = nil)
             #   Pass arguments to `create_metadata_job` via a request object, either of type
@@ -2948,6 +2948,273 @@ module Google
             end
 
             ##
+            # Creates an Entry Link.
+            #
+            # @overload create_entry_link(request, options = nil)
+            #   Pass arguments to `create_entry_link` via a request object, either of type
+            #   {::Google::Cloud::Dataplex::V1::CreateEntryLinkRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::Dataplex::V1::CreateEntryLinkRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload create_entry_link(parent: nil, entry_link_id: nil, entry_link: nil)
+            #   Pass arguments to `create_entry_link` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param parent [::String]
+            #     Required. The resource name of the parent Entry Group:
+            #     `projects/{project_id_or_number}/locations/{location_id}/entryGroups/{entry_group_id}`.
+            #   @param entry_link_id [::String]
+            #     Required. Entry Link identifier
+            #     * Must contain only lowercase letters, numbers and hyphens.
+            #     * Must start with a letter.
+            #     * Must be between 1-63 characters.
+            #     * Must end with a number or a letter.
+            #     * Must be unique within the EntryGroup.
+            #   @param entry_link [::Google::Cloud::Dataplex::V1::EntryLink, ::Hash]
+            #     Required. Entry Link resource.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Google::Cloud::Dataplex::V1::EntryLink]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Google::Cloud::Dataplex::V1::EntryLink]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/dataplex/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Dataplex::V1::CatalogService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Dataplex::V1::CreateEntryLinkRequest.new
+            #
+            #   # Call the create_entry_link method.
+            #   result = client.create_entry_link request
+            #
+            #   # The returned object is of type Google::Cloud::Dataplex::V1::EntryLink.
+            #   p result
+            #
+            def create_entry_link request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Dataplex::V1::CreateEntryLinkRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.create_entry_link.metadata.to_h
+
+              # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::Dataplex::V1::VERSION
+              metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.create_entry_link.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.create_entry_link.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @catalog_service_stub.call_rpc :create_entry_link, request, options: options do |response, operation|
+                yield response, operation if block_given?
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Deletes an Entry Link.
+            #
+            # @overload delete_entry_link(request, options = nil)
+            #   Pass arguments to `delete_entry_link` via a request object, either of type
+            #   {::Google::Cloud::Dataplex::V1::DeleteEntryLinkRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::Dataplex::V1::DeleteEntryLinkRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload delete_entry_link(name: nil)
+            #   Pass arguments to `delete_entry_link` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param name [::String]
+            #     Required. The resource name of the Entry Link:
+            #     `projects/{project_id_or_number}/locations/{location_id}/entryGroups/{entry_group_id}/entryLinks/{entry_link_id}`.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Google::Cloud::Dataplex::V1::EntryLink]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Google::Cloud::Dataplex::V1::EntryLink]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/dataplex/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Dataplex::V1::CatalogService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Dataplex::V1::DeleteEntryLinkRequest.new
+            #
+            #   # Call the delete_entry_link method.
+            #   result = client.delete_entry_link request
+            #
+            #   # The returned object is of type Google::Cloud::Dataplex::V1::EntryLink.
+            #   p result
+            #
+            def delete_entry_link request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Dataplex::V1::DeleteEntryLinkRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.delete_entry_link.metadata.to_h
+
+              # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::Dataplex::V1::VERSION
+              metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.delete_entry_link.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.delete_entry_link.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @catalog_service_stub.call_rpc :delete_entry_link, request, options: options do |response, operation|
+                yield response, operation if block_given?
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Gets an Entry Link.
+            #
+            # @overload get_entry_link(request, options = nil)
+            #   Pass arguments to `get_entry_link` via a request object, either of type
+            #   {::Google::Cloud::Dataplex::V1::GetEntryLinkRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::Dataplex::V1::GetEntryLinkRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload get_entry_link(name: nil)
+            #   Pass arguments to `get_entry_link` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param name [::String]
+            #     Required. The resource name of the Entry Link:
+            #     `projects/{project_id_or_number}/locations/{location_id}/entryGroups/{entry_group_id}/entryLinks/{entry_link_id}`.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Google::Cloud::Dataplex::V1::EntryLink]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Google::Cloud::Dataplex::V1::EntryLink]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/dataplex/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Dataplex::V1::CatalogService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Dataplex::V1::GetEntryLinkRequest.new
+            #
+            #   # Call the get_entry_link method.
+            #   result = client.get_entry_link request
+            #
+            #   # The returned object is of type Google::Cloud::Dataplex::V1::EntryLink.
+            #   p result
+            #
+            def get_entry_link request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Dataplex::V1::GetEntryLinkRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.get_entry_link.metadata.to_h
+
+              # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::Dataplex::V1::VERSION
+              metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.get_entry_link.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.get_entry_link.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @catalog_service_stub.call_rpc :get_entry_link, request, options: options do |response, operation|
+                yield response, operation if block_given?
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
             # Configuration class for the CatalogService API.
             #
             # This class represents the configuration for CatalogService,
@@ -3243,6 +3510,21 @@ module Google
                 # @return [::Gapic::Config::Method]
                 #
                 attr_reader :cancel_metadata_job
+                ##
+                # RPC-specific configuration for `create_entry_link`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :create_entry_link
+                ##
+                # RPC-specific configuration for `delete_entry_link`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :delete_entry_link
+                ##
+                # RPC-specific configuration for `get_entry_link`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :get_entry_link
 
                 # @private
                 def initialize parent_rpcs = nil
@@ -3298,6 +3580,12 @@ module Google
                   @list_metadata_jobs = ::Gapic::Config::Method.new list_metadata_jobs_config
                   cancel_metadata_job_config = parent_rpcs.cancel_metadata_job if parent_rpcs.respond_to? :cancel_metadata_job
                   @cancel_metadata_job = ::Gapic::Config::Method.new cancel_metadata_job_config
+                  create_entry_link_config = parent_rpcs.create_entry_link if parent_rpcs.respond_to? :create_entry_link
+                  @create_entry_link = ::Gapic::Config::Method.new create_entry_link_config
+                  delete_entry_link_config = parent_rpcs.delete_entry_link if parent_rpcs.respond_to? :delete_entry_link
+                  @delete_entry_link = ::Gapic::Config::Method.new delete_entry_link_config
+                  get_entry_link_config = parent_rpcs.get_entry_link if parent_rpcs.respond_to? :get_entry_link
+                  @get_entry_link = ::Gapic::Config::Method.new get_entry_link_config
 
                   yield self if block_given?
                 end

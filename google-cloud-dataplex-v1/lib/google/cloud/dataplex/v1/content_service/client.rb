@@ -29,7 +29,8 @@ module Google
           ##
           # Client for the ContentService service.
           #
-          # ContentService manages Notebook and SQL Scripts for Dataplex.
+          # ContentService manages Notebook and SQL Scripts for Dataplex Universal
+          # Catalog.
           #
           class Client
             # @private

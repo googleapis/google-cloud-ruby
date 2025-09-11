@@ -77,6 +77,18 @@ class ::Google::Cloud::Dataplex::V1::CatalogService::ClientPathsTest < Minitest:
     end
   end
 
+  def test_entry_link_path
+    grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
+      client = ::Google::Cloud::Dataplex::V1::CatalogService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      path = client.entry_link_path project: "value0", location: "value1", entry_group: "value2", entry_link: "value3"
+      assert_equal "projects/value0/locations/value1/entryGroups/value2/entryLinks/value3", path
+    end
+  end
+
   def test_entry_type_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
     ::Gapic::ServiceStub.stub :new, DummyStub.new do
@@ -86,6 +98,18 @@ class ::Google::Cloud::Dataplex::V1::CatalogService::ClientPathsTest < Minitest:
 
       path = client.entry_type_path project: "value0", location: "value1", entry_type: "value2"
       assert_equal "projects/value0/locations/value1/entryTypes/value2", path
+    end
+  end
+
+  def test_glossary_path
+    grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
+      client = ::Google::Cloud::Dataplex::V1::CatalogService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      path = client.glossary_path project: "value0", location: "value1", glossary: "value2"
+      assert_equal "projects/value0/locations/value1/glossaries/value2", path
     end
   end
 
