@@ -183,9 +183,14 @@ module Google
         #     <1.16.
         # @!attribute [rw] k8s_version
         #   @return [::String]
-        #     Optional. Major version of the Kubernetes cluster. This is only used to
-        #     determine which version to use for the CustomResourceDefinition resources,
-        #     `apiextensions/v1beta1` or`apiextensions/v1`.
+        #     Optional. Major and minor version of the Kubernetes cluster. This is only
+        #     used to determine which version to use for the CustomResourceDefinition
+        #     resources, `apiextensions/v1beta1` or`apiextensions/v1`.
+        # @!attribute [rw] k8s_git_version
+        #   @return [::String]
+        #     Optional. Git version of the Kubernetes cluster. This is only used to gate
+        #     the Connect Agent migration to svc.id.goog on GDC-SO 1.33.100 patch and
+        #     above.
         class ResourceOptions
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
