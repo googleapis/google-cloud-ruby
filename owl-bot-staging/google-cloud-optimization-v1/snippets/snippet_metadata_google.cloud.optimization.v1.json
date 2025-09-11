@@ -1,0 +1,95 @@
+{
+  "client_library": {
+    "name": "google-cloud-optimization-v1",
+    "version": "",
+    "language": "RUBY",
+    "apis": [
+      {
+        "id": "google.cloud.optimization.v1",
+        "version": "v1"
+      }
+    ]
+  },
+  "snippets": [
+    {
+      "region_tag": "cloudoptimization_v1_generated_FleetRouting_OptimizeTours_sync",
+      "title": "Snippet for the optimize_tours call in the FleetRouting service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Optimization::V1::FleetRouting::Client#optimize_tours.",
+      "file": "fleet_routing/optimize_tours.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "optimize_tours",
+        "full_name": "::Google::Cloud::Optimization::V1::FleetRouting::Client#optimize_tours",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Optimization::V1::OptimizeToursRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Optimization::V1::OptimizeToursResponse",
+        "client": {
+          "short_name": "FleetRouting::Client",
+          "full_name": "::Google::Cloud::Optimization::V1::FleetRouting::Client"
+        },
+        "method": {
+          "short_name": "OptimizeTours",
+          "full_name": "google.cloud.optimization.v1.FleetRouting.OptimizeTours",
+          "service": {
+            "short_name": "FleetRouting",
+            "full_name": "google.cloud.optimization.v1.FleetRouting"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "cloudoptimization_v1_generated_FleetRouting_BatchOptimizeTours_sync",
+      "title": "Snippet for the batch_optimize_tours call in the FleetRouting service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Optimization::V1::FleetRouting::Client#batch_optimize_tours.",
+      "file": "fleet_routing/batch_optimize_tours.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "batch_optimize_tours",
+        "full_name": "::Google::Cloud::Optimization::V1::FleetRouting::Client#batch_optimize_tours",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Optimization::V1::BatchOptimizeToursRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "FleetRouting::Client",
+          "full_name": "::Google::Cloud::Optimization::V1::FleetRouting::Client"
+        },
+        "method": {
+          "short_name": "BatchOptimizeTours",
+          "full_name": "google.cloud.optimization.v1.FleetRouting.BatchOptimizeTours",
+          "service": {
+            "short_name": "FleetRouting",
+            "full_name": "google.cloud.optimization.v1.FleetRouting"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    }
+  ]
+}
