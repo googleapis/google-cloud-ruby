@@ -22,7 +22,7 @@ module Google
     module MarketingPlatform
       module Admin
         module V1alpha
-          VERSION = "0.1.0"
+          VERSION = "0.2.0"
         end
       end
     end
