@@ -66,16 +66,20 @@ module Google
         # The data source for DataScan.
         # @!attribute [rw] entity
         #   @return [::String]
-        #     Immutable. The Dataplex entity that represents the data source (e.g.
-        #     BigQuery table) for DataScan, of the form:
+        #     Immutable. The Dataplex Universal Catalog entity that represents the data
+        #     source (e.g. BigQuery table) for DataScan, of the form:
         #     `projects/{project_number}/locations/{location_id}/lakes/{lake_id}/zones/{zone_id}/entities/{entity_id}`.
         #
         #     Note: The following fields are mutually exclusive: `entity`, `resource`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] resource
         #   @return [::String]
         #     Immutable. The service-qualified full resource name of the cloud resource
-        #     for a DataScan job to scan against. The field could be: BigQuery table of
-        #     type "TABLE" for DataProfileScan/DataQualityScan Format:
+        #     for a DataScan job to scan against. The field could either be: Cloud
+        #     Storage bucket for DataDiscoveryScan Format:
+        #     //storage.googleapis.com/projects/PROJECT_ID/buckets/BUCKET_ID
+        #     or
+        #     BigQuery table of type "TABLE" for DataProfileScan/DataQualityScan
+        #     Format:
         #     //bigquery.googleapis.com/projects/PROJECT_ID/datasets/DATASET_ID/tables/TABLE_ID
         #
         #     Note: The following fields are mutually exclusive: `resource`, `entity`. If a field in that set is populated, all other fields in the set will automatically be cleared.
@@ -93,16 +97,16 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
 
           # A data range denoted by a pair of start/end values of a field.
-          # @!attribute [rw] field
+          # @!attribute [r] field
           #   @return [::String]
-          #     The field that contains values which monotonically increases over time
-          #     (e.g. a timestamp column).
-          # @!attribute [rw] start
+          #     Output only. The field that contains values which monotonically increases
+          #     over time (e.g. a timestamp column).
+          # @!attribute [r] start
           #   @return [::String]
-          #     Value that marks the start of the range.
-          # @!attribute [rw] end
+          #     Output only. Value that marks the start of the range.
+          # @!attribute [r] end
           #   @return [::String]
-          #     Value that marks the end of the range.
+          #     Output only. Value that marks the end of the range.
           class IncrementalField
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods

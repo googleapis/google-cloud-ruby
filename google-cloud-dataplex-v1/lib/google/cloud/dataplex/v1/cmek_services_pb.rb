@@ -24,7 +24,7 @@ module Google
     module Dataplex
       module V1
         module CmekService
-          # Dataplex Cmek Service
+          # Dataplex Universal Catalog Customer Managed Encryption Keys (CMEK) Service
           class Service
 
             include ::GRPC::GenericService

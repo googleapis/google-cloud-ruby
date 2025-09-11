@@ -46,6 +46,10 @@ module Google
         # @!attribute [rw] post_scan_actions
         #   @return [::Google::Cloud::Dataplex::V1::DataQualitySpec::PostScanActions]
         #     Optional. Actions to take upon job completion.
+        # @!attribute [rw] catalog_publishing_enabled
+        #   @return [::Boolean]
+        #     Optional. If set, the latest DataScan job result will be published as
+        #     Dataplex Universal Catalog metadata.
         class DataQualitySpec
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -164,6 +168,10 @@ module Google
         # @!attribute [r] post_scan_actions_result
         #   @return [::Google::Cloud::Dataplex::V1::DataQualityResult::PostScanActionsResult]
         #     Output only. The result of post scan actions.
+        # @!attribute [r] catalog_publishing_status
+        #   @return [::Google::Cloud::Dataplex::V1::DataScanCatalogPublishingStatus]
+        #     Output only. The status of publishing the data scan as Dataplex Universal
+        #     Catalog metadata.
         class DataQualityResult
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -280,9 +288,9 @@ module Google
 
         # A dimension captures data quality intent about a defined subset of the rules
         # specified.
-        # @!attribute [rw] name
+        # @!attribute [r] name
         #   @return [::String]
-        #     Optional. The dimension name a rule belongs to. Custom dimension name is
+        #     Output only. The dimension name a rule belongs to. Custom dimension name is
         #     supported with all uppercase letters and maximum length of 30 characters.
         class DataQualityDimension
           include ::Google::Protobuf::MessageExts
@@ -360,9 +368,8 @@ module Google
         # @!attribute [rw] dimension
         #   @return [::String]
         #     Required. The dimension a rule belongs to. Results are also aggregated at
-        #     the dimension level. Supported dimensions are **["COMPLETENESS",
-        #     "ACCURACY", "CONSISTENCY", "VALIDITY", "UNIQUENESS", "FRESHNESS",
-        #     "VOLUME"]**
+        #     the dimension level. Custom dimension name is supported with all uppercase
+        #     letters and maximum length of 30 characters.
         # @!attribute [rw] threshold
         #   @return [::Float]
         #     Optional. The minimum ratio of **passing_rows / total_rows** required to
@@ -565,6 +572,12 @@ module Google
         #
         #     The score ranges between between [0, 100] (up to two decimal
         #     points).
+        # @!attribute [r] passed
+        #   @return [::Boolean]
+        #     Output only. Whether the column passed or failed.
+        # @!attribute [r] dimensions
+        #   @return [::Array<::Google::Cloud::Dataplex::V1::DataQualityDimensionResult>]
+        #     Output only. The dimension-level results for this column.
         class DataQualityColumnResult
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

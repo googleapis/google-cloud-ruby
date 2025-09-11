@@ -34,10 +34,8 @@ module Google
         # @!attribute [rw] row_filter
         #   @return [::String]
         #     Optional. A filter applied to all rows in a single DataScan job.
-        #     The filter needs to be a valid SQL expression for a [WHERE clause in
-        #     GoogleSQL
-        #     syntax](https://cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#where_clause).
-        #
+        #     The filter needs to be a valid SQL expression for a WHERE clause in
+        #     BigQuery standard SQL syntax.
         #     Example: col1 >= 0 AND col2 < 10
         # @!attribute [rw] post_scan_actions
         #   @return [::Google::Cloud::Dataplex::V1::DataProfileSpec::PostScanActions]
@@ -73,8 +71,6 @@ module Google
             #     Optional. The BigQuery table to export DataProfileScan results to.
             #     Format:
             #     //bigquery.googleapis.com/projects/PROJECT_ID/datasets/DATASET_ID/tables/TABLE_ID
-            #     or
-            #     projects/PROJECT_ID/datasets/DATASET_ID/tables/TABLE_ID
             class BigQueryExport
               include ::Google::Protobuf::MessageExts
               extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -99,15 +95,15 @@ module Google
 
         # DataProfileResult defines the output of DataProfileScan. Each field of the
         # table will have field type specific profile result.
-        # @!attribute [rw] row_count
+        # @!attribute [r] row_count
         #   @return [::Integer]
-        #     The count of rows scanned.
-        # @!attribute [rw] profile
+        #     Output only. The count of rows scanned.
+        # @!attribute [r] profile
         #   @return [::Google::Cloud::Dataplex::V1::DataProfileResult::Profile]
-        #     The profile information per field.
-        # @!attribute [rw] scanned_data
+        #     Output only. The profile information per field.
+        # @!attribute [r] scanned_data
         #   @return [::Google::Cloud::Dataplex::V1::ScannedData]
-        #     The data scanned for this result.
+        #     Output only. The data scanned for this result.
         # @!attribute [r] post_scan_actions_result
         #   @return [::Google::Cloud::Dataplex::V1::DataProfileResult::PostScanActionsResult]
         #     Output only. The result of post scan actions.
@@ -116,54 +112,58 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
 
           # Contains name, type, mode and field type specific profile information.
-          # @!attribute [rw] fields
+          # @!attribute [r] fields
           #   @return [::Array<::Google::Cloud::Dataplex::V1::DataProfileResult::Profile::Field>]
-          #     List of fields with structural and profile information for each field.
+          #     Output only. List of fields with structural and profile information for
+          #     each field.
           class Profile
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
 
             # A field within a table.
-            # @!attribute [rw] name
+            # @!attribute [r] name
             #   @return [::String]
-            #     The name of the field.
-            # @!attribute [rw] type
+            #     Output only. The name of the field.
+            # @!attribute [r] type
             #   @return [::String]
-            #     The data type retrieved from the schema of the data source. For
-            #     instance, for a BigQuery native table, it is the [BigQuery Table
+            #     Output only. The data type retrieved from the schema of the data
+            #     source. For instance, for a BigQuery native table, it is the [BigQuery
+            #     Table
             #     Schema](https://cloud.google.com/bigquery/docs/reference/rest/v2/tables#tablefieldschema).
-            #     For a Dataplex Entity, it is the [Entity
+            #     For a Dataplex Universal Catalog Entity, it is the [Entity
             #     Schema](https://cloud.google.com/dataplex/docs/reference/rpc/google.cloud.dataplex.v1#type_3).
-            # @!attribute [rw] mode
+            # @!attribute [r] mode
             #   @return [::String]
-            #     The mode of the field. Possible values include:
+            #     Output only. The mode of the field. Possible values include:
             #
             #     * REQUIRED, if it is a required field.
             #     * NULLABLE, if it is an optional field.
             #     * REPEATED, if it is a repeated field.
-            # @!attribute [rw] profile
+            # @!attribute [r] profile
             #   @return [::Google::Cloud::Dataplex::V1::DataProfileResult::Profile::Field::ProfileInfo]
-            #     Profile information for the corresponding field.
+            #     Output only. Profile information for the corresponding field.
             class Field
               include ::Google::Protobuf::MessageExts
               extend ::Google::Protobuf::MessageExts::ClassMethods
 
               # The profile information for each field type.
-              # @!attribute [rw] null_ratio
+              # @!attribute [r] null_ratio
               #   @return [::Float]
-              #     Ratio of rows with null value against total scanned rows.
-              # @!attribute [rw] distinct_ratio
+              #     Output only. Ratio of rows with null value against total scanned
+              #     rows.
+              # @!attribute [r] distinct_ratio
               #   @return [::Float]
-              #     Ratio of rows with distinct values against total scanned rows.
-              #     Not available for complex non-groupable field type, including RECORD,
-              #     ARRAY, GEOGRAPHY, and JSON, as well as fields with REPEATABLE mode.
-              # @!attribute [rw] top_n_values
+              #     Output only. Ratio of rows with distinct values against total scanned
+              #     rows. Not available for complex non-groupable field type, including
+              #     RECORD, ARRAY, GEOGRAPHY, and JSON, as well as fields with REPEATABLE
+              #     mode.
+              # @!attribute [r] top_n_values
               #   @return [::Array<::Google::Cloud::Dataplex::V1::DataProfileResult::Profile::Field::ProfileInfo::TopNValue>]
-              #     The list of top N non-null values, frequency and ratio with which
-              #     they occur in the scanned data. N is 10 or equal to the number of
-              #     distinct values in the field, whichever is smaller. Not available for
-              #     complex non-groupable field type, including RECORD, ARRAY, GEOGRAPHY,
-              #     and JSON, as well as fields with REPEATABLE mode.
+              #     Output only. The list of top N non-null values, frequency and ratio
+              #     with which they occur in the scanned data. N is 10 or equal to the
+              #     number of distinct values in the field, whichever is smaller. Not
+              #     available for complex non-groupable field type, including RECORD,
+              #     ARRAY, GEOGRAPHY, and JSON, as well as fields with REPEATABLE mode.
               # @!attribute [rw] string_profile
               #   @return [::Google::Cloud::Dataplex::V1::DataProfileResult::Profile::Field::ProfileInfo::StringFieldInfo]
               #     String type field information.
@@ -184,102 +184,103 @@ module Google
                 extend ::Google::Protobuf::MessageExts::ClassMethods
 
                 # The profile information for a string type field.
-                # @!attribute [rw] min_length
+                # @!attribute [r] min_length
                 #   @return [::Integer]
-                #     Minimum length of non-null values in the scanned data.
-                # @!attribute [rw] max_length
+                #     Output only. Minimum length of non-null values in the scanned data.
+                # @!attribute [r] max_length
                 #   @return [::Integer]
-                #     Maximum length of non-null values in the scanned data.
-                # @!attribute [rw] average_length
+                #     Output only. Maximum length of non-null values in the scanned data.
+                # @!attribute [r] average_length
                 #   @return [::Float]
-                #     Average length of non-null values in the scanned data.
+                #     Output only. Average length of non-null values in the scanned data.
                 class StringFieldInfo
                   include ::Google::Protobuf::MessageExts
                   extend ::Google::Protobuf::MessageExts::ClassMethods
                 end
 
                 # The profile information for an integer type field.
-                # @!attribute [rw] average
+                # @!attribute [r] average
                 #   @return [::Float]
-                #     Average of non-null values in the scanned data. NaN, if the field
-                #     has a NaN.
-                # @!attribute [rw] standard_deviation
+                #     Output only. Average of non-null values in the scanned data. NaN,
+                #     if the field has a NaN.
+                # @!attribute [r] standard_deviation
                 #   @return [::Float]
-                #     Standard deviation of non-null values in the scanned data. NaN, if
-                #     the field has a NaN.
-                # @!attribute [rw] min
+                #     Output only. Standard deviation of non-null values in the scanned
+                #     data. NaN, if the field has a NaN.
+                # @!attribute [r] min
                 #   @return [::Integer]
-                #     Minimum of non-null values in the scanned data. NaN, if the field
-                #     has a NaN.
-                # @!attribute [rw] quartiles
+                #     Output only. Minimum of non-null values in the scanned data. NaN,
+                #     if the field has a NaN.
+                # @!attribute [r] quartiles
                 #   @return [::Array<::Integer>]
-                #     A quartile divides the number of data points into four parts, or
-                #     quarters, of more-or-less equal size. Three main quartiles used
-                #     are: The first quartile (Q1) splits off the lowest 25% of data from
-                #     the highest 75%. It is also known as the lower or 25th empirical
-                #     quartile, as 25% of the data is below this point. The second
-                #     quartile (Q2) is the median of a data set. So, 50% of the data lies
-                #     below this point. The third quartile (Q3) splits off the highest
-                #     25% of data from the lowest 75%. It is known as the upper or 75th
-                #     empirical quartile, as 75% of the data lies below this point.
-                #     Here, the quartiles is provided as an ordered list of approximate
-                #     quartile values for the scanned data, occurring in order Q1,
-                #     median, Q3.
-                # @!attribute [rw] max
+                #     Output only. A quartile divides the number of data points into four
+                #     parts, or quarters, of more-or-less equal size. Three main
+                #     quartiles used are: The first quartile (Q1) splits off the lowest
+                #     25% of data from the highest 75%. It is also known as the lower or
+                #     25th empirical quartile, as 25% of the data is below this point.
+                #     The second quartile (Q2) is the median of a data set. So, 50% of
+                #     the data lies below this point. The third quartile (Q3) splits off
+                #     the highest 25% of data from the lowest 75%. It is known as the
+                #     upper or 75th empirical quartile, as 75% of the data lies below
+                #     this point. Here, the quartiles is provided as an ordered list of
+                #     approximate quartile values for the scanned data, occurring in
+                #     order Q1, median, Q3.
+                # @!attribute [r] max
                 #   @return [::Integer]
-                #     Maximum of non-null values in the scanned data. NaN, if the field
-                #     has a NaN.
+                #     Output only. Maximum of non-null values in the scanned data. NaN,
+                #     if the field has a NaN.
                 class IntegerFieldInfo
                   include ::Google::Protobuf::MessageExts
                   extend ::Google::Protobuf::MessageExts::ClassMethods
                 end
 
                 # The profile information for a double type field.
-                # @!attribute [rw] average
+                # @!attribute [r] average
                 #   @return [::Float]
-                #     Average of non-null values in the scanned data. NaN, if the field
-                #     has a NaN.
-                # @!attribute [rw] standard_deviation
+                #     Output only. Average of non-null values in the scanned data. NaN,
+                #     if the field has a NaN.
+                # @!attribute [r] standard_deviation
                 #   @return [::Float]
-                #     Standard deviation of non-null values in the scanned data. NaN, if
-                #     the field has a NaN.
-                # @!attribute [rw] min
+                #     Output only. Standard deviation of non-null values in the scanned
+                #     data. NaN, if the field has a NaN.
+                # @!attribute [r] min
                 #   @return [::Float]
-                #     Minimum of non-null values in the scanned data. NaN, if the field
-                #     has a NaN.
-                # @!attribute [rw] quartiles
+                #     Output only. Minimum of non-null values in the scanned data. NaN,
+                #     if the field has a NaN.
+                # @!attribute [r] quartiles
                 #   @return [::Array<::Float>]
-                #     A quartile divides the number of data points into four parts, or
-                #     quarters, of more-or-less equal size. Three main quartiles used
-                #     are: The first quartile (Q1) splits off the lowest 25% of data from
-                #     the highest 75%. It is also known as the lower or 25th empirical
-                #     quartile, as 25% of the data is below this point. The second
-                #     quartile (Q2) is the median of a data set. So, 50% of the data lies
-                #     below this point. The third quartile (Q3) splits off the highest
-                #     25% of data from the lowest 75%. It is known as the upper or 75th
-                #     empirical quartile, as 75% of the data lies below this point.
-                #     Here, the quartiles is provided as an ordered list of quartile
-                #     values for the scanned data, occurring in order Q1, median, Q3.
-                # @!attribute [rw] max
+                #     Output only. A quartile divides the number of data points into four
+                #     parts, or quarters, of more-or-less equal size. Three main
+                #     quartiles used are: The first quartile (Q1) splits off the lowest
+                #     25% of data from the highest 75%. It is also known as the lower or
+                #     25th empirical quartile, as 25% of the data is below this point.
+                #     The second quartile (Q2) is the median of a data set. So, 50% of
+                #     the data lies below this point. The third quartile (Q3) splits off
+                #     the highest 25% of data from the lowest 75%. It is known as the
+                #     upper or 75th empirical quartile, as 75% of the data lies below
+                #     this point. Here, the quartiles is provided as an ordered list of
+                #     quartile values for the scanned data, occurring in order Q1,
+                #     median, Q3.
+                # @!attribute [r] max
                 #   @return [::Float]
-                #     Maximum of non-null values in the scanned data. NaN, if the field
-                #     has a NaN.
+                #     Output only. Maximum of non-null values in the scanned data. NaN,
+                #     if the field has a NaN.
                 class DoubleFieldInfo
                   include ::Google::Protobuf::MessageExts
                   extend ::Google::Protobuf::MessageExts::ClassMethods
                 end
 
                 # Top N non-null values in the scanned data.
-                # @!attribute [rw] value
+                # @!attribute [r] value
                 #   @return [::String]
-                #     String value of a top N non-null value.
-                # @!attribute [rw] count
+                #     Output only. String value of a top N non-null value.
+                # @!attribute [r] count
                 #   @return [::Integer]
-                #     Count of the corresponding value in the scanned data.
-                # @!attribute [rw] ratio
+                #     Output only. Count of the corresponding value in the scanned data.
+                # @!attribute [r] ratio
                 #   @return [::Float]
-                #     Ratio of the corresponding value in the field against the total
-                #     number of rows in the scanned data.
+                #     Output only. Ratio of the corresponding value in the field against
+                #     the total number of rows in the scanned data.
                 class TopNValue
                   include ::Google::Protobuf::MessageExts
                   extend ::Google::Protobuf::MessageExts::ClassMethods

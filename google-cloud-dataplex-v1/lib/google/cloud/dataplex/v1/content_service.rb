@@ -32,7 +32,8 @@ module Google
     module Dataplex
       module V1
         ##
-        # ContentService manages Notebook and SQL Scripts for Dataplex.
+        # ContentService manages Notebook and SQL Scripts for Dataplex Universal
+        # Catalog.
         #
         # @example Load this service and instantiate a gRPC client
         #
