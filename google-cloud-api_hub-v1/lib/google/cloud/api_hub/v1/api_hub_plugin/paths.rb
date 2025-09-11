@@ -25,6 +25,42 @@ module Google
           # Path helper methods for the ApiHubPlugin API.
           module Paths
             ##
+            # Create a fully-qualified Attribute resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `projects/{project}/locations/{location}/attributes/{attribute}`
+            #
+            # @param project [String]
+            # @param location [String]
+            # @param attribute [String]
+            #
+            # @return [::String]
+            def attribute_path project:, location:, attribute:
+              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+              raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+
+              "projects/#{project}/locations/#{location}/attributes/#{attribute}"
+            end
+
+            ##
+            # Create a fully-qualified Location resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `projects/{project}/locations/{location}`
+            #
+            # @param project [String]
+            # @param location [String]
+            #
+            # @return [::String]
+            def location_path project:, location:
+              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+
+              "projects/#{project}/locations/#{location}"
+            end
+
+            ##
             # Create a fully-qualified Plugin resource string.
             #
             # The resource will be in the following format:
@@ -41,6 +77,44 @@ module Google
               raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
 
               "projects/#{project}/locations/#{location}/plugins/#{plugin}"
+            end
+
+            ##
+            # Create a fully-qualified PluginInstance resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `projects/{project}/locations/{location}/plugins/{plugin}/instances/{instance}`
+            #
+            # @param project [String]
+            # @param location [String]
+            # @param plugin [String]
+            # @param instance [String]
+            #
+            # @return [::String]
+            def plugin_instance_path project:, location:, plugin:, instance:
+              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+              raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+              raise ::ArgumentError, "plugin cannot contain /" if plugin.to_s.include? "/"
+
+              "projects/#{project}/locations/#{location}/plugins/#{plugin}/instances/#{instance}"
+            end
+
+            ##
+            # Create a fully-qualified ServiceAccount resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `projects/{project}/serviceAccounts/{service_account}`
+            #
+            # @param project [String]
+            # @param service_account [String]
+            #
+            # @return [::String]
+            def service_account_path project:, service_account:
+              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+
+              "projects/#{project}/serviceAccounts/#{service_account}"
             end
 
             extend self

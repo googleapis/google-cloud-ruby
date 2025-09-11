@@ -317,6 +317,95 @@ module Google
               end
 
               ##
+              # Deletes the API hub instance.
+              #
+              # @overload delete_api_hub_instance(request, options = nil)
+              #   Pass arguments to `delete_api_hub_instance` via a request object, either of type
+              #   {::Google::Cloud::ApiHub::V1::DeleteApiHubInstanceRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::ApiHub::V1::DeleteApiHubInstanceRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload delete_api_hub_instance(name: nil)
+              #   Pass arguments to `delete_api_hub_instance` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param name [::String]
+              #     Required. The name of the Api Hub instance to delete.
+              #     Format:
+              #     `projects/{project}/locations/{location}/apiHubInstances/{apiHubInstance}`.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Gapic::Operation]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Gapic::Operation]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/api_hub/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::ApiHub::V1::Provisioning::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::ApiHub::V1::DeleteApiHubInstanceRequest.new
+              #
+              #   # Call the delete_api_hub_instance method.
+              #   result = client.delete_api_hub_instance request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
+              def delete_api_hub_instance request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::ApiHub::V1::DeleteApiHubInstanceRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.delete_api_hub_instance.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::ApiHub::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.delete_api_hub_instance.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.delete_api_hub_instance.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @provisioning_stub.delete_api_hub_instance request, options do |result, operation|
+                  result = ::Gapic::Operation.new result, @operations_client, options: options
+                  yield result, operation if block_given?
+                  throw :response, result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
               # Gets details of a single API Hub instance.
               #
               # @overload get_api_hub_instance(request, options = nil)
@@ -637,6 +726,11 @@ module Google
                   #
                   attr_reader :create_api_hub_instance
                   ##
+                  # RPC-specific configuration for `delete_api_hub_instance`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :delete_api_hub_instance
+                  ##
                   # RPC-specific configuration for `get_api_hub_instance`
                   # @return [::Gapic::Config::Method]
                   #
@@ -651,6 +745,8 @@ module Google
                   def initialize parent_rpcs = nil
                     create_api_hub_instance_config = parent_rpcs.create_api_hub_instance if parent_rpcs.respond_to? :create_api_hub_instance
                     @create_api_hub_instance = ::Gapic::Config::Method.new create_api_hub_instance_config
+                    delete_api_hub_instance_config = parent_rpcs.delete_api_hub_instance if parent_rpcs.respond_to? :delete_api_hub_instance
+                    @delete_api_hub_instance = ::Gapic::Config::Method.new delete_api_hub_instance_config
                     get_api_hub_instance_config = parent_rpcs.get_api_hub_instance if parent_rpcs.respond_to? :get_api_hub_instance
                     @get_api_hub_instance = ::Gapic::Config::Method.new get_api_hub_instance_config
                     lookup_api_hub_instance_config = parent_rpcs.lookup_api_hub_instance if parent_rpcs.respond_to? :lookup_api_hub_instance

@@ -87,7 +87,7 @@ module Google
 
                   default_config.rpcs.update_api.timeout = 60.0
 
-                  default_config.rpcs.delete_api.timeout = 60.0
+                  default_config.rpcs.delete_api.timeout = 300.0
 
                   default_config.rpcs.create_version.timeout = 60.0
 
@@ -103,7 +103,7 @@ module Google
 
                   default_config.rpcs.update_version.timeout = 60.0
 
-                  default_config.rpcs.delete_version.timeout = 60.0
+                  default_config.rpcs.delete_version.timeout = 300.0
 
                   default_config.rpcs.create_spec.timeout = 60.0
 
@@ -124,7 +124,7 @@ module Google
 
                   default_config.rpcs.update_spec.timeout = 60.0
 
-                  default_config.rpcs.delete_spec.timeout = 60.0
+                  default_config.rpcs.delete_spec.timeout = 300.0
 
                   default_config.rpcs.get_api_operation.timeout = 60.0
                   default_config.rpcs.get_api_operation.retry_policy = {
@@ -553,6 +553,37 @@ module Google
               #       * `api_style.enum_values.values.display_name` - The allowed value display
               #       name of the api style attribute associated with the ApiResource. Allowed
               #       comparison operator is `:`.
+              #       * `attributes.projects/test-project-id/locations/test-location-id/
+              #       attributes/user-defined-attribute-id.enum_values.values.id` - The
+              #       allowed value id of the user defined enum attribute associated with the
+              #       Resource. Allowed comparison operator is `:`. Here
+              #       user-defined-attribute-enum-id is a placeholder that can be replaced with
+              #       any user defined enum attribute name.
+              #       * `attributes.projects/test-project-id/locations/test-location-id/
+              #       attributes/user-defined-attribute-id.enum_values.values.display_name`
+              #       - The allowed value display name of the user defined enum attribute
+              #       associated with the Resource. Allowed comparison operator is `:`. Here
+              #       user-defined-attribute-enum-display-name is a placeholder that can be
+              #       replaced with any user defined enum attribute enum name.
+              #       * `attributes.projects/test-project-id/locations/test-location-id/
+              #       attributes/user-defined-attribute-id.string_values.values` - The
+              #       allowed value of the user defined string attribute associated with the
+              #       Resource. Allowed comparison operator is `:`. Here
+              #       user-defined-attribute-string is a placeholder that can be replaced with
+              #       any user defined string attribute name.
+              #       * `attributes.projects/test-project-id/locations/test-location-id/
+              #       attributes/user-defined-attribute-id.json_values.values` - The
+              #       allowed value of the user defined JSON attribute associated with the
+              #       Resource. Allowed comparison operator is `:`. Here
+              #       user-defined-attribute-json is a placeholder that can be replaced with
+              #       any user defined JSON attribute name.
+              #
+              #     A filter function is also supported in the filter string. The filter
+              #     function is `id(name)`. The `id(name)` function returns the id of the
+              #     resource name. For example, `id(name) = \"api-1\"` is equivalent to
+              #     `name = \"projects/test-project-id/locations/test-location-id/apis/api-1\"`
+              #     provided the parent is
+              #     `projects/test-project-id/locations/test-location-id`.
               #
               #     Expressions are combined with either `AND` logic operator or `OR` logical
               #     operator but not both of them together i.e. only one of the `AND` or `OR`
@@ -578,6 +609,16 @@ module Google
               #       specifies the APIs where the owner team email is _apihub@google.com_ or
               #       the display name of the allowed value associated with the team attribute
               #       is `ApiHub Team`.
+              #       * `owner.email = \"apihub@google.com\" AND
+              #       attributes.projects/test-project-id/locations/test-location-id/
+              #       attributes/17650f90-4a29-4971-b3c0-d5532da3764b.enum_values.values.id:
+              #       test_enum_id AND
+              #       attributes.projects/test-project-id/locations/test-location-id/
+              #       attributes/1765\0f90-4a29-5431-b3d0-d5532da3764c.string_values.values:
+              #       test_string_value`  - The filter string specifies the APIs where the
+              #       owner team email is _apihub@google.com_ and the id of the allowed value
+              #       associated with the user defined attribute of type enum is _test_enum_id_
+              #       and the value of the user defined attribute of type string is _test_..
               #   @param page_size [::Integer]
               #     Optional. The maximum number of API resources to return. The service may
               #     return fewer than this value. If unspecified, at most 50 Apis will be
@@ -655,7 +696,7 @@ module Google
 
               ##
               # Update an API resource in the API hub. The following fields in the
-              # [API][] can be updated:
+              # {::Google::Cloud::ApiHub::V1::Api API} can be updated:
               #
               # * {::Google::Cloud::ApiHub::V1::Api#display_name display_name}
               # * {::Google::Cloud::ApiHub::V1::Api#description description}
@@ -665,6 +706,7 @@ module Google
               # * {::Google::Cloud::ApiHub::V1::Api#team team}
               # * {::Google::Cloud::ApiHub::V1::Api#business_unit business_unit}
               # * {::Google::Cloud::ApiHub::V1::Api#maturity_level maturity_level}
+              # * {::Google::Cloud::ApiHub::V1::Api#api_style api_style}
               # * {::Google::Cloud::ApiHub::V1::Api#attributes attributes}
               #
               # The
@@ -867,8 +909,11 @@ module Google
               #     the specified id is already used by another version in the API resource.
               #     * If not provided, a system generated id will be used.
               #
-              #     This value should be 4-500 characters, and valid characters
-              #     are /[a-z][A-Z][0-9]-_/.
+              #     This value should be 4-500 characters, overall resource name which will be
+              #     of format
+              #     `projects/{project}/locations/{location}/apis/{api}/versions/{version}`,
+              #     its length is limited to 700 characters and valid characters are
+              #     /[a-z][A-Z][0-9]-_/.
               #   @param version [::Google::Cloud::ApiHub::V1::Version, ::Hash]
               #     Required. The version to create.
               # @yield [result, operation] Access the result along with the TransportOperation object
@@ -1065,6 +1110,30 @@ module Google
               #       * `accreditation.enum_values.values.display_name` - The allowed value
               #       display name of the accreditations attribute associated with the Version.
               #       Allowed comparison operators: `:`.
+              #       * `attributes.projects/test-project-id/locations/test-location-id/
+              #       attributes/user-defined-attribute-id.enum_values.values.id` - The
+              #       allowed value id of the user defined enum attribute associated with the
+              #       Resource. Allowed comparison operator is `:`. Here
+              #       user-defined-attribute-enum-id is a placeholder that can be replaced with
+              #       any user defined enum attribute name.
+              #       * `attributes.projects/test-project-id/locations/test-location-id/
+              #       attributes/user-defined-attribute-id.enum_values.values.display_name`
+              #       - The allowed value display name of the user defined enum attribute
+              #       associated with the Resource. Allowed comparison operator is `:`. Here
+              #       user-defined-attribute-enum-display-name is a placeholder that can be
+              #       replaced with any user defined enum attribute enum name.
+              #       * `attributes.projects/test-project-id/locations/test-location-id/
+              #       attributes/user-defined-attribute-id.string_values.values` - The
+              #       allowed value of the user defined string attribute associated with the
+              #       Resource. Allowed comparison operator is `:`. Here
+              #       user-defined-attribute-string is a placeholder that can be replaced with
+              #       any user defined string attribute name.
+              #       * `attributes.projects/test-project-id/locations/test-location-id/
+              #       attributes/user-defined-attribute-id.json_values.values` - The
+              #       allowed value of the user defined JSON attribute associated with the
+              #       Resource. Allowed comparison operator is `:`. Here
+              #       user-defined-attribute-json is a placeholder that can be replaced with
+              #       any user defined JSON attribute name.
               #
               #     Expressions are combined with either `AND` logic operator or `OR` logical
               #     operator but not both of them together i.e. only one of the `AND` or `OR`
@@ -1092,6 +1161,12 @@ module Google
               #       compliance.enum_values.values.id: pci-dss-id`
               #       - The id of the allowed value associated with the compliance attribute is
               #       _gdpr-id_ or _pci-dss-id_.
+              #       * `lifecycle.enum_values.values.id: preview-id AND
+              #       attributes.projects/test-project-id/locations/test-location-id/
+              #       attributes/17650f90-4a29-4971-b3c0-d5532da3764b.string_values.values:
+              #       test`  - The filter string specifies that the id of the allowed value
+              #       associated with the lifecycle attribute of the Version is _preview-id_
+              #       and the value of the user defined attribute of type string is _test_.
               #   @param page_size [::Integer]
               #     Optional. The maximum number of versions to return. The service may return
               #     fewer than this value. If unspecified, at most 50 versions will be
@@ -1400,8 +1475,11 @@ module Google
               #     resource.
               #     * If not provided, a system generated id will be used.
               #
-              #     This value should be 4-500 characters, and valid characters
-              #     are /[a-z][A-Z][0-9]-_/.
+              #     This value should be 4-500 characters, overall resource name which will be
+              #     of format
+              #     `projects/{project}/locations/{location}/apis/{api}/versions/{version}/specs/{spec}`,
+              #     its length is limited to 1000 characters and valid characters are
+              #     /[a-z][A-Z][0-9]-_/.
               #   @param spec [::Google::Cloud::ApiHub::V1::Spec, ::Hash]
               #     Required. The spec to create.
               # @yield [result, operation] Access the result along with the TransportOperation object
@@ -1673,6 +1751,30 @@ module Google
               #       operators: `:`.
               #       * `mime_type` - The MIME type of the Spec. Allowed comparison
               #       operators: `=`.
+              #       * `attributes.projects/test-project-id/locations/test-location-id/
+              #       attributes/user-defined-attribute-id.enum_values.values.id` - The
+              #       allowed value id of the user defined enum attribute associated with the
+              #       Resource. Allowed comparison operator is `:`. Here
+              #       user-defined-attribute-enum-id is a placeholder that can be replaced with
+              #       any user defined enum attribute name.
+              #       * `attributes.projects/test-project-id/locations/test-location-id/
+              #       attributes/user-defined-attribute-id.enum_values.values.display_name`
+              #       - The allowed value display name of the user defined enum attribute
+              #       associated with the Resource. Allowed comparison operator is `:`. Here
+              #       user-defined-attribute-enum-display-name is a placeholder that can be
+              #       replaced with any user defined enum attribute enum name.
+              #       * `attributes.projects/test-project-id/locations/test-location-id/
+              #       attributes/user-defined-attribute-id.string_values.values` - The
+              #       allowed value of the user defined string attribute associated with the
+              #       Resource. Allowed comparison operator is `:`. Here
+              #       user-defined-attribute-string is a placeholder that can be replaced with
+              #       any user defined string attribute name.
+              #       * `attributes.projects/test-project-id/locations/test-location-id/
+              #       attributes/user-defined-attribute-id.json_values.values` - The
+              #       allowed value of the user defined JSON attribute associated with the
+              #       Resource. Allowed comparison operator is `:`. Here
+              #       user-defined-attribute-json is a placeholder that can be replaced with
+              #       any user defined JSON attribute name.
               #
               #     Expressions are combined with either `AND` logic operator or `OR` logical
               #     operator but not both of them together i.e. only one of the `AND` or `OR`
@@ -1699,6 +1801,13 @@ module Google
               #       spec_type.enum_values.values.id: grpc-id`
               #       - The id of the allowed value associated with the spec_type attribute is
               #       _rest-id_ or _grpc-id_.
+              #       * `spec_type.enum_values.values.id: rest-id AND
+              #       attributes.projects/test-project-id/locations/test-location-id/
+              #       attributes/17650f90-4a29-4971-b3c0-d5532da3764b.enum_values.values.id:
+              #       test`  - The filter string specifies that the id of the allowed value
+              #       associated with the spec_type attribute is _rest-id_ and the id of the
+              #       allowed value associated with the user defined attribute of type enum is
+              #       _test_.
               #   @param page_size [::Integer]
               #     Optional. The maximum number of specs to return. The service may return
               #     fewer than this value. If unspecified, at most 50 specs will be
@@ -1962,6 +2071,104 @@ module Google
               end
 
               ##
+              # Create an apiOperation in an API version.
+              # An apiOperation can be created only if the version has no apiOperations
+              # which were created by parsing a spec.
+              #
+              # @overload create_api_operation(request, options = nil)
+              #   Pass arguments to `create_api_operation` via a request object, either of type
+              #   {::Google::Cloud::ApiHub::V1::CreateApiOperationRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::ApiHub::V1::CreateApiOperationRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload create_api_operation(parent: nil, api_operation_id: nil, api_operation: nil)
+              #   Pass arguments to `create_api_operation` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param parent [::String]
+              #     Required. The parent resource for the operation resource.
+              #     Format:
+              #     `projects/{project}/locations/{location}/apis/{api}/versions/{version}`
+              #   @param api_operation_id [::String]
+              #     Optional. The ID to use for the operation resource, which will become the
+              #     final component of the operation's resource name. This field is optional.
+              #
+              #     * If provided, the same will be used. The service will throw an error if
+              #     the specified id is already used by another operation resource in the API
+              #     hub.
+              #     * If not provided, a system generated id will be used.
+              #
+              #     This value should be 4-500 characters, overall resource name which
+              #     will be of format
+              #     `projects/{project}/locations/{location}/apis/{api}/versions/{version}/operations/{operation}`,
+              #     its length is limited to 700 characters, and valid characters are
+              #     /[a-z][A-Z][0-9]-_/.
+              #   @param api_operation [::Google::Cloud::ApiHub::V1::ApiOperation, ::Hash]
+              #     Required. The operation resource to create.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Cloud::ApiHub::V1::ApiOperation]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Cloud::ApiHub::V1::ApiOperation]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/api_hub/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::ApiHub::V1::ApiHub::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::ApiHub::V1::CreateApiOperationRequest.new
+              #
+              #   # Call the create_api_operation method.
+              #   result = client.create_api_operation request
+              #
+              #   # The returned object is of type Google::Cloud::ApiHub::V1::ApiOperation.
+              #   p result
+              #
+              def create_api_operation request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::ApiHub::V1::CreateApiOperationRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.create_api_operation.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::ApiHub::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.create_api_operation.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.create_api_operation.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @api_hub_stub.create_api_operation request, options do |result, operation|
+                  yield result, operation if block_given?
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
               # Get details about a particular operation in API version.
               #
               # @overload get_api_operation(request, options = nil)
@@ -2085,6 +2292,30 @@ module Google
               #       * `create_time` - The time at which the ApiOperation was created. The
               #       value should be in the (RFC3339)[https://tools.ietf.org/html/rfc3339]
               #       format. Allowed comparison operators: `>` and `<`.
+              #       * `attributes.projects/test-project-id/locations/test-location-id/
+              #       attributes/user-defined-attribute-id.enum_values.values.id` - The
+              #       allowed value id of the user defined enum attribute associated with the
+              #       Resource. Allowed comparison operator is `:`. Here
+              #       user-defined-attribute-enum-id is a placeholder that can be replaced with
+              #       any user defined enum attribute name.
+              #       * `attributes.projects/test-project-id/locations/test-location-id/
+              #       attributes/user-defined-attribute-id.enum_values.values.display_name`
+              #       - The allowed value display name of the user defined enum attribute
+              #       associated with the Resource. Allowed comparison operator is `:`. Here
+              #       user-defined-attribute-enum-display-name is a placeholder that can be
+              #       replaced with any user defined enum attribute enum name.
+              #       * `attributes.projects/test-project-id/locations/test-location-id/
+              #       attributes/user-defined-attribute-id.string_values.values` - The
+              #       allowed value of the user defined string attribute associated with the
+              #       Resource. Allowed comparison operator is `:`. Here
+              #       user-defined-attribute-string is a placeholder that can be replaced with
+              #       any user defined string attribute name.
+              #       * `attributes.projects/test-project-id/locations/test-location-id/
+              #       attributes/user-defined-attribute-id.json_values.values` - The
+              #       allowed value of the user defined JSON attribute associated with the
+              #       Resource. Allowed comparison operator is `:`. Here
+              #       user-defined-attribute-json is a placeholder that can be replaced with
+              #       any user defined JSON attribute name.
               #
               #     Expressions are combined with either `AND` logic operator or `OR` logical
               #     operator but not both of them together i.e. only one of the `AND` or `OR`
@@ -2104,6 +2335,11 @@ module Google
               #       * `details.http_operation.method = GET OR details.http_operation.method =
               #       POST`. - The http operation of the method of ApiOperation is _GET_ or
               #       _POST_.
+              #       * `details.deprecated = True AND
+              #       attributes.projects/test-project-id/locations/test-location-id/
+              #       attributes/17650f90-4a29-4971-b3c0-d5532da3764b.string_values.values:
+              #       test`  - The filter string specifies that the ApiOperation is deprecated
+              #       and the value of the user defined attribute of type string is _test_.
               #   @param page_size [::Integer]
               #     Optional. The maximum number of operations to return. The service may
               #     return fewer than this value. If unspecified, at most 50 operations will be
@@ -2174,6 +2410,191 @@ module Google
                   result = ::Gapic::Rest::PagedEnumerable.new @api_hub_stub, :list_api_operations, "api_operations", request, result, options
                   yield result, operation if block_given?
                   throw :response, result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Update an operation in an API version. The following fields in the
+              # {::Google::Cloud::ApiHub::V1::ApiOperation ApiOperation resource} can be
+              # updated:
+              #
+              # * [details.description][ApiOperation.details.description]
+              # * [details.documentation][ApiOperation.details.documentation]
+              # * [details.http_operation.path][ApiOperation.details.http_operation.path.path]
+              # * [details.http_operation.method][ApiOperation.details.http_operation.method]
+              # * [details.deprecated][ApiOperation.details.deprecated]
+              # * {::Google::Cloud::ApiHub::V1::ApiOperation#attributes attributes}
+              #
+              # The
+              # {::Google::Cloud::ApiHub::V1::UpdateApiOperationRequest#update_mask update_mask}
+              # should be used to specify the fields being updated.
+              #
+              # An operation can be updated only if the operation was created via
+              # {::Google::Cloud::ApiHub::V1::ApiHub::Rest::Client#create_api_operation CreateApiOperation} API.
+              # If the operation was created by parsing the spec, then it can be edited by
+              # updating the spec.
+              #
+              # @overload update_api_operation(request, options = nil)
+              #   Pass arguments to `update_api_operation` via a request object, either of type
+              #   {::Google::Cloud::ApiHub::V1::UpdateApiOperationRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::ApiHub::V1::UpdateApiOperationRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload update_api_operation(api_operation: nil, update_mask: nil)
+              #   Pass arguments to `update_api_operation` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param api_operation [::Google::Cloud::ApiHub::V1::ApiOperation, ::Hash]
+              #     Required. The apiOperation resource to update.
+              #
+              #     The operation resource's `name` field is used to identify the operation
+              #     resource to update.
+              #     Format:
+              #     `projects/{project}/locations/{location}/apis/{api}/versions/{version}/operations/{operation}`
+              #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
+              #     Required. The list of fields to update.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Cloud::ApiHub::V1::ApiOperation]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Cloud::ApiHub::V1::ApiOperation]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/api_hub/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::ApiHub::V1::ApiHub::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::ApiHub::V1::UpdateApiOperationRequest.new
+              #
+              #   # Call the update_api_operation method.
+              #   result = client.update_api_operation request
+              #
+              #   # The returned object is of type Google::Cloud::ApiHub::V1::ApiOperation.
+              #   p result
+              #
+              def update_api_operation request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::ApiHub::V1::UpdateApiOperationRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.update_api_operation.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::ApiHub::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.update_api_operation.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.update_api_operation.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @api_hub_stub.update_api_operation request, options do |result, operation|
+                  yield result, operation if block_given?
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Delete an operation in an API version and we can delete only the
+              # operations created via create API. If the operation was created by parsing
+              # the spec, then it can be deleted by editing or deleting the spec.
+              #
+              # @overload delete_api_operation(request, options = nil)
+              #   Pass arguments to `delete_api_operation` via a request object, either of type
+              #   {::Google::Cloud::ApiHub::V1::DeleteApiOperationRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::ApiHub::V1::DeleteApiOperationRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload delete_api_operation(name: nil)
+              #   Pass arguments to `delete_api_operation` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param name [::String]
+              #     Required. The name of the operation resource to delete.
+              #     Format:
+              #     `projects/{project}/locations/{location}/apis/{api}/versions/{version}/operations/{operation}`
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Protobuf::Empty]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Protobuf::Empty]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/api_hub/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::ApiHub::V1::ApiHub::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::ApiHub::V1::DeleteApiOperationRequest.new
+              #
+              #   # Call the delete_api_operation method.
+              #   result = client.delete_api_operation request
+              #
+              #   # The returned object is of type Google::Protobuf::Empty.
+              #   p result
+              #
+              def delete_api_operation request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::ApiHub::V1::DeleteApiOperationRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.delete_api_operation.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::ApiHub::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.delete_api_operation.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.delete_api_operation.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @api_hub_stub.delete_api_operation request, options do |result, operation|
+                  yield result, operation if block_given?
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -2472,6 +2893,10 @@ module Google
               #       comparison operators: `=`.
               #       * `api_versions` - The API versions linked to this deployment. Allowed
               #       comparison operators: `:`.
+              #       * `source_project` - The project/organization at source for the
+              #       deployment. Allowed comparison operators: `=`.
+              #       * `source_environment` - The environment at source for the
+              #       deployment. Allowed comparison operators: `=`.
               #       * `deployment_type.enum_values.values.id` - The allowed value id of the
               #       deployment_type attribute associated with the Deployment. Allowed
               #       comparison operators: `:`.
@@ -2487,6 +2912,38 @@ module Google
               #       * `environment.enum_values.values.display_name` - The allowed value
               #       display name of the environment attribute associated with the deployment.
               #       Allowed comparison operators: `:`.
+              #       * `attributes.projects/test-project-id/locations/test-location-id/
+              #       attributes/user-defined-attribute-id.enum_values.values.id` - The
+              #       allowed value id of the user defined enum attribute associated with the
+              #       Resource. Allowed comparison operator is `:`. Here
+              #       user-defined-attribute-enum-id is a placeholder that can be replaced with
+              #       any user defined enum attribute name.
+              #       * `attributes.projects/test-project-id/locations/test-location-id/
+              #       attributes/user-defined-attribute-id.enum_values.values.display_name`
+              #       - The allowed value display name of the user defined enum attribute
+              #       associated with the Resource. Allowed comparison operator is `:`. Here
+              #       user-defined-attribute-enum-display-name is a placeholder that can be
+              #       replaced with any user defined enum attribute enum name.
+              #       * `attributes.projects/test-project-id/locations/test-location-id/
+              #       attributes/user-defined-attribute-id.string_values.values` - The
+              #       allowed value of the user defined string attribute associated with the
+              #       Resource. Allowed comparison operator is `:`. Here
+              #       user-defined-attribute-string is a placeholder that can be replaced with
+              #       any user defined string attribute name.
+              #       * `attributes.projects/test-project-id/locations/test-location-id/
+              #       attributes/user-defined-attribute-id.json_values.values` - The
+              #       allowed value of the user defined JSON attribute associated with the
+              #       Resource. Allowed comparison operator is `:`. Here
+              #       user-defined-attribute-json is a placeholder that can be replaced with
+              #       any user defined JSON attribute name.
+              #
+              #     A filter function is also supported in the filter string. The filter
+              #     function is `id(name)`. The `id(name)` function returns the id of the
+              #     resource name. For example, `id(name) = \"deployment-1\"` is equivalent to
+              #     `name =
+              #     \"projects/test-project-id/locations/test-location-id/deployments/deployment-1\"`
+              #     provided the parent is
+              #     `projects/test-project-id/locations/test-location-id`.
               #
               #     Expressions are combined with either `AND` logic operator or `OR` logical
               #     operator but not both of them together i.e. only one of the `AND` or `OR`
@@ -2512,6 +2969,12 @@ module Google
               #       slo.string_values.values: \"99.99%\"`
               #       - The allowed value id of the environment attribute Deployment is
               #       _production-id_ or string value of the slo attribute is _99.99%_.
+              #       * `environment.enum_values.values.id: staging-id AND
+              #       attributes.projects/test-project-id/locations/test-location-id/
+              #       attributes/17650f90-4a29-4971-b3c0-d5532da3764b.string_values.values:
+              #       test`  - The filter string specifies that the allowed value id of the
+              #       environment attribute associated with the Deployment is _staging-id_ and
+              #       the value of the user defined attribute of type string is _test_.
               #   @param page_size [::Integer]
               #     Optional. The maximum number of deployment resources to return. The service
               #     may return fewer than this value. If unspecified, at most 50 deployments
@@ -2601,7 +3064,11 @@ module Google
               # * {::Google::Cloud::ApiHub::V1::Deployment#slo slo}
               # * {::Google::Cloud::ApiHub::V1::Deployment#environment environment}
               # * {::Google::Cloud::ApiHub::V1::Deployment#attributes attributes}
-              #
+              # * [source_project] [google.cloud.apihub.v1.Deployment.source_project]
+              # * [source_environment]
+              # [google.cloud.apihub.v1.Deployment.source_environment]
+              # * {::Google::Cloud::ApiHub::V1::Deployment#management_url management_url}
+              # * {::Google::Cloud::ApiHub::V1::Deployment#source_uri source_uri}
               # The
               # {::Google::Cloud::ApiHub::V1::UpdateDeploymentRequest#update_mask update_mask}
               # should be used to specify the fields being updated.
@@ -4077,6 +4544,11 @@ module Google
                   #
                   attr_reader :delete_spec
                   ##
+                  # RPC-specific configuration for `create_api_operation`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :create_api_operation
+                  ##
                   # RPC-specific configuration for `get_api_operation`
                   # @return [::Gapic::Config::Method]
                   #
@@ -4086,6 +4558,16 @@ module Google
                   # @return [::Gapic::Config::Method]
                   #
                   attr_reader :list_api_operations
+                  ##
+                  # RPC-specific configuration for `update_api_operation`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :update_api_operation
+                  ##
+                  # RPC-specific configuration for `delete_api_operation`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :delete_api_operation
                   ##
                   # RPC-specific configuration for `get_definition`
                   # @return [::Gapic::Config::Method]
@@ -4206,10 +4688,16 @@ module Google
                     @update_spec = ::Gapic::Config::Method.new update_spec_config
                     delete_spec_config = parent_rpcs.delete_spec if parent_rpcs.respond_to? :delete_spec
                     @delete_spec = ::Gapic::Config::Method.new delete_spec_config
+                    create_api_operation_config = parent_rpcs.create_api_operation if parent_rpcs.respond_to? :create_api_operation
+                    @create_api_operation = ::Gapic::Config::Method.new create_api_operation_config
                     get_api_operation_config = parent_rpcs.get_api_operation if parent_rpcs.respond_to? :get_api_operation
                     @get_api_operation = ::Gapic::Config::Method.new get_api_operation_config
                     list_api_operations_config = parent_rpcs.list_api_operations if parent_rpcs.respond_to? :list_api_operations
                     @list_api_operations = ::Gapic::Config::Method.new list_api_operations_config
+                    update_api_operation_config = parent_rpcs.update_api_operation if parent_rpcs.respond_to? :update_api_operation
+                    @update_api_operation = ::Gapic::Config::Method.new update_api_operation_config
+                    delete_api_operation_config = parent_rpcs.delete_api_operation if parent_rpcs.respond_to? :delete_api_operation
+                    @delete_api_operation = ::Gapic::Config::Method.new delete_api_operation_config
                     get_definition_config = parent_rpcs.get_definition if parent_rpcs.respond_to? :get_definition
                     @get_definition = ::Gapic::Config::Method.new get_definition_config
                     create_deployment_config = parent_rpcs.create_deployment if parent_rpcs.respond_to? :create_deployment

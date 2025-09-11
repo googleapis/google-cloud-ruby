@@ -21,7 +21,8 @@ module Google
   module Cloud
     module ApiHub
       module V1
-        # The [GetStyleGuide][ApiHub.GetStyleGuide] method's request.
+        # The {::Google::Cloud::ApiHub::V1::LintingService::Rest::Client#get_style_guide GetStyleGuide}
+        # method's request.
         # @!attribute [rw] name
         #   @return [::String]
         #     Required. The name of the spec to retrieve.
@@ -32,7 +33,9 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # The [UpdateStyleGuide][ApiHub.UpdateStyleGuide] method's request.
+        # The
+        # {::Google::Cloud::ApiHub::V1::LintingService::Rest::Client#update_style_guide UpdateStyleGuide}
+        # method's request.
         # @!attribute [rw] style_guide
         #   @return [::Google::Cloud::ApiHub::V1::StyleGuide]
         #     Required. The Style guide resource to update.
@@ -44,7 +47,9 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # The [GetStyleGuideContents][ApiHub.GetStyleGuideContents] method's request.
+        # The
+        # {::Google::Cloud::ApiHub::V1::LintingService::Rest::Client#get_style_guide_contents GetStyleGuideContents}
+        # method's request.
         # @!attribute [rw] name
         #   @return [::String]
         #     Required. The name of the StyleGuide whose contents need to be retrieved.
@@ -56,7 +61,8 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # The [LintSpec][ApiHub.LintSpec] method's request.
+        # The {::Google::Cloud::ApiHub::V1::LintingService::Rest::Client#lint_spec LintSpec} method's
+        # request.
         # @!attribute [rw] name
         #   @return [::String]
         #     Required. The name of the spec to be linted.

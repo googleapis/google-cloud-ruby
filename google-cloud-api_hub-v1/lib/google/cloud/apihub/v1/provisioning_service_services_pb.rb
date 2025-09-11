@@ -35,6 +35,8 @@ module Google
 
             # Provisions instance resources for the API Hub.
             rpc :CreateApiHubInstance, ::Google::Cloud::ApiHub::V1::CreateApiHubInstanceRequest, ::Google::Longrunning::Operation
+            # Deletes the API hub instance.
+            rpc :DeleteApiHubInstance, ::Google::Cloud::ApiHub::V1::DeleteApiHubInstanceRequest, ::Google::Longrunning::Operation
             # Gets details of a single API Hub instance.
             rpc :GetApiHubInstance, ::Google::Cloud::ApiHub::V1::GetApiHubInstanceRequest, ::Google::Cloud::ApiHub::V1::ApiHubInstance
             # Looks up an Api Hub instance in a given GCP project. There will always be

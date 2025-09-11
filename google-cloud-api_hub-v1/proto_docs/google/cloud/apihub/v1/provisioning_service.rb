@@ -45,6 +45,19 @@ module Google
         end
 
         # The
+        # {::Google::Cloud::ApiHub::V1::Provisioning::Rest::Client#delete_api_hub_instance DeleteApiHubInstance}
+        # method's request.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The name of the Api Hub instance to delete.
+        #     Format:
+        #     `projects/{project}/locations/{location}/apiHubInstances/{apiHubInstance}`.
+        class DeleteApiHubInstanceRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # The
         # {::Google::Cloud::ApiHub::V1::Provisioning::Rest::Client#get_api_hub_instance GetApiHubInstance}
         # method's request.
         # @!attribute [rw] name

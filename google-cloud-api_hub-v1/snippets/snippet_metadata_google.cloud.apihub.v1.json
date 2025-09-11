@@ -652,6 +652,46 @@
       ]
     },
     {
+      "region_tag": "apihub_v1_generated_ApiHub_CreateApiOperation_sync",
+      "title": "Snippet for the create_api_operation call in the ApiHub service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ApiHub::V1::ApiHub::Rest::Client#create_api_operation.",
+      "file": "api_hub/create_api_operation.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_api_operation",
+        "full_name": "::Google::Cloud::ApiHub::V1::ApiHub::Rest::Client#create_api_operation",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::ApiHub::V1::CreateApiOperationRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::ApiHub::V1::ApiOperation",
+        "client": {
+          "short_name": "ApiHub::Rest::Client",
+          "full_name": "::Google::Cloud::ApiHub::V1::ApiHub::Rest::Client"
+        },
+        "method": {
+          "short_name": "CreateApiOperation",
+          "full_name": "google.cloud.apihub.v1.ApiHub.CreateApiOperation",
+          "service": {
+            "short_name": "ApiHub",
+            "full_name": "google.cloud.apihub.v1.ApiHub"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
       "region_tag": "apihub_v1_generated_ApiHub_GetApiOperation_sync",
       "title": "Snippet for the get_api_operation call in the ApiHub service",
       "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ApiHub::V1::ApiHub::Rest::Client#get_api_operation.",
@@ -727,6 +767,86 @@
         {
           "start": 20,
           "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "apihub_v1_generated_ApiHub_UpdateApiOperation_sync",
+      "title": "Snippet for the update_api_operation call in the ApiHub service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ApiHub::V1::ApiHub::Rest::Client#update_api_operation.",
+      "file": "api_hub/update_api_operation.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_api_operation",
+        "full_name": "::Google::Cloud::ApiHub::V1::ApiHub::Rest::Client#update_api_operation",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::ApiHub::V1::UpdateApiOperationRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::ApiHub::V1::ApiOperation",
+        "client": {
+          "short_name": "ApiHub::Rest::Client",
+          "full_name": "::Google::Cloud::ApiHub::V1::ApiHub::Rest::Client"
+        },
+        "method": {
+          "short_name": "UpdateApiOperation",
+          "full_name": "google.cloud.apihub.v1.ApiHub.UpdateApiOperation",
+          "service": {
+            "short_name": "ApiHub",
+            "full_name": "google.cloud.apihub.v1.ApiHub"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "apihub_v1_generated_ApiHub_DeleteApiOperation_sync",
+      "title": "Snippet for the delete_api_operation call in the ApiHub service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ApiHub::V1::ApiHub::Rest::Client#delete_api_operation.",
+      "file": "api_hub/delete_api_operation.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_api_operation",
+        "full_name": "::Google::Cloud::ApiHub::V1::ApiHub::Rest::Client#delete_api_operation",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::ApiHub::V1::DeleteApiOperationRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Protobuf::Empty",
+        "client": {
+          "short_name": "ApiHub::Rest::Client",
+          "full_name": "::Google::Cloud::ApiHub::V1::ApiHub::Rest::Client"
+        },
+        "method": {
+          "short_name": "DeleteApiOperation",
+          "full_name": "google.cloud.apihub.v1.ApiHub.DeleteApiOperation",
+          "service": {
+            "short_name": "ApiHub",
+            "full_name": "google.cloud.apihub.v1.ApiHub"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -1612,6 +1732,406 @@
       ]
     },
     {
+      "region_tag": "apihub_v1_generated_ApiHubCollect_CollectApiData_sync",
+      "title": "Snippet for the collect_api_data call in the ApiHubCollect service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ApiHub::V1::ApiHubCollect::Rest::Client#collect_api_data.",
+      "file": "api_hub_collect/collect_api_data.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "collect_api_data",
+        "full_name": "::Google::Cloud::ApiHub::V1::ApiHubCollect::Rest::Client#collect_api_data",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::ApiHub::V1::CollectApiDataRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "ApiHubCollect::Rest::Client",
+          "full_name": "::Google::Cloud::ApiHub::V1::ApiHubCollect::Rest::Client"
+        },
+        "method": {
+          "short_name": "CollectApiData",
+          "full_name": "google.cloud.apihub.v1.ApiHubCollect.CollectApiData",
+          "service": {
+            "short_name": "ApiHubCollect",
+            "full_name": "google.cloud.apihub.v1.ApiHubCollect"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "apihub_v1_generated_ApiHubCurate_CreateCuration_sync",
+      "title": "Snippet for the create_curation call in the ApiHubCurate service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ApiHub::V1::ApiHubCurate::Rest::Client#create_curation.",
+      "file": "api_hub_curate/create_curation.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_curation",
+        "full_name": "::Google::Cloud::ApiHub::V1::ApiHubCurate::Rest::Client#create_curation",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::ApiHub::V1::CreateCurationRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::ApiHub::V1::Curation",
+        "client": {
+          "short_name": "ApiHubCurate::Rest::Client",
+          "full_name": "::Google::Cloud::ApiHub::V1::ApiHubCurate::Rest::Client"
+        },
+        "method": {
+          "short_name": "CreateCuration",
+          "full_name": "google.cloud.apihub.v1.ApiHubCurate.CreateCuration",
+          "service": {
+            "short_name": "ApiHubCurate",
+            "full_name": "google.cloud.apihub.v1.ApiHubCurate"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "apihub_v1_generated_ApiHubCurate_GetCuration_sync",
+      "title": "Snippet for the get_curation call in the ApiHubCurate service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ApiHub::V1::ApiHubCurate::Rest::Client#get_curation.",
+      "file": "api_hub_curate/get_curation.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_curation",
+        "full_name": "::Google::Cloud::ApiHub::V1::ApiHubCurate::Rest::Client#get_curation",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::ApiHub::V1::GetCurationRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::ApiHub::V1::Curation",
+        "client": {
+          "short_name": "ApiHubCurate::Rest::Client",
+          "full_name": "::Google::Cloud::ApiHub::V1::ApiHubCurate::Rest::Client"
+        },
+        "method": {
+          "short_name": "GetCuration",
+          "full_name": "google.cloud.apihub.v1.ApiHubCurate.GetCuration",
+          "service": {
+            "short_name": "ApiHubCurate",
+            "full_name": "google.cloud.apihub.v1.ApiHubCurate"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "apihub_v1_generated_ApiHubCurate_ListCurations_sync",
+      "title": "Snippet for the list_curations call in the ApiHubCurate service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ApiHub::V1::ApiHubCurate::Rest::Client#list_curations.",
+      "file": "api_hub_curate/list_curations.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_curations",
+        "full_name": "::Google::Cloud::ApiHub::V1::ApiHubCurate::Rest::Client#list_curations",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::ApiHub::V1::ListCurationsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::ApiHub::V1::ListCurationsResponse",
+        "client": {
+          "short_name": "ApiHubCurate::Rest::Client",
+          "full_name": "::Google::Cloud::ApiHub::V1::ApiHubCurate::Rest::Client"
+        },
+        "method": {
+          "short_name": "ListCurations",
+          "full_name": "google.cloud.apihub.v1.ApiHubCurate.ListCurations",
+          "service": {
+            "short_name": "ApiHubCurate",
+            "full_name": "google.cloud.apihub.v1.ApiHubCurate"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "apihub_v1_generated_ApiHubCurate_UpdateCuration_sync",
+      "title": "Snippet for the update_curation call in the ApiHubCurate service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ApiHub::V1::ApiHubCurate::Rest::Client#update_curation.",
+      "file": "api_hub_curate/update_curation.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_curation",
+        "full_name": "::Google::Cloud::ApiHub::V1::ApiHubCurate::Rest::Client#update_curation",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::ApiHub::V1::UpdateCurationRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::ApiHub::V1::Curation",
+        "client": {
+          "short_name": "ApiHubCurate::Rest::Client",
+          "full_name": "::Google::Cloud::ApiHub::V1::ApiHubCurate::Rest::Client"
+        },
+        "method": {
+          "short_name": "UpdateCuration",
+          "full_name": "google.cloud.apihub.v1.ApiHubCurate.UpdateCuration",
+          "service": {
+            "short_name": "ApiHubCurate",
+            "full_name": "google.cloud.apihub.v1.ApiHubCurate"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "apihub_v1_generated_ApiHubCurate_DeleteCuration_sync",
+      "title": "Snippet for the delete_curation call in the ApiHubCurate service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ApiHub::V1::ApiHubCurate::Rest::Client#delete_curation.",
+      "file": "api_hub_curate/delete_curation.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_curation",
+        "full_name": "::Google::Cloud::ApiHub::V1::ApiHubCurate::Rest::Client#delete_curation",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::ApiHub::V1::DeleteCurationRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Protobuf::Empty",
+        "client": {
+          "short_name": "ApiHubCurate::Rest::Client",
+          "full_name": "::Google::Cloud::ApiHub::V1::ApiHubCurate::Rest::Client"
+        },
+        "method": {
+          "short_name": "DeleteCuration",
+          "full_name": "google.cloud.apihub.v1.ApiHubCurate.DeleteCuration",
+          "service": {
+            "short_name": "ApiHubCurate",
+            "full_name": "google.cloud.apihub.v1.ApiHubCurate"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "apihub_v1_generated_ApiHubDiscovery_ListDiscoveredApiObservations_sync",
+      "title": "Snippet for the list_discovered_api_observations call in the ApiHubDiscovery service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ApiHub::V1::ApiHubDiscovery::Rest::Client#list_discovered_api_observations.",
+      "file": "api_hub_discovery/list_discovered_api_observations.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_discovered_api_observations",
+        "full_name": "::Google::Cloud::ApiHub::V1::ApiHubDiscovery::Rest::Client#list_discovered_api_observations",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::ApiHub::V1::ListDiscoveredApiObservationsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::ApiHub::V1::ListDiscoveredApiObservationsResponse",
+        "client": {
+          "short_name": "ApiHubDiscovery::Rest::Client",
+          "full_name": "::Google::Cloud::ApiHub::V1::ApiHubDiscovery::Rest::Client"
+        },
+        "method": {
+          "short_name": "ListDiscoveredApiObservations",
+          "full_name": "google.cloud.apihub.v1.ApiHubDiscovery.ListDiscoveredApiObservations",
+          "service": {
+            "short_name": "ApiHubDiscovery",
+            "full_name": "google.cloud.apihub.v1.ApiHubDiscovery"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "apihub_v1_generated_ApiHubDiscovery_GetDiscoveredApiObservation_sync",
+      "title": "Snippet for the get_discovered_api_observation call in the ApiHubDiscovery service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ApiHub::V1::ApiHubDiscovery::Rest::Client#get_discovered_api_observation.",
+      "file": "api_hub_discovery/get_discovered_api_observation.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_discovered_api_observation",
+        "full_name": "::Google::Cloud::ApiHub::V1::ApiHubDiscovery::Rest::Client#get_discovered_api_observation",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::ApiHub::V1::GetDiscoveredApiObservationRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::ApiHub::V1::DiscoveredApiObservation",
+        "client": {
+          "short_name": "ApiHubDiscovery::Rest::Client",
+          "full_name": "::Google::Cloud::ApiHub::V1::ApiHubDiscovery::Rest::Client"
+        },
+        "method": {
+          "short_name": "GetDiscoveredApiObservation",
+          "full_name": "google.cloud.apihub.v1.ApiHubDiscovery.GetDiscoveredApiObservation",
+          "service": {
+            "short_name": "ApiHubDiscovery",
+            "full_name": "google.cloud.apihub.v1.ApiHubDiscovery"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "apihub_v1_generated_ApiHubDiscovery_ListDiscoveredApiOperations_sync",
+      "title": "Snippet for the list_discovered_api_operations call in the ApiHubDiscovery service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ApiHub::V1::ApiHubDiscovery::Rest::Client#list_discovered_api_operations.",
+      "file": "api_hub_discovery/list_discovered_api_operations.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_discovered_api_operations",
+        "full_name": "::Google::Cloud::ApiHub::V1::ApiHubDiscovery::Rest::Client#list_discovered_api_operations",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::ApiHub::V1::ListDiscoveredApiOperationsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::ApiHub::V1::ListDiscoveredApiOperationsResponse",
+        "client": {
+          "short_name": "ApiHubDiscovery::Rest::Client",
+          "full_name": "::Google::Cloud::ApiHub::V1::ApiHubDiscovery::Rest::Client"
+        },
+        "method": {
+          "short_name": "ListDiscoveredApiOperations",
+          "full_name": "google.cloud.apihub.v1.ApiHubDiscovery.ListDiscoveredApiOperations",
+          "service": {
+            "short_name": "ApiHubDiscovery",
+            "full_name": "google.cloud.apihub.v1.ApiHubDiscovery"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "apihub_v1_generated_ApiHubDiscovery_GetDiscoveredApiOperation_sync",
+      "title": "Snippet for the get_discovered_api_operation call in the ApiHubDiscovery service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ApiHub::V1::ApiHubDiscovery::Rest::Client#get_discovered_api_operation.",
+      "file": "api_hub_discovery/get_discovered_api_operation.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_discovered_api_operation",
+        "full_name": "::Google::Cloud::ApiHub::V1::ApiHubDiscovery::Rest::Client#get_discovered_api_operation",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::ApiHub::V1::GetDiscoveredApiOperationRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::ApiHub::V1::DiscoveredApiOperation",
+        "client": {
+          "short_name": "ApiHubDiscovery::Rest::Client",
+          "full_name": "::Google::Cloud::ApiHub::V1::ApiHubDiscovery::Rest::Client"
+        },
+        "method": {
+          "short_name": "GetDiscoveredApiOperation",
+          "full_name": "google.cloud.apihub.v1.ApiHubDiscovery.GetDiscoveredApiOperation",
+          "service": {
+            "short_name": "ApiHubDiscovery",
+            "full_name": "google.cloud.apihub.v1.ApiHubDiscovery"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
       "region_tag": "apihub_v1_generated_HostProjectRegistrationService_CreateHostProjectRegistration_sync",
       "title": "Snippet for the create_host_project_registration call in the HostProjectRegistrationService service",
       "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ApiHub::V1::HostProjectRegistrationService::Rest::Client#create_host_project_registration.",
@@ -2012,6 +2532,446 @@
       ]
     },
     {
+      "region_tag": "apihub_v1_generated_ApiHubPlugin_CreatePlugin_sync",
+      "title": "Snippet for the create_plugin call in the ApiHubPlugin service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ApiHub::V1::ApiHubPlugin::Rest::Client#create_plugin.",
+      "file": "api_hub_plugin/create_plugin.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_plugin",
+        "full_name": "::Google::Cloud::ApiHub::V1::ApiHubPlugin::Rest::Client#create_plugin",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::ApiHub::V1::CreatePluginRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::ApiHub::V1::Plugin",
+        "client": {
+          "short_name": "ApiHubPlugin::Rest::Client",
+          "full_name": "::Google::Cloud::ApiHub::V1::ApiHubPlugin::Rest::Client"
+        },
+        "method": {
+          "short_name": "CreatePlugin",
+          "full_name": "google.cloud.apihub.v1.ApiHubPlugin.CreatePlugin",
+          "service": {
+            "short_name": "ApiHubPlugin",
+            "full_name": "google.cloud.apihub.v1.ApiHubPlugin"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "apihub_v1_generated_ApiHubPlugin_ListPlugins_sync",
+      "title": "Snippet for the list_plugins call in the ApiHubPlugin service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ApiHub::V1::ApiHubPlugin::Rest::Client#list_plugins.",
+      "file": "api_hub_plugin/list_plugins.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_plugins",
+        "full_name": "::Google::Cloud::ApiHub::V1::ApiHubPlugin::Rest::Client#list_plugins",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::ApiHub::V1::ListPluginsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::ApiHub::V1::ListPluginsResponse",
+        "client": {
+          "short_name": "ApiHubPlugin::Rest::Client",
+          "full_name": "::Google::Cloud::ApiHub::V1::ApiHubPlugin::Rest::Client"
+        },
+        "method": {
+          "short_name": "ListPlugins",
+          "full_name": "google.cloud.apihub.v1.ApiHubPlugin.ListPlugins",
+          "service": {
+            "short_name": "ApiHubPlugin",
+            "full_name": "google.cloud.apihub.v1.ApiHubPlugin"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "apihub_v1_generated_ApiHubPlugin_DeletePlugin_sync",
+      "title": "Snippet for the delete_plugin call in the ApiHubPlugin service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ApiHub::V1::ApiHubPlugin::Rest::Client#delete_plugin.",
+      "file": "api_hub_plugin/delete_plugin.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_plugin",
+        "full_name": "::Google::Cloud::ApiHub::V1::ApiHubPlugin::Rest::Client#delete_plugin",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::ApiHub::V1::DeletePluginRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "ApiHubPlugin::Rest::Client",
+          "full_name": "::Google::Cloud::ApiHub::V1::ApiHubPlugin::Rest::Client"
+        },
+        "method": {
+          "short_name": "DeletePlugin",
+          "full_name": "google.cloud.apihub.v1.ApiHubPlugin.DeletePlugin",
+          "service": {
+            "short_name": "ApiHubPlugin",
+            "full_name": "google.cloud.apihub.v1.ApiHubPlugin"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "apihub_v1_generated_ApiHubPlugin_CreatePluginInstance_sync",
+      "title": "Snippet for the create_plugin_instance call in the ApiHubPlugin service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ApiHub::V1::ApiHubPlugin::Rest::Client#create_plugin_instance.",
+      "file": "api_hub_plugin/create_plugin_instance.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_plugin_instance",
+        "full_name": "::Google::Cloud::ApiHub::V1::ApiHubPlugin::Rest::Client#create_plugin_instance",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::ApiHub::V1::CreatePluginInstanceRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "ApiHubPlugin::Rest::Client",
+          "full_name": "::Google::Cloud::ApiHub::V1::ApiHubPlugin::Rest::Client"
+        },
+        "method": {
+          "short_name": "CreatePluginInstance",
+          "full_name": "google.cloud.apihub.v1.ApiHubPlugin.CreatePluginInstance",
+          "service": {
+            "short_name": "ApiHubPlugin",
+            "full_name": "google.cloud.apihub.v1.ApiHubPlugin"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "apihub_v1_generated_ApiHubPlugin_ExecutePluginInstanceAction_sync",
+      "title": "Snippet for the execute_plugin_instance_action call in the ApiHubPlugin service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ApiHub::V1::ApiHubPlugin::Rest::Client#execute_plugin_instance_action.",
+      "file": "api_hub_plugin/execute_plugin_instance_action.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "execute_plugin_instance_action",
+        "full_name": "::Google::Cloud::ApiHub::V1::ApiHubPlugin::Rest::Client#execute_plugin_instance_action",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::ApiHub::V1::ExecutePluginInstanceActionRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "ApiHubPlugin::Rest::Client",
+          "full_name": "::Google::Cloud::ApiHub::V1::ApiHubPlugin::Rest::Client"
+        },
+        "method": {
+          "short_name": "ExecutePluginInstanceAction",
+          "full_name": "google.cloud.apihub.v1.ApiHubPlugin.ExecutePluginInstanceAction",
+          "service": {
+            "short_name": "ApiHubPlugin",
+            "full_name": "google.cloud.apihub.v1.ApiHubPlugin"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "apihub_v1_generated_ApiHubPlugin_GetPluginInstance_sync",
+      "title": "Snippet for the get_plugin_instance call in the ApiHubPlugin service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ApiHub::V1::ApiHubPlugin::Rest::Client#get_plugin_instance.",
+      "file": "api_hub_plugin/get_plugin_instance.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_plugin_instance",
+        "full_name": "::Google::Cloud::ApiHub::V1::ApiHubPlugin::Rest::Client#get_plugin_instance",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::ApiHub::V1::GetPluginInstanceRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::ApiHub::V1::PluginInstance",
+        "client": {
+          "short_name": "ApiHubPlugin::Rest::Client",
+          "full_name": "::Google::Cloud::ApiHub::V1::ApiHubPlugin::Rest::Client"
+        },
+        "method": {
+          "short_name": "GetPluginInstance",
+          "full_name": "google.cloud.apihub.v1.ApiHubPlugin.GetPluginInstance",
+          "service": {
+            "short_name": "ApiHubPlugin",
+            "full_name": "google.cloud.apihub.v1.ApiHubPlugin"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "apihub_v1_generated_ApiHubPlugin_ListPluginInstances_sync",
+      "title": "Snippet for the list_plugin_instances call in the ApiHubPlugin service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ApiHub::V1::ApiHubPlugin::Rest::Client#list_plugin_instances.",
+      "file": "api_hub_plugin/list_plugin_instances.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_plugin_instances",
+        "full_name": "::Google::Cloud::ApiHub::V1::ApiHubPlugin::Rest::Client#list_plugin_instances",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::ApiHub::V1::ListPluginInstancesRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::ApiHub::V1::ListPluginInstancesResponse",
+        "client": {
+          "short_name": "ApiHubPlugin::Rest::Client",
+          "full_name": "::Google::Cloud::ApiHub::V1::ApiHubPlugin::Rest::Client"
+        },
+        "method": {
+          "short_name": "ListPluginInstances",
+          "full_name": "google.cloud.apihub.v1.ApiHubPlugin.ListPluginInstances",
+          "service": {
+            "short_name": "ApiHubPlugin",
+            "full_name": "google.cloud.apihub.v1.ApiHubPlugin"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "apihub_v1_generated_ApiHubPlugin_EnablePluginInstanceAction_sync",
+      "title": "Snippet for the enable_plugin_instance_action call in the ApiHubPlugin service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ApiHub::V1::ApiHubPlugin::Rest::Client#enable_plugin_instance_action.",
+      "file": "api_hub_plugin/enable_plugin_instance_action.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "enable_plugin_instance_action",
+        "full_name": "::Google::Cloud::ApiHub::V1::ApiHubPlugin::Rest::Client#enable_plugin_instance_action",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::ApiHub::V1::EnablePluginInstanceActionRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "ApiHubPlugin::Rest::Client",
+          "full_name": "::Google::Cloud::ApiHub::V1::ApiHubPlugin::Rest::Client"
+        },
+        "method": {
+          "short_name": "EnablePluginInstanceAction",
+          "full_name": "google.cloud.apihub.v1.ApiHubPlugin.EnablePluginInstanceAction",
+          "service": {
+            "short_name": "ApiHubPlugin",
+            "full_name": "google.cloud.apihub.v1.ApiHubPlugin"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "apihub_v1_generated_ApiHubPlugin_DisablePluginInstanceAction_sync",
+      "title": "Snippet for the disable_plugin_instance_action call in the ApiHubPlugin service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ApiHub::V1::ApiHubPlugin::Rest::Client#disable_plugin_instance_action.",
+      "file": "api_hub_plugin/disable_plugin_instance_action.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "disable_plugin_instance_action",
+        "full_name": "::Google::Cloud::ApiHub::V1::ApiHubPlugin::Rest::Client#disable_plugin_instance_action",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::ApiHub::V1::DisablePluginInstanceActionRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "ApiHubPlugin::Rest::Client",
+          "full_name": "::Google::Cloud::ApiHub::V1::ApiHubPlugin::Rest::Client"
+        },
+        "method": {
+          "short_name": "DisablePluginInstanceAction",
+          "full_name": "google.cloud.apihub.v1.ApiHubPlugin.DisablePluginInstanceAction",
+          "service": {
+            "short_name": "ApiHubPlugin",
+            "full_name": "google.cloud.apihub.v1.ApiHubPlugin"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "apihub_v1_generated_ApiHubPlugin_UpdatePluginInstance_sync",
+      "title": "Snippet for the update_plugin_instance call in the ApiHubPlugin service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ApiHub::V1::ApiHubPlugin::Rest::Client#update_plugin_instance.",
+      "file": "api_hub_plugin/update_plugin_instance.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_plugin_instance",
+        "full_name": "::Google::Cloud::ApiHub::V1::ApiHubPlugin::Rest::Client#update_plugin_instance",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::ApiHub::V1::UpdatePluginInstanceRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::ApiHub::V1::PluginInstance",
+        "client": {
+          "short_name": "ApiHubPlugin::Rest::Client",
+          "full_name": "::Google::Cloud::ApiHub::V1::ApiHubPlugin::Rest::Client"
+        },
+        "method": {
+          "short_name": "UpdatePluginInstance",
+          "full_name": "google.cloud.apihub.v1.ApiHubPlugin.UpdatePluginInstance",
+          "service": {
+            "short_name": "ApiHubPlugin",
+            "full_name": "google.cloud.apihub.v1.ApiHubPlugin"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "apihub_v1_generated_ApiHubPlugin_DeletePluginInstance_sync",
+      "title": "Snippet for the delete_plugin_instance call in the ApiHubPlugin service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ApiHub::V1::ApiHubPlugin::Rest::Client#delete_plugin_instance.",
+      "file": "api_hub_plugin/delete_plugin_instance.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_plugin_instance",
+        "full_name": "::Google::Cloud::ApiHub::V1::ApiHubPlugin::Rest::Client#delete_plugin_instance",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::ApiHub::V1::DeletePluginInstanceRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "ApiHubPlugin::Rest::Client",
+          "full_name": "::Google::Cloud::ApiHub::V1::ApiHubPlugin::Rest::Client"
+        },
+        "method": {
+          "short_name": "DeletePluginInstance",
+          "full_name": "google.cloud.apihub.v1.ApiHubPlugin.DeletePluginInstance",
+          "service": {
+            "short_name": "ApiHubPlugin",
+            "full_name": "google.cloud.apihub.v1.ApiHubPlugin"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
       "region_tag": "apihub_v1_generated_Provisioning_CreateApiHubInstance_sync",
       "title": "Snippet for the create_api_hub_instance call in the Provisioning service",
       "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ApiHub::V1::Provisioning::Rest::Client#create_api_hub_instance.",
@@ -2035,6 +2995,46 @@
         "method": {
           "short_name": "CreateApiHubInstance",
           "full_name": "google.cloud.apihub.v1.Provisioning.CreateApiHubInstance",
+          "service": {
+            "short_name": "Provisioning",
+            "full_name": "google.cloud.apihub.v1.Provisioning"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "apihub_v1_generated_Provisioning_DeleteApiHubInstance_sync",
+      "title": "Snippet for the delete_api_hub_instance call in the Provisioning service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ApiHub::V1::Provisioning::Rest::Client#delete_api_hub_instance.",
+      "file": "provisioning/delete_api_hub_instance.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_api_hub_instance",
+        "full_name": "::Google::Cloud::ApiHub::V1::Provisioning::Rest::Client#delete_api_hub_instance",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::ApiHub::V1::DeleteApiHubInstanceRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "Provisioning::Rest::Client",
+          "full_name": "::Google::Cloud::ApiHub::V1::Provisioning::Rest::Client"
+        },
+        "method": {
+          "short_name": "DeleteApiHubInstance",
+          "full_name": "google.cloud.apihub.v1.Provisioning.DeleteApiHubInstance",
           "service": {
             "short_name": "Provisioning",
             "full_name": "google.cloud.apihub.v1.Provisioning"
