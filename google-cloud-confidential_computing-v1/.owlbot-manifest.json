@@ -40,6 +40,8 @@
     "snippets/Gemfile",
     "snippets/confidential_computing/create_challenge.rb",
     "snippets/confidential_computing/verify_attestation.rb",
+    "snippets/confidential_computing/verify_confidential_gke.rb",
+    "snippets/confidential_computing/verify_confidential_space.rb",
     "snippets/snippet_metadata_google.cloud.confidentialcomputing.v1.json",
     "test/google/cloud/confidential_computing/v1/confidential_computing_paths_test.rb",
     "test/google/cloud/confidential_computing/v1/confidential_computing_rest_test.rb",

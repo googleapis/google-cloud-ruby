@@ -90,6 +90,86 @@
           "type": "FULL"
         }
       ]
+    },
+    {
+      "region_tag": "confidentialcomputing_v1_generated_ConfidentialComputing_VerifyConfidentialSpace_sync",
+      "title": "Snippet for the verify_confidential_space call in the ConfidentialComputing service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ConfidentialComputing::V1::ConfidentialComputing::Client#verify_confidential_space.",
+      "file": "confidential_computing/verify_confidential_space.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "verify_confidential_space",
+        "full_name": "::Google::Cloud::ConfidentialComputing::V1::ConfidentialComputing::Client#verify_confidential_space",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::ConfidentialComputing::V1::VerifyConfidentialSpaceRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::ConfidentialComputing::V1::VerifyConfidentialSpaceResponse",
+        "client": {
+          "short_name": "ConfidentialComputing::Client",
+          "full_name": "::Google::Cloud::ConfidentialComputing::V1::ConfidentialComputing::Client"
+        },
+        "method": {
+          "short_name": "VerifyConfidentialSpace",
+          "full_name": "google.cloud.confidentialcomputing.v1.ConfidentialComputing.VerifyConfidentialSpace",
+          "service": {
+            "short_name": "ConfidentialComputing",
+            "full_name": "google.cloud.confidentialcomputing.v1.ConfidentialComputing"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "confidentialcomputing_v1_generated_ConfidentialComputing_VerifyConfidentialGke_sync",
+      "title": "Snippet for the verify_confidential_gke call in the ConfidentialComputing service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ConfidentialComputing::V1::ConfidentialComputing::Client#verify_confidential_gke.",
+      "file": "confidential_computing/verify_confidential_gke.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "verify_confidential_gke",
+        "full_name": "::Google::Cloud::ConfidentialComputing::V1::ConfidentialComputing::Client#verify_confidential_gke",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::ConfidentialComputing::V1::VerifyConfidentialGkeRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::ConfidentialComputing::V1::VerifyConfidentialGkeResponse",
+        "client": {
+          "short_name": "ConfidentialComputing::Client",
+          "full_name": "::Google::Cloud::ConfidentialComputing::V1::ConfidentialComputing::Client"
+        },
+        "method": {
+          "short_name": "VerifyConfidentialGke",
+          "full_name": "google.cloud.confidentialcomputing.v1.ConfidentialComputing.VerifyConfidentialGke",
+          "service": {
+            "short_name": "ConfidentialComputing",
+            "full_name": "google.cloud.confidentialcomputing.v1.ConfidentialComputing"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
     }
   ]
 }

@@ -19,6 +19,16 @@
               "methods": [
                 "verify_attestation"
               ]
+            },
+            "VerifyConfidentialSpace": {
+              "methods": [
+                "verify_confidential_space"
+              ]
+            },
+            "VerifyConfidentialGke": {
+              "methods": [
+                "verify_confidential_gke"
+              ]
             }
           }
         }
