@@ -1,0 +1,1935 @@
+{
+  "client_library": {
+    "name": "google-cloud-migration_center-v1",
+    "version": "",
+    "language": "RUBY",
+    "apis": [
+      {
+        "id": "google.cloud.migrationcenter.v1",
+        "version": "v1"
+      }
+    ]
+  },
+  "snippets": [
+    {
+      "region_tag": "migrationcenter_v1_generated_MigrationCenter_ListAssets_sync",
+      "title": "Snippet for the list_assets call in the MigrationCenter service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::MigrationCenter::V1::MigrationCenter::Client#list_assets.",
+      "file": "migration_center/list_assets.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_assets",
+        "full_name": "::Google::Cloud::MigrationCenter::V1::MigrationCenter::Client#list_assets",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::MigrationCenter::V1::ListAssetsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::MigrationCenter::V1::ListAssetsResponse",
+        "client": {
+          "short_name": "MigrationCenter::Client",
+          "full_name": "::Google::Cloud::MigrationCenter::V1::MigrationCenter::Client"
+        },
+        "method": {
+          "short_name": "ListAssets",
+          "full_name": "google.cloud.migrationcenter.v1.MigrationCenter.ListAssets",
+          "service": {
+            "short_name": "MigrationCenter",
+            "full_name": "google.cloud.migrationcenter.v1.MigrationCenter"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "migrationcenter_v1_generated_MigrationCenter_GetAsset_sync",
+      "title": "Snippet for the get_asset call in the MigrationCenter service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::MigrationCenter::V1::MigrationCenter::Client#get_asset.",
+      "file": "migration_center/get_asset.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_asset",
+        "full_name": "::Google::Cloud::MigrationCenter::V1::MigrationCenter::Client#get_asset",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::MigrationCenter::V1::GetAssetRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::MigrationCenter::V1::Asset",
+        "client": {
+          "short_name": "MigrationCenter::Client",
+          "full_name": "::Google::Cloud::MigrationCenter::V1::MigrationCenter::Client"
+        },
+        "method": {
+          "short_name": "GetAsset",
+          "full_name": "google.cloud.migrationcenter.v1.MigrationCenter.GetAsset",
+          "service": {
+            "short_name": "MigrationCenter",
+            "full_name": "google.cloud.migrationcenter.v1.MigrationCenter"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "migrationcenter_v1_generated_MigrationCenter_UpdateAsset_sync",
+      "title": "Snippet for the update_asset call in the MigrationCenter service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::MigrationCenter::V1::MigrationCenter::Client#update_asset.",
+      "file": "migration_center/update_asset.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_asset",
+        "full_name": "::Google::Cloud::MigrationCenter::V1::MigrationCenter::Client#update_asset",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::MigrationCenter::V1::UpdateAssetRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::MigrationCenter::V1::Asset",
+        "client": {
+          "short_name": "MigrationCenter::Client",
+          "full_name": "::Google::Cloud::MigrationCenter::V1::MigrationCenter::Client"
+        },
+        "method": {
+          "short_name": "UpdateAsset",
+          "full_name": "google.cloud.migrationcenter.v1.MigrationCenter.UpdateAsset",
+          "service": {
+            "short_name": "MigrationCenter",
+            "full_name": "google.cloud.migrationcenter.v1.MigrationCenter"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "migrationcenter_v1_generated_MigrationCenter_BatchUpdateAssets_sync",
+      "title": "Snippet for the batch_update_assets call in the MigrationCenter service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::MigrationCenter::V1::MigrationCenter::Client#batch_update_assets.",
+      "file": "migration_center/batch_update_assets.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "batch_update_assets",
+        "full_name": "::Google::Cloud::MigrationCenter::V1::MigrationCenter::Client#batch_update_assets",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::MigrationCenter::V1::BatchUpdateAssetsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::MigrationCenter::V1::BatchUpdateAssetsResponse",
+        "client": {
+          "short_name": "MigrationCenter::Client",
+          "full_name": "::Google::Cloud::MigrationCenter::V1::MigrationCenter::Client"
+        },
+        "method": {
+          "short_name": "BatchUpdateAssets",
+          "full_name": "google.cloud.migrationcenter.v1.MigrationCenter.BatchUpdateAssets",
+          "service": {
+            "short_name": "MigrationCenter",
+            "full_name": "google.cloud.migrationcenter.v1.MigrationCenter"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "migrationcenter_v1_generated_MigrationCenter_DeleteAsset_sync",
+      "title": "Snippet for the delete_asset call in the MigrationCenter service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::MigrationCenter::V1::MigrationCenter::Client#delete_asset.",
+      "file": "migration_center/delete_asset.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_asset",
+        "full_name": "::Google::Cloud::MigrationCenter::V1::MigrationCenter::Client#delete_asset",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::MigrationCenter::V1::DeleteAssetRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Protobuf::Empty",
+        "client": {
+          "short_name": "MigrationCenter::Client",
+          "full_name": "::Google::Cloud::MigrationCenter::V1::MigrationCenter::Client"
+        },
+        "method": {
+          "short_name": "DeleteAsset",
+          "full_name": "google.cloud.migrationcenter.v1.MigrationCenter.DeleteAsset",
+          "service": {
+            "short_name": "MigrationCenter",
+            "full_name": "google.cloud.migrationcenter.v1.MigrationCenter"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "migrationcenter_v1_generated_MigrationCenter_BatchDeleteAssets_sync",
+      "title": "Snippet for the batch_delete_assets call in the MigrationCenter service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::MigrationCenter::V1::MigrationCenter::Client#batch_delete_assets.",
+      "file": "migration_center/batch_delete_assets.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "batch_delete_assets",
+        "full_name": "::Google::Cloud::MigrationCenter::V1::MigrationCenter::Client#batch_delete_assets",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::MigrationCenter::V1::BatchDeleteAssetsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Protobuf::Empty",
+        "client": {
+          "short_name": "MigrationCenter::Client",
+          "full_name": "::Google::Cloud::MigrationCenter::V1::MigrationCenter::Client"
+        },
+        "method": {
+          "short_name": "BatchDeleteAssets",
+          "full_name": "google.cloud.migrationcenter.v1.MigrationCenter.BatchDeleteAssets",
+          "service": {
+            "short_name": "MigrationCenter",
+            "full_name": "google.cloud.migrationcenter.v1.MigrationCenter"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "migrationcenter_v1_generated_MigrationCenter_ReportAssetFrames_sync",
+      "title": "Snippet for the report_asset_frames call in the MigrationCenter service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::MigrationCenter::V1::MigrationCenter::Client#report_asset_frames.",
+      "file": "migration_center/report_asset_frames.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "report_asset_frames",
+        "full_name": "::Google::Cloud::MigrationCenter::V1::MigrationCenter::Client#report_asset_frames",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::MigrationCenter::V1::ReportAssetFramesRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::MigrationCenter::V1::ReportAssetFramesResponse",
+        "client": {
+          "short_name": "MigrationCenter::Client",
+          "full_name": "::Google::Cloud::MigrationCenter::V1::MigrationCenter::Client"
+        },
+        "method": {
+          "short_name": "ReportAssetFrames",
+          "full_name": "google.cloud.migrationcenter.v1.MigrationCenter.ReportAssetFrames",
+          "service": {
+            "short_name": "MigrationCenter",
+            "full_name": "google.cloud.migrationcenter.v1.MigrationCenter"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "migrationcenter_v1_generated_MigrationCenter_AggregateAssetsValues_sync",
+      "title": "Snippet for the aggregate_assets_values call in the MigrationCenter service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::MigrationCenter::V1::MigrationCenter::Client#aggregate_assets_values.",
+      "file": "migration_center/aggregate_assets_values.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "aggregate_assets_values",
+        "full_name": "::Google::Cloud::MigrationCenter::V1::MigrationCenter::Client#aggregate_assets_values",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::MigrationCenter::V1::AggregateAssetsValuesRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::MigrationCenter::V1::AggregateAssetsValuesResponse",
+        "client": {
+          "short_name": "MigrationCenter::Client",
+          "full_name": "::Google::Cloud::MigrationCenter::V1::MigrationCenter::Client"
+        },
+        "method": {
+          "short_name": "AggregateAssetsValues",
+          "full_name": "google.cloud.migrationcenter.v1.MigrationCenter.AggregateAssetsValues",
+          "service": {
+            "short_name": "MigrationCenter",
+            "full_name": "google.cloud.migrationcenter.v1.MigrationCenter"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "migrationcenter_v1_generated_MigrationCenter_CreateImportJob_sync",
+      "title": "Snippet for the create_import_job call in the MigrationCenter service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::MigrationCenter::V1::MigrationCenter::Client#create_import_job.",
+      "file": "migration_center/create_import_job.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_import_job",
+        "full_name": "::Google::Cloud::MigrationCenter::V1::MigrationCenter::Client#create_import_job",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::MigrationCenter::V1::CreateImportJobRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "MigrationCenter::Client",
+          "full_name": "::Google::Cloud::MigrationCenter::V1::MigrationCenter::Client"
+        },
+        "method": {
+          "short_name": "CreateImportJob",
+          "full_name": "google.cloud.migrationcenter.v1.MigrationCenter.CreateImportJob",
+          "service": {
+            "short_name": "MigrationCenter",
+            "full_name": "google.cloud.migrationcenter.v1.MigrationCenter"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "migrationcenter_v1_generated_MigrationCenter_ListImportJobs_sync",
+      "title": "Snippet for the list_import_jobs call in the MigrationCenter service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::MigrationCenter::V1::MigrationCenter::Client#list_import_jobs.",
+      "file": "migration_center/list_import_jobs.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_import_jobs",
+        "full_name": "::Google::Cloud::MigrationCenter::V1::MigrationCenter::Client#list_import_jobs",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::MigrationCenter::V1::ListImportJobsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::MigrationCenter::V1::ListImportJobsResponse",
+        "client": {
+          "short_name": "MigrationCenter::Client",
+          "full_name": "::Google::Cloud::MigrationCenter::V1::MigrationCenter::Client"
+        },
+        "method": {
+          "short_name": "ListImportJobs",
+          "full_name": "google.cloud.migrationcenter.v1.MigrationCenter.ListImportJobs",
+          "service": {
+            "short_name": "MigrationCenter",
+            "full_name": "google.cloud.migrationcenter.v1.MigrationCenter"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "migrationcenter_v1_generated_MigrationCenter_GetImportJob_sync",
+      "title": "Snippet for the get_import_job call in the MigrationCenter service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::MigrationCenter::V1::MigrationCenter::Client#get_import_job.",
+      "file": "migration_center/get_import_job.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_import_job",
+        "full_name": "::Google::Cloud::MigrationCenter::V1::MigrationCenter::Client#get_import_job",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::MigrationCenter::V1::GetImportJobRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::MigrationCenter::V1::ImportJob",
+        "client": {
+          "short_name": "MigrationCenter::Client",
+          "full_name": "::Google::Cloud::MigrationCenter::V1::MigrationCenter::Client"
+        },
+        "method": {
+          "short_name": "GetImportJob",
+          "full_name": "google.cloud.migrationcenter.v1.MigrationCenter.GetImportJob",
+          "service": {
+            "short_name": "MigrationCenter",
+            "full_name": "google.cloud.migrationcenter.v1.MigrationCenter"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "migrationcenter_v1_generated_MigrationCenter_DeleteImportJob_sync",
+      "title": "Snippet for the delete_import_job call in the MigrationCenter service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::MigrationCenter::V1::MigrationCenter::Client#delete_import_job.",
+      "file": "migration_center/delete_import_job.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_import_job",
+        "full_name": "::Google::Cloud::MigrationCenter::V1::MigrationCenter::Client#delete_import_job",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::MigrationCenter::V1::DeleteImportJobRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "MigrationCenter::Client",
+          "full_name": "::Google::Cloud::MigrationCenter::V1::MigrationCenter::Client"
+        },
+        "method": {
+          "short_name": "DeleteImportJob",
+          "full_name": "google.cloud.migrationcenter.v1.MigrationCenter.DeleteImportJob",
+          "service": {
+            "short_name": "MigrationCenter",
+            "full_name": "google.cloud.migrationcenter.v1.MigrationCenter"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "migrationcenter_v1_generated_MigrationCenter_UpdateImportJob_sync",
+      "title": "Snippet for the update_import_job call in the MigrationCenter service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::MigrationCenter::V1::MigrationCenter::Client#update_import_job.",
+      "file": "migration_center/update_import_job.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_import_job",
+        "full_name": "::Google::Cloud::MigrationCenter::V1::MigrationCenter::Client#update_import_job",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::MigrationCenter::V1::UpdateImportJobRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "MigrationCenter::Client",
+          "full_name": "::Google::Cloud::MigrationCenter::V1::MigrationCenter::Client"
+        },
+        "method": {
+          "short_name": "UpdateImportJob",
+          "full_name": "google.cloud.migrationcenter.v1.MigrationCenter.UpdateImportJob",
+          "service": {
+            "short_name": "MigrationCenter",
+            "full_name": "google.cloud.migrationcenter.v1.MigrationCenter"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "migrationcenter_v1_generated_MigrationCenter_ValidateImportJob_sync",
+      "title": "Snippet for the validate_import_job call in the MigrationCenter service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::MigrationCenter::V1::MigrationCenter::Client#validate_import_job.",
+      "file": "migration_center/validate_import_job.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "validate_import_job",
+        "full_name": "::Google::Cloud::MigrationCenter::V1::MigrationCenter::Client#validate_import_job",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::MigrationCenter::V1::ValidateImportJobRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "MigrationCenter::Client",
+          "full_name": "::Google::Cloud::MigrationCenter::V1::MigrationCenter::Client"
+        },
+        "method": {
+          "short_name": "ValidateImportJob",
+          "full_name": "google.cloud.migrationcenter.v1.MigrationCenter.ValidateImportJob",
+          "service": {
+            "short_name": "MigrationCenter",
+            "full_name": "google.cloud.migrationcenter.v1.MigrationCenter"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "migrationcenter_v1_generated_MigrationCenter_RunImportJob_sync",
+      "title": "Snippet for the run_import_job call in the MigrationCenter service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::MigrationCenter::V1::MigrationCenter::Client#run_import_job.",
+      "file": "migration_center/run_import_job.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "run_import_job",
+        "full_name": "::Google::Cloud::MigrationCenter::V1::MigrationCenter::Client#run_import_job",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::MigrationCenter::V1::RunImportJobRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "MigrationCenter::Client",
+          "full_name": "::Google::Cloud::MigrationCenter::V1::MigrationCenter::Client"
+        },
+        "method": {
+          "short_name": "RunImportJob",
+          "full_name": "google.cloud.migrationcenter.v1.MigrationCenter.RunImportJob",
+          "service": {
+            "short_name": "MigrationCenter",
+            "full_name": "google.cloud.migrationcenter.v1.MigrationCenter"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "migrationcenter_v1_generated_MigrationCenter_GetImportDataFile_sync",
+      "title": "Snippet for the get_import_data_file call in the MigrationCenter service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::MigrationCenter::V1::MigrationCenter::Client#get_import_data_file.",
+      "file": "migration_center/get_import_data_file.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_import_data_file",
+        "full_name": "::Google::Cloud::MigrationCenter::V1::MigrationCenter::Client#get_import_data_file",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::MigrationCenter::V1::GetImportDataFileRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::MigrationCenter::V1::ImportDataFile",
+        "client": {
+          "short_name": "MigrationCenter::Client",
+          "full_name": "::Google::Cloud::MigrationCenter::V1::MigrationCenter::Client"
+        },
+        "method": {
+          "short_name": "GetImportDataFile",
+          "full_name": "google.cloud.migrationcenter.v1.MigrationCenter.GetImportDataFile",
+          "service": {
+            "short_name": "MigrationCenter",
+            "full_name": "google.cloud.migrationcenter.v1.MigrationCenter"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "migrationcenter_v1_generated_MigrationCenter_ListImportDataFiles_sync",
+      "title": "Snippet for the list_import_data_files call in the MigrationCenter service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::MigrationCenter::V1::MigrationCenter::Client#list_import_data_files.",
+      "file": "migration_center/list_import_data_files.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_import_data_files",
+        "full_name": "::Google::Cloud::MigrationCenter::V1::MigrationCenter::Client#list_import_data_files",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::MigrationCenter::V1::ListImportDataFilesRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::MigrationCenter::V1::ListImportDataFilesResponse",
+        "client": {
+          "short_name": "MigrationCenter::Client",
+          "full_name": "::Google::Cloud::MigrationCenter::V1::MigrationCenter::Client"
+        },
+        "method": {
+          "short_name": "ListImportDataFiles",
+          "full_name": "google.cloud.migrationcenter.v1.MigrationCenter.ListImportDataFiles",
+          "service": {
+            "short_name": "MigrationCenter",
+            "full_name": "google.cloud.migrationcenter.v1.MigrationCenter"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "migrationcenter_v1_generated_MigrationCenter_CreateImportDataFile_sync",
+      "title": "Snippet for the create_import_data_file call in the MigrationCenter service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::MigrationCenter::V1::MigrationCenter::Client#create_import_data_file.",
+      "file": "migration_center/create_import_data_file.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_import_data_file",
+        "full_name": "::Google::Cloud::MigrationCenter::V1::MigrationCenter::Client#create_import_data_file",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::MigrationCenter::V1::CreateImportDataFileRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "MigrationCenter::Client",
+          "full_name": "::Google::Cloud::MigrationCenter::V1::MigrationCenter::Client"
+        },
+        "method": {
+          "short_name": "CreateImportDataFile",
+          "full_name": "google.cloud.migrationcenter.v1.MigrationCenter.CreateImportDataFile",
+          "service": {
+            "short_name": "MigrationCenter",
+            "full_name": "google.cloud.migrationcenter.v1.MigrationCenter"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "migrationcenter_v1_generated_MigrationCenter_DeleteImportDataFile_sync",
+      "title": "Snippet for the delete_import_data_file call in the MigrationCenter service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::MigrationCenter::V1::MigrationCenter::Client#delete_import_data_file.",
+      "file": "migration_center/delete_import_data_file.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_import_data_file",
+        "full_name": "::Google::Cloud::MigrationCenter::V1::MigrationCenter::Client#delete_import_data_file",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::MigrationCenter::V1::DeleteImportDataFileRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "MigrationCenter::Client",
+          "full_name": "::Google::Cloud::MigrationCenter::V1::MigrationCenter::Client"
+        },
+        "method": {
+          "short_name": "DeleteImportDataFile",
+          "full_name": "google.cloud.migrationcenter.v1.MigrationCenter.DeleteImportDataFile",
+          "service": {
+            "short_name": "MigrationCenter",
+            "full_name": "google.cloud.migrationcenter.v1.MigrationCenter"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "migrationcenter_v1_generated_MigrationCenter_ListGroups_sync",
+      "title": "Snippet for the list_groups call in the MigrationCenter service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::MigrationCenter::V1::MigrationCenter::Client#list_groups.",
+      "file": "migration_center/list_groups.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_groups",
+        "full_name": "::Google::Cloud::MigrationCenter::V1::MigrationCenter::Client#list_groups",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::MigrationCenter::V1::ListGroupsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::MigrationCenter::V1::ListGroupsResponse",
+        "client": {
+          "short_name": "MigrationCenter::Client",
+          "full_name": "::Google::Cloud::MigrationCenter::V1::MigrationCenter::Client"
+        },
+        "method": {
+          "short_name": "ListGroups",
+          "full_name": "google.cloud.migrationcenter.v1.MigrationCenter.ListGroups",
+          "service": {
+            "short_name": "MigrationCenter",
+            "full_name": "google.cloud.migrationcenter.v1.MigrationCenter"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "migrationcenter_v1_generated_MigrationCenter_GetGroup_sync",
+      "title": "Snippet for the get_group call in the MigrationCenter service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::MigrationCenter::V1::MigrationCenter::Client#get_group.",
+      "file": "migration_center/get_group.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_group",
+        "full_name": "::Google::Cloud::MigrationCenter::V1::MigrationCenter::Client#get_group",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::MigrationCenter::V1::GetGroupRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::MigrationCenter::V1::Group",
+        "client": {
+          "short_name": "MigrationCenter::Client",
+          "full_name": "::Google::Cloud::MigrationCenter::V1::MigrationCenter::Client"
+        },
+        "method": {
+          "short_name": "GetGroup",
+          "full_name": "google.cloud.migrationcenter.v1.MigrationCenter.GetGroup",
+          "service": {
+            "short_name": "MigrationCenter",
+            "full_name": "google.cloud.migrationcenter.v1.MigrationCenter"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "migrationcenter_v1_generated_MigrationCenter_CreateGroup_sync",
+      "title": "Snippet for the create_group call in the MigrationCenter service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::MigrationCenter::V1::MigrationCenter::Client#create_group.",
+      "file": "migration_center/create_group.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_group",
+        "full_name": "::Google::Cloud::MigrationCenter::V1::MigrationCenter::Client#create_group",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::MigrationCenter::V1::CreateGroupRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "MigrationCenter::Client",
+          "full_name": "::Google::Cloud::MigrationCenter::V1::MigrationCenter::Client"
+        },
+        "method": {
+          "short_name": "CreateGroup",
+          "full_name": "google.cloud.migrationcenter.v1.MigrationCenter.CreateGroup",
+          "service": {
+            "short_name": "MigrationCenter",
+            "full_name": "google.cloud.migrationcenter.v1.MigrationCenter"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "migrationcenter_v1_generated_MigrationCenter_UpdateGroup_sync",
+      "title": "Snippet for the update_group call in the MigrationCenter service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::MigrationCenter::V1::MigrationCenter::Client#update_group.",
+      "file": "migration_center/update_group.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_group",
+        "full_name": "::Google::Cloud::MigrationCenter::V1::MigrationCenter::Client#update_group",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::MigrationCenter::V1::UpdateGroupRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "MigrationCenter::Client",
+          "full_name": "::Google::Cloud::MigrationCenter::V1::MigrationCenter::Client"
+        },
+        "method": {
+          "short_name": "UpdateGroup",
+          "full_name": "google.cloud.migrationcenter.v1.MigrationCenter.UpdateGroup",
+          "service": {
+            "short_name": "MigrationCenter",
+            "full_name": "google.cloud.migrationcenter.v1.MigrationCenter"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "migrationcenter_v1_generated_MigrationCenter_DeleteGroup_sync",
+      "title": "Snippet for the delete_group call in the MigrationCenter service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::MigrationCenter::V1::MigrationCenter::Client#delete_group.",
+      "file": "migration_center/delete_group.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_group",
+        "full_name": "::Google::Cloud::MigrationCenter::V1::MigrationCenter::Client#delete_group",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::MigrationCenter::V1::DeleteGroupRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "MigrationCenter::Client",
+          "full_name": "::Google::Cloud::MigrationCenter::V1::MigrationCenter::Client"
+        },
+        "method": {
+          "short_name": "DeleteGroup",
+          "full_name": "google.cloud.migrationcenter.v1.MigrationCenter.DeleteGroup",
+          "service": {
+            "short_name": "MigrationCenter",
+            "full_name": "google.cloud.migrationcenter.v1.MigrationCenter"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "migrationcenter_v1_generated_MigrationCenter_AddAssetsToGroup_sync",
+      "title": "Snippet for the add_assets_to_group call in the MigrationCenter service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::MigrationCenter::V1::MigrationCenter::Client#add_assets_to_group.",
+      "file": "migration_center/add_assets_to_group.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "add_assets_to_group",
+        "full_name": "::Google::Cloud::MigrationCenter::V1::MigrationCenter::Client#add_assets_to_group",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::MigrationCenter::V1::AddAssetsToGroupRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "MigrationCenter::Client",
+          "full_name": "::Google::Cloud::MigrationCenter::V1::MigrationCenter::Client"
+        },
+        "method": {
+          "short_name": "AddAssetsToGroup",
+          "full_name": "google.cloud.migrationcenter.v1.MigrationCenter.AddAssetsToGroup",
+          "service": {
+            "short_name": "MigrationCenter",
+            "full_name": "google.cloud.migrationcenter.v1.MigrationCenter"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "migrationcenter_v1_generated_MigrationCenter_RemoveAssetsFromGroup_sync",
+      "title": "Snippet for the remove_assets_from_group call in the MigrationCenter service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::MigrationCenter::V1::MigrationCenter::Client#remove_assets_from_group.",
+      "file": "migration_center/remove_assets_from_group.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "remove_assets_from_group",
+        "full_name": "::Google::Cloud::MigrationCenter::V1::MigrationCenter::Client#remove_assets_from_group",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::MigrationCenter::V1::RemoveAssetsFromGroupRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "MigrationCenter::Client",
+          "full_name": "::Google::Cloud::MigrationCenter::V1::MigrationCenter::Client"
+        },
+        "method": {
+          "short_name": "RemoveAssetsFromGroup",
+          "full_name": "google.cloud.migrationcenter.v1.MigrationCenter.RemoveAssetsFromGroup",
+          "service": {
+            "short_name": "MigrationCenter",
+            "full_name": "google.cloud.migrationcenter.v1.MigrationCenter"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "migrationcenter_v1_generated_MigrationCenter_ListErrorFrames_sync",
+      "title": "Snippet for the list_error_frames call in the MigrationCenter service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::MigrationCenter::V1::MigrationCenter::Client#list_error_frames.",
+      "file": "migration_center/list_error_frames.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_error_frames",
+        "full_name": "::Google::Cloud::MigrationCenter::V1::MigrationCenter::Client#list_error_frames",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::MigrationCenter::V1::ListErrorFramesRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::MigrationCenter::V1::ListErrorFramesResponse",
+        "client": {
+          "short_name": "MigrationCenter::Client",
+          "full_name": "::Google::Cloud::MigrationCenter::V1::MigrationCenter::Client"
+        },
+        "method": {
+          "short_name": "ListErrorFrames",
+          "full_name": "google.cloud.migrationcenter.v1.MigrationCenter.ListErrorFrames",
+          "service": {
+            "short_name": "MigrationCenter",
+            "full_name": "google.cloud.migrationcenter.v1.MigrationCenter"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "migrationcenter_v1_generated_MigrationCenter_GetErrorFrame_sync",
+      "title": "Snippet for the get_error_frame call in the MigrationCenter service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::MigrationCenter::V1::MigrationCenter::Client#get_error_frame.",
+      "file": "migration_center/get_error_frame.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_error_frame",
+        "full_name": "::Google::Cloud::MigrationCenter::V1::MigrationCenter::Client#get_error_frame",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::MigrationCenter::V1::GetErrorFrameRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::MigrationCenter::V1::ErrorFrame",
+        "client": {
+          "short_name": "MigrationCenter::Client",
+          "full_name": "::Google::Cloud::MigrationCenter::V1::MigrationCenter::Client"
+        },
+        "method": {
+          "short_name": "GetErrorFrame",
+          "full_name": "google.cloud.migrationcenter.v1.MigrationCenter.GetErrorFrame",
+          "service": {
+            "short_name": "MigrationCenter",
+            "full_name": "google.cloud.migrationcenter.v1.MigrationCenter"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "migrationcenter_v1_generated_MigrationCenter_ListSources_sync",
+      "title": "Snippet for the list_sources call in the MigrationCenter service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::MigrationCenter::V1::MigrationCenter::Client#list_sources.",
+      "file": "migration_center/list_sources.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_sources",
+        "full_name": "::Google::Cloud::MigrationCenter::V1::MigrationCenter::Client#list_sources",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::MigrationCenter::V1::ListSourcesRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::MigrationCenter::V1::ListSourcesResponse",
+        "client": {
+          "short_name": "MigrationCenter::Client",
+          "full_name": "::Google::Cloud::MigrationCenter::V1::MigrationCenter::Client"
+        },
+        "method": {
+          "short_name": "ListSources",
+          "full_name": "google.cloud.migrationcenter.v1.MigrationCenter.ListSources",
+          "service": {
+            "short_name": "MigrationCenter",
+            "full_name": "google.cloud.migrationcenter.v1.MigrationCenter"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "migrationcenter_v1_generated_MigrationCenter_GetSource_sync",
+      "title": "Snippet for the get_source call in the MigrationCenter service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::MigrationCenter::V1::MigrationCenter::Client#get_source.",
+      "file": "migration_center/get_source.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_source",
+        "full_name": "::Google::Cloud::MigrationCenter::V1::MigrationCenter::Client#get_source",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::MigrationCenter::V1::GetSourceRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::MigrationCenter::V1::Source",
+        "client": {
+          "short_name": "MigrationCenter::Client",
+          "full_name": "::Google::Cloud::MigrationCenter::V1::MigrationCenter::Client"
+        },
+        "method": {
+          "short_name": "GetSource",
+          "full_name": "google.cloud.migrationcenter.v1.MigrationCenter.GetSource",
+          "service": {
+            "short_name": "MigrationCenter",
+            "full_name": "google.cloud.migrationcenter.v1.MigrationCenter"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "migrationcenter_v1_generated_MigrationCenter_CreateSource_sync",
+      "title": "Snippet for the create_source call in the MigrationCenter service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::MigrationCenter::V1::MigrationCenter::Client#create_source.",
+      "file": "migration_center/create_source.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_source",
+        "full_name": "::Google::Cloud::MigrationCenter::V1::MigrationCenter::Client#create_source",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::MigrationCenter::V1::CreateSourceRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "MigrationCenter::Client",
+          "full_name": "::Google::Cloud::MigrationCenter::V1::MigrationCenter::Client"
+        },
+        "method": {
+          "short_name": "CreateSource",
+          "full_name": "google.cloud.migrationcenter.v1.MigrationCenter.CreateSource",
+          "service": {
+            "short_name": "MigrationCenter",
+            "full_name": "google.cloud.migrationcenter.v1.MigrationCenter"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "migrationcenter_v1_generated_MigrationCenter_UpdateSource_sync",
+      "title": "Snippet for the update_source call in the MigrationCenter service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::MigrationCenter::V1::MigrationCenter::Client#update_source.",
+      "file": "migration_center/update_source.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_source",
+        "full_name": "::Google::Cloud::MigrationCenter::V1::MigrationCenter::Client#update_source",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::MigrationCenter::V1::UpdateSourceRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "MigrationCenter::Client",
+          "full_name": "::Google::Cloud::MigrationCenter::V1::MigrationCenter::Client"
+        },
+        "method": {
+          "short_name": "UpdateSource",
+          "full_name": "google.cloud.migrationcenter.v1.MigrationCenter.UpdateSource",
+          "service": {
+            "short_name": "MigrationCenter",
+            "full_name": "google.cloud.migrationcenter.v1.MigrationCenter"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "migrationcenter_v1_generated_MigrationCenter_DeleteSource_sync",
+      "title": "Snippet for the delete_source call in the MigrationCenter service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::MigrationCenter::V1::MigrationCenter::Client#delete_source.",
+      "file": "migration_center/delete_source.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_source",
+        "full_name": "::Google::Cloud::MigrationCenter::V1::MigrationCenter::Client#delete_source",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::MigrationCenter::V1::DeleteSourceRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "MigrationCenter::Client",
+          "full_name": "::Google::Cloud::MigrationCenter::V1::MigrationCenter::Client"
+        },
+        "method": {
+          "short_name": "DeleteSource",
+          "full_name": "google.cloud.migrationcenter.v1.MigrationCenter.DeleteSource",
+          "service": {
+            "short_name": "MigrationCenter",
+            "full_name": "google.cloud.migrationcenter.v1.MigrationCenter"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "migrationcenter_v1_generated_MigrationCenter_ListPreferenceSets_sync",
+      "title": "Snippet for the list_preference_sets call in the MigrationCenter service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::MigrationCenter::V1::MigrationCenter::Client#list_preference_sets.",
+      "file": "migration_center/list_preference_sets.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_preference_sets",
+        "full_name": "::Google::Cloud::MigrationCenter::V1::MigrationCenter::Client#list_preference_sets",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::MigrationCenter::V1::ListPreferenceSetsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::MigrationCenter::V1::ListPreferenceSetsResponse",
+        "client": {
+          "short_name": "MigrationCenter::Client",
+          "full_name": "::Google::Cloud::MigrationCenter::V1::MigrationCenter::Client"
+        },
+        "method": {
+          "short_name": "ListPreferenceSets",
+          "full_name": "google.cloud.migrationcenter.v1.MigrationCenter.ListPreferenceSets",
+          "service": {
+            "short_name": "MigrationCenter",
+            "full_name": "google.cloud.migrationcenter.v1.MigrationCenter"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "migrationcenter_v1_generated_MigrationCenter_GetPreferenceSet_sync",
+      "title": "Snippet for the get_preference_set call in the MigrationCenter service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::MigrationCenter::V1::MigrationCenter::Client#get_preference_set.",
+      "file": "migration_center/get_preference_set.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_preference_set",
+        "full_name": "::Google::Cloud::MigrationCenter::V1::MigrationCenter::Client#get_preference_set",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::MigrationCenter::V1::GetPreferenceSetRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::MigrationCenter::V1::PreferenceSet",
+        "client": {
+          "short_name": "MigrationCenter::Client",
+          "full_name": "::Google::Cloud::MigrationCenter::V1::MigrationCenter::Client"
+        },
+        "method": {
+          "short_name": "GetPreferenceSet",
+          "full_name": "google.cloud.migrationcenter.v1.MigrationCenter.GetPreferenceSet",
+          "service": {
+            "short_name": "MigrationCenter",
+            "full_name": "google.cloud.migrationcenter.v1.MigrationCenter"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "migrationcenter_v1_generated_MigrationCenter_CreatePreferenceSet_sync",
+      "title": "Snippet for the create_preference_set call in the MigrationCenter service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::MigrationCenter::V1::MigrationCenter::Client#create_preference_set.",
+      "file": "migration_center/create_preference_set.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_preference_set",
+        "full_name": "::Google::Cloud::MigrationCenter::V1::MigrationCenter::Client#create_preference_set",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::MigrationCenter::V1::CreatePreferenceSetRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "MigrationCenter::Client",
+          "full_name": "::Google::Cloud::MigrationCenter::V1::MigrationCenter::Client"
+        },
+        "method": {
+          "short_name": "CreatePreferenceSet",
+          "full_name": "google.cloud.migrationcenter.v1.MigrationCenter.CreatePreferenceSet",
+          "service": {
+            "short_name": "MigrationCenter",
+            "full_name": "google.cloud.migrationcenter.v1.MigrationCenter"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "migrationcenter_v1_generated_MigrationCenter_UpdatePreferenceSet_sync",
+      "title": "Snippet for the update_preference_set call in the MigrationCenter service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::MigrationCenter::V1::MigrationCenter::Client#update_preference_set.",
+      "file": "migration_center/update_preference_set.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_preference_set",
+        "full_name": "::Google::Cloud::MigrationCenter::V1::MigrationCenter::Client#update_preference_set",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::MigrationCenter::V1::UpdatePreferenceSetRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "MigrationCenter::Client",
+          "full_name": "::Google::Cloud::MigrationCenter::V1::MigrationCenter::Client"
+        },
+        "method": {
+          "short_name": "UpdatePreferenceSet",
+          "full_name": "google.cloud.migrationcenter.v1.MigrationCenter.UpdatePreferenceSet",
+          "service": {
+            "short_name": "MigrationCenter",
+            "full_name": "google.cloud.migrationcenter.v1.MigrationCenter"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "migrationcenter_v1_generated_MigrationCenter_DeletePreferenceSet_sync",
+      "title": "Snippet for the delete_preference_set call in the MigrationCenter service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::MigrationCenter::V1::MigrationCenter::Client#delete_preference_set.",
+      "file": "migration_center/delete_preference_set.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_preference_set",
+        "full_name": "::Google::Cloud::MigrationCenter::V1::MigrationCenter::Client#delete_preference_set",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::MigrationCenter::V1::DeletePreferenceSetRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "MigrationCenter::Client",
+          "full_name": "::Google::Cloud::MigrationCenter::V1::MigrationCenter::Client"
+        },
+        "method": {
+          "short_name": "DeletePreferenceSet",
+          "full_name": "google.cloud.migrationcenter.v1.MigrationCenter.DeletePreferenceSet",
+          "service": {
+            "short_name": "MigrationCenter",
+            "full_name": "google.cloud.migrationcenter.v1.MigrationCenter"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "migrationcenter_v1_generated_MigrationCenter_GetSettings_sync",
+      "title": "Snippet for the get_settings call in the MigrationCenter service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::MigrationCenter::V1::MigrationCenter::Client#get_settings.",
+      "file": "migration_center/get_settings.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_settings",
+        "full_name": "::Google::Cloud::MigrationCenter::V1::MigrationCenter::Client#get_settings",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::MigrationCenter::V1::GetSettingsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::MigrationCenter::V1::Settings",
+        "client": {
+          "short_name": "MigrationCenter::Client",
+          "full_name": "::Google::Cloud::MigrationCenter::V1::MigrationCenter::Client"
+        },
+        "method": {
+          "short_name": "GetSettings",
+          "full_name": "google.cloud.migrationcenter.v1.MigrationCenter.GetSettings",
+          "service": {
+            "short_name": "MigrationCenter",
+            "full_name": "google.cloud.migrationcenter.v1.MigrationCenter"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "migrationcenter_v1_generated_MigrationCenter_UpdateSettings_sync",
+      "title": "Snippet for the update_settings call in the MigrationCenter service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::MigrationCenter::V1::MigrationCenter::Client#update_settings.",
+      "file": "migration_center/update_settings.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_settings",
+        "full_name": "::Google::Cloud::MigrationCenter::V1::MigrationCenter::Client#update_settings",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::MigrationCenter::V1::UpdateSettingsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "MigrationCenter::Client",
+          "full_name": "::Google::Cloud::MigrationCenter::V1::MigrationCenter::Client"
+        },
+        "method": {
+          "short_name": "UpdateSettings",
+          "full_name": "google.cloud.migrationcenter.v1.MigrationCenter.UpdateSettings",
+          "service": {
+            "short_name": "MigrationCenter",
+            "full_name": "google.cloud.migrationcenter.v1.MigrationCenter"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "migrationcenter_v1_generated_MigrationCenter_CreateReportConfig_sync",
+      "title": "Snippet for the create_report_config call in the MigrationCenter service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::MigrationCenter::V1::MigrationCenter::Client#create_report_config.",
+      "file": "migration_center/create_report_config.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_report_config",
+        "full_name": "::Google::Cloud::MigrationCenter::V1::MigrationCenter::Client#create_report_config",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::MigrationCenter::V1::CreateReportConfigRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "MigrationCenter::Client",
+          "full_name": "::Google::Cloud::MigrationCenter::V1::MigrationCenter::Client"
+        },
+        "method": {
+          "short_name": "CreateReportConfig",
+          "full_name": "google.cloud.migrationcenter.v1.MigrationCenter.CreateReportConfig",
+          "service": {
+            "short_name": "MigrationCenter",
+            "full_name": "google.cloud.migrationcenter.v1.MigrationCenter"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "migrationcenter_v1_generated_MigrationCenter_GetReportConfig_sync",
+      "title": "Snippet for the get_report_config call in the MigrationCenter service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::MigrationCenter::V1::MigrationCenter::Client#get_report_config.",
+      "file": "migration_center/get_report_config.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_report_config",
+        "full_name": "::Google::Cloud::MigrationCenter::V1::MigrationCenter::Client#get_report_config",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::MigrationCenter::V1::GetReportConfigRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::MigrationCenter::V1::ReportConfig",
+        "client": {
+          "short_name": "MigrationCenter::Client",
+          "full_name": "::Google::Cloud::MigrationCenter::V1::MigrationCenter::Client"
+        },
+        "method": {
+          "short_name": "GetReportConfig",
+          "full_name": "google.cloud.migrationcenter.v1.MigrationCenter.GetReportConfig",
+          "service": {
+            "short_name": "MigrationCenter",
+            "full_name": "google.cloud.migrationcenter.v1.MigrationCenter"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "migrationcenter_v1_generated_MigrationCenter_ListReportConfigs_sync",
+      "title": "Snippet for the list_report_configs call in the MigrationCenter service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::MigrationCenter::V1::MigrationCenter::Client#list_report_configs.",
+      "file": "migration_center/list_report_configs.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_report_configs",
+        "full_name": "::Google::Cloud::MigrationCenter::V1::MigrationCenter::Client#list_report_configs",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::MigrationCenter::V1::ListReportConfigsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::MigrationCenter::V1::ListReportConfigsResponse",
+        "client": {
+          "short_name": "MigrationCenter::Client",
+          "full_name": "::Google::Cloud::MigrationCenter::V1::MigrationCenter::Client"
+        },
+        "method": {
+          "short_name": "ListReportConfigs",
+          "full_name": "google.cloud.migrationcenter.v1.MigrationCenter.ListReportConfigs",
+          "service": {
+            "short_name": "MigrationCenter",
+            "full_name": "google.cloud.migrationcenter.v1.MigrationCenter"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "migrationcenter_v1_generated_MigrationCenter_DeleteReportConfig_sync",
+      "title": "Snippet for the delete_report_config call in the MigrationCenter service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::MigrationCenter::V1::MigrationCenter::Client#delete_report_config.",
+      "file": "migration_center/delete_report_config.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_report_config",
+        "full_name": "::Google::Cloud::MigrationCenter::V1::MigrationCenter::Client#delete_report_config",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::MigrationCenter::V1::DeleteReportConfigRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "MigrationCenter::Client",
+          "full_name": "::Google::Cloud::MigrationCenter::V1::MigrationCenter::Client"
+        },
+        "method": {
+          "short_name": "DeleteReportConfig",
+          "full_name": "google.cloud.migrationcenter.v1.MigrationCenter.DeleteReportConfig",
+          "service": {
+            "short_name": "MigrationCenter",
+            "full_name": "google.cloud.migrationcenter.v1.MigrationCenter"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "migrationcenter_v1_generated_MigrationCenter_CreateReport_sync",
+      "title": "Snippet for the create_report call in the MigrationCenter service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::MigrationCenter::V1::MigrationCenter::Client#create_report.",
+      "file": "migration_center/create_report.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_report",
+        "full_name": "::Google::Cloud::MigrationCenter::V1::MigrationCenter::Client#create_report",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::MigrationCenter::V1::CreateReportRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "MigrationCenter::Client",
+          "full_name": "::Google::Cloud::MigrationCenter::V1::MigrationCenter::Client"
+        },
+        "method": {
+          "short_name": "CreateReport",
+          "full_name": "google.cloud.migrationcenter.v1.MigrationCenter.CreateReport",
+          "service": {
+            "short_name": "MigrationCenter",
+            "full_name": "google.cloud.migrationcenter.v1.MigrationCenter"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "migrationcenter_v1_generated_MigrationCenter_GetReport_sync",
+      "title": "Snippet for the get_report call in the MigrationCenter service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::MigrationCenter::V1::MigrationCenter::Client#get_report.",
+      "file": "migration_center/get_report.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_report",
+        "full_name": "::Google::Cloud::MigrationCenter::V1::MigrationCenter::Client#get_report",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::MigrationCenter::V1::GetReportRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::MigrationCenter::V1::Report",
+        "client": {
+          "short_name": "MigrationCenter::Client",
+          "full_name": "::Google::Cloud::MigrationCenter::V1::MigrationCenter::Client"
+        },
+        "method": {
+          "short_name": "GetReport",
+          "full_name": "google.cloud.migrationcenter.v1.MigrationCenter.GetReport",
+          "service": {
+            "short_name": "MigrationCenter",
+            "full_name": "google.cloud.migrationcenter.v1.MigrationCenter"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "migrationcenter_v1_generated_MigrationCenter_ListReports_sync",
+      "title": "Snippet for the list_reports call in the MigrationCenter service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::MigrationCenter::V1::MigrationCenter::Client#list_reports.",
+      "file": "migration_center/list_reports.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_reports",
+        "full_name": "::Google::Cloud::MigrationCenter::V1::MigrationCenter::Client#list_reports",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::MigrationCenter::V1::ListReportsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::MigrationCenter::V1::ListReportsResponse",
+        "client": {
+          "short_name": "MigrationCenter::Client",
+          "full_name": "::Google::Cloud::MigrationCenter::V1::MigrationCenter::Client"
+        },
+        "method": {
+          "short_name": "ListReports",
+          "full_name": "google.cloud.migrationcenter.v1.MigrationCenter.ListReports",
+          "service": {
+            "short_name": "MigrationCenter",
+            "full_name": "google.cloud.migrationcenter.v1.MigrationCenter"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "migrationcenter_v1_generated_MigrationCenter_DeleteReport_sync",
+      "title": "Snippet for the delete_report call in the MigrationCenter service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::MigrationCenter::V1::MigrationCenter::Client#delete_report.",
+      "file": "migration_center/delete_report.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_report",
+        "full_name": "::Google::Cloud::MigrationCenter::V1::MigrationCenter::Client#delete_report",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::MigrationCenter::V1::DeleteReportRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "MigrationCenter::Client",
+          "full_name": "::Google::Cloud::MigrationCenter::V1::MigrationCenter::Client"
+        },
+        "method": {
+          "short_name": "DeleteReport",
+          "full_name": "google.cloud.migrationcenter.v1.MigrationCenter.DeleteReport",
+          "service": {
+            "short_name": "MigrationCenter",
+            "full_name": "google.cloud.migrationcenter.v1.MigrationCenter"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    }
+  ]
+}

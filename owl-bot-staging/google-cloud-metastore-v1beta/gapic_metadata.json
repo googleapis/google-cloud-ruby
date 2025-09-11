@@ -1,0 +1,147 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "ruby",
+  "protoPackage": "google.cloud.metastore.v1beta",
+  "libraryPackage": "::Google::Cloud::Metastore::V1beta",
+  "services": {
+    "DataprocMetastore": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::Metastore::V1beta::DataprocMetastore::Client",
+          "rpcs": {
+            "ListServices": {
+              "methods": [
+                "list_services"
+              ]
+            },
+            "GetService": {
+              "methods": [
+                "get_service"
+              ]
+            },
+            "CreateService": {
+              "methods": [
+                "create_service"
+              ]
+            },
+            "UpdateService": {
+              "methods": [
+                "update_service"
+              ]
+            },
+            "DeleteService": {
+              "methods": [
+                "delete_service"
+              ]
+            },
+            "ListMetadataImports": {
+              "methods": [
+                "list_metadata_imports"
+              ]
+            },
+            "GetMetadataImport": {
+              "methods": [
+                "get_metadata_import"
+              ]
+            },
+            "CreateMetadataImport": {
+              "methods": [
+                "create_metadata_import"
+              ]
+            },
+            "UpdateMetadataImport": {
+              "methods": [
+                "update_metadata_import"
+              ]
+            },
+            "ExportMetadata": {
+              "methods": [
+                "export_metadata"
+              ]
+            },
+            "RestoreService": {
+              "methods": [
+                "restore_service"
+              ]
+            },
+            "ListBackups": {
+              "methods": [
+                "list_backups"
+              ]
+            },
+            "GetBackup": {
+              "methods": [
+                "get_backup"
+              ]
+            },
+            "CreateBackup": {
+              "methods": [
+                "create_backup"
+              ]
+            },
+            "DeleteBackup": {
+              "methods": [
+                "delete_backup"
+              ]
+            },
+            "RemoveIamPolicy": {
+              "methods": [
+                "remove_iam_policy"
+              ]
+            },
+            "QueryMetadata": {
+              "methods": [
+                "query_metadata"
+              ]
+            },
+            "MoveTableToDatabase": {
+              "methods": [
+                "move_table_to_database"
+              ]
+            },
+            "AlterMetadataResourceLocation": {
+              "methods": [
+                "alter_metadata_resource_location"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "DataprocMetastoreFederation": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::Metastore::V1beta::DataprocMetastoreFederation::Client",
+          "rpcs": {
+            "ListFederations": {
+              "methods": [
+                "list_federations"
+              ]
+            },
+            "GetFederation": {
+              "methods": [
+                "get_federation"
+              ]
+            },
+            "CreateFederation": {
+              "methods": [
+                "create_federation"
+              ]
+            },
+            "UpdateFederation": {
+              "methods": [
+                "update_federation"
+              ]
+            },
+            "DeleteFederation": {
+              "methods": [
+                "delete_federation"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}
