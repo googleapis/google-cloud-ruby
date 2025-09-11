@@ -1,5 +1,12 @@
 # Changelog
 
+### 2.6.0 (2025-09-11)
+
+#### Features
+
+* A new message `Glossary` is added 
+* A new service `BusinessGlossaryService` is added ([#31013](https://github.com/googleapis/google-cloud-ruby/issues/31013)) 
+
 ### 2.5.0 (2025-07-15)
 
 #### Features
