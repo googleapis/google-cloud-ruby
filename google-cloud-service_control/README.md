@@ -34,6 +34,14 @@ In order to use this library, you first need to go through the following steps:
 1. [Enable the API.](https://console.cloud.google.com/apis/library/servicecontrol.googleapis.com)
 1. [Set up authentication.](AUTHENTICATION.md)
 
+```ruby
+require "google/cloud/service_control"
+
+client = Google::Cloud::ServiceControl.quota_controller
+request = ::Google::Cloud::ServiceControl::V1::AllocateQuotaRequest.new # (request fields as keyword arguments...)
+response = client.allocate_quota request
+```
+
 ## Debug Logging
 
 This library comes with opt-in Debug Logging that can help you troubleshoot

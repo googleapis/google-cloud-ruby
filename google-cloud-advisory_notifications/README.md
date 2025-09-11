@@ -33,6 +33,14 @@ In order to use this library, you first need to go through the following steps:
 1. [Enable the API.](https://console.cloud.google.com/apis/library/advisorynotifications.googleapis.com)
 1. [Set up authentication.](AUTHENTICATION.md)
 
+```ruby
+require "google/cloud/advisory_notifications"
+
+client = Google::Cloud::AdvisoryNotifications.advisory_notifications_service
+request = ::Google::Cloud::AdvisoryNotifications::V1::ListNotificationsRequest.new # (request fields as keyword arguments...)
+response = client.list_notifications request
+```
+
 ## Debug Logging
 
 This library comes with opt-in Debug Logging that can help you troubleshoot

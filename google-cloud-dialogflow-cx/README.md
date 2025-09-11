@@ -34,6 +34,14 @@ In order to use this library, you first need to go through the following steps:
 1. [Enable the API.](https://console.cloud.google.com/apis/library/dialogflow.googleapis.com)
 1. [Set up authentication.](AUTHENTICATION.md)
 
+```ruby
+require "google/cloud/dialogflow/cx"
+
+client = Google::Cloud::Dialogflow::CX.pages
+request = ::Google::Cloud::Dialogflow::CX::V3::ListPagesRequest.new # (request fields as keyword arguments...)
+response = client.list_pages request
+```
+
 ## Debug Logging
 
 This library comes with opt-in Debug Logging that can help you troubleshoot

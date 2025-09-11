@@ -34,6 +34,14 @@ In order to use this library, you first need to go through the following steps:
 1. [Enable the API.](https://console.cloud.google.com/apis/library/contactcenterinsights.googleapis.com)
 1. [Set up authentication.](AUTHENTICATION.md)
 
+```ruby
+require "google/cloud/contact_center_insights"
+
+client = Google::Cloud::ContactCenterInsights.contact_center_insights
+request = ::Google::Cloud::ContactCenterInsights::V1::CreateConversationRequest.new # (request fields as keyword arguments...)
+response = client.create_conversation request
+```
+
 ## Debug Logging
 
 This library comes with opt-in Debug Logging that can help you troubleshoot

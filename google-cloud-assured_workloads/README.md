@@ -34,6 +34,14 @@ In order to use this library, you first need to go through the following steps:
 1. [Enable the API.](https://console.cloud.google.com/apis/library/assuredworkloads.googleapis.com)
 1. [Set up authentication.](AUTHENTICATION.md)
 
+```ruby
+require "google/cloud/assured_workloads"
+
+client = Google::Cloud::AssuredWorkloads.assured_workloads_service
+request = ::Google::Cloud::AssuredWorkloads::V1::CreateWorkloadRequest.new # (request fields as keyword arguments...)
+response = client.create_workload request
+```
+
 ## Debug Logging
 
 This library comes with opt-in Debug Logging that can help you troubleshoot

@@ -34,6 +34,14 @@ In order to use this library, you first need to go through the following steps:
 1. [Enable the API.](https://console.cloud.google.com/apis/library/phishingprotection.googleapis.com)
 1. [Set up authentication.](AUTHENTICATION.md)
 
+```ruby
+require "google/cloud/phishing_protection"
+
+client = Google::Cloud::PhishingProtection.phishing_protection_service
+request = ::Google::Cloud::PhishingProtection::V1beta1::ReportPhishingRequest.new # (request fields as keyword arguments...)
+response = client.report_phishing request
+```
+
 ## Migrating from pre-0.10 versions
 
 The 0.10 release of the google-cloud-phishing_protection client is a significant upgrade

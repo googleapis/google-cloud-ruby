@@ -35,6 +35,14 @@ In order to use this library, you first need to go through the following steps:
 1. [Enable the API.](https://console.cloud.google.com/apis/library/notebooks.googleapis.com)
 1. [Set up authentication.](AUTHENTICATION.md)
 
+```ruby
+require "google/cloud/notebooks"
+
+client = Google::Cloud::Notebooks.managed_notebook_service
+request = ::Google::Cloud::Notebooks::V1::ListRuntimesRequest.new # (request fields as keyword arguments...)
+response = client.list_runtimes request
+```
+
 ## Debug Logging
 
 This library comes with opt-in Debug Logging that can help you troubleshoot

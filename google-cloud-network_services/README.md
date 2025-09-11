@@ -34,6 +34,14 @@ In order to use this library, you first need to go through the following steps:
 1. [Enable the API.](https://console.cloud.google.com/apis/library/networkservices.googleapis.com)
 1. [Set up authentication.](AUTHENTICATION.md)
 
+```ruby
+require "google/cloud/network_services"
+
+client = Google::Cloud::NetworkServices.dep_service
+request = ::Google::Cloud::NetworkServices::V1::ListLbTrafficExtensionsRequest.new # (request fields as keyword arguments...)
+response = client.list_lb_traffic_extensions request
+```
+
 ## Debug Logging
 
 This library comes with opt-in Debug Logging that can help you troubleshoot

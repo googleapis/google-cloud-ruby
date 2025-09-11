@@ -34,6 +34,14 @@ In order to use this library, you first need to go through the following steps:
 1. [Enable the API.](https://console.cloud.google.com/apis/library/serviceusage.googleapis.com)
 1. [Set up authentication.](AUTHENTICATION.md)
 
+```ruby
+require "google/cloud/service_usage"
+
+client = Google::Cloud::ServiceUsage.service_usage
+request = ::Google::Cloud::ServiceUsage::V1::EnableServiceRequest.new # (request fields as keyword arguments...)
+response = client.enable_service request
+```
+
 ## Debug Logging
 
 This library comes with opt-in Debug Logging that can help you troubleshoot

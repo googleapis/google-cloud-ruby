@@ -33,6 +33,14 @@ In order to use this library, you first need to go through the following steps:
 1. [Enable the API.](https://console.cloud.google.com/apis/library/telcoautomation.googleapis.com)
 1. [Set up authentication.](AUTHENTICATION.md)
 
+```ruby
+require "google/cloud/telco_automation"
+
+client = Google::Cloud::TelcoAutomation.telco_automation
+request = ::Google::Cloud::TelcoAutomation::V1::ListOrchestrationClustersRequest.new # (request fields as keyword arguments...)
+response = client.list_orchestration_clusters request
+```
+
 ## Debug Logging
 
 This library comes with opt-in Debug Logging that can help you troubleshoot

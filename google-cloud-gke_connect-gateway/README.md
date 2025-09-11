@@ -34,6 +34,14 @@ In order to use this library, you first need to go through the following steps:
 1. [Enable the API.](https://console.cloud.google.com/apis/library/connectgateway.googleapis.com)
 1. [Set up authentication.](AUTHENTICATION.md)
 
+```ruby
+require "google/cloud/gke_connect/gateway"
+
+client = Google::Cloud::GkeConnect::Gateway.gateway_control
+request = ::Google::Cloud::GkeConnect::Gateway::V1::GenerateCredentialsRequest.new # (request fields as keyword arguments...)
+response = client.generate_credentials request
+```
+
 ## Debug Logging
 
 This library comes with opt-in Debug Logging that can help you troubleshoot

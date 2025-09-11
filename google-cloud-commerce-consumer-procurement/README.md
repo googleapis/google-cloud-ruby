@@ -33,6 +33,14 @@ In order to use this library, you first need to go through the following steps:
 1. [Enable the API.](https://console.cloud.google.com/apis/library/cloudcommerceconsumerprocurement.googleapis.com)
 1. [Set up authentication.](AUTHENTICATION.md)
 
+```ruby
+require "google/cloud/commerce/consumer/procurement"
+
+client = Google::Cloud::Commerce::Consumer::Procurement.license_management_service
+request = ::Google::Cloud::Commerce::Consumer::Procurement::V1::GetLicensePoolRequest.new # (request fields as keyword arguments...)
+response = client.get_license_pool request
+```
+
 ## Debug Logging
 
 This library comes with opt-in Debug Logging that can help you troubleshoot

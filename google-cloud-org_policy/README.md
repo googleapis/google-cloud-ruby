@@ -34,6 +34,14 @@ In order to use this library, you first need to go through the following steps:
 1. [Enable the API.](https://console.cloud.google.com/apis/library/orgpolicy.googleapis.com)
 1. [Set up authentication.](AUTHENTICATION.md)
 
+```ruby
+require "google/cloud/org_policy"
+
+client = Google::Cloud::OrgPolicy.org_policy
+request = ::Google::Cloud::OrgPolicy::V2::ListConstraintsRequest.new # (request fields as keyword arguments...)
+response = client.list_constraints request
+```
+
 ## Debug Logging
 
 This library comes with opt-in Debug Logging that can help you troubleshoot

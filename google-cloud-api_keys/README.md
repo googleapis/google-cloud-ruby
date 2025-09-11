@@ -34,6 +34,14 @@ In order to use this library, you first need to go through the following steps:
 1. [Enable the API.](https://console.cloud.google.com/apis/library/apikeys.googleapis.com)
 1. [Set up authentication.](AUTHENTICATION.md)
 
+```ruby
+require "google/cloud/api_keys"
+
+client = Google::Cloud::ApiKeys.api_keys
+request = ::Google::Cloud::ApiKeys::V2::CreateKeyRequest.new # (request fields as keyword arguments...)
+response = client.create_key request
+```
+
 ## Debug Logging
 
 This library comes with opt-in Debug Logging that can help you troubleshoot

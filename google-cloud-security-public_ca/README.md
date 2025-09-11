@@ -34,6 +34,14 @@ In order to use this library, you first need to go through the following steps:
 1. [Enable the API.](https://console.cloud.google.com/apis/library/publicca.googleapis.com)
 1. [Set up authentication.](AUTHENTICATION.md)
 
+```ruby
+require "google/cloud/security/public_ca"
+
+client = Google::Cloud::Security::PublicCA.public_certificate_authority_service
+request = ::Google::Cloud::Security::PublicCA::V1::CreateExternalAccountKeyRequest.new # (request fields as keyword arguments...)
+response = client.create_external_account_key request
+```
+
 ## Debug Logging
 
 This library comes with opt-in Debug Logging that can help you troubleshoot

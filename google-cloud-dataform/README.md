@@ -34,6 +34,14 @@ In order to use this library, you first need to go through the following steps:
 1. [Enable the API.](https://console.cloud.google.com/apis/library/dataform.googleapis.com)
 1. [Set up authentication.](AUTHENTICATION.md)
 
+```ruby
+require "google/cloud/dataform"
+
+client = Google::Cloud::Dataform.dataform
+request = ::Google::Cloud::Dataform::V1beta1::ListRepositoriesRequest.new # (request fields as keyword arguments...)
+response = client.list_repositories request
+```
+
 ## Debug Logging
 
 This library comes with opt-in Debug Logging that can help you troubleshoot

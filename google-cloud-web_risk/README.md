@@ -34,6 +34,14 @@ In order to use this library, you first need to go through the following steps:
 1. [Enable the API.](https://console.cloud.google.com/apis/library/webrisk.googleapis.com)
 1. [Set up authentication.](AUTHENTICATION.md)
 
+```ruby
+require "google/cloud/web_risk"
+
+client = Google::Cloud::WebRisk.web_risk_service
+request = ::Google::Cloud::WebRisk::V1::ComputeThreatListDiffRequest.new # (request fields as keyword arguments...)
+response = client.compute_threat_list_diff request
+```
+
 ## Debug Logging
 
 This library comes with opt-in Debug Logging that can help you troubleshoot

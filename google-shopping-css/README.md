@@ -34,6 +34,14 @@ In order to use this library, you first need to go through the following steps:
 1. [Enable the API.](https://console.cloud.google.com/apis/library/css.googleapis.com)
 1. [Set up authentication.](AUTHENTICATION.md)
 
+```ruby
+require "google/shopping/css"
+
+client = Google::Shopping::Css.accounts_service
+request = ::Google::Shopping::Css::V1::ListChildAccountsRequest.new # (request fields as keyword arguments...)
+response = client.list_child_accounts request
+```
+
 ## Debug Logging
 
 This library comes with opt-in Debug Logging that can help you troubleshoot

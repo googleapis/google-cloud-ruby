@@ -34,6 +34,14 @@ In order to use this library, you first need to go through the following steps:
 1. [Enable the API.](https://console.cloud.google.com/apis/library/texttospeech.googleapis.com)
 1. [Set up authentication.](AUTHENTICATION.md)
 
+```ruby
+require "google/cloud/text_to_speech"
+
+client = Google::Cloud::TextToSpeech.text_to_speech
+request = ::Google::Cloud::TextToSpeech::V1::ListVoicesRequest.new # (request fields as keyword arguments...)
+response = client.list_voices request
+```
+
 ## Debug Logging
 
 This library comes with opt-in Debug Logging that can help you troubleshoot

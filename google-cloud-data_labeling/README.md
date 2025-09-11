@@ -34,6 +34,14 @@ In order to use this library, you first need to go through the following steps:
 1. [Enable the API.](https://console.cloud.google.com/apis/library/datalabeling.googleapis.com)
 1. [Set up authentication.](AUTHENTICATION.md)
 
+```ruby
+require "google/cloud/data_labeling"
+
+client = Google::Cloud::DataLabeling.data_labeling_service
+request = ::Google::Cloud::DataLabeling::V1beta1::CreateDatasetRequest.new # (request fields as keyword arguments...)
+response = client.create_dataset request
+```
+
 ## Debug Logging
 
 This library comes with opt-in Debug Logging that can help you troubleshoot

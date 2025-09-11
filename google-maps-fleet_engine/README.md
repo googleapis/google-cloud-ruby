@@ -34,6 +34,14 @@ In order to use this library, you first need to go through the following steps:
 1. [Enable the API.](https://console.cloud.google.com/apis/library/fleetengine.googleapis.com)
 1. [Set up authentication.](AUTHENTICATION.md)
 
+```ruby
+require "google/maps/fleet_engine"
+
+client = Google::Maps::FleetEngine.trip_service
+request = ::Google::Maps::FleetEngine::V1::CreateTripRequest.new # (request fields as keyword arguments...)
+response = client.create_trip request
+```
+
 ## Debug Logging
 
 This library comes with opt-in Debug Logging that can help you troubleshoot

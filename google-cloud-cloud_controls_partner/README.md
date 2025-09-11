@@ -34,6 +34,14 @@ In order to use this library, you first need to go through the following steps:
 1. [Enable the API.](https://console.cloud.google.com/apis/library/cloudcontrolspartner.googleapis.com)
 1. [Set up authentication.](AUTHENTICATION.md)
 
+```ruby
+require "google/cloud/cloud_controls_partner"
+
+client = Google::Cloud::CloudControlsPartner.cloud_controls_partner_core
+request = ::Google::Cloud::CloudControlsPartner::V1::GetWorkloadRequest.new # (request fields as keyword arguments...)
+response = client.get_workload request
+```
+
 ## Debug Logging
 
 This library comes with opt-in Debug Logging that can help you troubleshoot

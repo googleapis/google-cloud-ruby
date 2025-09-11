@@ -34,6 +34,14 @@ In order to use this library, you first need to go through the following steps:
 1. [Enable the API.](https://console.cloud.google.com/apis/library/livestream.googleapis.com)
 1. [Set up authentication.](AUTHENTICATION.md)
 
+```ruby
+require "google/cloud/video/live_stream"
+
+client = Google::Cloud::Video::LiveStream.livestream_service
+request = ::Google::Cloud::Video::LiveStream::V1::CreateChannelRequest.new # (request fields as keyword arguments...)
+response = client.create_channel request
+```
+
 ## Debug Logging
 
 This library comes with opt-in Debug Logging that can help you troubleshoot
