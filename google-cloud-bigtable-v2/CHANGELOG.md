@@ -1,5 +1,12 @@
 # Release History
 
+### 1.10.0 (2025-09-11)
+
+#### Features
+
+* Add encodings for STRUCT and the Timestamp type 
+* Add Type API updates needed to support structured keys in materialized views ([#30990](https://github.com/googleapis/google-cloud-ruby/issues/30990)) 
+
 ### 1.9.0 (2025-08-18)
 
 #### Features
