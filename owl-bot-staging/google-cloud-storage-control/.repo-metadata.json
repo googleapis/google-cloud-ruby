@@ -1,0 +1,17 @@
+{
+    "api_id": "storage.googleapis.com",
+    "api_shortname": "storage",
+    "client_documentation": "https://cloud.google.com/ruby/docs/reference/google-cloud-storage-control/latest",
+    "distribution_name": "google-cloud-storage-control",
+    "is_cloud": true,
+    "language": "ruby",
+    "name": "storage",
+    "name_pretty": "Storage Control API",
+    "product_documentation": "https://cloud.google.com/storage/docs/overview",
+    "release_level": "unreleased",
+    "repo": "googleapis/google-cloud-ruby",
+    "requires_billing": true,
+    "ruby-cloud-description": "The Google Cloud Storage API allows applications to read and write data through the abstractions of buckets and objects, which are similar to directories and files except that buckets cannot contain other buckets, and directory-level operations (like directory rename) are not supported. Buckets share a single global namespace, and each bucket belongs to a specific project that has an associated owner that pays for the data stored in the bucket. This API is accessed using standard gRPC requests.",
+    "ruby-cloud-product-url": "https://cloud.google.com/storage/docs/overview",
+    "library_type": "GAPIC_AUTO"
+}
