@@ -34,6 +34,16 @@ In order to use this library, you first need to go through the following steps:
 1. [Enable the API.](https://console.cloud.google.com/apis/library/apihub.googleapis.com)
 1. [Set up authentication.](AUTHENTICATION.md)
 
+## Quick Start
+
+```ruby
+require "google/cloud/api_hub"
+
+client = Google::Cloud::ApiHub.api_hub
+request = ::Google::Cloud::ApiHub::V1::CreateApiRequest.new # (request fields as keyword arguments...)
+response = client.create_api request
+```
+
 ## Debug Logging
 
 This library comes with opt-in Debug Logging that can help you troubleshoot

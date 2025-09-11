@@ -172,6 +172,199 @@ module Google
       end
 
       ##
+      # Create a new client object for ApiHubCollect.
+      #
+      # By default, this returns an instance of
+      # [Google::Cloud::ApiHub::V1::ApiHubCollect::Rest::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-api_hub-v1/latest/Google-Cloud-ApiHub-V1-ApiHubCollect-Rest-Client)
+      # for a REST client for version V1 of the API.
+      # However, you can specify a different API version by passing it in the
+      # `version` parameter. If the ApiHubCollect service is
+      # supported by that API version, and the corresponding gem is available, the
+      # appropriate versioned client will be returned.
+      #
+      # Raises an exception if the currently installed versioned client gem for the
+      # given API version does not support the ApiHubCollect service.
+      # You can determine whether the method will succeed by calling
+      # {Google::Cloud::ApiHub.api_hub_collect_available?}.
+      #
+      # ## About ApiHubCollect
+      #
+      # This service exposes methods used for collecting various types of data from
+      # different first party and third party sources and push it to Hub's collect
+      # layer.
+      #
+      # @param version [::String, ::Symbol] The API version to connect to. Optional.
+      #   Defaults to `:v1`.
+      # @return [::Object] A client object for the specified version.
+      #
+      def self.api_hub_collect version: :v1, &block
+        require "google/cloud/api_hub/#{version.to_s.downcase}"
+
+        package_name = Google::Cloud::ApiHub
+                       .constants
+                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                       .first
+        service_module = Google::Cloud::ApiHub.const_get(package_name).const_get(:ApiHubCollect)
+        service_module.const_get(:Rest).const_get(:Client).new(&block)
+      end
+
+      ##
+      # Determines whether the ApiHubCollect service is supported by the current client.
+      # If true, you can retrieve a client object by calling {Google::Cloud::ApiHub.api_hub_collect}.
+      # If false, that method will raise an exception. This could happen if the given
+      # API version does not exist or does not support the ApiHubCollect service,
+      # or if the versioned client gem needs an update to support the ApiHubCollect service.
+      #
+      # @param version [::String, ::Symbol] The API version to connect to. Optional.
+      #   Defaults to `:v1`.
+      # @return [boolean] Whether the service is available.
+      #
+      def self.api_hub_collect_available? version: :v1
+        require "google/cloud/api_hub/#{version.to_s.downcase}"
+        package_name = Google::Cloud::ApiHub
+                       .constants
+                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                       .first
+        return false unless package_name
+        service_module = Google::Cloud::ApiHub.const_get package_name
+        return false unless service_module.const_defined? :ApiHubCollect
+        service_module = service_module.const_get :ApiHubCollect
+        return false unless service_module.const_defined? :Rest
+        service_module = service_module.const_get :Rest
+        service_module.const_defined? :Client
+      rescue ::LoadError
+        false
+      end
+
+      ##
+      # Create a new client object for ApiHubCurate.
+      #
+      # By default, this returns an instance of
+      # [Google::Cloud::ApiHub::V1::ApiHubCurate::Rest::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-api_hub-v1/latest/Google-Cloud-ApiHub-V1-ApiHubCurate-Rest-Client)
+      # for a REST client for version V1 of the API.
+      # However, you can specify a different API version by passing it in the
+      # `version` parameter. If the ApiHubCurate service is
+      # supported by that API version, and the corresponding gem is available, the
+      # appropriate versioned client will be returned.
+      #
+      # Raises an exception if the currently installed versioned client gem for the
+      # given API version does not support the ApiHubCurate service.
+      # You can determine whether the method will succeed by calling
+      # {Google::Cloud::ApiHub.api_hub_curate_available?}.
+      #
+      # ## About ApiHubCurate
+      #
+      # This service is used for managing curations for processing API data consumed
+      # from collect layer.
+      #
+      # @param version [::String, ::Symbol] The API version to connect to. Optional.
+      #   Defaults to `:v1`.
+      # @return [::Object] A client object for the specified version.
+      #
+      def self.api_hub_curate version: :v1, &block
+        require "google/cloud/api_hub/#{version.to_s.downcase}"
+
+        package_name = Google::Cloud::ApiHub
+                       .constants
+                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                       .first
+        service_module = Google::Cloud::ApiHub.const_get(package_name).const_get(:ApiHubCurate)
+        service_module.const_get(:Rest).const_get(:Client).new(&block)
+      end
+
+      ##
+      # Determines whether the ApiHubCurate service is supported by the current client.
+      # If true, you can retrieve a client object by calling {Google::Cloud::ApiHub.api_hub_curate}.
+      # If false, that method will raise an exception. This could happen if the given
+      # API version does not exist or does not support the ApiHubCurate service,
+      # or if the versioned client gem needs an update to support the ApiHubCurate service.
+      #
+      # @param version [::String, ::Symbol] The API version to connect to. Optional.
+      #   Defaults to `:v1`.
+      # @return [boolean] Whether the service is available.
+      #
+      def self.api_hub_curate_available? version: :v1
+        require "google/cloud/api_hub/#{version.to_s.downcase}"
+        package_name = Google::Cloud::ApiHub
+                       .constants
+                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                       .first
+        return false unless package_name
+        service_module = Google::Cloud::ApiHub.const_get package_name
+        return false unless service_module.const_defined? :ApiHubCurate
+        service_module = service_module.const_get :ApiHubCurate
+        return false unless service_module.const_defined? :Rest
+        service_module = service_module.const_get :Rest
+        service_module.const_defined? :Client
+      rescue ::LoadError
+        false
+      end
+
+      ##
+      # Create a new client object for ApiHubDiscovery.
+      #
+      # By default, this returns an instance of
+      # [Google::Cloud::ApiHub::V1::ApiHubDiscovery::Rest::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-api_hub-v1/latest/Google-Cloud-ApiHub-V1-ApiHubDiscovery-Rest-Client)
+      # for a REST client for version V1 of the API.
+      # However, you can specify a different API version by passing it in the
+      # `version` parameter. If the ApiHubDiscovery service is
+      # supported by that API version, and the corresponding gem is available, the
+      # appropriate versioned client will be returned.
+      #
+      # Raises an exception if the currently installed versioned client gem for the
+      # given API version does not support the ApiHubDiscovery service.
+      # You can determine whether the method will succeed by calling
+      # {Google::Cloud::ApiHub.api_hub_discovery_available?}.
+      #
+      # ## About ApiHubDiscovery
+      #
+      # This service exposes methods used to manage DiscoveredApiObservations
+      # and DiscoveredApiOperations.
+      #
+      # @param version [::String, ::Symbol] The API version to connect to. Optional.
+      #   Defaults to `:v1`.
+      # @return [::Object] A client object for the specified version.
+      #
+      def self.api_hub_discovery version: :v1, &block
+        require "google/cloud/api_hub/#{version.to_s.downcase}"
+
+        package_name = Google::Cloud::ApiHub
+                       .constants
+                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                       .first
+        service_module = Google::Cloud::ApiHub.const_get(package_name).const_get(:ApiHubDiscovery)
+        service_module.const_get(:Rest).const_get(:Client).new(&block)
+      end
+
+      ##
+      # Determines whether the ApiHubDiscovery service is supported by the current client.
+      # If true, you can retrieve a client object by calling {Google::Cloud::ApiHub.api_hub_discovery}.
+      # If false, that method will raise an exception. This could happen if the given
+      # API version does not exist or does not support the ApiHubDiscovery service,
+      # or if the versioned client gem needs an update to support the ApiHubDiscovery service.
+      #
+      # @param version [::String, ::Symbol] The API version to connect to. Optional.
+      #   Defaults to `:v1`.
+      # @return [boolean] Whether the service is available.
+      #
+      def self.api_hub_discovery_available? version: :v1
+        require "google/cloud/api_hub/#{version.to_s.downcase}"
+        package_name = Google::Cloud::ApiHub
+                       .constants
+                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                       .first
+        return false unless package_name
+        service_module = Google::Cloud::ApiHub.const_get package_name
+        return false unless service_module.const_defined? :ApiHubDiscovery
+        service_module = service_module.const_get :ApiHubDiscovery
+        return false unless service_module.const_defined? :Rest
+        service_module = service_module.const_get :Rest
+        service_module.const_defined? :Client
+      rescue ::LoadError
+        false
+      end
+
+      ##
       # Create a new client object for HostProjectRegistrationService.
       #
       # By default, this returns an instance of
