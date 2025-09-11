@@ -1,0 +1,17 @@
+{
+    "api_id": "apphub.googleapis.com",
+    "api_shortname": "apphub",
+    "client_documentation": "https://cloud.google.com/ruby/docs/reference/google-cloud-app_hub/latest",
+    "distribution_name": "google-cloud-app_hub",
+    "is_cloud": true,
+    "language": "ruby",
+    "name": "apphub",
+    "name_pretty": "App Hub API",
+    "product_documentation": "https://cloud.google.com/app-hub/docs/overview",
+    "release_level": "unreleased",
+    "repo": "googleapis/google-cloud-ruby",
+    "requires_billing": true,
+    "ruby-cloud-description": "google-cloud-app_hub is the official client library for the App Hub API.",
+    "ruby-cloud-product-url": "https://cloud.google.com/app-hub/docs/overview",
+    "library_type": "GAPIC_AUTO"
+}

@@ -1,0 +1,17 @@
+{
+    "api_id": "advisorynotifications.googleapis.com",
+    "api_shortname": "advisorynotifications",
+    "client_documentation": "https://cloud.google.com/ruby/docs/reference/google-cloud-advisory_notifications/latest",
+    "distribution_name": "google-cloud-advisory_notifications",
+    "is_cloud": true,
+    "language": "ruby",
+    "name": "advisorynotifications",
+    "name_pretty": "Advisory Notifications API",
+    "product_documentation": "https://cloud.google.com/advisory-notifications/docs/overview",
+    "release_level": "unreleased",
+    "repo": "googleapis/google-cloud-ruby",
+    "requires_billing": true,
+    "ruby-cloud-description": "An API for accessing Advisory Notifications in Google Cloud.",
+    "ruby-cloud-product-url": "https://cloud.google.com/advisory-notifications/docs/overview",
+    "library_type": "GAPIC_AUTO"
+}
