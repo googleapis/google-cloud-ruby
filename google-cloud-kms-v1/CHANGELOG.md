@@ -1,5 +1,12 @@
 # Release History
 
+### 1.8.0 (2025-09-11)
+
+#### Features
+
+* Add PublicKeyFormat enums XWING_RAW_BYTES (used for KEM_XWING) and DER 
+* Support KEY_ENCAPSULATION purpose and quantum-safe algorithms ML_KEM_768, ML_KEM_1024 and KEM_XWING ([#31005](https://github.com/googleapis/google-cloud-ruby/issues/31005)) 
+
 ### 1.7.0 (2025-05-16)
 
 #### Features
