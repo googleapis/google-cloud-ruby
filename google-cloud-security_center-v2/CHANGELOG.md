@@ -1,5 +1,12 @@
 # Changelog
 
+### 1.4.0 (2025-09-11)
+
+#### Features
+
+* add GCE to DeploymentPlatform enum ([#31007](https://github.com/googleapis/google-cloud-ruby/issues/31007)) 
+* update gapic-common dependency for generated libraries to 1.2 which requires google-protobuf v4.26+ 
+
 ### 1.3.0 (2025-07-15)
 
 #### Features
