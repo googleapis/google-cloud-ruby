@@ -491,7 +491,7 @@
   "google-cloud-managed_kafka+FILLER": "0.0.0",
   "google-cloud-managed_kafka-schema_registry": "0.1.0",
   "google-cloud-managed_kafka-schema_registry+FILLER": "0.0.0",
-  "google-cloud-managed_kafka-schema_registry-v1": "0.1.0",
+  "google-cloud-managed_kafka-schema_registry-v1": "0.2.0",
   "google-cloud-managed_kafka-schema_registry-v1+FILLER": "0.0.0",
   "google-cloud-managed_kafka-v1": "1.4.0",
   "google-cloud-managed_kafka-v1+FILLER": "0.0.0",
