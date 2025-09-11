@@ -1,5 +1,12 @@
 # Changelog
 
+### 0.22.0 (2025-09-11)
+
+#### Features
+
+* Added `ranking_expression_backed` and `rank_signals` fields related to the Custom Ranking feature ([#31003](https://github.com/googleapis/google-cloud-ruby/issues/31003)) 
+* update gapic-common dependency for generated libraries to 1.2 which requires google-protobuf v4.26+ 
+
 ### 0.21.0 (2025-07-28)
 
 #### Features
