@@ -310,6 +310,16 @@ class Google::Cloud::Compute::ClientConstructionMinitest < Minitest::Test
     end
   end
 
+  def test_interconnect_attachment_groups_rest
+    skip unless Google::Cloud::Compute.interconnect_attachment_groups_available?
+    Gapic::Rest::ClientStub.stub :new, DummyStub.new do
+      client = Google::Cloud::Compute.interconnect_attachment_groups do |config|
+        config.credentials = :dummy_credentials
+      end
+      assert_kind_of Google::Cloud::Compute::V1::InterconnectAttachmentGroups::Rest::Client, client
+    end
+  end
+
   def test_interconnect_attachments_rest
     skip unless Google::Cloud::Compute.interconnect_attachments_available?
     Gapic::Rest::ClientStub.stub :new, DummyStub.new do
@@ -317,6 +327,16 @@ class Google::Cloud::Compute::ClientConstructionMinitest < Minitest::Test
         config.credentials = :dummy_credentials
       end
       assert_kind_of Google::Cloud::Compute::V1::InterconnectAttachments::Rest::Client, client
+    end
+  end
+
+  def test_interconnect_groups_rest
+    skip unless Google::Cloud::Compute.interconnect_groups_available?
+    Gapic::Rest::ClientStub.stub :new, DummyStub.new do
+      client = Google::Cloud::Compute.interconnect_groups do |config|
+        config.credentials = :dummy_credentials
+      end
+      assert_kind_of Google::Cloud::Compute::V1::InterconnectGroups::Rest::Client, client
     end
   end
 
@@ -777,6 +797,16 @@ class Google::Cloud::Compute::ClientConstructionMinitest < Minitest::Test
         config.credentials = :dummy_credentials
       end
       assert_kind_of Google::Cloud::Compute::V1::ReservationBlocks::Rest::Client, client
+    end
+  end
+
+  def test_reservation_sub_blocks_rest
+    skip unless Google::Cloud::Compute.reservation_sub_blocks_available?
+    Gapic::Rest::ClientStub.stub :new, DummyStub.new do
+      client = Google::Cloud::Compute.reservation_sub_blocks do |config|
+        config.credentials = :dummy_credentials
+      end
+      assert_kind_of Google::Cloud::Compute::V1::ReservationSubBlocks::Rest::Client, client
     end
   end
 

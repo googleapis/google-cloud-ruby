@@ -34,6 +34,14 @@ In order to use this library, you first need to go through the following steps:
 1. [Enable the API.](https://console.cloud.google.com/apis/library/compute.googleapis.com)
 1. [Set up authentication.](AUTHENTICATION.md)
 
+```ruby
+require "google/cloud/compute"
+
+client = Google::Cloud::Compute.accelerator_types
+request = ::Google::Cloud::Compute::V1::AggregatedListAcceleratorTypesRequest.new # (request fields as keyword arguments...)
+response = client.aggregated_list request
+```
+
 ## Debug Logging
 
 This library comes with opt-in Debug Logging that can help you troubleshoot
