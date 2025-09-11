@@ -22,7 +22,7 @@ module Google
     module Dialogflow
       module CX
         module V3
-          VERSION = "1.8.0"
+          VERSION = "1.9.0"
         end
       end
     end
