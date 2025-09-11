@@ -34,6 +34,14 @@ In order to use this library, you first need to go through the following steps:
 1. [Enable the API.](https://console.cloud.google.com/apis/library/dlp.googleapis.com)
 1. [Set up authentication.](AUTHENTICATION.md)
 
+```ruby
+require "google/cloud/dlp"
+
+client = Google::Cloud::Dlp.dlp_service
+request = ::Google::Cloud::Dlp::V2::InspectContentRequest.new # (request fields as keyword arguments...)
+response = client.inspect_content request
+```
+
 ## Migrating from 0.x versions
 
 The 1.0 release of the google-cloud-dlp client is a significant upgrade

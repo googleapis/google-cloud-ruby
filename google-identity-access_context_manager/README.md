@@ -34,6 +34,14 @@ In order to use this library, you first need to go through the following steps:
 1. [Enable the API.](https://console.cloud.google.com/apis/library/accesscontextmanager.googleapis.com)
 1. [Set up authentication.](AUTHENTICATION.md)
 
+```ruby
+require "google/identity/access_context_manager"
+
+client = Google::Identity::AccessContextManager.access_context_manager
+request = ::Google::Identity::AccessContextManager::V1::ListAccessPoliciesRequest.new # (request fields as keyword arguments...)
+response = client.list_access_policies request
+```
+
 ## Debug Logging
 
 This library comes with opt-in Debug Logging that can help you troubleshoot

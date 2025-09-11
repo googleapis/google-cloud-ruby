@@ -35,6 +35,14 @@ In order to use this library, you first need to go through the following steps:
 1. [Enable the API.](https://console.cloud.google.com/apis/library/speech.googleapis.com)
 1. [Set up authentication.](AUTHENTICATION.md)
 
+```ruby
+require "google/cloud/speech"
+
+client = Google::Cloud::Speech.speech
+request = ::Google::Cloud::Speech::V2::CreateRecognizerRequest.new # (request fields as keyword arguments...)
+response = client.create_recognizer request
+```
+
 ## Debug Logging
 
 This library comes with opt-in Debug Logging that can help you troubleshoot

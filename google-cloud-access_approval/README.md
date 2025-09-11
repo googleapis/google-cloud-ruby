@@ -34,6 +34,14 @@ In order to use this library, you first need to go through the following steps:
 1. [Enable the API.](https://console.cloud.google.com/apis/library/accessapproval.googleapis.com)
 1. [Set up authentication.](AUTHENTICATION.md)
 
+```ruby
+require "google/cloud/access_approval"
+
+client = Google::Cloud::AccessApproval.access_approval
+request = ::Google::Cloud::AccessApproval::V1::ListApprovalRequestsMessage.new # (request fields as keyword arguments...)
+response = client.list_approval_requests request
+```
+
 ## Debug Logging
 
 This library comes with opt-in Debug Logging that can help you troubleshoot

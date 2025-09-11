@@ -34,6 +34,14 @@ In order to use this library, you first need to go through the following steps:
 1. [Enable the API.](https://console.cloud.google.com/apis/library/analyticshub.googleapis.com)
 1. [Set up authentication.](AUTHENTICATION.md)
 
+```ruby
+require "google/cloud/bigquery/analytics_hub"
+
+client = Google::Cloud::Bigquery::AnalyticsHub.analytics_hub_service
+request = ::Google::Cloud::Bigquery::AnalyticsHub::V1::ListDataExchangesRequest.new # (request fields as keyword arguments...)
+response = client.list_data_exchanges request
+```
+
 ## Debug Logging
 
 This library comes with opt-in Debug Logging that can help you troubleshoot

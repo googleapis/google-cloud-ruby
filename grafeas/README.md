@@ -27,8 +27,6 @@ for more usage information.
 $ gem install grafeas
 ```
 
-## Quick Start
-
 ```ruby
 require "grafeas"
 

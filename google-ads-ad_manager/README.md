@@ -34,6 +34,14 @@ In order to use this library, you first need to go through the following steps:
 1. [Enable the API.](https://console.cloud.google.com/apis/library/admanager.googleapis.com)
 1. [Set up authentication.](AUTHENTICATION.md)
 
+```ruby
+require "google/ads/ad_manager"
+
+client = Google::Ads::AdManager.ad_break_service
+request = ::Google::Ads::AdManager::V1::GetAdBreakRequest.new # (request fields as keyword arguments...)
+response = client.get_ad_break request
+```
+
 ## Debug Logging
 
 This library comes with opt-in Debug Logging that can help you troubleshoot

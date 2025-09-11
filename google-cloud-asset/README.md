@@ -34,6 +34,14 @@ In order to use this library, you first need to go through the following steps:
 1. [Enable the API.](https://console.cloud.google.com/apis/library/cloudasset.googleapis.com)
 1. [Set up authentication.](AUTHENTICATION.md)
 
+```ruby
+require "google/cloud/asset"
+
+client = Google::Cloud::Asset.asset_service
+request = ::Google::Cloud::Asset::V1::ExportAssetsRequest.new # (request fields as keyword arguments...)
+response = client.export_assets request
+```
+
 ## Migrating from 0.x versions
 
 The 1.0 release of the google-cloud-asset client is a significant upgrade

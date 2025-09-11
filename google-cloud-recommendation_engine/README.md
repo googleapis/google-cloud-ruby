@@ -34,6 +34,14 @@ In order to use this library, you first need to go through the following steps:
 1. [Enable the API.](https://console.cloud.google.com/apis/library/recommendationengine.googleapis.com)
 1. [Set up authentication.](AUTHENTICATION.md)
 
+```ruby
+require "google/cloud/recommendation_engine"
+
+client = Google::Cloud::RecommendationEngine.catalog_service
+request = ::Google::Cloud::RecommendationEngine::V1beta1::CreateCatalogItemRequest.new # (request fields as keyword arguments...)
+response = client.create_catalog_item request
+```
+
 ## Debug Logging
 
 This library comes with opt-in Debug Logging that can help you troubleshoot

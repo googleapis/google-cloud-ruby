@@ -31,6 +31,14 @@ In order to use this library, you first need to go through the following steps:
 1. [Enable the API.](https://console.cloud.google.com/apis/library/cloudresourcemanager.googleapis.com)
 1. [Set up authentication.](AUTHENTICATION.md)
 
+```ruby
+require "google/cloud/resource_manager"
+
+client = Google::Cloud::ResourceManager.folders
+request = ::Google::Cloud::ResourceManager::V3::GetFolderRequest.new # (request fields as keyword arguments...)
+response = client.get_folder request
+```
+
 ## Migrating from 0.x versions
 
 The 1.0 release of the google-cloud-resource_manager client is a significant upgrade

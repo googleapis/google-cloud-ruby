@@ -34,6 +34,14 @@ In order to use this library, you first need to go through the following steps:
 1. [Enable the API.](https://console.cloud.google.com/apis/library/bigquerystorage.googleapis.com)
 1. [Set up authentication.](AUTHENTICATION.md)
 
+```ruby
+require "google/cloud/bigquery/storage"
+
+client = Google::Cloud::Bigquery::Storage.big_query_read
+request = ::Google::Cloud::Bigquery::Storage::V1::CreateReadSessionRequest.new # (request fields as keyword arguments...)
+response = client.create_read_session request
+```
+
 ## Debug Logging
 
 This library comes with opt-in Debug Logging that can help you troubleshoot

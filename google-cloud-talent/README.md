@@ -34,6 +34,14 @@ In order to use this library, you first need to go through the following steps:
 1. [Enable the API.](https://console.cloud.google.com/apis/library/jobs.googleapis.com)
 1. [Set up authentication.](AUTHENTICATION.md)
 
+```ruby
+require "google/cloud/talent"
+
+client = Google::Cloud::Talent.company_service
+request = ::Google::Cloud::Talent::V4::CreateCompanyRequest.new # (request fields as keyword arguments...)
+response = client.create_company request
+```
+
 ## Debug Logging
 
 This library comes with opt-in Debug Logging that can help you troubleshoot

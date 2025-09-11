@@ -34,6 +34,14 @@ In order to use this library, you first need to go through the following steps:
 1. [Enable the API.](https://console.cloud.google.com/apis/library/workspaceevents.googleapis.com)
 1. [Set up authentication.](AUTHENTICATION.md)
 
+```ruby
+require "google/apps/events/subscriptions"
+
+client = Google::Apps::Events::Subscriptions.subscriptions_service
+request = ::Google::Apps::Events::Subscriptions::V1::CreateSubscriptionRequest.new # (request fields as keyword arguments...)
+response = client.create_subscription request
+```
+
 ## Debug Logging
 
 This library comes with opt-in Debug Logging that can help you troubleshoot

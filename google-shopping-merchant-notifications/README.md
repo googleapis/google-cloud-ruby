@@ -33,6 +33,14 @@ In order to use this library, you first need to go through the following steps:
 1. [Enable the API.](https://console.cloud.google.com/apis/library/merchantapi.googleapis.com)
 1. [Set up authentication.](AUTHENTICATION.md)
 
+```ruby
+require "google/shopping/merchant/notifications"
+
+client = Google::Shopping::Merchant::Notifications.notifications_api_service
+request = ::Google::Shopping::Merchant::Notifications::V1beta::GetNotificationSubscriptionRequest.new # (request fields as keyword arguments...)
+response = client.get_notification_subscription request
+```
+
 ## Debug Logging
 
 This library comes with opt-in Debug Logging that can help you troubleshoot

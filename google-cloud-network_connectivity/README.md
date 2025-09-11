@@ -34,6 +34,14 @@ In order to use this library, you first need to go through the following steps:
 1. [Enable the API.](https://console.cloud.google.com/apis/library/networkconnectivity.googleapis.com)
 1. [Set up authentication.](AUTHENTICATION.md)
 
+```ruby
+require "google/cloud/network_connectivity"
+
+client = Google::Cloud::NetworkConnectivity.cross_network_automation_service
+request = ::Google::Cloud::NetworkConnectivity::V1::ListServiceConnectionMapsRequest.new # (request fields as keyword arguments...)
+response = client.list_service_connection_maps request
+```
+
 ## Debug Logging
 
 This library comes with opt-in Debug Logging that can help you troubleshoot

@@ -34,6 +34,14 @@ In order to use this library, you first need to go through the following steps:
 1. [Enable the API.](https://console.cloud.google.com/apis/library/dataproc.googleapis.com)
 1. [Set up authentication.](AUTHENTICATION.md)
 
+```ruby
+require "google/cloud/dataproc"
+
+client = Google::Cloud::Dataproc.autoscaling_policy_service
+request = ::Google::Cloud::Dataproc::V1::CreateAutoscalingPolicyRequest.new # (request fields as keyword arguments...)
+response = client.create_autoscaling_policy request
+```
+
 ## Migrating from 0.x versions
 
 The 1.0 release of the google-cloud-dataproc client is a significant upgrade

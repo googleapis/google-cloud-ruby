@@ -34,6 +34,14 @@ In order to use this library, you first need to go through the following steps:
 1. [Enable the API.](https://console.cloud.google.com/apis/library/bigquerydatatransfer.googleapis.com)
 1. [Set up authentication.](AUTHENTICATION.md)
 
+```ruby
+require "google/cloud/bigquery/data_transfer"
+
+client = Google::Cloud::Bigquery::DataTransfer.data_transfer_service
+request = ::Google::Cloud::Bigquery::DataTransfer::V1::GetDataSourceRequest.new # (request fields as keyword arguments...)
+response = client.get_data_source request
+```
+
 ## Migrating from 0.x versions
 
 The 1.0 release of the google-cloud-bigquery-data_transfer client is a significant upgrade
