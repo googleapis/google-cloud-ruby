@@ -164,6 +164,27 @@ module Google
             end
 
             ##
+            # Create a fully-qualified PluginInstance resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `projects/{project}/locations/{location}/plugins/{plugin}/instances/{instance}`
+            #
+            # @param project [String]
+            # @param location [String]
+            # @param plugin [String]
+            # @param instance [String]
+            #
+            # @return [::String]
+            def plugin_instance_path project:, location:, plugin:, instance:
+              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+              raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+              raise ::ArgumentError, "plugin cannot contain /" if plugin.to_s.include? "/"
+
+              "projects/#{project}/locations/#{location}/plugins/#{plugin}/instances/#{instance}"
+            end
+
+            ##
             # Create a fully-qualified Spec resource string.
             #
             # The resource will be in the following format:

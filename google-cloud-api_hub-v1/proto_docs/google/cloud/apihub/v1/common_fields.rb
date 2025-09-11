@@ -114,6 +114,40 @@ module Google
         #     This can be used when special handling is needed on client side for
         #     particular version of the API. Format is
         #     `projects/{project}/locations/{location}/apis/{api}/versions/{version}`
+        # @!attribute [rw] api_requirements
+        #   @return [::Google::Cloud::ApiHub::V1::AttributeValues]
+        #     Optional. The api requirement doc associated with the API resource.
+        #     Carinality is 1 for this attribute. This maps to the following system
+        #     defined attribute:
+        #     `projects/{project}/locations/{location}/attributes/system-api-requirements`
+        #     attribute. The value of the attribute should be a proper URI, and in case
+        #     of Cloud Storage URI, it should point to a Cloud Storage object,
+        #     not a directory.
+        # @!attribute [rw] fingerprint
+        #   @return [::String]
+        #     Optional. Fingerprint of the API resource.
+        # @!attribute [r] source_metadata
+        #   @return [::Array<::Google::Cloud::ApiHub::V1::SourceMetadata>]
+        #     Output only. The list of sources and metadata from the sources of the API
+        #     resource.
+        # @!attribute [rw] api_functional_requirements
+        #   @return [::Google::Cloud::ApiHub::V1::AttributeValues]
+        #     Optional. The api functional requirements associated with the API resource.
+        #     Carinality is 1 for this attribute.
+        #     This maps to the following system defined attribute:
+        #     `projects/{project}/locations/{location}/attributes/system-api-functional-requirements`
+        #     attribute. The value of the attribute should be a proper URI, and in case
+        #     of Cloud Storage URI, it should point to a Cloud Storage object,
+        #     not a directory.
+        # @!attribute [rw] api_technical_requirements
+        #   @return [::Google::Cloud::ApiHub::V1::AttributeValues]
+        #     Optional. The api technical requirements associated with the API resource.
+        #     Carinality is 1 for this attribute. This maps to the following system
+        #     defined attribute:
+        #     `projects/{project}/locations/{location}/attributes/system-api-technical-requirements`
+        #     attribute. The value of the attribute should be a proper URI, and in case
+        #     of Cloud Storage URI, it should point to a Cloud Storage object,
+        #     not a directory.
         class Api
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -219,6 +253,10 @@ module Google
         #     particular deployment linked to the version.
         #     Format is
         #     `projects/{project}/locations/{location}/deployments/{deployment}`
+        # @!attribute [r] source_metadata
+        #   @return [::Array<::Google::Cloud::ApiHub::V1::SourceMetadata>]
+        #     Output only. The list of sources and metadata from the sources of the
+        #     version.
         class Version
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -291,6 +329,9 @@ module Google
         #   @return [::Google::Cloud::ApiHub::V1::Spec::ParsingMode]
         #     Optional. Input only. Enum specifying the parsing mode for OpenAPI
         #     Specification (OAS) parsing.
+        # @!attribute [r] source_metadata
+        #   @return [::Array<::Google::Cloud::ApiHub::V1::SourceMetadata>]
+        #     Output only. The list of sources and metadata from the sources of the spec.
         class Spec
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -356,9 +397,12 @@ module Google
         #     attribute.
         # @!attribute [rw] resource_uri
         #   @return [::String]
-        #     Required. A URI to the runtime resource. This URI can be used to manage the
-        #     resource. For example, if the runtime resource is of type APIGEE_PROXY,
-        #     then this field will contain the URI to the management UI of the proxy.
+        #     Required. The resource URI identifies the deployment within its gateway.
+        #     For Apigee gateways, its recommended to use the format:
+        #     organizations/\\{org}/environments/\\{env}/apis/\\{api}.
+        #     For ex: if a proxy with name `orders` is deployed in `staging`
+        #     environment of `cymbal` organization, the resource URI would be:
+        #     `organizations/cymbal/environments/staging/apis/orders`.
         # @!attribute [rw] endpoints
         #   @return [::Array<::String>]
         #     Required. The endpoints at which this deployment resource is listening for
@@ -401,6 +445,38 @@ module Google
         #     deployment resource. The key is the attribute name. It will be of the
         #     format: `projects/{project}/locations/{location}/attributes/{attribute}`.
         #     The value is the attribute values associated with the resource.
+        # @!attribute [r] source_metadata
+        #   @return [::Array<::Google::Cloud::ApiHub::V1::SourceMetadata>]
+        #     Output only. The list of sources and metadata from the sources of the
+        #     deployment.
+        # @!attribute [rw] management_url
+        #   @return [::Google::Cloud::ApiHub::V1::AttributeValues]
+        #     Optional. The uri where users can navigate to for the management of the
+        #     deployment. This maps to the following system defined attribute:
+        #     `projects/{project}/locations/{location}/attributes/system-management-url`
+        #     The number of values for this attribute will be based on the
+        #     cardinality of the attribute. The same can be retrieved via GetAttribute
+        #     API. The value of the attribute should be a valid URL.
+        # @!attribute [rw] source_uri
+        #   @return [::Google::Cloud::ApiHub::V1::AttributeValues]
+        #     Optional. The uri where additional source specific information for this
+        #     deployment can be found. This maps to the following system defined
+        #     attribute:
+        #     `projects/{project}/locations/{location}/attributes/system-source-uri`
+        #     The number of values for this attribute will be based on the
+        #     cardinality of the attribute. The same can be retrieved via GetAttribute
+        #     API. The value of the attribute should be a valid URI, and in case
+        #     of Cloud Storage URI, it should point to a Cloud Storage object,
+        #     not a directory.
+        # @!attribute [rw] source_project
+        #   @return [::String]
+        #     Optional. The project to which the deployment belongs.
+        #     For GCP gateways, this will refer to the project identifier.
+        #     For others like Edge/OPDK, this will refer to the org identifier.
+        # @!attribute [rw] source_environment
+        #   @return [::String]
+        #     Optional. The environment at source for the deployment.
+        #     For example: prod, dev, staging, etc.
         class Deployment
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -420,6 +496,10 @@ module Google
         # added or an existing spec is updated/deleted in a version.
         # Currently, an operation will be created only corresponding to OpenAPI spec as
         # parsing is supported for OpenAPI spec.
+        # Alternatively operations can be managed via create,update and delete APIs,
+        # creation of apiOperation can be possible only for version with no parsed
+        # operations and update/delete can be possible only for operations created via
+        # create API.
         # @!attribute [rw] name
         #   @return [::String]
         #     Identifier. The name of the operation.
@@ -428,12 +508,16 @@ module Google
         #     `projects/{project}/locations/{location}/apis/{api}/versions/{version}/operations/{operation}`
         # @!attribute [r] spec
         #   @return [::String]
-        #     Output only. The name of the spec from where the operation was parsed.
-        #     Format is
+        #     Output only. The name of the spec will be of the format:
         #     `projects/{project}/locations/{location}/apis/{api}/versions/{version}/specs/{spec}`
-        # @!attribute [r] details
+        #     Note:The name of the spec will be empty if the operation is created via
+        #     {::Google::Cloud::ApiHub::V1::ApiHub::Rest::Client#create_api_operation CreateApiOperation} API.
+        # @!attribute [rw] details
         #   @return [::Google::Cloud::ApiHub::V1::OperationDetails]
-        #     Output only. Operation details.
+        #     Optional. Operation details.
+        #     Note: Even though this field is optional, it is required for
+        #     {::Google::Cloud::ApiHub::V1::ApiHub::Rest::Client#create_api_operation CreateApiOperation}
+        #     API and we will fail the request if not provided.
         # @!attribute [r] create_time
         #   @return [::Google::Protobuf::Timestamp]
         #     Output only. The time at which the operation was created.
@@ -446,6 +530,10 @@ module Google
         #     operation resource. The key is the attribute name. It will be of the
         #     format: `projects/{project}/locations/{location}/attributes/{attribute}`.
         #     The value is the attribute values associated with the resource.
+        # @!attribute [r] source_metadata
+        #   @return [::Array<::Google::Cloud::ApiHub::V1::SourceMetadata>]
+        #     Output only. The list of sources and metadata from the sources of the API
+        #     operation.
         class ApiOperation
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -661,6 +749,9 @@ module Google
 
             # Attribute's value is of type string.
             STRING = 3
+
+            # Attribute's value is of type uri.
+            URI = 4
           end
         end
 
@@ -732,18 +823,18 @@ module Google
         # @!attribute [rw] http_operation
         #   @return [::Google::Cloud::ApiHub::V1::HttpOperation]
         #     The HTTP Operation.
-        # @!attribute [r] description
+        # @!attribute [rw] description
         #   @return [::String]
-        #     Output only. Description of the operation behavior.
+        #     Optional. Description of the operation behavior.
         #     For OpenAPI spec, this will map to `operation.description` in the
         #     spec, in case description is empty, `operation.summary` will be used.
-        # @!attribute [r] documentation
+        # @!attribute [rw] documentation
         #   @return [::Google::Cloud::ApiHub::V1::Documentation]
-        #     Output only. Additional external documentation for this operation.
+        #     Optional. Additional external documentation for this operation.
         #     For OpenAPI spec, this will map to `operation.documentation` in the spec.
-        # @!attribute [r] deprecated
+        # @!attribute [rw] deprecated
         #   @return [::Boolean]
-        #     Output only. For OpenAPI spec, this will be set if `operation.deprecated`is
+        #     Optional. For OpenAPI spec, this will be set if `operation.deprecated`is
         #     marked as `true` in the spec.
         class OperationDetails
           include ::Google::Protobuf::MessageExts
@@ -751,12 +842,18 @@ module Google
         end
 
         # The HTTP Operation.
-        # @!attribute [r] path
+        # @!attribute [rw] path
         #   @return [::Google::Cloud::ApiHub::V1::Path]
-        #     Output only. The path details for the Operation.
-        # @!attribute [r] method
+        #     Optional. The path details for the Operation.
+        #     Note: Even though this field is optional, it is required for
+        #     {::Google::Cloud::ApiHub::V1::ApiHub::Rest::Client#create_api_operation CreateApiOperation}
+        #     API and we will fail the request if not provided.
+        # @!attribute [rw] method
         #   @return [::Google::Cloud::ApiHub::V1::HttpOperation::Method]
-        #     Output only. Operation method
+        #     Optional. Operation method
+        #     Note: Even though this field is optional, it is required for
+        #     {::Google::Cloud::ApiHub::V1::ApiHub::Rest::Client#create_api_operation CreateApiOperation}
+        #     API and we will fail the request if not provided.
         class HttpOperation
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -793,12 +890,15 @@ module Google
         end
 
         # The path details derived from the spec.
-        # @!attribute [r] path
+        # @!attribute [rw] path
         #   @return [::String]
-        #     Output only. Complete path relative to server endpoint.
-        # @!attribute [r] description
+        #     Optional. Complete path relative to server endpoint.
+        #     Note: Even though this field is optional, it is required for
+        #     {::Google::Cloud::ApiHub::V1::ApiHub::Rest::Client#create_api_operation CreateApiOperation}
+        #     API and we will fail the request if not provided.
+        # @!attribute [rw] description
         #   @return [::String]
-        #     Output only. A short description for the path applicable to all operations.
+        #     Optional. A short description for the path applicable to all operations.
         class Path
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -849,19 +949,25 @@ module Google
         #     The attribute values associated with a resource in case attribute data
         #     type is enum.
         #
-        #     Note: The following fields are mutually exclusive: `enum_values`, `string_values`, `json_values`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `enum_values`, `string_values`, `json_values`, `uri_values`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] string_values
         #   @return [::Google::Cloud::ApiHub::V1::AttributeValues::StringAttributeValues]
         #     The attribute values associated with a resource in case attribute data
         #     type is string.
         #
-        #     Note: The following fields are mutually exclusive: `string_values`, `enum_values`, `json_values`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `string_values`, `enum_values`, `json_values`, `uri_values`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] json_values
         #   @return [::Google::Cloud::ApiHub::V1::AttributeValues::StringAttributeValues]
         #     The attribute values associated with a resource in case attribute data
         #     type is JSON.
         #
-        #     Note: The following fields are mutually exclusive: `json_values`, `enum_values`, `string_values`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `json_values`, `enum_values`, `string_values`, `uri_values`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] uri_values
+        #   @return [::Google::Cloud::ApiHub::V1::AttributeValues::StringAttributeValues]
+        #     The attribute values associated with a resource in case attribute data
+        #     type is URL, URI or IP, like gs://bucket-name/object-name.
+        #
+        #     Note: The following fields are mutually exclusive: `uri_values`, `enum_values`, `string_values`, `json_values`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [r] attribute
         #   @return [::String]
         #     Output only. The name of the attribute.
@@ -892,8 +998,8 @@ module Google
 
         # A dependency resource defined in the API hub describes a dependency directed
         # from a consumer to a supplier entity. A dependency can be defined between two
-        # [Operations][google.cloud.apihub.v1.Operation] or between
-        # an [Operation][google.cloud.apihub.v1.Operation] and [External
+        # {::Google::Cloud::ApiHub::V1::ApiOperation Operations} or between
+        # an {::Google::Cloud::ApiHub::V1::ApiOperation Operation} and [External
         # API][google.cloud.apihub.v1.ExternalApi].
         # @!attribute [rw] name
         #   @return [::String]
@@ -1119,7 +1225,7 @@ module Google
         #   @return [::Boolean]
         #     Output only. Identifies whether the user has requested cancellation
         #     of the operation. Operations that have been cancelled successfully
-        #     have [Operation.error][] value with a
+        #     have {::Google::Longrunning::Operation#error Operation.error} value with a
         #     {::Google::Rpc::Status#code google.rpc.Status.code} of 1, corresponding to
         #     `Code.CANCELLED`.
         # @!attribute [r] api_version
@@ -1167,13 +1273,39 @@ module Google
           # Available configurations to provision an ApiHub Instance.
           # @!attribute [rw] cmek_key_name
           #   @return [::String]
-          #     Required. The Customer Managed Encryption Key (CMEK) used for data
+          #     Optional. The Customer Managed Encryption Key (CMEK) used for data
           #     encryption. The CMEK name should follow the format of
           #     `projects/([^/]+)/locations/([^/]+)/keyRings/([^/]+)/cryptoKeys/([^/]+)`,
           #     where the location must match the instance location.
+          #     If the CMEK is not provided, a GMEK will be created for the instance.
+          # @!attribute [rw] disable_search
+          #   @return [::Boolean]
+          #     Optional. If true, the search will be disabled for the instance. The
+          #     default value is false.
+          # @!attribute [rw] vertex_location
+          #   @return [::String]
+          #     Optional. The name of the Vertex AI location where the data store is
+          #     stored.
+          # @!attribute [rw] encryption_type
+          #   @return [::Google::Cloud::ApiHub::V1::ApiHubInstance::Config::EncryptionType]
+          #     Optional. Encryption type for the region. If the encryption type is CMEK,
+          #     the cmek_key_name must be provided. If no encryption type is provided,
+          #     GMEK will be used.
           class Config
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
+
+            # Types of data encryption.
+            module EncryptionType
+              # Encryption type unspecified.
+              ENCRYPTION_TYPE_UNSPECIFIED = 0
+
+              # Default encryption using Google managed encryption key.
+              GMEK = 1
+
+              # Encryption using customer managed encryption key.
+              CMEK = 2
+            end
           end
 
           # @!attribute [rw] key
@@ -1259,6 +1391,631 @@ module Google
           end
         end
 
+        # ConfigValueOption represents an option for a config variable of type enum or
+        # multi select.
+        # @!attribute [rw] id
+        #   @return [::String]
+        #     Required. Id of the option.
+        # @!attribute [rw] display_name
+        #   @return [::String]
+        #     Required. Display name of the option.
+        # @!attribute [rw] description
+        #   @return [::String]
+        #     Optional. Description of the option.
+        class ConfigValueOption
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Secret provides a reference to entries in Secret Manager.
+        # @!attribute [rw] secret_version
+        #   @return [::String]
+        #     Required. The resource name of the secret version in the format,
+        #     format as: `projects/*/secrets/*/versions/*`.
+        class Secret
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # ConfigVariableTemplate represents a configuration variable template present
+        # in a Plugin Config.
+        # @!attribute [rw] id
+        #   @return [::String]
+        #     Required. ID of the config variable. Must be unique within the
+        #     configuration.
+        # @!attribute [rw] value_type
+        #   @return [::Google::Cloud::ApiHub::V1::ConfigVariableTemplate::ValueType]
+        #     Required. Type of the parameter: string, int, bool etc.
+        # @!attribute [rw] description
+        #   @return [::String]
+        #     Optional. Description.
+        # @!attribute [rw] validation_regex
+        #   @return [::String]
+        #     Optional. Regular expression in RE2 syntax used for validating the `value`
+        #     of a `ConfigVariable`.
+        # @!attribute [rw] required
+        #   @return [::Boolean]
+        #     Optional. Flag represents that this `ConfigVariable` must be provided for a
+        #     PluginInstance.
+        # @!attribute [rw] enum_options
+        #   @return [::Array<::Google::Cloud::ApiHub::V1::ConfigValueOption>]
+        #     Optional. Enum options. To be populated if `ValueType` is `ENUM`.
+        # @!attribute [rw] multi_select_options
+        #   @return [::Array<::Google::Cloud::ApiHub::V1::ConfigValueOption>]
+        #     Optional. Multi select options. To be populated if `ValueType` is
+        #     `MULTI_SELECT`.
+        class ConfigVariableTemplate
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # ValueType indicates the data type of the value.
+          module ValueType
+            # Value type is not specified.
+            VALUE_TYPE_UNSPECIFIED = 0
+
+            # Value type is string.
+            STRING = 1
+
+            # Value type is integer.
+            INT = 2
+
+            # Value type is boolean.
+            BOOL = 3
+
+            # Value type is secret.
+            SECRET = 4
+
+            # Value type is enum.
+            ENUM = 5
+
+            # Value type is multi select.
+            MULTI_SELECT = 6
+
+            # Value type is multi string.
+            MULTI_STRING = 7
+
+            # Value type is multi int.
+            MULTI_INT = 8
+          end
+        end
+
+        # ConfigVariable represents a additional configuration variable present in a
+        # PluginInstance Config or AuthConfig, based on a ConfigVariableTemplate.
+        # @!attribute [rw] string_value
+        #   @return [::String]
+        #     Optional. The config variable value in case of config variable of type
+        #     string.
+        #
+        #     Note: The following fields are mutually exclusive: `string_value`, `int_value`, `bool_value`, `secret_value`, `enum_value`, `multi_select_values`, `multi_string_values`, `multi_int_values`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] int_value
+        #   @return [::Integer]
+        #     Optional. The config variable value in case of config variable of type
+        #     integer.
+        #
+        #     Note: The following fields are mutually exclusive: `int_value`, `string_value`, `bool_value`, `secret_value`, `enum_value`, `multi_select_values`, `multi_string_values`, `multi_int_values`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] bool_value
+        #   @return [::Boolean]
+        #     Optional. The config variable value in case of config variable of type
+        #     boolean.
+        #
+        #     Note: The following fields are mutually exclusive: `bool_value`, `string_value`, `int_value`, `secret_value`, `enum_value`, `multi_select_values`, `multi_string_values`, `multi_int_values`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] secret_value
+        #   @return [::Google::Cloud::ApiHub::V1::Secret]
+        #     Optional. The config variable value in case of config variable of type
+        #     secret.
+        #
+        #     Note: The following fields are mutually exclusive: `secret_value`, `string_value`, `int_value`, `bool_value`, `enum_value`, `multi_select_values`, `multi_string_values`, `multi_int_values`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] enum_value
+        #   @return [::Google::Cloud::ApiHub::V1::ConfigValueOption]
+        #     Optional. The config variable value in case of config variable of type
+        #     enum.
+        #
+        #     Note: The following fields are mutually exclusive: `enum_value`, `string_value`, `int_value`, `bool_value`, `secret_value`, `multi_select_values`, `multi_string_values`, `multi_int_values`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] multi_select_values
+        #   @return [::Google::Cloud::ApiHub::V1::ConfigVariable::MultiSelectValues]
+        #     Optional. The config variable value in case of config variable of type
+        #     multi select.
+        #
+        #     Note: The following fields are mutually exclusive: `multi_select_values`, `string_value`, `int_value`, `bool_value`, `secret_value`, `enum_value`, `multi_string_values`, `multi_int_values`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] multi_string_values
+        #   @return [::Google::Cloud::ApiHub::V1::ConfigVariable::MultiStringValues]
+        #     Optional. The config variable value in case of config variable of type
+        #     multi string.
+        #
+        #     Note: The following fields are mutually exclusive: `multi_string_values`, `string_value`, `int_value`, `bool_value`, `secret_value`, `enum_value`, `multi_select_values`, `multi_int_values`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] multi_int_values
+        #   @return [::Google::Cloud::ApiHub::V1::ConfigVariable::MultiIntValues]
+        #     Optional. The config variable value in case of config variable of type
+        #     multi integer.
+        #
+        #     Note: The following fields are mutually exclusive: `multi_int_values`, `string_value`, `int_value`, `bool_value`, `secret_value`, `enum_value`, `multi_select_values`, `multi_string_values`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [r] key
+        #   @return [::String]
+        #     Output only. Key will be the
+        #     {::Google::Cloud::ApiHub::V1::ConfigVariableTemplate#id id} to uniquely identify
+        #     the config variable.
+        class ConfigVariable
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # The config variable value of data type multi select.
+          # @!attribute [rw] values
+          #   @return [::Array<::Google::Cloud::ApiHub::V1::ConfigValueOption>]
+          #     Optional. The config variable value of data type multi select.
+          class MultiSelectValues
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # The config variable value of data type multi string.
+          # @!attribute [rw] values
+          #   @return [::Array<::String>]
+          #     Optional. The config variable value of data type multi string.
+          class MultiStringValues
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # The config variable value of data type multi int.
+          # @!attribute [rw] values
+          #   @return [::Array<::Integer>]
+          #     Optional. The config variable value of data type multi int.
+          class MultiIntValues
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+        end
+
+        # Config for Google service account authentication.
+        # @!attribute [rw] service_account
+        #   @return [::String]
+        #     Required. The service account to be used for authenticating request.
+        #
+        #     The `iam.serviceAccounts.getAccessToken` permission should be granted on
+        #     this service account to the impersonator service account.
+        class GoogleServiceAccountConfig
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # AuthConfig represents the authentication information.
+        # @!attribute [rw] google_service_account_config
+        #   @return [::Google::Cloud::ApiHub::V1::GoogleServiceAccountConfig]
+        #     Google Service Account.
+        #
+        #     Note: The following fields are mutually exclusive: `google_service_account_config`, `user_password_config`, `api_key_config`, `oauth2_client_credentials_config`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] user_password_config
+        #   @return [::Google::Cloud::ApiHub::V1::AuthConfig::UserPasswordConfig]
+        #     User Password.
+        #
+        #     Note: The following fields are mutually exclusive: `user_password_config`, `google_service_account_config`, `api_key_config`, `oauth2_client_credentials_config`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] api_key_config
+        #   @return [::Google::Cloud::ApiHub::V1::AuthConfig::ApiKeyConfig]
+        #     Api Key Config.
+        #
+        #     Note: The following fields are mutually exclusive: `api_key_config`, `google_service_account_config`, `user_password_config`, `oauth2_client_credentials_config`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] oauth2_client_credentials_config
+        #   @return [::Google::Cloud::ApiHub::V1::AuthConfig::Oauth2ClientCredentialsConfig]
+        #     Oauth2.0 Client Credentials.
+        #
+        #     Note: The following fields are mutually exclusive: `oauth2_client_credentials_config`, `google_service_account_config`, `user_password_config`, `api_key_config`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] auth_type
+        #   @return [::Google::Cloud::ApiHub::V1::AuthType]
+        #     Required. The authentication type.
+        class AuthConfig
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Parameters to support Username and Password Authentication.
+          # @!attribute [rw] username
+          #   @return [::String]
+          #     Required. Username.
+          # @!attribute [rw] password
+          #   @return [::Google::Cloud::ApiHub::V1::Secret]
+          #     Required. Secret version reference containing the password.
+          #     The `secretmanager.versions.access` permission should be
+          #     granted to the service account accessing the secret.
+          class UserPasswordConfig
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Parameters to support Oauth 2.0 client credentials grant authentication.
+          # See https://tools.ietf.org/html/rfc6749#section-1.3.4 for more details.
+          # @!attribute [rw] client_id
+          #   @return [::String]
+          #     Required. The client identifier.
+          # @!attribute [rw] client_secret
+          #   @return [::Google::Cloud::ApiHub::V1::Secret]
+          #     Required. Secret version reference containing the client secret.
+          #     The `secretmanager.versions.access` permission should be
+          #     granted to the service account accessing the secret.
+          class Oauth2ClientCredentialsConfig
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Config for authentication with API key.
+          # @!attribute [rw] name
+          #   @return [::String]
+          #     Required. The parameter name of the API key.
+          #     E.g. If the API request is "https://example.com/act?api_key=<API KEY>",
+          #     "api_key" would be the parameter name.
+          # @!attribute [rw] api_key
+          #   @return [::Google::Cloud::ApiHub::V1::Secret]
+          #     Required. The name of the SecretManager secret version resource storing
+          #     the API key. Format:
+          #     `projects/{project}/secrets/{secrete}/versions/{version}`. The
+          #     `secretmanager.versions.access` permission should be granted to the
+          #     service account accessing the secret.
+          # @!attribute [rw] http_element_location
+          #   @return [::Google::Cloud::ApiHub::V1::AuthConfig::ApiKeyConfig::HttpElementLocation]
+          #     Required. The location of the API key.
+          #     The default value is QUERY.
+          class ApiKeyConfig
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+
+            # Enum of location an HTTP element can be.
+            module HttpElementLocation
+              # HTTP element location not specified.
+              HTTP_ELEMENT_LOCATION_UNSPECIFIED = 0
+
+              # Element is in the HTTP request query.
+              QUERY = 1
+
+              # Element is in the HTTP request header.
+              HEADER = 2
+
+              # Element is in the HTTP request path.
+              PATH = 3
+
+              # Element is in the HTTP request body.
+              BODY = 4
+
+              # Element is in the HTTP request cookie.
+              COOKIE = 5
+            end
+          end
+        end
+
+        # SourceMetadata represents the metadata for a resource at the source.
+        # @!attribute [r] plugin_instance_action_source
+        #   @return [::Google::Cloud::ApiHub::V1::SourceMetadata::PluginInstanceActionSource]
+        #     Output only. The source of the resource is a plugin instance action.
+        # @!attribute [r] source_type
+        #   @return [::Google::Cloud::ApiHub::V1::SourceMetadata::SourceType]
+        #     Output only. The type of the source.
+        # @!attribute [r] original_resource_id
+        #   @return [::String]
+        #     Output only. The unique identifier of the resource at the source.
+        # @!attribute [r] original_resource_create_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Output only. The time at which the resource was created at the source.
+        # @!attribute [r] original_resource_update_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Output only. The time at which the resource was last updated at the source.
+        class SourceMetadata
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # PluginInstanceActionSource represents the plugin instance action source.
+          # @!attribute [r] plugin_instance
+          #   @return [::String]
+          #     Output only. The resource name of the source plugin instance.
+          #     Format is
+          #     `projects/{project}/locations/{location}/plugins/{plugin}/instances/{instance}`
+          # @!attribute [r] action_id
+          #   @return [::String]
+          #     Output only. The id of the plugin instance action.
+          class PluginInstanceActionSource
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # The possible types of the source.
+          module SourceType
+            # Source type not specified.
+            SOURCE_TYPE_UNSPECIFIED = 0
+
+            # Source type plugin.
+            PLUGIN = 1
+          end
+        end
+
+        # Respresents an API Observation observed in one of the sources.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Identifier. The name of the discovered API Observation.
+        #
+        #     Format:
+        #     `projects/{project}/locations/{location}/discoveredApiObservations/{discovered_api_observation}`
+        # @!attribute [rw] style
+        #   @return [::Google::Cloud::ApiHub::V1::DiscoveredApiObservation::Style]
+        #     Optional. Style of ApiObservation
+        # @!attribute [rw] server_ips
+        #   @return [::Array<::String>]
+        #     Optional. The IP address (IPv4 or IPv6) of the origin server that the
+        #     request was sent to. This field can include port information. Examples:
+        #     `"192.168.1.1"`, `"10.0.0.1:80"`, `"FE80::0202:B3FF:FE1E:8329"`.
+        # @!attribute [rw] hostname
+        #   @return [::String]
+        #     Optional. The hostname of requests processed for this Observation.
+        # @!attribute [rw] last_event_detected_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Optional. Last event detected time stamp
+        # @!attribute [rw] source_locations
+        #   @return [::Array<::String>]
+        #     Optional. The location of the observation source.
+        # @!attribute [rw] api_operation_count
+        #   @return [::Integer]
+        #     Optional. The number of observed API Operations.
+        # @!attribute [rw] origin
+        #   @return [::String]
+        #     Optional. For an observation pushed from a gcp resource, this would be the
+        #     gcp project id.
+        # @!attribute [rw] source_types
+        #   @return [::Array<::Google::Cloud::ApiHub::V1::DiscoveredApiObservation::SourceType>]
+        #     Optional. The type of the source from which the observation was collected.
+        # @!attribute [r] known_operations_count
+        #   @return [::Integer]
+        #     Output only. The number of known API Operations.
+        # @!attribute [r] unknown_operations_count
+        #   @return [::Integer]
+        #     Output only. The number of unknown API Operations.
+        # @!attribute [r] create_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Output only. Create time stamp of the observation in API Hub.
+        # @!attribute [r] update_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Output only. Update time stamp of the observation in API Hub.
+        # @!attribute [r] source_metadata
+        #   @return [::Google::Cloud::ApiHub::V1::SourceMetadata]
+        #     Output only. The metadata of the source from which the observation was
+        #     collected.
+        class DiscoveredApiObservation
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # DiscoveredApiObservation protocol style
+          module Style
+            # Unknown style
+            STYLE_UNSPECIFIED = 0
+
+            # Style is Rest API
+            REST = 1
+
+            # Style is Grpc API
+            GRPC = 2
+
+            # Style is GraphQL API
+            GRAPHQL = 3
+          end
+
+          # The possible types of the source from which the observation was collected.
+          module SourceType
+            # Source type not specified.
+            SOURCE_TYPE_UNSPECIFIED = 0
+
+            # GCP external load balancer.
+            GCP_XLB = 1
+
+            # GCP internal load balancer.
+            GCP_ILB = 2
+          end
+        end
+
+        # DiscoveredApiOperation represents an API Operation observed in one of the
+        # sources.
+        # @!attribute [rw] http_operation
+        #   @return [::Google::Cloud::ApiHub::V1::HttpOperationDetails]
+        #     Optional. An HTTP Operation.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Identifier. The name of the discovered API Operation.
+        #
+        #     Format:
+        #     `projects/{project}/locations/{location}/discoveredApiObservations/{discovered_api_observation}/discoveredApiOperations/{discovered_api_operation}`
+        # @!attribute [rw] first_seen_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Optional. First seen time stamp
+        # @!attribute [rw] last_seen_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Optional. Last seen time stamp
+        # @!attribute [rw] count
+        #   @return [::Integer]
+        #     Optional. The number of occurrences of this API Operation.
+        # @!attribute [r] classification
+        #   @return [::Google::Cloud::ApiHub::V1::DiscoveredApiOperation::Classification]
+        #     Output only. The classification of the discovered API operation.
+        # @!attribute [r] match_results
+        #   @return [::Array<::Google::Cloud::ApiHub::V1::DiscoveredApiOperation::MatchResult>]
+        #     Output only. The list of matched results for the discovered API operation.
+        #     This will be populated only if the classification is known. The current
+        #     usecase is for a single match. Keeping it repeated to support multiple
+        #     matches in future.
+        # @!attribute [r] source_metadata
+        #   @return [::Google::Cloud::ApiHub::V1::SourceMetadata]
+        #     Output only. The metadata of the source from which the api operation was
+        #     collected.
+        # @!attribute [r] create_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Output only. Create time stamp of the discovered API operation in API Hub.
+        # @!attribute [r] update_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Output only. Update time stamp of the discovered API operation in API Hub.
+        class DiscoveredApiOperation
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # MatchResult represents the result of matching a discovered API operation
+          # with a catalog API operation.
+          # @!attribute [r] name
+          #   @return [::String]
+          #     Output only. The name of the matched API Operation.
+          #
+          #     Format:
+          #     `projects/{project}/locations/{location}/apis/{api}/versions/{version}/operations/{operation}`
+          class MatchResult
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # The classification of the discovered API operation.
+          module Classification
+            # Operation is not classified as known or unknown.
+            CLASSIFICATION_UNSPECIFIED = 0
+
+            # Operation has a matched catalog operation.
+            KNOWN = 1
+
+            # Operation does not have a matched catalog operation.
+            UNKNOWN = 2
+          end
+        end
+
+        # An HTTP-based API Operation, sometimes called a "REST" Operation.
+        # @!attribute [rw] http_operation
+        #   @return [::Google::Cloud::ApiHub::V1::HttpOperation]
+        #     Required. An HTTP Operation.
+        # @!attribute [rw] path_params
+        #   @return [::Array<::Google::Cloud::ApiHub::V1::HttpOperationDetails::PathParam>]
+        #     Optional. Path params of HttpOperation
+        # @!attribute [rw] query_params
+        #   @return [::Google::Protobuf::Map{::String => ::Google::Cloud::ApiHub::V1::HttpOperationDetails::QueryParam}]
+        #     Optional. Query params of HttpOperation
+        # @!attribute [rw] request
+        #   @return [::Google::Cloud::ApiHub::V1::HttpOperationDetails::HttpRequest]
+        #     Optional. Request metadata.
+        # @!attribute [rw] response
+        #   @return [::Google::Cloud::ApiHub::V1::HttpOperationDetails::HttpResponse]
+        #     Optional. Response metadata.
+        class HttpOperationDetails
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # HTTP Path parameter.
+          # @!attribute [rw] position
+          #   @return [::Integer]
+          #     Optional. Segment location in the path, 1-indexed
+          # @!attribute [rw] data_type
+          #   @return [::Google::Cloud::ApiHub::V1::HttpOperationDetails::DataType]
+          #     Optional. Data type of path param
+          class PathParam
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # An aggregation of HTTP query parameter occurrences.
+          # @!attribute [rw] name
+          #   @return [::String]
+          #     Required. Name of query param
+          # @!attribute [rw] count
+          #   @return [::Integer]
+          #     Optional. The number of occurrences of this query parameter across
+          #     transactions.
+          # @!attribute [rw] data_type
+          #   @return [::Google::Cloud::ApiHub::V1::HttpOperationDetails::DataType]
+          #     Optional. Data type of path param
+          class QueryParam
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # An aggregation of HTTP header occurrences.
+          # @!attribute [rw] name
+          #   @return [::String]
+          #     Header name.
+          # @!attribute [rw] count
+          #   @return [::Integer]
+          #     The number of occurrences of this Header across transactions.
+          # @!attribute [rw] data_type
+          #   @return [::Google::Cloud::ApiHub::V1::HttpOperationDetails::DataType]
+          #     Data type of header
+          class Header
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # An aggregation of HTTP requests.
+          # @!attribute [rw] headers
+          #   @return [::Google::Protobuf::Map{::String => ::Google::Cloud::ApiHub::V1::HttpOperationDetails::Header}]
+          #     Optional. Unordered map from header name to header metadata
+          class HttpRequest
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+
+            # @!attribute [rw] key
+            #   @return [::String]
+            # @!attribute [rw] value
+            #   @return [::Google::Cloud::ApiHub::V1::HttpOperationDetails::Header]
+            class HeadersEntry
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
+          end
+
+          # An aggregation of HTTP responses.
+          # @!attribute [rw] headers
+          #   @return [::Google::Protobuf::Map{::String => ::Google::Cloud::ApiHub::V1::HttpOperationDetails::Header}]
+          #     Optional. Unordered map from header name to header metadata
+          # @!attribute [rw] response_codes
+          #   @return [::Google::Protobuf::Map{::Integer => ::Integer}]
+          #     Optional. Map of status code to observed count
+          class HttpResponse
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+
+            # @!attribute [rw] key
+            #   @return [::String]
+            # @!attribute [rw] value
+            #   @return [::Google::Cloud::ApiHub::V1::HttpOperationDetails::Header]
+            class HeadersEntry
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
+
+            # @!attribute [rw] key
+            #   @return [::Integer]
+            # @!attribute [rw] value
+            #   @return [::Integer]
+            class ResponseCodesEntry
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
+          end
+
+          # @!attribute [rw] key
+          #   @return [::String]
+          # @!attribute [rw] value
+          #   @return [::Google::Cloud::ApiHub::V1::HttpOperationDetails::QueryParam]
+          class QueryParamsEntry
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Type of data
+          module DataType
+            # Unspecified data type
+            DATA_TYPE_UNSPECIFIED = 0
+
+            # Boolean data type
+            BOOL = 1
+
+            # Integer data type
+            INTEGER = 2
+
+            # Float data type
+            FLOAT = 3
+
+            # String data type
+            STRING = 4
+
+            # UUID data type
+            UUID = 5
+          end
+        end
+
         # Lint state represents success or failure for linting.
         module LintState
           # Lint state unspecified.
@@ -1299,6 +2056,40 @@ module Google
 
           # Severity hint.
           SEVERITY_HINT = 4
+        end
+
+        # AuthType represents the authentication type.
+        module AuthType
+          # Authentication type not specified.
+          AUTH_TYPE_UNSPECIFIED = 0
+
+          # No authentication.
+          NO_AUTH = 1
+
+          # Google service account authentication.
+          GOOGLE_SERVICE_ACCOUNT = 2
+
+          # Username and password authentication.
+          USER_PASSWORD = 3
+
+          # API Key authentication.
+          API_KEY = 4
+
+          # Oauth 2.0 client credentials grant authentication.
+          OAUTH2_CLIENT_CREDENTIALS = 5
+        end
+
+        # Enum for the plugin category.
+        module PluginCategory
+          # Default unspecified plugin type.
+          PLUGIN_CATEGORY_UNSPECIFIED = 0
+
+          # API_GATEWAY plugins represent plugins built for API Gateways like Apigee.
+          API_GATEWAY = 1
+
+          # API_PRODUCER plugins represent plugins built for API Producers like
+          # Cloud Run, Application Integration etc.
+          API_PRODUCER = 2
         end
       end
     end

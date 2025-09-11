@@ -18,6 +18,9 @@
 
 require "google/cloud/api_hub/v1/api_hub/rest"
 require "google/cloud/api_hub/v1/api_hub_dependencies/rest"
+require "google/cloud/api_hub/v1/api_hub_collect/rest"
+require "google/cloud/api_hub/v1/api_hub_curate/rest"
+require "google/cloud/api_hub/v1/api_hub_discovery/rest"
 require "google/cloud/api_hub/v1/host_project_registration_service/rest"
 require "google/cloud/api_hub/v1/linting_service/rest"
 require "google/cloud/api_hub/v1/api_hub_plugin/rest"

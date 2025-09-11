@@ -90,6 +90,11 @@
                 "delete_spec"
               ]
             },
+            "CreateApiOperation": {
+              "methods": [
+                "create_api_operation"
+              ]
+            },
             "GetApiOperation": {
               "methods": [
                 "get_api_operation"
@@ -98,6 +103,16 @@
             "ListApiOperations": {
               "methods": [
                 "list_api_operations"
+              ]
+            },
+            "UpdateApiOperation": {
+              "methods": [
+                "update_api_operation"
+              ]
+            },
+            "DeleteApiOperation": {
+              "methods": [
+                "delete_api_operation"
               ]
             },
             "GetDefinition": {
@@ -223,6 +238,83 @@
         }
       }
     },
+    "ApiHubCollect": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::ApiHub::V1::ApiHubCollect::Client",
+          "rpcs": {
+            "CollectApiData": {
+              "methods": [
+                "collect_api_data"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "ApiHubCurate": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::ApiHub::V1::ApiHubCurate::Client",
+          "rpcs": {
+            "CreateCuration": {
+              "methods": [
+                "create_curation"
+              ]
+            },
+            "GetCuration": {
+              "methods": [
+                "get_curation"
+              ]
+            },
+            "ListCurations": {
+              "methods": [
+                "list_curations"
+              ]
+            },
+            "UpdateCuration": {
+              "methods": [
+                "update_curation"
+              ]
+            },
+            "DeleteCuration": {
+              "methods": [
+                "delete_curation"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "ApiHubDiscovery": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::ApiHub::V1::ApiHubDiscovery::Client",
+          "rpcs": {
+            "ListDiscoveredApiObservations": {
+              "methods": [
+                "list_discovered_api_observations"
+              ]
+            },
+            "GetDiscoveredApiObservation": {
+              "methods": [
+                "get_discovered_api_observation"
+              ]
+            },
+            "ListDiscoveredApiOperations": {
+              "methods": [
+                "list_discovered_api_operations"
+              ]
+            },
+            "GetDiscoveredApiOperation": {
+              "methods": [
+                "get_discovered_api_operation"
+              ]
+            }
+          }
+        }
+      }
+    },
     "HostProjectRegistrationService": {
       "clients": {
         "grpc": {
@@ -295,6 +387,61 @@
               "methods": [
                 "disable_plugin"
               ]
+            },
+            "CreatePlugin": {
+              "methods": [
+                "create_plugin"
+              ]
+            },
+            "ListPlugins": {
+              "methods": [
+                "list_plugins"
+              ]
+            },
+            "DeletePlugin": {
+              "methods": [
+                "delete_plugin"
+              ]
+            },
+            "CreatePluginInstance": {
+              "methods": [
+                "create_plugin_instance"
+              ]
+            },
+            "ExecutePluginInstanceAction": {
+              "methods": [
+                "execute_plugin_instance_action"
+              ]
+            },
+            "GetPluginInstance": {
+              "methods": [
+                "get_plugin_instance"
+              ]
+            },
+            "ListPluginInstances": {
+              "methods": [
+                "list_plugin_instances"
+              ]
+            },
+            "EnablePluginInstanceAction": {
+              "methods": [
+                "enable_plugin_instance_action"
+              ]
+            },
+            "DisablePluginInstanceAction": {
+              "methods": [
+                "disable_plugin_instance_action"
+              ]
+            },
+            "UpdatePluginInstance": {
+              "methods": [
+                "update_plugin_instance"
+              ]
+            },
+            "DeletePluginInstance": {
+              "methods": [
+                "delete_plugin_instance"
+              ]
             }
           }
         }
@@ -308,6 +455,11 @@
             "CreateApiHubInstance": {
               "methods": [
                 "create_api_hub_instance"
+              ]
+            },
+            "DeleteApiHubInstance": {
+              "methods": [
+                "delete_api_hub_instance"
               ]
             },
             "GetApiHubInstance": {

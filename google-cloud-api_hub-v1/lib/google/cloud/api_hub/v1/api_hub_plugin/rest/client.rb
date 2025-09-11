@@ -156,6 +156,13 @@ module Google
                 @quota_project_id = @config.quota_project
                 @quota_project_id ||= credentials.quota_project_id if credentials.respond_to? :quota_project_id
 
+                @operations_client = ::Google::Cloud::ApiHub::V1::ApiHubPlugin::Rest::Operations.new do |config|
+                  config.credentials = credentials
+                  config.quota_project = @quota_project_id
+                  config.endpoint = @config.endpoint
+                  config.universe_domain = @config.universe_domain
+                end
+
                 @api_hub_plugin_stub = ::Google::Cloud::ApiHub::V1::ApiHubPlugin::Rest::ServiceStub.new(
                   endpoint: @config.endpoint,
                   endpoint_template: DEFAULT_ENDPOINT_TEMPLATE,
@@ -185,6 +192,13 @@ module Google
               end
 
               ##
+              # Get the associated client for long-running operations.
+              #
+              # @return [::Google::Cloud::ApiHub::V1::ApiHubPlugin::Rest::Operations]
+              #
+              attr_reader :operations_client
+
+              ##
               # Get the associated client for mix-in of the Locations.
               #
               # @return [Google::Cloud::Location::Locations::Rest::Client]
@@ -203,7 +217,7 @@ module Google
               # Service calls
 
               ##
-              # Get details about an API Hub plugin.
+              # Get an API Hub plugin.
               #
               # @overload get_plugin(request, options = nil)
               #   Pass arguments to `get_plugin` via a request object, either of type
@@ -442,6 +456,1082 @@ module Google
               end
 
               ##
+              # Create an API Hub plugin resource in the API hub.
+              # Once a plugin is created, it can be used to create plugin instances.
+              #
+              # @overload create_plugin(request, options = nil)
+              #   Pass arguments to `create_plugin` via a request object, either of type
+              #   {::Google::Cloud::ApiHub::V1::CreatePluginRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::ApiHub::V1::CreatePluginRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload create_plugin(parent: nil, plugin_id: nil, plugin: nil)
+              #   Pass arguments to `create_plugin` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param parent [::String]
+              #     Required. The parent resource where this plugin will be created.
+              #     Format: `projects/{project}/locations/{location}`.
+              #   @param plugin_id [::String]
+              #     Optional. The ID to use for the Plugin resource, which will become the
+              #     final component of the Plugin's resource name. This field is optional.
+              #
+              #     * If provided, the same will be used. The service will throw an error if
+              #     the specified id is already used by another Plugin resource in the API hub
+              #     instance.
+              #     * If not provided, a system generated id will be used.
+              #
+              #     This value should be 4-63 characters, overall resource name which will be
+              #     of format
+              #     `projects/{project}/locations/{location}/plugins/{plugin}`,
+              #     its length is limited to 1000 characters and valid characters are
+              #     /[a-z][A-Z][0-9]-_/.
+              #   @param plugin [::Google::Cloud::ApiHub::V1::Plugin, ::Hash]
+              #     Required. The plugin to create.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Cloud::ApiHub::V1::Plugin]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Cloud::ApiHub::V1::Plugin]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/api_hub/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::ApiHub::V1::ApiHubPlugin::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::ApiHub::V1::CreatePluginRequest.new
+              #
+              #   # Call the create_plugin method.
+              #   result = client.create_plugin request
+              #
+              #   # The returned object is of type Google::Cloud::ApiHub::V1::Plugin.
+              #   p result
+              #
+              def create_plugin request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::ApiHub::V1::CreatePluginRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.create_plugin.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::ApiHub::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.create_plugin.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.create_plugin.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @api_hub_plugin_stub.create_plugin request, options do |result, operation|
+                  yield result, operation if block_given?
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # List all the plugins in a given project and location.
+              #
+              # @overload list_plugins(request, options = nil)
+              #   Pass arguments to `list_plugins` via a request object, either of type
+              #   {::Google::Cloud::ApiHub::V1::ListPluginsRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::ApiHub::V1::ListPluginsRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload list_plugins(parent: nil, filter: nil, page_size: nil, page_token: nil)
+              #   Pass arguments to `list_plugins` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param parent [::String]
+              #     Required. The parent resource where this plugin will be created.
+              #     Format: `projects/{project}/locations/{location}`.
+              #   @param filter [::String]
+              #     Optional. An expression that filters the list of plugins.
+              #
+              #     A filter expression consists of a field name, a comparison
+              #     operator, and a value for filtering. The value must be a string. The
+              #     comparison operator must be one of: `<`, `>` or
+              #     `=`. Filters are not case sensitive.
+              #
+              #     The following fields in the `Plugins` are eligible for filtering:
+              #
+              #       * `plugin_category` - The category of the Plugin. Allowed
+              #       comparison operators: `=`.
+              #
+              #     Expressions are combined with either `AND` logic operator or `OR` logical
+              #     operator but not both of them together i.e. only one of the `AND` or `OR`
+              #     operator can be used throughout the filter string and both the operators
+              #     cannot be used together. No other logical operators are
+              #     supported. At most three filter fields are allowed in the filter
+              #     string and if provided more than that then `INVALID_ARGUMENT` error is
+              #     returned by the API.
+              #     Here are a few examples:
+              #
+              #       * `plugin_category = ON_RAMP` - The plugin is of category
+              #       on ramp.
+              #   @param page_size [::Integer]
+              #     Optional. The maximum number of hub plugins to return. The service may
+              #     return fewer than this value. If unspecified, at most 50 hub plugins will
+              #     be returned. The maximum value is 1000; values above 1000 will be coerced
+              #     to 1000.
+              #   @param page_token [::String]
+              #     Optional. A page token, received from a previous `ListPlugins` call.
+              #     Provide this to retrieve the subsequent page.
+              #
+              #     When paginating, all other parameters (except page_size) provided to
+              #     `ListPlugins` must match the call that provided the page token.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::ApiHub::V1::Plugin>]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::ApiHub::V1::Plugin>]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/api_hub/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::ApiHub::V1::ApiHubPlugin::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::ApiHub::V1::ListPluginsRequest.new
+              #
+              #   # Call the list_plugins method.
+              #   result = client.list_plugins request
+              #
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
+              #     # Each element is of type ::Google::Cloud::ApiHub::V1::Plugin.
+              #     p item
+              #   end
+              #
+              def list_plugins request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::ApiHub::V1::ListPluginsRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.list_plugins.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::ApiHub::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.list_plugins.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.list_plugins.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @api_hub_plugin_stub.list_plugins request, options do |result, operation|
+                  result = ::Gapic::Rest::PagedEnumerable.new @api_hub_plugin_stub, :list_plugins, "plugins", request, result, options
+                  yield result, operation if block_given?
+                  throw :response, result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Delete a Plugin in API hub.
+              # Note, only user owned plugins can be deleted via this method.
+              #
+              # @overload delete_plugin(request, options = nil)
+              #   Pass arguments to `delete_plugin` via a request object, either of type
+              #   {::Google::Cloud::ApiHub::V1::DeletePluginRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::ApiHub::V1::DeletePluginRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload delete_plugin(name: nil)
+              #   Pass arguments to `delete_plugin` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param name [::String]
+              #     Required. The name of the Plugin resource to delete.
+              #     Format: `projects/{project}/locations/{location}/plugins/{plugin}`
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Gapic::Operation]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Gapic::Operation]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/api_hub/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::ApiHub::V1::ApiHubPlugin::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::ApiHub::V1::DeletePluginRequest.new
+              #
+              #   # Call the delete_plugin method.
+              #   result = client.delete_plugin request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
+              def delete_plugin request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::ApiHub::V1::DeletePluginRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.delete_plugin.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::ApiHub::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.delete_plugin.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.delete_plugin.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @api_hub_plugin_stub.delete_plugin request, options do |result, operation|
+                  result = ::Gapic::Operation.new result, @operations_client, options: options
+                  yield result, operation if block_given?
+                  throw :response, result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Creates a Plugin instance in the API hub.
+              #
+              # @overload create_plugin_instance(request, options = nil)
+              #   Pass arguments to `create_plugin_instance` via a request object, either of type
+              #   {::Google::Cloud::ApiHub::V1::CreatePluginInstanceRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::ApiHub::V1::CreatePluginInstanceRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload create_plugin_instance(parent: nil, plugin_instance_id: nil, plugin_instance: nil)
+              #   Pass arguments to `create_plugin_instance` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param parent [::String]
+              #     Required. The parent of the plugin instance resource.
+              #     Format: `projects/{project}/locations/{location}/plugins/{plugin}`
+              #   @param plugin_instance_id [::String]
+              #     Optional. The ID to use for the plugin instance, which will become the
+              #     final component of the plugin instance's resource name. This field is
+              #     optional.
+              #
+              #     * If provided, the same will be used. The service will throw an error if
+              #     the specified id is already used by another plugin instance in the plugin
+              #     resource.
+              #     * If not provided, a system generated id will be used.
+              #
+              #     This value should be 4-63 characters, and valid characters
+              #     are /[a-z][A-Z][0-9]-_/.
+              #   @param plugin_instance [::Google::Cloud::ApiHub::V1::PluginInstance, ::Hash]
+              #     Required. The plugin instance to create.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Gapic::Operation]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Gapic::Operation]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/api_hub/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::ApiHub::V1::ApiHubPlugin::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::ApiHub::V1::CreatePluginInstanceRequest.new
+              #
+              #   # Call the create_plugin_instance method.
+              #   result = client.create_plugin_instance request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
+              def create_plugin_instance request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::ApiHub::V1::CreatePluginInstanceRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.create_plugin_instance.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::ApiHub::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.create_plugin_instance.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.create_plugin_instance.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @api_hub_plugin_stub.create_plugin_instance request, options do |result, operation|
+                  result = ::Gapic::Operation.new result, @operations_client, options: options
+                  yield result, operation if block_given?
+                  throw :response, result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Executes a plugin instance in the API hub.
+              #
+              # @overload execute_plugin_instance_action(request, options = nil)
+              #   Pass arguments to `execute_plugin_instance_action` via a request object, either of type
+              #   {::Google::Cloud::ApiHub::V1::ExecutePluginInstanceActionRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::ApiHub::V1::ExecutePluginInstanceActionRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload execute_plugin_instance_action(name: nil, action_execution_detail: nil)
+              #   Pass arguments to `execute_plugin_instance_action` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param name [::String]
+              #     Required. The name of the plugin instance to execute.
+              #     Format:
+              #     `projects/{project}/locations/{location}/plugins/{plugin}/instances/{instance}`
+              #   @param action_execution_detail [::Google::Cloud::ApiHub::V1::ActionExecutionDetail, ::Hash]
+              #     Required. The execution details for the action to execute.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Gapic::Operation]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Gapic::Operation]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/api_hub/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::ApiHub::V1::ApiHubPlugin::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::ApiHub::V1::ExecutePluginInstanceActionRequest.new
+              #
+              #   # Call the execute_plugin_instance_action method.
+              #   result = client.execute_plugin_instance_action request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
+              def execute_plugin_instance_action request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::ApiHub::V1::ExecutePluginInstanceActionRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.execute_plugin_instance_action.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::ApiHub::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.execute_plugin_instance_action.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.execute_plugin_instance_action.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @api_hub_plugin_stub.execute_plugin_instance_action request, options do |result, operation|
+                  result = ::Gapic::Operation.new result, @operations_client, options: options
+                  yield result, operation if block_given?
+                  throw :response, result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Get an API Hub plugin instance.
+              #
+              # @overload get_plugin_instance(request, options = nil)
+              #   Pass arguments to `get_plugin_instance` via a request object, either of type
+              #   {::Google::Cloud::ApiHub::V1::GetPluginInstanceRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::ApiHub::V1::GetPluginInstanceRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload get_plugin_instance(name: nil)
+              #   Pass arguments to `get_plugin_instance` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param name [::String]
+              #     Required. The name of the plugin instance to retrieve.
+              #     Format:
+              #     `projects/{project}/locations/{location}/plugins/{plugin}/instances/{instance}`
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Cloud::ApiHub::V1::PluginInstance]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Cloud::ApiHub::V1::PluginInstance]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/api_hub/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::ApiHub::V1::ApiHubPlugin::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::ApiHub::V1::GetPluginInstanceRequest.new
+              #
+              #   # Call the get_plugin_instance method.
+              #   result = client.get_plugin_instance request
+              #
+              #   # The returned object is of type Google::Cloud::ApiHub::V1::PluginInstance.
+              #   p result
+              #
+              def get_plugin_instance request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::ApiHub::V1::GetPluginInstanceRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.get_plugin_instance.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::ApiHub::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.get_plugin_instance.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.get_plugin_instance.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @api_hub_plugin_stub.get_plugin_instance request, options do |result, operation|
+                  yield result, operation if block_given?
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # List all the plugins in a given project and location.
+              # `-` can be used as wildcard value for \\{plugin_id}
+              #
+              # @overload list_plugin_instances(request, options = nil)
+              #   Pass arguments to `list_plugin_instances` via a request object, either of type
+              #   {::Google::Cloud::ApiHub::V1::ListPluginInstancesRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::ApiHub::V1::ListPluginInstancesRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload list_plugin_instances(parent: nil, filter: nil, page_size: nil, page_token: nil)
+              #   Pass arguments to `list_plugin_instances` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param parent [::String]
+              #     Required. The parent resource where this plugin will be created.
+              #     Format: `projects/{project}/locations/{location}/plugins/{plugin}`.
+              #     To list plugin instances for multiple plugins,
+              #     use the - character instead of the plugin ID.
+              #   @param filter [::String]
+              #     Optional. An expression that filters the list of plugin instances.
+              #
+              #     A filter expression consists of a field name, a comparison
+              #     operator, and a value for filtering. The value must be a string. The
+              #     comparison operator must be one of: `<`, `>` or
+              #     `=`. Filters are not case sensitive.
+              #
+              #     The following fields in the `PluginInstances` are eligible for filtering:
+              #
+              #       * `state` - The state of the Plugin Instance. Allowed
+              #       comparison operators: `=`.
+              #
+              #     A filter function is also supported in the filter string. The filter
+              #     function is `id(name)`. The `id(name)` function returns the id of the
+              #     resource name. For example, `id(name) = \"plugin-instance-1\"` is
+              #     equivalent to `name =
+              #     \"projects/test-project-id/locations/test-location-id/plugins/plugin-1/instances/plugin-instance-1\"`
+              #     provided the parent is
+              #     `projects/test-project-id/locations/test-location-id/plugins/plugin-1`.
+              #
+              #     Expressions are combined with either `AND` logic operator or `OR` logical
+              #     operator but not both of them together i.e. only one of the `AND` or `OR`
+              #     operator can be used throughout the filter string and both the operators
+              #     cannot be used together. No other logical operators are
+              #     supported. At most three filter fields are allowed in the filter
+              #     string and if provided more than that then `INVALID_ARGUMENT` error is
+              #     returned by the API.
+              #     Here are a few examples:
+              #
+              #       * `state = ENABLED` - The plugin instance is in enabled state.
+              #   @param page_size [::Integer]
+              #     Optional. The maximum number of hub plugins to return. The service may
+              #     return fewer than this value. If unspecified, at most 50 hub plugins will
+              #     be returned. The maximum value is 1000; values above 1000 will be coerced
+              #     to 1000.
+              #   @param page_token [::String]
+              #     Optional. A page token, received from a previous `ListPluginInstances`
+              #     call. Provide this to retrieve the subsequent page.
+              #
+              #     When paginating, all other parameters provided to `ListPluginInstances`
+              #     must match the call that provided the page token.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::ApiHub::V1::PluginInstance>]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::ApiHub::V1::PluginInstance>]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/api_hub/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::ApiHub::V1::ApiHubPlugin::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::ApiHub::V1::ListPluginInstancesRequest.new
+              #
+              #   # Call the list_plugin_instances method.
+              #   result = client.list_plugin_instances request
+              #
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
+              #     # Each element is of type ::Google::Cloud::ApiHub::V1::PluginInstance.
+              #     p item
+              #   end
+              #
+              def list_plugin_instances request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::ApiHub::V1::ListPluginInstancesRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.list_plugin_instances.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::ApiHub::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.list_plugin_instances.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.list_plugin_instances.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @api_hub_plugin_stub.list_plugin_instances request, options do |result, operation|
+                  result = ::Gapic::Rest::PagedEnumerable.new @api_hub_plugin_stub, :list_plugin_instances, "plugin_instances", request, result, options
+                  yield result, operation if block_given?
+                  throw :response, result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Enables a plugin instance in the API hub.
+              #
+              # @overload enable_plugin_instance_action(request, options = nil)
+              #   Pass arguments to `enable_plugin_instance_action` via a request object, either of type
+              #   {::Google::Cloud::ApiHub::V1::EnablePluginInstanceActionRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::ApiHub::V1::EnablePluginInstanceActionRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload enable_plugin_instance_action(name: nil, action_id: nil)
+              #   Pass arguments to `enable_plugin_instance_action` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param name [::String]
+              #     Required. The name of the plugin instance to enable.
+              #     Format:
+              #     `projects/{project}/locations/{location}/plugins/{plugin}/instances/{instance}`
+              #   @param action_id [::String]
+              #     Required. The action id to enable.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Gapic::Operation]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Gapic::Operation]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/api_hub/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::ApiHub::V1::ApiHubPlugin::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::ApiHub::V1::EnablePluginInstanceActionRequest.new
+              #
+              #   # Call the enable_plugin_instance_action method.
+              #   result = client.enable_plugin_instance_action request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
+              def enable_plugin_instance_action request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::ApiHub::V1::EnablePluginInstanceActionRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.enable_plugin_instance_action.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::ApiHub::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.enable_plugin_instance_action.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.enable_plugin_instance_action.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @api_hub_plugin_stub.enable_plugin_instance_action request, options do |result, operation|
+                  result = ::Gapic::Operation.new result, @operations_client, options: options
+                  yield result, operation if block_given?
+                  throw :response, result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Disables a plugin instance in the API hub.
+              #
+              # @overload disable_plugin_instance_action(request, options = nil)
+              #   Pass arguments to `disable_plugin_instance_action` via a request object, either of type
+              #   {::Google::Cloud::ApiHub::V1::DisablePluginInstanceActionRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::ApiHub::V1::DisablePluginInstanceActionRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload disable_plugin_instance_action(name: nil, action_id: nil)
+              #   Pass arguments to `disable_plugin_instance_action` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param name [::String]
+              #     Required. The name of the plugin instance to disable.
+              #     Format:
+              #     `projects/{project}/locations/{location}/plugins/{plugin}/instances/{instance}`
+              #   @param action_id [::String]
+              #     Required. The action id to disable.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Gapic::Operation]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Gapic::Operation]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/api_hub/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::ApiHub::V1::ApiHubPlugin::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::ApiHub::V1::DisablePluginInstanceActionRequest.new
+              #
+              #   # Call the disable_plugin_instance_action method.
+              #   result = client.disable_plugin_instance_action request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
+              def disable_plugin_instance_action request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::ApiHub::V1::DisablePluginInstanceActionRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.disable_plugin_instance_action.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::ApiHub::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.disable_plugin_instance_action.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.disable_plugin_instance_action.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @api_hub_plugin_stub.disable_plugin_instance_action request, options do |result, operation|
+                  result = ::Gapic::Operation.new result, @operations_client, options: options
+                  yield result, operation if block_given?
+                  throw :response, result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Updates a plugin instance in the API hub.
+              # The following fields in the
+              # {::Google::Cloud::ApiHub::V1::PluginInstance plugin_instance} can be updated
+              # currently:
+              #
+              # * {::Google::Cloud::ApiHub::V1::PluginInstance#display_name display_name}
+              # * [schedule_cron_expression][PluginInstance.actions.schedule_cron_expression]
+              #
+              # The
+              # {::Google::Cloud::ApiHub::V1::UpdatePluginInstanceRequest#update_mask update_mask}
+              # should be used to specify the fields being updated.
+              #
+              # To update the
+              # {::Google::Cloud::ApiHub::V1::PluginInstance#auth_config auth_config} and
+              # {::Google::Cloud::ApiHub::V1::PluginInstance#additional_config additional_config}
+              # of the plugin instance, use the
+              # [ApplyPluginInstanceConfig][google.cloud.apihub.v1.ApiHubPlugin.ApplyPluginInstanceConfig]
+              # method.
+              #
+              # @overload update_plugin_instance(request, options = nil)
+              #   Pass arguments to `update_plugin_instance` via a request object, either of type
+              #   {::Google::Cloud::ApiHub::V1::UpdatePluginInstanceRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::ApiHub::V1::UpdatePluginInstanceRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload update_plugin_instance(plugin_instance: nil, update_mask: nil)
+              #   Pass arguments to `update_plugin_instance` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param plugin_instance [::Google::Cloud::ApiHub::V1::PluginInstance, ::Hash]
+              #     Required. The plugin instance to update.
+              #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
+              #     Optional. The list of fields to update.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Cloud::ApiHub::V1::PluginInstance]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Cloud::ApiHub::V1::PluginInstance]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/api_hub/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::ApiHub::V1::ApiHubPlugin::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::ApiHub::V1::UpdatePluginInstanceRequest.new
+              #
+              #   # Call the update_plugin_instance method.
+              #   result = client.update_plugin_instance request
+              #
+              #   # The returned object is of type Google::Cloud::ApiHub::V1::PluginInstance.
+              #   p result
+              #
+              def update_plugin_instance request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::ApiHub::V1::UpdatePluginInstanceRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.update_plugin_instance.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::ApiHub::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.update_plugin_instance.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.update_plugin_instance.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @api_hub_plugin_stub.update_plugin_instance request, options do |result, operation|
+                  yield result, operation if block_given?
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Deletes a plugin instance in the API hub.
+              #
+              # @overload delete_plugin_instance(request, options = nil)
+              #   Pass arguments to `delete_plugin_instance` via a request object, either of type
+              #   {::Google::Cloud::ApiHub::V1::DeletePluginInstanceRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::ApiHub::V1::DeletePluginInstanceRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload delete_plugin_instance(name: nil)
+              #   Pass arguments to `delete_plugin_instance` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param name [::String]
+              #     Required. The name of the plugin instance to delete.
+              #     Format:
+              #     `projects/{project}/locations/{location}/plugins/{plugin}/instances/{instance}`.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Gapic::Operation]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Gapic::Operation]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/api_hub/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::ApiHub::V1::ApiHubPlugin::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::ApiHub::V1::DeletePluginInstanceRequest.new
+              #
+              #   # Call the delete_plugin_instance method.
+              #   result = client.delete_plugin_instance request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
+              def delete_plugin_instance request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::ApiHub::V1::DeletePluginInstanceRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.delete_plugin_instance.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::ApiHub::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.delete_plugin_instance.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.delete_plugin_instance.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @api_hub_plugin_stub.delete_plugin_instance request, options do |result, operation|
+                  result = ::Gapic::Operation.new result, @operations_client, options: options
+                  yield result, operation if block_given?
+                  throw :response, result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
               # Configuration class for the ApiHubPlugin REST API.
               #
               # This class represents the configuration for ApiHubPlugin REST,
@@ -609,6 +1699,61 @@ module Google
                   # @return [::Gapic::Config::Method]
                   #
                   attr_reader :disable_plugin
+                  ##
+                  # RPC-specific configuration for `create_plugin`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :create_plugin
+                  ##
+                  # RPC-specific configuration for `list_plugins`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :list_plugins
+                  ##
+                  # RPC-specific configuration for `delete_plugin`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :delete_plugin
+                  ##
+                  # RPC-specific configuration for `create_plugin_instance`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :create_plugin_instance
+                  ##
+                  # RPC-specific configuration for `execute_plugin_instance_action`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :execute_plugin_instance_action
+                  ##
+                  # RPC-specific configuration for `get_plugin_instance`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :get_plugin_instance
+                  ##
+                  # RPC-specific configuration for `list_plugin_instances`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :list_plugin_instances
+                  ##
+                  # RPC-specific configuration for `enable_plugin_instance_action`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :enable_plugin_instance_action
+                  ##
+                  # RPC-specific configuration for `disable_plugin_instance_action`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :disable_plugin_instance_action
+                  ##
+                  # RPC-specific configuration for `update_plugin_instance`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :update_plugin_instance
+                  ##
+                  # RPC-specific configuration for `delete_plugin_instance`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :delete_plugin_instance
 
                   # @private
                   def initialize parent_rpcs = nil
@@ -618,6 +1763,28 @@ module Google
                     @enable_plugin = ::Gapic::Config::Method.new enable_plugin_config
                     disable_plugin_config = parent_rpcs.disable_plugin if parent_rpcs.respond_to? :disable_plugin
                     @disable_plugin = ::Gapic::Config::Method.new disable_plugin_config
+                    create_plugin_config = parent_rpcs.create_plugin if parent_rpcs.respond_to? :create_plugin
+                    @create_plugin = ::Gapic::Config::Method.new create_plugin_config
+                    list_plugins_config = parent_rpcs.list_plugins if parent_rpcs.respond_to? :list_plugins
+                    @list_plugins = ::Gapic::Config::Method.new list_plugins_config
+                    delete_plugin_config = parent_rpcs.delete_plugin if parent_rpcs.respond_to? :delete_plugin
+                    @delete_plugin = ::Gapic::Config::Method.new delete_plugin_config
+                    create_plugin_instance_config = parent_rpcs.create_plugin_instance if parent_rpcs.respond_to? :create_plugin_instance
+                    @create_plugin_instance = ::Gapic::Config::Method.new create_plugin_instance_config
+                    execute_plugin_instance_action_config = parent_rpcs.execute_plugin_instance_action if parent_rpcs.respond_to? :execute_plugin_instance_action
+                    @execute_plugin_instance_action = ::Gapic::Config::Method.new execute_plugin_instance_action_config
+                    get_plugin_instance_config = parent_rpcs.get_plugin_instance if parent_rpcs.respond_to? :get_plugin_instance
+                    @get_plugin_instance = ::Gapic::Config::Method.new get_plugin_instance_config
+                    list_plugin_instances_config = parent_rpcs.list_plugin_instances if parent_rpcs.respond_to? :list_plugin_instances
+                    @list_plugin_instances = ::Gapic::Config::Method.new list_plugin_instances_config
+                    enable_plugin_instance_action_config = parent_rpcs.enable_plugin_instance_action if parent_rpcs.respond_to? :enable_plugin_instance_action
+                    @enable_plugin_instance_action = ::Gapic::Config::Method.new enable_plugin_instance_action_config
+                    disable_plugin_instance_action_config = parent_rpcs.disable_plugin_instance_action if parent_rpcs.respond_to? :disable_plugin_instance_action
+                    @disable_plugin_instance_action = ::Gapic::Config::Method.new disable_plugin_instance_action_config
+                    update_plugin_instance_config = parent_rpcs.update_plugin_instance if parent_rpcs.respond_to? :update_plugin_instance
+                    @update_plugin_instance = ::Gapic::Config::Method.new update_plugin_instance_config
+                    delete_plugin_instance_config = parent_rpcs.delete_plugin_instance if parent_rpcs.respond_to? :delete_plugin_instance
+                    @delete_plugin_instance = ::Gapic::Config::Method.new delete_plugin_instance_config
 
                     yield self if block_given?
                   end

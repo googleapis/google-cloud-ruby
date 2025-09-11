@@ -240,6 +240,614 @@ class ::Google::Cloud::ApiHub::V1::ApiHubPlugin::Rest::ClientTest < Minitest::Te
     end
   end
 
+  def test_create_plugin
+    # Create test objects.
+    client_result = ::Google::Cloud::ApiHub::V1::Plugin.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    plugin_id = "hello world"
+    plugin = {}
+
+    create_plugin_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::ApiHub::V1::ApiHubPlugin::Rest::ServiceStub.stub :transcode_create_plugin_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, create_plugin_client_stub do
+        # Create client
+        client = ::Google::Cloud::ApiHub::V1::ApiHubPlugin::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.create_plugin({ parent: parent, plugin_id: plugin_id, plugin: plugin }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.create_plugin parent: parent, plugin_id: plugin_id, plugin: plugin do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.create_plugin ::Google::Cloud::ApiHub::V1::CreatePluginRequest.new(parent: parent, plugin_id: plugin_id, plugin: plugin) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.create_plugin({ parent: parent, plugin_id: plugin_id, plugin: plugin }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.create_plugin(::Google::Cloud::ApiHub::V1::CreatePluginRequest.new(parent: parent, plugin_id: plugin_id, plugin: plugin), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, create_plugin_client_stub.call_count
+      end
+    end
+  end
+
+  def test_list_plugins
+    # Create test objects.
+    client_result = ::Google::Cloud::ApiHub::V1::ListPluginsResponse.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    filter = "hello world"
+    page_size = 42
+    page_token = "hello world"
+
+    list_plugins_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::ApiHub::V1::ApiHubPlugin::Rest::ServiceStub.stub :transcode_list_plugins_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, list_plugins_client_stub do
+        # Create client
+        client = ::Google::Cloud::ApiHub::V1::ApiHubPlugin::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.list_plugins({ parent: parent, filter: filter, page_size: page_size, page_token: page_token }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.list_plugins parent: parent, filter: filter, page_size: page_size, page_token: page_token do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.list_plugins ::Google::Cloud::ApiHub::V1::ListPluginsRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.list_plugins({ parent: parent, filter: filter, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.list_plugins(::Google::Cloud::ApiHub::V1::ListPluginsRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, list_plugins_client_stub.call_count
+      end
+    end
+  end
+
+  def test_delete_plugin
+    # Create test objects.
+    client_result = ::Google::Longrunning::Operation.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    delete_plugin_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::ApiHub::V1::ApiHubPlugin::Rest::ServiceStub.stub :transcode_delete_plugin_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, delete_plugin_client_stub do
+        # Create client
+        client = ::Google::Cloud::ApiHub::V1::ApiHubPlugin::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.delete_plugin({ name: name }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.delete_plugin name: name do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.delete_plugin ::Google::Cloud::ApiHub::V1::DeletePluginRequest.new(name: name) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.delete_plugin({ name: name }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.delete_plugin(::Google::Cloud::ApiHub::V1::DeletePluginRequest.new(name: name), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, delete_plugin_client_stub.call_count
+      end
+    end
+  end
+
+  def test_create_plugin_instance
+    # Create test objects.
+    client_result = ::Google::Longrunning::Operation.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    plugin_instance_id = "hello world"
+    plugin_instance = {}
+
+    create_plugin_instance_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::ApiHub::V1::ApiHubPlugin::Rest::ServiceStub.stub :transcode_create_plugin_instance_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, create_plugin_instance_client_stub do
+        # Create client
+        client = ::Google::Cloud::ApiHub::V1::ApiHubPlugin::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.create_plugin_instance({ parent: parent, plugin_instance_id: plugin_instance_id, plugin_instance: plugin_instance }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.create_plugin_instance parent: parent, plugin_instance_id: plugin_instance_id, plugin_instance: plugin_instance do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.create_plugin_instance ::Google::Cloud::ApiHub::V1::CreatePluginInstanceRequest.new(parent: parent, plugin_instance_id: plugin_instance_id, plugin_instance: plugin_instance) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.create_plugin_instance({ parent: parent, plugin_instance_id: plugin_instance_id, plugin_instance: plugin_instance }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.create_plugin_instance(::Google::Cloud::ApiHub::V1::CreatePluginInstanceRequest.new(parent: parent, plugin_instance_id: plugin_instance_id, plugin_instance: plugin_instance), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, create_plugin_instance_client_stub.call_count
+      end
+    end
+  end
+
+  def test_execute_plugin_instance_action
+    # Create test objects.
+    client_result = ::Google::Longrunning::Operation.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+    action_execution_detail = {}
+
+    execute_plugin_instance_action_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::ApiHub::V1::ApiHubPlugin::Rest::ServiceStub.stub :transcode_execute_plugin_instance_action_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, execute_plugin_instance_action_client_stub do
+        # Create client
+        client = ::Google::Cloud::ApiHub::V1::ApiHubPlugin::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.execute_plugin_instance_action({ name: name, action_execution_detail: action_execution_detail }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.execute_plugin_instance_action name: name, action_execution_detail: action_execution_detail do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.execute_plugin_instance_action ::Google::Cloud::ApiHub::V1::ExecutePluginInstanceActionRequest.new(name: name, action_execution_detail: action_execution_detail) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.execute_plugin_instance_action({ name: name, action_execution_detail: action_execution_detail }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.execute_plugin_instance_action(::Google::Cloud::ApiHub::V1::ExecutePluginInstanceActionRequest.new(name: name, action_execution_detail: action_execution_detail), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, execute_plugin_instance_action_client_stub.call_count
+      end
+    end
+  end
+
+  def test_get_plugin_instance
+    # Create test objects.
+    client_result = ::Google::Cloud::ApiHub::V1::PluginInstance.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    get_plugin_instance_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::ApiHub::V1::ApiHubPlugin::Rest::ServiceStub.stub :transcode_get_plugin_instance_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, get_plugin_instance_client_stub do
+        # Create client
+        client = ::Google::Cloud::ApiHub::V1::ApiHubPlugin::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.get_plugin_instance({ name: name }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.get_plugin_instance name: name do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.get_plugin_instance ::Google::Cloud::ApiHub::V1::GetPluginInstanceRequest.new(name: name) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.get_plugin_instance({ name: name }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.get_plugin_instance(::Google::Cloud::ApiHub::V1::GetPluginInstanceRequest.new(name: name), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, get_plugin_instance_client_stub.call_count
+      end
+    end
+  end
+
+  def test_list_plugin_instances
+    # Create test objects.
+    client_result = ::Google::Cloud::ApiHub::V1::ListPluginInstancesResponse.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    filter = "hello world"
+    page_size = 42
+    page_token = "hello world"
+
+    list_plugin_instances_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::ApiHub::V1::ApiHubPlugin::Rest::ServiceStub.stub :transcode_list_plugin_instances_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, list_plugin_instances_client_stub do
+        # Create client
+        client = ::Google::Cloud::ApiHub::V1::ApiHubPlugin::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.list_plugin_instances({ parent: parent, filter: filter, page_size: page_size, page_token: page_token }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.list_plugin_instances parent: parent, filter: filter, page_size: page_size, page_token: page_token do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.list_plugin_instances ::Google::Cloud::ApiHub::V1::ListPluginInstancesRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.list_plugin_instances({ parent: parent, filter: filter, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.list_plugin_instances(::Google::Cloud::ApiHub::V1::ListPluginInstancesRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, list_plugin_instances_client_stub.call_count
+      end
+    end
+  end
+
+  def test_enable_plugin_instance_action
+    # Create test objects.
+    client_result = ::Google::Longrunning::Operation.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+    action_id = "hello world"
+
+    enable_plugin_instance_action_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::ApiHub::V1::ApiHubPlugin::Rest::ServiceStub.stub :transcode_enable_plugin_instance_action_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, enable_plugin_instance_action_client_stub do
+        # Create client
+        client = ::Google::Cloud::ApiHub::V1::ApiHubPlugin::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.enable_plugin_instance_action({ name: name, action_id: action_id }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.enable_plugin_instance_action name: name, action_id: action_id do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.enable_plugin_instance_action ::Google::Cloud::ApiHub::V1::EnablePluginInstanceActionRequest.new(name: name, action_id: action_id) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.enable_plugin_instance_action({ name: name, action_id: action_id }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.enable_plugin_instance_action(::Google::Cloud::ApiHub::V1::EnablePluginInstanceActionRequest.new(name: name, action_id: action_id), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, enable_plugin_instance_action_client_stub.call_count
+      end
+    end
+  end
+
+  def test_disable_plugin_instance_action
+    # Create test objects.
+    client_result = ::Google::Longrunning::Operation.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+    action_id = "hello world"
+
+    disable_plugin_instance_action_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::ApiHub::V1::ApiHubPlugin::Rest::ServiceStub.stub :transcode_disable_plugin_instance_action_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, disable_plugin_instance_action_client_stub do
+        # Create client
+        client = ::Google::Cloud::ApiHub::V1::ApiHubPlugin::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.disable_plugin_instance_action({ name: name, action_id: action_id }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.disable_plugin_instance_action name: name, action_id: action_id do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.disable_plugin_instance_action ::Google::Cloud::ApiHub::V1::DisablePluginInstanceActionRequest.new(name: name, action_id: action_id) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.disable_plugin_instance_action({ name: name, action_id: action_id }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.disable_plugin_instance_action(::Google::Cloud::ApiHub::V1::DisablePluginInstanceActionRequest.new(name: name, action_id: action_id), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, disable_plugin_instance_action_client_stub.call_count
+      end
+    end
+  end
+
+  def test_update_plugin_instance
+    # Create test objects.
+    client_result = ::Google::Cloud::ApiHub::V1::PluginInstance.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    plugin_instance = {}
+    update_mask = {}
+
+    update_plugin_instance_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::ApiHub::V1::ApiHubPlugin::Rest::ServiceStub.stub :transcode_update_plugin_instance_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, update_plugin_instance_client_stub do
+        # Create client
+        client = ::Google::Cloud::ApiHub::V1::ApiHubPlugin::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.update_plugin_instance({ plugin_instance: plugin_instance, update_mask: update_mask }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.update_plugin_instance plugin_instance: plugin_instance, update_mask: update_mask do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.update_plugin_instance ::Google::Cloud::ApiHub::V1::UpdatePluginInstanceRequest.new(plugin_instance: plugin_instance, update_mask: update_mask) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.update_plugin_instance({ plugin_instance: plugin_instance, update_mask: update_mask }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.update_plugin_instance(::Google::Cloud::ApiHub::V1::UpdatePluginInstanceRequest.new(plugin_instance: plugin_instance, update_mask: update_mask), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, update_plugin_instance_client_stub.call_count
+      end
+    end
+  end
+
+  def test_delete_plugin_instance
+    # Create test objects.
+    client_result = ::Google::Longrunning::Operation.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    delete_plugin_instance_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::ApiHub::V1::ApiHubPlugin::Rest::ServiceStub.stub :transcode_delete_plugin_instance_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, delete_plugin_instance_client_stub do
+        # Create client
+        client = ::Google::Cloud::ApiHub::V1::ApiHubPlugin::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.delete_plugin_instance({ name: name }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.delete_plugin_instance name: name do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.delete_plugin_instance ::Google::Cloud::ApiHub::V1::DeletePluginInstanceRequest.new(name: name) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.delete_plugin_instance({ name: name }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.delete_plugin_instance(::Google::Cloud::ApiHub::V1::DeletePluginInstanceRequest.new(name: name), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, delete_plugin_instance_client_stub.call_count
+      end
+    end
+  end
+
   def test_configure
     credentials_token = :dummy_value
 

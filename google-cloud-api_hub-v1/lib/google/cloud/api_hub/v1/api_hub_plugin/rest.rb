@@ -25,6 +25,7 @@ require "google/cloud/api_hub/v1/bindings_override"
 
 require "google/cloud/api_hub/v1/api_hub_plugin/credentials"
 require "google/cloud/api_hub/v1/api_hub_plugin/paths"
+require "google/cloud/api_hub/v1/api_hub_plugin/rest/operations"
 require "google/cloud/api_hub/v1/api_hub_plugin/rest/client"
 
 module Google

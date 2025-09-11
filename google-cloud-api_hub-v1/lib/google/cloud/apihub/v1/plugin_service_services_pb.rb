@@ -33,7 +33,7 @@ module Google
             self.unmarshal_class_method = :decode
             self.service_name = 'google.cloud.apihub.v1.ApiHubPlugin'
 
-            # Get details about an API Hub plugin.
+            # Get an API Hub plugin.
             rpc :GetPlugin, ::Google::Cloud::ApiHub::V1::GetPluginRequest, ::Google::Cloud::ApiHub::V1::Plugin
             # Enables a plugin.
             # The `state` of the plugin after enabling is `ENABLED`
@@ -41,6 +41,48 @@ module Google
             # Disables a plugin.
             # The `state` of the plugin after disabling is `DISABLED`
             rpc :DisablePlugin, ::Google::Cloud::ApiHub::V1::DisablePluginRequest, ::Google::Cloud::ApiHub::V1::Plugin
+            # Create an API Hub plugin resource in the API hub.
+            # Once a plugin is created, it can be used to create plugin instances.
+            rpc :CreatePlugin, ::Google::Cloud::ApiHub::V1::CreatePluginRequest, ::Google::Cloud::ApiHub::V1::Plugin
+            # List all the plugins in a given project and location.
+            rpc :ListPlugins, ::Google::Cloud::ApiHub::V1::ListPluginsRequest, ::Google::Cloud::ApiHub::V1::ListPluginsResponse
+            # Delete a Plugin in API hub.
+            # Note, only user owned plugins can be deleted via this method.
+            rpc :DeletePlugin, ::Google::Cloud::ApiHub::V1::DeletePluginRequest, ::Google::Longrunning::Operation
+            # Creates a Plugin instance in the API hub.
+            rpc :CreatePluginInstance, ::Google::Cloud::ApiHub::V1::CreatePluginInstanceRequest, ::Google::Longrunning::Operation
+            # Executes a plugin instance in the API hub.
+            rpc :ExecutePluginInstanceAction, ::Google::Cloud::ApiHub::V1::ExecutePluginInstanceActionRequest, ::Google::Longrunning::Operation
+            # Get an API Hub plugin instance.
+            rpc :GetPluginInstance, ::Google::Cloud::ApiHub::V1::GetPluginInstanceRequest, ::Google::Cloud::ApiHub::V1::PluginInstance
+            # List all the plugins in a given project and location.
+            # `-` can be used as wildcard value for {plugin_id}
+            rpc :ListPluginInstances, ::Google::Cloud::ApiHub::V1::ListPluginInstancesRequest, ::Google::Cloud::ApiHub::V1::ListPluginInstancesResponse
+            # Enables a plugin instance in the API hub.
+            rpc :EnablePluginInstanceAction, ::Google::Cloud::ApiHub::V1::EnablePluginInstanceActionRequest, ::Google::Longrunning::Operation
+            # Disables a plugin instance in the API hub.
+            rpc :DisablePluginInstanceAction, ::Google::Cloud::ApiHub::V1::DisablePluginInstanceActionRequest, ::Google::Longrunning::Operation
+            # Updates a plugin instance in the API hub.
+            # The following fields in the
+            # [plugin_instance][google.cloud.apihub.v1.PluginInstance] can be updated
+            # currently:
+            #
+            # * [display_name][google.cloud.apihub.v1.PluginInstance.display_name]
+            # * [schedule_cron_expression][PluginInstance.actions.schedule_cron_expression]
+            #
+            # The
+            # [update_mask][google.cloud.apihub.v1.UpdatePluginInstanceRequest.update_mask]
+            # should be used to specify the fields being updated.
+            #
+            # To update the
+            # [auth_config][google.cloud.apihub.v1.PluginInstance.auth_config] and
+            # [additional_config][google.cloud.apihub.v1.PluginInstance.additional_config]
+            # of the plugin instance, use the
+            # [ApplyPluginInstanceConfig][google.cloud.apihub.v1.ApiHubPlugin.ApplyPluginInstanceConfig]
+            # method.
+            rpc :UpdatePluginInstance, ::Google::Cloud::ApiHub::V1::UpdatePluginInstanceRequest, ::Google::Cloud::ApiHub::V1::PluginInstance
+            # Deletes a plugin instance in the API hub.
+            rpc :DeletePluginInstance, ::Google::Cloud::ApiHub::V1::DeletePluginInstanceRequest, ::Google::Longrunning::Operation
           end
 
           Stub = Service.rpc_stub_class
