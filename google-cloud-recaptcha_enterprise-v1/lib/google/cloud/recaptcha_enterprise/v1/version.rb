@@ -21,7 +21,7 @@ module Google
   module Cloud
     module RecaptchaEnterprise
       module V1
-        VERSION = "1.8.0"
+        VERSION = "1.9.0"
       end
     end
   end
