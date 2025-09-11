@@ -503,7 +503,7 @@
   "google-cloud-memcache+FILLER": "0.0.0",
   "google-cloud-memcache-v1": "2.1.0",
   "google-cloud-memcache-v1+FILLER": "0.0.0",
-  "google-cloud-memcache-v1beta2": "0.13.0",
+  "google-cloud-memcache-v1beta2": "0.14.0",
   "google-cloud-memcache-v1beta2+FILLER": "0.0.0",
   "google-cloud-memorystore": "1.0.1",
   "google-cloud-memorystore+FILLER": "0.0.0",
