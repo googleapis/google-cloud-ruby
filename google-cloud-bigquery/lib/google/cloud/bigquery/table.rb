@@ -753,6 +753,37 @@ module Google
         end
 
         ##
+        # The default collation of the table.
+        #
+        # @return [String, nil] The default collation, or `nil` if not present or the object is a
+        #   reference (see {#reference?}).
+        #
+        # @!group Attributes
+        #
+        def default_collation
+          return nil if reference?
+          ensure_full_data!
+          @gapi.default_collation
+        end
+
+        ##
+        # Updates the default collation of the table.
+        #
+        # If the table is not a full resource representation (see
+        # {#resource_full?}), the full representation will be retrieved before
+        # the update to comply with ETag-based optimistic concurrency control.
+        #
+        # @param [String] new_default_collation The new default collation for the table.
+        #
+        # @!group Attributes
+        #
+        def default_collation= new_default_collation
+          reload! unless resource_full?
+          @gapi.update! default_collation: new_default_collation
+          patch_gapi! :default_collation
+        end
+
+        ##
         # The number of bytes in the table.
         #
         # @return [Integer, nil] The count of bytes in the table, or `nil` if
@@ -3706,7 +3737,7 @@ format_options_use_int64_timestamp: format_options_use_int64_timestamp
           #   At most 1 policy tag is currently allowed.
           # @param [Integer] max_length The maximum UTF-8 length of strings
           #   allowed in the field.
-          # @param default_value_expression [String] The default value of a field
+          # @param [String] default_value_expression The default value of a field
           #   using a SQL expression. It can only be set for top level fields (columns).
           #   Use a struct or array expression to specify default value for the entire struct or
           #   array. The valid SQL expressions are:
@@ -3722,6 +3753,11 @@ format_options_use_int64_timestamp: format_options_use_int64_timestamp
           #         `ST_GEOPOINT`
           #     - Struct or array composed with the above allowed functions, for example:
           #         "[CURRENT_DATE(), DATE '2020-01-01'"]
+          # @param [String] collation The collation of the field.
+          #   Collation can be set only when the type of field is `STRING`.
+          #   The following values are supported:
+          #     - `und:ci`: undetermined locale, case insensitive.
+          #     - (empty string): Default to case-sensitive behavior.
           #
           # @example
           #   require "google/cloud/bigquery"
@@ -3743,9 +3779,9 @@ format_options_use_int64_timestamp: format_options_use_int64_timestamp
           #
           # @!group Schema
           def string name, description: nil, mode: :nullable, policy_tags: nil, max_length: nil,
-                     default_value_expression: nil
+                     default_value_expression: nil, collation: nil
             schema.string name, description: description, mode: mode, policy_tags: policy_tags, max_length: max_length,
-                          default_value_expression: default_value_expression
+                          default_value_expression: default_value_expression, collation: collation
           end
 
           ##

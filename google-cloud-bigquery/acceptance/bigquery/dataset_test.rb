@@ -173,6 +173,20 @@ describe Google::Cloud::Bigquery::Dataset, :bigquery do
     dataset.default_expiration = nil
   end
 
+  it "sets and gets the default_collation" do
+    new_default_collation = "und:ci"
+
+    dataset.default_collation = new_default_collation
+
+    fresh = bigquery.dataset dataset.dataset_id
+    _(fresh).wont_be :nil?
+    _(fresh).must_be_kind_of Google::Cloud::Bigquery::Dataset
+    _(fresh.dataset_id).must_equal dataset.dataset_id
+    _(fresh.default_collation).must_equal new_default_collation
+  ensure
+    dataset.default_collation = nil
+  end
+
   it "should fail to set metadata with stale etag" do
     fresh = bigquery.dataset dataset.dataset_id
     _(fresh.etag).wont_be :nil?

@@ -134,4 +134,17 @@ describe Google::Cloud::Bigquery::Table, :attributes, :mock_bigquery do
   attr_test :buffer_bytes, 2000
   attr_test :buffer_rows, 200
 
+  it "gets full data for default_collation" do
+    mock = Minitest::Mock.new
+    mock.expect :get_table, table_full_gapi,
+      [table.project_id, table.dataset_id, table.table_id], **patch_table_args
+    table.service.mocked_service = mock
+
+    _(table.default_collation).must_equal "und:ci"
+
+    mock.verify
+
+    # A second call to attribute does not make a second HTTP API call
+    table.default_collation
+  end
 end
