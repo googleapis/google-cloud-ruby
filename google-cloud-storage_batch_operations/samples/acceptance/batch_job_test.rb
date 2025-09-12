@@ -25,7 +25,6 @@ describe "Batch jobs Snippets" do
   let(:file_content)   { "some content" }
   let(:remote_file_name) { "ruby_file_#{SecureRandom.hex}" }
 
-
   after :all do
     delete_bucket_helper bucket.name
   end
