@@ -1,5 +1,14 @@
 # Changelog
 
+### 2.2.0 (2025-09-12)
+
+#### Features
+
+* A new service `BusinessGlossaryService` is added 
+#### Documentation
+
+* Update README in wrapper libraries ([#31012](https://github.com/googleapis/google-cloud-ruby/issues/31012)) 
+
 ### 2.1.1 (2025-04-29)
 
 #### Bug Fixes
