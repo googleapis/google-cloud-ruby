@@ -1,5 +1,11 @@
 # Changelog
 
+### 1.11.2 (2025-09-12)
+
+#### Documentation
+
+* Update README in wrapper libraries ([#31309](https://github.com/googleapis/google-cloud-ruby/issues/31309)) 
+
 ### 1.11.1 (2025-04-29)
 
 #### Bug Fixes
