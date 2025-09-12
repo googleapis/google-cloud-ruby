@@ -20,7 +20,7 @@
 module Google
   module Cloud
     module DiscoveryEngine
-      VERSION = "2.3.0"
+      VERSION = "2.3.1"
     end
   end
 end
