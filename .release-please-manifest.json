@@ -413,7 +413,7 @@
   "google-cloud-gemini_data_analytics+FILLER": "0.0.0",
   "google-cloud-gemini_data_analytics-v1beta": "0.2.0",
   "google-cloud-gemini_data_analytics-v1beta+FILLER": "0.0.0",
-  "google-cloud-gke_backup": "2.0.1",
+  "google-cloud-gke_backup": "2.0.2",
   "google-cloud-gke_backup+FILLER": "0.0.0",
   "google-cloud-gke_backup-v1": "1.4.0",
   "google-cloud-gke_backup-v1+FILLER": "0.0.0",
