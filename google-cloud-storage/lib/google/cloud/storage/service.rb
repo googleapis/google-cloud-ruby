@@ -583,7 +583,6 @@ module Google
                           key: nil, range: nil, user_project: nil, options: {}
           options = key_options(key).merge(options)
           options = range_header options, range
-
           execute do
             service.get_object \
               bucket_name, file_path,
@@ -591,6 +590,7 @@ module Google
               user_project: user_project(user_project),
               options: options
           end
+          Google::Apis.logger.level = Logger::DEBUG
         end
 
         ##
