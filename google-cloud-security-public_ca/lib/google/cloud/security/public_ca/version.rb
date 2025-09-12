@@ -21,7 +21,7 @@ module Google
   module Cloud
     module Security
       module PublicCA
-        VERSION = "2.0.1"
+        VERSION = "2.0.2"
       end
     end
   end
