@@ -1,5 +1,11 @@
 # Release History
 
+### 1.5.4 (2025-09-12)
+
+#### Documentation
+
+* Add examples to wrapper libraries README.md ([#31320](https://github.com/googleapis/google-cloud-ruby/issues/31320)) 
+
 ### 1.5.3 (2025-08-12)
 
 #### Bug Fixes
