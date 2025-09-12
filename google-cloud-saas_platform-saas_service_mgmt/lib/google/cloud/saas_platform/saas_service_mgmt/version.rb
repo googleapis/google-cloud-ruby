@@ -21,7 +21,7 @@ module Google
   module Cloud
     module SaasPlatform
       module SaasServiceMgmt
-        VERSION = "0.1.0"
+        VERSION = "0.1.1"
       end
     end
   end
