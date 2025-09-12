@@ -757,7 +757,7 @@
   "google-cloud-speech-v2+FILLER": "0.0.0",
   "google-cloud-storage": "1.57.0",
   "google-cloud-storage+FILLER": "0.0.0",
-  "google-cloud-storage-control": "1.1.1",
+  "google-cloud-storage-control": "1.1.2",
   "google-cloud-storage-control+FILLER": "0.0.0",
   "google-cloud-storage-control-v2": "1.7.0",
   "google-cloud-storage-control-v2+FILLER": "0.0.0",
