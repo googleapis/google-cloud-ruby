@@ -1504,7 +1504,6 @@ describe Google::Cloud::Storage::Bucket, :mock_storage do
   end
 
   it "raises ArgumentError if upload_id is not provided to delete_resumable_upload" do
-
     error = _ { bucket.delete_resumable_upload  }.must_raise ArgumentError
     assert_match "wrong number of arguments", error.message
   end
