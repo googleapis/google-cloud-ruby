@@ -723,8 +723,8 @@ module Google
         #   upload. Can be a File object, or File-like object such as StringIO.
         # @param [String] upload_id Unique Id of a resumable upload
         #
-        # @return [Google::Apis::StorageV1::Object, Integer]
-        #   The object metadata on success, or 0 if request is not completed.
+        # @return [Google::Apis::StorageV1::Object, Boolean]
+        #   The object metadata on success, or 'false' request is not completed.
         #
         # @example
         #   require "google/cloud/storage"
@@ -1438,8 +1438,8 @@ module Google
         # Delete resumable upload
         # @param [String] upload_id Unique Id of a resumable upload
         #
-        # @return [Boolean,nil] Returns `true` if the resumable upload was deleted,
-        #  'nil' if the request is not completed.
+        # @return [Boolean] Returns `true` if the resumable upload was deleted,
+        #  'false' if the request is not completed.
         #
         # @example
         #   require "google/cloud/storage"
