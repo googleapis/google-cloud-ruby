@@ -1,5 +1,11 @@
 # Release History
 
+### 2.0.2 (2025-09-12)
+
+#### Documentation
+
+* Update README in wrapper libraries ([#31311](https://github.com/googleapis/google-cloud-ruby/issues/31311)) 
+
 ### 2.0.1 (2025-04-29)
 
 #### Bug Fixes
