@@ -104,6 +104,8 @@ module Google
 
                   default_config.rpcs.set_security_policy.timeout = 600.0
 
+                  default_config.rpcs.test_iam_permissions.timeout = 600.0
+
                   default_config
                 end
                 yield @configure if block_given?
@@ -1341,6 +1343,90 @@ module Google
               end
 
               ##
+              # Returns permissions that a caller has on the specified resource.
+              #
+              # @overload test_iam_permissions(request, options = nil)
+              #   Pass arguments to `test_iam_permissions` via a request object, either of type
+              #   {::Google::Cloud::Compute::V1::TestIamPermissionsTargetPoolRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::Compute::V1::TestIamPermissionsTargetPoolRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload test_iam_permissions(project: nil, region: nil, resource: nil, test_permissions_request_resource: nil)
+              #   Pass arguments to `test_iam_permissions` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param project [::String]
+              #     Project ID for this request.
+              #   @param region [::String]
+              #     The name of the region for this request.
+              #   @param resource [::String]
+              #     Name or id of the resource for this request.
+              #   @param test_permissions_request_resource [::Google::Cloud::Compute::V1::TestPermissionsRequest, ::Hash]
+              #     The body resource for this request
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Cloud::Compute::V1::TestPermissionsResponse]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Cloud::Compute::V1::TestPermissionsResponse]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/compute/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Compute::V1::TargetPools::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Compute::V1::TestIamPermissionsTargetPoolRequest.new
+              #
+              #   # Call the test_iam_permissions method.
+              #   result = client.test_iam_permissions request
+              #
+              #   # The returned object is of type Google::Cloud::Compute::V1::TestPermissionsResponse.
+              #   p result
+              #
+              def test_iam_permissions request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Compute::V1::TestIamPermissionsTargetPoolRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.test_iam_permissions.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::Compute::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.test_iam_permissions.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.test_iam_permissions.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @target_pools_stub.test_iam_permissions request, options do |result, operation|
+                  yield result, operation if block_given?
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
               # Configuration class for the TargetPools REST API.
               #
               # This class represents the configuration for TargetPools REST,
@@ -1546,6 +1632,11 @@ module Google
                   # @return [::Gapic::Config::Method]
                   #
                   attr_reader :set_security_policy
+                  ##
+                  # RPC-specific configuration for `test_iam_permissions`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :test_iam_permissions
 
                   # @private
                   def initialize parent_rpcs = nil
@@ -1573,6 +1664,8 @@ module Google
                     @set_backup = ::Gapic::Config::Method.new set_backup_config
                     set_security_policy_config = parent_rpcs.set_security_policy if parent_rpcs.respond_to? :set_security_policy
                     @set_security_policy = ::Gapic::Config::Method.new set_security_policy_config
+                    test_iam_permissions_config = parent_rpcs.test_iam_permissions if parent_rpcs.respond_to? :test_iam_permissions
+                    @test_iam_permissions = ::Gapic::Config::Method.new test_iam_permissions_config
 
                     yield self if block_given?
                   end

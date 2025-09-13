@@ -73,6 +73,8 @@ module Google
 
                   default_config.rpcs.add_access_config.timeout = 600.0
 
+                  default_config.rpcs.add_network_interface.timeout = 600.0
+
                   default_config.rpcs.add_resource_policies.timeout = 600.0
 
                   default_config.rpcs.aggregated_list.timeout = 600.0
@@ -87,6 +89,8 @@ module Google
                   default_config.rpcs.delete.timeout = 600.0
 
                   default_config.rpcs.delete_access_config.timeout = 600.0
+
+                  default_config.rpcs.delete_network_interface.timeout = 600.0
 
                   default_config.rpcs.detach_disk.timeout = 600.0
 
@@ -399,6 +403,102 @@ module Google
                                        retry_policy: @config.retry_policy
 
                 @instances_stub.add_access_config request, options do |result, response|
+                  result = ::Google::Cloud::Compute::V1::ZoneOperations::Rest::NonstandardLro.create_operation(
+                    operation: result,
+                    client: zone_operations,
+                    request_values: {
+                      "project" => request.project,
+                      "zone" => request.zone
+                    },
+                    options: options
+                  )
+                  yield result, response if block_given?
+                  throw :response, result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Adds one dynamic network interface to an active instance.
+              #
+              # @overload add_network_interface(request, options = nil)
+              #   Pass arguments to `add_network_interface` via a request object, either of type
+              #   {::Google::Cloud::Compute::V1::AddNetworkInterfaceInstanceRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::Compute::V1::AddNetworkInterfaceInstanceRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload add_network_interface(instance: nil, network_interface_resource: nil, project: nil, request_id: nil, zone: nil)
+              #   Pass arguments to `add_network_interface` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param instance [::String]
+              #     The instance name for this request stored as resource_id. Name should conform to RFC1035 or be an unsigned long integer.
+              #   @param network_interface_resource [::Google::Cloud::Compute::V1::NetworkInterface, ::Hash]
+              #     The body resource for this request
+              #   @param project [::String]
+              #     Project ID for this request.
+              #   @param request_id [::String]
+              #     An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
+              #   @param zone [::String]
+              #     The name of the zone for this request.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Gapic::GenericLRO::Operation]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Gapic::GenericLRO::Operation]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/compute/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Compute::V1::Instances::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Compute::V1::AddNetworkInterfaceInstanceRequest.new
+              #
+              #   # Call the add_network_interface method.
+              #   result = client.add_network_interface request
+              #
+              #   # The returned object is of type Google::Cloud::Compute::V1::Operation.
+              #   p result
+              #
+              def add_network_interface request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Compute::V1::AddNetworkInterfaceInstanceRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.add_network_interface.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::Compute::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.add_network_interface.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.add_network_interface.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @instances_stub.add_network_interface request, options do |result, response|
                   result = ::Google::Cloud::Compute::V1::ZoneOperations::Rest::NonstandardLro.create_operation(
                     operation: result,
                     client: zone_operations,
@@ -973,6 +1073,102 @@ module Google
                                        retry_policy: @config.retry_policy
 
                 @instances_stub.delete_access_config request, options do |result, response|
+                  result = ::Google::Cloud::Compute::V1::ZoneOperations::Rest::NonstandardLro.create_operation(
+                    operation: result,
+                    client: zone_operations,
+                    request_values: {
+                      "project" => request.project,
+                      "zone" => request.zone
+                    },
+                    options: options
+                  )
+                  yield result, response if block_given?
+                  throw :response, result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Deletes one dynamic network interface from an active instance. InstancesDeleteNetworkInterfaceRequest indicates: - instance from which to delete, using project+zone+resource_id fields; - dynamic network interface to be deleted, using network_interface_name field;
+              #
+              # @overload delete_network_interface(request, options = nil)
+              #   Pass arguments to `delete_network_interface` via a request object, either of type
+              #   {::Google::Cloud::Compute::V1::DeleteNetworkInterfaceInstanceRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::Compute::V1::DeleteNetworkInterfaceInstanceRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload delete_network_interface(instance: nil, network_interface_name: nil, project: nil, request_id: nil, zone: nil)
+              #   Pass arguments to `delete_network_interface` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param instance [::String]
+              #     The instance name for this request stored as resource_id. Name should conform to RFC1035 or be an unsigned long integer.
+              #   @param network_interface_name [::String]
+              #     The name of the dynamic network interface to be deleted from the instance.
+              #   @param project [::String]
+              #     Project ID for this request.
+              #   @param request_id [::String]
+              #     An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
+              #   @param zone [::String]
+              #     The name of the zone for this request.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Gapic::GenericLRO::Operation]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Gapic::GenericLRO::Operation]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/compute/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Compute::V1::Instances::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Compute::V1::DeleteNetworkInterfaceInstanceRequest.new
+              #
+              #   # Call the delete_network_interface method.
+              #   result = client.delete_network_interface request
+              #
+              #   # The returned object is of type Google::Cloud::Compute::V1::Operation.
+              #   p result
+              #
+              def delete_network_interface request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Compute::V1::DeleteNetworkInterfaceInstanceRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.delete_network_interface.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::Compute::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.delete_network_interface.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.delete_network_interface.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @instances_stub.delete_network_interface request, options do |result, response|
                   result = ::Google::Cloud::Compute::V1::ZoneOperations::Rest::NonstandardLro.create_operation(
                     operation: result,
                     client: zone_operations,
@@ -5049,6 +5245,11 @@ module Google
                   #
                   attr_reader :add_access_config
                   ##
+                  # RPC-specific configuration for `add_network_interface`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :add_network_interface
+                  ##
                   # RPC-specific configuration for `add_resource_policies`
                   # @return [::Gapic::Config::Method]
                   #
@@ -5078,6 +5279,11 @@ module Google
                   # @return [::Gapic::Config::Method]
                   #
                   attr_reader :delete_access_config
+                  ##
+                  # RPC-specific configuration for `delete_network_interface`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :delete_network_interface
                   ##
                   # RPC-specific configuration for `detach_disk`
                   # @return [::Gapic::Config::Method]
@@ -5293,6 +5499,8 @@ module Google
                   def initialize parent_rpcs = nil
                     add_access_config_config = parent_rpcs.add_access_config if parent_rpcs.respond_to? :add_access_config
                     @add_access_config = ::Gapic::Config::Method.new add_access_config_config
+                    add_network_interface_config = parent_rpcs.add_network_interface if parent_rpcs.respond_to? :add_network_interface
+                    @add_network_interface = ::Gapic::Config::Method.new add_network_interface_config
                     add_resource_policies_config = parent_rpcs.add_resource_policies if parent_rpcs.respond_to? :add_resource_policies
                     @add_resource_policies = ::Gapic::Config::Method.new add_resource_policies_config
                     aggregated_list_config = parent_rpcs.aggregated_list if parent_rpcs.respond_to? :aggregated_list
@@ -5305,6 +5513,8 @@ module Google
                     @delete = ::Gapic::Config::Method.new delete_config
                     delete_access_config_config = parent_rpcs.delete_access_config if parent_rpcs.respond_to? :delete_access_config
                     @delete_access_config = ::Gapic::Config::Method.new delete_access_config_config
+                    delete_network_interface_config = parent_rpcs.delete_network_interface if parent_rpcs.respond_to? :delete_network_interface
+                    @delete_network_interface = ::Gapic::Config::Method.new delete_network_interface_config
                     detach_disk_config = parent_rpcs.detach_disk if parent_rpcs.respond_to? :detach_disk
                     @detach_disk = ::Gapic::Config::Method.new detach_disk_config
                     get_config = parent_rpcs.get if parent_rpcs.respond_to? :get

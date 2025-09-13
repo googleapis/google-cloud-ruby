@@ -420,7 +420,7 @@ module Google
               #   @param options [::Gapic::CallOptions, ::Hash]
               #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
               #
-              # @overload get(project: nil, region: nil, service_attachment: nil)
+              # @overload get(project: nil, region: nil, service_attachment: nil, show_nat_ips: nil)
               #   Pass arguments to `get` via keyword arguments. Note that at
               #   least one keyword argument is required. To specify no parameters, or to keep all
               #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -431,6 +431,8 @@ module Google
               #     Name of the region of this request.
               #   @param service_attachment [::String]
               #     Name of the ServiceAttachment resource to return.
+              #   @param show_nat_ips [::Boolean]
+              #     Indicates whether NAT IPs should be included in the response.
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Google::Cloud::Compute::V1::ServiceAttachment]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
