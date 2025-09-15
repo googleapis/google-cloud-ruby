@@ -118,6 +118,14 @@ module Google
                 uri_method: :get,
                 uri_template: "/v1/{resource}:getIamPolicy",
                 matches: [
+                  ["resource", %r{^projects/[^/]+/locations/[^/]+/kafkaSources/[^/]+/?$}, false]
+                ],
+                body: nil
+              ),
+              Gapic::Rest::GrpcTranscoder::HttpBinding.create_with_validation(
+                uri_method: :get,
+                uri_template: "/v1/{resource}:getIamPolicy",
+                matches: [
                   ["resource", %r{^projects/[^/]+/locations/[^/]+/googleApiSources/[^/]+/?$}, false]
                 ],
                 body: nil
@@ -177,6 +185,14 @@ module Google
                 uri_method: :post,
                 uri_template: "/v1/{resource}:setIamPolicy",
                 matches: [
+                  ["resource", %r{^projects/[^/]+/locations/[^/]+/kafkaSources/[^/]+/?$}, false]
+                ],
+                body: "*"
+              ),
+              Gapic::Rest::GrpcTranscoder::HttpBinding.create_with_validation(
+                uri_method: :post,
+                uri_template: "/v1/{resource}:setIamPolicy",
+                matches: [
                   ["resource", %r{^projects/[^/]+/locations/[^/]+/googleApiSources/[^/]+/?$}, false]
                 ],
                 body: "*"
@@ -229,6 +245,14 @@ module Google
                 uri_template: "/v1/{resource}:testIamPermissions",
                 matches: [
                   ["resource", %r{^projects/[^/]+/locations/[^/]+/pipelines/[^/]+/?$}, false]
+                ],
+                body: "*"
+              ),
+              Gapic::Rest::GrpcTranscoder::HttpBinding.create_with_validation(
+                uri_method: :post,
+                uri_template: "/v1/{resource}:testIamPermissions",
+                matches: [
+                  ["resource", %r{^projects/[^/]+/locations/[^/]+/kafkaSources/[^/]+/?$}, false]
                 ],
                 body: "*"
               ),

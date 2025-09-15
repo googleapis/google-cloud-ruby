@@ -1808,7 +1808,9 @@ module Google
               end
 
               ##
-              # Get a GoogleChannelConfig
+              # Get a GoogleChannelConfig.
+              # The name of the GoogleChannelConfig in the response is ALWAYS coded with
+              # projectID.
               #
               # @overload get_google_channel_config(request, options = nil)
               #   Pass arguments to `get_google_channel_config` via a request object, either of type
@@ -2064,7 +2066,7 @@ module Google
               #   the default parameter values, pass an empty Hash as a request object (see above).
               #
               #   @param parent [::String]
-              #     Required. The parent collection to list triggers on.
+              #     Required. The parent collection to list message buses on.
               #   @param page_size [::Integer]
               #     Optional. The maximum number of results to return on each page.
               #
@@ -2259,7 +2261,7 @@ module Google
               #     Required. The message bus to create.
               #   @param message_bus_id [::String]
               #     Required. The user-provided ID to be assigned to the MessageBus. It should
-              #     match the format (^[a-z]([a-z0-9-]\\{0,61}[a-z0-9])?$)
+              #     match the format `^[a-z]([a-z0-9-]{0,61}[a-z0-9])?$`.
               #   @param validate_only [::Boolean]
               #     Optional. If set, validate the request and preview the review, but do not
               #     post it.
@@ -2727,7 +2729,7 @@ module Google
               #     Required. The enrollment to create.
               #   @param enrollment_id [::String]
               #     Required. The user-provided ID to be assigned to the Enrollment. It should
-              #     match the format (^[a-z]([a-z0-9-]\\{0,61}[a-z0-9])?$).
+              #     match the format `^[a-z]([a-z0-9-]{0,61}[a-z0-9])?$`.
               #   @param validate_only [::Boolean]
               #     Optional. If set, validate the request and preview the review, but do not
               #     post it.
@@ -3194,7 +3196,8 @@ module Google
               #   @param pipeline [::Google::Cloud::Eventarc::V1::Pipeline, ::Hash]
               #     Required. The pipeline to create.
               #   @param pipeline_id [::String]
-              #     Required. The user-provided ID to be assigned to the Pipeline.
+              #     Required. The user-provided ID to be assigned to the Pipeline. It should
+              #     match the format `^[a-z]([a-z0-9-]{0,61}[a-z0-9])?$`.
               #   @param validate_only [::Boolean]
               #     Optional. If set, validate the request and preview the review, but do not
               #     post it.
@@ -3662,7 +3665,7 @@ module Google
               #     Required. The google api source to create.
               #   @param google_api_source_id [::String]
               #     Required. The user-provided ID to be assigned to the GoogleApiSource. It
-              #     should match the format (^[a-z]([a-z0-9-]\\{0,61}[a-z0-9])?$).
+              #     should match the format `^[a-z]([a-z0-9-]{0,61}[a-z0-9])?$`.
               #   @param validate_only [::Boolean]
               #     Optional. If set, validate the request and preview the review, but do not
               #     post it.

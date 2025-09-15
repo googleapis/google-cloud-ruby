@@ -61,7 +61,7 @@ module Google
         #     by the provider to register the channel for publishing.
         # @!attribute [rw] crypto_key_name
         #   @return [::String]
-        #     Resource name of a KMS crypto key (managed by the user) used to
+        #     Optional. Resource name of a KMS crypto key (managed by the user) used to
         #     encrypt/decrypt their event data.
         #
         #     It must match the pattern
@@ -70,9 +70,21 @@ module Google
         #   @return [::Boolean]
         #     Output only. Whether or not this Channel satisfies the requirements of
         #     physical zone separation
+        # @!attribute [rw] labels
+        #   @return [::Google::Protobuf::Map{::String => ::String}]
+        #     Optional. Resource labels.
         class Channel
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # @!attribute [rw] key
+          #   @return [::String]
+          # @!attribute [rw] value
+          #   @return [::String]
+          class LabelsEntry
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
 
           # State lists all the possible states of a Channel
           module State
