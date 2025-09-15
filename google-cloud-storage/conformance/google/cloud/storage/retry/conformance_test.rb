@@ -59,11 +59,6 @@ class ConformanceTest < MockStorage
       begin
         run_retry_test test_id, lib_func, scenario.preconditionProvided, method.resources
       rescue => e
-        puts "**********************"
-        puts "Error response- #{response.body}"
-        puts "Error occurred while running test #{scenario}"
-        puts "Error occurred while running test in function- #{lib_func}"
-        puts "**********************"
 
         success_result = false
       end
