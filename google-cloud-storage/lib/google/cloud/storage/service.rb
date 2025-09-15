@@ -583,6 +583,7 @@ module Google
                           key: nil, range: nil, user_project: nil, options: {}
           options = key_options(key).merge(options)
           options = range_header options, range
+          Google::Apis.logger.level = Logger::DEBUG
 
           execute do
             service.get_object \
