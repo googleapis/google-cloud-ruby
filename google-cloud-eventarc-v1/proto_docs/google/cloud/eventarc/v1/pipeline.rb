@@ -86,11 +86,15 @@ module Google
         # @!attribute [rw] retry_policy
         #   @return [::Google::Cloud::Eventarc::V1::Pipeline::RetryPolicy]
         #     Optional. The retry policy to use in the pipeline.
-        # @!attribute [rw] etag
+        # @!attribute [r] etag
         #   @return [::String]
         #     Output only. This checksum is computed by the server based on the value of
         #     other fields, and might be sent only on create requests to ensure that the
         #     client has an up-to-date value before proceeding.
+        # @!attribute [r] satisfies_pzs
+        #   @return [::Boolean]
+        #     Output only. Whether or not this Pipeline satisfies the requirements of
+        #     physical zone separation
         class Pipeline
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -181,9 +185,9 @@ module Google
           #   @return [::Google::Cloud::Eventarc::V1::Pipeline::Destination::AuthenticationConfig]
           #     Optional. An authentication config used to authenticate message requests,
           #     such that destinations can verify the source. For example, this can be
-          #     used with private GCP destinations that require GCP credentials to access
-          #     like Cloud Run. This field is optional and should be set only by users
-          #     interested in authenticated push
+          #     used with private Google Cloud destinations that require Google Cloud
+          #     credentials for access like Cloud Run. This field is optional and should
+          #     be set only by users interested in authenticated push.
           # @!attribute [rw] output_payload_format
           #   @return [::Google::Cloud::Eventarc::V1::Pipeline::MessagePayloadFormat]
           #     Optional. The message format before it is delivered to the destination.
@@ -209,7 +213,7 @@ module Google
             # Represents a HTTP endpoint destination.
             # @!attribute [rw] uri
             #   @return [::String]
-            #     Required. The URI of the HTTP enpdoint.
+            #     Required. The URI of the HTTP endpoint.
             #
             #     The value must be a RFC2396 URI string.
             #     Examples: `https://svc.us-central1.p.local:8080/route`.
@@ -221,10 +225,11 @@ module Google
             #
             #     If a binding expression is not specified here, the message
             #     is treated as a CloudEvent and is mapped to the HTTP request according
-            #     to the CloudEvent HTTP Protocol Binding Binary Content Mode. In this
-            #     representation, all fields except the `data` and `datacontenttype`
-            #     field on the message are mapped to HTTP request headers with a prefix
-            #     of `ce-`.
+            #     to the CloudEvent HTTP Protocol Binding Binary Content Mode
+            #     (https://github.com/cloudevents/spec/blob/main/cloudevents/bindings/http-protocol-binding.md#31-binary-content-mode).
+            #     In this representation, all fields except the `data` and
+            #     `datacontenttype` field on the message are mapped to HTTP request
+            #     headers with a prefix of `ce-`.
             #
             #     To construct the HTTP request payload and the value of the content-type
             #     HTTP header, the payload format is defined as follows:
@@ -254,7 +259,7 @@ module Google
             #     - If a map named `headers` exists on the result of the expression,
             #     then its key/value pairs are directly mapped to the HTTP request
             #     headers. The headers values are constructed from the corresponding
-            #     value type’s canonical representation. If the `headers` field doesn’t
+            #     value type's canonical representation. If the `headers` field doesn't
             #     exist then the resulting HTTP request will be the headers of the
             #     CloudEvent HTTP Binding Binary Content Mode representation of the final
             #     message. Note: If the specified binding expression, has updated the
@@ -296,6 +301,11 @@ module Google
             #       "body": "new-body"
             #     }
             #     ```
+            #     - The default binding for the message payload can be accessed using the
+            #     `body` variable. It conatins a string representation of the message
+            #     payload in the format specified by the `output_payload_format` field.
+            #     If the `input_payload_format` field is not set, the `body`
+            #     variable contains the same message payload bytes that were published.
             #
             #     Additionally, the following CEL extension functions are provided for
             #     use in this CEL expression:
@@ -353,33 +363,28 @@ module Google
             #     - toMap:
             #       [map1, map2, ...].toMap() -> map
             #         - Converts a CEL list of CEL maps to a single CEL map
-            #     - toDestinationPayloadFormat():
-            #       message.data.toDestinationPayloadFormat() -> string or bytes
-            #         - Converts the message data to the destination payload format
-            #         specified in Pipeline.Destination.output_payload_format
-            #         - This function is meant to be applied to the message.data field.
-            #         - If the destination payload format is not set, the function will
-            #         return the message data unchanged.
             #     - toCloudEventJsonWithPayloadFormat:
             #       message.toCloudEventJsonWithPayloadFormat() -> map
             #         - Converts a message to the corresponding structure of JSON
-            #         format for CloudEvents
-            #         - This function applies toDestinationPayloadFormat() to the
-            #         message data. It also sets the corresponding datacontenttype of
+            #         format for CloudEvents.
+            #         - It converts `data` to destination payload format
+            #         specified in `output_payload_format`. If `output_payload_format` is
+            #         not set, the data will remain unchanged.
+            #         - It also sets the corresponding datacontenttype of
             #         the CloudEvent, as indicated by
-            #         Pipeline.Destination.output_payload_format. If no
-            #         output_payload_format is set it will use the existing
-            #         datacontenttype on the CloudEvent if present, else leave
-            #         datacontenttype absent.
+            #         `output_payload_format`. If no
+            #         `output_payload_format` is set it will use the value of the
+            #         "datacontenttype" attribute on the CloudEvent if present, else
+            #         remove "datacontenttype" attribute.
             #         - This function expects that the content of the message will
-            #         adhere to the standard CloudEvent format. If it doesn’t then this
+            #         adhere to the standard CloudEvent format. If it doesn't then this
             #         function will fail.
             #         - The result is a CEL map that corresponds to the JSON
             #         representation of the CloudEvent. To convert that data to a JSON
             #         string it can be chained with the toJsonString function.
             #
             #     The Pipeline expects that the message it receives adheres to the
-            #     standard CloudEvent format. If it doesn’t then the outgoing message
+            #     standard CloudEvent format. If it doesn't then the outgoing message
             #     request may fail with a persistent error.
             class HttpEndpoint
               include ::Google::Protobuf::MessageExts
@@ -390,7 +395,7 @@ module Google
             # @!attribute [rw] google_oidc
             #   @return [::Google::Cloud::Eventarc::V1::Pipeline::Destination::AuthenticationConfig::OidcToken]
             #     Optional. This authenticate method will apply Google OIDC tokens
-            #     signed by a GCP service account to the requests.
+            #     signed by a Google Cloud service account to the requests.
             #
             #     Note: The following fields are mutually exclusive: `google_oidc`, `oauth_token`. If a field in that set is populated, all other fields in the set will automatically be cleared.
             # @!attribute [rw] oauth_token
@@ -409,15 +414,15 @@ module Google
               extend ::Google::Protobuf::MessageExts::ClassMethods
 
               # Represents a config used to authenticate with a Google OIDC token using
-              # a GCP service account. Use this authentication method to invoke your
-              # Cloud Run and Cloud Functions destinations or HTTP endpoints that
-              # support Google OIDC.
+              # a Google Cloud service account. Use this authentication method to
+              # invoke your Cloud Run and Cloud Functions destinations or HTTP
+              # endpoints that support Google OIDC.
               # @!attribute [rw] service_account
               #   @return [::String]
               #     Required. Service account email used to generate the OIDC Token.
               #     The principal who calls this API must have
               #     iam.serviceAccounts.actAs permission in the service account. See
-              #     https://cloud.google.com/iam/docs/understanding-service-accounts?hl=en#sa_common
+              #     https://cloud.google.com/iam/docs/understanding-service-accounts
               #     for more information. Eventarc service agents must have
               #     roles/roles/iam.serviceAccountTokenCreator role to allow the
               #     Pipeline to create OpenID tokens for authenticated requests.
@@ -441,7 +446,7 @@ module Google
               #     token](https://developers.google.com/identity/protocols/OAuth2).
               #     The principal who calls this API must have
               #     iam.serviceAccounts.actAs permission in the service account. See
-              #     https://cloud.google.com/iam/docs/understanding-service-accounts?hl=en#sa_common
+              #     https://cloud.google.com/iam/docs/understanding-service-accounts
               #     for more information. Eventarc service agents must have
               #     roles/roles/iam.serviceAccountTokenCreator role to allow Pipeline
               #     to create OAuth2 tokens for authenticated requests.
@@ -539,7 +544,7 @@ module Google
             #         datacontenttype on the CloudEvent if present, else leave
             #         datacontenttype absent.
             #         - This function expects that the content of the message will
-            #         adhere to the standard CloudEvent format. If it doesn’t then this
+            #         adhere to the standard CloudEvent format. If it doesn't then this
             #         function will fail.
             #         - The result is a CEL map that corresponds to the JSON
             #         representation of the CloudEvent. To convert that data to a JSON

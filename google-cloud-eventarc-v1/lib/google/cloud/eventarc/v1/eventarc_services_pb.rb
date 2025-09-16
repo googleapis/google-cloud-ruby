@@ -66,7 +66,9 @@ module Google
             rpc :CreateChannelConnection, ::Google::Cloud::Eventarc::V1::CreateChannelConnectionRequest, ::Google::Longrunning::Operation
             # Delete a single ChannelConnection.
             rpc :DeleteChannelConnection, ::Google::Cloud::Eventarc::V1::DeleteChannelConnectionRequest, ::Google::Longrunning::Operation
-            # Get a GoogleChannelConfig
+            # Get a GoogleChannelConfig.
+            # The name of the GoogleChannelConfig in the response is ALWAYS coded with
+            # projectID.
             rpc :GetGoogleChannelConfig, ::Google::Cloud::Eventarc::V1::GetGoogleChannelConfigRequest, ::Google::Cloud::Eventarc::V1::GoogleChannelConfig
             # Update a single GoogleChannelConfig
             rpc :UpdateGoogleChannelConfig, ::Google::Cloud::Eventarc::V1::UpdateGoogleChannelConfigRequest, ::Google::Cloud::Eventarc::V1::GoogleChannelConfig

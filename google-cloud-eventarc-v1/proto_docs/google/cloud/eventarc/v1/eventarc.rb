@@ -402,7 +402,7 @@ module Google
         # The request message for the ListMessageBuses method.
         # @!attribute [rw] parent
         #   @return [::String]
-        #     Required. The parent collection to list triggers on.
+        #     Required. The parent collection to list message buses on.
         # @!attribute [rw] page_size
         #   @return [::Integer]
         #     Optional. The maximum number of results to return on each page.
@@ -493,7 +493,7 @@ module Google
         # @!attribute [rw] message_bus_id
         #   @return [::String]
         #     Required. The user-provided ID to be assigned to the MessageBus. It should
-        #     match the format (^[a-z]([a-z0-9-]\\{0,61}[a-z0-9])?$)
+        #     match the format `^[a-z]([a-z0-9-]{0,61}[a-z0-9])?$`.
         # @!attribute [rw] validate_only
         #   @return [::Boolean]
         #     Optional. If set, validate the request and preview the review, but do not
@@ -612,7 +612,7 @@ module Google
         # @!attribute [rw] enrollment_id
         #   @return [::String]
         #     Required. The user-provided ID to be assigned to the Enrollment. It should
-        #     match the format (^[a-z]([a-z0-9-]\\{0,61}[a-z0-9])?$).
+        #     match the format `^[a-z]([a-z0-9-]{0,61}[a-z0-9])?$`.
         # @!attribute [rw] validate_only
         #   @return [::Boolean]
         #     Optional. If set, validate the request and preview the review, but do not
@@ -730,7 +730,8 @@ module Google
         #     Required. The pipeline to create.
         # @!attribute [rw] pipeline_id
         #   @return [::String]
-        #     Required. The user-provided ID to be assigned to the Pipeline.
+        #     Required. The user-provided ID to be assigned to the Pipeline. It should
+        #     match the format `^[a-z]([a-z0-9-]{0,61}[a-z0-9])?$`.
         # @!attribute [rw] validate_only
         #   @return [::Boolean]
         #     Optional. If set, validate the request and preview the review, but do not
@@ -849,7 +850,7 @@ module Google
         # @!attribute [rw] google_api_source_id
         #   @return [::String]
         #     Required. The user-provided ID to be assigned to the GoogleApiSource. It
-        #     should match the format (^[a-z]([a-z0-9-]\\{0,61}[a-z0-9])?$).
+        #     should match the format `^[a-z]([a-z0-9-]{0,61}[a-z0-9])?$`.
         # @!attribute [rw] validate_only
         #   @return [::Boolean]
         #     Optional. If set, validate the request and preview the review, but do not

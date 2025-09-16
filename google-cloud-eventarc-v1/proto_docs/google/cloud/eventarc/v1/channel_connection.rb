@@ -49,9 +49,21 @@ module Google
         #     Input only. Activation token for the channel. The token will be used
         #     during the creation of ChannelConnection to bind the channel with the
         #     provider project. This field will not be stored in the provider resource.
+        # @!attribute [rw] labels
+        #   @return [::Google::Protobuf::Map{::String => ::String}]
+        #     Optional. Resource labels.
         class ChannelConnection
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # @!attribute [rw] key
+          #   @return [::String]
+          # @!attribute [rw] value
+          #   @return [::String]
+          class LabelsEntry
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
         end
       end
     end
