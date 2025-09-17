@@ -194,6 +194,136 @@ class ::Google::Cloud::ConfidentialComputing::V1::ConfidentialComputing::ClientT
     end
   end
 
+  def test_verify_confidential_space
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::ConfidentialComputing::V1::VerifyConfidentialSpaceResponse.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    td_ccel = {}
+    challenge = "hello world"
+    gcp_credentials = {}
+    signed_entities = [{}]
+    gce_shielded_identity = {}
+    options = {}
+
+    verify_confidential_space_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :verify_confidential_space, name
+      assert_kind_of ::Google::Cloud::ConfidentialComputing::V1::VerifyConfidentialSpaceRequest, request
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::ConfidentialComputing::V1::TdxCcelAttestation), request["td_ccel"]
+      assert_equal :td_ccel, request.tee_attestation
+      assert_equal "hello world", request["challenge"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::ConfidentialComputing::V1::GcpCredentials), request["gcp_credentials"]
+      assert_kind_of ::Google::Cloud::ConfidentialComputing::V1::SignedEntity, request["signed_entities"].first
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::ConfidentialComputing::V1::GceShieldedIdentity), request["gce_shielded_identity"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::ConfidentialComputing::V1::VerifyConfidentialSpaceRequest::ConfidentialSpaceOptions), request["options"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, verify_confidential_space_client_stub do
+      # Create client
+      client = ::Google::Cloud::ConfidentialComputing::V1::ConfidentialComputing::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.verify_confidential_space({ td_ccel: td_ccel, challenge: challenge, gcp_credentials: gcp_credentials, signed_entities: signed_entities, gce_shielded_identity: gce_shielded_identity, options: options }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.verify_confidential_space td_ccel: td_ccel, challenge: challenge, gcp_credentials: gcp_credentials, signed_entities: signed_entities, gce_shielded_identity: gce_shielded_identity, options: options do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.verify_confidential_space ::Google::Cloud::ConfidentialComputing::V1::VerifyConfidentialSpaceRequest.new(td_ccel: td_ccel, challenge: challenge, gcp_credentials: gcp_credentials, signed_entities: signed_entities, gce_shielded_identity: gce_shielded_identity, options: options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.verify_confidential_space({ td_ccel: td_ccel, challenge: challenge, gcp_credentials: gcp_credentials, signed_entities: signed_entities, gce_shielded_identity: gce_shielded_identity, options: options }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.verify_confidential_space(::Google::Cloud::ConfidentialComputing::V1::VerifyConfidentialSpaceRequest.new(td_ccel: td_ccel, challenge: challenge, gcp_credentials: gcp_credentials, signed_entities: signed_entities, gce_shielded_identity: gce_shielded_identity, options: options), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, verify_confidential_space_client_stub.call_rpc_count
+    end
+  end
+
+  def test_verify_confidential_gke
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::ConfidentialComputing::V1::VerifyConfidentialGkeResponse.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    tpm_attestation = {}
+    challenge = "hello world"
+
+    verify_confidential_gke_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :verify_confidential_gke, name
+      assert_kind_of ::Google::Cloud::ConfidentialComputing::V1::VerifyConfidentialGkeRequest, request
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::ConfidentialComputing::V1::TpmAttestation), request["tpm_attestation"]
+      assert_equal :tpm_attestation, request.tee_attestation
+      assert_equal "hello world", request["challenge"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, verify_confidential_gke_client_stub do
+      # Create client
+      client = ::Google::Cloud::ConfidentialComputing::V1::ConfidentialComputing::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.verify_confidential_gke({ tpm_attestation: tpm_attestation, challenge: challenge }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.verify_confidential_gke tpm_attestation: tpm_attestation, challenge: challenge do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.verify_confidential_gke ::Google::Cloud::ConfidentialComputing::V1::VerifyConfidentialGkeRequest.new(tpm_attestation: tpm_attestation, challenge: challenge) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.verify_confidential_gke({ tpm_attestation: tpm_attestation, challenge: challenge }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.verify_confidential_gke(::Google::Cloud::ConfidentialComputing::V1::VerifyConfidentialGkeRequest.new(tpm_attestation: tpm_attestation, challenge: challenge), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, verify_confidential_gke_client_stub.call_rpc_count
+    end
+  end
+
   def test_configure
     grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
 
