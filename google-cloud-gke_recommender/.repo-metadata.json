@@ -8,7 +8,7 @@
     "name": "gkerecommender",
     "name_pretty": "GKE Recommender API",
     "product_documentation": "https://cloud.google.com/kubernetes-engine/docs/how-to/machine-learning/inference-quickstart",
-    "release_level": "unreleased",
+    "release_level": "preview",
     "repo": "googleapis/google-cloud-ruby",
     "requires_billing": true,
     "ruby-cloud-description": "GKE Recommender API.",
