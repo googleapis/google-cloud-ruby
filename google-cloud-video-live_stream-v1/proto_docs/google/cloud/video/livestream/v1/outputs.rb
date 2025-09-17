@@ -153,6 +153,119 @@ module Google
             end
           end
 
+          # Multiplexing settings for output streams used in
+          # {::Google::Cloud::Video::LiveStream::V1::Distribution Distribution}.
+          # @!attribute [rw] key
+          #   @return [::String]
+          #     Required. A unique key for this distribution stream. The key must be 1-63
+          #     characters in length. The key must begin and end with a letter (regardless
+          #     of case) or a number, but can contain dashes or underscores in between.
+          # @!attribute [rw] container
+          #   @return [::String]
+          #     Required. The container format.
+          #
+          #     Supported container formats:
+          #
+          #     - `ts`, must contain exactly one audio stream and up to one video stream.
+          #     - `flv`, must contain at most one audio stream and at most one video
+          #     stream.
+          # @!attribute [rw] elementary_streams
+          #   @return [::Array<::String>]
+          #     Required. List of `ElementaryStream`
+          #     {::Google::Cloud::Video::LiveStream::V1::ElementaryStream#key key}s multiplexed
+          #     in this stream. Must contain at least one audio stream and up to one video
+          #     stream.
+          class DistributionStream
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Distribution configuration.
+          # @!attribute [rw] key
+          #   @return [::String]
+          #     Required. A unique key for this distribution. The key must be 1-63
+          #     characters in length. The key must begin and end with a letter (regardless
+          #     of case) or a number, but can contain dashes or underscores in between.
+          # @!attribute [rw] distribution_stream
+          #   @return [::String]
+          #     Required. `DistributionStream`
+          #     {::Google::Cloud::Video::LiveStream::V1::DistributionStream#key key}s that should
+          #     appear in this distribution output.
+          #
+          #     - For SRT protocol, only `ts` distribution streams can be specified.
+          #     - For RTMP protocol, only `flv` distribution streams can be specified.
+          # @!attribute [r] state
+          #   @return [::Google::Cloud::Video::LiveStream::V1::Distribution::State]
+          #     Output only. State of the distribution.
+          # @!attribute [r] error
+          #   @return [::Google::Rpc::Status]
+          #     Output only. Only present when the `state` is `ERROR`. The reason for the
+          #     error state of the distribution.
+          # @!attribute [rw] srt_push
+          #   @return [::Google::Cloud::Video::LiveStream::V1::SrtPushOutputEndpoint]
+          #     Output endpoint using SRT_PUSH.
+          #
+          #     Note: The following fields are mutually exclusive: `srt_push`, `rtmp_push`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+          # @!attribute [rw] rtmp_push
+          #   @return [::Google::Cloud::Video::LiveStream::V1::RtmpPushOutputEndpoint]
+          #     Output endpoint using RTMP_PUSH.
+          #
+          #     Note: The following fields are mutually exclusive: `rtmp_push`, `srt_push`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+          class Distribution
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+
+            # State of this distribution.
+            module State
+              # State is not specified.
+              STATE_UNSPECIFIED = 0
+
+              # Distribution has trouble to produce or deliver the output.
+              ERROR = 5
+
+              # Distribution is not ready to be started.
+              NOT_READY = 6
+
+              # Distribution is ready to be started.
+              READY = 7
+
+              # Distribution is already started and is waiting for input.
+              AWAITING_INPUT = 8
+
+              # Distribution is already started and is generating output.
+              DISTRIBUTING = 9
+            end
+          end
+
+          # Configurations for an output endpoint using SRT_PUSH as the streaming
+          # protocol.
+          # @!attribute [rw] uri
+          #   @return [::String]
+          #     Required. The full URI of the remote SRT server.
+          # @!attribute [rw] passphrase_secret_version
+          #   @return [::String]
+          #     The name of the Secret Version containing the SRT encryption passphrase,
+          #     which is stored in Google Secret Manager. It should be in the format of
+          #     `projects/{project}/secrets/{secret_id}/versions/{version_number}`.
+          class SrtPushOutputEndpoint
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Configurations for an output endpoint using RTMP_PUSH as the streaming
+          # protocol.
+          # @!attribute [rw] uri
+          #   @return [::String]
+          #     Required. The full URI of the remote RTMP server. For example:
+          #     `rtmp://192.168.123.321/live/my-stream` or `rtmp://somedomain.com/someapp`.
+          # @!attribute [rw] stream_key
+          #   @return [::String]
+          #     Required. Stream key for RTMP protocol.
+          class RtmpPushOutputEndpoint
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
           # Sprite sheet configuration.
           # @!attribute [rw] format
           #   @return [::String]
@@ -274,6 +387,13 @@ module Google
           # @!attribute [rw] h264
           #   @return [::Google::Cloud::Video::LiveStream::V1::VideoStream::H264CodecSettings]
           #     H264 codec settings.
+          #
+          #     Note: The following fields are mutually exclusive: `h264`, `h265`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+          # @!attribute [rw] h265
+          #   @return [::Google::Cloud::Video::LiveStream::V1::VideoStream::H265CodecSettings]
+          #     H265 codec settings.
+          #
+          #     Note: The following fields are mutually exclusive: `h265`, `h264`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           class VideoStream
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -282,11 +402,11 @@ module Google
             # @!attribute [rw] width_pixels
             #   @return [::Integer]
             #     Required. The width of the video in pixels. Must be an even integer.
-            #     Valid range is [320, 1920].
+            #     Valid range is [320, 4096].
             # @!attribute [rw] height_pixels
             #   @return [::Integer]
             #     Required. The height of the video in pixels. Must be an even integer.
-            #     Valid range is [180, 1080].
+            #     Valid range is [180, 2160].
             # @!attribute [rw] frame_rate
             #   @return [::Float]
             #     Required. The target video frame rate in frames per second (FPS). Must be
@@ -302,6 +422,7 @@ module Google
             #
             #     - For SD resolution (< 720p), must be <= 3,000,000 (3 Mbps).
             #     - For HD resolution (<= 1080p), must be <= 15,000,000 (15 Mbps).
+            #     - For UHD resolution (<= 2160p), must be <= 25,000,000 (25 Mbps).
             # @!attribute [rw] allow_open_gop
             #   @return [::Boolean]
             #     Specifies whether an open Group of Pictures (GOP) structure should be
@@ -385,6 +506,87 @@ module Google
             #     {::Google::Cloud::Video::LiveStream::V1::VideoStream::H264CodecSettings H264CodecSettings}
             #     message.
             class H264CodecSettings
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
+
+            # H265 codec settings.
+            # @!attribute [rw] width_pixels
+            #   @return [::Integer]
+            #     Optional. The width of the video in pixels. Must be an even integer.
+            #     When not specified, the width is adjusted to match the specified height
+            #     and input aspect ratio. If both are omitted, the input width is used.
+            #     Valid range is [320, 4096].
+            # @!attribute [rw] height_pixels
+            #   @return [::Integer]
+            #     Optional. The height of the video in pixels. Must be an even integer.
+            #     When not specified, the height is adjusted to match the specified width
+            #     and input aspect ratio. If both are omitted, the input height is used.
+            #     Valid range is [180, 2160].
+            # @!attribute [rw] frame_rate
+            #   @return [::Float]
+            #     Required. The target video frame rate in frames per second (FPS). Must be
+            #     less than or equal to 120. Will default to the input frame rate if larger
+            #     than the input frame rate. The API will generate an output FPS that is
+            #     divisible by the input FPS, and smaller or equal to the target FPS. See
+            #     [Calculating frame
+            #     rate](https://cloud.google.com/transcoder/docs/concepts/frame-rate) for
+            #     more information.
+            # @!attribute [rw] bitrate_bps
+            #   @return [::Integer]
+            #     Required. The video bitrate in bits per second. Minimum value is 10,000.
+            #
+            #     - For SD resolution (< 720p), must be <= 3,000,000 (3 Mbps).
+            #     - For HD resolution (<= 1080p), must be <= 15,000,000 (15 Mbps).
+            #     - For UHD resolution (<= 2160p), must be <= 25,000,000 (25 Mbps).
+            # @!attribute [rw] gop_frame_count
+            #   @return [::Integer]
+            #     Optional. Select the GOP size based on the specified frame count.
+            #     If GOP frame count is set instead of GOP duration, GOP duration will be
+            #     calculated by `gopFrameCount`/`frameRate`. The calculated GOP duration
+            #     must satisfy the limitations on `gopDuration` as well.
+            #     Valid range is [60, 600].
+            #
+            #     Note: The following fields are mutually exclusive: `gop_frame_count`, `gop_duration`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+            # @!attribute [rw] gop_duration
+            #   @return [::Google::Protobuf::Duration]
+            #     Optional. Select the GOP size based on the specified duration. The
+            #     default is `2s`. Note that `gopDuration` must be less than or equal to
+            #     {::Google::Cloud::Video::LiveStream::V1::SegmentSettings#segment_duration segment_duration},
+            #     and
+            #     {::Google::Cloud::Video::LiveStream::V1::SegmentSettings#segment_duration segment_duration}
+            #     must be divisible by `gopDuration`. Valid range is [2s, 20s].
+            #
+            #     All video streams in the same channel must have the same GOP size.
+            #
+            #     Note: The following fields are mutually exclusive: `gop_duration`, `gop_frame_count`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+            # @!attribute [rw] vbv_size_bits
+            #   @return [::Integer]
+            #     Optional. Size of the Video Buffering Verifier (VBV) buffer in bits. Must
+            #     be greater than zero. The default is equal to
+            #     {::Google::Cloud::Video::LiveStream::V1::VideoStream::H265CodecSettings#bitrate_bps bitrate_bps}.
+            # @!attribute [rw] vbv_fullness_bits
+            #   @return [::Integer]
+            #     Optional. Initial fullness of the Video Buffering Verifier (VBV) buffer
+            #     in bits. Must be greater than zero. The default is equal to 90% of
+            #     {::Google::Cloud::Video::LiveStream::V1::VideoStream::H265CodecSettings#vbv_size_bits vbv_size_bits}.
+            # @!attribute [rw] b_pyramid
+            #   @return [::Boolean]
+            #     Optional. Allow B-pyramid for reference frame selection. This may not be
+            #     supported on all decoders. The default is `false`.
+            # @!attribute [rw] b_frame_count
+            #   @return [::Integer]
+            #     Optional. The number of consecutive B-frames. Must be greater than or
+            #     equal to zero. Must be less than
+            #     {::Google::Cloud::Video::LiveStream::V1::VideoStream::H265CodecSettings#gop_frame_count gop_frame_count}
+            #     if set. The default is 0.
+            # @!attribute [rw] aq_strength
+            #   @return [::Float]
+            #     Optional. Specify the intensity of the adaptive quantizer (AQ). Must be
+            #     between 0 and 1, where 0 disables the quantizer and 1 maximizes the
+            #     quantizer. A higher value equals a lower bitrate but smoother image. The
+            #     default is 0.
+            class H265CodecSettings
               include ::Google::Protobuf::MessageExts
               extend ::Google::Protobuf::MessageExts::ClassMethods
             end
@@ -475,9 +677,59 @@ module Google
           #
           #     - `cea608`
           #     - `cea708`
+          #     - `webvtt`
+          # @!attribute [rw] language_code
+          #   @return [::String]
+          #     Optional. The BCP-47 language code, such as `en-US` or `sr-Latn`. For more
+          #     information, see
+          #     https://www.unicode.org/reports/tr35/#Unicode_locale_identifier.
+          # @!attribute [rw] display_name
+          #   @return [::String]
+          #     Optional. The name for this particular text stream that will be added to
+          #     the HLS/DASH manifest.
+          # @!attribute [rw] output_cea_channel
+          #   @return [::String]
+          #     Optional. The channel of the closed caption in the output stream.
+          #     This field should only be set when textstream is used for partner
+          #     distribution.
+          #     Must be one of `CC1`, `CC2`, `CC3`, and `CC4`, if the
+          #     {::Google::Cloud::Video::LiveStream::V1::TextStream#codec codec} is `cea608`;
+          #     Must be one between `SERVICE1` and `SERVICE63`, if the
+          #     {::Google::Cloud::Video::LiveStream::V1::TextStream#codec codec} is `cea708`.
+          # @!attribute [rw] mapping
+          #   @return [::Array<::Google::Cloud::Video::LiveStream::V1::TextStream::TextMapping>]
+          #     Optional. The mapping for the input streams and text tracks.
           class TextStream
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
+
+            # The mapping for the input streams and text tracks.
+            # @!attribute [rw] input_key
+            #   @return [::String]
+            #     Optional. The `Channel`
+            #     {::Google::Cloud::Video::LiveStream::V1::InputAttachment#key InputAttachment.key}
+            #     that identifies the input that this text mapping applies to.
+            # @!attribute [rw] input_track
+            #   @return [::Integer]
+            #     Optional. The zero-based index of the track in the input stream.
+            # @!attribute [rw] input_cea_channel
+            #   @return [::String]
+            #     Optional. The channel of the closed caption in the input stream.
+            #     If this field is set, the output
+            #     {::Google::Cloud::Video::LiveStream::V1::TextStream#codec codec} must be
+            #     `webvtt`. Must be one of `CC1`, `CC2`, `CC3`, and `CC4`, if the codec of
+            #     the input closed caption is `cea608`; Must be one between `SERVICE1` and
+            #     `SERVICE64`, if the codec of the input closed caption is `cea708`.
+            # @!attribute [rw] from_language_code
+            #   @return [::String]
+            #     Optional. The BCP-47 source language code, such as `en-US` or `sr-Latn`.
+            #     If differ from the textStream's language code, enable translation. For
+            #     more information on BCP-47 language codes, see
+            #     https://www.unicode.org/reports/tr35/#Unicode_locale_identifier.
+            class TextMapping
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
           end
 
           # Segment settings for `fmp4` and `ts`.

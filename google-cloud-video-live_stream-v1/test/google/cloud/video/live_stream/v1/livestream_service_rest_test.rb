@@ -469,6 +469,118 @@ class ::Google::Cloud::Video::LiveStream::V1::LivestreamService::Rest::ClientTes
     end
   end
 
+  def test_start_distribution
+    # Create test objects.
+    client_result = ::Google::Longrunning::Operation.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+    distribution_keys = ["hello world"]
+    request_id = "hello world"
+
+    start_distribution_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::Video::LiveStream::V1::LivestreamService::Rest::ServiceStub.stub :transcode_start_distribution_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, start_distribution_client_stub do
+        # Create client
+        client = ::Google::Cloud::Video::LiveStream::V1::LivestreamService::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.start_distribution({ name: name, distribution_keys: distribution_keys, request_id: request_id }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.start_distribution name: name, distribution_keys: distribution_keys, request_id: request_id do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.start_distribution ::Google::Cloud::Video::LiveStream::V1::StartDistributionRequest.new(name: name, distribution_keys: distribution_keys, request_id: request_id) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.start_distribution({ name: name, distribution_keys: distribution_keys, request_id: request_id }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.start_distribution(::Google::Cloud::Video::LiveStream::V1::StartDistributionRequest.new(name: name, distribution_keys: distribution_keys, request_id: request_id), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, start_distribution_client_stub.call_count
+      end
+    end
+  end
+
+  def test_stop_distribution
+    # Create test objects.
+    client_result = ::Google::Longrunning::Operation.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+    distribution_keys = ["hello world"]
+    request_id = "hello world"
+
+    stop_distribution_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::Video::LiveStream::V1::LivestreamService::Rest::ServiceStub.stub :transcode_stop_distribution_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, stop_distribution_client_stub do
+        # Create client
+        client = ::Google::Cloud::Video::LiveStream::V1::LivestreamService::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.stop_distribution({ name: name, distribution_keys: distribution_keys, request_id: request_id }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.stop_distribution name: name, distribution_keys: distribution_keys, request_id: request_id do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.stop_distribution ::Google::Cloud::Video::LiveStream::V1::StopDistributionRequest.new(name: name, distribution_keys: distribution_keys, request_id: request_id) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.stop_distribution({ name: name, distribution_keys: distribution_keys, request_id: request_id }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.stop_distribution(::Google::Cloud::Video::LiveStream::V1::StopDistributionRequest.new(name: name, distribution_keys: distribution_keys, request_id: request_id), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, stop_distribution_client_stub.call_count
+      end
+    end
+  end
+
   def test_create_input
     # Create test objects.
     client_result = ::Google::Longrunning::Operation.new
@@ -745,6 +857,60 @@ class ::Google::Cloud::Video::LiveStream::V1::LivestreamService::Rest::ClientTes
 
         # Verify method calls
         assert_equal 5, update_input_client_stub.call_count
+      end
+    end
+  end
+
+  def test_preview_input
+    # Create test objects.
+    client_result = ::Google::Cloud::Video::LiveStream::V1::PreviewInputResponse.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    preview_input_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::Video::LiveStream::V1::LivestreamService::Rest::ServiceStub.stub :transcode_preview_input_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, preview_input_client_stub do
+        # Create client
+        client = ::Google::Cloud::Video::LiveStream::V1::LivestreamService::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.preview_input({ name: name }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.preview_input name: name do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.preview_input ::Google::Cloud::Video::LiveStream::V1::PreviewInputRequest.new(name: name) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.preview_input({ name: name }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.preview_input(::Google::Cloud::Video::LiveStream::V1::PreviewInputRequest.new(name: name), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, preview_input_client_stub.call_count
       end
     end
   end

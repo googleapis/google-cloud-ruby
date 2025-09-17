@@ -98,6 +98,10 @@ module Google
 
                     default_config.rpcs.stop_channel.timeout = 60.0
 
+                    default_config.rpcs.start_distribution.timeout = 60.0
+
+                    default_config.rpcs.stop_distribution.timeout = 60.0
+
                     default_config.rpcs.create_input.timeout = 60.0
 
                     default_config.rpcs.list_inputs.timeout = 60.0
@@ -113,6 +117,8 @@ module Google
                     default_config.rpcs.delete_input.timeout = 60.0
 
                     default_config.rpcs.update_input.timeout = 60.0
+
+                    default_config.rpcs.preview_input.timeout = 60.0
 
                     default_config.rpcs.create_event.timeout = 60.0
 
@@ -138,6 +144,30 @@ module Google
                       initial_delay: 1.0, max_delay: 10.0, multiplier: 1.3, retry_codes: [14]
                     }
 
+                    default_config.rpcs.create_clip.timeout = 60.0
+
+                    default_config.rpcs.delete_clip.timeout = 60.0
+
+                    default_config.rpcs.create_dvr_session.timeout = 60.0
+
+                    default_config.rpcs.list_dvr_sessions.timeout = 60.0
+                    default_config.rpcs.list_dvr_sessions.retry_policy = {
+                      initial_delay: 1.0, max_delay: 10.0, multiplier: 1.3, retry_codes: [14]
+                    }
+
+                    default_config.rpcs.get_dvr_session.timeout = 60.0
+                    default_config.rpcs.get_dvr_session.retry_policy = {
+                      initial_delay: 1.0, max_delay: 10.0, multiplier: 1.3, retry_codes: [14]
+                    }
+
+                    default_config.rpcs.delete_dvr_session.timeout = 60.0
+
+                    default_config.rpcs.update_dvr_session.timeout = 60.0
+
+                    default_config.rpcs.create_asset.timeout = 60.0
+
+                    default_config.rpcs.delete_asset.timeout = 60.0
+
                     default_config.rpcs.get_asset.timeout = 60.0
                     default_config.rpcs.get_asset.retry_policy = {
                       initial_delay: 1.0, max_delay: 10.0, multiplier: 1.3, retry_codes: [14]
@@ -152,6 +182,8 @@ module Google
                     default_config.rpcs.get_pool.retry_policy = {
                       initial_delay: 1.0, max_delay: 10.0, multiplier: 1.3, retry_codes: [14]
                     }
+
+                    default_config.rpcs.update_pool.timeout = 60.0
 
                     default_config
                   end
@@ -313,8 +345,11 @@ module Google
                 #     Required. The channel resource to be created.
                 #   @param channel_id [::String]
                 #     Required. The ID of the channel resource to be created.
-                #     This value must be 1-63 characters, begin and end with `[a-z0-9]`,
-                #     could contain dashes (-) in between.
+                #
+                #     This value must be 1-63 characters, begin and end with a lower-case letter
+                #     or a number, and consist of only lower-case letters, numbers, and hyphens.
+                #     In other words, it must match the following regex:
+                #     `^[a-z0-9]([a-z0-9-]{0,61}[a-z0-9])?$`.
                 #   @param request_id [::String]
                 #     A request ID to identify requests. Specify a unique request ID
                 #     so that if you must retry your request, the server will know to ignore
@@ -1009,6 +1044,219 @@ module Google
                 end
 
                 ##
+                # Starts distribution which delivers outputs to the destination indicated by
+                # the Distribution configuration.
+                #
+                # @overload start_distribution(request, options = nil)
+                #   Pass arguments to `start_distribution` via a request object, either of type
+                #   {::Google::Cloud::Video::LiveStream::V1::StartDistributionRequest} or an equivalent Hash.
+                #
+                #   @param request [::Google::Cloud::Video::LiveStream::V1::StartDistributionRequest, ::Hash]
+                #     A request object representing the call parameters. Required. To specify no
+                #     parameters, or to keep all the default parameter values, pass an empty Hash.
+                #   @param options [::Gapic::CallOptions, ::Hash]
+                #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+                #
+                # @overload start_distribution(name: nil, distribution_keys: nil, request_id: nil)
+                #   Pass arguments to `start_distribution` via keyword arguments. Note that at
+                #   least one keyword argument is required. To specify no parameters, or to keep all
+                #   the default parameter values, pass an empty Hash as a request object (see above).
+                #
+                #   @param name [::String]
+                #     Required. The name of the channel resource, in the form of:
+                #     `projects/{project}/locations/{location}/channels/{channelId}`.
+                #   @param distribution_keys [::Array<::String>]
+                #     Optional. A list of keys to identify the distribution configuration in the
+                #     channel resource. If left empty, all the distributions in the channel
+                #     specification will be started.
+                #   @param request_id [::String]
+                #     Optional. A request ID to identify requests. Specify a unique request ID
+                #     so that if you must retry your request, the server will know to ignore
+                #     the request if it has already been completed. The server will guarantee
+                #     that for at least 60 minutes since the first request.
+                #
+                #     For example, consider a situation where you make an initial request and the
+                #     request times out. If you make the request again with the same request ID,
+                #     the server can check if original operation with the same request ID was
+                #     received, and if so, will ignore the second request. This prevents clients
+                #     from accidentally creating duplicate commitments.
+                #
+                #     The request ID must be a valid UUID with the exception that zero UUID is
+                #     not supported `(00000000-0000-0000-0000-000000000000)`.
+                # @yield [result, operation] Access the result along with the TransportOperation object
+                # @yieldparam result [::Gapic::Operation]
+                # @yieldparam operation [::Gapic::Rest::TransportOperation]
+                #
+                # @return [::Gapic::Operation]
+                #
+                # @raise [::Google::Cloud::Error] if the REST call is aborted.
+                #
+                # @example Basic example
+                #   require "google/cloud/video/live_stream/v1"
+                #
+                #   # Create a client object. The client can be reused for multiple calls.
+                #   client = Google::Cloud::Video::LiveStream::V1::LivestreamService::Rest::Client.new
+                #
+                #   # Create a request. To set request fields, pass in keyword arguments.
+                #   request = Google::Cloud::Video::LiveStream::V1::StartDistributionRequest.new
+                #
+                #   # Call the start_distribution method.
+                #   result = client.start_distribution request
+                #
+                #   # The returned object is of type Gapic::Operation. You can use it to
+                #   # check the status of an operation, cancel it, or wait for results.
+                #   # Here is how to wait for a response.
+                #   result.wait_until_done! timeout: 60
+                #   if result.response?
+                #     p result.response
+                #   else
+                #     puts "No response received."
+                #   end
+                #
+                def start_distribution request, options = nil
+                  raise ::ArgumentError, "request must be provided" if request.nil?
+
+                  request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Video::LiveStream::V1::StartDistributionRequest
+
+                  # Converts hash and nil to an options object
+                  options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                  # Customize the options with defaults
+                  call_metadata = @config.rpcs.start_distribution.metadata.to_h
+
+                  # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                  call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                    lib_name: @config.lib_name, lib_version: @config.lib_version,
+                    gapic_version: ::Google::Cloud::Video::LiveStream::V1::VERSION,
+                    transports_version_send: [:rest]
+
+                  call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                  call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                  options.apply_defaults timeout:      @config.rpcs.start_distribution.timeout,
+                                         metadata:     call_metadata,
+                                         retry_policy: @config.rpcs.start_distribution.retry_policy
+
+                  options.apply_defaults timeout:      @config.timeout,
+                                         metadata:     @config.metadata,
+                                         retry_policy: @config.retry_policy
+
+                  @livestream_service_stub.start_distribution request, options do |result, operation|
+                    result = ::Gapic::Operation.new result, @operations_client, options: options
+                    yield result, operation if block_given?
+                    throw :response, result
+                  end
+                rescue ::Gapic::Rest::Error => e
+                  raise ::Google::Cloud::Error.from_error(e)
+                end
+
+                ##
+                # Stops the specified distribution.
+                #
+                # @overload stop_distribution(request, options = nil)
+                #   Pass arguments to `stop_distribution` via a request object, either of type
+                #   {::Google::Cloud::Video::LiveStream::V1::StopDistributionRequest} or an equivalent Hash.
+                #
+                #   @param request [::Google::Cloud::Video::LiveStream::V1::StopDistributionRequest, ::Hash]
+                #     A request object representing the call parameters. Required. To specify no
+                #     parameters, or to keep all the default parameter values, pass an empty Hash.
+                #   @param options [::Gapic::CallOptions, ::Hash]
+                #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+                #
+                # @overload stop_distribution(name: nil, distribution_keys: nil, request_id: nil)
+                #   Pass arguments to `stop_distribution` via keyword arguments. Note that at
+                #   least one keyword argument is required. To specify no parameters, or to keep all
+                #   the default parameter values, pass an empty Hash as a request object (see above).
+                #
+                #   @param name [::String]
+                #     Required. The name of the channel resource, in the form of:
+                #     `projects/{project}/locations/{location}/channels/{channelId}`.
+                #   @param distribution_keys [::Array<::String>]
+                #     Optional. A list of key to identify the distribution configuration in the
+                #     channel resource. If left empty, all the distributions in the channel
+                #     specification will be stopped.
+                #   @param request_id [::String]
+                #     Optional. A request ID to identify requests. Specify a unique request ID
+                #     so that if you must retry your request, the server will know to ignore
+                #     the request if it has already been completed. The server will guarantee
+                #     that for at least 60 minutes since the first request.
+                #
+                #     For example, consider a situation where you make an initial request and the
+                #     request times out. If you make the request again with the same request ID,
+                #     the server can check if original operation with the same request ID was
+                #     received, and if so, will ignore the second request. This prevents clients
+                #     from accidentally creating duplicate commitments.
+                #
+                #     The request ID must be a valid UUID with the exception that zero UUID is
+                #     not supported `(00000000-0000-0000-0000-000000000000)`.
+                # @yield [result, operation] Access the result along with the TransportOperation object
+                # @yieldparam result [::Gapic::Operation]
+                # @yieldparam operation [::Gapic::Rest::TransportOperation]
+                #
+                # @return [::Gapic::Operation]
+                #
+                # @raise [::Google::Cloud::Error] if the REST call is aborted.
+                #
+                # @example Basic example
+                #   require "google/cloud/video/live_stream/v1"
+                #
+                #   # Create a client object. The client can be reused for multiple calls.
+                #   client = Google::Cloud::Video::LiveStream::V1::LivestreamService::Rest::Client.new
+                #
+                #   # Create a request. To set request fields, pass in keyword arguments.
+                #   request = Google::Cloud::Video::LiveStream::V1::StopDistributionRequest.new
+                #
+                #   # Call the stop_distribution method.
+                #   result = client.stop_distribution request
+                #
+                #   # The returned object is of type Gapic::Operation. You can use it to
+                #   # check the status of an operation, cancel it, or wait for results.
+                #   # Here is how to wait for a response.
+                #   result.wait_until_done! timeout: 60
+                #   if result.response?
+                #     p result.response
+                #   else
+                #     puts "No response received."
+                #   end
+                #
+                def stop_distribution request, options = nil
+                  raise ::ArgumentError, "request must be provided" if request.nil?
+
+                  request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Video::LiveStream::V1::StopDistributionRequest
+
+                  # Converts hash and nil to an options object
+                  options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                  # Customize the options with defaults
+                  call_metadata = @config.rpcs.stop_distribution.metadata.to_h
+
+                  # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                  call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                    lib_name: @config.lib_name, lib_version: @config.lib_version,
+                    gapic_version: ::Google::Cloud::Video::LiveStream::V1::VERSION,
+                    transports_version_send: [:rest]
+
+                  call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                  call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                  options.apply_defaults timeout:      @config.rpcs.stop_distribution.timeout,
+                                         metadata:     call_metadata,
+                                         retry_policy: @config.rpcs.stop_distribution.retry_policy
+
+                  options.apply_defaults timeout:      @config.timeout,
+                                         metadata:     @config.metadata,
+                                         retry_policy: @config.retry_policy
+
+                  @livestream_service_stub.stop_distribution request, options do |result, operation|
+                    result = ::Gapic::Operation.new result, @operations_client, options: options
+                    yield result, operation if block_given?
+                    throw :response, result
+                  end
+                rescue ::Gapic::Rest::Error => e
+                  raise ::Google::Cloud::Error.from_error(e)
+                end
+
+                ##
                 # Creates an input with the provided unique ID in the specified region.
                 #
                 # @overload create_input(request, options = nil)
@@ -1033,8 +1281,11 @@ module Google
                 #     Required. The input resource to be created.
                 #   @param input_id [::String]
                 #     Required. The ID of the input resource to be created.
-                #     This value must be 1-63 characters, begin and end with `[a-z0-9]`,
-                #     could contain dashes (-) in between.
+                #
+                #     This value must be 1-63 characters, begin and end with a lower-case letter
+                #     or a number, and consist of only lower-case letters, numbers, and hyphens.
+                #     In other words, it must match the following regex:
+                #     `^[a-z0-9]([a-z0-9-]{0,61}[a-z0-9])?$`.
                 #   @param request_id [::String]
                 #     A request ID to identify requests. Specify a unique request ID
                 #     so that if you must retry your request, the server will know to ignore
@@ -1511,6 +1762,85 @@ module Google
                 end
 
                 ##
+                # Preview the streaming content of the specified input.
+                #
+                # @overload preview_input(request, options = nil)
+                #   Pass arguments to `preview_input` via a request object, either of type
+                #   {::Google::Cloud::Video::LiveStream::V1::PreviewInputRequest} or an equivalent Hash.
+                #
+                #   @param request [::Google::Cloud::Video::LiveStream::V1::PreviewInputRequest, ::Hash]
+                #     A request object representing the call parameters. Required. To specify no
+                #     parameters, or to keep all the default parameter values, pass an empty Hash.
+                #   @param options [::Gapic::CallOptions, ::Hash]
+                #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+                #
+                # @overload preview_input(name: nil)
+                #   Pass arguments to `preview_input` via keyword arguments. Note that at
+                #   least one keyword argument is required. To specify no parameters, or to keep all
+                #   the default parameter values, pass an empty Hash as a request object (see above).
+                #
+                #   @param name [::String]
+                #     Required. The name of the input resource, in the form of:
+                #     `projects/{project}/locations/{location}/inputs/{inputId}`.
+                # @yield [result, operation] Access the result along with the TransportOperation object
+                # @yieldparam result [::Google::Cloud::Video::LiveStream::V1::PreviewInputResponse]
+                # @yieldparam operation [::Gapic::Rest::TransportOperation]
+                #
+                # @return [::Google::Cloud::Video::LiveStream::V1::PreviewInputResponse]
+                #
+                # @raise [::Google::Cloud::Error] if the REST call is aborted.
+                #
+                # @example Basic example
+                #   require "google/cloud/video/live_stream/v1"
+                #
+                #   # Create a client object. The client can be reused for multiple calls.
+                #   client = Google::Cloud::Video::LiveStream::V1::LivestreamService::Rest::Client.new
+                #
+                #   # Create a request. To set request fields, pass in keyword arguments.
+                #   request = Google::Cloud::Video::LiveStream::V1::PreviewInputRequest.new
+                #
+                #   # Call the preview_input method.
+                #   result = client.preview_input request
+                #
+                #   # The returned object is of type Google::Cloud::Video::LiveStream::V1::PreviewInputResponse.
+                #   p result
+                #
+                def preview_input request, options = nil
+                  raise ::ArgumentError, "request must be provided" if request.nil?
+
+                  request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Video::LiveStream::V1::PreviewInputRequest
+
+                  # Converts hash and nil to an options object
+                  options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                  # Customize the options with defaults
+                  call_metadata = @config.rpcs.preview_input.metadata.to_h
+
+                  # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                  call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                    lib_name: @config.lib_name, lib_version: @config.lib_version,
+                    gapic_version: ::Google::Cloud::Video::LiveStream::V1::VERSION,
+                    transports_version_send: [:rest]
+
+                  call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                  call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                  options.apply_defaults timeout:      @config.rpcs.preview_input.timeout,
+                                         metadata:     call_metadata,
+                                         retry_policy: @config.rpcs.preview_input.retry_policy
+
+                  options.apply_defaults timeout:      @config.timeout,
+                                         metadata:     @config.metadata,
+                                         retry_policy: @config.retry_policy
+
+                  @livestream_service_stub.preview_input request, options do |result, operation|
+                    yield result, operation if block_given?
+                  end
+                rescue ::Gapic::Rest::Error => e
+                  raise ::Google::Cloud::Error.from_error(e)
+                end
+
+                ##
                 # Creates an event with the provided unique ID in the specified channel.
                 #
                 # @overload create_event(request, options = nil)
@@ -1535,8 +1865,11 @@ module Google
                 #     Required. The event resource to be created.
                 #   @param event_id [::String]
                 #     Required. The ID of the event resource to be created.
-                #     This value must be 1-63 characters, begin and end with `[a-z0-9]`,
-                #     could contain dashes (-) in between.
+                #
+                #     This value must be 1-63 characters, begin and end with a lower-case letter
+                #     or a number, and consist of only lower-case letters, numbers, and hyphens.
+                #     In other words, it must match the following regex:
+                #     `^[a-z0-9]([a-z0-9-]{0,61}[a-z0-9])?$`.
                 #   @param request_id [::String]
                 #     A request ID to identify requests. Specify a unique request ID
                 #     so that if you must retry your request, the server will know to ignore
@@ -2073,10 +2406,12 @@ module Google
                 #     Required. The parent resource name, in the following form:
                 #     `projects/{project}/locations/{location}/channels/{channel}`.
                 #   @param clip_id [::String]
-                #     Required. Id of the requesting object in the following form:
+                #     Required. The ID of the clip resource to be created.
                 #
-                #     1. 1 character minimum, 63 characters maximum
-                #     2. Only contains letters, digits, underscores, and hyphens
+                #     This value must be 1-63 characters, begin and end with a lower-case letter
+                #     or a number, and consist of only lower-case letters, numbers, and hyphens.
+                #     In other words, it must match the following regex:
+                #     `^[a-z0-9]([a-z0-9-]{0,61}[a-z0-9])?$`.
                 #   @param clip [::Google::Cloud::Video::LiveStream::V1::Clip, ::Hash]
                 #     Required. The resource being created
                 #   @param request_id [::String]
@@ -2285,10 +2620,12 @@ module Google
                 #     Required. The parent resource name, in the following form:
                 #     `projects/{project}/locations/{location}/channels/{channelId}`.
                 #   @param dvr_session_id [::String]
-                #     Required. Id of the requesting object in the following form:
+                #     Required. The ID of the DVR session resource to be created.
                 #
-                #     1. 1 character minimum, 63 characters maximum
-                #     2. Only contains letters, digits, underscores, and hyphens
+                #     This value must be 1-63 characters, begin and end with a lower-case letter
+                #     or a number, and consist of only lower-case letters, numbers, and hyphens.
+                #     In other words, it must match the following regex:
+                #     `^[a-z0-9]([a-z0-9-]{0,61}[a-z0-9])?$`.
                 #   @param dvr_session [::Google::Cloud::Video::LiveStream::V1::DvrSession, ::Hash]
                 #     Required. The resource being created
                 #   @param request_id [::String]
@@ -2782,8 +3119,11 @@ module Google
                 #     Required. The asset resource to be created.
                 #   @param asset_id [::String]
                 #     Required. The ID of the asset resource to be created.
-                #     This value must be 1-63 characters, begin and end with `[a-z0-9]`,
-                #     could contain dashes (-) in between.
+                #
+                #     This value must be 1-63 characters, begin and end with a lower-case letter
+                #     or a number, and consist of only lower-case letters, numbers, and hyphens.
+                #     In other words, it must match the following regex:
+                #     `^[a-z0-9]([a-z0-9-]{0,61}[a-z0-9])?$`.
                 #   @param request_id [::String]
                 #     A request ID to identify requests. Specify a unique request ID
                 #     so that if you must retry your request, the server will know to ignore
@@ -3517,6 +3857,16 @@ module Google
                     #
                     attr_reader :stop_channel
                     ##
+                    # RPC-specific configuration for `start_distribution`
+                    # @return [::Gapic::Config::Method]
+                    #
+                    attr_reader :start_distribution
+                    ##
+                    # RPC-specific configuration for `stop_distribution`
+                    # @return [::Gapic::Config::Method]
+                    #
+                    attr_reader :stop_distribution
+                    ##
                     # RPC-specific configuration for `create_input`
                     # @return [::Gapic::Config::Method]
                     #
@@ -3541,6 +3891,11 @@ module Google
                     # @return [::Gapic::Config::Method]
                     #
                     attr_reader :update_input
+                    ##
+                    # RPC-specific configuration for `preview_input`
+                    # @return [::Gapic::Config::Method]
+                    #
+                    attr_reader :preview_input
                     ##
                     # RPC-specific configuration for `create_event`
                     # @return [::Gapic::Config::Method]
@@ -3653,6 +4008,10 @@ module Google
                       @start_channel = ::Gapic::Config::Method.new start_channel_config
                       stop_channel_config = parent_rpcs.stop_channel if parent_rpcs.respond_to? :stop_channel
                       @stop_channel = ::Gapic::Config::Method.new stop_channel_config
+                      start_distribution_config = parent_rpcs.start_distribution if parent_rpcs.respond_to? :start_distribution
+                      @start_distribution = ::Gapic::Config::Method.new start_distribution_config
+                      stop_distribution_config = parent_rpcs.stop_distribution if parent_rpcs.respond_to? :stop_distribution
+                      @stop_distribution = ::Gapic::Config::Method.new stop_distribution_config
                       create_input_config = parent_rpcs.create_input if parent_rpcs.respond_to? :create_input
                       @create_input = ::Gapic::Config::Method.new create_input_config
                       list_inputs_config = parent_rpcs.list_inputs if parent_rpcs.respond_to? :list_inputs
@@ -3663,6 +4022,8 @@ module Google
                       @delete_input = ::Gapic::Config::Method.new delete_input_config
                       update_input_config = parent_rpcs.update_input if parent_rpcs.respond_to? :update_input
                       @update_input = ::Gapic::Config::Method.new update_input_config
+                      preview_input_config = parent_rpcs.preview_input if parent_rpcs.respond_to? :preview_input
+                      @preview_input = ::Gapic::Config::Method.new preview_input_config
                       create_event_config = parent_rpcs.create_event if parent_rpcs.respond_to? :create_event
                       @create_event = ::Gapic::Config::Method.new create_event_config
                       list_events_config = parent_rpcs.list_events if parent_rpcs.respond_to? :list_events
