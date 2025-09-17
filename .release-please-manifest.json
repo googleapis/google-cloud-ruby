@@ -433,7 +433,7 @@
   "google-cloud-gke_multi_cloud+FILLER": "0.0.0",
   "google-cloud-gke_multi_cloud-v1": "0.16.0",
   "google-cloud-gke_multi_cloud-v1+FILLER": "0.0.0",
-  "google-cloud-gke_recommender": "0.0.1",
+  "google-cloud-gke_recommender": "0.1.0",
   "google-cloud-gke_recommender+FILLER": "0.0.0",
   "google-cloud-gke_recommender-v1": "0.0.1",
   "google-cloud-gke_recommender-v1+FILLER": "0.0.0",
