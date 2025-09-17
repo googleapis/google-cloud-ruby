@@ -1,5 +1,11 @@
 # Changelog
 
+### 1.23.0 (2025-09-17)
+
+#### Features
+
+* add private_model_server_enabled to in Endpoint.proto ([#31516](https://github.com/googleapis/google-cloud-ruby/issues/31516)) 
+
 ### 1.22.0 (2025-09-11)
 
 #### Features
