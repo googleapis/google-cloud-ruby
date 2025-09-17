@@ -435,7 +435,7 @@
   "google-cloud-gke_multi_cloud-v1+FILLER": "0.0.0",
   "google-cloud-gke_recommender": "0.0.1",
   "google-cloud-gke_recommender+FILLER": "0.0.0",
-  "google-cloud-gke_recommender-v1": "0.0.1",
+  "google-cloud-gke_recommender-v1": "0.1.0",
   "google-cloud-gke_recommender-v1+FILLER": "0.0.0",
   "google-cloud-gsuite_add_ons": "1.1.2",
   "google-cloud-gsuite_add_ons+FILLER": "0.0.0",
