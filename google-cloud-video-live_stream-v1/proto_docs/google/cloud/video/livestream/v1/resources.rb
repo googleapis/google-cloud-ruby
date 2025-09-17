@@ -113,8 +113,17 @@ module Google
               # Resolution <= 1920x1080. Bitrate <= 25 Mbps. FPS <= 60.
               HD = 2
 
-              # Resolution <= 4096x2160. Not supported yet.
+              # Resolution <= 4096x2160. Bitrate <= 50 Mbps. FPS <= 60.
               UHD = 3
+
+              # Resolution <= 1280x720. Bitrate <= 6 Mbps. FPS <= 60. H265 codec.
+              SD_H265 = 4
+
+              # Resolution <= 1920x1080. Bitrate <= 25 Mbps. FPS <= 60. H265 codec.
+              HD_H265 = 5
+
+              # Resolution <= 4096x2160. Bitrate <= 50 Mbps. FPS <= 60. H265 codec.
+              UHD_H265 = 6
             end
           end
 
@@ -161,6 +170,12 @@ module Google
           # @!attribute [rw] manifests
           #   @return [::Array<::Google::Cloud::Video::LiveStream::V1::Manifest>]
           #     List of output manifests.
+          # @!attribute [rw] distribution_streams
+          #   @return [::Array<::Google::Cloud::Video::LiveStream::V1::DistributionStream>]
+          #     Optional. List of multiplexing settings of streams for distributions.
+          # @!attribute [rw] distributions
+          #   @return [::Array<::Google::Cloud::Video::LiveStream::V1::Distribution>]
+          #     Optional. List of distributions.
           # @!attribute [rw] sprite_sheets
           #   @return [::Array<::Google::Cloud::Video::LiveStream::V1::SpriteSheet>]
           #     List of output sprite sheets.
@@ -182,9 +197,9 @@ module Google
           #     Configuration of timecode for this channel.
           # @!attribute [rw] encryptions
           #   @return [::Array<::Google::Cloud::Video::LiveStream::V1::Encryption>]
-          #     Encryption configurations for this channel. Each configuration has an ID
-          #     which is referred to by each MuxStream to indicate which configuration is
-          #     used for that output.
+          #     Optional. Encryption configurations for this channel. Each configuration
+          #     has an ID which is referred to by each MuxStream to indicate which
+          #     configuration is used for that output.
           # @!attribute [rw] input_config
           #   @return [::Google::Cloud::Video::LiveStream::V1::InputConfig]
           #     The configuration for input sources defined in
@@ -196,6 +211,9 @@ module Google
           #   @return [::Array<::Google::Cloud::Video::LiveStream::V1::StaticOverlay>]
           #     Optional. List of static overlay images. Those images display over the
           #     output content for the whole duration of the live stream.
+          # @!attribute [rw] auto_transcription_config
+          #   @return [::Google::Cloud::Video::LiveStream::V1::AutoTranscriptionConfig]
+          #     Optional. Advanced configurations for auto-generated text streams.
           class Channel
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -501,6 +519,53 @@ module Google
             end
           end
 
+          # Advanced configurations for auto-generated text streams.
+          # @!attribute [rw] display_timing
+          #   @return [::Google::Cloud::Video::LiveStream::V1::AutoTranscriptionConfig::DisplayTiming]
+          #     Optional. Whether auto-generated text streams are displayed synchronously
+          #     or asynchronously with the original audio.
+          # @!attribute [rw] quality_preset
+          #   @return [::Google::Cloud::Video::LiveStream::V1::AutoTranscriptionConfig::QualityPreset]
+          #     Optional. Tunes the latency and quality of auto-generated captions.
+          class AutoTranscriptionConfig
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+
+            # Whether auto-generated text streams are displayed synchronously or
+            # asynchronously with the original audio.
+            module DisplayTiming
+              # Display timing is not specified. Caption display will be asynchronous by
+              # default.
+              DISPLAY_TIMING_UNSPECIFIED = 0
+
+              # Caption will be displayed asynchronous with audio.
+              ASYNC = 1
+
+              # Caption will be displayed synchronous with audio. This option increases
+              # overall media output latency, and reduces viewing latency between audio
+              # and auto-generated captions.
+              SYNC = 2
+            end
+
+            # Presets to tune the latency and quality of auto-generated captions.
+            module QualityPreset
+              # Quality Preset is not specified. By default, BALANCED_QUALITY will be
+              # used.
+              QUALITY_PRESET_UNSPECIFIED = 0
+
+              # Reduce the latency of auto-generated captions. This may reduce the
+              # quality of the captions.
+              LOW_LATENCY = 1
+
+              # Default behavior when QualityPreset is not specified.
+              BALANCED_QUALITY = 2
+
+              # Increases the quality of the auto-generated captions at the cost of
+              # higher latency.
+              IMPROVED_QUALITY = 3
+            end
+          end
+
           # Event is a sub-resource of a channel, which can be scheduled by the user to
           # execute operations on a channel resource without having to stop the channel.
           # @!attribute [rw] name
@@ -520,32 +585,37 @@ module Google
           #   @return [::Google::Cloud::Video::LiveStream::V1::Event::InputSwitchTask]
           #     Switches to another input stream.
           #
-          #     Note: The following fields are mutually exclusive: `input_switch`, `ad_break`, `return_to_program`, `slate`, `mute`, `unmute`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+          #     Note: The following fields are mutually exclusive: `input_switch`, `ad_break`, `return_to_program`, `slate`, `mute`, `unmute`, `update_encryptions`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] ad_break
           #   @return [::Google::Cloud::Video::LiveStream::V1::Event::AdBreakTask]
           #     Inserts a new ad opportunity.
           #
-          #     Note: The following fields are mutually exclusive: `ad_break`, `input_switch`, `return_to_program`, `slate`, `mute`, `unmute`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+          #     Note: The following fields are mutually exclusive: `ad_break`, `input_switch`, `return_to_program`, `slate`, `mute`, `unmute`, `update_encryptions`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] return_to_program
           #   @return [::Google::Cloud::Video::LiveStream::V1::Event::ReturnToProgramTask]
           #     Stops any running ad break.
           #
-          #     Note: The following fields are mutually exclusive: `return_to_program`, `input_switch`, `ad_break`, `slate`, `mute`, `unmute`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+          #     Note: The following fields are mutually exclusive: `return_to_program`, `input_switch`, `ad_break`, `slate`, `mute`, `unmute`, `update_encryptions`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] slate
           #   @return [::Google::Cloud::Video::LiveStream::V1::Event::SlateTask]
           #     Inserts a slate.
           #
-          #     Note: The following fields are mutually exclusive: `slate`, `input_switch`, `ad_break`, `return_to_program`, `mute`, `unmute`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+          #     Note: The following fields are mutually exclusive: `slate`, `input_switch`, `ad_break`, `return_to_program`, `mute`, `unmute`, `update_encryptions`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] mute
           #   @return [::Google::Cloud::Video::LiveStream::V1::Event::MuteTask]
           #     Mutes the stream.
           #
-          #     Note: The following fields are mutually exclusive: `mute`, `input_switch`, `ad_break`, `return_to_program`, `slate`, `unmute`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+          #     Note: The following fields are mutually exclusive: `mute`, `input_switch`, `ad_break`, `return_to_program`, `slate`, `unmute`, `update_encryptions`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] unmute
           #   @return [::Google::Cloud::Video::LiveStream::V1::Event::UnmuteTask]
           #     Unmutes the stream.
           #
-          #     Note: The following fields are mutually exclusive: `unmute`, `input_switch`, `ad_break`, `return_to_program`, `slate`, `mute`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+          #     Note: The following fields are mutually exclusive: `unmute`, `input_switch`, `ad_break`, `return_to_program`, `slate`, `mute`, `update_encryptions`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+          # @!attribute [rw] update_encryptions
+          #   @return [::Google::Cloud::Video::LiveStream::V1::Event::UpdateEncryptionsTask]
+          #     Updates encryption settings.
+          #
+          #     Note: The following fields are mutually exclusive: `update_encryptions`, `input_switch`, `ad_break`, `return_to_program`, `slate`, `mute`, `unmute`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] execute_now
           #   @return [::Boolean]
           #     When this field is set to true, the event will be executed at the earliest
@@ -628,6 +698,17 @@ module Google
 
             # Unmutes the stream. The task fails if the stream is not currently muted.
             class UnmuteTask
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
+
+            # Update encryption settings.
+            # @!attribute [rw] encryptions
+            #   @return [::Array<::Google::Cloud::Video::LiveStream::V1::EncryptionUpdate>]
+            #     Required. A list of
+            #     {::Google::Cloud::Video::LiveStream::V1::EncryptionUpdate EncryptionUpdate}s
+            #     that updates the existing encryption settings.
+            class UpdateEncryptionsTask
               include ::Google::Protobuf::MessageExts
               extend ::Google::Protobuf::MessageExts::ClassMethods
             end
@@ -1107,16 +1188,16 @@ module Google
             # that DRM system will be considered to be disabled.
             # @!attribute [rw] widevine
             #   @return [::Google::Cloud::Video::LiveStream::V1::Encryption::Widevine]
-            #     Widevine configuration.
+            #     Optional. Widevine configuration.
             # @!attribute [rw] fairplay
             #   @return [::Google::Cloud::Video::LiveStream::V1::Encryption::Fairplay]
-            #     Fairplay configuration.
+            #     Optional. Fairplay configuration.
             # @!attribute [rw] playready
             #   @return [::Google::Cloud::Video::LiveStream::V1::Encryption::Playready]
-            #     Playready configuration.
+            #     Optional. Playready configuration.
             # @!attribute [rw] clearkey
             #   @return [::Google::Cloud::Video::LiveStream::V1::Encryption::Clearkey]
-            #     Clearkey configuration.
+            #     Optional. Clearkey configuration.
             class DrmSystems
               include ::Google::Protobuf::MessageExts
               extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -1144,6 +1225,18 @@ module Google
               include ::Google::Protobuf::MessageExts
               extend ::Google::Protobuf::MessageExts::ClassMethods
             end
+          end
+
+          # Encryption setting when updating encryption.
+          # @!attribute [rw] id
+          #   @return [::String]
+          #     Required. Identifier for the encryption option to be updated.
+          # @!attribute [rw] secret_manager_key_source
+          #   @return [::Google::Cloud::Video::LiveStream::V1::Encryption::SecretManagerSource]
+          #     For keys stored in Google Secret Manager.
+          class EncryptionUpdate
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
           end
 
           # Pool resource defines the configuration of Live Stream pools for a specific

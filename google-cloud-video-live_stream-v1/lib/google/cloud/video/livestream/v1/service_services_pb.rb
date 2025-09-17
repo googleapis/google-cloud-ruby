@@ -55,6 +55,11 @@ module Google
               # Stops the specified channel. Part of the video pipeline will be released
               # when the StopChannel request is received by the server.
               rpc :StopChannel, ::Google::Cloud::Video::LiveStream::V1::StopChannelRequest, ::Google::Longrunning::Operation
+              # Starts distribution which delivers outputs to the destination indicated by
+              # the Distribution configuration.
+              rpc :StartDistribution, ::Google::Cloud::Video::LiveStream::V1::StartDistributionRequest, ::Google::Longrunning::Operation
+              # Stops the specified distribution.
+              rpc :StopDistribution, ::Google::Cloud::Video::LiveStream::V1::StopDistributionRequest, ::Google::Longrunning::Operation
               # Creates an input with the provided unique ID in the specified region.
               rpc :CreateInput, ::Google::Cloud::Video::LiveStream::V1::CreateInputRequest, ::Google::Longrunning::Operation
               # Returns a list of all inputs in the specified region.
@@ -65,6 +70,8 @@ module Google
               rpc :DeleteInput, ::Google::Cloud::Video::LiveStream::V1::DeleteInputRequest, ::Google::Longrunning::Operation
               # Updates the specified input.
               rpc :UpdateInput, ::Google::Cloud::Video::LiveStream::V1::UpdateInputRequest, ::Google::Longrunning::Operation
+              # Preview the streaming content of the specified input.
+              rpc :PreviewInput, ::Google::Cloud::Video::LiveStream::V1::PreviewInputRequest, ::Google::Cloud::Video::LiveStream::V1::PreviewInputResponse
               # Creates an event with the provided unique ID in the specified channel.
               rpc :CreateEvent, ::Google::Cloud::Video::LiveStream::V1::CreateEventRequest, ::Google::Cloud::Video::LiveStream::V1::Event
               # Returns a list of all events in the specified channel.
