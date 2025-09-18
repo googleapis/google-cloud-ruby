@@ -64,7 +64,7 @@ def create_job bucket_name:, prefix:, job_id:, project_id:
     ## Waiting for operation to complete
     create_job_operation.wait_until_done!
     message = "The #{job_id} is created."
-  rescue
+  rescue StandardError
     message = " #{job_id} not created"
   end
   puts message

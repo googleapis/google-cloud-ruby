@@ -20,7 +20,7 @@ require_relative "../storage_batch_list_job"
 require_relative "../storage_batch_get_job"
 
 describe "Batch jobs Snippets" do
-  let(:bucket_name)           { random_bucket_name }
+  let(:bucket_name) { random_bucket_name }
   let(:project_id)       { storage_client.project }
   let(:file_content)     { "some content" }
   let(:remote_file_name) { "ruby_file_#{SecureRandom.hex}" }
