@@ -55,6 +55,7 @@ module Google
                 ::Digest::MD5.file(f).base64digest
               end
             else # StringIO
+              (local_file = ::File.open Pathname(local_file)) unless local_file.respond_to? :rewind
               local_file.rewind
               md5 = ::Digest::MD5.base64digest local_file.read
               local_file.rewind
@@ -68,6 +69,7 @@ module Google
                 ::Digest::CRC32c.file(f).base64digest
               end
             else # StringIO
+              (local_file = ::File.open Pathname(local_file)) unless local_file.respond_to? :rewind
               local_file.rewind
               crc32c = ::Digest::CRC32c.base64digest local_file.read
               local_file.rewind
