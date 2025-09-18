@@ -26,12 +26,13 @@ def cancel_job project_id:, job_id:
   parent = "projects/#{project_id}/locations/global"
 
   request = Google::Cloud::StorageBatchOperations::V1::CancelJobRequest.new name: "#{parent}/jobs/#{job_id}"
-  result = client.cancel_job request
-  message = if result.is_a? Google::Cloud::StorageBatchOperations::V1::CancelJobResponse
-              "The #{job_id} is canceled."
-            else
-              "The #{job_id} is not canceled."
-            end
+  begin
+    client.cancel_job request
+    message = "The #{job_id} is canceled."
+  rescue Google::Cloud::FailedPreconditionError, Google::Cloud::NotFoundError
+    ## We will get error if the job was already completed. this is an expected outcome
+    message = "#{job_id} was already completed or was not created."
+  end
   puts message
 end
 # [END storage_batch_cancel_job]

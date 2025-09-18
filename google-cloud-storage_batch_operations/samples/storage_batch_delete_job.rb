@@ -25,8 +25,15 @@ def delete_job project_id:, job_id:
   client = Google::Cloud::StorageBatchOperations.storage_batch_operations
   parent = "projects/#{project_id}/locations/global"
   request = Google::Cloud::StorageBatchOperations::V1::DeleteJobRequest.new name: "#{parent}/jobs/#{job_id}"
-  result = client.delete_job request
-  puts result.is_a?(Google::Protobuf::Empty) ? "The #{job_id} is deleted." : "The #{job_id} is not deleted."
+
+  begin
+    client.delete_job request
+    message = "The #{job_id} is deleted."
+  rescue Google::Cloud::NotFoundError
+    message = "Job #{job_id} not found."
+  end
+
+  puts message
 end
 # [END storage_batch_delete_job]
 
