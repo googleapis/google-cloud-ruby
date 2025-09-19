@@ -19,7 +19,7 @@ require_relative "../storage_batch_cancel_job"
 require_relative "../storage_batch_list_job"
 require_relative "../storage_batch_get_job"
 
-describe "Batch jobs Snippets" do
+describe "Storage Batch Operations" do
   let(:bucket_name) { random_bucket_name }
   let(:project_id)       { storage_client.project }
   let(:file_content)     { "some content" }
@@ -34,7 +34,7 @@ describe "Batch jobs Snippets" do
     delete_bucket_helper bucket_name
   end
 
-  it "creates, lists, gets, cancels, and deletes a batch job in sequence" do
+  it "handles Storage batch operation lifecycle in sequence" do
     job_id = "ruby-sbo-job-#{SecureRandom.hex}"
 
     # Create job
@@ -52,7 +52,6 @@ describe "Batch jobs Snippets" do
 
     # Cancel job
     expected_output_pattern = /The #{job_id} is canceled\.|#{job_id} was already completed or was not created\./
-
     assert_output expected_output_pattern do
       cancel_job project_id: project_id, job_id: job_id
     end
