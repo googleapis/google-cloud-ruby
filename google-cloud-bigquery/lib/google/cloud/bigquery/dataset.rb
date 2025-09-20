@@ -2224,7 +2224,7 @@ module Google
         def load_job table_id, files, format: nil, create: nil, write: nil, projection_fields: nil, jagged_rows: nil,
                      quoted_newlines: nil, encoding: nil, delimiter: nil, ignore_unknown: nil, max_bad_records: nil,
                      quote: nil, skip_leading: nil, schema: nil, job_id: nil, prefix: nil, labels: nil, autodetect: nil,
-                     null_marker: nil, dryrun: nil, create_session: nil, session_id: nil
+                     null_marker: nil, dryrun: nil, create_session: nil, session_id: nil, column_name_character_map: nil
           ensure_service!
 
           updater = load_job_updater table_id,
@@ -2234,7 +2234,7 @@ module Google
                                      max_bad_records: max_bad_records, quote: quote, skip_leading: skip_leading,
                                      dryrun: dryrun, schema: schema, job_id: job_id, prefix: prefix, labels: labels,
                                      autodetect: autodetect, null_marker: null_marker, create_session: create_session,
-                                     session_id: session_id
+                                     session_id: session_id, column_name_character_map: column_name_character_map
 
           yield updater if block_given?
 
@@ -2979,36 +2979,38 @@ module Google
         end
 
         def load_job_csv_options! job, jagged_rows: nil, quoted_newlines: nil, delimiter: nil, quote: nil,
-                                  skip_leading: nil, null_marker: nil
+                                  skip_leading: nil, null_marker: nil, column_name_character_map: nil
           job.jagged_rows = jagged_rows unless jagged_rows.nil?
           job.quoted_newlines = quoted_newlines unless quoted_newlines.nil?
           job.delimiter = delimiter unless delimiter.nil?
           job.null_marker = null_marker unless null_marker.nil?
           job.quote = quote unless quote.nil?
           job.skip_leading = skip_leading unless skip_leading.nil?
+          job.column_name_character_map = column_name_character_map unless column_name_character_map.nil?
         end
 
         def load_job_file_options! job, format: nil, projection_fields: nil, jagged_rows: nil, quoted_newlines: nil,
                                    encoding: nil, delimiter: nil, ignore_unknown: nil, max_bad_records: nil, quote: nil,
-                                   skip_leading: nil, null_marker: nil
+                                   skip_leading: nil, null_marker: nil, column_name_character_map: nil
           job.format = format unless format.nil?
           job.projection_fields = projection_fields unless projection_fields.nil?
           job.encoding = encoding unless encoding.nil?
           job.ignore_unknown = ignore_unknown unless ignore_unknown.nil?
           job.max_bad_records = max_bad_records unless max_bad_records.nil?
-          load_job_csv_options! job, jagged_rows:     jagged_rows,
-                                     quoted_newlines: quoted_newlines,
-                                     delimiter:       delimiter,
-                                     quote:           quote,
-                                     skip_leading:    skip_leading,
-                                     null_marker:     null_marker
+          load_job_csv_options! job, jagged_rows:               jagged_rows,
+                                     quoted_newlines:           quoted_newlines,
+                                     delimiter:                 delimiter,
+                                     quote:                     quote,
+                                     skip_leading:              skip_leading,
+                                     null_marker:               null_marker,
+                                     column_name_character_map: column_name_character_map
         end
 
         def load_job_updater table_id, format: nil, create: nil, write: nil, projection_fields: nil, jagged_rows: nil,
                              quoted_newlines: nil, encoding: nil, delimiter: nil, ignore_unknown: nil,
                              max_bad_records: nil, quote: nil, skip_leading: nil, dryrun: nil, schema: nil, job_id: nil,
                              prefix: nil, labels: nil, autodetect: nil, null_marker: nil, create_session: nil,
-                             session_id: nil
+                             session_id: nil, column_name_character_map: nil
           new_job = load_job_gapi table_id, dryrun, job_id: job_id, prefix: prefix
           LoadJob::Updater.new(new_job).tap do |job|
             job.location = location if location # may be dataset reference
@@ -3019,17 +3021,18 @@ module Google
             job.labels = labels unless labels.nil?
             job.create_session = create_session unless create_session.nil?
             job.session_id = session_id unless session_id.nil?
-            load_job_file_options! job, format:            format,
-                                        projection_fields: projection_fields,
-                                        jagged_rows:       jagged_rows,
-                                        quoted_newlines:   quoted_newlines,
-                                        encoding:          encoding,
-                                        delimiter:         delimiter,
-                                        ignore_unknown:    ignore_unknown,
-                                        max_bad_records:   max_bad_records,
-                                        quote:             quote,
-                                        skip_leading:      skip_leading,
-                                        null_marker:       null_marker
+            load_job_file_options! job, format:                    format,
+                                        projection_fields:         projection_fields,
+                                        jagged_rows:               jagged_rows,
+                                        quoted_newlines:           quoted_newlines,
+                                        encoding:                  encoding,
+                                        delimiter:                 delimiter,
+                                        ignore_unknown:            ignore_unknown,
+                                        max_bad_records:           max_bad_records,
+                                        quote:                     quote,
+                                        skip_leading:              skip_leading,
+                                        null_marker:               null_marker,
+                                        column_name_character_map: column_name_character_map
           end
         end
 
