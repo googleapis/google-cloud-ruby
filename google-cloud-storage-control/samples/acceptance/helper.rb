@@ -27,6 +27,7 @@ def random_folder_name prefix: "ruby-storage-control-folder-samples-test-"
   t = Time.now.utc.iso8601.gsub ":", "-"
   "#{prefix}-#{t}-#{SecureRandom.hex 4}".downcase
 end
+
 def storage_client
   @storage_client ||= Google::Cloud::Storage.new
 end
@@ -91,4 +92,4 @@ def count_anywhere_caches bucket_name
   end
 
   result.response.anywhere_caches.count
-end 
+end
