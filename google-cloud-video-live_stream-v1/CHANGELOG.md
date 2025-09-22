@@ -1,5 +1,11 @@
 # Changelog
 
+### 2.4.0 (2025-09-22)
+
+#### Features
+
+* Added H.265 (HEVC) codec support ([#31529](https://github.com/googleapis/google-cloud-ruby/issues/31529)) 
+
 ### 2.3.0 (2025-09-11)
 
 #### Features
