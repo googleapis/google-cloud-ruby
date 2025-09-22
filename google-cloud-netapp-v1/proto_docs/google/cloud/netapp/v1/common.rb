@@ -29,7 +29,19 @@ module Google
         # @!attribute [r] supported_flex_performance
         #   @return [::Array<::Google::Cloud::NetApp::V1::FlexPerformance>]
         #     Output only. Supported flex performance in a location.
+        # @!attribute [r] has_vcp
+        #   @return [::Boolean]
+        #     Output only. Indicates if the location has VCP support.
         class LocationMetadata
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # UserCommands contains the commands to be executed by the customer.
+        # @!attribute [r] commands
+        #   @return [::Array<::String>]
+        #     Output only. List of commands to be executed by the customer.
+        class UserCommands
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
@@ -83,6 +95,35 @@ module Google
 
           # Active directory policy attached to the storage pool.
           ACTIVE_DIRECTORY = 1
+        end
+
+        # Schedule for Hybrid Replication.
+        # New enum values may be added in future to support different frequency of
+        # replication.
+        module HybridReplicationSchedule
+          # Unspecified HybridReplicationSchedule
+          HYBRID_REPLICATION_SCHEDULE_UNSPECIFIED = 0
+
+          # Replication happens once every 10 minutes.
+          EVERY_10_MINUTES = 1
+
+          # Replication happens once every hour.
+          HOURLY = 2
+
+          # Replication happens once every day.
+          DAILY = 3
+        end
+
+        # QoS (Quality of Service) Types of the storage pool
+        module QosType
+          # Unspecified QoS Type
+          QOS_TYPE_UNSPECIFIED = 0
+
+          # QoS Type is Auto
+          AUTO = 1
+
+          # QoS Type is Manual
+          MANUAL = 2
         end
       end
     end

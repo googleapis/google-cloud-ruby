@@ -34,6 +34,14 @@ In order to use this library, you first need to go through the following steps:
 1. [Enable the API.](https://console.cloud.google.com/apis/library/iap.googleapis.com)
 1. [Set up authentication.](AUTHENTICATION.md)
 
+```ruby
+require "google/cloud/iap"
+
+client = Google::Cloud::Iap.identity_aware_proxy_admin_service
+request = ::Google::Iam::V1::SetIamPolicyRequest.new # (request fields as keyword arguments...)
+response = client.set_iam_policy request
+```
+
 ## Debug Logging
 
 This library comes with opt-in Debug Logging that can help you troubleshoot

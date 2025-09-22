@@ -99,7 +99,7 @@ module Google
             # Software Runtime Configuration to run Analyze.
             # @!attribute [rw] image_version
             #   @return [::String]
-            #     Required. Dataplex Image version.
+            #     Required. Dataplex Universal Catalog Image version.
             # @!attribute [rw] java_libraries
             #   @return [::Array<::String>]
             #     Optional. List of Java jars to be included in the runtime environment.

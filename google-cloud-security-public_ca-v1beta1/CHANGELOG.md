@@ -1,5 +1,17 @@
 # Changelog
 
+### 0.10.0 (2025-09-11)
+
+#### Features
+
+* update gapic-common dependency for generated libraries to 1.2 which requires google-protobuf v4.26+ ([#31011](https://github.com/googleapis/google-cloud-ruby/issues/31011)) 
+
+### 0.9.1 (2025-09-03)
+
+#### Documentation
+
+* Add API publishing information for public CA.googleapis.com ([#30931](https://github.com/googleapis/google-cloud-ruby/issues/30931)) 
+
 ### 0.9.0 (2025-05-12)
 
 #### Features

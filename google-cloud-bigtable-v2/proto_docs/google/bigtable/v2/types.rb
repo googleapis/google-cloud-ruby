@@ -26,25 +26,23 @@ module Google
         # familiarity and consistency across products and features.
         #
         # For compatibility with Bigtable's existing untyped APIs, each `Type` includes
-        # an `Encoding` which describes how to convert to/from the underlying data.
+        # an `Encoding` which describes how to convert to or from the underlying data.
         #
-        # Each encoding also defines the following properties:
+        # Each encoding can operate in one of two modes:
         #
-        #  * Order-preserving: Does the encoded value sort consistently with the
-        #    original typed value? Note that Bigtable will always sort data based on
-        #    the raw encoded value, *not* the decoded type.
-        #     - Example: BYTES values sort in the same order as their raw encodings.
-        #     - Counterexample: Encoding INT64 as a fixed-width decimal string does
-        #       *not* preserve sort order when dealing with negative numbers.
-        #       `INT64(1) > INT64(-1)`, but `STRING("-00001") > STRING("00001)`.
-        #  * Self-delimiting: If we concatenate two encoded values, can we always tell
-        #    where the first one ends and the second one begins?
-        #     - Example: If we encode INT64s to fixed-width STRINGs, the first value
-        #       will always contain exactly N digits, possibly preceded by a sign.
-        #     - Counterexample: If we concatenate two UTF-8 encoded STRINGs, we have
-        #       no way to tell where the first one ends.
-        #  * Compatibility: Which other systems have matching encoding schemes? For
-        #    example, does this encoding have a GoogleSQL equivalent? HBase? Java?
+        #  - Sorted: In this mode, Bigtable guarantees that `Encode(X) <= Encode(Y)`
+        #    if and only if `X <= Y`. This is useful anywhere sort order is important,
+        #    for example when encoding keys.
+        #  - Distinct: In this mode, Bigtable guarantees that if `X != Y` then
+        #   `Encode(X) != Encode(Y)`. However, the converse is not guaranteed. For
+        #    example, both `{'foo': '1', 'bar': '2'}` and `{'bar': '2', 'foo': '1'}`
+        #    are valid encodings of the same JSON value.
+        #
+        # The API clearly documents which mode is used wherever an encoding can be
+        # configured. Each encoding also documents which values are supported in which
+        # modes. For example, when encoding INT64 as a numeric STRING, negative numbers
+        # cannot be encoded in sorted mode. This is because `INT64(1) > INT64(-1)`, but
+        # `STRING("-00001") > STRING("00001")`.
         # @!attribute [rw] bytes_type
         #   @return [::Google::Cloud::Bigtable::V2::Type::Bytes]
         #     Bytes
@@ -123,12 +121,12 @@ module Google
           # Values of type `Bytes` are stored in `Value.bytes_value`.
           # @!attribute [rw] encoding
           #   @return [::Google::Cloud::Bigtable::V2::Type::Bytes::Encoding]
-          #     The encoding to use when converting to/from lower level types.
+          #     The encoding to use when converting to or from lower level types.
           class Bytes
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
 
-            # Rules used to convert to/from lower level types.
+            # Rules used to convert to or from lower level types.
             # @!attribute [rw] raw
             #   @return [::Google::Cloud::Bigtable::V2::Type::Bytes::Encoding::Raw]
             #     Use `Raw` encoding.
@@ -136,10 +134,17 @@ module Google
               include ::Google::Protobuf::MessageExts
               extend ::Google::Protobuf::MessageExts::ClassMethods
 
-              # Leaves the value "as-is"
-              # * Order-preserving? Yes
-              # * Self-delimiting? No
-              # * Compatibility? N/A
+              # Leaves the value as-is.
+              #
+              # Sorted mode: all values are supported.
+              #
+              # Distinct mode: all values are supported.
+              # @!attribute [rw] escape_nulls
+              #   @return [::Boolean]
+              #     If set, allows NULL values to be encoded as the empty string "".
+              #
+              #     The actual empty string, or any value which only contains the
+              #     null byte `0x00`, has one more null byte appended.
               class Raw
                 include ::Google::Protobuf::MessageExts
                 extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -151,12 +156,12 @@ module Google
           # Values of type `String` are stored in `Value.string_value`.
           # @!attribute [rw] encoding
           #   @return [::Google::Cloud::Bigtable::V2::Type::String::Encoding]
-          #     The encoding to use when converting to/from lower level types.
+          #     The encoding to use when converting to or from lower level types.
           class String
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
 
-            # Rules used to convert to/from lower level types.
+            # Rules used to convert to or from lower level types.
             # @!attribute [rw] utf8_raw
             #   @deprecated This field is deprecated and may be removed in the next major version update.
             #   @return [::Google::Cloud::Bigtable::V2::Type::String::Encoding::Utf8Raw]
@@ -179,13 +184,32 @@ module Google
                 extend ::Google::Protobuf::MessageExts::ClassMethods
               end
 
-              # UTF-8 encoding
-              # * Order-preserving? Yes (code point order)
-              # * Self-delimiting? No
-              # * Compatibility?
-              #    - BigQuery Federation `TEXT` encoding
-              #    - HBase `Bytes.toBytes`
-              #    - Java `String#getBytes(StandardCharsets.UTF_8)`
+              # UTF-8 encoding.
+              #
+              # Sorted mode:
+              #  - All values are supported.
+              #  - Code point order is preserved.
+              #
+              # Distinct mode: all values are supported.
+              #
+              # Compatible with:
+              #
+              #  - BigQuery `TEXT` encoding
+              #  - HBase `Bytes.toBytes`
+              #  - Java `String#getBytes(StandardCharsets.UTF_8)`
+              # @!attribute [rw] null_escape_char
+              #   @return [::String]
+              #     Single-character escape sequence used to support NULL values.
+              #
+              #     If set, allows NULL values to be encoded as the empty string "".
+              #
+              #     The actual empty string, or any value where every character equals
+              #     `null_escape_char`, has one more `null_escape_char` appended.
+              #
+              #     If `null_escape_char` is set and does not equal the ASCII null
+              #     character `0x00`, then the encoding will not support sorted mode.
+              #
+              #     .
               class Utf8Bytes
                 include ::Google::Protobuf::MessageExts
                 extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -197,31 +221,53 @@ module Google
           # Values of type `Int64` are stored in `Value.int_value`.
           # @!attribute [rw] encoding
           #   @return [::Google::Cloud::Bigtable::V2::Type::Int64::Encoding]
-          #     The encoding to use when converting to/from lower level types.
+          #     The encoding to use when converting to or from lower level types.
           class Int64
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
 
-            # Rules used to convert to/from lower level types.
+            # Rules used to convert to or from lower level types.
             # @!attribute [rw] big_endian_bytes
             #   @return [::Google::Cloud::Bigtable::V2::Type::Int64::Encoding::BigEndianBytes]
             #     Use `BigEndianBytes` encoding.
+            #
+            #     Note: The following fields are mutually exclusive: `big_endian_bytes`, `ordered_code_bytes`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+            # @!attribute [rw] ordered_code_bytes
+            #   @return [::Google::Cloud::Bigtable::V2::Type::Int64::Encoding::OrderedCodeBytes]
+            #     Use `OrderedCodeBytes` encoding.
+            #
+            #     Note: The following fields are mutually exclusive: `ordered_code_bytes`, `big_endian_bytes`. If a field in that set is populated, all other fields in the set will automatically be cleared.
             class Encoding
               include ::Google::Protobuf::MessageExts
               extend ::Google::Protobuf::MessageExts::ClassMethods
 
-              # Encodes the value as an 8-byte big endian twos complement `Bytes`
-              # value.
-              # * Order-preserving? No (positive values only)
-              # * Self-delimiting? Yes
-              # * Compatibility?
-              #    - BigQuery Federation `BINARY` encoding
-              #    - HBase `Bytes.toBytes`
-              #    - Java `ByteBuffer.putLong()` with `ByteOrder.BIG_ENDIAN`
+              # Encodes the value as an 8-byte big-endian two's complement value.
+              #
+              # Sorted mode: non-negative values are supported.
+              #
+              # Distinct mode: all values are supported.
+              #
+              # Compatible with:
+              #
+              #  - BigQuery `BINARY` encoding
+              #  - HBase `Bytes.toBytes`
+              #  - Java `ByteBuffer.putLong()` with `ByteOrder.BIG_ENDIAN`
               # @!attribute [rw] bytes_type
+              #   @deprecated This field is deprecated and may be removed in the next major version update.
               #   @return [::Google::Cloud::Bigtable::V2::Type::Bytes]
               #     Deprecated: ignored if set.
               class BigEndianBytes
+                include ::Google::Protobuf::MessageExts
+                extend ::Google::Protobuf::MessageExts::ClassMethods
+              end
+
+              # Encodes the value in a variable length binary format of up to 10 bytes.
+              # Values that are closer to zero use fewer bytes.
+              #
+              # Sorted mode: all values are supported.
+              #
+              # Distinct mode: all values are supported.
+              class OrderedCodeBytes
                 include ::Google::Protobuf::MessageExts
                 extend ::Google::Protobuf::MessageExts::ClassMethods
               end
@@ -251,9 +297,26 @@ module Google
 
           # Timestamp
           # Values of type `Timestamp` are stored in `Value.timestamp_value`.
+          # @!attribute [rw] encoding
+          #   @return [::Google::Cloud::Bigtable::V2::Type::Timestamp::Encoding]
+          #     The encoding to use when converting to or from lower level types.
           class Timestamp
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
+
+            # Rules used to convert to or from lower level types.
+            # @!attribute [rw] unix_micros_int64
+            #   @return [::Google::Cloud::Bigtable::V2::Type::Int64::Encoding]
+            #     Encodes the number of microseconds since the Unix epoch using the
+            #     given `Int64` encoding. Values must be microsecond-aligned.
+            #
+            #     Compatible with:
+            #
+            #      - Java `Instant.truncatedTo()` with `ChronoUnit.MICROS`
+            class Encoding
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
           end
 
           # Date
@@ -270,6 +333,9 @@ module Google
           # @!attribute [rw] fields
           #   @return [::Array<::Google::Cloud::Bigtable::V2::Type::Struct::Field>]
           #     The names and types of the fields in this struct.
+          # @!attribute [rw] encoding
+          #   @return [::Google::Cloud::Bigtable::V2::Type::Struct::Encoding]
+          #     The encoding to use when converting to or from lower level types.
           class Struct
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -285,6 +351,107 @@ module Google
             class Field
               include ::Google::Protobuf::MessageExts
               extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
+
+            # Rules used to convert to or from lower level types.
+            # @!attribute [rw] singleton
+            #   @return [::Google::Cloud::Bigtable::V2::Type::Struct::Encoding::Singleton]
+            #     Use `Singleton` encoding.
+            #
+            #     Note: The following fields are mutually exclusive: `singleton`, `delimited_bytes`, `ordered_code_bytes`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+            # @!attribute [rw] delimited_bytes
+            #   @return [::Google::Cloud::Bigtable::V2::Type::Struct::Encoding::DelimitedBytes]
+            #     Use `DelimitedBytes` encoding.
+            #
+            #     Note: The following fields are mutually exclusive: `delimited_bytes`, `singleton`, `ordered_code_bytes`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+            # @!attribute [rw] ordered_code_bytes
+            #   @return [::Google::Cloud::Bigtable::V2::Type::Struct::Encoding::OrderedCodeBytes]
+            #     User `OrderedCodeBytes` encoding.
+            #
+            #     Note: The following fields are mutually exclusive: `ordered_code_bytes`, `singleton`, `delimited_bytes`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+            class Encoding
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+
+              # Uses the encoding of `fields[0].type` as-is.
+              # Only valid if `fields.size == 1`.
+              class Singleton
+                include ::Google::Protobuf::MessageExts
+                extend ::Google::Protobuf::MessageExts::ClassMethods
+              end
+
+              # Fields are encoded independently and concatenated with a configurable
+              # `delimiter` in between.
+              #
+              # A struct with no fields defined is encoded as a single `delimiter`.
+              #
+              # Sorted mode:
+              #
+              #  - Fields are encoded in sorted mode.
+              #  - Encoded field values must not contain any bytes <= `delimiter[0]`
+              #  - Element-wise order is preserved: `A < B` if `A[0] < B[0]`, or if
+              #    `A[0] == B[0] && A[1] < B[1]`, etc. Strict prefixes sort first.
+              #
+              # Distinct mode:
+              #
+              #  - Fields are encoded in distinct mode.
+              #  - Encoded field values must not contain `delimiter[0]`.
+              # @!attribute [rw] delimiter
+              #   @return [::String]
+              #     Byte sequence used to delimit concatenated fields. The delimiter must
+              #     contain at least 1 character and at most 50 characters.
+              class DelimitedBytes
+                include ::Google::Protobuf::MessageExts
+                extend ::Google::Protobuf::MessageExts::ClassMethods
+              end
+
+              # Fields are encoded independently and concatenated with the fixed byte
+              # pair `{0x00, 0x01}` in between.
+              #
+              # Any null `(0x00)` byte in an encoded field is replaced by the fixed
+              # byte pair `{0x00, 0xFF}`.
+              #
+              # Fields that encode to the empty string "" have special handling:
+              #
+              #  - If *every* field encodes to "", or if the STRUCT has no fields
+              #    defined, then the STRUCT is encoded as the fixed byte pair
+              #    `{0x00, 0x00}`.
+              #  - Otherwise, the STRUCT only encodes until the last non-empty field,
+              #    omitting any trailing empty fields. Any empty fields that aren't
+              #    omitted are replaced with the fixed byte pair `{0x00, 0x00}`.
+              #
+              # Examples:
+              #
+              # ```
+              #  - STRUCT()             -> "\00\00"
+              #  - STRUCT("")           -> "\00\00"
+              #  - STRUCT("", "")       -> "\00\00"
+              #  - STRUCT("", "B")      -> "\00\00" + "\00\01" + "B"
+              #  - STRUCT("A", "")      -> "A"
+              #  - STRUCT("", "B", "")  -> "\00\00" + "\00\01" + "B"
+              #  - STRUCT("A", "", "C") -> "A" + "\00\01" + "\00\00" + "\00\01" + "C"
+              # ```
+              #
+              #
+              # Since null bytes are always escaped, this encoding can cause size
+              # blowup for encodings like `Int64.BigEndianBytes` that are likely to
+              # produce many such bytes.
+              #
+              # Sorted mode:
+              #
+              #  - Fields are encoded in sorted mode.
+              #  - All values supported by the field encodings are allowed
+              #  - Element-wise order is preserved: `A < B` if `A[0] < B[0]`, or if
+              #    `A[0] == B[0] && A[1] < B[1]`, etc. Strict prefixes sort first.
+              #
+              # Distinct mode:
+              #
+              #  - Fields are encoded in distinct mode.
+              #  - All values supported by the field encodings are allowed.
+              class OrderedCodeBytes
+                include ::Google::Protobuf::MessageExts
+                extend ::Google::Protobuf::MessageExts::ClassMethods
+              end
             end
           end
 
@@ -347,19 +514,18 @@ module Google
 
           # A value that combines incremental updates into a summarized value.
           #
-          # Data is never directly written or read using type `Aggregate`. Writes will
-          # provide either the `input_type` or `state_type`, and reads will always
-          # return the `state_type` .
+          # Data is never directly written or read using type `Aggregate`. Writes
+          # provide either the `input_type` or `state_type`, and reads always return
+          # the `state_type` .
           # @!attribute [rw] input_type
           #   @return [::Google::Cloud::Bigtable::V2::Type]
-          #     Type of the inputs that are accumulated by this `Aggregate`, which must
-          #     specify a full encoding.
+          #     Type of the inputs that are accumulated by this `Aggregate`.
           #     Use `AddInput` mutations to accumulate new inputs.
           # @!attribute [r] state_type
           #   @return [::Google::Cloud::Bigtable::V2::Type]
           #     Output only. Type that holds the internal accumulator state for the
           #     `Aggregate`. This is a function of the `input_type` and `aggregator`
-          #     chosen, and will always specify a full encoding.
+          #     chosen.
           # @!attribute [rw] sum
           #   @return [::Google::Cloud::Bigtable::V2::Type::Aggregate::Sum]
           #     Sum aggregator.

@@ -1,5 +1,14 @@
 # Changelog
 
+### 0.4.0 (2025-09-12)
+
+#### Features
+
+* Introduce new services for data collection (ApiHubCollect) and curation (ApiHubCurate) 
+#### Documentation
+
+* Update README in wrapper libraries ([#31016](https://github.com/googleapis/google-cloud-ruby/issues/31016)) 
+
 ### 0.3.1 (2025-04-29)
 
 #### Bug Fixes

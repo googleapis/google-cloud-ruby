@@ -879,6 +879,14 @@
       "component": "google-cloud-gke_multi_cloud-v1",
       "version_file": "lib/google/cloud/gke_multi_cloud/v1/version.rb"
     },
+    "google-cloud-gke_recommender": {
+      "component": "google-cloud-gke_recommender",
+      "version_file": "lib/google/cloud/gke_recommender/version.rb"
+    },
+    "google-cloud-gke_recommender-v1": {
+      "component": "google-cloud-gke_recommender-v1",
+      "version_file": "lib/google/cloud/gke_recommender/v1/version.rb"
+    },
     "google-cloud-gsuite_add_ons": {
       "component": "google-cloud-gsuite_add_ons",
       "version_file": "lib/google/cloud/gsuite_add_ons/version.rb"

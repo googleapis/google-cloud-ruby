@@ -1,5 +1,17 @@
 # Release History
 
+### 1.59.0 (2025-09-17)
+
+#### Features
+
+* Support collation feature ([#30919](https://github.com/googleapis/google-cloud-ruby/issues/30919)) 
+
+### 1.58.0 (2025-09-03)
+
+#### Features
+
+* Add support for remote function options ([#30822](https://github.com/googleapis/google-cloud-ruby/issues/30822)) 
+
 ### 1.57.0 (2025-08-28)
 
 #### Features

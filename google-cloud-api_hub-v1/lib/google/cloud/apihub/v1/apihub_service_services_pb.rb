@@ -41,7 +41,7 @@ module Google
             # List API resources in the API hub.
             rpc :ListApis, ::Google::Cloud::ApiHub::V1::ListApisRequest, ::Google::Cloud::ApiHub::V1::ListApisResponse
             # Update an API resource in the API hub. The following fields in the
-            # [API][] can be updated:
+            # [API][google.cloud.apihub.v1.Api] can be updated:
             #
             # * [display_name][google.cloud.apihub.v1.Api.display_name]
             # * [description][google.cloud.apihub.v1.Api.description]
@@ -51,6 +51,7 @@ module Google
             # * [team][google.cloud.apihub.v1.Api.team]
             # * [business_unit][google.cloud.apihub.v1.Api.business_unit]
             # * [maturity_level][google.cloud.apihub.v1.Api.maturity_level]
+            # * [api_style][google.cloud.apihub.v1.Api.api_style]
             # * [attributes][google.cloud.apihub.v1.Api.attributes]
             #
             # The
@@ -148,10 +149,38 @@ module Google
             # Deleting a spec will also delete the associated operations from the
             # version.
             rpc :DeleteSpec, ::Google::Cloud::ApiHub::V1::DeleteSpecRequest, ::Google::Protobuf::Empty
+            # Create an apiOperation in an API version.
+            # An apiOperation can be created only if the version has no apiOperations
+            # which were created by parsing a spec.
+            rpc :CreateApiOperation, ::Google::Cloud::ApiHub::V1::CreateApiOperationRequest, ::Google::Cloud::ApiHub::V1::ApiOperation
             # Get details about a particular operation in API version.
             rpc :GetApiOperation, ::Google::Cloud::ApiHub::V1::GetApiOperationRequest, ::Google::Cloud::ApiHub::V1::ApiOperation
             # List operations in an API version.
             rpc :ListApiOperations, ::Google::Cloud::ApiHub::V1::ListApiOperationsRequest, ::Google::Cloud::ApiHub::V1::ListApiOperationsResponse
+            # Update an operation in an API version. The following fields in the
+            # [ApiOperation resource][google.cloud.apihub.v1.ApiOperation] can be
+            # updated:
+            #
+            # * [details.description][ApiOperation.details.description]
+            # * [details.documentation][ApiOperation.details.documentation]
+            # * [details.http_operation.path][ApiOperation.details.http_operation.path.path]
+            # * [details.http_operation.method][ApiOperation.details.http_operation.method]
+            # * [details.deprecated][ApiOperation.details.deprecated]
+            # * [attributes][google.cloud.apihub.v1.ApiOperation.attributes]
+            #
+            # The
+            # [update_mask][google.cloud.apihub.v1.UpdateApiOperationRequest.update_mask]
+            # should be used to specify the fields being updated.
+            #
+            # An operation can be updated only if the operation was created via
+            # [CreateApiOperation][google.cloud.apihub.v1.ApiHub.CreateApiOperation] API.
+            # If the operation was created by parsing the spec, then it can be edited by
+            # updating the spec.
+            rpc :UpdateApiOperation, ::Google::Cloud::ApiHub::V1::UpdateApiOperationRequest, ::Google::Cloud::ApiHub::V1::ApiOperation
+            # Delete an operation in an API version and we can delete only the
+            # operations created via create API. If the operation was created by parsing
+            # the spec, then it can be deleted by editing or deleting the spec.
+            rpc :DeleteApiOperation, ::Google::Cloud::ApiHub::V1::DeleteApiOperationRequest, ::Google::Protobuf::Empty
             # Get details about a definition in an API version.
             rpc :GetDefinition, ::Google::Cloud::ApiHub::V1::GetDefinitionRequest, ::Google::Cloud::ApiHub::V1::Definition
             # Create a deployment resource in the API hub.
@@ -175,7 +204,11 @@ module Google
             # * [slo][google.cloud.apihub.v1.Deployment.slo]
             # * [environment][google.cloud.apihub.v1.Deployment.environment]
             # * [attributes][google.cloud.apihub.v1.Deployment.attributes]
-            #
+            # * [source_project] [google.cloud.apihub.v1.Deployment.source_project]
+            # * [source_environment]
+            # [google.cloud.apihub.v1.Deployment.source_environment]
+            # * [management_url][google.cloud.apihub.v1.Deployment.management_url]
+            # * [source_uri][google.cloud.apihub.v1.Deployment.source_uri]
             # The
             # [update_mask][google.cloud.apihub.v1.UpdateDeploymentRequest.update_mask]
             # should be used to specify the fields being updated.

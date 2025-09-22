@@ -1,5 +1,17 @@
 # Release History
 
+### 0.24.0 (2025-09-11)
+
+#### Features
+
+* update gapic-common dependency for generated libraries to 1.2 which requires google-protobuf v4.26+ ([#31011](https://github.com/googleapis/google-cloud-ruby/issues/31011)) 
+
+### 0.23.0 (2025-09-04)
+
+#### Features
+
+* Add string value prompt to SynthesisInput ([#30942](https://github.com/googleapis/google-cloud-ruby/issues/30942)) 
+
 ### 0.22.0 (2025-08-27)
 
 #### Features

@@ -355,6 +355,86 @@ module Google
                 end
 
                 ##
+                # Baseline implementation for the start_distribution REST call
+                #
+                # @param request_pb [::Google::Cloud::Video::LiveStream::V1::StartDistributionRequest]
+                #   A request object representing the call parameters. Required.
+                # @param options [::Gapic::CallOptions]
+                #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+                #
+                # @yield [result, operation] Access the result along with the TransportOperation object
+                # @yieldparam result [::Google::Longrunning::Operation]
+                # @yieldparam operation [::Gapic::Rest::TransportOperation]
+                #
+                # @return [::Google::Longrunning::Operation]
+                #   A result object deserialized from the server's reply
+                def start_distribution request_pb, options = nil
+                  raise ::ArgumentError, "request must be provided" if request_pb.nil?
+
+                  verb, uri, query_string_params, body = ServiceStub.transcode_start_distribution_request request_pb
+                  query_string_params = if query_string_params.any?
+                                          query_string_params.to_h { |p| p.split "=", 2 }
+                                        else
+                                          {}
+                                        end
+
+                  response = @client_stub.make_http_request(
+                    verb,
+                    uri: uri,
+                    body: body || "",
+                    params: query_string_params,
+                    method_name: "start_distribution",
+                    options: options
+                  )
+                  operation = ::Gapic::Rest::TransportOperation.new response
+                  result = ::Google::Longrunning::Operation.decode_json response.body, ignore_unknown_fields: true
+                  catch :response do
+                    yield result, operation if block_given?
+                    result
+                  end
+                end
+
+                ##
+                # Baseline implementation for the stop_distribution REST call
+                #
+                # @param request_pb [::Google::Cloud::Video::LiveStream::V1::StopDistributionRequest]
+                #   A request object representing the call parameters. Required.
+                # @param options [::Gapic::CallOptions]
+                #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+                #
+                # @yield [result, operation] Access the result along with the TransportOperation object
+                # @yieldparam result [::Google::Longrunning::Operation]
+                # @yieldparam operation [::Gapic::Rest::TransportOperation]
+                #
+                # @return [::Google::Longrunning::Operation]
+                #   A result object deserialized from the server's reply
+                def stop_distribution request_pb, options = nil
+                  raise ::ArgumentError, "request must be provided" if request_pb.nil?
+
+                  verb, uri, query_string_params, body = ServiceStub.transcode_stop_distribution_request request_pb
+                  query_string_params = if query_string_params.any?
+                                          query_string_params.to_h { |p| p.split "=", 2 }
+                                        else
+                                          {}
+                                        end
+
+                  response = @client_stub.make_http_request(
+                    verb,
+                    uri: uri,
+                    body: body || "",
+                    params: query_string_params,
+                    method_name: "stop_distribution",
+                    options: options
+                  )
+                  operation = ::Gapic::Rest::TransportOperation.new response
+                  result = ::Google::Longrunning::Operation.decode_json response.body, ignore_unknown_fields: true
+                  catch :response do
+                    yield result, operation if block_given?
+                    result
+                  end
+                end
+
+                ##
                 # Baseline implementation for the create_input REST call
                 #
                 # @param request_pb [::Google::Cloud::Video::LiveStream::V1::CreateInputRequest]
@@ -548,6 +628,46 @@ module Google
                   )
                   operation = ::Gapic::Rest::TransportOperation.new response
                   result = ::Google::Longrunning::Operation.decode_json response.body, ignore_unknown_fields: true
+                  catch :response do
+                    yield result, operation if block_given?
+                    result
+                  end
+                end
+
+                ##
+                # Baseline implementation for the preview_input REST call
+                #
+                # @param request_pb [::Google::Cloud::Video::LiveStream::V1::PreviewInputRequest]
+                #   A request object representing the call parameters. Required.
+                # @param options [::Gapic::CallOptions]
+                #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+                #
+                # @yield [result, operation] Access the result along with the TransportOperation object
+                # @yieldparam result [::Google::Cloud::Video::LiveStream::V1::PreviewInputResponse]
+                # @yieldparam operation [::Gapic::Rest::TransportOperation]
+                #
+                # @return [::Google::Cloud::Video::LiveStream::V1::PreviewInputResponse]
+                #   A result object deserialized from the server's reply
+                def preview_input request_pb, options = nil
+                  raise ::ArgumentError, "request must be provided" if request_pb.nil?
+
+                  verb, uri, query_string_params, body = ServiceStub.transcode_preview_input_request request_pb
+                  query_string_params = if query_string_params.any?
+                                          query_string_params.to_h { |p| p.split "=", 2 }
+                                        else
+                                          {}
+                                        end
+
+                  response = @client_stub.make_http_request(
+                    verb,
+                    uri: uri,
+                    body: body || "",
+                    params: query_string_params,
+                    method_name: "preview_input",
+                    options: options
+                  )
+                  operation = ::Gapic::Rest::TransportOperation.new response
+                  result = ::Google::Cloud::Video::LiveStream::V1::PreviewInputResponse.decode_json response.body, ignore_unknown_fields: true
                   catch :response do
                     yield result, operation if block_given?
                     result
@@ -1468,6 +1588,50 @@ module Google
                 ##
                 # @private
                 #
+                # GRPC transcoding helper method for the start_distribution REST call
+                #
+                # @param request_pb [::Google::Cloud::Video::LiveStream::V1::StartDistributionRequest]
+                #   A request object representing the call parameters. Required.
+                # @return [Array(String, [String, nil], Hash{String => String})]
+                #   Uri, Body, Query string parameters
+                def self.transcode_start_distribution_request request_pb
+                  transcoder = Gapic::Rest::GrpcTranscoder.new
+                                                          .with_bindings(
+                                                            uri_method: :post,
+                                                            uri_template: "/v1/{name}:startdistribution",
+                                                            body: "*",
+                                                            matches: [
+                                                              ["name", %r{^projects/[^/]+/locations/[^/]+/channels/[^/]+/?$}, false]
+                                                            ]
+                                                          )
+                  transcoder.transcode request_pb
+                end
+
+                ##
+                # @private
+                #
+                # GRPC transcoding helper method for the stop_distribution REST call
+                #
+                # @param request_pb [::Google::Cloud::Video::LiveStream::V1::StopDistributionRequest]
+                #   A request object representing the call parameters. Required.
+                # @return [Array(String, [String, nil], Hash{String => String})]
+                #   Uri, Body, Query string parameters
+                def self.transcode_stop_distribution_request request_pb
+                  transcoder = Gapic::Rest::GrpcTranscoder.new
+                                                          .with_bindings(
+                                                            uri_method: :post,
+                                                            uri_template: "/v1/{name}:stopdistribution",
+                                                            body: "*",
+                                                            matches: [
+                                                              ["name", %r{^projects/[^/]+/locations/[^/]+/channels/[^/]+/?$}, false]
+                                                            ]
+                                                          )
+                  transcoder.transcode request_pb
+                end
+
+                ##
+                # @private
+                #
                 # GRPC transcoding helper method for the create_input REST call
                 #
                 # @param request_pb [::Google::Cloud::Video::LiveStream::V1::CreateInputRequest]
@@ -1567,6 +1731,28 @@ module Google
                                                             body: "input",
                                                             matches: [
                                                               ["input.name", %r{^projects/[^/]+/locations/[^/]+/inputs/[^/]+/?$}, false]
+                                                            ]
+                                                          )
+                  transcoder.transcode request_pb
+                end
+
+                ##
+                # @private
+                #
+                # GRPC transcoding helper method for the preview_input REST call
+                #
+                # @param request_pb [::Google::Cloud::Video::LiveStream::V1::PreviewInputRequest]
+                #   A request object representing the call parameters. Required.
+                # @return [Array(String, [String, nil], Hash{String => String})]
+                #   Uri, Body, Query string parameters
+                def self.transcode_preview_input_request request_pb
+                  transcoder = Gapic::Rest::GrpcTranscoder.new
+                                                          .with_bindings(
+                                                            uri_method: :post,
+                                                            uri_template: "/v1/{name}:preview",
+                                                            body: "*",
+                                                            matches: [
+                                                              ["name", %r{^projects/[^/]+/locations/[^/]+/inputs/[^/]+/?$}, false]
                                                             ]
                                                           )
                   transcoder.transcode request_pb

@@ -50,9 +50,13 @@ module Google
         # @!attribute [rw] state
         #   @return [::Google::Cloud::VMMigration::V1::ReplicationCycle::State]
         #     State of the ReplicationCycle.
-        # @!attribute [rw] error
+        # @!attribute [r] error
         #   @return [::Google::Rpc::Status]
-        #     Provides details on the state of the cycle in case of an error.
+        #     Output only. Provides details on the state of the cycle in case of an
+        #     error.
+        # @!attribute [r] warnings
+        #   @return [::Array<::Google::Cloud::VMMigration::V1::MigrationWarning>]
+        #     Output only. Warnings that occurred during the cycle.
         class ReplicationCycle
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -151,9 +155,28 @@ module Google
         # @!attribute [rw] compute_engine_target_defaults
         #   @return [::Google::Cloud::VMMigration::V1::ComputeEngineTargetDefaults]
         #     Details of the target VM in Compute Engine.
+        #
+        #     Note: The following fields are mutually exclusive: `compute_engine_target_defaults`, `compute_engine_disks_target_defaults`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] compute_engine_disks_target_defaults
+        #   @return [::Google::Cloud::VMMigration::V1::ComputeEngineDisksTargetDefaults]
+        #     Details of the target Persistent Disks in Compute Engine.
+        #
+        #     Note: The following fields are mutually exclusive: `compute_engine_disks_target_defaults`, `compute_engine_target_defaults`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [r] vmware_source_vm_details
+        #   @return [::Google::Cloud::VMMigration::V1::VmwareSourceVmDetails]
+        #     Output only. Details of the VM from a Vmware source.
+        #
+        #     Note: The following fields are mutually exclusive: `vmware_source_vm_details`, `aws_source_vm_details`, `azure_source_vm_details`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [r] aws_source_vm_details
         #   @return [::Google::Cloud::VMMigration::V1::AwsSourceVmDetails]
         #     Output only. Details of the VM from an AWS source.
+        #
+        #     Note: The following fields are mutually exclusive: `aws_source_vm_details`, `vmware_source_vm_details`, `azure_source_vm_details`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [r] azure_source_vm_details
+        #   @return [::Google::Cloud::VMMigration::V1::AzureSourceVmDetails]
+        #     Output only. Details of the VM from an Azure source.
+        #
+        #     Note: The following fields are mutually exclusive: `azure_source_vm_details`, `vmware_source_vm_details`, `aws_source_vm_details`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [r] name
         #   @return [::String]
         #     Output only. The identifier of the MigratingVm.
@@ -190,8 +213,12 @@ module Google
         #     Output only. The last time the migrating VM state was updated.
         # @!attribute [r] current_sync_info
         #   @return [::Google::Cloud::VMMigration::V1::ReplicationCycle]
-        #     Output only. The percentage progress of the current running replication
-        #     cycle.
+        #     Output only. Details of the current running replication cycle.
+        # @!attribute [r] last_replication_cycle
+        #   @return [::Google::Cloud::VMMigration::V1::ReplicationCycle]
+        #     Output only. Details of the last replication cycle. This will be updated
+        #     whenever a replication cycle is finished and is not to be confused with
+        #     last_sync which is only updated on successful replication cycles.
         # @!attribute [r] group
         #   @return [::String]
         #     Output only. The group this migrating vm is included in, if any. The group
@@ -218,9 +245,32 @@ module Google
         #     running cutover job, if one exists.
         #     Note: To have this field populated you need to explicitly request it via
         #     the "view" parameter of the Get/List request.
+        # @!attribute [r] cutover_forecast
+        #   @return [::Google::Cloud::VMMigration::V1::CutoverForecast]
+        #     Output only. Provides details of future CutoverJobs of a MigratingVm.
+        #     Set to empty when cutover forecast is unavailable.
+        # @!attribute [r] expiration
+        #   @return [::Google::Cloud::VMMigration::V1::MigratingVm::Expiration]
+        #     Output only. Provides details about the expiration state of the migrating
+        #     VM.
         class MigratingVm
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Expiration holds information about the expiration of a MigratingVm.
+          # @!attribute [r] expire_time
+          #   @return [::Google::Protobuf::Timestamp]
+          #     Output only. Timestamp of when this resource is considered expired.
+          # @!attribute [r] extension_count
+          #   @return [::Integer]
+          #     Output only. The number of times expiration was extended.
+          # @!attribute [r] extendable
+          #   @return [::Boolean]
+          #     Output only. Describes whether the expiration can be extended.
+          class Expiration
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
 
           # @!attribute [rw] key
           #   @return [::String]
@@ -274,7 +324,25 @@ module Google
             # The replication process encountered an unrecoverable error and was
             # aborted.
             ERROR = 13
+
+            # The migrating VM has passed its expiration date. It might be possible to
+            # bring it back to "Active" state by updating the TTL field. For more
+            # information, see the documentation.
+            EXPIRED = 14
+
+            # The migrating VM's has been finalized and migration resources have been
+            # removed.
+            FINALIZED_EXPIRED = 17
           end
+        end
+
+        # CutoverForecast holds information about future CutoverJobs of a MigratingVm.
+        # @!attribute [r] estimated_cutover_job_duration
+        #   @return [::Google::Protobuf::Duration]
+        #     Output only. Estimation of the CutoverJob duration.
+        class CutoverForecast
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # CloneJob describes the process of creating a clone of a
@@ -290,6 +358,13 @@ module Google
         # @!attribute [r] compute_engine_target_details
         #   @return [::Google::Cloud::VMMigration::V1::ComputeEngineTargetDetails]
         #     Output only. Details of the target VM in Compute Engine.
+        #
+        #     Note: The following fields are mutually exclusive: `compute_engine_target_details`, `compute_engine_disks_target_details`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [r] compute_engine_disks_target_details
+        #   @return [::Google::Cloud::VMMigration::V1::ComputeEngineDisksTargetDetails]
+        #     Output only. Details of the target Persistent Disks in Compute Engine.
+        #
+        #     Note: The following fields are mutually exclusive: `compute_engine_disks_target_details`, `compute_engine_target_details`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [r] create_time
         #   @return [::Google::Protobuf::Timestamp]
         #     Output only. The time the clone job was created (as an API call, not when
@@ -393,10 +468,17 @@ module Google
 
         # CutoverJob message describes a cutover of a migrating VM. The CutoverJob is
         # the operation of shutting down the VM, creating a snapshot and
-        # clonning the VM using the replicated snapshot.
+        # cloning the VM using the replicated snapshot.
         # @!attribute [r] compute_engine_target_details
         #   @return [::Google::Cloud::VMMigration::V1::ComputeEngineTargetDetails]
         #     Output only. Details of the target VM in Compute Engine.
+        #
+        #     Note: The following fields are mutually exclusive: `compute_engine_target_details`, `compute_engine_disks_target_details`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [r] compute_engine_disks_target_details
+        #   @return [::Google::Cloud::VMMigration::V1::ComputeEngineDisksTargetDetails]
+        #     Output only. Details of the target Persistent Disks in Compute Engine.
+        #
+        #     Note: The following fields are mutually exclusive: `compute_engine_disks_target_details`, `compute_engine_target_details`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [r] create_time
         #   @return [::Google::Protobuf::Timestamp]
         #     Output only. The time the cutover job was created (as an API call, not when
@@ -520,8 +602,8 @@ module Google
         #     the request if it has already been completed. The server will guarantee
         #     that for at least 60 minutes since the first request.
         #
-        #     For example, consider a situation where you make an initial request and t
-        #     he request times out. If you make the request again with the same request
+        #     For example, consider a situation where you make an initial request and
+        #     the request times out. If you make the request again with the same request
         #     ID, the server can check if original operation with the same request ID
         #     was received, and if so, will ignore the second request. This prevents
         #     clients from accidentally creating duplicate commitments.
@@ -607,12 +689,17 @@ module Google
         #   @return [::Google::Cloud::VMMigration::V1::VmwareSourceDetails]
         #     Vmware type source details.
         #
-        #     Note: The following fields are mutually exclusive: `vmware`, `aws`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `vmware`, `aws`, `azure`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] aws
         #   @return [::Google::Cloud::VMMigration::V1::AwsSourceDetails]
         #     AWS type source details.
         #
-        #     Note: The following fields are mutually exclusive: `aws`, `vmware`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `aws`, `vmware`, `azure`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] azure
+        #   @return [::Google::Cloud::VMMigration::V1::AzureSourceDetails]
+        #     Azure type source details.
+        #
+        #     Note: The following fields are mutually exclusive: `azure`, `vmware`, `aws`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [r] name
         #   @return [::String]
         #     Output only. The Source name.
@@ -628,6 +715,10 @@ module Google
         # @!attribute [rw] description
         #   @return [::String]
         #     User-provided description of the source.
+        # @!attribute [rw] encryption
+        #   @return [::Google::Cloud::VMMigration::V1::Encryption]
+        #     Optional. Immutable. The encryption details of the source data stored by
+        #     the service.
         class Source
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -640,6 +731,16 @@ module Google
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
+        end
+
+        # Encryption message describes the details of the applied encryption.
+        # @!attribute [rw] kms_key
+        #   @return [::String]
+        #     Required. The name of the encryption key that is stored in Google Cloud
+        #     KMS.
+        class Encryption
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # VmwareSourceDetails message describes a specific source details for the
@@ -657,6 +758,9 @@ module Google
         # @!attribute [rw] thumbprint
         #   @return [::String]
         #     The thumbprint representing the certificate for the vcenter.
+        # @!attribute [rw] resolved_vcenter_host
+        #   @return [::String]
+        #     The hostname of the vcenter.
         class VmwareSourceDetails
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -705,6 +809,11 @@ module Google
           # @!attribute [rw] secret_access_key
           #   @return [::String]
           #     Input only. AWS secret access key.
+          # @!attribute [rw] session_token
+          #   @return [::String]
+          #     Input only. AWS session token.
+          #     Used only when AWS security token service (STS) is responsible for
+          #     creating the temporary credentials.
           class AccessKeyCredentials
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -713,11 +822,87 @@ module Google
           # Tag is an AWS tag representation.
           # @!attribute [rw] key
           #   @return [::String]
-          #     Key of tag.
+          #     Required. Key of tag.
           # @!attribute [rw] value
           #   @return [::String]
-          #     Value of tag.
+          #     Required. Value of tag.
           class Tag
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # @!attribute [rw] key
+          #   @return [::String]
+          # @!attribute [rw] value
+          #   @return [::String]
+          class MigrationResourcesUserTagsEntry
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # The possible values of the state.
+          module State
+            # The state is unknown. This is used for API compatibility only and is not
+            # used by the system.
+            STATE_UNSPECIFIED = 0
+
+            # The state was not sampled by the health checks yet.
+            PENDING = 1
+
+            # The source is available but might not be usable yet due to invalid
+            # credentials or another reason.
+            # The error message will contain further details.
+            FAILED = 2
+
+            # The source exists and its credentials were verified.
+            ACTIVE = 3
+          end
+        end
+
+        # AzureSourceDetails message describes a specific source details for the
+        # Azure source type.
+        # @!attribute [rw] client_secret_creds
+        #   @return [::Google::Cloud::VMMigration::V1::AzureSourceDetails::ClientSecretCredentials]
+        #     Azure Credentials using tenant ID, client ID and secret.
+        # @!attribute [rw] subscription_id
+        #   @return [::String]
+        #     Immutable. Azure subscription ID.
+        # @!attribute [rw] azure_location
+        #   @return [::String]
+        #     Immutable. The Azure location (region) that the source VMs will be migrated
+        #     from.
+        # @!attribute [r] state
+        #   @return [::Google::Cloud::VMMigration::V1::AzureSourceDetails::State]
+        #     Output only. State of the source as determined by the health check.
+        # @!attribute [r] error
+        #   @return [::Google::Rpc::Status]
+        #     Output only. Provides details on the state of the Source in case of an
+        #     error.
+        # @!attribute [rw] migration_resources_user_tags
+        #   @return [::Google::Protobuf::Map{::String => ::String}]
+        #     User specified tags to add to every M2VM generated resource in Azure.
+        #     These tags will be set in addition to the default tags that are set as part
+        #     of the migration process. The tags must not begin with the reserved prefix
+        #     `m4ce` or `m2vm`.
+        # @!attribute [r] resource_group_id
+        #   @return [::String]
+        #     Output only. The ID of the Azure resource group that contains all resources
+        #     related to the migration process of this source.
+        class AzureSourceDetails
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Message describing Azure Credentials using tenant ID, client ID and secret.
+          # @!attribute [rw] tenant_id
+          #   @return [::String]
+          #     Azure tenant ID.
+          # @!attribute [rw] client_id
+          #   @return [::String]
+          #     Azure client ID.
+          # @!attribute [rw] client_secret
+          #   @return [::String]
+          #     Input only. Azure client secret.
+          class ClientSecretCredentials
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
@@ -841,9 +1026,10 @@ module Google
         # @!attribute [rw] state
         #   @return [::Google::Cloud::VMMigration::V1::UpgradeStatus::State]
         #     The state of the upgradeAppliance operation.
-        # @!attribute [rw] error
+        # @!attribute [r] error
         #   @return [::Google::Rpc::Status]
-        #     Provides details on the state of the upgrade operation in case of an error.
+        #     Output only. Provides details on the state of the upgrade operation in case
+        #     of an error.
         # @!attribute [rw] start_time
         #   @return [::Google::Protobuf::Timestamp]
         #     The time the operation was started.
@@ -870,7 +1056,7 @@ module Google
           end
         end
 
-        # Holds informatiom about the available versions for upgrade.
+        # Holds information about the available versions for upgrade.
         # @!attribute [rw] new_deployable_appliance
         #   @return [::Google::Cloud::VMMigration::V1::ApplianceVersion]
         #     The newest deployable version of the appliance.
@@ -974,8 +1160,8 @@ module Google
         #     the request if it has already been completed. The server will guarantee
         #     that for at least 60 minutes since the first request.
         #
-        #     For example, consider a situation where you make an initial request and t
-        #     he request times out. If you make the request again with the same request
+        #     For example, consider a situation where you make an initial request and
+        #     the request times out. If you make the request again with the same request
         #     ID, the server can check if original operation with the same request ID
         #     was received, and if so, will ignore the second request. This prevents
         #     clients from accidentally creating duplicate commitments.
@@ -1005,8 +1191,8 @@ module Google
         #     the request if it has already been completed. The server will guarantee
         #     that for at least 60 minutes since the first request.
         #
-        #     For example, consider a situation where you make an initial request and t
-        #     he request times out. If you make the request again with the same request
+        #     For example, consider a situation where you make an initial request and
+        #     the request times out. If you make the request again with the same request
         #     ID, the server can check if original operation with the same request ID
         #     was received, and if so, will ignore the second request. This prevents
         #     clients from accidentally creating duplicate commitments.
@@ -1029,8 +1215,8 @@ module Google
         #     the request if it has already been completed. The server will guarantee
         #     that for at least 60 minutes after the first request.
         #
-        #     For example, consider a situation where you make an initial request and t
-        #     he request times out. If you make the request again with the same request
+        #     For example, consider a situation where you make an initial request and
+        #     the request times out. If you make the request again with the same request
         #     ID, the server can check if original operation with the same request ID
         #     was received, and if so, will ignore the second request. This prevents
         #     clients from accidentally creating duplicate commitments.
@@ -1096,6 +1282,9 @@ module Google
         # @!attribute [r] boot_option
         #   @return [::Google::Cloud::VMMigration::V1::VmwareVmDetails::BootOption]
         #     Output only. The VM Boot Option.
+        # @!attribute [r] architecture
+        #   @return [::Google::Cloud::VMMigration::V1::VmwareVmDetails::VmArchitecture]
+        #     Output only. The CPU architecture.
         class VmwareVmDetails
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -1126,6 +1315,18 @@ module Google
             # The boot option is BIOS.
             BIOS = 2
           end
+
+          # Possible values for the VM architecture.
+          module VmArchitecture
+            # The architecture is unknown.
+            VM_ARCHITECTURE_UNSPECIFIED = 0
+
+            # The architecture is one of the x86 architectures.
+            VM_ARCHITECTURE_X86_FAMILY = 1
+
+            # The architecture is ARM64.
+            VM_ARCHITECTURE_ARM64 = 2
+          end
         end
 
         # AwsVmDetails describes a VM in AWS.
@@ -1146,7 +1347,7 @@ module Google
         #     Output only. The power state of the VM at the moment list was taken.
         # @!attribute [rw] cpu_count
         #   @return [::Integer]
-        #     The number of cpus the VM has.
+        #     The number of CPU cores the VM has.
         # @!attribute [rw] memory_mb
         #   @return [::Integer]
         #     The memory size of the VM in MB.
@@ -1183,6 +1384,10 @@ module Google
         # @!attribute [rw] architecture
         #   @return [::Google::Cloud::VMMigration::V1::AwsVmDetails::VmArchitecture]
         #     The CPU architecture.
+        # @!attribute [rw] vcpu_count
+        #   @return [::Integer]
+        #     The number of vCPUs the VM has. It is calculated as the
+        #     number of CPU cores * threads per CPU the VM has.
         class AwsVmDetails
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -1270,6 +1475,163 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # AzureVmDetails describes a VM in Azure.
+        # @!attribute [rw] vm_id
+        #   @return [::String]
+        #     The VM full path in Azure.
+        # @!attribute [rw] power_state
+        #   @return [::Google::Cloud::VMMigration::V1::AzureVmDetails::PowerState]
+        #     The power state of the VM at the moment list was taken.
+        # @!attribute [rw] vm_size
+        #   @return [::String]
+        #     VM size as configured in Azure. Determines the VM's hardware spec.
+        # @!attribute [rw] cpu_count
+        #   @return [::Integer]
+        #     The number of cpus the VM has.
+        # @!attribute [rw] memory_mb
+        #   @return [::Integer]
+        #     The memory size of the VM in MB.
+        # @!attribute [rw] disk_count
+        #   @return [::Integer]
+        #     The number of disks the VM has, including OS disk.
+        # @!attribute [rw] committed_storage_mb
+        #   @return [::Integer]
+        #     The total size of the storage allocated to the VM in MB.
+        # @!attribute [rw] os_disk
+        #   @return [::Google::Cloud::VMMigration::V1::AzureVmDetails::OSDisk]
+        #     Description of the OS disk.
+        # @!attribute [rw] disks
+        #   @return [::Array<::Google::Cloud::VMMigration::V1::AzureVmDetails::Disk>]
+        #     Description of the data disks.
+        # @!attribute [rw] os_description
+        #   @return [::Google::Cloud::VMMigration::V1::AzureVmDetails::OSDescription]
+        #     Description of the OS.
+        # @!attribute [rw] boot_option
+        #   @return [::Google::Cloud::VMMigration::V1::AzureVmDetails::BootOption]
+        #     The VM Boot Option.
+        # @!attribute [rw] tags
+        #   @return [::Google::Protobuf::Map{::String => ::String}]
+        #     The tags of the VM.
+        # @!attribute [rw] computer_name
+        #   @return [::String]
+        #     The VM's ComputerName.
+        # @!attribute [rw] architecture
+        #   @return [::Google::Cloud::VMMigration::V1::AzureVmDetails::VmArchitecture]
+        #     The CPU architecture.
+        class AzureVmDetails
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # A message describing the OS disk.
+          # @!attribute [rw] type
+          #   @return [::String]
+          #     The disk's type.
+          # @!attribute [rw] name
+          #   @return [::String]
+          #     The disk's full name.
+          # @!attribute [rw] size_gb
+          #   @return [::Integer]
+          #     The disk's size in GB.
+          class OSDisk
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # A message describing a data disk.
+          # @!attribute [rw] name
+          #   @return [::String]
+          #     The disk name.
+          # @!attribute [rw] size_gb
+          #   @return [::Integer]
+          #     The disk size in GB.
+          # @!attribute [rw] lun
+          #   @return [::Integer]
+          #     The disk's Logical Unit Number (LUN).
+          class Disk
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # A message describing the VM's OS. Including OS, Publisher, Offer and Plan
+          # if applicable.
+          # @!attribute [rw] type
+          #   @return [::String]
+          #     OS type.
+          # @!attribute [rw] publisher
+          #   @return [::String]
+          #     OS publisher.
+          # @!attribute [rw] offer
+          #   @return [::String]
+          #     OS offer.
+          # @!attribute [rw] plan
+          #   @return [::String]
+          #     OS plan.
+          class OSDescription
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # @!attribute [rw] key
+          #   @return [::String]
+          # @!attribute [rw] value
+          #   @return [::String]
+          class TagsEntry
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Possible values for the power state of the VM.
+          module PowerState
+            # Power state is not specified.
+            POWER_STATE_UNSPECIFIED = 0
+
+            # The VM is starting.
+            STARTING = 1
+
+            # The VM is running.
+            RUNNING = 2
+
+            # The VM is stopping.
+            STOPPING = 3
+
+            # The VM is stopped.
+            STOPPED = 4
+
+            # The VM is deallocating.
+            DEALLOCATING = 5
+
+            # The VM is deallocated.
+            DEALLOCATED = 6
+
+            # The VM's power state is unknown.
+            UNKNOWN = 7
+          end
+
+          # The possible values for the vm boot option.
+          module BootOption
+            # The boot option is unknown.
+            BOOT_OPTION_UNSPECIFIED = 0
+
+            # The boot option is UEFI.
+            EFI = 1
+
+            # The boot option is BIOS.
+            BIOS = 2
+          end
+
+          # Possible values for the VM architecture.
+          module VmArchitecture
+            # The architecture is unknown.
+            VM_ARCHITECTURE_UNSPECIFIED = 0
+
+            # The architecture is one of the x86 architectures.
+            VM_ARCHITECTURE_X86_FAMILY = 1
+
+            # The architecture is ARM64.
+            VM_ARCHITECTURE_ARM64 = 2
+          end
+        end
+
         # VmwareVmsDetails describes VMs in vCenter.
         # @!attribute [rw] details
         #   @return [::Array<::Google::Cloud::VMMigration::V1::VmwareVmDetails>]
@@ -1288,23 +1650,103 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # AzureVmsDetails describes VMs in Azure.
+        # @!attribute [rw] details
+        #   @return [::Array<::Google::Cloud::VMMigration::V1::AzureVmDetails>]
+        #     The details of the Azure VMs.
+        class AzureVmsDetails
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # Response message for
         # {::Google::Cloud::VMMigration::V1::VMMigration::Client#fetch_inventory fetchInventory}.
         # @!attribute [rw] vmware_vms
         #   @return [::Google::Cloud::VMMigration::V1::VmwareVmsDetails]
         #     The description of the VMs in a Source of type Vmware.
         #
-        #     Note: The following fields are mutually exclusive: `vmware_vms`, `aws_vms`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `vmware_vms`, `aws_vms`, `azure_vms`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] aws_vms
         #   @return [::Google::Cloud::VMMigration::V1::AwsVmsDetails]
         #     The description of the VMs in a Source of type AWS.
         #
-        #     Note: The following fields are mutually exclusive: `aws_vms`, `vmware_vms`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `aws_vms`, `vmware_vms`, `azure_vms`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] azure_vms
+        #   @return [::Google::Cloud::VMMigration::V1::AzureVmsDetails]
+        #     The description of the VMs in a Source of type Azure.
+        #
+        #     Note: The following fields are mutually exclusive: `azure_vms`, `vmware_vms`, `aws_vms`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [r] update_time
         #   @return [::Google::Protobuf::Timestamp]
         #     Output only. The timestamp when the source was last queried (if the result
         #     is from the cache).
         class FetchInventoryResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for
+        # {::Google::Cloud::VMMigration::V1::VMMigration::Client#fetch_storage_inventory fetchStorageInventory}.
+        # @!attribute [rw] source
+        #   @return [::String]
+        #     Required. The name of the Source.
+        # @!attribute [rw] type
+        #   @return [::Google::Cloud::VMMigration::V1::FetchStorageInventoryRequest::StorageType]
+        #     Required. The type of the storage inventory to fetch.
+        # @!attribute [rw] force_refresh
+        #   @return [::Boolean]
+        #     Optional. If this flag is set to true, the source will be queried instead
+        #     of using cached results. Using this flag will make the call slower.
+        # @!attribute [rw] page_size
+        #   @return [::Integer]
+        #     Optional. The maximum number of VMs to return. The service may return
+        #     fewer than this value.
+        # @!attribute [rw] page_token
+        #   @return [::String]
+        #     Optional. A page token, received from a previous `FetchStorageInventory`
+        #     call. Provide this to retrieve the subsequent page. When paginating, all
+        #     other parameters provided to `FetchStorageInventory` must match the call
+        #     that provided the page token.
+        class FetchStorageInventoryRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # The type of the storage inventory to fetch.
+          module StorageType
+            # The type is unspecified.
+            STORAGE_TYPE_UNSPECIFIED = 0
+
+            # The type is disks.
+            DISKS = 1
+
+            # The type is snapshots.
+            SNAPSHOTS = 2
+          end
+        end
+
+        # Response message for
+        # {::Google::Cloud::VMMigration::V1::VMMigration::Client#fetch_storage_inventory fetchStorageInventory}.
+        # @!attribute [rw] resources
+        #   @return [::Array<::Google::Cloud::VMMigration::V1::SourceStorageResource>]
+        #     The list of storage resources in the source.
+        # @!attribute [r] update_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Output only. The timestamp when the source was last queried (if the result
+        #     is from the cache).
+        # @!attribute [r] next_page_token
+        #   @return [::String]
+        #     Output only. A token, which can be sent as `page_token` to retrieve the
+        #     next page. If this field is omitted, there are no subsequent pages.
+        class FetchStorageInventoryResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # SourceStorageResource describes a storage resource in the source.
+        # @!attribute [rw] aws_disk_details
+        #   @return [::Google::Cloud::VMMigration::V1::AwsSourceDiskDetails]
+        #     Source AWS volume details.
+        class SourceStorageResource
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
@@ -1514,8 +1956,8 @@ module Google
         #     the request if it has already been completed. The server will guarantee
         #     that for at least 60 minutes since the first request.
         #
-        #     For example, consider a situation where you make an initial request and t
-        #     he request times out. If you make the request again with the same request
+        #     For example, consider a situation where you make an initial request and
+        #     the request times out. If you make the request again with the same request
         #     ID, the server can check if original operation with the same request ID
         #     was received, and if so, will ignore the second request. This prevents
         #     clients from accidentally creating duplicate commitments.
@@ -1538,8 +1980,8 @@ module Google
         #     the request if it has already been completed. The server will guarantee
         #     that for at least 60 minutes after the first request.
         #
-        #     For example, consider a situation where you make an initial request and t
-        #     he request times out. If you make the request again with the same request
+        #     For example, consider a situation where you make an initial request and
+        #     the request times out. If you make the request again with the same request
         #     ID, the server can check if original operation with the same request ID
         #     was received, and if so, will ignore the second request. This prevents
         #     clients from accidentally creating duplicate commitments.
@@ -1596,8 +2038,8 @@ module Google
         #     the request if it has already been completed. The server will guarantee
         #     that for at least 60 minutes since the first request.
         #
-        #     For example, consider a situation where you make an initial request and t
-        #     he request times out. If you make the request again with the same request
+        #     For example, consider a situation where you make an initial request and
+        #     the request times out. If you make the request again with the same request
         #     ID, the server can check if original operation with the same request ID
         #     was received, and if so, will ignore the second request. This prevents
         #     clients from accidentally creating duplicate commitments.
@@ -1620,8 +2062,8 @@ module Google
         #     the request if it has already been completed. The server will guarantee
         #     that for at least 60 minutes after the first request.
         #
-        #     For example, consider a situation where you make an initial request and t
-        #     he request times out. If you make the request again with the same request
+        #     For example, consider a situation where you make an initial request and
+        #     the request times out. If you make the request again with the same request
         #     ID, the server can check if original operation with the same request ID
         #     was received, and if so, will ignore the second request. This prevents
         #     clients from accidentally creating duplicate commitments.
@@ -1644,8 +2086,8 @@ module Google
         #     the request if it has already been completed. The server will guarantee
         #     that for at least 60 minutes after the first request.
         #
-        #     For example, consider a situation where you make an initial request and t
-        #     he request times out. If you make the request again with the same request
+        #     For example, consider a situation where you make an initial request and
+        #     the request times out. If you make the request again with the same request
         #     ID, the server can check if original operation with the same request ID
         #     was received, and if so, will ignore the second request. This prevents
         #     clients from accidentally creating duplicate commitments.
@@ -1712,13 +2154,13 @@ module Google
         #     The machine type to create the VM with.
         # @!attribute [rw] network_tags
         #   @return [::Array<::String>]
-        #     A map of network tags to associate with the VM.
+        #     A list of network tags to associate with the VM.
         # @!attribute [rw] network_interfaces
         #   @return [::Array<::Google::Cloud::VMMigration::V1::NetworkInterface>]
         #     List of NICs connected to this VM.
         # @!attribute [rw] service_account
         #   @return [::String]
-        #     The service account to associate the VM with.
+        #     Optional. The service account to associate the VM with.
         # @!attribute [rw] disk_type
         #   @return [::Google::Cloud::VMMigration::V1::ComputeEngineDiskType]
         #     The disk type to use in the VM.
@@ -1737,10 +2179,19 @@ module Google
         # @!attribute [rw] secure_boot
         #   @return [::Boolean]
         #     Defines whether the instance has Secure Boot enabled.
-        #     This can be set to true only if the vm boot option is EFI.
+        #     This can be set to true only if the VM boot option is EFI.
+        # @!attribute [rw] enable_vtpm
+        #   @return [::Boolean]
+        #     Optional. Defines whether the instance has vTPM enabled.
+        #     This can be set to true only if the VM boot option is EFI.
+        # @!attribute [rw] enable_integrity_monitoring
+        #   @return [::Boolean]
+        #     Optional. Defines whether the instance has integrity monitoring enabled.
+        #     This can be set to true only if the VM boot option is EFI, and vTPM is
+        #     enabled.
         # @!attribute [r] boot_option
         #   @return [::Google::Cloud::VMMigration::V1::ComputeEngineBootOption]
-        #     Output only. The VM Boot Option, as set in the source vm.
+        #     Output only. The VM Boot Option, as set in the source VM.
         # @!attribute [rw] metadata
         #   @return [::Google::Protobuf::Map{::String => ::String}]
         #     The metadata key/value pairs to assign to the VM.
@@ -1750,6 +2201,25 @@ module Google
         # @!attribute [rw] hostname
         #   @return [::String]
         #     The hostname to assign to the VM.
+        # @!attribute [rw] encryption
+        #   @return [::Google::Cloud::VMMigration::V1::Encryption]
+        #     Optional. Immutable. The encryption to apply to the VM disks.
+        # @!attribute [rw] boot_conversion
+        #   @return [::Google::Cloud::VMMigration::V1::BootConversion]
+        #     Optional. By default the virtual machine will keep its existing boot
+        #     option. Setting this property will trigger an internal process which will
+        #     convert the virtual machine from using the existing boot option to another.
+        # @!attribute [rw] disk_replica_zones
+        #   @return [::Array<::String>]
+        #     Optional. Additional replica zones of the target regional disks.
+        #     If this list is not empty a regional disk will be created. The first
+        #     supported zone would be the one stated in the
+        #     {::Google::Cloud::VMMigration::V1::ComputeEngineTargetDefaults#zone zone} field.
+        #     The rest are taken from this list. Please refer to the [regional disk
+        #     creation
+        #     API](https://cloud.google.com/compute/docs/regions-zones/global-regional-zonal-resources)
+        #     for further details about regional vs zonal disks. If not specified, a
+        #     zonal disk will be created in the same zone the VM is created.
         class ComputeEngineTargetDefaults
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -1792,7 +2262,7 @@ module Google
         #     The machine type to create the VM with.
         # @!attribute [rw] network_tags
         #   @return [::Array<::String>]
-        #     A map of network tags to associate with the VM.
+        #     A list of network tags to associate with the VM.
         # @!attribute [rw] network_interfaces
         #   @return [::Array<::Google::Cloud::VMMigration::V1::NetworkInterface>]
         #     List of NICs connected to this VM.
@@ -1817,10 +2287,16 @@ module Google
         # @!attribute [rw] secure_boot
         #   @return [::Boolean]
         #     Defines whether the instance has Secure Boot enabled.
-        #     This can be set to true only if the vm boot option is EFI.
+        #     This can be set to true only if the VM boot option is EFI.
+        # @!attribute [rw] enable_vtpm
+        #   @return [::Boolean]
+        #     Optional. Defines whether the instance has vTPM enabled.
+        # @!attribute [rw] enable_integrity_monitoring
+        #   @return [::Boolean]
+        #     Optional. Defines whether the instance has integrity monitoring enabled.
         # @!attribute [rw] boot_option
         #   @return [::Google::Cloud::VMMigration::V1::ComputeEngineBootOption]
-        #     The VM Boot Option, as set in the source vm.
+        #     The VM Boot Option, as set in the source VM.
         # @!attribute [rw] metadata
         #   @return [::Google::Protobuf::Map{::String => ::String}]
         #     The metadata key/value pairs to assign to the VM.
@@ -1830,6 +2306,25 @@ module Google
         # @!attribute [rw] hostname
         #   @return [::String]
         #     The hostname to assign to the VM.
+        # @!attribute [rw] encryption
+        #   @return [::Google::Cloud::VMMigration::V1::Encryption]
+        #     Optional. The encryption to apply to the VM disks.
+        # @!attribute [rw] boot_conversion
+        #   @return [::Google::Cloud::VMMigration::V1::BootConversion]
+        #     Optional. By default the virtual machine will keep its existing boot
+        #     option. Setting this property will trigger an internal process which will
+        #     convert the virtual machine from using the existing boot option to another.
+        # @!attribute [rw] disk_replica_zones
+        #   @return [::Array<::String>]
+        #     Optional. Additional replica zones of the target regional disks.
+        #     If this list is not empty a regional disk will be created. The first
+        #     supported zone would be the one stated in the
+        #     {::Google::Cloud::VMMigration::V1::ComputeEngineTargetDetails#zone zone} field.
+        #     The rest are taken from this list. Please refer to the [regional disk
+        #     creation
+        #     API](https://cloud.google.com/compute/docs/regions-zones/global-regional-zonal-resources)
+        #     for further details about regional vs zonal disks. If not specified, a
+        #     zonal disk will be created in the same zone the VM is created.
         class ComputeEngineTargetDetails
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -1856,18 +2351,23 @@ module Google
         # NetworkInterface represents a NIC of a VM.
         # @!attribute [rw] network
         #   @return [::String]
-        #     The network to connect the NIC to.
+        #     Optional. The network to connect the NIC to.
         # @!attribute [rw] subnetwork
         #   @return [::String]
-        #     The subnetwork to connect the NIC to.
+        #     Optional. The subnetwork to connect the NIC to.
         # @!attribute [rw] internal_ip
         #   @return [::String]
-        #     The internal IP to define in the NIC.
+        #     Optional. The internal IP to define in the NIC.
         #     The formats accepted are: `ephemeral` \ ipv4 address \ a named address
         #     resource full path.
         # @!attribute [rw] external_ip
         #   @return [::String]
-        #     The external IP to define in the NIC.
+        #     Optional. The external IP to define in the NIC.
+        # @!attribute [rw] network_tier
+        #   @return [::Google::Cloud::VMMigration::V1::ComputeEngineNetworkTier]
+        #     Optional. The networking tier used for optimizing connectivity between
+        #     instances and systems on the internet. Applies only for external ephemeral
+        #     IP addresses. If left empty, will default to PREMIUM.
         class NetworkInterface
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -1933,6 +2433,8 @@ module Google
 
         # Scheduling information for VM on maintenance/restart behaviour and
         # node allocation in sole tenant nodes.
+        # Options for instance behavior when the host machine undergoes
+        # maintenance that may temporarily impact instance performance.
         # @!attribute [rw] on_host_maintenance
         #   @return [::Google::Cloud::VMMigration::V1::ComputeScheduling::OnHostMaintenance]
         #     How the instance should behave when the host machine undergoes
@@ -1985,6 +2487,244 @@ module Google
           end
         end
 
+        # ComputeEngineDisksTargetDefaults is a collection of details for creating
+        # Persistent Disks in a target Compute Engine project.
+        # @!attribute [rw] zone
+        #   @return [::String]
+        #     The zone in which to create the Persistent Disks.
+        # @!attribute [rw] disks_target_defaults
+        #   @return [::Google::Cloud::VMMigration::V1::DisksMigrationDisksTargetDefaults]
+        #     Details of the disk only migration target.
+        #
+        #     Note: The following fields are mutually exclusive: `disks_target_defaults`, `vm_target_defaults`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] vm_target_defaults
+        #   @return [::Google::Cloud::VMMigration::V1::DisksMigrationVmTargetDefaults]
+        #     Details of the VM migration target.
+        #
+        #     Note: The following fields are mutually exclusive: `vm_target_defaults`, `disks_target_defaults`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] target_project
+        #   @return [::String]
+        #     The full path of the resource of type TargetProject which represents the
+        #     Compute Engine project in which to create the Persistent Disks.
+        # @!attribute [rw] disks
+        #   @return [::Array<::Google::Cloud::VMMigration::V1::PersistentDiskDefaults>]
+        #     The details of each Persistent Disk to create.
+        class ComputeEngineDisksTargetDefaults
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Details for creation of a Persistent Disk.
+        # @!attribute [rw] source_disk_number
+        #   @return [::Integer]
+        #     Required. The ordinal number of the source VM disk.
+        # @!attribute [rw] disk_name
+        #   @return [::String]
+        #     Optional. The name of the Persistent Disk to create.
+        # @!attribute [rw] disk_type
+        #   @return [::Google::Cloud::VMMigration::V1::ComputeEngineDiskType]
+        #     The disk type to use.
+        # @!attribute [rw] additional_labels
+        #   @return [::Google::Protobuf::Map{::String => ::String}]
+        #     A map of labels to associate with the Persistent Disk.
+        # @!attribute [rw] encryption
+        #   @return [::Google::Cloud::VMMigration::V1::Encryption]
+        #     Optional. The encryption to apply to the disk.
+        # @!attribute [rw] vm_attachment_details
+        #   @return [::Google::Cloud::VMMigration::V1::VmAttachmentDetails]
+        #     Optional. Details for attachment of the disk to a VM.
+        #     Used when the disk is set to be attached to a target VM.
+        class PersistentDiskDefaults
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # @!attribute [rw] key
+          #   @return [::String]
+          # @!attribute [rw] value
+          #   @return [::String]
+          class AdditionalLabelsEntry
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+        end
+
+        # Details for attachment of the disk to a VM.
+        # @!attribute [rw] device_name
+        #   @return [::String]
+        #     Optional. Specifies a unique device name of your choice that is reflected
+        #     into the /dev/disk/by-id/google-* tree of a Linux operating system running
+        #     within the instance. If not specified, the server chooses a default device
+        #     name to apply to this disk, in the form persistent-disk-x, where x is a
+        #     number assigned by Google Compute Engine. This field is only applicable for
+        #     persistent disks.
+        class VmAttachmentDetails
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Details for a disk only migration.
+        class DisksMigrationDisksTargetDefaults
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Details for creation of a VM that migrated data disks will be attached to.
+        # @!attribute [rw] vm_name
+        #   @return [::String]
+        #     Required. The name of the VM to create.
+        # @!attribute [rw] machine_type_series
+        #   @return [::String]
+        #     Optional. The machine type series to create the VM with.
+        #     For presentation only.
+        # @!attribute [rw] machine_type
+        #   @return [::String]
+        #     Required. The machine type to create the VM with.
+        # @!attribute [rw] network_tags
+        #   @return [::Array<::String>]
+        #     Optional. A list of network tags to associate with the VM.
+        # @!attribute [rw] network_interfaces
+        #   @return [::Array<::Google::Cloud::VMMigration::V1::NetworkInterface>]
+        #     Optional. NICs to attach to the VM.
+        # @!attribute [rw] service_account
+        #   @return [::String]
+        #     Optional. The service account to associate the VM with.
+        # @!attribute [rw] compute_scheduling
+        #   @return [::Google::Cloud::VMMigration::V1::ComputeScheduling]
+        #     Optional. Compute instance scheduling information (if empty default is
+        #     used).
+        # @!attribute [rw] secure_boot
+        #   @return [::Boolean]
+        #     Optional. Defines whether the instance has Secure Boot enabled.
+        #     This can be set to true only if the VM boot option is EFI.
+        # @!attribute [rw] enable_vtpm
+        #   @return [::Boolean]
+        #     Optional. Defines whether the instance has vTPM enabled.
+        # @!attribute [rw] enable_integrity_monitoring
+        #   @return [::Boolean]
+        #     Optional. Defines whether the instance has integrity monitoring enabled.
+        # @!attribute [rw] metadata
+        #   @return [::Google::Protobuf::Map{::String => ::String}]
+        #     Optional. The metadata key/value pairs to assign to the VM.
+        # @!attribute [rw] additional_licenses
+        #   @return [::Array<::String>]
+        #     Optional. Additional licenses to assign to the VM.
+        # @!attribute [rw] hostname
+        #   @return [::String]
+        #     Optional. The hostname to assign to the VM.
+        # @!attribute [rw] labels
+        #   @return [::Google::Protobuf::Map{::String => ::String}]
+        #     Optional. A map of labels to associate with the VM.
+        # @!attribute [rw] boot_disk_defaults
+        #   @return [::Google::Cloud::VMMigration::V1::BootDiskDefaults]
+        #     Optional. Details of the boot disk of the VM.
+        # @!attribute [rw] encryption
+        #   @return [::Google::Cloud::VMMigration::V1::Encryption]
+        #     Optional. The encryption to apply to the VM.
+        class DisksMigrationVmTargetDefaults
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # @!attribute [rw] key
+          #   @return [::String]
+          # @!attribute [rw] value
+          #   @return [::String]
+          class MetadataEntry
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # @!attribute [rw] key
+          #   @return [::String]
+          # @!attribute [rw] value
+          #   @return [::String]
+          class LabelsEntry
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+        end
+
+        # BootDiskDefaults hold information about the boot disk of a VM.
+        # @!attribute [rw] image
+        #   @return [::Google::Cloud::VMMigration::V1::BootDiskDefaults::DiskImageDefaults]
+        #     The image to use when creating the disk.
+        # @!attribute [rw] disk_name
+        #   @return [::String]
+        #     Optional. The name of the disk.
+        # @!attribute [rw] disk_type
+        #   @return [::Google::Cloud::VMMigration::V1::ComputeEngineDiskType]
+        #     Optional. The type of disk provisioning to use for the VM.
+        # @!attribute [rw] device_name
+        #   @return [::String]
+        #     Optional. Specifies a unique device name of your choice that is reflected
+        #     into the /dev/disk/by-id/google-* tree of a Linux operating system running
+        #     within the instance. If not specified, the server chooses a default device
+        #     name to apply to this disk, in the form persistent-disk-x, where x is a
+        #     number assigned by Google Compute Engine. This field is only applicable for
+        #     persistent disks.
+        # @!attribute [rw] encryption
+        #   @return [::Google::Cloud::VMMigration::V1::Encryption]
+        #     Optional. The encryption to apply to the boot disk.
+        class BootDiskDefaults
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Contains details about the image source used to create the disk.
+          # @!attribute [rw] source_image
+          #   @return [::String]
+          #     Required. The Image resource used when creating the disk.
+          class DiskImageDefaults
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+        end
+
+        # ComputeEngineDisksTargetDetails is a collection of created Persistent Disks
+        # details.
+        # @!attribute [rw] disks_target_details
+        #   @return [::Google::Cloud::VMMigration::V1::DisksMigrationDisksTargetDetails]
+        #     Details of the disks-only migration target.
+        #
+        #     Note: The following fields are mutually exclusive: `disks_target_details`, `vm_target_details`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] vm_target_details
+        #   @return [::Google::Cloud::VMMigration::V1::DisksMigrationVmTargetDetails]
+        #     Details for the VM the migrated data disks are attached to.
+        #
+        #     Note: The following fields are mutually exclusive: `vm_target_details`, `disks_target_details`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] disks
+        #   @return [::Array<::Google::Cloud::VMMigration::V1::PersistentDisk>]
+        #     The details of each created Persistent Disk.
+        class ComputeEngineDisksTargetDetails
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Details of a created Persistent Disk.
+        # @!attribute [rw] source_disk_number
+        #   @return [::Integer]
+        #     The ordinal number of the source VM disk.
+        # @!attribute [rw] disk_uri
+        #   @return [::String]
+        #     The URI of the Persistent Disk.
+        class PersistentDisk
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Details for a disks-only migration.
+        class DisksMigrationDisksTargetDetails
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Details for the VM created VM as part of disks migration.
+        # @!attribute [r] vm_uri
+        #   @return [::String]
+        #     Output only. The URI of the Compute Engine VM.
+        class DisksMigrationVmTargetDetails
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # A policy for scheduling replications.
         # @!attribute [rw] idle_duration
         #   @return [::Google::Protobuf::Duration]
@@ -2016,8 +2756,8 @@ module Google
         #     the request if it has already been completed. The server will guarantee
         #     that for at least 60 minutes since the first request.
         #
-        #     For example, consider a situation where you make an initial request and t
-        #     he request times out. If you make the request again with the same request
+        #     For example, consider a situation where you make an initial request and
+        #     the request times out. If you make the request again with the same request
         #     ID, the server can check if original operation with the same request ID
         #     was received, and if so, will ignore the second request. This prevents
         #     clients from accidentally creating duplicate commitments.
@@ -2106,8 +2846,8 @@ module Google
         #     the request if it has already been completed. The server will guarantee
         #     that for at least 60 minutes since the first request.
         #
-        #     For example, consider a situation where you make an initial request and t
-        #     he request times out. If you make the request again with the same request
+        #     For example, consider a situation where you make an initial request and
+        #     the request times out. If you make the request again with the same request
         #     ID, the server can check if original operation with the same request ID
         #     was received, and if so, will ignore the second request. This prevents
         #     clients from accidentally creating duplicate commitments.
@@ -2182,6 +2922,21 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # Request message for 'ExtendMigrationRequest' request.
+        # @!attribute [rw] migrating_vm
+        #   @return [::String]
+        #     Required. The name of the MigratingVm.
+        class ExtendMigrationRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Response message for 'ExtendMigration' request.
+        class ExtendMigrationResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # Response message for 'FinalizeMigration' request.
         class FinalizeMigrationResponse
           include ::Google::Protobuf::MessageExts
@@ -2195,7 +2950,7 @@ module Google
         #     Output only. The name of the target project.
         # @!attribute [rw] project
         #   @return [::String]
-        #     The target project ID (number) or project name.
+        #     Required. The target project ID (number) or project name.
         # @!attribute [rw] description
         #   @return [::String]
         #     The target project's description.
@@ -2281,8 +3036,8 @@ module Google
         #     the request if it has already been completed. The server will guarantee
         #     that for at least 60 minutes since the first request.
         #
-        #     For example, consider a situation where you make an initial request and t
-        #     he request times out. If you make the request again with the same request
+        #     For example, consider a situation where you make an initial request and
+        #     the request times out. If you make the request again with the same request
         #     ID, the server can check if original operation with the same request ID
         #     was received, and if so, will ignore the second request. This prevents
         #     clients from accidentally creating duplicate commitments.
@@ -2312,8 +3067,8 @@ module Google
         #     the request if it has already been completed. The server will guarantee
         #     that for at least 60 minutes since the first request.
         #
-        #     For example, consider a situation where you make an initial request and t
-        #     he request times out. If you make the request again with the same request
+        #     For example, consider a situation where you make an initial request and
+        #     the request times out. If you make the request again with the same request
         #     ID, the server can check if original operation with the same request ID
         #     was received, and if so, will ignore the second request. This prevents
         #     clients from accidentally creating duplicate commitments.
@@ -2336,8 +3091,8 @@ module Google
         #     the request if it has already been completed. The server will guarantee
         #     that for at least 60 minutes after the first request.
         #
-        #     For example, consider a situation where you make an initial request and t
-        #     he request times out. If you make the request again with the same request
+        #     For example, consider a situation where you make an initial request and
+        #     the request times out. If you make the request again with the same request
         #     ID, the server can check if original operation with the same request ID
         #     was received, and if so, will ignore the second request. This prevents
         #     clients from accidentally creating duplicate commitments.
@@ -2366,9 +3121,24 @@ module Google
         # @!attribute [rw] display_name
         #   @return [::String]
         #     Display name is a user defined name for this group which can be updated.
+        # @!attribute [rw] migration_target_type
+        #   @return [::Google::Cloud::VMMigration::V1::Group::MigrationTargetType]
+        #     Immutable. The target type of this group.
         class Group
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # The possible types of the group.
+          module MigrationTargetType
+            # Group type is not specified. This defaults to Compute Engine targets.
+            MIGRATION_TARGET_TYPE_UNSPECIFIED = 0
+
+            # All MigratingVMs in the group must have Compute Engine targets.
+            MIGRATION_TARGET_TYPE_GCE = 1
+
+            # All MigratingVMs in the group must have Compute Engine Disks targets.
+            MIGRATION_TARGET_TYPE_DISKS = 2
+          end
         end
 
         # Request message for 'ListGroups' request.
@@ -2441,8 +3211,8 @@ module Google
         #     the request if it has already been completed. The server will guarantee
         #     that for at least 60 minutes since the first request.
         #
-        #     For example, consider a situation where you make an initial request and t
-        #     he request times out. If you make the request again with the same request
+        #     For example, consider a situation where you make an initial request and
+        #     the request times out. If you make the request again with the same request
         #     ID, the server can check if original operation with the same request ID
         #     was received, and if so, will ignore the second request. This prevents
         #     clients from accidentally creating duplicate commitments.
@@ -2472,8 +3242,8 @@ module Google
         #     the request if it has already been completed. The server will guarantee
         #     that for at least 60 minutes since the first request.
         #
-        #     For example, consider a situation where you make an initial request and t
-        #     he request times out. If you make the request again with the same request
+        #     For example, consider a situation where you make an initial request and
+        #     the request times out. If you make the request again with the same request
         #     ID, the server can check if original operation with the same request ID
         #     was received, and if so, will ignore the second request. This prevents
         #     clients from accidentally creating duplicate commitments.
@@ -2496,8 +3266,8 @@ module Google
         #     the request if it has already been completed. The server will guarantee
         #     that for at least 60 minutes after the first request.
         #
-        #     For example, consider a situation where you make an initial request and t
-        #     he request times out. If you make the request again with the same request
+        #     For example, consider a situation where you make an initial request and
+        #     the request times out. If you make the request again with the same request
         #     ID, the server can check if original operation with the same request ID
         #     was received, and if so, will ignore the second request. This prevents
         #     clients from accidentally creating duplicate commitments.
@@ -2562,8 +3332,8 @@ module Google
         #     the request if it has already been completed. The server will guarantee
         #     that for at least 60 minutes since the first request.
         #
-        #     For example, consider a situation where you make an initial request and t
-        #     he request times out. If you make the request again with the same request
+        #     For example, consider a situation where you make an initial request and
+        #     the request times out. If you make the request again with the same request
         #     ID, the server can check if original operation with the same request ID
         #     was received, and if so, will ignore the second request. This prevents
         #     clients from accidentally creating duplicate commitments.
@@ -2702,49 +3472,216 @@ module Google
             # Default value. This value is not used.
             ERROR_CODE_UNSPECIFIED = 0
 
-            # Migrate for Compute encountered an unknown error.
+            # Migrate to Virtual Machines encountered an unknown error.
             UNKNOWN_ERROR = 1
 
-            # Migrate for Compute encountered an error while validating replication
-            # source health.
+            # Migrate to Virtual Machines encountered an error while validating
+            # replication source health.
             SOURCE_VALIDATION_ERROR = 2
 
-            # Migrate for Compute encountered an error during source data operation.
+            # Migrate to Virtual Machines encountered an error during source data
+            # operation.
             SOURCE_REPLICATION_ERROR = 3
 
-            # Migrate for Compute encountered an error during target data operation.
+            # Migrate to Virtual Machines encountered an error during target data
+            # operation.
             TARGET_REPLICATION_ERROR = 4
 
-            # Migrate for Compute encountered an error during OS adaptation.
+            # Migrate to Virtual Machines encountered an error during OS adaptation.
             OS_ADAPTATION_ERROR = 5
 
-            # Migrate for Compute encountered an error in clone operation.
+            # Migrate to Virtual Machines encountered an error in clone operation.
             CLONE_ERROR = 6
 
-            # Migrate for Compute encountered an error in cutover operation.
+            # Migrate to Virtual Machines encountered an error in cutover operation.
             CUTOVER_ERROR = 7
 
-            # Migrate for Compute encountered an error during utilization report
-            # creation.
+            # Migrate to Virtual Machines encountered an error during utilization
+            # report creation.
             UTILIZATION_REPORT_ERROR = 8
 
-            # Migrate for Compute encountered an error during appliance upgrade.
+            # Migrate to Virtual Machines encountered an error during appliance
+            # upgrade.
             APPLIANCE_UPGRADE_ERROR = 9
+
+            # Migrate to Virtual Machines encountered an error in image import
+            # operation.
+            IMAGE_IMPORT_ERROR = 10
+
+            # Migrate to Virtual Machines encountered an error in disk migration
+            # operation.
+            DISK_MIGRATION_ERROR = 11
+          end
+        end
+
+        # Represents migration resource warning information that can be used with
+        # google.rpc.Status message. MigrationWarning is used to present the user with
+        # warning information in migration operations.
+        # @!attribute [rw] code
+        #   @return [::Google::Cloud::VMMigration::V1::MigrationWarning::WarningCode]
+        #     The warning code.
+        # @!attribute [r] warning_message
+        #   @return [::Google::Rpc::LocalizedMessage]
+        #     Output only. The localized warning message.
+        # @!attribute [r] action_item
+        #   @return [::Google::Rpc::LocalizedMessage]
+        #     Output only. Suggested action for solving the warning.
+        # @!attribute [r] help_links
+        #   @return [::Array<::Google::Rpc::Help::Link>]
+        #     Output only. URL(s) pointing to additional information on handling the
+        #     current warning.
+        # @!attribute [rw] warning_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     The time the warning occurred.
+        class MigrationWarning
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Represents possible warning codes.
+          module WarningCode
+            # Default value. This value is not used.
+            WARNING_CODE_UNSPECIFIED = 0
+
+            # A warning originated from OS Adaptation.
+            ADAPTATION_WARNING = 1
+          end
+        end
+
+        # Represent the source Vmware VM details.
+        # @!attribute [r] firmware
+        #   @return [::Google::Cloud::VMMigration::V1::VmwareSourceVmDetails::Firmware]
+        #     Output only. The firmware type of the source VM.
+        # @!attribute [r] committed_storage_bytes
+        #   @return [::Integer]
+        #     Output only. The total size of the disks being migrated in bytes.
+        # @!attribute [r] disks
+        #   @return [::Array<::Google::Cloud::VMMigration::V1::VmwareSourceVmDetails::VmwareDiskDetails>]
+        #     Output only. The disks attached to the source VM.
+        # @!attribute [r] vm_capabilities_info
+        #   @return [::Google::Cloud::VMMigration::V1::VmCapabilities]
+        #     Output only. Information about VM capabilities needed for some Compute
+        #     Engine features.
+        # @!attribute [r] architecture
+        #   @return [::Google::Cloud::VMMigration::V1::VmArchitecture]
+        #     Output only. The VM architecture.
+        class VmwareSourceVmDetails
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # The details of a Vmware VM disk.
+          # @!attribute [r] disk_number
+          #   @return [::Integer]
+          #     Output only. The ordinal number of the disk.
+          # @!attribute [r] size_gb
+          #   @return [::Integer]
+          #     Output only. Size in GB.
+          # @!attribute [r] label
+          #   @return [::String]
+          #     Output only. The disk label.
+          class VmwareDiskDetails
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Possible values for Vmware VM firmware.
+          module Firmware
+            # The firmware is unknown.
+            FIRMWARE_UNSPECIFIED = 0
+
+            # The firmware is EFI.
+            EFI = 1
+
+            # The firmware is BIOS.
+            BIOS = 2
           end
         end
 
         # Represent the source AWS VM details.
-        # @!attribute [rw] firmware
+        # @!attribute [r] firmware
         #   @return [::Google::Cloud::VMMigration::V1::AwsSourceVmDetails::Firmware]
-        #     The firmware type of the source VM.
-        # @!attribute [rw] committed_storage_bytes
+        #     Output only. The firmware type of the source VM.
+        # @!attribute [r] committed_storage_bytes
         #   @return [::Integer]
-        #     The total size of the disks being migrated in bytes.
+        #     Output only. The total size of the disks being migrated in bytes.
+        # @!attribute [r] disks
+        #   @return [::Array<::Google::Cloud::VMMigration::V1::AwsSourceVmDetails::AwsDiskDetails>]
+        #     Output only. The disks attached to the source VM.
+        # @!attribute [r] vm_capabilities_info
+        #   @return [::Google::Cloud::VMMigration::V1::VmCapabilities]
+        #     Output only. Information about VM capabilities needed for some Compute
+        #     Engine features.
+        # @!attribute [r] architecture
+        #   @return [::Google::Cloud::VMMigration::V1::VmArchitecture]
+        #     Output only. The VM architecture.
         class AwsSourceVmDetails
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
 
+          # The details of an AWS instance disk.
+          # @!attribute [r] disk_number
+          #   @return [::Integer]
+          #     Output only. The ordinal number of the disk.
+          # @!attribute [r] volume_id
+          #   @return [::String]
+          #     Output only. AWS volume ID.
+          # @!attribute [r] size_gb
+          #   @return [::Integer]
+          #     Output only. Size in GB.
+          class AwsDiskDetails
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
           # Possible values for AWS VM firmware.
+          module Firmware
+            # The firmware is unknown.
+            FIRMWARE_UNSPECIFIED = 0
+
+            # The firmware is EFI.
+            EFI = 1
+
+            # The firmware is BIOS.
+            BIOS = 2
+          end
+        end
+
+        # Represent the source Azure VM details.
+        # @!attribute [r] firmware
+        #   @return [::Google::Cloud::VMMigration::V1::AzureSourceVmDetails::Firmware]
+        #     Output only. The firmware type of the source VM.
+        # @!attribute [r] committed_storage_bytes
+        #   @return [::Integer]
+        #     Output only. The total size of the disks being migrated in bytes.
+        # @!attribute [r] disks
+        #   @return [::Array<::Google::Cloud::VMMigration::V1::AzureSourceVmDetails::AzureDiskDetails>]
+        #     Output only. The disks attached to the source VM.
+        # @!attribute [r] vm_capabilities_info
+        #   @return [::Google::Cloud::VMMigration::V1::VmCapabilities]
+        #     Output only. Information about VM capabilities needed for some Compute
+        #     Engine features.
+        # @!attribute [r] architecture
+        #   @return [::Google::Cloud::VMMigration::V1::VmArchitecture]
+        #     Output only. The VM architecture.
+        class AzureSourceVmDetails
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # The details of an Azure VM disk.
+          # @!attribute [r] disk_number
+          #   @return [::Integer]
+          #     Output only. The ordinal number of the disk.
+          # @!attribute [r] disk_id
+          #   @return [::String]
+          #     Output only. Azure disk ID.
+          # @!attribute [r] size_gb
+          #   @return [::Integer]
+          #     Output only. Size in GB.
+          class AzureDiskDetails
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Possible values for Azure VM firmware.
           module Firmware
             # The firmware is unknown.
             FIRMWARE_UNSPECIFIED = 0
@@ -2810,6 +3747,1029 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # Migrating VM source information about the VM capabilities needed for some
+        # Compute Engine features.
+        # @!attribute [r] os_capabilities
+        #   @return [::Array<::Google::Cloud::VMMigration::V1::OsCapability>]
+        #     Output only. Unordered list. List of certain VM OS capabilities needed for
+        #     some Compute Engine features.
+        # @!attribute [r] last_os_capabilities_update_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Output only. The last time OS capabilities list was updated.
+        class VmCapabilities
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # ImageImport describes the configuration of the image import to run.
+        # @!attribute [rw] cloud_storage_uri
+        #   @return [::String]
+        #     Immutable. The path to the Cloud Storage file from which the image should
+        #     be imported.
+        # @!attribute [rw] disk_image_target_defaults
+        #   @return [::Google::Cloud::VMMigration::V1::DiskImageTargetDetails]
+        #     Immutable. Target details for importing a disk image, will be used by
+        #     ImageImportJob.
+        #
+        #     Note: The following fields are mutually exclusive: `disk_image_target_defaults`, `machine_image_target_defaults`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] machine_image_target_defaults
+        #   @return [::Google::Cloud::VMMigration::V1::MachineImageTargetDetails]
+        #     Immutable. Target details for importing a machine image, will be used by
+        #     ImageImportJob.
+        #
+        #     Note: The following fields are mutually exclusive: `machine_image_target_defaults`, `disk_image_target_defaults`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [r] name
+        #   @return [::String]
+        #     Output only. The resource path of the ImageImport.
+        # @!attribute [r] create_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Output only. The time the image import was created.
+        # @!attribute [r] recent_image_import_jobs
+        #   @return [::Array<::Google::Cloud::VMMigration::V1::ImageImportJob>]
+        #     Output only. The result of the most recent runs for this ImageImport. All
+        #     jobs for this ImageImport can be listed via ListImageImportJobs.
+        # @!attribute [rw] encryption
+        #   @return [::Google::Cloud::VMMigration::V1::Encryption]
+        #     Immutable. The encryption details used by the image import process during
+        #     the image adaptation for Compute Engine.
+        class ImageImport
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # ImageImportJob describes the progress and result of an image import.
+        # @!attribute [r] cloud_storage_uri
+        #   @return [::String]
+        #     Output only. The path to the Cloud Storage file from which the image
+        #     should be imported.
+        # @!attribute [r] disk_image_target_details
+        #   @return [::Google::Cloud::VMMigration::V1::DiskImageTargetDetails]
+        #     Output only. Target details used to import a disk image.
+        #
+        #     Note: The following fields are mutually exclusive: `disk_image_target_details`, `machine_image_target_details`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [r] machine_image_target_details
+        #   @return [::Google::Cloud::VMMigration::V1::MachineImageTargetDetails]
+        #     Output only. Target details used to import a machine image.
+        #
+        #     Note: The following fields are mutually exclusive: `machine_image_target_details`, `disk_image_target_details`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [r] name
+        #   @return [::String]
+        #     Output only. The resource path of the ImageImportJob.
+        # @!attribute [r] created_resources
+        #   @return [::Array<::String>]
+        #     Output only. The resource paths of the resources created by the image
+        #     import job.
+        # @!attribute [r] state
+        #   @return [::Google::Cloud::VMMigration::V1::ImageImportJob::State]
+        #     Output only. The state of the image import.
+        # @!attribute [r] create_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Output only. The time the image import was created (as an API call, not
+        #     when it was actually created in the target).
+        # @!attribute [r] end_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Output only. The time the image import was ended.
+        # @!attribute [r] errors
+        #   @return [::Array<::Google::Rpc::Status>]
+        #     Output only. Provides details on the error that led to the image import
+        #     state in case of an error.
+        # @!attribute [r] warnings
+        #   @return [::Array<::Google::Cloud::VMMigration::V1::MigrationWarning>]
+        #     Output only. Warnings that occurred during the image import.
+        # @!attribute [r] steps
+        #   @return [::Array<::Google::Cloud::VMMigration::V1::ImageImportStep>]
+        #     Output only. The image import steps list representing its progress.
+        class ImageImportJob
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Possible states of the image import.
+          module State
+            # The state is unknown.
+            STATE_UNSPECIFIED = 0
+
+            # The image import has not yet started.
+            PENDING = 1
+
+            # The image import is active and running.
+            RUNNING = 2
+
+            # The image import has finished successfully.
+            SUCCEEDED = 3
+
+            # The image import has finished with errors.
+            FAILED = 4
+
+            # The image import is being cancelled.
+            CANCELLING = 5
+
+            # The image import was cancelled.
+            CANCELLED = 6
+          end
+        end
+
+        # ImageImportStep holds information about the image import step progress.
+        # @!attribute [rw] initializing
+        #   @return [::Google::Cloud::VMMigration::V1::InitializingImageImportStep]
+        #     Initializing step.
+        #
+        #     Note: The following fields are mutually exclusive: `initializing`, `loading_source_files`, `adapting_os`, `creating_image`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] loading_source_files
+        #   @return [::Google::Cloud::VMMigration::V1::LoadingImageSourceFilesStep]
+        #     Loading source files step.
+        #
+        #     Note: The following fields are mutually exclusive: `loading_source_files`, `initializing`, `adapting_os`, `creating_image`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] adapting_os
+        #   @return [::Google::Cloud::VMMigration::V1::AdaptingOSStep]
+        #     Adapting OS step.
+        #
+        #     Note: The following fields are mutually exclusive: `adapting_os`, `initializing`, `loading_source_files`, `creating_image`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] creating_image
+        #   @return [::Google::Cloud::VMMigration::V1::CreatingImageStep]
+        #     Creating image step.
+        #
+        #     Note: The following fields are mutually exclusive: `creating_image`, `initializing`, `loading_source_files`, `adapting_os`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [r] start_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Output only. The time the step has started.
+        # @!attribute [r] end_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Output only. The time the step has ended.
+        class ImageImportStep
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # InitializingImageImportStep contains specific step details.
+        class InitializingImageImportStep
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # LoadingImageSourceFilesStep contains specific step details.
+        class LoadingImageSourceFilesStep
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # CreatingImageStep contains specific step details.
+        class CreatingImageStep
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # The target details of the image resource that will be created by the import
+        # job.
+        # @!attribute [rw] os_adaptation_parameters
+        #   @return [::Google::Cloud::VMMigration::V1::ImageImportOsAdaptationParameters]
+        #     Optional. Use to set the parameters relevant for the OS adaptation
+        #     process.
+        #
+        #     Note: The following fields are mutually exclusive: `os_adaptation_parameters`, `data_disk_image_import`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] data_disk_image_import
+        #   @return [::Google::Cloud::VMMigration::V1::DataDiskImageImport]
+        #     Optional. Use to skip OS adaptation process.
+        #
+        #     Note: The following fields are mutually exclusive: `data_disk_image_import`, `os_adaptation_parameters`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] image_name
+        #   @return [::String]
+        #     Required. The name of the image to be created.
+        # @!attribute [rw] target_project
+        #   @return [::String]
+        #     Required. Reference to the TargetProject resource that represents the
+        #     target project in which the imported image will be created.
+        # @!attribute [rw] description
+        #   @return [::String]
+        #     Optional. An optional description of the image.
+        # @!attribute [rw] family_name
+        #   @return [::String]
+        #     Optional. The name of the image family to which the new image belongs.
+        # @!attribute [rw] labels
+        #   @return [::Google::Protobuf::Map{::String => ::String}]
+        #     Optional. A map of labels to associate with the image.
+        # @!attribute [rw] additional_licenses
+        #   @return [::Array<::String>]
+        #     Optional. Additional licenses to assign to the image.
+        #     Format:
+        #     https://www.googleapis.com/compute/v1/projects/PROJECT_ID/global/licenses/LICENSE_NAME
+        #     Or
+        #     https://www.googleapis.com/compute/beta/projects/PROJECT_ID/global/licenses/LICENSE_NAME
+        # @!attribute [rw] single_region_storage
+        #   @return [::Boolean]
+        #     Optional. Set to true to set the image storageLocations to the single
+        #     region of the import job. When false, the closest multi-region is selected.
+        # @!attribute [rw] encryption
+        #   @return [::Google::Cloud::VMMigration::V1::Encryption]
+        #     Immutable. The encryption to apply to the image.
+        class DiskImageTargetDetails
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # @!attribute [rw] key
+          #   @return [::String]
+          # @!attribute [rw] value
+          #   @return [::String]
+          class LabelsEntry
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+        end
+
+        # The target details of the machine image resource that will be created by the
+        # image import job.
+        # @!attribute [rw] os_adaptation_parameters
+        #   @return [::Google::Cloud::VMMigration::V1::ImageImportOsAdaptationParameters]
+        #     Optional. Use to set the parameters relevant for the OS adaptation
+        #     process.
+        #
+        #     Note: The following fields are mutually exclusive: `os_adaptation_parameters`, `skip_os_adaptation`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] skip_os_adaptation
+        #   @return [::Google::Cloud::VMMigration::V1::SkipOsAdaptation]
+        #     Optional. Use to skip OS adaptation process.
+        #
+        #     Note: The following fields are mutually exclusive: `skip_os_adaptation`, `os_adaptation_parameters`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] machine_image_name
+        #   @return [::String]
+        #     Required. The name of the machine image to be created.
+        # @!attribute [rw] target_project
+        #   @return [::String]
+        #     Required. Reference to the TargetProject resource that represents the
+        #     target project in which the imported machine image will be created.
+        # @!attribute [rw] description
+        #   @return [::String]
+        #     Optional. An optional description of the machine image.
+        # @!attribute [rw] single_region_storage
+        #   @return [::Boolean]
+        #     Optional. Set to true to set the machine image storageLocations to the
+        #     single region of the import job. When false, the closest multi-region is
+        #     selected.
+        # @!attribute [rw] encryption
+        #   @return [::Google::Cloud::VMMigration::V1::Encryption]
+        #     Immutable. The encryption to apply to the machine image.
+        #     If the Image Import resource has an encryption, this field must be set to
+        #     the same encryption key.
+        # @!attribute [rw] machine_image_parameters_overrides
+        #   @return [::Google::Cloud::VMMigration::V1::MachineImageParametersOverrides]
+        #     Optional. Parameters overriding decisions based on the source machine image
+        #     configurations.
+        # @!attribute [rw] service_account
+        #   @return [::Google::Cloud::VMMigration::V1::ServiceAccount]
+        #     Optional. The service account to assign to the instance created by the
+        #     machine image.
+        # @!attribute [rw] additional_licenses
+        #   @return [::Array<::String>]
+        #     Optional. Additional licenses to assign to the instance created by the
+        #     machine image. Format:
+        #     https://www.googleapis.com/compute/v1/projects/PROJECT_ID/global/licenses/LICENSE_NAME
+        #     Or
+        #     https://www.googleapis.com/compute/beta/projects/PROJECT_ID/global/licenses/LICENSE_NAME
+        # @!attribute [rw] labels
+        #   @return [::Google::Protobuf::Map{::String => ::String}]
+        #     Optional. The labels to apply to the instance created by the machine image.
+        # @!attribute [rw] tags
+        #   @return [::Array<::String>]
+        #     Optional. The tags to apply to the instance created by the machine image.
+        # @!attribute [rw] shielded_instance_config
+        #   @return [::Google::Cloud::VMMigration::V1::ShieldedInstanceConfig]
+        #     Optional. Shielded instance configuration.
+        # @!attribute [rw] network_interfaces
+        #   @return [::Array<::Google::Cloud::VMMigration::V1::NetworkInterface>]
+        #     Optional. The network interfaces to create with the instance created by the
+        #     machine image. Internal and external IP addresses, and network tiers are
+        #     ignored for machine image import.
+        class MachineImageTargetDetails
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # @!attribute [rw] key
+          #   @return [::String]
+          # @!attribute [rw] value
+          #   @return [::String]
+          class LabelsEntry
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+        end
+
+        # Service account to assign to the instance created by the machine image.
+        # @!attribute [rw] email
+        #   @return [::String]
+        #     Required. The email address of the service account.
+        # @!attribute [rw] scopes
+        #   @return [::Array<::String>]
+        #     Optional. The list of scopes to be made available for this service account.
+        class ServiceAccount
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Shielded instance configuration.
+        # @!attribute [rw] secure_boot
+        #   @return [::Google::Cloud::VMMigration::V1::ShieldedInstanceConfig::SecureBoot]
+        #     Optional. Defines whether the instance created by the machine image has
+        #     Secure Boot enabled. This can be set to true only if the image boot option
+        #     is EFI.
+        # @!attribute [rw] enable_vtpm
+        #   @return [::Boolean]
+        #     Optional. Defines whether the instance created by the machine image has
+        #     vTPM enabled. This can be set to true only if the image boot option is EFI.
+        # @!attribute [rw] enable_integrity_monitoring
+        #   @return [::Boolean]
+        #     Optional. Defines whether the instance created by the machine image has
+        #     integrity monitoring enabled. This can be set to true only if the image
+        #     boot option is EFI, and vTPM is enabled.
+        class ShieldedInstanceConfig
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Possible values for secure boot.
+          module SecureBoot
+            # No explicit value is selected. Will use the configuration of the source
+            # (if exists, otherwise the default will be false).
+            SECURE_BOOT_UNSPECIFIED = 0
+
+            # Use secure boot. This can be set to true only if the image boot option is
+            # EFI.
+            TRUE = 1
+
+            # Do not use secure boot.
+            FALSE = 2
+          end
+        end
+
+        # Parameters overriding decisions based on the source machine image
+        # configurations.
+        # @!attribute [rw] machine_type
+        #   @return [::String]
+        #     Optional. The machine type to create the MachineImage with.
+        #     If empty, the service will choose a relevant machine type based on the
+        #     information from the source image.
+        #     For more information about machine types, please refer to
+        #     https://cloud.google.com/compute/docs/machine-resource.
+        class MachineImageParametersOverrides
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Parameters affecting the OS adaptation process.
+        # @!attribute [rw] generalize
+        #   @return [::Boolean]
+        #     Optional. Set to true in order to generalize the imported image.
+        #     The generalization process enables co-existence of multiple VMs created
+        #     from the same image.
+        #     For Windows, generalizing the image removes computer-specific information
+        #     such as installed drivers and the computer security identifier (SID).
+        # @!attribute [rw] license_type
+        #   @return [::Google::Cloud::VMMigration::V1::ComputeEngineLicenseType]
+        #     Optional. Choose which type of license to apply to the imported image.
+        # @!attribute [rw] boot_conversion
+        #   @return [::Google::Cloud::VMMigration::V1::BootConversion]
+        #     Optional. By default the image will keep its existing boot option. Setting
+        #     this property will trigger an internal process which will convert the
+        #     image from using the existing boot option to another.
+        #     The size of the boot disk might be increased to allow the conversion
+        class ImageImportOsAdaptationParameters
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Mentions that the image import is not using OS adaptation process.
+        class DataDiskImageImport
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Mentions that the machine image import is not using OS adaptation process.
+        class SkipOsAdaptation
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for 'GetImageImport' call.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The ImageImport name.
+        class GetImageImportRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for 'ListImageImports' call.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. The parent, which owns this collection of targets.
+        # @!attribute [rw] page_size
+        #   @return [::Integer]
+        #     Optional. The maximum number of targets to return. The service may return
+        #     fewer than this value. If unspecified, at most 500 targets will be
+        #     returned. The maximum value is 1000; values above 1000 will be coerced to
+        #     1000.
+        # @!attribute [rw] page_token
+        #   @return [::String]
+        #     Optional. A page token, received from a previous `ListImageImports` call.
+        #     Provide this to retrieve the subsequent page.
+        #
+        #     When paginating, all other parameters provided to `ListImageImports` must
+        #     match the call that provided the page token.
+        # @!attribute [rw] filter
+        #   @return [::String]
+        #     Optional. The filter request (according to <a
+        #     href="https://google.aip.dev/160" target="_blank">AIP-160</a>).
+        # @!attribute [rw] order_by
+        #   @return [::String]
+        #     Optional. The order by fields for the result (according to <a
+        #     href="https://google.aip.dev/132#ordering" target="_blank">AIP-132</a>).
+        #     Currently ordering is only possible by "name" field.
+        class ListImageImportsRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Response message for 'ListImageImports' call.
+        # @!attribute [r] image_imports
+        #   @return [::Array<::Google::Cloud::VMMigration::V1::ImageImport>]
+        #     Output only. The list of target response.
+        # @!attribute [r] next_page_token
+        #   @return [::String]
+        #     Output only. A token, which can be sent as `page_token` to retrieve the
+        #     next page. If this field is omitted, there are no subsequent pages.
+        # @!attribute [r] unreachable
+        #   @return [::Array<::String>]
+        #     Output only. Locations that could not be reached.
+        class ListImageImportsResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for 'CreateImageImport' request.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. The ImageImport's parent.
+        # @!attribute [rw] image_import_id
+        #   @return [::String]
+        #     Required. The image import identifier.
+        #     This value maximum length is 63 characters, and valid characters are
+        #     /[a-z][0-9]-/. It must start with an english letter and must not end with a
+        #     hyphen.
+        # @!attribute [rw] image_import
+        #   @return [::Google::Cloud::VMMigration::V1::ImageImport]
+        #     Required. The create request body.
+        # @!attribute [rw] request_id
+        #   @return [::String]
+        #     Optional. A request ID to identify requests. Specify a unique request ID
+        #     so that if you must retry your request, the server will know to ignore
+        #     the request if it has already been completed. The server will guarantee
+        #     that for at least 60 minutes since the first request.
+        #
+        #     For example, consider a situation where you make an initial request and
+        #     the request times out. If you make the request again with the same request
+        #     ID, the server can check if original operation with the same request ID
+        #     was received, and if so, will ignore the second request. This prevents
+        #     clients from accidentally creating duplicate commitments.
+        #
+        #     The request ID must be a valid UUID with the exception that zero UUID is
+        #     not supported (00000000-0000-0000-0000-000000000000).
+        class CreateImageImportRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for 'DeleteImageImport' request.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The ImageImport name.
+        # @!attribute [rw] request_id
+        #   @return [::String]
+        #     Optional. A request ID to identify requests. Specify a unique request ID
+        #     so that if you must retry your request, the server will know to ignore
+        #     the request if it has already been completed. The server will guarantee
+        #     that for at least 60 minutes after the first request.
+        #
+        #     For example, consider a situation where you make an initial request and t
+        #     he request times out. If you make the request again with the same request
+        #     ID, the server can check if original operation with the same request ID
+        #     was received, and if so, will ignore the second request. This prevents
+        #     clients from accidentally creating duplicate commitments.
+        #
+        #     The request ID must be a valid UUID with the exception that zero UUID is
+        #     not supported (00000000-0000-0000-0000-000000000000).
+        class DeleteImageImportRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for 'GetImageImportJob' call.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The ImageImportJob name.
+        class GetImageImportJobRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for 'ListImageImportJobs' call.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. The parent, which owns this collection of targets.
+        # @!attribute [rw] page_size
+        #   @return [::Integer]
+        #     Optional. The maximum number of targets to return. The service may return
+        #     fewer than this value. If unspecified, at most 500 targets will be
+        #     returned. The maximum value is 1000; values above 1000 will be coerced to
+        #     1000.
+        # @!attribute [rw] page_token
+        #   @return [::String]
+        #     Optional. A page token, received from a previous `ListImageImportJobs`
+        #     call. Provide this to retrieve the subsequent page.
+        #
+        #     When paginating, all other parameters provided to `ListImageImportJobs`
+        #     must match the call that provided the page token.
+        # @!attribute [rw] filter
+        #   @return [::String]
+        #     Optional. The filter request (according to <a
+        #     href="https://google.aip.dev/160" target="_blank">AIP-160</a>).
+        # @!attribute [rw] order_by
+        #   @return [::String]
+        #     Optional. The order by fields for the result (according to <a
+        #     href="https://google.aip.dev/132#ordering" target="_blank">AIP-132</a>).
+        #     Currently ordering is only possible by "name" field.
+        class ListImageImportJobsRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Response message for 'ListImageImportJobs' call.
+        # @!attribute [r] image_import_jobs
+        #   @return [::Array<::Google::Cloud::VMMigration::V1::ImageImportJob>]
+        #     Output only. The list of target response.
+        # @!attribute [r] next_page_token
+        #   @return [::String]
+        #     Output only. A token, which can be sent as `page_token` to retrieve the
+        #     next page. If this field is omitted, there are no subsequent pages.
+        # @!attribute [r] unreachable
+        #   @return [::Array<::String>]
+        #     Output only. Locations that could not be reached.
+        class ListImageImportJobsResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for 'CancelImageImportJob' request.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The image import job id.
+        class CancelImageImportJobRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Response message for 'CancelImageImportJob' request.
+        class CancelImageImportJobResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Describes the disk which will be migrated from the source environment.
+        # The source disk has to be unattached.
+        # @!attribute [rw] aws_source_disk_details
+        #   @return [::Google::Cloud::VMMigration::V1::AwsSourceDiskDetails]
+        #     Details of the unattached AWS source disk.
+        # @!attribute [r] name
+        #   @return [::String]
+        #     Output only. Identifier. The identifier of the DiskMigrationJob.
+        # @!attribute [rw] target_details
+        #   @return [::Google::Cloud::VMMigration::V1::DiskMigrationJobTargetDetails]
+        #     Required. Details of the target Disk in Compute Engine.
+        # @!attribute [r] create_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Output only. The time the DiskMigrationJob resource was created.
+        # @!attribute [r] update_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Output only. The last time the DiskMigrationJob resource was updated.
+        # @!attribute [r] state
+        #   @return [::Google::Cloud::VMMigration::V1::DiskMigrationJob::State]
+        #     Output only. State of the DiskMigrationJob.
+        # @!attribute [r] errors
+        #   @return [::Array<::Google::Rpc::Status>]
+        #     Output only. Provides details on the errors that led to the disk migration
+        #     job's state in case of an error.
+        # @!attribute [r] steps
+        #   @return [::Array<::Google::Cloud::VMMigration::V1::DiskMigrationStep>]
+        #     Output only. The disk migration steps list representing its progress.
+        class DiskMigrationJob
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # The possible values of the state/health of DiskMigrationJob.
+          module State
+            # The state is unspecified. This is not in use.
+            STATE_UNSPECIFIED = 0
+
+            # The initial state of the disk migration.
+            # In this state the customers can update the target details.
+            READY = 1
+
+            # The migration is active, and it's running or scheduled to run.
+            RUNNING = 3
+
+            # The migration completed successfully.
+            SUCCEEDED = 4
+
+            # Migration cancellation was initiated.
+            CANCELLING = 5
+
+            # The migration was cancelled.
+            CANCELLED = 6
+
+            # The migration process encountered an unrecoverable error and was aborted.
+            FAILED = 7
+          end
+        end
+
+        # Details of the target disk in Compute Engine.
+        # @!attribute [rw] target_disk
+        #   @return [::Google::Cloud::VMMigration::V1::ComputeEngineDisk]
+        #     Required. The target disk.
+        # @!attribute [rw] target_project
+        #   @return [::String]
+        #     Required. The name of the resource of type TargetProject which represents
+        #     the Compute Engine project in which to create the disk. Should be of the
+        #     form: projects/\\{project}/locations/global/targetProjects/\\{target-project}
+        # @!attribute [rw] labels
+        #   @return [::Google::Protobuf::Map{::String => ::String}]
+        #     Optional. A map of labels to associate with the disk.
+        # @!attribute [rw] encryption
+        #   @return [::Google::Cloud::VMMigration::V1::Encryption]
+        #     Optional. The encryption to apply to the disk.
+        #     If the DiskMigrationJob parent Source resource has an encryption, this
+        #     field must be set to the same encryption key.
+        class DiskMigrationJobTargetDetails
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # @!attribute [rw] key
+          #   @return [::String]
+          # @!attribute [rw] value
+          #   @return [::String]
+          class LabelsEntry
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+        end
+
+        # DiskMigrationStep holds information about the disk migration step progress.
+        # @!attribute [rw] creating_source_disk_snapshot
+        #   @return [::Google::Cloud::VMMigration::V1::CreatingSourceDiskSnapshotStep]
+        #     Creating source disk snapshot step.
+        #
+        #     Note: The following fields are mutually exclusive: `creating_source_disk_snapshot`, `copying_source_disk_snapshot`, `provisioning_target_disk`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] copying_source_disk_snapshot
+        #   @return [::Google::Cloud::VMMigration::V1::CopyingSourceDiskSnapshotStep]
+        #     Copying source disk snapshot step.
+        #
+        #     Note: The following fields are mutually exclusive: `copying_source_disk_snapshot`, `creating_source_disk_snapshot`, `provisioning_target_disk`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] provisioning_target_disk
+        #   @return [::Google::Cloud::VMMigration::V1::ProvisioningTargetDiskStep]
+        #     Creating target disk step.
+        #
+        #     Note: The following fields are mutually exclusive: `provisioning_target_disk`, `creating_source_disk_snapshot`, `copying_source_disk_snapshot`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [r] start_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Output only. The time the step has started.
+        # @!attribute [r] end_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Output only. The time the step has ended.
+        class DiskMigrationStep
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # CreatingSourceDiskSnapshotStep contains specific step details.
+        class CreatingSourceDiskSnapshotStep
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # CopyingSourceDiskSnapshotStep contains specific step details.
+        class CopyingSourceDiskSnapshotStep
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # ProvisioningTargetDiskStep contains specific step details.
+        class ProvisioningTargetDiskStep
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Compute Engine disk target details.
+        # @!attribute [rw] disk_id
+        #   @return [::String]
+        #     Optional. Target Compute Engine Disk ID.
+        #     This is the resource ID segment of the Compute Engine Disk to create.
+        #     In the resource name compute/v1/projects/\\{project}/zones/\\{zone}/disks/disk1
+        #     "disk1" is the resource ID for the disk.
+        # @!attribute [rw] zone
+        #   @return [::String]
+        #     Required. The Compute Engine zone in which to create the disk. Should be of
+        #     the form: projects/\\{target-project}/locations/\\{zone}
+        # @!attribute [rw] replica_zones
+        #   @return [::Array<::String>]
+        #     Optional. Replication zones of the regional disk. Should be of the form:
+        #     projects/\\{target-project}/locations/\\{replica-zone}
+        #     Currently only one replica zone is supported.
+        # @!attribute [rw] disk_type
+        #   @return [::Google::Cloud::VMMigration::V1::ComputeEngineDiskType]
+        #     Required. The disk type to use.
+        class ComputeEngineDisk
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Represents the source AWS Disk details.
+        # @!attribute [rw] volume_id
+        #   @return [::String]
+        #     Required. AWS volume ID.
+        # @!attribute [r] size_gib
+        #   @return [::Integer]
+        #     Output only. Size in GiB.
+        # @!attribute [r] disk_type
+        #   @return [::Google::Cloud::VMMigration::V1::AwsSourceDiskDetails::Type]
+        #     Optional. Output only. Disk type.
+        # @!attribute [r] tags
+        #   @return [::Google::Protobuf::Map{::String => ::String}]
+        #     Optional. Output only. A map of AWS volume tags.
+        class AwsSourceDiskDetails
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # @!attribute [rw] key
+          #   @return [::String]
+          # @!attribute [rw] value
+          #   @return [::String]
+          class TagsEntry
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Possible values for disk types.
+          module Type
+            # Unspecified AWS disk type. Should not be used.
+            TYPE_UNSPECIFIED = 0
+
+            # GP2 disk type.
+            GP2 = 1
+
+            # GP3 disk type.
+            GP3 = 2
+
+            # IO1 disk type.
+            IO1 = 3
+
+            # IO2 disk type.
+            IO2 = 4
+
+            # ST1 disk type.
+            ST1 = 5
+
+            # SC1 disk type.
+            SC1 = 6
+
+            # Standard disk type.
+            STANDARD = 7
+          end
+        end
+
+        # Request message for 'CreateDiskMigrationJob' request.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. The DiskMigrationJob's parent.
+        # @!attribute [rw] disk_migration_job_id
+        #   @return [::String]
+        #     Required. The DiskMigrationJob identifier.
+        #     The maximum length of this value is 63 characters.
+        #     Valid characters are lower case Latin letters, digits and hyphen.
+        #     It must start with a Latin letter and must not end with a hyphen.
+        # @!attribute [rw] disk_migration_job
+        #   @return [::Google::Cloud::VMMigration::V1::DiskMigrationJob]
+        #     Required. The create request body.
+        # @!attribute [rw] request_id
+        #   @return [::String]
+        #     Optional. A request ID to identify requests. Specify a unique request ID
+        #     so that if you must retry your request, the server will know to ignore
+        #     the request if it has already been completed. The server will guarantee
+        #     that for at least 60 minutes since the first request.
+        #
+        #     For example, consider a situation where you make an initial request and
+        #     the request timed out. If you make the request again with the same request
+        #     ID, the server can check if original operation with the same request ID
+        #     was received, and if so, will ignore the second request. This prevents
+        #     clients from accidentally creating duplicate commitments.
+        #
+        #     The request ID must be a valid UUID with the exception that zero UUID is
+        #     not supported (00000000-0000-0000-0000-000000000000).
+        class CreateDiskMigrationJobRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for 'ListDiskMigrationJobsRequest' request.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. The parent, which owns this collection of DiskMigrationJobs.
+        # @!attribute [rw] page_size
+        #   @return [::Integer]
+        #     Optional. The maximum number of disk migration jobs to return. The service
+        #     may return fewer than this value. If unspecified, at most 500
+        #     disk migration jobs will be returned.
+        #     The maximum value is 1000; values above 1000 will be coerced to 1000.
+        # @!attribute [rw] page_token
+        #   @return [::String]
+        #     Optional. A page token, received from a previous `ListDiskMigrationJobs`
+        #     call. Provide this to retrieve the subsequent page.
+        #
+        #     When paginating, all parameters provided to `ListDiskMigrationJobs`
+        #     except `page_size` must match the call that provided the page token.
+        # @!attribute [rw] filter
+        #   @return [::String]
+        #     Optional. The filter request (according to <a
+        #     href="https://google.aip.dev/160" target="_blank">AIP-160</a>).
+        # @!attribute [rw] order_by
+        #   @return [::String]
+        #     Optional. Ordering of the result list.
+        class ListDiskMigrationJobsRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Response message for 'ListDiskMigrationJobs' request.
+        # @!attribute [r] disk_migration_jobs
+        #   @return [::Array<::Google::Cloud::VMMigration::V1::DiskMigrationJob>]
+        #     Output only. The list of the disk migration jobs.
+        # @!attribute [r] next_page_token
+        #   @return [::String]
+        #     Optional. Output only. A token, which can be sent as `page_token` to
+        #     retrieve the next page. If this field is omitted, there are no subsequent
+        #     pages.
+        # @!attribute [r] unreachable
+        #   @return [::Array<::String>]
+        #     Output only. Locations that could not be reached.
+        class ListDiskMigrationJobsResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for 'GetDiskMigrationJob' request.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The name of the DiskMigrationJob.
+        class GetDiskMigrationJobRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for 'UpdateDiskMigrationJob' request.
+        # @!attribute [rw] update_mask
+        #   @return [::Google::Protobuf::FieldMask]
+        #     Optional. Field mask is used to specify the fields to be overwritten in the
+        #     DiskMigrationJob resource by the update.
+        #     The fields specified in the update_mask are relative to the resource, not
+        #     the full request. A field will be overwritten if it is in the mask. If the
+        #     user does not provide a mask, then a mask equivalent to all fields that are
+        #     populated (have a non-empty value), will be implied.
+        # @!attribute [rw] disk_migration_job
+        #   @return [::Google::Cloud::VMMigration::V1::DiskMigrationJob]
+        #     Required. The update request body.
+        # @!attribute [rw] request_id
+        #   @return [::String]
+        #     Optional. A request ID to identify requests. Specify a unique request ID
+        #     so that if you must retry your request, the server will know to ignore
+        #     the request if it has already been completed. The server will guarantee
+        #     that for at least 60 minutes since the first request.
+        #
+        #     For example, consider a situation where you make an initial request and
+        #     the request timed out. If you make the request again with the same request
+        #     ID, the server can check if original operation with the same request ID
+        #     was received, and if so, will ignore the second request. This prevents
+        #     clients from accidentally creating duplicate commitments.
+        #
+        #     The request ID must be a valid UUID with the exception that zero UUID is
+        #     not supported (00000000-0000-0000-0000-000000000000).
+        class UpdateDiskMigrationJobRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for 'DeleteDiskMigrationJob' request.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The name of the DiskMigrationJob.
+        class DeleteDiskMigrationJobRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for 'RunDiskMigrationJobRequest' request.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The name of the DiskMigrationJob.
+        class RunDiskMigrationJobRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Response message for 'RunDiskMigrationJob' request.
+        class RunDiskMigrationJobResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for 'CancelDiskMigrationJob' request.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The name of the DiskMigrationJob.
+        class CancelDiskMigrationJobRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Response message for 'CancelDiskMigrationJob' request.
+        class CancelDiskMigrationJobResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Types of disks supported for Compute Engine VM.
+        module ComputeEngineDiskType
+          # An unspecified disk type. Will be used as STANDARD.
+          COMPUTE_ENGINE_DISK_TYPE_UNSPECIFIED = 0
+
+          # A Standard disk type.
+          COMPUTE_ENGINE_DISK_TYPE_STANDARD = 1
+
+          # SSD hard disk type.
+          COMPUTE_ENGINE_DISK_TYPE_SSD = 2
+
+          # An alternative to SSD persistent disks that balance performance and
+          # cost.
+          COMPUTE_ENGINE_DISK_TYPE_BALANCED = 3
+
+          # Hyperdisk balanced disk type.
+          COMPUTE_ENGINE_DISK_TYPE_HYPERDISK_BALANCED = 4
+        end
+
+        # Types of licenses used in OS adaptation.
+        module ComputeEngineLicenseType
+          # The license type is the default for the OS.
+          COMPUTE_ENGINE_LICENSE_TYPE_DEFAULT = 0
+
+          # The license type is Pay As You Go license type.
+          COMPUTE_ENGINE_LICENSE_TYPE_PAYG = 1
+
+          # The license type is Bring Your Own License type.
+          COMPUTE_ENGINE_LICENSE_TYPE_BYOL = 2
+        end
+
+        # Possible values for vm boot option.
+        module ComputeEngineBootOption
+          # The boot option is unknown.
+          COMPUTE_ENGINE_BOOT_OPTION_UNSPECIFIED = 0
+
+          # The boot option is EFI.
+          COMPUTE_ENGINE_BOOT_OPTION_EFI = 1
+
+          # The boot option is BIOS.
+          COMPUTE_ENGINE_BOOT_OPTION_BIOS = 2
+        end
+
+        # VM operating system (OS) capabilities needed for determining compatibility
+        # with Compute Engine features supported by the migration.
+        module OsCapability
+          # This is for API compatibility only and is not in use.
+          OS_CAPABILITY_UNSPECIFIED = 0
+
+          # NVMe driver installed and the VM can use NVMe PD or local SSD.
+          OS_CAPABILITY_NVME_STORAGE_ACCESS = 1
+
+          # gVNIC virtual NIC driver supported.
+          OS_CAPABILITY_GVNIC_NETWORK_INTERFACE = 2
+
+          # IDPF virtual NIC driver supported.
+          OS_CAPABILITY_IDPF_NETWORK_INTERFACE = 3
+        end
+
+        # Possible boot options conversions.
+        module BootConversion
+          # Unspecified conversion type.
+          BOOT_CONVERSION_UNSPECIFIED = 0
+
+          # No conversion.
+          NONE = 1
+
+          # Convert from BIOS to EFI.
+          BIOS_TO_EFI = 2
+        end
+
         # Controls the level of details of a Utilization Report.
         module UtilizationReportView
           # The default / unset value.
@@ -2839,44 +4799,29 @@ module Google
           MIGRATING_VM_VIEW_FULL = 2
         end
 
-        # Types of disks supported for Compute Engine VM.
-        module ComputeEngineDiskType
-          # An unspecified disk type. Will be used as STANDARD.
-          COMPUTE_ENGINE_DISK_TYPE_UNSPECIFIED = 0
+        # Possible values for the VM architecture.
+        module VmArchitecture
+          # The architecture is unknown.
+          VM_ARCHITECTURE_UNSPECIFIED = 0
 
-          # A Standard disk type.
-          COMPUTE_ENGINE_DISK_TYPE_STANDARD = 1
+          # The architecture is one of the x86 architectures.
+          VM_ARCHITECTURE_X86_FAMILY = 1
 
-          # SSD hard disk type.
-          COMPUTE_ENGINE_DISK_TYPE_SSD = 2
-
-          # An alternative to SSD persistent disks that balance performance and
-          # cost.
-          COMPUTE_ENGINE_DISK_TYPE_BALANCED = 3
+          # The architecture is ARM64.
+          VM_ARCHITECTURE_ARM64 = 2
         end
 
-        # Types of licenses used in OS adaptation.
-        module ComputeEngineLicenseType
-          # The license type is the default for the OS.
-          COMPUTE_ENGINE_LICENSE_TYPE_DEFAULT = 0
+        # Describes the networking tier used for configuring network access
+        # configuration.
+        module ComputeEngineNetworkTier
+          # An unspecified network tier. Will be used as PREMIUM.
+          COMPUTE_ENGINE_NETWORK_TIER_UNSPECIFIED = 0
 
-          # The license type is Pay As You Go license type.
-          COMPUTE_ENGINE_LICENSE_TYPE_PAYG = 1
+          # A standard network tier.
+          NETWORK_TIER_STANDARD = 1
 
-          # The license type is Bring Your Own License type.
-          COMPUTE_ENGINE_LICENSE_TYPE_BYOL = 2
-        end
-
-        # Possible values for vm boot option.
-        module ComputeEngineBootOption
-          # The boot option is unknown.
-          COMPUTE_ENGINE_BOOT_OPTION_UNSPECIFIED = 0
-
-          # The boot option is EFI.
-          COMPUTE_ENGINE_BOOT_OPTION_EFI = 1
-
-          # The boot option is BIOS.
-          COMPUTE_ENGINE_BOOT_OPTION_BIOS = 2
+          # A premium network tier.
+          NETWORK_TIER_PREMIUM = 2
         end
       end
     end

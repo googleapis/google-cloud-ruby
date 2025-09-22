@@ -429,7 +429,7 @@ module Google
             # The job is no longer running due to an error.
             FAILED = 5
 
-            # The job was cancelled outside of Dataplex.
+            # The job was cancelled outside of Dataplex Universal Catalog.
             ABORTED = 6
           end
 
@@ -438,8 +438,8 @@ module Google
             # The trigger is unspecified.
             TRIGGER_UNSPECIFIED = 0
 
-            # The job was triggered by Dataplex based on trigger spec from task
-            # definition.
+            # The job was triggered by Dataplex Universal Catalog based on trigger spec
+            # from task definition.
             TASK_CONFIG = 1
 
             # The job was triggered by the explicit call of Task API.

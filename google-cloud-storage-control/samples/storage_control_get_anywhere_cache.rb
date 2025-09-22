@@ -16,7 +16,7 @@
 require "google/cloud/storage/control"
 
 def get_anywhere_cache bucket_name:, anywhere_cache_id:
-  # The ID of your GCS bucket
+  # The Name of your GCS bucket
   # bucket_name = "your-unique-bucket-name"
 
   # A value that, along with the bucket's name, uniquely identifies the cache
@@ -39,7 +39,7 @@ def get_anywhere_cache bucket_name:, anywhere_cache_id:
   begin
     result = storage_control_client.get_anywhere_cache request
     puts "AnywhereCache #{result.name} fetched"
-  rescue StandardError => e
+  rescue Google::Cloud::Error => e
     puts "Error fetching AnywhereCache: #{e.message}"
   end
 end

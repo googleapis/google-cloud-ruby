@@ -962,6 +962,62 @@ class ::Google::Cloud::ApiHub::V1::ApiHub::Rest::ClientTest < Minitest::Test
     end
   end
 
+  def test_create_api_operation
+    # Create test objects.
+    client_result = ::Google::Cloud::ApiHub::V1::ApiOperation.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    api_operation_id = "hello world"
+    api_operation = {}
+
+    create_api_operation_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::ApiHub::V1::ApiHub::Rest::ServiceStub.stub :transcode_create_api_operation_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, create_api_operation_client_stub do
+        # Create client
+        client = ::Google::Cloud::ApiHub::V1::ApiHub::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.create_api_operation({ parent: parent, api_operation_id: api_operation_id, api_operation: api_operation }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.create_api_operation parent: parent, api_operation_id: api_operation_id, api_operation: api_operation do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.create_api_operation ::Google::Cloud::ApiHub::V1::CreateApiOperationRequest.new(parent: parent, api_operation_id: api_operation_id, api_operation: api_operation) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.create_api_operation({ parent: parent, api_operation_id: api_operation_id, api_operation: api_operation }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.create_api_operation(::Google::Cloud::ApiHub::V1::CreateApiOperationRequest.new(parent: parent, api_operation_id: api_operation_id, api_operation: api_operation), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, create_api_operation_client_stub.call_count
+      end
+    end
+  end
+
   def test_get_api_operation
     # Create test objects.
     client_result = ::Google::Cloud::ApiHub::V1::ApiOperation.new
@@ -1069,6 +1125,115 @@ class ::Google::Cloud::ApiHub::V1::ApiHub::Rest::ClientTest < Minitest::Test
 
         # Verify method calls
         assert_equal 5, list_api_operations_client_stub.call_count
+      end
+    end
+  end
+
+  def test_update_api_operation
+    # Create test objects.
+    client_result = ::Google::Cloud::ApiHub::V1::ApiOperation.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    api_operation = {}
+    update_mask = {}
+
+    update_api_operation_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::ApiHub::V1::ApiHub::Rest::ServiceStub.stub :transcode_update_api_operation_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, update_api_operation_client_stub do
+        # Create client
+        client = ::Google::Cloud::ApiHub::V1::ApiHub::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.update_api_operation({ api_operation: api_operation, update_mask: update_mask }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.update_api_operation api_operation: api_operation, update_mask: update_mask do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.update_api_operation ::Google::Cloud::ApiHub::V1::UpdateApiOperationRequest.new(api_operation: api_operation, update_mask: update_mask) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.update_api_operation({ api_operation: api_operation, update_mask: update_mask }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.update_api_operation(::Google::Cloud::ApiHub::V1::UpdateApiOperationRequest.new(api_operation: api_operation, update_mask: update_mask), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, update_api_operation_client_stub.call_count
+      end
+    end
+  end
+
+  def test_delete_api_operation
+    # Create test objects.
+    client_result = ::Google::Protobuf::Empty.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    delete_api_operation_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::ApiHub::V1::ApiHub::Rest::ServiceStub.stub :transcode_delete_api_operation_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, delete_api_operation_client_stub do
+        # Create client
+        client = ::Google::Cloud::ApiHub::V1::ApiHub::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.delete_api_operation({ name: name }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.delete_api_operation name: name do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.delete_api_operation ::Google::Cloud::ApiHub::V1::DeleteApiOperationRequest.new(name: name) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.delete_api_operation({ name: name }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.delete_api_operation(::Google::Cloud::ApiHub::V1::DeleteApiOperationRequest.new(name: name), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, delete_api_operation_client_stub.call_count
       end
     end
   end

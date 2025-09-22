@@ -299,8 +299,8 @@ module Google
             # The job execution trigger is unspecified.
             EXECUTION_TRIGGER_UNSPECIFIED = 0
 
-            # The job was triggered by Dataplex based on trigger spec from task
-            # definition.
+            # The job was triggered by Dataplex Universal Catalog based on trigger spec
+            # from task definition.
             TASK_CONFIG = 1
 
             # The job was triggered by the explicit call of Task API.
@@ -550,6 +550,10 @@ module Google
         # @!attribute [rw] post_scan_actions_result
         #   @return [::Google::Cloud::Dataplex::V1::DataScanEvent::PostScanActionsResult]
         #     The result of post scan actions.
+        # @!attribute [rw] catalog_publishing_status
+        #   @return [::Google::Cloud::Dataplex::V1::DataScanCatalogPublishingStatus]
+        #     The status of publishing the data scan as Dataplex Universal Catalog
+        #     metadata.
         class DataScanEvent
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -733,7 +737,7 @@ module Google
             # Data scan job was cancelled.
             CANCELLED = 4
 
-            # Data scan job was createed.
+            # Data scan job was created.
             CREATED = 5
           end
 

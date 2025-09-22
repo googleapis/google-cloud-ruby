@@ -26,7 +26,7 @@ module Google
         #   @return [::String]
         #     Required. The resource name of the lake location, of the form:
         #     projects/\\{project_number}/locations/\\{location_id}
-        #     where `location_id` refers to a GCP region.
+        #     where `location_id` refers to a Google Cloud region.
         # @!attribute [rw] lake_id
         #   @return [::String]
         #     Required. Lake identifier.
@@ -81,7 +81,7 @@ module Google
         #   @return [::String]
         #     Required. The resource name of the lake location, of the form:
         #     `projects/{project_number}/locations/{location_id}`
-        #     where `location_id` refers to a GCP region.
+        #     where `location_id` refers to a Google Cloud region.
         # @!attribute [rw] page_size
         #   @return [::Integer]
         #     Optional. Maximum number of Lakes to return. The service may return fewer

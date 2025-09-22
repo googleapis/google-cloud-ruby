@@ -3231,6 +3231,114 @@ module Google
               end
 
               ##
+              # Decapsulates data that was encapsulated with a public key retrieved from
+              # {::Google::Cloud::Kms::V1::KeyManagementService::Rest::Client#get_public_key GetPublicKey}
+              # corresponding to a {::Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersion}
+              # with {::Google::Cloud::Kms::V1::CryptoKey#purpose CryptoKey.purpose}
+              # KEY_ENCAPSULATION.
+              #
+              # @overload decapsulate(request, options = nil)
+              #   Pass arguments to `decapsulate` via a request object, either of type
+              #   {::Google::Cloud::Kms::V1::DecapsulateRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::Kms::V1::DecapsulateRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload decapsulate(name: nil, ciphertext: nil, ciphertext_crc32c: nil)
+              #   Pass arguments to `decapsulate` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param name [::String]
+              #     Required. The resource name of the
+              #     {::Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersion} to use for
+              #     decapsulation.
+              #   @param ciphertext [::String]
+              #     Required. The ciphertext produced from encapsulation with the
+              #     named {::Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersion} public
+              #     key(s).
+              #   @param ciphertext_crc32c [::Google::Protobuf::Int64Value, ::Hash]
+              #     Optional. A CRC32C checksum of the
+              #     {::Google::Cloud::Kms::V1::DecapsulateRequest#ciphertext DecapsulateRequest.ciphertext}.
+              #     If specified,
+              #     {::Google::Cloud::Kms::V1::KeyManagementService::Rest::Client KeyManagementService} will
+              #     verify the integrity of the received
+              #     {::Google::Cloud::Kms::V1::DecapsulateRequest#ciphertext DecapsulateRequest.ciphertext}
+              #     using this checksum.
+              #     {::Google::Cloud::Kms::V1::KeyManagementService::Rest::Client KeyManagementService} will
+              #     report an error if the checksum verification fails. If you receive a
+              #     checksum error, your client should verify that
+              #     CRC32C({::Google::Cloud::Kms::V1::DecapsulateRequest#ciphertext DecapsulateRequest.ciphertext})
+              #     is equal to
+              #     {::Google::Cloud::Kms::V1::DecapsulateRequest#ciphertext_crc32c DecapsulateRequest.ciphertext_crc32c},
+              #     and if so, perform a limited number of retries. A persistent mismatch may
+              #     indicate an issue in your computation of the CRC32C checksum. Note: This
+              #     field is defined as int64 for reasons of compatibility across different
+              #     languages. However, it is a non-negative integer, which will never exceed
+              #     2^32-1, and can be safely downconverted to uint32 in languages that support
+              #     this type.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Cloud::Kms::V1::DecapsulateResponse]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Cloud::Kms::V1::DecapsulateResponse]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/kms/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Kms::V1::KeyManagementService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Kms::V1::DecapsulateRequest.new
+              #
+              #   # Call the decapsulate method.
+              #   result = client.decapsulate request
+              #
+              #   # The returned object is of type Google::Cloud::Kms::V1::DecapsulateResponse.
+              #   p result
+              #
+              def decapsulate request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Kms::V1::DecapsulateRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.decapsulate.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::Kms::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.decapsulate.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.decapsulate.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @key_management_service_stub.decapsulate request, options do |result, operation|
+                  yield result, operation if block_given?
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
               # Generate random bytes using the Cloud KMS randomness source in the provided
               # location.
               #
@@ -3607,6 +3715,11 @@ module Google
                   #
                   attr_reader :mac_verify
                   ##
+                  # RPC-specific configuration for `decapsulate`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :decapsulate
+                  ##
                   # RPC-specific configuration for `generate_random_bytes`
                   # @return [::Gapic::Config::Method]
                   #
@@ -3668,6 +3781,8 @@ module Google
                     @mac_sign = ::Gapic::Config::Method.new mac_sign_config
                     mac_verify_config = parent_rpcs.mac_verify if parent_rpcs.respond_to? :mac_verify
                     @mac_verify = ::Gapic::Config::Method.new mac_verify_config
+                    decapsulate_config = parent_rpcs.decapsulate if parent_rpcs.respond_to? :decapsulate
+                    @decapsulate = ::Gapic::Config::Method.new decapsulate_config
                     generate_random_bytes_config = parent_rpcs.generate_random_bytes if parent_rpcs.respond_to? :generate_random_bytes
                     @generate_random_bytes = ::Gapic::Config::Method.new generate_random_bytes_config
 

@@ -136,6 +136,34 @@
         }
       }
     },
+    "SearchService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::Retail::V2::SearchService::Client",
+          "rpcs": {
+            "Search": {
+              "methods": [
+                "search"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "ConversationalSearchService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::Retail::V2::ConversationalSearchService::Client",
+          "rpcs": {
+            "ConversationalSearch": {
+              "methods": [
+                "conversational_search"
+              ]
+            }
+          }
+        }
+      }
+    },
     "GenerativeQuestionService": {
       "clients": {
         "grpc": {
@@ -296,20 +324,6 @@
             "RemoveLocalInventories": {
               "methods": [
                 "remove_local_inventories"
-              ]
-            }
-          }
-        }
-      }
-    },
-    "SearchService": {
-      "clients": {
-        "grpc": {
-          "libraryClient": "::Google::Cloud::Retail::V2::SearchService::Client",
-          "rpcs": {
-            "Search": {
-              "methods": [
-                "search"
               ]
             }
           }

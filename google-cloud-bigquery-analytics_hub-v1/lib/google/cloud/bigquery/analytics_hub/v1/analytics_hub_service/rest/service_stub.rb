@@ -955,6 +955,286 @@ module Google
                 end
 
                 ##
+                # Baseline implementation for the create_query_template REST call
+                #
+                # @param request_pb [::Google::Cloud::Bigquery::AnalyticsHub::V1::CreateQueryTemplateRequest]
+                #   A request object representing the call parameters. Required.
+                # @param options [::Gapic::CallOptions]
+                #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+                #
+                # @yield [result, operation] Access the result along with the TransportOperation object
+                # @yieldparam result [::Google::Cloud::Bigquery::AnalyticsHub::V1::QueryTemplate]
+                # @yieldparam operation [::Gapic::Rest::TransportOperation]
+                #
+                # @return [::Google::Cloud::Bigquery::AnalyticsHub::V1::QueryTemplate]
+                #   A result object deserialized from the server's reply
+                def create_query_template request_pb, options = nil
+                  raise ::ArgumentError, "request must be provided" if request_pb.nil?
+
+                  verb, uri, query_string_params, body = ServiceStub.transcode_create_query_template_request request_pb
+                  query_string_params = if query_string_params.any?
+                                          query_string_params.to_h { |p| p.split "=", 2 }
+                                        else
+                                          {}
+                                        end
+
+                  response = @client_stub.make_http_request(
+                    verb,
+                    uri: uri,
+                    body: body || "",
+                    params: query_string_params,
+                    method_name: "create_query_template",
+                    options: options
+                  )
+                  operation = ::Gapic::Rest::TransportOperation.new response
+                  result = ::Google::Cloud::Bigquery::AnalyticsHub::V1::QueryTemplate.decode_json response.body, ignore_unknown_fields: true
+                  catch :response do
+                    yield result, operation if block_given?
+                    result
+                  end
+                end
+
+                ##
+                # Baseline implementation for the get_query_template REST call
+                #
+                # @param request_pb [::Google::Cloud::Bigquery::AnalyticsHub::V1::GetQueryTemplateRequest]
+                #   A request object representing the call parameters. Required.
+                # @param options [::Gapic::CallOptions]
+                #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+                #
+                # @yield [result, operation] Access the result along with the TransportOperation object
+                # @yieldparam result [::Google::Cloud::Bigquery::AnalyticsHub::V1::QueryTemplate]
+                # @yieldparam operation [::Gapic::Rest::TransportOperation]
+                #
+                # @return [::Google::Cloud::Bigquery::AnalyticsHub::V1::QueryTemplate]
+                #   A result object deserialized from the server's reply
+                def get_query_template request_pb, options = nil
+                  raise ::ArgumentError, "request must be provided" if request_pb.nil?
+
+                  verb, uri, query_string_params, body = ServiceStub.transcode_get_query_template_request request_pb
+                  query_string_params = if query_string_params.any?
+                                          query_string_params.to_h { |p| p.split "=", 2 }
+                                        else
+                                          {}
+                                        end
+
+                  response = @client_stub.make_http_request(
+                    verb,
+                    uri: uri,
+                    body: body || "",
+                    params: query_string_params,
+                    method_name: "get_query_template",
+                    options: options
+                  )
+                  operation = ::Gapic::Rest::TransportOperation.new response
+                  result = ::Google::Cloud::Bigquery::AnalyticsHub::V1::QueryTemplate.decode_json response.body, ignore_unknown_fields: true
+                  catch :response do
+                    yield result, operation if block_given?
+                    result
+                  end
+                end
+
+                ##
+                # Baseline implementation for the list_query_templates REST call
+                #
+                # @param request_pb [::Google::Cloud::Bigquery::AnalyticsHub::V1::ListQueryTemplatesRequest]
+                #   A request object representing the call parameters. Required.
+                # @param options [::Gapic::CallOptions]
+                #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+                #
+                # @yield [result, operation] Access the result along with the TransportOperation object
+                # @yieldparam result [::Google::Cloud::Bigquery::AnalyticsHub::V1::ListQueryTemplatesResponse]
+                # @yieldparam operation [::Gapic::Rest::TransportOperation]
+                #
+                # @return [::Google::Cloud::Bigquery::AnalyticsHub::V1::ListQueryTemplatesResponse]
+                #   A result object deserialized from the server's reply
+                def list_query_templates request_pb, options = nil
+                  raise ::ArgumentError, "request must be provided" if request_pb.nil?
+
+                  verb, uri, query_string_params, body = ServiceStub.transcode_list_query_templates_request request_pb
+                  query_string_params = if query_string_params.any?
+                                          query_string_params.to_h { |p| p.split "=", 2 }
+                                        else
+                                          {}
+                                        end
+
+                  response = @client_stub.make_http_request(
+                    verb,
+                    uri: uri,
+                    body: body || "",
+                    params: query_string_params,
+                    method_name: "list_query_templates",
+                    options: options
+                  )
+                  operation = ::Gapic::Rest::TransportOperation.new response
+                  result = ::Google::Cloud::Bigquery::AnalyticsHub::V1::ListQueryTemplatesResponse.decode_json response.body, ignore_unknown_fields: true
+                  catch :response do
+                    yield result, operation if block_given?
+                    result
+                  end
+                end
+
+                ##
+                # Baseline implementation for the update_query_template REST call
+                #
+                # @param request_pb [::Google::Cloud::Bigquery::AnalyticsHub::V1::UpdateQueryTemplateRequest]
+                #   A request object representing the call parameters. Required.
+                # @param options [::Gapic::CallOptions]
+                #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+                #
+                # @yield [result, operation] Access the result along with the TransportOperation object
+                # @yieldparam result [::Google::Cloud::Bigquery::AnalyticsHub::V1::QueryTemplate]
+                # @yieldparam operation [::Gapic::Rest::TransportOperation]
+                #
+                # @return [::Google::Cloud::Bigquery::AnalyticsHub::V1::QueryTemplate]
+                #   A result object deserialized from the server's reply
+                def update_query_template request_pb, options = nil
+                  raise ::ArgumentError, "request must be provided" if request_pb.nil?
+
+                  verb, uri, query_string_params, body = ServiceStub.transcode_update_query_template_request request_pb
+                  query_string_params = if query_string_params.any?
+                                          query_string_params.to_h { |p| p.split "=", 2 }
+                                        else
+                                          {}
+                                        end
+
+                  response = @client_stub.make_http_request(
+                    verb,
+                    uri: uri,
+                    body: body || "",
+                    params: query_string_params,
+                    method_name: "update_query_template",
+                    options: options
+                  )
+                  operation = ::Gapic::Rest::TransportOperation.new response
+                  result = ::Google::Cloud::Bigquery::AnalyticsHub::V1::QueryTemplate.decode_json response.body, ignore_unknown_fields: true
+                  catch :response do
+                    yield result, operation if block_given?
+                    result
+                  end
+                end
+
+                ##
+                # Baseline implementation for the delete_query_template REST call
+                #
+                # @param request_pb [::Google::Cloud::Bigquery::AnalyticsHub::V1::DeleteQueryTemplateRequest]
+                #   A request object representing the call parameters. Required.
+                # @param options [::Gapic::CallOptions]
+                #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+                #
+                # @yield [result, operation] Access the result along with the TransportOperation object
+                # @yieldparam result [::Google::Protobuf::Empty]
+                # @yieldparam operation [::Gapic::Rest::TransportOperation]
+                #
+                # @return [::Google::Protobuf::Empty]
+                #   A result object deserialized from the server's reply
+                def delete_query_template request_pb, options = nil
+                  raise ::ArgumentError, "request must be provided" if request_pb.nil?
+
+                  verb, uri, query_string_params, body = ServiceStub.transcode_delete_query_template_request request_pb
+                  query_string_params = if query_string_params.any?
+                                          query_string_params.to_h { |p| p.split "=", 2 }
+                                        else
+                                          {}
+                                        end
+
+                  response = @client_stub.make_http_request(
+                    verb,
+                    uri: uri,
+                    body: body || "",
+                    params: query_string_params,
+                    method_name: "delete_query_template",
+                    options: options
+                  )
+                  operation = ::Gapic::Rest::TransportOperation.new response
+                  result = ::Google::Protobuf::Empty.decode_json response.body, ignore_unknown_fields: true
+                  catch :response do
+                    yield result, operation if block_given?
+                    result
+                  end
+                end
+
+                ##
+                # Baseline implementation for the submit_query_template REST call
+                #
+                # @param request_pb [::Google::Cloud::Bigquery::AnalyticsHub::V1::SubmitQueryTemplateRequest]
+                #   A request object representing the call parameters. Required.
+                # @param options [::Gapic::CallOptions]
+                #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+                #
+                # @yield [result, operation] Access the result along with the TransportOperation object
+                # @yieldparam result [::Google::Cloud::Bigquery::AnalyticsHub::V1::QueryTemplate]
+                # @yieldparam operation [::Gapic::Rest::TransportOperation]
+                #
+                # @return [::Google::Cloud::Bigquery::AnalyticsHub::V1::QueryTemplate]
+                #   A result object deserialized from the server's reply
+                def submit_query_template request_pb, options = nil
+                  raise ::ArgumentError, "request must be provided" if request_pb.nil?
+
+                  verb, uri, query_string_params, body = ServiceStub.transcode_submit_query_template_request request_pb
+                  query_string_params = if query_string_params.any?
+                                          query_string_params.to_h { |p| p.split "=", 2 }
+                                        else
+                                          {}
+                                        end
+
+                  response = @client_stub.make_http_request(
+                    verb,
+                    uri: uri,
+                    body: body || "",
+                    params: query_string_params,
+                    method_name: "submit_query_template",
+                    options: options
+                  )
+                  operation = ::Gapic::Rest::TransportOperation.new response
+                  result = ::Google::Cloud::Bigquery::AnalyticsHub::V1::QueryTemplate.decode_json response.body, ignore_unknown_fields: true
+                  catch :response do
+                    yield result, operation if block_given?
+                    result
+                  end
+                end
+
+                ##
+                # Baseline implementation for the approve_query_template REST call
+                #
+                # @param request_pb [::Google::Cloud::Bigquery::AnalyticsHub::V1::ApproveQueryTemplateRequest]
+                #   A request object representing the call parameters. Required.
+                # @param options [::Gapic::CallOptions]
+                #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+                #
+                # @yield [result, operation] Access the result along with the TransportOperation object
+                # @yieldparam result [::Google::Cloud::Bigquery::AnalyticsHub::V1::QueryTemplate]
+                # @yieldparam operation [::Gapic::Rest::TransportOperation]
+                #
+                # @return [::Google::Cloud::Bigquery::AnalyticsHub::V1::QueryTemplate]
+                #   A result object deserialized from the server's reply
+                def approve_query_template request_pb, options = nil
+                  raise ::ArgumentError, "request must be provided" if request_pb.nil?
+
+                  verb, uri, query_string_params, body = ServiceStub.transcode_approve_query_template_request request_pb
+                  query_string_params = if query_string_params.any?
+                                          query_string_params.to_h { |p| p.split "=", 2 }
+                                        else
+                                          {}
+                                        end
+
+                  response = @client_stub.make_http_request(
+                    verb,
+                    uri: uri,
+                    body: body || "",
+                    params: query_string_params,
+                    method_name: "approve_query_template",
+                    options: options
+                  )
+                  operation = ::Gapic::Rest::TransportOperation.new response
+                  result = ::Google::Cloud::Bigquery::AnalyticsHub::V1::QueryTemplate.decode_json response.body, ignore_unknown_fields: true
+                  catch :response do
+                    yield result, operation if block_given?
+                    result
+                  end
+                end
+
+                ##
                 # @private
                 #
                 # GRPC transcoding helper method for the list_data_exchanges REST call
@@ -1469,6 +1749,157 @@ module Google
                                                             body: "*",
                                                             matches: [
                                                               ["resource", %r{^projects/[^/]+/locations/[^/]+/dataExchanges/[^/]+/listings/[^/]+/?$}, false]
+                                                            ]
+                                                          )
+                  transcoder.transcode request_pb
+                end
+
+                ##
+                # @private
+                #
+                # GRPC transcoding helper method for the create_query_template REST call
+                #
+                # @param request_pb [::Google::Cloud::Bigquery::AnalyticsHub::V1::CreateQueryTemplateRequest]
+                #   A request object representing the call parameters. Required.
+                # @return [Array(String, [String, nil], Hash{String => String})]
+                #   Uri, Body, Query string parameters
+                def self.transcode_create_query_template_request request_pb
+                  transcoder = Gapic::Rest::GrpcTranscoder.new
+                                                          .with_bindings(
+                                                            uri_method: :post,
+                                                            uri_template: "/v1/{parent}/queryTemplates",
+                                                            body: "query_template",
+                                                            matches: [
+                                                              ["parent", %r{^projects/[^/]+/locations/[^/]+/dataExchanges/[^/]+/?$}, false]
+                                                            ]
+                                                          )
+                  transcoder.transcode request_pb
+                end
+
+                ##
+                # @private
+                #
+                # GRPC transcoding helper method for the get_query_template REST call
+                #
+                # @param request_pb [::Google::Cloud::Bigquery::AnalyticsHub::V1::GetQueryTemplateRequest]
+                #   A request object representing the call parameters. Required.
+                # @return [Array(String, [String, nil], Hash{String => String})]
+                #   Uri, Body, Query string parameters
+                def self.transcode_get_query_template_request request_pb
+                  transcoder = Gapic::Rest::GrpcTranscoder.new
+                                                          .with_bindings(
+                                                            uri_method: :get,
+                                                            uri_template: "/v1/{name}",
+                                                            matches: [
+                                                              ["name", %r{^projects/[^/]+/locations/[^/]+/dataExchanges/[^/]+/queryTemplates/[^/]+/?$}, false]
+                                                            ]
+                                                          )
+                  transcoder.transcode request_pb
+                end
+
+                ##
+                # @private
+                #
+                # GRPC transcoding helper method for the list_query_templates REST call
+                #
+                # @param request_pb [::Google::Cloud::Bigquery::AnalyticsHub::V1::ListQueryTemplatesRequest]
+                #   A request object representing the call parameters. Required.
+                # @return [Array(String, [String, nil], Hash{String => String})]
+                #   Uri, Body, Query string parameters
+                def self.transcode_list_query_templates_request request_pb
+                  transcoder = Gapic::Rest::GrpcTranscoder.new
+                                                          .with_bindings(
+                                                            uri_method: :get,
+                                                            uri_template: "/v1/{parent}/queryTemplates",
+                                                            matches: [
+                                                              ["parent", %r{^projects/[^/]+/locations/[^/]+/dataExchanges/[^/]+/?$}, false]
+                                                            ]
+                                                          )
+                  transcoder.transcode request_pb
+                end
+
+                ##
+                # @private
+                #
+                # GRPC transcoding helper method for the update_query_template REST call
+                #
+                # @param request_pb [::Google::Cloud::Bigquery::AnalyticsHub::V1::UpdateQueryTemplateRequest]
+                #   A request object representing the call parameters. Required.
+                # @return [Array(String, [String, nil], Hash{String => String})]
+                #   Uri, Body, Query string parameters
+                def self.transcode_update_query_template_request request_pb
+                  transcoder = Gapic::Rest::GrpcTranscoder.new
+                                                          .with_bindings(
+                                                            uri_method: :patch,
+                                                            uri_template: "/v1/{query_template.name}",
+                                                            body: "query_template",
+                                                            matches: [
+                                                              ["query_template.name", %r{^projects/[^/]+/locations/[^/]+/dataExchanges/[^/]+/queryTemplates/[^/]+/?$}, false]
+                                                            ]
+                                                          )
+                  transcoder.transcode request_pb
+                end
+
+                ##
+                # @private
+                #
+                # GRPC transcoding helper method for the delete_query_template REST call
+                #
+                # @param request_pb [::Google::Cloud::Bigquery::AnalyticsHub::V1::DeleteQueryTemplateRequest]
+                #   A request object representing the call parameters. Required.
+                # @return [Array(String, [String, nil], Hash{String => String})]
+                #   Uri, Body, Query string parameters
+                def self.transcode_delete_query_template_request request_pb
+                  transcoder = Gapic::Rest::GrpcTranscoder.new
+                                                          .with_bindings(
+                                                            uri_method: :delete,
+                                                            uri_template: "/v1/{name}",
+                                                            matches: [
+                                                              ["name", %r{^projects/[^/]+/locations/[^/]+/dataExchanges/[^/]+/queryTemplates/[^/]+/?$}, false]
+                                                            ]
+                                                          )
+                  transcoder.transcode request_pb
+                end
+
+                ##
+                # @private
+                #
+                # GRPC transcoding helper method for the submit_query_template REST call
+                #
+                # @param request_pb [::Google::Cloud::Bigquery::AnalyticsHub::V1::SubmitQueryTemplateRequest]
+                #   A request object representing the call parameters. Required.
+                # @return [Array(String, [String, nil], Hash{String => String})]
+                #   Uri, Body, Query string parameters
+                def self.transcode_submit_query_template_request request_pb
+                  transcoder = Gapic::Rest::GrpcTranscoder.new
+                                                          .with_bindings(
+                                                            uri_method: :post,
+                                                            uri_template: "/v1/{name}:submit",
+                                                            body: "*",
+                                                            matches: [
+                                                              ["name", %r{^projects/[^/]+/locations/[^/]+/dataExchanges/[^/]+/queryTemplates/[^/]+/?$}, false]
+                                                            ]
+                                                          )
+                  transcoder.transcode request_pb
+                end
+
+                ##
+                # @private
+                #
+                # GRPC transcoding helper method for the approve_query_template REST call
+                #
+                # @param request_pb [::Google::Cloud::Bigquery::AnalyticsHub::V1::ApproveQueryTemplateRequest]
+                #   A request object representing the call parameters. Required.
+                # @return [Array(String, [String, nil], Hash{String => String})]
+                #   Uri, Body, Query string parameters
+                def self.transcode_approve_query_template_request request_pb
+                  transcoder = Gapic::Rest::GrpcTranscoder.new
+                                                          .with_bindings(
+                                                            uri_method: :post,
+                                                            uri_template: "/v1/{name}:approve",
+                                                            body: "*",
+                                                            matches: [
+                                                              ["name", %r{^projects/[^/]+/locations/[^/]+/dataExchanges/[^/]+/queryTemplates/[^/]+/?$}, false]
                                                             ]
                                                           )
                   transcoder.transcode request_pb

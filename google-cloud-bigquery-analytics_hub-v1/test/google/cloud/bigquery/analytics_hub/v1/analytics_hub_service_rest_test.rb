@@ -1295,6 +1295,389 @@ class ::Google::Cloud::Bigquery::AnalyticsHub::V1::AnalyticsHubService::Rest::Cl
     end
   end
 
+  def test_create_query_template
+    # Create test objects.
+    client_result = ::Google::Cloud::Bigquery::AnalyticsHub::V1::QueryTemplate.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    query_template_id = "hello world"
+    query_template = {}
+
+    create_query_template_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::Bigquery::AnalyticsHub::V1::AnalyticsHubService::Rest::ServiceStub.stub :transcode_create_query_template_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, create_query_template_client_stub do
+        # Create client
+        client = ::Google::Cloud::Bigquery::AnalyticsHub::V1::AnalyticsHubService::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.create_query_template({ parent: parent, query_template_id: query_template_id, query_template: query_template }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.create_query_template parent: parent, query_template_id: query_template_id, query_template: query_template do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.create_query_template ::Google::Cloud::Bigquery::AnalyticsHub::V1::CreateQueryTemplateRequest.new(parent: parent, query_template_id: query_template_id, query_template: query_template) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.create_query_template({ parent: parent, query_template_id: query_template_id, query_template: query_template }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.create_query_template(::Google::Cloud::Bigquery::AnalyticsHub::V1::CreateQueryTemplateRequest.new(parent: parent, query_template_id: query_template_id, query_template: query_template), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, create_query_template_client_stub.call_count
+      end
+    end
+  end
+
+  def test_get_query_template
+    # Create test objects.
+    client_result = ::Google::Cloud::Bigquery::AnalyticsHub::V1::QueryTemplate.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    get_query_template_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::Bigquery::AnalyticsHub::V1::AnalyticsHubService::Rest::ServiceStub.stub :transcode_get_query_template_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, get_query_template_client_stub do
+        # Create client
+        client = ::Google::Cloud::Bigquery::AnalyticsHub::V1::AnalyticsHubService::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.get_query_template({ name: name }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.get_query_template name: name do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.get_query_template ::Google::Cloud::Bigquery::AnalyticsHub::V1::GetQueryTemplateRequest.new(name: name) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.get_query_template({ name: name }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.get_query_template(::Google::Cloud::Bigquery::AnalyticsHub::V1::GetQueryTemplateRequest.new(name: name), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, get_query_template_client_stub.call_count
+      end
+    end
+  end
+
+  def test_list_query_templates
+    # Create test objects.
+    client_result = ::Google::Cloud::Bigquery::AnalyticsHub::V1::ListQueryTemplatesResponse.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    page_size = 42
+    page_token = "hello world"
+
+    list_query_templates_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::Bigquery::AnalyticsHub::V1::AnalyticsHubService::Rest::ServiceStub.stub :transcode_list_query_templates_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, list_query_templates_client_stub do
+        # Create client
+        client = ::Google::Cloud::Bigquery::AnalyticsHub::V1::AnalyticsHubService::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.list_query_templates({ parent: parent, page_size: page_size, page_token: page_token }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.list_query_templates parent: parent, page_size: page_size, page_token: page_token do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.list_query_templates ::Google::Cloud::Bigquery::AnalyticsHub::V1::ListQueryTemplatesRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.list_query_templates({ parent: parent, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.list_query_templates(::Google::Cloud::Bigquery::AnalyticsHub::V1::ListQueryTemplatesRequest.new(parent: parent, page_size: page_size, page_token: page_token), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, list_query_templates_client_stub.call_count
+      end
+    end
+  end
+
+  def test_update_query_template
+    # Create test objects.
+    client_result = ::Google::Cloud::Bigquery::AnalyticsHub::V1::QueryTemplate.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    update_mask = {}
+    query_template = {}
+
+    update_query_template_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::Bigquery::AnalyticsHub::V1::AnalyticsHubService::Rest::ServiceStub.stub :transcode_update_query_template_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, update_query_template_client_stub do
+        # Create client
+        client = ::Google::Cloud::Bigquery::AnalyticsHub::V1::AnalyticsHubService::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.update_query_template({ update_mask: update_mask, query_template: query_template }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.update_query_template update_mask: update_mask, query_template: query_template do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.update_query_template ::Google::Cloud::Bigquery::AnalyticsHub::V1::UpdateQueryTemplateRequest.new(update_mask: update_mask, query_template: query_template) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.update_query_template({ update_mask: update_mask, query_template: query_template }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.update_query_template(::Google::Cloud::Bigquery::AnalyticsHub::V1::UpdateQueryTemplateRequest.new(update_mask: update_mask, query_template: query_template), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, update_query_template_client_stub.call_count
+      end
+    end
+  end
+
+  def test_delete_query_template
+    # Create test objects.
+    client_result = ::Google::Protobuf::Empty.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    delete_query_template_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::Bigquery::AnalyticsHub::V1::AnalyticsHubService::Rest::ServiceStub.stub :transcode_delete_query_template_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, delete_query_template_client_stub do
+        # Create client
+        client = ::Google::Cloud::Bigquery::AnalyticsHub::V1::AnalyticsHubService::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.delete_query_template({ name: name }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.delete_query_template name: name do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.delete_query_template ::Google::Cloud::Bigquery::AnalyticsHub::V1::DeleteQueryTemplateRequest.new(name: name) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.delete_query_template({ name: name }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.delete_query_template(::Google::Cloud::Bigquery::AnalyticsHub::V1::DeleteQueryTemplateRequest.new(name: name), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, delete_query_template_client_stub.call_count
+      end
+    end
+  end
+
+  def test_submit_query_template
+    # Create test objects.
+    client_result = ::Google::Cloud::Bigquery::AnalyticsHub::V1::QueryTemplate.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    submit_query_template_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::Bigquery::AnalyticsHub::V1::AnalyticsHubService::Rest::ServiceStub.stub :transcode_submit_query_template_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, submit_query_template_client_stub do
+        # Create client
+        client = ::Google::Cloud::Bigquery::AnalyticsHub::V1::AnalyticsHubService::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.submit_query_template({ name: name }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.submit_query_template name: name do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.submit_query_template ::Google::Cloud::Bigquery::AnalyticsHub::V1::SubmitQueryTemplateRequest.new(name: name) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.submit_query_template({ name: name }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.submit_query_template(::Google::Cloud::Bigquery::AnalyticsHub::V1::SubmitQueryTemplateRequest.new(name: name), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, submit_query_template_client_stub.call_count
+      end
+    end
+  end
+
+  def test_approve_query_template
+    # Create test objects.
+    client_result = ::Google::Cloud::Bigquery::AnalyticsHub::V1::QueryTemplate.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    approve_query_template_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::Bigquery::AnalyticsHub::V1::AnalyticsHubService::Rest::ServiceStub.stub :transcode_approve_query_template_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, approve_query_template_client_stub do
+        # Create client
+        client = ::Google::Cloud::Bigquery::AnalyticsHub::V1::AnalyticsHubService::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.approve_query_template({ name: name }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.approve_query_template name: name do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.approve_query_template ::Google::Cloud::Bigquery::AnalyticsHub::V1::ApproveQueryTemplateRequest.new(name: name) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.approve_query_template({ name: name }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.approve_query_template(::Google::Cloud::Bigquery::AnalyticsHub::V1::ApproveQueryTemplateRequest.new(name: name), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, approve_query_template_client_stub.call_count
+      end
+    end
+  end
+
   def test_configure
     credentials_token = :dummy_value
 

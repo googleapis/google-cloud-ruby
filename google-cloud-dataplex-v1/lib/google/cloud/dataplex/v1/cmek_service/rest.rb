@@ -33,7 +33,7 @@ module Google
     module Dataplex
       module V1
         ##
-        # Dataplex Cmek Service
+        # Dataplex Universal Catalog Customer Managed Encryption Keys (CMEK) Service
         #
         # To load this service and instantiate a REST client:
         #

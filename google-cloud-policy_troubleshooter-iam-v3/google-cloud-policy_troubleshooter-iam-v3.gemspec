@@ -23,7 +23,7 @@ Gem::Specification.new do |gem|
 
   gem.required_ruby_version = ">= 3.1"
 
-  gem.add_dependency "gapic-common", "~> 1.1"
+  gem.add_dependency "gapic-common", "~> 1.2"
   gem.add_dependency "google-cloud-errors", "~> 1.0"
   gem.add_dependency "google-iam-v1", "> 0.5", "< 2.a"
   gem.add_dependency "google-iam-v2", "> 0.3", "< 2.a"

@@ -425,6 +425,27 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # A request message for Instances.AddNetworkInterface. See the method description for details.
+        # @!attribute [rw] instance
+        #   @return [::String]
+        #     The instance name for this request stored as resource_id. Name should conform to RFC1035 or be an unsigned long integer.
+        # @!attribute [rw] network_interface_resource
+        #   @return [::Google::Cloud::Compute::V1::NetworkInterface]
+        #     The body resource for this request
+        # @!attribute [rw] project
+        #   @return [::String]
+        #     Project ID for this request.
+        # @!attribute [rw] request_id
+        #   @return [::String]
+        #     An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
+        # @!attribute [rw] zone
+        #   @return [::String]
+        #     The name of the zone for this request.
+        class AddNetworkInterfaceInstanceRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # A request message for NodeGroups.AddNodes. See the method description for details.
         # @!attribute [rw] node_group
         #   @return [::String]
@@ -3595,7 +3616,7 @@ module Google
         #     Specifies the maximum allowed TTL for cached content served by this origin. Cache directives that attempt to set a max-age or s-maxage higher than this, or an Expires header more than maxTTL seconds in the future will be capped at the value of maxTTL, as if it were the value of an s-maxage Cache-Control directive. Headers sent to the client will not be modified. Setting a TTL of "0" means "always revalidate". The maximum allowed value is 31,622,400s (1 year), noting that infrequently accessed objects may be evicted from the cache before the defined TTL.
         # @!attribute [rw] negative_caching
         #   @return [::Boolean]
-        #     Negative caching allows per-status code TTLs to be set, in order to apply fine-grained caching for common errors or redirects. This can reduce the load on your origin and improve end-user experience by reducing response latency. When the cache mode is set to CACHE_ALL_STATIC or USE_ORIGIN_HEADERS, negative caching applies to responses with the specified response code that lack any Cache-Control, Expires, or Pragma: no-cache directives. When the cache mode is set to FORCE_CACHE_ALL, negative caching applies to all responses with the specified response code, and override any caching headers. By default, Cloud CDN will apply the following default TTLs to these status codes: HTTP 300 (Multiple Choice), 301, 308 (Permanent Redirects): 10m HTTP 404 (Not Found), 410 (Gone), 451 (Unavailable For Legal Reasons): 120s HTTP 405 (Method Not Found), 421 (Misdirected Request), 501 (Not Implemented): 60s. These defaults can be overridden in negative_caching_policy.
+        #     Negative caching allows per-status code TTLs to be set, in order to apply fine-grained caching for common errors or redirects. This can reduce the load on your origin and improve end-user experience by reducing response latency. When the cache mode is set to CACHE_ALL_STATIC or USE_ORIGIN_HEADERS, negative caching applies to responses with the specified response code that lack any Cache-Control, Expires, or Pragma: no-cache directives. When the cache mode is set to FORCE_CACHE_ALL, negative caching applies to all responses with the specified response code, and override any caching headers. By default, Cloud CDN will apply the following default TTLs to these status codes: HTTP 300 (Multiple Choice), 301, 308 (Permanent Redirects): 10m HTTP 404 (Not Found), 410 (Gone), 451 (Unavailable For Legal Reasons): 120s HTTP 405 (Method Not Found), 501 (Not Implemented): 60s. These defaults can be overridden in negative_caching_policy.
         # @!attribute [rw] negative_caching_policy
         #   @return [::Array<::Google::Cloud::Compute::V1::BackendBucketCdnPolicyNegativeCachingPolicy>]
         #     Sets a cache TTL for the specified HTTP status code. negative_caching must be enabled to configure negative_caching_policy. Omitting the policy and leaving negative_caching enabled will use Cloud CDN's default cache TTLs. Note that when specifying an explicit negative_caching_policy, you should take care to specify a cache TTL for all response codes that you wish to cache. Cloud CDN will not apply any default negative caching when a policy exists.
@@ -3991,6 +4012,9 @@ module Google
             # This is a simple policy in which each healthy backend is selected in round robin order. This is the default.
             ROUND_ROBIN = 153_895_801
 
+            # Per-instance weighted Load Balancing via health check reported weights. In internal passthrough network load balancing, it is weighted rendezvous hashing. This option is only supported in internal passthrough network load balancing.
+            WEIGHTED_GCP_RENDEZVOUS = 82_501_640
+
             # Per-instance weighted Load Balancing via health check reported weights. If set, the Backend Service must configure a non legacy HTTP-based Health Check, and health check replies are expected to contain non-standard HTTP response header field X-Load-Balancing-Endpoint-Weight to specify the per-instance weights. If set, Load Balancing is weighted based on the per-instance weights reported in the last processed health check replies, as long as every instance either reported a valid weight or had UNAVAILABLE_WEIGHT. Otherwise, Load Balancing remains equal-weight. This option is only supported in Network Load Balancing.
             WEIGHTED_MAGLEV = 254_930_962
 
@@ -4121,7 +4145,7 @@ module Google
         #     Specifies the maximum allowed TTL for cached content served by this origin. Cache directives that attempt to set a max-age or s-maxage higher than this, or an Expires header more than maxTTL seconds in the future will be capped at the value of maxTTL, as if it were the value of an s-maxage Cache-Control directive. Headers sent to the client will not be modified. Setting a TTL of "0" means "always revalidate". The maximum allowed value is 31,622,400s (1 year), noting that infrequently accessed objects may be evicted from the cache before the defined TTL.
         # @!attribute [rw] negative_caching
         #   @return [::Boolean]
-        #     Negative caching allows per-status code TTLs to be set, in order to apply fine-grained caching for common errors or redirects. This can reduce the load on your origin and improve end-user experience by reducing response latency. When the cache mode is set to CACHE_ALL_STATIC or USE_ORIGIN_HEADERS, negative caching applies to responses with the specified response code that lack any Cache-Control, Expires, or Pragma: no-cache directives. When the cache mode is set to FORCE_CACHE_ALL, negative caching applies to all responses with the specified response code, and override any caching headers. By default, Cloud CDN will apply the following default TTLs to these status codes: HTTP 300 (Multiple Choice), 301, 308 (Permanent Redirects): 10m HTTP 404 (Not Found), 410 (Gone), 451 (Unavailable For Legal Reasons): 120s HTTP 405 (Method Not Found), 421 (Misdirected Request), 501 (Not Implemented): 60s. These defaults can be overridden in negative_caching_policy.
+        #     Negative caching allows per-status code TTLs to be set, in order to apply fine-grained caching for common errors or redirects. This can reduce the load on your origin and improve end-user experience by reducing response latency. When the cache mode is set to CACHE_ALL_STATIC or USE_ORIGIN_HEADERS, negative caching applies to responses with the specified response code that lack any Cache-Control, Expires, or Pragma: no-cache directives. When the cache mode is set to FORCE_CACHE_ALL, negative caching applies to all responses with the specified response code, and override any caching headers. By default, Cloud CDN will apply the following default TTLs to these status codes: HTTP 300 (Multiple Choice), 301, 308 (Permanent Redirects): 10m HTTP 404 (Not Found), 410 (Gone), 451 (Unavailable For Legal Reasons): 120s HTTP 405 (Method Not Found), 501 (Not Implemented): 60s. These defaults can be overridden in negative_caching_policy.
         # @!attribute [rw] negative_caching_policy
         #   @return [::Array<::Google::Cloud::Compute::V1::BackendServiceCdnPolicyNegativeCachingPolicy>]
         #     Sets a cache TTL for the specified HTTP status code. negative_caching must be enabled to configure negative_caching_policy. Omitting the policy and leaving negative_caching enabled will use Cloud CDN's default cache TTLs. Note that when specifying an explicit negative_caching_policy, you should take care to specify a cache TTL for all response codes that you wish to cache. Cloud CDN will not apply any default negative caching when a policy exists.
@@ -4451,6 +4475,9 @@ module Google
 
             # This is a simple policy in which each healthy backend is selected in round robin order. This is the default.
             ROUND_ROBIN = 153_895_801
+
+            # Per-instance weighted Load Balancing via health check reported weights. In internal passthrough network load balancing, it is weighted rendezvous hashing. This option is only supported in internal passthrough network load balancing.
+            WEIGHTED_GCP_RENDEZVOUS = 82_501_640
 
             # Per-instance weighted Load Balancing via health check reported weights. If set, the Backend Service must configure a non legacy HTTP-based Health Check, and health check replies are expected to contain non-standard HTTP response header field X-Load-Balancing-Endpoint-Weight to specify the per-instance weights. If set, Load Balancing is weighted based on the per-instance weights reported in the last processed health check replies, as long as every instance either reported a valid weight or had UNAVAILABLE_WEIGHT. Otherwise, Load Balancing remains equal-weight. This option is only supported in Network Load Balancing.
             WEIGHTED_MAGLEV = 254_930_962
@@ -6344,6 +6371,27 @@ module Google
         #   @return [::String]
         #     An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
         class DeleteNetworkFirewallPolicyRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # A request message for Instances.DeleteNetworkInterface. See the method description for details.
+        # @!attribute [rw] instance
+        #   @return [::String]
+        #     The instance name for this request stored as resource_id. Name should conform to RFC1035 or be an unsigned long integer.
+        # @!attribute [rw] network_interface_name
+        #   @return [::String]
+        #     The name of the dynamic network interface to be deleted from the instance.
+        # @!attribute [rw] project
+        #   @return [::String]
+        #     Project ID for this request.
+        # @!attribute [rw] request_id
+        #   @return [::String]
+        #     An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
+        # @!attribute [rw] zone
+        #   @return [::String]
+        #     The name of the zone for this request.
+        class DeleteNetworkInterfaceInstanceRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
@@ -11251,6 +11299,9 @@ module Google
         # @!attribute [rw] service_attachment
         #   @return [::String]
         #     Name of the ServiceAttachment resource to return.
+        # @!attribute [rw] show_nat_ips
+        #   @return [::Boolean]
+        #     Indicates whether NAT IPs should be included in the response.
         class GetServiceAttachmentRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -14401,6 +14452,9 @@ module Google
             # The instance is halted and we are performing tear down tasks like network deprogramming, releasing quota, IP, tearing down disks etc.
             DEPROVISIONING = 428_935_662
 
+            # For Flex Start provisioning instance is waiting for available capacity from Dynamic Workload Scheduler (DWS).
+            PENDING = 35_394_935
+
             # Resources are being allocated for the instance.
             PROVISIONING = 290_896_621
 
@@ -15632,6 +15686,9 @@ module Google
         end
 
         # Additional instance params.
+        # @!attribute [rw] request_valid_for_duration
+        #   @return [::Google::Cloud::Compute::V1::Duration]
+        #     Relative deadline for waiting for capacity. Relevant only for Instances.Insert API.
         # @!attribute [rw] resource_manager_tags
         #   @return [::Google::Protobuf::Map{::String => ::String}]
         #     Resource manager tags to be bound to the instance. Tag keys and values have the same definition as resource manager tags. Keys must be in the format `tagKeys/{tag_key_id}`, and values are in the format `tagValues/456`. The field is ignored (both PUT & PATCH) when empty.
@@ -15968,6 +16025,9 @@ module Google
 
             # The instance is halted and we are performing tear down tasks like network deprogramming, releasing quota, IP, tearing down disks etc.
             DEPROVISIONING = 428_935_662
+
+            # For Flex Start provisioning instance is waiting for available capacity from Dynamic Workload Scheduler (DWS).
+            PENDING = 35_394_935
 
             # Resources are being allocated for the instance.
             PROVISIONING = 290_896_621
@@ -17332,7 +17392,7 @@ module Google
         #     Check the IsActive enum for the list of possible values.
         # @!attribute [rw] status
         #   @return [::String]
-        #     Whether this Attachment is active, and if so, whether BGP is up. This is based on the statuses available in the Pantheon UI here: http://google3/java/com/google/cloud/boq/clientapi/gce/hybrid/api/interconnect_models.proto
+        #     Whether this Attachment is active, and if so, whether BGP is up.
         #     Check the Status enum for the list of possible values.
         class InterconnectAttachmentGroupsOperationalStatusAttachmentStatus
           include ::Google::Protobuf::MessageExts
@@ -17350,7 +17410,7 @@ module Google
             UNSPECIFIED = 526_786_327
           end
 
-          # Whether this Attachment is active, and if so, whether BGP is up. This is based on the statuses available in the Pantheon UI here: http://google3/java/com/google/cloud/boq/clientapi/gce/hybrid/api/interconnect_models.proto
+          # Whether this Attachment is active, and if so, whether BGP is up.
           module Status
             # A value indicating that the enum field is not set.
             UNDEFINED_STATUS = 0
@@ -22507,6 +22567,9 @@ module Google
             # The instance is halted and we are performing tear down tasks like network deprogramming, releasing quota, IP, tearing down disks etc.
             DEPROVISIONING = 428_935_662
 
+            # For Flex Start provisioning instance is waiting for available capacity from Dynamic Workload Scheduler (DWS).
+            PENDING = 35_394_935
+
             # Resources are being allocated for the instance.
             PROVISIONING = 290_896_621
 
@@ -23588,6 +23651,9 @@ module Google
         #   @return [::String]
         #     The type of vNIC to be used on this interface. This may be gVNIC or VirtioNet.
         #     Check the NicType enum for the list of possible values.
+        # @!attribute [rw] parent_nic_name
+        #   @return [::String]
+        #     Name of the parent network interface of a dynamic network interface.
         # @!attribute [rw] queue_count
         #   @return [::Integer]
         #     The networking queue count that's specified by users for the network interface. Both Rx and Tx queues will be set to this number. It'll be empty if not specified by the users.
@@ -23598,6 +23664,9 @@ module Google
         # @!attribute [rw] subnetwork
         #   @return [::String]
         #     The URL of the Subnetwork resource for this instance. If the network resource is in legacy mode, do not specify this field. If the network is in auto subnet mode, specifying the subnetwork is optional. If the network is in custom subnet mode, specifying the subnetwork is required. If you specify this field, you can specify the subnetwork as a full or partial URL. For example, the following are all valid URLs: - https://www.googleapis.com/compute/v1/projects/project/regions/region /subnetworks/subnetwork - regions/region/subnetworks/subnetwork
+        # @!attribute [rw] vlan
+        #   @return [::Integer]
+        #     VLAN tag of a dynamic network interface, must be an integer in the range from 2 to 255 inclusively.
         class NetworkInterface
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -23942,6 +24011,9 @@ module Google
         # @!attribute [rw] name
         #   @return [::String]
         #     [Output Only] Name of the resource.
+        # @!attribute [rw] profile_type
+        #   @return [::Google::Cloud::Compute::V1::NetworkProfileProfileType]
+        #     [Output Only] Type of the network profile.
         # @!attribute [rw] self_link
         #   @return [::String]
         #     [Output Only] Server-defined URL for the resource.
@@ -24424,6 +24496,68 @@ module Google
             UNICAST_SDN = 379_954_157
 
             UNICAST_ULL = 379_956_325
+          end
+        end
+
+        # @!attribute [rw] network_type
+        #   @return [::String]
+        #     Check the NetworkType enum for the list of possible values.
+        # @!attribute [rw] rdma_subtype
+        #   @return [::String]
+        #     Check the RdmaSubtype enum for the list of possible values.
+        # @!attribute [rw] ull_subtype
+        #   @return [::String]
+        #     Check the UllSubtype enum for the list of possible values.
+        # @!attribute [rw] vpc_subtype
+        #   @return [::String]
+        #     Check the VpcSubtype enum for the list of possible values.
+        class NetworkProfileProfileType
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+
+          module NetworkType
+            # A value indicating that the enum field is not set.
+            UNDEFINED_NETWORK_TYPE = 0
+
+            # RDMA network.
+            RDMA = 2_510_662
+
+            # ULL network.
+            ULL = 84_117
+
+            # VPC network.
+            VPC = 85_193
+          end
+
+          module RdmaSubtype
+            # A value indicating that the enum field is not set.
+            UNDEFINED_RDMA_SUBTYPE = 0
+
+            # RDMA over Falcon.
+            FALCON = 455_787_729
+
+            # RDMA over Converged Ethernet (RoCE).
+            ROCE = 2_520_927
+          end
+
+          module UllSubtype
+            # A value indicating that the enum field is not set.
+            UNDEFINED_ULL_SUBTYPE = 0
+
+            # Exchange operator.
+            OPERATOR = 282_073_252
+
+            # Exchange participant.
+            PARTICIPANT = 236_028_691
+          end
+
+          module VpcSubtype
+            # A value indicating that the enum field is not set.
+            UNDEFINED_VPC_SUBTYPE = 0
+
+            # Regionally bound VPC network.
+            REGIONAL = 92_288_543
           end
         end
 
@@ -30643,6 +30777,9 @@ module Google
         end
 
         # Contains output only fields. Use this sub-message for actual values set on Instance attributes as compared to the value requested by the user (intent) in their instance CRUD calls.
+        # @!attribute [rw] effective_instance_metadata
+        #   @return [::Google::Cloud::Compute::V1::ResourceStatusEffectiveInstanceMetadata]
+        #     [Output Only] Effective metadata is a field that consolidates project, zonal instance settings, and instance-level predefined metadata keys to provide the overridden value for those metadata keys at the instance level.
         # @!attribute [rw] physical_host
         #   @return [::String]
         #     [Output Only] The precise location of your instance within the zone's data center, including the block, sub-block, and host. The field is formatted as follows: blockId/subBlockId/hostId.
@@ -30654,6 +30791,36 @@ module Google
         # @!attribute [rw] upcoming_maintenance
         #   @return [::Google::Cloud::Compute::V1::UpcomingMaintenance]
         class ResourceStatus
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Effective values of predefined metadata keys for an instance.
+        # @!attribute [rw] block_project_ssh_keys_metadata_value
+        #   @return [::Boolean]
+        #     Effective block-project-ssh-keys value at Instance level.
+        # @!attribute [rw] enable_guest_attributes_metadata_value
+        #   @return [::Boolean]
+        #     Effective enable-guest-attributes value at Instance level.
+        # @!attribute [rw] enable_os_inventory_metadata_value
+        #   @return [::Boolean]
+        #     Effective enable-os-inventory value at Instance level.
+        # @!attribute [rw] enable_osconfig_metadata_value
+        #   @return [::Boolean]
+        #     Effective enable-osconfig value at Instance level.
+        # @!attribute [rw] enable_oslogin_metadata_value
+        #   @return [::Boolean]
+        #     Effective enable-oslogin value at Instance level.
+        # @!attribute [rw] serial_port_enable_metadata_value
+        #   @return [::Boolean]
+        #     Effective serial-port-enable value at Instance level.
+        # @!attribute [rw] serial_port_logging_enable_metadata_value
+        #   @return [::Boolean]
+        #     Effective serial-port-logging-enable value at Instance level.
+        # @!attribute [rw] vm_dns_setting_metadata_value
+        #   @return [::String]
+        #     Effective VM DNS setting at Instance level.
+        class ResourceStatusEffectiveInstanceMetadata
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
@@ -31026,6 +31193,9 @@ module Google
         # @!attribute [rw] network
         #   @return [::String]
         #     URI of the network to which this router belongs.
+        # @!attribute [rw] params
+        #   @return [::Google::Cloud::Compute::V1::RouterParams]
+        #     Input only. [Input Only] Additional params passed with the request, but not persisted as part of resource payload.
         # @!attribute [rw] region
         #   @return [::String]
         #     [Output Only] URI of the region where the router resides. You must specify this field as part of the HTTP request URL. It is not settable as a field in the request body.
@@ -31640,6 +31810,24 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # Additional router parameters.
+        # @!attribute [rw] resource_manager_tags
+        #   @return [::Google::Protobuf::Map{::String => ::String}]
+        #     Tag keys/values directly bound to this resource. The field is allowed for INSERT only. The keys/values to set on the resource should be specified in either ID { : } or Namespaced format { : }. For example the following are valid inputs: * \\{"tagKeys/333" : "tagValues/444", "tagKeys/123" : "tagValues/456"} * \\{"123/environment" : "production", "345/abc" : "xyz"} Note: * Invalid combinations of ID & namespaced format is not supported. For instance: \\{"123/environment" : "tagValues/444"} is invalid. * Inconsistent format is not supported. For instance: \\{"tagKeys/333" : "tagValues/444", "123/env" : "prod"} is invalid.
+        class RouterParams
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # @!attribute [rw] key
+          #   @return [::String]
+          # @!attribute [rw] value
+          #   @return [::String]
+          class ResourceManagerTagsEntry
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+        end
+
         # @!attribute [rw] best_routes
         #   @return [::Array<::Google::Cloud::Compute::V1::Route>]
         #     A list of the best dynamic routes for this Cloud Router's Virtual Private Cloud (VPC) network in the same region as this Cloud Router. Lists all of the best routes per prefix that are programmed into this region's VPC data plane. When global dynamic routing mode is turned on in the VPC network, this list can include cross-region dynamic routes from Cloud Routers in other regions.
@@ -32172,6 +32360,9 @@ module Google
         #   @return [::String]
         #     Specifies the provisioning model of the instance.
         #     Check the ProvisioningModel enum for the list of possible values.
+        # @!attribute [rw] skip_guest_os_shutdown
+        #   @return [::Boolean]
+        #     Default is false and there will be 120 seconds between GCE ACPI G2 Soft Off and ACPI G3 Mechanical Off for Standard VMs and 30 seconds for Spot VMs.
         # @!attribute [rw] termination_time
         #   @return [::String]
         #     Specifies the timestamp, when the instance will be terminated, in RFC3339 text format. If specified, the instance termination action will be performed at the termination time.
@@ -32210,6 +32401,9 @@ module Google
           module ProvisioningModel
             # A value indicating that the enum field is not set.
             UNDEFINED_PROVISIONING_MODEL = 0
+
+            # Instance is provisioned using the Flex Start provisioning model and has a limited runtime.
+            FLEX_START = 101_746_812
 
             # Bound to the lifecycle of the reservation in which it is provisioned.
             RESERVATION_BOUND = 293_538_571
@@ -32379,7 +32573,7 @@ module Google
         #     [Output Only] Server-defined URL for the resource.
         # @!attribute [rw] type
         #   @return [::String]
-        #     The type indicates the intended use of the security policy. - CLOUD_ARMOR: Cloud Armor backend security policies can be configured to filter incoming HTTP requests targeting backend services. They filter requests before they hit the origin servers. - CLOUD_ARMOR_EDGE: Cloud Armor edge security policies can be configured to filter incoming HTTP requests targeting backend services (including Cloud CDN-enabled) as well as backend buckets (Cloud Storage). They filter requests before the request is served from Google's cache. - CLOUD_ARMOR_INTERNAL_SERVICE: Cloud Armor internal service policies can be configured to filter HTTP requests targeting services managed by Traffic Director in a service mesh. They filter requests before the request is served from the application. - CLOUD_ARMOR_NETWORK: Cloud Armor network policies can be configured to filter packets targeting network load balancing resources such as backend services, target pools, target instances, and instances with external IPs. They filter requests before the request is served from the application. This field can be set only at resource creation time.
+        #     The type indicates the intended use of the security policy. - CLOUD_ARMOR: Cloud Armor backend security policies can be configured to filter incoming HTTP requests targeting backend services. They filter requests before they hit the origin servers. - CLOUD_ARMOR_EDGE: Cloud Armor edge security policies can be configured to filter incoming HTTP requests targeting backend services (including Cloud CDN-enabled) as well as backend buckets (Cloud Storage). They filter requests before the request is served from Google's cache. - CLOUD_ARMOR_INTERNAL_SERVICE (preview only): Cloud Armor internal service policies can be configured to filter HTTP requests targeting services managed by Traffic Director in a service mesh. They filter requests before the request is served from the application. - CLOUD_ARMOR_NETWORK: Cloud Armor network policies can be configured to filter packets targeting network load balancing resources such as backend services, target pools, target instances, and instances with external IPs. They filter requests before the request is served from the application. This field can be set only at resource creation time.
         #     Check the Type enum for the list of possible values.
         # @!attribute [rw] user_defined_fields
         #   @return [::Array<::Google::Cloud::Compute::V1::SecurityPolicyUserDefinedField>]
@@ -32397,7 +32591,7 @@ module Google
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
 
-          # The type indicates the intended use of the security policy. - CLOUD_ARMOR: Cloud Armor backend security policies can be configured to filter incoming HTTP requests targeting backend services. They filter requests before they hit the origin servers. - CLOUD_ARMOR_EDGE: Cloud Armor edge security policies can be configured to filter incoming HTTP requests targeting backend services (including Cloud CDN-enabled) as well as backend buckets (Cloud Storage). They filter requests before the request is served from Google's cache. - CLOUD_ARMOR_INTERNAL_SERVICE: Cloud Armor internal service policies can be configured to filter HTTP requests targeting services managed by Traffic Director in a service mesh. They filter requests before the request is served from the application. - CLOUD_ARMOR_NETWORK: Cloud Armor network policies can be configured to filter packets targeting network load balancing resources such as backend services, target pools, target instances, and instances with external IPs. They filter requests before the request is served from the application. This field can be set only at resource creation time.
+          # The type indicates the intended use of the security policy. - CLOUD_ARMOR: Cloud Armor backend security policies can be configured to filter incoming HTTP requests targeting backend services. They filter requests before they hit the origin servers. - CLOUD_ARMOR_EDGE: Cloud Armor edge security policies can be configured to filter incoming HTTP requests targeting backend services (including Cloud CDN-enabled) as well as backend buckets (Cloud Storage). They filter requests before the request is served from Google's cache. - CLOUD_ARMOR_INTERNAL_SERVICE (preview only): Cloud Armor internal service policies can be configured to filter HTTP requests targeting services managed by Traffic Director in a service mesh. They filter requests before the request is served from the application. - CLOUD_ARMOR_NETWORK: Cloud Armor network policies can be configured to filter packets targeting network load balancing resources such as backend services, target pools, target instances, and instances with external IPs. They filter requests before the request is served from the application. This field can be set only at resource creation time.
           module Type
             # A value indicating that the enum field is not set.
             UNDEFINED_TYPE = 0
@@ -32602,7 +32796,7 @@ module Google
         # Represents a rule that describes one or more match conditions along with the action to be taken when traffic matches this condition (allow or deny).
         # @!attribute [rw] action
         #   @return [::String]
-        #     The Action to perform when the rule is matched. The following are the valid actions: - allow: allow access to target. - deny(STATUS): deny access to target, returns the HTTP response code specified. Valid values for `STATUS` are 403, 404, and 502. - rate_based_ban: limit client traffic to the configured threshold and ban the client if the traffic exceeds the threshold. Configure parameters for this action in RateLimitOptions. Requires rate_limit_options to be set. - redirect: redirect to a different target. This can either be an internal reCAPTCHA redirect, or an external URL-based redirect via a 302 response. Parameters for this action can be configured via redirectOptions. This action is only supported in Global Security Policies of type CLOUD_ARMOR. - throttle: limit client traffic to the configured threshold. Configure parameters for this action in rateLimitOptions. Requires rate_limit_options to be set for this.
+        #     The Action to perform when the rule is matched. The following are the valid actions: - allow: allow access to target. - deny(STATUS): deny access to target, returns the HTTP response code specified. Valid values for `STATUS` are 403, 404, and 502. - rate_based_ban: limit client traffic to the configured threshold and ban the client if the traffic exceeds the threshold. Configure parameters for this action in RateLimitOptions. Requires rate_limit_options to be set. - redirect: redirect to a different target. This can either be an internal reCAPTCHA redirect, or an external URL-based redirect via a 302 response. Parameters for this action can be configured via redirectOptions. This action is only supported in Global Security Policies of type CLOUD_ARMOR. - throttle: limit client traffic to the configured threshold. Configure parameters for this action in rateLimitOptions. Requires rate_limit_options to be set for this. - fairshare (preview only): when traffic reaches the threshold limit, requests from the clients matching this rule begin to be rate-limited using the Fair Share algorithm. This action is only allowed in security policies of type `CLOUD_ARMOR_INTERNAL_SERVICE`.
         # @!attribute [rw] description
         #   @return [::String]
         #     An optional description of this resource. Provide this property when you create the resource.
@@ -32629,7 +32823,7 @@ module Google
         #     An integer indicating the priority of a rule in the list. The priority must be a positive value between 0 and 2147483647. Rules are evaluated from highest to lowest priority where 0 is the highest priority and 2147483647 is the lowest priority.
         # @!attribute [rw] rate_limit_options
         #   @return [::Google::Cloud::Compute::V1::SecurityPolicyRuleRateLimitOptions]
-        #     Must be specified if the action is "rate_based_ban" or "throttle". Cannot be specified for any other actions.
+        #     Must be specified if the action is "rate_based_ban" or "throttle" or "fairshare". Cannot be specified for any other actions.
         # @!attribute [rw] redirect_options
         #   @return [::Google::Cloud::Compute::V1::SecurityPolicyRuleRedirectOptions]
         #     Parameters defining the redirect action. Cannot be specified for any other actions. This field is only supported in Global Security Policies of type CLOUD_ARMOR.
@@ -32663,7 +32857,7 @@ module Google
         #     The configuration options available when specifying versioned_expr. This field must be specified if versioned_expr is specified and cannot be specified if versioned_expr is not specified.
         # @!attribute [rw] expr
         #   @return [::Google::Cloud::Compute::V1::Expr]
-        #     User defined CEVAL expression. A CEVAL expression is used to specify match criteria such as origin.ip, source.region_code and contents in the request header. Expressions containing `evaluateThreatIntelligence` require Cloud Armor Managed Protection Plus tier and are not supported in Edge Policies nor in Regional Policies. Expressions containing `evaluatePreconfiguredExpr('sourceiplist-*')` require Cloud Armor Managed Protection Plus tier and are only supported in Global Security Policies.
+        #     User defined CEVAL expression. A CEVAL expression is used to specify match criteria such as origin.ip, source.region_code and contents in the request header. Expressions containing `evaluateThreatIntelligence` require a Cloud Armor Enterprise subscription and are not supported in Edge Policies nor in Regional Policies. Expressions containing `evaluatePreconfiguredExpr('sourceiplist-*')` require a Cloud Armor Enterprise subscription and are only supported in Global Security Policies.
         # @!attribute [rw] expr_options
         #   @return [::Google::Cloud::Compute::V1::SecurityPolicyRuleMatcherExprOptions]
         #     The configuration options available when specifying a user defined CEVAL expression (i.e., 'expr').
@@ -32828,7 +33022,7 @@ module Google
         #     Action to take for requests that are under the configured rate limit threshold. Valid option is "allow" only.
         # @!attribute [rw] enforce_on_key
         #   @return [::String]
-        #     Determines the key to enforce the rate_limit_threshold on. Possible values are: - ALL: A single rate limit threshold is applied to all the requests matching this rule. This is the default value if "enforceOnKey" is not configured. - IP: The source IP address of the request is the key. Each IP has this limit enforced separately. - HTTP_HEADER: The value of the HTTP header whose name is configured under "enforceOnKeyName". The key value is truncated to the first 128 bytes of the header value. If no such header is present in the request, the key type defaults to ALL. - XFF_IP: The first IP address (i.e. the originating client IP address) specified in the list of IPs under X-Forwarded-For HTTP header. If no such header is present or the value is not a valid IP, the key defaults to the source IP address of the request i.e. key type IP. - HTTP_COOKIE: The value of the HTTP cookie whose name is configured under "enforceOnKeyName". The key value is truncated to the first 128 bytes of the cookie value. If no such cookie is present in the request, the key type defaults to ALL. - HTTP_PATH: The URL path of the HTTP request. The key value is truncated to the first 128 bytes. - SNI: Server name indication in the TLS session of the HTTPS request. The key value is truncated to the first 128 bytes. The key type defaults to ALL on a HTTP session. - REGION_CODE: The country/region from which the request originates. - TLS_JA3_FINGERPRINT: JA3 TLS/SSL fingerprint if the client connects using HTTPS, HTTP/2 or HTTP/3. If not available, the key type defaults to ALL. - USER_IP: The IP address of the originating client, which is resolved based on "userIpRequestHeaders" configured with the security policy. If there is no "userIpRequestHeaders" configuration or an IP address cannot be resolved from it, the key type defaults to IP. - TLS_JA4_FINGERPRINT: JA4 TLS/SSL fingerprint if the client connects using HTTPS, HTTP/2 or HTTP/3. If not available, the key type defaults to ALL.
+        #     Determines the key to enforce the rate_limit_threshold on. Possible values are: - ALL: A single rate limit threshold is applied to all the requests matching this rule. This is the default value if "enforceOnKey" is not configured. - IP: The source IP address of the request is the key. Each IP has this limit enforced separately. - HTTP_HEADER: The value of the HTTP header whose name is configured under "enforceOnKeyName". The key value is truncated to the first 128 bytes of the header value. If no such header is present in the request, the key type defaults to ALL. - XFF_IP: The first IP address (i.e. the originating client IP address) specified in the list of IPs under X-Forwarded-For HTTP header. If no such header is present or the value is not a valid IP, the key defaults to the source IP address of the request i.e. key type IP. - HTTP_COOKIE: The value of the HTTP cookie whose name is configured under "enforceOnKeyName". The key value is truncated to the first 128 bytes of the cookie value. If no such cookie is present in the request, the key type defaults to ALL. - HTTP_PATH: The URL path of the HTTP request. The key value is truncated to the first 128 bytes. - SNI: Server name indication in the TLS session of the HTTPS request. The key value is truncated to the first 128 bytes. The key type defaults to ALL on a HTTP session. - REGION_CODE: The country/region from which the request originates. - TLS_JA3_FINGERPRINT: JA3 TLS/SSL fingerprint if the client connects using HTTPS, HTTP/2 or HTTP/3. If not available, the key type defaults to ALL. - USER_IP: The IP address of the originating client, which is resolved based on "userIpRequestHeaders" configured with the security policy. If there is no "userIpRequestHeaders" configuration or an IP address cannot be resolved from it, the key type defaults to IP. - TLS_JA4_FINGERPRINT: JA4 TLS/SSL fingerprint if the client connects using HTTPS, HTTP/2 or HTTP/3. If not available, the key type defaults to ALL. For "fairshare" action, this value is limited to ALL i.e. a single rate limit threshold is enforced for all the requests matching the rule.
         #     Check the EnforceOnKey enum for the list of possible values.
         # @!attribute [rw] enforce_on_key_configs
         #   @return [::Array<::Google::Cloud::Compute::V1::SecurityPolicyRuleRateLimitOptionsEnforceOnKeyConfig>]
@@ -32849,7 +33043,7 @@ module Google
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
 
-          # Determines the key to enforce the rate_limit_threshold on. Possible values are: - ALL: A single rate limit threshold is applied to all the requests matching this rule. This is the default value if "enforceOnKey" is not configured. - IP: The source IP address of the request is the key. Each IP has this limit enforced separately. - HTTP_HEADER: The value of the HTTP header whose name is configured under "enforceOnKeyName". The key value is truncated to the first 128 bytes of the header value. If no such header is present in the request, the key type defaults to ALL. - XFF_IP: The first IP address (i.e. the originating client IP address) specified in the list of IPs under X-Forwarded-For HTTP header. If no such header is present or the value is not a valid IP, the key defaults to the source IP address of the request i.e. key type IP. - HTTP_COOKIE: The value of the HTTP cookie whose name is configured under "enforceOnKeyName". The key value is truncated to the first 128 bytes of the cookie value. If no such cookie is present in the request, the key type defaults to ALL. - HTTP_PATH: The URL path of the HTTP request. The key value is truncated to the first 128 bytes. - SNI: Server name indication in the TLS session of the HTTPS request. The key value is truncated to the first 128 bytes. The key type defaults to ALL on a HTTP session. - REGION_CODE: The country/region from which the request originates. - TLS_JA3_FINGERPRINT: JA3 TLS/SSL fingerprint if the client connects using HTTPS, HTTP/2 or HTTP/3. If not available, the key type defaults to ALL. - USER_IP: The IP address of the originating client, which is resolved based on "userIpRequestHeaders" configured with the security policy. If there is no "userIpRequestHeaders" configuration or an IP address cannot be resolved from it, the key type defaults to IP. - TLS_JA4_FINGERPRINT: JA4 TLS/SSL fingerprint if the client connects using HTTPS, HTTP/2 or HTTP/3. If not available, the key type defaults to ALL.
+          # Determines the key to enforce the rate_limit_threshold on. Possible values are: - ALL: A single rate limit threshold is applied to all the requests matching this rule. This is the default value if "enforceOnKey" is not configured. - IP: The source IP address of the request is the key. Each IP has this limit enforced separately. - HTTP_HEADER: The value of the HTTP header whose name is configured under "enforceOnKeyName". The key value is truncated to the first 128 bytes of the header value. If no such header is present in the request, the key type defaults to ALL. - XFF_IP: The first IP address (i.e. the originating client IP address) specified in the list of IPs under X-Forwarded-For HTTP header. If no such header is present or the value is not a valid IP, the key defaults to the source IP address of the request i.e. key type IP. - HTTP_COOKIE: The value of the HTTP cookie whose name is configured under "enforceOnKeyName". The key value is truncated to the first 128 bytes of the cookie value. If no such cookie is present in the request, the key type defaults to ALL. - HTTP_PATH: The URL path of the HTTP request. The key value is truncated to the first 128 bytes. - SNI: Server name indication in the TLS session of the HTTPS request. The key value is truncated to the first 128 bytes. The key type defaults to ALL on a HTTP session. - REGION_CODE: The country/region from which the request originates. - TLS_JA3_FINGERPRINT: JA3 TLS/SSL fingerprint if the client connects using HTTPS, HTTP/2 or HTTP/3. If not available, the key type defaults to ALL. - USER_IP: The IP address of the originating client, which is resolved based on "userIpRequestHeaders" configured with the security policy. If there is no "userIpRequestHeaders" configuration or an IP address cannot be resolved from it, the key type defaults to IP. - TLS_JA4_FINGERPRINT: JA4 TLS/SSL fingerprint if the client connects using HTTPS, HTTP/2 or HTTP/3. If not available, the key type defaults to ALL. For "fairshare" action, this value is limited to ALL i.e. a single rate limit threshold is enforced for all the requests matching the rule.
           module EnforceOnKey
             # A value indicating that the enum field is not set.
             UNDEFINED_ENFORCE_ON_KEY = 0
@@ -33211,6 +33405,9 @@ module Google
         # @!attribute [rw] endpoint
         #   @return [::String]
         #     The url of a connected endpoint.
+        # @!attribute [rw] nat_ips
+        #   @return [::Array<::String>]
+        #     NAT IPs of the connected PSC endpoint and those of other endpoints propagated from it.
         # @!attribute [rw] propagated_connection_count
         #   @return [::Integer]
         #     The number of consumer Network Connectivity Center spokes that the connected Private Service Connect endpoint has propagated to.
@@ -38463,6 +38660,24 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # A request message for Addresses.TestIamPermissions. See the method description for details.
+        # @!attribute [rw] project
+        #   @return [::String]
+        #     Project ID for this request.
+        # @!attribute [rw] region
+        #   @return [::String]
+        #     The name of the region for this request.
+        # @!attribute [rw] resource
+        #   @return [::String]
+        #     Name or id of the resource for this request.
+        # @!attribute [rw] test_permissions_request_resource
+        #   @return [::Google::Cloud::Compute::V1::TestPermissionsRequest]
+        #     The body resource for this request
+        class TestIamPermissionsAddressRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # A request message for BackendBuckets.TestIamPermissions. See the method description for details.
         # @!attribute [rw] project
         #   @return [::String]
@@ -38538,6 +38753,21 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # A request message for GlobalAddresses.TestIamPermissions. See the method description for details.
+        # @!attribute [rw] project
+        #   @return [::String]
+        #     Project ID for this request.
+        # @!attribute [rw] resource
+        #   @return [::String]
+        #     Name or id of the resource for this request.
+        # @!attribute [rw] test_permissions_request_resource
+        #   @return [::Google::Cloud::Compute::V1::TestPermissionsRequest]
+        #     The body resource for this request
+        class TestIamPermissionsGlobalAddressRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # A request message for Images.TestIamPermissions. See the method description for details.
         # @!attribute [rw] project
         #   @return [::String]
@@ -38549,6 +38779,24 @@ module Google
         #   @return [::Google::Cloud::Compute::V1::TestPermissionsRequest]
         #     The body resource for this request
         class TestIamPermissionsImageRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # A request message for InstanceGroups.TestIamPermissions. See the method description for details.
+        # @!attribute [rw] project
+        #   @return [::String]
+        #     Project ID for this request.
+        # @!attribute [rw] resource
+        #   @return [::String]
+        #     Name or id of the resource for this request.
+        # @!attribute [rw] test_permissions_request_resource
+        #   @return [::Google::Cloud::Compute::V1::TestPermissionsRequest]
+        #     The body resource for this request
+        # @!attribute [rw] zone
+        #   @return [::String]
+        #     The name of the zone for this request.
+        class TestIamPermissionsInstanceGroupRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
@@ -38820,6 +39068,24 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # A request message for RegionInstanceGroups.TestIamPermissions. See the method description for details.
+        # @!attribute [rw] project
+        #   @return [::String]
+        #     Project ID for this request.
+        # @!attribute [rw] region
+        #   @return [::String]
+        #     The name of the region for this request.
+        # @!attribute [rw] resource
+        #   @return [::String]
+        #     Name or id of the resource for this request.
+        # @!attribute [rw] test_permissions_request_resource
+        #   @return [::Google::Cloud::Compute::V1::TestPermissionsRequest]
+        #     The body resource for this request
+        class TestIamPermissionsRegionInstanceGroupRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # A request message for RegionInstantSnapshots.TestIamPermissions. See the method description for details.
         # @!attribute [rw] project
         #   @return [::String]
@@ -38961,6 +39227,42 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # A request message for TargetInstances.TestIamPermissions. See the method description for details.
+        # @!attribute [rw] project
+        #   @return [::String]
+        #     Project ID for this request.
+        # @!attribute [rw] resource
+        #   @return [::String]
+        #     Name or id of the resource for this request.
+        # @!attribute [rw] test_permissions_request_resource
+        #   @return [::Google::Cloud::Compute::V1::TestPermissionsRequest]
+        #     The body resource for this request
+        # @!attribute [rw] zone
+        #   @return [::String]
+        #     The name of the zone for this request.
+        class TestIamPermissionsTargetInstanceRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # A request message for TargetPools.TestIamPermissions. See the method description for details.
+        # @!attribute [rw] project
+        #   @return [::String]
+        #     Project ID for this request.
+        # @!attribute [rw] region
+        #   @return [::String]
+        #     The name of the region for this request.
+        # @!attribute [rw] resource
+        #   @return [::String]
+        #     Name or id of the resource for this request.
+        # @!attribute [rw] test_permissions_request_resource
+        #   @return [::Google::Cloud::Compute::V1::TestPermissionsRequest]
+        #     The body resource for this request
+        class TestIamPermissionsTargetPoolRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # A request message for VpnGateways.TestIamPermissions. See the method description for details.
         # @!attribute [rw] project
         #   @return [::String]
@@ -39045,6 +39347,12 @@ module Google
 
             # Maintenance due to GPU errors.
             FAILURE_GPU = 467_876_919
+
+            # Maintenance due to customer reported multiple faulty hosts via R&R Subblock API.
+            FAILURE_GPU_MULTIPLE_FAULTY_HOSTS_CUSTOMER_REPORTED = 223_284_959
+
+            # Maintenance due to customer reported NVLink switch failure via R&R Subblock API.
+            FAILURE_GPU_NVLINK_SWITCH_CUSTOMER_REPORTED = 88_487_838
 
             # Maintenance due to high GPU temperature.
             FAILURE_GPU_TEMPERATURE = 24_926_540
@@ -40468,6 +40776,9 @@ module Google
         end
 
         # Represents a Cloud VPN Tunnel resource. For more information about VPN, read the the Cloud VPN Overview.
+        # @!attribute [rw] cipher_suite
+        #   @return [::Google::Cloud::Compute::V1::VpnTunnelCipherSuite]
+        #     User specified list of ciphers to use for the phase 1 and phase 2 of the IKE protocol.
         # @!attribute [rw] creation_timestamp
         #   @return [::String]
         #     [Output Only] Creation timestamp in RFC3339 text format.
@@ -40635,6 +40946,15 @@ module Google
           end
         end
 
+        # @!attribute [rw] phase1
+        #   @return [::Google::Cloud::Compute::V1::VpnTunnelPhase1Algorithms]
+        # @!attribute [rw] phase2
+        #   @return [::Google::Cloud::Compute::V1::VpnTunnelPhase2Algorithms]
+        class VpnTunnelCipherSuite
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # Contains a list of VpnTunnel resources.
         # @!attribute [rw] id
         #   @return [::String]
@@ -40655,6 +40975,30 @@ module Google
         #   @return [::Google::Cloud::Compute::V1::Warning]
         #     [Output Only] Informational warning message.
         class VpnTunnelList
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # @!attribute [rw] dh
+        #   @return [::Array<::String>]
+        # @!attribute [rw] encryption
+        #   @return [::Array<::String>]
+        # @!attribute [rw] integrity
+        #   @return [::Array<::String>]
+        # @!attribute [rw] prf
+        #   @return [::Array<::String>]
+        class VpnTunnelPhase1Algorithms
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # @!attribute [rw] encryption
+        #   @return [::Array<::String>]
+        # @!attribute [rw] integrity
+        #   @return [::Array<::String>]
+        # @!attribute [rw] pfs
+        #   @return [::Array<::String>]
+        class VpnTunnelPhase2Algorithms
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end

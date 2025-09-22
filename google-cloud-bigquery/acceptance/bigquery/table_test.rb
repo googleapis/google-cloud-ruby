@@ -190,6 +190,18 @@ describe Google::Cloud::Bigquery::Table, :bigquery do
     _(table.labels).must_equal new_labels
   end
 
+  it "sets and gets the default_collation" do
+    new_default_collation = "und:ci"
+
+    table.default_collation = new_default_collation
+
+    fresh = dataset.table table.table_id
+    _(fresh).wont_be :nil?
+    _(fresh).must_be_kind_of Google::Cloud::Bigquery::Table
+    _(fresh.table_id).must_equal table.table_id
+    _(fresh.default_collation).must_equal new_default_collation
+  end
+
   it "loads and reloads table with partial projection of table metadata" do
     _(table.table_id).must_equal table_id # ensure table is created
     %w[unspecified basic storage full].each do |view|
@@ -1184,6 +1196,19 @@ describe Google::Cloud::Bigquery::Table, :bigquery do
 
     table = dataset.table table_id
     _(table.schema.fields.map(&:default_value_expression)).must_be :==, schema_fields_default.map(&:default_value_expression)
+  end
+
+  it "creates a table with a field with collation" do
+    t = nil
+    begin
+      t = dataset.create_table "#{prefix}_table_collation_test" do |schema|
+        schema.string "name", mode: :required, collation: "und:ci"
+      end
+      t.reload!
+      _(t.schema.field("name").collation).must_equal "und:ci"
+    ensure
+      t.delete if t
+    end
   end
 
   it "restores snapshot into a table" do

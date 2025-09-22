@@ -34,6 +34,14 @@ In order to use this library, you first need to go through the following steps:
 1. [Enable the API.](https://console.cloud.google.com/apis/library/edgecontainer.googleapis.com)
 1. [Set up authentication.](AUTHENTICATION.md)
 
+```ruby
+require "google/cloud/edge_container"
+
+client = Google::Cloud::EdgeContainer.edge_container
+request = ::Google::Cloud::EdgeContainer::V1::ListClustersRequest.new # (request fields as keyword arguments...)
+response = client.list_clusters request
+```
+
 ## Debug Logging
 
 This library comes with opt-in Debug Logging that can help you troubleshoot

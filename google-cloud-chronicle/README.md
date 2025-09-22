@@ -34,6 +34,14 @@ In order to use this library, you first need to go through the following steps:
 1. [Enable the API.](https://console.cloud.google.com/apis/library/chronicle.googleapis.com)
 1. [Set up authentication.](AUTHENTICATION.md)
 
+```ruby
+require "google/cloud/chronicle"
+
+client = Google::Cloud::Chronicle.data_access_control_service
+request = ::Google::Cloud::Chronicle::V1::CreateDataAccessLabelRequest.new # (request fields as keyword arguments...)
+response = client.create_data_access_label request
+```
+
 ## Debug Logging
 
 This library comes with opt-in Debug Logging that can help you troubleshoot

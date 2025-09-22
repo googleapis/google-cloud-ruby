@@ -352,6 +352,31 @@ module Google
           end
 
           ##
+          # The collation of the field.
+          #
+          # Collation can be set only when the type of field is `STRING`.
+          # The following values are supported:
+          #
+          # * `und:ci`: undetermined locale, case insensitive.
+          # * (empty string): Default to case-sensitive behavior.
+          #
+          # @return [String, nil] The collation for the field, or `nil`.
+          #
+          def collation
+            @gapi.collation
+          end
+
+          ##
+          # Updates the collation of the field.
+          #
+          # @param [String] new_collation The new collation. See {#collation}
+          #   for supported values.
+          #
+          def collation= new_collation
+            @gapi.update! collation: new_collation
+          end
+
+          ##
           # Checks if the type of the field is `STRING`.
           #
           # @return [Boolean] `true` when `STRING`, `false` otherwise.
@@ -568,7 +593,7 @@ module Google
           # @param [Integer] max_length The maximum UTF-8 length of strings
           #   allowed in the field.
           #
-          def string name, description: nil, mode: :nullable, policy_tags: nil, max_length: nil
+          def string name, description: nil, mode: :nullable, policy_tags: nil, max_length: nil, collation: nil
             record_check!
 
             add_field name,
@@ -576,7 +601,8 @@ module Google
                       description: description,
                       mode: mode,
                       policy_tags: policy_tags,
-                      max_length: max_length
+                      max_length: max_length,
+                      collation: collation
           end
 
           ##
@@ -1029,7 +1055,8 @@ module Google
                         policy_tags: nil,
                         max_length: nil,
                         precision: nil,
-                        scale: nil
+                        scale: nil,
+                        collation: nil
             frozen_check!
 
             new_gapi = Google::Apis::BigqueryV2::TableFieldSchema.new(
@@ -1046,6 +1073,7 @@ module Google
             new_gapi.max_length = max_length if max_length
             new_gapi.precision = precision if precision
             new_gapi.scale = scale if scale
+            new_gapi.collation = collation if collation
             # Remove any existing field of this name
             @gapi.fields ||= []
             @gapi.fields.reject! { |f| f.name == new_gapi.name }

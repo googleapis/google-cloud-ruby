@@ -34,6 +34,14 @@ In order to use this library, you first need to go through the following steps:
 1. [Enable the API.](https://console.cloud.google.com/apis/library/iamcredentials.googleapis.com)
 1. [Set up authentication.](AUTHENTICATION.md)
 
+```ruby
+require "google/iam/credentials"
+
+client = Google::Iam::Credentials.iam_credentials
+request = ::Google::Iam::Credentials::V1::GenerateAccessTokenRequest.new # (request fields as keyword arguments...)
+response = client.generate_access_token request
+```
+
 ## Debug Logging
 
 This library comes with opt-in Debug Logging that can help you troubleshoot

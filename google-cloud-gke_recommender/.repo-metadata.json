@@ -1,0 +1,17 @@
+{
+    "api_id": "gkerecommender.googleapis.com",
+    "api_shortname": "gkerecommender",
+    "client_documentation": "https://cloud.google.com/ruby/docs/reference/google-cloud-gke_recommender/latest",
+    "distribution_name": "google-cloud-gke_recommender",
+    "is_cloud": true,
+    "language": "ruby",
+    "name": "gkerecommender",
+    "name_pretty": "GKE Recommender API",
+    "product_documentation": "https://cloud.google.com/kubernetes-engine/docs/how-to/machine-learning/inference-quickstart",
+    "release_level": "preview",
+    "repo": "googleapis/google-cloud-ruby",
+    "requires_billing": true,
+    "ruby-cloud-description": "GKE Recommender API.",
+    "ruby-cloud-product-url": "https://cloud.google.com/kubernetes-engine/docs/how-to/machine-learning/inference-quickstart",
+    "library_type": "GAPIC_MANUAL"
+}

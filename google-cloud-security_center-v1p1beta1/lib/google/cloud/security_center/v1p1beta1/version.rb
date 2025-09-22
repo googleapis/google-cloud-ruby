@@ -21,7 +21,7 @@ module Google
   module Cloud
     module SecurityCenter
       module V1p1beta1
-        VERSION = "0.17.0"
+        VERSION = "0.18.0"
       end
     end
   end

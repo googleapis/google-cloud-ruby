@@ -138,6 +138,37 @@ module Google
         #       * `api_style.enum_values.values.display_name` - The allowed value display
         #       name of the api style attribute associated with the ApiResource. Allowed
         #       comparison operator is `:`.
+        #       * `attributes.projects/test-project-id/locations/test-location-id/
+        #       attributes/user-defined-attribute-id.enum_values.values.id` - The
+        #       allowed value id of the user defined enum attribute associated with the
+        #       Resource. Allowed comparison operator is `:`. Here
+        #       user-defined-attribute-enum-id is a placeholder that can be replaced with
+        #       any user defined enum attribute name.
+        #       * `attributes.projects/test-project-id/locations/test-location-id/
+        #       attributes/user-defined-attribute-id.enum_values.values.display_name`
+        #       - The allowed value display name of the user defined enum attribute
+        #       associated with the Resource. Allowed comparison operator is `:`. Here
+        #       user-defined-attribute-enum-display-name is a placeholder that can be
+        #       replaced with any user defined enum attribute enum name.
+        #       * `attributes.projects/test-project-id/locations/test-location-id/
+        #       attributes/user-defined-attribute-id.string_values.values` - The
+        #       allowed value of the user defined string attribute associated with the
+        #       Resource. Allowed comparison operator is `:`. Here
+        #       user-defined-attribute-string is a placeholder that can be replaced with
+        #       any user defined string attribute name.
+        #       * `attributes.projects/test-project-id/locations/test-location-id/
+        #       attributes/user-defined-attribute-id.json_values.values` - The
+        #       allowed value of the user defined JSON attribute associated with the
+        #       Resource. Allowed comparison operator is `:`. Here
+        #       user-defined-attribute-json is a placeholder that can be replaced with
+        #       any user defined JSON attribute name.
+        #
+        #     A filter function is also supported in the filter string. The filter
+        #     function is `id(name)`. The `id(name)` function returns the id of the
+        #     resource name. For example, `id(name) = \"api-1\"` is equivalent to
+        #     `name = \"projects/test-project-id/locations/test-location-id/apis/api-1\"`
+        #     provided the parent is
+        #     `projects/test-project-id/locations/test-location-id`.
         #
         #     Expressions are combined with either `AND` logic operator or `OR` logical
         #     operator but not both of them together i.e. only one of the `AND` or `OR`
@@ -163,6 +194,16 @@ module Google
         #       specifies the APIs where the owner team email is _apihub@google.com_ or
         #       the display name of the allowed value associated with the team attribute
         #       is `ApiHub Team`.
+        #       * `owner.email = \"apihub@google.com\" AND
+        #       attributes.projects/test-project-id/locations/test-location-id/
+        #       attributes/17650f90-4a29-4971-b3c0-d5532da3764b.enum_values.values.id:
+        #       test_enum_id AND
+        #       attributes.projects/test-project-id/locations/test-location-id/
+        #       attributes/1765\0f90-4a29-5431-b3d0-d5532da3764c.string_values.values:
+        #       test_string_value`  - The filter string specifies the APIs where the
+        #       owner team email is _apihub@google.com_ and the id of the allowed value
+        #       associated with the user defined attribute of type enum is _test_enum_id_
+        #       and the value of the user defined attribute of type string is _test_..
         # @!attribute [rw] page_size
         #   @return [::Integer]
         #     Optional. The maximum number of API resources to return. The service may
@@ -209,8 +250,11 @@ module Google
         #     the specified id is already used by another version in the API resource.
         #     * If not provided, a system generated id will be used.
         #
-        #     This value should be 4-500 characters, and valid characters
-        #     are /[a-z][A-Z][0-9]-_/.
+        #     This value should be 4-500 characters, overall resource name which will be
+        #     of format
+        #     `projects/{project}/locations/{location}/apis/{api}/versions/{version}`,
+        #     its length is limited to 700 characters and valid characters are
+        #     /[a-z][A-Z][0-9]-_/.
         # @!attribute [rw] version
         #   @return [::Google::Cloud::ApiHub::V1::Version]
         #     Required. The version to create.
@@ -303,6 +347,30 @@ module Google
         #       * `accreditation.enum_values.values.display_name` - The allowed value
         #       display name of the accreditations attribute associated with the Version.
         #       Allowed comparison operators: `:`.
+        #       * `attributes.projects/test-project-id/locations/test-location-id/
+        #       attributes/user-defined-attribute-id.enum_values.values.id` - The
+        #       allowed value id of the user defined enum attribute associated with the
+        #       Resource. Allowed comparison operator is `:`. Here
+        #       user-defined-attribute-enum-id is a placeholder that can be replaced with
+        #       any user defined enum attribute name.
+        #       * `attributes.projects/test-project-id/locations/test-location-id/
+        #       attributes/user-defined-attribute-id.enum_values.values.display_name`
+        #       - The allowed value display name of the user defined enum attribute
+        #       associated with the Resource. Allowed comparison operator is `:`. Here
+        #       user-defined-attribute-enum-display-name is a placeholder that can be
+        #       replaced with any user defined enum attribute enum name.
+        #       * `attributes.projects/test-project-id/locations/test-location-id/
+        #       attributes/user-defined-attribute-id.string_values.values` - The
+        #       allowed value of the user defined string attribute associated with the
+        #       Resource. Allowed comparison operator is `:`. Here
+        #       user-defined-attribute-string is a placeholder that can be replaced with
+        #       any user defined string attribute name.
+        #       * `attributes.projects/test-project-id/locations/test-location-id/
+        #       attributes/user-defined-attribute-id.json_values.values` - The
+        #       allowed value of the user defined JSON attribute associated with the
+        #       Resource. Allowed comparison operator is `:`. Here
+        #       user-defined-attribute-json is a placeholder that can be replaced with
+        #       any user defined JSON attribute name.
         #
         #     Expressions are combined with either `AND` logic operator or `OR` logical
         #     operator but not both of them together i.e. only one of the `AND` or `OR`
@@ -330,6 +398,12 @@ module Google
         #       compliance.enum_values.values.id: pci-dss-id`
         #       - The id of the allowed value associated with the compliance attribute is
         #       _gdpr-id_ or _pci-dss-id_.
+        #       * `lifecycle.enum_values.values.id: preview-id AND
+        #       attributes.projects/test-project-id/locations/test-location-id/
+        #       attributes/17650f90-4a29-4971-b3c0-d5532da3764b.string_values.values:
+        #       test`  - The filter string specifies that the id of the allowed value
+        #       associated with the lifecycle attribute of the Version is _preview-id_
+        #       and the value of the user defined attribute of type string is _test_.
         # @!attribute [rw] page_size
         #   @return [::Integer]
         #     Optional. The maximum number of versions to return. The service may return
@@ -378,8 +452,11 @@ module Google
         #     resource.
         #     * If not provided, a system generated id will be used.
         #
-        #     This value should be 4-500 characters, and valid characters
-        #     are /[a-z][A-Z][0-9]-_/.
+        #     This value should be 4-500 characters, overall resource name which will be
+        #     of format
+        #     `projects/{project}/locations/{location}/apis/{api}/versions/{version}/specs/{spec}`,
+        #     its length is limited to 1000 characters and valid characters are
+        #     /[a-z][A-Z][0-9]-_/.
         # @!attribute [rw] spec
         #   @return [::Google::Cloud::ApiHub::V1::Spec]
         #     Required. The spec to create.
@@ -459,6 +536,30 @@ module Google
         #       operators: `:`.
         #       * `mime_type` - The MIME type of the Spec. Allowed comparison
         #       operators: `=`.
+        #       * `attributes.projects/test-project-id/locations/test-location-id/
+        #       attributes/user-defined-attribute-id.enum_values.values.id` - The
+        #       allowed value id of the user defined enum attribute associated with the
+        #       Resource. Allowed comparison operator is `:`. Here
+        #       user-defined-attribute-enum-id is a placeholder that can be replaced with
+        #       any user defined enum attribute name.
+        #       * `attributes.projects/test-project-id/locations/test-location-id/
+        #       attributes/user-defined-attribute-id.enum_values.values.display_name`
+        #       - The allowed value display name of the user defined enum attribute
+        #       associated with the Resource. Allowed comparison operator is `:`. Here
+        #       user-defined-attribute-enum-display-name is a placeholder that can be
+        #       replaced with any user defined enum attribute enum name.
+        #       * `attributes.projects/test-project-id/locations/test-location-id/
+        #       attributes/user-defined-attribute-id.string_values.values` - The
+        #       allowed value of the user defined string attribute associated with the
+        #       Resource. Allowed comparison operator is `:`. Here
+        #       user-defined-attribute-string is a placeholder that can be replaced with
+        #       any user defined string attribute name.
+        #       * `attributes.projects/test-project-id/locations/test-location-id/
+        #       attributes/user-defined-attribute-id.json_values.values` - The
+        #       allowed value of the user defined JSON attribute associated with the
+        #       Resource. Allowed comparison operator is `:`. Here
+        #       user-defined-attribute-json is a placeholder that can be replaced with
+        #       any user defined JSON attribute name.
         #
         #     Expressions are combined with either `AND` logic operator or `OR` logical
         #     operator but not both of them together i.e. only one of the `AND` or `OR`
@@ -485,6 +586,13 @@ module Google
         #       spec_type.enum_values.values.id: grpc-id`
         #       - The id of the allowed value associated with the spec_type attribute is
         #       _rest-id_ or _grpc-id_.
+        #       * `spec_type.enum_values.values.id: rest-id AND
+        #       attributes.projects/test-project-id/locations/test-location-id/
+        #       attributes/17650f90-4a29-4971-b3c0-d5532da3764b.enum_values.values.id:
+        #       test`  - The filter string specifies that the id of the allowed value
+        #       associated with the spec_type attribute is _rest-id_ and the id of the
+        #       allowed value associated with the user defined attribute of type enum is
+        #       _test_.
         # @!attribute [rw] page_size
         #   @return [::Integer]
         #     Optional. The maximum number of specs to return. The service may return
@@ -506,7 +614,7 @@ module Google
         # The {::Google::Cloud::ApiHub::V1::ApiHub::Rest::Client#list_specs ListSpecs} method's response.
         # @!attribute [rw] specs
         #   @return [::Array<::Google::Cloud::ApiHub::V1::Spec>]
-        #     The specs corresponding to an API.
+        #     The specs corresponding to an API Version.
         # @!attribute [rw] next_page_token
         #   @return [::String]
         #     A token, which can be sent as `page_token` to retrieve the next page.
@@ -528,6 +636,36 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # The {::Google::Cloud::ApiHub::V1::ApiHub::Rest::Client#create_api_operation CreateApiOperation}
+        # method's request.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. The parent resource for the operation resource.
+        #     Format:
+        #     `projects/{project}/locations/{location}/apis/{api}/versions/{version}`
+        # @!attribute [rw] api_operation_id
+        #   @return [::String]
+        #     Optional. The ID to use for the operation resource, which will become the
+        #     final component of the operation's resource name. This field is optional.
+        #
+        #     * If provided, the same will be used. The service will throw an error if
+        #     the specified id is already used by another operation resource in the API
+        #     hub.
+        #     * If not provided, a system generated id will be used.
+        #
+        #     This value should be 4-500 characters, overall resource name which
+        #     will be of format
+        #     `projects/{project}/locations/{location}/apis/{api}/versions/{version}/operations/{operation}`,
+        #     its length is limited to 700 characters, and valid characters are
+        #     /[a-z][A-Z][0-9]-_/.
+        # @!attribute [rw] api_operation
+        #   @return [::Google::Cloud::ApiHub::V1::ApiOperation]
+        #     Required. The operation resource to create.
+        class CreateApiOperationRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # The {::Google::Cloud::ApiHub::V1::ApiHub::Rest::Client#get_api_operation GetApiOperation} method's
         # request.
         # @!attribute [rw] name
@@ -536,6 +674,36 @@ module Google
         #     Format:
         #     `projects/{project}/locations/{location}/apis/{api}/versions/{version}/operations/{operation}`
         class GetApiOperationRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # The {::Google::Cloud::ApiHub::V1::ApiHub::Rest::Client#update_api_operation UpdateApiOperation}
+        # method's request.
+        # @!attribute [rw] api_operation
+        #   @return [::Google::Cloud::ApiHub::V1::ApiOperation]
+        #     Required. The apiOperation resource to update.
+        #
+        #     The operation resource's `name` field is used to identify the operation
+        #     resource to update.
+        #     Format:
+        #     `projects/{project}/locations/{location}/apis/{api}/versions/{version}/operations/{operation}`
+        # @!attribute [rw] update_mask
+        #   @return [::Google::Protobuf::FieldMask]
+        #     Required. The list of fields to update.
+        class UpdateApiOperationRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # The {::Google::Cloud::ApiHub::V1::ApiHub::Rest::Client#delete_api_operation DeleteApiOperation}
+        # method's request.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The name of the operation resource to delete.
+        #     Format:
+        #     `projects/{project}/locations/{location}/apis/{api}/versions/{version}/operations/{operation}`
+        class DeleteApiOperationRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
@@ -570,6 +738,30 @@ module Google
         #       * `create_time` - The time at which the ApiOperation was created. The
         #       value should be in the (RFC3339)[https://tools.ietf.org/html/rfc3339]
         #       format. Allowed comparison operators: `>` and `<`.
+        #       * `attributes.projects/test-project-id/locations/test-location-id/
+        #       attributes/user-defined-attribute-id.enum_values.values.id` - The
+        #       allowed value id of the user defined enum attribute associated with the
+        #       Resource. Allowed comparison operator is `:`. Here
+        #       user-defined-attribute-enum-id is a placeholder that can be replaced with
+        #       any user defined enum attribute name.
+        #       * `attributes.projects/test-project-id/locations/test-location-id/
+        #       attributes/user-defined-attribute-id.enum_values.values.display_name`
+        #       - The allowed value display name of the user defined enum attribute
+        #       associated with the Resource. Allowed comparison operator is `:`. Here
+        #       user-defined-attribute-enum-display-name is a placeholder that can be
+        #       replaced with any user defined enum attribute enum name.
+        #       * `attributes.projects/test-project-id/locations/test-location-id/
+        #       attributes/user-defined-attribute-id.string_values.values` - The
+        #       allowed value of the user defined string attribute associated with the
+        #       Resource. Allowed comparison operator is `:`. Here
+        #       user-defined-attribute-string is a placeholder that can be replaced with
+        #       any user defined string attribute name.
+        #       * `attributes.projects/test-project-id/locations/test-location-id/
+        #       attributes/user-defined-attribute-id.json_values.values` - The
+        #       allowed value of the user defined JSON attribute associated with the
+        #       Resource. Allowed comparison operator is `:`. Here
+        #       user-defined-attribute-json is a placeholder that can be replaced with
+        #       any user defined JSON attribute name.
         #
         #     Expressions are combined with either `AND` logic operator or `OR` logical
         #     operator but not both of them together i.e. only one of the `AND` or `OR`
@@ -589,6 +781,11 @@ module Google
         #       * `details.http_operation.method = GET OR details.http_operation.method =
         #       POST`. - The http operation of the method of ApiOperation is _GET_ or
         #       _POST_.
+        #       * `details.deprecated = True AND
+        #       attributes.projects/test-project-id/locations/test-location-id/
+        #       attributes/17650f90-4a29-4971-b3c0-d5532da3764b.string_values.values:
+        #       test`  - The filter string specifies that the ApiOperation is deprecated
+        #       and the value of the user defined attribute of type string is _test_.
         # @!attribute [rw] page_size
         #   @return [::Integer]
         #     Optional. The maximum number of operations to return. The service may
@@ -612,9 +809,6 @@ module Google
         # @!attribute [rw] api_operations
         #   @return [::Array<::Google::Cloud::ApiHub::V1::ApiOperation>]
         #     The operations corresponding to an API version.
-        #     Only following field will be populated in the response: name,
-        #     spec, details.deprecated, details.http_operation.path.path,
-        #     details.http_operation.method and details.documentation.external_uri.
         # @!attribute [rw] next_page_token
         #   @return [::String]
         #     A token, which can be sent as `page_token` to retrieve the next page.
@@ -727,6 +921,10 @@ module Google
         #       comparison operators: `=`.
         #       * `api_versions` - The API versions linked to this deployment. Allowed
         #       comparison operators: `:`.
+        #       * `source_project` - The project/organization at source for the
+        #       deployment. Allowed comparison operators: `=`.
+        #       * `source_environment` - The environment at source for the
+        #       deployment. Allowed comparison operators: `=`.
         #       * `deployment_type.enum_values.values.id` - The allowed value id of the
         #       deployment_type attribute associated with the Deployment. Allowed
         #       comparison operators: `:`.
@@ -742,6 +940,38 @@ module Google
         #       * `environment.enum_values.values.display_name` - The allowed value
         #       display name of the environment attribute associated with the deployment.
         #       Allowed comparison operators: `:`.
+        #       * `attributes.projects/test-project-id/locations/test-location-id/
+        #       attributes/user-defined-attribute-id.enum_values.values.id` - The
+        #       allowed value id of the user defined enum attribute associated with the
+        #       Resource. Allowed comparison operator is `:`. Here
+        #       user-defined-attribute-enum-id is a placeholder that can be replaced with
+        #       any user defined enum attribute name.
+        #       * `attributes.projects/test-project-id/locations/test-location-id/
+        #       attributes/user-defined-attribute-id.enum_values.values.display_name`
+        #       - The allowed value display name of the user defined enum attribute
+        #       associated with the Resource. Allowed comparison operator is `:`. Here
+        #       user-defined-attribute-enum-display-name is a placeholder that can be
+        #       replaced with any user defined enum attribute enum name.
+        #       * `attributes.projects/test-project-id/locations/test-location-id/
+        #       attributes/user-defined-attribute-id.string_values.values` - The
+        #       allowed value of the user defined string attribute associated with the
+        #       Resource. Allowed comparison operator is `:`. Here
+        #       user-defined-attribute-string is a placeholder that can be replaced with
+        #       any user defined string attribute name.
+        #       * `attributes.projects/test-project-id/locations/test-location-id/
+        #       attributes/user-defined-attribute-id.json_values.values` - The
+        #       allowed value of the user defined JSON attribute associated with the
+        #       Resource. Allowed comparison operator is `:`. Here
+        #       user-defined-attribute-json is a placeholder that can be replaced with
+        #       any user defined JSON attribute name.
+        #
+        #     A filter function is also supported in the filter string. The filter
+        #     function is `id(name)`. The `id(name)` function returns the id of the
+        #     resource name. For example, `id(name) = \"deployment-1\"` is equivalent to
+        #     `name =
+        #     \"projects/test-project-id/locations/test-location-id/deployments/deployment-1\"`
+        #     provided the parent is
+        #     `projects/test-project-id/locations/test-location-id`.
         #
         #     Expressions are combined with either `AND` logic operator or `OR` logical
         #     operator but not both of them together i.e. only one of the `AND` or `OR`
@@ -767,6 +997,12 @@ module Google
         #       slo.string_values.values: \"99.99%\"`
         #       - The allowed value id of the environment attribute Deployment is
         #       _production-id_ or string value of the slo attribute is _99.99%_.
+        #       * `environment.enum_values.values.id: staging-id AND
+        #       attributes.projects/test-project-id/locations/test-location-id/
+        #       attributes/17650f90-4a29-4971-b3c0-d5532da3764b.string_values.values:
+        #       test`  - The filter string specifies that the allowed value id of the
+        #       environment attribute associated with the Deployment is _staging-id_ and
+        #       the value of the user defined attribute of type string is _test_.
         # @!attribute [rw] page_size
         #   @return [::Integer]
         #     Optional. The maximum number of deployment resources to return. The service
@@ -1015,19 +1251,21 @@ module Google
         # @!attribute [rw] operation
         #   @return [::Google::Cloud::ApiHub::V1::ApiOperation]
         #     This represents ApiOperation resource in search results. Only name,
-        #     and description fields are populated in search results.
+        #     description, spec and details fields are populated in search results.
         #
         #     Note: The following fields are mutually exclusive: `operation`, `api`, `deployment`, `spec`, `definition`, `version`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] deployment
         #   @return [::Google::Cloud::ApiHub::V1::Deployment]
         #     This represents Deployment resource in search results. Only name,
-        #     display_name and description fields are populated in search results.
+        #     display_name, description, deployment_type and api_versions fields are
+        #     populated in search results.
         #
         #     Note: The following fields are mutually exclusive: `deployment`, `api`, `operation`, `spec`, `definition`, `version`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] spec
         #   @return [::Google::Cloud::ApiHub::V1::Spec]
         #     This represents Spec resource in search results. Only name,
-        #     display_name and description fields are populated in search results.
+        #     display_name, description, spec_type and documentation fields are
+        #     populated in search results.
         #
         #     Note: The following fields are mutually exclusive: `spec`, `api`, `operation`, `deployment`, `definition`, `version`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] definition
@@ -1039,7 +1277,8 @@ module Google
         # @!attribute [rw] version
         #   @return [::Google::Cloud::ApiHub::V1::Version]
         #     This represents Version resource in search results. Only name,
-        #     display_name and description fields are populated in search results.
+        #     display_name, description, lifecycle, compliance and accreditation fields
+        #     are populated in search results.
         #
         #     Note: The following fields are mutually exclusive: `version`, `api`, `operation`, `deployment`, `spec`, `definition`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         class ApiHubResource
@@ -1206,7 +1445,6 @@ module Google
         # @!attribute [rw] dependencies
         #   @return [::Array<::Google::Cloud::ApiHub::V1::Dependency>]
         #     The dependency resources present in the API hub.
-        #     Only following field will be populated in the response: name.
         # @!attribute [rw] next_page_token
         #   @return [::String]
         #     A token, which can be sent as `page_token` to retrieve the next page.
@@ -1313,8 +1551,6 @@ module Google
         # @!attribute [rw] external_apis
         #   @return [::Array<::Google::Cloud::ApiHub::V1::ExternalApi>]
         #     The External API resources present in the API hub.
-        #     Only following fields will be populated in the response: name,
-        #     display_name, documentation.external_uri.
         # @!attribute [rw] next_page_token
         #   @return [::String]
         #     A token, which can be sent as `page_token` to retrieve the next page.

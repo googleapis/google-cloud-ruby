@@ -34,6 +34,14 @@ In order to use this library, you first need to go through the following steps:
 1. [Enable the API.](https://console.cloud.google.com/apis/library/gdchardwaremanagement.googleapis.com)
 1. [Set up authentication.](AUTHENTICATION.md)
 
+```ruby
+require "google/cloud/gdc_hardware_management"
+
+client = Google::Cloud::GDCHardwareManagement.gdc_hardware_management
+request = ::Google::Cloud::GDCHardwareManagement::V1alpha::ListOrdersRequest.new # (request fields as keyword arguments...)
+response = client.list_orders request
+```
+
 ## Debug Logging
 
 This library comes with opt-in Debug Logging that can help you troubleshoot

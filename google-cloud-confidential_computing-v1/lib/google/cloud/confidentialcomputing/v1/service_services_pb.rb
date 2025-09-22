@@ -35,8 +35,15 @@ module Google
 
             # Creates a new Challenge in a given project and location.
             rpc :CreateChallenge, ::Google::Cloud::ConfidentialComputing::V1::CreateChallengeRequest, ::Google::Cloud::ConfidentialComputing::V1::Challenge
-            # Verifies the provided attestation info, returning a signed OIDC token.
+            # Verifies the provided attestation info, returning a signed attestation
+            # token.
             rpc :VerifyAttestation, ::Google::Cloud::ConfidentialComputing::V1::VerifyAttestationRequest, ::Google::Cloud::ConfidentialComputing::V1::VerifyAttestationResponse
+            # Verifies whether the provided attestation info is valid, returning a signed
+            # attestation token if so.
+            rpc :VerifyConfidentialSpace, ::Google::Cloud::ConfidentialComputing::V1::VerifyConfidentialSpaceRequest, ::Google::Cloud::ConfidentialComputing::V1::VerifyConfidentialSpaceResponse
+            # Verifies the provided Confidential GKE attestation info, returning a signed
+            # OIDC token.
+            rpc :VerifyConfidentialGke, ::Google::Cloud::ConfidentialComputing::V1::VerifyConfidentialGkeRequest, ::Google::Cloud::ConfidentialComputing::V1::VerifyConfidentialGkeResponse
           end
 
           Stub = Service.rpc_stub_class

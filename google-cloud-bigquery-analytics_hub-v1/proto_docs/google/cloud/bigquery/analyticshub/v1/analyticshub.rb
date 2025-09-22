@@ -76,6 +76,199 @@ module Google
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
 
+          # A query template is a container for sharing table-valued functions defined by
+          # contributors in a data clean room.
+          # @!attribute [r] name
+          #   @return [::String]
+          #     Output only. The resource name of the QueryTemplate.
+          #     e.g. `projects/myproject/locations/us/dataExchanges/123/queryTemplates/456`
+          # @!attribute [rw] display_name
+          #   @return [::String]
+          #     Required. Human-readable display name of the QueryTemplate. The display
+          #     name must contain only Unicode letters, numbers (0-9), underscores (_),
+          #     dashes (-), spaces ( ), ampersands (&) and can't start or end with spaces.
+          #     Default value is an empty string. Max length: 63 bytes.
+          # @!attribute [rw] description
+          #   @return [::String]
+          #     Optional. Short description of the QueryTemplate. The description must not
+          #     contain Unicode non-characters and C0 and C1 control codes except tabs
+          #     (HT), new lines (LF), carriage returns (CR), and page breaks (FF). Default
+          #     value is an empty string. Max length: 2000 bytes.
+          # @!attribute [rw] proposer
+          #   @return [::String]
+          #     Optional. Will be deprecated.
+          #     Email or URL of the primary point of contact of the QueryTemplate.
+          #     Max Length: 1000 bytes.
+          # @!attribute [rw] primary_contact
+          #   @return [::String]
+          #     Optional. Email or URL of the primary point of contact of the
+          #     QueryTemplate. Max Length: 1000 bytes.
+          # @!attribute [rw] documentation
+          #   @return [::String]
+          #     Optional. Documentation describing the QueryTemplate.
+          # @!attribute [r] state
+          #   @return [::Google::Cloud::Bigquery::AnalyticsHub::V1::QueryTemplate::State]
+          #     Output only. The QueryTemplate lifecycle state.
+          # @!attribute [rw] routine
+          #   @return [::Google::Cloud::Bigquery::AnalyticsHub::V1::Routine]
+          #     Optional. The routine associated with the QueryTemplate.
+          # @!attribute [r] create_time
+          #   @return [::Google::Protobuf::Timestamp]
+          #     Output only. Timestamp when the QueryTemplate was created.
+          # @!attribute [r] update_time
+          #   @return [::Google::Protobuf::Timestamp]
+          #     Output only. Timestamp when the QueryTemplate was last modified.
+          class QueryTemplate
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+
+            # The QueryTemplate lifecycle state.
+            module State
+              # Default value. This value is unused.
+              STATE_UNSPECIFIED = 0
+
+              # The QueryTemplate is in draft state.
+              DRAFTED = 1
+
+              # The QueryTemplate is in pending state.
+              PENDING = 2
+
+              # The QueryTemplate is in deleted state.
+              DELETED = 3
+
+              # The QueryTemplate is in approved state.
+              APPROVED = 4
+            end
+          end
+
+          # Represents a bigquery routine.
+          # @!attribute [rw] routine_type
+          #   @return [::Google::Cloud::Bigquery::AnalyticsHub::V1::Routine::RoutineType]
+          #     Required. The type of routine.
+          # @!attribute [rw] definition_body
+          #   @return [::String]
+          #     Optional. The definition body of the routine.
+          class Routine
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+
+            # Represents the type of a given routine.
+            module RoutineType
+              # Default value.
+              ROUTINE_TYPE_UNSPECIFIED = 0
+
+              # Non-built-in persistent TVF.
+              TABLE_VALUED_FUNCTION = 1
+            end
+          end
+
+          # Message for creating a QueryTemplate.
+          # @!attribute [rw] parent
+          #   @return [::String]
+          #     Required. The parent resource path of the QueryTemplate.
+          #     e.g.
+          #     `projects/myproject/locations/us/dataExchanges/123/queryTemplates/myQueryTemplate`.
+          # @!attribute [rw] query_template_id
+          #   @return [::String]
+          #     Required. The ID of the QueryTemplate to create.
+          #     Must contain only Unicode letters, numbers (0-9), underscores (_).
+          #     Max length: 100 bytes.
+          # @!attribute [rw] query_template
+          #   @return [::Google::Cloud::Bigquery::AnalyticsHub::V1::QueryTemplate]
+          #     Required. The QueryTemplate to create.
+          class CreateQueryTemplateRequest
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Message for creating a QueryTemplate.
+          # @!attribute [rw] name
+          #   @return [::String]
+          #     Required. The parent resource path of the QueryTemplate.
+          #     e.g.
+          #     `projects/myproject/locations/us/dataExchanges/123/queryTemplates/myqueryTemplate`.
+          class GetQueryTemplateRequest
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Message for requesting the list of QueryTemplates.
+          # @!attribute [rw] parent
+          #   @return [::String]
+          #     Required. The parent resource path of the QueryTemplates.
+          #     e.g. `projects/myproject/locations/us/dataExchanges/123`.
+          # @!attribute [rw] page_size
+          #   @return [::Integer]
+          #     Optional. The maximum number of results to return in a single response
+          #     page. Leverage the page tokens to iterate through the entire collection.
+          # @!attribute [rw] page_token
+          #   @return [::String]
+          #     Optional. Page token, returned by a previous call, to request the next page
+          #     of results.
+          class ListQueryTemplatesRequest
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Message for response to the list of QueryTemplates.
+          # @!attribute [rw] query_templates
+          #   @return [::Array<::Google::Cloud::Bigquery::AnalyticsHub::V1::QueryTemplate>]
+          #     The list of QueryTemplates.
+          # @!attribute [rw] next_page_token
+          #   @return [::String]
+          #     A token to request the next page of results.
+          class ListQueryTemplatesResponse
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Message for updating a QueryTemplate.
+          # @!attribute [rw] update_mask
+          #   @return [::Google::Protobuf::FieldMask]
+          #     Optional. Field mask specifies the fields to update in the query template
+          #     resource. The fields specified in the `updateMask` are relative to the
+          #     resource and are not a full request.
+          # @!attribute [rw] query_template
+          #   @return [::Google::Cloud::Bigquery::AnalyticsHub::V1::QueryTemplate]
+          #     Required. The QueryTemplate to update.
+          class UpdateQueryTemplateRequest
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Message for deleting a QueryTemplate.
+          # @!attribute [rw] name
+          #   @return [::String]
+          #     Required. The resource path of the QueryTemplate.
+          #     e.g.
+          #     `projects/myproject/locations/us/dataExchanges/123/queryTemplates/myqueryTemplate`.
+          class DeleteQueryTemplateRequest
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Message for submitting a QueryTemplate.
+          # @!attribute [rw] name
+          #   @return [::String]
+          #     Required. The resource path of the QueryTemplate.
+          #     e.g.
+          #     `projects/myproject/locations/us/dataExchanges/123/queryTemplates/myqueryTemplate`.
+          class SubmitQueryTemplateRequest
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Message for approving a QueryTemplate.
+          # @!attribute [rw] name
+          #   @return [::String]
+          #     Required. The resource path of the QueryTemplate.
+          #     e.g.
+          #     `projects/myproject/locations/us/dataExchanges/123/queryTemplates/myqueryTemplate`.
+          class ApproveQueryTemplateRequest
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
           # Sharing environment is a behavior model for sharing data within a
           # data exchange. This option is configurable for a data exchange.
           # @!attribute [rw] default_exchange_config
@@ -181,6 +374,11 @@ module Google
           #     Required. The geographic location where the dataset should reside. See
           #     https://cloud.google.com/bigquery/docs/locations for supported
           #     locations.
+          # @!attribute [rw] replica_locations
+          #   @return [::Array<::String>]
+          #     Optional. The geographic locations where the dataset should be replicated.
+          #     See [BigQuery locations](https://cloud.google.com/bigquery/docs/locations)
+          #     for supported locations.
           class DestinationDataset
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -256,7 +454,7 @@ module Google
           #     Optional. Details of the data provider who owns the source data.
           # @!attribute [rw] categories
           #   @return [::Array<::Google::Cloud::Bigquery::AnalyticsHub::V1::Listing::Category>]
-          #     Optional. Categories of the listing. Up to two categories are allowed.
+          #     Optional. Categories of the listing. Up to five categories are allowed.
           # @!attribute [rw] publisher
           #   @return [::Google::Cloud::Bigquery::AnalyticsHub::V1::Publisher]
           #     Optional. Details of the publisher who owns the listing and who can share
@@ -311,6 +509,16 @@ module Google
             #   @return [::Google::Cloud::Bigquery::AnalyticsHub::V1::Listing::BigQueryDatasetSource::RestrictedExportPolicy]
             #     Optional. If set, restricted export policy will be propagated and
             #     enforced on the linked dataset.
+            # @!attribute [rw] replica_locations
+            #   @return [::Array<::String>]
+            #     Optional. A list of regions where the publisher has created shared
+            #     dataset replicas.
+            # @!attribute [r] effective_replicas
+            #   @return [::Array<::Google::Cloud::Bigquery::AnalyticsHub::V1::Listing::BigQueryDatasetSource::Replica>]
+            #     Output only. Server-owned effective state of replicas.
+            #     Contains both primary and secondary replicas.
+            #     Each replica includes a system-computed (output-only) state and primary
+            #     designation.
             class BigQueryDatasetSource
               include ::Google::Protobuf::MessageExts
               extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -353,6 +561,49 @@ module Google
               class RestrictedExportPolicy
                 include ::Google::Protobuf::MessageExts
                 extend ::Google::Protobuf::MessageExts::ClassMethods
+              end
+
+              # Represents the state of a replica of a shared dataset.
+              # It includes the geographic location of the replica and
+              # system-computed, output-only fields indicating its replication state and
+              # whether it is the primary replica.
+              # @!attribute [r] location
+              #   @return [::String]
+              #     Output only. The geographic location where the replica resides. See
+              #     [BigQuery locations](https://cloud.google.com/bigquery/docs/locations)
+              #     for supported locations. Eg. "us-central1".
+              # @!attribute [r] replica_state
+              #   @return [::Google::Cloud::Bigquery::AnalyticsHub::V1::Listing::BigQueryDatasetSource::Replica::ReplicaState]
+              #     Output only. Assigned by Analytics Hub based on real BigQuery
+              #     replication state.
+              # @!attribute [r] primary_state
+              #   @return [::Google::Cloud::Bigquery::AnalyticsHub::V1::Listing::BigQueryDatasetSource::Replica::PrimaryState]
+              #     Output only. Indicates that this replica is the primary replica.
+              class Replica
+                include ::Google::Protobuf::MessageExts
+                extend ::Google::Protobuf::MessageExts::ClassMethods
+
+                # Replica state of the shared dataset.
+                module ReplicaState
+                  # Default value. This value is unused.
+                  REPLICA_STATE_UNSPECIFIED = 0
+
+                  # The replica is backfilled and ready to use.
+                  READY_TO_USE = 1
+
+                  # The replica is unavailable, does not exist, or has not been
+                  # backfilled yet.
+                  UNAVAILABLE = 2
+                end
+
+                # Primary state of the replica. Set only for the primary replica.
+                module PrimaryState
+                  # Default value. This value is unused.
+                  PRIMARY_STATE_UNSPECIFIED = 0
+
+                  # The replica is the primary replica.
+                  PRIMARY_REPLICA = 1
+                end
               end
             end
 
@@ -477,6 +728,8 @@ module Google
               CATEGORY_TRANSPORTATION_AND_LOGISTICS = 18
 
               CATEGORY_TRAVEL_AND_TOURISM = 19
+
+              CATEGORY_GOOGLE_EARTH_ENGINE = 20
             end
           end
 

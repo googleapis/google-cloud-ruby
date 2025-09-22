@@ -253,10 +253,18 @@ module Google
         #     Output only. Specifies the active zone for regional volume.
         # @!attribute [r] cold_tier_size_gib
         #   @return [::Integer]
-        #     Output only. Size of the volume cold tier data in GiB.
+        #     Output only. Size of the volume cold tier data rounded down to the nearest
+        #     GiB.
         # @!attribute [rw] hybrid_replication_parameters
         #   @return [::Google::Cloud::NetApp::V1::HybridReplicationParameters]
         #     Optional. The Hybrid Replication parameters for the volume.
+        # @!attribute [rw] throughput_mibps
+        #   @return [::Float]
+        #     Optional. Throughput of the volume (in MiB/s)
+        # @!attribute [r] hot_tier_size_used_gib
+        #   @return [::Integer]
+        #     Output only. Total hot tier data rounded down to the nearest GiB used by
+        #     the Volume. This field is only used for flex Service Level
         class Volume
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -534,6 +542,10 @@ module Google
         #   @return [::Integer]
         #     Optional. Time in days to mark the volume's data block as cold and make it
         #     eligible for tiering, can be range from 2-183. Default is 31.
+        # @!attribute [rw] hot_tier_bypass_mode_enabled
+        #   @return [::Boolean]
+        #     Optional. Flag indicating that the hot tier bypass mode is enabled. Default
+        #     is false. This is only applicable to Flex service level.
         class TieringPolicy
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -581,6 +593,15 @@ module Google
         # @!attribute [rw] labels
         #   @return [::Google::Protobuf::Map{::String => ::String}]
         #     Optional. Labels to be added to the replication as the key value pairs.
+        # @!attribute [rw] replication_schedule
+        #   @return [::Google::Cloud::NetApp::V1::HybridReplicationSchedule]
+        #     Optional. Replication Schedule for the replication created.
+        # @!attribute [rw] hybrid_replication_type
+        #   @return [::Google::Cloud::NetApp::V1::HybridReplicationParameters::VolumeHybridReplicationType]
+        #     Optional. Type of the hybrid replication.
+        # @!attribute [rw] large_volume_constituent_count
+        #   @return [::Integer]
+        #     Optional. Constituent volume count for large volume.
         class HybridReplicationParameters
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -592,6 +613,26 @@ module Google
           class LabelsEntry
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Type of the volume's hybrid replication.
+          module VolumeHybridReplicationType
+            # Unspecified hybrid replication type.
+            VOLUME_HYBRID_REPLICATION_TYPE_UNSPECIFIED = 0
+
+            # Hybrid replication type for migration.
+            MIGRATION = 1
+
+            # Hybrid replication type for continuous replication.
+            CONTINUOUS_REPLICATION = 2
+
+            # New field for reversible OnPrem replication, to be used for data
+            # protection.
+            ONPREM_REPLICATION = 3
+
+            # New field for reversible OnPrem replication, to be used for data
+            # protection.
+            REVERSE_ONPREM_REPLICATION = 4
           end
         end
 

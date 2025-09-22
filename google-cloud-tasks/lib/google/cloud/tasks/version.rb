@@ -20,7 +20,7 @@
 module Google
   module Cloud
     module Tasks
-      VERSION = "3.0.2"
+      VERSION = "3.0.3"
     end
   end
 end

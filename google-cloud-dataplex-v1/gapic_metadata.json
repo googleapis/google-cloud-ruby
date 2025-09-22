@@ -179,6 +179,90 @@
         }
       }
     },
+    "BusinessGlossaryService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::Dataplex::V1::BusinessGlossaryService::Client",
+          "rpcs": {
+            "CreateGlossary": {
+              "methods": [
+                "create_glossary"
+              ]
+            },
+            "UpdateGlossary": {
+              "methods": [
+                "update_glossary"
+              ]
+            },
+            "DeleteGlossary": {
+              "methods": [
+                "delete_glossary"
+              ]
+            },
+            "GetGlossary": {
+              "methods": [
+                "get_glossary"
+              ]
+            },
+            "ListGlossaries": {
+              "methods": [
+                "list_glossaries"
+              ]
+            },
+            "CreateGlossaryCategory": {
+              "methods": [
+                "create_glossary_category"
+              ]
+            },
+            "UpdateGlossaryCategory": {
+              "methods": [
+                "update_glossary_category"
+              ]
+            },
+            "DeleteGlossaryCategory": {
+              "methods": [
+                "delete_glossary_category"
+              ]
+            },
+            "GetGlossaryCategory": {
+              "methods": [
+                "get_glossary_category"
+              ]
+            },
+            "ListGlossaryCategories": {
+              "methods": [
+                "list_glossary_categories"
+              ]
+            },
+            "CreateGlossaryTerm": {
+              "methods": [
+                "create_glossary_term"
+              ]
+            },
+            "UpdateGlossaryTerm": {
+              "methods": [
+                "update_glossary_term"
+              ]
+            },
+            "DeleteGlossaryTerm": {
+              "methods": [
+                "delete_glossary_term"
+              ]
+            },
+            "GetGlossaryTerm": {
+              "methods": [
+                "get_glossary_term"
+              ]
+            },
+            "ListGlossaryTerms": {
+              "methods": [
+                "list_glossary_terms"
+              ]
+            }
+          }
+        }
+      }
+    },
     "CatalogService": {
       "clients": {
         "grpc": {
@@ -312,6 +396,21 @@
             "CancelMetadataJob": {
               "methods": [
                 "cancel_metadata_job"
+              ]
+            },
+            "CreateEntryLink": {
+              "methods": [
+                "create_entry_link"
+              ]
+            },
+            "DeleteEntryLink": {
+              "methods": [
+                "delete_entry_link"
+              ]
+            },
+            "GetEntryLink": {
+              "methods": [
+                "get_entry_link"
               ]
             }
           }

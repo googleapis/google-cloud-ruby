@@ -525,6 +525,140 @@ class ::Google::Cloud::Video::LiveStream::V1::LivestreamService::ClientTest < Mi
     end
   end
 
+  def test_start_distribution
+    # Create GRPC objects.
+    grpc_response = ::Google::Longrunning::Operation.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+    distribution_keys = ["hello world"]
+    request_id = "hello world"
+
+    start_distribution_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :start_distribution, name
+      assert_kind_of ::Google::Cloud::Video::LiveStream::V1::StartDistributionRequest, request
+      assert_equal "hello world", request["name"]
+      assert_equal ["hello world"], request["distribution_keys"]
+      assert_equal "hello world", request["request_id"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, start_distribution_client_stub do
+      # Create client
+      client = ::Google::Cloud::Video::LiveStream::V1::LivestreamService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.start_distribution({ name: name, distribution_keys: distribution_keys, request_id: request_id }) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.start_distribution name: name, distribution_keys: distribution_keys, request_id: request_id do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.start_distribution ::Google::Cloud::Video::LiveStream::V1::StartDistributionRequest.new(name: name, distribution_keys: distribution_keys, request_id: request_id) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.start_distribution({ name: name, distribution_keys: distribution_keys, request_id: request_id }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.start_distribution(::Google::Cloud::Video::LiveStream::V1::StartDistributionRequest.new(name: name, distribution_keys: distribution_keys, request_id: request_id), grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, start_distribution_client_stub.call_rpc_count
+    end
+  end
+
+  def test_stop_distribution
+    # Create GRPC objects.
+    grpc_response = ::Google::Longrunning::Operation.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+    distribution_keys = ["hello world"]
+    request_id = "hello world"
+
+    stop_distribution_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :stop_distribution, name
+      assert_kind_of ::Google::Cloud::Video::LiveStream::V1::StopDistributionRequest, request
+      assert_equal "hello world", request["name"]
+      assert_equal ["hello world"], request["distribution_keys"]
+      assert_equal "hello world", request["request_id"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, stop_distribution_client_stub do
+      # Create client
+      client = ::Google::Cloud::Video::LiveStream::V1::LivestreamService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.stop_distribution({ name: name, distribution_keys: distribution_keys, request_id: request_id }) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.stop_distribution name: name, distribution_keys: distribution_keys, request_id: request_id do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.stop_distribution ::Google::Cloud::Video::LiveStream::V1::StopDistributionRequest.new(name: name, distribution_keys: distribution_keys, request_id: request_id) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.stop_distribution({ name: name, distribution_keys: distribution_keys, request_id: request_id }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.stop_distribution(::Google::Cloud::Video::LiveStream::V1::StopDistributionRequest.new(name: name, distribution_keys: distribution_keys, request_id: request_id), grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, stop_distribution_client_stub.call_rpc_count
+    end
+  end
+
   def test_create_input
     # Create GRPC objects.
     grpc_response = ::Google::Longrunning::Operation.new
@@ -852,6 +986,64 @@ class ::Google::Cloud::Video::LiveStream::V1::LivestreamService::ClientTest < Mi
 
       # Verify method calls
       assert_equal 5, update_input_client_stub.call_rpc_count
+    end
+  end
+
+  def test_preview_input
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::Video::LiveStream::V1::PreviewInputResponse.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    preview_input_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :preview_input, name
+      assert_kind_of ::Google::Cloud::Video::LiveStream::V1::PreviewInputRequest, request
+      assert_equal "hello world", request["name"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, preview_input_client_stub do
+      # Create client
+      client = ::Google::Cloud::Video::LiveStream::V1::LivestreamService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.preview_input({ name: name }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.preview_input name: name do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.preview_input ::Google::Cloud::Video::LiveStream::V1::PreviewInputRequest.new(name: name) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.preview_input({ name: name }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.preview_input(::Google::Cloud::Video::LiveStream::V1::PreviewInputRequest.new(name: name), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, preview_input_client_stub.call_rpc_count
     end
   end
 

@@ -16,7 +16,7 @@
 require "google/cloud/storage/control"
 
 def list_anywhere_caches bucket_name:
-  # The ID of your GCS bucket
+  # The Name of your GCS bucket
   # bucket_name = "your-unique-bucket-name"
 
   # Create a client object. The client can be reused for multiple calls.
@@ -35,7 +35,7 @@ def list_anywhere_caches bucket_name:
     result.response.anywhere_caches.each do |item|
       puts "AnywhereCache #{item.name} found in list"
     end
-  rescue StandardError => e
+  rescue Google::Cloud::Error => e
     puts "Error listing AnywhereCaches: #{e.message}"
   end
 end

@@ -30,6 +30,8 @@ module Google
         #   @return [::String]
         #     Required. The resource name of the config. Must be in the format of,
         #     `projects/{project}/locations/{location}/googleChannelConfig`.
+        #     In API responses, the config name always includes the projectID, regardless
+        #     of whether the projectID or projectNumber was provided.
         # @!attribute [r] update_time
         #   @return [::Google::Protobuf::Timestamp]
         #     Output only. The last-modified time.
@@ -40,9 +42,21 @@ module Google
         #
         #     It must match the pattern
         #     `projects/*/locations/*/keyRings/*/cryptoKeys/*`.
+        # @!attribute [rw] labels
+        #   @return [::Google::Protobuf::Map{::String => ::String}]
+        #     Optional. Resource labels.
         class GoogleChannelConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # @!attribute [rw] key
+          #   @return [::String]
+          # @!attribute [rw] value
+          #   @return [::String]
+          class LabelsEntry
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
         end
       end
     end

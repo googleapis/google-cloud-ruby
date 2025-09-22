@@ -114,6 +114,27 @@ module Google
               end
 
               ##
+              # Create a fully-qualified QueryTemplate resource string.
+              #
+              # The resource will be in the following format:
+              #
+              # `projects/{project}/locations/{location}/dataExchanges/{data_exchange}/queryTemplates/{query_template}`
+              #
+              # @param project [String]
+              # @param location [String]
+              # @param data_exchange [String]
+              # @param query_template [String]
+              #
+              # @return [::String]
+              def query_template_path project:, location:, data_exchange:, query_template:
+                raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+                raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+                raise ::ArgumentError, "data_exchange cannot contain /" if data_exchange.to_s.include? "/"
+
+                "projects/#{project}/locations/#{location}/dataExchanges/#{data_exchange}/queryTemplates/#{query_template}"
+              end
+
+              ##
               # Create a fully-qualified Routine resource string.
               #
               # The resource will be in the following format:

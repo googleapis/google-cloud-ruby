@@ -24,11 +24,13 @@ module Google
     module Dataplex
       module V1
         module CatalogService
+          # LINT: LEGACY_NAMES
+          #
           # The primary resources offered by this service are EntryGroups, EntryTypes,
-          # AspectTypes, and Entries. They collectively let data administrators organize,
-          # manage, secure, and catalog data located across cloud projects in their
-          # organization in a variety of storage systems, including Cloud Storage and
-          # BigQuery.
+          # AspectTypes, Entries and EntryLinks. They collectively let data
+          # administrators organize, manage, secure, and catalog data located across
+          # cloud projects in their organization in a variety of storage systems,
+          # including Cloud Storage and BigQuery.
           class Service
 
             include ::GRPC::GenericService
@@ -81,8 +83,8 @@ module Google
             rpc :LookupEntry, ::Google::Cloud::Dataplex::V1::LookupEntryRequest, ::Google::Cloud::Dataplex::V1::Entry
             # Searches for Entries matching the given query and scope.
             rpc :SearchEntries, ::Google::Cloud::Dataplex::V1::SearchEntriesRequest, ::Google::Cloud::Dataplex::V1::SearchEntriesResponse
-            # Creates a metadata job. For example, use a metadata job to import Dataplex
-            # Catalog entries and aspects from a third-party system into Dataplex.
+            # Creates a metadata job. For example, use a metadata job to import metadata
+            # from a third-party system into Dataplex Universal Catalog.
             rpc :CreateMetadataJob, ::Google::Cloud::Dataplex::V1::CreateMetadataJobRequest, ::Google::Longrunning::Operation
             # Gets a metadata job.
             rpc :GetMetadataJob, ::Google::Cloud::Dataplex::V1::GetMetadataJobRequest, ::Google::Cloud::Dataplex::V1::MetadataJob
@@ -95,6 +97,12 @@ module Google
             # the entry groups in your project by running another metadata job that
             # reverts the changes from the canceled job.
             rpc :CancelMetadataJob, ::Google::Cloud::Dataplex::V1::CancelMetadataJobRequest, ::Google::Protobuf::Empty
+            # Creates an Entry Link.
+            rpc :CreateEntryLink, ::Google::Cloud::Dataplex::V1::CreateEntryLinkRequest, ::Google::Cloud::Dataplex::V1::EntryLink
+            # Deletes an Entry Link.
+            rpc :DeleteEntryLink, ::Google::Cloud::Dataplex::V1::DeleteEntryLinkRequest, ::Google::Cloud::Dataplex::V1::EntryLink
+            # Gets an Entry Link.
+            rpc :GetEntryLink, ::Google::Cloud::Dataplex::V1::GetEntryLinkRequest, ::Google::Cloud::Dataplex::V1::EntryLink
           end
 
           Stub = Service.rpc_stub_class

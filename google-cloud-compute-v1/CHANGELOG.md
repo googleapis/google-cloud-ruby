@@ -1,5 +1,23 @@
 # Release History
 
+### 3.4.0 (2025-09-17)
+
+#### Features
+
+* Update Compute Engine v1 API to revision 20250902 ([#31517](https://github.com/googleapis/google-cloud-ruby/issues/31517)) 
+
+### 3.3.0 (2025-09-11)
+
+#### Features
+
+* update gapic-common dependency for generated libraries to 1.2 which requires google-protobuf v4.26+ ([#31015](https://github.com/googleapis/google-cloud-ruby/issues/31015)) 
+
+### 3.2.0 (2025-09-03)
+
+#### Features
+
+* Update Compute Engine v1 API to revision 20250810 ([#1091](https://github.com/googleapis/google-cloud-ruby/issues/1091)) ([#30928](https://github.com/googleapis/google-cloud-ruby/issues/30928)) 
+
 ### 3.1.0 (2025-08-28)
 
 #### Features

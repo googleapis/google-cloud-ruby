@@ -45,6 +45,16 @@
                 "stop_channel"
               ]
             },
+            "StartDistribution": {
+              "methods": [
+                "start_distribution"
+              ]
+            },
+            "StopDistribution": {
+              "methods": [
+                "stop_distribution"
+              ]
+            },
             "CreateInput": {
               "methods": [
                 "create_input"
@@ -68,6 +78,11 @@
             "UpdateInput": {
               "methods": [
                 "update_input"
+              ]
+            },
+            "PreviewInput": {
+              "methods": [
+                "preview_input"
               ]
             },
             "CreateEvent": {

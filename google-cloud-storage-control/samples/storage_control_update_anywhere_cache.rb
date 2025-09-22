@@ -14,10 +14,9 @@
 
 # [START storage_control_update_anywhere_cache]
 require "google/cloud/storage/control"
-require "google/cloud/storage/control/v2"
 
 def update_anywhere_cache bucket_name:, anywhere_cache_id:
-  # The ID of your GCS bucket
+  # The Name of your GCS bucket
   # bucket_name = "your-unique-bucket-name"
   # A value that, along with the bucket's name, uniquely identifies the cache
   # anywhere_cache_id = "us-east1-b"
@@ -43,17 +42,21 @@ def update_anywhere_cache bucket_name:, anywhere_cache_id:
   # The cache is identified by the specified ID.
   begin
     operation = storage_control_client.update_anywhere_cache request
-    if operation.instance_of? Gapic::Operation
-      puts "AnywhereCache operation created - #{operation.name}"
-      get_request = Google::Cloud::Storage::Control::V2::GetAnywhereCacheRequest.new(
-        name: name
-      )
+    puts "AnywhereCache operation created - #{operation.name}"
+    get_request = Google::Cloud::Storage::Control::V2::GetAnywhereCacheRequest.new(
+      name: name
+    )
+    result = storage_control_client.get_anywhere_cache get_request
+    min_delay = 120 # 2 minutes
+    max_delay = 600 # 10 minutes
+    while result.state != "running"
+      puts "Cache not running yet, current state is #{result.state}. Retrying in #{min_delay} seconds."
+      sleep min_delay
+      min_delay = [min_delay * 2, max_delay].min # Exponential backoff with a max delay
       result = storage_control_client.get_anywhere_cache get_request
-      puts "AnywhereCache #{result.name} updated"
-    else
-      puts "AnywhereCache update operation failed"
     end
-  rescue StandardError => e
+    puts "AnywhereCache #{result.name} updated"
+  rescue Google::Cloud::Error => e
     puts "Error updating AnywhereCache: #{e.message}"
   end
 end

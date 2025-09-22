@@ -1,5 +1,11 @@
 # Release History
 
+### 0.38.0 (2025-09-11)
+
+#### Features
+
+* update gapic-common dependency for generated libraries to 1.2 which requires google-protobuf v4.26+ 
+
 ### 0.37.0 (2025-08-26)
 
 ### ⚠ BREAKING CHANGES

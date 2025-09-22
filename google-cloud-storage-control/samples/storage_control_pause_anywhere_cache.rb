@@ -16,7 +16,7 @@
 require "google/cloud/storage/control"
 
 def pause_anywhere_cache bucket_name:, anywhere_cache_id:
-  # The ID of your GCS bucket
+  # The Name of your GCS bucket
   # bucket_name = "your-unique-bucket-name"
 
   # A value that, along with the bucket's name, uniquely identifies the cache
@@ -38,7 +38,7 @@ def pause_anywhere_cache bucket_name:, anywhere_cache_id:
   begin
     result = storage_control_client.pause_anywhere_cache request
     puts "AnywhereCache #{result.name} #{result.state}"
-  rescue StandardError => e
+  rescue Google::Cloud::Error => e
     puts "Error pausing AnywhereCache: #{e.message}"
   end
 end

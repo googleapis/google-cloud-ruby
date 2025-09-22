@@ -94,6 +94,20 @@ module Google
               rpc :SetIamPolicy, ::Google::Iam::V1::SetIamPolicyRequest, ::Google::Iam::V1::Policy
               # Returns the permissions that a caller has.
               rpc :TestIamPermissions, ::Google::Iam::V1::TestIamPermissionsRequest, ::Google::Iam::V1::TestIamPermissionsResponse
+              # Creates a new QueryTemplate
+              rpc :CreateQueryTemplate, ::Google::Cloud::Bigquery::AnalyticsHub::V1::CreateQueryTemplateRequest, ::Google::Cloud::Bigquery::AnalyticsHub::V1::QueryTemplate
+              # Gets a QueryTemplate
+              rpc :GetQueryTemplate, ::Google::Cloud::Bigquery::AnalyticsHub::V1::GetQueryTemplateRequest, ::Google::Cloud::Bigquery::AnalyticsHub::V1::QueryTemplate
+              # Lists all QueryTemplates in a given project and location.
+              rpc :ListQueryTemplates, ::Google::Cloud::Bigquery::AnalyticsHub::V1::ListQueryTemplatesRequest, ::Google::Cloud::Bigquery::AnalyticsHub::V1::ListQueryTemplatesResponse
+              # Updates an existing QueryTemplate
+              rpc :UpdateQueryTemplate, ::Google::Cloud::Bigquery::AnalyticsHub::V1::UpdateQueryTemplateRequest, ::Google::Cloud::Bigquery::AnalyticsHub::V1::QueryTemplate
+              # Deletes a query template.
+              rpc :DeleteQueryTemplate, ::Google::Cloud::Bigquery::AnalyticsHub::V1::DeleteQueryTemplateRequest, ::Google::Protobuf::Empty
+              # Submits a query template for approval.
+              rpc :SubmitQueryTemplate, ::Google::Cloud::Bigquery::AnalyticsHub::V1::SubmitQueryTemplateRequest, ::Google::Cloud::Bigquery::AnalyticsHub::V1::QueryTemplate
+              # Approves a query template.
+              rpc :ApproveQueryTemplate, ::Google::Cloud::Bigquery::AnalyticsHub::V1::ApproveQueryTemplateRequest, ::Google::Cloud::Bigquery::AnalyticsHub::V1::QueryTemplate
             end
 
             Stub = Service.rpc_stub_class

@@ -150,6 +150,9 @@ module Google
         #     Optional. Configuration for GenAiAdvancedFeatures. If the endpoint is
         #     serving GenAI models, advanced features like native RAG integration can be
         #     configured. Currently, only Model Garden models are supported.
+        # @!attribute [rw] private_model_server_enabled
+        #   @return [::Boolean]
+        #     If true, the model server will be isolated from the external internet.
         class Endpoint
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

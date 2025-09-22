@@ -33,6 +33,14 @@ In order to use this library, you first need to go through the following steps:
 1. [Enable the API.](https://console.cloud.google.com/apis/library/config.googleapis.com)
 1. [Set up authentication.](AUTHENTICATION.md)
 
+```ruby
+require "google/cloud/config_service"
+
+client = Google::Cloud::ConfigService.config
+request = ::Google::Cloud::ConfigService::V1::ListDeploymentsRequest.new # (request fields as keyword arguments...)
+response = client.list_deployments request
+```
+
 ## Debug Logging
 
 This library comes with opt-in Debug Logging that can help you troubleshoot

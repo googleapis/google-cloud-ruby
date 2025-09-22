@@ -35,6 +35,14 @@ In order to use this library, you first need to go through the following steps:
 1. [Enable the API.](https://console.cloud.google.com/apis/library/securitycenter.googleapis.com)
 1. [Set up authentication.](AUTHENTICATION.md)
 
+```ruby
+require "google/cloud/security_center"
+
+client = Google::Cloud::SecurityCenter.security_center
+request = ::Google::Cloud::SecurityCenter::V2::BatchCreateResourceValueConfigsRequest.new # (request fields as keyword arguments...)
+response = client.batch_create_resource_value_configs request
+```
+
 ## Debug Logging
 
 This library comes with opt-in Debug Logging that can help you troubleshoot

@@ -20,7 +20,7 @@
 module Google
   module Cloud
     module Dataproc
-      VERSION = "2.7.2"
+      VERSION = "2.7.3"
     end
   end
 end

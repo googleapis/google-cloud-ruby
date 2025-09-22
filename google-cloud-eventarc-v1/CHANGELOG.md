@@ -1,5 +1,17 @@
 # Changelog
 
+### 2.3.0 (2025-09-17)
+
+#### Features
+
+* add new fields to Eventarc resources ([#31518](https://github.com/googleapis/google-cloud-ruby/issues/31518)) 
+
+### 2.2.0 (2025-09-11)
+
+#### Features
+
+* update gapic-common dependency for generated libraries to 1.2 which requires google-protobuf v4.26+ ([#31015](https://github.com/googleapis/google-cloud-ruby/issues/31015)) 
+
 ### 2.1.0 (2025-05-12)
 
 #### Features

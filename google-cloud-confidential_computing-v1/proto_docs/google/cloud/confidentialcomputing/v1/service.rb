@@ -58,8 +58,8 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # A request for an OIDC token, providing all the necessary information needed
-        # for this service to verify the platform state of the requestor.
+        # A request for an attestation token, providing all the necessary information
+        # needed for this service to verify the platform state of the requestor.
         # @!attribute [rw] td_ccel
         #   @return [::Google::Cloud::ConfidentialComputing::V1::TdxCcelAttestation]
         #     Optional. A TDX with CCEL and RTMR Attestation Quote.
@@ -141,7 +141,7 @@ module Google
         end
 
         # A response once an attestation has been successfully verified, containing a
-        # signed OIDC token.
+        # signed attestation token.
         # @!attribute [r] oidc_claims_token
         #   @return [::String]
         #     Output only. Same as claims_token, but as a string.
@@ -166,8 +166,8 @@ module Google
 
         # Options to modify claims in the token to generate custom-purpose tokens.
         # @!attribute [rw] aws_principal_tags_options
-        #   @return [::Google::Cloud::ConfidentialComputing::V1::TokenOptions::AwsPrincipalTagsOptions]
-        #     Optional. Options for the Limited AWS token type.
+        #   @return [::Google::Cloud::ConfidentialComputing::V1::AwsPrincipalTagsOptions]
+        #     Optional. Options for AWS token type.
         # @!attribute [rw] audience
         #   @return [::String]
         #     Optional. Optional string to issue the token with a custom audience claim.
@@ -183,35 +183,35 @@ module Google
         class TokenOptions
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
 
-          # Token options that only apply to the AWS Principal Tags token type.
-          # @!attribute [rw] allowed_principal_tags
-          #   @return [::Google::Cloud::ConfidentialComputing::V1::TokenOptions::AwsPrincipalTagsOptions::AllowedPrincipalTags]
-          #     Optional. Principal tags to allow in the token.
-          class AwsPrincipalTagsOptions
+        # Token options that only apply to the AWS Principal Tags token type.
+        # @!attribute [rw] allowed_principal_tags
+        #   @return [::Google::Cloud::ConfidentialComputing::V1::AwsPrincipalTagsOptions::AllowedPrincipalTags]
+        #     Optional. Principal tags to allow in the token.
+        class AwsPrincipalTagsOptions
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Allowed principal tags is used to define what principal tags will be
+          # placed in the token.
+          # @!attribute [rw] container_image_signatures
+          #   @return [::Google::Cloud::ConfidentialComputing::V1::AwsPrincipalTagsOptions::AllowedPrincipalTags::ContainerImageSignatures]
+          #     Optional. Container image signatures allowed in the token.
+          class AllowedPrincipalTags
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
 
-            # Allowed principal tags is used to define what principal tags will be
-            # placed in the token.
-            # @!attribute [rw] container_image_signatures
-            #   @return [::Google::Cloud::ConfidentialComputing::V1::TokenOptions::AwsPrincipalTagsOptions::AllowedPrincipalTags::ContainerImageSignatures]
-            #     Optional. Container image signatures allowed in the token.
-            class AllowedPrincipalTags
+            # Allowed Container Image Signatures. Key IDs are required to allow
+            # this claim to fit within the narrow AWS IAM restrictions.
+            # @!attribute [rw] key_ids
+            #   @return [::Array<::String>]
+            #     Optional. List of key ids to filter into the Principal tags. Only keys
+            #     that have been validated and added to the token will be filtered into
+            #     principal tags. Unrecognized key ids will be ignored.
+            class ContainerImageSignatures
               include ::Google::Protobuf::MessageExts
               extend ::Google::Protobuf::MessageExts::ClassMethods
-
-              # Allowed Container Image Signatures. Key IDs are required to allow this
-              # claim to fit within the narrow AWS IAM restrictions.
-              # @!attribute [rw] key_ids
-              #   @return [::Array<::String>]
-              #     Optional. List of key ids to filter into the Principal tags. Only
-              #     keys that have been validated and added to the token will be filtered
-              #     into principal tags. Unrecognized key ids will be ignored.
-              class ContainerImageSignatures
-                include ::Google::Protobuf::MessageExts
-                extend ::Google::Protobuf::MessageExts::ClassMethods
-              end
             end
           end
         end
@@ -321,6 +321,133 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # A request for an attestation token, providing all the necessary information
+        # needed for this service to verify the platform state of the requestor.
+        # @!attribute [rw] td_ccel
+        #   @return [::Google::Cloud::ConfidentialComputing::V1::TdxCcelAttestation]
+        #     Input only. A TDX with CCEL and RTMR Attestation Quote.
+        #
+        #     Note: The following fields are mutually exclusive: `td_ccel`, `tpm_attestation`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] tpm_attestation
+        #   @return [::Google::Cloud::ConfidentialComputing::V1::TpmAttestation]
+        #     Input only. The TPM-specific data provided by the attesting platform,
+        #     used to populate any of the claims regarding platform state.
+        #
+        #     Note: The following fields are mutually exclusive: `tpm_attestation`, `td_ccel`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] challenge
+        #   @return [::String]
+        #     Required. The name of the Challenge whose nonce was used to generate the
+        #     attestation, in the format `projects/*/locations/*/challenges/*`. The
+        #     provided Challenge will be consumed, and cannot be used again.
+        # @!attribute [rw] gcp_credentials
+        #   @return [::Google::Cloud::ConfidentialComputing::V1::GcpCredentials]
+        #     Optional. Credentials used to populate the "emails" claim in the
+        #     claims_token. If not present, token will not contain the "emails" claim.
+        # @!attribute [rw] signed_entities
+        #   @return [::Array<::Google::Cloud::ConfidentialComputing::V1::SignedEntity>]
+        #     Optional. A list of signed entities containing container image signatures
+        #     that can be used for server-side signature verification.
+        # @!attribute [rw] gce_shielded_identity
+        #   @return [::Google::Cloud::ConfidentialComputing::V1::GceShieldedIdentity]
+        #     Optional. Information about the associated Compute Engine instance.
+        #     Required for td_ccel requests only - tpm_attestation requests will provide
+        #     this information in the attestation.
+        # @!attribute [rw] options
+        #   @return [::Google::Cloud::ConfidentialComputing::V1::VerifyConfidentialSpaceRequest::ConfidentialSpaceOptions]
+        #     Optional. A collection of fields that modify the token output.
+        class VerifyConfidentialSpaceRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Token options for Confidential Space attestation.
+          # @!attribute [rw] aws_principal_tags_options
+          #   @return [::Google::Cloud::ConfidentialComputing::V1::AwsPrincipalTagsOptions]
+          #     Optional. Options for the AWS token type.
+          # @!attribute [rw] audience
+          #   @return [::String]
+          #     Optional. Optional string to issue the token with a custom audience
+          #     claim. Required if custom nonces are specified.
+          # @!attribute [rw] token_profile
+          #   @return [::Google::Cloud::ConfidentialComputing::V1::TokenProfile]
+          #     Optional. Optional specification for token claims profile.
+          # @!attribute [rw] nonce
+          #   @return [::Array<::String>]
+          #     Optional. Optional parameter to place one or more nonces in the eat_nonce
+          #     claim in the output token. The minimum size for JSON-encoded EATs is 10
+          #     bytes and the maximum size is 74 bytes.
+          # @!attribute [rw] signature_type
+          #   @return [::Google::Cloud::ConfidentialComputing::V1::SignatureType]
+          #     Optional. Optional specification for how to sign the attestation token.
+          #     Defaults to SIGNATURE_TYPE_OIDC if unspecified.
+          class ConfidentialSpaceOptions
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+        end
+
+        # GceShieldedIdentity contains information about a Compute Engine instance.
+        # @!attribute [rw] ak_cert
+        #   @return [::String]
+        #     Optional. DER-encoded X.509 certificate of the Attestation Key (otherwise
+        #     known as an AK or a TPM restricted signing key) used to generate the
+        #     quotes.
+        # @!attribute [rw] ak_cert_chain
+        #   @return [::Array<::String>]
+        #     Optional. List of DER-encoded X.509 certificates which, together with the
+        #     ak_cert, chain back to a trusted Root Certificate.
+        class GceShieldedIdentity
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # VerifyConfidentialSpaceResponse is returned once a Confidential Space
+        # attestation has been successfully verified, containing a signed token.
+        # @!attribute [r] attestation_token
+        #   @return [::String]
+        #     Output only. The attestation token issued by this service. It contains
+        #     specific platform claims based on the contents of the provided attestation.
+        # @!attribute [r] partial_errors
+        #   @return [::Array<::Google::Rpc::Status>]
+        #     Output only. A list of messages that carry the partial error details
+        #     related to VerifyConfidentialSpace. This field is populated by errors
+        #     during container image signature verification, which may reflect problems
+        #     in the provided image signatures. This does not block the issuing of an
+        #     attestation token, but the token will not contain claims for the failed
+        #     image signatures.
+        class VerifyConfidentialSpaceResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # A request for an attestation token, providing all the necessary information
+        # needed for this service to verify Confidential GKE platform state of the
+        # requestor.
+        # @!attribute [rw] tpm_attestation
+        #   @return [::Google::Cloud::ConfidentialComputing::V1::TpmAttestation]
+        #     The TPM-specific data provided by the attesting platform, used to
+        #     populate any of the claims regarding platform state.
+        # @!attribute [rw] challenge
+        #   @return [::String]
+        #     Required. The name of the Challenge whose nonce was used to generate the
+        #     attestation, in the format projects/*/locations/*/challenges/*. The
+        #     provided Challenge will be consumed, and cannot be used again.
+        class VerifyConfidentialGkeRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # VerifyConfidentialGkeResponse response is returened once a Confidential GKE
+        # attestation has been successfully verified, containing a signed OIDC token.
+        # @!attribute [r] attestation_token
+        #   @return [::String]
+        #     Output only. The attestation token issued by this service for Confidential
+        #     GKE. It contains specific platform claims based on the contents of the
+        #     provided attestation.
+        class VerifyConfidentialGkeResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # SigningAlgorithm enumerates all the supported signing algorithms.
         module SigningAlgorithm
           # Unspecified signing algorithm.
@@ -353,6 +480,30 @@ module Google
 
           # Principal-tag-based token for AWS integration
           TOKEN_TYPE_AWS_PRINCIPALTAGS = 4
+        end
+
+        # SignatureType enumerates supported signature types for attestation tokens.
+        module SignatureType
+          # Unspecified signature type.
+          SIGNATURE_TYPE_UNSPECIFIED = 0
+
+          # Google OIDC signature.
+          SIGNATURE_TYPE_OIDC = 1
+
+          # Public Key Infrastructure (PKI) signature.
+          SIGNATURE_TYPE_PKI = 2
+        end
+
+        # TokenProfile enumerates the supported token claims profiles.
+        module TokenProfile
+          # Unspecified token profile.
+          TOKEN_PROFILE_UNSPECIFIED = 0
+
+          # EAT claims.
+          TOKEN_PROFILE_DEFAULT_EAT = 1
+
+          # AWS Principal Tags claims.
+          TOKEN_PROFILE_AWS = 2
         end
       end
     end

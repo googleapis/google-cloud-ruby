@@ -1,0 +1,255 @@
+{
+  "client_library": {
+    "name": "google-cloud-gke_recommender-v1",
+    "version": "0.1.0",
+    "language": "RUBY",
+    "apis": [
+      {
+        "id": "google.cloud.gkerecommender.v1",
+        "version": "v1"
+      }
+    ]
+  },
+  "snippets": [
+    {
+      "region_tag": "gkerecommender_v1_generated_GkeInferenceQuickstart_FetchModels_sync",
+      "title": "Snippet for the fetch_models call in the GkeInferenceQuickstart service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::GkeRecommender::V1::GkeInferenceQuickstart::Client#fetch_models.",
+      "file": "gke_inference_quickstart/fetch_models.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "fetch_models",
+        "full_name": "::Google::Cloud::GkeRecommender::V1::GkeInferenceQuickstart::Client#fetch_models",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::GkeRecommender::V1::FetchModelsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::GkeRecommender::V1::FetchModelsResponse",
+        "client": {
+          "short_name": "GkeInferenceQuickstart::Client",
+          "full_name": "::Google::Cloud::GkeRecommender::V1::GkeInferenceQuickstart::Client"
+        },
+        "method": {
+          "short_name": "FetchModels",
+          "full_name": "google.cloud.gkerecommender.v1.GkeInferenceQuickstart.FetchModels",
+          "service": {
+            "short_name": "GkeInferenceQuickstart",
+            "full_name": "google.cloud.gkerecommender.v1.GkeInferenceQuickstart"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "gkerecommender_v1_generated_GkeInferenceQuickstart_FetchModelServers_sync",
+      "title": "Snippet for the fetch_model_servers call in the GkeInferenceQuickstart service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::GkeRecommender::V1::GkeInferenceQuickstart::Client#fetch_model_servers.",
+      "file": "gke_inference_quickstart/fetch_model_servers.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "fetch_model_servers",
+        "full_name": "::Google::Cloud::GkeRecommender::V1::GkeInferenceQuickstart::Client#fetch_model_servers",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::GkeRecommender::V1::FetchModelServersRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::GkeRecommender::V1::FetchModelServersResponse",
+        "client": {
+          "short_name": "GkeInferenceQuickstart::Client",
+          "full_name": "::Google::Cloud::GkeRecommender::V1::GkeInferenceQuickstart::Client"
+        },
+        "method": {
+          "short_name": "FetchModelServers",
+          "full_name": "google.cloud.gkerecommender.v1.GkeInferenceQuickstart.FetchModelServers",
+          "service": {
+            "short_name": "GkeInferenceQuickstart",
+            "full_name": "google.cloud.gkerecommender.v1.GkeInferenceQuickstart"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "gkerecommender_v1_generated_GkeInferenceQuickstart_FetchModelServerVersions_sync",
+      "title": "Snippet for the fetch_model_server_versions call in the GkeInferenceQuickstart service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::GkeRecommender::V1::GkeInferenceQuickstart::Client#fetch_model_server_versions.",
+      "file": "gke_inference_quickstart/fetch_model_server_versions.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "fetch_model_server_versions",
+        "full_name": "::Google::Cloud::GkeRecommender::V1::GkeInferenceQuickstart::Client#fetch_model_server_versions",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::GkeRecommender::V1::FetchModelServerVersionsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::GkeRecommender::V1::FetchModelServerVersionsResponse",
+        "client": {
+          "short_name": "GkeInferenceQuickstart::Client",
+          "full_name": "::Google::Cloud::GkeRecommender::V1::GkeInferenceQuickstart::Client"
+        },
+        "method": {
+          "short_name": "FetchModelServerVersions",
+          "full_name": "google.cloud.gkerecommender.v1.GkeInferenceQuickstart.FetchModelServerVersions",
+          "service": {
+            "short_name": "GkeInferenceQuickstart",
+            "full_name": "google.cloud.gkerecommender.v1.GkeInferenceQuickstart"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "gkerecommender_v1_generated_GkeInferenceQuickstart_FetchProfiles_sync",
+      "title": "Snippet for the fetch_profiles call in the GkeInferenceQuickstart service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::GkeRecommender::V1::GkeInferenceQuickstart::Client#fetch_profiles.",
+      "file": "gke_inference_quickstart/fetch_profiles.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "fetch_profiles",
+        "full_name": "::Google::Cloud::GkeRecommender::V1::GkeInferenceQuickstart::Client#fetch_profiles",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::GkeRecommender::V1::FetchProfilesRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::GkeRecommender::V1::FetchProfilesResponse",
+        "client": {
+          "short_name": "GkeInferenceQuickstart::Client",
+          "full_name": "::Google::Cloud::GkeRecommender::V1::GkeInferenceQuickstart::Client"
+        },
+        "method": {
+          "short_name": "FetchProfiles",
+          "full_name": "google.cloud.gkerecommender.v1.GkeInferenceQuickstart.FetchProfiles",
+          "service": {
+            "short_name": "GkeInferenceQuickstart",
+            "full_name": "google.cloud.gkerecommender.v1.GkeInferenceQuickstart"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "gkerecommender_v1_generated_GkeInferenceQuickstart_GenerateOptimizedManifest_sync",
+      "title": "Snippet for the generate_optimized_manifest call in the GkeInferenceQuickstart service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::GkeRecommender::V1::GkeInferenceQuickstart::Client#generate_optimized_manifest.",
+      "file": "gke_inference_quickstart/generate_optimized_manifest.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "generate_optimized_manifest",
+        "full_name": "::Google::Cloud::GkeRecommender::V1::GkeInferenceQuickstart::Client#generate_optimized_manifest",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::GkeRecommender::V1::GenerateOptimizedManifestRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::GkeRecommender::V1::GenerateOptimizedManifestResponse",
+        "client": {
+          "short_name": "GkeInferenceQuickstart::Client",
+          "full_name": "::Google::Cloud::GkeRecommender::V1::GkeInferenceQuickstart::Client"
+        },
+        "method": {
+          "short_name": "GenerateOptimizedManifest",
+          "full_name": "google.cloud.gkerecommender.v1.GkeInferenceQuickstart.GenerateOptimizedManifest",
+          "service": {
+            "short_name": "GkeInferenceQuickstart",
+            "full_name": "google.cloud.gkerecommender.v1.GkeInferenceQuickstart"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "gkerecommender_v1_generated_GkeInferenceQuickstart_FetchBenchmarkingData_sync",
+      "title": "Snippet for the fetch_benchmarking_data call in the GkeInferenceQuickstart service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::GkeRecommender::V1::GkeInferenceQuickstart::Client#fetch_benchmarking_data.",
+      "file": "gke_inference_quickstart/fetch_benchmarking_data.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "fetch_benchmarking_data",
+        "full_name": "::Google::Cloud::GkeRecommender::V1::GkeInferenceQuickstart::Client#fetch_benchmarking_data",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::GkeRecommender::V1::FetchBenchmarkingDataRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::GkeRecommender::V1::FetchBenchmarkingDataResponse",
+        "client": {
+          "short_name": "GkeInferenceQuickstart::Client",
+          "full_name": "::Google::Cloud::GkeRecommender::V1::GkeInferenceQuickstart::Client"
+        },
+        "method": {
+          "short_name": "FetchBenchmarkingData",
+          "full_name": "google.cloud.gkerecommender.v1.GkeInferenceQuickstart.FetchBenchmarkingData",
+          "service": {
+            "short_name": "GkeInferenceQuickstart",
+            "full_name": "google.cloud.gkerecommender.v1.GkeInferenceQuickstart"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    }
+  ]
+}

@@ -1,5 +1,17 @@
 # Changelog
 
+### 2.4.0 (2025-09-11)
+
+#### Features
+
+* update gapic-common dependency for generated libraries to 1.2 which requires google-protobuf v4.26+ ([#31011](https://github.com/googleapis/google-cloud-ruby/issues/31011)) 
+
+### 2.3.0 (2025-09-08)
+
+#### Features
+
+* [‎google-cloud-vm_migration-v1] Azure as a source ([#30951](https://github.com/googleapis/google-cloud-ruby/issues/30951)) 
+
 ### 2.2.0 (2025-05-12)
 
 #### Features

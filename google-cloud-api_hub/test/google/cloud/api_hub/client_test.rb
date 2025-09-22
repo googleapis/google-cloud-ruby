@@ -60,6 +60,36 @@ class Google::Cloud::ApiHub::ClientConstructionMinitest < Minitest::Test
     end
   end
 
+  def test_api_hub_collect_rest
+    skip unless Google::Cloud::ApiHub.api_hub_collect_available?
+    Gapic::Rest::ClientStub.stub :new, DummyStub.new do
+      client = Google::Cloud::ApiHub.api_hub_collect do |config|
+        config.credentials = :dummy_credentials
+      end
+      assert_kind_of Google::Cloud::ApiHub::V1::ApiHubCollect::Rest::Client, client
+    end
+  end
+
+  def test_api_hub_curate_rest
+    skip unless Google::Cloud::ApiHub.api_hub_curate_available?
+    Gapic::Rest::ClientStub.stub :new, DummyStub.new do
+      client = Google::Cloud::ApiHub.api_hub_curate do |config|
+        config.credentials = :dummy_credentials
+      end
+      assert_kind_of Google::Cloud::ApiHub::V1::ApiHubCurate::Rest::Client, client
+    end
+  end
+
+  def test_api_hub_discovery_rest
+    skip unless Google::Cloud::ApiHub.api_hub_discovery_available?
+    Gapic::Rest::ClientStub.stub :new, DummyStub.new do
+      client = Google::Cloud::ApiHub.api_hub_discovery do |config|
+        config.credentials = :dummy_credentials
+      end
+      assert_kind_of Google::Cloud::ApiHub::V1::ApiHubDiscovery::Rest::Client, client
+    end
+  end
+
   def test_host_project_registration_service_rest
     skip unless Google::Cloud::ApiHub.host_project_registration_service_available?
     Gapic::Rest::ClientStub.stub :new, DummyStub.new do

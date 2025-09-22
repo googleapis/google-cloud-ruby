@@ -104,6 +104,75 @@
         }
       }
     },
+    "DataTransferService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::NetworkConnectivity::V1::DataTransferService::Client",
+          "rpcs": {
+            "ListMulticloudDataTransferConfigs": {
+              "methods": [
+                "list_multicloud_data_transfer_configs"
+              ]
+            },
+            "GetMulticloudDataTransferConfig": {
+              "methods": [
+                "get_multicloud_data_transfer_config"
+              ]
+            },
+            "CreateMulticloudDataTransferConfig": {
+              "methods": [
+                "create_multicloud_data_transfer_config"
+              ]
+            },
+            "UpdateMulticloudDataTransferConfig": {
+              "methods": [
+                "update_multicloud_data_transfer_config"
+              ]
+            },
+            "DeleteMulticloudDataTransferConfig": {
+              "methods": [
+                "delete_multicloud_data_transfer_config"
+              ]
+            },
+            "ListDestinations": {
+              "methods": [
+                "list_destinations"
+              ]
+            },
+            "GetDestination": {
+              "methods": [
+                "get_destination"
+              ]
+            },
+            "CreateDestination": {
+              "methods": [
+                "create_destination"
+              ]
+            },
+            "UpdateDestination": {
+              "methods": [
+                "update_destination"
+              ]
+            },
+            "DeleteDestination": {
+              "methods": [
+                "delete_destination"
+              ]
+            },
+            "GetMulticloudDataTransferSupportedService": {
+              "methods": [
+                "get_multicloud_data_transfer_supported_service"
+              ]
+            },
+            "ListMulticloudDataTransferSupportedServices": {
+              "methods": [
+                "list_multicloud_data_transfer_supported_services"
+              ]
+            }
+          }
+        }
+      }
+    },
     "HubService": {
       "clients": {
         "grpc": {

@@ -1,5 +1,20 @@
 # Changelog
 
+### 2.3.0 (2025-09-12)
+
+#### Features
+
+* add `k8s_git_version` field ([#31319](https://github.com/googleapis/google-cloud-ruby/issues/31319)) 
+#### Documentation
+
+* correct comment for `k8s_version` field 
+
+### 2.2.0 (2025-09-11)
+
+#### Features
+
+* update gapic-common dependency for generated libraries to 1.2 which requires google-protobuf v4.26+ ([#31015](https://github.com/googleapis/google-cloud-ruby/issues/31015)) 
+
 ### 2.1.0 (2025-05-12)
 
 #### Features

@@ -529,7 +529,7 @@ module Google
               #   @param parent [::String]
               #     Required. The resource name of the DataTaxonomy location, of the form:
               #     projects/\\{project_number}/locations/\\{location_id}
-              #     where `location_id` refers to a GCP region.
+              #     where `location_id` refers to a Google Cloud region.
               #   @param page_size [::Integer]
               #     Optional. Maximum number of DataTaxonomies to return. The service may
               #     return fewer than this value. If unspecified, at most 10 DataTaxonomies

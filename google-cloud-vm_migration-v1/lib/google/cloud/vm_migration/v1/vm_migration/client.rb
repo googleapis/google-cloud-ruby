@@ -19,7 +19,6 @@
 require "google/cloud/errors"
 require "google/cloud/vmmigration/v1/vmmigration_pb"
 require "google/cloud/location"
-require "google/iam/v1"
 
 module Google
   module Cloud
@@ -195,14 +194,6 @@ module Google
                 config.universe_domain = @vm_migration_stub.universe_domain
                 config.logger = @vm_migration_stub.logger if config.respond_to? :logger=
               end
-
-              @iam_policy_client = Google::Iam::V1::IAMPolicy::Client.new do |config|
-                config.credentials = credentials
-                config.quota_project = @quota_project_id
-                config.endpoint = @vm_migration_stub.endpoint
-                config.universe_domain = @vm_migration_stub.universe_domain
-                config.logger = @vm_migration_stub.logger if config.respond_to? :logger=
-              end
             end
 
             ##
@@ -218,13 +209,6 @@ module Google
             # @return [Google::Cloud::Location::Locations::Client]
             #
             attr_reader :location_client
-
-            ##
-            # Get the associated client for mix-in of the IAMPolicy.
-            #
-            # @return [Google::Iam::V1::IAMPolicy::Client]
-            #
-            attr_reader :iam_policy_client
 
             ##
             # The logger used for request/response debug logging.
@@ -458,8 +442,8 @@ module Google
             #     the request if it has already been completed. The server will guarantee
             #     that for at least 60 minutes since the first request.
             #
-            #     For example, consider a situation where you make an initial request and t
-            #     he request times out. If you make the request again with the same request
+            #     For example, consider a situation where you make an initial request and
+            #     the request times out. If you make the request again with the same request
             #     ID, the server can check if original operation with the same request ID
             #     was received, and if so, will ignore the second request. This prevents
             #     clients from accidentally creating duplicate commitments.
@@ -572,8 +556,8 @@ module Google
             #     the request if it has already been completed. The server will guarantee
             #     that for at least 60 minutes since the first request.
             #
-            #     For example, consider a situation where you make an initial request and t
-            #     he request times out. If you make the request again with the same request
+            #     For example, consider a situation where you make an initial request and
+            #     the request times out. If you make the request again with the same request
             #     ID, the server can check if original operation with the same request ID
             #     was received, and if so, will ignore the second request. This prevents
             #     clients from accidentally creating duplicate commitments.
@@ -680,8 +664,8 @@ module Google
             #     the request if it has already been completed. The server will guarantee
             #     that for at least 60 minutes after the first request.
             #
-            #     For example, consider a situation where you make an initial request and t
-            #     he request times out. If you make the request again with the same request
+            #     For example, consider a situation where you make an initial request and
+            #     the request times out. If you make the request again with the same request
             #     ID, the server can check if original operation with the same request ID
             #     was received, and if so, will ignore the second request. This prevents
             #     clients from accidentally creating duplicate commitments.
@@ -849,6 +833,115 @@ module Google
 
               @vm_migration_stub.call_rpc :fetch_inventory, request, options: options do |response, operation|
                 yield response, operation if block_given?
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # List remote source's inventory of storage resources.
+            # The remote source is another cloud vendor (e.g. AWS, Azure).
+            # The inventory describes the list of existing storage resources in that
+            # source. Note that this operation lists the resources on the remote source,
+            # as opposed to listing the MigratingVms resources in the vmmigration
+            # service.
+            #
+            # @overload fetch_storage_inventory(request, options = nil)
+            #   Pass arguments to `fetch_storage_inventory` via a request object, either of type
+            #   {::Google::Cloud::VMMigration::V1::FetchStorageInventoryRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::VMMigration::V1::FetchStorageInventoryRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload fetch_storage_inventory(source: nil, type: nil, force_refresh: nil, page_size: nil, page_token: nil)
+            #   Pass arguments to `fetch_storage_inventory` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param source [::String]
+            #     Required. The name of the Source.
+            #   @param type [::Google::Cloud::VMMigration::V1::FetchStorageInventoryRequest::StorageType]
+            #     Required. The type of the storage inventory to fetch.
+            #   @param force_refresh [::Boolean]
+            #     Optional. If this flag is set to true, the source will be queried instead
+            #     of using cached results. Using this flag will make the call slower.
+            #   @param page_size [::Integer]
+            #     Optional. The maximum number of VMs to return. The service may return
+            #     fewer than this value.
+            #   @param page_token [::String]
+            #     Optional. A page token, received from a previous `FetchStorageInventory`
+            #     call. Provide this to retrieve the subsequent page. When paginating, all
+            #     other parameters provided to `FetchStorageInventory` must match the call
+            #     that provided the page token.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Gapic::PagedEnumerable<::Google::Cloud::VMMigration::V1::SourceStorageResource>]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Gapic::PagedEnumerable<::Google::Cloud::VMMigration::V1::SourceStorageResource>]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/vm_migration/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::VMMigration::V1::VMMigration::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::VMMigration::V1::FetchStorageInventoryRequest.new
+            #
+            #   # Call the fetch_storage_inventory method.
+            #   result = client.fetch_storage_inventory request
+            #
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
+            #     # Each element is of type ::Google::Cloud::VMMigration::V1::SourceStorageResource.
+            #     p item
+            #   end
+            #
+            def fetch_storage_inventory request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::VMMigration::V1::FetchStorageInventoryRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.fetch_storage_inventory.metadata.to_h
+
+              # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::VMMigration::V1::VERSION
+              metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.source
+                header_params["source"] = request.source
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.fetch_storage_inventory.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.fetch_storage_inventory.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @vm_migration_stub.call_rpc :fetch_storage_inventory, request, options: options do |response, operation|
+                response = ::Gapic::PagedEnumerable.new @vm_migration_stub, :fetch_storage_inventory, request, response, operation, options
+                yield response, operation if block_given?
+                throw :response, response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -1086,8 +1179,8 @@ module Google
             #     the request if it has already been completed. The server will guarantee
             #     that for at least 60 minutes since the first request.
             #
-            #     For example, consider a situation where you make an initial request and t
-            #     he request times out. If you make the request again with the same request
+            #     For example, consider a situation where you make an initial request and
+            #     the request times out. If you make the request again with the same request
             #     ID, the server can check if original operation with the same request ID
             #     was received, and if so, will ignore the second request. This prevents
             #     clients from accidentally creating duplicate commitments.
@@ -1194,8 +1287,8 @@ module Google
             #     the request if it has already been completed. The server will guarantee
             #     that for at least 60 minutes after the first request.
             #
-            #     For example, consider a situation where you make an initial request and t
-            #     he request times out. If you make the request again with the same request
+            #     For example, consider a situation where you make an initial request and
+            #     the request times out. If you make the request again with the same request
             #     ID, the server can check if original operation with the same request ID
             #     was received, and if so, will ignore the second request. This prevents
             #     clients from accidentally creating duplicate commitments.
@@ -1501,8 +1594,8 @@ module Google
             #     the request if it has already been completed. The server will guarantee
             #     that for at least 60 minutes since the first request.
             #
-            #     For example, consider a situation where you make an initial request and t
-            #     he request times out. If you make the request again with the same request
+            #     For example, consider a situation where you make an initial request and
+            #     the request times out. If you make the request again with the same request
             #     ID, the server can check if original operation with the same request ID
             #     was received, and if so, will ignore the second request. This prevents
             #     clients from accidentally creating duplicate commitments.
@@ -1609,8 +1702,8 @@ module Google
             #     the request if it has already been completed. The server will guarantee
             #     that for at least 60 minutes after the first request.
             #
-            #     For example, consider a situation where you make an initial request and t
-            #     he request times out. If you make the request again with the same request
+            #     For example, consider a situation where you make an initial request and
+            #     the request times out. If you make the request again with the same request
             #     ID, the server can check if original operation with the same request ID
             #     was received, and if so, will ignore the second request. This prevents
             #     clients from accidentally creating duplicate commitments.
@@ -1718,8 +1811,8 @@ module Google
             #     the request if it has already been completed. The server will guarantee
             #     that for at least 60 minutes after the first request.
             #
-            #     For example, consider a situation where you make an initial request and t
-            #     he request times out. If you make the request again with the same request
+            #     For example, consider a situation where you make an initial request and
+            #     the request times out. If you make the request again with the same request
             #     ID, the server can check if original operation with the same request ID
             #     was received, and if so, will ignore the second request. This prevents
             #     clients from accidentally creating duplicate commitments.
@@ -1830,8 +1923,8 @@ module Google
             #     the request if it has already been completed. The server will guarantee
             #     that for at least 60 minutes since the first request.
             #
-            #     For example, consider a situation where you make an initial request and t
-            #     he request times out. If you make the request again with the same request
+            #     For example, consider a situation where you make an initial request and
+            #     the request times out. If you make the request again with the same request
             #     ID, the server can check if original operation with the same request ID
             #     was received, and if so, will ignore the second request. This prevents
             #     clients from accidentally creating duplicate commitments.
@@ -2139,8 +2232,8 @@ module Google
             #     the request if it has already been completed. The server will guarantee
             #     that for at least 60 minutes since the first request.
             #
-            #     For example, consider a situation where you make an initial request and t
-            #     he request times out. If you make the request again with the same request
+            #     For example, consider a situation where you make an initial request and
+            #     the request times out. If you make the request again with the same request
             #     ID, the server can check if original operation with the same request ID
             #     was received, and if so, will ignore the second request. This prevents
             #     clients from accidentally creating duplicate commitments.
@@ -2699,6 +2792,100 @@ module Google
             end
 
             ##
+            # Extend the migrating VM time to live.
+            #
+            # @overload extend_migration(request, options = nil)
+            #   Pass arguments to `extend_migration` via a request object, either of type
+            #   {::Google::Cloud::VMMigration::V1::ExtendMigrationRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::VMMigration::V1::ExtendMigrationRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload extend_migration(migrating_vm: nil)
+            #   Pass arguments to `extend_migration` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param migrating_vm [::String]
+            #     Required. The name of the MigratingVm.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Gapic::Operation]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Gapic::Operation]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/vm_migration/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::VMMigration::V1::VMMigration::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::VMMigration::V1::ExtendMigrationRequest.new
+            #
+            #   # Call the extend_migration method.
+            #   result = client.extend_migration request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "No response received."
+            #   end
+            #
+            def extend_migration request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::VMMigration::V1::ExtendMigrationRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.extend_migration.metadata.to_h
+
+              # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::VMMigration::V1::VERSION
+              metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.migrating_vm
+                header_params["migrating_vm"] = request.migrating_vm
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.extend_migration.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.extend_migration.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @vm_migration_stub.call_rpc :extend_migration, request, options: options do |response, operation|
+                response = ::Gapic::Operation.new response, @operations_client, options: options
+                yield response, operation if block_given?
+                throw :response, response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
             # Initiates a Clone of a specific migrating VM.
             #
             # @overload create_clone_job(request, options = nil)
@@ -2728,8 +2915,8 @@ module Google
             #     the request if it has already been completed. The server will guarantee
             #     that for at least 60 minutes since the first request.
             #
-            #     For example, consider a situation where you make an initial request and t
-            #     he request times out. If you make the request again with the same request
+            #     For example, consider a situation where you make an initial request and
+            #     the request times out. If you make the request again with the same request
             #     ID, the server can check if original operation with the same request ID
             #     was received, and if so, will ignore the second request. This prevents
             #     clients from accidentally creating duplicate commitments.
@@ -2905,7 +3092,8 @@ module Google
             end
 
             ##
-            # Lists CloneJobs of a given migrating VM.
+            # Lists the CloneJobs of a migrating VM. Only 25 most recent CloneJobs are
+            # listed.
             #
             # @overload list_clone_jobs(request, options = nil)
             #   Pass arguments to `list_clone_jobs` via a request object, either of type
@@ -3127,8 +3315,8 @@ module Google
             #     the request if it has already been completed. The server will guarantee
             #     that for at least 60 minutes since the first request.
             #
-            #     For example, consider a situation where you make an initial request and t
-            #     he request times out. If you make the request again with the same request
+            #     For example, consider a situation where you make an initial request and
+            #     the request times out. If you make the request again with the same request
             #     ID, the server can check if original operation with the same request ID
             #     was received, and if so, will ignore the second request. This prevents
             #     clients from accidentally creating duplicate commitments.
@@ -3304,7 +3492,8 @@ module Google
             end
 
             ##
-            # Lists CutoverJobs of a given migrating VM.
+            # Lists the CutoverJobs of a migrating VM. Only 25 most recent CutoverJobs
+            # are listed.
             #
             # @overload list_cutover_jobs(request, options = nil)
             #   Pass arguments to `list_cutover_jobs` via a request object, either of type
@@ -3715,8 +3904,8 @@ module Google
             #     the request if it has already been completed. The server will guarantee
             #     that for at least 60 minutes since the first request.
             #
-            #     For example, consider a situation where you make an initial request and t
-            #     he request times out. If you make the request again with the same request
+            #     For example, consider a situation where you make an initial request and
+            #     the request times out. If you make the request again with the same request
             #     ID, the server can check if original operation with the same request ID
             #     was received, and if so, will ignore the second request. This prevents
             #     clients from accidentally creating duplicate commitments.
@@ -3829,8 +4018,8 @@ module Google
             #     the request if it has already been completed. The server will guarantee
             #     that for at least 60 minutes since the first request.
             #
-            #     For example, consider a situation where you make an initial request and t
-            #     he request times out. If you make the request again with the same request
+            #     For example, consider a situation where you make an initial request and
+            #     the request times out. If you make the request again with the same request
             #     ID, the server can check if original operation with the same request ID
             #     was received, and if so, will ignore the second request. This prevents
             #     clients from accidentally creating duplicate commitments.
@@ -3937,8 +4126,8 @@ module Google
             #     the request if it has already been completed. The server will guarantee
             #     that for at least 60 minutes after the first request.
             #
-            #     For example, consider a situation where you make an initial request and t
-            #     he request times out. If you make the request again with the same request
+            #     For example, consider a situation where you make an initial request and
+            #     the request times out. If you make the request again with the same request
             #     ID, the server can check if original operation with the same request ID
             #     was received, and if so, will ignore the second request. This prevents
             #     clients from accidentally creating duplicate commitments.
@@ -4441,8 +4630,8 @@ module Google
             #     the request if it has already been completed. The server will guarantee
             #     that for at least 60 minutes since the first request.
             #
-            #     For example, consider a situation where you make an initial request and t
-            #     he request times out. If you make the request again with the same request
+            #     For example, consider a situation where you make an initial request and
+            #     the request times out. If you make the request again with the same request
             #     ID, the server can check if original operation with the same request ID
             #     was received, and if so, will ignore the second request. This prevents
             #     clients from accidentally creating duplicate commitments.
@@ -4558,8 +4747,8 @@ module Google
             #     the request if it has already been completed. The server will guarantee
             #     that for at least 60 minutes since the first request.
             #
-            #     For example, consider a situation where you make an initial request and t
-            #     he request times out. If you make the request again with the same request
+            #     For example, consider a situation where you make an initial request and
+            #     the request times out. If you make the request again with the same request
             #     ID, the server can check if original operation with the same request ID
             #     was received, and if so, will ignore the second request. This prevents
             #     clients from accidentally creating duplicate commitments.
@@ -4669,8 +4858,8 @@ module Google
             #     the request if it has already been completed. The server will guarantee
             #     that for at least 60 minutes after the first request.
             #
-            #     For example, consider a situation where you make an initial request and t
-            #     he request times out. If you make the request again with the same request
+            #     For example, consider a situation where you make an initial request and
+            #     the request times out. If you make the request again with the same request
             #     ID, the server can check if original operation with the same request ID
             #     was received, and if so, will ignore the second request. This prevents
             #     clients from accidentally creating duplicate commitments.
@@ -4943,6 +5132,1415 @@ module Google
             end
 
             ##
+            # Lists ImageImports in a given project.
+            #
+            # @overload list_image_imports(request, options = nil)
+            #   Pass arguments to `list_image_imports` via a request object, either of type
+            #   {::Google::Cloud::VMMigration::V1::ListImageImportsRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::VMMigration::V1::ListImageImportsRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload list_image_imports(parent: nil, page_size: nil, page_token: nil, filter: nil, order_by: nil)
+            #   Pass arguments to `list_image_imports` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param parent [::String]
+            #     Required. The parent, which owns this collection of targets.
+            #   @param page_size [::Integer]
+            #     Optional. The maximum number of targets to return. The service may return
+            #     fewer than this value. If unspecified, at most 500 targets will be
+            #     returned. The maximum value is 1000; values above 1000 will be coerced to
+            #     1000.
+            #   @param page_token [::String]
+            #     Optional. A page token, received from a previous `ListImageImports` call.
+            #     Provide this to retrieve the subsequent page.
+            #
+            #     When paginating, all other parameters provided to `ListImageImports` must
+            #     match the call that provided the page token.
+            #   @param filter [::String]
+            #     Optional. The filter request (according to <a
+            #     href="https://google.aip.dev/160" target="_blank">AIP-160</a>).
+            #   @param order_by [::String]
+            #     Optional. The order by fields for the result (according to <a
+            #     href="https://google.aip.dev/132#ordering" target="_blank">AIP-132</a>).
+            #     Currently ordering is only possible by "name" field.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Gapic::PagedEnumerable<::Google::Cloud::VMMigration::V1::ImageImport>]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Gapic::PagedEnumerable<::Google::Cloud::VMMigration::V1::ImageImport>]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/vm_migration/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::VMMigration::V1::VMMigration::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::VMMigration::V1::ListImageImportsRequest.new
+            #
+            #   # Call the list_image_imports method.
+            #   result = client.list_image_imports request
+            #
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
+            #     # Each element is of type ::Google::Cloud::VMMigration::V1::ImageImport.
+            #     p item
+            #   end
+            #
+            def list_image_imports request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::VMMigration::V1::ListImageImportsRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.list_image_imports.metadata.to_h
+
+              # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::VMMigration::V1::VERSION
+              metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.list_image_imports.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.list_image_imports.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @vm_migration_stub.call_rpc :list_image_imports, request, options: options do |response, operation|
+                response = ::Gapic::PagedEnumerable.new @vm_migration_stub, :list_image_imports, request, response, operation, options
+                yield response, operation if block_given?
+                throw :response, response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Gets details of a single ImageImport.
+            #
+            # @overload get_image_import(request, options = nil)
+            #   Pass arguments to `get_image_import` via a request object, either of type
+            #   {::Google::Cloud::VMMigration::V1::GetImageImportRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::VMMigration::V1::GetImageImportRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload get_image_import(name: nil)
+            #   Pass arguments to `get_image_import` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param name [::String]
+            #     Required. The ImageImport name.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Google::Cloud::VMMigration::V1::ImageImport]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Google::Cloud::VMMigration::V1::ImageImport]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/vm_migration/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::VMMigration::V1::VMMigration::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::VMMigration::V1::GetImageImportRequest.new
+            #
+            #   # Call the get_image_import method.
+            #   result = client.get_image_import request
+            #
+            #   # The returned object is of type Google::Cloud::VMMigration::V1::ImageImport.
+            #   p result
+            #
+            def get_image_import request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::VMMigration::V1::GetImageImportRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.get_image_import.metadata.to_h
+
+              # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::VMMigration::V1::VERSION
+              metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.get_image_import.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.get_image_import.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @vm_migration_stub.call_rpc :get_image_import, request, options: options do |response, operation|
+                yield response, operation if block_given?
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Creates a new ImageImport in a given project.
+            #
+            # @overload create_image_import(request, options = nil)
+            #   Pass arguments to `create_image_import` via a request object, either of type
+            #   {::Google::Cloud::VMMigration::V1::CreateImageImportRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::VMMigration::V1::CreateImageImportRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload create_image_import(parent: nil, image_import_id: nil, image_import: nil, request_id: nil)
+            #   Pass arguments to `create_image_import` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param parent [::String]
+            #     Required. The ImageImport's parent.
+            #   @param image_import_id [::String]
+            #     Required. The image import identifier.
+            #     This value maximum length is 63 characters, and valid characters are
+            #     /[a-z][0-9]-/. It must start with an english letter and must not end with a
+            #     hyphen.
+            #   @param image_import [::Google::Cloud::VMMigration::V1::ImageImport, ::Hash]
+            #     Required. The create request body.
+            #   @param request_id [::String]
+            #     Optional. A request ID to identify requests. Specify a unique request ID
+            #     so that if you must retry your request, the server will know to ignore
+            #     the request if it has already been completed. The server will guarantee
+            #     that for at least 60 minutes since the first request.
+            #
+            #     For example, consider a situation where you make an initial request and
+            #     the request times out. If you make the request again with the same request
+            #     ID, the server can check if original operation with the same request ID
+            #     was received, and if so, will ignore the second request. This prevents
+            #     clients from accidentally creating duplicate commitments.
+            #
+            #     The request ID must be a valid UUID with the exception that zero UUID is
+            #     not supported (00000000-0000-0000-0000-000000000000).
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Gapic::Operation]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Gapic::Operation]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/vm_migration/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::VMMigration::V1::VMMigration::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::VMMigration::V1::CreateImageImportRequest.new
+            #
+            #   # Call the create_image_import method.
+            #   result = client.create_image_import request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "No response received."
+            #   end
+            #
+            def create_image_import request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::VMMigration::V1::CreateImageImportRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.create_image_import.metadata.to_h
+
+              # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::VMMigration::V1::VERSION
+              metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.create_image_import.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.create_image_import.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @vm_migration_stub.call_rpc :create_image_import, request, options: options do |response, operation|
+                response = ::Gapic::Operation.new response, @operations_client, options: options
+                yield response, operation if block_given?
+                throw :response, response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Deletes a single ImageImport.
+            #
+            # @overload delete_image_import(request, options = nil)
+            #   Pass arguments to `delete_image_import` via a request object, either of type
+            #   {::Google::Cloud::VMMigration::V1::DeleteImageImportRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::VMMigration::V1::DeleteImageImportRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload delete_image_import(name: nil, request_id: nil)
+            #   Pass arguments to `delete_image_import` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param name [::String]
+            #     Required. The ImageImport name.
+            #   @param request_id [::String]
+            #     Optional. A request ID to identify requests. Specify a unique request ID
+            #     so that if you must retry your request, the server will know to ignore
+            #     the request if it has already been completed. The server will guarantee
+            #     that for at least 60 minutes after the first request.
+            #
+            #     For example, consider a situation where you make an initial request and t
+            #     he request times out. If you make the request again with the same request
+            #     ID, the server can check if original operation with the same request ID
+            #     was received, and if so, will ignore the second request. This prevents
+            #     clients from accidentally creating duplicate commitments.
+            #
+            #     The request ID must be a valid UUID with the exception that zero UUID is
+            #     not supported (00000000-0000-0000-0000-000000000000).
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Gapic::Operation]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Gapic::Operation]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/vm_migration/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::VMMigration::V1::VMMigration::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::VMMigration::V1::DeleteImageImportRequest.new
+            #
+            #   # Call the delete_image_import method.
+            #   result = client.delete_image_import request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "No response received."
+            #   end
+            #
+            def delete_image_import request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::VMMigration::V1::DeleteImageImportRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.delete_image_import.metadata.to_h
+
+              # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::VMMigration::V1::VERSION
+              metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.delete_image_import.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.delete_image_import.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @vm_migration_stub.call_rpc :delete_image_import, request, options: options do |response, operation|
+                response = ::Gapic::Operation.new response, @operations_client, options: options
+                yield response, operation if block_given?
+                throw :response, response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Lists ImageImportJobs in a given project.
+            #
+            # @overload list_image_import_jobs(request, options = nil)
+            #   Pass arguments to `list_image_import_jobs` via a request object, either of type
+            #   {::Google::Cloud::VMMigration::V1::ListImageImportJobsRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::VMMigration::V1::ListImageImportJobsRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload list_image_import_jobs(parent: nil, page_size: nil, page_token: nil, filter: nil, order_by: nil)
+            #   Pass arguments to `list_image_import_jobs` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param parent [::String]
+            #     Required. The parent, which owns this collection of targets.
+            #   @param page_size [::Integer]
+            #     Optional. The maximum number of targets to return. The service may return
+            #     fewer than this value. If unspecified, at most 500 targets will be
+            #     returned. The maximum value is 1000; values above 1000 will be coerced to
+            #     1000.
+            #   @param page_token [::String]
+            #     Optional. A page token, received from a previous `ListImageImportJobs`
+            #     call. Provide this to retrieve the subsequent page.
+            #
+            #     When paginating, all other parameters provided to `ListImageImportJobs`
+            #     must match the call that provided the page token.
+            #   @param filter [::String]
+            #     Optional. The filter request (according to <a
+            #     href="https://google.aip.dev/160" target="_blank">AIP-160</a>).
+            #   @param order_by [::String]
+            #     Optional. The order by fields for the result (according to <a
+            #     href="https://google.aip.dev/132#ordering" target="_blank">AIP-132</a>).
+            #     Currently ordering is only possible by "name" field.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Gapic::PagedEnumerable<::Google::Cloud::VMMigration::V1::ImageImportJob>]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Gapic::PagedEnumerable<::Google::Cloud::VMMigration::V1::ImageImportJob>]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/vm_migration/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::VMMigration::V1::VMMigration::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::VMMigration::V1::ListImageImportJobsRequest.new
+            #
+            #   # Call the list_image_import_jobs method.
+            #   result = client.list_image_import_jobs request
+            #
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
+            #     # Each element is of type ::Google::Cloud::VMMigration::V1::ImageImportJob.
+            #     p item
+            #   end
+            #
+            def list_image_import_jobs request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::VMMigration::V1::ListImageImportJobsRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.list_image_import_jobs.metadata.to_h
+
+              # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::VMMigration::V1::VERSION
+              metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.list_image_import_jobs.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.list_image_import_jobs.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @vm_migration_stub.call_rpc :list_image_import_jobs, request, options: options do |response, operation|
+                response = ::Gapic::PagedEnumerable.new @vm_migration_stub, :list_image_import_jobs, request, response, operation, options
+                yield response, operation if block_given?
+                throw :response, response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Gets details of a single ImageImportJob.
+            #
+            # @overload get_image_import_job(request, options = nil)
+            #   Pass arguments to `get_image_import_job` via a request object, either of type
+            #   {::Google::Cloud::VMMigration::V1::GetImageImportJobRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::VMMigration::V1::GetImageImportJobRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload get_image_import_job(name: nil)
+            #   Pass arguments to `get_image_import_job` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param name [::String]
+            #     Required. The ImageImportJob name.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Google::Cloud::VMMigration::V1::ImageImportJob]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Google::Cloud::VMMigration::V1::ImageImportJob]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/vm_migration/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::VMMigration::V1::VMMigration::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::VMMigration::V1::GetImageImportJobRequest.new
+            #
+            #   # Call the get_image_import_job method.
+            #   result = client.get_image_import_job request
+            #
+            #   # The returned object is of type Google::Cloud::VMMigration::V1::ImageImportJob.
+            #   p result
+            #
+            def get_image_import_job request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::VMMigration::V1::GetImageImportJobRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.get_image_import_job.metadata.to_h
+
+              # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::VMMigration::V1::VERSION
+              metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.get_image_import_job.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.get_image_import_job.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @vm_migration_stub.call_rpc :get_image_import_job, request, options: options do |response, operation|
+                yield response, operation if block_given?
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Initiates the cancellation of a running clone job.
+            #
+            # @overload cancel_image_import_job(request, options = nil)
+            #   Pass arguments to `cancel_image_import_job` via a request object, either of type
+            #   {::Google::Cloud::VMMigration::V1::CancelImageImportJobRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::VMMigration::V1::CancelImageImportJobRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload cancel_image_import_job(name: nil)
+            #   Pass arguments to `cancel_image_import_job` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param name [::String]
+            #     Required. The image import job id.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Gapic::Operation]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Gapic::Operation]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/vm_migration/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::VMMigration::V1::VMMigration::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::VMMigration::V1::CancelImageImportJobRequest.new
+            #
+            #   # Call the cancel_image_import_job method.
+            #   result = client.cancel_image_import_job request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "No response received."
+            #   end
+            #
+            def cancel_image_import_job request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::VMMigration::V1::CancelImageImportJobRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.cancel_image_import_job.metadata.to_h
+
+              # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::VMMigration::V1::VERSION
+              metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.cancel_image_import_job.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.cancel_image_import_job.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @vm_migration_stub.call_rpc :cancel_image_import_job, request, options: options do |response, operation|
+                response = ::Gapic::Operation.new response, @operations_client, options: options
+                yield response, operation if block_given?
+                throw :response, response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Creates a new disk migration job in a given Source.
+            #
+            # @overload create_disk_migration_job(request, options = nil)
+            #   Pass arguments to `create_disk_migration_job` via a request object, either of type
+            #   {::Google::Cloud::VMMigration::V1::CreateDiskMigrationJobRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::VMMigration::V1::CreateDiskMigrationJobRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload create_disk_migration_job(parent: nil, disk_migration_job_id: nil, disk_migration_job: nil, request_id: nil)
+            #   Pass arguments to `create_disk_migration_job` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param parent [::String]
+            #     Required. The DiskMigrationJob's parent.
+            #   @param disk_migration_job_id [::String]
+            #     Required. The DiskMigrationJob identifier.
+            #     The maximum length of this value is 63 characters.
+            #     Valid characters are lower case Latin letters, digits and hyphen.
+            #     It must start with a Latin letter and must not end with a hyphen.
+            #   @param disk_migration_job [::Google::Cloud::VMMigration::V1::DiskMigrationJob, ::Hash]
+            #     Required. The create request body.
+            #   @param request_id [::String]
+            #     Optional. A request ID to identify requests. Specify a unique request ID
+            #     so that if you must retry your request, the server will know to ignore
+            #     the request if it has already been completed. The server will guarantee
+            #     that for at least 60 minutes since the first request.
+            #
+            #     For example, consider a situation where you make an initial request and
+            #     the request timed out. If you make the request again with the same request
+            #     ID, the server can check if original operation with the same request ID
+            #     was received, and if so, will ignore the second request. This prevents
+            #     clients from accidentally creating duplicate commitments.
+            #
+            #     The request ID must be a valid UUID with the exception that zero UUID is
+            #     not supported (00000000-0000-0000-0000-000000000000).
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Gapic::Operation]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Gapic::Operation]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/vm_migration/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::VMMigration::V1::VMMigration::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::VMMigration::V1::CreateDiskMigrationJobRequest.new
+            #
+            #   # Call the create_disk_migration_job method.
+            #   result = client.create_disk_migration_job request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "No response received."
+            #   end
+            #
+            def create_disk_migration_job request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::VMMigration::V1::CreateDiskMigrationJobRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.create_disk_migration_job.metadata.to_h
+
+              # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::VMMigration::V1::VERSION
+              metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.create_disk_migration_job.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.create_disk_migration_job.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @vm_migration_stub.call_rpc :create_disk_migration_job, request, options: options do |response, operation|
+                response = ::Gapic::Operation.new response, @operations_client, options: options
+                yield response, operation if block_given?
+                throw :response, response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Lists DiskMigrationJobs in a given Source.
+            #
+            # @overload list_disk_migration_jobs(request, options = nil)
+            #   Pass arguments to `list_disk_migration_jobs` via a request object, either of type
+            #   {::Google::Cloud::VMMigration::V1::ListDiskMigrationJobsRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::VMMigration::V1::ListDiskMigrationJobsRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload list_disk_migration_jobs(parent: nil, page_size: nil, page_token: nil, filter: nil, order_by: nil)
+            #   Pass arguments to `list_disk_migration_jobs` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param parent [::String]
+            #     Required. The parent, which owns this collection of DiskMigrationJobs.
+            #   @param page_size [::Integer]
+            #     Optional. The maximum number of disk migration jobs to return. The service
+            #     may return fewer than this value. If unspecified, at most 500
+            #     disk migration jobs will be returned.
+            #     The maximum value is 1000; values above 1000 will be coerced to 1000.
+            #   @param page_token [::String]
+            #     Optional. A page token, received from a previous `ListDiskMigrationJobs`
+            #     call. Provide this to retrieve the subsequent page.
+            #
+            #     When paginating, all parameters provided to `ListDiskMigrationJobs`
+            #     except `page_size` must match the call that provided the page token.
+            #   @param filter [::String]
+            #     Optional. The filter request (according to <a
+            #     href="https://google.aip.dev/160" target="_blank">AIP-160</a>).
+            #   @param order_by [::String]
+            #     Optional. Ordering of the result list.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Gapic::PagedEnumerable<::Google::Cloud::VMMigration::V1::DiskMigrationJob>]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Gapic::PagedEnumerable<::Google::Cloud::VMMigration::V1::DiskMigrationJob>]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/vm_migration/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::VMMigration::V1::VMMigration::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::VMMigration::V1::ListDiskMigrationJobsRequest.new
+            #
+            #   # Call the list_disk_migration_jobs method.
+            #   result = client.list_disk_migration_jobs request
+            #
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
+            #     # Each element is of type ::Google::Cloud::VMMigration::V1::DiskMigrationJob.
+            #     p item
+            #   end
+            #
+            def list_disk_migration_jobs request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::VMMigration::V1::ListDiskMigrationJobsRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.list_disk_migration_jobs.metadata.to_h
+
+              # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::VMMigration::V1::VERSION
+              metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.list_disk_migration_jobs.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.list_disk_migration_jobs.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @vm_migration_stub.call_rpc :list_disk_migration_jobs, request, options: options do |response, operation|
+                response = ::Gapic::PagedEnumerable.new @vm_migration_stub, :list_disk_migration_jobs, request, response, operation, options
+                yield response, operation if block_given?
+                throw :response, response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Gets details of a single DiskMigrationJob.
+            #
+            # @overload get_disk_migration_job(request, options = nil)
+            #   Pass arguments to `get_disk_migration_job` via a request object, either of type
+            #   {::Google::Cloud::VMMigration::V1::GetDiskMigrationJobRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::VMMigration::V1::GetDiskMigrationJobRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload get_disk_migration_job(name: nil)
+            #   Pass arguments to `get_disk_migration_job` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param name [::String]
+            #     Required. The name of the DiskMigrationJob.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Google::Cloud::VMMigration::V1::DiskMigrationJob]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Google::Cloud::VMMigration::V1::DiskMigrationJob]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/vm_migration/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::VMMigration::V1::VMMigration::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::VMMigration::V1::GetDiskMigrationJobRequest.new
+            #
+            #   # Call the get_disk_migration_job method.
+            #   result = client.get_disk_migration_job request
+            #
+            #   # The returned object is of type Google::Cloud::VMMigration::V1::DiskMigrationJob.
+            #   p result
+            #
+            def get_disk_migration_job request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::VMMigration::V1::GetDiskMigrationJobRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.get_disk_migration_job.metadata.to_h
+
+              # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::VMMigration::V1::VERSION
+              metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.get_disk_migration_job.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.get_disk_migration_job.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @vm_migration_stub.call_rpc :get_disk_migration_job, request, options: options do |response, operation|
+                yield response, operation if block_given?
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Updates the parameters of a single DiskMigrationJob.
+            #
+            # @overload update_disk_migration_job(request, options = nil)
+            #   Pass arguments to `update_disk_migration_job` via a request object, either of type
+            #   {::Google::Cloud::VMMigration::V1::UpdateDiskMigrationJobRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::VMMigration::V1::UpdateDiskMigrationJobRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload update_disk_migration_job(update_mask: nil, disk_migration_job: nil, request_id: nil)
+            #   Pass arguments to `update_disk_migration_job` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
+            #     Optional. Field mask is used to specify the fields to be overwritten in the
+            #     DiskMigrationJob resource by the update.
+            #     The fields specified in the update_mask are relative to the resource, not
+            #     the full request. A field will be overwritten if it is in the mask. If the
+            #     user does not provide a mask, then a mask equivalent to all fields that are
+            #     populated (have a non-empty value), will be implied.
+            #   @param disk_migration_job [::Google::Cloud::VMMigration::V1::DiskMigrationJob, ::Hash]
+            #     Required. The update request body.
+            #   @param request_id [::String]
+            #     Optional. A request ID to identify requests. Specify a unique request ID
+            #     so that if you must retry your request, the server will know to ignore
+            #     the request if it has already been completed. The server will guarantee
+            #     that for at least 60 minutes since the first request.
+            #
+            #     For example, consider a situation where you make an initial request and
+            #     the request timed out. If you make the request again with the same request
+            #     ID, the server can check if original operation with the same request ID
+            #     was received, and if so, will ignore the second request. This prevents
+            #     clients from accidentally creating duplicate commitments.
+            #
+            #     The request ID must be a valid UUID with the exception that zero UUID is
+            #     not supported (00000000-0000-0000-0000-000000000000).
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Gapic::Operation]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Gapic::Operation]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/vm_migration/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::VMMigration::V1::VMMigration::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::VMMigration::V1::UpdateDiskMigrationJobRequest.new
+            #
+            #   # Call the update_disk_migration_job method.
+            #   result = client.update_disk_migration_job request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "No response received."
+            #   end
+            #
+            def update_disk_migration_job request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::VMMigration::V1::UpdateDiskMigrationJobRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.update_disk_migration_job.metadata.to_h
+
+              # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::VMMigration::V1::VERSION
+              metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.disk_migration_job&.name
+                header_params["disk_migration_job.name"] = request.disk_migration_job.name
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.update_disk_migration_job.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.update_disk_migration_job.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @vm_migration_stub.call_rpc :update_disk_migration_job, request, options: options do |response, operation|
+                response = ::Gapic::Operation.new response, @operations_client, options: options
+                yield response, operation if block_given?
+                throw :response, response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Deletes a single DiskMigrationJob.
+            #
+            # @overload delete_disk_migration_job(request, options = nil)
+            #   Pass arguments to `delete_disk_migration_job` via a request object, either of type
+            #   {::Google::Cloud::VMMigration::V1::DeleteDiskMigrationJobRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::VMMigration::V1::DeleteDiskMigrationJobRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload delete_disk_migration_job(name: nil)
+            #   Pass arguments to `delete_disk_migration_job` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param name [::String]
+            #     Required. The name of the DiskMigrationJob.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Gapic::Operation]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Gapic::Operation]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/vm_migration/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::VMMigration::V1::VMMigration::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::VMMigration::V1::DeleteDiskMigrationJobRequest.new
+            #
+            #   # Call the delete_disk_migration_job method.
+            #   result = client.delete_disk_migration_job request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "No response received."
+            #   end
+            #
+            def delete_disk_migration_job request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::VMMigration::V1::DeleteDiskMigrationJobRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.delete_disk_migration_job.metadata.to_h
+
+              # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::VMMigration::V1::VERSION
+              metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.delete_disk_migration_job.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.delete_disk_migration_job.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @vm_migration_stub.call_rpc :delete_disk_migration_job, request, options: options do |response, operation|
+                response = ::Gapic::Operation.new response, @operations_client, options: options
+                yield response, operation if block_given?
+                throw :response, response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Runs the disk migration job.
+            #
+            # @overload run_disk_migration_job(request, options = nil)
+            #   Pass arguments to `run_disk_migration_job` via a request object, either of type
+            #   {::Google::Cloud::VMMigration::V1::RunDiskMigrationJobRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::VMMigration::V1::RunDiskMigrationJobRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload run_disk_migration_job(name: nil)
+            #   Pass arguments to `run_disk_migration_job` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param name [::String]
+            #     Required. The name of the DiskMigrationJob.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Gapic::Operation]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Gapic::Operation]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/vm_migration/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::VMMigration::V1::VMMigration::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::VMMigration::V1::RunDiskMigrationJobRequest.new
+            #
+            #   # Call the run_disk_migration_job method.
+            #   result = client.run_disk_migration_job request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "No response received."
+            #   end
+            #
+            def run_disk_migration_job request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::VMMigration::V1::RunDiskMigrationJobRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.run_disk_migration_job.metadata.to_h
+
+              # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::VMMigration::V1::VERSION
+              metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.run_disk_migration_job.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.run_disk_migration_job.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @vm_migration_stub.call_rpc :run_disk_migration_job, request, options: options do |response, operation|
+                response = ::Gapic::Operation.new response, @operations_client, options: options
+                yield response, operation if block_given?
+                throw :response, response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Cancels the disk migration job.
+            #
+            # @overload cancel_disk_migration_job(request, options = nil)
+            #   Pass arguments to `cancel_disk_migration_job` via a request object, either of type
+            #   {::Google::Cloud::VMMigration::V1::CancelDiskMigrationJobRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::VMMigration::V1::CancelDiskMigrationJobRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload cancel_disk_migration_job(name: nil)
+            #   Pass arguments to `cancel_disk_migration_job` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param name [::String]
+            #     Required. The name of the DiskMigrationJob.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Gapic::Operation]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Gapic::Operation]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/vm_migration/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::VMMigration::V1::VMMigration::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::VMMigration::V1::CancelDiskMigrationJobRequest.new
+            #
+            #   # Call the cancel_disk_migration_job method.
+            #   result = client.cancel_disk_migration_job request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "No response received."
+            #   end
+            #
+            def cancel_disk_migration_job request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::VMMigration::V1::CancelDiskMigrationJobRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.cancel_disk_migration_job.metadata.to_h
+
+              # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::VMMigration::V1::VERSION
+              metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.cancel_disk_migration_job.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.cancel_disk_migration_job.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @vm_migration_stub.call_rpc :cancel_disk_migration_job, request, options: options do |response, operation|
+                response = ::Gapic::Operation.new response, @operations_client, options: options
+                yield response, operation if block_given?
+                throw :response, response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
             # Configuration class for the VmMigration API.
             #
             # This class represents the configuration for VmMigration,
@@ -5139,6 +6737,11 @@ module Google
                 #
                 attr_reader :fetch_inventory
                 ##
+                # RPC-specific configuration for `fetch_storage_inventory`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :fetch_storage_inventory
+                ##
                 # RPC-specific configuration for `list_utilization_reports`
                 # @return [::Gapic::Config::Method]
                 #
@@ -5228,6 +6831,11 @@ module Google
                 # @return [::Gapic::Config::Method]
                 #
                 attr_reader :finalize_migration
+                ##
+                # RPC-specific configuration for `extend_migration`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :extend_migration
                 ##
                 # RPC-specific configuration for `create_clone_job`
                 # @return [::Gapic::Config::Method]
@@ -5338,6 +6946,76 @@ module Google
                 # @return [::Gapic::Config::Method]
                 #
                 attr_reader :get_replication_cycle
+                ##
+                # RPC-specific configuration for `list_image_imports`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :list_image_imports
+                ##
+                # RPC-specific configuration for `get_image_import`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :get_image_import
+                ##
+                # RPC-specific configuration for `create_image_import`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :create_image_import
+                ##
+                # RPC-specific configuration for `delete_image_import`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :delete_image_import
+                ##
+                # RPC-specific configuration for `list_image_import_jobs`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :list_image_import_jobs
+                ##
+                # RPC-specific configuration for `get_image_import_job`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :get_image_import_job
+                ##
+                # RPC-specific configuration for `cancel_image_import_job`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :cancel_image_import_job
+                ##
+                # RPC-specific configuration for `create_disk_migration_job`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :create_disk_migration_job
+                ##
+                # RPC-specific configuration for `list_disk_migration_jobs`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :list_disk_migration_jobs
+                ##
+                # RPC-specific configuration for `get_disk_migration_job`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :get_disk_migration_job
+                ##
+                # RPC-specific configuration for `update_disk_migration_job`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :update_disk_migration_job
+                ##
+                # RPC-specific configuration for `delete_disk_migration_job`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :delete_disk_migration_job
+                ##
+                # RPC-specific configuration for `run_disk_migration_job`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :run_disk_migration_job
+                ##
+                # RPC-specific configuration for `cancel_disk_migration_job`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :cancel_disk_migration_job
 
                 # @private
                 def initialize parent_rpcs = nil
@@ -5353,6 +7031,8 @@ module Google
                   @delete_source = ::Gapic::Config::Method.new delete_source_config
                   fetch_inventory_config = parent_rpcs.fetch_inventory if parent_rpcs.respond_to? :fetch_inventory
                   @fetch_inventory = ::Gapic::Config::Method.new fetch_inventory_config
+                  fetch_storage_inventory_config = parent_rpcs.fetch_storage_inventory if parent_rpcs.respond_to? :fetch_storage_inventory
+                  @fetch_storage_inventory = ::Gapic::Config::Method.new fetch_storage_inventory_config
                   list_utilization_reports_config = parent_rpcs.list_utilization_reports if parent_rpcs.respond_to? :list_utilization_reports
                   @list_utilization_reports = ::Gapic::Config::Method.new list_utilization_reports_config
                   get_utilization_report_config = parent_rpcs.get_utilization_report if parent_rpcs.respond_to? :get_utilization_report
@@ -5389,6 +7069,8 @@ module Google
                   @pause_migration = ::Gapic::Config::Method.new pause_migration_config
                   finalize_migration_config = parent_rpcs.finalize_migration if parent_rpcs.respond_to? :finalize_migration
                   @finalize_migration = ::Gapic::Config::Method.new finalize_migration_config
+                  extend_migration_config = parent_rpcs.extend_migration if parent_rpcs.respond_to? :extend_migration
+                  @extend_migration = ::Gapic::Config::Method.new extend_migration_config
                   create_clone_job_config = parent_rpcs.create_clone_job if parent_rpcs.respond_to? :create_clone_job
                   @create_clone_job = ::Gapic::Config::Method.new create_clone_job_config
                   cancel_clone_job_config = parent_rpcs.cancel_clone_job if parent_rpcs.respond_to? :cancel_clone_job
@@ -5433,6 +7115,34 @@ module Google
                   @list_replication_cycles = ::Gapic::Config::Method.new list_replication_cycles_config
                   get_replication_cycle_config = parent_rpcs.get_replication_cycle if parent_rpcs.respond_to? :get_replication_cycle
                   @get_replication_cycle = ::Gapic::Config::Method.new get_replication_cycle_config
+                  list_image_imports_config = parent_rpcs.list_image_imports if parent_rpcs.respond_to? :list_image_imports
+                  @list_image_imports = ::Gapic::Config::Method.new list_image_imports_config
+                  get_image_import_config = parent_rpcs.get_image_import if parent_rpcs.respond_to? :get_image_import
+                  @get_image_import = ::Gapic::Config::Method.new get_image_import_config
+                  create_image_import_config = parent_rpcs.create_image_import if parent_rpcs.respond_to? :create_image_import
+                  @create_image_import = ::Gapic::Config::Method.new create_image_import_config
+                  delete_image_import_config = parent_rpcs.delete_image_import if parent_rpcs.respond_to? :delete_image_import
+                  @delete_image_import = ::Gapic::Config::Method.new delete_image_import_config
+                  list_image_import_jobs_config = parent_rpcs.list_image_import_jobs if parent_rpcs.respond_to? :list_image_import_jobs
+                  @list_image_import_jobs = ::Gapic::Config::Method.new list_image_import_jobs_config
+                  get_image_import_job_config = parent_rpcs.get_image_import_job if parent_rpcs.respond_to? :get_image_import_job
+                  @get_image_import_job = ::Gapic::Config::Method.new get_image_import_job_config
+                  cancel_image_import_job_config = parent_rpcs.cancel_image_import_job if parent_rpcs.respond_to? :cancel_image_import_job
+                  @cancel_image_import_job = ::Gapic::Config::Method.new cancel_image_import_job_config
+                  create_disk_migration_job_config = parent_rpcs.create_disk_migration_job if parent_rpcs.respond_to? :create_disk_migration_job
+                  @create_disk_migration_job = ::Gapic::Config::Method.new create_disk_migration_job_config
+                  list_disk_migration_jobs_config = parent_rpcs.list_disk_migration_jobs if parent_rpcs.respond_to? :list_disk_migration_jobs
+                  @list_disk_migration_jobs = ::Gapic::Config::Method.new list_disk_migration_jobs_config
+                  get_disk_migration_job_config = parent_rpcs.get_disk_migration_job if parent_rpcs.respond_to? :get_disk_migration_job
+                  @get_disk_migration_job = ::Gapic::Config::Method.new get_disk_migration_job_config
+                  update_disk_migration_job_config = parent_rpcs.update_disk_migration_job if parent_rpcs.respond_to? :update_disk_migration_job
+                  @update_disk_migration_job = ::Gapic::Config::Method.new update_disk_migration_job_config
+                  delete_disk_migration_job_config = parent_rpcs.delete_disk_migration_job if parent_rpcs.respond_to? :delete_disk_migration_job
+                  @delete_disk_migration_job = ::Gapic::Config::Method.new delete_disk_migration_job_config
+                  run_disk_migration_job_config = parent_rpcs.run_disk_migration_job if parent_rpcs.respond_to? :run_disk_migration_job
+                  @run_disk_migration_job = ::Gapic::Config::Method.new run_disk_migration_job_config
+                  cancel_disk_migration_job_config = parent_rpcs.cancel_disk_migration_job if parent_rpcs.respond_to? :cancel_disk_migration_job
+                  @cancel_disk_migration_job = ::Gapic::Config::Method.new cancel_disk_migration_job_config
 
                   yield self if block_given?
                 end

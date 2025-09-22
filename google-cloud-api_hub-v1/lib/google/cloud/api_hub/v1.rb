@@ -18,6 +18,9 @@
 
 require "google/cloud/api_hub/v1/api_hub"
 require "google/cloud/api_hub/v1/api_hub_dependencies"
+require "google/cloud/api_hub/v1/api_hub_collect"
+require "google/cloud/api_hub/v1/api_hub_curate"
+require "google/cloud/api_hub/v1/api_hub_discovery"
 require "google/cloud/api_hub/v1/host_project_registration_service"
 require "google/cloud/api_hub/v1/linting_service"
 require "google/cloud/api_hub/v1/api_hub_plugin"

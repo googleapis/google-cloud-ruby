@@ -34,6 +34,14 @@ In order to use this library, you first need to go through the following steps:
 1. [Enable the API.](https://console.cloud.google.com/apis/library/visionai.googleapis.com)
 1. [Set up authentication.](AUTHENTICATION.md)
 
+```ruby
+require "google/cloud/vision_ai"
+
+client = Google::Cloud::VisionAI.live_video_analytics
+request = ::Google::Cloud::VisionAI::V1::ListPublicOperatorsRequest.new # (request fields as keyword arguments...)
+response = client.list_public_operators request
+```
+
 ## Debug Logging
 
 This library comes with opt-in Debug Logging that can help you troubleshoot

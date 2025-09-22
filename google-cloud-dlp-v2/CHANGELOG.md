@@ -1,5 +1,20 @@
 # Release History
 
+### 1.14.0 (2025-09-11)
+
+#### Features
+
+* update gapic-common dependency for generated libraries to 1.2 which requires google-protobuf v4.26+ ([#31015](https://github.com/googleapis/google-cloud-ruby/issues/31015)) 
+
+### 1.13.0 (2025-09-10)
+
+#### Features
+
+* add LocationSupport, Domain, DocumentFallbackLocation ([#30960](https://github.com/googleapis/google-cloud-ruby/issues/30960)) 
+#### Documentation
+
+* minor doc revision 
+
 ### 1.12.1 (2025-07-15)
 
 #### Documentation

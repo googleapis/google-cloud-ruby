@@ -29,7 +29,7 @@ module Google
           ##
           # Client for the CmekService service.
           #
-          # Dataplex Cmek Service
+          # Dataplex Universal Catalog Customer Managed Encryption Keys (CMEK) Service
           #
           class Client
             # @private

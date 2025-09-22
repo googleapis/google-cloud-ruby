@@ -16,7 +16,7 @@
 require "google/cloud/storage/control"
 
 def create_anywhere_cache bucket_name:, zone:
-  # The ID of your GCS bucket
+  # The Name of your GCS bucket
   # bucket_name = "your-unique-bucket-name"
 
   # Zone where you want to create cache
@@ -41,22 +41,21 @@ def create_anywhere_cache bucket_name:, zone:
   # The cache is created in the specified bucket.
   begin
     operation = storage_control_client.create_anywhere_cache request
-    if operation.instance_of? Gapic::Operation
-      puts "AnywhereCache operation created - #{operation.name}"
-      get_request = Google::Cloud::Storage::Control::V2::GetAnywhereCacheRequest.new(
-        name: name
-      )
+    puts "AnywhereCache operation created - #{operation.name}"
+    get_request = Google::Cloud::Storage::Control::V2::GetAnywhereCacheRequest.new(
+      name: name
+    )
+    result = storage_control_client.get_anywhere_cache get_request
+    min_delay = 180 # 3 minutes
+    max_delay = 900 # 15 minutes
+    while result.state != "running"
+      puts "Cache not running yet, current state is #{result.state}. Retrying in #{min_delay} seconds."
+      sleep min_delay
+      min_delay = [min_delay * 2, max_delay].min # Exponential backoff with a max delay
       result = storage_control_client.get_anywhere_cache get_request
-      until result.state == "running"
-        sleep 1800 # Wait for 1/2 hour before checking again
-        result = storage_control_client.get_anywhere_cache get_request
-        puts "AnywhereCache status check retried"
-      end
-      puts "AnywhereCache created - #{result.name}"
-    else
-      puts "AnywhereCache create operation failed"
     end
-  rescue StandardError => e
+    puts "AnywhereCache created - #{result.name}"
+  rescue Google::Cloud::Error => e
     puts "Error creating AnywhereCache: #{e.message}"
   end
 end

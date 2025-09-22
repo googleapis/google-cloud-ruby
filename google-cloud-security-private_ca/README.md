@@ -34,6 +34,14 @@ In order to use this library, you first need to go through the following steps:
 1. [Enable the API.](https://console.cloud.google.com/apis/library/privateca.googleapis.com)
 1. [Set up authentication.](AUTHENTICATION.md)
 
+```ruby
+require "google/cloud/security/private_ca"
+
+client = Google::Cloud::Security::PrivateCA.certificate_authority_service
+request = ::Google::Cloud::Security::PrivateCA::V1::CreateCertificateRequest.new # (request fields as keyword arguments...)
+response = client.create_certificate request
+```
+
 ## Debug Logging
 
 This library comes with opt-in Debug Logging that can help you troubleshoot

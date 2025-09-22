@@ -1,5 +1,20 @@
 # Release History
 
+### 0.17.0 (2025-09-12)
+
+#### Features
+
+* add `k8s_git_version` field ([#31318](https://github.com/googleapis/google-cloud-ruby/issues/31318)) 
+#### Documentation
+
+* correct comment for `k8s_version` field 
+
+### 0.16.0 (2025-09-11)
+
+#### Features
+
+* update gapic-common dependency for generated libraries to 1.2 which requires google-protobuf v4.26+ ([#31015](https://github.com/googleapis/google-cloud-ruby/issues/31015)) 
+
 ### 0.15.0 (2025-05-12)
 
 #### Features

@@ -53,6 +53,18 @@ class ::Google::Cloud::VMMigration::V1::VMMigration::ClientPathsTest < Minitest:
     end
   end
 
+  def test_crypto_key_path
+    grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
+      client = ::Google::Cloud::VMMigration::V1::VMMigration::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      path = client.crypto_key_path project: "value0", location: "value1", key_ring: "value2", crypto_key: "value3"
+      assert_equal "projects/value0/locations/value1/keyRings/value2/cryptoKeys/value3", path
+    end
+  end
+
   def test_cutover_job_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
     ::Gapic::ServiceStub.stub :new, DummyStub.new do
@@ -77,6 +89,18 @@ class ::Google::Cloud::VMMigration::V1::VMMigration::ClientPathsTest < Minitest:
     end
   end
 
+  def test_disk_migration_job_path
+    grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
+      client = ::Google::Cloud::VMMigration::V1::VMMigration::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      path = client.disk_migration_job_path project: "value0", location: "value1", source: "value2", disk_migration_job: "value3"
+      assert_equal "projects/value0/locations/value1/sources/value2/diskMigrationJobs/value3", path
+    end
+  end
+
   def test_group_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
     ::Gapic::ServiceStub.stub :new, DummyStub.new do
@@ -86,6 +110,42 @@ class ::Google::Cloud::VMMigration::V1::VMMigration::ClientPathsTest < Minitest:
 
       path = client.group_path project: "value0", location: "value1", group: "value2"
       assert_equal "projects/value0/locations/value1/groups/value2", path
+    end
+  end
+
+  def test_image_path
+    grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
+      client = ::Google::Cloud::VMMigration::V1::VMMigration::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      path = client.image_path project: "value0", image: "value1"
+      assert_equal "projects/value0/global/images/value1", path
+    end
+  end
+
+  def test_image_import_path
+    grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
+      client = ::Google::Cloud::VMMigration::V1::VMMigration::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      path = client.image_import_path project: "value0", location: "value1", job: "value2"
+      assert_equal "projects/value0/locations/value1/imageImports/value2", path
+    end
+  end
+
+  def test_image_import_job_path
+    grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
+      client = ::Google::Cloud::VMMigration::V1::VMMigration::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      path = client.image_import_job_path project: "value0", location: "value1", job: "value2", result: "value3"
+      assert_equal "projects/value0/locations/value1/imageImports/value2/imageImportJobs/value3", path
     end
   end
 
@@ -122,6 +182,18 @@ class ::Google::Cloud::VMMigration::V1::VMMigration::ClientPathsTest < Minitest:
 
       path = client.replication_cycle_path project: "value0", location: "value1", source: "value2", migrating_vm: "value3", replication_cycle: "value4"
       assert_equal "projects/value0/locations/value1/sources/value2/migratingVms/value3/replicationCycles/value4", path
+    end
+  end
+
+  def test_service_account_path
+    grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
+      client = ::Google::Cloud::VMMigration::V1::VMMigration::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      path = client.service_account_path project: "value0", service_account: "value1"
+      assert_equal "projects/value0/serviceAccounts/value1", path
     end
   end
 

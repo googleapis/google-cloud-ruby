@@ -356,6 +356,22 @@ module Google
                   ["resource", %r{^organizations/[^/]+/locations/[^/]+/encryptionConfigs/[^/]+/?$}, false]
                 ],
                 body: "*"
+              ),
+              Gapic::Rest::GrpcTranscoder::HttpBinding.create_with_validation(
+                uri_method: :post,
+                uri_template: "/v1/{resource}:setIamPolicy",
+                matches: [
+                  ["resource", %r{^projects/[^/]+/locations/[^/]+/dataProducts/[^/]+/?$}, false]
+                ],
+                body: "*"
+              ),
+              Gapic::Rest::GrpcTranscoder::HttpBinding.create_with_validation(
+                uri_method: :post,
+                uri_template: "/v1/{resource}:setIamPolicy",
+                matches: [
+                  ["resource", %r{^projects/[^/]+/locations/[^/]+/dataProducts/[^/]+/dataAssets/[^/]+/?$}, false]
+                ],
+                body: "*"
               )
             ]
             default_config.bindings_override["google.iam.v1.IAMPolicy.TestIamPermissions"] = [
@@ -501,6 +517,22 @@ module Google
                 uri_template: "/v1/{resource}:testIamPermissions",
                 matches: [
                   ["resource", %r{^organizations/[^/]+/locations/[^/]+/encryptionConfigs/[^/]+/?$}, false]
+                ],
+                body: "*"
+              ),
+              Gapic::Rest::GrpcTranscoder::HttpBinding.create_with_validation(
+                uri_method: :post,
+                uri_template: "/v1/{resource}:testIamPermissions",
+                matches: [
+                  ["resource", %r{^projects/[^/]+/locations/[^/]+/dataProducts/[^/]+/?$}, false]
+                ],
+                body: "*"
+              ),
+              Gapic::Rest::GrpcTranscoder::HttpBinding.create_with_validation(
+                uri_method: :post,
+                uri_template: "/v1/{resource}:testIamPermissions",
+                matches: [
+                  ["resource", %r{^projects/[^/]+/locations/[^/]+/dataProducts/[^/]+/dataAssets/[^/]+/?$}, false]
                 ],
                 body: "*"
               )

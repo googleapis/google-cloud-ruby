@@ -84,6 +84,27 @@ module Google
             end
 
             ##
+            # Create a fully-qualified EntryLink resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `projects/{project}/locations/{location}/entryGroups/{entry_group}/entryLinks/{entry_link}`
+            #
+            # @param project [String]
+            # @param location [String]
+            # @param entry_group [String]
+            # @param entry_link [String]
+            #
+            # @return [::String]
+            def entry_link_path project:, location:, entry_group:, entry_link:
+              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+              raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+              raise ::ArgumentError, "entry_group cannot contain /" if entry_group.to_s.include? "/"
+
+              "projects/#{project}/locations/#{location}/entryGroups/#{entry_group}/entryLinks/#{entry_link}"
+            end
+
+            ##
             # Create a fully-qualified EntryType resource string.
             #
             # The resource will be in the following format:
@@ -100,6 +121,25 @@ module Google
               raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
 
               "projects/#{project}/locations/#{location}/entryTypes/#{entry_type}"
+            end
+
+            ##
+            # Create a fully-qualified Glossary resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `projects/{project}/locations/{location}/glossaries/{glossary}`
+            #
+            # @param project [String]
+            # @param location [String]
+            # @param glossary [String]
+            #
+            # @return [::String]
+            def glossary_path project:, location:, glossary:
+              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+              raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+
+              "projects/#{project}/locations/#{location}/glossaries/#{glossary}"
             end
 
             ##

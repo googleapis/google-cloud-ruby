@@ -1,6 +1,6 @@
 # Ruby Client for the Dataplex V1 API
 
-Dataplex API is used to manage the lifecycle of data lakes.
+A unified, intelligent governance solution for data and AI assets.
 
 Dataplex is an intelligent data fabric that provides a way to centrally manage, monitor, and govern your data across data lakes, data warehouses and data marts, and make this data securely accessible to a variety of analytics and data science tools.
 

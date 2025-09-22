@@ -34,6 +34,14 @@ In order to use this library, you first need to go through the following steps:
 1. [Enable the API.](https://console.cloud.google.com/apis/library/analyticsdata.googleapis.com)
 1. [Set up authentication.](AUTHENTICATION.md)
 
+```ruby
+require "google/analytics/data"
+
+client = Google::Analytics::Data.analytics_data
+request = ::Google::Analytics::Data::V1beta::RunReportRequest.new # (request fields as keyword arguments...)
+response = client.run_report request
+```
+
 ## Debug Logging
 
 This library comes with opt-in Debug Logging that can help you troubleshoot

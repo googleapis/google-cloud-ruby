@@ -34,10 +34,10 @@ module Google
       module V1
         ##
         # The primary resources offered by this service are EntryGroups, EntryTypes,
-        # AspectTypes, and Entries. They collectively let data administrators organize,
-        # manage, secure, and catalog data located across cloud projects in their
-        # organization in a variety of storage systems, including Cloud Storage and
-        # BigQuery.
+        # AspectTypes, Entries and EntryLinks. They collectively let data
+        # administrators organize, manage, secure, and catalog data located across
+        # cloud projects in their organization in a variety of storage systems,
+        # including Cloud Storage and BigQuery.
         #
         # To load this service and instantiate a REST client:
         #

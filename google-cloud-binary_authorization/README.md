@@ -34,6 +34,14 @@ In order to use this library, you first need to go through the following steps:
 1. [Enable the API.](https://console.cloud.google.com/apis/library/binaryauthorization.googleapis.com)
 1. [Set up authentication.](AUTHENTICATION.md)
 
+```ruby
+require "google/cloud/binary_authorization"
+
+client = Google::Cloud::BinaryAuthorization.binauthz_management_service
+request = ::Google::Cloud::BinaryAuthorization::V1::GetPolicyRequest.new # (request fields as keyword arguments...)
+response = client.get_policy request
+```
+
 ## Debug Logging
 
 This library comes with opt-in Debug Logging that can help you troubleshoot

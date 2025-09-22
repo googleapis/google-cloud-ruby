@@ -34,6 +34,14 @@ In order to use this library, you first need to go through the following steps:
 1. [Enable the API.](https://console.cloud.google.com/apis/library/bigquerydatapolicy.googleapis.com)
 1. [Set up authentication.](AUTHENTICATION.md)
 
+```ruby
+require "google/cloud/bigquery/data_policies"
+
+client = Google::Cloud::Bigquery::DataPolicies.data_policy_service
+request = ::Google::Cloud::Bigquery::DataPolicies::V1::CreateDataPolicyRequest.new # (request fields as keyword arguments...)
+response = client.create_data_policy request
+```
+
 ## Debug Logging
 
 This library comes with opt-in Debug Logging that can help you troubleshoot

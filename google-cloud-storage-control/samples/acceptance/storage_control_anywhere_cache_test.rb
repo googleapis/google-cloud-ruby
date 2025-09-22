@@ -13,7 +13,6 @@
 # limitations under the License.
 
 require_relative "helper"
-require "google/cloud/storage/control"
 require_relative "../storage_control_create_anywhere_cache"
 require_relative "../storage_control_list_anywhere_caches"
 require_relative "../storage_control_get_anywhere_cache"
@@ -29,11 +28,12 @@ describe "Storage Control Anywhere Cache" do
   let(:anywhere_cache_name) { "projects/_/buckets/#{bucket_name}/anywhereCaches/#{zone}" }
 
   before :all do
-    @bucket = create_bucket_helper bucket_name
+    create_bucket_helper bucket_name
   end
 
-  after do
-    delete_bucket_helper bucket_name until count_anywhere_caches bucket_name
+  after :all do
+    count_anywhere_caches bucket_name # Ensure all caches are deleted before deleting bucket
+    delete_bucket_helper bucket_name
   end
 
   it "handles Anywhere cache lifecycle in sequence" do
@@ -72,16 +72,4 @@ describe "Storage Control Anywhere Cache" do
     end
     assert_includes out_disable, "AnywhereCache #{anywhere_cache_name} disabled"
   end
-end
-
-def count_anywhere_caches bucket_name
-  sleep 900
-  storage_control_client = Google::Cloud::Storage::Control.storage_control
-  # Set project to "_" to signify global bucket
-  parent = "projects/_/buckets/#{bucket_name}"
-  request = Google::Cloud::Storage::Control::V2::ListAnywhereCachesRequest.new(
-    parent: parent
-  )
-  result = storage_control_client.list_anywhere_caches request
-  result.response.anywhere_caches.count
 end

@@ -1,5 +1,17 @@
 # Release History
 
+### 1.11.0 (2025-09-11)
+
+#### Features
+
+* update gapic-common dependency for generated libraries to 1.2 which requires google-protobuf v4.26+ ([#31011](https://github.com/googleapis/google-cloud-ruby/issues/31011)) 
+
+### 1.10.1 (2025-09-03)
+
+#### Documentation
+
+* A comment for field `ranges` in message `.google.spanner.v1.KeySet` is changed ([#30926](https://github.com/googleapis/google-cloud-ruby/issues/30926)) 
+
 ### 1.10.0 (2025-07-24)
 
 #### Features

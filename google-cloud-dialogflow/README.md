@@ -34,6 +34,14 @@ In order to use this library, you first need to go through the following steps:
 1. [Enable the API.](https://console.cloud.google.com/apis/library/dialogflow.googleapis.com)
 1. [Set up authentication.](AUTHENTICATION.md)
 
+```ruby
+require "google/cloud/dialogflow"
+
+client = Google::Cloud::Dialogflow.agents
+request = ::Google::Cloud::Dialogflow::V2::GetAgentRequest.new # (request fields as keyword arguments...)
+response = client.get_agent request
+```
+
 ## Migrating from 0.x versions
 
 The 1.0 release of the google-cloud-dialogflow client is a significant upgrade

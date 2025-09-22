@@ -16,7 +16,7 @@
 require "google/cloud/storage/control"
 
 def resume_anywhere_cache bucket_name:, anywhere_cache_id:
-  # The ID of your GCS bucket
+  # The Name of your GCS bucket
   # bucket_name = "your-unique-bucket-name"
 
   # A value that, along with the bucket's name, uniquely identifies the cache
@@ -24,8 +24,8 @@ def resume_anywhere_cache bucket_name:, anywhere_cache_id:
 
   # Create a client object. The client can be reused for multiple calls.
   storage_control_client = Google::Cloud::Storage::Control.storage_control
-  parent = "projects/_/buckets/#{bucket_name}"
   # Set project to "_" to signify global bucket
+  parent = "projects/_/buckets/#{bucket_name}"
   name = "#{parent}/anywhereCaches/#{anywhere_cache_id}"
 
   # Create a request.
@@ -38,7 +38,7 @@ def resume_anywhere_cache bucket_name:, anywhere_cache_id:
   begin
     result = storage_control_client.resume_anywhere_cache request
     puts "AnywhereCache #{result.name} #{result.state}"
-  rescue StandardError => e
+  rescue Google::Cloud::Error => e
     puts "Error resuming AnywhereCache: #{e.message}"
   end
 end

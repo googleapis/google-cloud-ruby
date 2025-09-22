@@ -1,5 +1,17 @@
 # Release History
 
+### 2.3.1 (2025-09-12)
+
+#### Documentation
+
+* Add examples to wrapper libraries README.md ([#31320](https://github.com/googleapis/google-cloud-ruby/issues/31320)) 
+
+### 2.3.0 (2025-09-05)
+
+#### Features
+
+* introduce DataTransfer APIs ([#30949](https://github.com/googleapis/google-cloud-ruby/issues/30949)) 
+
 ### 2.2.0 (2025-07-24)
 
 #### Features

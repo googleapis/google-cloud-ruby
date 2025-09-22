@@ -1,5 +1,17 @@
 # Changelog
 
+### 1.7.0 (2025-09-11)
+
+#### Features
+
+* update gapic-common dependency for generated libraries to 1.2 which requires google-protobuf v4.26+ ([#31011](https://github.com/googleapis/google-cloud-ruby/issues/31011)) 
+
+### 1.6.0 (2025-09-10)
+
+#### Features
+
+* Add new GetIamPolicy, SetIamPolicy, and TestIamPermissions RPCs ([#30959](https://github.com/googleapis/google-cloud-ruby/issues/30959)) 
+
 ### 1.5.0 (2025-07-15)
 
 #### Features

@@ -91,7 +91,6 @@
   ],
   "static": [
     ".OwlBot.yaml",
-    ".owlbot.rb",
     "lib/google/cloud/pubsub/v1/_helpers.rb",
     "lib/google/cloud/pubsub/v1/iam_policy.rb",
     "lib/google/cloud/pubsub/v1/iam_policy/client.rb",

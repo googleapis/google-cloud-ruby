@@ -269,14 +269,14 @@ module Google
             # transaction internally, and count toward the one transaction
             # limit.
             #
-            # Active sessions use additional server resources, so it is a good idea to
+            # Active sessions use additional server resources, so it's a good idea to
             # delete idle and unneeded sessions.
-            # Aside from explicit deletes, Cloud Spanner may delete sessions for which no
+            # Aside from explicit deletes, Cloud Spanner can delete sessions when no
             # operations are sent for more than an hour. If a session is deleted,
             # requests to it return `NOT_FOUND`.
             #
             # Idle sessions can be kept alive by sending a trivial SQL query
-            # periodically, e.g., `"SELECT 1"`.
+            # periodically, for example, `"SELECT 1"`.
             #
             # @overload create_session(request, options = nil)
             #   Pass arguments to `create_session` via a request object, either of type
@@ -386,12 +386,12 @@ module Google
             #   @param database [::String]
             #     Required. The database in which the new sessions are created.
             #   @param session_template [::Google::Cloud::Spanner::V1::Session, ::Hash]
-            #     Parameters to be applied to each created session.
+            #     Parameters to apply to each created session.
             #   @param session_count [::Integer]
             #     Required. The number of sessions to be created in this batch call.
-            #     The API may return fewer than the requested number of sessions. If a
+            #     The API can return fewer than the requested number of sessions. If a
             #     specific number of sessions are desired, the client can make additional
-            #     calls to BatchCreateSessions (adjusting
+            #     calls to `BatchCreateSessions` (adjusting
             #     {::Google::Cloud::Spanner::V1::BatchCreateSessionsRequest#session_count session_count}
             #     as necessary).
             #
@@ -460,7 +460,7 @@ module Google
             end
 
             ##
-            # Gets a session. Returns `NOT_FOUND` if the session does not exist.
+            # Gets a session. Returns `NOT_FOUND` if the session doesn't exist.
             # This is mainly useful for determining whether a session is still
             # alive.
             #
@@ -657,9 +657,9 @@ module Google
             end
 
             ##
-            # Ends a session, releasing server resources associated with it. This will
-            # asynchronously trigger cancellation of any operations that are running with
-            # this session.
+            # Ends a session, releasing server resources associated with it. This
+            # asynchronously triggers the cancellation of any operations that are running
+            # with this session.
             #
             # @overload delete_session(request, options = nil)
             #   Pass arguments to `delete_session` via a request object, either of type
@@ -745,7 +745,7 @@ module Google
 
             ##
             # Executes an SQL statement, returning all results in a single reply. This
-            # method cannot be used to return a result set larger than 10 MiB;
+            # method can't be used to return a result set larger than 10 MiB;
             # if the query yields more data than that, the query fails with
             # a `FAILED_PRECONDITION` error.
             #
@@ -757,6 +757,9 @@ module Google
             # Larger result sets can be fetched in streaming fashion by calling
             # {::Google::Cloud::Spanner::V1::Spanner::Client#execute_streaming_sql ExecuteStreamingSql}
             # instead.
+            #
+            # The query string can be SQL or [Graph Query Language
+            # (GQL)](https://cloud.google.com/spanner/docs/reference/standard-sql/graph-intro).
             #
             # @overload execute_sql(request, options = nil)
             #   Pass arguments to `execute_sql` via a request object, either of type
@@ -782,7 +785,7 @@ module Google
             #     transaction with strong concurrency.
             #
             #     Standard DML statements require a read-write transaction. To protect
-            #     against replays, single-use transactions are not supported.  The caller
+            #     against replays, single-use transactions are not supported. The caller
             #     must either supply an existing transaction ID or begin a new transaction.
             #
             #     Partitioned DML requires an existing Partitioned DML transaction ID.
@@ -796,19 +799,19 @@ module Google
             #     to the naming requirements of identifiers as specified at
             #     https://cloud.google.com/spanner/docs/lexical#identifiers.
             #
-            #     Parameters can appear anywhere that a literal value is expected.  The same
+            #     Parameters can appear anywhere that a literal value is expected. The same
             #     parameter name can be used more than once, for example:
             #
             #     `"WHERE id > @msg_id AND id < @msg_id + 100"`
             #
-            #     It is an error to execute a SQL statement with unbound parameters.
+            #     It's an error to execute a SQL statement with unbound parameters.
             #   @param param_types [::Hash{::String => ::Google::Cloud::Spanner::V1::Type, ::Hash}]
-            #     It is not always possible for Cloud Spanner to infer the right SQL type
-            #     from a JSON value.  For example, values of type `BYTES` and values
+            #     It isn't always possible for Cloud Spanner to infer the right SQL type
+            #     from a JSON value. For example, values of type `BYTES` and values
             #     of type `STRING` both appear in
             #     {::Google::Cloud::Spanner::V1::ExecuteSqlRequest#params params} as JSON strings.
             #
-            #     In these cases, `param_types` can be used to specify the exact
+            #     In these cases, you can use `param_types` to specify the exact
             #     SQL type for some or all of the SQL statement parameters. See the
             #     definition of {::Google::Cloud::Spanner::V1::Type Type} for more information
             #     about SQL types.
@@ -827,19 +830,19 @@ module Google
             #     be set to
             #     {::Google::Cloud::Spanner::V1::ExecuteSqlRequest::QueryMode::NORMAL QueryMode.NORMAL}.
             #   @param partition_token [::String]
-            #     If present, results will be restricted to the specified partition
-            #     previously created using PartitionQuery().  There must be an exact
+            #     If present, results are restricted to the specified partition
+            #     previously created using `PartitionQuery`. There must be an exact
             #     match for the values of fields common to this message and the
-            #     PartitionQueryRequest message used to create this partition_token.
+            #     `PartitionQueryRequest` message used to create this `partition_token`.
             #   @param seqno [::Integer]
             #     A per-transaction sequence number used to identify this request. This field
             #     makes each request idempotent such that if the request is received multiple
-            #     times, at most one will succeed.
+            #     times, at most one succeeds.
             #
             #     The sequence number must be monotonically increasing within the
             #     transaction. If a request arrives for the first time with an out-of-order
-            #     sequence number, the transaction may be aborted. Replays of previously
-            #     handled requests will yield the same response as the first execution.
+            #     sequence number, the transaction can be aborted. Replays of previously
+            #     handled requests yield the same response as the first execution.
             #
             #     Required for DML statements. Ignored for queries.
             #   @param query_options [::Google::Cloud::Spanner::V1::ExecuteSqlRequest::QueryOptions, ::Hash]
@@ -852,18 +855,18 @@ module Google
             #     If this is for a partitioned query and this field is set to `true`, the
             #     request is executed with Spanner Data Boost independent compute resources.
             #
-            #     If the field is set to `true` but the request does not set
+            #     If the field is set to `true` but the request doesn't set
             #     `partition_token`, the API returns an `INVALID_ARGUMENT` error.
             #   @param last_statement [::Boolean]
-            #     Optional. If set to true, this statement marks the end of the transaction.
-            #     The transaction should be committed or aborted after this statement
-            #     executes, and attempts to execute any other requests against this
-            #     transaction (including reads and queries) will be rejected.
+            #     Optional. If set to `true`, this statement marks the end of the
+            #     transaction. After this statement executes, you must commit or abort the
+            #     transaction. Attempts to execute any other requests against this
+            #     transaction (including reads and queries) are rejected.
             #
-            #     For DML statements, setting this option may cause some error reporting to
-            #     be deferred until commit time (e.g. validation of unique constraints).
-            #     Given this, successful execution of a DML statement should not be assumed
-            #     until a subsequent Commit call completes successfully.
+            #     For DML statements, setting this option might cause some error reporting to
+            #     be deferred until commit time (for example, validation of unique
+            #     constraints). Given this, successful execution of a DML statement shouldn't
+            #     be assumed until a subsequent `Commit` call completes successfully.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::Spanner::V1::ResultSet]
@@ -936,6 +939,9 @@ module Google
             # the size of the returned result set. However, no individual row in the
             # result set can exceed 100 MiB, and no column value can exceed 10 MiB.
             #
+            # The query string can be SQL or [Graph Query Language
+            # (GQL)](https://cloud.google.com/spanner/docs/reference/standard-sql/graph-intro).
+            #
             # @overload execute_streaming_sql(request, options = nil)
             #   Pass arguments to `execute_streaming_sql` via a request object, either of type
             #   {::Google::Cloud::Spanner::V1::ExecuteSqlRequest} or an equivalent Hash.
@@ -960,7 +966,7 @@ module Google
             #     transaction with strong concurrency.
             #
             #     Standard DML statements require a read-write transaction. To protect
-            #     against replays, single-use transactions are not supported.  The caller
+            #     against replays, single-use transactions are not supported. The caller
             #     must either supply an existing transaction ID or begin a new transaction.
             #
             #     Partitioned DML requires an existing Partitioned DML transaction ID.
@@ -974,19 +980,19 @@ module Google
             #     to the naming requirements of identifiers as specified at
             #     https://cloud.google.com/spanner/docs/lexical#identifiers.
             #
-            #     Parameters can appear anywhere that a literal value is expected.  The same
+            #     Parameters can appear anywhere that a literal value is expected. The same
             #     parameter name can be used more than once, for example:
             #
             #     `"WHERE id > @msg_id AND id < @msg_id + 100"`
             #
-            #     It is an error to execute a SQL statement with unbound parameters.
+            #     It's an error to execute a SQL statement with unbound parameters.
             #   @param param_types [::Hash{::String => ::Google::Cloud::Spanner::V1::Type, ::Hash}]
-            #     It is not always possible for Cloud Spanner to infer the right SQL type
-            #     from a JSON value.  For example, values of type `BYTES` and values
+            #     It isn't always possible for Cloud Spanner to infer the right SQL type
+            #     from a JSON value. For example, values of type `BYTES` and values
             #     of type `STRING` both appear in
             #     {::Google::Cloud::Spanner::V1::ExecuteSqlRequest#params params} as JSON strings.
             #
-            #     In these cases, `param_types` can be used to specify the exact
+            #     In these cases, you can use `param_types` to specify the exact
             #     SQL type for some or all of the SQL statement parameters. See the
             #     definition of {::Google::Cloud::Spanner::V1::Type Type} for more information
             #     about SQL types.
@@ -1005,19 +1011,19 @@ module Google
             #     be set to
             #     {::Google::Cloud::Spanner::V1::ExecuteSqlRequest::QueryMode::NORMAL QueryMode.NORMAL}.
             #   @param partition_token [::String]
-            #     If present, results will be restricted to the specified partition
-            #     previously created using PartitionQuery().  There must be an exact
+            #     If present, results are restricted to the specified partition
+            #     previously created using `PartitionQuery`. There must be an exact
             #     match for the values of fields common to this message and the
-            #     PartitionQueryRequest message used to create this partition_token.
+            #     `PartitionQueryRequest` message used to create this `partition_token`.
             #   @param seqno [::Integer]
             #     A per-transaction sequence number used to identify this request. This field
             #     makes each request idempotent such that if the request is received multiple
-            #     times, at most one will succeed.
+            #     times, at most one succeeds.
             #
             #     The sequence number must be monotonically increasing within the
             #     transaction. If a request arrives for the first time with an out-of-order
-            #     sequence number, the transaction may be aborted. Replays of previously
-            #     handled requests will yield the same response as the first execution.
+            #     sequence number, the transaction can be aborted. Replays of previously
+            #     handled requests yield the same response as the first execution.
             #
             #     Required for DML statements. Ignored for queries.
             #   @param query_options [::Google::Cloud::Spanner::V1::ExecuteSqlRequest::QueryOptions, ::Hash]
@@ -1030,18 +1036,18 @@ module Google
             #     If this is for a partitioned query and this field is set to `true`, the
             #     request is executed with Spanner Data Boost independent compute resources.
             #
-            #     If the field is set to `true` but the request does not set
+            #     If the field is set to `true` but the request doesn't set
             #     `partition_token`, the API returns an `INVALID_ARGUMENT` error.
             #   @param last_statement [::Boolean]
-            #     Optional. If set to true, this statement marks the end of the transaction.
-            #     The transaction should be committed or aborted after this statement
-            #     executes, and attempts to execute any other requests against this
-            #     transaction (including reads and queries) will be rejected.
+            #     Optional. If set to `true`, this statement marks the end of the
+            #     transaction. After this statement executes, you must commit or abort the
+            #     transaction. Attempts to execute any other requests against this
+            #     transaction (including reads and queries) are rejected.
             #
-            #     For DML statements, setting this option may cause some error reporting to
-            #     be deferred until commit time (e.g. validation of unique constraints).
-            #     Given this, successful execution of a DML statement should not be assumed
-            #     until a subsequent Commit call completes successfully.
+            #     For DML statements, setting this option might cause some error reporting to
+            #     be deferred until commit time (for example, validation of unique
+            #     constraints). Given this, successful execution of a DML statement shouldn't
+            #     be assumed until a subsequent `Commit` call completes successfully.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Enumerable<::Google::Cloud::Spanner::V1::PartialResultSet>]
@@ -1157,24 +1163,24 @@ module Google
             #   @param seqno [::Integer]
             #     Required. A per-transaction sequence number used to identify this request.
             #     This field makes each request idempotent such that if the request is
-            #     received multiple times, at most one will succeed.
+            #     received multiple times, at most one succeeds.
             #
             #     The sequence number must be monotonically increasing within the
             #     transaction. If a request arrives for the first time with an out-of-order
-            #     sequence number, the transaction may be aborted. Replays of previously
-            #     handled requests will yield the same response as the first execution.
+            #     sequence number, the transaction might be aborted. Replays of previously
+            #     handled requests yield the same response as the first execution.
             #   @param request_options [::Google::Cloud::Spanner::V1::RequestOptions, ::Hash]
             #     Common options for this request.
             #   @param last_statements [::Boolean]
-            #     Optional. If set to true, this request marks the end of the transaction.
-            #     The transaction should be committed or aborted after these statements
-            #     execute, and attempts to execute any other requests against this
-            #     transaction (including reads and queries) will be rejected.
+            #     Optional. If set to `true`, this request marks the end of the transaction.
+            #     After these statements execute, you must commit or abort the transaction.
+            #     Attempts to execute any other requests against this transaction
+            #     (including reads and queries) are rejected.
             #
-            #     Setting this option may cause some error reporting to be deferred until
-            #     commit time (e.g. validation of unique constraints). Given this, successful
-            #     execution of statements should not be assumed until a subsequent Commit
-            #     call completes successfully.
+            #     Setting this option might cause some error reporting to be deferred until
+            #     commit time (for example, validation of unique constraints). Given this,
+            #     successful execution of statements shouldn't be assumed until a subsequent
+            #     `Commit` call completes successfully.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::Spanner::V1::ExecuteBatchDmlResponse]
@@ -1243,7 +1249,7 @@ module Google
             ##
             # Reads rows from the database using key lookups and scans, as a
             # simple key/value style alternative to
-            # {::Google::Cloud::Spanner::V1::Spanner::Client#execute_sql ExecuteSql}.  This method cannot be
+            # {::Google::Cloud::Spanner::V1::Spanner::Client#execute_sql ExecuteSql}. This method can't be
             # used to return a result set larger than 10 MiB; if the read matches more
             # data than that, the read fails with a `FAILED_PRECONDITION`
             # error.
@@ -1299,15 +1305,15 @@ module Google
             #     If the {::Google::Cloud::Spanner::V1::ReadRequest#partition_token partition_token}
             #     field is empty, rows are yielded in table primary key order (if
             #     {::Google::Cloud::Spanner::V1::ReadRequest#index index} is empty) or index key order
-            #     (if {::Google::Cloud::Spanner::V1::ReadRequest#index index} is non-empty).  If the
-            #     {::Google::Cloud::Spanner::V1::ReadRequest#partition_token partition_token} field is
-            #     not empty, rows will be yielded in an unspecified order.
+            #     (if {::Google::Cloud::Spanner::V1::ReadRequest#index index} is non-empty). If the
+            #     {::Google::Cloud::Spanner::V1::ReadRequest#partition_token partition_token} field
+            #     isn't empty, rows are yielded in an unspecified order.
             #
-            #     It is not an error for the `key_set` to name rows that do not
+            #     It isn't an error for the `key_set` to name rows that don't
             #     exist in the database. Read yields nothing for nonexistent rows.
             #   @param limit [::Integer]
             #     If greater than zero, only the first `limit` rows are yielded. If `limit`
-            #     is zero, the default is no limit. A limit cannot be specified if
+            #     is zero, the default is no limit. A limit can't be specified if
             #     `partition_token` is set.
             #   @param resume_token [::String]
             #     If this request is resuming a previously interrupted read,
@@ -1317,8 +1323,8 @@ module Google
             #     left off. The rest of the request parameters must exactly match the request
             #     that yielded this token.
             #   @param partition_token [::String]
-            #     If present, results will be restricted to the specified partition
-            #     previously created using PartitionRead().    There must be an exact
+            #     If present, results are restricted to the specified partition
+            #     previously created using `PartitionRead`. There must be an exact
             #     match for the values of fields common to this message and the
             #     PartitionReadRequest message used to create this partition_token.
             #   @param request_options [::Google::Cloud::Spanner::V1::RequestOptions, ::Hash]
@@ -1329,16 +1335,17 @@ module Google
             #     If this is for a partitioned read and this field is set to `true`, the
             #     request is executed with Spanner Data Boost independent compute resources.
             #
-            #     If the field is set to `true` but the request does not set
+            #     If the field is set to `true` but the request doesn't set
             #     `partition_token`, the API returns an `INVALID_ARGUMENT` error.
             #   @param order_by [::Google::Cloud::Spanner::V1::ReadRequest::OrderBy]
             #     Optional. Order for the returned rows.
             #
-            #     By default, Spanner will return result rows in primary key order except for
-            #     PartitionRead requests. For applications that do not require rows to be
+            #     By default, Spanner returns result rows in primary key order except for
+            #     PartitionRead requests. For applications that don't require rows to be
             #     returned in primary key (`ORDER_BY_PRIMARY_KEY`) order, setting
             #     `ORDER_BY_NO_ORDER` option allows Spanner to optimize row retrieval,
-            #     resulting in lower latencies in certain cases (e.g. bulk point lookups).
+            #     resulting in lower latencies in certain cases (for example, bulk point
+            #     lookups).
             #   @param lock_hint [::Google::Cloud::Spanner::V1::ReadRequest::LockHint]
             #     Optional. Lock Hint for the request, it can only be used with read-write
             #     transactions.
@@ -1457,15 +1464,15 @@ module Google
             #     If the {::Google::Cloud::Spanner::V1::ReadRequest#partition_token partition_token}
             #     field is empty, rows are yielded in table primary key order (if
             #     {::Google::Cloud::Spanner::V1::ReadRequest#index index} is empty) or index key order
-            #     (if {::Google::Cloud::Spanner::V1::ReadRequest#index index} is non-empty).  If the
-            #     {::Google::Cloud::Spanner::V1::ReadRequest#partition_token partition_token} field is
-            #     not empty, rows will be yielded in an unspecified order.
+            #     (if {::Google::Cloud::Spanner::V1::ReadRequest#index index} is non-empty). If the
+            #     {::Google::Cloud::Spanner::V1::ReadRequest#partition_token partition_token} field
+            #     isn't empty, rows are yielded in an unspecified order.
             #
-            #     It is not an error for the `key_set` to name rows that do not
+            #     It isn't an error for the `key_set` to name rows that don't
             #     exist in the database. Read yields nothing for nonexistent rows.
             #   @param limit [::Integer]
             #     If greater than zero, only the first `limit` rows are yielded. If `limit`
-            #     is zero, the default is no limit. A limit cannot be specified if
+            #     is zero, the default is no limit. A limit can't be specified if
             #     `partition_token` is set.
             #   @param resume_token [::String]
             #     If this request is resuming a previously interrupted read,
@@ -1475,8 +1482,8 @@ module Google
             #     left off. The rest of the request parameters must exactly match the request
             #     that yielded this token.
             #   @param partition_token [::String]
-            #     If present, results will be restricted to the specified partition
-            #     previously created using PartitionRead().    There must be an exact
+            #     If present, results are restricted to the specified partition
+            #     previously created using `PartitionRead`. There must be an exact
             #     match for the values of fields common to this message and the
             #     PartitionReadRequest message used to create this partition_token.
             #   @param request_options [::Google::Cloud::Spanner::V1::RequestOptions, ::Hash]
@@ -1487,16 +1494,17 @@ module Google
             #     If this is for a partitioned read and this field is set to `true`, the
             #     request is executed with Spanner Data Boost independent compute resources.
             #
-            #     If the field is set to `true` but the request does not set
+            #     If the field is set to `true` but the request doesn't set
             #     `partition_token`, the API returns an `INVALID_ARGUMENT` error.
             #   @param order_by [::Google::Cloud::Spanner::V1::ReadRequest::OrderBy]
             #     Optional. Order for the returned rows.
             #
-            #     By default, Spanner will return result rows in primary key order except for
-            #     PartitionRead requests. For applications that do not require rows to be
+            #     By default, Spanner returns result rows in primary key order except for
+            #     PartitionRead requests. For applications that don't require rows to be
             #     returned in primary key (`ORDER_BY_PRIMARY_KEY`) order, setting
             #     `ORDER_BY_NO_ORDER` option allows Spanner to optimize row retrieval,
-            #     resulting in lower latencies in certain cases (e.g. bulk point lookups).
+            #     resulting in lower latencies in certain cases (for example, bulk point
+            #     lookups).
             #   @param lock_hint [::Google::Cloud::Spanner::V1::ReadRequest::LockHint]
             #     Optional. Lock Hint for the request, it can only be used with read-write
             #     transactions.
@@ -1597,16 +1605,14 @@ module Google
             #   @param request_options [::Google::Cloud::Spanner::V1::RequestOptions, ::Hash]
             #     Common options for this request.
             #     Priority is ignored for this request. Setting the priority in this
-            #     request_options struct will not do anything. To set the priority for a
+            #     `request_options` struct doesn't do anything. To set the priority for a
             #     transaction, set it on the reads and writes that are part of this
             #     transaction instead.
             #   @param mutation_key [::Google::Cloud::Spanner::V1::Mutation, ::Hash]
             #     Optional. Required for read-write transactions on a multiplexed session
-            #     that commit mutations but do not perform any reads or queries. Clients
-            #     should randomly select one of the mutations from the mutation set and send
-            #     it as a part of this request.
-            #     This feature is not yet supported and will result in an UNIMPLEMENTED
-            #     error.
+            #     that commit mutations but don't perform any reads or queries. You must
+            #     randomly select one of the mutations from the mutation set and send it as a
+            #     part of this request.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::Spanner::V1::Transaction]
@@ -1679,8 +1685,8 @@ module Google
             # `Commit` might return an `ABORTED` error. This can occur at any time;
             # commonly, the cause is conflicts with concurrent
             # transactions. However, it can also happen for a variety of other
-            # reasons. If `Commit` returns `ABORTED`, the caller should re-attempt
-            # the transaction from the beginning, re-using the same session.
+            # reasons. If `Commit` returns `ABORTED`, the caller should retry
+            # the transaction from the beginning, reusing the same session.
             #
             # On very rare occasions, `Commit` might return `UNKNOWN`. This can happen,
             # for example, if the client job experiences a 1+ hour networking failure.
@@ -1715,7 +1721,7 @@ module Google
             #     temporary transaction is non-idempotent. That is, if the
             #     `CommitRequest` is sent to Cloud Spanner more than once (for
             #     instance, due to retries in the application, or in the
-            #     transport library), it is possible that the mutations are
+            #     transport library), it's possible that the mutations are
             #     executed more than once. If this is undesirable, use
             #     {::Google::Cloud::Spanner::V1::Spanner::Client#begin_transaction BeginTransaction} and
             #     {::Google::Cloud::Spanner::V1::Spanner::Client#commit Commit} instead.
@@ -1726,24 +1732,22 @@ module Google
             #     mutations are applied atomically, in the order they appear in
             #     this list.
             #   @param return_commit_stats [::Boolean]
-            #     If `true`, then statistics related to the transaction will be included in
+            #     If `true`, then statistics related to the transaction is included in
             #     the {::Google::Cloud::Spanner::V1::CommitResponse#commit_stats CommitResponse}.
             #     Default value is `false`.
             #   @param max_commit_delay [::Google::Protobuf::Duration, ::Hash]
-            #     Optional. The amount of latency this request is willing to incur in order
-            #     to improve throughput. If this field is not set, Spanner assumes requests
-            #     are relatively latency sensitive and automatically determines an
-            #     appropriate delay time. You can specify a batching delay value between 0
-            #     and 500 ms.
+            #     Optional. The amount of latency this request is configured to incur in
+            #     order to improve throughput. If this field isn't set, Spanner assumes
+            #     requests are relatively latency sensitive and automatically determines an
+            #     appropriate delay time. You can specify a commit delay value between 0 and
+            #     500 ms.
             #   @param request_options [::Google::Cloud::Spanner::V1::RequestOptions, ::Hash]
             #     Common options for this request.
             #   @param precommit_token [::Google::Cloud::Spanner::V1::MultiplexedSessionPrecommitToken, ::Hash]
             #     Optional. If the read-write transaction was executed on a multiplexed
-            #     session, the precommit token with the highest sequence number received in
-            #     this transaction attempt, should be included here. Failing to do so will
-            #     result in a FailedPrecondition error.
-            #     This feature is not yet supported and will result in an UNIMPLEMENTED
-            #     error.
+            #     session, then you must include the precommit token with the highest
+            #     sequence number received in this transaction attempt. Failing to do so
+            #     results in a `FailedPrecondition` error.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::Spanner::V1::CommitResponse]
@@ -1810,14 +1814,14 @@ module Google
             end
 
             ##
-            # Rolls back a transaction, releasing any locks it holds. It is a good
+            # Rolls back a transaction, releasing any locks it holds. It's a good
             # idea to call this for any transaction that includes one or more
             # {::Google::Cloud::Spanner::V1::Spanner::Client#read Read} or
             # {::Google::Cloud::Spanner::V1::Spanner::Client#execute_sql ExecuteSql} requests and ultimately
             # decides not to commit.
             #
             # `Rollback` returns `OK` if it successfully aborts the transaction, the
-            # transaction was already aborted, or the transaction is not
+            # transaction was already aborted, or the transaction isn't
             # found. `Rollback` never returns `ABORTED`.
             #
             # @overload rollback(request, options = nil)
@@ -1906,16 +1910,16 @@ module Google
 
             ##
             # Creates a set of partition tokens that can be used to execute a query
-            # operation in parallel.  Each of the returned partition tokens can be used
+            # operation in parallel. Each of the returned partition tokens can be used
             # by {::Google::Cloud::Spanner::V1::Spanner::Client#execute_streaming_sql ExecuteStreamingSql} to
-            # specify a subset of the query result to read.  The same session and
-            # read-only transaction must be used by the PartitionQueryRequest used to
-            # create the partition tokens and the ExecuteSqlRequests that use the
+            # specify a subset of the query result to read. The same session and
+            # read-only transaction must be used by the `PartitionQueryRequest` used to
+            # create the partition tokens and the `ExecuteSqlRequests` that use the
             # partition tokens.
             #
             # Partition tokens become invalid when the session used to create them
             # is deleted, is idle for too long, begins a new transaction, or becomes too
-            # old.  When any of these happen, it is not possible to resume the query, and
+            # old. When any of these happen, it isn't possible to resume the query, and
             # the whole operation must be restarted from the beginning.
             #
             # @overload partition_query(request, options = nil)
@@ -1936,21 +1940,22 @@ module Google
             #   @param session [::String]
             #     Required. The session used to create the partitions.
             #   @param transaction [::Google::Cloud::Spanner::V1::TransactionSelector, ::Hash]
-            #     Read only snapshot transactions are supported, read/write and single use
-            #     transactions are not.
+            #     Read-only snapshot transactions are supported, read and write and
+            #     single-use transactions are not.
             #   @param sql [::String]
-            #     Required. The query request to generate partitions for. The request will
-            #     fail if the query is not root partitionable. For a query to be root
+            #     Required. The query request to generate partitions for. The request fails
+            #     if the query isn't root partitionable. For a query to be root
             #     partitionable, it needs to satisfy a few conditions. For example, if the
             #     query execution plan contains a distributed union operator, then it must be
             #     the first operator in the plan. For more information about other
             #     conditions, see [Read data in
             #     parallel](https://cloud.google.com/spanner/docs/reads#read_data_in_parallel).
             #
-            #     The query request must not contain DML commands, such as INSERT, UPDATE, or
-            #     DELETE. Use
-            #     {::Google::Cloud::Spanner::V1::Spanner::Client#execute_streaming_sql ExecuteStreamingSql} with a
-            #     PartitionedDml transaction for large, partition-friendly DML operations.
+            #     The query request must not contain DML commands, such as `INSERT`,
+            #     `UPDATE`, or `DELETE`. Use
+            #     {::Google::Cloud::Spanner::V1::Spanner::Client#execute_streaming_sql `ExecuteStreamingSql`} with
+            #     a `PartitionedDml` transaction for large, partition-friendly DML
+            #     operations.
             #   @param params [::Google::Protobuf::Struct, ::Hash]
             #     Parameter names and values that bind to placeholders in the SQL string.
             #
@@ -1958,15 +1963,15 @@ module Google
             #     parameter name (for example, `@firstName`). Parameter names can contain
             #     letters, numbers, and underscores.
             #
-            #     Parameters can appear anywhere that a literal value is expected.  The same
+            #     Parameters can appear anywhere that a literal value is expected. The same
             #     parameter name can be used more than once, for example:
             #
             #     `"WHERE id > @msg_id AND id < @msg_id + 100"`
             #
-            #     It is an error to execute a SQL statement with unbound parameters.
+            #     It's an error to execute a SQL statement with unbound parameters.
             #   @param param_types [::Hash{::String => ::Google::Cloud::Spanner::V1::Type, ::Hash}]
-            #     It is not always possible for Cloud Spanner to infer the right SQL type
-            #     from a JSON value.  For example, values of type `BYTES` and values
+            #     It isn't always possible for Cloud Spanner to infer the right SQL type
+            #     from a JSON value. For example, values of type `BYTES` and values
             #     of type `STRING` both appear in
             #     {::Google::Cloud::Spanner::V1::PartitionQueryRequest#params params} as JSON strings.
             #
@@ -2043,18 +2048,18 @@ module Google
 
             ##
             # Creates a set of partition tokens that can be used to execute a read
-            # operation in parallel.  Each of the returned partition tokens can be used
+            # operation in parallel. Each of the returned partition tokens can be used
             # by {::Google::Cloud::Spanner::V1::Spanner::Client#streaming_read StreamingRead} to specify a
-            # subset of the read result to read.  The same session and read-only
-            # transaction must be used by the PartitionReadRequest used to create the
-            # partition tokens and the ReadRequests that use the partition tokens.  There
-            # are no ordering guarantees on rows returned among the returned partition
-            # tokens, or even within each individual StreamingRead call issued with a
-            # partition_token.
+            # subset of the read result to read. The same session and read-only
+            # transaction must be used by the `PartitionReadRequest` used to create the
+            # partition tokens and the `ReadRequests` that use the partition tokens.
+            # There are no ordering guarantees on rows returned among the returned
+            # partition tokens, or even within each individual `StreamingRead` call
+            # issued with a `partition_token`.
             #
             # Partition tokens become invalid when the session used to create them
             # is deleted, is idle for too long, begins a new transaction, or becomes too
-            # old.  When any of these happen, it is not possible to resume the read, and
+            # old. When any of these happen, it isn't possible to resume the read, and
             # the whole operation must be restarted from the beginning.
             #
             # @overload partition_read(request, options = nil)
@@ -2098,7 +2103,7 @@ module Google
             #     {::Google::Cloud::Spanner::V1::PartitionReadRequest#key_set key_set} instead names
             #     index keys in {::Google::Cloud::Spanner::V1::PartitionReadRequest#index index}.
             #
-            #     It is not an error for the `key_set` to name rows that do not
+            #     It isn't an error for the `key_set` to name rows that don't
             #     exist in the database. Read yields nothing for nonexistent rows.
             #   @param partition_options [::Google::Cloud::Spanner::V1::PartitionOptions, ::Hash]
             #     Additional options that affect how many partitions are created.
@@ -2172,15 +2177,15 @@ module Google
             # transactions. All mutations in a group are committed atomically. However,
             # mutations across groups can be committed non-atomically in an unspecified
             # order and thus, they must be independent of each other. Partial failure is
-            # possible, i.e., some groups may have been committed successfully, while
-            # some may have failed. The results of individual batches are streamed into
-            # the response as the batches are applied.
+            # possible, that is, some groups might have been committed successfully,
+            # while some might have failed. The results of individual batches are
+            # streamed into the response as the batches are applied.
             #
-            # BatchWrite requests are not replay protected, meaning that each mutation
-            # group may be applied more than once. Replays of non-idempotent mutations
-            # may have undesirable effects. For example, replays of an insert mutation
-            # may produce an already exists error or if you use generated or commit
-            # timestamp-based keys, it may result in additional rows being added to the
+            # `BatchWrite` requests are not replay protected, meaning that each mutation
+            # group can be applied more than once. Replays of non-idempotent mutations
+            # can have undesirable effects. For example, replays of an insert mutation
+            # can produce an already exists error or if you use generated or commit
+            # timestamp-based keys, it can result in additional rows being added to the
             # mutation's table. We recommend structuring your mutation groups to be
             # idempotent to avoid this issue.
             #
@@ -2206,18 +2211,9 @@ module Google
             #   @param mutation_groups [::Array<::Google::Cloud::Spanner::V1::BatchWriteRequest::MutationGroup, ::Hash>]
             #     Required. The groups of mutations to be applied.
             #   @param exclude_txn_from_change_streams [::Boolean]
-            #     Optional. When `exclude_txn_from_change_streams` is set to `true`:
-            #      * Mutations from all transactions in this batch write operation will not
-            #      be recorded in change streams with DDL option `allow_txn_exclusion=true`
-            #      that are tracking columns modified by these transactions.
-            #      * Mutations from all transactions in this batch write operation will be
-            #      recorded in change streams with DDL option `allow_txn_exclusion=false or
-            #      not set` that are tracking columns modified by these transactions.
-            #
-            #     When `exclude_txn_from_change_streams` is set to `false` or not set,
-            #     mutations from all transactions in this batch write operation will be
-            #     recorded in all change streams that are tracking columns modified by these
-            #     transactions.
+            #     Optional. If you don't set the `exclude_txn_from_change_streams` option or
+            #     if it's set to `false`, then any change streams monitoring columns modified
+            #     by transactions will capture the updates made within that transaction.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Enumerable<::Google::Cloud::Spanner::V1::BatchWriteResponse>]

@@ -33,8 +33,11 @@ module Google
           # @!attribute [rw] asset_id
           #   @return [::String]
           #     Required. The ID of the asset resource to be created.
-          #     This value must be 1-63 characters, begin and end with `[a-z0-9]`,
-          #     could contain dashes (-) in between.
+          #
+          #     This value must be 1-63 characters, begin and end with a lower-case letter
+          #     or a number, and consist of only lower-case letters, numbers, and hyphens.
+          #     In other words, it must match the following regex:
+          #     `^[a-z0-9]([a-z0-9-]{0,61}[a-z0-9])?$`.
           # @!attribute [rw] request_id
           #   @return [::String]
           #     A request ID to identify requests. Specify a unique request ID
@@ -139,8 +142,11 @@ module Google
           # @!attribute [rw] channel_id
           #   @return [::String]
           #     Required. The ID of the channel resource to be created.
-          #     This value must be 1-63 characters, begin and end with `[a-z0-9]`,
-          #     could contain dashes (-) in between.
+          #
+          #     This value must be 1-63 characters, begin and end with a lower-case letter
+          #     or a number, and consist of only lower-case letters, numbers, and hyphens.
+          #     In other words, it must match the following regex:
+          #     `^[a-z0-9]([a-z0-9-]{0,61}[a-z0-9])?$`.
           # @!attribute [rw] request_id
           #   @return [::String]
           #     A request ID to identify requests. Specify a unique request ID
@@ -341,6 +347,66 @@ module Google
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
 
+          # Request message for "LivestreamService.StartDistribution".
+          # @!attribute [rw] name
+          #   @return [::String]
+          #     Required. The name of the channel resource, in the form of:
+          #     `projects/{project}/locations/{location}/channels/{channelId}`.
+          # @!attribute [rw] distribution_keys
+          #   @return [::Array<::String>]
+          #     Optional. A list of keys to identify the distribution configuration in the
+          #     channel resource. If left empty, all the distributions in the channel
+          #     specification will be started.
+          # @!attribute [rw] request_id
+          #   @return [::String]
+          #     Optional. A request ID to identify requests. Specify a unique request ID
+          #     so that if you must retry your request, the server will know to ignore
+          #     the request if it has already been completed. The server will guarantee
+          #     that for at least 60 minutes since the first request.
+          #
+          #     For example, consider a situation where you make an initial request and the
+          #     request times out. If you make the request again with the same request ID,
+          #     the server can check if original operation with the same request ID was
+          #     received, and if so, will ignore the second request. This prevents clients
+          #     from accidentally creating duplicate commitments.
+          #
+          #     The request ID must be a valid UUID with the exception that zero UUID is
+          #     not supported `(00000000-0000-0000-0000-000000000000)`.
+          class StartDistributionRequest
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Request message for "LivestreamService.StopDistribution".
+          # @!attribute [rw] name
+          #   @return [::String]
+          #     Required. The name of the channel resource, in the form of:
+          #     `projects/{project}/locations/{location}/channels/{channelId}`.
+          # @!attribute [rw] distribution_keys
+          #   @return [::Array<::String>]
+          #     Optional. A list of key to identify the distribution configuration in the
+          #     channel resource. If left empty, all the distributions in the channel
+          #     specification will be stopped.
+          # @!attribute [rw] request_id
+          #   @return [::String]
+          #     Optional. A request ID to identify requests. Specify a unique request ID
+          #     so that if you must retry your request, the server will know to ignore
+          #     the request if it has already been completed. The server will guarantee
+          #     that for at least 60 minutes since the first request.
+          #
+          #     For example, consider a situation where you make an initial request and the
+          #     request times out. If you make the request again with the same request ID,
+          #     the server can check if original operation with the same request ID was
+          #     received, and if so, will ignore the second request. This prevents clients
+          #     from accidentally creating duplicate commitments.
+          #
+          #     The request ID must be a valid UUID with the exception that zero UUID is
+          #     not supported `(00000000-0000-0000-0000-000000000000)`.
+          class StopDistributionRequest
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
           # Request message for "LivestreamService.CreateInput".
           # @!attribute [rw] parent
           #   @return [::String]
@@ -352,8 +418,11 @@ module Google
           # @!attribute [rw] input_id
           #   @return [::String]
           #     Required. The ID of the input resource to be created.
-          #     This value must be 1-63 characters, begin and end with `[a-z0-9]`,
-          #     could contain dashes (-) in between.
+          #
+          #     This value must be 1-63 characters, begin and end with a lower-case letter
+          #     or a number, and consist of only lower-case letters, numbers, and hyphens.
+          #     In other words, it must match the following regex:
+          #     `^[a-z0-9]([a-z0-9-]{0,61}[a-z0-9])?$`.
           # @!attribute [rw] request_id
           #   @return [::String]
           #     A request ID to identify requests. Specify a unique request ID
@@ -502,8 +571,11 @@ module Google
           # @!attribute [rw] event_id
           #   @return [::String]
           #     Required. The ID of the event resource to be created.
-          #     This value must be 1-63 characters, begin and end with `[a-z0-9]`,
-          #     could contain dashes (-) in between.
+          #
+          #     This value must be 1-63 characters, begin and end with a lower-case letter
+          #     or a number, and consist of only lower-case letters, numbers, and hyphens.
+          #     In other words, it must match the following regex:
+          #     `^[a-z0-9]([a-z0-9-]{0,61}[a-z0-9])?$`.
           # @!attribute [rw] request_id
           #   @return [::String]
           #     A request ID to identify requests. Specify a unique request ID
@@ -662,10 +734,12 @@ module Google
           #     `projects/{project}/locations/{location}/channels/{channel}`.
           # @!attribute [rw] clip_id
           #   @return [::String]
-          #     Required. Id of the requesting object in the following form:
+          #     Required. The ID of the clip resource to be created.
           #
-          #     1. 1 character minimum, 63 characters maximum
-          #     2. Only contains letters, digits, underscores, and hyphens
+          #     This value must be 1-63 characters, begin and end with a lower-case letter
+          #     or a number, and consist of only lower-case letters, numbers, and hyphens.
+          #     In other words, it must match the following regex:
+          #     `^[a-z0-9]([a-z0-9-]{0,61}[a-z0-9])?$`.
           # @!attribute [rw] clip
           #   @return [::Google::Cloud::Video::LiveStream::V1::Clip]
           #     Required. The resource being created
@@ -768,10 +842,12 @@ module Google
           #     `projects/{project}/locations/{location}/channels/{channelId}`.
           # @!attribute [rw] dvr_session_id
           #   @return [::String]
-          #     Required. Id of the requesting object in the following form:
+          #     Required. The ID of the DVR session resource to be created.
           #
-          #     1. 1 character minimum, 63 characters maximum
-          #     2. Only contains letters, digits, underscores, and hyphens
+          #     This value must be 1-63 characters, begin and end with a lower-case letter
+          #     or a number, and consist of only lower-case letters, numbers, and hyphens.
+          #     In other words, it must match the following regex:
+          #     `^[a-z0-9]([a-z0-9-]{0,61}[a-z0-9])?$`.
           # @!attribute [rw] dvr_session
           #   @return [::Google::Cloud::Video::LiveStream::V1::DvrSession]
           #     Required. The resource being created
@@ -922,6 +998,30 @@ module Google
           #     The request ID must be a valid UUID with the exception that zero UUID is
           #     not supported `(00000000-0000-0000-0000-000000000000)`.
           class UpdatePoolRequest
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Request message for "LivestreamService.PreviewInput"
+          # @!attribute [rw] name
+          #   @return [::String]
+          #     Required. The name of the input resource, in the form of:
+          #     `projects/{project}/locations/{location}/inputs/{inputId}`.
+          class PreviewInputRequest
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Response message for "LivestreamService.PreviewInput"
+          # @!attribute [rw] uri
+          #   @return [::String]
+          #     URI to display the preview content.
+          # @!attribute [rw] bearer_token
+          #   @return [::String]
+          #     A bearer token used to authenticate connections that display the preview
+          #     content. The token expires after one hour. For HTTP connections, this token
+          #     should be included as a bearer token inside the Authorization header.
+          class PreviewInputResponse
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end

@@ -128,6 +128,9 @@ module Google
         #     identify deployments during automation. See
         #     https://google.aip.dev/148#annotations for details on format and size
         #     limitations.
+        # @!attribute [rw] provider_config
+        #   @return [::Google::Cloud::ConfigService::V1::ProviderConfig]
+        #     Optional. This field specifies the provider configurations.
         class Deployment
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -694,6 +697,9 @@ module Google
         #     Optional. Input to control quota checks for resources in terraform
         #     configuration files. There are limited resources on which quota validation
         #     applies.
+        # @!attribute [r] provider_config
+        #   @return [::Google::Cloud::ConfigService::V1::ProviderConfig]
+        #     Output only. This field specifies the provider configurations.
         class Revision
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -1237,6 +1243,9 @@ module Google
         #     identify preview during automation. See
         #     https://google.aip.dev/148#annotations for details on format and size
         #     limitations.
+        # @!attribute [rw] provider_config
+        #   @return [::Google::Cloud::ConfigService::V1::ProviderConfig]
+        #     Optional. This field specifies the provider configurations.
         class Preview
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -1930,6 +1939,24 @@ module Google
         class GetResourceDriftRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # ProviderConfig contains the provider configurations.
+        # @!attribute [rw] source_type
+        #   @return [::Google::Cloud::ConfigService::V1::ProviderConfig::ProviderSource]
+        #     Optional. ProviderSource specifies the source type of the provider.
+        class ProviderConfig
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # ProviderSource represents the source type of the provider.
+          module ProviderSource
+            # Unspecified source type, default to public sources.
+            PROVIDER_SOURCE_UNSPECIFIED = 0
+
+            # Service maintained provider source type.
+            SERVICE_MAINTAINED = 1
+          end
         end
 
         # Enum values to control quota checks for resources in terraform

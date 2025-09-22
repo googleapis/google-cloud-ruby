@@ -20,7 +20,7 @@
 module Google
   module Cloud
     module OracleDatabase
-      VERSION = "0.2.1"
+      VERSION = "0.2.2"
     end
   end
 end
