@@ -640,6 +640,9 @@ module Google
           # The Jupyter Notebook.
           JUPYTER = 1
 
+          # The Jupyter Kernel Gateway.
+          JUPYTER_KERNEL_GATEWAY = 22
+
           # The Pig component.
           PIG = 21
 
