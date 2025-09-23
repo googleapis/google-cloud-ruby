@@ -13,7 +13,7 @@
 #### Documentation
 
 * A comment for field `aws_principal_tags_options` in message `.google.cloud.confidentialcomputing.v1.TokenOptions` is changed 
-* Updated comment for method `VerifyAttestation`, `VerifyAttestationRequest` and  `VerifyAttestationResponse` in service `ConfidentialComputing` is changed 
+* Updated comments for methods `VerifyAttestation`, `VerifyAttestationRequest` and  `VerifyAttestationResponse` in service `ConfidentialComputing`.
 
 ### 1.6.1 (2025-07-15)
 
