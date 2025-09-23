@@ -24,8 +24,6 @@ module Google
     module Dataplex
       module V1
         module CatalogService
-          # LINT: LEGACY_NAMES
-          #
           # The primary resources offered by this service are EntryGroups, EntryTypes,
           # AspectTypes, Entries and EntryLinks. They collectively let data
           # administrators organize, manage, secure, and catalog data located across
