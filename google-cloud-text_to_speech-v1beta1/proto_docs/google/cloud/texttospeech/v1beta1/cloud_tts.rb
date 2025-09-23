@@ -192,6 +192,33 @@ module Google
           end
         end
 
+        # Configuration for a single speaker in a Gemini TTS multi-speaker setup.
+        # Enables dialogue between two speakers.
+        # @!attribute [rw] speaker_alias
+        #   @return [::String]
+        #     Required. The speaker alias of the voice. This is the user-chosen speaker
+        #     name that is used in the multispeaker text input, such as "Speaker1".
+        # @!attribute [rw] speaker_id
+        #   @return [::String]
+        #     Required. The speaker ID of the voice. See
+        #     https://cloud.google.com/text-to-speech/docs/gemini-tts#voice_options
+        #     for available values.
+        class MultispeakerPrebuiltVoice
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Configuration for a multi-speaker text-to-speech setup. Enables the use of up
+        # to two distinct voices in a single synthesis request.
+        # @!attribute [rw] speaker_voice_configs
+        #   @return [::Array<::Google::Cloud::TextToSpeech::V1beta1::MultispeakerPrebuiltVoice>]
+        #     Required. A list of configurations for the voices of the speakers. Exactly
+        #     two speaker voice configurations must be provided.
+        class MultiSpeakerVoiceConfig
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # Contains text input to be synthesized. Either `text` or `ssml` must be
         # supplied. Supplying both or neither returns
         # [google.rpc.Code.INVALID_ARGUMENT][google.rpc.Code.INVALID_ARGUMENT]. The
@@ -285,6 +312,11 @@ module Google
         #   @return [::String]
         #     Optional. The name of the model. If set, the service will choose the model
         #     matching the specified configuration.
+        # @!attribute [rw] multi_speaker_voice_config
+        #   @return [::Google::Cloud::TextToSpeech::V1beta1::MultiSpeakerVoiceConfig]
+        #     Optional. The configuration for a Gemini multi-speaker text-to-speech
+        #     setup. Enables the use of two distinct voices in a single synthesis
+        #     request.
         class VoiceSelectionParams
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -459,13 +491,19 @@ module Google
         #     contains complete, terminating sentences, which results in better prosody
         #     in the output audio.
         #
-        #     Note: The following fields are mutually exclusive: `text`, `markup`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `text`, `markup`, `multi_speaker_markup`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] markup
         #   @return [::String]
         #     Markup for HD voices specifically. This field may not be used with any
         #     other voices.
         #
-        #     Note: The following fields are mutually exclusive: `markup`, `text`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `markup`, `text`, `multi_speaker_markup`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] multi_speaker_markup
+        #   @return [::Google::Cloud::TextToSpeech::V1beta1::MultiSpeakerMarkup]
+        #     Multi-speaker markup for Gemini TTS. This field may not
+        #     be used with any other voices.
+        #
+        #     Note: The following fields are mutually exclusive: `multi_speaker_markup`, `text`, `markup`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] prompt
         #   @return [::String]
         #     This is system instruction supported only for controllable voice models.
