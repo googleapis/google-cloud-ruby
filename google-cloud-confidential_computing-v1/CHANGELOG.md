@@ -1,5 +1,25 @@
 # Changelog
 
+### 2.0.0 (2025-09-23)
+
+### ⚠ BREAKING CHANGES
+
+* Move `AwsPrincipalTagsOptions` out from `TokenOptions` message
+* Breaking change: move AwsPrincipalTagsOptions message out from TokenOptions message into the V1 namespace ([#30927](https://github.com/googleapis/google-cloud-ruby/issues/30927))
+
+#### Features
+
+* Add new `VerifyConfidentialSpace` and `VerifyConfidentialGke` rpcs and relevant fields 
+* Add new `VerifyConfidentialSpace` and `VerifyConfidentialGke` rpcs and relevant fields 
+#### Bug Fixes
+
+* Breaking change: move AwsPrincipalTagsOptions message out from TokenOptions message into the V1 namespace ([#30927](https://github.com/googleapis/google-cloud-ruby/issues/30927)) 
+* Move `AwsPrincipalTagsOptions` out from `TokenOptions` message 
+#### Documentation
+
+* A comment for field `aws_principal_tags_options` in message `.google.cloud.confidentialcomputing.v1.TokenOptions` is changed 
+* Updated comment for method `VerifyAttestation`, `VerifyAttestationRequest` and  `VerifyAttestationResponse` in service `ConfidentialComputing` is changed 
+
 ### 1.6.1 (2025-07-15)
 
 #### Documentation
