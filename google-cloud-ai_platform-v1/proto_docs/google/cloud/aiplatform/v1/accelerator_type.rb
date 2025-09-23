@@ -21,7 +21,6 @@ module Google
   module Cloud
     module AIPlatform
       module V1
-        # LINT: LEGACY_NAMES
         # Represents a hardware accelerator type.
         module AcceleratorType
           # Unspecified accelerator type, which means no accelerator.

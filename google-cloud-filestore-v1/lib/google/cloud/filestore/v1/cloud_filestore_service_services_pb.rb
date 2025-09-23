@@ -24,8 +24,6 @@ module Google
     module Filestore
       module V1
         module CloudFilestoreManager
-          # LINT: LEGACY_NAMES
-          #
           # Configures and manages Filestore resources.
           #
           # Filestore Manager v1.
