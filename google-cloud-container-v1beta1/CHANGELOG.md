@@ -1,5 +1,11 @@
 # Release History
 
+### 0.49.1 (2025-09-24)
+
+#### Documentation
+
+* remove legacy internal lint directives ([#31540](https://github.com/googleapis/google-cloud-ruby/issues/31540)) 
+
 ### 0.49.0 (2025-09-11)
 
 #### Features
