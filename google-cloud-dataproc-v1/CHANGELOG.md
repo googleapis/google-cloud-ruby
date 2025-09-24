@@ -1,5 +1,11 @@
 # Release History
 
+### 1.8.0 (2025-09-24)
+
+#### Features
+
+* Added support for JUPYTER_KERNEL_GATEWAY component ([#31535](https://github.com/googleapis/google-cloud-ruby/issues/31535)) 
+
 ### 1.7.0 (2025-09-11)
 
 #### Features
