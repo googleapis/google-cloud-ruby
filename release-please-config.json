@@ -451,6 +451,10 @@
       "component": "google-cloud-cloud_quotas-v1beta",
       "version_file": "lib/google/cloud/cloud_quotas/v1beta/version.rb"
     },
+    "google-cloud-cloud_security_compliance": {
+      "component": "google-cloud-cloud_security_compliance",
+      "version_file": "lib/google/cloud/cloud_security_compliance/version.rb"
+    },
     "google-cloud-cloud_security_compliance-v1": {
       "component": "google-cloud-cloud_security_compliance-v1",
       "version_file": "lib/google/cloud/cloud_security_compliance/v1/version.rb"

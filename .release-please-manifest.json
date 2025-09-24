@@ -219,6 +219,8 @@
   "google-cloud-cloud_quotas-v1+FILLER": "0.0.0",
   "google-cloud-cloud_quotas-v1beta": "0.6.0",
   "google-cloud-cloud_quotas-v1beta+FILLER": "0.0.0",
+  "google-cloud-cloud_security_compliance": "0.0.1",
+  "google-cloud-cloud_security_compliance+FILLER": "0.0.0",
   "google-cloud-cloud_security_compliance-v1": "0.0.1",
   "google-cloud-cloud_security_compliance-v1+FILLER": "0.0.0",
   "google-cloud-commerce-consumer-procurement": "1.2.2",
