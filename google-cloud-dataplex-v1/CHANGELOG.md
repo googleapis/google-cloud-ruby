@@ -1,5 +1,11 @@
 # Changelog
 
+### 2.6.1 (2025-09-24)
+
+#### Documentation
+
+* remove legacy internal lint directives ([#31540](https://github.com/googleapis/google-cloud-ruby/issues/31540)) 
+
 ### 2.6.0 (2025-09-11)
 
 #### Features
