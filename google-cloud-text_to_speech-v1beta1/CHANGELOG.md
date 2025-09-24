@@ -1,5 +1,11 @@
 # Release History
 
+### 0.25.0 (2025-09-24)
+
+#### Features
+
+* add Gemini TTS Multispeaker API fields ([#31539](https://github.com/googleapis/google-cloud-ruby/issues/31539)) 
+
 ### 0.24.0 (2025-09-11)
 
 #### Features
