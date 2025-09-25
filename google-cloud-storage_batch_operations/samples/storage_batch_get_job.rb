@@ -27,7 +27,7 @@ def get_job project_id:, job_id:
   request = Google::Cloud::StorageBatchOperations::V1::GetJobRequest.new name: "#{parent}/jobs/#{job_id}"
   begin
     result = client.get_job request
-    message = "job_name- #{result.name}, job_status- #{result.state}"
+    message = "Found job_name- #{result.name}, job_status- #{result.state}"
   rescue Google::Cloud::NotFoundError
     message = "Job #{job_id} not found."
   end

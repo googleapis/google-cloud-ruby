@@ -22,7 +22,7 @@ def list_job project_id:
   parent = "projects/#{project_id}/locations/global"
   request = Google::Cloud::StorageBatchOperations::V1::ListJobsRequest.new parent: parent, page_size: 10
   job_list = client.list_jobs request
-  job_list.each { |job| puts "Job name: #{job.name}" }
+  job_list.each { |job| puts "Job name: #{job.name} present in the list" }
 end
 # [END storage_batch_list_job]
 

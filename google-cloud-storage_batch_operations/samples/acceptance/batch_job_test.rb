@@ -24,6 +24,7 @@ describe "Storage Batch Operations" do
   let(:project_id)       { storage_client.project }
   let(:file_content)     { "some content" }
   let(:remote_file_name) { "ruby_file_#{SecureRandom.hex}" }
+  let(:job_name_prefix) { "projects/#{project_id}/locations/global/jobs/" }
 
   before :all do
     bucket = create_bucket_helper bucket_name
@@ -36,19 +37,22 @@ describe "Storage Batch Operations" do
 
   it "handles Storage batch operation lifecycle in sequence" do
     job_id = "ruby-sbo-job-#{SecureRandom.hex}"
+    job_name = "#{job_name_prefix}#{job_id}"
 
     # Create job
-    assert_output "The #{job_id} is created.\n" do
+    assert_output(/The #{job_id} is created./) do
       create_job bucket_name: bucket_name, prefix: "ruby_file", job_id: job_id, project_id: project_id
     end
 
     # List jobs
-    out, _err = capture_io { list_job project_id: project_id }
-    assert_includes out, job_id, "#{job_id} not found in the list"
+    assert_output(/Job name: #{job_name} present in the list/) do
+      list_job project_id: project_id
+    end
 
     # Get job details
-    out, _err = capture_io { get_job project_id: project_id, job_id: job_id }
-    assert_includes out, job_id, "#{job_id} not found"
+    assert_output(/Found job_name- #{job_name}, job_status- /) do
+      get_job project_id: project_id, job_id: job_id
+    end
 
     # Cancel job
     expected_output_pattern = /The #{job_id} is canceled\.|#{job_id} was already completed or was not created\./
