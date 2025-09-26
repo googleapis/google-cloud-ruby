@@ -2798,7 +2798,7 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload execute_sql(password: nil, instance: nil, database: nil, user: nil, sql_statement: nil)
+            # @overload execute_sql(password: nil, instance: nil, database: nil, user: nil, sql_statement: nil, validate_only: nil)
             #   Pass arguments to `execute_sql` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -2819,6 +2819,9 @@ module Google
             #   @param sql_statement [::String]
             #     Required. SQL statement to execute on database. Any valid statement is
             #     permitted, including DDL, DML, DQL statements.
+            #   @param validate_only [::Boolean]
+            #     Optional. If set, validates the sql statement by performing
+            #     syntax and semantic validation and doesn't execute the query.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::AlloyDB::V1::ExecuteSqlResponse]
