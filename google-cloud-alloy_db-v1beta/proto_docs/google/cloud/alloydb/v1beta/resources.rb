@@ -553,10 +553,10 @@ module Google
         #     ```
         # @!attribute [r] service_account_email
         #   @return [::String]
-        #     Output only. AlloyDB per-cluster service agent email. This service account
-        #     is created per-cluster per-project, and is different from that of the
-        #     primary service agent which is created per-project. The service account
-        #     naming format is subject to change.
+        #     Output only. AlloyDB per-cluster service account. This service account is
+        #     created per-cluster per-project, and is different from the per-project
+        #     service account. The per-cluster service account naming format is subject
+        #     to change.
         class Cluster
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -674,11 +674,8 @@ module Google
             # The cluster is active and running.
             READY = 1
 
-            # The cluster is stopped. All instances in the cluster are stopped.
-            # Customers can start a stopped cluster at any point and all their
-            # instances will come back to life with same names and IP resources. In
-            # this state, customer pays for storage.
-            # Associated backups could also be present in a stopped cluster.
+            # This is unused. Even when all instances in the cluster are stopped, the
+            # cluster remains in READY state.
             STOPPED = 2
 
             # The cluster is empty and has no associated resources.
@@ -1179,6 +1176,9 @@ module Google
           # @!attribute [rw] flags
           #   @return [::Google::Protobuf::Map{::String => ::String}]
           #     Optional. Connection Pool flags, as a list of "key": "value" pairs.
+          # @!attribute [r] pooler_count
+          #   @return [::Integer]
+          #     Output only. The number of running poolers per instance.
           class ConnectionPoolConfig
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -1190,18 +1190,6 @@ module Google
             class FlagsEntry
               include ::Google::Protobuf::MessageExts
               extend ::Google::Protobuf::MessageExts::ClassMethods
-            end
-
-            # The pool mode. Defaults to `POOL_MODE_TRANSACTION`.
-            module PoolMode
-              # The pool mode is not specified. Defaults to `POOL_MODE_TRANSACTION`.
-              POOL_MODE_UNSPECIFIED = 0
-
-              # Server is released back to pool after a client disconnects.
-              POOL_MODE_SESSION = 1
-
-              # Server is released back to pool after a transaction finishes.
-              POOL_MODE_TRANSACTION = 2
             end
           end
 
@@ -1706,14 +1694,31 @@ module Google
         #     `projects/{project}/locations/{location}/clusters/{cluster}/databases/{database}`.
         # @!attribute [rw] charset
         #   @return [::String]
-        #     Optional. Charset for the database.
+        #     Optional. Immutable. Charset for the database.
         #     This field can contain any PostgreSQL supported charset name.
         #     Example values include "UTF8", "SQL_ASCII", etc.
         # @!attribute [rw] collation
         #   @return [::String]
-        #     Optional. Collation for the database.
-        #     Name of the custom or native collation for postgres.
-        #     Example values include "C", "POSIX", etc
+        #     Optional. Immutable. lc_collate for the database.
+        #     String sort order.
+        #     Example values include "C", "POSIX", etc.
+        # @!attribute [rw] character_type
+        #   @return [::String]
+        #     Optional. Immutable. lc_ctype for the database.
+        #     Character classification (What is a letter? The upper-case equivalent?).
+        #     Example values include "C", "POSIX", etc.
+        # @!attribute [rw] is_template
+        #   @deprecated This field is deprecated and may be removed in the next major version update.
+        #   @return [::Boolean]
+        #     Optional. Whether the database is a template database.
+        #     Deprecated in favor of is_template_database.
+        # @!attribute [rw] database_template
+        #   @return [::String]
+        #     Input only. Immutable. Template of the database to be used for creating a
+        #     new database.
+        # @!attribute [rw] is_template_database
+        #   @return [::Boolean]
+        #     Optional. Whether the database is a template database.
         class Database
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -1768,6 +1773,9 @@ module Google
 
           # The database version is Postgres 16.
           POSTGRES_16 = 4
+
+          # The database version is Postgres 17.
+          POSTGRES_17 = 5
         end
 
         # Subscription_type added to distinguish between Standard and Trial
