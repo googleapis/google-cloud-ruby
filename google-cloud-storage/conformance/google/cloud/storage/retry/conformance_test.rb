@@ -61,8 +61,8 @@ class ConformanceTest < MockStorage
       rescue => e
 
       puts "**********************"
-        puts "Error response- #{response.body}"
-        puts "Error occurred while running test #{scenario}"
+        puts "Error occurred while running test - #{response.body}"
+        puts "#{scenario}"
         puts "Error occurred while running test in function- #{lib_func}"
         puts "**********************"
 
