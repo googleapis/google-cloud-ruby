@@ -403,6 +403,9 @@ module Google
         end
 
         # Tool to retrieve public maps data for grounding, powered by Google.
+        # @!attribute [rw] enable_widget
+        #   @return [::Boolean]
+        #     If true, include the widget context token in the response.
         class GoogleMaps
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
