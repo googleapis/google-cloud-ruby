@@ -62,7 +62,6 @@ class ConformanceTest < MockStorage
 
       puts "**********************"
         puts "Error occurred while running test - #{response.body}"
-        puts "#{scenario}"
         puts "Error occurred while running test in function- #{lib_func}"
         puts "**********************"
 
