@@ -925,7 +925,7 @@ module Google
               end
 
               ##
-              # Moves a persistent disk from one zone to another.
+              # Starting September 29, 2025, you can't use the moveDisk API on new projects. To move a disk to a different region or zone, follow the steps in [Change the location of a disk](https://\\{$universe.dns_names.final_documentation_domain}/compute/docs/disks/migrate-to-hyperdisk#migrate-to-hd). Projects that already use the moveDisk API can continue usage until September 29, 2026. Starting November 1, 2025, API responses will include a warning message in the response body about the upcoming deprecation. You can skip the message to continue using the service without interruption.
               #
               # @overload move_disk(request, options = nil)
               #   Pass arguments to `move_disk` via a request object, either of type
