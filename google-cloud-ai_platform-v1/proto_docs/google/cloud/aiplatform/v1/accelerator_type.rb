@@ -66,6 +66,9 @@ module Google
           # Nvidia GB200 GPU.
           NVIDIA_GB200 = 17
 
+          # Nvidia RTX Pro 6000 GPU.
+          NVIDIA_RTX_PRO_6000 = 18
+
           # TPU v2.
           TPU_V2 = 6
 
