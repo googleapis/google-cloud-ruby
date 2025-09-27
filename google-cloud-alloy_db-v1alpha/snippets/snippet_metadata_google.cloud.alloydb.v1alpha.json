@@ -1492,6 +1492,46 @@
       ]
     },
     {
+      "region_tag": "alloydb_v1alpha_generated_AlloyDBAdmin_CreateDatabase_sync",
+      "title": "Snippet for the create_database call in the AlloyDBAdmin service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AlloyDB::V1alpha::AlloyDBAdmin::Client#create_database.",
+      "file": "alloy_db_admin/create_database.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_database",
+        "full_name": "::Google::Cloud::AlloyDB::V1alpha::AlloyDBAdmin::Client#create_database",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::AlloyDB::V1alpha::CreateDatabaseRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::AlloyDB::V1alpha::Database",
+        "client": {
+          "short_name": "AlloyDBAdmin::Client",
+          "full_name": "::Google::Cloud::AlloyDB::V1alpha::AlloyDBAdmin::Client"
+        },
+        "method": {
+          "short_name": "CreateDatabase",
+          "full_name": "google.cloud.alloydb.v1alpha.AlloyDBAdmin.CreateDatabase",
+          "service": {
+            "short_name": "AlloyDBAdmin",
+            "full_name": "google.cloud.alloydb.v1alpha.AlloyDBAdmin"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
       "region_tag": "alloydb_v1alpha_generated_AlloyDBCloudSQLAdmin_RestoreFromCloudSQL_sync",
       "title": "Snippet for the restore_from_cloud_sql call in the AlloyDBCloudSQLAdmin service",
       "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AlloyDB::V1alpha::AlloyDBCloudSQLAdmin::Client#restore_from_cloud_sql.",

@@ -131,6 +131,11 @@ module Google
                     initial_delay: 1.0, max_delay: 60.0, multiplier: 1.3, retry_codes: [14]
                   }
 
+                  default_config.rpcs.create_database.timeout = 60.0
+                  default_config.rpcs.create_database.retry_policy = {
+                    initial_delay: 1.0, max_delay: 60.0, multiplier: 1.3, retry_codes: [14]
+                  }
+
                   default_config
                 end
                 yield @configure if block_given?
@@ -2648,7 +2653,7 @@ module Google
               #   @param options [::Gapic::CallOptions, ::Hash]
               #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
               #
-              # @overload execute_sql(password: nil, instance: nil, database: nil, user: nil, sql_statement: nil)
+              # @overload execute_sql(password: nil, instance: nil, database: nil, user: nil, sql_statement: nil, validate_only: nil)
               #   Pass arguments to `execute_sql` via keyword arguments. Note that at
               #   least one keyword argument is required. To specify no parameters, or to keep all
               #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -2669,6 +2674,9 @@ module Google
               #   @param sql_statement [::String]
               #     Required. SQL statement to execute on database. Any valid statement is
               #     permitted, including DDL, DML, DQL statements.
+              #   @param validate_only [::Boolean]
+              #     Optional. If set, validates the sql statement by performing
+              #     syntax and semantic validation and doesn't execute the query.
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Google::Cloud::AlloyDB::V1alpha::ExecuteSqlResponse]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
@@ -4098,6 +4106,88 @@ module Google
               end
 
               ##
+              # Creates a new Database in a given project, location, and cluster.
+              #
+              # @overload create_database(request, options = nil)
+              #   Pass arguments to `create_database` via a request object, either of type
+              #   {::Google::Cloud::AlloyDB::V1alpha::CreateDatabaseRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::AlloyDB::V1alpha::CreateDatabaseRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload create_database(parent: nil, database_id: nil, database: nil)
+              #   Pass arguments to `create_database` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param parent [::String]
+              #     Required. Value for parent.
+              #   @param database_id [::String]
+              #     Required. ID of the requesting object.
+              #   @param database [::Google::Cloud::AlloyDB::V1alpha::Database, ::Hash]
+              #     Required. The resource being created.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Cloud::AlloyDB::V1alpha::Database]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Cloud::AlloyDB::V1alpha::Database]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/alloy_db/v1alpha"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::AlloyDB::V1alpha::AlloyDBAdmin::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::AlloyDB::V1alpha::CreateDatabaseRequest.new
+              #
+              #   # Call the create_database method.
+              #   result = client.create_database request
+              #
+              #   # The returned object is of type Google::Cloud::AlloyDB::V1alpha::Database.
+              #   p result
+              #
+              def create_database request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::AlloyDB::V1alpha::CreateDatabaseRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.create_database.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::AlloyDB::V1alpha::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.create_database.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.create_database.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @alloy_db_admin_stub.create_database request, options do |result, operation|
+                  yield result, operation if block_given?
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
               # Configuration class for the AlloyDBAdmin REST API.
               #
               # This class represents the configuration for AlloyDBAdmin REST,
@@ -4435,6 +4525,11 @@ module Google
                   # @return [::Gapic::Config::Method]
                   #
                   attr_reader :list_databases
+                  ##
+                  # RPC-specific configuration for `create_database`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :create_database
 
                   # @private
                   def initialize parent_rpcs = nil
@@ -4512,6 +4607,8 @@ module Google
                     @delete_user = ::Gapic::Config::Method.new delete_user_config
                     list_databases_config = parent_rpcs.list_databases if parent_rpcs.respond_to? :list_databases
                     @list_databases = ::Gapic::Config::Method.new list_databases_config
+                    create_database_config = parent_rpcs.create_database if parent_rpcs.respond_to? :create_database
+                    @create_database = ::Gapic::Config::Method.new create_database_config
 
                     yield self if block_given?
                   end
