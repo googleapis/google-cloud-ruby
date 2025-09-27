@@ -72,6 +72,7 @@
     "snippets/alloy_db_admin/batch_create_instances.rb",
     "snippets/alloy_db_admin/create_backup.rb",
     "snippets/alloy_db_admin/create_cluster.rb",
+    "snippets/alloy_db_admin/create_database.rb",
     "snippets/alloy_db_admin/create_instance.rb",
     "snippets/alloy_db_admin/create_secondary_cluster.rb",
     "snippets/alloy_db_admin/create_secondary_instance.rb",
