@@ -11422,9 +11422,24 @@ module Google
         # @!attribute [rw] subnetwork
         #   @return [::String]
         #     Name of the Subnetwork resource to return.
+        # @!attribute [rw] views
+        #   @return [::String]
+        #     Defines the extra views returned back in the subnetwork resource. Supported values: - WITH_UTILIZATION: Utilization data is included in the response.
+        #     Check the Views enum for the list of possible values.
         class GetSubnetworkRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Defines the extra views returned back in the subnetwork resource. Supported values: - WITH_UTILIZATION: Utilization data is included in the response.
+          module Views
+            # A value indicating that the enum field is not set.
+            UNDEFINED_VIEWS = 0
+
+            DEFAULT = 115_302_945
+
+            # Utilization data is included in the response.
+            WITH_UTILIZATION = 504_090_633
+          end
         end
 
         # A request message for TargetGrpcProxies.Get. See the method description for details.
@@ -18182,6 +18197,9 @@ module Google
         # @!attribute [rw] self_link
         #   @return [::String]
         #     [Output Only] Server-defined URL for the resource.
+        # @!attribute [rw] single_region_production_critical_peer_locations
+        #   @return [::Array<::String>]
+        #     [Output Only] URLs of the other locations that can pair up with this location to support Single-Region 99.99% SLA. E.g. iad-zone1-1 and iad-zone2-5467 are Single-Region 99.99% peer locations of each other.
         # @!attribute [rw] status
         #   @return [::String]
         #     [Output Only] The status of this InterconnectLocation, which can take one of the following values: - CLOSED: The InterconnectLocation is closed and is unavailable for provisioning new Interconnects. - AVAILABLE: The InterconnectLocation is available for provisioning new Interconnects.
@@ -18493,6 +18511,9 @@ module Google
         # @!attribute [rw] max_lag_size10_gbps
         #   @return [::Integer]
         #     [Output Only] The maximum number of 10 Gbps ports supported in a link aggregation group (LAG). When linkType is 10 Gbps, requestedLinkCount cannot exceed max_lag_size_10_gbps.
+        # @!attribute [rw] max_lag_size400_gbps
+        #   @return [::Integer]
+        #     [Output Only] The maximum number of 400 Gbps ports supported in a link aggregation group (LAG). When linkType is 400 Gbps, requestedLinkCount cannot exceed max_lag_size_400_gbps.
         # @!attribute [rw] name
         #   @return [::String]
         #     [Output Only] Name of the resource.
@@ -21679,9 +21700,24 @@ module Google
         # @!attribute [rw] return_partial_success
         #   @return [::Boolean]
         #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.
+        # @!attribute [rw] views
+        #   @return [::String]
+        #     Defines the extra views returned back in the subnetwork resource. Supported values: - WITH_UTILIZATION: Utilization data is included in the response.
+        #     Check the Views enum for the list of possible values.
         class ListSubnetworksRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Defines the extra views returned back in the subnetwork resource. Supported values: - WITH_UTILIZATION: Utilization data is included in the response.
+          module Views
+            # A value indicating that the enum field is not set.
+            UNDEFINED_VIEWS = 0
+
+            DEFAULT = 115_302_945
+
+            # Utilization data is included in the response.
+            WITH_UTILIZATION = 504_090_633
+          end
         end
 
         # A request message for TargetGrpcProxies.List. See the method description for details.
@@ -29523,6 +29559,9 @@ module Google
         # @!attribute [rw] backend_service
         #   @return [::String]
         #     The full or partial URL to the BackendService resource being mirrored to. The backend service configured for a mirroring policy must reference backends that are of the same type as the original backend service matched in the URL map. Serverless NEG backends are not currently supported as a mirrored backend service.
+        # @!attribute [rw] mirror_percent
+        #   @return [::Float]
+        #     The percentage of requests to be mirrored to `backend_service`.
         class RequestMirrorPolicy
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -37081,6 +37120,9 @@ module Google
         # @!attribute [rw] system_reserved_internal_ipv6_ranges
         #   @return [::Array<::String>]
         #     Output only. [Output Only] The array of internal IPv6 network ranges reserved from the subnetwork's internal IPv6 range for system use.
+        # @!attribute [rw] utilization_details
+        #   @return [::Google::Cloud::Compute::V1::SubnetworkUtilizationDetails]
+        #     Output only. [Output Only] The current IP utilization of all subnetwork ranges. Contains the total number of allocated and free IPs in each range.
         class Subnetwork
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -37339,6 +37381,47 @@ module Google
         #   @return [::String]
         #     The URL of the reserved internal range.
         class SubnetworkSecondaryRange
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # The current IP utilization of all subnetwork ranges. Contains the total number of allocated and free IPs in each range.
+        # @!attribute [rw] external_ipv6_instance_utilization
+        #   @return [::Google::Cloud::Compute::V1::SubnetworkUtilizationDetailsIPV6Utilization]
+        #     Utilizations of external IPV6 IP range.
+        # @!attribute [rw] external_ipv6_lb_utilization
+        #   @return [::Google::Cloud::Compute::V1::SubnetworkUtilizationDetailsIPV6Utilization]
+        #     Utilizations of external IPV6 IP range for NetLB.
+        # @!attribute [rw] internal_ipv6_utilization
+        #   @return [::Google::Cloud::Compute::V1::SubnetworkUtilizationDetailsIPV6Utilization]
+        #     Utilizations of internal IPV6 IP range.
+        # @!attribute [rw] ipv4_utilizations
+        #   @return [::Array<::Google::Cloud::Compute::V1::SubnetworkUtilizationDetailsIPV4Utilization>]
+        #     Utilizations of all IPV4 IP ranges. For primary ranges, the range name will be empty.
+        class SubnetworkUtilizationDetails
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # The IPV4 utilization of a single IP range.
+        # @!attribute [rw] range_name
+        #   @return [::String]
+        #     Will be set for secondary range. Empty for primary IPv4 range.
+        # @!attribute [rw] total_allocated_ip
+        #   @return [::Integer]
+        # @!attribute [rw] total_free_ip
+        #   @return [::Integer]
+        class SubnetworkUtilizationDetailsIPV4Utilization
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # The IPV6 utilization of a single IP range.
+        # @!attribute [rw] total_allocated_ip
+        #   @return [::Google::Cloud::Compute::V1::Uint128]
+        # @!attribute [rw] total_free_ip
+        #   @return [::Google::Cloud::Compute::V1::Uint128]
+        class SubnetworkUtilizationDetailsIPV6Utilization
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
