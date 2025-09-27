@@ -1351,6 +1351,7 @@ class ::Google::Cloud::AlloyDB::V1::AlloyDBAdmin::Rest::ClientTest < Minitest::T
     database = "hello world"
     user = "hello world"
     sql_statement = "hello world"
+    validate_only = true
 
     execute_sql_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
@@ -1366,27 +1367,27 @@ class ::Google::Cloud::AlloyDB::V1::AlloyDBAdmin::Rest::ClientTest < Minitest::T
         end
 
         # Use hash object
-        client.execute_sql({ password: password, instance: instance, database: database, user: user, sql_statement: sql_statement }) do |_result, response|
+        client.execute_sql({ password: password, instance: instance, database: database, user: user, sql_statement: sql_statement, validate_only: validate_only }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.execute_sql password: password, instance: instance, database: database, user: user, sql_statement: sql_statement do |_result, response|
+        client.execute_sql password: password, instance: instance, database: database, user: user, sql_statement: sql_statement, validate_only: validate_only do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.execute_sql ::Google::Cloud::AlloyDB::V1::ExecuteSqlRequest.new(password: password, instance: instance, database: database, user: user, sql_statement: sql_statement) do |_result, response|
+        client.execute_sql ::Google::Cloud::AlloyDB::V1::ExecuteSqlRequest.new(password: password, instance: instance, database: database, user: user, sql_statement: sql_statement, validate_only: validate_only) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.execute_sql({ password: password, instance: instance, database: database, user: user, sql_statement: sql_statement }, call_options) do |_result, response|
+        client.execute_sql({ password: password, instance: instance, database: database, user: user, sql_statement: sql_statement, validate_only: validate_only }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.execute_sql(::Google::Cloud::AlloyDB::V1::ExecuteSqlRequest.new(password: password, instance: instance, database: database, user: user, sql_statement: sql_statement), call_options) do |_result, response|
+        client.execute_sql(::Google::Cloud::AlloyDB::V1::ExecuteSqlRequest.new(password: password, instance: instance, database: database, user: user, sql_statement: sql_statement, validate_only: validate_only), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
