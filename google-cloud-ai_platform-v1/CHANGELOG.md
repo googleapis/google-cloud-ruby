@@ -1,5 +1,12 @@
 # Changelog
 
+### 1.24.0 (2025-09-28)
+
+#### Features
+
+* A new value `NVIDIA_RTX_PRO_6000` is added to enum `AcceleratorType` ([#31554](https://github.com/googleapis/google-cloud-ruby/issues/31554)) 
+* Add enable_widget option in Google Maps and additional grounding information ([#31549](https://github.com/googleapis/google-cloud-ruby/issues/31549)) 
+
 ### 1.23.1 (2025-09-24)
 
 #### Documentation
