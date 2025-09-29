@@ -1152,6 +1152,10 @@ module Google
         #   @return [::String]
         #     Required. SQL statement to execute on database. Any valid statement is
         #     permitted, including DDL, DML, DQL statements.
+        # @!attribute [rw] validate_only
+        #   @return [::Boolean]
+        #     Optional. If set, validates the sql statement by performing
+        #     syntax and semantic validation and doesn't execute the query.
         class ExecuteSqlRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -1606,9 +1610,32 @@ module Google
           # @!attribute [rw] state
           #   @return [::Google::Cloud::AlloyDB::V1alpha::UpgradeClusterResponse::Status]
           #     State of this stage.
+          # @!attribute [r] schedule
+          #   @return [::Google::Cloud::AlloyDB::V1alpha::UpgradeClusterStatus::StageStatus::StageSchedule]
+          #     Output only. Timing information for the stage execution.
           class StageStatus
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
+
+            # Timing information for the stage execution.
+            # @!attribute [rw] estimated_start_time
+            #   @return [::Google::Protobuf::Timestamp]
+            #     When the stage is expected to start. Set only if the stage has not
+            #     started yet.
+            # @!attribute [rw] actual_start_time
+            #   @return [::Google::Protobuf::Timestamp]
+            #     Actual start time of the stage. Set only if the stage has started.
+            # @!attribute [rw] estimated_end_time
+            #   @return [::Google::Protobuf::Timestamp]
+            #     When the stage is expected to end. Set only if the stage has not
+            #     completed yet.
+            # @!attribute [rw] actual_end_time
+            #   @return [::Google::Protobuf::Timestamp]
+            #     Actual end time of the stage. Set only if the stage has completed.
+            class StageSchedule
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
           end
 
           # Read pool instances upgrade specific status.
@@ -1787,7 +1814,7 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Message for requesting list of Databases.
+        # Message for ListDatabases request.
         # @!attribute [rw] parent
         #   @return [::String]
         #     Required. Parent value for ListDatabasesRequest.
@@ -1811,15 +1838,30 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Message for response to listing Databases.
+        # Message for ListDatabases response.
         # @!attribute [rw] databases
         #   @return [::Array<::Google::Cloud::AlloyDB::V1alpha::Database>]
-        #     The list of databases
+        #     The list of databases.
         # @!attribute [rw] next_page_token
         #   @return [::String]
         #     A token identifying the next page of results the server should return.
         #     If this field is omitted, there are no subsequent pages.
         class ListDatabasesResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Message for CreateDatabase request.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. Value for parent.
+        # @!attribute [rw] database_id
+        #   @return [::String]
+        #     Required. ID of the requesting object.
+        # @!attribute [rw] database
+        #   @return [::Google::Cloud::AlloyDB::V1alpha::Database]
+        #     Required. The resource being created.
+        class CreateDatabaseRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end

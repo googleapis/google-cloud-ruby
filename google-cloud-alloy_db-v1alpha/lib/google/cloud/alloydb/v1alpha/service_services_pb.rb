@@ -135,6 +135,8 @@ module Google
             rpc :DeleteUser, ::Google::Cloud::AlloyDB::V1alpha::DeleteUserRequest, ::Google::Protobuf::Empty
             # Lists Databases in a given project and location.
             rpc :ListDatabases, ::Google::Cloud::AlloyDB::V1alpha::ListDatabasesRequest, ::Google::Cloud::AlloyDB::V1alpha::ListDatabasesResponse
+            # Creates a new Database in a given project, location, and cluster.
+            rpc :CreateDatabase, ::Google::Cloud::AlloyDB::V1alpha::CreateDatabaseRequest, ::Google::Cloud::AlloyDB::V1alpha::Database
           end
 
           Stub = Service.rpc_stub_class

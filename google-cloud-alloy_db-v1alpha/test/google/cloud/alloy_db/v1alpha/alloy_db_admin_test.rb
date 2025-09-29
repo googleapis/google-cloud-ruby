@@ -1600,6 +1600,7 @@ class ::Google::Cloud::AlloyDB::V1alpha::AlloyDBAdmin::ClientTest < Minitest::Te
     database = "hello world"
     user = "hello world"
     sql_statement = "hello world"
+    validate_only = true
 
     execute_sql_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :execute_sql, name
@@ -1610,6 +1611,7 @@ class ::Google::Cloud::AlloyDB::V1alpha::AlloyDBAdmin::ClientTest < Minitest::Te
       assert_equal "hello world", request["database"]
       assert_equal "hello world", request["user"]
       assert_equal "hello world", request["sql_statement"]
+      assert_equal true, request["validate_only"]
       refute_nil options
     end
 
@@ -1620,31 +1622,31 @@ class ::Google::Cloud::AlloyDB::V1alpha::AlloyDBAdmin::ClientTest < Minitest::Te
       end
 
       # Use hash object
-      client.execute_sql({ password: password, instance: instance, database: database, user: user, sql_statement: sql_statement }) do |response, operation|
+      client.execute_sql({ password: password, instance: instance, database: database, user: user, sql_statement: sql_statement, validate_only: validate_only }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.execute_sql password: password, instance: instance, database: database, user: user, sql_statement: sql_statement do |response, operation|
+      client.execute_sql password: password, instance: instance, database: database, user: user, sql_statement: sql_statement, validate_only: validate_only do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.execute_sql ::Google::Cloud::AlloyDB::V1alpha::ExecuteSqlRequest.new(password: password, instance: instance, database: database, user: user, sql_statement: sql_statement) do |response, operation|
+      client.execute_sql ::Google::Cloud::AlloyDB::V1alpha::ExecuteSqlRequest.new(password: password, instance: instance, database: database, user: user, sql_statement: sql_statement, validate_only: validate_only) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.execute_sql({ password: password, instance: instance, database: database, user: user, sql_statement: sql_statement }, grpc_options) do |response, operation|
+      client.execute_sql({ password: password, instance: instance, database: database, user: user, sql_statement: sql_statement, validate_only: validate_only }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.execute_sql(::Google::Cloud::AlloyDB::V1alpha::ExecuteSqlRequest.new(password: password, instance: instance, database: database, user: user, sql_statement: sql_statement), grpc_options) do |response, operation|
+      client.execute_sql(::Google::Cloud::AlloyDB::V1alpha::ExecuteSqlRequest.new(password: password, instance: instance, database: database, user: user, sql_statement: sql_statement, validate_only: validate_only), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -2580,6 +2582,68 @@ class ::Google::Cloud::AlloyDB::V1alpha::AlloyDBAdmin::ClientTest < Minitest::Te
 
       # Verify method calls
       assert_equal 5, list_databases_client_stub.call_rpc_count
+    end
+  end
+
+  def test_create_database
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::AlloyDB::V1alpha::Database.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    database_id = "hello world"
+    database = {}
+
+    create_database_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :create_database, name
+      assert_kind_of ::Google::Cloud::AlloyDB::V1alpha::CreateDatabaseRequest, request
+      assert_equal "hello world", request["parent"]
+      assert_equal "hello world", request["database_id"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::AlloyDB::V1alpha::Database), request["database"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, create_database_client_stub do
+      # Create client
+      client = ::Google::Cloud::AlloyDB::V1alpha::AlloyDBAdmin::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.create_database({ parent: parent, database_id: database_id, database: database }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.create_database parent: parent, database_id: database_id, database: database do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.create_database ::Google::Cloud::AlloyDB::V1alpha::CreateDatabaseRequest.new(parent: parent, database_id: database_id, database: database) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.create_database({ parent: parent, database_id: database_id, database: database }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.create_database(::Google::Cloud::AlloyDB::V1alpha::CreateDatabaseRequest.new(parent: parent, database_id: database_id, database: database), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, create_database_client_stub.call_rpc_count
     end
   end
 
