@@ -602,6 +602,7 @@ class ::Google::Cloud::PubSub::V1::SubscriptionAdmin::ClientTest < Minitest::Tes
     client_id = "hello world"
     max_outstanding_messages = 42
     max_outstanding_bytes = 42
+    protocol_version = 42
 
     streaming_pull_client_stub = ClientStub.new [grpc_response].to_enum, grpc_operation do |name, request, options:|
       assert_equal :streaming_pull, name
@@ -617,8 +618,8 @@ class ::Google::Cloud::PubSub::V1::SubscriptionAdmin::ClientTest < Minitest::Tes
       end
 
       # Use enumerable object with hash and protobuf object.
-      request_hash = { subscription: subscription, ack_ids: ack_ids, modify_deadline_seconds: modify_deadline_seconds, modify_deadline_ack_ids: modify_deadline_ack_ids, stream_ack_deadline_seconds: stream_ack_deadline_seconds, client_id: client_id, max_outstanding_messages: max_outstanding_messages, max_outstanding_bytes: max_outstanding_bytes }
-      request_proto = ::Google::Cloud::PubSub::V1::StreamingPullRequest.new subscription: subscription, ack_ids: ack_ids, modify_deadline_seconds: modify_deadline_seconds, modify_deadline_ack_ids: modify_deadline_ack_ids, stream_ack_deadline_seconds: stream_ack_deadline_seconds, client_id: client_id, max_outstanding_messages: max_outstanding_messages, max_outstanding_bytes: max_outstanding_bytes
+      request_hash = { subscription: subscription, ack_ids: ack_ids, modify_deadline_seconds: modify_deadline_seconds, modify_deadline_ack_ids: modify_deadline_ack_ids, stream_ack_deadline_seconds: stream_ack_deadline_seconds, client_id: client_id, max_outstanding_messages: max_outstanding_messages, max_outstanding_bytes: max_outstanding_bytes, protocol_version: protocol_version }
+      request_proto = ::Google::Cloud::PubSub::V1::StreamingPullRequest.new subscription: subscription, ack_ids: ack_ids, modify_deadline_seconds: modify_deadline_seconds, modify_deadline_ack_ids: modify_deadline_ack_ids, stream_ack_deadline_seconds: stream_ack_deadline_seconds, client_id: client_id, max_outstanding_messages: max_outstanding_messages, max_outstanding_bytes: max_outstanding_bytes, protocol_version: protocol_version
       enum_input = [request_hash, request_proto].to_enum
       client.streaming_pull enum_input do |response, operation|
         assert_kind_of Enumerable, response
@@ -629,8 +630,8 @@ class ::Google::Cloud::PubSub::V1::SubscriptionAdmin::ClientTest < Minitest::Tes
       end
 
       # Use stream input object (from gapic-common).
-      request_hash = { subscription: subscription, ack_ids: ack_ids, modify_deadline_seconds: modify_deadline_seconds, modify_deadline_ack_ids: modify_deadline_ack_ids, stream_ack_deadline_seconds: stream_ack_deadline_seconds, client_id: client_id, max_outstanding_messages: max_outstanding_messages, max_outstanding_bytes: max_outstanding_bytes }
-      request_proto = ::Google::Cloud::PubSub::V1::StreamingPullRequest.new subscription: subscription, ack_ids: ack_ids, modify_deadline_seconds: modify_deadline_seconds, modify_deadline_ack_ids: modify_deadline_ack_ids, stream_ack_deadline_seconds: stream_ack_deadline_seconds, client_id: client_id, max_outstanding_messages: max_outstanding_messages, max_outstanding_bytes: max_outstanding_bytes
+      request_hash = { subscription: subscription, ack_ids: ack_ids, modify_deadline_seconds: modify_deadline_seconds, modify_deadline_ack_ids: modify_deadline_ack_ids, stream_ack_deadline_seconds: stream_ack_deadline_seconds, client_id: client_id, max_outstanding_messages: max_outstanding_messages, max_outstanding_bytes: max_outstanding_bytes, protocol_version: protocol_version }
+      request_proto = ::Google::Cloud::PubSub::V1::StreamingPullRequest.new subscription: subscription, ack_ids: ack_ids, modify_deadline_seconds: modify_deadline_seconds, modify_deadline_ack_ids: modify_deadline_ack_ids, stream_ack_deadline_seconds: stream_ack_deadline_seconds, client_id: client_id, max_outstanding_messages: max_outstanding_messages, max_outstanding_bytes: max_outstanding_bytes, protocol_version: protocol_version
       stream_input = Gapic::StreamInput.new
       client.streaming_pull stream_input do |response, operation|
         assert_kind_of Enumerable, response
@@ -644,8 +645,8 @@ class ::Google::Cloud::PubSub::V1::SubscriptionAdmin::ClientTest < Minitest::Tes
       stream_input.close
 
       # Use enumerable object with hash and protobuf object with options.
-      request_hash = { subscription: subscription, ack_ids: ack_ids, modify_deadline_seconds: modify_deadline_seconds, modify_deadline_ack_ids: modify_deadline_ack_ids, stream_ack_deadline_seconds: stream_ack_deadline_seconds, client_id: client_id, max_outstanding_messages: max_outstanding_messages, max_outstanding_bytes: max_outstanding_bytes }
-      request_proto = ::Google::Cloud::PubSub::V1::StreamingPullRequest.new subscription: subscription, ack_ids: ack_ids, modify_deadline_seconds: modify_deadline_seconds, modify_deadline_ack_ids: modify_deadline_ack_ids, stream_ack_deadline_seconds: stream_ack_deadline_seconds, client_id: client_id, max_outstanding_messages: max_outstanding_messages, max_outstanding_bytes: max_outstanding_bytes
+      request_hash = { subscription: subscription, ack_ids: ack_ids, modify_deadline_seconds: modify_deadline_seconds, modify_deadline_ack_ids: modify_deadline_ack_ids, stream_ack_deadline_seconds: stream_ack_deadline_seconds, client_id: client_id, max_outstanding_messages: max_outstanding_messages, max_outstanding_bytes: max_outstanding_bytes, protocol_version: protocol_version }
+      request_proto = ::Google::Cloud::PubSub::V1::StreamingPullRequest.new subscription: subscription, ack_ids: ack_ids, modify_deadline_seconds: modify_deadline_seconds, modify_deadline_ack_ids: modify_deadline_ack_ids, stream_ack_deadline_seconds: stream_ack_deadline_seconds, client_id: client_id, max_outstanding_messages: max_outstanding_messages, max_outstanding_bytes: max_outstanding_bytes, protocol_version: protocol_version
       enum_input = [request_hash, request_proto].to_enum
       client.streaming_pull enum_input, grpc_options do |response, operation|
         assert_kind_of Enumerable, response
@@ -656,8 +657,8 @@ class ::Google::Cloud::PubSub::V1::SubscriptionAdmin::ClientTest < Minitest::Tes
       end
 
       # Use stream input object (from gapic-common) with options.
-      request_hash = { subscription: subscription, ack_ids: ack_ids, modify_deadline_seconds: modify_deadline_seconds, modify_deadline_ack_ids: modify_deadline_ack_ids, stream_ack_deadline_seconds: stream_ack_deadline_seconds, client_id: client_id, max_outstanding_messages: max_outstanding_messages, max_outstanding_bytes: max_outstanding_bytes }
-      request_proto = ::Google::Cloud::PubSub::V1::StreamingPullRequest.new subscription: subscription, ack_ids: ack_ids, modify_deadline_seconds: modify_deadline_seconds, modify_deadline_ack_ids: modify_deadline_ack_ids, stream_ack_deadline_seconds: stream_ack_deadline_seconds, client_id: client_id, max_outstanding_messages: max_outstanding_messages, max_outstanding_bytes: max_outstanding_bytes
+      request_hash = { subscription: subscription, ack_ids: ack_ids, modify_deadline_seconds: modify_deadline_seconds, modify_deadline_ack_ids: modify_deadline_ack_ids, stream_ack_deadline_seconds: stream_ack_deadline_seconds, client_id: client_id, max_outstanding_messages: max_outstanding_messages, max_outstanding_bytes: max_outstanding_bytes, protocol_version: protocol_version }
+      request_proto = ::Google::Cloud::PubSub::V1::StreamingPullRequest.new subscription: subscription, ack_ids: ack_ids, modify_deadline_seconds: modify_deadline_seconds, modify_deadline_ack_ids: modify_deadline_ack_ids, stream_ack_deadline_seconds: stream_ack_deadline_seconds, client_id: client_id, max_outstanding_messages: max_outstanding_messages, max_outstanding_bytes: max_outstanding_bytes, protocol_version: protocol_version
       stream_input = Gapic::StreamInput.new
       client.streaming_pull stream_input, grpc_options do |response, operation|
         assert_kind_of Enumerable, response
@@ -683,6 +684,7 @@ class ::Google::Cloud::PubSub::V1::SubscriptionAdmin::ClientTest < Minitest::Tes
           assert_equal "hello world", r["client_id"]
           assert_equal 42, r["max_outstanding_messages"]
           assert_equal 42, r["max_outstanding_bytes"]
+          assert_equal 42, r["protocol_version"]
         end
       end
     end
