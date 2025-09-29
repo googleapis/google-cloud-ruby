@@ -1,5 +1,18 @@
 # Changelog
 
+### 0.19.0 (2025-09-29)
+
+### ⚠ BREAKING CHANGES
+
+* An existing enum `PoolMode` is removed from the `ConnectionPoolConfig` ([#31552](https://github.com/googleapis/google-cloud-ruby/issues/31552))
+
+#### Features
+
+* add CRUD APIs on Databases 
+#### Bug Fixes
+
+* An existing enum `PoolMode` is removed from the `ConnectionPoolConfig` ([#31552](https://github.com/googleapis/google-cloud-ruby/issues/31552)) 
+
 ### 0.18.0 (2025-09-11)
 
 #### Features
