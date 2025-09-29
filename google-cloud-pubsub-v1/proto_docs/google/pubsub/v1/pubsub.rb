@@ -1894,6 +1894,11 @@ module Google
         #     This property can only be set on the initial StreamingPullRequest. If it is
         #     set on a subsequent request, the stream will be aborted with status
         #     `INVALID_ARGUMENT`.
+        # @!attribute [rw] protocol_version
+        #   @return [::Integer]
+        #     Optional. The protocol version used by the client. This property can only
+        #     be set on the initial StreamingPullRequest. If it is set on a subsequent
+        #     request, the stream will be aborted with status `INVALID_ARGUMENT`.
         class StreamingPullRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
