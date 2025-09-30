@@ -84,6 +84,10 @@ module Google
           #     Optional. List of domains to be excluded from the search results.
           #     The default limit is 2000 domains.
           #     Example: ["amazon.com", "facebook.com"].
+          # @!attribute [rw] blocking_confidence
+          #   @return [::Google::Cloud::AIPlatform::V1::Tool::PhishBlockThreshold]
+          #     Optional. Sites with confidence level chosen & above this value will be
+          #     blocked from the search results.
           class GoogleSearch
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -115,6 +119,33 @@ module Google
               # Operates in a web browser.
               ENVIRONMENT_BROWSER = 1
             end
+          end
+
+          # These are available confidence level user can set to block malicious urls
+          # with chosen confidence and above. For understanding different confidence of
+          # webrisk, please refer to
+          # https://cloud.google.com/web-risk/docs/reference/rpc/google.cloud.webrisk.v1eap1#confidencelevel
+          module PhishBlockThreshold
+            # Defaults to unspecified.
+            PHISH_BLOCK_THRESHOLD_UNSPECIFIED = 0
+
+            # Blocks Low and above confidence URL that is risky.
+            BLOCK_LOW_AND_ABOVE = 30
+
+            # Blocks Medium and above confidence URL that is risky.
+            BLOCK_MEDIUM_AND_ABOVE = 40
+
+            # Blocks High and above confidence URL that is risky.
+            BLOCK_HIGH_AND_ABOVE = 50
+
+            # Blocks Higher and above confidence URL that is risky.
+            BLOCK_HIGHER_AND_ABOVE = 55
+
+            # Blocks Very high and above confidence URL that is risky.
+            BLOCK_VERY_HIGH_AND_ABOVE = 60
+
+            # Blocks Extremely high confidence URL that is risky.
+            BLOCK_ONLY_EXTREMELY_HIGH = 100
           end
         end
 
@@ -417,6 +448,10 @@ module Google
         #   @return [::Array<::String>]
         #     Optional. List of domains to be excluded from the search results.
         #     The default limit is 2000 domains.
+        # @!attribute [rw] blocking_confidence
+        #   @return [::Google::Cloud::AIPlatform::V1::Tool::PhishBlockThreshold]
+        #     Optional. Sites with confidence level chosen & above this value will be
+        #     blocked from the search results.
         class EnterpriseWebSearch
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
