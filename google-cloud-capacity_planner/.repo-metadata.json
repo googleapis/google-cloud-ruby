@@ -1,0 +1,17 @@
+{
+    "api_id": "capacityplanner.googleapis.com",
+    "api_shortname": "capacityplanner",
+    "client_documentation": "https://cloud.google.com/ruby/docs/reference/google-cloud-capacity_planner/latest",
+    "distribution_name": "google-cloud-capacity_planner",
+    "is_cloud": true,
+    "language": "ruby",
+    "name": "capacityplanner",
+    "name_pretty": "Capacity Planner API",
+    "product_documentation": "https://cloud.google.com/capacity-planner/docs",
+    "release_level": "unreleased",
+    "repo": "googleapis/google-cloud-ruby",
+    "requires_billing": true,
+    "ruby-cloud-description": "Provides programmatic access to Capacity Planner features.",
+    "ruby-cloud-product-url": "https://cloud.google.com/capacity-planner/docs",
+    "library_type": "GAPIC_MANUAL"
+}
