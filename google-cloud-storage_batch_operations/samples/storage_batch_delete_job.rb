@@ -15,24 +15,26 @@
 # [START storage_batch_delete_job]
 require "google/cloud/storage_batch_operations"
 
+# Deletes a Storage Batch Operations job.
+#
+# @param project_id [String] The ID of your Google Cloud project.
+# @param job_id [String] The ID of the Storage Batch Operations job to be deleted.
+#
+# @example
+#   delete_job project_id: "your-project-id", job_id: "your-job-id"
+#
 def delete_job project_id:, job_id:
-  # The ID of your project
-  # project_id = "your-project-id"
-
-  # The ID of your Storage batch operation job
-  # job_id = "your-job-id"
-
   client = Google::Cloud::StorageBatchOperations.storage_batch_operations
   parent = "projects/#{project_id}/locations/global"
   request = Google::Cloud::StorageBatchOperations::V1::DeleteJobRequest.new name: "#{parent}/jobs/#{job_id}"
 
   begin
-    client.delete_job request
+    result = client.delete_job request
     message = "The #{job_id} is deleted."
-  rescue Google::Cloud::NotFoundError
-    message = "Job #{job_id} not found."
+  rescue StandardError
+    # This error is thrown when the job is not deleted.
+    message = "Failed to delete job #{job_id}. Error: #{result.error.message}"
   end
-
   puts message
 end
 # [END storage_batch_delete_job]

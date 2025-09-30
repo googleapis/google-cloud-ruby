@@ -12,18 +12,25 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# [START storage_batch_list_job]
+# [START storage_batch_list_jobs]
 require "google/cloud/storage_batch_operations"
 
-def list_job project_id:
-  # The ID of your project
-  # project_id = "your-project-id"
+# Lists Storage Batch Operations jobs for a given project.
+#
+# @param project_id [String] The ID of your Google Cloud project.
+#
+# @example
+#   list_jobs project_id: "your-project-id"
+#
+
+def list_jobs project_id:
+
   client = Google::Cloud::StorageBatchOperations.storage_batch_operations
   parent = "projects/#{project_id}/locations/global"
   request = Google::Cloud::StorageBatchOperations::V1::ListJobsRequest.new parent: parent, page_size: 10
   job_list = client.list_jobs request
   job_list.each { |job| puts "Job name: #{job.name} present in the list" }
 end
-# [END storage_batch_list_job]
+# [END storage_batch_list_jobs]
 
-list_job project_id: ARGV.shift if $PROGRAM_NAME == __FILE__
+list_jobs project_id: ARGV.shift if $PROGRAM_NAME == __FILE__

@@ -15,21 +15,24 @@
 # [START storage_batch_get_job]
 require "google/cloud/storage_batch_operations"
 
+# Gets a Storage Batch Operations job.
+#
+# @example
+#   get_job project_id: "your-project-id", job_id: "your-job-id"
+#
+# @param project_id [String] The ID of your Google Cloud project.
+# @param job_id [String] The ID of your Storage Batch Operations job.
+
 def get_job project_id:, job_id:
-  # The ID of your project
-  # project_id = "your-project-id"
-
-  # The ID of your Storage batch operation job
-  # job_id= "your-job-id"
-
   client = Google::Cloud::StorageBatchOperations.storage_batch_operations
   parent = "projects/#{project_id}/locations/global"
   request = Google::Cloud::StorageBatchOperations::V1::GetJobRequest.new name: "#{parent}/jobs/#{job_id}"
   begin
     result = client.get_job request
-    message = "Found job_name- #{result.name}, job_status- #{result.state}"
-  rescue Google::Cloud::NotFoundError
-    message = "Job #{job_id} not found."
+    message = "Storage Batch Operations job Found - #{result.name}, job_status- #{result.state}"
+  rescue StandardError
+    # This error is thrown when the job is not found.
+    message = "Failed to fetch job #{job_id}. Error: #{result.error.message}"
   end
   puts message
 end

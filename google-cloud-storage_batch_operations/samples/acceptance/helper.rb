@@ -42,16 +42,24 @@ def delete_bucket_helper bucket_name
 end
 
 def retry_resource_exhaustion
-  5.times do
-    return yield
-  rescue Google::Cloud::ResourceExhaustedError => e
-    puts "\n#{e} Gonna try again"
-    sleep rand(10..16)
-  rescue StandardError => e
-    puts "\n#{e}"
-    raise e
+  attempts = 5
+  start_time = Time.now
+  last_error = nil
+
+  attempts.times do |i|
+    begin
+      return yield
+    rescue Google::Cloud::ResourceExhaustedError => e
+      last_error = e
+      puts "\nAttempt #{i + 1} failed with #{e.class}. Retrying..."
+      sleep rand(10..16)
+    rescue StandardError => e
+      raise e
+    end
   end
-  raise Google::Cloud::ResourceExhaustedError, "Maybe take a break from creating and deleting buckets for a bit"
+
+  elapsed_time = Time.now - start_time
+  raise last_error, "Failed after #{attempts} attempts in #{elapsed_time.round 2} seconds. Last error: #{last_error.message}", last_error.backtrace
 end
 
 def random_bucket_name

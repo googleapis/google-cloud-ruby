@@ -16,7 +16,7 @@ require_relative "helper"
 require_relative "../storage_batch_create_job"
 require_relative "../storage_batch_delete_job"
 require_relative "../storage_batch_cancel_job"
-require_relative "../storage_batch_list_job"
+require_relative "../storage_batch_list_jobs"
 require_relative "../storage_batch_get_job"
 
 describe "Storage Batch Operations" do
@@ -40,22 +40,22 @@ describe "Storage Batch Operations" do
     job_name = "#{job_name_prefix}#{job_id}"
 
     # Create job
-    assert_output(/The #{job_id} is created./) do
+    assert_output(/Storage Batch Operations job #{job_name} is created./) do
       create_job bucket_name: bucket_name, prefix: "ruby_file", job_id: job_id, project_id: project_id
     end
 
     # List jobs
     assert_output(/Job name: #{job_name} present in the list/) do
-      list_job project_id: project_id
+      list_jobs project_id: project_id
     end
 
     # Get job details
-    assert_output(/Found job_name- #{job_name}, job_status- /) do
+    assert_output(/Storage Batch Operations job Found - #{job_name}, job_status- /) do
       get_job project_id: project_id, job_id: job_id
     end
 
     # Cancel job
-    expected_output_pattern = /The #{job_id} is canceled\.|#{job_id} was already completed or was not created\./
+    expected_output_pattern = /Storage Batch Operations job #{job_name} (is canceled|was already completed)\./
     assert_output expected_output_pattern do
       cancel_job project_id: project_id, job_id: job_id
     end
