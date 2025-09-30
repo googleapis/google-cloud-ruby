@@ -59,7 +59,8 @@ def retry_resource_exhaustion
   end
 
   elapsed_time = Time.now - start_time
-  raise last_error, "Failed after #{attempts} attempts in #{elapsed_time.round 2} seconds. Last error: #{last_error.message}", last_error.backtrace
+  raise last_error,
+        "Failed after #{attempts} attempts in #{elapsed_time.round 2} seconds. Last error: #{last_error.message}", last_error.backtrace
 end
 
 def random_bucket_name

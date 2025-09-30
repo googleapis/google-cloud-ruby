@@ -24,7 +24,6 @@ require "google/cloud/storage_batch_operations"
 #
 
 def list_jobs project_id:
-
   client = Google::Cloud::StorageBatchOperations.storage_batch_operations
   parent = "projects/#{project_id}/locations/global"
   request = Google::Cloud::StorageBatchOperations::V1::ListJobsRequest.new parent: parent, page_size: 10
