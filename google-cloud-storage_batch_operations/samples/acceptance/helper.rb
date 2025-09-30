@@ -49,18 +49,17 @@ def retry_resource_exhaustion
   attempts.times do |i|
     begin
       return yield
-    rescue Google::Cloud::ResourceExhaustedError => e
+    rescue StandardError => e
       last_error = e
       puts "\nAttempt #{i + 1} failed with #{e.class}. Retrying..."
       sleep rand(10..16)
-    rescue StandardError => e
-      raise e
     end
   end
 
   elapsed_time = Time.now - start_time
-  raise last_error,
-        "Failed after #{attempts} attempts in #{elapsed_time.round 2} seconds. Last error: #{last_error.message}", last_error.backtrace
+  message = "Failed after #{attempts} attempts in #{elapsed_time.round 2} seconds. " \
+            "Last error: #{last_error.message}"
+  raise last_error, message, last_error.backtrace
 end
 
 def random_bucket_name
