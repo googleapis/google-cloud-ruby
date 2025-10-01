@@ -4,8 +4,16 @@
 
 #### Features
 
-* add CRUD APIs on Databases 
-* add CRUD APIs on Databases ([#31551](https://github.com/googleapis/google-cloud-ruby/issues/31551)) 
+* add PG 17 as a Database version ([#31551](https://github.com/googleapis/google-cloud-ruby/issues/31551))
+* add configuration for Managed Connection Pool
+* update Database.charset to be immutable
+* add additional fields to Database object to specify the collation type, character type, if it is a template database, and the template to use for the database
+* add field to ExecuteSQL request to just validate the sql statement
+* add fields on the estimated/actual start/end times for an Upgrade Cluster operation
+
+#### Documentation
+
+* specify that the STOPPED state is not used for clusters anymore
 
 ### 1.4.0 (2025-09-11)
 
