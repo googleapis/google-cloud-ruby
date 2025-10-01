@@ -1,5 +1,12 @@
 # Changelog
 
+### 1.5.0 (2025-10-01)
+
+#### Features
+
+* add CRUD APIs on Databases 
+* add CRUD APIs on Databases ([#31551](https://github.com/googleapis/google-cloud-ruby/issues/31551)) 
+
 ### 1.4.0 (2025-09-11)
 
 #### Features
