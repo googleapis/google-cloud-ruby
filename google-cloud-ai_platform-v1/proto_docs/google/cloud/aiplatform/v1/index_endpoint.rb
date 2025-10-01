@@ -252,6 +252,10 @@ module Google
         #     [d, e] is disallowed.
         #
         #     Note: we only support up to 5 deployment groups(not including 'default').
+        # @!attribute [rw] deployment_tier
+        #   @return [::Google::Cloud::AIPlatform::V1::DeployedIndex::DeploymentTier]
+        #     Optional. The deployment tier that the index is deployed to.
+        #     DEPLOYMENT_TIER_UNSPECIFIED will use a system-chosen default tier.
         # @!attribute [rw] psc_automation_configs
         #   @return [::Array<::Google::Cloud::AIPlatform::V1::PSCAutomationConfig>]
         #     Optional. If set for PSC deployed index, PSC connection will be
@@ -260,6 +264,15 @@ module Google
         class DeployedIndex
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Tiers encapsulate serving time attributes like latency and throughput.
+          module DeploymentTier
+            # Default deployment tier.
+            DEPLOYMENT_TIER_UNSPECIFIED = 0
+
+            # Optimized for costs.
+            STORAGE = 2
+          end
         end
 
         # Used to set up the auth on the DeployedIndex's private endpoint.
