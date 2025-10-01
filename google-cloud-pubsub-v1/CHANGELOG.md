@@ -1,5 +1,11 @@
 # Release History
 
+### 1.13.0 (2025-10-01)
+
+#### Features
+
+* support the protocol version in StreamingPullRequest ([#31561](https://github.com/googleapis/google-cloud-ruby/issues/31561)) 
+
 ### 1.12.0 (2025-09-11)
 
 #### Features
