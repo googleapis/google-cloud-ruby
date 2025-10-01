@@ -395,6 +395,10 @@
       "component": "google-cloud-build-v2",
       "version_file": "lib/google/cloud/build/v2/version.rb"
     },
+    "google-cloud-capacity_planner": {
+      "component": "google-cloud-capacity_planner",
+      "version_file": "lib/google/cloud/capacity_planner/version.rb"
+    },
     "google-cloud-capacity_planner-v1beta": {
       "component": "google-cloud-capacity_planner-v1beta",
       "version_file": "lib/google/cloud/capacity_planner/v1beta/version.rb"
