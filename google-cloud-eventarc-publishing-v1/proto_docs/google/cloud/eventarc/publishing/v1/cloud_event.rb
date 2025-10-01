@@ -57,6 +57,12 @@ module Google
           #   @return [::Google::Protobuf::Any]
           #     Optional. Proto data.
           #
+          #     NOTE: The `protoData` field only functions as expected when the payload
+          #     is specifically a `CloudEvent` message type, and can't be used for
+          #     arbitrary protocol buffer messages. For any other protocol buffer type,
+          #     you must serialize your proto message into bytes, and use the
+          #     `binaryData` field instead.
+          #
           #     Note: The following fields are mutually exclusive: `proto_data`, `binary_data`, `text_data`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           class CloudEvent
             include ::Google::Protobuf::MessageExts
