@@ -193,7 +193,7 @@
   "google-cloud-build-v2+FILLER": "0.0.0",
   "google-cloud-capacity_planner": "0.0.1",
   "google-cloud-capacity_planner+FILLER": "0.0.0",
-  "google-cloud-capacity_planner-v1beta": "0.0.1",
+  "google-cloud-capacity_planner-v1beta": "0.1.0",
   "google-cloud-capacity_planner-v1beta+FILLER": "0.0.0",
   "google-cloud-certificate_manager": "2.0.2",
   "google-cloud-certificate_manager+FILLER": "0.0.0",
